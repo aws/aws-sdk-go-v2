@@ -47,6 +47,8 @@ type ListCustomVerificationEmailTemplatesInput struct {
 	// NextToken element, which you can use to obtain additional results. The value you
 	// specify has to be at least 1, and can be no more than 50.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // The following elements are returned by the service.
@@ -63,6 +65,8 @@ type ListCustomVerificationEmailTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCustomVerificationEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

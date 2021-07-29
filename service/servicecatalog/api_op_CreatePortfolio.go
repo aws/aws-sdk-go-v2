@@ -61,6 +61,8 @@ type CreatePortfolioInput struct {
 
 	// One or more tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePortfolioOutput struct {
@@ -73,6 +75,8 @@ type CreatePortfolioOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {

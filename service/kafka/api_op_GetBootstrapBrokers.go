@@ -32,6 +32,8 @@ type GetBootstrapBrokersInput struct {
 	//
 	// This member is required.
 	ClusterArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBootstrapBrokersOutput struct {
@@ -51,6 +53,8 @@ type GetBootstrapBrokersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBootstrapBrokersMiddlewares(stack *middleware.Stack, options Options) (err error) {

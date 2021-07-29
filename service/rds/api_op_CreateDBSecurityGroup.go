@@ -57,6 +57,8 @@ type CreateDBSecurityGroupInput struct {
 
 	// Tags to assign to the DB security group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBSecurityGroupOutput struct {
@@ -67,6 +69,8 @@ type CreateDBSecurityGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

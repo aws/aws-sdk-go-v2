@@ -42,6 +42,8 @@ type DeleteAddonInput struct {
 	//
 	// This member is required.
 	ClusterName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAddonOutput struct {
@@ -51,6 +53,8 @@ type DeleteAddonOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {

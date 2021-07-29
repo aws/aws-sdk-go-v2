@@ -78,6 +78,8 @@ type ModifyVpcEndpointInput struct {
 	// (Gateway endpoint) Specify true to reset the policy document to the default
 	// policy. The default policy allows full access to the service.
 	ResetPolicy *bool
+
+	noSmithyDocumentSerde
 }
 
 type ModifyVpcEndpointOutput struct {
@@ -87,6 +89,8 @@ type ModifyVpcEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

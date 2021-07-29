@@ -43,11 +43,15 @@ type PutCommentReactionInput struct {
 	//
 	// This member is required.
 	ReactionValue *string
+
+	noSmithyDocumentSerde
 }
 
 type PutCommentReactionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutCommentReactionMiddlewares(stack *middleware.Stack, options Options) (err error) {

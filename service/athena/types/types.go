@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type Column struct {
 
 	// The data type of the column.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the columns in a query execution result.
@@ -59,6 +62,8 @@ type ColumnInfo struct {
 
 	// The table name for the query results.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata information for a database in a data catalog.
@@ -74,6 +79,8 @@ type Database struct {
 
 	// A set of custom key/value pairs.
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a data catalog in an AWS account.
@@ -116,6 +123,8 @@ type DataCatalog struct {
 	// have a composite Lambda function that processes both metadata and data, use the
 	// following syntax to specify your Lambda function. function=lambda_arn
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The summary information for the data catalog, which includes its name and type.
@@ -126,6 +135,8 @@ type DataCatalogSummary struct {
 
 	// The data catalog type.
 	Type DataCatalogType
+
+	noSmithyDocumentSerde
 }
 
 // A piece of data (a field in the table).
@@ -133,6 +144,8 @@ type Datum struct {
 
 	// The value of the datum.
 	VarCharValue *string
+
+	noSmithyDocumentSerde
 }
 
 // If query results are encrypted in Amazon S3, indicates the encryption option
@@ -151,6 +164,8 @@ type EncryptionConfiguration struct {
 
 	// For SSE-KMS and CSE-KMS, this is the KMS key ARN or ID.
 	KmsKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The Athena engine version for running queries.
@@ -167,6 +182,8 @@ type EngineVersion struct {
 	// The engine version requested by the user. Possible values are determined by the
 	// output of ListEngineVersions, including Auto. The default is Auto.
 	SelectedEngineVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // A query, where QueryString is the list of SQL query statements that comprise the
@@ -196,6 +213,8 @@ type NamedQuery struct {
 
 	// The name of the workgroup that contains the named query.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // A prepared SQL statement for use with Athena.
@@ -215,6 +234,8 @@ type PreparedStatement struct {
 
 	// The name of the workgroup to which the prepared statement belongs.
 	WorkGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The name and last modified time of the prepared statement.
@@ -225,6 +246,8 @@ type PreparedStatementSummary struct {
 
 	// The name of the prepared statement.
 	StatementName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a single instance of a query execution.
@@ -265,6 +288,8 @@ type QueryExecution struct {
 
 	// The name of the workgroup in which the query ran.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // The database and data catalog context in which the query execution occurs.
@@ -275,6 +300,8 @@ type QueryExecutionContext struct {
 
 	// The name of the database used in the query execution.
 	Database *string
+
+	noSmithyDocumentSerde
 }
 
 // The amount of data scanned during the query execution and the amount of time
@@ -314,6 +341,8 @@ type QueryExecutionStatistics struct {
 
 	// The number of milliseconds that Athena took to run the query.
 	TotalExecutionTimeInMillis *int64
+
+	noSmithyDocumentSerde
 }
 
 // The completion date, current state, submission time, and state change reason (if
@@ -338,6 +367,8 @@ type QueryExecutionStatus struct {
 
 	// The date and time that the query was submitted.
 	SubmissionDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The location in Amazon S3 where query results are stored and the encryption
@@ -367,6 +398,8 @@ type ResultConfiguration struct {
 	// specified for the workgroup. See
 	// WorkGroupConfiguration$EnforceWorkGroupConfiguration.
 	OutputLocation *string
+
+	noSmithyDocumentSerde
 }
 
 // The information about the updates in the query results, such as output location
@@ -405,6 +438,8 @@ type ResultConfigurationUpdates struct {
 	// Settings
 	// (https://docs.aws.amazon.com/athena/latest/ug/workgroups-settings-override.html).
 	RemoveOutputLocation *bool
+
+	noSmithyDocumentSerde
 }
 
 // The metadata and rows that comprise a query result set. The metadata describes
@@ -418,6 +453,8 @@ type ResultSet struct {
 
 	// The rows in the table.
 	Rows []Row
+
+	noSmithyDocumentSerde
 }
 
 // The metadata that describes the column structure and data types of a table of
@@ -426,6 +463,8 @@ type ResultSetMetadata struct {
 
 	// Information about the columns returned in a query result metadata.
 	ColumnInfo []ColumnInfo
+
+	noSmithyDocumentSerde
 }
 
 // The rows that comprise a query result table.
@@ -433,6 +472,8 @@ type Row struct {
 
 	// The data that populates a row in a query result table.
 	Data []Datum
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata for a table.
@@ -460,6 +501,8 @@ type TableMetadata struct {
 
 	// The type of table. In Athena, only EXTERNAL_TABLE is supported.
 	TableType *string
+
+	noSmithyDocumentSerde
 }
 
 // A label that you assign to a resource. In Athena, a resource can be a workgroup
@@ -486,6 +529,8 @@ type Tag struct {
 	// You can use letters and numbers representable in UTF-8, and the following
 	// characters: + - = . _ : / @. Tag values are case-sensitive.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a named query ID that could not be processed.
@@ -501,6 +546,8 @@ type UnprocessedNamedQueryId struct {
 
 	// The unique identifier of the named query.
 	NamedQueryId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a query execution that failed to process.
@@ -516,6 +563,8 @@ type UnprocessedQueryExecutionId struct {
 
 	// The unique identifier of the query execution.
 	QueryExecutionId *string
+
+	noSmithyDocumentSerde
 }
 
 // A workgroup, which contains a name, description, creation time, state, and other
@@ -552,6 +601,8 @@ type WorkGroup struct {
 
 	// The state of the workgroup: ENABLED or DISABLED.
 	State WorkGroupState
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of the workgroup, which includes the location in Amazon S3
@@ -600,6 +651,8 @@ type WorkGroupConfiguration struct {
 	// information, see Query Results
 	// (https://docs.aws.amazon.com/athena/latest/ug/querying.html).
 	ResultConfiguration *ResultConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The configuration information that will be updated for this workgroup, which
@@ -648,6 +701,8 @@ type WorkGroupConfigurationUpdates struct {
 	// will be updated. Includes the updated results location and an updated option for
 	// encrypting query results.
 	ResultConfigurationUpdates *ResultConfigurationUpdates
+
+	noSmithyDocumentSerde
 }
 
 // The summary information for the workgroup, which includes its name, state,
@@ -670,4 +725,8 @@ type WorkGroupSummary struct {
 
 	// The state of the workgroup.
 	State WorkGroupState
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

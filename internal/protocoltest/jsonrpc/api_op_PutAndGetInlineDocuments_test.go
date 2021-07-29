@@ -7,6 +7,8 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/document"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -22,8 +24,6 @@ import (
 )
 
 func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
-	t.Skip("disabled test aws.protocoltests.json#JsonProtocol aws.protocoltests.json#PutAndGetInlineDocuments")
-
 	cases := map[string]struct {
 		Params        *PutAndGetInlineDocumentsInput
 		ExpectMethod  string
@@ -40,7 +40,9 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Serialize(t *testing.T) {
 		// Serializes inline documents in a JSON request.
 		"PutAndGetInlineDocumentsInput": {
 			Params: &PutAndGetInlineDocumentsInput{
-				InlineDocument: nil,
+				InlineDocument: document.NewLazyDocument(map[string]interface{}{
+					"foo": "bar",
+				}),
 			},
 			ExpectMethod:  "POST",
 			ExpectURIPath: "/",
@@ -143,7 +145,9 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Deserialize(t *testing.T) {
 			    "inlineDocument": {"foo": "bar"}
 			}`),
 			ExpectResult: &PutAndGetInlineDocumentsOutput{
-				InlineDocument: nil,
+				InlineDocument: document.NewLazyDocument(map[string]interface{}{
+					"foo": "bar",
+				}),
 			},
 		},
 	}
@@ -206,6 +210,7 @@ func TestClient_PutAndGetInlineDocuments_awsAwsjson11Deserialize(t *testing.T) {
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)

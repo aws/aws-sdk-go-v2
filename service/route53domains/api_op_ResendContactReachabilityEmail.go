@@ -34,6 +34,8 @@ type ResendContactReachabilityEmailInput struct {
 	// The name of the domain for which you want Route 53 to resend a confirmation
 	// email to the registrant contact.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type ResendContactReachabilityEmailOutput struct {
@@ -52,6 +54,8 @@ type ResendContactReachabilityEmailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResendContactReachabilityEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type CreateAppInstanceAdminInput struct {
 	//
 	// This member is required.
 	AppInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAppInstanceAdminOutput struct {
@@ -60,6 +62,8 @@ type CreateAppInstanceAdminOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAppInstanceAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {

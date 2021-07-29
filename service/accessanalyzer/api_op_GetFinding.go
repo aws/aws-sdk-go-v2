@@ -41,6 +41,8 @@ type GetFindingInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request.
@@ -51,6 +53,8 @@ type GetFindingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFindingMiddlewares(stack *middleware.Stack, options Options) (err error) {

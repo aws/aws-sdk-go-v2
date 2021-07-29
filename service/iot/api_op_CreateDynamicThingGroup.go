@@ -54,6 +54,8 @@ type CreateDynamicThingGroupInput struct {
 
 	// The dynamic thing group properties.
 	ThingGroupProperties *types.ThingGroupProperties
+
+	noSmithyDocumentSerde
 }
 
 type CreateDynamicThingGroupOutput struct {
@@ -78,6 +80,8 @@ type CreateDynamicThingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDynamicThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

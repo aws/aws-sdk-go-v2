@@ -58,6 +58,8 @@ type ListModelBiasJobDefinitionsInput struct {
 	// Whether to sort the results in Ascending or Descending order. The default is
 	// Descending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListModelBiasJobDefinitionsOutput struct {
@@ -73,6 +75,8 @@ type ListModelBiasJobDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListModelBiasJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

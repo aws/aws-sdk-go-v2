@@ -42,6 +42,8 @@ type ListTagsForResourceInput struct {
 	// An opaque string that indicates the position at which to begin the next list of
 	// locations.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // ListTagsForResourceResponse
@@ -56,6 +58,8 @@ type ListTagsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

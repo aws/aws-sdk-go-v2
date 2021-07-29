@@ -61,6 +61,8 @@ type CreateLaunchTemplateInput struct {
 
 	// A description for the first version of the launch template.
 	VersionDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLaunchTemplateOutput struct {
@@ -75,6 +77,8 @@ type CreateLaunchTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLaunchTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

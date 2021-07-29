@@ -56,6 +56,8 @@ type ResetDBClusterParameterGroupInput struct {
 	// parameter group to their default values. You can't use this parameter if there
 	// is a list of parameter names specified for the Parameters parameter.
 	ResetAllParameters bool
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -77,6 +79,8 @@ type ResetDBClusterParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

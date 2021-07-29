@@ -35,6 +35,8 @@ type GetBatchPredictionInput struct {
 	//
 	// This member is required.
 	BatchPredictionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetBatchPrediction operation and describes a
@@ -127,6 +129,8 @@ type GetBatchPredictionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {

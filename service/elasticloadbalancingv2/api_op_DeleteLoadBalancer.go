@@ -38,11 +38,15 @@ type DeleteLoadBalancerInput struct {
 	//
 	// This member is required.
 	LoadBalancerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLoadBalancerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

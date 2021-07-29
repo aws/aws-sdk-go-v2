@@ -77,6 +77,8 @@ type StartDocumentClassificationJobInput struct {
 	// more information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type StartDocumentClassificationJobOutput struct {
@@ -108,6 +110,8 @@ type StartDocumentClassificationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDocumentClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

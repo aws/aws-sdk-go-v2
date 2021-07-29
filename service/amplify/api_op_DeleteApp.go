@@ -34,6 +34,8 @@ type DeleteAppInput struct {
 	//
 	// This member is required.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the delete app request.
@@ -47,6 +49,8 @@ type DeleteAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

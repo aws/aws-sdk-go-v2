@@ -59,6 +59,8 @@ type CreateContactFlowInput struct {
 
 	// One or more tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateContactFlowOutput struct {
@@ -71,6 +73,8 @@ type CreateContactFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContactFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

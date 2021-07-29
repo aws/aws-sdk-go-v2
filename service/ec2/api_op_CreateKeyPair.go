@@ -51,6 +51,8 @@ type CreateKeyPairInput struct {
 
 	// The tags to apply to the new key pair.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Describes a key pair.
@@ -73,6 +75,8 @@ type CreateKeyPairOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

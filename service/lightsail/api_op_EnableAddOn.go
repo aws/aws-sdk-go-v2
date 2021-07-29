@@ -40,6 +40,8 @@ type EnableAddOnInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableAddOnOutput struct {
@@ -51,6 +53,8 @@ type EnableAddOnOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableAddOnMiddlewares(stack *middleware.Stack, options Options) (err error) {

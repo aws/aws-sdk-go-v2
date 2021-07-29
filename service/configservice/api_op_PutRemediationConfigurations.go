@@ -41,6 +41,8 @@ type PutRemediationConfigurationsInput struct {
 	//
 	// This member is required.
 	RemediationConfigurations []types.RemediationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutRemediationConfigurationsOutput struct {
@@ -50,6 +52,8 @@ type PutRemediationConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRemediationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

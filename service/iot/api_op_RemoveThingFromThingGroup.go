@@ -41,11 +41,15 @@ type RemoveThingFromThingGroupInput struct {
 
 	// The name of the thing to remove from the group.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveThingFromThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveThingFromThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

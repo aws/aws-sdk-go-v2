@@ -33,12 +33,16 @@ type CancelInputDeviceTransferInput struct {
 	//
 	// This member is required.
 	InputDeviceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for CancelInputDeviceTransferResponse
 type CancelInputDeviceTransferOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {

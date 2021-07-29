@@ -43,6 +43,8 @@ type EnableKinesisStreamingDestinationInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableKinesisStreamingDestinationOutput struct {
@@ -58,6 +60,8 @@ type EnableKinesisStreamingDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableKinesisStreamingDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

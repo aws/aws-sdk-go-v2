@@ -32,6 +32,8 @@ type StopICD10CMInferenceJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopICD10CMInferenceJobOutput struct {
@@ -42,6 +44,8 @@ type StopICD10CMInferenceJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopICD10CMInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -157,6 +157,8 @@ type CreateAccountInput struct {
 	// exceed the allowed number of tags for an account, then the entire request fails
 	// and the account is not created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAccountOutput struct {
@@ -174,6 +176,8 @@ type CreateAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

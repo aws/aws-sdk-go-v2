@@ -38,6 +38,8 @@ type DescribeTemplatePermissionsInput struct {
 	//
 	// This member is required.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTemplatePermissionsOutput struct {
@@ -59,6 +61,8 @@ type DescribeTemplatePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTemplatePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

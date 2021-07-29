@@ -36,6 +36,8 @@ type DeauthorizeConnectionInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeauthorizeConnectionOutput struct {
@@ -57,6 +59,8 @@ type DeauthorizeConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeauthorizeConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

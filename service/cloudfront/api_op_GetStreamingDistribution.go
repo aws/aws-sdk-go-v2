@@ -40,6 +40,8 @@ type GetStreamingDistributionInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -54,6 +56,8 @@ type GetStreamingDistributionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

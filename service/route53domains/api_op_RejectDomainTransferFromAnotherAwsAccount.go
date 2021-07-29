@@ -48,6 +48,8 @@ type RejectDomainTransferFromAnotherAwsAccountInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The RejectDomainTransferFromAnotherAwsAccount response includes the following
@@ -62,6 +64,8 @@ type RejectDomainTransferFromAnotherAwsAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectDomainTransferFromAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Gives a detailed description of the result of an action on each entry in the
 // request.
 type BatchResultErrorEntry struct {
@@ -23,6 +27,8 @@ type BatchResultErrorEntry struct {
 
 	// A message explaining why the action failed on this entry.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Encloses a receipt handle and an entry id for each message in
@@ -53,6 +59,8 @@ type ChangeMessageVisibilityBatchRequestEntry struct {
 
 	// The new value (in seconds) for the message's visibility timeout.
 	VisibilityTimeout int32
+
+	noSmithyDocumentSerde
 }
 
 // Encloses the Id of an entry in ChangeMessageVisibilityBatch.
@@ -62,6 +70,8 @@ type ChangeMessageVisibilityBatchResultEntry struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Encloses a receipt handle and an identifier for it.
@@ -79,6 +89,8 @@ type DeleteMessageBatchRequestEntry struct {
 	//
 	// This member is required.
 	ReceiptHandle *string
+
+	noSmithyDocumentSerde
 }
 
 // Encloses the Id of an entry in DeleteMessageBatch.
@@ -88,6 +100,8 @@ type DeleteMessageBatchResultEntry struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // An Amazon SQS message.
@@ -143,6 +157,8 @@ type Message struct {
 	// handle is returned every time you receive a message. When deleting a message,
 	// you provide the last received receipt handle to delete the message.
 	ReceiptHandle *string
+
+	noSmithyDocumentSerde
 }
 
 // The user-specified message attribute value. For string data types, the Value
@@ -175,6 +191,8 @@ type MessageAttributeValue struct {
 	// ASCII Printable Characters
 	// (http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The user-specified message system attribute value. For string data types, the
@@ -206,6 +224,8 @@ type MessageSystemAttributeValue struct {
 	// ASCII Printable Characters
 	// (http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters).
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of a single Amazon SQS message along with an Id.
@@ -326,6 +346,8 @@ type SendMessageBatchRequestEntry struct {
 	// * The size of a message system attribute
 	// doesn't count towards the total size of a message.
 	MessageSystemAttributes map[string]MessageSystemAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Encloses a MessageId for a successfully-enqueued message in a SendMessageBatch.
@@ -366,4 +388,8 @@ type SendMessageBatchResultEntry struct {
 	// SequenceNumber is 128 bits. As SequenceNumber continues to increase for a
 	// particular MessageGroupId.
 	SequenceNumber *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

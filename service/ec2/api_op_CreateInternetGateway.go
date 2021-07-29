@@ -40,6 +40,8 @@ type CreateInternetGatewayInput struct {
 
 	// The tags to assign to the internet gateway.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateInternetGatewayOutput struct {
@@ -49,6 +51,8 @@ type CreateInternetGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInternetGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

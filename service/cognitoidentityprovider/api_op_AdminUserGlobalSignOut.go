@@ -41,12 +41,16 @@ type AdminUserGlobalSignOutInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The global sign-out response, as an administrator.
 type AdminUserGlobalSignOutOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminUserGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {

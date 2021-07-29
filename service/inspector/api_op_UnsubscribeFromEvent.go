@@ -45,11 +45,15 @@ type UnsubscribeFromEventInput struct {
 	//
 	// This member is required.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UnsubscribeFromEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnsubscribeFromEventMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -77,11 +77,15 @@ type UpdateLocationSmbInput struct {
 	// The user who can mount the share has the permissions to access files and folders
 	// in the SMB share.
 	User *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLocationSmbOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLocationSmbMiddlewares(stack *middleware.Stack, options Options) (err error) {

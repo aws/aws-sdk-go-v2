@@ -52,6 +52,8 @@ type DeleteReplicationGroupInput struct {
 	// If set to true, all of the read replicas are deleted, but the primary node is
 	// retained.
 	RetainPrimaryCluster *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteReplicationGroupOutput struct {
@@ -61,6 +63,8 @@ type DeleteReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

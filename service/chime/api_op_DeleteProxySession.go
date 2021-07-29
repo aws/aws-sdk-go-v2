@@ -38,11 +38,15 @@ type DeleteProxySessionInput struct {
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProxySessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProxySessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type CancelPipelineReprocessingInput struct {
 	//
 	// This member is required.
 	ReprocessingId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelPipelineReprocessingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelPipelineReprocessingMiddlewares(stack *middleware.Stack, options Options) (err error) {

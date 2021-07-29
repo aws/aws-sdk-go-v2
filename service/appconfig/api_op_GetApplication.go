@@ -32,6 +32,8 @@ type GetApplicationInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetApplicationOutput struct {
@@ -47,6 +49,8 @@ type GetApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

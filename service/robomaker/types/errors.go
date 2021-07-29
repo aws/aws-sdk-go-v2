@@ -10,6 +10,8 @@ import (
 // The failure percentage threshold percentage was met.
 type ConcurrentDeploymentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentDeploymentException) Error() string {
@@ -29,6 +31,8 @@ func (e *ConcurrentDeploymentException) ErrorFault() smithy.ErrorFault { return 
 // identical.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -50,6 +54,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // AWS RoboMaker experienced a service issue. Try your call again.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -68,6 +74,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // used. The returned message provides an explanation of the error value.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -86,6 +94,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // concurrent stream requests exceeds the maximum number allowed.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -103,6 +113,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -120,6 +132,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -137,6 +151,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The request has failed due to a temporary failure of the server.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -154,6 +170,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // AWS RoboMaker is temporarily unable to process the request. Try your call again.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

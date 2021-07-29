@@ -10,6 +10,8 @@ import (
 // The certificate is invalid.
 type CertificateValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateValidationException) Error() string {
@@ -29,6 +31,8 @@ func (e *CertificateValidationException) ErrorFault() smithy.ErrorFault { return
 // contains details about the error.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -49,6 +53,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // error message also contains the executionState field.
 type InvalidStateTransitionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStateTransitionException) Error() string {
@@ -68,6 +74,8 @@ func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { retur
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -85,6 +93,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -102,6 +112,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // The job is in a terminal state.
 type TerminalStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TerminalStateException) Error() string {
@@ -121,6 +133,8 @@ type ThrottlingException struct {
 	Message *string
 
 	Payload []byte
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

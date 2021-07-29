@@ -32,11 +32,15 @@ type DeleteMedicalVocabularyInput struct {
 	//
 	// This member is required.
 	VocabularyName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMedicalVocabularyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {

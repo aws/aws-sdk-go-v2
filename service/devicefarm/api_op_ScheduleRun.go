@@ -61,6 +61,8 @@ type ScheduleRunInput struct {
 
 	// The name for the run to be scheduled.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a schedule run request.
@@ -71,6 +73,8 @@ type ScheduleRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationScheduleRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

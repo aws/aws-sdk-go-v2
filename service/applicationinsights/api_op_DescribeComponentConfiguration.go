@@ -38,6 +38,8 @@ type DescribeComponentConfigurationInput struct {
 	//
 	// This member is required.
 	ResourceGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeComponentConfigurationOutput struct {
@@ -55,6 +57,8 @@ type DescribeComponentConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeComponentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

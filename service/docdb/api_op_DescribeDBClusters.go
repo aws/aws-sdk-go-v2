@@ -62,6 +62,8 @@ type DescribeDBClustersInput struct {
 	// the response so that the remaining results can be retrieved. Default: 100
 	// Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of DescribeDBClusters.
@@ -77,6 +79,8 @@ type DescribeDBClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

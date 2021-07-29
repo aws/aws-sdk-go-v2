@@ -43,6 +43,8 @@ type GetCoreDefinitionVersionInput struct {
 	//
 	// This member is required.
 	CoreDefinitionVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCoreDefinitionVersionOutput struct {
@@ -69,6 +71,8 @@ type GetCoreDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCoreDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

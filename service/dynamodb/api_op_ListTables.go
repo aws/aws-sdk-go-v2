@@ -41,6 +41,8 @@ type ListTablesInput struct {
 	// A maximum number of table names to return. If this parameter is not specified,
 	// the limit is 100.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListTables operation.
@@ -62,6 +64,8 @@ type ListTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

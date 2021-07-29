@@ -44,6 +44,8 @@ type ListTablesInput struct {
 	// The pagination token. To resume pagination, provide the NextToken value as
 	// argument of a subsequent API invocation.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTablesOutput struct {
@@ -57,6 +59,8 @@ type ListTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

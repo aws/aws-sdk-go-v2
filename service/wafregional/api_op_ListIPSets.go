@@ -46,6 +46,8 @@ type ListIPSetsInput struct {
 	// specify the value of NextMarker from the previous response to get information
 	// about another batch of IPSets.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListIPSetsOutput struct {
@@ -59,6 +61,8 @@ type ListIPSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIPSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

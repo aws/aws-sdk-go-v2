@@ -65,11 +65,15 @@ type ModifySnapshotAttributeInput struct {
 
 	// The account ID to modify for the snapshot.
 	UserIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifySnapshotAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifySnapshotAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

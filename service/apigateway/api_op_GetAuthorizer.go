@@ -40,6 +40,8 @@ type GetAuthorizerInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
@@ -131,6 +133,8 @@ type GetAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -58,6 +58,8 @@ type CreateCertificateAuthorityAuditReportInput struct {
 	//
 	// This member is required.
 	S3BucketName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCertificateAuthorityAuditReportOutput struct {
@@ -70,6 +72,8 @@ type CreateCertificateAuthorityAuditReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCertificateAuthorityAuditReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

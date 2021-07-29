@@ -50,11 +50,15 @@ type SendHeartbeatInput struct {
 
 	// Returns a list of models deployed on the the device.
 	Models []types.Model
+
+	noSmithyDocumentSerde
 }
 
 type SendHeartbeatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {

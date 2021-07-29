@@ -81,6 +81,8 @@ type CreateComponentInput struct {
 	// component content up to your service quota. Either data or uri can be used to
 	// specify the data within the component.
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateComponentOutput struct {
@@ -97,6 +99,8 @@ type CreateComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

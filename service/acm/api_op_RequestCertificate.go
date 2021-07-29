@@ -120,6 +120,8 @@ type RequestCertificateInput struct {
 	// (https://docs.aws.amazon.com/acm/latest/userguide/gs-acm-validate-email.html).
 	// We recommend that you use DNS validation.
 	ValidationMethod types.ValidationMethod
+
+	noSmithyDocumentSerde
 }
 
 type RequestCertificateOutput struct {
@@ -131,6 +133,8 @@ type RequestCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRequestCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

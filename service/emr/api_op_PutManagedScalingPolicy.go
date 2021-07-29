@@ -42,11 +42,15 @@ type PutManagedScalingPolicyInput struct {
 	//
 	// This member is required.
 	ManagedScalingPolicy *types.ManagedScalingPolicy
+
+	noSmithyDocumentSerde
 }
 
 type PutManagedScalingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutManagedScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

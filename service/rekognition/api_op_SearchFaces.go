@@ -58,6 +58,8 @@ type SearchFacesInput struct {
 	// Maximum number of faces to return. The operation returns the maximum number of
 	// faces with the highest confidence in the match.
 	MaxFaces *int32
+
+	noSmithyDocumentSerde
 }
 
 type SearchFacesOutput struct {
@@ -75,6 +77,8 @@ type SearchFacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

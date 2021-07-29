@@ -40,6 +40,8 @@ type DescribeFeatureGroupInput struct {
 	// A token to resume pagination of the list of Features (FeatureDefinitions). 2,500
 	// Features are returned by default.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFeatureGroupOutput struct {
@@ -118,6 +120,8 @@ type DescribeFeatureGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

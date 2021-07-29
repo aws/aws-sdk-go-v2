@@ -39,6 +39,8 @@ type ListIdentityPoolsInput struct {
 
 	// A pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a successful ListIdentityPools action.
@@ -52,6 +54,8 @@ type ListIdentityPoolsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIdentityPoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Represents a cross-account destination that receives subscription log events.
 type Destination struct {
 
@@ -25,6 +29,8 @@ type Destination struct {
 	// The Amazon Resource Name (ARN) of the physical target where the log events are
 	// delivered (for example, a Kinesis stream).
 	TargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an export task.
@@ -59,6 +65,8 @@ type ExportTask struct {
 	// The end time, expressed as the number of milliseconds after Jan 1, 1970 00:00:00
 	// UTC. Events with a timestamp later than this time are not exported.
 	To *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the status of an export task.
@@ -71,6 +79,8 @@ type ExportTaskExecutionInfo struct {
 	// The creation time of the export task, expressed as the number of milliseconds
 	// after Jan 1, 1970 00:00:00 UTC.
 	CreationTime *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the status of an export task.
@@ -81,6 +91,8 @@ type ExportTaskStatus struct {
 
 	// The status message related to the status code.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a matched event.
@@ -102,6 +114,8 @@ type FilteredLogEvent struct {
 	// The time the event occurred, expressed as the number of milliseconds after Jan
 	// 1, 1970 00:00:00 UTC.
 	Timestamp *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a log event, which is a record of activity that was recorded by the
@@ -118,6 +132,8 @@ type InputLogEvent struct {
 	//
 	// This member is required.
 	Timestamp *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a log group.
@@ -147,6 +163,8 @@ type LogGroup struct {
 
 	// The number of bytes stored.
 	StoredBytes *int64
+
+	noSmithyDocumentSerde
 }
 
 // The fields contained in log events found by a GetLogGroupFields operation, along
@@ -158,6 +176,8 @@ type LogGroupField struct {
 
 	// The percentage of log events queried that contained the field.
 	Percent int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents a log stream, which is a sequence of log events from a single emitter
@@ -200,6 +220,8 @@ type LogStream struct {
 
 	// The sequence token.
 	UploadSequenceToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Metric filters express how CloudWatch Logs would extract metric observations
@@ -225,6 +247,8 @@ type MetricFilter struct {
 
 	// The metric transformations.
 	MetricTransformations []MetricTransformation
+
+	noSmithyDocumentSerde
 }
 
 // Represents a matched event.
@@ -238,6 +262,8 @@ type MetricFilterMatchRecord struct {
 
 	// The values extracted from the event data by the filter.
 	ExtractedValues map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Indicates how to transform ingested log events to metric data in a CloudWatch
@@ -282,6 +308,8 @@ type MetricTransformation struct {
 
 	// The unit to assign to the metric. If you omit this, the unit is set as None.
 	Unit StandardUnit
+
+	noSmithyDocumentSerde
 }
 
 // Represents a log event.
@@ -297,6 +325,8 @@ type OutputLogEvent struct {
 	// The time the event occurred, expressed as the number of milliseconds after Jan
 	// 1, 1970 00:00:00 UTC.
 	Timestamp *int64
+
+	noSmithyDocumentSerde
 }
 
 // Reserved.
@@ -307,6 +337,8 @@ type QueryCompileError struct {
 
 	// Reserved.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Reserved.
@@ -317,6 +349,8 @@ type QueryCompileErrorLocation struct {
 
 	// Reserved.
 	StartCharOffset *int32
+
+	noSmithyDocumentSerde
 }
 
 // This structure contains details about a saved CloudWatch Logs Insights query
@@ -340,6 +374,8 @@ type QueryDefinition struct {
 	// CloudWatch Logs Insights Query Syntax
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/CWL_QuerySyntax.html).
 	QueryString *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about one CloudWatch Logs Insights query that matches the request in
@@ -361,6 +397,8 @@ type QueryInfo struct {
 	// The status of this query. Possible values are Cancelled, Complete, Failed,
 	// Running, Scheduled, and Unknown.
 	Status QueryStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains the number of log events scanned by the query, the number of log events
@@ -376,6 +414,8 @@ type QueryStatistics struct {
 
 	// The total number of log events scanned during the query.
 	RecordsScanned float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the rejected events.
@@ -389,6 +429,8 @@ type RejectedLogEventsInfo struct {
 
 	// The log events that are too old.
 	TooOldLogEventEndIndex *int32
+
+	noSmithyDocumentSerde
 }
 
 // A policy enabling one or more entities to put logs to a log group in this
@@ -404,6 +446,8 @@ type ResourcePolicy struct {
 
 	// The name of the resource policy.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains one field from one log event returned by a CloudWatch Logs Insights
@@ -417,6 +461,8 @@ type ResultField struct {
 
 	// The value of this field.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the search status of a log stream.
@@ -427,6 +473,8 @@ type SearchedLogStream struct {
 
 	// Indicates whether all the events in this log stream were searched.
 	SearchedCompletely *bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents a subscription filter.
@@ -457,4 +505,8 @@ type SubscriptionFilter struct {
 
 	//
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

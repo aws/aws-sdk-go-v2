@@ -49,6 +49,8 @@ type UpdateFileSystemAssociationInput struct {
 	// share D$ of the Amazon FSx file system. The user account must belong to the
 	// Amazon FSx delegated admin user group.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFileSystemAssociationOutput struct {
@@ -58,6 +60,8 @@ type UpdateFileSystemAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFileSystemAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

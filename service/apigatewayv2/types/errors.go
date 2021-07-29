@@ -9,6 +9,8 @@ import (
 
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // the accompanying error message for details.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -46,6 +50,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // retrying this request. See the accompanying error message for details.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -66,6 +72,8 @@ type NotFoundException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -85,6 +93,8 @@ type TooManyRequestsException struct {
 	Message *string
 
 	LimitType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

@@ -10,6 +10,8 @@ import (
 // The number of active statements exceeds the limit.
 type ActiveStatementsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActiveStatementsExceededException) Error() string {
@@ -31,6 +33,8 @@ type ExecuteStatementException struct {
 	Message *string
 
 	StatementId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExecuteStatementException) Error() string {
@@ -48,6 +52,8 @@ func (e *ExecuteStatementException) ErrorFault() smithy.ErrorFault { return smit
 // The Amazon Redshift Data API operation failed due to invalid input.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -67,6 +73,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -84,6 +92,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The Amazon Redshift Data API operation failed due to invalid input.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

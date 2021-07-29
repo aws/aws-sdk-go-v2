@@ -28,6 +28,8 @@ func (c *Client) RecursiveShapes(ctx context.Context, params *RecursiveShapesInp
 
 type RecursiveShapesInput struct {
 	Nested *types.RecursiveShapesInputOutputNested1
+
+	noSmithyDocumentSerde
 }
 
 type RecursiveShapesOutput struct {
@@ -35,6 +37,8 @@ type RecursiveShapesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRecursiveShapesMiddlewares(stack *middleware.Stack, options Options) (err error) {

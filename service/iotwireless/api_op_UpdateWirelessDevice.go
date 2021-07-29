@@ -45,11 +45,15 @@ type UpdateWirelessDeviceInput struct {
 
 	// The new name of the resource.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWirelessDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,11 +40,15 @@ type ModifyClusterSnapshotScheduleInput struct {
 	// A unique alphanumeric identifier for the schedule that you want to associate
 	// with the cluster.
 	ScheduleIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterSnapshotScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

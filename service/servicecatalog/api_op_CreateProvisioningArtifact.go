@@ -60,6 +60,8 @@ type CreateProvisioningArtifactInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateProvisioningArtifactOutput struct {
@@ -80,6 +82,8 @@ type CreateProvisioningArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

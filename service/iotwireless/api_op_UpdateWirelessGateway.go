@@ -45,11 +45,15 @@ type UpdateWirelessGatewayInput struct {
 	// A list of NetId values that are used by LoRa gateways to filter the uplink
 	// frames.
 	NetIdFilters []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWirelessGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWirelessGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

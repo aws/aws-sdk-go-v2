@@ -35,6 +35,8 @@ type DescribeDataIngestionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDataIngestionJobOutput struct {
@@ -65,6 +67,8 @@ type DescribeDataIngestionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDataIngestionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

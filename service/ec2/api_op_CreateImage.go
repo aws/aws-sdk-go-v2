@@ -84,6 +84,8 @@ type CreateImageInput struct {
 	// tag an AMI or snapshot after it has been created, see CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateImageOutput struct {
@@ -93,6 +95,8 @@ type CreateImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

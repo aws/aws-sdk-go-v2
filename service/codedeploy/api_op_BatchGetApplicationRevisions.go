@@ -43,6 +43,8 @@ type BatchGetApplicationRevisionsInput struct {
 	//
 	// This member is required.
 	Revisions []types.RevisionLocation
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchGetApplicationRevisions operation.
@@ -59,6 +61,8 @@ type BatchGetApplicationRevisionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetApplicationRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

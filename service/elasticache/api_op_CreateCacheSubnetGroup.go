@@ -51,6 +51,8 @@ type CreateCacheSubnetGroupInput struct {
 	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
 	// key must be accompanied by a tag value, although null is accepted.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateCacheSubnetGroupOutput struct {
@@ -65,6 +67,8 @@ type CreateCacheSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCacheSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

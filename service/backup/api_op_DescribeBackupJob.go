@@ -34,6 +34,8 @@ type DescribeBackupJobInput struct {
 	//
 	// This member is required.
 	BackupJobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBackupJobOutput struct {
@@ -130,6 +132,8 @@ type DescribeBackupJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBackupJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,6 +57,8 @@ type CreateLinkInput struct {
 	// The type of the link. Constraints: Cannot include the following characters: | \
 	// ^ Length Constraints: Maximum length of 128 characters.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLinkOutput struct {
@@ -66,6 +68,8 @@ type CreateLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

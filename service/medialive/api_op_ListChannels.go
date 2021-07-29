@@ -36,6 +36,8 @@ type ListChannelsInput struct {
 
 	// Placeholder documentation for __string
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ListChannelsResponse
@@ -49,6 +51,8 @@ type ListChannelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

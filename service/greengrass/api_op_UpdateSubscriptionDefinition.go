@@ -35,11 +35,15 @@ type UpdateSubscriptionDefinitionInput struct {
 
 	// The name of the definition.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSubscriptionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

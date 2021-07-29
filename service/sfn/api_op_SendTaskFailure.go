@@ -43,11 +43,15 @@ type SendTaskFailureInput struct {
 
 	// The error code of the failure.
 	Error *string
+
+	noSmithyDocumentSerde
 }
 
 type SendTaskFailureOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendTaskFailureMiddlewares(stack *middleware.Stack, options Options) (err error) {

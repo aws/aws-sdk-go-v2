@@ -44,6 +44,8 @@ type DescribeTrainingJobInput struct {
 	//
 	// This member is required.
 	TrainingJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTrainingJobOutput struct {
@@ -319,6 +321,8 @@ type DescribeTrainingJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

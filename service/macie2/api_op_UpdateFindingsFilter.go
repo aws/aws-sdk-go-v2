@@ -66,6 +66,8 @@ type UpdateFindingsFilterInput struct {
 	// console. This value also determines the order in which the filter is applied to
 	// findings, relative to other filters that are also applied to the findings.
 	Position int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFindingsFilterOutput struct {
@@ -78,6 +80,8 @@ type UpdateFindingsFilterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFindingsFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

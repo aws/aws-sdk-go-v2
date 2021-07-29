@@ -30,11 +30,14 @@ func (c *Client) CreateSubscription(ctx context.Context, params *CreateSubscript
 }
 
 type CreateSubscriptionInput struct {
+	noSmithyDocumentSerde
 }
 
 type CreateSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

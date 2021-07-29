@@ -33,6 +33,8 @@ type GetSdkTypeInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A type of SDK that API Gateway can generate.
@@ -52,6 +54,8 @@ type GetSdkTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSdkTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

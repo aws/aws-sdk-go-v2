@@ -34,6 +34,8 @@ type GetDeploymentTargetInput struct {
 
 	// The unique ID of a deployment target.
 	TargetId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDeploymentTargetOutput struct {
@@ -46,6 +48,8 @@ type GetDeploymentTargetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeploymentTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

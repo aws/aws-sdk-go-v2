@@ -33,6 +33,8 @@ type CancelContactInput struct {
 	//
 	// This member is required.
 	ContactId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -43,6 +45,8 @@ type CancelContactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

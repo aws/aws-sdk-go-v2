@@ -71,6 +71,8 @@ type UpdateDataSetInput struct {
 
 	// The row-level security configuration for the data you want to create.
 	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDataSetOutput struct {
@@ -98,6 +100,8 @@ type UpdateDataSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

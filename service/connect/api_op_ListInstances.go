@@ -40,6 +40,8 @@ type ListInstancesInput struct {
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListInstancesOutput struct {
@@ -52,6 +54,8 @@ type ListInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

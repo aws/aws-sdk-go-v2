@@ -41,11 +41,15 @@ type DeleteUsagePlanKeyInput struct {
 	//
 	// This member is required.
 	UsagePlanId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUsagePlanKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUsagePlanKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

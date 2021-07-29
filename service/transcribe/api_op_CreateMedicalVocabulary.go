@@ -60,6 +60,8 @@ type CreateMedicalVocabularyInput struct {
 	//
 	// This member is required.
 	VocabularyName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateMedicalVocabularyOutput struct {
@@ -86,6 +88,8 @@ type CreateMedicalVocabularyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMedicalVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {

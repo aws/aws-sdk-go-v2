@@ -27,6 +27,7 @@ func (c *Client) DescribeAutoScalingNotificationTypes(ctx context.Context, param
 }
 
 type DescribeAutoScalingNotificationTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeAutoScalingNotificationTypesOutput struct {
@@ -36,6 +37,8 @@ type DescribeAutoScalingNotificationTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAutoScalingNotificationTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

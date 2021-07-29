@@ -98,6 +98,8 @@ type CreateRuleGroupInput struct {
 
 	// An array of key:value pairs to associate with the resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateRuleGroupOutput struct {
@@ -110,6 +112,8 @@ type CreateRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

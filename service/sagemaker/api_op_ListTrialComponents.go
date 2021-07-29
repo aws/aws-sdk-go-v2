@@ -72,6 +72,8 @@ type ListTrialComponentsInput struct {
 	// A filter that returns only components that are part of the specified trial. If
 	// you specify TrialName, you can't filter by ExperimentName or SourceArn.
 	TrialName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTrialComponentsOutput struct {
@@ -84,6 +86,8 @@ type ListTrialComponentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTrialComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

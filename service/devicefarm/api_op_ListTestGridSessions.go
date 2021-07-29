@@ -56,6 +56,8 @@ type ListTestGridSessionsInput struct {
 
 	// Return only sessions in this state.
 	Status types.TestGridSessionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListTestGridSessionsOutput struct {
@@ -68,6 +70,8 @@ type ListTestGridSessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTestGridSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,11 +35,15 @@ type UpdateLoggerDefinitionInput struct {
 
 	// The name of the definition.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLoggerDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLoggerDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

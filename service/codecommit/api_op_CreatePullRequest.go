@@ -54,6 +54,8 @@ type CreatePullRequestInput struct {
 
 	// A description of the pull request.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePullRequestOutput struct {
@@ -65,6 +67,8 @@ type CreatePullRequestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePullRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {

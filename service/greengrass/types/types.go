@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Information about a bulk deployment. You cannot start a new bulk deployment
 // while another one is still running or in a non-terminal state.
 type BulkDeployment struct {
@@ -14,6 +18,8 @@ type BulkDeployment struct {
 
 	// The time, in ISO format, when the deployment was created.
 	CreatedAt *string
+
+	noSmithyDocumentSerde
 }
 
 // Relevant metrics on input records processed during bulk deployment.
@@ -34,6 +40,8 @@ type BulkDeploymentMetrics struct {
 	// throttling error. ''StartBulkDeployment'' retries a group deployment up to five
 	// times.
 	RetryAttempts int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about an individual group deployment in a bulk deployment operation.
@@ -63,6 +71,8 @@ type BulkDeploymentResult struct {
 
 	// The ARN of the Greengrass group.
 	GroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Greengrass core's connectivity.
@@ -79,6 +89,8 @@ type ConnectivityInfo struct {
 
 	// The port of the Greengrass core. Usually 8883.
 	PortNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a connector. Connectors run on the Greengrass core and contain
@@ -100,6 +112,8 @@ type Connector struct {
 
 	// The parameters or configuration that the connector uses.
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the connector definition version, which is a container for
@@ -109,6 +123,8 @@ type ConnectorDefinitionVersion struct {
 	// A list of references to connectors in this version, with their corresponding
 	// configuration settings.
 	Connectors []Connector
+
+	noSmithyDocumentSerde
 }
 
 // Information about a core.
@@ -133,6 +149,8 @@ type Core struct {
 
 	// If true, the core's local shadow is automatically synced with the cloud.
 	SyncShadow bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about a core definition version.
@@ -140,6 +158,8 @@ type CoreDefinitionVersion struct {
 
 	// A list of cores in the core definition version.
 	Cores []Core
+
+	noSmithyDocumentSerde
 }
 
 // Information about a definition.
@@ -168,6 +188,8 @@ type DefinitionInformation struct {
 
 	// Tag(s) attached to the resource arn.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment.
@@ -187,6 +209,8 @@ type Deployment struct {
 
 	// The ARN of the group for this deployment.
 	GroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a device.
@@ -211,6 +235,8 @@ type Device struct {
 
 	// If true, the device's local shadow will be automatically synced with the cloud.
 	SyncShadow bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about a device definition version.
@@ -218,6 +244,8 @@ type DeviceDefinitionVersion struct {
 
 	// A list of devices in the definition version.
 	Devices []Device
+
+	noSmithyDocumentSerde
 }
 
 // Details about the error.
@@ -228,6 +256,8 @@ type ErrorDetail struct {
 
 	// A detailed error message.
 	DetailedErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Lambda function.
@@ -245,6 +275,8 @@ type Function struct {
 
 	// The configuration of the Lambda function.
 	FunctionConfiguration *FunctionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of the Lambda function.
@@ -276,6 +308,8 @@ type FunctionConfiguration struct {
 	// function. This timeout still applies to pinned Lambda functions for each
 	// request.
 	Timeout int32
+
+	noSmithyDocumentSerde
 }
 
 // The environment configuration of the function.
@@ -297,6 +331,8 @@ type FunctionConfigurationEnvironment struct {
 
 	// Environment variables for the Lambda function's configuration.
 	Variables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The default configuration that applies to all Lambda functions in the group.
@@ -305,6 +341,8 @@ type FunctionDefaultConfig struct {
 
 	// Configuration information that specifies how a Lambda function runs.
 	Execution *FunctionDefaultExecutionConfig
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information that specifies how a Lambda function runs.
@@ -324,6 +362,8 @@ type FunctionDefaultExecutionConfig struct {
 	// set ''IsolationMode'' to ''NoContainer'' and update config.json in
 	// ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
 	RunAs *FunctionRunAsConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about a function definition version.
@@ -335,6 +375,8 @@ type FunctionDefinitionVersion struct {
 
 	// A list of Lambda functions in this function definition version.
 	Functions []Function
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information that specifies how a Lambda function runs.
@@ -354,6 +396,8 @@ type FunctionExecutionConfig struct {
 	// set ''IsolationMode'' to ''NoContainer'' and update config.json in
 	// ''greengrass-root/config'' to set ''allowFunctionsToRunAsRoot'' to ''yes''.
 	RunAs *FunctionRunAsConfig
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the user and group whose permissions are used when running the Lambda
@@ -369,6 +413,8 @@ type FunctionRunAsConfig struct {
 
 	// The user ID whose permissions are used to run a Lambda function.
 	Uid int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a certificate authority for a group.
@@ -379,6 +425,8 @@ type GroupCertificateAuthorityProperties struct {
 
 	// The ID of the certificate authority for the group.
 	GroupCertificateAuthorityId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a group.
@@ -404,6 +452,8 @@ type GroupInformation struct {
 
 	// The name of the group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Group owner related settings for local resources.
@@ -417,6 +467,8 @@ type GroupOwnerSetting struct {
 	// The name of the Linux OS group whose privileges will be added to the Lambda
 	// process. This field is optional.
 	GroupOwner *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a group version.
@@ -442,6 +494,8 @@ type GroupVersion struct {
 
 	// The ARN of the subscription definition version for this group.
 	SubscriptionDefinitionVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes that define a local device resource.
@@ -453,6 +507,8 @@ type LocalDeviceResourceData struct {
 	// The local absolute path of the device resource. The source path for a device
 	// resource can refer only to a character device or block device under ''/dev''.
 	SourcePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes that define a local volume resource.
@@ -468,6 +524,8 @@ type LocalVolumeResourceData struct {
 	// The local absolute path of the volume resource on the host. The source path for
 	// a volume resource type cannot start with ''/sys''.
 	SourcePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a logger
@@ -498,6 +556,8 @@ type Logger struct {
 	// The amount of file space, in KB, to use if the local file system is used for
 	// logging purposes.
 	Space int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a logger definition version.
@@ -505,6 +565,8 @@ type LoggerDefinitionVersion struct {
 
 	// A list of loggers.
 	Loggers []Logger
+
+	noSmithyDocumentSerde
 }
 
 // Information about a resource.
@@ -528,6 +590,8 @@ type Resource struct {
 	//
 	// This member is required.
 	ResourceDataContainer *ResourceDataContainer
+
+	noSmithyDocumentSerde
 }
 
 // A policy used by the function to access a resource.
@@ -542,6 +606,8 @@ type ResourceAccessPolicy struct {
 	// The permissions that the Lambda function has to the resource. Can be one of
 	// ''rw'' (read/write) or ''ro'' (read-only).
 	Permission Permission
+
+	noSmithyDocumentSerde
 }
 
 // A container for resource data. The container takes only one of the following
@@ -565,6 +631,8 @@ type ResourceDataContainer struct {
 	// Attributes that define a secret resource, which references a secret from AWS
 	// Secrets Manager.
 	SecretsManagerSecretResourceData *SecretsManagerSecretResourceData
+
+	noSmithyDocumentSerde
 }
 
 // Information about a resource definition version.
@@ -572,6 +640,8 @@ type ResourceDefinitionVersion struct {
 
 	// A list of resources.
 	Resources []Resource
+
+	noSmithyDocumentSerde
 }
 
 // The owner setting for downloaded machine learning resources.
@@ -588,6 +658,8 @@ type ResourceDownloadOwnerSetting struct {
 	//
 	// This member is required.
 	GroupPermission Permission
+
+	noSmithyDocumentSerde
 }
 
 // Runtime configuration for a thing.
@@ -595,6 +667,8 @@ type RuntimeConfiguration struct {
 
 	// Configuration for telemetry service.
 	TelemetryConfiguration *TelemetryConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Attributes that define an Amazon S3 machine learning resource.
@@ -609,6 +683,8 @@ type S3MachineLearningModelResourceData struct {
 	// The URI of the source model in an S3 bucket. The model package must be in tar.gz
 	// or .zip format.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes that define an Amazon SageMaker machine learning resource.
@@ -622,6 +698,8 @@ type SageMakerMachineLearningModelResourceData struct {
 
 	// The ARN of the Amazon SageMaker training job that represents the source model.
 	SageMakerJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes that define a secret resource, which references a secret from AWS
@@ -638,6 +716,8 @@ type SecretsManagerSecretResourceData struct {
 	// Optional. The staging labels whose values you want to make available on the
 	// core, in addition to ''AWSCURRENT''.
 	AdditionalStagingLabelsToDownload []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a subscription.
@@ -668,6 +748,8 @@ type Subscription struct {
 	//
 	// This member is required.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a subscription definition version.
@@ -675,6 +757,8 @@ type SubscriptionDefinitionVersion struct {
 
 	// A list of subscriptions.
 	Subscriptions []Subscription
+
+	noSmithyDocumentSerde
 }
 
 // Configuration settings for running telemetry.
@@ -688,6 +772,8 @@ type TelemetryConfiguration struct {
 	// Synchronization status of the device reported configuration with the desired
 	// configuration.
 	ConfigurationSyncStatus ConfigurationSyncStatus
+
+	noSmithyDocumentSerde
 }
 
 // Configuration settings for running telemetry.
@@ -697,6 +783,8 @@ type TelemetryConfigurationUpdate struct {
 	//
 	// This member is required.
 	Telemetry Telemetry
+
+	noSmithyDocumentSerde
 }
 
 // Information about a version.
@@ -713,4 +801,8 @@ type VersionInformation struct {
 
 	// The ID of the version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

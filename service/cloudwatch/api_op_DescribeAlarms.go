@@ -91,6 +91,8 @@ type DescribeAlarmsInput struct {
 	// Specify this parameter to receive information only about alarms that are
 	// currently in the state that you specify.
 	StateValue types.StateValue
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAlarmsOutput struct {
@@ -106,6 +108,8 @@ type DescribeAlarmsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {

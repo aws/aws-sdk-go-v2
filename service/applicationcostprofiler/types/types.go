@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -30,6 +31,8 @@ type ReportDefinition struct {
 
 	// The ID of the report.
 	ReportId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the Amazon Simple Storage Service (Amazon S3) location where AWS
@@ -45,6 +48,8 @@ type S3Location struct {
 	//
 	// This member is required.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the Amazon Simple Storage Service (Amazon S3) location where usage
@@ -67,4 +72,8 @@ type SourceS3Location struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/rande-manage.html#rande-manage-enable)
 	// in the AWS General Reference guide.
 	Region S3BucketRegion
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

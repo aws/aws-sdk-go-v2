@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A resource that failed to be added to or removed from a group.
 type FailedResource struct {
 
@@ -13,6 +17,8 @@ type FailedResource struct {
 
 	// The ARN of the resource that failed to be added or removed.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A resource group that contains AWS resources. You can assign resources to the
@@ -42,6 +48,8 @@ type Group struct {
 
 	// The description of the resource group.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // A service configuration associated with a resource group. The configuration
@@ -65,6 +73,8 @@ type GroupConfiguration struct {
 
 	// The current status of an attempt to update the group configuration.
 	Status GroupConfigurationStatus
+
+	noSmithyDocumentSerde
 }
 
 // An item in a group configuration. A group service configuration can have one or
@@ -86,6 +96,8 @@ type GroupConfigurationItem struct {
 	// resource types and parameters
 	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
 	Parameters []GroupConfigurationParameter
+
+	noSmithyDocumentSerde
 }
 
 // A parameter for a group configuration item. For details about group service
@@ -106,6 +118,8 @@ type GroupConfigurationParameter struct {
 	// parameters
 	// (https://docs.aws.amazon.com/ARG/latest/APIReference/about-slg.html#about-slg-types).
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A filter collection that you can use to restrict the results from a List
@@ -122,6 +136,8 @@ type GroupFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The unique identifiers for a resource group.
@@ -132,6 +148,8 @@ type GroupIdentifier struct {
 
 	// The name of the resource group.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // A mapping of a query attached to a resource group that determines the AWS
@@ -149,6 +167,8 @@ type GroupQuery struct {
 	//
 	// This member is required.
 	ResourceQuery *ResourceQuery
+
+	noSmithyDocumentSerde
 }
 
 // A structure returned by the ListGroupResources operation that contains identity
@@ -162,6 +182,8 @@ type ListGroupResourcesItem struct {
 	// This field is present in the response only if the group is of type
 	// AWS::EC2::HostManagement.
 	Status *ResourceStatus
+
+	noSmithyDocumentSerde
 }
 
 // A structure that identifies a resource that is currently pending addition to the
@@ -171,6 +193,8 @@ type PendingResource struct {
 
 	// The Amazon resource name (ARN) of the resource that's in a pending state.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A two-part error structure that can occur in ListGroupResources or
@@ -191,6 +215,8 @@ type QueryError struct {
 	// CloudFormation stack has a status that is not (or no longer) active, such as
 	// CREATE_FAILED.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter name and value pair that is used to obtain more specific results from a
@@ -207,6 +233,8 @@ type ResourceFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains the ARN of a resource and its resource type.
@@ -217,6 +245,8 @@ type ResourceIdentifier struct {
 
 	// The resource type of a resource, such as AWS::EC2::Instance.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // The query that is used to define a resource group or a search for resources. A
@@ -312,6 +342,8 @@ type ResourceQuery struct {
 	//
 	// This member is required.
 	Type QueryType
+
+	noSmithyDocumentSerde
 }
 
 // A structure that identifies the current group membership status for a resource.
@@ -322,4 +354,8 @@ type ResourceStatus struct {
 
 	// The current status.
 	Name ResourceStatusValue
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

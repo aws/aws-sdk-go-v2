@@ -33,6 +33,8 @@ type DescribeWorkspaceSnapshotsInput struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorkspaceSnapshotsOutput struct {
@@ -47,6 +49,8 @@ type DescribeWorkspaceSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkspaceSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

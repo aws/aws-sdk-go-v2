@@ -38,6 +38,8 @@ type ListOTAUpdatesInput struct {
 
 	// The OTA update job status.
 	OtaUpdateStatus types.OTAUpdateStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListOTAUpdatesOutput struct {
@@ -50,6 +52,8 @@ type ListOTAUpdatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOTAUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

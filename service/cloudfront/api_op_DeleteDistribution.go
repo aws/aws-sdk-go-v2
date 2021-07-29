@@ -76,11 +76,15 @@ type DeleteDistributionInput struct {
 	// The value of the ETag header that you received when you disabled the
 	// distribution. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDistributionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

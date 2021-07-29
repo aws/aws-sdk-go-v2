@@ -43,6 +43,8 @@ type InstallToRemoteAccessSessionInput struct {
 	//
 	// This member is required.
 	RemoteAccessSessionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server after AWS Device Farm makes a request to
@@ -54,6 +56,8 @@ type InstallToRemoteAccessSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInstallToRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

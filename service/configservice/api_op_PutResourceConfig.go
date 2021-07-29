@@ -67,11 +67,15 @@ type PutResourceConfigInput struct {
 
 	// Tags associated with the resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type PutResourceConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

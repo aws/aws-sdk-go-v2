@@ -52,11 +52,15 @@ type DeleteCustomActionTypeInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomActionTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

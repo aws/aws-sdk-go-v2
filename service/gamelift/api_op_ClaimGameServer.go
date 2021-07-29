@@ -79,6 +79,8 @@ type ClaimGameServerInput struct {
 	// parameter is left empty, GameLift FleetIQ searches for an available game server
 	// in the specified game server group.
 	GameServerId *string
+
+	noSmithyDocumentSerde
 }
 
 type ClaimGameServerOutput struct {
@@ -88,6 +90,8 @@ type ClaimGameServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationClaimGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

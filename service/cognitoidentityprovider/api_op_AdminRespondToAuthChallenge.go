@@ -137,6 +137,8 @@ type AdminRespondToAuthChallengeInput struct {
 	// challenge parameters. This session should be passed as it is to the next
 	// RespondToAuthChallenge API call.
 	Session *string
+
+	noSmithyDocumentSerde
 }
 
 // Responds to the authentication challenge, as an administrator.
@@ -161,6 +163,8 @@ type AdminRespondToAuthChallengeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminRespondToAuthChallengeMiddlewares(stack *middleware.Stack, options Options) (err error) {

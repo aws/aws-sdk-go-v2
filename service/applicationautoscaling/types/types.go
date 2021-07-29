@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type Alarm struct {
 	//
 	// This member is required.
 	AlarmName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
@@ -66,6 +69,8 @@ type CustomizedMetricSpecification struct {
 
 	// The unit of the metric.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the dimension names and values associated with a metric.
@@ -80,6 +85,8 @@ type MetricDimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a predefined metric for a target tracking scaling policy to use with
@@ -119,6 +126,8 @@ type PredefinedMetricSpecification struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	ResourceLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a scalable target.
@@ -290,6 +299,8 @@ type ScalableTarget struct {
 	// Specifies whether the scaling activities for a scalable target are in a
 	// suspended state.
 	SuspendedState *SuspendedState
+
+	noSmithyDocumentSerde
 }
 
 // Represents the minimum and maximum capacity for a scheduled action.
@@ -310,6 +321,8 @@ type ScalableTargetAction struct {
 	// DB clusters, EMR clusters, and custom resources. For all other resources, the
 	// minimum value allowed is 1.
 	MinCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents a scaling activity.
@@ -490,6 +503,8 @@ type ScalingActivity struct {
 
 	// A simple message about the current status of the scaling activity.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a scaling policy to use with Application Auto Scaling. For more
@@ -669,6 +684,8 @@ type ScalingPolicy struct {
 
 	// A target tracking scaling policy.
 	TargetTrackingScalingPolicyConfiguration *TargetTrackingScalingPolicyConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Represents a scheduled action.
@@ -870,6 +887,8 @@ type ScheduledAction struct {
 	// The time zone used when referring to the date and time of a scheduled action,
 	// when the scheduled action uses an at or cron expression.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a step adjustment for a StepScalingPolicyConfiguration
@@ -926,6 +945,8 @@ type StepAdjustment struct {
 	// threshold plus the upper bound). A null value indicates positive infinity. The
 	// upper bound must be greater than the lower bound.
 	MetricIntervalUpperBound *float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a step scaling policy configuration to use with Application Auto
@@ -1014,6 +1035,8 @@ type StepScalingPolicyConfiguration struct {
 	// breach. At least one step adjustment is required if you are adding a new step
 	// scaling policy configuration.
 	StepAdjustments []StepAdjustment
+
+	noSmithyDocumentSerde
 }
 
 // Specifies whether the scaling activities for a scalable target are in a
@@ -1034,6 +1057,8 @@ type SuspendedState struct {
 	// Application Auto Scaling to add or remove capacity by initiating scheduled
 	// actions. The default is false.
 	ScheduledScalingSuspended *bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents a target tracking scaling policy configuration to use with
@@ -1155,4 +1180,8 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	// * Amazon
 	// MSK broker storage
 	ScaleOutCooldown *int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -40,6 +40,8 @@ type GetSegmentInput struct {
 	//
 	// This member is required.
 	SegmentId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSegmentOutput struct {
@@ -52,6 +54,8 @@ type GetSegmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSegmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

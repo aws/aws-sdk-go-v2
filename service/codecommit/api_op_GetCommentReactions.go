@@ -47,6 +47,8 @@ type GetCommentReactionsInput struct {
 	// Optional. The Amazon Resource Name (ARN) of the user or identity for which you
 	// want to get reaction information.
 	ReactionUserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCommentReactionsOutput struct {
@@ -62,6 +64,8 @@ type GetCommentReactionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCommentReactionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

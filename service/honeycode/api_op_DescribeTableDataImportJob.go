@@ -48,6 +48,8 @@ type DescribeTableDataImportJobInput struct {
 	//
 	// This member is required.
 	WorkbookId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTableDataImportJobOutput struct {
@@ -69,6 +71,8 @@ type DescribeTableDataImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTableDataImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

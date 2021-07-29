@@ -32,6 +32,8 @@ type DeleteDistributionInput struct {
 	// The name of the distribution to delete. Use the GetDistributions action to get a
 	// list of distribution names that you can specify.
 	DistributionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDistributionOutput struct {
@@ -43,6 +45,8 @@ type DeleteDistributionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

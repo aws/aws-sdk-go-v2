@@ -5,7 +5,7 @@ package awsrestjson
 import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	smithy "github.com/aws/smithy-go"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -27,14 +27,18 @@ func (c *Client) DocumentTypeAsPayload(ctx context.Context, params *DocumentType
 }
 
 type DocumentTypeAsPayloadInput struct {
-	DocumentValue smithy.Document
+	DocumentValue document.Interface
+
+	noSmithyDocumentSerde
 }
 
 type DocumentTypeAsPayloadOutput struct {
-	DocumentValue smithy.Document
+	DocumentValue document.Interface
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDocumentTypeAsPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {

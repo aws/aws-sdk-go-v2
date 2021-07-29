@@ -43,6 +43,8 @@ type DescribeUserGroupsInput struct {
 
 	// The ID of the user group.
 	UserGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUserGroupsOutput struct {
@@ -58,6 +60,8 @@ type DescribeUserGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUserGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

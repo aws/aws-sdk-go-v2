@@ -69,6 +69,8 @@ type ListDeploymentInstancesInput struct {
 	// An identifier returned from the previous list deployment instances call. It can
 	// be used to return the next set of deployment instances in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListDeploymentInstances operation.
@@ -84,6 +86,8 @@ type ListDeploymentInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeploymentInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

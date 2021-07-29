@@ -43,11 +43,15 @@ type EnableMacieInput struct {
 	// Specifies the new status for the account. To enable Amazon Macie and start all
 	// Macie activities for the account, set this value to ENABLED.
 	Status types.MacieStatus
+
+	noSmithyDocumentSerde
 }
 
 type EnableMacieOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DescribeCreateAccountStatusInput struct {
 	//
 	// This member is required.
 	CreateAccountRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCreateAccountStatusOutput struct {
@@ -48,6 +50,8 @@ type DescribeCreateAccountStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCreateAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

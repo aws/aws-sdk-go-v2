@@ -34,6 +34,8 @@ type GetDevicePoolInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a get device pool request.
@@ -44,6 +46,8 @@ type GetDevicePoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

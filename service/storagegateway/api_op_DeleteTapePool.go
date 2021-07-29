@@ -34,6 +34,8 @@ type DeleteTapePoolInput struct {
 	//
 	// This member is required.
 	PoolARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTapePoolOutput struct {
@@ -43,6 +45,8 @@ type DeleteTapePoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

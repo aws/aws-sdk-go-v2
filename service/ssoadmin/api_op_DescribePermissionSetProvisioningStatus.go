@@ -41,6 +41,8 @@ type DescribePermissionSetProvisioningStatusInput struct {
 	//
 	// This member is required.
 	ProvisionPermissionSetRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePermissionSetProvisioningStatusOutput struct {
@@ -50,6 +52,8 @@ type DescribePermissionSetProvisioningStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePermissionSetProvisioningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

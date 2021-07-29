@@ -33,11 +33,15 @@ type DeleteHsmClientCertificateInput struct {
 	//
 	// This member is required.
 	HsmClientCertificateIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteHsmClientCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHsmClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

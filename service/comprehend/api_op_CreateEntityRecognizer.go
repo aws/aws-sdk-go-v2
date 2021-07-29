@@ -97,6 +97,8 @@ type CreateEntityRecognizerInput struct {
 	// more information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateEntityRecognizerOutput struct {
@@ -106,6 +108,8 @@ type CreateEntityRecognizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

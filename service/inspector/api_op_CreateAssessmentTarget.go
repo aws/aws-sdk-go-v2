@@ -48,6 +48,8 @@ type CreateAssessmentTargetInput struct {
 	// target. If resourceGroupArn is not specified, all EC2 instances in the current
 	// AWS account and region are included in the assessment target.
 	ResourceGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssessmentTargetOutput struct {
@@ -59,6 +61,8 @@ type CreateAssessmentTargetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssessmentTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

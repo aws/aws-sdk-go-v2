@@ -67,6 +67,8 @@ type TestInvokeMethodInput struct {
 	// A key-value map of stage variables to simulate an invocation on a deployed
 	// Stage.
 	StageVariables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response of the test invoke request in the HTTP method. Test API
@@ -94,6 +96,8 @@ type TestInvokeMethodOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestInvokeMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {

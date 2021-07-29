@@ -68,6 +68,8 @@ type CreateLocationEfsInput struct {
 	// search for your resources. We recommend that you create a name tag for your
 	// location.
 	Tags []types.TagListEntry
+
+	noSmithyDocumentSerde
 }
 
 // CreateLocationEfs
@@ -79,6 +81,8 @@ type CreateLocationEfsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {

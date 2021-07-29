@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // An object that defines a message that contains text formatted using Amazon
 // Pinpoint Voice Instructions markup.
 type CallInstructionsMessageType struct {
@@ -9,6 +13,8 @@ type CallInstructionsMessageType struct {
 	// The language to use when delivering the message. For a complete list of
 	// supported languages, see the Amazon Polly Developer Guide.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about an event destination that sends data
@@ -21,6 +27,8 @@ type CloudWatchLogsDestination struct {
 
 	// The name of the Amazon CloudWatch Log Group that you want to record events in.
 	LogGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines an event destination.
@@ -49,6 +57,8 @@ type EventDestination struct {
 	// An object that contains information about an event destination that sends data
 	// to Amazon SNS.
 	SnsDestination *SnsDestination
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines a single event destination.
@@ -74,6 +84,8 @@ type EventDestinationDefinition struct {
 	// An object that contains information about an event destination that sends data
 	// to Amazon SNS.
 	SnsDestination *SnsDestination
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about an event destination that sends data
@@ -87,6 +99,8 @@ type KinesisFirehoseDestination struct {
 	// The Amazon Resource Name (ARN) of the Amazon Kinesis Data Firehose destination
 	// that you want to use in the event destination.
 	IamRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines a message that contains unformatted text.
@@ -102,6 +116,8 @@ type PlainTextMessageType struct {
 	// The name of the voice that you want to use to deliver the message. For a
 	// complete list of supported voices, see the Amazon Polly Developer Guide.
 	VoiceId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about an event destination that sends data
@@ -111,6 +127,8 @@ type SnsDestination struct {
 	// The Amazon Resource Name (ARN) of the Amazon SNS topic that you want to publish
 	// events to.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines a message that contains SSML-formatted text.
@@ -126,6 +144,8 @@ type SSMLMessageType struct {
 	// The name of the voice that you want to use to deliver the message. For a
 	// complete list of supported voices, see the Amazon Polly Developer Guide.
 	VoiceId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains a voice message and information about the recipient that
@@ -141,4 +161,8 @@ type VoiceMessageContent struct {
 
 	// An object that defines a message that contains SSML-formatted text.
 	SSMLMessage *SSMLMessageType
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

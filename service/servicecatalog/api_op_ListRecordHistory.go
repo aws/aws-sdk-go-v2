@@ -50,6 +50,8 @@ type ListRecordHistoryInput struct {
 
 	// The search filter to scope the results.
 	SearchFilter *types.ListRecordHistorySearchFilter
+
+	noSmithyDocumentSerde
 }
 
 type ListRecordHistoryOutput struct {
@@ -63,6 +65,8 @@ type ListRecordHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRecordHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

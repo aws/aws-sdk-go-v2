@@ -36,11 +36,15 @@ type DeleteUserInput struct {
 	// Amazon WorkDocs authentication token. Do not set this field when using
 	// administrative API actions, as in accessing the API using AWS credentials.
 	AuthenticationToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

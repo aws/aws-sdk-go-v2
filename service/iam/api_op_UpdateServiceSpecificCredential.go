@@ -51,11 +51,15 @@ type UpdateServiceSpecificCredentialInput struct {
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceSpecificCredentialOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {

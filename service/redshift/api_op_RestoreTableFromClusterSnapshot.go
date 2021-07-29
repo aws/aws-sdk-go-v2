@@ -81,6 +81,8 @@ type RestoreTableFromClusterSnapshotInput struct {
 
 	// The name of the schema to restore the table to.
 	TargetSchemaName *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreTableFromClusterSnapshotOutput struct {
@@ -90,6 +92,8 @@ type RestoreTableFromClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreTableFromClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type UpdateBatchPredictionInput struct {
 	//
 	// This member is required.
 	BatchPredictionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an UpdateBatchPrediction operation. You can see the
@@ -50,6 +52,8 @@ type UpdateBatchPredictionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {

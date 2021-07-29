@@ -32,6 +32,8 @@ type StopRxNormInferenceJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopRxNormInferenceJobOutput struct {
@@ -42,6 +44,8 @@ type StopRxNormInferenceJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopRxNormInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

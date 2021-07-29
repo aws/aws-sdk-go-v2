@@ -43,6 +43,8 @@ type CreateCoreDefinitionInput struct {
 
 	// Tag(s) to add to the new resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCoreDefinitionOutput struct {
@@ -70,6 +72,8 @@ type CreateCoreDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCoreDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

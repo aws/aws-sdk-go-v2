@@ -68,6 +68,8 @@ type CopyDBParameterGroupInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CopyDBParameterGroupOutput struct {
@@ -78,6 +80,8 @@ type CopyDBParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

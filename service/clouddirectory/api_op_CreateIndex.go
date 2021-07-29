@@ -52,6 +52,8 @@ type CreateIndexInput struct {
 
 	// A reference to the parent object that contains the index object.
 	ParentReference *types.ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 type CreateIndexOutput struct {
@@ -61,6 +63,8 @@ type CreateIndexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

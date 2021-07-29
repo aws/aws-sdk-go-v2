@@ -36,6 +36,8 @@ type ListTagsForDomainInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The ListTagsForDomain response includes the following elements.
@@ -48,6 +50,8 @@ type ListTagsForDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

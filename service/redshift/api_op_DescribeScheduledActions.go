@@ -66,6 +66,8 @@ type DescribeScheduledActionsInput struct {
 
 	// The type of the scheduled actions to retrieve.
 	TargetActionType types.ScheduledActionTypeValues
+
+	noSmithyDocumentSerde
 }
 
 type DescribeScheduledActionsOutput struct {
@@ -83,6 +85,8 @@ type DescribeScheduledActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScheduledActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

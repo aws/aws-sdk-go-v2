@@ -42,6 +42,8 @@ type DescribeProductViewInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProductViewOutput struct {
@@ -54,6 +56,8 @@ type DescribeProductViewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProductViewMiddlewares(stack *middleware.Stack, options Options) (err error) {

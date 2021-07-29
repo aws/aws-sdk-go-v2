@@ -30,6 +30,7 @@ func (c *Client) GetDistributionBundles(ctx context.Context, params *GetDistribu
 }
 
 type GetDistributionBundlesInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetDistributionBundlesOutput struct {
@@ -39,6 +40,8 @@ type GetDistributionBundlesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDistributionBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {

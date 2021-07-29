@@ -39,6 +39,8 @@ type DescribeWorkforceInput struct {
 	//
 	// This member is required.
 	WorkforceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorkforceOutput struct {
@@ -55,6 +57,8 @@ type DescribeWorkforceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {

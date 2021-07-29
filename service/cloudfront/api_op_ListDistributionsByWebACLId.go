@@ -48,6 +48,8 @@ type ListDistributionsByWebACLIdInput struct {
 	// The maximum number of distributions that you want CloudFront to return in the
 	// response body. The maximum and default values are both 100.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // The response to a request to list the distributions that are associated with a
@@ -59,6 +61,8 @@ type ListDistributionsByWebACLIdOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDistributionsByWebACLIdMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -30,6 +30,7 @@ func (c *Client) DescribeEmergencyContactSettings(ctx context.Context, params *D
 }
 
 type DescribeEmergencyContactSettingsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeEmergencyContactSettingsOutput struct {
@@ -41,6 +42,8 @@ type DescribeEmergencyContactSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEmergencyContactSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type ListDomainsInput struct {
 
 	// The pagination token from the previous ListDomain API call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDomainsOutput struct {
@@ -46,6 +48,8 @@ type ListDomainsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {

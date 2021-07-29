@@ -159,6 +159,8 @@ type GetInstanceMetricDataInput struct {
 	//
 	// This member is required.
 	Unit types.MetricUnit
+
+	noSmithyDocumentSerde
 }
 
 type GetInstanceMetricDataOutput struct {
@@ -171,6 +173,8 @@ type GetInstanceMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInstanceMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

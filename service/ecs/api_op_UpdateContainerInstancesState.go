@@ -89,6 +89,8 @@ type UpdateContainerInstancesStateInput struct {
 	// container instance to update. If you do not specify a cluster, the default
 	// cluster is assumed.
 	Cluster *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContainerInstancesStateOutput struct {
@@ -101,6 +103,8 @@ type UpdateContainerInstancesStateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContainerInstancesStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type DescribeReturnShippingLabelInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeReturnShippingLabelOutput struct {
@@ -49,6 +51,8 @@ type DescribeReturnShippingLabelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReturnShippingLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {

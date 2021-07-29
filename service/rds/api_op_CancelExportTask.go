@@ -34,6 +34,8 @@ type CancelExportTaskInput struct {
 	//
 	// This member is required.
 	ExportTaskIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of a snapshot export to Amazon S3. This data type is used
@@ -109,6 +111,8 @@ type CancelExportTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListTypedLinkFacetNamesInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTypedLinkFacetNamesOutput struct {
@@ -54,6 +56,8 @@ type ListTypedLinkFacetNamesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTypedLinkFacetNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {

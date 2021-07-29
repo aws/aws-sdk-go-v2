@@ -70,6 +70,8 @@ type GetContextKeysForPrincipalPolicyInput struct {
 	// * The special characters tab (\u0009), line feed (\u000A), and carriage
 	// return (\u000D)
 	PolicyInputList []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetContextKeysForPrincipalPolicy or
@@ -81,6 +83,8 @@ type GetContextKeysForPrincipalPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContextKeysForPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

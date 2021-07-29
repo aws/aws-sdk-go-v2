@@ -54,11 +54,15 @@ type EnableSecurityHubInput struct {
 
 	// The tags to add to the hub resource when you enable Security Hub.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type EnableSecurityHubOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableSecurityHubMiddlewares(stack *middleware.Stack, options Options) (err error) {

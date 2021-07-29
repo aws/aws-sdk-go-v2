@@ -35,11 +35,15 @@ type DeleteTestGridProjectInput struct {
 	//
 	// This member is required.
 	ProjectArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTestGridProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -15,6 +16,8 @@ type ActiveDirectoryComputerAttribute struct {
 
 	// The value for the LDAP attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a Microsoft Active Directory (Microsoft AD) studio
@@ -31,6 +34,8 @@ type ActiveDirectoryConfiguration struct {
 	// The distinguished name (DN) and organizational unit (OU) of an Active Directory
 	// computer.
 	OrganizationalUnitDistinguishedName *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a render farm that is associated with a studio resource.
@@ -43,6 +48,8 @@ type ComputeFarmConfiguration struct {
 	// The endpoint of the ComputeFarm that is accessed by the studio component
 	// resource.
 	Endpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a EULA resource.
@@ -62,6 +69,8 @@ type Eula struct {
 
 	// The Unix epoch timestamp in seconds for when the resource was updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type EulaAcceptance struct {
@@ -80,6 +89,8 @@ type EulaAcceptance struct {
 
 	// The EULA ID.
 	EulaId *string
+
+	noSmithyDocumentSerde
 }
 
 type LaunchProfile struct {
@@ -134,6 +145,8 @@ type LaunchProfile struct {
 
 	// The user ID of the user that most recently updated the resource.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
 }
 
 type LaunchProfileInitialization struct {
@@ -165,6 +178,8 @@ type LaunchProfileInitialization struct {
 
 	// The user initializtion scripts.
 	UserInitializationScripts []LaunchProfileInitializationScript
+
+	noSmithyDocumentSerde
 }
 
 type LaunchProfileInitializationActiveDirectory struct {
@@ -190,6 +205,8 @@ type LaunchProfileInitializationActiveDirectory struct {
 
 	// The name for the studio component.
 	StudioComponentName *string
+
+	noSmithyDocumentSerde
 }
 
 type LaunchProfileInitializationScript struct {
@@ -202,6 +219,8 @@ type LaunchProfileInitializationScript struct {
 
 	// The name for the studio component.
 	StudioComponentName *string
+
+	noSmithyDocumentSerde
 }
 
 type LaunchProfileMembership struct {
@@ -214,6 +233,8 @@ type LaunchProfileMembership struct {
 
 	// The principal ID.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a license service that is associated with a studio
@@ -223,6 +244,8 @@ type LicenseServiceConfiguration struct {
 	// The endpoint of the license service that is accessed by the studio component
 	// resource.
 	Endpoint *string
+
+	noSmithyDocumentSerde
 }
 
 type NewLaunchProfileMember struct {
@@ -236,6 +259,8 @@ type NewLaunchProfileMember struct {
 	//
 	// This member is required.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
 
 type NewStudioMember struct {
@@ -249,6 +274,8 @@ type NewStudioMember struct {
 	//
 	// This member is required.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
 
 // A parameter for a studio component script, in the form of a key:value pair.
@@ -259,6 +286,8 @@ type ScriptParameterKeyValue struct {
 
 	// A script parameter value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a shared file storage system that is associated with a
@@ -280,6 +309,8 @@ type SharedFileSystemConfiguration struct {
 
 	// The mount location for a shared file system on a Windows virtual workstation.
 	WindowsMountDrive *string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration for a streaming session.
@@ -300,6 +331,8 @@ type StreamConfiguration struct {
 	// The streaming images that users can select from when launching a streaming
 	// session with this launch profile.
 	StreamingImageIds []string
+
+	noSmithyDocumentSerde
 }
 
 type StreamConfigurationCreate struct {
@@ -325,6 +358,8 @@ type StreamConfigurationCreate struct {
 	// The length of time, in minutes, that a streaming session can run. After this
 	// point, Nimble Studio automatically terminates the session.
 	MaxSessionLengthInMinutes int32
+
+	noSmithyDocumentSerde
 }
 
 type StreamingImage struct {
@@ -371,6 +406,8 @@ type StreamingImage struct {
 	// A collection of labels, in the form of key:value pairs, that apply to this
 	// resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type StreamingImageEncryptionConfiguration struct {
@@ -382,6 +419,8 @@ type StreamingImageEncryptionConfiguration struct {
 
 	// The ARN for a KMS key that is used to encrypt studio data.
 	KeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StreamingSession struct {
@@ -429,6 +468,8 @@ type StreamingSession struct {
 
 	// The user ID of the user that most recently updated the resource.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
 }
 
 type StreamingSessionStream struct {
@@ -453,6 +494,8 @@ type StreamingSessionStream struct {
 
 	// The URL to connect to this stream using the DCV client.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 type Studio struct {
@@ -511,6 +554,8 @@ type Studio struct {
 	// The IAM role that studio users assume when logging in to the Nimble Studio
 	// portal.
 	UserRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A network that is used by a studio’s users and workflows, including render farm,
@@ -571,6 +616,8 @@ type StudioComponent struct {
 
 	// The user ID of the user that most recently updated the resource.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of the studio component, based on component type.
@@ -590,6 +637,8 @@ type StudioComponentConfiguration struct {
 	// The configuration for a shared file storage system that is associated with a
 	// studio resource.
 	SharedFileSystemConfiguration *SharedFileSystemConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Initialization scripts for studio components.
@@ -607,6 +656,8 @@ type StudioComponentInitializationScript struct {
 
 	// The initialization script.
 	Script *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -638,6 +689,8 @@ type StudioComponentSummary struct {
 
 	// The user ID of the user that most recently updated the resource.
 	UpdatedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration of the encryption method that is used for the studio.
@@ -650,6 +703,8 @@ type StudioEncryptionConfiguration struct {
 
 	// The ARN for a KMS key that is used to encrypt studio data.
 	KeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StudioMembership struct {
@@ -662,4 +717,8 @@ type StudioMembership struct {
 
 	// The principal ID.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

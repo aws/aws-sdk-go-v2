@@ -10,6 +10,8 @@ import (
 // An unexpected error occurred.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -27,6 +29,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -44,6 +48,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // A service quota has been exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -61,6 +67,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // One of the input parameters is not valid.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

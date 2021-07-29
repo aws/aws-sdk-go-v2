@@ -54,6 +54,8 @@ type IncreaseReplicaCountInput struct {
 	// Redis (cluster mode enabled) replication group. The ConfigureShard has three
 	// members: NewReplicaCount, NodeGroupId, and PreferredAvailabilityZones.
 	ReplicaConfiguration []types.ConfigureShard
+
+	noSmithyDocumentSerde
 }
 
 type IncreaseReplicaCountOutput struct {
@@ -63,6 +65,8 @@ type IncreaseReplicaCountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIncreaseReplicaCountMiddlewares(stack *middleware.Stack, options Options) (err error) {

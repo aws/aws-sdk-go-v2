@@ -52,6 +52,8 @@ type GetMapSpritesInput struct {
 	//
 	// This member is required.
 	MapName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMapSpritesOutput struct {
@@ -66,6 +68,8 @@ type GetMapSpritesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMapSpritesMiddlewares(stack *middleware.Stack, options Options) (err error) {

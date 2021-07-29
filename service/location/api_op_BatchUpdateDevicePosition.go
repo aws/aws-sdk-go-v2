@@ -42,6 +42,8 @@ type BatchUpdateDevicePositionInput struct {
 	//
 	// This member is required.
 	Updates []types.DevicePositionUpdate
+
+	noSmithyDocumentSerde
 }
 
 type BatchUpdateDevicePositionOutput struct {
@@ -53,6 +55,8 @@ type BatchUpdateDevicePositionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUpdateDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {

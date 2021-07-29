@@ -33,6 +33,8 @@ type DescribePlaceIndexInput struct {
 	//
 	// This member is required.
 	IndexName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePlaceIndexOutput struct {
@@ -101,6 +103,8 @@ type DescribePlaceIndexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

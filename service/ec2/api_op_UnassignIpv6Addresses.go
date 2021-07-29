@@ -37,6 +37,8 @@ type UnassignIpv6AddressesInput struct {
 	//
 	// This member is required.
 	NetworkInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type UnassignIpv6AddressesOutput struct {
@@ -49,6 +51,8 @@ type UnassignIpv6AddressesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnassignIpv6AddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

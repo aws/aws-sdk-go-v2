@@ -56,6 +56,8 @@ type GetIdentityPoliciesInput struct {
 	//
 	// This member is required.
 	PolicyNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the requested sending authorization policies.
@@ -68,6 +70,8 @@ type GetIdentityPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIdentityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

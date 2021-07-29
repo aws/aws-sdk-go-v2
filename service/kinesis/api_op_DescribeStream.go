@@ -61,6 +61,8 @@ type DescribeStreamInput struct {
 	// The maximum number of shards to return in a single call. The default value is
 	// 100. If you specify a value greater than 100, at most 100 shards are returned.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for DescribeStream.
@@ -75,6 +77,8 @@ type DescribeStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

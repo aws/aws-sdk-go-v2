@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type Alias struct {
 
 	// The type of the alias.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Value of a segment annotation. Has one of three value types: Number, Boolean, or
@@ -33,6 +36,8 @@ type AnnotationValue interface {
 // Value for a Number annotation.
 type AnnotationValueMemberNumberValue struct {
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 func (*AnnotationValueMemberNumberValue) isAnnotationValue() {}
@@ -40,6 +45,8 @@ func (*AnnotationValueMemberNumberValue) isAnnotationValue() {}
 // Value for a Boolean annotation.
 type AnnotationValueMemberBooleanValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*AnnotationValueMemberBooleanValue) isAnnotationValue() {}
@@ -47,6 +54,8 @@ func (*AnnotationValueMemberBooleanValue) isAnnotationValue() {}
 // Value for a String annotation.
 type AnnotationValueMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AnnotationValueMemberStringValue) isAnnotationValue() {}
@@ -56,6 +65,8 @@ type AnomalousService struct {
 
 	//
 	ServiceId *ServiceId
+
+	noSmithyDocumentSerde
 }
 
 // A list of Availability Zones corresponding to the segments in a trace.
@@ -63,6 +74,8 @@ type AvailabilityZoneDetail struct {
 
 	// The name of a corresponding Availability Zone.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -85,6 +98,8 @@ type BackendConnectionErrors struct {
 
 	//
 	UnknownHostCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a connection between two services.
@@ -107,6 +122,8 @@ type Edge struct {
 
 	// Response statistics for segments on the edge.
 	SummaryStatistics *EdgeStatistics
+
+	noSmithyDocumentSerde
 }
 
 // Response statistics for an edge.
@@ -126,6 +143,8 @@ type EdgeStatistics struct {
 
 	// The aggregate response time of completed requests.
 	TotalResponseTime *float64
+
+	noSmithyDocumentSerde
 }
 
 // A configuration document that specifies encryption configuration settings.
@@ -141,6 +160,8 @@ type EncryptionConfig struct {
 	// The type of encryption. Set to KMS for encryption with CMKs. Set to NONE for
 	// default encryption.
 	Type EncryptionType
+
+	noSmithyDocumentSerde
 }
 
 // The root cause of a trace summary error.
@@ -152,6 +173,8 @@ type ErrorRootCause struct {
 	// A list of services corresponding to an error. A service identifies a segment and
 	// it contains a name, account ID, type, and inferred flag.
 	Services []ErrorRootCauseService
+
+	noSmithyDocumentSerde
 }
 
 // A collection of segments and corresponding subsegments associated to a trace
@@ -166,6 +189,8 @@ type ErrorRootCauseEntity struct {
 
 	// A flag that denotes a remote subsegment.
 	Remote *bool
+
+	noSmithyDocumentSerde
 }
 
 // A collection of fields identifying the services in a trace summary error.
@@ -188,6 +213,8 @@ type ErrorRootCauseService struct {
 
 	// The type associated to the service.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about requests that failed with a 4xx Client Error status code.
@@ -201,6 +228,8 @@ type ErrorStatistics struct {
 
 	// The total number of requests that failed with a 4xx Client Error status code.
 	TotalCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // The root cause information for a trace summary fault.
@@ -212,6 +241,8 @@ type FaultRootCause struct {
 	// A list of corresponding services. A service identifies a segment and it contains
 	// a name, account ID, type, and inferred flag.
 	Services []FaultRootCauseService
+
+	noSmithyDocumentSerde
 }
 
 // A collection of segments and corresponding subsegments associated to a trace
@@ -226,6 +257,8 @@ type FaultRootCauseEntity struct {
 
 	// A flag that denotes a remote subsegment.
 	Remote *bool
+
+	noSmithyDocumentSerde
 }
 
 // A collection of fields identifying the services in a trace summary fault.
@@ -248,6 +281,8 @@ type FaultRootCauseService struct {
 
 	// The type associated to the service.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about requests that failed with a 5xx Server Error status code.
@@ -258,6 +293,8 @@ type FaultStatistics struct {
 
 	// The total number of requests that failed with a 5xx Server Error status code.
 	TotalCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // The predicted high and low fault count. This is used to determine if a service
@@ -269,6 +306,8 @@ type ForecastStatistics struct {
 
 	// The lower limit of fault counts for a service.
 	FaultCountLow *int64
+
+	noSmithyDocumentSerde
 }
 
 // Details and metadata for a group.
@@ -293,6 +332,8 @@ type Group struct {
 	// be set to true to enable insights notifications through Amazon EventBridge for
 	// the group.
 	InsightsConfiguration *InsightsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Details for a group without metadata.
@@ -317,6 +358,8 @@ type GroupSummary struct {
 	// be set to true to enable insights notifications. Notifications can only be
 	// enabled on a group with InsightsEnabled set to true.
 	InsightsConfiguration *InsightsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // An entry in a histogram for a statistic. A histogram maps the range of observed
@@ -328,6 +371,8 @@ type HistogramEntry struct {
 
 	// The value of the entry.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about an HTTP request.
@@ -347,6 +392,8 @@ type Http struct {
 
 	// The request's user agent string.
 	UserAgent *string
+
+	noSmithyDocumentSerde
 }
 
 // When fault rates go outside of the expected range, X-Ray creates an insight.
@@ -390,6 +437,8 @@ type Insight struct {
 
 	// The service within the insight that is most impacted by the incident.
 	TopAnomalousServices []AnomalousService
+
+	noSmithyDocumentSerde
 }
 
 // X-Ray reevaluates insights periodically until they are resolved, and records
@@ -413,6 +462,8 @@ type InsightEvent struct {
 
 	// The service during the event that is most impacted by the incident.
 	TopAnomalousServices []AnomalousService
+
+	noSmithyDocumentSerde
 }
 
 // The connection between two service in an insight impact graph.
@@ -420,6 +471,8 @@ type InsightImpactGraphEdge struct {
 
 	// Identifier of the edge. Unique within a service map.
 	ReferenceId *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about an application that processed requests, users that made
@@ -459,6 +512,8 @@ type InsightImpactGraphService struct {
 	//
 	// * remote - A downstream service of indeterminate type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure containing configurations related to insights.
@@ -471,6 +526,8 @@ type InsightsConfiguration struct {
 	// Set the NotificationsEnabled value to true to enable insights notifications.
 	// Notifications can only be enabled on a group with InsightsEnabled set to true.
 	NotificationsEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information that describes an insight.
@@ -516,6 +573,8 @@ type InsightSummary struct {
 
 	// The service within the insight that is most impacted by the incident.
 	TopAnomalousServices []AnomalousService
+
+	noSmithyDocumentSerde
 }
 
 // A list of EC2 instance IDs corresponding to the segments in a trace.
@@ -523,6 +582,8 @@ type InstanceIdDetail struct {
 
 	// The ID of a corresponding EC2 instance.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Statistics that describe how the incident has impacted a service.
@@ -536,6 +597,8 @@ type RequestImpactStatistics struct {
 
 	// The total number of requests to the service.
 	TotalCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // A list of resources ARNs corresponding to the segments in a trace.
@@ -543,6 +606,8 @@ type ResourceARNDetail struct {
 
 	// The ARN of a corresponding resource.
 	ARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The root cause information for a response time warning.
@@ -554,6 +619,8 @@ type ResponseTimeRootCause struct {
 	// A list of corresponding services. A service identifies a segment and contains a
 	// name, account ID, type, and inferred flag.
 	Services []ResponseTimeRootCauseService
+
+	noSmithyDocumentSerde
 }
 
 // A collection of segments and corresponding subsegments associated to a response
@@ -568,6 +635,8 @@ type ResponseTimeRootCauseEntity struct {
 
 	// A flag that denotes a remote subsegment.
 	Remote *bool
+
+	noSmithyDocumentSerde
 }
 
 // A collection of fields identifying the service in a response time warning.
@@ -590,6 +659,8 @@ type ResponseTimeRootCauseService struct {
 
 	// The type associated to the service.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The exception associated with a root cause.
@@ -600,6 +671,8 @@ type RootCauseException struct {
 
 	// The name of the exception.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A sampling rule that services use to decide whether to instrument a request.
@@ -670,6 +743,8 @@ type SamplingRule struct {
 	// The name of the sampling rule. Specify a rule by either name or ARN, but not
 	// both.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // A SamplingRule and its metadata.
@@ -683,6 +758,8 @@ type SamplingRuleRecord struct {
 
 	// The sampling rule.
 	SamplingRule *SamplingRule
+
+	noSmithyDocumentSerde
 }
 
 // A document specifying changes to a sampling rule's configuration.
@@ -728,6 +805,8 @@ type SamplingRuleUpdate struct {
 
 	// Matches the path from a request URL.
 	URLPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Request sampling results for a single rule from a service. Results are for the
@@ -762,6 +841,8 @@ type SamplingStatisticsDocument struct {
 
 	// The number of requests recorded with borrowed reservoir quota.
 	BorrowCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Aggregated request sampling data for a sampling rule across all services for a
@@ -782,6 +863,8 @@ type SamplingStatisticSummary struct {
 
 	// The start time of the reporting window.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The name and value of a sampling rule to apply to a trace summary.
@@ -792,6 +875,8 @@ type SamplingStrategy struct {
 
 	// The value of a sampling rule.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Temporary changes to a sampling rule configuration. To meet the global sampling
@@ -815,6 +900,8 @@ type SamplingTargetDocument struct {
 
 	// The name of the sampling rule.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // A segment from a trace that has been ingested by the X-Ray service. The segment
@@ -831,6 +918,8 @@ type Segment struct {
 
 	// The segment's ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an application that processed requests, users that made
@@ -890,6 +979,8 @@ type Service struct {
 	// * remote
 	// - A downstream service of indeterminate type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -906,6 +997,8 @@ type ServiceId struct {
 
 	//
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Response statistics for a service.
@@ -925,6 +1018,8 @@ type ServiceStatistics struct {
 
 	// The aggregate response time of completed requests.
 	TotalResponseTime *float64
+
+	noSmithyDocumentSerde
 }
 
 // A map that contains tag keys and tag values to attach to an AWS X-Ray group or
@@ -955,6 +1050,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -979,6 +1076,8 @@ type TelemetryRecord struct {
 
 	//
 	SegmentsSpilloverCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of TimeSeriesStatistic structures.
@@ -998,6 +1097,8 @@ type TimeSeriesServiceStatistics struct {
 
 	// Timestamp of the window for which statistics are aggregated.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A collection of segment documents with matching trace IDs.
@@ -1018,6 +1119,8 @@ type Trace struct {
 
 	// Segment documents for the segments and subsegments that comprise the trace.
 	Segments []Segment
+
+	noSmithyDocumentSerde
 }
 
 // Metadata generated from the segment documents in a trace.
@@ -1088,6 +1191,8 @@ type TraceSummary struct {
 
 	// Users from the trace's segment documents.
 	Users []TraceUser
+
+	noSmithyDocumentSerde
 }
 
 // Information about a user recorded in segment documents.
@@ -1098,6 +1203,8 @@ type TraceUser struct {
 
 	// The user's name.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Sampling statistics from a call to GetSamplingTargets that X-Ray could not
@@ -1112,6 +1219,8 @@ type UnprocessedStatistics struct {
 
 	// The name of the sampling rule.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a segment that failed processing.
@@ -1125,6 +1234,8 @@ type UnprocessedTraceSegment struct {
 
 	// The error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a segment annotation.
@@ -1135,13 +1246,19 @@ type ValueWithServiceIds struct {
 
 	// Services to which the annotation applies.
 	ServiceIds []ServiceId
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isAnnotationValue() {}

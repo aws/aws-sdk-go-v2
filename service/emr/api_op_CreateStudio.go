@@ -93,6 +93,8 @@ type CreateStudioInput struct {
 	// key-value pairs that consist of a required key string with a maximum of 128
 	// characters, and an optional value string with a maximum of 256 characters.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateStudioOutput struct {
@@ -105,6 +107,8 @@ type CreateStudioOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {

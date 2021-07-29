@@ -38,6 +38,8 @@ type DescribeChannelInput struct {
 	// response. This feature cannot be used with a channel whose S3 storage is
 	// customer-managed.
 	IncludeStatistics bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeChannelOutput struct {
@@ -51,6 +53,8 @@ type DescribeChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

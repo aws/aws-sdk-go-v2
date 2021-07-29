@@ -40,6 +40,8 @@ type ListSentimentDetectionJobsInput struct {
 
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSentimentDetectionJobsOutput struct {
@@ -52,6 +54,8 @@ type ListSentimentDetectionJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSentimentDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

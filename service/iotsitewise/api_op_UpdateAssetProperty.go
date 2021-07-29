@@ -66,11 +66,15 @@ type UpdateAssetPropertyInput struct {
 	// in the IoT SiteWise User Guide. If you omit this parameter, the notification
 	// state is set to DISABLED.
 	PropertyNotificationState types.PropertyNotificationState
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAssetPropertyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAssetPropertyMiddlewares(stack *middleware.Stack, options Options) (err error) {

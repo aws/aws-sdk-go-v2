@@ -42,6 +42,8 @@ type SyncDeploymentJobInput struct {
 	//
 	// This member is required.
 	Fleet *string
+
+	noSmithyDocumentSerde
 }
 
 type SyncDeploymentJobOutput struct {
@@ -87,6 +89,8 @@ type SyncDeploymentJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSyncDeploymentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

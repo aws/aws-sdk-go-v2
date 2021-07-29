@@ -100,6 +100,8 @@ type PutPipelineDefinitionInput struct {
 
 	// The parameter values used with the pipeline.
 	ParameterValues []types.ParameterValue
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of PutPipelineDefinition.
@@ -122,6 +124,8 @@ type PutPipelineDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutPipelineDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

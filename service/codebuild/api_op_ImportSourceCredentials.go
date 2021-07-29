@@ -55,6 +55,8 @@ type ImportSourceCredentialsInput struct {
 	// The Bitbucket username when the authType is BASIC_AUTH. This parameter is not
 	// valid for other types of source providers or connections.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 type ImportSourceCredentialsOutput struct {
@@ -64,6 +66,8 @@ type ImportSourceCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportSourceCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

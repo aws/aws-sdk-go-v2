@@ -57,11 +57,15 @@ type UpdateComponentConfigurationInput struct {
 	// The tier of the application component. Supported tiers include DOT_NET_WORKER,
 	// DOT_NET_WEB, DOT_NET_CORE, SQL_SERVER, and DEFAULT.
 	Tier types.Tier
+
+	noSmithyDocumentSerde
 }
 
 type UpdateComponentConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateComponentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

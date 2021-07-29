@@ -77,6 +77,8 @@ type AllocateHostsInput struct {
 
 	// The tags to apply to the Dedicated Host during creation.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of AllocateHosts.
@@ -88,6 +90,8 @@ type AllocateHostsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAllocateHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {

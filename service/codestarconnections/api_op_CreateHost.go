@@ -59,6 +59,8 @@ type CreateHostInput struct {
 	// and the infrastructure to be represented by the host must already be connected
 	// to the VPC.
 	VpcConfiguration *types.VpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type CreateHostOutput struct {
@@ -70,6 +72,8 @@ type CreateHostOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHostMiddlewares(stack *middleware.Stack, options Options) (err error) {

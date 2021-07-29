@@ -48,6 +48,8 @@ type DeleteLoadBalancerTlsCertificateInput struct {
 	// backup. The force parameter is required when the primary SSL/TLS certificate is
 	// in use by an instance attached to the load balancer.
 	Force *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLoadBalancerTlsCertificateOutput struct {
@@ -59,6 +61,8 @@ type DeleteLoadBalancerTlsCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLoadBalancerTlsCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

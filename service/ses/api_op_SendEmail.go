@@ -149,6 +149,8 @@ type SendEmailInput struct {
 	// send using SendEmail. Tags correspond to characteristics of the email that you
 	// define, so that you can publish email sending events.
 	Tags []types.MessageTag
+
+	noSmithyDocumentSerde
 }
 
 // Represents a unique message ID.
@@ -161,6 +163,8 @@ type SendEmailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {

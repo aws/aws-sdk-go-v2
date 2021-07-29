@@ -39,6 +39,8 @@ type CreateInvalidationInput struct {
 	//
 	// This member is required.
 	InvalidationBatch *types.InvalidationBatch
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -53,6 +55,8 @@ type CreateInvalidationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInvalidationMiddlewares(stack *middleware.Stack, options Options) (err error) {

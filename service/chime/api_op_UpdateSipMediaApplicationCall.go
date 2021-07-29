@@ -45,6 +45,8 @@ type UpdateSipMediaApplicationCallInput struct {
 	//
 	// This member is required.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSipMediaApplicationCallOutput struct {
@@ -54,6 +56,8 @@ type UpdateSipMediaApplicationCallOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSipMediaApplicationCallMiddlewares(stack *middleware.Stack, options Options) (err error) {

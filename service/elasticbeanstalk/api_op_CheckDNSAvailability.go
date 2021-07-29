@@ -33,6 +33,8 @@ type CheckDNSAvailabilityInput struct {
 	//
 	// This member is required.
 	CNAMEPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Indicates if the specified CNAME is available.
@@ -52,6 +54,8 @@ type CheckDNSAvailabilityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCheckDNSAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {

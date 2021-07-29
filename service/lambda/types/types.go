@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -28,6 +29,8 @@ type AccountLimit struct {
 	// The maximum number of simultaneous function executions, minus the capacity
 	// that's reserved for individual functions with PutFunctionConcurrency.
 	UnreservedConcurrentExecutions *int32
+
+	noSmithyDocumentSerde
 }
 
 // The number of functions and amount of storage in use.
@@ -39,6 +42,8 @@ type AccountUsage struct {
 	// The amount of storage space, in bytes, that's being used by deployment packages
 	// and layer archives.
 	TotalCodeSize int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information about a Lambda function alias
@@ -64,6 +69,8 @@ type AliasConfiguration struct {
 	// (https://docs.aws.amazon.com/lambda/latest/dg/lambda-traffic-shifting-using-aliases.html)
 	// of the alias.
 	RoutingConfig *AliasRoutingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The traffic-shifting
@@ -73,6 +80,8 @@ type AliasRoutingConfiguration struct {
 
 	// The second version, and the percentage of traffic that's routed to it.
 	AdditionalVersionWeights map[string]float64
+
+	noSmithyDocumentSerde
 }
 
 // List of signing profiles that can sign a code package.
@@ -83,6 +92,8 @@ type AllowedPublishers struct {
 	//
 	// This member is required.
 	SigningProfileVersionArns []string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a Code signing configuration
@@ -118,6 +129,8 @@ type CodeSigningConfig struct {
 
 	// Code signing configuration description.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Code signing configuration policies
@@ -130,6 +143,8 @@ type CodeSigningPolicies struct {
 	// validation checks fail. If you set the policy to Warn, Lambda allows the
 	// deployment and creates a CloudWatch log. Default value: Warn
 	UntrustedArtifactOnDeployment CodeSigningPolicy
+
+	noSmithyDocumentSerde
 }
 
 type Concurrency struct {
@@ -138,6 +153,8 @@ type Concurrency struct {
 	// more information, see Managing Concurrency
 	// (https://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html).
 	ReservedConcurrentExecutions *int32
+
+	noSmithyDocumentSerde
 }
 
 // The dead-letter queue
@@ -147,6 +164,8 @@ type DeadLetterConfig struct {
 
 	// The Amazon Resource Name (ARN) of an Amazon SQS queue or Amazon SNS topic.
 	TargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration object that specifies the destination of an event after Lambda
@@ -158,6 +177,8 @@ type DestinationConfig struct {
 
 	// The destination configuration for successful invocations.
 	OnSuccess *OnSuccess
+
+	noSmithyDocumentSerde
 }
 
 // A function's environment variable settings. You can use environment variables to
@@ -170,6 +191,8 @@ type Environment struct {
 	// environment variables
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-envvars.html).
 	Variables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Error messages for environment variables that couldn't be applied.
@@ -180,6 +203,8 @@ type EnvironmentError struct {
 
 	// The error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The results of an operation to update or read environment variables. If the
@@ -192,6 +217,8 @@ type EnvironmentResponse struct {
 
 	// Environment variable key-value pairs.
 	Variables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A mapping between an Amazon Web Services resource and an Lambda function. See
@@ -279,6 +306,8 @@ type EventSourceMappingConfiguration struct {
 
 	// The identifier of the event source mapping.
 	UUID *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the connection between a Lambda function and an Amazon EFS file
@@ -296,6 +325,8 @@ type FileSystemConfig struct {
 	//
 	// This member is required.
 	LocalMountPath *string
+
+	noSmithyDocumentSerde
 }
 
 // The code for the Lambda function. You can specify either an object in Amazon S3,
@@ -321,6 +352,8 @@ type FunctionCode struct {
 	// The base64-encoded contents of the deployment package. Amazon Web Services SDK
 	// and Amazon Web Services CLI clients handle the encoding for you.
 	ZipFile []byte
+
+	noSmithyDocumentSerde
 }
 
 // Details about a function's deployment package.
@@ -337,6 +370,8 @@ type FunctionCodeLocation struct {
 
 	// The resolved URI for the image.
 	ResolvedImageUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a function's configuration.
@@ -444,6 +479,8 @@ type FunctionConfiguration struct {
 
 	// The function's networking configuration.
 	VpcConfig *VpcConfigResponse
+
+	noSmithyDocumentSerde
 }
 
 type FunctionEventInvokeConfig struct {
@@ -473,6 +510,8 @@ type FunctionEventInvokeConfig struct {
 
 	// The maximum number of times to retry when the function returns an error.
 	MaximumRetryAttempts *int32
+
+	noSmithyDocumentSerde
 }
 
 // Configuration values that override the container image Dockerfile settings. See
@@ -489,6 +528,8 @@ type ImageConfig struct {
 
 	// Specifies the working directory.
 	WorkingDirectory *string
+
+	noSmithyDocumentSerde
 }
 
 // Error response to GetFunctionConfiguration.
@@ -499,6 +540,8 @@ type ImageConfigError struct {
 
 	// Error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Response to GetFunctionConfiguration request.
@@ -509,6 +552,8 @@ type ImageConfigResponse struct {
 
 	// Configuration values that override the container image Dockerfile.
 	ImageConfig *ImageConfig
+
+	noSmithyDocumentSerde
 }
 
 // An Lambda layer
@@ -526,6 +571,8 @@ type Layer struct {
 
 	// The Amazon Resource Name (ARN) for a signing profile version.
 	SigningProfileVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an Lambda layer
@@ -540,6 +587,8 @@ type LayersListItem struct {
 
 	// The name of the layer.
 	LayerName *string
+
+	noSmithyDocumentSerde
 }
 
 // A ZIP archive that contains the contents of an Lambda layer
@@ -559,6 +608,8 @@ type LayerVersionContentInput struct {
 	// The base64-encoded contents of the layer archive. Amazon Web Services SDK and
 	// Amazon Web Services CLI clients handle the encoding for you.
 	ZipFile []byte
+
+	noSmithyDocumentSerde
 }
 
 // Details about a version of an Lambda layer
@@ -579,6 +630,8 @@ type LayerVersionContentOutput struct {
 
 	// The Amazon Resource Name (ARN) for a signing profile version.
 	SigningProfileVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a version of an Lambda layer
@@ -603,6 +656,8 @@ type LayerVersionsListItem struct {
 
 	// The version number.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // A destination for events that failed processing.
@@ -610,6 +665,8 @@ type OnFailure struct {
 
 	// The Amazon Resource Name (ARN) of the destination resource.
 	Destination *string
+
+	noSmithyDocumentSerde
 }
 
 // A destination for events that were processed successfully.
@@ -617,6 +674,8 @@ type OnSuccess struct {
 
 	// The Amazon Resource Name (ARN) of the destination resource.
 	Destination *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the provisioned concurrency configuration for a function alias or
@@ -645,6 +704,8 @@ type ProvisionedConcurrencyConfigListItem struct {
 	// For failed allocations, the reason that provisioned concurrency could not be
 	// allocated.
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // The Self-Managed Apache Kafka cluster for your event source.
@@ -653,6 +714,8 @@ type SelfManagedEventSource struct {
 	// The list of bootstrap servers for your Kafka brokers in the following format:
 	// "KAFKA_BOOTSTRAP_SERVERS": ["abc.xyz.com:xxxx","abc2.xyz.com:xxxx"].
 	Endpoints map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 // You can specify the authentication protocol, or the VPC components to secure
@@ -688,6 +751,8 @@ type SourceAccessConfiguration struct {
 	// The value for your chosen configuration in Type. For example: "URI":
 	// "arn:aws:secretsmanager:us-east-1:01234567890:secret:MyBrokerSecretName".
 	URI *string
+
+	noSmithyDocumentSerde
 }
 
 // The function's X-Ray
@@ -697,6 +762,8 @@ type TracingConfig struct {
 
 	// The tracing mode.
 	Mode TracingMode
+
+	noSmithyDocumentSerde
 }
 
 // The function's X-Ray tracing configuration.
@@ -704,6 +771,8 @@ type TracingConfigResponse struct {
 
 	// The tracing mode.
 	Mode TracingMode
+
+	noSmithyDocumentSerde
 }
 
 // The VPC security groups and subnets that are attached to a Lambda function. For
@@ -716,6 +785,8 @@ type VpcConfig struct {
 
 	// A list of VPC subnet IDs.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The VPC security groups and subnets that are attached to a Lambda function.
@@ -729,4 +800,8 @@ type VpcConfigResponse struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

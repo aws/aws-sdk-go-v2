@@ -46,6 +46,8 @@ type DeleteHsmInput struct {
 
 	// The identifier (ID) of the HSM that you are deleting.
 	HsmId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteHsmOutput struct {
@@ -55,6 +57,8 @@ type DeleteHsmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {

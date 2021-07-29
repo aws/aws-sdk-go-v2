@@ -151,6 +151,8 @@ type CreateTargetGroupInput struct {
 	// The identifier of the virtual private cloud (VPC). If the target is a Lambda
 	// function, this parameter does not apply. Otherwise, this parameter is required.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTargetGroupOutput struct {
@@ -160,6 +162,8 @@ type CreateTargetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

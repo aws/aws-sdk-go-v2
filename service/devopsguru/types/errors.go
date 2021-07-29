@@ -14,6 +14,8 @@ import (
 // IAM User Guide.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -34,6 +36,8 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -53,6 +57,8 @@ type InternalServerException struct {
 	Message *string
 
 	RetryAfterSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -73,6 +79,8 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -90,6 +98,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The request contains a value that exceeds a maximum quota.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -111,6 +121,8 @@ type ThrottlingException struct {
 	QuotaCode         *string
 	ServiceCode       *string
 	RetryAfterSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -132,6 +144,8 @@ type ValidationException struct {
 
 	Reason ValidationExceptionReason
 	Fields []ValidationExceptionField
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

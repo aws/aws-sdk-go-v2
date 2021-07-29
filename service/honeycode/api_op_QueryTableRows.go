@@ -57,6 +57,8 @@ type QueryTableRowsInput struct {
 	// that was returned more than an hour back, the API will throw
 	// ValidationException.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type QueryTableRowsOutput struct {
@@ -85,6 +87,8 @@ type QueryTableRowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

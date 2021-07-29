@@ -37,6 +37,8 @@ type ListGeofenceCollectionsInput struct {
 	// The pagination token specifying which page of results to return in the response.
 	// If no token is provided, the default page is the first page. Default value: null
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGeofenceCollectionsOutput struct {
@@ -52,6 +54,8 @@ type ListGeofenceCollectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGeofenceCollectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

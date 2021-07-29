@@ -144,11 +144,15 @@ type PutCompositeAlarmInput struct {
 	// granting a user permission to access or change only resources with certain tag
 	// values.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutCompositeAlarmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutCompositeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type Action struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies when to create snapshots of EBS volumes. You must specify either a
@@ -52,6 +55,8 @@ type CreateRule struct {
 	// operation occurs within a one-hour window following the specified time. If you
 	// do not specify a time, Amazon DLM selects a time within the next 24 hours.
 	Times []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a rule for copying shared snapshots across Regions.
@@ -69,6 +74,8 @@ type CrossRegionCopyAction struct {
 
 	// Specifies the retention rule for cross-Region snapshot copies.
 	RetainRule *CrossRegionCopyRetainRule
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the retention rule for cross-Region snapshot copies.
@@ -80,6 +87,8 @@ type CrossRegionCopyRetainRule struct {
 
 	// The unit of time for time-based retention.
 	IntervalUnit RetentionIntervalUnitValues
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a rule for cross-Region snapshot copies.
@@ -113,6 +122,8 @@ type CrossRegionCopyRule struct {
 	// must omit Target. You cannot specify a target Region and a target Outpost in the
 	// same rule.
 	TargetRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the encryption settings for shared snapshots that are copied across
@@ -131,6 +142,8 @@ type EncryptionConfiguration struct {
 	// for EBS encryption. If this parameter is not specified, your AWS managed CMK for
 	// EBS is used.
 	CmkArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an event that triggers an event-based policy.
@@ -157,6 +170,8 @@ type EventParameters struct {
 	//
 	// This member is required.
 	SnapshotOwner []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an event that triggers an event-based policy.
@@ -170,6 +185,8 @@ type EventSource struct {
 
 	// Information about the event.
 	Parameters *EventParameters
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a rule for enabling fast snapshot restore. You can enable fast
@@ -190,6 +207,8 @@ type FastRestoreRule struct {
 
 	// The unit of time for enabling fast snapshot restore.
 	IntervalUnit RetentionIntervalUnitValues
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a lifecycle policy.
@@ -225,6 +244,8 @@ type LifecyclePolicy struct {
 
 	// The tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a lifecycle policy.
@@ -246,6 +267,8 @@ type LifecyclePolicySummary struct {
 
 	// The tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies optional parameters to add to a policy. The set of valid parameters
@@ -263,6 +286,8 @@ type Parameters struct {
 	// are not rebooted when the policy runs. false indicates that target instances are
 	// rebooted when the policy runs. The default is true (instances are not rebooted).
 	NoReboot *bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration of a lifecycle policy.
@@ -316,6 +341,8 @@ type PolicyDetails struct {
 	// parameter is required for snapshot and AMI policies only. If you are creating an
 	// event-based policy, omit this parameter.
 	TargetTags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the retention rule for a lifecycle policy. You can retain snapshots
@@ -331,6 +358,8 @@ type RetainRule struct {
 
 	// The unit of time for time-based retention.
 	IntervalUnit RetentionIntervalUnitValues
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a backup schedule for a snapshot or AMI lifecycle policy.
@@ -371,6 +400,8 @@ type Schedule struct {
 	// one of the two following formats: $(instance-id) or $(timestamp). Variable tags
 	// are only valid for EBS Snapshot Management – Instance policies.
 	VariableTags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a rule for sharing snapshots across AWS accounts.
@@ -387,6 +418,8 @@ type ShareRule struct {
 
 	// The unit of time for the automatic unsharing interval.
 	UnshareIntervalUnit RetentionIntervalUnitValues
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a tag for a resource.
@@ -401,4 +434,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

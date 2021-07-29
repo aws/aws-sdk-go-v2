@@ -41,6 +41,8 @@ type GetSAMLProviderInput struct {
 	//
 	// This member is required.
 	SAMLProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetSAMLProvider request.
@@ -64,6 +66,8 @@ type GetSAMLProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

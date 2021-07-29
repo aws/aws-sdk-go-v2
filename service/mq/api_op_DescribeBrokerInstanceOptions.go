@@ -45,6 +45,8 @@ type DescribeBrokerInstanceOptionsInput struct {
 
 	// Filter response by storage type.
 	StorageType *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBrokerInstanceOptionsOutput struct {
@@ -62,6 +64,8 @@ type DescribeBrokerInstanceOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBrokerInstanceOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

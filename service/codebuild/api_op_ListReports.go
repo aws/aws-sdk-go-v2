@@ -55,6 +55,8 @@ type ListReportsInput struct {
 	// * DESCENDING: return reports in the reverse chronological order based on
 	// their creation date.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type ListReportsOutput struct {
@@ -73,6 +75,8 @@ type ListReportsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {

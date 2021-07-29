@@ -39,6 +39,8 @@ type DeleteTransitGatewayMulticastDomainInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTransitGatewayMulticastDomainOutput struct {
@@ -48,6 +50,8 @@ type DeleteTransitGatewayMulticastDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTransitGatewayMulticastDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

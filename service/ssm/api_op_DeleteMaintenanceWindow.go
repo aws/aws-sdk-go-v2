@@ -32,6 +32,8 @@ type DeleteMaintenanceWindowInput struct {
 	//
 	// This member is required.
 	WindowId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMaintenanceWindowOutput struct {
@@ -41,6 +43,8 @@ type DeleteMaintenanceWindowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {

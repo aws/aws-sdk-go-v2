@@ -34,6 +34,8 @@ type DescribeArchiveInput struct {
 	//
 	// This member is required.
 	ArchiveName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeArchiveOutput struct {
@@ -73,6 +75,8 @@ type DescribeArchiveOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {

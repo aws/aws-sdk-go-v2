@@ -55,6 +55,8 @@ type GetContextKeysForCustomPolicyInput struct {
 	//
 	// This member is required.
 	PolicyInputList []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetContextKeysForPrincipalPolicy or
@@ -66,6 +68,8 @@ type GetContextKeysForCustomPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContextKeysForCustomPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

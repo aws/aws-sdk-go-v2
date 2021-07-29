@@ -32,11 +32,15 @@ type AssociateSkillWithUsersInput struct {
 	//
 	// This member is required.
 	SkillId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateSkillWithUsersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateSkillWithUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {

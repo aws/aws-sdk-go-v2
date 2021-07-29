@@ -48,6 +48,8 @@ type GetServiceTemplateVersionInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetServiceTemplateVersionOutput struct {
@@ -59,6 +61,8 @@ type GetServiceTemplateVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

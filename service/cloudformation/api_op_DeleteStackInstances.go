@@ -86,6 +86,8 @@ type DeleteStackInstancesInput struct {
 
 	// Preferences for how AWS CloudFormation performs this stack set operation.
 	OperationPreferences *types.StackSetOperationPreferences
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStackInstancesOutput struct {
@@ -95,6 +97,8 @@ type DeleteStackInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type ListDeploymentTargetsInput struct {
 	// * ServerInstanceLabel - A
 	// ServerInstanceLabel filter string can be Blue or Green.
 	TargetFilters map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 type ListDeploymentTargetsOutput struct {
@@ -58,6 +60,8 @@ type ListDeploymentTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeploymentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

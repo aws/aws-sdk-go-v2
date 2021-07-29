@@ -68,11 +68,15 @@ type RespondActivityTaskCanceledInput struct {
 
 	// Information about the cancellation.
 	Details *string
+
+	noSmithyDocumentSerde
 }
 
 type RespondActivityTaskCanceledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRespondActivityTaskCanceledMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -78,6 +78,8 @@ type CopyClusterSnapshotInput struct {
 	//
 	// * Must be the identifier for a valid cluster.
 	SourceSnapshotClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type CopyClusterSnapshotOutput struct {
@@ -87,6 +89,8 @@ type CopyClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

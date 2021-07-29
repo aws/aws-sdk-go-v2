@@ -61,6 +61,8 @@ type ListAttacksInput struct {
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#parameter-types)
 	// is allowed.
 	StartTime *types.TimeRange
+
+	noSmithyDocumentSerde
 }
 
 type ListAttacksOutput struct {
@@ -79,6 +81,8 @@ type ListAttacksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAttacksMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // The accelerator that you specified could not be disabled.
 type AcceleratorNotDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AcceleratorNotDisabledException) Error() string {
@@ -29,6 +31,8 @@ func (e *AcceleratorNotDisabledException) ErrorFault() smithy.ErrorFault { retur
 // The accelerator that you specified doesn't exist.
 type AcceleratorNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AcceleratorNotFoundException) Error() string {
@@ -46,6 +50,8 @@ func (e *AcceleratorNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // You don't have access permission.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -64,6 +70,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // must remove all dependent resources from a listener before you can delete it.
 type AssociatedEndpointGroupFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssociatedEndpointGroupFoundException) Error() string {
@@ -86,6 +94,8 @@ func (e *AssociatedEndpointGroupFoundException) ErrorFault() smithy.ErrorFault {
 // remove all dependent resources from an accelerator before you can delete it.
 type AssociatedListenerFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssociatedListenerFoundException) Error() string {
@@ -105,6 +115,8 @@ func (e *AssociatedListenerFoundException) ErrorFault() smithy.ErrorFault { retu
 // The CIDR that you specified was not found or is incorrect.
 type ByoipCidrNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ByoipCidrNotFoundException) Error() string {
@@ -122,6 +134,8 @@ func (e *ByoipCidrNotFoundException) ErrorFault() smithy.ErrorFault { return smi
 // You can't use both of those options.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -139,6 +153,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The endpoint that you specified doesn't exist.
 type EndpointAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointAlreadyExistsException) Error() string {
@@ -156,6 +172,8 @@ func (e *EndpointAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // The endpoint group that you specified already exists.
 type EndpointGroupAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointGroupAlreadyExistsException) Error() string {
@@ -177,6 +195,8 @@ func (e *EndpointGroupAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 // The endpoint group that you specified doesn't exist.
 type EndpointGroupNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointGroupNotFoundException) Error() string {
@@ -194,6 +214,8 @@ func (e *EndpointGroupNotFoundException) ErrorFault() smithy.ErrorFault { return
 // The endpoint that you specified doesn't exist.
 type EndpointNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointNotFoundException) Error() string {
@@ -212,6 +234,8 @@ func (e *EndpointNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // of the CIDR might be incorrect for this action.
 type IncorrectCidrStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncorrectCidrStateException) Error() string {
@@ -229,6 +253,8 @@ func (e *IncorrectCidrStateException) ErrorFault() smithy.ErrorFault { return sm
 // There was an internal error for AWS Global Accelerator.
 type InternalServiceErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceErrorException) Error() string {
@@ -246,6 +272,8 @@ func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return 
 // An argument that you specified is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgumentException) Error() string {
@@ -263,6 +291,8 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // There isn't another item to return.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -281,6 +311,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // this accelerator.
 type InvalidPortRangeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPortRangeException) Error() string {
@@ -299,6 +331,8 @@ func (e *InvalidPortRangeException) ErrorFault() smithy.ErrorFault { return smit
 // limit.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -316,6 +350,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The listener that you specified doesn't exist.
 type ListenerNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ListenerNotFoundException) Error() string {

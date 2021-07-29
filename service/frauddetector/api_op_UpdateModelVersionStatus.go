@@ -54,11 +54,15 @@ type UpdateModelVersionStatusInput struct {
 	//
 	// This member is required.
 	Status types.ModelVersionStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateModelVersionStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateModelVersionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

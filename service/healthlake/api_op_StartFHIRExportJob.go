@@ -53,6 +53,8 @@ type StartFHIRExportJobInput struct {
 
 	// The user generated name for an export job.
 	JobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StartFHIRExportJobOutput struct {
@@ -74,6 +76,8 @@ type StartFHIRExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartFHIRExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

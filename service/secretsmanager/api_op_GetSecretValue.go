@@ -84,6 +84,8 @@ type GetSecretValueInput struct {
 	// don't specify either a VersionStage or VersionId, then the default is to perform
 	// the operation on the version with the VersionStage value of AWSCURRENT.
 	VersionStage *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSecretValueOutput struct {
@@ -127,6 +129,8 @@ type GetSecretValueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {

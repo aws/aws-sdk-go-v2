@@ -35,6 +35,8 @@ type ListSecurityConfigurationsInput struct {
 
 	// The pagination token that indicates the set of results to retrieve.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSecurityConfigurationsOutput struct {
@@ -49,6 +51,8 @@ type ListSecurityConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSecurityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

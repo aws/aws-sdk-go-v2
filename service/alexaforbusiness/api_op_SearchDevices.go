@@ -51,6 +51,8 @@ type SearchDevicesInput struct {
 	// ConnectionStatus, NetworkProfileName, NetworkProfileArn, Feature, and
 	// FailureCode.
 	SortCriteria []types.Sort
+
+	noSmithyDocumentSerde
 }
 
 type SearchDevicesOutput struct {
@@ -66,6 +68,8 @@ type SearchDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

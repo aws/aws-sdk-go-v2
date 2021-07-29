@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The input you provided is invalid.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -44,6 +48,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // An internal service error occurred.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -61,6 +67,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // The requested resource does not exist, or access was denied.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -78,6 +86,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // You exceeded the maximum number of requests.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

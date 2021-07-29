@@ -54,6 +54,8 @@ type CreateLifecyclePolicyInput struct {
 
 	// The tags to apply to the lifecycle policy during creation.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLifecyclePolicyOutput struct {
@@ -63,6 +65,8 @@ type CreateLifecyclePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

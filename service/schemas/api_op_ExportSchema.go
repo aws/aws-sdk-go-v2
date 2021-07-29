@@ -42,6 +42,8 @@ type ExportSchemaInput struct {
 
 	// Specifying this limits the results to only this schema version.
 	SchemaVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type ExportSchemaOutput struct {
@@ -57,6 +59,8 @@ type ExportSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

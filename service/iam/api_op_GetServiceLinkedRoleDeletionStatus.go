@@ -38,6 +38,8 @@ type GetServiceLinkedRoleDeletionStatusInput struct {
 	//
 	// This member is required.
 	DeletionTaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetServiceLinkedRoleDeletionStatusOutput struct {
@@ -52,6 +54,8 @@ type GetServiceLinkedRoleDeletionStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceLinkedRoleDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type UpdateEndpointInput struct {
 	//
 	// This member is required.
 	EndpointRequest *types.EndpointRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEndpointOutput struct {
@@ -59,6 +61,8 @@ type UpdateEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

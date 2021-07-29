@@ -45,6 +45,8 @@ type CreateKeyGroupInput struct {
 	//
 	// This member is required.
 	KeyGroupConfig *types.KeyGroupConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateKeyGroupOutput struct {
@@ -60,6 +62,8 @@ type CreateKeyGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

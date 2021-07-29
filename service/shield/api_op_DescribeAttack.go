@@ -33,6 +33,8 @@ type DescribeAttackInput struct {
 	//
 	// This member is required.
 	AttackId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAttackOutput struct {
@@ -42,6 +44,8 @@ type DescribeAttackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAttackMiddlewares(stack *middleware.Stack, options Options) (err error) {

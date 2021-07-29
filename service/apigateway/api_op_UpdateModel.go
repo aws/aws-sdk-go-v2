@@ -43,6 +43,8 @@ type UpdateModelInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents the data structure of a method's request or response payload. A
@@ -77,6 +79,8 @@ type UpdateModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

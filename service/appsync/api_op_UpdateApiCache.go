@@ -94,6 +94,8 @@ type UpdateApiCacheInput struct {
 	//
 	// This member is required.
 	Type types.ApiCacheType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a UpdateApiCache operation.
@@ -104,6 +106,8 @@ type UpdateApiCacheOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

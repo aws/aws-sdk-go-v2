@@ -10,6 +10,8 @@ import (
 // The input fails to satisfy the constraints specified by an AWS service.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -28,6 +30,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // the resource.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -45,6 +49,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // There was an internal failure in the AppConfig service.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -66,6 +72,8 @@ type PayloadTooLargeException struct {
 	Measure BytesMeasure
 	Limit   float32
 	Size    float32
+
+	noSmithyDocumentSerde
 }
 
 func (e *PayloadTooLargeException) Error() string {
@@ -85,6 +93,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -103,6 +113,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // configuration store. Delete one or more versions and try again.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {

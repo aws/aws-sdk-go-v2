@@ -45,6 +45,8 @@ type DeregisterInstancesFromLoadBalancerInput struct {
 	//
 	// This member is required.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DeregisterInstancesFromLoadBalancer.
@@ -55,6 +57,8 @@ type DeregisterInstancesFromLoadBalancerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

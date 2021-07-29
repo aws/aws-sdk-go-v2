@@ -159,6 +159,8 @@ type IndexFacesInput struct {
 	// quality filtering, the collection you are using must be associated with version
 	// 3 of the face model or higher.
 	QualityFilter types.QualityFilter
+
+	noSmithyDocumentSerde
 }
 
 type IndexFacesOutput struct {
@@ -204,6 +206,8 @@ type IndexFacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIndexFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type DefineExpressionInput struct {
 	//
 	// This member is required.
 	Expression *types.Expression
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DefineExpression request. Contains the status of the
@@ -62,6 +64,8 @@ type DefineExpressionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDefineExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {

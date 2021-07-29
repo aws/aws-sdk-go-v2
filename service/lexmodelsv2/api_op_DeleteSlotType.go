@@ -58,11 +58,15 @@ type DeleteSlotTypeInput struct {
 	// skipResourceInUseCheck parameter to true to skip this check and remove the slot
 	// type even if a slot uses it.
 	SkipResourceInUseCheck bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSlotTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

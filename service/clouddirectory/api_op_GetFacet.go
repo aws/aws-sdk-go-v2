@@ -41,6 +41,8 @@ type GetFacetInput struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFacetOutput struct {
@@ -50,6 +52,8 @@ type GetFacetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {

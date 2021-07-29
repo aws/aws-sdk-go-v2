@@ -57,11 +57,15 @@ type UpdateConnectionAliasPermissionInput struct {
 	//
 	// This member is required.
 	ConnectionAliasPermission *types.ConnectionAliasPermission
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConnectionAliasPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConnectionAliasPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

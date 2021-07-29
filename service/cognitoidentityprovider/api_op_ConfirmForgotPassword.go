@@ -92,6 +92,8 @@ type ConfirmForgotPasswordInput struct {
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
+	noSmithyDocumentSerde
 }
 
 // The response from the server that results from a user's request to retrieve a
@@ -99,6 +101,8 @@ type ConfirmForgotPasswordInput struct {
 type ConfirmForgotPasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmForgotPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

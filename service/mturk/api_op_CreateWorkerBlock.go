@@ -40,11 +40,15 @@ type CreateWorkerBlockInput struct {
 	//
 	// This member is required.
 	WorkerId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorkerBlockOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkerBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

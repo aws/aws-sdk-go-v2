@@ -11,6 +11,8 @@ import (
 // a scaling plan that already has a pending update.
 type ConcurrentUpdateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentUpdateException) Error() string {
@@ -28,6 +30,8 @@ func (e *ConcurrentUpdateException) ErrorFault() smithy.ErrorFault { return smit
 // The service encountered an internal error.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -45,6 +49,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // The token provided is not valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -63,6 +69,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // resource limit is exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -80,6 +88,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified object could not be found.
 type ObjectNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ObjectNotFoundException) Error() string {
@@ -97,6 +107,8 @@ func (e *ObjectNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // An exception was thrown for a validation issue. Review the parameters provided.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

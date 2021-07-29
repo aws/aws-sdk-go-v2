@@ -42,6 +42,8 @@ type DescribeVpcPeeringConnectionsInput struct {
 
 	// A unique identifier for the fleet. You can use either the fleet ID or ARN value.
 	FleetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -52,6 +54,8 @@ type DescribeVpcPeeringConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcPeeringConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

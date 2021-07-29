@@ -39,11 +39,15 @@ type RestartAppServerInput struct {
 	// specify either this or an EnvironmentId, or both. If you do not specify either,
 	// AWS Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 type RestartAppServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestartAppServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

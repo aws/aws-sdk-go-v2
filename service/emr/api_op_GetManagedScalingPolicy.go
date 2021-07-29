@@ -34,6 +34,8 @@ type GetManagedScalingPolicyInput struct {
 	//
 	// This member is required.
 	ClusterId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetManagedScalingPolicyOutput struct {
@@ -43,6 +45,8 @@ type GetManagedScalingPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetManagedScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

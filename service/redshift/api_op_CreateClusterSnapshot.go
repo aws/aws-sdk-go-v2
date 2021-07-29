@@ -65,6 +65,8 @@ type CreateClusterSnapshotInput struct {
 
 	// A list of tag instances.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterSnapshotOutput struct {
@@ -74,6 +76,8 @@ type CreateClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

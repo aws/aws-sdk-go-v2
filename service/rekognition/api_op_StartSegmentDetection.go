@@ -75,6 +75,8 @@ type StartSegmentDetectionInput struct {
 	// The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to
 	// publish the completion status of the segment detection operation.
 	NotificationChannel *types.NotificationChannel
+
+	noSmithyDocumentSerde
 }
 
 type StartSegmentDetectionOutput struct {
@@ -85,6 +87,8 @@ type StartSegmentDetectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSegmentDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

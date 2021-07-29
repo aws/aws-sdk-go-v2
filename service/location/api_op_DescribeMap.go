@@ -33,6 +33,8 @@ type DescribeMapInput struct {
 	//
 	// This member is required.
 	MapName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMapOutput struct {
@@ -92,6 +94,8 @@ type DescribeMapOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMapMiddlewares(stack *middleware.Stack, options Options) (err error) {

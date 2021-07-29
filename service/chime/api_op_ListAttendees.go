@@ -43,6 +43,8 @@ type ListAttendeesInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAttendeesOutput struct {
@@ -55,6 +57,8 @@ type ListAttendeesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAttendeesMiddlewares(stack *middleware.Stack, options Options) (err error) {

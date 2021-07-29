@@ -56,6 +56,8 @@ type CreateAppInstanceUserInput struct {
 
 	// Tags assigned to the AppInstanceUser.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAppInstanceUserOutput struct {
@@ -65,6 +67,8 @@ type CreateAppInstanceUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

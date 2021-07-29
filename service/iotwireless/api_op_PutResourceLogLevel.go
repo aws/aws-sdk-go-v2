@@ -45,11 +45,15 @@ type PutResourceLogLevelInput struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type PutResourceLogLevelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutResourceLogLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {

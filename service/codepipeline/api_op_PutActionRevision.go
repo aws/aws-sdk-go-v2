@@ -49,6 +49,8 @@ type PutActionRevisionInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a PutActionRevision action.
@@ -63,6 +65,8 @@ type PutActionRevisionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutActionRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

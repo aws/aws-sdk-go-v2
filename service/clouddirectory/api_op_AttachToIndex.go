@@ -44,6 +44,8 @@ type AttachToIndexInput struct {
 	//
 	// This member is required.
 	TargetReference *types.ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 type AttachToIndexOutput struct {
@@ -53,6 +55,8 @@ type AttachToIndexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachToIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

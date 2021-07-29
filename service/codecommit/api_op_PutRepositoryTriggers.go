@@ -39,6 +39,8 @@ type PutRepositoryTriggersInput struct {
 	//
 	// This member is required.
 	Triggers []types.RepositoryTrigger
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a put repository triggers operation.
@@ -49,6 +51,8 @@ type PutRepositoryTriggersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRepositoryTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -71,6 +71,8 @@ type DescribeHostsInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHostsOutput struct {
@@ -84,6 +86,8 @@ type DescribeHostsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHostsMiddlewares(stack *middleware.Stack, options Options) (err error) {

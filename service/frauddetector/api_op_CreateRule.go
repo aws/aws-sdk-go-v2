@@ -59,6 +59,8 @@ type CreateRuleInput struct {
 
 	// A collection of key and value pairs.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateRuleOutput struct {
@@ -68,6 +70,8 @@ type CreateRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

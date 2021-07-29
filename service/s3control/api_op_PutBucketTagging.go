@@ -125,11 +125,15 @@ type PutBucketTaggingInput struct {
 	//
 	// This member is required.
 	Tagging *types.Tagging
+
+	noSmithyDocumentSerde
 }
 
 type PutBucketTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBucketTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

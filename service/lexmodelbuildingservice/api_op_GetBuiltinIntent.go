@@ -37,6 +37,8 @@ type GetBuiltinIntentInput struct {
 	//
 	// This member is required.
 	Signature *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBuiltinIntentOutput struct {
@@ -53,6 +55,8 @@ type GetBuiltinIntentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBuiltinIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {

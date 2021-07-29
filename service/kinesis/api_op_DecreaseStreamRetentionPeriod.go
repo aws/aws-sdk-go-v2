@@ -44,11 +44,15 @@ type DecreaseStreamRetentionPeriodInput struct {
 	//
 	// This member is required.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type DecreaseStreamRetentionPeriodOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDecreaseStreamRetentionPeriodMiddlewares(stack *middleware.Stack, options Options) (err error) {

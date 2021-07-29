@@ -28,11 +28,14 @@ func (c *Client) DisableSagemakerServicecatalogPortfolio(ctx context.Context, pa
 }
 
 type DisableSagemakerServicecatalogPortfolioInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisableSagemakerServicecatalogPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableSagemakerServicecatalogPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {

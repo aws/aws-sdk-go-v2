@@ -104,6 +104,8 @@ type DeleteSecretInput struct {
 	// ForceDeleteWithoutRecovery parameter in the same API call. This value can range
 	// from 7 to 30 days with a default value of 30.
 	RecoveryWindowInDays int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSecretOutput struct {
@@ -121,6 +123,8 @@ type DeleteSecretOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {

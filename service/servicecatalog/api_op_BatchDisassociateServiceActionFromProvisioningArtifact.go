@@ -44,6 +44,8 @@ type BatchDisassociateServiceActionFromProvisioningArtifactInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDisassociateServiceActionFromProvisioningArtifactOutput struct {
@@ -54,6 +56,8 @@ type BatchDisassociateServiceActionFromProvisioningArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDisassociateServiceActionFromProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

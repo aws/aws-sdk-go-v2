@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The request to change the source server migration lifecycle state.
 type ChangeServerLifeCycleStateSourceServerLifecycle struct {
 
@@ -9,6 +13,8 @@ type ChangeServerLifeCycleStateSourceServerLifecycle struct {
 	//
 	// This member is required.
 	State ChangeServerLifeCycleStateSourceServerLifecycleState
+
+	noSmithyDocumentSerde
 }
 
 // Source server CPU information.
@@ -19,6 +25,8 @@ type CPU struct {
 
 	// The source server's CPU model name.
 	ModelName *string
+
+	noSmithyDocumentSerde
 }
 
 // Error in data replication.
@@ -29,6 +37,8 @@ type DataReplicationError struct {
 
 	// Error in data replication.
 	RawError *string
+
+	noSmithyDocumentSerde
 }
 
 // Request data replication info.
@@ -51,6 +61,8 @@ type DataReplicationInfo struct {
 
 	// Request to query disks replicated.
 	ReplicatedDisks []DataReplicationInfoReplicatedDisk
+
+	noSmithyDocumentSerde
 }
 
 // Request to query disks replicated.
@@ -70,6 +82,8 @@ type DataReplicationInfoReplicatedDisk struct {
 
 	// Request to query total amount of data replicated in bytes.
 	TotalStorageBytes int64
+
+	noSmithyDocumentSerde
 }
 
 // Data replication initiation.
@@ -83,6 +97,8 @@ type DataReplicationInitiation struct {
 
 	// Request to query data initiation steps.
 	Steps []DataReplicationInitiationStep
+
+	noSmithyDocumentSerde
 }
 
 // Data replication intiation step.
@@ -93,6 +109,8 @@ type DataReplicationInitiationStep struct {
 
 	// Request to query data initiation status.
 	Status DataReplicationInitiationStepStatus
+
+	noSmithyDocumentSerde
 }
 
 // Request to describe Job log filters.
@@ -106,6 +124,8 @@ type DescribeJobsRequestFilters struct {
 
 	// Request to describe Job log by last date.
 	ToDate *string
+
+	noSmithyDocumentSerde
 }
 
 // Request to filter Source Servers list.
@@ -116,6 +136,8 @@ type DescribeSourceServersRequestFilters struct {
 
 	// Request to filter Source Servers list by Source Server ID.
 	SourceServerIDs []string
+
+	noSmithyDocumentSerde
 }
 
 // The disk identifier.
@@ -126,6 +148,8 @@ type Disk struct {
 
 	// The disk or device name.
 	DeviceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Identification hints.
@@ -142,6 +166,8 @@ type IdentificationHints struct {
 
 	// vmWare UUID identification hint.
 	VmWareUuid *string
+
+	noSmithyDocumentSerde
 }
 
 // Job.
@@ -175,6 +201,8 @@ type Job struct {
 
 	// Job type.
 	Type JobType
+
+	noSmithyDocumentSerde
 }
 
 // Job log.
@@ -188,6 +216,8 @@ type JobLog struct {
 
 	// Job log event date and time.
 	LogDateTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Job log data
@@ -204,6 +234,8 @@ type JobLogEventData struct {
 
 	// Job Event Target instance ID.
 	TargetInstanceID *string
+
+	noSmithyDocumentSerde
 }
 
 // Configure launced instance.
@@ -217,6 +249,8 @@ type LaunchedInstance struct {
 
 	// Configure launced instance Job ID.
 	JobID *string
+
+	noSmithyDocumentSerde
 }
 
 // Configure Licensing.
@@ -224,6 +258,8 @@ type Licensing struct {
 
 	// Configure BYOL OS licensing.
 	OsByol *bool
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle.
@@ -249,6 +285,8 @@ type LifeCycle struct {
 
 	// Lifecycle state.
 	State LifeCycleState
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle last Cutover .
@@ -262,6 +300,8 @@ type LifeCycleLastCutover struct {
 
 	// Lifecycle last Cutover reverted.
 	Reverted *LifeCycleLastCutoverReverted
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle Cutover finalized
@@ -269,6 +309,8 @@ type LifeCycleLastCutoverFinalized struct {
 
 	// Lifecycle Cutover finalized date and time.
 	ApiCallDateTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle last Cutover initiated.
@@ -279,6 +321,8 @@ type LifeCycleLastCutoverInitiated struct {
 
 	// Lifecycle last Cutover initiated by Job ID.
 	JobID *string
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle last Cutover reverted.
@@ -286,6 +330,8 @@ type LifeCycleLastCutoverReverted struct {
 
 	// Lifecycle last Cutover reverted API call date time.
 	ApiCallDateTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle last Test.
@@ -299,6 +345,8 @@ type LifeCycleLastTest struct {
 
 	// Lifecycle last Test reverted.
 	Reverted *LifeCycleLastTestReverted
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle last Test finlized.
@@ -306,6 +354,8 @@ type LifeCycleLastTestFinalized struct {
 
 	// Lifecycle Test failed API call date and time.
 	ApiCallDateTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle last Test initiated.
@@ -316,6 +366,8 @@ type LifeCycleLastTestInitiated struct {
 
 	// Lifecycle last Test initiated Job ID.
 	JobID *string
+
+	noSmithyDocumentSerde
 }
 
 // Lifecycle last Test reverted.
@@ -323,6 +375,8 @@ type LifeCycleLastTestReverted struct {
 
 	// Lifecycle last Test reverted API call date and time.
 	ApiCallDateTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Network interface.
@@ -336,6 +390,8 @@ type NetworkInterface struct {
 
 	// Network interface Mac address.
 	MacAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Operating System.
@@ -343,6 +399,8 @@ type OS struct {
 
 	// OS full string.
 	FullString *string
+
+	noSmithyDocumentSerde
 }
 
 // Server participating in Job.
@@ -353,6 +411,8 @@ type ParticipatingServer struct {
 
 	// Participating server Source Server ID.
 	SourceServerID *string
+
+	noSmithyDocumentSerde
 }
 
 // Replication Configuration replicated disk.
@@ -369,6 +429,8 @@ type ReplicationConfigurationReplicatedDisk struct {
 
 	// Replication Configuration replicated disk staging disk type.
 	StagingDiskType ReplicationConfigurationReplicatedDiskStagingDiskType
+
+	noSmithyDocumentSerde
 }
 
 type ReplicationConfigurationTemplate struct {
@@ -420,6 +482,8 @@ type ReplicationConfigurationTemplate struct {
 
 	// Replication Configuration template use Dedicated Replication Server.
 	UseDedicatedReplicationServer *bool
+
+	noSmithyDocumentSerde
 }
 
 // Source server properties.
@@ -448,6 +512,8 @@ type SourceProperties struct {
 
 	// Source server recommended instance type.
 	RecommendedInstanceType *string
+
+	noSmithyDocumentSerde
 }
 
 type SourceServer struct {
@@ -475,6 +541,8 @@ type SourceServer struct {
 
 	// Source server Tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Validate exception field.
@@ -485,4 +553,8 @@ type ValidationExceptionField struct {
 
 	// Validate exception field name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

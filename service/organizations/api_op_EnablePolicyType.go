@@ -65,6 +65,8 @@ type EnablePolicyTypeInput struct {
 	//
 	// This member is required.
 	RootId *string
+
+	noSmithyDocumentSerde
 }
 
 type EnablePolicyTypeOutput struct {
@@ -74,6 +76,8 @@ type EnablePolicyTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnablePolicyTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

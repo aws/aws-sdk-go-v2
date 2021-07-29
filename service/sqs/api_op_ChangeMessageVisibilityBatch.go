@@ -51,6 +51,8 @@ type ChangeMessageVisibilityBatchInput struct {
 	//
 	// This member is required.
 	QueueUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // For each message in the batch, the response contains a
@@ -70,6 +72,8 @@ type ChangeMessageVisibilityBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationChangeMessageVisibilityBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

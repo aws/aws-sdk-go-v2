@@ -39,6 +39,8 @@ type ListEnvironmentsInput struct {
 	// operation with each subsequent next token that is returned, until no more next
 	// tokens are returned.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEnvironmentsOutput struct {
@@ -54,6 +56,8 @@ type ListEnvironmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

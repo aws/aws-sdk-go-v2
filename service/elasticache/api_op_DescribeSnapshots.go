@@ -67,6 +67,8 @@ type DescribeSnapshotsInput struct {
 	// created. If omitted, the output shows both automatically and manually created
 	// snapshots.
 	SnapshotSource *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeSnapshots operation.
@@ -84,6 +86,8 @@ type DescribeSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

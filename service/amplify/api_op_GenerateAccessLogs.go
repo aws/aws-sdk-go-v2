@@ -47,6 +47,8 @@ type GenerateAccessLogsInput struct {
 	// The time at which the logs should start. The time range specified is inclusive
 	// of the start time.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the generate access logs request.
@@ -57,6 +59,8 @@ type GenerateAccessLogsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateAccessLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {

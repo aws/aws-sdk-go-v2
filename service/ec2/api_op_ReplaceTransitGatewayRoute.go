@@ -51,6 +51,8 @@ type ReplaceTransitGatewayRouteInput struct {
 
 	// The ID of the attachment.
 	TransitGatewayAttachmentId *string
+
+	noSmithyDocumentSerde
 }
 
 type ReplaceTransitGatewayRouteOutput struct {
@@ -60,6 +62,8 @@ type ReplaceTransitGatewayRouteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReplaceTransitGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

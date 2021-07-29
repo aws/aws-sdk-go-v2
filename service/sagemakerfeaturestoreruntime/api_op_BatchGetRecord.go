@@ -34,6 +34,8 @@ type BatchGetRecordInput struct {
 	//
 	// This member is required.
 	Identifiers []types.BatchGetRecordIdentifier
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetRecordOutput struct {
@@ -56,6 +58,8 @@ type BatchGetRecordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {

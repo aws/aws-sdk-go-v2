@@ -40,11 +40,15 @@ type DeleteLayerInput struct {
 	//
 	// This member is required.
 	LayerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLayerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DescribeNotebookInstanceInput struct {
 	//
 	// This member is required.
 	NotebookInstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNotebookInstanceOutput struct {
@@ -140,6 +142,8 @@ type DescribeNotebookInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

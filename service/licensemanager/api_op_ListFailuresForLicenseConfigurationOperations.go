@@ -39,6 +39,8 @@ type ListFailuresForLicenseConfigurationOperationsInput struct {
 
 	// Token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFailuresForLicenseConfigurationOperationsOutput struct {
@@ -51,6 +53,8 @@ type ListFailuresForLicenseConfigurationOperationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFailuresForLicenseConfigurationOperationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

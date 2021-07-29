@@ -42,6 +42,8 @@ type CreateUserHierarchyGroupInput struct {
 	// The identifier for the parent hierarchy group. The user hierarchy is created at
 	// level one if the parent group ID is null.
 	ParentGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserHierarchyGroupOutput struct {
@@ -54,6 +56,8 @@ type CreateUserHierarchyGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

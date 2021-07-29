@@ -40,6 +40,8 @@ type ListDocumentClassifiersInput struct {
 
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDocumentClassifiersOutput struct {
@@ -52,6 +54,8 @@ type ListDocumentClassifiersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDocumentClassifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {

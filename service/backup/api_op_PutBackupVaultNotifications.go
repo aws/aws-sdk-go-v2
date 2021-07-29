@@ -48,11 +48,15 @@ type PutBackupVaultNotificationsInput struct {
 	//
 	// This member is required.
 	SNSTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutBackupVaultNotificationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBackupVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

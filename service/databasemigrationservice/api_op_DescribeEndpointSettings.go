@@ -45,6 +45,8 @@ type DescribeEndpointSettingsInput struct {
 	// than the specified MaxRecords value, a pagination token called a marker is
 	// included in the response so that the remaining results can be retrieved.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEndpointSettingsOutput struct {
@@ -60,6 +62,8 @@ type DescribeEndpointSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEndpointSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

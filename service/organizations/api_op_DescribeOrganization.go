@@ -32,6 +32,7 @@ func (c *Client) DescribeOrganization(ctx context.Context, params *DescribeOrgan
 }
 
 type DescribeOrganizationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeOrganizationOutput struct {
@@ -45,6 +46,8 @@ type DescribeOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

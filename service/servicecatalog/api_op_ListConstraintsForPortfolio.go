@@ -53,6 +53,8 @@ type ListConstraintsForPortfolioInput struct {
 
 	// The product identifier.
 	ProductId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListConstraintsForPortfolioOutput struct {
@@ -66,6 +68,8 @@ type ListConstraintsForPortfolioOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConstraintsForPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -84,6 +84,8 @@ type GetDiscoveredResourceCountsInput struct {
 	// resource type (for example, S3 buckets), that resource type is not returned in
 	// the list of ResourceCount objects.
 	ResourceTypes []string
+
+	noSmithyDocumentSerde
 }
 
 type GetDiscoveredResourceCountsOutput struct {
@@ -114,6 +116,8 @@ type GetDiscoveredResourceCountsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDiscoveredResourceCountsMiddlewares(stack *middleware.Stack, options Options) (err error) {

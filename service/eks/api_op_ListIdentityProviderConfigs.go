@@ -50,6 +50,8 @@ type ListIdentityProviderConfigsInput struct {
 	// exceeded the value of that parameter. Pagination continues from the end of the
 	// previous results that returned the nextToken value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListIdentityProviderConfigsOutput struct {
@@ -65,6 +67,8 @@ type ListIdentityProviderConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIdentityProviderConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

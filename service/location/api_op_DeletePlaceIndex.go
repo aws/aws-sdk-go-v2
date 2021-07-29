@@ -33,11 +33,15 @@ type DeletePlaceIndexInput struct {
 	//
 	// This member is required.
 	IndexName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePlaceIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePlaceIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

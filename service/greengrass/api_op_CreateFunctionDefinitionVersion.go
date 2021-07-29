@@ -44,6 +44,8 @@ type CreateFunctionDefinitionVersionInput struct {
 
 	// A list of Lambda functions in this function definition version.
 	Functions []types.Function
+
+	noSmithyDocumentSerde
 }
 
 type CreateFunctionDefinitionVersionOutput struct {
@@ -62,6 +64,8 @@ type CreateFunctionDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFunctionDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

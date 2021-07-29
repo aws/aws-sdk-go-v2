@@ -34,6 +34,8 @@ type GetKeyPairsInput struct {
 	// paginated, the response will return a next page token that you can specify as
 	// the page token in a subsequent request.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetKeyPairsOutput struct {
@@ -49,6 +51,8 @@ type GetKeyPairsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,11 +48,15 @@ type DeleteAccessInput struct {
 	//
 	// This member is required.
 	ServerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -63,6 +63,8 @@ type ListContactsInput struct {
 
 	// ARN of a satellite.
 	SatelliteArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -77,6 +79,8 @@ type ListContactsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

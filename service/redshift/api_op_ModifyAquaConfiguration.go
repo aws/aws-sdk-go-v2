@@ -45,6 +45,8 @@ type ModifyAquaConfigurationInput struct {
 	// * auto - Amazon
 	// Redshift determines whether to use AQUA.
 	AquaConfigurationStatus types.AquaConfigurationStatus
+
+	noSmithyDocumentSerde
 }
 
 type ModifyAquaConfigurationOutput struct {
@@ -54,6 +56,8 @@ type ModifyAquaConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyAquaConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

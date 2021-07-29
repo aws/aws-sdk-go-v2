@@ -45,6 +45,8 @@ type ListImageBuildVersionsInput struct {
 	// A token to specify where to start paginating. This is the NextToken from a
 	// previously truncated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListImageBuildVersionsOutput struct {
@@ -62,6 +64,8 @@ type ListImageBuildVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListImageBuildVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

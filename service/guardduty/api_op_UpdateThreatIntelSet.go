@@ -48,11 +48,15 @@ type UpdateThreatIntelSetInput struct {
 
 	// The unique ID that specifies the ThreatIntelSet that you want to update.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateThreatIntelSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

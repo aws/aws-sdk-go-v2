@@ -47,6 +47,8 @@ type UpdateDomainEndpointOptionsInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a UpdateDomainEndpointOptions request. Contains the configuration
@@ -58,6 +60,8 @@ type UpdateDomainEndpointOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainEndpointOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

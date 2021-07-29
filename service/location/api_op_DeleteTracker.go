@@ -35,11 +35,15 @@ type DeleteTrackerInput struct {
 	//
 	// This member is required.
 	TrackerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTrackerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {

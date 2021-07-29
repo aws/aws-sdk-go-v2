@@ -6,6 +6,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/internal/document"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -518,8 +520,18 @@ func (m *awsAwsjson11_serializeOpSimpleScalarProperties) HandleSerialize(ctx con
 
 	return next.HandleSerialize(ctx, in)
 }
-func awsAwsjson11_serializeDocumentDocument(v smithy.Document, value smithyjson.Value) error {
-	// TODO: implement document serialization.
+func awsAwsjson11_serializeDocumentDocument(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }
 

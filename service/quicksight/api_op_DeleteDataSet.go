@@ -38,6 +38,8 @@ type DeleteDataSetInput struct {
 	//
 	// This member is required.
 	DataSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDataSetOutput struct {
@@ -57,6 +59,8 @@ type DeleteDataSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDataSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

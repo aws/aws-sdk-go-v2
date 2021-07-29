@@ -50,6 +50,8 @@ type ListElasticsearchInstanceTypesInput struct {
 	// NextToken should be sent in case if earlier API call produced result containing
 	// NextToken. It is used for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for the parameters returned by ListElasticsearchInstanceTypes
@@ -67,6 +69,8 @@ type ListElasticsearchInstanceTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListElasticsearchInstanceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

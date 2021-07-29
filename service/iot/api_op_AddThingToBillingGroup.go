@@ -39,11 +39,15 @@ type AddThingToBillingGroupInput struct {
 
 	// The name of the thing to be added to the billing group.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type AddThingToBillingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddThingToBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

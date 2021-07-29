@@ -47,11 +47,15 @@ type TagStreamInput struct {
 
 	// The name of the stream that you want to add the tag or tags to.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type TagStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

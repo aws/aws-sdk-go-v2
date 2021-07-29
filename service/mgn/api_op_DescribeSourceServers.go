@@ -40,6 +40,8 @@ type DescribeSourceServersInput struct {
 
 	// Request to filter Source Servers list by next token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSourceServersOutput struct {
@@ -52,6 +54,8 @@ type DescribeSourceServersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -63,11 +63,15 @@ type PutExternalModelInput struct {
 
 	// A collection of key and value pairs.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutExternalModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutExternalModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

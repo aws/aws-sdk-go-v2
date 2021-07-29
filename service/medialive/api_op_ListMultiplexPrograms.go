@@ -41,6 +41,8 @@ type ListMultiplexProgramsInput struct {
 
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ListMultiplexProgramsResponse
@@ -54,6 +56,8 @@ type ListMultiplexProgramsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMultiplexProgramsMiddlewares(stack *middleware.Stack, options Options) (err error) {

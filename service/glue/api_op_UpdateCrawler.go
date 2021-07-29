@@ -81,11 +81,15 @@ type UpdateCrawlerInput struct {
 
 	// A list of targets to crawl.
 	Targets *types.CrawlerTargets
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCrawlerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {

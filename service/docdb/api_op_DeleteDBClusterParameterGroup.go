@@ -42,11 +42,15 @@ type DeleteDBClusterParameterGroupInput struct {
 	//
 	// This member is required.
 	DBClusterParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBClusterParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

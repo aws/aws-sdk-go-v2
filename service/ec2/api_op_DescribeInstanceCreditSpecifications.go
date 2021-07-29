@@ -70,6 +70,8 @@ type DescribeInstanceCreditSpecificationsInput struct {
 
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInstanceCreditSpecificationsOutput struct {
@@ -83,6 +85,8 @@ type DescribeInstanceCreditSpecificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstanceCreditSpecificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

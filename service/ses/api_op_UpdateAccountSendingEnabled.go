@@ -38,11 +38,15 @@ type UpdateAccountSendingEnabledInput struct {
 	// Describes whether email sending is enabled or disabled for your Amazon SES
 	// account in the current AWS Region.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccountSendingEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccountSendingEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type CreateEvaluationInput struct {
 
 	// A user-supplied name or description of the Evaluation.
 	EvaluationName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateEvaluation operation, and is an acknowledgement
@@ -73,6 +75,8 @@ type CreateEvaluationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {

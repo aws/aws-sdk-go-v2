@@ -11,6 +11,8 @@ import (
 // incorrect. See the accompanying error message for details.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -29,6 +31,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // message.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -48,6 +52,8 @@ type LimitExceededException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -65,6 +71,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The requested resource is not found. Make sure that the request URI is correct.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -85,6 +93,8 @@ type ServiceUnavailableException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -105,6 +115,8 @@ type TooManyRequestsException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -122,6 +134,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // The request is denied because the caller has insufficient permissions.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {

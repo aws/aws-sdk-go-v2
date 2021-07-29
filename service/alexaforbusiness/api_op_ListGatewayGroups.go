@@ -36,6 +36,8 @@ type ListGatewayGroupsInput struct {
 
 	// The token used to paginate though multiple pages of gateway group summaries.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGatewayGroupsOutput struct {
@@ -48,6 +50,8 @@ type ListGatewayGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGatewayGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

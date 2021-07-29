@@ -102,6 +102,8 @@ type PutSlotTypeInput struct {
 	// If you don't specify the
 	// valueSelectionStrategy, the default is ORIGINAL_VALUE.
 	ValueSelectionStrategy types.SlotValueSelectionStrategy
+
+	noSmithyDocumentSerde
 }
 
 type PutSlotTypeOutput struct {
@@ -147,6 +149,8 @@ type PutSlotTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

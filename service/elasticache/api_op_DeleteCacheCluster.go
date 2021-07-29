@@ -63,6 +63,8 @@ type DeleteCacheClusterInput struct {
 	// identifies the snapshot. ElastiCache creates the snapshot, and then deletes the
 	// cluster immediately afterward.
 	FinalSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCacheClusterOutput struct {
@@ -72,6 +74,8 @@ type DeleteCacheClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

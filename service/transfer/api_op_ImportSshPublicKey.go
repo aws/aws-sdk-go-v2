@@ -45,6 +45,8 @@ type ImportSshPublicKeyInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the user, the server they belong to, and the identifier of the SSH
@@ -69,6 +71,8 @@ type ImportSshPublicKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportSshPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

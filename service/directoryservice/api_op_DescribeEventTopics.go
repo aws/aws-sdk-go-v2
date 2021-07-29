@@ -40,6 +40,8 @@ type DescribeEventTopicsInput struct {
 	// null, all associations for the specified Directory ID are returned. An empty
 	// list results in an InvalidParameterException being thrown.
 	TopicNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeEventTopic request.
@@ -51,6 +53,8 @@ type DescribeEventTopicsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventTopicsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,15 @@ type DisassociateMembershipInput struct {
 	//
 	// This member is required.
 	GraphArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

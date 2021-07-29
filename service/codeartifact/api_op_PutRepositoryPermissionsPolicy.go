@@ -57,6 +57,8 @@ type PutRepositoryPermissionsPolicyInput struct {
 	// the repository. This revision is used for optimistic locking, which prevents
 	// others from overwriting your changes to the repository's resource policy.
 	PolicyRevision *string
+
+	noSmithyDocumentSerde
 }
 
 type PutRepositoryPermissionsPolicyOutput struct {
@@ -66,6 +68,8 @@ type PutRepositoryPermissionsPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

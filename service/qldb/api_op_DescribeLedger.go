@@ -34,6 +34,8 @@ type DescribeLedgerInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLedgerOutput struct {
@@ -64,6 +66,8 @@ type DescribeLedgerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {

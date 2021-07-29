@@ -39,11 +39,15 @@ type DeregisterEcsClusterInput struct {
 	//
 	// This member is required.
 	EcsClusterArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterEcsClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterEcsClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

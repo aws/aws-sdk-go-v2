@@ -44,6 +44,8 @@ type ListIdentitiesInput struct {
 
 	// The token to use for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of all identities that you have attempted to verify under your AWS
@@ -60,6 +62,8 @@ type ListIdentitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

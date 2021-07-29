@@ -47,6 +47,8 @@ type CreateLunaClientInput struct {
 
 	// The label for the client.
 	Label *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the CreateLunaClient action.
@@ -57,6 +59,8 @@ type CreateLunaClientOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

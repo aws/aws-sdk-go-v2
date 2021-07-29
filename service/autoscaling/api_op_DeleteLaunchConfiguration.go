@@ -34,11 +34,15 @@ type DeleteLaunchConfigurationInput struct {
 	//
 	// This member is required.
 	LaunchConfigurationName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLaunchConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

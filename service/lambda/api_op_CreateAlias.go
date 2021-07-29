@@ -69,6 +69,8 @@ type CreateAliasInput struct {
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-aliases.html#configuring-alias-routing)
 	// of the alias.
 	RoutingConfig *types.AliasRoutingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information about a Lambda function alias
@@ -97,6 +99,8 @@ type CreateAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

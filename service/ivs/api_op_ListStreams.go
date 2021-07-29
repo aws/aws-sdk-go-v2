@@ -37,6 +37,8 @@ type ListStreamsInput struct {
 	// The first stream to retrieve. This is used for pagination; see the nextToken
 	// response field.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStreamsOutput struct {
@@ -52,6 +54,8 @@ type ListStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

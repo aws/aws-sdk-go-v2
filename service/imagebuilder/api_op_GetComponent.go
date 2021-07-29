@@ -34,6 +34,8 @@ type GetComponentInput struct {
 	//
 	// This member is required.
 	ComponentBuildVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetComponentOutput struct {
@@ -46,6 +48,8 @@ type GetComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

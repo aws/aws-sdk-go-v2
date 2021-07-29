@@ -52,6 +52,8 @@ type ListRobotsInput struct {
 	// request object's nextToken parameter. If there are no remaining results, the
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRobotsOutput struct {
@@ -68,6 +70,8 @@ type ListRobotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRobotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

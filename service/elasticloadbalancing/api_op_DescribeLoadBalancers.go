@@ -42,6 +42,8 @@ type DescribeLoadBalancersInput struct {
 	// The maximum number of results to return with this call (a number from 1 to 400).
 	// The default is 400.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the parameters for DescribeLoadBalancers.
@@ -56,6 +58,8 @@ type DescribeLoadBalancersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {

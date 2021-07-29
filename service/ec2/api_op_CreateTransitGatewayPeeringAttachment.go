@@ -61,6 +61,8 @@ type CreateTransitGatewayPeeringAttachmentInput struct {
 
 	// The tags to apply to the transit gateway peering attachment.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateTransitGatewayPeeringAttachmentOutput struct {
@@ -70,6 +72,8 @@ type CreateTransitGatewayPeeringAttachmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTransitGatewayPeeringAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

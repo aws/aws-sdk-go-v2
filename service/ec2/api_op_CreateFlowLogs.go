@@ -124,6 +124,8 @@ type CreateFlowLogsInput struct {
 
 	// The tags to apply to the flow logs.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateFlowLogsOutput struct {
@@ -140,6 +142,8 @@ type CreateFlowLogsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFlowLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {

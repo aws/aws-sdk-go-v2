@@ -34,6 +34,8 @@ type DeleteTrialComponentInput struct {
 	//
 	// This member is required.
 	TrialComponentName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTrialComponentOutput struct {
@@ -43,6 +45,8 @@ type DeleteTrialComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

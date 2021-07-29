@@ -38,6 +38,8 @@ type RemoveTagsInput struct {
 
 	// Specifies a list of tags to be removed.
 	TagsList []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -45,6 +47,8 @@ type RemoveTagsInput struct {
 type RemoveTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

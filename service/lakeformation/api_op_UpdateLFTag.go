@@ -49,11 +49,15 @@ type UpdateLFTagInput struct {
 
 	// A list of tag values to delete from the tag.
 	TagValuesToDelete []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLFTagOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLFTagMiddlewares(stack *middleware.Stack, options Options) (err error) {

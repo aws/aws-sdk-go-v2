@@ -48,6 +48,8 @@ type ListComponentsInput struct {
 	// specify if you want to view components owned by yourself, by Amazon, or those
 	// components that have been shared with you by other customers.
 	Owner types.Ownership
+
+	noSmithyDocumentSerde
 }
 
 type ListComponentsOutput struct {
@@ -65,6 +67,8 @@ type ListComponentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

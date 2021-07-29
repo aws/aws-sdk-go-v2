@@ -42,6 +42,8 @@ type UpdateChannelClassInput struct {
 
 	// A list of output destinations for this channel.
 	Destinations []types.OutputDestination
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for UpdateChannelClassResponse
@@ -52,6 +54,8 @@ type UpdateChannelClassOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateChannelClassMiddlewares(stack *middleware.Stack, options Options) (err error) {

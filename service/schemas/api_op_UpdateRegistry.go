@@ -36,6 +36,8 @@ type UpdateRegistryInput struct {
 
 	// The description of the registry to update.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRegistryOutput struct {
@@ -54,6 +56,8 @@ type UpdateRegistryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {

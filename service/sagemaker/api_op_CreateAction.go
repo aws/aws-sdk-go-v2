@@ -67,6 +67,8 @@ type CreateActionInput struct {
 
 	// A list of tags to apply to the action.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateActionOutput struct {
@@ -76,6 +78,8 @@ type CreateActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

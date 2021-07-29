@@ -46,6 +46,8 @@ type DescribeVpcClassicLinkDnsSupportInput struct {
 
 	// One or more VPC IDs.
 	VpcIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcClassicLinkDnsSupportOutput struct {
@@ -59,6 +61,8 @@ type DescribeVpcClassicLinkDnsSupportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcClassicLinkDnsSupportMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,6 +69,8 @@ type CreateBatchInferenceJobInput struct {
 
 	// The number of recommendations to retreive.
 	NumResults *int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateBatchInferenceJobOutput struct {
@@ -78,6 +80,8 @@ type CreateBatchInferenceJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBatchInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

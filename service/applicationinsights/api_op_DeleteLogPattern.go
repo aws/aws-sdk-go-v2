@@ -42,11 +42,15 @@ type DeleteLogPatternInput struct {
 	//
 	// This member is required.
 	ResourceGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLogPatternOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLogPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {

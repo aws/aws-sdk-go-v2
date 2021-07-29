@@ -61,6 +61,8 @@ type RegisterCACertificateInput struct {
 	// parameter use format: &&tags "key1=value1&key2=value2..." For the cli-input-json
 	// file use format: "tags": "key1=value1&key2=value2..."
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // The output from the RegisterCACertificateResponse operation.
@@ -74,6 +76,8 @@ type RegisterCACertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

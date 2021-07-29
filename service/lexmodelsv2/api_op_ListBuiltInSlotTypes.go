@@ -51,6 +51,8 @@ type ListBuiltInSlotTypesInput struct {
 	// operation. You can choose to sort by the slot type signature in either ascending
 	// or descending order.
 	SortBy *types.BuiltInSlotTypeSortBy
+
+	noSmithyDocumentSerde
 }
 
 type ListBuiltInSlotTypesOutput struct {
@@ -72,6 +74,8 @@ type ListBuiltInSlotTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBuiltInSlotTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

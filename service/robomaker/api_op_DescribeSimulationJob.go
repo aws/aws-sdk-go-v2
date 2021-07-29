@@ -34,6 +34,8 @@ type DescribeSimulationJobInput struct {
 	//
 	// This member is required.
 	Job *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSimulationJobOutput struct {
@@ -125,6 +127,8 @@ type DescribeSimulationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSimulationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

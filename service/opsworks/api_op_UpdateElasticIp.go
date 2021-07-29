@@ -41,11 +41,15 @@ type UpdateElasticIpInput struct {
 
 	// The new name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateElasticIpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

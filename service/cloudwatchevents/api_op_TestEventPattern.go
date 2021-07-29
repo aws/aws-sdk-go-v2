@@ -61,6 +61,8 @@ type TestEventPatternInput struct {
 	//
 	// This member is required.
 	EventPattern *string
+
+	noSmithyDocumentSerde
 }
 
 type TestEventPatternOutput struct {
@@ -70,6 +72,8 @@ type TestEventPatternOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestEventPatternMiddlewares(stack *middleware.Stack, options Options) (err error) {

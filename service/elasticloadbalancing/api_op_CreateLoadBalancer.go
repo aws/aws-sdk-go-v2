@@ -81,6 +81,8 @@ type CreateLoadBalancerInput struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/add-remove-tags.html)
 	// in the Classic Load Balancers Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output for CreateLoadBalancer.
@@ -91,6 +93,8 @@ type CreateLoadBalancerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

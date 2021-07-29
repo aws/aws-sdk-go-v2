@@ -41,6 +41,8 @@ type BatchUpdatePhoneNumberInput struct {
 	//
 	// This member is required.
 	UpdatePhoneNumberRequestItems []types.UpdatePhoneNumberRequestItem
+
+	noSmithyDocumentSerde
 }
 
 type BatchUpdatePhoneNumberOutput struct {
@@ -51,6 +53,8 @@ type BatchUpdatePhoneNumberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUpdatePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

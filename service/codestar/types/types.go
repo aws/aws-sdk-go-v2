@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Location and destination information about the source code files provided with
 // the project request. The source code is uploaded to the new project source
 // repository after project creation.
@@ -19,6 +23,8 @@ type Code struct {
 	//
 	// This member is required.
 	Source *CodeSource
+
+	noSmithyDocumentSerde
 }
 
 // Information about the AWS CodeCommit repository to be created in AWS CodeStar.
@@ -30,6 +36,8 @@ type CodeCommitCodeDestination struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The repository to be created in AWS CodeStar. Valid values are AWS CodeCommit or
@@ -46,6 +54,8 @@ type CodeDestination struct {
 	// where the source code files provided with the project request will be uploaded
 	// after project creation.
 	GitHub *GitHubCodeDestination
+
+	noSmithyDocumentSerde
 }
 
 // The location where the source code files provided with the project request are
@@ -57,6 +67,8 @@ type CodeSource struct {
 	//
 	// This member is required.
 	S3 *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Information about the GitHub repository to be created in AWS CodeStar. This is
@@ -100,6 +112,8 @@ type GitHubCodeDestination struct {
 	// Description for the GitHub repository to be created in AWS CodeStar. This
 	// description displays in GitHub after the repository is created.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // An indication of whether a project creation or deletion is failed or successful.
@@ -112,6 +126,8 @@ type ProjectStatus struct {
 
 	// In the case of a project creation or deletion failure, a reason for the failure.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the metadata for a project.
@@ -122,6 +138,8 @@ type ProjectSummary struct {
 
 	// The ID of the project.
 	ProjectId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a resource for a project.
@@ -131,6 +149,8 @@ type Resource struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon S3 location where the source code files provided with the project
@@ -144,6 +164,8 @@ type S3Location struct {
 	// The Amazon S3 bucket name where the source code files provided with the project
 	// request are stored.
 	BucketName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a team member in a project.
@@ -165,6 +187,8 @@ type TeamMember struct {
 	// Whether the user is allowed to remotely access project resources using an SSH
 	// public/private key pair.
 	RemoteAccessAllowed bool
+
+	noSmithyDocumentSerde
 }
 
 // The toolchain template file provided with the project request. AWS CodeStar uses
@@ -185,6 +209,8 @@ type Toolchain struct {
 	// The list of parameter overrides to be passed into the toolchain template during
 	// stack provisioning, if any.
 	StackParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon S3 location where the toolchain template file provided with the
@@ -197,6 +223,8 @@ type ToolchainSource struct {
 	//
 	// This member is required.
 	S3 *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Information about a user's profile in AWS CodeStar.
@@ -223,4 +251,8 @@ type UserProfileSummary struct {
 
 	// The Amazon Resource Name (ARN) of the user in IAM.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

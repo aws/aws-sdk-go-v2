@@ -45,11 +45,15 @@ type AddThingToThingGroupInput struct {
 
 	// The name of the thing to add to a group.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type AddThingToThingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddThingToThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

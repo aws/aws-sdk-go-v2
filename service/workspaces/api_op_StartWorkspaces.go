@@ -34,6 +34,8 @@ type StartWorkspacesInput struct {
 	//
 	// This member is required.
 	StartWorkspaceRequests []types.StartRequest
+
+	noSmithyDocumentSerde
 }
 
 type StartWorkspacesOutput struct {
@@ -43,6 +45,8 @@ type StartWorkspacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type DisassociateCustomDomainInput struct {
 	//
 	// This member is required.
 	ServiceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateCustomDomainOutput struct {
@@ -67,6 +69,8 @@ type DisassociateCustomDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -85,6 +85,8 @@ type CreateDBInstanceInput struct {
 	// The tags to be assigned to the instance. You can assign up to 10 tags to an
 	// instance.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBInstanceOutput struct {
@@ -94,6 +96,8 @@ type CreateDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

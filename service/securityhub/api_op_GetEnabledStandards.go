@@ -41,6 +41,8 @@ type GetEnabledStandardsInput struct {
 
 	// The list of the standards subscription ARNs for the standards to retrieve.
 	StandardsSubscriptionArns []string
+
+	noSmithyDocumentSerde
 }
 
 type GetEnabledStandardsOutput struct {
@@ -54,6 +56,8 @@ type GetEnabledStandardsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEnabledStandardsMiddlewares(stack *middleware.Stack, options Options) (err error) {

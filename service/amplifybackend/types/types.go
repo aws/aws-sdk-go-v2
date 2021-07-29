@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The authentication settings for accessing provisioned data models in your
 // Amplify project.
 type BackendAPIAppSyncAuthSettings struct {
@@ -35,6 +39,8 @@ type BackendAPIAppSyncAuthSettings struct {
 	// The OpenID provider name, if OpenID was used as an authentication mechanism to
 	// access your data models.
 	OpenIDProviderName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the auth types for your configured data models.
@@ -45,6 +51,8 @@ type BackendAPIAuthType struct {
 
 	// Describes settings for the authentication mode.
 	Settings *BackendAPIAppSyncAuthSettings
+
+	noSmithyDocumentSerde
 }
 
 // Describes the conflict resolution configuration for your data model configured
@@ -53,6 +61,8 @@ type BackendAPIConflictResolution struct {
 
 	// The strategy for conflict resolution.
 	ResolutionStrategy ResolutionStrategy
+
+	noSmithyDocumentSerde
 }
 
 // The resource config for the data model, configured as a part of the Amplify
@@ -79,6 +89,8 @@ type BackendAPIResourceConfig struct {
 	// The definition of the data model in the annotated transform of the GraphQL
 	// schema.
 	TransformSchema *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes Apple social federation configurations for allowing your app users to
@@ -96,6 +108,8 @@ type BackendAuthAppleProviderConfig struct {
 
 	// Describes the team_id that comes from Apple.
 	TeamId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes third-party social federation configurations for allowing your app
@@ -109,6 +123,8 @@ type BackendAuthSocialProviderConfig struct {
 	// Describes the client_secret, which can be obtained from third-party social
 	// federation providers.
 	ClientSecret *string
+
+	noSmithyDocumentSerde
 }
 
 // The response object for this operation.
@@ -141,6 +157,8 @@ type BackendJobRespObj struct {
 
 	// The time when the job was last updated.
 	UpdateTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the forgot password policy for authenticating into the Amplify app.
@@ -158,6 +176,8 @@ type CreateBackendAuthForgotPasswordConfig struct {
 	// The configuration for the SMS message sent when an app user forgets their
 	// password.
 	SmsSettings *SmsSettings
+
+	noSmithyDocumentSerde
 }
 
 // Describes authorization configurations for the auth resources, configured as a
@@ -174,6 +194,8 @@ type CreateBackendAuthIdentityPoolConfig struct {
 	//
 	// This member is required.
 	UnauthenticatedLogin bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes whether to apply multi-factor authentication policies for your Amazon
@@ -189,6 +211,8 @@ type CreateBackendAuthMFAConfig struct {
 	// Describes the configuration settings and methods for your Amplify app users to
 	// use MFA.
 	Settings *Settings
+
+	noSmithyDocumentSerde
 }
 
 // Creates the OAuth configuration for your Amplify project.
@@ -221,6 +245,8 @@ type CreateBackendAuthOAuthConfig struct {
 
 	// The settings for using social providers to access your Amplify app.
 	SocialProviderSettings *SocialProviderSettings
+
+	noSmithyDocumentSerde
 }
 
 // The password policy configuration for the backend to your Amplify project.
@@ -235,6 +261,8 @@ type CreateBackendAuthPasswordPolicyConfig struct {
 	// Additional constraints for the password used to access the backend of your
 	// Amplify project.
 	AdditionalConstraints []AdditionalConstraintsElement
+
+	noSmithyDocumentSerde
 }
 
 // Defines the resource configuration when creating an auth resource in your
@@ -262,6 +290,8 @@ type CreateBackendAuthResourceConfig struct {
 	// Describes the authorization configuration for the Amazon Cognito identity pool,
 	// provisioned as a part of your auth resource in the Amplify project.
 	IdentityPoolConfigs *CreateBackendAuthIdentityPoolConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Amazon Cognito user pool configuration for the auth resource to be
@@ -299,6 +329,8 @@ type CreateBackendAuthUserPoolConfig struct {
 	// Describes the password policy for your Amazon Cognito user pool, configured as a
 	// part of your Amplify project.
 	PasswordPolicy *CreateBackendAuthPasswordPolicyConfig
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for the email sent when an app user forgets their password.
@@ -309,6 +341,8 @@ type EmailSettings struct {
 
 	// The subject of the email.
 	EmailSubject *string
+
+	noSmithyDocumentSerde
 }
 
 // The request object for this operation.
@@ -326,10 +360,13 @@ type LoginAuthConfigReqObj struct {
 
 	// The web client ID for the Amazon Cognito user pools.
 	AwsUserPoolsWebClientId *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the resource configuration for the data model in your Amplify project.
 type ResourceConfig struct {
+	noSmithyDocumentSerde
 }
 
 // The settings of your MFA configuration for the backend of your Amplify project.
@@ -340,6 +377,8 @@ type Settings struct {
 
 	// The body of the SMS message.
 	SmsMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // SMS settings for authentication.
@@ -347,6 +386,8 @@ type SmsSettings struct {
 
 	// The body of the SMS message.
 	SmsMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for using the social identity providers for access to your Amplify
@@ -368,6 +409,8 @@ type SocialProviderSettings struct {
 	// Describes Apple social federation configurations for allowing your app users to
 	// sign in using OAuth.
 	SignInWithApple *BackendAuthAppleProviderConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the forgot password policy for authenticating into the Amplify app.
@@ -383,6 +426,8 @@ type UpdateBackendAuthForgotPasswordConfig struct {
 	// The configuration for the SMS message sent when an Amplify app user forgets
 	// their password.
 	SmsSettings *SmsSettings
+
+	noSmithyDocumentSerde
 }
 
 // Describes the authorization configuration for the Amazon Cognito identity pool,
@@ -392,6 +437,8 @@ type UpdateBackendAuthIdentityPoolConfig struct {
 	// A boolean value that can be set to allow or disallow guest-level authorization
 	// into your Amplify app.
 	UnauthenticatedLogin bool
+
+	noSmithyDocumentSerde
 }
 
 // Updates the multi-factor authentication (MFA) configuration for the backend of
@@ -403,6 +450,8 @@ type UpdateBackendAuthMFAConfig struct {
 
 	// The settings of your MFA configuration for the backend of your Amplify project.
 	Settings *Settings
+
+	noSmithyDocumentSerde
 }
 
 // The OAuth configurations for authenticating users into your Amplify app.
@@ -427,6 +476,8 @@ type UpdateBackendAuthOAuthConfig struct {
 	// Describes third-party social federation configurations for allowing your users
 	// to sign in with OAuth.
 	SocialProviderSettings *SocialProviderSettings
+
+	noSmithyDocumentSerde
 }
 
 // Describes the password policy for your Amazon Cognito user pool configured as a
@@ -440,6 +491,8 @@ type UpdateBackendAuthPasswordPolicyConfig struct {
 	// Describes the minimum length of the password required to sign in to the auth
 	// resource, configured as a part of your Amplify project.
 	MinimumLength float64
+
+	noSmithyDocumentSerde
 }
 
 // Defines the resource configuration when updating an authentication resource in
@@ -467,6 +520,8 @@ type UpdateBackendAuthResourceConfig struct {
 	// Describes the authorization configuration for the Amazon Cognito identity pool,
 	// provisioned as a part of your auth resource in the Amplify project.
 	IdentityPoolConfigs *UpdateBackendAuthIdentityPoolConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Amazon Cognito user pool configuration for the authorization
@@ -488,4 +543,8 @@ type UpdateBackendAuthUserPoolConfig struct {
 	// Describes the password policy for your Amazon Cognito user pool, configured as a
 	// part of your Amplify project.
 	PasswordPolicy *UpdateBackendAuthPasswordPolicyConfig
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -39,6 +39,8 @@ type DescribeApplicationInput struct {
 	// Displays verbose information about a Kinesis Data Analytics application,
 	// including the application's job plan.
 	IncludeAdditionalDetails *bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeApplicationOutput struct {
@@ -51,6 +53,8 @@ type DescribeApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type CreateThingTypeInput struct {
 	// about the new thing type including a description, and a list of searchable thing
 	// attribute names.
 	ThingTypeProperties *types.ThingTypeProperties
+
+	noSmithyDocumentSerde
 }
 
 // The output of the CreateThingType operation.
@@ -58,6 +60,8 @@ type CreateThingTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

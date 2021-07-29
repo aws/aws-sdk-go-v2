@@ -77,6 +77,8 @@ type UpdateReplicationConfigurationTemplateInput struct {
 	// Update replication configuration template use dedicated Replication Server
 	// request.
 	UseDedicatedReplicationServer *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateReplicationConfigurationTemplateOutput struct {
@@ -131,6 +133,8 @@ type UpdateReplicationConfigurationTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateReplicationConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

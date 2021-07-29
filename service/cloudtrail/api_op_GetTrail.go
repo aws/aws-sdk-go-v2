@@ -34,6 +34,8 @@ type GetTrailInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTrailOutput struct {
@@ -43,6 +45,8 @@ type GetTrailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {

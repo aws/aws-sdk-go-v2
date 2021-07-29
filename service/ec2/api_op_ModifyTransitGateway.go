@@ -47,6 +47,8 @@ type ModifyTransitGatewayInput struct {
 
 	// The options to modify.
 	Options *types.ModifyTransitGatewayOptions
+
+	noSmithyDocumentSerde
 }
 
 type ModifyTransitGatewayOutput struct {
@@ -56,6 +58,8 @@ type ModifyTransitGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyTransitGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

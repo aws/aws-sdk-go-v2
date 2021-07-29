@@ -74,6 +74,8 @@ type ListPermissionsInput struct {
 	// receive a response with truncated results. Set it to the value of NextToken from
 	// the response you just received.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPermissionsOutput struct {
@@ -88,6 +90,8 @@ type ListPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

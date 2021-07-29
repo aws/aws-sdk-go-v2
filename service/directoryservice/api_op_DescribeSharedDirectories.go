@@ -43,6 +43,8 @@ type DescribeSharedDirectoriesInput struct {
 
 	// A list of identifiers of all shared directories in your account.
 	SharedDirectoryIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSharedDirectoriesOutput struct {
@@ -57,6 +59,8 @@ type DescribeSharedDirectoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSharedDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

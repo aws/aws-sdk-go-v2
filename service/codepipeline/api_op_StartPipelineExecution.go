@@ -38,6 +38,8 @@ type StartPipelineExecutionInput struct {
 
 	// The system-generated unique ID used to identify a unique execution request.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a StartPipelineExecution action.
@@ -48,6 +50,8 @@ type StartPipelineExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

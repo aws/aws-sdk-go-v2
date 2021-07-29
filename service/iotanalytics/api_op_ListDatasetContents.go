@@ -51,6 +51,8 @@ type ListDatasetContentsInput struct {
 	// on or after the given time. See the field triggers.schedule in the CreateDataset
 	// request. (timestamp)
 	ScheduledOnOrAfter *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ListDatasetContentsOutput struct {
@@ -64,6 +66,8 @@ type ListDatasetContentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDatasetContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

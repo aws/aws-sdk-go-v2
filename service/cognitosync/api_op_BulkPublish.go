@@ -39,6 +39,8 @@ type BulkPublishInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the BulkPublish operation.
@@ -50,6 +52,8 @@ type BulkPublishOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBulkPublishMiddlewares(stack *middleware.Stack, options Options) (err error) {

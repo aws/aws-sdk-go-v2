@@ -35,11 +35,15 @@ type CheckInLicenseInput struct {
 
 	// License beneficiary.
 	Beneficiary *string
+
+	noSmithyDocumentSerde
 }
 
 type CheckInLicenseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCheckInLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {

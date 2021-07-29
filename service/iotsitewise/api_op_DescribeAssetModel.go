@@ -39,6 +39,8 @@ type DescribeAssetModelInput struct {
 	//
 	// This member is required.
 	AssetModelId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAssetModelOutput struct {
@@ -101,6 +103,8 @@ type DescribeAssetModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAssetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

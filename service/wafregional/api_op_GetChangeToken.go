@@ -43,6 +43,7 @@ func (c *Client) GetChangeToken(ctx context.Context, params *GetChangeTokenInput
 }
 
 type GetChangeTokenInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetChangeTokenOutput struct {
@@ -53,6 +54,8 @@ type GetChangeTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetChangeTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

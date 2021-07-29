@@ -49,6 +49,8 @@ type DescribeGameServerInput struct {
 	//
 	// This member is required.
 	GameServerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeGameServerOutput struct {
@@ -58,6 +60,8 @@ type DescribeGameServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

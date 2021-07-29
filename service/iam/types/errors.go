@@ -11,6 +11,8 @@ import (
 // submitted simultaneously. Wait a few minutes and submit your request again.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -32,6 +34,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // the IAM User Guide.
 type CredentialReportExpiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CredentialReportExpiredException) Error() string {
@@ -50,6 +54,8 @@ func (e *CredentialReportExpiredException) ErrorFault() smithy.ErrorFault { retu
 // generate a credential report, use GenerateCredentialReport.
 type CredentialReportNotPresentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CredentialReportNotPresentException) Error() string {
@@ -69,6 +75,8 @@ func (e *CredentialReportNotPresentException) ErrorFault() smithy.ErrorFault {
 // The request was rejected because the credential report is still being generated.
 type CredentialReportNotReadyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CredentialReportNotReadyException) Error() string {
@@ -87,6 +95,8 @@ func (e *CredentialReportNotReadyException) ErrorFault() smithy.ErrorFault { ret
 // attached subordinate entities. The error message describes these entities.
 type DeleteConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeleteConflictException) Error() string {
@@ -105,6 +115,8 @@ func (e *DeleteConflictException) ErrorFault() smithy.ErrorFault { return smithy
 // user in the account.
 type DuplicateCertificateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateCertificateException) Error() string {
@@ -123,6 +135,8 @@ func (e *DuplicateCertificateException) ErrorFault() smithy.ErrorFault { return 
 // the specified IAM user.
 type DuplicateSSHPublicKeyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateSSHPublicKeyException) Error() string {
@@ -141,6 +155,8 @@ func (e *DuplicateSSHPublicKeyException) ErrorFault() smithy.ErrorFault { return
 // exists.
 type EntityAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityAlreadyExistsException) Error() string {
@@ -161,6 +177,8 @@ func (e *EntityAlreadyExistsException) ErrorFault() smithy.ErrorFault { return s
 // several minutes. The error message describes the entity.
 type EntityTemporarilyUnmodifiableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityTemporarilyUnmodifiableException) Error() string {
@@ -183,6 +201,8 @@ func (e *EntityTemporarilyUnmodifiableException) ErrorFault() smithy.ErrorFault 
 // error message describes the specific error.
 type InvalidAuthenticationCodeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAuthenticationCodeException) Error() string {
@@ -202,6 +222,8 @@ func (e *InvalidAuthenticationCodeException) ErrorFault() smithy.ErrorFault {
 // The request was rejected because the certificate is invalid.
 type InvalidCertificateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCertificateException) Error() string {
@@ -220,6 +242,8 @@ func (e *InvalidCertificateException) ErrorFault() smithy.ErrorFault { return sm
 // for an input parameter.
 type InvalidInputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -238,6 +262,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // invalid.
 type InvalidPublicKeyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPublicKeyException) Error() string {
@@ -256,6 +282,8 @@ func (e *InvalidPublicKeyException) ErrorFault() smithy.ErrorFault { return smit
 // incorrect.
 type InvalidUserTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUserTypeException) Error() string {
@@ -274,6 +302,8 @@ func (e *InvalidUserTypeException) ErrorFault() smithy.ErrorFault { return smith
 // do not match.
 type KeyPairMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KeyPairMismatchException) Error() string {
@@ -293,6 +323,8 @@ func (e *KeyPairMismatchException) ErrorFault() smithy.ErrorFault { return smith
 // limit exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -311,6 +343,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // error message describes the specific error.
 type MalformedCertificateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MalformedCertificateException) Error() string {
@@ -329,6 +363,8 @@ func (e *MalformedCertificateException) ErrorFault() smithy.ErrorFault { return 
 // message describes the specific error.
 type MalformedPolicyDocumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MalformedPolicyDocumentException) Error() string {
@@ -347,6 +383,8 @@ func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { retu
 // exist. The error message describes the resource.
 type NoSuchEntityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchEntityException) Error() string {
@@ -365,6 +403,8 @@ func (e *NoSuchEntityException) ErrorFault() smithy.ErrorFault { return smithy.F
 // requirements imposed by the account password policy.
 type PasswordPolicyViolationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PasswordPolicyViolationException) Error() string {
@@ -383,6 +423,8 @@ func (e *PasswordPolicyViolationException) ErrorFault() smithy.ErrorFault { retu
 // evaluated. An additional detailed message indicates the source of the failure.
 type PolicyEvaluationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyEvaluationException) Error() string {
@@ -401,6 +443,8 @@ func (e *PolicyEvaluationException) ErrorFault() smithy.ErrorFault { return smit
 // attached to the service-linked role for that service.
 type PolicyNotAttachableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyNotAttachableException) Error() string {
@@ -419,6 +463,8 @@ func (e *PolicyNotAttachableException) ErrorFault() smithy.ErrorFault { return s
 // account are already running.
 type ReportGenerationLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReportGenerationLimitExceededException) Error() string {
@@ -441,6 +487,8 @@ func (e *ReportGenerationLimitExceededException) ErrorFault() smithy.ErrorFault 
 // failure.
 type ServiceFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceFailureException) Error() string {
@@ -458,6 +506,8 @@ func (e *ServiceFailureException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified service does not support service-specific credentials.
 type ServiceNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceNotSupportedException) Error() string {
@@ -478,6 +528,8 @@ func (e *ServiceNotSupportedException) ErrorFault() smithy.ErrorFault { return s
 // role. You must request the change through that service.
 type UnmodifiableEntityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnmodifiableEntityException) Error() string {
@@ -496,6 +548,8 @@ func (e *UnmodifiableEntityException) ErrorFault() smithy.ErrorFault { return sm
 // or unrecognized.
 type UnrecognizedPublicKeyEncodingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnrecognizedPublicKeyEncodingException) Error() string {

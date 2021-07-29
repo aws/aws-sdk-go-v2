@@ -33,12 +33,16 @@ type DeleteApiCacheInput struct {
 	//
 	// This member is required.
 	ApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteApiCache operation.
 type DeleteApiCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

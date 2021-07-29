@@ -52,6 +52,8 @@ type CreateProjectInput struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/tag-resources.html)
 	// in the IoT SiteWise User Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateProjectOutput struct {
@@ -71,6 +73,8 @@ type CreateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

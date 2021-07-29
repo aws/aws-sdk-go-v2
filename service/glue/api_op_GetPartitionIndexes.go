@@ -47,6 +47,8 @@ type GetPartitionIndexesInput struct {
 
 	// A continuation token, included if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPartitionIndexesOutput struct {
@@ -59,6 +61,8 @@ type GetPartitionIndexesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPartitionIndexesMiddlewares(stack *middleware.Stack, options Options) (err error) {

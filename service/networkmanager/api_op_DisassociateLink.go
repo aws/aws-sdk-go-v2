@@ -44,6 +44,8 @@ type DisassociateLinkInput struct {
 	//
 	// This member is required.
 	LinkId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateLinkOutput struct {
@@ -53,6 +55,8 @@ type DisassociateLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

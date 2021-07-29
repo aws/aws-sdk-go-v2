@@ -37,6 +37,8 @@ type DescribeRulesPackagesInput struct {
 
 	// The locale that you want to translate a rules package description into.
 	Locale types.Locale
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRulesPackagesOutput struct {
@@ -54,6 +56,8 @@ type DescribeRulesPackagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRulesPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type ListDatasetsInput struct {
 
 	// The token returned by a previous call to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDatasetsOutput struct {
@@ -50,6 +52,8 @@ type ListDatasetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

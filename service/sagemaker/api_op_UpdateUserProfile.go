@@ -41,6 +41,8 @@ type UpdateUserProfileInput struct {
 
 	// A collection of settings.
 	UserSettings *types.UserSettings
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserProfileOutput struct {
@@ -50,6 +52,8 @@ type UpdateUserProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type ListUserGroupsInput struct {
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListUserGroupsOutput struct {
@@ -69,6 +71,8 @@ type ListUserGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUserGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

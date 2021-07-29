@@ -29,6 +29,7 @@ func (c *Client) GetMessagingSessionEndpoint(ctx context.Context, params *GetMes
 }
 
 type GetMessagingSessionEndpointInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetMessagingSessionEndpointOutput struct {
@@ -38,6 +39,8 @@ type GetMessagingSessionEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMessagingSessionEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

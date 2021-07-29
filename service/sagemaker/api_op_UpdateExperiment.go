@@ -40,6 +40,8 @@ type UpdateExperimentInput struct {
 	// The name of the experiment as displayed. The name doesn't need to be unique. If
 	// DisplayName isn't specified, ExperimentName is displayed.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateExperimentOutput struct {
@@ -49,6 +51,8 @@ type UpdateExperimentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {

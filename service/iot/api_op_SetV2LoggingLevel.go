@@ -38,11 +38,15 @@ type SetV2LoggingLevelInput struct {
 	//
 	// This member is required.
 	LogTarget *types.LogTarget
+
+	noSmithyDocumentSerde
 }
 
 type SetV2LoggingLevelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetV2LoggingLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {

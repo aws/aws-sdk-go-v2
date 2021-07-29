@@ -46,6 +46,8 @@ type ImportApiInput struct {
 	// Specifies whether to rollback the API creation when a warning is encountered. By
 	// default, API creation continues if a warning is encountered.
 	FailOnWarnings bool
+
+	noSmithyDocumentSerde
 }
 
 type ImportApiOutput struct {
@@ -117,6 +119,8 @@ type ImportApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -8,6 +8,7 @@ import (
 	"errors"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithytesting "github.com/aws/smithy-go/testing"
@@ -120,6 +121,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsAwsjson11Deserialize(t *te
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr, opts...); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
@@ -245,6 +247,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsAwsjson11Deserialize(t *testi
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr, opts...); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
@@ -452,6 +455,7 @@ func TestClient_GreetingWithErrors_FooError_awsAwsjson11Deserialize(t *testing.T
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr, opts...); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)

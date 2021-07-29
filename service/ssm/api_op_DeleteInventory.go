@@ -57,6 +57,8 @@ type DeleteInventoryInput struct {
 	// disabled version. DeleteSchema: This option deletes the specified custom type
 	// from the Inventory service. You can recreate the schema later, if you want.
 	SchemaDeleteOption types.InventorySchemaDeleteOption
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInventoryOutput struct {
@@ -78,6 +80,8 @@ type DeleteInventoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInventoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

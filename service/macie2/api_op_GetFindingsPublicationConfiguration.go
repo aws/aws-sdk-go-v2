@@ -28,6 +28,7 @@ func (c *Client) GetFindingsPublicationConfiguration(ctx context.Context, params
 }
 
 type GetFindingsPublicationConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetFindingsPublicationConfigurationOutput struct {
@@ -38,6 +39,8 @@ type GetFindingsPublicationConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFindingsPublicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -100,6 +100,8 @@ type CreateStateMachineInput struct {
 	// is STANDARD. You cannot update the type of a state machine once it has been
 	// created.
 	Type types.StateMachineType
+
+	noSmithyDocumentSerde
 }
 
 type CreateStateMachineOutput struct {
@@ -116,6 +118,8 @@ type CreateStateMachineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {

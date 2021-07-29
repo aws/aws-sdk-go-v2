@@ -12,6 +12,8 @@ type InvalidParameterException struct {
 	Message *string
 
 	ParameterName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -31,6 +33,8 @@ type LimitExceededException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -51,6 +55,8 @@ type ResourceAlreadyExistsException struct {
 
 	ResourceType *string
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -71,6 +77,8 @@ type ResourceInUseException struct {
 
 	ResourceType *string
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -91,6 +99,8 @@ type ResourceNotFoundException struct {
 
 	ResourceType *string
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -111,6 +121,8 @@ type ResourcePreconditionNotMetException struct {
 
 	ResourceType *string
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourcePreconditionNotMetException) Error() string {

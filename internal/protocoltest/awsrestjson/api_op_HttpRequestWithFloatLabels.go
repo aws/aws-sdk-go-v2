@@ -31,11 +31,15 @@ type HttpRequestWithFloatLabelsInput struct {
 
 	// This member is required.
 	Float *float32
+
+	noSmithyDocumentSerde
 }
 
 type HttpRequestWithFloatLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpRequestWithFloatLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

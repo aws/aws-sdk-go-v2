@@ -40,11 +40,15 @@ type DeleteImagePermissionsInput struct {
 	//
 	// This member is required.
 	SharedAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteImagePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

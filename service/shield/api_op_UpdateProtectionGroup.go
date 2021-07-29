@@ -76,11 +76,15 @@ type UpdateProtectionGroupInput struct {
 	// Pattern to BY_RESOURCE_TYPE and you must not set it for any other Pattern
 	// setting.
 	ResourceType types.ProtectedResourceType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProtectionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

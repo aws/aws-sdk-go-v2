@@ -10,6 +10,8 @@ import (
 // Thrown when a tunnel limit is exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -27,6 +29,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Thrown when an operation is attempted on a resource that does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

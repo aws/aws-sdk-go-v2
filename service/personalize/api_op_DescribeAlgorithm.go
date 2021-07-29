@@ -33,6 +33,8 @@ type DescribeAlgorithmInput struct {
 	//
 	// This member is required.
 	AlgorithmArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAlgorithmOutput struct {
@@ -42,6 +44,8 @@ type DescribeAlgorithmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {

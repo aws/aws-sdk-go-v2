@@ -45,6 +45,8 @@ type GetFunctionConcurrencyInput struct {
 	//
 	// This member is required.
 	FunctionName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFunctionConcurrencyOutput struct {
@@ -54,6 +56,8 @@ type GetFunctionConcurrencyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {

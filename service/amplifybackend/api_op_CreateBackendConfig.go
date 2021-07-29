@@ -36,6 +36,8 @@ type CreateBackendConfigInput struct {
 
 	// The app ID for the backend manager.
 	BackendManagerAppId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBackendConfigOutput struct {
@@ -54,6 +56,8 @@ type CreateBackendConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackendConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

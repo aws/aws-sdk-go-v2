@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Contains data about a job execution.
 type JobExecution struct {
 
@@ -42,6 +46,8 @@ type JobExecution struct {
 	// The version of the job execution. Job execution versions are incremented each
 	// time they are updated by a device.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains data about the state of a job execution.
@@ -57,6 +63,8 @@ type JobExecutionState struct {
 	// The version of the job execution. Job execution versions are incremented each
 	// time they are updated by a device.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains a subset of information about a job execution.
@@ -81,4 +89,8 @@ type JobExecutionSummary struct {
 	// The version of the job execution. Job execution versions are incremented each
 	// time AWS IoT Jobs receives an update from a device.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

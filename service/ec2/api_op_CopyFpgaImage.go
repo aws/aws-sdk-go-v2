@@ -54,6 +54,8 @@ type CopyFpgaImageInput struct {
 
 	// The name for the new AFI. The default is the name of the source AFI.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type CopyFpgaImageOutput struct {
@@ -63,6 +65,8 @@ type CopyFpgaImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyFpgaImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

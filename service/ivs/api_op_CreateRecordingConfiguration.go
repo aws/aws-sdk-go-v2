@@ -50,6 +50,8 @@ type CreateRecordingConfigurationInput struct {
 
 	// Array of 1-50 maps, each of the form string:string (key:value).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRecordingConfigurationOutput struct {
@@ -59,6 +61,8 @@ type CreateRecordingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRecordingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

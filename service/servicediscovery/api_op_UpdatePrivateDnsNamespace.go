@@ -45,6 +45,8 @@ type UpdatePrivateDnsNamespaceInput struct {
 	// operation twice. UpdaterRequestId can be any unique string (for example, a
 	// date/timestamp).
 	UpdaterRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePrivateDnsNamespaceOutput struct {
@@ -56,6 +58,8 @@ type UpdatePrivateDnsNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePrivateDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

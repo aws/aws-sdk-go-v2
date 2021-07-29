@@ -37,11 +37,15 @@ type RestoreDomainAccessInput struct {
 	//
 	// This member is required.
 	FleetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreDomainAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreDomainAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

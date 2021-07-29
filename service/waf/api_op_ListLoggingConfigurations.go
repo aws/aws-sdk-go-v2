@@ -48,6 +48,8 @@ type ListLoggingConfigurationsInput struct {
 	// from the previous response to get information about another batch of
 	// ListLoggingConfigurations.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLoggingConfigurationsOutput struct {
@@ -64,6 +66,8 @@ type ListLoggingConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLoggingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

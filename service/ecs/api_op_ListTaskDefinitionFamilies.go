@@ -66,6 +66,8 @@ type ListTaskDefinitionFamiliesInput struct {
 	// resulting output, be sure to keep the status value constant in each subsequent
 	// request.
 	Status types.TaskDefinitionFamilyStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListTaskDefinitionFamiliesOutput struct {
@@ -82,6 +84,8 @@ type ListTaskDefinitionFamiliesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTaskDefinitionFamiliesMiddlewares(stack *middleware.Stack, options Options) (err error) {

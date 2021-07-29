@@ -47,6 +47,8 @@ type SendDataToWirelessDeviceInput struct {
 
 	// Metadata about the message request.
 	WirelessMetadata *types.WirelessMetadata
+
+	noSmithyDocumentSerde
 }
 
 type SendDataToWirelessDeviceOutput struct {
@@ -56,6 +58,8 @@ type SendDataToWirelessDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendDataToWirelessDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

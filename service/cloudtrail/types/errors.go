@@ -15,6 +15,8 @@ import (
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
 type CloudTrailAccessNotEnabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudTrailAccessNotEnabledException) Error() string {
@@ -38,6 +40,8 @@ func (e *CloudTrailAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 // arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 type CloudTrailARNInvalidException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudTrailARNInvalidException) Error() string {
@@ -57,6 +61,8 @@ func (e *CloudTrailARNInvalidException) ErrorFault() smithy.ErrorFault { return 
 // notifications to an Amazon SNS topic that is in a suspended AWS account.
 type CloudTrailInvalidClientTokenIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudTrailInvalidClientTokenIdException) Error() string {
@@ -78,6 +84,8 @@ func (e *CloudTrailInvalidClientTokenIdException) ErrorFault() smithy.ErrorFault
 // Cannot set a CloudWatch Logs delivery for this region.
 type CloudWatchLogsDeliveryUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudWatchLogsDeliveryUnavailableException) Error() string {
@@ -102,6 +110,8 @@ func (e *CloudWatchLogsDeliveryUnavailableException) ErrorFault() smithy.ErrorFa
 // few minutes, and then try the operation again.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -120,6 +130,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // enabled, the operation throws the exception InsightNotEnabledException.
 type InsightNotEnabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsightNotEnabledException) Error() string {
@@ -141,6 +153,8 @@ func (e *InsightNotEnabledException) ErrorFault() smithy.ErrorFault { return smi
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
 type InsufficientDependencyServiceAccessPermissionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientDependencyServiceAccessPermissionException) Error() string {
@@ -163,6 +177,8 @@ func (e *InsufficientDependencyServiceAccessPermissionException) ErrorFault() sm
 // sufficient.
 type InsufficientEncryptionPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientEncryptionPolicyException) Error() string {
@@ -184,6 +200,8 @@ func (e *InsufficientEncryptionPolicyException) ErrorFault() smithy.ErrorFault {
 // This exception is thrown when the policy on the S3 bucket is not sufficient.
 type InsufficientS3BucketPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientS3BucketPolicyException) Error() string {
@@ -205,6 +223,8 @@ func (e *InsufficientS3BucketPolicyException) ErrorFault() smithy.ErrorFault {
 // This exception is thrown when the policy on the SNS topic is not sufficient.
 type InsufficientSnsTopicPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientSnsTopicPolicyException) Error() string {
@@ -226,6 +246,8 @@ func (e *InsufficientSnsTopicPolicyException) ErrorFault() smithy.ErrorFault {
 // This exception is thrown when the provided CloudWatch log group is not valid.
 type InvalidCloudWatchLogsLogGroupArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCloudWatchLogsLogGroupArnException) Error() string {
@@ -247,6 +269,8 @@ func (e *InvalidCloudWatchLogsLogGroupArnException) ErrorFault() smithy.ErrorFau
 // This exception is thrown when the provided role is not valid.
 type InvalidCloudWatchLogsRoleArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCloudWatchLogsRoleArnException) Error() string {
@@ -269,6 +293,8 @@ func (e *InvalidCloudWatchLogsRoleArnException) ErrorFault() smithy.ErrorFault {
 // EventCategory.
 type InvalidEventCategoryException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEventCategoryException) Error() string {
@@ -309,6 +335,8 @@ func (e *InvalidEventCategoryException) ErrorFault() smithy.ErrorFault { return 
 // value of read-only is invalid.
 type InvalidEventSelectorsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEventSelectorsException) Error() string {
@@ -327,6 +355,8 @@ func (e *InvalidEventSelectorsException) ErrorFault() smithy.ErrorFault { return
 // other than the region in which the trail was created.
 type InvalidHomeRegionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidHomeRegionException) Error() string {
@@ -347,6 +377,8 @@ func (e *InvalidHomeRegionException) ErrorFault() smithy.ErrorFault { return smi
 // type.
 type InvalidInsightSelectorsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInsightSelectorsException) Error() string {
@@ -366,6 +398,8 @@ func (e *InvalidInsightSelectorsException) ErrorFault() smithy.ErrorFault { retu
 // This exception is thrown when the KMS key ARN is invalid.
 type InvalidKmsKeyIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKmsKeyIdException) Error() string {
@@ -383,6 +417,8 @@ func (e *InvalidKmsKeyIdException) ErrorFault() smithy.ErrorFault { return smith
 // Occurs when an invalid lookup attribute is specified.
 type InvalidLookupAttributesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLookupAttributesException) Error() string {
@@ -402,6 +438,8 @@ func (e *InvalidLookupAttributesException) ErrorFault() smithy.ErrorFault { retu
 // This exception is thrown if the limit specified is invalid.
 type InvalidMaxResultsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMaxResultsException) Error() string {
@@ -420,6 +458,8 @@ func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smi
 // parameters. This exception is thrown if the token is invalid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -438,6 +478,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // valid.
 type InvalidParameterCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterCombinationException) Error() string {
@@ -459,6 +501,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 // This exception is thrown when the provided S3 bucket name is not valid.
 type InvalidS3BucketNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3BucketNameException) Error() string {
@@ -476,6 +520,8 @@ func (e *InvalidS3BucketNameException) ErrorFault() smithy.ErrorFault { return s
 // This exception is thrown when the provided S3 prefix is not valid.
 type InvalidS3PrefixException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3PrefixException) Error() string {
@@ -493,6 +539,8 @@ func (e *InvalidS3PrefixException) ErrorFault() smithy.ErrorFault { return smith
 // This exception is thrown when the provided SNS topic name is not valid.
 type InvalidSnsTopicNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSnsTopicNameException) Error() string {
@@ -511,6 +559,8 @@ func (e *InvalidSnsTopicNameException) ErrorFault() smithy.ErrorFault { return s
 // can also occur if there are duplicate tags or too many tags on the resource.
 type InvalidTagParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagParameterException) Error() string {
@@ -529,6 +579,8 @@ func (e *InvalidTagParameterException) ErrorFault() smithy.ErrorFault { return s
 // the end time or the time range is outside the range of possible values.
 type InvalidTimeRangeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTimeRangeException) Error() string {
@@ -546,6 +598,8 @@ func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smit
 // Reserved for future use.
 type InvalidTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTokenException) Error() string {
@@ -579,6 +633,8 @@ func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 // example, 192.168.5.4)
 type InvalidTrailNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTrailNameException) Error() string {
@@ -597,6 +653,8 @@ func (e *InvalidTrailNameException) ErrorFault() smithy.ErrorFault { return smit
 // the trail can’t be updated.
 type KmsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KmsException) Error() string {
@@ -614,6 +672,8 @@ func (e *KmsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // This exception is no longer in use.
 type KmsKeyDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KmsKeyDisabledException) Error() string {
@@ -634,6 +694,8 @@ func (e *KmsKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy
 // region.
 type KmsKeyNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KmsKeyNotFoundException) Error() string {
@@ -651,6 +713,8 @@ func (e *KmsKeyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // This exception is thrown when the maximum number of trails is reached.
 type MaximumNumberOfTrailsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaximumNumberOfTrailsExceededException) Error() string {
@@ -676,6 +740,8 @@ func (e *MaximumNumberOfTrailsExceededException) ErrorFault() smithy.ErrorFault 
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
 type NotOrganizationMasterAccountException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotOrganizationMasterAccountException) Error() string {
@@ -697,6 +763,8 @@ func (e *NotOrganizationMasterAccountException) ErrorFault() smithy.ErrorFault {
 // This exception is thrown when the requested operation is not permitted.
 type OperationNotPermittedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotPermittedException) Error() string {
@@ -718,6 +786,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
 type OrganizationNotInAllFeaturesModeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationNotInAllFeaturesModeException) Error() string {
@@ -741,6 +811,8 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFau
 // credentials of an account that belongs to an organization.
 type OrganizationsNotInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationsNotInUseException) Error() string {
@@ -758,6 +830,8 @@ func (e *OrganizationsNotInUseException) ErrorFault() smithy.ErrorFault { return
 // This exception is thrown when the specified resource is not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -776,6 +850,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // CloudTrail.
 type ResourceTypeNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceTypeNotSupportedException) Error() string {
@@ -795,6 +871,8 @@ func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { ret
 // This exception is thrown when the specified S3 bucket does not exist.
 type S3BucketDoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *S3BucketDoesNotExistException) Error() string {
@@ -813,6 +891,8 @@ func (e *S3BucketDoesNotExistException) ErrorFault() smithy.ErrorFault { return 
 // limit is 50.
 type TagsLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagsLimitExceededException) Error() string {
@@ -830,6 +910,8 @@ func (e *TagsLimitExceededException) ErrorFault() smithy.ErrorFault { return smi
 // This exception is thrown when the specified trail already exists.
 type TrailAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrailAlreadyExistsException) Error() string {
@@ -847,6 +929,8 @@ func (e *TrailAlreadyExistsException) ErrorFault() smithy.ErrorFault { return sm
 // This exception is thrown when the trail with the given name is not found.
 type TrailNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrailNotFoundException) Error() string {
@@ -864,6 +948,8 @@ func (e *TrailNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.
 // This exception is no longer in use.
 type TrailNotProvidedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrailNotProvidedException) Error() string {
@@ -881,6 +967,8 @@ func (e *TrailNotProvidedException) ErrorFault() smithy.ErrorFault { return smit
 // This exception is thrown when the requested operation is not supported.
 type UnsupportedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {

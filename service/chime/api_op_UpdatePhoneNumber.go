@@ -46,6 +46,8 @@ type UpdatePhoneNumberInput struct {
 
 	// The product type.
 	ProductType types.PhoneNumberProductType
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePhoneNumberOutput struct {
@@ -55,6 +57,8 @@ type UpdatePhoneNumberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

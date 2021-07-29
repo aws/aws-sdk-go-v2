@@ -53,6 +53,8 @@ type GetPercentilesInput struct {
 
 	// The query version.
 	QueryVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPercentilesOutput struct {
@@ -62,6 +64,8 @@ type GetPercentilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPercentilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

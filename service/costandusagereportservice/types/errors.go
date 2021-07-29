@@ -11,6 +11,8 @@ import (
 // different report name.
 type DuplicateReportNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateReportNameException) Error() string {
@@ -29,6 +31,8 @@ func (e *DuplicateReportNameException) ErrorFault() smithy.ErrorFault { return s
 // later.
 type InternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalErrorException) Error() string {
@@ -47,6 +51,8 @@ func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 // delete an existing report.
 type ReportLimitReachedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReportLimitReachedException) Error() string {
@@ -64,6 +70,8 @@ func (e *ReportLimitReachedException) ErrorFault() smithy.ErrorFault { return sm
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

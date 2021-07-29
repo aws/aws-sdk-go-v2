@@ -67,6 +67,8 @@ type BatchPutDocumentInput struct {
 	// BatchPutDocument operation. For more information, see IAM Roles for Amazon
 	// Kendra (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html).
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchPutDocumentOutput struct {
@@ -82,6 +84,8 @@ type BatchPutDocumentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchPutDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {

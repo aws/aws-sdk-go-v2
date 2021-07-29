@@ -53,6 +53,8 @@ type ModifyLaunchTemplateInput struct {
 	// The name of the launch template. You must specify either the launch template ID
 	// or launch template name in the request.
 	LaunchTemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyLaunchTemplateOutput struct {
@@ -62,6 +64,8 @@ type ModifyLaunchTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyLaunchTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

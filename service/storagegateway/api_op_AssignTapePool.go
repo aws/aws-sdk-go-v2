@@ -54,6 +54,8 @@ type AssignTapePoolInput struct {
 	// retention lock. This parameter is set to true by default for calls from the
 	// console. Valid values: TRUE | FALSE
 	BypassGovernanceRetention bool
+
+	noSmithyDocumentSerde
 }
 
 type AssignTapePoolOutput struct {
@@ -64,6 +66,8 @@ type AssignTapePoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssignTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

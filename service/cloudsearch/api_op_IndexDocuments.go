@@ -39,6 +39,8 @@ type IndexDocumentsInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of an IndexDocuments request. Contains the status of the indexing
@@ -50,6 +52,8 @@ type IndexDocumentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIndexDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

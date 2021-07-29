@@ -89,6 +89,8 @@ type DescribeGameSessionDetailsInput struct {
 	// Game session status to filter results on. Possible game session statuses include
 	// ACTIVE, TERMINATED, ACTIVATING and TERMINATING (the last two are transitory).
 	StatusFilter *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -104,6 +106,8 @@ type DescribeGameSessionDetailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGameSessionDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

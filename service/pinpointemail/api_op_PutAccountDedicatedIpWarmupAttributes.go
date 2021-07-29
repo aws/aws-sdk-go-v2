@@ -34,6 +34,8 @@ type PutAccountDedicatedIpWarmupAttributesInput struct {
 	// Set to true to enable the automatic warm-up feature, or set to false to disable
 	// it.
 	AutoWarmupEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -41,6 +43,8 @@ type PutAccountDedicatedIpWarmupAttributesInput struct {
 type PutAccountDedicatedIpWarmupAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccountDedicatedIpWarmupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

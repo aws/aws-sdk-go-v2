@@ -35,6 +35,8 @@ type GenerateChangeSetInput struct {
 
 	// The format for the change set.
 	ChangesetFormat types.OutputFormat
+
+	noSmithyDocumentSerde
 }
 
 type GenerateChangeSetOutput struct {
@@ -44,6 +46,8 @@ type GenerateChangeSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

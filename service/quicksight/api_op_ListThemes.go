@@ -52,6 +52,8 @@ type ListThemesInput struct {
 	// * QUICKSIGHT -
 	// Display only the starting themes defined by QuickSight.
 	Type types.ThemeType
+
+	noSmithyDocumentSerde
 }
 
 type ListThemesOutput struct {
@@ -70,6 +72,8 @@ type ListThemesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThemesMiddlewares(stack *middleware.Stack, options Options) (err error) {

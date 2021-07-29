@@ -42,6 +42,8 @@ type ListFlowExecutionMessagesInput struct {
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFlowExecutionMessagesOutput struct {
@@ -55,6 +57,8 @@ type ListFlowExecutionMessagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFlowExecutionMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

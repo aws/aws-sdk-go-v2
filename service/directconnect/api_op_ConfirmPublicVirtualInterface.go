@@ -35,6 +35,8 @@ type ConfirmPublicVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type ConfirmPublicVirtualInterfaceOutput struct {
@@ -78,6 +80,8 @@ type ConfirmPublicVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmPublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

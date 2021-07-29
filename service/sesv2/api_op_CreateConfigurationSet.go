@@ -62,6 +62,8 @@ type CreateConfigurationSetInput struct {
 	// An object that defines the open and click tracking options for emails that you
 	// send using the configuration set.
 	TrackingOptions *types.TrackingOptions
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -69,6 +71,8 @@ type CreateConfigurationSetInput struct {
 type CreateConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

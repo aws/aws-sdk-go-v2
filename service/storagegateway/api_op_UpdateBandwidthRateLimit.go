@@ -53,6 +53,8 @@ type UpdateBandwidthRateLimitInput struct {
 
 	// The average upload bandwidth rate limit in bits per second.
 	AverageUploadRateLimitInBitsPerSec *int64
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
@@ -65,6 +67,8 @@ type UpdateBandwidthRateLimitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBandwidthRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

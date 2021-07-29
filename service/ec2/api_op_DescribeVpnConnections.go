@@ -90,6 +90,8 @@ type DescribeVpnConnectionsInput struct {
 
 	// One or more VPN connection IDs. Default: Describes your VPN connections.
 	VpnConnectionIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeVpnConnections.
@@ -100,6 +102,8 @@ type DescribeVpnConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpnConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -97,6 +97,8 @@ type CreateRemoteAccessSessionInput struct {
 	// remoteDebugEnabled is set to true. Remote debugging is no longer supported
 	// (https://docs.aws.amazon.com/devicefarm/latest/developerguide/history.html).
 	SshPublicKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the server response from a request to create a remote access session.
@@ -108,6 +110,8 @@ type CreateRemoteAccessSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRemoteAccessSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

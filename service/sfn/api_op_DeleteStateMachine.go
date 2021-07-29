@@ -35,11 +35,15 @@ type DeleteStateMachineInput struct {
 	//
 	// This member is required.
 	StateMachineArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStateMachineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStateMachineMiddlewares(stack *middleware.Stack, options Options) (err error) {

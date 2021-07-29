@@ -35,6 +35,8 @@ type JsonTimestampsInput struct {
 	HttpDate *time.Time
 
 	Normal *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type JsonTimestampsOutput struct {
@@ -48,6 +50,8 @@ type JsonTimestampsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationJsonTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type UpdatePipelineStatusInput struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // When you update status for a pipeline, Elastic Transcoder returns the values
@@ -60,6 +62,8 @@ type UpdatePipelineStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePipelineStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

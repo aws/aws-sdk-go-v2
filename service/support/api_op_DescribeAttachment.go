@@ -47,6 +47,8 @@ type DescribeAttachmentInput struct {
 	//
 	// This member is required.
 	AttachmentId *string
+
+	noSmithyDocumentSerde
 }
 
 // The content and file name of the attachment returned by the DescribeAttachment
@@ -61,6 +63,8 @@ type DescribeAttachmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -95,6 +95,8 @@ type UpdateQualificationTypeInput struct {
 	// The number of seconds the Worker has to complete the Qualification test,
 	// starting from the time the Worker requests the Qualification.
 	TestDurationInSeconds *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQualificationTypeOutput struct {
@@ -104,6 +106,8 @@ type UpdateQualificationTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

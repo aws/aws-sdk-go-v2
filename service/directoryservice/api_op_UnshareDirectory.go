@@ -40,6 +40,8 @@ type UnshareDirectoryInput struct {
 	//
 	// This member is required.
 	UnshareTarget *types.UnshareTarget
+
+	noSmithyDocumentSerde
 }
 
 type UnshareDirectoryOutput struct {
@@ -50,6 +52,8 @@ type UnshareDirectoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnshareDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

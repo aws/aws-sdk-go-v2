@@ -49,6 +49,8 @@ type DescribeImportImageTasksInput struct {
 
 	// A token that indicates the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImportImageTasksOutput struct {
@@ -63,6 +65,8 @@ type DescribeImportImageTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImportImageTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

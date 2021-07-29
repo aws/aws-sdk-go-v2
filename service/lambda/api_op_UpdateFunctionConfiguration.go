@@ -131,6 +131,8 @@ type UpdateFunctionConfigurationInput struct {
 	// information, see VPC Settings
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-vpc.html).
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Details about a function's configuration.
@@ -241,6 +243,8 @@ type UpdateFunctionConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFunctionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

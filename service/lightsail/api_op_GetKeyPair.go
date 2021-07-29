@@ -33,6 +33,8 @@ type GetKeyPairInput struct {
 	//
 	// This member is required.
 	KeyPairName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetKeyPairOutput struct {
@@ -42,6 +44,8 @@ type GetKeyPairOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

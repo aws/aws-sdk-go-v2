@@ -47,6 +47,8 @@ type DeleteAccountSettingInput struct {
 	// explicitly overrides these settings. If this field is omitted, the setting is
 	// changed only for the authenticated user.
 	PrincipalArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccountSettingOutput struct {
@@ -56,6 +58,8 @@ type DeleteAccountSettingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccountSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type PutImageTagMutabilityInput struct {
 	// which to update the image tag mutability settings. If you do not specify a
 	// registry, the default registry is assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutImageTagMutabilityOutput struct {
@@ -63,6 +65,8 @@ type PutImageTagMutabilityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutImageTagMutabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {

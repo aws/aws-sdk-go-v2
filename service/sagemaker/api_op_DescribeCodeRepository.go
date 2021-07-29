@@ -34,6 +34,8 @@ type DescribeCodeRepositoryInput struct {
 	//
 	// This member is required.
 	CodeRepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCodeRepositoryOutput struct {
@@ -66,6 +68,8 @@ type DescribeCodeRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

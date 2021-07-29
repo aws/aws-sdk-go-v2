@@ -97,12 +97,16 @@ type ContinueUpdateRollbackInput struct {
 	// CloudFormation uses a temporary session that is generated from your user
 	// credentials.
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for a ContinueUpdateRollback action.
 type ContinueUpdateRollbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationContinueUpdateRollbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

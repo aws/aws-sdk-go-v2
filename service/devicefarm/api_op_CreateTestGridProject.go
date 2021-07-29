@@ -40,6 +40,8 @@ type CreateTestGridProjectInput struct {
 
 	// The VPC security groups and subnets that are attached to a project.
 	VpcConfig *types.TestGridVpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateTestGridProjectOutput struct {
@@ -49,6 +51,8 @@ type CreateTestGridProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

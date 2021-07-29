@@ -58,6 +58,8 @@ type PutEmailIdentityMailFromAttributesInput struct {
 	// a "From" address if the MAIL FROM domain is a destination for feedback
 	// forwarding emails.
 	MailFromDomain *string
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -65,6 +67,8 @@ type PutEmailIdentityMailFromAttributesInput struct {
 type PutEmailIdentityMailFromAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEmailIdentityMailFromAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

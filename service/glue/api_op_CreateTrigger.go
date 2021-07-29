@@ -74,6 +74,8 @@ type CreateTriggerInput struct {
 
 	// The name of the workflow associated with the trigger.
 	WorkflowName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTriggerOutput struct {
@@ -83,6 +85,8 @@ type CreateTriggerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {

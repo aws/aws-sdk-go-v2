@@ -39,6 +39,8 @@ type ListComponentsInput struct {
 
 	// The scope of the components to list. Default: PRIVATE
 	Scope types.ComponentVisibilityScope
+
+	noSmithyDocumentSerde
 }
 
 type ListComponentsOutput struct {
@@ -52,6 +54,8 @@ type ListComponentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

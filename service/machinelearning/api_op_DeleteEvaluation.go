@@ -35,6 +35,8 @@ type DeleteEvaluationInput struct {
 	//
 	// This member is required.
 	EvaluationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteEvaluation operation. The output indicates that
@@ -49,6 +51,8 @@ type DeleteEvaluationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type FailoverDBClusterInput struct {
 	// the instance identifier for an Amazon DocumentDB replica in the cluster. For
 	// example, mydbcluster-replica1.
 	TargetDBInstanceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type FailoverDBClusterOutput struct {
@@ -54,6 +56,8 @@ type FailoverDBClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFailoverDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

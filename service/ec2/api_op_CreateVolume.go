@@ -169,6 +169,8 @@ type CreateVolumeInput struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSVolumeTypes.html) in the
 	// Amazon Elastic Compute Cloud User Guide. Default: gp2
 	VolumeType types.VolumeType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a volume.
@@ -229,6 +231,8 @@ type CreateVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

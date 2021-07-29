@@ -28,6 +28,7 @@ func (c *Client) DescribeCrossAccountAccessRole(ctx context.Context, params *Des
 }
 
 type DescribeCrossAccountAccessRoleInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeCrossAccountAccessRoleOutput struct {
@@ -51,6 +52,8 @@ type DescribeCrossAccountAccessRoleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCrossAccountAccessRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

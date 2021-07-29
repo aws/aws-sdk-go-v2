@@ -34,6 +34,8 @@ type DescribeRemediationConfigurationsInput struct {
 	//
 	// This member is required.
 	ConfigRuleNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRemediationConfigurationsOutput struct {
@@ -43,6 +45,8 @@ type DescribeRemediationConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRemediationConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type GetBasePathMappingsInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of BasePathMapping resources. Use Custom Domain Names
@@ -56,6 +58,8 @@ type GetBasePathMappingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBasePathMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

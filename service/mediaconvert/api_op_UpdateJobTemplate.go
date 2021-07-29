@@ -67,6 +67,8 @@ type UpdateJobTemplateInput struct {
 	// an update at this interval from the time the service begins processing your job
 	// to the time it completes the transcode or encounters an error.
 	StatusUpdateInterval types.StatusUpdateInterval
+
+	noSmithyDocumentSerde
 }
 
 type UpdateJobTemplateOutput struct {
@@ -77,6 +79,8 @@ type UpdateJobTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateJobTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

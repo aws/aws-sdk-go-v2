@@ -44,6 +44,8 @@ type DisassociateResourceShareInput struct {
 
 	// The Amazon Resource Names (ARNs) of the resources.
 	ResourceArns []string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateResourceShareOutput struct {
@@ -57,6 +59,8 @@ type DisassociateResourceShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateResourceShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

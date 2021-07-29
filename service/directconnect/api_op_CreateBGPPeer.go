@@ -43,6 +43,8 @@ type CreateBGPPeerInput struct {
 
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBGPPeerOutput struct {
@@ -52,6 +54,8 @@ type CreateBGPPeerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBGPPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {

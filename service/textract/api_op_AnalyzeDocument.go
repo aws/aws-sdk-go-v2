@@ -77,6 +77,8 @@ type AnalyzeDocumentInput struct {
 	// Sets the configuration for the human in the loop workflow for analyzing
 	// documents.
 	HumanLoopConfig *types.HumanLoopConfig
+
+	noSmithyDocumentSerde
 }
 
 type AnalyzeDocumentOutput struct {
@@ -95,6 +97,8 @@ type AnalyzeDocumentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAnalyzeDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {

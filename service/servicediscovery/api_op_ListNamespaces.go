@@ -49,6 +49,8 @@ type ListNamespacesInput struct {
 	// namespaces matched the specified criteria but that subsequent groups of
 	// MaxResults namespaces do contain namespaces that match the criteria.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListNamespacesOutput struct {
@@ -68,6 +70,8 @@ type ListNamespacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

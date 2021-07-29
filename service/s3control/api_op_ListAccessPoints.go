@@ -82,6 +82,8 @@ type ListAccessPointsInput struct {
 	// continuation token in the NextToken field, then providing that value here causes
 	// Amazon S3 to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAccessPointsOutput struct {
@@ -97,6 +99,8 @@ type ListAccessPointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccessPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -62,11 +62,15 @@ type ResumeProcessesInput struct {
 	// If you omit this
 	// parameter, all processes are specified.
 	ScalingProcesses []string
+
+	noSmithyDocumentSerde
 }
 
 type ResumeProcessesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResumeProcessesMiddlewares(stack *middleware.Stack, options Options) (err error) {

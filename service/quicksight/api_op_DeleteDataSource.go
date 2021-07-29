@@ -39,6 +39,8 @@ type DeleteDataSourceInput struct {
 	//
 	// This member is required.
 	DataSourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDataSourceOutput struct {
@@ -58,6 +60,8 @@ type DeleteDataSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

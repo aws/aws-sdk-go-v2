@@ -31,6 +31,8 @@ type GetCompatibleKafkaVersionsInput struct {
 
 	// The Amazon Resource Name (ARN) of the cluster check.
 	ClusterArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCompatibleKafkaVersionsOutput struct {
@@ -40,6 +42,8 @@ type GetCompatibleKafkaVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCompatibleKafkaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

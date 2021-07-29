@@ -36,6 +36,8 @@ type UpdateDiscovererInput struct {
 
 	// The description of the discoverer to update.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDiscovererOutput struct {
@@ -60,6 +62,8 @@ type UpdateDiscovererOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {

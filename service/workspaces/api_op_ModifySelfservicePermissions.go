@@ -41,11 +41,15 @@ type ModifySelfservicePermissionsInput struct {
 	//
 	// This member is required.
 	SelfservicePermissions *types.SelfservicePermissions
+
+	noSmithyDocumentSerde
 }
 
 type ModifySelfservicePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifySelfservicePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

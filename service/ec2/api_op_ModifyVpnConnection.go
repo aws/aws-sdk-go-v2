@@ -82,6 +82,8 @@ type ModifyVpnConnectionInput struct {
 
 	// The ID of the virtual private gateway at the AWS side of the VPN connection.
 	VpnGatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyVpnConnectionOutput struct {
@@ -91,6 +93,8 @@ type ModifyVpnConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyVpnConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type GetCompatibleElasticsearchVersionsInput struct {
 	// number and can contain the following characters: a-z (lowercase), 0-9, and -
 	// (hyphen).
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by GetCompatibleElasticsearchVersions operation.
@@ -49,6 +51,8 @@ type GetCompatibleElasticsearchVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCompatibleElasticsearchVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

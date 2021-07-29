@@ -166,6 +166,8 @@ type EncryptInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string
+
+	noSmithyDocumentSerde
 }
 
 type EncryptOutput struct {
@@ -184,6 +186,8 @@ type EncryptOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEncryptMiddlewares(stack *middleware.Stack, options Options) (err error) {

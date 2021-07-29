@@ -45,11 +45,15 @@ type PutNotificationChannelInput struct {
 	//
 	// This member is required.
 	SnsTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutNotificationChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

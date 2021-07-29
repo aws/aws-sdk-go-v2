@@ -43,6 +43,8 @@ type ListListenersInput struct {
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListListenersOutput struct {
@@ -56,6 +58,8 @@ type ListListenersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {

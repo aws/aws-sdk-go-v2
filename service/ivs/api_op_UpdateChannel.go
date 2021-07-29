@@ -64,6 +64,8 @@ type UpdateChannelInput struct {
 	// to viewers. The viewer’s video-quality choice is limited to the original input.
 	// Vertical resolution can be up to 480 and bitrate can be up to 1.5 Mbps.
 	Type types.ChannelType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateChannelOutput struct {
@@ -73,6 +75,8 @@ type UpdateChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

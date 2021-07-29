@@ -43,11 +43,15 @@ type UpdateDetectorVersionMetadataInput struct {
 	//
 	// This member is required.
 	DetectorVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDetectorVersionMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDetectorVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

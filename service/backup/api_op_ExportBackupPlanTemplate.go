@@ -32,6 +32,8 @@ type ExportBackupPlanTemplateInput struct {
 	//
 	// This member is required.
 	BackupPlanId *string
+
+	noSmithyDocumentSerde
 }
 
 type ExportBackupPlanTemplateOutput struct {
@@ -42,6 +44,8 @@ type ExportBackupPlanTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportBackupPlanTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

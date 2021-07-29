@@ -50,6 +50,8 @@ type ProvisionPermissionSetInput struct {
 	// TargetID is an AWS account identifier, typically a 10-12 digit string (For
 	// example, 123456789012).
 	TargetId *string
+
+	noSmithyDocumentSerde
 }
 
 type ProvisionPermissionSetOutput struct {
@@ -59,6 +61,8 @@ type ProvisionPermissionSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationProvisionPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

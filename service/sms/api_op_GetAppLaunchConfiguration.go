@@ -32,6 +32,8 @@ type GetAppLaunchConfigurationInput struct {
 
 	// The ID of the application.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAppLaunchConfigurationOutput struct {
@@ -52,6 +54,8 @@ type GetAppLaunchConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAppLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

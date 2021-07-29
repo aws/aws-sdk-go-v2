@@ -91,6 +91,8 @@ type AdminResetUserPasswordInput struct {
 	// * Amazon Cognito does not encrypt the the ClientMetadata value, so don't
 	// use it to provide sensitive information.
 	ClientMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to reset a user password as an
@@ -98,6 +100,8 @@ type AdminResetUserPasswordInput struct {
 type AdminResetUserPasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminResetUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

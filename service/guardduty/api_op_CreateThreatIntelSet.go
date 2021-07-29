@@ -66,6 +66,8 @@ type CreateThreatIntelSetInput struct {
 
 	// The tags to be added to a new threat list resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateThreatIntelSetOutput struct {
@@ -77,6 +79,8 @@ type CreateThreatIntelSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateThreatIntelSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

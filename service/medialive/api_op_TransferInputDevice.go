@@ -43,12 +43,16 @@ type TransferInputDeviceInput struct {
 
 	// An optional message for the recipient. Maximum 280 characters.
 	TransferMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for TransferInputDeviceResponse
 type TransferInputDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTransferInputDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

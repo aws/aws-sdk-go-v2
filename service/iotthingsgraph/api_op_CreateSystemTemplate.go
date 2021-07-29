@@ -39,6 +39,8 @@ type CreateSystemTemplateInput struct {
 	// The namespace version in which the system is to be created. If no value is
 	// specified, the latest version is used by default.
 	CompatibleNamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type CreateSystemTemplateOutput struct {
@@ -48,6 +50,8 @@ type CreateSystemTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSystemTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

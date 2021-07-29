@@ -60,6 +60,8 @@ type CreateInstanceInput struct {
 
 	// The name for your instance.
 	InstanceAlias *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateInstanceOutput struct {
@@ -72,6 +74,8 @@ type CreateInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

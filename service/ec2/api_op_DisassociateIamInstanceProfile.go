@@ -34,6 +34,8 @@ type DisassociateIamInstanceProfileInput struct {
 	//
 	// This member is required.
 	AssociationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateIamInstanceProfileOutput struct {
@@ -43,6 +45,8 @@ type DisassociateIamInstanceProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateIamInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

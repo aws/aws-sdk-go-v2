@@ -12,6 +12,8 @@ type BadRequestException struct {
 	Message *string
 
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -31,6 +33,8 @@ type ConflictException struct {
 	Message *string
 
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -50,6 +54,8 @@ type ForbiddenException struct {
 	Message *string
 
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -69,6 +75,8 @@ type InternalServerErrorException struct {
 	Message *string
 
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -88,6 +96,8 @@ type MethodNotAllowedException struct {
 	Message *string
 
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MethodNotAllowedException) Error() string {
@@ -107,6 +117,8 @@ type NotFoundException struct {
 	Message *string
 
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -126,6 +138,8 @@ type PayloadTooLargeException struct {
 	Message *string
 
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PayloadTooLargeException) Error() string {
@@ -145,6 +159,8 @@ type TooManyRequestsException struct {
 	Message *string
 
 	RequestID *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

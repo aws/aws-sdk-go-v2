@@ -43,6 +43,8 @@ type ResetCacheInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetCacheOutput struct {
@@ -53,6 +55,8 @@ type ResetCacheOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

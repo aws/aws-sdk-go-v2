@@ -46,6 +46,8 @@ type RemoveLFTagsFromResourceInput struct {
 	// table definitions, and other control information to manage your AWS Lake
 	// Formation environment.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveLFTagsFromResourceOutput struct {
@@ -55,6 +57,8 @@ type RemoveLFTagsFromResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveLFTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

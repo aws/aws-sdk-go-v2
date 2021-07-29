@@ -40,6 +40,8 @@ type DescribeCostCategoryDefinitionInput struct {
 
 	// The date when the Cost Category was effective.
 	EffectiveOn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCostCategoryDefinitionOutput struct {
@@ -50,6 +52,8 @@ type DescribeCostCategoryDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCostCategoryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -95,6 +95,8 @@ type ModifyDBInstanceInput struct {
 	// promoted to the primary instance after a failure of the existing primary
 	// instance. Default: 1 Valid values: 0-15
 	PromotionTier *int32
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBInstanceOutput struct {
@@ -104,6 +106,8 @@ type ModifyDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

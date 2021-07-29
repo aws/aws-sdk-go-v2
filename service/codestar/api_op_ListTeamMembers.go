@@ -40,6 +40,8 @@ type ListTeamMembersInput struct {
 	// The continuation token for the next set of results, if the results cannot be
 	// returned in one response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTeamMembersOutput struct {
@@ -55,6 +57,8 @@ type ListTeamMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTeamMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

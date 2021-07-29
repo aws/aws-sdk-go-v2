@@ -46,6 +46,8 @@ type CreateUserPoolDomainInput struct {
 	// hosted domain and custom domains, see Configuring a User Pool Domain
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-assign-domain.html).
 	CustomDomainConfig *types.CustomDomainConfigType
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserPoolDomainOutput struct {
@@ -56,6 +58,8 @@ type CreateUserPoolDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

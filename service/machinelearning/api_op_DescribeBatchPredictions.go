@@ -118,6 +118,8 @@ type DescribeBatchPredictionsInput struct {
 	// Results are sorted by
 	// FilterVariable.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeBatchPredictions operation. The content is
@@ -133,6 +135,8 @@ type DescribeBatchPredictionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBatchPredictionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // Two conflicting operations have been made on the same resource.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -27,6 +29,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Exceeded the maximum limit for connections.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -44,6 +48,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Resource not found. Verify the connection resource ARN and try again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -61,6 +67,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // Resource not found. Verify the ARN for the host resource and try again.
 type ResourceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceUnavailableException) Error() string {
@@ -78,6 +86,8 @@ func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return s
 // The operation is not supported. Check the connection status and try again.
 type UnsupportedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {

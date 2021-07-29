@@ -41,6 +41,8 @@ type ListNamespacesInput struct {
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListNamespacesOutput struct {
@@ -61,6 +63,8 @@ type ListNamespacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type StopMultiplexInput struct {
 	//
 	// This member is required.
 	MultiplexId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for StopMultiplexResponse
@@ -72,6 +74,8 @@ type StopMultiplexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,11 +44,15 @@ type DeleteApplicationVersionInput struct {
 	// application version is deleted only from Elastic Beanstalk and the source bundle
 	// remains in Amazon S3.
 	DeleteSourceBundle *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

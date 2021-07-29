@@ -34,6 +34,8 @@ type GetRepositoryTriggersInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a get repository triggers operation.
@@ -47,6 +49,8 @@ type GetRepositoryTriggersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRepositoryTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {

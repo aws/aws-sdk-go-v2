@@ -42,11 +42,15 @@ type UntagAttendeeInput struct {
 	//
 	// This member is required.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 type UntagAttendeeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {

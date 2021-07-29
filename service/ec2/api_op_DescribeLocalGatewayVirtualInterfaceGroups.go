@@ -57,6 +57,8 @@ type DescribeLocalGatewayVirtualInterfaceGroupsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLocalGatewayVirtualInterfaceGroupsOutput struct {
@@ -70,6 +72,8 @@ type DescribeLocalGatewayVirtualInterfaceGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocalGatewayVirtualInterfaceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

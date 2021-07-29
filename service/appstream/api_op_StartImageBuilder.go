@@ -37,6 +37,8 @@ type StartImageBuilderInput struct {
 	// The version of the AppStream 2.0 agent to use for this image builder. To use the
 	// latest version of the AppStream 2.0 agent, specify [LATEST].
 	AppstreamAgentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type StartImageBuilderOutput struct {
@@ -46,6 +48,8 @@ type StartImageBuilderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type DeleteIdentitiesInput struct {
 	//
 	// This member is required.
 	IdentityIdsToDelete []string
+
+	noSmithyDocumentSerde
 }
 
 // Returned in response to a successful DeleteIdentities operation.
@@ -47,6 +49,8 @@ type DeleteIdentitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

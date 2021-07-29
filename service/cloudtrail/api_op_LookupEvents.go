@@ -100,6 +100,8 @@ type LookupEventsInput struct {
 	// returned. If the specified start time is after the specified end time, an error
 	// is returned.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains a response to a LookupEvents action.
@@ -119,6 +121,8 @@ type LookupEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationLookupEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

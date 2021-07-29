@@ -33,6 +33,8 @@ type DescribeBillingGroupInput struct {
 	//
 	// This member is required.
 	BillingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBillingGroupOutput struct {
@@ -57,6 +59,8 @@ type DescribeBillingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

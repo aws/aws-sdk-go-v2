@@ -43,11 +43,15 @@ type UpdateRelatedItemsInput struct {
 
 	// A token ensuring that the action is called only once with the specified details.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRelatedItemsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

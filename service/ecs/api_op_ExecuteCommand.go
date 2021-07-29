@@ -51,6 +51,8 @@ type ExecuteCommandInput struct {
 	// The name of the container to execute the command on. A container name only needs
 	// to be specified for tasks containing multiple containers.
 	Container *string
+
+	noSmithyDocumentSerde
 }
 
 type ExecuteCommandOutput struct {
@@ -78,6 +80,8 @@ type ExecuteCommandOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {

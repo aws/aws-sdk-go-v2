@@ -48,6 +48,8 @@ type DescribeTargetGroupsInput struct {
 
 	// The Amazon Resource Names (ARN) of the target groups.
 	TargetGroupArns []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTargetGroupsOutput struct {
@@ -61,6 +63,8 @@ type DescribeTargetGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

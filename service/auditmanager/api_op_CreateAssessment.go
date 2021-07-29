@@ -61,6 +61,8 @@ type CreateAssessmentInput struct {
 
 	// The tags associated with the assessment.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssessmentOutput struct {
@@ -72,6 +74,8 @@ type CreateAssessmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

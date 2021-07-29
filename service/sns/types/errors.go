@@ -10,6 +10,8 @@ import (
 // Indicates that the user has been denied access to the requested resource.
 type AuthorizationErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationErrorException) Error() string {
@@ -28,6 +30,8 @@ func (e *AuthorizationErrorException) ErrorFault() smithy.ErrorFault { return sm
 // operations sequentially.
 type ConcurrentAccessException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentAccessException) Error() string {
@@ -45,6 +49,8 @@ func (e *ConcurrentAccessException) ErrorFault() smithy.ErrorFault { return smit
 // Exception error indicating endpoint disabled.
 type EndpointDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EndpointDisabledException) Error() string {
@@ -64,6 +70,8 @@ func (e *EndpointDisabledException) ErrorFault() smithy.ErrorFault { return smit
 // Services Support Center.
 type FilterPolicyLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FilterPolicyLimitExceededException) Error() string {
@@ -83,6 +91,8 @@ func (e *FilterPolicyLimitExceededException) ErrorFault() smithy.ErrorFault {
 // Indicates an internal service error.
 type InternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalErrorException) Error() string {
@@ -101,6 +111,8 @@ func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 // constraints.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -119,6 +131,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // constraints.
 type InvalidParameterValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -137,6 +151,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // your request using Signature Version 4.
 type InvalidSecurityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSecurityException) Error() string {
@@ -155,6 +171,8 @@ func (e *InvalidSecurityException) ErrorFault() smithy.ErrorFault { return smith
 // to.
 type KMSAccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSAccessDeniedException) Error() string {
@@ -173,6 +191,8 @@ func (e *KMSAccessDeniedException) ErrorFault() smithy.ErrorFault { return smith
 // enabled.
 type KMSDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSDisabledException) Error() string {
@@ -194,6 +214,8 @@ func (e *KMSDisabledException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Key Management Service Developer Guide.
 type KMSInvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSInvalidStateException) Error() string {
@@ -212,6 +234,8 @@ func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smith
 // found.
 type KMSNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSNotFoundException) Error() string {
@@ -229,6 +253,8 @@ func (e *KMSNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The Amazon Web Services access key ID needs a subscription for the service.
 type KMSOptInRequired struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSOptInRequired) Error() string {
@@ -249,6 +275,8 @@ func (e *KMSOptInRequired) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // in the Key Management Service Developer Guide.
 type KMSThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSThrottlingException) Error() string {
@@ -266,6 +294,8 @@ func (e *KMSThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.
 // Indicates that the requested resource does not exist.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -284,6 +314,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // from your account. You can't send SMS messages to phone numbers that opt out.
 type OptedOutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OptedOutException) Error() string {
@@ -301,6 +333,8 @@ func (e *OptedOutException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Exception error indicating platform application disabled.
 type PlatformApplicationDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PlatformApplicationDisabledException) Error() string {
@@ -323,6 +357,8 @@ func (e *PlatformApplicationDisabledException) ErrorFault() smithy.ErrorFault {
 // exists.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -341,6 +377,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // a short while and then retry the operation.
 type StaleTagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StaleTagException) Error() string {
@@ -359,6 +397,8 @@ func (e *StaleTagException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // subscriptions.
 type SubscriptionLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionLimitExceededException) Error() string {
@@ -378,6 +418,8 @@ func (e *SubscriptionLimitExceededException) ErrorFault() smithy.ErrorFault {
 // Can't add more than 50 tags to a topic.
 type TagLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagLimitExceededException) Error() string {
@@ -396,6 +438,8 @@ func (e *TagLimitExceededException) ErrorFault() smithy.ErrorFault { return smit
 // then retry it.
 type TagPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagPolicyException) Error() string {
@@ -414,6 +458,8 @@ func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // exceeds the limit for your account.
 type ThrottledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottledException) Error() string {
@@ -431,6 +477,8 @@ func (e *ThrottledException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Indicates that the customer already owns the maximum allowed number of topics.
 type TopicLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TopicLimitExceededException) Error() string {
@@ -449,6 +497,8 @@ func (e *TopicLimitExceededException) ErrorFault() smithy.ErrorFault { return sm
 // constraints.
 type UserErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserErrorException) Error() string {
@@ -466,6 +516,8 @@ func (e *UserErrorException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Indicates that a parameter in the request is invalid.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {
@@ -485,6 +537,8 @@ type VerificationException struct {
 	Message *string
 
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *VerificationException) Error() string {

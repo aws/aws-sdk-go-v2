@@ -77,6 +77,8 @@ type PutOrganizationConformancePackInput struct {
 	// conformance pack template (max size: 300 KB). You must have access to read
 	// Amazon S3 bucket.
 	TemplateS3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 type PutOrganizationConformancePackOutput struct {
@@ -86,6 +88,8 @@ type PutOrganizationConformancePackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutOrganizationConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {

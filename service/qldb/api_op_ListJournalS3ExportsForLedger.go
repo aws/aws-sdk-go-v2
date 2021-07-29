@@ -51,6 +51,8 @@ type ListJournalS3ExportsForLedgerInput struct {
 	// ListJournalS3ExportsForLedger call, then you should use that value as input
 	// here.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListJournalS3ExportsForLedgerOutput struct {
@@ -69,6 +71,8 @@ type ListJournalS3ExportsForLedgerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJournalS3ExportsForLedgerMiddlewares(stack *middleware.Stack, options Options) (err error) {

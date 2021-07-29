@@ -33,6 +33,8 @@ type BatchGetBuildsInput struct {
 	//
 	// This member is required.
 	Ids []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetBuildsOutput struct {
@@ -45,6 +47,8 @@ type BatchGetBuildsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetBuildsMiddlewares(stack *middleware.Stack, options Options) (err error) {

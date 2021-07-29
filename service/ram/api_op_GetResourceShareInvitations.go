@@ -42,6 +42,8 @@ type GetResourceShareInvitationsInput struct {
 
 	// The Amazon Resource Names (ARN) of the invitations.
 	ResourceShareInvitationArns []string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceShareInvitationsOutput struct {
@@ -55,6 +57,8 @@ type GetResourceShareInvitationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceShareInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type RemoveFlowMediaStreamInput struct {
 	//
 	// This member is required.
 	MediaStreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveFlowMediaStreamOutput struct {
@@ -50,6 +52,8 @@ type RemoveFlowMediaStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveFlowMediaStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type DeleteHsmInput struct {
 	//
 	// This member is required.
 	HsmArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the DeleteHsm operation.
@@ -56,6 +58,8 @@ type DeleteHsmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {

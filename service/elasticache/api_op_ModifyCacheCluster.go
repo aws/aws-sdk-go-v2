@@ -269,6 +269,8 @@ type ModifyCacheClusterInput struct {
 	// The daily time range (in UTC) during which ElastiCache begins taking a daily
 	// snapshot of your cluster.
 	SnapshotWindow *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyCacheClusterOutput struct {
@@ -278,6 +280,8 @@ type ModifyCacheClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

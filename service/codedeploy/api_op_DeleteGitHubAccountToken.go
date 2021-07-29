@@ -31,6 +31,8 @@ type DeleteGitHubAccountTokenInput struct {
 
 	// The name of the GitHub account connection to delete.
 	TokenName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteGitHubAccountToken operation.
@@ -41,6 +43,8 @@ type DeleteGitHubAccountTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGitHubAccountTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

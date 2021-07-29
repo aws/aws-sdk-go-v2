@@ -34,6 +34,8 @@ type DescribeRestoreJobInput struct {
 	//
 	// This member is required.
 	RestoreJobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRestoreJobOutput struct {
@@ -92,6 +94,8 @@ type DescribeRestoreJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRestoreJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

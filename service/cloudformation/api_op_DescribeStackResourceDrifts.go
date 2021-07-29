@@ -69,6 +69,8 @@ type DescribeStackResourceDriftsInput struct {
 	// *
 	// NOT_CHECKED: AWS CloudFormation does not currently return this value.
 	StackResourceDriftStatusFilters []types.StackResourceDriftStatus
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStackResourceDriftsOutput struct {
@@ -94,6 +96,8 @@ type DescribeStackResourceDriftsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStackResourceDriftsMiddlewares(stack *middleware.Stack, options Options) (err error) {

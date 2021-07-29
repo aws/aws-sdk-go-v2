@@ -37,11 +37,15 @@ type RevokeIpRulesInput struct {
 	//
 	// This member is required.
 	UserRules []string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeIpRulesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeIpRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

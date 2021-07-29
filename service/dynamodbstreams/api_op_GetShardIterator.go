@@ -67,6 +67,8 @@ type GetShardIteratorInput struct {
 
 	// The sequence number of a stream record in the shard from which to start reading.
 	SequenceNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetShardIterator operation.
@@ -79,6 +81,8 @@ type GetShardIteratorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetShardIteratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

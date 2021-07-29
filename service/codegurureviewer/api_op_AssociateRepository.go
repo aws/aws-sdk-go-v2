@@ -78,6 +78,8 @@ type AssociateRepositoryInput struct {
 	// name). Omitting the tag value is the same as using an empty string. Like tag
 	// keys, tag values are case sensitive.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateRepositoryOutput struct {
@@ -99,6 +101,8 @@ type AssociateRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

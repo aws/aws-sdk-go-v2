@@ -32,11 +32,15 @@ type DeleteAlgorithmInput struct {
 	//
 	// This member is required.
 	AlgorithmName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAlgorithmOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAlgorithmMiddlewares(stack *middleware.Stack, options Options) (err error) {

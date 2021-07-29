@@ -43,11 +43,15 @@ type DeleteScriptInput struct {
 	//
 	// This member is required.
 	ScriptId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteScriptOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {

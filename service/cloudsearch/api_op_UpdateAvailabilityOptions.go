@@ -53,6 +53,8 @@ type UpdateAvailabilityOptionsInput struct {
 	//
 	// This member is required.
 	MultiAZ *bool
+
+	noSmithyDocumentSerde
 }
 
 // The result of a UpdateAvailabilityOptions request. Contains the status of the
@@ -65,6 +67,8 @@ type UpdateAvailabilityOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAvailabilityOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

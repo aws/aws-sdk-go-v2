@@ -42,6 +42,7 @@ func (c *Client) DescribeEndpoints(ctx context.Context, params *DescribeEndpoint
 }
 
 type DescribeEndpointsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeEndpointsOutput struct {
@@ -53,6 +54,8 @@ type DescribeEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

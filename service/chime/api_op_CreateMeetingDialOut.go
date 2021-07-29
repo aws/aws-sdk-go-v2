@@ -54,6 +54,8 @@ type CreateMeetingDialOutInput struct {
 	//
 	// This member is required.
 	ToPhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateMeetingDialOutOutput struct {
@@ -63,6 +65,8 @@ type CreateMeetingDialOutOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMeetingDialOutMiddlewares(stack *middleware.Stack, options Options) (err error) {

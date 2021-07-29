@@ -46,6 +46,8 @@ type ListModelsInput struct {
 
 	// The status of the ML model.
 	Status types.ModelStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListModelsOutput struct {
@@ -60,6 +62,8 @@ type ListModelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

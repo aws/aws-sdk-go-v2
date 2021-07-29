@@ -46,11 +46,15 @@ type AddRoleToDBClusterInput struct {
 	// The name of the feature for the DB cluster that the IAM role is to be associated
 	// with. For the list of supported feature names, see DBEngineVersion.
 	FeatureName *string
+
+	noSmithyDocumentSerde
 }
 
 type AddRoleToDBClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddRoleToDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

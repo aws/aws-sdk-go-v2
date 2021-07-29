@@ -75,6 +75,8 @@ type CreateProjectVersionInput struct {
 
 	// A set of tags (key-value pairs) that you want to attach to the model.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateProjectVersionOutput struct {
@@ -85,6 +87,8 @@ type CreateProjectVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

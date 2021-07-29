@@ -47,6 +47,8 @@ type ListEmailIdentitiesInput struct {
 	// additional results. The value you specify has to be at least 0, and can be no
 	// more than 1000.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of all of the identities that you've attempted to verify for use with
@@ -65,6 +67,8 @@ type ListEmailIdentitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEmailIdentitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

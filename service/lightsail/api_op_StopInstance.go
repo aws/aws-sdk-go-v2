@@ -48,6 +48,8 @@ type StopInstanceInput struct {
 	// state. In any other state, your instance should stop normally without adding
 	// this parameter to your API request.
 	Force *bool
+
+	noSmithyDocumentSerde
 }
 
 type StopInstanceOutput struct {
@@ -59,6 +61,8 @@ type StopInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

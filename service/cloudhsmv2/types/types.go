@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -52,6 +53,8 @@ type Backup struct {
 
 	// The list of tags for the backup.
 	TagList []Tag
+
+	noSmithyDocumentSerde
 }
 
 // A policy that defines the number of days to retain backups.
@@ -63,6 +66,8 @@ type BackupRetentionPolicy struct {
 
 	// Use a value between 7 - 379.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains one or more certificates or a certificate signing request (CSR).
@@ -84,6 +89,8 @@ type Certificates struct {
 
 	// The HSM hardware certificate issued (signed) by the hardware manufacturer.
 	ManufacturerHardwareCertificate *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an AWS CloudHSM cluster.
@@ -135,6 +142,8 @@ type Cluster struct {
 	// The identifier (ID) of the virtual private cloud (VPC) that contains the
 	// cluster.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the backup that will be copied and created by the
@@ -154,6 +163,8 @@ type DestinationBackup struct {
 	// The AWS region that contains the source backup from which the new backup was
 	// copied.
 	SourceRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a hardware security module (HSM) in an AWS CloudHSM
@@ -185,6 +196,8 @@ type Hsm struct {
 
 	// The subnet that contains the HSM's elastic network interface (ENI).
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a tag. A tag is a key-value pair.
@@ -199,4 +212,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

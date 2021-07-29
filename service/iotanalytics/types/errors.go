@@ -10,6 +10,8 @@ import (
 // There was an internal failure.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -27,6 +29,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 // The request was not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -44,6 +48,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The command caused an internal limit to be exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -64,6 +70,8 @@ type ResourceAlreadyExistsException struct {
 
 	ResourceId  *string
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -81,6 +89,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // A resource with the specified name could not be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -98,6 +108,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The service is temporarily unavailable.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -115,6 +127,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

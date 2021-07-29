@@ -33,6 +33,8 @@ type BatchGetReportGroupsInput struct {
 	//
 	// This member is required.
 	ReportGroupArns []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetReportGroupsOutput struct {
@@ -46,6 +48,8 @@ type BatchGetReportGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetReportGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

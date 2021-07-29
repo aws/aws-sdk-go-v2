@@ -60,6 +60,8 @@ type CreateBucketInput struct {
 	// The tag keys and optional values to add to the bucket during creation. Use the
 	// TagResource action to tag the bucket after it's created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateBucketOutput struct {
@@ -74,6 +76,8 @@ type CreateBucketOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {

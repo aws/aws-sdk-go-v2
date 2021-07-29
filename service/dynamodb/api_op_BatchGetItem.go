@@ -161,6 +161,8 @@ type BatchGetItemInput struct {
 	// * NONE - No ConsumedCapacity details are included in the
 	// response.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchGetItem operation.
@@ -204,6 +206,8 @@ type BatchGetItemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -64,6 +64,8 @@ type UpdateDataSourceInput struct {
 
 	// The new service role ARN for the data source.
 	ServiceRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDataSourceOutput struct {
@@ -73,6 +75,8 @@ type UpdateDataSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -66,6 +66,8 @@ type DescribeJobInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the description of an Amazon S3 Glacier job.
@@ -169,6 +171,8 @@ type DescribeJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

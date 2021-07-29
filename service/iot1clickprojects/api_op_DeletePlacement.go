@@ -39,11 +39,15 @@ type DeletePlacementInput struct {
 	//
 	// This member is required.
 	ProjectName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePlacementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {

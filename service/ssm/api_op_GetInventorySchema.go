@@ -49,6 +49,8 @@ type GetInventorySchemaInput struct {
 
 	// The type of inventory item to return.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInventorySchemaOutput struct {
@@ -62,6 +64,8 @@ type GetInventorySchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInventorySchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

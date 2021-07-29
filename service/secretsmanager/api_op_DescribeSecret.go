@@ -69,6 +69,8 @@ type DescribeSecretInput struct {
 	//
 	// This member is required.
 	SecretId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSecretOutput struct {
@@ -147,6 +149,8 @@ type DescribeSecretOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {

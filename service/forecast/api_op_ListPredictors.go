@@ -62,6 +62,8 @@ type ListPredictorsInput struct {
 	// NextToken. To retrieve the next set of results, use the token in the next
 	// request. Tokens expire after 24 hours.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPredictorsOutput struct {
@@ -75,6 +77,8 @@ type ListPredictorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPredictorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

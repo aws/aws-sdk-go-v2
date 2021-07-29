@@ -76,6 +76,8 @@ type RecordActivityTaskHeartbeatInput struct {
 
 	// If specified, contains details about the progress of the task.
 	Details *string
+
+	noSmithyDocumentSerde
 }
 
 // Status information about an activity task.
@@ -88,6 +90,8 @@ type RecordActivityTaskHeartbeatOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRecordActivityTaskHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {

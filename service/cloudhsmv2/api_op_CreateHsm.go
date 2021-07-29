@@ -46,6 +46,8 @@ type CreateHsmInput struct {
 	// from the subnet that maps to the Availability Zone where you are creating the
 	// HSM. If you don't specify an IP address, one is chosen for you from that subnet.
 	IpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateHsmOutput struct {
@@ -55,6 +57,8 @@ type CreateHsmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHsmMiddlewares(stack *middleware.Stack, options Options) (err error) {

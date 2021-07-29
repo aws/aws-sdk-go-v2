@@ -48,6 +48,8 @@ type ListEnvironmentTemplateVersionsInput struct {
 	// of major or minor versions of an environment template, after the list of major
 	// or minor versions that was previously requested.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEnvironmentTemplateVersionsOutput struct {
@@ -64,6 +66,8 @@ type ListEnvironmentTemplateVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEnvironmentTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

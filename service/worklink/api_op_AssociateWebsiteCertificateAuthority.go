@@ -41,6 +41,8 @@ type AssociateWebsiteCertificateAuthorityInput struct {
 
 	// The certificate name to display.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateWebsiteCertificateAuthorityOutput struct {
@@ -50,6 +52,8 @@ type AssociateWebsiteCertificateAuthorityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateWebsiteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

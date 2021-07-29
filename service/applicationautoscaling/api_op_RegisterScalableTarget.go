@@ -244,11 +244,15 @@ type RegisterScalableTargetInput struct {
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-suspend-resume-scaling.html)
 	// in the Application Auto Scaling User Guide.
 	SuspendedState *types.SuspendedState
+
+	noSmithyDocumentSerde
 }
 
 type RegisterScalableTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterScalableTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

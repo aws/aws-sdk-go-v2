@@ -55,6 +55,8 @@ type DeleteGlobalReplicationGroupInput struct {
 	//
 	// This member is required.
 	RetainPrimaryReplicationGroup bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGlobalReplicationGroupOutput struct {
@@ -70,6 +72,8 @@ type DeleteGlobalReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

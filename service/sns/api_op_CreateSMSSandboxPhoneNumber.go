@@ -47,11 +47,15 @@ type CreateSMSSandboxPhoneNumberInput struct {
 
 	// The language to use for sending the OTP. The default value is en-US.
 	LanguageCode types.LanguageCodeString
+
+	noSmithyDocumentSerde
 }
 
 type CreateSMSSandboxPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

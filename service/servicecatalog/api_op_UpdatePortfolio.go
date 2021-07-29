@@ -58,6 +58,8 @@ type UpdatePortfolioInput struct {
 
 	// The tags to remove.
 	RemoveTags []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePortfolioOutput struct {
@@ -70,6 +72,8 @@ type UpdatePortfolioOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {

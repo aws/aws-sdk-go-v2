@@ -43,6 +43,8 @@ type GetPackageVersionHistoryInput struct {
 	// Used for pagination. Only necessary if a previous API call includes a non-null
 	// NextToken value. If provided, returns results for the next page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by GetPackageVersionHistory operation.
@@ -56,6 +58,8 @@ type GetPackageVersionHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPackageVersionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

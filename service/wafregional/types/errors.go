@@ -10,6 +10,8 @@ import (
 //
 type WAFBadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFBadRequestException) Error() string {
@@ -27,6 +29,8 @@ func (e *WAFBadRequestException) ErrorFault() smithy.ErrorFault { return smithy.
 // The name specified is invalid.
 type WAFDisallowedNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFDisallowedNameException) Error() string {
@@ -71,6 +75,8 @@ type WAFEntityMigrationException struct {
 
 	MigrationErrorType   MigrationErrorType
 	MigrationErrorReason *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFEntityMigrationException) Error() string {
@@ -89,6 +95,8 @@ func (e *WAFEntityMigrationException) ErrorFault() smithy.ErrorFault { return sm
 // valid. Retry your request.
 type WAFInternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInternalErrorException) Error() string {
@@ -107,6 +115,8 @@ func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smit
 // using an invalid account identifier.
 type WAFInvalidAccountException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidAccountException) Error() string {
@@ -141,6 +151,8 @@ func (e *WAFInvalidAccountException) ErrorFault() smithy.ErrorFault { return smi
 // in the specified WebACL.
 type WAFInvalidOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidOperationException) Error() string {
@@ -191,6 +203,8 @@ type WAFInvalidParameterException struct {
 	Field     ParameterExceptionField
 	Parameter *string
 	Reason    ParameterExceptionReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidParameterException) Error() string {
@@ -233,6 +247,8 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 // * Your policy must be composed using IAM Policy version 2012-10-17.
 type WAFInvalidPermissionPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidPermissionPolicyException) Error() string {
@@ -254,6 +270,8 @@ func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 // The regular expression (regex) you specified in RegexPatternString is invalid.
 type WAFInvalidRegexPatternException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidRegexPatternException) Error() string {
@@ -276,6 +294,8 @@ func (e *WAFInvalidRegexPatternException) ErrorFault() smithy.ErrorFault { retur
 // the AWS WAF Developer Guide.
 type WAFLimitsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFLimitsExceededException) Error() string {
@@ -306,6 +326,8 @@ func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smi
 // IPSet that references one or more IP addresses.
 type WAFNonEmptyEntityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFNonEmptyEntityException) Error() string {
@@ -337,6 +359,8 @@ func (e *WAFNonEmptyEntityException) ErrorFault() smithy.ErrorFault { return smi
 // ByteMatchSet that doesn't exist.
 type WAFNonexistentContainerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFNonexistentContainerException) Error() string {
@@ -356,6 +380,8 @@ func (e *WAFNonexistentContainerException) ErrorFault() smithy.ErrorFault { retu
 // The operation failed because the referenced object doesn't exist.
 type WAFNonexistentItemException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFNonexistentItemException) Error() string {
@@ -379,6 +405,8 @@ func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return sm
 // * You tried to delete a Rule that is still referenced by a WebACL.
 type WAFReferencedItemException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFReferencedItemException) Error() string {
@@ -403,6 +431,8 @@ func (e *WAFReferencedItemException) ErrorFault() smithy.ErrorFault { return smi
 // unlocked.
 type WAFServiceLinkedRoleErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFServiceLinkedRoleErrorException) Error() string {
@@ -425,6 +455,8 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 // using a change token that has already been used.
 type WAFStaleDataException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFStaleDataException) Error() string {
@@ -442,6 +474,8 @@ func (e *WAFStaleDataException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The specified subscription does not exist.
 type WAFSubscriptionNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFSubscriptionNotFoundException) Error() string {
@@ -461,6 +495,8 @@ func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { retu
 //
 type WAFTagOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFTagOperationException) Error() string {
@@ -478,6 +514,8 @@ func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smith
 //
 type WAFTagOperationInternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFTagOperationInternalErrorException) Error() string {
@@ -500,6 +538,8 @@ func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 // Retry your request.
 type WAFUnavailableEntityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFUnavailableEntityException) Error() string {

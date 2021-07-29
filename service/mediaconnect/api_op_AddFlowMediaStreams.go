@@ -41,6 +41,8 @@ type AddFlowMediaStreamsInput struct {
 	//
 	// This member is required.
 	MediaStreams []types.AddMediaStreamRequest
+
+	noSmithyDocumentSerde
 }
 
 type AddFlowMediaStreamsOutput struct {
@@ -53,6 +55,8 @@ type AddFlowMediaStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddFlowMediaStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

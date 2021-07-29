@@ -45,6 +45,8 @@ type AssociateLinkInput struct {
 	//
 	// This member is required.
 	LinkId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateLinkOutput struct {
@@ -54,6 +56,8 @@ type AssociateLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

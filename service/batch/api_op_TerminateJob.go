@@ -42,11 +42,15 @@ type TerminateJobInput struct {
 	//
 	// This member is required.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type TerminateJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

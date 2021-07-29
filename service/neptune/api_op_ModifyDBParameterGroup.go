@@ -61,6 +61,8 @@ type ModifyDBParameterGroupInput struct {
 	//
 	// This member is required.
 	Parameters []types.Parameter
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBParameterGroupOutput struct {
@@ -70,6 +72,8 @@ type ModifyDBParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

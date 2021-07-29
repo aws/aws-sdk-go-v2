@@ -62,6 +62,8 @@ type UpdateAnswerInput struct {
 	// List of selected choice IDs in a question answer. The values entered replace the
 	// previously selected choices.
 	SelectedChoices []string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a update answer call.
@@ -79,6 +81,8 @@ type UpdateAnswerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {

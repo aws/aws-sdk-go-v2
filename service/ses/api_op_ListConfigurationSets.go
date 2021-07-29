@@ -48,6 +48,8 @@ type ListConfigurationSetsInput struct {
 	// A token returned from a previous call to ListConfigurationSets to indicate the
 	// position of the configuration set in the configuration set list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of configuration sets associated with your AWS account. Configuration
@@ -65,6 +67,8 @@ type ListConfigurationSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

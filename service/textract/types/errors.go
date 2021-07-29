@@ -13,6 +13,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -33,6 +35,8 @@ type BadDocumentException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadDocumentException) Error() string {
@@ -54,6 +58,8 @@ type DocumentTooLargeException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DocumentTooLargeException) Error() string {
@@ -77,6 +83,8 @@ type HumanLoopQuotaExceededException struct {
 	QuotaCode    *string
 	ServiceCode  *string
 	Code         *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HumanLoopQuotaExceededException) Error() string {
@@ -100,6 +108,8 @@ type IdempotentParameterMismatchException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -123,6 +133,8 @@ type InternalServerError struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -143,6 +155,8 @@ type InvalidJobIdException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidJobIdException) Error() string {
@@ -163,6 +177,8 @@ type InvalidKMSKeyException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKMSKeyException) Error() string {
@@ -185,6 +201,8 @@ type InvalidParameterException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -208,6 +226,8 @@ type InvalidS3ObjectException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3ObjectException) Error() string {
@@ -231,6 +251,8 @@ type LimitExceededException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -251,6 +273,8 @@ type ProvisionedThroughputExceededException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProvisionedThroughputExceededException) Error() string {
@@ -275,6 +299,8 @@ type ThrottlingException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -296,6 +322,8 @@ type UnsupportedDocumentException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedDocumentException) Error() string {

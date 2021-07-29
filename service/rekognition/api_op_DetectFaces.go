@@ -60,6 +60,8 @@ type DetectFacesInput struct {
 	// logical AND operator to determine which attributes to return (in this case, all
 	// attributes).
 	Attributes []types.Attribute
+
+	noSmithyDocumentSerde
 }
 
 type DetectFacesOutput struct {
@@ -81,6 +83,8 @@ type DetectFacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectFacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

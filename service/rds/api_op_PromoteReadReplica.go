@@ -81,6 +81,8 @@ type PromoteReadReplicaInput struct {
 	//
 	// * Must be at least 30 minutes.
 	PreferredBackupWindow *string
+
+	noSmithyDocumentSerde
 }
 
 type PromoteReadReplicaOutput struct {
@@ -91,6 +93,8 @@ type PromoteReadReplicaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPromoteReadReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {

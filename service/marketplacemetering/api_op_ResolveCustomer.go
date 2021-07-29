@@ -38,6 +38,8 @@ type ResolveCustomerInput struct {
 	//
 	// This member is required.
 	RegistrationToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of the ResolveCustomer operation. Contains the CustomerIdentifier and
@@ -56,6 +58,8 @@ type ResolveCustomerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResolveCustomerMiddlewares(stack *middleware.Stack, options Options) (err error) {

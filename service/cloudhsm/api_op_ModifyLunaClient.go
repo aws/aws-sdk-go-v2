@@ -48,6 +48,8 @@ type ModifyLunaClientInput struct {
 	//
 	// This member is required.
 	ClientArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyLunaClientOutput struct {
@@ -57,6 +59,8 @@ type ModifyLunaClientOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyLunaClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

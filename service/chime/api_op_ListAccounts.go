@@ -44,6 +44,8 @@ type ListAccountsInput struct {
 
 	// User email address with which to filter results.
 	UserEmail *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAccountsOutput struct {
@@ -56,6 +58,8 @@ type ListAccountsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccountsMiddlewares(stack *middleware.Stack, options Options) (err error) {

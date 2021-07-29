@@ -47,6 +47,8 @@ type CreatePackageInput struct {
 
 	// Description of the package.
 	PackageDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by CreatePackage operation.
@@ -57,6 +59,8 @@ type CreatePackageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePackageMiddlewares(stack *middleware.Stack, options Options) (err error) {

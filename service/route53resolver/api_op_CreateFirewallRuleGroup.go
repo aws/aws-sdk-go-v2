@@ -46,6 +46,8 @@ type CreateFirewallRuleGroupInput struct {
 	// A list of the tag keys and values that you want to associate with the rule
 	// group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateFirewallRuleGroupOutput struct {
@@ -55,6 +57,8 @@ type CreateFirewallRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

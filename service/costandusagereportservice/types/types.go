@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The definition of AWS Cost and Usage Report. You can specify the report name,
 // time unit, report format, compression format, S3 bucket, additional artifacts,
 // and schema elements in the definition.
@@ -65,4 +69,8 @@ type ReportDefinition struct {
 	// Whether you want Amazon Web Services to overwrite the previous version of each
 	// report or to deliver the report in addition to the previous versions.
 	ReportVersioning ReportVersioning
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

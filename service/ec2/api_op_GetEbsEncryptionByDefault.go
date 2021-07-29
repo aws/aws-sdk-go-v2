@@ -36,6 +36,8 @@ type GetEbsEncryptionByDefaultInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetEbsEncryptionByDefaultOutput struct {
@@ -45,6 +47,8 @@ type GetEbsEncryptionByDefaultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEbsEncryptionByDefaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type ListDeploymentsInput struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
 	// the target AWS IoT thing or thing group.
 	TargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDeploymentsOutput struct {
@@ -64,6 +66,8 @@ type ListDeploymentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

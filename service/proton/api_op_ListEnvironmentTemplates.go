@@ -37,6 +37,8 @@ type ListEnvironmentTemplatesInput struct {
 	// of environment templates, after the list of environment templates that was
 	// previously requested.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEnvironmentTemplatesOutput struct {
@@ -53,6 +55,8 @@ type ListEnvironmentTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEnvironmentTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

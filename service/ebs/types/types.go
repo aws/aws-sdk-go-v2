@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A block of data in an Amazon Elastic Block Store snapshot.
 type Block struct {
 
@@ -10,6 +14,8 @@ type Block struct {
 
 	// The block token for the block index.
 	BlockToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A block of data in an Amazon Elastic Block Store snapshot that is different from
@@ -27,6 +33,8 @@ type ChangedBlock struct {
 	// The block token for the block index of the SecondSnapshotId specified in the
 	// ListChangedBlocks operation.
 	SecondBlockToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag.
@@ -37,4 +45,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

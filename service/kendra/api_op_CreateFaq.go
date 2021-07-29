@@ -71,6 +71,8 @@ type CreateFaqInput struct {
 	// A list of key-value pairs that identify the FAQ. You can use the tags to
 	// identify and organize your resources and to control access to resources.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateFaqOutput struct {
@@ -80,6 +82,8 @@ type CreateFaqOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFaqMiddlewares(stack *middleware.Stack, options Options) (err error) {

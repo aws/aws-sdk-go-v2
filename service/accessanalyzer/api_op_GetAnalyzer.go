@@ -34,6 +34,8 @@ type GetAnalyzerInput struct {
 	//
 	// This member is required.
 	AnalyzerName *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request.
@@ -46,6 +48,8 @@ type GetAnalyzerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {

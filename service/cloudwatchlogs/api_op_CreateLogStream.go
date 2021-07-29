@@ -51,11 +51,15 @@ type CreateLogStreamInput struct {
 	//
 	// This member is required.
 	LogStreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLogStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLogStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

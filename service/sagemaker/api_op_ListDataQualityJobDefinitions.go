@@ -62,6 +62,8 @@ type ListDataQualityJobDefinitionsInput struct {
 
 	// The sort order for results. The default is Descending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListDataQualityJobDefinitionsOutput struct {
@@ -78,6 +80,8 @@ type ListDataQualityJobDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDataQualityJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

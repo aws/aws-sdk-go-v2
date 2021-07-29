@@ -44,6 +44,8 @@ type DescribeServiceUpdatesInput struct {
 
 	// The status of the service update
 	ServiceUpdateStatus []types.ServiceUpdateStatus
+
+	noSmithyDocumentSerde
 }
 
 type DescribeServiceUpdatesOutput struct {
@@ -59,6 +61,8 @@ type DescribeServiceUpdatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServiceUpdatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

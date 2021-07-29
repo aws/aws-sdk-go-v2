@@ -42,11 +42,15 @@ type DeleteLabelsInput struct {
 
 	// List of labels to delete from the resource.
 	Labels []string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

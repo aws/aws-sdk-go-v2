@@ -45,6 +45,8 @@ type FailoverGlobalReplicationGroupInput struct {
 	//
 	// This member is required.
 	PrimaryReplicationGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type FailoverGlobalReplicationGroupOutput struct {
@@ -60,6 +62,8 @@ type FailoverGlobalReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFailoverGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

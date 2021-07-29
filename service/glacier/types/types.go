@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Contains information about the comma-separated value (CSV) file to select from.
 type CSVInput struct {
 
@@ -25,6 +29,8 @@ type CSVInput struct {
 
 	// A value used to separate individual records from each other.
 	RecordDelimiter *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the comma-separated value (CSV) file that the job
@@ -48,6 +54,8 @@ type CSVOutput struct {
 
 	// A value used to separate individual records from each other.
 	RecordDelimiter *string
+
+	noSmithyDocumentSerde
 }
 
 // Data retrieval policy.
@@ -56,6 +64,8 @@ type DataRetrievalPolicy struct {
 	// The policy rule. Although this is a list type, currently there must be only one
 	// rule, which contains a Strategy field and optionally a BytesPerHour field.
 	Rules []DataRetrievalRule
+
+	noSmithyDocumentSerde
 }
 
 // Data retrieval policy rule.
@@ -70,6 +80,8 @@ type DataRetrievalRule struct {
 	// The type of data retrieval policy to set. Valid values:
 	// BytesPerHour|FreeTier|None
 	Strategy *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -100,6 +112,8 @@ type DescribeVaultOutput struct {
 
 	// The name of the vault.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the encryption used to store the job results in
@@ -118,6 +132,8 @@ type Encryption struct {
 	// object protected by AWS KMS fail if not made by using Secure Sockets Layer (SSL)
 	// or Signature Version 4.
 	KMSKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the description of an Amazon S3 Glacier job.
@@ -218,6 +234,8 @@ type GlacierJobDescription struct {
 	// The Amazon Resource Name (ARN) of the vault from which an archive retrieval was
 	// requested.
 	VaultARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a grant.
@@ -228,6 +246,8 @@ type Grant struct {
 
 	// Specifies the permission given to the grantee.
 	Permission Permission
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the grantee.
@@ -249,6 +269,8 @@ type Grantee struct {
 
 	// URI of the grantee group.
 	URI *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes how the archive is serialized.
@@ -256,6 +278,8 @@ type InputSerialization struct {
 
 	// Describes the serialization of a CSV-encoded object.
 	Csv *CSVInput
+
+	noSmithyDocumentSerde
 }
 
 // Describes the options for a range inventory retrieval job.
@@ -288,6 +312,8 @@ type InventoryRetrievalJobDescription struct {
 	// value should be a string in the ISO 8601 date format, for example
 	// 2013-03-20T17:03:43Z.
 	StartDate *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides options for specifying a range inventory retrieval job.
@@ -312,6 +338,8 @@ type InventoryRetrievalJobInput struct {
 	// archives created on or after this date. This value should be a string in the ISO
 	// 8601 date format, for example 2013-03-20T17:03:43Z.
 	StartDate *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides options for defining a job.
@@ -365,6 +393,8 @@ type JobParameters struct {
 	// retrieve an archive, or get an inventory of a vault. Valid values are "select",
 	// "archive-retrieval" and "inventory-retrieval".
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the location where the select job results are stored.
@@ -372,6 +402,8 @@ type OutputLocation struct {
 
 	// Describes an S3 location that will receive the results of the job request.
 	S3 *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Describes how the select output is serialized.
@@ -379,6 +411,8 @@ type OutputSerialization struct {
 
 	// Describes the serialization of CSV-encoded query results.
 	Csv *CSVOutput
+
+	noSmithyDocumentSerde
 }
 
 // A list of the part sizes of the multipart upload.
@@ -390,6 +424,8 @@ type PartListElement struct {
 	// The SHA256 tree hash value that Amazon S3 Glacier calculated for the part. This
 	// field is never null.
 	SHA256TreeHash *string
+
+	noSmithyDocumentSerde
 }
 
 // The definition for a provisioned capacity unit.
@@ -405,6 +441,8 @@ type ProvisionedCapacityDescription struct {
 	// The date that the provisioned capacity unit was purchased, in Universal
 	// Coordinated Time (UTC).
 	StartDate *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the location in Amazon S3 where the select job
@@ -435,6 +473,8 @@ type S3Location struct {
 
 	// A map of metadata to store with the job results in Amazon S3.
 	UserMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the parameters used for a select.
@@ -451,6 +491,8 @@ type SelectParameters struct {
 
 	// Describes how the results of the select job are serialized.
 	OutputSerialization *OutputSerialization
+
+	noSmithyDocumentSerde
 }
 
 // A list of in-progress multipart uploads for a vault.
@@ -473,6 +515,8 @@ type UploadListElement struct {
 
 	// The Amazon Resource Name (ARN) of the vault that contains the archive.
 	VaultARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the vault access policy.
@@ -480,6 +524,8 @@ type VaultAccessPolicy struct {
 
 	// The vault access policy.
 	Policy *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the vault lock policy.
@@ -487,6 +533,8 @@ type VaultLockPolicy struct {
 
 	// The vault lock policy.
 	Policy *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a vault's notification configuration.
@@ -499,4 +547,8 @@ type VaultNotificationConfig struct {
 	// The Amazon Simple Notification Service (Amazon SNS) topic Amazon Resource Name
 	// (ARN).
 	SNSTopic *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

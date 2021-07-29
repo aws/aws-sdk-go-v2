@@ -55,6 +55,8 @@ type ExportApiInput struct {
 	// The name of the API stage to export. If you don't specify this property, a
 	// representation of the latest API configuration is exported.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 type ExportApiOutput struct {
@@ -66,6 +68,8 @@ type ExportApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type CreateHomeRegionControlInput struct {
 	// Optional Boolean flag to indicate whether any effect should take place. It tests
 	// whether the caller has permission to make the call.
 	DryRun bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateHomeRegionControlOutput struct {
@@ -53,6 +55,8 @@ type CreateHomeRegionControlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHomeRegionControlMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,11 +57,15 @@ type AssociateWebACLInput struct {
 	//
 	// This member is required.
 	WebACLArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateWebACLOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type ExtendLicenseConsumptionInput struct {
 	// actually making the request. Provides an error response if you do not have the
 	// required permissions.
 	DryRun bool
+
+	noSmithyDocumentSerde
 }
 
 type ExtendLicenseConsumptionOutput struct {
@@ -49,6 +51,8 @@ type ExtendLicenseConsumptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExtendLicenseConsumptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

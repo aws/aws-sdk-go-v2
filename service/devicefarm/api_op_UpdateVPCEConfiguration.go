@@ -51,6 +51,8 @@ type UpdateVPCEConfigurationInput struct {
 	// The name of the VPC endpoint service running in your AWS account that you want
 	// Device Farm to test.
 	VpceServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateVPCEConfigurationOutput struct {
@@ -60,6 +62,8 @@ type UpdateVPCEConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVPCEConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,11 +57,15 @@ type HttpRequestWithLabelsInput struct {
 	//
 	// This member is required.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type HttpRequestWithLabelsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpRequestWithLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

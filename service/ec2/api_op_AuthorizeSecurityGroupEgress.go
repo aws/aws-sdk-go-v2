@@ -77,6 +77,8 @@ type AuthorizeSecurityGroupEgressInput struct {
 
 	// Not supported. Use a set of IP permissions to specify the port.
 	ToPort *int32
+
+	noSmithyDocumentSerde
 }
 
 type AuthorizeSecurityGroupEgressOutput struct {
@@ -89,6 +91,8 @@ type AuthorizeSecurityGroupEgressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAuthorizeSecurityGroupEgressMiddlewares(stack *middleware.Stack, options Options) (err error) {

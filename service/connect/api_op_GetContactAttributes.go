@@ -37,6 +37,8 @@ type GetContactAttributesInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetContactAttributesOutput struct {
@@ -46,6 +48,8 @@ type GetContactAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContactAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

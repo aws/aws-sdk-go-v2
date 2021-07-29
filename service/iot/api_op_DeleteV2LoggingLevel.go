@@ -38,11 +38,15 @@ type DeleteV2LoggingLevelInput struct {
 	//
 	// This member is required.
 	TargetType types.LogTargetType
+
+	noSmithyDocumentSerde
 }
 
 type DeleteV2LoggingLevelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteV2LoggingLevelMiddlewares(stack *middleware.Stack, options Options) (err error) {

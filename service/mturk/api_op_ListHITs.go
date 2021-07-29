@@ -35,6 +35,8 @@ type ListHITsInput struct {
 
 	// Pagination token
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListHITsOutput struct {
@@ -53,6 +55,8 @@ type ListHITsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHITsMiddlewares(stack *middleware.Stack, options Options) (err error) {

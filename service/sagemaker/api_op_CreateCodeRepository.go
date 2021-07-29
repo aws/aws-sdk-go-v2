@@ -54,6 +54,8 @@ type CreateCodeRepositoryInput struct {
 	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateCodeRepositoryOutput struct {
@@ -65,6 +67,8 @@ type CreateCodeRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCodeRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

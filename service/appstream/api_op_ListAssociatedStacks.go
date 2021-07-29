@@ -36,6 +36,8 @@ type ListAssociatedStacksInput struct {
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssociatedStacksOutput struct {
@@ -49,6 +51,8 @@ type ListAssociatedStacksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssociatedStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {

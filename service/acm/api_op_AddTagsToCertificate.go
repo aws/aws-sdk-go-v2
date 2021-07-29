@@ -57,11 +57,15 @@ type AddTagsToCertificateInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type AddTagsToCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddTagsToCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

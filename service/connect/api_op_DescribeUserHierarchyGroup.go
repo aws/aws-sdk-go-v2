@@ -39,6 +39,8 @@ type DescribeUserHierarchyGroupInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUserHierarchyGroupOutput struct {
@@ -48,6 +50,8 @@ type DescribeUserHierarchyGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUserHierarchyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

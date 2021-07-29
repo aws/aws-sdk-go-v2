@@ -34,6 +34,8 @@ type DescribeBundleInput struct {
 	//
 	// This member is required.
 	BundleId *string
+
+	noSmithyDocumentSerde
 }
 
 // Result structure contains the details of the bundle.
@@ -44,6 +46,8 @@ type DescribeBundleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {

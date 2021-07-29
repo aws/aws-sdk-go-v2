@@ -40,6 +40,8 @@ type DescribePermissionsInput struct {
 
 	// The stack ID.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribePermissions request.
@@ -62,6 +64,8 @@ type DescribePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type SetRiskConfigurationInput struct {
 
 	// The configuration to override the risk decision.
 	RiskExceptionConfiguration *types.RiskExceptionConfigurationType
+
+	noSmithyDocumentSerde
 }
 
 type SetRiskConfigurationOutput struct {
@@ -63,6 +65,8 @@ type SetRiskConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetRiskConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

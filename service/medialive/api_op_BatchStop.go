@@ -35,6 +35,8 @@ type BatchStopInput struct {
 
 	// List of multiplex IDs
 	MultiplexIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for BatchStopResponse
@@ -48,6 +50,8 @@ type BatchStopOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchStopMiddlewares(stack *middleware.Stack, options Options) (err error) {

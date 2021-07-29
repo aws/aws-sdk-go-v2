@@ -41,6 +41,8 @@ type ListGroupsInput struct {
 	// The token to use to retrieve the next page of results. The first call does not
 	// contain any tokens.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGroupsOutput struct {
@@ -54,6 +56,8 @@ type ListGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

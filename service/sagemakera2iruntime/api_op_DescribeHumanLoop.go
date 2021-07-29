@@ -35,6 +35,8 @@ type DescribeHumanLoopInput struct {
 	//
 	// This member is required.
 	HumanLoopName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHumanLoopOutput struct {
@@ -79,6 +81,8 @@ type DescribeHumanLoopOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {

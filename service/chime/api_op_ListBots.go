@@ -41,6 +41,8 @@ type ListBotsInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBotsOutput struct {
@@ -53,6 +55,8 @@ type ListBotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

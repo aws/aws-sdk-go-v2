@@ -2,7 +2,12 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 type Attributes struct {
+	noSmithyDocumentSerde
 }
 
 type Device struct {
@@ -15,6 +20,8 @@ type Device struct {
 
 	// The device type, such as "button".
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 type DeviceDescription struct {
@@ -41,6 +48,8 @@ type DeviceDescription struct {
 
 	// The type of the device, such as "button".
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 type DeviceEvent struct {
@@ -50,6 +59,8 @@ type DeviceEvent struct {
 
 	// A serialized JSON object representing the device-type specific event.
 	StdEvent *string
+
+	noSmithyDocumentSerde
 }
 
 type DeviceMethod struct {
@@ -59,4 +70,8 @@ type DeviceMethod struct {
 
 	// The name of the method applicable to the deviceType.
 	MethodName *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

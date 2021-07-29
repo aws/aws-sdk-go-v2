@@ -32,11 +32,15 @@ type DeleteSubscriptionDefinitionInput struct {
 	//
 	// This member is required.
 	SubscriptionDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSubscriptionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

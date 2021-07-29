@@ -41,6 +41,8 @@ type GetBotAliasInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBotAliasOutput struct {
@@ -72,6 +74,8 @@ type GetBotAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

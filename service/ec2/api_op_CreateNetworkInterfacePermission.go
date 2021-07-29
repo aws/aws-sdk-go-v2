@@ -53,6 +53,8 @@ type CreateNetworkInterfacePermissionInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateNetworkInterfacePermission.
@@ -63,6 +65,8 @@ type CreateNetworkInterfacePermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNetworkInterfacePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

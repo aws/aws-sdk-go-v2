@@ -57,6 +57,8 @@ type UpdateCachePolicyInput struct {
 	// The version of the cache policy that you are updating. The version is returned
 	// in the cache policy’s ETag field in the response to GetCachePolicyConfig.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCachePolicyOutput struct {
@@ -69,6 +71,8 @@ type UpdateCachePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCachePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DeleteGlobalNetworkInput struct {
 	//
 	// This member is required.
 	GlobalNetworkId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGlobalNetworkOutput struct {
@@ -43,6 +45,8 @@ type DeleteGlobalNetworkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGlobalNetworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

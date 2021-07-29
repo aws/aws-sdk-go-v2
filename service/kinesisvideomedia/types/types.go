@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -62,4 +63,8 @@ type StartSelector struct {
 	// or the SERVER_TIMESTAMP as the startSelectorType. The GetMedia API then starts
 	// with the chunk containing the fragment that has the specified timestamp.
 	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

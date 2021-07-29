@@ -37,6 +37,8 @@ type CreateScriptInput struct {
 
 	// The programming language of the resulting code from the DAG.
 	Language types.Language
+
+	noSmithyDocumentSerde
 }
 
 type CreateScriptOutput struct {
@@ -49,6 +51,8 @@ type CreateScriptOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type DescribeNotebookInstanceLifecycleConfigInput struct {
 	//
 	// This member is required.
 	NotebookInstanceLifecycleConfigName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNotebookInstanceLifecycleConfigOutput struct {
@@ -62,6 +64,8 @@ type DescribeNotebookInstanceLifecycleConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

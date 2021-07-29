@@ -28,6 +28,7 @@ func (c *Client) GetIndexingConfiguration(ctx context.Context, params *GetIndexi
 }
 
 type GetIndexingConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetIndexingConfigurationOutput struct {
@@ -40,6 +41,8 @@ type GetIndexingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIndexingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

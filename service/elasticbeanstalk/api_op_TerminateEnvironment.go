@@ -60,6 +60,8 @@ type TerminateEnvironmentInput struct {
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/ug/) Default: true Valid
 	// Values: true | false
 	TerminateResources *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of an environment.
@@ -173,6 +175,8 @@ type TerminateEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

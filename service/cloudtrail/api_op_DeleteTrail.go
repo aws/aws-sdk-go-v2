@@ -36,6 +36,8 @@ type DeleteTrailInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -43,6 +45,8 @@ type DeleteTrailInput struct {
 type DeleteTrailOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {

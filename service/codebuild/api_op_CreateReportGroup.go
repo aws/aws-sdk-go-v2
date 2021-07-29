@@ -49,6 +49,8 @@ type CreateReportGroupInput struct {
 	// are available for use by Amazon Web Services services that support CodeBuild
 	// report group tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateReportGroupOutput struct {
@@ -58,6 +60,8 @@ type CreateReportGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

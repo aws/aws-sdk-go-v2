@@ -124,6 +124,8 @@ type GetCostForecastInput struct {
 	// actual value falling in the prediction interval. Higher confidence levels result
 	// in wider prediction intervals.
 	PredictionIntervalLevel *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetCostForecastOutput struct {
@@ -137,6 +139,8 @@ type GetCostForecastOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCostForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {

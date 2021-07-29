@@ -49,6 +49,8 @@ type AssociateResolverRuleInput struct {
 	// A name for the association that you're creating between a Resolver rule and a
 	// VPC.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateResolverRuleOutput struct {
@@ -59,6 +61,8 @@ type AssociateResolverRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

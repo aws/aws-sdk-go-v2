@@ -44,11 +44,15 @@ type DeleteRecoveryPointInput struct {
 	//
 	// This member is required.
 	RecoveryPointArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRecoveryPointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {

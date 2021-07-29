@@ -33,6 +33,8 @@ type GetDataCatalogInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDataCatalogOutput struct {
@@ -42,6 +44,8 @@ type GetDataCatalogOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {

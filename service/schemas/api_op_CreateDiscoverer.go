@@ -39,6 +39,8 @@ type CreateDiscovererInput struct {
 
 	// Tags associated with the resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDiscovererOutput struct {
@@ -63,6 +65,8 @@ type CreateDiscovererOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {

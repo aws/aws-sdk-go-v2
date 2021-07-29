@@ -64,6 +64,8 @@ type AttachVolumeInput struct {
 	// specify a value, Storage Gateway uses the value that was previously used for
 	// this volume as the new target name.
 	TargetName *string
+
+	noSmithyDocumentSerde
 }
 
 // AttachVolumeOutput
@@ -78,6 +80,8 @@ type AttachVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

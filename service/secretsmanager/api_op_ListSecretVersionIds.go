@@ -88,6 +88,8 @@ type ListSecretVersionIdsInput struct {
 	// call, set it to the value of the previous call NextToken response to indicate
 	// where the output should continue from.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSecretVersionIdsOutput struct {
@@ -117,6 +119,8 @@ type ListSecretVersionIdsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSecretVersionIdsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type GetLabelsInput struct {
 
 	// The next token for the subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLabelsOutput struct {
@@ -55,6 +57,8 @@ type GetLabelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLabelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -62,6 +62,8 @@ type CreateDBClusterSnapshotInput struct {
 
 	// The tags to be assigned to the DB cluster snapshot.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBClusterSnapshotOutput struct {
@@ -72,6 +74,8 @@ type CreateDBClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

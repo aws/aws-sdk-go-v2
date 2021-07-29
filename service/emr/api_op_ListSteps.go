@@ -48,6 +48,8 @@ type ListStepsInput struct {
 
 	// The filter to limit the step list based on certain states.
 	StepStates []types.StepState
+
+	noSmithyDocumentSerde
 }
 
 // This output contains the list of steps returned in reverse order. This means
@@ -62,6 +64,8 @@ type ListStepsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStepsMiddlewares(stack *middleware.Stack, options Options) (err error) {

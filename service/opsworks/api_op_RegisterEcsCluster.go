@@ -45,6 +45,8 @@ type RegisterEcsClusterInput struct {
 	//
 	// This member is required.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a RegisterEcsCluster request.
@@ -55,6 +57,8 @@ type RegisterEcsClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterEcsClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

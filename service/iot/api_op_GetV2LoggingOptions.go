@@ -28,6 +28,7 @@ func (c *Client) GetV2LoggingOptions(ctx context.Context, params *GetV2LoggingOp
 }
 
 type GetV2LoggingOptionsInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetV2LoggingOptionsOutput struct {
@@ -43,6 +44,8 @@ type GetV2LoggingOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetV2LoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

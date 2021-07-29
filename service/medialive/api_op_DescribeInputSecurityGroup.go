@@ -34,6 +34,8 @@ type DescribeInputSecurityGroupInput struct {
 	//
 	// This member is required.
 	InputSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DescribeInputSecurityGroupResponse
@@ -59,6 +61,8 @@ type DescribeInputSecurityGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

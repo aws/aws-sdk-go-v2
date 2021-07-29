@@ -42,6 +42,8 @@ type ConfirmPrivateVirtualInterfaceInput struct {
 
 	// The ID of the virtual private gateway.
 	VirtualGatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 type ConfirmPrivateVirtualInterfaceOutput struct {
@@ -85,6 +87,8 @@ type ConfirmPrivateVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmPrivateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

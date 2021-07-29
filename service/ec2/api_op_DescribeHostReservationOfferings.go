@@ -72,6 +72,8 @@ type DescribeHostReservationOfferingsInput struct {
 
 	// The ID of the reservation offering.
 	OfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHostReservationOfferingsOutput struct {
@@ -85,6 +87,8 @@ type DescribeHostReservationOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHostReservationOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

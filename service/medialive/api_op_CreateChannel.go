@@ -74,6 +74,8 @@ type CreateChannelInput struct {
 
 	// Settings for VPC output
 	Vpc *types.VpcOutputSettings
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for CreateChannelResponse
@@ -84,6 +86,8 @@ type CreateChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

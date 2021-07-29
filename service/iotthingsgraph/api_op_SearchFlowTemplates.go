@@ -40,6 +40,8 @@ type SearchFlowTemplatesInput struct {
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchFlowTemplatesOutput struct {
@@ -53,6 +55,8 @@ type SearchFlowTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchFlowTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

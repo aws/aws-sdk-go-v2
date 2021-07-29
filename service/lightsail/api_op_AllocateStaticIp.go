@@ -33,6 +33,8 @@ type AllocateStaticIpInput struct {
 	//
 	// This member is required.
 	StaticIpName *string
+
+	noSmithyDocumentSerde
 }
 
 type AllocateStaticIpOutput struct {
@@ -44,6 +46,8 @@ type AllocateStaticIpOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAllocateStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

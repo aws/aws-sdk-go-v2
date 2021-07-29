@@ -61,6 +61,8 @@ type CreateVpcEndpointConnectionNotificationInput struct {
 
 	// The ID of the endpoint.
 	VpcEndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVpcEndpointConnectionNotificationOutput struct {
@@ -74,6 +76,8 @@ type CreateVpcEndpointConnectionNotificationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcEndpointConnectionNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {

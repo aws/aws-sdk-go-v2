@@ -44,6 +44,8 @@ type DescribeContinuousBackupsInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeContinuousBackupsOutput struct {
@@ -54,6 +56,8 @@ type DescribeContinuousBackupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeContinuousBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

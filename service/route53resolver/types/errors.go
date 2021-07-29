@@ -11,6 +11,8 @@ import (
 // specified Resolver operation.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 //
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -45,6 +49,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // We encountered an unknown error. Try again in a few minutes.
 type InternalServiceErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceErrorException) Error() string {
@@ -62,6 +68,8 @@ func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return 
 // The value that you specified for NextToken in a List request isn't valid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -81,6 +89,8 @@ type InvalidParameterException struct {
 	Message *string
 
 	FieldName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -98,6 +108,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // The specified Resolver rule policy is invalid.
 type InvalidPolicyDocument struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPolicyDocument) Error() string {
@@ -115,6 +127,8 @@ func (e *InvalidPolicyDocument) ErrorFault() smithy.ErrorFault { return smithy.F
 // The request is invalid.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -132,6 +146,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified tag is invalid.
 type InvalidTagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagException) Error() string {
@@ -151,6 +167,8 @@ type LimitExceededException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -170,6 +188,8 @@ type ResourceExistsException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceExistsException) Error() string {
@@ -189,6 +209,8 @@ type ResourceInUseException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -208,6 +230,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -227,6 +251,8 @@ type ResourceUnavailableException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceUnavailableException) Error() string {
@@ -244,6 +270,8 @@ func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return s
 // The request was throttled. Try again in a few minutes.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -261,6 +289,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The specified resource doesn't exist.
 type UnknownResourceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnknownResourceException) Error() string {
@@ -278,6 +308,8 @@ func (e *UnknownResourceException) ErrorFault() smithy.ErrorFault { return smith
 //
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

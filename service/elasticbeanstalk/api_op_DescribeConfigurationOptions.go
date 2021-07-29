@@ -54,6 +54,8 @@ type DescribeConfigurationOptionsInput struct {
 	// The name of the configuration template whose configuration options you want to
 	// describe.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the settings for a specified configuration set.
@@ -70,6 +72,8 @@ type DescribeConfigurationOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConfigurationOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

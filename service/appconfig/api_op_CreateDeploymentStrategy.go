@@ -85,6 +85,8 @@ type CreateDeploymentStrategyInput struct {
 	// your AppConfig resources. Each tag consists of a key and an optional value, both
 	// of which you define.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeploymentStrategyOutput struct {
@@ -117,6 +119,8 @@ type CreateDeploymentStrategyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -100,6 +100,8 @@ type SynthesizeSpeechInput struct {
 	// plain text. For more information, see Using SSML
 	// (https://docs.aws.amazon.com/polly/latest/dg/ssml.html).
 	TextType types.TextType
+
+	noSmithyDocumentSerde
 }
 
 type SynthesizeSpeechOutput struct {
@@ -129,6 +131,8 @@ type SynthesizeSpeechOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSynthesizeSpeechMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type DescribeEnvironmentHealthInput struct {
 	// Specify the environment by name. You must specify either this or an
 	// EnvironmentName, or both.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // Health details for an AWS Elastic Beanstalk environment.
@@ -81,6 +83,8 @@ type DescribeEnvironmentHealthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEnvironmentHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {

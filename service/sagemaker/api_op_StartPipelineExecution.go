@@ -49,6 +49,8 @@ type StartPipelineExecutionInput struct {
 
 	// Contains a list of pipeline parameters. This list can be empty.
 	PipelineParameters []types.Parameter
+
+	noSmithyDocumentSerde
 }
 
 type StartPipelineExecutionOutput struct {
@@ -58,6 +60,8 @@ type StartPipelineExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

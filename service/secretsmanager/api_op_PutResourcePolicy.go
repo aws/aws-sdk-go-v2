@@ -89,6 +89,8 @@ type PutResourcePolicyInput struct {
 	// (Optional) If you set the parameter, BlockPublicPolicy to true, then you block
 	// resource-based policies that allow broad access to the secret.
 	BlockPublicPolicy bool
+
+	noSmithyDocumentSerde
 }
 
 type PutResourcePolicyOutput struct {
@@ -101,6 +103,8 @@ type PutResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

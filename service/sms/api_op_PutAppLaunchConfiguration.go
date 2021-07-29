@@ -43,11 +43,15 @@ type PutAppLaunchConfigurationInput struct {
 	// Information about the launch configurations for server groups in the
 	// application.
 	ServerGroupLaunchConfigurations []types.ServerGroupLaunchConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutAppLaunchConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAppLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

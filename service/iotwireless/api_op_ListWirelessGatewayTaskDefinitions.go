@@ -39,6 +39,8 @@ type ListWirelessGatewayTaskDefinitionsInput struct {
 	// A filter to list only the wireless gateway task definitions that use this task
 	// definition type.
 	TaskDefinitionType types.WirelessGatewayTaskDefinitionType
+
+	noSmithyDocumentSerde
 }
 
 type ListWirelessGatewayTaskDefinitionsOutput struct {
@@ -52,6 +54,8 @@ type ListWirelessGatewayTaskDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWirelessGatewayTaskDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

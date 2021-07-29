@@ -31,6 +31,8 @@ type GetProfileInput struct {
 
 	// The ARN of the room profile for which to request details. Required.
 	ProfileArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetProfileOutput struct {
@@ -40,6 +42,8 @@ type GetProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

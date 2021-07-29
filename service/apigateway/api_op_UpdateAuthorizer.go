@@ -44,6 +44,8 @@ type UpdateAuthorizerInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
@@ -135,6 +137,8 @@ type UpdateAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -24,6 +25,8 @@ type Principal struct {
 
 	// The Amazon Resource Name (ARN) of the resource share.
 	ResourceShareArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resource associated with a resource share.
@@ -53,6 +56,8 @@ type Resource struct {
 
 	// The resource type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resource share.
@@ -102,6 +107,8 @@ type ResourceShare struct {
 
 	// The tags for the resource share.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes an association with a resource share.
@@ -136,6 +143,8 @@ type ResourceShareAssociation struct {
 
 	// A message about the status of the association.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an invitation to join a resource share.
@@ -172,6 +181,8 @@ type ResourceShareInvitation struct {
 
 	// The status of the invitation.
 	Status ResourceShareInvitationStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about an AWS RAM permission.
@@ -207,6 +218,8 @@ type ResourceSharePermissionDetail struct {
 
 	// The identifier for the version of the permission.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a permission that is associated with a resource share.
@@ -240,6 +253,8 @@ type ResourceSharePermissionSummary struct {
 
 	// The identifier for the version of the permission.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the shareable resource types and the AWS services to which
@@ -251,6 +266,8 @@ type ServiceNameAndResourceType struct {
 
 	// The name of the AWS services to which the resources belong.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tag.
@@ -261,6 +278,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to filter information based on tags.
@@ -271,4 +290,8 @@ type TagFilter struct {
 
 	// The tag values.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

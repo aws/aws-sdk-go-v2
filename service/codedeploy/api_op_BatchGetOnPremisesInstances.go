@@ -36,6 +36,8 @@ type BatchGetOnPremisesInstancesInput struct {
 	//
 	// This member is required.
 	InstanceNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchGetOnPremisesInstances operation.
@@ -46,6 +48,8 @@ type BatchGetOnPremisesInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

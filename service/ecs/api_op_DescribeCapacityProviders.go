@@ -55,6 +55,8 @@ type DescribeCapacityProvidersInput struct {
 	// identifier that is only used to retrieve the next items in a list and not for
 	// other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCapacityProvidersOutput struct {
@@ -73,6 +75,8 @@ type DescribeCapacityProvidersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {

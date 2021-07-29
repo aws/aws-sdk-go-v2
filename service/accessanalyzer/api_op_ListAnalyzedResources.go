@@ -47,6 +47,8 @@ type ListAnalyzedResourcesInput struct {
 
 	// The type of resource.
 	ResourceType types.ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request.
@@ -62,6 +64,8 @@ type ListAnalyzedResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAnalyzedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

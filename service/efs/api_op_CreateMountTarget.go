@@ -157,6 +157,8 @@ type CreateMountTargetInput struct {
 	// Up to five VPC security group IDs, of the form sg-xxxxxxxx. These must be for
 	// the same VPC as subnet specified.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a description of a mount target.
@@ -208,6 +210,8 @@ type CreateMountTargetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMountTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

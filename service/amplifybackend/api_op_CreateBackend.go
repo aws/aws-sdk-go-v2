@@ -51,6 +51,8 @@ type CreateBackendInput struct {
 
 	// The name of the resource.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBackendOutput struct {
@@ -75,6 +77,8 @@ type CreateBackendOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {

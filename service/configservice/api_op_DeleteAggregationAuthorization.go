@@ -38,11 +38,15 @@ type DeleteAggregationAuthorizationInput struct {
 	//
 	// This member is required.
 	AuthorizedAwsRegion *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAggregationAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAggregationAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

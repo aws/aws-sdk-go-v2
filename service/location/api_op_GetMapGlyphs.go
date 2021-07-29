@@ -45,6 +45,8 @@ type GetMapGlyphsInput struct {
 	//
 	// This member is required.
 	MapName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMapGlyphsOutput struct {
@@ -57,6 +59,8 @@ type GetMapGlyphsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMapGlyphsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DeleteEndpointAccessInput struct {
 	//
 	// This member is required.
 	EndpointName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a Redshift-managed VPC endpoint.
@@ -72,6 +74,8 @@ type DeleteEndpointAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

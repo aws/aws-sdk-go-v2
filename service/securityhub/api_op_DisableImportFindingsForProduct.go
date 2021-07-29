@@ -34,11 +34,15 @@ type DisableImportFindingsForProductInput struct {
 	//
 	// This member is required.
 	ProductSubscriptionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableImportFindingsForProductOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableImportFindingsForProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

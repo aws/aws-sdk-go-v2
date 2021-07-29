@@ -54,6 +54,8 @@ type UpdatePolicyInput struct {
 	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
 	// string of any of the characters in the ASCII character range.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePolicyOutput struct {
@@ -64,6 +66,8 @@ type UpdatePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

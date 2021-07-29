@@ -10,6 +10,8 @@ import (
 // You are not authorized to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // already exists.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -46,6 +50,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // server error.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -63,6 +69,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // The requested endpoint was invalid.
 type InvalidEndpointException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEndpointException) Error() string {
@@ -97,6 +105,8 @@ type RejectedRecordsException struct {
 	Message *string
 
 	RejectedRecords []RejectedRecord
+
+	noSmithyDocumentSerde
 }
 
 func (e *RejectedRecordsException) Error() string {
@@ -115,6 +125,8 @@ func (e *RejectedRecordsException) ErrorFault() smithy.ErrorFault { return smith
 // specified correctly, or its status might not be ACTIVE.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -132,6 +144,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // Instance quota of resource exceeded for this account.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -150,6 +164,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // throttled.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -167,6 +183,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Invalid or malformed request.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

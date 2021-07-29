@@ -43,6 +43,8 @@ type GetDataRetrievalPolicyInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to the GetDataRetrievalPolicy request.
@@ -53,6 +55,8 @@ type GetDataRetrievalPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataRetrievalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type CreateResourceServerInput struct {
 
 	// A list of scopes. Each scope is map, where the keys are name and description.
 	Scopes []types.ResourceServerScopeType
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourceServerOutput struct {
@@ -59,6 +61,8 @@ type CreateResourceServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -84,6 +84,8 @@ type CreateSolutionVersionInput struct {
 	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-hrnn-coldstart.html)
 	// recipe.
 	TrainingMode types.TrainingMode
+
+	noSmithyDocumentSerde
 }
 
 type CreateSolutionVersionOutput struct {
@@ -93,6 +95,8 @@ type CreateSolutionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSolutionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

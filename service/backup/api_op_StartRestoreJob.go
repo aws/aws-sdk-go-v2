@@ -104,6 +104,8 @@ type StartRestoreJobInput struct {
 	// * Storage
 	// Gateway for AWS Storage Gateway
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type StartRestoreJobOutput struct {
@@ -113,6 +115,8 @@ type StartRestoreJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartRestoreJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

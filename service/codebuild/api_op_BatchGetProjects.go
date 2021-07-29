@@ -35,6 +35,8 @@ type BatchGetProjectsInput struct {
 	//
 	// This member is required.
 	Names []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetProjectsOutput struct {
@@ -47,6 +49,8 @@ type BatchGetProjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

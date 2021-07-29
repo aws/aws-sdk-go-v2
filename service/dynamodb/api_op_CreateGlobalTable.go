@@ -84,6 +84,8 @@ type CreateGlobalTableInput struct {
 	//
 	// This member is required.
 	ReplicationGroup []types.Replica
+
+	noSmithyDocumentSerde
 }
 
 type CreateGlobalTableOutput struct {
@@ -93,6 +95,8 @@ type CreateGlobalTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGlobalTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

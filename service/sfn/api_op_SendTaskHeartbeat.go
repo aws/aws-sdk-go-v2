@@ -50,11 +50,15 @@ type SendTaskHeartbeatInput struct {
 	//
 	// This member is required.
 	TaskToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SendTaskHeartbeatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendTaskHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {

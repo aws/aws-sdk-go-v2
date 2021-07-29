@@ -39,6 +39,8 @@ type DescribeDatabaseInput struct {
 	//
 	// This member is required.
 	DatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDatabaseOutput struct {
@@ -48,6 +50,8 @@ type DescribeDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

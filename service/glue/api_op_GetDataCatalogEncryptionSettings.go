@@ -32,6 +32,8 @@ type GetDataCatalogEncryptionSettingsInput struct {
 	// The ID of the Data Catalog to retrieve the security configuration for. If none
 	// is provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDataCatalogEncryptionSettingsOutput struct {
@@ -41,6 +43,8 @@ type GetDataCatalogEncryptionSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataCatalogEncryptionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

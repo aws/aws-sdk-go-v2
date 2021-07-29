@@ -60,6 +60,8 @@ type CreateProjectInput struct {
 	// this parameter is specified, the request must also include the sourceCode
 	// parameter.
 	Toolchain *types.Toolchain
+
+	noSmithyDocumentSerde
 }
 
 type CreateProjectOutput struct {
@@ -83,6 +85,8 @@ type CreateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

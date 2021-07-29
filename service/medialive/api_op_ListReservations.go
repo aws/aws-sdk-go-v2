@@ -60,6 +60,8 @@ type ListReservationsInput struct {
 
 	// Filter by video quality, 'STANDARD', 'ENHANCED', or 'PREMIUM'
 	VideoQuality *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ListReservationsResponse
@@ -73,6 +75,8 @@ type ListReservationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReservationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

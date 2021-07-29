@@ -39,6 +39,8 @@ type DeleteManagedEndpointInput struct {
 	//
 	// This member is required.
 	VirtualClusterId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteManagedEndpointOutput struct {
@@ -51,6 +53,8 @@ type DeleteManagedEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

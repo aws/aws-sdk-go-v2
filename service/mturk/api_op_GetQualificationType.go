@@ -34,6 +34,8 @@ type GetQualificationTypeInput struct {
 	//
 	// This member is required.
 	QualificationTypeId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetQualificationTypeOutput struct {
@@ -43,6 +45,8 @@ type GetQualificationTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

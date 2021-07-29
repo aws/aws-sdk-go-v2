@@ -39,6 +39,8 @@ type UpdateApiKeyInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // A resource that can be distributed to callers for executing Method resources
@@ -81,6 +83,8 @@ type UpdateApiKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

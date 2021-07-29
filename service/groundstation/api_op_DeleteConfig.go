@@ -39,6 +39,8 @@ type DeleteConfigInput struct {
 	//
 	// This member is required.
 	ConfigType types.ConfigCapabilityType
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -55,6 +57,8 @@ type DeleteConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

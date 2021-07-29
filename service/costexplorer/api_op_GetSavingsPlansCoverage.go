@@ -115,6 +115,8 @@ type GetSavingsPlansCoverageInput struct {
 	// Supported values for SortOrder
 	// are ASCENDING or DESCENDING.
 	SortBy *types.SortDefinition
+
+	noSmithyDocumentSerde
 }
 
 type GetSavingsPlansCoverageOutput struct {
@@ -131,6 +133,8 @@ type GetSavingsPlansCoverageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSavingsPlansCoverageMiddlewares(stack *middleware.Stack, options Options) (err error) {

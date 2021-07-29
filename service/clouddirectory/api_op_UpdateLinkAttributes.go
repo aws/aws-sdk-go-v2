@@ -47,11 +47,15 @@ type UpdateLinkAttributesInput struct {
 	//
 	// This member is required.
 	TypedLinkSpecifier *types.TypedLinkSpecifier
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLinkAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLinkAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

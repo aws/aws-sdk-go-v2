@@ -40,11 +40,15 @@ type CancelCertificateTransferInput struct {
 	//
 	// This member is required.
 	CertificateId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelCertificateTransferOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelCertificateTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {

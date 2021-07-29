@@ -36,6 +36,8 @@ type ListReportDefinitionsInput struct {
 
 	// The token value from a previous call to access the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListReportDefinitionsOutput struct {
@@ -48,6 +50,8 @@ type ListReportDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReportDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

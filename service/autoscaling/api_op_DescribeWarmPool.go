@@ -44,6 +44,8 @@ type DescribeWarmPoolInput struct {
 	// The token for the next set of instances to return. (You received this token from
 	// a previous call.)
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWarmPoolOutput struct {
@@ -60,6 +62,8 @@ type DescribeWarmPoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

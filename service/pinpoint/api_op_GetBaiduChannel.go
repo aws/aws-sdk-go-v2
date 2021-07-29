@@ -35,6 +35,8 @@ type GetBaiduChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBaiduChannelOutput struct {
@@ -47,6 +49,8 @@ type GetBaiduChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBaiduChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

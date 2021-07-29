@@ -39,11 +39,15 @@ type RemoveAutoScalingPolicyInput struct {
 	//
 	// This member is required.
 	InstanceGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveAutoScalingPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveAutoScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

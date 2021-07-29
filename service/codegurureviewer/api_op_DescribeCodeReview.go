@@ -40,6 +40,8 @@ type DescribeCodeReviewInput struct {
 	//
 	// This member is required.
 	CodeReviewArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCodeReviewOutput struct {
@@ -49,6 +51,8 @@ type DescribeCodeReviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

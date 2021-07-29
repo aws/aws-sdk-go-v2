@@ -68,6 +68,8 @@ type DiscoverInstancesInput struct {
 	// example, {version=v1, az=1a}). Only instances that match all the specified
 	// key-value pairs are returned.
 	QueryParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type DiscoverInstancesOutput struct {
@@ -78,6 +80,8 @@ type DiscoverInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDiscoverInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type ListIndicesInput struct {
 	// The token used to get the next set of results, or null if there are no
 	// additional results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListIndicesOutput struct {
@@ -48,6 +50,8 @@ type ListIndicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIndicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

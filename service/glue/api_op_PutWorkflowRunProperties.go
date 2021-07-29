@@ -44,11 +44,15 @@ type PutWorkflowRunPropertiesInput struct {
 	//
 	// This member is required.
 	RunProperties map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type PutWorkflowRunPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutWorkflowRunPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

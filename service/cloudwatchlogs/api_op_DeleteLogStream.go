@@ -38,11 +38,15 @@ type DeleteLogStreamInput struct {
 	//
 	// This member is required.
 	LogStreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLogStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLogStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

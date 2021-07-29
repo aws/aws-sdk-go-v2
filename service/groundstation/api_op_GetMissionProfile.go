@@ -33,6 +33,8 @@ type GetMissionProfileInput struct {
 	//
 	// This member is required.
 	MissionProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -75,6 +77,8 @@ type GetMissionProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

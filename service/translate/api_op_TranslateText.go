@@ -57,6 +57,8 @@ type TranslateTextInput struct {
 	// You can use 1 terminology list at most in a TranslateText request. Terminology
 	// lists can contain a maximum of 256 terms.
 	TerminologyNames []string
+
+	noSmithyDocumentSerde
 }
 
 type TranslateTextOutput struct {
@@ -82,6 +84,8 @@ type TranslateTextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTranslateTextMiddlewares(stack *middleware.Stack, options Options) (err error) {

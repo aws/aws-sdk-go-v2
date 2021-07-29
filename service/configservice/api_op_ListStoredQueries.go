@@ -37,6 +37,8 @@ type ListStoredQueriesInput struct {
 	// The nextToken string returned in a previous request that you use to request the
 	// next page of results in a paginated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStoredQueriesOutput struct {
@@ -53,6 +55,8 @@ type ListStoredQueriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStoredQueriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

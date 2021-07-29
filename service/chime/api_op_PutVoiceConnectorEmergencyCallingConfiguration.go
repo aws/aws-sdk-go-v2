@@ -41,6 +41,8 @@ type PutVoiceConnectorEmergencyCallingConfigurationInput struct {
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutVoiceConnectorEmergencyCallingConfigurationOutput struct {
@@ -50,6 +52,8 @@ type PutVoiceConnectorEmergencyCallingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutVoiceConnectorEmergencyCallingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

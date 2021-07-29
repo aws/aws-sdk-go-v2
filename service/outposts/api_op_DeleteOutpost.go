@@ -32,11 +32,15 @@ type DeleteOutpostInput struct {
 	//
 	// This member is required.
 	OutpostId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOutpostOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {

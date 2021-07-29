@@ -13,6 +13,8 @@ type InternalServerError struct {
 	Message *string
 
 	Error_ *StorageGatewayError
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -33,6 +35,8 @@ type InvalidGatewayRequestException struct {
 	Message *string
 
 	Error_ *StorageGatewayError
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGatewayRequestException) Error() string {
@@ -53,6 +57,8 @@ type ServiceUnavailableError struct {
 	Message *string
 
 	Error_ *StorageGatewayError
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableError) Error() string {

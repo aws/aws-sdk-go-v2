@@ -48,6 +48,8 @@ type DescribeElasticsearchInstanceTypeLimitsInput struct {
 	// should be present only if we are querying for Elasticsearch Limits for existing
 	// domain.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for the parameters received from
@@ -69,6 +71,8 @@ type DescribeElasticsearchInstanceTypeLimitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeElasticsearchInstanceTypeLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

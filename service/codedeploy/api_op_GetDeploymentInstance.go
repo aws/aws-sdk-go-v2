@@ -41,6 +41,8 @@ type GetDeploymentInstanceInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetDeploymentInstance operation.
@@ -53,6 +55,8 @@ type GetDeploymentInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeploymentInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

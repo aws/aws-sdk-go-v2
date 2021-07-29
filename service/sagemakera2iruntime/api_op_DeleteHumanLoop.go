@@ -33,11 +33,15 @@ type DeleteHumanLoopInput struct {
 	//
 	// This member is required.
 	HumanLoopName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteHumanLoopOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {

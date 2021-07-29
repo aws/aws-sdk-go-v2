@@ -32,6 +32,8 @@ type GetSamplingStatisticSummariesInput struct {
 
 	// Pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSamplingStatisticSummariesOutput struct {
@@ -44,6 +46,8 @@ type GetSamplingStatisticSummariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSamplingStatisticSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

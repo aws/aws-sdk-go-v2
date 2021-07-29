@@ -47,6 +47,8 @@ type ListResolverEndpointsInput struct {
 	// request to get the next group of Resolver endpoints. In the next request,
 	// specify the value of NextToken from the previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResolverEndpointsOutput struct {
@@ -65,6 +67,8 @@ type ListResolverEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResolverEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

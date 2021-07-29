@@ -39,6 +39,8 @@ type ListInstanceFleetsInput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListInstanceFleetsOutput struct {
@@ -51,6 +53,8 @@ type ListInstanceFleetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInstanceFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

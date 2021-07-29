@@ -38,6 +38,8 @@ type DescribeLoadBasedAutoScalingInput struct {
 	//
 	// This member is required.
 	LayerIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeLoadBasedAutoScaling request.
@@ -49,6 +51,8 @@ type DescribeLoadBasedAutoScalingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLoadBasedAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {

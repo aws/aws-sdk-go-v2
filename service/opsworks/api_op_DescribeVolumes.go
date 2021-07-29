@@ -49,6 +49,8 @@ type DescribeVolumesInput struct {
 	// descriptions of the specified volumes. Otherwise, it returns a description of
 	// every volume.
 	VolumeIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeVolumes request.
@@ -59,6 +61,8 @@ type DescribeVolumesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {

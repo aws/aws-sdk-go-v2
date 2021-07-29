@@ -55,6 +55,8 @@ type ListProfilingGroupsInput struct {
 	// identifier that is only used to retrieve the next items in a list and not for
 	// other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the listProfilingGroupsResponse.
@@ -84,6 +86,8 @@ type ListProfilingGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProfilingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

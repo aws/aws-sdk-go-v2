@@ -33,6 +33,8 @@ type BatchDeleteClusterSnapshotsInput struct {
 	//
 	// This member is required.
 	Identifiers []types.DeleteClusterSnapshotMessage
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteClusterSnapshotsOutput struct {
@@ -45,6 +47,8 @@ type BatchDeleteClusterSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

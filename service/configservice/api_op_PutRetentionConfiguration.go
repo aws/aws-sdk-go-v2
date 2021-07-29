@@ -39,6 +39,8 @@ type PutRetentionConfigurationInput struct {
 	//
 	// This member is required.
 	RetentionPeriodInDays int32
+
+	noSmithyDocumentSerde
 }
 
 type PutRetentionConfigurationOutput struct {
@@ -48,6 +50,8 @@ type PutRetentionConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRetentionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

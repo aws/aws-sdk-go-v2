@@ -35,6 +35,8 @@ type ListConfigurationSetsInput struct {
 
 	// Used to specify the number of items that should be returned in the response.
 	PageSize *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the configuration sets for your
@@ -51,6 +53,8 @@ type ListConfigurationSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConfigurationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

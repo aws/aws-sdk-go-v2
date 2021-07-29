@@ -37,6 +37,8 @@ type InferRxNormInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type InferRxNormOutput struct {
@@ -59,6 +61,8 @@ type InferRxNormOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInferRxNormMiddlewares(stack *middleware.Stack, options Options) (err error) {

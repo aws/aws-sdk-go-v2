@@ -107,6 +107,8 @@ type StartAutomationExecutionInput struct {
 	// A key-value mapping to target resources. Required if you specify
 	// TargetParameterName.
 	Targets []types.Target
+
+	noSmithyDocumentSerde
 }
 
 type StartAutomationExecutionOutput struct {
@@ -116,6 +118,8 @@ type StartAutomationExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartAutomationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

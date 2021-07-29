@@ -43,6 +43,8 @@ type ModifyCacheParameterGroupInput struct {
 	//
 	// This member is required.
 	ParameterNameValues []types.ParameterNameValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of one of the following operations:
@@ -58,6 +60,8 @@ type ModifyCacheParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

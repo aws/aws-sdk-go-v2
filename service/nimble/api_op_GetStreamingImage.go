@@ -38,6 +38,8 @@ type GetStreamingImageInput struct {
 	//
 	// This member is required.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStreamingImageOutput struct {
@@ -47,6 +49,8 @@ type GetStreamingImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStreamingImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

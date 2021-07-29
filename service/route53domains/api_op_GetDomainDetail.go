@@ -37,6 +37,8 @@ type GetDomainDetailInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The GetDomainDetail response includes the following elements.
@@ -149,6 +151,8 @@ type GetDomainDetailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDomainDetailMiddlewares(stack *middleware.Stack, options Options) (err error) {

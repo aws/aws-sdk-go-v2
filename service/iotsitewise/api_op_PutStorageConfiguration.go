@@ -45,6 +45,8 @@ type PutStorageConfigurationInput struct {
 	// Identifies a storage destination. If you specified MULTI_LAYER_STORAGE for the
 	// storage type, you must specify a MultiLayerStorage object.
 	MultiLayerStorage *types.MultiLayerStorage
+
+	noSmithyDocumentSerde
 }
 
 type PutStorageConfigurationOutput struct {
@@ -72,6 +74,8 @@ type PutStorageConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutStorageConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

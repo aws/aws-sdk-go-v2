@@ -32,6 +32,7 @@ func (c *Client) DescribeAccountAttributes(ctx context.Context, params *Describe
 
 //
 type DescribeAccountAttributesInput struct {
+	noSmithyDocumentSerde
 }
 
 // Data returned by the DescribeAccountAttributes action.
@@ -43,6 +44,8 @@ type DescribeAccountAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

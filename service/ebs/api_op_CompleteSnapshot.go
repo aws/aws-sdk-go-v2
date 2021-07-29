@@ -55,6 +55,8 @@ type CompleteSnapshotInput struct {
 	// The algorithm used to generate the checksum. Currently, the only supported
 	// algorithm is SHA256.
 	ChecksumAlgorithm types.ChecksumAlgorithm
+
+	noSmithyDocumentSerde
 }
 
 type CompleteSnapshotOutput struct {
@@ -64,6 +66,8 @@ type CompleteSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCompleteSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

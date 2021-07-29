@@ -37,11 +37,15 @@ type DeleteSecurityProfileInput struct {
 	// whenever the security profile is updated. If you specify a value that is
 	// different from the actual version, a VersionConflictException is thrown.
 	ExpectedVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSecurityProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSecurityProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

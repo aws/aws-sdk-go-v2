@@ -92,6 +92,8 @@ type PutMethodInput struct {
 
 	// The identifier of a RequestValidator for validating the method request.
 	RequestValidatorId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a client-facing interface by which the client calls the API to access
@@ -327,6 +329,8 @@ type PutMethodOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {

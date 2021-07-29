@@ -35,11 +35,15 @@ type DeleteVerifiedEmailAddressInput struct {
 	//
 	// This member is required.
 	EmailAddress *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVerifiedEmailAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVerifiedEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {

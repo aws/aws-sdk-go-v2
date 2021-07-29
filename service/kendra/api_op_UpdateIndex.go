@@ -58,11 +58,15 @@ type UpdateIndexInput struct {
 
 	// The user token configuration.
 	UserTokenConfigurations []types.UserTokenConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIndexOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

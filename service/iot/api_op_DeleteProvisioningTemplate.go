@@ -32,11 +32,15 @@ type DeleteProvisioningTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProvisioningTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

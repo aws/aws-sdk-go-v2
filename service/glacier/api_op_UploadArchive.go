@@ -84,6 +84,8 @@ type UploadArchiveInput struct {
 
 	// The SHA256 tree hash of the data being uploaded.
 	Checksum *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request. For information about
@@ -104,6 +106,8 @@ type UploadArchiveOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUploadArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {

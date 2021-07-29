@@ -42,11 +42,15 @@ type UpdateServiceSettingsInput struct {
 	// Amazon Resource Name (ARN) of the Amazon SNS topic used for License Manager
 	// alerts.
 	SnsTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

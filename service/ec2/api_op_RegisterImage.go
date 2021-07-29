@@ -145,6 +145,8 @@ type RegisterImageInput struct {
 
 	// The type of virtualization (hvm | paravirtual). Default: paravirtual
 	VirtualizationType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of RegisterImage.
@@ -155,6 +157,8 @@ type RegisterImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

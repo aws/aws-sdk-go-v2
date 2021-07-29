@@ -59,6 +59,8 @@ type CreateArtifactInput struct {
 
 	// A list of tags to apply to the artifact.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateArtifactOutput struct {
@@ -68,6 +70,8 @@ type CreateArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

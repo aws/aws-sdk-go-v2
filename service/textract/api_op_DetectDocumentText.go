@@ -47,6 +47,8 @@ type DetectDocumentTextInput struct {
 	//
 	// This member is required.
 	Document *types.Document
+
+	noSmithyDocumentSerde
 }
 
 type DetectDocumentTextOutput struct {
@@ -63,6 +65,8 @@ type DetectDocumentTextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectDocumentTextMiddlewares(stack *middleware.Stack, options Options) (err error) {

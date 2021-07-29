@@ -30,6 +30,7 @@ func (c *Client) GetHealthCheckCount(ctx context.Context, params *GetHealthCheck
 // A request for the number of health checks that are associated with the current
 // AWS account.
 type GetHealthCheckCountInput struct {
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to a GetHealthCheckCount request.
@@ -42,6 +43,8 @@ type GetHealthCheckCountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHealthCheckCountMiddlewares(stack *middleware.Stack, options Options) (err error) {

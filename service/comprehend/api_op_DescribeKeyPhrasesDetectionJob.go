@@ -35,6 +35,8 @@ type DescribeKeyPhrasesDetectionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeKeyPhrasesDetectionJobOutput struct {
@@ -45,6 +47,8 @@ type DescribeKeyPhrasesDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeKeyPhrasesDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

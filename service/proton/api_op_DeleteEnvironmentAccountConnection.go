@@ -40,6 +40,8 @@ type DeleteEnvironmentAccountConnectionInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEnvironmentAccountConnectionOutput struct {
@@ -49,6 +51,8 @@ type DeleteEnvironmentAccountConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

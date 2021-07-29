@@ -56,6 +56,8 @@ type UpdateGraphqlApiInput struct {
 
 	// A flag indicating whether to enable X-Ray tracing for the GraphqlApi.
 	XrayEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGraphqlApiOutput struct {
@@ -65,6 +67,8 @@ type UpdateGraphqlApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

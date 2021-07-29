@@ -31,6 +31,8 @@ type UndeploySystemInstanceInput struct {
 
 	// The ID of the system instance to remove from its target.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type UndeploySystemInstanceOutput struct {
@@ -41,6 +43,8 @@ type UndeploySystemInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUndeploySystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

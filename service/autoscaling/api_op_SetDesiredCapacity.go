@@ -49,11 +49,15 @@ type SetDesiredCapacityInput struct {
 	// its new capacity. By default, Amazon EC2 Auto Scaling does not honor the
 	// cooldown period during manual scaling activities.
 	HonorCooldown *bool
+
+	noSmithyDocumentSerde
 }
 
 type SetDesiredCapacityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetDesiredCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {

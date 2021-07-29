@@ -35,6 +35,8 @@ type GetRecommenderConfigurationInput struct {
 	//
 	// This member is required.
 	RecommenderId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRecommenderConfigurationOutput struct {
@@ -47,6 +49,8 @@ type GetRecommenderConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

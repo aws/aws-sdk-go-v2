@@ -41,11 +41,15 @@ type UpdateUserHierarchyInput struct {
 
 	// The identifier of the hierarchy group.
 	HierarchyGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserHierarchyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserHierarchyMiddlewares(stack *middleware.Stack, options Options) (err error) {

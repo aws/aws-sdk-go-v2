@@ -52,6 +52,8 @@ type CreateParticipantConnectionInput struct {
 	//
 	// This member is required.
 	Type []types.ConnectionType
+
+	noSmithyDocumentSerde
 }
 
 type CreateParticipantConnectionOutput struct {
@@ -65,6 +67,8 @@ type CreateParticipantConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateParticipantConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

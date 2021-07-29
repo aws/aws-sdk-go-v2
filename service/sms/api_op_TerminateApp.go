@@ -30,11 +30,15 @@ type TerminateAppInput struct {
 
 	// The ID of the application.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type TerminateAppOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

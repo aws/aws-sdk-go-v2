@@ -85,6 +85,8 @@ type CreateOriginEndpointInput struct {
 	// A list of source IP CIDR blocks that will be allowed to access the
 	// OriginEndpoint.
 	Whitelist []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateOriginEndpointOutput struct {
@@ -146,6 +148,8 @@ type CreateOriginEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOriginEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

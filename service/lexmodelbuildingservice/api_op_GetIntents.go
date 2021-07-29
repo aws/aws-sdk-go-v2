@@ -53,6 +53,8 @@ type GetIntentsInput struct {
 	// response. To fetch the next page of intents, specify the pagination token in the
 	// next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIntentsOutput struct {
@@ -66,6 +68,8 @@ type GetIntentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

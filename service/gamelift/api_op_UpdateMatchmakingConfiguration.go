@@ -135,6 +135,8 @@ type UpdateMatchmakingConfigurationInput struct {
 	// You can use either the rule set name or ARN value. A matchmaking configuration
 	// can only use rule sets that are defined in the same Region.
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -145,6 +147,8 @@ type UpdateMatchmakingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMatchmakingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

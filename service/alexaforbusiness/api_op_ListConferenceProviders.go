@@ -35,6 +35,8 @@ type ListConferenceProvidersInput struct {
 
 	// The tokens used for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListConferenceProvidersOutput struct {
@@ -47,6 +49,8 @@ type ListConferenceProvidersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConferenceProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {

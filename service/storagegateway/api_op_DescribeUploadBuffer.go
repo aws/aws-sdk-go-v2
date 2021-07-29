@@ -36,6 +36,8 @@ type DescribeUploadBufferInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUploadBufferOutput struct {
@@ -58,6 +60,8 @@ type DescribeUploadBufferOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUploadBufferMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DescribeInsightRulesInput struct {
 	// Include this value, if it was returned by the previous operation, to get the
 	// next set of rules.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInsightRulesOutput struct {
@@ -53,6 +55,8 @@ type DescribeInsightRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInsightRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

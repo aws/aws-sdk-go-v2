@@ -33,6 +33,8 @@ type GetConferenceProviderInput struct {
 	//
 	// This member is required.
 	ConferenceProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetConferenceProviderOutput struct {
@@ -42,6 +44,8 @@ type GetConferenceProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConferenceProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

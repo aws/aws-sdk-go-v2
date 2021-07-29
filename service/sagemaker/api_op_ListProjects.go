@@ -53,6 +53,8 @@ type ListProjectsInput struct {
 
 	// The sort order for results. The default is Ascending.
 	SortOrder types.ProjectSortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListProjectsOutput struct {
@@ -69,6 +71,8 @@ type ListProjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

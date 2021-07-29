@@ -41,6 +41,8 @@ type TestRenderTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type TestRenderTemplateOutput struct {
@@ -51,6 +53,8 @@ type TestRenderTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestRenderTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

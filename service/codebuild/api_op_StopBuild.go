@@ -33,6 +33,8 @@ type StopBuildInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type StopBuildOutput struct {
@@ -42,6 +44,8 @@ type StopBuildOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {

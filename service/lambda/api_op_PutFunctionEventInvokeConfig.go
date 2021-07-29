@@ -85,6 +85,8 @@ type PutFunctionEventInvokeConfigInput struct {
 
 	// A version number or alias name.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type PutFunctionEventInvokeConfigOutput struct {
@@ -117,6 +119,8 @@ type PutFunctionEventInvokeConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutFunctionEventInvokeConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

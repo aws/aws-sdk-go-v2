@@ -10,6 +10,8 @@ import (
 // You have specified a template that is not valid or supported.
 type ConformancePackTemplateValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConformancePackTemplateValidationException) Error() string {
@@ -31,6 +33,8 @@ func (e *ConformancePackTemplateValidationException) ErrorFault() smithy.ErrorFa
 // Your Amazon S3 bucket policy does not permit AWS Config to write to it.
 type InsufficientDeliveryPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientDeliveryPolicyException) Error() string {
@@ -73,6 +77,8 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 // bucket.
 type InsufficientPermissionsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientPermissionsException) Error() string {
@@ -92,6 +98,8 @@ func (e *InsufficientPermissionsException) ErrorFault() smithy.ErrorFault { retu
 // You have provided a configuration recorder name that is not valid.
 type InvalidConfigurationRecorderNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConfigurationRecorderNameException) Error() string {
@@ -113,6 +121,8 @@ func (e *InvalidConfigurationRecorderNameException) ErrorFault() smithy.ErrorFau
 // The specified delivery channel name is not valid.
 type InvalidDeliveryChannelNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeliveryChannelNameException) Error() string {
@@ -134,6 +144,8 @@ func (e *InvalidDeliveryChannelNameException) ErrorFault() smithy.ErrorFault {
 // The syntax of the query is incorrect.
 type InvalidExpressionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidExpressionException) Error() string {
@@ -151,6 +163,8 @@ func (e *InvalidExpressionException) ErrorFault() smithy.ErrorFault { return smi
 // The specified limit is outside the allowable range.
 type InvalidLimitException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLimitException) Error() string {
@@ -169,6 +183,8 @@ func (e *InvalidLimitException) ErrorFault() smithy.ErrorFault { return smithy.F
 // returned in the previous response to get the next page of results.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -187,6 +203,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // are valid and try again.
 type InvalidParameterValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -205,6 +223,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // list of resource types. Invalid values might also be incorrectly formatted.
 type InvalidRecordingGroupException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRecordingGroupException) Error() string {
@@ -222,6 +242,8 @@ func (e *InvalidRecordingGroupException) ErrorFault() smithy.ErrorFault { return
 // The specified ResultToken is invalid.
 type InvalidResultTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResultTokenException) Error() string {
@@ -239,6 +261,8 @@ func (e *InvalidResultTokenException) ErrorFault() smithy.ErrorFault { return sm
 // You have provided a null or empty role ARN.
 type InvalidRoleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRoleException) Error() string {
@@ -256,6 +280,8 @@ func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The specified Amazon S3 key prefix is not valid.
 type InvalidS3KeyPrefixException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3KeyPrefixException) Error() string {
@@ -273,6 +299,8 @@ func (e *InvalidS3KeyPrefixException) ErrorFault() smithy.ErrorFault { return sm
 // The specified Amazon KMS Key ARN is not valid.
 type InvalidS3KmsKeyArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3KmsKeyArnException) Error() string {
@@ -290,6 +318,8 @@ func (e *InvalidS3KmsKeyArnException) ErrorFault() smithy.ErrorFault { return sm
 // The specified Amazon SNS topic does not exist.
 type InvalidSNSTopicARNException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSNSTopicARNException) Error() string {
@@ -308,6 +338,8 @@ func (e *InvalidSNSTopicARNException) ErrorFault() smithy.ErrorFault { return sm
 // before the later time.
 type InvalidTimeRangeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTimeRangeException) Error() string {
@@ -326,6 +358,8 @@ func (e *InvalidTimeRangeException) ErrorFault() smithy.ErrorFault { return smit
 // recorder is running.
 type LastDeliveryChannelDeleteFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LastDeliveryChannelDeleteFailedException) Error() string {
@@ -350,6 +384,8 @@ func (e *LastDeliveryChannelDeleteFailedException) ErrorFault() smithy.ErrorFaul
 // number of accounts and aggregators exceeds the limit.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -368,6 +404,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // account. Delete unused resources using DeleteResourceConfig.
 type MaxActiveResourcesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxActiveResourcesExceededException) Error() string {
@@ -391,6 +429,8 @@ func (e *MaxActiveResourcesExceededException) ErrorFault() smithy.ErrorFault {
 // add new rules.
 type MaxNumberOfConfigRulesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxNumberOfConfigRulesExceededException) Error() string {
@@ -412,6 +452,8 @@ func (e *MaxNumberOfConfigRulesExceededException) ErrorFault() smithy.ErrorFault
 // You have reached the limit of the number of recorders you can create.
 type MaxNumberOfConfigurationRecordersExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxNumberOfConfigurationRecordersExceededException) Error() string {
@@ -434,6 +476,8 @@ func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorFault() smithy
 // (6 conformance pack with 25 AWS Config rules per pack).
 type MaxNumberOfConformancePacksExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxNumberOfConformancePacksExceededException) Error() string {
@@ -455,6 +499,8 @@ func (e *MaxNumberOfConformancePacksExceededException) ErrorFault() smithy.Error
 // You have reached the limit of the number of delivery channels you can create.
 type MaxNumberOfDeliveryChannelsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxNumberOfDeliveryChannelsExceededException) Error() string {
@@ -477,6 +523,8 @@ func (e *MaxNumberOfDeliveryChannelsExceededException) ErrorFault() smithy.Error
 // create.
 type MaxNumberOfOrganizationConfigRulesExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxNumberOfOrganizationConfigRulesExceededException) Error() string {
@@ -500,6 +548,8 @@ func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorFault() smith
 // account).
 type MaxNumberOfOrganizationConformancePacksExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxNumberOfOrganizationConformancePacksExceededException) Error() string {
@@ -522,6 +572,8 @@ func (e *MaxNumberOfOrganizationConformancePacksExceededException) ErrorFault() 
 // that name already exists.
 type MaxNumberOfRetentionConfigurationsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxNumberOfRetentionConfigurationsExceededException) Error() string {
@@ -544,6 +596,8 @@ func (e *MaxNumberOfRetentionConfigurationsExceededException) ErrorFault() smith
 // describe your resources. Create a configuration recorder.
 type NoAvailableConfigurationRecorderException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoAvailableConfigurationRecorderException) Error() string {
@@ -565,6 +619,8 @@ func (e *NoAvailableConfigurationRecorderException) ErrorFault() smithy.ErrorFau
 // There is no delivery channel available to record configurations.
 type NoAvailableDeliveryChannelException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoAvailableDeliveryChannelException) Error() string {
@@ -586,6 +642,8 @@ func (e *NoAvailableDeliveryChannelException) ErrorFault() smithy.ErrorFault {
 // Organization is no longer available.
 type NoAvailableOrganizationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoAvailableOrganizationException) Error() string {
@@ -605,6 +663,8 @@ func (e *NoAvailableOrganizationException) ErrorFault() smithy.ErrorFault { retu
 // There is no configuration recorder running.
 type NoRunningConfigurationRecorderException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoRunningConfigurationRecorderException) Error() string {
@@ -626,6 +686,8 @@ func (e *NoRunningConfigurationRecorderException) ErrorFault() smithy.ErrorFault
 // The specified Amazon S3 bucket does not exist.
 type NoSuchBucketException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchBucketException) Error() string {
@@ -644,6 +706,8 @@ func (e *NoSuchBucketException) ErrorFault() smithy.ErrorFault { return smithy.F
 // names are correct and try again.
 type NoSuchConfigRuleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchConfigRuleException) Error() string {
@@ -661,6 +725,8 @@ func (e *NoSuchConfigRuleException) ErrorFault() smithy.ErrorFault { return smit
 // AWS Config rule that you passed in the filter does not exist.
 type NoSuchConfigRuleInConformancePackException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchConfigRuleInConformancePackException) Error() string {
@@ -682,6 +748,8 @@ func (e *NoSuchConfigRuleInConformancePackException) ErrorFault() smithy.ErrorFa
 // You have specified a configuration aggregator that does not exist.
 type NoSuchConfigurationAggregatorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchConfigurationAggregatorException) Error() string {
@@ -703,6 +771,8 @@ func (e *NoSuchConfigurationAggregatorException) ErrorFault() smithy.ErrorFault 
 // You have specified a configuration recorder that does not exist.
 type NoSuchConfigurationRecorderException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchConfigurationRecorderException) Error() string {
@@ -724,6 +794,8 @@ func (e *NoSuchConfigurationRecorderException) ErrorFault() smithy.ErrorFault {
 // You specified one or more conformance packs that do not exist.
 type NoSuchConformancePackException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchConformancePackException) Error() string {
@@ -741,6 +813,8 @@ func (e *NoSuchConformancePackException) ErrorFault() smithy.ErrorFault { return
 // You have specified a delivery channel that does not exist.
 type NoSuchDeliveryChannelException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchDeliveryChannelException) Error() string {
@@ -758,6 +832,8 @@ func (e *NoSuchDeliveryChannelException) ErrorFault() smithy.ErrorFault { return
 // You specified one or more organization config rules that do not exist.
 type NoSuchOrganizationConfigRuleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchOrganizationConfigRuleException) Error() string {
@@ -781,6 +857,8 @@ func (e *NoSuchOrganizationConfigRuleException) ErrorFault() smithy.ErrorFault {
 // organization conformance pack that does not exist.
 type NoSuchOrganizationConformancePackException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchOrganizationConformancePackException) Error() string {
@@ -802,6 +880,8 @@ func (e *NoSuchOrganizationConformancePackException) ErrorFault() smithy.ErrorFa
 // You specified an AWS Config rule without a remediation configuration.
 type NoSuchRemediationConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchRemediationConfigurationException) Error() string {
@@ -823,6 +903,8 @@ func (e *NoSuchRemediationConfigurationException) ErrorFault() smithy.ErrorFault
 // You tried to delete a remediation exception that does not exist.
 type NoSuchRemediationExceptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchRemediationExceptionException) Error() string {
@@ -844,6 +926,8 @@ func (e *NoSuchRemediationExceptionException) ErrorFault() smithy.ErrorFault {
 // You have specified a retention configuration that does not exist.
 type NoSuchRetentionConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchRetentionConfigurationException) Error() string {
@@ -889,6 +973,8 @@ func (e *NoSuchRetentionConfigurationException) ErrorFault() smithy.ErrorFault {
 // account.
 type OrganizationAccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationAccessDeniedException) Error() string {
@@ -909,6 +995,8 @@ func (e *OrganizationAccessDeniedException) ErrorFault() smithy.ErrorFault { ret
 // all features enabled.
 type OrganizationAllFeaturesNotEnabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationAllFeaturesNotEnabledException) Error() string {
@@ -930,6 +1018,8 @@ func (e *OrganizationAllFeaturesNotEnabledException) ErrorFault() smithy.ErrorFa
 // You have specified a template that is not valid or supported.
 type OrganizationConformancePackTemplateValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationConformancePackTemplateValidationException) Error() string {
@@ -951,6 +1041,8 @@ func (e *OrganizationConformancePackTemplateValidationException) ErrorFault() sm
 // The configuration item size is outside the allowable range.
 type OversizedConfigurationItemException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OversizedConfigurationItemException) Error() string {
@@ -973,6 +1065,8 @@ func (e *OversizedConfigurationItemException) ErrorFault() smithy.ErrorFault {
 // Systems Manager or wait and try again later.
 type RemediationInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RemediationInProgressException) Error() string {
@@ -991,6 +1085,8 @@ func (e *RemediationInProgressException) ErrorFault() smithy.ErrorFault { return
 // moment and try again.
 type ResourceConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceConcurrentModificationException) Error() string {
@@ -1038,6 +1134,8 @@ func (e *ResourceConcurrentModificationException) ErrorFault() smithy.ErrorFault
 // and deletion is in progress. Try your request again later.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -1055,6 +1153,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // You have specified a resource that is either unknown or has not been discovered.
 type ResourceNotDiscoveredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotDiscoveredException) Error() string {
@@ -1072,6 +1172,8 @@ func (e *ResourceNotDiscoveredException) ErrorFault() smithy.ErrorFault { return
 // You have specified a resource that does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -1090,6 +1192,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // 50 tags.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -1112,6 +1216,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // validation.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

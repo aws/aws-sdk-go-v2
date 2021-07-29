@@ -50,11 +50,15 @@ type VoteOnProposalInput struct {
 	//
 	// This member is required.
 	VoterMemberId *string
+
+	noSmithyDocumentSerde
 }
 
 type VoteOnProposalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVoteOnProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {

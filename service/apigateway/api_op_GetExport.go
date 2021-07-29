@@ -58,6 +58,8 @@ type GetExportInput struct {
 	// the API with x-amazon-apigateway-authorizer extensions. postman will export the
 	// API with Postman extensions, allowing for import to the Postman tool
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The binary blob response to GetExport, which contains the generated SDK.
@@ -75,6 +77,8 @@ type GetExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

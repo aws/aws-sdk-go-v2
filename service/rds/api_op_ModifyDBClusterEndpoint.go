@@ -45,6 +45,8 @@ type ModifyDBClusterEndpointInput struct {
 
 	// List of DB instance identifiers that are part of the custom endpoint group.
 	StaticMembers []string
+
+	noSmithyDocumentSerde
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -104,6 +106,8 @@ type ModifyDBClusterEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

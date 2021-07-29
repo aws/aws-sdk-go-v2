@@ -30,6 +30,7 @@ func (c *Client) DescribeVirtualGateways(ctx context.Context, params *DescribeVi
 }
 
 type DescribeVirtualGatewaysInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeVirtualGatewaysOutput struct {
@@ -39,6 +40,8 @@ type DescribeVirtualGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVirtualGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

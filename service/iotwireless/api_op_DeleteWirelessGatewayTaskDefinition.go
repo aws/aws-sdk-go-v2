@@ -33,11 +33,15 @@ type DeleteWirelessGatewayTaskDefinitionInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWirelessGatewayTaskDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWirelessGatewayTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

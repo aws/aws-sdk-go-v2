@@ -41,6 +41,8 @@ type ListSchemaExtensionsInput struct {
 	// The ListSchemaExtensions.NextToken value from a previous call to
 	// ListSchemaExtensions. Pass null if this is the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSchemaExtensionsOutput struct {
@@ -55,6 +57,8 @@ type ListSchemaExtensionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSchemaExtensionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

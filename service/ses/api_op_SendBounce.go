@@ -69,6 +69,8 @@ type SendBounceInput struct {
 
 	// Message-related DSN fields. If not specified, Amazon SES will choose the values.
 	MessageDsn *types.MessageDsn
+
+	noSmithyDocumentSerde
 }
 
 // Represents a unique message ID.
@@ -79,6 +81,8 @@ type SendBounceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendBounceMiddlewares(stack *middleware.Stack, options Options) (err error) {

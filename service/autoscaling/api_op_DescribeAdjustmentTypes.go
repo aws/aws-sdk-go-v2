@@ -36,6 +36,7 @@ func (c *Client) DescribeAdjustmentTypes(ctx context.Context, params *DescribeAd
 }
 
 type DescribeAdjustmentTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeAdjustmentTypesOutput struct {
@@ -45,6 +46,8 @@ type DescribeAdjustmentTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAdjustmentTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

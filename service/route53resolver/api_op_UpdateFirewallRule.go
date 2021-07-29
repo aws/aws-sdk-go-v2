@@ -90,6 +90,8 @@ type UpdateFirewallRuleInput struct {
 	// numbers, for example, use 100, 200, and so on. You can change the priority
 	// setting for the rules in a rule group at any time.
 	Priority *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFirewallRuleOutput struct {
@@ -99,6 +101,8 @@ type UpdateFirewallRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

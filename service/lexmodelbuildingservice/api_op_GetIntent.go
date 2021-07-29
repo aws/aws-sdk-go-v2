@@ -41,6 +41,8 @@ type GetIntentInput struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIntentOutput struct {
@@ -110,6 +112,8 @@ type GetIntentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {

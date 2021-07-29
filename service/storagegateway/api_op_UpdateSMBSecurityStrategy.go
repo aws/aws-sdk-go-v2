@@ -51,6 +51,8 @@ type UpdateSMBSecurityStrategyInput struct {
 	//
 	// This member is required.
 	SMBSecurityStrategy types.SMBSecurityStrategy
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSMBSecurityStrategyOutput struct {
@@ -61,6 +63,8 @@ type UpdateSMBSecurityStrategyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSMBSecurityStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {

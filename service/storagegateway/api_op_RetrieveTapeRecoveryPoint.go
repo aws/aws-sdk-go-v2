@@ -46,6 +46,8 @@ type RetrieveTapeRecoveryPointInput struct {
 	//
 	// This member is required.
 	TapeARN *string
+
+	noSmithyDocumentSerde
 }
 
 // RetrieveTapeRecoveryPointOutput
@@ -57,6 +59,8 @@ type RetrieveTapeRecoveryPointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRetrieveTapeRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {

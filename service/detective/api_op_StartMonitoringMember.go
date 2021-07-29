@@ -46,11 +46,15 @@ type StartMonitoringMemberInput struct {
 	//
 	// This member is required.
 	GraphArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StartMonitoringMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMonitoringMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

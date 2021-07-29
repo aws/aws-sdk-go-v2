@@ -64,6 +64,8 @@ type UpdateLedgerPermissionsModeInput struct {
 	//
 	// This member is required.
 	PermissionsMode types.PermissionsMode
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLedgerPermissionsModeOutput struct {
@@ -79,6 +81,8 @@ type UpdateLedgerPermissionsModeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLedgerPermissionsModeMiddlewares(stack *middleware.Stack, options Options) (err error) {

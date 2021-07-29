@@ -40,6 +40,8 @@ type ListGroundStationsInput struct {
 
 	// Satellite ID to retrieve on-boarded ground stations.
 	SatelliteId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -54,6 +56,8 @@ type ListGroundStationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGroundStationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

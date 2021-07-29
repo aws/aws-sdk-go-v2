@@ -44,6 +44,8 @@ type UpdateEndpointsBatchInput struct {
 	//
 	// This member is required.
 	EndpointBatchRequest *types.EndpointBatchRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEndpointsBatchOutput struct {
@@ -55,6 +57,8 @@ type UpdateEndpointsBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEndpointsBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

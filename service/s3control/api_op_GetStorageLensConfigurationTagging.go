@@ -50,6 +50,8 @@ type GetStorageLensConfigurationTaggingInput struct {
 	//
 	// This member is required.
 	ConfigId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStorageLensConfigurationTaggingOutput struct {
@@ -59,6 +61,8 @@ type GetStorageLensConfigurationTaggingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStorageLensConfigurationTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type GetGroupConfigurationInput struct {
 
 	// The name or the ARN of the resource group.
 	Group *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGroupConfigurationOutput struct {
@@ -49,6 +51,8 @@ type GetGroupConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

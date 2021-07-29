@@ -60,6 +60,8 @@ type UpdateServiceInput struct {
 	//
 	// This member is required.
 	Service *types.ServiceChange
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceOutput struct {
@@ -71,6 +73,8 @@ type UpdateServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

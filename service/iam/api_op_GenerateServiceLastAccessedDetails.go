@@ -91,6 +91,8 @@ type GenerateServiceLastAccessedDetailsInput struct {
 	// data. If you don't include this optional parameter, the operation generates
 	// service data.
 	Granularity types.AccessAdvisorUsageGranularityType
+
+	noSmithyDocumentSerde
 }
 
 type GenerateServiceLastAccessedDetailsOutput struct {
@@ -103,6 +105,8 @@ type GenerateServiceLastAccessedDetailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateServiceLastAccessedDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

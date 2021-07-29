@@ -187,6 +187,8 @@ type CreateEventSourceMappingInput struct {
 	// (Streams only) The duration in seconds of a processing window. The range is
 	// between 1 second up to 900 seconds.
 	TumblingWindowInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // A mapping between an Amazon Web Services resource and an Lambda function. See
@@ -277,6 +279,8 @@ type CreateEventSourceMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

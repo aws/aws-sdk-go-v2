@@ -87,6 +87,8 @@ type GetObjectTaggingInput struct {
 
 	// The versionId of the object for which to get the tagging information.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectTaggingOutput struct {
@@ -101,6 +103,8 @@ type GetObjectTaggingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

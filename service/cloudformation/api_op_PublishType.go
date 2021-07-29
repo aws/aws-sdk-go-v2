@@ -55,6 +55,8 @@ type PublishTypeInput struct {
 	// The name of the extension. Conditional: You must specify Arn, or TypeName and
 	// Type.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type PublishTypeOutput struct {
@@ -65,6 +67,8 @@ type PublishTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

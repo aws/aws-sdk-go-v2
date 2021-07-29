@@ -38,6 +38,8 @@ type GetJobDetailsInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetJobDetails action.
@@ -49,6 +51,8 @@ type GetJobDetailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetJobDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

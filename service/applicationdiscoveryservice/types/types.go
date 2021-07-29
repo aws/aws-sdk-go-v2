@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -21,6 +22,8 @@ type AgentConfigurationStatus struct {
 	// operations. The system has recorded the data collection operation. The
 	// agent/connector receives this command the next time it polls for a new command.
 	OperationSucceeded bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about agents or connectors associated with the user’s AWS account.
@@ -59,6 +62,8 @@ type AgentInfo struct {
 
 	// The agent or connector version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Network details about the host where the agent/connector resides.
@@ -69,6 +74,8 @@ type AgentNetworkInfo struct {
 
 	// The MAC address for the host where the agent/connector resides.
 	MacAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Error messages returned for each import task that you deleted as a response for
@@ -83,6 +90,8 @@ type BatchDeleteImportDataError struct {
 
 	// The unique import ID associated with the error that occurred.
 	ImportTaskId *string
+
+	noSmithyDocumentSerde
 }
 
 // Tags for a configuration item. Tags are metadata that help you categorize IT
@@ -104,6 +113,8 @@ type ConfigurationTag struct {
 
 	// A value on which to filter. For example key = serverType and value = web server.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of continuous export descriptions.
@@ -202,6 +213,8 @@ type ContinuousExportDescription struct {
 
 	// The timestamp that represents when this continuous export was stopped.
 	StopTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Inventory data for installed discovery agents.
@@ -241,6 +254,8 @@ type CustomerAgentInfo struct {
 	//
 	// This member is required.
 	UnknownAgents int32
+
+	noSmithyDocumentSerde
 }
 
 // Inventory data for installed discovery connectors.
@@ -280,6 +295,8 @@ type CustomerConnectorInfo struct {
 	//
 	// This member is required.
 	UnknownConnectors int32
+
+	noSmithyDocumentSerde
 }
 
 // Used to select which agent's data is to be exported. A single agent ID may be
@@ -305,6 +322,8 @@ type ExportFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information regarding the export status of discovered data. The value is an
@@ -348,6 +367,8 @@ type ExportInfo struct {
 	// The value of startTime parameter in the StartExportTask request. If no startTime
 	// was requested, this result does not appear in ExportInfo.
 	RequestedStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A filter that can use conditional operators. For more information about filters,
@@ -376,6 +397,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // An array of information related to the import task request that includes status
@@ -445,6 +468,8 @@ type ImportTask struct {
 	// information can be found in the downloadable archive defined in the
 	// errorsAndFailedEntriesZip field, or in the Migration Hub management console.
 	Status ImportStatus
+
+	noSmithyDocumentSerde
 }
 
 // A name-values pair of elements you can use to filter the results when querying
@@ -458,6 +483,8 @@ type ImportTaskFilter struct {
 	// An array of strings that you can provide to match against a specific name,
 	// status, or import task ID to filter the results for your import task queries.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Details about neighboring servers.
@@ -483,6 +510,8 @@ type NeighborConnectionDetail struct {
 
 	// The network protocol used for the connection.
 	TransportProtocol *string
+
+	noSmithyDocumentSerde
 }
 
 // A field and direction for ordered output.
@@ -495,6 +524,8 @@ type OrderByElement struct {
 
 	// Ordering direction.
 	SortOrder OrderString
+
+	noSmithyDocumentSerde
 }
 
 // Metadata that help you categorize IT assets.
@@ -509,6 +540,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The tag filter. Valid names are: tagKey, tagValue, configurationId.
@@ -523,4 +556,8 @@ type TagFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

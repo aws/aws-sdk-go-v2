@@ -43,11 +43,15 @@ type UpdateMemberInput struct {
 
 	// Configuration properties for publishing to Amazon CloudWatch Logs.
 	LogPublishingConfiguration *types.MemberLogPublishingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMemberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

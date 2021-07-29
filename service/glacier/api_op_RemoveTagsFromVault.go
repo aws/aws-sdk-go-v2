@@ -50,11 +50,15 @@ type RemoveTagsFromVaultInput struct {
 
 	// A list of tag keys. Each corresponding tag is removed from the vault.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveTagsFromVaultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveTagsFromVaultMiddlewares(stack *middleware.Stack, options Options) (err error) {

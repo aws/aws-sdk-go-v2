@@ -64,6 +64,8 @@ type StartTextDetectionInput struct {
 	// publishes the completion status of a video analysis operation. For more
 	// information, see api-video.
 	NotificationChannel *types.NotificationChannel
+
+	noSmithyDocumentSerde
 }
 
 type StartTextDetectionOutput struct {
@@ -74,6 +76,8 @@ type StartTextDetectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTextDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

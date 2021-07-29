@@ -33,6 +33,8 @@ type DescribeRoleAliasInput struct {
 	//
 	// This member is required.
 	RoleAlias *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRoleAliasOutput struct {
@@ -42,6 +44,8 @@ type DescribeRoleAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

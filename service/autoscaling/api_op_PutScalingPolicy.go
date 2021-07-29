@@ -159,6 +159,8 @@ type PutScalingPolicyInput struct {
 	// in the Amazon EC2 Auto Scaling API Reference. Required if the policy type is
 	// TargetTrackingScaling.
 	TargetTrackingConfiguration *types.TargetTrackingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of PutScalingPolicy.
@@ -172,6 +174,8 @@ type PutScalingPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

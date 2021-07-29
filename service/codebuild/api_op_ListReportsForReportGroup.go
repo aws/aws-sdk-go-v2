@@ -54,6 +54,8 @@ type ListReportsForReportGroupInput struct {
 	// Use to specify whether the results are returned in ascending or descending
 	// order.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type ListReportsForReportGroupOutput struct {
@@ -71,6 +73,8 @@ type ListReportsForReportGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReportsForReportGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DescribeThesaurusInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeThesaurusOutput struct {
@@ -91,6 +93,8 @@ type DescribeThesaurusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeThesaurusMiddlewares(stack *middleware.Stack, options Options) (err error) {

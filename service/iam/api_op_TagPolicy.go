@@ -68,11 +68,15 @@ type TagPolicyInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type TagPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

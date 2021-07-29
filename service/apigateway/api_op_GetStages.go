@@ -37,6 +37,8 @@ type GetStagesInput struct {
 
 	// The stages' deployment identifiers.
 	DeploymentId *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of Stage resources that are associated with the ApiKey resource.
@@ -49,6 +51,8 @@ type GetStagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

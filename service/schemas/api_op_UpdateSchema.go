@@ -52,6 +52,8 @@ type UpdateSchemaInput struct {
 
 	// The schema type for the events schema.
 	Type types.Type
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSchemaOutput struct {
@@ -82,6 +84,8 @@ type UpdateSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

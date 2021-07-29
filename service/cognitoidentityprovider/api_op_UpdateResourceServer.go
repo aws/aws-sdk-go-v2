@@ -48,6 +48,8 @@ type UpdateResourceServerInput struct {
 
 	// The scope values to be set for the resource server.
 	Scopes []types.ResourceServerScopeType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResourceServerOutput struct {
@@ -59,6 +61,8 @@ type UpdateResourceServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResourceServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

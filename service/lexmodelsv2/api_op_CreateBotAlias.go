@@ -69,6 +69,8 @@ type CreateBotAliasInput struct {
 	// alias, you can't use the UpdateBotAlias operation to update the tags on a bot
 	// alias. To update tags, use the TagResource operation.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBotAliasOutput struct {
@@ -111,6 +113,8 @@ type CreateBotAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

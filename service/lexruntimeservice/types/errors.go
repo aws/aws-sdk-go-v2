@@ -11,6 +11,8 @@ import (
 // (Amazon Polly, AWS Lambda) failed with an internal service error.
 type BadGatewayException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadGatewayException) Error() string {
@@ -29,6 +31,8 @@ func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // build failed, is still in progress, or contains unbuilt changes.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -46,6 +50,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Two clients are using the same AWS account, Amazon Lex bot, and user ID.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -73,6 +79,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // without removing any slot values.
 type DependencyFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependencyFailedException) Error() string {
@@ -90,6 +98,8 @@ func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smit
 // Internal service error. Retry the call.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -109,6 +119,8 @@ type LimitExceededException struct {
 	Message *string
 
 	RetryAfterSeconds *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -126,6 +138,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // This exception is not used.
 type LoopDetectedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LoopDetectedException) Error() string {
@@ -143,6 +157,8 @@ func (e *LoopDetectedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The accept header in the request does not have a valid value.
 type NotAcceptableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAcceptableException) Error() string {
@@ -161,6 +177,8 @@ func (e *NotAcceptableException) ErrorFault() smithy.ErrorFault { return smithy.
 // found.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -178,6 +196,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The input speech is too long.
 type RequestTimeoutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestTimeoutException) Error() string {
@@ -195,6 +215,8 @@ func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy
 // The Content-Type header (PostContent API) has an invalid value.
 type UnsupportedMediaTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedMediaTypeException) Error() string {

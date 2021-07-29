@@ -38,6 +38,8 @@ type GetComplianceSummaryByResourceTypeInput struct {
 	// can specify that the resource type is an AWS account by specifying
 	// AWS::::Account.
 	ResourceTypes []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -50,6 +52,8 @@ type GetComplianceSummaryByResourceTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetComplianceSummaryByResourceTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

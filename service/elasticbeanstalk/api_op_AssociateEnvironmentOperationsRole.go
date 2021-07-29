@@ -44,11 +44,15 @@ type AssociateEnvironmentOperationsRoleInput struct {
 	//
 	// This member is required.
 	OperationsRole *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateEnvironmentOperationsRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateEnvironmentOperationsRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

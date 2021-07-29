@@ -42,6 +42,8 @@ type UpdateEndpointWeightsAndCapacitiesInput struct {
 	//
 	// This member is required.
 	EndpointName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEndpointWeightsAndCapacitiesOutput struct {
@@ -53,6 +55,8 @@ type UpdateEndpointWeightsAndCapacitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEndpointWeightsAndCapacitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

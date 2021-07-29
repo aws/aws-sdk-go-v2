@@ -46,11 +46,15 @@ type ResumeContactRecordingInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type ResumeContactRecordingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResumeContactRecordingMiddlewares(stack *middleware.Stack, options Options) (err error) {

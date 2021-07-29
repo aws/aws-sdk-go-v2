@@ -113,6 +113,8 @@ type GetDashboardEmbedUrlInput struct {
 	// Omit this parameter for users in the
 	// third group – IAM users and IAM role-based sessions.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Output returned from the GetDashboardEmbedUrl operation.
@@ -132,6 +134,8 @@ type GetDashboardEmbedUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDashboardEmbedUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

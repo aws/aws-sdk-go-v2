@@ -29,6 +29,7 @@ func (c *Client) DescribeScalingProcessTypes(ctx context.Context, params *Descri
 }
 
 type DescribeScalingProcessTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeScalingProcessTypesOutput struct {
@@ -38,6 +39,8 @@ type DescribeScalingProcessTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScalingProcessTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

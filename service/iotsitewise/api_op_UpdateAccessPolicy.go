@@ -58,11 +58,15 @@ type UpdateAccessPolicyInput struct {
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

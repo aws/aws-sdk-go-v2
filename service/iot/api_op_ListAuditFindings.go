@@ -60,6 +60,8 @@ type ListAuditFindingsInput struct {
 	// A filter to limit results to the audit with the specified ID. You must specify
 	// either the taskId or the startTime and endTime, but not both.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAuditFindingsOutput struct {
@@ -73,6 +75,8 @@ type ListAuditFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAuditFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

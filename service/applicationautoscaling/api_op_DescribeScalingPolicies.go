@@ -189,6 +189,8 @@ type DescribeScalingPoliciesInput struct {
 	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	// brokers in an Amazon MSK cluster.
 	ScalableDimension types.ScalableDimension
+
+	noSmithyDocumentSerde
 }
 
 type DescribeScalingPoliciesOutput struct {
@@ -202,6 +204,8 @@ type DescribeScalingPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

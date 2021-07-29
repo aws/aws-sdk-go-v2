@@ -43,6 +43,8 @@ type ListApplicationDependenciesInput struct {
 
 	// The semantic version of the application to get.
 	SemanticVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type ListApplicationDependenciesOutput struct {
@@ -55,6 +57,8 @@ type ListApplicationDependenciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListApplicationDependenciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

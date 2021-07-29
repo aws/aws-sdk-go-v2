@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -18,6 +19,8 @@ type ChannelTargetInfo struct {
 	// The number of minutes to wait to retry sending engagement in the case the
 	// engagement initially fails.
 	RetryIntervalInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // A personal contact or escalation plan that Incident Manager engages during an
@@ -42,6 +45,8 @@ type Contact struct {
 
 	// The full name of the contact or escalation plan.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 // The method that Incident Manager uses to engage a contact.
@@ -84,6 +89,8 @@ type ContactChannel struct {
 	//
 	// * EMAIL
 	Type ChannelType
+
+	noSmithyDocumentSerde
 }
 
 // The details that Incident Manager uses when trying to engage the contact
@@ -101,6 +108,8 @@ type ContactChannelAddress struct {
 	// * EMAIL -
 	// any standard email format
 	SimpleAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // The contact that Incident Manager is engaging during an incident.
@@ -114,6 +123,8 @@ type ContactTargetInfo struct {
 
 	// The Amazon Resource Name (ARN) of the contact.
 	ContactId *string
+
+	noSmithyDocumentSerde
 }
 
 // Incident Manager reaching out to a contact or escalation plan to engage contact
@@ -143,6 +154,8 @@ type Engagement struct {
 
 	// The time that the engagement ended.
 	StopTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Incident Manager engaging a contact's contact channel.
@@ -179,6 +192,8 @@ type Page struct {
 
 	// The time that Incident Manager engaged the contact channel.
 	SentTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The stages that an escalation plan or engagement plan engages contacts and
@@ -190,6 +205,8 @@ type Plan struct {
 	//
 	// This member is required.
 	Stages []Stage
+
+	noSmithyDocumentSerde
 }
 
 // Records events during an engagement.
@@ -210,6 +227,8 @@ type Receipt struct {
 
 	// Information provided during the page acknowledgement.
 	ReceiptInfo *string
+
+	noSmithyDocumentSerde
 }
 
 // A set amount of time that an escalation plan or engagement plan engages the
@@ -226,6 +245,8 @@ type Stage struct {
 	//
 	// This member is required.
 	Targets []Target
+
+	noSmithyDocumentSerde
 }
 
 // A container of a key-value name pair.
@@ -236,6 +257,8 @@ type Tag struct {
 
 	// Value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The contact or contact channel that is being engaged.
@@ -246,6 +269,8 @@ type Target struct {
 
 	// Information about the contact that Incident Manager is engaging.
 	ContactTargetInfo *ContactTargetInfo
+
+	noSmithyDocumentSerde
 }
 
 // A range of between two set times
@@ -256,6 +281,8 @@ type TimeRange struct {
 
 	// The start of the time range.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about which field caused the exception.
@@ -270,4 +297,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

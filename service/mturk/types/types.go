@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -64,6 +65,8 @@ type Assignment struct {
 
 	// The ID of the Worker who accepted the HIT.
 	WorkerId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a Bonus payment paid to a Worker.
@@ -83,6 +86,8 @@ type BonusPayment struct {
 
 	// The ID of the Worker to whom the bonus was paid.
 	WorkerId *string
+
+	noSmithyDocumentSerde
 }
 
 // The HIT data structure represents a single HIT, including all the information
@@ -167,6 +172,8 @@ type HIT struct {
 
 	// The title of the HIT.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // The HITLayoutParameter data structure defines parameter values used with a
@@ -183,6 +190,8 @@ type HITLayoutParameter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The Locale data structure represents a geographical region or location.
@@ -197,6 +206,8 @@ type Locale struct {
 	// The state or subdivision of the locale. A valid ISO 3166-2 subdivision code. For
 	// example, the code WA refers to the state of Washington.
 	Subdivision *string
+
+	noSmithyDocumentSerde
 }
 
 // The NotificationSpecification data structure describes a HIT event notification
@@ -236,6 +247,8 @@ type NotificationSpecification struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // When MTurk encounters an issue with notifying the Workers you specified, it
@@ -250,6 +263,8 @@ type NotifyWorkersFailureStatus struct {
 
 	// The ID of the Worker.
 	WorkerId *string
+
+	noSmithyDocumentSerde
 }
 
 // This data structure is the data type for the AnswerKey parameter of the
@@ -264,6 +279,8 @@ type ParameterMapEntry struct {
 	// The list of answers to the question specified in the MapEntry Key element. The
 	// Worker must match all values in order for the answer to be scored correctly.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Name of the parameter from the Review policy.
@@ -277,6 +294,8 @@ type PolicyParameter struct {
 
 	// The list of values of the Parameter
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The Qualification data structure represents a Qualification assigned to a user,
@@ -304,6 +323,8 @@ type Qualification struct {
 
 	// The ID of the Worker who possesses the Qualification.
 	WorkerId *string
+
+	noSmithyDocumentSerde
 }
 
 // The QualificationRequest data structure represents a request a Worker has made
@@ -338,6 +359,8 @@ type QualificationRequest struct {
 
 	// The ID of the Worker requesting the Qualification.
 	WorkerId *string
+
+	noSmithyDocumentSerde
 }
 
 // The QualificationRequirement data structure describes a Qualification that a
@@ -413,6 +436,8 @@ type QualificationRequirement struct {
 	//
 	// Deprecated: This member has been deprecated.
 	RequiredToPreview *bool
+
+	noSmithyDocumentSerde
 }
 
 // The QualificationType data structure represents a Qualification type, a
@@ -481,6 +506,8 @@ type QualificationType struct {
 	// The amount of time, in seconds, given to a Worker to complete the Qualification
 	// test, beginning from the time the Worker requests the Qualification.
 	TestDurationInSeconds *int64
+
+	noSmithyDocumentSerde
 }
 
 // Both the AssignmentReviewReport and the HITReviewReport elements contains the
@@ -514,6 +541,8 @@ type ReviewActionDetail struct {
 
 	// The type of object in TargetId.
 	TargetType *string
+
+	noSmithyDocumentSerde
 }
 
 // HIT Review Policy data structures represent HIT review policies, which you
@@ -528,6 +557,8 @@ type ReviewPolicy struct {
 
 	// Name of the parameter from the Review policy.
 	Parameters []PolicyParameter
+
+	noSmithyDocumentSerde
 }
 
 // Contains both ReviewResult and ReviewAction elements for a particular HIT.
@@ -538,6 +569,8 @@ type ReviewReport struct {
 
 	// A list of ReviewResults objects for each action specified in the Review Policy.
 	ReviewResults []ReviewResultDetail
+
+	noSmithyDocumentSerde
 }
 
 // This data structure is returned multiple times for each result specified in the
@@ -569,6 +602,8 @@ type ReviewResultDetail struct {
 
 	// The values of Key provided by the review policies you have selected.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The WorkerBlock data structure represents a Worker who has been blocked. It has
@@ -580,4 +615,8 @@ type WorkerBlock struct {
 
 	// The ID of the Worker who accepted the HIT.
 	WorkerId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

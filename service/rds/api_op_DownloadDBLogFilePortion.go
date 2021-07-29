@@ -73,6 +73,8 @@ type DownloadDBLogFilePortionInput struct {
 	// response as the Marker value for the next request, continuing until the
 	// AdditionalDataPending response element returns false.
 	NumberOfLines int32
+
+	noSmithyDocumentSerde
 }
 
 // This data type is used as a response element to DownloadDBLogFilePortion.
@@ -89,6 +91,8 @@ type DownloadDBLogFilePortionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDownloadDBLogFilePortionMiddlewares(stack *middleware.Stack, options Options) (err error) {

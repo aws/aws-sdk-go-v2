@@ -79,6 +79,8 @@ type UpdateServicePipelineInput struct {
 	// The minor version of the service template that was used to create the service
 	// that the pipeline is associated with.
 	TemplateMinorVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServicePipelineOutput struct {
@@ -90,6 +92,8 @@ type UpdateServicePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServicePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

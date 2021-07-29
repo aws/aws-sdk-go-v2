@@ -59,6 +59,8 @@ type CreateCustomMetricInput struct {
 
 	// Metadata that can be used to manage the custom metric.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateCustomMetricOutput struct {
@@ -72,6 +74,8 @@ type CreateCustomMetricOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {

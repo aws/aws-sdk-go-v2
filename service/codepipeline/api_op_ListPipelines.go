@@ -39,6 +39,8 @@ type ListPipelinesInput struct {
 	// An identifier that was returned from the previous list pipelines call. It can be
 	// used to return the next set of pipelines in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListPipelines action.
@@ -54,6 +56,8 @@ type ListPipelinesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {

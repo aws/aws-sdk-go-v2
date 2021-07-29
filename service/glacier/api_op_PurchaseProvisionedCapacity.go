@@ -36,6 +36,8 @@ type PurchaseProvisionedCapacityInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type PurchaseProvisionedCapacityOutput struct {
@@ -45,6 +47,8 @@ type PurchaseProvisionedCapacityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseProvisionedCapacityMiddlewares(stack *middleware.Stack, options Options) (err error) {

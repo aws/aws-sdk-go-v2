@@ -12,6 +12,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -31,6 +33,8 @@ type BadRequestException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -51,6 +55,8 @@ type ConflictException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -70,6 +76,8 @@ type ForbiddenException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -89,6 +97,8 @@ type NotFoundException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -108,6 +118,8 @@ type ResourceLimitExceededException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceededException) Error() string {
@@ -127,6 +139,8 @@ type ServiceFailureException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceFailureException) Error() string {
@@ -146,6 +160,8 @@ type ServiceUnavailableException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -165,6 +181,8 @@ type ThrottledClientException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottledClientException) Error() string {
@@ -184,6 +202,8 @@ type UnauthorizedClientException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedClientException) Error() string {
@@ -204,6 +224,8 @@ type UnprocessableEntityException struct {
 	Message *string
 
 	Code ErrorCode
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnprocessableEntityException) Error() string {

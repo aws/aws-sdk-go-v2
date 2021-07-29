@@ -35,6 +35,8 @@ type ListTestGridProjectsInput struct {
 
 	// From a response, used to continue a paginated listing.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTestGridProjectsOutput struct {
@@ -48,6 +50,8 @@ type ListTestGridProjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTestGridProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

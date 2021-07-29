@@ -57,6 +57,8 @@ type GetResourceShareAssociationsInput struct {
 
 	// The Amazon Resource Names (ARN) of the resource shares.
 	ResourceShareArns []string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceShareAssociationsOutput struct {
@@ -70,6 +72,8 @@ type GetResourceShareAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceShareAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

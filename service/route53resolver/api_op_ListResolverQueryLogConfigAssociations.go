@@ -110,6 +110,8 @@ type ListResolverQueryLogConfigAssociationsInput struct {
 	// NextToken parameter, you must use the same value for SortOrder, if any, as in
 	// the previous request.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListResolverQueryLogConfigAssociationsOutput struct {
@@ -139,6 +141,8 @@ type ListResolverQueryLogConfigAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResolverQueryLogConfigAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

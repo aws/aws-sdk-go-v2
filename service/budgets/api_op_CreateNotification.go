@@ -53,12 +53,16 @@ type CreateNotificationInput struct {
 	//
 	// This member is required.
 	Subscribers []types.Subscriber
+
+	noSmithyDocumentSerde
 }
 
 // Response of CreateNotification
 type CreateNotificationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {

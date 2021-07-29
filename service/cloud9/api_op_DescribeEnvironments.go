@@ -33,6 +33,8 @@ type DescribeEnvironmentsInput struct {
 	//
 	// This member is required.
 	EnvironmentIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEnvironmentsOutput struct {
@@ -42,6 +44,8 @@ type DescribeEnvironmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

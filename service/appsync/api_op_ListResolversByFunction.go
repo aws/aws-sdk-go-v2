@@ -45,6 +45,8 @@ type ListResolversByFunctionInput struct {
 	// An identifier that was returned from the previous call to this operation, which
 	// you can use to return the next set of items in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResolversByFunctionOutput struct {
@@ -57,6 +59,8 @@ type ListResolversByFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResolversByFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -56,6 +56,8 @@ type DescribeCodeCoveragesInput struct {
 
 	// Specifies if the results are sorted in ascending or descending order.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCodeCoveragesOutput struct {
@@ -69,6 +71,8 @@ type DescribeCodeCoveragesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCodeCoveragesMiddlewares(stack *middleware.Stack, options Options) (err error) {

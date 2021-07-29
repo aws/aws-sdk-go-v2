@@ -39,11 +39,15 @@ type DeleteApplicationInput struct {
 	// When set to true, running environments will be terminated before deleting the
 	// application.
 	TerminateEnvByForce *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

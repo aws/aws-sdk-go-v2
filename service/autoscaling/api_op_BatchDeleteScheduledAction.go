@@ -38,6 +38,8 @@ type BatchDeleteScheduledActionInput struct {
 	//
 	// This member is required.
 	ScheduledActionNames []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteScheduledActionOutput struct {
@@ -48,6 +50,8 @@ type BatchDeleteScheduledActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

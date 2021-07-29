@@ -210,6 +210,8 @@ type UpdatePipelineInput struct {
 	// storage class, Standard or ReducedRedundancy, that you want Elastic Transcoder
 	// to assign to the thumbnails that it stores in your Amazon S3 bucket.
 	ThumbnailConfig *types.PipelineOutputConfig
+
+	noSmithyDocumentSerde
 }
 
 // When you update a pipeline, Elastic Transcoder returns the values that you
@@ -227,6 +229,8 @@ type UpdatePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type ListEndpointsInput struct {
 
 	// The next endpoint requested in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEndpointsOutput struct {
@@ -58,6 +60,8 @@ type ListEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -30,6 +30,7 @@ func (c *Client) GetContainerServicePowers(ctx context.Context, params *GetConta
 }
 
 type GetContainerServicePowersInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetContainerServicePowersOutput struct {
@@ -40,6 +41,8 @@ type GetContainerServicePowersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContainerServicePowersMiddlewares(stack *middleware.Stack, options Options) (err error) {

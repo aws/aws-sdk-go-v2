@@ -95,6 +95,8 @@ type ResendConfirmationCodeInput struct {
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
+	noSmithyDocumentSerde
 }
 
 // The response from the server when the Amazon Cognito Your User Pools service
@@ -107,6 +109,8 @@ type ResendConfirmationCodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResendConfirmationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

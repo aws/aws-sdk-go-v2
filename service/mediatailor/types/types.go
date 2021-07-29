@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -29,6 +30,8 @@ type AccessConfiguration struct {
 
 	// AWS Secrets Manager access token configuration parameters.
 	SecretsManagerAccessTokenConfiguration *SecretsManagerAccessTokenConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Ad break configuration parameters.
@@ -49,6 +52,8 @@ type AdBreak struct {
 	// information about using splice_insert(), see the SCTE-35 specficiaiton, section
 	// 9.7.3.1.
 	SpliceInsertMessage *SpliceInsertMessage
+
+	noSmithyDocumentSerde
 }
 
 // For HLS, when set to true, MediaTailor passes through EXT-X-CUE-IN,
@@ -60,6 +65,8 @@ type AdMarkerPassthrough struct {
 
 	// Enables ad marker passthrough for your configuration.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Alert configuration parameters.
@@ -90,6 +97,8 @@ type Alert struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for avail suppression, also known as ad suppression. For more
@@ -112,6 +121,8 @@ type AvailSuppression struct {
 	// minutes behind the live edge, but won't fill ad breaks on or behind 45 minutes
 	// behind the live edge.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for bumpers. Bumpers are short audio or video clips that play
@@ -124,6 +135,8 @@ type Bumper struct {
 
 	// The URL for the start bumper asset.
 	StartUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for using a content delivery network (CDN), like Amazon
@@ -144,6 +157,8 @@ type CdnConfiguration struct {
 	// this ContentSegmentUrlPrefix. When AWS Elemental MediaTailor serves a manifest,
 	// it reports your CDN as the source for content segments.
 	ContentSegmentUrlPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration parameters for a channel.
@@ -182,6 +197,8 @@ type Channel struct {
 
 	// The tags to assign to the channel.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for DASH content.
@@ -206,6 +223,8 @@ type DashConfiguration struct {
 	// setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it
 	// to MULTI_PERIOD.
 	OriginManifestType OriginManifestType
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for DASH PUT operations.
@@ -226,6 +245,8 @@ type DashConfigurationForPut struct {
 	// setting is MULTI_PERIOD. For multi-period manifests, omit this setting or set it
 	// to MULTI_PERIOD.
 	OriginManifestType OriginManifestType
+
+	noSmithyDocumentSerde
 }
 
 // Dash manifest configuration parameters.
@@ -247,6 +268,8 @@ type DashPlaylistSettings struct {
 	// Amount of time (in seconds) that the player should be from the live point at the
 	// end of the manifest. Minimum value: 2 seconds. Maximum value: 60 seconds.
 	SuggestedPresentationDelaySeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // The optional configuration for a server that serves segments. Use this if you
@@ -260,6 +283,8 @@ type DefaultSegmentDeliveryConfiguration struct {
 	// The hostname of the server that will be used to serve segments. This string must
 	// include the protocol, such as https://.
 	BaseUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for HLS content.
@@ -268,6 +293,8 @@ type HlsConfiguration struct {
 	// The URL that is used to initiate a playback session for devices that support
 	// Apple HLS. The session uses server-side reporting.
 	ManifestEndpointPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // HLS playlist configuration parameters.
@@ -276,6 +303,8 @@ type HlsPlaylistSettings struct {
 	// The total duration (in seconds) of each manifest. Minimum value: 30 seconds.
 	// Maximum value: 3600 seconds.
 	ManifestWindowSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // The HTTP configuration for the source location.
@@ -286,6 +315,8 @@ type HttpConfiguration struct {
 	//
 	// This member is required.
 	BaseUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The HTTP package configuration properties for the requested VOD source.
@@ -308,6 +339,8 @@ type HttpPackageConfiguration struct {
 	//
 	// This member is required.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for pre-roll ad insertion.
@@ -324,6 +357,8 @@ type LivePreRollConfiguration struct {
 	// MediaTailor won't play pre-roll ads to exceed this duration, regardless of the
 	// total duration of ads that the ADS returns.
 	MaxDurationSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for manifest processing rules. Manifest processing rules
@@ -336,6 +371,8 @@ type ManifestProcessingRules struct {
 	// markers. For example, if EXT-X-CUE-OUT has a value of 60, but no ads are filled
 	// for that ad break, MediaTailor will not set the value to 0.
 	AdMarkerPassthrough *AdMarkerPassthrough
+
+	noSmithyDocumentSerde
 }
 
 // Creates a playback configuration. For information about MediaTailor
@@ -426,6 +463,8 @@ type PlaybackConfiguration struct {
 	// The URL prefix for the parent manifest for the stream, minus the asset ID. The
 	// maximum length is 512 characters.
 	VideoContentSourceUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The ouput configuration for this channel.
@@ -447,6 +486,8 @@ type RequestOutputItem struct {
 
 	// HLS playlist configuration parameters.
 	HlsPlaylistSettings *HlsPlaylistSettings
+
+	noSmithyDocumentSerde
 }
 
 // This response includes only the "property" : "type" property.
@@ -474,6 +515,8 @@ type ResponseOutputItem struct {
 
 	// HLS manifest configuration settings.
 	HlsPlaylistSettings *HlsPlaylistSettings
+
+	noSmithyDocumentSerde
 }
 
 // The schedule's ad break properties.
@@ -490,6 +533,8 @@ type ScheduleAdBreak struct {
 
 	// The name of the VOD source used for the ad break.
 	VodSourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Schedule configuration parameters. A channel must be stopped before changes can
@@ -500,6 +545,8 @@ type ScheduleConfiguration struct {
 	//
 	// This member is required.
 	Transition *Transition
+
+	noSmithyDocumentSerde
 }
 
 // The properties for a schedule.
@@ -538,6 +585,8 @@ type ScheduleEntry struct {
 
 	// The schedule's ad break properties.
 	ScheduleAdBreaks []ScheduleAdBreak
+
+	noSmithyDocumentSerde
 }
 
 // AWS Secrets Manager access token configuration parameters. For information about
@@ -559,6 +608,8 @@ type SecretsManagerAccessTokenConfiguration struct {
 	// key associated with the access token. MediaTailor uses the key to look up
 	// SecretString key and value pair containing the access token.
 	SecretStringKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Slate VOD source configuration.
@@ -570,6 +621,8 @@ type SlateSource struct {
 	// The slate VOD source name. The VOD source must already exist in a source
 	// location before it can be used for slate.
 	VodSourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // This response includes only the "type" : "object" property.
@@ -604,6 +657,8 @@ type SourceLocation struct {
 
 	// The tags assigned to the source location.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Splice insert message configuration.
@@ -627,6 +682,8 @@ type SpliceInsertMessage struct {
 	// 9.7.3.1 of the SCTE-35 specification. The default value is 0. Values must be
 	// between 0 and 256, inclusive.
 	UniqueProgramId int32
+
+	noSmithyDocumentSerde
 }
 
 // Program transition configuration.
@@ -647,6 +704,8 @@ type Transition struct {
 	// The name of the program that this program will be inserted next to, as defined
 	// by RelativePosition.
 	RelativeProgram *string
+
+	noSmithyDocumentSerde
 }
 
 // VOD source configuration parameters.
@@ -680,4 +739,8 @@ type VodSource struct {
 
 	// The tags assigned to the VOD source.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

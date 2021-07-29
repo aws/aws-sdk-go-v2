@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -22,6 +23,8 @@ type CognitoStreams struct {
 	// to identity pool is enabled. DISABLED - Streaming of updates to identity pool is
 	// disabled. Bulk publish will also fail if StreamingStatus is DISABLED.
 	StreamingStatus StreamingStatus
+
+	noSmithyDocumentSerde
 }
 
 // A collection of data for an identity pool. An identity pool can have multiple
@@ -53,6 +56,8 @@ type Dataset struct {
 
 	// Number of records in this dataset.
 	NumRecords *int64
+
+	noSmithyDocumentSerde
 }
 
 // Usage information for the identity pool.
@@ -70,6 +75,8 @@ type IdentityPoolUsage struct {
 
 	// Number of sync sessions for the identity pool.
 	SyncSessionsCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // Usage information for the identity.
@@ -91,6 +98,8 @@ type IdentityUsage struct {
 
 	// Date on which the identity was last modified.
 	LastModifiedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Configuration options to be applied to the identity pool.
@@ -101,6 +110,8 @@ type PushSync struct {
 
 	// A role configured to allow Cognito to call SNS on behalf of the developer.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The basic data structure of a dataset.
@@ -123,6 +134,8 @@ type Record struct {
 
 	// The value for the record.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An update operation for a record.
@@ -148,4 +161,8 @@ type RecordPatch struct {
 
 	// The value associated with the record patch.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

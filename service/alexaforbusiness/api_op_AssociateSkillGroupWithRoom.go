@@ -34,11 +34,15 @@ type AssociateSkillGroupWithRoomInput struct {
 
 	// The ARN of the skill group to associate with a room. Required.
 	SkillGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateSkillGroupWithRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateSkillGroupWithRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

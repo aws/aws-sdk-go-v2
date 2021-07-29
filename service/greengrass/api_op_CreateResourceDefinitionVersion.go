@@ -39,6 +39,8 @@ type CreateResourceDefinitionVersionInput struct {
 
 	// A list of resources.
 	Resources []types.Resource
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourceDefinitionVersionOutput struct {
@@ -57,6 +59,8 @@ type CreateResourceDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

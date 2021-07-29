@@ -296,6 +296,8 @@ type CreateClusterInput struct {
 	// A list of Virtual Private Cloud (VPC) security groups to be associated with the
 	// cluster. Default: The default VPC security group is associated with the cluster.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterOutput struct {
@@ -305,6 +307,8 @@ type CreateClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

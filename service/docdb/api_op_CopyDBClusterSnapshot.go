@@ -131,6 +131,8 @@ type CopyDBClusterSnapshotInput struct {
 	// Used by the SDK's PresignURL autofill customization to specify the region the of
 	// the client's request.
 	destinationRegion *string
+
+	noSmithyDocumentSerde
 }
 
 type CopyDBClusterSnapshotOutput struct {
@@ -140,6 +142,8 @@ type CopyDBClusterSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyDBClusterSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

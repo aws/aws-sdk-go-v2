@@ -38,12 +38,16 @@ type DeprecateThingTypeInput struct {
 	// Whether to undeprecate a deprecated thing type. If true, the thing type will not
 	// be deprecated anymore and you can associate it with things.
 	UndoDeprecate bool
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DeprecateThingType operation.
 type DeprecateThingTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeprecateThingTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

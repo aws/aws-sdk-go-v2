@@ -54,6 +54,8 @@ type GetLinksInput struct {
 
 	// The link type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLinksOutput struct {
@@ -66,6 +68,8 @@ type GetLinksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {

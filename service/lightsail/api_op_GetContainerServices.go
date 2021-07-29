@@ -34,6 +34,8 @@ type GetContainerServicesInput struct {
 	// the response includes all of your container services in the AWS Region where the
 	// request is made.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetContainerServicesOutput struct {
@@ -43,6 +45,8 @@ type GetContainerServicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContainerServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

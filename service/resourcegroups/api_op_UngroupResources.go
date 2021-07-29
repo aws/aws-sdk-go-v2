@@ -42,6 +42,8 @@ type UngroupResourcesInput struct {
 	//
 	// This member is required.
 	ResourceArns []string
+
+	noSmithyDocumentSerde
 }
 
 type UngroupResourcesOutput struct {
@@ -63,6 +65,8 @@ type UngroupResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUngroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

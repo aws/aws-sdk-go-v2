@@ -78,6 +78,8 @@ type GetKeyRotationStatusInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetKeyRotationStatusOutput struct {
@@ -87,6 +89,8 @@ type GetKeyRotationStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetKeyRotationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

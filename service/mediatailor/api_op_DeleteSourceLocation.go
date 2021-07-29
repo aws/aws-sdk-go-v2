@@ -32,11 +32,15 @@ type DeleteSourceLocationInput struct {
 	//
 	// This member is required.
 	SourceLocationName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSourceLocationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type CreateDatastoreInput struct {
 
 	// Metadata which can be used to manage the data store.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatastoreOutput struct {
@@ -70,6 +72,8 @@ type CreateDatastoreOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

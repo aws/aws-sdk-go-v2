@@ -39,6 +39,8 @@ type ProvideAnomalyFeedbackInput struct {
 	//
 	// This member is required.
 	Feedback types.AnomalyFeedbackType
+
+	noSmithyDocumentSerde
 }
 
 type ProvideAnomalyFeedbackOutput struct {
@@ -50,6 +52,8 @@ type ProvideAnomalyFeedbackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationProvideAnomalyFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

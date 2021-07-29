@@ -12,6 +12,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -32,6 +34,8 @@ type InternalServerException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -53,6 +57,8 @@ type ResourceNotFoundException struct {
 	ResourceType ResourceType
 	ResourceId   *string
 	RequestId    *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -73,6 +79,8 @@ type ThrottlingException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -92,6 +100,8 @@ type ValidationException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

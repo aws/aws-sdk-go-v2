@@ -78,6 +78,8 @@ type ImportAsProvisionedProductInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type ImportAsProvisionedProductOutput struct {
@@ -87,6 +89,8 @@ type ImportAsProvisionedProductOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportAsProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

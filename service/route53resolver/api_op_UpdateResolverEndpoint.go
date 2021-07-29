@@ -36,6 +36,8 @@ type UpdateResolverEndpointInput struct {
 
 	// The name of the Resolver endpoint that you want to update.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResolverEndpointOutput struct {
@@ -45,6 +47,8 @@ type UpdateResolverEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type DescribeJournalS3ExportInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJournalS3ExportOutput struct {
@@ -58,6 +60,8 @@ type DescribeJournalS3ExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJournalS3ExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

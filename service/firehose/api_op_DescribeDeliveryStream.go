@@ -48,6 +48,8 @@ type DescribeDeliveryStreamInput struct {
 	// The limit on the number of destinations to return. You can have one destination
 	// per delivery stream.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDeliveryStreamOutput struct {
@@ -59,6 +61,8 @@ type DescribeDeliveryStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

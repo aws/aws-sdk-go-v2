@@ -54,6 +54,8 @@ type DescribeSnapshotSchedulesInput struct {
 
 	// The value corresponding to the key of the snapshot schedule tag.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSnapshotSchedulesOutput struct {
@@ -70,6 +72,8 @@ type DescribeSnapshotSchedulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSnapshotSchedulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

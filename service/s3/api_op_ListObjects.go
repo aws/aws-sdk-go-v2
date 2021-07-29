@@ -109,6 +109,8 @@ type ListObjectsInput struct {
 	// objects request. Bucket owners need not specify this parameter in their
 	// requests.
 	RequestPayer types.RequestPayer
+
+	noSmithyDocumentSerde
 }
 
 type ListObjectsOutput struct {
@@ -165,6 +167,8 @@ type ListObjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListObjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

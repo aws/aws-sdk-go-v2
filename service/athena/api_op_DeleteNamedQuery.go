@@ -36,11 +36,15 @@ type DeleteNamedQueryInput struct {
 	//
 	// This member is required.
 	NamedQueryId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNamedQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNamedQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

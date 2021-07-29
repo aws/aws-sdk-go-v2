@@ -38,6 +38,8 @@ type DeleteQueryDefinitionInput struct {
 	//
 	// This member is required.
 	QueryDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteQueryDefinitionOutput struct {
@@ -48,6 +50,8 @@ type DeleteQueryDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteQueryDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

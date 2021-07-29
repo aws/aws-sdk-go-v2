@@ -58,6 +58,8 @@ type DisassociateSubnetsInput struct {
 	// current copy of it with a new token. Reapply your changes as needed, then try
 	// the operation again using the new token.
 	UpdateToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateSubnetsOutput struct {
@@ -88,6 +90,8 @@ type DisassociateSubnetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -54,6 +54,8 @@ type DescribeSubscribersForNotificationInput struct {
 	// The pagination token that you include in your request to indicate the next set
 	// of results that you want to retrieve.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Response of DescribeSubscribersForNotification
@@ -68,6 +70,8 @@ type DescribeSubscribersForNotificationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSubscribersForNotificationMiddlewares(stack *middleware.Stack, options Options) (err error) {

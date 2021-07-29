@@ -37,12 +37,16 @@ type DeleteTrafficPolicyInstanceInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element.
 type DeleteTrafficPolicyInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTrafficPolicyInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

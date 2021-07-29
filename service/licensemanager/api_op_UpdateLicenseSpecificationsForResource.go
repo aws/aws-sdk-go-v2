@@ -43,11 +43,15 @@ type UpdateLicenseSpecificationsForResourceInput struct {
 
 	// ARNs of the license configurations to remove.
 	RemoveLicenseSpecifications []types.LicenseSpecification
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLicenseSpecificationsForResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLicenseSpecificationsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

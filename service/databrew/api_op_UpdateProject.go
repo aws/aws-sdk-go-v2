@@ -43,6 +43,8 @@ type UpdateProjectInput struct {
 	// Represents the sample size and sampling type for DataBrew to use for interactive
 	// data analysis.
 	Sample *types.Sample
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProjectOutput struct {
@@ -57,6 +59,8 @@ type UpdateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

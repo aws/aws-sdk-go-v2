@@ -36,11 +36,15 @@ type ForgetDeviceInput struct {
 
 	// The access token for the forgotten device request.
 	AccessToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ForgetDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationForgetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type DeleteConstraintInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConstraintOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {

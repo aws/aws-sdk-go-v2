@@ -88,6 +88,8 @@ type CreateDatasetGroupInput struct {
 	// user tag and will count against the limit of 50 tags. Tags with only the key
 	// prefix of aws do not count against your tags per resource limit.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetGroupOutput struct {
@@ -97,6 +99,8 @@ type CreateDatasetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

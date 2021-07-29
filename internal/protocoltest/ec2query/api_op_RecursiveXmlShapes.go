@@ -27,6 +27,7 @@ func (c *Client) RecursiveXmlShapes(ctx context.Context, params *RecursiveXmlSha
 }
 
 type RecursiveXmlShapesInput struct {
+	noSmithyDocumentSerde
 }
 
 type RecursiveXmlShapesOutput struct {
@@ -34,6 +35,8 @@ type RecursiveXmlShapesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRecursiveXmlShapesMiddlewares(stack *middleware.Stack, options Options) (err error) {

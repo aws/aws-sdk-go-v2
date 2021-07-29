@@ -40,6 +40,8 @@ type ListStreamProcessorsInput struct {
 	// the response. You can use this pagination token to retrieve the next set of
 	// stream processors.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStreamProcessorsOutput struct {
@@ -54,6 +56,8 @@ type ListStreamProcessorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamProcessorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

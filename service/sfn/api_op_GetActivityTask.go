@@ -48,6 +48,8 @@ type GetActivityTaskInput struct {
 	// You can provide an arbitrary name in order to identify the worker that the task
 	// is assigned to. This name is used when it is logged in the execution history.
 	WorkerName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetActivityTaskOutput struct {
@@ -63,6 +65,8 @@ type GetActivityTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetActivityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

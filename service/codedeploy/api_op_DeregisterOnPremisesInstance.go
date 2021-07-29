@@ -33,11 +33,15 @@ type DeregisterOnPremisesInstanceInput struct {
 	//
 	// This member is required.
 	InstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterOnPremisesInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

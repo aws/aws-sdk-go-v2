@@ -51,6 +51,8 @@ type UpdateAliasInput struct {
 	// The routing configuration, including routing type and fleet target, for the
 	// alias.
 	RoutingStrategy *types.RoutingStrategy
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -61,6 +63,8 @@ type UpdateAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

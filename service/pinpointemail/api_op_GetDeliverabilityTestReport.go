@@ -34,6 +34,8 @@ type GetDeliverabilityTestReportInput struct {
 	//
 	// This member is required.
 	ReportId *string
+
+	noSmithyDocumentSerde
 }
 
 // The results of the predictive inbox placement test.
@@ -67,6 +69,8 @@ type GetDeliverabilityTestReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeliverabilityTestReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -62,6 +62,8 @@ type DescribeLocalGatewayRouteTableVpcAssociationsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLocalGatewayRouteTableVpcAssociationsOutput struct {
@@ -75,6 +77,8 @@ type DescribeLocalGatewayRouteTableVpcAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocalGatewayRouteTableVpcAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

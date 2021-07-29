@@ -32,11 +32,15 @@ type DeleteAnomalySubscriptionInput struct {
 	//
 	// This member is required.
 	SubscriptionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAnomalySubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

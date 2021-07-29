@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type ActionTarget struct {
 
 	// The ID of the remediation target.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // An individual Firewall Manager application.
@@ -35,6 +38,8 @@ type App struct {
 	//
 	// This member is required.
 	Protocol *string
+
+	noSmithyDocumentSerde
 }
 
 // An Firewall Manager applications list.
@@ -66,6 +71,8 @@ type AppsListData struct {
 
 	// A map of previous version numbers to their corresponding App object arrays.
 	PreviousAppsList map[string][]App
+
+	noSmithyDocumentSerde
 }
 
 // Details of the Firewall Manager applications list.
@@ -82,6 +89,8 @@ type AppsListDataSummary struct {
 
 	// The name of the applications list.
 	ListName *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for an EC2 instance resource.
@@ -92,6 +101,8 @@ type AwsEc2InstanceViolation struct {
 
 	// The resource ID of the EC2 instance.
 	ViolationTarget *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for network interfaces associated with an EC2 instance.
@@ -103,6 +114,8 @@ type AwsEc2NetworkInterfaceViolation struct {
 
 	// The resource ID of the network interface.
 	ViolationTarget *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for the rule violation in a security group when compared to the
@@ -121,6 +134,8 @@ type AwsVPCSecurityGroupViolation struct {
 
 	// A description of the security group that violates the policy.
 	ViolationTargetDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the resource that is not protected by the policy.
@@ -138,6 +153,8 @@ type ComplianceViolator struct {
 
 	// The reason that the resource is not protected by the policy.
 	ViolationReason ViolationReason
+
+	noSmithyDocumentSerde
 }
 
 // A DNS Firewall rule group that Firewall Manager tried to associate with a VPC is
@@ -149,6 +166,8 @@ type DnsDuplicateRuleGroupViolation struct {
 
 	// A description of the violation that specifies the rule group and VPC.
 	ViolationTargetDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // The VPC that Firewall Manager was applying a DNS Fireall policy to reached the
@@ -164,6 +183,8 @@ type DnsRuleGroupLimitExceededViolation struct {
 
 	// A description of the violation that specifies the rule group and VPC.
 	ViolationTargetDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule group that Firewall Manager tried to associate with a VPC has the same
@@ -189,6 +210,8 @@ type DnsRuleGroupPriorityConflictViolation struct {
 	// A description of the violation that specifies the VPC and the rule group that's
 	// already associated with it.
 	ViolationTargetDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // The action of associating an EC2 resource, such as a subnet or internet gateway,
@@ -211,6 +234,8 @@ type EC2AssociateRouteTableAction struct {
 	// The ID of the subnet for the EC2 route table that is associated with the
 	// remediation action.
 	SubnetId *ActionTarget
+
+	noSmithyDocumentSerde
 }
 
 // An action that copies the EC2 route table for use in remediation.
@@ -231,6 +256,8 @@ type EC2CopyRouteTableAction struct {
 	// A description of the copied EC2 route table that is associated with the
 	// remediation action.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the CreateRoute action in Amazon EC2.
@@ -260,6 +287,8 @@ type EC2CreateRouteAction struct {
 	// Information about the ID of a VPC endpoint. Supported for Gateway Load Balancer
 	// endpoints only.
 	VpcEndpointId *ActionTarget
+
+	noSmithyDocumentSerde
 }
 
 // Information about the CreateRouteTable action in Amazon EC2.
@@ -272,6 +301,8 @@ type EC2CreateRouteTableAction struct {
 
 	// A description of the CreateRouteTable action.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the DeleteRoute action in Amazon EC2.
@@ -295,6 +326,8 @@ type EC2DeleteRouteAction struct {
 
 	// Information about the ID of the prefix list for the route.
 	DestinationPrefixListId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the ReplaceRoute action in Amazon EC2.
@@ -323,6 +356,8 @@ type EC2ReplaceRouteAction struct {
 
 	// Information about the ID of an internet gateway or virtual private gateway.
 	GatewayId *ActionTarget
+
+	noSmithyDocumentSerde
 }
 
 // Information about the ReplaceRouteTableAssociation action in Amazon EC2.
@@ -340,6 +375,8 @@ type EC2ReplaceRouteTableAssociationAction struct {
 
 	// A description of the ReplaceRouteTableAssociation action in Amazon EC2.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the compliance status for the account. An account is considered
@@ -361,6 +398,8 @@ type EvaluationResult struct {
 	// considered noncompliant if it doesn't comply with the rules of the policy and
 	// remediation is disabled or not possible.
 	ViolatorCount int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about the expected route in the route table.
@@ -383,6 +422,8 @@ type ExpectedRoute struct {
 
 	// Information about the route table ID.
 	RouteTableId *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for an internet gateway route with an inactive state in the
@@ -400,6 +441,8 @@ type NetworkFirewallBlackHoleRouteDetectedViolation struct {
 
 	// Information about the VPC ID.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for the subnet for which internet traffic that hasn't been
@@ -450,6 +493,8 @@ type NetworkFirewallInternetTrafficNotInspectedViolation struct {
 
 	// Information about the VPC ID.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for the improperly configured subnet route. It's possible there
@@ -504,6 +549,8 @@ type NetworkFirewallInvalidRouteConfigurationViolation struct {
 
 	// Information about the VPC ID.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for an expected route missing in Network Firewall.
@@ -517,6 +564,8 @@ type NetworkFirewallMissingExpectedRoutesViolation struct {
 
 	// Information about the VPC ID.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for Network Firewall for a subnet that's not associated to the
@@ -538,6 +587,8 @@ type NetworkFirewallMissingExpectedRTViolation struct {
 
 	// The ID of the Network Firewall or VPC resource that's in violation.
 	ViolationTarget *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for Network Firewall for a subnet that doesn't have a Firewall
@@ -555,6 +606,8 @@ type NetworkFirewallMissingFirewallViolation struct {
 
 	// The ID of the Network Firewall or VPC resource that's in violation.
 	ViolationTarget *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for Network Firewall for an Availability Zone that's missing
@@ -572,6 +625,8 @@ type NetworkFirewallMissingSubnetViolation struct {
 
 	// The ID of the Network Firewall or VPC resource that's in violation.
 	ViolationTarget *string
+
+	noSmithyDocumentSerde
 }
 
 // The definition of the Network Firewall firewall policy.
@@ -594,6 +649,8 @@ type NetworkFirewallPolicyDescription struct {
 
 	// The stateless rule groups that are used in the Network Firewall firewall policy.
 	StatelessRuleGroups []StatelessRuleGroup
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for Network Firewall for a firewall policy that has a different
@@ -610,6 +667,8 @@ type NetworkFirewallPolicyModifiedViolation struct {
 
 	// The ID of the Network Firewall or VPC resource that's in violation.
 	ViolationTarget *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for an unexpected route that's present in a route table.
@@ -629,6 +688,8 @@ type NetworkFirewallUnexpectedFirewallRoutesViolation struct {
 
 	// Information about the VPC ID.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail for an unexpected gateway route that’s present in a route
@@ -646,6 +707,8 @@ type NetworkFirewallUnexpectedGatewayRoutesViolation struct {
 
 	// Information about the VPC ID.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // The reference rule that partially matches the ViolationTarget rule and violation
@@ -658,6 +721,8 @@ type PartialMatch struct {
 
 	// The violation reason.
 	TargetViolationReasons []string
+
+	noSmithyDocumentSerde
 }
 
 // An Firewall Manager policy.
@@ -764,6 +829,8 @@ type Policy struct {
 	// An array of ResourceType objects. Use this only to specify multiple resource
 	// types. To specify a single resource type, use ResourceType.
 	ResourceTypeList []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the noncompliant resources in a member account for a specific Firewall
@@ -795,6 +862,8 @@ type PolicyComplianceDetail struct {
 	// An array of resources that aren't protected by the WAF or Shield Advanced policy
 	// or that aren't in compliance with the security group policy.
 	Violators []ComplianceViolator
+
+	noSmithyDocumentSerde
 }
 
 // Indicates whether the account is compliant with the specified policy. An account
@@ -824,6 +893,8 @@ type PolicyComplianceStatus struct {
 
 	// The Amazon Web Services account that created the Firewall Manager policy.
 	PolicyOwner *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the Firewall Manager policy.
@@ -857,6 +928,8 @@ type PolicySummary struct {
 	// the type of policy that is created, either an WAF policy, a Shield Advanced
 	// policy, or a security group policy.
 	SecurityServiceType SecurityServiceType
+
+	noSmithyDocumentSerde
 }
 
 // A list of remediation actions.
@@ -872,6 +945,8 @@ type PossibleRemediationAction struct {
 
 	// Information about whether an action is taken by default.
 	IsDefaultAction bool
+
+	noSmithyDocumentSerde
 }
 
 // A list of possible remediation action lists. Each individual possible
@@ -883,6 +958,8 @@ type PossibleRemediationActions struct {
 
 	// A description of the possible remediation actions list.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // An Firewall Manager protocols list.
@@ -914,6 +991,8 @@ type ProtocolsListData struct {
 
 	// A map of previous version numbers to their corresponding protocol arrays.
 	PreviousProtocolsList map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the Firewall Manager protocols list.
@@ -930,6 +1009,8 @@ type ProtocolsListDataSummary struct {
 
 	// An array of protocols in the Firewall Manager protocols list.
 	ProtocolsList []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an individual action you can take to remediate a violation.
@@ -958,6 +1039,8 @@ type RemediationAction struct {
 
 	// Information about the ReplaceRouteTableAssociation action in the Amazon EC2 API.
 	EC2ReplaceRouteTableAssociationAction *EC2ReplaceRouteTableAssociationAction
+
+	noSmithyDocumentSerde
 }
 
 // An ordered list of actions you can take to remediate a violation.
@@ -968,6 +1051,8 @@ type RemediationActionWithOrder struct {
 
 	// Information about an action you can take to remediate a violation.
 	RemediationAction *RemediationAction
+
+	noSmithyDocumentSerde
 }
 
 // The resource tags that Firewall Manager uses to determine if a particular
@@ -988,6 +1073,8 @@ type ResourceTag struct {
 
 	// The resource tag value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Violation detail based on resource type.
@@ -1059,6 +1146,8 @@ type ResourceViolation struct {
 	// A list of possible remediation action lists. Each individual possible
 	// remediation action is a list of individual remediation actions.
 	PossibleRemediationActions *PossibleRemediationActions
+
+	noSmithyDocumentSerde
 }
 
 // Describes a route in a route table.
@@ -1075,6 +1164,8 @@ type Route struct {
 
 	// The type of target for the route.
 	TargetType TargetType
+
+	noSmithyDocumentSerde
 }
 
 // Remediation option for the rule specified in the ViolationTarget.
@@ -1092,6 +1183,8 @@ type SecurityGroupRemediationAction struct {
 	// The final state of the rule specified in the ViolationTarget after it is
 	// remediated.
 	RemediationResult *SecurityGroupRuleDescription
+
+	noSmithyDocumentSerde
 }
 
 // Describes a set of permissions for a security group rule.
@@ -1116,6 +1209,8 @@ type SecurityGroupRuleDescription struct {
 	// The end of the port range for the TCP and UDP protocols, or an ICMP/ICMPv6 code.
 	// A value of -1 indicates all ICMP/ICMPv6 codes.
 	ToPort *int64
+
+	noSmithyDocumentSerde
 }
 
 // Details about the security service that is being used to protect the resources.
@@ -1175,6 +1270,8 @@ type SecurityServicePolicyData struct {
 	// * Example:
 	// SECURITY_GROUPS_USAGE_AUDIT"{\"type\":\"SECURITY_GROUPS_USAGE_AUDIT\",\"deleteUnusedSecurityGroups\":true,\"coalesceRedundantSecurityGroups\":true}"
 	ManagedServiceData *string
+
+	noSmithyDocumentSerde
 }
 
 // Network Firewall stateful rule group, used in a
@@ -1186,6 +1283,8 @@ type StatefulRuleGroup struct {
 
 	// The name of the rule group.
 	RuleGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Network Firewall stateless rule group, used in a
@@ -1201,6 +1300,8 @@ type StatelessRuleGroup struct {
 
 	// The name of the rule group.
 	RuleGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of key:value pairs associated with an Amazon Web Services resource.
@@ -1222,6 +1323,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Violations for a resource based on the specified Firewall Manager policy and
@@ -1259,4 +1362,8 @@ type ViolationDetail struct {
 
 	// The ResourceTag objects associated with the resource.
 	ResourceTags []Tag
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

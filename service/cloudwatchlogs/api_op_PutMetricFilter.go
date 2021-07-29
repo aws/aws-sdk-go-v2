@@ -64,11 +64,15 @@ type PutMetricFilterInput struct {
 	//
 	// This member is required.
 	MetricTransformations []types.MetricTransformation
+
+	noSmithyDocumentSerde
 }
 
 type PutMetricFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

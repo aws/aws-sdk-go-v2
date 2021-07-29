@@ -63,6 +63,8 @@ type ListProcessingJobsInput struct {
 
 	// A filter that retrieves only processing jobs with a specific status.
 	StatusEquals types.ProcessingJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListProcessingJobsOutput struct {
@@ -78,6 +80,8 @@ type ListProcessingJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProcessingJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

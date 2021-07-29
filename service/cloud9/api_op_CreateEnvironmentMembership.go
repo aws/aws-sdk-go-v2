@@ -49,6 +49,8 @@ type CreateEnvironmentMembershipInput struct {
 	//
 	// This member is required.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentMembershipOutput struct {
@@ -60,6 +62,8 @@ type CreateEnvironmentMembershipOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

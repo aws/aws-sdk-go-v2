@@ -50,6 +50,8 @@ type DescribeConfigurationsInput struct {
 	//
 	// This member is required.
 	ConfigurationIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConfigurationsOutput struct {
@@ -59,6 +61,8 @@ type DescribeConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

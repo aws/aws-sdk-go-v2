@@ -50,6 +50,8 @@ type GetSchemaByDefinitionInput struct {
 	//
 	// This member is required.
 	SchemaId *types.SchemaId
+
+	noSmithyDocumentSerde
 }
 
 type GetSchemaByDefinitionOutput struct {
@@ -72,6 +74,8 @@ type GetSchemaByDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSchemaByDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

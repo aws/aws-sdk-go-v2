@@ -50,11 +50,15 @@ type DeleteNodeInput struct {
 	// The unique identifier of the member that owns this node. Applies only to
 	// Hyperledger Fabric and is required for Hyperledger Fabric.
 	MemberId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

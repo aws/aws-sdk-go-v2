@@ -68,6 +68,8 @@ type CreateLicenseManagerReportGeneratorInput struct {
 
 	// Tags to add to the report generator.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateLicenseManagerReportGeneratorOutput struct {
@@ -77,6 +79,8 @@ type CreateLicenseManagerReportGeneratorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLicenseManagerReportGeneratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,15 @@ type UpdateMyUserProfileInput struct {
 
 	// The user's SSH public key.
 	SshPublicKey *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMyUserProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMyUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

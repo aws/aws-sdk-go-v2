@@ -33,11 +33,15 @@ type DeleteDashboardsInput struct {
 	//
 	// This member is required.
 	DashboardNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDashboardsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDashboardsMiddlewares(stack *middleware.Stack, options Options) (err error) {

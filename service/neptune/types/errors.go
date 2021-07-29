@@ -12,6 +12,8 @@ import (
 // actions on your behalf.
 type AuthorizationNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationNotFoundFault) Error() string {
@@ -29,6 +31,8 @@ func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 // CertificateIdentifier does not refer to an existing certificate.
 type CertificateNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateNotFoundFault) Error() string {
@@ -46,6 +50,8 @@ func (e *CertificateNotFoundFault) ErrorFault() smithy.ErrorFault { return smith
 // User already has a DB cluster with the given identifier.
 type DBClusterAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterAlreadyExistsFault) Error() string {
@@ -63,6 +69,8 @@ func (e *DBClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return sm
 // The specified custom endpoint cannot be created because it already exists.
 type DBClusterEndpointAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterEndpointAlreadyExistsFault) Error() string {
@@ -84,6 +92,8 @@ func (e *DBClusterEndpointAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // The specified custom endpoint doesn't exist.
 type DBClusterEndpointNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterEndpointNotFoundFault) Error() string {
@@ -101,6 +111,8 @@ func (e *DBClusterEndpointNotFoundFault) ErrorFault() smithy.ErrorFault { return
 // The cluster already has the maximum number of custom endpoints.
 type DBClusterEndpointQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterEndpointQuotaExceededFault) Error() string {
@@ -122,6 +134,8 @@ func (e *DBClusterEndpointQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // DBClusterIdentifier does not refer to an existing DB cluster.
 type DBClusterNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterNotFoundFault) Error() string {
@@ -140,6 +154,8 @@ func (e *DBClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.
 // group.
 type DBClusterParameterGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterParameterGroupNotFoundFault) Error() string {
@@ -162,6 +178,8 @@ func (e *DBClusterParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 // maximum allowed DB cluster quota.
 type DBClusterQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterQuotaExceededFault) Error() string {
@@ -180,6 +198,8 @@ func (e *DBClusterQuotaExceededFault) ErrorFault() smithy.ErrorFault { return sm
 // specified DB cluster.
 type DBClusterRoleAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterRoleAlreadyExistsFault) Error() string {
@@ -198,6 +218,8 @@ func (e *DBClusterRoleAlreadyExistsFault) ErrorFault() smithy.ErrorFault { retur
 // specified DB cluster.
 type DBClusterRoleNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterRoleNotFoundFault) Error() string {
@@ -216,6 +238,8 @@ func (e *DBClusterRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 // the specified DB cluster.
 type DBClusterRoleQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterRoleQuotaExceededFault) Error() string {
@@ -233,6 +257,8 @@ func (e *DBClusterRoleQuotaExceededFault) ErrorFault() smithy.ErrorFault { retur
 // User already has a DB cluster snapshot with the given identifier.
 type DBClusterSnapshotAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterSnapshotAlreadyExistsFault) Error() string {
@@ -254,6 +280,8 @@ func (e *DBClusterSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // DBClusterSnapshotIdentifier does not refer to an existing DB cluster snapshot.
 type DBClusterSnapshotNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBClusterSnapshotNotFoundFault) Error() string {
@@ -271,6 +299,8 @@ func (e *DBClusterSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return
 // User already has a DB instance with the given identifier.
 type DBInstanceAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBInstanceAlreadyExistsFault) Error() string {
@@ -288,6 +318,8 @@ func (e *DBInstanceAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return s
 // DBInstanceIdentifier does not refer to an existing DB instance.
 type DBInstanceNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBInstanceNotFoundFault) Error() string {
@@ -305,6 +337,8 @@ func (e *DBInstanceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy
 // A DB parameter group with the same name exists.
 type DBParameterGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBParameterGroupAlreadyExistsFault) Error() string {
@@ -326,6 +360,8 @@ func (e *DBParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // DBParameterGroupName does not refer to an existing DB parameter group.
 type DBParameterGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBParameterGroupNotFoundFault) Error() string {
@@ -344,6 +380,8 @@ func (e *DBParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return 
 // groups.
 type DBParameterGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBParameterGroupQuotaExceededFault) Error() string {
@@ -365,6 +403,8 @@ func (e *DBParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // DBSecurityGroupName does not refer to an existing DB security group.
 type DBSecurityGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBSecurityGroupNotFoundFault) Error() string {
@@ -382,6 +422,8 @@ func (e *DBSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return s
 // DBSnapshotIdentifier is already used by an existing snapshot.
 type DBSnapshotAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBSnapshotAlreadyExistsFault) Error() string {
@@ -399,6 +441,8 @@ func (e *DBSnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return s
 // DBSnapshotIdentifier does not refer to an existing DB snapshot.
 type DBSnapshotNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBSnapshotNotFoundFault) Error() string {
@@ -416,6 +460,8 @@ func (e *DBSnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy
 // DBSubnetGroupName is already used by an existing DB subnet group.
 type DBSubnetGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBSubnetGroupAlreadyExistsFault) Error() string {
@@ -434,6 +480,8 @@ func (e *DBSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { retur
 // unless there is only one Availability Zone.
 type DBSubnetGroupDoesNotCoverEnoughAZs struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBSubnetGroupDoesNotCoverEnoughAZs) Error() string {
@@ -455,6 +503,8 @@ func (e *DBSubnetGroupDoesNotCoverEnoughAZs) ErrorFault() smithy.ErrorFault {
 // DBSubnetGroupName does not refer to an existing DB subnet group.
 type DBSubnetGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBSubnetGroupNotFoundFault) Error() string {
@@ -472,6 +522,8 @@ func (e *DBSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 // Request would result in user exceeding the allowed number of DB subnet groups.
 type DBSubnetGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBSubnetGroupQuotaExceededFault) Error() string {
@@ -490,6 +542,8 @@ func (e *DBSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { retur
 // subnet groups.
 type DBSubnetQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBSubnetQuotaExceededFault) Error() string {
@@ -508,6 +562,8 @@ func (e *DBSubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smi
 // modified.
 type DBUpgradeDependencyFailureFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DBUpgradeDependencyFailureFault) Error() string {
@@ -525,6 +581,8 @@ func (e *DBUpgradeDependencyFailureFault) ErrorFault() smithy.ErrorFault { retur
 // Domain does not refer to an existing Active Directory Domain.
 type DomainNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DomainNotFoundFault) Error() string {
@@ -542,6 +600,8 @@ func (e *DomainNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // You have exceeded the number of events you can subscribe to.
 type EventSubscriptionQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EventSubscriptionQuotaExceededFault) Error() string {
@@ -563,6 +623,8 @@ func (e *EventSubscriptionQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // Request would result in user exceeding the allowed number of DB instances.
 type InstanceQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InstanceQuotaExceededFault) Error() string {
@@ -580,6 +642,8 @@ func (e *InstanceQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smi
 // The DB cluster does not have enough capacity for the current operation.
 type InsufficientDBClusterCapacityFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientDBClusterCapacityFault) Error() string {
@@ -601,6 +665,8 @@ func (e *InsufficientDBClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 // Specified DB instance class is not available in the specified Availability Zone.
 type InsufficientDBInstanceCapacityFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientDBInstanceCapacityFault) Error() string {
@@ -624,6 +690,8 @@ func (e *InsufficientDBInstanceCapacityFault) ErrorFault() smithy.ErrorFault {
 // Availability Zones that have more storage available.
 type InsufficientStorageClusterCapacityFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientStorageClusterCapacityFault) Error() string {
@@ -646,6 +714,8 @@ func (e *InsufficientStorageClusterCapacityFault) ErrorFault() smithy.ErrorFault
 // is in this state.
 type InvalidDBClusterEndpointStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBClusterEndpointStateFault) Error() string {
@@ -667,6 +737,8 @@ func (e *InvalidDBClusterEndpointStateFault) ErrorFault() smithy.ErrorFault {
 // The supplied value is not a valid DB cluster snapshot state.
 type InvalidDBClusterSnapshotStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBClusterSnapshotStateFault) Error() string {
@@ -688,6 +760,8 @@ func (e *InvalidDBClusterSnapshotStateFault) ErrorFault() smithy.ErrorFault {
 // The DB cluster is not in a valid state.
 type InvalidDBClusterStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBClusterStateFault) Error() string {
@@ -705,6 +779,8 @@ func (e *InvalidDBClusterStateFault) ErrorFault() smithy.ErrorFault { return smi
 // The specified DB instance is not in the available state.
 type InvalidDBInstanceStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBInstanceStateFault) Error() string {
@@ -724,6 +800,8 @@ func (e *InvalidDBInstanceStateFault) ErrorFault() smithy.ErrorFault { return sm
 // parameter group is in this state.
 type InvalidDBParameterGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBParameterGroupStateFault) Error() string {
@@ -741,6 +819,8 @@ func (e *InvalidDBParameterGroupStateFault) ErrorFault() smithy.ErrorFault { ret
 // The state of the DB security group does not allow deletion.
 type InvalidDBSecurityGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBSecurityGroupStateFault) Error() string {
@@ -758,6 +838,8 @@ func (e *InvalidDBSecurityGroupStateFault) ErrorFault() smithy.ErrorFault { retu
 // The state of the DB snapshot does not allow deletion.
 type InvalidDBSnapshotStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBSnapshotStateFault) Error() string {
@@ -775,6 +857,8 @@ func (e *InvalidDBSnapshotStateFault) ErrorFault() smithy.ErrorFault { return sm
 // The DB subnet group cannot be deleted because it is in use.
 type InvalidDBSubnetGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBSubnetGroupStateFault) Error() string {
@@ -792,6 +876,8 @@ func (e *InvalidDBSubnetGroupStateFault) ErrorFault() smithy.ErrorFault { return
 // The DB subnet is not in the available state.
 type InvalidDBSubnetStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDBSubnetStateFault) Error() string {
@@ -809,6 +895,8 @@ func (e *InvalidDBSubnetStateFault) ErrorFault() smithy.ErrorFault { return smit
 // The event subscription is in an invalid state.
 type InvalidEventSubscriptionStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEventSubscriptionStateFault) Error() string {
@@ -830,6 +918,8 @@ func (e *InvalidEventSubscriptionStateFault) ErrorFault() smithy.ErrorFault {
 // Cannot restore from vpc backup to non-vpc DB instance.
 type InvalidRestoreFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRestoreFault) Error() string {
@@ -848,6 +938,8 @@ func (e *InvalidRestoreFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // all in a common VPC.
 type InvalidSubnet struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubnet) Error() string {
@@ -866,6 +958,8 @@ func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // because users' change.
 type InvalidVPCNetworkStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidVPCNetworkStateFault) Error() string {
@@ -883,6 +977,8 @@ func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return sm
 // Error accessing KMS key.
 type KMSKeyNotAccessibleFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSKeyNotAccessibleFault) Error() string {
@@ -900,6 +996,8 @@ func (e *KMSKeyNotAccessibleFault) ErrorFault() smithy.ErrorFault { return smith
 // The designated option group could not be found.
 type OptionGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OptionGroupNotFoundFault) Error() string {
@@ -917,6 +1015,8 @@ func (e *OptionGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smith
 // Provisioned IOPS not available in the specified Availability Zone.
 type ProvisionedIopsNotAvailableInAZFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProvisionedIopsNotAvailableInAZFault) Error() string {
@@ -938,6 +1038,8 @@ func (e *ProvisionedIopsNotAvailableInAZFault) ErrorFault() smithy.ErrorFault {
 // The specified resource ID was not found.
 type ResourceNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundFault) Error() string {
@@ -956,6 +1058,8 @@ func (e *ResourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // snapshot with.
 type SharedSnapshotQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SharedSnapshotQuotaExceededFault) Error() string {
@@ -973,6 +1077,8 @@ func (e *SharedSnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { retu
 // Request would result in user exceeding the allowed number of DB snapshots.
 type SnapshotQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotQuotaExceededFault) Error() string {
@@ -990,6 +1096,8 @@ func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smi
 // The SNS topic is invalid.
 type SNSInvalidTopicFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SNSInvalidTopicFault) Error() string {
@@ -1007,6 +1115,8 @@ func (e *SNSInvalidTopicFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // There is no SNS authorization.
 type SNSNoAuthorizationFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SNSNoAuthorizationFault) Error() string {
@@ -1024,6 +1134,8 @@ func (e *SNSNoAuthorizationFault) ErrorFault() smithy.ErrorFault { return smithy
 // The ARN of the SNS topic could not be found.
 type SNSTopicArnNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SNSTopicArnNotFoundFault) Error() string {
@@ -1041,6 +1153,8 @@ func (e *SNSTopicArnNotFoundFault) ErrorFault() smithy.ErrorFault { return smith
 // The source could not be found.
 type SourceNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SourceNotFoundFault) Error() string {
@@ -1059,6 +1173,8 @@ func (e *SourceNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // across all DB instances.
 type StorageQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StorageQuotaExceededFault) Error() string {
@@ -1076,6 +1192,8 @@ func (e *StorageQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smit
 // StorageType specified cannot be associated with the DB Instance.
 type StorageTypeNotSupportedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StorageTypeNotSupportedFault) Error() string {
@@ -1093,6 +1211,8 @@ func (e *StorageTypeNotSupportedFault) ErrorFault() smithy.ErrorFault { return s
 // The DB subnet is already in use in the Availability Zone.
 type SubnetAlreadyInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetAlreadyInUse) Error() string {
@@ -1110,6 +1230,8 @@ func (e *SubnetAlreadyInUse) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // This subscription already exists.
 type SubscriptionAlreadyExistFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionAlreadyExistFault) Error() string {
@@ -1127,6 +1249,8 @@ func (e *SubscriptionAlreadyExistFault) ErrorFault() smithy.ErrorFault { return 
 // The designated subscription category could not be found.
 type SubscriptionCategoryNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionCategoryNotFoundFault) Error() string {
@@ -1144,6 +1268,8 @@ func (e *SubscriptionCategoryNotFoundFault) ErrorFault() smithy.ErrorFault { ret
 // The designated subscription could not be found.
 type SubscriptionNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubscriptionNotFoundFault) Error() string {

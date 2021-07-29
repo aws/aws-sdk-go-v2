@@ -123,6 +123,8 @@ type RestoreDBClusterToPointInTimeInput struct {
 
 	// A list of VPC security groups that the new cluster belongs to.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreDBClusterToPointInTimeOutput struct {
@@ -132,6 +134,8 @@ type RestoreDBClusterToPointInTimeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreDBClusterToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {

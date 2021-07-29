@@ -39,6 +39,8 @@ type GetRoomInput struct {
 	//
 	// This member is required.
 	RoomId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRoomOutput struct {
@@ -48,6 +50,8 @@ type GetRoomOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

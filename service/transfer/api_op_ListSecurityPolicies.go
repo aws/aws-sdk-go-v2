@@ -39,6 +39,8 @@ type ListSecurityPoliciesInput struct {
 	// parameter in a subsequent command to continue listing additional security
 	// policies.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSecurityPoliciesOutput struct {
@@ -55,6 +57,8 @@ type ListSecurityPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSecurityPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

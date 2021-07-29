@@ -46,6 +46,8 @@ type ListRoomMembershipsInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRoomMembershipsOutput struct {
@@ -58,6 +60,8 @@ type ListRoomMembershipsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRoomMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {

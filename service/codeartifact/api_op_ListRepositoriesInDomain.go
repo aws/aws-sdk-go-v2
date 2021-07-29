@@ -56,6 +56,8 @@ type ListRepositoriesInDomainInput struct {
 	// A prefix used to filter returned repositories. Only repositories with names that
 	// start with repositoryPrefix are returned.
 	RepositoryPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRepositoriesInDomainOutput struct {
@@ -68,6 +70,8 @@ type ListRepositoriesInDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRepositoriesInDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

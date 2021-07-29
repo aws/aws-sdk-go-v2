@@ -47,6 +47,8 @@ type ListRegexMatchSetsInput struct {
 	// ListRegexMatchSets requests, specify the value of NextMarker from the previous
 	// response to get information about another batch of RegexMatchSet objects.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRegexMatchSetsOutput struct {
@@ -63,6 +65,8 @@ type ListRegexMatchSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRegexMatchSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

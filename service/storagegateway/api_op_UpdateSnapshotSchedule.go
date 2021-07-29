@@ -75,6 +75,8 @@ type UpdateSnapshotScheduleInput struct {
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the updated storage
@@ -87,6 +89,8 @@ type UpdateSnapshotScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type DeleteFlowInput struct {
 	//
 	// This member is required.
 	FlowArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFlowOutput struct {
@@ -45,6 +47,8 @@ type DeleteFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

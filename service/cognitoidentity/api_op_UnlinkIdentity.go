@@ -45,11 +45,15 @@ type UnlinkIdentityInput struct {
 	//
 	// This member is required.
 	LoginsToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type UnlinkIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnlinkIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

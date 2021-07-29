@@ -39,6 +39,8 @@ type ListICD10CMInferenceJobsInput struct {
 
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListICD10CMInferenceJobsOutput struct {
@@ -51,6 +53,8 @@ type ListICD10CMInferenceJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListICD10CMInferenceJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

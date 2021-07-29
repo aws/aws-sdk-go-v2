@@ -122,6 +122,8 @@ type CreateAccessInput struct {
 	// directories in your file system determine the level of access your users get
 	// when transferring files into and out of your Amazon EFS file systems.
 	PosixProfile *types.PosixProfile
+
+	noSmithyDocumentSerde
 }
 
 type CreateAccessOutput struct {
@@ -140,6 +142,8 @@ type CreateAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,11 +35,15 @@ type DeleteActivationInput struct {
 	//
 	// This member is required.
 	ActivationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteActivationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteActivationMiddlewares(stack *middleware.Stack, options Options) (err error) {

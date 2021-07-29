@@ -47,12 +47,16 @@ type DeleteConfigurationSetEventDestinationInput struct {
 	//
 	// This member is required.
 	EventDestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type DeleteConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

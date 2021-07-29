@@ -30,11 +30,14 @@ func (c *Client) AssociateServiceQuotaTemplate(ctx context.Context, params *Asso
 }
 
 type AssociateServiceQuotaTemplateInput struct {
+	noSmithyDocumentSerde
 }
 
 type AssociateServiceQuotaTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

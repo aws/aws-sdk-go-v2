@@ -43,6 +43,8 @@ type DescribeParameterGroupsInput struct {
 
 	// The names of the parameter groups.
 	ParameterGroupNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeParameterGroupsOutput struct {
@@ -56,6 +58,8 @@ type DescribeParameterGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeParameterGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

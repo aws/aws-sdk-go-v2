@@ -46,6 +46,8 @@ type PutEventsConfigurationInput struct {
 
 	// HTTPS endpoint that allows the bot to receive outgoing events.
 	OutboundEventsHTTPSEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 type PutEventsConfigurationOutput struct {
@@ -56,6 +58,8 @@ type PutEventsConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEventsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

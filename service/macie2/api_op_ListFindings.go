@@ -42,6 +42,8 @@ type ListFindingsInput struct {
 
 	// The criteria to use to sort the results.
 	SortCriteria *types.SortCriteria
+
+	noSmithyDocumentSerde
 }
 
 type ListFindingsOutput struct {
@@ -56,6 +58,8 @@ type ListFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

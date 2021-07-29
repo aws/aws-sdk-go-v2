@@ -60,6 +60,8 @@ type AuthorizeClusterSecurityGroupIngressInput struct {
 	// EC2SecurityGroupName parameter. The Amazon Web Services Access Key ID is not an
 	// acceptable value. Example: 111122223333
 	EC2SecurityGroupOwnerId *string
+
+	noSmithyDocumentSerde
 }
 
 type AuthorizeClusterSecurityGroupIngressOutput struct {
@@ -69,6 +71,8 @@ type AuthorizeClusterSecurityGroupIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAuthorizeClusterSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

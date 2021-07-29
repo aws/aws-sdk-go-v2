@@ -42,6 +42,8 @@ type ListDatabasesInput struct {
 	// pagination if a previous request was truncated. To obtain the next set of pages,
 	// pass in the NextToken from the response object of the previous page call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDatabasesOutput struct {
@@ -56,6 +58,8 @@ type ListDatabasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

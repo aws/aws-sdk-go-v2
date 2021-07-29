@@ -39,6 +39,8 @@ type BatchDisassociateScramSecretInput struct {
 	//
 	// This member is required.
 	SecretArnList []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDisassociateScramSecretOutput struct {
@@ -51,6 +53,8 @@ type BatchDisassociateScramSecretOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDisassociateScramSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {

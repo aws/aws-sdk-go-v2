@@ -51,6 +51,8 @@ type AddCustomRoutingEndpointsInput struct {
 	//
 	// This member is required.
 	EndpointGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AddCustomRoutingEndpointsOutput struct {
@@ -64,6 +66,8 @@ type AddCustomRoutingEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddCustomRoutingEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DescribeDirectConnectGatewaysInput struct {
 
 	// The token provided in the previous call to retrieve the next page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDirectConnectGatewaysOutput struct {
@@ -52,6 +54,8 @@ type DescribeDirectConnectGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDirectConnectGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

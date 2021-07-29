@@ -45,6 +45,8 @@ type DescribeOrganizationConfigRulesInput struct {
 	// specify any names, AWS Config returns details for all your organization config
 	// rules.
 	OrganizationConfigRuleNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeOrganizationConfigRulesOutput struct {
@@ -58,6 +60,8 @@ type DescribeOrganizationConfigRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOrganizationConfigRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

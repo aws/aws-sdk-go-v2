@@ -76,6 +76,8 @@ type UpdateImagePipelineInput struct {
 
 	// The status of the image pipeline.
 	Status types.PipelineStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateImagePipelineOutput struct {
@@ -92,6 +94,8 @@ type UpdateImagePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateImagePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

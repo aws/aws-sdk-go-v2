@@ -34,6 +34,8 @@ type DescribeDimensionInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDimensionOutput struct {
@@ -59,6 +61,8 @@ type DescribeDimensionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {

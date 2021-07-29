@@ -12,6 +12,8 @@ import (
 // resource, or specifying an identifier that's not valid.
 type ClientException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientException) Error() string {
@@ -29,6 +31,8 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // These errors are usually caused by a server issue.
 type ServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServerException) Error() string {

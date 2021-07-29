@@ -34,6 +34,8 @@ type StopQueryInput struct {
 	//
 	// This member is required.
 	QueryId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopQueryOutput struct {
@@ -43,6 +45,8 @@ type StopQueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

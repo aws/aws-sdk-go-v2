@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -24,6 +25,8 @@ type ClipFragmentSelector struct {
 	//
 	// This member is required.
 	TimestampRange *ClipTimestampRange
+
+	noSmithyDocumentSerde
 }
 
 // The range of timestamps for which to return fragments.
@@ -48,6 +51,8 @@ type ClipTimestampRange struct {
 	//
 	// This member is required.
 	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the range of timestamps for the requested media, and the source of the
@@ -79,6 +84,8 @@ type DASHFragmentSelector struct {
 	// The start and end of the timestamp range for the requested media. This value
 	// should not be present if PlaybackType is LIVE.
 	TimestampRange *DASHTimestampRange
+
+	noSmithyDocumentSerde
 }
 
 // The start and end of the timestamp range for the requested media. This value
@@ -107,6 +114,8 @@ type DASHTimestampRange struct {
 	// included in the session. If FragmentSelectorType is SERVER_TIMESTAMP, the
 	// StartTimestamp must be later than the stream head.
 	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents a segment of video or other time-delimited data.
@@ -128,6 +137,8 @@ type Fragment struct {
 
 	// The timestamp from the AWS server corresponding to the fragment.
 	ServerTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the timestamp range and timestamp origin of a range of fragments. Only
@@ -158,6 +169,8 @@ type FragmentSelector struct {
 	//
 	// This member is required.
 	TimestampRange *TimestampRange
+
+	noSmithyDocumentSerde
 }
 
 // Contains the range of timestamps for the requested media, and the source of the
@@ -189,6 +202,8 @@ type HLSFragmentSelector struct {
 	// The start and end of the timestamp range for the requested media. This value
 	// should not be present if PlaybackType is LIVE.
 	TimestampRange *HLSTimestampRange
+
+	noSmithyDocumentSerde
 }
 
 // The start and end of the timestamp range for the requested media. This value
@@ -214,6 +229,8 @@ type HLSTimestampRange struct {
 	// included in the session. If FragmentSelectorType is SERVER_TIMESTAMP, the
 	// StartTimestamp must be later than the stream head.
 	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The range of timestamps for which to return fragments.
@@ -228,4 +245,8 @@ type TimestampRange struct {
 	//
 	// This member is required.
 	StartTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

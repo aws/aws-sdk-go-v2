@@ -35,6 +35,8 @@ type GetResolverRuleInput struct {
 	//
 	// This member is required.
 	ResolverRuleId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResolverRuleOutput struct {
@@ -45,6 +47,8 @@ type GetResolverRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

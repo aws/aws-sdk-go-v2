@@ -42,6 +42,8 @@ type AdminGetUserInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server from the request to get the specified
@@ -104,6 +106,8 @@ type AdminGetUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

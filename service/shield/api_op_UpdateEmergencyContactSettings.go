@@ -36,11 +36,15 @@ type UpdateEmergencyContactSettingsInput struct {
 	// to the DRT and to initiate proactive customer support. If you have proactive
 	// engagement enabled, the contact list must include at least one phone number.
 	EmergencyContactList []types.EmergencyContact
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEmergencyContactSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEmergencyContactSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

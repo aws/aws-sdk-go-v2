@@ -58,6 +58,8 @@ type DescribeIpv6PoolsInput struct {
 
 	// The IDs of the IPv6 address pools.
 	PoolIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeIpv6PoolsOutput struct {
@@ -71,6 +73,8 @@ type DescribeIpv6PoolsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIpv6PoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {

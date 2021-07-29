@@ -49,6 +49,8 @@ type UpdateEnvironmentTemplateVersionInput struct {
 
 	// The status of the environment template minor version to update.
 	Status types.TemplateVersionStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEnvironmentTemplateVersionOutput struct {
@@ -60,6 +62,8 @@ type UpdateEnvironmentTemplateVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

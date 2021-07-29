@@ -76,11 +76,15 @@ type ModifyImageAttributeInput struct {
 	// The value of the attribute being modified. This parameter can be used only when
 	// the Attribute parameter is description or productCodes.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyImageAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyImageAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListAssociatedApprovalRuleTemplatesForRepositoryInput struct {
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssociatedApprovalRuleTemplatesForRepositoryOutput struct {
@@ -55,6 +57,8 @@ type ListAssociatedApprovalRuleTemplatesForRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssociatedApprovalRuleTemplatesForRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

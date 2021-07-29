@@ -35,6 +35,8 @@ type RebootWorkspacesInput struct {
 	//
 	// This member is required.
 	RebootWorkspaceRequests []types.RebootRequest
+
+	noSmithyDocumentSerde
 }
 
 type RebootWorkspacesOutput struct {
@@ -44,6 +46,8 @@ type RebootWorkspacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

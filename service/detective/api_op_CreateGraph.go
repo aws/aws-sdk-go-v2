@@ -45,6 +45,8 @@ type CreateGraphInput struct {
 	// each tag, you provide the tag key and the tag value. Each tag key can contain up
 	// to 128 characters. Each tag value can contain up to 256 characters.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGraphOutput struct {
@@ -54,6 +56,8 @@ type CreateGraphOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {

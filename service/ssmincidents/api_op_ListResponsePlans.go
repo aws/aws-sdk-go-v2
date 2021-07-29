@@ -35,6 +35,8 @@ type ListResponsePlansInput struct {
 
 	// The pagination token to continue to the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResponsePlansOutput struct {
@@ -49,6 +51,8 @@ type ListResponsePlansOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResponsePlansMiddlewares(stack *middleware.Stack, options Options) (err error) {

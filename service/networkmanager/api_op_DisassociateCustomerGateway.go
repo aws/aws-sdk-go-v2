@@ -40,6 +40,8 @@ type DisassociateCustomerGatewayInput struct {
 	//
 	// This member is required.
 	GlobalNetworkId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateCustomerGatewayOutput struct {
@@ -49,6 +51,8 @@ type DisassociateCustomerGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateCustomerGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

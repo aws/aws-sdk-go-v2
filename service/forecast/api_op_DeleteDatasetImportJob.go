@@ -34,11 +34,15 @@ type DeleteDatasetImportJobInput struct {
 	//
 	// This member is required.
 	DatasetImportJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDatasetImportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

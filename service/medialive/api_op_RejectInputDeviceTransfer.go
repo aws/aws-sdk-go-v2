@@ -33,12 +33,16 @@ type RejectInputDeviceTransferInput struct {
 	//
 	// This member is required.
 	InputDeviceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for RejectInputDeviceTransferResponse
 type RejectInputDeviceTransferOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectInputDeviceTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {

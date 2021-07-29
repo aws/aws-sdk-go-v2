@@ -55,6 +55,8 @@ type GetAutoScalingGroupRecommendationsInput struct {
 
 	// The token to advance to the next page of Auto Scaling group recommendations.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAutoScalingGroupRecommendationsOutput struct {
@@ -74,6 +76,8 @@ type GetAutoScalingGroupRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAutoScalingGroupRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -85,6 +85,8 @@ type DescribeUsageLimitsInput struct {
 
 	// The identifier of the usage limit to describe.
 	UsageLimitId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUsageLimitsOutput struct {
@@ -101,6 +103,8 @@ type DescribeUsageLimitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUsageLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

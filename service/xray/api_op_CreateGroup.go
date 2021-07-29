@@ -71,6 +71,8 @@ type CreateGroupInput struct {
 	// * Don't use aws: as a
 	// prefix for keys; it's reserved for AWS use.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateGroupOutput struct {
@@ -83,6 +85,8 @@ type CreateGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

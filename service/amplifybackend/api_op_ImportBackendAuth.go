@@ -56,6 +56,8 @@ type ImportBackendAuthInput struct {
 
 	// The ID of the Amazon Cognito identity pool.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 type ImportBackendAuthOutput struct {
@@ -80,6 +82,8 @@ type ImportBackendAuthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportBackendAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {

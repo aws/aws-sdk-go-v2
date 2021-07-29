@@ -11,6 +11,8 @@ import (
 // that exceeds the valid range.
 type InvalidInputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -28,6 +30,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The token is not valid. Tokens expire after 24 hours.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -45,6 +49,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // The limit on the number of resources per account has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -62,6 +68,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // There is already a resource with this name. Try again with a different name.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -79,6 +87,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // The specified resource is in use.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -97,6 +107,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // try again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

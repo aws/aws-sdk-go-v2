@@ -11,6 +11,8 @@ import (
 // table. The backup is either being created, deleted or restored to a table.
 type BackupInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BackupInUseException) Error() string {
@@ -28,6 +30,8 @@ func (e *BackupInUseException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Backup not found for the given BackupARN.
 type BackupNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BackupNotFoundException) Error() string {
@@ -45,6 +49,8 @@ func (e *BackupNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // A condition specified in the operation could not be evaluated.
 type ConditionalCheckFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConditionalCheckFailedException) Error() string {
@@ -64,6 +70,8 @@ func (e *ConditionalCheckFailedException) ErrorFault() smithy.ErrorFault { retur
 // Backups have not yet been enabled for this table.
 type ContinuousBackupsUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ContinuousBackupsUnavailableException) Error() string {
@@ -86,6 +94,8 @@ func (e *ContinuousBackupsUnavailableException) ErrorFault() smithy.ErrorFault {
 // already exists in the DynamoDB table.
 type DuplicateItemException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateItemException) Error() string {
@@ -103,6 +113,8 @@ func (e *DuplicateItemException) ErrorFault() smithy.ErrorFault { return smithy.
 // There was a conflict when writing to the specified S3 bucket.
 type ExportConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExportConflictException) Error() string {
@@ -120,6 +132,8 @@ func (e *ExportConflictException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified export was not found.
 type ExportNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExportNotFoundException) Error() string {
@@ -137,6 +151,8 @@ func (e *ExportNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified global table already exists.
 type GlobalTableAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GlobalTableAlreadyExistsException) Error() string {
@@ -156,6 +172,8 @@ func (e *GlobalTableAlreadyExistsException) ErrorFault() smithy.ErrorFault { ret
 // The specified global table does not exist.
 type GlobalTableNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GlobalTableNotFoundException) Error() string {
@@ -174,6 +192,8 @@ func (e *GlobalTableNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // payload but with an idempotent token that was already used.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -195,6 +215,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // The operation tried to access a nonexistent index.
 type IndexNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IndexNotFoundException) Error() string {
@@ -212,6 +234,8 @@ func (e *IndexNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.
 // An error occurred on the server side.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -228,6 +252,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 
 type InvalidEndpointException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEndpointException) Error() string {
@@ -245,6 +271,8 @@ func (e *InvalidEndpointException) ErrorFault() smithy.ErrorFault { return smith
 // The specified ExportTime is outside of the point in time recovery window.
 type InvalidExportTimeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidExportTimeException) Error() string {
@@ -263,6 +291,8 @@ func (e *InvalidExportTimeException) ErrorFault() smithy.ErrorFault { return smi
 // EarliestRestorableDateTime and LatestRestorableDateTime.
 type InvalidRestoreTimeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRestoreTimeException) Error() string {
@@ -281,6 +311,8 @@ func (e *InvalidRestoreTimeException) ErrorFault() smithy.ErrorFault { return sm
 // have one or more local secondary indexes.
 type ItemCollectionSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ItemCollectionSizeLimitExceededException) Error() string {
@@ -309,6 +341,8 @@ func (e *ItemCollectionSizeLimitExceededException) ErrorFault() smithy.ErrorFaul
 // concurrent operations. There is a soft account quota of 256 tables.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -326,6 +360,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Point in time recovery has not yet been enabled for this source table.
 type PointInTimeRecoveryUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PointInTimeRecoveryUnavailableException) Error() string {
@@ -353,6 +389,8 @@ func (e *PointInTimeRecoveryUnavailableException) ErrorFault() smithy.ErrorFault
 // in the Amazon DynamoDB Developer Guide.
 type ProvisionedThroughputExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProvisionedThroughputExceededException) Error() string {
@@ -374,6 +412,8 @@ func (e *ProvisionedThroughputExceededException) ErrorFault() smithy.ErrorFault 
 // The specified replica is already part of the global table.
 type ReplicaAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicaAlreadyExistsException) Error() string {
@@ -391,6 +431,8 @@ func (e *ReplicaAlreadyExistsException) ErrorFault() smithy.ErrorFault { return 
 // The specified replica is no longer part of the global table.
 type ReplicaNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicaNotFoundException) Error() string {
@@ -410,6 +452,8 @@ func (e *ReplicaNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // increase.
 type RequestLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestLimitExceeded) Error() string {
@@ -429,6 +473,8 @@ func (e *RequestLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // the CREATING state.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -447,6 +493,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // not be specified correctly, or its status might not be ACTIVE.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -464,6 +512,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // A target table with the specified name already exists.
 type TableAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TableAlreadyExistsException) Error() string {
@@ -481,6 +531,8 @@ func (e *TableAlreadyExistsException) ErrorFault() smithy.ErrorFault { return sm
 // A target table with the specified name is either being created or deleted.
 type TableInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TableInUseException) Error() string {
@@ -499,6 +551,8 @@ func (e *TableInUseException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // subscriber's account.
 type TableNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TableNotFoundException) Error() string {
@@ -665,6 +719,8 @@ type TransactionCanceledException struct {
 	Message *string
 
 	CancellationReasons []CancellationReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *TransactionCanceledException) Error() string {
@@ -682,6 +738,8 @@ func (e *TransactionCanceledException) ErrorFault() smithy.ErrorFault { return s
 // Operation was rejected because there is an ongoing transaction for the item.
 type TransactionConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TransactionConflictException) Error() string {
@@ -699,6 +757,8 @@ func (e *TransactionConflictException) ErrorFault() smithy.ErrorFault { return s
 // The transaction with the given request token is already in progress.
 type TransactionInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TransactionInProgressException) Error() string {

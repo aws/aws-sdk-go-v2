@@ -35,11 +35,15 @@ type DisassociateCertificateInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type RejectGrantInput struct {
 	//
 	// This member is required.
 	GrantArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RejectGrantOutput struct {
@@ -48,6 +50,8 @@ type RejectGrantOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {

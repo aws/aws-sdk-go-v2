@@ -35,6 +35,8 @@ type DescribeStreamInput struct {
 
 	// The name of the stream.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStreamOutput struct {
@@ -44,6 +46,8 @@ type DescribeStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

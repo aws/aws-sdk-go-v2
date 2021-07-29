@@ -32,11 +32,15 @@ type DeleteSiteInput struct {
 	//
 	// This member is required.
 	SiteId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSiteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {

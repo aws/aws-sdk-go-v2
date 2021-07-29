@@ -37,11 +37,15 @@ type DisassociateConfigurationItemsFromApplicationInput struct {
 	//
 	// This member is required.
 	ConfigurationIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateConfigurationItemsFromApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateConfigurationItemsFromApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -82,6 +82,8 @@ type CreateHyperParameterTuningJobInput struct {
 	// hyperparameter tuning jobs and the new hyperparameter tuning jobs count against
 	// the limit of training jobs for the tuning job.
 	WarmStartConfig *types.HyperParameterTuningJobWarmStartConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateHyperParameterTuningJobOutput struct {
@@ -94,6 +96,8 @@ type CreateHyperParameterTuningJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHyperParameterTuningJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

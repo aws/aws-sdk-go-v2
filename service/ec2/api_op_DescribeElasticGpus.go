@@ -65,6 +65,8 @@ type DescribeElasticGpusInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeElasticGpusOutput struct {
@@ -83,6 +85,8 @@ type DescribeElasticGpusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeElasticGpusMiddlewares(stack *middleware.Stack, options Options) (err error) {

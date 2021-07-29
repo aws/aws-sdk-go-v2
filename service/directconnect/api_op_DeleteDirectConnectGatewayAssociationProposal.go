@@ -34,6 +34,8 @@ type DeleteDirectConnectGatewayAssociationProposalInput struct {
 	//
 	// This member is required.
 	ProposalId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDirectConnectGatewayAssociationProposalOutput struct {
@@ -43,6 +45,8 @@ type DeleteDirectConnectGatewayAssociationProposalOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDirectConnectGatewayAssociationProposalMiddlewares(stack *middleware.Stack, options Options) (err error) {

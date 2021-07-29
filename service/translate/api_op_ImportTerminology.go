@@ -59,6 +59,8 @@ type ImportTerminologyInput struct {
 
 	// The encryption key for the custom terminology being imported.
 	EncryptionKey *types.EncryptionKey
+
+	noSmithyDocumentSerde
 }
 
 type ImportTerminologyOutput struct {
@@ -68,6 +70,8 @@ type ImportTerminologyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {

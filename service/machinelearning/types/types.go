@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -84,6 +85,8 @@ type BatchPrediction struct {
 
 	// Long integer type that is a 64-bit signed number.
 	TotalRecordCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of the GetDataSource operation. The content consists of
@@ -168,6 +171,8 @@ type DataSource struct {
 	// * DELETED -
 	// The DataSource is marked as deleted. It is not usable.
 	Status EntityStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of GetEvaluation operation. The content consists of the
@@ -251,6 +256,8 @@ type Evaluation struct {
 	// * DELETED - The
 	// Evaluation is marked as deleted. It is not usable.
 	Status EntityStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetMLModel operation. The content consists of the
@@ -380,6 +387,8 @@ type MLModel struct {
 	// normalization. This parameter can't be used when L1 is specified. Use this
 	// parameter sparingly.
 	TrainingParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Measurements of how well the MLModel performed on known observations. One of the
@@ -402,6 +411,8 @@ type MLModel struct {
 // (https://docs.aws.amazon.com/machine-learning/latest/dg).
 type PerformanceMetrics struct {
 	Properties map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The output from a Predict operation:
@@ -431,6 +442,8 @@ type Prediction struct {
 
 	// The prediction value for REGRESSIONMLModel.
 	PredictedValue *float32
+
+	noSmithyDocumentSerde
 }
 
 // The database details of an Amazon RDS database.
@@ -445,6 +458,8 @@ type RDSDatabase struct {
 	//
 	// This member is required.
 	InstanceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // The database credentials to connect to a database on an RDS DB instance.
@@ -463,6 +478,8 @@ type RDSDatabaseCredentials struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The data specification of an Amazon Relational Database Service (Amazon RDS)
@@ -601,6 +618,8 @@ type RDSDataSpec struct {
 
 	// The Amazon S3 location of the DataSchema.
 	DataSchemaUri *string
+
+	noSmithyDocumentSerde
 }
 
 // The datasource details that are specific to Amazon RDS.
@@ -636,6 +655,8 @@ type RDSMetadata struct {
 	// (https://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html)
 	// for data pipelines.
 	ServiceRole *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the real-time endpoint information for an MLModel.
@@ -665,6 +686,8 @@ type RealtimeEndpointInfo struct {
 	// The maximum processing rate for the real-time endpoint for MLModel, measured in
 	// incoming requests per second.
 	PeakRequestsPerSecond int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the database details required to connect to an Amazon Redshift
@@ -680,6 +703,8 @@ type RedshiftDatabase struct {
 	//
 	// This member is required.
 	DatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the database credentials for connecting to a database on an Amazon
@@ -703,6 +728,8 @@ type RedshiftDatabaseCredentials struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the data specification of an Amazon Redshift DataSource.
@@ -809,6 +836,8 @@ type RedshiftDataSpec struct {
 
 	// Describes the schema location for an Amazon Redshift DataSource.
 	DataSchemaUri *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the DataSource details specific to Amazon Redshift.
@@ -828,6 +857,8 @@ type RedshiftMetadata struct {
 	// The SQL query that is specified during CreateDataSourceFromRedshift. Returns
 	// only if Verbose is true in GetDataSourceInput.
 	SelectSqlQuery *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the data specification of a DataSource.
@@ -918,6 +949,8 @@ type S3DataSpec struct {
 	// Describes the schema location in Amazon S3. You must provide either the
 	// DataSchema or the DataSchemaLocationS3.
 	DataSchemaLocationS3 *string
+
+	noSmithyDocumentSerde
 }
 
 // A custom key-value pair associated with an ML object, such as an ML model.
@@ -931,4 +964,8 @@ type Tag struct {
 	// characters include Unicode letters, digits, white space, _, ., /, =, +, -, %,
 	// and @.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

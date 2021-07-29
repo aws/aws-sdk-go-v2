@@ -35,6 +35,8 @@ type GetGcmChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGcmChannelOutput struct {
@@ -49,6 +51,8 @@ type GetGcmChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGcmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

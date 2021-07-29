@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -32,6 +33,8 @@ type ApplicationDescription struct {
 
 	// The names of the versions for this application.
 	Versions []string
+
+	noSmithyDocumentSerde
 }
 
 // Application request metrics for an AWS Elastic Beanstalk environment.
@@ -53,6 +56,8 @@ type ApplicationMetrics struct {
 	// Represents the percentage of requests over the last 10 seconds that resulted in
 	// each type of status code response.
 	StatusCodes *StatusCodes
+
+	noSmithyDocumentSerde
 }
 
 // The resource lifecycle configuration for an application. Defines lifecycle
@@ -73,6 +78,8 @@ type ApplicationResourceLifecycleConfig struct {
 
 	// Defines lifecycle settings for application versions.
 	VersionLifecycleConfig *ApplicationVersionLifecycleConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of an application version.
@@ -129,6 +136,8 @@ type ApplicationVersionDescription struct {
 
 	// A unique identifier for the application version.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // The application version lifecycle settings for an application. Defines the rules
@@ -146,6 +155,8 @@ type ApplicationVersionLifecycleConfig struct {
 	// Specify a max count rule to restrict the number of application versions that are
 	// retained for an application.
 	MaxCountRule *MaxCountRule
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Auto Scaling launch configuration.
@@ -153,6 +164,8 @@ type AutoScalingGroup struct {
 
 	// The name of the AutoScalingGroup .
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings for an AWS CodeBuild build.
@@ -193,6 +206,8 @@ type BuildConfiguration struct {
 	// timing out any related build that does not get marked as completed. The default
 	// is 60 minutes.
 	TimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // The builder used to build the custom platform.
@@ -200,6 +215,8 @@ type Builder struct {
 
 	// The ARN of the builder.
 	ARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the possible values for a configuration option.
@@ -279,6 +296,8 @@ type ConfigurationOptionDescription struct {
 	// * Json : Values for this option are a JSON representation of a
 	// ConfigDocument.
 	ValueType ConfigurationOptionValueType
+
+	noSmithyDocumentSerde
 }
 
 // A specification identifying an individual configuration option along with its
@@ -300,6 +319,8 @@ type ConfigurationOptionSetting struct {
 
 	// The current value for the configuration option.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the settings for a configuration set.
@@ -349,6 +370,8 @@ type ConfigurationSettingsDescription struct {
 
 	// If not null, the name of the configuration template for this configuration set.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // CPU utilization metrics for an instance.
@@ -385,6 +408,8 @@ type CPUUtilization struct {
 	// Percentage of time that the CPU has spent in the User state over the last 10
 	// seconds.
 	User *float64
+
+	noSmithyDocumentSerde
 }
 
 // A custom AMI available to platforms.
@@ -395,6 +420,8 @@ type CustomAmi struct {
 
 	// The type of virtualization used to create the custom AMI.
 	VirtualizationType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an application version deployment.
@@ -420,6 +447,8 @@ type Deployment struct {
 
 	// The version label of the application version in the deployment.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of an environment.
@@ -530,6 +559,8 @@ type EnvironmentDescription struct {
 
 	// The application version deployed in this environment.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // The information retrieved from the Amazon EC2 instances.
@@ -549,6 +580,8 @@ type EnvironmentInfoDescription struct {
 
 	// The time stamp when this information was retrieved.
 	SampleTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A link to another environment, defined in the environment's manifest. Links
@@ -563,6 +596,8 @@ type EnvironmentLink struct {
 
 	// The name of the link.
 	LinkName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the AWS resources in use by this environment. This data is live.
@@ -591,6 +626,8 @@ type EnvironmentResourceDescription struct {
 
 	// The AutoScaling triggers in use by this environment.
 	Triggers []Trigger
+
+	noSmithyDocumentSerde
 }
 
 // Describes the AWS resources in use by this environment. This data is not live
@@ -599,6 +636,8 @@ type EnvironmentResourcesDescription struct {
 
 	// Describes the LoadBalancer.
 	LoadBalancer *LoadBalancerDescription
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of an environment tier
@@ -625,6 +664,8 @@ type EnvironmentTier struct {
 	// deprecated. Any specific version that you set may become out of date. We
 	// recommend leaving it unspecified.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an event.
@@ -656,6 +697,8 @@ type EventDescription struct {
 
 	// The release label for the application version associated with this event.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // The description of an Amazon EC2 instance.
@@ -663,6 +706,8 @@ type Instance struct {
 
 	// The ID of the Amazon EC2 instance.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents summary information about the health of an instance. For more
@@ -699,6 +744,8 @@ type InstanceHealthSummary struct {
 	// Yellow. The health agent is reporting a moderate number of request failures or
 	// other issues for an instance or environment.
 	Warning *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the average latency for the slowest X percent of requests over the
@@ -736,6 +783,8 @@ type Latency struct {
 	// The average latency for the slowest 0.1 percent of requests over the last 10
 	// seconds.
 	P999 *float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Auto Scaling launch configuration.
@@ -743,6 +792,8 @@ type LaunchConfiguration struct {
 
 	// The name of the launch configuration.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon EC2 launch template.
@@ -750,6 +801,8 @@ type LaunchTemplate struct {
 
 	// The ID of the launch template.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of a Listener for the LoadBalancer.
@@ -760,6 +813,8 @@ type Listener struct {
 
 	// The protocol that is used by the Listener.
 	Protocol *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a LoadBalancer.
@@ -767,6 +822,8 @@ type LoadBalancer struct {
 
 	// The name of the LoadBalancer.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the details of a LoadBalancer.
@@ -780,6 +837,8 @@ type LoadBalancerDescription struct {
 
 	// The name of the LoadBalancer.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 // The record of an upcoming or in-progress managed action.
@@ -801,6 +860,8 @@ type ManagedAction struct {
 	// The start time of the maintenance window in which the managed action will
 	// execute.
 	WindowStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The record of a completed or failed managed action.
@@ -829,6 +890,8 @@ type ManagedActionHistoryItem struct {
 
 	// The status of the action.
 	Status ActionHistoryStatus
+
+	noSmithyDocumentSerde
 }
 
 // A lifecycle rule that deletes application versions after the specified number of
@@ -846,6 +909,8 @@ type MaxAgeRule struct {
 
 	// Specify the number of days to retain an application versions.
 	MaxAgeInDays *int32
+
+	noSmithyDocumentSerde
 }
 
 // A lifecycle rule that deletes the oldest application version when the maximum
@@ -863,6 +928,8 @@ type MaxCountRule struct {
 
 	// Specify the maximum number of application versions to retain.
 	MaxCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // A regular expression representing a restriction on a string configuration option
@@ -875,6 +942,8 @@ type OptionRestrictionRegex struct {
 	// The regular expression pattern that a string configuration option value with
 	// this restriction must match.
 	Pattern *string
+
+	noSmithyDocumentSerde
 }
 
 // A specification identifying an individual configuration option.
@@ -888,6 +957,8 @@ type OptionSpecification struct {
 
 	// A unique resource name for a time-based scaling configuration option.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a platform branch.
@@ -912,6 +983,8 @@ type PlatformBranchSummary struct {
 	// The environment tiers that platform versions in this branch support. Possible
 	// values: WebServer/Standard | Worker/SQS/HTTP
 	SupportedTierList []string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about a platform version.
@@ -983,6 +1056,8 @@ type PlatformDescription struct {
 
 	// The tiers supported by the platform version.
 	SupportedTierList []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes criteria to restrict the results when listing platform versions. The
@@ -1014,6 +1089,8 @@ type PlatformFilter struct {
 	// * SupportedAddon: Log/S3 |
 	// Monitoring/Healthd | WorkerDaemon/SQSD
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A framework supported by the platform.
@@ -1024,6 +1101,8 @@ type PlatformFramework struct {
 
 	// The version of the framework.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // A programming language supported by the platform.
@@ -1034,6 +1113,8 @@ type PlatformProgrammingLanguage struct {
 
 	// The version of the programming language.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a platform version.
@@ -1078,6 +1159,8 @@ type PlatformSummary struct {
 
 	// The tiers in which the platform version runs.
 	SupportedTierList []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a queue.
@@ -1088,6 +1171,8 @@ type Queue struct {
 
 	// The URL of the queue.
 	URL *string
+
+	noSmithyDocumentSerde
 }
 
 // The AWS Elastic Beanstalk quota information for a single resource type in an AWS
@@ -1097,6 +1182,8 @@ type ResourceQuota struct {
 	// The maximum number of instances of this Elastic Beanstalk resource type that an
 	// AWS account can use.
 	Maximum *int32
+
+	noSmithyDocumentSerde
 }
 
 // A set of per-resource AWS Elastic Beanstalk quotas associated with an AWS
@@ -1117,6 +1204,8 @@ type ResourceQuotas struct {
 
 	// The quota for environments in the AWS account.
 	EnvironmentQuota *ResourceQuota
+
+	noSmithyDocumentSerde
 }
 
 // The bucket and key of an item stored in Amazon S3.
@@ -1127,6 +1216,8 @@ type S3Location struct {
 
 	// The Amazon S3 key where the data is located.
 	S3Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes criteria to restrict a list of results. For operators that apply a
@@ -1151,6 +1242,8 @@ type SearchFilter struct {
 	// The list of values applied to the Attribute and Operator attributes. Number of
 	// values and valid values vary by Attribute.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed health information about an Amazon EC2 instance in your Elastic
@@ -1191,6 +1284,8 @@ type SingleInstanceHealth struct {
 
 	// Operating system metrics from the instance.
 	System *SystemStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes the solution stack.
@@ -1201,6 +1296,8 @@ type SolutionStackDescription struct {
 
 	// The name of the solution stack.
 	SolutionStackName *string
+
+	noSmithyDocumentSerde
 }
 
 // Location of the source code for an application version.
@@ -1237,6 +1334,8 @@ type SourceBuildInformation struct {
 	//
 	// This member is required.
 	SourceType SourceType
+
+	noSmithyDocumentSerde
 }
 
 // A specification for an environment configuration.
@@ -1247,6 +1346,8 @@ type SourceConfiguration struct {
 
 	// The name of the configuration template.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the percentage of requests over the last 10 seconds that resulted in
@@ -1269,6 +1370,8 @@ type StatusCodes struct {
 	// The percentage of requests over the last 10 seconds that resulted in a 5xx (500,
 	// 501, etc.) status code.
 	Status5xx *int32
+
+	noSmithyDocumentSerde
 }
 
 // CPU utilization and load average metrics for an Amazon EC2 instance.
@@ -1281,6 +1384,8 @@ type SystemStatus struct {
 	// information, see Operating System Metrics
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-metrics.html#health-enhanced-metrics-os).
 	LoadAverage []float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag applied to a resource in an environment.
@@ -1291,6 +1396,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a trigger.
@@ -1298,6 +1405,8 @@ type Trigger struct {
 
 	// The name of the trigger.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An error or warning for a desired configuration option value.
@@ -1320,4 +1429,8 @@ type ValidationMessage struct {
 	// * warning: This message is
 	// providing information you should take into account.
 	Severity ValidationSeverity
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

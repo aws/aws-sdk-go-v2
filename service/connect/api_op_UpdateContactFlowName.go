@@ -45,11 +45,15 @@ type UpdateContactFlowNameInput struct {
 
 	// The name of the contact flow.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContactFlowNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContactFlowNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

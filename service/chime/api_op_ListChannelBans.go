@@ -45,6 +45,8 @@ type ListChannelBansInput struct {
 
 	// The token passed by previous API calls until all requested bans are returned.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListChannelBansOutput struct {
@@ -60,6 +62,8 @@ type ListChannelBansOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelBansMiddlewares(stack *middleware.Stack, options Options) (err error) {

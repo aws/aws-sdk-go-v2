@@ -195,6 +195,8 @@ type StartBuildInput struct {
 	// The number of build timeout minutes, from 5 to 480 (8 hours), that overrides,
 	// for this build only, the latest setting already defined in the build project.
 	TimeoutInMinutesOverride *int32
+
+	noSmithyDocumentSerde
 }
 
 type StartBuildOutput struct {
@@ -204,6 +206,8 @@ type StartBuildOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {

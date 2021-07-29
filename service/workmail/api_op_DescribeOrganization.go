@@ -34,6 +34,8 @@ type DescribeOrganizationInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeOrganizationOutput struct {
@@ -70,6 +72,8 @@ type DescribeOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

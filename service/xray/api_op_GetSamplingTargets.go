@@ -35,6 +35,8 @@ type GetSamplingTargetsInput struct {
 	//
 	// This member is required.
 	SamplingStatisticsDocuments []types.SamplingStatisticsDocument
+
+	noSmithyDocumentSerde
 }
 
 type GetSamplingTargetsOutput struct {
@@ -52,6 +54,8 @@ type GetSamplingTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSamplingTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

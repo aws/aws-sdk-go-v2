@@ -53,6 +53,8 @@ type ListQueuesInput struct {
 	// begins with the specified string are returned. Queue URLs and names are
 	// case-sensitive.
 	QueueNamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of your queues.
@@ -69,6 +71,8 @@ type ListQueuesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

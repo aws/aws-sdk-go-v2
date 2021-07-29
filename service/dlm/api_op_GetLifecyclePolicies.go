@@ -46,6 +46,8 @@ type GetLifecyclePoliciesInput struct {
 
 	// The target tag for a policy. Tags are strings in the format key=value.
 	TargetTags []string
+
+	noSmithyDocumentSerde
 }
 
 type GetLifecyclePoliciesOutput struct {
@@ -55,6 +57,8 @@ type GetLifecyclePoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLifecyclePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

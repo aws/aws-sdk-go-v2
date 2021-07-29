@@ -65,11 +65,15 @@ type SendBonusInput struct {
 	// UniqueRequestToken, subsequent calls will return an error with a message
 	// containing the request ID.
 	UniqueRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SendBonusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendBonusMiddlewares(stack *middleware.Stack, options Options) (err error) {

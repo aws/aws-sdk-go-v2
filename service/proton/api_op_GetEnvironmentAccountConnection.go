@@ -35,6 +35,8 @@ type GetEnvironmentAccountConnectionInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEnvironmentAccountConnectionOutput struct {
@@ -46,6 +48,8 @@ type GetEnvironmentAccountConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

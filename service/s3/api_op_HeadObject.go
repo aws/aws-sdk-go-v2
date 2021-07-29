@@ -203,6 +203,8 @@ type HeadObjectInput struct {
 
 	// VersionId used to reference a specific version of the object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type HeadObjectOutput struct {
@@ -376,6 +378,8 @@ type HeadObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHeadObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

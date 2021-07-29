@@ -47,11 +47,15 @@ type TagDeliveryStreamInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type TagDeliveryStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

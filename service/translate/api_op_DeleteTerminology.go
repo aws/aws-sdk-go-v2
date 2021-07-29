@@ -32,11 +32,15 @@ type DeleteTerminologyInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTerminologyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {

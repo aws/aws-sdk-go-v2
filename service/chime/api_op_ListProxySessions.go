@@ -43,6 +43,8 @@ type ListProxySessionsInput struct {
 
 	// The proxy session status.
 	Status types.ProxySessionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListProxySessionsOutput struct {
@@ -55,6 +57,8 @@ type ListProxySessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProxySessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

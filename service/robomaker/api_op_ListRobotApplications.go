@@ -53,6 +53,8 @@ type ListRobotApplicationsInput struct {
 
 	// The version qualifier of the robot application.
 	VersionQualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRobotApplicationsOutput struct {
@@ -69,6 +71,8 @@ type ListRobotApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRobotApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type ListActionTypesInput struct {
 
 	// The Region to filter on for the list of action types.
 	RegionFilter *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListActionTypes action.
@@ -58,6 +60,8 @@ type ListActionTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListActionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

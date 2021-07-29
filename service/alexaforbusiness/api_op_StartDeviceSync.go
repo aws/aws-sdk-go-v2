@@ -57,11 +57,15 @@ type StartDeviceSyncInput struct {
 
 	// The ARN of the room with which the device to sync is associated. Required.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StartDeviceSyncOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDeviceSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {

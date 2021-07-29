@@ -40,11 +40,15 @@ type StopAssessmentRunInput struct {
 	// SKIP_EVALUATION cancels the assessment run immediately, after which no findings
 	// are generated.
 	StopAction types.StopAction
+
+	noSmithyDocumentSerde
 }
 
 type StopAssessmentRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

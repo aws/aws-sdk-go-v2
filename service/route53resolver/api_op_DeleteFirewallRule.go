@@ -39,6 +39,8 @@ type DeleteFirewallRuleInput struct {
 	//
 	// This member is required.
 	FirewallRuleGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFirewallRuleOutput struct {
@@ -48,6 +50,8 @@ type DeleteFirewallRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFirewallRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

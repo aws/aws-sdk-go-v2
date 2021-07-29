@@ -81,6 +81,8 @@ type GetDocumentAnalysisInput struct {
 	// retrieve), Amazon Textract returns a pagination token in the response. You can
 	// use this pagination token to retrieve the next set of blocks.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDocumentAnalysisOutput struct {
@@ -113,6 +115,8 @@ type GetDocumentAnalysisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDocumentAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type UpdateBackendConfigInput struct {
 
 	// Describes the Amazon Cognito configuration for Admin UI access.
 	LoginAuthConfig *types.LoginAuthConfigReqObj
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBackendConfigOutput struct {
@@ -56,6 +58,8 @@ type UpdateBackendConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBackendConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

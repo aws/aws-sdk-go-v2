@@ -53,6 +53,8 @@ type CreateMultiplexInput struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for CreateMultiplexResponse
@@ -63,6 +65,8 @@ type CreateMultiplexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {

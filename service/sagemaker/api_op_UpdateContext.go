@@ -41,6 +41,8 @@ type UpdateContextInput struct {
 
 	// A list of properties to remove.
 	PropertiesToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContextOutput struct {
@@ -50,6 +52,8 @@ type UpdateContextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContextMiddlewares(stack *middleware.Stack, options Options) (err error) {

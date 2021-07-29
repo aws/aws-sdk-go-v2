@@ -43,11 +43,15 @@ type RenewCertificateInput struct {
 	//
 	// This member is required.
 	CertificateArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RenewCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRenewCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

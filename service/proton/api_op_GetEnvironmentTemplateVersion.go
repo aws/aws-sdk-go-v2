@@ -48,6 +48,8 @@ type GetEnvironmentTemplateVersionInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEnvironmentTemplateVersionOutput struct {
@@ -59,6 +61,8 @@ type GetEnvironmentTemplateVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

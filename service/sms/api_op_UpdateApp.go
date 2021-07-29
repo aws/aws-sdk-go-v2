@@ -46,6 +46,8 @@ type UpdateAppInput struct {
 
 	// The tags to associate with the application.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAppOutput struct {
@@ -61,6 +63,8 @@ type UpdateAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

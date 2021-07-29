@@ -71,6 +71,8 @@ type ModifyInstanceMetadataOptionsInput struct {
 	// credential always returns the version 2.0 credentials; the version 1.0
 	// credentials are not available.
 	HttpTokens types.HttpTokensState
+
+	noSmithyDocumentSerde
 }
 
 type ModifyInstanceMetadataOptionsOutput struct {
@@ -83,6 +85,8 @@ type ModifyInstanceMetadataOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyInstanceMetadataOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

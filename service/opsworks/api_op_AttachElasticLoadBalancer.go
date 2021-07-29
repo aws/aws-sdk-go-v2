@@ -51,11 +51,15 @@ type AttachElasticLoadBalancerInput struct {
 	//
 	// This member is required.
 	LayerId *string
+
+	noSmithyDocumentSerde
 }
 
 type AttachElasticLoadBalancerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachElasticLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

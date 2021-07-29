@@ -45,6 +45,8 @@ type CreateTypeInput struct {
 	//
 	// This member is required.
 	Format types.TypeDefinitionFormat
+
+	noSmithyDocumentSerde
 }
 
 type CreateTypeOutput struct {
@@ -54,6 +56,8 @@ type CreateTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

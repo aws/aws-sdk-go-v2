@@ -65,6 +65,8 @@ type UpdateEnrollmentStatusInput struct {
 	// Indicates whether to enroll member accounts of the organization if the account
 	// is the management account of an organization.
 	IncludeMemberAccounts bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEnrollmentStatusOutput struct {
@@ -79,6 +81,8 @@ type UpdateEnrollmentStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEnrollmentStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

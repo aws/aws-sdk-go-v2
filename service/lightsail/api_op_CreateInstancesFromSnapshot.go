@@ -131,6 +131,8 @@ type CreateInstancesFromSnapshotInput struct {
 	// see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/compare-options-choose-lightsail-instance-image).
 	UserData *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateInstancesFromSnapshotOutput struct {
@@ -142,6 +144,8 @@ type CreateInstancesFromSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInstancesFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

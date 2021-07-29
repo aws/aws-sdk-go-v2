@@ -63,6 +63,8 @@ type CheckDomainAvailabilityInput struct {
 
 	// Reserved for future use.
 	IdnLangCode *string
+
+	noSmithyDocumentSerde
 }
 
 // The CheckDomainAvailability response includes the following elements.
@@ -87,6 +89,8 @@ type CheckDomainAvailabilityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCheckDomainAvailabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {

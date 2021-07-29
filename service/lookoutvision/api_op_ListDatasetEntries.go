@@ -76,6 +76,8 @@ type ListDatasetEntriesInput struct {
 	// dataset. For example a value of "IMG_17" returns all JSON Lines where the
 	// source-ref key value matches *IMG_17*.
 	SourceRefContains *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDatasetEntriesOutput struct {
@@ -90,6 +92,8 @@ type ListDatasetEntriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDatasetEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

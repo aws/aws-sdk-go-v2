@@ -65,6 +65,8 @@ type DescribeImageScanFindingsInput struct {
 	// which to describe the image scan findings for. If you do not specify a registry,
 	// the default registry is assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImageScanFindingsOutput struct {
@@ -92,6 +94,8 @@ type DescribeImageScanFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImageScanFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

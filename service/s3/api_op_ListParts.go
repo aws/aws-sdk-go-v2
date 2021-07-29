@@ -116,6 +116,8 @@ type ListPartsInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
+
+	noSmithyDocumentSerde
 }
 
 type ListPartsOutput struct {
@@ -188,6 +190,8 @@ type ListPartsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -72,6 +72,8 @@ type SendCommandInput struct {
 
 	// Command to start a new transaction.
 	StartTransaction *types.StartTransactionRequest
+
+	noSmithyDocumentSerde
 }
 
 type SendCommandOutput struct {
@@ -101,6 +103,8 @@ type SendCommandOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendCommandMiddlewares(stack *middleware.Stack, options Options) (err error) {

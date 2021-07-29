@@ -42,6 +42,8 @@ type UpdateBotInput struct {
 
 	// When true, stops the specified bot from running in your account.
 	Disabled *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBotOutput struct {
@@ -51,6 +53,8 @@ type UpdateBotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBotMiddlewares(stack *middleware.Stack, options Options) (err error) {

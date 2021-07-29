@@ -29,11 +29,14 @@ func (c *Client) DisassociateAdminAccount(ctx context.Context, params *Disassoci
 }
 
 type DisassociateAdminAccountInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisassociateAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

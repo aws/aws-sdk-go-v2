@@ -37,11 +37,15 @@ type DeleteJobQueueInput struct {
 	//
 	// This member is required.
 	JobQueue *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteJobQueueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteJobQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

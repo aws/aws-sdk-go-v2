@@ -53,6 +53,8 @@ type DescribeAnomalyDetectorsInput struct {
 	// Use the token returned by the previous operation to request the next page of
 	// results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAnomalyDetectorsOutput struct {
@@ -66,6 +68,8 @@ type DescribeAnomalyDetectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAnomalyDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

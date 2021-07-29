@@ -33,11 +33,15 @@ type EnableTopicRuleInput struct {
 	//
 	// This member is required.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableTopicRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

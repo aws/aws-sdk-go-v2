@@ -143,6 +143,8 @@ type UpdateSMBFileShareInput struct {
 	// include: DOMAIN\User1, user1, @group1, and @DOMAIN\group1. Can only be set if
 	// Authentication is set to ActiveDirectory.
 	ValidUserList []string
+
+	noSmithyDocumentSerde
 }
 
 // UpdateSMBFileShareOutput
@@ -153,6 +155,8 @@ type UpdateSMBFileShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSMBFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

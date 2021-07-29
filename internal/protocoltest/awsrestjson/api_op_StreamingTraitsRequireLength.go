@@ -32,6 +32,8 @@ type StreamingTraitsRequireLengthInput struct {
 	Blob io.Reader
 
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type StreamingTraitsRequireLengthOutput struct {
@@ -41,6 +43,8 @@ type StreamingTraitsRequireLengthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStreamingTraitsRequireLengthMiddlewares(stack *middleware.Stack, options Options) (err error) {

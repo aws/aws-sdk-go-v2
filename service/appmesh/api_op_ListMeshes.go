@@ -46,6 +46,8 @@ type ListMeshesInput struct {
 	// value. This token should be treated as an opaque identifier that is used only to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -64,6 +66,8 @@ type ListMeshesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMeshesMiddlewares(stack *middleware.Stack, options Options) (err error) {

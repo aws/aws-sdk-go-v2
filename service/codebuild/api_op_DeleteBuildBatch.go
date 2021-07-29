@@ -33,6 +33,8 @@ type DeleteBuildBatchInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBuildBatchOutput struct {
@@ -50,6 +52,8 @@ type DeleteBuildBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

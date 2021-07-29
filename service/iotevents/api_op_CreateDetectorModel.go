@@ -61,6 +61,8 @@ type CreateDetectorModelInput struct {
 
 	// Metadata that can be used to manage the detector model.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDetectorModelOutput struct {
@@ -70,6 +72,8 @@ type CreateDetectorModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDetectorModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

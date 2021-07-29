@@ -32,11 +32,15 @@ type DeleteFunctionDefinitionInput struct {
 	//
 	// This member is required.
 	FunctionDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFunctionDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFunctionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

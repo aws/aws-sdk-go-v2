@@ -43,6 +43,8 @@ type ListInstanceAttributesInput struct {
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListInstanceAttributesOutput struct {
@@ -55,6 +57,8 @@ type ListInstanceAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInstanceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,11 +48,15 @@ type EnableStageTransitionInput struct {
 	//
 	// This member is required.
 	TransitionType types.StageTransitionType
+
+	noSmithyDocumentSerde
 }
 
 type EnableStageTransitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableStageTransitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

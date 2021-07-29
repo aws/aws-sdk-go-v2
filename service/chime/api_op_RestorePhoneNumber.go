@@ -34,6 +34,8 @@ type RestorePhoneNumberInput struct {
 	//
 	// This member is required.
 	PhoneNumberId *string
+
+	noSmithyDocumentSerde
 }
 
 type RestorePhoneNumberOutput struct {
@@ -43,6 +45,8 @@ type RestorePhoneNumberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestorePhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

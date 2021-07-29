@@ -57,11 +57,15 @@ type PutMailboxPermissionsInput struct {
 	//
 	// This member is required.
 	PermissionValues []types.PermissionType
+
+	noSmithyDocumentSerde
 }
 
 type PutMailboxPermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMailboxPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

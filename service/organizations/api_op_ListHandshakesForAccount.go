@@ -62,6 +62,8 @@ type ListHandshakesForAccountInput struct {
 	// is available. Set this parameter to the value of the previous call's NextToken
 	// response to indicate where the output should continue from.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListHandshakesForAccountOutput struct {
@@ -78,6 +80,8 @@ type ListHandshakesForAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHandshakesForAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type DescribeJobQueuesInput struct {
 	// This token should be treated as an opaque identifier that's only used to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJobQueuesOutput struct {
@@ -66,6 +68,8 @@ type DescribeJobQueuesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

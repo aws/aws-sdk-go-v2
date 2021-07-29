@@ -58,6 +58,8 @@ type DescribeManagedPrefixListsInput struct {
 
 	// One or more prefix list IDs.
 	PrefixListIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeManagedPrefixListsOutput struct {
@@ -71,6 +73,8 @@ type DescribeManagedPrefixListsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeManagedPrefixListsMiddlewares(stack *middleware.Stack, options Options) (err error) {

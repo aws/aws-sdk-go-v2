@@ -53,6 +53,8 @@ type CreateGrantVersionInput struct {
 	Status types.GrantStatus
 
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGrantVersionOutput struct {
@@ -68,6 +70,8 @@ type CreateGrantVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGrantVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

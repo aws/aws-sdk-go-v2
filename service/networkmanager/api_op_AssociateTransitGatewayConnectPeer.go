@@ -50,6 +50,8 @@ type AssociateTransitGatewayConnectPeerInput struct {
 
 	// The ID of the link.
 	LinkId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateTransitGatewayConnectPeerOutput struct {
@@ -59,6 +61,8 @@ type AssociateTransitGatewayConnectPeerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateTransitGatewayConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {

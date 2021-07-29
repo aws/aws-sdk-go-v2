@@ -68,6 +68,8 @@ type DescribeEventsInput struct {
 
 	// The start time for the events to be listed.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -83,6 +85,8 @@ type DescribeEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

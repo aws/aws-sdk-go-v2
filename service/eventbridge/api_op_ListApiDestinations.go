@@ -41,6 +41,8 @@ type ListApiDestinationsInput struct {
 
 	// The token returned by a previous call to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListApiDestinationsOutput struct {
@@ -54,6 +56,8 @@ type ListApiDestinationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListApiDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

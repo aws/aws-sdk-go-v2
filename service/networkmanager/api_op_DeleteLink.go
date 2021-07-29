@@ -39,6 +39,8 @@ type DeleteLinkInput struct {
 	//
 	// This member is required.
 	LinkId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLinkOutput struct {
@@ -48,6 +50,8 @@ type DeleteLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

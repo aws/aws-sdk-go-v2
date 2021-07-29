@@ -68,6 +68,8 @@ type ExportServerEngineAttributeInput struct {
 	// attribute is empty, OpsWorks for Chef Automate uses the most current version. In
 	// Puppet, this parameter is ignored.
 	InputAttributes []types.EngineAttribute
+
+	noSmithyDocumentSerde
 }
 
 type ExportServerEngineAttributeOutput struct {
@@ -80,6 +82,8 @@ type ExportServerEngineAttributeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportServerEngineAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetRequestedServiceQuotaChangeInput struct {
 	//
 	// This member is required.
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRequestedServiceQuotaChangeOutput struct {
@@ -42,6 +44,8 @@ type GetRequestedServiceQuotaChangeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRequestedServiceQuotaChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {

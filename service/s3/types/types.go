@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type AbortIncompleteMultipartUpload struct {
 	// Specifies the number of days after which Amazon S3 aborts an incomplete
 	// multipart upload.
 	DaysAfterInitiation int32
+
+	noSmithyDocumentSerde
 }
 
 // Configures the transfer acceleration state for an Amazon S3 bucket. For more
@@ -27,6 +30,8 @@ type AccelerateConfiguration struct {
 
 	// Specifies the transfer acceleration status of the bucket.
 	Status BucketAccelerateStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains the elements that set the ACL permissions for an object per grantee.
@@ -37,6 +42,8 @@ type AccessControlPolicy struct {
 
 	// Container for the bucket owner's display name and ID.
 	Owner *Owner
+
+	noSmithyDocumentSerde
 }
 
 // A container for information about access control for replicas.
@@ -49,6 +56,8 @@ type AccessControlTranslation struct {
 	//
 	// This member is required.
 	Owner OwnerOverride
+
+	noSmithyDocumentSerde
 }
 
 // A conjunction (logical AND) of predicates, which is used in evaluating a metrics
@@ -62,6 +71,8 @@ type AnalyticsAndOperator struct {
 
 	// The list of tags to use when evaluating an AND predicate.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration and any analyses for the analytics filter of an
@@ -83,6 +94,8 @@ type AnalyticsConfiguration struct {
 	// exactly one prefix, one tag, or one conjunction (AnalyticsAndOperator). If no
 	// filter is provided, all objects will be considered in any analysis.
 	Filter AnalyticsFilter
+
+	noSmithyDocumentSerde
 }
 
 // Where to publish the analytics results.
@@ -92,6 +105,8 @@ type AnalyticsExportDestination struct {
 	//
 	// This member is required.
 	S3BucketDestination *AnalyticsS3BucketDestination
+
+	noSmithyDocumentSerde
 }
 
 // The filter used to describe a set of objects for analyses. A filter must have
@@ -109,6 +124,8 @@ type AnalyticsFilter interface {
 // The prefix to use when evaluating an analytics filter.
 type AnalyticsFilterMemberPrefix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AnalyticsFilterMemberPrefix) isAnalyticsFilter() {}
@@ -116,6 +133,8 @@ func (*AnalyticsFilterMemberPrefix) isAnalyticsFilter() {}
 // The tag to use when evaluating an analytics filter.
 type AnalyticsFilterMemberTag struct {
 	Value Tag
+
+	noSmithyDocumentSerde
 }
 
 func (*AnalyticsFilterMemberTag) isAnalyticsFilter() {}
@@ -124,6 +143,8 @@ func (*AnalyticsFilterMemberTag) isAnalyticsFilter() {}
 // analytics filter. The operator must have at least two predicates.
 type AnalyticsFilterMemberAnd struct {
 	Value AnalyticsAndOperator
+
+	noSmithyDocumentSerde
 }
 
 func (*AnalyticsFilterMemberAnd) isAnalyticsFilter() {}
@@ -149,6 +170,8 @@ type AnalyticsS3BucketDestination struct {
 
 	// The prefix to use when exporting data. The prefix is prepended to all results.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // In terms of implementation, a Bucket is a resource. An Amazon S3 bucket name is
@@ -161,6 +184,8 @@ type Bucket struct {
 
 	// The name of the bucket.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the lifecycle configuration for objects in an Amazon S3 bucket. For
@@ -173,6 +198,8 @@ type BucketLifecycleConfiguration struct {
 	//
 	// This member is required.
 	Rules []LifecycleRule
+
+	noSmithyDocumentSerde
 }
 
 // Container for logging status information.
@@ -183,6 +210,8 @@ type BucketLoggingStatus struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTlogging.html) in
 	// the Amazon S3 API Reference.
 	LoggingEnabled *LoggingEnabled
+
+	noSmithyDocumentSerde
 }
 
 // Container for all (if there are any) keys between Prefix and the next occurrence
@@ -194,6 +223,8 @@ type CommonPrefix struct {
 
 	// Container for the specified common prefix.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The container for the completed multipart upload details.
@@ -201,6 +232,8 @@ type CompletedMultipartUpload struct {
 
 	// Array of CompletedPart data types.
 	Parts []CompletedPart
+
+	noSmithyDocumentSerde
 }
 
 // Details of the parts that were uploaded.
@@ -212,6 +245,8 @@ type CompletedPart struct {
 	// Part number that identifies the part. This is a positive integer between 1 and
 	// 10,000.
 	PartNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // A container for describing a condition that must be met for the specified
@@ -238,6 +273,8 @@ type Condition struct {
 	// information, see  XML related object key constraints
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	KeyPrefixEquals *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for all response elements.
@@ -250,6 +287,8 @@ type CopyObjectResult struct {
 
 	// Creation date of the object.
 	LastModified *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Container for all response elements.
@@ -260,6 +299,8 @@ type CopyPartResult struct {
 
 	// Date and time at which the object was uploaded.
 	LastModified *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the cross-origin access configuration for objects in an Amazon S3
@@ -273,6 +314,8 @@ type CORSConfiguration struct {
 	//
 	// This member is required.
 	CORSRules []CORSRule
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a cross-origin access rule for an Amazon S3 bucket.
@@ -304,6 +347,8 @@ type CORSRule struct {
 	// The time in seconds that your browser is to cache the preflight response for the
 	// specified resource.
 	MaxAgeSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // The configuration information for the bucket.
@@ -312,6 +357,8 @@ type CreateBucketConfiguration struct {
 	// Specifies the Region where the bucket will be created. If you don't specify a
 	// Region, the bucket is created in the US East (N. Virginia) Region (us-east-1).
 	LocationConstraint BucketLocationConstraint
+
+	noSmithyDocumentSerde
 }
 
 // Describes how an uncompressed comma-separated values (CSV)-formatted input
@@ -359,6 +406,8 @@ type CSVInput struct {
 	// A single character used to separate individual records in the input. Instead of
 	// the default value, you can specify an arbitrary delimiter.
 	RecordDelimiter *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes how uncompressed comma-separated values (CSV)-formatted results are
@@ -390,6 +439,8 @@ type CSVOutput struct {
 	// A single character used to separate individual records in the output. Instead of
 	// the default value, you can specify an arbitrary delimiter.
 	RecordDelimiter *string
+
+	noSmithyDocumentSerde
 }
 
 // The container element for specifying the default Object Lock retention settings
@@ -414,6 +465,8 @@ type DefaultRetention struct {
 	// The number of years that you want to specify for the default retention period.
 	// Must be used with Mode.
 	Years int32
+
+	noSmithyDocumentSerde
 }
 
 // Container for the objects to delete.
@@ -427,6 +480,8 @@ type Delete struct {
 	// Element to enable quiet mode for the request. When you add this element, you
 	// must set its value to true.
 	Quiet bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the deleted object.
@@ -447,6 +502,8 @@ type DeletedObject struct {
 
 	// The version ID of the deleted object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the delete marker.
@@ -467,6 +524,8 @@ type DeleteMarkerEntry struct {
 
 	// Version ID of an object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies whether Amazon S3 replicates delete markers. If you specify a Filter
@@ -488,6 +547,8 @@ type DeleteMarkerReplication struct {
 	// Indicates whether to replicate delete markers. Indicates whether to replicate
 	// delete markers.
 	Status DeleteMarkerReplicationStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies information about where to publish analysis or configuration results
@@ -536,6 +597,8 @@ type Destination struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTreplication.html)
 	// action in the Amazon S3 API Reference.
 	StorageClass StorageClass
+
+	noSmithyDocumentSerde
 }
 
 // Contains the type of server-side encryption used.
@@ -558,6 +621,8 @@ type Encryption struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	KMSKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies encryption-related information for an Amazon S3 bucket that is a
@@ -572,6 +637,8 @@ type EncryptionConfiguration struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	ReplicaKmsKeyID *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for all error elements.
@@ -1520,6 +1587,8 @@ type Error struct {
 
 	// The version ID of the error.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The error information.
@@ -1533,6 +1602,8 @@ type ErrorDocument struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Optional configuration to replicate existing source bucket objects. For more
@@ -1545,6 +1616,8 @@ type ExistingObjectReplication struct {
 	//
 	// This member is required.
 	Status ExistingObjectReplicationStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the Amazon S3 object key name to filter on and whether to filter on
@@ -1561,6 +1634,8 @@ type FilterRule struct {
 
 	// The value that the filter searches for in object key names.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for S3 Glacier job parameters.
@@ -1570,6 +1645,8 @@ type GlacierJobParameters struct {
 	//
 	// This member is required.
 	Tier Tier
+
+	noSmithyDocumentSerde
 }
 
 // Container for grant information.
@@ -1580,6 +1657,8 @@ type Grant struct {
 
 	// Specifies the permission given to the grantee.
 	Permission Permission
+
+	noSmithyDocumentSerde
 }
 
 // Container for the person being granted permissions.
@@ -1626,6 +1705,8 @@ type Grantee struct {
 
 	// URI of the grantee group.
 	URI *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for the Suffix element.
@@ -1642,6 +1723,8 @@ type IndexDocument struct {
 	//
 	// This member is required.
 	Suffix *string
+
+	noSmithyDocumentSerde
 }
 
 // Container element that identifies who initiated the multipart upload.
@@ -1653,6 +1736,8 @@ type Initiator struct {
 	// If the principal is an AWS account, it provides the Canonical User ID. If the
 	// principal is an IAM User, it provides a user ARN value.
 	ID *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the serialization format of the object.
@@ -1670,6 +1755,8 @@ type InputSerialization struct {
 
 	// Specifies Parquet as object's input serialization format.
 	Parquet *ParquetInput
+
+	noSmithyDocumentSerde
 }
 
 // A container for specifying S3 Intelligent-Tiering filters. The filters determine
@@ -1683,6 +1770,8 @@ type IntelligentTieringAndOperator struct {
 	// All of these tags must exist in the object's tag set in order for the
 	// configuration to apply.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the S3 Intelligent-Tiering configuration for an Amazon S3 bucket. For
@@ -1709,6 +1798,8 @@ type IntelligentTieringConfiguration struct {
 	// Specifies a bucket filter. The configuration only includes objects that meet the
 	// filter's criteria.
 	Filter *IntelligentTieringFilter
+
+	noSmithyDocumentSerde
 }
 
 // The Filter is used to identify objects that the S3 Intelligent-Tiering
@@ -1729,6 +1820,8 @@ type IntelligentTieringFilter struct {
 
 	// A container of a key value name pair.
 	Tag *Tag
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the inventory configuration for an Amazon S3 bucket. For more
@@ -1772,6 +1865,8 @@ type InventoryConfiguration struct {
 
 	// Contains the optional fields that are included in the inventory results.
 	OptionalFields []InventoryOptionalField
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the inventory configuration for an Amazon S3 bucket.
@@ -1782,6 +1877,8 @@ type InventoryDestination struct {
 	//
 	// This member is required.
 	S3BucketDestination *InventoryS3BucketDestination
+
+	noSmithyDocumentSerde
 }
 
 // Contains the type of server-side encryption used to encrypt the inventory
@@ -1793,6 +1890,8 @@ type InventoryEncryption struct {
 
 	// Specifies the use of SSE-S3 to encrypt delivered inventory reports.
 	SSES3 *SSES3
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an inventory filter. The inventory only includes objects that meet the
@@ -1803,6 +1902,8 @@ type InventoryFilter struct {
 	//
 	// This member is required.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the bucket name, file format, bucket owner (optional), and prefix
@@ -1832,6 +1933,8 @@ type InventoryS3BucketDestination struct {
 
 	// The prefix that is prepended to all inventory results.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the schedule for generating inventory results.
@@ -1841,6 +1944,8 @@ type InventorySchedule struct {
 	//
 	// This member is required.
 	Frequency InventoryFrequency
+
+	noSmithyDocumentSerde
 }
 
 // Specifies JSON as object's input serialization format.
@@ -1848,6 +1953,8 @@ type JSONInput struct {
 
 	// The type of JSON. Valid values: Document, Lines.
 	Type JSONType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies JSON as request's output serialization format.
@@ -1856,6 +1963,8 @@ type JSONOutput struct {
 	// The value used to separate individual records in the output. If no value is
 	// specified, Amazon S3 uses a newline character ('\n').
 	RecordDelimiter *string
+
+	noSmithyDocumentSerde
 }
 
 // A container for specifying the configuration for AWS Lambda notifications.
@@ -1884,6 +1993,8 @@ type LambdaFunctionConfiguration struct {
 	// An optional unique identifier for configurations in a notification
 	// configuration. If you don't provide one, Amazon S3 will assign an ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for the expiration for the lifecycle of the object.
@@ -1902,6 +2013,8 @@ type LifecycleExpiration struct {
 	// policy takes no action. This cannot be specified with Days or Date in a
 	// Lifecycle Expiration Policy.
 	ExpiredObjectDeleteMarker bool
+
+	noSmithyDocumentSerde
 }
 
 // A lifecycle rule for individual objects in an Amazon S3 bucket.
@@ -1958,6 +2071,8 @@ type LifecycleRule struct {
 
 	// Specifies when an Amazon S3 object transitions to a specified storage class.
 	Transitions []Transition
+
+	noSmithyDocumentSerde
 }
 
 // This is used in a Lifecycle Rule Filter to apply a logical AND to two or more
@@ -1971,6 +2086,8 @@ type LifecycleRuleAndOperator struct {
 	// All of these tags must exist in the object's tag set in order for the rule to
 	// apply.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // The Filter is used to identify objects that a Lifecycle Rule applies to. A
@@ -1991,6 +2108,8 @@ type LifecycleRuleFilter interface {
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 type LifecycleRuleFilterMemberPrefix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*LifecycleRuleFilterMemberPrefix) isLifecycleRuleFilter() {}
@@ -1998,6 +2117,8 @@ func (*LifecycleRuleFilterMemberPrefix) isLifecycleRuleFilter() {}
 // This tag must exist in the object's tag set in order for the rule to apply.
 type LifecycleRuleFilterMemberTag struct {
 	Value Tag
+
+	noSmithyDocumentSerde
 }
 
 func (*LifecycleRuleFilterMemberTag) isLifecycleRuleFilter() {}
@@ -2007,6 +2128,8 @@ func (*LifecycleRuleFilterMemberTag) isLifecycleRuleFilter() {}
 // predicates configured inside the And operator.
 type LifecycleRuleFilterMemberAnd struct {
 	Value LifecycleRuleAndOperator
+
+	noSmithyDocumentSerde
 }
 
 func (*LifecycleRuleFilterMemberAnd) isLifecycleRuleFilter() {}
@@ -2036,6 +2159,8 @@ type LoggingEnabled struct {
 
 	// Container for granting information.
 	TargetGrants []TargetGrant
+
+	noSmithyDocumentSerde
 }
 
 // A metadata key-value pair to store with an object.
@@ -2046,6 +2171,8 @@ type MetadataEntry struct {
 
 	// Value of the Object.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A container specifying replication metrics-related settings enabling replication
@@ -2060,6 +2187,8 @@ type Metrics struct {
 	// A container specifying the time threshold for emitting the
 	// s3:Replication:OperationMissedThreshold event.
 	EventThreshold *ReplicationTimeValue
+
+	noSmithyDocumentSerde
 }
 
 // A conjunction (logical AND) of predicates, which is used in evaluating a metrics
@@ -2072,6 +2201,8 @@ type MetricsAndOperator struct {
 
 	// The list of tags used when evaluating an AND predicate.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a metrics configuration for the CloudWatch request metrics (specified
@@ -2092,6 +2223,8 @@ type MetricsConfiguration struct {
 	// include objects that meet the filter's criteria. A filter must be a prefix, a
 	// tag, or a conjunction (MetricsAndOperator).
 	Filter MetricsFilter
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a metrics configuration filter. The metrics configuration only
@@ -2109,6 +2242,8 @@ type MetricsFilter interface {
 // The prefix used when evaluating a metrics filter.
 type MetricsFilterMemberPrefix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*MetricsFilterMemberPrefix) isMetricsFilter() {}
@@ -2116,6 +2251,8 @@ func (*MetricsFilterMemberPrefix) isMetricsFilter() {}
 // The tag used when evaluating a metrics filter.
 type MetricsFilterMemberTag struct {
 	Value Tag
+
+	noSmithyDocumentSerde
 }
 
 func (*MetricsFilterMemberTag) isMetricsFilter() {}
@@ -2125,6 +2262,8 @@ func (*MetricsFilterMemberTag) isMetricsFilter() {}
 // all of the predicates in order for the filter to apply.
 type MetricsFilterMemberAnd struct {
 	Value MetricsAndOperator
+
+	noSmithyDocumentSerde
 }
 
 func (*MetricsFilterMemberAnd) isMetricsFilter() {}
@@ -2149,6 +2288,8 @@ type MultipartUpload struct {
 
 	// Upload ID that identifies the multipart upload.
 	UploadId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies when noncurrent object versions expire. Upon expiration, Amazon S3
@@ -2164,6 +2305,8 @@ type NoncurrentVersionExpiration struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/intro-lifecycle-rules.html#non-current-days-calculations)
 	// in the Amazon S3 User Guide.
 	NoncurrentDays int32
+
+	noSmithyDocumentSerde
 }
 
 // Container for the transition rule that describes when noncurrent objects
@@ -2185,6 +2328,8 @@ type NoncurrentVersionTransition struct {
 
 	// The class of storage used to store the object.
 	StorageClass TransitionStorageClass
+
+	noSmithyDocumentSerde
 }
 
 // A container for specifying the notification configuration of the bucket. If this
@@ -2202,6 +2347,8 @@ type NotificationConfiguration struct {
 	// The topic to which notifications are sent and the events for which notifications
 	// are generated.
 	TopicConfigurations []TopicConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Specifies object key name filtering rules. For information about key name
@@ -2212,6 +2359,8 @@ type NotificationConfigurationFilter struct {
 
 	// A container for object key name prefix and suffix filtering rules.
 	Key *S3KeyFilter
+
+	noSmithyDocumentSerde
 }
 
 // An object consists of data and its descriptive metadata.
@@ -2251,6 +2400,8 @@ type Object struct {
 
 	// The class of storage used to store the object.
 	StorageClass ObjectStorageClass
+
+	noSmithyDocumentSerde
 }
 
 // Object Identifier is unique value to identify objects.
@@ -2266,6 +2417,8 @@ type ObjectIdentifier struct {
 
 	// VersionId for the specific version of the object to delete.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The container element for Object Lock configuration parameters.
@@ -2280,6 +2433,8 @@ type ObjectLockConfiguration struct {
 	// a mode and a period. The period can be either Days or Years but you must select
 	// one. You cannot specify Days and Years at the same time.
 	Rule *ObjectLockRule
+
+	noSmithyDocumentSerde
 }
 
 // A Legal Hold configuration for an object.
@@ -2287,6 +2442,8 @@ type ObjectLockLegalHold struct {
 
 	// Indicates whether the specified object has a Legal Hold in place.
 	Status ObjectLockLegalHoldStatus
+
+	noSmithyDocumentSerde
 }
 
 // A Retention configuration for an object.
@@ -2297,6 +2454,8 @@ type ObjectLockRetention struct {
 
 	// The date on which this Object Lock Retention will expire.
 	RetainUntilDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The container element for an Object Lock rule.
@@ -2307,6 +2466,8 @@ type ObjectLockRule struct {
 	// a period. The period can be either Days or Years but you must select one. You
 	// cannot specify Days and Years at the same time.
 	DefaultRetention *DefaultRetention
+
+	noSmithyDocumentSerde
 }
 
 // The version of an object.
@@ -2336,6 +2497,8 @@ type ObjectVersion struct {
 
 	// Version ID of an object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the location where the restore job's output is stored.
@@ -2343,6 +2506,8 @@ type OutputLocation struct {
 
 	// Describes an S3 location that will receive the results of the restore request.
 	S3 *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Describes how results of the Select job are serialized.
@@ -2353,6 +2518,8 @@ type OutputSerialization struct {
 
 	// Specifies JSON as request's output serialization format.
 	JSON *JSONOutput
+
+	noSmithyDocumentSerde
 }
 
 // Container for the owner's display name and ID.
@@ -2363,6 +2530,8 @@ type Owner struct {
 
 	// Container for the ID of the owner.
 	ID *string
+
+	noSmithyDocumentSerde
 }
 
 // The container element for a bucket's ownership controls.
@@ -2372,6 +2541,8 @@ type OwnershipControls struct {
 	//
 	// This member is required.
 	Rules []OwnershipControlsRule
+
+	noSmithyDocumentSerde
 }
 
 // The container element for an ownership control rule.
@@ -2385,10 +2556,13 @@ type OwnershipControlsRule struct {
 	//
 	// This member is required.
 	ObjectOwnership ObjectOwnership
+
+	noSmithyDocumentSerde
 }
 
 // Container for Parquet.
 type ParquetInput struct {
+	noSmithyDocumentSerde
 }
 
 // Container for elements related to a part.
@@ -2406,6 +2580,8 @@ type Part struct {
 
 	// Size in bytes of the uploaded part data.
 	Size int64
+
+	noSmithyDocumentSerde
 }
 
 // The container element for a bucket's policy status.
@@ -2414,6 +2590,8 @@ type PolicyStatus struct {
 	// The policy status for this bucket. TRUE indicates that this bucket is public.
 	// FALSE indicates that the bucket is not public.
 	IsPublic bool
+
+	noSmithyDocumentSerde
 }
 
 // The PublicAccessBlock configuration that you want to apply to this Amazon S3
@@ -2460,6 +2638,8 @@ type PublicAccessBlockConfiguration struct {
 	// policies, except that public and cross-account access within any public bucket
 	// policy, including non-public delegation to specific accounts, is blocked.
 	RestrictPublicBuckets bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration for publishing messages to an Amazon Simple Queue
@@ -2486,6 +2666,8 @@ type QueueConfiguration struct {
 	// An optional unique identifier for configurations in a notification
 	// configuration. If you don't provide one, Amazon S3 will assign an ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies how requests are redirected. In the event of an error, you can specify
@@ -2522,6 +2704,8 @@ type Redirect struct {
 	// constraints
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 	ReplaceKeyWith *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the redirect behavior of all requests to a website endpoint of an
@@ -2536,6 +2720,8 @@ type RedirectAllRequestsTo struct {
 	// Protocol to use when redirecting requests. The default is the protocol that is
 	// used in the original request.
 	Protocol Protocol
+
+	noSmithyDocumentSerde
 }
 
 // A filter that you can specify for selection for modifications on replicas.
@@ -2551,6 +2737,8 @@ type ReplicaModifications struct {
 	//
 	// This member is required.
 	Status ReplicaModificationsStatus
+
+	noSmithyDocumentSerde
 }
 
 // A container for replication rules. You can add up to 1,000 rules. The maximum
@@ -2571,6 +2759,8 @@ type ReplicationConfiguration struct {
 	//
 	// This member is required.
 	Rules []ReplicationRule
+
+	noSmithyDocumentSerde
 }
 
 // Specifies which Amazon S3 objects to replicate and where to store the replicas.
@@ -2639,6 +2829,8 @@ type ReplicationRule struct {
 	// specify for objects created with server-side encryption using a customer master
 	// key (CMK) stored in AWS Key Management Service (SSE-KMS).
 	SourceSelectionCriteria *SourceSelectionCriteria
+
+	noSmithyDocumentSerde
 }
 
 // A container for specifying rule filters. The filters determine the subset of
@@ -2658,6 +2850,8 @@ type ReplicationRuleAndOperator struct {
 
 	// An array of tags containing key and value pairs.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // A filter that identifies the subset of objects to which the replication rule
@@ -2678,6 +2872,8 @@ type ReplicationRuleFilter interface {
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-keys.html#object-key-xml-related-constraints).
 type ReplicationRuleFilterMemberPrefix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*ReplicationRuleFilterMemberPrefix) isReplicationRuleFilter() {}
@@ -2686,6 +2882,8 @@ func (*ReplicationRuleFilterMemberPrefix) isReplicationRuleFilter() {}
 // that have the tag in their tag set.
 type ReplicationRuleFilterMemberTag struct {
 	Value Tag
+
+	noSmithyDocumentSerde
 }
 
 func (*ReplicationRuleFilterMemberTag) isReplicationRuleFilter() {}
@@ -2701,6 +2899,8 @@ func (*ReplicationRuleFilterMemberTag) isReplicationRuleFilter() {}
 // multiple tags, wrap the Tag elements in an And tag.
 type ReplicationRuleFilterMemberAnd struct {
 	Value ReplicationRuleAndOperator
+
+	noSmithyDocumentSerde
 }
 
 func (*ReplicationRuleFilterMemberAnd) isReplicationRuleFilter() {}
@@ -2720,6 +2920,8 @@ type ReplicationTime struct {
 	//
 	// This member is required.
 	Time *ReplicationTimeValue
+
+	noSmithyDocumentSerde
 }
 
 // A container specifying the time value for S3 Replication Time Control (S3 RTC)
@@ -2728,6 +2930,8 @@ type ReplicationTimeValue struct {
 
 	// Contains an integer specifying time in minutes. Valid values: 15 minutes.
 	Minutes int32
+
+	noSmithyDocumentSerde
 }
 
 // Container for Payer.
@@ -2737,6 +2941,8 @@ type RequestPaymentConfiguration struct {
 	//
 	// This member is required.
 	Payer Payer
+
+	noSmithyDocumentSerde
 }
 
 // Container for restore job parameters.
@@ -2765,6 +2971,8 @@ type RestoreRequest struct {
 
 	// Type of restore request.
 	Type RestoreRequestType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the redirect behavior and when a redirect is applied. For more
@@ -2785,6 +2993,8 @@ type RoutingRule struct {
 	// redirect to the /documents folder. 2. If request results in HTTP error 4xx,
 	// redirect request to another host where you might process the error.
 	Condition *Condition
+
+	noSmithyDocumentSerde
 }
 
 // A container for object key name prefix and suffix filtering rules.
@@ -2793,6 +3003,8 @@ type S3KeyFilter struct {
 	// A list of containers for the key-value pair that defines the criteria for the
 	// filter rule.
 	FilterRules []FilterRule
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon S3 location that will receive the results of the restore
@@ -2826,6 +3038,8 @@ type S3Location struct {
 
 	// A list of metadata to store with the restore results in S3.
 	UserMetadata []MetadataEntry
+
+	noSmithyDocumentSerde
 }
 
 // Describes the parameters for Select job types.
@@ -2850,6 +3064,8 @@ type SelectParameters struct {
 	//
 	// This member is required.
 	OutputSerialization *OutputSerialization
+
+	noSmithyDocumentSerde
 }
 
 // Describes the default server-side encryption to apply to new objects in the
@@ -2885,6 +3101,8 @@ type ServerSideEncryptionByDefault struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the AWS Key Management Service Developer Guide.
 	KMSMasterKeyID *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default server-side-encryption configuration.
@@ -2895,6 +3113,8 @@ type ServerSideEncryptionConfiguration struct {
 	//
 	// This member is required.
 	Rules []ServerSideEncryptionRule
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the default server-side encryption configuration.
@@ -2913,6 +3133,8 @@ type ServerSideEncryptionRule struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon
 	// S3 User Guide.
 	BucketKeyEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // A container that describes additional filters for identifying the source objects
@@ -2935,6 +3157,8 @@ type SourceSelectionCriteria struct {
 	// encrypted with AWS KMS. If you include SourceSelectionCriteria in the
 	// replication configuration, this element is required.
 	SseKmsEncryptedObjects *SseKmsEncryptedObjects
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the use of SSE-KMS to encrypt delivered inventory reports.
@@ -2945,6 +3169,8 @@ type SSEKMS struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // A container for filter information for the selection of S3 objects encrypted
@@ -2956,10 +3182,13 @@ type SseKmsEncryptedObjects struct {
 	//
 	// This member is required.
 	Status SseKmsEncryptedObjectsStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the use of SSE-S3 to encrypt delivered inventory reports.
 type SSES3 struct {
+	noSmithyDocumentSerde
 }
 
 // Specifies data related to access patterns to be collected and made available to
@@ -2969,6 +3198,8 @@ type StorageClassAnalysis struct {
 	// Specifies how data related to the storage class analysis for an Amazon S3 bucket
 	// should be exported.
 	DataExport *StorageClassAnalysisDataExport
+
+	noSmithyDocumentSerde
 }
 
 // Container for data related to the storage class analysis for an Amazon S3 bucket
@@ -2984,6 +3215,8 @@ type StorageClassAnalysisDataExport struct {
 	//
 	// This member is required.
 	OutputSchemaVersion StorageClassAnalysisSchemaVersion
+
+	noSmithyDocumentSerde
 }
 
 // A container of a key value name pair.
@@ -2998,6 +3231,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for TagSet elements.
@@ -3007,6 +3242,8 @@ type Tagging struct {
 	//
 	// This member is required.
 	TagSet []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Container for granting information.
@@ -3017,6 +3254,8 @@ type TargetGrant struct {
 
 	// Logging permissions assigned to the grantee for the bucket.
 	Permission BucketLogsPermission
+
+	noSmithyDocumentSerde
 }
 
 // The S3 Intelligent-Tiering storage class is designed to optimize storage costs
@@ -3040,6 +3279,8 @@ type Tiering struct {
 	//
 	// This member is required.
 	Days int32
+
+	noSmithyDocumentSerde
 }
 
 // A container for specifying the configuration for publication of messages to an
@@ -3070,6 +3311,8 @@ type TopicConfiguration struct {
 	// An optional unique identifier for configurations in a notification
 	// configuration. If you don't provide one, Amazon S3 will assign an ID.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies when an object transitions to a specified storage class. For more
@@ -3089,6 +3332,8 @@ type Transition struct {
 
 	// The storage class to which you want the object to transition.
 	StorageClass TransitionStorageClass
+
+	noSmithyDocumentSerde
 }
 
 // Describes the versioning state of an Amazon S3 bucket. For more information, see
@@ -3104,6 +3349,8 @@ type VersioningConfiguration struct {
 
 	// The versioning state of the bucket.
 	Status BucketVersioningStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies website configuration parameters for an Amazon S3 bucket.
@@ -3121,13 +3368,19 @@ type WebsiteConfiguration struct {
 
 	// Rules that define when a redirect is applied and the redirect behavior.
 	RoutingRules []RoutingRule
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isAnalyticsFilter()       {}

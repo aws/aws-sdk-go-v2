@@ -39,6 +39,8 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 	// Specifies whether messages that use the configuration set are required to use
 	// Transport Layer Security (TLS).
 	DeliveryOptions *types.DeliveryOptions
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -46,6 +48,8 @@ type PutConfigurationSetDeliveryOptionsInput struct {
 type PutConfigurationSetDeliveryOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConfigurationSetDeliveryOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

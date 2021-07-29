@@ -126,6 +126,8 @@ type IssueCertificateInput struct {
 	// this API reference and Validity
 	// (https://tools.ietf.org/html/rfc5280#section-4.1.2.5) in RFC 5280.
 	ValidityNotBefore *types.Validity
+
+	noSmithyDocumentSerde
 }
 
 type IssueCertificateOutput struct {
@@ -137,6 +139,8 @@ type IssueCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIssueCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,6 +57,8 @@ type UpdateVocabularyInput struct {
 	// vocabularies, see Custom Vocabularies
 	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
 	VocabularyFileUri *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateVocabularyOutput struct {
@@ -76,6 +78,8 @@ type UpdateVocabularyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVocabularyMiddlewares(stack *middleware.Stack, options Options) (err error) {

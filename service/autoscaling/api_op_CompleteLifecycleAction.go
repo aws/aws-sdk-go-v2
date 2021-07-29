@@ -77,11 +77,15 @@ type CompleteLifecycleActionInput struct {
 	// action associated with an instance. Amazon EC2 Auto Scaling sends this token to
 	// the notification target you specified when you created the lifecycle hook.
 	LifecycleActionToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CompleteLifecycleActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCompleteLifecycleActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

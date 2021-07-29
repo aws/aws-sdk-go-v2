@@ -46,6 +46,8 @@ type ListQuerySuggestionsBlockListsInput struct {
 	// this pagination token to retrieve the next set of block lists
 	// (BlockListSummaryItems).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListQuerySuggestionsBlockListsOutput struct {
@@ -63,6 +65,8 @@ type ListQuerySuggestionsBlockListsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListQuerySuggestionsBlockListsMiddlewares(stack *middleware.Stack, options Options) (err error) {

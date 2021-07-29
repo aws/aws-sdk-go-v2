@@ -45,11 +45,15 @@ type UpdateProjectInput struct {
 	// placementTemplate, you can update the associated callbackOverrides for the
 	// device definition using this API.
 	PlacementTemplate *types.PlacementTemplate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

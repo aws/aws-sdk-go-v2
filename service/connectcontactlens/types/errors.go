@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // Request processing failed due to an error or failure with the service.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -44,6 +48,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // The request is not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -61,6 +67,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -78,6 +86,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The throttling limit has been exceeded.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

@@ -45,6 +45,8 @@ type UpdateDeploymentInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // An immutable representation of a RestApi resource that can be called by users
@@ -73,6 +75,8 @@ type UpdateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

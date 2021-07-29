@@ -34,6 +34,8 @@ type DescribeClusterInput struct {
 	//
 	// This member is required.
 	ClusterArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClusterOutput struct {
@@ -43,6 +45,8 @@ type DescribeClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

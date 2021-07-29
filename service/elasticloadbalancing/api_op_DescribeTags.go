@@ -34,6 +34,8 @@ type DescribeTagsInput struct {
 	//
 	// This member is required.
 	LoadBalancerNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output for DescribeTags.
@@ -44,6 +46,8 @@ type DescribeTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

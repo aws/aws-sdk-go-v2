@@ -10,6 +10,8 @@ import (
 // The operation did not succeed because of an unauthorized access attempt.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -30,6 +32,8 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -48,6 +52,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // CodeArtifact.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -69,6 +75,8 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -90,6 +98,8 @@ type ServiceQuotaExceededException struct {
 
 	ResourceId   *string
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -109,6 +119,8 @@ type ThrottlingException struct {
 	Message *string
 
 	RetryAfterSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -129,6 +141,8 @@ type ValidationException struct {
 	Message *string
 
 	Reason ValidationExceptionReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

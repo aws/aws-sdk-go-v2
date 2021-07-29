@@ -51,6 +51,8 @@ type CreateAnalyzerInput struct {
 
 	// The tags to apply to the analyzer.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request to create an analyzer.
@@ -61,6 +63,8 @@ type CreateAnalyzerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAnalyzerMiddlewares(stack *middleware.Stack, options Options) (err error) {

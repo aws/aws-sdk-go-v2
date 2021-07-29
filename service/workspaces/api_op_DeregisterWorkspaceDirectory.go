@@ -46,11 +46,15 @@ type DeregisterWorkspaceDirectoryInput struct {
 	//
 	// This member is required.
 	DirectoryId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterWorkspaceDirectoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterWorkspaceDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

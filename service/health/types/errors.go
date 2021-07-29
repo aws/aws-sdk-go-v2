@@ -15,6 +15,8 @@ import (
 // operation.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -34,6 +36,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // The specified pagination token (nextToken) is not valid.
 type InvalidPaginationToken struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPaginationToken) Error() string {
@@ -51,6 +55,8 @@ func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified locale is not supported.
 type UnsupportedLocale struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedLocale) Error() string {

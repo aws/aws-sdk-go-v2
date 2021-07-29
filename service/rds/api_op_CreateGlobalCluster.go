@@ -61,6 +61,8 @@ type CreateGlobalClusterInput struct {
 
 	// The storage encryption setting for the new global database cluster.
 	StorageEncrypted *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateGlobalClusterOutput struct {
@@ -70,6 +72,8 @@ type CreateGlobalClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

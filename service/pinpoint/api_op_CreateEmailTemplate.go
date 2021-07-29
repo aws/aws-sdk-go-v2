@@ -42,6 +42,8 @@ type CreateEmailTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateEmailTemplateOutput struct {
@@ -53,6 +55,8 @@ type CreateEmailTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

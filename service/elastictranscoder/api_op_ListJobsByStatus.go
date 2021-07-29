@@ -47,6 +47,8 @@ type ListJobsByStatusInput struct {
 	// When Elastic Transcoder returns more than one page of results, use pageToken in
 	// subsequent GET requests to get each successive page of results.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The ListJobsByStatusResponse structure.
@@ -62,6 +64,8 @@ type ListJobsByStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobsByStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

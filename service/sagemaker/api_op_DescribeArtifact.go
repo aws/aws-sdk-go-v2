@@ -34,6 +34,8 @@ type DescribeArtifactInput struct {
 	//
 	// This member is required.
 	ArtifactArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeArtifactOutput struct {
@@ -72,6 +74,8 @@ type DescribeArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

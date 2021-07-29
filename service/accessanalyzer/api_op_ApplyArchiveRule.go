@@ -43,11 +43,15 @@ type ApplyArchiveRuleInput struct {
 
 	// A client token.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ApplyArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationApplyArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

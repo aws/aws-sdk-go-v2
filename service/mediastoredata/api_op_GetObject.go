@@ -57,6 +57,8 @@ type GetObjectInput struct {
 	// MediaStore ignores this header for partially uploaded objects that have
 	// streaming upload availability.
 	Range *string
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectOutput struct {
@@ -95,6 +97,8 @@ type GetObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

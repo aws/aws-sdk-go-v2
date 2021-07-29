@@ -38,6 +38,8 @@ type ListIndicesInput struct {
 	// this pagination token to retrieve the next set of indexes
 	// (DataSourceSummaryItems).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListIndicesOutput struct {
@@ -51,6 +53,8 @@ type ListIndicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIndicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

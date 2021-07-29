@@ -36,6 +36,8 @@ type ListExperimentTemplatesInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListExperimentTemplatesOutput struct {
@@ -49,6 +51,8 @@ type ListExperimentTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListExperimentTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

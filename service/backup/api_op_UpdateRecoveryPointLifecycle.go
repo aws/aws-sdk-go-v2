@@ -60,6 +60,8 @@ type UpdateRecoveryPointLifecycleInput struct {
 	// days” setting. The “transition to cold after days” setting cannot be changed
 	// after a backup has been transitioned to cold.
 	Lifecycle *types.Lifecycle
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRecoveryPointLifecycleOutput struct {
@@ -89,6 +91,8 @@ type UpdateRecoveryPointLifecycleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRecoveryPointLifecycleMiddlewares(stack *middleware.Stack, options Options) (err error) {

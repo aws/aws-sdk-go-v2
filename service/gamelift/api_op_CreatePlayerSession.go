@@ -56,6 +56,8 @@ type CreatePlayerSessionInput struct {
 	// Developer-defined information related to a player. GameLift does not use this
 	// data, so it can be formatted as needed for use in the game.
 	PlayerData *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -66,6 +68,8 @@ type CreatePlayerSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePlayerSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

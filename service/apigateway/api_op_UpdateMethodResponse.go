@@ -53,6 +53,8 @@ type UpdateMethodResponseInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -113,6 +115,8 @@ type UpdateMethodResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

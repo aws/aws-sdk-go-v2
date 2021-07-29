@@ -39,12 +39,16 @@ type DeleteUserAttributesInput struct {
 	//
 	// This member is required.
 	UserAttributeNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to delete user attributes.
 type DeleteUserAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

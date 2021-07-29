@@ -130,11 +130,15 @@ type ModifyInstanceAttributeInput struct {
 	// A new value for the attribute. Use only with the kernel, ramdisk, userData,
 	// disableApiTermination, or instanceInitiatedShutdownBehavior attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyInstanceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyInstanceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,11 +38,15 @@ type DisassociateElasticIpInput struct {
 	//
 	// This member is required.
 	ElasticIp *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateElasticIpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

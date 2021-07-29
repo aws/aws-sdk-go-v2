@@ -41,6 +41,8 @@ type DescribeRuntimeVersionsInput struct {
 	// in a subsequent DescribeRuntimeVersions operation to retrieve the next set of
 	// results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRuntimeVersionsOutput struct {
@@ -56,6 +58,8 @@ type DescribeRuntimeVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRuntimeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

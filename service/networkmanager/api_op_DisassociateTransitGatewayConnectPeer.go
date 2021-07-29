@@ -38,6 +38,8 @@ type DisassociateTransitGatewayConnectPeerInput struct {
 	//
 	// This member is required.
 	TransitGatewayConnectPeerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateTransitGatewayConnectPeerOutput struct {
@@ -47,6 +49,8 @@ type DisassociateTransitGatewayConnectPeerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateTransitGatewayConnectPeerMiddlewares(stack *middleware.Stack, options Options) (err error) {

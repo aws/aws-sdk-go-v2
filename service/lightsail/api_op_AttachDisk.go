@@ -48,6 +48,8 @@ type AttachDiskInput struct {
 	//
 	// This member is required.
 	InstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 type AttachDiskOutput struct {
@@ -59,6 +61,8 @@ type AttachDiskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {

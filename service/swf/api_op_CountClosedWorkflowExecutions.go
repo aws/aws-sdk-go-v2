@@ -95,6 +95,8 @@ type CountClosedWorkflowExecutionsInput struct {
 	// closeStatusFilter, executionFilter, typeFilter and tagFilter are mutually
 	// exclusive. You can specify at most one of these in a request.
 	TypeFilter *types.WorkflowTypeFilter
+
+	noSmithyDocumentSerde
 }
 
 // Contains the count of workflow executions returned from
@@ -112,6 +114,8 @@ type CountClosedWorkflowExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCountClosedWorkflowExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

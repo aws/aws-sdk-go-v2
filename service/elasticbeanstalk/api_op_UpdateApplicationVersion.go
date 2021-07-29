@@ -46,6 +46,8 @@ type UpdateApplicationVersionInput struct {
 
 	// A new description for this version.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Result message wrapping a single description of an application version.
@@ -56,6 +58,8 @@ type UpdateApplicationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

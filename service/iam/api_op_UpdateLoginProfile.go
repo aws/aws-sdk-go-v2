@@ -64,11 +64,15 @@ type UpdateLoginProfileInput struct {
 	// Allows this new password to be used only once by requiring the specified IAM
 	// user to set a new password on next sign-in.
 	PasswordResetRequired *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLoginProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

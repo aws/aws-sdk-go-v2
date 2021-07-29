@@ -52,6 +52,8 @@ type ListDeviceEventsInput struct {
 	// includes results beyond the token, up to the value specified by MaxResults. When
 	// the end of results is reached, the response has a value of null.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDeviceEventsOutput struct {
@@ -64,6 +66,8 @@ type ListDeviceEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeviceEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

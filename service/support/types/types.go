@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // An attachment to a case communication. The attachment consists of the file name
 // and the content of the file.
 type Attachment struct {
@@ -11,6 +15,8 @@ type Attachment struct {
 
 	// The name of the attachment file.
 	FileName *string
+
+	noSmithyDocumentSerde
 }
 
 // The file name and ID of an attachment to a case communication. You can use the
@@ -22,6 +28,8 @@ type AttachmentDetails struct {
 
 	// The file name of the attachment.
 	FileName *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON-formatted object that contains the metadata for a support case. It is
@@ -140,6 +148,8 @@ type CaseDetails struct {
 
 	// The time that the case was created in the AWS Support Center.
 	TimeCreated *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON-formatted name/value pair that represents the category name and category
@@ -152,6 +162,8 @@ type Category struct {
 
 	// The category name for the support case.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A communication associated with a support case. The communication consists of
@@ -178,6 +190,8 @@ type Communication struct {
 
 	// The time the communication was created.
 	TimeCreated *string
+
+	noSmithyDocumentSerde
 }
 
 // The five most recent communications associated with the case.
@@ -188,6 +202,8 @@ type RecentCaseCommunications struct {
 
 	// A resumption point for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an AWS service returned by the DescribeServices operation.
@@ -205,6 +221,8 @@ type Service struct {
 	// The friendly name for an AWS service. The code element contains the
 	// corresponding code.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A code and name pair that represents the severity level of a support case. The
@@ -241,6 +259,8 @@ type SeverityLevel struct {
 	// (https://docs.aws.amazon.com/awssupport/latest/user/case-management.html#choosing-severity)
 	// in the AWS Support User Guide.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The container for summary information that relates to the category of the
@@ -250,6 +270,8 @@ type TrustedAdvisorCategorySpecificSummary struct {
 	// The summary information about cost savings for a Trusted Advisor check that is
 	// in the Cost Optimizing category.
 	CostOptimizing *TrustedAdvisorCostOptimizingSummary
+
+	noSmithyDocumentSerde
 }
 
 // The description and metadata for a Trusted Advisor check.
@@ -284,6 +306,8 @@ type TrustedAdvisorCheckDescription struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The refresh status of a Trusted Advisor check.
@@ -319,6 +343,8 @@ type TrustedAdvisorCheckRefreshStatus struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The results of a Trusted Advisor check returned by
@@ -357,6 +383,8 @@ type TrustedAdvisorCheckResult struct {
 	//
 	// This member is required.
 	Timestamp *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a Trusted Advisor check result, including the alert status, last
@@ -393,6 +421,8 @@ type TrustedAdvisorCheckSummary struct {
 
 	// Specifies whether the Trusted Advisor check has flagged resources.
 	HasFlaggedResources bool
+
+	noSmithyDocumentSerde
 }
 
 // The estimated cost savings that might be realized if the recommended operations
@@ -410,6 +440,8 @@ type TrustedAdvisorCostOptimizingSummary struct {
 	//
 	// This member is required.
 	EstimatedPercentMonthlySavings float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a resource identified by a Trusted Advisor check.
@@ -440,6 +472,8 @@ type TrustedAdvisorResourceDetail struct {
 
 	// The AWS Region in which the identified resource is located.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about AWS resources that were analyzed in a call to Trusted Advisor
@@ -468,4 +502,8 @@ type TrustedAdvisorResourcesSummary struct {
 	//
 	// This member is required.
 	ResourcesSuppressed int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

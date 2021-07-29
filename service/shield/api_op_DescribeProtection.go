@@ -38,6 +38,8 @@ type DescribeProtectionInput struct {
 	// that is described. When submitting the DescribeProtection request you must
 	// provide either the ResourceArn or the ProtectionID, but not both.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProtectionOutput struct {
@@ -47,6 +49,8 @@ type DescribeProtectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

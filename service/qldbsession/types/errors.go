@@ -13,6 +13,8 @@ type BadRequestException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -30,6 +32,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Returned when the request exceeds the processing capacity of the ledger.
 type CapacityExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CapacityExceededException) Error() string {
@@ -49,6 +53,8 @@ type InvalidSessionException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSessionException) Error() string {
@@ -66,6 +72,8 @@ func (e *InvalidSessionException) ErrorFault() smithy.ErrorFault { return smithy
 // Returned if a resource limit such as number of active sessions is exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -84,6 +92,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // the verification phase of optimistic concurrency control (OCC).
 type OccConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OccConflictException) Error() string {
@@ -101,6 +111,8 @@ func (e *OccConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Returned when the rate of requests exceeds the allowed throughput.
 type RateExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RateExceededException) Error() string {

@@ -60,6 +60,8 @@ type TransactGetItemsInput struct {
 	// value of NONE prevents that information from being returned. No other value is
 	// valid.
 	ReturnConsumedCapacity types.ReturnConsumedCapacity
+
+	noSmithyDocumentSerde
 }
 
 type TransactGetItemsOutput struct {
@@ -81,6 +83,8 @@ type TransactGetItemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTransactGetItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

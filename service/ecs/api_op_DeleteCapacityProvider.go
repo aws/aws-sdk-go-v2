@@ -45,6 +45,8 @@ type DeleteCapacityProviderInput struct {
 	//
 	// This member is required.
 	CapacityProvider *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCapacityProviderOutput struct {
@@ -54,6 +56,8 @@ type DeleteCapacityProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

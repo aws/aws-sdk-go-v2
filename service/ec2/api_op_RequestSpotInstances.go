@@ -115,6 +115,8 @@ type RequestSpotInstancesInput struct {
 	// the request is canceled, or the ValidUntil date and time is reached. By default,
 	// the request is valid for 7 days from the date the request was created.
 	ValidUntil *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of RequestSpotInstances.
@@ -125,6 +127,8 @@ type RequestSpotInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRequestSpotInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type UpdateVoiceConnectorGroupInput struct {
 	//
 	// This member is required.
 	VoiceConnectorItems []types.VoiceConnectorItem
+
+	noSmithyDocumentSerde
 }
 
 type UpdateVoiceConnectorGroupOutput struct {
@@ -53,6 +55,8 @@ type UpdateVoiceConnectorGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVoiceConnectorGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type CreatePermissionSetInput struct {
 
 	// The tags to attach to the new PermissionSet.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePermissionSetOutput struct {
@@ -64,6 +66,8 @@ type CreatePermissionSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

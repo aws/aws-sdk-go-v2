@@ -38,6 +38,8 @@ type GetBlobInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a get blob operation.
@@ -50,6 +52,8 @@ type GetBlobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBlobMiddlewares(stack *middleware.Stack, options Options) (err error) {

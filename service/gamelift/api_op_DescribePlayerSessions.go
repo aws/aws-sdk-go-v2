@@ -87,6 +87,8 @@ type DescribePlayerSessionsInput struct {
 	// * TIMEDOUT -- A player session request was received, but the player
 	// did not connect and/or was not validated within the timeout limit (60 seconds).
 	PlayerSessionStatusFilter *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -103,6 +105,8 @@ type DescribePlayerSessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePlayerSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

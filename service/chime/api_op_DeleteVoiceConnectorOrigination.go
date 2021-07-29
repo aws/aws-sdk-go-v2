@@ -34,11 +34,15 @@ type DeleteVoiceConnectorOriginationInput struct {
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVoiceConnectorOriginationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVoiceConnectorOriginationMiddlewares(stack *middleware.Stack, options Options) (err error) {

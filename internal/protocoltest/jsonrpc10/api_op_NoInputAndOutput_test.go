@@ -7,6 +7,7 @@ import (
 	"context"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	awshttp "github.com/aws/aws-sdk-go-v2/aws/transport/http"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	smithytesting "github.com/aws/smithy-go/testing"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -194,6 +195,7 @@ func TestClient_NoInputAndOutput_awsAwsjson10Deserialize(t *testing.T) {
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)

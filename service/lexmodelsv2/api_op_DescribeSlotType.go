@@ -52,6 +52,8 @@ type DescribeSlotTypeInput struct {
 	//
 	// This member is required.
 	SlotTypeId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSlotTypeOutput struct {
@@ -93,6 +95,8 @@ type DescribeSlotTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type CreatePartnerInputInput struct {
 
 	// A collection of key-value pairs.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for CreatePartnerInputResponse
@@ -52,6 +54,8 @@ type CreatePartnerInputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePartnerInputMiddlewares(stack *middleware.Stack, options Options) (err error) {

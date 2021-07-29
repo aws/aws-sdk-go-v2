@@ -58,6 +58,8 @@ type PutDestinationInput struct {
 	//
 	// This member is required.
 	TargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutDestinationOutput struct {
@@ -67,6 +69,8 @@ type PutDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

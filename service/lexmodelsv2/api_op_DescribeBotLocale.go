@@ -46,6 +46,8 @@ type DescribeBotLocaleInput struct {
 	//
 	// This member is required.
 	LocaleId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBotLocaleOutput struct {
@@ -102,6 +104,8 @@ type DescribeBotLocaleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {

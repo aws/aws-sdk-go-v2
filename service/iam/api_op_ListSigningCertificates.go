@@ -58,6 +58,8 @@ type ListSigningCertificatesInput struct {
 	// string of characters consisting of upper and lowercase alphanumeric characters
 	// with no spaces. You can also include any of the following characters: _+=,.@-
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful ListSigningCertificates request.
@@ -82,6 +84,8 @@ type ListSigningCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSigningCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

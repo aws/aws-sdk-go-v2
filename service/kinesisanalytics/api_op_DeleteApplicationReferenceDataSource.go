@@ -59,11 +59,15 @@ type DeleteApplicationReferenceDataSourceInput struct {
 	//
 	// This member is required.
 	ReferenceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationReferenceDataSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationReferenceDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

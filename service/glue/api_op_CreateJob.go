@@ -151,6 +151,8 @@ type CreateJobInput struct {
 	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
 	// recommend this worker type for memory-intensive jobs.
 	WorkerType types.WorkerType
+
+	noSmithyDocumentSerde
 }
 
 type CreateJobOutput struct {
@@ -160,6 +162,8 @@ type CreateJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

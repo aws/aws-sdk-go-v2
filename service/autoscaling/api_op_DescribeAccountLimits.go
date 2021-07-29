@@ -32,6 +32,7 @@ func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAcco
 }
 
 type DescribeAccountLimitsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountLimitsOutput struct {
@@ -52,6 +53,8 @@ type DescribeAccountLimitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

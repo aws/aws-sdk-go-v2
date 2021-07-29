@@ -44,6 +44,8 @@ type DisassociateResourceInput struct {
 	//
 	// This member is required.
 	ResourceType types.ResourceType
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateResourceOutput struct {
@@ -56,6 +58,8 @@ type DisassociateResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

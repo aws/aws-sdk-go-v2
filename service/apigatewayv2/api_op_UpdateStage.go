@@ -69,6 +69,8 @@ type UpdateStageInput struct {
 	// alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	StageVariables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStageOutput struct {
@@ -125,6 +127,8 @@ type UpdateStageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStageMiddlewares(stack *middleware.Stack, options Options) (err error) {

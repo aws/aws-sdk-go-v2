@@ -56,6 +56,8 @@ type UpdateDistributionInput struct {
 	// Lightsail instance or load balancer. The distribution pulls, caches, and serves
 	// content from the origin.
 	Origin *types.InputOrigin
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDistributionOutput struct {
@@ -67,6 +69,8 @@ type UpdateDistributionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

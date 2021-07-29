@@ -175,6 +175,8 @@ type DescribeNetworkInterfacesInput struct {
 
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeNetworkInterfaces.
@@ -189,6 +191,8 @@ type DescribeNetworkInterfacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNetworkInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

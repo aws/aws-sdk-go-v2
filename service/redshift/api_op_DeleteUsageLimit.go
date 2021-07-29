@@ -32,11 +32,15 @@ type DeleteUsageLimitInput struct {
 	//
 	// This member is required.
 	UsageLimitId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUsageLimitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

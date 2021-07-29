@@ -53,6 +53,8 @@ type ListFindingsInput struct {
 
 	// The sort order for the findings returned.
 	Sort *types.SortCriteria
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request.
@@ -69,6 +71,8 @@ type ListFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

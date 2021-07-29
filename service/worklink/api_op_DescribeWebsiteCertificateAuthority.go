@@ -38,6 +38,8 @@ type DescribeWebsiteCertificateAuthorityInput struct {
 	//
 	// This member is required.
 	WebsiteCaId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWebsiteCertificateAuthorityOutput struct {
@@ -53,6 +55,8 @@ type DescribeWebsiteCertificateAuthorityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWebsiteCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

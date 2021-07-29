@@ -47,6 +47,8 @@ type UpgradeAppliedSchemaInput struct {
 	// not. If schema compatibility fails, an exception would be thrown else the call
 	// would succeed but no changes will be saved. This parameter is optional.
 	DryRun bool
+
+	noSmithyDocumentSerde
 }
 
 type UpgradeAppliedSchemaOutput struct {
@@ -59,6 +61,8 @@ type UpgradeAppliedSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpgradeAppliedSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

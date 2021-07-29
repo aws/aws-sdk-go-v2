@@ -60,6 +60,8 @@ type GetTransitGatewayRouteTableAssociationsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTransitGatewayRouteTableAssociationsOutput struct {
@@ -73,6 +75,8 @@ type GetTransitGatewayRouteTableAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTransitGatewayRouteTableAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

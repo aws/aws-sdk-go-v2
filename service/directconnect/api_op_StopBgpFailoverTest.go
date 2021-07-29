@@ -33,6 +33,8 @@ type StopBgpFailoverTestInput struct {
 	//
 	// This member is required.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopBgpFailoverTestOutput struct {
@@ -42,6 +44,8 @@ type StopBgpFailoverTestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopBgpFailoverTestMiddlewares(stack *middleware.Stack, options Options) (err error) {

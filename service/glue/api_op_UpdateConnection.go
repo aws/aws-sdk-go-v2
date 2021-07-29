@@ -42,11 +42,15 @@ type UpdateConnectionInput struct {
 	// The ID of the Data Catalog in which the connection resides. If none is provided,
 	// the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

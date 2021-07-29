@@ -53,6 +53,8 @@ type CreateCachePolicyInput struct {
 	//
 	// This member is required.
 	CachePolicyConfig *types.CachePolicyConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateCachePolicyOutput struct {
@@ -68,6 +70,8 @@ type CreateCachePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCachePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

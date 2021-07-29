@@ -48,11 +48,15 @@ type CreateWorkGroupInput struct {
 
 	// A list of comma separated tags to add to the workgroup that is created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorkGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

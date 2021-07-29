@@ -67,6 +67,8 @@ type UpdateDeploymentStrategyInput struct {
 	// follows: 2% of the targets, 4% of the targets, 8% of the targets, and continues
 	// until the configuration has been deployed to all targets.
 	GrowthType types.GrowthType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDeploymentStrategyOutput struct {
@@ -99,6 +101,8 @@ type UpdateDeploymentStrategyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeploymentStrategyMiddlewares(stack *middleware.Stack, options Options) (err error) {

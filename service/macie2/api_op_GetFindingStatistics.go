@@ -55,6 +55,8 @@ type GetFindingStatisticsInput struct {
 
 	// The criteria to use to sort the query results.
 	SortCriteria *types.FindingStatisticsSortCriteria
+
+	noSmithyDocumentSerde
 }
 
 type GetFindingStatisticsOutput struct {
@@ -65,6 +67,8 @@ type GetFindingStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFindingStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

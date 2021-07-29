@@ -30,6 +30,7 @@ func (c *Client) GetDiscoverySummary(ctx context.Context, params *GetDiscoverySu
 }
 
 type GetDiscoverySummaryInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetDiscoverySummaryOutput struct {
@@ -54,6 +55,8 @@ type GetDiscoverySummaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDiscoverySummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type StopPipelineExecutionInput struct {
 	//
 	// This member is required.
 	PipelineExecutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StopPipelineExecutionOutput struct {
@@ -57,6 +59,8 @@ type StopPipelineExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopPipelineExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

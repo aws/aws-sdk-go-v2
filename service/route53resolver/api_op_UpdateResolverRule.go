@@ -40,6 +40,8 @@ type UpdateResolverRuleInput struct {
 	//
 	// This member is required.
 	ResolverRuleId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResolverRuleOutput struct {
@@ -49,6 +51,8 @@ type UpdateResolverRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -89,6 +89,8 @@ type ActivateTypeInput struct {
 	// * MINOR: CloudFormation updates the extension to the newest minor
 	// version, if one is available.
 	VersionBump types.VersionBump
+
+	noSmithyDocumentSerde
 }
 
 type ActivateTypeOutput struct {
@@ -99,6 +101,8 @@ type ActivateTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationActivateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

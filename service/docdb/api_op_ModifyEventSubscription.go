@@ -50,6 +50,8 @@ type ModifyEventSubscriptionInput struct {
 	// If this value is not specified, all events are returned. Valid values:
 	// db-instance, db-parameter-group, db-security-group
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyEventSubscriptionOutput struct {
@@ -59,6 +61,8 @@ type ModifyEventSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

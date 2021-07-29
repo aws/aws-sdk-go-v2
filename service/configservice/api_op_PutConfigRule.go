@@ -62,11 +62,15 @@ type PutConfigRuleInput struct {
 
 	// An array of tag object.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutConfigRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,12 +47,16 @@ type DisableSsoInput struct {
 	// used to disable single sign-on and are not stored by the service. The AD
 	// Connector service account is not changed.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the DisableSso operation.
 type DisableSsoOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableSsoMiddlewares(stack *middleware.Stack, options Options) (err error) {

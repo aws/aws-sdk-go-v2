@@ -44,6 +44,8 @@ type ListOpsItemRelatedItemsInput struct {
 
 	// The ID of the OpsItem for which you want to list all related-item resources.
 	OpsItemId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListOpsItemRelatedItemsOutput struct {
@@ -57,6 +59,8 @@ type ListOpsItemRelatedItemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOpsItemRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

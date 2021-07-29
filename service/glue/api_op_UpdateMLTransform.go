@@ -95,6 +95,8 @@ type UpdateMLTransformInput struct {
 	// * For the G.2X worker type, each worker
 	// provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.
 	WorkerType types.WorkerType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMLTransformOutput struct {
@@ -104,6 +106,8 @@ type UpdateMLTransformOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMLTransformMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type ModifyClusterSubnetGroupInput struct {
 
 	// A text description of the subnet group to be modified.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterSubnetGroupOutput struct {
@@ -54,6 +56,8 @@ type ModifyClusterSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

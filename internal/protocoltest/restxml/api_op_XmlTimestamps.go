@@ -35,6 +35,8 @@ type XmlTimestampsInput struct {
 	HttpDate *time.Time
 
 	Normal *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type XmlTimestampsOutput struct {
@@ -48,6 +50,8 @@ type XmlTimestampsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlTimestampsMiddlewares(stack *middleware.Stack, options Options) (err error) {

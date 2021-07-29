@@ -91,6 +91,8 @@ type CreateBranchInput struct {
 
 	// The content Time To Live (TTL) for the website in seconds.
 	Ttl *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for create branch request.
@@ -104,6 +106,8 @@ type CreateBranchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {

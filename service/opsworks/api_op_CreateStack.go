@@ -285,6 +285,8 @@ type CreateStackInput struct {
 	// For more information about default VPC and EC2-Classic, see Supported Platforms
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html).
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a CreateStack request.
@@ -296,6 +298,8 @@ type CreateStackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

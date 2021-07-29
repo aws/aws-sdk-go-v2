@@ -40,6 +40,8 @@ type DescribeWorkingStorageInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -65,6 +67,8 @@ type DescribeWorkingStorageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkingStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {

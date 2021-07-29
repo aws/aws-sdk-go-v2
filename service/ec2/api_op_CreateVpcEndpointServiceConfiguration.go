@@ -78,6 +78,8 @@ type CreateVpcEndpointServiceConfigurationInput struct {
 
 	// The tags to associate with the service.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateVpcEndpointServiceConfigurationOutput struct {
@@ -91,6 +93,8 @@ type CreateVpcEndpointServiceConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcEndpointServiceConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

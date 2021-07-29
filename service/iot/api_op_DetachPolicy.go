@@ -37,11 +37,15 @@ type DetachPolicyInput struct {
 	//
 	// This member is required.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 type DetachPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

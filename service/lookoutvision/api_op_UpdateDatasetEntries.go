@@ -61,6 +61,8 @@ type UpdateDatasetEntriesInput struct {
 	// Using a different value for ClientToken is considered a new call to
 	// UpdateDatasetEntries. An idempotency token is active for 8 hours.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDatasetEntriesOutput struct {
@@ -70,6 +72,8 @@ type UpdateDatasetEntriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDatasetEntriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,6 +32,8 @@ type DescribeFeedbackInput struct {
 
 	// The ID of the insight for which the feedback was provided.
 	InsightId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFeedbackOutput struct {
@@ -41,6 +43,8 @@ type DescribeFeedbackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -11,6 +11,8 @@ import (
 // instance.
 type AuthException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthException) Error() string {
@@ -28,6 +30,8 @@ func (e *AuthException) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The specified instance was not found.
 type EC2InstanceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EC2InstanceNotFoundException) Error() string {
@@ -46,6 +50,8 @@ func (e *EC2InstanceNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // Nitro instance types are currently supported.
 type EC2InstanceTypeInvalidException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EC2InstanceTypeInvalidException) Error() string {
@@ -65,6 +71,8 @@ func (e *EC2InstanceTypeInvalidException) ErrorFault() smithy.ErrorFault { retur
 // One of the parameters is not valid.
 type InvalidArgsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgsException) Error() string {
@@ -86,6 +94,8 @@ func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // in the Amazon EC2 API Reference.
 type SerialConsoleAccessDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SerialConsoleAccessDisabledException) Error() string {
@@ -108,6 +118,8 @@ func (e *SerialConsoleAccessDisabledException) ErrorFault() smithy.ErrorFault {
 // supported at a time.
 type SerialConsoleSessionLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SerialConsoleSessionLimitExceededException) Error() string {
@@ -129,6 +141,8 @@ func (e *SerialConsoleSessionLimitExceededException) ErrorFault() smithy.ErrorFa
 // Unable to start a serial console session. Please try again.
 type SerialConsoleSessionUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SerialConsoleSessionUnavailableException) Error() string {
@@ -151,6 +165,8 @@ func (e *SerialConsoleSessionUnavailableException) ErrorFault() smithy.ErrorFaul
 // and try again.
 type ServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceException) Error() string {
@@ -169,6 +185,8 @@ func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultS
 // try again. To increase the limit on your request frequency, contact AWS Support.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

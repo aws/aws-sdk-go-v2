@@ -39,6 +39,8 @@ type ListTagsForStreamInput struct {
 
 	// The name of the stream that you want to list tags for.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsForStreamOutput struct {
@@ -53,6 +55,8 @@ type ListTagsForStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

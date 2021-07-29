@@ -35,6 +35,8 @@ type GetQueryExecutionInput struct {
 	//
 	// This member is required.
 	QueryExecutionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetQueryExecutionOutput struct {
@@ -44,6 +46,8 @@ type GetQueryExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

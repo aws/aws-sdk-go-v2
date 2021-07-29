@@ -65,6 +65,8 @@ type RegisterContainerImageInput struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterContainerImageOutput struct {
@@ -75,6 +77,8 @@ type RegisterContainerImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterContainerImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

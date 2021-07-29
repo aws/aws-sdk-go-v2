@@ -70,6 +70,8 @@ type GetOrganizationsAccessReportInput struct {
 	// results are returned in alphabetical order. If you choose the time key, the
 	// results are sorted numerically by the date and time.
 	SortKey types.SortKeyType
+
+	noSmithyDocumentSerde
 }
 
 type GetOrganizationsAccessReportOutput struct {
@@ -123,6 +125,8 @@ type GetOrganizationsAccessReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOrganizationsAccessReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

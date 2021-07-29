@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -23,6 +24,8 @@ type AddHeaderAction struct {
 	//
 	// This member is required.
 	HeaderValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the body of the message. You can specify text, HTML, or both. If you
@@ -38,6 +41,8 @@ type Body struct {
 	// The content of the message, in text format. Use this for text-based email
 	// clients, or clients on high-latency networks (such as mobile devices).
 	Text *Content
+
+	noSmithyDocumentSerde
 }
 
 // When included in a receipt rule, this action rejects the received email by
@@ -75,6 +80,8 @@ type BounceAction struct {
 	// SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Recipient-related information to include in the Delivery Status Notification
@@ -104,6 +111,8 @@ type BouncedRecipientInfo struct {
 	// automatically when provided with a BounceType. You must provide either this
 	// parameter or BounceType.
 	RecipientDsnFields *RecipientDsnFields
+
+	noSmithyDocumentSerde
 }
 
 // An array that contains one or more Destinations, as well as the tags and
@@ -132,6 +141,8 @@ type BulkEmailDestination struct {
 	// object, typically consisting of key-value pairs in which the keys correspond to
 	// replacement tags in the email template.
 	ReplacementTemplateData *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the response from the SendBulkTemplatedEmail operation.
@@ -196,6 +207,8 @@ type BulkEmailDestinationStatus struct {
 	// * Failed: Amazon SES was unable to process your
 	// request. See the error message for additional information.
 	Status BulkEmailStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information associated with an Amazon CloudWatch event destination to
@@ -211,6 +224,8 @@ type CloudWatchDestination struct {
 	//
 	// This member is required.
 	DimensionConfigurations []CloudWatchDimensionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains the dimension configuration to use when you publish email sending
@@ -251,6 +266,8 @@ type CloudWatchDimensionConfiguration struct {
 	//
 	// This member is required.
 	DimensionValueSource DimensionValueSource
+
+	noSmithyDocumentSerde
 }
 
 // The name of the configuration set. Configuration sets let you create groups of
@@ -272,6 +289,8 @@ type ConfigurationSet struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents textual data, plus an optional character set specification. By
@@ -287,6 +306,8 @@ type Content struct {
 
 	// The character set of the content.
 	Charset *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a custom verification email template.
@@ -308,6 +329,8 @@ type CustomVerificationEmailTemplate struct {
 
 	// The subject line of the custom verification email.
 	TemplateSubject *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies whether messages that use the configuration set are required to use
@@ -320,6 +343,8 @@ type DeliveryOptions struct {
 	// messages can be delivered in plain text if a TLS connection can't be
 	// established.
 	TlsPolicy TlsPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Represents the destination of the message, consisting of To:, CC:, and BCC:
@@ -341,6 +366,8 @@ type Destination struct {
 
 	// The recipients to place on the To: line of the message.
 	ToAddresses []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the event destination that the specified email
@@ -387,6 +414,8 @@ type EventDestination struct {
 	// An object that contains the topic ARN associated with an Amazon Simple
 	// Notification Service (Amazon SNS) event destination.
 	SNSDestination *SNSDestination
+
+	noSmithyDocumentSerde
 }
 
 // Additional X-headers to include in the Delivery Status Notification (DSN) when
@@ -406,6 +435,8 @@ type ExtensionField struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the DKIM attributes of a verified email address or a domain.
@@ -434,6 +465,8 @@ type IdentityDkimAttributes struct {
 	// see the Amazon SES Developer Guide
 	// (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/easy-dkim.html).
 	DkimTokens []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the custom MAIL FROM domain attributes of a verified identity (email
@@ -465,6 +498,8 @@ type IdentityMailFromDomainAttributes struct {
 	//
 	// This member is required.
 	MailFromDomainStatus CustomMailFromStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the notification attributes of an identity, including whether an
@@ -517,6 +552,8 @@ type IdentityNotificationAttributes struct {
 	// include headers in delivery notifications, and a value of false specifies that
 	// Amazon SES will not include headers in delivery notifications.
 	HeadersInDeliveryNotificationsEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the verification attributes of a single identity.
@@ -530,6 +567,8 @@ type IdentityVerificationAttributes struct {
 
 	// The verification token for a domain identity. Null for email address identities.
 	VerificationToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the delivery stream ARN and the IAM role ARN associated with an Amazon
@@ -551,6 +590,8 @@ type KinesisFirehoseDestination struct {
 	//
 	// This member is required.
 	IAMRoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 // When included in a receipt rule, this action calls an AWS Lambda function and,
@@ -590,6 +631,8 @@ type LambdaAction struct {
 	// SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the message to be sent, composed of a subject and a body.
@@ -605,6 +648,8 @@ type Message struct {
 	//
 	// This member is required.
 	Subject *Content
+
+	noSmithyDocumentSerde
 }
 
 // Message-related information to include in the Delivery Status Notification (DSN)
@@ -626,6 +671,8 @@ type MessageDsn struct {
 
 	// Additional X-headers to include in the DSN.
 	ExtensionFields []ExtensionField
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name and value of a tag that you can provide to SendEmail or
@@ -656,6 +703,8 @@ type MessageTag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the raw data of the message.
@@ -677,6 +726,8 @@ type RawMessage struct {
 	//
 	// This member is required.
 	Data []byte
+
+	noSmithyDocumentSerde
 }
 
 // An action that Amazon SES can take when it receives an email on behalf of one or
@@ -712,6 +763,8 @@ type ReceiptAction struct {
 	// Calls Amazon WorkMail and, optionally, publishes a notification to Amazon Amazon
 	// SNS.
 	WorkmailAction *WorkmailAction
+
+	noSmithyDocumentSerde
 }
 
 // A receipt IP address filter enables you to specify whether to accept or reject
@@ -738,6 +791,8 @@ type ReceiptFilter struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A receipt IP address filter enables you to specify whether to accept or reject
@@ -760,6 +815,8 @@ type ReceiptIpFilter struct {
 	//
 	// This member is required.
 	Policy ReceiptFilterPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Receipt rules enable you to specify which actions Amazon SES should take when it
@@ -806,6 +863,8 @@ type ReceiptRule struct {
 	// parameter is set to Require, Amazon SES will bounce emails that are not received
 	// over TLS. The default is Optional.
 	TlsPolicy TlsPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Information about a receipt rule set. A receipt rule set is a collection of
@@ -828,6 +887,8 @@ type ReceiptRuleSetMetadata struct {
 	//
 	// * Contain less than 64 characters.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Recipient-related information to include in the Delivery Status Notification
@@ -875,6 +936,8 @@ type RecipientDsnFields struct {
 	// mta-name). This parameter typically applies only to propagating synchronous
 	// bounces.
 	RemoteMta *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the reputation settings for a configuration set.
@@ -901,6 +964,8 @@ type ReputationOptions struct {
 	// use the configuration set. The default value is true. You can change this
 	// setting using UpdateConfigurationSetSendingEnabled.
 	SendingEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // When included in a receipt rule, this action saves the received message to an
@@ -970,6 +1035,8 @@ type S3Action struct {
 	// SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents sending statistics data. Each SendDataPoint contains statistics for a
@@ -990,6 +1057,8 @@ type SendDataPoint struct {
 
 	// Time of the data point.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // When included in a receipt rule, this action publishes a notification to Amazon
@@ -1022,6 +1091,8 @@ type SNSAction struct {
 	// encoded with a different encoding format. Base64 preserves all special
 	// characters. The default value is UTF-8.
 	Encoding SNSActionEncoding
+
+	noSmithyDocumentSerde
 }
 
 // Contains the topic ARN associated with an Amazon Simple Notification Service
@@ -1040,6 +1111,8 @@ type SNSDestination struct {
 	//
 	// This member is required.
 	TopicARN *string
+
+	noSmithyDocumentSerde
 }
 
 // When included in a receipt rule, this action terminates the evaluation of the
@@ -1060,6 +1133,8 @@ type StopAction struct {
 	// SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The content of the email, composed of a subject line, an HTML part, and a
@@ -1081,6 +1156,8 @@ type Template struct {
 	// The email body that will be visible to recipients whose email clients do not
 	// display HTML.
 	TextPart *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an email template.
@@ -1091,6 +1168,8 @@ type TemplateMetadata struct {
 
 	// The name of the template.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A domain that is used to redirect email recipients to an Amazon SES-operated
@@ -1104,6 +1183,8 @@ type TrackingOptions struct {
 	// The custom subdomain that will be used to redirect email recipients to the
 	// Amazon SES event tracking domain.
 	CustomRedirectDomain *string
+
+	noSmithyDocumentSerde
 }
 
 // When included in a receipt rule, this action calls Amazon WorkMail and,
@@ -1130,4 +1211,8 @@ type WorkmailAction struct {
 	// SNS topics, see the Amazon SNS Developer Guide
 	// (https://docs.aws.amazon.com/sns/latest/dg/CreateTopic.html).
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -169,6 +169,8 @@ type CreateMatchmakingConfigurationInput struct {
 	// maximum tag limit may be lower than stated. See the AWS General Reference for
 	// actual tagging limits.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -179,6 +181,8 @@ type CreateMatchmakingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMatchmakingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

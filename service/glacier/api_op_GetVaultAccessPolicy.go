@@ -51,6 +51,8 @@ type GetVaultAccessPolicyInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 // Output for GetVaultAccessPolicy.
@@ -61,6 +63,8 @@ type GetVaultAccessPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

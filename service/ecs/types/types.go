@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -23,6 +24,8 @@ type Attachment struct {
 
 	// The type of the attachment, such as ElasticNetworkInterface.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a change in state for a task attachment.
@@ -37,6 +40,8 @@ type AttachmentStateChange struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // An attribute is a name-value pair associated with an Amazon ECS object.
@@ -66,6 +71,8 @@ type Attribute struct {
 	// underscores, periods, at signs (@), forward slashes, back slashes, colons, or
 	// spaces. The value cannot contain any leading or trailing whitespace.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the Auto Scaling group for the capacity provider.
@@ -93,6 +100,8 @@ type AutoScalingGroupProvider struct {
 	// disabled, your Amazon EC2 instances are not protected from termination when the
 	// Auto Scaling group scales in.
 	ManagedTerminationProtection ManagedTerminationProtection
+
+	noSmithyDocumentSerde
 }
 
 // The details of the Auto Scaling group capacity provider to update.
@@ -115,6 +124,8 @@ type AutoScalingGroupProviderUpdate struct {
 	// disabled, your Amazon EC2 instances are not protected from termination when the
 	// Auto Scaling group scales in.
 	ManagedTerminationProtection ManagedTerminationProtection
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the networking details for a task or service.
@@ -136,6 +147,8 @@ type AwsVpcConfiguration struct {
 	// There is a limit of 5 security groups that can be specified per
 	// AwsVpcConfiguration. All specified security groups must be from the same VPC.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a capacity provider.
@@ -196,6 +209,8 @@ type CapacityProvider struct {
 	// The update status reason. This provides further details about the update status
 	// for the capacity provider.
 	UpdateStatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a capacity provider strategy. A capacity provider strategy can be
@@ -240,6 +255,8 @@ type CapacityProviderStrategyItem struct {
 	// weight of 4 for capacityProviderB, then for every one task that is run using
 	// capacityProviderA, four tasks would use capacityProviderB.
 	Weight int32
+
+	noSmithyDocumentSerde
 }
 
 // A regional grouping of one or more container instances on which you can run task
@@ -364,6 +381,8 @@ type Cluster struct {
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // The execute command configuration for the cluster.
@@ -371,6 +390,8 @@ type ClusterConfiguration struct {
 
 	// The details of the execute command configuration.
 	ExecuteCommandConfiguration *ExecuteCommandConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The settings to use when creating a cluster. This parameter is used to enable
@@ -387,6 +408,8 @@ type ClusterSetting struct {
 	// the containerInsights value set with PutAccountSetting or
 	// PutAccountSettingDefault.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A Docker container that is part of a task.
@@ -447,6 +470,8 @@ type Container struct {
 
 	// The ARN of the task.
 	TaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Container definitions are used in task definitions to describe the different
@@ -1028,6 +1053,8 @@ type ContainerDefinition struct {
 	// --workdir option to docker run
 	// (https://docs.docker.com/engine/reference/run/#security-configuration).
 	WorkingDirectory *string
+
+	noSmithyDocumentSerde
 }
 
 // The dependencies defined for container startup and shutdown. A container can
@@ -1078,6 +1105,8 @@ type ContainerDependency struct {
 	//
 	// This member is required.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 // An EC2 instance that is running the Amazon ECS agent and has been registered
@@ -1207,6 +1236,8 @@ type ContainerInstance struct {
 	// The version information for the Amazon ECS container agent and Docker daemon
 	// running on the container instance.
 	VersionInfo *VersionInfo
+
+	noSmithyDocumentSerde
 }
 
 // The overrides that should be sent to a container. An empty container override
@@ -1250,6 +1281,8 @@ type ContainerOverride struct {
 	// The type and amount of a resource to assign to a container, instead of the
 	// default value from the task definition. The only supported resource is a GPU.
 	ResourceRequirements []ResourceRequirement
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a change in state for a container.
@@ -1276,6 +1309,8 @@ type ContainerStateChange struct {
 
 	// The status of the container.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of an Amazon ECS service deployment. This is used only when a
@@ -1351,6 +1386,8 @@ type Deployment struct {
 
 	// The Unix timestamp for when the service deployment was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The deployment circuit breaker can only be used for services using the rolling
@@ -1375,6 +1412,8 @@ type DeploymentCircuitBreaker struct {
 	//
 	// This member is required.
 	Rollback bool
+
+	noSmithyDocumentSerde
 }
 
 // Optional deployment parameters that control how many tasks run during a
@@ -1430,6 +1469,8 @@ type DeploymentConfiguration struct {
 	// launch type, the minimum healthy percent value is not used, although it is
 	// returned when describing your service.
 	MinimumHealthyPercent *int32
+
+	noSmithyDocumentSerde
 }
 
 // The deployment controller to use for the service. For more information, see
@@ -1453,6 +1494,8 @@ type DeploymentController struct {
 	//
 	// This member is required.
 	Type DeploymentControllerType
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a container instance host device.
@@ -1469,6 +1512,8 @@ type Device struct {
 	// The explicit permissions to provide to the container for the device. By default,
 	// the container has permissions for read, write, and mknod for the device.
 	Permissions []DeviceCgroupPermission
+
+	noSmithyDocumentSerde
 }
 
 // This parameter is specified when you are using Docker volumes. Docker volumes
@@ -1516,6 +1561,8 @@ type DockerVolumeConfiguration struct {
 	// destroyed when the task stops. Docker volumes that are scoped as shared persist
 	// after the task stops.
 	Scope Scope
+
+	noSmithyDocumentSerde
 }
 
 // The authorization configuration details for the Amazon EFS file system.
@@ -1538,6 +1585,8 @@ type EFSAuthorizationConfig struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/efs-volumes.html#efs-volume-accesspoints)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Iam EFSAuthorizationConfigIAM
+
+	noSmithyDocumentSerde
 }
 
 // This parameter is specified when you are using an Amazon Elastic File System
@@ -1577,6 +1626,8 @@ type EFSVolumeConfiguration struct {
 	// (https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html) in the Amazon
 	// Elastic File System User Guide.
 	TransitEncryptionPort *int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of files containing the environment variables to pass to a container. You
@@ -1606,6 +1657,8 @@ type EnvironmentFile struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The amount of ephemeral storage to allocate for the task. This parameter is used
@@ -1622,6 +1675,8 @@ type EphemeralStorage struct {
 	//
 	// This member is required.
 	SizeInGiB int32
+
+	noSmithyDocumentSerde
 }
 
 // The details of the execute command configuration.
@@ -1650,6 +1705,8 @@ type ExecuteCommandConfiguration struct {
 	// * OVERRIDE: Specify the logging details as a part of logConfiguration.
 	// If the OVERRIDE logging option is specified, the logConfiguration is required.
 	Logging ExecuteCommandLogging
+
+	noSmithyDocumentSerde
 }
 
 // The log configuration for the results of the execute command actions. The logs
@@ -1674,6 +1731,8 @@ type ExecuteCommandLogConfiguration struct {
 
 	// An optional folder in the S3 bucket to place logs in.
 	S3KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // A failed resource. For a list of common causes, see API failure reasons
@@ -1689,6 +1748,8 @@ type Failure struct {
 
 	// The reason for the failure.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // The FireLens configuration for the container. This is used to specify and
@@ -1714,6 +1775,8 @@ type FirelensConfiguration struct {
 	// in the Amazon Elastic Container Service Developer Guide. Tasks hosted on AWS
 	// Fargate only support the file configuration file type.
 	Options map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The authorization configuration details for Amazon FSx for Windows File Server
@@ -1739,6 +1802,8 @@ type FSxWindowsFileServerAuthorizationConfig struct {
 	//
 	// This member is required.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 // This parameter is specified when you are using Amazon FSx for Windows File
@@ -1765,6 +1830,8 @@ type FSxWindowsFileServerVolumeConfiguration struct {
 	//
 	// This member is required.
 	RootDirectory *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a container health check. Health check parameters that
@@ -1852,6 +1919,8 @@ type HealthCheck struct {
 	// considered a failure. You may specify between 2 and 60 seconds. The default
 	// value is 5.
 	Timeout *int32
+
+	noSmithyDocumentSerde
 }
 
 // Hostnames and IP address entries that are added to the /etc/hosts file of a
@@ -1867,6 +1936,8 @@ type HostEntry struct {
 	//
 	// This member is required.
 	IpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on a container instance bind mount host volume.
@@ -1882,6 +1953,8 @@ type HostVolumeProperties struct {
 	// source path folder are exported. If you are using the Fargate launch type, the
 	// sourcePath parameter is not supported.
 	SourcePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on a Elastic Inference accelerator. For more information, see Working
@@ -1900,6 +1973,8 @@ type InferenceAccelerator struct {
 	//
 	// This member is required.
 	DeviceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on an Elastic Inference accelerator task override. This parameter is
@@ -1916,6 +1991,8 @@ type InferenceAcceleratorOverride struct {
 
 	// The Elastic Inference accelerator type to use.
 	DeviceType *string
+
+	noSmithyDocumentSerde
 }
 
 // The Linux capabilities for the container that are added to or dropped from the
@@ -1960,6 +2037,8 @@ type KernelCapabilities struct {
 	// "SYS_PTRACE" | "SYS_RAWIO" | "SYS_RESOURCE" | "SYS_TIME" | "SYS_TTY_CONFIG" |
 	// "SYSLOG" | "WAKE_ALARM"
 	Drop []string
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair object.
@@ -1972,6 +2051,8 @@ type KeyValuePair struct {
 	// The value of the key-value pair. For environment variables, this is the value of
 	// the environment variable.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Linux-specific options that are applied to the container, such as Linux
@@ -2040,6 +2121,8 @@ type LinuxParameters struct {
 	// are using tasks that use the Fargate launch type, the tmpfs parameter is not
 	// supported.
 	Tmpfs []Tmpfs
+
+	noSmithyDocumentSerde
 }
 
 // The load balancer configuration to use with a service or task set. For specific
@@ -2082,6 +2165,8 @@ type LoadBalancer struct {
 	// your target groups because tasks that use the awsvpc network mode are associated
 	// with an elastic network interface, not an Amazon EC2 instance.
 	TargetGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The log configuration for the container. This parameter maps to LogConfig in the
@@ -2152,6 +2237,8 @@ type LogConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/specifying-sensitive-data.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	SecretOptions []Secret
+
+	noSmithyDocumentSerde
 }
 
 // Details about the managed agent status for the container.
@@ -2169,6 +2256,8 @@ type ManagedAgent struct {
 
 	// The reason for why the managed agent is in the state it is in.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a change in state for a managed agent.
@@ -2191,6 +2280,8 @@ type ManagedAgentStateChange struct {
 
 	// The reason for the status of the managed agent.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // The managed scaling settings for the Auto Scaling group capacity provider. When
@@ -2225,6 +2316,8 @@ type ManagedScaling struct {
 	// greater than 0 and less than or equal to 100. A value of 100 will result in the
 	// Amazon EC2 instances in your Auto Scaling group being completely utilized.
 	TargetCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // Details on a volume mount point that is used in a container definition.
@@ -2241,6 +2334,8 @@ type MountPoint struct {
 	// The name of the volume to mount. Must be a volume name referenced in the name
 	// parameter of task definition volume.
 	SourceVolume *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on the network bindings between a container and its host container
@@ -2260,6 +2355,8 @@ type NetworkBinding struct {
 
 	// The protocol used for the network binding.
 	Protocol TransportProtocol
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the network configuration for a task or service.
@@ -2268,6 +2365,8 @@ type NetworkConfiguration struct {
 	// The VPC subnets and security groups associated with a task. All specified
 	// subnets and security groups must be from the same VPC.
 	AwsvpcConfiguration *AwsVpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the elastic network interface for tasks that use the
@@ -2282,6 +2381,8 @@ type NetworkInterface struct {
 
 	// The private IPv4 address for the network interface.
 	PrivateIpv4Address *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a constraint on task placement. For more information, see
@@ -2302,6 +2403,8 @@ type PlacementConstraint struct {
 	// particular group is running on a different container instance. Use memberOf to
 	// restrict the selection to a group of valid candidates.
 	Type PlacementConstraintType
+
+	noSmithyDocumentSerde
 }
 
 // The task placement strategy for a task or service. For more information, see
@@ -2326,6 +2429,8 @@ type PlacementStrategy struct {
 	// if you binpack on memory, a task is placed on the instance with the least amount
 	// of remaining memory (but still enough to run the task).
 	Type PlacementStrategyType
+
+	noSmithyDocumentSerde
 }
 
 // The devices that are available on the container instance. The only supported
@@ -2344,6 +2449,8 @@ type PlatformDevice struct {
 	//
 	// This member is required.
 	Type PlatformDeviceType
+
+	noSmithyDocumentSerde
 }
 
 // Port mappings allow containers to access ports on the host container instance to
@@ -2394,6 +2501,8 @@ type PortMapping struct {
 	// The protocol used for the port mapping. Valid values are tcp and udp. The
 	// default is tcp.
 	Protocol TransportProtocol
+
+	noSmithyDocumentSerde
 }
 
 // The configuration details for the App Mesh proxy. For tasks using the EC2 launch
@@ -2446,6 +2555,8 @@ type ProxyConfiguration struct {
 
 	// The proxy type. The only supported value is APPMESH.
 	Type ProxyConfigurationType
+
+	noSmithyDocumentSerde
 }
 
 // The repository credentials for private registry authentication.
@@ -2459,6 +2570,8 @@ type RepositoryCredentials struct {
 	//
 	// This member is required.
 	CredentialsParameter *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the resources available for a container instance.
@@ -2485,6 +2598,8 @@ type Resource struct {
 
 	// The type of the resource, such as INTEGER, DOUBLE, LONG, or STRINGSET.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The type and amount of a resource to assign to a container. The supported
@@ -2511,6 +2626,8 @@ type ResourceRequirement struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A floating-point percentage of the desired number of tasks to place and keep
@@ -2523,6 +2640,8 @@ type Scale struct {
 	// The value, specified as a percent total of a service's desiredCount, to scale
 	// the task set. Accepted values are numbers between 0 and 100.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the secret to expose to your container. Secrets can be
@@ -2555,6 +2674,8 @@ type Secret struct {
 	//
 	// This member is required.
 	ValueFrom *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on a service within a cluster
@@ -2732,6 +2853,8 @@ type Service struct {
 	// number of tasks, how many tasks are running, and whether the task set serves
 	// production traffic.
 	TaskSets []TaskSet
+
+	noSmithyDocumentSerde
 }
 
 // Details on an event associated with a service.
@@ -2745,6 +2868,8 @@ type ServiceEvent struct {
 
 	// The event message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the service registry.
@@ -2776,6 +2901,8 @@ type ServiceRegistry struct {
 	// service registry is AWS Cloud Map. For more information, see CreateService
 	// (https://docs.aws.amazon.com/cloud-map/latest/api/API_CreateService.html).
 	RegistryArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the execute command session.
@@ -2791,6 +2918,8 @@ type Session struct {
 	// An encrypted token value containing session and caller information. Used to
 	// authenticate the connection to the container.
 	TokenValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The current account setting for a resource.
@@ -2805,6 +2934,8 @@ type Setting struct {
 
 	// Whether the account setting is enabled or disabled for the specified resource.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of namespaced kernel parameters to set in the container. This parameter
@@ -2833,6 +2964,8 @@ type SystemControl struct {
 
 	// The value for the namespaced kernel parameter specified in namespace.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata that you apply to a resource to help you categorize and organize
@@ -2872,6 +3005,8 @@ type Tag struct {
 	// The optional part of a key-value pair that make up a tag. A value acts as a
 	// descriptor within a tag category (key).
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on a task in a cluster.
@@ -3089,6 +3224,8 @@ type Task struct {
 	// reported in CloudWatch Events for the task (inside the detail object) to verify
 	// that the version in your event stream is current.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // The details of a task definition which describes the container and volume
@@ -3330,6 +3467,8 @@ type TaskDefinition struct {
 	// in the Amazon Elastic Container Service Developer Guide. The host and sourcePath
 	// parameters are not supported for tasks run on AWS Fargate.
 	Volumes []Volume
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a constraint on task placement in the task definition.
@@ -3348,6 +3487,8 @@ type TaskDefinitionPlacementConstraint struct {
 	// The type of constraint. The MemberOf constraint restricts selection to be from a
 	// group of valid candidates.
 	Type TaskDefinitionPlacementConstraintType
+
+	noSmithyDocumentSerde
 }
 
 // The overrides associated with a task.
@@ -3377,6 +3518,8 @@ type TaskOverride struct {
 	// assume. All containers in this task are granted the permissions that are
 	// specified in this role.
 	TaskRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
@@ -3523,6 +3666,8 @@ type TaskSet struct {
 
 	// The Unix timestamp for when the task set was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The container path, mount options, and size of the tmpfs mount.
@@ -3546,6 +3691,8 @@ type Tmpfs struct {
 	// "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" |
 	// "nr_inodes" | "nr_blocks" | "mpol"
 	MountOptions []string
+
+	noSmithyDocumentSerde
 }
 
 // The ulimit settings to pass to the container. Amazon ECS tasks hosted on Fargate
@@ -3569,6 +3716,8 @@ type Ulimit struct {
 	//
 	// This member is required.
 	SoftLimit int32
+
+	noSmithyDocumentSerde
 }
 
 // The Docker and Amazon ECS container agent version information about a container
@@ -3585,6 +3734,8 @@ type VersionInfo struct {
 
 	// The Docker version running on the container instance.
 	DockerVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // A data volume used in a task definition. For tasks that use the Amazon Elastic
@@ -3627,6 +3778,8 @@ type Volume struct {
 	// underscores, and hyphens are allowed. This name is referenced in the
 	// sourceVolume parameter of container definition mountPoints.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Details on a data volume from another container in the same task definition.
@@ -3640,4 +3793,8 @@ type VolumeFrom struct {
 	// The name of another container within the same task definition from which to
 	// mount volumes.
 	SourceContainer *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

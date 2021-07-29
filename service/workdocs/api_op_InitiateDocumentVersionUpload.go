@@ -61,6 +61,8 @@ type InitiateDocumentVersionUploadInput struct {
 
 	// The name of the document.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type InitiateDocumentVersionUploadOutput struct {
@@ -73,6 +75,8 @@ type InitiateDocumentVersionUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInitiateDocumentVersionUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -80,11 +80,15 @@ type CreateProtectionGroupInput struct {
 
 	// One or more tag key-value pairs for the protection group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateProtectionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

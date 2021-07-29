@@ -58,6 +58,8 @@ type GetPasswordDataInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetPasswordDataOutput struct {
@@ -74,6 +76,8 @@ type GetPasswordDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPasswordDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

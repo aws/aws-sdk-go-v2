@@ -37,11 +37,15 @@ type DeleteWorkspaceInput struct {
 	// Optional, unique, case-sensitive, user-provided identifier to ensure the
 	// idempotency of the request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorkspaceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

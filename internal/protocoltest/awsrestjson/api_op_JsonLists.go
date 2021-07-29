@@ -56,6 +56,8 @@ type JsonListsInput struct {
 	StructureList []types.StructureListMember
 
 	TimestampList []time.Time
+
+	noSmithyDocumentSerde
 }
 
 type JsonListsOutput struct {
@@ -80,6 +82,8 @@ type JsonListsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationJsonListsMiddlewares(stack *middleware.Stack, options Options) (err error) {

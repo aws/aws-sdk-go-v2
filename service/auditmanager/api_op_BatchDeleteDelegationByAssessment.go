@@ -38,6 +38,8 @@ type BatchDeleteDelegationByAssessmentInput struct {
 	//
 	// This member is required.
 	DelegationIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteDelegationByAssessmentOutput struct {
@@ -47,6 +49,8 @@ type BatchDeleteDelegationByAssessmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteDelegationByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

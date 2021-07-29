@@ -38,6 +38,8 @@ type ListNotificationsInput struct {
 
 	// The ID assigned to the workload. This ID is unique within an AWS Region.
 	WorkloadId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListNotificationsOutput struct {
@@ -50,6 +52,8 @@ type ListNotificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

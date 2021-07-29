@@ -61,6 +61,8 @@ type DescribeFolderContentsInput struct {
 
 	// The type of items.
 	Type types.FolderContentType
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFolderContentsOutput struct {
@@ -77,6 +79,8 @@ type DescribeFolderContentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFolderContentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

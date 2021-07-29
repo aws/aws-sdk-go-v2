@@ -51,6 +51,8 @@ type ListComplianceItemsInput struct {
 	// The type of resource from which to get compliance information. Currently, the
 	// only supported resource type is ManagedInstance.
 	ResourceTypes []string
+
+	noSmithyDocumentSerde
 }
 
 type ListComplianceItemsOutput struct {
@@ -64,6 +66,8 @@ type ListComplianceItemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListComplianceItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

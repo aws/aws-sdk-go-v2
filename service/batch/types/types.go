@@ -2,11 +2,17 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // An object representing an AWS Batch array job.
 type ArrayProperties struct {
 
 	// The size of the array job.
 	Size int32
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the array properties of a job.
@@ -22,6 +28,8 @@ type ArrayPropertiesDetail struct {
 	// A summary of the number of array job children in each available job status. This
 	// parameter is returned for parent array jobs.
 	StatusSummary map[string]int32
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the array properties of a job.
@@ -33,6 +41,8 @@ type ArrayPropertiesSummary struct {
 
 	// The size of the array job. This parameter is returned for parent array jobs.
 	Size int32
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the details of a container that's part of a job attempt.
@@ -61,6 +71,8 @@ type AttemptContainerDetail struct {
 	// job attempt. Each container attempt receives a task ARN when they reach the
 	// STARTING status.
 	TaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a job attempt.
@@ -81,6 +93,8 @@ type AttemptDetail struct {
 	// attempt transitioned from the RUNNING state to a terminal state, such as
 	// SUCCEEDED or FAILED).
 	StoppedAt int64
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an AWS Batch compute environment.
@@ -142,6 +156,8 @@ type ComputeEnvironmentDetail struct {
 	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
 	// in the AWS Batch User Guide.
 	Type CEType
+
+	noSmithyDocumentSerde
 }
 
 // The order in which compute environments are tried for job placement within a
@@ -168,6 +184,8 @@ type ComputeEnvironmentOrder struct {
 	//
 	// This member is required.
 	Order int32
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an AWS Batch compute resource. For more information, see
@@ -369,6 +387,8 @@ type ComputeResource struct {
 	// operation. This parameter isn't applicable to jobs running on Fargate resources,
 	// and shouldn't be specified.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the attributes of a compute environment that can be
@@ -409,6 +429,8 @@ type ComputeResourceUpdate struct {
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) in the
 	// Amazon VPC User Guide.
 	Subnets []string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the details of a container that's part of a job.
@@ -569,6 +591,8 @@ type ContainerDetail struct {
 
 	// A list of volumes associated with the job.
 	Volumes []Volume
+
+	noSmithyDocumentSerde
 }
 
 // The overrides that should be sent to a container.
@@ -624,6 +648,8 @@ type ContainerOverrides struct {
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Vcpus int32
+
+	noSmithyDocumentSerde
 }
 
 // Container properties are used in job definitions to describe the container
@@ -827,6 +853,8 @@ type ContainerProperties struct {
 
 	// A list of data volumes used in a job.
 	Volumes []Volume
+
+	noSmithyDocumentSerde
 }
 
 // An object representing summary details of a container within a job.
@@ -838,6 +866,8 @@ type ContainerSummary struct {
 	// A short (255 max characters) human-readable string to provide additional details
 	// about a running or stopped container.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a container instance host device. This object isn't
@@ -856,6 +886,8 @@ type Device struct {
 	// The explicit permissions to provide to the container for the device. By default,
 	// the container has permissions for read, write, and mknod for the device.
 	Permissions []DeviceCgroupPermission
+
+	noSmithyDocumentSerde
 }
 
 // Provides information used to select Amazon Machine Images (AMIs) for instances
@@ -895,6 +927,8 @@ type Ec2Configuration struct {
 	// image type. This setting overrides the imageId set in the computeResource
 	// object.
 	ImageIdOverride *string
+
+	noSmithyDocumentSerde
 }
 
 // The authorization configuration details for the Amazon EFS file system.
@@ -918,6 +952,8 @@ type EFSAuthorizationConfig struct {
 	// in the AWS Batch User Guide. EFS IAM authorization requires that
 	// TransitEncryption be ENABLED and that a JobRoleArn is specified.
 	Iam EFSAuthorizationConfigIAM
+
+	noSmithyDocumentSerde
 }
 
 // This parameter is specified when you are using an Amazon Elastic File System
@@ -957,6 +993,8 @@ type EFSVolumeConfiguration struct {
 	// (https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html) in the Amazon
 	// Elastic File System User Guide.
 	TransitEncryptionPort int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a set of conditions to be met, and an action to take (RETRY or EXIT)
@@ -988,6 +1026,8 @@ type EvaluateOnExit struct {
 	// optionally end with an asterisk (*) so that only the start of the string needs
 	// to be an exact match.
 	OnStatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // The platform configuration for jobs running on Fargate resources. For jobs that
@@ -1002,6 +1042,8 @@ type FargatePlatformConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Determine whether your data volume persists on the host container instance and
@@ -1019,6 +1061,8 @@ type Host struct {
 	// of the source path folder are exported. This parameter isn't applicable to jobs
 	// that run on Fargate resources and shouldn't be provided.
 	SourcePath *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an AWS Batch job definition.
@@ -1091,6 +1135,8 @@ type JobDefinition struct {
 	// You can specify a timeout duration after which AWS Batch terminates your jobs if
 	// they haven't finished.
 	Timeout *JobTimeout
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an AWS Batch job dependency.
@@ -1101,6 +1147,8 @@ type JobDependency struct {
 
 	// The type of the job dependency.
 	Type ArrayJobDependency
+
+	noSmithyDocumentSerde
 }
 
 // An object representing an AWS Batch job.
@@ -1205,6 +1253,8 @@ type JobDetail struct {
 
 	// The timeout configuration for the job.
 	Timeout *JobTimeout
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the details of an AWS Batch job queue.
@@ -1257,6 +1307,8 @@ type JobQueueDetail struct {
 	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in AWS
 	// Batch User Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing summary details of a job.
@@ -1306,6 +1358,8 @@ type JobSummary struct {
 	// The Unix timestamp for when the job was stopped (when the job transitioned from
 	// the RUNNING state to a terminal state, such as SUCCEEDED or FAILED).
 	StoppedAt int64
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a job timeout configuration.
@@ -1315,6 +1369,8 @@ type JobTimeout struct {
 	// timestamp) after which AWS Batch terminates your jobs if they have not finished.
 	// The minimum value for the timeout is 60 seconds.
 	AttemptDurationSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair object.
@@ -1327,6 +1383,8 @@ type KeyValuePair struct {
 	// The value of the key-value pair. For environment variables, this is the value of
 	// the environment variable.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a launch template associated with a compute resource. You
@@ -1353,6 +1411,8 @@ type LaunchTemplateSpecification struct {
 	// environment from the job queue, and delete the old compute environment. Default:
 	// $Default.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Linux-specific modifications that are applied to the container, such as details
@@ -1435,6 +1495,8 @@ type LinuxParameters struct {
 	// (https://docs.docker.com/engine/reference/run/). This parameter isn't applicable
 	// to jobs running on Fargate resources and shouldn't be provided.
 	Tmpfs []Tmpfs
+
+	noSmithyDocumentSerde
 }
 
 // Log configuration options to send to a custom log driver for the container.
@@ -1494,6 +1556,8 @@ type LogConfiguration struct {
 	// (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
 	// in the AWS Batch User Guide.
 	SecretOptions []Secret
+
+	noSmithyDocumentSerde
 }
 
 // Details on a Docker volume mount point that's used in a job's container
@@ -1511,6 +1575,8 @@ type MountPoint struct {
 
 	// The name of the volume to mount.
 	SourceVolume *string
+
+	noSmithyDocumentSerde
 }
 
 // The network configuration for jobs running on Fargate resources. Jobs running on
@@ -1525,6 +1591,8 @@ type NetworkConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html).
 	// The default value is "DISABLED".
 	AssignPublicIp AssignPublicIp
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the elastic network interface for a multi-node parallel
@@ -1539,6 +1607,8 @@ type NetworkInterface struct {
 
 	// The private IPv4 address for the network interface.
 	PrivateIpv4Address *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the details of a multi-node parallel job node.
@@ -1552,6 +1622,8 @@ type NodeDetails struct {
 	// also available on the node with the AWS_BATCH_JOB_NODE_INDEX environment
 	// variable.
 	NodeIndex int32
+
+	noSmithyDocumentSerde
 }
 
 // Object representing any node overrides to a job definition that's used in a
@@ -1576,6 +1648,8 @@ type NodeOverrides struct {
 	// * The main node index specified in the job
 	// definition must be fewer than the number of nodes specified in the override.
 	NumNodes int32
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the node properties of a multi-node parallel job.
@@ -1597,6 +1671,8 @@ type NodeProperties struct {
 	//
 	// This member is required.
 	NumNodes int32
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the properties of a node that's associated with a
@@ -1614,6 +1690,8 @@ type NodePropertiesSummary struct {
 
 	// The number of nodes associated with a multi-node parallel job.
 	NumNodes int32
+
+	noSmithyDocumentSerde
 }
 
 // Object representing any node overrides to a job definition that's used in a
@@ -1631,6 +1709,8 @@ type NodePropertyOverride struct {
 
 	// The overrides that should be sent to a node range.
 	ContainerOverrides *ContainerOverrides
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the properties of the node range for a multi-node
@@ -1650,6 +1730,8 @@ type NodeRangeProperty struct {
 
 	// The container details for the node range.
 	Container *ContainerProperties
+
+	noSmithyDocumentSerde
 }
 
 // The type and amount of a resource to assign to a container. The supported
@@ -1712,6 +1794,8 @@ type ResourceRequirement struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The retry strategy associated with a job. For more information, see Automated
@@ -1729,6 +1813,8 @@ type RetryStrategy struct {
 	// retried or failed. If this parameter is specified, then the attempts parameter
 	// must also be specified.
 	EvaluateOnExit []EvaluateOnExit
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the secret to expose to your container. Secrets can be
@@ -1761,6 +1847,8 @@ type Secret struct {
 	//
 	// This member is required.
 	ValueFrom *string
+
+	noSmithyDocumentSerde
 }
 
 // The container path, mount options, and size of the tmpfs mount. This object
@@ -1785,6 +1873,8 @@ type Tmpfs struct {
 	// "norelatime" | "strictatime" | "nostrictatime" | "mode" | "uid" | "gid" |
 	// "nr_inodes" | "nr_blocks" | "mpol"
 	MountOptions []string
+
+	noSmithyDocumentSerde
 }
 
 // The ulimit settings to pass to the container. This object isn't applicable to
@@ -1805,6 +1895,8 @@ type Ulimit struct {
 	//
 	// This member is required.
 	SoftLimit int32
+
+	noSmithyDocumentSerde
 }
 
 // A data volume used in a job's container properties.
@@ -1827,4 +1919,8 @@ type Volume struct {
 	// hyphens, and underscores are allowed. This name is referenced in the
 	// sourceVolume parameter of container definition mountPoints.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

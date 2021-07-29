@@ -51,6 +51,8 @@ type TestInvokeAuthorizerInput struct {
 	// The signature made with the token and your custom authentication service's
 	// private key. This value must be Base-64-encoded.
 	TokenSignature *string
+
+	noSmithyDocumentSerde
 }
 
 type TestInvokeAuthorizerOutput struct {
@@ -72,6 +74,8 @@ type TestInvokeAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestInvokeAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

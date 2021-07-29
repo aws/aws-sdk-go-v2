@@ -62,6 +62,8 @@ type ModifySnapshotCopyRetentionPeriodInput struct {
 	// Indicates whether to apply the snapshot retention period to newly copied manual
 	// snapshots instead of automated snapshots.
 	Manual bool
+
+	noSmithyDocumentSerde
 }
 
 type ModifySnapshotCopyRetentionPeriodOutput struct {
@@ -71,6 +73,8 @@ type ModifySnapshotCopyRetentionPeriodOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifySnapshotCopyRetentionPeriodMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DeleteBranchInput struct {
 	//
 	// This member is required.
 	BranchName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the delete branch request.
@@ -51,6 +53,8 @@ type DeleteBranchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,12 +33,16 @@ type DeleteUploadInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a delete upload request.
 type DeleteUploadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

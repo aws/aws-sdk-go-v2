@@ -46,6 +46,8 @@ type StopDBInstanceInput struct {
 	// The user-supplied instance identifier of the DB Snapshot created immediately
 	// before the DB instance is stopped.
 	DBSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type StopDBInstanceOutput struct {
@@ -56,6 +58,8 @@ type StopDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

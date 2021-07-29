@@ -49,6 +49,8 @@ type EstimateTemplateCostInput struct {
 	// in the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or
 	// TemplateBody. If both are passed, only TemplateBody is used.
 	TemplateURL *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for a EstimateTemplateCost action.
@@ -60,6 +62,8 @@ type EstimateTemplateCostOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEstimateTemplateCostMiddlewares(stack *middleware.Stack, options Options) (err error) {

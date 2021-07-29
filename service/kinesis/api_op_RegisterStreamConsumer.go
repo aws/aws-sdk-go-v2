@@ -52,6 +52,8 @@ type RegisterStreamConsumerInput struct {
 	//
 	// This member is required.
 	StreamARN *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterStreamConsumerOutput struct {
@@ -64,6 +66,8 @@ type RegisterStreamConsumerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterStreamConsumerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -91,6 +91,8 @@ type DescribeAccountCustomizationInput struct {
 	// to the console. Omit this flag, or set it to no-resolved, to reveal
 	// customizations that are configured at different levels.
 	Resolved bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountCustomizationOutput struct {
@@ -116,6 +118,8 @@ type DescribeAccountCustomizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

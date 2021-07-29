@@ -47,6 +47,8 @@ type ListAssessmentTargetsInput struct {
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// NextToken from the previous response to continue listing data.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssessmentTargetsOutput struct {
@@ -65,6 +67,8 @@ type ListAssessmentTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssessmentTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

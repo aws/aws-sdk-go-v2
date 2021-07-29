@@ -53,11 +53,15 @@ type SetVaultAccessPolicyInput struct {
 
 	// The vault access policy as a JSON string.
 	Policy *types.VaultAccessPolicy
+
+	noSmithyDocumentSerde
 }
 
 type SetVaultAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

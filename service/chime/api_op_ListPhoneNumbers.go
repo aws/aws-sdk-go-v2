@@ -48,6 +48,8 @@ type ListPhoneNumbersInput struct {
 
 	// The phone number status.
 	Status types.PhoneNumberStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListPhoneNumbersOutput struct {
@@ -60,6 +62,8 @@ type ListPhoneNumbersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPhoneNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {

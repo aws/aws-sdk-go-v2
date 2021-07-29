@@ -76,6 +76,8 @@ type CreateStageInput struct {
 	// names can have alphanumeric and underscore characters, and the values must match
 	// [A-Za-z0-9-._~:/?#&=,]+.
 	Variables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a unique identifier for a version of a deployed RestApi that is
@@ -144,6 +146,8 @@ type CreateStageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetFieldLevelEncryptionInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFieldLevelEncryptionOutput struct {
@@ -46,6 +48,8 @@ type GetFieldLevelEncryptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFieldLevelEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

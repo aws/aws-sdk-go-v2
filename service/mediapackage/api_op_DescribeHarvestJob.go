@@ -33,6 +33,8 @@ type DescribeHarvestJobInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHarvestJobOutput struct {
@@ -71,6 +73,8 @@ type DescribeHarvestJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHarvestJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

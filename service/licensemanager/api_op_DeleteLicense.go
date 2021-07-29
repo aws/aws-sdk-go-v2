@@ -38,6 +38,8 @@ type DeleteLicenseInput struct {
 	//
 	// This member is required.
 	SourceVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLicenseOutput struct {
@@ -50,6 +52,8 @@ type DeleteLicenseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {

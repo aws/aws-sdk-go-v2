@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -21,6 +22,8 @@ type BranchDiffSourceCodeType struct {
 	//
 	// This member is required.
 	SourceBranchName *string
+
+	noSmithyDocumentSerde
 }
 
 // Code artifacts are source code artifacts and build artifacts used in a
@@ -45,6 +48,8 @@ type CodeArtifacts struct {
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/code-review-security.html)
 	// in the Amazon CodeGuru Reviewer User Guide.
 	BuildArtifactsObjectKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an AWS CodeCommit repository. The CodeCommit repository must
@@ -59,6 +64,8 @@ type CodeCommitRepository struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a code review. A code review belongs to the associated
@@ -132,6 +139,8 @@ type CodeReview struct {
 
 	// The type of code review.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // Information about the summary of the code review.
@@ -190,6 +199,8 @@ type CodeReviewSummary struct {
 
 	// The type of the code review.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // The type of a code review. There are two code review types:
@@ -215,6 +226,8 @@ type CodeReviewType struct {
 	// They types of analysis performed during a repository analysis or a pull request
 	// review. You can specify either Security, CodeQuality, or both.
 	AnalysisTypes []AnalysisType
+
+	noSmithyDocumentSerde
 }
 
 // A type of SourceCodeType
@@ -234,6 +247,8 @@ type CommitDiffSourceCodeType struct {
 	// The SHA of the source commit used to generate a commit diff. This field is
 	// required for a pull request code review.
 	SourceCommit *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an event. The event might be a push, pull request, scheduled
@@ -246,6 +261,8 @@ type EventInfo struct {
 
 	// The state of an event. The state might be open, closed, or another state.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains:
@@ -265,6 +282,8 @@ type KMSKeyDetails struct {
 
 	// The ID of the AWS KMS key that is associated with a respository association.
 	KMSKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the statistics from the code review.
@@ -285,6 +304,8 @@ type Metrics struct {
 	// lines), the new file (200 lines) and the 25 changed lines of code for a total of
 	// 2,725 lines of code.
 	MeteredLinesOfCodeCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about metrics summaries.
@@ -305,6 +326,8 @@ type MetricsSummary struct {
 	// lines), the new file (200 lines) and the 25 changed lines of code for a total of
 	// 2,725 lines of code.
 	MeteredLinesOfCodeCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about the recommendation feedback.
@@ -335,6 +358,8 @@ type RecommendationFeedback struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
 	// in the AWS Identity and Access Management User Guide.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about recommendation feedback summaries.
@@ -353,6 +378,8 @@ type RecommendationFeedbackSummary struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
 	// in the AWS Identity and Access Management User Guide.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about recommendations.
@@ -380,6 +407,8 @@ type RecommendationSummary struct {
 	// Start line from where the recommendation is applicable in the source commit or
 	// source branch.
 	StartLine *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about an associated AWS CodeCommit repository or an associated
@@ -399,6 +428,8 @@ type Repository struct {
 
 	// Information about a repository in an S3 bucket.
 	S3Bucket *S3Repository
+
+	noSmithyDocumentSerde
 }
 
 // A code review type that analyzes all code under a specified branch in an
@@ -414,6 +445,8 @@ type RepositoryAnalysis struct {
 
 	// Specifies the source code that is analyzed in a code review.
 	SourceCodeType *SourceCodeType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a repository association. The DescribeRepositoryAssociation
@@ -507,6 +540,8 @@ type RepositoryAssociation struct {
 
 	// A description of why the repository association is in the current state.
 	StateReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a repository association. The
@@ -582,6 +617,8 @@ type RepositoryAssociationSummary struct {
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/auth-and-access-control-using-tags.html)
 	// in the Amazon CodeGuru Reviewer User Guide.
 	State RepositoryAssociationState
+
+	noSmithyDocumentSerde
 }
 
 // A SourceCodeType
@@ -594,6 +631,8 @@ type RepositoryHeadSourceCodeType struct {
 	//
 	// This member is required.
 	BranchName *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata that is associated with a code review. This applies to both pull
@@ -619,6 +658,8 @@ type RequestMetadata struct {
 	// in RepositoryAssociation
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html).
 	VendorName VendorName
+
+	noSmithyDocumentSerde
 }
 
 // Information about an associated repository in an S3 bucket. The associated
@@ -635,6 +676,8 @@ type S3BucketRepository struct {
 	// CodeArtifacts object. The CodeArtifacts object includes the S3 object keys for a
 	// source code .zip file and for a build artifacts .zip file.
 	Details *S3RepositoryDetails
+
+	noSmithyDocumentSerde
 }
 
 // Information about a repository in an S3 bucket.
@@ -650,6 +693,8 @@ type S3Repository struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the name of an S3 bucket and a CodeArtifacts object that contains the
@@ -665,6 +710,8 @@ type S3RepositoryDetails struct {
 	// a source code .zip file and for a build artifacts .zip file that contains .jar
 	// or .class files.
 	CodeArtifacts *CodeArtifacts
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the source code that is analyzed in a code review.
@@ -701,6 +748,8 @@ type SourceCodeType struct {
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_SourceCodeType)
 	// for S3BucketRepository based code reviews.
 	S3BucketRepository *S3BucketRepository
+
+	noSmithyDocumentSerde
 }
 
 // Information about a third-party source repository connected to CodeGuru
@@ -728,4 +777,8 @@ type ThirdPartySourceRepository struct {
 	//
 	// This member is required.
 	Owner *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

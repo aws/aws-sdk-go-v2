@@ -31,6 +31,8 @@ type NullAndEmptyHeadersClientInput struct {
 	B *string
 
 	C []string
+
+	noSmithyDocumentSerde
 }
 
 type NullAndEmptyHeadersClientOutput struct {
@@ -42,6 +44,8 @@ type NullAndEmptyHeadersClientOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNullAndEmptyHeadersClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

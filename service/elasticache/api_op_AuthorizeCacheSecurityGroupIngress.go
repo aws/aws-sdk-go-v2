@@ -50,6 +50,8 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 	//
 	// This member is required.
 	EC2SecurityGroupOwnerId *string
+
+	noSmithyDocumentSerde
 }
 
 type AuthorizeCacheSecurityGroupIngressOutput struct {
@@ -67,6 +69,8 @@ type AuthorizeCacheSecurityGroupIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAuthorizeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type ListInputsInput struct {
 
 	// Placeholder documentation for __string
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for ListInputsResponse
@@ -49,6 +51,8 @@ type ListInputsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInputsMiddlewares(stack *middleware.Stack, options Options) (err error) {

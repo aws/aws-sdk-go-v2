@@ -43,6 +43,8 @@ type GetEvidenceFolderInput struct {
 	//
 	// This member is required.
 	EvidenceFolderId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEvidenceFolderOutput struct {
@@ -52,6 +54,8 @@ type GetEvidenceFolderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEvidenceFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

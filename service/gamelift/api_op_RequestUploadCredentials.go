@@ -44,6 +44,8 @@ type RequestUploadCredentialsInput struct {
 	//
 	// This member is required.
 	BuildId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -59,6 +61,8 @@ type RequestUploadCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRequestUploadCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

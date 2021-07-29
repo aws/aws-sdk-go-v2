@@ -199,11 +199,15 @@ type PutBucketAclInput struct {
 
 	// Allows grantee to write the ACL for the applicable bucket.
 	GrantWriteACP *string
+
+	noSmithyDocumentSerde
 }
 
 type PutBucketAclOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBucketAclMiddlewares(stack *middleware.Stack, options Options) (err error) {

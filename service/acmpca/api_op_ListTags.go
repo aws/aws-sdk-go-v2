@@ -56,6 +56,8 @@ type ListTagsInput struct {
 	// receive a response with truncated results. Set it to the value of NextToken from
 	// the response you just received.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsOutput struct {
@@ -69,6 +71,8 @@ type ListTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

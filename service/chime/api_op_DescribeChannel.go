@@ -39,6 +39,8 @@ type DescribeChannelInput struct {
 
 	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeChannelOutput struct {
@@ -48,6 +50,8 @@ type DescribeChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

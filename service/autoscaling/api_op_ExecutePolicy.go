@@ -56,11 +56,15 @@ type ExecutePolicyInput struct {
 	// adjustment for the policy, the call returns an error. Required if the policy
 	// type is StepScaling and not supported otherwise.
 	MetricValue *float64
+
+	noSmithyDocumentSerde
 }
 
 type ExecutePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecutePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

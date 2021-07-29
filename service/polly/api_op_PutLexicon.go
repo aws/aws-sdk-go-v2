@@ -44,11 +44,15 @@ type PutLexiconInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type PutLexiconOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {

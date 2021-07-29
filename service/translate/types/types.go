@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -21,6 +22,8 @@ type AppliedTerminology struct {
 	// returned, and the specific terms applied will be the first 250 terms in the
 	// source text.
 	Terms []Term
+
+	noSmithyDocumentSerde
 }
 
 // The encryption key used to encrypt this object.
@@ -37,6 +40,8 @@ type EncryptionKey struct {
 	//
 	// This member is required.
 	Type EncryptionKeyType
+
+	noSmithyDocumentSerde
 }
 
 // The input configuration properties for requesting a batch translation job.
@@ -79,6 +84,8 @@ type InputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // The number of documents successfully and unsuccessfully processed during a
@@ -93,6 +100,8 @@ type JobDetails struct {
 
 	// The number of documents successfully processed during a translation job.
 	TranslatedDocumentsCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // The output configuration properties for a batch translation job.
@@ -103,6 +112,8 @@ type OutputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the format and S3 location of the parallel data input file.
@@ -118,6 +129,8 @@ type ParallelDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // The location of the most recent parallel data input file that was successfully
@@ -134,6 +147,8 @@ type ParallelDataDataLocation struct {
 	//
 	// This member is required.
 	RepositoryType *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties of a parallel data resource.
@@ -197,6 +212,8 @@ type ParallelDataProperties struct {
 	// The language codes for the target languages available in the parallel data file.
 	// All possible target languages are returned as an array.
 	TargetLanguageCodes []string
+
+	noSmithyDocumentSerde
 }
 
 // The term being translated by the custom terminology.
@@ -207,6 +224,8 @@ type Term struct {
 
 	// The target text of the term being translated by the custom terminology.
 	TargetText *string
+
+	noSmithyDocumentSerde
 }
 
 // The data associated with the custom terminology.
@@ -223,6 +242,8 @@ type TerminologyData struct {
 	//
 	// This member is required.
 	Format TerminologyDataFormat
+
+	noSmithyDocumentSerde
 }
 
 // The location of the custom terminology data.
@@ -237,6 +258,8 @@ type TerminologyDataLocation struct {
 	//
 	// This member is required.
 	RepositoryType *string
+
+	noSmithyDocumentSerde
 }
 
 // The properties of the custom terminology.
@@ -274,6 +297,8 @@ type TerminologyProperties struct {
 
 	// The number of terms included in the custom terminology.
 	TermCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of translation jobs. For more
@@ -295,6 +320,8 @@ type TextTranslationJobFilter struct {
 	// processing and returns only the jobs submitted before the specified time. Jobs
 	// are returned in ascending order, oldest to newest.
 	SubmittedBeforeTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a translation job.
@@ -350,4 +377,8 @@ type TextTranslationJobProperties struct {
 	// Only one terminology can be applied per StartTextTranslationJob request at this
 	// time.
 	TerminologyNames []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

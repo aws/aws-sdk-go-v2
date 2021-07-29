@@ -48,6 +48,8 @@ type DescribeServiceActionExecutionParametersInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeServiceActionExecutionParametersOutput struct {
@@ -57,6 +59,8 @@ type DescribeServiceActionExecutionParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServiceActionExecutionParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

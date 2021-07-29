@@ -61,11 +61,15 @@ type UpdateClassificationJobInput struct {
 	//
 	// This member is required.
 	JobStatus types.JobStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateClassificationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

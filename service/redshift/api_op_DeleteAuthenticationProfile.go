@@ -32,6 +32,8 @@ type DeleteAuthenticationProfileInput struct {
 	//
 	// This member is required.
 	AuthenticationProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAuthenticationProfileOutput struct {
@@ -41,6 +43,8 @@ type DeleteAuthenticationProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAuthenticationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

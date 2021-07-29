@@ -10,6 +10,8 @@ import (
 // AWS CodeBuild is not available in the specified region.
 type CodeBuildNotInServiceRegionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CodeBuildNotInServiceRegionException) Error() string {
@@ -31,6 +33,8 @@ func (e *CodeBuildNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 // A generic service exception has occurred.
 type ElasticBeanstalkServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ElasticBeanstalkServiceException) Error() string {
@@ -51,6 +55,8 @@ func (e *ElasticBeanstalkServiceException) ErrorFault() smithy.ErrorFault { retu
 // services.
 type InsufficientPrivilegesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientPrivilegesException) Error() string {
@@ -71,6 +77,8 @@ func (e *InsufficientPrivilegesException) ErrorFault() smithy.ErrorFault { retur
 // and try the operation again.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -88,6 +96,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // Cannot modify the managed action in its current state.
 type ManagedActionInvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ManagedActionInvalidStateException) Error() string {
@@ -110,6 +120,8 @@ func (e *ManagedActionInvalidStateException) ErrorFault() smithy.ErrorFault {
 // an element in this activity is already in progress.
 type OperationInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationInProgressException) Error() string {
@@ -128,6 +140,8 @@ func (e *OperationInProgressException) ErrorFault() smithy.ErrorFault { return s
 // running on it.
 type PlatformVersionStillReferencedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PlatformVersionStillReferencedException) Error() string {
@@ -149,6 +163,8 @@ func (e *PlatformVersionStillReferencedException) ErrorFault() smithy.ErrorFault
 // A resource doesn't exist for the specified Amazon Resource Name (ARN).
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -167,6 +183,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // operation.
 type ResourceTypeNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceTypeNotSupportedException) Error() string {
@@ -194,6 +212,8 @@ func (e *ResourceTypeNotSupportedException) ErrorFault() smithy.ErrorFault { ret
 // * DUB/eu-west-1
 type S3LocationNotInServiceRegionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *S3LocationNotInServiceRegionException) Error() string {
@@ -215,6 +235,8 @@ func (e *S3LocationNotInServiceRegionException) ErrorFault() smithy.ErrorFault {
 // The specified account does not have a subscription to Amazon S3.
 type S3SubscriptionRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *S3SubscriptionRequiredException) Error() string {
@@ -235,6 +257,8 @@ func (e *S3SubscriptionRequiredException) ErrorFault() smithy.ErrorFault { retur
 // version. The application version was deleted successfully.
 type SourceBundleDeletionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SourceBundleDeletionException) Error() string {
@@ -252,6 +276,8 @@ func (e *SourceBundleDeletionException) ErrorFault() smithy.ErrorFault { return 
 // The specified account has reached its limit of applications.
 type TooManyApplicationsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyApplicationsException) Error() string {
@@ -269,6 +295,8 @@ func (e *TooManyApplicationsException) ErrorFault() smithy.ErrorFault { return s
 // The specified account has reached its limit of application versions.
 type TooManyApplicationVersionsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyApplicationVersionsException) Error() string {
@@ -290,6 +318,8 @@ func (e *TooManyApplicationVersionsException) ErrorFault() smithy.ErrorFault {
 // The specified account has reached its limit of Amazon S3 buckets.
 type TooManyBucketsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyBucketsException) Error() string {
@@ -307,6 +337,8 @@ func (e *TooManyBucketsException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified account has reached its limit of configuration templates.
 type TooManyConfigurationTemplatesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyConfigurationTemplatesException) Error() string {
@@ -328,6 +360,8 @@ func (e *TooManyConfigurationTemplatesException) ErrorFault() smithy.ErrorFault 
 // The specified account has reached its limit of environments.
 type TooManyEnvironmentsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyEnvironmentsException) Error() string {
@@ -346,6 +380,8 @@ func (e *TooManyEnvironmentsException) ErrorFault() smithy.ErrorFault { return s
 // account.
 type TooManyPlatformsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyPlatformsException) Error() string {
@@ -366,6 +402,8 @@ func (e *TooManyPlatformsException) ErrorFault() smithy.ErrorFault { return smit
 // succeeded.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

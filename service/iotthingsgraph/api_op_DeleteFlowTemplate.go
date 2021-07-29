@@ -36,11 +36,15 @@ type DeleteFlowTemplateInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFlowTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

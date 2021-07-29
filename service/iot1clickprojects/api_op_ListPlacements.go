@@ -41,6 +41,8 @@ type ListPlacementsInput struct {
 
 	// The token to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPlacementsOutput struct {
@@ -56,6 +58,8 @@ type ListPlacementsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPlacementsMiddlewares(stack *middleware.Stack, options Options) (err error) {

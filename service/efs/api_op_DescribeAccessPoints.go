@@ -50,6 +50,8 @@ type DescribeAccessPointsInput struct {
 	// NextToken is present if the response is paginated. You can use NextMarker in the
 	// subsequent request to fetch the next page of access point descriptions.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccessPointsOutput struct {
@@ -64,6 +66,8 @@ type DescribeAccessPointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccessPointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type DeleteCloudFrontOriginAccessIdentityInput struct {
 	// The value of the ETag header you received from a previous GET or PUT request.
 	// For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCloudFrontOriginAccessIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCloudFrontOriginAccessIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

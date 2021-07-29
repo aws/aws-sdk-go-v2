@@ -36,6 +36,8 @@ type ListFindingsFiltersInput struct {
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFindingsFiltersOutput struct {
@@ -49,6 +51,8 @@ type ListFindingsFiltersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFindingsFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {

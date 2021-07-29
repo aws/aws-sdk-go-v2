@@ -63,6 +63,8 @@ type GetPredictiveScalingForecastInput struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type GetPredictiveScalingForecastOutput struct {
@@ -84,6 +86,8 @@ type GetPredictiveScalingForecastOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPredictiveScalingForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {

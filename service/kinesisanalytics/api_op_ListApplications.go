@@ -52,6 +52,8 @@ type ListApplicationsInput struct {
 
 	// Maximum number of applications to list.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -69,6 +71,8 @@ type ListApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

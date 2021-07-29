@@ -58,11 +58,15 @@ type UpdateLicenseConfigurationInput struct {
 
 	// New product information.
 	ProductInformationList []types.ProductInformation
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLicenseConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

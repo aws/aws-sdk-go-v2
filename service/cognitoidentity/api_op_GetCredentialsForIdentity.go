@@ -54,6 +54,8 @@ type GetCredentialsForIdentityInput struct {
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/external-identity-providers.html)
 	// section of the Amazon Cognito Developer Guide.
 	Logins map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Returned in response to a successful GetCredentialsForIdentity operation.
@@ -67,6 +69,8 @@ type GetCredentialsForIdentityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCredentialsForIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type DescribeProductAsAdminInput struct {
 	// and shared TagOptions associated with the product. Otherwise only local
 	// TagOptions will be returned.
 	SourcePortfolioId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProductAsAdminOutput struct {
@@ -74,6 +76,8 @@ type DescribeProductAsAdminOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProductAsAdminMiddlewares(stack *middleware.Stack, options Options) (err error) {

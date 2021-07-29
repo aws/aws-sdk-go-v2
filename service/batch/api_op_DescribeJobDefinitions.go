@@ -58,6 +58,8 @@ type DescribeJobDefinitionsInput struct {
 
 	// The status used to filter job definitions.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJobDefinitionsOutput struct {
@@ -73,6 +75,8 @@ type DescribeJobDefinitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobDefinitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

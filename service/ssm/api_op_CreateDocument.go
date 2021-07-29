@@ -121,6 +121,8 @@ type CreateDocumentInput struct {
 	// the document. For example, "Release 12, Update 6". This value is unique across
 	// all versions of a document, and can't be changed.
 	VersionName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDocumentOutput struct {
@@ -130,6 +132,8 @@ type CreateDocumentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {

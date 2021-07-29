@@ -10,6 +10,8 @@ import (
 // An internal service error occurred.
 type InternalServiceError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceError) Error() string {
@@ -29,6 +31,8 @@ func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // exceeded any of the service limits for your account.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -46,6 +50,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified pipeline has been deleted.
 type PipelineDeletedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PipelineDeletedException) Error() string {
@@ -64,6 +70,8 @@ func (e *PipelineDeletedException) ErrorFault() smithy.ErrorFault { return smith
 // account identifiers.
 type PipelineNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PipelineNotFoundException) Error() string {
@@ -81,6 +89,8 @@ func (e *PipelineNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The specified task was not found.
 type TaskNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TaskNotFoundException) Error() string {

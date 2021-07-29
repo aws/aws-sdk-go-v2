@@ -66,6 +66,8 @@ type UpdateIAMPolicyAssignmentInput struct {
 	// The ARN for the IAM policy to apply to the QuickSight users and groups specified
 	// in this assignment.
 	PolicyArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIAMPolicyAssignmentOutput struct {
@@ -104,6 +106,8 @@ type UpdateIAMPolicyAssignmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIAMPolicyAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

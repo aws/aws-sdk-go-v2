@@ -38,6 +38,8 @@ type DeleteRecipeVersionInput struct {
 	//
 	// This member is required.
 	RecipeVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRecipeVersionOutput struct {
@@ -54,6 +56,8 @@ type DeleteRecipeVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRecipeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

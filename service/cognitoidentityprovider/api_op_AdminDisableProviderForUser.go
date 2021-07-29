@@ -61,11 +61,15 @@ type AdminDisableProviderForUserInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 type AdminDisableProviderForUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminDisableProviderForUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

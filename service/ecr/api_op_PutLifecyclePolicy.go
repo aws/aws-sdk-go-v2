@@ -43,6 +43,8 @@ type PutLifecyclePolicyInput struct {
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do  not specify a registry, the default registry is assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutLifecyclePolicyOutput struct {
@@ -58,6 +60,8 @@ type PutLifecyclePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

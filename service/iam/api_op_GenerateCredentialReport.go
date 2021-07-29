@@ -31,6 +31,7 @@ func (c *Client) GenerateCredentialReport(ctx context.Context, params *GenerateC
 }
 
 type GenerateCredentialReportInput struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GenerateCredentialReport request.
@@ -44,6 +45,8 @@ type GenerateCredentialReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateCredentialReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

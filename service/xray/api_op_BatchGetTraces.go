@@ -39,6 +39,8 @@ type BatchGetTracesInput struct {
 
 	// Pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetTracesOutput struct {
@@ -54,6 +56,8 @@ type BatchGetTracesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetTracesMiddlewares(stack *middleware.Stack, options Options) (err error) {

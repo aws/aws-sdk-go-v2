@@ -12,6 +12,8 @@ type CodeSigningConfigNotFoundException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CodeSigningConfigNotFoundException) Error() string {
@@ -36,6 +38,8 @@ type CodeStorageExceededException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CodeStorageExceededException) Error() string {
@@ -57,6 +61,8 @@ type CodeVerificationFailedException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CodeVerificationFailedException) Error() string {
@@ -78,6 +84,8 @@ type EC2AccessDeniedException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EC2AccessDeniedException) Error() string {
@@ -98,6 +106,8 @@ type EC2ThrottledException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EC2ThrottledException) Error() string {
@@ -119,6 +129,8 @@ type EC2UnexpectedException struct {
 
 	Type         *string
 	EC2ErrorCode *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EC2UnexpectedException) Error() string {
@@ -138,6 +150,8 @@ type EFSIOException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EFSIOException) Error() string {
@@ -157,6 +171,8 @@ type EFSMountConnectivityException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EFSMountConnectivityException) Error() string {
@@ -177,6 +193,8 @@ type EFSMountFailureException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EFSMountFailureException) Error() string {
@@ -197,6 +215,8 @@ type EFSMountTimeoutException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EFSMountTimeoutException) Error() string {
@@ -218,6 +238,8 @@ type ENILimitReachedException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ENILimitReachedException) Error() string {
@@ -238,6 +260,8 @@ type InvalidCodeSignatureException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCodeSignatureException) Error() string {
@@ -257,6 +281,8 @@ type InvalidParameterValueException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -276,6 +302,8 @@ type InvalidRequestContentException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestContentException) Error() string {
@@ -295,6 +323,8 @@ type InvalidRuntimeException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRuntimeException) Error() string {
@@ -315,6 +345,8 @@ type InvalidSecurityGroupIDException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSecurityGroupIDException) Error() string {
@@ -336,6 +368,8 @@ type InvalidSubnetIDException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubnetIDException) Error() string {
@@ -355,6 +389,8 @@ type InvalidZipFileException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidZipFileException) Error() string {
@@ -375,6 +411,8 @@ type KMSAccessDeniedException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSAccessDeniedException) Error() string {
@@ -395,6 +433,8 @@ type KMSDisabledException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSDisabledException) Error() string {
@@ -415,6 +455,8 @@ type KMSInvalidStateException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSInvalidStateException) Error() string {
@@ -435,6 +477,8 @@ type KMSNotFoundException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KMSNotFoundException) Error() string {
@@ -455,6 +499,8 @@ type PolicyLengthExceededException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyLengthExceededException) Error() string {
@@ -476,6 +522,8 @@ type PreconditionFailedException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PreconditionFailedException) Error() string {
@@ -495,6 +543,8 @@ type ProvisionedConcurrencyConfigNotFoundException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProvisionedConcurrencyConfigNotFoundException) Error() string {
@@ -520,6 +570,8 @@ type RequestTooLargeException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestTooLargeException) Error() string {
@@ -539,6 +591,8 @@ type ResourceConflictException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceConflictException) Error() string {
@@ -560,6 +614,8 @@ type ResourceInUseException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -579,6 +635,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -599,6 +657,8 @@ type ResourceNotReadyException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotReadyException) Error() string {
@@ -618,6 +678,8 @@ type ServiceException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceException) Error() string {
@@ -638,6 +700,8 @@ type SubnetIPAddressLimitReachedException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetIPAddressLimitReachedException) Error() string {
@@ -663,6 +727,8 @@ type TooManyRequestsException struct {
 	RetryAfterSeconds *string
 	Type              *string
 	Reason            ThrottleReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -682,6 +748,8 @@ type UnsupportedMediaTypeException struct {
 	Message *string
 
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedMediaTypeException) Error() string {

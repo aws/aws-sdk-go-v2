@@ -36,6 +36,8 @@ type RemoveAllBackendsInput struct {
 
 	// Cleans up the Amplify Console app if this value is set to true.
 	CleanAmplifyApp bool
+
+	noSmithyDocumentSerde
 }
 
 type RemoveAllBackendsOutput struct {
@@ -57,6 +59,8 @@ type RemoveAllBackendsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveAllBackendsMiddlewares(stack *middleware.Stack, options Options) (err error) {

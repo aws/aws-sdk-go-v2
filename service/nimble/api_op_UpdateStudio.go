@@ -56,6 +56,8 @@ type UpdateStudioInput struct {
 	// The IAM role that Studio Users will assume when logging in to the Nimble Studio
 	// portal.
 	UserRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStudioOutput struct {
@@ -65,6 +67,8 @@ type UpdateStudioOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {

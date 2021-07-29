@@ -52,6 +52,8 @@ type CreateThingInput struct {
 
 	// The name of the thing type associated with the new thing.
 	ThingTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output of the CreateThing operation.
@@ -68,6 +70,8 @@ type CreateThingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

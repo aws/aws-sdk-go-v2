@@ -40,6 +40,8 @@ type DescribeReplicationConfigurationTemplatesInput struct {
 
 	// Request to describe Replication Configuration template by next token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeReplicationConfigurationTemplatesOutput struct {
@@ -52,6 +54,8 @@ type DescribeReplicationConfigurationTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReplicationConfigurationTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type GetCachePolicyConfigInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCachePolicyConfigOutput struct {
@@ -52,6 +54,8 @@ type GetCachePolicyConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCachePolicyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

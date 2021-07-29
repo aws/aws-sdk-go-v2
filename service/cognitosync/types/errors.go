@@ -11,6 +11,8 @@ import (
 // hours after a previous bulk publish operation completed successfully.
 type AlreadyStreamedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyStreamedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AlreadyStreamedException) ErrorFault() smithy.ErrorFault { return smith
 // Thrown if there are parallel requests to modify a resource.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -48,6 +52,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // given identity pool.
 type DuplicateRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateRequestException) Error() string {
@@ -65,6 +71,8 @@ func (e *DuplicateRequestException) ErrorFault() smithy.ErrorFault { return smit
 // Indicates an internal service error.
 type InternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalErrorException) Error() string {
@@ -81,6 +89,8 @@ func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 
 type InvalidConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConfigurationException) Error() string {
@@ -98,6 +108,8 @@ func (e *InvalidConfigurationException) ErrorFault() smithy.ErrorFault { return 
 // The AWS Lambda function returned invalid output or an exception.
 type InvalidLambdaFunctionOutputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLambdaFunctionOutputException) Error() string {
@@ -119,6 +131,8 @@ func (e *InvalidLambdaFunctionOutputException) ErrorFault() smithy.ErrorFault {
 // Thrown when a request parameter does not comply with the associated constraints.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -136,6 +150,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // AWS Lambda throttled your account, please contact AWS Support
 type LambdaThrottledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LambdaThrottledException) Error() string {
@@ -153,6 +169,8 @@ func (e *LambdaThrottledException) ErrorFault() smithy.ErrorFault { return smith
 // Thrown when the limit on the number of objects or operations has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -170,6 +188,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Thrown when a user is not authorized to access the requested resource.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {
@@ -188,6 +208,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // call and this would result in a conflict.
 type ResourceConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceConflictException) Error() string {
@@ -205,6 +227,8 @@ func (e *ResourceConflictException) ErrorFault() smithy.ErrorFault { return smit
 // Thrown if the resource doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -222,6 +246,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // Thrown if the request is throttled.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

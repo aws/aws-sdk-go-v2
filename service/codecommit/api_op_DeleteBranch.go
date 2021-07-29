@@ -40,6 +40,8 @@ type DeleteBranchInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a delete branch operation.
@@ -51,6 +53,8 @@ type DeleteBranchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBranchMiddlewares(stack *middleware.Stack, options Options) (err error) {

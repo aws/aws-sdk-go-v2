@@ -56,11 +56,15 @@ type RespondDecisionTaskCompletedInput struct {
 
 	// User defined context to add to workflow execution.
 	ExecutionContext *string
+
+	noSmithyDocumentSerde
 }
 
 type RespondDecisionTaskCompletedOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRespondDecisionTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -84,6 +84,8 @@ type DescribeScalingPoliciesInput struct {
 	// * ERROR -- An error occurred in creating the policy.
 	// It should be removed and recreated.
 	StatusFilter types.ScalingStatusType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -99,6 +101,8 @@ type DescribeScalingPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScalingPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

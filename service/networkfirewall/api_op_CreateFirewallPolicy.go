@@ -58,6 +58,8 @@ type CreateFirewallPolicyInput struct {
 
 	// The key:value pairs to associate with the resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateFirewallPolicyOutput struct {
@@ -83,6 +85,8 @@ type CreateFirewallPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

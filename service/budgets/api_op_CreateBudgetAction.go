@@ -76,6 +76,8 @@ type CreateBudgetActionInput struct {
 	//
 	// This member is required.
 	Subscribers []types.Subscriber
+
+	noSmithyDocumentSerde
 }
 
 type CreateBudgetActionOutput struct {
@@ -98,6 +100,8 @@ type CreateBudgetActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBudgetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

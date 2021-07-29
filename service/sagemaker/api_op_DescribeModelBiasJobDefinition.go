@@ -35,6 +35,8 @@ type DescribeModelBiasJobDefinitionInput struct {
 	//
 	// This member is required.
 	JobDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeModelBiasJobDefinitionOutput struct {
@@ -93,6 +95,8 @@ type DescribeModelBiasJobDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeModelBiasJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

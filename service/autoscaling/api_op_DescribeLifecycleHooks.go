@@ -37,6 +37,8 @@ type DescribeLifecycleHooksInput struct {
 	// The names of one or more lifecycle hooks. If you omit this parameter, all
 	// lifecycle hooks are described.
 	LifecycleHookNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLifecycleHooksOutput struct {
@@ -46,6 +48,8 @@ type DescribeLifecycleHooksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLifecycleHooksMiddlewares(stack *middleware.Stack, options Options) (err error) {

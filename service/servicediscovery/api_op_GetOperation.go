@@ -36,6 +36,8 @@ type GetOperationInput struct {
 	//
 	// This member is required.
 	OperationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetOperationOutput struct {
@@ -45,6 +47,8 @@ type GetOperationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type StopRelationalDatabaseInput struct {
 	// The name of your new database snapshot to be created before stopping your
 	// database.
 	RelationalDatabaseSnapshotName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopRelationalDatabaseOutput struct {
@@ -52,6 +54,8 @@ type StopRelationalDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

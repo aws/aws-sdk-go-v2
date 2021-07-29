@@ -95,6 +95,8 @@ type CreateProvisionedProductPlanInput struct {
 	// product must have a RESOURCE_UPDATE constraint with
 	// TagUpdatesOnProvisionedProduct set to ALLOWED to allow tag updates.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateProvisionedProductPlanOutput struct {
@@ -116,6 +118,8 @@ type CreateProvisionedProductPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

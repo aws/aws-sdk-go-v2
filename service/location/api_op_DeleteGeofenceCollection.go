@@ -34,11 +34,15 @@ type DeleteGeofenceCollectionInput struct {
 	//
 	// This member is required.
 	CollectionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGeofenceCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGeofenceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

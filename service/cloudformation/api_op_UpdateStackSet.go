@@ -283,6 +283,8 @@ type UpdateStackSetInput struct {
 	// updating. Conditional: You must specify only one of the following parameters:
 	// TemplateBody or TemplateURL—or set UsePreviousTemplate to true.
 	UsePreviousTemplate *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStackSetOutput struct {
@@ -292,6 +294,8 @@ type UpdateStackSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DescribeNotificationSubscriptionsInput struct {
 	// The marker for the next set of results. (You received this marker from a
 	// previous call.)
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNotificationSubscriptionsOutput struct {
@@ -53,6 +55,8 @@ type DescribeNotificationSubscriptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNotificationSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

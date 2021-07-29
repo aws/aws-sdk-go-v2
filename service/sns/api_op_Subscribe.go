@@ -153,6 +153,8 @@ type SubscribeInput struct {
 	// the ConfirmSubscription action with a confirmation token. The default value is
 	// false.
 	ReturnSubscriptionArn bool
+
+	noSmithyDocumentSerde
 }
 
 // Response for Subscribe action.
@@ -166,6 +168,8 @@ type SubscribeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {

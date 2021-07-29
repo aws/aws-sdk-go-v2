@@ -48,6 +48,8 @@ type ListActiveViolationsInput struct {
 
 	// The name of the thing whose active violations are listed.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListActiveViolationsOutput struct {
@@ -61,6 +63,8 @@ type ListActiveViolationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListActiveViolationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

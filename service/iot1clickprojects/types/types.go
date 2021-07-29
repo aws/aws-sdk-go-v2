@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -16,6 +17,8 @@ type DeviceTemplate struct {
 
 	// The device type, which currently must be "button".
 	DeviceType *string
+
+	noSmithyDocumentSerde
 }
 
 // An object describing a project's placement.
@@ -46,6 +49,8 @@ type PlacementDescription struct {
 	//
 	// This member is required.
 	UpdatedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object providing summary information for a particular placement.
@@ -71,6 +76,8 @@ type PlacementSummary struct {
 	//
 	// This member is required.
 	UpdatedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object defining the template for a placement.
@@ -83,6 +90,8 @@ type PlacementTemplate struct {
 	// An object specifying the DeviceTemplate for all placements using this
 	// (PlacementTemplate) template.
 	DeviceTemplates map[string]DeviceTemplate
+
+	noSmithyDocumentSerde
 }
 
 // An object providing detailed information for a particular project associated
@@ -116,6 +125,8 @@ type ProjectDescription struct {
 
 	// The tags (metadata key/value pairs) associated with the project.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An object providing summary information for a particular project for an
@@ -143,4 +154,8 @@ type ProjectSummary struct {
 
 	// The tags (metadata key/value pairs) associated with the project.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

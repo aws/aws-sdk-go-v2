@@ -32,6 +32,8 @@ type DisassociateRoleFromGroupInput struct {
 	//
 	// This member is required.
 	GroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateRoleFromGroupOutput struct {
@@ -42,6 +44,8 @@ type DisassociateRoleFromGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateRoleFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

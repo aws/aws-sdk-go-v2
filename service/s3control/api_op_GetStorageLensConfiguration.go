@@ -49,6 +49,8 @@ type GetStorageLensConfigurationInput struct {
 	//
 	// This member is required.
 	ConfigId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStorageLensConfigurationOutput struct {
@@ -58,6 +60,8 @@ type GetStorageLensConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStorageLensConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

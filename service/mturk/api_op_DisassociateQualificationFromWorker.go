@@ -44,11 +44,15 @@ type DisassociateQualificationFromWorkerInput struct {
 	// A text message that explains why the Qualification was revoked. The user who had
 	// the Qualification sees this message.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateQualificationFromWorkerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateQualificationFromWorkerMiddlewares(stack *middleware.Stack, options Options) (err error) {

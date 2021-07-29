@@ -56,6 +56,8 @@ type DeleteRuleGroupInput struct {
 	//
 	// This member is required.
 	RuleGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRuleGroupOutput struct {
@@ -67,6 +69,8 @@ type DeleteRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

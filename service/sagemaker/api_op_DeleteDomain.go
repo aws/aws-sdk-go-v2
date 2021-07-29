@@ -41,11 +41,15 @@ type DeleteDomainInput struct {
 	// retained after the Domain is deleted. By default, all resources are retained
 	// (not automatically deleted).
 	RetentionPolicy *types.RetentionPolicy
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

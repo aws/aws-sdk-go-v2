@@ -82,6 +82,8 @@ type ListRecordsInput struct {
 
 	// A token containing a session ID, identity ID, and expiration.
 	SyncSessionToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Returned for a successful ListRecordsRequest.
@@ -116,6 +118,8 @@ type ListRecordsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

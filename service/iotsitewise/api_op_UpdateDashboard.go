@@ -54,11 +54,15 @@ type UpdateDashboardInput struct {
 
 	// A new description for the dashboard.
 	DashboardDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDashboardOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {

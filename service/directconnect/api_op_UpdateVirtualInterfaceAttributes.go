@@ -44,6 +44,8 @@ type UpdateVirtualInterfaceAttributesInput struct {
 	// The maximum transmission unit (MTU), in bytes. The supported values are 1500 and
 	// 9001. The default value is 1500.
 	Mtu *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a virtual interface.
@@ -168,6 +170,8 @@ type UpdateVirtualInterfaceAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVirtualInterfaceAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

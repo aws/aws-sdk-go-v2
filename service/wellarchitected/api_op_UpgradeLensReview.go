@@ -53,11 +53,15 @@ type UpgradeLensReviewInput struct {
 	// the AWS SDKs automatically generate one for you. If you are not using the AWS
 	// SDK or the AWS CLI, you must provide this token or the request will fail.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpgradeLensReviewOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpgradeLensReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

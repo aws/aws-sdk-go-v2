@@ -74,6 +74,8 @@ type GetConfigurationInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/appconfig-retrieving-the-configuration.html)
 	// in the AWS AppConfig User Guide.
 	ClientConfigurationVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type GetConfigurationOutput struct {
@@ -91,6 +93,8 @@ type GetConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

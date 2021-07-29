@@ -147,11 +147,15 @@ type RegisterWorkflowTypeInput struct {
 
 	// Textual description of the workflow type.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterWorkflowTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

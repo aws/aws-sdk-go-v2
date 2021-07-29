@@ -50,6 +50,8 @@ type GetResourcesInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of Resource resources. Create an API
@@ -64,6 +66,8 @@ type GetResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

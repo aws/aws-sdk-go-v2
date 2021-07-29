@@ -35,6 +35,8 @@ type ListPortalsInput struct {
 
 	// The token to be used for the next set of paginated results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPortalsOutput struct {
@@ -48,6 +50,8 @@ type ListPortalsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPortalsMiddlewares(stack *middleware.Stack, options Options) (err error) {

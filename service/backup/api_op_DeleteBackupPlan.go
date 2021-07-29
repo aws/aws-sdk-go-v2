@@ -35,6 +35,8 @@ type DeleteBackupPlanInput struct {
 	//
 	// This member is required.
 	BackupPlanId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBackupPlanOutput struct {
@@ -59,6 +61,8 @@ type DeleteBackupPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

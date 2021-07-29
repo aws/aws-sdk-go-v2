@@ -43,6 +43,8 @@ type GetEntityTypesInput struct {
 
 	// The next token for the subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEntityTypesOutput struct {
@@ -55,6 +57,8 @@ type GetEntityTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEntityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type StopInstanceInput struct {
 	// formerly-associated instance in EC2 after troubleshooting and replacing the AWS
 	// OpsWorks Stacks instance with a new one.
 	Force *bool
+
+	noSmithyDocumentSerde
 }
 
 type StopInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

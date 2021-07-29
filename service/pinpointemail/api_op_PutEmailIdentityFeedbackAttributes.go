@@ -57,6 +57,8 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 	// Pinpoint sends an email notification when these events occur (even if this
 	// setting is disabled).
 	EmailForwardingEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -64,6 +66,8 @@ type PutEmailIdentityFeedbackAttributesInput struct {
 type PutEmailIdentityFeedbackAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEmailIdentityFeedbackAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

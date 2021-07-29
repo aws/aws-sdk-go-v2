@@ -37,11 +37,15 @@ type PutLoggingOptionsInput struct {
 	//
 	// This member is required.
 	LoggingOptions *types.LoggingOptions
+
+	noSmithyDocumentSerde
 }
 
 type PutLoggingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutLoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

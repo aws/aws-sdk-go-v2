@@ -10,6 +10,8 @@ import (
 // The specified load balancer does not exist.
 type AccessPointNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessPointNotFoundException) Error() string {
@@ -30,6 +32,8 @@ func (e *AccessPointNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // certificate is not fully available yet.
 type CertificateNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateNotFoundException) Error() string {
@@ -48,6 +52,8 @@ func (e *CertificateNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // request rate permitted for your account.
 type DependencyThrottleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependencyThrottleException) Error() string {
@@ -65,6 +71,8 @@ func (e *DependencyThrottleException) ErrorFault() smithy.ErrorFault { return sm
 // The specified load balancer name already exists for this account.
 type DuplicateAccessPointNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateAccessPointNameException) Error() string {
@@ -83,6 +91,8 @@ func (e *DuplicateAccessPointNameException) ErrorFault() smithy.ErrorFault { ret
 // with a different instance port, protocol, or SSL certificate.
 type DuplicateListenerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateListenerException) Error() string {
@@ -100,6 +110,8 @@ func (e *DuplicateListenerException) ErrorFault() smithy.ErrorFault { return smi
 // A policy with the specified name already exists for this load balancer.
 type DuplicatePolicyNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicatePolicyNameException) Error() string {
@@ -117,6 +129,8 @@ func (e *DuplicatePolicyNameException) ErrorFault() smithy.ErrorFault { return s
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateTagKeysException) Error() string {
@@ -134,6 +148,8 @@ func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smit
 // The requested configuration change is not valid.
 type InvalidConfigurationRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConfigurationRequestException) Error() string {
@@ -155,6 +171,8 @@ func (e *InvalidConfigurationRequestException) ErrorFault() smithy.ErrorFault {
 // The specified endpoint is not valid.
 type InvalidEndPointException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEndPointException) Error() string {
@@ -173,6 +191,8 @@ func (e *InvalidEndPointException) ErrorFault() smithy.ErrorFault { return smith
 // for load balancers in a VPC.
 type InvalidSchemeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSchemeException) Error() string {
@@ -190,6 +210,8 @@ func (e *InvalidSchemeException) ErrorFault() smithy.ErrorFault { return smithy.
 // One or more of the specified security groups do not exist.
 type InvalidSecurityGroupException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSecurityGroupException) Error() string {
@@ -207,6 +229,8 @@ func (e *InvalidSecurityGroupException) ErrorFault() smithy.ErrorFault { return 
 // The specified VPC has no associated Internet gateway.
 type InvalidSubnetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubnetException) Error() string {
@@ -224,6 +248,8 @@ func (e *InvalidSubnetException) ErrorFault() smithy.ErrorFault { return smithy.
 // The load balancer does not have a listener configured at the specified port.
 type ListenerNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ListenerNotFoundException) Error() string {
@@ -241,6 +267,8 @@ func (e *ListenerNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The specified load balancer attribute does not exist.
 type LoadBalancerAttributeNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LoadBalancerAttributeNotFoundException) Error() string {
@@ -262,6 +290,8 @@ func (e *LoadBalancerAttributeNotFoundException) ErrorFault() smithy.ErrorFault 
 // This operation is not allowed.
 type OperationNotPermittedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotPermittedException) Error() string {
@@ -279,6 +309,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // One or more of the specified policies do not exist.
 type PolicyNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyNotFoundException) Error() string {
@@ -296,6 +328,8 @@ func (e *PolicyNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // One or more of the specified policy types do not exist.
 type PolicyTypeNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyTypeNotFoundException) Error() string {
@@ -313,6 +347,8 @@ func (e *PolicyTypeNotFoundException) ErrorFault() smithy.ErrorFault { return sm
 // One or more of the specified subnets do not exist.
 type SubnetNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetNotFoundException) Error() string {
@@ -330,6 +366,8 @@ func (e *SubnetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // The quota for the number of load balancers has been reached.
 type TooManyAccessPointsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyAccessPointsException) Error() string {
@@ -347,6 +385,8 @@ func (e *TooManyAccessPointsException) ErrorFault() smithy.ErrorFault { return s
 // The quota for the number of policies for this load balancer has been reached.
 type TooManyPoliciesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyPoliciesException) Error() string {
@@ -365,6 +405,8 @@ func (e *TooManyPoliciesException) ErrorFault() smithy.ErrorFault { return smith
 // been reached.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -382,6 +424,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The specified protocol or signature version is not supported.
 type UnsupportedProtocolException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedProtocolException) Error() string {

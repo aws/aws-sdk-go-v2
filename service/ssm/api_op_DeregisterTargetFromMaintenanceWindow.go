@@ -42,6 +42,8 @@ type DeregisterTargetFromMaintenanceWindowInput struct {
 	// being referenced, the system returns an error and doesn't deregister the target
 	// from the maintenance window.
 	Safe bool
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterTargetFromMaintenanceWindowOutput struct {
@@ -54,6 +56,8 @@ type DeregisterTargetFromMaintenanceWindowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterTargetFromMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {

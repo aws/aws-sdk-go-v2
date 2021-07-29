@@ -99,6 +99,8 @@ type AddPermissionInput struct {
 	// For Amazon Web Services services, the ARN of the Amazon Web Services resource
 	// that invokes the function. For example, an Amazon S3 bucket or Amazon SNS topic.
 	SourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AddPermissionOutput struct {
@@ -108,6 +110,8 @@ type AddPermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,11 +43,15 @@ type TagAttendeeInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type TagAttendeeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {

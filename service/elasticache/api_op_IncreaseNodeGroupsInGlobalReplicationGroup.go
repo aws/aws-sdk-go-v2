@@ -48,6 +48,8 @@ type IncreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// Describes the replication group IDs, the AWS regions where they are stored and
 	// the shard configuration for each that comprise the Global datastore
 	RegionalConfigurations []types.RegionalConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type IncreaseNodeGroupsInGlobalReplicationGroupOutput struct {
@@ -63,6 +65,8 @@ type IncreaseNodeGroupsInGlobalReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIncreaseNodeGroupsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

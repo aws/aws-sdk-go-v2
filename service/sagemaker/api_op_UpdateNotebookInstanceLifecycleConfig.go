@@ -43,11 +43,15 @@ type UpdateNotebookInstanceLifecycleConfigInput struct {
 	// when you create the notebook instance. The shell script must be a base64-encoded
 	// string.
 	OnStart []types.NotebookInstanceLifecycleHook
+
+	noSmithyDocumentSerde
 }
 
 type UpdateNotebookInstanceLifecycleConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

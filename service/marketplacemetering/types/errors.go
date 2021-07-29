@@ -11,6 +11,8 @@ import (
 // product.
 type CustomerNotEntitledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomerNotEntitledException) Error() string {
@@ -28,6 +30,8 @@ func (e *CustomerNotEntitledException) ErrorFault() smithy.ErrorFault { return s
 // The API is disabled in the Region.
 type DisabledApiException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DisabledApiException) Error() string {
@@ -47,6 +51,8 @@ func (e *DisabledApiException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // usageQuantity.
 type DuplicateRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateRequestException) Error() string {
@@ -68,6 +74,8 @@ func (e *DuplicateRequestException) ErrorFault() smithy.ErrorFault { return smit
 // it is submitted by the buyer's browser.
 type ExpiredTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredTokenException) Error() string {
@@ -86,6 +94,8 @@ func (e *ExpiredTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 // post a message with details on the AWS forums.
 type InternalServiceErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceErrorException) Error() string {
@@ -103,6 +113,8 @@ func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return 
 // You have metered usage for a CustomerIdentifier that does not exist.
 type InvalidCustomerIdentifierException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCustomerIdentifierException) Error() string {
@@ -126,6 +138,8 @@ func (e *InvalidCustomerIdentifierException) ErrorFault() smithy.ErrorFault {
 // Region of the resource must match.
 type InvalidEndpointRegionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEndpointRegionException) Error() string {
@@ -144,6 +158,8 @@ func (e *InvalidEndpointRegionException) ErrorFault() smithy.ErrorFault { return
 // product.
 type InvalidProductCodeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidProductCodeException) Error() string {
@@ -161,6 +177,8 @@ func (e *InvalidProductCodeException) ErrorFault() smithy.ErrorFault { return sm
 // Public Key version is invalid.
 type InvalidPublicKeyVersionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPublicKeyVersionException) Error() string {
@@ -182,6 +200,8 @@ func (e *InvalidPublicKeyVersionException) ErrorFault() smithy.ErrorFault { retu
 // withRegion(“us-east-1”) when calling RegisterUsage.
 type InvalidRegionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRegionException) Error() string {
@@ -199,6 +219,8 @@ func (e *InvalidRegionException) ErrorFault() smithy.ErrorFault { return smithy.
 // The tag is invalid, or the number of tags is greater than 5.
 type InvalidTagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagException) Error() string {
@@ -216,6 +238,8 @@ func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Registration token is invalid.
 type InvalidTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTokenException) Error() string {
@@ -234,6 +258,8 @@ func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 // greater than 500 for a single usage record.
 type InvalidUsageAllocationsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUsageAllocationsException) Error() string {
@@ -254,6 +280,8 @@ func (e *InvalidUsageAllocationsException) ErrorFault() smithy.ErrorFault { retu
 // products.
 type InvalidUsageDimensionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUsageDimensionException) Error() string {
@@ -272,6 +300,8 @@ func (e *InvalidUsageDimensionException) ErrorFault() smithy.ErrorFault { return
 // Currently, Amazon ECS, Amazon EKS, and AWS Fargate are supported.
 type PlatformNotSupportedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PlatformNotSupportedException) Error() string {
@@ -289,6 +319,8 @@ func (e *PlatformNotSupportedException) ErrorFault() smithy.ErrorFault { return 
 // The calls to the API are throttled.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -306,6 +338,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The timestamp value passed in the meterUsage() is out of allowed range.
 type TimestampOutOfBoundsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TimestampOutOfBoundsException) Error() string {

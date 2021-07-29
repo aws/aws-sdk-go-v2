@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // An object that identifies an item. The and APIs return a list of PredictedItems.
 type PredictedItem struct {
 
@@ -11,4 +15,8 @@ type PredictedItem struct {
 	// A numeric representation of the model's certainty that the item will be the next
 	// user selection. For more information on scoring logic, see how-scores-work.
 	Score *float64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

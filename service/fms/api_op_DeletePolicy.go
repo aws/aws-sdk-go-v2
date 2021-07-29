@@ -64,11 +64,15 @@ type DeletePolicyInput struct {
 	// handled by the policy. All others are out of scope. If you don't specify tags or
 	// accounts, all resources are in scope.
 	DeleteAllPolicyResources bool
+
+	noSmithyDocumentSerde
 }
 
 type DeletePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

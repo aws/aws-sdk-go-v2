@@ -70,6 +70,8 @@ type StartContentModerationInput struct {
 	// The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the
 	// completion status of the unsafe content analysis to.
 	NotificationChannel *types.NotificationChannel
+
+	noSmithyDocumentSerde
 }
 
 type StartContentModerationOutput struct {
@@ -80,6 +82,8 @@ type StartContentModerationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartContentModerationMiddlewares(stack *middleware.Stack, options Options) (err error) {

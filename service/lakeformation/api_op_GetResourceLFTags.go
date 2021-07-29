@@ -42,6 +42,8 @@ type GetResourceLFTagsInput struct {
 
 	// Indicates whether to show the assigned tags.
 	ShowAssignedLFTags *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceLFTagsOutput struct {
@@ -57,6 +59,8 @@ type GetResourceLFTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

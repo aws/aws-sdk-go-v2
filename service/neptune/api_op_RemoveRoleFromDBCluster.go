@@ -43,11 +43,15 @@ type RemoveRoleFromDBClusterInput struct {
 	// disassociated from. For the list of supported feature names, see
 	// DBEngineVersion.
 	FeatureName *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveRoleFromDBClusterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveRoleFromDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

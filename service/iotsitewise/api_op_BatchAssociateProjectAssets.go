@@ -44,6 +44,8 @@ type BatchAssociateProjectAssetsInput struct {
 	// idempotency of the request. Don't reuse this client token if a new idempotent
 	// request is required.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchAssociateProjectAssetsOutput struct {
@@ -53,6 +55,8 @@ type BatchAssociateProjectAssetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchAssociateProjectAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

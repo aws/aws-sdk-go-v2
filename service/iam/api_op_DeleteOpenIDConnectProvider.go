@@ -39,11 +39,15 @@ type DeleteOpenIDConnectProviderInput struct {
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

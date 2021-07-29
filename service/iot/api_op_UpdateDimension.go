@@ -43,6 +43,8 @@ type UpdateDimensionInput struct {
 	//
 	// This member is required.
 	StringValues []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDimensionOutput struct {
@@ -70,6 +72,8 @@ type UpdateDimensionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {

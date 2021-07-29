@@ -37,11 +37,15 @@ type RevokeDomainAccessInput struct {
 	//
 	// This member is required.
 	FleetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeDomainAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeDomainAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

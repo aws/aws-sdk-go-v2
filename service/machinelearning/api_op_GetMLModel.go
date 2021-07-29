@@ -40,6 +40,8 @@ type GetMLModelInput struct {
 	// Specifies whether the GetMLModel operation should return Recipe. If true, Recipe
 	// is returned. If false, Recipe is not returned.
 	Verbose bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetMLModel operation, and provides detailed
@@ -187,6 +189,8 @@ type GetMLModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

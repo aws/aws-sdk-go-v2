@@ -41,11 +41,15 @@ type DeleteVpnConnectionRouteInput struct {
 	//
 	// This member is required.
 	VpnConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVpnConnectionRouteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVpnConnectionRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

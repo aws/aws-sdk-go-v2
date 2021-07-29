@@ -54,6 +54,8 @@ type CreateMemberInput struct {
 	//
 	// This member is required.
 	NetworkId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateMemberOutput struct {
@@ -63,6 +65,8 @@ type CreateMemberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

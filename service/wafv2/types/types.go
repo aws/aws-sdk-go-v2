@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type ActionCondition struct {
 	//
 	// This member is required.
 	Action ActionValue
+
+	noSmithyDocumentSerde
 }
 
 // Inspect all of the elements that WAF has parsed and extracted from the web
@@ -21,6 +24,7 @@ type ActionCondition struct {
 // FieldToMatch option JsonBody. This is used only to indicate the web request
 // component for WAF to inspect, in the FieldToMatch specification.
 type All struct {
+	noSmithyDocumentSerde
 }
 
 // Specifies that WAF should allow the request and optionally defines additional
@@ -34,11 +38,14 @@ type AllowAction struct {
 	// in the WAF Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 	CustomRequestHandling *CustomRequestHandling
+
+	noSmithyDocumentSerde
 }
 
 // All query arguments of a web request. This is used only to indicate the web
 // request component for WAF to inspect, in the FieldToMatch specification.
 type AllQueryArguments struct {
+	noSmithyDocumentSerde
 }
 
 // A logical rule statement used to combine other rule statements with AND logic.
@@ -50,6 +57,8 @@ type AndStatement struct {
 	//
 	// This member is required.
 	Statements []Statement
+
+	noSmithyDocumentSerde
 }
 
 // Specifies that WAF should block the request and optionally defines additional
@@ -64,12 +73,15 @@ type BlockAction struct {
 	// in the WAF Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 	CustomResponse *CustomResponse
+
+	noSmithyDocumentSerde
 }
 
 // The body of a web request. This immediately follows the request headers. This is
 // used only to indicate the web request component for WAF to inspect, in the
 // FieldToMatch specification.
 type Body struct {
+	noSmithyDocumentSerde
 }
 
 // A rule statement that defines a string match search for WAF to apply to web
@@ -147,6 +159,8 @@ type ByteMatchStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	noSmithyDocumentSerde
 }
 
 // A single match condition for a Filter.
@@ -157,6 +171,8 @@ type Condition struct {
 
 	// A single label name condition.
 	LabelNameCondition *LabelNameCondition
+
+	noSmithyDocumentSerde
 }
 
 // Specifies that WAF should count the request. Optionally defines additional
@@ -170,6 +186,8 @@ type CountAction struct {
 	// in the WAF Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 	CustomRequestHandling *CustomRequestHandling
+
+	noSmithyDocumentSerde
 }
 
 // A custom header for custom request and response handling. This is used in
@@ -188,6 +206,8 @@ type CustomHTTPHeader struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Custom request handling behavior that inserts custom headers into a web request.
@@ -208,6 +228,8 @@ type CustomRequestHandling struct {
 	//
 	// This member is required.
 	InsertHeaders []CustomHTTPHeader
+
+	noSmithyDocumentSerde
 }
 
 // A custom response to send to the client. You can define a custom response for
@@ -244,6 +266,8 @@ type CustomResponse struct {
 	// Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/waf-chapter.html).
 	ResponseHeaders []CustomHTTPHeader
+
+	noSmithyDocumentSerde
 }
 
 // The response body to use in a custom response to a web request. This is
@@ -265,6 +289,8 @@ type CustomResponseBody struct {
 	//
 	// This member is required.
 	ContentType ResponseContentType
+
+	noSmithyDocumentSerde
 }
 
 // In a WebACL, this is the action that you want WAF to perform when a web request
@@ -277,6 +303,8 @@ type DefaultAction struct {
 
 	// Specifies that WAF should block requests by default.
 	Block *BlockAction
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a single rule to exclude from the rule group. Excluding a rule
@@ -288,6 +316,8 @@ type ExcludedRule struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The part of a web request that you want WAF to inspect. Include the single
@@ -349,6 +379,8 @@ type FieldToMatch struct {
 	// Inspect the request URI path. This is the part of a web request that identifies
 	// a resource, for example, /images/daily-ad.jpg.
 	UriPath *UriPath
+
+	noSmithyDocumentSerde
 }
 
 // A single logging filter, used in LoggingFilter.
@@ -370,6 +402,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Requirement FilterRequirement
+
+	noSmithyDocumentSerde
 }
 
 // A rule group that's defined for an Firewall Manager WAF policy.
@@ -416,6 +450,8 @@ type FirewallManagerRuleGroup struct {
 	//
 	// This member is required.
 	VisibilityConfig *VisibilityConfig
+
+	noSmithyDocumentSerde
 }
 
 // The processing guidance for an Firewall Manager rule. This is like a regular
@@ -436,6 +472,8 @@ type FirewallManagerStatement struct {
 	// example for use inside a NotStatement or OrStatement. It can only be referenced
 	// as a top-level statement within a rule.
 	RuleGroupReferenceStatement *RuleGroupReferenceStatement
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for inspecting IP addresses in an HTTP header that you
@@ -469,6 +507,8 @@ type ForwardedIPConfig struct {
 	//
 	// This member is required.
 	HeaderName *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule statement used to identify web requests based on country of origin.
@@ -484,6 +524,8 @@ type GeoMatchStatement struct {
 	// any header name. If the specified header isn't present in the request, WAF
 	// doesn't apply the rule to the web request at all.
 	ForwardedIPConfig *ForwardedIPConfig
+
+	noSmithyDocumentSerde
 }
 
 // Part of the response from GetSampledRequests. This is a complex type that
@@ -496,6 +538,8 @@ type HTTPHeader struct {
 
 	// The value of the HTTP header.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Part of the response from GetSampledRequests. This is a complex type that
@@ -532,6 +576,8 @@ type HTTPRequest struct {
 	// The URI path of the request, which identifies the resource, for example,
 	// /images/daily-ad.jpg.
 	URI *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains one or more IP addresses or blocks of IP addresses specified in
@@ -596,6 +642,8 @@ type IPSet struct {
 
 	// A description of the IP set that helps with identification.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for inspecting IP addresses in an HTTP header that you
@@ -648,6 +696,8 @@ type IPSetForwardedIPConfig struct {
 	//
 	// This member is required.
 	Position ForwardedIPPosition
+
+	noSmithyDocumentSerde
 }
 
 // A rule statement used to detect web requests coming from particular IP addresses
@@ -670,6 +720,8 @@ type IPSetReferenceStatement struct {
 	// any header name. If the specified header isn't present in the request, WAF
 	// doesn't apply the rule to the web request at all.
 	IPSetForwardedIPConfig *IPSetForwardedIPConfig
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about an IPSet, returned by operations like create and
@@ -700,6 +752,8 @@ type IPSetSummary struct {
 	// The name of the IP set. You cannot change the name of an IPSet after you create
 	// it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The body of a web request, inspected as JSON. The body immediately follows the
@@ -750,6 +804,8 @@ type JsonBody struct {
 	// * Extra colons:
 	// {"key1"::"value1","key2""value2"}
 	InvalidFallbackBehavior BodyParsingFallbackBehavior
+
+	noSmithyDocumentSerde
 }
 
 // The patterns to look for in the JSON body. WAF inspects the results of these
@@ -769,6 +825,8 @@ type JsonMatchPattern struct {
 	// this setting or the All setting, but not both. Don't use this option to include
 	// all paths. Instead, use the All setting.
 	IncludedPaths []string
+
+	noSmithyDocumentSerde
 }
 
 // A single label container. This is used as an element of a label array in
@@ -780,6 +838,8 @@ type Label struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule statement that defines a string match search against labels that have
@@ -816,6 +876,8 @@ type LabelMatchStatement struct {
 	//
 	// This member is required.
 	Scope LabelMatchScope
+
+	noSmithyDocumentSerde
 }
 
 // A single label name condition for a Condition in a logging filter.
@@ -828,6 +890,8 @@ type LabelNameCondition struct {
 	//
 	// This member is required.
 	LabelName *string
+
+	noSmithyDocumentSerde
 }
 
 // List of labels used by one or more of the rules of a RuleGroup. This summary
@@ -844,6 +908,8 @@ type LabelSummary struct {
 
 	// An individual label specification.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines an association between Amazon Kinesis Data Firehose destinations and a
@@ -878,6 +944,8 @@ type LoggingConfiguration struct {
 	// you redact the HEADER field, the HEADER field in the firehose will be xxx. You
 	// must use one of the following values: URI, QUERY_STRING, HEADER, or METHOD.
 	RedactedFields []FieldToMatch
+
+	noSmithyDocumentSerde
 }
 
 // Filtering that specifies which web requests are kept in the logs and which are
@@ -896,6 +964,8 @@ type LoggingFilter struct {
 	//
 	// This member is required.
 	Filters []Filter
+
+	noSmithyDocumentSerde
 }
 
 // A rule statement used to run the rules that are defined in a managed rule group.
@@ -929,6 +999,8 @@ type ManagedRuleGroupStatement struct {
 	// in the scope-down statement, and you can nest statements at any level, the same
 	// as you can for a rule statement.
 	ScopeDownStatement *Statement
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a managed rule group, returned by
@@ -950,12 +1022,15 @@ type ManagedRuleGroupSummary struct {
 	// The name of the managed rule group vendor. You use this, along with the rule
 	// group name, to identify the rule group.
 	VendorName *string
+
+	noSmithyDocumentSerde
 }
 
 // The HTTP method of a web request. The method indicates the type of operation
 // that the request is asking the origin to perform. This is used only to indicate
 // the web request component for WAF to inspect, in the FieldToMatch specification.
 type Method struct {
+	noSmithyDocumentSerde
 }
 
 // Specifies that WAF should do nothing. This is generally used to try out a rule
@@ -963,6 +1038,7 @@ type Method struct {
 // used in the context of other settings, for example to specify values for
 // RuleAction and web ACL DefaultAction.
 type NoneAction struct {
+	noSmithyDocumentSerde
 }
 
 // A logical rule statement used to negate the results of another rule statement.
@@ -973,6 +1049,8 @@ type NotStatement struct {
 	//
 	// This member is required.
 	Statement *Statement
+
+	noSmithyDocumentSerde
 }
 
 // A logical rule statement used to combine other rule statements with OR logic.
@@ -984,6 +1062,8 @@ type OrStatement struct {
 	//
 	// This member is required.
 	Statements []Statement
+
+	noSmithyDocumentSerde
 }
 
 // The override action to apply to the rules in a rule group. Used only for rule
@@ -1006,12 +1086,15 @@ type OverrideAction struct {
 
 	// Don't override the rule action setting.
 	None *NoneAction
+
+	noSmithyDocumentSerde
 }
 
 // The query string of a web request. This is the part of a URL that appears after
 // a ? character, if any. This is used only to indicate the web request component
 // for WAF to inspect, in the FieldToMatch specification.
 type QueryString struct {
+	noSmithyDocumentSerde
 }
 
 // A rate-based rule tracks the rate of requests for each originating IP address,
@@ -1076,6 +1159,8 @@ type RateBasedStatement struct {
 	// nestable Statement in the scope-down statement, and you can nest statements at
 	// any level, the same as you can for a rule statement.
 	ScopeDownStatement *Statement
+
+	noSmithyDocumentSerde
 }
 
 // The set of IP addresses that are currently blocked for a rate-based statement.
@@ -1085,6 +1170,8 @@ type RateBasedStatementManagedKeysIPSet struct {
 	Addresses []string
 
 	IPAddressVersion IPAddressVersion
+
+	noSmithyDocumentSerde
 }
 
 // A single regular expression. This is used in a RegexPatternSet.
@@ -1092,6 +1179,8 @@ type Regex struct {
 
 	// The string representing the regular expression.
 	RegexString *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains one or more regular expressions. WAF assigns an ARN to each
@@ -1114,6 +1203,8 @@ type RegexPatternSet struct {
 
 	// The regular expression patterns in the set.
 	RegularExpressionList []Regex
+
+	noSmithyDocumentSerde
 }
 
 // A rule statement used to search web request components for matches with regular
@@ -1147,6 +1238,8 @@ type RegexPatternSetReferenceStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a RegexPatternSet, returned by operations like
@@ -1177,6 +1270,8 @@ type RegexPatternSetSummary struct {
 	// The name of the data type instance. You cannot change the name after you create
 	// the instance.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A single rule, which you can use in a WebACL or RuleGroup to identify web
@@ -1262,6 +1357,8 @@ type Rule struct {
 	// For example, myLabelName or
 	// nameSpace1:nameSpace2:myLabelName.
 	RuleLabels []Label
+
+	noSmithyDocumentSerde
 }
 
 // The action that WAF should take on a web request when it matches a rule's
@@ -1276,6 +1373,8 @@ type RuleAction struct {
 
 	// Instructs WAF to count the web request and allow it.
 	Count *CountAction
+
+	noSmithyDocumentSerde
 }
 
 // A rule group defines a collection of rules to inspect and control web requests
@@ -1365,6 +1464,8 @@ type RuleGroup struct {
 	// block, or count. Each rule includes one top-level statement that WAF uses to
 	// identify matching web requests, and parameters that govern how WAF handles them.
 	Rules []Rule
+
+	noSmithyDocumentSerde
 }
 
 // A rule statement used to run the rules that are defined in a RuleGroup. To use
@@ -1382,6 +1483,8 @@ type RuleGroupReferenceStatement struct {
 	// The names of rules that are in the referenced rule group, but that you want WAF
 	// to exclude from processing for this rule statement.
 	ExcludedRules []ExcludedRule
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a RuleGroup, returned by operations like create and
@@ -1412,6 +1515,8 @@ type RuleGroupSummary struct {
 	// The name of the data type instance. You cannot change the name after you create
 	// the instance.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a Rule, returned by operations like
@@ -1426,6 +1531,8 @@ type RuleSummary struct {
 
 	// The name of the rule.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single sampled web request. The response from GetSampledRequests
@@ -1473,6 +1580,8 @@ type SampledHTTPRequest struct {
 	// The time at which WAF received the request from your Amazon Web Services
 	// resource, in Unix time format (in seconds).
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // One of the headers in a web request, identified by name, for example, User-Agent
@@ -1484,6 +1593,8 @@ type SingleHeader struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // One query argument in a web request, identified by name, for example UserName or
@@ -1494,6 +1605,8 @@ type SingleQueryArgument struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule statement that compares a number of bytes against the size of a request
@@ -1532,6 +1645,8 @@ type SizeConstraintStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	noSmithyDocumentSerde
 }
 
 // Attackers sometimes insert malicious SQL code into web requests in an effort to
@@ -1557,6 +1672,8 @@ type SqliMatchStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	noSmithyDocumentSerde
 }
 
 // The processing guidance for a Rule, used by WAF to determine whether a web
@@ -1689,6 +1806,8 @@ type Statement struct {
 	// on the search area before WAF searches for character sequences that are likely
 	// to be malicious strings.
 	XssMatchStatement *XssMatchStatement
+
+	noSmithyDocumentSerde
 }
 
 // A tag associated with an Amazon Web Services resource. Tags are key:value pairs
@@ -1715,6 +1834,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The collection of tagging definitions for an Amazon Web Services resource. Tags
@@ -1734,6 +1855,8 @@ type TagInfoForResource struct {
 
 	// The array of Tag objects defined for the resource.
 	TagList []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Text transformations eliminate some of the unusual formatting that attackers use
@@ -1847,6 +1970,8 @@ type TextTransformation struct {
 	//
 	// This member is required.
 	Type TextTransformationType
+
+	noSmithyDocumentSerde
 }
 
 // In a GetSampledRequests request, the StartTime and EndTime objects specify the
@@ -1880,6 +2005,8 @@ type TimeWindow struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The path component of the URI of a web request. This is the part of a web
@@ -1887,6 +2014,7 @@ type TimeWindow struct {
 // used only to indicate the web request component for WAF to inspect, in the
 // FieldToMatch specification.
 type UriPath struct {
+	noSmithyDocumentSerde
 }
 
 // Defines and enables Amazon CloudWatch metrics and web request sample collection.
@@ -1912,6 +2040,8 @@ type VisibilityConfig struct {
 	//
 	// This member is required.
 	SampledRequestsEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // A web ACL defines a collection of rules to use to inspect and control web
@@ -2021,6 +2151,8 @@ type WebACL struct {
 	// block, or count. Each rule includes one top-level statement that WAF uses to
 	// identify matching web requests, and parameters that govern how WAF handles them.
 	Rules []Rule
+
+	noSmithyDocumentSerde
 }
 
 // High-level information about a WebACL, returned by operations like create and
@@ -2051,6 +2183,8 @@ type WebACLSummary struct {
 	// The name of the web ACL. You cannot change the name of a web ACL after you
 	// create it.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule statement that defines a cross-site scripting (XSS) match search for WAF
@@ -2076,4 +2210,8 @@ type XssMatchStatement struct {
 	//
 	// This member is required.
 	TextTransformations []TextTransformation
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

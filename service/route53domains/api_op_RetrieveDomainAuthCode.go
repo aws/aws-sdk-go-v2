@@ -35,6 +35,8 @@ type RetrieveDomainAuthCodeInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The RetrieveDomainAuthCode response includes the following element.
@@ -47,6 +49,8 @@ type RetrieveDomainAuthCodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRetrieveDomainAuthCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

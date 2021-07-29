@@ -48,6 +48,8 @@ type UpdateThemeAliasInput struct {
 	//
 	// This member is required.
 	ThemeVersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateThemeAliasOutput struct {
@@ -63,6 +65,8 @@ type UpdateThemeAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

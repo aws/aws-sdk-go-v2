@@ -58,11 +58,15 @@ type ApproveAssignmentInput struct {
 	// A message for the Worker, which the Worker can see in the Status section of the
 	// web site.
 	RequesterFeedback *string
+
+	noSmithyDocumentSerde
 }
 
 type ApproveAssignmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationApproveAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

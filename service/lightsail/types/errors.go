@@ -15,6 +15,8 @@ type AccessDeniedException struct {
 	Code *string
 	Docs *string
 	Tip  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -37,6 +39,8 @@ type AccountSetupInProgressException struct {
 	Code *string
 	Docs *string
 	Tip  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccountSetupInProgressException) Error() string {
@@ -63,6 +67,8 @@ type InvalidInputException struct {
 	Code *string
 	Docs *string
 	Tip  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -84,6 +90,8 @@ type NotFoundException struct {
 	Code *string
 	Docs *string
 	Tip  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -105,6 +113,8 @@ type OperationFailureException struct {
 	Code *string
 	Docs *string
 	Tip  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationFailureException) Error() string {
@@ -126,6 +136,8 @@ type ServiceException struct {
 	Code *string
 	Docs *string
 	Tip  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceException) Error() string {
@@ -147,6 +159,8 @@ type UnauthenticatedException struct {
 	Code *string
 	Docs *string
 	Tip  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthenticatedException) Error() string {

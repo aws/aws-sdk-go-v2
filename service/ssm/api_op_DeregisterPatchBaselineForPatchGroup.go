@@ -37,6 +37,8 @@ type DeregisterPatchBaselineForPatchGroupInput struct {
 	//
 	// This member is required.
 	PatchGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterPatchBaselineForPatchGroupOutput struct {
@@ -49,6 +51,8 @@ type DeregisterPatchBaselineForPatchGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

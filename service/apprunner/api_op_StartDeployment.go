@@ -40,6 +40,8 @@ type StartDeploymentInput struct {
 	//
 	// This member is required.
 	ServiceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StartDeploymentOutput struct {
@@ -52,6 +54,8 @@ type StartDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

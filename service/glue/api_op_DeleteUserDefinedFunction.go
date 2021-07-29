@@ -41,11 +41,15 @@ type DeleteUserDefinedFunctionInput struct {
 	// The ID of the Data Catalog where the function to be deleted is located. If none
 	// is supplied, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserDefinedFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

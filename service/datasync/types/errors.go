@@ -12,6 +12,8 @@ type InternalException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalException) Error() string {
@@ -31,6 +33,8 @@ type InvalidRequestException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {

@@ -42,6 +42,8 @@ type ListCrawlersInput struct {
 
 	// Specifies to return only these tagged resources.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type ListCrawlersOutput struct {
@@ -56,6 +58,8 @@ type ListCrawlersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCrawlersMiddlewares(stack *middleware.Stack, options Options) (err error) {

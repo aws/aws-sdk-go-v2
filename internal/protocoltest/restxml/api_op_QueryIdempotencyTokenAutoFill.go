@@ -28,11 +28,15 @@ func (c *Client) QueryIdempotencyTokenAutoFill(ctx context.Context, params *Quer
 
 type QueryIdempotencyTokenAutoFillInput struct {
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 type QueryIdempotencyTokenAutoFillOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryIdempotencyTokenAutoFillMiddlewares(stack *middleware.Stack, options Options) (err error) {

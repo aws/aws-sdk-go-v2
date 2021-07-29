@@ -56,6 +56,8 @@ type DescribeDataRepositoryTasksInput struct {
 
 	// (Optional) IDs of the tasks whose descriptions you want to retrieve (String).
 	TaskIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDataRepositoryTasksOutput struct {
@@ -70,6 +72,8 @@ type DescribeDataRepositoryTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDataRepositoryTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

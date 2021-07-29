@@ -45,11 +45,15 @@ type CompleteAttachmentUploadInput struct {
 	//
 	// This member is required.
 	ConnectionToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CompleteAttachmentUploadOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCompleteAttachmentUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

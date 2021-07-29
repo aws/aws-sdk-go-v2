@@ -39,12 +39,16 @@ type DeleteConditionalForwarderInput struct {
 	//
 	// This member is required.
 	RemoteDomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DeleteConditionalForwarder request.
 type DeleteConditionalForwarderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConditionalForwarderMiddlewares(stack *middleware.Stack, options Options) (err error) {

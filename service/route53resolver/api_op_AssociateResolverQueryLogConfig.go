@@ -47,6 +47,8 @@ type AssociateResolverQueryLogConfigInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateResolverQueryLogConfigOutput struct {
@@ -57,6 +59,8 @@ type AssociateResolverQueryLogConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateResolverQueryLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

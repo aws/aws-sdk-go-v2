@@ -35,6 +35,8 @@ type ListTopicsInput struct {
 
 	// Token returned by the previous ListTopics request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Response for ListTopics action.
@@ -49,6 +51,8 @@ type ListTopicsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTopicsMiddlewares(stack *middleware.Stack, options Options) (err error) {

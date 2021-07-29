@@ -44,6 +44,8 @@ type UpdateObjectAttributesInput struct {
 	//
 	// This member is required.
 	ObjectReference *types.ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 type UpdateObjectAttributesOutput struct {
@@ -53,6 +55,8 @@ type UpdateObjectAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateObjectAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

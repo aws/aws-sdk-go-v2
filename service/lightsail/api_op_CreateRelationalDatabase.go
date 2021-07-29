@@ -195,6 +195,8 @@ type CreateRelationalDatabaseInput struct {
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateRelationalDatabaseOutput struct {
@@ -206,6 +208,8 @@ type CreateRelationalDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,11 +44,15 @@ type UpdateConfigurationSetReputationMetricsEnabledInput struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConfigurationSetReputationMetricsEnabledOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConfigurationSetReputationMetricsEnabledMiddlewares(stack *middleware.Stack, options Options) (err error) {

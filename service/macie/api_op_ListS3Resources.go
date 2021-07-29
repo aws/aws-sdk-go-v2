@@ -47,6 +47,8 @@ type ListS3ResourcesInput struct {
 	// nextToken in the request with the value of nextToken from the previous response
 	// to continue listing data.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListS3ResourcesOutput struct {
@@ -62,6 +64,8 @@ type ListS3ResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

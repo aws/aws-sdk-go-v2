@@ -45,6 +45,8 @@ type DeleteBotVersionInput struct {
 	// Set the skipResourceInUseCheck parameter to true to skip this check and remove
 	// the version even if an alias points to it.
 	SkipResourceInUseCheck bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBotVersionOutput struct {
@@ -60,6 +62,8 @@ type DeleteBotVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type DescribeBrokerInput struct {
 	//
 	// This member is required.
 	BrokerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBrokerOutput struct {
@@ -142,6 +144,8 @@ type DescribeBrokerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {

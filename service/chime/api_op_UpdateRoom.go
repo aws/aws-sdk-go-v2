@@ -42,6 +42,8 @@ type UpdateRoomInput struct {
 
 	// The room name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRoomOutput struct {
@@ -51,6 +53,8 @@ type UpdateRoomOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

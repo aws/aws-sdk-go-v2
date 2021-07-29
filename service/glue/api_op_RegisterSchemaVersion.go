@@ -55,6 +55,8 @@ type RegisterSchemaVersionInput struct {
 	//
 	// This member is required.
 	SchemaId *types.SchemaId
+
+	noSmithyDocumentSerde
 }
 
 type RegisterSchemaVersionOutput struct {
@@ -71,6 +73,8 @@ type RegisterSchemaVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -31,6 +31,8 @@ type DescribeAccountAttributesInput struct {
 
 	// A list of attribute names.
 	AttributeNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountAttributesOutput struct {
@@ -40,6 +42,8 @@ type DescribeAccountAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

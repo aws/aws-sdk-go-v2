@@ -46,11 +46,15 @@ type RemoveRoleFromDBInstanceInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveRoleFromDBInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveRoleFromDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

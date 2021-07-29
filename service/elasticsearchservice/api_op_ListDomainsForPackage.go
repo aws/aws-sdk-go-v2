@@ -42,6 +42,8 @@ type ListDomainsForPackageInput struct {
 	// Used for pagination. Only necessary if a previous API call includes a non-null
 	// NextToken value. If provided, returns results for the next page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response parameters to ListDomainsForPackage operation.
@@ -54,6 +56,8 @@ type ListDomainsForPackageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainsForPackageMiddlewares(stack *middleware.Stack, options Options) (err error) {

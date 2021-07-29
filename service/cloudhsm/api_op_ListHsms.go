@@ -45,6 +45,8 @@ type ListHsmsInput struct {
 	// The NextToken value from a previous call to ListHsms. Pass null if this is the
 	// first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the ListHsms operation.
@@ -59,6 +61,8 @@ type ListHsmsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHsmsMiddlewares(stack *middleware.Stack, options Options) (err error) {

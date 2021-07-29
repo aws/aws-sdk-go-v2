@@ -52,6 +52,8 @@ type CreateSiteInput struct {
 
 	// The tags to apply to the resource during creation.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateSiteOutput struct {
@@ -61,6 +63,8 @@ type CreateSiteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSiteMiddlewares(stack *middleware.Stack, options Options) (err error) {

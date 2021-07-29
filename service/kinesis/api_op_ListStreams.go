@@ -45,6 +45,8 @@ type ListStreamsInput struct {
 
 	// The maximum number of streams to list.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output for ListStreams.
@@ -63,6 +65,8 @@ type ListStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

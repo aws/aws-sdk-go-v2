@@ -232,6 +232,8 @@ type CreateChangeSetInput struct {
 	// Whether to reuse the template that is associated with the stack to create the
 	// change set.
 	UsePreviousTemplate *bool
+
+	noSmithyDocumentSerde
 }
 
 // The output for the CreateChangeSet action.
@@ -245,6 +247,8 @@ type CreateChangeSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

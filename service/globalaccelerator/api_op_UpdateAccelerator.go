@@ -48,6 +48,8 @@ type UpdateAcceleratorInput struct {
 	// contain only alphanumeric characters or hyphens (-), and must not begin or end
 	// with a hyphen.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAcceleratorOutput struct {
@@ -57,6 +59,8 @@ type UpdateAcceleratorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

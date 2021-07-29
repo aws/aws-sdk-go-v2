@@ -58,6 +58,8 @@ type GetFunctionConfigurationInput struct {
 	// Specify a version or alias to get details about a published version of the
 	// function.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a function's configuration.
@@ -168,6 +170,8 @@ type GetFunctionConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFunctionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

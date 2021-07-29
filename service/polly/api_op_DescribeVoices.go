@@ -59,6 +59,8 @@ type DescribeVoicesInput struct {
 	// An opaque pagination token returned from the previous DescribeVoices operation.
 	// If present, this indicates where to continue the listing.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVoicesOutput struct {
@@ -72,6 +74,8 @@ type DescribeVoicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVoicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

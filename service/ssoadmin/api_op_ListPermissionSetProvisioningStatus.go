@@ -47,6 +47,8 @@ type ListPermissionSetProvisioningStatusInput struct {
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPermissionSetProvisioningStatusOutput struct {
@@ -60,6 +62,8 @@ type ListPermissionSetProvisioningStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPermissionSetProvisioningStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

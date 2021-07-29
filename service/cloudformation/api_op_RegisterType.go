@@ -123,6 +123,8 @@ type RegisterTypeInput struct {
 
 	// The kind of extension.
 	Type types.RegistryType
+
+	noSmithyDocumentSerde
 }
 
 type RegisterTypeOutput struct {
@@ -134,6 +136,8 @@ type RegisterTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

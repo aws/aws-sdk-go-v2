@@ -52,6 +52,8 @@ type CreateApplicationVersionInput struct {
 
 	// A link to the packaged AWS SAM template of your application.
 	TemplateUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateApplicationVersionOutput struct {
@@ -123,6 +125,8 @@ type CreateApplicationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

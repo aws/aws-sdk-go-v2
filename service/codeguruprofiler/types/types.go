@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -48,6 +49,8 @@ type AgentConfiguration struct {
 	// * SamplingIntervalInMilliseconds - The
 	// sampling interval in milliseconds that is used to profile samples.
 	AgentParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies whether profiling is enabled or disabled for a profiling group. It is
@@ -61,6 +64,8 @@ type AgentOrchestrationConfig struct {
 	//
 	// This member is required.
 	ProfilingEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the aggregation period and aggregation start time for an aggregated
@@ -88,6 +93,8 @@ type AggregatedProfileTime struct {
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
 	Start *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Details about an anomaly in a specific metric of application profile. The
@@ -110,6 +117,8 @@ type Anomaly struct {
 	//
 	// This member is required.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // The specific duration in which the metric is flagged as anomalous.
@@ -136,6 +145,8 @@ type AnomalyInstance struct {
 
 	// Feedback type on a specific instance of anomaly submitted by the user.
 	UserFeedback *UserFeedback
+
+	noSmithyDocumentSerde
 }
 
 // Notification medium for users to get alerted for events that occur in
@@ -159,6 +170,8 @@ type Channel struct {
 	// Profiling Group. A random UUID for channelId is used when adding a channel to
 	// the notification configuration if not specified in the request.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about potential recommendations that might be created from the
@@ -183,6 +196,8 @@ type FindingsReportSummary struct {
 
 	// The total number of different recommendations that were found by the analysis.
 	TotalNumberOfFindings *int32
+
+	noSmithyDocumentSerde
 }
 
 // The frame name, metric type, and thread states. These are used to derive the
@@ -208,6 +223,8 @@ type FrameMetric struct {
 	//
 	// This member is required.
 	Type MetricType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a frame metric and its values.
@@ -223,6 +240,8 @@ type FrameMetricDatum struct {
 	//
 	// This member is required.
 	Values []float64
+
+	noSmithyDocumentSerde
 }
 
 // The part of a profile that contains a recommendation found during analysis.
@@ -237,6 +256,8 @@ type Match struct {
 
 	// The value in the profile data that exceeded the recommendation threshold.
 	ThresholdBreachValue *float64
+
+	noSmithyDocumentSerde
 }
 
 // Details about the metric that the analysis used when it detected the anomaly.
@@ -262,6 +283,8 @@ type Metric struct {
 	//
 	// This member is required.
 	Type MetricType
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for notifications stored for each profiling group. This
@@ -272,6 +295,8 @@ type NotificationConfiguration struct {
 	// List of up to two channels to be used for sending notifications for events
 	// detected from the application profile.
 	Channels []Channel
+
+	noSmithyDocumentSerde
 }
 
 // A set of rules used to make a recommendation during an analysis.
@@ -302,6 +327,8 @@ type Pattern struct {
 	// recommendation. The percentage of time is the same as the percentage of the
 	// total gathered sample counts during analysis.
 	ThresholdPercent float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the start time of a profile.
@@ -311,6 +338,8 @@ type ProfileTime struct {
 	// example, 2020-06-01T13:15:02.001Z represents 1 millisecond past June 1, 2020
 	// 1:15:02 PM UTC.
 	Start *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a profiling group.
@@ -353,6 +382,8 @@ type ProfilingGroupDescription struct {
 	// ISO 8601 format. For example, 2020-06-01T13:15:02.001Z represents 1 millisecond
 	// past June 1, 2020 1:15:02 PM UTC.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Profiling status includes information about the last time a profile agent pinged
@@ -375,6 +406,8 @@ type ProfilingStatus struct {
 	// object that contains the aggregation period and start time for an aggregated
 	// profile.
 	LatestAggregatedProfile *AggregatedProfileTime
+
+	noSmithyDocumentSerde
 }
 
 // A potential improvement that was found from analyzing the profiling data.
@@ -413,6 +446,8 @@ type Recommendation struct {
 	//
 	// This member is required.
 	TopMatches []Match
+
+	noSmithyDocumentSerde
 }
 
 // A data type that contains a Timestamp object. This is specified using the ISO
@@ -426,6 +461,8 @@ type TimestampStructure struct {
 	//
 	// This member is required.
 	Value *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Feedback that can be submitted for each instance of an anomaly by the user.
@@ -438,4 +475,8 @@ type UserFeedback struct {
 	//
 	// This member is required.
 	Type FeedbackType
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

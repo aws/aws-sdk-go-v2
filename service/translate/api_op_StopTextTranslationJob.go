@@ -39,6 +39,8 @@ type StopTextTranslationJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopTextTranslationJobOutput struct {
@@ -52,6 +54,8 @@ type StopTextTranslationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

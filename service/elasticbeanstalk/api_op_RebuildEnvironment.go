@@ -39,11 +39,15 @@ type RebuildEnvironmentInput struct {
 	// or an EnvironmentId, or both. If you do not specify either, AWS Elastic
 	// Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 type RebuildEnvironmentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebuildEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type DescribeClustersInput struct {
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClustersOutput struct {
@@ -65,6 +67,8 @@ type DescribeClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

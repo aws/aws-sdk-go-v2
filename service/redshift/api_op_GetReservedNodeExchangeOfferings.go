@@ -44,6 +44,8 @@ type GetReservedNodeExchangeOfferingsInput struct {
 
 	// An integer setting the maximum number of ReservedNodeOfferings to retrieve.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetReservedNodeExchangeOfferingsOutput struct {
@@ -61,6 +63,8 @@ type GetReservedNodeExchangeOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReservedNodeExchangeOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

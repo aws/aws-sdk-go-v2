@@ -33,11 +33,15 @@ type DeleteReplicationConfigurationTemplateInput struct {
 	//
 	// This member is required.
 	ReplicationConfigurationTemplateID *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteReplicationConfigurationTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReplicationConfigurationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type ListAgentsInput struct {
 	// An opaque string that indicates the position at which to begin the next list of
 	// agents.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // ListAgentsResponse
@@ -58,6 +60,8 @@ type ListAgentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAgentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,11 +47,15 @@ type CreatePartitionInput struct {
 	// The Amazon Web Services account ID of the catalog in which the partition is to
 	// be created.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePartitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

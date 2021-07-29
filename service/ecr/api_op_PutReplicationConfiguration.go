@@ -43,6 +43,8 @@ type PutReplicationConfigurationInput struct {
 	//
 	// This member is required.
 	ReplicationConfiguration *types.ReplicationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutReplicationConfigurationOutput struct {
@@ -52,6 +54,8 @@ type PutReplicationConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

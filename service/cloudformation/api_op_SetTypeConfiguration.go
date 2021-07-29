@@ -71,6 +71,8 @@ type SetTypeConfigurationInput struct {
 	// The name of the extension. Conditional: You must specify ConfigurationArn, or
 	// Type and TypeName.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 type SetTypeConfigurationOutput struct {
@@ -81,6 +83,8 @@ type SetTypeConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetTypeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type RevokeEndpointAccessInput struct {
 
 	// The virtual private cloud (VPC) identifiers for which access is to be revoked.
 	VpcIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
@@ -78,6 +80,8 @@ type RevokeEndpointAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type DeleteChapCredentialsInput struct {
 	//
 	// This member is required.
 	TargetARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -60,6 +62,8 @@ type DeleteChapCredentialsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteChapCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

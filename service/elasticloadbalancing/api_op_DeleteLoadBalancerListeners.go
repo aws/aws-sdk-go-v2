@@ -38,12 +38,16 @@ type DeleteLoadBalancerListenersInput struct {
 	//
 	// This member is required.
 	LoadBalancerPorts []int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DeleteLoadBalancerListeners.
 type DeleteLoadBalancerListenersOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLoadBalancerListenersMiddlewares(stack *middleware.Stack, options Options) (err error) {

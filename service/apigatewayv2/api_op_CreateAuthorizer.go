@@ -115,6 +115,8 @@ type CreateAuthorizerInput struct {
 	// Represents the configuration of a JWT authorizer. Required for the JWT
 	// authorizer type. Supported only for HTTP APIs.
 	JwtConfiguration *types.JWTConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type CreateAuthorizerOutput struct {
@@ -198,6 +200,8 @@ type CreateAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

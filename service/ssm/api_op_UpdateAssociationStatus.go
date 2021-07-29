@@ -44,6 +44,8 @@ type UpdateAssociationStatusInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAssociationStatusOutput struct {
@@ -53,6 +55,8 @@ type UpdateAssociationStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAssociationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

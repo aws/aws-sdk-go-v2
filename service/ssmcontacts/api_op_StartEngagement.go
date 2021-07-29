@@ -65,6 +65,8 @@ type StartEngagementInput struct {
 	// The insecure subject of the message that was sent to the contact. Use this field
 	// for engagements to SMS.
 	PublicSubject *string
+
+	noSmithyDocumentSerde
 }
 
 type StartEngagementOutput struct {
@@ -76,6 +78,8 @@ type StartEngagementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {

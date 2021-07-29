@@ -74,6 +74,8 @@ type PutSessionInput struct {
 	// * If the value is text/plain;
 	// charset=utf-8, Amazon Lex V2 returns text in the response.
 	ResponseContentType *string
+
+	noSmithyDocumentSerde
 }
 
 type PutSessionOutput struct {
@@ -106,6 +108,8 @@ type PutSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

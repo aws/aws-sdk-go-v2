@@ -34,6 +34,8 @@ type DescribeReservationInput struct {
 	//
 	// This member is required.
 	ReservationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DescribeReservationResponse
@@ -98,6 +100,8 @@ type DescribeReservationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {

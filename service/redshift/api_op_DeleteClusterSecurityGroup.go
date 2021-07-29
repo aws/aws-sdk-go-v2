@@ -38,11 +38,15 @@ type DeleteClusterSecurityGroupInput struct {
 	//
 	// This member is required.
 	ClusterSecurityGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteClusterSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteClusterSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

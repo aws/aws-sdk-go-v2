@@ -36,6 +36,8 @@ type ResetJobBookmarkInput struct {
 
 	// The unique run identifier associated with this job run.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetJobBookmarkOutput struct {
@@ -45,6 +47,8 @@ type ResetJobBookmarkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetJobBookmarkMiddlewares(stack *middleware.Stack, options Options) (err error) {

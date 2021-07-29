@@ -39,6 +39,8 @@ type UpdatePullRequestTitleInput struct {
 	//
 	// This member is required.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePullRequestTitleOutput struct {
@@ -50,6 +52,8 @@ type UpdatePullRequestTitleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePullRequestTitleMiddlewares(stack *middleware.Stack, options Options) (err error) {

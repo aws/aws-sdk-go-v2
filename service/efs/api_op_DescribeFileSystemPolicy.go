@@ -33,6 +33,8 @@ type DescribeFileSystemPolicyInput struct {
 	//
 	// This member is required.
 	FileSystemId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFileSystemPolicyOutput struct {
@@ -45,6 +47,8 @@ type DescribeFileSystemPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

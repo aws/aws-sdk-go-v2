@@ -12,6 +12,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -31,6 +33,8 @@ type InternalException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalException) Error() string {
@@ -52,6 +56,8 @@ type InvalidInputException struct {
 
 	ErrorCode_ *string
 	FieldName  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -73,6 +79,8 @@ type LimitExceededException struct {
 
 	ErrorCode_   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {

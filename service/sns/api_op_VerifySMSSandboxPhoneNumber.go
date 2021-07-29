@@ -47,12 +47,16 @@ type VerifySMSSandboxPhoneNumberInput struct {
 	//
 	// This member is required.
 	PhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // The destination phone number's verification status.
 type VerifySMSSandboxPhoneNumberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVerifySMSSandboxPhoneNumberMiddlewares(stack *middleware.Stack, options Options) (err error) {

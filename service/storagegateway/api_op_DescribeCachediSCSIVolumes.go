@@ -39,6 +39,8 @@ type DescribeCachediSCSIVolumesInput struct {
 	//
 	// This member is required.
 	VolumeARNs []string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -49,6 +51,8 @@ type DescribeCachediSCSIVolumesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCachediSCSIVolumesMiddlewares(stack *middleware.Stack, options Options) (err error) {

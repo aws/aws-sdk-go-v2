@@ -76,6 +76,8 @@ type CreateTemplateInput struct {
 	// a new version is created. Each version of the template maintains a description
 	// of the version in the VersionDescription field.
 	VersionDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTemplateOutput struct {
@@ -101,6 +103,8 @@ type CreateTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

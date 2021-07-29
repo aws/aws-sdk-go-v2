@@ -38,11 +38,15 @@ type UpdateDevicesInput struct {
 	//
 	// This member is required.
 	Devices []types.Device
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDevicesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

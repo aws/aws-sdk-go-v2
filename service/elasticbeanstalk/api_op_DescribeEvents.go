@@ -80,6 +80,8 @@ type DescribeEventsInput struct {
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to those
 	// associated with this application version.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Result message wrapping a list of event descriptions.
@@ -94,6 +96,8 @@ type DescribeEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

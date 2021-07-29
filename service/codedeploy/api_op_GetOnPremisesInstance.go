@@ -34,6 +34,8 @@ type GetOnPremisesInstanceInput struct {
 	//
 	// This member is required.
 	InstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetOnPremisesInstance operation.
@@ -44,6 +46,8 @@ type GetOnPremisesInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOnPremisesInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

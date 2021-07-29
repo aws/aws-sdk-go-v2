@@ -41,11 +41,15 @@ type PutConfigurationRecorderInput struct {
 	//
 	// This member is required.
 	ConfigurationRecorder *types.ConfigurationRecorder
+
+	noSmithyDocumentSerde
 }
 
 type PutConfigurationRecorderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConfigurationRecorderMiddlewares(stack *middleware.Stack, options Options) (err error) {

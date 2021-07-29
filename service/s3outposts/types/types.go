@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -29,6 +30,8 @@ type Endpoint struct {
 
 	// The status of the endpoint.
 	Status EndpointStatus
+
+	noSmithyDocumentSerde
 }
 
 // The container for the network interface.
@@ -36,4 +39,8 @@ type NetworkInterface struct {
 
 	// The ID for the network interface.
 	NetworkInterfaceId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

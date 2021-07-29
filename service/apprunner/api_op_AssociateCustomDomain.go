@@ -53,6 +53,8 @@ type AssociateCustomDomainInput struct {
 	// Set to true to associate the subdomain www.DomainName  with the App Runner
 	// service in addition to the base domain. Default: true
 	EnableWWWSubdomain *bool
+
+	noSmithyDocumentSerde
 }
 
 type AssociateCustomDomainOutput struct {
@@ -76,6 +78,8 @@ type AssociateCustomDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateCustomDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

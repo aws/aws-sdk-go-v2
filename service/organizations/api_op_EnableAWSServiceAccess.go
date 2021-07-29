@@ -52,11 +52,15 @@ type EnableAWSServiceAccessInput struct {
 	//
 	// This member is required.
 	ServicePrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableAWSServiceAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableAWSServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

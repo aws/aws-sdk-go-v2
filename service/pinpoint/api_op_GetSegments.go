@@ -43,6 +43,8 @@ type GetSegmentsInput struct {
 	// The NextToken string that specifies which page of results to return in a
 	// paginated response.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSegmentsOutput struct {
@@ -55,6 +57,8 @@ type GetSegmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSegmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

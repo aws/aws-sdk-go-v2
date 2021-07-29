@@ -56,6 +56,8 @@ type GetTemplateInput struct {
 	// Processed. If the template doesn't include transforms, Original and Processed
 	// return the same template. By default, AWS CloudFormation specifies Processed.
 	TemplateStage types.TemplateStage
+
+	noSmithyDocumentSerde
 }
 
 // The output for GetTemplate action.
@@ -76,6 +78,8 @@ type GetTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

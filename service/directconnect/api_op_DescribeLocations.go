@@ -30,6 +30,7 @@ func (c *Client) DescribeLocations(ctx context.Context, params *DescribeLocation
 }
 
 type DescribeLocationsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeLocationsOutput struct {
@@ -39,6 +40,8 @@ type DescribeLocationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

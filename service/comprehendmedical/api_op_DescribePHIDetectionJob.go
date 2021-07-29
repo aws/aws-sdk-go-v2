@@ -35,6 +35,8 @@ type DescribePHIDetectionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePHIDetectionJobOutput struct {
@@ -44,6 +46,8 @@ type DescribePHIDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

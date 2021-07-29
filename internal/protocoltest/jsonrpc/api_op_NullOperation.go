@@ -31,6 +31,8 @@ type NullOperationInput struct {
 	SparseStringMap map[string]*string
 
 	String_ *string
+
+	noSmithyDocumentSerde
 }
 
 type NullOperationOutput struct {
@@ -42,6 +44,8 @@ type NullOperationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNullOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {

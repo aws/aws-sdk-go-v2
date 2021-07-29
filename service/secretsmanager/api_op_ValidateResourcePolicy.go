@@ -81,6 +81,8 @@ type ValidateResourcePolicyInput struct {
 	// suffix added by Secrets Manager, you receive either a ResourceNotFoundException
 	// or an AccessDeniedException error, depending on your permissions.
 	SecretId *string
+
+	noSmithyDocumentSerde
 }
 
 type ValidateResourcePolicyOutput struct {
@@ -93,6 +95,8 @@ type ValidateResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationValidateResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

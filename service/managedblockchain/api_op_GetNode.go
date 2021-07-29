@@ -43,6 +43,8 @@ type GetNodeInput struct {
 	// The unique identifier of the member that owns the node. Applies only to
 	// Hyperledger Fabric and is required for Hyperledger Fabric.
 	MemberId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetNodeOutput struct {
@@ -52,6 +54,8 @@ type GetNodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

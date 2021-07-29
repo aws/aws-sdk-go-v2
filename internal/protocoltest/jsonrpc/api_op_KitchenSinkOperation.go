@@ -80,6 +80,8 @@ type KitchenSinkOperationInput struct {
 	Timestamp *time.Time
 
 	UnixTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type KitchenSinkOperationOutput struct {
@@ -138,6 +140,8 @@ type KitchenSinkOperationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationKitchenSinkOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {

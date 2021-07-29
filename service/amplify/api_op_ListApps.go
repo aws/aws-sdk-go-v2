@@ -36,6 +36,8 @@ type ListAppsInput struct {
 	// A pagination token. If non-null, the pagination token is returned in a result.
 	// Pass its value in another request to retrieve more entries.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for an Amplify app list request.
@@ -53,6 +55,8 @@ type ListAppsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {

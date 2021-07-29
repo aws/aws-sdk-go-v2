@@ -121,6 +121,8 @@ type CreateGameSessionInput struct {
 	// A descriptive label that is associated with a game session. Session names do not
 	// need to be unique.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -131,6 +133,8 @@ type CreateGameSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

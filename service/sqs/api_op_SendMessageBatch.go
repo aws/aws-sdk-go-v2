@@ -58,6 +58,8 @@ type SendMessageBatchInput struct {
 	//
 	// This member is required.
 	QueueUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // For each message in the batch, the response contains a
@@ -78,6 +80,8 @@ type SendMessageBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendMessageBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

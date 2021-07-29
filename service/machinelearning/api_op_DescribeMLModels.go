@@ -121,6 +121,8 @@ type DescribeMLModelsInput struct {
 	// Results are sorted by
 	// FilterVariable.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeMLModels operation. The content is
@@ -136,6 +138,8 @@ type DescribeMLModelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMLModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

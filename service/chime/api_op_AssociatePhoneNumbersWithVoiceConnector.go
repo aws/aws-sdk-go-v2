@@ -43,6 +43,8 @@ type AssociatePhoneNumbersWithVoiceConnectorInput struct {
 	// Voice Connector and removes any previously existing associations. If false, does
 	// not associate any phone numbers that have previously existing associations.
 	ForceAssociate *bool
+
+	noSmithyDocumentSerde
 }
 
 type AssociatePhoneNumbersWithVoiceConnectorOutput struct {
@@ -53,6 +55,8 @@ type AssociatePhoneNumbersWithVoiceConnectorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociatePhoneNumbersWithVoiceConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

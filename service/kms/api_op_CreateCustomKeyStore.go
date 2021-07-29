@@ -97,6 +97,8 @@ type CreateCustomKeyStoreInput struct {
 	//
 	// This member is required.
 	TrustAnchorCertificate *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCustomKeyStoreOutput struct {
@@ -106,6 +108,8 @@ type CreateCustomKeyStoreOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

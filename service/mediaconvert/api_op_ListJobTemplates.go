@@ -52,6 +52,8 @@ type ListJobTemplatesInput struct {
 	// Optional. When you request lists of resources, you can specify whether they are
 	// sorted in ASCENDING or DESCENDING order. Default varies by resource.
 	Order types.Order
+
+	noSmithyDocumentSerde
 }
 
 type ListJobTemplatesOutput struct {
@@ -64,6 +66,8 @@ type ListJobTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

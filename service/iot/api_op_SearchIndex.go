@@ -46,6 +46,8 @@ type SearchIndexInput struct {
 
 	// The query version.
 	QueryVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchIndexOutput struct {
@@ -62,6 +64,8 @@ type SearchIndexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchIndexMiddlewares(stack *middleware.Stack, options Options) (err error) {

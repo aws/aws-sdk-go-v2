@@ -28,11 +28,15 @@ type QueryParamsAsStringListMapInput struct {
 	Foo map[string][]string
 
 	Qux *string
+
+	noSmithyDocumentSerde
 }
 
 type QueryParamsAsStringListMapOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryParamsAsStringListMapMiddlewares(stack *middleware.Stack, options Options) (err error) {

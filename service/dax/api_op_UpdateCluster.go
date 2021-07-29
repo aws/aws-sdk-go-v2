@@ -59,6 +59,8 @@ type UpdateClusterInput struct {
 	// DAX cluster. If this parameter is not specified, DAX assigns the default VPC
 	// security group to each node.
 	SecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateClusterOutput struct {
@@ -68,6 +70,8 @@ type UpdateClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

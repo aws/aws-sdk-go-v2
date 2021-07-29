@@ -48,6 +48,8 @@ type ListAppsInput struct {
 
 	// A parameter to search by user profile name.
 	UserProfileNameEquals *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAppsOutput struct {
@@ -61,6 +63,8 @@ type ListAppsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAppsMiddlewares(stack *middleware.Stack, options Options) (err error) {

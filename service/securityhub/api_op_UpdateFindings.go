@@ -42,11 +42,15 @@ type UpdateFindingsInput struct {
 
 	// The updated record state for the finding.
 	RecordState types.RecordState
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

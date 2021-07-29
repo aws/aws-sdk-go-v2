@@ -47,6 +47,8 @@ type MigrateWorkspaceInput struct {
 	//
 	// This member is required.
 	SourceWorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type MigrateWorkspaceOutput struct {
@@ -61,6 +63,8 @@ type MigrateWorkspaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMigrateWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

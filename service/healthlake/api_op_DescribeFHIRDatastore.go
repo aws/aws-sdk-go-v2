@@ -34,6 +34,8 @@ type DescribeFHIRDatastoreInput struct {
 	// The AWS-generated Data Store id. This is part of the ‘CreateFHIRDatastore’
 	// output.
 	DatastoreId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFHIRDatastoreOutput struct {
@@ -47,6 +49,8 @@ type DescribeFHIRDatastoreOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFHIRDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

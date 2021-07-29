@@ -62,6 +62,8 @@ type StartEventsDetectionJobInput struct {
 
 	// The identifier of the events detection job.
 	JobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StartEventsDetectionJobOutput struct {
@@ -75,6 +77,8 @@ type StartEventsDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartEventsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

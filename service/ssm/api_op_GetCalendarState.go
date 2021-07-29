@@ -52,6 +52,8 @@ type GetCalendarStateInput struct {
 	// information, in ISO 8601 (https://en.wikipedia.org/wiki/ISO_8601) format. If you
 	// don't specify a value or AtTime, the current time is used.
 	AtTime *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCalendarStateOutput struct {
@@ -74,6 +76,8 @@ type GetCalendarStateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCalendarStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

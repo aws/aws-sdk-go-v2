@@ -53,6 +53,8 @@ type DescribeVpcClassicLinkInput struct {
 
 	// One or more VPCs for which you want to describe the ClassicLink status.
 	VpcIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcClassicLinkOutput struct {
@@ -62,6 +64,8 @@ type DescribeVpcClassicLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcClassicLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

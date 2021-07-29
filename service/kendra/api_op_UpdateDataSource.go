@@ -56,11 +56,15 @@ type UpdateDataSourceInput struct {
 
 	// The new update schedule for the data source.
 	Schedule *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDataSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

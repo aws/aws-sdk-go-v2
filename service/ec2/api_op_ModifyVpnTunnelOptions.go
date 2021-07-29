@@ -54,6 +54,8 @@ type ModifyVpnTunnelOptionsInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type ModifyVpnTunnelOptionsOutput struct {
@@ -63,6 +65,8 @@ type ModifyVpnTunnelOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyVpnTunnelOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

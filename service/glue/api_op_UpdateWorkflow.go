@@ -44,6 +44,8 @@ type UpdateWorkflowInput struct {
 	// concurrent runs of any of the component jobs. If you leave this parameter blank,
 	// there is no limit to the number of concurrent workflow runs.
 	MaxConcurrentRuns *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWorkflowOutput struct {
@@ -53,6 +55,8 @@ type UpdateWorkflowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type ListDatasetsInput struct {
 
 	// An opaque pagination token indicating where to continue the listing of datasets.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDatasetsOutput struct {
@@ -52,6 +54,8 @@ type ListDatasetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

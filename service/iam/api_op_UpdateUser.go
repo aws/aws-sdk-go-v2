@@ -62,11 +62,15 @@ type UpdateUserInput struct {
 	// Names are not distinguished by case. For example, you cannot create resources
 	// named both "MyResource" and "myresource".
 	NewUserName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

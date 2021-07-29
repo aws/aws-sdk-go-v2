@@ -27,11 +27,14 @@ func (c *Client) DeleteAccountPasswordPolicy(ctx context.Context, params *Delete
 }
 
 type DeleteAccountPasswordPolicyInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeleteAccountPasswordPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

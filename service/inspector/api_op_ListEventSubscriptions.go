@@ -45,6 +45,8 @@ type ListEventSubscriptionsInput struct {
 	// The ARN of the assessment template for which you want to list the existing event
 	// subscriptions.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEventSubscriptionsOutput struct {
@@ -62,6 +64,8 @@ type ListEventSubscriptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

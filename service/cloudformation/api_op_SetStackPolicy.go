@@ -46,11 +46,15 @@ type SetStackPolicyInput struct {
 	// You can specify either the StackPolicyBody or the StackPolicyURL parameter, but
 	// not both.
 	StackPolicyURL *string
+
+	noSmithyDocumentSerde
 }
 
 type SetStackPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetStackPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

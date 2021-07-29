@@ -36,11 +36,15 @@ type DeletePlatformApplicationInput struct {
 	//
 	// This member is required.
 	PlatformApplicationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePlatformApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePlatformApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

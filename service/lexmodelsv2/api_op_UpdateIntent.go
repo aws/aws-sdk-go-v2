@@ -93,6 +93,8 @@ type UpdateIntentInput struct {
 
 	// A new list of slots and their priorities that are contained by the intent.
 	SlotPriorities []types.SlotPriority
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIntentOutput struct {
@@ -159,6 +161,8 @@ type UpdateIntentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {

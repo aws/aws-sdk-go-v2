@@ -9,6 +9,8 @@ import (
 	"encoding/json"
 	"fmt"
 	"github.com/aws/aws-sdk-go-v2/aws/protocol/restjson"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/internal/document"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/types"
 	smithy "github.com/aws/smithy-go"
 	smithyio "github.com/aws/smithy-go/io"
@@ -1420,11 +1422,11 @@ func awsAwsjson11_deserializeDocumentComplexNestedErrorData(v **types.ComplexNes
 	return nil
 }
 
-func awsAwsjson11_deserializeDocumentDocument(v *smithy.Document, value interface{}) error {
+func awsAwsjson11_deserializeDocumentDocument(v *document.Interface, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
 	}
-	// TODO: implement document serialization.
+	*v = internaldocument.NewDocumentUnmarshaler(value)
 	return nil
 }
 

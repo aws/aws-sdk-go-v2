@@ -40,6 +40,8 @@ type DescribeHoursOfOperationInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHoursOfOperationOutput struct {
@@ -49,6 +51,8 @@ type DescribeHoursOfOperationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHoursOfOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {

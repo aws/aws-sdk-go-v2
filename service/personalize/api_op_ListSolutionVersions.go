@@ -43,6 +43,8 @@ type ListSolutionVersionsInput struct {
 
 	// The Amazon Resource Name (ARN) of the solution.
 	SolutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSolutionVersionsOutput struct {
@@ -55,6 +57,8 @@ type ListSolutionVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSolutionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

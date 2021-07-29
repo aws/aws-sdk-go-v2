@@ -29,6 +29,7 @@ func (c *Client) GetPhoneNumberSettings(ctx context.Context, params *GetPhoneNum
 }
 
 type GetPhoneNumberSettingsInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetPhoneNumberSettingsOutput struct {
@@ -41,6 +42,8 @@ type GetPhoneNumberSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPhoneNumberSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

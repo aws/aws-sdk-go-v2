@@ -44,11 +44,15 @@ type DeleteAliasInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

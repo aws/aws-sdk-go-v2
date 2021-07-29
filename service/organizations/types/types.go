@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -38,6 +39,8 @@ type Account struct {
 
 	// The status of the account in the organization.
 	Status AccountStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of child entities, either OUs or accounts.
@@ -58,6 +61,8 @@ type Child struct {
 
 	// The type of this child entity.
 	Type ChildType
+
+	noSmithyDocumentSerde
 }
 
 // Contains the status about a CreateAccount or CreateGovCloudAccount request to
@@ -143,6 +148,8 @@ type CreateAccountStatus struct {
 
 	// The status of the asynchronous request to create an AWS account.
 	State CreateAccountState
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the delegated administrator.
@@ -174,6 +181,8 @@ type DelegatedAdministrator struct {
 
 	// The status of the delegated administrator's account in the organization.
 	Status AccountStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the AWS service for which the account is a delegated
@@ -187,6 +196,8 @@ type DelegatedService struct {
 	// service. This is typically in the form of a URL, such as:
 	// servicename.amazonaws.com.
 	ServicePrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains rules to be applied to the affected accounts. The effective policy is
@@ -205,6 +216,8 @@ type EffectivePolicy struct {
 
 	// The account ID of the policy target.
 	TargetId *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains details of a service principal that represents an AWS
@@ -218,6 +231,8 @@ type EnabledServicePrincipal struct {
 	// The name of the service principal. This is typically in the form of a URL, such
 	// as:  servicename.amazonaws.com.
 	ServicePrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information that must be exchanged to securely establish a relationship
@@ -302,6 +317,8 @@ type Handshake struct {
 	// active because the originator did not receive a response of any kind from the
 	// recipient before the expiration time (15 days).
 	State HandshakeState
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the criteria that are used to select the handshakes for the operation.
@@ -316,6 +333,8 @@ type HandshakeFilter struct {
 	// ActionType. The regex pattern (http://wikipedia.org/wiki/regex) for handshake ID
 	// string requires "h-" followed by from 8 to 32 lowercase letters or digits.
 	ParentHandshakeId *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a participant in a handshake.
@@ -332,6 +351,8 @@ type HandshakeParty struct {
 	//
 	// This member is required.
 	Type HandshakePartyType
+
+	noSmithyDocumentSerde
 }
 
 // Contains additional data that is needed to process a handshake.
@@ -366,6 +387,8 @@ type HandshakeResource struct {
 	// The information that is passed to the other party in the handshake. The format
 	// of the value string must match the requirements of the specified type.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an organization. An organization is a collection of
@@ -415,6 +438,8 @@ type Organization struct {
 	// regex pattern (http://wikipedia.org/wiki/regex) for an account ID string
 	// requires exactly 12 digits.
 	MasterAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an organizational unit (OU). An OU is a container of AWS
@@ -439,6 +464,8 @@ type OrganizationalUnit struct {
 	// (http://wikipedia.org/wiki/regex) that is used to validate this parameter is a
 	// string of any of the characters in the ASCII character range.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about either a root or an organizational unit (OU) that can
@@ -460,6 +487,8 @@ type Parent struct {
 
 	// The type of the parent entity.
 	Type ParentType
+
+	noSmithyDocumentSerde
 }
 
 // Contains rules to be applied to the affected accounts. Policies can be attached
@@ -472,6 +501,8 @@ type Policy struct {
 
 	// A structure that contains additional details about the policy.
 	PolicySummary *PolicySummary
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a policy, but does not include the content. To see
@@ -505,6 +536,8 @@ type PolicySummary struct {
 
 	// The type of policy.
 	Type PolicyType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a root, OU, or account that a policy is attached to.
@@ -539,6 +572,8 @@ type PolicyTargetSummary struct {
 
 	// The type of the policy target.
 	Type TargetType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a policy type and its status in the associated root.
@@ -551,6 +586,8 @@ type PolicyTypeSummary struct {
 
 	// The name of the policy type.
 	Type PolicyType
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about a root. A root is a top-level parent node in the
@@ -581,6 +618,8 @@ type Root struct {
 	// DescribeOrganization to see the availability of the policy types in that
 	// organization.
 	PolicyTypes []PolicyTypeSummary
+
+	noSmithyDocumentSerde
 }
 
 // A custom key-value pair associated with a resource within your organization. You
@@ -606,4 +645,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

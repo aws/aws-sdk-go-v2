@@ -36,6 +36,7 @@ func (c *Client) DescribeActiveReceiptRuleSet(ctx context.Context, params *Descr
 // with Amazon SES. For more information, see the Amazon SES Developer Guide
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/receiving-email-concepts.html).
 type DescribeActiveReceiptRuleSetInput struct {
+	noSmithyDocumentSerde
 }
 
 // Represents the metadata and receipt rules for the receipt rule set that is
@@ -51,6 +52,8 @@ type DescribeActiveReceiptRuleSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeActiveReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

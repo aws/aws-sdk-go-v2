@@ -34,6 +34,8 @@ type DeleteRecommenderConfigurationInput struct {
 	//
 	// This member is required.
 	RecommenderId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRecommenderConfigurationOutput struct {
@@ -46,6 +48,8 @@ type DeleteRecommenderConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

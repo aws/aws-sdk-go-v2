@@ -86,6 +86,8 @@ type UpdateRuleGroupInput struct {
 	// rules. This setting is required for requests that do not include the
 	// RuleGroupARN.
 	Type types.RuleGroupType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRuleGroupOutput struct {
@@ -112,6 +114,8 @@ type UpdateRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

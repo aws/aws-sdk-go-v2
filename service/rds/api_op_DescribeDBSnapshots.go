@@ -132,6 +132,8 @@ type DescribeDBSnapshotsInput struct {
 	// parameter doesn't apply when SnapshotType is set to shared. The IncludeShared
 	// parameter doesn't apply when SnapshotType is set to public.
 	SnapshotType *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of a successful invocation of the DescribeDBSnapshots
@@ -148,6 +150,8 @@ type DescribeDBSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

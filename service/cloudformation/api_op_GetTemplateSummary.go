@@ -80,6 +80,8 @@ type GetTemplateSummaryInput struct {
 	// in the AWS CloudFormation User Guide. Conditional: You must specify only one of
 	// the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
 	TemplateURL *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the GetTemplateSummary action.
@@ -127,6 +129,8 @@ type GetTemplateSummaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTemplateSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

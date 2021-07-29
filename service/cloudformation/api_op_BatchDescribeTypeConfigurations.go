@@ -37,6 +37,8 @@ type BatchDescribeTypeConfigurationsInput struct {
 	//
 	// This member is required.
 	TypeConfigurationIdentifiers []types.TypeConfigurationIdentifier
+
+	noSmithyDocumentSerde
 }
 
 type BatchDescribeTypeConfigurationsOutput struct {
@@ -55,6 +57,8 @@ type BatchDescribeTypeConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDescribeTypeConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

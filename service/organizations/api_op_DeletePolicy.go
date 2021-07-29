@@ -39,11 +39,15 @@ type DeletePolicyInput struct {
 	//
 	// This member is required.
 	PolicyId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

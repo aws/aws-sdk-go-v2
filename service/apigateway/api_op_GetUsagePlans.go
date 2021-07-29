@@ -40,6 +40,8 @@ type GetUsagePlansInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of usage plans for an AWS account. Create and Use Usage
@@ -55,6 +57,8 @@ type GetUsagePlansOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUsagePlansMiddlewares(stack *middleware.Stack, options Options) (err error) {

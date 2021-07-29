@@ -50,11 +50,15 @@ type DeleteVaultAccessPolicyInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVaultAccessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVaultAccessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

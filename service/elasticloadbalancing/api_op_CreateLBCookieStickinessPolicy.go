@@ -58,12 +58,16 @@ type CreateLBCookieStickinessPolicyInput struct {
 	// If you do not specify this parameter, the default value is 0, which indicates
 	// that the sticky session should last for the duration of the browser session.
 	CookieExpirationPeriod *int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output for CreateLBCookieStickinessPolicy.
 type CreateLBCookieStickinessPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLBCookieStickinessPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

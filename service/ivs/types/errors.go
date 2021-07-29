@@ -11,6 +11,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -29,6 +31,8 @@ type ChannelNotBroadcasting struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ChannelNotBroadcasting) Error() string {
@@ -47,6 +51,8 @@ type ConflictException struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -65,6 +71,8 @@ type InternalServerException struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -83,6 +91,8 @@ type PendingVerification struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PendingVerification) Error() string {
@@ -101,6 +111,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -119,6 +131,8 @@ type ServiceQuotaExceededException struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -137,6 +151,8 @@ type StreamUnavailable struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StreamUnavailable) Error() string {
@@ -155,6 +171,8 @@ type ThrottlingException struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -173,6 +191,8 @@ type ValidationException struct {
 	Message *string
 
 	ExceptionMessage *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

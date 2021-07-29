@@ -119,6 +119,8 @@ type GetUsageForecastInput struct {
 	// actual value falling in the prediction interval. Higher confidence levels result
 	// in wider prediction intervals.
 	PredictionIntervalLevel *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetUsageForecastOutput struct {
@@ -132,6 +134,8 @@ type GetUsageForecastOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUsageForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -202,6 +202,8 @@ type ReplicateKeyInput struct {
 	// to control access to a CMK. For details, see Tagging Keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type ReplicateKeyOutput struct {
@@ -224,6 +226,8 @@ type ReplicateKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReplicateKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

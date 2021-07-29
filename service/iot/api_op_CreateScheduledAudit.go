@@ -61,6 +61,8 @@ type CreateScheduledAuditInput struct {
 
 	// Metadata that can be used to manage the scheduled audit.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateScheduledAuditOutput struct {
@@ -70,6 +72,8 @@ type CreateScheduledAuditOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {

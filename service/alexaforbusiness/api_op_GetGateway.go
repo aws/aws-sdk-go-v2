@@ -33,6 +33,8 @@ type GetGatewayInput struct {
 	//
 	// This member is required.
 	GatewayArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGatewayOutput struct {
@@ -42,6 +44,8 @@ type GetGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

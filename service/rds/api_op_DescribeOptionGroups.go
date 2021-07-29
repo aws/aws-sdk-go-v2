@@ -81,6 +81,8 @@ type DescribeOptionGroupsInput struct {
 	// The name of the option group to describe. Can't be supplied together with
 	// EngineName or MajorEngineVersion.
 	OptionGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // List of option groups.
@@ -96,6 +98,8 @@ type DescribeOptionGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOptionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

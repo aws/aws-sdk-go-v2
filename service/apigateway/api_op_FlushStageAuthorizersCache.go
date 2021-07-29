@@ -38,11 +38,15 @@ type FlushStageAuthorizersCacheInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 type FlushStageAuthorizersCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFlushStageAuthorizersCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

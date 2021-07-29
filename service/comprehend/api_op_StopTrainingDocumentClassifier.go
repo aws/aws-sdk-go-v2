@@ -38,11 +38,15 @@ type StopTrainingDocumentClassifierInput struct {
 	//
 	// This member is required.
 	DocumentClassifierArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StopTrainingDocumentClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopTrainingDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

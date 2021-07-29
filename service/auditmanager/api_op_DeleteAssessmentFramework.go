@@ -32,11 +32,15 @@ type DeleteAssessmentFrameworkInput struct {
 	//
 	// This member is required.
 	FrameworkId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAssessmentFrameworkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

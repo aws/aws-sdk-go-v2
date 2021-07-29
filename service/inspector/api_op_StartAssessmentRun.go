@@ -38,6 +38,8 @@ type StartAssessmentRunInput struct {
 	// You can specify the name for the assessment run. The name must be unique for the
 	// assessment template whose ARN is used to start the assessment run.
 	AssessmentRunName *string
+
+	noSmithyDocumentSerde
 }
 
 type StartAssessmentRunOutput struct {
@@ -49,6 +51,8 @@ type StartAssessmentRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartAssessmentRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

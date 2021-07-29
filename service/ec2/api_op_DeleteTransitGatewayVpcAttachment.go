@@ -39,6 +39,8 @@ type DeleteTransitGatewayVpcAttachmentInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTransitGatewayVpcAttachmentOutput struct {
@@ -48,6 +50,8 @@ type DeleteTransitGatewayVpcAttachmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTransitGatewayVpcAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

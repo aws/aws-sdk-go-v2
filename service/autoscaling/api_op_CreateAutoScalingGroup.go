@@ -239,11 +239,15 @@ type CreateAutoScalingGroupInput struct {
 	// supports EC2-Classic and VPC, this parameter is required to launch instances
 	// into a VPC.
 	VPCZoneIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAutoScalingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAutoScalingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,6 +69,8 @@ type ListEventSourceMappingsInput struct {
 
 	// The maximum number of event source mappings to return.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListEventSourceMappingsOutput struct {
@@ -82,6 +84,8 @@ type ListEventSourceMappingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEventSourceMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

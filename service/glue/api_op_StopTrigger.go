@@ -32,6 +32,8 @@ type StopTriggerInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type StopTriggerOutput struct {
@@ -41,6 +43,8 @@ type StopTriggerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopTriggerMiddlewares(stack *middleware.Stack, options Options) (err error) {

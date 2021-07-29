@@ -44,6 +44,8 @@ type UpdateBrokerCountInput struct {
 	//
 	// This member is required.
 	TargetNumberOfBrokerNodes int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBrokerCountOutput struct {
@@ -56,6 +58,8 @@ type UpdateBrokerCountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBrokerCountMiddlewares(stack *middleware.Stack, options Options) (err error) {

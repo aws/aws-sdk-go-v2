@@ -57,7 +57,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     protected void serializeInputDocument(GenerationContext context, OperationShape operation) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         ServiceShape service = context.getService();
         StructureShape input = ProtocolUtils.expectInput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentSerializerFunctionName(
@@ -97,7 +97,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     protected void deserializeOutputDocument(GenerationContext context, OperationShape operation) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         StructureShape output = ProtocolUtils.expectOutput(context.getModel(), operation);
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
                 output, context.getService(), getProtocolName());
@@ -109,7 +109,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
 
     @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
 
         writer.write("output := &$T{}", symbol);
@@ -129,7 +129,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     }
 
     protected void unwrapOutputDocument(GenerationContext context, OperationShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         ServiceShape service = context.getService();
         writer.write("t, err = decoder.GetElement(\"$LResult\")", shape.getId().getName(service));
         handleDecodeError(writer, "out, metadata, ");
@@ -139,7 +139,7 @@ class AwsQuery extends HttpRpcProtocolGenerator {
     }
 
     protected void unwrapErrorElement(GenerationContext context) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.write("t, err = decoder.GetElement(\"Error\")");
         XmlProtocolUtils.handleDecodeError(writer, "");
         Symbol wrapNodeDecoder = SymbolUtils.createValueSymbolBuilder("WrapNodeDecoder",

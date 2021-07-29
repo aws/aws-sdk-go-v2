@@ -39,6 +39,8 @@ type StartMigrationInput struct {
 	//
 	// This member is required.
 	ReplicationGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartMigrationOutput struct {
@@ -48,6 +50,8 @@ type StartMigrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

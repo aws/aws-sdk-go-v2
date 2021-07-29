@@ -38,11 +38,15 @@ type DeleteConfigurationProfileInput struct {
 	//
 	// This member is required.
 	ConfigurationProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConfigurationProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConfigurationProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

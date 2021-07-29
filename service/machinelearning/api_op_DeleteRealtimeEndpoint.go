@@ -33,6 +33,8 @@ type DeleteRealtimeEndpointInput struct {
 	//
 	// This member is required.
 	MLModelId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an DeleteRealtimeEndpoint operation. The result
@@ -48,6 +50,8 @@ type DeleteRealtimeEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRealtimeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

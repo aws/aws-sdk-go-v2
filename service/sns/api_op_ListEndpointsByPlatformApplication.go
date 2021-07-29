@@ -49,6 +49,8 @@ type ListEndpointsByPlatformApplicationInput struct {
 	// NextToken string is used when calling ListEndpointsByPlatformApplication action
 	// to retrieve additional records that are available after the first page results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Response for ListEndpointsByPlatformApplication action.
@@ -63,6 +65,8 @@ type ListEndpointsByPlatformApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEndpointsByPlatformApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

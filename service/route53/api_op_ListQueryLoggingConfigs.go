@@ -58,6 +58,8 @@ type ListQueryLoggingConfigsInput struct {
 	// and subsequent requests, get the value of NextToken from the previous response
 	// and specify that value for NextToken in the request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListQueryLoggingConfigsOutput struct {
@@ -81,6 +83,8 @@ type ListQueryLoggingConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListQueryLoggingConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

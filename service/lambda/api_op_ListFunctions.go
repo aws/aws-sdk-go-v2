@@ -53,6 +53,8 @@ type ListFunctionsInput struct {
 	// ListFunctions returns a maximum of 50 items in each response, even if you set
 	// the number higher.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of Lambda functions.
@@ -66,6 +68,8 @@ type ListFunctionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFunctionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

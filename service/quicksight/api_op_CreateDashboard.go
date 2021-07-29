@@ -102,6 +102,8 @@ type CreateDashboardInput struct {
 
 	// A description for the first version of the dashboard being created.
 	VersionDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDashboardOutput struct {
@@ -127,6 +129,8 @@ type CreateDashboardOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDashboardMiddlewares(stack *middleware.Stack, options Options) (err error) {

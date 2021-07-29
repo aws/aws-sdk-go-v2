@@ -46,6 +46,8 @@ type GetParameterHistoryInput struct {
 	// Return decrypted values for secure string parameters. This flag is ignored for
 	// String and StringList parameter types.
 	WithDecryption bool
+
+	noSmithyDocumentSerde
 }
 
 type GetParameterHistoryOutput struct {
@@ -59,6 +61,8 @@ type GetParameterHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetParameterHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type GetBuiltinSlotTypesInput struct {
 	// returned if any part of its signature matches the substring. For example, "xyz"
 	// matches both "xyzabc" and "abcxyz."
 	SignatureContains *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBuiltinSlotTypesOutput struct {
@@ -64,6 +66,8 @@ type GetBuiltinSlotTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBuiltinSlotTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

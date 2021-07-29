@@ -11,6 +11,8 @@ import (
 // administrator to verify your permissions.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The request was unsuccessful due to a conflict.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -46,6 +50,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // or failure.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -63,6 +69,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // The resource that you've entered was not found in your AWS account.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -80,6 +88,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -100,6 +110,8 @@ type ValidationException struct {
 
 	Reason    ValidationExceptionReason
 	FieldList []ValidationExceptionField
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

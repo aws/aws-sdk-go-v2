@@ -63,6 +63,8 @@ type CreateMissionProfileInput struct {
 
 	// Tags assigned to a mission profile.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -73,6 +75,8 @@ type CreateMissionProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMissionProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -65,6 +65,8 @@ type PutPolicyInput struct {
 
 	// The tags to add to the Amazon Web Services resource.
 	TagList []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutPolicyOutput struct {
@@ -77,6 +79,8 @@ type PutPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

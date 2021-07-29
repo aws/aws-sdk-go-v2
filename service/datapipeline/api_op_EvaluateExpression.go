@@ -53,6 +53,8 @@ type EvaluateExpressionInput struct {
 	//
 	// This member is required.
 	PipelineId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of EvaluateExpression.
@@ -65,6 +67,8 @@ type EvaluateExpressionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEvaluateExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {

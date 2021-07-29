@@ -47,12 +47,16 @@ type DeleteMatchmakingRuleSetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
 type DeleteMatchmakingRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMatchmakingRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

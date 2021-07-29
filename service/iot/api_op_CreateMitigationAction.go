@@ -51,6 +51,8 @@ type CreateMitigationActionInput struct {
 
 	// Metadata that can be used to manage the mitigation action.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateMitigationActionOutput struct {
@@ -63,6 +65,8 @@ type CreateMitigationActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMitigationActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

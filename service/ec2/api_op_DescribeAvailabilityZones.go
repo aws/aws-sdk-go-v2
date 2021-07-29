@@ -94,6 +94,8 @@ type DescribeAvailabilityZonesInput struct {
 
 	// The names of the Availability Zones, Local Zones, and Wavelength Zones.
 	ZoneNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAvailabilityZonesOutput struct {
@@ -103,6 +105,8 @@ type DescribeAvailabilityZonesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAvailabilityZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {

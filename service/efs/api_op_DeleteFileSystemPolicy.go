@@ -38,11 +38,15 @@ type DeleteFileSystemPolicyInput struct {
 	//
 	// This member is required.
 	FileSystemId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFileSystemPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFileSystemPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

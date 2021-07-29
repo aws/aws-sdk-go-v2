@@ -47,6 +47,8 @@ type DescribeImagePermissionsInput struct {
 	// The 12-digit identifier of one or more AWS accounts with which the image is
 	// shared.
 	SharedAwsAccountIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImagePermissionsOutput struct {
@@ -63,6 +65,8 @@ type DescribeImagePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImagePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

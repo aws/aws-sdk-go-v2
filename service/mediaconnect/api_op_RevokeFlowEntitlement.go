@@ -38,6 +38,8 @@ type RevokeFlowEntitlementInput struct {
 	//
 	// This member is required.
 	FlowArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeFlowEntitlementOutput struct {
@@ -50,6 +52,8 @@ type RevokeFlowEntitlementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeFlowEntitlementMiddlewares(stack *middleware.Stack, options Options) (err error) {

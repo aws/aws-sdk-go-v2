@@ -74,6 +74,8 @@ type ModifyFleetInput struct {
 
 	// The size of the EC2 Fleet.
 	TargetCapacitySpecification *types.TargetCapacitySpecificationRequest
+
+	noSmithyDocumentSerde
 }
 
 type ModifyFleetOutput struct {
@@ -83,6 +85,8 @@ type ModifyFleetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

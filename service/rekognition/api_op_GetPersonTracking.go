@@ -74,6 +74,8 @@ type GetPersonTrackingInput struct {
 	// persons. If you sort by INDEX, the array elements for each person are sorted by
 	// detection confidence. The default sort is by TIMESTAMP.
 	SortBy types.PersonTrackingSortBy
+
+	noSmithyDocumentSerde
 }
 
 type GetPersonTrackingOutput struct {
@@ -100,6 +102,8 @@ type GetPersonTrackingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPersonTrackingMiddlewares(stack *middleware.Stack, options Options) (err error) {

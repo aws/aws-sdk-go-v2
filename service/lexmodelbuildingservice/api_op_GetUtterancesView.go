@@ -62,6 +62,8 @@ type GetUtterancesViewInput struct {
 	//
 	// This member is required.
 	StatusType types.StatusType
+
+	noSmithyDocumentSerde
 }
 
 type GetUtterancesViewOutput struct {
@@ -77,6 +79,8 @@ type GetUtterancesViewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUtterancesViewMiddlewares(stack *middleware.Stack, options Options) (err error) {

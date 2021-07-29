@@ -38,6 +38,7 @@ func (c *Client) ListAvailableZones(ctx context.Context, params *ListAvailableZo
 
 // Contains the inputs for the ListAvailableZones action.
 type ListAvailableZonesInput struct {
+	noSmithyDocumentSerde
 }
 
 type ListAvailableZonesOutput struct {
@@ -47,6 +48,8 @@ type ListAvailableZonesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAvailableZonesMiddlewares(stack *middleware.Stack, options Options) (err error) {

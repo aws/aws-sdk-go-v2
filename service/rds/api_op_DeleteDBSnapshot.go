@@ -36,6 +36,8 @@ type DeleteDBSnapshotInput struct {
 	//
 	// This member is required.
 	DBSnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBSnapshotOutput struct {
@@ -46,6 +48,8 @@ type DeleteDBSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

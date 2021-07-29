@@ -50,6 +50,8 @@ type RefreshTrustedAdvisorCheckInput struct {
 	//
 	// This member is required.
 	CheckId *string
+
+	noSmithyDocumentSerde
 }
 
 // The current refresh status of a Trusted Advisor check.
@@ -63,6 +65,8 @@ type RefreshTrustedAdvisorCheckOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRefreshTrustedAdvisorCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {

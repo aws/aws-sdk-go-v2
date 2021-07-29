@@ -39,11 +39,15 @@ type DisassociateConnectionAliasInput struct {
 	//
 	// This member is required.
 	AliasId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateConnectionAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteAccountAuditConfigurationInput struct {
 
 	// If true, all scheduled audits are deleted.
 	DeleteScheduledAudits bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccountAuditConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccountAuditConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

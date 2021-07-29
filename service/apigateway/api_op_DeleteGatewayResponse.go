@@ -87,11 +87,15 @@ type DeleteGatewayResponseInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGatewayResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

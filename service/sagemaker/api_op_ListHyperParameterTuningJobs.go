@@ -68,6 +68,8 @@ type ListHyperParameterTuningJobsInput struct {
 
 	// A filter that returns only tuning jobs with the specified status.
 	StatusEquals types.HyperParameterTuningJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListHyperParameterTuningJobsOutput struct {
@@ -85,6 +87,8 @@ type ListHyperParameterTuningJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHyperParameterTuningJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

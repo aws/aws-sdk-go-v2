@@ -52,11 +52,15 @@ type UpdateUserIdentityInfoInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserIdentityInfoOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserIdentityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {

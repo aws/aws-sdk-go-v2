@@ -29,6 +29,7 @@ func (c *Client) StartContinuousExport(ctx context.Context, params *StartContinu
 }
 
 type StartContinuousExportInput struct {
+	noSmithyDocumentSerde
 }
 
 type StartContinuousExportOutput struct {
@@ -54,6 +55,8 @@ type StartContinuousExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartContinuousExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

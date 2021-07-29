@@ -39,6 +39,8 @@ type GetResourcePoliciesInput struct {
 
 	// A continuation token, if this is a continuation request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourcePoliciesOutput struct {
@@ -53,6 +55,8 @@ type GetResourcePoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourcePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListCertificatesInput struct {
 
 	// The result page size.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // The output of the ListCertificates operation.
@@ -56,6 +58,8 @@ type ListCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DetectEntitiesInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectEntitiesOutput struct {
@@ -69,6 +71,8 @@ type DetectEntitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

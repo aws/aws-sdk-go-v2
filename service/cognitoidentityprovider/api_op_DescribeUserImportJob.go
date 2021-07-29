@@ -39,6 +39,8 @@ type DescribeUserImportJobInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to the request to describe the user
@@ -50,6 +52,8 @@ type DescribeUserImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 //
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -27,6 +29,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 //
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -44,6 +48,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 //
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -61,6 +67,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 //
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -78,6 +86,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 //
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -95,6 +105,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 //
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -112,6 +124,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 //
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

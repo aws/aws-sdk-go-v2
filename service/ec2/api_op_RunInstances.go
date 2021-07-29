@@ -322,6 +322,8 @@ type RunInstancesInput struct {
 	// for you, and you can load the text from a file. Otherwise, you must provide
 	// base64-encoded text. User data is limited to 16 KB.
 	UserData *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a launch request for one or more instances, and includes owner,
@@ -347,6 +349,8 @@ type RunInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRunInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

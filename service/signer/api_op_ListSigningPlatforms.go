@@ -52,6 +52,8 @@ type ListSigningPlatformsInput struct {
 
 	// The validation template that is used by the target signing platform.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSigningPlatformsOutput struct {
@@ -64,6 +66,8 @@ type ListSigningPlatformsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSigningPlatformsMiddlewares(stack *middleware.Stack, options Options) (err error) {

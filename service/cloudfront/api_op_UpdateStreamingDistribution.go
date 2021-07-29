@@ -43,6 +43,8 @@ type UpdateStreamingDistributionInput struct {
 	// The value of the ETag header that you received when retrieving the streaming
 	// distribution's configuration. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -56,6 +58,8 @@ type UpdateStreamingDistributionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStreamingDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

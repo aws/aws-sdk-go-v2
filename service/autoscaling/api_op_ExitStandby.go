@@ -40,6 +40,8 @@ type ExitStandbyInput struct {
 
 	// The IDs of the instances. You can specify up to 20 instances.
 	InstanceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ExitStandbyOutput struct {
@@ -49,6 +51,8 @@ type ExitStandbyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExitStandbyMiddlewares(stack *middleware.Stack, options Options) (err error) {

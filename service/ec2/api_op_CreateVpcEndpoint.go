@@ -103,6 +103,8 @@ type CreateVpcEndpointInput struct {
 
 	// The type of endpoint. Default: Gateway
 	VpcEndpointType types.VpcEndpointType
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateVpcEndpoint.
@@ -117,6 +119,8 @@ type CreateVpcEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

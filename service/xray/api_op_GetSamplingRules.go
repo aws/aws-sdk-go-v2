@@ -32,6 +32,8 @@ type GetSamplingRulesInput struct {
 
 	// Pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSamplingRulesOutput struct {
@@ -44,6 +46,8 @@ type GetSamplingRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSamplingRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

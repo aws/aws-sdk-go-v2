@@ -40,6 +40,8 @@ type ListApplicationVersionsInput struct {
 
 	// A token to specify where to start paginating.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListApplicationVersionsOutput struct {
@@ -52,6 +54,8 @@ type ListApplicationVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListApplicationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

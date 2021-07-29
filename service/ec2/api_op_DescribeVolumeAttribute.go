@@ -47,6 +47,8 @@ type DescribeVolumeAttributeInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVolumeAttributeOutput struct {
@@ -62,6 +64,8 @@ type DescribeVolumeAttributeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVolumeAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

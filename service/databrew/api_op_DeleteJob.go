@@ -32,6 +32,8 @@ type DeleteJobInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteJobOutput struct {
@@ -43,6 +45,8 @@ type DeleteJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

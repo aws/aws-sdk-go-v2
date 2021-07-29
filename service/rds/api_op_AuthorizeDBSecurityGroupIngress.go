@@ -65,6 +65,8 @@ type AuthorizeDBSecurityGroupIngressInput struct {
 	// must be provided. Otherwise, EC2SecurityGroupOwnerId and either
 	// EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupOwnerId *string
+
+	noSmithyDocumentSerde
 }
 
 type AuthorizeDBSecurityGroupIngressOutput struct {
@@ -75,6 +77,8 @@ type AuthorizeDBSecurityGroupIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAuthorizeDBSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

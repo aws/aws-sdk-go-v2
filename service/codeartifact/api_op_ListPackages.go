@@ -82,6 +82,8 @@ type ListPackagesInput struct {
 	// A prefix used to filter returned packages. Only packages with names that start
 	// with packagePrefix are returned.
 	PackagePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPackagesOutput struct {
@@ -96,6 +98,8 @@ type ListPackagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPackagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type CreateUseCaseInput struct {
 
 	// One or more tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateUseCaseOutput struct {
@@ -60,6 +62,8 @@ type CreateUseCaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUseCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

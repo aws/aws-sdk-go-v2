@@ -60,6 +60,8 @@ type CreateTapePoolInput struct {
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateTapePoolOutput struct {
@@ -71,6 +73,8 @@ type CreateTapePoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTapePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

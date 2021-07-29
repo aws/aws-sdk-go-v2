@@ -51,6 +51,8 @@ type UpdateConfigInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -67,6 +69,8 @@ type UpdateConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

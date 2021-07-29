@@ -49,6 +49,8 @@ type SearchDatabasesByLFTagsInput struct {
 
 	// A continuation token, if this is not the first call to retrieve this list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchDatabasesByLFTagsOutput struct {
@@ -61,6 +63,8 @@ type SearchDatabasesByLFTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchDatabasesByLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

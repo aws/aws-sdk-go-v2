@@ -32,6 +32,8 @@ type GetResourcePolicyInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourcePolicyOutput struct {
@@ -41,6 +43,8 @@ type GetResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

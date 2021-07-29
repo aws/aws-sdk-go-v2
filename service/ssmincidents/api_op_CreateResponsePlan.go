@@ -60,6 +60,8 @@ type CreateResponsePlanInput struct {
 
 	// A list of tags that you are adding to the response plan.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateResponsePlanOutput struct {
@@ -71,6 +73,8 @@ type CreateResponsePlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResponsePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type UpdateWorldTemplateInput struct {
 
 	// The location of the world template.
 	TemplateLocation *types.TemplateLocation
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWorldTemplateOutput struct {
@@ -62,6 +64,8 @@ type UpdateWorldTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorldTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

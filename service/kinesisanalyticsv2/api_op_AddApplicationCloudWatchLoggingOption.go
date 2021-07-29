@@ -53,6 +53,8 @@ type AddApplicationCloudWatchLoggingOptionInput struct {
 	// support, use the ConditionalToken parameter instead of
 	// CurrentApplicationVersionId.
 	CurrentApplicationVersionId *int64
+
+	noSmithyDocumentSerde
 }
 
 type AddApplicationCloudWatchLoggingOptionOutput struct {
@@ -71,6 +73,8 @@ type AddApplicationCloudWatchLoggingOptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

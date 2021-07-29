@@ -35,6 +35,8 @@ type DeleteMLModelInput struct {
 	//
 	// This member is required.
 	MLModelId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteMLModel operation. You can use the GetMLModel
@@ -48,6 +50,8 @@ type DeleteMLModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMLModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

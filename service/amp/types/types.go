@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the properties of a workspace.
@@ -49,6 +52,8 @@ type WorkspaceDescription struct {
 
 	// Prometheus endpoint URI.
 	PrometheusEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the status of a workspace.
@@ -58,6 +63,8 @@ type WorkspaceStatus struct {
 	//
 	// This member is required.
 	StatusCode WorkspaceStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // Represents a summary of the properties of a workspace.
@@ -85,4 +92,8 @@ type WorkspaceSummary struct {
 
 	// Alias of this workspace.
 	Alias *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -55,6 +55,8 @@ type CreateVpcLinkInput struct {
 	// tag key can be up to 128 characters and must not start with aws:. The tag value
 	// can be up to 256 characters.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
@@ -94,6 +96,8 @@ type CreateVpcLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

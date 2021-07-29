@@ -45,6 +45,8 @@ type DescribeEndpointsInput struct {
 	// Use this string, provided with the response to a previous request, to request
 	// the next batch of endpoints.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEndpointsOutput struct {
@@ -57,6 +59,8 @@ type DescribeEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

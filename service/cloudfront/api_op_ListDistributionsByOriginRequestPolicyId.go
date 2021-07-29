@@ -49,6 +49,8 @@ type ListDistributionsByOriginRequestPolicyIdInput struct {
 
 	// The maximum number of distribution IDs that you want in the response.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListDistributionsByOriginRequestPolicyIdOutput struct {
@@ -58,6 +60,8 @@ type ListDistributionsByOriginRequestPolicyIdOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDistributionsByOriginRequestPolicyIdMiddlewares(stack *middleware.Stack, options Options) (err error) {

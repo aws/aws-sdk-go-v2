@@ -40,6 +40,8 @@ type GetOpenIDConnectProviderInput struct {
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetOpenIDConnectProvider request.
@@ -72,6 +74,8 @@ type GetOpenIDConnectProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

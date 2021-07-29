@@ -38,11 +38,15 @@ type UpdateAddressBookInput struct {
 
 	// The updated name of the room.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAddressBookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {

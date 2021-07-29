@@ -45,11 +45,15 @@ type AttachPolicyInput struct {
 	//
 	// This member is required.
 	PolicyReference *types.ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 type AttachPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

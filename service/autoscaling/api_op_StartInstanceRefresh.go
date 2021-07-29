@@ -60,6 +60,8 @@ type StartInstanceRefreshInput struct {
 	// in. If the rolling update process fails, any instances that were already
 	// replaced are not rolled back to their previous configuration.
 	Strategy types.RefreshStrategy
+
+	noSmithyDocumentSerde
 }
 
 type StartInstanceRefreshOutput struct {
@@ -69,6 +71,8 @@ type StartInstanceRefreshOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartInstanceRefreshMiddlewares(stack *middleware.Stack, options Options) (err error) {

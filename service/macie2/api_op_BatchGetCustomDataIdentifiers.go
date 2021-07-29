@@ -32,6 +32,8 @@ type BatchGetCustomDataIdentifiersInput struct {
 	// An array of strings that lists the unique identifiers for the custom data
 	// identifiers to retrieve information about.
 	Ids []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetCustomDataIdentifiersOutput struct {
@@ -46,6 +48,8 @@ type BatchGetCustomDataIdentifiersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetCustomDataIdentifiersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type GetReservedInstancesExchangeQuoteInput struct {
 	// The configuration of the target Convertible Reserved Instance to exchange for
 	// your current Convertible Reserved Instances.
 	TargetConfigurations []types.TargetConfigurationRequest
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of GetReservedInstancesExchangeQuote.
@@ -82,6 +84,8 @@ type GetReservedInstancesExchangeQuoteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReservedInstancesExchangeQuoteMiddlewares(stack *middleware.Stack, options Options) (err error) {

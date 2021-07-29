@@ -81,6 +81,8 @@ type ResizeClusterInput struct {
 	// The new number of nodes for the cluster. If not specified, the cluster's current
 	// number of nodes is used.
 	NumberOfNodes *int32
+
+	noSmithyDocumentSerde
 }
 
 type ResizeClusterOutput struct {
@@ -90,6 +92,8 @@ type ResizeClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResizeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

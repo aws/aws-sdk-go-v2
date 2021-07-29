@@ -63,6 +63,8 @@ type CreateServiceLinkedRoleInput struct {
 
 	// The description of the role.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceLinkedRoleOutput struct {
@@ -72,6 +74,8 @@ type CreateServiceLinkedRoleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceLinkedRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

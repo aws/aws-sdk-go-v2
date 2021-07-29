@@ -47,6 +47,8 @@ type DescribeContainerInstancesInput struct {
 	// If TAGS is specified, the tags are included in the response. If this field is
 	// omitted, tags are not included in the response.
 	Include []types.ContainerInstanceField
+
+	noSmithyDocumentSerde
 }
 
 type DescribeContainerInstancesOutput struct {
@@ -59,6 +61,8 @@ type DescribeContainerInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeContainerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

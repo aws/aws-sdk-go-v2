@@ -33,11 +33,15 @@ type DeleteSchemaInput struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSchemaOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

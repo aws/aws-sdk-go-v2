@@ -43,6 +43,8 @@ type DescribeUserInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUserOutput struct {
@@ -60,6 +62,8 @@ type DescribeUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

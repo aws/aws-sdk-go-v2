@@ -42,6 +42,8 @@ type CancelIngestionInput struct {
 	//
 	// This member is required.
 	IngestionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelIngestionOutput struct {
@@ -60,6 +62,8 @@ type CancelIngestionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type UpdateRevisionInput struct {
 	// the revision are complete. After it's in this read-only state, you can publish
 	// the revision to your products.
 	Finalized bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRevisionOutput struct {
@@ -85,6 +87,8 @@ type UpdateRevisionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

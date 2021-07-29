@@ -57,6 +57,8 @@ type CreateDiskInput struct {
 	// The tag keys and optional values to add to the resource during create. Use the
 	// TagResource action to tag a resource after it's created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDiskOutput struct {
@@ -68,6 +70,8 @@ type CreateDiskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type DeleteDomainPermissionsPolicyInput struct {
 	// for optimistic locking, which prevents others from overwriting your changes to
 	// the domain's resource policy.
 	PolicyRevision *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDomainPermissionsPolicyOutput struct {
@@ -51,6 +53,8 @@ type DeleteDomainPermissionsPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

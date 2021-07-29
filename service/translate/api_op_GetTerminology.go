@@ -38,6 +38,8 @@ type GetTerminologyInput struct {
 	//
 	// This member is required.
 	TerminologyDataFormat types.TerminologyDataFormat
+
+	noSmithyDocumentSerde
 }
 
 type GetTerminologyOutput struct {
@@ -51,6 +53,8 @@ type GetTerminologyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTerminologyMiddlewares(stack *middleware.Stack, options Options) (err error) {

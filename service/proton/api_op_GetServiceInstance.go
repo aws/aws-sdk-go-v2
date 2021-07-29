@@ -44,6 +44,8 @@ type GetServiceInstanceInput struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetServiceInstanceOutput struct {
@@ -55,6 +57,8 @@ type GetServiceInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

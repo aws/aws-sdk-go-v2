@@ -32,6 +32,8 @@ type DeleteBrokerInput struct {
 	//
 	// This member is required.
 	BrokerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBrokerOutput struct {
@@ -41,6 +43,8 @@ type DeleteBrokerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {

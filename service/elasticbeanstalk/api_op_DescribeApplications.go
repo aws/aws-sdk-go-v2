@@ -33,6 +33,8 @@ type DescribeApplicationsInput struct {
 	// If specified, AWS Elastic Beanstalk restricts the returned descriptions to only
 	// include those with the specified names.
 	ApplicationNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Result message containing a list of application descriptions.
@@ -43,6 +45,8 @@ type DescribeApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetGraphqlApiInput struct {
 	//
 	// This member is required.
 	ApiId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGraphqlApiOutput struct {
@@ -42,6 +44,8 @@ type GetGraphqlApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGraphqlApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

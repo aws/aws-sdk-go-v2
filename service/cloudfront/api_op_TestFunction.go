@@ -60,6 +60,8 @@ type TestFunctionInput struct {
 
 	// The stage of the function that you are testing, either DEVELOPMENT or LIVE.
 	Stage types.FunctionStage
+
+	noSmithyDocumentSerde
 }
 
 type TestFunctionOutput struct {
@@ -70,6 +72,8 @@ type TestFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

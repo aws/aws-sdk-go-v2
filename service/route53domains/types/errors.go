@@ -10,6 +10,8 @@ import (
 // The number of domains has exceeded the allowed threshold for the account.
 type DomainLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DomainLimitExceeded) Error() string {
@@ -27,6 +29,8 @@ func (e *DomainLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The request is already in progress for the domain.
 type DuplicateRequest struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateRequest) Error() string {
@@ -47,6 +51,8 @@ func (e *DuplicateRequest) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // password might be invalid.
 type InvalidInput struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInput) Error() string {
@@ -65,6 +71,8 @@ func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // account.
 type OperationLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationLimitExceeded) Error() string {
@@ -82,6 +90,8 @@ func (e *OperationLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.
 // The top-level domain does not support this operation.
 type TLDRulesViolation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TLDRulesViolation) Error() string {
@@ -99,6 +109,8 @@ func (e *TLDRulesViolation) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Amazon Route 53 does not support this top-level domain (TLD).
 type UnsupportedTLD struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedTLD) Error() string {

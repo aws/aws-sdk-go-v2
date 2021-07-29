@@ -55,6 +55,8 @@ type ListVirtualGatewaysInput struct {
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListVirtualGatewaysOutput struct {
@@ -72,6 +74,8 @@ type ListVirtualGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVirtualGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

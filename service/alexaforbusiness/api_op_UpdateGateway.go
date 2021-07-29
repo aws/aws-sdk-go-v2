@@ -43,11 +43,15 @@ type UpdateGatewayInput struct {
 	// The updated software version of the gateway. The gateway automatically updates
 	// its software version during normal operation.
 	SoftwareVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGatewayOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

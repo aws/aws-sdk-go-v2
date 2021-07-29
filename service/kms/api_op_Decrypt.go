@@ -154,6 +154,8 @@ type DecryptInput struct {
 	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
 	// use ListAliases.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type DecryptOutput struct {
@@ -172,6 +174,8 @@ type DecryptOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDecryptMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,11 +33,15 @@ type DeleteMonitoringSubscriptionInput struct {
 	//
 	// This member is required.
 	DistributionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMonitoringSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMonitoringSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

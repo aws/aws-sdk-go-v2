@@ -33,6 +33,8 @@ type DescribePageInput struct {
 	//
 	// This member is required.
 	PageId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePageOutput struct {
@@ -91,6 +93,8 @@ type DescribePageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePageMiddlewares(stack *middleware.Stack, options Options) (err error) {

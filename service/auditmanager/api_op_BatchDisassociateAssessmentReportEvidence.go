@@ -44,6 +44,8 @@ type BatchDisassociateAssessmentReportEvidenceInput struct {
 	//
 	// This member is required.
 	EvidenceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDisassociateAssessmentReportEvidenceOutput struct {
@@ -56,6 +58,8 @@ type BatchDisassociateAssessmentReportEvidenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDisassociateAssessmentReportEvidenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

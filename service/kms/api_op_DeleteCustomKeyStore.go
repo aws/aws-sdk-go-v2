@@ -74,11 +74,15 @@ type DeleteCustomKeyStoreInput struct {
 	//
 	// This member is required.
 	CustomKeyStoreId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomKeyStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

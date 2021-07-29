@@ -85,6 +85,8 @@ type CreateSubnetInput struct {
 
 	// The tags to assign to the subnet.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateSubnetOutput struct {
@@ -94,6 +96,8 @@ type CreateSubnetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSubnetMiddlewares(stack *middleware.Stack, options Options) (err error) {

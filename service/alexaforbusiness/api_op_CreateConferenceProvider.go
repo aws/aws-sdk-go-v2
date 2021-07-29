@@ -56,6 +56,8 @@ type CreateConferenceProviderInput struct {
 
 	// The tags to be added to the specified resource. Do not provide system tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateConferenceProviderOutput struct {
@@ -65,6 +67,8 @@ type CreateConferenceProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConferenceProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

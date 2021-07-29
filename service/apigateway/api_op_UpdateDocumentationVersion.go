@@ -43,6 +43,8 @@ type UpdateDocumentationVersionInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // A snapshot of the documentation of an API. Publishing API documentation involves
@@ -63,6 +65,8 @@ type UpdateDocumentationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDocumentationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

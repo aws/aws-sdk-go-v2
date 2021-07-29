@@ -80,6 +80,8 @@ type UpdateRouteInput struct {
 
 	// The target for the route.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRouteOutput struct {
@@ -141,6 +143,8 @@ type UpdateRouteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

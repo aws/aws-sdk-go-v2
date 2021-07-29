@@ -32,6 +32,8 @@ type GetChannelPolicyInput struct {
 	//
 	// This member is required.
 	ChannelName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetChannelPolicyOutput struct {
@@ -41,6 +43,8 @@ type GetChannelPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetChannelPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

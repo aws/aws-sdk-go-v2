@@ -41,6 +41,8 @@ type UpdateContributorInsightsInput struct {
 
 	// The global secondary index name, if applicable.
 	IndexName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContributorInsightsOutput struct {
@@ -56,6 +58,8 @@ type UpdateContributorInsightsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {

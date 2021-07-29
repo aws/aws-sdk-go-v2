@@ -49,6 +49,8 @@ type CreateScalingPlanInput struct {
 	//
 	// This member is required.
 	ScalingPlanName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateScalingPlanOutput struct {
@@ -61,6 +63,8 @@ type CreateScalingPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateScalingPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

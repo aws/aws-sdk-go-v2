@@ -44,6 +44,8 @@ type PutSchemaVersionMetadataInput struct {
 
 	// The version number of the schema.
 	SchemaVersionNumber *types.SchemaVersionNumber
+
+	noSmithyDocumentSerde
 }
 
 type PutSchemaVersionMetadataOutput struct {
@@ -74,6 +76,8 @@ type PutSchemaVersionMetadataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSchemaVersionMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -85,6 +85,8 @@ type ListPoliciesInput struct {
 	// in your account, set Scope to Local. This parameter is optional. If it is not
 	// included, or if it is set to All, all policies are returned.
 	Scope types.PolicyScopeType
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful ListPolicies request.
@@ -107,6 +109,8 @@ type ListPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

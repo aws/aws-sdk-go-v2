@@ -56,6 +56,8 @@ type DescribeManagedRuleGroupInput struct {
 	//
 	// This member is required.
 	VendorName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeManagedRuleGroupOutput struct {
@@ -95,6 +97,8 @@ type DescribeManagedRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeManagedRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

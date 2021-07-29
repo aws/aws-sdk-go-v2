@@ -47,6 +47,8 @@ type ListPlatformVersionsInput struct {
 	// the ones specified in the initial request. If no NextToken is specified, the
 	// first page is retrieved.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPlatformVersionsOutput struct {
@@ -60,6 +62,8 @@ type ListPlatformVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPlatformVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

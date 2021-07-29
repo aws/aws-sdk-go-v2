@@ -37,6 +37,8 @@ type DeregisterRobotInput struct {
 	//
 	// This member is required.
 	Robot *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterRobotOutput struct {
@@ -49,6 +51,8 @@ type DeregisterRobotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterRobotMiddlewares(stack *middleware.Stack, options Options) (err error) {

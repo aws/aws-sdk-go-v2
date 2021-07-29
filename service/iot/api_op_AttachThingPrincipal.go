@@ -41,12 +41,16 @@ type AttachThingPrincipalInput struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the AttachThingPrincipal operation.
 type AttachThingPrincipalOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachThingPrincipalMiddlewares(stack *middleware.Stack, options Options) (err error) {

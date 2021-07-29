@@ -36,6 +36,7 @@ func (c *Client) DescribeAttackStatistics(ctx context.Context, params *DescribeA
 }
 
 type DescribeAttackStatisticsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeAttackStatisticsOutput struct {
@@ -52,6 +53,8 @@ type DescribeAttackStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAttackStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

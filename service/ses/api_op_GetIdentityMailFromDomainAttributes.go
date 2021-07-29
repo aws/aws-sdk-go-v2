@@ -39,6 +39,8 @@ type GetIdentityMailFromDomainAttributesInput struct {
 	//
 	// This member is required.
 	Identities []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the custom MAIL FROM attributes for a list of identities.
@@ -51,6 +53,8 @@ type GetIdentityMailFromDomainAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIdentityMailFromDomainAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -80,6 +80,8 @@ type ListSchemasInput struct {
 	// The name or ARN of the secret that enables access to the database. This
 	// parameter is required when authenticating using AWS Secrets Manager.
 	SecretArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSchemasOutput struct {
@@ -96,6 +98,8 @@ type ListSchemasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {

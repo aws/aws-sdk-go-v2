@@ -53,11 +53,15 @@ type UpdateApplicationInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

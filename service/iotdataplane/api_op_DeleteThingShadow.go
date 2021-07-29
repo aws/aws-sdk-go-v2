@@ -39,6 +39,8 @@ type DeleteThingShadowInput struct {
 
 	// The name of the shadow.
 	ShadowName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the DeleteThingShadow operation.
@@ -51,6 +53,8 @@ type DeleteThingShadowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {

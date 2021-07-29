@@ -12,6 +12,8 @@ type DependencyException struct {
 	Message *string
 
 	ParameterName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependencyException) Error() string {
@@ -31,6 +33,8 @@ type InvalidParameterException struct {
 	Message *string
 
 	ParameterName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -50,6 +54,8 @@ type ResourceLimitExceededException struct {
 	Message *string
 
 	ParameterName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceededException) Error() string {
@@ -67,6 +73,8 @@ func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // Resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

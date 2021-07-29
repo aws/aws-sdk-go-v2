@@ -40,6 +40,8 @@ type GetDocumentInput struct {
 
 	// Set this to TRUE to include custom metadata in the response.
 	IncludeCustomMetadata bool
+
+	noSmithyDocumentSerde
 }
 
 type GetDocumentOutput struct {
@@ -52,6 +54,8 @@ type GetDocumentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {

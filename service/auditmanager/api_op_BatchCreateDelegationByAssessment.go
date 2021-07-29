@@ -38,6 +38,8 @@ type BatchCreateDelegationByAssessmentInput struct {
 	//
 	// This member is required.
 	CreateDelegationRequests []types.CreateDelegationRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchCreateDelegationByAssessmentOutput struct {
@@ -50,6 +52,8 @@ type BatchCreateDelegationByAssessmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchCreateDelegationByAssessmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type ListAssessmentsInput struct {
 
 	// The pagination token used to fetch the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssessmentsOutput struct {
@@ -47,6 +49,8 @@ type ListAssessmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssessmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

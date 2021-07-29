@@ -47,6 +47,8 @@ type ListCertificateAuthoritiesInput struct {
 	// Use this parameter to filter the returned set of certificate authorities based
 	// on their owner. The default is SELF.
 	ResourceOwner types.ResourceOwner
+
+	noSmithyDocumentSerde
 }
 
 type ListCertificateAuthoritiesOutput struct {
@@ -60,6 +62,8 @@ type ListCertificateAuthoritiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type DeleteSnapshotInput struct {
 	//
 	// This member is required.
 	SnapshotId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the DeleteSnapshot operation.
@@ -43,6 +45,8 @@ type DeleteSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

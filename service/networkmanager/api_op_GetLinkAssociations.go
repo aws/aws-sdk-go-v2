@@ -47,6 +47,8 @@ type GetLinkAssociationsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLinkAssociationsOutput struct {
@@ -59,6 +61,8 @@ type GetLinkAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLinkAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

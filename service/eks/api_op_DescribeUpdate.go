@@ -49,6 +49,8 @@ type DescribeUpdateInput struct {
 
 	// The name of the Amazon EKS node group associated with the update.
 	NodegroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUpdateOutput struct {
@@ -58,6 +60,8 @@ type DescribeUpdateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {

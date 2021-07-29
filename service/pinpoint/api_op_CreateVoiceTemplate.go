@@ -42,6 +42,8 @@ type CreateVoiceTemplateInput struct {
 	//
 	// This member is required.
 	VoiceTemplateRequest *types.VoiceTemplateRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateVoiceTemplateOutput struct {
@@ -53,6 +55,8 @@ type CreateVoiceTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVoiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

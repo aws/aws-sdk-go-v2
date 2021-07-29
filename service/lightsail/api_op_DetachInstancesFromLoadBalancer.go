@@ -45,6 +45,8 @@ type DetachInstancesFromLoadBalancerInput struct {
 	//
 	// This member is required.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DetachInstancesFromLoadBalancerOutput struct {
@@ -56,6 +58,8 @@ type DetachInstancesFromLoadBalancerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachInstancesFromLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

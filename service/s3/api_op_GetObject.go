@@ -253,6 +253,8 @@ type GetObjectInput struct {
 
 	// VersionId used to reference a specific version of the object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectOutput struct {
@@ -381,6 +383,8 @@ type GetObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

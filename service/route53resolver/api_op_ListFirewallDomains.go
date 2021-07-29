@@ -48,6 +48,8 @@ type ListFirewallDomainsInput struct {
 	// NextToken value in the response. To retrieve the next batch of objects, use the
 	// token that was returned for the prior request in your next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFirewallDomainsOutput struct {
@@ -64,6 +66,8 @@ type ListFirewallDomainsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFirewallDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {

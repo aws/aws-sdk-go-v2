@@ -38,11 +38,15 @@ type StartApplicationInput struct {
 	// Identifies the run configuration (start parameters) of a Kinesis Data Analytics
 	// application.
 	RunConfiguration *types.RunConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type StartApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -65,6 +65,8 @@ type CreateDataSourceInput struct {
 	// The AWS IAM service role ARN for the data source. The system assumes this role
 	// when accessing the data source.
 	ServiceRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDataSourceOutput struct {
@@ -74,6 +76,8 @@ type CreateDataSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

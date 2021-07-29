@@ -42,6 +42,8 @@ type GetReplicationRunsInput struct {
 
 	// The token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetReplicationRunsOutput struct {
@@ -58,6 +60,8 @@ type GetReplicationRunsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReplicationRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {

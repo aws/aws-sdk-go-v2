@@ -59,6 +59,8 @@ type RevokeDBSecurityGroupIngressInput struct {
 	// must be provided. Otherwise, EC2SecurityGroupOwnerId and either
 	// EC2SecurityGroupName or EC2SecurityGroupId must be provided.
 	EC2SecurityGroupOwnerId *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeDBSecurityGroupIngressOutput struct {
@@ -69,6 +71,8 @@ type RevokeDBSecurityGroupIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeDBSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

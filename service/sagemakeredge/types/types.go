@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -20,6 +21,8 @@ type EdgeMetric struct {
 
 	// Returns the value of the metric.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a model deployed on an edge device that is registered with
@@ -40,4 +43,8 @@ type Model struct {
 
 	// The version of the model.
 	ModelVersion *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

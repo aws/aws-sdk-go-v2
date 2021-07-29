@@ -34,6 +34,8 @@ type BatchExecuteStatementInput struct {
 	//
 	// This member is required.
 	Statements []types.BatchStatementRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchExecuteStatementOutput struct {
@@ -43,6 +45,8 @@ type BatchExecuteStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

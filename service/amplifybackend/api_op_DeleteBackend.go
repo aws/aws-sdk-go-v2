@@ -37,6 +37,8 @@ type DeleteBackendInput struct {
 	//
 	// This member is required.
 	BackendEnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBackendOutput struct {
@@ -61,6 +63,8 @@ type DeleteBackendOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBackendMiddlewares(stack *middleware.Stack, options Options) (err error) {

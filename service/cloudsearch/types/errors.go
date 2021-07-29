@@ -12,6 +12,8 @@ type BaseException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BaseException) Error() string {
@@ -31,6 +33,8 @@ type DisabledOperationException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DisabledOperationException) Error() string {
@@ -52,6 +56,8 @@ type InternalException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalException) Error() string {
@@ -71,6 +77,8 @@ type InvalidTypeException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTypeException) Error() string {
@@ -90,6 +98,8 @@ type LimitExceededException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -110,6 +120,8 @@ type ResourceAlreadyExistsException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -130,6 +142,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -149,6 +163,8 @@ type ValidationException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

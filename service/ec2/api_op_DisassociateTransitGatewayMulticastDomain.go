@@ -43,6 +43,8 @@ type DisassociateTransitGatewayMulticastDomainInput struct {
 
 	// The ID of the transit gateway multicast domain.
 	TransitGatewayMulticastDomainId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateTransitGatewayMulticastDomainOutput struct {
@@ -52,6 +54,8 @@ type DisassociateTransitGatewayMulticastDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateTransitGatewayMulticastDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

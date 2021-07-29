@@ -49,6 +49,8 @@ type UpdateConnectionInput struct {
 
 	// The ID of the link for the first device in the connection.
 	LinkId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateConnectionOutput struct {
@@ -58,6 +60,8 @@ type UpdateConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

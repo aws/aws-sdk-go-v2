@@ -66,6 +66,8 @@ type StartICD10CMInferenceJobInput struct {
 	// An AWS Key Management Service key to encrypt your output files. If you do not
 	// specify a key, the files are written in plain text.
 	KMSKey *string
+
+	noSmithyDocumentSerde
 }
 
 type StartICD10CMInferenceJobOutput struct {
@@ -76,6 +78,8 @@ type StartICD10CMInferenceJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartICD10CMInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

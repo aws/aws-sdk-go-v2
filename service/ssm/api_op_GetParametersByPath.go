@@ -67,6 +67,8 @@ type GetParametersByPathInput struct {
 
 	// Retrieve all parameters in a hierarchy with their value decrypted.
 	WithDecryption bool
+
+	noSmithyDocumentSerde
 }
 
 type GetParametersByPathOutput struct {
@@ -80,6 +82,8 @@ type GetParametersByPathOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetParametersByPathMiddlewares(stack *middleware.Stack, options Options) (err error) {

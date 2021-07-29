@@ -42,11 +42,15 @@ type UpdateContactInput struct {
 	// contact channels. An escalation plan uses these stages to contact specified
 	// contacts.
 	Plan *types.Plan
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

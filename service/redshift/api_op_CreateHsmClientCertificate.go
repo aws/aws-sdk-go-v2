@@ -46,6 +46,8 @@ type CreateHsmClientCertificateInput struct {
 
 	// A list of tag instances.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateHsmClientCertificateOutput struct {
@@ -57,6 +59,8 @@ type CreateHsmClientCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHsmClientCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

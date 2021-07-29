@@ -46,6 +46,8 @@ type DeleteFargateProfileInput struct {
 	//
 	// This member is required.
 	FargateProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFargateProfileOutput struct {
@@ -55,6 +57,8 @@ type DeleteFargateProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

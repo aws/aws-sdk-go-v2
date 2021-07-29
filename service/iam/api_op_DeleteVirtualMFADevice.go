@@ -38,11 +38,15 @@ type DeleteVirtualMFADeviceInput struct {
 	//
 	// This member is required.
 	SerialNumber *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVirtualMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVirtualMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

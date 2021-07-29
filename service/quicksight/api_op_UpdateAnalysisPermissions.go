@@ -48,6 +48,8 @@ type UpdateAnalysisPermissionsInput struct {
 	// A structure that describes the permissions to remove and the principal to remove
 	// them from.
 	RevokePermissions []types.ResourcePermission
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAnalysisPermissionsOutput struct {
@@ -70,6 +72,8 @@ type UpdateAnalysisPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAnalysisPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListStreamingSessionsInput struct {
 
 	// A collection of session IDs.
 	SessionIds *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStreamingSessionsOutput struct {
@@ -54,6 +56,8 @@ type ListStreamingSessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamingSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

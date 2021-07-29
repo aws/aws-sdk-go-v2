@@ -51,6 +51,8 @@ type AllocatePublicVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	OwnerAccount *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a virtual interface.
@@ -175,6 +177,8 @@ type AllocatePublicVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAllocatePublicVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

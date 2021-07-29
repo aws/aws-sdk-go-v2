@@ -43,6 +43,8 @@ type GetWorkflowRunsInput struct {
 
 	// The maximum size of the response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetWorkflowRunsOutput struct {
@@ -55,6 +57,8 @@ type GetWorkflowRunsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWorkflowRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type DescribeChangeSetInput struct {
 	// If you specified the name of a change set, specify the stack name or ID (ARN) of
 	// the change set you want to describe.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DescribeChangeSet action.
@@ -127,6 +129,8 @@ type DescribeChangeSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

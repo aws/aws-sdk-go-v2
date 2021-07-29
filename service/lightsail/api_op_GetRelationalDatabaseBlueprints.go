@@ -36,6 +36,8 @@ type GetRelationalDatabaseBlueprintsInput struct {
 	// results are paginated, the response will return a next page token that you can
 	// specify as the page token in a subsequent request.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRelationalDatabaseBlueprintsOutput struct {
@@ -52,6 +54,8 @@ type GetRelationalDatabaseBlueprintsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRelationalDatabaseBlueprintsMiddlewares(stack *middleware.Stack, options Options) (err error) {

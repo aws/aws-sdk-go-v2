@@ -33,6 +33,8 @@ type GetRelationalDatabaseLogStreamsInput struct {
 	//
 	// This member is required.
 	RelationalDatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRelationalDatabaseLogStreamsOutput struct {
@@ -43,6 +45,8 @@ type GetRelationalDatabaseLogStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRelationalDatabaseLogStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type DescribeLoggingStatusInput struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of logging for a cluster.
@@ -61,6 +63,8 @@ type DescribeLoggingStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLoggingStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

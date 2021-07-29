@@ -43,12 +43,16 @@ type RegisterEventTopicInput struct {
 	//
 	// This member is required.
 	TopicName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a RegisterEventTopic request.
 type RegisterEventTopicOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterEventTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {

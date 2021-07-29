@@ -75,6 +75,8 @@ type GetOpenIdTokenForDeveloperIdentityInput struct {
 	// resources for the token's duration. Please provide for a small grace period,
 	// usually no more than 5 minutes, to account for clock skew.
 	TokenDuration *int64
+
+	noSmithyDocumentSerde
 }
 
 // Returned in response to a successful GetOpenIdTokenForDeveloperIdentity request.
@@ -88,6 +90,8 @@ type GetOpenIdTokenForDeveloperIdentityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOpenIdTokenForDeveloperIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

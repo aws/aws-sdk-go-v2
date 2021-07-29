@@ -40,12 +40,16 @@ type DeleteReceiptRuleSetInput struct {
 	//
 	// This member is required.
 	RuleSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type DeleteReceiptRuleSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReceiptRuleSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

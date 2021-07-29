@@ -84,6 +84,8 @@ type MergeProfilesInput struct {
 	// Profile1 into MainProfile. This would be the identifier of the EmailAddress
 	// field in Profile1.
 	FieldSourceProfileIds *types.FieldSourceProfileIds
+
+	noSmithyDocumentSerde
 }
 
 type MergeProfilesOutput struct {
@@ -93,6 +95,8 @@ type MergeProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMergeProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

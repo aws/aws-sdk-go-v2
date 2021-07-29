@@ -58,11 +58,15 @@ type AcceptPortfolioShareInput struct {
 	// example, aws servicecatalog accept-portfolio-share --portfolio-id
 	// "port-2qwzkwxt3y5fk" --portfolio-share-type AWS_ORGANIZATIONS
 	PortfolioShareType types.PortfolioShareType
+
+	noSmithyDocumentSerde
 }
 
 type AcceptPortfolioShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptPortfolioShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

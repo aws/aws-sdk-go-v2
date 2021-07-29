@@ -55,11 +55,15 @@ type CreateUserInput struct {
 	// valid for only 7 days. If users don’t set their passwords within 7 days, you
 	// must send them a new welcome email.
 	MessageAction types.MessageAction
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

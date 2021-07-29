@@ -41,6 +41,8 @@ type DescribeBuildInput struct {
 	//
 	// This member is required.
 	BuildId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -51,6 +53,8 @@ type DescribeBuildOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetControlInput struct {
 	//
 	// This member is required.
 	ControlId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetControlOutput struct {
@@ -42,6 +44,8 @@ type GetControlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetControlMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -201,11 +201,15 @@ type SetQueueAttributesInput struct {
 	//
 	// This member is required.
 	QueueUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type SetQueueAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetQueueAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

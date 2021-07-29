@@ -48,6 +48,8 @@ type UpdateRelationalDatabaseParametersInput struct {
 	//
 	// This member is required.
 	RelationalDatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRelationalDatabaseParametersOutput struct {
@@ -59,6 +61,8 @@ type UpdateRelationalDatabaseParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRelationalDatabaseParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

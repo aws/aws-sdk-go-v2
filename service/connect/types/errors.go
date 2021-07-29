@@ -10,6 +10,8 @@ import (
 // The contact flow has not been published.
 type ContactFlowNotPublishedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ContactFlowNotPublishedException) Error() string {
@@ -29,6 +31,8 @@ func (e *ContactFlowNotPublishedException) ErrorFault() smithy.ErrorFault { retu
 // The contact with the specified ID is not active or does not exist.
 type ContactNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ContactNotFoundException) Error() string {
@@ -46,6 +50,8 @@ func (e *ContactNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // Outbound calls to the destination number are not allowed.
 type DestinationNotAllowedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DestinationNotAllowedException) Error() string {
@@ -63,6 +69,8 @@ func (e *DestinationNotAllowedException) ErrorFault() smithy.ErrorFault { return
 // A resource with the specified name already exists.
 type DuplicateResourceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateResourceException) Error() string {
@@ -80,6 +88,8 @@ func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smi
 // Request processing failed because of an error or failure with the service.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -99,6 +109,8 @@ type InvalidContactFlowException struct {
 	Message *string
 
 	Problems []ProblemDetail
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidContactFlowException) Error() string {
@@ -116,6 +128,8 @@ func (e *InvalidContactFlowException) ErrorFault() smithy.ErrorFault { return sm
 // One or more of the specified parameters are not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -133,6 +147,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // The request is not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -150,6 +166,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The allowed limit for the resource has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -167,6 +185,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The contact is not permitted.
 type OutboundContactNotPermittedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OutboundContactNotPermittedException) Error() string {
@@ -188,6 +208,8 @@ func (e *OutboundContactNotPermittedException) ErrorFault() smithy.ErrorFault {
 // A resource already has that name.
 type ResourceConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceConflictException) Error() string {
@@ -208,6 +230,8 @@ type ResourceInUseException struct {
 
 	ResourceType ResourceType
 	ResourceId   *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -225,6 +249,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -242,6 +268,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The service quota has been exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -259,6 +287,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // The throttling limit has been exceeded.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -276,6 +306,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // No user with the specified credentials was found in the Amazon Connect instance.
 type UserNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserNotFoundException) Error() string {

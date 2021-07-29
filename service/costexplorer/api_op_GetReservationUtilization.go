@@ -137,6 +137,8 @@ type GetReservationUtilizationInput struct {
 	//
 	// Supported values for SortOrder are ASCENDING or DESCENDING.
 	SortBy *types.SortDefinition
+
+	noSmithyDocumentSerde
 }
 
 type GetReservationUtilizationOutput struct {
@@ -155,6 +157,8 @@ type GetReservationUtilizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReservationUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type CreateUsagePlanKeyInput struct {
 	//
 	// This member is required.
 	UsagePlanId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a usage plan key to identify a plan customer. To associate an API
@@ -67,6 +69,8 @@ type CreateUsagePlanKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUsagePlanKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type CreateClassifierInput struct {
 
 	// An XMLClassifier object specifying the classifier to create.
 	XMLClassifier *types.CreateXMLClassifierRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

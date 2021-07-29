@@ -32,11 +32,15 @@ type DeleteMetricStreamInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMetricStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMetricStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

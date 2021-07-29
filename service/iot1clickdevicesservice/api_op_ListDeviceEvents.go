@@ -54,6 +54,8 @@ type ListDeviceEventsInput struct {
 
 	// The token to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDeviceEventsOutput struct {
@@ -67,6 +69,8 @@ type ListDeviceEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeviceEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

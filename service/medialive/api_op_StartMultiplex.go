@@ -35,6 +35,8 @@ type StartMultiplexInput struct {
 	//
 	// This member is required.
 	MultiplexId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for StartMultiplexResponse
@@ -72,6 +74,8 @@ type StartMultiplexOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMultiplexMiddlewares(stack *middleware.Stack, options Options) (err error) {

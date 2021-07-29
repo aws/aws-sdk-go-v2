@@ -39,6 +39,8 @@ type GetDomainAssociationInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the get domain association request.
@@ -52,6 +54,8 @@ type GetDomainAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

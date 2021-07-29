@@ -36,11 +36,15 @@ type UpdateSubscriptionInput struct {
 	// UpdateSubscription request. If the UpdateSubscription request does not included
 	// a value for AutoRenew, the existing value for AutoRenew remains unchanged.
 	AutoRenew types.AutoRenew
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSubscriptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

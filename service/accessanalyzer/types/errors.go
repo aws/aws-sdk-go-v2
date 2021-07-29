@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -30,6 +32,8 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -49,6 +53,8 @@ type InternalServerException struct {
 	Message *string
 
 	RetryAfterSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -69,6 +75,8 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -89,6 +97,8 @@ type ServiceQuotaExceededException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -108,6 +118,8 @@ type ThrottlingException struct {
 	Message *string
 
 	RetryAfterSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -128,6 +140,8 @@ type ValidationException struct {
 
 	Reason    ValidationExceptionReason
 	FieldList []ValidationExceptionField
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

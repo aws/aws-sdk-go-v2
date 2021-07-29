@@ -37,6 +37,8 @@ type StartProjectSessionInput struct {
 	// A value that, if true, enables you to take control of a session, even if a
 	// different client is currently accessing the project.
 	AssumeControl bool
+
+	noSmithyDocumentSerde
 }
 
 type StartProjectSessionOutput struct {
@@ -51,6 +53,8 @@ type StartProjectSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartProjectSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

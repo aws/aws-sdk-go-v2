@@ -107,6 +107,8 @@ type CreateDocumentClassifierInput struct {
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateDocumentClassifierOutput struct {
@@ -116,6 +118,8 @@ type CreateDocumentClassifierOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

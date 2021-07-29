@@ -38,6 +38,8 @@ type GetApiKeyInput struct {
 	// A boolean flag to specify whether (true) or not (false) the result contains the
 	// key value.
 	IncludeValue *bool
+
+	noSmithyDocumentSerde
 }
 
 // A resource that can be distributed to callers for executing Method resources
@@ -80,6 +82,8 @@ type GetApiKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -65,6 +65,8 @@ type ListAccessPointsForObjectLambdaInput struct {
 	// this field contains a continuation token that you can provide in subsequent
 	// calls to this API to retrieve additional access points.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAccessPointsForObjectLambdaOutput struct {
@@ -79,6 +81,8 @@ type ListAccessPointsForObjectLambdaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccessPointsForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {

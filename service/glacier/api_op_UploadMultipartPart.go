@@ -104,6 +104,8 @@ type UploadMultipartPartInput struct {
 	// the proper sequence. The format of this header follows RFC 2616. An example
 	// header is Content-Range:bytes 0-4194303/*.
 	Range *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -114,6 +116,8 @@ type UploadMultipartPartOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUploadMultipartPartMiddlewares(stack *middleware.Stack, options Options) (err error) {

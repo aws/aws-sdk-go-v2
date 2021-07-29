@@ -32,6 +32,8 @@ type DeleteInsightInput struct {
 	//
 	// This member is required.
 	InsightArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInsightOutput struct {
@@ -43,6 +45,8 @@ type DeleteInsightOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {

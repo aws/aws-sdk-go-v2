@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -52,6 +53,8 @@ type DnsConfig struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-policy.html#routing-policy-weighted)
 	// in the Route 53 Developer Guide.
 	RoutingPolicy RoutingPolicy
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about changes to the Route 53 DNS
@@ -63,6 +66,8 @@ type DnsConfigChange struct {
 	//
 	// This member is required.
 	DnsRecords []DnsRecord
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the ID for the Route 53 hosted zone that Cloud Map
@@ -75,6 +80,8 @@ type DnsProperties struct {
 
 	// Start of Authority (SOA) record for the hosted zone.
 	SOA *SOA
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the Route 53 DNS records that you
@@ -179,6 +186,8 @@ type DnsRecord struct {
 	//
 	// This member is required.
 	Type RecordType
+
+	noSmithyDocumentSerde
 }
 
 // Public DNS and HTTP namespaces only. A complex type that contains settings for
@@ -266,6 +275,8 @@ type HealthCheckConfig struct {
 	// the service. If you don't specify a value for ResourcePath, the default value is
 	// /. If you specify TCP for Type, you must not specify a value for ResourcePath.
 	ResourcePath *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about an optional custom health check.
@@ -326,6 +337,8 @@ type HealthCheckCustomConfig struct {
 	// Deprecated: Configurable FailureThreshold of HealthCheckCustomConfig is
 	// deprecated. It will always have value 1.
 	FailureThreshold *int32
+
+	noSmithyDocumentSerde
 }
 
 // In a response to a DiscoverInstances
@@ -351,6 +364,8 @@ type HttpInstanceSummary struct {
 
 	// The name of the service that you specified when you registered the instance.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Updated properties for the HTTP namespace.
@@ -360,6 +375,8 @@ type HttpNamespaceChange struct {
 	//
 	// This member is required.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the name of an HTTP namespace.
@@ -367,6 +384,8 @@ type HttpProperties struct {
 
 	// The name of an HTTP namespace.
 	HttpName *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about an instance that Cloud Map
@@ -468,6 +487,8 @@ type Instance struct {
 	// the same namespace and service. CreatorRequestId can be any unique string (for
 	// example, a date/time stamp).
 	CreatorRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the instances that you registered
@@ -504,6 +525,8 @@ type InstanceSummary struct {
 
 	// The ID for an instance that you created by using a specified service.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about a specified namespace.
@@ -546,6 +569,8 @@ type Namespace struct {
 	// DNS_PRIVATE Instances can be discovered using DNS queries in VPCs and using the
 	// DiscoverInstances API.
 	Type NamespaceType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that identifies the namespaces that you want to list. You can
@@ -570,6 +595,8 @@ type NamespaceFilter struct {
 	// specify IN for the condition, you can choose to list public namespaces, private
 	// namespaces, or both. BETWEEN Not applicable
 	Condition FilterCondition
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information that's specific to the namespace type.
@@ -581,6 +608,8 @@ type NamespaceProperties struct {
 
 	// A complex type that contains the name of an HTTP namespace.
 	HttpProperties *HttpProperties
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about a namespace.
@@ -611,6 +640,8 @@ type NamespaceSummary struct {
 
 	// The type of the namespace, either public or private.
 	Type NamespaceType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about a specified operation.
@@ -668,6 +699,8 @@ type Operation struct {
 	// is accurate to milliseconds. For example, the value 1516925490.087 represents
 	// Friday, January 26, 2018 12:11:30.087 AM.
 	UpdateDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that lets you select the operations that you want to list.
@@ -731,6 +764,8 @@ type OperationFilter struct {
 	// Universal Time (UTC). The start date must be the first value. BETWEEN is
 	// supported for UPDATE_DATE.
 	Condition FilterCondition
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about an operation that matches the
@@ -755,6 +790,8 @@ type OperationSummary struct {
 	// * FAIL: The
 	// operation failed. For the failure reason, see ErrorMessage.
 	Status OperationStatus
+
+	noSmithyDocumentSerde
 }
 
 // Updated properties for the private DNS namespace.
@@ -765,6 +802,8 @@ type PrivateDnsNamespaceChange struct {
 
 	// Properties to be updated in the private DNS namespace.
 	Properties *PrivateDnsNamespacePropertiesChange
+
+	noSmithyDocumentSerde
 }
 
 // DNS properties for the private DNS namespace.
@@ -774,6 +813,8 @@ type PrivateDnsNamespaceProperties struct {
 	//
 	// This member is required.
 	DnsProperties *PrivateDnsPropertiesMutable
+
+	noSmithyDocumentSerde
 }
 
 // Updated properties for the private DNS namespace.
@@ -783,6 +824,8 @@ type PrivateDnsNamespacePropertiesChange struct {
 	//
 	// This member is required.
 	DnsProperties *PrivateDnsPropertiesMutableChange
+
+	noSmithyDocumentSerde
 }
 
 // DNS properties for the private DNS namespace.
@@ -793,6 +836,8 @@ type PrivateDnsPropertiesMutable struct {
 	//
 	// This member is required.
 	SOA *SOA
+
+	noSmithyDocumentSerde
 }
 
 // Updated DNS properties for the private DNS namespace.
@@ -803,6 +848,8 @@ type PrivateDnsPropertiesMutableChange struct {
 	//
 	// This member is required.
 	SOA *SOAChange
+
+	noSmithyDocumentSerde
 }
 
 // Updated properties for the public DNS namespace.
@@ -813,6 +860,8 @@ type PublicDnsNamespaceChange struct {
 
 	// Properties to be updated in the public DNS namespace.
 	Properties *PublicDnsNamespacePropertiesChange
+
+	noSmithyDocumentSerde
 }
 
 // DNS properties for the public DNS namespace.
@@ -822,6 +871,8 @@ type PublicDnsNamespaceProperties struct {
 	//
 	// This member is required.
 	DnsProperties *PublicDnsPropertiesMutable
+
+	noSmithyDocumentSerde
 }
 
 // Updated properties for the public DNS namespace.
@@ -831,6 +882,8 @@ type PublicDnsNamespacePropertiesChange struct {
 	//
 	// This member is required.
 	DnsProperties *PublicDnsPropertiesMutableChange
+
+	noSmithyDocumentSerde
 }
 
 // DNS properties for the public DNS namespace.
@@ -841,6 +894,8 @@ type PublicDnsPropertiesMutable struct {
 	//
 	// This member is required.
 	SOA *SOA
+
+	noSmithyDocumentSerde
 }
 
 // Updated DNS properties for the public DNS namespace.
@@ -851,6 +906,8 @@ type PublicDnsPropertiesMutableChange struct {
 	//
 	// This member is required.
 	SOA *SOAChange
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the specified service.
@@ -910,6 +967,8 @@ type Service struct {
 	// DiscoverInstances API operation. HTTP The service instances can only be
 	// discovered using the DiscoverInstances API operation. DNS Reserved.
 	Type ServiceType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains changes to an existing service.
@@ -926,6 +985,8 @@ type ServiceChange struct {
 	// you specify settings for a health check, Cloud Map associates the health check
 	// with the records that you specify in DnsConfig.
 	HealthCheckConfig *HealthCheckConfig
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that lets you specify the namespaces that you want to list
@@ -956,6 +1017,8 @@ type ServiceFilter struct {
 	// *
 	// BETWEEN: Not applicable.
 	Condition FilterCondition
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about a specified service.
@@ -1015,6 +1078,8 @@ type ServiceSummary struct {
 	// DiscoverInstances API operation. HTTP The service instances can only be
 	// discovered using the DiscoverInstances API operation. DNS Reserved.
 	Type ServiceType
+
+	noSmithyDocumentSerde
 }
 
 // Start of Authority (SOA) properties for a public or private DNS namespace.
@@ -1024,6 +1089,8 @@ type SOA struct {
 	//
 	// This member is required.
 	TTL *int64
+
+	noSmithyDocumentSerde
 }
 
 // Updated Start of Authority (SOA) properties for a public or private DNS
@@ -1034,6 +1101,8 @@ type SOAChange struct {
 	//
 	// This member is required.
 	TTL *int64
+
+	noSmithyDocumentSerde
 }
 
 // A custom key-value pair that's associated with a resource.
@@ -1049,4 +1118,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

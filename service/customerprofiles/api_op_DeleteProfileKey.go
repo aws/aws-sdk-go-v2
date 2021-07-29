@@ -47,6 +47,8 @@ type DeleteProfileKeyInput struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProfileKeyOutput struct {
@@ -56,6 +58,8 @@ type DeleteProfileKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProfileKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

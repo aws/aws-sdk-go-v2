@@ -83,6 +83,8 @@ type UpdatePortalInput struct {
 	// * The ID of an existing image. Choose this option
 	// to keep an existing image.
 	PortalLogoImage *types.Image
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePortalOutput struct {
@@ -95,6 +97,8 @@ type UpdatePortalOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {

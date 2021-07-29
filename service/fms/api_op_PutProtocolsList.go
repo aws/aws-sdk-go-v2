@@ -36,6 +36,8 @@ type PutProtocolsListInput struct {
 
 	// The tags associated with the resource.
 	TagList []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutProtocolsListOutput struct {
@@ -48,6 +50,8 @@ type PutProtocolsListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {

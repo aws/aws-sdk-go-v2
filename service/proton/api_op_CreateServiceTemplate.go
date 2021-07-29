@@ -65,6 +65,8 @@ type CreateServiceTemplateInput struct {
 	// Proton User Guide
 	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceTemplateOutput struct {
@@ -76,6 +78,8 @@ type CreateServiceTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

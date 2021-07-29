@@ -45,6 +45,8 @@ type GetLoginProfileInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetLoginProfile request.
@@ -57,6 +59,8 @@ type GetLoginProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLoginProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -77,6 +77,8 @@ type DeleteGameServerGroupInput struct {
 	// * RETAIN – Does a safe
 	// delete of the game server group but retains the EC2 Auto Scaling group as is.
 	DeleteOption types.GameServerGroupDeleteOption
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGameServerGroupOutput struct {
@@ -87,6 +89,8 @@ type DeleteGameServerGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

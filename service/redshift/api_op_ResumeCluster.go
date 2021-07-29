@@ -35,6 +35,8 @@ type ResumeClusterInput struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type ResumeClusterOutput struct {
@@ -44,6 +46,8 @@ type ResumeClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResumeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

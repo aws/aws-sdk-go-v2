@@ -33,6 +33,8 @@ type GetAssignmentInput struct {
 	//
 	// This member is required.
 	AssignmentId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAssignmentOutput struct {
@@ -45,6 +47,8 @@ type GetAssignmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

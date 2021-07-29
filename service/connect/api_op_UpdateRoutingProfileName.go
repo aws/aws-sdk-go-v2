@@ -45,11 +45,15 @@ type UpdateRoutingProfileNameInput struct {
 
 	// The name of the routing profile. Must not be more than 127 characters.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRoutingProfileNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRoutingProfileNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

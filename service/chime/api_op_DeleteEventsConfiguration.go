@@ -37,11 +37,15 @@ type DeleteEventsConfigurationInput struct {
 	//
 	// This member is required.
 	BotId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEventsConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEventsConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

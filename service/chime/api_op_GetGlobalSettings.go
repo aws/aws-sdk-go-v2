@@ -29,6 +29,7 @@ func (c *Client) GetGlobalSettings(ctx context.Context, params *GetGlobalSetting
 }
 
 type GetGlobalSettingsInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetGlobalSettingsOutput struct {
@@ -41,6 +42,8 @@ type GetGlobalSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type DeleteProgramInput struct {
 	//
 	// This member is required.
 	ProgramName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProgramOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProgramMiddlewares(stack *middleware.Stack, options Options) (err error) {

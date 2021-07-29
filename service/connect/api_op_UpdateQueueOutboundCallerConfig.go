@@ -46,11 +46,15 @@ type UpdateQueueOutboundCallerConfigInput struct {
 	//
 	// This member is required.
 	QueueId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQueueOutboundCallerConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQueueOutboundCallerConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

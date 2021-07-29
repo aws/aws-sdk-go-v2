@@ -57,6 +57,8 @@ type DescribeReservedNodeOfferingsInput struct {
 
 	// The unique identifier for the offering.
 	ReservedNodeOfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -74,6 +76,8 @@ type DescribeReservedNodeOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedNodeOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

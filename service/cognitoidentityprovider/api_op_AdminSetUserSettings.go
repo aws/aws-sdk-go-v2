@@ -50,6 +50,8 @@ type AdminSetUserSettingsInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to set user settings as an
@@ -57,6 +59,8 @@ type AdminSetUserSettingsInput struct {
 type AdminSetUserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminSetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

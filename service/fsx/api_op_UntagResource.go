@@ -39,12 +39,16 @@ type UntagResourceInput struct {
 	//
 	// This member is required.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 // The response object for UntagResource action.
 type UntagResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

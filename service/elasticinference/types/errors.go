@@ -10,6 +10,8 @@ import (
 // Raised when a malformed input has been provided to the API.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -27,6 +29,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // Raised when an unexpected error occurred during request processing.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -44,6 +48,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // Raised when the requested resource cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

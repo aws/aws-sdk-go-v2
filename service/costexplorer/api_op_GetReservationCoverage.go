@@ -187,6 +187,8 @@ type GetReservationCoverageInput struct {
 	// Supported values for SortOrder are
 	// ASCENDING or DESCENDING.
 	SortBy *types.SortDefinition
+
+	noSmithyDocumentSerde
 }
 
 type GetReservationCoverageOutput struct {
@@ -205,6 +207,8 @@ type GetReservationCoverageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReservationCoverageMiddlewares(stack *middleware.Stack, options Options) (err error) {

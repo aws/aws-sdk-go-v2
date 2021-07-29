@@ -42,6 +42,8 @@ type GetTrafficPolicyInput struct {
 	//
 	// This member is required.
 	Version *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the request.
@@ -54,6 +56,8 @@ type GetTrafficPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTrafficPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

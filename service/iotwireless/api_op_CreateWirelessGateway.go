@@ -50,6 +50,8 @@ type CreateWirelessGatewayInput struct {
 	// The tags to attach to the new wireless gateway. Tags are metadata that you can
 	// use to manage a resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateWirelessGatewayOutput struct {
@@ -62,6 +64,8 @@ type CreateWirelessGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWirelessGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

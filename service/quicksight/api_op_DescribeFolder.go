@@ -38,6 +38,8 @@ type DescribeFolderInput struct {
 	//
 	// This member is required.
 	FolderId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFolderOutput struct {
@@ -53,6 +55,8 @@ type DescribeFolderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

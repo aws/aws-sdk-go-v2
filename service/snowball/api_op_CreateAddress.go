@@ -36,6 +36,8 @@ type CreateAddressInput struct {
 	//
 	// This member is required.
 	Address *types.Address
+
+	noSmithyDocumentSerde
 }
 
 type CreateAddressOutput struct {
@@ -47,6 +49,8 @@ type CreateAddressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {

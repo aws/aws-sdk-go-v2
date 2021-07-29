@@ -66,6 +66,8 @@ type ListAssociationsInput struct {
 
 	// A filter that returns only associations with the specified source type.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssociationsOutput struct {
@@ -78,6 +80,8 @@ type ListAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

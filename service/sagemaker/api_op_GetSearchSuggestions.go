@@ -38,6 +38,8 @@ type GetSearchSuggestionsInput struct {
 
 	// Limits the property names that are included in the response.
 	SuggestionQuery *types.SuggestionQuery
+
+	noSmithyDocumentSerde
 }
 
 type GetSearchSuggestionsOutput struct {
@@ -47,6 +49,8 @@ type GetSearchSuggestionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSearchSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

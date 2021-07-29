@@ -44,6 +44,8 @@ type UpdateConfigurationSetEventDestinationInput struct {
 
 	// An object that defines a single event destination.
 	EventDestination *types.EventDestinationDefinition
+
+	noSmithyDocumentSerde
 }
 
 // An empty object that indicates that the event destination was updated
@@ -51,6 +53,8 @@ type UpdateConfigurationSetEventDestinationInput struct {
 type UpdateConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

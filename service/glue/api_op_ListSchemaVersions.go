@@ -52,6 +52,8 @@ type ListSchemaVersionsInput struct {
 
 	// A continuation token, if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSchemaVersionsOutput struct {
@@ -65,6 +67,8 @@ type ListSchemaVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

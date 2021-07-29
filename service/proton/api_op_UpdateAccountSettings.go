@@ -31,6 +31,8 @@ type UpdateAccountSettingsInput struct {
 
 	// The Amazon Resource Name (ARN) of the AWS Proton pipeline service role.
 	PipelineServiceRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccountSettingsOutput struct {
@@ -42,6 +44,8 @@ type UpdateAccountSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

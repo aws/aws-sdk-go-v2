@@ -40,6 +40,8 @@ type DescribeManagedEndpointInput struct {
 	//
 	// This member is required.
 	VirtualClusterId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeManagedEndpointOutput struct {
@@ -49,6 +51,8 @@ type DescribeManagedEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

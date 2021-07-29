@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -12,6 +13,8 @@ type Alarm struct {
 	// The name of the alarm. Maximum length is 255 characters. Each alarm name can be
 	// used only once in a list of alarms.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about alarms associated with the deployment group.
@@ -34,6 +37,8 @@ type AlarmConfiguration struct {
 	// * false: The deployment stops if alarm
 	// status information can't be retrieved from Amazon CloudWatch.
 	IgnorePollAlarmFailure bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about an application.
@@ -58,6 +63,8 @@ type ApplicationInfo struct {
 	// True if the user has authenticated with GitHub for the specified application.
 	// Otherwise, false.
 	LinkedToGitHub bool
+
+	noSmithyDocumentSerde
 }
 
 // A revision for an AWS Lambda or Amazon ECS deployment that is a YAML-formatted
@@ -79,6 +86,8 @@ type AppSpecContent struct {
 
 	// The SHA256 hash value of the revision content.
 	Sha256 *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a configuration for automatically rolling back to a previous
@@ -92,6 +101,8 @@ type AutoRollbackConfiguration struct {
 
 	// The event type or types that trigger a rollback.
 	Events []AutoRollbackEvent
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Auto Scaling group.
@@ -102,6 +113,8 @@ type AutoScalingGroup struct {
 
 	// The Auto Scaling group name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about blue/green deployment options for a deployment group.
@@ -118,6 +131,8 @@ type BlueGreenDeploymentConfiguration struct {
 	// Information about whether to terminate instances in the original fleet during a
 	// blue/green deployment.
 	TerminateBlueInstancesOnDeploymentSuccess *BlueInstanceTerminationOption
+
+	noSmithyDocumentSerde
 }
 
 // Information about whether instances in the original environment are terminated
@@ -142,6 +157,8 @@ type BlueInstanceTerminationOption struct {
 	// traffic from the original (blue) task set to a replacement (green) task set. The
 	// maximum setting is 2880 minutes (2 days).
 	TerminationWaitTimeInMinutes int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the target to be updated by an AWS CloudFormation blue/green
@@ -172,6 +189,8 @@ type CloudFormationTarget struct {
 	// The percentage of production traffic that the target version of an AWS
 	// CloudFormation blue/green deployment receives.
 	TargetVersionWeight float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment configuration.
@@ -195,6 +214,8 @@ type DeploymentConfigInfo struct {
 	// The configuration that specifies how the deployment traffic is routed. Used for
 	// deployments with a Lambda or ECS compute platform only.
 	TrafficRoutingConfig *TrafficRoutingConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment group.
@@ -287,6 +308,8 @@ type DeploymentGroupInfo struct {
 
 	// Information about triggers associated with the deployment group.
 	TriggerConfigurations []TriggerConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment.
@@ -436,6 +459,8 @@ type DeploymentInfo struct {
 	// Indicates whether only instances that are not running the latest application
 	// revision are to be deployed to.
 	UpdateOutdatedInstancesOnly bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the deployment status of the instances in the deployment.
@@ -460,6 +485,8 @@ type DeploymentOverview struct {
 	// The number of instances in the deployment to which revisions have been
 	// successfully deployed.
 	Succeeded int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about how traffic is rerouted to instances in a replacement
@@ -484,6 +511,8 @@ type DeploymentReadyOption struct {
 	// changed to Stopped if rerouting is not started manually. Applies only to the
 	// STOP_DEPLOYMENT option for actionOnTimeout.
 	WaitTimeInMinutes int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the type of deployment, either in-place or blue/green, you
@@ -495,6 +524,8 @@ type DeploymentStyle struct {
 
 	// Indicates whether to run an in-place deployment or a blue/green deployment.
 	DeploymentType DeploymentType
+
+	noSmithyDocumentSerde
 }
 
 // Information about the deployment target.
@@ -520,6 +551,8 @@ type DeploymentTarget struct {
 	// Information about the target for a deployment that uses the AWS Lambda compute
 	// platform.
 	LambdaTarget *LambdaTarget
+
+	noSmithyDocumentSerde
 }
 
 // Diagnostic information about executable scripts that are part of a deployment.
@@ -555,6 +588,8 @@ type Diagnostics struct {
 
 	// The name of the script.
 	ScriptName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an EC2 tag filter.
@@ -575,6 +610,8 @@ type EC2TagFilter struct {
 
 	// The tag filter value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about groups of EC2 instance tags.
@@ -584,6 +621,8 @@ type EC2TagSet struct {
 	// be included in the deployment group, it must be identified by all of the tag
 	// groups in the list.
 	Ec2TagSetList [][]EC2TagFilter
+
+	noSmithyDocumentSerde
 }
 
 // Contains the service and cluster names used to identify an Amazon ECS
@@ -595,6 +634,8 @@ type ECSService struct {
 
 	// The name of the target Amazon ECS service.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the target of an Amazon ECS deployment.
@@ -621,6 +662,8 @@ type ECSTarget struct {
 
 	// The ECSTaskSet objects associated with the ECS target.
 	TaskSetsInfo []ECSTaskSet
+
+	noSmithyDocumentSerde
 }
 
 // Information about a set of Amazon ECS tasks in an AWS CodeDeploy deployment. An
@@ -672,6 +715,8 @@ type ECSTaskSet struct {
 
 	// The percentage of traffic served by this task set.
 	TrafficWeight float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a load balancer in Elastic Load Balancing to use in a
@@ -685,6 +730,8 @@ type ELBInfo struct {
 	// instances are deregistered from so they are not serving traffic during a
 	// deployment, and then re-registered with after the deployment is complete.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment error.
@@ -742,6 +789,8 @@ type ErrorInformation struct {
 
 	// An accompanying error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an application revision.
@@ -761,6 +810,8 @@ type GenericRevisionInfo struct {
 
 	// When the revision was registered with AWS CodeDeploy.
 	RegisterTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information about the location of application artifacts stored in GitHub.
@@ -774,6 +825,8 @@ type GitHubLocation struct {
 	// that represents the bundled artifacts for the application revision. Specified as
 	// account/repository.
 	Repository *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the instances that belong to the replacement environment in a
@@ -789,6 +842,8 @@ type GreenFleetProvisioningOption struct {
 	// * COPY_AUTO_SCALING_GROUP: Use settings from a specified Auto Scaling
 	// group to define and create instances in a new Auto Scaling group.
 	Action GreenFleetProvisioningAction
+
+	noSmithyDocumentSerde
 }
 
 // Information about an on-premises instance.
@@ -815,6 +870,8 @@ type InstanceInfo struct {
 
 	// The tags currently associated with the on-premises instance.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about an instance in a deployment.
@@ -862,6 +919,8 @@ type InstanceSummary struct {
 	//
 	// Deprecated: InstanceStatus is deprecated, use TargetStatus instead.
 	Status InstanceStatus
+
+	noSmithyDocumentSerde
 }
 
 // A target Amazon EC2 or on-premises instance during a deployment that uses the
@@ -889,6 +948,8 @@ type InstanceTarget struct {
 
 	// The unique ID of a deployment target that has a type of instanceTarget.
 	TargetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Lambda function specified in a deployment.
@@ -912,6 +973,8 @@ type LambdaFunctionInfo struct {
 	// The percentage of production traffic that the target version of a Lambda
 	// function receives.
 	TargetVersionWeight float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about the target AWS Lambda function during an AWS Lambda
@@ -938,6 +1001,8 @@ type LambdaTarget struct {
 
 	// The unique ID of a deployment target that has a type of lambdaTarget.
 	TargetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the most recent attempted or successful deployment to a
@@ -957,6 +1022,8 @@ type LastDeploymentInfo struct {
 
 	// The status of the most recent deployment.
 	Status DeploymentStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment lifecycle event.
@@ -994,6 +1061,8 @@ type LifecycleEvent struct {
 	// * Unknown: The deployment lifecycle event is
 	// unknown.
 	Status LifecycleEventStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about the Elastic Load Balancing load balancer or target group used
@@ -1015,6 +1084,8 @@ type LoadBalancerInfo struct {
 	// The target group pair information. This is an array of TargeGroupPairInfo
 	// objects with a maximum size of one.
 	TargetGroupPairInfoList []TargetGroupPairInfo
+
+	noSmithyDocumentSerde
 }
 
 // Information about minimum healthy instance.
@@ -1050,6 +1121,8 @@ type MinimumHealthyHosts struct {
 
 	// The minimum healthy instance value.
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about groups of on-premises instance tags.
@@ -1059,6 +1132,8 @@ type OnPremisesTagSet struct {
 	// instance to be included in the deployment group, it must be identified by all of
 	// the tag groups in the list.
 	OnPremisesTagSetList [][]TagFilter
+
+	noSmithyDocumentSerde
 }
 
 // A revision for an AWS Lambda deployment that is a YAML-formatted or
@@ -1073,6 +1148,8 @@ type RawString struct {
 
 	// The SHA256 hash value of the revision content.
 	Sha256 *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about deployments related to the specified deployment.
@@ -1084,6 +1161,8 @@ type RelatedDeployments struct {
 
 	// The deployment ID of the root deployment that triggered this deployment.
 	AutoUpdateOutdatedInstancesRootDeploymentId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an application revision.
@@ -1095,6 +1174,8 @@ type RevisionInfo struct {
 
 	// Information about the location and type of an application revision.
 	RevisionLocation *RevisionLocation
+
+	noSmithyDocumentSerde
 }
 
 // Information about the location of an application revision.
@@ -1132,6 +1213,8 @@ type RevisionLocation struct {
 	// Deprecated: RawString and String revision type are deprecated, use
 	// AppSpecContent type instead.
 	String_ *RawString
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment rollback.
@@ -1148,6 +1231,8 @@ type RollbackInfo struct {
 	// The deployment ID of the deployment that was underway and triggered a rollback
 	// deployment because it failed or was stopped.
 	RollbackTriggeringDeploymentId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the location of application artifacts stored in Amazon S3.
@@ -1180,6 +1265,8 @@ type S3Location struct {
 	// for the application revision. If the version is not specified, the system uses
 	// the most recent version by default.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tag.
@@ -1190,6 +1277,8 @@ type Tag struct {
 
 	// The tag's value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an on-premises instance tag filter.
@@ -1210,6 +1299,8 @@ type TagFilter struct {
 
 	// The on-premises instance tag filter value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a target group in Elastic Load Balancing to use in a
@@ -1224,6 +1315,8 @@ type TargetGroupInfo struct {
 	// traffic during a deployment, and then re-registered with after the deployment is
 	// complete.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about two target groups and how traffic is routed during an Amazon
@@ -1243,6 +1336,8 @@ type TargetGroupPairInfo struct {
 	// ECS deployment. Validation can occur while test traffic is served during a
 	// deployment.
 	TestTrafficRoute *TrafficRoute
+
+	noSmithyDocumentSerde
 }
 
 // Information about the instances to be used in the replacement environment in a
@@ -1262,6 +1357,8 @@ type TargetInstances struct {
 	// replacement environment for a blue/green deployment. Cannot be used in the same
 	// call as ec2TagSet.
 	TagFilters []EC2TagFilter
+
+	noSmithyDocumentSerde
 }
 
 // A configuration that shifts traffic from one version of a Lambda function or ECS
@@ -1276,6 +1373,8 @@ type TimeBasedCanary struct {
 	// The percentage of traffic to shift in the first increment of a TimeBasedCanary
 	// deployment.
 	CanaryPercentage int32
+
+	noSmithyDocumentSerde
 }
 
 // A configuration that shifts traffic from one version of a Lambda function or ECS
@@ -1291,6 +1390,8 @@ type TimeBasedLinear struct {
 	// The percentage of traffic that is shifted at the start of each increment of a
 	// TimeBasedLinear deployment.
 	LinearPercentage int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a time range.
@@ -1302,6 +1403,8 @@ type TimeRange struct {
 	// The start time of the time range. Specify null to leave the start time
 	// open-ended.
 	Start *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information about a listener. The listener contains the path used to route
@@ -1312,6 +1415,8 @@ type TrafficRoute struct {
 	// route between a target group and a load balancer. This is an array of strings
 	// with a maximum size of one.
 	ListenerArns []string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration that specifies how traffic is shifted from one version of a
@@ -1333,6 +1438,8 @@ type TrafficRoutingConfig struct {
 	// The type of traffic shifting (TimeBasedCanary or TimeBasedLinear) used by a
 	// deployment configuration.
 	Type TrafficRoutingType
+
+	noSmithyDocumentSerde
 }
 
 // Information about notification triggers for the deployment group.
@@ -1347,4 +1454,8 @@ type TriggerConfig struct {
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service topic
 	// through which notifications about deployment or instance events are sent.
 	TriggerTargetArn *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -39,6 +39,8 @@ type UpdateShareInvitationInput struct {
 	//
 	// This member is required.
 	ShareInvitationId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateShareInvitationOutput struct {
@@ -48,6 +50,8 @@ type UpdateShareInvitationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateShareInvitationMiddlewares(stack *middleware.Stack, options Options) (err error) {

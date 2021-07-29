@@ -84,6 +84,8 @@ type ListPartsInput struct {
 	// previous List Parts response. You need only include the marker if you are
 	// continuing the pagination of results started in a previous List Parts request.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -118,6 +120,8 @@ type ListPartsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,11 +52,15 @@ type EnableKeyInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

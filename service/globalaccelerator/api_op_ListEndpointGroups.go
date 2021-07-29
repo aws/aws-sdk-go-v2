@@ -42,6 +42,8 @@ type ListEndpointGroupsInput struct {
 	// The token for the next set of results. You receive this token from a previous
 	// call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEndpointGroupsOutput struct {
@@ -55,6 +57,8 @@ type ListEndpointGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEndpointGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

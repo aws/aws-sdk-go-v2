@@ -87,6 +87,8 @@ type ModifyListenerInput struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/network/create-tls-listener.html#describe-ssl-policies)
 	// in the Network Load Balancers Guide.
 	SslPolicy *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyListenerOutput struct {
@@ -96,6 +98,8 @@ type ModifyListenerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

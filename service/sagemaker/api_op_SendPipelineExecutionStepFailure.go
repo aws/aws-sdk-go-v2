@@ -43,6 +43,8 @@ type SendPipelineExecutionStepFailureInput struct {
 
 	// A message describing why the step failed.
 	FailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 type SendPipelineExecutionStepFailureOutput struct {
@@ -52,6 +54,8 @@ type SendPipelineExecutionStepFailureOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendPipelineExecutionStepFailureMiddlewares(stack *middleware.Stack, options Options) (err error) {

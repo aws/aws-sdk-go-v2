@@ -50,11 +50,15 @@ type UpdateDeviceFleetInput struct {
 
 	// The Amazon Resource Name (ARN) of the device.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDeviceFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeviceFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

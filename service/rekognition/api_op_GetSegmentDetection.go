@@ -67,6 +67,8 @@ type GetSegmentDetectionInput struct {
 	// If the response is truncated, Amazon Rekognition Video returns this token that
 	// you can use in the subsequent request to retrieve the next set of text.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSegmentDetectionOutput struct {
@@ -108,6 +110,8 @@ type GetSegmentDetectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSegmentDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

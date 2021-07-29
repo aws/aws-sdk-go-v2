@@ -39,6 +39,8 @@ type GetAggregateResourceConfigInput struct {
 	//
 	// This member is required.
 	ResourceIdentifier *types.AggregateResourceIdentifier
+
+	noSmithyDocumentSerde
 }
 
 type GetAggregateResourceConfigOutput struct {
@@ -48,6 +50,8 @@ type GetAggregateResourceConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

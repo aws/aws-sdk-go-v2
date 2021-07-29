@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -36,6 +37,8 @@ type AccountDetails struct {
 	// The URL of your website. This information helps us better understand the type of
 	// content that you plan to send.
 	WebsiteURL *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about a blacklisting event that impacts one
@@ -51,6 +54,8 @@ type BlacklistEntry struct {
 
 	// The name of the blacklist that the IP address appears on.
 	RblName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the body of the email message.
@@ -65,6 +70,8 @@ type Body struct {
 	// clients that don't support HTML, or clients where the recipient has disabled
 	// HTML rendering.
 	Text *Content
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the body of the message. You can specify a template
@@ -73,6 +80,8 @@ type BulkEmailContent struct {
 
 	// The template to use for the bulk email message.
 	Template *Template
+
+	noSmithyDocumentSerde
 }
 
 type BulkEmailEntry struct {
@@ -98,6 +107,8 @@ type BulkEmailEntry struct {
 	// characteristics of the email that you define, so that you can publish email
 	// sending events.
 	ReplacementTags []MessageTag
+
+	noSmithyDocumentSerde
 }
 
 // The result of the SendBulkEmail operation of each specified BulkEmailEntry.
@@ -165,6 +176,8 @@ type BulkEmailEntryResult struct {
 	// * FAILED: Amazon SES was unable to
 	// process your request. See the error message for additional information.
 	Status BulkEmailStatus
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines an Amazon CloudWatch destination for email events. You
@@ -177,6 +190,8 @@ type CloudWatchDestination struct {
 	//
 	// This member is required.
 	DimensionConfigurations []CloudWatchDimensionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the dimension configuration to use when you send email
@@ -216,6 +231,8 @@ type CloudWatchDimensionConfiguration struct {
 	//
 	// This member is required.
 	DimensionValueSource DimensionValueSource
+
+	noSmithyDocumentSerde
 }
 
 // A contact is the end-user who is receiving the email.
@@ -236,6 +253,8 @@ type Contact struct {
 	// A boolean value status noting if the contact is unsubscribed from all contact
 	// list topics.
 	UnsubscribeAll bool
+
+	noSmithyDocumentSerde
 }
 
 // A list that contains contacts that have subscribed to a particular topic or
@@ -247,6 +266,8 @@ type ContactList struct {
 
 	// A timestamp noting the last time the contact list was updated.
 	LastUpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains details about the action of a contact list.
@@ -268,6 +289,8 @@ type ContactListDestination struct {
 	//
 	// This member is required.
 	ContactListName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the content of the email, and optionally a character
@@ -284,6 +307,8 @@ type Content struct {
 	// characters outside of the ASCII range, you have to specify a character set. For
 	// example, you could specify UTF-8, ISO-8859-1, or Shift_JIS.
 	Charset *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a custom verification email template.
@@ -305,6 +330,8 @@ type CustomVerificationEmailTemplateMetadata struct {
 
 	// The subject line of the custom verification email.
 	TemplateSubject *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the volume of email sent on each day
@@ -321,6 +348,8 @@ type DailyVolume struct {
 	// An object that contains inbox placement metrics for a specific day in the
 	// analysis period.
 	VolumeStatistics *VolumeStatistics
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a dedicated IP address that is associated with your
@@ -355,6 +384,8 @@ type DedicatedIp struct {
 
 	// The name of the dedicated IP pool that the IP address is associated with.
 	PoolName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains metadata related to a predictive inbox placement test.
@@ -383,6 +414,8 @@ type DeliverabilityTestReport struct {
 	// The subject line for an email that you submitted in a predictive inbox placement
 	// test.
 	Subject *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to associate a configuration set with a dedicated IP pool.
@@ -398,6 +431,8 @@ type DeliveryOptions struct {
 	// messages can be delivered in plain text if a TLS connection can't be
 	// established.
 	TlsPolicy TlsPolicy
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes the recipients for an email.
@@ -413,6 +448,8 @@ type Destination struct {
 
 	// An array that contains the email addresses of the "To" recipients for the email.
 	ToAddresses []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the DKIM authentication status for an
@@ -478,6 +515,8 @@ type DkimAttributes struct {
 	// for the appropriate records in the DNS configuration of the domain for up to 72
 	// hours.
 	Tokens []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the tokens used for setting up Bring
@@ -495,6 +534,8 @@ type DkimSigningAttributes struct {
 	//
 	// This member is required.
 	DomainSigningSelector *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the deliverability data for a specific campaign. This
@@ -556,6 +597,8 @@ type DomainDeliverabilityCampaign struct {
 
 	// The subject line, or title, of the email message.
 	Subject *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the Deliverability dashboard
@@ -576,6 +619,8 @@ type DomainDeliverabilityTrackingOption struct {
 	// The date, in Unix time format, when you enabled the Deliverability dashboard for
 	// the domain.
 	SubscriptionStartDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains inbox placement data for email sent from one of your
@@ -600,6 +645,8 @@ type DomainIspPlacement struct {
 	// The total number of messages that were sent from the selected domain to the
 	// specified email provider that arrived in recipients' spam or junk mail folders.
 	SpamRawCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the entire content of the email, including the message
@@ -641,6 +688,8 @@ type EmailContent struct {
 
 	// The template to use for the email message.
 	Template *Template
+
+	noSmithyDocumentSerde
 }
 
 // The content of the email, composed of a subject line, an HTML part, and a
@@ -656,6 +705,8 @@ type EmailTemplateContent struct {
 	// The email body that will be visible to recipients whose email clients do not
 	// display HTML.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an email template.
@@ -666,6 +717,8 @@ type EmailTemplateMetadata struct {
 
 	// The name of the template.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // In the Amazon SES API v2, events include message sends, deliveries, opens,
@@ -714,6 +767,8 @@ type EventDestination struct {
 	// An object that defines an Amazon SNS destination for email events. You can use
 	// Amazon SNS to send notification when certain email events occur.
 	SnsDestination *SnsDestination
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the event destination. Specifically, it defines which
@@ -754,6 +809,8 @@ type EventDestinationDefinition struct {
 	// An object that defines an Amazon SNS destination for email events. You can use
 	// Amazon SNS to send notification when certain email events occur.
 	SnsDestination *SnsDestination
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the failure details about an import job.
@@ -765,6 +822,8 @@ type FailureInfo struct {
 	// An Amazon S3 presigned URL that contains all the failed records and related
 	// information.
 	FailedRecordsS3Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an email identity.
@@ -789,6 +848,8 @@ type IdentityInfo struct {
 	// an identity, you have to demostrate that you own the identity, and that you
 	// authorize Amazon SES to send email from that identity.
 	SendingEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains details about the data source of the import job.
@@ -803,6 +864,8 @@ type ImportDataSource struct {
 	//
 	// This member is required.
 	S3Url *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains details about the resource destination the import job is
@@ -814,6 +877,8 @@ type ImportDestination struct {
 
 	// An object that contains the action of the import job towards suppression list.
 	SuppressionListDestination *SuppressionListDestination
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the import job.
@@ -831,6 +896,8 @@ type ImportJobSummary struct {
 
 	// The status of the import job.
 	JobStatus JobStatus
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the inbox placement data settings for
@@ -844,6 +911,8 @@ type InboxPlacementTrackingOption struct {
 	// An array of strings, one for each major email provider that the inbox placement
 	// data applies to.
 	TrackedIsps []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes how email sent during the predictive inbox placement
@@ -855,6 +924,8 @@ type IspPlacement struct {
 
 	// An object that contains inbox placement metrics for a specific email provider.
 	PlacementStatistics *PlacementStatistics
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines an Amazon Kinesis Data Firehose destination for email
@@ -873,6 +944,8 @@ type KinesisFirehoseDestination struct {
 	//
 	// This member is required.
 	IamRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter that can be applied to a list of contacts.
@@ -883,6 +956,8 @@ type ListContactsFilter struct {
 
 	// Used for filtering by a specific topic preference.
 	TopicFilter *TopicFilter
+
+	noSmithyDocumentSerde
 }
 
 // An object used to specify a list or topic to which an email belongs, which will
@@ -896,6 +971,8 @@ type ListManagementOptions struct {
 
 	// The name of the topic.
 	TopicName *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of attributes that are associated with a MAIL FROM domain.
@@ -934,6 +1011,8 @@ type MailFromAttributes struct {
 	//
 	// This member is required.
 	MailFromDomainStatus MailFromDomainStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the email message that you're sending. The Message object consists of
@@ -953,6 +1032,8 @@ type Message struct {
 	//
 	// This member is required.
 	Subject *Content
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name and value of a tag that you apply to an email. You can use
@@ -980,6 +1061,8 @@ type MessageTag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about email that was sent from the selected
@@ -997,6 +1080,8 @@ type OverallVolume struct {
 	// An object that contains information about the numbers of messages that arrived
 	// in recipients' inboxes and junk mail folders.
 	VolumeStatistics *VolumeStatistics
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines an Amazon Pinpoint project destination for email events.
@@ -1010,6 +1095,8 @@ type PinpointDestination struct {
 	// The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to
 	// send email events to.
 	ApplicationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains inbox placement data for an email provider.
@@ -1034,6 +1121,8 @@ type PlacementStatistics struct {
 	// The percentage of emails that were authenticated by using Sender Policy
 	// Framework (SPF) during the predictive inbox placement test.
 	SpfPercentage *float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the raw content of an email message.
@@ -1066,6 +1155,8 @@ type RawMessage struct {
 	//
 	// This member is required.
 	Data []byte
+
+	noSmithyDocumentSerde
 }
 
 // The ReplaceEmailContent object to be used for a specific BulkEmailEntry. The
@@ -1074,6 +1165,8 @@ type ReplacementEmailContent struct {
 
 	// The ReplacementTemplate associated with ReplacementEmailContent.
 	ReplacementTemplate *ReplacementTemplate
+
+	noSmithyDocumentSerde
 }
 
 // An object which contains ReplacementTemplateData to be used for a specific
@@ -1084,6 +1177,8 @@ type ReplacementTemplate struct {
 	// object, typically consisting of key-value pairs in which the keys correspond to
 	// replacement tags in the email template.
 	ReplacementTemplateData *string
+
+	noSmithyDocumentSerde
 }
 
 // Enable or disable collection of reputation metrics for emails that you send
@@ -1098,6 +1193,8 @@ type ReputationOptions struct {
 	// If true, tracking of reputation metrics is enabled for the configuration set. If
 	// false, tracking of reputation metrics is disabled for the configuration set.
 	ReputationMetricsEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about your account details review.
@@ -1121,6 +1218,8 @@ type ReviewDetails struct {
 	// * FAILED – An internal error occurred and we
 	// didn't receive your appeal. You can submit your appeal again.
 	Status ReviewStatus
+
+	noSmithyDocumentSerde
 }
 
 // Used to enable or disable email sending for messages that use this configuration
@@ -1130,6 +1229,8 @@ type SendingOptions struct {
 	// If true, email sending is enabled for the configuration set. If false, email
 	// sending is disabled for the configuration set.
 	SendingEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the per-day and per-second sending
@@ -1148,6 +1249,8 @@ type SendQuota struct {
 	// The number of emails sent from your Amazon SES account in the current AWS Region
 	// over the past 24 hours.
 	SentLast24Hours float64
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines an Amazon SNS destination for email events. You can use
@@ -1161,6 +1264,8 @@ type SnsDestination struct {
 	//
 	// This member is required.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about an email address that is on the
@@ -1186,6 +1291,8 @@ type SuppressedDestination struct {
 	// An optional value that can contain additional information about the reasons that
 	// the address was added to the suppression list for your account.
 	Attributes *SuppressedDestinationAttributes
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains additional attributes that are related an email address
@@ -1199,6 +1306,8 @@ type SuppressedDestinationAttributes struct {
 	// The unique identifier of the email message that caused the email address to be
 	// added to the suppression list for your account.
 	MessageId *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary that describes the suppressed email address.
@@ -1219,6 +1328,8 @@ type SuppressedDestinationSummary struct {
 	//
 	// This member is required.
 	Reason SuppressionListReason
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the email address suppression
@@ -1237,6 +1348,8 @@ type SuppressionAttributes struct {
 	// list for your account when a message sent to that address results in a hard
 	// bounce.
 	SuppressedReasons []SuppressionListReason
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains details about the action of suppression list.
@@ -1253,6 +1366,8 @@ type SuppressionListDestination struct {
 	//
 	// This member is required.
 	SuppressionListImportAction SuppressionListImportAction
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the suppression list preferences for
@@ -1270,6 +1385,8 @@ type SuppressionOptions struct {
 	// * BOUNCE – Amazon SES adds an email address to the suppression list
 	// for your account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []SuppressionListReason
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the tags that are associated with a resource. A tag is a
@@ -1316,6 +1433,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the email template to use for an email message, and the
@@ -1336,6 +1455,8 @@ type Template struct {
 	// The name of the template. You will refer to this name when you send email using
 	// the SendTemplatedEmail or SendBulkTemplatedEmail operations.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // An interest group, theme, or label within a list. Lists can have multiple
@@ -1360,6 +1481,8 @@ type Topic struct {
 
 	// A description of what the topic is about, which the contact will see.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Used for filtering by a specific topic preference.
@@ -1371,6 +1494,8 @@ type TopicFilter struct {
 	// Notes that the default subscription status should be applied to a contact
 	// because the contact has not noted their preference for subscribing to a topic.
 	UseDefaultIfPreferenceUnavailable bool
+
+	noSmithyDocumentSerde
 }
 
 // The contact's preference for being opted-in to or opted-out of a topic.
@@ -1385,6 +1510,8 @@ type TopicPreference struct {
 	//
 	// This member is required.
 	TopicName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the tracking options for a configuration set. When you
@@ -1400,6 +1527,8 @@ type TrackingOptions struct {
 	//
 	// This member is required.
 	CustomRedirectDomain *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the amount of email that was delivered
@@ -1420,4 +1549,8 @@ type VolumeStatistics struct {
 	// The total number of emails that arrived in recipients' spam or junk mail
 	// folders.
 	SpamRawCount *int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

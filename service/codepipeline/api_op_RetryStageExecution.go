@@ -55,6 +55,8 @@ type RetryStageExecutionInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a RetryStageExecution action.
@@ -65,6 +67,8 @@ type RetryStageExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRetryStageExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

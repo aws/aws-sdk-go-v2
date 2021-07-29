@@ -56,11 +56,15 @@ type UpdateFacetInput struct {
 	// The object type that is associated with the facet. See
 	// CreateFacetRequest$ObjectType for more details.
 	ObjectType types.ObjectType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,11 +33,15 @@ type CreateSampleFindingsInput struct {
 	// sample findings. Currently, the only supported value is
 	// Policy:IAMUser/S3BucketEncryptionDisabled.
 	FindingTypes []types.FindingType
+
+	noSmithyDocumentSerde
 }
 
 type CreateSampleFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSampleFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

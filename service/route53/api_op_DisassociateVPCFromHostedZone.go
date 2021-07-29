@@ -66,6 +66,8 @@ type DisassociateVPCFromHostedZoneInput struct {
 
 	// Optional: A comment about the disassociation request.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the disassociate
@@ -80,6 +82,8 @@ type DisassociateVPCFromHostedZoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateVPCFromHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

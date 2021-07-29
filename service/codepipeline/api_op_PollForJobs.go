@@ -49,6 +49,8 @@ type PollForJobsInput struct {
 	// queryable property, you must supply that property as a key in the map. Only jobs
 	// whose action configuration matches the mapped value are returned.
 	QueryParam map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a PollForJobs action.
@@ -59,6 +61,8 @@ type PollForJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPollForJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

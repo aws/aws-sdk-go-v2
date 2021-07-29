@@ -37,6 +37,8 @@ type CreateCloudFormationTemplateInput struct {
 	// The semantic version of the application: https://semver.org/
 	// (https://semver.org/)
 	SemanticVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCloudFormationTemplateOutput struct {
@@ -68,6 +70,8 @@ type CreateCloudFormationTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCloudFormationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type CreateComponentInput struct {
 	//
 	// This member is required.
 	ResourceList []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateComponentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

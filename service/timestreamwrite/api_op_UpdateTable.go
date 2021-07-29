@@ -54,6 +54,8 @@ type UpdateTableInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTableOutput struct {
@@ -63,6 +65,8 @@ type UpdateTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

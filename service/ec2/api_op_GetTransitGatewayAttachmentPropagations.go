@@ -54,6 +54,8 @@ type GetTransitGatewayAttachmentPropagationsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTransitGatewayAttachmentPropagationsOutput struct {
@@ -67,6 +69,8 @@ type GetTransitGatewayAttachmentPropagationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTransitGatewayAttachmentPropagationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

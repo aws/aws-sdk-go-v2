@@ -38,6 +38,8 @@ type ListAssetsInput struct {
 
 	// Returns Assets associated with the specified PackagingGroup.
 	PackagingGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssetsOutput struct {
@@ -50,6 +52,8 @@ type ListAssetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

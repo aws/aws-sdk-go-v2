@@ -56,6 +56,8 @@ type ListHumanLoopsInput struct {
 	// Optional. The order for displaying results. Valid values: Ascending and
 	// Descending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListHumanLoopsOutput struct {
@@ -70,6 +72,8 @@ type ListHumanLoopsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHumanLoopsMiddlewares(stack *middleware.Stack, options Options) (err error) {

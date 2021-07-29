@@ -33,6 +33,8 @@ type ListGroupCertificateAuthoritiesInput struct {
 	//
 	// This member is required.
 	GroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGroupCertificateAuthoritiesOutput struct {
@@ -42,6 +44,8 @@ type ListGroupCertificateAuthoritiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGroupCertificateAuthoritiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

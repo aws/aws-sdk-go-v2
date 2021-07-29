@@ -82,11 +82,15 @@ type ConnectCustomKeyStoreInput struct {
 	//
 	// This member is required.
 	CustomKeyStoreId *string
+
+	noSmithyDocumentSerde
 }
 
 type ConnectCustomKeyStoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConnectCustomKeyStoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

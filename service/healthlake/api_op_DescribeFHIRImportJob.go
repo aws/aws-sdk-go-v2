@@ -39,6 +39,8 @@ type DescribeFHIRImportJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFHIRImportJobOutput struct {
@@ -51,6 +53,8 @@ type DescribeFHIRImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFHIRImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

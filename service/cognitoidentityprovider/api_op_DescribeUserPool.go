@@ -34,6 +34,8 @@ type DescribeUserPoolInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response to describe the user pool.
@@ -44,6 +46,8 @@ type DescribeUserPoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUserPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

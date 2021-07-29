@@ -38,6 +38,8 @@ type CompleteMigrationInput struct {
 	// recommended to use this option only to abort the migration and not recommended
 	// when application wants to continue migration to ElastiCache.
 	Force bool
+
+	noSmithyDocumentSerde
 }
 
 type CompleteMigrationOutput struct {
@@ -47,6 +49,8 @@ type CompleteMigrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCompleteMigrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

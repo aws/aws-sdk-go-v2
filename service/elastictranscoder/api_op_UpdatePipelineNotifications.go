@@ -64,6 +64,8 @@ type UpdatePipelineNotificationsInput struct {
 	//
 	// This member is required.
 	Notifications *types.Notifications
+
+	noSmithyDocumentSerde
 }
 
 // The UpdatePipelineNotificationsResponse structure.
@@ -75,6 +77,8 @@ type UpdatePipelineNotificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePipelineNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -57,6 +57,8 @@ type ListAuditTasksInput struct {
 	// A filter to limit the output to the specified type of audit: can be one of
 	// "ON_DEMAND_AUDIT_TASK" or "SCHEDULED__AUDIT_TASK".
 	TaskType types.AuditTaskType
+
+	noSmithyDocumentSerde
 }
 
 type ListAuditTasksOutput struct {
@@ -70,6 +72,8 @@ type ListAuditTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAuditTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

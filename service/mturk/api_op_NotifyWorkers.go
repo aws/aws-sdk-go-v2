@@ -48,6 +48,8 @@ type NotifyWorkersInput struct {
 	//
 	// This member is required.
 	WorkerIds []string
+
+	noSmithyDocumentSerde
 }
 
 type NotifyWorkersOutput struct {
@@ -58,6 +60,8 @@ type NotifyWorkersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNotifyWorkersMiddlewares(stack *middleware.Stack, options Options) (err error) {

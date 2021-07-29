@@ -44,6 +44,8 @@ type ReloadTablesInput struct {
 	// option applies only when validation is enabled for the task. Valid values:
 	// data-reload, validate-only Default value is data-reload.
 	ReloadOption types.ReloadOptionValue
+
+	noSmithyDocumentSerde
 }
 
 type ReloadTablesOutput struct {
@@ -53,6 +55,8 @@ type ReloadTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReloadTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -80,11 +80,15 @@ type UpdateMobileDeviceAccessRuleInput struct {
 	// User agents that the updated rule will not match. All other user agents will
 	// match.
 	NotDeviceUserAgents []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMobileDeviceAccessRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMobileDeviceAccessRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

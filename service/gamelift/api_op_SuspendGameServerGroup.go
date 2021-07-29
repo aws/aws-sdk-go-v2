@@ -63,6 +63,8 @@ type SuspendGameServerGroupInput struct {
 	//
 	// This member is required.
 	SuspendActions []types.GameServerGroupAction
+
+	noSmithyDocumentSerde
 }
 
 type SuspendGameServerGroupOutput struct {
@@ -73,6 +75,8 @@ type SuspendGameServerGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSuspendGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

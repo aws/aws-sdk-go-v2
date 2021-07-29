@@ -81,6 +81,8 @@ type ExportTableToPointInTimeInput struct {
 	// The ID of the AWS KMS managed key used to encrypt the S3 bucket where export
 	// data will be stored (if applicable).
 	S3SseKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type ExportTableToPointInTimeOutput struct {
@@ -90,6 +92,8 @@ type ExportTableToPointInTimeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportTableToPointInTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {

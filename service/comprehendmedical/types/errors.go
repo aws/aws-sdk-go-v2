@@ -10,6 +10,8 @@ import (
 // An internal server error occurred. Retry your request.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -28,6 +30,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // retry your request.
 type InvalidEncodingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEncodingException) Error() string {
@@ -46,6 +50,8 @@ func (e *InvalidEncodingException) ErrorFault() smithy.ErrorFault { return smith
 // invalid and then retry the request.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -64,6 +70,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // found. Check the ARN and try your request again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -82,6 +90,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // and then retry your request.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -100,6 +110,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // the text or use a smaller document and then retry your request.
 type TextSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TextSizeLimitExceededException) Error() string {
@@ -119,6 +131,8 @@ func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // information about a service limit increase.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -137,6 +151,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // values that you entered and try your request again.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

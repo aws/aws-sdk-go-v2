@@ -62,6 +62,8 @@ type CreateSamplingRuleInput struct {
 	// * Don't use aws:
 	// as a prefix for keys; it's reserved for AWS use.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateSamplingRuleOutput struct {
@@ -71,6 +73,8 @@ type CreateSamplingRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSamplingRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,6 +32,8 @@ type GetCoreDefinitionInput struct {
 	//
 	// This member is required.
 	CoreDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCoreDefinitionOutput struct {
@@ -62,6 +64,8 @@ type GetCoreDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCoreDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

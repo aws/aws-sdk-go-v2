@@ -62,6 +62,8 @@ type ListBuildsInput struct {
 	// * FAILED
 	// -- The game build upload failed. You cannot create new fleets for this build.
 	Status types.BuildStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -77,6 +79,8 @@ type ListBuildsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBuildsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -273,6 +273,8 @@ type ScanInput struct {
 	// sequential rather than parallel. If you specify TotalSegments, you must also
 	// specify Segment.
 	TotalSegments *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a Scan operation.
@@ -316,6 +318,8 @@ type ScanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationScanMiddlewares(stack *middleware.Stack, options Options) (err error) {

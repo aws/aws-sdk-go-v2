@@ -37,7 +37,7 @@ final class Ec2Query extends AwsQuery {
 
     @Override
     protected void writeErrorMessageCodeDeserializer(GenerationContext context) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(AwsGoDependency.AWS_EC2QUERY_PROTOCOL);
         writer.write("errorComponents, err := ec2query.GetErrorResponseComponents(errorBody)");
         writer.write("if err != nil { return err }");
@@ -64,7 +64,7 @@ final class Ec2Query extends AwsQuery {
     protected void unwrapErrorElement(GenerationContext context) {
         Symbol wrapNodeDecoder = SymbolUtils.createValueSymbolBuilder("WrapNodeDecoder",
                 SmithyGoDependency.SMITHY_XML).build();
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Consumer<String> unwrapElement = (String element) -> {
             writer.write("t, err = decoder.GetElement($S)", element);
             XmlProtocolUtils.handleDecodeError(writer, "");

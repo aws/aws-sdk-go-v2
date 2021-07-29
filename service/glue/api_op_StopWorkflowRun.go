@@ -37,11 +37,15 @@ type StopWorkflowRunInput struct {
 	//
 	// This member is required.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopWorkflowRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopWorkflowRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -65,6 +65,8 @@ type DescribeClusterParametersInput struct {
 	// that are the same as the default parameter group. Default: All parameter types
 	// returned. Valid Values: user | engine-default
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output from the DescribeClusterParameters action.
@@ -83,6 +85,8 @@ type DescribeClusterParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClusterParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

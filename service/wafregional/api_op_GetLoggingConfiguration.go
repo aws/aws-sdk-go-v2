@@ -40,6 +40,8 @@ type GetLoggingConfigurationInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLoggingConfigurationOutput struct {
@@ -49,6 +51,8 @@ type GetLoggingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

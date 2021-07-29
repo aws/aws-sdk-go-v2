@@ -42,6 +42,8 @@ type DescribeServersInput struct {
 
 	// Describes the server with the specified ServerName.
 	ServerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeServersOutput struct {
@@ -71,6 +73,8 @@ type DescribeServersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeServersMiddlewares(stack *middleware.Stack, options Options) (err error) {

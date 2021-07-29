@@ -102,11 +102,15 @@ type PutBucketIntelligentTieringConfigurationInput struct {
 	//
 	// This member is required.
 	IntelligentTieringConfiguration *types.IntelligentTieringConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutBucketIntelligentTieringConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBucketIntelligentTieringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

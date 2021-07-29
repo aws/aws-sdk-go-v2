@@ -40,6 +40,8 @@ type ListResourceServersInput struct {
 
 	// A pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourceServersOutput struct {
@@ -54,6 +56,8 @@ type ListResourceServersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourceServersMiddlewares(stack *middleware.Stack, options Options) (err error) {

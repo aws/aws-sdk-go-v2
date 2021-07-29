@@ -52,6 +52,8 @@ type ListDeadLetterSourceQueuesInput struct {
 
 	// Pagination token to request the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of your dead letter source queues.
@@ -70,6 +72,8 @@ type ListDeadLetterSourceQueuesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeadLetterSourceQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

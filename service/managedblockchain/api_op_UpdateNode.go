@@ -46,11 +46,15 @@ type UpdateNodeInput struct {
 	// The unique identifier of the member that owns the node. Applies only to
 	// Hyperledger Fabric.
 	MemberId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateNodeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type CreateIngestionInput struct {
 	//
 	// This member is required.
 	IngestionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateIngestionOutput struct {
@@ -70,6 +72,8 @@ type CreateIngestionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIngestionMiddlewares(stack *middleware.Stack, options Options) (err error) {

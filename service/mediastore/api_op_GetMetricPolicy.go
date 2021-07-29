@@ -33,6 +33,8 @@ type GetMetricPolicyInput struct {
 	//
 	// This member is required.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMetricPolicyOutput struct {
@@ -44,6 +46,8 @@ type GetMetricPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

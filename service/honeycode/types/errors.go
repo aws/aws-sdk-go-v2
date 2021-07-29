@@ -12,6 +12,8 @@ import (
 // the request.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -29,6 +31,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The automation execution did not end successfully.
 type AutomationExecutionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AutomationExecutionException) Error() string {
@@ -46,6 +50,8 @@ func (e *AutomationExecutionException) ErrorFault() smithy.ErrorFault { return s
 // The automation execution timed out.
 type AutomationExecutionTimeoutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AutomationExecutionTimeoutException) Error() string {
@@ -67,6 +73,8 @@ func (e *AutomationExecutionTimeoutException) ErrorFault() smithy.ErrorFault {
 // There were unexpected errors from the server.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -84,6 +92,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // The request timed out.
 type RequestTimeoutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestTimeoutException) Error() string {
@@ -102,6 +112,8 @@ func (e *RequestTimeoutException) ErrorFault() smithy.ErrorFault { return smithy
 // ID.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -119,6 +131,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The request caused service quota to be breached.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -136,6 +150,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // Remote service is unreachable.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -153,6 +169,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // Tps(transactions per second) rate reached.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -171,6 +189,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // request is invalid.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

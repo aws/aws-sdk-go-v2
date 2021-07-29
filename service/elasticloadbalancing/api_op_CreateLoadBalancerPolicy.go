@@ -51,12 +51,16 @@ type CreateLoadBalancerPolicyInput struct {
 
 	// The policy attributes.
 	PolicyAttributes []types.PolicyAttribute
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CreateLoadBalancerPolicy.
 type CreateLoadBalancerPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLoadBalancerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

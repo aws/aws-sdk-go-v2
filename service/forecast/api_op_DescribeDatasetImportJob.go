@@ -51,6 +51,8 @@ type DescribeDatasetImportJobInput struct {
 	//
 	// This member is required.
 	DatasetImportJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDatasetImportJobOutput struct {
@@ -138,6 +140,8 @@ type DescribeDatasetImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

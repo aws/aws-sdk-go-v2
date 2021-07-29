@@ -35,6 +35,8 @@ type ListSkillsStoreCategoriesInput struct {
 
 	// The tokens used for pagination.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSkillsStoreCategoriesOutput struct {
@@ -47,6 +49,8 @@ type ListSkillsStoreCategoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSkillsStoreCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

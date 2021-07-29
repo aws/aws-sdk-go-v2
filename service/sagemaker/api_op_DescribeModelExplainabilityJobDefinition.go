@@ -35,6 +35,8 @@ type DescribeModelExplainabilityJobDefinitionInput struct {
 	//
 	// This member is required.
 	JobDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeModelExplainabilityJobDefinitionOutput struct {
@@ -94,6 +96,8 @@ type DescribeModelExplainabilityJobDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeModelExplainabilityJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

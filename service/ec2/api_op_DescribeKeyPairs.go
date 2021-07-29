@@ -71,6 +71,8 @@ type DescribeKeyPairsInput struct {
 
 	// The IDs of the key pairs.
 	KeyPairIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeKeyPairsOutput struct {
@@ -80,6 +82,8 @@ type DescribeKeyPairsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {

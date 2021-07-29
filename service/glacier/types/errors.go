@@ -15,6 +15,8 @@ type InsufficientCapacityException struct {
 
 	Type *string
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientCapacityException) Error() string {
@@ -35,6 +37,8 @@ type InvalidParameterValueException struct {
 
 	Type *string
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -55,6 +59,8 @@ type LimitExceededException struct {
 
 	Type *string
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -75,6 +81,8 @@ type MissingParameterValueException struct {
 
 	Type *string
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingParameterValueException) Error() string {
@@ -96,6 +104,8 @@ type PolicyEnforcedException struct {
 
 	Type *string
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyEnforcedException) Error() string {
@@ -117,6 +127,8 @@ type RequestTimeoutException struct {
 
 	Type *string
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestTimeoutException) Error() string {
@@ -138,6 +150,8 @@ type ResourceNotFoundException struct {
 
 	Type *string
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -158,6 +172,8 @@ type ServiceUnavailableException struct {
 
 	Type *string
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {

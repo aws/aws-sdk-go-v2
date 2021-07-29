@@ -13,6 +13,8 @@ type BadRequestException struct {
 
 	ClassName *string
 	Code      int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -33,6 +35,8 @@ type ConcurrentAccessException struct {
 
 	ClassName *string
 	Code      int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentAccessException) Error() string {
@@ -53,6 +57,8 @@ type ConflictException struct {
 
 	ClassName *string
 	Code      int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -73,6 +79,8 @@ type ForbiddenException struct {
 
 	ClassName *string
 	Code      int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -93,6 +101,8 @@ type InternalServerErrorException struct {
 
 	ClassName *string
 	Code      int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -113,6 +123,8 @@ type LimitExceededException struct {
 
 	ClassName *string
 	Code      int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -133,6 +145,8 @@ type NotFoundException struct {
 
 	ClassName *string
 	Code      int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -153,6 +167,8 @@ type TooManyRequestsException struct {
 
 	ClassName *string
 	Code      int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {

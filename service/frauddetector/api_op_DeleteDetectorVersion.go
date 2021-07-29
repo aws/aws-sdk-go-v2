@@ -40,11 +40,15 @@ type DeleteDetectorVersionInput struct {
 	//
 	// This member is required.
 	DetectorVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDetectorVersionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDetectorVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -54,6 +54,8 @@ type UpdateSecurityGroupRuleDescriptionsEgressInput struct {
 	// The description for the egress security group rules. You must specify either the
 	// description or the IP permissions.
 	SecurityGroupRuleDescriptions []types.SecurityGroupRuleDescription
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSecurityGroupRuleDescriptionsEgressOutput struct {
@@ -63,6 +65,8 @@ type UpdateSecurityGroupRuleDescriptionsEgressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSecurityGroupRuleDescriptionsEgressMiddlewares(stack *middleware.Stack, options Options) (err error) {

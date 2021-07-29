@@ -49,6 +49,8 @@ type ListActivitiesInput struct {
 	// unchanged. Each pagination token expires after 24 hours. Using an expired
 	// pagination token will return an HTTP 400 InvalidToken error.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListActivitiesOutput struct {
@@ -67,6 +69,8 @@ type ListActivitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListActivitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

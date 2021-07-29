@@ -42,6 +42,8 @@ type GroupResourcesInput struct {
 	//
 	// This member is required.
 	ResourceArns []string
+
+	noSmithyDocumentSerde
 }
 
 type GroupResourcesOutput struct {
@@ -63,6 +65,8 @@ type GroupResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGroupResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

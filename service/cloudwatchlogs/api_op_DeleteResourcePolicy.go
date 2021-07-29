@@ -31,11 +31,15 @@ type DeleteResourcePolicyInput struct {
 
 	// The name of the policy to be revoked. This parameter is required.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourcePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

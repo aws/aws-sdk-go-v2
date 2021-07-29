@@ -39,6 +39,8 @@ type DescribeDetectorInput struct {
 
 	// The next token from the previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDetectorOutput struct {
@@ -57,6 +59,8 @@ type DescribeDetectorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

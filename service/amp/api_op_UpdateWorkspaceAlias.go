@@ -40,11 +40,15 @@ type UpdateWorkspaceAliasInput struct {
 	// Optional, unique, case-sensitive, user-provided identifier to ensure the
 	// idempotency of the request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWorkspaceAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorkspaceAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

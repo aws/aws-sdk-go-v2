@@ -32,11 +32,15 @@ type StopProcessingJobInput struct {
 	//
 	// This member is required.
 	ProcessingJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopProcessingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

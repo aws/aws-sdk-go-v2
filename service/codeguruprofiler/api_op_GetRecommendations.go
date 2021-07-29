@@ -87,6 +87,8 @@ type GetRecommendationsInput struct {
 	//
 	// * zh-TW - Chinese, Taiwan
 	Locale *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the GetRecommendationsResponse.
@@ -123,6 +125,8 @@ type GetRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

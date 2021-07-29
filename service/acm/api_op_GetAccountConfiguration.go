@@ -29,6 +29,7 @@ func (c *Client) GetAccountConfiguration(ctx context.Context, params *GetAccount
 }
 
 type GetAccountConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetAccountConfigurationOutput struct {
@@ -39,6 +40,8 @@ type GetAccountConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,15 @@ type DeleteEventBusInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEventBusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type UpdatePublicDnsNamespaceInput struct {
 	// operation twice. UpdaterRequestId can be any unique string (for example, a
 	// date/timestamp).
 	UpdaterRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePublicDnsNamespaceOutput struct {
@@ -56,6 +58,8 @@ type UpdatePublicDnsNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePublicDnsNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

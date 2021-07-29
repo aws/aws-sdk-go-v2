@@ -39,6 +39,8 @@ type DescribePortalInput struct {
 	//
 	// This member is required.
 	PortalId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePortalOutput struct {
@@ -123,6 +125,8 @@ type DescribePortalOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePortalMiddlewares(stack *middleware.Stack, options Options) (err error) {

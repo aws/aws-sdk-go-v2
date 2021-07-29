@@ -92,6 +92,8 @@ type CreateAppInput struct {
 
 	// An SslConfiguration object with the SSL configuration.
 	SslConfiguration *types.SslConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a CreateApp request.
@@ -102,6 +104,8 @@ type CreateAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

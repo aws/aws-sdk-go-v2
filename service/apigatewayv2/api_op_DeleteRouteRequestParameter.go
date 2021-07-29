@@ -42,11 +42,15 @@ type DeleteRouteRequestParameterInput struct {
 	//
 	// This member is required.
 	RouteId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRouteRequestParameterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRouteRequestParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {

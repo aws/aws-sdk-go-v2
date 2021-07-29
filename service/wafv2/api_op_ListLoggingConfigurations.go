@@ -52,6 +52,8 @@ type ListLoggingConfigurationsInput struct {
 	// * API and SDKs - For all calls, use the
 	// Region endpoint us-east-1.
 	Scope types.Scope
+
+	noSmithyDocumentSerde
 }
 
 type ListLoggingConfigurationsOutput struct {
@@ -67,6 +69,8 @@ type ListLoggingConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLoggingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,6 +61,8 @@ type CreateDomainInput struct {
 
 	// The tags used to organize, track, or control access for this resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDomainOutput struct {
@@ -103,6 +105,8 @@ type CreateDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type CreateFolderInput struct {
 
 	// Tags for the folder.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateFolderOutput struct {
@@ -73,6 +75,8 @@ type CreateFolderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

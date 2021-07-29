@@ -49,11 +49,15 @@ type SuspendContactRecordingInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type SuspendContactRecordingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSuspendContactRecordingMiddlewares(stack *middleware.Stack, options Options) (err error) {

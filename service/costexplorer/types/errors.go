@@ -10,6 +10,8 @@ import (
 // The requested report expired. Update the date interval and try again.
 type BillExpirationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BillExpirationException) Error() string {
@@ -27,6 +29,8 @@ func (e *BillExpirationException) ErrorFault() smithy.ErrorFault { return smithy
 // The requested data is unavailable.
 type DataUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DataUnavailableException) Error() string {
@@ -44,6 +48,8 @@ func (e *DataUnavailableException) ErrorFault() smithy.ErrorFault { return smith
 // The pagination token is invalid. Try again without a pagination token.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -61,6 +67,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // You made too many calls in a short period of time. Try again later.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -79,6 +87,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // or without a pagination token.
 type RequestChangedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestChangedException) Error() string {
@@ -96,6 +106,8 @@ func (e *RequestChangedException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified ARN in the request doesn't exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -114,6 +126,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // the size of an individual resource.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -131,6 +145,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // The cost anomaly monitor does not exist for the account.
 type UnknownMonitorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnknownMonitorException) Error() string {
@@ -148,6 +164,8 @@ func (e *UnknownMonitorException) ErrorFault() smithy.ErrorFault { return smithy
 // The cost anomaly subscription does not exist for the account.
 type UnknownSubscriptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnknownSubscriptionException) Error() string {
@@ -167,6 +185,8 @@ func (e *UnknownSubscriptionException) ErrorFault() smithy.ErrorFault { return s
 // example: hours.
 type UnresolvableUsageUnitException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnresolvableUsageUnitException) Error() string {

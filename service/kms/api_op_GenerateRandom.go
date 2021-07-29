@@ -45,6 +45,8 @@ type GenerateRandomInput struct {
 
 	// The length of the byte string.
 	NumberOfBytes *int32
+
+	noSmithyDocumentSerde
 }
 
 type GenerateRandomOutput struct {
@@ -55,6 +57,8 @@ type GenerateRandomOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateRandomMiddlewares(stack *middleware.Stack, options Options) (err error) {

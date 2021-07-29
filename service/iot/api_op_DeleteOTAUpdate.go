@@ -42,11 +42,15 @@ type DeleteOTAUpdateInput struct {
 	// "IN_PROGRESS". Otherwise, if the job is not in a terminal state ("COMPLETED" or
 	// "CANCELED") an exception will occur. The default is false.
 	ForceDeleteAWSJob bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOTAUpdateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {

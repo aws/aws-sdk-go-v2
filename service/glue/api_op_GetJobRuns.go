@@ -40,6 +40,8 @@ type GetJobRunsInput struct {
 
 	// A continuation token, if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetJobRunsOutput struct {
@@ -52,6 +54,8 @@ type GetJobRunsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetJobRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {

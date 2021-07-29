@@ -41,11 +41,15 @@ type DeleteKeyGroupInput struct {
 	// The version of the key group that you are deleting. The version is the key
 	// group’s ETag value. To get the ETag, use GetKeyGroup or GetKeyGroupConfig.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteKeyGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

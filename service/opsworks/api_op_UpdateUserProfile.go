@@ -50,11 +50,15 @@ type UpdateUserProfileInput struct {
 	// not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM
 	// user name.
 	SshUsername *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

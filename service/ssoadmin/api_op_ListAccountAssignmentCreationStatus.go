@@ -47,6 +47,8 @@ type ListAccountAssignmentCreationStatusInput struct {
 	// The pagination token for the list API. Initially the value is null. Use the
 	// output of previous API calls to make subsequent calls.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAccountAssignmentCreationStatusOutput struct {
@@ -60,6 +62,8 @@ type ListAccountAssignmentCreationStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccountAssignmentCreationStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

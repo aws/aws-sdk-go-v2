@@ -28,6 +28,7 @@ func (c *Client) GetClassificationExportConfiguration(ctx context.Context, param
 }
 
 type GetClassificationExportConfigurationInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetClassificationExportConfigurationOutput struct {
@@ -38,6 +39,8 @@ type GetClassificationExportConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetClassificationExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

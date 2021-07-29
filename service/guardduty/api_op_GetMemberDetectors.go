@@ -38,6 +38,8 @@ type GetMemberDetectorsInput struct {
 	//
 	// This member is required.
 	DetectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMemberDetectorsOutput struct {
@@ -55,6 +57,8 @@ type GetMemberDetectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMemberDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

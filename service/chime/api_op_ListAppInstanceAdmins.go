@@ -41,6 +41,8 @@ type ListAppInstanceAdminsInput struct {
 	// The token returned from previous API requests until the number of administrators
 	// is reached.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAppInstanceAdminsOutput struct {
@@ -57,6 +59,8 @@ type ListAppInstanceAdminsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAppInstanceAdminsMiddlewares(stack *middleware.Stack, options Options) (err error) {

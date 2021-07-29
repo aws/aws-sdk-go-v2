@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -25,6 +26,8 @@ type Assessment struct {
 
 	// The tags associated with the assessment.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The control entity that represents a standard or custom control used in an AWS
@@ -57,6 +60,8 @@ type AssessmentControl struct {
 
 	// The status of the specified control.
 	Status ControlStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents a set of controls in an AWS Audit Manager assessment.
@@ -87,6 +92,8 @@ type AssessmentControlSet struct {
 	// The total number of evidence objects retrieved automatically for the control
 	// set.
 	SystemEvidenceCount int32
+
+	noSmithyDocumentSerde
 }
 
 // The folder in which AWS Audit Manager stores evidence for an assessment.
@@ -151,6 +158,8 @@ type AssessmentEvidenceFolder struct {
 
 	// The total amount of evidence in the evidence folder.
 	TotalEvidence int32
+
+	noSmithyDocumentSerde
 }
 
 // The file used to structure and automate AWS Audit Manager assessments for a
@@ -168,6 +177,8 @@ type AssessmentFramework struct {
 
 	// The metadata of a framework, such as the name, ID, description, and so on.
 	Metadata *FrameworkMetadata
+
+	noSmithyDocumentSerde
 }
 
 // The metadata associated with a standard or custom framework.
@@ -206,6 +217,8 @@ type AssessmentFrameworkMetadata struct {
 
 	// The framework type, such as standard or custom.
 	Type FrameworkType
+
+	noSmithyDocumentSerde
 }
 
 // The metadata associated with the specified assessment.
@@ -244,6 +257,8 @@ type AssessmentMetadata struct {
 
 	// The overall status of the assessment.
 	Status AssessmentStatus
+
+	noSmithyDocumentSerde
 }
 
 // A metadata object associated with an assessment in AWS Audit Manager.
@@ -272,6 +287,8 @@ type AssessmentMetadataItem struct {
 
 	// The current status of the assessment.
 	Status AssessmentStatus
+
+	noSmithyDocumentSerde
 }
 
 // A finalized document generated from an AWS Audit Manager assessment. These
@@ -306,6 +323,8 @@ type AssessmentReport struct {
 
 	// The current status of the specified assessment report.
 	Status AssessmentReportStatus
+
+	noSmithyDocumentSerde
 }
 
 // An error entity for the AssessmentReportEvidence API. This is used to provide
@@ -320,6 +339,8 @@ type AssessmentReportEvidenceError struct {
 
 	// The identifier for the evidence.
 	EvidenceId *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata objects associated with the specified assessment report.
@@ -348,6 +369,8 @@ type AssessmentReportMetadata struct {
 
 	// The current status of the assessment report.
 	Status AssessmentReportStatus
+
+	noSmithyDocumentSerde
 }
 
 // The location in which AWS Audit Manager saves assessment reports for the given
@@ -359,6 +382,8 @@ type AssessmentReportsDestination struct {
 
 	// The destination type, such as Amazon S3.
 	DestinationType AssessmentReportDestinationType
+
+	noSmithyDocumentSerde
 }
 
 // The wrapper of AWS account details, such as account ID, email address, and so
@@ -373,6 +398,8 @@ type AWSAccount struct {
 
 	// The name of the specified AWS account.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An AWS service such as Amazon S3, AWS CloudTrail, and so on.
@@ -380,6 +407,8 @@ type AWSService struct {
 
 	// The name of the AWS service.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // An error entity for the BatchCreateDelegationByAssessment API. This is used to
@@ -394,6 +423,8 @@ type BatchCreateDelegationByAssessmentError struct {
 
 	// The error message returned by the BatchCreateDelegationByAssessment API.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // An error entity for the BatchDeleteDelegationByAssessment API. This is used to
@@ -408,6 +439,8 @@ type BatchDeleteDelegationByAssessmentError struct {
 
 	// The error message returned by the BatchDeleteDelegationByAssessment API.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // An error entity for the BatchImportEvidenceToAssessmentControl API. This is used
@@ -422,6 +455,8 @@ type BatchImportEvidenceToAssessmentControlError struct {
 
 	// Manual evidence that cannot be collected automatically by AWS Audit Manager.
 	ManualEvidence *ManualEvidence
+
+	noSmithyDocumentSerde
 }
 
 // The record of a change within AWS Audit Manager, such as a modified assessment,
@@ -442,6 +477,8 @@ type ChangeLog struct {
 
 	// The changelog object type, such as an assessment, control, or control set.
 	ObjectType ObjectTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 // A control in AWS Audit Manager.
@@ -492,6 +529,8 @@ type Control struct {
 
 	// The type of control, such as custom or standard.
 	Type ControlType
+
+	noSmithyDocumentSerde
 }
 
 // A comment posted by a user on a control. This includes the author's name, the
@@ -506,6 +545,8 @@ type ControlComment struct {
 
 	// The time when the comment was posted.
 	PostedDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The data source that determines from where AWS Audit Manager collects evidence
@@ -537,6 +578,8 @@ type ControlMappingSource struct {
 
 	// The instructions for troubleshooting the specified control.
 	TroubleshootingText *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata associated with the specified standard or custom control.
@@ -560,6 +603,8 @@ type ControlMetadata struct {
 
 	// The name of the specified control.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A set of controls in AWS Audit Manager.
@@ -574,6 +619,8 @@ type ControlSet struct {
 
 	// The name of the control set.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Control entity attributes that uniquely identify an existing control to be added
@@ -582,6 +629,8 @@ type CreateAssessmentFrameworkControl struct {
 
 	// The unique identifier of the control.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A controlSet entity that represents a collection of controls in AWS Audit
@@ -596,6 +645,8 @@ type CreateAssessmentFrameworkControlSet struct {
 	// The list of controls within the control set. This does not contain the control
 	// set ID.
 	Controls []CreateAssessmentFrameworkControl
+
+	noSmithyDocumentSerde
 }
 
 // Control mapping fields that represent the source for evidence collection, along
@@ -625,6 +676,8 @@ type CreateControlMappingSource struct {
 
 	// The instructions for troubleshooting the specified control.
 	TroubleshootingText *string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of attributes used to create a delegation for an assessment in AWS
@@ -644,6 +697,8 @@ type CreateDelegationRequest struct {
 	// PROCESS_OWNER. In UpdateSettings, roleType can only be PROCESS_OWNER. In
 	// BatchCreateDelegationByAssessment, roleType can only be RESOURCE_OWNER.
 	RoleType RoleType
+
+	noSmithyDocumentSerde
 }
 
 // The assignment of a control set to a delegate for review.
@@ -683,6 +738,8 @@ type Delegation struct {
 
 	// The status of the delegation.
 	Status DelegationStatus
+
+	noSmithyDocumentSerde
 }
 
 // The metadata associated with the specified delegation.
@@ -708,6 +765,8 @@ type DelegationMetadata struct {
 
 	// The current status of the delgation.
 	Status DelegationStatus
+
+	noSmithyDocumentSerde
 }
 
 // A record that contains the information needed to demonstrate compliance with the
@@ -764,6 +823,8 @@ type Evidence struct {
 
 	// The timestamp that represents when the evidence was collected.
 	Time *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The file used to structure and automate AWS Audit Manager assessments for a
@@ -812,6 +873,8 @@ type Framework struct {
 
 	// The framework type, such as custom or standard.
 	Type FrameworkType
+
+	noSmithyDocumentSerde
 }
 
 // The metadata of a framework, such as the name, ID, description, and so on.
@@ -828,6 +891,8 @@ type FrameworkMetadata struct {
 
 	// The name of the framework.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Evidence that is uploaded to AWS Audit Manager manually.
@@ -835,6 +900,8 @@ type ManualEvidence struct {
 
 	// The Amazon S3 URL that points to a manual evidence object.
 	S3ResourcePath *string
+
+	noSmithyDocumentSerde
 }
 
 // The notification used to inform a user of an update in AWS Audit Manager. For
@@ -865,6 +932,8 @@ type Notification struct {
 
 	// The sender of the notification.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // A system asset that is evaluated in an AWS Audit Manager assessment.
@@ -875,6 +944,8 @@ type Resource struct {
 
 	// The value of the specified resource.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The wrapper that contains the AWS Audit Manager role information of the current
@@ -888,6 +959,8 @@ type Role struct {
 	// PROCESS_OWNER. In UpdateSettings, roleType can only be PROCESS_OWNER. In
 	// BatchCreateDelegationByAssessment, roleType can only be RESOURCE_OWNER.
 	RoleType RoleType
+
+	noSmithyDocumentSerde
 }
 
 // The wrapper that contains the AWS accounts and AWS services in scope for the
@@ -899,6 +972,8 @@ type Scope struct {
 
 	// The AWS services included in the scope of the assessment.
 	AwsServices []AWSService
+
+	noSmithyDocumentSerde
 }
 
 // The metadata associated with the specified AWS service.
@@ -916,6 +991,8 @@ type ServiceMetadata struct {
 
 	// The name of the AWS service.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings object that holds all supported AWS Audit Manager settings.
@@ -935,6 +1012,8 @@ type Settings struct {
 
 	// The designated Amazon Simple Notification Service (Amazon SNS) topic.
 	SnsTopic *string
+
+	noSmithyDocumentSerde
 }
 
 // The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security
@@ -947,6 +1026,8 @@ type SourceKeyword struct {
 	// The value of the keyword used to search AWS CloudTrail logs, AWS Config rules,
 	// AWS Security Hub checks, and AWS API names when mapping a control data source.
 	KeywordValue *string
+
+	noSmithyDocumentSerde
 }
 
 // A controlSet entity that represents a collection of controls in AWS Audit
@@ -963,6 +1044,8 @@ type UpdateAssessmentFrameworkControlSet struct {
 
 	// The unique identifier for the control set.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // A uniform resource locator, used as a unique identifier to locate a resource on
@@ -974,6 +1057,8 @@ type URL struct {
 
 	// The unique identifier for the internet resource.
 	Link *string
+
+	noSmithyDocumentSerde
 }
 
 // Indicates that the request has invalid or missing parameters for the specified
@@ -989,4 +1074,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

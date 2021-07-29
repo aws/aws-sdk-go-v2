@@ -84,6 +84,8 @@ type GetCelebrityRecognitionInput struct {
 	// the celebrity identifier, specify TIMESTAMP to sort by the time the celebrity
 	// was recognized.
 	SortBy types.CelebrityRecognitionSortBy
+
+	noSmithyDocumentSerde
 }
 
 type GetCelebrityRecognitionOutput struct {
@@ -108,6 +110,8 @@ type GetCelebrityRecognitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCelebrityRecognitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

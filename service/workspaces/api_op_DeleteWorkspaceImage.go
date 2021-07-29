@@ -34,11 +34,15 @@ type DeleteWorkspaceImageInput struct {
 	//
 	// This member is required.
 	ImageId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorkspaceImageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorkspaceImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

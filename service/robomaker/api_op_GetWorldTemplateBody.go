@@ -33,6 +33,8 @@ type GetWorldTemplateBodyInput struct {
 
 	// The Amazon Resource Name (arn) of the world template.
 	Template *string
+
+	noSmithyDocumentSerde
 }
 
 type GetWorldTemplateBodyOutput struct {
@@ -42,6 +44,8 @@ type GetWorldTemplateBodyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWorldTemplateBodyMiddlewares(stack *middleware.Stack, options Options) (err error) {

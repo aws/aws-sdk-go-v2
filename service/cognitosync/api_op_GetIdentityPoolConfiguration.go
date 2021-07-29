@@ -54,6 +54,8 @@ type GetIdentityPoolConfigurationInput struct {
 	//
 	// This member is required.
 	IdentityPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the GetIdentityPoolConfiguration operation.
@@ -71,6 +73,8 @@ type GetIdentityPoolConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIdentityPoolConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

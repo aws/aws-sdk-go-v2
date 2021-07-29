@@ -47,6 +47,8 @@ type BatchGetAggregateResourceConfigInput struct {
 	//
 	// This member is required.
 	ResourceIdentifiers []types.AggregateResourceIdentifier
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetAggregateResourceConfigOutput struct {
@@ -60,6 +62,8 @@ type BatchGetAggregateResourceConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetAggregateResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

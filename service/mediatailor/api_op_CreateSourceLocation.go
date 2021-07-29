@@ -49,6 +49,8 @@ type CreateSourceLocationInput struct {
 
 	// The tags to assign to the source location.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSourceLocationOutput struct {
@@ -79,6 +81,8 @@ type CreateSourceLocationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSourceLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {

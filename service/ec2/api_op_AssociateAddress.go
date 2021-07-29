@@ -88,6 +88,8 @@ type AssociateAddressInput struct {
 	// [EC2-Classic] The Elastic IP address to associate with the instance. This is
 	// required for EC2-Classic.
 	PublicIp *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateAddressOutput struct {
@@ -98,6 +100,8 @@ type AssociateAddressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {

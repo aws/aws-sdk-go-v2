@@ -33,6 +33,8 @@ type GetBackupPlanFromJSONInput struct {
 	//
 	// This member is required.
 	BackupPlanTemplateJson *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBackupPlanFromJSONOutput struct {
@@ -43,6 +45,8 @@ type GetBackupPlanFromJSONOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackupPlanFromJSONMiddlewares(stack *middleware.Stack, options Options) (err error) {

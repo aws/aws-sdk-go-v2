@@ -32,6 +32,8 @@ type BatchDeleteWorldsInput struct {
 	//
 	// This member is required.
 	Worlds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDeleteWorldsOutput struct {
@@ -42,6 +44,8 @@ type BatchDeleteWorldsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDeleteWorldsMiddlewares(stack *middleware.Stack, options Options) (err error) {

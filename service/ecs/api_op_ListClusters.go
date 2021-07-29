@@ -45,6 +45,8 @@ type ListClustersInput struct {
 	// only used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListClustersOutput struct {
@@ -61,6 +63,8 @@ type ListClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

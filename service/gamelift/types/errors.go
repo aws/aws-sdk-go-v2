@@ -12,6 +12,8 @@ import (
 // retrying this request.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -30,6 +32,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // request. Clients can retry such requests immediately or after a waiting period.
 type FleetCapacityExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FleetCapacityExceededException) Error() string {
@@ -48,6 +52,8 @@ func (e *FleetCapacityExceededException) ErrorFault() smithy.ErrorFault { return
 // join. Clients can retry such requests immediately or after a waiting period.
 type GameSessionFullException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GameSessionFullException) Error() string {
@@ -66,6 +72,8 @@ func (e *GameSessionFullException) ErrorFault() smithy.ErrorFault { return smith
 // this conflict before retrying this request.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -88,6 +96,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // request. Clients can retry such requests immediately or after a waiting period.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -107,6 +117,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // before retrying.
 type InvalidFleetStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFleetStatusException) Error() string {
@@ -126,6 +138,8 @@ func (e *InvalidFleetStatusException) ErrorFault() smithy.ErrorFault { return sm
 // conflict before retrying.
 type InvalidGameSessionStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGameSessionStatusException) Error() string {
@@ -146,6 +160,8 @@ func (e *InvalidGameSessionStatusException) ErrorFault() smithy.ErrorFault { ret
 // parameter values before retrying.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -164,6 +180,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // limit. Resolve the issue before retrying.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -182,6 +200,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // should not retry such requests.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -201,6 +221,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // waiting period.
 type OutOfCapacityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OutOfCapacityException) Error() string {
@@ -220,6 +242,8 @@ func (e *OutOfCapacityException) ErrorFault() smithy.ErrorFault { return smithy.
 // retrying.
 type TaggingFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TaggingFailedException) Error() string {
@@ -241,6 +265,8 @@ func (e *TaggingFailedException) ErrorFault() smithy.ErrorFault { return smithy.
 // modified.
 type TerminalRoutingStrategyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TerminalRoutingStrategyException) Error() string {
@@ -260,6 +286,8 @@ func (e *TerminalRoutingStrategyException) ErrorFault() smithy.ErrorFault { retu
 // The client failed authentication. Clients should not retry such requests.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {
@@ -277,6 +305,8 @@ func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The requested operation is not supported in the Region specified.
 type UnsupportedRegionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedRegionException) Error() string {

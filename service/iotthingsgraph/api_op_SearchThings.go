@@ -51,6 +51,8 @@ type SearchThingsInput struct {
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchThingsOutput struct {
@@ -63,6 +65,8 @@ type SearchThingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchThingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,11 +40,15 @@ type UpdateContactChannelInput struct {
 
 	// The name of the contact channel
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContactChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

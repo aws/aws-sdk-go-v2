@@ -45,6 +45,7 @@ func (c *Client) CreateContainerServiceRegistryLogin(ctx context.Context, params
 }
 
 type CreateContainerServiceRegistryLoginInput struct {
+	noSmithyDocumentSerde
 }
 
 type CreateContainerServiceRegistryLoginOutput struct {
@@ -55,6 +56,8 @@ type CreateContainerServiceRegistryLoginOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContainerServiceRegistryLoginMiddlewares(stack *middleware.Stack, options Options) (err error) {

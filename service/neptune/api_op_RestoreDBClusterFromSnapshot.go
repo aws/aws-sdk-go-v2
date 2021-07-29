@@ -137,6 +137,8 @@ type RestoreDBClusterFromSnapshotInput struct {
 
 	// A list of VPC security groups that the new DB cluster will belong to.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreDBClusterFromSnapshotOutput struct {
@@ -147,6 +149,8 @@ type RestoreDBClusterFromSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreDBClusterFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

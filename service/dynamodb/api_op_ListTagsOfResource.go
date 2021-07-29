@@ -45,6 +45,8 @@ type ListTagsOfResourceInput struct {
 	// previous call to ListTagOfResource. When provided in this manner, this API
 	// fetches the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsOfResourceOutput struct {
@@ -58,6 +60,8 @@ type ListTagsOfResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsOfResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

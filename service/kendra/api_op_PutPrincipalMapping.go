@@ -88,11 +88,15 @@ type PutPrincipalMappingInput struct {
 	// information, see IAM roles for Amazon Kendra
 	// (https://docs.aws.amazon.com/kendra/latest/dg/iam-roles.html#iam-roles-ds).
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutPrincipalMappingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutPrincipalMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type GetServiceEndpointInput struct {
 	// the Configuration and Update Server endpoint, or LNS for the LoRaWAN Network
 	// Server endpoint.
 	ServiceType types.WirelessGatewayServiceType
+
+	noSmithyDocumentSerde
 }
 
 type GetServiceEndpointOutput struct {
@@ -49,6 +51,8 @@ type GetServiceEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type RevokeCacheSecurityGroupIngressInput struct {
 	//
 	// This member is required.
 	EC2SecurityGroupOwnerId *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeCacheSecurityGroupIngressOutput struct {
@@ -64,6 +66,8 @@ type RevokeCacheSecurityGroupIngressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeCacheSecurityGroupIngressMiddlewares(stack *middleware.Stack, options Options) (err error) {

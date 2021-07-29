@@ -48,6 +48,8 @@ type DeleteProjectInput struct {
 	// ClientToken is considered a new call to DeleteProject. An idempotency token is
 	// active for 8 hours.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProjectOutput struct {
@@ -57,6 +59,8 @@ type DeleteProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

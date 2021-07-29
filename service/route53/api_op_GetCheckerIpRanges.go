@@ -34,6 +34,7 @@ func (c *Client) GetCheckerIpRanges(ctx context.Context, params *GetCheckerIpRan
 
 // Empty request.
 type GetCheckerIpRangesInput struct {
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the CheckerIpRanges element.
@@ -47,6 +48,8 @@ type GetCheckerIpRangesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCheckerIpRangesMiddlewares(stack *middleware.Stack, options Options) (err error) {

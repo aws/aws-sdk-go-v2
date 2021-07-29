@@ -42,6 +42,8 @@ type ModifyReplicationSubnetGroupInput struct {
 
 	// A description for the replication instance subnet group.
 	ReplicationSubnetGroupDescription *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -52,6 +54,8 @@ type ModifyReplicationSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyReplicationSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

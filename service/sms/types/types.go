@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -65,6 +66,8 @@ type AppSummary struct {
 
 	// The number of servers present in the application.
 	TotalServers *int32
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for validating an application.
@@ -81,6 +84,8 @@ type AppValidationConfiguration struct {
 
 	// The ID of the validation.
 	ValidationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Output from validating an application.
@@ -88,6 +93,8 @@ type AppValidationOutput struct {
 
 	// Output from using SSM to validate the application.
 	SsmOutput *SSMOutput
+
+	noSmithyDocumentSerde
 }
 
 // Represents a connector.
@@ -122,6 +129,8 @@ type Connector struct {
 
 	// The VM management product.
 	VmManagerType VmManagerType
+
+	noSmithyDocumentSerde
 }
 
 // Details about the latest launch of an application.
@@ -135,6 +144,8 @@ type LaunchDetails struct {
 
 	// The name of the latest stack launched for this application.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the status of validating an application.
@@ -148,6 +159,8 @@ type NotificationContext struct {
 
 	// The ID of the validation.
 	ValidationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a replication job.
@@ -221,6 +234,8 @@ type ReplicationJob struct {
 
 	// Information about the VM server.
 	VmServer *VmServer
+
+	noSmithyDocumentSerde
 }
 
 // Represents a replication run.
@@ -272,6 +287,8 @@ type ReplicationRun struct {
 
 	// The type of replication run.
 	Type ReplicationRunType
+
+	noSmithyDocumentSerde
 }
 
 // Details of the current stage of a replication run.
@@ -282,6 +299,8 @@ type ReplicationRunStageDetails struct {
 
 	// The progress of the current stage of a replication run.
 	StageProgress *string
+
+	noSmithyDocumentSerde
 }
 
 // Location of an Amazon S3 object.
@@ -292,6 +311,8 @@ type S3Location struct {
 
 	// The Amazon S3 bucket key.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a server.
@@ -311,6 +332,8 @@ type Server struct {
 
 	// Information about the VM server.
 	VmServer *VmServer
+
+	noSmithyDocumentSerde
 }
 
 // Logical grouping of servers.
@@ -324,6 +347,8 @@ type ServerGroup struct {
 
 	// The servers that belong to a server group.
 	ServerList []Server
+
+	noSmithyDocumentSerde
 }
 
 // Launch configuration for a server group.
@@ -337,6 +362,8 @@ type ServerGroupLaunchConfiguration struct {
 
 	// The launch configuration for servers in the server group.
 	ServerLaunchConfigurations []ServerLaunchConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Replication configuration for a server group.
@@ -348,6 +375,8 @@ type ServerGroupReplicationConfiguration struct {
 
 	// The replication configuration for servers in the server group.
 	ServerReplicationConfigurations []ServerReplicationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for validating an instance.
@@ -358,6 +387,8 @@ type ServerGroupValidationConfiguration struct {
 
 	// The validation configuration.
 	ServerValidationConfigurations []ServerValidationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Launch configuration for a server.
@@ -400,6 +431,8 @@ type ServerLaunchConfiguration struct {
 
 	// The ID of the VPC into which the server should be launched.
 	Vpc *string
+
+	noSmithyDocumentSerde
 }
 
 // Replication configuration of a server.
@@ -410,6 +443,8 @@ type ServerReplicationConfiguration struct {
 
 	// The parameters for replicating the server.
 	ServerReplicationParameters *ServerReplicationParameters
+
+	noSmithyDocumentSerde
 }
 
 // The replication parameters for replicating a server.
@@ -450,6 +485,8 @@ type ServerReplicationParameters struct {
 
 	// The seed time for creating a replication job for the server.
 	SeedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for validating an instance.
@@ -469,6 +506,8 @@ type ServerValidationConfiguration struct {
 
 	// The ID of the validation.
 	ValidationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains output from validating an instance.
@@ -476,6 +515,8 @@ type ServerValidationOutput struct {
 
 	// Represents a server.
 	Server *Server
+
+	noSmithyDocumentSerde
 }
 
 // Contains the location of a validation script.
@@ -483,6 +524,8 @@ type Source struct {
 
 	// Location of an Amazon S3 object.
 	S3Location *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Contains the location of validation output.
@@ -490,6 +533,8 @@ type SSMOutput struct {
 
 	// Location of an Amazon S3 object.
 	S3Location *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Contains validation parameters.
@@ -513,6 +558,8 @@ type SSMValidationParameters struct {
 
 	// The location of the validation script.
 	Source *Source
+
+	noSmithyDocumentSerde
 }
 
 // Key/value pair that can be assigned to an application.
@@ -523,6 +570,8 @@ type Tag struct {
 
 	// The tag value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A script that runs on first launch of an Amazon EC2 instance. Used for
@@ -531,6 +580,8 @@ type UserData struct {
 
 	// Amazon S3 location of the user-data script.
 	S3Location *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Contains validation parameters.
@@ -541,6 +592,8 @@ type UserDataValidationParameters struct {
 
 	// The location of the validation script.
 	Source *Source
+
+	noSmithyDocumentSerde
 }
 
 // Contains validation output.
@@ -566,6 +619,8 @@ type ValidationOutput struct {
 
 	// The ID of the validation.
 	ValidationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a VM server.
@@ -585,6 +640,8 @@ type VmServer struct {
 
 	// The VM server location.
 	VmServerAddress *VmServerAddress
+
+	noSmithyDocumentSerde
 }
 
 // Represents a VM server location.
@@ -595,4 +652,8 @@ type VmServerAddress struct {
 
 	// The ID of the VM manager.
 	VmManagerId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

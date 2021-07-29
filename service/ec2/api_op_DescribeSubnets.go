@@ -109,6 +109,8 @@ type DescribeSubnetsInput struct {
 
 	// One or more subnet IDs. Default: Describes all your subnets.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSubnetsOutput struct {
@@ -122,6 +124,8 @@ type DescribeSubnetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

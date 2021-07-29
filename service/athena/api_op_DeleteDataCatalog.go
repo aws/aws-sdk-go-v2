@@ -32,11 +32,15 @@ type DeleteDataCatalogInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDataCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {

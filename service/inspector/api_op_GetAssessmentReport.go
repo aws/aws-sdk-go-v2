@@ -49,6 +49,8 @@ type GetAssessmentReportInput struct {
 	//
 	// This member is required.
 	ReportType types.ReportType
+
+	noSmithyDocumentSerde
 }
 
 type GetAssessmentReportOutput struct {
@@ -64,6 +66,8 @@ type GetAssessmentReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssessmentReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type UpdateDomainContactInput struct {
 
 	// Provides detailed contact information.
 	TechContact *types.ContactDetail
+
+	noSmithyDocumentSerde
 }
 
 // The UpdateDomainContact response includes the following element.
@@ -61,6 +63,8 @@ type UpdateDomainContactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

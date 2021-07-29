@@ -40,6 +40,8 @@ type PromoteResourceShareCreatedFromPolicyInput struct {
 	//
 	// This member is required.
 	ResourceShareArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PromoteResourceShareCreatedFromPolicyOutput struct {
@@ -49,6 +51,8 @@ type PromoteResourceShareCreatedFromPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPromoteResourceShareCreatedFromPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

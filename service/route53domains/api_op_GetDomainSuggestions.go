@@ -70,6 +70,8 @@ type GetDomainSuggestionsInput struct {
 	//
 	// This member is required.
 	SuggestionCount int32
+
+	noSmithyDocumentSerde
 }
 
 type GetDomainSuggestionsOutput struct {
@@ -80,6 +82,8 @@ type GetDomainSuggestionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDomainSuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

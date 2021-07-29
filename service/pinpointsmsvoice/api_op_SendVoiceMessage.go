@@ -49,6 +49,8 @@ type SendVoiceMessageInput struct {
 	// receive the message, because you can specify a CallerId parameter in the
 	// request.
 	OriginationPhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that that contains the Message ID of a Voice message that was sent
@@ -60,6 +62,8 @@ type SendVoiceMessageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendVoiceMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

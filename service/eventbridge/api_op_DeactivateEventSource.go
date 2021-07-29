@@ -36,11 +36,15 @@ type DeactivateEventSourceInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeactivateEventSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeactivateEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

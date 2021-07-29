@@ -37,6 +37,8 @@ type DescribeAccountLimitsInput struct {
 
 	// A string that identifies the next page of limits that you want to retrieve.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DescribeAccountLimits action.
@@ -52,6 +54,8 @@ type DescribeAccountLimitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountLimitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

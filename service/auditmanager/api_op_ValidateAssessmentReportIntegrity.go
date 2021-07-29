@@ -33,6 +33,8 @@ type ValidateAssessmentReportIntegrityInput struct {
 	//
 	// This member is required.
 	S3RelativePath *string
+
+	noSmithyDocumentSerde
 }
 
 type ValidateAssessmentReportIntegrityOutput struct {
@@ -55,6 +57,8 @@ type ValidateAssessmentReportIntegrityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationValidateAssessmentReportIntegrityMiddlewares(stack *middleware.Stack, options Options) (err error) {

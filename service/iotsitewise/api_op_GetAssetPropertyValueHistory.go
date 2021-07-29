@@ -75,6 +75,8 @@ type GetAssetPropertyValueHistoryInput struct {
 
 	// The chronological sorting order of the requested information. Default: ASCENDING
 	TimeOrdering types.TimeOrdering
+
+	noSmithyDocumentSerde
 }
 
 type GetAssetPropertyValueHistoryOutput struct {
@@ -90,6 +92,8 @@ type GetAssetPropertyValueHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssetPropertyValueHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

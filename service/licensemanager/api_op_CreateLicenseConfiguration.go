@@ -85,6 +85,8 @@ type CreateLicenseConfigurationInput struct {
 
 	// Tags to add to the license configuration.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateLicenseConfigurationOutput struct {
@@ -94,6 +96,8 @@ type CreateLicenseConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLicenseConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

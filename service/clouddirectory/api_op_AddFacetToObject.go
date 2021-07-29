@@ -49,11 +49,15 @@ type AddFacetToObjectInput struct {
 
 	// Attributes on the facet that you are adding to the object.
 	ObjectAttributeList []types.AttributeKeyAndValue
+
+	noSmithyDocumentSerde
 }
 
 type AddFacetToObjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddFacetToObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

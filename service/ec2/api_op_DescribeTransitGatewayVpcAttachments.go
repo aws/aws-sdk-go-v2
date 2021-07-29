@@ -62,6 +62,8 @@ type DescribeTransitGatewayVpcAttachmentsInput struct {
 
 	// The IDs of the attachments.
 	TransitGatewayAttachmentIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTransitGatewayVpcAttachmentsOutput struct {
@@ -75,6 +77,8 @@ type DescribeTransitGatewayVpcAttachmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTransitGatewayVpcAttachmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

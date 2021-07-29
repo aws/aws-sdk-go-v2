@@ -30,6 +30,7 @@ func (c *Client) GetSnowballUsage(ctx context.Context, params *GetSnowballUsageI
 }
 
 type GetSnowballUsageInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetSnowballUsageOutput struct {
@@ -43,6 +44,8 @@ type GetSnowballUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSnowballUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

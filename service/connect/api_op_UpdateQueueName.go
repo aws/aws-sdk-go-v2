@@ -46,11 +46,15 @@ type UpdateQueueNameInput struct {
 
 	// The name of the queue.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQueueNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQueueNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,6 +61,8 @@ type CreateDimensionInput struct {
 
 	// Metadata that can be used to manage the dimension.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDimensionOutput struct {
@@ -73,6 +75,8 @@ type CreateDimensionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDimensionMiddlewares(stack *middleware.Stack, options Options) (err error) {

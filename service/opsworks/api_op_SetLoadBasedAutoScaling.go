@@ -56,11 +56,15 @@ type SetLoadBasedAutoScalingInput struct {
 	// the load exceeds these thresholds for a specified amount of time, AWS OpsWorks
 	// Stacks starts a specified number of instances.
 	UpScaling *types.AutoScalingThresholds
+
+	noSmithyDocumentSerde
 }
 
 type SetLoadBasedAutoScalingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetLoadBasedAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {

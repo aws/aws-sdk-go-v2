@@ -35,11 +35,15 @@ type DeleteRobotApplicationInput struct {
 
 	// The version of the robot application to delete.
 	ApplicationVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRobotApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRobotApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

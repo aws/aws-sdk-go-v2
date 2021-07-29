@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type ActionConfiguration struct {
 
 	// The configuration data for the action.
 	Configuration map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about an action configuration property.
@@ -54,6 +57,8 @@ type ActionConfigurationProperty struct {
 
 	// The type of the configuration property.
 	Type ActionConfigurationPropertyType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the context of an action in the stage of a pipeline to a job worker.
@@ -64,6 +69,8 @@ type ActionContext struct {
 
 	// The name of the action in the context of a job.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about an action declaration.
@@ -115,6 +122,8 @@ type ActionDeclaration struct {
 
 	// The order in which actions are run.
 	RunOrder *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the run of an action.
@@ -157,6 +166,8 @@ type ActionExecution struct {
 	// command. It is used to validate that the approval request corresponding to this
 	// token is still valid.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about an execution of an action, including the action
@@ -194,6 +205,8 @@ type ActionExecutionDetail struct {
 	// The status of the action execution. Status categories are InProgress, Succeeded,
 	// and Failed.
 	Status ActionExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Filter values for the action execution.
@@ -201,6 +214,8 @@ type ActionExecutionFilter struct {
 
 	// The pipeline execution ID used to filter action execution history.
 	PipelineExecutionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Input information used for an action execution.
@@ -230,6 +245,8 @@ type ActionExecutionInput struct {
 	// The ARN of the IAM service role that performs the declared action. This is
 	// assumed through the roleArn for the pipeline.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Output details listed for an action execution, such as the action execution
@@ -247,6 +264,8 @@ type ActionExecutionOutput struct {
 	// The outputVariables field shows the key-value pairs that were output as part of
 	// that execution.
 	OutputVariables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Execution result information, such as the external execution ID.
@@ -261,6 +280,8 @@ type ActionExecutionResult struct {
 	// The deepest external link to the external resource (for example, a repository
 	// URL or deployment endpoint) that is used when running the action.
 	ExternalExecutionUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the version (or revision) of an action.
@@ -283,6 +304,8 @@ type ActionRevision struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the state of an action.
@@ -304,6 +327,8 @@ type ActionState struct {
 	// A URL link for more information about the revision, such as a commit details
 	// page.
 	RevisionUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the details of an action type.
@@ -329,6 +354,8 @@ type ActionType struct {
 
 	// The settings for the action type.
 	Settings *ActionTypeSettings
+
+	noSmithyDocumentSerde
 }
 
 // Information about parameters for artifacts associated with the action type, such
@@ -348,6 +375,8 @@ type ActionTypeArtifactDetails struct {
 	//
 	// This member is required.
 	MinimumCount int32
+
+	noSmithyDocumentSerde
 }
 
 // The parameters for the action type definition that are provided when the action
@@ -390,6 +419,8 @@ type ActionTypeDeclaration struct {
 
 	// The links associated with the action type to be updated.
 	Urls *ActionTypeUrls
+
+	noSmithyDocumentSerde
 }
 
 // The action engine, or executor, for an action type created for a provider, where
@@ -421,6 +452,8 @@ type ActionTypeExecutor struct {
 	// codepipeline.amazonaws.com. The size of the passed JSON policy document cannot
 	// exceed 2048 characters.
 	PolicyStatementsTemplate *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about an action type.
@@ -468,6 +501,8 @@ type ActionTypeId struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the category, owner, provider, and version of the action type.
@@ -506,6 +541,8 @@ type ActionTypeIdentifier struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Details identifying the users with permissions to use the action type.
@@ -515,6 +552,8 @@ type ActionTypePermissions struct {
 	//
 	// This member is required.
 	AllowedAccounts []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about each property specified in the action
@@ -550,6 +589,8 @@ type ActionTypeProperty struct {
 	// one queryable property. If it has one, that property must be both required and
 	// not secret.
 	Queryable bool
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the settings for an action type.
@@ -575,6 +616,8 @@ type ActionTypeSettings struct {
 	// The URL of a sign-up page where users can sign up for an external service and
 	// perform initial configuration of the action provided by that service.
 	ThirdPartyConfigurationUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about URLs for web pages that display to customers as links
@@ -599,6 +642,8 @@ type ActionTypeUrls struct {
 	// The URL returned to the CodePipeline console that contains a link to the page
 	// where customers can update or change the configuration of the external action.
 	RevisionUrlTemplate *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the result of an approval request.
@@ -613,6 +658,8 @@ type ApprovalResult struct {
 	//
 	// This member is required.
 	Summary *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about an artifact that is worked on by actions in the
@@ -628,6 +675,8 @@ type Artifact struct {
 	// The artifact's revision ID. Depending on the type of object, this could be a
 	// commit ID (GitHub) or a revision ID (Amazon S3).
 	Revision *string
+
+	noSmithyDocumentSerde
 }
 
 // Artifact details for the action execution, such as the artifact location.
@@ -638,6 +687,8 @@ type ArtifactDetail struct {
 
 	// The Amazon S3 artifact location for the action execution.
 	S3location *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the details of an artifact.
@@ -652,6 +703,8 @@ type ArtifactDetails struct {
 	//
 	// This member is required.
 	MinimumCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the location of an artifact.
@@ -662,6 +715,8 @@ type ArtifactLocation struct {
 
 	// The type of artifact in the location.
 	Type ArtifactLocationType
+
+	noSmithyDocumentSerde
 }
 
 // Represents revision details of an artifact.
@@ -691,6 +746,8 @@ type ArtifactRevision struct {
 	// The commit ID for the artifact revision. For artifacts stored in GitHub or AWS
 	// CodeCommit repositories, the commit ID is linked to a commit details page.
 	RevisionUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The S3 bucket where artifacts for the pipeline are stored. You must include
@@ -717,6 +774,8 @@ type ArtifactStore struct {
 	// AWS Key Management Service (AWS KMS) key. If this is undefined, the default key
 	// for Amazon S3 is used.
 	EncryptionKey *EncryptionKey
+
+	noSmithyDocumentSerde
 }
 
 // Represents an AWS session credentials object. These credentials are temporary
@@ -739,6 +798,8 @@ type AWSSessionCredentials struct {
 	//
 	// This member is required.
 	SessionToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Reserved for future use.
@@ -753,6 +814,8 @@ type BlockerDeclaration struct {
 	//
 	// This member is required.
 	Type BlockerType
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about a current revision.
@@ -774,6 +837,8 @@ type CurrentRevision struct {
 
 	// The summary of the most recent revision of the artifact.
 	RevisionSummary *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the key used to encrypt data in the artifact store,
@@ -793,6 +858,8 @@ type EncryptionKey struct {
 	//
 	// This member is required.
 	Type EncryptionKeyType
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about an error in AWS CodePipeline.
@@ -803,6 +870,8 @@ type ErrorDetails struct {
 
 	// The text of the error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the actions taken and results produced on an artifact as it
@@ -819,6 +888,8 @@ type ExecutionDetails struct {
 
 	// The summary of the current status of the actions.
 	Summary *string
+
+	noSmithyDocumentSerde
 }
 
 // The interaction or event that started a pipeline execution.
@@ -832,6 +903,8 @@ type ExecutionTrigger struct {
 	// The type of change-detection method, command, or user interaction that started a
 	// pipeline execution.
 	TriggerType TriggerType
+
+	noSmithyDocumentSerde
 }
 
 // The action engine, or executor, related to the supported integration model used
@@ -844,6 +917,8 @@ type ExecutorConfiguration struct {
 
 	// Details about the Lambda executor of the action type.
 	LambdaExecutorConfiguration *LambdaExecutorConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about failure details.
@@ -861,6 +936,8 @@ type FailureDetails struct {
 
 	// The external ID of the run of the action that failed.
 	ExternalExecutionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about an artifact to be worked on, such as a test or
@@ -876,6 +953,8 @@ type InputArtifact struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about a job.
@@ -894,6 +973,8 @@ type Job struct {
 	// job is being worked on by only one job worker. Use this number in an
 	// AcknowledgeJob request.
 	Nonce *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents other information about a job required for a job worker to complete
@@ -929,6 +1010,8 @@ type JobData struct {
 	// Represents information about a pipeline to a job worker. Includes pipelineArn
 	// and pipelineExecutionId for custom jobs.
 	PipelineContext *PipelineContext
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the details of a job.
@@ -943,6 +1026,8 @@ type JobDetails struct {
 
 	// The unique system-generated ID of the job.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the polling configuration for the JobWorker action engine, or
@@ -956,6 +1041,8 @@ type JobWorkerExecutorConfiguration struct {
 	// The service Principals in which the job worker is configured and might poll for
 	// jobs as part of the action execution.
 	PollingServicePrincipals []string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the configuration for the Lambda action engine, or executor.
@@ -965,6 +1052,8 @@ type LambdaExecutorConfiguration struct {
 	//
 	// This member is required.
 	LambdaFunctionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The detail returned for each webhook after listing webhooks, such as the webhook
@@ -1000,6 +1089,8 @@ type ListWebhookItem struct {
 
 	// Specifies the tags applied to the webhook.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the output of an action.
@@ -1014,6 +1105,8 @@ type OutputArtifact struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about a pipeline to a job worker. PipelineContext
@@ -1037,6 +1130,8 @@ type PipelineContext struct {
 
 	// The stage of the pipeline.
 	Stage *StageContext
+
+	noSmithyDocumentSerde
 }
 
 // Represents the structure of actions and stages to be performed in the pipeline.
@@ -1075,6 +1170,8 @@ type PipelineDeclaration struct {
 	// The version number of the pipeline. A new pipeline always has a version number
 	// of 1. This number is incremented when a pipeline is updated.
 	Version *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about an execution of a pipeline.
@@ -1125,6 +1222,8 @@ type PipelineExecution struct {
 
 	// A summary that contains a description of the pipeline execution status.
 	StatusSummary *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information about a pipeline execution.
@@ -1177,6 +1276,8 @@ type PipelineExecutionSummary struct {
 	// The interaction or event that started a pipeline execution, such as automated
 	// change detection or a StartPipelineExecution API call.
 	Trigger *ExecutionTrigger
+
+	noSmithyDocumentSerde
 }
 
 // Information about a pipeline.
@@ -1190,6 +1291,8 @@ type PipelineMetadata struct {
 
 	// The date and time the pipeline was last updated, in timestamp format.
 	Updated *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Returns a summary of a pipeline.
@@ -1206,6 +1309,8 @@ type PipelineSummary struct {
 
 	// The version number of the pipeline.
 	Version *int32
+
+	noSmithyDocumentSerde
 }
 
 // The location of the S3 bucket that contains a revision.
@@ -1221,6 +1326,8 @@ type S3ArtifactLocation struct {
 	//
 	// This member is required.
 	ObjectKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon S3 artifact location for an action's artifacts.
@@ -1231,6 +1338,8 @@ type S3Location struct {
 
 	// The artifact name.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the version (or revision) of a source artifact that initiated
@@ -1255,6 +1364,8 @@ type SourceRevision struct {
 	// The commit ID for the artifact revision. For artifacts stored in GitHub or AWS
 	// CodeCommit repositories, the commit ID is linked to a commit details page.
 	RevisionUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about a stage to a job worker.
@@ -1262,6 +1373,8 @@ type StageContext struct {
 
 	// The name of the stage.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about a stage and its definition.
@@ -1279,6 +1392,8 @@ type StageDeclaration struct {
 
 	// Reserved for future use.
 	Blockers []BlockerDeclaration
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the run of a stage.
@@ -1295,6 +1410,8 @@ type StageExecution struct {
 	//
 	// This member is required.
 	Status StageExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the state of the stage.
@@ -1315,6 +1432,8 @@ type StageState struct {
 
 	// The name of the stage.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 // The interaction that stopped a pipeline execution.
@@ -1322,6 +1441,8 @@ type StopExecutionTrigger struct {
 
 	// The user-specified reason the pipeline was stopped.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag is a key-value pair that is used to manage the resource.
@@ -1336,6 +1457,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A response to a PollForThirdPartyJobs request returned by AWS CodePipeline when
@@ -1348,6 +1471,8 @@ type ThirdPartyJob struct {
 
 	// The identifier used to identify the job in AWS CodePipeline.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the job data for a partner action.
@@ -1389,6 +1514,8 @@ type ThirdPartyJobData struct {
 	// Represents information about a pipeline to a job worker. Does not include
 	// pipelineArn and pipelineExecutionId for ThirdParty jobs.
 	PipelineContext *PipelineContext
+
+	noSmithyDocumentSerde
 }
 
 // The details of a job sent in response to a GetThirdPartyJobDetails request.
@@ -1404,6 +1531,8 @@ type ThirdPartyJobDetails struct {
 	// job is being worked on by only one job worker. Use this number in an
 	// AcknowledgeThirdPartyJob request.
 	Nonce *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about the state of transitions between one stage and
@@ -1422,6 +1551,8 @@ type TransitionState struct {
 
 	// The ID of the user who last changed the transition state.
 	LastChangedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // The authentication applied to incoming webhook trigger requests.
@@ -1435,6 +1566,8 @@ type WebhookAuthConfiguration struct {
 	// The property used to configure GitHub authentication. For GITHUB_HMAC, only the
 	// SecretToken property must be set.
 	SecretToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents information about a webhook and its definition.
@@ -1488,6 +1621,8 @@ type WebhookDefinition struct {
 	//
 	// This member is required.
 	TargetPipeline *string
+
+	noSmithyDocumentSerde
 }
 
 // The event criteria that specify when a webhook notification is sent to your URL.
@@ -1512,4 +1647,8 @@ type WebhookFilterRule struct {
 	// Reference Action Requirements
 	// (https://docs.aws.amazon.com/codepipeline/latest/userguide/reference-pipeline-structure.html#action-requirements).
 	MatchEquals *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -54,6 +54,8 @@ type UpdateIntegrationResponseInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents an integration response. The status code must map to an existing
@@ -110,6 +112,8 @@ type UpdateIntegrationResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

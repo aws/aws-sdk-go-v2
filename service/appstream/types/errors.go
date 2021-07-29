@@ -10,6 +10,8 @@ import (
 // An API error occurred. Wait a few minutes and try again.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -29,6 +31,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // The image can't be updated because it's not compatible for updates.
 type IncompatibleImageException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncompatibleImageException) Error() string {
@@ -47,6 +51,8 @@ func (e *IncompatibleImageException) ErrorFault() smithy.ErrorFault { return smi
 // assistance, contact AWS Support.
 type InvalidAccountStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAccountStatusException) Error() string {
@@ -64,6 +70,8 @@ func (e *InvalidAccountStatusException) ErrorFault() smithy.ErrorFault { return 
 // Indicates an incorrect combination of parameters, or a missing parameter.
 type InvalidParameterCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterCombinationException) Error() string {
@@ -85,6 +93,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 // The specified role is invalid.
 type InvalidRoleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRoleException) Error() string {
@@ -102,6 +112,8 @@ func (e *InvalidRoleException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The requested limit exceeds the permitted limit for an account.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -119,6 +131,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The attempted operation is not permitted.
 type OperationNotPermittedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotPermittedException) Error() string {
@@ -137,6 +151,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // from your AWS account are being throttled by Amazon EC2. Try again later.
 type RequestLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestLimitExceededException) Error() string {
@@ -154,6 +170,8 @@ func (e *RequestLimitExceededException) ErrorFault() smithy.ErrorFault { return 
 // The specified resource already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -171,6 +189,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // The specified resource is in use.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -188,6 +208,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource exists and is not in use, but isn't available.
 type ResourceNotAvailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotAvailableException) Error() string {
@@ -205,6 +227,8 @@ func (e *ResourceNotAvailableException) ErrorFault() smithy.ErrorFault { return 
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

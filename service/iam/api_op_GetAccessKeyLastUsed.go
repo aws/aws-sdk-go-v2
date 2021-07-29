@@ -38,6 +38,8 @@ type GetAccessKeyLastUsedInput struct {
 	//
 	// This member is required.
 	AccessKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful GetAccessKeyLastUsed request. It is also
@@ -53,6 +55,8 @@ type GetAccessKeyLastUsedOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccessKeyLastUsedMiddlewares(stack *middleware.Stack, options Options) (err error) {

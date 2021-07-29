@@ -40,11 +40,15 @@ type AssociateAdminAccountInput struct {
 	//
 	// This member is required.
 	AdminAccount *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

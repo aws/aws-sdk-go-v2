@@ -43,6 +43,8 @@ type GetRouteResponseInput struct {
 	//
 	// This member is required.
 	RouteResponseId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRouteResponseOutput struct {
@@ -65,6 +67,8 @@ type GetRouteResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

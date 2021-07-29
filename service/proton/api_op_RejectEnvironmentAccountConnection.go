@@ -38,6 +38,8 @@ type RejectEnvironmentAccountConnectionInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type RejectEnvironmentAccountConnectionOutput struct {
@@ -49,6 +51,8 @@ type RejectEnvironmentAccountConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectEnvironmentAccountConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

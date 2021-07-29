@@ -54,6 +54,8 @@ type CreateRouteResponseInput struct {
 
 	// The route response parameters.
 	ResponseParameters map[string]types.ParameterConstraints
+
+	noSmithyDocumentSerde
 }
 
 type CreateRouteResponseOutput struct {
@@ -76,6 +78,8 @@ type CreateRouteResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRouteResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

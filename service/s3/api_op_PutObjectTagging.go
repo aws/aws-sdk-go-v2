@@ -128,6 +128,8 @@ type PutObjectTaggingInput struct {
 
 	// The versionId of the object that the tag-set will be added to.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutObjectTaggingOutput struct {
@@ -137,6 +139,8 @@ type PutObjectTaggingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutObjectTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

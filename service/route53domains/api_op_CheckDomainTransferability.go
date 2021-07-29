@@ -55,6 +55,8 @@ type CheckDomainTransferabilityInput struct {
 	// to transfer the domain, the code that you got from the current registrar for the
 	// domain.
 	AuthCode *string
+
+	noSmithyDocumentSerde
 }
 
 // The CheckDomainTransferability response includes the following elements.
@@ -68,6 +70,8 @@ type CheckDomainTransferabilityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCheckDomainTransferabilityMiddlewares(stack *middleware.Stack, options Options) (err error) {

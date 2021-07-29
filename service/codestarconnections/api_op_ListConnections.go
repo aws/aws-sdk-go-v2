@@ -44,6 +44,8 @@ type ListConnectionsInput struct {
 	// Filters the list of connections to those associated with a specified provider,
 	// such as Bitbucket.
 	ProviderTypeFilter types.ProviderType
+
+	noSmithyDocumentSerde
 }
 
 type ListConnectionsOutput struct {
@@ -59,6 +61,8 @@ type ListConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

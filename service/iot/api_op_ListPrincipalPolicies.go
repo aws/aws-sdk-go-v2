@@ -52,6 +52,8 @@ type ListPrincipalPoliciesInput struct {
 
 	// The result page size.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // The output from the ListPrincipalPolicies operation.
@@ -66,6 +68,8 @@ type ListPrincipalPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPrincipalPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

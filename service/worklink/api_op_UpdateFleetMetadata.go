@@ -39,11 +39,15 @@ type UpdateFleetMetadataInput struct {
 	// The option to optimize for better performance by routing traffic through the
 	// closest AWS Region to users, which may be outside of your home Region.
 	OptimizeForEndUserLocation *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFleetMetadataOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFleetMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

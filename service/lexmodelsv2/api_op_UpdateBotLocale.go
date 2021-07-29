@@ -61,6 +61,8 @@ type UpdateBotLocaleInput struct {
 	// The new Amazon Polly voice Amazon Lex should use for voice interaction with the
 	// user.
 	VoiceSettings *types.VoiceSettings
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBotLocaleOutput struct {
@@ -104,6 +106,8 @@ type UpdateBotLocaleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {

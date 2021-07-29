@@ -43,6 +43,8 @@ type AssociateConnectionAliasInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateConnectionAliasOutput struct {
@@ -54,6 +56,8 @@ type AssociateConnectionAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

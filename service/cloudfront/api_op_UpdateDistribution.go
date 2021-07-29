@@ -120,6 +120,8 @@ type UpdateDistributionInput struct {
 	// The value of the ETag header that you received when retrieving the
 	// distribution's configuration. For example: E2QWRUHAPOMQZL.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -133,6 +135,8 @@ type UpdateDistributionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDistributionMiddlewares(stack *middleware.Stack, options Options) (err error) {

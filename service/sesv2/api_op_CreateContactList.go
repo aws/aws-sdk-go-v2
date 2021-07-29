@@ -43,11 +43,15 @@ type CreateContactListInput struct {
 	// An interest group, theme, or label within a list. A contact list can have
 	// multiple topics.
 	Topics []types.Topic
+
+	noSmithyDocumentSerde
 }
 
 type CreateContactListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetExperimentTemplateInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetExperimentTemplateOutput struct {
@@ -42,6 +44,8 @@ type GetExperimentTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetExperimentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

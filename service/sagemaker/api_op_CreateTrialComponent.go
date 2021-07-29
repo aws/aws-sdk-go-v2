@@ -80,6 +80,8 @@ type CreateTrialComponentInput struct {
 	// A list of tags to associate with the component. You can use Search API to search
 	// on the tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateTrialComponentOutput struct {
@@ -89,6 +91,8 @@ type CreateTrialComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

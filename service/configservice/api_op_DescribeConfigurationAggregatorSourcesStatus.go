@@ -56,6 +56,8 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 	// *
 	// Valid value OUTDATED indicates the data is not the most recent.
 	UpdateStatus []types.AggregatedSourceStatusType
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConfigurationAggregatorSourcesStatusOutput struct {
@@ -69,6 +71,8 @@ type DescribeConfigurationAggregatorSourcesStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConfigurationAggregatorSourcesStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

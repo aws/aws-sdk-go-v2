@@ -45,6 +45,8 @@ type CreateHumanTaskUiInput struct {
 	// organize a human review workflow user interface. Each tag consists of a key and
 	// a value, both of which you define.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateHumanTaskUiOutput struct {
@@ -57,6 +59,8 @@ type CreateHumanTaskUiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateHumanTaskUiMiddlewares(stack *middleware.Stack, options Options) (err error) {

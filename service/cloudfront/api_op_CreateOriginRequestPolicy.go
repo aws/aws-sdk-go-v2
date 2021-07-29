@@ -57,6 +57,8 @@ type CreateOriginRequestPolicyInput struct {
 	//
 	// This member is required.
 	OriginRequestPolicyConfig *types.OriginRequestPolicyConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateOriginRequestPolicyOutput struct {
@@ -72,6 +74,8 @@ type CreateOriginRequestPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

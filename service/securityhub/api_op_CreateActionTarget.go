@@ -45,6 +45,8 @@ type CreateActionTargetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateActionTargetOutput struct {
@@ -56,6 +58,8 @@ type CreateActionTargetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateActionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

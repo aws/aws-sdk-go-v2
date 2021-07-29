@@ -33,11 +33,15 @@ type DeleteConfigurationAggregatorInput struct {
 	//
 	// This member is required.
 	ConfigurationAggregatorName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConfigurationAggregatorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConfigurationAggregatorMiddlewares(stack *middleware.Stack, options Options) (err error) {

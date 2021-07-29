@@ -44,6 +44,8 @@ type DeleteProjectInput struct {
 	// delete all AWS resources for the project (except for any buckets in Amazon S3)
 	// as well as deleting the project itself. Recommended for most use cases.
 	DeleteStack bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProjectOutput struct {
@@ -57,6 +59,8 @@ type DeleteProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

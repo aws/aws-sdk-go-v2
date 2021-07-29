@@ -41,6 +41,8 @@ type BatchGetWorkflowsInput struct {
 	// Specifies whether to include a graph when returning the workflow resource
 	// metadata.
 	IncludeGraph *bool
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetWorkflowsOutput struct {
@@ -53,6 +55,8 @@ type BatchGetWorkflowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetWorkflowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

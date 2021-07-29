@@ -76,6 +76,8 @@ type CreateJobInput struct {
 	// pairs per job. Elastic Transcoder does not guarantee that key/value pairs are
 	// returned in the same order in which you specify them.
 	UserMetadata map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The CreateJobResponse structure.
@@ -87,6 +89,8 @@ type CreateJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

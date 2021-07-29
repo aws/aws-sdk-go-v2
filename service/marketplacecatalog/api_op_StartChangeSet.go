@@ -57,6 +57,8 @@ type StartChangeSetInput struct {
 
 	// A unique token to identify the request to ensure idempotency.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type StartChangeSetOutput struct {
@@ -69,6 +71,8 @@ type StartChangeSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

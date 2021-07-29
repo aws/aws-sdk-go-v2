@@ -62,6 +62,8 @@ type GetVaultNotificationsInput struct {
 	//
 	// This member is required.
 	VaultName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -72,6 +74,8 @@ type GetVaultNotificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

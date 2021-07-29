@@ -34,12 +34,16 @@ type DeletePresetInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // The DeletePresetResponse structure.
 type DeletePresetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePresetMiddlewares(stack *middleware.Stack, options Options) (err error) {

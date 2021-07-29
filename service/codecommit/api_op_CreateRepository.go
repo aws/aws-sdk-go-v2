@@ -50,6 +50,8 @@ type CreateRepositoryInput struct {
 
 	// One or more tag key-value pairs to use when tagging this repository.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a create repository operation.
@@ -60,6 +62,8 @@ type CreateRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type ListProblemsInput struct {
 	// The time when the problem was detected, in epoch seconds. If you don't specify a
 	// time frame for the request, problems within the past seven days are returned.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ListProblemsOutput struct {
@@ -61,6 +63,8 @@ type ListProblemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProblemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

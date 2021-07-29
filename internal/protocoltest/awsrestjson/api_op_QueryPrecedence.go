@@ -28,11 +28,15 @@ type QueryPrecedenceInput struct {
 	Baz map[string]string
 
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type QueryPrecedenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryPrecedenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

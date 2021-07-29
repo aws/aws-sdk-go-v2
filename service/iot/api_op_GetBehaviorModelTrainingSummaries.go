@@ -38,6 +38,8 @@ type GetBehaviorModelTrainingSummariesInput struct {
 
 	// The name of the security profile.
 	SecurityProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBehaviorModelTrainingSummariesOutput struct {
@@ -52,6 +54,8 @@ type GetBehaviorModelTrainingSummariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBehaviorModelTrainingSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

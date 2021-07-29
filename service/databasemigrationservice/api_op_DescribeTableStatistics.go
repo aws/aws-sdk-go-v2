@@ -55,6 +55,8 @@ type DescribeTableStatisticsInput struct {
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 500.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -73,6 +75,8 @@ type DescribeTableStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTableStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

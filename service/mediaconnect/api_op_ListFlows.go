@@ -46,6 +46,8 @@ type ListFlowsInput struct {
 	// next batch of results, you can submit the ListFlows request a second time and
 	// specify the NextToken value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFlowsOutput struct {
@@ -62,6 +64,8 @@ type ListFlowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

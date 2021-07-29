@@ -39,6 +39,8 @@ type UpdateSubnetGroupInput struct {
 
 	// A list of subnet IDs in the subnet group.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSubnetGroupOutput struct {
@@ -48,6 +50,8 @@ type UpdateSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

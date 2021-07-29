@@ -38,11 +38,15 @@ type DisassociateKmsKeyInput struct {
 	//
 	// This member is required.
 	LogGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateKmsKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateKmsKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

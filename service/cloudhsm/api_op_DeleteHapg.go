@@ -43,6 +43,8 @@ type DeleteHapgInput struct {
 	//
 	// This member is required.
 	HapgArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of the DeleteHapg action.
@@ -55,6 +57,8 @@ type DeleteHapgOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteHapgMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -62,6 +62,8 @@ type DescribeFleetPortSettingsInput struct {
 	// A remote location to check for status of port setting updates. Use the AWS
 	// Region code format, such as us-west-2.
 	Location *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -91,6 +93,8 @@ type DescribeFleetPortSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFleetPortSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

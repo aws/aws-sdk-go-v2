@@ -151,6 +151,8 @@ type GetResourcesInput struct {
 	// third page displays the remaining 2 resources, each with its 10 tags. You can
 	// set TagsPerPage to a minimum of 100 items up to a maximum of 500 items.
 	TagsPerPage *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetResourcesOutput struct {
@@ -166,6 +168,8 @@ type GetResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

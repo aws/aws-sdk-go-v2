@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Provides the category rules that are used to automatically categorize contacts
 // based on uttered keywords and phrases.
 type Categories struct {
@@ -15,6 +19,8 @@ type Categories struct {
 	//
 	// This member is required.
 	MatchedDetails map[string]CategoryDetails
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the category rule that was matched.
@@ -24,6 +30,8 @@ type CategoryDetails struct {
 	//
 	// This member is required.
 	PointsOfInterest []PointOfInterest
+
+	noSmithyDocumentSerde
 }
 
 // For characters that were detected as issues, where they occur in the transcript.
@@ -38,6 +46,8 @@ type CharacterOffsets struct {
 	//
 	// This member is required.
 	EndOffsetChar int32
+
+	noSmithyDocumentSerde
 }
 
 // Potential issues that are detected based on an artificial intelligence analysis
@@ -48,6 +58,8 @@ type IssueDetected struct {
 	//
 	// This member is required.
 	CharacterOffsets *CharacterOffsets
+
+	noSmithyDocumentSerde
 }
 
 // The section of the contact audio where that category rule was detected.
@@ -62,6 +74,8 @@ type PointOfInterest struct {
 	//
 	// This member is required.
 	EndOffsetMillis int32
+
+	noSmithyDocumentSerde
 }
 
 // An analyzed segment for a real-time analysis session.
@@ -72,6 +86,8 @@ type RealtimeContactAnalysisSegment struct {
 
 	// The analyzed transcript.
 	Transcript *Transcript
+
+	noSmithyDocumentSerde
 }
 
 // A list of messages in the session.
@@ -114,4 +130,8 @@ type Transcript struct {
 
 	// List of positions where issues were detected on the transcript.
 	IssuesDetected []IssueDetected
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

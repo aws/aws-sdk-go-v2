@@ -59,11 +59,15 @@ type AttachLoadBalancerTargetGroupsInput struct {
 	//
 	// This member is required.
 	TargetGroupARNs []string
+
+	noSmithyDocumentSerde
 }
 
 type AttachLoadBalancerTargetGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachLoadBalancerTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

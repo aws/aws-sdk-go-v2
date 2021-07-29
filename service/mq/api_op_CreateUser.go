@@ -55,11 +55,15 @@ type CreateUserInput struct {
 	// can contain only alphanumeric characters, dashes, periods, underscores, and
 	// tildes (- . _ ~). This value must be 2-100 characters long.
 	Groups []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

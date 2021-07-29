@@ -70,6 +70,8 @@ type BatchUpsertTableRowsInput struct {
 	// again. Note that request tokens are valid only for a few minutes. You cannot use
 	// request tokens to dedupe requests spanning hours or days.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchUpsertTableRowsOutput struct {
@@ -95,6 +97,8 @@ type BatchUpsertTableRowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUpsertTableRowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

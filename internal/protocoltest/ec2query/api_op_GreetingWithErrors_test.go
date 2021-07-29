@@ -8,6 +8,7 @@ import (
 	"errors"
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/ec2query/types"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/middleware"
 	"github.com/aws/smithy-go/ptr"
 	smithyrand "github.com/aws/smithy-go/rand"
@@ -107,6 +108,7 @@ func TestClient_GreetingWithErrors_awsEc2queryDeserialize(t *testing.T) {
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectResult, result, opts...); err != nil {
 				t.Errorf("expect c.ExpectResult value match:\n%v", err)
@@ -222,6 +224,7 @@ func TestClient_GreetingWithErrors_InvalidGreeting_awsEc2queryDeserialize(t *tes
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr, opts...); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)
@@ -343,6 +346,7 @@ func TestClient_GreetingWithErrors_ComplexError_awsEc2queryDeserialize(t *testin
 				cmp.FilterValues(func(x, y float32) bool {
 					return math.IsNaN(float64(x)) && math.IsNaN(float64(y))
 				}, cmp.Comparer(func(_, _ interface{}) bool { return true })),
+				cmpopts.IgnoreTypes(smithydocument.NoSerde{}),
 			}
 			if err := smithytesting.CompareValues(c.ExpectError, actualErr, opts...); err != nil {
 				t.Errorf("expect c.ExpectError value match:\n%v", err)

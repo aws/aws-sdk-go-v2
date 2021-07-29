@@ -199,6 +199,8 @@ type CreatePredictorInput struct {
 	// can override are listed in the individual algorithms. For the list of supported
 	// algorithms, see aws-forecast-choosing-recipes.
 	TrainingParameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePredictorOutput struct {
@@ -208,6 +210,8 @@ type CreatePredictorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePredictorMiddlewares(stack *middleware.Stack, options Options) (err error) {

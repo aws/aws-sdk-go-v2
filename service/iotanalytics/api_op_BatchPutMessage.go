@@ -62,6 +62,8 @@ type BatchPutMessageInput struct {
 	//
 	// This member is required.
 	Messages []types.Message
+
+	noSmithyDocumentSerde
 }
 
 type BatchPutMessageOutput struct {
@@ -71,6 +73,8 @@ type BatchPutMessageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchPutMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

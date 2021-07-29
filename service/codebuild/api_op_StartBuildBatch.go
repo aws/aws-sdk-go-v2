@@ -192,6 +192,8 @@ type StartBuildBatchInput struct {
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
 	// in the CodeBuild User Guide.
 	SourceVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type StartBuildBatchOutput struct {
@@ -201,6 +203,8 @@ type StartBuildBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

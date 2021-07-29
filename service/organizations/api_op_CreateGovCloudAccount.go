@@ -204,6 +204,8 @@ type CreateGovCloudAccountInput struct {
 	// exceed the allowed number of tags for an account, then the entire request fails
 	// and the account is not created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateGovCloudAccountOutput struct {
@@ -214,6 +216,8 @@ type CreateGovCloudAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGovCloudAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -330,6 +330,8 @@ type RestoreDBInstanceFromS3Input struct {
 
 	// A list of VPC security groups to associate with this DB instance.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreDBInstanceFromS3Output struct {
@@ -340,6 +342,8 @@ type RestoreDBInstanceFromS3Output struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreDBInstanceFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {

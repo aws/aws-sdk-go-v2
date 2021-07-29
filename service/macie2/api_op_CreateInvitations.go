@@ -44,6 +44,8 @@ type CreateInvitationsInput struct {
 	// A custom message to include in the invitation. Amazon Macie adds this message to
 	// the standard content that it sends for an invitation.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateInvitationsOutput struct {
@@ -55,6 +57,8 @@ type CreateInvitationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

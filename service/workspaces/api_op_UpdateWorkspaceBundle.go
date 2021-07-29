@@ -39,11 +39,15 @@ type UpdateWorkspaceBundleInput struct {
 
 	// The identifier of the image.
 	ImageId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWorkspaceBundleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorkspaceBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {

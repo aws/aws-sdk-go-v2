@@ -70,11 +70,15 @@ type TagMFADeviceInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type TagMFADeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTagMFADeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

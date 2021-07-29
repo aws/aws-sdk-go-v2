@@ -35,6 +35,8 @@ type ExportProjectInput struct {
 	//
 	// This member is required.
 	ProjectId *string
+
+	noSmithyDocumentSerde
 }
 
 // Result structure used for requests to export project configuration details.
@@ -57,6 +59,8 @@ type ExportProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The media stream that you want to add to the flow.
 type AddMediaStreamRequest struct {
 
@@ -34,6 +38,8 @@ type AddMediaStreamRequest struct {
 
 	// The resolution of the video.
 	VideoFormat *string
+
+	noSmithyDocumentSerde
 }
 
 // The output that you want to add to this flow.
@@ -92,6 +98,8 @@ type AddOutputRequest struct {
 
 	// The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
 }
 
 // The transport parameters that are associated with an outbound media stream.
@@ -120,6 +128,8 @@ type DestinationConfiguration struct {
 	//
 	// This member is required.
 	OutboundIp *string
+
+	noSmithyDocumentSerde
 }
 
 // The transport parameters that you want to associate with an outbound media
@@ -142,6 +152,8 @@ type DestinationConfigurationRequest struct {
 	//
 	// This member is required.
 	Interface *InterfaceRequest
+
+	noSmithyDocumentSerde
 }
 
 // A collection of parameters that determine how MediaConnect will convert the
@@ -163,6 +175,8 @@ type EncodingParameters struct {
 	//
 	// This member is required.
 	EncoderProfile EncoderProfile
+
+	noSmithyDocumentSerde
 }
 
 // A collection of parameters that determine how MediaConnect will convert the
@@ -184,6 +198,8 @@ type EncodingParametersRequest struct {
 	//
 	// This member is required.
 	EncoderProfile EncoderProfile
+
+	noSmithyDocumentSerde
 }
 
 // Information about the encryption of the flow.
@@ -233,6 +249,8 @@ type Encryption struct {
 	// This parameter is required for SPEKE encryption and is not valid for static key
 	// encryption.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a flow entitlement.
@@ -267,6 +285,8 @@ type Entitlement struct {
 
 	// An indication of whether the entitlement is enabled.
 	EntitlementStatus EntitlementStatus
+
+	noSmithyDocumentSerde
 }
 
 // The settings for source failover
@@ -285,6 +305,8 @@ type FailoverConfig struct {
 	SourcePriority *SourcePriority
 
 	State State
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a flow, including its source, outputs, and entitlements.
@@ -345,6 +367,8 @@ type Flow struct {
 
 	// The VPC Interfaces for this flow.
 	VpcInterfaces []VpcInterface
+
+	noSmithyDocumentSerde
 }
 
 // FMTP
@@ -372,6 +396,8 @@ type Fmtp struct {
 
 	// The transfer characteristic system (TCS) that is used in the video.
 	Tcs Tcs
+
+	noSmithyDocumentSerde
 }
 
 // The settings that you want to use to define the media stream.
@@ -399,6 +425,8 @@ type FmtpRequest struct {
 
 	// The transfer characteristic system (TCS) that is used in the video.
 	Tcs Tcs
+
+	noSmithyDocumentSerde
 }
 
 // The entitlements that you want to grant on a flow.
@@ -430,6 +458,8 @@ type GrantEntitlementRequest struct {
 
 	// The name of the entitlement. This value must be unique within the current flow.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The transport parameters that are associated with an incoming media stream.
@@ -449,6 +479,8 @@ type InputConfiguration struct {
 	//
 	// This member is required.
 	Interface *Interface
+
+	noSmithyDocumentSerde
 }
 
 // The transport parameters that you want to associate with an incoming media
@@ -464,6 +496,8 @@ type InputConfigurationRequest struct {
 	//
 	// This member is required.
 	Interface *InterfaceRequest
+
+	noSmithyDocumentSerde
 }
 
 // The VPC interface that is used for the media stream associated with the source
@@ -474,6 +508,8 @@ type Interface struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The VPC interface that you want to designate where the media stream is coming
@@ -484,6 +520,8 @@ type InterfaceRequest struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An entitlement that has been granted to you from other AWS accounts.
@@ -501,6 +539,8 @@ type ListedEntitlement struct {
 
 	// Percentage from 0-100 of the data transfer cost to be billed to the subscriber.
 	DataTransferSubscriberFeePercent int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of a flow, including its ARN, Availability Zone, and source
@@ -538,6 +578,8 @@ type ListedFlow struct {
 	//
 	// This member is required.
 	Status Status
+
+	noSmithyDocumentSerde
 }
 
 // A single track or stream of media that contains video, audio, or ancillary data.
@@ -580,6 +622,8 @@ type MediaStream struct {
 
 	// The resolution of the video.
 	VideoFormat *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes that are related to the media stream.
@@ -592,6 +636,8 @@ type MediaStreamAttributes struct {
 
 	// The audio language, in a format that is recognized by the receiver.
 	Lang *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes that are related to the media stream.
@@ -602,6 +648,8 @@ type MediaStreamAttributesRequest struct {
 
 	// The audio language, in a format that is recognized by the receiver.
 	Lang *string
+
+	noSmithyDocumentSerde
 }
 
 // The media stream that is associated with the output, and the parameters for that
@@ -626,6 +674,8 @@ type MediaStreamOutputConfiguration struct {
 
 	// Encoding parameters
 	EncodingParameters *EncodingParameters
+
+	noSmithyDocumentSerde
 }
 
 // The media stream that you want to associate with the output, and the parameters
@@ -651,6 +701,8 @@ type MediaStreamOutputConfigurationRequest struct {
 	// A collection of parameters that determine how MediaConnect will convert the
 	// content. These fields only apply to outputs on flows that have a CDI source.
 	EncodingParameters *EncodingParametersRequest
+
+	noSmithyDocumentSerde
 }
 
 // The media stream that is associated with the source, and the parameters for that
@@ -672,6 +724,8 @@ type MediaStreamSourceConfiguration struct {
 
 	// The transport parameters that are associated with an incoming media stream.
 	InputConfigurations []InputConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The definition of a media stream that you want to associate with the source.
@@ -692,6 +746,8 @@ type MediaStreamSourceConfigurationRequest struct {
 
 	// The transport parameters that you want to associate with the media stream.
 	InputConfigurations []InputConfigurationRequest
+
+	noSmithyDocumentSerde
 }
 
 // Messages that provide the state of the flow.
@@ -701,6 +757,8 @@ type Messages struct {
 	//
 	// This member is required.
 	Errors []string
+
+	noSmithyDocumentSerde
 }
 
 // A savings plan that reserves a certain amount of outbound bandwidth usage at a
@@ -750,6 +808,8 @@ type Offering struct {
 	//
 	// This member is required.
 	ResourceSpecification *ResourceSpecification
+
+	noSmithyDocumentSerde
 }
 
 // The settings for an output.
@@ -804,6 +864,8 @@ type Output struct {
 
 	// The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
 }
 
 // A pricing agreement for a discounted rate for a specific outbound bandwidth that
@@ -889,6 +951,8 @@ type Reservation struct {
 	//
 	// This member is required.
 	Start *string
+
+	noSmithyDocumentSerde
 }
 
 // A definition of what is being billed for, including the type and amount.
@@ -901,6 +965,8 @@ type ResourceSpecification struct {
 
 	// The amount of outbound bandwidth that is discounted in the offering.
 	ReservedBitrate int32
+
+	noSmithyDocumentSerde
 }
 
 // The settings for the source of the flow.
@@ -959,6 +1025,8 @@ type SetSourceRequest struct {
 	// source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for the source of the flow.
@@ -1009,6 +1077,8 @@ type Source struct {
 	// source. These IP addresses should be in the form of a Classless Inter-Domain
 	// Routing (CIDR) block; for example, 10.0.0.0/16.
 	WhitelistCidr *string
+
+	noSmithyDocumentSerde
 }
 
 // The priority you want to assign to a source. You can have a primary stream and a
@@ -1017,6 +1087,8 @@ type SourcePriority struct {
 
 	// The name of the source you choose as the primary source for this flow.
 	PrimarySource *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes related to the transport stream that are used in a source or output.
@@ -1058,6 +1130,8 @@ type Transport struct {
 	// The stream ID that you want to use for this transport. This parameter applies
 	// only to Zixi-based streams.
 	StreamId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the encryption of the flow.
@@ -1105,6 +1179,8 @@ type UpdateEncryption struct {
 	// This parameter is required for SPEKE encryption and is not valid for static key
 	// encryption.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for source failover
@@ -1123,6 +1199,8 @@ type UpdateFailoverConfig struct {
 	SourcePriority *SourcePriority
 
 	State State
+
+	noSmithyDocumentSerde
 }
 
 // The settings for a VPC Source.
@@ -1157,6 +1235,8 @@ type VpcInterface struct {
 	//
 	// This member is required.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for attaching a VPC interface to an output.
@@ -1164,6 +1244,8 @@ type VpcInterfaceAttachment struct {
 
 	// The name of the VPC interface to use for this output.
 	VpcInterfaceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Desired VPC Interface for a Flow
@@ -1193,4 +1275,8 @@ type VpcInterfaceRequest struct {
 	// The type of network interface. If this value is not included in the request,
 	// MediaConnect uses ENA as the networkInterfaceType.
 	NetworkInterfaceType NetworkInterfaceType
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

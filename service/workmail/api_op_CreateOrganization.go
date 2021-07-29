@@ -68,6 +68,8 @@ type CreateOrganizationInput struct {
 
 	// The Amazon Resource Name (ARN) of a customer managed master key from AWS KMS.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateOrganizationOutput struct {
@@ -77,6 +79,8 @@ type CreateOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

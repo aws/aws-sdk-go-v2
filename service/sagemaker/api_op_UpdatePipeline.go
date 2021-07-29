@@ -44,6 +44,8 @@ type UpdatePipelineInput struct {
 
 	// The Amazon Resource Name (ARN) that the pipeline uses to execute.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePipelineOutput struct {
@@ -53,6 +55,8 @@ type UpdatePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

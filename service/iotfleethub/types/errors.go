@@ -10,6 +10,8 @@ import (
 // The request conflicts with the current state of the resource.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -27,6 +29,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // An unexpected error has occurred.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -44,6 +48,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 // The request is not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -61,6 +67,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // A limit has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -78,6 +86,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -95,6 +105,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The rate exceeds the limit.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

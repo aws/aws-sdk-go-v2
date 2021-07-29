@@ -43,6 +43,8 @@ type UpdateRequestValidatorInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // A set of validation rules for incoming Method requests. In OpenAPI, a
@@ -71,6 +73,8 @@ type UpdateRequestValidatorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {

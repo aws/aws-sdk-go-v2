@@ -48,6 +48,8 @@ type UpdateContinuousBackupsInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContinuousBackupsOutput struct {
@@ -58,6 +60,8 @@ type UpdateContinuousBackupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContinuousBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

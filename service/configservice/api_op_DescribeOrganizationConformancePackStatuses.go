@@ -48,6 +48,8 @@ type DescribeOrganizationConformancePackStatusesInput struct {
 	// If you do not specify any names, AWS Config returns details for all your
 	// organization conformance packs.
 	OrganizationConformancePackNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeOrganizationConformancePackStatusesOutput struct {
@@ -61,6 +63,8 @@ type DescribeOrganizationConformancePackStatusesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOrganizationConformancePackStatusesMiddlewares(stack *middleware.Stack, options Options) (err error) {

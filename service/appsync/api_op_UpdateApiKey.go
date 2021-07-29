@@ -45,6 +45,8 @@ type UpdateApiKeyInput struct {
 	// The time from update time after which the API key expires. The date is
 	// represented as seconds since the epoch. For more information, see .
 	Expires int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApiKeyOutput struct {
@@ -54,6 +56,8 @@ type UpdateApiKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

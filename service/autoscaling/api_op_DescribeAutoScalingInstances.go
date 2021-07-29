@@ -42,6 +42,8 @@ type DescribeAutoScalingInstancesInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAutoScalingInstancesOutput struct {
@@ -57,6 +59,8 @@ type DescribeAutoScalingInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAutoScalingInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

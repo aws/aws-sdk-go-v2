@@ -86,11 +86,15 @@ type SplitShardInput struct {
 	//
 	// This member is required.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type SplitShardOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSplitShardMiddlewares(stack *middleware.Stack, options Options) (err error) {

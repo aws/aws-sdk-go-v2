@@ -33,6 +33,8 @@ type StopBuildBatchInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type StopBuildBatchOutput struct {
@@ -42,6 +44,8 @@ type StopBuildBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopBuildBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

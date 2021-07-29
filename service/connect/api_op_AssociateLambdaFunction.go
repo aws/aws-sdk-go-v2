@@ -41,11 +41,15 @@ type AssociateLambdaFunctionInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateLambdaFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateLambdaFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

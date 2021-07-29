@@ -35,6 +35,8 @@ type DescribeBatchInferenceJobInput struct {
 	//
 	// This member is required.
 	BatchInferenceJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBatchInferenceJobOutput struct {
@@ -44,6 +46,8 @@ type DescribeBatchInferenceJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBatchInferenceJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

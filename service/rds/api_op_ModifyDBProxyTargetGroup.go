@@ -47,6 +47,8 @@ type ModifyDBProxyTargetGroupInput struct {
 	// letter and must contain only ASCII letters, digits, and hyphens; it can't end
 	// with a hyphen or contain two consecutive hyphens.
 	NewName *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBProxyTargetGroupOutput struct {
@@ -56,6 +58,8 @@ type ModifyDBProxyTargetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBProxyTargetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -96,6 +96,8 @@ type GetInterpolatedAssetPropertyValuesInput struct {
 
 	// The nanosecond offset converted from startTimeInSeconds.
 	StartTimeOffsetInNanos *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetInterpolatedAssetPropertyValuesOutput struct {
@@ -111,6 +113,8 @@ type GetInterpolatedAssetPropertyValuesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInterpolatedAssetPropertyValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

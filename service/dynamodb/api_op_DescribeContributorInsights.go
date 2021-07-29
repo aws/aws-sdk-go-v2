@@ -38,6 +38,8 @@ type DescribeContributorInsightsInput struct {
 
 	// The name of the global secondary index to describe, if applicable.
 	IndexName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeContributorInsightsOutput struct {
@@ -78,6 +80,8 @@ type DescribeContributorInsightsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {

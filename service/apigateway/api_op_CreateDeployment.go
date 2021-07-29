@@ -64,6 +64,8 @@ type CreateDeploymentInput struct {
 	// with the new deployment. Variable names can have alphanumeric and underscore
 	// characters, and the values must match [A-Za-z0-9-._~:/?#&=,]+.
 	Variables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An immutable representation of a RestApi resource that can be called by users
@@ -92,6 +94,8 @@ type CreateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type DeleteMetricFilterInput struct {
 	//
 	// This member is required.
 	LogGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMetricFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

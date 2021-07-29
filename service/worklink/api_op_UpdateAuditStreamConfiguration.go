@@ -35,11 +35,15 @@ type UpdateAuditStreamConfigurationInput struct {
 
 	// The ARN of the Amazon Kinesis data stream that receives the audit events.
 	AuditStreamArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAuditStreamConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAuditStreamConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

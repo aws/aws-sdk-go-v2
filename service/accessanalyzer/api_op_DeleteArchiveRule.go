@@ -41,11 +41,15 @@ type DeleteArchiveRuleInput struct {
 
 	// A client token.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteArchiveRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteArchiveRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,11 +45,15 @@ type UpdateRoutingProfileConcurrencyInput struct {
 	//
 	// This member is required.
 	RoutingProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRoutingProfileConcurrencyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRoutingProfileConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {

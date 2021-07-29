@@ -34,6 +34,8 @@ type CancelStatementInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelStatementOutput struct {
@@ -43,6 +45,8 @@ type CancelStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

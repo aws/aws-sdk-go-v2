@@ -85,6 +85,8 @@ type CreateDatasetInput struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetOutput struct {
@@ -94,6 +96,8 @@ type CreateDatasetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetMiddlewares(stack *middleware.Stack, options Options) (err error) {

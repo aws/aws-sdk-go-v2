@@ -73,6 +73,8 @@ type CreateScheduledActionInput struct {
 	// action does not trigger. For more information about this parameter, see
 	// ScheduledAction.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes a scheduled action. You can use a scheduled action to trigger some
@@ -126,6 +128,8 @@ type CreateScheduledActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

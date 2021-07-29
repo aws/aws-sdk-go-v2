@@ -71,6 +71,8 @@ type InvokeScreenAutomationInput struct {
 	// property, rawValue, which holds the value of the variable to be passed to the
 	// screen. Any variables defined in a screen are required to be passed in the call.
 	Variables map[string]types.VariableValue
+
+	noSmithyDocumentSerde
 }
 
 type InvokeScreenAutomationOutput struct {
@@ -82,6 +84,8 @@ type InvokeScreenAutomationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInvokeScreenAutomationMiddlewares(stack *middleware.Stack, options Options) (err error) {

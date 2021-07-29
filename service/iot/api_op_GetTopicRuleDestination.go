@@ -33,6 +33,8 @@ type GetTopicRuleDestinationInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTopicRuleDestinationOutput struct {
@@ -42,6 +44,8 @@ type GetTopicRuleDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTopicRuleDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

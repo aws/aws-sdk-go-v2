@@ -33,6 +33,8 @@ type DescribePipelineDefinitionForExecutionInput struct {
 	//
 	// This member is required.
 	PipelineExecutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePipelineDefinitionForExecutionOutput struct {
@@ -45,6 +47,8 @@ type DescribePipelineDefinitionForExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePipelineDefinitionForExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

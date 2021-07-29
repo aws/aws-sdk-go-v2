@@ -141,6 +141,8 @@ type UpdateProjectInput struct {
 
 	// VpcConfig enables CodeBuild to access resources in an Amazon VPC.
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProjectOutput struct {
@@ -150,6 +152,8 @@ type UpdateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type CreateResourceInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an API resource. Create an API
@@ -145,6 +147,8 @@ type CreateResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

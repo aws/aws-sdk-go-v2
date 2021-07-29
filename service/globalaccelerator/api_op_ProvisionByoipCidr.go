@@ -48,6 +48,8 @@ type ProvisionByoipCidrInput struct {
 	//
 	// This member is required.
 	CidrAuthorizationContext *types.CidrAuthorizationContext
+
+	noSmithyDocumentSerde
 }
 
 type ProvisionByoipCidrOutput struct {
@@ -57,6 +59,8 @@ type ProvisionByoipCidrOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationProvisionByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {

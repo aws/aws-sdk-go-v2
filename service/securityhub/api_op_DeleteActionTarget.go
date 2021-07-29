@@ -34,6 +34,8 @@ type DeleteActionTargetInput struct {
 	//
 	// This member is required.
 	ActionTargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteActionTargetOutput struct {
@@ -45,6 +47,8 @@ type DeleteActionTargetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteActionTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

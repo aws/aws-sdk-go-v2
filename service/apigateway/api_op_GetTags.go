@@ -41,6 +41,8 @@ type GetTagsInput struct {
 	// (Not currently supported) The current pagination position in the paged result
 	// set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // The collection of tags. Each tag element is associated with a given resource.
@@ -51,6 +53,8 @@ type GetTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

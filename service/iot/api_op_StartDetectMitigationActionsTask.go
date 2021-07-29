@@ -61,6 +61,8 @@ type StartDetectMitigationActionsTaskInput struct {
 
 	// Specifies the time period of which violation events occurred between.
 	ViolationEventOccurrenceRange *types.ViolationEventOccurrenceRange
+
+	noSmithyDocumentSerde
 }
 
 type StartDetectMitigationActionsTaskOutput struct {
@@ -70,6 +72,8 @@ type StartDetectMitigationActionsTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDetectMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

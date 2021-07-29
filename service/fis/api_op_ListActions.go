@@ -36,6 +36,8 @@ type ListActionsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListActionsOutput struct {
@@ -49,6 +51,8 @@ type ListActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

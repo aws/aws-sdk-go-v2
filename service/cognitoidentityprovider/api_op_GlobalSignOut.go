@@ -35,12 +35,16 @@ type GlobalSignOutInput struct {
 	//
 	// This member is required.
 	AccessToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request to sign out all devices.
 type GlobalSignOutOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGlobalSignOutMiddlewares(stack *middleware.Stack, options Options) (err error) {

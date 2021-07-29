@@ -50,6 +50,8 @@ type CreateOutpostInput struct {
 
 	// The tags to apply to the Outpost.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateOutpostOutput struct {
@@ -59,6 +61,8 @@ type CreateOutpostOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateOutpostMiddlewares(stack *middleware.Stack, options Options) (err error) {

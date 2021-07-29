@@ -45,6 +45,8 @@ type ListReplaysInput struct {
 
 	// The state of the replay.
 	State types.ReplayState
+
+	noSmithyDocumentSerde
 }
 
 type ListReplaysOutput struct {
@@ -57,6 +59,8 @@ type ListReplaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReplaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

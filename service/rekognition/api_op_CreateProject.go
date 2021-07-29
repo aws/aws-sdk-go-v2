@@ -35,6 +35,8 @@ type CreateProjectInput struct {
 	//
 	// This member is required.
 	ProjectName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateProjectOutput struct {
@@ -45,6 +47,8 @@ type CreateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

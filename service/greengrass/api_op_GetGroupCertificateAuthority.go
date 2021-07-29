@@ -37,6 +37,8 @@ type GetGroupCertificateAuthorityInput struct {
 	//
 	// This member is required.
 	GroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGroupCertificateAuthorityOutput struct {
@@ -52,6 +54,8 @@ type GetGroupCertificateAuthorityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

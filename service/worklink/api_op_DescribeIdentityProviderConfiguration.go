@@ -33,6 +33,8 @@ type DescribeIdentityProviderConfigurationInput struct {
 	//
 	// This member is required.
 	FleetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeIdentityProviderConfigurationOutput struct {
@@ -48,6 +50,8 @@ type DescribeIdentityProviderConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIdentityProviderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

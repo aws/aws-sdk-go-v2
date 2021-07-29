@@ -58,6 +58,8 @@ type UpdateSchemaInput struct {
 	// Version number required for check pointing. One of VersionNumber or
 	// Compatibility has to be provided.
 	SchemaVersionNumber *types.SchemaVersionNumber
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSchemaOutput struct {
@@ -73,6 +75,8 @@ type UpdateSchemaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSchemaMiddlewares(stack *middleware.Stack, options Options) (err error) {

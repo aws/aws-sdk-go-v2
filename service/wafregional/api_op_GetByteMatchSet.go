@@ -40,6 +40,8 @@ type GetByteMatchSetInput struct {
 	//
 	// This member is required.
 	ByteMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetByteMatchSetOutput struct {
@@ -60,6 +62,8 @@ type GetByteMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetByteMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

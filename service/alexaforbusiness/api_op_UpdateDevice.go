@@ -33,11 +33,15 @@ type UpdateDeviceInput struct {
 
 	// The updated device name. Required.
 	DeviceName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

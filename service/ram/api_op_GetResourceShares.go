@@ -58,6 +58,8 @@ type GetResourceSharesInput struct {
 
 	// One or more tag filters.
 	TagFilters []types.TagFilter
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceSharesOutput struct {
@@ -71,6 +73,8 @@ type GetResourceSharesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {

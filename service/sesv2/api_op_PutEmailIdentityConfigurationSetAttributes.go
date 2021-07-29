@@ -36,6 +36,8 @@ type PutEmailIdentityConfigurationSetAttributesInput struct {
 
 	// The configuration set that you want to associate with an email identity.
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // If the action is successful, the service sends back an HTTP 200 response with an
@@ -43,6 +45,8 @@ type PutEmailIdentityConfigurationSetAttributesInput struct {
 type PutEmailIdentityConfigurationSetAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEmailIdentityConfigurationSetAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

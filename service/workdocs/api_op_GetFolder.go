@@ -40,6 +40,8 @@ type GetFolderInput struct {
 
 	// Set to TRUE to include custom metadata in the response.
 	IncludeCustomMetadata bool
+
+	noSmithyDocumentSerde
 }
 
 type GetFolderOutput struct {
@@ -52,6 +54,8 @@ type GetFolderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

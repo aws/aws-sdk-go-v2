@@ -47,6 +47,8 @@ type ListDiscoveredResourcesInput struct {
 	// available. To retrieve the next page of results, make the call again using the
 	// returned token in NextToken.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDiscoveredResourcesOutput struct {
@@ -60,6 +62,8 @@ type ListDiscoveredResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDiscoveredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

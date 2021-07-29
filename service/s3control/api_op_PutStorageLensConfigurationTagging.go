@@ -56,11 +56,15 @@ type PutStorageLensConfigurationTaggingInput struct {
 	//
 	// This member is required.
 	Tags []types.StorageLensTag
+
+	noSmithyDocumentSerde
 }
 
 type PutStorageLensConfigurationTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutStorageLensConfigurationTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

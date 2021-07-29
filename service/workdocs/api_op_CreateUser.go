@@ -65,6 +65,8 @@ type CreateUserInput struct {
 
 	// The time zone ID of the user.
 	TimeZoneId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserOutput struct {
@@ -74,6 +76,8 @@ type CreateUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

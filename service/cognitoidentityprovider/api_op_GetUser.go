@@ -34,6 +34,8 @@ type GetUserInput struct {
 	//
 	// This member is required.
 	AccessToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server from the request to get information
@@ -66,6 +68,8 @@ type GetUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

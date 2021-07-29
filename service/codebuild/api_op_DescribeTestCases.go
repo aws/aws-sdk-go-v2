@@ -50,6 +50,8 @@ type DescribeTestCasesInput struct {
 	// of the items in the list, keep calling this operation with each subsequent next
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTestCasesOutput struct {
@@ -67,6 +69,8 @@ type DescribeTestCasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTestCasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

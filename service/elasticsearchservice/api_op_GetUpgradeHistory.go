@@ -47,6 +47,8 @@ type GetUpgradeHistoryInput struct {
 	// a NextToken output in the response which can be used by the client to retrieve
 	// more results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for response returned by GetUpgradeHistory operation.
@@ -63,6 +65,8 @@ type GetUpgradeHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUpgradeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

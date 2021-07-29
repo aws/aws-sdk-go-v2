@@ -96,6 +96,8 @@ type CreateServiceInput struct {
 	// The ID of the minor version of the service template that was used to create the
 	// service.
 	TemplateMinorVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceOutput struct {
@@ -107,6 +109,8 @@ type CreateServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

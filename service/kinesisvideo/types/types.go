@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -29,6 +30,8 @@ type ChannelInfo struct {
 
 	// The current version of the signaling channel.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // An optional input parameter for the ListSignalingChannels API. When this
@@ -42,6 +45,8 @@ type ChannelNameCondition struct {
 
 	// A value to compare.
 	ComparisonValue *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes the endpoint of the signaling channel returned by the
@@ -55,6 +60,8 @@ type ResourceEndpointListItem struct {
 	// The endpoint of the signaling channel returned by the
 	// GetSignalingChannelEndpoint API.
 	ResourceEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the endpoint configuration for the SINGLE_MASTER channel
@@ -73,6 +80,8 @@ type SingleMasterChannelEndpointConfiguration struct {
 	// that a client can use only to send offers to another MASTER client on this
 	// signaling channel.
 	Role ChannelRole
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains the configuration for the SINGLE_MASTER channel type.
@@ -81,6 +90,8 @@ type SingleMasterConfiguration struct {
 	// The period of time a signaling channel retains underlivered messages before they
 	// are discarded.
 	MessageTtlSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // An object describing a Kinesis video stream.
@@ -113,6 +124,8 @@ type StreamInfo struct {
 
 	// The version of the stream.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the condition that streams must satisfy to be returned when you list
@@ -127,6 +140,8 @@ type StreamNameCondition struct {
 
 	// A value to compare.
 	ComparisonValue *string
+
+	noSmithyDocumentSerde
 }
 
 // A key and value pair that is associated with the specified signaling channel.
@@ -141,4 +156,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -47,11 +47,15 @@ type RemoveClientIDFromOpenIDConnectProviderInput struct {
 	//
 	// This member is required.
 	OpenIDConnectProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveClientIDFromOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveClientIDFromOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

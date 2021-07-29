@@ -63,6 +63,8 @@ type AllocateConnectionOnInterconnectInput struct {
 	//
 	// This member is required.
 	Vlan int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect connection.
@@ -172,6 +174,8 @@ type AllocateConnectionOnInterconnectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAllocateConnectionOnInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {

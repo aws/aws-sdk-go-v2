@@ -36,6 +36,8 @@ type ListDeviceProfilesInput struct {
 	// To retrieve the next set of results, the nextToken value from a previous
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDeviceProfilesOutput struct {
@@ -49,6 +51,8 @@ type ListDeviceProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeviceProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type ListAlertsInput struct {
 	// Pagination token from the GET list request. Use the token to fetch the next page
 	// of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAlertsOutput struct {
@@ -55,6 +57,8 @@ type ListAlertsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAlertsMiddlewares(stack *middleware.Stack, options Options) (err error) {

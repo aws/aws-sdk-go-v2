@@ -62,6 +62,8 @@ type CreateVocabularyFilterInput struct {
 	// If you provide a list of words in the Words parameter, you can't use the
 	// VocabularyFilterFileUri parameter.
 	Words []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVocabularyFilterOutput struct {
@@ -77,6 +79,8 @@ type CreateVocabularyFilterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVocabularyFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

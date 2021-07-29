@@ -43,6 +43,8 @@ type TestMetricFilterInput struct {
 	//
 	// This member is required.
 	LogEventMessages []string
+
+	noSmithyDocumentSerde
 }
 
 type TestMetricFilterOutput struct {
@@ -52,6 +54,8 @@ type TestMetricFilterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestMetricFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

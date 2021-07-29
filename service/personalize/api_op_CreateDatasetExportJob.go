@@ -71,6 +71,8 @@ type CreateDatasetExportJobInput struct {
 	// you imported incrementally (using the console, PutEvents, PutUsers and PutItems
 	// operations), or ALL for both types. The default value is PUT.
 	IngestionMode types.IngestionMode
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetExportJobOutput struct {
@@ -80,6 +82,8 @@ type CreateDatasetExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

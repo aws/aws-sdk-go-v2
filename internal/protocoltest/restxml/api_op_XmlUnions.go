@@ -27,6 +27,8 @@ func (c *Client) XmlUnions(ctx context.Context, params *XmlUnionsInput, optFns .
 
 type XmlUnionsInput struct {
 	UnionValue types.XmlUnionShape
+
+	noSmithyDocumentSerde
 }
 
 type XmlUnionsOutput struct {
@@ -34,6 +36,8 @@ type XmlUnionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlUnionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

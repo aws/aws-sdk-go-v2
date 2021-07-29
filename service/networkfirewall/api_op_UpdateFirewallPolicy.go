@@ -67,6 +67,8 @@ type UpdateFirewallPolicyInput struct {
 	// firewall policy after you create it. You must specify the ARN or the name, and
 	// you can specify both.
 	FirewallPolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFirewallPolicyOutput struct {
@@ -92,6 +94,8 @@ type UpdateFirewallPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFirewallPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

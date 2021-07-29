@@ -33,6 +33,8 @@ type DescribeResourcePolicyInput struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeResourcePolicyOutput struct {
@@ -42,6 +44,8 @@ type DescribeResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

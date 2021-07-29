@@ -33,6 +33,8 @@ type GetInsightResultsInput struct {
 	//
 	// This member is required.
 	InsightArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInsightResultsOutput struct {
@@ -44,6 +46,8 @@ type GetInsightResultsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInsightResultsMiddlewares(stack *middleware.Stack, options Options) (err error) {

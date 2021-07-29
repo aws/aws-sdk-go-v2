@@ -48,6 +48,8 @@ type UpdateApplicationInput struct {
 
 	// Disassociates the SNS topic from the opsItem created for detected problems.
 	RemoveSNSTopic *bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApplicationOutput struct {
@@ -57,6 +59,8 @@ type UpdateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

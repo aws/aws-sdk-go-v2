@@ -47,6 +47,8 @@ type DescribePendingMaintenanceActionsInput struct {
 
 	// The Amazon Resource Name (ARN) of the replication instance.
 	ReplicationInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -62,6 +64,8 @@ type DescribePendingMaintenanceActionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePendingMaintenanceActionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

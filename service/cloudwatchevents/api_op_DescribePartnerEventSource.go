@@ -35,6 +35,8 @@ type DescribePartnerEventSourceInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePartnerEventSourceOutput struct {
@@ -47,6 +49,8 @@ type DescribePartnerEventSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePartnerEventSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // You do not have access to perform this operation on this resource.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The API key exceeded a limit. Try your request again.
 type ApiKeyLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApiKeyLimitExceededException) Error() string {
@@ -45,6 +49,8 @@ func (e *ApiKeyLimitExceededException) ErrorFault() smithy.ErrorFault { return s
 // creation (for CreateApiKey) or from update (for UpdateApiKey).
 type ApiKeyValidityOutOfBoundsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApiKeyValidityOutOfBoundsException) Error() string {
@@ -66,6 +72,8 @@ func (e *ApiKeyValidityOutOfBoundsException) ErrorFault() smithy.ErrorFault {
 // The GraphQL API exceeded a limit. Try your request again.
 type ApiLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ApiLimitExceededException) Error() string {
@@ -84,6 +92,8 @@ func (e *ApiLimitExceededException) ErrorFault() smithy.ErrorFault { return smit
 // field is missing. Check the field values, and then try again.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -102,6 +112,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // can make your change.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -121,6 +133,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // The GraphQL schema is not valid.
 type GraphQLSchemaException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GraphQLSchemaException) Error() string {
@@ -138,6 +152,8 @@ func (e *GraphQLSchemaException) ErrorFault() smithy.ErrorFault { return smithy.
 // An internal AWS AppSync error occurred. Try your request again.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -155,6 +171,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 // The request exceeded a limit. Try your request again.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -173,6 +191,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // then try again.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -190,6 +210,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // You are not authorized to perform this operation.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {

@@ -50,6 +50,8 @@ type ModifyReservedInstancesInput struct {
 	// modification request. For more information, see Ensuring Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of ModifyReservedInstances.
@@ -60,6 +62,8 @@ type ModifyReservedInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyReservedInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

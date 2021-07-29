@@ -44,11 +44,15 @@ type DeleteEnvironmentConfigurationInput struct {
 	//
 	// This member is required.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEnvironmentConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEnvironmentConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

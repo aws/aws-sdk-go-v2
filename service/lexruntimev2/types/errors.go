@@ -10,6 +10,8 @@ import (
 //
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 //
 type BadGatewayException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadGatewayException) Error() string {
@@ -44,6 +48,8 @@ func (e *BadGatewayException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 //
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -61,6 +67,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //
 type DependencyFailedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependencyFailedException) Error() string {
@@ -78,6 +86,8 @@ func (e *DependencyFailedException) ErrorFault() smithy.ErrorFault { return smit
 //
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -95,6 +105,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 //
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -112,6 +124,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 //
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -129,6 +143,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 //
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

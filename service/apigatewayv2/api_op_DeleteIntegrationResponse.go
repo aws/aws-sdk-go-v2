@@ -42,11 +42,15 @@ type DeleteIntegrationResponseInput struct {
 	//
 	// This member is required.
 	IntegrationResponseId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteIntegrationResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

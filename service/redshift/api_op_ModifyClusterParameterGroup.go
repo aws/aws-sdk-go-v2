@@ -46,6 +46,8 @@ type ModifyClusterParameterGroupInput struct {
 	//
 	// This member is required.
 	Parameters []types.Parameter
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -61,6 +63,8 @@ type ModifyClusterParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

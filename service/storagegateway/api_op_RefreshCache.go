@@ -75,6 +75,8 @@ type RefreshCacheInput struct {
 	// FolderList are found and used for the update. The default is true. Valid Values:
 	// true | false
 	Recursive *bool
+
+	noSmithyDocumentSerde
 }
 
 // RefreshCacheOutput
@@ -89,6 +91,8 @@ type RefreshCacheOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRefreshCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

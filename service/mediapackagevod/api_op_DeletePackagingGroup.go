@@ -32,11 +32,15 @@ type DeletePackagingGroupInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePackagingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePackagingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

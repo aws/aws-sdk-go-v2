@@ -54,6 +54,8 @@ type UpdateDomainAssociationInput struct {
 
 	// Enables the automated creation of subdomains for branches.
 	EnableAutoSubDomain *bool
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the update domain association request.
@@ -67,6 +69,8 @@ type UpdateDomainAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

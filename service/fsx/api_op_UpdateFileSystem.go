@@ -115,6 +115,8 @@ type UpdateFileSystemInput struct {
 
 	// The configuration updates for an Amazon FSx for Windows File Server file system.
 	WindowsConfiguration *types.UpdateFileSystemWindowsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The response object for the UpdateFileSystem operation.
@@ -125,6 +127,8 @@ type UpdateFileSystemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {

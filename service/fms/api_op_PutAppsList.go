@@ -36,6 +36,8 @@ type PutAppsListInput struct {
 
 	// The tags associated with the resource.
 	TagList []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutAppsListOutput struct {
@@ -48,6 +50,8 @@ type PutAppsListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAppsListMiddlewares(stack *middleware.Stack, options Options) (err error) {

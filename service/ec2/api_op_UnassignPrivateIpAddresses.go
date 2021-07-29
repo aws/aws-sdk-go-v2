@@ -39,11 +39,15 @@ type UnassignPrivateIpAddressesInput struct {
 	//
 	// This member is required.
 	PrivateIpAddresses []string
+
+	noSmithyDocumentSerde
 }
 
 type UnassignPrivateIpAddressesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnassignPrivateIpAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

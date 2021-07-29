@@ -38,6 +38,8 @@ type ListInstanceGroupsInput struct {
 
 	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // This input determines which instance groups to retrieve.
@@ -51,6 +53,8 @@ type ListInstanceGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInstanceGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,11 +43,15 @@ type UpdateMailboxQuotaInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMailboxQuotaOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMailboxQuotaMiddlewares(stack *middleware.Stack, options Options) (err error) {

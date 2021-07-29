@@ -71,11 +71,15 @@ type RegisterWorkspaceDirectoryInput struct {
 	// about BYOL images, see Bring Your Own Windows Desktop Images
 	// (https://docs.aws.amazon.com/workspaces/latest/adminguide/byol-windows-images.html).
 	Tenancy types.Tenancy
+
+	noSmithyDocumentSerde
 }
 
 type RegisterWorkspaceDirectoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterWorkspaceDirectoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type ListDomainsInput struct {
 	// If the previous response was truncated, you will receive this token. Use it in
 	// your next request to receive the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDomainsOutput struct {
@@ -49,6 +51,8 @@ type ListDomainsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {

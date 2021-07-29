@@ -39,11 +39,15 @@ type DeleteKeyPairInput struct {
 
 	// The ID of the key pair.
 	KeyPairId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteKeyPairOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

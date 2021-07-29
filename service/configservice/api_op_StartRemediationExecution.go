@@ -44,6 +44,8 @@ type StartRemediationExecutionInput struct {
 	//
 	// This member is required.
 	ResourceKeys []types.ResourceKey
+
+	noSmithyDocumentSerde
 }
 
 type StartRemediationExecutionOutput struct {
@@ -57,6 +59,8 @@ type StartRemediationExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartRemediationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

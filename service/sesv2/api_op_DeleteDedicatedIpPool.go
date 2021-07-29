@@ -33,6 +33,8 @@ type DeleteDedicatedIpPoolInput struct {
 	//
 	// This member is required.
 	PoolName *string
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -40,6 +42,8 @@ type DeleteDedicatedIpPoolInput struct {
 type DeleteDedicatedIpPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDedicatedIpPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

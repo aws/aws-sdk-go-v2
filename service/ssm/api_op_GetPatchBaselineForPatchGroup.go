@@ -37,6 +37,8 @@ type GetPatchBaselineForPatchGroupInput struct {
 	// Returns he operating system rule specified for patch groups using the patch
 	// baseline.
 	OperatingSystem types.OperatingSystem
+
+	noSmithyDocumentSerde
 }
 
 type GetPatchBaselineForPatchGroupOutput struct {
@@ -52,6 +54,8 @@ type GetPatchBaselineForPatchGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPatchBaselineForPatchGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

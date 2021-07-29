@@ -49,6 +49,8 @@ type ListServicesInput struct {
 	// matched the specified criteria but that subsequent groups of MaxResults services
 	// do contain services that match the criteria.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListServicesOutput struct {
@@ -67,6 +69,8 @@ type ListServicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListServicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

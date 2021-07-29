@@ -48,6 +48,8 @@ type PutConfigurationSetSuppressionOptionsInput struct {
 	// * BOUNCE – Amazon SES adds an email address to the suppression list
 	// for your account when a message sent to that address results in a hard bounce.
 	SuppressedReasons []types.SuppressionListReason
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -55,6 +57,8 @@ type PutConfigurationSetSuppressionOptionsInput struct {
 type PutConfigurationSetSuppressionOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConfigurationSetSuppressionOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

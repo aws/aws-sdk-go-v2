@@ -74,6 +74,8 @@ type DescribeFleetUtilizationInput struct {
 	// beginning of the result set, do not specify a value. This parameter is ignored
 	// when the request specifies one or a list of fleet IDs.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -90,6 +92,8 @@ type DescribeFleetUtilizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFleetUtilizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

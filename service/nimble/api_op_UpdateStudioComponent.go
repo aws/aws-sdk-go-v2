@@ -73,6 +73,8 @@ type UpdateStudioComponentInput struct {
 
 	// The type of the studio component.
 	Type types.StudioComponentType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStudioComponentOutput struct {
@@ -82,6 +84,8 @@ type UpdateStudioComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStudioComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

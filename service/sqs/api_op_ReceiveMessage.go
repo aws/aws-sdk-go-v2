@@ -221,6 +221,8 @@ type ReceiveMessageInput struct {
 	// (https://sdk.amazonaws.com/java/api/latest/software/amazon/awssdk/http/apache/ApacheHttpClient.html)
 	// for synchronous clients.
 	WaitTimeSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of received messages.
@@ -231,6 +233,8 @@ type ReceiveMessageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReceiveMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

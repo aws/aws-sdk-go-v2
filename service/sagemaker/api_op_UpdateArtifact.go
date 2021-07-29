@@ -41,6 +41,8 @@ type UpdateArtifactInput struct {
 
 	// A list of properties to remove.
 	PropertiesToRemove []string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateArtifactOutput struct {
@@ -50,6 +52,8 @@ type UpdateArtifactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

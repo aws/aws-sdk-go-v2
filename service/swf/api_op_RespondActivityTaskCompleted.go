@@ -69,11 +69,15 @@ type RespondActivityTaskCompletedInput struct {
 	// The result of the activity task. It is a free form string that is implementation
 	// specific.
 	Result *string
+
+	noSmithyDocumentSerde
 }
 
 type RespondActivityTaskCompletedOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRespondActivityTaskCompletedMiddlewares(stack *middleware.Stack, options Options) (err error) {

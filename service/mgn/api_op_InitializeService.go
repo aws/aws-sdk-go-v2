@@ -27,11 +27,14 @@ func (c *Client) InitializeService(ctx context.Context, params *InitializeServic
 }
 
 type InitializeServiceInput struct {
+	noSmithyDocumentSerde
 }
 
 type InitializeServiceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInitializeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

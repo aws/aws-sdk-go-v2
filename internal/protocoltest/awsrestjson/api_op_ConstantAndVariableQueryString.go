@@ -31,11 +31,15 @@ type ConstantAndVariableQueryStringInput struct {
 	Baz *string
 
 	MaybeSet *string
+
+	noSmithyDocumentSerde
 }
 
 type ConstantAndVariableQueryStringOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConstantAndVariableQueryStringMiddlewares(stack *middleware.Stack, options Options) (err error) {

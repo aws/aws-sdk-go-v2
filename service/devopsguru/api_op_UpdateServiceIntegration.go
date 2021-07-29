@@ -37,11 +37,15 @@ type UpdateServiceIntegrationInput struct {
 	//
 	// This member is required.
 	ServiceIntegration *types.UpdateServiceIntegrationConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceIntegrationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

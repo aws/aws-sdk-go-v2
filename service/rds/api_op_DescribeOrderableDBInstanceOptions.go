@@ -103,6 +103,8 @@ type DescribeOrderableDBInstanceOptionsInput struct {
 
 	// A value that indicates whether to show only VPC or non-VPC offerings.
 	Vpc *bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of a successful invocation of the
@@ -120,6 +122,8 @@ type DescribeOrderableDBInstanceOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOrderableDBInstanceOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

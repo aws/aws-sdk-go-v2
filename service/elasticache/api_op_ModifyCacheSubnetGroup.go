@@ -42,6 +42,8 @@ type ModifyCacheSubnetGroupInput struct {
 
 	// The EC2 subnet IDs for the cache subnet group.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyCacheSubnetGroupOutput struct {
@@ -56,6 +58,8 @@ type ModifyCacheSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyCacheSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

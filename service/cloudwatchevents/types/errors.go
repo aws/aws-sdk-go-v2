@@ -10,6 +10,8 @@ import (
 // There is concurrent modification on a rule, target, archive, or replay.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -30,6 +32,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // Running or Starting.
 type IllegalStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IllegalStatusException) Error() string {
@@ -47,6 +51,8 @@ func (e *IllegalStatusException) ErrorFault() smithy.ErrorFault { return smithy.
 // This exception occurs due to unexpected causes.
 type InternalException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalException) Error() string {
@@ -64,6 +70,8 @@ func (e *InternalException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The event pattern is not valid.
 type InvalidEventPatternException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidEventPatternException) Error() string {
@@ -81,6 +89,8 @@ func (e *InvalidEventPatternException) ErrorFault() smithy.ErrorFault { return s
 // The specified state is not a valid state for an event source.
 type InvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStateException) Error() string {
@@ -99,6 +109,8 @@ func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.F
 // service quota.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -120,6 +132,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // DisableRule, EnableRule, PutTargets, PutRule, TagResource, or UntagResource.
 type ManagedRuleException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ManagedRuleException) Error() string {
@@ -137,6 +151,8 @@ func (e *ManagedRuleException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The operation you are attempting is not available in this region.
 type OperationDisabledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationDisabledException) Error() string {
@@ -154,6 +170,8 @@ func (e *OperationDisabledException) ErrorFault() smithy.ErrorFault { return smi
 // The event bus policy is too long. For more information, see the limits.
 type PolicyLengthExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyLengthExceededException) Error() string {
@@ -171,6 +189,8 @@ func (e *PolicyLengthExceededException) ErrorFault() smithy.ErrorFault { return 
 // The resource you are trying to create already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -188,6 +208,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // An entity that you specified does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

@@ -54,6 +54,8 @@ type CreateWorldExportJobInput struct {
 	// A map that contains tag keys and tag values that are attached to the world
 	// export job.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorldExportJobOutput struct {
@@ -101,6 +103,8 @@ type CreateWorldExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorldExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

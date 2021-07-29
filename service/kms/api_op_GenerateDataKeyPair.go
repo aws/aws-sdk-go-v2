@@ -127,6 +127,8 @@ type GenerateDataKeyPairInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string
+
+	noSmithyDocumentSerde
 }
 
 type GenerateDataKeyPairOutput struct {
@@ -152,6 +154,8 @@ type GenerateDataKeyPairOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGenerateDataKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

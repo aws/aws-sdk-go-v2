@@ -38,11 +38,15 @@ type ActivateContactChannelInput struct {
 	//
 	// This member is required.
 	ContactChannelId *string
+
+	noSmithyDocumentSerde
 }
 
 type ActivateContactChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationActivateContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

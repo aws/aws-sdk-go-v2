@@ -236,6 +236,8 @@ type CreateStackInput struct {
 	// The amount of time that can pass before the stack status becomes CREATE_FAILED;
 	// if DisableRollback is not set or is set to false, the stack will be rolled back.
 	TimeoutInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // The output for a CreateStack action.
@@ -246,6 +248,8 @@ type CreateStackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type GetConnectionsInput struct {
 
 	// A continuation token, if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetConnectionsOutput struct {
@@ -62,6 +64,8 @@ type GetConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

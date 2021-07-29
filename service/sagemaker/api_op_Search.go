@@ -60,6 +60,8 @@ type SearchInput struct {
 	// How SearchResults are ordered. Valid values are Ascending or Descending. The
 	// default is Descending.
 	SortOrder types.SearchSortOrder
+
+	noSmithyDocumentSerde
 }
 
 type SearchOutput struct {
@@ -74,6 +76,8 @@ type SearchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {

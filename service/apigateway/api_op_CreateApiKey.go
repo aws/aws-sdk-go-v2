@@ -59,6 +59,8 @@ type CreateApiKeyInput struct {
 
 	// Specifies a value of the API key.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A resource that can be distributed to callers for executing Method resources
@@ -101,6 +103,8 @@ type CreateApiKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

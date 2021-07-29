@@ -46,6 +46,8 @@ type CreateVpcLinkInput struct {
 
 	// A list of tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVpcLinkOutput struct {
@@ -79,6 +81,8 @@ type CreateVpcLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

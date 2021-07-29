@@ -54,6 +54,8 @@ type UpdateKeyGroupInput struct {
 	// The version of the key group that you are updating. The version is the key
 	// group’s ETag value.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateKeyGroupOutput struct {
@@ -66,6 +68,8 @@ type UpdateKeyGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

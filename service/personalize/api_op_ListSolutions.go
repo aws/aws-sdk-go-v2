@@ -43,6 +43,8 @@ type ListSolutionsInput struct {
 	// A token returned from the previous call to ListSolutions for getting the next
 	// set of solutions (if they exist).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSolutionsOutput struct {
@@ -55,6 +57,8 @@ type ListSolutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSolutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

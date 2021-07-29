@@ -35,6 +35,8 @@ type DescribeTaskInput struct {
 	//
 	// This member is required.
 	TaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeTaskResponse
@@ -106,6 +108,8 @@ type DescribeTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

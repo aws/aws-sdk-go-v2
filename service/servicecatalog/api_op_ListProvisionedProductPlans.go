@@ -51,6 +51,8 @@ type ListProvisionedProductPlansInput struct {
 
 	// The product identifier.
 	ProvisionProductId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProvisionedProductPlansOutput struct {
@@ -64,6 +66,8 @@ type ListProvisionedProductPlansOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProvisionedProductPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {

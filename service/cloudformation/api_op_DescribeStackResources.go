@@ -68,6 +68,8 @@ type DescribeStackResourcesInput struct {
 	// Default: There is no default value. Required: Conditional. If you do
 	// not specify StackName, you must specify PhysicalResourceId.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for a DescribeStackResources action.
@@ -78,6 +80,8 @@ type DescribeStackResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStackResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type DisassociateResolverRuleInput struct {
 	//
 	// This member is required.
 	VPCId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateResolverRuleOutput struct {
@@ -51,6 +53,8 @@ type DisassociateResolverRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateResolverRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

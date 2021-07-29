@@ -50,6 +50,8 @@ type GetEvidenceByEvidenceFolderInput struct {
 
 	// The pagination token used to fetch the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEvidenceByEvidenceFolderOutput struct {
@@ -62,6 +64,8 @@ type GetEvidenceByEvidenceFolderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEvidenceByEvidenceFolderMiddlewares(stack *middleware.Stack, options Options) (err error) {

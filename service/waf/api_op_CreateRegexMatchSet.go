@@ -70,6 +70,8 @@ type CreateRegexMatchSetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRegexMatchSetOutput struct {
@@ -84,6 +86,8 @@ type CreateRegexMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRegexMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

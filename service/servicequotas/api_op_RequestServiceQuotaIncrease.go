@@ -43,6 +43,8 @@ type RequestServiceQuotaIncreaseInput struct {
 	//
 	// This member is required.
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
 
 type RequestServiceQuotaIncreaseOutput struct {
@@ -52,6 +54,8 @@ type RequestServiceQuotaIncreaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRequestServiceQuotaIncreaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

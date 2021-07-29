@@ -76,6 +76,8 @@ type DescribeEventsForOrganizationInput struct {
 	// returned token. When all results have been returned, the response does not
 	// contain a pagination token value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEventsForOrganizationOutput struct {
@@ -92,6 +94,8 @@ type DescribeEventsForOrganizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventsForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

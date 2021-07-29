@@ -41,6 +41,8 @@ type ListRelatedItemsInput struct {
 
 	// The pagination token to continue to the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRelatedItemsOutput struct {
@@ -55,6 +57,8 @@ type ListRelatedItemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRelatedItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

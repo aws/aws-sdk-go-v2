@@ -50,6 +50,8 @@ type CreateInstanceProfileInput struct {
 	// When set to true, Device Farm reboots the instance after a test run. The default
 	// value is true.
 	RebootAfterUse *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateInstanceProfileOutput struct {
@@ -59,6 +61,8 @@ type CreateInstanceProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

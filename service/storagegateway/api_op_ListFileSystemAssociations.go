@@ -44,6 +44,8 @@ type ListFileSystemAssociationsInput struct {
 	// operation. If present, Marker specifies where to continue the list from after a
 	// previous call to ListFileSystemAssociations. Optional.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFileSystemAssociationsOutput struct {
@@ -61,6 +63,8 @@ type ListFileSystemAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFileSystemAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

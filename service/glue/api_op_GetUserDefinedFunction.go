@@ -42,6 +42,8 @@ type GetUserDefinedFunctionInput struct {
 	// The ID of the Data Catalog where the function to be retrieved is located. If
 	// none is provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetUserDefinedFunctionOutput struct {
@@ -51,6 +53,8 @@ type GetUserDefinedFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUserDefinedFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

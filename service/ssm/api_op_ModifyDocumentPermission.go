@@ -56,11 +56,15 @@ type ModifyDocumentPermissionInput struct {
 	// (Optional) The version of the document to share. If it isn't specified, the
 	// system choose the Default version to share.
 	SharedDocumentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDocumentPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDocumentPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

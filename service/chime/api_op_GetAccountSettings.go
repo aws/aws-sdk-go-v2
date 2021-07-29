@@ -37,6 +37,8 @@ type GetAccountSettingsInput struct {
 	//
 	// This member is required.
 	AccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAccountSettingsOutput struct {
@@ -46,6 +48,8 @@ type GetAccountSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

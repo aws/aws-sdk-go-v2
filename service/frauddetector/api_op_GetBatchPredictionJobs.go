@@ -43,6 +43,8 @@ type GetBatchPredictionJobsInput struct {
 
 	// The next token from the previous request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBatchPredictionJobsOutput struct {
@@ -55,6 +57,8 @@ type GetBatchPredictionJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBatchPredictionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

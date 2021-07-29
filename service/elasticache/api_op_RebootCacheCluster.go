@@ -51,6 +51,8 @@ type RebootCacheClusterInput struct {
 	//
 	// This member is required.
 	CacheNodeIdsToReboot []string
+
+	noSmithyDocumentSerde
 }
 
 type RebootCacheClusterOutput struct {
@@ -60,6 +62,8 @@ type RebootCacheClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

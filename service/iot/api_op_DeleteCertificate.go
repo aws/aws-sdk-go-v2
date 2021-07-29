@@ -42,11 +42,15 @@ type DeleteCertificateInput struct {
 	// Forces the deletion of a certificate if it is inactive and is not attached to an
 	// IoT thing.
 	ForceDelete bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

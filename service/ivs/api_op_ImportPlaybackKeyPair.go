@@ -45,6 +45,8 @@ type ImportPlaybackKeyPairInput struct {
 
 	// Any tags provided with the request are added to the playback key pair tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type ImportPlaybackKeyPairOutput struct {
@@ -54,6 +56,8 @@ type ImportPlaybackKeyPairOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportPlaybackKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

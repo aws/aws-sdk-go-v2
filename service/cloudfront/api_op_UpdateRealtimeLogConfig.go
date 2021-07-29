@@ -65,6 +65,8 @@ type UpdateRealtimeLogConfigInput struct {
 	// determines the percentage of viewer requests that are represented in the
 	// real-time log data. You must provide an integer between 1 and 100, inclusive.
 	SamplingRate *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRealtimeLogConfigOutput struct {
@@ -74,6 +76,8 @@ type UpdateRealtimeLogConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

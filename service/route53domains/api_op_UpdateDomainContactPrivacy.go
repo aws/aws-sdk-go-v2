@@ -73,6 +73,8 @@ type UpdateDomainContactPrivacyInput struct {
 	// associate, Gandi (for all other TLDs). If you specify false, WHOIS queries
 	// return the information that you entered for the technical contact.
 	TechPrivacy *bool
+
+	noSmithyDocumentSerde
 }
 
 // The UpdateDomainContactPrivacy response includes the following element.
@@ -86,6 +88,8 @@ type UpdateDomainContactPrivacyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainContactPrivacyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -31,6 +31,7 @@ func (c *Client) GetHomeRegion(ctx context.Context, params *GetHomeRegionInput, 
 }
 
 type GetHomeRegionInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetHomeRegionOutput struct {
@@ -40,6 +41,8 @@ type GetHomeRegionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHomeRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type SearchSystemInstancesInput struct {
 	// The string that specifies the next page of results. Use this when you're
 	// paginating results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchSystemInstancesOutput struct {
@@ -54,6 +56,8 @@ type SearchSystemInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchSystemInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

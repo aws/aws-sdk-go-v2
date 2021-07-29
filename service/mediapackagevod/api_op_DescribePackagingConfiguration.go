@@ -33,6 +33,8 @@ type DescribePackagingConfigurationInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePackagingConfigurationOutput struct {
@@ -63,6 +65,8 @@ type DescribePackagingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePackagingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

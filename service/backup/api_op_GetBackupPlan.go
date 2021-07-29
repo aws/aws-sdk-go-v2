@@ -39,6 +39,8 @@ type GetBackupPlanInput struct {
 	// Unique, randomly generated, Unicode, UTF-8 encoded strings that are at most
 	// 1,024 bytes long. Version IDs cannot be edited.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBackupPlanOutput struct {
@@ -87,6 +89,8 @@ type GetBackupPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackupPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

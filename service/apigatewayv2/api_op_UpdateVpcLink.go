@@ -38,6 +38,8 @@ type UpdateVpcLinkInput struct {
 
 	// The name of the VPC link.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateVpcLinkOutput struct {
@@ -71,6 +73,8 @@ type UpdateVpcLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

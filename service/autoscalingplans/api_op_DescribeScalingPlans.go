@@ -47,6 +47,8 @@ type DescribeScalingPlansInput struct {
 	// The version number of the scaling plan. Currently, the only valid value is 1. If
 	// you specify a scaling plan version, you must also specify a scaling plan name.
 	ScalingPlanVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type DescribeScalingPlansOutput struct {
@@ -60,6 +62,8 @@ type DescribeScalingPlansOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScalingPlansMiddlewares(stack *middleware.Stack, options Options) (err error) {

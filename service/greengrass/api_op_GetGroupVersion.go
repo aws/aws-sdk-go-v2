@@ -42,6 +42,8 @@ type GetGroupVersionInput struct {
 	//
 	// This member is required.
 	GroupVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGroupVersionOutput struct {
@@ -63,6 +65,8 @@ type GetGroupVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

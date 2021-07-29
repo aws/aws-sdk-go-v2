@@ -100,6 +100,8 @@ type CreateProfileInput struct {
 
 	// The customer’s shipping address.
 	ShippingAddress *types.Address
+
+	noSmithyDocumentSerde
 }
 
 type CreateProfileOutput struct {
@@ -111,6 +113,8 @@ type CreateProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

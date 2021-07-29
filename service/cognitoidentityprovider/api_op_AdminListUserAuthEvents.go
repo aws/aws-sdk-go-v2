@@ -46,6 +46,8 @@ type AdminListUserAuthEventsInput struct {
 
 	// A pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type AdminListUserAuthEventsOutput struct {
@@ -59,6 +61,8 @@ type AdminListUserAuthEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminListUserAuthEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -11,6 +11,8 @@ import (
 // Try again later.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -46,6 +48,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // account.
 type ConstraintViolationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConstraintViolationException) Error() string {
@@ -64,6 +68,8 @@ func (e *ConstraintViolationException) ErrorFault() smithy.ErrorFault { return s
 // failure. You can retry the request.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -98,6 +104,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // in the AWS Organizations User Guide.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -116,6 +124,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // because the specified PaginationToken has expired.
 type PaginationTokenExpiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PaginationTokenExpiredException) Error() string {
@@ -135,6 +145,8 @@ func (e *PaginationTokenExpiredException) ErrorFault() smithy.ErrorFault { retur
 // The request was denied to limit the frequency of submitted requests.
 type ThrottledException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottledException) Error() string {

@@ -50,6 +50,8 @@ type CreateIntentVersionInput struct {
 	// and doesn't publish a new version. If you don't specify a checksum, Amazon Lex
 	// publishes the $LATEST version.
 	Checksum *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateIntentVersionOutput struct {
@@ -118,6 +120,8 @@ type CreateIntentVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIntentVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

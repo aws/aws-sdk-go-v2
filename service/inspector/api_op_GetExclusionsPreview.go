@@ -56,6 +56,8 @@ type GetExclusionsPreviewInput struct {
 	// Subsequent calls to the action fill nextToken in the request with the value of
 	// nextToken from the previous response to continue listing data.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetExclusionsPreviewOutput struct {
@@ -76,6 +78,8 @@ type GetExclusionsPreviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetExclusionsPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

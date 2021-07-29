@@ -70,11 +70,15 @@ type PutWarmPoolInput struct {
 	// Sets the instance state to transition to after the lifecycle actions are
 	// complete. Default is Stopped.
 	PoolState types.WarmPoolState
+
+	noSmithyDocumentSerde
 }
 
 type PutWarmPoolOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutWarmPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

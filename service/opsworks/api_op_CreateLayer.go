@@ -131,6 +131,8 @@ type CreateLayerInput struct {
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
 	VolumeConfigurations []types.VolumeConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a CreateLayer request.
@@ -141,6 +143,8 @@ type CreateLayerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLayerMiddlewares(stack *middleware.Stack, options Options) (err error) {

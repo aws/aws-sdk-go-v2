@@ -35,6 +35,8 @@ type BatchSnoozeAlarmInput struct {
 	//
 	// This member is required.
 	SnoozeActionRequests []types.SnoozeAlarmActionRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchSnoozeAlarmOutput struct {
@@ -46,6 +48,8 @@ type BatchSnoozeAlarmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchSnoozeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type UpdateDirectConnectGatewayAssociationInput struct {
 
 	// The Amazon VPC prefixes to no longer advertise to the Direct Connect gateway.
 	RemoveAllowedPrefixesToDirectConnectGateway []types.RouteFilterPrefix
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDirectConnectGatewayAssociationOutput struct {
@@ -48,6 +50,8 @@ type UpdateDirectConnectGatewayAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDirectConnectGatewayAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

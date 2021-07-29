@@ -32,6 +32,8 @@ type GetConnectorDefinitionInput struct {
 	//
 	// This member is required.
 	ConnectorDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetConnectorDefinitionOutput struct {
@@ -62,6 +64,8 @@ type GetConnectorDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

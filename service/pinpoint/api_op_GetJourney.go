@@ -40,6 +40,8 @@ type GetJourneyInput struct {
 	//
 	// This member is required.
 	JourneyId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetJourneyOutput struct {
@@ -52,6 +54,8 @@ type GetJourneyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetJourneyMiddlewares(stack *middleware.Stack, options Options) (err error) {

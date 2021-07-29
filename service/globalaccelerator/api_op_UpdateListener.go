@@ -57,6 +57,8 @@ type UpdateListenerInput struct {
 
 	// The updated protocol for the connections from clients to the accelerator.
 	Protocol types.Protocol
+
+	noSmithyDocumentSerde
 }
 
 type UpdateListenerOutput struct {
@@ -66,6 +68,8 @@ type UpdateListenerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

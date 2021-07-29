@@ -46,11 +46,15 @@ type StopApplicationInput struct {
 	// Kinesis Data Analytics application. The application must be in the STARTING,
 	// UPDATING, STOPPING, AUTOSCALING, or RUNNING status.
 	Force *bool
+
+	noSmithyDocumentSerde
 }
 
 type StopApplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

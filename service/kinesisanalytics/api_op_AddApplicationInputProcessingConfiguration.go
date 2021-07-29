@@ -66,11 +66,15 @@ type AddApplicationInputProcessingConfigurationInput struct {
 	//
 	// This member is required.
 	InputProcessingConfiguration *types.InputProcessingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type AddApplicationInputProcessingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddApplicationInputProcessingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

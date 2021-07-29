@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -27,6 +28,8 @@ type AugmentedManifestsListItem struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of calling the operation. The operation returns one object for each
@@ -39,6 +42,8 @@ type BatchDetectDominantLanguageItemResult struct {
 	// One or more DominantLanguage objects describing the dominant languages in the
 	// document.
 	Languages []DominantLanguage
+
+	noSmithyDocumentSerde
 }
 
 // The result of calling the operation. The operation returns one object for each
@@ -50,6 +55,8 @@ type BatchDetectEntitiesItemResult struct {
 
 	// The zero-based index of the document in the input list.
 	Index *int32
+
+	noSmithyDocumentSerde
 }
 
 // The result of calling the operation. The operation returns one object for each
@@ -61,6 +68,8 @@ type BatchDetectKeyPhrasesItemResult struct {
 
 	// One or more KeyPhrase objects, one for each key phrase detected in the document.
 	KeyPhrases []KeyPhrase
+
+	noSmithyDocumentSerde
 }
 
 // The result of calling the operation. The operation returns one object for each
@@ -76,6 +85,8 @@ type BatchDetectSentimentItemResult struct {
 	// The level of confidence that Amazon Comprehend has in the accuracy of its
 	// sentiment detection.
 	SentimentScore *SentimentScore
+
+	noSmithyDocumentSerde
 }
 
 // The result of calling the operation. The operation returns one object that is
@@ -87,6 +98,8 @@ type BatchDetectSyntaxItemResult struct {
 
 	// The syntax tokens for the words in the document, one token for each word.
 	SyntaxTokens []SyntaxToken
+
+	noSmithyDocumentSerde
 }
 
 // Describes an error that occurred while processing a document in a batch. The
@@ -102,6 +115,8 @@ type BatchItemError struct {
 
 	// The zero-based index of the document in the input list.
 	Index *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the result metrics for the test data associated with an documentation
@@ -153,6 +168,8 @@ type ClassifierEvaluationMetrics struct {
 	// A measure of how complete the classifier results are for the test data. High
 	// recall means that the classifier returned most of the relevant results.
 	Recall *float64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a document classifier.
@@ -173,6 +190,8 @@ type ClassifierMetadata struct {
 	// The number of documents in the input data that were used to train the
 	// classifier. Typically this is 80 to 90 percent of the input documents.
 	NumberOfTrainedDocuments *int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the class that categorizes the document being analyzed
@@ -183,6 +202,8 @@ type DocumentClass struct {
 
 	// The confidence score that Amazon Comprehend has this class correctly attributed.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of document classification jobs. For
@@ -206,6 +227,8 @@ type DocumentClassificationJobFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a document classification job.
@@ -262,6 +285,8 @@ type DocumentClassificationJobProperties struct {
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of document classifiers. You can only
@@ -281,6 +306,8 @@ type DocumentClassifierFilter struct {
 	// submitted for processing. Returns only classifiers submitted before the
 	// specified time. Classifiers are returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The input properties for training a document classifier. For more information on
@@ -326,6 +353,8 @@ type DocumentClassifierInputDataConfig struct {
 	// prefix, Amazon Comprehend uses all of them as input. This parameter is required
 	// if you set DataFormat to COMPREHEND_CSV.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides output results configuration parameters for custom classifier jobs.
@@ -357,6 +386,8 @@ type DocumentClassifierOutputDataConfig struct {
 	// output file, called output.tar.gz. It is a compressed archive that contains the
 	// confusion matrix.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a document classifier.
@@ -443,6 +474,8 @@ type DocumentClassifierProperties struct {
 	// see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one of the label or labels that categorize the document being
@@ -454,6 +487,8 @@ type DocumentLabel struct {
 
 	// The confidence score that Amazon Comprehend has this label correctly attributed.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // Returns the code for the dominant language in the input text and the level of
@@ -468,6 +503,8 @@ type DominantLanguage struct {
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
 	// detection.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of dominant language detection jobs.
@@ -490,6 +527,8 @@ type DominantLanguageDetectionJobFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a dominant language detection job.
@@ -543,6 +582,8 @@ type DominantLanguageDetectionJobProperties struct {
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // The filter used to determine which endpoints are returned. You can filter jobs
@@ -562,6 +603,8 @@ type EndpointFilter struct {
 	// Specifies the status of the endpoint being returned. Possible values are:
 	// Creating, Ready, Updating, Deleting, Failed.
 	Status EndpointStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies information about the specified endpoint.
@@ -599,6 +642,8 @@ type EndpointProperties struct {
 	// are asynchronous, so customers will need to wait for the endpoint to be Ready
 	// status before making inference requests.
 	Status EndpointStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of dominant language detection jobs.
@@ -621,6 +666,8 @@ type EntitiesDetectionJobFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an entities detection job.
@@ -680,6 +727,8 @@ type EntitiesDetectionJobProperties struct {
 	// see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an entity.
@@ -707,6 +756,8 @@ type Entity struct {
 
 	// The entity's type.
 	Type EntityType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one of the label or labels that categorize the personally identifiable
@@ -719,6 +770,8 @@ type EntityLabel struct {
 	// The level of confidence that Amazon Comprehend has in the accuracy of the
 	// detection.
 	Score *float32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the annotations associated with a entity recognizer.
@@ -730,6 +783,8 @@ type EntityRecognizerAnnotations struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the training documents submitted with an entity recognizer.
@@ -741,6 +796,8 @@ type EntityRecognizerDocuments struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the entity recognizer submitted with an entity recognizer.
@@ -751,6 +808,8 @@ type EntityRecognizerEntityList struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about the accuracy of an entity recognizer.
@@ -769,6 +828,8 @@ type EntityRecognizerEvaluationMetrics struct {
 	// A measure of how complete the recognizer results are for the test data. High
 	// recall means that the recognizer returned most of the relevant results.
 	Recall *float64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of entity recognizers. You can only
@@ -788,6 +849,8 @@ type EntityRecognizerFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the format and location of the input data.
@@ -840,6 +903,8 @@ type EntityRecognizerInputDataConfig struct {
 	// The S3 location of the CSV file that has the entity list for your custom entity
 	// recognizer.
 	EntityList *EntityRecognizerEntityList
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an entity recognizer.
@@ -858,6 +923,8 @@ type EntityRecognizerMetadata struct {
 	// The number of documents in the input data that were used to train the entity
 	// recognizer. Typically this is 80 to 90 percent of the input documents.
 	NumberOfTrainedDocuments *int32
+
+	noSmithyDocumentSerde
 }
 
 // Individual item from the list of entity types in the metadata of an entity
@@ -875,6 +942,8 @@ type EntityRecognizerMetadataEntityTypesListItem struct {
 	// Type of entity from the list of entity types in the metadata of an entity
 	// recognizer.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes information about an entity recognizer.
@@ -943,6 +1012,8 @@ type EntityRecognizerProperties struct {
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about the accuracy of an entity recognizer for a specific
@@ -964,6 +1035,8 @@ type EntityTypesEvaluationMetrics struct {
 	// in the test data. High recall means that the recognizer returned most of the
 	// relevant results.
 	Recall *float64
+
+	noSmithyDocumentSerde
 }
 
 // An entity type within a labeled training dataset that Amazon Comprehend uses to
@@ -978,6 +1051,8 @@ type EntityTypesListItem struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of event detection jobs.
@@ -999,6 +1074,8 @@ type EventsDetectionJobFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an events detection job.
@@ -1039,6 +1116,8 @@ type EventsDetectionJobProperties struct {
 
 	// The types of events that are detected by the job.
 	TargetEventTypes []string
+
+	noSmithyDocumentSerde
 }
 
 // The input properties for a topic detection job.
@@ -1064,6 +1143,8 @@ type InputDataConfig struct {
 	// ONE_DOC_PER_LINE - Each line in a file is considered a separate document. Use
 	// this option when you are processing many short documents, such as text messages.
 	InputFormat InputFormat
+
+	noSmithyDocumentSerde
 }
 
 // Describes a key noun phrase.
@@ -1088,6 +1169,8 @@ type KeyPhrase struct {
 
 	// The text of a key noun phrase.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of dominant language detection jobs.
@@ -1110,6 +1193,8 @@ type KeyPhrasesDetectionJobFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a key phrases detection job.
@@ -1166,6 +1251,8 @@ type KeyPhrasesDetectionJobProperties struct {
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration parameters for the output of topic detection jobs.
@@ -1199,6 +1286,8 @@ type OutputDataConfig struct {
 	// * ARN of a KMS Key Alias:
 	// "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the part of speech represented by the token and gives the confidence
@@ -1213,6 +1302,8 @@ type PartOfSpeechTag struct {
 
 	// Identifies the part of speech that the token represents.
 	Tag PartOfSpeechTagType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of PII entity detection jobs.
@@ -1234,6 +1325,8 @@ type PiiEntitiesDetectionJobFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a PII entities detection job.
@@ -1280,6 +1373,8 @@ type PiiEntitiesDetectionJobProperties struct {
 
 	// The time that the PII entities detection job was submitted for processing.
 	SubmitTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a PII entity.
@@ -1304,6 +1399,8 @@ type PiiEntity struct {
 
 	// The entity's type.
 	Type PiiEntityType
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration parameters for the output of PII entity detection jobs.
@@ -1318,6 +1415,8 @@ type PiiOutputDataConfig struct {
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt the output results from an analysis job.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration parameters for PII entity redaction.
@@ -1333,6 +1432,8 @@ type RedactionConfig struct {
 	// An array of the types of PII entities that Amazon Comprehend detects in the
 	// input text for your request.
 	PiiEntityTypes []PiiEntityType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering a list of dominant language detection jobs.
@@ -1355,6 +1456,8 @@ type SentimentDetectionJobFilter struct {
 	// processing. Returns only jobs submitted before the specified time. Jobs are
 	// returned in ascending order, oldest to newest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a sentiment detection job.
@@ -1411,6 +1514,8 @@ type SentimentDetectionJobProperties struct {
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the level of confidence that Amazon Comprehend has in the accuracy of
@@ -1432,6 +1537,8 @@ type SentimentScore struct {
 	// The level of confidence that Amazon Comprehend has in the accuracy of its
 	// detection of the POSITIVE sentiment.
 	Positive *float32
+
+	noSmithyDocumentSerde
 }
 
 // Represents a work in the input text that was recognized and assigned a part of
@@ -1456,6 +1563,8 @@ type SyntaxToken struct {
 
 	// A unique identifier for a token.
 	TokenId *int32
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair that adds as a metadata to a resource used by Amazon
@@ -1476,6 +1585,8 @@ type Tag struct {
 	// departments, you might use “Department” as the initial (key) portion of the
 	// pair, with a value of “sales” to indicate the sales department.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for filtering topic detection jobs. For more information,
@@ -1498,6 +1609,8 @@ type TopicsDetectionJobFilter struct {
 	// processing. Only returns jobs submitted before the specified time. Jobs are
 	// returned in descending order, newest to oldest.
 	SubmitTimeBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a topic detection job.
@@ -1553,6 +1666,8 @@ type TopicsDetectionJobProperties struct {
 	// see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 // Configuration parameters for an optional private Virtual Private Cloud (VPC)
@@ -1579,4 +1694,8 @@ type VpcConfig struct {
 	//
 	// This member is required.
 	Subnets []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

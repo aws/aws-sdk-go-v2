@@ -41,12 +41,16 @@ type UpdateRadiusInput struct {
 	//
 	// This member is required.
 	RadiusSettings *types.RadiusSettings
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the UpdateRadius operation.
 type UpdateRadiusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRadiusMiddlewares(stack *middleware.Stack, options Options) (err error) {

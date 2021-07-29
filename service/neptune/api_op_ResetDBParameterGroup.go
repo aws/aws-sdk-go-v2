@@ -52,6 +52,8 @@ type ResetDBParameterGroupInput struct {
 	// Specifies whether (true) or not (false) to reset all parameters in the DB
 	// parameter group to default values. Default: true
 	ResetAllParameters bool
+
+	noSmithyDocumentSerde
 }
 
 type ResetDBParameterGroupOutput struct {
@@ -61,6 +63,8 @@ type ResetDBParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

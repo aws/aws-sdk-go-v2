@@ -129,6 +129,8 @@ type DescribeReservedCacheNodesOfferingsInput struct {
 	// available offering that matches the specified reservation identifier. Example:
 	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
 	ReservedCacheNodesOfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeReservedCacheNodesOfferings operation.
@@ -143,6 +145,8 @@ type DescribeReservedCacheNodesOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedCacheNodesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DescribeWorkspaceDirectoriesInput struct {
 	// If you received a NextToken from a previous call that was paginated, provide
 	// this token to receive the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorkspaceDirectoriesOutput struct {
@@ -53,6 +55,8 @@ type DescribeWorkspaceDirectoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkspaceDirectoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

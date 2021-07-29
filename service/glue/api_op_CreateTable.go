@@ -46,11 +46,15 @@ type CreateTableInput struct {
 
 	// A list of partition indexes, PartitionIndex structures, to create in the table.
 	PartitionIndexes []types.PartitionIndex
+
+	noSmithyDocumentSerde
 }
 
 type CreateTableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

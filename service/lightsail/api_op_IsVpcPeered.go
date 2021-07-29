@@ -27,6 +27,7 @@ func (c *Client) IsVpcPeered(ctx context.Context, params *IsVpcPeeredInput, optF
 }
 
 type IsVpcPeeredInput struct {
+	noSmithyDocumentSerde
 }
 
 type IsVpcPeeredOutput struct {
@@ -36,6 +37,8 @@ type IsVpcPeeredOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationIsVpcPeeredMiddlewares(stack *middleware.Stack, options Options) (err error) {

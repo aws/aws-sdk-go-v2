@@ -41,6 +41,8 @@ type DescribeInstancePatchStatesInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInstancePatchStatesOutput struct {
@@ -54,6 +56,8 @@ type DescribeInstancePatchStatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstancePatchStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

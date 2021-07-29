@@ -88,6 +88,8 @@ type CreateClassificationJobInput struct {
 	// associated tag value. The maximum length of a tag key is 128 characters. The
 	// maximum length of a tag value is 256 characters.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateClassificationJobOutput struct {
@@ -100,6 +102,8 @@ type CreateClassificationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClassificationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

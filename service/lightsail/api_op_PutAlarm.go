@@ -169,6 +169,8 @@ type PutAlarmInput struct {
 	// If
 	// treatMissingData is not specified, the default behavior of missing is used.
 	TreatMissingData types.TreatMissingData
+
+	noSmithyDocumentSerde
 }
 
 type PutAlarmOutput struct {
@@ -180,6 +182,8 @@ type PutAlarmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,11 +51,15 @@ type SetInstanceHealthInput struct {
 	// (https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_CreateAutoScalingGroup.html)
 	// in the Amazon EC2 Auto Scaling API Reference.
 	ShouldRespectGracePeriod *bool
+
+	noSmithyDocumentSerde
 }
 
 type SetInstanceHealthOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetInstanceHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {

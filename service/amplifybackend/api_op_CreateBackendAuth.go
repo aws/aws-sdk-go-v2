@@ -49,6 +49,8 @@ type CreateBackendAuthInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBackendAuthOutput struct {
@@ -73,6 +75,8 @@ type CreateBackendAuthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackendAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {

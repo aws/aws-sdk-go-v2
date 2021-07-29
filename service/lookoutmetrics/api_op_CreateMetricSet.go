@@ -73,6 +73,8 @@ type CreateMetricSetInput struct {
 
 	// The time zone in which your source data was recorded.
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateMetricSetOutput struct {
@@ -82,6 +84,8 @@ type CreateMetricSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMetricSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

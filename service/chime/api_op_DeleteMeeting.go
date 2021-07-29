@@ -36,11 +36,15 @@ type DeleteMeetingInput struct {
 	//
 	// This member is required.
 	MeetingId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMeetingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMeetingMiddlewares(stack *middleware.Stack, options Options) (err error) {

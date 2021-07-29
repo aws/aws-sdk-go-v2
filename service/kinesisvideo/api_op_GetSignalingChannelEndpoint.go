@@ -47,6 +47,8 @@ type GetSignalingChannelEndpointInput struct {
 	// A structure containing the endpoint configuration for the SINGLE_MASTER channel
 	// type.
 	SingleMasterChannelEndpointConfiguration *types.SingleMasterChannelEndpointConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type GetSignalingChannelEndpointOutput struct {
@@ -56,6 +58,8 @@ type GetSignalingChannelEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSignalingChannelEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

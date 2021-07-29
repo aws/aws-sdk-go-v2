@@ -50,11 +50,15 @@ type UpdateContactInput struct {
 	// A boolean value status noting if the contact is unsubscribed from all contact
 	// list topics.
 	UnsubscribeAll bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

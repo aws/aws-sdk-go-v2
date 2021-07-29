@@ -87,6 +87,8 @@ type CreateLagInput struct {
 
 	// The tags to associate with the LAG.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about a link aggregation group (LAG).
@@ -185,6 +187,8 @@ type CreateLagOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLagMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type DescribeGlobalTableInput struct {
 	//
 	// This member is required.
 	GlobalTableName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeGlobalTableOutput struct {
@@ -51,6 +53,8 @@ type DescribeGlobalTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGlobalTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

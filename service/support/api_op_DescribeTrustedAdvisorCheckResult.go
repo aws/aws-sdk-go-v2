@@ -69,6 +69,8 @@ type DescribeTrustedAdvisorCheckResultInput struct {
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
 	// be passed explicitly for operations that take them.
 	Language *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of the Trusted Advisor check returned by the
@@ -80,6 +82,8 @@ type DescribeTrustedAdvisorCheckResultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrustedAdvisorCheckResultMiddlewares(stack *middleware.Stack, options Options) (err error) {

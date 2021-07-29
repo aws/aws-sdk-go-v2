@@ -55,6 +55,8 @@ type ListManagedEndpointsInput struct {
 
 	// The types of the managed endpoints.
 	Types []string
+
+	noSmithyDocumentSerde
 }
 
 type ListManagedEndpointsOutput struct {
@@ -67,6 +69,8 @@ type ListManagedEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListManagedEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

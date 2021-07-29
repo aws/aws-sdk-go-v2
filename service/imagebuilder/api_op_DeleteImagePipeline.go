@@ -32,6 +32,8 @@ type DeleteImagePipelineInput struct {
 	//
 	// This member is required.
 	ImagePipelineArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteImagePipelineOutput struct {
@@ -44,6 +46,8 @@ type DeleteImagePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteImagePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

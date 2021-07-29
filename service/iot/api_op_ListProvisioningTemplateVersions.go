@@ -40,6 +40,8 @@ type ListProvisioningTemplateVersionsInput struct {
 
 	// A token to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProvisioningTemplateVersionsOutput struct {
@@ -52,6 +54,8 @@ type ListProvisioningTemplateVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProvisioningTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

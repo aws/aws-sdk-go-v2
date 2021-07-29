@@ -42,6 +42,8 @@ type GetAssociatedEnclaveCertificateIamRolesInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetAssociatedEnclaveCertificateIamRolesOutput struct {
@@ -51,6 +53,8 @@ type GetAssociatedEnclaveCertificateIamRolesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssociatedEnclaveCertificateIamRolesMiddlewares(stack *middleware.Stack, options Options) (err error) {

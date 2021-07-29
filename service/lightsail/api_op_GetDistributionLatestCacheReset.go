@@ -35,6 +35,8 @@ type GetDistributionLatestCacheResetInput struct {
 	// you can specify. When omitted, the response includes the latest cache reset
 	// timestamp of all your distributions.
 	DistributionName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDistributionLatestCacheResetOutput struct {
@@ -47,6 +49,8 @@ type GetDistributionLatestCacheResetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDistributionLatestCacheResetMiddlewares(stack *middleware.Stack, options Options) (err error) {

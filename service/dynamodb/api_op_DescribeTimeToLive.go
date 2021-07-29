@@ -35,6 +35,8 @@ type DescribeTimeToLiveInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTimeToLiveOutput struct {
@@ -44,6 +46,8 @@ type DescribeTimeToLiveOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTimeToLiveMiddlewares(stack *middleware.Stack, options Options) (err error) {

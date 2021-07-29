@@ -48,6 +48,8 @@ type StartPipelineReprocessingInput struct {
 	// specify a value for the startTime parameter, you must not use the
 	// channelMessages object.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type StartPipelineReprocessingOutput struct {
@@ -57,6 +59,8 @@ type StartPipelineReprocessingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartPipelineReprocessingMiddlewares(stack *middleware.Stack, options Options) (err error) {

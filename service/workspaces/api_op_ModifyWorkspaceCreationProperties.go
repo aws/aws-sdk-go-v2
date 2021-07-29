@@ -38,11 +38,15 @@ type ModifyWorkspaceCreationPropertiesInput struct {
 	//
 	// This member is required.
 	WorkspaceCreationProperties *types.WorkspaceCreationProperties
+
+	noSmithyDocumentSerde
 }
 
 type ModifyWorkspaceCreationPropertiesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyWorkspaceCreationPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,12 +33,16 @@ type FlushApiCacheInput struct {
 	//
 	// This member is required.
 	ApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a FlushApiCache operation.
 type FlushApiCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFlushApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

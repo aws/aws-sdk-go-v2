@@ -34,6 +34,7 @@ func (c *Client) DescribeVpcPeeringAuthorizations(ctx context.Context, params *D
 }
 
 type DescribeVpcPeeringAuthorizationsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcPeeringAuthorizationsOutput struct {
@@ -44,6 +45,8 @@ type DescribeVpcPeeringAuthorizationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcPeeringAuthorizationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

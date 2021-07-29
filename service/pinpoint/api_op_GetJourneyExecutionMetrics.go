@@ -49,6 +49,8 @@ type GetJourneyExecutionMetricsInput struct {
 	// The maximum number of items to include in each page of a paginated response.
 	// This parameter is not supported for application, campaign, and journey metrics.
 	PageSize *string
+
+	noSmithyDocumentSerde
 }
 
 type GetJourneyExecutionMetricsOutput struct {
@@ -61,6 +63,8 @@ type GetJourneyExecutionMetricsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetJourneyExecutionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {

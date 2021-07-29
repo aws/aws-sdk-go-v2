@@ -41,11 +41,15 @@ type DeleteDBParameterGroupInput struct {
 	//
 	// This member is required.
 	DBParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

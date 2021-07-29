@@ -53,6 +53,8 @@ type DescribeDBProxyEndpointsInput struct {
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDBProxyEndpointsOutput struct {
@@ -67,6 +69,8 @@ type DescribeDBProxyEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBProxyEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

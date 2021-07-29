@@ -64,6 +64,8 @@ type CreateDeviceInput struct {
 
 	// The vendor of the device. Length Constraints: Maximum length of 128 characters.
 	Vendor *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeviceOutput struct {
@@ -73,6 +75,8 @@ type CreateDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type DescribeJournalKinesisStreamInput struct {
 	//
 	// This member is required.
 	StreamId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJournalKinesisStreamOutput struct {
@@ -55,6 +57,8 @@ type DescribeJournalKinesisStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJournalKinesisStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

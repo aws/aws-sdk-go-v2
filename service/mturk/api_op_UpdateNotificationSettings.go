@@ -52,11 +52,15 @@ type UpdateNotificationSettingsInput struct {
 
 	// The notification specification for the HIT type.
 	Notification *types.NotificationSpecification
+
+	noSmithyDocumentSerde
 }
 
 type UpdateNotificationSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNotificationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

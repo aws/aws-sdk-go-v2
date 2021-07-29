@@ -70,6 +70,8 @@ type DescribeInternetGatewaysInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInternetGatewaysOutput struct {
@@ -83,6 +85,8 @@ type DescribeInternetGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInternetGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

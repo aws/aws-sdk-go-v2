@@ -33,6 +33,8 @@ type GetAppValidationConfigurationInput struct {
 	//
 	// This member is required.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAppValidationConfigurationOutput struct {
@@ -45,6 +47,8 @@ type GetAppValidationConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAppValidationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

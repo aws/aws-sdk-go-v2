@@ -50,6 +50,8 @@ type CreateSlotTypeVersionInput struct {
 	// publish the new version. If you don't specify a checksum, Amazon Lex publishes
 	// the $LATEST version.
 	Checksum *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSlotTypeVersionOutput struct {
@@ -89,6 +91,8 @@ type CreateSlotTypeVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSlotTypeVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

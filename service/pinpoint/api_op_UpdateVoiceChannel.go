@@ -40,6 +40,8 @@ type UpdateVoiceChannelInput struct {
 	//
 	// This member is required.
 	VoiceChannelRequest *types.VoiceChannelRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateVoiceChannelOutput struct {
@@ -52,6 +54,8 @@ type UpdateVoiceChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVoiceChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

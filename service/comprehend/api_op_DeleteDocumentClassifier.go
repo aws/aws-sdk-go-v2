@@ -37,11 +37,15 @@ type DeleteDocumentClassifierInput struct {
 	//
 	// This member is required.
 	DocumentClassifierArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDocumentClassifierOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDocumentClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

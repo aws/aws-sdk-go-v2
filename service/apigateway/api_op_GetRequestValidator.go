@@ -38,6 +38,8 @@ type GetRequestValidatorInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // A set of validation rules for incoming Method requests. In OpenAPI, a
@@ -66,6 +68,8 @@ type GetRequestValidatorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRequestValidatorMiddlewares(stack *middleware.Stack, options Options) (err error) {

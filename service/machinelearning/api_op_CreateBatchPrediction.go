@@ -67,6 +67,8 @@ type CreateBatchPredictionInput struct {
 	// A user-supplied name or description of the BatchPrediction. BatchPredictionName
 	// can only use the UTF-8 character set.
 	BatchPredictionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateBatchPrediction operation, and is an
@@ -81,6 +83,8 @@ type CreateBatchPredictionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {

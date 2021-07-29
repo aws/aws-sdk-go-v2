@@ -51,11 +51,15 @@ type DeleteDeliveryStreamInput struct {
 	// retire the grant happens due to an AWS KMS issue, Kinesis Data Firehose keeps
 	// retrying the delete operation. The default value is false.
 	AllowForceDelete *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDeliveryStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

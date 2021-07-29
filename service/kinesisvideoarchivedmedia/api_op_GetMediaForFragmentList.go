@@ -66,6 +66,8 @@ type GetMediaForFragmentListInput struct {
 	// The name of the stream from which to retrieve fragment media. Specify either
 	// this parameter or the StreamARN parameter.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMediaForFragmentListOutput struct {
@@ -104,6 +106,8 @@ type GetMediaForFragmentListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMediaForFragmentListMiddlewares(stack *middleware.Stack, options Options) (err error) {

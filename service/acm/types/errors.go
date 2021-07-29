@@ -10,6 +10,8 @@ import (
 // You do not have access required to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // created or updated. Wait for the previous operation to finish and try again.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -45,6 +49,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // One or more of of request parameters specified is not valid.
 type InvalidArgsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgsException) Error() string {
@@ -62,6 +68,8 @@ func (e *InvalidArgsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The requested Amazon Resource Name (ARN) does not refer to an existing resource.
 type InvalidArnException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArnException) Error() string {
@@ -79,6 +87,8 @@ func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // One or more values in the DomainValidationOption structure is incorrect.
 type InvalidDomainValidationOptionsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDomainValidationOptionsException) Error() string {
@@ -100,6 +110,8 @@ func (e *InvalidDomainValidationOptionsException) ErrorFault() smithy.ErrorFault
 // An input parameter was invalid.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -117,6 +129,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // Processing has reached an invalid state.
 type InvalidStateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidStateException) Error() string {
@@ -135,6 +149,8 @@ func (e *InvalidStateException) ErrorFault() smithy.ErrorFault { return smithy.F
 // example, you cannot specify a tag value that begins with aws:.
 type InvalidTagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTagException) Error() string {
@@ -152,6 +168,8 @@ func (e *InvalidTagException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // An ACM quota has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -170,6 +188,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // not yet been issued.
 type RequestInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestInProgressException) Error() string {
@@ -188,6 +208,8 @@ func (e *RequestInProgressException) ErrorFault() smithy.ErrorFault { return smi
 // account. Remove the association and try again.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -206,6 +228,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // caller's account cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -223,6 +247,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // A specified tag did not comply with an existing tag policy and was rejected.
 type TagPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagPolicyException) Error() string {
@@ -240,6 +266,8 @@ func (e *TagPolicyException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The request was denied because it exceeded a quota.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -257,6 +285,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The request contains too many tags. Try the request again with fewer tags.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -275,6 +305,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // service.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

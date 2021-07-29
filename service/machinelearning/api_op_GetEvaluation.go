@@ -36,6 +36,8 @@ type GetEvaluationInput struct {
 	//
 	// This member is required.
 	EvaluationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetEvaluation operation and describes an Evaluation.
@@ -128,6 +130,8 @@ type GetEvaluationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEvaluationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type DescribeProvisionedProductInput struct {
 	// both. If you do not provide a name or ID, or you provide both name and ID, an
 	// InvalidParametersException will occur.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProvisionedProductOutput struct {
@@ -63,6 +65,8 @@ type DescribeProvisionedProductOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

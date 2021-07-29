@@ -27,6 +27,8 @@ func (c *Client) XmlNamespaces(ctx context.Context, params *XmlNamespacesInput, 
 
 type XmlNamespacesInput struct {
 	Nested *types.XmlNamespaceNested
+
+	noSmithyDocumentSerde
 }
 
 type XmlNamespacesOutput struct {
@@ -34,6 +36,8 @@ type XmlNamespacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlNamespacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

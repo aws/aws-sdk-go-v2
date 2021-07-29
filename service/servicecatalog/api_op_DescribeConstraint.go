@@ -42,6 +42,8 @@ type DescribeConstraintInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConstraintOutput struct {
@@ -57,6 +59,8 @@ type DescribeConstraintOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {

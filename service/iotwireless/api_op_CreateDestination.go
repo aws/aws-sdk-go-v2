@@ -62,6 +62,8 @@ type CreateDestinationInput struct {
 	// The tags to attach to the new destination. Tags are metadata that you can use to
 	// manage a resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDestinationOutput struct {
@@ -74,6 +76,8 @@ type CreateDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteDiscovererInput struct {
 	//
 	// This member is required.
 	DiscovererId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDiscovererOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDiscovererMiddlewares(stack *middleware.Stack, options Options) (err error) {

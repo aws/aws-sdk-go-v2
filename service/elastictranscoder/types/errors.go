@@ -10,6 +10,8 @@ import (
 // General authentication failure. The request was not signed correctly.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -26,6 +28,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 type IncompatibleVersionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncompatibleVersionException) Error() string {
@@ -44,6 +48,8 @@ func (e *IncompatibleVersionException) ErrorFault() smithy.ErrorFault { return s
 // the request.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -62,6 +68,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // pipelines exceeds the maximum allowed.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -80,6 +88,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // attempting to delete a pipeline that is currently in use.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -99,6 +109,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // created.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -116,6 +128,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // One or more required parameter values were not provided in the request.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

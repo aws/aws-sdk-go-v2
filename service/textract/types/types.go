@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A Block represents items that are recognized in a document within a group of
 // pixels close to each other. The information returned in a Block object depends
 // on the type of operation. In text detection for documents (for example
@@ -132,6 +136,8 @@ type Block struct {
 	// The kind of text that Amazon Textract has detected. Can check for handwritten
 	// text and printed text.
 	TextType TextType
+
+	noSmithyDocumentSerde
 }
 
 // The bounding box around the detected page, text, key-value pair, table, table
@@ -160,6 +166,8 @@ type BoundingBox struct {
 
 	// The width of the bounding box as a ratio of the overall document page width.
 	Width float32
+
+	noSmithyDocumentSerde
 }
 
 // The input document, either as bytes or as an S3 object. You pass image bytes to
@@ -187,6 +195,8 @@ type Document struct {
 	// Identifies an S3 object as the document source. The maximum size of a document
 	// that's stored in an S3 bucket is 5 MB.
 	S3Object *S3Object
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon S3 bucket that contains the document to be processed. It's used by
@@ -196,6 +206,8 @@ type DocumentLocation struct {
 
 	// The Amazon S3 bucket that contains the input document.
 	S3Object *S3Object
+
+	noSmithyDocumentSerde
 }
 
 // Information about the input document.
@@ -203,6 +215,8 @@ type DocumentMetadata struct {
 
 	// The number of pages that are detected in the document.
 	Pages *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about where the following items are located on a document page:
@@ -216,6 +230,8 @@ type Geometry struct {
 
 	// Within the bounding box, a fine-grained polygon around the recognized item.
 	Polygon []Point
+
+	noSmithyDocumentSerde
 }
 
 // Shows the results of the human in the loop evaluation. If there is no
@@ -233,6 +249,8 @@ type HumanLoopActivationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the HumanLoop created.
 	HumanLoopArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Sets up the human review workflow the document will be sent to if one of the
@@ -253,6 +271,8 @@ type HumanLoopConfig struct {
 
 	// Sets attributes of the input data.
 	DataAttributes *HumanLoopDataAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Allows you to set attributes of the image. Currently, you can declare an image
@@ -262,6 +282,8 @@ type HumanLoopDataAttributes struct {
 	// Sets whether the input image is free of personally identifiable information or
 	// adult content.
 	ContentClassifiers []ContentClassifier
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon
@@ -279,6 +301,8 @@ type NotificationChannel struct {
 	//
 	// This member is required.
 	SNSTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Sets whether or not your output will go to a user created bucket. Used to set
@@ -293,6 +317,8 @@ type OutputConfig struct {
 	// The prefix of the object key that the output will be saved to. When not enabled,
 	// the prefix will be “textract_output".
 	S3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The X and Y coordinates of a point on a document page. The X and Y values that
@@ -309,6 +335,8 @@ type Point struct {
 
 	// The value of the Y coordinate for a point on a Polygon.
 	Y float32
+
+	noSmithyDocumentSerde
 }
 
 // Information about how blocks are related to each other. A Block object contains
@@ -328,6 +356,8 @@ type Relationship struct {
 	// blocks in the case of lines Cell blocks in the case of Tables, and WORD blocks
 	// in the case of Selection Elements.
 	Type RelationshipType
+
+	noSmithyDocumentSerde
 }
 
 // The S3 bucket name and file name that identifies the document. The AWS Region
@@ -346,6 +376,8 @@ type S3Object struct {
 
 	// If the bucket has versioning enabled, you can specify the object version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // A warning about an issue that occurred during asynchronous text analysis
@@ -358,4 +390,8 @@ type Warning struct {
 
 	// A list of the pages that the warning applies to.
 	Pages []int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

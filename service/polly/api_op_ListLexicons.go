@@ -34,6 +34,8 @@ type ListLexiconsInput struct {
 	// An opaque pagination token returned from previous ListLexicons operation. If
 	// present, indicates where to continue the list of lexicons.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLexiconsOutput struct {
@@ -47,6 +49,8 @@ type ListLexiconsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLexiconsMiddlewares(stack *middleware.Stack, options Options) (err error) {

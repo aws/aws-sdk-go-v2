@@ -10,6 +10,8 @@ import (
 // More than one process tried to modify a resource at the same time.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -31,6 +33,8 @@ type DashboardInvalidInputError struct {
 	Message *string
 
 	DashboardValidationMessages []DashboardValidationMessage
+
+	noSmithyDocumentSerde
 }
 
 func (e *DashboardInvalidInputError) Error() string {
@@ -48,6 +52,8 @@ func (e *DashboardInvalidInputError) ErrorFault() smithy.ErrorFault { return smi
 // The specified dashboard does not exist.
 type DashboardNotFoundError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DashboardNotFoundError) Error() string {
@@ -65,6 +71,8 @@ func (e *DashboardNotFoundError) ErrorFault() smithy.ErrorFault { return smithy.
 // Request processing has failed due to some unknown error, exception, or failure.
 type InternalServiceFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceFault) Error() string {
@@ -82,6 +90,8 @@ func (e *InternalServiceFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // Data was not syntactically valid JSON.
 type InvalidFormatFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFormatFault) Error() string {
@@ -99,6 +109,8 @@ func (e *InvalidFormatFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The next token specified is invalid.
 type InvalidNextToken struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextToken) Error() string {
@@ -116,6 +128,8 @@ func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // Parameters were used together that cannot be used together.
 type InvalidParameterCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterCombinationException) Error() string {
@@ -137,6 +151,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 // The value of an input parameter is bad or out-of-range.
 type InvalidParameterValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -154,6 +170,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // The operation exceeded one or more limits.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -171,6 +189,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The quota for alarms for this customer has already been reached.
 type LimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededFault) Error() string {
@@ -188,6 +208,8 @@ func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // An input parameter that is required is missing.
 type MissingRequiredParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingRequiredParameterException) Error() string {
@@ -205,6 +227,8 @@ func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { ret
 // The named resource does not exist.
 type ResourceNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFound) Error() string {
@@ -225,6 +249,8 @@ type ResourceNotFoundException struct {
 
 	ResourceType *string
 	ResourceId   *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

@@ -34,6 +34,8 @@ type GetEventStreamInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEventStreamOutput struct {
@@ -46,6 +48,8 @@ type GetEventStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEventStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

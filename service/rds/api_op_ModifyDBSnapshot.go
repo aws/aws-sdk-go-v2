@@ -65,6 +65,8 @@ type ModifyDBSnapshotInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_UpgradeDBInstance.Oracle.html#USER_UpgradeDBInstance.Oracle.OGPG.OG)
 	// in the Amazon RDS User Guide.
 	OptionGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyDBSnapshotOutput struct {
@@ -75,6 +77,8 @@ type ModifyDBSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

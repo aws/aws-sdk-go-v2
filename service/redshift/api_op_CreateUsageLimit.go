@@ -64,6 +64,8 @@ type CreateUsageLimitInput struct {
 
 	// A list of tag instances.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a usage limit object for a cluster.
@@ -107,6 +109,8 @@ type CreateUsageLimitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

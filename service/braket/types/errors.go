@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // An error occurred due to a conflict.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -44,6 +48,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The specified device is currently offline.
 type DeviceOfflineException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeviceOfflineException) Error() string {
@@ -61,6 +67,8 @@ func (e *DeviceOfflineException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified device has been retired.
 type DeviceRetiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DeviceRetiredException) Error() string {
@@ -79,6 +87,8 @@ func (e *DeviceRetiredException) ErrorFault() smithy.ErrorFault { return smithy.
 // failure.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -96,6 +106,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -113,6 +125,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The request failed because a service quota is exceeded.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -130,6 +144,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // The throttling rate limit is met.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -147,6 +163,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

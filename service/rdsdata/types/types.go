@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Contains an array.
 //
 // The following types satisfy this interface:
@@ -17,6 +21,8 @@ type ArrayValue interface {
 // An array of Boolean values.
 type ArrayValueMemberBooleanValues struct {
 	Value []bool
+
+	noSmithyDocumentSerde
 }
 
 func (*ArrayValueMemberBooleanValues) isArrayValue() {}
@@ -24,6 +30,8 @@ func (*ArrayValueMemberBooleanValues) isArrayValue() {}
 // An array of floating point numbers.
 type ArrayValueMemberLongValues struct {
 	Value []int64
+
+	noSmithyDocumentSerde
 }
 
 func (*ArrayValueMemberLongValues) isArrayValue() {}
@@ -31,6 +39,8 @@ func (*ArrayValueMemberLongValues) isArrayValue() {}
 // An array of integers.
 type ArrayValueMemberDoubleValues struct {
 	Value []float64
+
+	noSmithyDocumentSerde
 }
 
 func (*ArrayValueMemberDoubleValues) isArrayValue() {}
@@ -38,6 +48,8 @@ func (*ArrayValueMemberDoubleValues) isArrayValue() {}
 // An array of strings.
 type ArrayValueMemberStringValues struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*ArrayValueMemberStringValues) isArrayValue() {}
@@ -45,6 +57,8 @@ func (*ArrayValueMemberStringValues) isArrayValue() {}
 // An array of arrays.
 type ArrayValueMemberArrayValues struct {
 	Value []ArrayValue
+
+	noSmithyDocumentSerde
 }
 
 func (*ArrayValueMemberArrayValues) isArrayValue() {}
@@ -93,6 +107,8 @@ type ColumnMetadata struct {
 
 	// The database-specific data type of the column.
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a value.
@@ -112,6 +128,8 @@ type Field interface {
 // A NULL value.
 type FieldMemberIsNull struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberIsNull) isField() {}
@@ -119,6 +137,8 @@ func (*FieldMemberIsNull) isField() {}
 // A value of Boolean data type.
 type FieldMemberBooleanValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberBooleanValue) isField() {}
@@ -126,6 +146,8 @@ func (*FieldMemberBooleanValue) isField() {}
 // A value of long data type.
 type FieldMemberLongValue struct {
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberLongValue) isField() {}
@@ -133,6 +155,8 @@ func (*FieldMemberLongValue) isField() {}
 // A value of double data type.
 type FieldMemberDoubleValue struct {
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberDoubleValue) isField() {}
@@ -140,6 +164,8 @@ func (*FieldMemberDoubleValue) isField() {}
 // A value of string data type.
 type FieldMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberStringValue) isField() {}
@@ -147,6 +173,8 @@ func (*FieldMemberStringValue) isField() {}
 // A value of BLOB data type.
 type FieldMemberBlobValue struct {
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberBlobValue) isField() {}
@@ -154,6 +182,8 @@ func (*FieldMemberBlobValue) isField() {}
 // An array of values.
 type FieldMemberArrayValue struct {
 	Value ArrayValue
+
+	noSmithyDocumentSerde
 }
 
 func (*FieldMemberArrayValue) isField() {}
@@ -163,6 +193,8 @@ type Record struct {
 
 	// The values returned in the record.
 	Values []Value
+
+	noSmithyDocumentSerde
 }
 
 // The result set returned by a SQL statement.
@@ -173,6 +205,8 @@ type ResultFrame struct {
 
 	// The result-set metadata in the result set.
 	ResultSetMetadata *ResultSetMetadata
+
+	noSmithyDocumentSerde
 }
 
 // The metadata of the result set returned by a SQL statement.
@@ -183,6 +217,8 @@ type ResultSetMetadata struct {
 
 	// The metadata of the columns in the result set.
 	ColumnMetadata []ColumnMetadata
+
+	noSmithyDocumentSerde
 }
 
 // Options that control how the result set is returned.
@@ -195,6 +231,8 @@ type ResultSetOptions struct {
 	// Double or Long can result in roundoff errors due to precision loss. We recommend
 	// converting to String, especially when working with currency values.
 	DecimalReturnType DecimalReturnType
+
+	noSmithyDocumentSerde
 }
 
 // A parameter used in a SQL statement.
@@ -231,6 +269,8 @@ type SqlParameter struct {
 
 	// The value of the parameter.
 	Value Field
+
+	noSmithyDocumentSerde
 }
 
 // The result of a SQL statement. This data type is deprecated.
@@ -241,6 +281,8 @@ type SqlStatementResult struct {
 
 	// The result set of the SQL statement.
 	ResultFrame *ResultFrame
+
+	noSmithyDocumentSerde
 }
 
 // A structure value returned by a call.
@@ -248,6 +290,8 @@ type StructValue struct {
 
 	// The attributes returned in the record.
 	Attributes []Value
+
+	noSmithyDocumentSerde
 }
 
 // The response elements represent the results of an update.
@@ -255,6 +299,8 @@ type UpdateResult struct {
 
 	// Values for fields generated during the request.
 	GeneratedFields []Field
+
+	noSmithyDocumentSerde
 }
 
 // Contains the value of a column. This data type is deprecated.
@@ -277,6 +323,8 @@ type Value interface {
 // A NULL value.
 type ValueMemberIsNull struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberIsNull) isValue() {}
@@ -284,6 +332,8 @@ func (*ValueMemberIsNull) isValue() {}
 // A value for a column of BIT data type.
 type ValueMemberBitValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberBitValue) isValue() {}
@@ -291,6 +341,8 @@ func (*ValueMemberBitValue) isValue() {}
 // A value for a column of big integer data type.
 type ValueMemberBigIntValue struct {
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberBigIntValue) isValue() {}
@@ -298,6 +350,8 @@ func (*ValueMemberBigIntValue) isValue() {}
 // A value for a column of integer data type.
 type ValueMemberIntValue struct {
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberIntValue) isValue() {}
@@ -305,6 +359,8 @@ func (*ValueMemberIntValue) isValue() {}
 // A value for a column of double data type.
 type ValueMemberDoubleValue struct {
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberDoubleValue) isValue() {}
@@ -312,6 +368,8 @@ func (*ValueMemberDoubleValue) isValue() {}
 // A value for a column of real data type.
 type ValueMemberRealValue struct {
 	Value float32
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberRealValue) isValue() {}
@@ -319,6 +377,8 @@ func (*ValueMemberRealValue) isValue() {}
 // A value for a column of string data type.
 type ValueMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberStringValue) isValue() {}
@@ -326,6 +386,8 @@ func (*ValueMemberStringValue) isValue() {}
 // A value for a column of BLOB data type.
 type ValueMemberBlobValue struct {
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberBlobValue) isValue() {}
@@ -333,6 +395,8 @@ func (*ValueMemberBlobValue) isValue() {}
 // An array of column values.
 type ValueMemberArrayValues struct {
 	Value []Value
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberArrayValues) isValue() {}
@@ -340,15 +404,21 @@ func (*ValueMemberArrayValues) isValue() {}
 // A value for a column of STRUCT data type.
 type ValueMemberStructValue struct {
 	Value StructValue
+
+	noSmithyDocumentSerde
 }
 
 func (*ValueMemberStructValue) isValue() {}
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isArrayValue() {}

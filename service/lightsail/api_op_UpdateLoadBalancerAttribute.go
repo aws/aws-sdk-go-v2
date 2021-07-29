@@ -48,6 +48,8 @@ type UpdateLoadBalancerAttributeInput struct {
 	//
 	// This member is required.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLoadBalancerAttributeOutput struct {
@@ -59,6 +61,8 @@ type UpdateLoadBalancerAttributeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLoadBalancerAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

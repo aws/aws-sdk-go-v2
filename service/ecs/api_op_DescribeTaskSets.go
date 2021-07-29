@@ -52,6 +52,8 @@ type DescribeTaskSetsInput struct {
 
 	// The ID or full Amazon Resource Name (ARN) of task sets to describe.
 	TaskSets []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTaskSetsOutput struct {
@@ -64,6 +66,8 @@ type DescribeTaskSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTaskSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

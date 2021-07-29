@@ -59,6 +59,8 @@ type FailoverGlobalClusterInput struct {
 	//
 	// This member is required.
 	TargetDbClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type FailoverGlobalClusterOutput struct {
@@ -68,6 +70,8 @@ type FailoverGlobalClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFailoverGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

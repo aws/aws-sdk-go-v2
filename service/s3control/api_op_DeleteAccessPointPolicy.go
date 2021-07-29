@@ -64,11 +64,15 @@ type DeleteAccessPointPolicyInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccessPointPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccessPointPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -64,6 +64,8 @@ type CreateUserProfileInput struct {
 
 	// A collection of settings.
 	UserSettings *types.UserSettings
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserProfileOutput struct {
@@ -73,6 +75,8 @@ type CreateUserProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

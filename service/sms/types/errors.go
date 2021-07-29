@@ -11,6 +11,8 @@ import (
 // a dry run was performed.
 type DryRunOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DryRunOperationException) Error() string {
@@ -28,6 +30,8 @@ func (e *DryRunOperationException) ErrorFault() smithy.ErrorFault { return smith
 // An internal error occurred.
 type InternalError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalError) Error() string {
@@ -45,6 +49,8 @@ func (e *InternalError) ErrorFault() smithy.ErrorFault { return smithy.FaultServ
 // A specified parameter is not valid.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -62,6 +68,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // A required parameter is missing.
 type MissingRequiredParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingRequiredParameterException) Error() string {
@@ -81,6 +89,8 @@ func (e *MissingRequiredParameterException) ErrorFault() smithy.ErrorFault { ret
 // There are no connectors available.
 type NoConnectorsAvailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoConnectorsAvailableException) Error() string {
@@ -98,6 +108,8 @@ func (e *NoConnectorsAvailableException) ErrorFault() smithy.ErrorFault { return
 // This operation is not allowed.
 type OperationNotPermittedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotPermittedException) Error() string {
@@ -115,6 +127,8 @@ func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return
 // The specified replication job already exists.
 type ReplicationJobAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicationJobAlreadyExistsException) Error() string {
@@ -136,6 +150,8 @@ func (e *ReplicationJobAlreadyExistsException) ErrorFault() smithy.ErrorFault {
 // The specified replication job does not exist.
 type ReplicationJobNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicationJobNotFoundException) Error() string {
@@ -156,6 +172,8 @@ func (e *ReplicationJobNotFoundException) ErrorFault() smithy.ErrorFault { retur
 // 24-hour period.
 type ReplicationRunLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicationRunLimitExceededException) Error() string {
@@ -177,6 +195,8 @@ func (e *ReplicationRunLimitExceededException) ErrorFault() smithy.ErrorFault {
 // The specified server cannot be replicated.
 type ServerCannotBeReplicatedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServerCannotBeReplicatedException) Error() string {
@@ -196,6 +216,8 @@ func (e *ServerCannotBeReplicatedException) ErrorFault() smithy.ErrorFault { ret
 // The service is temporarily unavailable.
 type TemporarilyUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TemporarilyUnavailableException) Error() string {
@@ -216,6 +238,8 @@ func (e *TemporarilyUnavailableException) ErrorFault() smithy.ErrorFault { retur
 // and ensure that you are using the correct access keys.
 type UnauthorizedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedOperationException) Error() string {

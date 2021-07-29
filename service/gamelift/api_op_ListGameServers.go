@@ -58,6 +58,8 @@ type ListGameServersInput struct {
 	// DESCENDING to retrieve newest game servers first. If this parameter is left
 	// empty, game servers are returned in no particular order.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListGameServersOutput struct {
@@ -72,6 +74,8 @@ type ListGameServersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGameServersMiddlewares(stack *middleware.Stack, options Options) (err error) {

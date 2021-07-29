@@ -47,6 +47,8 @@ type GetSubscriptionDefinitionVersionInput struct {
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSubscriptionDefinitionVersionOutput struct {
@@ -73,6 +75,8 @@ type GetSubscriptionDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSubscriptionDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

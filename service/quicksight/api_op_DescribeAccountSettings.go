@@ -34,6 +34,8 @@ type DescribeAccountSettingsInput struct {
 	//
 	// This member is required.
 	AwsAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAccountSettingsOutput struct {
@@ -55,6 +57,8 @@ type DescribeAccountSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAccountSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

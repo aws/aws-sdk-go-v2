@@ -59,6 +59,8 @@ type AddSourceIdentifierToSubscriptionInput struct {
 	//
 	// This member is required.
 	SubscriptionName *string
+
+	noSmithyDocumentSerde
 }
 
 type AddSourceIdentifierToSubscriptionOutput struct {
@@ -69,6 +71,8 @@ type AddSourceIdentifierToSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddSourceIdentifierToSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

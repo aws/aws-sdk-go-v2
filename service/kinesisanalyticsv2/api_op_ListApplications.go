@@ -40,6 +40,8 @@ type ListApplicationsInput struct {
 	// Using the AWS Command Line Interface's Pagination Options
 	// (https://docs.aws.amazon.com/cli/latest/userguide/pagination.html).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListApplicationsOutput struct {
@@ -58,6 +60,8 @@ type ListApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type ListDetectorModelVersionsInput struct {
 
 	// The token that you can use to return the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDetectorModelVersionsOutput struct {
@@ -53,6 +55,8 @@ type ListDetectorModelVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDetectorModelVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

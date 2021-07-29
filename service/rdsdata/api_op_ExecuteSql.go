@@ -58,6 +58,8 @@ type ExecuteSqlInput struct {
 
 	// The name of the database schema.
 	Schema *string
+
+	noSmithyDocumentSerde
 }
 
 // The response elements represent the output of a request to run one or more SQL
@@ -69,6 +71,8 @@ type ExecuteSqlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteSqlMiddlewares(stack *middleware.Stack, options Options) (err error) {

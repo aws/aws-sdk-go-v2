@@ -45,6 +45,8 @@ type DescribeInstancesHealthInput struct {
 
 	// Specify the pagination token returned by a previous call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed health information about the Amazon EC2 instances in an AWS Elastic
@@ -64,6 +66,8 @@ type DescribeInstancesHealthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstancesHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {

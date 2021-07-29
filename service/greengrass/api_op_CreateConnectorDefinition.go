@@ -42,6 +42,8 @@ type CreateConnectorDefinitionInput struct {
 
 	// Tag(s) to add to the new resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateConnectorDefinitionOutput struct {
@@ -69,6 +71,8 @@ type CreateConnectorDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConnectorDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

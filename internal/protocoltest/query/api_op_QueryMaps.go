@@ -42,11 +42,15 @@ type QueryMapsInput struct {
 	NestedStructWithMap *types.NestedStructWithMap
 
 	RenamedMapArg map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type QueryMapsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -29,11 +29,14 @@ func (c *Client) DeleteNotificationChannel(ctx context.Context, params *DeleteNo
 }
 
 type DeleteNotificationChannelInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeleteNotificationChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNotificationChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type UpdateSipRuleInput struct {
 
 	// The new value of the list of target applications.
 	TargetApplications []types.SipRuleTargetApplication
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSipRuleOutput struct {
@@ -53,6 +55,8 @@ type UpdateSipRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

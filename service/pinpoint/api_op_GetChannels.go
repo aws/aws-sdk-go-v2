@@ -35,6 +35,8 @@ type GetChannelsInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetChannelsOutput struct {
@@ -47,6 +49,8 @@ type GetChannelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

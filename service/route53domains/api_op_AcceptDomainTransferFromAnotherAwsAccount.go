@@ -55,6 +55,8 @@ type AcceptDomainTransferFromAnotherAwsAccountInput struct {
 	//
 	// This member is required.
 	Password *string
+
+	noSmithyDocumentSerde
 }
 
 // The AcceptDomainTransferFromAnotherAwsAccount response includes the following
@@ -68,6 +70,8 @@ type AcceptDomainTransferFromAnotherAwsAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptDomainTransferFromAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

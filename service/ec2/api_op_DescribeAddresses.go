@@ -87,6 +87,8 @@ type DescribeAddressesInput struct {
 	// One or more Elastic IP addresses. Default: Describes all your Elastic IP
 	// addresses.
 	PublicIps []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAddressesOutput struct {
@@ -96,6 +98,8 @@ type DescribeAddressesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

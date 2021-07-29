@@ -31,6 +31,7 @@ func (c *Client) DescribeTerminationPolicyTypes(ctx context.Context, params *Des
 }
 
 type DescribeTerminationPolicyTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeTerminationPolicyTypesOutput struct {
@@ -42,6 +43,8 @@ type DescribeTerminationPolicyTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTerminationPolicyTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

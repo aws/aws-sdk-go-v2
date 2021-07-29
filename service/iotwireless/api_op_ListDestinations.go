@@ -36,6 +36,8 @@ type ListDestinationsInput struct {
 	// To retrieve the next set of results, the nextToken value from a previous
 	// response; otherwise null to receive the first set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDestinationsOutput struct {
@@ -49,6 +51,8 @@ type ListDestinationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

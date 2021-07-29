@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -47,6 +48,8 @@ type Accelerator struct {
 
 	// Describes the deployment status of the accelerator.
 	Status AcceleratorStatus
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of an accelerator.
@@ -70,6 +73,8 @@ type AcceleratorAttributes struct {
 	// bucket prefix, the log file bucket folder structure will include a double slash
 	// (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an IP address range that is provisioned for use with your AWS
@@ -133,6 +138,8 @@ type ByoipCidr struct {
 
 	// The state of the address pool.
 	State ByoipCidrState
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains a Message and a Timestamp value for changes that
@@ -148,6 +155,8 @@ type ByoipCidrEvent struct {
 	// A timestamp when you make a status change for an IP address range that you bring
 	// to AWS Global Accelerator through bring your own IP address (BYOIP).
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides authorization for Amazon to bring a specific IP address range to a
@@ -166,6 +175,8 @@ type CidrAuthorizationContext struct {
 	//
 	// This member is required.
 	Signature *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of a custom routing accelerator.
@@ -207,6 +218,8 @@ type CustomRoutingAccelerator struct {
 
 	// Describes the deployment status of the accelerator.
 	Status CustomRoutingAcceleratorStatus
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of a custom routing accelerator.
@@ -230,6 +243,8 @@ type CustomRoutingAcceleratorAttributes struct {
 	// bucket prefix, the log file bucket folder structure will include a double slash
 	// (//), like the following: DOC-EXAMPLE-BUCKET//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // For a custom routing accelerator, sets the port range and protocol for all
@@ -254,6 +269,8 @@ type CustomRoutingDestinationConfiguration struct {
 	//
 	// This member is required.
 	ToPort *int32
+
+	noSmithyDocumentSerde
 }
 
 // For a custom routing accelerator, describes the port range and protocol for all
@@ -272,6 +289,8 @@ type CustomRoutingDestinationDescription struct {
 	// The last port, inclusive, in the range of ports for the endpoint group that is
 	// associated with a custom routing accelerator.
 	ToPort *int32
+
+	noSmithyDocumentSerde
 }
 
 // The list of endpoint objects. For custom routing, this is a list of virtual
@@ -281,6 +300,8 @@ type CustomRoutingEndpointConfiguration struct {
 	// An ID for the endpoint. For custom routing accelerators, this is the virtual
 	// private cloud (VPC) subnet ID.
 	EndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for an endpoint for a custom routing accelerator. Each endpoint
@@ -291,6 +312,8 @@ type CustomRoutingEndpointDescription struct {
 	// An ID for the endpoint. For custom routing accelerators, this is the virtual
 	// private cloud (VPC) subnet ID.
 	EndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for the endpoint group for a custom routing accelerator. An AWS
@@ -311,6 +334,8 @@ type CustomRoutingEndpointGroup struct {
 
 	// The AWS Region where the endpoint group is located.
 	EndpointGroupRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for a listener for a custom routing accelerator.
@@ -324,6 +349,8 @@ type CustomRoutingListener struct {
 	// endpoints for custom routing accelerators
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-custom-routing-endpoints.html).
 	PortRanges []PortRange
+
+	noSmithyDocumentSerde
 }
 
 // The port mappings for a specified endpoint IP address (destination).
@@ -357,6 +384,8 @@ type DestinationPortMapping struct {
 
 	// The IP address type, which must be IPv4.
 	IpAddressType IpAddressType
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for endpoints. A resource must be valid and active when you add
@@ -391,6 +420,8 @@ type EndpointConfiguration struct {
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
 	// in the AWS Global Accelerator Developer Guide.
 	Weight *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for an endpoint. Each endpoint group can include one or more
@@ -430,6 +461,8 @@ type EndpointDescription struct {
 	// (https://docs.aws.amazon.com/global-accelerator/latest/dg/about-endpoints-endpoint-weights.html)
 	// in the AWS Global Accelerator Developer Guide.
 	Weight *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for the endpoint group. An AWS Region can have only one endpoint
@@ -481,6 +514,8 @@ type EndpointGroup struct {
 	// percentage is applied to the traffic that would otherwise have been routed to
 	// the Region based on optimal routing. The default value is 100.
 	TrafficDialPercentage *float32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for the set of IP addresses for an accelerator.
@@ -492,6 +527,8 @@ type IpSet struct {
 
 	// The types of IP addresses included in this IP set.
 	IpFamily *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for a listener.
@@ -522,6 +559,8 @@ type Listener struct {
 
 	// The protocol for the connections from clients to the accelerator.
 	Protocol Protocol
+
+	noSmithyDocumentSerde
 }
 
 // Returns the ports and associated IP addresses and ports of Amazon EC2 instances
@@ -551,6 +590,8 @@ type PortMapping struct {
 
 	// The protocols supported by the endpoint group.
 	Protocols []CustomRoutingProtocol
+
+	noSmithyDocumentSerde
 }
 
 // Override specific listener ports used to route traffic to endpoints that are
@@ -570,6 +611,8 @@ type PortOverride struct {
 	// The listener port that you want to map to a specific endpoint port. This is the
 	// port that user traffic arrives to the Global Accelerator on.
 	ListenerPort *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type for a range of ports for a listener.
@@ -580,6 +623,8 @@ type PortRange struct {
 
 	// The last port in the range of ports, inclusive.
 	ToPort *int32
+
+	noSmithyDocumentSerde
 }
 
 // An IP address/port combination.
@@ -590,6 +635,8 @@ type SocketAddress struct {
 
 	// The port for the socket address.
 	Port *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains a Tag key and Tag value.
@@ -604,4 +651,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

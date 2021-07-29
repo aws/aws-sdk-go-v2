@@ -69,6 +69,8 @@ type UpdateMaintenanceStartTimeInput struct {
 	// The day of the week component of the maintenance start time week represented as
 	// an ordinal number from 0 to 6, where 0 represents Sunday and 6 Saturday.
 	DayOfWeek *int32
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
@@ -81,6 +83,8 @@ type UpdateMaintenanceStartTimeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMaintenanceStartTimeMiddlewares(stack *middleware.Stack, options Options) (err error) {

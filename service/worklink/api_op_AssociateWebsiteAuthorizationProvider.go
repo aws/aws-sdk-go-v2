@@ -43,6 +43,8 @@ type AssociateWebsiteAuthorizationProviderInput struct {
 	// The domain name of the authorization provider. This applies only to SAML-based
 	// authorization providers.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateWebsiteAuthorizationProviderOutput struct {
@@ -52,6 +54,8 @@ type AssociateWebsiteAuthorizationProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateWebsiteAuthorizationProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

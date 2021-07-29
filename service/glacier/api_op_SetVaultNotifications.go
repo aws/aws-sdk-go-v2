@@ -80,11 +80,15 @@ type SetVaultNotificationsInput struct {
 
 	// Provides options for specifying notification configuration.
 	VaultNotificationConfig *types.VaultNotificationConfig
+
+	noSmithyDocumentSerde
 }
 
 type SetVaultNotificationsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

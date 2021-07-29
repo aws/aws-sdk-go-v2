@@ -39,6 +39,8 @@ type DescribeSnapshotScheduleInput struct {
 	//
 	// This member is required.
 	VolumeARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSnapshotScheduleOutput struct {
@@ -67,6 +69,8 @@ type DescribeSnapshotScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSnapshotScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -24,6 +25,8 @@ type AttributeKey struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The combination of an attribute key and an attribute value.
@@ -38,6 +41,8 @@ type AttributeKeyAndValue struct {
 	//
 	// This member is required.
 	Value TypedAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the attribute name and value for a typed link.
@@ -52,6 +57,8 @@ type AttributeNameAndValue struct {
 	//
 	// This member is required.
 	Value TypedAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a batch add facet to object operation.
@@ -71,10 +78,13 @@ type BatchAddFacetToObject struct {
 	//
 	// This member is required.
 	SchemaFacet *SchemaFacet
+
+	noSmithyDocumentSerde
 }
 
 // The result of a batch add facet to object operation.
 type BatchAddFacetToObjectResponse struct {
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an AttachObject operation.
@@ -94,6 +104,8 @@ type BatchAttachObject struct {
 	//
 	// This member is required.
 	ParentReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output batch AttachObject response operation.
@@ -101,6 +113,8 @@ type BatchAttachObjectResponse struct {
 
 	// The ObjectIdentifier of the object that has been attached.
 	AttachedObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Attaches a policy object to a regular object inside a BatchRead operation. For
@@ -116,10 +130,13 @@ type BatchAttachPolicy struct {
 	//
 	// This member is required.
 	PolicyReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an AttachPolicy response operation.
 type BatchAttachPolicyResponse struct {
+	noSmithyDocumentSerde
 }
 
 // Attaches the specified object to the specified index inside a BatchRead
@@ -136,6 +153,8 @@ type BatchAttachToIndex struct {
 	//
 	// This member is required.
 	TargetReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a AttachToIndex response operation.
@@ -143,6 +162,8 @@ type BatchAttachToIndexResponse struct {
 
 	// The ObjectIdentifier of the object that was attached to the index.
 	AttachedObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Attaches a typed link to a specified source and target object inside a BatchRead
@@ -169,6 +190,8 @@ type BatchAttachTypedLink struct {
 	//
 	// This member is required.
 	TypedLinkFacet *TypedLinkSchemaAndFacetName
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a AttachTypedLink response operation.
@@ -176,6 +199,8 @@ type BatchAttachTypedLinkResponse struct {
 
 	// Returns a typed link specifier as output.
 	TypedLinkSpecifier *TypedLinkSpecifier
+
+	noSmithyDocumentSerde
 }
 
 // Creates an index object inside of a BatchRead operation. For more information,
@@ -203,6 +228,8 @@ type BatchCreateIndex struct {
 
 	// A reference to the parent object that contains the index object.
 	ParentReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateIndex response operation.
@@ -210,6 +237,8 @@ type BatchCreateIndexResponse struct {
 
 	// The ObjectIdentifier of the index created by this operation.
 	ObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateObject operation.
@@ -237,6 +266,8 @@ type BatchCreateObject struct {
 
 	// If specified, the parent reference to which this object will be attached.
 	ParentReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateObject response operation.
@@ -244,6 +275,8 @@ type BatchCreateObjectResponse struct {
 
 	// The ID that is associated with the object.
 	ObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteObject operation.
@@ -253,10 +286,13 @@ type BatchDeleteObject struct {
 	//
 	// This member is required.
 	ObjectReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteObject response operation.
 type BatchDeleteObjectResponse struct {
+	noSmithyDocumentSerde
 }
 
 // Detaches the specified object from the specified index inside a BatchRead
@@ -273,6 +309,8 @@ type BatchDetachFromIndex struct {
 	//
 	// This member is required.
 	TargetReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DetachFromIndex response operation.
@@ -280,6 +318,8 @@ type BatchDetachFromIndexResponse struct {
 
 	// The ObjectIdentifier of the object that was detached from the index.
 	DetachedObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DetachObject operation.
@@ -299,6 +339,8 @@ type BatchDetachObject struct {
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/transaction_support.html)
 	// for more information.
 	BatchReferenceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DetachObject response operation.
@@ -306,6 +348,8 @@ type BatchDetachObjectResponse struct {
 
 	// The ObjectIdentifier of the detached object.
 	DetachedObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Detaches the specified policy from the specified directory inside a BatchWrite
@@ -322,10 +366,13 @@ type BatchDetachPolicy struct {
 	//
 	// This member is required.
 	PolicyReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DetachPolicy response operation.
 type BatchDetachPolicyResponse struct {
+	noSmithyDocumentSerde
 }
 
 // Detaches a typed link from a specified source and target object inside a
@@ -337,10 +384,13 @@ type BatchDetachTypedLink struct {
 	//
 	// This member is required.
 	TypedLinkSpecifier *TypedLinkSpecifier
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DetachTypedLink response operation.
 type BatchDetachTypedLinkResponse struct {
+	noSmithyDocumentSerde
 }
 
 // Retrieves attributes that are associated with a typed link inside a BatchRead
@@ -357,6 +407,8 @@ type BatchGetLinkAttributes struct {
 	//
 	// This member is required.
 	TypedLinkSpecifier *TypedLinkSpecifier
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetLinkAttributes response operation.
@@ -364,6 +416,8 @@ type BatchGetLinkAttributesResponse struct {
 
 	// The attributes that are associated with the typed link.
 	Attributes []AttributeKeyAndValue
+
+	noSmithyDocumentSerde
 }
 
 // Retrieves attributes within a facet that are associated with an object inside an
@@ -386,6 +440,8 @@ type BatchGetObjectAttributes struct {
 	//
 	// This member is required.
 	SchemaFacet *SchemaFacet
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetObjectAttributes response operation.
@@ -393,6 +449,8 @@ type BatchGetObjectAttributesResponse struct {
 
 	// The attribute values that are associated with an object.
 	Attributes []AttributeKeyAndValue
+
+	noSmithyDocumentSerde
 }
 
 // Retrieves metadata about an object inside a BatchRead operation. For more
@@ -403,6 +461,8 @@ type BatchGetObjectInformation struct {
 	//
 	// This member is required.
 	ObjectReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetObjectInformation response operation.
@@ -413,6 +473,8 @@ type BatchGetObjectInformationResponse struct {
 
 	// The facets attached to the specified object.
 	SchemaFacets []SchemaFacet
+
+	noSmithyDocumentSerde
 }
 
 // Lists indices attached to an object inside a BatchRead operation. For more
@@ -429,6 +491,8 @@ type BatchListAttachedIndices struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListAttachedIndices response operation.
@@ -439,6 +503,8 @@ type BatchListAttachedIndicesResponse struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns a paginated list of all the incoming TypedLinkSpecifier information for
@@ -465,6 +531,8 @@ type BatchListIncomingTypedLinks struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListIncomingTypedLinks response operation.
@@ -475,6 +543,8 @@ type BatchListIncomingTypedLinksResponse struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists objects attached to the specified index inside a BatchRead operation. For
@@ -494,6 +564,8 @@ type BatchListIndex struct {
 
 	// Specifies the ranges of indexed values that you want to query.
 	RangesOnIndexedValues []ObjectAttributeRange
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListIndex response operation.
@@ -504,6 +576,8 @@ type BatchListIndexResponse struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListObjectAttributes operation.
@@ -524,6 +598,8 @@ type BatchListObjectAttributes struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListObjectAttributes response operation.
@@ -535,6 +611,8 @@ type BatchListObjectAttributesResponse struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListObjectChildren operation.
@@ -551,6 +629,8 @@ type BatchListObjectChildren struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListObjectChildren response operation.
@@ -562,6 +642,8 @@ type BatchListObjectChildrenResponse struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Retrieves all available parent paths for any object type such as node, leaf
@@ -579,6 +661,8 @@ type BatchListObjectParentPaths struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListObjectParentPaths response operation.
@@ -590,6 +674,8 @@ type BatchListObjectParentPathsResponse struct {
 	// Returns the path to the ObjectIdentifiers that are associated with the
 	// directory.
 	PathToObjectIdentifiersList []PathToObjectIdentifiers
+
+	noSmithyDocumentSerde
 }
 
 type BatchListObjectParents struct {
@@ -602,12 +688,16 @@ type BatchListObjectParents struct {
 	MaxResults *int32
 
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchListObjectParentsResponse struct {
 	NextToken *string
 
 	ParentLinks []ObjectIdentifierAndLinkNameTuple
+
+	noSmithyDocumentSerde
 }
 
 // Returns policies attached to an object in pagination fashion inside a BatchRead
@@ -625,6 +715,8 @@ type BatchListObjectPolicies struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListObjectPolicies response operation.
@@ -635,6 +727,8 @@ type BatchListObjectPoliciesResponse struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns a paginated list of all the outgoing TypedLinkSpecifier information for
@@ -661,6 +755,8 @@ type BatchListOutgoingTypedLinks struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListOutgoingTypedLinks response operation.
@@ -671,6 +767,8 @@ type BatchListOutgoingTypedLinksResponse struct {
 
 	// Returns a typed link specifier as output.
 	TypedLinkSpecifiers []TypedLinkSpecifier
+
+	noSmithyDocumentSerde
 }
 
 // Returns all of the ObjectIdentifiers to which a given policy is attached inside
@@ -688,6 +786,8 @@ type BatchListPolicyAttachments struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListPolicyAttachments response operation.
@@ -698,6 +798,8 @@ type BatchListPolicyAttachmentsResponse struct {
 
 	// A list of ObjectIdentifiers to which the policy is attached.
 	ObjectIdentifiers []string
+
+	noSmithyDocumentSerde
 }
 
 // Lists all policies from the root of the Directory to the object specified inside
@@ -715,6 +817,8 @@ type BatchLookupPolicy struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a LookupPolicy response operation.
@@ -727,6 +831,8 @@ type BatchLookupPolicyResponse struct {
 	// and PolicyType. For more information, see Policies
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	PolicyToPathList []PolicyToPath
+
+	noSmithyDocumentSerde
 }
 
 // The batch read exception structure, which contains the exception type and
@@ -738,6 +844,8 @@ type BatchReadException struct {
 
 	// A type of exception, such as InvalidArnException.
 	Type BatchReadExceptionType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchRead operation.
@@ -799,6 +907,8 @@ type BatchReadOperation struct {
 	// from the target object are ignored. For more information, see Policies
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	LookupPolicy *BatchLookupPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchRead response operation.
@@ -809,6 +919,8 @@ type BatchReadOperationResponse struct {
 
 	// Identifies which operation in a batch has succeeded.
 	SuccessfulResponse *BatchReadSuccessfulResponse
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchRead success response operation.
@@ -870,6 +982,8 @@ type BatchReadSuccessfulResponse struct {
 	// from the target object are ignored. For more information, see Policies
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directory.html#key_concepts_policies).
 	LookupPolicy *BatchLookupPolicyResponse
+
+	noSmithyDocumentSerde
 }
 
 // A batch operation to remove a facet from an object.
@@ -884,10 +998,13 @@ type BatchRemoveFacetFromObject struct {
 	//
 	// This member is required.
 	SchemaFacet *SchemaFacet
+
+	noSmithyDocumentSerde
 }
 
 // An empty result that represents success.
 type BatchRemoveFacetFromObjectResponse struct {
+	noSmithyDocumentSerde
 }
 
 // Updates a given typed link’s attributes inside a BatchRead operation. Attributes
@@ -905,10 +1022,13 @@ type BatchUpdateLinkAttributes struct {
 	//
 	// This member is required.
 	TypedLinkSpecifier *TypedLinkSpecifier
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a UpdateLinkAttributes response operation.
 type BatchUpdateLinkAttributesResponse struct {
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchUpdate operation.
@@ -923,6 +1043,8 @@ type BatchUpdateObjectAttributes struct {
 	//
 	// This member is required.
 	ObjectReference *ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchUpdate response operation.
@@ -930,6 +1052,8 @@ type BatchUpdateObjectAttributesResponse struct {
 
 	// ID that is associated with the object.
 	ObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchWrite operation.
@@ -986,6 +1110,8 @@ type BatchWriteOperation struct {
 
 	// Updates a given object's attributes.
 	UpdateObjectAttributes *BatchUpdateObjectAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a BatchWrite response operation.
@@ -1042,6 +1168,8 @@ type BatchWriteOperationResponse struct {
 
 	// Updates a given object’s attributes.
 	UpdateObjectAttributes *BatchUpdateObjectAttributesResponse
+
+	noSmithyDocumentSerde
 }
 
 // Directory structure that includes the directory name and directory ARN.
@@ -1059,6 +1187,8 @@ type Directory struct {
 
 	// The state of the directory. Can be either Enabled, Disabled, or Deleted.
 	State DirectoryState
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains Name, ARN, Attributes, Rules, and ObjectTypes. See
@@ -1078,6 +1208,8 @@ type Facet struct {
 	// The object type that is associated with the facet. See
 	// CreateFacetRequest$ObjectType for more details.
 	ObjectType ObjectType
+
+	noSmithyDocumentSerde
 }
 
 // An attribute that is associated with the Facet.
@@ -1102,6 +1234,8 @@ type FacetAttribute struct {
 
 	// The required behavior of the FacetAttribute.
 	RequiredBehavior RequiredAttributeBehavior
+
+	noSmithyDocumentSerde
 }
 
 // A facet attribute definition. See Attribute References
@@ -1122,6 +1256,8 @@ type FacetAttributeDefinition struct {
 
 	// Validation rules attached to the attribute definition.
 	Rules map[string]Rule
+
+	noSmithyDocumentSerde
 }
 
 // The facet attribute reference that specifies the attribute definition that
@@ -1143,6 +1279,8 @@ type FacetAttributeReference struct {
 	//
 	// This member is required.
 	TargetFacetName *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains information used to update an attribute.
@@ -1153,6 +1291,8 @@ type FacetAttributeUpdate struct {
 
 	// The attribute to update.
 	Attribute *FacetAttribute
+
+	noSmithyDocumentSerde
 }
 
 // Represents an index and an attached object.
@@ -1166,6 +1306,8 @@ type IndexAttachment struct {
 	// attached to the object. This field will always contain the ObjectIdentifier of
 	// the object on the opposite side of the attachment specified in the query.
 	ObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // The action to take on a typed link attribute value. Updates are only supported
@@ -1177,6 +1319,8 @@ type LinkAttributeAction struct {
 
 	// The value that you want to update to.
 	AttributeUpdateValue TypedAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Structure that contains attribute update information.
@@ -1187,6 +1331,8 @@ type LinkAttributeUpdate struct {
 
 	// The key of the attribute being updated.
 	AttributeKey *AttributeKey
+
+	noSmithyDocumentSerde
 }
 
 // The action to take on the object attribute.
@@ -1197,6 +1343,8 @@ type ObjectAttributeAction struct {
 
 	// The value that you want to update to.
 	ObjectAttributeUpdateValue TypedAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // A range of attributes.
@@ -1207,6 +1355,8 @@ type ObjectAttributeRange struct {
 
 	// The range of attribute values being selected.
 	Range *TypedAttributeValueRange
+
+	noSmithyDocumentSerde
 }
 
 // Structure that contains attribute update information.
@@ -1217,6 +1367,8 @@ type ObjectAttributeUpdate struct {
 
 	// The key of the attribute being updated.
 	ObjectAttributeKey *AttributeKey
+
+	noSmithyDocumentSerde
 }
 
 // A pair of ObjectIdentifier and LinkName.
@@ -1227,6 +1379,8 @@ type ObjectIdentifierAndLinkNameTuple struct {
 
 	// The ID that is associated with the object.
 	ObjectIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // The reference that identifies an object.
@@ -1250,6 +1404,8 @@ type ObjectReference struct {
 	//
 	// * #SomeBatchReference - Identifies the object in a batch call
 	Selector *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the path to the ObjectIdentifiers that is associated with the directory.
@@ -1261,6 +1417,8 @@ type PathToObjectIdentifiers struct {
 
 	// The path that is used to identify the object starting from directory root.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the PolicyType, PolicyId, and the ObjectIdentifier to which it is
@@ -1276,6 +1434,8 @@ type PolicyAttachment struct {
 
 	// The type of policy that can be associated with PolicyAttachment.
 	PolicyType *string
+
+	noSmithyDocumentSerde
 }
 
 // Used when a regular object exists in a Directory and you want to find all of the
@@ -1287,6 +1447,8 @@ type PolicyToPath struct {
 
 	// List of policy objects.
 	Policies []PolicyAttachment
+
+	noSmithyDocumentSerde
 }
 
 // Contains an Amazon Resource Name (ARN) and parameters that are associated with
@@ -1298,6 +1460,8 @@ type Rule struct {
 
 	// The type of attribute validation rule.
 	Type RuleType
+
+	noSmithyDocumentSerde
 }
 
 // A facet.
@@ -1311,6 +1475,8 @@ type SchemaFacet struct {
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html)
 	// for a description of when to provide minor versions.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The tag structure that contains a tag key and value.
@@ -1321,6 +1487,8 @@ type Tag struct {
 
 	// The value that is associated with the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the data for a typed attribute. You can set one, and only one, of the
@@ -1340,6 +1508,8 @@ type TypedAttributeValue interface {
 // A string data value.
 type TypedAttributeValueMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*TypedAttributeValueMemberStringValue) isTypedAttributeValue() {}
@@ -1347,6 +1517,8 @@ func (*TypedAttributeValueMemberStringValue) isTypedAttributeValue() {}
 // A binary data value.
 type TypedAttributeValueMemberBinaryValue struct {
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*TypedAttributeValueMemberBinaryValue) isTypedAttributeValue() {}
@@ -1354,6 +1526,8 @@ func (*TypedAttributeValueMemberBinaryValue) isTypedAttributeValue() {}
 // A Boolean data value.
 type TypedAttributeValueMemberBooleanValue struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*TypedAttributeValueMemberBooleanValue) isTypedAttributeValue() {}
@@ -1361,6 +1535,8 @@ func (*TypedAttributeValueMemberBooleanValue) isTypedAttributeValue() {}
 // A number data value.
 type TypedAttributeValueMemberNumberValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*TypedAttributeValueMemberNumberValue) isTypedAttributeValue() {}
@@ -1368,6 +1544,8 @@ func (*TypedAttributeValueMemberNumberValue) isTypedAttributeValue() {}
 // A date and time value.
 type TypedAttributeValueMemberDatetimeValue struct {
 	Value time.Time
+
+	noSmithyDocumentSerde
 }
 
 func (*TypedAttributeValueMemberDatetimeValue) isTypedAttributeValue() {}
@@ -1391,6 +1569,8 @@ type TypedAttributeValueRange struct {
 
 	// The value to start the range at.
 	StartValue TypedAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // A typed link attribute definition.
@@ -1419,6 +1599,8 @@ type TypedLinkAttributeDefinition struct {
 
 	// Validation rules that are attached to the attribute definition.
 	Rules map[string]Rule
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the range of attributes that are used by a specified filter.
@@ -1431,6 +1613,8 @@ type TypedLinkAttributeRange struct {
 
 	// The unique name of the typed link attribute.
 	AttributeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the typed links structure and its attributes. To create a typed link
@@ -1457,6 +1641,8 @@ type TypedLinkFacet struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A typed link facet attribute update.
@@ -1471,6 +1657,8 @@ type TypedLinkFacetAttributeUpdate struct {
 	//
 	// This member is required.
 	Attribute *TypedLinkAttributeDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the schema Amazon Resource Name (ARN) and facet name for the typed
@@ -1487,6 +1675,8 @@ type TypedLinkSchemaAndFacetName struct {
 	//
 	// This member is required.
 	TypedLinkName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains all the information that is used to uniquely identify a typed link. The
@@ -1517,13 +1707,19 @@ type TypedLinkSpecifier struct {
 	//
 	// This member is required.
 	TypedLinkFacet *TypedLinkSchemaAndFacetName
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isTypedAttributeValue() {}

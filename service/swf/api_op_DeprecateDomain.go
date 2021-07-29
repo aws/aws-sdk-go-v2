@@ -57,11 +57,15 @@ type DeprecateDomainInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeprecateDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeprecateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type DescribeExportTasksInput struct {
 	// The ID of the export task. Specifying a task ID filters the results to zero or
 	// one export tasks.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeExportTasksOutput struct {
@@ -57,6 +59,8 @@ type DescribeExportTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

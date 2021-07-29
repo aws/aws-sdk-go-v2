@@ -267,6 +267,8 @@ type CreateCacheClusterInput struct {
 
 	// A list of tags to be added to this resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateCacheClusterOutput struct {
@@ -276,6 +278,8 @@ type CreateCacheClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCacheClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

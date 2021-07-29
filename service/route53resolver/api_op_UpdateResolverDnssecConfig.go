@@ -42,6 +42,8 @@ type UpdateResolverDnssecConfigInput struct {
 	//
 	// This member is required.
 	Validation types.Validation
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResolverDnssecConfigOutput struct {
@@ -51,6 +53,8 @@ type UpdateResolverDnssecConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResolverDnssecConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type UpdateOriginRequestPolicyInput struct {
 	// returned in the origin request policy’s ETag field in the response to
 	// GetOriginRequestPolicyConfig.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateOriginRequestPolicyOutput struct {
@@ -71,6 +73,8 @@ type UpdateOriginRequestPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateOriginRequestPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

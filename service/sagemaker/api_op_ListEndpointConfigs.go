@@ -56,6 +56,8 @@ type ListEndpointConfigsInput struct {
 
 	// The sort order for results. The default is Descending.
 	SortOrder types.OrderKey
+
+	noSmithyDocumentSerde
 }
 
 type ListEndpointConfigsOutput struct {
@@ -71,6 +73,8 @@ type ListEndpointConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEndpointConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

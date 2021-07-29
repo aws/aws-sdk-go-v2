@@ -77,6 +77,8 @@ type CreateMobileDeviceAccessRuleInput struct {
 	// Device user agents that the rule will not match. All other device user agents
 	// will match.
 	NotDeviceUserAgents []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateMobileDeviceAccessRuleOutput struct {
@@ -86,6 +88,8 @@ type CreateMobileDeviceAccessRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMobileDeviceAccessRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

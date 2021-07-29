@@ -33,6 +33,8 @@ type GetRelationalDatabaseSnapshotInput struct {
 	//
 	// This member is required.
 	RelationalDatabaseSnapshotName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRelationalDatabaseSnapshotOutput struct {
@@ -42,6 +44,8 @@ type GetRelationalDatabaseSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRelationalDatabaseSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

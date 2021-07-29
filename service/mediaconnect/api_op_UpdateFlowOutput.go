@@ -88,6 +88,8 @@ type UpdateFlowOutputInput struct {
 
 	// The name of the VPC interface attachment to use for this output.
 	VpcInterfaceAttachment *types.VpcInterfaceAttachment
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFlowOutputOutput struct {
@@ -100,6 +102,8 @@ type UpdateFlowOutputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFlowOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {

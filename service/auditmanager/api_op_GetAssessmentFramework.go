@@ -33,6 +33,8 @@ type GetAssessmentFrameworkInput struct {
 	//
 	// This member is required.
 	FrameworkId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAssessmentFrameworkOutput struct {
@@ -42,6 +44,8 @@ type GetAssessmentFrameworkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

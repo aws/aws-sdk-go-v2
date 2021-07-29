@@ -39,6 +39,8 @@ type BatchGetCommitsInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetCommitsOutput struct {
@@ -54,6 +56,8 @@ type BatchGetCommitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetCommitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

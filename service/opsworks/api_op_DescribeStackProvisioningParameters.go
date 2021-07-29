@@ -37,6 +37,8 @@ type DescribeStackProvisioningParametersInput struct {
 	//
 	// This member is required.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeStackProvisioningParameters request.
@@ -50,6 +52,8 @@ type DescribeStackProvisioningParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStackProvisioningParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

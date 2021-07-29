@@ -45,6 +45,8 @@ type GetQuerySuggestionsInput struct {
 
 	// The maximum number of query suggestions you want to show to your users.
 	MaxSuggestionsCount *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetQuerySuggestionsOutput struct {
@@ -57,6 +59,8 @@ type GetQuerySuggestionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetQuerySuggestionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

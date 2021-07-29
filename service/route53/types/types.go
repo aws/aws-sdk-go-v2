@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -40,6 +41,8 @@ type AccountLimit struct {
 	//
 	// This member is required.
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that identifies the CloudWatch alarm that you want Amazon Route
@@ -72,6 +75,8 @@ type AlarmIdentifier struct {
 	//
 	// This member is required.
 	Region CloudWatchRegion
+
+	noSmithyDocumentSerde
 }
 
 // Alias resource record sets only: Information about the AWS resource, such as a
@@ -359,6 +364,8 @@ type AliasTarget struct {
 	//
 	// This member is required.
 	HostedZoneId *string
+
+	noSmithyDocumentSerde
 }
 
 // The information for each resource record set that you want to change.
@@ -389,6 +396,8 @@ type Change struct {
 	//
 	// This member is required.
 	ResourceRecordSet *ResourceRecordSet
+
+	noSmithyDocumentSerde
 }
 
 // The information for a change request.
@@ -401,6 +410,8 @@ type ChangeBatch struct {
 
 	// Optional: Any comments you want to include about a change batch request.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that describes change information about changes made to your
@@ -432,6 +443,8 @@ type ChangeInfo struct {
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
 	// action to get detailed information about the change.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the CloudWatch alarm that Amazon
@@ -487,6 +500,8 @@ type CloudWatchAlarmConfiguration struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
 	// in the Amazon CloudWatch User Guide.
 	Dimensions []Dimension
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that lists the name servers in a delegation set, as well as the
@@ -505,6 +520,8 @@ type DelegationSet struct {
 
 	// The ID that Amazon Route 53 assigns to a reusable delegation set.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // For the metric that the CloudWatch alarm is associated with, a complex type that
@@ -522,6 +539,8 @@ type Dimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A string repesenting the status of DNSSEC signing.
@@ -544,6 +563,8 @@ type DNSSECStatus struct {
 	// INTERNAL_FAILURE. The status message includes information about what the problem
 	// might be and steps that you can take to correct the issue.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about a geographic location.
@@ -584,6 +605,8 @@ type GeoLocation struct {
 	// United States Postal Service website. If you specify subdivisioncode, you must
 	// also specify US for CountryCode.
 	SubdivisionCode *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the codes and full continent, country, and
@@ -614,6 +637,8 @@ type GeoLocationDetails struct {
 	// The full name of the subdivision. Route 53 currently supports only states in the
 	// United States.
 	SubdivisionName *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about one health check that is
@@ -651,6 +676,8 @@ type HealthCheck struct {
 	// health check. When a health check is created by another service, you can't edit
 	// or delete it using Amazon Route 53.
 	LinkedService *LinkedService
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the health check.
@@ -930,6 +957,8 @@ type HealthCheckConfig struct {
 	// resource healthy. Route 53 considers case when searching for SearchString in the
 	// response body.
 	SearchString *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the last failure reason as reported by one Amazon
@@ -947,6 +976,8 @@ type HealthCheckObservation struct {
 	// A complex type that contains the last failure reason as reported by one Amazon
 	// Route 53 health checker and the time of the failed health check.
 	StatusReport *StatusReport
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains general information about the hosted zone.
@@ -984,6 +1015,8 @@ type HostedZone struct {
 
 	// The number of resource record sets in the hosted zone.
 	ResourceRecordSetCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains an optional comment about your hosted zone. If you
@@ -996,6 +1029,8 @@ type HostedZoneConfig struct {
 
 	// A value that indicates whether this is a private hosted zone.
 	PrivateZone bool
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the type of limit that you specified in the request
@@ -1018,6 +1053,8 @@ type HostedZoneLimit struct {
 	//
 	// This member is required.
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that identifies a hosted zone that a specified Amazon VPC is
@@ -1038,6 +1075,8 @@ type HostedZoneOwner struct {
 	// created a hosted zone and associated a VPC with the hosted zone, the value of
 	// OwningService is efs.amazonaws.com.
 	OwningService *string
+
+	noSmithyDocumentSerde
 }
 
 // In the response to a ListHostedZonesByVPC request, the HostedZoneSummaries
@@ -1062,6 +1101,8 @@ type HostedZoneSummary struct {
 	//
 	// This member is required.
 	Owner *HostedZoneOwner
+
+	noSmithyDocumentSerde
 }
 
 // A key-signing key (KSK) is a complex type that represents a public/private key
@@ -1167,6 +1208,8 @@ type KeySigningKey struct {
 	// ACTION_NEEDED or INTERNAL_FAILURE. The status message includes information about
 	// what the problem might be and steps that you can take to correct the issue.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // If a health check or hosted zone was created by another service, LinkedService
@@ -1184,6 +1227,8 @@ type LinkedService struct {
 	// that created the resource. When a resource is created by another service, you
 	// can't edit or delete it using Amazon Route 53.
 	ServicePrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about a configuration for DNS query
@@ -1205,6 +1250,8 @@ type QueryLoggingConfig struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Information specific to the resource record. If you're creating an alias
@@ -1222,6 +1269,8 @@ type ResourceRecord struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the resource record set to create or delete.
@@ -1654,6 +1703,8 @@ type ResourceRecordSet struct {
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-configuring-options.html)
 	// in the Amazon Route 53 Developer Guide.
 	Weight *int64
+
+	noSmithyDocumentSerde
 }
 
 // A complex type containing a resource and its associated tags.
@@ -1672,6 +1723,8 @@ type ResourceTagSet struct {
 
 	// The tags associated with the specified resource.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the type of limit that you specified in the request
@@ -1689,6 +1742,8 @@ type ReusableDelegationSetLimit struct {
 	//
 	// This member is required.
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the status that one Amazon Route 53 health checker
@@ -1704,6 +1759,8 @@ type StatusReport struct {
 	// A description of the status of the health check endpoint as reported by one of
 	// the Amazon Route 53 health checkers.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about a tag that you want to add or
@@ -1736,6 +1793,8 @@ type Tag struct {
 	// * Edit a tag: Value is the new value that you want to assign the
 	// tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains settings for a traffic policy.
@@ -1773,6 +1832,8 @@ type TrafficPolicy struct {
 
 	// The comment that you specify in the CreateTrafficPolicy request, if any.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains settings for the new traffic policy instance.
@@ -1835,6 +1896,8 @@ type TrafficPolicyInstance struct {
 	//
 	// This member is required.
 	TrafficPolicyVersion *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the latest version of one traffic
@@ -1866,6 +1929,8 @@ type TrafficPolicySummary struct {
 	//
 	// This member is required.
 	Type RRType
+
+	noSmithyDocumentSerde
 }
 
 // (Private hosted zones only) A complex type that contains information about an
@@ -1877,4 +1942,8 @@ type VPC struct {
 
 	// (Private hosted zones only) The region that an Amazon VPC was created in.
 	VPCRegion VPCRegion
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

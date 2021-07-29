@@ -6,7 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
-	smithy "github.com/aws/smithy-go"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/jsonrpc/document"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -28,14 +28,18 @@ func (c *Client) PutAndGetInlineDocuments(ctx context.Context, params *PutAndGet
 }
 
 type PutAndGetInlineDocumentsInput struct {
-	InlineDocument smithy.Document
+	InlineDocument document.Interface
+
+	noSmithyDocumentSerde
 }
 
 type PutAndGetInlineDocumentsOutput struct {
-	InlineDocument smithy.Document
+	InlineDocument document.Interface
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAndGetInlineDocumentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

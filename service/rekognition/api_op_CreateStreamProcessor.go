@@ -76,6 +76,8 @@ type CreateStreamProcessorInput struct {
 
 	// A set of tags (key-value pairs) that you want to attach to the stream processor.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateStreamProcessorOutput struct {
@@ -85,6 +87,8 @@ type CreateStreamProcessorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {

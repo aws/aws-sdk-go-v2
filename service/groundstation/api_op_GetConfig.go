@@ -39,6 +39,8 @@ type GetConfigInput struct {
 	//
 	// This member is required.
 	ConfigType types.ConfigCapabilityType
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -72,6 +74,8 @@ type GetConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

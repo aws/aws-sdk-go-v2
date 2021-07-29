@@ -160,6 +160,8 @@ type DescribeSecurityGroupsInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSecurityGroupsOutput struct {
@@ -173,6 +175,8 @@ type DescribeSecurityGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

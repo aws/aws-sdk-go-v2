@@ -73,6 +73,8 @@ type CreateThemeInput struct {
 	// UpdateTheme is called, a new version is created. Each version of the theme has a
 	// description of the version in the VersionDescription field.
 	VersionDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateThemeOutput struct {
@@ -97,6 +99,8 @@ type CreateThemeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {

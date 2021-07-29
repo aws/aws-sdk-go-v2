@@ -36,6 +36,8 @@ type ListResourceTypesInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourceTypesOutput struct {
@@ -49,6 +51,8 @@ type ListResourceTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourceTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

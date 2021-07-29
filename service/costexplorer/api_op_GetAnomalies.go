@@ -54,6 +54,8 @@ type GetAnomaliesInput struct {
 	// example, you can filter anomalies GREATER_THAN 200.00 to retrieve anomalies,
 	// with an estimated dollar impact greater than 200.
 	TotalImpact *types.TotalImpactFilter
+
+	noSmithyDocumentSerde
 }
 
 type GetAnomaliesOutput struct {
@@ -69,6 +71,8 @@ type GetAnomaliesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAnomaliesMiddlewares(stack *middleware.Stack, options Options) (err error) {

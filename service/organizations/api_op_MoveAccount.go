@@ -68,11 +68,15 @@ type MoveAccountInput struct {
 	//
 	// This member is required.
 	SourceParentId *string
+
+	noSmithyDocumentSerde
 }
 
 type MoveAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMoveAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

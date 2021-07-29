@@ -67,6 +67,8 @@ type CreateLocationFsxWindowsInput struct {
 	// search for your resources. We recommend that you create a name tag for your
 	// location.
 	Tags []types.TagListEntry
+
+	noSmithyDocumentSerde
 }
 
 type CreateLocationFsxWindowsOutput struct {
@@ -77,6 +79,8 @@ type CreateLocationFsxWindowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLocationFsxWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

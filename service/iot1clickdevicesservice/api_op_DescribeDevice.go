@@ -34,6 +34,8 @@ type DescribeDeviceInput struct {
 	//
 	// This member is required.
 	DeviceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDeviceOutput struct {
@@ -43,6 +45,8 @@ type DescribeDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

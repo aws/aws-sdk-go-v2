@@ -32,11 +32,15 @@ type StartSmartHomeApplianceDiscoveryInput struct {
 	//
 	// This member is required.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StartSmartHomeApplianceDiscoveryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSmartHomeApplianceDiscoveryMiddlewares(stack *middleware.Stack, options Options) (err error) {

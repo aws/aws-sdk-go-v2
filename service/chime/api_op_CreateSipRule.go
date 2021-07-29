@@ -59,6 +59,8 @@ type CreateSipRuleInput struct {
 
 	// Enables or disables a rule. You must disable rules before you can delete them.
 	Disabled *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateSipRuleOutput struct {
@@ -69,6 +71,8 @@ type CreateSipRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

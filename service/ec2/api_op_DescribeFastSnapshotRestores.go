@@ -57,6 +57,8 @@ type DescribeFastSnapshotRestoresInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFastSnapshotRestoresOutput struct {
@@ -70,6 +72,8 @@ type DescribeFastSnapshotRestoresOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFastSnapshotRestoresMiddlewares(stack *middleware.Stack, options Options) (err error) {

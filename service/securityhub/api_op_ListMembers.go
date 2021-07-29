@@ -48,6 +48,8 @@ type ListMembersInput struct {
 	// OnlyAssociated is set to FALSE, the response includes all existing member
 	// accounts.
 	OnlyAssociated bool
+
+	noSmithyDocumentSerde
 }
 
 type ListMembersOutput struct {
@@ -60,6 +62,8 @@ type ListMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

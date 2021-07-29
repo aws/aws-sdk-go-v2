@@ -60,6 +60,8 @@ type ListChannelsInput struct {
 	// The privacy setting. PUBLIC retrieves all the public channels. PRIVATE retrieves
 	// private channels. Only an AppInstanceAdmin can retrieve private channels.
 	Privacy types.ChannelPrivacy
+
+	noSmithyDocumentSerde
 }
 
 type ListChannelsOutput struct {
@@ -73,6 +75,8 @@ type ListChannelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

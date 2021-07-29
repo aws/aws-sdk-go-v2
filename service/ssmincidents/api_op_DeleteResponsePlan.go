@@ -34,11 +34,15 @@ type DeleteResponsePlanInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResponsePlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResponsePlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

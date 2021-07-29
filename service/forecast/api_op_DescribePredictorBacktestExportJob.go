@@ -46,6 +46,8 @@ type DescribePredictorBacktestExportJobInput struct {
 	//
 	// This member is required.
 	PredictorBacktestExportJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePredictorBacktestExportJobOutput struct {
@@ -102,6 +104,8 @@ type DescribePredictorBacktestExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

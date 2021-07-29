@@ -40,11 +40,15 @@ type UpdateContactListInput struct {
 	// An interest group, theme, or label within a list. A contact list can have
 	// multiple topics.
 	Topics []types.Topic
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContactListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {

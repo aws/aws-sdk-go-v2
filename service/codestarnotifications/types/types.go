@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Returns information about an event that has triggered a notification rule.
 type EventTypeSummary struct {
 
@@ -16,6 +20,8 @@ type EventTypeSummary struct {
 
 	// The name of the service for which the event applies.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter to apply to the list of returned event types. You can
@@ -32,6 +38,8 @@ type ListEventTypesFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter to apply to the list of returned notification rules.
@@ -50,6 +58,8 @@ type ListNotificationRulesFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter to apply to the list of returned targets. You can
@@ -70,6 +80,8 @@ type ListTargetsFilter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a specified notification rule.
@@ -80,6 +92,8 @@ type NotificationRuleSummary struct {
 
 	// The unique ID of the notification rule.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the SNS topics associated with a notification rule.
@@ -90,6 +104,8 @@ type Target struct {
 
 	// The target type. Can be an Amazon SNS topic.
 	TargetType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the targets specified for a notification rule.
@@ -103,4 +119,8 @@ type TargetSummary struct {
 
 	// The type of the target (for example, SNS).
 	TargetType *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

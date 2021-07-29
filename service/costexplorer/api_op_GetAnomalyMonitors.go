@@ -39,6 +39,8 @@ type GetAnomalyMonitorsInput struct {
 	// The token to retrieve the next set of results. AWS provides the token when the
 	// response from a previous call has more results than the maximum page size.
 	NextPageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAnomalyMonitorsOutput struct {
@@ -55,6 +57,8 @@ type GetAnomalyMonitorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAnomalyMonitorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

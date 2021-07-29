@@ -10,6 +10,8 @@ import (
 // The caller is not authorized to invoke this operation.
 type ForbiddenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -27,6 +29,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The connection with the provided id no longer exists.
 type GoneException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GoneException) Error() string {
@@ -45,6 +49,8 @@ func (e *GoneException) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // or the WebSocket client side buffer is full.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -62,6 +68,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The data has exceeded the maximum size allowed.
 type PayloadTooLargeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PayloadTooLargeException) Error() string {

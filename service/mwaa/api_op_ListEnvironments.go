@@ -35,6 +35,8 @@ type ListEnvironmentsInput struct {
 
 	// Retrieves the next page of the results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEnvironmentsOutput struct {
@@ -49,6 +51,8 @@ type ListEnvironmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

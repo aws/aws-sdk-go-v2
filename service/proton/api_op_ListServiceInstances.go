@@ -39,6 +39,8 @@ type ListServiceInstancesInput struct {
 
 	// The name of the service that the service instance belongs to.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListServiceInstancesOutput struct {
@@ -54,6 +56,8 @@ type ListServiceInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListServiceInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

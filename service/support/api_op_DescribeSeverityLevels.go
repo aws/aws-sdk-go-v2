@@ -44,6 +44,8 @@ type DescribeSeverityLevelsInput struct {
 	// currently supports English ("en") and Japanese ("ja"). Language parameters must
 	// be passed explicitly for operations that take them.
 	Language *string
+
+	noSmithyDocumentSerde
 }
 
 // The list of severity levels returned by the DescribeSeverityLevels operation.
@@ -55,6 +57,8 @@ type DescribeSeverityLevelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSeverityLevelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,11 +41,15 @@ type DeleteAssociationInput struct {
 
 	// The name of the SSM document.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAssociationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

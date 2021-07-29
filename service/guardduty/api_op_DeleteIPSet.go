@@ -38,11 +38,15 @@ type DeleteIPSetInput struct {
 	//
 	// This member is required.
 	IpSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteIPSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

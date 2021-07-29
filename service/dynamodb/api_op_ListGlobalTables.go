@@ -46,6 +46,8 @@ type ListGlobalTablesInput struct {
 
 	// Lists the global tables in a specific Region.
 	RegionName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGlobalTablesOutput struct {
@@ -58,6 +60,8 @@ type ListGlobalTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGlobalTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

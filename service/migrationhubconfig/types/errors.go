@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // when the DryRun flag is set to true.
 type DryRunOperation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DryRunOperation) Error() string {
@@ -46,6 +50,8 @@ func (e *DryRunOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // encountered.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -64,6 +70,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // entered in the wrong format or data type.
 type InvalidInputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -82,6 +90,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // service.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -101,6 +111,8 @@ type ThrottlingException struct {
 	Message *string
 
 	RetryAfterSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

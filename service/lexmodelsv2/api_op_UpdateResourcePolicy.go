@@ -50,6 +50,8 @@ type UpdateResourcePolicyInput struct {
 	// don't specify a revision, Amazon Lex overwrites the contents of the policy with
 	// the new values.
 	ExpectedRevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResourcePolicyOutput struct {
@@ -65,6 +67,8 @@ type UpdateResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

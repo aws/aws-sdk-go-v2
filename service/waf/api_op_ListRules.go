@@ -46,6 +46,8 @@ type ListRulesInput struct {
 	// specify the value of NextMarker from the previous response to get information
 	// about another batch of Rules.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRulesOutput struct {
@@ -61,6 +63,8 @@ type ListRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

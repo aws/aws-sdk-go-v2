@@ -49,6 +49,8 @@ type DescribeStackSetInput struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
 	// in the AWS CloudFormation User Guide.
 	CallAs types.CallAs
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStackSetOutput struct {
@@ -58,6 +60,8 @@ type DescribeStackSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStackSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

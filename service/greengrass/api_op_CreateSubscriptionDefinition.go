@@ -42,6 +42,8 @@ type CreateSubscriptionDefinitionInput struct {
 
 	// Tag(s) to add to the new resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSubscriptionDefinitionOutput struct {
@@ -69,6 +71,8 @@ type CreateSubscriptionDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

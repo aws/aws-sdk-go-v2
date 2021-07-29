@@ -55,11 +55,15 @@ type PutMetricPolicyInput struct {
 	//
 	// This member is required.
 	MetricPolicy *types.MetricPolicy
+
+	noSmithyDocumentSerde
 }
 
 type PutMetricPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutMetricPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

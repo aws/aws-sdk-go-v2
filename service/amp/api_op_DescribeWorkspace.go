@@ -34,6 +34,8 @@ type DescribeWorkspaceInput struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeWorkspace operation.
@@ -46,6 +48,8 @@ type DescribeWorkspaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkspaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

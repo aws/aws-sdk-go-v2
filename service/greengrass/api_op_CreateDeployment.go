@@ -49,6 +49,8 @@ type CreateDeploymentInput struct {
 
 	// The ID of the group version to be deployed.
 	GroupVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeploymentOutput struct {
@@ -61,6 +63,8 @@ type CreateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

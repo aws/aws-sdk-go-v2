@@ -28,6 +28,7 @@ func (c *Client) PeerVpc(ctx context.Context, params *PeerVpcInput, optFns ...fu
 }
 
 type PeerVpcInput struct {
+	noSmithyDocumentSerde
 }
 
 type PeerVpcOutput struct {
@@ -39,6 +40,8 @@ type PeerVpcOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {

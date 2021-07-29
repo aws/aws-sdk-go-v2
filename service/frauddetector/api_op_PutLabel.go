@@ -41,11 +41,15 @@ type PutLabelInput struct {
 
 	//
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutLabelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutLabelMiddlewares(stack *middleware.Stack, options Options) (err error) {

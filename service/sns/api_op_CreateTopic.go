@@ -98,6 +98,8 @@ type CreateTopicInput struct {
 	// The list of tags to add to a new topic. To be able to tag a topic on creation,
 	// you must have the sns:CreateTopic and sns:TagResource permissions.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Response from CreateTopic action.
@@ -108,6 +110,8 @@ type CreateTopicOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {

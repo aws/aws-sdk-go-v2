@@ -62,6 +62,8 @@ type UpdateInputInput struct {
 	// source URLs for redundancy. Only specify sources for PULL type Inputs. Leave
 	// Destinations empty.
 	Sources []types.InputSourceRequest
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for UpdateInputResponse
@@ -72,6 +74,8 @@ type UpdateInputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInputMiddlewares(stack *middleware.Stack, options Options) (err error) {

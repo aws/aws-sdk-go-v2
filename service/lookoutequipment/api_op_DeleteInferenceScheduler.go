@@ -33,11 +33,15 @@ type DeleteInferenceSchedulerInput struct {
 	//
 	// This member is required.
 	InferenceSchedulerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteInferenceSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {

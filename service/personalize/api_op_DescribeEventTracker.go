@@ -35,6 +35,8 @@ type DescribeEventTrackerInput struct {
 	//
 	// This member is required.
 	EventTrackerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEventTrackerOutput struct {
@@ -44,6 +46,8 @@ type DescribeEventTrackerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventTrackerMiddlewares(stack *middleware.Stack, options Options) (err error) {

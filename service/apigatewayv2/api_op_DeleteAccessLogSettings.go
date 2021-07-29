@@ -39,11 +39,15 @@ type DeleteAccessLogSettingsInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccessLogSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccessLogSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -85,6 +85,8 @@ type GetGatewayResponseInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // A gateway response of a given response type and status code, with optional
@@ -201,6 +203,8 @@ type GetGatewayResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type GetWebACLInput struct {
 	//
 	// This member is required.
 	Scope types.Scope
+
+	noSmithyDocumentSerde
 }
 
 type GetWebACLOutput struct {
@@ -74,6 +76,8 @@ type GetWebACLOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {

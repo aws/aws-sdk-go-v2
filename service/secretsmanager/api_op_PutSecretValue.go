@@ -185,6 +185,8 @@ type PutSecretValueInput struct {
 	// you do not specify a value for VersionStages then Secrets Manager automatically
 	// moves the staging label AWSCURRENT to this new version.
 	VersionStages []string
+
+	noSmithyDocumentSerde
 }
 
 type PutSecretValueOutput struct {
@@ -206,6 +208,8 @@ type PutSecretValueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSecretValueMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type GetChannelScheduleInput struct {
 	// Pagination token from the GET list request. Use the token to fetch the next page
 	// of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetChannelScheduleOutput struct {
@@ -59,6 +61,8 @@ type GetChannelScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetChannelScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

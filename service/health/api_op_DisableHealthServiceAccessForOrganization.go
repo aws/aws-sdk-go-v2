@@ -43,11 +43,14 @@ func (c *Client) DisableHealthServiceAccessForOrganization(ctx context.Context, 
 }
 
 type DisableHealthServiceAccessForOrganizationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisableHealthServiceAccessForOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableHealthServiceAccessForOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

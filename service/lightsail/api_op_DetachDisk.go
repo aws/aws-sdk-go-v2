@@ -39,6 +39,8 @@ type DetachDiskInput struct {
 	//
 	// This member is required.
 	DiskName *string
+
+	noSmithyDocumentSerde
 }
 
 type DetachDiskOutput struct {
@@ -50,6 +52,8 @@ type DetachDiskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachDiskMiddlewares(stack *middleware.Stack, options Options) (err error) {

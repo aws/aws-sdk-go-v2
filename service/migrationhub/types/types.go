@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type ApplicationState struct {
 
 	// The timestamp when the application status was last updated.
 	LastUpdatedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An ARN of the AWS cloud resource target receiving the migration (e.g., AMI, EC2
@@ -33,6 +36,8 @@ type CreatedArtifact struct {
 	// A description that can be free-form text to record additional detail about the
 	// artifact for clarity or for later reference.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Object representing the on-premises resource being migrated.
@@ -47,6 +52,8 @@ type DiscoveredResource struct {
 	// A description that can be free-form text to record additional detail about the
 	// discovered resource for clarity or later reference.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a migration task in a migration tool.
@@ -68,6 +75,8 @@ type MigrationTask struct {
 
 	// The timestamp when the task was gathered.
 	UpdateDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // MigrationTaskSummary includes MigrationTaskName, ProgressPercent,
@@ -93,6 +102,8 @@ type MigrationTaskSummary struct {
 
 	// The timestamp when the task was gathered.
 	UpdateDateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the AWS resource used for access control that is implicitly linked to
@@ -101,6 +112,8 @@ type ProgressUpdateStreamSummary struct {
 
 	// The name of the ProgressUpdateStream. Do not store personal data in this field.
 	ProgressUpdateStreamName *string
+
+	noSmithyDocumentSerde
 }
 
 // Attribute associated with a resource. Note the corresponding format required per
@@ -119,6 +132,8 @@ type ResourceAttribute struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Task object encapsulating task information.
@@ -136,4 +151,8 @@ type Task struct {
 	// field to provide clarifying information about the status that is unique to that
 	// tool or that explains an error state.
 	StatusDetail *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

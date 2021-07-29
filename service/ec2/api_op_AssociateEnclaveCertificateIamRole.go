@@ -56,6 +56,8 @@ type AssociateEnclaveCertificateIamRoleInput struct {
 	// The ARN of the IAM role to associate with the ACM certificate. You can associate
 	// up to 16 IAM roles with an ACM certificate.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateEnclaveCertificateIamRoleOutput struct {
@@ -73,6 +75,8 @@ type AssociateEnclaveCertificateIamRoleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateEnclaveCertificateIamRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

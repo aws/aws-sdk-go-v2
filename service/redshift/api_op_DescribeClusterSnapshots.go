@@ -126,6 +126,8 @@ type DescribeClusterSnapshotsInput struct {
 	// Redshift returns a response with the snapshots that have either or both of these
 	// tag values associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output from the DescribeClusterSnapshots action.
@@ -143,6 +145,8 @@ type DescribeClusterSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClusterSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

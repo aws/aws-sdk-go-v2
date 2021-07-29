@@ -35,6 +35,8 @@ type GetSecurityConfigurationsInput struct {
 
 	// A continuation token, if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSecurityConfigurationsOutput struct {
@@ -47,6 +49,8 @@ type GetSecurityConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSecurityConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

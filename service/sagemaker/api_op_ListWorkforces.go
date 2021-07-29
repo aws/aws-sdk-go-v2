@@ -46,6 +46,8 @@ type ListWorkforcesInput struct {
 
 	// Sort workforces in ascending or descending order.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListWorkforcesOutput struct {
@@ -60,6 +62,8 @@ type ListWorkforcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkforcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

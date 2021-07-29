@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -47,6 +48,8 @@ type Action struct {
 	// forward and you want to route to a single target group. To route to one or more
 	// target groups, use ForwardConfig instead.
 	TargetGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Request parameters to use when integrating with Amazon Cognito to authenticate
@@ -97,6 +100,8 @@ type AuthenticateCognitoActionConfig struct {
 	// The maximum duration of the authentication session, in seconds. The default is
 	// 604800 seconds (7 days).
 	SessionTimeout *int64
+
+	noSmithyDocumentSerde
 }
 
 // Request parameters when using an identity provider (IdP) that is compliant with
@@ -169,6 +174,8 @@ type AuthenticateOidcActionConfig struct {
 	// Indicates whether to use the existing client secret when modifying a rule. If
 	// you are creating a rule, you can omit this parameter or set it to false.
 	UseExistingClientSecret *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Availability Zone.
@@ -188,6 +195,8 @@ type AvailabilityZone struct {
 
 	// The name of the Availability Zone.
 	ZoneName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an SSL server certificate.
@@ -201,6 +210,8 @@ type Certificate struct {
 	// the output when describing a listener, but is included when describing listener
 	// certificates.
 	IsDefault *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about a cipher used in a policy.
@@ -211,6 +222,8 @@ type Cipher struct {
 
 	// The priority of the cipher.
 	Priority int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about an action that returns a custom HTTP response.
@@ -227,6 +240,8 @@ type FixedResponseActionConfig struct {
 
 	// The message.
 	MessageBody *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a forward action.
@@ -238,6 +253,8 @@ type ForwardActionConfig struct {
 	// One or more target groups. For Network Load Balancers, you can specify a single
 	// target group.
 	TargetGroups []TargetGroupTuple
+
+	noSmithyDocumentSerde
 }
 
 // Information about a host header condition.
@@ -249,6 +266,8 @@ type HostHeaderConditionConfig struct {
 	// specify multiple strings, the condition is satisfied if one of the strings
 	// matches the host name.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an HTTP header condition. There is a set of standard HTTP
@@ -271,6 +290,8 @@ type HttpHeaderConditionConfig struct {
 	// strings matches the value of the HTTP header. To require that all of the strings
 	// are a match, create one condition per string.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an HTTP method condition. HTTP defines a set of request
@@ -288,6 +309,8 @@ type HttpRequestMethodConditionConfig struct {
 	// and HEAD requests in the same way, because the response to a HEAD request may be
 	// cached.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Elastic Load Balancing resource limit for your Amazon Web
@@ -347,6 +370,8 @@ type Limit struct {
 	// *
 	// targets-per-network-load-balancer
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a listener.
@@ -377,6 +402,8 @@ type Listener struct {
 	// [HTTPS or TLS listener] The security policy that defines which protocols and
 	// ciphers are supported.
 	SslPolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a load balancer.
@@ -430,6 +457,8 @@ type LoadBalancer struct {
 
 	// The ID of the VPC for the load balancer.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a static IP address for a load balancer.
@@ -447,6 +476,8 @@ type LoadBalancerAddress struct {
 
 	// [Network Load Balancers] The private IPv4 address for an internal load balancer.
 	PrivateIPv4Address *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a load balancer attribute.
@@ -511,6 +542,8 @@ type LoadBalancerAttribute struct {
 
 	// The value of the attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the state of the load balancer.
@@ -525,6 +558,8 @@ type LoadBalancerState struct {
 
 	// A description of the state.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // The codes to use when checking for a successful response from a target. If the
@@ -541,6 +576,8 @@ type Matcher struct {
 	// "200,202") or a range of values (for example, "200-299"). For Network Load
 	// Balancers and Gateway Load Balancers, this must be "200–399".
 	HttpCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a path pattern condition.
@@ -554,6 +591,8 @@ type PathPatternConditionConfig struct {
 	// is compared only to the path of the URL, not to its query string. To compare
 	// against the query string, use QueryStringConditionConfig.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a query string condition. The query string component of a URI
@@ -571,6 +610,8 @@ type QueryStringConditionConfig struct {
 	// '\' character. If you specify multiple key/value pairs or values, the condition
 	// is satisfied if one of them is found in the query string.
 	Values []QueryStringKeyValuePair
+
+	noSmithyDocumentSerde
 }
 
 // Information about a key/value pair.
@@ -581,6 +622,8 @@ type QueryStringKeyValuePair struct {
 
 	// The value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a redirect action. A URI consists of the following components:
@@ -630,6 +673,8 @@ type RedirectActionConfig struct {
 	// not include the leading "?", as it is automatically added. You can specify any
 	// of the reserved keywords.
 	Query *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a rule.
@@ -653,6 +698,8 @@ type Rule struct {
 
 	// The Amazon Resource Name (ARN) of the rule.
 	RuleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a condition for a rule. Each rule can optionally include up to
@@ -734,6 +781,8 @@ type RuleCondition struct {
 	// * ? (matches exactly 1
 	// character)
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the priorities for the rules for a listener.
@@ -744,6 +793,8 @@ type RulePriorityPair struct {
 
 	// The Amazon Resource Name (ARN) of the rule.
 	RuleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a source IP condition. You can use this condition to route
@@ -759,6 +810,8 @@ type SourceIpConditionConfig struct {
 	// X-Forwarded-For header. To search for addresses in the X-Forwarded-For header,
 	// use HttpHeaderConditionConfig.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a policy used for SSL negotiation.
@@ -772,6 +825,8 @@ type SslPolicy struct {
 
 	// The protocols.
 	SslProtocols []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a subnet mapping.
@@ -789,6 +844,8 @@ type SubnetMapping struct {
 
 	// The ID of the subnet.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tag.
@@ -801,6 +858,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The tags associated with a resource.
@@ -811,6 +870,8 @@ type TagDescription struct {
 
 	// Information about the tags.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about a target.
@@ -839,6 +900,8 @@ type TargetDescription struct {
 	// The port on which the target is listening. If the target group protocol is
 	// GENEVE, the supported port is 6081. Not used if the target is a Lambda function.
 	Port *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a target group.
@@ -906,6 +969,8 @@ type TargetGroup struct {
 
 	// The ID of the VPC for the targets.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a target group attribute.
@@ -995,6 +1060,8 @@ type TargetGroupAttribute struct {
 
 	// The value of the attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the target group stickiness for a rule.
@@ -1006,6 +1073,8 @@ type TargetGroupStickinessConfig struct {
 
 	// Indicates whether target group stickiness is enabled.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about how traffic will be distributed between multiple target groups
@@ -1017,6 +1086,8 @@ type TargetGroupTuple struct {
 
 	// The weight. The range is 0 to 999.
 	Weight *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the current health of a target.
@@ -1091,6 +1162,8 @@ type TargetHealth struct {
 
 	// The state of the target.
 	State TargetHealthStateEnum
+
+	noSmithyDocumentSerde
 }
 
 // Information about the health of a target.
@@ -1104,4 +1177,8 @@ type TargetHealthDescription struct {
 
 	// The health information for the target.
 	TargetHealth *TargetHealth
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

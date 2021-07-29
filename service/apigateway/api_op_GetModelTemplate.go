@@ -39,6 +39,8 @@ type GetModelTemplateInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a mapping template used to transform a payload. Mapping Templates
@@ -52,6 +54,8 @@ type GetModelTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetModelTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

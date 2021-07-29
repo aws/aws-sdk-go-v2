@@ -33,6 +33,8 @@ type GetSettingsInput struct {
 	//
 	// This member is required.
 	Attribute types.SettingAttribute
+
+	noSmithyDocumentSerde
 }
 
 type GetSettingsOutput struct {
@@ -42,6 +44,8 @@ type GetSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

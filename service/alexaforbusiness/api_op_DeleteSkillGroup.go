@@ -30,11 +30,15 @@ type DeleteSkillGroupInput struct {
 
 	// The ARN of the skill group to delete. Required.
 	SkillGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSkillGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

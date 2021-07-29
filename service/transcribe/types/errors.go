@@ -13,6 +13,8 @@ import (
 // more information.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -30,6 +32,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // There is already a resource with that name.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -47,6 +51,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // There was an internal error. Check the error message and try your request again.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -65,6 +71,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 // before you resend your request, or use a smaller file and resend the request.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -82,6 +90,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // We can't find the requested resource. Check the name and try your request again.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {

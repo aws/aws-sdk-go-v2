@@ -32,11 +32,15 @@ type DeleteConferenceProviderInput struct {
 	//
 	// This member is required.
 	ConferenceProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConferenceProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConferenceProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type GetStreamingSessionInput struct {
 	//
 	// This member is required.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetStreamingSessionOutput struct {
@@ -48,6 +50,8 @@ type GetStreamingSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetStreamingSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

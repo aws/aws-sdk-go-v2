@@ -39,6 +39,8 @@ type ListPlaybackKeyPairsInput struct {
 
 	// Maximum number of key pairs to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPlaybackKeyPairsOutput struct {
@@ -54,6 +56,8 @@ type ListPlaybackKeyPairsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPlaybackKeyPairsMiddlewares(stack *middleware.Stack, options Options) (err error) {

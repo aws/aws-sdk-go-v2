@@ -66,6 +66,8 @@ type DescribeActivityTypeInput struct {
 	//
 	// This member is required.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 // Detailed information about an activity type.
@@ -92,6 +94,8 @@ type DescribeActivityTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

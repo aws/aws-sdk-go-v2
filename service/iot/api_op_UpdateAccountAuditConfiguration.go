@@ -49,11 +49,15 @@ type UpdateAccountAuditConfigurationInput struct {
 	// access information about your devices, policies, certificates, and other items
 	// as required when performing an audit.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccountAuditConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccountAuditConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

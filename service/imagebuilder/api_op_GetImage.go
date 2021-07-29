@@ -33,6 +33,8 @@ type GetImageInput struct {
 	//
 	// This member is required.
 	ImageBuildVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetImageOutput struct {
@@ -45,6 +47,8 @@ type GetImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

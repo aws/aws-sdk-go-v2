@@ -27,6 +27,7 @@ func (c *Client) XmlEmptyLists(ctx context.Context, params *XmlEmptyListsInput, 
 }
 
 type XmlEmptyListsInput struct {
+	noSmithyDocumentSerde
 }
 
 type XmlEmptyListsOutput struct {
@@ -59,6 +60,8 @@ type XmlEmptyListsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlEmptyListsMiddlewares(stack *middleware.Stack, options Options) (err error) {

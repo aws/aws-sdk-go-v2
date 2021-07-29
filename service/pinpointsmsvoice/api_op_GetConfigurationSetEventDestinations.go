@@ -35,6 +35,8 @@ type GetConfigurationSetEventDestinationsInput struct {
 	//
 	// This member is required.
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about an event destination.
@@ -46,6 +48,8 @@ type GetConfigurationSetEventDestinationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConfigurationSetEventDestinationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

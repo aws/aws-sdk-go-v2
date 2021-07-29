@@ -51,6 +51,8 @@ type InviteMembersInput struct {
 	// The invitation message that you want to send to the accounts that you're
 	// inviting to GuardDuty as members.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 type InviteMembersOutput struct {
@@ -63,6 +65,8 @@ type InviteMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

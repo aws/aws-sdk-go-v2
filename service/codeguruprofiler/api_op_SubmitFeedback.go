@@ -50,12 +50,16 @@ type SubmitFeedbackInput struct {
 
 	// Optional feedback about this anomaly.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the SubmitFeedbackResponse.
 type SubmitFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubmitFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type UpdateVariableInput struct {
 	// The variable type. For more information see Variable types
 	// (https://docs.aws.amazon.com/frauddetector/latest/ug/create-a-variable.html#variable-types).
 	VariableType *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateVariableOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {

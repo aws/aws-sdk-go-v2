@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type DeviceSummary struct {
 
 	// The status of the device.
 	DeviceStatus DeviceStatus
+
+	noSmithyDocumentSerde
 }
 
 // The summary of the domain.
@@ -36,6 +39,8 @@ type DomainSummary struct {
 
 	// The name to display.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of the fleet.
@@ -64,6 +69,8 @@ type FleetSummary struct {
 
 	// The tags attached to the resource. A tag is a key-value pair.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of the website authorization provider.
@@ -83,6 +90,8 @@ type WebsiteAuthorizationProviderSummary struct {
 	// The domain name of the authorization provider. This applies only to SAML-based
 	// authorization providers.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of the certificate authority (CA).
@@ -96,4 +105,8 @@ type WebsiteCaSummary struct {
 
 	// A unique identifier for the CA.
 	WebsiteCaId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -43,6 +43,8 @@ type ModifyRuleInput struct {
 
 	// The conditions.
 	Conditions []types.RuleCondition
+
+	noSmithyDocumentSerde
 }
 
 type ModifyRuleOutput struct {
@@ -52,6 +54,8 @@ type ModifyRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

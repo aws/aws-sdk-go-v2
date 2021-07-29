@@ -87,6 +87,8 @@ type ExportEC2InstanceRecommendationsInput struct {
 	// omitted. Recommendations for member accounts are not included in the export if
 	// this parameter, or the account IDs parameter, is omitted.
 	IncludeMemberAccounts bool
+
+	noSmithyDocumentSerde
 }
 
 type ExportEC2InstanceRecommendationsOutput struct {
@@ -102,6 +104,8 @@ type ExportEC2InstanceRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportEC2InstanceRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

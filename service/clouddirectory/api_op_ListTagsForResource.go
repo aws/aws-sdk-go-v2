@@ -45,6 +45,8 @@ type ListTagsForResourceInput struct {
 	// The pagination token. This is for future use. Currently pagination is not
 	// supported for tagging.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsForResourceOutput struct {
@@ -58,6 +60,8 @@ type ListTagsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

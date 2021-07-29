@@ -38,6 +38,8 @@ type ListOriginationNumbersInput struct {
 
 	// Token that the previous ListOriginationNumbers request returns.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListOriginationNumbersOutput struct {
@@ -51,6 +53,8 @@ type ListOriginationNumbersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOriginationNumbersMiddlewares(stack *middleware.Stack, options Options) (err error) {

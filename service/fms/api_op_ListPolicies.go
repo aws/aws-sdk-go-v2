@@ -43,6 +43,8 @@ type ListPoliciesInput struct {
 	// specify the value of NextToken from the previous response to get information
 	// about another batch of PolicySummary objects.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPoliciesOutput struct {
@@ -58,6 +60,8 @@ type ListPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

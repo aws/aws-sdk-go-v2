@@ -33,6 +33,7 @@ func (c *Client) DescribeLifecycleHookTypes(ctx context.Context, params *Describ
 }
 
 type DescribeLifecycleHookTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeLifecycleHookTypesOutput struct {
@@ -42,6 +43,8 @@ type DescribeLifecycleHookTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLifecycleHookTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

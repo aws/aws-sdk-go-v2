@@ -74,6 +74,8 @@ type ListResourceTagsInput struct {
 	// you just received. Do not attempt to construct this value. Use only the value of
 	// NextMarker from the truncated response you just received.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourceTagsOutput struct {
@@ -98,6 +100,8 @@ type ListResourceTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourceTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

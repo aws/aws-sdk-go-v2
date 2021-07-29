@@ -45,6 +45,8 @@ type ListThemeVersionsInput struct {
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListThemeVersionsOutput struct {
@@ -63,6 +65,8 @@ type ListThemeVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThemeVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

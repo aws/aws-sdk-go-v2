@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type AccountAttribute struct {
 
 	// A list of attribute values.
 	AttributeValues []AttributeValueTarget
+
+	noSmithyDocumentSerde
 }
 
 // Describes an account authorized to restore a snapshot.
@@ -26,6 +29,8 @@ type AccountWithRestoreAccess struct {
 
 	// The identifier of an account authorized to restore a snapshot.
 	AccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // The AQUA (Advanced Query Accelerator) configuration of the cluster.
@@ -53,6 +58,8 @@ type AquaConfiguration struct {
 	//
 	// * applying - AQUA status is being applied.
 	AquaStatus AquaStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes an attribute value.
@@ -60,6 +67,8 @@ type AttributeValueTarget struct {
 
 	// The value of the attribute.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an authentication profile.
@@ -71,6 +80,8 @@ type AuthenticationProfile struct {
 
 	// The name of the authentication profile.
 	AuthenticationProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an availability zone.
@@ -81,6 +92,8 @@ type AvailabilityZone struct {
 
 	//
 	SupportedPlatforms []SupportedPlatform
+
+	noSmithyDocumentSerde
 }
 
 // Describes a cluster.
@@ -341,6 +354,8 @@ type Cluster struct {
 	// associated with the cluster. This parameter is returned only if the cluster is
 	// in a VPC.
 	VpcSecurityGroups []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -351,6 +366,8 @@ type ClusterAssociatedToSchedule struct {
 
 	//
 	ScheduleAssociationState ScheduleState
+
+	noSmithyDocumentSerde
 }
 
 // Describes a ClusterDbRevision.
@@ -368,6 +385,8 @@ type ClusterDbRevision struct {
 	// A list of RevisionTarget objects, where each object describes the database
 	// revision that a cluster can be updated to.
 	RevisionTargets []RevisionTarget
+
+	noSmithyDocumentSerde
 }
 
 // An Identity and Access Management (IAM) role that can be used by the associated
@@ -390,6 +409,8 @@ type ClusterIamRole struct {
 	// The Amazon Resource Name (ARN) of the IAM role, for example,
 	// arn:aws:iam::123456789012:role/RedshiftCopyUnload.
 	IamRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The identifier of a node in a cluster.
@@ -403,6 +424,8 @@ type ClusterNode struct {
 
 	// The public IP address of a node within a cluster.
 	PublicIPAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a parameter group.
@@ -420,6 +443,8 @@ type ClusterParameterGroup struct {
 
 	// The list of tags for the cluster parameter group.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of a parameter group.
@@ -436,6 +461,8 @@ type ClusterParameterGroupStatus struct {
 
 	// The name of the cluster parameter group.
 	ParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of a parameter group.
@@ -474,6 +501,8 @@ type ClusterParameterStatus struct {
 
 	// The name of the parameter.
 	ParameterName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a security group.
@@ -495,6 +524,8 @@ type ClusterSecurityGroup struct {
 
 	// The list of tags for the cluster security group.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a cluster security group.
@@ -505,6 +536,8 @@ type ClusterSecurityGroupMembership struct {
 
 	// The status of the cluster security group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the destination region and retention period that are configured for
@@ -527,6 +560,8 @@ type ClusterSnapshotCopyStatus struct {
 
 	// The name of the snapshot copy grant.
 	SnapshotCopyGrantName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a subnet group.
@@ -550,6 +585,8 @@ type ClusterSubnetGroup struct {
 
 	// The VPC ID of the cluster subnet group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a cluster version, including the parameter group family and
@@ -564,6 +601,8 @@ type ClusterVersion struct {
 
 	// The description of the cluster version.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of a cluster while it is in the process of resizing with an
@@ -588,6 +627,8 @@ type DataTransferProgress struct {
 
 	// Describes the total amount of data to be transfered in megabytes.
 	TotalDataInMegaBytes int64
+
+	noSmithyDocumentSerde
 }
 
 // Describes the default cluster parameters for a parameter group family.
@@ -606,6 +647,8 @@ type DefaultClusterParameters struct {
 
 	// The list of cluster default parameters.
 	Parameters []Parameter
+
+	noSmithyDocumentSerde
 }
 
 // Describes a deferred maintenance window
@@ -619,6 +662,8 @@ type DeferredMaintenanceWindow struct {
 
 	// A timestamp for the beginning of the time period when we defer maintenance.
 	DeferMaintenanceStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -636,6 +681,8 @@ type DeleteClusterSnapshotMessage struct {
 	// resource element that specifies anything other than * for the cluster name.
 	// Constraints: Must be the name of valid cluster.
 	SnapshotClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon EC2 security group.
@@ -653,6 +700,8 @@ type EC2SecurityGroup struct {
 
 	// The list of tags for the EC2 security group.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of the elastic IP (EIP) address.
@@ -663,6 +712,8 @@ type ElasticIpStatus struct {
 
 	// The status of the elastic IP (EIP) address.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a connection endpoint.
@@ -676,6 +727,8 @@ type Endpoint struct {
 
 	// Describes a connection endpoint.
 	VpcEndpoints []VpcEndpoint
+
+	noSmithyDocumentSerde
 }
 
 // Describes a Redshift-managed VPC endpoint.
@@ -711,6 +764,8 @@ type EndpointAccess struct {
 
 	// The security groups associated with the endpoint.
 	VpcSecurityGroups []VpcSecurityGroupMembership
+
+	noSmithyDocumentSerde
 }
 
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
@@ -744,6 +799,8 @@ type EndpointAuthorization struct {
 
 	// The status of the authorization action.
 	Status AuthorizationStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes an event.
@@ -770,6 +827,8 @@ type Event struct {
 
 	// The source type for this event.
 	SourceType SourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes event categories.
@@ -781,6 +840,8 @@ type EventCategoriesMap struct {
 	// The source type, such as cluster or cluster-snapshot, that the returned
 	// categories belong to.
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes event information.
@@ -797,6 +858,8 @@ type EventInfoMap struct {
 
 	// The severity of the event. Values: ERROR, INFO
 	Severity *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes event subscriptions.
@@ -851,6 +914,8 @@ type EventSubscription struct {
 
 	// The list of tags for the event subscription.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about an HSM client certificate. The certificate is stored
@@ -867,6 +932,8 @@ type HsmClientCertificate struct {
 
 	// The list of tags for the HSM client certificate.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about an HSM configuration, which is an object that
@@ -889,6 +956,8 @@ type HsmConfiguration struct {
 
 	// The list of tags for the HSM configuration.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of changes to HSM settings.
@@ -905,6 +974,8 @@ type HsmStatus struct {
 	// Reports whether the Amazon Redshift cluster has finished applying any HSM
 	// settings changes specified in a modify cluster command. Values: active, applying
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an IP range used in a security group.
@@ -918,6 +989,8 @@ type IPRange struct {
 
 	// The list of tags for the IP range.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Defines a maintenance track that determines which Amazon Redshift version to
@@ -935,6 +1008,8 @@ type MaintenanceTrack struct {
 
 	// An array of UpdateTarget objects to update with the maintenance track.
 	UpdateTargets []UpdateTarget
+
+	noSmithyDocumentSerde
 }
 
 // Describes a network interface.
@@ -951,6 +1026,8 @@ type NetworkInterface struct {
 
 	// The subnet identifier.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of node configurations.
@@ -967,6 +1044,8 @@ type NodeConfigurationOption struct {
 
 	// The number of nodes.
 	NumberOfNodes int32
+
+	noSmithyDocumentSerde
 }
 
 // A set of elements to filter the returned node configurations.
@@ -985,6 +1064,8 @@ type NodeConfigurationOptionsFilter struct {
 	// EstimatedDiskUtilizationPercent, then values can range from 0 to 100. For
 	// example, filter NumberOfNodes (name) GT (operator) 3 (values).
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an orderable cluster option.
@@ -1001,6 +1082,8 @@ type OrderableClusterOption struct {
 
 	// The node type for the orderable cluster.
 	NodeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a parameter in a cluster parameter group.
@@ -1039,6 +1122,8 @@ type Parameter struct {
 
 	// The source of the parameter value, such as "engine-default" or "user".
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a partner integration.
@@ -1062,6 +1147,8 @@ type PartnerIntegrationInfo struct {
 	// The date (UTC) that the partner integration status was last updated by the
 	// partner.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes a pause cluster operation. For example, a scheduled action to run the
@@ -1072,6 +1159,8 @@ type PauseClusterMessage struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes cluster attributes that are in a pending state. A change to one or
@@ -1117,6 +1206,8 @@ type PendingModifiedValues struct {
 	// The pending or in-progress change of the ability to connect to the cluster from
 	// the public network.
 	PubliclyAccessible *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a recurring charge.
@@ -1128,6 +1219,8 @@ type RecurringCharge struct {
 
 	// The frequency at which the recurring charge amount is applied.
 	RecurringChargeFrequency *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a reserved node. You can call the DescribeReservedNodeOfferings API to
@@ -1189,6 +1282,8 @@ type ReservedNode struct {
 
 	// The hourly rate Amazon Redshift charges you for this reserved node.
 	UsagePrice float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a reserved node offering.
@@ -1225,6 +1320,8 @@ type ReservedNodeOffering struct {
 	// The rate you are charged for each hour the cluster that is using the offering is
 	// running.
 	UsagePrice float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resize cluster operation. For example, a scheduled action to run the
@@ -1251,6 +1348,8 @@ type ResizeClusterMessage struct {
 	// The new number of nodes for the cluster. If not specified, the cluster's current
 	// number of nodes is used.
 	NumberOfNodes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resize operation.
@@ -1261,6 +1360,8 @@ type ResizeInfo struct {
 
 	// Returns the value ClassicResize.
 	ResizeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of a cluster restore action. Returns null if the cluster
@@ -1293,6 +1394,8 @@ type RestoreStatus struct {
 	// The status of the restore action. Returns starting, restoring, completed, or
 	// failed.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a resume cluster operation. For example, a scheduled action to run the
@@ -1303,6 +1406,8 @@ type ResumeClusterMessage struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a RevisionTarget.
@@ -1318,6 +1423,8 @@ type RevisionTarget struct {
 	// A string that describes the changes and features that will be applied to the
 	// cluster when it is updated to the corresponding ClusterDbRevision.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a scheduled action. You can use a scheduled action to trigger some
@@ -1368,6 +1475,8 @@ type ScheduledAction struct {
 	// A JSON format string of the Amazon Redshift API operation with input parameters.
 	// "{\"ResizeCluster\":{\"NodeType\":\"ds2.8xlarge\",\"ClusterIdentifier\":\"my-test-cluster\",\"NumberOfNodes\":3}}".
 	TargetAction *ScheduledActionType
+
+	noSmithyDocumentSerde
 }
 
 // A set of elements to filter the returned scheduled actions.
@@ -1383,6 +1492,8 @@ type ScheduledActionFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The action type that specifies an Amazon Redshift API operation that is
@@ -1397,6 +1508,8 @@ type ScheduledActionType struct {
 
 	// An action that runs a ResumeCluster API operation.
 	ResumeCluster *ResumeClusterMessage
+
+	noSmithyDocumentSerde
 }
 
 // Describes a snapshot.
@@ -1534,6 +1647,8 @@ type Snapshot struct {
 	// The VPC identifier of the cluster if the snapshot is from a cluster in a VPC.
 	// Otherwise, this field is not in the output.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // The snapshot copy grant that grants Amazon Redshift permission to encrypt copied
@@ -1553,6 +1668,8 @@ type SnapshotCopyGrant struct {
 
 	// A list of tag instances.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes the errors returned by a snapshot.
@@ -1569,6 +1686,8 @@ type SnapshotErrorMessage struct {
 
 	// A unique identifier for the snapshot returning the error.
 	SnapshotIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a snapshot schedule. You can set a regular interval for creating
@@ -1596,6 +1715,8 @@ type SnapshotSchedule struct {
 
 	// An optional set of tags describing the schedule.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a sorting entity
@@ -1608,6 +1729,8 @@ type SnapshotSortingEntity struct {
 
 	// The order for listing the attributes.
 	SortOrder SortByOrder
+
+	noSmithyDocumentSerde
 }
 
 // Describes a subnet.
@@ -1621,6 +1744,8 @@ type Subnet struct {
 
 	// The status of the subnet.
 	SubnetStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the operations that are allowed on a maintenance track.
@@ -1628,6 +1753,8 @@ type SupportedOperation struct {
 
 	// A list of the supported operations.
 	OperationName *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of supported platforms for orderable clusters.
@@ -1635,6 +1762,8 @@ type SupportedPlatform struct {
 
 	//
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of a RestoreTableFromClusterSnapshot operation.
@@ -1685,6 +1814,8 @@ type TableRestoreStatus struct {
 
 	// The total amount of data to restore to the new table, in megabytes (MB).
 	TotalDataInMegaBytes *int64
+
+	noSmithyDocumentSerde
 }
 
 // A tag consisting of a name/value pair for a resource.
@@ -1695,6 +1826,8 @@ type Tag struct {
 
 	// The value for the resource tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A tag and its associated resource.
@@ -1736,6 +1869,8 @@ type TaggedResource struct {
 
 	// The tag for the resource.
 	Tag *Tag
+
+	noSmithyDocumentSerde
 }
 
 // A maintenance track that you can switch the current track to.
@@ -1749,6 +1884,8 @@ type UpdateTarget struct {
 
 	// A list of operations supported by the maintenance track.
 	SupportedOperations []SupportedOperation
+
+	noSmithyDocumentSerde
 }
 
 // Describes a usage limit object for a cluster.
@@ -1789,6 +1926,8 @@ type UsageLimit struct {
 
 	// The identifier of the usage limit.
 	UsageLimitId *string
+
+	noSmithyDocumentSerde
 }
 
 // The connection endpoint for connecting to an Amazon Redshift cluster through the
@@ -1805,6 +1944,8 @@ type VpcEndpoint struct {
 
 	// The VPC identifier that the endpoint is associated.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the members of a VPC security group.
@@ -1815,4 +1956,8 @@ type VpcSecurityGroupMembership struct {
 
 	// The identifier of the VPC security group.
 	VpcSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

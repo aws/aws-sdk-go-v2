@@ -10,6 +10,8 @@ import (
 // The request includes one or more parameters that violate validation rules.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -27,6 +29,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The caller isn't authorized to make the request. Check permissions.
 type ForbiddenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -44,6 +48,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // An internal error occurred while processing the request. Try again later.
 type InternalServerErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -61,6 +67,8 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // The request uses an HTTP method that isn't allowed for the specified resource.
 type MethodNotAllowedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MethodNotAllowedException) Error() string {
@@ -78,6 +86,8 @@ func (e *MethodNotAllowedException) ErrorFault() smithy.ErrorFault { return smit
 // One or more of the specified resources don't exist.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -96,6 +106,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // time.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -114,6 +126,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // target resource.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {

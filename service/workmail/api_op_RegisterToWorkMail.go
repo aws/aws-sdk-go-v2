@@ -50,11 +50,15 @@ type RegisterToWorkMailInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterToWorkMailOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterToWorkMailMiddlewares(stack *middleware.Stack, options Options) (err error) {

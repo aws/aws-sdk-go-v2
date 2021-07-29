@@ -50,11 +50,15 @@ type DeleteProvisioningArtifactInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProvisioningArtifactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProvisioningArtifactMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A structure for the ICE server connection data.
 type IceServer struct {
 
@@ -21,4 +25,8 @@ type IceServer struct {
 
 	// A username to login to the ICE server.
 	Username *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

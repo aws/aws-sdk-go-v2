@@ -43,6 +43,8 @@ type GetModelInput struct {
 	// references and returns a flattened model schema or not (false) The default is
 	// false.
 	Flatten bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the data structure of a method's request or response payload. A
@@ -77,6 +79,8 @@ type GetModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

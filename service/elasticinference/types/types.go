@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The details of an Elastic Inference Accelerator type.
 type AcceleratorType struct {
 
@@ -13,6 +17,8 @@ type AcceleratorType struct {
 
 	// The throughput information of the Elastic Inference Accelerator type.
 	ThroughputInfo []KeyValuePair
+
+	noSmithyDocumentSerde
 }
 
 // The offering for an Elastic Inference Accelerator type.
@@ -32,6 +38,8 @@ type AcceleratorTypeOffering struct {
 	// defines that the offering is at the availability zone level, defined by the
 	// availability zone id.
 	LocationType LocationType
+
+	noSmithyDocumentSerde
 }
 
 // The details of an Elastic Inference Accelerator.
@@ -51,6 +59,8 @@ type ElasticInferenceAccelerator struct {
 
 	// The availability zone where the Elastic Inference Accelerator is present.
 	AvailabilityZone *string
+
+	noSmithyDocumentSerde
 }
 
 // The health details of an Elastic Inference Accelerator.
@@ -58,6 +68,8 @@ type ElasticInferenceAcceleratorHealth struct {
 
 	// The health status of the Elastic Inference Accelerator.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter expression for the Elastic Inference Accelerator list.
@@ -70,6 +82,8 @@ type Filter struct {
 
 	// The values for the filter of the Elastic Inference Accelerator list.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A throughput entry for an Elastic Inference Accelerator type.
@@ -82,6 +96,8 @@ type KeyValuePair struct {
 
 	// The throughput value of the Elastic Inference Accelerator type.
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 // The memory information of an Elastic Inference Accelerator type.
@@ -89,4 +105,8 @@ type MemoryInfo struct {
 
 	// The size in mebibytes of the Elastic Inference Accelerator type.
 	SizeInMiB int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

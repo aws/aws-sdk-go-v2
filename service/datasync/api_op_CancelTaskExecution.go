@@ -40,11 +40,15 @@ type CancelTaskExecutionInput struct {
 	//
 	// This member is required.
 	TaskExecutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelTaskExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type GetSqlInjectionMatchSetInput struct {
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a GetSqlInjectionMatchSet request.
@@ -64,6 +66,8 @@ type GetSqlInjectionMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

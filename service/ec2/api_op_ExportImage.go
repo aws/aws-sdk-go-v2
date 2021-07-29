@@ -69,6 +69,8 @@ type ExportImageInput struct {
 
 	// The tags to apply to the export image task during creation.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type ExportImageOutput struct {
@@ -107,6 +109,8 @@ type ExportImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

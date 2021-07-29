@@ -47,6 +47,8 @@ type UpdateBackendAPIInput struct {
 
 	// Defines the resource configuration for the data model in your Amplify project.
 	ResourceConfig *types.BackendAPIResourceConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBackendAPIOutput struct {
@@ -71,6 +73,8 @@ type UpdateBackendAPIOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {

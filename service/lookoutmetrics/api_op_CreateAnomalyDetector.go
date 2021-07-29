@@ -49,6 +49,8 @@ type CreateAnomalyDetectorInput struct {
 	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html) to
 	// apply to the anomaly detector.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAnomalyDetectorOutput struct {
@@ -58,6 +60,8 @@ type CreateAnomalyDetectorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

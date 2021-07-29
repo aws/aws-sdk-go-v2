@@ -52,11 +52,15 @@ type AdminSetUserPasswordInput struct {
 
 	// True if the password is permanent, False if it is temporary.
 	Permanent bool
+
+	noSmithyDocumentSerde
 }
 
 type AdminSetUserPasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminSetUserPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

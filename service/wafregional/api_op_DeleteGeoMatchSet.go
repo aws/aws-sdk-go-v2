@@ -57,6 +57,8 @@ type DeleteGeoMatchSetInput struct {
 	//
 	// This member is required.
 	GeoMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGeoMatchSetOutput struct {
@@ -68,6 +70,8 @@ type DeleteGeoMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

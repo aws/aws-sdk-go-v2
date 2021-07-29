@@ -41,11 +41,15 @@ type UpdateOrganizationConfigurationInput struct {
 
 	// Describes which data sources will be updated.
 	DataSources *types.OrganizationDataSourceConfigurations
+
+	noSmithyDocumentSerde
 }
 
 type UpdateOrganizationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateOrganizationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

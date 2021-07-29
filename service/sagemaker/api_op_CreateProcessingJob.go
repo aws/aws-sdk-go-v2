@@ -88,6 +88,8 @@ type CreateProcessingJobInput struct {
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateProcessingJobOutput struct {
@@ -99,6 +101,8 @@ type CreateProcessingJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

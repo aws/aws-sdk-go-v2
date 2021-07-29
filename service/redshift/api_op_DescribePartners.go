@@ -47,6 +47,8 @@ type DescribePartnersInput struct {
 	// The name of the partner that is being described. If partner name is not
 	// specified, then all partner integrations are described.
 	PartnerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePartnersOutput struct {
@@ -56,6 +58,8 @@ type DescribePartnersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePartnersMiddlewares(stack *middleware.Stack, options Options) (err error) {

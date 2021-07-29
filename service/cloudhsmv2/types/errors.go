@@ -11,6 +11,8 @@ import (
 // perform the requested operation.
 type CloudHsmAccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmAccessDeniedException) Error() string {
@@ -29,6 +31,8 @@ func (e *CloudHsmAccessDeniedException) ErrorFault() smithy.ErrorFault { return 
 // request can be retried.
 type CloudHsmInternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmInternalFailureException) Error() string {
@@ -48,6 +52,8 @@ func (e *CloudHsmInternalFailureException) ErrorFault() smithy.ErrorFault { retu
 // The request was rejected because it is not a valid request.
 type CloudHsmInvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmInvalidRequestException) Error() string {
@@ -67,6 +73,8 @@ func (e *CloudHsmInvalidRequestException) ErrorFault() smithy.ErrorFault { retur
 // The request was rejected because it refers to a resource that cannot be found.
 type CloudHsmResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmResourceNotFoundException) Error() string {
@@ -86,6 +94,8 @@ func (e *CloudHsmResourceNotFoundException) ErrorFault() smithy.ErrorFault { ret
 // The request was rejected because an error occurred.
 type CloudHsmServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmServiceException) Error() string {
@@ -104,6 +114,8 @@ func (e *CloudHsmServiceException) ErrorFault() smithy.ErrorFault { return smith
 // in all applicable policies, and then retry the request.
 type CloudHsmTagException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CloudHsmTagException) Error() string {

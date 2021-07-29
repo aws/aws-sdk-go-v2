@@ -61,6 +61,8 @@ type ListChannelMessagesInput struct {
 	// The order in which you want messages sorted. Default is Descending, based on
 	// time created.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListChannelMessagesOutput struct {
@@ -77,6 +79,8 @@ type ListChannelMessagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

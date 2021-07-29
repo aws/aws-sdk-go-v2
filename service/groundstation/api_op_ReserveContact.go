@@ -57,6 +57,8 @@ type ReserveContactInput struct {
 
 	// Tags assigned to a contact.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -67,6 +69,8 @@ type ReserveContactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReserveContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

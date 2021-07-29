@@ -29,6 +29,8 @@ type NestedXmlMapsInput struct {
 	FlatNestedMap map[string]map[string]types.FooEnum
 
 	NestedMap map[string]map[string]types.FooEnum
+
+	noSmithyDocumentSerde
 }
 
 type NestedXmlMapsOutput struct {
@@ -38,6 +40,8 @@ type NestedXmlMapsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationNestedXmlMapsMiddlewares(stack *middleware.Stack, options Options) (err error) {

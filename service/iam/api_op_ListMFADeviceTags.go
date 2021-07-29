@@ -56,6 +56,8 @@ type ListMFADeviceTagsInput struct {
 	// IsTruncated response element returns true, and Marker contains a value to
 	// include in the subsequent call that tells the service where to continue from.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListMFADeviceTagsOutput struct {
@@ -81,6 +83,8 @@ type ListMFADeviceTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMFADeviceTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

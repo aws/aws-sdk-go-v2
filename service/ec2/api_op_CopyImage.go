@@ -126,6 +126,8 @@ type CopyImageInput struct {
 	// the action can appear to complete, but eventually fails. The specified CMK must
 	// exist in the destination Region. Amazon EBS does not support asymmetric CMKs.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of CopyImage.
@@ -136,6 +138,8 @@ type CopyImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

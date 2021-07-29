@@ -37,11 +37,15 @@ type DeleteConnectorProfileInput struct {
 	// Indicates whether Amazon AppFlow should delete the profile, even if it is
 	// currently in use in one or more flows.
 	ForceDelete bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConnectorProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConnectorProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

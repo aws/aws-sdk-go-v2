@@ -58,6 +58,8 @@ type DescribeMatchmakingRuleSetsInput struct {
 	// token that is returned with a previous call to this operation. To start at the
 	// beginning of the result set, do not specify a value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -75,6 +77,8 @@ type DescribeMatchmakingRuleSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMatchmakingRuleSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type PutFunctionConcurrencyInput struct {
 	//
 	// This member is required.
 	ReservedConcurrentExecutions *int32
+
+	noSmithyDocumentSerde
 }
 
 type PutFunctionConcurrencyOutput struct {
@@ -70,6 +72,8 @@ type PutFunctionConcurrencyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutFunctionConcurrencyMiddlewares(stack *middleware.Stack, options Options) (err error) {

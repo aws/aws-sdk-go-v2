@@ -44,11 +44,15 @@ type UpdatePullRequestApprovalStateInput struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePullRequestApprovalStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePullRequestApprovalStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type DeleteContactMethodInput struct {
 	//
 	// This member is required.
 	Protocol types.ContactProtocol
+
+	noSmithyDocumentSerde
 }
 
 type DeleteContactMethodOutput struct {
@@ -52,6 +54,8 @@ type DeleteContactMethodOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteContactMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {

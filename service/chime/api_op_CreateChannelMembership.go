@@ -75,6 +75,8 @@ type CreateChannelMembershipInput struct {
 
 	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateChannelMembershipOutput struct {
@@ -87,6 +89,8 @@ type CreateChannelMembershipOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

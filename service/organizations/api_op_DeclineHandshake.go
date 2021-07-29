@@ -42,6 +42,8 @@ type DeclineHandshakeInput struct {
 	//
 	// This member is required.
 	HandshakeId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeclineHandshakeOutput struct {
@@ -52,6 +54,8 @@ type DeclineHandshakeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeclineHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,11 +36,15 @@ type UpdateThingRuntimeConfigurationInput struct {
 
 	// Configuration for telemetry service.
 	TelemetryConfiguration *types.TelemetryConfigurationUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateThingRuntimeConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThingRuntimeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

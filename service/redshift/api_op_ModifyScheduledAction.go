@@ -61,6 +61,8 @@ type ModifyScheduledActionInput struct {
 	// A modified JSON format of the scheduled action. For more information about this
 	// parameter, see ScheduledAction.
 	TargetAction *types.ScheduledActionType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a scheduled action. You can use a scheduled action to trigger some
@@ -114,6 +116,8 @@ type ModifyScheduledActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

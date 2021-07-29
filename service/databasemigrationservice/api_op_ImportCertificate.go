@@ -46,6 +46,8 @@ type ImportCertificateInput struct {
 
 	// The tags associated with the certificate.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type ImportCertificateOutput struct {
@@ -55,6 +57,8 @@ type ImportCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -103,6 +103,8 @@ type CreateConstraintInput struct {
 
 	// The description of the constraint.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateConstraintOutput struct {
@@ -118,6 +120,8 @@ type CreateConstraintOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConstraintMiddlewares(stack *middleware.Stack, options Options) (err error) {

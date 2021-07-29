@@ -34,6 +34,8 @@ type DescribeObjectInput struct {
 	//
 	// This member is required.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeObjectOutput struct {
@@ -59,6 +61,8 @@ type DescribeObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

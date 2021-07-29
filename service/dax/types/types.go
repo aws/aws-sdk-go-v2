@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -76,6 +77,8 @@ type Cluster struct {
 
 	// The total number of nodes in the cluster.
 	TotalNodes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the information required for client programs to connect to the
@@ -91,6 +94,8 @@ type Endpoint struct {
 	// The URL that applications should use to connect to the endpoint. The default
 	// ports are 8111 for the "dax" protocol and 9111 for the "daxs" protocol.
 	URL *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single occurrence of something interesting within the system. Some
@@ -111,6 +116,8 @@ type Event struct {
 	// Specifies the origin of this event - a cluster, a parameter group, a node ID,
 	// etc.
 	SourceType SourceType
+
+	noSmithyDocumentSerde
 }
 
 // Represents an individual node within a DAX cluster.
@@ -137,6 +144,8 @@ type Node struct {
 	// The status of the parameter group associated with this node. For example,
 	// in-sync.
 	ParameterGroupStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a parameter value that is applicable to a particular node type.
@@ -147,6 +156,8 @@ type NodeTypeSpecificValue struct {
 
 	// The parameter value for this node type.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a notification topic and its status. Notification topics are used for
@@ -161,6 +172,8 @@ type NotificationConfiguration struct {
 	// will be sent to the topic. A value of “inactive” means that notifications will
 	// not be sent to the topic.
 	TopicStatus *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an individual setting that controls some aspect of DAX behavior.
@@ -199,6 +212,8 @@ type Parameter struct {
 	// How the parameter is defined. For example, system denotes a system-defined
 	// parameter.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // A named set of parameters that are applied to all of the nodes in a DAX cluster.
@@ -209,6 +224,8 @@ type ParameterGroup struct {
 
 	// The name of the parameter group.
 	ParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of a parameter group.
@@ -222,6 +239,8 @@ type ParameterGroupStatus struct {
 
 	// The name of the parameter group.
 	ParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // An individual DAX parameter.
@@ -232,6 +251,8 @@ type ParameterNameValue struct {
 
 	// The value of the parameter.
 	ParameterValue *string
+
+	noSmithyDocumentSerde
 }
 
 // An individual VPC security group and its status.
@@ -242,6 +263,8 @@ type SecurityGroupMembership struct {
 
 	// The status of this security group.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The description of the server-side encryption status on the specified DAX
@@ -261,6 +284,8 @@ type SSEDescription struct {
 	// * DISABLED - Server-side
 	// encryption is disabled.
 	Status SSEStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the settings used to enable server-side encryption.
@@ -271,6 +296,8 @@ type SSESpecification struct {
 	//
 	// This member is required.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the subnet associated with a DAX cluster. This parameter refers to
@@ -282,6 +309,8 @@ type Subnet struct {
 
 	// The system-assigned identifier for the subnet.
 	SubnetIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of one of the following actions:
@@ -303,6 +332,8 @@ type SubnetGroup struct {
 
 	// The Amazon Virtual Private Cloud identifier (VPC ID) of the subnet group.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of a tag. Every tag is a key-value pair. You can add up to 50 tags
@@ -319,4 +350,8 @@ type Tag struct {
 
 	// The value of the tag. Tag values are case-sensitive and can be null.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

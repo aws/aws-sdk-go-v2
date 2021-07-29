@@ -72,6 +72,8 @@ type CreateAccountAssignmentInput struct {
 	//
 	// This member is required.
 	TargetType types.TargetType
+
+	noSmithyDocumentSerde
 }
 
 type CreateAccountAssignmentOutput struct {
@@ -81,6 +83,8 @@ type CreateAccountAssignmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAccountAssignmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

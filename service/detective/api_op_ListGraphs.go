@@ -41,6 +41,8 @@ type ListGraphsInput struct {
 	// returned with the previous set of results. The initial request does not include
 	// a pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGraphsOutput struct {
@@ -54,6 +56,8 @@ type ListGraphsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGraphsMiddlewares(stack *middleware.Stack, options Options) (err error) {

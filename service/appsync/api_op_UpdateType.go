@@ -46,6 +46,8 @@ type UpdateTypeInput struct {
 
 	// The new definition.
 	Definition *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTypeOutput struct {
@@ -55,6 +57,8 @@ type UpdateTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

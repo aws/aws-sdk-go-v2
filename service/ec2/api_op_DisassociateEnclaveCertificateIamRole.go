@@ -44,6 +44,8 @@ type DisassociateEnclaveCertificateIamRoleInput struct {
 
 	// The ARN of the IAM role to disassociate.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateEnclaveCertificateIamRoleOutput struct {
@@ -53,6 +55,8 @@ type DisassociateEnclaveCertificateIamRoleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateEnclaveCertificateIamRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

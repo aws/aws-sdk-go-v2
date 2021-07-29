@@ -72,11 +72,15 @@ type CreateDataCatalogInput struct {
 
 	// A list of comma separated tags to add to the data catalog that is created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDataCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDataCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {

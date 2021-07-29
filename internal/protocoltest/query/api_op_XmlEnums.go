@@ -27,6 +27,7 @@ func (c *Client) XmlEnums(ctx context.Context, params *XmlEnumsInput, optFns ...
 }
 
 type XmlEnumsInput struct {
+	noSmithyDocumentSerde
 }
 
 type XmlEnumsOutput struct {
@@ -44,6 +45,8 @@ type XmlEnumsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlEnumsMiddlewares(stack *middleware.Stack, options Options) (err error) {

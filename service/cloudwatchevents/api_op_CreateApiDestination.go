@@ -58,6 +58,8 @@ type CreateApiDestinationInput struct {
 	// The maximum number of requests per second to send to the HTTP invocation
 	// endpoint.
 	InvocationRateLimitPerSecond *int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateApiDestinationOutput struct {
@@ -76,6 +78,8 @@ type CreateApiDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

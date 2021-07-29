@@ -55,6 +55,8 @@ type GetEBSVolumeRecommendationsInput struct {
 	// The Amazon Resource Name (ARN) of the volumes for which to return
 	// recommendations.
 	VolumeArns []string
+
+	noSmithyDocumentSerde
 }
 
 type GetEBSVolumeRecommendationsOutput struct {
@@ -72,6 +74,8 @@ type GetEBSVolumeRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEBSVolumeRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

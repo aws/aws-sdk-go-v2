@@ -43,6 +43,8 @@ type GetRepositoryPermissionsPolicyInput struct {
 	// The 12-digit account number of the AWS account that owns the domain. It does not
 	// include dashes or spaces.
 	DomainOwner *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRepositoryPermissionsPolicyOutput struct {
@@ -52,6 +54,8 @@ type GetRepositoryPermissionsPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

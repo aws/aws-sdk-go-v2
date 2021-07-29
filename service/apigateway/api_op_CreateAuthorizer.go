@@ -115,6 +115,8 @@ type CreateAuthorizerInput struct {
 	// arn:aws:cognito-idp:{region}:{account_id}:userpool/{user_pool_id}. For a TOKEN
 	// or REQUEST authorizer, this is not defined.
 	ProviderARNs []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an authorization layer for methods. If enabled on a method, API
@@ -206,6 +208,8 @@ type CreateAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

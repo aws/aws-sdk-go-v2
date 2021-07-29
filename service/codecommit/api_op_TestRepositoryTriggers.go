@@ -41,6 +41,8 @@ type TestRepositoryTriggersInput struct {
 	//
 	// This member is required.
 	Triggers []types.RepositoryTrigger
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a test repository triggers operation.
@@ -56,6 +58,8 @@ type TestRepositoryTriggersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestRepositoryTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {

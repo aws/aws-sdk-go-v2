@@ -54,6 +54,8 @@ type DescribeTrafficMirrorFiltersInput struct {
 
 	// The ID of the Traffic Mirror filter.
 	TrafficMirrorFilterIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTrafficMirrorFiltersOutput struct {
@@ -67,6 +69,8 @@ type DescribeTrafficMirrorFiltersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrafficMirrorFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,6 +32,8 @@ type GetSolutionMetricsInput struct {
 	//
 	// This member is required.
 	SolutionVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSolutionMetricsOutput struct {
@@ -44,6 +46,8 @@ type GetSolutionMetricsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSolutionMetricsMiddlewares(stack *middleware.Stack, options Options) (err error) {

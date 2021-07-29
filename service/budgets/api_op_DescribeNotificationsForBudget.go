@@ -49,6 +49,8 @@ type DescribeNotificationsForBudgetInput struct {
 	// The pagination token that you include in your request to indicate the next set
 	// of results that you want to retrieve.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Response of GetNotificationsForBudget
@@ -63,6 +65,8 @@ type DescribeNotificationsForBudgetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNotificationsForBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {

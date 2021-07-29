@@ -50,11 +50,15 @@ type UpdatePermissionSetInput struct {
 	// The length of time that the application user sessions are valid for in the
 	// ISO-8601 standard.
 	SessionDuration *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

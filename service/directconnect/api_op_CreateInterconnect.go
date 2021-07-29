@@ -69,6 +69,8 @@ type CreateInterconnectInput struct {
 
 	// The tags to associate with the interconnect.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about an interconnect.
@@ -146,6 +148,8 @@ type CreateInterconnectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInterconnectMiddlewares(stack *middleware.Stack, options Options) (err error) {

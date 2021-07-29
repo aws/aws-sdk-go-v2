@@ -45,6 +45,8 @@ type BatchCreateRoomMembershipInput struct {
 	//
 	// This member is required.
 	RoomId *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchCreateRoomMembershipOutput struct {
@@ -55,6 +57,8 @@ type BatchCreateRoomMembershipOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchCreateRoomMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

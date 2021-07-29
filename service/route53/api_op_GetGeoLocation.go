@@ -73,6 +73,8 @@ type GetGeoLocationInput struct {
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListGeoLocations.html)
 	// API.
 	SubdivisionCode *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the specified
@@ -87,6 +89,8 @@ type GetGeoLocationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGeoLocationMiddlewares(stack *middleware.Stack, options Options) (err error) {

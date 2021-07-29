@@ -83,7 +83,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             OperationShape operation,
             GoStackStepMiddlewareGenerator generator
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.SMITHY);
         writer.addUseImports(SmithyGoDependency.SMITHY_XML);
 
@@ -126,7 +126,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             MemberShape memberShape,
             String operand
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Model model = context.getModel();
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
@@ -189,7 +189,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
 
         writer.write("output := &$T{}", symbol);
@@ -247,7 +247,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             GoStackStepMiddlewareGenerator generator
     ) {
         Model model = context.getModel();
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Shape targetShape = ProtocolUtils.expectOutput(model, operation);
         String operand = "output";
 
@@ -286,7 +286,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
                 .collect(Collectors.toSet());
 
         Shape outputShape = ProtocolUtils.expectOutput(model, operation);
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         if (documentBindings.size() != 0) {
             outputShape.accept(new XmlShapeDeserVisitor(context, documentBindings::contains));
@@ -319,7 +319,7 @@ abstract class RestXmlProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape shape,
             Predicate<MemberShape> filterMemberShapes
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol shapeSymbol = symbolProvider.toSymbol(shape);
         String funcName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), getProtocolName());

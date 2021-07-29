@@ -37,6 +37,8 @@ type GetVpcLinksInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // The collection of VPC links under the caller's account in a region. Getting
@@ -54,6 +56,8 @@ type GetVpcLinksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetVpcLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {

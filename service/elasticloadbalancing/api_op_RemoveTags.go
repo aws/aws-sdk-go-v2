@@ -40,12 +40,16 @@ type RemoveTagsInput struct {
 	//
 	// This member is required.
 	Tags []types.TagKeyOnly
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of RemoveTags.
 type RemoveTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

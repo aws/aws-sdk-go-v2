@@ -48,6 +48,8 @@ type UpdateMethodInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents a client-facing interface by which the client calls the API to access
@@ -283,6 +285,8 @@ type UpdateMethodOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMethodMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -68,6 +68,8 @@ type CreateSqlInjectionMatchSetInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a CreateSqlInjectionMatchSet request.
@@ -83,6 +85,8 @@ type CreateSqlInjectionMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

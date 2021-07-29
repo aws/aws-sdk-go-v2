@@ -69,6 +69,8 @@ type UpdateProductInput struct {
 
 	// The updated support URL for the product.
 	SupportUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProductOutput struct {
@@ -81,6 +83,8 @@ type UpdateProductOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

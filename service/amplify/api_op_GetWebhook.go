@@ -34,6 +34,8 @@ type GetWebhookInput struct {
 	//
 	// This member is required.
 	WebhookId *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the get webhook request.
@@ -46,6 +48,8 @@ type GetWebhookOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {

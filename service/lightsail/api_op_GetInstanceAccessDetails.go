@@ -40,6 +40,8 @@ type GetInstanceAccessDetailsInput struct {
 
 	// The protocol to use to connect to your instance. Defaults to ssh.
 	Protocol types.InstanceAccessProtocol
+
+	noSmithyDocumentSerde
 }
 
 type GetInstanceAccessDetailsOutput struct {
@@ -50,6 +52,8 @@ type GetInstanceAccessDetailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInstanceAccessDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

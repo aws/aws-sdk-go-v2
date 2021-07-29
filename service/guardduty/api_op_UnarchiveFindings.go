@@ -37,11 +37,15 @@ type UnarchiveFindingsInput struct {
 	//
 	// This member is required.
 	FindingIds []string
+
+	noSmithyDocumentSerde
 }
 
 type UnarchiveFindingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnarchiveFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

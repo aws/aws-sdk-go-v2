@@ -59,6 +59,8 @@ type DescribeAlarmsForMetricInput struct {
 
 	// The unit for the metric.
 	Unit types.StandardUnit
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAlarmsForMetricOutput struct {
@@ -68,6 +70,8 @@ type DescribeAlarmsForMetricOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAlarmsForMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {

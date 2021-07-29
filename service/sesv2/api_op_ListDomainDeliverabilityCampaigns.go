@@ -64,6 +64,8 @@ type ListDomainDeliverabilityCampaignsInput struct {
 	// than the number that you specify in this parameter, the response includes a
 	// NextToken element, which you can use to obtain additional results.
 	PageSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // An array of objects that provide deliverability data for all the campaigns that
@@ -85,6 +87,8 @@ type ListDomainDeliverabilityCampaignsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainDeliverabilityCampaignsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type ListAddonsInput struct {
 	// used only to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAddonsOutput struct {
@@ -67,6 +69,8 @@ type ListAddonsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAddonsMiddlewares(stack *middleware.Stack, options Options) (err error) {

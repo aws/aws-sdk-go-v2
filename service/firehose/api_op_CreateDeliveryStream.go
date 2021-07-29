@@ -143,6 +143,8 @@ type CreateDeliveryStreamInput struct {
 	// in the AWS Billing and Cost Management User Guide. You can specify up to 50 tags
 	// when creating a delivery stream.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeliveryStreamOutput struct {
@@ -152,6 +154,8 @@ type CreateDeliveryStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

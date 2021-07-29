@@ -69,6 +69,8 @@ type GetTraceSummariesInput struct {
 	// A parameter to indicate whether to query trace summaries by TraceId or Event
 	// time.
 	TimeRangeType types.TimeRangeType
+
+	noSmithyDocumentSerde
 }
 
 type GetTraceSummariesOutput struct {
@@ -91,6 +93,8 @@ type GetTraceSummariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTraceSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

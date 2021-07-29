@@ -11,6 +11,8 @@ import (
 // Experiment or Artifact.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -28,6 +30,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // Resource being accessed is in use.
 type ResourceInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUse) Error() string {
@@ -46,6 +50,8 @@ func (e *ResourceInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // have too many training jobs created.
 type ResourceLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceeded) Error() string {
@@ -63,6 +69,8 @@ func (e *ResourceLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.F
 // Resource being access is not found.
 type ResourceNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFound) Error() string {

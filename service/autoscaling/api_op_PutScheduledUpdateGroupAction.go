@@ -86,11 +86,15 @@ type PutScheduledUpdateGroupActionInput struct {
 	// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 	// (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string
+
+	noSmithyDocumentSerde
 }
 
 type PutScheduledUpdateGroupActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutScheduledUpdateGroupActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

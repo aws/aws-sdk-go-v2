@@ -33,11 +33,15 @@ type DeleteTopicRuleInput struct {
 	//
 	// This member is required.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTopicRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

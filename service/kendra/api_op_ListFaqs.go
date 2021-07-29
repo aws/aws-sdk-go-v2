@@ -41,6 +41,8 @@ type ListFaqsInput struct {
 	// If the result of the previous request to ListFaqs was truncated, include the
 	// NextToken to fetch the next set of FAQs.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFaqsOutput struct {
@@ -56,6 +58,8 @@ type ListFaqsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFaqsMiddlewares(stack *middleware.Stack, options Options) (err error) {

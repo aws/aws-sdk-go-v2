@@ -66,11 +66,15 @@ type UndeprecateWorkflowTypeInput struct {
 	//
 	// This member is required.
 	WorkflowType *types.WorkflowType
+
+	noSmithyDocumentSerde
 }
 
 type UndeprecateWorkflowTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUndeprecateWorkflowTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

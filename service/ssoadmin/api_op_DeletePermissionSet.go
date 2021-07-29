@@ -39,11 +39,15 @@ type DeletePermissionSetInput struct {
 	//
 	// This member is required.
 	PermissionSetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePermissionSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

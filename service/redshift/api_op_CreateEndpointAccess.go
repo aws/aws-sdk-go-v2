@@ -54,6 +54,8 @@ type CreateEndpointAccessInput struct {
 	// The security group that defines the ports, protocols, and sources for inbound
 	// traffic that you are authorizing into your endpoint.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a Redshift-managed VPC endpoint.
@@ -92,6 +94,8 @@ type CreateEndpointAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

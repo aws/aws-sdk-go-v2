@@ -38,6 +38,8 @@ type ListSchemasInput struct {
 	// A token returned from the previous call to ListSchemas for getting the next set
 	// of schemas (if they exist).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSchemasOutput struct {
@@ -50,6 +52,8 @@ type ListSchemasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type ListDataIngestionJobsInput struct {
 
 	// Indicates the status of the data ingestion job.
 	Status types.IngestionJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListDataIngestionJobsOutput struct {
@@ -57,6 +59,8 @@ type ListDataIngestionJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDataIngestionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

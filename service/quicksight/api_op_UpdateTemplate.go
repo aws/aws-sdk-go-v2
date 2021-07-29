@@ -61,6 +61,8 @@ type UpdateTemplateInput struct {
 	// of the template maintains a description of the version in the VersionDescription
 	// field.
 	VersionDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTemplateOutput struct {
@@ -86,6 +88,8 @@ type UpdateTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type CreateQuickConnectInput struct {
 
 	// One or more tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateQuickConnectOutput struct {
@@ -62,6 +64,8 @@ type CreateQuickConnectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateQuickConnectMiddlewares(stack *middleware.Stack, options Options) (err error) {

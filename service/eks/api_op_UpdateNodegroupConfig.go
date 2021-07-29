@@ -61,6 +61,8 @@ type UpdateNodegroupConfigInput struct {
 
 	// The node group update configuration.
 	UpdateConfig *types.NodegroupUpdateConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateNodegroupConfigOutput struct {
@@ -70,6 +72,8 @@ type UpdateNodegroupConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNodegroupConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

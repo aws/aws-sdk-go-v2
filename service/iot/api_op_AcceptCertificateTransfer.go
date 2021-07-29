@@ -39,11 +39,15 @@ type AcceptCertificateTransferInput struct {
 
 	// Specifies whether the certificate is active.
 	SetAsActive bool
+
+	noSmithyDocumentSerde
 }
 
 type AcceptCertificateTransferOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptCertificateTransferMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type UpdateResourceDataSyncInput struct {
 	//
 	// This member is required.
 	SyncType *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateResourceDataSyncOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {

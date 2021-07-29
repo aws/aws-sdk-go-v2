@@ -10,6 +10,8 @@ import (
 // You already have a DAX cluster with the given identifier.
 type ClusterAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterAlreadyExistsFault) Error() string {
@@ -27,6 +29,8 @@ func (e *ClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smit
 // The requested cluster ID does not refer to an existing DAX cluster.
 type ClusterNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterNotFoundFault) Error() string {
@@ -45,6 +49,8 @@ func (e *ClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // account.
 type ClusterQuotaForCustomerExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterQuotaForCustomerExceededFault) Error() string {
@@ -67,6 +73,8 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 // resize an already-existing cluster).
 type InsufficientClusterCapacityFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientClusterCapacityFault) Error() string {
@@ -86,6 +94,8 @@ func (e *InsufficientClusterCapacityFault) ErrorFault() smithy.ErrorFault { retu
 // The Amazon Resource Name (ARN) supplied in the request is not valid.
 type InvalidARNFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidARNFault) Error() string {
@@ -103,6 +113,8 @@ func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The requested DAX cluster is not in the available state.
 type InvalidClusterStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClusterStateFault) Error() string {
@@ -120,6 +132,8 @@ func (e *InvalidClusterStateFault) ErrorFault() smithy.ErrorFault { return smith
 // Two or more incompatible parameters were specified.
 type InvalidParameterCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterCombinationException) Error() string {
@@ -141,6 +155,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 // One or more parameters in a parameter group are in an invalid state.
 type InvalidParameterGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterGroupStateFault) Error() string {
@@ -160,6 +176,8 @@ func (e *InvalidParameterGroupStateFault) ErrorFault() smithy.ErrorFault { retur
 // The value for a parameter is invalid.
 type InvalidParameterValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -177,6 +195,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // An invalid subnet identifier was specified.
 type InvalidSubnet struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubnet) Error() string {
@@ -194,6 +214,8 @@ func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The VPC network is in an invalid state.
 type InvalidVPCNetworkStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidVPCNetworkStateFault) Error() string {
@@ -211,6 +233,8 @@ func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return sm
 // None of the nodes in the cluster have the given node ID.
 type NodeNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NodeNotFoundFault) Error() string {
@@ -228,6 +252,8 @@ func (e *NodeNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // You have attempted to exceed the maximum number of nodes for a DAX cluster.
 type NodeQuotaForClusterExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NodeQuotaForClusterExceededFault) Error() string {
@@ -247,6 +273,8 @@ func (e *NodeQuotaForClusterExceededFault) ErrorFault() smithy.ErrorFault { retu
 // You have attempted to exceed the maximum number of nodes for your AWS account.
 type NodeQuotaForCustomerExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NodeQuotaForCustomerExceededFault) Error() string {
@@ -266,6 +294,8 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault { ret
 // The specified parameter group already exists.
 type ParameterGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterGroupAlreadyExistsFault) Error() string {
@@ -285,6 +315,8 @@ func (e *ParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { retu
 // The specified parameter group does not exist.
 type ParameterGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterGroupNotFoundFault) Error() string {
@@ -302,6 +334,8 @@ func (e *ParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return sm
 // You have attempted to exceed the maximum number of parameter groups.
 type ParameterGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterGroupQuotaExceededFault) Error() string {
@@ -321,6 +355,8 @@ func (e *ParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { retu
 // The specified service linked role (SLR) was not found.
 type ServiceLinkedRoleNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceLinkedRoleNotFoundFault) Error() string {
@@ -340,6 +376,8 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return
 // options for continuing to create encrypted clusters.
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -357,6 +395,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // The specified subnet group already exists.
 type SubnetGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetGroupAlreadyExistsFault) Error() string {
@@ -374,6 +414,8 @@ func (e *SubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return 
 // The specified subnet group is currently in use.
 type SubnetGroupInUseFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetGroupInUseFault) Error() string {
@@ -391,6 +433,8 @@ func (e *SubnetGroupInUseFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // The requested subnet group name does not refer to an existing subnet group.
 type SubnetGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetGroupNotFoundFault) Error() string {
@@ -409,6 +453,8 @@ func (e *SubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smith
 // subnets in a subnet group.
 type SubnetGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetGroupQuotaExceededFault) Error() string {
@@ -426,6 +472,8 @@ func (e *SubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return 
 // The requested subnet is being used by another subnet group.
 type SubnetInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetInUse) Error() string {
@@ -444,6 +492,8 @@ func (e *SubnetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient
 // subnets in a subnet group.
 type SubnetQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetQuotaExceededFault) Error() string {
@@ -461,6 +511,8 @@ func (e *SubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smith
 // The tag does not exist.
 type TagNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagNotFoundFault) Error() string {
@@ -478,6 +530,8 @@ func (e *TagNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // You have exceeded the maximum number of tags for this DAX cluster.
 type TagQuotaPerResourceExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagQuotaPerResourceExceeded) Error() string {

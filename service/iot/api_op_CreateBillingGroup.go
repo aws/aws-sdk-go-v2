@@ -39,6 +39,8 @@ type CreateBillingGroupInput struct {
 
 	// Metadata which can be used to manage the billing group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateBillingGroupOutput struct {
@@ -54,6 +56,8 @@ type CreateBillingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

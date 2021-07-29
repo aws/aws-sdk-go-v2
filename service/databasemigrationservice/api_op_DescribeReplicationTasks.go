@@ -56,6 +56,8 @@ type DescribeReplicationTasksInput struct {
 	// reduce overhead when setting information is too large. To use this option,
 	// choose true; otherwise, choose false (the default).
 	WithoutSettings *bool
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -71,6 +73,8 @@ type DescribeReplicationTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReplicationTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

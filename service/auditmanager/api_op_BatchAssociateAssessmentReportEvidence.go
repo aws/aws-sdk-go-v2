@@ -44,6 +44,8 @@ type BatchAssociateAssessmentReportEvidenceInput struct {
 	//
 	// This member is required.
 	EvidenceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchAssociateAssessmentReportEvidenceOutput struct {
@@ -56,6 +58,8 @@ type BatchAssociateAssessmentReportEvidenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchAssociateAssessmentReportEvidenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

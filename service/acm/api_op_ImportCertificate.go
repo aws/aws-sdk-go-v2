@@ -116,6 +116,8 @@ type ImportCertificateInput struct {
 	// One or more resource tags to associate with the imported certificate. Note: You
 	// cannot apply tags when reimporting a certificate.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type ImportCertificateOutput struct {
@@ -127,6 +129,8 @@ type ImportCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

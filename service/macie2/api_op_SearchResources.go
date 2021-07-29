@@ -45,6 +45,8 @@ type SearchResourcesInput struct {
 
 	// The criteria to use to sort the results.
 	SortCriteria *types.SearchResourcesSortCriteria
+
+	noSmithyDocumentSerde
 }
 
 type SearchResourcesOutput struct {
@@ -59,6 +61,8 @@ type SearchResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

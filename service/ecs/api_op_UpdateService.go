@@ -218,6 +218,8 @@ type UpdateServiceInput struct {
 	// a task with the new version of the task definition and then stops an old task
 	// after the new version is running.
 	TaskDefinition *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceOutput struct {
@@ -227,6 +229,8 @@ type UpdateServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

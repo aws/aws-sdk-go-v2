@@ -32,11 +32,15 @@ type StopStreamProcessorInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type StopStreamProcessorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopStreamProcessorMiddlewares(stack *middleware.Stack, options Options) (err error) {

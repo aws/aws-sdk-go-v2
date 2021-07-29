@@ -64,6 +64,8 @@ type ListCodeRepositoriesInput struct {
 
 	// The sort order for results. The default is Ascending.
 	SortOrder types.CodeRepositorySortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListCodeRepositoriesOutput struct {
@@ -94,6 +96,8 @@ type ListCodeRepositoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCodeRepositoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

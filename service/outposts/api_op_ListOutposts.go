@@ -57,6 +57,8 @@ type ListOutpostsInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListOutpostsOutput struct {
@@ -69,6 +71,8 @@ type ListOutpostsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOutpostsMiddlewares(stack *middleware.Stack, options Options) (err error) {

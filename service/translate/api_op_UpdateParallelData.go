@@ -50,6 +50,8 @@ type UpdateParallelDataInput struct {
 
 	// A custom description for the parallel data resource in Amazon Translate.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateParallelDataOutput struct {
@@ -70,6 +72,8 @@ type UpdateParallelDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

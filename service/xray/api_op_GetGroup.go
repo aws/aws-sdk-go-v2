@@ -34,6 +34,8 @@ type GetGroupInput struct {
 
 	// The case-sensitive name of the group.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGroupOutput struct {
@@ -45,6 +47,8 @@ type GetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

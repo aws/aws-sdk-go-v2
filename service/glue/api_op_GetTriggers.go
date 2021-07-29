@@ -39,6 +39,8 @@ type GetTriggersInput struct {
 
 	// A continuation token, if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTriggersOutput struct {
@@ -51,6 +53,8 @@ type GetTriggersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,11 +35,15 @@ type UpdateRegionSettingsInput struct {
 
 	// Updates the list of services along with the opt-in preferences for the Region.
 	ResourceTypeOptInPreference map[string]bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRegionSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRegionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

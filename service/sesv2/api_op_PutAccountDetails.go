@@ -63,6 +63,8 @@ type PutAccountDetailsInput struct {
 	// can send email to any address. The sending quota and maximum sending rate for
 	// your account vary based on your specific use case.
 	ProductionAccessEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -70,6 +72,8 @@ type PutAccountDetailsInput struct {
 type PutAccountDetailsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccountDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type DescribeTrustedAdvisorCheckSummariesInput struct {
 	//
 	// This member is required.
 	CheckIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The summaries of the Trusted Advisor checks returned by the
@@ -58,6 +60,8 @@ type DescribeTrustedAdvisorCheckSummariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrustedAdvisorCheckSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

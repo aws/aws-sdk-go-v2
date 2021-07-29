@@ -78,6 +78,8 @@ type RegisterTargetWithMaintenanceWindowInput struct {
 	// User-provided value that will be included in any Amazon CloudWatch Events events
 	// raised while running tasks for these targets in this maintenance window.
 	OwnerInformation *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterTargetWithMaintenanceWindowOutput struct {
@@ -87,6 +89,8 @@ type RegisterTargetWithMaintenanceWindowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterTargetWithMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {

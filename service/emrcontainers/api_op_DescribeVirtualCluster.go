@@ -38,6 +38,8 @@ type DescribeVirtualClusterInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVirtualClusterOutput struct {
@@ -47,6 +49,8 @@ type DescribeVirtualClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

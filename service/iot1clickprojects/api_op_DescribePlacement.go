@@ -38,6 +38,8 @@ type DescribePlacementInput struct {
 	//
 	// This member is required.
 	ProjectName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePlacementOutput struct {
@@ -49,6 +51,8 @@ type DescribePlacementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {

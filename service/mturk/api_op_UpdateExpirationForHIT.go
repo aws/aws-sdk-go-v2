@@ -40,11 +40,15 @@ type UpdateExpirationForHITInput struct {
 	//
 	// This member is required.
 	HITId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateExpirationForHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateExpirationForHITMiddlewares(stack *middleware.Stack, options Options) (err error) {

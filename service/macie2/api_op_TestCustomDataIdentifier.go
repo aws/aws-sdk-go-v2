@@ -59,6 +59,8 @@ type TestCustomDataIdentifierInput struct {
 	// matches the regex pattern. The distance can be 1-300 characters. The default
 	// value is 50.
 	MaximumMatchDistance int32
+
+	noSmithyDocumentSerde
 }
 
 type TestCustomDataIdentifierOutput struct {
@@ -69,6 +71,8 @@ type TestCustomDataIdentifierOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

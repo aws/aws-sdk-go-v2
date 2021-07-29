@@ -31,6 +31,8 @@ type JsonUnionsInput struct {
 
 	// A union with a representative set of types for members.
 	Contents types.MyUnion
+
+	noSmithyDocumentSerde
 }
 
 // A shared structure that contains a single union member.
@@ -41,6 +43,8 @@ type JsonUnionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationJsonUnionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

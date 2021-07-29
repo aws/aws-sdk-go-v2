@@ -50,6 +50,8 @@ type UpdateAssessmentFrameworkInput struct {
 
 	// The description of the framework that is to be updated.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAssessmentFrameworkOutput struct {
@@ -59,6 +61,8 @@ type UpdateAssessmentFrameworkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

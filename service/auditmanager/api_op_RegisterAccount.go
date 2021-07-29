@@ -34,6 +34,8 @@ type RegisterAccountInput struct {
 
 	// The AWS KMS key details.
 	KmsKey *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterAccountOutput struct {
@@ -43,6 +45,8 @@ type RegisterAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

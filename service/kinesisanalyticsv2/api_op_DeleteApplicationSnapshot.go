@@ -44,11 +44,15 @@ type DeleteApplicationSnapshotInput struct {
 	//
 	// This member is required.
 	SnapshotName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationSnapshotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

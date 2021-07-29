@@ -92,11 +92,15 @@ type CreateCrawlerInput struct {
 	// Tags in Glue (https://docs.aws.amazon.com/glue/latest/dg/monitor-tags.html) in
 	// the developer guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCrawlerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {

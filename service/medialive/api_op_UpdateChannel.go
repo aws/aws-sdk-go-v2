@@ -60,6 +60,8 @@ type UpdateChannelInput struct {
 	// Channel. If you do not specify this on an update call but the role was
 	// previously set that role will be removed.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for UpdateChannelResponse
@@ -70,6 +72,8 @@ type UpdateChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

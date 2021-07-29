@@ -203,6 +203,8 @@ type UploadPartInput struct {
 	// Amazon S3 uses this header for a message integrity check to ensure that the
 	// encryption key was transmitted without error.
 	SSECustomerKeyMD5 *string
+
+	noSmithyDocumentSerde
 }
 
 type UploadPartOutput struct {
@@ -237,6 +239,8 @@ type UploadPartOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUploadPartMiddlewares(stack *middleware.Stack, options Options) (err error) {

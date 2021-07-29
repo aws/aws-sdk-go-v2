@@ -27,11 +27,14 @@ func (c *Client) EndpointOperation(ctx context.Context, params *EndpointOperatio
 }
 
 type EndpointOperationInput struct {
+	noSmithyDocumentSerde
 }
 
 type EndpointOperationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEndpointOperationMiddlewares(stack *middleware.Stack, options Options) (err error) {

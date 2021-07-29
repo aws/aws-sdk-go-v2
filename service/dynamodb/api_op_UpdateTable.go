@@ -114,6 +114,8 @@ type UpdateTableInput struct {
 	// a stream, or if you try to disable a stream on a table that doesn't have a
 	// stream.
 	StreamSpecification *types.StreamSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of an UpdateTable operation.
@@ -124,6 +126,8 @@ type UpdateTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

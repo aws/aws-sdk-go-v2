@@ -52,6 +52,8 @@ type CreatePresignedNotebookInstanceUrlInput struct {
 
 	// The duration of the session, in seconds. The default is 12 hours.
 	SessionExpirationDurationInSeconds *int32
+
+	noSmithyDocumentSerde
 }
 
 type CreatePresignedNotebookInstanceUrlOutput struct {
@@ -61,6 +63,8 @@ type CreatePresignedNotebookInstanceUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePresignedNotebookInstanceUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -72,11 +72,15 @@ type UpdateProfileInput struct {
 
 	// The updated wake word for the room profile.
 	WakeWord types.WakeWord
+
+	noSmithyDocumentSerde
 }
 
 type UpdateProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

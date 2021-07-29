@@ -61,6 +61,8 @@ type UpdateGameSessionInput struct {
 	// FullProtection -- If the game session is in an ACTIVE status, it cannot be
 	// terminated during a scale-down event.
 	ProtectionPolicy types.ProtectionPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -71,6 +73,8 @@ type UpdateGameSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGameSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

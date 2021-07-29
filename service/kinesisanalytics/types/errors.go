@@ -11,6 +11,8 @@ import (
 // error.
 type CodeValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CodeValidationException) Error() string {
@@ -30,6 +32,8 @@ func (e *CodeValidationException) ErrorFault() smithy.ErrorFault { return smithy
 // time.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -49,6 +53,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // User-provided application configuration is not valid.
 type InvalidApplicationConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidApplicationConfigurationException) Error() string {
@@ -70,6 +76,8 @@ func (e *InvalidApplicationConfigurationException) ErrorFault() smithy.ErrorFaul
 // Specified input parameter value is invalid.
 type InvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgumentException) Error() string {
@@ -87,6 +95,8 @@ func (e *InvalidArgumentException) ErrorFault() smithy.ErrorFault { return smith
 // Exceeded the number of applications allowed.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -104,6 +114,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // Application is not available for this operation.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -121,6 +133,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // Specified application can't be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -142,6 +156,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // the Amazon Kinesis Streams API Reference.
 type ResourceProvisionedThroughputExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceProvisionedThroughputExceededException) Error() string {
@@ -163,6 +179,8 @@ func (e *ResourceProvisionedThroughputExceededException) ErrorFault() smithy.Err
 // The service is unavailable. Back off and retry the operation.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -182,6 +200,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // tags. The maximum number of user-defined application tags is 50.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -203,6 +223,8 @@ type UnableToDetectSchemaException struct {
 
 	RawInputRecords       []string
 	ProcessedInputRecords []string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnableToDetectSchemaException) Error() string {
@@ -221,6 +243,8 @@ func (e *UnableToDetectSchemaException) ErrorFault() smithy.ErrorFault { return 
 // specified resource is not valid for this operation.
 type UnsupportedOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {

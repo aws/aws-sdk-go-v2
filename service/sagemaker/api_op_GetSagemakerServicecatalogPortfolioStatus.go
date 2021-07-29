@@ -29,6 +29,7 @@ func (c *Client) GetSagemakerServicecatalogPortfolioStatus(ctx context.Context, 
 }
 
 type GetSagemakerServicecatalogPortfolioStatusInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetSagemakerServicecatalogPortfolioStatusOutput struct {
@@ -38,6 +39,8 @@ type GetSagemakerServicecatalogPortfolioStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSagemakerServicecatalogPortfolioStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

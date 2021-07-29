@@ -58,6 +58,8 @@ type CreateEnvironmentTemplateVersionInput struct {
 
 	// Create tags for a new version of an environment template.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentTemplateVersionOutput struct {
@@ -69,6 +71,8 @@ type CreateEnvironmentTemplateVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

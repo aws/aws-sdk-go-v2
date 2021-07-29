@@ -76,6 +76,8 @@ type DescribeVpcEndpointsInput struct {
 
 	// One or more endpoint IDs.
 	VpcEndpointIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeVpcEndpoints.
@@ -90,6 +92,8 @@ type DescribeVpcEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

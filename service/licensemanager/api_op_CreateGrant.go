@@ -60,6 +60,8 @@ type CreateGrantInput struct {
 	//
 	// This member is required.
 	Principals []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGrantOutput struct {
@@ -75,6 +77,8 @@ type CreateGrantOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {

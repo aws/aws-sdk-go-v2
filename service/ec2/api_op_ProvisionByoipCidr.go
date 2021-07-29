@@ -74,6 +74,8 @@ type ProvisionByoipCidrInput struct {
 	// (IPv6 only) Indicate whether the address range will be publicly advertised to
 	// the internet. Default: true
 	PubliclyAdvertisable *bool
+
+	noSmithyDocumentSerde
 }
 
 type ProvisionByoipCidrOutput struct {
@@ -83,6 +85,8 @@ type ProvisionByoipCidrOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationProvisionByoipCidrMiddlewares(stack *middleware.Stack, options Options) (err error) {

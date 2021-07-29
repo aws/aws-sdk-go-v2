@@ -40,6 +40,8 @@ type ListTextTranslationJobsInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTextTranslationJobsOutput struct {
@@ -53,6 +55,8 @@ type ListTextTranslationJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTextTranslationJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

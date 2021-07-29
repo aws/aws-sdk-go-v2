@@ -38,6 +38,8 @@ type GetQueryLoggingConfigInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetQueryLoggingConfigOutput struct {
@@ -52,6 +54,8 @@ type GetQueryLoggingConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetQueryLoggingConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

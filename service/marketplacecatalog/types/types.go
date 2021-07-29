@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // An object that contains the ChangeType, Details, and Entity.
 type Change struct {
 
@@ -25,6 +29,8 @@ type Change struct {
 
 	// Optional name for the change.
 	ChangeName *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a change set returned in a list of change sets when the
@@ -62,6 +68,8 @@ type ChangeSetSummaryListItem struct {
 
 	// The current status of the change set.
 	Status ChangeStatus
+
+	noSmithyDocumentSerde
 }
 
 // This object is a container for common summary information about the change. The
@@ -83,6 +91,8 @@ type ChangeSummary struct {
 
 	// An array of ErrorDetail objects associated with the change.
 	ErrorDetailList []ErrorDetail
+
+	noSmithyDocumentSerde
 }
 
 // An entity contains data that describes your product, its supported features, and
@@ -96,6 +106,8 @@ type Entity struct {
 
 	// The identifier for the entity.
 	Identifier *string
+
+	noSmithyDocumentSerde
 }
 
 // This object is a container for common summary information about the entity. The
@@ -124,6 +136,8 @@ type EntitySummary struct {
 	// accounts only), or Restricted (the entity was published and then unpublished and
 	// only existing buyers can view it).
 	Visibility *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the error.
@@ -134,6 +148,8 @@ type ErrorDetail struct {
 
 	// The message for the error.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter object, used to optionally filter results from calls to the
@@ -171,6 +187,8 @@ type Filter struct {
 	// - The supported ValueList is a list of all change sets that ended after the
 	// filter value.
 	ValueList []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains two attributes, SortBy and SortOrder.
@@ -184,4 +202,8 @@ type Sort struct {
 	// The sorting order. Can be ASCENDING or DESCENDING. The default value is
 	// DESCENDING.
 	SortOrder SortOrder
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

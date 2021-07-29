@@ -82,6 +82,8 @@ type StartOutboundVoiceContactInput struct {
 	// The phone number associated with the Amazon Connect instance, in E.164 format.
 	// If you do not specify a source phone number, you must specify a queue.
 	SourcePhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 type StartOutboundVoiceContactOutput struct {
@@ -91,6 +93,8 @@ type StartOutboundVoiceContactOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartOutboundVoiceContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

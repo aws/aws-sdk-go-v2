@@ -55,6 +55,8 @@ type ResumeGameServerGroupInput struct {
 	//
 	// This member is required.
 	ResumeActions []types.GameServerGroupAction
+
+	noSmithyDocumentSerde
 }
 
 type ResumeGameServerGroupOutput struct {
@@ -65,6 +67,8 @@ type ResumeGameServerGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResumeGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

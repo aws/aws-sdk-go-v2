@@ -60,6 +60,8 @@ type CreateCodeReviewInput struct {
 	// Amazon CodeGuru Reviewer uses this value to prevent the accidental creation of
 	// duplicate code reviews if there are failures and retries.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCodeReviewOutput struct {
@@ -70,6 +72,8 @@ type CreateCodeReviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCodeReviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

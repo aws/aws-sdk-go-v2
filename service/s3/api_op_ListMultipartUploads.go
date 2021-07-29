@@ -135,6 +135,8 @@ type ListMultipartUploadsInput struct {
 	// might be included in the list only if they have an upload ID lexicographically
 	// greater than the specified upload-id-marker.
 	UploadIdMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMultipartUploadsOutput struct {
@@ -191,6 +193,8 @@ type ListMultipartUploadsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMultipartUploadsMiddlewares(stack *middleware.Stack, options Options) (err error) {

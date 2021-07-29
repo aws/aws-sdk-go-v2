@@ -36,6 +36,8 @@ type ListStreamingDistributionsInput struct {
 
 	// The value that you provided for the MaxItems request parameter.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -46,6 +48,8 @@ type ListStreamingDistributionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStreamingDistributionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

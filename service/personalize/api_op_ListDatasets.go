@@ -42,6 +42,8 @@ type ListDatasetsInput struct {
 	// A token returned from the previous call to ListDatasetImportJobs for getting the
 	// next set of dataset import jobs (if they exist).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDatasetsOutput struct {
@@ -54,6 +56,8 @@ type ListDatasetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDatasetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

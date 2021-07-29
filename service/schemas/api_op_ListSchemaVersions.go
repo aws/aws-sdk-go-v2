@@ -46,6 +46,8 @@ type ListSchemaVersionsInput struct {
 	// first page, leave NextToken empty. The token will expire in 24 hours, and cannot
 	// be shared with other accounts.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSchemaVersionsOutput struct {
@@ -60,6 +62,8 @@ type ListSchemaVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type GetDetectorsInput struct {
 
 	// The next token for the subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDetectorsOutput struct {
@@ -55,6 +57,8 @@ type GetDetectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

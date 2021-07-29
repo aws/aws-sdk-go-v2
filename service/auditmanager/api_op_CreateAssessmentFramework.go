@@ -48,6 +48,8 @@ type CreateAssessmentFrameworkInput struct {
 
 	// The tags associated with the framework.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssessmentFrameworkOutput struct {
@@ -57,6 +59,8 @@ type CreateAssessmentFrameworkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssessmentFrameworkMiddlewares(stack *middleware.Stack, options Options) (err error) {

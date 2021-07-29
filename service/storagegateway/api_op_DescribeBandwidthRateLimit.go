@@ -40,6 +40,8 @@ type DescribeBandwidthRateLimitInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -59,6 +61,8 @@ type DescribeBandwidthRateLimitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBandwidthRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

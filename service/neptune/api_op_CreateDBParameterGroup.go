@@ -76,6 +76,8 @@ type CreateDBParameterGroupInput struct {
 
 	// The tags to be assigned to the new DB parameter group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDBParameterGroupOutput struct {
@@ -86,6 +88,8 @@ type CreateDBParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type DeleteStorageLensConfigurationTaggingInput struct {
 	//
 	// This member is required.
 	ConfigId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStorageLensConfigurationTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStorageLensConfigurationTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

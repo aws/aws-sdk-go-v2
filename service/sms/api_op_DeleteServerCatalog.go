@@ -27,11 +27,14 @@ func (c *Client) DeleteServerCatalog(ctx context.Context, params *DeleteServerCa
 }
 
 type DeleteServerCatalogInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeleteServerCatalogOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteServerCatalogMiddlewares(stack *middleware.Stack, options Options) (err error) {

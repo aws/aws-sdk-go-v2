@@ -253,6 +253,8 @@ type GetDASHStreamingSessionURLInput struct {
 	// The name of the stream for which to retrieve the MPEG-DASH manifest URL. You
 	// must specify either the StreamName or the StreamARN.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDASHStreamingSessionURLOutput struct {
@@ -263,6 +265,8 @@ type GetDASHStreamingSessionURLOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDASHStreamingSessionURLMiddlewares(stack *middleware.Stack, options Options) (err error) {

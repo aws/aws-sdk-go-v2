@@ -62,6 +62,8 @@ type ListImageVersionsInput struct {
 
 	// The sort order. The default value is DESCENDING.
 	SortOrder types.ImageVersionSortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListImageVersionsOutput struct {
@@ -74,6 +76,8 @@ type ListImageVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListImageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -79,6 +79,8 @@ type GetClipInput struct {
 	// The name of the stream for which to retrieve the media clip. You must specify
 	// either the StreamName or the StreamARN.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetClipOutput struct {
@@ -94,6 +96,8 @@ type GetClipOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetClipMiddlewares(stack *middleware.Stack, options Options) (err error) {

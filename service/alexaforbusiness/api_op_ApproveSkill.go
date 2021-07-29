@@ -34,11 +34,15 @@ type ApproveSkillInput struct {
 	//
 	// This member is required.
 	SkillId *string
+
+	noSmithyDocumentSerde
 }
 
 type ApproveSkillOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationApproveSkillMiddlewares(stack *middleware.Stack, options Options) (err error) {

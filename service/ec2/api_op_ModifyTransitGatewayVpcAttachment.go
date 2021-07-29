@@ -49,6 +49,8 @@ type ModifyTransitGatewayVpcAttachmentInput struct {
 
 	// The IDs of one or more subnets to remove.
 	RemoveSubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyTransitGatewayVpcAttachmentOutput struct {
@@ -58,6 +60,8 @@ type ModifyTransitGatewayVpcAttachmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyTransitGatewayVpcAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

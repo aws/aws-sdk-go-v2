@@ -44,6 +44,8 @@ type ListReviewableHITsInput struct {
 
 	// Can be either Reviewable or Reviewing. Reviewable is the default value.
 	Status types.ReviewableHITStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListReviewableHITsOutput struct {
@@ -62,6 +64,8 @@ type ListReviewableHITsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReviewableHITsMiddlewares(stack *middleware.Stack, options Options) (err error) {

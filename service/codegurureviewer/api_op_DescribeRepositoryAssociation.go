@@ -43,6 +43,8 @@ type DescribeRepositoryAssociationInput struct {
 	//
 	// This member is required.
 	AssociationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRepositoryAssociationOutput struct {
@@ -64,6 +66,8 @@ type DescribeRepositoryAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRepositoryAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

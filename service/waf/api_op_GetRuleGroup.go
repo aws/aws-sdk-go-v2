@@ -42,6 +42,8 @@ type GetRuleGroupInput struct {
 	//
 	// This member is required.
 	RuleGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRuleGroupOutput struct {
@@ -51,6 +53,8 @@ type GetRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

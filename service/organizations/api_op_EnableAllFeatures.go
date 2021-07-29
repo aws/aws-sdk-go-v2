@@ -51,6 +51,7 @@ func (c *Client) EnableAllFeatures(ctx context.Context, params *EnableAllFeature
 }
 
 type EnableAllFeaturesInput struct {
+	noSmithyDocumentSerde
 }
 
 type EnableAllFeaturesOutput struct {
@@ -61,6 +62,8 @@ type EnableAllFeaturesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableAllFeaturesMiddlewares(stack *middleware.Stack, options Options) (err error) {

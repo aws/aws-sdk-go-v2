@@ -50,6 +50,8 @@ type DescribeClusterDbRevisionsInput struct {
 	// response records by providing the returned marker value in the marker parameter
 	// and retrying the request. Default: 100 Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClusterDbRevisionsOutput struct {
@@ -65,6 +67,8 @@ type DescribeClusterDbRevisionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClusterDbRevisionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

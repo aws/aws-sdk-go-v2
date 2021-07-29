@@ -104,6 +104,8 @@ type DisposePackageVersionsInput struct {
 
 	// The revisions of the package versions you want to dispose.
 	VersionRevisions map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type DisposePackageVersionsOutput struct {
@@ -131,6 +133,8 @@ type DisposePackageVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisposePackageVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

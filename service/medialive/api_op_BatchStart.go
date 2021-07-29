@@ -35,6 +35,8 @@ type BatchStartInput struct {
 
 	// List of multiplex IDs
 	MultiplexIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for BatchStartResponse
@@ -48,6 +50,8 @@ type BatchStartOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchStartMiddlewares(stack *middleware.Stack, options Options) (err error) {

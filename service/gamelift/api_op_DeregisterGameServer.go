@@ -48,11 +48,15 @@ type DeregisterGameServerInput struct {
 	//
 	// This member is required.
 	GameServerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterGameServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterGameServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

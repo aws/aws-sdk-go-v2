@@ -40,6 +40,8 @@ type CreateCoreDefinitionVersionInput struct {
 
 	// A list of cores in the core definition version.
 	Cores []types.Core
+
+	noSmithyDocumentSerde
 }
 
 type CreateCoreDefinitionVersionOutput struct {
@@ -58,6 +60,8 @@ type CreateCoreDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCoreDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

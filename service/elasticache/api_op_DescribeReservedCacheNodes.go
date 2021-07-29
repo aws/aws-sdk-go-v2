@@ -133,6 +133,8 @@ type DescribeReservedCacheNodesInput struct {
 	// The offering identifier filter value. Use this parameter to show only purchased
 	// reservations matching the specified offering identifier.
 	ReservedCacheNodesOfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeReservedCacheNodes operation.
@@ -147,6 +149,8 @@ type DescribeReservedCacheNodesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedCacheNodesMiddlewares(stack *middleware.Stack, options Options) (err error) {

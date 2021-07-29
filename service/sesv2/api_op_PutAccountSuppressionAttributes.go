@@ -42,6 +42,8 @@ type PutAccountSuppressionAttributesInput struct {
 	// list for your account when a message sent to that address results in a hard
 	// bounce.
 	SuppressedReasons []types.SuppressionListReason
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -49,6 +51,8 @@ type PutAccountSuppressionAttributesInput struct {
 type PutAccountSuppressionAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccountSuppressionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

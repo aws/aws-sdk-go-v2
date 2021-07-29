@@ -39,6 +39,8 @@ type DescribeBotVersionInput struct {
 	//
 	// This member is required.
 	BotVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBotVersionOutput struct {
@@ -79,6 +81,8 @@ type DescribeBotVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

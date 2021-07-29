@@ -39,11 +39,15 @@ type UnassignInstanceInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type UnassignInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnassignInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

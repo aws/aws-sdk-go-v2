@@ -90,6 +90,8 @@ type CreateTrafficMirrorSessionInput struct {
 	// VXLAN protocol, see RFC 7348 (https://tools.ietf.org/html/rfc7348). If you do
 	// not specify a VirtualNetworkId, an account-wide unique id is chosen at random.
 	VirtualNetworkId *int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateTrafficMirrorSessionOutput struct {
@@ -104,6 +106,8 @@ type CreateTrafficMirrorSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTrafficMirrorSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

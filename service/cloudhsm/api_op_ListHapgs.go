@@ -44,6 +44,8 @@ type ListHapgsInput struct {
 	// The NextToken value from a previous call to ListHapgs. Pass null if this is the
 	// first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListHapgsOutput struct {
@@ -59,6 +61,8 @@ type ListHapgsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListHapgsMiddlewares(stack *middleware.Stack, options Options) (err error) {

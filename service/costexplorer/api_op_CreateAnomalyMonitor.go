@@ -34,6 +34,8 @@ type CreateAnomalyMonitorInput struct {
 	//
 	// This member is required.
 	AnomalyMonitor *types.AnomalyMonitor
+
+	noSmithyDocumentSerde
 }
 
 type CreateAnomalyMonitorOutput struct {
@@ -45,6 +47,8 @@ type CreateAnomalyMonitorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAnomalyMonitorMiddlewares(stack *middleware.Stack, options Options) (err error) {

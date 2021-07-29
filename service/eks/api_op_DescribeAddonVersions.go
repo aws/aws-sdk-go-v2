@@ -48,6 +48,8 @@ type DescribeAddonVersionsInput struct {
 	// opaque identifier that is used only to retrieve the next items in a list and not
 	// for other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAddonVersionsOutput struct {
@@ -65,6 +67,8 @@ type DescribeAddonVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAddonVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

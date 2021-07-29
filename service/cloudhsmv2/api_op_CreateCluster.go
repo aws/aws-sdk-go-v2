@@ -57,6 +57,8 @@ type CreateClusterInput struct {
 
 	// Tags to apply to the CloudHSM cluster during creation.
 	TagList []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateClusterOutput struct {
@@ -66,6 +68,8 @@ type CreateClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

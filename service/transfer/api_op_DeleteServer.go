@@ -33,11 +33,15 @@ type DeleteServerInput struct {
 	//
 	// This member is required.
 	ServerId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

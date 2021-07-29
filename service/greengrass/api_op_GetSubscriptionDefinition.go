@@ -32,6 +32,8 @@ type GetSubscriptionDefinitionInput struct {
 	//
 	// This member is required.
 	SubscriptionDefinitionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSubscriptionDefinitionOutput struct {
@@ -62,6 +64,8 @@ type GetSubscriptionDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSubscriptionDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

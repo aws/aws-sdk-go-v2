@@ -63,6 +63,8 @@ type DeleteResourcePolicyInput struct {
 	//
 	// This member is required.
 	SecretId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourcePolicyOutput struct {
@@ -75,6 +77,8 @@ type DeleteResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

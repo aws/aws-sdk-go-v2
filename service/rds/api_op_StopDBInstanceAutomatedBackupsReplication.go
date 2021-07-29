@@ -38,6 +38,8 @@ type StopDBInstanceAutomatedBackupsReplicationInput struct {
 	//
 	// This member is required.
 	SourceDBInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StopDBInstanceAutomatedBackupsReplicationOutput struct {
@@ -49,6 +51,8 @@ type StopDBInstanceAutomatedBackupsReplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopDBInstanceAutomatedBackupsReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

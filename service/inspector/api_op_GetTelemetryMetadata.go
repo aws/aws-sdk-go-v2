@@ -34,6 +34,8 @@ type GetTelemetryMetadataInput struct {
 	//
 	// This member is required.
 	AssessmentRunArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTelemetryMetadataOutput struct {
@@ -45,6 +47,8 @@ type GetTelemetryMetadataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTelemetryMetadataMiddlewares(stack *middleware.Stack, options Options) (err error) {

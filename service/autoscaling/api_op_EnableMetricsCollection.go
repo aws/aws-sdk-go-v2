@@ -102,11 +102,15 @@ type EnableMetricsCollectionInput struct {
 	// If you omit
 	// this parameter, all metrics are enabled.
 	Metrics []string
+
+	noSmithyDocumentSerde
 }
 
 type EnableMetricsCollectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableMetricsCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

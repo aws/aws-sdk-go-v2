@@ -11,6 +11,8 @@ import (
 // baseline that is already registered with a different patch baseline.
 type AlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsException) Error() string {
@@ -28,6 +30,8 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 // You must disassociate a document from all instances before you can delete it.
 type AssociatedInstances struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssociatedInstances) Error() string {
@@ -45,6 +49,8 @@ func (e *AssociatedInstances) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The specified association already exists.
 type AssociationAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssociationAlreadyExists) Error() string {
@@ -62,6 +68,8 @@ func (e *AssociationAlreadyExists) ErrorFault() smithy.ErrorFault { return smith
 // The specified association doesn't exist.
 type AssociationDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssociationDoesNotExist) Error() string {
@@ -79,6 +87,8 @@ func (e *AssociationDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy
 // The specified execution ID doesn't exist. Verify the ID number and try again.
 type AssociationExecutionDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssociationExecutionDoesNotExist) Error() string {
@@ -98,6 +108,8 @@ func (e *AssociationExecutionDoesNotExist) ErrorFault() smithy.ErrorFault { retu
 // You can have at most 2,000 active associations.
 type AssociationLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssociationLimitExceeded) Error() string {
@@ -116,6 +128,8 @@ func (e *AssociationLimitExceeded) ErrorFault() smithy.ErrorFault { return smith
 // association has a limit of 1,000 versions.
 type AssociationVersionLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AssociationVersionLimitExceeded) Error() string {
@@ -136,6 +150,8 @@ func (e *AssociationVersionLimitExceeded) ErrorFault() smithy.ErrorFault { retur
 // rejected or is still in a pending state.
 type AutomationDefinitionNotApprovedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AutomationDefinitionNotApprovedException) Error() string {
@@ -157,6 +173,8 @@ func (e *AutomationDefinitionNotApprovedException) ErrorFault() smithy.ErrorFaul
 // An Automation runbook with the specified name couldn't be found.
 type AutomationDefinitionNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AutomationDefinitionNotFoundException) Error() string {
@@ -178,6 +196,8 @@ func (e *AutomationDefinitionNotFoundException) ErrorFault() smithy.ErrorFault {
 // An Automation runbook with the specified name and version couldn't be found.
 type AutomationDefinitionVersionNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AutomationDefinitionVersionNotFoundException) Error() string {
@@ -200,6 +220,8 @@ func (e *AutomationDefinitionVersionNotFoundException) ErrorFault() smithy.Error
 // allowable limit.
 type AutomationExecutionLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AutomationExecutionLimitExceededException) Error() string {
@@ -222,6 +244,8 @@ func (e *AutomationExecutionLimitExceededException) ErrorFault() smithy.ErrorFau
 // execution ID.
 type AutomationExecutionNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AutomationExecutionNotFoundException) Error() string {
@@ -244,6 +268,8 @@ func (e *AutomationExecutionNotFoundException) ErrorFault() smithy.ErrorFault {
 // try again.
 type AutomationStepNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AutomationStepNotFoundException) Error() string {
@@ -264,6 +290,8 @@ func (e *AutomationStepNotFoundException) ErrorFault() smithy.ErrorFault { retur
 // different types.
 type ComplianceTypeCountLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ComplianceTypeCountLimitExceededException) Error() string {
@@ -286,6 +314,8 @@ func (e *ComplianceTypeCountLimitExceededException) ErrorFault() smithy.ErrorFau
 // schemas and try again.
 type CustomSchemaCountLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomSchemaCountLimitExceededException) Error() string {
@@ -307,6 +337,8 @@ func (e *CustomSchemaCountLimitExceededException) ErrorFault() smithy.ErrorFault
 // The specified document already exists.
 type DocumentAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DocumentAlreadyExists) Error() string {
@@ -324,6 +356,8 @@ func (e *DocumentAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.F
 // You can have at most 500 active SSM documents.
 type DocumentLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DocumentLimitExceeded) Error() string {
@@ -344,6 +378,8 @@ func (e *DocumentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.F
 // Support.
 type DocumentPermissionLimit struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DocumentPermissionLimit) Error() string {
@@ -362,6 +398,8 @@ func (e *DocumentPermissionLimit) ErrorFault() smithy.ErrorFault { return smithy
 // again.
 type DocumentVersionLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DocumentVersionLimitExceeded) Error() string {
@@ -383,6 +421,8 @@ func (e *DocumentVersionLimitExceeded) ErrorFault() smithy.ErrorFault { return s
 // Amazon Web Services General Reference.
 type DoesNotExistException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DoesNotExistException) Error() string {
@@ -401,6 +441,8 @@ func (e *DoesNotExistException) ErrorFault() smithy.ErrorFault { return smithy.F
 // content of the document and try again.
 type DuplicateDocumentContent struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateDocumentContent) Error() string {
@@ -419,6 +461,8 @@ func (e *DuplicateDocumentContent) ErrorFault() smithy.ErrorFault { return smith
 // version name, and then try again.
 type DuplicateDocumentVersionName struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateDocumentVersionName) Error() string {
@@ -436,6 +480,8 @@ func (e *DuplicateDocumentVersionName) ErrorFault() smithy.ErrorFault { return s
 // You can't specify an instance ID in more than one association.
 type DuplicateInstanceId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateInstanceId) Error() string {
@@ -454,6 +500,8 @@ func (e *DuplicateInstanceId) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // corresponding service isn't available.
 type FeatureNotAvailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FeatureNotAvailableException) Error() string {
@@ -474,6 +522,8 @@ func (e *FeatureNotAvailableException) ErrorFault() smithy.ErrorFault { return s
 // in the Amazon Web Services Systems Manager User Guide.
 type HierarchyLevelLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HierarchyLevelLimitExceededException) Error() string {
@@ -497,6 +547,8 @@ func (e *HierarchyLevelLimitExceededException) ErrorFault() smithy.ErrorFault {
 // You must create a new, unique parameter.
 type HierarchyTypeMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HierarchyTypeMismatchException) Error() string {
@@ -515,6 +567,8 @@ func (e *HierarchyTypeMismatchException) ErrorFault() smithy.ErrorFault { return
 // match the original call to the API with the same idempotency token.
 type IdempotentParameterMismatch struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatch) Error() string {
@@ -534,6 +588,8 @@ func (e *IdempotentParameterMismatch) ErrorFault() smithy.ErrorFault { return sm
 // and try again.
 type IncompatiblePolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncompatiblePolicyException) Error() string {
@@ -551,6 +607,8 @@ func (e *IncompatiblePolicyException) ErrorFault() smithy.ErrorFault { return sm
 // An error occurred on the server side.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -569,6 +627,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // ActivationId and the ActivationCode don't match.
 type InvalidActivation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidActivation) Error() string {
@@ -587,6 +647,8 @@ func (e *InvalidActivation) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // or ActivationCode and try again.
 type InvalidActivationId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidActivationId) Error() string {
@@ -606,6 +668,8 @@ func (e *InvalidActivationId) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // AWS:InstanceInformation.
 type InvalidAggregatorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAggregatorException) Error() string {
@@ -623,6 +687,8 @@ func (e *InvalidAggregatorException) ErrorFault() smithy.ErrorFault { return smi
 // The request doesn't meet the regular expression requirement.
 type InvalidAllowedPatternException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAllowedPatternException) Error() string {
@@ -640,6 +706,8 @@ func (e *InvalidAllowedPatternException) ErrorFault() smithy.ErrorFault { return
 // The association isn't valid or doesn't exist.
 type InvalidAssociation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAssociation) Error() string {
@@ -659,6 +727,8 @@ func (e *InvalidAssociation) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // parameter to view the latest version of the association.
 type InvalidAssociationVersion struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAssociationVersion) Error() string {
@@ -678,6 +748,8 @@ func (e *InvalidAssociationVersion) ErrorFault() smithy.ErrorFault { return smit
 // the specified Automation document.
 type InvalidAutomationExecutionParametersException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAutomationExecutionParametersException) Error() string {
@@ -699,6 +771,8 @@ func (e *InvalidAutomationExecutionParametersException) ErrorFault() smithy.Erro
 // The signal isn't valid for the current Automation execution.
 type InvalidAutomationSignalException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAutomationSignalException) Error() string {
@@ -718,6 +792,8 @@ func (e *InvalidAutomationSignalException) ErrorFault() smithy.ErrorFault { retu
 // The specified update status operation isn't valid.
 type InvalidAutomationStatusUpdateException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAutomationStatusUpdateException) Error() string {
@@ -739,6 +815,8 @@ func (e *InvalidAutomationStatusUpdateException) ErrorFault() smithy.ErrorFault 
 // The specified command ID isn't valid. Verify the ID and try again.
 type InvalidCommandId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCommandId) Error() string {
@@ -757,6 +835,8 @@ func (e *InvalidCommandId) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // Verify all parameters and try again.
 type InvalidDeleteInventoryParametersException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeleteInventoryParametersException) Error() string {
@@ -779,6 +859,8 @@ func (e *InvalidDeleteInventoryParametersException) ErrorFault() smithy.ErrorFau
 // the ID and try again.
 type InvalidDeletionIdException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeletionIdException) Error() string {
@@ -796,6 +878,8 @@ func (e *InvalidDeletionIdException) ErrorFault() smithy.ErrorFault { return smi
 // The specified SSM document doesn't exist.
 type InvalidDocument struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDocument) Error() string {
@@ -813,6 +897,8 @@ func (e *InvalidDocument) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The content for the document isn't valid.
 type InvalidDocumentContent struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDocumentContent) Error() string {
@@ -831,6 +917,8 @@ func (e *InvalidDocumentContent) ErrorFault() smithy.ErrorFault { return smithy.
 // sharing the document before you can delete it.
 type InvalidDocumentOperation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDocumentOperation) Error() string {
@@ -848,6 +936,8 @@ func (e *InvalidDocumentOperation) ErrorFault() smithy.ErrorFault { return smith
 // The version of the document schema isn't supported.
 type InvalidDocumentSchemaVersion struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDocumentSchemaVersion) Error() string {
@@ -866,6 +956,8 @@ func (e *InvalidDocumentSchemaVersion) ErrorFault() smithy.ErrorFault { return s
 // DocumentType property.
 type InvalidDocumentType struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDocumentType) Error() string {
@@ -883,6 +975,8 @@ func (e *InvalidDocumentType) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The document version isn't valid or doesn't exist.
 type InvalidDocumentVersion struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDocumentVersion) Error() string {
@@ -901,6 +995,8 @@ func (e *InvalidDocumentVersion) ErrorFault() smithy.ErrorFault { return smithy.
 // again.
 type InvalidFilter struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFilter) Error() string {
@@ -918,6 +1014,8 @@ func (e *InvalidFilter) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The specified key isn't valid.
 type InvalidFilterKey struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFilterKey) Error() string {
@@ -936,6 +1034,8 @@ func (e *InvalidFilterKey) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // BeginsWith. For Path filter, valid options are Recursive and OneLevel.
 type InvalidFilterOption struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFilterOption) Error() string {
@@ -953,6 +1053,8 @@ func (e *InvalidFilterOption) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The filter value isn't valid. Verify the value and try again.
 type InvalidFilterValue struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFilterValue) Error() string {
@@ -983,6 +1085,8 @@ func (e *InvalidFilterValue) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // states are: Shutting-down and Terminated.
 type InvalidInstanceId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInstanceId) Error() string {
@@ -1000,6 +1104,8 @@ func (e *InvalidInstanceId) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The specified filter value isn't valid.
 type InvalidInstanceInformationFilterValue struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInstanceInformationFilterValue) Error() string {
@@ -1021,6 +1127,8 @@ func (e *InvalidInstanceInformationFilterValue) ErrorFault() smithy.ErrorFault {
 // The specified inventory group isn't valid.
 type InvalidInventoryGroupException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInventoryGroupException) Error() string {
@@ -1039,6 +1147,8 @@ func (e *InvalidInventoryGroupException) ErrorFault() smithy.ErrorFault { return
 // Verify the keys and values, and try again.
 type InvalidInventoryItemContextException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInventoryItemContextException) Error() string {
@@ -1060,6 +1170,8 @@ func (e *InvalidInventoryItemContextException) ErrorFault() smithy.ErrorFault {
 // The request isn't valid.
 type InvalidInventoryRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInventoryRequestException) Error() string {
@@ -1081,6 +1193,8 @@ type InvalidItemContentException struct {
 	Message *string
 
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidItemContentException) Error() string {
@@ -1098,6 +1212,8 @@ func (e *InvalidItemContentException) ErrorFault() smithy.ErrorFault { return sm
 // The query key ID isn't valid.
 type InvalidKeyId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKeyId) Error() string {
@@ -1115,6 +1231,8 @@ func (e *InvalidKeyId) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // The specified token isn't valid.
 type InvalidNextToken struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextToken) Error() string {
@@ -1133,6 +1251,8 @@ func (e *InvalidNextToken) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // Name (ARN) was provided for an Amazon Simple Notification Service topic.
 type InvalidNotificationConfig struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNotificationConfig) Error() string {
@@ -1151,6 +1271,8 @@ func (e *InvalidNotificationConfig) ErrorFault() smithy.ErrorFault { return smit
 // again.
 type InvalidOptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOptionException) Error() string {
@@ -1168,6 +1290,8 @@ func (e *InvalidOptionException) ErrorFault() smithy.ErrorFault { return smithy.
 // The S3 bucket doesn't exist.
 type InvalidOutputFolder struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOutputFolder) Error() string {
@@ -1185,6 +1309,8 @@ func (e *InvalidOutputFolder) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The output location isn't valid or doesn't exist.
 type InvalidOutputLocation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOutputLocation) Error() string {
@@ -1204,6 +1330,8 @@ func (e *InvalidOutputLocation) ErrorFault() smithy.ErrorFault { return smithy.F
 // parameters defined in the SSM document.
 type InvalidParameters struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameters) Error() string {
@@ -1222,6 +1350,8 @@ func (e *InvalidParameters) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // type.
 type InvalidPermissionType struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPermissionType) Error() string {
@@ -1239,6 +1369,8 @@ func (e *InvalidPermissionType) ErrorFault() smithy.ErrorFault { return smithy.F
 // The plugin name isn't valid.
 type InvalidPluginName struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPluginName) Error() string {
@@ -1256,6 +1388,8 @@ func (e *InvalidPluginName) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // A policy attribute or its value is invalid.
 type InvalidPolicyAttributeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPolicyAttributeException) Error() string {
@@ -1276,6 +1410,8 @@ func (e *InvalidPolicyAttributeException) ErrorFault() smithy.ErrorFault { retur
 // types: Expiration, ExpirationNotification, and NoChangeNotification.
 type InvalidPolicyTypeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPolicyTypeException) Error() string {
@@ -1294,6 +1430,8 @@ func (e *InvalidPolicyTypeException) ErrorFault() smithy.ErrorFault { return smi
 // again.
 type InvalidResourceId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceId) Error() string {
@@ -1312,6 +1450,8 @@ func (e *InvalidResourceId) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // instance, the instance must be a registered, managed instance.
 type InvalidResourceType struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResourceType) Error() string {
@@ -1329,6 +1469,8 @@ func (e *InvalidResourceType) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The specified inventory item result attribute isn't valid.
 type InvalidResultAttributeException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidResultAttributeException) Error() string {
@@ -1353,6 +1495,8 @@ func (e *InvalidResultAttributeException) ErrorFault() smithy.ErrorFault { retur
 // in the Amazon Web Services Systems Manager User Guide.
 type InvalidRole struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRole) Error() string {
@@ -1370,6 +1514,8 @@ func (e *InvalidRole) ErrorFault() smithy.ErrorFault { return smithy.FaultClient
 // The schedule is invalid. Verify your cron or rate expression and try again.
 type InvalidSchedule struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSchedule) Error() string {
@@ -1388,6 +1534,8 @@ func (e *InvalidSchedule) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // Manager or you might not have permission to perform the operation.
 type InvalidTarget struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTarget) Error() string {
@@ -1405,6 +1553,8 @@ func (e *InvalidTarget) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The parameter type name isn't valid.
 type InvalidTypeNameException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTypeNameException) Error() string {
@@ -1422,6 +1572,8 @@ func (e *InvalidTypeNameException) ErrorFault() smithy.ErrorFault { return smith
 // The update isn't valid.
 type InvalidUpdate struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUpdate) Error() string {
@@ -1440,6 +1592,8 @@ func (e *InvalidUpdate) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // Verify the command ID and the instance ID and try again.
 type InvocationDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvocationDoesNotExist) Error() string {
@@ -1459,6 +1613,8 @@ type ItemContentMismatchException struct {
 	Message *string
 
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ItemContentMismatchException) Error() string {
@@ -1478,6 +1634,8 @@ type ItemSizeLimitExceededException struct {
 	Message *string
 
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ItemSizeLimitExceededException) Error() string {
@@ -1495,6 +1653,8 @@ func (e *ItemSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // The size limit of a document is 64 KB.
 type MaxDocumentSizeExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MaxDocumentSizeExceeded) Error() string {
@@ -1514,6 +1674,8 @@ type OpsItemAlreadyExistsException struct {
 	Message *string
 
 	OpsItemId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsItemAlreadyExistsException) Error() string {
@@ -1534,6 +1696,8 @@ type OpsItemInvalidParameterException struct {
 	Message *string
 
 	ParameterNames []string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsItemInvalidParameterException) Error() string {
@@ -1559,6 +1723,8 @@ type OpsItemLimitExceededException struct {
 	ResourceTypes []string
 	Limit         int32
 	LimitType     *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsItemLimitExceededException) Error() string {
@@ -1576,6 +1742,8 @@ func (e *OpsItemLimitExceededException) ErrorFault() smithy.ErrorFault { return 
 // The specified OpsItem ID doesn't exist. Verify the ID and try again.
 type OpsItemNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsItemNotFoundException) Error() string {
@@ -1596,6 +1764,8 @@ type OpsItemRelatedItemAlreadyExistsException struct {
 
 	ResourceUri *string
 	OpsItemId   *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsItemRelatedItemAlreadyExistsException) Error() string {
@@ -1618,6 +1788,8 @@ func (e *OpsItemRelatedItemAlreadyExistsException) ErrorFault() smithy.ErrorFaul
 // Verify the information and try again.
 type OpsItemRelatedItemAssociationNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsItemRelatedItemAssociationNotFoundException) Error() string {
@@ -1639,6 +1811,8 @@ func (e *OpsItemRelatedItemAssociationNotFoundException) ErrorFault() smithy.Err
 // An OpsMetadata object already exists for the selected resource.
 type OpsMetadataAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsMetadataAlreadyExistsException) Error() string {
@@ -1658,6 +1832,8 @@ func (e *OpsMetadataAlreadyExistsException) ErrorFault() smithy.ErrorFault { ret
 // One of the arguments passed is invalid.
 type OpsMetadataInvalidArgumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsMetadataInvalidArgumentException) Error() string {
@@ -1680,6 +1856,8 @@ func (e *OpsMetadataInvalidArgumentException) ErrorFault() smithy.ErrorFault {
 // can assign to an application in Application Manager.
 type OpsMetadataKeyLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsMetadataKeyLimitExceededException) Error() string {
@@ -1703,6 +1881,8 @@ func (e *OpsMetadataKeyLimitExceededException) ErrorFault() smithy.ErrorFault {
 // OpsMetadata object and try again.
 type OpsMetadataLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsMetadataLimitExceededException) Error() string {
@@ -1722,6 +1902,8 @@ func (e *OpsMetadataLimitExceededException) ErrorFault() smithy.ErrorFault { ret
 // The OpsMetadata object doesn't exist.
 type OpsMetadataNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsMetadataNotFoundException) Error() string {
@@ -1740,6 +1922,8 @@ func (e *OpsMetadataNotFoundException) ErrorFault() smithy.ErrorFault { return s
 // again.
 type OpsMetadataTooManyUpdatesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OpsMetadataTooManyUpdatesException) Error() string {
@@ -1761,6 +1945,8 @@ func (e *OpsMetadataTooManyUpdatesException) ErrorFault() smithy.ErrorFault {
 // The parameter already exists. You can't create duplicate parameters.
 type ParameterAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterAlreadyExists) Error() string {
@@ -1779,6 +1965,8 @@ func (e *ParameterAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.
 // parameters and try again.
 type ParameterLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterLimitExceeded) Error() string {
@@ -1813,6 +2001,8 @@ func (e *ParameterLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.
 // in the Amazon Web Services Systems Manager User Guide.
 type ParameterMaxVersionLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterMaxVersionLimitExceeded) Error() string {
@@ -1832,6 +2022,8 @@ func (e *ParameterMaxVersionLimitExceeded) ErrorFault() smithy.ErrorFault { retu
 // The parameter couldn't be found. Verify the name and try again.
 type ParameterNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterNotFound) Error() string {
@@ -1849,6 +2041,8 @@ func (e *ParameterNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The parameter name isn't valid.
 type ParameterPatternMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterPatternMismatchException) Error() string {
@@ -1868,6 +2062,8 @@ func (e *ParameterPatternMismatchException) ErrorFault() smithy.ErrorFault { ret
 // A parameter version can have a maximum of ten labels.
 type ParameterVersionLabelLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterVersionLabelLimitExceeded) Error() string {
@@ -1890,6 +2086,8 @@ func (e *ParameterVersionLabelLimitExceeded) ErrorFault() smithy.ErrorFault {
 // version, and try again.
 type ParameterVersionNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ParameterVersionNotFound) Error() string {
@@ -1908,6 +2106,8 @@ func (e *ParameterVersionNotFound) ErrorFault() smithy.ErrorFault { return smith
 // parameter. The maximum is 10.
 type PoliciesLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PoliciesLimitExceededException) Error() string {
@@ -1927,6 +2127,8 @@ type ResourceDataSyncAlreadyExistsException struct {
 	Message *string
 
 	SyncName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceDataSyncAlreadyExistsException) Error() string {
@@ -1949,6 +2151,8 @@ func (e *ResourceDataSyncAlreadyExistsException) ErrorFault() smithy.ErrorFault 
 // and try again.
 type ResourceDataSyncConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceDataSyncConflictException) Error() string {
@@ -1968,6 +2172,8 @@ func (e *ResourceDataSyncConflictException) ErrorFault() smithy.ErrorFault { ret
 // You have exceeded the allowed maximum sync configurations.
 type ResourceDataSyncCountExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceDataSyncCountExceededException) Error() string {
@@ -1989,6 +2195,8 @@ func (e *ResourceDataSyncCountExceededException) ErrorFault() smithy.ErrorFault 
 // The specified sync configuration is invalid.
 type ResourceDataSyncInvalidConfigurationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceDataSyncInvalidConfigurationException) Error() string {
@@ -2013,6 +2221,8 @@ type ResourceDataSyncNotFoundException struct {
 
 	SyncName *string
 	SyncType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceDataSyncNotFoundException) Error() string {
@@ -2033,6 +2243,8 @@ func (e *ResourceDataSyncNotFoundException) ErrorFault() smithy.ErrorFault { ret
 // registered for a patch group.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -2055,6 +2267,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // Amazon Web Services General Reference.
 type ResourceLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceededException) Error() string {
@@ -2073,6 +2287,8 @@ func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // setting hasn't been provisioned by the Amazon Web Services service team.
 type ServiceSettingNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceSettingNotFound) Error() string {
@@ -2090,6 +2306,8 @@ func (e *ServiceSettingNotFound) ErrorFault() smithy.ErrorFault { return smithy.
 // The updated status is the same as the current status.
 type StatusUnchanged struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StatusUnchanged) Error() string {
@@ -2107,6 +2325,8 @@ func (e *StatusUnchanged) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The sub-type count exceeded the limit for the inventory type.
 type SubTypeCountLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubTypeCountLimitExceededException) Error() string {
@@ -2129,6 +2349,8 @@ func (e *SubTypeCountLimitExceededException) ErrorFault() smithy.ErrorFault {
 // operation, but the target is still referenced in a task.
 type TargetInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TargetInUseException) Error() string {
@@ -2152,6 +2374,8 @@ func (e *TargetInUseException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // different account or Region
 type TargetNotConnected struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TargetNotConnected) Error() string {
@@ -2170,6 +2394,8 @@ func (e *TargetNotConnected) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // the command again.
 type TooManyTagsError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsError) Error() string {
@@ -2187,6 +2413,8 @@ func (e *TooManyTagsError) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // There are concurrent updates for a resource that supports one update at a time.
 type TooManyUpdates struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyUpdates) Error() string {
@@ -2204,6 +2432,8 @@ func (e *TooManyUpdates) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 // The size of inventory data has exceeded the total size limit for the resource.
 type TotalSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TotalSizeLimitExceededException) Error() string {
@@ -2223,6 +2453,8 @@ func (e *TotalSizeLimitExceededException) ErrorFault() smithy.ErrorFault { retur
 // The calendar entry contained in the specified SSM document isn't supported.
 type UnsupportedCalendarException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedCalendarException) Error() string {
@@ -2245,6 +2477,8 @@ func (e *UnsupportedCalendarException) ErrorFault() smithy.ErrorFault { return s
 // in the Amazon Web Services Systems Manager User Guide.
 type UnsupportedFeatureRequiredException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedFeatureRequiredException) Error() string {
@@ -2270,6 +2504,8 @@ type UnsupportedInventoryItemContextException struct {
 	Message *string
 
 	TypeName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedInventoryItemContextException) Error() string {
@@ -2293,6 +2529,8 @@ func (e *UnsupportedInventoryItemContextException) ErrorFault() smithy.ErrorFaul
 // for each type.
 type UnsupportedInventorySchemaVersionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedInventorySchemaVersionException) Error() string {
@@ -2315,6 +2553,8 @@ func (e *UnsupportedInventorySchemaVersionException) ErrorFault() smithy.ErrorFa
 // supported for the operating system.
 type UnsupportedOperatingSystem struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperatingSystem) Error() string {
@@ -2332,6 +2572,8 @@ func (e *UnsupportedOperatingSystem) ErrorFault() smithy.ErrorFault { return smi
 // The parameter type isn't supported.
 type UnsupportedParameterType struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedParameterType) Error() string {
@@ -2350,6 +2592,8 @@ func (e *UnsupportedParameterType) ErrorFault() smithy.ErrorFault { return smith
 // example, you sent an document for a Windows instance to a Linux instance.
 type UnsupportedPlatformType struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedPlatformType) Error() string {

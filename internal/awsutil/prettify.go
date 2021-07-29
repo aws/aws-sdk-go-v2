@@ -18,7 +18,9 @@ func Prettify(i interface{}) string {
 // prettify will recursively walk value v to build a textual
 // representation of the value.
 func prettify(v reflect.Value, indent int, buf *bytes.Buffer) {
+	isPtr := false
 	for v.Kind() == reflect.Ptr {
+		isPtr = true
 		v = v.Elem()
 	}
 
@@ -33,6 +35,9 @@ func prettify(v reflect.Value, indent int, buf *bytes.Buffer) {
 			break
 		}
 
+		if isPtr {
+			buf.WriteRune('&')
+		}
 		buf.WriteString("{\n")
 
 		names := []string{}
@@ -67,9 +72,9 @@ func prettify(v reflect.Value, indent int, buf *bytes.Buffer) {
 			break
 		}
 
-		nl, id, id2 := "", "", ""
-		if v.Len() > 3 {
-			nl, id, id2 = "\n", strings.Repeat(" ", indent), strings.Repeat(" ", indent+2)
+		nl, id, id2 := "\n", strings.Repeat(" ", indent), strings.Repeat(" ", indent+2)
+		if isPtr {
+			buf.WriteRune('&')
 		}
 		buf.WriteString("[" + nl)
 		for i := 0; i < v.Len(); i++ {
@@ -83,6 +88,9 @@ func prettify(v reflect.Value, indent int, buf *bytes.Buffer) {
 
 		buf.WriteString(nl + id + "]")
 	case reflect.Map:
+		if isPtr {
+			buf.WriteRune('&')
+		}
 		buf.WriteString("{\n")
 
 		for i, k := range v.MapKeys() {
@@ -101,6 +109,16 @@ func prettify(v reflect.Value, indent int, buf *bytes.Buffer) {
 			fmt.Fprint(buf, "<invalid value>")
 			return
 		}
+
+		for v.Kind() == reflect.Interface && !v.IsNil() {
+			v = v.Elem()
+		}
+
+		if v.Kind() == reflect.Ptr || v.Kind() == reflect.Struct || v.Kind() == reflect.Map || v.Kind() == reflect.Slice {
+			prettify(v, indent, buf)
+			return
+		}
+
 		format := "%v"
 		switch v.Interface().(type) {
 		case string:

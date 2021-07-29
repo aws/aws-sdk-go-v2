@@ -41,11 +41,15 @@ type UpdateStandardsControlInput struct {
 	// A description of the reason why you are disabling a security standard control.
 	// If you are disabling a control, then this is required.
 	DisabledReason *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStandardsControlOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStandardsControlMiddlewares(stack *middleware.Stack, options Options) (err error) {

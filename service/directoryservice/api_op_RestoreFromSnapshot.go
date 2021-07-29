@@ -39,12 +39,16 @@ type RestoreFromSnapshotInput struct {
 	//
 	// This member is required.
 	SnapshotId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of the RestoreFromSnapshot operation.
 type RestoreFromSnapshotOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,15 @@ type CancelSigningProfileInput struct {
 	//
 	// This member is required.
 	ProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelSigningProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelSigningProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

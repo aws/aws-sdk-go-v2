@@ -49,11 +49,15 @@ type DeleteGroupPolicyInput struct {
 	//
 	// This member is required.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGroupPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

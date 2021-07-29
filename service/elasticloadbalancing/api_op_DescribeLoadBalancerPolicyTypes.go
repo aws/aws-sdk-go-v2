@@ -40,6 +40,8 @@ type DescribeLoadBalancerPolicyTypesInput struct {
 	// The names of the policy types. If no names are specified, describes all policy
 	// types defined by Elastic Load Balancing.
 	PolicyTypeNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeLoadBalancerPolicyTypes.
@@ -50,6 +52,8 @@ type DescribeLoadBalancerPolicyTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLoadBalancerPolicyTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

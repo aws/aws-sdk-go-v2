@@ -253,6 +253,8 @@ type CreateServerInput struct {
 	// * A maximum of 50 user-applied tags is allowed for any AWS
 	// OpsWorks-CM server.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateServerOutput struct {
@@ -262,6 +264,8 @@ type CreateServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

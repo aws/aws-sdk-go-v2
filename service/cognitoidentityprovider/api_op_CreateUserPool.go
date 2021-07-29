@@ -140,6 +140,8 @@ type CreateUserPoolInput struct {
 	// The template for the verification message that the user sees when the app
 	// requests permission to access the user's information.
 	VerificationMessageTemplate *types.VerificationMessageTemplateType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server for the request to create a user pool.
@@ -150,6 +152,8 @@ type CreateUserPoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserPoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

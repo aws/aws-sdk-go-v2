@@ -37,11 +37,15 @@ type StopAutomationExecutionInput struct {
 	// The stop request type. Valid types include the following: Cancel and Complete.
 	// The default type is Cancel.
 	Type types.StopType
+
+	noSmithyDocumentSerde
 }
 
 type StopAutomationExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopAutomationExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

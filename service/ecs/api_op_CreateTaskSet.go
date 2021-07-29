@@ -138,6 +138,8 @@ type CreateTaskSetInput struct {
 	// values with this prefix. Tags with this prefix do not count against your tags
 	// per resource limit.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateTaskSetOutput struct {
@@ -150,6 +152,8 @@ type CreateTaskSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type ListBranchesInput struct {
 
 	// An enumeration token that allows the operation to batch the results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a list branches operation.
@@ -50,6 +52,8 @@ type ListBranchesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBranchesMiddlewares(stack *middleware.Stack, options Options) (err error) {

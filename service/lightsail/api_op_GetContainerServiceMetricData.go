@@ -99,6 +99,8 @@ type GetContainerServiceMetricDataInput struct {
 	//
 	// This member is required.
 	Statistics []types.MetricStatistic
+
+	noSmithyDocumentSerde
 }
 
 type GetContainerServiceMetricDataOutput struct {
@@ -111,6 +113,8 @@ type GetContainerServiceMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContainerServiceMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

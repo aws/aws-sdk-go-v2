@@ -32,11 +32,15 @@ type DisassociateWirelessDeviceFromThingInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateWirelessDeviceFromThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateWirelessDeviceFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

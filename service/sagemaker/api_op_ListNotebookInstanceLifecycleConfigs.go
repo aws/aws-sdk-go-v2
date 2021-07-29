@@ -65,6 +65,8 @@ type ListNotebookInstanceLifecycleConfigsInput struct {
 
 	// The sort order for results.
 	SortOrder types.NotebookInstanceLifecycleConfigSortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListNotebookInstanceLifecycleConfigsOutput struct {
@@ -79,6 +81,8 @@ type ListNotebookInstanceLifecycleConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNotebookInstanceLifecycleConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

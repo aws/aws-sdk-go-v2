@@ -29,11 +29,14 @@ func (c *Client) EnableProactiveEngagement(ctx context.Context, params *EnablePr
 }
 
 type EnableProactiveEngagementInput struct {
+	noSmithyDocumentSerde
 }
 
 type EnableProactiveEngagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableProactiveEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {

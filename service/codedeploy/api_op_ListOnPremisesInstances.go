@@ -49,6 +49,8 @@ type ListOnPremisesInstancesInput struct {
 	// The on-premises instance tags that are used to restrict the on-premises instance
 	// names returned.
 	TagFilters []types.TagFilter
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of the list on-premises instances operation.
@@ -64,6 +66,8 @@ type ListOnPremisesInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOnPremisesInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

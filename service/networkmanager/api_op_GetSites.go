@@ -43,6 +43,8 @@ type GetSitesInput struct {
 
 	// One or more site IDs. The maximum is 10.
 	SiteIds []string
+
+	noSmithyDocumentSerde
 }
 
 type GetSitesOutput struct {
@@ -55,6 +57,8 @@ type GetSitesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSitesMiddlewares(stack *middleware.Stack, options Options) (err error) {

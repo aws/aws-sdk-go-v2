@@ -30,6 +30,7 @@ func (c *Client) DescribeMetricCollectionTypes(ctx context.Context, params *Desc
 }
 
 type DescribeMetricCollectionTypesInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeMetricCollectionTypesOutput struct {
@@ -42,6 +43,8 @@ type DescribeMetricCollectionTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMetricCollectionTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

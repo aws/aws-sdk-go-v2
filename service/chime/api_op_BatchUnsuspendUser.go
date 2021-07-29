@@ -45,6 +45,8 @@ type BatchUnsuspendUserInput struct {
 	//
 	// This member is required.
 	UserIdList []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchUnsuspendUserOutput struct {
@@ -56,6 +58,8 @@ type BatchUnsuspendUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUnsuspendUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

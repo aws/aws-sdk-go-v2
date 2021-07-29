@@ -47,6 +47,8 @@ type MergeBranchesByFastForwardInput struct {
 
 	// The branch where the merge is applied.
 	TargetBranch *string
+
+	noSmithyDocumentSerde
 }
 
 type MergeBranchesByFastForwardOutput struct {
@@ -59,6 +61,8 @@ type MergeBranchesByFastForwardOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMergeBranchesByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {

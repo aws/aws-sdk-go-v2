@@ -93,12 +93,16 @@ type ConfirmSignUpInput struct {
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server for the registration confirmation.
 type ConfirmSignUpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmSignUpMiddlewares(stack *middleware.Stack, options Options) (err error) {

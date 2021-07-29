@@ -43,6 +43,8 @@ type ListDatabasesInput struct {
 	// The pagination token. To resume pagination, provide the NextToken value as
 	// argument of a subsequent API invocation.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDatabasesOutput struct {
@@ -55,6 +57,8 @@ type ListDatabasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

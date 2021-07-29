@@ -40,6 +40,8 @@ type ListFHIRDatastoresInput struct {
 
 	// Fetches the next page of Data Stores when results are paginated.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFHIRDatastoresOutput struct {
@@ -54,6 +56,8 @@ type ListFHIRDatastoresOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFHIRDatastoresMiddlewares(stack *middleware.Stack, options Options) (err error) {

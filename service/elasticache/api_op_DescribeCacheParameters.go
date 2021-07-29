@@ -50,6 +50,8 @@ type DescribeCacheParametersInput struct {
 
 	// The parameter types to return. Valid values: user | system | engine-default
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DescribeCacheParameters operation.
@@ -67,6 +69,8 @@ type DescribeCacheParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCacheParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

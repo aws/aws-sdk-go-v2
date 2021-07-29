@@ -98,6 +98,8 @@ type PutGatewayResponseInput struct {
 
 	// The HTTP status code of the GatewayResponse.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // A gateway response of a given response type and status code, with optional
@@ -214,6 +216,8 @@ type PutGatewayResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutGatewayResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

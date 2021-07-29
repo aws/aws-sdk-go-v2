@@ -101,6 +101,8 @@ type GetContainerLogInput struct {
 	// time to Unix time format using a converter like Epoch converter
 	// (https://www.epochconverter.com/).
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type GetContainerLogOutput struct {
@@ -116,6 +118,8 @@ type GetContainerLogOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContainerLogMiddlewares(stack *middleware.Stack, options Options) (err error) {

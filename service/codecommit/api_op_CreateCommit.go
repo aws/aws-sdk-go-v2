@@ -67,6 +67,8 @@ type CreateCommitInput struct {
 
 	// The file modes to update for files in this commit.
 	SetFileModes []types.SetFileModeEntry
+
+	noSmithyDocumentSerde
 }
 
 type CreateCommitOutput struct {
@@ -89,6 +91,8 @@ type CreateCommitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCommitMiddlewares(stack *middleware.Stack, options Options) (err error) {

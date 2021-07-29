@@ -33,11 +33,14 @@ func (c *Client) DisassociateDRTRole(ctx context.Context, params *DisassociateDR
 }
 
 type DisassociateDRTRoleInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisassociateDRTRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateDRTRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

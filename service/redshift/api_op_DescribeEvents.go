@@ -99,6 +99,8 @@ type DescribeEventsInput struct {
 	// format. For more information about ISO 8601, go to the ISO8601 Wikipedia page.
 	// (http://en.wikipedia.org/wiki/ISO_8601) Example: 2009-07-08T18:00Z
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -116,6 +118,8 @@ type DescribeEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

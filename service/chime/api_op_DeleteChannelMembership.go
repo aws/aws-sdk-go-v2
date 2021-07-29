@@ -43,11 +43,15 @@ type DeleteChannelMembershipInput struct {
 
 	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteChannelMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteChannelMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

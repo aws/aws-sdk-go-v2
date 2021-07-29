@@ -28,11 +28,14 @@ func (c *Client) DisableProactiveEngagement(ctx context.Context, params *Disable
 }
 
 type DisableProactiveEngagementInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisableProactiveEngagementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableProactiveEngagementMiddlewares(stack *middleware.Stack, options Options) (err error) {

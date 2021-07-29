@@ -51,6 +51,8 @@ type BatchMeterUsageInput struct {
 	//
 	// This member is required.
 	UsageRecords []types.UsageRecord
+
+	noSmithyDocumentSerde
 }
 
 // Contains the UsageRecords processed by BatchMeterUsage and any records that have
@@ -68,6 +70,8 @@ type BatchMeterUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type GetGrantInput struct {
 
 	// Grant version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGrantOutput struct {
@@ -45,6 +47,8 @@ type GetGrantOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {

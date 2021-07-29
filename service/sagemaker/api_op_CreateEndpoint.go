@@ -101,6 +101,8 @@ type CreateEndpointInput struct {
 	// environment. For more information, see Tagging Amazon Web Services Resources
 	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateEndpointOutput struct {
@@ -112,6 +114,8 @@ type CreateEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

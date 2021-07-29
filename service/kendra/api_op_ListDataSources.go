@@ -43,6 +43,8 @@ type ListDataSourcesInput struct {
 	// this pagination token to retrieve the next set of data sources
 	// (DataSourceSummaryItems).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDataSourcesOutput struct {
@@ -56,6 +58,8 @@ type ListDataSourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDataSourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

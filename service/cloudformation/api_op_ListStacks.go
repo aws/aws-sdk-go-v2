@@ -42,6 +42,8 @@ type ListStacksInput struct {
 	// only stacks with the specified status codes. For a complete list of stack status
 	// codes, see the StackStatus parameter of the Stack data type.
 	StackStatusFilter []types.StackStatus
+
+	noSmithyDocumentSerde
 }
 
 // The output for ListStacks action.
@@ -57,6 +59,8 @@ type ListStacksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStacksMiddlewares(stack *middleware.Stack, options Options) (err error) {

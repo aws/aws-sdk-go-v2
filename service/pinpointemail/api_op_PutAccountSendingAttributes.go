@@ -34,6 +34,8 @@ type PutAccountSendingAttributesInput struct {
 	// account's ability to send email, you can't use this operation to resume your
 	// account's ability to send email.
 	SendingEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -41,6 +43,8 @@ type PutAccountSendingAttributesInput struct {
 type PutAccountSendingAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccountSendingAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

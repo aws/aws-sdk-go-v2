@@ -117,11 +117,15 @@ type UpdateNotebookInstanceInput struct {
 	// you can't decrease the volume size. If you want to decrease the size of the ML
 	// storage volume in use, create a new notebook instance with the desired size.
 	VolumeSizeInGB *int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateNotebookInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNotebookInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

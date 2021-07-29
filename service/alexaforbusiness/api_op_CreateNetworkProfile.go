@@ -76,6 +76,8 @@ type CreateNetworkProfileInput struct {
 	// The root certificates of your authentication server that is installed on your
 	// devices and used to trust your authentication server during EAP negotiation.
 	TrustAnchors []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateNetworkProfileOutput struct {
@@ -85,6 +87,8 @@ type CreateNetworkProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNetworkProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

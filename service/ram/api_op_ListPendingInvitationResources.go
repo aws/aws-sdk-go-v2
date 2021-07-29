@@ -42,6 +42,8 @@ type ListPendingInvitationResourcesInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPendingInvitationResourcesOutput struct {
@@ -55,6 +57,8 @@ type ListPendingInvitationResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPendingInvitationResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

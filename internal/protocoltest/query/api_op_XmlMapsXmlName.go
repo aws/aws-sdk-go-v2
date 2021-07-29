@@ -26,6 +26,7 @@ func (c *Client) XmlMapsXmlName(ctx context.Context, params *XmlMapsXmlNameInput
 }
 
 type XmlMapsXmlNameInput struct {
+	noSmithyDocumentSerde
 }
 
 type XmlMapsXmlNameOutput struct {
@@ -33,6 +34,8 @@ type XmlMapsXmlNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlMapsXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

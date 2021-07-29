@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 type Identity struct {
 
 	// The source IP address of the TCP connection making the request to API Gateway.
@@ -13,4 +17,8 @@ type Identity struct {
 	//
 	// This member is required.
 	UserAgent *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

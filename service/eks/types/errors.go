@@ -11,6 +11,8 @@ import (
 // meaning will depend on the API, and will be documented in the error message.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -34,6 +36,8 @@ type ClientException struct {
 	ClusterName   *string
 	NodegroupName *string
 	AddonName     *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientException) Error() string {
@@ -57,6 +61,8 @@ type InvalidParameterException struct {
 	NodegroupName      *string
 	FargateProfileName *string
 	AddonName          *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -79,6 +85,8 @@ type InvalidRequestException struct {
 	ClusterName   *string
 	NodegroupName *string
 	AddonName     *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -97,6 +105,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // should not retry such requests.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -118,6 +128,8 @@ type ResourceInUseException struct {
 	ClusterName   *string
 	NodegroupName *string
 	AddonName     *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -138,6 +150,8 @@ type ResourceLimitExceededException struct {
 
 	ClusterName   *string
 	NodegroupName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceededException) Error() string {
@@ -162,6 +176,8 @@ type ResourceNotFoundException struct {
 	NodegroupName      *string
 	FargateProfileName *string
 	AddonName          *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -183,6 +199,8 @@ type ServerException struct {
 	ClusterName   *string
 	NodegroupName *string
 	AddonName     *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServerException) Error() string {
@@ -200,6 +218,8 @@ func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultSe
 // The service is unavailable. Back off and retry the operation.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -224,6 +244,8 @@ type UnsupportedAvailabilityZoneException struct {
 	ClusterName   *string
 	NodegroupName *string
 	ValidZones    []string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedAvailabilityZoneException) Error() string {

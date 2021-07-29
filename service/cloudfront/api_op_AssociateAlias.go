@@ -48,11 +48,15 @@ type AssociateAliasInput struct {
 	//
 	// This member is required.
 	TargetDistributionId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -82,6 +82,8 @@ type ListNotebookExecutionsInput struct {
 	// The end of time range filter for listing notebook executions. The default is the
 	// current timestamp.
 	To *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type ListNotebookExecutionsOutput struct {
@@ -95,6 +97,8 @@ type ListNotebookExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNotebookExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

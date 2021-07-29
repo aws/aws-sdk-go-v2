@@ -48,6 +48,8 @@ type AssociateVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a virtual interface.
@@ -172,6 +174,8 @@ type AssociateVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

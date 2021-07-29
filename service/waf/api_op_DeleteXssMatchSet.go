@@ -58,6 +58,8 @@ type DeleteXssMatchSetInput struct {
 	//
 	// This member is required.
 	XssMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a request to delete an XssMatchSet from AWS WAF.
@@ -70,6 +72,8 @@ type DeleteXssMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type CreateRobotApplicationVersionInput struct {
 	// The current revision id for the robot application. If you provide a value and it
 	// matches the latest revision ID, a new version will be created.
 	CurrentRevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRobotApplicationVersionOutput struct {
@@ -66,6 +68,8 @@ type CreateRobotApplicationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRobotApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

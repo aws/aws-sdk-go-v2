@@ -45,6 +45,8 @@ type ListRoomsInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRoomsOutput struct {
@@ -57,6 +59,8 @@ type ListRoomsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRoomsMiddlewares(stack *middleware.Stack, options Options) (err error) {

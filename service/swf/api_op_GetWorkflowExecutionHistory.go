@@ -78,6 +78,8 @@ type GetWorkflowExecutionHistoryInput struct {
 	// When set to true, returns the events in reverse order. By default the results
 	// are returned in ascending order of the eventTimeStamp of the events.
 	ReverseOrder bool
+
+	noSmithyDocumentSerde
 }
 
 // Paginated representation of a workflow history for a workflow execution. This is
@@ -99,6 +101,8 @@ type GetWorkflowExecutionHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWorkflowExecutionHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

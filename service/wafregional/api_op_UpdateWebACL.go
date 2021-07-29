@@ -124,6 +124,8 @@ type UpdateWebACLInput struct {
 	//
 	// * WafAction: Contains Type
 	Updates []types.WebACLUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWebACLOutput struct {
@@ -135,6 +137,8 @@ type UpdateWebACLOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {

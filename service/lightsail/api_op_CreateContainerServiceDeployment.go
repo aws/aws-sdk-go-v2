@@ -51,6 +51,8 @@ type CreateContainerServiceDeploymentInput struct {
 	// An object that describes the settings of the public endpoint for the container
 	// service.
 	PublicEndpoint *types.EndpointRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateContainerServiceDeploymentOutput struct {
@@ -60,6 +62,8 @@ type CreateContainerServiceDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContainerServiceDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

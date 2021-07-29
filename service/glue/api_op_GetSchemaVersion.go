@@ -48,6 +48,8 @@ type GetSchemaVersionInput struct {
 
 	// The version number of the schema.
 	SchemaVersionNumber *types.SchemaVersionNumber
+
+	noSmithyDocumentSerde
 }
 
 type GetSchemaVersionOutput struct {
@@ -75,6 +77,8 @@ type GetSchemaVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSchemaVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

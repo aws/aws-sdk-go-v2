@@ -35,6 +35,8 @@ type DeleteReplicationInstanceInput struct {
 	//
 	// This member is required.
 	ReplicationInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -45,6 +47,8 @@ type DeleteReplicationInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReplicationInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

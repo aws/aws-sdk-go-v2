@@ -29,6 +29,8 @@ type HttpPrefixHeadersInput struct {
 	Foo *string
 
 	FooMap map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type HttpPrefixHeadersOutput struct {
@@ -39,6 +41,8 @@ type HttpPrefixHeadersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpPrefixHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {

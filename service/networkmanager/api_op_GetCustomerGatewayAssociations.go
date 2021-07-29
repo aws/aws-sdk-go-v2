@@ -47,6 +47,8 @@ type GetCustomerGatewayAssociationsInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCustomerGatewayAssociationsOutput struct {
@@ -59,6 +61,8 @@ type GetCustomerGatewayAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCustomerGatewayAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

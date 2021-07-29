@@ -52,6 +52,8 @@ type PutDomainPermissionsPolicyInput struct {
 	// optimistic locking, which prevents others from overwriting your changes to the
 	// domain's resource policy.
 	PolicyRevision *string
+
+	noSmithyDocumentSerde
 }
 
 type PutDomainPermissionsPolicyOutput struct {
@@ -61,6 +63,8 @@ type PutDomainPermissionsPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDomainPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

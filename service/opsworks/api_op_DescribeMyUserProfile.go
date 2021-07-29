@@ -32,6 +32,7 @@ func (c *Client) DescribeMyUserProfile(ctx context.Context, params *DescribeMyUs
 }
 
 type DescribeMyUserProfileInput struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeMyUserProfile request.
@@ -42,6 +43,8 @@ type DescribeMyUserProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMyUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetOTAUpdateInput struct {
 	//
 	// This member is required.
 	OtaUpdateId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetOTAUpdateOutput struct {
@@ -42,6 +44,8 @@ type GetOTAUpdateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetOTAUpdateMiddlewares(stack *middleware.Stack, options Options) (err error) {

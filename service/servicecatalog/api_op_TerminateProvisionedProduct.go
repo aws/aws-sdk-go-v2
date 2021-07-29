@@ -66,6 +66,8 @@ type TerminateProvisionedProductInput struct {
 	// CloudFormation stack, stack set, or the underlying resources of the deleted
 	// provisioned product. The default value is false.
 	RetainPhysicalResources bool
+
+	noSmithyDocumentSerde
 }
 
 type TerminateProvisionedProductOutput struct {
@@ -75,6 +77,8 @@ type TerminateProvisionedProductOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateProvisionedProductMiddlewares(stack *middleware.Stack, options Options) (err error) {

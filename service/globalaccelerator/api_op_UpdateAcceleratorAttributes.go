@@ -52,6 +52,8 @@ type UpdateAcceleratorAttributesInput struct {
 	// the S3 bucket prefix, the log file bucket folder structure will include a double
 	// slash (//), like the following: s3-bucket_name//AWSLogs/aws_account_id
 	FlowLogsS3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAcceleratorAttributesOutput struct {
@@ -61,6 +63,8 @@ type UpdateAcceleratorAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAcceleratorAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

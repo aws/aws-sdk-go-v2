@@ -43,11 +43,15 @@ type UpdateWorkGroupInput struct {
 
 	// The workgroup state that will be updated for the given workgroup.
 	State types.WorkGroupState
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWorkGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

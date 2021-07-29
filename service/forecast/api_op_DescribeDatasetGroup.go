@@ -45,6 +45,8 @@ type DescribeDatasetGroupInput struct {
 	//
 	// This member is required.
 	DatasetGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDatasetGroupOutput struct {
@@ -90,6 +92,8 @@ type DescribeDatasetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDatasetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

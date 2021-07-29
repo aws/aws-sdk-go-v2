@@ -39,11 +39,15 @@ type UpdateCrawlerScheduleInput struct {
 	// For example, to run something every day at 12:15 UTC, you would specify: cron(15
 	// 12 * * ? *).
 	Schedule *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCrawlerScheduleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCrawlerScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

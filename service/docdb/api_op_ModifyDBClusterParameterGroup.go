@@ -50,6 +50,8 @@ type ModifyDBClusterParameterGroupInput struct {
 	//
 	// This member is required.
 	Parameters []types.Parameter
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name of a cluster parameter group.
@@ -71,6 +73,8 @@ type ModifyDBClusterParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyDBClusterParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

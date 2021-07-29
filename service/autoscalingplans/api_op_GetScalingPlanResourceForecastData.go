@@ -94,6 +94,8 @@ type GetScalingPlanResourceForecastDataInput struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type GetScalingPlanResourceForecastDataOutput struct {
@@ -105,6 +107,8 @@ type GetScalingPlanResourceForecastDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetScalingPlanResourceForecastDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

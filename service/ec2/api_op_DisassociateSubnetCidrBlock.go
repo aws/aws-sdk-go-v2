@@ -35,6 +35,8 @@ type DisassociateSubnetCidrBlockInput struct {
 	//
 	// This member is required.
 	AssociationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateSubnetCidrBlockOutput struct {
@@ -47,6 +49,8 @@ type DisassociateSubnetCidrBlockOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateSubnetCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

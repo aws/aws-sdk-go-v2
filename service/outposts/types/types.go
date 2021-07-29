@@ -2,11 +2,17 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Information about an instance type.
 type InstanceTypeItem struct {
 
 	// The instance type.
 	InstanceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Outpost.
@@ -44,6 +50,8 @@ type Outpost struct {
 
 	// The Outpost tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a site.
@@ -66,4 +74,8 @@ type Site struct {
 
 	// The site tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

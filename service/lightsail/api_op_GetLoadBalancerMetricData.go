@@ -164,6 +164,8 @@ type GetLoadBalancerMetricDataInput struct {
 	//
 	// This member is required.
 	Unit types.MetricUnit
+
+	noSmithyDocumentSerde
 }
 
 type GetLoadBalancerMetricDataOutput struct {
@@ -176,6 +178,8 @@ type GetLoadBalancerMetricDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLoadBalancerMetricDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

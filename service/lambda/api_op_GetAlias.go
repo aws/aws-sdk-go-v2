@@ -51,6 +51,8 @@ type GetAliasInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information about a Lambda function alias
@@ -79,6 +81,8 @@ type GetAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

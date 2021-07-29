@@ -58,6 +58,8 @@ type StartExportTaskInput struct {
 	// Agent selected in the filters. If no value is specified, data is exported
 	// starting from the first data collected by the agent.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type StartExportTaskOutput struct {
@@ -67,6 +69,8 @@ type StartExportTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

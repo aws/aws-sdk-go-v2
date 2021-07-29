@@ -47,6 +47,8 @@ type PostCommentReplyInput struct {
 	// received with the same parameters and a token is included, the request returns
 	// information about the initial request that used that token.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type PostCommentReplyOutput struct {
@@ -56,6 +58,8 @@ type PostCommentReplyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPostCommentReplyMiddlewares(stack *middleware.Stack, options Options) (err error) {

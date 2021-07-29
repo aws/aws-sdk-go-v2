@@ -10,6 +10,8 @@ import (
 // Access to the resource is denied.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -31,6 +33,8 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -48,6 +52,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // An exception occurred with the service.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -68,6 +74,8 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -88,6 +96,8 @@ type ServiceLimitExceededException struct {
 
 	LimitName  LimitName
 	LimitValue float64
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceLimitExceededException) Error() string {
@@ -105,6 +115,8 @@ func (e *ServiceLimitExceededException) ErrorFault() smithy.ErrorFault { return 
 // The limit on the number of requests per second was exceeded.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -122,6 +134,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The request was invalid.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

@@ -39,6 +39,8 @@ type DescribeChangeSetInput struct {
 	//
 	// This member is required.
 	ChangeSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeChangeSetOutput struct {
@@ -81,6 +83,8 @@ type DescribeChangeSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeChangeSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

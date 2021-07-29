@@ -52,6 +52,8 @@ type GetRuleGroupInput struct {
 	// * API and SDKs - For all calls, use the
 	// Region endpoint us-east-1.
 	Scope types.Scope
+
+	noSmithyDocumentSerde
 }
 
 type GetRuleGroupOutput struct {
@@ -70,6 +72,8 @@ type GetRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

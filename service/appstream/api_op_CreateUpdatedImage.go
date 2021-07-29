@@ -68,6 +68,8 @@ type CreateUpdatedImageInput struct {
 	// (https://docs.aws.amazon.com/appstream2/latest/developerguide/tagging-basic.html)
 	// in the Amazon AppStream 2.0 Administration Guide.
 	NewImageTags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateUpdatedImageOutput struct {
@@ -80,6 +82,8 @@ type CreateUpdatedImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUpdatedImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

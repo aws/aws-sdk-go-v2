@@ -55,6 +55,8 @@ type CreateModelVersionInput struct {
 
 	// A collection of key and value pairs.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateModelVersionOutput struct {
@@ -73,6 +75,8 @@ type CreateModelVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

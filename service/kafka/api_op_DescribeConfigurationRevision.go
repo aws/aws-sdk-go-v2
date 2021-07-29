@@ -39,6 +39,8 @@ type DescribeConfigurationRevisionInput struct {
 	//
 	// This member is required.
 	Revision int64
+
+	noSmithyDocumentSerde
 }
 
 type DescribeConfigurationRevisionOutput struct {
@@ -63,6 +65,8 @@ type DescribeConfigurationRevisionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConfigurationRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

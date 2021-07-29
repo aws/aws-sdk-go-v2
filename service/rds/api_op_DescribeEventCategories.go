@@ -41,6 +41,8 @@ type DescribeEventCategoriesInput struct {
 	// db-cluster | db-parameter-group | db-security-group | db-snapshot |
 	// db-cluster-snapshot
 	SourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Data returned from the DescribeEventCategories operation.
@@ -51,6 +53,8 @@ type DescribeEventCategoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

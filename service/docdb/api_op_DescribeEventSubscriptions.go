@@ -51,6 +51,8 @@ type DescribeEventSubscriptionsInput struct {
 	// The name of the Amazon DocumentDB event notification subscription that you want
 	// to describe.
 	SubscriptionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of DescribeEventSubscriptions.
@@ -66,6 +68,8 @@ type DescribeEventSubscriptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

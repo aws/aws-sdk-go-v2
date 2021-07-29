@@ -51,11 +51,15 @@ type DeleteApplicationInputProcessingConfigurationInput struct {
 	//
 	// This member is required.
 	InputId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationInputProcessingConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationInputProcessingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

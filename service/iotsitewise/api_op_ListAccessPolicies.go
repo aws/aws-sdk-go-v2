@@ -58,6 +58,8 @@ type ListAccessPoliciesInput struct {
 	// The type of resource (portal or project). This parameter is required if you
 	// specify resourceId.
 	ResourceType types.ResourceType
+
+	noSmithyDocumentSerde
 }
 
 type ListAccessPoliciesOutput struct {
@@ -73,6 +75,8 @@ type ListAccessPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccessPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type UpdateThingGroupInput struct {
 	// The expected version of the thing group. If this does not match the version of
 	// the thing group being updated, the update will fail.
 	ExpectedVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type UpdateThingGroupOutput struct {
@@ -51,6 +53,8 @@ type UpdateThingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

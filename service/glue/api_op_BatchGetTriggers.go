@@ -37,6 +37,8 @@ type BatchGetTriggersInput struct {
 	//
 	// This member is required.
 	TriggerNames []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetTriggersOutput struct {
@@ -49,6 +51,8 @@ type BatchGetTriggersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetTriggersMiddlewares(stack *middleware.Stack, options Options) (err error) {

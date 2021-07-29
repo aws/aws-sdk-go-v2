@@ -33,6 +33,8 @@ type StopReplicationToReplicaInput struct {
 	//
 	// This member is required.
 	SecretId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopReplicationToReplicaOutput struct {
@@ -42,6 +44,8 @@ type StopReplicationToReplicaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopReplicationToReplicaMiddlewares(stack *middleware.Stack, options Options) (err error) {

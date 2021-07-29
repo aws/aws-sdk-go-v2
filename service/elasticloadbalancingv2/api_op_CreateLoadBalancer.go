@@ -108,6 +108,8 @@ type CreateLoadBalancerInput struct {
 
 	// The type of load balancer. The default is application.
 	Type types.LoadBalancerTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 type CreateLoadBalancerOutput struct {
@@ -117,6 +119,8 @@ type CreateLoadBalancerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

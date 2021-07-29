@@ -56,6 +56,8 @@ type DescribePortfolioSharesInput struct {
 	// The page token for the next set of results. To retrieve the first set of
 	// results, use null.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePortfolioSharesOutput struct {
@@ -69,6 +71,8 @@ type DescribePortfolioSharesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePortfolioSharesMiddlewares(stack *middleware.Stack, options Options) (err error) {

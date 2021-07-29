@@ -41,6 +41,8 @@ type ActivateKeySigningKeyInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type ActivateKeySigningKeyOutput struct {
@@ -53,6 +55,8 @@ type ActivateKeySigningKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationActivateKeySigningKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type GetDeployablePatchSnapshotForInstanceInput struct {
 
 	// Defines the basic information about a patch baseline override.
 	BaselineOverride *types.BaselineOverride
+
+	noSmithyDocumentSerde
 }
 
 type GetDeployablePatchSnapshotForInstanceOutput struct {
@@ -70,6 +72,8 @@ type GetDeployablePatchSnapshotForInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeployablePatchSnapshotForInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

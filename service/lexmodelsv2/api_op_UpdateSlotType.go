@@ -73,6 +73,8 @@ type UpdateSlotTypeInput struct {
 	// A new list of values and their optional synonyms that define the values that the
 	// slot type can take.
 	SlotTypeValues []types.SlotTypeValue
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSlotTypeOutput struct {
@@ -114,6 +116,8 @@ type UpdateSlotTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSlotTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

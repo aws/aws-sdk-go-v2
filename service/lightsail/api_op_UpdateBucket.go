@@ -52,6 +52,8 @@ type UpdateBucketInput struct {
 	// * Suspended - Suspends versioning of objects in the
 	// specified bucket. Existing object versions are retained.
 	Versioning *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBucketOutput struct {
@@ -66,6 +68,8 @@ type UpdateBucketOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {

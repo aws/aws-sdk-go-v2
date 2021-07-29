@@ -43,11 +43,15 @@ type DeleteServiceQuotaIncreaseRequestFromTemplateInput struct {
 	//
 	// This member is required.
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteServiceQuotaIncreaseRequestFromTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteServiceQuotaIncreaseRequestFromTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

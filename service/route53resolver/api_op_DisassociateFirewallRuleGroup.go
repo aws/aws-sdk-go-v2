@@ -34,6 +34,8 @@ type DisassociateFirewallRuleGroupInput struct {
 	//
 	// This member is required.
 	FirewallRuleGroupAssociationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateFirewallRuleGroupOutput struct {
@@ -43,6 +45,8 @@ type DisassociateFirewallRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateFirewallRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

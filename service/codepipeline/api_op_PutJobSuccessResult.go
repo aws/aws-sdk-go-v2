@@ -56,11 +56,15 @@ type PutJobSuccessResultInput struct {
 	// a downstream action configuration. outputVariables can be included only when
 	// there is no continuation token on the request.
 	OutputVariables map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type PutJobSuccessResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutJobSuccessResultMiddlewares(stack *middleware.Stack, options Options) (err error) {

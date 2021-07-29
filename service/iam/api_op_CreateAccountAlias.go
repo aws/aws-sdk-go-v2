@@ -38,11 +38,15 @@ type CreateAccountAliasInput struct {
 	//
 	// This member is required.
 	AccountAlias *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAccountAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAccountAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

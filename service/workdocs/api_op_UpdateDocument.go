@@ -47,11 +47,15 @@ type UpdateDocumentInput struct {
 
 	// The resource state of the document. Only ACTIVE and RECYCLED are supported.
 	ResourceState types.ResourceStateType
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDocumentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {

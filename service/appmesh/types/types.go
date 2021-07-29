@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type AccessLog interface {
 // The file object to send virtual node access logs to.
 type AccessLogMemberFile struct {
 	Value FileAccessLog
+
+	noSmithyDocumentSerde
 }
 
 func (*AccessLogMemberFile) isAccessLog() {}
@@ -36,6 +39,8 @@ type AwsCloudMapInstanceAttribute struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the Cloud Map service discovery information for your
@@ -57,6 +62,8 @@ type AwsCloudMapServiceDiscovery struct {
 	// instance. Only instances that match all of the specified key/value pairs will be
 	// returned.
 	Attributes []AwsCloudMapInstanceAttribute
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the backends that a virtual node is expected to send
@@ -71,6 +78,8 @@ type Backend interface {
 // Specifies a virtual service to use as a backend.
 type BackendMemberVirtualService struct {
 	Value VirtualServiceBackend
+
+	noSmithyDocumentSerde
 }
 
 func (*BackendMemberVirtualService) isBackend() {}
@@ -80,6 +89,8 @@ type BackendDefaults struct {
 
 	// A reference to an object that represents a client policy.
 	ClientPolicy *ClientPolicy
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a client policy.
@@ -88,6 +99,8 @@ type ClientPolicy struct {
 	// A reference to an object that represents a Transport Layer Security (TLS) client
 	// policy.
 	Tls *ClientPolicyTls
+
+	noSmithyDocumentSerde
 }
 
 // A reference to an object that represents a Transport Layer Security (TLS) client
@@ -107,6 +120,8 @@ type ClientPolicyTls struct {
 
 	// One or more ports that the policy is enforced for.
 	Ports []int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the client's certificate.
@@ -124,6 +139,8 @@ type ClientTlsCertificate interface {
 // (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html).
 type ClientTlsCertificateMemberFile struct {
 	Value ListenerTlsFileCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*ClientTlsCertificateMemberFile) isClientTlsCertificate() {}
@@ -132,6 +149,8 @@ func (*ClientTlsCertificateMemberFile) isClientTlsCertificate() {}
 // certificate.
 type ClientTlsCertificateMemberSds struct {
 	Value ListenerTlsSdsCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*ClientTlsCertificateMemberSds) isClientTlsCertificate() {}
@@ -147,6 +166,8 @@ type DnsServiceDiscovery struct {
 
 	// Specifies the DNS response type for the virtual node.
 	ResponseType DnsResponseType
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a duration of time.
@@ -157,6 +178,8 @@ type Duration struct {
 
 	// A number of time units.
 	Value *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the egress filter rules for a service mesh.
@@ -170,6 +193,8 @@ type EgressFilter struct {
 	//
 	// This member is required.
 	Type EgressFilterType
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents an access log file.
@@ -185,6 +210,8 @@ type FileAccessLog struct {
 	//
 	// This member is required.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a gateway route returned by a describe operation.
@@ -219,6 +246,8 @@ type GatewayRouteData struct {
 	//
 	// This member is required.
 	VirtualGatewayName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the gateway route host name to match.
@@ -229,6 +258,8 @@ type GatewayRouteHostnameMatch struct {
 
 	// The specified ending characters of the host name to match on.
 	Suffix *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the gateway route host name to rewrite.
@@ -236,6 +267,8 @@ type GatewayRouteHostnameRewrite struct {
 
 	// The default target host name to write to.
 	DefaultTargetHostname DefaultGatewayRouteRewrite
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a gateway route returned by a list operation.
@@ -292,6 +325,8 @@ type GatewayRouteRef struct {
 	//
 	// This member is required.
 	VirtualGatewayName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a gateway route specification. Specify one gateway
@@ -309,6 +344,8 @@ type GatewayRouteSpec struct {
 
 	// The ordering of the gateway routes spec.
 	Priority *int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the current status of a gateway route.
@@ -318,6 +355,8 @@ type GatewayRouteStatus struct {
 	//
 	// This member is required.
 	Status GatewayRouteStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a gateway route target.
@@ -327,6 +366,8 @@ type GatewayRouteTarget struct {
 	//
 	// This member is required.
 	VirtualService *GatewayRouteVirtualService
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the virtual service that traffic is routed to.
@@ -336,6 +377,8 @@ type GatewayRouteVirtualService struct {
 	//
 	// This member is required.
 	VirtualServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a gRPC gateway route.
@@ -350,6 +393,8 @@ type GrpcGatewayRoute struct {
 	//
 	// This member is required.
 	Match *GrpcGatewayRouteMatch
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the action to take if a match is determined.
@@ -363,6 +408,8 @@ type GrpcGatewayRouteAction struct {
 
 	// The gateway route action to rewrite.
 	Rewrite *GrpcGatewayRouteRewrite
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the criteria for determining a request match.
@@ -376,6 +423,8 @@ type GrpcGatewayRouteMatch struct {
 
 	// The fully qualified domain name for the service to match from the request.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the metadata of the gateway route.
@@ -392,6 +441,8 @@ type GrpcGatewayRouteMetadata struct {
 
 	// The criteria for determining a metadata match.
 	Match GrpcMetadataMatchMethod
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the gateway route to rewrite.
@@ -399,6 +450,8 @@ type GrpcGatewayRouteRewrite struct {
 
 	// The host name of the gateway route to rewrite.
 	Hostname *GatewayRouteHostnameRewrite
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the method header to be matched.
@@ -416,6 +469,8 @@ type GrpcMetadataMatchMethod interface {
 // The exact method header to be matched on.
 type GrpcMetadataMatchMethodMemberExact struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcMetadataMatchMethodMemberExact) isGrpcMetadataMatchMethod() {}
@@ -423,6 +478,8 @@ func (*GrpcMetadataMatchMethodMemberExact) isGrpcMetadataMatchMethod() {}
 // The regex used to match the method header.
 type GrpcMetadataMatchMethodMemberRegex struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcMetadataMatchMethodMemberRegex) isGrpcMetadataMatchMethod() {}
@@ -432,6 +489,8 @@ func (*GrpcMetadataMatchMethodMemberRegex) isGrpcMetadataMatchMethod() {}
 // example, if the range specified were 1-100, only values 1-99 would be matched.
 type GrpcMetadataMatchMethodMemberRange struct {
 	Value MatchRange
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcMetadataMatchMethodMemberRange) isGrpcMetadataMatchMethod() {}
@@ -439,6 +498,8 @@ func (*GrpcMetadataMatchMethodMemberRange) isGrpcMetadataMatchMethod() {}
 // The specified beginning characters of the method header to be matched on.
 type GrpcMetadataMatchMethodMemberPrefix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcMetadataMatchMethodMemberPrefix) isGrpcMetadataMatchMethod() {}
@@ -446,6 +507,8 @@ func (*GrpcMetadataMatchMethodMemberPrefix) isGrpcMetadataMatchMethod() {}
 // The specified ending characters of the method header to match on.
 type GrpcMetadataMatchMethodMemberSuffix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcMetadataMatchMethodMemberSuffix) isGrpcMetadataMatchMethod() {}
@@ -489,6 +552,8 @@ type GrpcRetryPolicy struct {
 	// started and is encountered when the upstream is temporarily or permanently
 	// unavailable.
 	TcpRetryEvents []TcpRetryPolicyEvent
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a gRPC route type.
@@ -509,6 +574,8 @@ type GrpcRoute struct {
 
 	// An object that represents types of timeouts.
 	Timeout *GrpcTimeout
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the action to take if a match is determined.
@@ -519,6 +586,8 @@ type GrpcRouteAction struct {
 	//
 	// This member is required.
 	WeightedTargets []WeightedTarget
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the criteria for determining a request match.
@@ -533,6 +602,8 @@ type GrpcRouteMatch struct {
 
 	// The fully qualified domain name for the service to match from the request.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the match metadata for the route.
@@ -549,6 +620,8 @@ type GrpcRouteMetadata struct {
 
 	// An object that represents the data to match from the request.
 	Match GrpcRouteMetadataMatchMethod
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the match method. Specify one of the match values.
@@ -566,6 +639,8 @@ type GrpcRouteMetadataMatchMethod interface {
 // The value sent by the client must match the specified value exactly.
 type GrpcRouteMetadataMatchMethodMemberExact struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberExact) isGrpcRouteMetadataMatchMethod() {}
@@ -573,6 +648,8 @@ func (*GrpcRouteMetadataMatchMethodMemberExact) isGrpcRouteMetadataMatchMethod()
 // The value sent by the client must include the specified characters.
 type GrpcRouteMetadataMatchMethodMemberRegex struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberRegex) isGrpcRouteMetadataMatchMethod() {}
@@ -580,6 +657,8 @@ func (*GrpcRouteMetadataMatchMethodMemberRegex) isGrpcRouteMetadataMatchMethod()
 // An object that represents the range of values to match on.
 type GrpcRouteMetadataMatchMethodMemberRange struct {
 	Value MatchRange
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberRange) isGrpcRouteMetadataMatchMethod() {}
@@ -587,6 +666,8 @@ func (*GrpcRouteMetadataMatchMethodMemberRange) isGrpcRouteMetadataMatchMethod()
 // The value sent by the client must begin with the specified characters.
 type GrpcRouteMetadataMatchMethodMemberPrefix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberPrefix) isGrpcRouteMetadataMatchMethod() {}
@@ -594,6 +675,8 @@ func (*GrpcRouteMetadataMatchMethodMemberPrefix) isGrpcRouteMetadataMatchMethod(
 // The value sent by the client must end with the specified characters.
 type GrpcRouteMetadataMatchMethodMemberSuffix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*GrpcRouteMetadataMatchMethodMemberSuffix) isGrpcRouteMetadataMatchMethod() {}
@@ -612,6 +695,8 @@ type GrpcTimeout struct {
 	// the timeout should be greater than 15 seconds for the source and destination
 	// virtual node and the route.
 	PerRequest *Duration
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the method and value to match with the header value
@@ -630,6 +715,8 @@ type HeaderMatchMethod interface {
 // The value sent by the client must match the specified value exactly.
 type HeaderMatchMethodMemberExact struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*HeaderMatchMethodMemberExact) isHeaderMatchMethod() {}
@@ -637,6 +724,8 @@ func (*HeaderMatchMethodMemberExact) isHeaderMatchMethod() {}
 // The value sent by the client must include the specified characters.
 type HeaderMatchMethodMemberRegex struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*HeaderMatchMethodMemberRegex) isHeaderMatchMethod() {}
@@ -644,6 +733,8 @@ func (*HeaderMatchMethodMemberRegex) isHeaderMatchMethod() {}
 // An object that represents the range of values to match on.
 type HeaderMatchMethodMemberRange struct {
 	Value MatchRange
+
+	noSmithyDocumentSerde
 }
 
 func (*HeaderMatchMethodMemberRange) isHeaderMatchMethod() {}
@@ -651,6 +742,8 @@ func (*HeaderMatchMethodMemberRange) isHeaderMatchMethod() {}
 // The value sent by the client must begin with the specified characters.
 type HeaderMatchMethodMemberPrefix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*HeaderMatchMethodMemberPrefix) isHeaderMatchMethod() {}
@@ -658,6 +751,8 @@ func (*HeaderMatchMethodMemberPrefix) isHeaderMatchMethod() {}
 // The value sent by the client must end with the specified characters.
 type HeaderMatchMethodMemberSuffix struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*HeaderMatchMethodMemberSuffix) isHeaderMatchMethod() {}
@@ -703,6 +798,8 @@ type HealthCheckPolicy struct {
 	// The destination port for the health check request. This port must match the port
 	// defined in the PortMapping for the listener.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents an HTTP gateway route.
@@ -717,6 +814,8 @@ type HttpGatewayRoute struct {
 	//
 	// This member is required.
 	Match *HttpGatewayRouteMatch
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the action to take if a match is determined.
@@ -730,6 +829,8 @@ type HttpGatewayRouteAction struct {
 
 	// The gateway route action to rewrite.
 	Rewrite *HttpGatewayRouteRewrite
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the HTTP header in the gateway route.
@@ -747,6 +848,8 @@ type HttpGatewayRouteHeader struct {
 	// An object that represents the method and value to match with the header value
 	// sent in a request. Specify one match method.
 	Match HeaderMatchMethod
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the criteria for determining a request match.
@@ -773,6 +876,8 @@ type HttpGatewayRouteMatch struct {
 
 	// The query parameter to match on.
 	QueryParameters []HttpQueryParameter
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the path to rewrite.
@@ -780,6 +885,8 @@ type HttpGatewayRoutePathRewrite struct {
 
 	// The exact path to rewrite.
 	Exact *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the beginning characters of the route to rewrite.
@@ -790,6 +897,8 @@ type HttpGatewayRoutePrefixRewrite struct {
 
 	// The value used to replace the incoming route prefix when rewritten.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the gateway route to rewrite.
@@ -803,6 +912,8 @@ type HttpGatewayRouteRewrite struct {
 
 	// The specified beginning characters to rewrite.
 	Prefix *HttpGatewayRoutePrefixRewrite
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the path to match in the request.
@@ -813,6 +924,8 @@ type HttpPathMatch struct {
 
 	// The regex used to match the path.
 	Regex *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the query parameter in the request.
@@ -825,6 +938,8 @@ type HttpQueryParameter struct {
 
 	// The query parameter to match on.
 	Match *QueryParameterMatch
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a retry policy. Specify at least one value for at
@@ -863,6 +978,8 @@ type HttpRetryPolicy struct {
 	// started and is encountered when the upstream is temporarily or permanently
 	// unavailable.
 	TcpRetryEvents []TcpRetryPolicyEvent
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents an HTTP or HTTP/2 route type.
@@ -883,6 +1000,8 @@ type HttpRoute struct {
 
 	// An object that represents types of timeouts.
 	Timeout *HttpTimeout
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the action to take if a match is determined.
@@ -893,6 +1012,8 @@ type HttpRouteAction struct {
 	//
 	// This member is required.
 	WeightedTargets []WeightedTarget
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the HTTP header in the request.
@@ -909,6 +1030,8 @@ type HttpRouteHeader struct {
 
 	// The HeaderMatchMethod object.
 	Match HeaderMatchMethod
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the requirements for a route to match HTTP requests
@@ -937,6 +1060,8 @@ type HttpRouteMatch struct {
 	// The client request scheme to match on. Specify only one. Applicable only for
 	// HTTP2 routes.
 	Scheme HttpScheme
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents types of timeouts.
@@ -953,6 +1078,8 @@ type HttpTimeout struct {
 	// the timeout should be greater than 15 seconds for the source and destination
 	// virtual node and the route.
 	PerRequest *Duration
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a listener for a virtual node.
@@ -978,6 +1105,8 @@ type Listener struct {
 	// A reference to an object that represents the Transport Layer Security (TLS)
 	// properties for a listener.
 	Tls *ListenerTls
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents timeouts for different protocols.
@@ -994,6 +1123,8 @@ type ListenerTimeout interface {
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberTcp struct {
 	Value TcpTimeout
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTimeoutMemberTcp) isListenerTimeout() {}
@@ -1001,6 +1132,8 @@ func (*ListenerTimeoutMemberTcp) isListenerTimeout() {}
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberHttp struct {
 	Value HttpTimeout
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTimeoutMemberHttp) isListenerTimeout() {}
@@ -1008,6 +1141,8 @@ func (*ListenerTimeoutMemberHttp) isListenerTimeout() {}
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberHttp2 struct {
 	Value HttpTimeout
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTimeoutMemberHttp2) isListenerTimeout() {}
@@ -1015,6 +1150,8 @@ func (*ListenerTimeoutMemberHttp2) isListenerTimeout() {}
 // An object that represents types of timeouts.
 type ListenerTimeoutMemberGrpc struct {
 	Value GrpcTimeout
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTimeoutMemberGrpc) isListenerTimeout() {}
@@ -1046,6 +1183,8 @@ type ListenerTls struct {
 	// A reference to an object that represents a listener's Transport Layer Security
 	// (TLS) validation context.
 	Validation *ListenerTlsValidationContext
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents an AWS Certicate Manager (ACM) certificate.
@@ -1058,6 +1197,8 @@ type ListenerTlsAcmCertificate struct {
 	//
 	// This member is required.
 	CertificateArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a listener's Transport Layer Security (TLS)
@@ -1075,6 +1216,8 @@ type ListenerTlsCertificate interface {
 // certificate.
 type ListenerTlsCertificateMemberAcm struct {
 	Value ListenerTlsAcmCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTlsCertificateMemberAcm) isListenerTlsCertificate() {}
@@ -1082,6 +1225,8 @@ func (*ListenerTlsCertificateMemberAcm) isListenerTlsCertificate() {}
 // A reference to an object that represents a local file certificate.
 type ListenerTlsCertificateMemberFile struct {
 	Value ListenerTlsFileCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTlsCertificateMemberFile) isListenerTlsCertificate() {}
@@ -1090,6 +1235,8 @@ func (*ListenerTlsCertificateMemberFile) isListenerTlsCertificate() {}
 // certificate.
 type ListenerTlsCertificateMemberSds struct {
 	Value ListenerTlsSdsCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTlsCertificateMemberSds) isListenerTlsCertificate() {}
@@ -1110,6 +1257,8 @@ type ListenerTlsFileCertificate struct {
 	//
 	// This member is required.
 	PrivateKey *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the listener's Secret Discovery Service certificate.
@@ -1124,6 +1273,8 @@ type ListenerTlsSdsCertificate struct {
 	//
 	// This member is required.
 	SecretName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a listener's Transport Layer Security (TLS) validation
@@ -1139,6 +1290,8 @@ type ListenerTlsValidationContext struct {
 	// A reference to an object that represents the SANs for a listener's Transport
 	// Layer Security (TLS) validation context.
 	SubjectAlternativeNames *SubjectAlternativeNames
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a listener's Transport Layer Security (TLS) validation
@@ -1155,6 +1308,8 @@ type ListenerTlsValidationContextTrust interface {
 // trust for a local file.
 type ListenerTlsValidationContextTrustMemberFile struct {
 	Value TlsValidationContextFileTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTlsValidationContextTrustMemberFile) isListenerTlsValidationContextTrust() {}
@@ -1163,6 +1318,8 @@ func (*ListenerTlsValidationContextTrustMemberFile) isListenerTlsValidationConte
 // (TLS) Secret Discovery Service validation context trust.
 type ListenerTlsValidationContextTrustMemberSds struct {
 	Value TlsValidationContextSdsTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*ListenerTlsValidationContextTrustMemberSds) isListenerTlsValidationContextTrust() {}
@@ -1172,6 +1329,8 @@ type Logging struct {
 
 	// The access log configuration for a virtual node.
 	AccessLog AccessLog
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the range of values to match on. The first character
@@ -1188,6 +1347,8 @@ type MatchRange struct {
 	//
 	// This member is required.
 	Start *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a service mesh returned by a describe operation.
@@ -1212,6 +1373,8 @@ type MeshData struct {
 	//
 	// This member is required.
 	Status *MeshStatus
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a service mesh returned by a list operation.
@@ -1258,6 +1421,8 @@ type MeshRef struct {
 	//
 	// This member is required.
 	Version *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the specification of a service mesh.
@@ -1265,6 +1430,8 @@ type MeshSpec struct {
 
 	// The egress filter rules for the service mesh.
 	EgressFilter *EgressFilter
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the status of a service mesh.
@@ -1272,6 +1439,8 @@ type MeshStatus struct {
 
 	// The current mesh status.
 	Status MeshStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the outlier detection for a virtual node's listener.
@@ -1297,6 +1466,8 @@ type OutlierDetection struct {
 	//
 	// This member is required.
 	MaxServerErrors *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a port mapping.
@@ -1311,6 +1482,8 @@ type PortMapping struct {
 	//
 	// This member is required.
 	Protocol PortProtocol
+
+	noSmithyDocumentSerde
 }
 
 // An object representing the query parameter to match.
@@ -1318,6 +1491,8 @@ type QueryParameterMatch struct {
 
 	// The exact query parameter to match on.
 	Exact *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents metadata for a resource.
@@ -1364,6 +1539,8 @@ type ResourceMetadata struct {
 	//
 	// This member is required.
 	Version *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a route returned by a describe operation.
@@ -1398,6 +1575,8 @@ type RouteData struct {
 	//
 	// This member is required.
 	VirtualRouterName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a route returned by a list operation.
@@ -1454,6 +1633,8 @@ type RouteRef struct {
 	//
 	// This member is required.
 	VirtualRouterName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a route specification. Specify one route type.
@@ -1474,6 +1655,8 @@ type RouteSpec struct {
 
 	// An object that represents the specification of a TCP route.
 	TcpRoute *TcpRoute
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the current status of a route.
@@ -1483,6 +1666,8 @@ type RouteStatus struct {
 	//
 	// This member is required.
 	Status RouteStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the service discovery information for a virtual node.
@@ -1497,6 +1682,8 @@ type ServiceDiscovery interface {
 // Specifies the DNS information for the virtual node.
 type ServiceDiscoveryMemberDns struct {
 	Value DnsServiceDiscovery
+
+	noSmithyDocumentSerde
 }
 
 func (*ServiceDiscoveryMemberDns) isServiceDiscovery() {}
@@ -1504,6 +1691,8 @@ func (*ServiceDiscoveryMemberDns) isServiceDiscovery() {}
 // Specifies any Cloud Map information for the virtual node.
 type ServiceDiscoveryMemberAwsCloudMap struct {
 	Value AwsCloudMapServiceDiscovery
+
+	noSmithyDocumentSerde
 }
 
 func (*ServiceDiscoveryMemberAwsCloudMap) isServiceDiscovery() {}
@@ -1516,6 +1705,8 @@ type SubjectAlternativeNameMatchers struct {
 	//
 	// This member is required.
 	Exact []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the subject alternative names secured by the
@@ -1526,6 +1717,8 @@ type SubjectAlternativeNames struct {
 	//
 	// This member is required.
 	Match *SubjectAlternativeNameMatchers
+
+	noSmithyDocumentSerde
 }
 
 // Optional metadata that you apply to a resource to assist with categorization and
@@ -1545,6 +1738,8 @@ type TagRef struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a TCP route type.
@@ -1557,6 +1752,8 @@ type TcpRoute struct {
 
 	// An object that represents types of timeouts.
 	Timeout *TcpTimeout
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the action to take if a match is determined.
@@ -1567,6 +1764,8 @@ type TcpRouteAction struct {
 	//
 	// This member is required.
 	WeightedTargets []WeightedTarget
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents types of timeouts.
@@ -1575,6 +1774,8 @@ type TcpTimeout struct {
 	// An object that represents an idle timeout. An idle timeout bounds the amount of
 	// time that a connection may be idle. The default value is none.
 	Idle *Duration
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents how the proxy will validate its peer during Transport
@@ -1590,6 +1791,8 @@ type TlsValidationContext struct {
 	// A reference to an object that represents the SANs for a Transport Layer Security
 	// (TLS) validation context.
 	SubjectAlternativeNames *SubjectAlternativeNames
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -1600,6 +1803,8 @@ type TlsValidationContextAcmTrust struct {
 	//
 	// This member is required.
 	CertificateAuthorityArns []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -1611,6 +1816,8 @@ type TlsValidationContextFileTrust struct {
 	//
 	// This member is required.
 	CertificateChain *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) Secret Discovery
@@ -1624,6 +1831,8 @@ type TlsValidationContextSdsTrust struct {
 	//
 	// This member is required.
 	SecretName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -1641,6 +1850,8 @@ type TlsValidationContextTrust interface {
 // validation context trust for an Certificate Manager certificate.
 type TlsValidationContextTrustMemberAcm struct {
 	Value TlsValidationContextAcmTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*TlsValidationContextTrustMemberAcm) isTlsValidationContextTrust() {}
@@ -1649,6 +1860,8 @@ func (*TlsValidationContextTrustMemberAcm) isTlsValidationContextTrust() {}
 // trust for a local file.
 type TlsValidationContextTrustMemberFile struct {
 	Value TlsValidationContextFileTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*TlsValidationContextTrustMemberFile) isTlsValidationContextTrust() {}
@@ -1657,6 +1870,8 @@ func (*TlsValidationContextTrustMemberFile) isTlsValidationContextTrust() {}
 // Discovery Service validation context trust.
 type TlsValidationContextTrustMemberSds struct {
 	Value TlsValidationContextSdsTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*TlsValidationContextTrustMemberSds) isTlsValidationContextTrust() {}
@@ -1672,6 +1887,8 @@ type VirtualGatewayAccessLog interface {
 // The file object to send virtual gateway access logs to.
 type VirtualGatewayAccessLogMemberFile struct {
 	Value VirtualGatewayFileAccessLog
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayAccessLogMemberFile) isVirtualGatewayAccessLog() {}
@@ -1681,6 +1898,8 @@ type VirtualGatewayBackendDefaults struct {
 
 	// A reference to an object that represents a client policy.
 	ClientPolicy *VirtualGatewayClientPolicy
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a client policy.
@@ -1689,6 +1908,8 @@ type VirtualGatewayClientPolicy struct {
 	// A reference to an object that represents a Transport Layer Security (TLS) client
 	// policy.
 	Tls *VirtualGatewayClientPolicyTls
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) client policy.
@@ -1709,6 +1930,8 @@ type VirtualGatewayClientPolicyTls struct {
 
 	// One or more ports that the policy is enforced for.
 	Ports []int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the virtual gateway's client's Transport Layer
@@ -1727,6 +1950,8 @@ type VirtualGatewayClientTlsCertificate interface {
 // (https://docs.aws.amazon.com/app-mesh/latest/userguide/tls.html).
 type VirtualGatewayClientTlsCertificateMemberFile struct {
 	Value VirtualGatewayListenerTlsFileCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayClientTlsCertificateMemberFile) isVirtualGatewayClientTlsCertificate() {}
@@ -1735,6 +1960,8 @@ func (*VirtualGatewayClientTlsCertificateMemberFile) isVirtualGatewayClientTlsCe
 // Discovery Service certificate.
 type VirtualGatewayClientTlsCertificateMemberSds struct {
 	Value VirtualGatewayListenerTlsSdsCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayClientTlsCertificateMemberSds) isVirtualGatewayClientTlsCertificate() {}
@@ -1755,6 +1982,8 @@ type VirtualGatewayConnectionPool interface {
 // An object that represents a type of connection pool.
 type VirtualGatewayConnectionPoolMemberHttp struct {
 	Value VirtualGatewayHttpConnectionPool
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayConnectionPoolMemberHttp) isVirtualGatewayConnectionPool() {}
@@ -1762,6 +1991,8 @@ func (*VirtualGatewayConnectionPoolMemberHttp) isVirtualGatewayConnectionPool() 
 // An object that represents a type of connection pool.
 type VirtualGatewayConnectionPoolMemberHttp2 struct {
 	Value VirtualGatewayHttp2ConnectionPool
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayConnectionPoolMemberHttp2) isVirtualGatewayConnectionPool() {}
@@ -1769,6 +2000,8 @@ func (*VirtualGatewayConnectionPoolMemberHttp2) isVirtualGatewayConnectionPool()
 // An object that represents a type of connection pool.
 type VirtualGatewayConnectionPoolMemberGrpc struct {
 	Value VirtualGatewayGrpcConnectionPool
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayConnectionPoolMemberGrpc) isVirtualGatewayConnectionPool() {}
@@ -1800,6 +2033,8 @@ type VirtualGatewayData struct {
 	//
 	// This member is required.
 	VirtualGatewayName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents an access log file.
@@ -1813,6 +2048,8 @@ type VirtualGatewayFileAccessLog struct {
 	//
 	// This member is required.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a type of connection pool.
@@ -1823,6 +2060,8 @@ type VirtualGatewayGrpcConnectionPool struct {
 	//
 	// This member is required.
 	MaxRequests int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the health check policy for a virtual gateway's
@@ -1867,6 +2106,8 @@ type VirtualGatewayHealthCheckPolicy struct {
 	// The destination port for the health check request. This port must match the port
 	// defined in the PortMapping for the listener.
 	Port int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a type of connection pool.
@@ -1877,6 +2118,8 @@ type VirtualGatewayHttp2ConnectionPool struct {
 	//
 	// This member is required.
 	MaxRequests int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a type of connection pool.
@@ -1891,6 +2134,8 @@ type VirtualGatewayHttpConnectionPool struct {
 	// Number of overflowing requests after max_connections Envoy will queue to
 	// upstream cluster.
 	MaxPendingRequests int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a listener for a virtual gateway.
@@ -1910,6 +2155,8 @@ type VirtualGatewayListener struct {
 	// A reference to an object that represents the Transport Layer Security (TLS)
 	// properties for the listener.
 	Tls *VirtualGatewayListenerTls
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the Transport Layer Security (TLS) properties for a
@@ -1938,6 +2185,8 @@ type VirtualGatewayListenerTls struct {
 	// A reference to an object that represents a virtual gateway's listener's
 	// Transport Layer Security (TLS) validation context.
 	Validation *VirtualGatewayListenerTlsValidationContext
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents an Certificate Manager certificate.
@@ -1950,6 +2199,8 @@ type VirtualGatewayListenerTlsAcmCertificate struct {
 	//
 	// This member is required.
 	CertificateArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a listener's Transport Layer Security (TLS)
@@ -1966,6 +2217,8 @@ type VirtualGatewayListenerTlsCertificate interface {
 // A reference to an object that represents an Certificate Manager certificate.
 type VirtualGatewayListenerTlsCertificateMemberAcm struct {
 	Value VirtualGatewayListenerTlsAcmCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayListenerTlsCertificateMemberAcm) isVirtualGatewayListenerTlsCertificate() {}
@@ -1973,6 +2226,8 @@ func (*VirtualGatewayListenerTlsCertificateMemberAcm) isVirtualGatewayListenerTl
 // A reference to an object that represents a local file certificate.
 type VirtualGatewayListenerTlsCertificateMemberFile struct {
 	Value VirtualGatewayListenerTlsFileCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayListenerTlsCertificateMemberFile) isVirtualGatewayListenerTlsCertificate() {}
@@ -1981,6 +2236,8 @@ func (*VirtualGatewayListenerTlsCertificateMemberFile) isVirtualGatewayListenerT
 // Discovery Service certificate.
 type VirtualGatewayListenerTlsCertificateMemberSds struct {
 	Value VirtualGatewayListenerTlsSdsCertificate
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayListenerTlsCertificateMemberSds) isVirtualGatewayListenerTlsCertificate() {}
@@ -2001,6 +2258,8 @@ type VirtualGatewayListenerTlsFileCertificate struct {
 	//
 	// This member is required.
 	PrivateKey *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the virtual gateway's listener's Secret Discovery
@@ -2015,6 +2274,8 @@ type VirtualGatewayListenerTlsSdsCertificate struct {
 	//
 	// This member is required.
 	SecretName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual gateway's listener's Transport Layer
@@ -2030,6 +2291,8 @@ type VirtualGatewayListenerTlsValidationContext struct {
 	// A reference to an object that represents the SANs for a virtual gateway
 	// listener's Transport Layer Security (TLS) validation context.
 	SubjectAlternativeNames *SubjectAlternativeNames
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual gateway's listener's Transport Layer
@@ -2046,6 +2309,8 @@ type VirtualGatewayListenerTlsValidationContextTrust interface {
 // trust for a local file.
 type VirtualGatewayListenerTlsValidationContextTrustMemberFile struct {
 	Value VirtualGatewayTlsValidationContextFileTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayListenerTlsValidationContextTrustMemberFile) isVirtualGatewayListenerTlsValidationContextTrust() {
@@ -2056,6 +2321,8 @@ func (*VirtualGatewayListenerTlsValidationContextTrustMemberFile) isVirtualGatew
 // trust.
 type VirtualGatewayListenerTlsValidationContextTrustMemberSds struct {
 	Value VirtualGatewayTlsValidationContextSdsTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayListenerTlsValidationContextTrustMemberSds) isVirtualGatewayListenerTlsValidationContextTrust() {
@@ -2066,6 +2333,8 @@ type VirtualGatewayLogging struct {
 
 	// The access log configuration.
 	AccessLog VirtualGatewayAccessLog
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a port mapping.
@@ -2080,6 +2349,8 @@ type VirtualGatewayPortMapping struct {
 	//
 	// This member is required.
 	Protocol VirtualGatewayPortProtocol
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual gateway returned by a list operation.
@@ -2131,6 +2402,8 @@ type VirtualGatewayRef struct {
 	//
 	// This member is required.
 	VirtualGatewayName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the specification of a service mesh resource.
@@ -2147,6 +2420,8 @@ type VirtualGatewaySpec struct {
 
 	// An object that represents logging information.
 	Logging *VirtualGatewayLogging
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the status of the mesh resource.
@@ -2156,6 +2431,8 @@ type VirtualGatewayStatus struct {
 	//
 	// This member is required.
 	Status VirtualGatewayStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context.
@@ -2170,6 +2447,8 @@ type VirtualGatewayTlsValidationContext struct {
 	// A reference to an object that represents the SANs for a virtual gateway's
 	// listener's Transport Layer Security (TLS) validation context.
 	SubjectAlternativeNames *SubjectAlternativeNames
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -2180,6 +2459,8 @@ type VirtualGatewayTlsValidationContextAcmTrust struct {
 	//
 	// This member is required.
 	CertificateAuthorityArns []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -2191,6 +2472,8 @@ type VirtualGatewayTlsValidationContextFileTrust struct {
 	//
 	// This member is required.
 	CertificateChain *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual gateway's listener's Transport Layer
@@ -2206,6 +2489,8 @@ type VirtualGatewayTlsValidationContextSdsTrust struct {
 	//
 	// This member is required.
 	SecretName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a Transport Layer Security (TLS) validation context
@@ -2223,6 +2508,8 @@ type VirtualGatewayTlsValidationContextTrust interface {
 // validation context trust for an Certificate Manager certificate.
 type VirtualGatewayTlsValidationContextTrustMemberAcm struct {
 	Value VirtualGatewayTlsValidationContextAcmTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayTlsValidationContextTrustMemberAcm) isVirtualGatewayTlsValidationContextTrust() {
@@ -2232,6 +2519,8 @@ func (*VirtualGatewayTlsValidationContextTrustMemberAcm) isVirtualGatewayTlsVali
 // trust for a local file.
 type VirtualGatewayTlsValidationContextTrustMemberFile struct {
 	Value VirtualGatewayTlsValidationContextFileTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayTlsValidationContextTrustMemberFile) isVirtualGatewayTlsValidationContextTrust() {
@@ -2241,6 +2530,8 @@ func (*VirtualGatewayTlsValidationContextTrustMemberFile) isVirtualGatewayTlsVal
 // Security (TLS) Secret Discovery Service validation context trust.
 type VirtualGatewayTlsValidationContextTrustMemberSds struct {
 	Value VirtualGatewayTlsValidationContextSdsTrust
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualGatewayTlsValidationContextTrustMemberSds) isVirtualGatewayTlsValidationContextTrust() {
@@ -2263,6 +2554,8 @@ type VirtualNodeConnectionPool interface {
 // An object that represents a type of connection pool.
 type VirtualNodeConnectionPoolMemberTcp struct {
 	Value VirtualNodeTcpConnectionPool
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualNodeConnectionPoolMemberTcp) isVirtualNodeConnectionPool() {}
@@ -2270,6 +2563,8 @@ func (*VirtualNodeConnectionPoolMemberTcp) isVirtualNodeConnectionPool() {}
 // An object that represents a type of connection pool.
 type VirtualNodeConnectionPoolMemberHttp struct {
 	Value VirtualNodeHttpConnectionPool
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualNodeConnectionPoolMemberHttp) isVirtualNodeConnectionPool() {}
@@ -2277,6 +2572,8 @@ func (*VirtualNodeConnectionPoolMemberHttp) isVirtualNodeConnectionPool() {}
 // An object that represents a type of connection pool.
 type VirtualNodeConnectionPoolMemberHttp2 struct {
 	Value VirtualNodeHttp2ConnectionPool
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualNodeConnectionPoolMemberHttp2) isVirtualNodeConnectionPool() {}
@@ -2284,6 +2581,8 @@ func (*VirtualNodeConnectionPoolMemberHttp2) isVirtualNodeConnectionPool() {}
 // An object that represents a type of connection pool.
 type VirtualNodeConnectionPoolMemberGrpc struct {
 	Value VirtualNodeGrpcConnectionPool
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualNodeConnectionPoolMemberGrpc) isVirtualNodeConnectionPool() {}
@@ -2315,6 +2614,8 @@ type VirtualNodeData struct {
 	//
 	// This member is required.
 	VirtualNodeName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a type of connection pool.
@@ -2325,6 +2626,8 @@ type VirtualNodeGrpcConnectionPool struct {
 	//
 	// This member is required.
 	MaxRequests int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a type of connection pool.
@@ -2335,6 +2638,8 @@ type VirtualNodeHttp2ConnectionPool struct {
 	//
 	// This member is required.
 	MaxRequests int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a type of connection pool.
@@ -2349,6 +2654,8 @@ type VirtualNodeHttpConnectionPool struct {
 	// Number of overflowing requests after max_connections Envoy will queue to
 	// upstream cluster.
 	MaxPendingRequests int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual node returned by a list operation.
@@ -2400,6 +2707,8 @@ type VirtualNodeRef struct {
 	//
 	// This member is required.
 	VirtualNodeName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual node service provider.
@@ -2409,6 +2718,8 @@ type VirtualNodeServiceProvider struct {
 	//
 	// This member is required.
 	VirtualNodeName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the specification of a virtual node.
@@ -2431,6 +2742,8 @@ type VirtualNodeSpec struct {
 	// does not expect ingress traffic, you can omit this parameter. If you specify a
 	// listener, then you must specify service discovery information.
 	ServiceDiscovery ServiceDiscovery
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the current status of the virtual node.
@@ -2440,6 +2753,8 @@ type VirtualNodeStatus struct {
 	//
 	// This member is required.
 	Status VirtualNodeStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a type of connection pool.
@@ -2450,6 +2765,8 @@ type VirtualNodeTcpConnectionPool struct {
 	//
 	// This member is required.
 	MaxConnections int32
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual router returned by a describe operation.
@@ -2479,6 +2796,8 @@ type VirtualRouterData struct {
 	//
 	// This member is required.
 	VirtualRouterName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual router listener.
@@ -2488,6 +2807,8 @@ type VirtualRouterListener struct {
 	//
 	// This member is required.
 	PortMapping *PortMapping
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual router returned by a list operation.
@@ -2539,6 +2860,8 @@ type VirtualRouterRef struct {
 	//
 	// This member is required.
 	VirtualRouterName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual node service provider.
@@ -2548,6 +2871,8 @@ type VirtualRouterServiceProvider struct {
 	//
 	// This member is required.
 	VirtualRouterName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the specification of a virtual router.
@@ -2556,6 +2881,8 @@ type VirtualRouterSpec struct {
 	// The listeners that the virtual router is expected to receive inbound traffic
 	// from. You can specify one listener.
 	Listeners []VirtualRouterListener
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the status of a virtual router.
@@ -2565,6 +2892,8 @@ type VirtualRouterStatus struct {
 	//
 	// This member is required.
 	Status VirtualRouterStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual service backend for a virtual node.
@@ -2577,6 +2906,8 @@ type VirtualServiceBackend struct {
 
 	// A reference to an object that represents the client policy for a backend.
 	ClientPolicy *ClientPolicy
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a virtual service returned by a describe operation.
@@ -2606,6 +2937,8 @@ type VirtualServiceData struct {
 	//
 	// This member is required.
 	VirtualServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the provider for a virtual service.
@@ -2620,6 +2953,8 @@ type VirtualServiceProvider interface {
 // The virtual node associated with a virtual service.
 type VirtualServiceProviderMemberVirtualNode struct {
 	Value VirtualNodeServiceProvider
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualServiceProviderMemberVirtualNode) isVirtualServiceProvider() {}
@@ -2627,6 +2962,8 @@ func (*VirtualServiceProviderMemberVirtualNode) isVirtualServiceProvider() {}
 // The virtual router associated with a virtual service.
 type VirtualServiceProviderMemberVirtualRouter struct {
 	Value VirtualRouterServiceProvider
+
+	noSmithyDocumentSerde
 }
 
 func (*VirtualServiceProviderMemberVirtualRouter) isVirtualServiceProvider() {}
@@ -2680,6 +3017,8 @@ type VirtualServiceRef struct {
 	//
 	// This member is required.
 	VirtualServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the specification of a virtual service.
@@ -2688,6 +3027,8 @@ type VirtualServiceSpec struct {
 	// The App Mesh object that is acting as the provider for a virtual service. You
 	// can specify a single virtual node or virtual router.
 	Provider VirtualServiceProvider
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the status of a virtual service.
@@ -2697,6 +3038,8 @@ type VirtualServiceStatus struct {
 	//
 	// This member is required.
 	Status VirtualServiceStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents a target and its relative weight. Traffic is
@@ -2715,13 +3058,19 @@ type WeightedTarget struct {
 	//
 	// This member is required.
 	Weight int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isAccessLog()                                       {}

@@ -12,6 +12,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -31,6 +33,8 @@ type AuthenticationFailedException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthenticationFailedException) Error() string {
@@ -50,6 +54,8 @@ type CertificateAlreadyExistsException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateAlreadyExistsException) Error() string {
@@ -72,6 +78,8 @@ type CertificateDoesNotExistException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateDoesNotExistException) Error() string {
@@ -94,6 +102,8 @@ type CertificateInUseException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateInUseException) Error() string {
@@ -114,6 +124,8 @@ type CertificateLimitExceededException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CertificateLimitExceededException) Error() string {
@@ -135,6 +147,8 @@ type ClientException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientException) Error() string {
@@ -155,6 +169,8 @@ type DirectoryAlreadyInRegionException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryAlreadyInRegionException) Error() string {
@@ -176,6 +192,8 @@ type DirectoryAlreadySharedException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryAlreadySharedException) Error() string {
@@ -197,6 +215,8 @@ type DirectoryDoesNotExistException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryDoesNotExistException) Error() string {
@@ -218,6 +238,8 @@ type DirectoryLimitExceededException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryLimitExceededException) Error() string {
@@ -239,6 +261,8 @@ type DirectoryNotSharedException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryNotSharedException) Error() string {
@@ -258,6 +282,8 @@ type DirectoryUnavailableException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectoryUnavailableException) Error() string {
@@ -278,6 +304,8 @@ type DomainControllerLimitExceededException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DomainControllerLimitExceededException) Error() string {
@@ -301,6 +329,8 @@ type EntityAlreadyExistsException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityAlreadyExistsException) Error() string {
@@ -320,6 +350,8 @@ type EntityDoesNotExistException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityDoesNotExistException) Error() string {
@@ -339,6 +371,8 @@ type InsufficientPermissionsException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientPermissionsException) Error() string {
@@ -360,6 +394,8 @@ type InvalidCertificateException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCertificateException) Error() string {
@@ -379,6 +415,8 @@ type InvalidClientAuthStatusException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClientAuthStatusException) Error() string {
@@ -401,6 +439,8 @@ type InvalidLDAPSStatusException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLDAPSStatusException) Error() string {
@@ -420,6 +460,8 @@ type InvalidNextTokenException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -439,6 +481,8 @@ type InvalidParameterException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -459,6 +503,8 @@ type InvalidPasswordException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPasswordException) Error() string {
@@ -478,6 +524,8 @@ type InvalidTargetException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTargetException) Error() string {
@@ -498,6 +546,8 @@ type IpRouteLimitExceededException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IpRouteLimitExceededException) Error() string {
@@ -518,6 +568,8 @@ type NoAvailableCertificateException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoAvailableCertificateException) Error() string {
@@ -539,6 +591,8 @@ type OrganizationsException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OrganizationsException) Error() string {
@@ -559,6 +613,8 @@ type RegionLimitExceededException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RegionLimitExceededException) Error() string {
@@ -578,6 +634,8 @@ type ServiceException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceException) Error() string {
@@ -598,6 +656,8 @@ type ShareLimitExceededException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ShareLimitExceededException) Error() string {
@@ -619,6 +679,8 @@ type SnapshotLimitExceededException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotLimitExceededException) Error() string {
@@ -638,6 +700,8 @@ type TagLimitExceededException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagLimitExceededException) Error() string {
@@ -657,6 +721,8 @@ type UnsupportedOperationException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperationException) Error() string {
@@ -676,6 +742,8 @@ type UserDoesNotExistException struct {
 	Message *string
 
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserDoesNotExistException) Error() string {

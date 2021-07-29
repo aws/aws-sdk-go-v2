@@ -87,6 +87,8 @@ type CreateAgentInput struct {
 	// in the Amazon VPC User Guide. VPC endpoint ID looks like this:
 	// vpce-01234d5aff67890e1.
 	VpcEndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 // CreateAgentResponse
@@ -98,6 +100,8 @@ type CreateAgentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {

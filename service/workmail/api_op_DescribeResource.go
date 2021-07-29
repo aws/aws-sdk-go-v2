@@ -40,6 +40,8 @@ type DescribeResourceInput struct {
 	//
 	// This member is required.
 	ResourceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeResourceOutput struct {
@@ -73,6 +75,8 @@ type DescribeResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

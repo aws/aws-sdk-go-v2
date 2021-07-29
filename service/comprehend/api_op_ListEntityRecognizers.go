@@ -44,6 +44,8 @@ type ListEntityRecognizersInput struct {
 
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListEntityRecognizersOutput struct {
@@ -56,6 +58,8 @@ type ListEntityRecognizersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEntityRecognizersMiddlewares(stack *middleware.Stack, options Options) (err error) {

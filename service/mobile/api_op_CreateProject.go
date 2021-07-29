@@ -44,6 +44,8 @@ type CreateProjectInput struct {
 	// Unique identifier for an exported snapshot of project configuration. This
 	// snapshot identifier is included in the share URL when a project is exported.
 	SnapshotId *string
+
+	noSmithyDocumentSerde
 }
 
 // Result structure used in response to a request to create a project.
@@ -54,6 +56,8 @@ type CreateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

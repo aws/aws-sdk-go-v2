@@ -10,6 +10,8 @@ import (
 // You do not have authorization to perform the requested action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -29,6 +31,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // on a resource with DeleteAttributes.
 type AttributeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AttributeLimitExceededException) Error() string {
@@ -49,6 +53,8 @@ func (e *AttributeLimitExceededException) ErrorFault() smithy.ErrorFault { retur
 // (http://aws.amazon.com/contact-us/).
 type BlockedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BlockedException) Error() string {
@@ -68,6 +74,8 @@ func (e *BlockedException) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // resource, or specifying an identifier that is not valid.
 type ClientException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientException) Error() string {
@@ -87,6 +95,8 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // information, see DeregisterContainerInstance.
 type ClusterContainsContainerInstancesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterContainsContainerInstancesException) Error() string {
@@ -110,6 +120,8 @@ func (e *ClusterContainsContainerInstancesException) ErrorFault() smithy.ErrorFa
 // information, see UpdateService and DeleteService.
 type ClusterContainsServicesException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterContainsServicesException) Error() string {
@@ -129,6 +141,8 @@ func (e *ClusterContainsServicesException) ErrorFault() smithy.ErrorFault { retu
 // You cannot delete a cluster that has active tasks.
 type ClusterContainsTasksException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterContainsTasksException) Error() string {
@@ -147,6 +161,8 @@ func (e *ClusterContainsTasksException) ErrorFault() smithy.ErrorFault { return 
 // with ListClusters. Amazon ECS clusters are Region-specific.
 type ClusterNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterNotFoundException) Error() string {
@@ -165,6 +181,8 @@ func (e *ClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // request.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -182,6 +200,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // The limit for the resource has been exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -203,6 +223,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // information.
 type MissingVersionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingVersionException) Error() string {
@@ -222,6 +244,8 @@ func (e *MissingVersionException) ErrorFault() smithy.ErrorFault { return smithy
 // there is no update path to the current version.
 type NoUpdateAvailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoUpdateAvailableException) Error() string {
@@ -240,6 +264,8 @@ func (e *NoUpdateAvailableException) ErrorFault() smithy.ErrorFault { return smi
 // capabilities.
 type PlatformTaskDefinitionIncompatibilityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PlatformTaskDefinitionIncompatibilityException) Error() string {
@@ -261,6 +287,8 @@ func (e *PlatformTaskDefinitionIncompatibilityException) ErrorFault() smithy.Err
 // The specified platform version does not exist.
 type PlatformUnknownException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PlatformUnknownException) Error() string {
@@ -278,6 +306,8 @@ func (e *PlatformUnknownException) ErrorFault() smithy.ErrorFault { return smith
 // The specified resource is in-use and cannot be removed.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -295,6 +325,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource could not be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -312,6 +344,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // These errors are usually caused by a server issue.
 type ServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServerException) Error() string {
@@ -331,6 +365,8 @@ func (e *ServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultSe
 // CreateService.
 type ServiceNotActiveException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceNotActiveException) Error() string {
@@ -349,6 +385,8 @@ func (e *ServiceNotActiveException) ErrorFault() smithy.ErrorFault { return smit
 // with ListServices. Amazon ECS services are cluster-specific and Region-specific.
 type ServiceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceNotFoundException) Error() string {
@@ -367,6 +405,8 @@ func (e *ServiceNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // or the container is no longer active or running.
 type TargetNotConnectedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TargetNotConnectedException) Error() string {
@@ -386,6 +426,8 @@ func (e *TargetNotConnectedException) ErrorFault() smithy.ErrorFault { return sm
 // cluster-specific and Region-specific.
 type TargetNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TargetNotFoundException) Error() string {
@@ -405,6 +447,8 @@ func (e *TargetNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // Region.
 type TaskSetNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TaskSetNotFoundException) Error() string {
@@ -422,6 +466,8 @@ func (e *TaskSetNotFoundException) ErrorFault() smithy.ErrorFault { return smith
 // The specified task is not supported in this Region.
 type UnsupportedFeatureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedFeatureException) Error() string {
@@ -443,6 +489,8 @@ func (e *UnsupportedFeatureException) ErrorFault() smithy.ErrorFault { return sm
 // where it stopped previously.
 type UpdateInProgressException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UpdateInProgressException) Error() string {

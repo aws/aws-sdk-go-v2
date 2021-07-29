@@ -36,6 +36,8 @@ type ConfirmConnectionInput struct {
 	//
 	// This member is required.
 	ConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type ConfirmConnectionOutput struct {
@@ -74,6 +76,8 @@ type ConfirmConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationConfirmConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

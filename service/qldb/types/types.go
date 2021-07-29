@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -62,6 +63,8 @@ type JournalKinesisStreamDescription struct {
 
 	// The inclusive start date and time from which to start streaming journal data.
 	InclusiveStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Information about a journal export job, including the ledger name, export ID,
@@ -121,6 +124,8 @@ type JournalS3ExportDescription struct {
 	//
 	// This member is required.
 	Status ExportStatus
+
+	noSmithyDocumentSerde
 }
 
 // The configuration settings of the Amazon Kinesis Data Streams destination for an
@@ -142,6 +147,8 @@ type KinesisConfiguration struct {
 	// (https://docs.aws.amazon.com/streams/latest/dev/kinesis-kpl-consumer-deaggregation.html)
 	// in the Amazon Kinesis Data Streams Developer Guide.
 	AggregationEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about a ledger, including its name, state, and when it was created.
@@ -157,6 +164,8 @@ type LedgerSummary struct {
 
 	// The current status of the ledger.
 	State LedgerState
+
+	noSmithyDocumentSerde
 }
 
 // The encryption settings that are used by a journal export job to write data in
@@ -176,6 +185,8 @@ type S3EncryptionConfiguration struct {
 	// You must provide a KmsKeyArn if you specify SSE_KMS as the ObjectEncryptionType.
 	// KmsKeyArn is not required if you specify SSE_S3 as the ObjectEncryptionType.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Simple Storage Service (Amazon S3) bucket location in which a journal
@@ -212,6 +223,8 @@ type S3ExportConfiguration struct {
 	//
 	// This member is required.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that can contain a value in multiple encoding formats.
@@ -219,4 +232,8 @@ type ValueHolder struct {
 
 	// An Amazon Ion plaintext value contained in a ValueHolder structure.
 	IonText *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -47,6 +47,8 @@ type StartImageScanInput struct {
 	// which to start an image scan request. If you do not specify a registry, the
 	// default registry is assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartImageScanOutput struct {
@@ -65,6 +67,8 @@ type StartImageScanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartImageScanMiddlewares(stack *middleware.Stack, options Options) (err error) {

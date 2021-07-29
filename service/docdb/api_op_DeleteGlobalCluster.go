@@ -36,6 +36,8 @@ type DeleteGlobalClusterInput struct {
 	//
 	// This member is required.
 	GlobalClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGlobalClusterOutput struct {
@@ -45,6 +47,8 @@ type DeleteGlobalClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

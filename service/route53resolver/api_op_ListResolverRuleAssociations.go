@@ -48,6 +48,8 @@ type ListResolverRuleAssociationsInput struct {
 	// ListResolverRuleAssociation request to get the next group of rule associations.
 	// In the next request, specify the value of NextToken from the previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResolverRuleAssociationsOutput struct {
@@ -67,6 +69,8 @@ type ListResolverRuleAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResolverRuleAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

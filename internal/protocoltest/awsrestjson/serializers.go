@@ -7,6 +7,8 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/document"
+	internaldocument "github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/internal/document"
 	"github.com/aws/aws-sdk-go-v2/internal/protocoltest/awsrestjson/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
@@ -3291,8 +3293,18 @@ func awsRestjson1_serializeDocumentDenseStructMap(v map[string]types.GreetingStr
 	return nil
 }
 
-func awsRestjson1_serializeDocumentDocument(v smithy.Document, value smithyjson.Value) error {
-	// TODO: implement document serialization.
+func awsRestjson1_serializeDocumentDocument(v document.Interface, value smithyjson.Value) error {
+	if v == nil {
+		return nil
+	}
+	if !internaldocument.IsInterface(v) {
+		return fmt.Errorf("%T is not a compatible document type", v)
+	}
+	db, err := v.MarshalSmithyDocument()
+	if err != nil {
+		return err
+	}
+	value.Write(db)
 	return nil
 }
 

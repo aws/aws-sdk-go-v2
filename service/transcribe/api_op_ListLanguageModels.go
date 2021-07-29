@@ -49,6 +49,8 @@ type ListLanguageModelsInput struct {
 	// you don't specify a status, Amazon Transcribe returns all custom language models
 	// ordered by date.
 	StatusEquals types.ModelStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListLanguageModelsOutput struct {
@@ -65,6 +67,8 @@ type ListLanguageModelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLanguageModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

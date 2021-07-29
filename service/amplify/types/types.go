@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -105,6 +106,8 @@ type App struct {
 
 	// The tag for the Amplify app.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an artifact.
@@ -119,6 +122,8 @@ type Artifact struct {
 	//
 	// This member is required.
 	ArtifactId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the automated branch creation configuration.
@@ -156,6 +161,8 @@ type AutoBranchCreationConfig struct {
 
 	// Describes the current stage for the autocreated branch.
 	Stage Stage
+
+	noSmithyDocumentSerde
 }
 
 // Describes the backend environment for an Amplify app.
@@ -189,6 +196,8 @@ type BackendEnvironment struct {
 
 	// The AWS CloudFormation stack name of a backend environment.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 // The branch for an Amplify app, which maps to a third-party repository branch.
@@ -312,6 +321,8 @@ type Branch struct {
 
 	// The thumbnail URL for the branch of an Amplify app.
 	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a custom rewrite or redirect rule.
@@ -336,6 +347,8 @@ type CustomRule struct {
 	// redirect rule. 404 Represents a 404 redirect rule. 404-200 Represents a 404
 	// rewrite rule.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a domain association that associates a custom domain with an Amplify
@@ -381,6 +394,8 @@ type DomainAssociation struct {
 
 	// The DNS record for certificate verification.
 	CertificateVerificationDNSRecord *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an execution job for an Amplify app.
@@ -395,6 +410,8 @@ type Job struct {
 	//
 	// This member is required.
 	Summary *JobSummary
+
+	noSmithyDocumentSerde
 }
 
 // Describes the summary for an execution job for an Amplify app.
@@ -445,6 +462,8 @@ type JobSummary struct {
 
 	// The end date and time for the job.
 	EndTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the information about a production branch for an Amplify app.
@@ -461,6 +480,8 @@ type ProductionBranch struct {
 
 	// The thumbnail URL for the production branch.
 	ThumbnailUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an execution step, for an execution job, for an Amplify app.
@@ -506,6 +527,8 @@ type Step struct {
 
 	// The URL to the test configuration for the execution step.
 	TestConfigUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // The subdomain for the domain association.
@@ -525,6 +548,8 @@ type SubDomain struct {
 	//
 	// This member is required.
 	Verified *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes the settings for the subdomain.
@@ -539,6 +564,8 @@ type SubDomainSetting struct {
 	//
 	// This member is required.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a webhook that connects repository events to an Amplify app.
@@ -578,4 +605,8 @@ type Webhook struct {
 	//
 	// This member is required.
 	WebhookUrl *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

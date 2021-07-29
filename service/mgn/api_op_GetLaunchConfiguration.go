@@ -33,6 +33,8 @@ type GetLaunchConfigurationInput struct {
 	//
 	// This member is required.
 	SourceServerID *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLaunchConfigurationOutput struct {
@@ -63,6 +65,8 @@ type GetLaunchConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // The request syntax was malformed. Check your request syntax and try again.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -29,6 +31,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // token.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -46,6 +50,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // You don't have permissions to perform this action.
 type ForbiddenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -64,6 +70,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // failure.
 type InternalServerErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -84,6 +92,8 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // the AWS App Mesh User Guide.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -101,6 +111,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified resource doesn't exist. Check your request syntax and try again.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -119,6 +131,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // another resource.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -136,6 +150,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // The request has failed due to a temporary failure of the service.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -155,6 +171,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // between requests.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -174,6 +192,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // in the request. None of the tags in this request were applied.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

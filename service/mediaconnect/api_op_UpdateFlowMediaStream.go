@@ -56,6 +56,8 @@ type UpdateFlowMediaStreamInput struct {
 
 	// The resolution of the video.
 	VideoFormat *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateFlowMediaStreamOutput struct {
@@ -68,6 +70,8 @@ type UpdateFlowMediaStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateFlowMediaStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,11 +55,15 @@ type AttachRolePolicyInput struct {
 	//
 	// This member is required.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 type AttachRolePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachRolePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

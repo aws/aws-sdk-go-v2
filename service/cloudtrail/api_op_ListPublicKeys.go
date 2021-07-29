@@ -49,6 +49,8 @@ type ListPublicKeysInput struct {
 	// for CloudTrail digest files. If not specified, the current time is used, and the
 	// current public key is returned.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -64,6 +66,8 @@ type ListPublicKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type DescribeJobExecutionInput struct {
 	// A string (consisting of the digits "0" through "9" which is used to specify a
 	// particular job execution on a particular device.
 	ExecutionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJobExecutionOutput struct {
@@ -51,6 +53,8 @@ type DescribeJobExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

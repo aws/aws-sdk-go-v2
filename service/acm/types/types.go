@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -129,6 +130,8 @@ type CertificateDetail struct {
 	// (https://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html) in
 	// the Amazon Web Services Certificate Manager User Guide.
 	Type CertificateType
+
+	noSmithyDocumentSerde
 }
 
 // Structure that contains options for your certificate. Currently, you can use
@@ -144,6 +147,8 @@ type CertificateOptions struct {
 	// You can opt out of certificate transparency logging by specifying the DISABLED
 	// option. Opt in by specifying ENABLED.
 	CertificateTransparencyLoggingPreference CertificateTransparencyLoggingPreference
+
+	noSmithyDocumentSerde
 }
 
 // This structure is returned in the response object of ListCertificates action.
@@ -158,6 +163,8 @@ type CertificateSummary struct {
 	// Fully qualified domain name (FQDN), such as www.example.com or example.com, for
 	// the certificate.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the validation of each domain name in the
@@ -198,6 +205,8 @@ type DomainValidation struct {
 	//
 	// * FAILED
 	ValidationStatus DomainStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the domain names that you want ACM to use to send you
@@ -230,6 +239,8 @@ type DomainValidationOption struct {
 	//
 	// This member is required.
 	ValidationDomain *string
+
+	noSmithyDocumentSerde
 }
 
 // Object containing expiration events options associated with an Amazon Web
@@ -241,6 +252,8 @@ type ExpiryEventsConfiguration struct {
 	// the certificate expires. By default, accounts receive events starting 45 days
 	// before certificate expiration.
 	DaysBeforeExpiry *int32
+
+	noSmithyDocumentSerde
 }
 
 // The Extended Key Usage X.509 v3 extension defines one or more purposes for which
@@ -277,6 +290,8 @@ type ExtendedKeyUsage struct {
 	//
 	// * 1.3.6.1.5.5.7.3.7 (IPSEC_USER)
 	OID *string
+
+	noSmithyDocumentSerde
 }
 
 // This structure can be used in the ListCertificates action to filter the output
@@ -295,6 +310,8 @@ type Filters struct {
 
 	// Specify one or more KeyUsage extension values.
 	KeyUsage []KeyUsageName
+
+	noSmithyDocumentSerde
 }
 
 // The Key Usage X.509 v3 extension defines the purpose of the public key contained
@@ -303,6 +320,8 @@ type KeyUsage struct {
 
 	// A string value that contains a Key Usage extension name.
 	Name KeyUsageName
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the status of ACM's managed renewal
@@ -335,6 +354,8 @@ type RenewalSummary struct {
 
 	// The reason that a renewal request was unsuccessful.
 	RenewalStatusReason FailureReason
+
+	noSmithyDocumentSerde
 }
 
 // Contains a DNS record value that you can use to validate ownership or control of
@@ -356,6 +377,8 @@ type ResourceRecord struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair that identifies or specifies metadata about an ACM resource.
@@ -368,4 +391,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

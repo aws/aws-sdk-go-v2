@@ -41,11 +41,15 @@ type DeleteQualificationTypeInput struct {
 	//
 	// This member is required.
 	QualificationTypeId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteQualificationTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteQualificationTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

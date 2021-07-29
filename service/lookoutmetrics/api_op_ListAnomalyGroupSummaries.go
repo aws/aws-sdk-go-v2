@@ -46,6 +46,8 @@ type ListAnomalyGroupSummariesInput struct {
 	// Specify the pagination token that's returned by a previous request to retrieve
 	// the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAnomalyGroupSummariesOutput struct {
@@ -61,6 +63,8 @@ type ListAnomalyGroupSummariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAnomalyGroupSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

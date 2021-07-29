@@ -38,11 +38,15 @@ type UpdateTemplateInput struct {
 	//
 	// This member is required.
 	Template *types.Template
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

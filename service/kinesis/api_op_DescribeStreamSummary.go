@@ -37,6 +37,8 @@ type DescribeStreamSummaryInput struct {
 	//
 	// This member is required.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStreamSummaryOutput struct {
@@ -48,6 +50,8 @@ type DescribeStreamSummaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStreamSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

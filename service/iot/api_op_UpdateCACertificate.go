@@ -48,11 +48,15 @@ type UpdateCACertificateInput struct {
 
 	// If true, removes auto registration.
 	RemoveAutoRegistration bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCACertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

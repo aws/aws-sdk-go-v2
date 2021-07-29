@@ -34,6 +34,8 @@ type DescribeCustomMetricInput struct {
 	//
 	// This member is required.
 	MetricName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCustomMetricOutput struct {
@@ -61,6 +63,8 @@ type DescribeCustomMetricOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCustomMetricMiddlewares(stack *middleware.Stack, options Options) (err error) {

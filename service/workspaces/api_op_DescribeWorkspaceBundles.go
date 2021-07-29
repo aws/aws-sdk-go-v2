@@ -43,6 +43,8 @@ type DescribeWorkspaceBundlesInput struct {
 	// filter. To describe the bundles provided by AWS, specify AMAZON. To describe the
 	// bundles that belong to your account, don't specify a value.
 	Owner *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorkspaceBundlesOutput struct {
@@ -57,6 +59,8 @@ type DescribeWorkspaceBundlesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorkspaceBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {

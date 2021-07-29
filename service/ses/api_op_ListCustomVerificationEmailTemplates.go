@@ -49,6 +49,8 @@ type ListCustomVerificationEmailTemplatesInput struct {
 	// An array the contains the name and creation time stamp for each template in your
 	// Amazon SES account.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // A paginated list of custom verification email templates.
@@ -64,6 +66,8 @@ type ListCustomVerificationEmailTemplatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCustomVerificationEmailTemplatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

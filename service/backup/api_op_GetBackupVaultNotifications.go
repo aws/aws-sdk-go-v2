@@ -36,6 +36,8 @@ type GetBackupVaultNotificationsInput struct {
 	//
 	// This member is required.
 	BackupVaultName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBackupVaultNotificationsOutput struct {
@@ -60,6 +62,8 @@ type GetBackupVaultNotificationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackupVaultNotificationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

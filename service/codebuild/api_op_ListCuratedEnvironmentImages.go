@@ -28,6 +28,7 @@ func (c *Client) ListCuratedEnvironmentImages(ctx context.Context, params *ListC
 }
 
 type ListCuratedEnvironmentImagesInput struct {
+	noSmithyDocumentSerde
 }
 
 type ListCuratedEnvironmentImagesOutput struct {
@@ -38,6 +39,8 @@ type ListCuratedEnvironmentImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCuratedEnvironmentImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

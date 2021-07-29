@@ -50,6 +50,8 @@ type CreateUserProfileInput struct {
 	// not specify an SSH user name, AWS OpsWorks Stacks generates one from the IAM
 	// user name.
 	SshUsername *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a CreateUserProfile request.
@@ -60,6 +62,8 @@ type CreateUserProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

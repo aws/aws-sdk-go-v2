@@ -46,6 +46,8 @@ type RegisterCertificateInput struct {
 	// The function that the registered certificate performs. Valid values include
 	// ClientLDAPS or ClientCertAuth. The default value is ClientLDAPS.
 	Type types.CertificateType
+
+	noSmithyDocumentSerde
 }
 
 type RegisterCertificateOutput struct {
@@ -55,6 +57,8 @@ type RegisterCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

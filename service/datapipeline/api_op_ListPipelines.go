@@ -44,6 +44,8 @@ type ListPipelinesInput struct {
 	// ListPipelines with the marker value from the previous call to retrieve the next
 	// set of results.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of ListPipelines.
@@ -67,6 +69,8 @@ type ListPipelinesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {

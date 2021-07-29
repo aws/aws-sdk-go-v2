@@ -63,6 +63,8 @@ type ModifyCertificatesInput struct {
 	// certificate. If the override is removed, the default certificate is the system
 	// default.
 	RemoveCustomerOverride *bool
+
+	noSmithyDocumentSerde
 }
 
 type ModifyCertificatesOutput struct {
@@ -72,6 +74,8 @@ type ModifyCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

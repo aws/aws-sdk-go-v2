@@ -46,6 +46,7 @@ func (c *Client) GetDeliverabilityDashboardOptions(ctx context.Context, params *
 // Deliverability dashboard subscription, see Amazon Pinpoint Pricing
 // (http://aws.amazon.com/pinpoint/pricing/).
 type GetDeliverabilityDashboardOptionsInput struct {
+	noSmithyDocumentSerde
 }
 
 // An object that shows the status of the Deliverability dashboard for your Amazon
@@ -82,6 +83,8 @@ type GetDeliverabilityDashboardOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeliverabilityDashboardOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

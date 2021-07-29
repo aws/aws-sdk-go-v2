@@ -56,6 +56,8 @@ type DeleteSchemaVersionsInput struct {
 	//
 	// This member is required.
 	Versions *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSchemaVersionsOutput struct {
@@ -66,6 +68,8 @@ type DeleteSchemaVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSchemaVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

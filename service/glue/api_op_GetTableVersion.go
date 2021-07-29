@@ -47,6 +47,8 @@ type GetTableVersionInput struct {
 	// The ID value of the table version to be retrieved. A VersionID is a string
 	// representation of an integer. Each version is incremented by 1.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTableVersionOutput struct {
@@ -56,6 +58,8 @@ type GetTableVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTableVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

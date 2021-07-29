@@ -57,6 +57,8 @@ type DescribeTransitGatewayConnectPeersInput struct {
 
 	// The IDs of the Connect peers.
 	TransitGatewayConnectPeerIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTransitGatewayConnectPeersOutput struct {
@@ -70,6 +72,8 @@ type DescribeTransitGatewayConnectPeersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTransitGatewayConnectPeersMiddlewares(stack *middleware.Stack, options Options) (err error) {

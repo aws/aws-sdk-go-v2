@@ -49,6 +49,8 @@ type DescribeRecommendationFeedbackInput struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
 	// in the AWS Identity and Access Management User Guide.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRecommendationFeedbackOutput struct {
@@ -58,6 +60,8 @@ type DescribeRecommendationFeedbackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

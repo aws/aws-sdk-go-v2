@@ -121,6 +121,8 @@ type CreateFeatureGroupInput struct {
 
 	// Tags used to identify Features in each FeatureGroup.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateFeatureGroupOutput struct {
@@ -133,6 +135,8 @@ type CreateFeatureGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFeatureGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

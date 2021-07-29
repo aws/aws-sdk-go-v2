@@ -53,6 +53,8 @@ type TerminateWorkspacesInput struct {
 	//
 	// This member is required.
 	TerminateWorkspaceRequests []types.TerminateRequest
+
+	noSmithyDocumentSerde
 }
 
 type TerminateWorkspacesOutput struct {
@@ -62,6 +64,8 @@ type TerminateWorkspacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -64,6 +64,8 @@ type CreateAssessmentTemplateInput struct {
 	// and value pair (an Attribute object). Within an assessment template, each key
 	// must be unique.
 	UserAttributesForFindings []types.Attribute
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssessmentTemplateOutput struct {
@@ -75,6 +77,8 @@ type CreateAssessmentTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssessmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

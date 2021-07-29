@@ -34,6 +34,8 @@ type ListAutomaticTapeCreationPoliciesInput struct {
 	// The Amazon Resource Name (ARN) of the gateway. Use the ListGateways operation to
 	// return a list of gateways for your account and Region.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAutomaticTapeCreationPoliciesOutput struct {
@@ -45,6 +47,8 @@ type ListAutomaticTapeCreationPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAutomaticTapeCreationPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

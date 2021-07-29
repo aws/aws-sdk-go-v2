@@ -32,11 +32,15 @@ type UpdateSecurityHubConfigurationInput struct {
 	// that are enabled. By default, this is set to true, and new controls are enabled
 	// automatically. To not automatically enable new controls, set this to false.
 	AutoEnableControls bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSecurityHubConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSecurityHubConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

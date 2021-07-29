@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -64,6 +65,8 @@ type ChangesetInfo struct {
 
 	// Unique identifier of the changeset that is updated.
 	UpdatesChangesetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Set short term API credentials.
@@ -77,6 +80,8 @@ type Credentials struct {
 
 	// The session token.
 	SessionToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Error message.
@@ -108,4 +113,8 @@ type ErrorInfo struct {
 
 	// The text of the error message.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

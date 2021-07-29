@@ -50,6 +50,8 @@ type GetDatabasesInput struct {
 	// databases shared with your account, as well as the databases in yor local
 	// account.
 	ResourceShareType types.ResourceShareType
+
+	noSmithyDocumentSerde
 }
 
 type GetDatabasesOutput struct {
@@ -65,6 +67,8 @@ type GetDatabasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDatabasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

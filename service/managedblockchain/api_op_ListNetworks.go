@@ -47,6 +47,8 @@ type ListNetworksInput struct {
 	// An optional status specifier. If provided, only networks currently in this
 	// status are listed. Applies only to Hyperledger Fabric.
 	Status types.NetworkStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListNetworksOutput struct {
@@ -60,6 +62,8 @@ type ListNetworksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {

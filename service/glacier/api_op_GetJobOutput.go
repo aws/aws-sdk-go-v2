@@ -116,6 +116,8 @@ type GetJobOutputInput struct {
 	// you computed to ensure you have downloaded the entire archive content with no
 	// errors.
 	Range *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon S3 Glacier response to your request.
@@ -168,6 +170,8 @@ type GetJobOutputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetJobOutputMiddlewares(stack *middleware.Stack, options Options) (err error) {

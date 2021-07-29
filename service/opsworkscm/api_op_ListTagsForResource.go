@@ -54,6 +54,8 @@ type ListTagsForResourceInput struct {
 	// not returned in your previous results causes an InvalidNextTokenException to
 	// occur.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsForResourceOutput struct {
@@ -67,6 +69,8 @@ type ListTagsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DescribeLocationObjectStorageInput struct {
 	//
 	// This member is required.
 	LocationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeLocationObjectStorageResponse
@@ -76,6 +78,8 @@ type DescribeLocationObjectStorageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocationObjectStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {

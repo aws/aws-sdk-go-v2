@@ -48,12 +48,16 @@ type AdminUpdateDeviceStatusInput struct {
 
 	// The status indicating whether a device has been remembered or not.
 	DeviceRememberedStatus types.DeviceRememberedStatusType
+
+	noSmithyDocumentSerde
 }
 
 // The status response from the request to update the device, as an administrator.
 type AdminUpdateDeviceStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminUpdateDeviceStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

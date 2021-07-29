@@ -239,6 +239,8 @@ type SimulatePrincipalPolicyInput struct {
 	// * The special characters
 	// tab (\u0009), line feed (\u000A), and carriage return (\u000D)
 	ResourcePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful SimulatePrincipalPolicy or
@@ -262,6 +264,8 @@ type SimulatePrincipalPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSimulatePrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

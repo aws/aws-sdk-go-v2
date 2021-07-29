@@ -27,11 +27,14 @@ func (c *Client) DisableMacie(ctx context.Context, params *DisableMacieInput, op
 }
 
 type DisableMacieInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisableMacieOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableMacieMiddlewares(stack *middleware.Stack, options Options) (err error) {

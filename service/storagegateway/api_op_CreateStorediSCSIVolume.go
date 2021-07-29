@@ -114,6 +114,8 @@ type CreateStorediSCSIVolumeInput struct {
 	// = . _ : / @. The maximum length of a tag's key is 128 characters, and the
 	// maximum length for a tag's value is 256.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -131,6 +133,8 @@ type CreateStorediSCSIVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStorediSCSIVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

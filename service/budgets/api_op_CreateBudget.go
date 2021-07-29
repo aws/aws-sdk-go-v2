@@ -50,12 +50,16 @@ type CreateBudgetInput struct {
 	// 10 email subscribers. If you include notifications and subscribers in your
 	// CreateBudget call, AWS creates the notifications and subscribers for you.
 	NotificationsWithSubscribers []types.NotificationWithSubscribers
+
+	noSmithyDocumentSerde
 }
 
 // Response of CreateBudget
 type CreateBudgetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {

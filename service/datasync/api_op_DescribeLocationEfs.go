@@ -35,6 +35,8 @@ type DescribeLocationEfsInput struct {
 	//
 	// This member is required.
 	LocationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeLocationEfsResponse
@@ -57,6 +59,8 @@ type DescribeLocationEfsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocationEfsMiddlewares(stack *middleware.Stack, options Options) (err error) {

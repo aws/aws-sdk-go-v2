@@ -46,6 +46,8 @@ type UpdateUsageInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents the usage data of a usage plan. Create and Use Usage Plans
@@ -75,6 +77,8 @@ type UpdateUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

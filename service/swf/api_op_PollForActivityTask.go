@@ -75,6 +75,8 @@ type PollForActivityTaskInput struct {
 	// event in the workflow history. This enables diagnostic tracing when problems
 	// arise. The form of this identity is user defined.
 	Identity *string
+
+	noSmithyDocumentSerde
 }
 
 // Unit of work sent to an activity worker.
@@ -112,6 +114,8 @@ type PollForActivityTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPollForActivityTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type RegisterDBProxyTargetsInput struct {
 
 	// The identifier of the DBProxyTargetGroup.
 	TargetGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterDBProxyTargetsOutput struct {
@@ -52,6 +54,8 @@ type RegisterDBProxyTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

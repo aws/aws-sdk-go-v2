@@ -42,6 +42,8 @@ type SearchDevicesInput struct {
 	// returned from the previous request continue results where the previous request
 	// ended.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SearchDevicesOutput struct {
@@ -59,6 +61,8 @@ type SearchDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSearchDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

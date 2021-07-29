@@ -32,6 +32,8 @@ type StreamingTraitsInput struct {
 	Blob io.Reader
 
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type StreamingTraitsOutput struct {
@@ -41,6 +43,8 @@ type StreamingTraitsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStreamingTraitsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type CancelDomainTransferToAnotherAwsAccountInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The CancelDomainTransferToAnotherAwsAccount response includes the following
@@ -63,6 +65,8 @@ type CancelDomainTransferToAnotherAwsAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelDomainTransferToAnotherAwsAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

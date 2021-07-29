@@ -42,6 +42,8 @@ type ListThesauriInput struct {
 	// this pagination token to retrieve the next set of thesauri
 	// (ThesaurusSummaryItems).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListThesauriOutput struct {
@@ -55,6 +57,8 @@ type ListThesauriOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThesauriMiddlewares(stack *middleware.Stack, options Options) (err error) {

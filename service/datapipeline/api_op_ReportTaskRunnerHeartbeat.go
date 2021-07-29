@@ -56,6 +56,8 @@ type ReportTaskRunnerHeartbeatInput struct {
 	// can only specify a single value for workerGroup. There are no wildcard values
 	// permitted in workerGroup; the string must be an exact, case-sensitive, match.
 	WorkerGroup *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of ReportTaskRunnerHeartbeat.
@@ -68,6 +70,8 @@ type ReportTaskRunnerHeartbeatOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReportTaskRunnerHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {

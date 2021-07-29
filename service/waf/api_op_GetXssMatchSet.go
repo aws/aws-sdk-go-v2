@@ -41,6 +41,8 @@ type GetXssMatchSetInput struct {
 	//
 	// This member is required.
 	XssMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a GetXssMatchSet request.
@@ -61,6 +63,8 @@ type GetXssMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetXssMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

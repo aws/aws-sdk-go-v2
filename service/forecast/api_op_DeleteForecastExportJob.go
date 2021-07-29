@@ -34,11 +34,15 @@ type DeleteForecastExportJobInput struct {
 	//
 	// This member is required.
 	ForecastExportJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteForecastExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

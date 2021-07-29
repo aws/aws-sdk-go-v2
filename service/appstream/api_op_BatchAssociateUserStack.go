@@ -35,6 +35,8 @@ type BatchAssociateUserStackInput struct {
 	//
 	// This member is required.
 	UserStackAssociations []types.UserStackAssociation
+
+	noSmithyDocumentSerde
 }
 
 type BatchAssociateUserStackOutput struct {
@@ -44,6 +46,8 @@ type BatchAssociateUserStackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchAssociateUserStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

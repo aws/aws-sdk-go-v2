@@ -39,11 +39,15 @@ type DeleteRealtimeLogConfigInput struct {
 
 	// The name of the real-time log configuration to delete.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRealtimeLogConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

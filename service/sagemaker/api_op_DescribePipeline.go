@@ -34,6 +34,8 @@ type DescribePipelineInput struct {
 	//
 	// This member is required.
 	PipelineName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePipelineOutput struct {
@@ -78,6 +80,8 @@ type DescribePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

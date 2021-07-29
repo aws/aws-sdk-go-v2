@@ -53,6 +53,8 @@ type ListChangedBlocksInput struct {
 	// The block index from which the comparison should start. The list in the response
 	// will start from this block index or the next valid block index in the snapshots.
 	StartingBlockIndex *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListChangedBlocksOutput struct {
@@ -75,6 +77,8 @@ type ListChangedBlocksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChangedBlocksMiddlewares(stack *middleware.Stack, options Options) (err error) {

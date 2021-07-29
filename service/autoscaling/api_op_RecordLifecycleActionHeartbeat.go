@@ -72,11 +72,15 @@ type RecordLifecycleActionHeartbeatInput struct {
 	// instance. Amazon EC2 Auto Scaling sends this token to the notification target
 	// that you specified when you created the lifecycle hook.
 	LifecycleActionToken *string
+
+	noSmithyDocumentSerde
 }
 
 type RecordLifecycleActionHeartbeatOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRecordLifecycleActionHeartbeatMiddlewares(stack *middleware.Stack, options Options) (err error) {

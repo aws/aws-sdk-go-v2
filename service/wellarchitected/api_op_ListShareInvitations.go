@@ -40,6 +40,8 @@ type ListShareInvitationsInput struct {
 	// An optional string added to the beginning of each workload name returned in the
 	// results.
 	WorkloadNamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Input for List Share Invitations
@@ -53,6 +55,8 @@ type ListShareInvitationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListShareInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

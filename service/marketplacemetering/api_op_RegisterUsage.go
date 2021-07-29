@@ -75,6 +75,8 @@ type RegisterUsageInput struct {
 	// (Optional) To scope down the registration to a specific running software
 	// instance and guard against replay attacks.
 	Nonce *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterUsageOutput struct {
@@ -87,6 +89,8 @@ type RegisterUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

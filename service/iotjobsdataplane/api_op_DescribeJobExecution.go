@@ -46,6 +46,8 @@ type DescribeJobExecutionInput struct {
 	// Optional. When set to true, the response contains the job document. The default
 	// is false.
 	IncludeJobDocument *bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJobExecutionOutput struct {
@@ -55,6 +57,8 @@ type DescribeJobExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

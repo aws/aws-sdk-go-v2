@@ -44,11 +44,15 @@ type StopSolutionVersionCreationInput struct {
 	//
 	// This member is required.
 	SolutionVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StopSolutionVersionCreationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopSolutionVersionCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {

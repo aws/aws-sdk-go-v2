@@ -35,11 +35,15 @@ type StopTransformJobInput struct {
 	//
 	// This member is required.
 	TransformJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopTransformJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopTransformJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -14,6 +14,8 @@ type ConflictingOperationException struct {
 
 	ResourceId  *string
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictingOperationException) Error() string {
@@ -31,6 +33,8 @@ func (e *ConflictingOperationException) ErrorFault() smithy.ErrorFault { return 
 // IoT SiteWise can't process your request right now. Try again later.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -49,6 +53,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 // or unsupported characters. Check your request and try again.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -71,6 +77,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // IoT SiteWise User Guide.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -91,6 +99,8 @@ type ResourceAlreadyExistsException struct {
 
 	ResourceId  *string
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -108,6 +118,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // The requested resource can't be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -125,6 +137,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The requested service is unavailable.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -146,6 +160,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // IoT SiteWise User Guide.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -168,6 +184,8 @@ type TooManyTagsException struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -185,6 +203,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // You are not authorized.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {

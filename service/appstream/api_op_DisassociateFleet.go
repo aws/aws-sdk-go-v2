@@ -37,11 +37,15 @@ type DisassociateFleetInput struct {
 	//
 	// This member is required.
 	StackName *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateFleetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

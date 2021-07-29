@@ -82,6 +82,8 @@ type ListActivityTypesInput struct {
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the activity types.
 	ReverseOrder bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains a paginated list of activity type information structures.
@@ -101,6 +103,8 @@ type ListActivityTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListActivityTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

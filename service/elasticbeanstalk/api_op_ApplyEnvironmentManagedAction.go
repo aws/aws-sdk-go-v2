@@ -42,6 +42,8 @@ type ApplyEnvironmentManagedActionInput struct {
 
 	// The name of the target environment.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result message containing information about the managed action.
@@ -61,6 +63,8 @@ type ApplyEnvironmentManagedActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationApplyEnvironmentManagedActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

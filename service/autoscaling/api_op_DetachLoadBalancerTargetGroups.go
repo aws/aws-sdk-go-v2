@@ -38,11 +38,15 @@ type DetachLoadBalancerTargetGroupsInput struct {
 	//
 	// This member is required.
 	TargetGroupARNs []string
+
+	noSmithyDocumentSerde
 }
 
 type DetachLoadBalancerTargetGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachLoadBalancerTargetGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type UpdateGcmChannelInput struct {
 	//
 	// This member is required.
 	GCMChannelRequest *types.GCMChannelRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGcmChannelOutput struct {
@@ -56,6 +58,8 @@ type UpdateGcmChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGcmChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

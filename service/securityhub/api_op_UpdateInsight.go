@@ -42,11 +42,15 @@ type UpdateInsightInput struct {
 
 	// The updated name for the insight.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInsightOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInsightMiddlewares(stack *middleware.Stack, options Options) (err error) {

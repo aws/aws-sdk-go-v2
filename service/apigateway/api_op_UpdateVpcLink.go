@@ -39,6 +39,8 @@ type UpdateVpcLinkInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // An API Gateway VPC link for a RestApi to access resources in an Amazon Virtual
@@ -78,6 +80,8 @@ type UpdateVpcLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

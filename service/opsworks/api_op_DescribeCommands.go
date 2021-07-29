@@ -46,6 +46,8 @@ type DescribeCommandsInput struct {
 	// The instance ID. If you include this parameter, DescribeCommands returns a
 	// description of the commands associated with the specified instance.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeCommands request.
@@ -56,6 +58,8 @@ type DescribeCommandsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCommandsMiddlewares(stack *middleware.Stack, options Options) (err error) {

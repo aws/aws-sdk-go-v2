@@ -51,6 +51,8 @@ type DescribeEventSubscriptionsInput struct {
 
 	// The name of the RDS event notification subscription you want to describe.
 	SubscriptionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Data returned by the DescribeEventSubscriptions action.
@@ -67,6 +69,8 @@ type DescribeEventSubscriptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventSubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,6 +60,8 @@ type DescribeLocalGatewayRouteTablesInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLocalGatewayRouteTablesOutput struct {
@@ -73,6 +75,8 @@ type DescribeLocalGatewayRouteTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocalGatewayRouteTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

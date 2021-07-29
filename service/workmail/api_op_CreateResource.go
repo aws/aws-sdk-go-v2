@@ -44,6 +44,8 @@ type CreateResourceInput struct {
 	//
 	// This member is required.
 	Type types.ResourceType
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourceOutput struct {
@@ -53,6 +55,8 @@ type CreateResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

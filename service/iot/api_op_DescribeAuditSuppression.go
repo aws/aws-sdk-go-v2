@@ -42,6 +42,8 @@ type DescribeAuditSuppressionInput struct {
 	//
 	// This member is required.
 	ResourceIdentifier *types.ResourceIdentifier
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAuditSuppressionOutput struct {
@@ -66,6 +68,8 @@ type DescribeAuditSuppressionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAuditSuppressionMiddlewares(stack *middleware.Stack, options Options) (err error) {

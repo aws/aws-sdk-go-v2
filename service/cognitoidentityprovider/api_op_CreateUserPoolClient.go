@@ -197,6 +197,8 @@ type CreateUserPoolClientInput struct {
 	// User Pool
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-pools-specifying-attribute-mapping.html).
 	WriteAttributes []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to create a user pool client.
@@ -207,6 +209,8 @@ type CreateUserPoolClientOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserPoolClientMiddlewares(stack *middleware.Stack, options Options) (err error) {

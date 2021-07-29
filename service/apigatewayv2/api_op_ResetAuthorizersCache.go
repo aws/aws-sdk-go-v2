@@ -38,11 +38,15 @@ type ResetAuthorizersCacheInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetAuthorizersCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetAuthorizersCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

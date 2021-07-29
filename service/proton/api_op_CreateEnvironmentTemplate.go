@@ -71,6 +71,8 @@ type CreateEnvironmentTemplateInput struct {
 	// Proton User Guide
 	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateEnvironmentTemplateOutput struct {
@@ -82,6 +84,8 @@ type CreateEnvironmentTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEnvironmentTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

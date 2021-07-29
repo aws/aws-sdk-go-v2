@@ -75,6 +75,8 @@ type ListDomainsInput struct {
 	// When set to true, returns the results in reverse order. By default, the results
 	// are returned in ascending alphabetical order by name of the domains.
 	ReverseOrder bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains a paginated collection of DomainInfo structures.
@@ -94,6 +96,8 @@ type ListDomainsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {

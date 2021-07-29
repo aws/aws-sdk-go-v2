@@ -49,6 +49,8 @@ type CreateBasePathMappingInput struct {
 	// '(none)' if you want callers to explicitly specify the stage name after any base
 	// path name.
 	Stage *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the base path that callers of the API must provide as part of the URL
@@ -70,6 +72,8 @@ type CreateBasePathMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBasePathMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -29,6 +29,8 @@ func (c *Client) HttpPayloadWithMemberXmlName(ctx context.Context, params *HttpP
 
 type HttpPayloadWithMemberXmlNameInput struct {
 	Nested *types.PayloadWithXmlName
+
+	noSmithyDocumentSerde
 }
 
 type HttpPayloadWithMemberXmlNameOutput struct {
@@ -36,6 +38,8 @@ type HttpPayloadWithMemberXmlNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpPayloadWithMemberXmlNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

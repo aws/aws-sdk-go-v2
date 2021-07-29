@@ -54,11 +54,15 @@ type UpdateTaskExecutionInput struct {
 	//
 	// This member is required.
 	TaskExecutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTaskExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

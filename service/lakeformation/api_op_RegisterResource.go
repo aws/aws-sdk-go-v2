@@ -54,11 +54,15 @@ type RegisterResourceInput struct {
 	// information, see Using Service-Linked Roles for Lake Formation
 	// (https://docs-aws.amazon.com/lake-formation/latest/dg/service-linked-roles.html).
 	UseServiceLinkedRole *bool
+
+	noSmithyDocumentSerde
 }
 
 type RegisterResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

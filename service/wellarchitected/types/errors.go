@@ -10,6 +10,8 @@ import (
 // User does not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -30,6 +32,8 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -47,6 +51,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // There is a problem with the AWS Well-Architected Tool API service.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -67,6 +73,8 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -89,6 +97,8 @@ type ServiceQuotaExceededException struct {
 	ResourceType *string
 	QuotaCode    *string
 	ServiceCode  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -109,6 +119,8 @@ type ThrottlingException struct {
 
 	QuotaCode   *string
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -129,6 +141,8 @@ type ValidationException struct {
 
 	Reason ValidationExceptionReason
 	Fields []ValidationExceptionField
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

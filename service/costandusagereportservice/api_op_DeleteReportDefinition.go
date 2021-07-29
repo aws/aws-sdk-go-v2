@@ -32,6 +32,8 @@ type DeleteReportDefinitionInput struct {
 	// The name of the report that you want to delete. The name must be unique, is case
 	// sensitive, and can't include spaces.
 	ReportName *string
+
+	noSmithyDocumentSerde
 }
 
 // If the action is successful, the service sends back an HTTP 200 response.
@@ -42,6 +44,8 @@ type DeleteReportDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

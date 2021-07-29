@@ -61,6 +61,8 @@ type StartActivityStreamInput struct {
 	// fields. This option only applies to an Oracle DB instance. By default, no
 	// engine-native audit fields are included.
 	EngineNativeAuditFieldsIncluded *bool
+
+	noSmithyDocumentSerde
 }
 
 type StartActivityStreamOutput struct {
@@ -89,6 +91,8 @@ type StartActivityStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartActivityStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

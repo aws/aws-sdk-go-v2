@@ -37,6 +37,8 @@ type ListInvitationsInput struct {
 	// The nextToken string that specifies which page of results to return in a
 	// paginated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListInvitationsOutput struct {
@@ -50,6 +52,8 @@ type ListInvitationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInvitationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

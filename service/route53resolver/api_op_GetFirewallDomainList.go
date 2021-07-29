@@ -33,6 +33,8 @@ type GetFirewallDomainListInput struct {
 	//
 	// This member is required.
 	FirewallDomainListId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFirewallDomainListOutput struct {
@@ -42,6 +44,8 @@ type GetFirewallDomainListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFirewallDomainListMiddlewares(stack *middleware.Stack, options Options) (err error) {

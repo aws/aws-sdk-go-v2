@@ -51,6 +51,8 @@ type ListReceivedLicensesInput struct {
 
 	// Token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListReceivedLicensesOutput struct {
@@ -63,6 +65,8 @@ type ListReceivedLicensesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReceivedLicensesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,12 +61,16 @@ type PutIdentityPolicyInput struct {
 	//
 	// This member is required.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type PutIdentityPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutIdentityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

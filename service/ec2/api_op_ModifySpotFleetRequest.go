@@ -76,6 +76,8 @@ type ModifySpotFleetRequestInput struct {
 
 	// The size of the fleet.
 	TargetCapacity *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of ModifySpotFleetRequest.
@@ -86,6 +88,8 @@ type ModifySpotFleetRequestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifySpotFleetRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {

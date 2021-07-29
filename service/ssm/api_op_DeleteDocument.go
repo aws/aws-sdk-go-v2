@@ -49,11 +49,15 @@ type DeleteDocumentInput struct {
 	// The version name of the document that you want to delete. If not provided, all
 	// versions of the document are deleted.
 	VersionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDocumentOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {

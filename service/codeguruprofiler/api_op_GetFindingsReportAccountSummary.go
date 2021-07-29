@@ -55,6 +55,8 @@ type GetFindingsReportAccountSummaryInput struct {
 	// treated as an opaque identifier that is only used to retrieve the next items in
 	// a list and not for other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the GetFindingsReportAccountSummaryResponse.
@@ -76,6 +78,8 @@ type GetFindingsReportAccountSummaryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFindingsReportAccountSummaryMiddlewares(stack *middleware.Stack, options Options) (err error) {

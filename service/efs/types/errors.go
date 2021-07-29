@@ -14,6 +14,8 @@ type AccessPointAlreadyExists struct {
 
 	ErrorCode_    *string
 	AccessPointId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessPointAlreadyExists) Error() string {
@@ -34,6 +36,8 @@ type AccessPointLimitExceeded struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessPointLimitExceeded) Error() string {
@@ -54,6 +58,8 @@ type AccessPointNotFound struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessPointNotFound) Error() string {
@@ -76,6 +82,8 @@ type AvailabilityZonesMismatch struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AvailabilityZonesMismatch) Error() string {
@@ -96,6 +104,8 @@ type BadRequest struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequest) Error() string {
@@ -116,6 +126,8 @@ type DependencyTimeout struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependencyTimeout) Error() string {
@@ -137,6 +149,8 @@ type FileSystemAlreadyExists struct {
 
 	ErrorCode_   *string
 	FileSystemId *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileSystemAlreadyExists) Error() string {
@@ -156,6 +170,8 @@ type FileSystemInUse struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileSystemInUse) Error() string {
@@ -176,6 +192,8 @@ type FileSystemLimitExceeded struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileSystemLimitExceeded) Error() string {
@@ -196,6 +214,8 @@ type FileSystemNotFound struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FileSystemNotFound) Error() string {
@@ -215,6 +235,8 @@ type IncorrectFileSystemLifeCycleState struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncorrectFileSystemLifeCycleState) Error() string {
@@ -236,6 +258,8 @@ type IncorrectMountTargetState struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncorrectMountTargetState) Error() string {
@@ -259,6 +283,8 @@ type InsufficientThroughputCapacity struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientThroughputCapacity) Error() string {
@@ -278,6 +304,8 @@ type InternalServerError struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -299,6 +327,8 @@ type InvalidPolicyException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPolicyException) Error() string {
@@ -319,6 +349,8 @@ type IpAddressInUse struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IpAddressInUse) Error() string {
@@ -339,6 +371,8 @@ type MountTargetConflict struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MountTargetConflict) Error() string {
@@ -359,6 +393,8 @@ type MountTargetNotFound struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MountTargetNotFound) Error() string {
@@ -384,6 +420,8 @@ type NetworkInterfaceLimitExceeded struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NetworkInterfaceLimitExceeded) Error() string {
@@ -404,6 +442,8 @@ type NoFreeAddressesInSubnet struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoFreeAddressesInSubnet) Error() string {
@@ -424,6 +464,8 @@ type PolicyNotFound struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PolicyNotFound) Error() string {
@@ -444,6 +486,8 @@ type SecurityGroupLimitExceeded struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SecurityGroupLimitExceeded) Error() string {
@@ -464,6 +508,8 @@ type SecurityGroupNotFound struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SecurityGroupNotFound) Error() string {
@@ -483,6 +529,8 @@ type SubnetNotFound struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetNotFound) Error() string {
@@ -503,6 +551,8 @@ type ThroughputLimitExceeded struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThroughputLimitExceeded) Error() string {
@@ -523,6 +573,8 @@ type TooManyRequests struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequests) Error() string {
@@ -543,6 +595,8 @@ type UnsupportedAvailabilityZone struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedAvailabilityZone) Error() string {
@@ -563,6 +617,8 @@ type ValidationException struct {
 	Message *string
 
 	ErrorCode_ *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

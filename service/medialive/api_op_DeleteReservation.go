@@ -34,6 +34,8 @@ type DeleteReservationInput struct {
 	//
 	// This member is required.
 	ReservationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DeleteReservationResponse
@@ -98,6 +100,8 @@ type DeleteReservationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {

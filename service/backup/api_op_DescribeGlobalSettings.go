@@ -29,6 +29,7 @@ func (c *Client) DescribeGlobalSettings(ctx context.Context, params *DescribeGlo
 }
 
 type DescribeGlobalSettingsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeGlobalSettingsOutput struct {
@@ -44,6 +45,8 @@ type DescribeGlobalSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGlobalSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

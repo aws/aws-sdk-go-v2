@@ -34,6 +34,8 @@ type DescribeAutoMLJobInput struct {
 	//
 	// This member is required.
 	AutoMLJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAutoMLJobOutput struct {
@@ -127,6 +129,8 @@ type DescribeAutoMLJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAutoMLJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

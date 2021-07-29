@@ -171,6 +171,8 @@ type InitiateAuthInput struct {
 	// used for evaluating the risk of an unexpected event by Amazon Cognito advanced
 	// security.
 	UserContextData *types.UserContextDataType
+
+	noSmithyDocumentSerde
 }
 
 // Initiates the authentication response.
@@ -236,6 +238,8 @@ type InitiateAuthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInitiateAuthMiddlewares(stack *middleware.Stack, options Options) (err error) {

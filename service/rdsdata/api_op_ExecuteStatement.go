@@ -77,6 +77,8 @@ type ExecuteStatementInput struct {
 	// include the SQL statement in. If the SQL statement is not part of a transaction,
 	// don't set this parameter.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response elements represent the output of a request to run a SQL statement
@@ -101,6 +103,8 @@ type ExecuteStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

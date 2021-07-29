@@ -63,6 +63,8 @@ type ListPrincipalsInput struct {
 	// rds:Cluster | route53resolver:ResolverQueryLogConfig |
 	// route53resolver:ResolverRule
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPrincipalsOutput struct {
@@ -76,6 +78,8 @@ type ListPrincipalsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPrincipalsMiddlewares(stack *middleware.Stack, options Options) (err error) {

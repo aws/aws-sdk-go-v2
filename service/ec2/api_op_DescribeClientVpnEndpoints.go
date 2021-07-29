@@ -55,6 +55,8 @@ type DescribeClientVpnEndpointsInput struct {
 
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClientVpnEndpointsOutput struct {
@@ -68,6 +70,8 @@ type DescribeClientVpnEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClientVpnEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

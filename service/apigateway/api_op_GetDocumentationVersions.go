@@ -40,6 +40,8 @@ type GetDocumentationVersionsInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // The collection of documentation snapshots of an API. Use the
@@ -57,6 +59,8 @@ type GetDocumentationVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDocumentationVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

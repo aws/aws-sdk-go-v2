@@ -63,11 +63,15 @@ type UpdateInferenceSchedulerInput struct {
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source for the inference scheduler.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInferenceSchedulerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {

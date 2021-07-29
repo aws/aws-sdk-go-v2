@@ -79,11 +79,15 @@ type DeleteBucketLifecycleConfigurationInput struct {
 	//
 	// This member is required.
 	Bucket *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBucketLifecycleConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBucketLifecycleConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

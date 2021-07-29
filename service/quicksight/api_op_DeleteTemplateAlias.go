@@ -46,6 +46,8 @@ type DeleteTemplateAliasInput struct {
 	//
 	// This member is required.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTemplateAliasOutput struct {
@@ -67,6 +69,8 @@ type DeleteTemplateAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTemplateAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

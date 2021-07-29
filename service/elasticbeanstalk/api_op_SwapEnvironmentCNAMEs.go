@@ -52,11 +52,15 @@ type SwapEnvironmentCNAMEsInput struct {
 	// you specify the SourceEnvironmentName, you must specify the
 	// DestinationEnvironmentName.
 	SourceEnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 type SwapEnvironmentCNAMEsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSwapEnvironmentCNAMEsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DescribeRoutingProfileInput struct {
 	//
 	// This member is required.
 	RoutingProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRoutingProfileOutput struct {
@@ -48,6 +50,8 @@ type DescribeRoutingProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRoutingProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,6 +36,8 @@ type DisassociateRepositoryInput struct {
 	//
 	// This member is required.
 	AssociationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateRepositoryOutput struct {
@@ -57,6 +59,8 @@ type DisassociateRepositoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

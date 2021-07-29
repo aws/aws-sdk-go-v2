@@ -34,11 +34,15 @@ type DeleteOptionGroupInput struct {
 	//
 	// This member is required.
 	OptionGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOptionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOptionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

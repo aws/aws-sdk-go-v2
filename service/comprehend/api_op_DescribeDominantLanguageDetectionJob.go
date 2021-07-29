@@ -35,6 +35,8 @@ type DescribeDominantLanguageDetectionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDominantLanguageDetectionJobOutput struct {
@@ -45,6 +47,8 @@ type DescribeDominantLanguageDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

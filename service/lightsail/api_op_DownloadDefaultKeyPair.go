@@ -27,6 +27,7 @@ func (c *Client) DownloadDefaultKeyPair(ctx context.Context, params *DownloadDef
 }
 
 type DownloadDefaultKeyPairInput struct {
+	noSmithyDocumentSerde
 }
 
 type DownloadDefaultKeyPairOutput struct {
@@ -39,6 +40,8 @@ type DownloadDefaultKeyPairOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDownloadDefaultKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

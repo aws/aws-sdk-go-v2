@@ -56,6 +56,8 @@ type UpdateApplicationInput struct {
 	// A link to the readme file in Markdown language that contains a more detailed
 	// description of the application and how it works.Maximum size 5 MB
 	ReadmeUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApplicationOutput struct {
@@ -111,6 +113,8 @@ type UpdateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

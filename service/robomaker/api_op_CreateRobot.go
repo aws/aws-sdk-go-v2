@@ -47,6 +47,8 @@ type CreateRobotInput struct {
 
 	// A map that contains tag keys and tag values that are attached to the robot.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRobotOutput struct {
@@ -72,6 +74,8 @@ type CreateRobotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRobotMiddlewares(stack *middleware.Stack, options Options) (err error) {

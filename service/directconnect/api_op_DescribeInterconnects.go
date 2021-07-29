@@ -31,6 +31,8 @@ type DescribeInterconnectsInput struct {
 
 	// The ID of the interconnect.
 	InterconnectId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInterconnectsOutput struct {
@@ -40,6 +42,8 @@ type DescribeInterconnectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInterconnectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type DescribeAgentInput struct {
 	//
 	// This member is required.
 	AgentArn *string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeAgentResponse
@@ -70,6 +72,8 @@ type DescribeAgentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {

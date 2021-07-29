@@ -35,11 +35,15 @@ type DeleteExternalModelInput struct {
 	//
 	// This member is required.
 	ModelEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteExternalModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteExternalModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

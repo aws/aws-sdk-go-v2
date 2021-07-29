@@ -38,6 +38,8 @@ type GetLogRecordInput struct {
 	//
 	// This member is required.
 	LogRecordPointer *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLogRecordOutput struct {
@@ -47,6 +49,8 @@ type GetLogRecordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLogRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {

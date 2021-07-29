@@ -51,6 +51,8 @@ type ComposeEnvironmentsInput struct {
 	// manifest that specifies the name of the environment and the name of the solution
 	// stack to use, and optionally can specify environment links to create.
 	VersionLabels []string
+
+	noSmithyDocumentSerde
 }
 
 // Result message containing a list of environment descriptions.
@@ -65,6 +67,8 @@ type ComposeEnvironmentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationComposeEnvironmentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -29,6 +29,7 @@ func (c *Client) GetAccount(ctx context.Context, params *GetAccountInput, optFns
 
 // Requests API Gateway to get information about the current Account resource.
 type GetAccountInput struct {
+	noSmithyDocumentSerde
 }
 
 // Represents an AWS account that is associated with API Gateway. To view the
@@ -94,6 +95,8 @@ type GetAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteNotebookInstanceLifecycleConfigInput struct {
 	//
 	// This member is required.
 	NotebookInstanceLifecycleConfigName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNotebookInstanceLifecycleConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNotebookInstanceLifecycleConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

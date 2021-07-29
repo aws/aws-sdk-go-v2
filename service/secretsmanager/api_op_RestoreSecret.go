@@ -58,6 +58,8 @@ type RestoreSecretInput struct {
 	//
 	// This member is required.
 	SecretId *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreSecretOutput struct {
@@ -70,6 +72,8 @@ type RestoreSecretOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {

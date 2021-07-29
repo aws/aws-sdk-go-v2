@@ -41,6 +41,8 @@ type ListResourcesForWebACLInput struct {
 	// application can be an Application Load Balancer (ALB), an Amazon API Gateway
 	// REST API, or an AppSync GraphQL API.
 	ResourceType types.ResourceType
+
+	noSmithyDocumentSerde
 }
 
 type ListResourcesForWebACLOutput struct {
@@ -50,6 +52,8 @@ type ListResourcesForWebACLOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourcesForWebACLMiddlewares(stack *middleware.Stack, options Options) (err error) {

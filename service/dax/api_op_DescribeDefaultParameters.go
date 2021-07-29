@@ -39,6 +39,8 @@ type DescribeDefaultParametersInput struct {
 	// of results from this action. If this parameter is specified, the response
 	// includes only results beyond the token, up to the value specified by MaxResults.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDefaultParametersOutput struct {
@@ -51,6 +53,8 @@ type DescribeDefaultParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDefaultParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

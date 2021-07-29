@@ -42,6 +42,8 @@ type GetHostedConfigurationVersionInput struct {
 	//
 	// This member is required.
 	VersionNumber int32
+
+	noSmithyDocumentSerde
 }
 
 type GetHostedConfigurationVersionOutput struct {
@@ -68,6 +70,8 @@ type GetHostedConfigurationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHostedConfigurationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

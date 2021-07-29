@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -15,6 +16,8 @@ type Action struct {
 
 	// A configuration for an Amazon SNS channel.
 	SNSConfiguration *SNSConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A configuration for Amazon SNS-integrated notifications.
@@ -49,6 +52,8 @@ type Alert struct {
 
 	// The time at which the alert was last modified.
 	LastModificationTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of an alert's configuration.
@@ -81,6 +86,8 @@ type AlertSummary struct {
 	// The alert's tags
 	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a detector's configuration.
@@ -88,6 +95,8 @@ type AnomalyDetectorConfig struct {
 
 	// The frequency at which the detector analyzes its source data.
 	AnomalyDetectorFrequency Frequency
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a detector's configuration.
@@ -95,6 +104,8 @@ type AnomalyDetectorConfigSummary struct {
 
 	// The interval at which the detector analyzes its source data.
 	AnomalyDetectorFrequency Frequency
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an an anomaly detector.
@@ -121,6 +132,8 @@ type AnomalyDetectorSummary struct {
 	// The detector's tags
 	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A group of anomalous metrics
@@ -143,6 +156,8 @@ type AnomalyGroup struct {
 
 	// The start time for the group.
 	StartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Aggregated statistics for a group of anomalous metrics.
@@ -156,6 +171,8 @@ type AnomalyGroupStatistics struct {
 
 	// The number of groups found.
 	TotalCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Details about a group of anomalous metrics.
@@ -175,6 +192,8 @@ type AnomalyGroupSummary struct {
 
 	// The start time for the group.
 	StartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // An anomalous metric in an anomaly group.
@@ -187,6 +206,8 @@ type AnomalyGroupTimeSeries struct {
 
 	// The ID of the metric.
 	TimeSeriesId *string
+
+	noSmithyDocumentSerde
 }
 
 // Feedback for an anomalous metric.
@@ -206,6 +227,8 @@ type AnomalyGroupTimeSeriesFeedback struct {
 	//
 	// This member is required.
 	TimeSeriesId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an Amazon AppFlow flow datasource.
@@ -220,6 +243,8 @@ type AppFlowConfig struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an Amazon CloudWatch datasource.
@@ -230,6 +255,8 @@ type CloudWatchConfig struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about dimensions that contributed to an anomaly.
@@ -237,6 +264,8 @@ type ContributionMatrix struct {
 
 	// A list of contributing dimensions.
 	DimensionContributionList []DimensionContribution
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about how a source CSV data file should be analyzed.
@@ -259,6 +288,8 @@ type CsvFormatDescriptor struct {
 
 	// The character used as a quote character.
 	QuoteSymbol *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a dimension that contributed to an anomaly.
@@ -269,6 +300,8 @@ type DimensionContribution struct {
 
 	// A list of dimension values that contributed to the anomaly.
 	DimensionValueContributionList []DimensionValueContribution
+
+	noSmithyDocumentSerde
 }
 
 // A dimension name and value.
@@ -283,6 +316,8 @@ type DimensionNameValue struct {
 	//
 	// This member is required.
 	DimensionValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The severity of a value of a dimension that contributed to an anomaly.
@@ -293,6 +328,8 @@ type DimensionValueContribution struct {
 
 	// The value of the dimension.
 	DimensionValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of an anomaly detector run.
@@ -306,6 +343,8 @@ type ExecutionStatus struct {
 
 	// The run's timestamp.
 	Timestamp *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a source file's formatting.
@@ -316,6 +355,8 @@ type FileFormatDescriptor struct {
 
 	// Contains information about how a source JSON data file should be analyzed.
 	JsonFormatDescriptor *JsonFormatDescriptor
+
+	noSmithyDocumentSerde
 }
 
 // Aggregated statistics about a measure affected by an anomaly.
@@ -326,6 +367,8 @@ type ItemizedMetricStats struct {
 
 	// The number of times that the measure appears.
 	OccurrenceCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about how a source JSON data file should be analyzed.
@@ -336,6 +379,8 @@ type JsonFormatDescriptor struct {
 
 	// The level of compression of the source CSV file.
 	FileCompression JsonFileCompression
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a Lambda configuration.
@@ -350,6 +395,8 @@ type LambdaConfiguration struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A calculation made by contrasting a measure and a dimension from your source
@@ -368,6 +415,8 @@ type Metric struct {
 
 	// The namespace for the metric.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a measure affected by an anomaly.
@@ -381,6 +430,8 @@ type MetricLevelImpact struct {
 
 	// The number of anomalous metrics for the measure.
 	NumTimeSeries int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a dataset.
@@ -407,6 +458,8 @@ type MetricSetSummary struct {
 	// The dataset's tags
 	// (https://docs.aws.amazon.com/lookoutmetrics/latest/dev/detectors-tags.html).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about source data used to generate a metric.
@@ -430,6 +483,8 @@ type MetricSource struct {
 	// Contains information about the configuration of the S3 bucket that contains
 	// source files.
 	S3SourceConfig *S3SourceConfig
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the Amazon Relational Database Service (RDS)
@@ -476,6 +531,8 @@ type RDSSourceConfig struct {
 	//
 	// This member is required.
 	VpcConfiguration *VpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the Amazon Redshift database configuration.
@@ -520,6 +577,8 @@ type RedshiftSourceConfig struct {
 	//
 	// This member is required.
 	VpcConfiguration *VpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the configuration of the S3 bucket that contains
@@ -540,6 +599,8 @@ type S3SourceConfig struct {
 
 	// A list of templated paths to the source files.
 	TemplatedPathList []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the source configuration in Amazon S3.
@@ -560,6 +621,8 @@ type SampleDataS3SourceConfig struct {
 
 	// An array of strings containing the list of templated paths.
 	TemplatedPathList []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the SNS topic to which you want to send your alerts
@@ -575,6 +638,8 @@ type SNSConfiguration struct {
 	//
 	// This member is required.
 	SnsTopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about a metric. A metric is an aggregation of the values of a measure
@@ -595,6 +660,8 @@ type TimeSeries struct {
 	//
 	// This member is required.
 	TimeSeriesId *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about feedback submitted for an anomalous metric.
@@ -605,6 +672,8 @@ type TimeSeriesFeedback struct {
 
 	// The ID of the metric.
 	TimeSeriesId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the column used to track time in a source data file.
@@ -615,6 +684,8 @@ type TimestampColumn struct {
 
 	// The name of the timestamp column.
 	ColumnName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a a field in a validation exception.
@@ -629,6 +700,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information about the Amazon Virtual Private Cloud (VPC).
@@ -644,4 +717,8 @@ type VpcConfiguration struct {
 	//
 	// This member is required.
 	SubnetIdList []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

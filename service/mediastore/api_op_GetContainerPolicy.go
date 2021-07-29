@@ -34,6 +34,8 @@ type GetContainerPolicyInput struct {
 	//
 	// This member is required.
 	ContainerName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetContainerPolicyOutput struct {
@@ -45,6 +47,8 @@ type GetContainerPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContainerPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

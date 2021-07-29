@@ -64,6 +64,8 @@ type CreateBackupSelectionInput struct {
 	// A unique string that identifies the request and allows failed requests to be
 	// retried without the risk of running the operation twice.
 	CreatorRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBackupSelectionOutput struct {
@@ -83,6 +85,8 @@ type CreateBackupSelectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBackupSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

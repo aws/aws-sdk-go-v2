@@ -47,6 +47,8 @@ type GetLogGroupFieldsInput struct {
 	// minutes after this time are searched. The time value is specified as epoch time,
 	// the number of seconds since January 1, 1970, 00:00:00 UTC.
 	Time *int64
+
+	noSmithyDocumentSerde
 }
 
 type GetLogGroupFieldsOutput struct {
@@ -58,6 +60,8 @@ type GetLogGroupFieldsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLogGroupFieldsMiddlewares(stack *middleware.Stack, options Options) (err error) {

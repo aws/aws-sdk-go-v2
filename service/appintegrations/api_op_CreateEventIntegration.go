@@ -58,6 +58,8 @@ type CreateEventIntegrationInput struct {
 
 	// One or more tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateEventIntegrationOutput struct {
@@ -67,6 +69,8 @@ type CreateEventIntegrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEventIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type DescribeRetentionConfigurationsInput struct {
 	// configurations for that account. Currently, AWS Config supports only one
 	// retention configuration per region in your account.
 	RetentionConfigurationNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRetentionConfigurationsOutput struct {
@@ -55,6 +57,8 @@ type DescribeRetentionConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRetentionConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

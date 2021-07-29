@@ -33,6 +33,8 @@ type CancelResizeInput struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the result of a cluster resize operation.
@@ -108,6 +110,8 @@ type CancelResizeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelResizeMiddlewares(stack *middleware.Stack, options Options) (err error) {

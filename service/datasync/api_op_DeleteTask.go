@@ -33,11 +33,15 @@ type DeleteTaskInput struct {
 	//
 	// This member is required.
 	TaskArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

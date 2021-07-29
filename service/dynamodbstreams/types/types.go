@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -30,6 +31,8 @@ type AttributeValue interface {
 // An attribute of type String. For example: "S": "Hello"
 type AttributeValueMemberS struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberS) isAttributeValue() {}
@@ -40,6 +43,8 @@ func (*AttributeValueMemberS) isAttributeValue() {}
 // mathematical operations.
 type AttributeValueMemberN struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberN) isAttributeValue() {}
@@ -48,6 +53,8 @@ func (*AttributeValueMemberN) isAttributeValue() {}
 // "dGhpcyB0ZXh0IGlzIGJhc2U2NC1lbmNvZGVk"
 type AttributeValueMemberB struct {
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberB) isAttributeValue() {}
@@ -56,6 +63,8 @@ func (*AttributeValueMemberB) isAttributeValue() {}
 // ,"Zebra"]
 type AttributeValueMemberSS struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberSS) isAttributeValue() {}
@@ -66,6 +75,8 @@ func (*AttributeValueMemberSS) isAttributeValue() {}
 // number type attributes for mathematical operations.
 type AttributeValueMemberNS struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberNS) isAttributeValue() {}
@@ -74,6 +85,8 @@ func (*AttributeValueMemberNS) isAttributeValue() {}
 // "U25vd3k="]
 type AttributeValueMemberBS struct {
 	Value [][]byte
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberBS) isAttributeValue() {}
@@ -82,6 +95,8 @@ func (*AttributeValueMemberBS) isAttributeValue() {}
 // "35"}}
 type AttributeValueMemberM struct {
 	Value map[string]AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberM) isAttributeValue() {}
@@ -90,6 +105,8 @@ func (*AttributeValueMemberM) isAttributeValue() {}
 // "Coffee"}, {"N", "3.14159"}]
 type AttributeValueMemberL struct {
 	Value []AttributeValue
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberL) isAttributeValue() {}
@@ -97,6 +114,8 @@ func (*AttributeValueMemberL) isAttributeValue() {}
 // An attribute of type Null. For example: "NULL": true
 type AttributeValueMemberNULL struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberNULL) isAttributeValue() {}
@@ -104,6 +123,8 @@ func (*AttributeValueMemberNULL) isAttributeValue() {}
 // An attribute of type Boolean. For example: "BOOL": true
 type AttributeValueMemberBOOL struct {
 	Value bool
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueMemberBOOL) isAttributeValue() {}
@@ -117,6 +138,8 @@ type Identity struct {
 
 	// The type of the identity. For Time To Live, the type is "Service".
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single element of a key schema. A key schema specifies the
@@ -151,6 +174,8 @@ type KeySchemaElement struct {
 	//
 	// This member is required.
 	KeyType KeyType
+
+	noSmithyDocumentSerde
 }
 
 // A description of a unique event within a stream.
@@ -198,6 +223,8 @@ type Record struct {
 	// *
 	// Records[].userIdentity.principalId "dynamodb.amazonaws.com"
 	UserIdentity *Identity
+
+	noSmithyDocumentSerde
 }
 
 // The beginning and ending sequence numbers for the stream records contained
@@ -211,6 +238,8 @@ type SequenceNumberRange struct {
 	// The first sequence number for the stream records contained within a shard.
 	// String contains numeric characters only.
 	StartingSequenceNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // A uniquely identified group of stream records within a stream.
@@ -224,6 +253,8 @@ type Shard struct {
 
 	// The system-generated identifier for this shard.
 	ShardId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents all of the data describing a particular stream.
@@ -247,6 +278,8 @@ type Stream struct {
 
 	// The DynamoDB table with which the stream is associated.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents all of the data describing a particular stream.
@@ -318,6 +351,8 @@ type StreamDescription struct {
 
 	// The DynamoDB table with which the stream is associated.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of a single data modification that was performed on an item in a
@@ -357,13 +392,19 @@ type StreamRecord struct {
 	// * NEW_AND_OLD_IMAGES
 	// - both the new and the old item images of the item.
 	StreamViewType StreamViewType
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isAttributeValue() {}

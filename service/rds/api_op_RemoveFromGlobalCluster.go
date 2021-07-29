@@ -38,6 +38,8 @@ type RemoveFromGlobalClusterInput struct {
 
 	// The cluster identifier to detach from the Aurora global database cluster.
 	GlobalClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveFromGlobalClusterOutput struct {
@@ -47,6 +49,8 @@ type RemoveFromGlobalClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveFromGlobalClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

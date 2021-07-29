@@ -70,6 +70,8 @@ type CreateNatGatewayInput struct {
 
 	// The tags to assign to the NAT gateway.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateNatGatewayOutput struct {
@@ -83,6 +85,8 @@ type CreateNatGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateNatGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

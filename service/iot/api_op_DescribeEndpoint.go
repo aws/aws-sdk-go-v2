@@ -47,6 +47,8 @@ type DescribeEndpointInput struct {
 	// endpoint type to avoid issues related to the widespread distrust of Symantec
 	// certificate authorities.
 	EndpointType *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the DescribeEndpoint operation.
@@ -58,6 +60,8 @@ type DescribeEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

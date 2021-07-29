@@ -46,6 +46,8 @@ type GetSnapshotBlockInput struct {
 	//
 	// This member is required.
 	SnapshotId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSnapshotBlockOutput struct {
@@ -64,6 +66,8 @@ type GetSnapshotBlockOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSnapshotBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

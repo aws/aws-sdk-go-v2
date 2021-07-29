@@ -39,11 +39,15 @@ type RemoveThingFromBillingGroupInput struct {
 
 	// The name of the thing to be removed from the billing group.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveThingFromBillingGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveThingFromBillingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -363,6 +363,8 @@ type CreateReplicationGroupInput struct {
 
 	// The user group to associate with the replication group.
 	UserGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateReplicationGroupOutput struct {
@@ -372,6 +374,8 @@ type CreateReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

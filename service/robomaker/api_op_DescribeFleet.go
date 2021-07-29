@@ -34,6 +34,8 @@ type DescribeFleetInput struct {
 	//
 	// This member is required.
 	Fleet *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFleetOutput struct {
@@ -64,6 +66,8 @@ type DescribeFleetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFleetMiddlewares(stack *middleware.Stack, options Options) (err error) {

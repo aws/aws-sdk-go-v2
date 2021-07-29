@@ -134,6 +134,8 @@ type TransactWriteItemsInput struct {
 	// during the operation and are returned in the response. If set to NONE (the
 	// default), no statistics are returned.
 	ReturnItemCollectionMetrics types.ReturnItemCollectionMetrics
+
+	noSmithyDocumentSerde
 }
 
 type TransactWriteItemsOutput struct {
@@ -150,6 +152,8 @@ type TransactWriteItemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTransactWriteItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

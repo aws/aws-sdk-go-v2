@@ -30,11 +30,15 @@ type DeregisterOrganizationAdminAccountInput struct {
 
 	// The identifier for the specified administrator account.
 	AdminAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterOrganizationAdminAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterOrganizationAdminAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

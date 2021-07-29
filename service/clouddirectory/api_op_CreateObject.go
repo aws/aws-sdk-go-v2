@@ -53,6 +53,8 @@ type CreateObjectInput struct {
 
 	// If specified, the parent reference to which this object will be attached.
 	ParentReference *types.ObjectReference
+
+	noSmithyDocumentSerde
 }
 
 type CreateObjectOutput struct {
@@ -62,6 +64,8 @@ type CreateObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

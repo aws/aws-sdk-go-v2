@@ -50,11 +50,15 @@ type DeleteVpcPeeringAuthorizationInput struct {
 	//
 	// This member is required.
 	PeerVpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVpcPeeringAuthorizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVpcPeeringAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

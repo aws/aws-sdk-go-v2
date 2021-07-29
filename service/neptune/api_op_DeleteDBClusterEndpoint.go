@@ -33,6 +33,8 @@ type DeleteDBClusterEndpointInput struct {
 	//
 	// This member is required.
 	DBClusterEndpointIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -92,6 +94,8 @@ type DeleteDBClusterEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

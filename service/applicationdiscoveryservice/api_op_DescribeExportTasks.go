@@ -50,6 +50,8 @@ type DescribeExportTasksInput struct {
 	// returned the nextToken value. This value is null when there are no more results
 	// to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeExportTasksOutput struct {
@@ -67,6 +69,8 @@ type DescribeExportTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeExportTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

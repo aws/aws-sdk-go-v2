@@ -56,6 +56,8 @@ type DescribeInstallationMediaInput struct {
 	// request. If this parameter is specified, the response includes only records
 	// beyond the marker, up to the value specified by MaxRecords.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInstallationMediaOutput struct {
@@ -70,6 +72,8 @@ type DescribeInstallationMediaOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstallationMediaMiddlewares(stack *middleware.Stack, options Options) (err error) {

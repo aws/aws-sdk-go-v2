@@ -55,6 +55,8 @@ type TestAlarmInput struct {
 	//
 	// This member is required.
 	State types.AlarmState
+
+	noSmithyDocumentSerde
 }
 
 type TestAlarmOutput struct {
@@ -66,6 +68,8 @@ type TestAlarmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

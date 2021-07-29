@@ -47,6 +47,8 @@ type DescribeGlobalReplicationGroupsInput struct {
 
 	// Returns the list of members that comprise the Global datastore.
 	ShowMemberInfo *bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeGlobalReplicationGroupsOutput struct {
@@ -62,6 +64,8 @@ type DescribeGlobalReplicationGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGlobalReplicationGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

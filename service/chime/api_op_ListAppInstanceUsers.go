@@ -40,6 +40,8 @@ type ListAppInstanceUsersInput struct {
 
 	// The token passed by previous API calls until all requested users are returned.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAppInstanceUsersOutput struct {
@@ -55,6 +57,8 @@ type ListAppInstanceUsersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAppInstanceUsersMiddlewares(stack *middleware.Stack, options Options) (err error) {

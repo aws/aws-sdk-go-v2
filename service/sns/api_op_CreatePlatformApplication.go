@@ -75,6 +75,8 @@ type CreatePlatformApplicationInput struct {
 	//
 	// This member is required.
 	Platform *string
+
+	noSmithyDocumentSerde
 }
 
 // Response from CreatePlatformApplication action.
@@ -85,6 +87,8 @@ type CreatePlatformApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePlatformApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

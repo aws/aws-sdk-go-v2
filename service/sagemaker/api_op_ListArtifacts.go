@@ -56,6 +56,8 @@ type ListArtifactsInput struct {
 
 	// A filter that returns only artifacts with the specified source URI.
 	SourceUri *string
+
+	noSmithyDocumentSerde
 }
 
 type ListArtifactsOutput struct {
@@ -68,6 +70,8 @@ type ListArtifactsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

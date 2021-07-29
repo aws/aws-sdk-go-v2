@@ -48,11 +48,15 @@ type DeleteMethodResponseInput struct {
 	//
 	// This member is required.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteMethodResponseOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

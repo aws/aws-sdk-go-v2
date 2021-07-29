@@ -41,6 +41,8 @@ type ListComponentsInput struct {
 
 	// The token to request the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListComponentsOutput struct {
@@ -53,6 +55,8 @@ type ListComponentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,11 +44,15 @@ type DeleteConnectionAliasInput struct {
 	//
 	// This member is required.
 	AliasId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteConnectionAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteConnectionAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

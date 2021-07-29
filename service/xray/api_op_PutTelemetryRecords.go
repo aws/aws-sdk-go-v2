@@ -42,11 +42,15 @@ type PutTelemetryRecordsInput struct {
 
 	//
 	ResourceARN *string
+
+	noSmithyDocumentSerde
 }
 
 type PutTelemetryRecordsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutTelemetryRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

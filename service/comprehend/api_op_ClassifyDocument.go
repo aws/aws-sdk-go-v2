@@ -39,6 +39,8 @@ type ClassifyDocumentInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type ClassifyDocumentOutput struct {
@@ -58,6 +60,8 @@ type ClassifyDocumentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationClassifyDocumentMiddlewares(stack *middleware.Stack, options Options) (err error) {

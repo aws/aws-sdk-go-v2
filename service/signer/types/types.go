@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -12,6 +13,8 @@ type Destination struct {
 
 	// The S3Destination object.
 	S3 *S3Destination
+
+	noSmithyDocumentSerde
 }
 
 // The encryption algorithm options that are available to a code signing job.
@@ -27,6 +30,8 @@ type EncryptionAlgorithmOptions struct {
 	//
 	// This member is required.
 	DefaultValue EncryptionAlgorithm
+
+	noSmithyDocumentSerde
 }
 
 // The hash algorithms that are available to a code signing job.
@@ -41,6 +46,8 @@ type HashAlgorithmOptions struct {
 	//
 	// This member is required.
 	DefaultValue HashAlgorithm
+
+	noSmithyDocumentSerde
 }
 
 // A cross-account permission for a signing profile.
@@ -57,6 +64,8 @@ type Permission struct {
 
 	// A unique identifier for a cross-account permission statement.
 	StatementId *string
+
+	noSmithyDocumentSerde
 }
 
 // The name and prefix of the S3 bucket where code signing saves your signed
@@ -69,6 +78,8 @@ type S3Destination struct {
 	// An Amazon S3 prefix that you can use to limit responses to those that begin with
 	// the specified prefix.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The S3 bucket name and key where code signing saved your signed code image.
@@ -79,6 +90,8 @@ type S3SignedObject struct {
 
 	// Key name that uniquely identifies a signed code image in your bucket.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the S3 bucket where you saved your unsigned code.
@@ -98,6 +111,8 @@ type S3Source struct {
 	//
 	// This member is required.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // The validity period for a signing job.
@@ -108,6 +123,8 @@ type SignatureValidityPeriod struct {
 
 	// The numerical value of the time unit for signature validity.
 	Value int32
+
+	noSmithyDocumentSerde
 }
 
 // Points to an S3SignedObject object that contains information about your signed
@@ -116,6 +133,8 @@ type SignedObject struct {
 
 	// The S3SignedObject.
 	S3 *S3SignedObject
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of a code signing operation.
@@ -130,6 +149,8 @@ type SigningConfiguration struct {
 	//
 	// This member is required.
 	HashAlgorithmOptions *HashAlgorithmOptions
+
+	noSmithyDocumentSerde
 }
 
 // A signing configuration that overrides the default encryption or hash algorithm
@@ -143,6 +164,8 @@ type SigningConfigurationOverrides struct {
 	// A specified override of the default hash algorithm that is used in a code
 	// signing job.
 	HashAlgorithm HashAlgorithm
+
+	noSmithyDocumentSerde
 }
 
 // The image format of a code signing platform or profile.
@@ -157,6 +180,8 @@ type SigningImageFormat struct {
 	//
 	// This member is required.
 	SupportedFormats []ImageFormat
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a signing job.
@@ -205,6 +230,8 @@ type SigningJob struct {
 
 	// The status of the signing job.
 	Status SigningStatus
+
+	noSmithyDocumentSerde
 }
 
 // Revocation information for a signing job.
@@ -218,6 +245,8 @@ type SigningJobRevocationRecord struct {
 
 	// The identity of the revoker.
 	RevokedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // The ACM certificate that is used to sign your code.
@@ -228,6 +257,8 @@ type SigningMaterial struct {
 	//
 	// This member is required.
 	CertificateArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the signing configurations and parameters that are
@@ -261,6 +292,8 @@ type SigningPlatform struct {
 
 	// The types of targets that can be signed by a code signing platform.
 	Target *string
+
+	noSmithyDocumentSerde
 }
 
 // Any overrides that are applied to the signing configuration of a code signing
@@ -277,6 +310,8 @@ type SigningPlatformOverrides struct {
 	// JSONEmbedded, the signing image has the payload embedded in it. With
 	// JSONDetached, the payload is not be embedded in the signing image.
 	SigningImageFormat ImageFormat
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the ACM certificates and code signing configuration
@@ -315,6 +350,8 @@ type SigningProfile struct {
 
 	// A list of tags associated with the signing profile.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Revocation information for a signing profile.
@@ -328,6 +365,8 @@ type SigningProfileRevocationRecord struct {
 
 	// The identity of the revoker.
 	RevokedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // An S3Source object that contains information about the S3 bucket where you saved
@@ -336,4 +375,8 @@ type Source struct {
 
 	// The S3Source object.
 	S3 *S3Source
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

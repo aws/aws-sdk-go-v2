@@ -72,6 +72,8 @@ type DescribeReservedDBInstancesOfferingsInput struct {
 	// available offering that matches the specified reservation identifier. Example:
 	// 438012d3-4052-4cc7-b2e3-8d3372e0e706
 	ReservedDBInstancesOfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of a successful invocation of the
@@ -88,6 +90,8 @@ type DescribeReservedDBInstancesOfferingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedDBInstancesOfferingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

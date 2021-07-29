@@ -70,6 +70,8 @@ type DescribeDBInstancesInput struct {
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 100 Constraints: Minimum 20, maximum 100.
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDBInstancesOutput struct {
@@ -84,6 +86,8 @@ type DescribeDBInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

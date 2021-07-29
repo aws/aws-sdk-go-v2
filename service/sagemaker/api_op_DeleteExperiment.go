@@ -34,6 +34,8 @@ type DeleteExperimentInput struct {
 	//
 	// This member is required.
 	ExperimentName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteExperimentOutput struct {
@@ -43,6 +45,8 @@ type DeleteExperimentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteExperimentMiddlewares(stack *middleware.Stack, options Options) (err error) {

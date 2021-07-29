@@ -42,6 +42,8 @@ type ListTokensInput struct {
 
 	// Token IDs.
 	TokenIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ListTokensOutput struct {
@@ -54,6 +56,8 @@ type ListTokensOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTokensMiddlewares(stack *middleware.Stack, options Options) (err error) {

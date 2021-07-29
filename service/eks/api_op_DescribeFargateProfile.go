@@ -44,6 +44,8 @@ type DescribeFargateProfileInput struct {
 	//
 	// This member is required.
 	FargateProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFargateProfileOutput struct {
@@ -53,6 +55,8 @@ type DescribeFargateProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type DescribeThemeAliasInput struct {
 	//
 	// This member is required.
 	ThemeId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeThemeAliasOutput struct {
@@ -58,6 +60,8 @@ type DescribeThemeAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeThemeAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

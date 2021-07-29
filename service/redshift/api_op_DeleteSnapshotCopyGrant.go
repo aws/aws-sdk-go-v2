@@ -33,11 +33,15 @@ type DeleteSnapshotCopyGrantInput struct {
 	//
 	// This member is required.
 	SnapshotCopyGrantName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSnapshotCopyGrantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSnapshotCopyGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {

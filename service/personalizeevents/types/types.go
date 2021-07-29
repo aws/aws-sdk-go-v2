@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -53,6 +54,8 @@ type Event struct {
 
 	// The ID of the recommendation.
 	RecommendationId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents item metadata added to an Items dataset using the PutItems API. For
@@ -75,6 +78,8 @@ type Item struct {
 	//
 	// This value conforms to the media type: application/json
 	Properties *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents user metadata added to a Users dataset using the PutUsers API. For
@@ -97,4 +102,8 @@ type User struct {
 	//
 	// This value conforms to the media type: application/json
 	Properties *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

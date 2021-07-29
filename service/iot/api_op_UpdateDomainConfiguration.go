@@ -43,6 +43,8 @@ type UpdateDomainConfigurationInput struct {
 
 	// Removes the authorization configuration from a domain.
 	RemoveAuthorizerConfig bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDomainConfigurationOutput struct {
@@ -55,6 +57,8 @@ type UpdateDomainConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

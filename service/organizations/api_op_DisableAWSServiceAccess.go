@@ -84,11 +84,15 @@ type DisableAWSServiceAccessInput struct {
 	//
 	// This member is required.
 	ServicePrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableAWSServiceAccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableAWSServiceAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

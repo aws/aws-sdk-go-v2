@@ -38,6 +38,8 @@ type DescribeApplicationSnapshotInput struct {
 	//
 	// This member is required.
 	SnapshotName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeApplicationSnapshotOutput struct {
@@ -49,6 +51,8 @@ type DescribeApplicationSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeApplicationSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -44,6 +44,8 @@ type GetChannelMessageInput struct {
 
 	// The AppInstanceUserArn of the user that makes the API call.
 	ChimeBearer *string
+
+	noSmithyDocumentSerde
 }
 
 type GetChannelMessageOutput struct {
@@ -53,6 +55,8 @@ type GetChannelMessageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetChannelMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type StopInferenceSchedulerInput struct {
 	//
 	// This member is required.
 	InferenceSchedulerName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopInferenceSchedulerOutput struct {
@@ -55,6 +57,8 @@ type StopInferenceSchedulerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {

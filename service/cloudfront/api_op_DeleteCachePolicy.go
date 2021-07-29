@@ -42,11 +42,15 @@ type DeleteCachePolicyInput struct {
 	// policy’s ETag value, which you can get using ListCachePolicies, GetCachePolicy,
 	// or GetCachePolicyConfig.
 	IfMatch *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCachePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCachePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

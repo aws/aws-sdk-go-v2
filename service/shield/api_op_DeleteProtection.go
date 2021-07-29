@@ -32,11 +32,15 @@ type DeleteProtectionInput struct {
 	//
 	// This member is required.
 	ProtectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProtectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

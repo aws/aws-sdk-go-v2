@@ -44,6 +44,8 @@ type UpdateThingShadowInput struct {
 
 	// The name of the shadow.
 	ShadowName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the UpdateThingShadow operation.
@@ -54,6 +56,8 @@ type UpdateThingShadowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThingShadowMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -33,6 +34,8 @@ type DeviceSummary struct {
 	//
 	// This member is required.
 	ProviderName *string
+
+	noSmithyDocumentSerde
 }
 
 // Includes information about a quantum task.
@@ -78,6 +81,8 @@ type QuantumTaskSummary struct {
 
 	// Displays the key, value pairs of tags associated with this quantum task.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The filter to use for searching devices.
@@ -92,6 +97,8 @@ type SearchDevicesFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // A filter to use to search for tasks.
@@ -111,4 +118,8 @@ type SearchQuantumTasksFilter struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

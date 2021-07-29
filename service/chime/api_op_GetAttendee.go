@@ -41,6 +41,8 @@ type GetAttendeeInput struct {
 	//
 	// This member is required.
 	MeetingId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAttendeeOutput struct {
@@ -50,6 +52,8 @@ type GetAttendeeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {

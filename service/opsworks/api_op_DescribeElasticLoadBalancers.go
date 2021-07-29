@@ -40,6 +40,8 @@ type DescribeElasticLoadBalancersInput struct {
 
 	// A stack ID. The action describes the stack's Elastic Load Balancing instances.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeElasticLoadBalancers request.
@@ -51,6 +53,8 @@ type DescribeElasticLoadBalancersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeElasticLoadBalancersMiddlewares(stack *middleware.Stack, options Options) (err error) {

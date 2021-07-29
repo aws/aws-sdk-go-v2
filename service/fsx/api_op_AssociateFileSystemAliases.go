@@ -76,6 +76,8 @@ type AssociateFileSystemAliasesInput struct {
 	// ASCII characters. This token is automatically filled on your behalf when you use
 	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The system generated response showing the DNS aliases that Amazon FSx is
@@ -90,6 +92,8 @@ type AssociateFileSystemAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateFileSystemAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

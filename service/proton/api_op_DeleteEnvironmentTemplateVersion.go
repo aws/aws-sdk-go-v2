@@ -51,6 +51,8 @@ type DeleteEnvironmentTemplateVersionInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEnvironmentTemplateVersionOutput struct {
@@ -60,6 +62,8 @@ type DeleteEnvironmentTemplateVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEnvironmentTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

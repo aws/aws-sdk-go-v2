@@ -47,6 +47,8 @@ type CreateUserGroupInput struct {
 
 	// The list of user IDs that belong to the user group.
 	UserIds []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserGroupOutput struct {
@@ -75,6 +77,8 @@ type CreateUserGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type DescribeDetectorModelAnalysisInput struct {
 	//
 	// This member is required.
 	AnalysisId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDetectorModelAnalysisOutput struct {
@@ -54,6 +56,8 @@ type DescribeDetectorModelAnalysisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDetectorModelAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {

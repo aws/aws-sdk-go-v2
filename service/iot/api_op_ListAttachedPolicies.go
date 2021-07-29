@@ -46,6 +46,8 @@ type ListAttachedPoliciesInput struct {
 
 	// When true, recursively list attached policies.
 	Recursive bool
+
+	noSmithyDocumentSerde
 }
 
 type ListAttachedPoliciesOutput struct {
@@ -59,6 +61,8 @@ type ListAttachedPoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAttachedPoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

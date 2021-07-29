@@ -35,6 +35,8 @@ type GetApnsChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetApnsChannelOutput struct {
@@ -47,6 +49,8 @@ type GetApnsChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApnsChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

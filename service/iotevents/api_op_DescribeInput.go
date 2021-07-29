@@ -33,6 +33,8 @@ type DescribeInputInput struct {
 	//
 	// This member is required.
 	InputName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInputOutput struct {
@@ -42,6 +44,8 @@ type DescribeInputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInputMiddlewares(stack *middleware.Stack, options Options) (err error) {

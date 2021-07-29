@@ -44,11 +44,15 @@ type AdminForgetDeviceInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 type AdminForgetDeviceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminForgetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,11 +48,15 @@ type UpdateIPSetInput struct {
 
 	// The unique ID that specifies the IPSet that you want to update.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateIPSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateIPSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

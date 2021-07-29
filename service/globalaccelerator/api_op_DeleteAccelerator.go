@@ -47,11 +47,15 @@ type DeleteAcceleratorInput struct {
 	//
 	// This member is required.
 	AcceleratorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAcceleratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

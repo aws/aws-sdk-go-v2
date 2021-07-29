@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -13,6 +14,8 @@ type AbortConfig struct {
 	//
 	// This member is required.
 	CriteriaList []AbortCriteria
+
+	noSmithyDocumentSerde
 }
 
 // The criteria that determine when and how a job abort takes place.
@@ -40,6 +43,8 @@ type AbortCriteria struct {
 	//
 	// This member is required.
 	ThresholdPercentage *float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes the actions associated with a rule.
@@ -114,6 +119,8 @@ type Action struct {
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/timestream-rule-action.html)
 	// topic rule action documentation.
 	Timestream *TimestreamAction
+
+	noSmithyDocumentSerde
 }
 
 // Information about an active Device Defender security profile behavior violation.
@@ -142,6 +149,8 @@ type ActiveViolation struct {
 
 	// The time the violation started.
 	ViolationStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Parameters used when defining a mitigation action that move a set of things to a
@@ -158,6 +167,8 @@ type AddThingsToThingGroupParams struct {
 	// Specifies if this mitigation action can move the things that triggered the
 	// mitigation action even if they are part of one or more dynamic thing groups.
 	OverrideDynamicGroups bool
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing the alert target ARN and the role ARN.
@@ -174,6 +185,8 @@ type AlertTarget struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information that allowed the authorization.
@@ -181,6 +194,8 @@ type Allowed struct {
 
 	// A list of policies that allowed the authentication.
 	Policies []Policy
+
+	noSmithyDocumentSerde
 }
 
 // An asset property timestamp entry containing the following information.
@@ -195,6 +210,8 @@ type AssetPropertyTimestamp struct {
 	// Optional. A string that contains the nanosecond time offset. Accepts
 	// substitution templates.
 	OffsetInNanos *string
+
+	noSmithyDocumentSerde
 }
 
 // An asset property value entry containing the following information.
@@ -213,6 +230,8 @@ type AssetPropertyValue struct {
 	// Optional. A string that describes the quality of the value. Accepts substitution
 	// templates. Must be GOOD, BAD, or UNCERTAIN.
 	Quality *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an asset property value (of a single type).
@@ -229,6 +248,8 @@ type AssetPropertyVariant interface {
 // Optional. The string value of the value entry. Accepts substitution templates.
 type AssetPropertyVariantMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AssetPropertyVariantMemberStringValue) isAssetPropertyVariant() {}
@@ -237,6 +258,8 @@ func (*AssetPropertyVariantMemberStringValue) isAssetPropertyVariant() {}
 // substitution templates.
 type AssetPropertyVariantMemberIntegerValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AssetPropertyVariantMemberIntegerValue) isAssetPropertyVariant() {}
@@ -245,6 +268,8 @@ func (*AssetPropertyVariantMemberIntegerValue) isAssetPropertyVariant() {}
 // substitution templates.
 type AssetPropertyVariantMemberDoubleValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AssetPropertyVariantMemberDoubleValue) isAssetPropertyVariant() {}
@@ -253,6 +278,8 @@ func (*AssetPropertyVariantMemberDoubleValue) isAssetPropertyVariant() {}
 // entry. Accepts substitution templates.
 type AssetPropertyVariantMemberBooleanValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AssetPropertyVariantMemberBooleanValue) isAssetPropertyVariant() {}
@@ -269,6 +296,8 @@ type AttributePayload struct {
 	// To remove an attribute, call UpdateThing with an empty attribute value. The
 	// merge attribute is only valid when calling UpdateThing or UpdateThingGroup.
 	Merge bool
+
+	noSmithyDocumentSerde
 }
 
 // Which audit checks are enabled and disabled for this account.
@@ -276,6 +305,8 @@ type AuditCheckConfiguration struct {
 
 	// True if this audit check is enabled for this account.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the audit check.
@@ -306,6 +337,8 @@ type AuditCheckDetails struct {
 
 	// The number of resources on which the check was performed.
 	TotalResourcesCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // The findings (results) of the audit.
@@ -344,6 +377,8 @@ type AuditFinding struct {
 
 	// The time the audit started.
 	TaskStartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Returned by ListAuditMitigationActionsTask, this object contains information
@@ -378,6 +413,8 @@ type AuditMitigationActionExecutionMetadata struct {
 
 	// The unique identifier for the task that applies the mitigation action.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an audit mitigation actions task that is returned by
@@ -392,6 +429,8 @@ type AuditMitigationActionsTaskMetadata struct {
 
 	// The current state of the audit mitigation actions task.
 	TaskStatus AuditMitigationActionsTaskStatus
+
+	noSmithyDocumentSerde
 }
 
 // Used in MitigationActionParams, this information identifies the target findings
@@ -410,6 +449,8 @@ type AuditMitigationActionsTaskTarget struct {
 	// If the task will apply a mitigation action to one or more listed findings, this
 	// value uniquely identifies those findings.
 	FindingIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the targets to which audit notifications are sent.
@@ -423,6 +464,8 @@ type AuditNotificationTarget struct {
 
 	// The ARN of the target (SNS topic) to which audit notifications are sent.
 	TargetArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters out specific findings of a Device Defender audit.
@@ -450,6 +493,8 @@ type AuditSuppression struct {
 
 	// Indicates whether a suppression should exist indefinitely or not.
 	SuppressIndefinitely *bool
+
+	noSmithyDocumentSerde
 }
 
 // The audits that were performed.
@@ -464,6 +509,8 @@ type AuditTaskMetadata struct {
 
 	// The type of this audit. One of "ON_DEMAND_AUDIT_TASK" or "SCHEDULED_AUDIT_TASK".
 	TaskType AuditTaskType
+
+	noSmithyDocumentSerde
 }
 
 // A collection of authorization information.
@@ -477,6 +524,8 @@ type AuthInfo struct {
 
 	// The type of action for which the principal is being authorized.
 	ActionType ActionType
+
+	noSmithyDocumentSerde
 }
 
 // An object that specifies the authorization service for a domain.
@@ -488,6 +537,8 @@ type AuthorizerConfig struct {
 
 	// The name of the authorization service for a domain configuration.
 	DefaultAuthorizerName *string
+
+	noSmithyDocumentSerde
 }
 
 // The authorizer description.
@@ -521,6 +572,8 @@ type AuthorizerDescription struct {
 	// The public keys used to validate the token signature returned by your custom
 	// authentication service.
 	TokenSigningPublicKeys map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The authorizer summary.
@@ -531,6 +584,8 @@ type AuthorizerSummary struct {
 
 	// The authorizer name.
 	AuthorizerName *string
+
+	noSmithyDocumentSerde
 }
 
 // The authorizer result.
@@ -552,6 +607,8 @@ type AuthResult struct {
 
 	// Contains any missing context values found while evaluating policy.
 	MissingContextValues []string
+
+	noSmithyDocumentSerde
 }
 
 // The criteria that determine when and how a job abort takes place.
@@ -561,6 +618,8 @@ type AwsJobAbortConfig struct {
 	//
 	// This member is required.
 	AbortCriteriaList []AwsJobAbortCriteria
+
+	noSmithyDocumentSerde
 }
 
 // The criteria that determine when and how a job abort takes place.
@@ -588,6 +647,8 @@ type AwsJobAbortCriteria struct {
 	//
 	// This member is required.
 	ThresholdPercentage *float64
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for the rollout of OTA updates.
@@ -599,6 +660,8 @@ type AwsJobExecutionsRolloutConfig struct {
 
 	// The maximum number of OTA update job executions started per minute.
 	MaximumPerMinute *int32
+
+	noSmithyDocumentSerde
 }
 
 // The rate of increase for a job rollout. This parameter allows you to define an
@@ -622,6 +685,8 @@ type AwsJobExponentialRolloutRate struct {
 	//
 	// This member is required.
 	RateIncreaseCriteria *AwsJobRateIncreaseCriteria
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for pre-signed URLs. Valid when protocols contains
@@ -632,6 +697,8 @@ type AwsJobPresignedUrlConfig struct {
 	// default value is 1800 seconds. Pre-signed URLs are generated when a request for
 	// the job document is received.
 	ExpiresInSec *int64
+
+	noSmithyDocumentSerde
 }
 
 // The criteria to initiate the increase in rate of rollout for a job.
@@ -644,6 +711,8 @@ type AwsJobRateIncreaseCriteria struct {
 	// When this number of things have succeeded in their job execution, it will
 	// initiate an increase in the rollout rate.
 	NumberOfSucceededThings *int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the amount of time each device has to finish its execution of the job.
@@ -659,6 +728,8 @@ type AwsJobTimeoutConfig struct {
 	// status for longer than this interval, the job execution will fail and switch to
 	// the terminal TIMED_OUT status.
 	InProgressTimeoutInMinutes *int64
+
+	noSmithyDocumentSerde
 }
 
 // A Device Defender security profile behavior.
@@ -684,6 +755,8 @@ type Behavior struct {
 
 	// Suppresses alerts.
 	SuppressAlerts *bool
+
+	noSmithyDocumentSerde
 }
 
 // The criteria by which the behavior is determined to be normal.
@@ -731,6 +804,8 @@ type BehaviorCriteria struct {
 
 	// The value to be compared with the metric.
 	Value *MetricValue
+
+	noSmithyDocumentSerde
 }
 
 // The summary of an ML Detect behavior model.
@@ -753,6 +828,8 @@ type BehaviorModelTrainingSummary struct {
 
 	// The date a training model started collecting data.
 	TrainingDataCollectionStartDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Additional information about the billing group.
@@ -760,6 +837,8 @@ type BillingGroupMetadata struct {
 
 	// The date the billing group was created.
 	CreationDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The properties of a billing group.
@@ -767,6 +846,8 @@ type BillingGroupProperties struct {
 
 	// The description of the billing group.
 	BillingGroupDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // A CA certificate.
@@ -784,6 +865,8 @@ type CACertificate struct {
 	// The status of the CA certificate. The status value REGISTER_INACTIVE is
 	// deprecated and should not be used.
 	Status CACertificateStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes a CA certificate.
@@ -822,6 +905,8 @@ type CACertificateDescription struct {
 
 	// When the CA certificate is valid.
 	Validity *CertificateValidity
+
+	noSmithyDocumentSerde
 }
 
 // Information about a certificate.
@@ -843,6 +928,8 @@ type Certificate struct {
 	// The status of the certificate. The status value REGISTER_INACTIVE is deprecated
 	// and should not be used.
 	Status CertificateStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes a certificate.
@@ -889,6 +976,8 @@ type CertificateDescription struct {
 
 	// When the certificate is valid.
 	Validity *CertificateValidity
+
+	noSmithyDocumentSerde
 }
 
 // When the certificate is valid.
@@ -899,6 +988,8 @@ type CertificateValidity struct {
 
 	// The certificate is not valid before this date.
 	NotBefore *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action that updates a CloudWatch alarm.
@@ -924,6 +1015,8 @@ type CloudwatchAlarmAction struct {
 	//
 	// This member is required.
 	StateValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action that sends data to CloudWatch Logs.
@@ -938,6 +1031,8 @@ type CloudwatchLogsAction struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action that captures a CloudWatch metric.
@@ -973,6 +1068,8 @@ type CloudwatchMetricAction struct {
 	// An optional Unix timestamp
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#about_timestamp).
 	MetricTimestamp *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the method to use when code signing a file.
@@ -986,6 +1083,8 @@ type CodeSigning struct {
 
 	// Describes the code-signing job.
 	StartSigningJobParameter *StartSigningJobParameter
+
+	noSmithyDocumentSerde
 }
 
 // Describes the certificate chain being used when code signing a file.
@@ -996,6 +1095,8 @@ type CodeSigningCertificateChain struct {
 
 	// A base64 encoded binary representation of the code signing certificate chain.
 	InlineDocument *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the signature for a file.
@@ -1003,6 +1104,8 @@ type CodeSigningSignature struct {
 
 	// A base64 encoded binary representation of the code signing signature.
 	InlineDocument []byte
+
+	noSmithyDocumentSerde
 }
 
 // Configuration.
@@ -1010,6 +1113,8 @@ type Configuration struct {
 
 	// True to enable the configuration.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a custom method used to code sign a file.
@@ -1026,6 +1131,8 @@ type CustomCodeSigning struct {
 
 	// The signature algorithm used to code sign the file.
 	SignatureAlgorithm *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information that denied the authorization.
@@ -1038,6 +1145,8 @@ type Denied struct {
 	// explicitly deny or allow an action on a resource it is considered an implicit
 	// deny.
 	ImplicitDeny *ImplicitDeny
+
+	noSmithyDocumentSerde
 }
 
 // Describes the location of the updated firmware.
@@ -1045,6 +1154,8 @@ type Destination struct {
 
 	// Describes the location in S3 of the updated firmware.
 	S3Destination *S3Destination
+
+	noSmithyDocumentSerde
 }
 
 // Describes which mitigation actions should be executed.
@@ -1076,6 +1187,8 @@ type DetectMitigationActionExecution struct {
 
 	// The unique identifier of the violation.
 	ViolationId *string
+
+	noSmithyDocumentSerde
 }
 
 // The statistics of a mitigation action task.
@@ -1089,6 +1202,8 @@ type DetectMitigationActionsTaskStatistics struct {
 
 	// The actions that were skipped.
 	ActionsSkipped *int64
+
+	noSmithyDocumentSerde
 }
 
 // The summary of the mitigation action tasks.
@@ -1123,6 +1238,8 @@ type DetectMitigationActionsTaskSummary struct {
 
 	// Specifies the time period of which violation events occurred between.
 	ViolationEventOccurrenceRange *ViolationEventOccurrenceRange
+
+	noSmithyDocumentSerde
 }
 
 // The target of a mitigation action task.
@@ -1136,6 +1253,8 @@ type DetectMitigationActionsTaskTarget struct {
 
 	// The unique identifiers of the violations.
 	ViolationIds []string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of a domain configuration. A domain configuration specifies custom
@@ -1159,6 +1278,8 @@ type DomainConfigurationSummary struct {
 
 	// The type of service delivered by the endpoint.
 	ServiceType ServiceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to write to a DynamoDB table. The tableName, hashKeyField,
@@ -1211,6 +1332,8 @@ type DynamoDBAction struct {
 
 	// The range key value.
 	RangeKeyValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to write to a DynamoDB table. This DynamoDB action writes
@@ -1230,6 +1353,8 @@ type DynamoDBv2Action struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The policy that has the effect on the authorization results.
@@ -1243,6 +1368,8 @@ type EffectivePolicy struct {
 
 	// The policy name.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action that writes data to an Amazon Elasticsearch Service domain.
@@ -1272,6 +1399,8 @@ type ElasticsearchAction struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Parameters used when defining a mitigation action that enable AWS IoT logging.
@@ -1286,6 +1415,8 @@ type EnableIoTLoggingParams struct {
 	//
 	// This member is required.
 	RoleArnForLogging *string
+
+	noSmithyDocumentSerde
 }
 
 // Error information.
@@ -1296,6 +1427,8 @@ type ErrorInfo struct {
 
 	// The error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Information that explicitly denies authorization.
@@ -1303,6 +1436,8 @@ type ExplicitDeny struct {
 
 	// The policies that denied the authorization.
 	Policies []Policy
+
+	noSmithyDocumentSerde
 }
 
 // Allows you to create an exponential rate of rollout for a job.
@@ -1325,6 +1460,8 @@ type ExponentialRolloutRate struct {
 	//
 	// This member is required.
 	RateIncreaseCriteria *RateIncreaseCriteria
+
+	noSmithyDocumentSerde
 }
 
 // Describes the name and data type at a field.
@@ -1335,6 +1472,8 @@ type Field struct {
 
 	// The datatype of the field.
 	Type FieldType
+
+	noSmithyDocumentSerde
 }
 
 // The location of the OTA update.
@@ -1345,6 +1484,8 @@ type FileLocation struct {
 
 	// The stream that contains the OTA update.
 	Stream *Stream
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action that writes data to an Amazon Kinesis Firehose stream.
@@ -1373,6 +1514,8 @@ type FirehoseAction struct {
 	// Firehose stream. Valid values are: '\n' (newline), '\t' (tab), '\r\n' (Windows
 	// newline), ',' (comma).
 	Separator *string
+
+	noSmithyDocumentSerde
 }
 
 // The name and ARN of a group.
@@ -1383,6 +1526,8 @@ type GroupNameAndArn struct {
 
 	// The group name.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Send data to an HTTPS endpoint.
@@ -1408,6 +1553,8 @@ type HttpAction struct {
 
 	// The HTTP headers to send with the message data.
 	Headers []HttpActionHeader
+
+	noSmithyDocumentSerde
 }
 
 // The HTTP action header.
@@ -1422,6 +1569,8 @@ type HttpActionHeader struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The authorization method used to send messages.
@@ -1431,6 +1580,8 @@ type HttpAuthorization struct {
 	// Process
 	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 	Sigv4 *SigV4Authorization
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the HTTP context to use for the test authorizer request.
@@ -1441,6 +1592,8 @@ type HttpContext struct {
 
 	// The query string keys and values in an HTTP authorization request.
 	QueryString *string
+
+	noSmithyDocumentSerde
 }
 
 // HTTP URL destination configuration used by the topic rule's HTTP action.
@@ -1451,6 +1604,8 @@ type HttpUrlDestinationConfiguration struct {
 	//
 	// This member is required.
 	ConfirmationUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // HTTP URL destination properties.
@@ -1458,6 +1613,8 @@ type HttpUrlDestinationProperties struct {
 
 	// The URL used to confirm the HTTP topic rule destination URL.
 	ConfirmationUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an HTTP URL destination.
@@ -1466,6 +1623,8 @@ type HttpUrlDestinationSummary struct {
 	// The URL used to confirm ownership of or access to the HTTP topic rule
 	// destination URL.
 	ConfirmationUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // Information that implicitly denies authorization. When policy doesn't explicitly
@@ -1475,6 +1634,8 @@ type ImplicitDeny struct {
 	// Policies that don't contain a matching allow or deny statement for the specified
 	// action on the specified resource.
 	Policies []Policy
+
+	noSmithyDocumentSerde
 }
 
 // Sends message data to an AWS IoT Analytics channel.
@@ -1498,6 +1659,8 @@ type IotAnalyticsAction struct {
 	// The ARN of the role which has a policy that grants IoT Analytics permission to
 	// send message data via IoT Analytics (iotanalytics:BatchPutMessage).
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Sends an input to an AWS IoT Events detector.
@@ -1528,6 +1691,8 @@ type IotEventsAction struct {
 	// Assign a value to this property to ensure that only one input (message) with a
 	// given messageId will be processed by an AWS IoT Events detector.
 	MessageId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to send data from an MQTT message that triggered the rule to
@@ -1545,6 +1710,8 @@ type IotSiteWiseAction struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The Job object contains details about a job.
@@ -1620,6 +1787,8 @@ type Job struct {
 	// job execution status is not set to another terminal state before the timer
 	// expires, it will be automatically set to TIMED_OUT.
 	TimeoutConfig *TimeoutConfig
+
+	noSmithyDocumentSerde
 }
 
 // The job execution object represents the execution of a job on a particular
@@ -1667,6 +1836,8 @@ type JobExecution struct {
 	// The version of the job execution. Job execution versions are incremented each
 	// time they are updated by a device.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // Allows you to create a staged rollout of a job.
@@ -1679,6 +1850,8 @@ type JobExecutionsRolloutConfig struct {
 	// The maximum number of things that will be notified of a pending job, per minute.
 	// This parameter allows you to create a staged rollout.
 	MaximumPerMinute *int32
+
+	noSmithyDocumentSerde
 }
 
 // Details of the job execution status.
@@ -1686,6 +1859,8 @@ type JobExecutionStatusDetails struct {
 
 	// The job execution status.
 	DetailsMap map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The job execution summary.
@@ -1707,6 +1882,8 @@ type JobExecutionSummary struct {
 
 	// The status of the job execution.
 	Status JobExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of information about job executions for a specific job.
@@ -1717,6 +1894,8 @@ type JobExecutionSummaryForJob struct {
 
 	// The ARN of the thing on which the job execution is running.
 	ThingArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The job execution summary for a thing.
@@ -1727,6 +1906,8 @@ type JobExecutionSummaryForThing struct {
 
 	// The unique identifier you assigned to this job when it was created.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 // The job process details.
@@ -1762,6 +1943,8 @@ type JobProcessDetails struct {
 	// will be null after the job execution has finished rolling out to all the target
 	// devices.
 	ProcessingTargets []string
+
+	noSmithyDocumentSerde
 }
 
 // The job summary.
@@ -1795,6 +1978,8 @@ type JobSummary struct {
 
 	// The ID of the thing group.
 	ThingGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the job template.
@@ -1811,6 +1996,8 @@ type JobTemplateSummary struct {
 
 	// The unique identifier of the job template.
 	JobTemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 // Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or
@@ -1837,6 +2024,8 @@ type KafkaAction struct {
 
 	// The Kafka message partition.
 	Partition *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a key pair.
@@ -1847,6 +2036,8 @@ type KeyPair struct {
 
 	// The public key.
 	PublicKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to write data to an Amazon Kinesis stream.
@@ -1864,6 +2055,8 @@ type KinesisAction struct {
 
 	// The partition key.
 	PartitionKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to invoke a Lambda function.
@@ -1873,6 +2066,8 @@ type LambdaAction struct {
 	//
 	// This member is required.
 	FunctionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the logging options payload.
@@ -1885,6 +2080,8 @@ type LoggingOptionsPayload struct {
 
 	// The log level.
 	LogLevel LogLevel
+
+	noSmithyDocumentSerde
 }
 
 // A log target.
@@ -1897,6 +2094,8 @@ type LogTarget struct {
 
 	// The target name.
 	TargetName *string
+
+	noSmithyDocumentSerde
 }
 
 // The target configuration.
@@ -1907,6 +2106,8 @@ type LogTargetConfiguration struct {
 
 	// A log target
 	LogTarget *LogTarget
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of an ML Detect Security Profile.
@@ -1916,6 +2117,8 @@ type MachineLearningDetectionConfig struct {
 	//
 	// This member is required.
 	ConfidenceLevel ConfidenceLevel
+
+	noSmithyDocumentSerde
 }
 
 // The dimension of a metric.
@@ -1932,6 +2135,8 @@ type MetricDimension struct {
 	// be counted only if it doesn't match any of the topic filters. The operator is
 	// optional: if it's not provided (is null), it will be interpreted as IN.
 	Operator DimensionValueOperator
+
+	noSmithyDocumentSerde
 }
 
 // The metric you want to retain. Dimensions are optional.
@@ -1944,6 +2149,8 @@ type MetricToRetain struct {
 
 	// The dimension of a metric. This can't be used with custom metrics.
 	MetricDimension *MetricDimension
+
+	noSmithyDocumentSerde
 }
 
 // The value to be compared with the metric.
@@ -1969,6 +2176,8 @@ type MetricValue struct {
 
 	// The string values of a metric.
 	Strings []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes which changes should be applied as part of a mitigation action.
@@ -1986,6 +2195,8 @@ type MitigationAction struct {
 
 	// The IAM role ARN used to apply this mitigation action.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information that identifies a mitigation action. This information is returned by
@@ -2000,6 +2211,8 @@ type MitigationActionIdentifier struct {
 
 	// The date when this mitigation action was created.
 	CreationDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The set of parameters for this mitigation action. You can specify only one type
@@ -2031,6 +2244,8 @@ type MitigationActionParams struct {
 	// Parameters to define a mitigation action that changes the state of the device
 	// certificate to inactive.
 	UpdateDeviceCertificateParams *UpdateDeviceCertificateParams
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the MQTT context to use for the test authorizer request
@@ -2044,6 +2259,8 @@ type MqttContext struct {
 
 	// The value of the username key in an MQTT authorization request.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the resource that was noncompliant with the audit check.
@@ -2057,6 +2274,8 @@ type NonCompliantResource struct {
 
 	// The type of the noncompliant resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a file to be associated with an OTA update.
@@ -2080,6 +2299,8 @@ type OTAUpdateFile struct {
 
 	// The file version.
 	FileVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an OTA update.
@@ -2140,6 +2361,8 @@ type OTAUpdateInfo struct {
 
 	// The targets of the OTA update.
 	Targets []string
+
+	noSmithyDocumentSerde
 }
 
 // An OTA update summary.
@@ -2153,6 +2376,8 @@ type OTAUpdateSummary struct {
 
 	// The OTA update ID.
 	OtaUpdateId *string
+
+	noSmithyDocumentSerde
 }
 
 // A certificate that has been transferred but not yet accepted.
@@ -2175,6 +2400,8 @@ type OutgoingCertificate struct {
 
 	// The AWS account to which the transfer was made.
 	TransferredTo *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the percentile and percentile value.
@@ -2185,6 +2412,8 @@ type PercentPair struct {
 
 	// The value of the percentile.
 	Value float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes an AWS IoT policy.
@@ -2195,6 +2424,8 @@ type Policy struct {
 
 	// The policy name.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a policy version.
@@ -2208,6 +2439,8 @@ type PolicyVersion struct {
 
 	// The policy version ID.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the version of the policy associated with the resource.
@@ -2218,6 +2451,8 @@ type PolicyVersionIdentifier struct {
 
 	// The ID of the version of the policy associated with the resource.
 	PolicyVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for pre-signed S3 URLs.
@@ -2232,6 +2467,8 @@ type PresignedUrlConfig struct {
 	// S3 bucket where the job data/updates are stored. The role must also grant
 	// permission for IoT to download the files.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Structure that contains payloadVersion and targetArn.
@@ -2246,6 +2483,8 @@ type ProvisioningHook struct {
 	// The payload that was sent to the target function. Note: Only Lambda functions
 	// are currently supported.
 	PayloadVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of information about a fleet provisioning template.
@@ -2268,6 +2507,8 @@ type ProvisioningTemplateSummary struct {
 
 	// The name of the fleet provisioning template.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of information about a fleet provision template version.
@@ -2282,6 +2523,8 @@ type ProvisioningTemplateVersionSummary struct {
 
 	// The ID of the fleet privisioning template version.
 	VersionId *int32
+
+	noSmithyDocumentSerde
 }
 
 // Parameters to define a mitigation action that publishes findings to Amazon SNS.
@@ -2293,6 +2536,8 @@ type PublishFindingToSnsParams struct {
 	//
 	// This member is required.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An asset property value entry containing the following information.
@@ -2321,6 +2566,8 @@ type PutAssetPropertyValueEntry struct {
 	// The ID of the asset's property. You must specify either a propertyAlias or both
 	// an aliasId and a propertyId. Accepts substitution templates.
 	PropertyId *string
+
+	noSmithyDocumentSerde
 }
 
 // The input for the DynamoActionVS action that specifies the DynamoDB table to
@@ -2331,6 +2578,8 @@ type PutItemInput struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // Allows you to define a criteria to initiate the increase in rate of rollout for
@@ -2344,6 +2593,8 @@ type RateIncreaseCriteria struct {
 	// The threshold for number of succeeded things that will initiate the increase in
 	// rate of rollout.
 	NumberOfSucceededThings *int32
+
+	noSmithyDocumentSerde
 }
 
 // The registration configuration.
@@ -2354,6 +2605,8 @@ type RegistrationConfig struct {
 
 	// The template body.
 	TemplateBody *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a related resource.
@@ -2367,6 +2620,8 @@ type RelatedResource struct {
 
 	// The type of resource.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Parameters to define a mitigation action that adds a blank policy to restrict
@@ -2378,6 +2633,8 @@ type ReplaceDefaultPolicyVersionParams struct {
 	//
 	// This member is required.
 	TemplateName PolicyTemplateName
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to republish to another topic.
@@ -2396,6 +2653,8 @@ type RepublishAction struct {
 	// The Quality of Service (QoS) level to use when republishing messages. The
 	// default value is 0.
 	Qos *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information that identifies the noncompliant resource.
@@ -2424,6 +2683,8 @@ type ResourceIdentifier struct {
 
 	// The ARN of the role alias that has overly permissive actions.
 	RoleAliasArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Role alias description.
@@ -2449,6 +2710,8 @@ type RoleAliasDescription struct {
 
 	// The role ARN.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to write data to an Amazon S3 bucket.
@@ -2475,6 +2738,8 @@ type S3Action struct {
 	// object key. For more information, see S3 canned ACLs
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl).
 	CannedAcl CannedAccessControlList
+
+	noSmithyDocumentSerde
 }
 
 // Describes the location of updated firmware in S3.
@@ -2485,6 +2750,8 @@ type S3Destination struct {
 
 	// The S3 prefix.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The S3 location.
@@ -2498,6 +2765,8 @@ type S3Location struct {
 
 	// The S3 bucket version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to write a message to a Salesforce IoT Cloud Input Stream.
@@ -2515,6 +2784,8 @@ type SalesforceAction struct {
 	//
 	// This member is required.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the scheduled audit.
@@ -2537,6 +2808,8 @@ type ScheduledAuditMetadata struct {
 
 	// The name of the scheduled audit.
 	ScheduledAuditName *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifying information for a Device Defender security profile.
@@ -2551,6 +2824,8 @@ type SecurityProfileIdentifier struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A target to which an alert is sent when a security profile behavior is violated.
@@ -2560,6 +2835,8 @@ type SecurityProfileTarget struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a security profile and the target associated with it.
@@ -2570,6 +2847,8 @@ type SecurityProfileTargetMapping struct {
 
 	// Information about the target (thing group) associated with the security profile.
 	Target *SecurityProfileTarget
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about a server certificate.
@@ -2583,6 +2862,8 @@ type ServerCertificateSummary struct {
 
 	// Details that explain the status of the server certificate.
 	ServerCertificateStatusDetail *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the code-signing profile.
@@ -2596,6 +2877,8 @@ type SigningProfileParameter struct {
 
 	// The hardware platform of your device.
 	Platform *string
+
+	noSmithyDocumentSerde
 }
 
 // For more information, see Signature Version 4 signing process
@@ -2616,6 +2899,8 @@ type SigV4Authorization struct {
 	//
 	// This member is required.
 	SigningRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to publish to an Amazon SNS topic.
@@ -2640,6 +2925,8 @@ type SnsAction struct {
 	// (https://docs.aws.amazon.com/sns/latest/dg/json-formats.html) refer to their
 	// official documentation.
 	MessageFormat MessageFormat
+
+	noSmithyDocumentSerde
 }
 
 // Describes an action to publish data to an Amazon SQS queue.
@@ -2657,6 +2944,8 @@ type SqsAction struct {
 
 	// Specifies whether to use Base64 encoding.
 	UseBase64 *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information required to start a signing job.
@@ -2670,6 +2959,8 @@ type StartSigningJobParameter struct {
 
 	// Describes the code-signing profile.
 	SigningProfileParameter *SigningProfileParameter
+
+	noSmithyDocumentSerde
 }
 
 // A statistical ranking (percentile) that indicates a threshold value by which a
@@ -2685,6 +2976,8 @@ type StatisticalThreshold struct {
 	// then the device is considered to be in compliance with the behavior, otherwise a
 	// violation occurs.
 	Statistic *string
+
+	noSmithyDocumentSerde
 }
 
 // A map of key-value pairs for all supported statistics. Currently, only count is
@@ -2714,6 +3007,8 @@ type Statistics struct {
 
 	// The variance of the aggregated field values.
 	Variance float64
+
+	noSmithyDocumentSerde
 }
 
 // Starts execution of a Step Functions state machine.
@@ -2734,6 +3029,8 @@ type StepFunctionsAction struct {
 	// this prefix followed by a UUID. Step Functions automatically creates a unique
 	// name for each state machine execution if one is not provided.
 	ExecutionNamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a group of files that can be streamed.
@@ -2744,6 +3041,8 @@ type Stream struct {
 
 	// The stream ID.
 	StreamId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a file to stream.
@@ -2754,6 +3053,8 @@ type StreamFile struct {
 
 	// The location of the file in S3.
 	S3Location *S3Location
+
+	noSmithyDocumentSerde
 }
 
 // Information about a stream.
@@ -2782,6 +3083,8 @@ type StreamInfo struct {
 
 	// The stream version.
 	StreamVersion *int32
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a stream.
@@ -2798,6 +3101,8 @@ type StreamSummary struct {
 
 	// The stream version.
 	StreamVersion *int32
+
+	noSmithyDocumentSerde
 }
 
 // A set of key/value pairs that are used to manage the resource.
@@ -2810,6 +3115,8 @@ type Tag struct {
 
 	// The tag's value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Statistics for the checks performed during the audit.
@@ -2835,6 +3142,8 @@ type TaskStatistics struct {
 
 	// The number of checks waiting for data collection.
 	WaitingForDataCollectionChecks *int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary counts of how many tasks for findings are in a particular
@@ -2859,6 +3168,8 @@ type TaskStatisticsForAuditCheck struct {
 
 	// The total number of findings to which a task is being applied.
 	TotalFindingsCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // The properties of the thing, including thing name, thing type name, and a list
@@ -2879,6 +3190,8 @@ type ThingAttribute struct {
 
 	// The version of the thing record in the registry.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // The connectivity status of the thing.
@@ -2892,6 +3205,8 @@ type ThingConnectivity struct {
 	// If the thing has been disconnected for more than a few weeks, the time value
 	// might be missing.
 	Timestamp *int64
+
+	noSmithyDocumentSerde
 }
 
 // The thing search index document.
@@ -2917,6 +3232,8 @@ type ThingDocument struct {
 
 	// The thing type name.
 	ThingTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // The thing group search index document.
@@ -2936,6 +3253,8 @@ type ThingGroupDocument struct {
 
 	// The thing group name.
 	ThingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Thing group indexing configuration.
@@ -2954,6 +3273,8 @@ type ThingGroupIndexingConfiguration struct {
 	// Contains fields that are indexed and whose types are already known by the Fleet
 	// Indexing service.
 	ManagedFields []Field
+
+	noSmithyDocumentSerde
 }
 
 // Thing group metadata.
@@ -2967,6 +3288,8 @@ type ThingGroupMetadata struct {
 
 	// The root parent thing group.
 	RootToParentThingGroups []GroupNameAndArn
+
+	noSmithyDocumentSerde
 }
 
 // Thing group properties.
@@ -2977,6 +3300,8 @@ type ThingGroupProperties struct {
 
 	// The thing group description.
 	ThingGroupDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // The thing indexing configuration. For more information, see Managing Thing
@@ -3013,6 +3338,8 @@ type ThingIndexingConfiguration struct {
 	// * OFF - Thing connectivity status
 	// indexing is disabled.
 	ThingConnectivityIndexingMode ThingConnectivityIndexingMode
+
+	noSmithyDocumentSerde
 }
 
 // The definition of the thing type, including thing type name and description.
@@ -3031,6 +3358,8 @@ type ThingTypeDefinition struct {
 
 	// The ThingTypeProperties for the thing type.
 	ThingTypeProperties *ThingTypeProperties
+
+	noSmithyDocumentSerde
 }
 
 // The ThingTypeMetadata contains additional information about the thing type
@@ -3047,6 +3376,8 @@ type ThingTypeMetadata struct {
 
 	// The date and time when the thing type was deprecated.
 	DeprecationDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The ThingTypeProperties contains information about the thing type including: a
@@ -3058,6 +3389,8 @@ type ThingTypeProperties struct {
 
 	// The description of the thing type.
 	ThingTypeDescription *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the amount of time each device has to finish its execution of the job.
@@ -3073,6 +3406,8 @@ type TimeoutConfig struct {
 	// status for longer than this interval, the job execution will fail and switch to
 	// the terminal TIMED_OUT status.
 	InProgressTimeoutInMinutes *int64
+
+	noSmithyDocumentSerde
 }
 
 // The Timestream rule action writes attributes (measures) from an MQTT message
@@ -3109,6 +3444,8 @@ type TimestreamAction struct {
 	// substitution template. If omitted, the topic rule action assigns the timestamp,
 	// in milliseconds, at the time it processed the rule.
 	Timestamp *TimestreamTimestamp
+
+	noSmithyDocumentSerde
 }
 
 // Metadata attributes of the time series that are written in each measure record.
@@ -3126,6 +3463,8 @@ type TimestreamDimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes how to interpret an application-defined timestamp value from an MQTT
@@ -3143,6 +3482,8 @@ type TimestreamTimestamp struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the TLS context to use for the test authorizer request.
@@ -3150,6 +3491,8 @@ type TlsContext struct {
 
 	// The value of the serverName key in a TLS authorization request.
 	ServerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a rule.
@@ -3179,6 +3522,8 @@ type TopicRule struct {
 	// The SQL statement used to query the topic. When using a SQL query with multiple
 	// lines, be sure to escape the newline characters.
 	Sql *string
+
+	noSmithyDocumentSerde
 }
 
 // A topic rule destination.
@@ -3217,6 +3562,8 @@ type TopicRuleDestination struct {
 
 	// Properties of the virtual private cloud (VPC) connection.
 	VpcProperties *VpcDestinationProperties
+
+	noSmithyDocumentSerde
 }
 
 // Configuration of the topic rule destination.
@@ -3227,6 +3574,8 @@ type TopicRuleDestinationConfiguration struct {
 
 	// Configuration of the virtual private cloud (VPC) connection.
 	VpcConfiguration *VpcDestinationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Information about the topic rule destination.
@@ -3264,6 +3613,8 @@ type TopicRuleDestinationSummary struct {
 
 	// Information about the virtual private cloud (VPC) connection.
 	VpcDestinationSummary *VpcDestinationSummary
+
+	noSmithyDocumentSerde
 }
 
 // Describes a rule.
@@ -3283,6 +3634,8 @@ type TopicRuleListItem struct {
 
 	// The pattern for the topic names that apply.
 	TopicPattern *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a rule.
@@ -3312,6 +3665,8 @@ type TopicRulePayload struct {
 
 	// Specifies whether the rule is disabled.
 	RuleDisabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Data used to transfer a certificate to an AWS account.
@@ -3331,6 +3686,8 @@ type TransferData struct {
 
 	// The transfer message.
 	TransferMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Parameters to define a mitigation action that changes the state of the CA
@@ -3342,6 +3699,8 @@ type UpdateCACertificateParams struct {
 	//
 	// This member is required.
 	Action CACertificateUpdateAction
+
+	noSmithyDocumentSerde
 }
 
 // Parameters to define a mitigation action that changes the state of the device
@@ -3353,6 +3712,8 @@ type UpdateDeviceCertificateParams struct {
 	//
 	// This member is required.
 	Action DeviceCertificateUpdateAction
+
+	noSmithyDocumentSerde
 }
 
 // Information about an error found in a behavior specification.
@@ -3360,6 +3721,8 @@ type ValidationError struct {
 
 	// The description of an error found in the behaviors.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a Device Defender security profile behavior violation.
@@ -3388,6 +3751,8 @@ type ViolationEvent struct {
 
 	// The ID of the violation event.
 	ViolationId *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a violation event.
@@ -3395,6 +3760,8 @@ type ViolationEventAdditionalInfo struct {
 
 	// The sensitivity of anomalous behavior evaluation. Can be Low, Medium, or High.
 	ConfidenceLevel ConfidenceLevel
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the time period of which violation events occurred between.
@@ -3409,6 +3776,8 @@ type ViolationEventOccurrenceRange struct {
 	//
 	// This member is required.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The configuration information for a virtual private cloud (VPC) destination.
@@ -3432,6 +3801,8 @@ type VpcDestinationConfiguration struct {
 
 	// The security groups of the VPC destination.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 // The properties of a virtual private cloud (VPC) destination.
@@ -3449,6 +3820,8 @@ type VpcDestinationProperties struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of a virtual private cloud (VPC) destination.
@@ -3466,13 +3839,19 @@ type VpcDestinationSummary struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isAssetPropertyVariant() {}

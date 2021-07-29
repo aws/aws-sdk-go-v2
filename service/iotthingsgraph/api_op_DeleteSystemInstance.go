@@ -32,11 +32,15 @@ type DeleteSystemInstanceInput struct {
 
 	// The ID of the system instance to be deleted.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSystemInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSystemInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

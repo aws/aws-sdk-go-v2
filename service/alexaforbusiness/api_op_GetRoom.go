@@ -31,6 +31,8 @@ type GetRoomInput struct {
 
 	// The ARN of the room for which to request details. Required.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRoomOutput struct {
@@ -40,6 +42,8 @@ type GetRoomOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

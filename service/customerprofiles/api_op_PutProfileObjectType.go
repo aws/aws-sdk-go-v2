@@ -70,6 +70,8 @@ type PutProfileObjectTypeInput struct {
 
 	// A unique identifier for the object template.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutProfileObjectTypeOutput struct {
@@ -118,6 +120,8 @@ type PutProfileObjectTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutProfileObjectTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

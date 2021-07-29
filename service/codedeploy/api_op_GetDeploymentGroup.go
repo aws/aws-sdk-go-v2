@@ -40,6 +40,8 @@ type GetDeploymentGroupInput struct {
 	//
 	// This member is required.
 	DeploymentGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetDeploymentGroup operation.
@@ -50,6 +52,8 @@ type GetDeploymentGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeploymentGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

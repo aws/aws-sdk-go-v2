@@ -54,6 +54,8 @@ type CreateMediaCapturePipelineInput struct {
 
 	// The token assigned to the client making the pipeline request.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateMediaCapturePipelineOutput struct {
@@ -64,6 +66,8 @@ type CreateMediaCapturePipelineOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMediaCapturePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

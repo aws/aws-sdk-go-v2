@@ -42,6 +42,8 @@ type SetLocalConsolePasswordInput struct {
 	//
 	// This member is required.
 	LocalConsolePassword *string
+
+	noSmithyDocumentSerde
 }
 
 type SetLocalConsolePasswordOutput struct {
@@ -52,6 +54,8 @@ type SetLocalConsolePasswordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetLocalConsolePasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

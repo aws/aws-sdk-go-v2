@@ -26,6 +26,7 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoValueAccessUtils;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ProtocolDocumentGenerator;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
 import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.integration.DocumentShapeSerVisitor;
@@ -97,7 +98,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeCollection(GenerationContext context, CollectionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Shape target = context.getModel().expectShape(shape.getMember().getTarget());
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
         writer.write("array := value.Array()");
@@ -126,15 +127,27 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeDocument(GenerationContext context, DocumentShape shape) {
-        // TODO: implement document serialization
-        LOGGER.warning("Document type is currently unsupported for JSON serialization.");
-        context.getWriter().writeDocs("TODO: implement document serialization.");
-        context.getWriter().write("return nil");
+        GoWriter writer = context.getWriter().get();
+
+        Symbol isInterface = ProtocolDocumentGenerator.Utilities.getInternalDocumentSymbolBuilder(context.getSettings(),
+                ProtocolDocumentGenerator.INTERNAL_IS_DOCUMENT_INTERFACE).build();
+
+        writer.openBlock("if v == nil {", "}", () -> writer.write("return nil"));
+
+        writer.openBlock("if !$T(v) {", "}", isInterface, () -> {
+            writer.addUseImports(SmithyGoDependency.FMT);
+            writer.write("return fmt.Errorf(\"%T is not a compatible document type\", v)");
+        });
+
+        writer.write("db, err := v.MarshalSmithyDocument()");
+        writer.openBlock("if err != nil {", "}", () -> writer.write("return err"));
+        writer.write("value.Write(db)");
+        writer.write("return nil");
     }
 
     @Override
     protected void serializeMap(GenerationContext context, MapShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Shape target = context.getModel().expectShape(shape.getValue().getTarget());
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
@@ -164,7 +177,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeStructure(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
         writer.write("object := value.Object()");
@@ -198,7 +211,7 @@ final class JsonShapeSerVisitor extends DocumentShapeSerVisitor {
 
     @Override
     protected void serializeUnion(GenerationContext context, UnionShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol symbol = symbolProvider.toSymbol(shape);
         writer.addUseImports(SmithyGoDependency.FMT);

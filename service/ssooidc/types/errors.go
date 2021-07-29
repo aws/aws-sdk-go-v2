@@ -13,6 +13,8 @@ type AccessDeniedException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -34,6 +36,8 @@ type AuthorizationPendingException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationPendingException) Error() string {
@@ -55,6 +59,8 @@ type ExpiredTokenException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredTokenException) Error() string {
@@ -76,6 +82,8 @@ type InternalServerException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -98,6 +106,8 @@ type InvalidClientException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClientException) Error() string {
@@ -119,6 +129,8 @@ type InvalidClientMetadataException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidClientMetadataException) Error() string {
@@ -140,6 +152,8 @@ type InvalidGrantException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGrantException) Error() string {
@@ -161,6 +175,8 @@ type InvalidRequestException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -181,6 +197,8 @@ type InvalidScopeException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidScopeException) Error() string {
@@ -202,6 +220,8 @@ type SlowDownException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SlowDownException) Error() string {
@@ -223,6 +243,8 @@ type UnauthorizedClientException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedClientException) Error() string {
@@ -243,6 +265,8 @@ type UnsupportedGrantTypeException struct {
 
 	Error_            *string
 	Error_description *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedGrantTypeException) Error() string {

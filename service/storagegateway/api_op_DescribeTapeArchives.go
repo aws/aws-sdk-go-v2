@@ -45,6 +45,8 @@ type DescribeTapeArchivesInput struct {
 	// Specifies one or more unique Amazon Resource Names (ARNs) that represent the
 	// virtual tapes you want to describe.
 	TapeARNs []string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeTapeArchivesOutput
@@ -66,6 +68,8 @@ type DescribeTapeArchivesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTapeArchivesMiddlewares(stack *middleware.Stack, options Options) (err error) {

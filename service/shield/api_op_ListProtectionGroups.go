@@ -42,6 +42,8 @@ type ListProtectionGroupsInput struct {
 	// The next token value from a previous call to ListProtectionGroups. Pass null if
 	// this is the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProtectionGroupsOutput struct {
@@ -58,6 +60,8 @@ type ListProtectionGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProtectionGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

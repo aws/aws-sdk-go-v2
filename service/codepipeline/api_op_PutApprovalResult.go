@@ -59,6 +59,8 @@ type PutApprovalResultInput struct {
 	//
 	// This member is required.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a PutApprovalResult action.
@@ -69,6 +71,8 @@ type PutApprovalResultOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutApprovalResultMiddlewares(stack *middleware.Stack, options Options) (err error) {

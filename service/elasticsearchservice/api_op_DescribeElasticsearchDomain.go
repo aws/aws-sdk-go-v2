@@ -35,6 +35,8 @@ type DescribeElasticsearchDomainInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeElasticsearchDomain request. Contains the status of the
@@ -48,6 +50,8 @@ type DescribeElasticsearchDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeElasticsearchDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

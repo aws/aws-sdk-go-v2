@@ -161,6 +161,8 @@ type PutIntegrationInput struct {
 	// arn:aws:apigateway:us-west-2:s3:action/GetObject&Bucket={bucket}&Key={key} or
 	// arn:aws:apigateway:us-west-2:s3:path/{bucket}/{key}
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an HTTP, HTTP_PROXY, AWS, AWS_PROXY, or Mock integration. In the API
@@ -362,6 +364,8 @@ type PutIntegrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

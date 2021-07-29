@@ -11,6 +11,8 @@ import (
 // another resource or it’s associated with another resource.
 type WAFAssociatedItemException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFAssociatedItemException) Error() string {
@@ -29,6 +31,8 @@ func (e *WAFAssociatedItemException) ErrorFault() smithy.ErrorFault { return smi
 // is a duplicate of an existing one.
 type WAFDuplicateItemException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFDuplicateItemException) Error() string {
@@ -47,6 +51,8 @@ func (e *WAFDuplicateItemException) ErrorFault() smithy.ErrorFault { return smit
 // system problem. Retry your request.
 type WAFInternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInternalErrorException) Error() string {
@@ -64,6 +70,8 @@ func (e *WAFInternalErrorException) ErrorFault() smithy.ErrorFault { return smit
 // The operation isn't valid.
 type WAFInvalidOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidOperationException) Error() string {
@@ -99,6 +107,8 @@ type WAFInvalidParameterException struct {
 	Field     ParameterExceptionField
 	Parameter *string
 	Reason    *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidParameterException) Error() string {
@@ -136,6 +146,8 @@ func (e *WAFInvalidParameterException) ErrorFault() smithy.ErrorFault { return s
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies.html).
 type WAFInvalidPermissionPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidPermissionPolicyException) Error() string {
@@ -158,6 +170,8 @@ func (e *WAFInvalidPermissionPolicyException) ErrorFault() smithy.ErrorFault {
 // valid. Check the resource, and try again.
 type WAFInvalidResourceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFInvalidResourceException) Error() string {
@@ -179,6 +193,8 @@ func (e *WAFInvalidResourceException) ErrorFault() smithy.ErrorFault { return sm
 // Developer Guide.
 type WAFLimitsExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFLimitsExceededException) Error() string {
@@ -196,6 +212,8 @@ func (e *WAFLimitsExceededException) ErrorFault() smithy.ErrorFault { return smi
 // WAF couldn’t perform the operation because your resource doesn’t exist.
 type WAFNonexistentItemException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFNonexistentItemException) Error() string {
@@ -215,6 +233,8 @@ func (e *WAFNonexistentItemException) ErrorFault() smithy.ErrorFault { return sm
 // changes you need to make to the new copy, and retry your operation.
 type WAFOptimisticLockException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFOptimisticLockException) Error() string {
@@ -239,6 +259,8 @@ func (e *WAFOptimisticLockException) ErrorFault() smithy.ErrorFault { return smi
 // until the role is unlocked.
 type WAFServiceLinkedRoleErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFServiceLinkedRoleErrorException) Error() string {
@@ -261,6 +283,8 @@ func (e *WAFServiceLinkedRoleErrorException) ErrorFault() smithy.ErrorFault {
 // aren't subscribed to it yet.
 type WAFSubscriptionNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFSubscriptionNotFoundException) Error() string {
@@ -280,6 +304,8 @@ func (e *WAFSubscriptionNotFoundException) ErrorFault() smithy.ErrorFault { retu
 // An error occurred during the tagging operation. Retry your request.
 type WAFTagOperationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFTagOperationException) Error() string {
@@ -298,6 +324,8 @@ func (e *WAFTagOperationException) ErrorFault() smithy.ErrorFault { return smith
 // your request.
 type WAFTagOperationInternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFTagOperationInternalErrorException) Error() string {
@@ -319,6 +347,8 @@ func (e *WAFTagOperationInternalErrorException) ErrorFault() smithy.ErrorFault {
 // WAF couldn’t retrieve the resource that you requested. Retry your request.
 type WAFUnavailableEntityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WAFUnavailableEntityException) Error() string {

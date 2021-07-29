@@ -42,6 +42,8 @@ type UpdatePresetInput struct {
 
 	// Settings for preset
 	Settings *types.PresetSettings
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePresetOutput struct {
@@ -52,6 +54,8 @@ type UpdatePresetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePresetMiddlewares(stack *middleware.Stack, options Options) (err error) {

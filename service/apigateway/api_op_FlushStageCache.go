@@ -38,11 +38,15 @@ type FlushStageCacheInput struct {
 	//
 	// This member is required.
 	StageName *string
+
+	noSmithyDocumentSerde
 }
 
 type FlushStageCacheOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationFlushStageCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

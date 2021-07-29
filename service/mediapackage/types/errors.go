@@ -10,6 +10,8 @@ import (
 // The client is not authorized to access the requested resource.
 type ForbiddenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -27,6 +29,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // An unexpected error occurred.
 type InternalServerErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerErrorException) Error() string {
@@ -44,6 +48,8 @@ func (e *InternalServerErrorException) ErrorFault() smithy.ErrorFault { return s
 // The requested resource does not exist.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -61,6 +67,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // An unexpected error occurred.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {
@@ -78,6 +86,8 @@ func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return sm
 // The client has exceeded their resource or throttling limits.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -95,6 +105,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // The parameters sent in the request are not valid.
 type UnprocessableEntityException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnprocessableEntityException) Error() string {

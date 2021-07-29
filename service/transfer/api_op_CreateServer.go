@@ -157,6 +157,8 @@ type CreateServerInput struct {
 
 	// Key-value pairs that can be used to group and search for servers.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateServerOutput struct {
@@ -168,6 +170,8 @@ type CreateServerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

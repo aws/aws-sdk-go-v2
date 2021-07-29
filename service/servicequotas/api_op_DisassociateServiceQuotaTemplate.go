@@ -30,11 +30,14 @@ func (c *Client) DisassociateServiceQuotaTemplate(ctx context.Context, params *D
 }
 
 type DisassociateServiceQuotaTemplateInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisassociateServiceQuotaTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateServiceQuotaTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

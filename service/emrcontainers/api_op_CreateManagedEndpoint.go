@@ -73,6 +73,8 @@ type CreateManagedEndpointInput struct {
 
 	// The tags of the managed endpoint.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateManagedEndpointOutput struct {
@@ -91,6 +93,8 @@ type CreateManagedEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateManagedEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

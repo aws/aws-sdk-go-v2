@@ -42,6 +42,8 @@ type UpdateS3ResourcesInput struct {
 	// The AWS ID of the Amazon Macie Classic member account whose S3 resources'
 	// classification types you want to update.
 	MemberAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateS3ResourcesOutput struct {
@@ -52,6 +54,8 @@ type UpdateS3ResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

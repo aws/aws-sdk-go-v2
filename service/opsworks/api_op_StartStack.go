@@ -36,11 +36,15 @@ type StartStackInput struct {
 	//
 	// This member is required.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartStackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartStackMiddlewares(stack *middleware.Stack, options Options) (err error) {

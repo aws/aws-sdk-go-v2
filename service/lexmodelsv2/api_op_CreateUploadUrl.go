@@ -28,6 +28,7 @@ func (c *Client) CreateUploadUrl(ctx context.Context, params *CreateUploadUrlInp
 }
 
 type CreateUploadUrlInput struct {
+	noSmithyDocumentSerde
 }
 
 type CreateUploadUrlOutput struct {
@@ -41,6 +42,8 @@ type CreateUploadUrlOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUploadUrlMiddlewares(stack *middleware.Stack, options Options) (err error) {

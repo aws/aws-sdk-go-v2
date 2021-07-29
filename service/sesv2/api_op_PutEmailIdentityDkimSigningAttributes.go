@@ -67,6 +67,8 @@ type PutEmailIdentityDkimSigningAttributesInput struct {
 	// want to use to configure DKIM for the identity. This object is only required if
 	// you want to configure Bring Your Own DKIM (BYODKIM) for the identity.
 	SigningAttributes *types.DkimSigningAttributes
+
+	noSmithyDocumentSerde
 }
 
 // If the action is successful, the service sends back an HTTP 200 response. The
@@ -118,6 +120,8 @@ type PutEmailIdentityDkimSigningAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEmailIdentityDkimSigningAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

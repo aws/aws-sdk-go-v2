@@ -54,6 +54,8 @@ type DeleteRepositoryPermissionsPolicyInput struct {
 	// used for optimistic locking, which prevents others from accidentally overwriting
 	// your changes to the repository's resource policy.
 	PolicyRevision *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRepositoryPermissionsPolicyOutput struct {
@@ -63,6 +65,8 @@ type DeleteRepositoryPermissionsPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRepositoryPermissionsPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

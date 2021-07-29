@@ -43,6 +43,8 @@ type GetInsightsInput struct {
 	// operation, to continue listing data, set the value of this parameter to the
 	// value returned from the previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInsightsOutput struct {
@@ -57,6 +59,8 @@ type GetInsightsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {

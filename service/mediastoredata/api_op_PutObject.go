@@ -77,6 +77,8 @@ type PutObjectInput struct {
 	// uploaded completely. The default value for this header is standard. To use this
 	// header, you must also set the HTTP Transfer-Encoding header to chunked.
 	UploadAvailability types.UploadAvailability
+
+	noSmithyDocumentSerde
 }
 
 type PutObjectOutput struct {
@@ -93,6 +95,8 @@ type PutObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -17,7 +17,6 @@ package software.amazon.smithy.aws.go.codegen;
 
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.function.Consumer;
 import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.go.codegen.GoWriter;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
@@ -185,25 +184,6 @@ final class AwsProtocolUtils {
                         .addTestName("RestXmlEndpointTraitWithHostLabel")
                         .build(),
 
-
-                // REST-JSON Documents
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
-                        .operation(ShapeId.from("aws.protocoltests.restjson#InlineDocument"))
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
-                        .operation(ShapeId.from("aws.protocoltests.restjson#InlineDocumentAsPayload"))
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
-                        .operation(ShapeId.from("aws.protocoltests.restjson#DocumentType"))
-                        .build(),
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
-                        .operation(ShapeId.from("aws.protocoltests.restjson#DocumentTypeAsPayload"))
-                        .build(),
-
                 // Null lists/maps without sparse tag
                 HttpProtocolUnitTestGenerator.SkipTest.builder()
                         .service(ShapeId.from("aws.protocoltests.restjson#RestJson"))
@@ -220,12 +200,6 @@ final class AwsProtocolUtils {
                         .operation(ShapeId.from("aws.protocoltests.json#NullOperation"))
                         .addTestName("AwsJson11MapsSerializeNullValues")
                         .addTestName("AwsJson11ListsSerializeNull")
-                        .build(),
-
-                // JSON RPC Documents
-                HttpProtocolUnitTestGenerator.SkipTest.builder()
-                        .service(ShapeId.from("aws.protocoltests.json#JsonProtocol"))
-                        .operation(ShapeId.from("aws.protocoltests.json#PutAndGetInlineDocuments"))
                         .build(),
 
                 // JSON RPC serialize empty modeled input should always serialize something
@@ -255,20 +229,23 @@ final class AwsProtocolUtils {
         new HttpProtocolTestGenerator(context,
                 (HttpProtocolUnitTestRequestGenerator.Builder) new HttpProtocolUnitTestRequestGenerator
                         .Builder()
+                        .settings(context.getSettings())
                         .addSkipTests(inputSkipTests)
                         .addClientConfigValues(inputConfigValues),
                 (HttpProtocolUnitTestResponseGenerator.Builder) new HttpProtocolUnitTestResponseGenerator
                         .Builder()
+                        .settings(context.getSettings())
                         .addSkipTests(outputSkipTests)
                         .addClientConfigValues(configValues),
                 (HttpProtocolUnitTestResponseErrorGenerator.Builder) new HttpProtocolUnitTestResponseErrorGenerator
                         .Builder()
+                        .settings(context.getSettings())
                         .addClientConfigValues(configValues)
         ).generateProtocolTests();
     }
 
     public static void writeJsonErrorMessageCodeDeserializer(GenerationContext context) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         // The error code could be in the headers, even though for this protocol it should be in the body.
         writer.write("code := response.Header.Get(\"X-Amzn-ErrorType\")");
         writer.write("if len(code) != 0 { errorCode = restjson.SanitizeErrorCode(code) }");

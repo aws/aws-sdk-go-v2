@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The forecast value for a specific date. Part of the Forecast object.
 type DataPoint struct {
 
@@ -10,6 +14,8 @@ type DataPoint struct {
 
 	// The forecast value.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a forecast. Returned as part of the QueryForecast
@@ -25,4 +31,8 @@ type Forecast struct {
 	//
 	// * p90
 	Predictions map[string][]DataPoint
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

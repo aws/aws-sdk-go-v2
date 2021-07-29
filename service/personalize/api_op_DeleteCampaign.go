@@ -36,11 +36,15 @@ type DeleteCampaignInput struct {
 	//
 	// This member is required.
 	CampaignArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCampaignOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {

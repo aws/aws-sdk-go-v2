@@ -34,6 +34,8 @@ type DescribeEntityRecognizerInput struct {
 	//
 	// This member is required.
 	EntityRecognizerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEntityRecognizerOutput struct {
@@ -43,6 +45,8 @@ type DescribeEntityRecognizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

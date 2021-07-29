@@ -36,6 +36,8 @@ type DetectDominantLanguageInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectDominantLanguageOutput struct {
@@ -49,6 +51,8 @@ type DetectDominantLanguageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectDominantLanguageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -36,11 +36,15 @@ type RemoveAllResourcePermissionsInput struct {
 	// Amazon WorkDocs authentication token. Not required when using AWS administrator
 	// credentials to access the API.
 	AuthenticationToken *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveAllResourcePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveAllResourcePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

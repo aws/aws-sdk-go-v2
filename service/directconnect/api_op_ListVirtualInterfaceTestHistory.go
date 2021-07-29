@@ -49,6 +49,8 @@ type ListVirtualInterfaceTestHistoryInput struct {
 
 	// The ID of the virtual interface that was tested.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListVirtualInterfaceTestHistoryOutput struct {
@@ -62,6 +64,8 @@ type ListVirtualInterfaceTestHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVirtualInterfaceTestHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

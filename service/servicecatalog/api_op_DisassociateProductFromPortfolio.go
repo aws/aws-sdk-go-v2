@@ -47,11 +47,15 @@ type DisassociateProductFromPortfolioInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateProductFromPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateProductFromPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {

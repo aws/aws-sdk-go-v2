@@ -151,6 +151,8 @@ type DescribeSnapshotsInput struct {
 	// The snapshot IDs. Default: Describes the snapshots for which you have create
 	// volume permissions.
 	SnapshotIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSnapshotsOutput struct {
@@ -166,6 +168,8 @@ type DescribeSnapshotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSnapshotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

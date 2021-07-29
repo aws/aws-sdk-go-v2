@@ -71,6 +71,8 @@ type GetLabelDetectionInput struct {
 	// elements for a label together. Within each label group, the array element are
 	// sorted by detection confidence. The default sort is by TIMESTAMP.
 	SortBy types.LabelDetectionSortBy
+
+	noSmithyDocumentSerde
 }
 
 type GetLabelDetectionOutput struct {
@@ -100,6 +102,8 @@ type GetLabelDetectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLabelDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The classification type that Amazon Macie Classic applies to the associated S3
 // resources.
 type ClassificationType struct {
@@ -18,6 +22,8 @@ type ClassificationType struct {
 	//
 	// This member is required.
 	OneTime S3OneTimeClassificationType
+
+	noSmithyDocumentSerde
 }
 
 // The classification type that Amazon Macie Classic applies to the associated S3
@@ -33,6 +39,8 @@ type ClassificationTypeUpdate struct {
 	// A one-time classification of all of the existing objects in a specified S3
 	// bucket.
 	OneTime S3OneTimeClassificationType
+
+	noSmithyDocumentSerde
 }
 
 // Includes details about the failed S3 resources.
@@ -46,6 +54,8 @@ type FailedS3Resource struct {
 
 	// The failed S3 resources.
 	FailedItem *S3Resource
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the Amazon Macie Classic member account.
@@ -53,6 +63,8 @@ type MemberAccount struct {
 
 	// The AWS account ID of the Amazon Macie Classic member account.
 	AccountId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the S3 resource. This data type is used as a request
@@ -67,6 +79,8 @@ type S3Resource struct {
 
 	// The prefix of the S3 bucket.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The S3 resources that you want to associate with Amazon Macie Classic for
@@ -89,6 +103,8 @@ type S3ResourceClassification struct {
 	// The prefix of the S3 bucket that you want to associate with Amazon Macie
 	// Classic.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The S3 resources whose classification types you want to update. This data type
@@ -108,4 +124,8 @@ type S3ResourceClassificationUpdate struct {
 
 	// The prefix of the S3 bucket whose classification types you want to update.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

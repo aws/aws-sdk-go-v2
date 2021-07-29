@@ -30,6 +30,7 @@ func (c *Client) GetLoggingOptions(ctx context.Context, params *GetLoggingOption
 
 // The input for the GetLoggingOptions operation.
 type GetLoggingOptionsInput struct {
+	noSmithyDocumentSerde
 }
 
 // The output from the GetLoggingOptions operation.
@@ -43,6 +44,8 @@ type GetLoggingOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

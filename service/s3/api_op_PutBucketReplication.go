@@ -104,11 +104,15 @@ type PutBucketReplicationInput struct {
 
 	// A token to allow Object Lock to be enabled for an existing bucket.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 type PutBucketReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBucketReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

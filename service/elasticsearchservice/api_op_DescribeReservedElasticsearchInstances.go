@@ -42,6 +42,8 @@ type DescribeReservedElasticsearchInstancesInput struct {
 	// The reserved instance identifier filter value. Use this parameter to show only
 	// the reservation that matches the specified reserved Elasticsearch instance ID.
 	ReservedElasticsearchInstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for results from DescribeReservedElasticsearchInstances
@@ -55,6 +57,8 @@ type DescribeReservedElasticsearchInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReservedElasticsearchInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

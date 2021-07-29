@@ -42,11 +42,15 @@ type ValidateConfigurationInput struct {
 	//
 	// This member is required.
 	ConfigurationVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type ValidateConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationValidateConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

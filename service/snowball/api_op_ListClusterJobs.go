@@ -44,6 +44,8 @@ type ListClusterJobsInput struct {
 	// JobListEntry objects, you have the option of specifying NextToken as the
 	// starting point for your returned list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListClusterJobsOutput struct {
@@ -59,6 +61,8 @@ type ListClusterJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListClusterJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -92,6 +92,8 @@ type UpdateThemePermissionsInput struct {
 
 	// A list of resource permissions to be revoked from the theme.
 	RevokePermissions []types.ResourcePermission
+
+	noSmithyDocumentSerde
 }
 
 type UpdateThemePermissionsOutput struct {
@@ -113,6 +115,8 @@ type UpdateThemePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateThemePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type AuthenticationConfiguration struct {
 	// Runner service to connect to a source repository. It's required for GitHub code
 	// repositories.
 	ConnectionArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an AWS App Runner automatic scaling configuration resource. Multiple
@@ -77,6 +80,8 @@ type AutoScalingConfiguration struct {
 	// configuration revisions are permanently removed some time after they are
 	// deleted.
 	Status AutoScalingConfigurationStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about an AWS App Runner automatic scaling
@@ -99,6 +104,8 @@ type AutoScalingConfigurationSummary struct {
 	// active configurations ("Status": "ACTIVE") with the same
 	// AutoScalingConfigurationName.
 	AutoScalingConfigurationRevision int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a certificate CNAME record to add to your DNS. For more information,
@@ -118,6 +125,8 @@ type CertificateValidationRecord struct {
 
 	// The certificate CNAME record value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration that AWS App Runner uses to build and run an App
@@ -142,6 +151,8 @@ type CodeConfiguration struct {
 	// to quickly launch an App Runner service without providing a apprunner.yaml file
 	// in the source code repository (or ignoring the file if it exists).
 	CodeConfigurationValues *CodeConfigurationValues
+
+	noSmithyDocumentSerde
 }
 
 // Describes the basic configuration needed for building and running an AWS App
@@ -169,6 +180,8 @@ type CodeConfigurationValues struct {
 
 	// The command App Runner runs to start your application.
 	StartCommand *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a source code repository.
@@ -187,6 +200,8 @@ type CodeRepository struct {
 	// Configuration for building and running the service from a source code
 	// repository.
 	CodeConfiguration *CodeConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Describes an AWS App Runner connection resource.
@@ -207,6 +222,8 @@ type Connection struct {
 	// The current state of the App Runner connection. When the state is AVAILABLE, you
 	// can use the connection to create an App Runner service.
 	Status ConnectionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information about an AWS App Runner connection resource.
@@ -227,6 +244,8 @@ type ConnectionSummary struct {
 	// The current state of the App Runner connection. When the state is AVAILABLE, you
 	// can use the connection to create an App Runner service.
 	Status ConnectionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes a custom domain that's associated with an AWS App Runner service.
@@ -252,6 +271,8 @@ type CustomDomain struct {
 
 	// A list of certificate CNAME records that's used for this domain name.
 	CertificateValidationRecords []CertificateValidationRecord
+
+	noSmithyDocumentSerde
 }
 
 // Describes a custom encryption key that AWS App Runner uses to encrypt copies of
@@ -262,6 +283,8 @@ type EncryptionConfiguration struct {
 	//
 	// This member is required.
 	KmsKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the settings for the health check that AWS App Runner performs to
@@ -291,6 +314,8 @@ type HealthCheckConfiguration struct {
 	// The number of consecutive checks that must fail before App Runner decides that
 	// the service is unhealthy. Default: 3
 	UnhealthyThreshold *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration that AWS App Runner uses to run an App Runner
@@ -309,6 +334,8 @@ type ImageConfiguration struct {
 	// image. If specified, this command overrides the Docker image’s default start
 	// command.
 	StartCommand *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a source image repository.
@@ -331,6 +358,8 @@ type ImageRepository struct {
 
 	// Configuration for running the identified image.
 	ImageConfiguration *ImageConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Describes the runtime configuration of an AWS App Runner service instance
@@ -349,6 +378,8 @@ type InstanceConfiguration struct {
 	// The amount of memory, in MB or GB, reserved for each instance of your App Runner
 	// service. Default: 2 GB
 	Memory *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information for an operation that occurred on an AWS App Runner
@@ -378,6 +409,8 @@ type OperationSummary struct {
 	// The time when the operation was last updated. It's in the Unix time stamp
 	// format.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes an AWS App Runner service. It can describe a service in any state,
@@ -473,6 +506,8 @@ type Service struct {
 	// The settings for the health check that App Runner performs to monitor the health
 	// of this service.
 	HealthCheckConfiguration *HealthCheckConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides summary information for an AWS App Runner service. This type contains
@@ -524,6 +559,8 @@ type ServiceSummary struct {
 	// The time when the App Runner service was last updated. It's in theUnix time
 	// stamp format.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a version of code that AWS App Runner refers to within a source code
@@ -541,6 +578,8 @@ type SourceCodeVersion struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the source deployed to an AWS App Runner service. It can be a code or
@@ -563,6 +602,8 @@ type SourceConfiguration struct {
 	// The description of a source image repository. You must provide either this
 	// member or CodeRepository (but not both).
 	ImageRepository *ImageRepository
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag that is applied to an AWS App Runner resource. A tag is a
@@ -574,4 +615,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

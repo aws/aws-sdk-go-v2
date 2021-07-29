@@ -43,6 +43,8 @@ type CreateApplicationInput struct {
 	// categorize them. Each tag consists of a key and an optional value, both of which
 	// you define.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateApplication operation.
@@ -53,6 +55,8 @@ type CreateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

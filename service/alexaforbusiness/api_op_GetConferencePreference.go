@@ -28,6 +28,7 @@ func (c *Client) GetConferencePreference(ctx context.Context, params *GetConfere
 }
 
 type GetConferencePreferenceInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetConferencePreferenceOutput struct {
@@ -37,6 +38,8 @@ type GetConferencePreferenceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConferencePreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

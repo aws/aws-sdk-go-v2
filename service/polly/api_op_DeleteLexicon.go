@@ -36,11 +36,15 @@ type DeleteLexiconInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteLexiconOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteLexiconMiddlewares(stack *middleware.Stack, options Options) (err error) {

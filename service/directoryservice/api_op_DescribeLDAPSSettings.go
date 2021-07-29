@@ -43,6 +43,8 @@ type DescribeLDAPSSettingsInput struct {
 	// The type of LDAP security to enable. Currently only the value Client is
 	// supported.
 	Type types.LDAPSType
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLDAPSSettingsOutput struct {
@@ -57,6 +59,8 @@ type DescribeLDAPSSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLDAPSSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

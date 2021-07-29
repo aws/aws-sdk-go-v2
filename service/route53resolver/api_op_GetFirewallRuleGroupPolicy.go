@@ -34,6 +34,8 @@ type GetFirewallRuleGroupPolicyInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFirewallRuleGroupPolicyOutput struct {
@@ -45,6 +47,8 @@ type GetFirewallRuleGroupPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFirewallRuleGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

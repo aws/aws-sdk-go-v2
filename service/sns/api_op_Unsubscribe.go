@@ -40,11 +40,15 @@ type UnsubscribeInput struct {
 	//
 	// This member is required.
 	SubscriptionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UnsubscribeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnsubscribeMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -87,6 +87,8 @@ type CopyBackupInput struct {
 
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CopyBackupOutput struct {
@@ -96,6 +98,8 @@ type CopyBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

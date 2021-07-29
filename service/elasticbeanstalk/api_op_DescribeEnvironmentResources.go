@@ -39,6 +39,8 @@ type DescribeEnvironmentResourcesInput struct {
 	// must specify either this or an EnvironmentId, or both. If you do not specify
 	// either, AWS Elastic Beanstalk returns MissingRequiredParameter error.
 	EnvironmentName *string
+
+	noSmithyDocumentSerde
 }
 
 // Result message containing a list of environment resource descriptions.
@@ -49,6 +51,8 @@ type DescribeEnvironmentResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEnvironmentResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

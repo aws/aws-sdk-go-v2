@@ -40,11 +40,15 @@ type DeleteResourceConfigInput struct {
 	//
 	// This member is required.
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourceConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResourceConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

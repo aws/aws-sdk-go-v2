@@ -71,6 +71,8 @@ type CreateAnalysisInput struct {
 	// The ARN for the theme to apply to the analysis that you're creating. To see the
 	// theme in the QuickSight console, make sure that you have access to it.
 	ThemeArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAnalysisOutput struct {
@@ -92,6 +94,8 @@ type CreateAnalysisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -105,6 +105,8 @@ type PollForDecisionTaskInput struct {
 	// When set to true, returns the events in reverse order. By default the results
 	// are returned in ascending order of the eventTimestamp of the events.
 	ReverseOrder bool
+
+	noSmithyDocumentSerde
 }
 
 // A structure that represents a decision task. Decision tasks are sent to deciders
@@ -153,6 +155,8 @@ type PollForDecisionTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPollForDecisionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

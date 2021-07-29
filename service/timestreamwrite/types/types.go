@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -28,6 +29,8 @@ type Database struct {
 
 	// The total number of tables found within a Timestream database.
 	TableCount int64
+
+	noSmithyDocumentSerde
 }
 
 // Dimension represents the meta data attributes of the time series. For example,
@@ -51,6 +54,8 @@ type Dimension struct {
 
 	// The data type of the dimension for the time series data point.
 	DimensionValueType DimensionValueType
+
+	noSmithyDocumentSerde
 }
 
 // Represents an available endpoint against which to make API calls agaisnt, as
@@ -66,6 +71,8 @@ type Endpoint struct {
 	//
 	// This member is required.
 	CachePeriodInMinutes int64
+
+	noSmithyDocumentSerde
 }
 
 // Record represents a time series data point being written into Timestream. Each
@@ -107,6 +114,8 @@ type Record struct {
 	// cases where the measure value is the same, Version will still be updated .
 	// Default value is to 1.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // Records that were not successfully inserted into Timestream due to data
@@ -148,6 +157,8 @@ type RejectedRecord struct {
 	// The index of the record in the input request for WriteRecords. Indexes begin
 	// with 0.
 	RecordIndex int32
+
+	noSmithyDocumentSerde
 }
 
 // Retention properties contain the duration for which your time series data must
@@ -163,6 +174,8 @@ type RetentionProperties struct {
 	//
 	// This member is required.
 	MemoryStoreRetentionPeriodInHours int64
+
+	noSmithyDocumentSerde
 }
 
 // Table represents a database table in Timestream. Tables contain one or more
@@ -195,6 +208,8 @@ type Table struct {
 	// *
 	// ACTIVE - The table is ready for use.
 	TableStatus TableStatus
+
+	noSmithyDocumentSerde
 }
 
 // A tag is a label that you assign to a Timestream database and/or table. Each tag
@@ -212,4 +227,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

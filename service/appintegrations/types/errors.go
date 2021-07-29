@@ -10,6 +10,8 @@ import (
 // You do not have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // A resource with the specified name already exists.
 type DuplicateResourceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateResourceException) Error() string {
@@ -44,6 +48,8 @@ func (e *DuplicateResourceException) ErrorFault() smithy.ErrorFault { return smi
 // Request processing failed due to an error or failure with the service.
 type InternalServiceError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceError) Error() string {
@@ -61,6 +67,8 @@ func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The request is not valid.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -78,6 +86,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified resource was not found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -95,6 +105,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // The allowed quota for the resource has been exceeded.
 type ResourceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceQuotaExceededException) Error() string {
@@ -112,6 +124,8 @@ func (e *ResourceQuotaExceededException) ErrorFault() smithy.ErrorFault { return
 // The throttling limit has been exceeded.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

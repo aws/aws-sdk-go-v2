@@ -49,6 +49,8 @@ type UpdateApiMappingInput struct {
 
 	// The API stage.
 	Stage *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApiMappingOutput struct {
@@ -67,6 +69,8 @@ type UpdateApiMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApiMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

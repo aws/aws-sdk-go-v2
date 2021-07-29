@@ -51,6 +51,8 @@ type CreateTransitGatewayRouteInput struct {
 
 	// The ID of the attachment.
 	TransitGatewayAttachmentId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTransitGatewayRouteOutput struct {
@@ -60,6 +62,8 @@ type CreateTransitGatewayRouteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTransitGatewayRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

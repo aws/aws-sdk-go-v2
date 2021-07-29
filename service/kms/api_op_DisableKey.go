@@ -56,11 +56,15 @@ type DisableKeyInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

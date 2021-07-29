@@ -32,6 +32,7 @@ func (c *Client) ListOpenIDConnectProviders(ctx context.Context, params *ListOpe
 }
 
 type ListOpenIDConnectProvidersInput struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a successful ListOpenIDConnectProviders request.
@@ -42,6 +43,8 @@ type ListOpenIDConnectProvidersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListOpenIDConnectProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type CreateIpGroupInput struct {
 
 	// The rules to add to the group.
 	UserRules []types.IpRuleItem
+
+	noSmithyDocumentSerde
 }
 
 type CreateIpGroupOutput struct {
@@ -60,6 +62,8 @@ type CreateIpGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIpGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

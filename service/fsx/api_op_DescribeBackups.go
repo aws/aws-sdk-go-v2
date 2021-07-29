@@ -67,6 +67,8 @@ type DescribeBackupsInput struct {
 	// (String). If a token present, the action continues the list from where the
 	// returning call left off.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Response object for DescribeBackups operation.
@@ -82,6 +84,8 @@ type DescribeBackupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBackupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type PutEventsInput struct {
 	//
 	// This member is required.
 	Entries []types.PutEventsRequestEntry
+
+	noSmithyDocumentSerde
 }
 
 type PutEventsOutput struct {
@@ -49,6 +51,8 @@ type PutEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

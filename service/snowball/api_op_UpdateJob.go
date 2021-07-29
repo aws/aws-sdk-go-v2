@@ -74,11 +74,15 @@ type UpdateJobInput struct {
 	// "https://docs.aws.amazon.com/snowball/latest/developer-guide/snow-device-types.html"
 	// (Snow Family Devices and Capacity) in the Snowcone User Guide.
 	SnowballCapacityPreference types.SnowballCapacity
+
+	noSmithyDocumentSerde
 }
 
 type UpdateJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

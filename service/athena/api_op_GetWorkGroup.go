@@ -33,6 +33,8 @@ type GetWorkGroupInput struct {
 	//
 	// This member is required.
 	WorkGroup *string
+
+	noSmithyDocumentSerde
 }
 
 type GetWorkGroupOutput struct {
@@ -42,6 +44,8 @@ type GetWorkGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWorkGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

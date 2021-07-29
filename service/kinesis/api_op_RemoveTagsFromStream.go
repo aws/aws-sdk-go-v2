@@ -41,11 +41,15 @@ type RemoveTagsFromStreamInput struct {
 	//
 	// This member is required.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveTagsFromStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveTagsFromStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

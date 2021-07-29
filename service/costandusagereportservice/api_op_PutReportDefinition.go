@@ -35,6 +35,8 @@ type PutReportDefinitionInput struct {
 	//
 	// This member is required.
 	ReportDefinition *types.ReportDefinition
+
+	noSmithyDocumentSerde
 }
 
 // If the action is successful, the service sends back an HTTP 200 response with an
@@ -42,6 +44,8 @@ type PutReportDefinitionInput struct {
 type PutReportDefinitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutReportDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

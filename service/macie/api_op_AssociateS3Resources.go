@@ -42,6 +42,8 @@ type AssociateS3ResourcesInput struct {
 	// The ID of the Amazon Macie Classic member account whose resources you want to
 	// associate with Macie Classic.
 	MemberAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateS3ResourcesOutput struct {
@@ -52,6 +54,8 @@ type AssociateS3ResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateS3ResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

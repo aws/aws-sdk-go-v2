@@ -38,11 +38,15 @@ type DeleteNotificationConfigurationInput struct {
 	//
 	// This member is required.
 	TopicARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNotificationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

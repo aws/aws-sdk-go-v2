@@ -38,6 +38,8 @@ type GetDevEndpointsInput struct {
 
 	// A continuation token, if this is a continuation call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDevEndpointsOutput struct {
@@ -50,6 +52,8 @@ type GetDevEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDevEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type SendUsersMessagesInput struct {
 	//
 	// This member is required.
 	SendUsersMessageRequest *types.SendUsersMessageRequest
+
+	noSmithyDocumentSerde
 }
 
 type SendUsersMessagesOutput struct {
@@ -51,6 +53,8 @@ type SendUsersMessagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendUsersMessagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

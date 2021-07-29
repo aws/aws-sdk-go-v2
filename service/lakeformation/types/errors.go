@@ -10,6 +10,8 @@ import (
 // Access to a resource was denied.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // A resource to be created or added already exists.
 type AlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsException) Error() string {
@@ -44,6 +48,8 @@ func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.
 // Two processes are trying to modify a resource simultaneously.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -63,6 +69,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // A specified entity does not exist
 type EntityNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EntityNotFoundException) Error() string {
@@ -80,6 +88,8 @@ func (e *EntityNotFoundException) ErrorFault() smithy.ErrorFault { return smithy
 // An encryption operation failed.
 type GlueEncryptionException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GlueEncryptionException) Error() string {
@@ -97,6 +107,8 @@ func (e *GlueEncryptionException) ErrorFault() smithy.ErrorFault { return smithy
 // An internal service error occurred.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -114,6 +126,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 // The input provided was not valid.
 type InvalidInputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -131,6 +145,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // The operation timed out.
 type OperationTimeoutException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationTimeoutException) Error() string {
@@ -148,6 +164,8 @@ func (e *OperationTimeoutException) ErrorFault() smithy.ErrorFault { return smit
 // A resource numerical limit was exceeded.
 type ResourceNumberLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNumberLimitExceededException) Error() string {

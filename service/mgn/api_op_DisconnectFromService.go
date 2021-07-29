@@ -44,6 +44,8 @@ type DisconnectFromServiceInput struct {
 	//
 	// This member is required.
 	SourceServerID *string
+
+	noSmithyDocumentSerde
 }
 
 type DisconnectFromServiceOutput struct {
@@ -74,6 +76,8 @@ type DisconnectFromServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisconnectFromServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

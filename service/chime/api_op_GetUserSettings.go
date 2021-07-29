@@ -39,6 +39,8 @@ type GetUserSettingsInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetUserSettingsOutput struct {
@@ -48,6 +50,8 @@ type GetUserSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

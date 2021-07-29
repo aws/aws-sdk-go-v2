@@ -32,11 +32,15 @@ type CancelWorldGenerationJobInput struct {
 	//
 	// This member is required.
 	Job *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelWorldGenerationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

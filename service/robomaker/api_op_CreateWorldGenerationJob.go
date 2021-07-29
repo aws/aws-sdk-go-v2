@@ -53,6 +53,8 @@ type CreateWorldGenerationJobInput struct {
 	// A map that contains tag keys and tag values that are attached to the generated
 	// worlds.
 	WorldTags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorldGenerationJobOutput struct {
@@ -100,6 +102,8 @@ type CreateWorldGenerationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

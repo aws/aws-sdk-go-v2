@@ -54,11 +54,15 @@ type DeleteFunctionInput struct {
 	// Specify a version to delete. You can't delete a version that's referenced by an
 	// alias.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFunctionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

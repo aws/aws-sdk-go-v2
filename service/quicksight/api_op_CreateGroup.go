@@ -49,6 +49,8 @@ type CreateGroupInput struct {
 
 	// A description for the group that you want to create.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // The response object for this operation.
@@ -65,6 +67,8 @@ type CreateGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

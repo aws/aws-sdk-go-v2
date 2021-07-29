@@ -52,6 +52,8 @@ type DescribeIndexFieldsInput struct {
 	// A list of the index fields you want to describe. If not specified, information
 	// is returned for all configured index fields.
 	FieldNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeIndexFields request. Contains the index fields
@@ -65,6 +67,8 @@ type DescribeIndexFieldsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeIndexFieldsMiddlewares(stack *middleware.Stack, options Options) (err error) {

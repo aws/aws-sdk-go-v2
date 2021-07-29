@@ -10,6 +10,8 @@ import (
 // You have exceeded the permitted request rate for the specific operation.
 type CallRateLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CallRateLimitExceededException) Error() string {
@@ -29,6 +31,8 @@ func (e *CallRateLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // resource, or specifying an invalid resource identifier.
 type ClientException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClientException) Error() string {
@@ -46,6 +50,8 @@ func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // You are not authorized to perform the requested operation.
 type ForbiddenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -64,6 +70,8 @@ func (e *ForbiddenException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // differ from a previous request that used the same client token.
 type IdempotentParameterMismatchException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -85,6 +93,8 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 // You have provided an invalid pagination token in your request.
 type InvalidPaginationTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPaginationTokenException) Error() string {
@@ -105,6 +115,8 @@ func (e *InvalidPaginationTokenException) ErrorFault() smithy.ErrorFault { retur
 // message for details.
 type InvalidParameterCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterCombinationException) Error() string {
@@ -127,6 +139,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 // request.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -144,6 +158,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // The value that you provided for the specified parameter is invalid.
 type InvalidParameterValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -161,6 +177,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // You have made a request for an action that is not supported by the service.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -178,6 +196,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // Your version number is out of bounds or does not follow the required syntax.
 type InvalidVersionNumberException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidVersionNumberException) Error() string {
@@ -195,6 +215,8 @@ func (e *InvalidVersionNumberException) ErrorFault() smithy.ErrorFault { return 
 // The resource that you are trying to create already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -213,6 +235,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // prohibits this action. See the error message for more details.
 type ResourceDependencyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceDependencyException) Error() string {
@@ -231,6 +255,8 @@ func (e *ResourceDependencyException) ErrorFault() smithy.ErrorFault { return sm
 // message details and retry later.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -248,6 +274,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // At least one of the resources referenced by your request does not exist.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -265,6 +293,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // This exception is thrown when the service encounters an unrecoverable exception.
 type ServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceException) Error() string {
@@ -284,6 +314,8 @@ func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultS
 // (https://docs.aws.amazon.com/general/latest/gr/imagebuilder.html#limits_imagebuilder).
 type ServiceQuotaExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -301,6 +333,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // The service is unable to process your request at this time.
 type ServiceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUnavailableException) Error() string {

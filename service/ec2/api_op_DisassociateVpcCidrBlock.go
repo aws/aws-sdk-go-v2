@@ -38,6 +38,8 @@ type DisassociateVpcCidrBlockInput struct {
 	//
 	// This member is required.
 	AssociationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateVpcCidrBlockOutput struct {
@@ -53,6 +55,8 @@ type DisassociateVpcCidrBlockOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateVpcCidrBlockMiddlewares(stack *middleware.Stack, options Options) (err error) {

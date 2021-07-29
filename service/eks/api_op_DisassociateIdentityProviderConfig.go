@@ -46,6 +46,8 @@ type DisassociateIdentityProviderConfigInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateIdentityProviderConfigOutput struct {
@@ -55,6 +57,8 @@ type DisassociateIdentityProviderConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

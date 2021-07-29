@@ -72,6 +72,8 @@ type CreateProtectionInput struct {
 
 	// One or more tag key-value pairs for the Protection object that is created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateProtectionOutput struct {
@@ -81,6 +83,8 @@ type CreateProtectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProtectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,6 +35,8 @@ type DeleteBatchPredictionInput struct {
 	//
 	// This member is required.
 	BatchPredictionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteBatchPrediction operation. You can use the
@@ -48,6 +50,8 @@ type DeleteBatchPredictionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBatchPredictionMiddlewares(stack *middleware.Stack, options Options) (err error) {

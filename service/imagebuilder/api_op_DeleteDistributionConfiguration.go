@@ -32,6 +32,8 @@ type DeleteDistributionConfigurationInput struct {
 	//
 	// This member is required.
 	DistributionConfigurationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDistributionConfigurationOutput struct {
@@ -45,6 +47,8 @@ type DeleteDistributionConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

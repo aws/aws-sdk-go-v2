@@ -2,12 +2,18 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // The values of a given attribute, such as Throughput Optimized HDD or Provisioned
 // IOPS for the Amazon EC2volumeType attribute.
 type AttributeValue struct {
 
 	// The specific value of an attributeName.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The constraints that you want all returned products to match.
@@ -38,6 +44,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata for a service, such as the service code and available attribute
@@ -49,4 +57,8 @@ type Service struct {
 
 	// The code for the Amazon Web Services service.
 	ServiceCode *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

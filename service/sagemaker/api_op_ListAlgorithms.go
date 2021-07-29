@@ -56,6 +56,8 @@ type ListAlgorithmsInput struct {
 
 	// The sort order for the results. The default is Ascending.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListAlgorithmsOutput struct {
@@ -71,6 +73,8 @@ type ListAlgorithmsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAlgorithmsMiddlewares(stack *middleware.Stack, options Options) (err error) {

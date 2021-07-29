@@ -64,6 +64,8 @@ type UpdateJobPriorityInput struct {
 	//
 	// This member is required.
 	Priority int32
+
+	noSmithyDocumentSerde
 }
 
 type UpdateJobPriorityOutput struct {
@@ -80,6 +82,8 @@ type UpdateJobPriorityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateJobPriorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type DeleteDBClusterInput struct {
 	// SkipFinalSnapshot is false, you must specify a FinalDBSnapshotIdentifier
 	// parameter. Default: false
 	SkipFinalSnapshot bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBClusterOutput struct {
@@ -68,6 +70,8 @@ type DeleteDBClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

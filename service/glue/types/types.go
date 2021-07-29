@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -38,6 +39,8 @@ type Action struct {
 	// is 2,880 minutes (48 hours). This overrides the timeout value set in the parent
 	// job.
 	Timeout *int32
+
+	noSmithyDocumentSerde
 }
 
 // A list of errors that can occur when registering partition indexes for an
@@ -69,6 +72,8 @@ type BackfillError struct {
 
 	// A list of a limited number of partitions in the response.
 	Partitions []PartitionValueList
+
+	noSmithyDocumentSerde
 }
 
 // Records an error that occurred when attempting to stop a specified job run.
@@ -82,6 +87,8 @@ type BatchStopJobRunError struct {
 
 	// The JobRunId of the job run in question.
 	JobRunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Records a successful request to stop a specified JobRun.
@@ -92,6 +99,8 @@ type BatchStopJobRunSuccessfulSubmission struct {
 
 	// The JobRunId of the job run that was stopped.
 	JobRunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a batch update partition error.
@@ -102,6 +111,8 @@ type BatchUpdatePartitionFailureEntry struct {
 
 	// A list of values defining the partitions.
 	PartitionValueList []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains the values and structure used to update a partition.
@@ -116,6 +127,8 @@ type BatchUpdatePartitionRequestEntry struct {
 	//
 	// This member is required.
 	PartitionValueList []string
+
+	noSmithyDocumentSerde
 }
 
 // Defines column statistics supported for bit sequence data values.
@@ -135,6 +148,8 @@ type BinaryColumnStatisticsData struct {
 	//
 	// This member is required.
 	NumberOfNulls int64
+
+	noSmithyDocumentSerde
 }
 
 // Defines column statistics supported for Boolean data columns.
@@ -154,6 +169,8 @@ type BooleanColumnStatisticsData struct {
 	//
 	// This member is required.
 	NumberOfTrues int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a table definition in the Glue Data Catalog.
@@ -168,6 +185,8 @@ type CatalogEntry struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing migration status information.
@@ -181,6 +200,8 @@ type CatalogImportStatus struct {
 
 	// The name of the person who initiated the migration.
 	ImportedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an Glue Data Catalog target.
@@ -195,6 +216,8 @@ type CatalogTarget struct {
 	//
 	// This member is required.
 	Tables []string
+
+	noSmithyDocumentSerde
 }
 
 // Classifiers are triggered during a crawl task. A classifier checks whether a
@@ -218,6 +241,8 @@ type Classifier struct {
 
 	// A classifier for XML content.
 	XMLClassifier *XMLClassifier
+
+	noSmithyDocumentSerde
 }
 
 // Specifies how Amazon CloudWatch data should be encrypted.
@@ -228,6 +253,8 @@ type CloudWatchEncryption struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a directional edge in a directed acyclic graph (DAG).
@@ -245,6 +272,8 @@ type CodeGenEdge struct {
 
 	// The target of the edge.
 	TargetParameter *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a node in a directed acyclic graph (DAG)
@@ -267,6 +296,8 @@ type CodeGenNode struct {
 
 	// The line number of the node.
 	LineNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // An argument or property of a node.
@@ -284,6 +315,8 @@ type CodeGenNodeArg struct {
 
 	// True if the value is used as a parameter.
 	Param bool
+
+	noSmithyDocumentSerde
 }
 
 // A column in a Table.
@@ -302,6 +335,8 @@ type Column struct {
 
 	// The data type of the Column.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Encapsulates a column name that failed and the reason for failure.
@@ -312,6 +347,8 @@ type ColumnError struct {
 
 	// An error message with the reason for the failure of an operation.
 	Error *ErrorDetail
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing the column name and column importance score for a column.
@@ -324,6 +361,8 @@ type ColumnImportance struct {
 
 	// The column importance score for the column, as a decimal.
 	Importance *float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents the generated column-level statistics for a table or partition.
@@ -348,6 +387,8 @@ type ColumnStatistics struct {
 	//
 	// This member is required.
 	StatisticsData *ColumnStatisticsData
+
+	noSmithyDocumentSerde
 }
 
 // Contains the individual types of column statistics data. Only one data object
@@ -379,6 +420,8 @@ type ColumnStatisticsData struct {
 
 	// String column statistics data.
 	StringColumnStatisticsData *StringColumnStatisticsData
+
+	noSmithyDocumentSerde
 }
 
 // Encapsulates a ColumnStatistics object that failed and the reason for failure.
@@ -389,6 +432,8 @@ type ColumnStatisticsError struct {
 
 	// An error message with the reason for the failure of an operation.
 	Error *ErrorDetail
+
+	noSmithyDocumentSerde
 }
 
 // Defines a condition under which a trigger fires.
@@ -411,6 +456,8 @@ type Condition struct {
 	// for are SUCCEEDED, STOPPED, FAILED, and TIMEOUT. The only crawler states that a
 	// trigger can listen for are SUCCEEDED, FAILED, and CANCELLED.
 	State JobRunState
+
+	noSmithyDocumentSerde
 }
 
 // The confusion matrix shows you what your transform is predicting accurately and
@@ -433,6 +480,8 @@ type ConfusionMatrix struct {
 	// The number of matches in the data that the transform correctly found, in the
 	// confusion matrix for your transform.
 	NumTruePositives *int64
+
+	noSmithyDocumentSerde
 }
 
 // Defines a connection to a data source.
@@ -579,6 +628,8 @@ type Connection struct {
 	// A map of physical connection requirements, such as virtual private cloud (VPC)
 	// and SecurityGroup, that are needed to make this connection successfully.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirements
+
+	noSmithyDocumentSerde
 }
 
 // A structure that is used to specify a connection to create or update.
@@ -632,6 +683,8 @@ type ConnectionInput struct {
 	// A map of physical connection requirements, such as virtual private cloud (VPC)
 	// and SecurityGroup, that are needed to successfully make this connection.
 	PhysicalConnectionRequirements *PhysicalConnectionRequirements
+
+	noSmithyDocumentSerde
 }
 
 // The data structure used by the Data Catalog to encrypt the password as part of
@@ -660,6 +713,8 @@ type ConnectionPasswordEncryption struct {
 	// decrypt permission to enable or restrict access on the password key according to
 	// your security requirements.
 	AwsKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the connections used by a job.
@@ -667,6 +722,8 @@ type ConnectionsList struct {
 
 	// A list of connections used by the job.
 	Connections []string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a crawl in the workflow.
@@ -689,6 +746,8 @@ type Crawl struct {
 
 	// The state of the crawler.
 	State CrawlState
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a crawler program that examines a data source and uses classifiers to
@@ -760,6 +819,8 @@ type Crawler struct {
 
 	// The version of the crawler.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // Metrics for a specified crawler.
@@ -789,6 +850,8 @@ type CrawlerMetrics struct {
 
 	// The estimated time left to complete a running crawl.
 	TimeLeftSeconds float64
+
+	noSmithyDocumentSerde
 }
 
 // The details of a Crawler node present in the workflow.
@@ -796,6 +859,8 @@ type CrawlerNodeDetails struct {
 
 	// A list of crawls represented by the crawl node.
 	Crawls []Crawl
+
+	noSmithyDocumentSerde
 }
 
 // Specifies data stores to crawl.
@@ -815,6 +880,8 @@ type CrawlerTargets struct {
 
 	// Specifies Amazon Simple Storage Service (Amazon S3) targets.
 	S3Targets []S3Target
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a custom CSV classifier for CreateClassifier to create.
@@ -844,6 +911,8 @@ type CreateCsvClassifierRequest struct {
 	// A custom symbol to denote what combines content into a single column value. Must
 	// be different from the column delimiter.
 	QuoteSymbol *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a grok classifier for CreateClassifier to create.
@@ -867,6 +936,8 @@ type CreateGrokClassifierRequest struct {
 
 	// Optional custom grok patterns used by this classifier.
 	CustomPatterns *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a JSON classifier for CreateClassifier to create.
@@ -884,6 +955,8 @@ type CreateJsonClassifierRequest struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an XML classifier for CreateClassifier to create.
@@ -904,6 +977,8 @@ type CreateXMLClassifierRequest struct {
 	// empty row element that contains only attributes can be parsed as long as it ends
 	// with a closing tag (for example,  is okay, but  is not).
 	RowTag *string
+
+	noSmithyDocumentSerde
 }
 
 // A classifier for custom CSV content.
@@ -942,6 +1017,8 @@ type CsvClassifier struct {
 
 	// The version of this classifier.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // The Database object represents a logical grouping of tables that might reside in
@@ -975,6 +1052,8 @@ type Database struct {
 	// A DatabaseIdentifier structure that describes a target database for resource
 	// linking.
 	TargetDatabase *DatabaseIdentifier
+
+	noSmithyDocumentSerde
 }
 
 // A structure that describes a target database for resource linking.
@@ -985,6 +1064,8 @@ type DatabaseIdentifier struct {
 
 	// The name of the catalog database.
 	DatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure used to create or update a database.
@@ -1012,6 +1093,8 @@ type DatabaseInput struct {
 	// A DatabaseIdentifier structure that describes a target database for resource
 	// linking.
 	TargetDatabase *DatabaseIdentifier
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information for maintaining Data Catalog security.
@@ -1025,6 +1108,8 @@ type DataCatalogEncryptionSettings struct {
 
 	// Specifies the encryption-at-rest configuration for the Data Catalog.
 	EncryptionAtRest *EncryptionAtRest
+
+	noSmithyDocumentSerde
 }
 
 // The Lake Formation principal.
@@ -1032,6 +1117,8 @@ type DataLakePrincipal struct {
 
 	// An identifier for the Lake Formation principal.
 	DataLakePrincipalIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines column statistics supported for timestamp data columns.
@@ -1052,6 +1139,8 @@ type DateColumnStatisticsData struct {
 
 	// The lowest value in the column.
 	MinimumValue *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Defines column statistics supported for fixed-point number data columns.
@@ -1072,6 +1161,8 @@ type DecimalColumnStatisticsData struct {
 
 	// The lowest value in the column.
 	MinimumValue *DecimalNumber
+
+	noSmithyDocumentSerde
 }
 
 // Contains a numeric value in decimal format.
@@ -1086,6 +1177,8 @@ type DecimalNumber struct {
 	//
 	// This member is required.
 	UnscaledValue []byte
+
+	noSmithyDocumentSerde
 }
 
 // A development endpoint where a developer can remotely debug extract, transform,
@@ -1220,6 +1313,8 @@ type DevEndpoint struct {
 
 	// The Apache Zeppelin port for the remote Apache Spark interpreter.
 	ZeppelinRemoteSparkInterpreterPort int32
+
+	noSmithyDocumentSerde
 }
 
 // Custom libraries to be loaded into a development endpoint.
@@ -1236,6 +1331,8 @@ type DevEndpointCustomLibraries struct {
 	// pandas (http://pandas.pydata.org/) Python data analysis library, are not
 	// currently supported.
 	ExtraPythonLibsS3Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines column statistics supported for floating-point number data columns.
@@ -1256,6 +1353,8 @@ type DoubleColumnStatisticsData struct {
 
 	// The lowest value in the column.
 	MinimumValue float64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an Amazon DynamoDB table to crawl.
@@ -1279,6 +1378,8 @@ type DynamoDBTarget struct {
 	// configured Read Capacity Unit (for provisioned tables), or 0.25 of the max
 	// configured Read Capacity Unit (for tables using on-demand mode).
 	ScanRate *float64
+
+	noSmithyDocumentSerde
 }
 
 // An edge represents a directed connection between two components on a workflow
@@ -1290,6 +1391,8 @@ type Edge struct {
 
 	// The unique of the node within the workflow where the edge starts.
 	SourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the encryption-at-rest configuration for the Data Catalog.
@@ -1302,6 +1405,8 @@ type EncryptionAtRest struct {
 
 	// The ID of the KMS key to use for encryption at rest.
 	SseAwsKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an encryption configuration.
@@ -1315,6 +1420,8 @@ type EncryptionConfiguration struct {
 
 	// The encryption configuration for Amazon Simple Storage Service (Amazon S3) data.
 	S3Encryption []S3Encryption
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about an error.
@@ -1325,6 +1432,8 @@ type ErrorDetail struct {
 
 	// A message describing the error.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // An object containing error details.
@@ -1335,6 +1444,8 @@ type ErrorDetails struct {
 
 	// The error message for an error.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Evaluation metrics provide an estimate of the quality of your machine learning
@@ -1348,6 +1459,8 @@ type EvaluationMetrics struct {
 
 	// The evaluation metrics for the find matches algorithm.
 	FindMatchesMetrics *FindMatchesMetrics
+
+	noSmithyDocumentSerde
 }
 
 // Batch condition that must be met (specified number of events received or batch
@@ -1363,6 +1476,8 @@ type EventBatchingCondition struct {
 	// Window of time in seconds after which EventBridge event trigger fires. Window
 	// starts when first event is received.
 	BatchWindow *int32
+
+	noSmithyDocumentSerde
 }
 
 // An execution property of a job.
@@ -1372,6 +1487,8 @@ type ExecutionProperty struct {
 	// error is returned when this threshold is reached. The maximum value you can
 	// specify is controlled by a service limit.
 	MaxConcurrentRuns int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration properties for an exporting labels task run.
@@ -1380,6 +1497,8 @@ type ExportLabelsTaskRunProperties struct {
 	// The Amazon Simple Storage Service (Amazon S3) path where you will export the
 	// labels.
 	OutputS3Path *string
+
+	noSmithyDocumentSerde
 }
 
 // The evaluation metrics for the find matches algorithm. The quality of your
@@ -1422,6 +1541,8 @@ type FindMatchesMetrics struct {
 	// Precision and recall (https://en.wikipedia.org/wiki/Precision_and_recall) in
 	// Wikipedia.
 	Recall *float64
+
+	noSmithyDocumentSerde
 }
 
 // The parameters to configure the find matches transform.
@@ -1460,6 +1581,8 @@ type FindMatchesParameters struct {
 	// The name of a column that uniquely identifies rows in the source table. Used to
 	// help identify matching records.
 	PrimaryKeyColumnName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration properties for a Find Matches task run.
@@ -1473,6 +1596,8 @@ type FindMatchesTaskRunProperties struct {
 
 	// The job run ID for the Find Matches task run.
 	JobRunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Filters the connection definitions that are returned by the GetConnections API
@@ -1485,6 +1610,8 @@ type GetConnectionsFilter struct {
 	// A criteria string that must match the criteria recorded in the connection
 	// definition for that connection definition to be returned.
 	MatchCriteria []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure for returning a resource policy.
@@ -1501,6 +1628,8 @@ type GluePolicy struct {
 
 	// The date and time at which the policy was last updated.
 	UpdateTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The database and table in the Glue Data Catalog that is used for input or output
@@ -1522,6 +1651,8 @@ type GlueTable struct {
 
 	// The name of the connection to the Glue Data Catalog.
 	ConnectionName *string
+
+	noSmithyDocumentSerde
 }
 
 // A classifier that uses grok patterns.
@@ -1558,6 +1689,8 @@ type GrokClassifier struct {
 
 	// The version of this classifier.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration properties for an importing labels task run.
@@ -1569,6 +1702,8 @@ type ImportLabelsTaskRunProperties struct {
 
 	// Indicates whether to overwrite your existing labels.
 	Replace bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a JDBC data store to crawl.
@@ -1584,6 +1719,8 @@ type JdbcTarget struct {
 
 	// The path of the JDBC target.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a job definition.
@@ -1706,6 +1843,8 @@ type Job struct {
 	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
 	// recommend this worker type for memory-intensive jobs.
 	WorkerType WorkerType
+
+	noSmithyDocumentSerde
 }
 
 // Defines a point that a job can resume processing.
@@ -1731,6 +1870,8 @@ type JobBookmarkEntry struct {
 
 	// The version of the job.
 	Version int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies how job bookmark data should be encrypted.
@@ -1741,6 +1882,8 @@ type JobBookmarksEncryption struct {
 
 	// The Amazon Resource Name (ARN) of the KMS key to be used to encrypt the data.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies code that runs when a job is run.
@@ -1758,6 +1901,8 @@ type JobCommand struct {
 	// Specifies the Amazon Simple Storage Service (Amazon S3) path to a script that
 	// runs a job.
 	ScriptLocation *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a Job node present in the workflow.
@@ -1765,6 +1910,8 @@ type JobNodeDetails struct {
 
 	// The information for the job runs represented by the job node.
 	JobRuns []JobRun
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a job run.
@@ -1894,6 +2041,8 @@ type JobRun struct {
 	// * For the G.2X worker type, each worker
 	// provides 8 vCPU, 32 GB of memory and a 128GB disk, and 1 executor per worker.
 	WorkerType WorkerType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies information used to update an existing job definition. The previous
@@ -2007,6 +2156,8 @@ type JobUpdate struct {
 	// vCPU, 32 GB of memory, 128 GB disk), and provides 1 executor per worker. We
 	// recommend this worker type for memory-intensive jobs.
 	WorkerType WorkerType
+
+	noSmithyDocumentSerde
 }
 
 // A classifier for JSON content.
@@ -2033,6 +2184,8 @@ type JsonClassifier struct {
 
 	// The version of this classifier.
 	Version int64
+
+	noSmithyDocumentSerde
 }
 
 // A partition key pair consisting of a name and a type.
@@ -2047,6 +2200,8 @@ type KeySchemaElement struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration properties for a labeling set generation task run.
@@ -2055,6 +2210,8 @@ type LabelingSetGenerationTaskRunProperties struct {
 	// The Amazon Simple Storage Service (Amazon S3) path where you will generate the
 	// labeling set.
 	OutputS3Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Status and error information about the most recent crawl.
@@ -2077,6 +2234,8 @@ type LastCrawlInfo struct {
 
 	// Status of the last crawl.
 	Status LastCrawlStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies data lineage configuration settings for the crawler.
@@ -2090,6 +2249,8 @@ type LineageConfiguration struct {
 	// * DISABLE: disables data lineage
 	// for the crawler
 	CrawlerLineageSettings CrawlerLineageSettings
+
+	noSmithyDocumentSerde
 }
 
 // The location of resources.
@@ -2103,6 +2264,8 @@ type Location struct {
 
 	// An Amazon Simple Storage Service (Amazon S3) location.
 	S3 []CodeGenNodeArg
+
+	noSmithyDocumentSerde
 }
 
 // Defines column statistics supported for integer data columns.
@@ -2123,6 +2286,8 @@ type LongColumnStatisticsData struct {
 
 	// The lowest value in the column.
 	MinimumValue int64
+
+	noSmithyDocumentSerde
 }
 
 // Defines a mapping.
@@ -2145,6 +2310,8 @@ type MappingEntry struct {
 
 	// The target type.
 	TargetType *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing metadata information for a schema version.
@@ -2158,6 +2325,8 @@ type MetadataInfo struct {
 
 	// Other metadata belonging to the same metadata key.
 	OtherMetadataValueList []OtherMetadataValueListItem
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing a key value pair for metadata.
@@ -2168,6 +2337,8 @@ type MetadataKeyValuePair struct {
 
 	// A metadata key’s corresponding value.
 	MetadataValue *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure for a machine learning transform.
@@ -2309,6 +2480,8 @@ type MLTransform struct {
 	// * MaxCapacity and NumberOfWorkers
 	// must both be at least 1.
 	WorkerType WorkerType
+
+	noSmithyDocumentSerde
 }
 
 // The encryption-at-rest settings of the transform that apply to accessing user
@@ -2328,6 +2501,8 @@ type MLUserDataEncryption struct {
 
 	// The ID for the customer-provided KMS key.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an Amazon DocumentDB or MongoDB data store to crawl.
@@ -2346,6 +2521,8 @@ type MongoDBTarget struct {
 	// false means to sample the records. If no value is specified, the value defaults
 	// to true.
 	ScanAll *bool
+
+	noSmithyDocumentSerde
 }
 
 // A node represents an Glue component (trigger, crawler, or job) on a workflow
@@ -2369,6 +2546,8 @@ type Node struct {
 
 	// The unique Id assigned to the node within the workflow.
 	UniqueId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration properties of a notification.
@@ -2377,6 +2556,8 @@ type NotificationProperty struct {
 	// After a job run starts, the number of minutes to wait before sending a job run
 	// delay notification.
 	NotifyDelayAfter *int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the sort order of a sorted column.
@@ -2392,6 +2573,8 @@ type Order struct {
 	//
 	// This member is required.
 	SortOrder int32
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing other metadata for a schema version belonging to the same
@@ -2404,6 +2587,8 @@ type OtherMetadataValueListItem struct {
 	// The metadata key’s corresponding value for the other metadata belonging to the
 	// same metadata key.
 	MetadataValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a slice of table data.
@@ -2435,6 +2620,8 @@ type Partition struct {
 
 	// The values of the partition.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a partition error.
@@ -2445,6 +2632,8 @@ type PartitionError struct {
 
 	// The values that define the partition.
 	PartitionValues []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure for a partition index.
@@ -2459,6 +2648,8 @@ type PartitionIndex struct {
 	//
 	// This member is required.
 	Keys []string
+
+	noSmithyDocumentSerde
 }
 
 // A descriptor for a partition index in a table.
@@ -2495,6 +2686,8 @@ type PartitionIndexDescriptor struct {
 	// A list of errors that can occur when registering partition indexes for an
 	// existing table.
 	BackfillErrors []BackfillError
+
+	noSmithyDocumentSerde
 }
 
 // The structure used to create and update a partition.
@@ -2518,6 +2711,8 @@ type PartitionInput struct {
 	// ordered in the same order as the partition keys appearing in the Amazon S3
 	// prefix. Otherwise Glue will add the values to the wrong keys.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of values defining partitions.
@@ -2527,6 +2722,8 @@ type PartitionValueList struct {
 	//
 	// This member is required.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the physical requirements for a connection.
@@ -2542,6 +2739,8 @@ type PhysicalConnectionRequirements struct {
 
 	// The subnet ID used by the connection.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 // A job run that was used in the predicate of a conditional trigger that triggered
@@ -2553,6 +2752,8 @@ type Predecessor struct {
 
 	// The job-run ID of the predecessor job run.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines the predicate of the trigger, which determines when it fires.
@@ -2564,6 +2765,8 @@ type Predicate struct {
 	// An optional field if only one condition is listed. If multiple conditions are
 	// listed, then this field is required.
 	Logical Logical
+
+	noSmithyDocumentSerde
 }
 
 // Permissions granted to a principal.
@@ -2574,6 +2777,8 @@ type PrincipalPermissions struct {
 
 	// The principal who is granted permissions.
 	Principal *DataLakePrincipal
+
+	noSmithyDocumentSerde
 }
 
 // Defines a property predicate.
@@ -2587,6 +2792,8 @@ type PropertyPredicate struct {
 
 	// The value of the property.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // When crawling an Amazon S3 data source after the first crawl is complete,
@@ -2602,6 +2809,8 @@ type RecrawlPolicy struct {
 	// specifies crawling the entire dataset again. A value of CRAWL_NEW_FOLDERS_ONLY
 	// specifies crawling only folders that were added since the last crawler run.
 	RecrawlBehavior RecrawlBehavior
+
+	noSmithyDocumentSerde
 }
 
 // A wrapper structure that may contain the registry name and Amazon Resource Name
@@ -2615,6 +2824,8 @@ type RegistryId struct {
 	// Name of the registry. Used only for lookup. One of RegistryArn or RegistryName
 	// has to be provided.
 	RegistryName *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing the details for a registry.
@@ -2637,6 +2848,8 @@ type RegistryListItem struct {
 
 	// The date the registry was updated.
 	UpdatedTime *string
+
+	noSmithyDocumentSerde
 }
 
 // The URIs for function resources.
@@ -2647,6 +2860,8 @@ type ResourceUri struct {
 
 	// The URI for accessing the resource.
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies how Amazon Simple Storage Service (Amazon S3) data should be
@@ -2658,6 +2873,8 @@ type S3Encryption struct {
 
 	// The encryption mode to use for Amazon S3 data.
 	S3EncryptionMode S3EncryptionMode
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a data store in Amazon Simple Storage Service (Amazon S3).
@@ -2679,6 +2896,8 @@ type S3Target struct {
 	// files in a dataset. If not set, all the files are crawled. A valid value is an
 	// integer between 1 and 249.
 	SampleSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // A scheduling object using a cron statement to schedule an event.
@@ -2693,6 +2912,8 @@ type Schedule struct {
 
 	// The state of the schedule.
 	State ScheduleState
+
+	noSmithyDocumentSerde
 }
 
 // A policy that specifies update and deletion behaviors for the crawler.
@@ -2703,6 +2924,8 @@ type SchemaChangePolicy struct {
 
 	// The update behavior when the crawler finds a changed schema.
 	UpdateBehavior UpdateBehavior
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair representing a column and data type that this transform can run
@@ -2715,6 +2938,8 @@ type SchemaColumn struct {
 
 	// The name of the column.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The unique ID of the schema in the Glue schema registry.
@@ -2729,6 +2954,8 @@ type SchemaId struct {
 
 	// The name of the schema. One of SchemaArn or SchemaName has to be provided.
 	SchemaName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains minimal details for a schema.
@@ -2754,6 +2981,8 @@ type SchemaListItem struct {
 
 	// The date and time that a schema was updated.
 	UpdatedTime *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that references a schema stored in the Glue Schema Registry.
@@ -2769,6 +2998,8 @@ type SchemaReference struct {
 
 	// The version number of the schema.
 	SchemaVersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the error details for an operation on a schema version.
@@ -2779,6 +3010,8 @@ type SchemaVersionErrorItem struct {
 
 	// The version number of the schema.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // An object containing the details about a schema version.
@@ -2798,6 +3031,8 @@ type SchemaVersionListItem struct {
 
 	// The version number of the schema.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // A structure containing the schema version information.
@@ -2808,6 +3043,8 @@ type SchemaVersionNumber struct {
 
 	// The version number of the schema.
 	VersionNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a security configuration.
@@ -2821,6 +3058,8 @@ type SecurityConfiguration struct {
 
 	// The name of the security configuration.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines a non-overlapping region of a table's partitions, allowing multiple
@@ -2837,6 +3076,8 @@ type Segment struct {
 	//
 	// This member is required.
 	TotalSegments int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a serialization/deserialization program (SerDe) that serves as
@@ -2852,6 +3093,8 @@ type SerDeInfo struct {
 	// Usually the class that implements the SerDe. An example is
 	// org.apache.hadoop.hive.serde2.columnar.ColumnarSerDe.
 	SerializationLibrary *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies skewed values in a table. Skewed values are those that occur with very
@@ -2866,6 +3109,8 @@ type SkewedInfo struct {
 
 	// A list of values that appear so frequently as to be considered skewed.
 	SkewedColumnValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a field to sort by and a sort order.
@@ -2876,6 +3121,8 @@ type SortCriterion struct {
 
 	// An ascending or descending sort.
 	Sort Sort
+
+	noSmithyDocumentSerde
 }
 
 // The batch condition that started the workflow run. Either the number of events
@@ -2888,6 +3135,8 @@ type StartingEventBatchCondition struct {
 
 	// Duration of the batch window in seconds.
 	BatchWindow *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the physical storage of table data.
@@ -2938,6 +3187,8 @@ type StorageDescriptor struct {
 
 	// True if the table data is stored in subdirectories, or False if not.
 	StoredAsSubDirectories bool
+
+	noSmithyDocumentSerde
 }
 
 // Defines column statistics supported for character sequence data values.
@@ -2962,6 +3213,8 @@ type StringColumnStatisticsData struct {
 	//
 	// This member is required.
 	NumberOfNulls int64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of related data organized in columns and rows.
@@ -3031,6 +3284,8 @@ type Table struct {
 
 	// If the table is a view, the original text of the view; otherwise null.
 	ViewOriginalText *string
+
+	noSmithyDocumentSerde
 }
 
 // An error record for table operations.
@@ -3041,6 +3296,8 @@ type TableError struct {
 
 	// The name of the table. For Hive compatibility, this must be entirely lowercase.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that describes a target table for resource linking.
@@ -3054,6 +3311,8 @@ type TableIdentifier struct {
 
 	// The name of the target table.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure used to define a table.
@@ -3104,6 +3363,8 @@ type TableInput struct {
 
 	// If the table is a view, the original text of the view; otherwise null.
 	ViewOriginalText *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a version of a table.
@@ -3115,6 +3376,8 @@ type TableVersion struct {
 	// The ID value that identifies this table version. A VersionId is a string
 	// representation of an integer. Each version is incremented by 1.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // An error record for table-version operations.
@@ -3129,6 +3392,8 @@ type TableVersionError struct {
 	// The ID value of the version in question. A VersionID is a string representation
 	// of an integer. Each version is incremented by 1.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The sampling parameters that are associated with the machine learning transform.
@@ -3163,6 +3428,8 @@ type TaskRun struct {
 
 	// The unique identifier for the transform.
 	TransformId *string
+
+	noSmithyDocumentSerde
 }
 
 // The criteria that are used to filter the task runs for the machine learning
@@ -3180,6 +3447,8 @@ type TaskRunFilterCriteria struct {
 
 	// The type of task run.
 	TaskRunType TaskType
+
+	noSmithyDocumentSerde
 }
 
 // The configuration properties for the task run.
@@ -3199,6 +3468,8 @@ type TaskRunProperties struct {
 
 	// The type of task run.
 	TaskType TaskType
+
+	noSmithyDocumentSerde
 }
 
 // The sorting criteria that are used to sort the list of task runs for the machine
@@ -3216,6 +3487,8 @@ type TaskRunSortCriteria struct {
 	//
 	// This member is required.
 	SortDirection SortDirectionType
+
+	noSmithyDocumentSerde
 }
 
 // The encryption-at-rest settings of the transform that apply to accessing user
@@ -3230,6 +3503,8 @@ type TransformEncryption struct {
 
 	// The name of the security configuration.
 	TaskRunSecurityConfigurationName *string
+
+	noSmithyDocumentSerde
 }
 
 // The criteria used to filter the machine learning transforms.
@@ -3272,6 +3547,8 @@ type TransformFilterCriteria struct {
 	// The type of machine learning transform that is used to filter the machine
 	// learning transforms.
 	TransformType TransformType
+
+	noSmithyDocumentSerde
 }
 
 // The algorithm-specific parameters that are associated with the machine learning
@@ -3287,6 +3564,8 @@ type TransformParameters struct {
 
 	// The parameters for the find matches algorithm.
 	FindMatchesParameters *FindMatchesParameters
+
+	noSmithyDocumentSerde
 }
 
 // The sorting criteria that are associated with the machine learning transform.
@@ -3303,6 +3582,8 @@ type TransformSortCriteria struct {
 	//
 	// This member is required.
 	SortDirection SortDirectionType
+
+	noSmithyDocumentSerde
 }
 
 // Information about a specific trigger.
@@ -3342,6 +3623,8 @@ type Trigger struct {
 
 	// The name of the workflow associated with the trigger.
 	WorkflowName *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a Trigger node present in the workflow.
@@ -3349,6 +3632,8 @@ type TriggerNodeDetails struct {
 
 	// The information of the trigger represented by the trigger node.
 	Trigger *Trigger
+
+	noSmithyDocumentSerde
 }
 
 // A structure used to provide information used to update a trigger. This object
@@ -3377,6 +3662,8 @@ type TriggerUpdate struct {
 	// For example, to run something every day at 12:15 UTC, you would specify: cron(15
 	// 12 * * ? *).
 	Schedule *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a custom CSV classifier to be updated.
@@ -3406,6 +3693,8 @@ type UpdateCsvClassifierRequest struct {
 	// A custom symbol to denote what combines content into a single column value. It
 	// must be different from the column delimiter.
 	QuoteSymbol *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a grok classifier to update when passed to UpdateClassifier.
@@ -3425,6 +3714,8 @@ type UpdateGrokClassifierRequest struct {
 
 	// The grok pattern used by this classifier.
 	GrokPattern *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a JSON classifier to be updated.
@@ -3440,6 +3731,8 @@ type UpdateJsonClassifierRequest struct {
 	// Classifiers
 	// (https://docs.aws.amazon.com/glue/latest/dg/custom-classifier.html#custom-classifier-json).
 	JsonPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an XML classifier to be updated.
@@ -3458,6 +3751,8 @@ type UpdateXMLClassifierRequest struct {
 	// empty row element that contains only attributes can be parsed as long as it ends
 	// with a closing tag (for example,  is okay, but  is not).
 	RowTag *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the equivalent of a Hive user-defined function (UDF) definition.
@@ -3486,6 +3781,8 @@ type UserDefinedFunction struct {
 
 	// The resource URIs for the function.
 	ResourceUris []ResourceUri
+
+	noSmithyDocumentSerde
 }
 
 // A structure used to create or update a user-defined function.
@@ -3505,6 +3802,8 @@ type UserDefinedFunctionInput struct {
 
 	// The resource URIs for the function.
 	ResourceUris []ResourceUri
+
+	noSmithyDocumentSerde
 }
 
 // A workflow is a collection of multiple dependent Glue jobs and crawlers that are
@@ -3541,6 +3840,8 @@ type Workflow struct {
 
 	// The name of the workflow.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A workflow graph represents the complete workflow containing all the Glue
@@ -3554,6 +3855,8 @@ type WorkflowGraph struct {
 
 	// A list of the the Glue components belong to the workflow represented as nodes.
 	Nodes []Node
+
+	noSmithyDocumentSerde
 }
 
 // A workflow run is an execution of a workflow providing all the runtime
@@ -3595,6 +3898,8 @@ type WorkflowRun struct {
 
 	// The workflow run properties which were set during the run.
 	WorkflowRunProperties map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Workflow run statistics provides statistics about the workflow run.
@@ -3617,6 +3922,8 @@ type WorkflowRunStatistics struct {
 
 	// Total number of Actions in the workflow run.
 	TotalActions int32
+
+	noSmithyDocumentSerde
 }
 
 // A classifier for XML content.
@@ -3646,4 +3953,8 @@ type XMLClassifier struct {
 
 	// The version of this classifier.
 	Version int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

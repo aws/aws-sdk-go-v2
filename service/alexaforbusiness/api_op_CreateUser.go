@@ -49,6 +49,8 @@ type CreateUserInput struct {
 
 	// The tags for the user.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateUserOutput struct {
@@ -58,6 +60,8 @@ type CreateUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

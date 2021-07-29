@@ -39,6 +39,8 @@ type ExecuteTransactionInput struct {
 	// Set this value to get remaining results, if NextToken was returned in the
 	// statement response.
 	ClientRequestToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ExecuteTransactionOutput struct {
@@ -48,6 +50,8 @@ type ExecuteTransactionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteTransactionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -12,6 +12,8 @@ import (
 // GetShardIterator action.
 type ExpiredIteratorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredIteratorException) Error() string {
@@ -29,6 +31,8 @@ func (e *ExpiredIteratorException) ErrorFault() smithy.ErrorFault { return smith
 // An error occurred on the server side.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -53,6 +57,8 @@ func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // concurrent operations. There is a soft account quota of 256 tables.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -71,6 +77,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // not be specified correctly, or its status might not be ACTIVE.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -99,6 +107,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // This causes the iterator to access a record that no longer exists.
 type TrimmedDataAccessException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrimmedDataAccessException) Error() string {

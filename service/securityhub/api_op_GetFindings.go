@@ -48,6 +48,8 @@ type GetFindingsInput struct {
 
 	// The finding attributes used to sort the list of returned findings.
 	SortCriteria []types.SortCriterion
+
+	noSmithyDocumentSerde
 }
 
 type GetFindingsOutput struct {
@@ -62,6 +64,8 @@ type GetFindingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFindingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

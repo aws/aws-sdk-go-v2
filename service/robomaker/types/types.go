@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -22,6 +23,8 @@ type BatchPolicy struct {
 	// other reason, the failed pending requests will be moved to the failed list and
 	// the batch status will be TimedOut.
 	TimeoutInSeconds *int64
+
+	noSmithyDocumentSerde
 }
 
 // Compute information for the simulation job.
@@ -32,6 +35,8 @@ type Compute struct {
 	// and 2GB of memory. You are only billed for the SU utilization you consume up to
 	// the maximim value provided. The default is 15.
 	SimulationUnitLimit *int32
+
+	noSmithyDocumentSerde
 }
 
 // Compute information for the simulation job
@@ -42,6 +47,8 @@ type ComputeResponse struct {
 	// and 2GB of memory. You are only billed for the SU utilization you consume up to
 	// the maximim value provided. The default is 15.
 	SimulationUnitLimit *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a data source.
@@ -55,6 +62,8 @@ type DataSource struct {
 
 	// The list of S3 keys identifying the data source files.
 	S3Keys []S3KeyOutput
+
+	noSmithyDocumentSerde
 }
 
 // Information about a data source.
@@ -74,6 +83,8 @@ type DataSourceConfig struct {
 	//
 	// This member is required.
 	S3Keys []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment application configuration.
@@ -93,6 +104,8 @@ type DeploymentApplicationConfig struct {
 	//
 	// This member is required.
 	LaunchConfig *DeploymentLaunchConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment configuration.
@@ -110,6 +123,8 @@ type DeploymentConfig struct {
 	// The amount of time, in seconds, to wait for deployment to a single robot to
 	// complete. Choose a time between 1 minute and 7 days. The default is 5 hours.
 	RobotDeploymentTimeoutInSeconds *int64
+
+	noSmithyDocumentSerde
 }
 
 // Information about a deployment job.
@@ -138,6 +153,8 @@ type DeploymentJob struct {
 
 	// The status of the deployment job.
 	Status DeploymentStatus
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for a deployment launch.
@@ -164,6 +181,8 @@ type DeploymentLaunchConfig struct {
 	// The deployment pre-launch file. This file will be executed prior to the launch
 	// file.
 	PreLaunchFile *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a failed create simulation job request.
@@ -180,6 +199,8 @@ type FailedCreateSimulationJobRequest struct {
 
 	// The simulation job request.
 	Request *SimulationJobRequest
+
+	noSmithyDocumentSerde
 }
 
 // Information about worlds that failed.
@@ -190,6 +211,8 @@ type FailureSummary struct {
 
 	// The total number of failures.
 	TotalFailureCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a filter.
@@ -200,6 +223,8 @@ type Filter struct {
 
 	// A list of values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about worlds that finished.
@@ -213,6 +238,8 @@ type FinishedWorldsSummary struct {
 
 	// A list of worlds that succeeded.
 	SucceededWorlds []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a fleet.
@@ -235,6 +262,8 @@ type Fleet struct {
 
 	// The name of the fleet.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a launch configuration.
@@ -261,6 +290,8 @@ type LaunchConfig struct {
 	// interact with your application as it is running in the simulation. You must
 	// configure and launch the component. It must have a graphical user interface.
 	StreamUI bool
+
+	noSmithyDocumentSerde
 }
 
 // The logging configuration.
@@ -270,6 +301,8 @@ type LoggingConfig struct {
 	//
 	// This member is required.
 	RecordAllRosTopics *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a network interface.
@@ -283,6 +316,8 @@ type NetworkInterface struct {
 
 	// The IPv4 public address of the network interface.
 	PublicIpAddress *string
+
+	noSmithyDocumentSerde
 }
 
 // The output location.
@@ -293,6 +328,8 @@ type OutputLocation struct {
 
 	// The S3 folder in the s3Bucket where output files will be placed.
 	S3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for port forwarding.
@@ -300,6 +337,8 @@ type PortForwardingConfig struct {
 
 	// The port mappings for the configuration.
 	PortMappings []PortMapping
+
+	noSmithyDocumentSerde
 }
 
 // An object representing a port mapping.
@@ -318,6 +357,8 @@ type PortMapping struct {
 
 	// A Boolean indicating whether to enable this port mapping on public IP.
 	EnableOnPublicIp bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the progress of a deployment job.
@@ -341,6 +382,8 @@ type ProgressDetail struct {
 
 	// The Amazon Resource Name (ARN) of the deployment job.
 	TargetResource *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a rendering engine.
@@ -351,6 +394,8 @@ type RenderingEngine struct {
 
 	// The version of the rendering engine.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a robot.
@@ -382,6 +427,8 @@ type Robot struct {
 
 	// The status of the robot.
 	Status RobotStatus
+
+	noSmithyDocumentSerde
 }
 
 // Application configuration information for a robot.
@@ -415,6 +462,8 @@ type RobotApplicationConfig struct {
 	// topics will be recorded. If you set this value, you must specify an
 	// outputLocation.
 	UseDefaultUploadConfigurations *bool
+
+	noSmithyDocumentSerde
 }
 
 // Summary information for a robot application.
@@ -435,6 +484,8 @@ type RobotApplicationSummary struct {
 
 	// The version of the robot application.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a robot deployment.
@@ -460,6 +511,8 @@ type RobotDeployment struct {
 
 	// The status of the robot deployment.
 	Status RobotStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about a robot software suite (ROS distribution).
@@ -470,6 +523,8 @@ type RobotSoftwareSuite struct {
 
 	// The version of the robot software suite (ROS distribution).
 	Version RobotSoftwareSuiteVersionType
+
+	noSmithyDocumentSerde
 }
 
 // Information about S3 keys.
@@ -480,6 +535,8 @@ type S3KeyOutput struct {
 
 	// The S3 key.
 	S3Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an S3 object.
@@ -497,6 +554,8 @@ type S3Object struct {
 
 	// The etag of the object.
 	Etag *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a simulation application configuration.
@@ -533,6 +592,8 @@ type SimulationApplicationConfig struct {
 
 	// A list of world configurations.
 	WorldConfigs []WorldConfig
+
+	noSmithyDocumentSerde
 }
 
 // Summary information for a simulation application.
@@ -556,6 +617,8 @@ type SimulationApplicationSummary struct {
 
 	// The version of the simulation application.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a simulation job.
@@ -630,6 +693,8 @@ type SimulationJob struct {
 
 	// VPC configuration information.
 	VpcConfig *VPCConfigResponse
+
+	noSmithyDocumentSerde
 }
 
 // Information about a simulation job batch.
@@ -672,6 +737,8 @@ type SimulationJobBatchSummary struct {
 	// failing request, the batch status will be TimedOut. TimedOut The simulation
 	// batch job timed out.
 	Status SimulationJobBatchStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about a simulation job request.
@@ -725,6 +792,8 @@ type SimulationJobRequest struct {
 	// identifying the list of security group IDs and subnet IDs. These must belong to
 	// the same VPC. You must provide at least one security group and two subnet IDs.
 	VpcConfig *VPCConfig
+
+	noSmithyDocumentSerde
 }
 
 // Summary information for a simulation job.
@@ -751,6 +820,8 @@ type SimulationJobSummary struct {
 
 	// The status of the simulation job.
 	Status SimulationJobStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about a simulation software suite.
@@ -761,6 +832,8 @@ type SimulationSoftwareSuite struct {
 
 	// The version of the simulation software suite.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a source.
@@ -777,6 +850,8 @@ type Source struct {
 
 	// The s3 object key.
 	S3Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a source configuration.
@@ -790,6 +865,8 @@ type SourceConfig struct {
 
 	// The s3 object key.
 	S3Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a template location.
@@ -804,6 +881,8 @@ type TemplateLocation struct {
 	//
 	// This member is required.
 	S3Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information for a template.
@@ -820,6 +899,8 @@ type TemplateSummary struct {
 
 	// The name of the template.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tool. Tools are used in a simulation job.
@@ -849,6 +930,8 @@ type Tool struct {
 	// tool as it is running in the simulation. It must have a graphical user
 	// interface. The default is False.
 	StreamUI *bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides upload configuration information. Files are uploaded from the
@@ -884,6 +967,8 @@ type UploadConfiguration struct {
 	//
 	// This member is required.
 	UploadBehavior UploadBehavior
+
+	noSmithyDocumentSerde
 }
 
 // If your simulation job accesses resources in a VPC, you provide this parameter
@@ -901,6 +986,8 @@ type VPCConfig struct {
 
 	// A list of one or more security groups IDs in your VPC.
 	SecurityGroups []string
+
+	noSmithyDocumentSerde
 }
 
 // VPC configuration associated with your simulation job.
@@ -917,6 +1004,8 @@ type VPCConfigResponse struct {
 
 	// The VPC ID associated with your simulation job.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for a world.
@@ -924,6 +1013,8 @@ type WorldConfig struct {
 
 	// The world generated by Simulation WorldForge.
 	World *string
+
+	noSmithyDocumentSerde
 }
 
 // The number of worlds that will be created. You can configure the number of
@@ -940,6 +1031,8 @@ type WorldCount struct {
 
 	// The number of unique interiors per floorplan.
 	InteriorCountPerFloorplan *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a world export job.
@@ -961,6 +1054,8 @@ type WorldExportJobSummary struct {
 
 	// A list of worlds.
 	Worlds []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a failed world.
@@ -980,6 +1075,8 @@ type WorldFailure struct {
 	// The sample reason why the world failed. World errors are aggregated. A sample is
 	// used as the sampleFailureReason.
 	SampleFailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a world generator job.
@@ -1011,6 +1108,8 @@ type WorldGenerationJobSummary struct {
 
 	// Information about the world count.
 	WorldCount *WorldCount
+
+	noSmithyDocumentSerde
 }
 
 // Information about a world.
@@ -1027,4 +1126,8 @@ type WorldSummary struct {
 
 	// The Amazon Resource Name (arn) of the world template.
 	Template *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

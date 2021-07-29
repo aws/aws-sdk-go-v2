@@ -37,6 +37,8 @@ type GetDeviceInput struct {
 
 	// The access token.
 	AccessToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Gets the device response.
@@ -49,6 +51,8 @@ type GetDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

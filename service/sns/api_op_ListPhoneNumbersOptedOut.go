@@ -39,6 +39,8 @@ type ListPhoneNumbersOptedOutInput struct {
 	// A NextToken string is used when you call the ListPhoneNumbersOptedOut action to
 	// retrieve additional records that are available after the first page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The response from the ListPhoneNumbersOptedOut action.
@@ -54,6 +56,8 @@ type ListPhoneNumbersOptedOutOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPhoneNumbersOptedOutMiddlewares(stack *middleware.Stack, options Options) (err error) {

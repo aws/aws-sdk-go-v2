@@ -39,6 +39,8 @@ type GetCloudFormationTemplateInput struct {
 	//
 	// This member is required.
 	TemplateId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCloudFormationTemplateOutput struct {
@@ -70,6 +72,8 @@ type GetCloudFormationTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCloudFormationTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

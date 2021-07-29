@@ -37,11 +37,15 @@ type StopTrainingJobInput struct {
 	//
 	// This member is required.
 	TrainingJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopTrainingJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopTrainingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

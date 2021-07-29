@@ -48,6 +48,8 @@ type ListIncidentRecordsInput struct {
 
 	// The pagination token to continue to the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListIncidentRecordsOutput struct {
@@ -62,6 +64,8 @@ type ListIncidentRecordsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIncidentRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

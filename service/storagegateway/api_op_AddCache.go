@@ -45,6 +45,8 @@ type AddCacheInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type AddCacheOutput struct {
@@ -55,6 +57,8 @@ type AddCacheOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

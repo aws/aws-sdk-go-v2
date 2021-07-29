@@ -38,6 +38,8 @@ type DeleteTrafficMirrorSessionInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTrafficMirrorSessionOutput struct {
@@ -47,6 +49,8 @@ type DeleteTrafficMirrorSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTrafficMirrorSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

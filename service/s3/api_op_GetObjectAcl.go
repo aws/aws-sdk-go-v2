@@ -77,6 +77,8 @@ type GetObjectAclInput struct {
 
 	// VersionId used to reference a specific version of the object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectAclOutput struct {
@@ -93,6 +95,8 @@ type GetObjectAclOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectAclMiddlewares(stack *middleware.Stack, options Options) (err error) {

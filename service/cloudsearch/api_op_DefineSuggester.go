@@ -51,6 +51,8 @@ type DefineSuggesterInput struct {
 	//
 	// This member is required.
 	Suggester *types.Suggester
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DefineSuggester request. Contains the status of the
@@ -64,6 +66,8 @@ type DefineSuggesterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDefineSuggesterMiddlewares(stack *middleware.Stack, options Options) (err error) {

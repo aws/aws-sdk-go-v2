@@ -42,6 +42,8 @@ type UpdateTestGridProjectInput struct {
 
 	// The VPC security groups and subnets that are attached to a project.
 	VpcConfig *types.TestGridVpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTestGridProjectOutput struct {
@@ -51,6 +53,8 @@ type UpdateTestGridProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTestGridProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

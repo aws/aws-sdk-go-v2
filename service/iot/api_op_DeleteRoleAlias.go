@@ -32,11 +32,15 @@ type DeleteRoleAliasInput struct {
 	//
 	// This member is required.
 	RoleAlias *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRoleAliasOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRoleAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

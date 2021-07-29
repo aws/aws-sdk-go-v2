@@ -35,6 +35,8 @@ type DescribePlatformVersionInput struct {
 
 	// The ARN of the platform version.
 	PlatformArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePlatformVersionOutput struct {
@@ -44,6 +46,8 @@ type DescribePlatformVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePlatformVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

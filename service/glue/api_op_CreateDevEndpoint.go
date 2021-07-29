@@ -124,6 +124,8 @@ type CreateDevEndpointInput struct {
 	// configuration, the Spark drivers for the development endpoint will run on 4
 	// vCPU, 16 GB of memory, and a 64 GB disk.
 	WorkerType types.WorkerType
+
+	noSmithyDocumentSerde
 }
 
 type CreateDevEndpointOutput struct {
@@ -205,6 +207,8 @@ type CreateDevEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDevEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

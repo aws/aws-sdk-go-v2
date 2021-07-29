@@ -48,11 +48,15 @@ type UpdateDatastoreInput struct {
 	// How long, in days, message data is kept for the data store. The retention period
 	// cannot be updated if the data store's S3 storage is customer-managed.
 	RetentionPeriod *types.RetentionPeriod
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDatastoreOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDatastoreMiddlewares(stack *middleware.Stack, options Options) (err error) {

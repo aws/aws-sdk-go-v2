@@ -72,6 +72,8 @@ type StartLabelDetectionInput struct {
 	// The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the
 	// completion status of the label detection operation to.
 	NotificationChannel *types.NotificationChannel
+
+	noSmithyDocumentSerde
 }
 
 type StartLabelDetectionOutput struct {
@@ -82,6 +84,8 @@ type StartLabelDetectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartLabelDetectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

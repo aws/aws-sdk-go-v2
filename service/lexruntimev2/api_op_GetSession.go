@@ -53,6 +53,8 @@ type GetSessionInput struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSessionOutput struct {
@@ -79,6 +81,8 @@ type GetSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

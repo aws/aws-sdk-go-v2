@@ -52,6 +52,8 @@ type DescribeSourceRegionsInput struct {
 	//
 	// * Must specify a valid Amazon Web Services Region name.
 	RegionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of a successful invocation of the DescribeSourceRegions
@@ -70,6 +72,8 @@ type DescribeSourceRegionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSourceRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

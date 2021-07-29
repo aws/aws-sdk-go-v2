@@ -47,6 +47,8 @@ type UpdateAccountCustomizationInput struct {
 
 	// The namespace that you want to update QuickSight customizations for.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccountCustomizationOutput struct {
@@ -73,6 +75,8 @@ type UpdateAccountCustomizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccountCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type RestartSimulationJobInput struct {
 	//
 	// This member is required.
 	Job *string
+
+	noSmithyDocumentSerde
 }
 
 type RestartSimulationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestartSimulationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

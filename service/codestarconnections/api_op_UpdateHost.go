@@ -41,11 +41,15 @@ type UpdateHostInput struct {
 	// the infrastructure to be represented by the host must already be connected to
 	// the VPC.
 	VpcConfiguration *types.VpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateHostOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateHostMiddlewares(stack *middleware.Stack, options Options) (err error) {

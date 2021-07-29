@@ -40,6 +40,8 @@ type StopDominantLanguageDetectionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopDominantLanguageDetectionJobOutput struct {
@@ -53,6 +55,8 @@ type StopDominantLanguageDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopDominantLanguageDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type PromoteReadReplicaDBClusterInput struct {
 	//
 	// This member is required.
 	DBClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type PromoteReadReplicaDBClusterOutput struct {
@@ -43,6 +45,8 @@ type PromoteReadReplicaDBClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPromoteReadReplicaDBClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

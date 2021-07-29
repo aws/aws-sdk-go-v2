@@ -42,6 +42,8 @@ type ListLayersInput struct {
 
 	// The maximum number of layers to return.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListLayersOutput struct {
@@ -54,6 +56,8 @@ type ListLayersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLayersMiddlewares(stack *middleware.Stack, options Options) (err error) {

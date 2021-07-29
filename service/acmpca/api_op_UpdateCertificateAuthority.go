@@ -48,11 +48,15 @@ type UpdateCertificateAuthorityInput struct {
 
 	// Status of your private CA.
 	Status types.CertificateAuthorityStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

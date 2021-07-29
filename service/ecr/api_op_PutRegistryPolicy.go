@@ -40,6 +40,8 @@ type PutRegistryPolicyInput struct {
 	//
 	// This member is required.
 	PolicyText *string
+
+	noSmithyDocumentSerde
 }
 
 type PutRegistryPolicyOutput struct {
@@ -52,6 +54,8 @@ type PutRegistryPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRegistryPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DescribeJobRunInput struct {
 	//
 	// This member is required.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeJobRunOutput struct {
@@ -100,6 +102,8 @@ type DescribeJobRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

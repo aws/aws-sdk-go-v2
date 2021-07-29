@@ -75,6 +75,8 @@ type ListStackSetsInput struct {
 
 	// The status of the stack sets that you want to get summary information about.
 	Status types.StackSetStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListStackSetsOutput struct {
@@ -91,6 +93,8 @@ type ListStackSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStackSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

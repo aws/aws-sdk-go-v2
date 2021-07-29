@@ -34,6 +34,8 @@ type DescribeEdgePackagingJobInput struct {
 	//
 	// This member is required.
 	EdgePackagingJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEdgePackagingJobOutput struct {
@@ -93,6 +95,8 @@ type DescribeEdgePackagingJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEdgePackagingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

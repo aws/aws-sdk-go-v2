@@ -33,6 +33,8 @@ type DescribeAcceleratorInput struct {
 	//
 	// This member is required.
 	AcceleratorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAcceleratorOutput struct {
@@ -42,6 +44,8 @@ type DescribeAcceleratorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type DataPoint struct {
 	//
 	// This member is required.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // A logical grouping of Performance Insights metrics for a related subject area.
@@ -122,6 +125,8 @@ type DimensionGroup struct {
 
 	// The maximum number of items to fetch for this dimension group.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 // An array of descriptions and aggregated values for each dimension within a
@@ -136,6 +141,8 @@ type DimensionKeyDescription struct {
 
 	// The aggregated metric value for the dimension(s), over the requested time range.
 	Total *float64
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes the details for a specified dimension.
@@ -162,6 +169,8 @@ type DimensionKeyDetail struct {
 	// The value of the dimension detail data. For the db.sql.statement dimension, this
 	// value is either the full or truncated SQL query, depending on the return status.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A time-ordered series of data points, corresponding to a dimension of a
@@ -174,6 +183,8 @@ type MetricKeyDataPoints struct {
 
 	// The dimension(s) to which the data points apply.
 	Key *ResponseResourceMetricKey
+
+	noSmithyDocumentSerde
 }
 
 // A single query to be processed. You must provide the metric to query. If no
@@ -218,6 +229,8 @@ type MetricQuery struct {
 	// dimensions within that group. You can also request that Performance Insights
 	// return a limited number of values for a dimension.
 	GroupBy *DimensionGroup
+
+	noSmithyDocumentSerde
 }
 
 // If PartitionBy was specified in a DescribeDimensionKeys request, the dimensions
@@ -228,6 +241,8 @@ type ResponsePartitionKey struct {
 	//
 	// This member is required.
 	Dimensions map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // An object describing a Performance Insights metric and one or more dimensions
@@ -256,4 +271,8 @@ type ResponseResourceMetricKey struct {
 
 	// The valid dimensions for the metric.
 	Dimensions map[string]string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

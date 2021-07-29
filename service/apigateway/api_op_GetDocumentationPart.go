@@ -38,6 +38,8 @@ type GetDocumentationPartInput struct {
 	//
 	// This member is required.
 	RestApiId *string
+
+	noSmithyDocumentSerde
 }
 
 // A documentation part for a targeted API entity. A documentation part consists of
@@ -75,6 +77,8 @@ type GetDocumentationPartOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDocumentationPartMiddlewares(stack *middleware.Stack, options Options) (err error) {

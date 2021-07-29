@@ -59,6 +59,8 @@ type DeleteAnalysisInput struct {
 	// deletes the analysis. You can't use this parameter with the
 	// ForceDeleteWithoutRecovery option in the same API call. The default value is 30.
 	RecoveryWindowInDays *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAnalysisOutput struct {
@@ -80,6 +82,8 @@ type DeleteAnalysisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {

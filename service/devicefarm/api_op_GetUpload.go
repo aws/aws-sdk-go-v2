@@ -34,6 +34,8 @@ type GetUploadInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a get upload request.
@@ -44,6 +46,8 @@ type GetUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

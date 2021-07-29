@@ -40,6 +40,8 @@ type DescribePermissionSetInput struct {
 	//
 	// This member is required.
 	PermissionSetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePermissionSetOutput struct {
@@ -49,6 +51,8 @@ type DescribePermissionSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

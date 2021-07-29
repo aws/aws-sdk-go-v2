@@ -39,6 +39,8 @@ type GetMappingInput struct {
 
 	// A list of target tables.
 	Sinks []types.CatalogEntry
+
+	noSmithyDocumentSerde
 }
 
 type GetMappingOutput struct {
@@ -50,6 +52,8 @@ type GetMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,11 +69,15 @@ type StartDeliveryStreamEncryptionInput struct {
 	// Used to specify the type and Amazon Resource Name (ARN) of the KMS key needed
 	// for Server-Side Encryption (SSE).
 	DeliveryStreamEncryptionConfigurationInput *types.DeliveryStreamEncryptionConfigurationInput
+
+	noSmithyDocumentSerde
 }
 
 type StartDeliveryStreamEncryptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDeliveryStreamEncryptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

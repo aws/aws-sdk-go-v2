@@ -13,6 +13,8 @@ type AccessDeniedException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -37,6 +39,8 @@ type HumanLoopQuotaExceededException struct {
 	ServiceCode  *string
 	Code         *string
 	Logref       *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HumanLoopQuotaExceededException) Error() string {
@@ -61,6 +65,8 @@ type IdempotentParameterMismatchException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotentParameterMismatchException) Error() string {
@@ -88,6 +94,8 @@ type ImageTooLargeException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ImageTooLargeException) Error() string {
@@ -108,6 +116,8 @@ type InternalServerError struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {
@@ -128,6 +138,8 @@ type InvalidImageFormatException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidImageFormatException) Error() string {
@@ -148,6 +160,8 @@ type InvalidPaginationTokenException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPaginationTokenException) Error() string {
@@ -171,6 +185,8 @@ type InvalidParameterException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -191,6 +207,8 @@ type InvalidS3ObjectException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3ObjectException) Error() string {
@@ -215,6 +233,8 @@ type LimitExceededException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -236,6 +256,8 @@ type ProvisionedThroughputExceededException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProvisionedThroughputExceededException) Error() string {
@@ -260,6 +282,8 @@ type ResourceAlreadyExistsException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -280,6 +304,8 @@ type ResourceInUseException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -300,6 +326,8 @@ type ResourceNotFoundException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -321,6 +349,8 @@ type ResourceNotReadyException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotReadyException) Error() string {
@@ -342,6 +372,8 @@ type ServiceQuotaExceededException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -363,6 +395,8 @@ type ThrottlingException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -384,6 +418,8 @@ type VideoTooLargeException struct {
 
 	Code   *string
 	Logref *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *VideoTooLargeException) Error() string {

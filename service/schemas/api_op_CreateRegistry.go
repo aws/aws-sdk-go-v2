@@ -38,6 +38,8 @@ type CreateRegistryInput struct {
 
 	// Tags to associate with the registry.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateRegistryOutput struct {
@@ -56,6 +58,8 @@ type CreateRegistryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRegistryMiddlewares(stack *middleware.Stack, options Options) (err error) {

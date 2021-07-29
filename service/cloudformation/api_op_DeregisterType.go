@@ -56,11 +56,15 @@ type DeregisterTypeInput struct {
 	// the end of the Amazon Resource Name (ARN) assigned to the extension version when
 	// it is registered.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

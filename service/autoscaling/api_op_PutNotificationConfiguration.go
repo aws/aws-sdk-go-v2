@@ -52,11 +52,15 @@ type PutNotificationConfigurationInput struct {
 	//
 	// This member is required.
 	TopicARN *string
+
+	noSmithyDocumentSerde
 }
 
 type PutNotificationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

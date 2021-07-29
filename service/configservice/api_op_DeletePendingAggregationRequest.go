@@ -38,11 +38,15 @@ type DeletePendingAggregationRequestInput struct {
 	//
 	// This member is required.
 	RequesterAwsRegion *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePendingAggregationRequestOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePendingAggregationRequestMiddlewares(stack *middleware.Stack, options Options) (err error) {

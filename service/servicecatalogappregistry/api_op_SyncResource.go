@@ -42,6 +42,8 @@ type SyncResourceInput struct {
 	//
 	// This member is required.
 	ResourceType types.ResourceType
+
+	noSmithyDocumentSerde
 }
 
 type SyncResourceOutput struct {
@@ -58,6 +60,8 @@ type SyncResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSyncResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

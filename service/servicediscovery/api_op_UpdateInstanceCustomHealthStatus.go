@@ -50,11 +50,15 @@ type UpdateInstanceCustomHealthStatusInput struct {
 	//
 	// This member is required.
 	Status types.CustomHealthStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInstanceCustomHealthStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInstanceCustomHealthStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

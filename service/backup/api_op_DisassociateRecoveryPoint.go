@@ -42,11 +42,15 @@ type DisassociateRecoveryPointInput struct {
 	//
 	// This member is required.
 	RecoveryPointArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateRecoveryPointOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateRecoveryPointMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type StartPolicyGenerationInput struct {
 	// A CloudTrailDetails object that contains details about a Trail that you want to
 	// analyze to generate policies.
 	CloudTrailDetails *types.CloudTrailDetails
+
+	noSmithyDocumentSerde
 }
 
 type StartPolicyGenerationOutput struct {
@@ -60,6 +62,8 @@ type StartPolicyGenerationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartPolicyGenerationMiddlewares(stack *middleware.Stack, options Options) (err error) {

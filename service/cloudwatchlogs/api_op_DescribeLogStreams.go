@@ -64,6 +64,8 @@ type DescribeLogStreamsInput struct {
 	// updates in less than an hour from ingestion, but in rare situations might take
 	// longer.
 	OrderBy types.OrderBy
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLogStreamsOutput struct {
@@ -76,6 +78,8 @@ type DescribeLogStreamsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLogStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

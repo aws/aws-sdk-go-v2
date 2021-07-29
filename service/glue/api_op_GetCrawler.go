@@ -33,6 +33,8 @@ type GetCrawlerInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCrawlerOutput struct {
@@ -42,6 +44,8 @@ type GetCrawlerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCrawlerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteContactListInput struct {
 	//
 	// This member is required.
 	ContactListName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteContactListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteContactListMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,12 +33,16 @@ type DeleteInputSecurityGroupInput struct {
 	//
 	// This member is required.
 	InputSecurityGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Placeholder documentation for DeleteInputSecurityGroupResponse
 type DeleteInputSecurityGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteInputSecurityGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

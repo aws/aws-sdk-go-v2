@@ -37,6 +37,8 @@ type ResolveAliasInput struct {
 	//
 	// This member is required.
 	AliasId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -52,6 +54,8 @@ type ResolveAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResolveAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

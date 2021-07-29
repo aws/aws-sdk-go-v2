@@ -60,6 +60,8 @@ type InputAndOutputWithHeadersInput struct {
 	HeaderTimestampList []time.Time
 
 	HeaderTrueBool *bool
+
+	noSmithyDocumentSerde
 }
 
 type InputAndOutputWithHeadersOutput struct {
@@ -97,6 +99,8 @@ type InputAndOutputWithHeadersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInputAndOutputWithHeadersMiddlewares(stack *middleware.Stack, options Options) (err error) {

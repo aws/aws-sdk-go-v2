@@ -79,6 +79,8 @@ type StartTopicsDetectionJobInput struct {
 	// information, see Amazon VPC
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/what-is-amazon-vpc.html).
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type StartTopicsDetectionJobOutput struct {
@@ -104,6 +106,8 @@ type StartTopicsDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTopicsDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

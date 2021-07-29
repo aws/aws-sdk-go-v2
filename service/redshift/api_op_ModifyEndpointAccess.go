@@ -38,6 +38,8 @@ type ModifyEndpointAccessInput struct {
 	// The complete list of VPC security groups associated with the endpoint after the
 	// endpoint is modified.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a Redshift-managed VPC endpoint.
@@ -76,6 +78,8 @@ type ModifyEndpointAccessOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyEndpointAccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

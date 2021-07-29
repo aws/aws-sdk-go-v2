@@ -34,6 +34,8 @@ type DescribeTrialComponentInput struct {
 	//
 	// This member is required.
 	TrialComponentName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTrialComponentOutput struct {
@@ -96,6 +98,8 @@ type DescribeTrialComponentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrialComponentMiddlewares(stack *middleware.Stack, options Options) (err error) {

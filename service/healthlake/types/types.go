@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -22,6 +23,8 @@ type DatastoreFilter struct {
 
 	// Allows the user to filter Data Store results by status.
 	DatastoreStatus DatastoreStatus
+
+	noSmithyDocumentSerde
 }
 
 // Displays the properties of the Data Store, including the ID, Arn, name, and the
@@ -68,6 +71,8 @@ type DatastoreProperties struct {
 	// The server-side encryption key configuration for a customer provided encryption
 	// key (CMK).
 	SseConfiguration *SseConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The properties of a FHIR export job, including the ID, ARN, name, and the status
@@ -112,6 +117,8 @@ type ExportJobProperties struct {
 
 	// An explanation of any errors that may have occurred during the export job.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Displays the properties of the import job, including the ID, Arn, Name, and the
@@ -159,6 +166,8 @@ type ImportJobProperties struct {
 
 	// An explanation of any errors that may have occurred during the FHIR import job.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // The input properties for an import job.
@@ -173,6 +182,8 @@ type InputDataConfig interface {
 // Amazon HealthLake.
 type InputDataConfigMemberS3Uri struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*InputDataConfigMemberS3Uri) isInputDataConfig() {}
@@ -189,6 +200,8 @@ type KmsEncryptionConfig struct {
 
 	// The KMS encryption key id/alias used to encrypt the Data Store contents at rest.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // The output data configuration that was supplied when the export job was created.
@@ -202,6 +215,8 @@ type OutputDataConfig interface {
 // The output data configuration that was supplied when the export job was created.
 type OutputDataConfigMemberS3Configuration struct {
 	Value S3Configuration
+
+	noSmithyDocumentSerde
 }
 
 func (*OutputDataConfigMemberS3Configuration) isOutputDataConfig() {}
@@ -214,6 +229,8 @@ type PreloadDataConfig struct {
 	//
 	// This member is required.
 	PreloadDataType PreloadDataType
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of the S3 bucket for either an import or export job. This
@@ -230,6 +247,8 @@ type S3Configuration struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // The server-side encryption key configuration for a customer provided encryption
@@ -240,6 +259,8 @@ type SseConfiguration struct {
 	//
 	// This member is required.
 	KmsEncryptionConfig *KmsEncryptionConfig
+
+	noSmithyDocumentSerde
 }
 
 // A tag is a label consisting of a user-defined key and value. The form for tags
@@ -255,13 +276,19 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isInputDataConfig()  {}

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -31,6 +32,8 @@ type ApprovalThresholdPolicy struct {
 	// ThresholdComparator value of GREATER_THAN, this indicates that 6 YES votes are
 	// required for the proposal to be approved.
 	ThresholdPercentage *int32
+
+	noSmithyDocumentSerde
 }
 
 // An invitation to an AWS account to create a member and join the network. Applies
@@ -76,6 +79,8 @@ type Invitation struct {
 	// The invitee neither created a member nor rejected the invitation before the
 	// ExpirationDate.
 	Status InvitationStatus
+
+	noSmithyDocumentSerde
 }
 
 // An action to invite a specific AWS account to create a member and join the
@@ -87,6 +92,8 @@ type InviteAction struct {
 	//
 	// This member is required.
 	Principal *string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration for logging events.
@@ -94,6 +101,8 @@ type LogConfiguration struct {
 
 	// Indicates whether logging is enabled.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // A collection of log configurations.
@@ -101,6 +110,8 @@ type LogConfigurations struct {
 
 	// Parameters for publishing logs to Amazon CloudWatch Logs.
 	Cloudwatch *LogConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Member configuration properties. Applies only to Hyperledger Fabric.
@@ -178,6 +189,8 @@ type Member struct {
 	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties of the member. Applies only to Hyperledger Fabric.
@@ -225,6 +238,8 @@ type MemberConfiguration struct {
 	// specifying tags during creation, you can specify multiple key-value pairs in a
 	// single request, with an overall maximum of 50 tags added to each resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of Hyperledger Fabric for a member in a Managed Blockchain network
@@ -236,6 +251,8 @@ type MemberFabricAttributes struct {
 
 	// The endpoint used to access the member's certificate authority.
 	CaEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties for Hyperledger Fabric for a member in a Managed
@@ -255,6 +272,8 @@ type MemberFabricConfiguration struct {
 	//
 	// This member is required.
 	AdminUsername *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties for logging events associated with a member of a
@@ -265,6 +284,8 @@ type MemberFabricLogPublishingConfiguration struct {
 	// Certificate Authority (CA). CA logs help you determine when a member in your
 	// account joins the network, or when new peers register with a member CA.
 	CaLogs *LogConfigurations
+
+	noSmithyDocumentSerde
 }
 
 // Attributes relevant to a member for the blockchain framework that the Managed
@@ -274,6 +295,8 @@ type MemberFrameworkAttributes struct {
 	// Attributes of Hyperledger Fabric relevant to a member on a Managed Blockchain
 	// network that uses Hyperledger Fabric.
 	Fabric *MemberFabricAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties relevant to a member for the blockchain framework that
@@ -283,6 +306,8 @@ type MemberFrameworkConfiguration struct {
 	// Attributes of Hyperledger Fabric for a member on a Managed Blockchain network
 	// that uses Hyperledger Fabric.
 	Fabric *MemberFabricConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties for logging events associated with a member of a
@@ -292,6 +317,8 @@ type MemberLogPublishingConfiguration struct {
 	// Configuration properties for logging events associated with a member of a
 	// Managed Blockchain network using the Hyperledger Fabric framework.
 	Fabric *MemberFabricLogPublishingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A summary of configuration properties for a member. Applies only to Hyperledger
@@ -353,6 +380,8 @@ type MemberSummary struct {
 	// the key is inaccessible. When a resource is in this state, we recommend deleting
 	// and recreating the resource.
 	Status MemberStatus
+
+	noSmithyDocumentSerde
 }
 
 // Network configuration properties.
@@ -403,6 +432,8 @@ type Network struct {
 	// Members use the VPC endpoint service name to create a VPC endpoint to access
 	// network resources.
 	VpcEndpointServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of Ethereum for a network.
@@ -417,6 +448,8 @@ type NetworkEthereumAttributes struct {
 	//
 	// * ropsten = 3
 	ChainId *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of Hyperledger Fabric for a network.
@@ -429,6 +462,8 @@ type NetworkFabricAttributes struct {
 
 	// The endpoint of the ordering service for the network.
 	OrderingServiceEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Hyperledger Fabric configuration properties for the network.
@@ -440,6 +475,8 @@ type NetworkFabricConfiguration struct {
 	//
 	// This member is required.
 	Edition Edition
+
+	noSmithyDocumentSerde
 }
 
 // Attributes relevant to the network for the blockchain framework that the network
@@ -453,6 +490,8 @@ type NetworkFrameworkAttributes struct {
 	// Attributes of Hyperledger Fabric for a Managed Blockchain network that uses
 	// Hyperledger Fabric.
 	Fabric *NetworkFabricAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties relevant to the network for the blockchain framework
@@ -462,6 +501,8 @@ type NetworkFrameworkConfiguration struct {
 	// Hyperledger Fabric configuration properties for a Managed Blockchain network
 	// that uses Hyperledger Fabric.
 	Fabric *NetworkFabricConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A summary of network configuration properties.
@@ -493,6 +534,8 @@ type NetworkSummary struct {
 
 	// The current status of the network.
 	Status NetworkStatus
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties of a node.
@@ -585,6 +628,8 @@ type Node struct {
 	// (https://docs.aws.amazon.com/managed-blockchain/latest/hyperledger-fabric-dev/tagging-resources.html)
 	// in the Amazon Managed Blockchain Hyperledger Fabric Developer Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties of a node.
@@ -606,6 +651,8 @@ type NodeConfiguration struct {
 	// an Amazon Managed Blockchain network with Hyperledger Fabric version 1.4 or
 	// later, the default is CouchDB. Applies only to Hyperledger Fabric.
 	StateDB StateDBType
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of an Ethereum node.
@@ -624,6 +671,8 @@ type NodeEthereumAttributes struct {
 	// are authenticated using Signature Version 4
 	// (https://docs.aws.amazon.com/general/latest/gr/signature-version-4.html).
 	WebSocketEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Attributes of Hyperledger Fabric for a peer node on a Hyperledger Fabric network
@@ -637,6 +686,8 @@ type NodeFabricAttributes struct {
 	// The endpoint that identifies the peer node for peer channel-based event
 	// services.
 	PeerEventEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties for logging events associated with a peer node owned by
@@ -655,6 +706,8 @@ type NodeFabricLogPublishingConfiguration struct {
 	// to join channels, enrolls an admin peer, and lists the chaincode instances on a
 	// peer node.
 	PeerLogs *LogConfigurations
+
+	noSmithyDocumentSerde
 }
 
 // Attributes relevant to a node on a Managed Blockchain network for the blockchain
@@ -668,6 +721,8 @@ type NodeFrameworkAttributes struct {
 	// Attributes of Hyperledger Fabric for a peer node on a Managed Blockchain network
 	// that uses Hyperledger Fabric.
 	Fabric *NodeFabricAttributes
+
+	noSmithyDocumentSerde
 }
 
 // Configuration properties for logging events associated with a peer node on a
@@ -678,6 +733,8 @@ type NodeLogPublishingConfiguration struct {
 	// by a member of a Managed Blockchain network using the Hyperledger Fabric
 	// framework.
 	Fabric *NodeFabricLogPublishingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A summary of configuration properties for a node.
@@ -703,6 +760,8 @@ type NodeSummary struct {
 
 	// The status of the node.
 	Status NodeStatus
+
+	noSmithyDocumentSerde
 }
 
 // Properties of a proposal on a Managed Blockchain network. Applies only to
@@ -784,6 +843,8 @@ type Proposal struct {
 
 	// The current total of YES votes cast on the proposal by members.
 	YesVoteCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // The actions to carry out if a proposal is APPROVED. Applies only to Hyperledger
@@ -798,6 +859,8 @@ type ProposalActions struct {
 	// network, which deletes the member and all associated member resources from the
 	// network.
 	Removals []RemoveAction
+
+	noSmithyDocumentSerde
 }
 
 // Properties of a proposal. Applies only to Hyperledger Fabric.
@@ -853,6 +916,8 @@ type ProposalSummary struct {
 	// specified ProposalActions in a proposal that was approved could not be completed
 	// because of an error.
 	Status ProposalStatus
+
+	noSmithyDocumentSerde
 }
 
 // An action to remove a member from a Managed Blockchain network as the result of
@@ -864,6 +929,8 @@ type RemoveAction struct {
 	//
 	// This member is required.
 	MemberId *string
+
+	noSmithyDocumentSerde
 }
 
 // Properties of an individual vote that a member cast for a proposal. Applies only
@@ -878,6 +945,8 @@ type VoteSummary struct {
 
 	// The vote value, either YES or NO.
 	Vote VoteValue
+
+	noSmithyDocumentSerde
 }
 
 // The voting rules for the network to decide if a proposal is accepted Applies
@@ -889,4 +958,8 @@ type VotingPolicy struct {
 	// duration of the proposal. The policy applies to all proposals and is specified
 	// when the network is created.
 	ApprovalThresholdPolicy *ApprovalThresholdPolicy
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

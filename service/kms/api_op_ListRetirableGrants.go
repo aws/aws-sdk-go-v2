@@ -73,6 +73,8 @@ type ListRetirableGrantsInput struct {
 	// truncated results. Set it to the value of NextMarker from the truncated response
 	// you just received.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRetirableGrantsOutput struct {
@@ -92,6 +94,8 @@ type ListRetirableGrantsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRetirableGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {

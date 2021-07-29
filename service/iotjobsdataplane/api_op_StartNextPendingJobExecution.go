@@ -48,6 +48,8 @@ type StartNextPendingJobExecutionInput struct {
 	// timeout which may have been specified when the job was created (CreateJob using
 	// field timeoutConfig).
 	StepTimeoutInMinutes *int64
+
+	noSmithyDocumentSerde
 }
 
 type StartNextPendingJobExecutionOutput struct {
@@ -57,6 +59,8 @@ type StartNextPendingJobExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartNextPendingJobExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

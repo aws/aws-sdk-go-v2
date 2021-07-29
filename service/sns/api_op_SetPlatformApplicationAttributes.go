@@ -80,11 +80,15 @@ type SetPlatformApplicationAttributesInput struct {
 	//
 	// This member is required.
 	PlatformApplicationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type SetPlatformApplicationAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetPlatformApplicationAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

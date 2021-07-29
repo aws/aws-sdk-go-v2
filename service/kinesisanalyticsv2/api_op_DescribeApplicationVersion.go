@@ -41,6 +41,8 @@ type DescribeApplicationVersionInput struct {
 	//
 	// This member is required.
 	ApplicationVersionId *int64
+
+	noSmithyDocumentSerde
 }
 
 type DescribeApplicationVersionOutput struct {
@@ -51,6 +53,8 @@ type DescribeApplicationVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeApplicationVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

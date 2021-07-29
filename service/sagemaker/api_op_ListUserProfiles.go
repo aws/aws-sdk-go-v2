@@ -48,6 +48,8 @@ type ListUserProfilesInput struct {
 
 	// A parameter by which to filter the results.
 	UserProfileNameContains *string
+
+	noSmithyDocumentSerde
 }
 
 type ListUserProfilesOutput struct {
@@ -61,6 +63,8 @@ type ListUserProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListUserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

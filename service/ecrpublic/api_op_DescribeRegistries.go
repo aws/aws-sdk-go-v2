@@ -47,6 +47,8 @@ type DescribeRegistriesInput struct {
 	// used to retrieve the next items in a list and not for other programmatic
 	// purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRegistriesOutput struct {
@@ -64,6 +66,8 @@ type DescribeRegistriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRegistriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

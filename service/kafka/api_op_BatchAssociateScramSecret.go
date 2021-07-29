@@ -39,6 +39,8 @@ type BatchAssociateScramSecretInput struct {
 	//
 	// This member is required.
 	SecretArnList []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchAssociateScramSecretOutput struct {
@@ -51,6 +53,8 @@ type BatchAssociateScramSecretOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchAssociateScramSecretMiddlewares(stack *middleware.Stack, options Options) (err error) {

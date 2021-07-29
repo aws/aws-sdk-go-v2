@@ -55,6 +55,8 @@ type CreateDevicePoolInput struct {
 	// specifying the maximum number of devices, you can control the costs that you
 	// incur by running tests.
 	MaxDevices *int32
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a create device pool request.
@@ -65,6 +67,8 @@ type CreateDevicePoolOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDevicePoolMiddlewares(stack *middleware.Stack, options Options) (err error) {

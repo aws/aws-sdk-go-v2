@@ -49,11 +49,15 @@ type CreateProjectInput struct {
 	// Tagging Strategies
 	// (https://aws.amazon.com/answers/account-management/aws-tagging-strategies/).
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateProjectOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

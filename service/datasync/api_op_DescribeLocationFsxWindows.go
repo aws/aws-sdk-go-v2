@@ -35,6 +35,8 @@ type DescribeLocationFsxWindowsInput struct {
 	//
 	// This member is required.
 	LocationArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLocationFsxWindowsOutput struct {
@@ -62,6 +64,8 @@ type DescribeLocationFsxWindowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLocationFsxWindowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

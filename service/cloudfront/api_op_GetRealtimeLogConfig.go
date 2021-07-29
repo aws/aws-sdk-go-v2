@@ -37,6 +37,8 @@ type GetRealtimeLogConfigInput struct {
 
 	// The name of the real-time log configuration to get.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRealtimeLogConfigOutput struct {
@@ -46,6 +48,8 @@ type GetRealtimeLogConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

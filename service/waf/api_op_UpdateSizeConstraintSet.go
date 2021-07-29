@@ -106,6 +106,8 @@ type UpdateSizeConstraintSetInput struct {
 	//
 	// This member is required.
 	Updates []types.SizeConstraintSetUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSizeConstraintSetOutput struct {
@@ -117,6 +119,8 @@ type UpdateSizeConstraintSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

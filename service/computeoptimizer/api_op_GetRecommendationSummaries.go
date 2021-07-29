@@ -55,6 +55,8 @@ type GetRecommendationSummariesInput struct {
 
 	// The token to advance to the next page of recommendation summaries.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRecommendationSummariesOutput struct {
@@ -69,6 +71,8 @@ type GetRecommendationSummariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRecommendationSummariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

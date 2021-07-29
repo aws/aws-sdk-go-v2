@@ -47,6 +47,8 @@ type CreateApplicationInput struct {
 	// tags only to the application. Environments that you create in the application
 	// don't inherit the tags.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Result message containing a single description of an application.
@@ -57,6 +59,8 @@ type CreateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -99,6 +99,8 @@ type DescribeLaunchTemplateVersionsInput struct {
 	// are defined as the default version, the valid value is $Default. You can specify
 	// $Latest and $Default in the same call. You cannot specify numbers.
 	Versions []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeLaunchTemplateVersionsOutput struct {
@@ -112,6 +114,8 @@ type DescribeLaunchTemplateVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLaunchTemplateVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

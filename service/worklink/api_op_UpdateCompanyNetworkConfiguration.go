@@ -48,11 +48,15 @@ type UpdateCompanyNetworkConfigurationInput struct {
 	//
 	// This member is required.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCompanyNetworkConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCompanyNetworkConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

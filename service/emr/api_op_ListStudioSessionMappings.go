@@ -41,6 +41,8 @@ type ListStudioSessionMappingsInput struct {
 
 	// The ID of the Amazon EMR Studio.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStudioSessionMappingsOutput struct {
@@ -55,6 +57,8 @@ type ListStudioSessionMappingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStudioSessionMappingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

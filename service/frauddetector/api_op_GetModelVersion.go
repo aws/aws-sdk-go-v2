@@ -43,6 +43,8 @@ type GetModelVersionInput struct {
 	//
 	// This member is required.
 	ModelVersionNumber *string
+
+	noSmithyDocumentSerde
 }
 
 type GetModelVersionOutput struct {
@@ -93,6 +95,8 @@ type GetModelVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetModelVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

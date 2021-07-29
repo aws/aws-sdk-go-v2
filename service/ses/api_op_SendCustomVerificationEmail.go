@@ -51,6 +51,8 @@ type SendCustomVerificationEmailInput struct {
 
 	// Name of a configuration set to use when sending the verification email.
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 // The response received when attempting to send the custom verification email.
@@ -62,6 +64,8 @@ type SendCustomVerificationEmailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendCustomVerificationEmailMiddlewares(stack *middleware.Stack, options Options) (err error) {

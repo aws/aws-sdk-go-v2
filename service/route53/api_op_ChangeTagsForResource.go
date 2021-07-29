@@ -57,12 +57,16 @@ type ChangeTagsForResourceInput struct {
 	// A complex type that contains a list of the tags that you want to delete from the
 	// specified health check or hosted zone. You can specify up to 10 keys.
 	RemoveTagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 // Empty response for the request.
 type ChangeTagsForResourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationChangeTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

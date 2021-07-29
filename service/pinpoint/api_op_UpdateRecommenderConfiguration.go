@@ -40,6 +40,8 @@ type UpdateRecommenderConfigurationInput struct {
 	//
 	// This member is required.
 	UpdateRecommenderConfiguration *types.UpdateRecommenderConfigurationShape
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRecommenderConfigurationOutput struct {
@@ -52,6 +54,8 @@ type UpdateRecommenderConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRecommenderConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

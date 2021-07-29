@@ -74,6 +74,8 @@ type ModifyTrafficMirrorFilterRuleInput struct {
 
 	// The type of traffic (ingress | egress) to assign to the rule.
 	TrafficDirection types.TrafficDirection
+
+	noSmithyDocumentSerde
 }
 
 type ModifyTrafficMirrorFilterRuleOutput struct {
@@ -83,6 +85,8 @@ type ModifyTrafficMirrorFilterRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyTrafficMirrorFilterRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

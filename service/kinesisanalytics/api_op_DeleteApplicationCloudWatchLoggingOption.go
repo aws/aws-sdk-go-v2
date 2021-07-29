@@ -51,11 +51,15 @@ type DeleteApplicationCloudWatchLoggingOptionInput struct {
 	//
 	// This member is required.
 	CurrentApplicationVersionId *int64
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApplicationCloudWatchLoggingOptionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApplicationCloudWatchLoggingOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

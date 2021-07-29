@@ -58,6 +58,8 @@ type DescribeSessionsInput struct {
 	// The user identifier (ID). If you specify a user ID, you must also specify the
 	// authentication type.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSessionsOutput struct {
@@ -71,6 +73,8 @@ type DescribeSessionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSessionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

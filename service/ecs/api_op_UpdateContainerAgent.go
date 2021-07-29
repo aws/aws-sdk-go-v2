@@ -55,6 +55,8 @@ type UpdateContainerAgentInput struct {
 	// container instance is running on. If you do not specify a cluster, the default
 	// cluster is assumed.
 	Cluster *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContainerAgentOutput struct {
@@ -64,6 +66,8 @@ type UpdateContainerAgentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContainerAgentMiddlewares(stack *middleware.Stack, options Options) (err error) {

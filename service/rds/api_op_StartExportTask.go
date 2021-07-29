@@ -107,6 +107,8 @@ type StartExportTaskInput struct {
 	// The Amazon S3 bucket prefix to use as the file name and path of the exported
 	// snapshot.
 	S3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of a snapshot export to Amazon S3. This data type is used
@@ -182,6 +184,8 @@ type StartExportTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartExportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

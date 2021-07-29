@@ -48,6 +48,8 @@ type GetMethodResponseInput struct {
 	//
 	// This member is required.
 	StatusCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a method response of a given HTTP status code returned to the client.
@@ -108,6 +110,8 @@ type GetMethodResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMethodResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

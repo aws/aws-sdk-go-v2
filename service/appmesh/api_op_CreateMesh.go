@@ -52,6 +52,8 @@ type CreateMeshInput struct {
 	// value, both of which you define. Tag keys can have a maximum character length of
 	// 128 characters, and tag values can have a maximum length of 256 characters.
 	Tags []types.TagRef
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -64,6 +66,8 @@ type CreateMeshOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMeshMiddlewares(stack *middleware.Stack, options Options) (err error) {

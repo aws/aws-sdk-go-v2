@@ -45,11 +45,15 @@ type UpdateQuickConnectNameInput struct {
 
 	// The name of the quick connect.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateQuickConnectNameOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateQuickConnectNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -123,6 +123,8 @@ type UpdateNFSFileShareInput struct {
 	//
 	// * AllSquash: Everyone is mapped to anonymous user.
 	Squash *string
+
+	noSmithyDocumentSerde
 }
 
 // UpdateNFSFileShareOutput
@@ -133,6 +135,8 @@ type UpdateNFSFileShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNFSFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

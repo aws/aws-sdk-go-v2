@@ -64,6 +64,8 @@ type CreatePlatformEndpointInput struct {
 	// Arbitrary user data to associate with the endpoint. Amazon SNS does not use this
 	// data. The data must be in UTF-8 format and less than 2KB.
 	CustomUserData *string
+
+	noSmithyDocumentSerde
 }
 
 // Response from CreateEndpoint action.
@@ -74,6 +76,8 @@ type CreatePlatformEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePlatformEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

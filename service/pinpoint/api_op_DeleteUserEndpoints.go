@@ -39,6 +39,8 @@ type DeleteUserEndpointsInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUserEndpointsOutput struct {
@@ -50,6 +52,8 @@ type DeleteUserEndpointsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUserEndpointsMiddlewares(stack *middleware.Stack, options Options) (err error) {

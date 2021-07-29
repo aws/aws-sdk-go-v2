@@ -56,6 +56,8 @@ type ListBuildsForProjectInput struct {
 	// If the project has more than 100 builds, setting the sort
 	// order will result in an error.
 	SortOrder types.SortOrderType
+
+	noSmithyDocumentSerde
 }
 
 type ListBuildsForProjectOutput struct {
@@ -72,6 +74,8 @@ type ListBuildsForProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBuildsForProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -50,6 +50,8 @@ type DefineAnalysisSchemeInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DefineAnalysisScheme request. Contains the status of the
@@ -63,6 +65,8 @@ type DefineAnalysisSchemeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDefineAnalysisSchemeMiddlewares(stack *middleware.Stack, options Options) (err error) {

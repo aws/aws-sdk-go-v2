@@ -43,11 +43,15 @@ type CreateVpnConnectionRouteInput struct {
 	//
 	// This member is required.
 	VpnConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVpnConnectionRouteOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpnConnectionRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

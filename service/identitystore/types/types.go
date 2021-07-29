@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // A query filter used by ListUsers and ListGroup. This filter object provides the
 // attribute name and attribute value to search users or groups.
 type Filter struct {
@@ -18,6 +22,8 @@ type Filter struct {
 	//
 	// This member is required.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 // A group object, which contains a specified group’s metadata and attributes.
@@ -37,6 +43,8 @@ type Group struct {
 	//
 	// This member is required.
 	GroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // A user object, which contains a specified user’s metadata and attributes.
@@ -55,4 +63,8 @@ type User struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

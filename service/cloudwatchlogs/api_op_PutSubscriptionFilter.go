@@ -107,11 +107,15 @@ type PutSubscriptionFilterInput struct {
 	// ingested log events to the destination stream. You don't need to provide the ARN
 	// when you are working with a logical destination for cross-account delivery.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutSubscriptionFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSubscriptionFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

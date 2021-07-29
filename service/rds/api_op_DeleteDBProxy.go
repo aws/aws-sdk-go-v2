@@ -33,6 +33,8 @@ type DeleteDBProxyInput struct {
 	//
 	// This member is required.
 	DBProxyName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBProxyOutput struct {
@@ -42,6 +44,8 @@ type DeleteDBProxyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBProxyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type UpdateCapacityProviderInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateCapacityProviderOutput struct {
@@ -48,6 +50,8 @@ type UpdateCapacityProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateCapacityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,6 +49,8 @@ type GetDomainStatisticsReportInput struct {
 	//
 	// This member is required.
 	StartDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object that includes statistics that are related to the domain that you
@@ -71,6 +73,8 @@ type GetDomainStatisticsReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDomainStatisticsReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

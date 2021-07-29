@@ -46,6 +46,8 @@ type DescribeInstanceHealthInput struct {
 
 	// The IDs of the instances.
 	Instances []types.Instance
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output for DescribeInstanceHealth.
@@ -56,6 +58,8 @@ type DescribeInstanceHealthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstanceHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {

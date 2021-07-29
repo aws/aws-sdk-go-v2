@@ -42,6 +42,8 @@ type ResolveCaseInput struct {
 	// alphanumeric string formatted as shown in this example:
 	// case-12345678910-2013-c4c1d2bf33c5cf47
 	CaseId *string
+
+	noSmithyDocumentSerde
 }
 
 // The status of the case returned by the ResolveCase operation.
@@ -55,6 +57,8 @@ type ResolveCaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResolveCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

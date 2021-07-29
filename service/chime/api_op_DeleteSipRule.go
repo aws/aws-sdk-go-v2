@@ -32,11 +32,15 @@ type DeleteSipRuleInput struct {
 	//
 	// This member is required.
 	SipRuleId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSipRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSipRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

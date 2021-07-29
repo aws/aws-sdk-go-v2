@@ -34,11 +34,15 @@ type DeleteProtectionGroupInput struct {
 	//
 	// This member is required.
 	ProtectionGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProtectionGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

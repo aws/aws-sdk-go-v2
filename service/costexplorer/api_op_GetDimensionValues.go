@@ -232,6 +232,8 @@ type GetDimensionValuesInput struct {
 	// COST_AND_USAGE. Further, when using SortBy, NextPageToken and SearchString are
 	// not supported.
 	SortBy []types.SortDefinition
+
+	noSmithyDocumentSerde
 }
 
 type GetDimensionValuesOutput struct {
@@ -364,6 +366,8 @@ type GetDimensionValuesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDimensionValuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

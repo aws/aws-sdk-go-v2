@@ -47,6 +47,8 @@ type StartMLLabelingSetGenerationTaskRunInput struct {
 	//
 	// This member is required.
 	TransformId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartMLLabelingSetGenerationTaskRunOutput struct {
@@ -56,6 +58,8 @@ type StartMLLabelingSetGenerationTaskRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMLLabelingSetGenerationTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type GetGroupQueryInput struct {
 	//
 	// Deprecated: This field is deprecated, use Group instead.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGroupQueryOutput struct {
@@ -54,6 +56,8 @@ type GetGroupQueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

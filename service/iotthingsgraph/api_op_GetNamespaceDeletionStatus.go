@@ -28,6 +28,7 @@ func (c *Client) GetNamespaceDeletionStatus(ctx context.Context, params *GetName
 }
 
 type GetNamespaceDeletionStatusInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetNamespaceDeletionStatusOutput struct {
@@ -49,6 +50,8 @@ type GetNamespaceDeletionStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetNamespaceDeletionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

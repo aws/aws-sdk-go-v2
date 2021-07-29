@@ -41,6 +41,8 @@ type DescribeClustersInput struct {
 	// separated by launch type. If TAGS is specified, the metadata tags associated
 	// with the cluster are included.
 	Include []types.ClusterField
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClustersOutput struct {
@@ -53,6 +55,8 @@ type DescribeClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

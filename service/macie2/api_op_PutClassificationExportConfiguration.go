@@ -35,6 +35,8 @@ type PutClassificationExportConfigurationInput struct {
 	//
 	// This member is required.
 	Configuration *types.ClassificationExportConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutClassificationExportConfigurationOutput struct {
@@ -45,6 +47,8 @@ type PutClassificationExportConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutClassificationExportConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

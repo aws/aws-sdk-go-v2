@@ -42,6 +42,8 @@ type DescribeScalingParametersInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DescribeScalingParameters request. Contains the scaling
@@ -55,6 +57,8 @@ type DescribeScalingParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScalingParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

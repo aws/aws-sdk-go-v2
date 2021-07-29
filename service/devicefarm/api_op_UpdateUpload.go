@@ -44,6 +44,8 @@ type UpdateUploadInput struct {
 	// The upload's test spec file name. The name must not contain any forward slashes
 	// (/). The test spec file name must end with the .yaml or .yml file extension.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUploadOutput struct {
@@ -53,6 +55,8 @@ type UpdateUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

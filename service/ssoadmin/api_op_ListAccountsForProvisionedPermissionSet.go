@@ -52,6 +52,8 @@ type ListAccountsForProvisionedPermissionSetInput struct {
 
 	// The permission set provisioning status for an AWS account.
 	ProvisioningStatus types.ProvisioningStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListAccountsForProvisionedPermissionSetOutput struct {
@@ -65,6 +67,8 @@ type ListAccountsForProvisionedPermissionSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccountsForProvisionedPermissionSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,6 +32,8 @@ type DeleteWorkflowInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorkflowOutput struct {
@@ -41,6 +43,8 @@ type DeleteWorkflowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorkflowMiddlewares(stack *middleware.Stack, options Options) (err error) {

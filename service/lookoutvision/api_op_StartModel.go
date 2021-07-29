@@ -62,6 +62,8 @@ type StartModelInput struct {
 	// as in the first request. Using a different value for ClientToken is considered a
 	// new call to StartModel. An idempotency token is active for 8 hours.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type StartModelOutput struct {
@@ -71,6 +73,8 @@ type StartModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

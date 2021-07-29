@@ -137,6 +137,8 @@ type CreateRateBasedRuleInput struct {
 
 	//
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateRateBasedRuleOutput struct {
@@ -151,6 +153,8 @@ type CreateRateBasedRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRateBasedRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

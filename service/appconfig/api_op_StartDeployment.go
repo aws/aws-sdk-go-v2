@@ -62,6 +62,8 @@ type StartDeploymentInput struct {
 	// AppConfig resources. Each tag consists of a key and an optional value, both of
 	// which you define.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type StartDeploymentOutput struct {
@@ -125,6 +127,8 @@ type StartDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

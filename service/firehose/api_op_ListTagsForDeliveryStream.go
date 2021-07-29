@@ -45,6 +45,8 @@ type ListTagsForDeliveryStreamInput struct {
 	// response. To list additional tags, set ExclusiveStartTagKey to the last key in
 	// the response.
 	Limit *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsForDeliveryStreamOutput struct {
@@ -64,6 +66,8 @@ type ListTagsForDeliveryStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForDeliveryStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

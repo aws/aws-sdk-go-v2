@@ -48,6 +48,8 @@ type ListResourcesForTagOptionInput struct {
 	//
 	// * Product
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourcesForTagOptionOutput struct {
@@ -61,6 +63,8 @@ type ListResourcesForTagOptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourcesForTagOptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

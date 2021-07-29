@@ -35,6 +35,8 @@ type DescribeHostedConnectionsInput struct {
 	//
 	// This member is required.
 	ConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeHostedConnectionsOutput struct {
@@ -44,6 +46,8 @@ type DescribeHostedConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeHostedConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

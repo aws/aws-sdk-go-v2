@@ -41,6 +41,8 @@ type ModifyUsageLimitInput struct {
 	// The new action that Amazon Redshift takes when the limit is reached. For more
 	// information about this parameter, see UsageLimit.
 	BreachAction types.UsageLimitBreachAction
+
+	noSmithyDocumentSerde
 }
 
 // Describes a usage limit object for a cluster.
@@ -84,6 +86,8 @@ type ModifyUsageLimitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyUsageLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type DisassociateConnectionFromLagInput struct {
 	//
 	// This member is required.
 	LagId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect connection.
@@ -157,6 +159,8 @@ type DisassociateConnectionFromLagOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateConnectionFromLagMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,11 +69,15 @@ type UpdateDataRetentionInput struct {
 
 	// The name of the stream whose retention period you want to change.
 	StreamName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDataRetentionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDataRetentionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type DescribeFlowExecutionRecordsInput struct {
 
 	// The pagination token for the next page of data.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFlowExecutionRecordsOutput struct {
@@ -54,6 +56,8 @@ type DescribeFlowExecutionRecordsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFlowExecutionRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

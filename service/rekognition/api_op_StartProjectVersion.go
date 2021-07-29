@@ -46,6 +46,8 @@ type StartProjectVersionInput struct {
 	//
 	// This member is required.
 	ProjectVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StartProjectVersionOutput struct {
@@ -55,6 +57,8 @@ type StartProjectVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

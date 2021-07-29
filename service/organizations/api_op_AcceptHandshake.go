@@ -62,6 +62,8 @@ type AcceptHandshakeInput struct {
 	//
 	// This member is required.
 	HandshakeId *string
+
+	noSmithyDocumentSerde
 }
 
 type AcceptHandshakeOutput struct {
@@ -71,6 +73,8 @@ type AcceptHandshakeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptHandshakeMiddlewares(stack *middleware.Stack, options Options) (err error) {

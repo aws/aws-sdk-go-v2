@@ -46,12 +46,16 @@ type UpdateConditionalForwarderInput struct {
 	//
 	// This member is required.
 	RemoteDomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of an UpdateConditionalForwarder request.
 type UpdateConditionalForwarderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateConditionalForwarderMiddlewares(stack *middleware.Stack, options Options) (err error) {

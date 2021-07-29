@@ -32,11 +32,15 @@ type DeleteCustomRoutingListenerInput struct {
 	//
 	// This member is required.
 	ListenerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomRoutingListenerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomRoutingListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

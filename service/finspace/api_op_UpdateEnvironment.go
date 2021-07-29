@@ -51,6 +51,8 @@ type UpdateEnvironmentInput struct {
 
 	// The name of the environment.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateEnvironmentOutput struct {
@@ -60,6 +62,8 @@ type UpdateEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

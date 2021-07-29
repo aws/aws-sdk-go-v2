@@ -36,6 +36,8 @@ type GetPermissionInput struct {
 
 	// The identifier for the version of the permission.
 	PermissionVersion *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetPermissionOutput struct {
@@ -45,6 +47,8 @@ type GetPermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

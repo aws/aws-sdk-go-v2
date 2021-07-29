@@ -41,6 +41,8 @@ type DescribeProcessingJobInput struct {
 	//
 	// This member is required.
 	ProcessingJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProcessingJobOutput struct {
@@ -129,6 +131,8 @@ type DescribeProcessingJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProcessingJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

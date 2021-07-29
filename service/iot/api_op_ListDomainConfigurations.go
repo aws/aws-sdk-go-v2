@@ -39,6 +39,8 @@ type ListDomainConfigurationsInput struct {
 
 	// The type of service delivered by the endpoint.
 	ServiceType types.ServiceType
+
+	noSmithyDocumentSerde
 }
 
 type ListDomainConfigurationsOutput struct {
@@ -52,6 +54,8 @@ type ListDomainConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

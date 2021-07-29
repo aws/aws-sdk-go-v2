@@ -49,11 +49,15 @@ type AssociateProactiveEngagementDetailsInput struct {
 	//
 	// This member is required.
 	EmergencyContactList []types.EmergencyContact
+
+	noSmithyDocumentSerde
 }
 
 type AssociateProactiveEngagementDetailsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateProactiveEngagementDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

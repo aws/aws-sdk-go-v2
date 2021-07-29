@@ -40,6 +40,8 @@ type GetEffectivePoliciesInput struct {
 
 	// The thing name.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEffectivePoliciesOutput struct {
@@ -49,6 +51,8 @@ type GetEffectivePoliciesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEffectivePoliciesMiddlewares(stack *middleware.Stack, options Options) (err error) {

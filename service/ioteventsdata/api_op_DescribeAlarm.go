@@ -38,6 +38,8 @@ type DescribeAlarmInput struct {
 	// the key
 	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_CreateAlarmModel.html#iotevents-CreateAlarmModel-request-key).
 	KeyValue *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAlarmOutput struct {
@@ -47,6 +49,8 @@ type DescribeAlarmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type DeleteAutoSnapshotInput struct {
 	//
 	// This member is required.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAutoSnapshotOutput struct {
@@ -54,6 +56,8 @@ type DeleteAutoSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAutoSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

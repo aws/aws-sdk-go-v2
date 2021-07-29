@@ -43,6 +43,8 @@ type CreateDomainNameInput struct {
 
 	// The collection of tags associated with a domain name.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDomainNameOutput struct {
@@ -64,6 +66,8 @@ type CreateDomainNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

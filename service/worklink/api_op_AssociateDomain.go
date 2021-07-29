@@ -46,11 +46,15 @@ type AssociateDomainInput struct {
 
 	// The name to display.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateDomainOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

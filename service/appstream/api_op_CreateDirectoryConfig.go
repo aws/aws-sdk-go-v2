@@ -44,6 +44,8 @@ type CreateDirectoryConfigInput struct {
 	// The credentials for the service account used by the fleet or image builder to
 	// connect to the directory.
 	ServiceAccountCredentials *types.ServiceAccountCredentials
+
+	noSmithyDocumentSerde
 }
 
 type CreateDirectoryConfigOutput struct {
@@ -53,6 +55,8 @@ type CreateDirectoryConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDirectoryConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

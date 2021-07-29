@@ -48,6 +48,8 @@ type ListWirelessDevicesInput struct {
 
 	// A filter to list only the wireless devices that use this wireless device type.
 	WirelessDeviceType types.WirelessDeviceType
+
+	noSmithyDocumentSerde
 }
 
 type ListWirelessDevicesOutput struct {
@@ -61,6 +63,8 @@ type ListWirelessDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWirelessDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

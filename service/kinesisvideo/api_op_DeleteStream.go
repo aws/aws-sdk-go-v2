@@ -45,11 +45,15 @@ type DeleteStreamInput struct {
 	// stream version, use the DescribeStream API. If not specified, only the
 	// CreationTime is checked before deleting the stream.
 	CurrentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStreamOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

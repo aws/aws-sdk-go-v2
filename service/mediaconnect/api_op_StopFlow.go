@@ -33,6 +33,8 @@ type StopFlowInput struct {
 	//
 	// This member is required.
 	FlowArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StopFlowOutput struct {
@@ -45,6 +47,8 @@ type StopFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

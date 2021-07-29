@@ -38,6 +38,8 @@ type UpdateDocumentDefaultVersionInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDocumentDefaultVersionOutput struct {
@@ -48,6 +50,8 @@ type UpdateDocumentDefaultVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDocumentDefaultVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

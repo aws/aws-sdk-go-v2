@@ -34,6 +34,8 @@ type GetTopicAttributesInput struct {
 	//
 	// This member is required.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Response for GetTopicAttributes action.
@@ -106,6 +108,8 @@ type GetTopicAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTopicAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -53,6 +53,8 @@ type CreateTokenInput struct {
 	// Data specified by the caller to be included in the JWT token. The data is mapped
 	// to the amr claim of the JWT token.
 	TokenProperties []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateTokenOutput struct {
@@ -68,6 +70,8 @@ type CreateTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

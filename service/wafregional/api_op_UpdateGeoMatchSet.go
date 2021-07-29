@@ -90,6 +90,8 @@ type UpdateGeoMatchSetInput struct {
 	//
 	// This member is required.
 	Updates []types.GeoMatchSetUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateGeoMatchSetOutput struct {
@@ -101,6 +103,8 @@ type UpdateGeoMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateGeoMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

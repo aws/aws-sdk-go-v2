@@ -179,6 +179,8 @@ type CreateBrokerInput struct {
 
 	// Create tags when creating the broker.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBrokerOutput struct {
@@ -191,6 +193,8 @@ type CreateBrokerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBrokerMiddlewares(stack *middleware.Stack, options Options) (err error) {

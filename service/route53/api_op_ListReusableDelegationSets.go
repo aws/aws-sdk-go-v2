@@ -45,6 +45,8 @@ type ListReusableDelegationSetsInput struct {
 	// in the response to this request. If you specify a value greater than 100, Route
 	// 53 returns only the first 100 reusable delegation sets.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the reusable delegation sets that
@@ -84,6 +86,8 @@ type ListReusableDelegationSetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListReusableDelegationSetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type ListSchemasInput struct {
 	// Specifying this limits the results to only those schema names that start with
 	// the specified prefix.
 	SchemaNamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSchemasOutput struct {
@@ -59,6 +61,8 @@ type ListSchemasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSchemasMiddlewares(stack *middleware.Stack, options Options) (err error) {

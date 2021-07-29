@@ -46,6 +46,8 @@ type ListDevicesInput struct {
 	// The response from the last list when returning a list large enough to need
 	// tokening.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDevicesOutput struct {
@@ -61,6 +63,8 @@ type ListDevicesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDevicesMiddlewares(stack *middleware.Stack, options Options) (err error) {

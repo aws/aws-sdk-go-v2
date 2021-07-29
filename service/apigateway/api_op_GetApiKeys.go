@@ -48,6 +48,8 @@ type GetApiKeysInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a collection of API keys as represented by an ApiKeys resource. Use
@@ -67,6 +69,8 @@ type GetApiKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApiKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

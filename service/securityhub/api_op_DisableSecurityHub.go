@@ -35,11 +35,14 @@ func (c *Client) DisableSecurityHub(ctx context.Context, params *DisableSecurity
 }
 
 type DisableSecurityHubInput struct {
+	noSmithyDocumentSerde
 }
 
 type DisableSecurityHubOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableSecurityHubMiddlewares(stack *middleware.Stack, options Options) (err error) {

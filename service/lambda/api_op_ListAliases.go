@@ -58,6 +58,8 @@ type ListAliasesInput struct {
 
 	// Limit the number of aliases returned.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListAliasesOutput struct {
@@ -70,6 +72,8 @@ type ListAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

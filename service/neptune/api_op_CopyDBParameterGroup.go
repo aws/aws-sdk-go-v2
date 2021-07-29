@@ -67,6 +67,8 @@ type CopyDBParameterGroupInput struct {
 
 	// The tags to be assigned to the copied DB parameter group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CopyDBParameterGroupOutput struct {
@@ -77,6 +79,8 @@ type CopyDBParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyDBParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

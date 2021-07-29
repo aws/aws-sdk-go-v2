@@ -32,11 +32,15 @@ type DeleteScheduledAuditInput struct {
 	//
 	// This member is required.
 	ScheduledAuditName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteScheduledAuditOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteScheduledAuditMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type PutFindingsPublicationConfigurationInput struct {
 	// The configuration settings that determine which findings to publish to Security
 	// Hub.
 	SecurityHubConfiguration *types.SecurityHubConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type PutFindingsPublicationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutFindingsPublicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

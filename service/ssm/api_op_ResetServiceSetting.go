@@ -66,6 +66,8 @@ type ResetServiceSettingInput struct {
 	//
 	// This member is required.
 	SettingId *string
+
+	noSmithyDocumentSerde
 }
 
 // The result body of the ResetServiceSetting API operation.
@@ -77,6 +79,8 @@ type ResetServiceSettingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetServiceSettingMiddlewares(stack *middleware.Stack, options Options) (err error) {

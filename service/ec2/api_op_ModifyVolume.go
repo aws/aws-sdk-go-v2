@@ -126,6 +126,8 @@ type ModifyVolumeInput struct {
 	// Amazon Elastic Compute Cloud User Guide. Default: If no type is specified, the
 	// existing type is retained.
 	VolumeType types.VolumeType
+
+	noSmithyDocumentSerde
 }
 
 type ModifyVolumeOutput struct {
@@ -135,6 +137,8 @@ type ModifyVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

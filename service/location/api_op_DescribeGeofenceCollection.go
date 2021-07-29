@@ -33,6 +33,8 @@ type DescribeGeofenceCollectionInput struct {
 	//
 	// This member is required.
 	CollectionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeGeofenceCollectionOutput struct {
@@ -90,6 +92,8 @@ type DescribeGeofenceCollectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGeofenceCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

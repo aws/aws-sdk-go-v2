@@ -149,6 +149,8 @@ type CreateAssociationInput struct {
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssociationOutput struct {
@@ -158,6 +160,8 @@ type CreateAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

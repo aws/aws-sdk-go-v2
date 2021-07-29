@@ -36,6 +36,8 @@ type DescribeTargetHealthInput struct {
 
 	// The targets.
 	Targets []types.TargetDescription
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTargetHealthOutput struct {
@@ -45,6 +47,8 @@ type DescribeTargetHealthOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTargetHealthMiddlewares(stack *middleware.Stack, options Options) (err error) {

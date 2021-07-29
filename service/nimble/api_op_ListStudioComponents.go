@@ -45,6 +45,8 @@ type ListStudioComponentsInput struct {
 
 	// The types.
 	Types []string
+
+	noSmithyDocumentSerde
 }
 
 type ListStudioComponentsOutput struct {
@@ -57,6 +59,8 @@ type ListStudioComponentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStudioComponentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

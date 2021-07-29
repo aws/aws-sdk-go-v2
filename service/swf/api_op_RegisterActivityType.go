@@ -130,11 +130,15 @@ type RegisterActivityTypeInput struct {
 
 	// A textual description of the activity type.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterActivityTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

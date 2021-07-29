@@ -56,6 +56,8 @@ type StartDBInstanceAutomatedBackupsReplicationInput struct {
 	// be executed in the Amazon Web Services Region that contains the source DB
 	// instance.
 	PreSignedUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type StartDBInstanceAutomatedBackupsReplicationOutput struct {
@@ -67,6 +69,8 @@ type StartDBInstanceAutomatedBackupsReplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartDBInstanceAutomatedBackupsReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

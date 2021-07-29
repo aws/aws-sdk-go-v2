@@ -51,6 +51,8 @@ type CreateDistributionConfigurationInput struct {
 
 	// The tags of the distribution configuration.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDistributionConfigurationOutput struct {
@@ -67,6 +69,8 @@ type CreateDistributionConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDistributionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

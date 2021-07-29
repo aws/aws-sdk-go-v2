@@ -10,6 +10,8 @@ import (
 // A request contains unexpected data.
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -27,6 +29,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // An operation failed because a dependent service threw an exception.
 type DependentServiceFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DependentServiceFailureException) Error() string {
@@ -46,6 +50,8 @@ func (e *DependentServiceFailureException) ErrorFault() smithy.ErrorFault { retu
 // The service failed to perform an operation due to an internal issue.
 type InternalFailureException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -63,6 +69,8 @@ func (e *InternalFailureException) ErrorFault() smithy.ErrorFault { return smith
 // A resource could not be created because service quotas were exceeded.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -80,6 +88,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // An entity was not found during an operation.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -99,6 +109,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -116,6 +128,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // An operation failed due to a lack of access.
 type UnauthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnauthorizedException) Error() string {

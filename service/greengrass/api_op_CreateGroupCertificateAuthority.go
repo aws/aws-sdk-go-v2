@@ -36,6 +36,8 @@ type CreateGroupCertificateAuthorityInput struct {
 
 	// A client token used to correlate requests and responses.
 	AmznClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGroupCertificateAuthorityOutput struct {
@@ -45,6 +47,8 @@ type CreateGroupCertificateAuthorityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGroupCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

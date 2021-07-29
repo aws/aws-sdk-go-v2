@@ -46,12 +46,16 @@ type AddTagsInput struct {
 	//
 	// This member is required.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // This output indicates the result of adding tags to a resource.
 type AddTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

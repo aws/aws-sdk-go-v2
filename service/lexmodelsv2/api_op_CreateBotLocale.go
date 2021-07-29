@@ -80,6 +80,8 @@ type CreateBotLocaleInput struct {
 	// The Amazon Polly voice ID that Amazon Lex uses for voice interaction with the
 	// user.
 	VoiceSettings *types.VoiceSettings
+
+	noSmithyDocumentSerde
 }
 
 type CreateBotLocaleOutput struct {
@@ -121,6 +123,8 @@ type CreateBotLocaleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBotLocaleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -59,6 +59,8 @@ type DecreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// ElastiCache for Redis will attempt to retain all node groups listed by
 	// GlobalNodeGroupsToRetain from the cluster.
 	GlobalNodeGroupsToRetain []string
+
+	noSmithyDocumentSerde
 }
 
 type DecreaseNodeGroupsInGlobalReplicationGroupOutput struct {
@@ -74,6 +76,8 @@ type DecreaseNodeGroupsInGlobalReplicationGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDecreaseNodeGroupsInGlobalReplicationGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

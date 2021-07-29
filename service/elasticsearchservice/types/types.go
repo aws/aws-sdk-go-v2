@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -23,6 +24,8 @@ type AccessPoliciesStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // List of limits that are specific to a given InstanceType and for each of it's
@@ -48,6 +51,8 @@ type AdditionalLimit struct {
 
 	// Value for given AdditionalLimit$LimitName .
 	LimitValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Status of the advanced options for the specified Elasticsearch domain.
@@ -78,6 +83,8 @@ type AdvancedOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the advanced security configuration: whether advanced security is
@@ -92,6 +99,8 @@ type AdvancedSecurityOptions struct {
 
 	// Describes the SAML application configured for a domain.
 	SAMLOptions *SAMLOptionsOutput
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the advanced security configuration: whether advanced security is
@@ -111,6 +120,8 @@ type AdvancedSecurityOptionsInput struct {
 
 	// Specifies the SAML application configuration for the domain.
 	SAMLOptions *SAMLOptionsInput
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status of advanced security options for the specified
@@ -126,6 +137,8 @@ type AdvancedSecurityOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies Auto-Tune type and Auto-Tune action details.
@@ -138,6 +151,8 @@ type AutoTune struct {
 
 	// Specifies Auto-Tune type. Valid value is SCHEDULED_ACTION.
 	AutoTuneType AutoTuneType
+
+	noSmithyDocumentSerde
 }
 
 // Specifies details of the Auto-Tune action. See the Developer Guide
@@ -149,6 +164,8 @@ type AutoTuneDetails struct {
 	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
 	// for more information.
 	ScheduledAutoTuneDetails *ScheduledAutoTuneDetails
+
+	noSmithyDocumentSerde
 }
 
 // Specifies Auto-Tune maitenance schedule. See the Developer Guide
@@ -170,6 +187,8 @@ type AutoTuneMaintenanceSchedule struct {
 
 	// Specifies timestamp at which Auto-Tune maintenance schedule start.
 	StartAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the Auto-Tune options: the Auto-Tune desired state for the domain,
@@ -188,6 +207,8 @@ type AutoTuneOptions struct {
 	// Specifies the rollback state while disabling Auto-Tune for the domain. Valid
 	// values are NO_ROLLBACK, DEFAULT_ROLLBACK.
 	RollbackOnDisable RollbackOnDisable
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and
@@ -201,6 +222,8 @@ type AutoTuneOptionsInput struct {
 	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
 	// for more information.
 	MaintenanceSchedules []AutoTuneMaintenanceSchedule
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the Auto-Tune options: the Auto-Tune desired state for the domain and
@@ -212,6 +235,8 @@ type AutoTuneOptionsOutput struct {
 
 	// Specifies the AutoTuneState for the Elasticsearch domain.
 	State AutoTuneState
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the status of Auto-Tune options for the specified Elasticsearch
@@ -224,6 +249,8 @@ type AutoTuneOptionsStatus struct {
 	// Specifies Status of the Auto-Tune options for the specified Elasticsearch
 	// domain.
 	Status *AutoTuneStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides the current status of the Auto-Tune options.
@@ -252,6 +279,8 @@ type AutoTuneStatus struct {
 
 	// Specifies the Auto-Tune options latest version.
 	UpdateVersion int32
+
+	noSmithyDocumentSerde
 }
 
 // Options to specify the Cognito user and identity pools for Kibana
@@ -272,6 +301,8 @@ type CognitoOptions struct {
 
 	// Specifies the Cognito user pool ID for Kibana authentication.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Status of the Cognito options for the specified Elasticsearch domain.
@@ -287,6 +318,8 @@ type CognitoOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies settings for cold storage.
@@ -296,6 +329,8 @@ type ColdStorageOptions struct {
 	//
 	// This member is required.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // A map from an ElasticsearchVersion to a list of compatible ElasticsearchVersion
@@ -307,6 +342,8 @@ type CompatibleVersionsMap struct {
 
 	// List of supported elastic search versions.
 	TargetVersions []string
+
+	noSmithyDocumentSerde
 }
 
 // Filter to apply in DescribePackage response.
@@ -317,6 +354,8 @@ type DescribePackagesFilter struct {
 
 	// A list of values for the specified field.
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 // Options to configure endpoint for the Elasticsearch domain.
@@ -346,6 +385,8 @@ type DomainEndpointOptions struct {
 	// * Policy-Min-TLS-1-2-2019-07: TLS security policy which supports only
 	// TLSv1.2
 	TLSSecurityPolicy TLSSecurityPolicy
+
+	noSmithyDocumentSerde
 }
 
 // The configured endpoint options for the domain and their current status.
@@ -361,12 +402,16 @@ type DomainEndpointOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 type DomainInfo struct {
 
 	// Specifies the DomainName.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type DomainInformation struct {
@@ -382,6 +427,8 @@ type DomainInformation struct {
 	OwnerId *string
 
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Information on a package that is associated with a domain.
@@ -414,6 +461,8 @@ type DomainPackageDetails struct {
 	// The relative path on Amazon ES nodes, which can be used as synonym_path when the
 	// package is synonym file.
 	ReferencePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies maintenance schedule duration: duration value and duration unit. See
@@ -433,6 +482,8 @@ type Duration struct {
 	// (https://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/auto-tune.html)
 	// for more information.
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 // Options to enable, disable, and specify the properties of EBS storage volumes.
@@ -451,6 +502,8 @@ type EBSOptions struct {
 
 	// Specifies the volume type for EBS-based storage.
 	VolumeType VolumeType
+
+	noSmithyDocumentSerde
 }
 
 // Status of the EBS options for the specified Elasticsearch domain.
@@ -465,6 +518,8 @@ type EBSOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration for the domain cluster, such as the type and number
@@ -511,6 +566,8 @@ type ElasticsearchClusterConfig struct {
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-managedomains.html#es-managedomains-zoneawareness)
 	// for more information.
 	ZoneAwarenessEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration status for the specified Elasticsearch domain.
@@ -526,6 +583,8 @@ type ElasticsearchClusterConfigStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of an Elasticsearch domain.
@@ -578,6 +637,8 @@ type ElasticsearchDomainConfig struct {
 	// for Amazon Elasticsearch Service Domains
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
 	VPCOptions *VPCDerivedInfoStatus
+
+	noSmithyDocumentSerde
 }
 
 // The current status of an Elasticsearch domain.
@@ -684,6 +745,8 @@ type ElasticsearchDomainStatus struct {
 	// for Amazon Elasticsearch Service Domains
 	// (http://docs.aws.amazon.com/elasticsearch-service/latest/developerguide/es-vpc.html).
 	VPCOptions *VPCDerivedInfo
+
+	noSmithyDocumentSerde
 }
 
 // Status of the Elasticsearch version options for the specified Elasticsearch
@@ -700,6 +763,8 @@ type ElasticsearchVersionStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the Encryption At Rest Options.
@@ -710,6 +775,8 @@ type EncryptionAtRestOptions struct {
 
 	// Specifies the KMS Key ID for Encryption At Rest options.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Status of the Encryption At Rest options for the specified Elasticsearch domain.
@@ -725,12 +792,16 @@ type EncryptionAtRestOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ErrorDetails struct {
 	ErrorMessage *string
 
 	ErrorType *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter used to limit results when describing inbound or outbound cross-cluster
@@ -744,6 +815,8 @@ type Filter struct {
 
 	// Contains one or more values for the filter.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies details of an inbound connection.
@@ -761,6 +834,8 @@ type InboundCrossClusterSearchConnection struct {
 
 	// Specifies the DomainInformation for the source Elasticsearch domain.
 	SourceDomainInfo *DomainInformation
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the coonection status of an inbound cross-cluster search connection.
@@ -789,6 +864,8 @@ type InboundCrossClusterSearchConnectionStatus struct {
 	// * DELETED: Inbound connection is deleted and cannot be
 	// used further.
 	StatusCode InboundCrossClusterSearchConnectionStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // InstanceCountLimits represents the limits on number of instances that be created
@@ -800,6 +877,8 @@ type InstanceCountLimits struct {
 
 	// Minimum number of Instances that can be instantiated for given InstanceType.
 	MinimumInstanceCount int32
+
+	noSmithyDocumentSerde
 }
 
 // InstanceLimits represents the list of instance related attributes that are
@@ -809,6 +888,8 @@ type InstanceLimits struct {
 	// InstanceCountLimits represents the limits on number of instances that be created
 	// in Amazon Elasticsearch for given InstanceType.
 	InstanceCountLimits *InstanceCountLimits
+
+	noSmithyDocumentSerde
 }
 
 // Limits for given InstanceType and for each of it's role.
@@ -828,6 +909,8 @@ type Limits struct {
 	// StorageType represents the list of storage related types and attributes that are
 	// available for given InstanceType.
 	StorageTypes []StorageType
+
+	noSmithyDocumentSerde
 }
 
 // Log Publishing option that is set for given domain.
@@ -847,6 +930,8 @@ type LogPublishingOption struct {
 
 	// Specifies whether given log publishing option is enabled or not.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // The configured log publishing options for the domain and their current status.
@@ -858,6 +943,8 @@ type LogPublishingOptionsStatus struct {
 	// The status of the log publishing options for the Elasticsearch domain. See
 	// OptionStatus for the status information that's included.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Credentials for the master user: username and password, ARN, or both.
@@ -873,6 +960,8 @@ type MasterUserOptions struct {
 	// The master user's password, which is stored in the Amazon Elasticsearch Service
 	// domain's internal database.
 	MasterUserPassword *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the node-to-node encryption options.
@@ -880,6 +969,8 @@ type NodeToNodeEncryptionOptions struct {
 
 	// Specify true to enable node-to-node encryption.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Status of the node-to-node encryption options for the specified Elasticsearch
@@ -897,6 +988,8 @@ type NodeToNodeEncryptionOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides the current status of the entity.
@@ -922,6 +1015,8 @@ type OptionStatus struct {
 
 	// Specifies the latest version for the entity.
 	UpdateVersion int32
+
+	noSmithyDocumentSerde
 }
 
 // Specifies details of an outbound connection.
@@ -942,6 +1037,8 @@ type OutboundCrossClusterSearchConnection struct {
 
 	// Specifies the DomainInformation for the source Elasticsearch domain.
 	SourceDomainInfo *DomainInformation
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the connection status of an outbound cross-cluster search connection.
@@ -976,6 +1073,8 @@ type OutboundCrossClusterSearchConnectionStatus struct {
 	// * DELETED:
 	// Outbound connection is deleted and cannot be used further.
 	StatusCode OutboundCrossClusterSearchConnectionStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // Basic information about a package.
@@ -1005,6 +1104,8 @@ type PackageDetails struct {
 
 	// Currently supports only TXT-DICTIONARY.
 	PackageType PackageType
+
+	noSmithyDocumentSerde
 }
 
 // The S3 location for importing the package specified as S3BucketName and S3Key
@@ -1015,6 +1116,8 @@ type PackageSource struct {
 
 	// Key (file name) of the package.
 	S3Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of a package version.
@@ -1028,6 +1131,8 @@ type PackageVersionHistory struct {
 
 	// Version of the package.
 	PackageVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the specific price and frequency of a recurring charges for a reserved
@@ -1039,6 +1144,8 @@ type RecurringCharge struct {
 
 	// The frequency of the recurring charge.
 	RecurringChargeFrequency *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of a reserved Elasticsearch instance.
@@ -1085,6 +1192,8 @@ type ReservedElasticsearchInstance struct {
 	// The rate you are charged for each hour for the domain that is using this
 	// reserved instance.
 	UsagePrice *float64
+
+	noSmithyDocumentSerde
 }
 
 // Details of a reserved Elasticsearch instance offering.
@@ -1117,6 +1226,8 @@ type ReservedElasticsearchInstanceOffering struct {
 	// The rate you are charged for each hour the domain that is using the offering is
 	// running.
 	UsagePrice *float64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the SAML Identity Provider's information.
@@ -1131,6 +1242,8 @@ type SAMLIdp struct {
 	//
 	// This member is required.
 	MetadataContent *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the SAML application configuration for the domain.
@@ -1158,6 +1271,8 @@ type SAMLOptionsInput struct {
 
 	// The key to use for matching the SAML Subject attribute.
 	SubjectKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the SAML application configured for the domain.
@@ -1177,6 +1292,8 @@ type SAMLOptionsOutput struct {
 
 	// The key used for matching the SAML Subject attribute.
 	SubjectKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies details of the scheduled Auto-Tune action. See the Developer Guide
@@ -1196,6 +1313,8 @@ type ScheduledAutoTuneDetails struct {
 
 	// Specifies Auto-Tune action severity. Valid values are LOW, MEDIUM and HIGH.
 	Severity ScheduledAutoTuneSeverityType
+
+	noSmithyDocumentSerde
 }
 
 // The current options of an Elasticsearch domain service software options.
@@ -1229,6 +1348,8 @@ type ServiceSoftwareOptions struct {
 	// The status of your service software update. This field can take the following
 	// values: ELIGIBLE, PENDING_UPDATE, IN_PROGRESS, COMPLETED, and NOT_ELIGIBLE.
 	UpdateStatus DeploymentStatus
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the time, in UTC format, when the service takes a daily automated
@@ -1238,6 +1359,8 @@ type SnapshotOptions struct {
 	// Specifies the time, in UTC format, when the service takes a daily automated
 	// snapshot of the specified Elasticsearch domain. Default value is 0 hours.
 	AutomatedSnapshotStartHour *int32
+
+	noSmithyDocumentSerde
 }
 
 // Status of a daily automated snapshot.
@@ -1252,6 +1375,8 @@ type SnapshotOptionsStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // StorageTypes represents the list of storage related types and their attributes
@@ -1284,6 +1409,8 @@ type StorageType struct {
 	//  Elastic block storage that would
 	// be attached to the given Instance
 	StorageTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Limits that are applicable for given storage type.
@@ -1311,6 +1438,8 @@ type StorageTypeLimit struct {
 
 	// Values for the StorageTypeLimit$LimitName .
 	LimitValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a key value pair for a resource tag.
@@ -1329,6 +1458,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // History of the last 10 Upgrades and Upgrade Eligibility Checks.
@@ -1356,6 +1487,8 @@ type UpgradeHistory struct {
 	//
 	// * Failed
 	UpgradeStatus UpgradeStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents a single step of the Upgrade or Upgrade Eligibility Check workflow.
@@ -1390,6 +1523,8 @@ type UpgradeStepItem struct {
 	// *
 	// Failed
 	UpgradeStepStatus UpgradeStatus
+
+	noSmithyDocumentSerde
 }
 
 // Options to specify the subnets and security groups for VPC endpoint. For more
@@ -1410,6 +1545,8 @@ type VPCDerivedInfo struct {
 	// The VPC Id for the Elasticsearch domain. Exists only if the domain was created
 	// with VPCOptions.
 	VPCId *string
+
+	noSmithyDocumentSerde
 }
 
 // Status of the VPC options for the specified Elasticsearch domain.
@@ -1424,6 +1561,8 @@ type VPCDerivedInfoStatus struct {
 	//
 	// This member is required.
 	Status *OptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // Options to specify the subnets and security groups for VPC endpoint. For more
@@ -1436,6 +1575,8 @@ type VPCOptions struct {
 
 	// Specifies the subnets for VPC endpoint.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the zone awareness configuration for the domain cluster, such as the
@@ -1446,4 +1587,8 @@ type ZoneAwarenessConfig struct {
 	// zone awareness is enabled. This should be equal to number of subnets if VPC
 	// endpoints is enabled
 	AvailabilityZoneCount *int32
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

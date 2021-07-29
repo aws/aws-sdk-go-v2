@@ -36,6 +36,8 @@ type StopProjectVersionInput struct {
 	//
 	// This member is required.
 	ProjectVersionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type StopProjectVersionOutput struct {
@@ -45,6 +47,8 @@ type StopProjectVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopProjectVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

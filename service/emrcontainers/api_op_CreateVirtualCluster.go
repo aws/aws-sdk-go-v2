@@ -51,6 +51,8 @@ type CreateVirtualClusterInput struct {
 
 	// The tags assigned to the virtual cluster.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVirtualClusterOutput struct {
@@ -66,6 +68,8 @@ type CreateVirtualClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVirtualClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

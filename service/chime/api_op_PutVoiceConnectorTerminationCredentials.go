@@ -36,11 +36,15 @@ type PutVoiceConnectorTerminationCredentialsInput struct {
 
 	// The termination SIP credentials.
 	Credentials []types.Credential
+
+	noSmithyDocumentSerde
 }
 
 type PutVoiceConnectorTerminationCredentialsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutVoiceConnectorTerminationCredentialsMiddlewares(stack *middleware.Stack, options Options) (err error) {

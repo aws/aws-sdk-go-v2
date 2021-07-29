@@ -40,6 +40,8 @@ type UpdatePullRequestStatusInput struct {
 	//
 	// This member is required.
 	PullRequestStatus types.PullRequestStatusEnum
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePullRequestStatusOutput struct {
@@ -51,6 +53,8 @@ type UpdatePullRequestStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePullRequestStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

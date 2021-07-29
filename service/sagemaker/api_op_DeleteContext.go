@@ -32,6 +32,8 @@ type DeleteContextInput struct {
 	//
 	// This member is required.
 	ContextName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteContextOutput struct {
@@ -41,6 +43,8 @@ type DeleteContextOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteContextMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type DescribeTaskDefinitionInput struct {
 	// specified, the tags are included in the response. If this field is omitted, tags
 	// are not included in the response.
 	Include []types.TaskDefinitionField
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTaskDefinitionOutput struct {
@@ -82,6 +84,8 @@ type DescribeTaskDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTaskDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

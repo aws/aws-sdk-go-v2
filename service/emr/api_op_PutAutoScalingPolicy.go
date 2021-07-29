@@ -48,6 +48,8 @@ type PutAutoScalingPolicyInput struct {
 	//
 	// This member is required.
 	InstanceGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutAutoScalingPolicyOutput struct {
@@ -67,6 +69,8 @@ type PutAutoScalingPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAutoScalingPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

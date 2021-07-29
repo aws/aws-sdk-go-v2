@@ -55,6 +55,8 @@ type DeleteRelationalDatabaseInput struct {
 	// must specify the final relational database snapshot name parameter if the skip
 	// final snapshot parameter is false. Default: false
 	SkipFinalSnapshot *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRelationalDatabaseOutput struct {
@@ -66,6 +68,8 @@ type DeleteRelationalDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

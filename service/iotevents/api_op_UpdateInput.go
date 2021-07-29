@@ -41,6 +41,8 @@ type UpdateInputInput struct {
 
 	// A brief description of the input.
 	InputDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateInputOutput struct {
@@ -50,6 +52,8 @@ type UpdateInputOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateInputMiddlewares(stack *middleware.Stack, options Options) (err error) {

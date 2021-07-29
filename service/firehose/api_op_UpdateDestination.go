@@ -91,11 +91,15 @@ type UpdateDestinationInput struct {
 
 	// Describes an update for a destination in Splunk.
 	SplunkDestinationUpdate *types.SplunkDestinationUpdate
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

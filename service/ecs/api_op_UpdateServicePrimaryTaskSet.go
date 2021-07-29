@@ -51,6 +51,8 @@ type UpdateServicePrimaryTaskSetInput struct {
 	//
 	// This member is required.
 	Service *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServicePrimaryTaskSetOutput struct {
@@ -60,6 +62,8 @@ type UpdateServicePrimaryTaskSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServicePrimaryTaskSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

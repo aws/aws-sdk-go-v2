@@ -59,6 +59,8 @@ type ListAggregateDiscoveredResourcesInput struct {
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAggregateDiscoveredResourcesOutput struct {
@@ -72,6 +74,8 @@ type ListAggregateDiscoveredResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAggregateDiscoveredResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

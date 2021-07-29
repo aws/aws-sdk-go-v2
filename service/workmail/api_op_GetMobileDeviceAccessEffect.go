@@ -48,6 +48,8 @@ type GetMobileDeviceAccessEffectInput struct {
 
 	// Device user agent the simulated user will report.
 	DeviceUserAgent *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMobileDeviceAccessEffectOutput struct {
@@ -63,6 +65,8 @@ type GetMobileDeviceAccessEffectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMobileDeviceAccessEffectMiddlewares(stack *middleware.Stack, options Options) (err error) {

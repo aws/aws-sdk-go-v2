@@ -50,11 +50,15 @@ type RemoveRoleFromInstanceProfileInput struct {
 	//
 	// This member is required.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveRoleFromInstanceProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveRoleFromInstanceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

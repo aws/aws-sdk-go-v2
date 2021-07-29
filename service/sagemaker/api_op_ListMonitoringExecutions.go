@@ -80,6 +80,8 @@ type ListMonitoringExecutionsInput struct {
 
 	// A filter that retrieves only jobs with a specific status.
 	StatusEquals types.ExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListMonitoringExecutionsOutput struct {
@@ -95,6 +97,8 @@ type ListMonitoringExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMonitoringExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

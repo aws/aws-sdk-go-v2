@@ -35,6 +35,8 @@ type PauseClusterInput struct {
 	//
 	// This member is required.
 	ClusterIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type PauseClusterOutput struct {
@@ -44,6 +46,8 @@ type PauseClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPauseClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

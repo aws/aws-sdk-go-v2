@@ -39,11 +39,15 @@ type UpdateMacieSessionInput struct {
 	// Amazon Macie activities for the account; and, PAUSED, suspend all Macie
 	// activities for the account.
 	Status types.MacieStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMacieSessionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMacieSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

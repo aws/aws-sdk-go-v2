@@ -49,11 +49,15 @@ type DetachUserPolicyInput struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type DetachUserPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetachUserPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type UpdateRuleVersionInput struct {
 
 	// The tags to assign to the rule version.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRuleVersionOutput struct {
@@ -64,6 +66,8 @@ type UpdateRuleVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRuleVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

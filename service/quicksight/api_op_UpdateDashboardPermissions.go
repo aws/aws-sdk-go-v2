@@ -45,6 +45,8 @@ type UpdateDashboardPermissionsInput struct {
 
 	// The permissions that you want to revoke from this resource.
 	RevokePermissions []types.ResourcePermission
+
+	noSmithyDocumentSerde
 }
 
 type UpdateDashboardPermissionsOutput struct {
@@ -66,6 +68,8 @@ type UpdateDashboardPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDashboardPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

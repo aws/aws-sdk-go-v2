@@ -12,6 +12,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -31,6 +33,8 @@ type InternalException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalException) Error() string {
@@ -52,6 +56,8 @@ type InvalidAccessException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAccessException) Error() string {
@@ -72,6 +78,8 @@ type InvalidInputException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -93,6 +101,8 @@ type LimitExceededException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -112,6 +122,8 @@ type ResourceConflictException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceConflictException) Error() string {
@@ -131,6 +143,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

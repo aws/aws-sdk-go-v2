@@ -38,6 +38,8 @@ type DescribeTimeBasedAutoScalingInput struct {
 	//
 	// This member is required.
 	InstanceIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeTimeBasedAutoScaling request.
@@ -49,6 +51,8 @@ type DescribeTimeBasedAutoScalingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTimeBasedAutoScalingMiddlewares(stack *middleware.Stack, options Options) (err error) {

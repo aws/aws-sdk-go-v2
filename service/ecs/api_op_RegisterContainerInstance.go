@@ -92,6 +92,8 @@ type RegisterContainerInstanceInput struct {
 	// The version information for the Amazon ECS container agent and Docker daemon
 	// running on the container instance.
 	VersionInfo *types.VersionInfo
+
+	noSmithyDocumentSerde
 }
 
 type RegisterContainerInstanceOutput struct {
@@ -101,6 +103,8 @@ type RegisterContainerInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterContainerInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

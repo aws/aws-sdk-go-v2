@@ -54,6 +54,8 @@ type ListInferenceExecutionsInput struct {
 
 	// The status of the inference execution.
 	Status types.InferenceExecutionStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListInferenceExecutionsOutput struct {
@@ -69,6 +71,8 @@ type ListInferenceExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInferenceExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

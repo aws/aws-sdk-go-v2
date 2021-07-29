@@ -54,6 +54,8 @@ type DescribeTapesInput struct {
 	// gateway returns a description of all virtual tapes associated with the specified
 	// gateway.
 	TapeARNs []string
+
+	noSmithyDocumentSerde
 }
 
 // DescribeTapesOutput
@@ -69,6 +71,8 @@ type DescribeTapesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {

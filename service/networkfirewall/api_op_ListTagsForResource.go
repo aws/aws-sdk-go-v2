@@ -53,6 +53,8 @@ type ListTagsForResourceInput struct {
 	// retrieve the next batch of objects, use the token returned from the prior
 	// request in your next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsForResourceOutput struct {
@@ -69,6 +71,8 @@ type ListTagsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

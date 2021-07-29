@@ -142,6 +142,8 @@ type StartTranscriptionJobInput struct {
 
 	// A Settings object that provides optional settings for a transcription job.
 	Settings *types.Settings
+
+	noSmithyDocumentSerde
 }
 
 type StartTranscriptionJobOutput struct {
@@ -151,6 +153,8 @@ type StartTranscriptionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTranscriptionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

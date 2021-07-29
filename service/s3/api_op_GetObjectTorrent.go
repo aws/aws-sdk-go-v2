@@ -63,6 +63,8 @@ type GetObjectTorrentInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
+
+	noSmithyDocumentSerde
 }
 
 type GetObjectTorrentOutput struct {
@@ -76,6 +78,8 @@ type GetObjectTorrentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetObjectTorrentMiddlewares(stack *middleware.Stack, options Options) (err error) {

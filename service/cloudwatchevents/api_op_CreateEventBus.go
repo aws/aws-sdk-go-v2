@@ -46,6 +46,8 @@ type CreateEventBusInput struct {
 
 	// Tags to associate with the event bus.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateEventBusOutput struct {
@@ -55,6 +57,8 @@ type CreateEventBusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEventBusMiddlewares(stack *middleware.Stack, options Options) (err error) {

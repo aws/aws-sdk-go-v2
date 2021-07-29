@@ -34,6 +34,8 @@ type CancelMaintenanceWindowExecutionInput struct {
 	//
 	// This member is required.
 	WindowExecutionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelMaintenanceWindowExecutionOutput struct {
@@ -43,6 +45,8 @@ type CancelMaintenanceWindowExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelMaintenanceWindowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

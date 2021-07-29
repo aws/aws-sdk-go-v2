@@ -48,6 +48,8 @@ type ListRoutingProfilesInput struct {
 	// The token for the next set of results. Use the value returned in the previous
 	// response in the next request to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRoutingProfilesOutput struct {
@@ -60,6 +62,8 @@ type ListRoutingProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRoutingProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

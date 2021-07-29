@@ -58,6 +58,8 @@ type GetTranscriptInput struct {
 
 	// A filtering option for where to start.
 	StartPosition *types.StartPosition
+
+	noSmithyDocumentSerde
 }
 
 type GetTranscriptOutput struct {
@@ -74,6 +76,8 @@ type GetTranscriptOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTranscriptMiddlewares(stack *middleware.Stack, options Options) (err error) {

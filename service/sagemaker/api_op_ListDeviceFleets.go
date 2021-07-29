@@ -58,6 +58,8 @@ type ListDeviceFleetsInput struct {
 
 	// What direction to sort in.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListDeviceFleetsOutput struct {
@@ -73,6 +75,8 @@ type ListDeviceFleetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeviceFleetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

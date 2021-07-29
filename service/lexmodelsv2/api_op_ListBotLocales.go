@@ -58,6 +58,8 @@ type ListBotLocalesInput struct {
 	// Specifies sorting parameters for the list of locales. You can sort by locale
 	// name in ascending or descending order.
 	SortBy *types.BotLocaleSortBy
+
+	noSmithyDocumentSerde
 }
 
 type ListBotLocalesOutput struct {
@@ -82,6 +84,8 @@ type ListBotLocalesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBotLocalesMiddlewares(stack *middleware.Stack, options Options) (err error) {

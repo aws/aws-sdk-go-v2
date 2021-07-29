@@ -44,6 +44,8 @@ type DescribeAnomalyDetectionExecutionsInput struct {
 
 	// The timestamp of the anomaly detection job.
 	Timestamp *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAnomalyDetectionExecutionsOutput struct {
@@ -56,6 +58,8 @@ type DescribeAnomalyDetectionExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAnomalyDetectionExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

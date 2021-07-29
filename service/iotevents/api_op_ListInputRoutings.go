@@ -39,6 +39,8 @@ type ListInputRoutingsInput struct {
 
 	// The token that you can use to return the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListInputRoutingsOutput struct {
@@ -52,6 +54,8 @@ type ListInputRoutingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListInputRoutingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

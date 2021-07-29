@@ -33,6 +33,8 @@ type DescribeDetectMitigationActionsTaskInput struct {
 	//
 	// This member is required.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeDetectMitigationActionsTaskOutput struct {
@@ -42,6 +44,8 @@ type DescribeDetectMitigationActionsTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDetectMitigationActionsTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

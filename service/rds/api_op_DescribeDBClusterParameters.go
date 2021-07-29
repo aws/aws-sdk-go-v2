@@ -60,6 +60,8 @@ type DescribeDBClusterParametersInput struct {
 	// A value that indicates to return only parameters for a specific source.
 	// Parameter sources can be engine, service, or customer.
 	Source *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides details about a DB cluster parameter group including the parameters in
@@ -76,6 +78,8 @@ type DescribeDBClusterParametersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeDBClusterParametersMiddlewares(stack *middleware.Stack, options Options) (err error) {

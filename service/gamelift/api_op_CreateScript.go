@@ -93,6 +93,8 @@ type CreateScriptInput struct {
 	// file data is a binary object. For example: --zip-file
 	// fileb://myRealtimeScript.zip.
 	ZipFile []byte
+
+	noSmithyDocumentSerde
 }
 
 type CreateScriptOutput struct {
@@ -107,6 +109,8 @@ type CreateScriptOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {

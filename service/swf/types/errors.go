@@ -16,6 +16,8 @@ import (
 // parameters were defined in the workflow type, this error is displayed.
 type DefaultUndefinedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DefaultUndefinedFault) Error() string {
@@ -35,6 +37,8 @@ func (e *DefaultUndefinedFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // undeprecate a domain that is currently registered.
 type DomainAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DomainAlreadyExistsFault) Error() string {
@@ -52,6 +56,8 @@ func (e *DomainAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smith
 // Returned when the specified domain has been deprecated.
 type DomainDeprecatedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DomainDeprecatedFault) Error() string {
@@ -71,6 +77,8 @@ func (e *DomainDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // limit by contacting AWS.
 type LimitExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededFault) Error() string {
@@ -89,6 +97,8 @@ func (e *LimitExceededFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // action.
 type OperationNotPermittedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OperationNotPermittedFault) Error() string {
@@ -106,6 +116,8 @@ func (e *OperationNotPermittedFault) ErrorFault() smithy.ErrorFault { return smi
 // You've exceeded the number of tags allowed for a domain.
 type TooManyTagsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsFault) Error() string {
@@ -125,6 +137,8 @@ func (e *TooManyTagsFault) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // deprecated, or if you undeprecate a type that is currently registered.
 type TypeAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TypeAlreadyExistsFault) Error() string {
@@ -142,6 +156,8 @@ func (e *TypeAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.
 // Returned when the specified activity or workflow type was already deprecated.
 type TypeDeprecatedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TypeDeprecatedFault) Error() string {
@@ -161,6 +177,8 @@ func (e *TypeDeprecatedFault) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // created or is no longer available for this operation.
 type UnknownResourceFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnknownResourceFault) Error() string {
@@ -179,6 +197,8 @@ func (e *UnknownResourceFault) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // workflowId is already running in the specified domain.
 type WorkflowExecutionAlreadyStartedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *WorkflowExecutionAlreadyStartedFault) Error() string {

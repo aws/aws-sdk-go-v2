@@ -35,6 +35,8 @@ type GetDeploymentConfigInput struct {
 	//
 	// This member is required.
 	DeploymentConfigName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetDeploymentConfig operation.
@@ -45,6 +47,8 @@ type GetDeploymentConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeploymentConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

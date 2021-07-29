@@ -40,6 +40,8 @@ type PutInventoryInput struct {
 	//
 	// This member is required.
 	Items []types.InventoryItem
+
+	noSmithyDocumentSerde
 }
 
 type PutInventoryOutput struct {
@@ -49,6 +51,8 @@ type PutInventoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutInventoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

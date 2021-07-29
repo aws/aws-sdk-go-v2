@@ -46,11 +46,15 @@ type AddRoleToDBInstanceInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AddRoleToDBInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddRoleToDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

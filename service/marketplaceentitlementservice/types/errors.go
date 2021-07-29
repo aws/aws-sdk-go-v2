@@ -11,6 +11,8 @@ import (
 // post a message with details on the AWS forums.
 type InternalServiceErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceErrorException) Error() string {
@@ -28,6 +30,8 @@ func (e *InternalServiceErrorException) ErrorFault() smithy.ErrorFault { return 
 // One or more parameters in your request was invalid.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -45,6 +49,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // The calls to the GetEntitlements API are throttled.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {

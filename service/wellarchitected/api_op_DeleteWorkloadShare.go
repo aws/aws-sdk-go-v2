@@ -50,11 +50,15 @@ type DeleteWorkloadShareInput struct {
 	//
 	// This member is required.
 	WorkloadId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorkloadShareOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorkloadShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

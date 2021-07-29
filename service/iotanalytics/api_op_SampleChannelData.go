@@ -44,6 +44,8 @@ type SampleChannelDataInput struct {
 
 	// The start of the time window from which sample messages are retrieved.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 type SampleChannelDataOutput struct {
@@ -54,6 +56,8 @@ type SampleChannelDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSampleChannelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

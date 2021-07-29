@@ -47,6 +47,8 @@ type DeleteProfileObjectInput struct {
 	//
 	// This member is required.
 	ProfileObjectUniqueKey *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProfileObjectOutput struct {
@@ -56,6 +58,8 @@ type DeleteProfileObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProfileObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

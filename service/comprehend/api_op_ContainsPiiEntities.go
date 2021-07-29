@@ -41,6 +41,8 @@ type ContainsPiiEntitiesInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type ContainsPiiEntitiesOutput struct {
@@ -51,6 +53,8 @@ type ContainsPiiEntitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationContainsPiiEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

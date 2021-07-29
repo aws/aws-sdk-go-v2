@@ -42,6 +42,8 @@ type ListRecommendationsInput struct {
 
 	// Pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRecommendationsOutput struct {
@@ -54,6 +56,8 @@ type ListRecommendationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRecommendationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

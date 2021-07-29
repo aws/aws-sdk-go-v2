@@ -46,6 +46,8 @@ type ResetServiceSpecificCredentialInput struct {
 	// consisting of upper and lowercase alphanumeric characters with no spaces. You
 	// can also include any of the following characters: _+=,.@-
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetServiceSpecificCredentialOutput struct {
@@ -57,6 +59,8 @@ type ResetServiceSpecificCredentialOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetServiceSpecificCredentialMiddlewares(stack *middleware.Stack, options Options) (err error) {

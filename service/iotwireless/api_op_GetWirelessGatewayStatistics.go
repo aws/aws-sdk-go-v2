@@ -33,6 +33,8 @@ type GetWirelessGatewayStatisticsInput struct {
 	//
 	// This member is required.
 	WirelessGatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetWirelessGatewayStatisticsOutput struct {
@@ -48,6 +50,8 @@ type GetWirelessGatewayStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetWirelessGatewayStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

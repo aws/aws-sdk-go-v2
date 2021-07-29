@@ -71,6 +71,8 @@ type AssociateNodeInput struct {
 	//
 	// This member is required.
 	ServerName *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateNodeOutput struct {
@@ -81,6 +83,8 @@ type AssociateNodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateNodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

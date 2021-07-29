@@ -74,6 +74,8 @@ type CreateDatasetImportJobInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatasetImportJobOutput struct {
@@ -83,6 +85,8 @@ type CreateDatasetImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatasetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

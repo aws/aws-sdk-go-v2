@@ -34,6 +34,8 @@ type DescribeAppInstanceUserInput struct {
 	//
 	// This member is required.
 	AppInstanceUserArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAppInstanceUserOutput struct {
@@ -43,6 +45,8 @@ type DescribeAppInstanceUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAppInstanceUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

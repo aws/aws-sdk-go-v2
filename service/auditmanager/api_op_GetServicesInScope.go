@@ -28,6 +28,7 @@ func (c *Client) GetServicesInScope(ctx context.Context, params *GetServicesInSc
 }
 
 type GetServicesInScopeInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetServicesInScopeOutput struct {
@@ -37,6 +38,8 @@ type GetServicesInScopeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServicesInScopeMiddlewares(stack *middleware.Stack, options Options) (err error) {

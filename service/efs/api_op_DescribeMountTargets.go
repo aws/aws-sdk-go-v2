@@ -59,6 +59,8 @@ type DescribeMountTargetsInput struct {
 	// must be included in your request if FileSystemId is not included. Accepts either
 	// a mount target ID or ARN as input.
 	MountTargetId *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -79,6 +81,8 @@ type DescribeMountTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMountTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

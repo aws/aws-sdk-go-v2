@@ -39,11 +39,15 @@ type DisassociateDRTLogBucketInput struct {
 	//
 	// This member is required.
 	LogBucket *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateDRTLogBucketOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateDRTLogBucketMiddlewares(stack *middleware.Stack, options Options) (err error) {

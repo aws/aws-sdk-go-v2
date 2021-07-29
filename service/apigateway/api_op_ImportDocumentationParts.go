@@ -48,6 +48,8 @@ type ImportDocumentationPartsInput struct {
 	// DocumentationParts definition or to merge (MERGE) the new definition into the
 	// existing one. The default value is MERGE.
 	Mode types.PutMode
+
+	noSmithyDocumentSerde
 }
 
 // A collection of the imported DocumentationPart identifiers. This is used to
@@ -67,6 +69,8 @@ type ImportDocumentationPartsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportDocumentationPartsMiddlewares(stack *middleware.Stack, options Options) (err error) {

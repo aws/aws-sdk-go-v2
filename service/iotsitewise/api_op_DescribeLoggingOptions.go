@@ -29,6 +29,7 @@ func (c *Client) DescribeLoggingOptions(ctx context.Context, params *DescribeLog
 }
 
 type DescribeLoggingOptionsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeLoggingOptionsOutput struct {
@@ -40,6 +41,8 @@ type DescribeLoggingOptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeLoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

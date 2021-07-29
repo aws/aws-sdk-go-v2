@@ -47,6 +47,8 @@ type MergePullRequestByFastForwardInput struct {
 	// branch. Pass this value if you want an exception thrown if the current commit ID
 	// of the tip of the source branch does not match this commit ID.
 	SourceCommitId *string
+
+	noSmithyDocumentSerde
 }
 
 type MergePullRequestByFastForwardOutput struct {
@@ -56,6 +58,8 @@ type MergePullRequestByFastForwardOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMergePullRequestByFastForwardMiddlewares(stack *middleware.Stack, options Options) (err error) {

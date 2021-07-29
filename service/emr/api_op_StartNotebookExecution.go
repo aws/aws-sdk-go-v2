@@ -71,6 +71,8 @@ type StartNotebookExecutionInput struct {
 	// key-value pairs that consist of a required key string with a maximum of 128
 	// characters and an optional value string with a maximum of 256 characters.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type StartNotebookExecutionOutput struct {
@@ -80,6 +82,8 @@ type StartNotebookExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartNotebookExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

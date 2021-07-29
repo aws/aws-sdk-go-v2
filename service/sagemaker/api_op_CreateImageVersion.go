@@ -49,6 +49,8 @@ type CreateImageVersionInput struct {
 	//
 	// This member is required.
 	ImageName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateImageVersionOutput struct {
@@ -58,6 +60,8 @@ type CreateImageVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateImageVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

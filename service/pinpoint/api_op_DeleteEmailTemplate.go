@@ -58,6 +58,8 @@ type DeleteEmailTemplateInput struct {
 	// For a delete operation, deletes the template, including all versions of the
 	// template.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEmailTemplateOutput struct {
@@ -69,6 +71,8 @@ type DeleteEmailTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

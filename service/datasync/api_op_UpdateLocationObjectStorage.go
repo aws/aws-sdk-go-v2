@@ -67,11 +67,15 @@ type UpdateLocationObjectStorageInput struct {
 	// The subdirectory in the self-managed object storage server that is used to read
 	// data from.
 	Subdirectory *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLocationObjectStorageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLocationObjectStorageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,11 +41,15 @@ type DisassociateApprovalRuleTemplateFromRepositoryInput struct {
 	//
 	// This member is required.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateApprovalRuleTemplateFromRepositoryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateApprovalRuleTemplateFromRepositoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

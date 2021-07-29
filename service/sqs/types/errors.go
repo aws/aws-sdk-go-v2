@@ -10,6 +10,8 @@ import (
 // Two or more batch entries in the request have the same Id.
 type BatchEntryIdsNotDistinct struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BatchEntryIdsNotDistinct) Error() string {
@@ -29,6 +31,8 @@ func (e *BatchEntryIdsNotDistinct) ErrorFault() smithy.ErrorFault { return smith
 // The length of all the messages put together is more than the limit.
 type BatchRequestTooLong struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BatchRequestTooLong) Error() string {
@@ -46,6 +50,8 @@ func (e *BatchRequestTooLong) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The batch request doesn't contain any entries.
 type EmptyBatchRequest struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EmptyBatchRequest) Error() string {
@@ -63,6 +69,8 @@ func (e *EmptyBatchRequest) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The specified attribute doesn't exist.
 type InvalidAttributeName struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidAttributeName) Error() string {
@@ -80,6 +88,8 @@ func (e *InvalidAttributeName) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The Id of a batch entry in a batch request doesn't abide by the specification.
 type InvalidBatchEntryId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidBatchEntryId) Error() string {
@@ -97,6 +107,8 @@ func (e *InvalidBatchEntryId) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The specified receipt handle isn't valid for the current version.
 type InvalidIdFormat struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidIdFormat) Error() string {
@@ -114,6 +126,8 @@ func (e *InvalidIdFormat) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The message contains characters outside the allowed set.
 type InvalidMessageContents struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidMessageContents) Error() string {
@@ -131,6 +145,8 @@ func (e *InvalidMessageContents) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified message isn't in flight.
 type MessageNotInflight struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MessageNotInflight) Error() string {
@@ -151,6 +167,8 @@ func (e *MessageNotInflight) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // reached.
 type OverLimit struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OverLimit) Error() string {
@@ -170,6 +188,8 @@ func (e *OverLimit) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 // queue).
 type PurgeQueueInProgress struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PurgeQueueInProgress) Error() string {
@@ -190,6 +210,8 @@ func (e *PurgeQueueInProgress) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // queue with the same name.
 type QueueDeletedRecently struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *QueueDeletedRecently) Error() string {
@@ -209,6 +231,8 @@ func (e *QueueDeletedRecently) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The specified queue doesn't exist.
 type QueueDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *QueueDoesNotExist) Error() string {
@@ -228,6 +252,8 @@ func (e *QueueDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // queue.
 type QueueNameExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *QueueNameExists) Error() string {
@@ -245,6 +271,8 @@ func (e *QueueNameExists) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The specified receipt handle isn't valid.
 type ReceiptHandleIsInvalid struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReceiptHandleIsInvalid) Error() string {
@@ -262,6 +290,8 @@ func (e *ReceiptHandleIsInvalid) ErrorFault() smithy.ErrorFault { return smithy.
 // The batch request contains more entries than permissible.
 type TooManyEntriesInBatchRequest struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyEntriesInBatchRequest) Error() string {
@@ -281,6 +311,8 @@ func (e *TooManyEntriesInBatchRequest) ErrorFault() smithy.ErrorFault { return s
 // Error code 400. Unsupported operation.
 type UnsupportedOperation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedOperation) Error() string {

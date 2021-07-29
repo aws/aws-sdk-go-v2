@@ -41,6 +41,8 @@ type ListArchiveRulesInput struct {
 
 	// A token used for pagination of results returned.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to the request.
@@ -56,6 +58,8 @@ type ListArchiveRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListArchiveRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

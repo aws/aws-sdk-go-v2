@@ -37,6 +37,8 @@ type DescribeConfigurationRecorderStatusInput struct {
 	// action returns the current status of all the configuration recorders associated
 	// with the account.
 	ConfigurationRecorderNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DescribeConfigurationRecorderStatus action, in JSON format.
@@ -47,6 +49,8 @@ type DescribeConfigurationRecorderStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeConfigurationRecorderStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,6 +34,8 @@ type GetBucketBundlesInput struct {
 	// A Boolean value that indicates whether to include inactive (unavailable) bundles
 	// in the response.
 	IncludeInactive *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetBucketBundlesOutput struct {
@@ -43,6 +45,8 @@ type GetBucketBundlesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBucketBundlesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type GetBucketAccessKeysInput struct {
 	//
 	// This member is required.
 	BucketName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBucketAccessKeysOutput struct {
@@ -46,6 +48,8 @@ type GetBucketAccessKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBucketAccessKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

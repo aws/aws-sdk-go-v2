@@ -35,6 +35,8 @@ type ListFlowsInput struct {
 
 	// The pagination token for next page of data.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFlowsOutput struct {
@@ -47,6 +49,8 @@ type ListFlowsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFlowsMiddlewares(stack *middleware.Stack, options Options) (err error) {

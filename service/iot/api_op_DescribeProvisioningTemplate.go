@@ -34,6 +34,8 @@ type DescribeProvisioningTemplateInput struct {
 	//
 	// This member is required.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProvisioningTemplateOutput struct {
@@ -71,6 +73,8 @@ type DescribeProvisioningTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProvisioningTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

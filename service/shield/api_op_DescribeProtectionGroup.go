@@ -35,6 +35,8 @@ type DescribeProtectionGroupInput struct {
 	//
 	// This member is required.
 	ProtectionGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProtectionGroupOutput struct {
@@ -48,6 +50,8 @@ type DescribeProtectionGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProtectionGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

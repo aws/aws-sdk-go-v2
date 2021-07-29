@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Provides the MIME content of the updated email message as an S3 object. All MIME
 // content must meet the following criteria:
 //
@@ -36,6 +40,8 @@ type RawMessageContent struct {
 	//
 	// This member is required.
 	S3Reference *S3Reference
+
+	noSmithyDocumentSerde
 }
 
 // Amazon S3 object representing the updated message content, in MIME format. The
@@ -58,4 +64,8 @@ type S3Reference struct {
 
 	// If you enable versioning for the bucket, you can specify the object version.
 	ObjectVersion *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

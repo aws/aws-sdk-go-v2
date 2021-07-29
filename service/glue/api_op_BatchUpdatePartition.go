@@ -47,6 +47,8 @@ type BatchUpdatePartitionInput struct {
 	// The ID of the catalog in which the partition is to be updated. Currently, this
 	// should be the Amazon Web Services account ID.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchUpdatePartitionOutput struct {
@@ -57,6 +59,8 @@ type BatchUpdatePartitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchUpdatePartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

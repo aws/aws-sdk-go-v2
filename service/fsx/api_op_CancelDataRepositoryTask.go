@@ -45,6 +45,8 @@ type CancelDataRepositoryTaskInput struct {
 	//
 	// This member is required.
 	TaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelDataRepositoryTaskOutput struct {
@@ -76,6 +78,8 @@ type CancelDataRepositoryTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelDataRepositoryTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

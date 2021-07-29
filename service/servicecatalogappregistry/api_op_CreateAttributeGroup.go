@@ -58,6 +58,8 @@ type CreateAttributeGroupInput struct {
 
 	// Key-value pairs you can use to associate with the attribute group.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAttributeGroupOutput struct {
@@ -67,6 +69,8 @@ type CreateAttributeGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAttributeGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

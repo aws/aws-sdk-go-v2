@@ -41,6 +41,8 @@ type ListConfigurationProfilesInput struct {
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListConfigurationProfilesOutput struct {
@@ -54,6 +56,8 @@ type ListConfigurationProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConfigurationProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

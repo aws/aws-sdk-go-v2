@@ -46,6 +46,8 @@ type ListRateBasedRulesInput struct {
 	// requests, specify the value of NextMarker from the previous response to get
 	// information about another batch of Rules.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRateBasedRulesOutput struct {
@@ -61,6 +63,8 @@ type ListRateBasedRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRateBasedRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

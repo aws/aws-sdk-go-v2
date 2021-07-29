@@ -35,6 +35,8 @@ type RestoreBackupInput struct {
 	//
 	// This member is required.
 	BackupId *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreBackupOutput struct {
@@ -44,6 +46,8 @@ type RestoreBackupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreBackupMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -73,6 +74,8 @@ type Environment struct {
 
 	// The name of the environment.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the current creation or deletion lifecycle state of an Cloud9
@@ -102,6 +105,8 @@ type EnvironmentLifecycle struct {
 	//
 	// * DELETE_FAILED: The environment failed to delete.
 	Status EnvironmentLifecycleStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about an environment member for an Cloud9 development environment.
@@ -139,6 +144,8 @@ type EnvironmentMember struct {
 	// The time, expressed in epoch time format, when the environment member last
 	// opened the environment.
 	LastAccess *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Metadata that is associated with Amazon Web Services resources. In particular, a
@@ -157,4 +164,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

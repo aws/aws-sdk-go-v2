@@ -47,6 +47,8 @@ type RenderUiTemplateInput struct {
 
 	// A Template object containing the worker UI template to render.
 	UiTemplate *types.UiTemplate
+
+	noSmithyDocumentSerde
 }
 
 type RenderUiTemplateOutput struct {
@@ -64,6 +66,8 @@ type RenderUiTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRenderUiTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

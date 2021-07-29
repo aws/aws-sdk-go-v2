@@ -58,6 +58,8 @@ type DescribeVpcEndpointServicePermissionsInput struct {
 
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcEndpointServicePermissionsOutput struct {
@@ -71,6 +73,8 @@ type DescribeVpcEndpointServicePermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcEndpointServicePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

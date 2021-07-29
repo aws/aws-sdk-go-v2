@@ -107,6 +107,8 @@ type CreateCaseInput struct {
 	// in the AWS Support User Guide. The availability of severity levels depends on
 	// the support plan for the AWS account.
 	SeverityCode *string
+
+	noSmithyDocumentSerde
 }
 
 // The support case ID returned by a successful completion of the CreateCase
@@ -120,6 +122,8 @@ type CreateCaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

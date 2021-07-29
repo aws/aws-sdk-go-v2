@@ -44,11 +44,15 @@ type AssociateRoutingProfileQueuesInput struct {
 	//
 	// This member is required.
 	RoutingProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateRoutingProfileQueuesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateRoutingProfileQueuesMiddlewares(stack *middleware.Stack, options Options) (err error) {

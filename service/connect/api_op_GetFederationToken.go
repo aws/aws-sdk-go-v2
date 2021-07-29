@@ -37,6 +37,8 @@ type GetFederationTokenInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFederationTokenOutput struct {
@@ -46,6 +48,8 @@ type GetFederationTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFederationTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

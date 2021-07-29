@@ -42,11 +42,15 @@ type AttachPrincipalPolicyInput struct {
 	//
 	// This member is required.
 	Principal *string
+
+	noSmithyDocumentSerde
 }
 
 type AttachPrincipalPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachPrincipalPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

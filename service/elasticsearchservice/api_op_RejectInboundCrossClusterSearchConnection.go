@@ -36,6 +36,8 @@ type RejectInboundCrossClusterSearchConnectionInput struct {
 	//
 	// This member is required.
 	CrossClusterSearchConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a RejectInboundCrossClusterSearchConnection operation. Contains
@@ -48,6 +50,8 @@ type RejectInboundCrossClusterSearchConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRejectInboundCrossClusterSearchConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

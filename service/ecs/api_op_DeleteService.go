@@ -57,6 +57,8 @@ type DeleteServiceInput struct {
 	// zero tasks. It is only necessary to use this if the service is using the REPLICA
 	// scheduling strategy.
 	Force *bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteServiceOutput struct {
@@ -66,6 +68,8 @@ type DeleteServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

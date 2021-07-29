@@ -34,6 +34,8 @@ type DescribeImageInput struct {
 	//
 	// This member is required.
 	ImageName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImageOutput struct {
@@ -68,6 +70,8 @@ type DescribeImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

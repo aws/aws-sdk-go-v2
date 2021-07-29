@@ -33,11 +33,15 @@ type DeleteAlarmModelInput struct {
 	//
 	// This member is required.
 	AlarmModelName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAlarmModelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAlarmModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

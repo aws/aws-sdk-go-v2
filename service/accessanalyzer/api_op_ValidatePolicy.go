@@ -58,6 +58,8 @@ type ValidatePolicyInput struct {
 
 	// A token used for pagination of results returned.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ValidatePolicyOutput struct {
@@ -73,6 +75,8 @@ type ValidatePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationValidatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

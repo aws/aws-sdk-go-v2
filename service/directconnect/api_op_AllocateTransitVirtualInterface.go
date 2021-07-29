@@ -49,6 +49,8 @@ type AllocateTransitVirtualInterfaceInput struct {
 	//
 	// This member is required.
 	OwnerAccount *string
+
+	noSmithyDocumentSerde
 }
 
 type AllocateTransitVirtualInterfaceOutput struct {
@@ -58,6 +60,8 @@ type AllocateTransitVirtualInterfaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAllocateTransitVirtualInterfaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

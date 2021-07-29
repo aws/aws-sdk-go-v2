@@ -44,6 +44,8 @@ type ListImportsInput struct {
 	// A string (provided by the ListImports response output) that identifies the next
 	// page of stacks that are importing the specified exported output value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListImportsOutput struct {
@@ -57,6 +59,8 @@ type ListImportsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListImportsMiddlewares(stack *middleware.Stack, options Options) (err error) {

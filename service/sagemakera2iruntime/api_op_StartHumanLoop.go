@@ -48,6 +48,8 @@ type StartHumanLoopInput struct {
 	// Attributes of the specified data. Use DataAttributes to specify if your data is
 	// free of personally identifiable information and/or free of adult content.
 	DataAttributes *types.HumanLoopDataAttributes
+
+	noSmithyDocumentSerde
 }
 
 type StartHumanLoopOutput struct {
@@ -57,6 +59,8 @@ type StartHumanLoopOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {

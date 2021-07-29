@@ -44,6 +44,8 @@ type DescribeBucketsInput struct {
 
 	// The criteria to use to sort the query results.
 	SortCriteria *types.BucketSortCriteria
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBucketsOutput struct {
@@ -58,6 +60,8 @@ type DescribeBucketsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {

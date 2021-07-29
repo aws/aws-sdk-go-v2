@@ -79,6 +79,8 @@ type CreateResourcePolicyStatementInput struct {
 	// don't specify a revision, Amazon Lex overwrites the contents of the policy with
 	// the new values.
 	ExpectedRevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourcePolicyStatementOutput struct {
@@ -94,6 +96,8 @@ type CreateResourcePolicyStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourcePolicyStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

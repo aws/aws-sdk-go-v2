@@ -50,6 +50,8 @@ type GetAlarmsInput struct {
 	// the response will return a next page token that you can specify as the page
 	// token in a subsequent request.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAlarmsOutput struct {
@@ -65,6 +67,8 @@ type GetAlarmsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAlarmsMiddlewares(stack *middleware.Stack, options Options) (err error) {

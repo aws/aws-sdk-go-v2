@@ -72,6 +72,8 @@ type StartTableDataImportJobInput struct {
 	//
 	// This member is required.
 	WorkbookId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartTableDataImportJobOutput struct {
@@ -90,6 +92,8 @@ type StartTableDataImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTableDataImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

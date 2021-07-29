@@ -31,11 +31,15 @@ type ImportCatalogToGlueInput struct {
 	// The ID of the catalog to import. Currently, this should be the Amazon Web
 	// Services account ID.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type ImportCatalogToGlueOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportCatalogToGlueMiddlewares(stack *middleware.Stack, options Options) (err error) {

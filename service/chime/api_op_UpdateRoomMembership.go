@@ -49,6 +49,8 @@ type UpdateRoomMembershipInput struct {
 
 	// The role of the member.
 	Role types.RoomMembershipRole
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRoomMembershipOutput struct {
@@ -58,6 +60,8 @@ type UpdateRoomMembershipOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRoomMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

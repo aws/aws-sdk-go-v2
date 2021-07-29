@@ -42,6 +42,8 @@ type GetCanaryRunsInput struct {
 	// A token that indicates that there is more data available. You can use this token
 	// in a subsequent GetCanaryRuns operation to retrieve the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCanaryRunsOutput struct {
@@ -56,6 +58,8 @@ type GetCanaryRunsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCanaryRunsMiddlewares(stack *middleware.Stack, options Options) (err error) {

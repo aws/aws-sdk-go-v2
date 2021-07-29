@@ -33,6 +33,8 @@ type SetDefaultAuthorizerInput struct {
 	//
 	// This member is required.
 	AuthorizerName *string
+
+	noSmithyDocumentSerde
 }
 
 type SetDefaultAuthorizerOutput struct {
@@ -45,6 +47,8 @@ type SetDefaultAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetDefaultAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

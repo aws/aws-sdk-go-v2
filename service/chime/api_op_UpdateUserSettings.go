@@ -43,11 +43,15 @@ type UpdateUserSettingsInput struct {
 	//
 	// This member is required.
 	UserSettings *types.UserSettings
+
+	noSmithyDocumentSerde
 }
 
 type UpdateUserSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateUserSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

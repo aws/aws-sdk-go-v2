@@ -61,6 +61,8 @@ type BatchPutAssetPropertyValueInput struct {
 	//
 	// This member is required.
 	Entries []types.PutAssetPropertyValueEntry
+
+	noSmithyDocumentSerde
 }
 
 type BatchPutAssetPropertyValueOutput struct {
@@ -73,6 +75,8 @@ type BatchPutAssetPropertyValueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchPutAssetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {

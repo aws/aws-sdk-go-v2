@@ -89,6 +89,8 @@ type CreateSlotInput struct {
 	// obfuscated in the log output. If the value is None, the actual value is present
 	// in the log output. The default is to obfuscate values in the CloudWatch logs.
 	ObfuscationSetting *types.ObfuscationSetting
+
+	noSmithyDocumentSerde
 }
 
 type CreateSlotOutput struct {
@@ -133,6 +135,8 @@ type CreateSlotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSlotMiddlewares(stack *middleware.Stack, options Options) (err error) {

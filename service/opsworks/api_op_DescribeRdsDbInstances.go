@@ -42,6 +42,8 @@ type DescribeRdsDbInstancesInput struct {
 
 	// An array containing the ARNs of the instances to be described.
 	RdsDbInstanceArns []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeRdsDbInstances request.
@@ -52,6 +54,8 @@ type DescribeRdsDbInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRdsDbInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

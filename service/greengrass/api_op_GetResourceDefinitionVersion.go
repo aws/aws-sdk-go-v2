@@ -44,6 +44,8 @@ type GetResourceDefinitionVersionInput struct {
 	//
 	// This member is required.
 	ResourceDefinitionVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourceDefinitionVersionOutput struct {
@@ -66,6 +68,8 @@ type GetResourceDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourceDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

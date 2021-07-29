@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type AcknowledgeActionConfiguration struct {
 
 	// The note that you can leave when you acknowledge the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to acknowledge the alarm.
@@ -33,6 +36,8 @@ type AcknowledgeAlarmActionRequest struct {
 
 	// The note that you can leave when you acknowledge the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an alarm.
@@ -60,6 +65,8 @@ type Alarm struct {
 
 	// A non-negative integer that reflects the severity level of the alarm.
 	Severity *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the current state of the alarm.
@@ -100,6 +107,8 @@ type AlarmState struct {
 
 	// Contains information about alarm state changes.
 	SystemEvent *SystemEvent
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of an alarm.
@@ -148,6 +157,8 @@ type AlarmSummary struct {
 	// specified range. To change the alarm to the NORMAL state, you must acknowledge
 	// the alarm.
 	StateName AlarmStateName
+
+	noSmithyDocumentSerde
 }
 
 // Contains error messages associated with one of the following requests:
@@ -181,6 +192,8 @@ type BatchAlarmActionErrorEntry struct {
 
 	// The request ID. Each ID must be unique within each batch.
 	RequestId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the errors encountered.
@@ -195,6 +208,8 @@ type BatchPutMessageErrorEntry struct {
 	// The ID of the message that caused the error. (See the value corresponding to the
 	// "messageId" key in the "message" object.)
 	MessageId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the error that occurred when attempting to update a detector.
@@ -209,6 +224,8 @@ type BatchUpdateDetectorErrorEntry struct {
 	// The "messageId" of the update request that caused the error. (The value of the
 	// "messageId" in the update request "Detector" object.)
 	MessageId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the action that you can take to respond to the alarm.
@@ -251,6 +268,8 @@ type CustomerAction struct {
 
 	// Contains the configuration information of a snooze action.
 	SnoozeActionConfiguration *SnoozeActionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Information about the detector (instance).
@@ -274,6 +293,8 @@ type Detector struct {
 
 	// The current state of the detector (instance).
 	State *DetectorState
+
+	noSmithyDocumentSerde
 }
 
 // Information about the current state of the detector instance.
@@ -293,6 +314,8 @@ type DetectorState struct {
 	//
 	// This member is required.
 	Variables []Variable
+
+	noSmithyDocumentSerde
 }
 
 // The new state, variable values, and timer settings of the detector (instance).
@@ -314,6 +337,8 @@ type DetectorStateDefinition struct {
 	//
 	// This member is required.
 	Variables []VariableDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Information about the detector state.
@@ -321,6 +346,8 @@ type DetectorStateSummary struct {
 
 	// The name of the state.
 	StateName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the detector (instance).
@@ -344,6 +371,8 @@ type DetectorSummary struct {
 
 	// The current state of the detector (instance).
 	State *DetectorStateSummary
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of a disable action.
@@ -351,6 +380,8 @@ type DisableActionConfiguration struct {
 
 	// The note that you can leave when you disable the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Information used to disable the alarm.
@@ -373,6 +404,8 @@ type DisableAlarmActionRequest struct {
 
 	// The note that you can leave when you disable the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of an enable action.
@@ -380,6 +413,8 @@ type EnableActionConfiguration struct {
 
 	// The note that you can leave when you enable the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to enable the alarm.
@@ -402,6 +437,8 @@ type EnableAlarmActionRequest struct {
 
 	// The note that you can leave when you enable the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a message.
@@ -426,6 +463,8 @@ type Message struct {
 
 	// The timestamp associated with the message.
 	Timestamp *TimestampValue
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of a reset action.
@@ -433,6 +472,8 @@ type ResetActionConfiguration struct {
 
 	// The note that you can leave when you reset the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to reset the alarm.
@@ -455,6 +496,8 @@ type ResetAlarmActionRequest struct {
 
 	// The note that you can leave when you reset the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to evaluate data.
@@ -462,6 +505,8 @@ type RuleEvaluation struct {
 
 	// Information needed to compare two values with a comparison operator.
 	SimpleRuleEvaluation *SimpleRuleEvaluation
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to compare two values with a comparison operator.
@@ -475,6 +520,8 @@ type SimpleRuleEvaluation struct {
 
 	// The threshold value, on the right side of the comparison operator.
 	ThresholdValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of a snooze action.
@@ -486,6 +533,8 @@ type SnoozeActionConfiguration struct {
 	// The snooze time in seconds. The alarm automatically changes to the NORMAL state
 	// after this duration.
 	SnoozeDuration *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information needed to snooze the alarm.
@@ -514,6 +563,8 @@ type SnoozeAlarmActionRequest struct {
 
 	// The note that you can leave when you snooze the alarm.
 	Note *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of alarm state changes.
@@ -522,6 +573,8 @@ type StateChangeConfiguration struct {
 	// The trigger type. If the value is SNOOZE_TIMEOUT, the snooze duration ends and
 	// the alarm automatically changes to the NORMAL state.
 	TriggerType TriggerType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about alarm state changes.
@@ -533,6 +586,8 @@ type SystemEvent struct {
 
 	// Contains the configuration information of alarm state changes.
 	StateChangeConfiguration *StateChangeConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The current state of a timer.
@@ -547,6 +602,8 @@ type Timer struct {
 	//
 	// This member is required.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The new setting of a timer.
@@ -561,6 +618,8 @@ type TimerDefinition struct {
 	//
 	// This member is required.
 	Seconds *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a timestamp.
@@ -568,6 +627,8 @@ type TimestampValue struct {
 
 	// The value of the timestamp, in the Unix epoch format.
 	TimeInMillis *int64
+
+	noSmithyDocumentSerde
 }
 
 // Information used to update the detector (instance).
@@ -592,6 +653,8 @@ type UpdateDetectorRequest struct {
 	// The value of the input key attribute (identifying the device or system) that
 	// caused the creation of this detector (instance).
 	KeyValue *string
+
+	noSmithyDocumentSerde
 }
 
 // The current state of the variable.
@@ -606,6 +669,8 @@ type Variable struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The new value of the variable.
@@ -620,4 +685,8 @@ type VariableDefinition struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

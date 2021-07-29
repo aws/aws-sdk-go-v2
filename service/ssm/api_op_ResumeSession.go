@@ -35,6 +35,8 @@ type ResumeSessionInput struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	noSmithyDocumentSerde
 }
 
 type ResumeSessionOutput struct {
@@ -60,6 +62,8 @@ type ResumeSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResumeSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

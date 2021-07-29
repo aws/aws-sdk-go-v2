@@ -33,6 +33,8 @@ type DescribeCopyJobInput struct {
 	//
 	// This member is required.
 	CopyJobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCopyJobOutput struct {
@@ -42,6 +44,8 @@ type DescribeCopyJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

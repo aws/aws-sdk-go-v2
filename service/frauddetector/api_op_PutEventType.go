@@ -59,11 +59,15 @@ type PutEventTypeInput struct {
 
 	// A collection of key and value pairs.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutEventTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutEventTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

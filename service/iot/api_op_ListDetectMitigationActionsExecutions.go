@@ -54,6 +54,8 @@ type ListDetectMitigationActionsExecutionsInput struct {
 
 	// The unique identifier of the violation.
 	ViolationId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDetectMitigationActionsExecutionsOutput struct {
@@ -67,6 +69,8 @@ type ListDetectMitigationActionsExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDetectMitigationActionsExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

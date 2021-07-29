@@ -35,11 +35,15 @@ type DeleteContactChannelInput struct {
 	//
 	// This member is required.
 	ContactChannelId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteContactChannelOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteContactChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type GetUsageInput struct {
 
 	// The current pagination position in the paged result set.
 	Position *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the usage data of a usage plan. Create and Use Usage Plans
@@ -84,6 +86,8 @@ type GetUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type PutRetentionPolicyInput struct {
 	//
 	// This member is required.
 	RetentionInDays *int32
+
+	noSmithyDocumentSerde
 }
 
 type PutRetentionPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRetentionPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

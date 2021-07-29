@@ -33,6 +33,8 @@ type DescribeUserPoolDomainInput struct {
 	//
 	// This member is required.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeUserPoolDomainOutput struct {
@@ -42,6 +44,8 @@ type DescribeUserPoolDomainOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUserPoolDomainMiddlewares(stack *middleware.Stack, options Options) (err error) {

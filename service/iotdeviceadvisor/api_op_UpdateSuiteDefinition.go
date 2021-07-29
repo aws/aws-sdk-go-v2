@@ -37,6 +37,8 @@ type UpdateSuiteDefinitionInput struct {
 
 	// Updates a Device Advisor test suite with suite definition configuration.
 	SuiteDefinitionConfiguration *types.SuiteDefinitionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSuiteDefinitionOutput struct {
@@ -61,6 +63,8 @@ type UpdateSuiteDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSuiteDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

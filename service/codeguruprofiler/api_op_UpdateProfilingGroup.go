@@ -39,6 +39,8 @@ type UpdateProfilingGroupInput struct {
 	//
 	// This member is required.
 	ProfilingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the updateProfilingGroupResponse.
@@ -53,6 +55,8 @@ type UpdateProfilingGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProfilingGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

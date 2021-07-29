@@ -43,6 +43,8 @@ type ListRequestedServiceQuotaChangeHistoryInput struct {
 
 	// The status of the quota increase request.
 	Status types.RequestStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListRequestedServiceQuotaChangeHistoryOutput struct {
@@ -56,6 +58,8 @@ type ListRequestedServiceQuotaChangeHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRequestedServiceQuotaChangeHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,6 +61,8 @@ type CreateBusinessReportScheduleInput struct {
 
 	// The tags for the business report schedule.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateBusinessReportScheduleOutput struct {
@@ -70,6 +72,8 @@ type CreateBusinessReportScheduleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBusinessReportScheduleMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type DisassociateMemberFromGroupInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateMemberFromGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateMemberFromGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

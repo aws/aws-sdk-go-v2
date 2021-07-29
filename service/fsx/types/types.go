@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -24,6 +25,8 @@ type ActiveDirectoryBackupAttributes struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the AWS General Reference.
 	ResourceARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a specific Amazon FSx administrative action for the current Windows or
@@ -106,6 +109,8 @@ type AdministrativeAction struct {
 	// UpdateFileSystem operation. Returned for FILE_SYSTEM_UPDATE administrative
 	// actions.
 	TargetFileSystemValues *FileSystem
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a failed administrative action.
@@ -113,6 +118,8 @@ type AdministrativeActionFailureDetails struct {
 
 	// Error message providing details about the failed administrative action.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // A DNS alias that is associated with the file system. You can use a DNS alias to
@@ -161,6 +168,8 @@ type Alias struct {
 	// specify them: as uppercase letters, lowercase letters, or the corresponding
 	// letters in escape codes.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A backup of an Amazon FSx file system.
@@ -242,6 +251,8 @@ type Backup struct {
 
 	// Tags associated with a particular file system.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // If backup creation fails, this structure contains the details of that failure.
@@ -249,6 +260,8 @@ type BackupFailureDetails struct {
 
 	// A message describing the backup creation failure.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a report detailing the data repository task results of the files
@@ -286,6 +299,8 @@ type CompletionReport struct {
 	// FAILED_FILES_ONLY, the CompletionReport only contains information about files
 	// that the data repository task failed to process.
 	Scope ReportScope
+
+	noSmithyDocumentSerde
 }
 
 // The Lustre configuration for the file system being created.
@@ -421,6 +436,8 @@ type CreateFileSystemLustreConfiguration struct {
 	// d:HH:MM in the UTC time zone, where d is the weekday number, from 1 through 7,
 	// beginning with Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration object for the Microsoft Windows file system used in
@@ -530,6 +547,8 @@ type CreateFileSystemWindowsConfiguration struct {
 	// UTC time zone, where d is the weekday number, from 1 through 7, beginning with
 	// Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // The data repository configuration object for Lustre file systems returned in the
@@ -603,6 +622,8 @@ type DataRepositoryConfiguration struct {
 	// UPDATING - The data repository is undergoing a customer initiated update and
 	// availability may be impacted.
 	Lifecycle DataRepositoryLifecycle
+
+	noSmithyDocumentSerde
 }
 
 // Provides detailed information about the data respository if its Lifecycle is set
@@ -611,6 +632,8 @@ type DataRepositoryFailureDetails struct {
 
 	// A detailed error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of the data repository task. You use data repository tasks to
@@ -710,6 +733,8 @@ type DataRepositoryTask struct {
 
 	// A list of Tag values, with a maximum of 50 elements.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about why a data repository task failed. Only populated
@@ -718,6 +743,8 @@ type DataRepositoryTaskFailureDetails struct {
 
 	// A detailed error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // (Optional) An array of filter objects you can use to filter the response of data
@@ -741,6 +768,8 @@ type DataRepositoryTaskFilter struct {
 	// Use Values to include the specific file system IDs and task lifecycle states for
 	// the filters you are using.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the task status showing a running total of the total number of files to
@@ -761,6 +790,8 @@ type DataRepositoryTaskStatus struct {
 	// the sum of SucceededCount plus FailedCount may not equal TotalCount. When the
 	// task is complete, TotalCount equals the sum of SucceededCount plus FailedCount.
 	TotalCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // The configuration object for the Amazon FSx for Lustre file system being deleted
@@ -777,6 +808,8 @@ type DeleteFileSystemLustreConfiguration struct {
 	// system you are deleting. By default, Amazon FSx will not take a final backup on
 	// your behalf when the DeleteFileSystem operation is invoked. (Default = true)
 	SkipFinalBackup *bool
+
+	noSmithyDocumentSerde
 }
 
 // The response object for the Amazon FSx for Lustre file system being deleted in
@@ -788,6 +821,8 @@ type DeleteFileSystemLustreResponse struct {
 
 	// The set of tags applied to the final backup.
 	FinalBackupTags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // The configuration object for the Microsoft Windows file system used in the
@@ -802,6 +837,8 @@ type DeleteFileSystemWindowsConfiguration struct {
 	// loss, and we highly recommend taking the final backup. If you want to skip this
 	// backup, use this flag to do so.
 	SkipFinalBackup *bool
+
+	noSmithyDocumentSerde
 }
 
 // The response object for the Microsoft Windows file system used in the
@@ -813,6 +850,8 @@ type DeleteFileSystemWindowsResponse struct {
 
 	// The set of tags applied to the final backup.
 	FinalBackupTags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // A description of a specific Amazon FSx file system.
@@ -923,6 +962,8 @@ type FileSystem struct {
 
 	// The configuration for this Microsoft Windows file system.
 	WindowsConfiguration *WindowsFileSystemConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // A structure providing details of any failures that occur when creating the file
@@ -931,6 +972,8 @@ type FileSystemFailureDetails struct {
 
 	// A message describing any failures that occurred during file system creation.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // A filter used to restrict the results of describe calls. You can use multiple
@@ -943,6 +986,8 @@ type Filter struct {
 	// The values of the filter. These are all the values for any of the applied
 	// filters.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for the Amazon FSx for Lustre file system.
@@ -1019,6 +1064,8 @@ type LustreFileSystemConfiguration struct {
 	// UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday
 	// and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration of the self-managed Microsoft Active Directory (AD) directory
@@ -1043,6 +1090,8 @@ type SelfManagedActiveDirectoryAttributes struct {
 	// The user name for the service account on your self-managed AD domain that FSx
 	// uses to join to your AD domain.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration that Amazon FSx uses to join the Windows File Server instance
@@ -1096,6 +1145,8 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	// Organizational Unit (OU) objects can be the direct parent of the file system
 	// that you're creating.
 	OrganizationalUnitDistinguishedName *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration that Amazon FSx uses to join the Windows File Server instance
@@ -1115,6 +1166,8 @@ type SelfManagedActiveDirectoryConfigurationUpdates struct {
 	// join computers to the domain in the organizational unit provided in
 	// OrganizationalUnitDistinguishedName.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a key-value pair for a resource tag.
@@ -1133,6 +1186,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration object for Amazon FSx for Lustre file systems used in the
@@ -1192,6 +1247,8 @@ type UpdateFileSystemLustreConfiguration struct {
 	// d:HH:MM in the UTC time zone. d is the weekday number, from 1 through 7,
 	// beginning with Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // Updates the configuration for an existing Amazon FSx for Windows File Server
@@ -1233,6 +1290,8 @@ type UpdateFileSystemWindowsConfiguration struct {
 	// UTC time zone. Where d is the weekday number, from 1 through 7, with 1 = Monday
 	// and 7 = Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration that Amazon FSx for Windows File Server uses to audit and log
@@ -1286,6 +1345,8 @@ type WindowsAuditLogConfiguration struct {
 	// must be in the same AWS partition, AWS region, and AWS account as your Amazon
 	// FSx file system.
 	AuditLogDestination *string
+
+	noSmithyDocumentSerde
 }
 
 // The Windows file access auditing configuration used when creating or updating an
@@ -1353,6 +1414,8 @@ type WindowsAuditLogCreateConfiguration struct {
 	// FileShareAccessAuditLogLevel are both set to DISABLED, you cannot specify a
 	// destination in AuditLogDestination.
 	AuditLogDestination *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for this Microsoft Windows file system.
@@ -1455,4 +1518,8 @@ type WindowsFileSystemConfiguration struct {
 	// UTC time zone. d is the weekday number, from 1 through 7, beginning with Monday
 	// and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

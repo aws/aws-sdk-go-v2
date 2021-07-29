@@ -54,6 +54,8 @@ type ViewBillingInput struct {
 	// billing records. Specify the date and time in Unix time format and Coordinated
 	// Universal time (UTC).
 	Start *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The ViewBilling response includes the following elements.
@@ -69,6 +71,8 @@ type ViewBillingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationViewBillingMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type ListAccessControlRulesInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAccessControlRulesOutput struct {
@@ -42,6 +44,8 @@ type ListAccessControlRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAccessControlRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

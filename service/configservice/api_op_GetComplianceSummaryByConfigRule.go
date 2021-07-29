@@ -29,6 +29,7 @@ func (c *Client) GetComplianceSummaryByConfigRule(ctx context.Context, params *G
 }
 
 type GetComplianceSummaryByConfigRuleInput struct {
+	noSmithyDocumentSerde
 }
 
 //
@@ -40,6 +41,8 @@ type GetComplianceSummaryByConfigRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetComplianceSummaryByConfigRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

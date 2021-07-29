@@ -54,6 +54,8 @@ type CreateTrafficPolicyVersionInput struct {
 	// The comment that you specified in the CreateTrafficPolicyVersion request, if
 	// any.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the
@@ -72,6 +74,8 @@ type CreateTrafficPolicyVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTrafficPolicyVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

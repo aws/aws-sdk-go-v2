@@ -45,6 +45,8 @@ type ListTablesInput struct {
 	// that was returned more than an hour back, the API will throw
 	// ValidationException.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTablesOutput struct {
@@ -66,6 +68,8 @@ type ListTablesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTablesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,12 +41,16 @@ type CreateConfigurationSetInput struct {
 	//
 	// This member is required.
 	ConfigurationSet *types.ConfigurationSet
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type CreateConfigurationSetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

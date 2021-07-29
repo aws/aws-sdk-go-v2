@@ -70,6 +70,8 @@ type GetLifecyclePolicyPreviewInput struct {
 	// The AWS account ID associated with the registry that contains the repository. If
 	// you do not specify a registry, the default registry is assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLifecyclePolicyPreviewOutput struct {
@@ -100,6 +102,8 @@ type GetLifecyclePolicyPreviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLifecyclePolicyPreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

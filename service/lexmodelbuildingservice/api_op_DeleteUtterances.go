@@ -49,11 +49,15 @@ type DeleteUtterancesInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteUtterancesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteUtterancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

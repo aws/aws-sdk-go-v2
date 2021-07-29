@@ -33,6 +33,8 @@ type GetLifecyclePolicyInput struct {
 	//
 	// This member is required.
 	PolicyId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLifecyclePolicyOutput struct {
@@ -42,6 +44,8 @@ type GetLifecyclePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

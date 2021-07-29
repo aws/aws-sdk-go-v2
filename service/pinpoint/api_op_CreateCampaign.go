@@ -40,6 +40,8 @@ type CreateCampaignInput struct {
 	//
 	// This member is required.
 	WriteCampaignRequest *types.WriteCampaignRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateCampaignOutput struct {
@@ -52,6 +54,8 @@ type CreateCampaignOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {

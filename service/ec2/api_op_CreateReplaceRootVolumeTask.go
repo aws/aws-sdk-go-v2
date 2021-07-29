@@ -57,6 +57,8 @@ type CreateReplaceRootVolumeTaskInput struct {
 
 	// The tags to apply to the root volume replacement task.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateReplaceRootVolumeTaskOutput struct {
@@ -66,6 +68,8 @@ type CreateReplaceRootVolumeTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReplaceRootVolumeTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

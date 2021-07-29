@@ -31,11 +31,15 @@ type HttpRequestWithGreedyLabelInPathInput struct {
 
 	// This member is required.
 	Foo *string
+
+	noSmithyDocumentSerde
 }
 
 type HttpRequestWithGreedyLabelInPathOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpRequestWithGreedyLabelInPathMiddlewares(stack *middleware.Stack, options Options) (err error) {

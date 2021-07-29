@@ -48,11 +48,15 @@ type PutRecommendationFeedbackInput struct {
 	//
 	// This member is required.
 	RecommendationId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutRecommendationFeedbackOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRecommendationFeedbackMiddlewares(stack *middleware.Stack, options Options) (err error) {

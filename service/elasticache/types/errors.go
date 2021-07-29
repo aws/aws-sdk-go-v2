@@ -10,6 +10,8 @@ import (
 // The customer has exceeded the allowed rate of API calls.
 type APICallRateForCustomerExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *APICallRateForCustomerExceededFault) Error() string {
@@ -32,6 +34,8 @@ func (e *APICallRateForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 // cache security group.
 type AuthorizationAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationAlreadyExistsFault) Error() string {
@@ -50,6 +54,8 @@ func (e *AuthorizationAlreadyExistsFault) ErrorFault() smithy.ErrorFault { retur
 // cache security group.
 type AuthorizationNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AuthorizationNotFoundFault) Error() string {
@@ -67,6 +73,8 @@ func (e *AuthorizationNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 // You already have a cluster with the given identifier.
 type CacheClusterAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheClusterAlreadyExistsFault) Error() string {
@@ -84,6 +92,8 @@ func (e *CacheClusterAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return
 // The requested cluster ID does not refer to an existing cluster.
 type CacheClusterNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheClusterNotFoundFault) Error() string {
@@ -101,6 +111,8 @@ func (e *CacheClusterNotFoundFault) ErrorFault() smithy.ErrorFault { return smit
 // A cache parameter group with the requested name already exists.
 type CacheParameterGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheParameterGroupAlreadyExistsFault) Error() string {
@@ -123,6 +135,8 @@ func (e *CacheParameterGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // parameter group.
 type CacheParameterGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheParameterGroupNotFoundFault) Error() string {
@@ -141,6 +155,8 @@ func (e *CacheParameterGroupNotFoundFault) ErrorFault() smithy.ErrorFault { retu
 // cache security groups.
 type CacheParameterGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheParameterGroupQuotaExceededFault) Error() string {
@@ -162,6 +178,8 @@ func (e *CacheParameterGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // A cache security group with the specified name already exists.
 type CacheSecurityGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheSecurityGroupAlreadyExistsFault) Error() string {
@@ -184,6 +202,8 @@ func (e *CacheSecurityGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // security group.
 type CacheSecurityGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheSecurityGroupNotFoundFault) Error() string {
@@ -202,6 +222,8 @@ func (e *CacheSecurityGroupNotFoundFault) ErrorFault() smithy.ErrorFault { retur
 // cache security groups.
 type CacheSecurityGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheSecurityGroupQuotaExceededFault) Error() string {
@@ -224,6 +246,8 @@ func (e *CacheSecurityGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // subnet group.
 type CacheSubnetGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheSubnetGroupAlreadyExistsFault) Error() string {
@@ -245,6 +269,8 @@ func (e *CacheSubnetGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // The requested cache subnet group is currently in use.
 type CacheSubnetGroupInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheSubnetGroupInUse) Error() string {
@@ -263,6 +289,8 @@ func (e *CacheSubnetGroupInUse) ErrorFault() smithy.ErrorFault { return smithy.F
 // group.
 type CacheSubnetGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheSubnetGroupNotFoundFault) Error() string {
@@ -281,6 +309,8 @@ func (e *CacheSubnetGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return 
 // cache subnet groups.
 type CacheSubnetGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheSubnetGroupQuotaExceededFault) Error() string {
@@ -303,6 +333,8 @@ func (e *CacheSubnetGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // subnets in a cache subnet group.
 type CacheSubnetQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CacheSubnetQuotaExceededFault) Error() string {
@@ -321,6 +353,8 @@ func (e *CacheSubnetQuotaExceededFault) ErrorFault() smithy.ErrorFault { return 
 // clusters per customer.
 type ClusterQuotaForCustomerExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ClusterQuotaForCustomerExceededFault) Error() string {
@@ -342,6 +376,8 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 //
 type DefaultUserAssociatedToUserGroupFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DefaultUserAssociatedToUserGroupFault) Error() string {
@@ -363,6 +399,8 @@ func (e *DefaultUserAssociatedToUserGroupFault) ErrorFault() smithy.ErrorFault {
 // You must add default user to a user group.
 type DefaultUserRequired struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DefaultUserRequired) Error() string {
@@ -380,6 +418,8 @@ func (e *DefaultUserRequired) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // A user with this username already exists.
 type DuplicateUserNameFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateUserNameFault) Error() string {
@@ -397,6 +437,8 @@ func (e *DuplicateUserNameFault) ErrorFault() smithy.ErrorFault { return smithy.
 // The Global datastore name already exists.
 type GlobalReplicationGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GlobalReplicationGroupAlreadyExistsFault) Error() string {
@@ -418,6 +460,8 @@ func (e *GlobalReplicationGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFaul
 // The Global datastore does not exist
 type GlobalReplicationGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *GlobalReplicationGroupNotFoundFault) Error() string {
@@ -442,6 +486,8 @@ func (e *GlobalReplicationGroupNotFoundFault) ErrorFault() smithy.ErrorFault {
 // in the ElastiCache User Guide.
 type InsufficientCacheClusterCapacityFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientCacheClusterCapacityFault) Error() string {
@@ -463,6 +509,8 @@ func (e *InsufficientCacheClusterCapacityFault) ErrorFault() smithy.ErrorFault {
 // The requested Amazon Resource Name (ARN) does not refer to an existing resource.
 type InvalidARNFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidARNFault) Error() string {
@@ -480,6 +528,8 @@ func (e *InvalidARNFault) ErrorFault() smithy.ErrorFault { return smithy.FaultCl
 // The requested cluster is not in the available state.
 type InvalidCacheClusterStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCacheClusterStateFault) Error() string {
@@ -498,6 +548,8 @@ func (e *InvalidCacheClusterStateFault) ErrorFault() smithy.ErrorFault { return 
 // operation to occur.
 type InvalidCacheParameterGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCacheParameterGroupStateFault) Error() string {
@@ -519,6 +571,8 @@ func (e *InvalidCacheParameterGroupStateFault) ErrorFault() smithy.ErrorFault {
 // The current state of the cache security group does not allow deletion.
 type InvalidCacheSecurityGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCacheSecurityGroupStateFault) Error() string {
@@ -540,6 +594,8 @@ func (e *InvalidCacheSecurityGroupStateFault) ErrorFault() smithy.ErrorFault {
 // The Global datastore is not available or in primary-only state.
 type InvalidGlobalReplicationGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidGlobalReplicationGroupStateFault) Error() string {
@@ -561,6 +617,8 @@ func (e *InvalidGlobalReplicationGroupStateFault) ErrorFault() smithy.ErrorFault
 // The KMS key supplied is not valid.
 type InvalidKMSKeyFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKMSKeyFault) Error() string {
@@ -578,6 +636,8 @@ func (e *InvalidKMSKeyFault) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Two or more incompatible parameters were specified.
 type InvalidParameterCombinationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterCombinationException) Error() string {
@@ -599,6 +659,8 @@ func (e *InvalidParameterCombinationException) ErrorFault() smithy.ErrorFault {
 // The value for a parameter is invalid.
 type InvalidParameterValueException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterValueException) Error() string {
@@ -616,6 +678,8 @@ func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return
 // The requested replication group is not in the available state.
 type InvalidReplicationGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidReplicationGroupStateFault) Error() string {
@@ -634,6 +698,8 @@ func (e *InvalidReplicationGroupStateFault) ErrorFault() smithy.ErrorFault { ret
 // occur.
 type InvalidSnapshotStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSnapshotStateFault) Error() string {
@@ -651,6 +717,8 @@ func (e *InvalidSnapshotStateFault) ErrorFault() smithy.ErrorFault { return smit
 // An invalid subnet identifier was specified.
 type InvalidSubnet struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSubnet) Error() string {
@@ -668,6 +736,8 @@ func (e *InvalidSubnet) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The user group is not in an active state.
 type InvalidUserGroupStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUserGroupStateFault) Error() string {
@@ -685,6 +755,8 @@ func (e *InvalidUserGroupStateFault) ErrorFault() smithy.ErrorFault { return smi
 // The user is not in active state.
 type InvalidUserStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidUserStateFault) Error() string {
@@ -702,6 +774,8 @@ func (e *InvalidUserStateFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // The VPC network is in an invalid state.
 type InvalidVPCNetworkStateFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidVPCNetworkStateFault) Error() string {
@@ -721,6 +795,8 @@ func (e *InvalidVPCNetworkStateFault) ErrorFault() smithy.ErrorFault { return sm
 // correctly.
 type NodeGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NodeGroupNotFoundFault) Error() string {
@@ -740,6 +816,8 @@ func (e *NodeGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.
 // maximum is 90
 type NodeGroupsPerReplicationGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) Error() string {
@@ -762,6 +840,8 @@ func (e *NodeGroupsPerReplicationGroupQuotaExceededFault) ErrorFault() smithy.Er
 // cache nodes in a single cluster.
 type NodeQuotaForClusterExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NodeQuotaForClusterExceededFault) Error() string {
@@ -780,6 +860,8 @@ func (e *NodeQuotaForClusterExceededFault) ErrorFault() smithy.ErrorFault { retu
 // cache nodes per customer.
 type NodeQuotaForCustomerExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NodeQuotaForCustomerExceededFault) Error() string {
@@ -797,6 +879,8 @@ func (e *NodeQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault { ret
 // The operation was not performed because no changes were required.
 type NoOperationFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoOperationFault) Error() string {
@@ -814,6 +898,8 @@ func (e *NoOperationFault) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // The specified replication group already exists.
 type ReplicationGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicationGroupAlreadyExistsFault) Error() string {
@@ -835,6 +921,8 @@ func (e *ReplicationGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // The targeted replication group is not available.
 type ReplicationGroupAlreadyUnderMigrationFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicationGroupAlreadyUnderMigrationFault) Error() string {
@@ -856,6 +944,8 @@ func (e *ReplicationGroupAlreadyUnderMigrationFault) ErrorFault() smithy.ErrorFa
 // The specified replication group does not exist.
 type ReplicationGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicationGroupNotFoundFault) Error() string {
@@ -873,6 +963,8 @@ func (e *ReplicationGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return 
 // The designated replication group is not available for data migration.
 type ReplicationGroupNotUnderMigrationFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReplicationGroupNotUnderMigrationFault) Error() string {
@@ -894,6 +986,8 @@ func (e *ReplicationGroupNotUnderMigrationFault) ErrorFault() smithy.ErrorFault 
 // You already have a reservation with the given identifier.
 type ReservedCacheNodeAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedCacheNodeAlreadyExistsFault) Error() string {
@@ -915,6 +1009,8 @@ func (e *ReservedCacheNodeAlreadyExistsFault) ErrorFault() smithy.ErrorFault {
 // The requested reserved cache node was not found.
 type ReservedCacheNodeNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedCacheNodeNotFoundFault) Error() string {
@@ -933,6 +1029,8 @@ func (e *ReservedCacheNodeNotFoundFault) ErrorFault() smithy.ErrorFault { return
 // quota.
 type ReservedCacheNodeQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedCacheNodeQuotaExceededFault) Error() string {
@@ -954,6 +1052,8 @@ func (e *ReservedCacheNodeQuotaExceededFault) ErrorFault() smithy.ErrorFault {
 // The requested cache node offering does not exist.
 type ReservedCacheNodesOfferingNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ReservedCacheNodesOfferingNotFoundFault) Error() string {
@@ -975,6 +1075,8 @@ func (e *ReservedCacheNodesOfferingNotFoundFault) ErrorFault() smithy.ErrorFault
 // The specified service linked role (SLR) was not found.
 type ServiceLinkedRoleNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceLinkedRoleNotFoundFault) Error() string {
@@ -992,6 +1094,8 @@ func (e *ServiceLinkedRoleNotFoundFault) ErrorFault() smithy.ErrorFault { return
 // The service update doesn't exist
 type ServiceUpdateNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceUpdateNotFoundFault) Error() string {
@@ -1009,6 +1113,8 @@ func (e *ServiceUpdateNotFoundFault) ErrorFault() smithy.ErrorFault { return smi
 // You already have a snapshot with the given name.
 type SnapshotAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotAlreadyExistsFault) Error() string {
@@ -1035,6 +1141,8 @@ func (e *SnapshotAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smi
 // supported by ElastiCache.
 type SnapshotFeatureNotSupportedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotFeatureNotSupportedFault) Error() string {
@@ -1054,6 +1162,8 @@ func (e *SnapshotFeatureNotSupportedFault) ErrorFault() smithy.ErrorFault { retu
 // The requested snapshot name does not refer to an existing snapshot.
 type SnapshotNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotNotFoundFault) Error() string {
@@ -1072,6 +1182,8 @@ func (e *SnapshotNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // snapshots.
 type SnapshotQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SnapshotQuotaExceededFault) Error() string {
@@ -1089,6 +1201,8 @@ func (e *SnapshotQuotaExceededFault) ErrorFault() smithy.ErrorFault { return smi
 // The requested subnet is being used by another cache subnet group.
 type SubnetInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetInUse) Error() string {
@@ -1109,6 +1223,8 @@ func (e *SubnetInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient
 // Outpost when not subscribed on this service.
 type SubnetNotAllowedFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *SubnetNotAllowedFault) Error() string {
@@ -1126,6 +1242,8 @@ func (e *SubnetNotAllowedFault) ErrorFault() smithy.ErrorFault { return smithy.F
 // The requested tag was not found on this resource.
 type TagNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagNotFoundFault) Error() string {
@@ -1145,6 +1263,8 @@ func (e *TagNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // resource is 50.
 type TagQuotaPerResourceExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TagQuotaPerResourceExceeded) Error() string {
@@ -1162,6 +1282,8 @@ func (e *TagQuotaPerResourceExceeded) ErrorFault() smithy.ErrorFault { return sm
 // The TestFailover action is not available.
 type TestFailoverNotAvailableFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TestFailoverNotAvailableFault) Error() string {
@@ -1179,6 +1301,8 @@ func (e *TestFailoverNotAvailableFault) ErrorFault() smithy.ErrorFault { return 
 // A user with this ID already exists.
 type UserAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserAlreadyExistsFault) Error() string {
@@ -1196,6 +1320,8 @@ func (e *UserAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return smithy.
 // The user group with this ID already exists.
 type UserGroupAlreadyExistsFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserGroupAlreadyExistsFault) Error() string {
@@ -1213,6 +1339,8 @@ func (e *UserGroupAlreadyExistsFault) ErrorFault() smithy.ErrorFault { return sm
 // The user group was not found or does not exist
 type UserGroupNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserGroupNotFoundFault) Error() string {
@@ -1230,6 +1358,8 @@ func (e *UserGroupNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.
 // The number of users exceeds the user group limit.
 type UserGroupQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserGroupQuotaExceededFault) Error() string {
@@ -1247,6 +1377,8 @@ func (e *UserGroupQuotaExceededFault) ErrorFault() smithy.ErrorFault { return sm
 // The user does not exist or could not be found.
 type UserNotFoundFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserNotFoundFault) Error() string {
@@ -1264,6 +1396,8 @@ func (e *UserNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The quota of users has been exceeded.
 type UserQuotaExceededFault struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UserQuotaExceededFault) Error() string {

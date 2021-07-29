@@ -42,6 +42,8 @@ type AcceptTransitGatewayVpcAttachmentInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type AcceptTransitGatewayVpcAttachmentOutput struct {
@@ -51,6 +53,8 @@ type AcceptTransitGatewayVpcAttachmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAcceptTransitGatewayVpcAttachmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

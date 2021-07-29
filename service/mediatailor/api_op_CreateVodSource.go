@@ -47,6 +47,8 @@ type CreateVodSourceInput struct {
 
 	// The tags to assign to the VOD source.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVodSourceOutput struct {
@@ -74,6 +76,8 @@ type CreateVodSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

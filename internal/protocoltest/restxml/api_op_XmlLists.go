@@ -78,6 +78,8 @@ type XmlListsInput struct {
 	StructureList []types.StructureListMember
 
 	TimestampList []time.Time
+
+	noSmithyDocumentSerde
 }
 
 type XmlListsOutput struct {
@@ -112,6 +114,8 @@ type XmlListsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationXmlListsMiddlewares(stack *middleware.Stack, options Options) (err error) {

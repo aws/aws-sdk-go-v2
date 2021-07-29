@@ -94,6 +94,8 @@ type CreateContainerRecipeInput struct {
 
 	// The working directory for use during build and test workflows.
 	WorkingDirectory *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateContainerRecipeOutput struct {
@@ -110,6 +112,8 @@ type CreateContainerRecipeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContainerRecipeMiddlewares(stack *middleware.Stack, options Options) (err error) {

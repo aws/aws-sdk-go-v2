@@ -32,6 +32,8 @@ type DescribeAuthenticationProfilesInput struct {
 	// The name of the authentication profile to describe. If not specified then all
 	// authentication profiles owned by the account are listed.
 	AuthenticationProfileName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAuthenticationProfilesOutput struct {
@@ -41,6 +43,8 @@ type DescribeAuthenticationProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAuthenticationProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

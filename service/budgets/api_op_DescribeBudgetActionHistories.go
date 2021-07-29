@@ -57,6 +57,8 @@ type DescribeBudgetActionHistoriesInput struct {
 	// an end date. The start date must come before the end date. There are no
 	// restrictions on the end date.
 	TimePeriod *types.TimePeriod
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBudgetActionHistoriesOutput struct {
@@ -71,6 +73,8 @@ type DescribeBudgetActionHistoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBudgetActionHistoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

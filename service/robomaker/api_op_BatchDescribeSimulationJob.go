@@ -33,6 +33,8 @@ type BatchDescribeSimulationJobInput struct {
 	//
 	// This member is required.
 	Jobs []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchDescribeSimulationJobOutput struct {
@@ -45,6 +47,8 @@ type BatchDescribeSimulationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchDescribeSimulationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

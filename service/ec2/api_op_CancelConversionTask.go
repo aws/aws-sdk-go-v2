@@ -47,11 +47,15 @@ type CancelConversionTaskInput struct {
 
 	// The reason for canceling the conversion task.
 	ReasonMessage *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelConversionTaskOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelConversionTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

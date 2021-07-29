@@ -46,6 +46,8 @@ type CreateRouteTableInput struct {
 
 	// The tags to assign to the route table.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateRouteTableOutput struct {
@@ -55,6 +57,8 @@ type CreateRouteTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

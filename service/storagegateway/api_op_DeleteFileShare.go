@@ -41,6 +41,8 @@ type DeleteFileShareInput struct {
 	// the data upload process, and the file share enters the FORCE_DELETING status.
 	// Valid Values: true | false
 	ForceDelete bool
+
+	noSmithyDocumentSerde
 }
 
 // DeleteFileShareOutput
@@ -51,6 +53,8 @@ type DeleteFileShareOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFileShareMiddlewares(stack *middleware.Stack, options Options) (err error) {

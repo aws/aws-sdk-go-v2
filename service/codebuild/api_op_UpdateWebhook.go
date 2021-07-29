@@ -53,6 +53,8 @@ type UpdateWebhookInput struct {
 	// token should be updated. If you use Bitbucket for your repository, rotateSecret
 	// is ignored.
 	RotateSecret bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWebhookOutput struct {
@@ -63,6 +65,8 @@ type UpdateWebhookOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {

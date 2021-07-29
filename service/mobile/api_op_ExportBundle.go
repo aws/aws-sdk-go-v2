@@ -42,6 +42,8 @@ type ExportBundleInput struct {
 
 	// Unique project identifier.
 	ProjectId *string
+
+	noSmithyDocumentSerde
 }
 
 // Result structure which contains link to download custom-generated SDK and tool
@@ -55,6 +57,8 @@ type ExportBundleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportBundleMiddlewares(stack *middleware.Stack, options Options) (err error) {

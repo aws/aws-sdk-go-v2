@@ -42,12 +42,16 @@ type DeactivatePipelineInput struct {
 	// the state of any running objects to CANCELED. If this value is false, the
 	// pipeline is deactivated after all running objects finish.
 	CancelActive *bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DeactivatePipeline.
 type DeactivatePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeactivatePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

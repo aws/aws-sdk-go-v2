@@ -35,6 +35,8 @@ type DeleteAutomaticTapeCreationPolicyInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAutomaticTapeCreationPolicyOutput struct {
@@ -45,6 +47,8 @@ type DeleteAutomaticTapeCreationPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAutomaticTapeCreationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

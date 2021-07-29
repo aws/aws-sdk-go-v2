@@ -41,6 +41,8 @@ type ListVocabularyFiltersInput struct {
 	// If the result of the previous request to ListVocabularyFilters was truncated,
 	// include the NextToken to fetch the next set of collections.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListVocabularyFiltersOutput struct {
@@ -60,6 +62,8 @@ type ListVocabularyFiltersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVocabularyFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {

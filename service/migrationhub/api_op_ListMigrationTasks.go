@@ -50,6 +50,8 @@ type ListMigrationTasksInput struct {
 
 	// Filter migration tasks by discovered resource name.
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListMigrationTasksOutput struct {
@@ -65,6 +67,8 @@ type ListMigrationTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMigrationTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -301,6 +301,8 @@ type UpdateHealthCheckInput struct {
 	// resource healthy. (You can't change the value of Type when you update a health
 	// check.)
 	SearchString *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to the UpdateHealthCheck request.
@@ -313,6 +315,8 @@ type UpdateHealthCheckOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,6 +45,8 @@ type GetRateBasedRuleManagedKeysInput struct {
 
 	// A null value and not currently used. Do not include this in your request.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRateBasedRuleManagedKeysOutput struct {
@@ -58,6 +60,8 @@ type GetRateBasedRuleManagedKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRateBasedRuleManagedKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

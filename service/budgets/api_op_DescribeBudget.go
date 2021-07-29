@@ -42,6 +42,8 @@ type DescribeBudgetInput struct {
 	//
 	// This member is required.
 	BudgetName *string
+
+	noSmithyDocumentSerde
 }
 
 // Response of DescribeBudget
@@ -52,6 +54,8 @@ type DescribeBudgetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {

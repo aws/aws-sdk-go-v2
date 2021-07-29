@@ -60,6 +60,8 @@ type DeleteSqlInjectionMatchSetInput struct {
 	//
 	// This member is required.
 	SqlInjectionMatchSetId *string
+
+	noSmithyDocumentSerde
 }
 
 // The response to a request to delete a SqlInjectionMatchSet from AWS WAF.
@@ -72,6 +74,8 @@ type DeleteSqlInjectionMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

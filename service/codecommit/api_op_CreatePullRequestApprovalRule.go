@@ -77,6 +77,8 @@ type CreatePullRequestApprovalRuleInput struct {
 	//
 	// This member is required.
 	PullRequestId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePullRequestApprovalRuleOutput struct {
@@ -88,6 +90,8 @@ type CreatePullRequestApprovalRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePullRequestApprovalRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

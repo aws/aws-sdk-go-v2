@@ -66,6 +66,8 @@ type GetBucketIntelligentTieringConfigurationInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBucketIntelligentTieringConfigurationOutput struct {
@@ -75,6 +77,8 @@ type GetBucketIntelligentTieringConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBucketIntelligentTieringConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

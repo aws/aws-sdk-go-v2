@@ -39,6 +39,8 @@ type UpdateDomainNameInput struct {
 	// A list of update operations to be applied to the specified resource and in the
 	// order specified in this list.
 	PatchOperations []types.PatchOperation
+
+	noSmithyDocumentSerde
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
@@ -134,6 +136,8 @@ type UpdateDomainNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,11 +33,15 @@ type DeleteProtocolsListInput struct {
 	//
 	// This member is required.
 	ListId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProtocolsListOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProtocolsListMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -42,6 +43,8 @@ type Account struct {
 
 	// Supported licenses for the Amazon Chime account.
 	SupportedLicenses []License
+
+	noSmithyDocumentSerde
 }
 
 // Settings related to the Amazon Chime account. This includes settings that start
@@ -59,6 +62,8 @@ type AccountSettings struct {
 	// option. For more information, see Join a Meeting without the Amazon Chime App
 	// (https://docs.aws.amazon.com/chime/latest/ug/chime-join-meeting.html).
 	EnableDialOut *bool
+
+	noSmithyDocumentSerde
 }
 
 // The Alexa for Business metadata associated with an Amazon Chime user, used to
@@ -70,6 +75,8 @@ type AlexaForBusinessMetadata struct {
 
 	// Starts or stops Alexa for Business.
 	IsAlexaForBusinessEnabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // The details of an AppInstance, an instance of an Amazon Chime SDK messaging
@@ -90,6 +97,8 @@ type AppInstance struct {
 
 	// The name of an AppInstance.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of an AppInstanceAdmin.
@@ -103,6 +112,8 @@ type AppInstanceAdmin struct {
 
 	// The time at which an administrator was created.
 	CreatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the details of an AppInstanceAdmin.
@@ -110,6 +121,8 @@ type AppInstanceAdminSummary struct {
 
 	// The details of the AppInstanceAdmin.
 	Admin *Identity
+
+	noSmithyDocumentSerde
 }
 
 // The details of the data-retention settings for an AppInstance.
@@ -117,6 +130,8 @@ type AppInstanceRetentionSettings struct {
 
 	// The length of time in days to retain the messages in a channel.
 	ChannelRetentionSettings *ChannelRetentionSettings
+
+	noSmithyDocumentSerde
 }
 
 // The details of the streaming configuration of an AppInstance.
@@ -131,6 +146,8 @@ type AppInstanceStreamingConfiguration struct {
 	//
 	// This member is required.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the data for an AppInstance.
@@ -144,6 +161,8 @@ type AppInstanceSummary struct {
 
 	// The name of the AppInstance.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of an AppInstanceUser.
@@ -163,6 +182,8 @@ type AppInstanceUser struct {
 
 	// The name of the AppInstanceUser.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the membership details of an AppInstanceUser.
@@ -173,6 +194,8 @@ type AppInstanceUserMembershipSummary struct {
 
 	// The type of ChannelMembership.
 	Type ChannelMembershipType
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the details of an AppInstanceUser.
@@ -186,6 +209,8 @@ type AppInstanceUserSummary struct {
 
 	// The name of an AppInstanceUser.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // An Amazon Chime SDK meeting attendee. Includes a unique AttendeeId and JoinToken
@@ -206,6 +231,8 @@ type Attendee struct {
 
 	// The join token used by the Amazon Chime SDK attendee.
 	JoinToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The membership information, including member ARNs, the channel ARN, and
@@ -223,6 +250,8 @@ type BatchChannelMemberships struct {
 
 	// The membership types set for the channel users.
 	Type ChannelMembershipType
+
+	noSmithyDocumentSerde
 }
 
 // A list of failed member ARNs, error codes, and error messages.
@@ -236,6 +265,8 @@ type BatchCreateChannelMembershipError struct {
 
 	// The ARN of the member that the service couldn't add.
 	MemberArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A resource that allows Enterprise account administrators to configure an
@@ -269,6 +300,8 @@ type Bot struct {
 
 	// The unique ID for the bot user.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Chime Business Calling settings for the administrator's AWS account.
@@ -277,6 +310,8 @@ type BusinessCallingSettings struct {
 
 	// The Amazon S3 bucket designated for call detail record storage.
 	CdrBucket *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a channel.
@@ -308,6 +343,8 @@ type Channel struct {
 
 	// The channel's privacy setting.
 	Privacy ChannelPrivacy
+
+	noSmithyDocumentSerde
 }
 
 // The details of a channel ban.
@@ -324,6 +361,8 @@ type ChannelBan struct {
 
 	// The member being banned from the channel.
 	Member *Identity
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the details of a ChannelBan.
@@ -331,6 +370,8 @@ type ChannelBanSummary struct {
 
 	// The member being banned from a channel.
 	Member *Identity
+
+	noSmithyDocumentSerde
 }
 
 // The details of a channel member.
@@ -353,6 +394,8 @@ type ChannelMembership struct {
 
 	// The membership type set for the channel member.
 	Type ChannelMembershipType
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the channel membership details of an AppInstanceUser.
@@ -363,6 +406,8 @@ type ChannelMembershipForAppInstanceUserSummary struct {
 
 	// Summary of the details of a Channel.
 	ChannelSummary *ChannelSummary
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the details of a ChannelMembership.
@@ -370,6 +415,8 @@ type ChannelMembershipSummary struct {
 
 	// A member's summary data.
 	Member *Identity
+
+	noSmithyDocumentSerde
 }
 
 // The details of a message in a channel.
@@ -407,6 +454,8 @@ type ChannelMessage struct {
 
 	// The message type.
 	Type ChannelMessageType
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the messages in a Channel.
@@ -438,6 +487,8 @@ type ChannelMessageSummary struct {
 
 	// The type of message.
 	Type ChannelMessageType
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the details of a moderated channel.
@@ -445,6 +496,8 @@ type ChannelModeratedByAppInstanceUserSummary struct {
 
 	// Summary of the details of a Channel.
 	ChannelSummary *ChannelSummary
+
+	noSmithyDocumentSerde
 }
 
 // The details of a channel moderator.
@@ -461,6 +514,8 @@ type ChannelModerator struct {
 
 	// The moderator's data.
 	Moderator *Identity
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the details of a ChannelModerator.
@@ -468,6 +523,8 @@ type ChannelModeratorSummary struct {
 
 	// The data for a moderator.
 	Moderator *Identity
+
+	noSmithyDocumentSerde
 }
 
 // The details of the retention settings for a channel.
@@ -475,6 +532,8 @@ type ChannelRetentionSettings struct {
 
 	// The time in days to retain the messages in a channel.
 	RetentionDays *int32
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the details of a Channel.
@@ -497,6 +556,8 @@ type ChannelSummary struct {
 
 	// The privacy setting of the channel.
 	Privacy ChannelPrivacy
+
+	noSmithyDocumentSerde
 }
 
 // The retention settings that determine how long to retain conversation messages
@@ -505,6 +566,8 @@ type ConversationRetentionSettings struct {
 
 	// The number of days for which to retain conversation messages.
 	RetentionDays *int32
+
+	noSmithyDocumentSerde
 }
 
 // The list of errors returned when errors are encountered during the
@@ -521,6 +584,8 @@ type CreateAttendeeError struct {
 	// The Amazon Chime SDK external user ID. An idempotency token. Links the attendee
 	// to an identity managed by a builder application.
 	ExternalUserId *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Chime SDK attendee fields to create, used with the
@@ -535,6 +600,8 @@ type CreateAttendeeRequestItem struct {
 
 	// The tag key-value pairs.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // The SIP credentials used to authenticate requests to your Amazon Chime Voice
@@ -548,6 +615,8 @@ type Credential struct {
 	// The RFC2617 compliant user name associated with the SIP credentials, in US-ASCII
 	// format.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The Dialed Number Identification Service (DNIS) emergency calling configuration
@@ -568,6 +637,8 @@ type DNISEmergencyCallingConfiguration struct {
 
 	// The DNIS phone number to route test emergency calls to, in E.164 format.
 	TestPhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // The emergency calling configuration details associated with an Amazon Chime
@@ -577,6 +648,8 @@ type EmergencyCallingConfiguration struct {
 	// The Dialed Number Identification Service (DNIS) emergency calling configuration
 	// details.
 	DNIS []DNISEmergencyCallingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The configuration that allows a bot to receive outgoing events. Can be either an
@@ -591,6 +664,8 @@ type EventsConfiguration struct {
 
 	// HTTPS endpoint that allows a bot to receive outgoing events.
 	OutboundEventsHTTPSEndpoint *string
+
+	noSmithyDocumentSerde
 }
 
 // The country and area code for a proxy phone number in a proxy phone session.
@@ -605,6 +680,8 @@ type GeoMatchParams struct {
 	//
 	// This member is required.
 	Country *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a user.
@@ -615,6 +692,8 @@ type Identity struct {
 
 	// The name in an Identity.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Invitation object returned after emailing users to invite them to join the
@@ -632,6 +711,8 @@ type Invite struct {
 
 	// The status of the invite.
 	Status InviteStatus
+
+	noSmithyDocumentSerde
 }
 
 // The logging configuration associated with an Amazon Chime Voice Connector.
@@ -641,6 +722,8 @@ type LoggingConfiguration struct {
 
 	// When true, enables SIP message logs for sending to Amazon CloudWatch Logs.
 	EnableSIPLogs *bool
+
+	noSmithyDocumentSerde
 }
 
 // A media capture pipeline object. A string consisting of an ID, source type, a
@@ -671,6 +754,8 @@ type MediaCapturePipeline struct {
 
 	// The time at which the capture pipeline was updated, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A set of endpoints used by clients to connect to the media service group for a
@@ -700,6 +785,8 @@ type MediaPlacement struct {
 
 	// The turn control URL.
 	TurnControlUrl *string
+
+	noSmithyDocumentSerde
 }
 
 // A meeting created using the Amazon Chime SDK.
@@ -719,6 +806,8 @@ type Meeting struct {
 
 	// The Amazon Chime SDK meeting ID.
 	MeetingId *string
+
+	noSmithyDocumentSerde
 }
 
 // The resource target configurations for receiving Amazon Chime SDK meeting and
@@ -731,6 +820,8 @@ type MeetingNotificationConfiguration struct {
 
 	// The SQS queue ARN.
 	SqsQueueArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The member details, such as email address, name, member ID, and member type.
@@ -750,6 +841,8 @@ type Member struct {
 
 	// The member type.
 	MemberType MemberType
+
+	noSmithyDocumentSerde
 }
 
 // The list of errors returned when a member action results in an error.
@@ -763,6 +856,8 @@ type MemberError struct {
 
 	// The member ID.
 	MemberId *string
+
+	noSmithyDocumentSerde
 }
 
 // Membership details, such as member ID and member role.
@@ -773,6 +868,8 @@ type MembershipItem struct {
 
 	// The member role.
 	Role RoomMembershipRole
+
+	noSmithyDocumentSerde
 }
 
 // The websocket endpoint used to connect to Amazon Chime SDK messaging.
@@ -780,6 +877,8 @@ type MessagingSessionEndpoint struct {
 
 	// The endpoint to which you establish a websocket connection.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // A phone number for which an order has been placed.
@@ -790,6 +889,8 @@ type OrderedPhoneNumber struct {
 
 	// The phone number status.
 	Status OrderedPhoneNumberStatus
+
+	noSmithyDocumentSerde
 }
 
 // Origination settings enable your SIP hosts to receive inbound calls using your
@@ -803,6 +904,8 @@ type Origination struct {
 	// The call distribution properties defined for your SIP hosts. Valid range:
 	// Minimum value of 1. Maximum value of 20.
 	Routes []OriginationRoute
+
+	noSmithyDocumentSerde
 }
 
 // Origination routes define call distribution properties for your SIP hosts to
@@ -827,6 +930,8 @@ type OriginationRoute struct {
 	// The weight associated with the host. If hosts are equal in priority, calls are
 	// redistributed among them based on their relative weight.
 	Weight *int32
+
+	noSmithyDocumentSerde
 }
 
 // The phone number and proxy phone number for a participant in an Amazon Chime
@@ -838,6 +943,8 @@ type Participant struct {
 
 	// The participant's proxy phone number.
 	ProxyPhoneNumber *string
+
+	noSmithyDocumentSerde
 }
 
 // A phone number used for Amazon Chime Business Calling or an Amazon Chime Voice
@@ -882,6 +989,8 @@ type PhoneNumber struct {
 
 	// The updated phone number timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The phone number associations, such as Amazon Chime account ID, Amazon Chime
@@ -898,6 +1007,8 @@ type PhoneNumberAssociation struct {
 
 	// Contains the ID for the entity specified in Name.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The phone number capabilities for Amazon Chime Business Calling phone numbers,
@@ -921,6 +1032,8 @@ type PhoneNumberCapabilities struct {
 
 	// Allows or denies outbound SMS messaging for the specified phone number.
 	OutboundSMS *bool
+
+	noSmithyDocumentSerde
 }
 
 // The phone number country.
@@ -931,6 +1044,8 @@ type PhoneNumberCountry struct {
 
 	// The supported phone number types.
 	SupportedPhoneNumberTypes []PhoneNumberType
+
+	noSmithyDocumentSerde
 }
 
 // If the phone number action fails for one or more of the phone numbers in the
@@ -946,6 +1061,8 @@ type PhoneNumberError struct {
 
 	// The phone number ID for which the action failed.
 	PhoneNumberId *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of a phone number order created for Amazon Chime.
@@ -969,6 +1086,8 @@ type PhoneNumberOrder struct {
 
 	// The updated phone number order time stamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The proxy configuration for an Amazon Chime Voice Connector.
@@ -986,6 +1105,8 @@ type Proxy struct {
 
 	// The countries for proxy phone numbers to be selected from.
 	PhoneNumberCountries []string
+
+	noSmithyDocumentSerde
 }
 
 // The proxy session for an Amazon Chime Voice Connector.
@@ -1031,6 +1152,8 @@ type ProxySession struct {
 
 	// The Amazon Chime voice connector ID.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 // The retention settings for an Amazon Chime Enterprise account that determine how
@@ -1042,6 +1165,8 @@ type RetentionSettings struct {
 
 	// The chat room retention settings.
 	RoomRetentionSettings *RoomRetentionSettings
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Chime chat room details.
@@ -1064,6 +1189,8 @@ type Room struct {
 
 	// The room update timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The room membership details.
@@ -1083,6 +1210,8 @@ type RoomMembership struct {
 
 	// The room membership update timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The retention settings that determine how long to retain chat-room messages for
@@ -1091,6 +1220,8 @@ type RoomRetentionSettings struct {
 
 	// The number of days for which to retain chat-room messages.
 	RetentionDays *int32
+
+	noSmithyDocumentSerde
 }
 
 // An Active Directory (AD) group whose members are granted permission to act as
@@ -1099,6 +1230,8 @@ type SigninDelegateGroup struct {
 
 	// The group name.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the SIP media application, including name and endpoints. An AWS
@@ -1123,6 +1256,8 @@ type SipMediaApplication struct {
 
 	// The SIP media application updated timestamp, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A Call instance for a SIP media application.
@@ -1130,6 +1265,8 @@ type SipMediaApplicationCall struct {
 
 	// The transaction ID of a call.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The endpoint assigned to the SIP media application.
@@ -1138,6 +1275,8 @@ type SipMediaApplicationEndpoint struct {
 	// Valid Amazon Resource Name (ARN) of the Lambda function. The function must be
 	// created in the same AWS Region as the SIP media application.
 	LambdaArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Logging configuration of the SIP media application.
@@ -1145,6 +1284,8 @@ type SipMediaApplicationLoggingConfiguration struct {
 
 	// Enables application message logs for the SIP media application.
 	EnableSipMediaApplicationMessageLogs *bool
+
+	noSmithyDocumentSerde
 }
 
 // The SIP rule details, including name, triggers, and target applications. An AWS
@@ -1182,6 +1323,8 @@ type SipRule struct {
 
 	// The time at which the SIP rule was last updated, in ISO 8601 format.
 	UpdatedTimestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Target SIP media application and other details, such as priority and AWS Region,
@@ -1197,6 +1340,8 @@ type SipRuleTargetApplication struct {
 
 	// The SIP media application ID.
 	SipMediaApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 // The streaming configuration associated with an Amazon Chime Voice Connector.
@@ -1214,6 +1359,8 @@ type StreamingConfiguration struct {
 
 	// The streaming notification targets.
 	StreamingNotificationTargets []StreamingNotificationTarget
+
+	noSmithyDocumentSerde
 }
 
 // The targeted recipient for a streaming configuration notification.
@@ -1223,6 +1370,8 @@ type StreamingNotificationTarget struct {
 	//
 	// This member is required.
 	NotificationTarget NotificationTarget
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag applied to a resource.
@@ -1237,6 +1386,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings that allow management of telephony permissions for an Amazon Chime
@@ -1257,6 +1408,8 @@ type TelephonySettings struct {
 	//
 	// This member is required.
 	SMS *bool
+
+	noSmithyDocumentSerde
 }
 
 // Termination settings enable your SIP hosts to make outbound calls using your
@@ -1279,6 +1432,8 @@ type Termination struct {
 
 	// When termination settings are disabled, outbound calls can not be made.
 	Disabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // The termination health details, including the source IP address and timestamp of
@@ -1290,6 +1445,8 @@ type TerminationHealth struct {
 
 	// The timestamp, in ISO 8601 format.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The phone number ID, product type, or calling name fields to update, used with
@@ -1306,6 +1463,8 @@ type UpdatePhoneNumberRequestItem struct {
 
 	// The product type to update.
 	ProductType PhoneNumberProductType
+
+	noSmithyDocumentSerde
 }
 
 // The user ID and user fields to update, used with the BatchUpdateUser action.
@@ -1324,6 +1483,8 @@ type UpdateUserRequestItem struct {
 
 	// The user type.
 	UserType UserType
+
+	noSmithyDocumentSerde
 }
 
 // The user on the Amazon Chime account.
@@ -1370,6 +1531,8 @@ type User struct {
 
 	// The user type.
 	UserType UserType
+
+	noSmithyDocumentSerde
 }
 
 // The list of errors returned when errors are encountered during the
@@ -1385,6 +1548,8 @@ type UserError struct {
 
 	// The user ID for which the action failed.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings associated with an Amazon Chime user, including inbound and outbound
@@ -1395,6 +1560,8 @@ type UserSettings struct {
 	//
 	// This member is required.
 	Telephony *TelephonySettings
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Chime Voice Connector configuration, including outbound host name and
@@ -1422,6 +1589,8 @@ type VoiceConnector struct {
 
 	// The Amazon Chime Voice Connector ID.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Chime Voice Connector group configuration, including associated
@@ -1444,6 +1613,8 @@ type VoiceConnectorGroup struct {
 
 	// The Amazon Chime Voice Connectors to which to route inbound calls.
 	VoiceConnectorItems []VoiceConnectorItem
+
+	noSmithyDocumentSerde
 }
 
 // For Amazon Chime Voice Connector groups, the Amazon Chime Voice Connectors to
@@ -1462,6 +1633,8 @@ type VoiceConnectorItem struct {
 	//
 	// This member is required.
 	VoiceConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon Chime Voice Connector settings. Includes any Amazon S3 buckets
@@ -1470,4 +1643,8 @@ type VoiceConnectorSettings struct {
 
 	// The Amazon S3 bucket designated for call detail record storage.
 	CdrBucket *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

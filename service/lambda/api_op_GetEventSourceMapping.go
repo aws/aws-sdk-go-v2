@@ -35,6 +35,8 @@ type GetEventSourceMappingInput struct {
 	//
 	// This member is required.
 	UUID *string
+
+	noSmithyDocumentSerde
 }
 
 // A mapping between an Amazon Web Services resource and an Lambda function. See
@@ -125,6 +127,8 @@ type GetEventSourceMappingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEventSourceMappingMiddlewares(stack *middleware.Stack, options Options) (err error) {

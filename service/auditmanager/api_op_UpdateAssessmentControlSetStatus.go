@@ -48,6 +48,8 @@ type UpdateAssessmentControlSetStatusInput struct {
 	//
 	// This member is required.
 	Status types.ControlSetStatus
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAssessmentControlSetStatusOutput struct {
@@ -58,6 +60,8 @@ type UpdateAssessmentControlSetStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAssessmentControlSetStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

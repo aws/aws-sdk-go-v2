@@ -35,6 +35,8 @@ type GetResourcePolicyInput struct {
 	// Resource ARNs
 	// (https://docs.aws.amazon.com/glue/latest/dg/glue-specifying-resource-arns.html).
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetResourcePolicyOutput struct {
@@ -53,6 +55,8 @@ type GetResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

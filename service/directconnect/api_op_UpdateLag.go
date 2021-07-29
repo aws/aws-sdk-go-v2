@@ -61,6 +61,8 @@ type UpdateLagInput struct {
 	// The minimum number of physical connections that must be operational for the LAG
 	// itself to be operational.
 	MinimumLinks int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about a link aggregation group (LAG).
@@ -159,6 +161,8 @@ type UpdateLagOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLagMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type GetHostReservationPurchasePreviewInput struct {
 	//
 	// This member is required.
 	OfferingId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetHostReservationPurchasePreviewOutput struct {
@@ -61,6 +63,8 @@ type GetHostReservationPurchasePreviewOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHostReservationPurchasePreviewMiddlewares(stack *middleware.Stack, options Options) (err error) {

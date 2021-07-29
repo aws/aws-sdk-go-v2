@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -25,6 +26,8 @@ type AliasListEntry struct {
 
 	// String that contains the key identifier of the CMK associated with the alias.
 	TargetKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about each custom key store in the custom key store list.
@@ -125,6 +128,8 @@ type CustomKeyStoresListEntry struct {
 	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr),
 	// you create this certificate and save it in the customerCA.crt file.
 	TrustAnchorCertificate *string
+
+	noSmithyDocumentSerde
 }
 
 // Use this structure to allow cryptographic operations
@@ -165,6 +170,8 @@ type GrantConstraints struct {
 	// context in the request includes the key-value pairs specified in this
 	// constraint, although it can include additional key-value pairs.
 	EncryptionContextSubset map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a grant.
@@ -204,6 +211,8 @@ type GrantListEntry struct {
 
 	// The principal that can retire the grant.
 	RetiringPrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about each entry in the key list.
@@ -214,6 +223,8 @@ type KeyListEntry struct {
 
 	// Unique identifier of the key.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata about a customer master key (CMK). This data type is used as a
@@ -349,6 +360,8 @@ type KeyMetadata struct {
 	// value is present only for CMKs whose Origin is EXTERNAL and whose
 	// ExpirationModel is KEY_MATERIAL_EXPIRES, otherwise this value is omitted.
 	ValidTo *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration of this multi-Region CMK. This field appears only
@@ -366,6 +379,8 @@ type MultiRegionConfiguration struct {
 	// displays the key ARNs and Regions of all replica keys. This field includes the
 	// current CMK if it is a replica key.
 	ReplicaKeys []MultiRegionKey
+
+	noSmithyDocumentSerde
 }
 
 // Describes the primary or replica key in a multi-Region key.
@@ -376,6 +391,8 @@ type MultiRegionKey struct {
 
 	// Displays the AWS Region of a primary or replica key in a multi-Region key.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // A key-value pair. A tag consists of a tag key and a tag value. Tag keys and tag
@@ -395,4 +412,8 @@ type Tag struct {
 	//
 	// This member is required.
 	TagValue *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

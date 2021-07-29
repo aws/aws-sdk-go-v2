@@ -33,11 +33,15 @@ type StartAssociationsOnceInput struct {
 	//
 	// This member is required.
 	AssociationIds []string
+
+	noSmithyDocumentSerde
 }
 
 type StartAssociationsOnceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartAssociationsOnceMiddlewares(stack *middleware.Stack, options Options) (err error) {

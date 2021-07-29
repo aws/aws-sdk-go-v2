@@ -56,6 +56,8 @@ type ListBackendJobsInput struct {
 	// Filters the list of response objects to include only those with the specified
 	// status.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 type ListBackendJobsOutput struct {
@@ -68,6 +70,8 @@ type ListBackendJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBackendJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

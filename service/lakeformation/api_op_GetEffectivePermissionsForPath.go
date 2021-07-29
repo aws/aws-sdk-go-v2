@@ -49,6 +49,8 @@ type GetEffectivePermissionsForPathInput struct {
 
 	// A continuation token, if this is not the first call to retrieve this list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEffectivePermissionsForPathOutput struct {
@@ -62,6 +64,8 @@ type GetEffectivePermissionsForPathOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEffectivePermissionsForPathMiddlewares(stack *middleware.Stack, options Options) (err error) {

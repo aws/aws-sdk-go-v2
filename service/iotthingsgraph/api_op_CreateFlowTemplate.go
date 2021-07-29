@@ -41,6 +41,8 @@ type CreateFlowTemplateInput struct {
 	// The namespace version in which the workflow is to be created. If no value is
 	// specified, the latest version is used by default.
 	CompatibleNamespaceVersion *int64
+
+	noSmithyDocumentSerde
 }
 
 type CreateFlowTemplateOutput struct {
@@ -50,6 +52,8 @@ type CreateFlowTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -45,11 +45,15 @@ type DeleteProvisionedProductPlanInput struct {
 	// If set to true, AWS Service Catalog stops managing the specified provisioned
 	// product even if it cannot delete the underlying resources.
 	IgnoreErrors bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteProvisionedProductPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

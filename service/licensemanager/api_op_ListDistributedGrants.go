@@ -52,6 +52,8 @@ type ListDistributedGrantsInput struct {
 
 	// Token for the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDistributedGrantsOutput struct {
@@ -64,6 +66,8 @@ type ListDistributedGrantsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDistributedGrantsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -49,11 +49,15 @@ type CreateContactInput struct {
 	// A boolean value status noting if the contact is unsubscribed from all contact
 	// list topics.
 	UnsubscribeAll bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

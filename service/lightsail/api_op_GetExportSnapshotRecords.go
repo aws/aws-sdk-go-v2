@@ -36,6 +36,8 @@ type GetExportSnapshotRecordsInput struct {
 	// are paginated, the response will return a next page token that you can specify
 	// as the page token in a subsequent request.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetExportSnapshotRecordsOutput struct {
@@ -51,6 +53,8 @@ type GetExportSnapshotRecordsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetExportSnapshotRecordsMiddlewares(stack *middleware.Stack, options Options) (err error) {

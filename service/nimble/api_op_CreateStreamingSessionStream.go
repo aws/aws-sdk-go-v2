@@ -54,6 +54,8 @@ type CreateStreamingSessionStreamInput struct {
 
 	// The expiration time in seconds.
 	ExpirationInSeconds int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateStreamingSessionStreamOutput struct {
@@ -63,6 +65,8 @@ type CreateStreamingSessionStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStreamingSessionStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

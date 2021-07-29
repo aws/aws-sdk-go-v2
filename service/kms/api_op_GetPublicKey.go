@@ -109,6 +109,8 @@ type GetPublicKeyInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
 	// in the AWS Key Management Service Developer Guide.
 	GrantTokens []string
+
+	noSmithyDocumentSerde
 }
 
 type GetPublicKeyOutput struct {
@@ -145,6 +147,8 @@ type GetPublicKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPublicKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

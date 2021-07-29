@@ -41,6 +41,8 @@ type GetSizeConstraintSetInput struct {
 	//
 	// This member is required.
 	SizeConstraintSetId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSizeConstraintSetOutput struct {
@@ -61,6 +63,8 @@ type GetSizeConstraintSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSizeConstraintSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

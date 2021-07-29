@@ -37,6 +37,8 @@ type DescribeInstanceAccessControlAttributeConfigurationInput struct {
 	//
 	// This member is required.
 	InstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
@@ -53,6 +55,8 @@ type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInstanceAccessControlAttributeConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

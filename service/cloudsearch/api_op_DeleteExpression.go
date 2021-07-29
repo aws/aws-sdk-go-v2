@@ -47,6 +47,8 @@ type DeleteExpressionInput struct {
 	//
 	// This member is required.
 	ExpressionName *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a DeleteExpression request. Specifies the expression being
@@ -60,6 +62,8 @@ type DeleteExpressionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteExpressionMiddlewares(stack *middleware.Stack, options Options) (err error) {

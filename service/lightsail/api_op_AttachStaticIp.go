@@ -38,6 +38,8 @@ type AttachStaticIpInput struct {
 	//
 	// This member is required.
 	StaticIpName *string
+
+	noSmithyDocumentSerde
 }
 
 type AttachStaticIpOutput struct {
@@ -49,6 +51,8 @@ type AttachStaticIpOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachStaticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

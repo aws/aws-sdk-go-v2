@@ -33,6 +33,8 @@ type GetSigningCertificateInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Response from Cognito for a signing certificate request.
@@ -43,6 +45,8 @@ type GetSigningCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSigningCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

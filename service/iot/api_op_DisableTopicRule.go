@@ -33,11 +33,15 @@ type DisableTopicRuleInput struct {
 	//
 	// This member is required.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 type DisableTopicRuleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

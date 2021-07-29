@@ -62,6 +62,8 @@ type PutConformancePackInput struct {
 	// in an Amazon S3 bucket in the same region as the conformance pack. You must have
 	// access to read Amazon S3 bucket.
 	TemplateS3Uri *string
+
+	noSmithyDocumentSerde
 }
 
 type PutConformancePackOutput struct {
@@ -71,6 +73,8 @@ type PutConformancePackOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConformancePackMiddlewares(stack *middleware.Stack, options Options) (err error) {

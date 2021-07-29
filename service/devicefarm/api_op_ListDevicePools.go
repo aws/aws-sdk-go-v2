@@ -48,6 +48,8 @@ type ListDevicePoolsInput struct {
 	// * PRIVATE: A device pool that is
 	// created and managed by the device pool developer.
 	Type types.DevicePoolType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a list device pools request.
@@ -63,6 +65,8 @@ type ListDevicePoolsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDevicePoolsMiddlewares(stack *middleware.Stack, options Options) (err error) {

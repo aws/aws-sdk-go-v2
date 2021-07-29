@@ -39,6 +39,8 @@ type AdminEnableUserInput struct {
 	//
 	// This member is required.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server for the request to enable a user as an
@@ -46,6 +48,8 @@ type AdminEnableUserInput struct {
 type AdminEnableUserOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAdminEnableUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type GetServiceGraphInput struct {
 
 	// Pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetServiceGraphOutput struct {
@@ -79,6 +81,8 @@ type GetServiceGraphOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetServiceGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {

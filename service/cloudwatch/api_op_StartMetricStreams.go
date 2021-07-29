@@ -35,11 +35,15 @@ type StartMetricStreamsInput struct {
 	//
 	// This member is required.
 	Names []string
+
+	noSmithyDocumentSerde
 }
 
 type StartMetricStreamsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartMetricStreamsMiddlewares(stack *middleware.Stack, options Options) (err error) {

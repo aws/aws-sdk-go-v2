@@ -61,12 +61,16 @@ type SetIdentityNotificationTopicInput struct {
 	// omitted from the request or a null value is passed, SnsTopic is cleared and
 	// publishing is disabled.
 	SnsTopic *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type SetIdentityNotificationTopicOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetIdentityNotificationTopicMiddlewares(stack *middleware.Stack, options Options) (err error) {

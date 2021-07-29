@@ -41,6 +41,8 @@ type GetBackupSelectionInput struct {
 	//
 	// This member is required.
 	SelectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBackupSelectionOutput struct {
@@ -67,6 +69,8 @@ type GetBackupSelectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBackupSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

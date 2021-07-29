@@ -11,6 +11,8 @@ import (
 // Services account.
 type AccountLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccountLimitExceededException) Error() string {
@@ -28,6 +30,8 @@ func (e *AccountLimitExceededException) ErrorFault() smithy.ErrorFault { return 
 // The input value that was provided is not valid.
 type InvalidInputException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInputException) Error() string {
@@ -45,6 +49,8 @@ func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.F
 // There was a problem with the underlying OAuth provider.
 type OAuthProviderException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *OAuthProviderException) Error() string {
@@ -63,6 +69,8 @@ func (e *OAuthProviderException) ErrorFault() smithy.ErrorFault { return smithy.
 // Web Services resource with the same settings already exists.
 type ResourceAlreadyExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceAlreadyExistsException) Error() string {
@@ -80,6 +88,8 @@ func (e *ResourceAlreadyExistsException) ErrorFault() smithy.ErrorFault { return
 // The specified Amazon Web Services resource cannot be found.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

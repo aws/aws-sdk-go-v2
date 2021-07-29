@@ -42,6 +42,8 @@ type CreateResourceDefinitionInput struct {
 
 	// Tag(s) to add to the new resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateResourceDefinitionOutput struct {
@@ -69,6 +71,8 @@ type CreateResourceDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateResourceDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

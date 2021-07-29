@@ -53,6 +53,8 @@ type InvokeAsyncInput struct {
 	//
 	// This member is required.
 	InvokeArgs io.Reader
+
+	noSmithyDocumentSerde
 }
 
 // A success response (202 Accepted) indicates that the request is queued for
@@ -64,6 +66,8 @@ type InvokeAsyncOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInvokeAsyncMiddlewares(stack *middleware.Stack, options Options) (err error) {

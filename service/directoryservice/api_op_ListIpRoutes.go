@@ -42,6 +42,8 @@ type ListIpRoutesInput struct {
 	// The ListIpRoutes.NextToken value from a previous call to ListIpRoutes. Pass null
 	// if this is the first call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListIpRoutesOutput struct {
@@ -56,6 +58,8 @@ type ListIpRoutesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIpRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {

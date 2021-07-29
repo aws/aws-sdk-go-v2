@@ -68,12 +68,16 @@ type AddApplicationReferenceDataSourceInput struct {
 	//
 	// This member is required.
 	ReferenceDataSource *types.ReferenceDataSource
+
+	noSmithyDocumentSerde
 }
 
 //
 type AddApplicationReferenceDataSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddApplicationReferenceDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

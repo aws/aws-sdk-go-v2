@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -41,6 +42,8 @@ type Algorithm struct {
 
 	// The training input mode.
 	TrainingInputMode *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an algorithm image.
@@ -53,6 +56,8 @@ type AlgorithmImage struct {
 
 	// The name of the algorithm image.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // When the solution performs AutoML (performAutoML is true in CreateSolution),
@@ -65,6 +70,8 @@ type AutoMLConfig struct {
 
 	// The list of candidate recipes.
 	RecipeList []string
+
+	noSmithyDocumentSerde
 }
 
 // When the solution performs AutoML (performAutoML is true in CreateSolution),
@@ -73,6 +80,8 @@ type AutoMLResult struct {
 
 	// The Amazon Resource Name (ARN) of the best recipe.
 	BestRecipeArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on a batch inference job.
@@ -130,6 +139,8 @@ type BatchInferenceJob struct {
 	//
 	// * CREATE FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration details of a batch inference job.
@@ -141,6 +152,8 @@ type BatchInferenceJobConfig struct {
 	// recommending items. See User-Personalization
 	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html).
 	ItemExplorationConfig map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The input configuration of a batch inference job.
@@ -151,6 +164,8 @@ type BatchInferenceJobInput struct {
 	//
 	// This member is required.
 	S3DataSource *S3DataConfig
+
+	noSmithyDocumentSerde
 }
 
 // The output configuration parameters of a batch inference job.
@@ -161,6 +176,8 @@ type BatchInferenceJobOutput struct {
 	//
 	// This member is required.
 	S3DataDestination *S3DataConfig
+
+	noSmithyDocumentSerde
 }
 
 // A truncated version of the BatchInferenceJob datatype. The
@@ -197,6 +214,8 @@ type BatchInferenceJobSummary struct {
 	//
 	// * CREATE FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a deployed solution version, otherwise known as a campaign. For more
@@ -240,6 +259,8 @@ type Campaign struct {
 	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration details of a campaign.
@@ -253,6 +274,8 @@ type CampaignConfig struct {
 	// (https://docs.aws.amazon.com/personalize/latest/dg/native-recipe-new-item-USER_PERSONALIZATION.html)
 	// recipe.
 	ItemExplorationConfig map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a campaign. For a complete listing, call
@@ -282,6 +305,8 @@ type CampaignSummary struct {
 	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a campaign update. For a complete
@@ -315,6 +340,8 @@ type CampaignUpdateSummary struct {
 	//
 	// * DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the name and range of a categorical hyperparameter.
@@ -325,6 +352,8 @@ type CategoricalHyperParameterRange struct {
 
 	// A list of the categories for the hyperparameter.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the name and range of a continuous hyperparameter.
@@ -338,6 +367,8 @@ type ContinuousHyperParameterRange struct {
 
 	// The name of the hyperparameter.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides metadata for a dataset.
@@ -378,6 +409,8 @@ type Dataset struct {
 	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a job that exports a dataset to an Amazon S3 bucket. For more
@@ -427,6 +460,8 @@ type DatasetExportJob struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The output configuration parameters of a dataset export job.
@@ -436,6 +471,8 @@ type DatasetExportJobOutput struct {
 	//
 	// This member is required.
 	S3DataDestination *S3DataConfig
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a dataset export job. For a complete
@@ -464,6 +501,8 @@ type DatasetExportJobSummary struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A dataset group is a collection of related datasets (Interactions, User, and
@@ -503,6 +542,8 @@ type DatasetGroup struct {
 	//
 	// * DELETE PENDING
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a dataset group. For a complete listing,
@@ -532,6 +573,8 @@ type DatasetGroupSummary struct {
 	// *
 	// DELETE PENDING
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a job that imports training data from a data source (Amazon S3 bucket)
@@ -573,6 +616,8 @@ type DatasetImportJob struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a dataset import job. For a complete
@@ -601,6 +646,8 @@ type DatasetImportJobSummary struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the schema for a dataset. For more information on schemas, see
@@ -621,6 +668,8 @@ type DatasetSchema struct {
 
 	// The Amazon Resource Name (ARN) of the schema.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a dataset schema. For a complete
@@ -638,6 +687,8 @@ type DatasetSchemaSummary struct {
 
 	// The Amazon Resource Name (ARN) of the schema.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a dataset. For a complete listing, call
@@ -676,6 +727,8 @@ type DatasetSummary struct {
 	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the data source that contains the data to upload to a dataset.
@@ -684,6 +737,8 @@ type DataSource struct {
 	// The path to the Amazon S3 bucket where the data that you want to upload to your
 	// dataset is stored. For example: s3://bucket-name/folder-name/
 	DataLocation *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the name and default range of a categorical hyperparameter and whether
@@ -699,6 +754,8 @@ type DefaultCategoricalHyperParameterRange struct {
 
 	// A list of the categories for the hyperparameter.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the name and default range of a continuous hyperparameter and whether
@@ -717,6 +774,8 @@ type DefaultContinuousHyperParameterRange struct {
 
 	// The name of the hyperparameter.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the hyperparameters and their default ranges. Hyperparameters can be
@@ -731,6 +790,8 @@ type DefaultHyperParameterRanges struct {
 
 	// The integer-valued hyperparameters and their default ranges.
 	IntegerHyperParameterRanges []DefaultIntegerHyperParameterRange
+
+	noSmithyDocumentSerde
 }
 
 // Provides the name and default range of a integer-valued hyperparameter and
@@ -749,6 +810,8 @@ type DefaultIntegerHyperParameterRange struct {
 
 	// The name of the hyperparameter.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an event tracker.
@@ -785,6 +848,8 @@ type EventTracker struct {
 	// The ID of the event tracker. Include this ID in requests to the PutEvents
 	// (https://docs.aws.amazon.com/personalize/latest/dg/API_UBS_PutEvents.html) API.
 	TrackingId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of an event tracker. For a complete
@@ -811,6 +876,8 @@ type EventTrackerSummary struct {
 	// *
 	// DELETE PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides feature transformation information. Feature transformation is the
@@ -839,6 +906,8 @@ type FeatureTransformation struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or-
 	// CREATE FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information on a recommendation filter, including its ARN, status, and
@@ -870,6 +939,8 @@ type Filter struct {
 
 	// The status of the filter.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A short summary of a filter's attributes.
@@ -895,6 +966,8 @@ type FilterSummary struct {
 
 	// The status of the filter.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties for hyperparameter optimization (HPO).
@@ -909,6 +982,8 @@ type HPOConfig struct {
 
 	// Describes the resource configuration for HPO.
 	HpoResourceConfig *HPOResourceConfig
+
+	noSmithyDocumentSerde
 }
 
 // The metric to optimize during hyperparameter optimization (HPO). Amazon
@@ -923,6 +998,8 @@ type HPOObjective struct {
 
 	// The type of the metric. Valid values are Maximize and Minimize.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the resource configuration for hyperparameter optimization (HPO).
@@ -935,6 +1012,8 @@ type HPOResourceConfig struct {
 	// The maximum number of parallel training jobs when you create a solution version.
 	// The maximum value for maxParallelTrainingJobs is 10.
 	MaxParallelTrainingJobs *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the hyperparameters and their ranges. Hyperparameters can be
@@ -949,6 +1028,8 @@ type HyperParameterRanges struct {
 
 	// The integer-valued hyperparameters and their ranges.
 	IntegerHyperParameterRanges []IntegerHyperParameterRange
+
+	noSmithyDocumentSerde
 }
 
 // Provides the name and range of an integer-valued hyperparameter.
@@ -962,6 +1043,8 @@ type IntegerHyperParameterRange struct {
 
 	// The name of the hyperparameter.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the additional objective for the solution, such as maximizing
@@ -978,6 +1061,8 @@ type OptimizationObjective struct {
 	// Specifies how Amazon Personalize balances the importance of your optimization
 	// objective versus relevance.
 	ObjectiveSensitivity ObjectiveSensitivity
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a recipe. Each recipe provides an algorithm that
@@ -1019,6 +1104,8 @@ type Recipe struct {
 
 	// The status of the recipe.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a recipe. For a complete listing, call
@@ -1039,6 +1126,8 @@ type RecipeSummary struct {
 
 	// The status of the recipe.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration details of an Amazon S3 input or output bucket.
@@ -1053,6 +1142,8 @@ type S3DataConfig struct {
 	// that Amazon Personalize uses to encrypt or decrypt the input and output files of
 	// a batch inference job.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that provides information about a solution. A solution is a trained
@@ -1110,6 +1201,8 @@ type Solution struct {
 	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration properties for the solution.
@@ -1137,6 +1230,8 @@ type SolutionConfig struct {
 	// solution
 	// (https://docs.aws.amazon.com/personalize/latest/dg/optimizing-solution-for-objective.html).
 	OptimizationObjective *OptimizationObjective
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a solution. For a complete listing, call
@@ -1163,6 +1258,8 @@ type SolutionSummary struct {
 	// * DELETE
 	// PENDING > DELETE IN_PROGRESS
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that provides information about a specific version of a Solution.
@@ -1244,6 +1341,8 @@ type SolutionVersion struct {
 	// If hyperparameter optimization was performed, contains the hyperparameter values
 	// of the best performing model.
 	TunedHPOParams *TunedHPOParams
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of the properties of a solution version. For a complete
@@ -1268,6 +1367,8 @@ type SolutionVersionSummary struct {
 	// * CREATE PENDING > CREATE IN_PROGRESS > ACTIVE -or- CREATE
 	// FAILED
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // If hyperparameter optimization (HPO) was performed, contains the hyperparameter
@@ -1276,4 +1377,8 @@ type TunedHPOParams struct {
 
 	// A list of the hyperparameter values of the best performing model.
 	AlgorithmHyperParameters map[string]string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

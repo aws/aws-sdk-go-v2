@@ -109,6 +109,8 @@ type InvokeInput struct {
 
 	// Specify a version or alias to invoke a published version of the function.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type InvokeOutput struct {
@@ -135,6 +137,8 @@ type InvokeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInvokeMiddlewares(stack *middleware.Stack, options Options) (err error) {

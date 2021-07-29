@@ -97,11 +97,15 @@ type UpdateAccountPasswordPolicyInput struct {
 	// value for this parameter, then the operation uses the default value of false.
 	// The result is that passwords do not require at least one uppercase character.
 	RequireUppercaseCharacters bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAccountPasswordPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAccountPasswordPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

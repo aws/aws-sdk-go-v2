@@ -48,6 +48,8 @@ type DescribeSpotFleetRequestsInput struct {
 
 	// The IDs of the Spot Fleet requests.
 	SpotFleetRequestIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeSpotFleetRequests.
@@ -62,6 +64,8 @@ type DescribeSpotFleetRequestsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSpotFleetRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {

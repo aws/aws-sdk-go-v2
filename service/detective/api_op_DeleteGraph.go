@@ -35,11 +35,15 @@ type DeleteGraphInput struct {
 	//
 	// This member is required.
 	GraphArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteGraphOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {

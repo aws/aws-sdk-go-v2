@@ -35,11 +35,15 @@ type DisassociateSkillFromSkillGroupInput struct {
 
 	// The unique identifier of a skill. Required.
 	SkillGroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateSkillFromSkillGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateSkillFromSkillGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

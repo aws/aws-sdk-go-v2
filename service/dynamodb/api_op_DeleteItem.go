@@ -176,6 +176,8 @@ type DeleteItemInput struct {
 	// several DynamoDB operations; however, DeleteItem does not recognize any values
 	// other than NONE or ALL_OLD.
 	ReturnValues types.ReturnValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a DeleteItem operation.
@@ -217,6 +219,8 @@ type DeleteItemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

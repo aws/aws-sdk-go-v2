@@ -40,6 +40,8 @@ type ListProtectedResourcesInput struct {
 	// return more items in your list starting at the location pointed to by the next
 	// token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProtectedResourcesOutput struct {
@@ -57,6 +59,8 @@ type ListProtectedResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProtectedResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

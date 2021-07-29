@@ -45,6 +45,8 @@ type GetRecordInput struct {
 	// List of names of Features to be retrieved. If not specified, the latest value
 	// for all the Features are returned.
 	FeatureNames []string
+
+	noSmithyDocumentSerde
 }
 
 type GetRecordOutput struct {
@@ -54,6 +56,8 @@ type GetRecordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {

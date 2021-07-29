@@ -102,6 +102,8 @@ type CreateApiCacheInput struct {
 	// Transit encryption flag when connecting to cache. This setting cannot be updated
 	// after creation.
 	TransitEncryptionEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a CreateApiCache operation.
@@ -112,6 +114,8 @@ type CreateApiCacheOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApiCacheMiddlewares(stack *middleware.Stack, options Options) (err error) {

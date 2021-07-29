@@ -32,11 +32,15 @@ type DeleteStoredQueryInput struct {
 	//
 	// This member is required.
 	QueryName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStoredQueryOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStoredQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type CancelImportTaskInput struct {
 
 	// The ID of the import image or import snapshot task to be canceled.
 	ImportTaskId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelImportTaskOutput struct {
@@ -54,6 +56,8 @@ type CancelImportTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelImportTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

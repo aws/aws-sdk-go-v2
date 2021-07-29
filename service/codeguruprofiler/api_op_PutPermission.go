@@ -70,6 +70,8 @@ type PutPermissionInput struct {
 	// profiling group for the first time. If a policy already exists on the profiling
 	// group, you must specify the revisionId.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the putPermissionResponse.
@@ -90,6 +92,8 @@ type PutPermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,6 +37,8 @@ type StopJobRunInput struct {
 	//
 	// This member is required.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopJobRunOutput struct {
@@ -48,6 +50,8 @@ type StopJobRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopJobRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

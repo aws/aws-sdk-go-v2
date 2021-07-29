@@ -12,6 +12,8 @@ import (
 // UpdateAccountSendingEnabled.
 type AccountSendingPausedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccountSendingPausedException) Error() string {
@@ -31,6 +33,8 @@ type AlreadyExistsException struct {
 	Message *string
 
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AlreadyExistsException) Error() string {
@@ -50,6 +54,8 @@ type CannotDeleteException struct {
 	Message *string
 
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CannotDeleteException) Error() string {
@@ -70,6 +76,8 @@ type ConfigurationSetAlreadyExistsException struct {
 	Message *string
 
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConfigurationSetAlreadyExistsException) Error() string {
@@ -93,6 +101,8 @@ type ConfigurationSetDoesNotExistException struct {
 	Message *string
 
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConfigurationSetDoesNotExistException) Error() string {
@@ -118,6 +128,8 @@ type ConfigurationSetSendingPausedException struct {
 	Message *string
 
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConfigurationSetSendingPausedException) Error() string {
@@ -139,6 +151,8 @@ func (e *ConfigurationSetSendingPausedException) ErrorFault() smithy.ErrorFault 
 // Indicates that custom verification email template provided content is invalid.
 type CustomVerificationEmailInvalidContentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomVerificationEmailInvalidContentException) Error() string {
@@ -163,6 +177,8 @@ type CustomVerificationEmailTemplateAlreadyExistsException struct {
 	Message *string
 
 	CustomVerificationEmailTemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomVerificationEmailTemplateAlreadyExistsException) Error() string {
@@ -187,6 +203,8 @@ type CustomVerificationEmailTemplateDoesNotExistException struct {
 	Message *string
 
 	CustomVerificationEmailTemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CustomVerificationEmailTemplateDoesNotExistException) Error() string {
@@ -212,6 +230,8 @@ type EventDestinationAlreadyExistsException struct {
 
 	ConfigurationSetName *string
 	EventDestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EventDestinationAlreadyExistsException) Error() string {
@@ -236,6 +256,8 @@ type EventDestinationDoesNotExistException struct {
 
 	ConfigurationSetName *string
 	EventDestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EventDestinationDoesNotExistException) Error() string {
@@ -261,6 +283,8 @@ type FromEmailAddressNotVerifiedException struct {
 	Message *string
 
 	FromEmailAddress *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *FromEmailAddressNotVerifiedException) Error() string {
@@ -286,6 +310,8 @@ type InvalidCloudWatchDestinationException struct {
 
 	ConfigurationSetName *string
 	EventDestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidCloudWatchDestinationException) Error() string {
@@ -308,6 +334,8 @@ func (e *InvalidCloudWatchDestinationException) ErrorFault() smithy.ErrorFault {
 // details.
 type InvalidConfigurationSetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidConfigurationSetException) Error() string {
@@ -325,6 +353,8 @@ func (e *InvalidConfigurationSetException) ErrorFault() smithy.ErrorFault { retu
 // Indicates that provided delivery option is invalid.
 type InvalidDeliveryOptionsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDeliveryOptionsException) Error() string {
@@ -346,6 +376,8 @@ type InvalidFirehoseDestinationException struct {
 
 	ConfigurationSetName *string
 	EventDestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFirehoseDestinationException) Error() string {
@@ -370,6 +402,8 @@ type InvalidLambdaFunctionException struct {
 	Message *string
 
 	FunctionArn *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLambdaFunctionException) Error() string {
@@ -388,6 +422,8 @@ func (e *InvalidLambdaFunctionException) ErrorFault() smithy.ErrorFault { return
 // information about what caused the error.
 type InvalidPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPolicyException) Error() string {
@@ -408,6 +444,8 @@ type InvalidRenderingParameterException struct {
 	Message *string
 
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRenderingParameterException) Error() string {
@@ -433,6 +471,8 @@ type InvalidS3ConfigurationException struct {
 	Message *string
 
 	Bucket *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidS3ConfigurationException) Error() string {
@@ -454,6 +494,8 @@ type InvalidSNSDestinationException struct {
 
 	ConfigurationSetName *string
 	EventDestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSNSDestinationException) Error() string {
@@ -476,6 +518,8 @@ type InvalidSnsTopicException struct {
 	Message *string
 
 	Topic *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSnsTopicException) Error() string {
@@ -496,6 +540,8 @@ type InvalidTemplateException struct {
 	Message *string
 
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTemplateException) Error() string {
@@ -521,6 +567,8 @@ func (e *InvalidTemplateException) ErrorFault() smithy.ErrorFault { return smith
 // subdomain.
 type InvalidTrackingOptionsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTrackingOptionsException) Error() string {
@@ -540,6 +588,8 @@ func (e *InvalidTrackingOptionsException) ErrorFault() smithy.ErrorFault { retur
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/limits.html).
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -561,6 +611,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // (https://docs.aws.amazon.com/ses/latest/DeveloperGuide/mail-from-edit.html).
 type MailFromDomainNotVerifiedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MailFromDomainNotVerifiedException) Error() string {
@@ -583,6 +635,8 @@ func (e *MailFromDomainNotVerifiedException) ErrorFault() smithy.ErrorFault {
 // error stack for more information about what caused the error.
 type MessageRejected struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MessageRejected) Error() string {
@@ -604,6 +658,8 @@ type MissingRenderingAttributeException struct {
 	Message *string
 
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingRenderingAttributeException) Error() string {
@@ -623,6 +679,8 @@ func (e *MissingRenderingAttributeException) ErrorFault() smithy.ErrorFault {
 // Indicates that the account has not been granted production access.
 type ProductionAccessNotGrantedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ProductionAccessNotGrantedException) Error() string {
@@ -644,6 +702,8 @@ type RuleDoesNotExistException struct {
 	Message *string
 
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RuleDoesNotExistException) Error() string {
@@ -663,6 +723,8 @@ type RuleSetDoesNotExistException struct {
 	Message *string
 
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RuleSetDoesNotExistException) Error() string {
@@ -683,6 +745,8 @@ type TemplateDoesNotExistException struct {
 	Message *string
 
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TemplateDoesNotExistException) Error() string {
@@ -703,6 +767,8 @@ type TrackingOptionsAlreadyExistsException struct {
 	Message *string
 
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrackingOptionsAlreadyExistsException) Error() string {
@@ -726,6 +792,8 @@ type TrackingOptionsDoesNotExistException struct {
 	Message *string
 
 	ConfigurationSetName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrackingOptionsDoesNotExistException) Error() string {

@@ -65,11 +65,15 @@ type UpdateContactAttributesInput struct {
 	//
 	// This member is required.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContactAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContactAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

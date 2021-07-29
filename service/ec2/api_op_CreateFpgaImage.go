@@ -62,6 +62,8 @@ type CreateFpgaImageInput struct {
 
 	// The tags to apply to the FPGA image during creation.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type CreateFpgaImageOutput struct {
@@ -74,6 +76,8 @@ type CreateFpgaImageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFpgaImageMiddlewares(stack *middleware.Stack, options Options) (err error) {

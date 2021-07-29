@@ -43,6 +43,8 @@ type StartSuiteRunInput struct {
 
 	// The tags to be attached to the suite run.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type StartSuiteRunOutput struct {
@@ -58,6 +60,8 @@ type StartSuiteRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSuiteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

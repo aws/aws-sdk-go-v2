@@ -37,6 +37,8 @@ type GetBlacklistReportsInput struct {
 	//
 	// This member is required.
 	BlacklistItemNames []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about blacklist events.
@@ -50,6 +52,8 @@ type GetBlacklistReportsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBlacklistReportsMiddlewares(stack *middleware.Stack, options Options) (err error) {

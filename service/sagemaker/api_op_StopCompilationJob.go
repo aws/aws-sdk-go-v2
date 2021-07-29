@@ -38,11 +38,15 @@ type StopCompilationJobInput struct {
 	//
 	// This member is required.
 	CompilationJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopCompilationJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -69,11 +69,15 @@ type CreateCustomVerificationEmailTemplateInput struct {
 	//
 	// This member is required.
 	TemplateSubject *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCustomVerificationEmailTemplateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCustomVerificationEmailTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

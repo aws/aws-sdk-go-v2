@@ -64,6 +64,8 @@ type ListTransformJobsInput struct {
 
 	// A filter that retrieves only transform jobs with a specific status.
 	StatusEquals types.TransformJobStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListTransformJobsOutput struct {
@@ -79,6 +81,8 @@ type ListTransformJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTransformJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

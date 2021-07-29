@@ -63,6 +63,8 @@ type DescribeImagesInput struct {
 	// repository in which to describe images. If you do not specify a registry, the
 	// default public registry is assumed.
 	RegistryId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeImagesOutput struct {
@@ -78,6 +80,8 @@ type DescribeImagesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeImagesMiddlewares(stack *middleware.Stack, options Options) (err error) {

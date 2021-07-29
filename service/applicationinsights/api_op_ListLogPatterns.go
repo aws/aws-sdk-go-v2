@@ -44,6 +44,8 @@ type ListLogPatternsInput struct {
 
 	// The name of the log pattern set.
 	PatternSetName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLogPatternsOutput struct {
@@ -60,6 +62,8 @@ type ListLogPatternsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLogPatternsMiddlewares(stack *middleware.Stack, options Options) (err error) {

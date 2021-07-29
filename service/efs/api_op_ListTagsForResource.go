@@ -45,6 +45,8 @@ type ListTagsForResourceInput struct {
 	// (Optional) You can use NextToken in a subsequent request to fetch the next page
 	// of access point descriptions if the response payload was paginated.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsForResourceOutput struct {
@@ -58,6 +60,8 @@ type ListTagsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

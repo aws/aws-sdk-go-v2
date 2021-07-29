@@ -60,6 +60,8 @@ type UpdateWorkteamInput struct {
 
 	// Configures SNS topic notifications for available or expiring work items
 	NotificationConfiguration *types.NotificationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateWorkteamOutput struct {
@@ -71,6 +73,8 @@ type UpdateWorkteamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {

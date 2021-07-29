@@ -29,6 +29,7 @@ func (c *Client) DeleteNamespace(ctx context.Context, params *DeleteNamespaceInp
 }
 
 type DeleteNamespaceInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeleteNamespaceOutput struct {
@@ -41,6 +42,8 @@ type DeleteNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

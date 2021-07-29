@@ -64,6 +64,8 @@ type CreateVpcPeeringConnectionInput struct {
 
 	// The ID of the requester VPC. You must specify this parameter in the request.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateVpcPeeringConnectionOutput struct {
@@ -73,6 +75,8 @@ type CreateVpcPeeringConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

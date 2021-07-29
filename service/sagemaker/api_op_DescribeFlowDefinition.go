@@ -34,6 +34,8 @@ type DescribeFlowDefinitionInput struct {
 	//
 	// This member is required.
 	FlowDefinitionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeFlowDefinitionOutput struct {
@@ -87,6 +89,8 @@ type DescribeFlowDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFlowDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

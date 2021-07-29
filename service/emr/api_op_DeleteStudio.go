@@ -32,11 +32,15 @@ type DeleteStudioInput struct {
 	//
 	// This member is required.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteStudioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {

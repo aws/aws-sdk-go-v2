@@ -67,6 +67,8 @@ type RegisterDeviceInput struct {
 	//
 	// This member is required.
 	Token *string
+
+	noSmithyDocumentSerde
 }
 
 // Response to a RegisterDevice request.
@@ -77,6 +79,8 @@ type RegisterDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

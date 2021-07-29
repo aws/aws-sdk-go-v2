@@ -41,6 +41,8 @@ type ListEngagementsInput struct {
 
 	// The time range to lists engagements for an incident.
 	TimeRangeValue *types.TimeRange
+
+	noSmithyDocumentSerde
 }
 
 type ListEngagementsOutput struct {
@@ -56,6 +58,8 @@ type ListEngagementsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListEngagementsMiddlewares(stack *middleware.Stack, options Options) (err error) {

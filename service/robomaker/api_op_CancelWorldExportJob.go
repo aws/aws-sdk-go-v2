@@ -32,11 +32,15 @@ type CancelWorldExportJobInput struct {
 	//
 	// This member is required.
 	Job *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelWorldExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelWorldExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

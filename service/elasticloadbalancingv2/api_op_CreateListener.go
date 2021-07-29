@@ -102,6 +102,8 @@ type CreateListenerInput struct {
 
 	// The tags to assign to the listener.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateListenerOutput struct {
@@ -111,6 +113,8 @@ type CreateListenerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

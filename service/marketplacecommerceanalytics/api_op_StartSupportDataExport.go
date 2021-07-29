@@ -94,6 +94,8 @@ type StartSupportDataExportInput struct {
 	// prefix directory structure does not exist, it will be created. If no prefix is
 	// provided, the data set will be published to the S3 bucket root.
 	DestinationS3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Container for the result of the StartSupportDataExport operation.
@@ -106,6 +108,8 @@ type StartSupportDataExportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSupportDataExportMiddlewares(stack *middleware.Stack, options Options) (err error) {

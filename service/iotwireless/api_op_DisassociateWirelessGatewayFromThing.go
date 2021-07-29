@@ -32,11 +32,15 @@ type DisassociateWirelessGatewayFromThingInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateWirelessGatewayFromThingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateWirelessGatewayFromThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

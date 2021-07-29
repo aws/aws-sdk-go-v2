@@ -36,11 +36,15 @@ type DeleteForecastInput struct {
 	//
 	// This member is required.
 	ForecastArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteForecastOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteForecastMiddlewares(stack *middleware.Stack, options Options) (err error) {

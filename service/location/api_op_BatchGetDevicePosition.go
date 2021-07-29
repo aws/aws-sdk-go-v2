@@ -41,6 +41,8 @@ type BatchGetDevicePositionInput struct {
 	//
 	// This member is required.
 	TrackerName *string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetDevicePositionOutput struct {
@@ -59,6 +61,8 @@ type BatchGetDevicePositionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetDevicePositionMiddlewares(stack *middleware.Stack, options Options) (err error) {

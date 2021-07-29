@@ -33,6 +33,8 @@ type ListApplicationsInput struct {
 	// An identifier returned from the previous list applications call. It can be used
 	// to return the next set of applications in the list.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a ListApplications operation.
@@ -48,6 +50,8 @@ type ListApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

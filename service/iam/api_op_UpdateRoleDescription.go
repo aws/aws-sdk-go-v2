@@ -40,6 +40,8 @@ type UpdateRoleDescriptionInput struct {
 	//
 	// This member is required.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateRoleDescriptionOutput struct {
@@ -49,6 +51,8 @@ type UpdateRoleDescriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRoleDescriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

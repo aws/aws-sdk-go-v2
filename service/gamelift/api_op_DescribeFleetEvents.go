@@ -70,6 +70,8 @@ type DescribeFleetEventsInput struct {
 	// specified end time. Format is a number expressed in Unix time as milliseconds
 	// (ex: "1469498468.057").
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -85,6 +87,8 @@ type DescribeFleetEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeFleetEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

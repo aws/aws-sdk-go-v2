@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type AccessControlList struct {
 	// Specifies whether the ACL grants the general public with write access
 	// permissions for the bucket.
 	AllowsPublicWriteAccess bool
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the details of an account to associate with an Amazon Macie
@@ -32,6 +35,8 @@ type AccountDetail struct {
 	//
 	// This member is required.
 	Email *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the account-level permissions settings that apply to
@@ -41,6 +46,8 @@ type AccountLevelPermissions struct {
 	// The block public access settings for the Amazon Web Services account that owns
 	// the bucket.
 	BlockPublicAccess *BlockPublicAccess
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the delegated Amazon Macie administrator account for
@@ -53,6 +60,8 @@ type AdminAccount struct {
 	// The current status of the account as the delegated administrator of Amazon Macie
 	// for the organization.
 	Status AdminStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an API operation that an entity invoked for an
@@ -74,6 +83,8 @@ type ApiCallDetails struct {
 	// The most recent date and time, in UTC and extended ISO 8601 format, when the
 	// specified operation (api) was invoked and produced the finding.
 	LastSeen *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an identity that performed an action on an affected
@@ -98,6 +109,8 @@ type AssumedRole struct {
 	// The details of the session that was created for the credentials, including the
 	// entity that issued the session.
 	SessionContext *SessionContext
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an Amazon Web Services account and entity that
@@ -110,6 +123,8 @@ type AwsAccount struct {
 
 	// The unique identifier for the entity that performed the action.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an Amazon Web Service that performed an action on an
@@ -118,6 +133,8 @@ type AwsService struct {
 
 	// The name of the Amazon Web Service that performed the action.
 	InvokedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a custom data identifier.
@@ -143,6 +160,8 @@ type BatchGetCustomDataIdentifierSummary struct {
 
 	// The custom name of the custom data identifier.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the block public access settings for an S3 bucket.
@@ -166,6 +185,8 @@ type BlockPublicAccess struct {
 
 	// Specifies whether Amazon S3 restricts public bucket policies for the bucket.
 	RestrictPublicBuckets bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the number of S3 buckets that are publicly accessible
@@ -188,6 +209,8 @@ type BucketCountByEffectivePermission struct {
 	// permissions settings for. Macie can't determine whether these buckets are
 	// publicly accessible.
 	Unknown int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the number of S3 buckets that use certain types of
@@ -217,6 +240,8 @@ type BucketCountByEncryptionType struct {
 	// metadata for. Macie can't provide current data about the default encryption
 	// settings for these buckets.
 	Unknown int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the number of S3 buckets that are or aren't shared
@@ -239,6 +264,8 @@ type BucketCountBySharedAccessType struct {
 	// access settings for. Macie can't determine whether these buckets are shared with
 	// other Amazon Web Services accounts.
 	Unknown int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the number of S3 buckets whose bucket policies do or
@@ -263,6 +290,8 @@ type BucketCountPolicyAllowsUnencryptedObjectUploads struct {
 	// server-side encryption requirements for. Macie can't determine whether the
 	// bucket policies for these buckets require server-side encryption of new objects.
 	Unknown int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the operator to use in a property-based condition that filters the
@@ -291,6 +320,8 @@ type BucketCriteriaAdditionalProperties struct {
 
 	// The name of the bucket begins with the specified value.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the bucket-level permissions settings for an S3
@@ -307,6 +338,8 @@ type BucketLevelPermissions struct {
 	// The permissions settings of the bucket policy for the bucket. This value is null
 	// if a bucket policy hasn't been defined for the bucket.
 	BucketPolicy *BucketPolicy
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an S3 bucket that Amazon Macie monitors and analyzes.
@@ -437,6 +470,8 @@ type BucketMetadata struct {
 
 	// Specifies whether versioning is enabled for the bucket.
 	Versioning bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the account-level and bucket-level permissions
@@ -448,6 +483,8 @@ type BucketPermissionConfiguration struct {
 
 	// The bucket-level permissions settings for the bucket.
 	BucketLevelPermissions *BucketLevelPermissions
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the permissions settings of the bucket policy for an
@@ -461,6 +498,8 @@ type BucketPolicy struct {
 	// Specifies whether the bucket policy allows the general public to have write
 	// access to the bucket.
 	AllowsPublicWriteAccess bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the permissions settings that determine whether an S3
@@ -482,6 +521,8 @@ type BucketPublicAccess struct {
 
 	// The account-level and bucket-level permissions settings for the bucket.
 	PermissionConfiguration *BucketPermissionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the default server-side encryption settings for an S3
@@ -512,6 +553,8 @@ type BucketServerSideEncryption struct {
 	// * NONE - New objects
 	// aren't encrypted by default. Default encryption is disabled for the bucket.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 // Specifies criteria for sorting the results of a query for information about S3
@@ -528,6 +571,8 @@ type BucketSortCriteria struct {
 	// attributeName property. Valid values are: ASC, sort the results in ascending
 	// order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the location of an occurrence of sensitive data in a Microsoft Excel
@@ -549,6 +594,8 @@ type Cell struct {
 
 	// The row number of the row that contains the sensitive data.
 	Row int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a sensitive data finding, including the
@@ -570,6 +617,8 @@ type ClassificationDetails struct {
 
 	// The status and other details of the finding.
 	Result *ClassificationResult
+
+	noSmithyDocumentSerde
 }
 
 // Specifies where to store data classification results, and the encryption
@@ -580,6 +629,8 @@ type ClassificationExportConfiguration struct {
 	// The S3 bucket to store data classification results in, and the encryption
 	// settings to use when storing results in that bucket.
 	S3Destination *S3Destination
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of a sensitive data finding, including the types, number of
@@ -612,6 +663,8 @@ type ClassificationResult struct {
 
 	// The status of the finding.
 	Status *ClassificationResultStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status of a sensitive data finding.
@@ -636,6 +689,8 @@ type ClassificationResultStatus struct {
 	// to notify you of any errors, warnings, or considerations that might impact your
 	// analysis of the finding.
 	Reason *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one or more property- and tag-based conditions that define criteria
@@ -646,6 +701,8 @@ type CriteriaBlockForJob struct {
 	// include or exclude from the job. If you specify more than one condition, Amazon
 	// Macie uses AND logic to join the conditions.
 	And []CriteriaForJob
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a property- or tag-based condition that defines criteria for including
@@ -659,6 +716,8 @@ type CriteriaForJob struct {
 	// A tag-based condition that defines an operator and tag keys, tag values, or tag
 	// key and value pairs for including or excluding buckets from the job.
 	TagCriterion *TagCriterionForJob
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the operator to use in a property-based condition that filters the
@@ -697,6 +756,8 @@ type CriterionAdditionalProperties struct {
 	// The value for the property doesn't match (doesn't equal) the specified value. If
 	// you specify multiple values, Macie uses OR logic to join the values.
 	Neq []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about custom data identifiers that produced a sensitive
@@ -711,6 +772,8 @@ type CustomDataIdentifiers struct {
 	// The total number of occurrences of the data that was detected by the custom data
 	// identifiers and produced the finding.
 	TotalCount int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a custom data identifier.
@@ -731,6 +794,8 @@ type CustomDataIdentifierSummary struct {
 
 	// The custom name of the custom data identifier.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a custom data identifier that produced a sensitive
@@ -751,11 +816,14 @@ type CustomDetection struct {
 	// identifier detected. A finding includes location data for a maximum of 15
 	// occurrences of sensitive data.
 	Occurrences *Occurrences
+
+	noSmithyDocumentSerde
 }
 
 // Specifies that a classification job runs once a day, every day. This is an empty
 // object.
 type DailySchedule struct {
+	noSmithyDocumentSerde
 }
 
 // Provides information about a type of sensitive data that was detected by managed
@@ -773,6 +841,8 @@ type DefaultDetection struct {
 	// The type of sensitive data that was detected. For example, AWS_CREDENTIALS,
 	// PHONE_NUMBER, or ADDRESS.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the domain name of the device that an entity used to
@@ -781,6 +851,8 @@ type DomainDetails struct {
 
 	// The name of the domain.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an identity that performed an action on an affected
@@ -805,6 +877,8 @@ type FederatedUser struct {
 	// The details of the session that was created for the credentials, including the
 	// entity that issued the session.
 	SessionContext *SessionContext
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of a finding.
@@ -876,6 +950,8 @@ type Finding struct {
 	// for the createdAt property. All sensitive data findings are considered new
 	// (unique) because they derive from individual classification jobs.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an action that occurred for a resource and produced a
@@ -890,6 +966,8 @@ type FindingAction struct {
 	// The invocation details of the API operation that an entity invoked for the
 	// affected resource, if the value for the actionType property is AWS_API_CALL.
 	ApiCallDetails *ApiCallDetails
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an entity that performed an action that produced a
@@ -908,6 +986,8 @@ type FindingActor struct {
 	// The type and other characteristics of the entity that performed the action on
 	// the affected resource.
 	UserIdentity *UserIdentity
+
+	noSmithyDocumentSerde
 }
 
 // Specifies, as a map, one or more property-based conditions that filter the
@@ -917,6 +997,8 @@ type FindingCriteria struct {
 	// A condition that specifies the property, operator, and one or more values to use
 	// to filter the results.
 	Criterion map[string]CriterionAdditionalProperties
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a findings filter.
@@ -939,6 +1021,8 @@ type FindingsFilterListItem struct {
 	// A map of key-value pairs that identifies the tags (keys and values) that are
 	// associated with the filter.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies criteria for sorting the results of a query that retrieves aggregated
@@ -954,6 +1038,8 @@ type FindingStatisticsSortCriteria struct {
 	// specified by the attributeName property. Valid values are: ASC, sort the results
 	// in ascending order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
+
+	noSmithyDocumentSerde
 }
 
 // Provides a group of results for a query that retrieved aggregated statistical
@@ -966,6 +1052,8 @@ type GroupCount struct {
 	// The name of the property that defines the group in the query results, as
 	// specified by the groupBy property in the query request.
 	GroupKey *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an Identity and Access Management (IAM) user who
@@ -985,6 +1073,8 @@ type IamUser struct {
 
 	// The user name of the IAM user who performed the action.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an Amazon Macie membership invitation that was
@@ -1006,6 +1096,8 @@ type Invitation struct {
 	// (inviter account) and the account that received the invitation (invitee
 	// account).
 	RelationshipStatus RelationshipStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the IP address of the device that an entity used to
@@ -1026,6 +1118,8 @@ type IpAddressDetails struct {
 
 	// The registered owner of the IP address.
 	IpOwner *IpOwner
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the city that an IP address originated from.
@@ -1033,6 +1127,8 @@ type IpCity struct {
 
 	// The name of the city.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the country that an IP address originated from.
@@ -1044,6 +1140,8 @@ type IpCountry struct {
 
 	// The name of the country that the IP address originated from.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides geographic coordinates that indicate where a specified IP address
@@ -1055,6 +1153,8 @@ type IpGeoLocation struct {
 
 	// The longitude coordinate of the location, rounded to four decimal places.
 	Lon float64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the registered owner of an IP address.
@@ -1073,6 +1173,8 @@ type IpOwner struct {
 
 	// The name of the organization that owned the IP address.
 	Org *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies whether any one-time or recurring classification jobs are configured
@@ -1129,6 +1231,8 @@ type JobDetails struct {
 	// recent run started. This value is typically null if the value for the
 	// isDefinedInJob property is FALSE or UNKNOWN.
 	LastJobRunTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the recurrence pattern for running a classification job.
@@ -1142,6 +1246,8 @@ type JobScheduleFrequency struct {
 
 	// Specifies a weekly recurrence pattern for running the job.
 	WeeklySchedule *WeeklySchedule
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a property- or tag-based condition that defines criteria for including
@@ -1156,6 +1262,8 @@ type JobScopeTerm struct {
 	// A tag-based condition that defines the operator and tag keys or tag key and
 	// value pairs for including or excluding objects from the job.
 	TagScopeTerm *TagScopeTerm
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one or more property- and tag-based conditions that define criteria
@@ -1166,6 +1274,8 @@ type JobScopingBlock struct {
 	// determines which objects to include or exclude from the job. If you specify more
 	// than one condition, Amazon Macie uses AND logic to join the conditions.
 	And []JobScopeTerm
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a classification job, including the current status of
@@ -1240,6 +1350,8 @@ type JobSummary struct {
 	// paused and when the job or job run will expire and be cancelled if it isn't
 	// resumed. This value is present only if the value for jobStatus is USER_PAUSED.
 	UserPausedDetails *UserPausedDetails
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the tags that are associated with an S3 bucket or
@@ -1253,6 +1365,8 @@ type KeyValuePair struct {
 	// One part of a key-value pair that comprises a tag. A tag value acts as a
 	// descriptor for a tag key. A tag value can be an empty string.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies whether any account- or bucket-level access errors occurred when a
@@ -1272,6 +1386,8 @@ type LastRunErrorStatus struct {
 	// * NONE - No
 	// errors occurred. Macie processed all the data specified for the job.
 	Code LastRunErrorStatusCode
+
+	noSmithyDocumentSerde
 }
 
 // Specifies criteria for filtering the results of a request for information about
@@ -1285,6 +1401,8 @@ type ListJobsFilterCriteria struct {
 	// An array of objects, one for each condition that determines which jobs to
 	// include in the results.
 	Includes []ListJobsFilterTerm
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a condition that filters the results of a request for information
@@ -1300,6 +1418,8 @@ type ListJobsFilterTerm struct {
 
 	// An array that lists one or more values to use to filter the results.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies criteria for sorting the results of a request for information about
@@ -1313,6 +1433,8 @@ type ListJobsSortCriteria struct {
 	// specified by the attributeName property. Valid values are: ASC, sort the results
 	// in ascending order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
+
+	noSmithyDocumentSerde
 }
 
 // Provides statistical data and other information about an S3 bucket that Amazon
@@ -1373,6 +1495,8 @@ type MatchingBucket struct {
 	// in the bucket. These objects don't use a supported storage class or don't have a
 	// file name extension for a supported file or storage format.
 	UnclassifiableObjectSizeInBytes *ObjectLevelStatistics
+
+	noSmithyDocumentSerde
 }
 
 // Provides statistical data and other information about an Amazon Web Services
@@ -1381,6 +1505,8 @@ type MatchingResource struct {
 
 	// The details of an S3 bucket that Amazon Macie monitors and analyzes.
 	MatchingBucket *MatchingBucket
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an account that's associated with an Amazon Macie
@@ -1421,6 +1547,8 @@ type Member struct {
 	// change to the status of the relationship between the account and the
 	// administrator account.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a monthly recurrence pattern for running a classification job.
@@ -1433,6 +1561,8 @@ type MonthlySchedule struct {
 	// a month has only 30 days, Macie doesn't run the job that month. To run the job
 	// every month, specify a value that's less than 29.
 	DayOfMonth int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the number of objects that are in an S3 bucket and
@@ -1460,6 +1590,8 @@ type ObjectCountByEncryptionType struct {
 	// metadata for. Macie can't provide current data about the encryption settings for
 	// these objects.
 	Unknown int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the total storage size (in bytes) or number of
@@ -1484,6 +1616,8 @@ type ObjectLevelStatistics struct {
 	// analyze because the objects use an unsupported storage class or don't have a
 	// file name extension for a supported file or storage format.
 	Total int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the location of 1-15 occurrences of sensitive data that was detected
@@ -1525,6 +1659,8 @@ type Occurrences struct {
 	// data. For a JSON Lines file, it also specifies the index of the line that
 	// contains the data.
 	Records []Record
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the location of an occurrence of sensitive data in an Adobe Portable
@@ -1539,6 +1675,8 @@ type Page struct {
 
 	// The page number of the page that contains the sensitive data.
 	PageNumber int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides the details of a policy finding.
@@ -1549,6 +1687,8 @@ type PolicyDetails struct {
 
 	// The entity that performed the action that produced the finding.
 	Actor *FindingActor
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the location of an occurrence of sensitive data in a non-binary text
@@ -1567,6 +1707,8 @@ type Range struct {
 	// the first line that contains the sensitive data (start) to the beginning of the
 	// sensitive data.
 	StartColumn int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the location of an occurrence of sensitive data in an Apache Avro
@@ -1590,6 +1732,8 @@ type Record struct {
 	// index, starting from 0, for the line that contains the sensitive data. This
 	// value is always 0 for JSON files.
 	RecordIndex int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about settings that define whether one or more objects in
@@ -1609,6 +1753,8 @@ type ReplicationDetails struct {
 	// An array of Amazon Web Services account IDs, one for each Amazon Web Services
 	// account that the bucket is configured to replicate one or more objects to.
 	ReplicationAccounts []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the resources that a finding applies to.
@@ -1619,6 +1765,8 @@ type ResourcesAffected struct {
 
 	// The details of the S3 object that the finding applies to.
 	S3Object *S3Object
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the S3 bucket that a finding applies to.
@@ -1667,6 +1815,8 @@ type S3Bucket struct {
 
 	// The tags that are associated with the bucket.
 	Tags []KeyValuePair
+
+	noSmithyDocumentSerde
 }
 
 // Specifies property- and tag-based conditions that define criteria for including
@@ -1681,6 +1831,8 @@ type S3BucketCriteriaForJob struct {
 	// The property- and tag-based conditions that determine which buckets to include
 	// in the job.
 	Includes *CriteriaBlockForJob
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an Amazon Web Services account that owns S3 buckets for a
@@ -1697,6 +1849,8 @@ type S3BucketDefinitionForJob struct {
 	//
 	// This member is required.
 	Buckets []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the user who owns an S3 bucket.
@@ -1707,6 +1861,8 @@ type S3BucketOwner struct {
 
 	// The Amazon Web Services account ID for the user who owns the bucket.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies an S3 bucket to store data classification results in, and the
@@ -1728,6 +1884,8 @@ type S3Destination struct {
 	// The path prefix to use in the path to the location in the bucket. This prefix
 	// specifies where to store classification results in the bucket.
 	KeyPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies which S3 buckets contain the objects that a classification job
@@ -1755,6 +1913,8 @@ type S3JobDefinition struct {
 	// include or exclude from the analysis. Each time the job runs, the job uses these
 	// criteria to determine which objects to analyze.
 	Scoping *Scoping
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the S3 object that a finding applies to.
@@ -1800,6 +1960,8 @@ type S3Object struct {
 
 	// The identifier for the affected version of the object.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies one or more property- and tag-based conditions that define criteria
@@ -1814,6 +1976,8 @@ type Scoping struct {
 	// The property- and tag-based conditions that determine which objects to include
 	// in the analysis.
 	Includes *JobScopingBlock
+
+	noSmithyDocumentSerde
 }
 
 // Specifies property- and tag-based conditions that define filter criteria for
@@ -1828,6 +1992,8 @@ type SearchResourcesBucketCriteria struct {
 	// The property- and tag-based conditions that determine which buckets to include
 	// in the results.
 	Includes *SearchResourcesCriteriaBlock
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a property- or tag-based filter condition for including or excluding
@@ -1841,6 +2007,8 @@ type SearchResourcesCriteria struct {
 	// A tag-based condition that defines an operator and tag keys, tag values, or tag
 	// key and value pairs for including or excluding resources from the results.
 	TagCriterion *SearchResourcesTagCriterion
+
+	noSmithyDocumentSerde
 }
 
 // Specifies property- and tag-based conditions that define filter criteria for
@@ -1851,6 +2019,8 @@ type SearchResourcesCriteriaBlock struct {
 	// or excludes resources from the query results. If you specify more than one
 	// condition, Amazon Macie uses AND logic to join the conditions.
 	And []SearchResourcesCriteria
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a property-based filter condition that determines which Amazon Web
@@ -1888,6 +2058,8 @@ type SearchResourcesSimpleCriterion struct {
 	// Values are case sensitive. Also, Macie doesn't
 	// support use of partial values or wildcard characters in values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies criteria for sorting the results of a query for information about
@@ -1901,6 +2073,8 @@ type SearchResourcesSortCriteria struct {
 	// specified by the attributeName property. Valid values are: ASC, sort the results
 	// in ascending order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a tag-based filter condition that determines which Amazon Web Services
@@ -1913,6 +2087,8 @@ type SearchResourcesTagCriterion struct {
 
 	// The tag keys, tag values, or tag key and value pairs to use in the condition.
 	TagValues []SearchResourcesTagCriterionPair
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in a
@@ -1926,6 +2102,8 @@ type SearchResourcesTagCriterionPair struct {
 
 	// The tag value to use in the condition.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration settings that determine which findings are published to
@@ -1950,6 +2128,8 @@ type SecurityHubConfiguration struct {
 	//
 	// This member is required.
 	PublishPolicyFindings bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the category, types, and occurrences of sensitive
@@ -1971,6 +2151,8 @@ type SensitiveDataItem struct {
 
 	// The total number of occurrences of the sensitive data that was detected.
 	TotalCount int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the server-side encryption settings for an S3 bucket
@@ -1986,6 +2168,8 @@ type ServerSideEncryption struct {
 	// Management Service (KMS) customer master key (CMK) that's used to encrypt data
 	// in the bucket or the object. If an KMS CMK isn't used, this value is null.
 	KmsMasterKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a current quota for an Amazon Macie account.
@@ -2001,6 +2185,8 @@ type ServiceLimit struct {
 	// The value for the metric specified by the UsageByAccount.type field in the
 	// response.
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a session that was created for an entity that
@@ -2013,6 +2199,8 @@ type SessionContext struct {
 
 	// The source and type of credentials that were issued to the entity.
 	SessionIssuer *SessionIssuer
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the context in which temporary security credentials
@@ -2025,6 +2213,8 @@ type SessionContextAttributes struct {
 	// Specifies whether the credentials were authenticated with a multi-factor
 	// authentication (MFA) device.
 	MfaAuthenticated bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the source and type of temporary security credentials
@@ -2050,6 +2240,8 @@ type SessionIssuer struct {
 	// null if the credentials were obtained from a root account that doesn't have an
 	// alias.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the numerical and qualitative representations of a finding's severity.
@@ -2062,6 +2254,8 @@ type Severity struct {
 	// The numerical representation of the finding's severity, ranging from 1 (least
 	// severe) to 3 (most severe).
 	Score int64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a property-based condition that determines whether an S3 bucket is
@@ -2099,6 +2293,8 @@ type SimpleCriterionForJob struct {
 	// Values are case sensitive. Also, Macie doesn't support
 	// use of partial values or wildcard characters in these values.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a property-based condition that determines whether an S3 object is
@@ -2147,6 +2343,8 @@ type SimpleScopeTerm struct {
 	// doesn't support use of wildcard characters in these values. Also, string values
 	// are case sensitive.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies criteria for sorting the results of a request for findings.
@@ -2160,6 +2358,8 @@ type SortCriteria struct {
 	// specified by the attributeName property. Valid values are: ASC, sort the results
 	// in ascending order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
+
+	noSmithyDocumentSerde
 }
 
 // Provides processing statistics for a classification job.
@@ -2171,6 +2371,8 @@ type Statistics struct {
 
 	// The number of times that the job has run.
 	NumberOfRuns float64
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a tag-based condition that determines whether an S3 bucket is included
@@ -2183,6 +2385,8 @@ type TagCriterionForJob struct {
 
 	// The tag keys, tag values, or tag key and value pairs to use in the condition.
 	TagValues []TagCriterionPairForJob
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a tag key, a tag value, or a tag key and value (as a pair) to use in a
@@ -2197,6 +2401,8 @@ type TagCriterionPairForJob struct {
 
 	// The tag value to use in the condition.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a tag-based condition that determines whether an S3 object is included
@@ -2217,6 +2423,8 @@ type TagScopeTerm struct {
 
 	// The type of object to apply the condition to.
 	Target TagTarget
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a tag key or tag key and value pair to use in a tag-based condition
@@ -2233,6 +2441,8 @@ type TagValuePair struct {
 	// condition. To specify only a tag key for a condition, specify the tag key for
 	// the key property and set this value to an empty string.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an account-related request that hasn't been
@@ -2247,6 +2457,8 @@ type UnprocessedAccount struct {
 
 	// The reason why the request hasn't been processed.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides data for a specific usage metric and the corresponding quota for an
@@ -2268,6 +2480,8 @@ type UsageByAccount struct {
 	// monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects
 	// to detect sensitive data.
 	Type UsageType
+
+	noSmithyDocumentSerde
 }
 
 // Provides quota and aggregated usage data for an Amazon Macie account.
@@ -2285,6 +2499,8 @@ type UsageRecord struct {
 	// object contains the data for a specific usage metric and the corresponding
 	// quota.
 	Usage []UsageByAccount
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a condition for filtering the results of a query for quota and usage
@@ -2317,6 +2533,8 @@ type UsageStatisticsFilter struct {
 	// *
 	// total - A string that represents the current estimated cost for an account.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies criteria for sorting the results of a query for Amazon Macie account
@@ -2330,6 +2548,8 @@ type UsageStatisticsSortBy struct {
 	// specified by the key property. Valid values are: ASC, sort the results in
 	// ascending order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
+
+	noSmithyDocumentSerde
 }
 
 // Provides aggregated data for an Amazon Macie usage metric. The value for the
@@ -2349,6 +2569,8 @@ type UsageTotal struct {
 	// monitoring S3 buckets; and, SENSITIVE_DATA_DISCOVERY, for analyzing S3 objects
 	// to detect sensitive data.
 	Type UsageType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the type and other characteristics of an entity that
@@ -2384,6 +2606,8 @@ type UserIdentity struct {
 
 	// The type of entity that performed the action.
 	Type UserIdentityType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an Amazon Web Services account and entity that
@@ -2401,6 +2625,8 @@ type UserIdentityRoot struct {
 
 	// The unique identifier for the entity that performed the action.
 	PrincipalId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about when a classification job was paused. For a one-time
@@ -2423,6 +2649,8 @@ type UserPausedDetails struct {
 
 	// The date and time, in UTC and extended ISO 8601 format, when you paused the job.
 	JobPausedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a weekly recurrence pattern for running a classification job.
@@ -2430,4 +2658,8 @@ type WeeklySchedule struct {
 
 	// The day of the week when Amazon Macie runs the job.
 	DayOfWeek DayOfWeek
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

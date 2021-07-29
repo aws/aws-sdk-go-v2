@@ -41,12 +41,16 @@ type CreateReceiptFilterInput struct {
 	//
 	// This member is required.
 	Filter *types.ReceiptFilter
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type CreateReceiptFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReceiptFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

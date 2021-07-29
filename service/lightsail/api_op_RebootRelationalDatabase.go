@@ -37,6 +37,8 @@ type RebootRelationalDatabaseInput struct {
 	//
 	// This member is required.
 	RelationalDatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 type RebootRelationalDatabaseOutput struct {
@@ -48,6 +50,8 @@ type RebootRelationalDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootRelationalDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

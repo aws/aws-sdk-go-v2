@@ -104,11 +104,15 @@ type PutJobTaggingInput struct {
 	//
 	// This member is required.
 	Tags []types.S3Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutJobTaggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutJobTaggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

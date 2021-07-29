@@ -42,11 +42,15 @@ type AssociateElasticIpInput struct {
 
 	// The instance ID.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateElasticIpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

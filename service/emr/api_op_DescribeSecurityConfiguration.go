@@ -34,6 +34,8 @@ type DescribeSecurityConfigurationInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSecurityConfigurationOutput struct {
@@ -49,6 +51,8 @@ type DescribeSecurityConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSecurityConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

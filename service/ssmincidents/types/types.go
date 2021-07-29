@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type Action interface {
 // of the incident.
 type ActionMemberSsmAutomation struct {
 	Value SsmAutomation
+
+	noSmithyDocumentSerde
 }
 
 func (*ActionMemberSsmAutomation) isAction() {}
@@ -33,6 +36,8 @@ type AddRegionAction struct {
 
 	// The KMS key ID to use to encrypt your replication set.
 	SseKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Use the AttributeValueList to filter by string or integer values.
@@ -47,6 +52,8 @@ type AttributeValueList interface {
 // The list of string values that the filter matches.
 type AttributeValueListMemberStringValues struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueListMemberStringValues) isAttributeValueList() {}
@@ -54,6 +61,8 @@ func (*AttributeValueListMemberStringValues) isAttributeValueList() {}
 // The list of integer values that the filter matches.
 type AttributeValueListMemberIntegerValues struct {
 	Value []int32
+
+	noSmithyDocumentSerde
 }
 
 func (*AttributeValueListMemberIntegerValues) isAttributeValueList() {}
@@ -70,6 +79,8 @@ type AutomationExecution interface {
 // The Amazon Resource Name (ARN) of the automation process.
 type AutomationExecutionMemberSsmExecutionArn struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*AutomationExecutionMemberSsmExecutionArn) isAutomationExecution() {}
@@ -86,6 +97,8 @@ type ChatChannel interface {
 // Used to remove the chat channel from an incident record or response plan.
 type ChatChannelMemberEmpty struct {
 	Value EmptyChatChannel
+
+	noSmithyDocumentSerde
 }
 
 func (*ChatChannelMemberEmpty) isChatChannel() {}
@@ -95,6 +108,8 @@ func (*ChatChannelMemberEmpty) isChatChannel() {}
 // by using the SNS topics.
 type ChatChannelMemberChatbotSns struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*ChatChannelMemberChatbotSns) isChatChannel() {}
@@ -115,6 +130,8 @@ type Condition interface {
 // Before the specified timestamp
 type ConditionMemberBefore struct {
 	Value time.Time
+
+	noSmithyDocumentSerde
 }
 
 func (*ConditionMemberBefore) isCondition() {}
@@ -122,6 +139,8 @@ func (*ConditionMemberBefore) isCondition() {}
 // After the specified timestamp.
 type ConditionMemberAfter struct {
 	Value time.Time
+
+	noSmithyDocumentSerde
 }
 
 func (*ConditionMemberAfter) isCondition() {}
@@ -129,6 +148,8 @@ func (*ConditionMemberAfter) isCondition() {}
 // The value is equal to the provided string or integer.
 type ConditionMemberEquals struct {
 	Value AttributeValueList
+
+	noSmithyDocumentSerde
 }
 
 func (*ConditionMemberEquals) isCondition() {}
@@ -141,10 +162,13 @@ type DeleteRegionAction struct {
 	//
 	// This member is required.
 	RegionName *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to remove the chat channel from an incident record or response plan.
 type EmptyChatChannel struct {
+	noSmithyDocumentSerde
 }
 
 // Details about a timeline event during an incident.
@@ -174,6 +198,8 @@ type EventSummary struct {
 	//
 	// This member is required.
 	IncidentRecordArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Filter the selection by using a condition.
@@ -189,6 +215,8 @@ type Filter struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // The record of the incident that's created when an incident occurs.
@@ -257,6 +285,8 @@ type IncidentRecord struct {
 	// The summary of the incident. The summary is a brief synopsis of what occurred,
 	// what is currently happening, and context.
 	Summary *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about how the incident record was created and when.
@@ -279,6 +309,8 @@ type IncidentRecordSource struct {
 
 	// The resource that caused the incident to be created.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details describing an incident record.
@@ -317,6 +349,8 @@ type IncidentRecordSummary struct {
 
 	// The time the incident was resolved.
 	ResolvedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Basic details used in creating a response plan. The response plan is then used
@@ -345,6 +379,8 @@ type IncidentTemplate struct {
 	// The summary of the incident. The summary is a brief synopsis of what occurred,
 	// what's currently happening, and context.
 	Summary *string
+
+	noSmithyDocumentSerde
 }
 
 // Details and type of a related item.
@@ -372,6 +408,8 @@ type ItemIdentifier struct {
 	//
 	// This member is required.
 	Value ItemValue
+
+	noSmithyDocumentSerde
 }
 
 // Describes a related item.
@@ -388,6 +426,8 @@ type ItemValue interface {
 // Amazon resource.
 type ItemValueMemberArn struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*ItemValueMemberArn) isItemValue() {}
@@ -395,6 +435,8 @@ func (*ItemValueMemberArn) isItemValue() {}
 // The URL, if the related item is a non-AWS resource.
 type ItemValueMemberUrl struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*ItemValueMemberUrl) isItemValue() {}
@@ -402,6 +444,8 @@ func (*ItemValueMemberUrl) isItemValue() {}
 // The metric definition, if the related item is a metric in CloudWatch.
 type ItemValueMemberMetricDefinition struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*ItemValueMemberMetricDefinition) isItemValue() {}
@@ -417,6 +461,8 @@ type NotificationTargetItem interface {
 // The Amazon Resource Name (ARN) of the SNS topic.
 type NotificationTargetItemMemberSnsTopicArn struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*NotificationTargetItemMemberSnsTopicArn) isNotificationTargetItem() {}
@@ -439,6 +485,8 @@ type RegionInfo struct {
 
 	// Information displayed about the status of the Region.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // The mapping between a Region and the key that's used to encrypt the data.
@@ -446,6 +494,8 @@ type RegionMapInputValue struct {
 
 	// The KMS key used to encrypt the data in your replication set.
 	SseKmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Resources that responders use to triage and mitigate the incident.
@@ -458,6 +508,8 @@ type RelatedItem struct {
 
 	// The title of the related item.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the related item you're adding.
@@ -472,6 +524,8 @@ type RelatedItemsUpdate interface {
 // Details about the related item you're adding.
 type RelatedItemsUpdateMemberItemToAdd struct {
 	Value RelatedItem
+
+	noSmithyDocumentSerde
 }
 
 func (*RelatedItemsUpdateMemberItemToAdd) isRelatedItemsUpdate() {}
@@ -479,6 +533,8 @@ func (*RelatedItemsUpdateMemberItemToAdd) isRelatedItemsUpdate() {}
 // Details about the related item you're deleting.
 type RelatedItemsUpdateMemberItemToRemove struct {
 	Value ItemIdentifier
+
+	noSmithyDocumentSerde
 }
 
 func (*RelatedItemsUpdateMemberItemToRemove) isRelatedItemsUpdate() {}
@@ -525,6 +581,8 @@ type ReplicationSet struct {
 	//
 	// This member is required.
 	Status ReplicationSetStatus
+
+	noSmithyDocumentSerde
 }
 
 // The resource policy that allows Incident Manager to perform actions on resources
@@ -545,6 +603,8 @@ type ResourcePolicy struct {
 	//
 	// This member is required.
 	RamResourceShareRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Details of the response plan that are used when creating an incident.
@@ -562,6 +622,8 @@ type ResponsePlanSummary struct {
 
 	// The human readable name of the response plan. This can include spaces.
 	DisplayName *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about the Systems Manager automation document that will be used as a
@@ -588,6 +650,8 @@ type SsmAutomation struct {
 	// The account that the automation document will be run in. This can be in either
 	// the management account or an application account.
 	TargetAccount SsmTargetAccount
+
+	noSmithyDocumentSerde
 }
 
 // A significant event that happened during the incident.
@@ -623,6 +687,8 @@ type TimelineEvent struct {
 	//
 	// This member is required.
 	IncidentRecordArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about what caused the incident to be created in Incident Manager.
@@ -647,6 +713,8 @@ type TriggerDetails struct {
 
 	// The ARN of the source that detected the incident.
 	TriggerArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Details used when updating the replication set.
@@ -661,6 +729,8 @@ type UpdateReplicationSetAction interface {
 // Details about the Region that you're adding to the replication set.
 type UpdateReplicationSetActionMemberAddRegionAction struct {
 	Value AddRegionAction
+
+	noSmithyDocumentSerde
 }
 
 func (*UpdateReplicationSetActionMemberAddRegionAction) isUpdateReplicationSetAction() {}
@@ -668,15 +738,21 @@ func (*UpdateReplicationSetActionMemberAddRegionAction) isUpdateReplicationSetAc
 // Details about the Region that you're deleting to the replication set.
 type UpdateReplicationSetActionMemberDeleteRegionAction struct {
 	Value DeleteRegionAction
+
+	noSmithyDocumentSerde
 }
 
 func (*UpdateReplicationSetActionMemberDeleteRegionAction) isUpdateReplicationSetAction() {}
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isAction()                     {}

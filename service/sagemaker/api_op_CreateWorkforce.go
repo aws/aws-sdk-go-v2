@@ -71,6 +71,8 @@ type CreateWorkforceInput struct {
 	// organize our workforce. Each tag consists of a key and a value, both of which
 	// you define.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorkforceOutput struct {
@@ -82,6 +84,8 @@ type CreateWorkforceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // You are not authorized to use this operation with the given parameters.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -27,6 +29,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // You've exceeded the notification or subscriber limit.
 type CreationLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CreationLimitExceededException) Error() string {
@@ -44,6 +48,8 @@ func (e *CreationLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // The budget name already exists. Budget names must be unique within an account.
 type DuplicateRecordException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateRecordException) Error() string {
@@ -61,6 +67,8 @@ func (e *DuplicateRecordException) ErrorFault() smithy.ErrorFault { return smith
 // The pagination token expired.
 type ExpiredNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExpiredNextTokenException) Error() string {
@@ -79,6 +87,8 @@ func (e *ExpiredNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // later.
 type InternalErrorException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalErrorException) Error() string {
@@ -96,6 +106,8 @@ func (e *InternalErrorException) ErrorFault() smithy.ErrorFault { return smithy.
 // The pagination token is invalid.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -113,6 +125,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // An error on the client occurred. Typically, the cause is an invalid input value.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -130,6 +144,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // We can’t locate the resource that you specified.
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -148,6 +164,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // that particular method for the requested resource.
 type ResourceLockedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLockedException) Error() string {

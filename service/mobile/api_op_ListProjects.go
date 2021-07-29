@@ -38,6 +38,8 @@ type ListProjectsInput struct {
 	// pagination token is returned in a result, then pass its value in here in another
 	// request to list more projects.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Result structure used for requests to list projects in AWS Mobile Hub.
@@ -53,6 +55,8 @@ type ListProjectsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProjectsMiddlewares(stack *middleware.Stack, options Options) (err error) {

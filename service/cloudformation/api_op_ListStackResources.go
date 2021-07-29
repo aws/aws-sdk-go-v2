@@ -50,6 +50,8 @@ type ListStackResourcesInput struct {
 	// A string that identifies the next page of stack resources that you want to
 	// retrieve.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for a ListStackResources action.
@@ -64,6 +66,8 @@ type ListStackResourcesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStackResourcesMiddlewares(stack *middleware.Stack, options Options) (err error) {

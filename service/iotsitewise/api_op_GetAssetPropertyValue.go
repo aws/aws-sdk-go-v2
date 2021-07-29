@@ -54,6 +54,8 @@ type GetAssetPropertyValueInput struct {
 
 	// The ID of the asset property.
 	PropertyId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetAssetPropertyValueOutput struct {
@@ -63,6 +65,8 @@ type GetAssetPropertyValueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAssetPropertyValueMiddlewares(stack *middleware.Stack, options Options) (err error) {

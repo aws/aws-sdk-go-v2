@@ -133,6 +133,8 @@ type UpdateTrailInput struct {
 	// Specifies the name of the Amazon SNS topic defined for notification of log file
 	// delivery. The maximum length is 256 characters.
 	SnsTopicName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -193,6 +195,8 @@ type UpdateTrailOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTrailMiddlewares(stack *middleware.Stack, options Options) (err error) {

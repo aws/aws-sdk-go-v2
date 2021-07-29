@@ -33,6 +33,8 @@ type GetRawMessageContentInput struct {
 	//
 	// This member is required.
 	MessageId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRawMessageContentOutput struct {
@@ -44,6 +46,8 @@ type GetRawMessageContentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRawMessageContentMiddlewares(stack *middleware.Stack, options Options) (err error) {

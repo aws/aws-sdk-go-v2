@@ -54,6 +54,8 @@ type StartNetworkInsightsAnalysisInput struct {
 
 	// The tags to apply.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type StartNetworkInsightsAnalysisOutput struct {
@@ -63,6 +65,8 @@ type StartNetworkInsightsAnalysisOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartNetworkInsightsAnalysisMiddlewares(stack *middleware.Stack, options Options) (err error) {

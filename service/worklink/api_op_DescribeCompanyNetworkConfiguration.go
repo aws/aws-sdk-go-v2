@@ -33,6 +33,8 @@ type DescribeCompanyNetworkConfigurationInput struct {
 	//
 	// This member is required.
 	FleetArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCompanyNetworkConfigurationOutput struct {
@@ -49,6 +51,8 @@ type DescribeCompanyNetworkConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCompanyNetworkConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

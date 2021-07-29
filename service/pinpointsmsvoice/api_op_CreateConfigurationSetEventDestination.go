@@ -40,6 +40,8 @@ type CreateConfigurationSetEventDestinationInput struct {
 
 	// A name that identifies the event destination.
 	EventDestinationName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty object that indicates that the event destination was created
@@ -47,6 +49,8 @@ type CreateConfigurationSetEventDestinationInput struct {
 type CreateConfigurationSetEventDestinationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConfigurationSetEventDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

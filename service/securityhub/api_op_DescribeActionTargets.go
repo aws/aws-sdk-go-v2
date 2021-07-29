@@ -41,6 +41,8 @@ type DescribeActionTargetsInput struct {
 	// subsequent calls to the operation, to continue listing data, set the value of
 	// this parameter to the value returned from the previous response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeActionTargetsOutput struct {
@@ -56,6 +58,8 @@ type DescribeActionTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeActionTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

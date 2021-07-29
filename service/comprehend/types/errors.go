@@ -11,6 +11,8 @@ import (
 // again with fewer documents.
 type BatchSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BatchSizeLimitExceededException) Error() string {
@@ -31,6 +33,8 @@ func (e *BatchSizeLimitExceededException) ErrorFault() smithy.ErrorFault { retur
 // resource is not supported.
 type ConcurrentModificationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModificationException) Error() string {
@@ -50,6 +54,8 @@ func (e *ConcurrentModificationException) ErrorFault() smithy.ErrorFault { retur
 // An internal server error occurred. Retry your request.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -67,6 +73,8 @@ func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy
 // The filter specified for the operation is invalid. Specify a different filter.
 type InvalidFilterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidFilterException) Error() string {
@@ -84,6 +92,8 @@ func (e *InvalidFilterException) ErrorFault() smithy.ErrorFault { return smithy.
 // The request is invalid.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -101,6 +111,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // The specified job was not found. Check the job ID and try again.
 type JobNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *JobNotFoundException) Error() string {
@@ -119,6 +131,8 @@ func (e *JobNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // and re-enter it.
 type KmsKeyValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KmsKeyValidationException) Error() string {
@@ -137,6 +151,8 @@ func (e *KmsKeyValidationException) ErrorFault() smithy.ErrorFault { return smit
 // request again.
 type ResourceInUseException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceInUseException) Error() string {
@@ -155,6 +171,8 @@ func (e *ResourceInUseException) ErrorFault() smithy.ErrorFault { return smithy.
 // resources, and then try your request again.
 type ResourceLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceLimitExceededException) Error() string {
@@ -173,6 +191,8 @@ func (e *ResourceLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // again.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -191,6 +211,8 @@ func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smit
 // again.
 type ResourceUnavailableException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceUnavailableException) Error() string {
@@ -208,6 +230,8 @@ func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return s
 // The size of the input text exceeds the limit. Use a smaller document.
 type TextSizeLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TextSizeLimitExceededException) Error() string {
@@ -225,6 +249,8 @@ func (e *TextSizeLimitExceededException) ErrorFault() smithy.ErrorFault { return
 // The number of requests exceeds the limit. Resubmit your request later.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -243,6 +269,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // tag keys per resource).
 type TooManyTagKeysException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagKeysException) Error() string {
@@ -262,6 +290,8 @@ func (e *TooManyTagKeysException) ErrorFault() smithy.ErrorFault { return smithy
 // included in your current request.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {
@@ -282,6 +312,8 @@ func (e *TooManyTagsException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // supported-languages.
 type UnsupportedLanguageException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *UnsupportedLanguageException) Error() string {

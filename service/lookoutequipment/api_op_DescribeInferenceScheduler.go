@@ -35,6 +35,8 @@ type DescribeInferenceSchedulerInput struct {
 	//
 	// This member is required.
 	InferenceSchedulerName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeInferenceSchedulerOutput struct {
@@ -97,6 +99,8 @@ type DescribeInferenceSchedulerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeInferenceSchedulerMiddlewares(stack *middleware.Stack, options Options) (err error) {

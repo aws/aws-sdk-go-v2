@@ -34,6 +34,8 @@ type DescribeWorldGenerationJobInput struct {
 	//
 	// This member is required.
 	Job *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeWorldGenerationJobOutput struct {
@@ -87,6 +89,8 @@ type DescribeWorldGenerationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeWorldGenerationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

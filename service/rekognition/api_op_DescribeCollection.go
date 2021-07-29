@@ -37,6 +37,8 @@ type DescribeCollectionInput struct {
 	//
 	// This member is required.
 	CollectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCollectionOutput struct {
@@ -60,6 +62,8 @@ type DescribeCollectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -34,11 +34,15 @@ type PutConferencePreferenceInput struct {
 	//
 	// This member is required.
 	ConferencePreference *types.ConferencePreference
+
+	noSmithyDocumentSerde
 }
 
 type PutConferencePreferenceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutConferencePreferenceMiddlewares(stack *middleware.Stack, options Options) (err error) {

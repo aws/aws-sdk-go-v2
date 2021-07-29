@@ -66,6 +66,8 @@ type SetSubnetsInput struct {
 	// more Local Zones. [Network Load Balancers] You can specify subnets from one or
 	// more Availability Zones.
 	Subnets []string
+
+	noSmithyDocumentSerde
 }
 
 type SetSubnetsOutput struct {
@@ -78,6 +80,8 @@ type SetSubnetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetSubnetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -99,11 +99,15 @@ type PutKeyPolicyInput struct {
 	// only when you intend to prevent the principal that is making the request from
 	// making a subsequent PutKeyPolicy request on the CMK. The default value is false.
 	BypassPolicyLockoutSafetyCheck bool
+
+	noSmithyDocumentSerde
 }
 
 type PutKeyPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutKeyPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -38,6 +38,8 @@ type EnableVpcClassicLinkDnsSupportInput struct {
 
 	// The ID of the VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 type EnableVpcClassicLinkDnsSupportOutput struct {
@@ -47,6 +49,8 @@ type EnableVpcClassicLinkDnsSupportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableVpcClassicLinkDnsSupportMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,6 +42,8 @@ type DescribeEffectiveInstanceAssociationsInput struct {
 	// The token for the next set of items to return. (You received this token from a
 	// previous call.)
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEffectiveInstanceAssociationsOutput struct {
@@ -55,6 +57,8 @@ type DescribeEffectiveInstanceAssociationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEffectiveInstanceAssociationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

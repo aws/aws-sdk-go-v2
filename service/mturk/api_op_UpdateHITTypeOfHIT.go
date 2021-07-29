@@ -40,11 +40,15 @@ type UpdateHITTypeOfHITInput struct {
 	//
 	// This member is required.
 	HITTypeId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateHITTypeOfHITOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateHITTypeOfHITMiddlewares(stack *middleware.Stack, options Options) (err error) {

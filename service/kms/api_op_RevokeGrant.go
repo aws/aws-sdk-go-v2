@@ -71,11 +71,15 @@ type RevokeGrantInput struct {
 	//
 	// This member is required.
 	KeyId *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeGrantOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeGrantMiddlewares(stack *middleware.Stack, options Options) (err error) {

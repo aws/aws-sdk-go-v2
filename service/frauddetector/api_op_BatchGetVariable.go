@@ -33,6 +33,8 @@ type BatchGetVariableInput struct {
 	//
 	// This member is required.
 	Names []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetVariableOutput struct {
@@ -45,6 +47,8 @@ type BatchGetVariableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetVariableMiddlewares(stack *middleware.Stack, options Options) (err error) {

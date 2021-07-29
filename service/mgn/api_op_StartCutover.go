@@ -38,6 +38,8 @@ type StartCutoverInput struct {
 
 	// Start Cutover by Tags.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type StartCutoverOutput struct {
@@ -47,6 +49,8 @@ type StartCutoverOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartCutoverMiddlewares(stack *middleware.Stack, options Options) (err error) {

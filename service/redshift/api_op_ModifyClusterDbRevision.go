@@ -41,6 +41,8 @@ type ModifyClusterDbRevisionInput struct {
 	//
 	// This member is required.
 	RevisionTarget *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterDbRevisionOutput struct {
@@ -50,6 +52,8 @@ type ModifyClusterDbRevisionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterDbRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type TestAuthorizationInput struct {
 	// (arn:aws:iot:region:accountId:cert/certificateId), thingGroupArn
 	// (arn:aws:iot:region:accountId:thinggroup/groupName) and CognitoId (region:id).
 	Principal *string
+
+	noSmithyDocumentSerde
 }
 
 type TestAuthorizationOutput struct {
@@ -64,6 +66,8 @@ type TestAuthorizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTestAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

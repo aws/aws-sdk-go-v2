@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -13,6 +14,8 @@ type AccessControlListConfiguration struct {
 
 	// Path to the Amazon Web Services S3 bucket that contains the ACL files.
 	KeyPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the column that should be used for filtering the
@@ -25,6 +28,8 @@ type AclConfiguration struct {
 	//
 	// This member is required.
 	AllowedGroupsColumnName *string
+
+	noSmithyDocumentSerde
 }
 
 // An attribute returned from an index query.
@@ -44,6 +49,8 @@ type AdditionalResultAttribute struct {
 	//
 	// This member is required.
 	ValueType AdditionalResultAttributeValueType
+
+	noSmithyDocumentSerde
 }
 
 // An attribute returned with a document from a search.
@@ -52,6 +59,8 @@ type AdditionalResultAttributeValue struct {
 	// The text associated with the attribute and information about the highlight to
 	// apply to the text.
 	TextWithHighlightsValue *TextWithHighlights
+
+	noSmithyDocumentSerde
 }
 
 // Provides filtering the query results based on document attributes. When you use
@@ -98,6 +107,8 @@ type AttributeFilter struct {
 
 	// Performs a logical OR operation on all supplied filters.
 	OrAllFilters []AttributeFilter
+
+	noSmithyDocumentSerde
 }
 
 // Provides the configuration information to connect to websites that require user
@@ -108,6 +119,8 @@ type AuthenticationConfiguration struct {
 	// website host using basic authentication credentials. The list includes the name
 	// and port number of the website host.
 	BasicAuthentication []BasicAuthenticationConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides the configuration information to connect to websites that require basic
@@ -135,6 +148,8 @@ type BasicAuthenticationConfiguration struct {
 	//
 	// This member is required.
 	Port *int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about documents that could not be removed from an index by
@@ -149,6 +164,8 @@ type BatchDeleteDocumentResponseFailedDocument struct {
 
 	// The identifier of the document that couldn't be removed from the index.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a response when the status of a document could not be retrieved.
@@ -163,6 +180,8 @@ type BatchGetDocumentStatusResponseError struct {
 	// States that the API could not get the status of a document. This could be
 	// because the request is not valid or there is a system error.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a document that could not be indexed.
@@ -176,6 +195,8 @@ type BatchPutDocumentResponseFailedDocument struct {
 
 	// The unique identifier of the document.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies capacity units configured for your enterprise edition index. You can
@@ -201,6 +222,8 @@ type CapacityUnitsConfiguration struct {
 	//
 	// This member is required.
 	StorageCapacityUnits *int32
+
+	noSmithyDocumentSerde
 }
 
 // Gathers information about when a particular result was clicked by a user. Your
@@ -216,6 +239,8 @@ type ClickFeedback struct {
 	//
 	// This member is required.
 	ResultId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about how Amazon Kendra should use the columns of a
@@ -244,6 +269,8 @@ type ColumnConfiguration struct {
 	// in an index. You must first create the fields in the index using the UpdateIndex
 	// operation.
 	FieldMappings []DataSourceToIndexFieldMapping
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the attachment settings for the Confluence data source. Attachment
@@ -260,6 +287,8 @@ type ConfluenceAttachmentConfiguration struct {
 	// Indicates whether Amazon Kendra indexes attachments to the pages and blogs in
 	// the Confluence data source.
 	CrawlAttachments bool
+
+	noSmithyDocumentSerde
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
@@ -279,6 +308,8 @@ type ConfluenceAttachmentToIndexFieldMapping struct {
 	// The name of the index field to map to the Confluence data source field. The
 	// index field type must match the Confluence field type.
 	IndexFieldName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the blog settings for the Confluence data source. Blogs are always
@@ -291,6 +322,8 @@ type ConfluenceBlogConfiguration struct {
 	// the console or the UpdateIndex operation. If you specify the BlogFieldMappings
 	// parameter, you must specify at least one field mapping.
 	BlogFieldMappings []ConfluenceBlogToIndexFieldMapping
+
+	noSmithyDocumentSerde
 }
 
 // Defines the mapping between a blog field in the Confluence data source to a
@@ -309,6 +342,8 @@ type ConfluenceBlogToIndexFieldMapping struct {
 	// The name of the index field to map to the Confluence data source field. The
 	// index field type must match the Confluence field type.
 	IndexFieldName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for data sources that connect to Confluence.
@@ -371,6 +406,8 @@ type ConfluenceConfiguration struct {
 
 	// Specifies the information for connecting to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the page settings for the Confluence data source.
@@ -381,6 +418,8 @@ type ConfluencePageConfiguration struct {
 	// the console or the UpdateIndex operation. If you specify the PageFieldMappings
 	// parameter, you must specify at least one field mapping.
 	PageFieldMappings []ConfluencePageToIndexFieldMapping
+
+	noSmithyDocumentSerde
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
@@ -399,6 +438,8 @@ type ConfluencePageToIndexFieldMapping struct {
 	// The name of the index field to map to the Confluence data source field. The
 	// index field type must match the Confluence field type.
 	IndexFieldName *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the configuration for indexing Confluence spaces.
@@ -431,6 +472,8 @@ type ConfluenceSpaceConfiguration struct {
 	// the console or the UpdateIndex operation. If you specify the SpaceFieldMappings
 	// parameter, you must specify at least one field mapping.
 	SpaceFieldMappings []ConfluenceSpaceToIndexFieldMapping
+
+	noSmithyDocumentSerde
 }
 
 // Defines the mapping between a field in the Confluence data source to a Amazon
@@ -449,6 +492,8 @@ type ConfluenceSpaceToIndexFieldMapping struct {
 	// The name of the index field to map to the Confluence data source field. The
 	// index field type must match the Confluence field type.
 	IndexFieldName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the information necessary to connect to a database.
@@ -485,6 +530,8 @@ type ConnectionConfiguration struct {
 	//
 	// This member is required.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the information necessary to connect a database to an index.
@@ -516,6 +563,8 @@ type DatabaseConfiguration struct {
 
 	// Provides information for connecting to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for a Amazon Kendra data source.
@@ -550,6 +599,8 @@ type DataSourceConfiguration struct {
 
 	// Provides the configuration information required for Amazon Kendra web crawler.
 	WebCrawlerConfiguration *WebCrawlerConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Data source information for user context filtering.
@@ -567,6 +618,8 @@ type DataSourceGroup struct {
 	//
 	// This member is required.
 	GroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary information for a Amazon Kendra data source. Returned in a call to the
@@ -591,6 +644,8 @@ type DataSourceSummary struct {
 
 	// The UNIX datetime that the data source was lasted updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a synchronization job.
@@ -626,6 +681,8 @@ type DataSourceSyncJob struct {
 	// SUCCEEDED, the synchronization job is done. If the status code is set to FAILED,
 	// the ErrorCode and ErrorMessage fields give you the reason for the failure.
 	Status DataSourceSyncJobStatus
+
+	noSmithyDocumentSerde
 }
 
 // Maps a batch delete document request to a specific data source sync job. This is
@@ -652,6 +709,8 @@ type DataSourceSyncJobMetrics struct {
 	// The current number of documents crawled by the current sync job in the data
 	// source.
 	DocumentsScanned *string
+
+	noSmithyDocumentSerde
 }
 
 // Maps a particular data source sync job to a particular data source.
@@ -669,6 +728,8 @@ type DataSourceSyncJobMetricTarget struct {
 	// and documents are indexed/deleted at the index level without sync job metrics
 	// included.
 	DataSourceSyncJobId *string
+
+	noSmithyDocumentSerde
 }
 
 // Maps a column or attribute in the data source to an index field. You must first
@@ -687,6 +748,8 @@ type DataSourceToIndexFieldMapping struct {
 
 	// The type of data stored in the column or attribute.
 	DateFieldFormat *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for connecting to an Amazon VPC.
@@ -704,6 +767,8 @@ type DataSourceVpcConfiguration struct {
 	//
 	// This member is required.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // A document in an index.
@@ -743,6 +808,8 @@ type Document struct {
 
 	// The title of the document.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // A custom attribute value assigned to a document.
@@ -757,6 +824,8 @@ type DocumentAttribute struct {
 	//
 	// This member is required.
 	Value DocumentAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // The value of a custom document attribute. You can only provide one value for a
@@ -774,6 +843,8 @@ type DocumentAttributeValue interface {
 // A string, such as "department".
 type DocumentAttributeValueMemberStringValue struct {
 	Value string
+
+	noSmithyDocumentSerde
 }
 
 func (*DocumentAttributeValueMemberStringValue) isDocumentAttributeValue() {}
@@ -781,6 +852,8 @@ func (*DocumentAttributeValueMemberStringValue) isDocumentAttributeValue() {}
 // A list of strings.
 type DocumentAttributeValueMemberStringListValue struct {
 	Value []string
+
+	noSmithyDocumentSerde
 }
 
 func (*DocumentAttributeValueMemberStringListValue) isDocumentAttributeValue() {}
@@ -788,6 +861,8 @@ func (*DocumentAttributeValueMemberStringListValue) isDocumentAttributeValue() {
 // A long integer value.
 type DocumentAttributeValueMemberLongValue struct {
 	Value int64
+
+	noSmithyDocumentSerde
 }
 
 func (*DocumentAttributeValueMemberLongValue) isDocumentAttributeValue() {}
@@ -798,6 +873,8 @@ func (*DocumentAttributeValueMemberLongValue) isDocumentAttributeValue() {}
 // in Central European Time.
 type DocumentAttributeValueMemberDateValue struct {
 	Value time.Time
+
+	noSmithyDocumentSerde
 }
 
 func (*DocumentAttributeValueMemberDateValue) isDocumentAttributeValue() {}
@@ -812,6 +889,8 @@ type DocumentAttributeValueCountPair struct {
 
 	// The value of the attribute. For example, "HR."
 	DocumentAttributeValue DocumentAttributeValue
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a document for which to retrieve status information
@@ -843,6 +922,8 @@ type DocumentInfo struct {
 	// * If dataSourceId and jobExecutionId are provided, but version is
 	// not, the version defaults to "0".
 	Attributes []DocumentAttribute
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the properties of a custom index field.
@@ -864,6 +945,8 @@ type DocumentMetadataConfiguration struct {
 
 	// Provides information about how the field is used during a search.
 	Search *Search
+
+	noSmithyDocumentSerde
 }
 
 // Overrides the document relevance properties of a custom index field.
@@ -881,6 +964,8 @@ type DocumentRelevanceConfiguration struct {
 	//
 	// This member is required.
 	Relevance *Relevance
+
+	noSmithyDocumentSerde
 }
 
 // Document metadata files that contain information such as the document access
@@ -892,6 +977,8 @@ type DocumentsMetadataConfiguration struct {
 	// S3 bucket. The S3 bucket might contain multiple metadata files. Use S3Prefix to
 	// include only the desired metadata files.
 	S3Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a document attribute
@@ -899,6 +986,8 @@ type Facet struct {
 
 	// The unique key for the document attribute.
 	DocumentAttributeKey *string
+
+	noSmithyDocumentSerde
 }
 
 // The facet values for the documents in the response.
@@ -915,6 +1004,8 @@ type FacetResult struct {
 	// The data type of the facet value. This is the same as the type defined for the
 	// index field when it was created.
 	DocumentAttributeValueType DocumentAttributeValueType
+
+	noSmithyDocumentSerde
 }
 
 // Provides statistical information about the FAQ questions and answers contained
@@ -925,6 +1016,8 @@ type FaqStatistics struct {
 	//
 	// This member is required.
 	IndexedQuestionAnswersCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a frequently asked questions and answer contained in
@@ -949,6 +1042,8 @@ type FaqSummary struct {
 
 	// The UNIX datetime that the FAQ was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for data sources that connect to Google
@@ -997,6 +1092,8 @@ type GoogleDriveConfiguration struct {
 	// index. If an item matches both an inclusion pattern and an exclusion pattern, it
 	// is excluded from the index.
 	InclusionPatterns []string
+
+	noSmithyDocumentSerde
 }
 
 // A list of users or sub groups that belong to a group. Users and groups are
@@ -1018,6 +1115,8 @@ type GroupMembers struct {
 	// group. Your sub groups can contain more than 1000 users, but the list of sub
 	// groups that belong to a group (and/or users) must be no more than 1000.
 	S3PathforGroupMembers *S3Path
+
+	noSmithyDocumentSerde
 }
 
 // Information on the processing of PUT and DELETE actions for mapping users to
@@ -1043,6 +1142,8 @@ type GroupOrderingIdSummary struct {
 	// The current processing status of actions for mapping users to their groups. The
 	// status can be either PROCESSING, SUCCEEDED, DELETING, DELETED, or FAILED.
 	Status PrincipalMappingStatus
+
+	noSmithyDocumentSerde
 }
 
 // Group summary information.
@@ -1053,6 +1154,8 @@ type GroupSummary struct {
 
 	// The timestamp identifier used for the latest PUT or DELETE action.
 	OrderingId *int64
+
+	noSmithyDocumentSerde
 }
 
 // Information to define the hierarchy for which documents users should have access
@@ -1067,6 +1170,8 @@ type HierarchicalPrincipal struct {
 	//
 	// This member is required.
 	PrincipalList []Principal
+
+	noSmithyDocumentSerde
 }
 
 // Provides information that you can use to highlight a search result so that your
@@ -1089,6 +1194,8 @@ type Highlight struct {
 
 	// The highlight type.
 	Type HighlightType
+
+	noSmithyDocumentSerde
 }
 
 // A summary of information about an index.
@@ -1120,6 +1227,8 @@ type IndexConfigurationSummary struct {
 
 	// The name of the index.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the number of documents and the number of questions
@@ -1135,6 +1244,8 @@ type IndexStatistics struct {
 	//
 	// This member is required.
 	TextDocumentStatistics *TextDocumentStatistics
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for the JSON token type.
@@ -1149,6 +1260,8 @@ type JsonTokenTypeConfiguration struct {
 	//
 	// This member is required.
 	UserNameAttributeField *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information for the JWT token type.
@@ -1176,6 +1289,8 @@ type JwtTokenTypeConfiguration struct {
 
 	// The user name attribute field.
 	UserNameAttributeField *string
+
+	noSmithyDocumentSerde
 }
 
 // The sub groups that belong to a group.
@@ -1188,6 +1303,8 @@ type MemberGroup struct {
 
 	// The identifier of the data source for the sub group you want to map to a group.
 	DataSourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // The users that belong to a group.
@@ -1197,6 +1314,8 @@ type MemberUser struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for data sources that connect to OneDrive.
@@ -1241,6 +1360,8 @@ type OneDriveConfiguration struct {
 	// pattern, the document is not included in the index. The exclusion pattern is
 	// applied to the file name.
 	InclusionPatterns []string
+
+	noSmithyDocumentSerde
 }
 
 // User accounts whose documents should be indexed.
@@ -1255,6 +1376,8 @@ type OneDriveUsers struct {
 	// The S3 bucket location of a file containing a list of users whose documents
 	// should be indexed.
 	OneDriveUserS3Path *S3Path
+
+	noSmithyDocumentSerde
 }
 
 // Provides user and group information for document access filtering.
@@ -1277,6 +1400,8 @@ type Principal struct {
 
 	// The identifier of the data source the principal should access documents from.
 	DataSourceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the configuration information for a web proxy to connect to website
@@ -1303,6 +1428,8 @@ type ProxyConfiguration struct {
 	// authentication to connect to a web proxy server. The secret stores your
 	// credentials.
 	Credentials *string
+
+	noSmithyDocumentSerde
 }
 
 // A single query result. A query result contains information about a document
@@ -1352,6 +1479,8 @@ type QueryResultItem struct {
 
 	// The type of document.
 	Type QueryResultType
+
+	noSmithyDocumentSerde
 }
 
 // Summary information on a query suggestions block list. This includes information
@@ -1379,6 +1508,8 @@ type QuerySuggestionsBlockListSummary struct {
 
 	// The date-time the block list was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides information for manually tuning the relevance of a field in a search.
@@ -1422,6 +1553,8 @@ type Relevance struct {
 	// when they appear in the metadata of a document. When those terms appear they are
 	// given the specified importance instead of the regular importance for the boost.
 	ValueImportanceMap map[string]int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides feedback on how relevant a document is to a search. Your application
@@ -1438,6 +1571,8 @@ type RelevanceFeedback struct {
 	//
 	// This member is required.
 	ResultId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for a data source to index documents in an
@@ -1494,6 +1629,8 @@ type S3DataSourceConfiguration struct {
 
 	// A list of S3 prefixes for the documents that should be included in the index.
 	InclusionPrefixes []string
+
+	noSmithyDocumentSerde
 }
 
 // Information required to find a specific file in an Amazon S3 bucket.
@@ -1508,6 +1645,8 @@ type S3Path struct {
 	//
 	// This member is required.
 	Key *string
+
+	noSmithyDocumentSerde
 }
 
 // Defines configuration for syncing a Salesforce chatter feed. The contents of the
@@ -1532,6 +1671,8 @@ type SalesforceChatterFeedConfiguration struct {
 	// When you specify STANDARD_USER only documents for Salesforce standard users are
 	// documented. You can specify both.
 	IncludeFilterTypes []SalesforceChatterFeedIncludeFilterType
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for connecting to a Salesforce data source.
@@ -1600,6 +1741,8 @@ type SalesforceConfiguration struct {
 
 	// Specifies the Salesforce standard objects that Amazon Kendra indexes.
 	StandardObjectConfigurations []SalesforceStandardObjectConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for indexing Salesforce custom articles.
@@ -1623,6 +1766,8 @@ type SalesforceCustomKnowledgeArticleTypeConfiguration struct {
 	// One or more objects that map fields in the custom knowledge article to fields in
 	// the Amazon Kendra index.
 	FieldMappings []DataSourceToIndexFieldMapping
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration information for the knowledge article types that Amazon
@@ -1642,6 +1787,8 @@ type SalesforceKnowledgeArticleConfiguration struct {
 
 	// Provides configuration information for standard Salesforce knowledge articles.
 	StandardKnowledgeArticleTypeConfiguration *SalesforceStandardKnowledgeArticleTypeConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for standard Salesforce knowledge articles.
@@ -1659,6 +1806,8 @@ type SalesforceStandardKnowledgeArticleTypeConfiguration struct {
 	// index fields. The index field must exist before you can map a Salesforce field
 	// to it.
 	FieldMappings []DataSourceToIndexFieldMapping
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for processing attachments to Salesforce
@@ -1671,6 +1820,8 @@ type SalesforceStandardObjectAttachmentConfiguration struct {
 	// One or more objects that map fields in attachments to Amazon Kendra index
 	// fields.
 	FieldMappings []DataSourceToIndexFieldMapping
+
+	noSmithyDocumentSerde
 }
 
 // Specifies configuration information for indexing a single standard object.
@@ -1695,6 +1846,8 @@ type SalesforceStandardObjectConfiguration struct {
 	// index fields. The index field must exist before you can map a Salesforce field
 	// to it.
 	FieldMappings []DataSourceToIndexFieldMapping
+
+	noSmithyDocumentSerde
 }
 
 // Provides a relative ranking that indicates how confident Amazon Kendra is that
@@ -1703,6 +1856,8 @@ type ScoreAttributes struct {
 
 	// A relative ranking for how well the response matches the query.
 	ScoreConfidence ScoreConfidence
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about how a custom index field is used during a search.
@@ -1726,6 +1881,8 @@ type Search struct {
 	// specify sorting on a field that does not have Sortable set to true, Amazon
 	// Kendra returns an exception. The default is false.
 	Sortable bool
+
+	noSmithyDocumentSerde
 }
 
 // Provides the configuration information of the seed or starting point URLs to
@@ -1757,6 +1914,8 @@ type SeedUrlConfiguration struct {
 	//
 	// The default mode is set to HOST_ONLY.
 	WebCrawlerMode WebCrawlerMode
+
+	noSmithyDocumentSerde
 }
 
 // Provides the identifier of the KMScustomer master key (CMK) used to encrypt data
@@ -1766,6 +1925,8 @@ type ServerSideEncryptionConfiguration struct {
 	// The identifier of the KMScustomer master key (CMK). Amazon Kendra doesn't
 	// support asymmetric CMKs.
 	KmsKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information required to connect to a ServiceNow data
@@ -1809,6 +1970,8 @@ type ServiceNowConfiguration struct {
 	// Provides configuration information for crawling service catalogs in the
 	// ServiceNow site.
 	ServiceCatalogConfiguration *ServiceNowServiceCatalogConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for crawling knowledge articles in the
@@ -1848,6 +2011,8 @@ type ServiceNowKnowledgeArticleConfiguration struct {
 	// match the inclusion pattern are not indexed. The regex is applied to the field
 	// specified in the PatternTargetField.
 	IncludeAttachmentFilePatterns []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for crawling service catalog items in the
@@ -1885,6 +2050,8 @@ type ServiceNowServiceCatalogConfiguration struct {
 	// pattern, the document is not included in the index. The regex is applied to the
 	// file name of the attachment.
 	IncludeAttachmentFilePatterns []string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for connecting to a Microsoft SharePoint data
@@ -1959,6 +2126,8 @@ type SharePointConfiguration struct {
 
 	// Provides information for connecting to an Amazon VPC.
 	VpcConfiguration *DataSourceVpcConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides the configuration information of the sitemap URLs to crawl. When
@@ -1973,6 +2142,8 @@ type SiteMapsConfiguration struct {
 	//
 	// This member is required.
 	SiteMaps []string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the document attribute to use to sort the response to a Amazon Kendra
@@ -2016,6 +2187,8 @@ type SortingConfiguration struct {
 	//
 	// This member is required.
 	SortOrder SortOrder
+
+	noSmithyDocumentSerde
 }
 
 // Provides information that configures Amazon Kendra to use a SQL database.
@@ -2031,6 +2204,8 @@ type SqlConfiguration struct {
 	// For MySQL databases, you must enable the ansi_quotes option when you set this
 	// field to DOUBLE_QUOTES.
 	QueryIdentifiersEnclosingOption QueryIdentifiersEnclosingOption
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the status of documents submitted for indexing.
@@ -2050,6 +2225,8 @@ type Status struct {
 	// this information to correct the error before you resubmit the document for
 	// indexing.
 	FailureReason *string
+
+	noSmithyDocumentSerde
 }
 
 // A single query suggestion.
@@ -2061,6 +2238,8 @@ type Suggestion struct {
 	// The value for the unique UUID (universally unique identifier) of a single query
 	// suggestion. The value is the text string of a suggestion.
 	Value *SuggestionValue
+
+	noSmithyDocumentSerde
 }
 
 // The text highlights for a single query suggestion.
@@ -2071,6 +2250,8 @@ type SuggestionHighlight struct {
 
 	// The zero-based location in the response string where the highlight ends.
 	EndOffset *int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides text and information about where to highlight the query suggestion
@@ -2082,6 +2263,8 @@ type SuggestionTextWithHighlights struct {
 
 	// The query suggestion text to display to the user.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 // The SuggestionTextWithHighlights structure information.
@@ -2090,6 +2273,8 @@ type SuggestionValue struct {
 	// The SuggestionTextWithHighlights structure that contains the query suggestion
 	// text and highlights.
 	Text *SuggestionTextWithHighlights
+
+	noSmithyDocumentSerde
 }
 
 // A list of key/value pairs that identify an index, FAQ, or data source. Tag keys
@@ -2108,6 +2293,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about text documents indexed in an index.
@@ -2122,6 +2309,8 @@ type TextDocumentStatistics struct {
 	//
 	// This member is required.
 	IndexedTextDocumentsCount int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides text and information about where to highlight the text.
@@ -2132,6 +2321,8 @@ type TextWithHighlights struct {
 
 	// The text to display to the user.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 // An array of summary information for one or more thesauruses.
@@ -2151,6 +2342,8 @@ type ThesaurusSummary struct {
 
 	// The Unix datetime that the thesaurus was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides a range of time.
@@ -2161,6 +2354,8 @@ type TimeRange struct {
 
 	// The UNIX datetime of the beginning of the time range.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Provides the configuration information of the URLs to crawl. When selecting
@@ -2180,6 +2375,8 @@ type Urls struct {
 	// crawl. Only URLs belonging to the same website host names are crawled. You can
 	// list up to three sitemap URLs.
 	SiteMapsConfiguration *SiteMapsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about the user context for a Amazon Kendra index. This is
@@ -2210,6 +2407,8 @@ type UserContext struct {
 	// The identifier of the user you want to filter search results based on their
 	// access to documents.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for a token configuration.
@@ -2220,6 +2419,8 @@ type UserTokenConfiguration struct {
 
 	// Information about the JWT token type configuration.
 	JwtTokenTypeConfiguration *JwtTokenTypeConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides the configuration information required for Amazon Kendra web crawler.
@@ -2289,13 +2490,19 @@ type WebCrawlerConfiguration struct {
 	// regular expression pattern to exclude certain URLs that conflicts with the
 	// include pattern, the exclude pattern takes precedence.
 	UrlInclusionPatterns []string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isDocumentAttributeValue() {}

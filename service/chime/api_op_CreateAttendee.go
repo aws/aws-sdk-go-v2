@@ -45,6 +45,8 @@ type CreateAttendeeInput struct {
 
 	// The tag key-value pairs.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAttendeeOutput struct {
@@ -54,6 +56,8 @@ type CreateAttendeeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {

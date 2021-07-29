@@ -38,6 +38,8 @@ type GetCelebrityInfoInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCelebrityInfoOutput struct {
@@ -50,6 +52,8 @@ type GetCelebrityInfoOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCelebrityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {

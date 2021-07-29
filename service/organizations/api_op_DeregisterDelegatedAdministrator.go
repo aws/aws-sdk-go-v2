@@ -52,11 +52,15 @@ type DeregisterDelegatedAdministratorInput struct {
 	//
 	// This member is required.
 	ServicePrincipal *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterDelegatedAdministratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterDelegatedAdministratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

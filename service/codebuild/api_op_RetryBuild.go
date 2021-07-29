@@ -37,6 +37,8 @@ type RetryBuildInput struct {
 	// for five minutes. If you repeat the RetryBuild request with the same token, but
 	// change a parameter, CodeBuild returns a parameter mismatch error.
 	IdempotencyToken *string
+
+	noSmithyDocumentSerde
 }
 
 type RetryBuildOutput struct {
@@ -46,6 +48,8 @@ type RetryBuildOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRetryBuildMiddlewares(stack *middleware.Stack, options Options) (err error) {

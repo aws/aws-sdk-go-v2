@@ -198,6 +198,8 @@ type DescribeSpotInstanceRequestsInput struct {
 
 	// One or more Spot Instance request IDs.
 	SpotInstanceRequestIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeSpotInstanceRequests.
@@ -212,6 +214,8 @@ type DescribeSpotInstanceRequestsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSpotInstanceRequestsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -37,11 +37,15 @@ type DeleteResourceDataSyncInput struct {
 
 	// Specify the type of resource data sync to delete.
 	SyncType *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourceDataSyncOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResourceDataSyncMiddlewares(stack *middleware.Stack, options Options) (err error) {

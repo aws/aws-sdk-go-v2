@@ -50,6 +50,8 @@ type CreateBotVersionInput struct {
 	// A description of the version. Use the description to help identify the version
 	// in lists.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateBotVersionOutput struct {
@@ -76,6 +78,8 @@ type CreateBotVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateBotVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

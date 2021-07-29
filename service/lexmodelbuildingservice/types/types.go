@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -33,6 +34,8 @@ type BotAliasMetadata struct {
 
 	// The name of the bot alias.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an association between an Amazon Lex bot and an external messaging
@@ -79,6 +82,8 @@ type BotChannelAssociation struct {
 	// Specifies the type of association by indicating the type of channel being
 	// established between the Amazon Lex bot and the external messaging platform.
 	Type ChannelType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a bot. .
@@ -102,6 +107,8 @@ type BotMetadata struct {
 
 	// The version of the bot. For a new bot, the version is always $LATEST.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides metadata for a built-in intent.
@@ -115,6 +122,8 @@ type BuiltinIntentMetadata struct {
 
 	// A list of identifiers for the locales that the intent supports.
 	SupportedLocales []Locale
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a slot used in a built-in intent.
@@ -122,6 +131,8 @@ type BuiltinIntentSlot struct {
 
 	// A list of the slots defined for the intent.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a built in slot type.
@@ -135,6 +146,8 @@ type BuiltinSlotTypeMetadata struct {
 
 	// A list of target locales for the slot.
 	SupportedLocales []Locale
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a Lambda function that verifies requests to a bot or fulfills the
@@ -151,6 +164,8 @@ type CodeHook struct {
 	//
 	// This member is required.
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the settings needed for conversation logs.
@@ -171,6 +186,8 @@ type ConversationLogsRequest struct {
 	//
 	// This member is required.
 	LogSettings []LogSettingsRequest
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about conversation log settings.
@@ -182,6 +199,8 @@ type ConversationLogsResponse struct {
 
 	// The settings for your conversation logs. You can log text, audio, or both.
 	LogSettings []LogSettingsResponse
+
+	noSmithyDocumentSerde
 }
 
 // Each slot type can have a set of values. Each enumeration value represents a
@@ -203,6 +222,8 @@ type EnumerationValue struct {
 
 	// Additional values related to the slot type value.
 	Synonyms []string
+
+	noSmithyDocumentSerde
 }
 
 // A prompt for additional activity after an intent is fulfilled. For example,
@@ -220,6 +241,8 @@ type FollowUpPrompt struct {
 	//
 	// This member is required.
 	RejectionStatement *Statement
+
+	noSmithyDocumentSerde
 }
 
 // Describes how the intent is fulfilled after the user provides all of the
@@ -249,6 +272,8 @@ type FulfillmentActivity struct {
 
 	// A description of the Lambda function that is run to fulfill the intent.
 	CodeHook *CodeHook
+
+	noSmithyDocumentSerde
 }
 
 // The name of a context that must be active for an intent to be selected by Amazon
@@ -259,6 +284,8 @@ type InputContext struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the specific version of an intent.
@@ -273,6 +300,8 @@ type Intent struct {
 	//
 	// This member is required.
 	IntentVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about an intent.
@@ -293,6 +322,8 @@ type IntentMetadata struct {
 
 	// The version of the intent.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for the AMAZON.KendraSearchIntent intent.
@@ -324,6 +355,8 @@ type KendraConfiguration struct {
 	// (http://docs.aws.amazon.com/kendra/latest/dg/filtering.html). You can override
 	// this filter string with a new filter string at runtime.
 	QueryFilterString *string
+
+	noSmithyDocumentSerde
 }
 
 // Settings used to configure delivery mode and destination for conversation logs.
@@ -351,6 +384,8 @@ type LogSettingsRequest struct {
 	// encrypting audio logs delivered to an S3 bucket. The key does not apply to
 	// CloudWatch Logs and is optional for S3 buckets.
 	KmsKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The settings for conversation logs.
@@ -374,6 +409,8 @@ type LogSettingsResponse struct {
 	// that you specified to contain audio logs. For CloudWatch Logs it is the prefix
 	// of the log stream name within the log group that you specified.
 	ResourcePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // The message object that provides the message text and its type.
@@ -393,6 +430,8 @@ type Message struct {
 	// assigned to a message, Amazon Lex returns one message from each group in the
 	// response.
 	GroupNumber *int32
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about alerts and warnings that Amazon Lex sends during a
@@ -417,6 +456,8 @@ type MigrationAlert struct {
 	// was an issue with the migration that requires manual changes to the new Amazon
 	// Lex V2 bot. The migration continues.
 	Type MigrationAlertType
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about migrating a bot from Amazon Lex V1 to Amazon Lex V2.
@@ -451,6 +492,8 @@ type MigrationSummary struct {
 
 	// The IAM role that Amazon Lex uses to run the Amazon Lex V2 bot.
 	V2BotRole *string
+
+	noSmithyDocumentSerde
 }
 
 // The specification of an output context that is set when an intent is fulfilled.
@@ -474,6 +517,8 @@ type OutputContext struct {
 	//
 	// This member is required.
 	TurnsToLive *int32
+
+	noSmithyDocumentSerde
 }
 
 // Obtains information from the user. To define a prompt, provide one or more
@@ -498,6 +543,8 @@ type Prompt struct {
 	// response. It substitutes session attributes and slot values for placeholders in
 	// the response card. For more information, see ex-resp-card.
 	ResponseCard *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the resource that refers to the resource that you are attempting to
@@ -511,6 +558,8 @@ type ResourceReference struct {
 	// The version of the resource that is using the resource that you are trying to
 	// delete.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies the version of a specific slot.
@@ -566,6 +615,8 @@ type Slot struct {
 
 	// The prompt that Amazon Lex uses to elicit the slot value from the user.
 	ValueElicitationPrompt *Prompt
+
+	noSmithyDocumentSerde
 }
 
 // A default value for a slot.
@@ -584,6 +635,8 @@ type SlotDefaultValue struct {
 	//
 	// This member is required.
 	DefaultValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the default values for a slot. Default values are used when Amazon Lex
@@ -599,6 +652,8 @@ type SlotDefaultValueSpec struct {
 	//
 	// This member is required.
 	DefaultValueList []SlotDefaultValue
+
+	noSmithyDocumentSerde
 }
 
 // Provides configuration information for a slot type.
@@ -606,6 +661,8 @@ type SlotTypeConfiguration struct {
 
 	// A regular expression used to validate the value of a slot.
 	RegexConfiguration *SlotTypeRegexConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a slot type..
@@ -626,6 +683,8 @@ type SlotTypeMetadata struct {
 
 	// The version of the slot type.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a regular expression used to validate the value of a slot.
@@ -652,6 +711,8 @@ type SlotTypeRegexConfiguration struct {
 	//
 	// This member is required.
 	Pattern *string
+
+	noSmithyDocumentSerde
 }
 
 // A collection of messages that convey information to the user. At runtime, Amazon
@@ -668,6 +729,8 @@ type Statement struct {
 	// Lex includes the response card in the response. It substitutes all of the
 	// session attributes and slot values for placeholders in the response card.
 	ResponseCard *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of key/value pairs that identify a bot, bot alias, or bot channel. Tag
@@ -685,6 +748,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides information about a single utterance that was made to your bot.
@@ -705,6 +770,8 @@ type UtteranceData struct {
 	// The text that was entered by the user or the text representation of an audio
 	// clip.
 	UtteranceString *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a list of utterances that have been made to a specific version of your
@@ -717,4 +784,8 @@ type UtteranceList struct {
 	// One or more UtteranceData objects that contain information about the utterances
 	// that have been made to a bot. The maximum number of object is 100.
 	Utterances []UtteranceData
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

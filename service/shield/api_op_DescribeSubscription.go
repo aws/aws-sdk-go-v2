@@ -28,6 +28,7 @@ func (c *Client) DescribeSubscription(ctx context.Context, params *DescribeSubsc
 }
 
 type DescribeSubscriptionInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeSubscriptionOutput struct {
@@ -37,6 +38,8 @@ type DescribeSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

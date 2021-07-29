@@ -43,6 +43,8 @@ type OpenInstancePublicPortsInput struct {
 	//
 	// This member is required.
 	PortInfo *types.PortInfo
+
+	noSmithyDocumentSerde
 }
 
 type OpenInstancePublicPortsOutput struct {
@@ -54,6 +56,8 @@ type OpenInstancePublicPortsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationOpenInstancePublicPortsMiddlewares(stack *middleware.Stack, options Options) (err error) {

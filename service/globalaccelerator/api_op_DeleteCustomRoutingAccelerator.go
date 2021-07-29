@@ -46,11 +46,15 @@ type DeleteCustomRoutingAcceleratorInput struct {
 	//
 	// This member is required.
 	AcceleratorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCustomRoutingAcceleratorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCustomRoutingAcceleratorMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type PutRoomSkillParameterInput struct {
 
 	// The ARN of the room associated with the room skill parameter. Required.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutRoomSkillParameterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {

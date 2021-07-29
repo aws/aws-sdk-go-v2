@@ -59,6 +59,8 @@ type ListPermissionsInput struct {
 
 	// Specifies a resource type to filter the permissions returned.
 	ResourceType types.DataLakeResourceType
+
+	noSmithyDocumentSerde
 }
 
 type ListPermissionsOutput struct {
@@ -72,6 +74,8 @@ type ListPermissionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

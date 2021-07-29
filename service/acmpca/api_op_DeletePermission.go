@@ -69,11 +69,15 @@ type DeletePermissionInput struct {
 
 	// The AWS account that calls this action.
 	SourceAccount *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

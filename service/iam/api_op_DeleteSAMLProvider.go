@@ -37,11 +37,15 @@ type DeleteSAMLProviderInput struct {
 	//
 	// This member is required.
 	SAMLProviderArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSAMLProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSAMLProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

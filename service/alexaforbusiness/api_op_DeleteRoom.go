@@ -30,11 +30,15 @@ type DeleteRoomInput struct {
 
 	// The ARN of the room to delete. Required.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRoomOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRoomMiddlewares(stack *middleware.Stack, options Options) (err error) {

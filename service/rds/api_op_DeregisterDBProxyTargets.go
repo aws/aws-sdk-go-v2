@@ -42,11 +42,15 @@ type DeregisterDBProxyTargetsInput struct {
 
 	// The identifier of the DBProxyTargetGroup.
 	TargetGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterDBProxyTargetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterDBProxyTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

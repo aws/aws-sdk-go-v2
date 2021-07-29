@@ -83,6 +83,8 @@ type CreateInfrastructureConfigurationInput struct {
 	// Set to false if you want Image Builder to retain the instance used to configure
 	// your AMI if the build or test phase of your workflow fails.
 	TerminateInstanceOnFailure *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateInfrastructureConfigurationOutput struct {
@@ -99,6 +101,8 @@ type CreateInfrastructureConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

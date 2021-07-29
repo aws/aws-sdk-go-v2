@@ -33,6 +33,8 @@ type GetApplicationPolicyInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetApplicationPolicyOutput struct {
@@ -42,6 +44,8 @@ type GetApplicationPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetApplicationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

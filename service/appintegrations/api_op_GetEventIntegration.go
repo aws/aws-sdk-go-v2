@@ -34,6 +34,8 @@ type GetEventIntegrationInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEventIntegrationOutput struct {
@@ -58,6 +60,8 @@ type GetEventIntegrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEventIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

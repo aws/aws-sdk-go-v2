@@ -52,6 +52,8 @@ type AssociateRouteTableInput struct {
 
 	// The ID of the subnet.
 	SubnetId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateRouteTableOutput struct {
@@ -65,6 +67,8 @@ type AssociateRouteTableOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateRouteTableMiddlewares(stack *middleware.Stack, options Options) (err error) {

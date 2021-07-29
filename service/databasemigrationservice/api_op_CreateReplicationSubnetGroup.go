@@ -50,6 +50,8 @@ type CreateReplicationSubnetGroupInput struct {
 
 	// One or more tags to be assigned to the subnet group.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -60,6 +62,8 @@ type CreateReplicationSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateReplicationSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

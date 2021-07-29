@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Describes an agent version.
 type AgentVersion struct {
 
@@ -10,6 +14,8 @@ type AgentVersion struct {
 
 	// The agent version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // A description of the app.
@@ -67,6 +73,8 @@ type App struct {
 
 	// The app type.
 	Type AppType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a load-based auto scaling upscaling or downscaling threshold
@@ -113,6 +121,8 @@ type AutoScalingThresholds struct {
 	// The amount of time, in minutes, that the load must exceed a threshold before
 	// more instances are added or removed.
 	ThresholdsWaitTime *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a block device mapping. This data type maps directly to the Amazon EC2
@@ -136,6 +146,8 @@ type BlockDeviceMapping struct {
 	// The virtual device name. For more information, see BlockDeviceMapping
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_BlockDeviceMapping.html).
 	VirtualName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Chef configuration.
@@ -146,6 +158,8 @@ type ChefConfiguration struct {
 
 	// Whether to enable Berkshelf.
 	ManageBerkshelf *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Amazon CloudWatch logs configuration for a layer.
@@ -156,6 +170,8 @@ type CloudWatchLogsConfiguration struct {
 
 	// A list of configuration options for CloudWatch Logs.
 	LogStreams []CloudWatchLogsLogStream
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Amazon CloudWatch logs configuration for a layer. For detailed
@@ -221,6 +237,8 @@ type CloudWatchLogsLogStream struct {
 
 	// Specifies the time zone of log event time stamps.
 	TimeZone CloudWatchLogsTimeZone
+
+	noSmithyDocumentSerde
 }
 
 // Describes a command.
@@ -289,6 +307,8 @@ type Command struct {
 	//
 	// * update_dependencies
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an app's data source.
@@ -303,6 +323,8 @@ type DataSource struct {
 	// The data source's type, AutoSelectOpsworksMysqlInstance, OpsworksMysqlInstance,
 	// RdsDbInstance, or None.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a deployment of a stack or app.
@@ -354,6 +376,8 @@ type Deployment struct {
 	//
 	// * failed
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to specify a stack or deployment command.
@@ -421,6 +445,8 @@ type DeploymentCommand struct {
 	// Amazon Linux 2016.09, set Args to the following.  { "upgrade_os_to":["Amazon
 	// Linux 2016.09"], "allow_reboot":["true"] }
 	Args map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon EBS volume. This data type maps directly to the Amazon EC2
@@ -452,6 +478,8 @@ type EbsBlockDevice struct {
 	// volume size (in GiB) specified in the AMI attributes to set IOPS to 50 x (volume
 	// size).
 	VolumeType VolumeType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a registered Amazon ECS cluster.
@@ -468,6 +496,8 @@ type EcsCluster struct {
 
 	// The stack ID.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Elastic IP address.
@@ -488,6 +518,8 @@ type ElasticIp struct {
 	// The AWS region. For more information, see Regions and Endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html).
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Elastic Load Balancing instance.
@@ -520,6 +552,8 @@ type ElasticLoadBalancer struct {
 
 	// The VPC ID.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an app's environment variable.
@@ -545,6 +579,8 @@ type EnvironmentVariable struct {
 	// DescribeApps then returns *****FILTERED***** instead of the actual value. The
 	// default value for Secure is false.
 	Secure *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance.
@@ -720,6 +756,8 @@ type Instance struct {
 
 	// The instance's virtualization type: paravirtual or hvm.
 	VirtualizationType VirtualizationType
+
+	noSmithyDocumentSerde
 }
 
 // Contains a description of an Amazon EC2 instance from the Amazon EC2 metadata
@@ -732,6 +770,8 @@ type InstanceIdentity struct {
 
 	// A signature that can be used to verify the document's accuracy and authenticity.
 	Signature *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes how many instances a stack has for each status.
@@ -796,6 +836,8 @@ type InstancesCount struct {
 
 	// The number of instances in the Unassigning state.
 	Unassigning *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a layer.
@@ -896,6 +938,8 @@ type Layer struct {
 
 	// A VolumeConfigurations object that describes the layer's Amazon EBS volumes.
 	VolumeConfigurations []VolumeConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the lifecycle event configuration
@@ -904,6 +948,8 @@ type LifecycleEventConfiguration struct {
 	// A ShutdownEventConfiguration object that specifies the Shutdown event
 	// configuration.
 	Shutdown *ShutdownEventConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Describes a layer's load-based auto scaling configuration.
@@ -923,6 +969,8 @@ type LoadBasedAutoScalingConfiguration struct {
 	// which defines how and when AWS OpsWorks Stacks increases the number of
 	// instances.
 	UpScaling *AutoScalingThresholds
+
+	noSmithyDocumentSerde
 }
 
 // Describes supported operating systems in AWS OpsWorks Stacks.
@@ -950,6 +998,8 @@ type OperatingSystem struct {
 
 	// The type of a supported operating system, either Linux or Windows.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // A block that contains information about the configuration manager (Chef) and the
@@ -963,6 +1013,8 @@ type OperatingSystemConfigurationManager struct {
 	// The versions of the configuration manager that are supported by an operating
 	// system.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes stack or user permissions.
@@ -999,6 +1051,8 @@ type Permission struct {
 
 	// A stack ID.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance's RAID array.
@@ -1043,6 +1097,8 @@ type RaidArray struct {
 
 	// The volume type, standard or PIOPS.
 	VolumeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon RDS instance.
@@ -1077,6 +1133,8 @@ type RdsDbInstance struct {
 
 	// The ID of the stack with which the instance is registered.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // AWS OpsWorks Stacks supports five lifecycle events: setup, configuration,
@@ -1105,6 +1163,8 @@ type Recipes struct {
 
 	// An array of custom recipe names to be run following a undeploy event.
 	Undeploy []string
+
+	noSmithyDocumentSerde
 }
 
 // A registered instance's reported operating system.
@@ -1118,6 +1178,8 @@ type ReportedOs struct {
 
 	// The operating system version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a user's SSH information.
@@ -1134,6 +1196,8 @@ type SelfUserProfile struct {
 
 	// The user's SSH user name.
 	SshUsername *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an AWS OpsWorks Stacks service error.
@@ -1156,6 +1220,8 @@ type ServiceError struct {
 
 	// The error type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The Shutdown event configuration.
@@ -1169,6 +1235,8 @@ type ShutdownEventConfiguration struct {
 	// The time, in seconds, that AWS OpsWorks Stacks will wait after triggering a
 	// Shutdown event before shutting down an instance.
 	ExecutionTimeout *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the information required to retrieve an app or cookbook from a
@@ -1219,6 +1287,8 @@ type Source struct {
 	// * For HTTP bundles, Git
 	// repositories, and Subversion repositories, set Username to the user name.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an app's SSL configuration.
@@ -1237,6 +1307,8 @@ type SslConfiguration struct {
 	// Optional. Can be used to specify an intermediate certificate authority key or
 	// client authentication.
 	Chain *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a stack.
@@ -1330,6 +1402,8 @@ type Stack struct {
 
 	// The VPC ID; applicable only if the stack is running in a VPC.
 	VpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the configuration manager.
@@ -1342,6 +1416,8 @@ type StackConfigurationManager struct {
 	// stacks, and to 12.2 for Windows stacks. The default value for Linux stacks is
 	// 11.4.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Summarizes the number of layers, instances, and apps in a stack.
@@ -1364,6 +1440,8 @@ type StackSummary struct {
 
 	// The stack ID.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the data needed by RDP clients such as the Microsoft Remote Desktop
@@ -1384,6 +1462,8 @@ type TemporaryCredential struct {
 	// credentials to log in. If they are logged in at the time, they will be
 	// automatically logged out.
 	ValidForInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance's time-based auto scaling configuration.
@@ -1394,6 +1474,8 @@ type TimeBasedAutoScalingConfiguration struct {
 
 	// The instance ID.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a user's SSH information.
@@ -1415,6 +1497,8 @@ type UserProfile struct {
 
 	// The user's SSH user name.
 	SshUsername *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance's Amazon EBS volume.
@@ -1485,6 +1569,8 @@ type Volume struct {
 	// * sc1 - Cold HDD. Cold HDD volumes must have a
 	// minimum size of 500 GiB and a maximum size of 16384 GiB.
 	VolumeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon EBS volume configuration.
@@ -1537,6 +1623,8 @@ type VolumeConfiguration struct {
 	// * sc1 - Cold HDD. Cold HDD volumes must have a
 	// minimum size of 500 GiB and a maximum size of 16384 GiB.
 	VolumeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a time-based instance's auto scaling schedule. The schedule consists
@@ -1577,4 +1665,8 @@ type WeeklyAutoScalingSchedule struct {
 
 	// The schedule for Wednesday.
 	Wednesday map[string]string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

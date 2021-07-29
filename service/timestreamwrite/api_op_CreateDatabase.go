@@ -51,6 +51,8 @@ type CreateDatabaseInput struct {
 
 	// A list of key-value pairs to label the table.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDatabaseOutput struct {
@@ -60,6 +62,8 @@ type CreateDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

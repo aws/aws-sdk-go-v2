@@ -43,6 +43,8 @@ type UpdateAutomaticTapeCreationPolicyInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAutomaticTapeCreationPolicyOutput struct {
@@ -53,6 +55,8 @@ type UpdateAutomaticTapeCreationPolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAutomaticTapeCreationPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

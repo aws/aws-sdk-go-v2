@@ -30,7 +30,9 @@ import software.amazon.smithy.codegen.core.Symbol;
 import software.amazon.smithy.codegen.core.SymbolProvider;
 import software.amazon.smithy.go.codegen.GoStackStepMiddlewareGenerator;
 import software.amazon.smithy.go.codegen.GoWriter;
+import software.amazon.smithy.go.codegen.ProtocolDocumentGenerator;
 import software.amazon.smithy.go.codegen.SmithyGoDependency;
+import software.amazon.smithy.go.codegen.SymbolUtils;
 import software.amazon.smithy.go.codegen.SyntheticClone;
 import software.amazon.smithy.go.codegen.integration.HttpBindingProtocolGenerator;
 import software.amazon.smithy.go.codegen.integration.ProtocolGenerator;
@@ -95,7 +97,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             MemberShape memberShape,
             String operand
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Model model = context.getModel();
         Shape payloadShape = model.expectShape(memberShape.getTarget());
 
@@ -149,7 +151,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             OperationShape operation,
             GoStackStepMiddlewareGenerator generator
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.SMITHY);
         writer.addUseImports(SmithyGoDependency.SMITHY_JSON);
 
@@ -186,7 +188,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             GoStackStepMiddlewareGenerator generator
     ) {
         Model model = context.getModel();
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Shape targetShape = ProtocolUtils.expectOutput(model, operation);
         String operand = "output";
 
@@ -230,7 +232,9 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     }
 
     // Writes middleware that delegates to deserializers for shapes that have explicit payload.
-    private void writeMiddlewarePayloadBindingDeserializerDelegator(GoWriter writer, ServiceShape service, Shape shape) {
+    private void writeMiddlewarePayloadBindingDeserializerDelegator(
+            GoWriter writer, ServiceShape service, Shape shape
+    ) {
         String deserFuncName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, service, getProtocolName());
         writer.write("err = $L(output, response.Body)", deserFuncName);
         writer.openBlock("if err != nil {", "}", () -> {
@@ -249,7 +253,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             String operand
     ) {
         String functionName = ProtocolGenerator.getDocumentDeserializerFunctionName(
-                    shape, context.getService(), context.getProtocolName());
+                shape, context.getService(), context.getProtocolName());
 
         writer.write("err = $L(&$L, shape)", functionName, operand);
         writer.openBlock("if err != nil {", "}", () -> {
@@ -277,7 +281,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
                 .collect(Collectors.toSet());
 
         Shape outputShape = ProtocolUtils.expectOutput(model, operation);
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         if (documentBindings.size() != 0) {
             outputShape.accept(new JsonShapeDeserVisitor(context, documentBindings::contains));
@@ -303,7 +307,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
 
     @Override
     protected void deserializeError(GenerationContext context, StructureShape shape) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         Symbol symbol = context.getSymbolProvider().toSymbol(shape);
         ServiceShape service = context.getService();
 
@@ -349,7 +353,7 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
             Shape shape,
             Predicate<MemberShape> filterMemberShapes
     ) {
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         SymbolProvider symbolProvider = context.getSymbolProvider();
         Symbol shapeSymbol = symbolProvider.toSymbol(shape);
         String funcName = ProtocolGenerator.getDocumentDeserializerFunctionName(shape, context.getService(), getProtocolName());
@@ -405,5 +409,25 @@ abstract class RestJsonProtocolGenerator extends HttpBindingProtocolGenerator {
     @Override
     public void generateProtocolTests(GenerationContext context) {
         AwsProtocolUtils.generateHttpProtocolTests(context);
+    }
+
+    @Override
+    public void generateProtocolDocumentMarshalerUnmarshalDocument(GenerationContext context) {
+        JsonProtocolDocumentUtils.generateProtocolDocumentMarshalerUnmarshalDocument(context);
+    }
+
+    @Override
+    public void generateProtocolDocumentMarshalerMarshalDocument(GenerationContext context) {
+        JsonProtocolDocumentUtils.generateProtocolDocumentMarshalerMarshalDocument(context);
+    }
+
+    @Override
+    public void generateProtocolDocumentUnmarshalerUnmarshalDocument(GenerationContext context) {
+        JsonProtocolDocumentUtils.generateProtocolDocumentUnmarshalerUnmarshalDocument(context);
+    }
+
+    @Override
+    public void generateProtocolDocumentUnmarshalerMarshalDocument(GenerationContext context) {
+        JsonProtocolDocumentUtils.generateProtocolDocumentUnmarshalerMarshalDocument(context);
     }
 }

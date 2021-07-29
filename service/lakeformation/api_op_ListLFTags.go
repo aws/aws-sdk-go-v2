@@ -46,6 +46,8 @@ type ListLFTagsInput struct {
 	// all share tags that the requester can view. If no resource share type is passed,
 	// lists tags in the given catalog ID that the requester has permission to view.
 	ResourceShareType types.ResourceShareType
+
+	noSmithyDocumentSerde
 }
 
 type ListLFTagsOutput struct {
@@ -58,6 +60,8 @@ type ListLFTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLFTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

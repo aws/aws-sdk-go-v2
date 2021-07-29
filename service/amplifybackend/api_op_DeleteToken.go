@@ -37,6 +37,8 @@ type DeleteTokenInput struct {
 	//
 	// This member is required.
 	SessionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteTokenOutput struct {
@@ -46,6 +48,8 @@ type DeleteTokenOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

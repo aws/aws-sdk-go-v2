@@ -33,6 +33,8 @@ type PutAccountPreferencesInput struct {
 	//
 	// This member is required.
 	ResourceIdType types.ResourceIdType
+
+	noSmithyDocumentSerde
 }
 
 type PutAccountPreferencesOutput struct {
@@ -40,6 +42,8 @@ type PutAccountPreferencesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutAccountPreferencesMiddlewares(stack *middleware.Stack, options Options) (err error) {

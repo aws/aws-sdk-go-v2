@@ -39,6 +39,8 @@ type ModifyClusterInput struct {
 	//
 	// This member is required.
 	ClusterId *string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterOutput struct {
@@ -48,6 +50,8 @@ type ModifyClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

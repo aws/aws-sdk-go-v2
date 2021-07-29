@@ -63,11 +63,15 @@ type SetAlarmStateInput struct {
 	// or application Auto Scaling alarm actions, the Auto Scaling policy uses the
 	// information in this field to take the correct action.
 	StateReasonData *string
+
+	noSmithyDocumentSerde
 }
 
 type SetAlarmStateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetAlarmStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

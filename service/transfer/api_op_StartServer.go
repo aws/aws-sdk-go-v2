@@ -37,11 +37,15 @@ type StartServerInput struct {
 	//
 	// This member is required.
 	ServerId *string
+
+	noSmithyDocumentSerde
 }
 
 type StartServerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartServerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -100,6 +100,8 @@ type UpdateSqlInjectionMatchSetInput struct {
 	//
 	// This member is required.
 	Updates []types.SqlInjectionMatchSetUpdate
+
+	noSmithyDocumentSerde
 }
 
 // The response to an UpdateSqlInjectionMatchSets request.
@@ -112,6 +114,8 @@ type UpdateSqlInjectionMatchSetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSqlInjectionMatchSetMiddlewares(stack *middleware.Stack, options Options) (err error) {

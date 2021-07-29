@@ -179,6 +179,8 @@ type GetQueueAttributesInput struct {
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-messages.html)
 	// in the Amazon SQS Developer Guide.
 	AttributeNames []types.QueueAttributeName
+
+	noSmithyDocumentSerde
 }
 
 // A list of returned queue attributes.
@@ -189,6 +191,8 @@ type GetQueueAttributesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetQueueAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

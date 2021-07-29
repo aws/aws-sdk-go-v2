@@ -36,6 +36,8 @@ type GetDomainNameInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a custom domain name as a user-friendly host name of an API
@@ -131,6 +133,8 @@ type GetDomainNameOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDomainNameMiddlewares(stack *middleware.Stack, options Options) (err error) {

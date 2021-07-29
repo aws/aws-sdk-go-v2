@@ -55,6 +55,8 @@ type ImportKeyPairInput struct {
 
 	// The tags to apply to the imported key pair.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type ImportKeyPairOutput struct {
@@ -73,6 +75,8 @@ type ImportKeyPairOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportKeyPairMiddlewares(stack *middleware.Stack, options Options) (err error) {

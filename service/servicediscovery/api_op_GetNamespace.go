@@ -33,6 +33,8 @@ type GetNamespaceInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetNamespaceOutput struct {
@@ -42,6 +44,8 @@ type GetNamespaceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetNamespaceMiddlewares(stack *middleware.Stack, options Options) (err error) {

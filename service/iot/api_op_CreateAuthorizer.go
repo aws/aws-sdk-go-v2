@@ -58,6 +58,8 @@ type CreateAuthorizerInput struct {
 	// The public keys used to verify the digital signature returned by your custom
 	// authentication service.
 	TokenSigningPublicKeys map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAuthorizerOutput struct {
@@ -70,6 +72,8 @@ type CreateAuthorizerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAuthorizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

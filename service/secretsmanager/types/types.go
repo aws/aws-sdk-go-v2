@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -15,6 +16,8 @@ type Filter struct {
 	// Filters your list of secrets by a specific value. You can prefix your search
 	// value with an exclamation mark (!) in order to perform negation filters.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // (Optional) Custom type consisting of a Region (required) and the KmsKeyId which
@@ -26,6 +29,8 @@ type ReplicaRegionType struct {
 
 	// Describes a single instance of Region objects.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // A replication object consisting of a RegionReplicationStatus object and includes
@@ -46,6 +51,8 @@ type ReplicationStatusType struct {
 
 	// Status message such as "Secret with this name already exists in this region".
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that defines the rotation configuration for the secret.
@@ -59,6 +66,8 @@ type RotationRulesType struct {
 	// somewhat randomly, but weighted towards the top of the hour and influenced by a
 	// variety of factors that help distribute load.
 	AutomaticallyAfterDays int64
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains the details about a secret. It does not include the
@@ -134,6 +143,8 @@ type SecretListEntry struct {
 	// The list of user-defined tags associated with the secret. To add tags to a
 	// secret, use TagResource. To remove tags, use UntagResource.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains information about one version of a secret.
@@ -152,6 +163,8 @@ type SecretVersionsListEntry struct {
 	// An array of staging labels that are currently associated with this version of
 	// the secret.
 	VersionStages []string
+
+	noSmithyDocumentSerde
 }
 
 // A structure that contains information about a tag.
@@ -162,6 +175,8 @@ type Tag struct {
 
 	// The string value associated with the key of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Displays errors that occurred during validation of the resource policy.
@@ -173,4 +188,8 @@ type ValidationErrorsEntry struct {
 	// Displays error messages if validation encounters problems during validation of
 	// the resource policy.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

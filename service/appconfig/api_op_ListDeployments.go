@@ -46,6 +46,8 @@ type ListDeploymentsInput struct {
 
 	// A token to start the list. Use this token to get the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDeploymentsOutput struct {
@@ -59,6 +61,8 @@ type ListDeploymentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDeploymentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -101,6 +101,8 @@ type GetPartitionsInput struct {
 
 	// The segment of the table's partitions to scan in this request.
 	Segment *types.Segment
+
+	noSmithyDocumentSerde
 }
 
 type GetPartitionsOutput struct {
@@ -114,6 +116,8 @@ type GetPartitionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPartitionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

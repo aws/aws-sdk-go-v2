@@ -53,6 +53,8 @@ type DescribeReplaceRootVolumeTasksInput struct {
 
 	// The ID of the root volume replacement task to view.
 	ReplaceRootVolumeTaskIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeReplaceRootVolumeTasksOutput struct {
@@ -66,6 +68,8 @@ type DescribeReplaceRootVolumeTasksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeReplaceRootVolumeTasksMiddlewares(stack *middleware.Stack, options Options) (err error) {

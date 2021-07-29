@@ -45,6 +45,8 @@ type EnableVpcClassicLinkInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type EnableVpcClassicLinkOutput struct {
@@ -54,6 +56,8 @@ type EnableVpcClassicLinkOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableVpcClassicLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

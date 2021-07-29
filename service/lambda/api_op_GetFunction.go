@@ -57,6 +57,8 @@ type GetFunctionInput struct {
 	// Specify a version or alias to get details about a published version of the
 	// function.
 	Qualifier *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFunctionOutput struct {
@@ -76,6 +78,8 @@ type GetFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

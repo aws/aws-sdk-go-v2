@@ -34,12 +34,16 @@ type DeleteRunInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a delete run request.
 type DeleteRunOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

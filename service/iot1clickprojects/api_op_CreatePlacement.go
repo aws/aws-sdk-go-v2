@@ -41,11 +41,15 @@ type CreatePlacementInput struct {
 	// Optional user-defined key/value pairs providing contextual data (such as
 	// location or function) for the placement.
 	Attributes map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePlacementOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePlacementMiddlewares(stack *middleware.Stack, options Options) (err error) {

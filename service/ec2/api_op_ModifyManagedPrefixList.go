@@ -54,6 +54,8 @@ type ModifyManagedPrefixListInput struct {
 
 	// One or more entries to remove from the prefix list.
 	RemoveEntries []types.RemovePrefixListEntry
+
+	noSmithyDocumentSerde
 }
 
 type ModifyManagedPrefixListOutput struct {
@@ -63,6 +65,8 @@ type ModifyManagedPrefixListOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyManagedPrefixListMiddlewares(stack *middleware.Stack, options Options) (err error) {

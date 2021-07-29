@@ -39,11 +39,15 @@ type DeleteOrganizationalUnitInput struct {
 	//
 	// This member is required.
 	OrganizationalUnitId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteOrganizationalUnitOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOrganizationalUnitMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -32,6 +33,8 @@ type Application struct {
 
 	// Key-value pairs you can use to associate with the application.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of a Service Catalog AppRegistry application.
@@ -56,6 +59,8 @@ type ApplicationSummary struct {
 	// The name of the application. The name must be unique in the region in which you
 	// are creating the application.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a Service Catalog AppRegistry attribute group that is rich metadata
@@ -85,6 +90,8 @@ type AttributeGroup struct {
 
 	// Key-value pairs you can use to associate with the attribute group.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of a Service Catalog AppRegistry attribute group.
@@ -110,6 +117,8 @@ type AttributeGroupSummary struct {
 
 	// The name of the attribute group.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the resource.
@@ -120,4 +129,8 @@ type ResourceInfo struct {
 
 	// The name of the resource.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

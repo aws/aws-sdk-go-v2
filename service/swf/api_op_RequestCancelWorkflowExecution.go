@@ -67,11 +67,15 @@ type RequestCancelWorkflowExecutionInput struct {
 
 	// The runId of the workflow execution to cancel.
 	RunId *string
+
+	noSmithyDocumentSerde
 }
 
 type RequestCancelWorkflowExecutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRequestCancelWorkflowExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

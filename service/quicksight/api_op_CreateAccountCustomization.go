@@ -67,6 +67,8 @@ type CreateAccountCustomizationInput struct {
 
 	// A list of the tags that you want to attach to this resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateAccountCustomizationOutput struct {
@@ -92,6 +94,8 @@ type CreateAccountCustomizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAccountCustomizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

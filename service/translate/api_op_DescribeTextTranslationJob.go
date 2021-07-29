@@ -36,6 +36,8 @@ type DescribeTextTranslationJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTextTranslationJobOutput struct {
@@ -46,6 +48,8 @@ type DescribeTextTranslationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTextTranslationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type CreateApiKeyInput struct {
 	// default value for this parameter is 7 days from creation time. For more
 	// information, see .
 	Expires int64
+
+	noSmithyDocumentSerde
 }
 
 type CreateApiKeyOutput struct {
@@ -52,6 +54,8 @@ type CreateApiKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApiKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -43,6 +43,8 @@ type DescribeOrganizationConformancePacksInput struct {
 
 	// The name that you assign to an organization conformance pack.
 	OrganizationConformancePackNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeOrganizationConformancePacksOutput struct {
@@ -56,6 +58,8 @@ type DescribeOrganizationConformancePacksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeOrganizationConformancePacksMiddlewares(stack *middleware.Stack, options Options) (err error) {

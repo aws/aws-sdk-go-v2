@@ -68,6 +68,8 @@ type CreateChangesetInput struct {
 
 	// Metadata tags to apply to this changeset.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateChangesetOutput struct {
@@ -77,6 +79,8 @@ type CreateChangesetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateChangesetMiddlewares(stack *middleware.Stack, options Options) (err error) {

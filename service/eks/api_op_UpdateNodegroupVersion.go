@@ -97,6 +97,8 @@ type UpdateNodegroupVersionInput struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/launch-templates.html) in the
 	// Amazon EKS User Guide.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateNodegroupVersionOutput struct {
@@ -106,6 +108,8 @@ type UpdateNodegroupVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateNodegroupVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

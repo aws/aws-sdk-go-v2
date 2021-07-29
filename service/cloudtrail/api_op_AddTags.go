@@ -45,6 +45,8 @@ type AddTagsInput struct {
 
 	// Contains a list of CloudTrail tags, up to a limit of 50
 	TagsList []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -52,6 +54,8 @@ type AddTagsInput struct {
 type AddTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

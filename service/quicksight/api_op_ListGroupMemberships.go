@@ -50,6 +50,8 @@ type ListGroupMembershipsInput struct {
 
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListGroupMembershipsOutput struct {
@@ -68,6 +70,8 @@ type ListGroupMembershipsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListGroupMembershipsMiddlewares(stack *middleware.Stack, options Options) (err error) {

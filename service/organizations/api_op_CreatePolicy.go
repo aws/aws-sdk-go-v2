@@ -83,6 +83,8 @@ type CreatePolicyInput struct {
 	// exceed the allowed number of tags for a policy, then the entire request fails
 	// and the policy is not created.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreatePolicyOutput struct {
@@ -92,6 +94,8 @@ type CreatePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

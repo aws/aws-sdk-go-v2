@@ -47,11 +47,15 @@ type UpdateLifecyclePolicyInput struct {
 
 	// The desired activation state of the lifecycle policy after creation.
 	State types.SettablePolicyStateValues
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLifecyclePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

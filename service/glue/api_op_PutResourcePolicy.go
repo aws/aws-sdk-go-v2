@@ -60,6 +60,8 @@ type PutResourcePolicyInput struct {
 
 	// Do not use. For internal use only.
 	ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutResourcePolicyOutput struct {
@@ -70,6 +72,8 @@ type PutResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

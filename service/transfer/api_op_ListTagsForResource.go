@@ -46,6 +46,8 @@ type ListTagsForResourceInput struct {
 	// NextToken parameter is returned in the input. You can then pass in a subsequent
 	// command to the NextToken parameter to continue listing additional tags.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTagsForResourceOutput struct {
@@ -64,6 +66,8 @@ type ListTagsForResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsForResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

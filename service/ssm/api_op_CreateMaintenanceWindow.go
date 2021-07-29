@@ -114,6 +114,8 @@ type CreateMaintenanceWindowInput struct {
 	// To add tags to an existing maintenance window,
 	// use the AddTagsToResource operation.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateMaintenanceWindowOutput struct {
@@ -123,6 +125,8 @@ type CreateMaintenanceWindowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMaintenanceWindowMiddlewares(stack *middleware.Stack, options Options) (err error) {

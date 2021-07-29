@@ -112,6 +112,8 @@ type GetProfileInput struct {
 	// 1:15:02 PM UTC. If you specify startTime, then you must also specify period or
 	// endTime, but not both.
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the getProfileResponse.
@@ -133,6 +135,8 @@ type GetProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

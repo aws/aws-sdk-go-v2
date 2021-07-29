@@ -49,6 +49,8 @@ type StartThingRegistrationTaskInput struct {
 	//
 	// This member is required.
 	TemplateBody *string
+
+	noSmithyDocumentSerde
 }
 
 type StartThingRegistrationTaskOutput struct {
@@ -58,6 +60,8 @@ type StartThingRegistrationTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartThingRegistrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

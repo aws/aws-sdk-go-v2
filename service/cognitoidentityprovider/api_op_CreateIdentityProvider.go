@@ -122,6 +122,8 @@ type CreateIdentityProviderInput struct {
 
 	// A list of identity provider identifiers.
 	IdpIdentifiers []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateIdentityProviderOutput struct {
@@ -133,6 +135,8 @@ type CreateIdentityProviderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateIdentityProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

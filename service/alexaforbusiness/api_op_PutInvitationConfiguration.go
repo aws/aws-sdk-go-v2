@@ -41,11 +41,15 @@ type PutInvitationConfigurationInput struct {
 	// The list of private skill IDs that you want to recommend to the user to enable
 	// in the invitation.
 	PrivateSkillIds []string
+
+	noSmithyDocumentSerde
 }
 
 type PutInvitationConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutInvitationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

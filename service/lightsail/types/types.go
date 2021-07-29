@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -33,6 +34,8 @@ type AccessKey struct {
 	// The status of the access key. A status of Active means that the key is valid,
 	// while Inactive means it is not.
 	Status StatusType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the anonymous access permissions for an Amazon Lightsail bucket and
@@ -65,6 +68,8 @@ type AccessRules struct {
 	// configured with a public-read ACL. Individual objects with a public-read ACL are
 	// readable by anyone in the world.
 	GetObject AccessType
+
+	noSmithyDocumentSerde
 }
 
 // Describes an add-on that is enabled for an Amazon Lightsail resource.
@@ -85,6 +90,8 @@ type AddOn struct {
 
 	// The status of the add-on.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a request to enable, modify, or disable an add-on for an Amazon
@@ -101,6 +108,8 @@ type AddOnRequest struct {
 	// An object that represents additional parameters when enabling or modifying the
 	// automatic snapshot add-on.
 	AutoSnapshotAddOnRequest *AutoSnapshotAddOnRequest
+
+	noSmithyDocumentSerde
 }
 
 // Describes an alarm. An alarm is a way to monitor your Lightsail resource
@@ -218,6 +227,8 @@ type Alarm struct {
 
 	// The unit of the metric associated with the alarm.
 	Unit MetricUnit
+
+	noSmithyDocumentSerde
 }
 
 // Describes a block storage disk that is attached to an instance, and is included
@@ -229,6 +240,8 @@ type AttachedDisk struct {
 
 	// The size of the disk in GB.
 	SizeInGb *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a request to enable or modify the automatic snapshot add-on for an
@@ -275,6 +288,8 @@ type AutoSnapshotAddOnRequest struct {
 	// * The snapshot will be automatically created between the
 	// time specified and up to 45 minutes after.
 	SnapshotTimeOfDay *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an automatic snapshot.
@@ -292,6 +307,8 @@ type AutoSnapshotDetails struct {
 
 	// The status of the automatic snapshot.
 	Status AutoSnapshotStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Availability Zone.
@@ -302,6 +319,8 @@ type AvailabilityZone struct {
 
 	// The name of the Availability Zone. The format is us-east-2a (case-sensitive).
 	ZoneName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a blueprint (a virtual private server image).
@@ -351,6 +370,8 @@ type Blueprint struct {
 
 	// The version code.
 	VersionCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Lightsail bucket.
@@ -423,6 +444,8 @@ type Bucket struct {
 
 	// The URL of the bucket.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the specifications of a bundle that can be applied to an Amazon
@@ -447,6 +470,8 @@ type BucketBundle struct {
 
 	// The monthly network transfer quota of the bundle.
 	TransferPerMonthInGb *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the state of an Amazon Lightsail bucket.
@@ -463,6 +488,8 @@ type BucketState struct {
 
 	// A message that describes the state of the bucket.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a bundle, which is a set of specs describing your virtual private
@@ -508,6 +535,8 @@ type Bundle struct {
 
 	// The data transfer rate per month in GB (e.g., 2000).
 	TransferPerMonthInGb *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the default cache behavior of an Amazon Lightsail content delivery
@@ -530,6 +559,8 @@ type CacheBehavior struct {
 	// websites or web applications that use cookies, headers, and query strings to
 	// personalize content for individual users.
 	Behavior BehaviorEnum
+
+	noSmithyDocumentSerde
 }
 
 // Describes the per-path cache behavior of an Amazon Lightsail content delivery
@@ -574,6 +605,8 @@ type CacheBehaviorPerPath struct {
 	// Specify the following to cache all files in the images sub-directory of the
 	// document root of an Apache web server. var/www/html/images/
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the cache settings of an Amazon Lightsail content delivery network
@@ -642,6 +675,8 @@ type CacheSettings struct {
 	// object has been updated. A value of 0 must be specified for minimumTTL if the
 	// distribution is configured to forward all headers to the origin.
 	MinimumTTL *int64
+
+	noSmithyDocumentSerde
 }
 
 // Describes the full details of an Amazon Lightsail SSL/TLS certificate. To get a
@@ -764,6 +799,8 @@ type Certificate struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Lightsail SSL/TLS certificate.
@@ -785,6 +822,8 @@ type CertificateSummary struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a CloudFormation stack record created as a result of the create cloud
@@ -820,6 +859,8 @@ type CloudFormationStackRecord struct {
 
 	// The current state of the CloudFormation stack record.
 	State RecordState
+
+	noSmithyDocumentSerde
 }
 
 // Describes the source of a CloudFormation stack record (i.e., the export snapshot
@@ -834,6 +875,8 @@ type CloudFormationStackRecordSourceInfo struct {
 
 	// The Lightsail resource type (e.g., ExportSnapshotRecord).
 	ResourceType CloudFormationStackRecordSourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes a contact method. A contact method is a way to send you notifications.
@@ -880,6 +923,8 @@ type ContactMethod struct {
 	// questions about your Lightsail contact method. This code enables our support
 	// team to look up your Lightsail information more easily.
 	SupportCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the settings of a container that will be launched, or that is
@@ -901,6 +946,8 @@ type Container struct {
 
 	// The open firewall ports of the container.
 	Ports map[string]ContainerServiceProtocol
+
+	noSmithyDocumentSerde
 }
 
 // Describes a container image that is registered to an Amazon Lightsail container
@@ -915,6 +962,8 @@ type ContainerImage struct {
 
 	// The name of the container image.
 	Image *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Lightsail container service.
@@ -1020,6 +1069,8 @@ type ContainerService struct {
 	// The publicly accessible URL of the container service. If no public endpoint is
 	// specified in the currentDeployment, this URL returns a 404 response.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a container deployment configuration of an Amazon Lightsail container
@@ -1056,6 +1107,8 @@ type ContainerServiceDeployment struct {
 
 	// The version number of the deployment.
 	Version *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a container deployment configuration of an Amazon Lightsail container
@@ -1068,6 +1121,8 @@ type ContainerServiceDeploymentRequest struct {
 
 	// An object that describes the endpoint of the deployment.
 	PublicEndpoint *EndpointRequest
+
+	noSmithyDocumentSerde
 }
 
 // Describes the public endpoint configuration of a deployment of an Amazon
@@ -1083,6 +1138,8 @@ type ContainerServiceEndpoint struct {
 
 	// An object that describes the health check configuration of the container.
 	HealthCheck *ContainerServiceHealthCheckConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes the health check configuration of an Amazon Lightsail container
@@ -1113,6 +1170,8 @@ type ContainerServiceHealthCheckConfig struct {
 	// The number of consecutive health check failures required before moving the
 	// container to the Unhealthy state. The default value is 2.
 	UnhealthyThreshold *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the log events of a container of an Amazon Lightsail container
@@ -1124,6 +1183,8 @@ type ContainerServiceLogEvent struct {
 
 	// The message of the container service log event.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the powers that can be specified for an Amazon Lightsail container
@@ -1149,6 +1210,8 @@ type ContainerServicePower struct {
 
 	// The amount of RAM (in GB) of the power.
 	RamSizeInGb *float32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the login information for the container image registry of an Amazon
@@ -1172,6 +1235,8 @@ type ContainerServiceRegistryLogin struct {
 	// The container service registry username to use to push container images to the
 	// container image registry of a Lightsail account.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the current state of a container service.
@@ -1220,6 +1285,8 @@ type ContainerServiceStateDetail struct {
 	// populated only when a container service is in a PENDING, DEPLOYING, or UPDATING
 	// state.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes whether an Amazon Lightsail content delivery network (CDN)
@@ -1235,6 +1302,8 @@ type CookieObject struct {
 	// behavior: all, none, or allow-list to forward only the cookies specified in the
 	// cookiesAllowList parameter.
 	Option ForwardValues
+
+	noSmithyDocumentSerde
 }
 
 // Describes the destination of a record.
@@ -1245,6 +1314,8 @@ type DestinationInfo struct {
 
 	// The destination service of the record.
 	Service *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a block storage disk.
@@ -1313,6 +1384,8 @@ type Disk struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a disk.
@@ -1330,6 +1403,8 @@ type DiskInfo struct {
 
 	// The size of the disk in GB (e.g., 32).
 	SizeInGb *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a block storage disk mapping.
@@ -1340,6 +1415,8 @@ type DiskMap struct {
 
 	// The original disk path exposed to the instance (for example, /dev/sdh).
 	OriginalDiskPath *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a block storage disk snapshot.
@@ -1397,6 +1474,8 @@ type DiskSnapshot struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a disk snapshot.
@@ -1404,6 +1483,8 @@ type DiskSnapshotInfo struct {
 
 	// The size of the disk in GB (e.g., 32).
 	SizeInGb *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the specifications of a distribution bundle.
@@ -1424,6 +1505,8 @@ type DistributionBundle struct {
 
 	// The monthly network transfer quota of the bundle.
 	TransferPerMonthInGb *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a domain where you are storing recordsets.
@@ -1457,6 +1540,8 @@ type Domain struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a domain recordset entry.
@@ -1510,6 +1595,8 @@ type DomainEntry struct {
 	//
 	// * TXT
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the domain validation records of an Amazon Lightsail SSL/TLS
@@ -1523,6 +1610,8 @@ type DomainValidationRecord struct {
 	// An object that describes the DNS records to add to your domain's DNS to validate
 	// it for the certificate.
 	ResourceRecord *ResourceRecord
+
+	noSmithyDocumentSerde
 }
 
 // Describes the settings of a public endpoint for an Amazon Lightsail container
@@ -1541,6 +1630,8 @@ type EndpointRequest struct {
 
 	// An object that describes the health check configuration of the container.
 	HealthCheck *ContainerServiceHealthCheckConfig
+
+	noSmithyDocumentSerde
 }
 
 // Describes an export snapshot record.
@@ -1570,6 +1661,8 @@ type ExportSnapshotRecord struct {
 
 	// The state of the export snapshot record.
 	State RecordState
+
+	noSmithyDocumentSerde
 }
 
 // Describes the source of an export snapshot record.
@@ -1598,6 +1691,8 @@ type ExportSnapshotRecordSourceInfo struct {
 
 	// The Lightsail resource type (e.g., InstanceSnapshot or DiskSnapshot).
 	ResourceType ExportSnapshotRecordSourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the request headers that a Lightsail distribution bases caching on.
@@ -1625,6 +1720,8 @@ type HeaderObject struct {
 	// * allow-list - Forward only the headers you specify using the
 	// headersAllowList parameter.
 	Option ForwardValues
+
+	noSmithyDocumentSerde
 }
 
 // Describes the public SSH host keys or the RDP certificate.
@@ -1669,6 +1766,8 @@ type HostKeyAttributes struct {
 
 	// The time that the SSH host key or RDP certificate was recorded by Lightsail.
 	WitnessedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the origin resource of an Amazon Lightsail content delivery network
@@ -1686,6 +1785,8 @@ type InputOrigin struct {
 
 	// The AWS Region name of the origin resource.
 	RegionName RegionName
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance (a virtual private server).
@@ -1762,6 +1863,8 @@ type Instance struct {
 
 	// The user name for connecting to the instance (e.g., ec2-user).
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // The parameters for gaining temporary access to one of your Amazon Lightsail
@@ -1811,6 +1914,8 @@ type InstanceAccessDetails struct {
 
 	// The user name to use when logging in to the Amazon Lightsail instance.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Amazon Elastic Compute Cloud instance and related resources to be
@@ -1874,6 +1979,8 @@ type InstanceEntry struct {
 	// Amazon Linux and CentOS use yum, Debian and Ubuntu use apt-get, and FreeBSD uses
 	// pkg.
 	UserData *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the hardware for the instance.
@@ -1887,6 +1994,8 @@ type InstanceHardware struct {
 
 	// The amount of RAM in GB on the instance (e.g., 1.0).
 	RamSizeInGb *float32
+
+	noSmithyDocumentSerde
 }
 
 // Describes information about the health of the instance.
@@ -1952,6 +2061,8 @@ type InstanceHealthSummary struct {
 	// The name of the Lightsail instance for which you are requesting health check
 	// data.
 	InstanceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes monthly data transfer rates and port information for an instance.
@@ -1963,6 +2074,8 @@ type InstanceNetworking struct {
 	// An array of key-value pairs containing information about the ports on the
 	// instance.
 	Ports []InstancePortInfo
+
+	noSmithyDocumentSerde
 }
 
 // Describes information about ports for an Amazon Lightsail instance.
@@ -2068,6 +2181,8 @@ type InstancePortInfo struct {
 	// information, see Internet Control Message Protocol for IPv6
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	ToPort int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes open ports on an instance, the IP addresses allowed to connect to the
@@ -2164,6 +2279,8 @@ type InstancePortState struct {
 	// information, see Internet Control Message Protocol for IPv6
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	ToPort int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance snapshot.
@@ -2227,6 +2344,8 @@ type InstanceSnapshot struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance snapshot.
@@ -2241,6 +2360,8 @@ type InstanceSnapshotInfo struct {
 	// A list of objects describing the disks that were attached to the source
 	// instance.
 	FromDiskInfo []DiskInfo
+
+	noSmithyDocumentSerde
 }
 
 // Describes the virtual private server (or instance) status.
@@ -2251,6 +2372,8 @@ type InstanceState struct {
 
 	// The state of the instance (e.g., running or pending).
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an SSH key pair.
@@ -2284,6 +2407,8 @@ type KeyPair struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Lightsail content delivery network (CDN) distribution.
@@ -2362,6 +2487,8 @@ type LightsailDistribution struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a load balancer.
@@ -2431,6 +2558,8 @@ type LoadBalancer struct {
 	// information about the SSL/TLS certificates. For example, if true, the
 	// certificate is attached to the load balancer.
 	TlsCertificateSummaries []LoadBalancerTlsCertificateSummary
+
+	noSmithyDocumentSerde
 }
 
 // Describes a load balancer SSL/TLS certificate. TLS is just an updated, more
@@ -2589,6 +2718,8 @@ type LoadBalancerTlsCertificate struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the domain names on an SSL/TLS certificate that you
@@ -2600,6 +2731,8 @@ type LoadBalancerTlsCertificateDomainValidationOption struct {
 
 	// The status of the domain validation. Valid values are listed below.
 	ValidationStatus LoadBalancerTlsCertificateDomainStatus
+
+	noSmithyDocumentSerde
 }
 
 // Describes the validation record of each domain name in the SSL/TLS certificate.
@@ -2619,6 +2752,8 @@ type LoadBalancerTlsCertificateDomainValidationRecord struct {
 
 	// The value for that type.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the status of Lightsail's managed renewal for the
@@ -2671,6 +2806,8 @@ type LoadBalancerTlsCertificateRenewalSummary struct {
 	// Lightsail did not renew the certificate. You can request a new certificate using
 	// the CreateCertificate action.
 	RenewalStatus LoadBalancerTlsCertificateRenewalStatus
+
+	noSmithyDocumentSerde
 }
 
 // Provides a summary of SSL/TLS certificate metadata.
@@ -2681,6 +2818,8 @@ type LoadBalancerTlsCertificateSummary struct {
 
 	// The name of the SSL/TLS certificate.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a database log event.
@@ -2691,6 +2830,8 @@ type LogEvent struct {
 
 	// The message of the database log event.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the metric data point.
@@ -2716,6 +2857,8 @@ type MetricDatapoint struct {
 
 	// The unit.
 	Unit MetricUnit
+
+	noSmithyDocumentSerde
 }
 
 // Describes resource being monitored by an alarm. An alarm is a way to monitor
@@ -2734,6 +2877,8 @@ type MonitoredResourceInfo struct {
 	// balancers, and relational databases are the only Lightsail resources that can
 	// currently be monitored by alarms.
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // Describes the monthly data transfer in and out of your virtual private server
@@ -2742,6 +2887,8 @@ type MonthlyTransfer struct {
 
 	// The amount allocated per month (in GB).
 	GbPerMonthAllocated *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the API operation.
@@ -2782,6 +2929,8 @@ type Operation struct {
 
 	// The timestamp when the status was changed (e.g., 1479816991.349).
 	StatusChangedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the origin resource of an Amazon Lightsail content delivery network
@@ -2802,6 +2951,8 @@ type Origin struct {
 
 	// The resource type of the origin resource (e.g., Instance).
 	ResourceType ResourceType
+
+	noSmithyDocumentSerde
 }
 
 // The password data for the Windows Server-based instance, including the
@@ -2826,6 +2977,8 @@ type PasswordData struct {
 	// Lightsail creates the ciphertext by encrypting your password with the public key
 	// part of this key pair.
 	KeyPairName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a pending database maintenance action.
@@ -2839,6 +2992,8 @@ type PendingMaintenanceAction struct {
 
 	// Additional detail about the pending database maintenance action.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a pending database value modification.
@@ -2852,6 +3007,8 @@ type PendingModifiedRelationalDatabaseValues struct {
 
 	// The password for the master user of the database.
 	MasterUserPassword *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes ports to open on an instance, the IP addresses allowed to connect to
@@ -2952,6 +3109,8 @@ type PortInfo struct {
 	// information, see Internet Control Message Protocol for IPv6
 	// (https://en.wikipedia.org/wiki/Internet_Control_Message_Protocol_for_IPv6).
 	ToPort int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the query string parameters that an Amazon Lightsail content delivery
@@ -2968,6 +3127,8 @@ type QueryStringObject struct {
 	// option parameter is true, then your distribution forwards all query strings,
 	// regardless of what you specify using the queryStringsAllowList parameter.
 	QueryStringsAllowList []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the AWS Region.
@@ -2992,6 +3153,8 @@ type Region struct {
 	// The Availability Zones for databases. Follows the format us-east-2a
 	// (case-sensitive).
 	RelationalDatabaseAvailabilityZones []AvailabilityZone
+
+	noSmithyDocumentSerde
 }
 
 // Describes a database.
@@ -3086,6 +3249,8 @@ type RelationalDatabase struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a database image, or blueprint. A blueprint describes the major engine
@@ -3110,6 +3275,8 @@ type RelationalDatabaseBlueprint struct {
 	// A Boolean value indicating whether the engine version is the default for the
 	// database blueprint.
 	IsEngineDefault *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes a database bundle. A bundle describes the performance specifications
@@ -3142,6 +3309,8 @@ type RelationalDatabaseBundle struct {
 
 	// The data transfer rate per month in GB for the database bundle.
 	TransferPerMonthInGb *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an endpoint for a database.
@@ -3152,6 +3321,8 @@ type RelationalDatabaseEndpoint struct {
 
 	// Specifies the port that the database is listening on.
 	Port *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an event for a database.
@@ -3168,6 +3339,8 @@ type RelationalDatabaseEvent struct {
 
 	// The database that the database event relates to.
 	Resource *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the hardware of a database.
@@ -3181,6 +3354,8 @@ type RelationalDatabaseHardware struct {
 
 	// The amount of RAM in GB for the database.
 	RamSizeInGb *float32
+
+	noSmithyDocumentSerde
 }
 
 // Describes the parameters of a database.
@@ -3210,6 +3385,8 @@ type RelationalDatabaseParameter struct {
 
 	// Specifies the value of the parameter.
 	ParameterValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a database snapshot.
@@ -3265,6 +3442,8 @@ type RelationalDatabaseSnapshot struct {
 	// tags in Lightsail, see the Amazon Lightsail Developer Guide
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-tags).
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of a SSL/TLS certificate renewal managed by Amazon
@@ -3302,6 +3481,8 @@ type RenewalSummary struct {
 
 	// The timestamp when the certificate was last updated.
 	UpdatedAt *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Describes the resource location.
@@ -3312,6 +3493,8 @@ type ResourceLocation struct {
 
 	// The AWS Region name.
 	RegionName RegionName
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Amazon Lightsail instance that has access to a Lightsail bucket.
@@ -3322,6 +3505,8 @@ type ResourceReceivingAccess struct {
 
 	// The Lightsail resource type (for example, Instance).
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the domain name system (DNS) records to add to your domain's DNS to
@@ -3336,6 +3521,8 @@ type ResourceRecord struct {
 
 	// The value for the DNS record.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a static IP.
@@ -3370,6 +3557,8 @@ type StaticIp struct {
 	// questions about an instance or another resource in Lightsail. This code enables
 	// our support team to look up your Lightsail information more easily.
 	SupportCode *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag key and optional value assigned to an Amazon Lightsail resource.
@@ -3385,4 +3574,8 @@ type Tag struct {
 	// The value of the tag. Constraints: Tag values accept a maximum of 256 letters,
 	// numbers, spaces in UTF-8, or the following characters: + - = . _ : / @
 	Value *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -47,6 +47,8 @@ type ListResourceDelegatesInput struct {
 
 	// The token used to paginate through the delegates associated with a resource.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResourceDelegatesOutput struct {
@@ -61,6 +63,8 @@ type ListResourceDelegatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResourceDelegatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

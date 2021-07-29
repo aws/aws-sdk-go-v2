@@ -38,6 +38,8 @@ type GetGroupInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGroupOutput struct {
@@ -47,6 +49,8 @@ type GetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

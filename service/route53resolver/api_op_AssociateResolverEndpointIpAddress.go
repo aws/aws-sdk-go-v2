@@ -44,6 +44,8 @@ type AssociateResolverEndpointIpAddressInput struct {
 	//
 	// This member is required.
 	ResolverEndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateResolverEndpointIpAddressOutput struct {
@@ -53,6 +55,8 @@ type AssociateResolverEndpointIpAddressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateResolverEndpointIpAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {

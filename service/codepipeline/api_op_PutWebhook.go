@@ -46,6 +46,8 @@ type PutWebhookInput struct {
 
 	// The tags for the webhook.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type PutWebhookOutput struct {
@@ -56,6 +58,8 @@ type PutWebhookOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutWebhookMiddlewares(stack *middleware.Stack, options Options) (err error) {

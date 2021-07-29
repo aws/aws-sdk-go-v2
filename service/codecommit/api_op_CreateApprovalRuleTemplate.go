@@ -82,6 +82,8 @@ type CreateApprovalRuleTemplateInput struct {
 	// that explains what this template does and when it might be appropriate to
 	// associate it with repositories.
 	ApprovalRuleTemplateDescription *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateApprovalRuleTemplateOutput struct {
@@ -93,6 +95,8 @@ type CreateApprovalRuleTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApprovalRuleTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

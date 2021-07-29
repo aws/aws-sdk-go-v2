@@ -77,6 +77,8 @@ type CreateCustomDataIdentifierInput struct {
 	// tag consists of a tag key and an associated tag value. The maximum length of a
 	// tag key is 128 characters. The maximum length of a tag value is 256 characters.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateCustomDataIdentifierOutput struct {
@@ -86,6 +88,8 @@ type CreateCustomDataIdentifierOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCustomDataIdentifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

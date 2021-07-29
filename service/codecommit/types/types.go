@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -14,6 +15,8 @@ type Approval struct {
 
 	// The Amazon Resource Name (ARN) of the user.
 	UserArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about an approval rule.
@@ -43,6 +46,8 @@ type ApprovalRule struct {
 
 	// The SHA-256 hash signature for the content of the approval rule.
 	RuleContentSha256 *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about an event for an approval rule.
@@ -56,6 +61,8 @@ type ApprovalRuleEventMetadata struct {
 
 	// The name of the approval rule.
 	ApprovalRuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about an override event for approval rules for a pull
@@ -67,6 +74,8 @@ type ApprovalRuleOverriddenEventMetadata struct {
 
 	// The revision ID of the pull request when the override event occurred.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about an approval rule template.
@@ -97,6 +106,8 @@ type ApprovalRuleTemplate struct {
 
 	// The SHA-256 hash signature for the content of the approval rule template.
 	RuleContentSha256 *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a change in the approval state for a pull request.
@@ -107,6 +118,8 @@ type ApprovalStateChangedEventMetadata struct {
 
 	// The revision ID of the pull request when the approval state changed.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about errors in a
@@ -123,6 +136,8 @@ type BatchAssociateApprovalRuleTemplateWithRepositoriesError struct {
 
 	// The name of the repository where the association was not made.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about errors in a BatchDescribeMergeConflicts operation.
@@ -142,6 +157,8 @@ type BatchDescribeMergeConflictsError struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about errors in a
@@ -159,6 +176,8 @@ type BatchDisassociateApprovalRuleTemplateFromRepositoriesError struct {
 	// The name of the repository where the association with the template was not able
 	// to be removed.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about errors in a BatchGetCommits operation.
@@ -173,6 +192,8 @@ type BatchGetCommitsError struct {
 	// An error message that provides detail about why the commit ID either was not
 	// found or was not valid.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a specific Git blob object.
@@ -196,6 +217,8 @@ type BlobMetadata struct {
 
 	// The path to the blob and associated file name, if any.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a branch.
@@ -206,6 +229,8 @@ type BranchInfo struct {
 
 	// The ID of the last commit made to the branch.
 	CommitId *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a specific comment.
@@ -245,6 +270,8 @@ type Comment struct {
 	// A string to integer map that represents the number of individual users who have
 	// responded to a comment with the specified reactions.
 	ReactionCounts map[string]int32
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about comments on the comparison between two commits.
@@ -273,6 +300,8 @@ type CommentsForComparedCommit struct {
 
 	// The name of the repository that contains the compared commits.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about comments on a pull request.
@@ -309,6 +338,8 @@ type CommentsForPullRequest struct {
 
 	// The name of the repository that contains the pull request.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a specific commit.
@@ -342,6 +373,8 @@ type Commit struct {
 
 	// Tree information for the specified commit.
 	TreeId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about conflicts in a merge operation.
@@ -353,6 +386,8 @@ type Conflict struct {
 	// A list of hunks that contain the differences between files or lines causing the
 	// conflict.
 	MergeHunks []MergeHunk
+
+	noSmithyDocumentSerde
 }
 
 // Information about the metadata for a conflict in a merge operation.
@@ -391,6 +426,8 @@ type ConflictMetadata struct {
 
 	// Information about any object type conflicts in a merge operation.
 	ObjectTypes *ObjectTypes
+
+	noSmithyDocumentSerde
 }
 
 // If AUTOMERGE is the conflict resolution strategy, a list of inputs to use when
@@ -405,6 +442,8 @@ type ConflictResolution struct {
 
 	// File modes that are set as part of the merge conflict resolution.
 	SetFileModes []SetFileModeEntry
+
+	noSmithyDocumentSerde
 }
 
 // A file that is deleted as part of a commit.
@@ -414,6 +453,8 @@ type DeleteFileEntry struct {
 	//
 	// This member is required.
 	FilePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a set of differences for a commit specifier.
@@ -430,6 +471,8 @@ type Difference struct {
 	// Whether the change type of the difference is an addition (A), deletion (D), or
 	// modification (M).
 	ChangeType ChangeTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the approval rules applied to a pull request and
@@ -448,6 +491,8 @@ type Evaluation struct {
 	// Whether the approval rule requirements for the pull request have been overridden
 	// and no longer need to be met.
 	Overridden bool
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a file in a repository.
@@ -465,6 +510,8 @@ type File struct {
 
 	// The relative path of the file from the folder where the query originated.
 	RelativePath *string
+
+	noSmithyDocumentSerde
 }
 
 // A file to be added, updated, or deleted as part of a commit.
@@ -480,6 +527,8 @@ type FileMetadata struct {
 	// The extrapolated file mode permissions for the file. Valid values include
 	// EXECUTABLE and NORMAL.
 	FileMode FileModeTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 // Information about file modes in a merge or pull request.
@@ -493,6 +542,8 @@ type FileModes struct {
 
 	// The file mode of a file in the source of a merge or pull request.
 	Source FileModeTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 // Information about the size of files in a merge or pull request.
@@ -506,6 +557,8 @@ type FileSizes struct {
 
 	// The size of a file in the source of a merge or pull request.
 	Source int64
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a folder in a repository.
@@ -521,6 +574,8 @@ type Folder struct {
 	// The full SHA-1 pointer of the tree information for the commit that contains the
 	// folder.
 	TreeId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about whether a file is binary or textual in a merge or pull request
@@ -538,6 +593,8 @@ type IsBinaryFile struct {
 	// The binary or non-binary status of file in the source of a merge or pull
 	// request.
 	Source *bool
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the location of a change or comment in the comparison
@@ -554,6 +611,8 @@ type Location struct {
 	// In a comparison of commits or a pull request, whether the change is in the
 	// before or after of that comparison.
 	RelativeFileVersion RelativeFileVersionEnum
+
+	noSmithyDocumentSerde
 }
 
 // Information about merge hunks in a merge or pull request operation.
@@ -575,6 +634,8 @@ type MergeHunk struct {
 
 	// Information about the merge hunk in the source of a merge or pull request.
 	Source *MergeHunkDetail
+
+	noSmithyDocumentSerde
 }
 
 // Information about the details of a merge hunk that contains a conflict in a
@@ -590,6 +651,8 @@ type MergeHunkDetail struct {
 
 	// The start position of the hunk in the merge result.
 	StartLine *int32
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a merge or potential merge between a source reference
@@ -607,6 +670,8 @@ type MergeMetadata struct {
 
 	// The Amazon Resource Name (ARN) of the user who merged the branches.
 	MergedBy *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the file operation conflicts in a merge operation.
@@ -618,6 +683,8 @@ type MergeOperations struct {
 	// The operation (add, modify, or delete) on a file in the source of a merge or
 	// pull request.
 	Source ChangeTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 // Information about the type of an object in a merge operation.
@@ -631,6 +698,8 @@ type ObjectTypes struct {
 
 	// The type of the object in the source branch.
 	Source ObjectTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the template that created the approval rule for a pull
@@ -642,6 +711,8 @@ type OriginApprovalRuleTemplate struct {
 
 	// The name of the template that created the approval rule.
 	ApprovalRuleTemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a pull request.
@@ -687,6 +758,8 @@ type PullRequest struct {
 	// The user-defined title of the pull request. This title is displayed in the list
 	// of pull requests to other repository users.
 	Title *string
+
+	noSmithyDocumentSerde
 }
 
 // Metadata about the pull request that is used when comparing the pull request
@@ -706,6 +779,8 @@ type PullRequestCreatedEventMetadata struct {
 
 	// The commit ID on the source branch used when the pull request was created.
 	SourceCommitId *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a pull request event.
@@ -747,6 +822,8 @@ type PullRequestEvent struct {
 
 	// Information about the change in status for the pull request event.
 	PullRequestStatusChangedEventMetadata *PullRequestStatusChangedEventMetadata
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about the change in the merge state for a pull request
@@ -761,6 +838,8 @@ type PullRequestMergedStateChangedEventMetadata struct {
 
 	// The name of the repository where the pull request was created.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an update to the source branch of a pull request.
@@ -780,6 +859,8 @@ type PullRequestSourceReferenceUpdatedEventMetadata struct {
 
 	// The name of the repository where the pull request was updated.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a change to the status of a pull request.
@@ -787,6 +868,8 @@ type PullRequestStatusChangedEventMetadata struct {
 
 	// The changed status of the pull request.
 	PullRequestStatus PullRequestStatusEnum
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a pull request target.
@@ -820,6 +903,8 @@ type PullRequestTarget struct {
 	// The branch of the repository that contains the changes for the pull request.
 	// Also known as the source branch.
 	SourceReference *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a file added or updated as part of a commit.
@@ -840,6 +925,8 @@ type PutFileEntry struct {
 	// The name and full path of the file that contains the changes you want to make as
 	// part of the commit, if you are not providing the file content directly.
 	SourceFile *SourceFileSpecifier
+
+	noSmithyDocumentSerde
 }
 
 // Information about the reaction values provided by users on a comment.
@@ -856,6 +943,8 @@ type ReactionForComment struct {
 	// have been subsequently deleted from IAM. While these IAM users or roles no
 	// longer exist, the reactions might still appear in total reaction counts.
 	ReactionsFromDeletedUsersCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the values for reactions to a comment. AWS CodeCommit supports
@@ -872,6 +961,8 @@ type ReactionValueFormats struct {
 
 	// The Unicode codepoint for the reaction.
 	Unicode *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a replacement content entry in the conflict of a merge or pull
@@ -893,6 +984,8 @@ type ReplaceContentEntry struct {
 
 	// The file mode to apply during conflict resoltion.
 	FileMode FileModeTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 // Information about a repository.
@@ -927,6 +1020,8 @@ type RepositoryMetadata struct {
 
 	// The repository's name.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a repository name and ID.
@@ -937,6 +1032,8 @@ type RepositoryNameIdPair struct {
 
 	// The name associated with the repository.
 	RepositoryName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a trigger for a repository.
@@ -968,6 +1065,8 @@ type RepositoryTrigger struct {
 	// Any custom data associated with the trigger to be included in the information
 	// sent to the target of the trigger.
 	CustomData *string
+
+	noSmithyDocumentSerde
 }
 
 // A trigger failed to run.
@@ -978,6 +1077,8 @@ type RepositoryTriggerExecutionFailure struct {
 
 	// The name of the trigger that did not run.
 	Trigger *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the file mode changes.
@@ -992,6 +1093,8 @@ type SetFileModeEntry struct {
 	//
 	// This member is required.
 	FilePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a source file that is part of changes made in a commit.
@@ -1004,6 +1107,8 @@ type SourceFileSpecifier struct {
 
 	// Whether to remove the source file from the parent commit.
 	IsMove bool
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a submodule reference in a repository folder.
@@ -1018,6 +1123,8 @@ type SubModule struct {
 
 	// The relative path of the submodule from the folder where the query originated.
 	RelativePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a symbolic link in a repository folder.
@@ -1036,6 +1143,8 @@ type SymbolicLink struct {
 	// The relative path of the symbolic link from the folder where the query
 	// originated.
 	RelativePath *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns information about a target for a pull request.
@@ -1055,6 +1164,8 @@ type Target struct {
 	// The branch of the repository where the pull request changes are merged. Also
 	// known as the destination branch.
 	DestinationReference *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the user who made a specified commit.
@@ -1069,4 +1180,8 @@ type UserInfo struct {
 
 	// The name of the user who made the specified commit.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

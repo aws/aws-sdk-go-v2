@@ -50,6 +50,8 @@ type ListFargateProfilesInput struct {
 	// parameter. Pagination continues from the end of the previous results that
 	// returned the nextToken value.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFargateProfilesOutput struct {
@@ -65,6 +67,8 @@ type ListFargateProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFargateProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

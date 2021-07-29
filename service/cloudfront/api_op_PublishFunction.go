@@ -45,6 +45,8 @@ type PublishFunctionInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type PublishFunctionOutput struct {
@@ -54,6 +56,8 @@ type PublishFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPublishFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

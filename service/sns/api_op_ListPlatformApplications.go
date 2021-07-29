@@ -43,6 +43,8 @@ type ListPlatformApplicationsInput struct {
 	// NextToken string is used when calling ListPlatformApplications action to
 	// retrieve additional records that are available after the first page results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // Response for ListPlatformApplications action.
@@ -57,6 +59,8 @@ type ListPlatformApplicationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPlatformApplicationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

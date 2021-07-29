@@ -46,6 +46,8 @@ type RegisterThingInput struct {
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/provision-template.html)
 	// for more information.
 	Parameters map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterThingOutput struct {
@@ -58,6 +60,8 @@ type RegisterThingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterThingMiddlewares(stack *middleware.Stack, options Options) (err error) {

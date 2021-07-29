@@ -35,6 +35,8 @@ type DescribeQuerySuggestionsConfigInput struct {
 	//
 	// This member is required.
 	IndexId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeQuerySuggestionsConfigOutput struct {
@@ -84,6 +86,8 @@ type DescribeQuerySuggestionsConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeQuerySuggestionsConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -54,6 +54,8 @@ type CreatePackagingConfigurationInput struct {
 
 	// A collection of tags associated with a resource
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreatePackagingConfigurationOutput struct {
@@ -84,6 +86,8 @@ type CreatePackagingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreatePackagingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

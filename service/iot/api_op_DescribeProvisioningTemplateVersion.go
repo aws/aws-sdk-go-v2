@@ -38,6 +38,8 @@ type DescribeProvisioningTemplateVersionInput struct {
 	//
 	// This member is required.
 	VersionId *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeProvisioningTemplateVersionOutput struct {
@@ -56,6 +58,8 @@ type DescribeProvisioningTemplateVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeProvisioningTemplateVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

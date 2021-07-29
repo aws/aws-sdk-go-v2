@@ -50,6 +50,8 @@ type UpdateServiceInput struct {
 	//
 	// This value conforms to the media type: application/yaml
 	Spec *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServiceOutput struct {
@@ -61,6 +63,8 @@ type UpdateServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

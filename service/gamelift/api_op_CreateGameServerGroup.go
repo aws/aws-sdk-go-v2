@@ -188,6 +188,8 @@ type CreateGameServerGroupInput struct {
 	// corresponding Auto Scaling group will always use the property value that is set
 	// with this request, even if the Auto Scaling group is updated directly.
 	VpcSubnets []string
+
+	noSmithyDocumentSerde
 }
 
 type CreateGameServerGroupOutput struct {
@@ -200,6 +202,8 @@ type CreateGameServerGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateGameServerGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

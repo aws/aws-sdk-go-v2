@@ -79,49 +79,49 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     @Override
     public Void blobShape(BlobShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        context.getWriter().write("$L.Base64EncodeBytes($L)", dataDest, source);
+        context.getWriter().get().write("$L.Base64EncodeBytes($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void booleanShape(BooleanShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        context.getWriter().write("$L.Boolean($L)", dataDest, source);
+        context.getWriter().get().write("$L.Boolean($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void byteShape(ByteShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        context.getWriter().write("$L.Byte($L)", dataDest, source);
+        context.getWriter().get().write("$L.Byte($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void shortShape(ShortShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        context.getWriter().write("$L.Short($L)", dataDest, source);
+        context.getWriter().get().write("$L.Short($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void integerShape(IntegerShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        context.getWriter().write("$L.Integer($L)", dataDest, source);
+        context.getWriter().get().write("$L.Integer($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void longShape(LongShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        context.getWriter().write("$L.Long($L)", dataDest, source);
+        context.getWriter().get().write("$L.Long($L)", dataDest, source);
         return null;
     }
 
     @Override
     public Void floatShape(FloatShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         handleDecimal(writer, dataDest, "float64(" + source + ")",
                 () -> writer.write("$L.Float($L)", dataDest, source));
         return null;
@@ -130,7 +130,7 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     @Override
     public Void doubleShape(DoubleShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         handleDecimal(writer, dataDest, source, () -> writer.write("$L.Double($L)", dataDest, source));
         return null;
     }
@@ -154,7 +154,7 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
     @Override
     public Void timestampShape(TimestampShape shape) {
         String source = CodegenUtils.getAsValueIfDereferencable(pointableIndex, member, dataSource);
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
         writer.addUseImports(SmithyGoDependency.SMITHY_TIME);
 
         switch (timestampFormat) {
@@ -179,7 +179,7 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
         if (shape.hasTrait(EnumTrait.class)) {
             source = String.format("string(%s)", source);
         }
-        context.getWriter().write("$L.String($L)", dataDest, source);
+        context.getWriter().get().write("$L.String($L)", dataDest, source);
         return null;
     }
 
@@ -260,7 +260,7 @@ public class DocumentMemberSerVisitor implements ShapeVisitor<Void> {
 
     private void writeDelegateFunction(Shape shape) {
         String serFunctionName = ProtocolGenerator.getDocumentSerializerFunctionName(shape, context.getService(), context.getProtocolName());
-        GoWriter writer = context.getWriter();
+        GoWriter writer = context.getWriter().get();
 
         ProtocolUtils.writeSerDelegateFunction(context, writer, member, dataSource, (srcVar) -> {
             writer.openBlock("if err := $L($L, $L); err != nil {", "}", serFunctionName, srcVar, dataDest,

@@ -35,6 +35,8 @@ type GetMapStyleDescriptorInput struct {
 	//
 	// This member is required.
 	MapName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetMapStyleDescriptorOutput struct {
@@ -47,6 +49,8 @@ type GetMapStyleDescriptorOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetMapStyleDescriptorMiddlewares(stack *middleware.Stack, options Options) (err error) {

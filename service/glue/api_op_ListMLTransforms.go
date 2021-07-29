@@ -49,6 +49,8 @@ type ListMLTransformsInput struct {
 
 	// Specifies to return only these tagged resources.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type ListMLTransformsOutput struct {
@@ -65,6 +67,8 @@ type ListMLTransformsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMLTransformsMiddlewares(stack *middleware.Stack, options Options) (err error) {

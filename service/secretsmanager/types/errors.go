@@ -11,6 +11,8 @@ import (
 // key.
 type DecryptionFailure struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DecryptionFailure) Error() string {
@@ -32,6 +34,8 @@ func (e *DecryptionFailure) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // (http://docs.aws.amazon.com/kms/latest/developerguide/key-state.html).
 type EncryptionFailure struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *EncryptionFailure) Error() string {
@@ -49,6 +53,8 @@ func (e *EncryptionFailure) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // An error occurred on the server side.
 type InternalServiceError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceError) Error() string {
@@ -66,6 +72,8 @@ func (e *InternalServiceError) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // You provided an invalid NextToken value.
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -83,6 +91,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 // You provided an invalid value for a parameter.
 type InvalidParameterException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidParameterException) Error() string {
@@ -108,6 +118,8 @@ func (e *InvalidParameterException) ErrorFault() smithy.ErrorFault { return smit
 // include such an ARN as a parameter in this call.
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -126,6 +138,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 // limits.
 type LimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitExceededException) Error() string {
@@ -143,6 +157,8 @@ func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.
 // You provided a resource-based policy with syntax errors.
 type MalformedPolicyDocumentException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MalformedPolicyDocumentException) Error() string {
@@ -162,6 +178,8 @@ func (e *MalformedPolicyDocumentException) ErrorFault() smithy.ErrorFault { retu
 // The request failed because you did not complete all the prerequisite steps.
 type PreconditionNotMetException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PreconditionNotMetException) Error() string {
@@ -180,6 +198,8 @@ func (e *PreconditionNotMetException) ErrorFault() smithy.ErrorFault { return sm
 // prevent broad access to the secret.
 type PublicPolicyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PublicPolicyException) Error() string {
@@ -197,6 +217,8 @@ func (e *PublicPolicyException) ErrorFault() smithy.ErrorFault { return smithy.F
 // A resource with the ID you requested already exists.
 type ResourceExistsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceExistsException) Error() string {
@@ -214,6 +236,8 @@ func (e *ResourceExistsException) ErrorFault() smithy.ErrorFault { return smithy
 // We can't find the resource that you asked for.
 type ResourceNotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

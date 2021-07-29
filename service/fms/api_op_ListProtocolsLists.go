@@ -48,6 +48,8 @@ type ListProtocolsListsInput struct {
 	// For all but the first request, you provide the token returned by the prior
 	// request in the request parameters, to retrieve the next batch of objects.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListProtocolsListsOutput struct {
@@ -63,6 +65,8 @@ type ListProtocolsListsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProtocolsListsMiddlewares(stack *middleware.Stack, options Options) (err error) {

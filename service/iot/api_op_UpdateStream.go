@@ -43,6 +43,8 @@ type UpdateStreamInput struct {
 	// An IAM role that allows the IoT service principal assumes to access your S3
 	// files.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateStreamOutput struct {
@@ -61,6 +63,8 @@ type UpdateStreamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateStreamMiddlewares(stack *middleware.Stack, options Options) (err error) {

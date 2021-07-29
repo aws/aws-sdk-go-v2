@@ -42,6 +42,8 @@ type RunPipelineActivityInput struct {
 	//
 	// This member is required.
 	PipelineActivity *types.PipelineActivity
+
+	noSmithyDocumentSerde
 }
 
 type RunPipelineActivityOutput struct {
@@ -56,6 +58,8 @@ type RunPipelineActivityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRunPipelineActivityMiddlewares(stack *middleware.Stack, options Options) (err error) {

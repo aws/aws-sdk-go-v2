@@ -39,6 +39,8 @@ type CancelQueryInput struct {
 	//
 	// This member is required.
 	QueryId *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelQueryOutput struct {
@@ -49,6 +51,8 @@ type CancelQueryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelQueryMiddlewares(stack *middleware.Stack, options Options) (err error) {

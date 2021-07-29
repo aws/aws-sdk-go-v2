@@ -39,11 +39,15 @@ type EnableLDAPSInput struct {
 	//
 	// This member is required.
 	Type types.LDAPSType
+
+	noSmithyDocumentSerde
 }
 
 type EnableLDAPSOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationEnableLDAPSMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -11,6 +11,8 @@ import (
 // same time that you did. Retry the request.
 type ConcurrentModification struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentModification) Error() string {
@@ -46,6 +48,8 @@ func (e *ConcurrentModification) ErrorFault() smithy.ErrorFault { return smithy.
 // associated with another hosted zone that has the same name.
 type ConflictingDomainExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictingDomainExists) Error() string {
@@ -66,6 +70,8 @@ func (e *ConflictingDomainExists) ErrorFault() smithy.ErrorFault { return smithy
 // CreateTrafficPolicyVersionrequest.
 type ConflictingTypes struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictingTypes) Error() string {
@@ -84,6 +90,8 @@ func (e *ConflictingTypes) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // already been created.
 type DelegationSetAlreadyCreated struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DelegationSetAlreadyCreated) Error() string {
@@ -101,6 +109,8 @@ func (e *DelegationSetAlreadyCreated) ErrorFault() smithy.ErrorFault { return sm
 // The specified delegation set has already been marked as reusable.
 type DelegationSetAlreadyReusable struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DelegationSetAlreadyReusable) Error() string {
@@ -119,6 +129,8 @@ func (e *DelegationSetAlreadyReusable) ErrorFault() smithy.ErrorFault { return s
 // before the reusable delegation set can be deleted.
 type DelegationSetInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DelegationSetInUse) Error() string {
@@ -140,6 +152,8 @@ func (e *DelegationSetInUse) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // Customer Support.
 type DelegationSetNotAvailable struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DelegationSetNotAvailable) Error() string {
@@ -157,6 +171,8 @@ func (e *DelegationSetNotAvailable) ErrorFault() smithy.ErrorFault { return smit
 // A reusable delegation set with the specified ID does not exist.
 type DelegationSetNotReusable struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DelegationSetNotReusable) Error() string {
@@ -174,6 +190,8 @@ func (e *DelegationSetNotReusable) ErrorFault() smithy.ErrorFault { return smith
 // The hosted zone doesn't have any DNSSEC resources.
 type DNSSECNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DNSSECNotFound) Error() string {
@@ -200,6 +218,8 @@ func (e *DNSSECNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 // created and later deleted, regardless of the other settings in the request.
 type HealthCheckAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HealthCheckAlreadyExists) Error() string {
@@ -217,6 +237,8 @@ func (e *HealthCheckAlreadyExists) ErrorFault() smithy.ErrorFault { return smith
 // This error code is not in use.
 type HealthCheckInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HealthCheckInUse) Error() string {
@@ -235,6 +257,8 @@ func (e *HealthCheckInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // HealthCheckVersion in the health check.
 type HealthCheckVersionMismatch struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HealthCheckVersionMismatch) Error() string {
@@ -254,6 +278,8 @@ func (e *HealthCheckVersionMismatch) ErrorFault() smithy.ErrorFault { return smi
 // CallerReference.
 type HostedZoneAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HostedZoneAlreadyExists) Error() string {
@@ -271,6 +297,8 @@ func (e *HostedZoneAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy
 // The hosted zone contains resource records that are not SOA or NS records.
 type HostedZoneNotEmpty struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HostedZoneNotEmpty) Error() string {
@@ -288,6 +316,8 @@ func (e *HostedZoneNotEmpty) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The specified HostedZone can't be found.
 type HostedZoneNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HostedZoneNotFound) Error() string {
@@ -305,6 +335,8 @@ func (e *HostedZoneNotFound) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The specified hosted zone is a public hosted zone, not a private hosted zone.
 type HostedZoneNotPrivate struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HostedZoneNotPrivate) Error() string {
@@ -323,6 +355,8 @@ func (e *HostedZoneNotPrivate) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // and parent must have the same nameservers.
 type HostedZonePartiallyDelegated struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *HostedZonePartiallyDelegated) Error() string {
@@ -341,6 +375,8 @@ func (e *HostedZonePartiallyDelegated) ErrorFault() smithy.ErrorFault { return s
 // endpoint.
 type IncompatibleVersion struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IncompatibleVersion) Error() string {
@@ -369,6 +405,8 @@ func (e *IncompatibleVersion) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // hasn't finished propagating yet.
 type InsufficientCloudWatchLogsResourcePolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InsufficientCloudWatchLogsResourcePolicy) Error() string {
@@ -390,6 +428,8 @@ func (e *InsufficientCloudWatchLogsResourcePolicy) ErrorFault() smithy.ErrorFaul
 // Parameter name is not valid.
 type InvalidArgument struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArgument) Error() string {
@@ -410,6 +450,8 @@ type InvalidChangeBatch struct {
 	Message *string
 
 	Messages []string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidChangeBatch) Error() string {
@@ -427,6 +469,8 @@ func (e *InvalidChangeBatch) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // The specified domain name is not valid.
 type InvalidDomainName struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDomainName) Error() string {
@@ -444,6 +488,8 @@ func (e *InvalidDomainName) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The input is not valid.
 type InvalidInput struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidInput) Error() string {
@@ -461,6 +507,8 @@ func (e *InvalidInput) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // The key-signing key (KSK) name that you specified isn't a valid name.
 type InvalidKeySigningKeyName struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKeySigningKeyName) Error() string {
@@ -479,6 +527,8 @@ func (e *InvalidKeySigningKeyName) ErrorFault() smithy.ErrorFault { return smith
 // INTERNAL_FAILURE.
 type InvalidKeySigningKeyStatus struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKeySigningKeyStatus) Error() string {
@@ -497,6 +547,8 @@ func (e *InvalidKeySigningKeyStatus) ErrorFault() smithy.ErrorFault { return smi
 // signing.
 type InvalidKMSArn struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidKMSArn) Error() string {
@@ -515,6 +567,8 @@ func (e *InvalidKMSArn) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // invalid.
 type InvalidPaginationToken struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidPaginationToken) Error() string {
@@ -533,6 +587,8 @@ func (e *InvalidPaginationToken) ErrorFault() smithy.ErrorFault { return smithy.
 // change the status to enable DNSSEC or disable DNSSEC.
 type InvalidSigningStatus struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidSigningStatus) Error() string {
@@ -551,6 +607,8 @@ func (e *InvalidSigningStatus) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // element is not valid.
 type InvalidTrafficPolicyDocument struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTrafficPolicyDocument) Error() string {
@@ -569,6 +627,8 @@ func (e *InvalidTrafficPolicyDocument) ErrorFault() smithy.ErrorFault { return s
 // not authorized to access this VPC.
 type InvalidVPCId struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidVPCId) Error() string {
@@ -587,6 +647,8 @@ func (e *InvalidVPCId) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // customer managed customer master key (CMK) ARN.
 type KeySigningKeyAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KeySigningKeyAlreadyExists) Error() string {
@@ -604,6 +666,8 @@ func (e *KeySigningKeyAlreadyExists) ErrorFault() smithy.ErrorFault { return smi
 // The key-signing key (KSK) is specified in a parent DS record.
 type KeySigningKeyInParentDSRecord struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KeySigningKeyInParentDSRecord) Error() string {
@@ -623,6 +687,8 @@ func (e *KeySigningKeyInParentDSRecord) ErrorFault() smithy.ErrorFault { return 
 // enable another KSK.
 type KeySigningKeyInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KeySigningKeyInUse) Error() string {
@@ -640,6 +706,8 @@ func (e *KeySigningKeyInUse) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // A key-signing key (KSK) with ACTIVE status wasn't found.
 type KeySigningKeyWithActiveStatusNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *KeySigningKeyWithActiveStatusNotFound) Error() string {
@@ -663,6 +731,8 @@ func (e *KeySigningKeyWithActiveStatusNotFound) ErrorFault() smithy.ErrorFault {
 // support disassociating the last VPC from a hosted zone.
 type LastVPCAssociation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LastVPCAssociation) Error() string {
@@ -690,6 +760,8 @@ func (e *LastVPCAssociation) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // with the AWS Support Center.
 type LimitsExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *LimitsExceeded) Error() string {
@@ -707,6 +779,8 @@ func (e *LimitsExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 // A change with the specified change ID does not exist.
 type NoSuchChange struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchChange) Error() string {
@@ -724,6 +798,8 @@ func (e *NoSuchChange) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // There is no CloudWatch Logs log group with the specified ARN.
 type NoSuchCloudWatchLogsLogGroup struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchCloudWatchLogsLogGroup) Error() string {
@@ -741,6 +817,8 @@ func (e *NoSuchCloudWatchLogsLogGroup) ErrorFault() smithy.ErrorFault { return s
 // A reusable delegation set with the specified ID does not exist.
 type NoSuchDelegationSet struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchDelegationSet) Error() string {
@@ -761,6 +839,8 @@ func (e *NoSuchDelegationSet) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // data type.
 type NoSuchGeoLocation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchGeoLocation) Error() string {
@@ -778,6 +858,8 @@ func (e *NoSuchGeoLocation) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // No health check exists with the specified ID.
 type NoSuchHealthCheck struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchHealthCheck) Error() string {
@@ -795,6 +877,8 @@ func (e *NoSuchHealthCheck) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // No hosted zone exists with the ID that you specified.
 type NoSuchHostedZone struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchHostedZone) Error() string {
@@ -812,6 +896,8 @@ func (e *NoSuchHostedZone) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // The specified key-signing key (KSK) doesn't exist.
 type NoSuchKeySigningKey struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchKeySigningKey) Error() string {
@@ -829,6 +915,8 @@ func (e *NoSuchKeySigningKey) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // There is no DNS query logging configuration with the specified ID.
 type NoSuchQueryLoggingConfig struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchQueryLoggingConfig) Error() string {
@@ -846,6 +934,8 @@ func (e *NoSuchQueryLoggingConfig) ErrorFault() smithy.ErrorFault { return smith
 // No traffic policy exists with the specified ID.
 type NoSuchTrafficPolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchTrafficPolicy) Error() string {
@@ -863,6 +953,8 @@ func (e *NoSuchTrafficPolicy) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // No traffic policy instance exists with the specified ID.
 type NoSuchTrafficPolicyInstance struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchTrafficPolicyInstance) Error() string {
@@ -881,6 +973,8 @@ func (e *NoSuchTrafficPolicyInstance) ErrorFault() smithy.ErrorFault { return sm
 // authorized.
 type NotAuthorizedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotAuthorizedException) Error() string {
@@ -902,6 +996,8 @@ func (e *NotAuthorizedException) ErrorFault() smithy.ErrorFault { return smithy.
 // you try the request again.
 type PriorRequestNotComplete struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PriorRequestNotComplete) Error() string {
@@ -920,6 +1016,8 @@ func (e *PriorRequestNotComplete) ErrorFault() smithy.ErrorFault { return smithy
 // doesn't support associating a VPC with a public hosted zone.
 type PublicZoneVPCAssociation struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PublicZoneVPCAssociation) Error() string {
@@ -938,6 +1036,8 @@ func (e *PublicZoneVPCAssociation) ErrorFault() smithy.ErrorFault { return smith
 // query logging configuration already exists for this hosted zone.
 type QueryLoggingConfigAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *QueryLoggingConfigAlreadyExists) Error() string {
@@ -957,6 +1057,8 @@ func (e *QueryLoggingConfigAlreadyExists) ErrorFault() smithy.ErrorFault { retur
 // The limit on the number of requests per second was exceeded.
 type ThrottlingException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -984,6 +1086,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // (http://aws.amazon.com/route53-request) with the AWS Support Center.
 type TooManyHealthChecks struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyHealthChecks) Error() string {
@@ -1013,6 +1117,8 @@ func (e *TooManyHealthChecks) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // with the AWS Support Center.
 type TooManyHostedZones struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyHostedZones) Error() string {
@@ -1031,6 +1137,8 @@ func (e *TooManyHostedZones) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // least one KSK, and then try again.
 type TooManyKeySigningKeys struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyKeySigningKeys) Error() string {
@@ -1056,6 +1164,8 @@ func (e *TooManyKeySigningKeys) ErrorFault() smithy.ErrorFault { return smithy.F
 // with the AWS Support Center.
 type TooManyTrafficPolicies struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTrafficPolicies) Error() string {
@@ -1081,6 +1191,8 @@ func (e *TooManyTrafficPolicies) ErrorFault() smithy.ErrorFault { return smithy.
 // with the AWS Support Center.
 type TooManyTrafficPolicyInstances struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTrafficPolicyInstances) Error() string {
@@ -1105,6 +1217,8 @@ func (e *TooManyTrafficPolicyInstances) ErrorFault() smithy.ErrorFault { return 
 // to create a new traffic policy using the traffic policy document.
 type TooManyTrafficPolicyVersionsForCurrentPolicy struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) Error() string {
@@ -1130,6 +1244,8 @@ func (e *TooManyTrafficPolicyVersionsForCurrentPolicy) ErrorFault() smithy.Error
 // ListVPCAssociationAuthorizations request.
 type TooManyVPCAssociationAuthorizations struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyVPCAssociationAuthorizations) Error() string {
@@ -1151,6 +1267,8 @@ func (e *TooManyVPCAssociationAuthorizations) ErrorFault() smithy.ErrorFault {
 // A traffic policy that has the same value for Name already exists.
 type TrafficPolicyAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrafficPolicyAlreadyExists) Error() string {
@@ -1168,6 +1286,8 @@ func (e *TrafficPolicyAlreadyExists) ErrorFault() smithy.ErrorFault { return smi
 // There is already a traffic policy instance with the specified ID.
 type TrafficPolicyInstanceAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrafficPolicyInstanceAlreadyExists) Error() string {
@@ -1190,6 +1310,8 @@ func (e *TrafficPolicyInstanceAlreadyExists) ErrorFault() smithy.ErrorFault {
 // policy.
 type TrafficPolicyInUse struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TrafficPolicyInUse) Error() string {
@@ -1208,6 +1330,8 @@ func (e *TrafficPolicyInUse) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // zone.
 type VPCAssociationAuthorizationNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *VPCAssociationAuthorizationNotFound) Error() string {
@@ -1229,6 +1353,8 @@ func (e *VPCAssociationAuthorizationNotFound) ErrorFault() smithy.ErrorFault {
 // The specified VPC and hosted zone are not currently associated.
 type VPCAssociationNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *VPCAssociationNotFound) Error() string {

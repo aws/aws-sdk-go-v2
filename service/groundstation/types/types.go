@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -11,6 +12,8 @@ type AntennaDemodDecodeDetails struct {
 
 	// Name of an antenna demod decode output node used in a contact.
 	OutputNode *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about how AWS Ground Station should configure an antenna for
@@ -21,6 +24,8 @@ type AntennaDownlinkConfig struct {
 	//
 	// This member is required.
 	SpectrumConfig *SpectrumConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about how AWS Ground Station should conﬁgure an antenna for downlink
@@ -41,6 +46,8 @@ type AntennaDownlinkDemodDecodeConfig struct {
 	//
 	// This member is required.
 	SpectrumConfig *SpectrumConfig
+
+	noSmithyDocumentSerde
 }
 
 // Information about the uplink Config of an antenna.
@@ -58,6 +65,8 @@ type AntennaUplinkConfig struct {
 
 	// Whether or not uplink transmit is disabled.
 	TransmitDisabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Details for certain Config object types in a contact.
@@ -73,6 +82,8 @@ type ConfigDetails interface {
 // Information about the endpoint details.
 type ConfigDetailsMemberEndpointDetails struct {
 	Value EndpointDetails
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigDetailsMemberEndpointDetails) isConfigDetails() {}
@@ -80,6 +91,8 @@ func (*ConfigDetailsMemberEndpointDetails) isConfigDetails() {}
 // Details for antenna demod decode Config in a contact.
 type ConfigDetailsMemberAntennaDemodDecodeDetails struct {
 	Value AntennaDemodDecodeDetails
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigDetailsMemberAntennaDemodDecodeDetails) isConfigDetails() {}
@@ -87,6 +100,8 @@ func (*ConfigDetailsMemberAntennaDemodDecodeDetails) isConfigDetails() {}
 // Details for an S3 recording Config in a contact.
 type ConfigDetailsMemberS3RecordingDetails struct {
 	Value S3RecordingDetails
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigDetailsMemberS3RecordingDetails) isConfigDetails() {}
@@ -105,6 +120,8 @@ type ConfigListItem struct {
 
 	// Name of a Config.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Object containing the parameters of a Config. See the subtype definitions for
@@ -126,6 +143,8 @@ type ConfigTypeData interface {
 // downlink during a contact.
 type ConfigTypeDataMemberAntennaDownlinkConfig struct {
 	Value AntennaDownlinkConfig
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigTypeDataMemberAntennaDownlinkConfig) isConfigTypeData() {}
@@ -134,6 +153,8 @@ func (*ConfigTypeDataMemberAntennaDownlinkConfig) isConfigTypeData() {}
 // with this Config in the mission profile.
 type ConfigTypeDataMemberTrackingConfig struct {
 	Value TrackingConfig
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
@@ -141,6 +162,8 @@ func (*ConfigTypeDataMemberTrackingConfig) isConfigTypeData() {}
 // Information about the dataflow endpoint Config.
 type ConfigTypeDataMemberDataflowEndpointConfig struct {
 	Value DataflowEndpointConfig
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
@@ -149,6 +172,8 @@ func (*ConfigTypeDataMemberDataflowEndpointConfig) isConfigTypeData() {}
 // demod decode during a contact.
 type ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig struct {
 	Value AntennaDownlinkDemodDecodeConfig
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig) isConfigTypeData() {}
@@ -157,6 +182,8 @@ func (*ConfigTypeDataMemberAntennaDownlinkDemodDecodeConfig) isConfigTypeData() 
 // during a contact.
 type ConfigTypeDataMemberAntennaUplinkConfig struct {
 	Value AntennaUplinkConfig
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigTypeDataMemberAntennaUplinkConfig) isConfigTypeData() {}
@@ -166,6 +193,8 @@ func (*ConfigTypeDataMemberAntennaUplinkConfig) isConfigTypeData() {}
 // used when this UplinkEchoConfig is used in a contact.
 type ConfigTypeDataMemberUplinkEchoConfig struct {
 	Value UplinkEchoConfig
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigTypeDataMemberUplinkEchoConfig) isConfigTypeData() {}
@@ -173,6 +202,8 @@ func (*ConfigTypeDataMemberUplinkEchoConfig) isConfigTypeData() {}
 // Information about an S3 recording Config.
 type ConfigTypeDataMemberS3RecordingConfig struct {
 	Value S3RecordingConfig
+
+	noSmithyDocumentSerde
 }
 
 func (*ConfigTypeDataMemberS3RecordingConfig) isConfigTypeData() {}
@@ -220,6 +251,8 @@ type ContactData struct {
 
 	// Tags assigned to a contact.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a dataflow edge used in a contact.
@@ -233,6 +266,8 @@ type DataflowDetail struct {
 
 	// Dataflow details for the source side.
 	Source *Source
+
+	noSmithyDocumentSerde
 }
 
 // Information about a dataflow endpoint.
@@ -249,6 +284,8 @@ type DataflowEndpoint struct {
 
 	// Status of a dataflow endpoint.
 	Status EndpointStatus
+
+	noSmithyDocumentSerde
 }
 
 // Information about the dataflow endpoint Config.
@@ -261,6 +298,8 @@ type DataflowEndpointConfig struct {
 
 	// Region of a dataflow endpoint.
 	DataflowEndpointRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Item in a list of DataflowEndpoint groups.
@@ -271,6 +310,8 @@ type DataflowEndpointListItem struct {
 
 	// UUID of a dataflow endpoint group.
 	DataflowEndpointGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the decode Config.
@@ -280,6 +321,8 @@ type DecodeConfig struct {
 	//
 	// This member is required.
 	UnvalidatedJSON *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the demodulation Config.
@@ -289,6 +332,8 @@ type DemodulationConfig struct {
 	//
 	// This member is required.
 	UnvalidatedJSON *string
+
+	noSmithyDocumentSerde
 }
 
 // Dataflow details for the destination side.
@@ -306,6 +351,8 @@ type Destination struct {
 
 	// Region of a dataflow destination.
 	DataflowDestinationRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Object that represents EIRP.
@@ -320,6 +367,8 @@ type Eirp struct {
 	//
 	// This member is required.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Elevation angle of the satellite in the sky during a contact.
@@ -334,6 +383,8 @@ type Elevation struct {
 	//
 	// This member is required.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about the endpoint details.
@@ -344,6 +395,8 @@ type EndpointDetails struct {
 
 	// Endpoint security details.
 	SecurityDetails *SecurityDetails
+
+	noSmithyDocumentSerde
 }
 
 // Object that describes the frequency.
@@ -359,6 +412,8 @@ type Frequency struct {
 	//
 	// This member is required.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Object that describes the frequency bandwidth.
@@ -383,6 +438,8 @@ type FrequencyBandwidth struct {
 	//
 	// This member is required.
 	Value *float64
+
+	noSmithyDocumentSerde
 }
 
 // Information about the ground station data.
@@ -396,6 +453,8 @@ type GroundStationData struct {
 
 	// Ground station Region.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Item in a list of mission profiles.
@@ -412,6 +471,8 @@ type MissionProfileListItem struct {
 
 	// Region of a mission profile.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an S3 recording Config.
@@ -429,6 +490,8 @@ type S3RecordingConfig struct {
 
 	// S3 Key prefix to prefice data files.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Details about an S3 recording Config used in a contact.
@@ -439,6 +502,8 @@ type S3RecordingDetails struct {
 
 	// Template of the S3 key used.
 	KeyTemplate *string
+
+	noSmithyDocumentSerde
 }
 
 // Item in a list of satellites.
@@ -455,6 +520,8 @@ type SatelliteListItem struct {
 
 	// UUID of a satellite.
 	SatelliteId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about endpoints.
@@ -475,6 +542,8 @@ type SecurityDetails struct {
 	//
 	// This member is required.
 	SubnetIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the socket address.
@@ -489,6 +558,8 @@ type SocketAddress struct {
 	//
 	// This member is required.
 	Port *int32
+
+	noSmithyDocumentSerde
 }
 
 // Dataflow details for the source side.
@@ -506,6 +577,8 @@ type Source struct {
 
 	// Region of a dataflow source.
 	DataflowSourceRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // Object that describes a spectral Config.
@@ -535,6 +608,8 @@ type SpectrumConfig struct {
 	// Polarization of a spectral Config. Capturing both "RIGHT_HAND" and "LEFT_HAND"
 	// polarization requires two separate configs.
 	Polarization Polarization
+
+	noSmithyDocumentSerde
 }
 
 // Object that determines whether tracking should be used during a contact executed
@@ -545,6 +620,8 @@ type TrackingConfig struct {
 	//
 	// This member is required.
 	Autotrack Criticality
+
+	noSmithyDocumentSerde
 }
 
 // Information about an uplink echo Config. Parameters from the
@@ -561,6 +638,8 @@ type UplinkEchoConfig struct {
 	//
 	// This member is required.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about the uplink spectral Config.
@@ -575,13 +654,19 @@ type UplinkSpectrumConfig struct {
 	// Polarization of an uplink spectral Config. Capturing both "RIGHT_HAND" and
 	// "LEFT_HAND" polarization requires two separate configs.
 	Polarization Polarization
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isConfigDetails()  {}

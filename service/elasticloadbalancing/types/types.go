@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -25,6 +26,8 @@ type AccessLog struct {
 	// my-bucket-prefix/prod. If the prefix is not provided, the log is placed at the
 	// root level of the bucket.
 	S3BucketPrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about additional load balancer attributes.
@@ -40,6 +43,8 @@ type AdditionalAttribute struct {
 
 	// This value of the attribute.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a policy for application-controlled session stickiness.
@@ -51,6 +56,8 @@ type AppCookieStickinessPolicy struct {
 	// The mnemonic name for the policy being created. The name must be unique within a
 	// set of policies for this load balancer.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the configuration of an EC2 instance.
@@ -61,6 +68,8 @@ type BackendServerDescription struct {
 
 	// The names of the policies enabled for the EC2 instance.
 	PolicyNames []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the ConnectionDraining attribute.
@@ -74,6 +83,8 @@ type ConnectionDraining struct {
 	// The maximum time, in seconds, to keep the existing connections open before
 	// deregistering the instances.
 	Timeout *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the ConnectionSettings attribute.
@@ -84,6 +95,8 @@ type ConnectionSettings struct {
 	//
 	// This member is required.
 	IdleTimeout *int32
+
+	noSmithyDocumentSerde
 }
 
 // Information about the CrossZoneLoadBalancing attribute.
@@ -93,6 +106,8 @@ type CrossZoneLoadBalancing struct {
 	//
 	// This member is required.
 	Enabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Information about a health check.
@@ -137,6 +152,8 @@ type HealthCheck struct {
 	//
 	// This member is required.
 	UnhealthyThreshold int32
+
+	noSmithyDocumentSerde
 }
 
 // The ID of an EC2 instance.
@@ -144,6 +161,8 @@ type Instance struct {
 
 	// The instance ID.
 	InstanceId *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the state of an EC2 instance.
@@ -196,6 +215,8 @@ type InstanceState struct {
 	// The current state of the instance. Valid values: InService | OutOfService |
 	// Unknown
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a policy for duration-based session stickiness.
@@ -209,6 +230,8 @@ type LBCookieStickinessPolicy struct {
 	// The name of the policy. This name must be unique within the set of policies for
 	// this load balancer.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Elastic Load Balancing resource limit for your AWS account.
@@ -226,6 +249,8 @@ type Limit struct {
 	//
 	// * classic-registered-instances
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a listener. For information about the protocols and the ports
@@ -265,6 +290,8 @@ type Listener struct {
 
 	// The Amazon Resource Name (ARN) of the server certificate.
 	SSLCertificateId *string
+
+	noSmithyDocumentSerde
 }
 
 // The policies enabled for a listener.
@@ -275,6 +302,8 @@ type ListenerDescription struct {
 
 	// The policies. If there are no policies enabled, the list is empty.
 	PolicyNames []string
+
+	noSmithyDocumentSerde
 }
 
 // The attributes for a load balancer.
@@ -312,6 +341,8 @@ type LoadBalancerAttributes struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/classic/enable-disable-crosszone-lb.html)
 	// in the Classic Load Balancers Guide.
 	CrossZoneLoadBalancing *CrossZoneLoadBalancing
+
+	noSmithyDocumentSerde
 }
 
 // Information about a load balancer.
@@ -374,6 +405,8 @@ type LoadBalancerDescription struct {
 
 	// The ID of the VPC for the load balancer.
 	VPCId *string
+
+	noSmithyDocumentSerde
 }
 
 // The policies for a load balancer.
@@ -387,6 +420,8 @@ type Policies struct {
 
 	// The policies other than the stickiness policies.
 	OtherPolicies []string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a policy attribute.
@@ -397,6 +432,8 @@ type PolicyAttribute struct {
 
 	// The value of the attribute.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a policy attribute.
@@ -407,6 +444,8 @@ type PolicyAttributeDescription struct {
 
 	// The value of the attribute.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a policy attribute type.
@@ -437,6 +476,8 @@ type PolicyAttributeTypeDescription struct {
 
 	// A description of the attribute.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a policy.
@@ -450,6 +491,8 @@ type PolicyDescription struct {
 
 	// The name of the policy type.
 	PolicyTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a policy type.
@@ -464,6 +507,8 @@ type PolicyTypeDescription struct {
 
 	// The name of the policy type.
 	PolicyTypeName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a source security group.
@@ -474,6 +519,8 @@ type SourceSecurityGroup struct {
 
 	// The owner of the security group.
 	OwnerAlias *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about a tag.
@@ -486,6 +533,8 @@ type Tag struct {
 
 	// The value of the tag.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The tags associated with a load balancer.
@@ -496,6 +545,8 @@ type TagDescription struct {
 
 	// The tags.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // The key of a tag.
@@ -503,4 +554,8 @@ type TagKeyOnly struct {
 
 	// The name of the key.
 	Key *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

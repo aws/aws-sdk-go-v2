@@ -34,11 +34,15 @@ type DeleteVpcLinkInput struct {
 	//
 	// This member is required.
 	VpcLinkId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVpcLinkOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVpcLinkMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -272,6 +272,8 @@ type CreateQueueInput struct {
 	// (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-customer-managed-policy-examples.html#grant-cross-account-permissions-to-role-and-user-name)
 	// in the Amazon SQS Developer Guide.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the QueueUrl attribute of the created queue.
@@ -282,6 +284,8 @@ type CreateQueueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

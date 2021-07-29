@@ -51,6 +51,8 @@ type ExecuteProvisionedProductPlanInput struct {
 	//
 	// * zh - Chinese
 	AcceptLanguage *string
+
+	noSmithyDocumentSerde
 }
 
 type ExecuteProvisionedProductPlanOutput struct {
@@ -60,6 +62,8 @@ type ExecuteProvisionedProductPlanOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExecuteProvisionedProductPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

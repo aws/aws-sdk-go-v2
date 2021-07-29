@@ -48,6 +48,8 @@ type DeleteBandwidthRateLimitInput struct {
 	//
 	// This member is required.
 	GatewayARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the gateway whose
@@ -60,6 +62,8 @@ type DeleteBandwidthRateLimitOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBandwidthRateLimitMiddlewares(stack *middleware.Stack, options Options) (err error) {

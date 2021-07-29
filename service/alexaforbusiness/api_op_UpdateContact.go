@@ -53,11 +53,15 @@ type UpdateContactInput struct {
 
 	// The list of SIP addresses for the contact.
 	SipAddresses []types.SipAddress
+
+	noSmithyDocumentSerde
 }
 
 type UpdateContactOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateContactMiddlewares(stack *middleware.Stack, options Options) (err error) {

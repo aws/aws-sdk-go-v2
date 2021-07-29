@@ -57,6 +57,8 @@ type ListCreateAccountStatusInput struct {
 	// A list of one or more states that you want included in the response. If this
 	// parameter isn't present, all requests are included in the response.
 	States []types.CreateAccountState
+
+	noSmithyDocumentSerde
 }
 
 type ListCreateAccountStatusOutput struct {
@@ -74,6 +76,8 @@ type ListCreateAccountStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListCreateAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

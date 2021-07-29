@@ -85,6 +85,8 @@ type CreateCampaignInput struct {
 
 	// The configuration details of a campaign.
 	CampaignConfig *types.CampaignConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateCampaignOutput struct {
@@ -94,6 +96,8 @@ type CreateCampaignOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCampaignMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -60,6 +60,8 @@ type DeleteFileSystemInput struct {
 	// The configuration object for the Microsoft Windows file system used in the
 	// DeleteFileSystem operation.
 	WindowsConfiguration *types.DeleteFileSystemWindowsConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The response object for the DeleteFileSystem operation.
@@ -81,6 +83,8 @@ type DeleteFileSystemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFileSystemMiddlewares(stack *middleware.Stack, options Options) (err error) {

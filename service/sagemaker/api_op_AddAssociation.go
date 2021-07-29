@@ -62,6 +62,8 @@ type AddAssociationInput struct {
 	// generated the destination. For example, a training job produced a model
 	// artifact.
 	AssociationType types.AssociationEdgeType
+
+	noSmithyDocumentSerde
 }
 
 type AddAssociationOutput struct {
@@ -74,6 +76,8 @@ type AddAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

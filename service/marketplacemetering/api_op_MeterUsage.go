@@ -68,6 +68,8 @@ type MeterUsageInput struct {
 
 	// Consumption value for the hour. Defaults to 0 if not specified.
 	UsageQuantity *int32
+
+	noSmithyDocumentSerde
 }
 
 type MeterUsageOutput struct {
@@ -77,6 +79,8 @@ type MeterUsageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationMeterUsageMiddlewares(stack *middleware.Stack, options Options) (err error) {

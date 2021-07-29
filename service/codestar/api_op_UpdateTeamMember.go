@@ -52,6 +52,8 @@ type UpdateTeamMemberInput struct {
 	// the user must associate a public key with their profile before the user can
 	// access resources.
 	RemoteAccessAllowed bool
+
+	noSmithyDocumentSerde
 }
 
 type UpdateTeamMemberOutput struct {
@@ -69,6 +71,8 @@ type UpdateTeamMemberOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTeamMemberMiddlewares(stack *middleware.Stack, options Options) (err error) {

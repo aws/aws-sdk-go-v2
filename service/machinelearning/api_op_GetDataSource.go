@@ -41,6 +41,8 @@ type GetDataSourceInput struct {
 	// Specifies whether the GetDataSource operation should return DataSourceSchema. If
 	// true, DataSourceSchema is returned. If false, DataSourceSchema is not returned.
 	Verbose bool
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a GetDataSource operation and describes a DataSource.
@@ -140,6 +142,8 @@ type GetDataSourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

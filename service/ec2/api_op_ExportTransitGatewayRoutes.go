@@ -81,6 +81,8 @@ type ExportTransitGatewayRoutesInput struct {
 	//
 	// * type - The type of route (propagated | static).
 	Filters []types.Filter
+
+	noSmithyDocumentSerde
 }
 
 type ExportTransitGatewayRoutesOutput struct {
@@ -91,6 +93,8 @@ type ExportTransitGatewayRoutesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportTransitGatewayRoutesMiddlewares(stack *middleware.Stack, options Options) (err error) {

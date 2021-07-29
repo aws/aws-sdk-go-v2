@@ -63,11 +63,15 @@ type ModifyNetworkInterfaceAttributeInput struct {
 	// if the instance runs services such as network address translation, routing, or
 	// firewalls.
 	SourceDestCheck *types.AttributeBooleanValue
+
+	noSmithyDocumentSerde
 }
 
 type ModifyNetworkInterfaceAttributeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyNetworkInterfaceAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

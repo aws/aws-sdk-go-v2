@@ -43,6 +43,8 @@ type DeleteRuleGroupInput struct {
 	// rules. This setting is required for requests that do not include the
 	// RuleGroupARN.
 	Type types.RuleGroupType
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRuleGroupOutput struct {
@@ -56,6 +58,8 @@ type DeleteRuleGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRuleGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

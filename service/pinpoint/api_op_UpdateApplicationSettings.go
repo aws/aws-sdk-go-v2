@@ -39,6 +39,8 @@ type UpdateApplicationSettingsInput struct {
 	//
 	// This member is required.
 	WriteApplicationSettingsRequest *types.WriteApplicationSettingsRequest
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApplicationSettingsOutput struct {
@@ -51,6 +53,8 @@ type UpdateApplicationSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApplicationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

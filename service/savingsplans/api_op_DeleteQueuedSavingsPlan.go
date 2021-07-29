@@ -32,11 +32,15 @@ type DeleteQueuedSavingsPlanInput struct {
 	//
 	// This member is required.
 	SavingsPlanId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteQueuedSavingsPlanOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteQueuedSavingsPlanMiddlewares(stack *middleware.Stack, options Options) (err error) {

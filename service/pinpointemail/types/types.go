@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -19,6 +20,8 @@ type BlacklistEntry struct {
 
 	// The name of the blacklist that the IP address appears on.
 	RblName *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the body of the email message.
@@ -33,6 +36,8 @@ type Body struct {
 	// clients that don't support HTML, or clients where the recipient has disabled
 	// HTML rendering.
 	Text *Content
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines an Amazon CloudWatch destination for email events. You
@@ -45,6 +50,8 @@ type CloudWatchDestination struct {
 	//
 	// This member is required.
 	DimensionConfigurations []CloudWatchDimensionConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the dimension configuration to use when you send Amazon
@@ -85,6 +92,8 @@ type CloudWatchDimensionConfiguration struct {
 	//
 	// This member is required.
 	DimensionValueSource DimensionValueSource
+
+	noSmithyDocumentSerde
 }
 
 // An object that represents the content of the email, and optionally a character
@@ -101,6 +110,8 @@ type Content struct {
 	// characters outside of the ASCII range, you have to specify a character set. For
 	// example, you could specify UTF-8, ISO-8859-1, or Shift_JIS.
 	Charset *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the volume of email sent on each day
@@ -117,6 +128,8 @@ type DailyVolume struct {
 	// An object that contains inbox placement metrics for a specific day in the
 	// analysis period.
 	VolumeStatistics *VolumeStatistics
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a dedicated IP address that is associated with your
@@ -148,6 +161,8 @@ type DedicatedIp struct {
 
 	// The name of the dedicated IP pool that the IP address is associated with.
 	PoolName *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains metadata related to a predictive inbox placement test.
@@ -176,6 +191,8 @@ type DeliverabilityTestReport struct {
 	// The subject line for an email that you submitted in a predictive inbox placement
 	// test.
 	Subject *string
+
+	noSmithyDocumentSerde
 }
 
 // Used to associate a configuration set with a dedicated IP pool.
@@ -191,6 +208,8 @@ type DeliveryOptions struct {
 	// messages can be delivered in plain text if a TLS connection can't be
 	// established.
 	TlsPolicy TlsPolicy
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes the recipients for an email.
@@ -206,6 +225,8 @@ type Destination struct {
 
 	// An array that contains the email addresses of the "To" recipients for the email.
 	ToAddresses []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the DKIM configuration for an email
@@ -247,6 +268,8 @@ type DkimAttributes struct {
 	// process is complete. Amazon Pinpoint usually detects these records within about
 	// 72 hours of adding them to the DNS configuration for your domain.
 	Tokens []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains the deliverability data for a specific campaign. This
@@ -310,6 +333,8 @@ type DomainDeliverabilityCampaign struct {
 
 	// The subject line, or title, of the email message.
 	Subject *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the Deliverability dashboard
@@ -330,6 +355,8 @@ type DomainDeliverabilityTrackingOption struct {
 	// The date, in Unix time format, when you enabled the Deliverability dashboard for
 	// the domain.
 	SubscriptionStartDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains inbox placement data for email sent from one of your
@@ -354,6 +381,8 @@ type DomainIspPlacement struct {
 	// The total number of messages that were sent from the selected domain to the
 	// specified email provider that arrived in recipients' spam or junk mail folders.
 	SpamRawCount *int64
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the entire content of the email, including the message
@@ -395,6 +424,8 @@ type EmailContent struct {
 
 	// The template to use for the email message.
 	Template *Template
+
+	noSmithyDocumentSerde
 }
 
 // In Amazon Pinpoint, events include message sends, deliveries, opens, clicks,
@@ -441,6 +472,8 @@ type EventDestination struct {
 	// An object that defines an Amazon SNS destination for email events. You can use
 	// Amazon SNS to send notification when certain email events occur.
 	SnsDestination *SnsDestination
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the event destination. Specifically, it defines which
@@ -478,6 +511,8 @@ type EventDestinationDefinition struct {
 	// An object that defines an Amazon SNS destination for email events. You can use
 	// Amazon SNS to send notification when certain email events occur.
 	SnsDestination *SnsDestination
+
+	noSmithyDocumentSerde
 }
 
 // Information about an email identity.
@@ -503,6 +538,8 @@ type IdentityInfo struct {
 	// the identity, and that you authorize Amazon Pinpoint to send email from that
 	// identity.
 	SendingEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the inbox placement data settings for
@@ -517,6 +554,8 @@ type InboxPlacementTrackingOption struct {
 	// An array of strings, one for each major email provider that the inbox placement
 	// data applies to.
 	TrackedIsps []string
+
+	noSmithyDocumentSerde
 }
 
 // An object that describes how email sent during the predictive inbox placement
@@ -528,6 +567,8 @@ type IspPlacement struct {
 
 	// An object that contains inbox placement metrics for a specific email provider.
 	PlacementStatistics *PlacementStatistics
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines an Amazon Kinesis Data Firehose destination for email
@@ -546,6 +587,8 @@ type KinesisFirehoseDestination struct {
 	//
 	// This member is required.
 	IamRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of attributes that are associated with a MAIL FROM domain.
@@ -585,6 +628,8 @@ type MailFromAttributes struct {
 	//
 	// This member is required.
 	MailFromDomainStatus MailFromDomainStatus
+
+	noSmithyDocumentSerde
 }
 
 // Represents the email message that you're sending. The Message object consists of
@@ -604,6 +649,8 @@ type Message struct {
 	//
 	// This member is required.
 	Subject *Content
+
+	noSmithyDocumentSerde
 }
 
 // Contains the name and value of a tag that you apply to an email. You can use
@@ -631,6 +678,8 @@ type MessageTag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about email that was sent from the selected
@@ -648,6 +697,8 @@ type OverallVolume struct {
 	// An object that contains information about the numbers of messages that arrived
 	// in recipients' inboxes and junk mail folders.
 	VolumeStatistics *VolumeStatistics
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines a Amazon Pinpoint destination for email events. You can
@@ -658,6 +709,8 @@ type PinpointDestination struct {
 	// The Amazon Resource Name (ARN) of the Amazon Pinpoint project that you want to
 	// send email events to.
 	ApplicationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains inbox placement data for an email provider.
@@ -682,6 +735,8 @@ type PlacementStatistics struct {
 	// The percentage of emails that were authenticated by using Sender Policy
 	// Framework (SPF) during the predictive inbox placement test.
 	SpfPercentage *float64
+
+	noSmithyDocumentSerde
 }
 
 // The raw email message.
@@ -714,6 +769,8 @@ type RawMessage struct {
 	//
 	// This member is required.
 	Data []byte
+
+	noSmithyDocumentSerde
 }
 
 // Enable or disable collection of reputation metrics for emails that you send
@@ -728,6 +785,8 @@ type ReputationOptions struct {
 	// If true, tracking of reputation metrics is enabled for the configuration set. If
 	// false, tracking of reputation metrics is disabled for the configuration set.
 	ReputationMetricsEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // Used to enable or disable email sending for messages that use this configuration
@@ -737,6 +796,8 @@ type SendingOptions struct {
 	// If true, email sending is enabled for the configuration set. If false, email
 	// sending is disabled for the configuration set.
 	SendingEnabled bool
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the per-day and per-second sending
@@ -755,6 +816,8 @@ type SendQuota struct {
 	// The number of emails sent from your Amazon Pinpoint account in the current AWS
 	// Region over the past 24 hours.
 	SentLast24Hours float64
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines an Amazon SNS destination for email events. You can use
@@ -768,6 +831,8 @@ type SnsDestination struct {
 	//
 	// This member is required.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the tags that are associated with a resource. A tag is a
@@ -813,6 +878,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 type Template struct {
@@ -825,6 +892,8 @@ type Template struct {
 	// the template. The corresponding value defines the value to use for that
 	// variable.
 	TemplateData *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that defines the tracking options for a configuration set. When you
@@ -840,6 +909,8 @@ type TrackingOptions struct {
 	//
 	// This member is required.
 	CustomRedirectDomain *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains information about the amount of email that was delivered
@@ -860,4 +931,8 @@ type VolumeStatistics struct {
 	// The total number of emails that arrived in recipients' spam or junk mail
 	// folders.
 	SpamRawCount *int64
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

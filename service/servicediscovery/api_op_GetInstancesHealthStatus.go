@@ -57,6 +57,8 @@ type GetInstancesHealthStatusInput struct {
 	// GetInstancesHealthStatus request to get the next group of results. Specify the
 	// value of NextToken from the previous response in the next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetInstancesHealthStatusOutput struct {
@@ -72,6 +74,8 @@ type GetInstancesHealthStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInstancesHealthStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

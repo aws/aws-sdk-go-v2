@@ -35,6 +35,8 @@ type DescribePortfolioShareStatusInput struct {
 	//
 	// This member is required.
 	PortfolioShareToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribePortfolioShareStatusOutput struct {
@@ -57,6 +59,8 @@ type DescribePortfolioShareStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePortfolioShareStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,6 +47,8 @@ type GetCertificatesInput struct {
 	// response. When omitted, the response includes only the certificate names, Amazon
 	// Resource Names (ARNs), domain names, and tags.
 	IncludeCertificateDetails bool
+
+	noSmithyDocumentSerde
 }
 
 type GetCertificatesOutput struct {
@@ -56,6 +58,8 @@ type GetCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

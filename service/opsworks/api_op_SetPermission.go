@@ -69,11 +69,15 @@ type SetPermissionInput struct {
 	// these levels, see Managing User Permissions
 	// (https://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html).
 	Level *string
+
+	noSmithyDocumentSerde
 }
 
 type SetPermissionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetPermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -91,6 +91,8 @@ type UpdateSecretVersionStageInput struct {
 	// attached and you either do not specify this parameter, or the version ID does
 	// not match, then the operation fails.
 	RemoveFromVersionId *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateSecretVersionStageOutput struct {
@@ -103,6 +105,8 @@ type UpdateSecretVersionStageOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSecretVersionStageMiddlewares(stack *middleware.Stack, options Options) (err error) {

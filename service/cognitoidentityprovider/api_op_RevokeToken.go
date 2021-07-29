@@ -43,11 +43,15 @@ type RevokeTokenInput struct {
 	// The secret for the client ID. This is required only if the client ID has a
 	// secret.
 	ClientSecret *string
+
+	noSmithyDocumentSerde
 }
 
 type RevokeTokenOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokeTokenMiddlewares(stack *middleware.Stack, options Options) (err error) {

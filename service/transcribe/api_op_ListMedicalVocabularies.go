@@ -48,6 +48,8 @@ type ListMedicalVocabulariesInput struct {
 	// specified vocabulary state. Use this field to see which vocabularies are ready
 	// for your medical transcription jobs.
 	StateEquals types.VocabularyState
+
+	noSmithyDocumentSerde
 }
 
 type ListMedicalVocabulariesOutput struct {
@@ -69,6 +71,8 @@ type ListMedicalVocabulariesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListMedicalVocabulariesMiddlewares(stack *middleware.Stack, options Options) (err error) {

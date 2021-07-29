@@ -46,6 +46,8 @@ type RegisterPublisherInput struct {
 	// (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs)
 	// in the CloudFormation CLI User Guide.
 	ConnectionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterPublisherOutput struct {
@@ -55,6 +57,8 @@ type RegisterPublisherOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterPublisherMiddlewares(stack *middleware.Stack, options Options) (err error) {

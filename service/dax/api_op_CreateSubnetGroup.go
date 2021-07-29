@@ -41,6 +41,8 @@ type CreateSubnetGroupInput struct {
 
 	// A description for the subnet group
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateSubnetGroupOutput struct {
@@ -50,6 +52,8 @@ type CreateSubnetGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSubnetGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

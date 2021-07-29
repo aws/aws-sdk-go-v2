@@ -39,6 +39,8 @@ type GetKeyGroupInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetKeyGroupOutput struct {
@@ -51,6 +53,8 @@ type GetKeyGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetKeyGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

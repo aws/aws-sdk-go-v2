@@ -32,6 +32,8 @@ type StopPHIDetectionJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopPHIDetectionJobOutput struct {
@@ -41,6 +43,8 @@ type StopPHIDetectionJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopPHIDetectionJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

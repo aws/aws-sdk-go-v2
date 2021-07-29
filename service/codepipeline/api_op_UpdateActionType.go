@@ -36,11 +36,15 @@ type UpdateActionTypeInput struct {
 	//
 	// This member is required.
 	ActionType *types.ActionTypeDeclaration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateActionTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateActionTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

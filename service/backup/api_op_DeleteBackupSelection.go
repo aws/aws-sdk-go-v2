@@ -39,11 +39,15 @@ type DeleteBackupSelectionInput struct {
 	//
 	// This member is required.
 	SelectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBackupSelectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBackupSelectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

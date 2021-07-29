@@ -34,6 +34,8 @@ type DeleteCollectionInput struct {
 	//
 	// This member is required.
 	CollectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCollectionOutput struct {
@@ -43,6 +45,8 @@ type DeleteCollectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCollectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -46,6 +46,8 @@ type DeleteNetworkInterfacePermissionInput struct {
 	// Specify true to remove the permission even if the network interface is attached
 	// to an instance.
 	Force *bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output for DeleteNetworkInterfacePermission.
@@ -56,6 +58,8 @@ type DeleteNetworkInterfacePermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNetworkInterfacePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

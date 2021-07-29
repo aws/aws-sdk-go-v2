@@ -64,11 +64,15 @@ type AssociateDRTRoleInput struct {
 	//
 	// This member is required.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateDRTRoleOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateDRTRoleMiddlewares(stack *middleware.Stack, options Options) (err error) {

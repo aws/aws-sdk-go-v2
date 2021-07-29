@@ -36,6 +36,8 @@ type ListParallelDataInput struct {
 	// A string that specifies the next page of results to return in a paginated
 	// response.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListParallelDataOutput struct {
@@ -49,6 +51,8 @@ type ListParallelDataOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListParallelDataMiddlewares(stack *middleware.Stack, options Options) (err error) {

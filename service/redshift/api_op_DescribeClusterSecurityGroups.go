@@ -78,6 +78,8 @@ type DescribeClusterSecurityGroupsInput struct {
 	// Redshift returns a response with the security groups that have either or both of
 	// these tag values associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -95,6 +97,8 @@ type DescribeClusterSecurityGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClusterSecurityGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

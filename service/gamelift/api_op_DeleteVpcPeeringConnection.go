@@ -52,11 +52,15 @@ type DeleteVpcPeeringConnectionInput struct {
 	//
 	// This member is required.
 	VpcPeeringConnectionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVpcPeeringConnectionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVpcPeeringConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

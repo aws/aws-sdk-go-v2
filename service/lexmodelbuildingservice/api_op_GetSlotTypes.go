@@ -53,6 +53,8 @@ type GetSlotTypesInput struct {
 	// response. To fetch next page of slot types, specify the pagination token in the
 	// next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSlotTypesOutput struct {
@@ -67,6 +69,8 @@ type GetSlotTypesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSlotTypesMiddlewares(stack *middleware.Stack, options Options) (err error) {

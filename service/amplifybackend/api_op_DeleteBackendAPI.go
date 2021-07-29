@@ -47,6 +47,8 @@ type DeleteBackendAPIInput struct {
 
 	// Defines the resource configuration for the data model in your Amplify project.
 	ResourceConfig *types.BackendAPIResourceConfig
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBackendAPIOutput struct {
@@ -71,6 +73,8 @@ type DeleteBackendAPIOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBackendAPIMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -16,6 +16,7 @@ import (
 	s3sharedconfig "github.com/aws/aws-sdk-go-v2/service/internal/s3shared/config"
 	s3cust "github.com/aws/aws-sdk-go-v2/service/s3/internal/customizations"
 	smithy "github.com/aws/smithy-go"
+	smithydocument "github.com/aws/smithy-go/document"
 	"github.com/aws/smithy-go/logging"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
@@ -172,6 +173,8 @@ func (c *Client) invokeOperation(ctx context.Context, opID string, params interf
 	}
 	return result, metadata, err
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 func resolveDefaultLogger(o *Options) {
 	if o.Logger != nil {

@@ -41,6 +41,8 @@ type SetIpAddressTypeInput struct {
 	//
 	// This member is required.
 	LoadBalancerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type SetIpAddressTypeOutput struct {
@@ -50,6 +52,8 @@ type SetIpAddressTypeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetIpAddressTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

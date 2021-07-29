@@ -48,6 +48,8 @@ type GetModelsInput struct {
 
 	// The next token for the subsequent request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetModelsOutput struct {
@@ -60,6 +62,8 @@ type GetModelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

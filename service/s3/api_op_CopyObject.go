@@ -383,6 +383,8 @@ type CopyObjectInput struct {
 	// another object in the same bucket or to an external URL. Amazon S3 stores the
 	// value of this header in the object metadata.
 	WebsiteRedirectLocation *string
+
+	noSmithyDocumentSerde
 }
 
 type CopyObjectOutput struct {
@@ -432,6 +434,8 @@ type CopyObjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopyObjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

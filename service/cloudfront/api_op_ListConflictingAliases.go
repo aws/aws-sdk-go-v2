@@ -71,6 +71,8 @@ type ListConflictingAliasesInput struct {
 
 	// The maximum number of conflicting aliases that you want in the response.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListConflictingAliasesOutput struct {
@@ -80,6 +82,8 @@ type ListConflictingAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListConflictingAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

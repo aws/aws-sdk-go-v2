@@ -34,6 +34,8 @@ type ListStudiosInput struct {
 
 	// The pagination token that indicates the set of results to retrieve.
 	Marker *string
+
+	noSmithyDocumentSerde
 }
 
 type ListStudiosOutput struct {
@@ -46,6 +48,8 @@ type ListStudiosOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListStudiosMiddlewares(stack *middleware.Stack, options Options) (err error) {

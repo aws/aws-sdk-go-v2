@@ -48,6 +48,8 @@ type GetAnswerInput struct {
 
 	// The milestone number. A workload can have a maximum of 100 milestones.
 	MilestoneNumber int32
+
+	noSmithyDocumentSerde
 }
 
 // Output of a get answer call.
@@ -68,6 +70,8 @@ type GetAnswerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAnswerMiddlewares(stack *middleware.Stack, options Options) (err error) {

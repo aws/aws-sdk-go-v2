@@ -31,6 +31,8 @@ type GetDataflowGraphInput struct {
 
 	// The Python script to transform.
 	PythonScript *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDataflowGraphOutput struct {
@@ -43,6 +45,8 @@ type GetDataflowGraphOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDataflowGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {

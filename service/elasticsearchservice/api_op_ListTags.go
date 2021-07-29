@@ -37,6 +37,8 @@ type ListTagsInput struct {
 	//
 	// This member is required.
 	ARN *string
+
+	noSmithyDocumentSerde
 }
 
 // The result of a ListTags operation. Contains tags for all requested
@@ -48,6 +50,8 @@ type ListTagsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTagsMiddlewares(stack *middleware.Stack, options Options) (err error) {

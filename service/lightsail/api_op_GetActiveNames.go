@@ -33,6 +33,8 @@ type GetActiveNamesInput struct {
 	// paginated, the response will return a next page token that you can specify as
 	// the page token in a subsequent request.
 	PageToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetActiveNamesOutput struct {
@@ -48,6 +50,8 @@ type GetActiveNamesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetActiveNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {

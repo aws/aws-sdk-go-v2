@@ -58,6 +58,8 @@ type ListVersionsByFunctionInput struct {
 	// returns a maximum of 50 items in each response, even if you set the number
 	// higher.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListVersionsByFunctionOutput struct {
@@ -70,6 +72,8 @@ type ListVersionsByFunctionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListVersionsByFunctionMiddlewares(stack *middleware.Stack, options Options) (err error) {

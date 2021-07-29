@@ -75,6 +75,8 @@ type DescribeNatGatewaysInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNatGatewaysOutput struct {
@@ -88,6 +90,8 @@ type DescribeNatGatewaysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNatGatewaysMiddlewares(stack *middleware.Stack, options Options) (err error) {

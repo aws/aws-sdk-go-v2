@@ -43,6 +43,8 @@ type ListTargetsInput struct {
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListTargetsOutput struct {
@@ -56,6 +58,8 @@ type ListTargetsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

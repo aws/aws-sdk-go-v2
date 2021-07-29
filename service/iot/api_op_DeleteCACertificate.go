@@ -34,12 +34,16 @@ type DeleteCACertificateInput struct {
 	//
 	// This member is required.
 	CertificateId *string
+
+	noSmithyDocumentSerde
 }
 
 // The output for the DeleteCACertificate operation.
 type DeleteCACertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCACertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

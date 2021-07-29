@@ -44,6 +44,8 @@ type DeleteBudgetActionInput struct {
 	//
 	// This member is required.
 	BudgetName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBudgetActionOutput struct {
@@ -66,6 +68,8 @@ type DeleteBudgetActionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBudgetActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type StopHumanLoopInput struct {
 	//
 	// This member is required.
 	HumanLoopName *string
+
+	noSmithyDocumentSerde
 }
 
 type StopHumanLoopOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopHumanLoopMiddlewares(stack *middleware.Stack, options Options) (err error) {

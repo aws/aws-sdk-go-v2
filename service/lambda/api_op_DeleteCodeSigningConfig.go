@@ -33,11 +33,15 @@ type DeleteCodeSigningConfigInput struct {
 	//
 	// This member is required.
 	CodeSigningConfigArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCodeSigningConfigOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCodeSigningConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

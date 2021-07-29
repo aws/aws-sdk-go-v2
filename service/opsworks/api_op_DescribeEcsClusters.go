@@ -57,6 +57,8 @@ type DescribeEcsClustersInput struct {
 	// A stack ID. DescribeEcsClusters returns a description of the cluster that is
 	// registered with the stack.
 	StackId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeEcsClusters request.
@@ -74,6 +76,8 @@ type DescribeEcsClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEcsClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

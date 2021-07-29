@@ -10,6 +10,8 @@ import (
 // This exception is thrown when an internal service error occurs.
 type MarketplaceCommerceAnalyticsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MarketplaceCommerceAnalyticsException) Error() string {

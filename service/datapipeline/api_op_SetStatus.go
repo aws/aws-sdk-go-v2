@@ -57,11 +57,15 @@ type SetStatusInput struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 type SetStatusOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

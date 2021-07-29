@@ -46,6 +46,8 @@ type DescribeAddonInput struct {
 	//
 	// This member is required.
 	ClusterName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAddonOutput struct {
@@ -55,6 +57,8 @@ type DescribeAddonOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {

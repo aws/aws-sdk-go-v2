@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -22,6 +23,8 @@ type DiscovererSummary struct {
 
 	// Tags associated with the resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type RegistrySummary struct {
@@ -34,6 +37,8 @@ type RegistrySummary struct {
 
 	// Tags associated with the registry.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of schema details.
@@ -53,6 +58,8 @@ type SchemaSummary struct {
 
 	// The number of versions available for the schema.
 	VersionCount int64
+
+	noSmithyDocumentSerde
 }
 
 type SchemaVersionSummary struct {
@@ -68,6 +75,8 @@ type SchemaVersionSummary struct {
 
 	// The type of schema.
 	Type Type
+
+	noSmithyDocumentSerde
 }
 
 type SearchSchemaSummary struct {
@@ -83,6 +92,8 @@ type SearchSchemaSummary struct {
 
 	// An array of schema version summaries.
 	SchemaVersions []SearchSchemaVersionSummary
+
+	noSmithyDocumentSerde
 }
 
 type SearchSchemaVersionSummary struct {
@@ -95,4 +106,8 @@ type SearchSchemaVersionSummary struct {
 
 	// The type of schema.
 	Type Type
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

@@ -115,6 +115,8 @@ type GetCostCategoriesInput struct {
 	// Supported values for SortOrder are ASCENDING or
 	// DESCENDING. When using SortBy, NextPageToken and SearchString are not supported.
 	SortBy []types.SortDefinition
+
+	noSmithyDocumentSerde
 }
 
 type GetCostCategoriesOutput struct {
@@ -143,6 +145,8 @@ type GetCostCategoriesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCostCategoriesMiddlewares(stack *middleware.Stack, options Options) (err error) {

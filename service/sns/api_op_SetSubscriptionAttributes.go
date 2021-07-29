@@ -81,11 +81,15 @@ type SetSubscriptionAttributesInput struct {
 
 	// The new value for the attribute in JSON format.
 	AttributeValue *string
+
+	noSmithyDocumentSerde
 }
 
 type SetSubscriptionAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetSubscriptionAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

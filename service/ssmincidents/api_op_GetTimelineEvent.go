@@ -40,6 +40,8 @@ type GetTimelineEventInput struct {
 	//
 	// This member is required.
 	IncidentRecordArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTimelineEventOutput struct {
@@ -51,6 +53,8 @@ type GetTimelineEventOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTimelineEventMiddlewares(stack *middleware.Stack, options Options) (err error) {

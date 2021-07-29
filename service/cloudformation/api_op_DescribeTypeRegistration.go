@@ -44,6 +44,8 @@ type DescribeTypeRegistrationInput struct {
 	//
 	// This member is required.
 	RegistrationToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeTypeRegistrationOutput struct {
@@ -66,6 +68,8 @@ type DescribeTypeRegistrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTypeRegistrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

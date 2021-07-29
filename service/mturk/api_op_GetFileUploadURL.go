@@ -49,6 +49,8 @@ type GetFileUploadURLInput struct {
 	//
 	// This member is required.
 	QuestionIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFileUploadURLOutput struct {
@@ -58,6 +60,8 @@ type GetFileUploadURLOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFileUploadURLMiddlewares(stack *middleware.Stack, options Options) (err error) {

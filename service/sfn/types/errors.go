@@ -10,6 +10,8 @@ import (
 // The specified activity does not exist.
 type ActivityDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActivityDoesNotExist) Error() string {
@@ -28,6 +30,8 @@ func (e *ActivityDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // deleted before a new activity can be created.
 type ActivityLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActivityLimitExceeded) Error() string {
@@ -46,6 +50,8 @@ func (e *ActivityLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.F
 // reached.
 type ActivityWorkerLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ActivityWorkerLimitExceeded) Error() string {
@@ -64,6 +70,8 @@ func (e *ActivityWorkerLimitExceeded) ErrorFault() smithy.ErrorFault { return sm
 // Executions with the same name and input are considered idempotent.
 type ExecutionAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExecutionAlreadyExists) Error() string {
@@ -81,6 +89,8 @@ func (e *ExecutionAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.
 // The specified execution does not exist.
 type ExecutionDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExecutionDoesNotExist) Error() string {
@@ -99,6 +109,8 @@ func (e *ExecutionDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.F
 // must end or be stopped before a new execution can be started.
 type ExecutionLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ExecutionLimitExceeded) Error() string {
@@ -116,6 +128,8 @@ func (e *ExecutionLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.
 // The provided Amazon Resource Name (ARN) is invalid.
 type InvalidArn struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidArn) Error() string {
@@ -133,6 +147,8 @@ func (e *InvalidArn) ErrorFault() smithy.ErrorFault { return smithy.FaultClient 
 // The provided Amazon States Language definition is invalid.
 type InvalidDefinition struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidDefinition) Error() string {
@@ -150,6 +166,8 @@ func (e *InvalidDefinition) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // The provided JSON input data is invalid.
 type InvalidExecutionInput struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidExecutionInput) Error() string {
@@ -167,6 +185,8 @@ func (e *InvalidExecutionInput) ErrorFault() smithy.ErrorFault { return smithy.F
 //
 type InvalidLoggingConfiguration struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidLoggingConfiguration) Error() string {
@@ -184,6 +204,8 @@ func (e *InvalidLoggingConfiguration) ErrorFault() smithy.ErrorFault { return sm
 // The provided name is invalid.
 type InvalidName struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidName) Error() string {
@@ -201,6 +223,8 @@ func (e *InvalidName) ErrorFault() smithy.ErrorFault { return smithy.FaultClient
 // The provided JSON output data is invalid.
 type InvalidOutput struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidOutput) Error() string {
@@ -218,6 +242,8 @@ func (e *InvalidOutput) ErrorFault() smithy.ErrorFault { return smithy.FaultClie
 // The provided token is invalid.
 type InvalidToken struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidToken) Error() string {
@@ -236,6 +262,8 @@ func (e *InvalidToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClien
 // true or false.
 type InvalidTracingConfiguration struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidTracingConfiguration) Error() string {
@@ -254,6 +282,8 @@ func (e *InvalidTracingConfiguration) ErrorFault() smithy.ErrorFault { return sm
 // and roleArn are not specified.
 type MissingRequiredParameter struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *MissingRequiredParameter) Error() string {
@@ -274,6 +304,8 @@ type ResourceNotFound struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFound) Error() string {
@@ -292,6 +324,8 @@ func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 // already exists.
 type StateMachineAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StateMachineAlreadyExists) Error() string {
@@ -309,6 +343,8 @@ func (e *StateMachineAlreadyExists) ErrorFault() smithy.ErrorFault { return smit
 // The specified state machine is being deleted.
 type StateMachineDeleting struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StateMachineDeleting) Error() string {
@@ -326,6 +362,8 @@ func (e *StateMachineDeleting) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // The specified state machine does not exist.
 type StateMachineDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StateMachineDoesNotExist) Error() string {
@@ -344,6 +382,8 @@ func (e *StateMachineDoesNotExist) ErrorFault() smithy.ErrorFault { return smith
 // must be deleted before a new state machine can be created.
 type StateMachineLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StateMachineLimitExceeded) Error() string {
@@ -361,6 +401,8 @@ func (e *StateMachineLimitExceeded) ErrorFault() smithy.ErrorFault { return smit
 //
 type StateMachineTypeNotSupported struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *StateMachineTypeNotSupported) Error() string {
@@ -377,6 +419,8 @@ func (e *StateMachineTypeNotSupported) ErrorFault() smithy.ErrorFault { return s
 
 type TaskDoesNotExist struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TaskDoesNotExist) Error() string {
@@ -393,6 +437,8 @@ func (e *TaskDoesNotExist) ErrorFault() smithy.ErrorFault { return smithy.FaultC
 
 type TaskTimedOut struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TaskTimedOut) Error() string {
@@ -414,6 +460,8 @@ type TooManyTags struct {
 	Message *string
 
 	ResourceName *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTags) Error() string {

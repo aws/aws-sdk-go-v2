@@ -58,11 +58,15 @@ type PutStorageLensConfigurationInput struct {
 	// The tag set of the S3 Storage Lens configuration. You can set up to a maximum of
 	// 50 tags.
 	Tags []types.StorageLensTag
+
+	noSmithyDocumentSerde
 }
 
 type PutStorageLensConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutStorageLensConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

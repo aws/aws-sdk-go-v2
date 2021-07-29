@@ -50,6 +50,8 @@ type GetUsageStatisticsInput struct {
 	// the preceding 30 days. If you don't specify a value, Amazon Macie provides usage
 	// data for the preceding 30 days.
 	TimeRange types.TimeRange
+
+	noSmithyDocumentSerde
 }
 
 type GetUsageStatisticsOutput struct {
@@ -69,6 +71,8 @@ type GetUsageStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetUsageStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -110,11 +110,15 @@ type UpdatePrimaryRegionInput struct {
 	//
 	// This member is required.
 	PrimaryRegion *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdatePrimaryRegionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdatePrimaryRegionMiddlewares(stack *middleware.Stack, options Options) (err error) {

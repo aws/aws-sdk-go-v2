@@ -27,6 +27,8 @@ func (c *Client) HttpEnumPayload(ctx context.Context, params *HttpEnumPayloadInp
 
 type HttpEnumPayloadInput struct {
 	Payload types.StringEnum
+
+	noSmithyDocumentSerde
 }
 
 type HttpEnumPayloadOutput struct {
@@ -34,6 +36,8 @@ type HttpEnumPayloadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationHttpEnumPayloadMiddlewares(stack *middleware.Stack, options Options) (err error) {

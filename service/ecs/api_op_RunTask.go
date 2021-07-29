@@ -189,6 +189,8 @@ type RunTaskInput struct {
 	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
 	// do not count against your tags per resource limit.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type RunTaskOutput struct {
@@ -202,6 +204,8 @@ type RunTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRunTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

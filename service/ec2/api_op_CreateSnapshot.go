@@ -97,6 +97,8 @@ type CreateSnapshotInput struct {
 
 	// The tags to apply to the snapshot during creation.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Describes a snapshot.
@@ -167,6 +169,8 @@ type CreateSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

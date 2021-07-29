@@ -96,6 +96,8 @@ type CreateModelInput struct {
 	// in Batch Transform Jobs by Using an Amazon Virtual Private Cloud
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/batch-vpc.html).
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateModelOutput struct {
@@ -107,6 +109,8 @@ type CreateModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

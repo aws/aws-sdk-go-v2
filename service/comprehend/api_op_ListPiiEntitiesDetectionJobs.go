@@ -39,6 +39,8 @@ type ListPiiEntitiesDetectionJobsInput struct {
 
 	// Identifies the next page of results to return.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPiiEntitiesDetectionJobsOutput struct {
@@ -51,6 +53,8 @@ type ListPiiEntitiesDetectionJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPiiEntitiesDetectionJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

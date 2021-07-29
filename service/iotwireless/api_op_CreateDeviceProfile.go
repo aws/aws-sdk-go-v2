@@ -45,6 +45,8 @@ type CreateDeviceProfileInput struct {
 	// The tags to attach to the new device profile. Tags are metadata that you can use
 	// to manage a resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeviceProfileOutput struct {
@@ -57,6 +59,8 @@ type CreateDeviceProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeviceProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

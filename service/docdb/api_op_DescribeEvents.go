@@ -90,6 +90,8 @@ type DescribeEventsInput struct {
 	// The beginning of the time interval to retrieve events for, specified in ISO 8601
 	// format. Example: 2009-07-08T18:00Z
 	StartTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of DescribeEvents.
@@ -105,6 +107,8 @@ type DescribeEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

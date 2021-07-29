@@ -34,6 +34,8 @@ type GetVocabularyFilterInput struct {
 	//
 	// This member is required.
 	VocabularyFilterName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetVocabularyFilterOutput struct {
@@ -53,6 +55,8 @@ type GetVocabularyFilterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetVocabularyFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

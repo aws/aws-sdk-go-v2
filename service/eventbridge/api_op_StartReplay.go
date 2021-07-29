@@ -68,6 +68,8 @@ type StartReplayInput struct {
 
 	// A description for the replay to start.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type StartReplayOutput struct {
@@ -86,6 +88,8 @@ type StartReplayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartReplayMiddlewares(stack *middleware.Stack, options Options) (err error) {

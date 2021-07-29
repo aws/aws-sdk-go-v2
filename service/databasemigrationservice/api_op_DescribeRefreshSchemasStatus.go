@@ -34,6 +34,8 @@ type DescribeRefreshSchemasStatusInput struct {
 	//
 	// This member is required.
 	EndpointArn *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -44,6 +46,8 @@ type DescribeRefreshSchemasStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRefreshSchemasStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

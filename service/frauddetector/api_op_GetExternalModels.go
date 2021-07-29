@@ -43,6 +43,8 @@ type GetExternalModelsInput struct {
 
 	// The next page token for the request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetExternalModelsOutput struct {
@@ -55,6 +57,8 @@ type GetExternalModelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetExternalModelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

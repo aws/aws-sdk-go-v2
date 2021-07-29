@@ -97,6 +97,8 @@ type CreateFargateProfileInput struct {
 	// associated with the Fargate profile, such as the pods that are scheduled with
 	// it.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateFargateProfileOutput struct {
@@ -106,6 +108,8 @@ type CreateFargateProfileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFargateProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

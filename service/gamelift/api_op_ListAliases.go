@@ -61,6 +61,8 @@ type ListAliasesInput struct {
 	// used to display a message to the user. A terminal alias throws a
 	// TerminalRoutingStrategyException with the RoutingStrategy message embedded.
 	RoutingStrategyType types.RoutingStrategyType
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -76,6 +78,8 @@ type ListAliasesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAliasesMiddlewares(stack *middleware.Stack, options Options) (err error) {

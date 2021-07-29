@@ -93,6 +93,8 @@ type UpdateAppInput struct {
 
 	// The name of the repository for an Amplify app
 	Repository *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for an Amplify app update request.
@@ -105,6 +107,8 @@ type UpdateAppOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAppMiddlewares(stack *middleware.Stack, options Options) (err error) {

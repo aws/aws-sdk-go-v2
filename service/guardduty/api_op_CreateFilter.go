@@ -210,6 +210,8 @@ type CreateFilterInput struct {
 
 	// The tags to be added to a new filter resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateFilterOutput struct {
@@ -221,6 +223,8 @@ type CreateFilterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -52,6 +52,8 @@ type ListArtifactsInput struct {
 	// non-null pagination token is returned in a result, pass its value in here to
 	// list more artifacts.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the list artifacts request.
@@ -68,6 +70,8 @@ type ListArtifactsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListArtifactsMiddlewares(stack *middleware.Stack, options Options) (err error) {

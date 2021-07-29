@@ -33,6 +33,8 @@ type GetIncidentRecordInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIncidentRecordOutput struct {
@@ -44,6 +46,8 @@ type GetIncidentRecordOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIncidentRecordMiddlewares(stack *middleware.Stack, options Options) (err error) {

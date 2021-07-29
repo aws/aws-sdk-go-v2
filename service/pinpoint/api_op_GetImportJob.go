@@ -40,6 +40,8 @@ type GetImportJobInput struct {
 	//
 	// This member is required.
 	JobId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetImportJobOutput struct {
@@ -54,6 +56,8 @@ type GetImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

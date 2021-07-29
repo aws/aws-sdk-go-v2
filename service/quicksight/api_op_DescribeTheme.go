@@ -48,6 +48,8 @@ type DescribeThemeInput struct {
 	// The version number for the version to describe. If a VersionNumber parameter
 	// value isn't provided, the latest version of the theme is described.
 	VersionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type DescribeThemeOutput struct {
@@ -63,6 +65,8 @@ type DescribeThemeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeThemeMiddlewares(stack *middleware.Stack, options Options) (err error) {

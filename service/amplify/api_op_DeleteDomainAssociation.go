@@ -39,6 +39,8 @@ type DeleteDomainAssociationInput struct {
 	//
 	// This member is required.
 	DomainName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDomainAssociationOutput struct {
@@ -51,6 +53,8 @@ type DeleteDomainAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDomainAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

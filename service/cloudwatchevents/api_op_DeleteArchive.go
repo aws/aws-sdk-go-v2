@@ -32,11 +32,15 @@ type DeleteArchiveInput struct {
 	//
 	// This member is required.
 	ArchiveName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteArchiveOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {

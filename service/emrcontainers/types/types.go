@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -17,6 +18,8 @@ type CloudWatchMonitoringConfiguration struct {
 
 	// The specified name prefix for log streams.
 	LogStreamNamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration specification to be used when provisioning virtual clusters,
@@ -37,6 +40,8 @@ type Configuration struct {
 
 	// A set of properties specified within a configuration classification.
 	Properties map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // A configuration specification to be used to override existing configurations.
@@ -47,6 +52,8 @@ type ConfigurationOverrides struct {
 
 	// The configurations for monitoring.
 	MonitoringConfiguration *MonitoringConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The information about the container used for a job run or a managed endpoint.
@@ -60,6 +67,8 @@ type ContainerInfo interface {
 // The information about the EKS cluster.
 type ContainerInfoMemberEksInfo struct {
 	Value EksInfo
+
+	noSmithyDocumentSerde
 }
 
 func (*ContainerInfoMemberEksInfo) isContainerInfo() {}
@@ -79,6 +88,8 @@ type ContainerProvider struct {
 
 	// The information about the container cluster.
 	Info ContainerInfo
+
+	noSmithyDocumentSerde
 }
 
 // The information about the EKS cluster.
@@ -86,6 +97,8 @@ type EksInfo struct {
 
 	// The namespaces of the EKS cluster.
 	Namespace *string
+
+	noSmithyDocumentSerde
 }
 
 // This entity represents the endpoint that is managed by Amazon EMR on EKS.
@@ -136,6 +149,8 @@ type Endpoint struct {
 
 	// The ID of the endpoint's virtual cluster.
 	VirtualClusterId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specify the driver that the job runs on.
@@ -143,6 +158,8 @@ type JobDriver struct {
 
 	// The job driver parameters specified for spark submit.
 	SparkSubmitJobDriver *SparkSubmitJobDriver
+
+	noSmithyDocumentSerde
 }
 
 // This entity describes a job run. A job run is a unit of work, such as a Spark
@@ -196,6 +213,8 @@ type JobRun struct {
 
 	// The ID of the job run's virtual cluster.
 	VirtualClusterId *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration setting for monitoring.
@@ -209,6 +228,8 @@ type MonitoringConfiguration struct {
 
 	// Amazon S3 configuration for monitoring log publishing.
 	S3MonitoringConfiguration *S3MonitoringConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Amazon S3 configuration for monitoring log publishing. You can configure your
@@ -219,6 +240,8 @@ type S3MonitoringConfiguration struct {
 	//
 	// This member is required.
 	LogUri *string
+
+	noSmithyDocumentSerde
 }
 
 // The information about job driver for Spark submit.
@@ -234,6 +257,8 @@ type SparkSubmitJobDriver struct {
 
 	// The Spark submit parameters that are used for job runs.
 	SparkSubmitParameters *string
+
+	noSmithyDocumentSerde
 }
 
 // This entity describes a virtual cluster. A virtual cluster is a Kubernetes
@@ -264,13 +289,19 @@ type VirtualCluster struct {
 
 	// The assigned tags of the virtual cluster.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde
 
 // UnknownUnionMember is returned when a union member is returned over the wire,
 // but has an unknown tag.
 type UnknownUnionMember struct {
 	Tag   string
 	Value []byte
+
+	noSmithyDocumentSerde
 }
 
 func (*UnknownUnionMember) isContainerInfo() {}

@@ -112,6 +112,8 @@ type ListResolverQueryLogConfigsInput struct {
 	// parameter, you must use the same value for SortOrder, if any, as in the previous
 	// request.
 	SortOrder types.SortOrder
+
+	noSmithyDocumentSerde
 }
 
 type ListResolverQueryLogConfigsOutput struct {
@@ -142,6 +144,8 @@ type ListResolverQueryLogConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResolverQueryLogConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

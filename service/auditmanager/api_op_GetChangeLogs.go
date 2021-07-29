@@ -46,6 +46,8 @@ type GetChangeLogsInput struct {
 
 	// The pagination token used to fetch the next set of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetChangeLogsOutput struct {
@@ -58,6 +60,8 @@ type GetChangeLogsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetChangeLogsMiddlewares(stack *middleware.Stack, options Options) (err error) {

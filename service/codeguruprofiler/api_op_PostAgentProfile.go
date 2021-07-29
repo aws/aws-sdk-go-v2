@@ -59,12 +59,16 @@ type PostAgentProfileInput struct {
 	// prevent the accidental submission of duplicate profiling data if there are
 	// failures and retries.
 	ProfileToken *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the postAgentProfileResponse.
 type PostAgentProfileOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPostAgentProfileMiddlewares(stack *middleware.Stack, options Options) (err error) {

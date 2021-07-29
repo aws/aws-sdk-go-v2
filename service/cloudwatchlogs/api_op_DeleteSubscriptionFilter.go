@@ -37,11 +37,15 @@ type DeleteSubscriptionFilterInput struct {
 	//
 	// This member is required.
 	LogGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSubscriptionFilterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSubscriptionFilterMiddlewares(stack *middleware.Stack, options Options) (err error) {

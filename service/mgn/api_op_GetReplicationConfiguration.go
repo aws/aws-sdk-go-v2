@@ -33,6 +33,8 @@ type GetReplicationConfigurationInput struct {
 	//
 	// This member is required.
 	SourceServerID *string
+
+	noSmithyDocumentSerde
 }
 
 type GetReplicationConfigurationOutput struct {
@@ -85,6 +87,8 @@ type GetReplicationConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetReplicationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

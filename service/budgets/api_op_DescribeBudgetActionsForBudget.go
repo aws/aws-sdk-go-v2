@@ -47,6 +47,8 @@ type DescribeBudgetActionsForBudgetInput struct {
 
 	// A generic string.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBudgetActionsForBudgetOutput struct {
@@ -61,6 +63,8 @@ type DescribeBudgetActionsForBudgetOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBudgetActionsForBudgetMiddlewares(stack *middleware.Stack, options Options) (err error) {

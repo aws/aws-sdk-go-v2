@@ -58,6 +58,8 @@ type CheckoutBorrowLicenseInput struct {
 
 	// Node ID.
 	NodeId *string
+
+	noSmithyDocumentSerde
 }
 
 type CheckoutBorrowLicenseOutput struct {
@@ -88,6 +90,8 @@ type CheckoutBorrowLicenseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCheckoutBorrowLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {

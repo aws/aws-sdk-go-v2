@@ -72,6 +72,8 @@ type GetFaceSearchInput struct {
 	// Sort to use for grouping faces in the response. Use TIMESTAMP to group faces by
 	// the time that they are recognized. Use INDEX to sort by recognized faces.
 	SortBy types.FaceSearchSortBy
+
+	noSmithyDocumentSerde
 }
 
 type GetFaceSearchOutput struct {
@@ -102,6 +104,8 @@ type GetFaceSearchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFaceSearchMiddlewares(stack *middleware.Stack, options Options) (err error) {

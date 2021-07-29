@@ -41,6 +41,8 @@ type CreateAssessmentReportInput struct {
 
 	// The description of the assessment report.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateAssessmentReportOutput struct {
@@ -50,6 +52,8 @@ type CreateAssessmentReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAssessmentReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

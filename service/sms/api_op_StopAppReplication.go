@@ -31,11 +31,15 @@ type StopAppReplicationInput struct {
 
 	// The ID of the application.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type StopAppReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopAppReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

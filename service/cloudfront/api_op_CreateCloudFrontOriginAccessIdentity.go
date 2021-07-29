@@ -46,6 +46,8 @@ type CreateCloudFrontOriginAccessIdentityInput struct {
 	//
 	// This member is required.
 	CloudFrontOriginAccessIdentityConfig *types.CloudFrontOriginAccessIdentityConfig
+
+	noSmithyDocumentSerde
 }
 
 // The returned result of the corresponding request.
@@ -62,6 +64,8 @@ type CreateCloudFrontOriginAccessIdentityOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateCloudFrontOriginAccessIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

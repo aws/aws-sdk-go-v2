@@ -38,6 +38,8 @@ type GetIntegrationInput struct {
 	//
 	// This member is required.
 	Uri *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIntegrationOutput struct {
@@ -72,6 +74,8 @@ type GetIntegrationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIntegrationMiddlewares(stack *middleware.Stack, options Options) (err error) {

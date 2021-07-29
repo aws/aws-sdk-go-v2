@@ -40,6 +40,8 @@ type ListSubscriptionDefinitionVersionsInput struct {
 	// The token for the next set of results, or ''null'' if there are no additional
 	// results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListSubscriptionDefinitionVersionsOutput struct {
@@ -53,6 +55,8 @@ type ListSubscriptionDefinitionVersionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSubscriptionDefinitionVersionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

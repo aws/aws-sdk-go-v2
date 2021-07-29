@@ -70,6 +70,8 @@ type ListContainerInstancesInput struct {
 	// parameter, the default is to include container instances set to all states other
 	// than INACTIVE.
 	Status types.ContainerInstanceStatus
+
+	noSmithyDocumentSerde
 }
 
 type ListContainerInstancesOutput struct {
@@ -86,6 +88,8 @@ type ListContainerInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContainerInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type UpdateMemberDetectorsInput struct {
 
 	// Describes which data sources will be updated.
 	DataSources *types.DataSourceConfigurations
+
+	noSmithyDocumentSerde
 }
 
 type UpdateMemberDetectorsOutput struct {
@@ -53,6 +55,8 @@ type UpdateMemberDetectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateMemberDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -61,6 +61,8 @@ type SubmitTaskStateChangeInput struct {
 
 	// The task ID or full ARN of the task in the state change request.
 	Task *string
+
+	noSmithyDocumentSerde
 }
 
 type SubmitTaskStateChangeOutput struct {
@@ -70,6 +72,8 @@ type SubmitTaskStateChangeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubmitTaskStateChangeMiddlewares(stack *middleware.Stack, options Options) (err error) {

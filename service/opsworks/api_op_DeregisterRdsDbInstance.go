@@ -36,11 +36,15 @@ type DeregisterRdsDbInstanceInput struct {
 	//
 	// This member is required.
 	RdsDbInstanceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterRdsDbInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterRdsDbInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

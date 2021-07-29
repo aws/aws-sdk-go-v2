@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -57,6 +58,8 @@ type AccessDetail struct {
 	// The number of accounts with authenticated principals (root users, IAM users, and
 	// IAM roles) that attempted to access the service in the reporting period.
 	TotalAuthenticatedEntities *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Web Services access key. This data type is
@@ -90,6 +93,8 @@ type AccessKey struct {
 
 	// The date when the access key was created.
 	CreateDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the last time an Amazon Web Services access key was
@@ -145,6 +150,8 @@ type AccessKeyLastUsed struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Amazon Web Services access key, without its secret
@@ -164,6 +171,8 @@ type AccessKeyMetadata struct {
 
 	// The name of the IAM user that the key is associated with.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an attached permissions boundary. An attached
@@ -181,6 +190,8 @@ type AttachedPermissionsBoundary struct {
 	// used as the permissions boundary for an entity. This data type can only have a
 	// value of Policy.
 	PermissionsBoundaryType PermissionsBoundaryAttachmentType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an attached policy. An attached policy is a managed
@@ -202,6 +213,8 @@ type AttachedPolicy struct {
 
 	// The friendly name of the attached policy.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a condition context key. It includes the name of the
@@ -223,6 +236,8 @@ type ContextEntry struct {
 	// provide to the simulation when the key is referenced by a Condition element in
 	// an input policy.
 	ContextKeyValues []string
+
+	noSmithyDocumentSerde
 }
 
 // The reason that the service-linked role deletion failed. This data type is used
@@ -239,6 +254,8 @@ type DeletionTaskFailureReasonType struct {
 	// includes a list of the resources that are associated with the role and the
 	// Region in which the resources are being used.
 	RoleUsageList []RoleUsageType
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains details about when the IAM entities (users or roles)
@@ -259,6 +276,8 @@ type EntityDetails struct {
 	// access the service within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAuthenticated *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the specified entity (user or role). This data type is an
@@ -294,6 +313,8 @@ type EntityInfo struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the reason that the operation failed. This data type
@@ -311,6 +332,8 @@ type ErrorDetails struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the results of a simulation. This data type is used by the return
@@ -375,6 +398,8 @@ type EvaluationResult struct {
 	// The individual results of the simulation of the API operation specified in
 	// EvalActionName on each resource.
 	ResourceSpecificResults []ResourceSpecificResult
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an IAM group entity. This data type is used as a
@@ -421,6 +446,8 @@ type Group struct {
 	//
 	// This member is required.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an IAM group, including all of the group's policies.
@@ -458,6 +485,8 @@ type GroupDetail struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html) in the
 	// IAM User Guide.
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an instance profile. This data type is used as a
@@ -517,6 +546,8 @@ type InstanceProfile struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the permissions policies that are attached to the
@@ -538,6 +569,8 @@ type ListPoliciesGrantingServiceAccessEntry struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#genref-aws-service-namespaces)
 	// in the Amazon Web Services General Reference.
 	ServiceNamespace *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the user name and password create date for a user. This data type is
@@ -558,6 +591,8 @@ type LoginProfile struct {
 
 	// Specifies whether the user is required to set a new password on next sign-in.
 	PasswordResetRequired bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a managed policy, including the policy's ARN,
@@ -627,6 +662,8 @@ type ManagedPolicyDetail struct {
 	// policy was created. When a policy has more than one version, this field contains
 	// the date and time when the most recent policy version was created.
 	UpdateDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an MFA device. This data type is used as a response
@@ -648,6 +685,8 @@ type MFADevice struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the Amazon Resource Name (ARN) for an IAM OpenID Connect provider.
@@ -659,6 +698,8 @@ type OpenIDConnectProviderListEntry struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the Amazon Web Services General Reference.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the effect that Organizations has on a policy
@@ -668,6 +709,8 @@ type OrganizationsDecisionDetail struct {
 	// Specifies whether the simulated operation is allowed by the Organizations
 	// service control policies that impact the simulated user's account.
 	AllowedByOrganizations bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the account password policy. This data type is used
@@ -711,6 +754,8 @@ type PasswordPolicy struct {
 	// Specifies whether IAM user passwords must contain at least one uppercase
 	// character (A to Z).
 	RequireUppercaseCharacters bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the effect that a permissions boundary has on a
@@ -726,6 +771,8 @@ type PermissionsBoundaryDecisionDetail struct {
 	// action is explicitly denied by the permissions boundary. In both of these cases,
 	// the action is not allowed, regardless of the identity-based policy.
 	AllowedByPermissionsBoundary bool
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a managed policy. This data type is used as a
@@ -795,6 +842,8 @@ type Policy struct {
 	// policy was created. When a policy has more than one version, this field contains
 	// the date and time when the most recent policy version was created.
 	UpdateDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an IAM policy, including the policy document. This
@@ -807,6 +856,8 @@ type PolicyDetail struct {
 
 	// The name of the policy.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the permissions policies that are attached to the
@@ -848,6 +899,8 @@ type PolicyGrantingServiceAccess struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
 	// the Amazon Web Services General Reference.
 	PolicyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a group that a managed policy is attached to. This
@@ -866,6 +919,8 @@ type PolicyGroup struct {
 
 	// The name (friendly name, not ARN) identifying the group.
 	GroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a role that a managed policy is attached to. This
@@ -884,6 +939,8 @@ type PolicyRole struct {
 
 	// The name (friendly name, not ARN) identifying the role.
 	RoleName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a user that a managed policy is attached to. This
@@ -902,6 +959,8 @@ type PolicyUser struct {
 
 	// The name (friendly name, not ARN) identifying the user.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a version of a managed policy. This data type is used
@@ -934,6 +993,8 @@ type PolicyVersion struct {
 	// with v (always lowercase). When a policy is created, the first policy version is
 	// v1.
 	VersionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the row and column of a location of a Statement element in a policy
@@ -945,6 +1006,8 @@ type Position struct {
 
 	// The line containing the specified position in the document.
 	Line int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of the simulation of a single API operation call on a single
@@ -988,6 +1051,8 @@ type ResourceSpecificResult struct {
 	// Contains information about the effect that a permissions boundary has on a
 	// policy simulation when that boundary is applied to an IAM entity.
 	PermissionsBoundaryDecisionDetail *PermissionsBoundaryDecisionDetail
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an IAM role. This structure is returned as a response
@@ -1061,6 +1126,8 @@ type Role struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an IAM role, including all of the role's policies.
@@ -1129,6 +1196,8 @@ type RoleDetail struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the last time that an IAM role was used. This
@@ -1152,6 +1221,8 @@ type RoleLastUsed struct {
 
 	// The name of the Region in which the role was last used.
 	Region *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that contains details about how a service-linked role is used, if that
@@ -1164,6 +1235,8 @@ type RoleUsageType struct {
 
 	// The name of the resource that is using the service-linked role.
 	Resources []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the list of SAML providers for this account.
@@ -1177,6 +1250,8 @@ type SAMLProviderListEntry struct {
 
 	// The expiration date and time for the SAML provider.
 	ValidUntil *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a server certificate. This data type is used as a
@@ -1202,6 +1277,8 @@ type ServerCertificate struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a server certificate without its certificate body,
@@ -1243,6 +1320,8 @@ type ServerCertificateMetadata struct {
 
 	// The date when the server certificate was uploaded.
 	UploadDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the most recent attempt to access the service. This data
@@ -1306,6 +1385,8 @@ type ServiceLastAccessed struct {
 	// the action level. For more information, see the Granularity field in
 	// GenerateServiceLastAccessedDetails.
 	TrackedActionsLastAccessed []TrackedActionLastAccessed
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of a service-specific credential.
@@ -1351,6 +1432,8 @@ type ServiceSpecificCredential struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains additional details about a service-specific credential.
@@ -1388,6 +1471,8 @@ type ServiceSpecificCredentialMetadata struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an X.509 signing certificate. This data type is used
@@ -1418,6 +1503,8 @@ type SigningCertificate struct {
 
 	// The date when the signing certificate was uploaded.
 	UploadDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an SSH public key. This data type is used as a
@@ -1454,6 +1541,8 @@ type SSHPublicKey struct {
 	// The date and time, in ISO 8601 date-time format
 	// (http://www.iso.org/iso/iso8601), when the SSH public key was uploaded.
 	UploadDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an SSH public key, without the key's body or
@@ -1483,6 +1572,8 @@ type SSHPublicKeyMetadata struct {
 	//
 	// This member is required.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a reference to a Statement element in a policy document that determines
@@ -1501,6 +1592,8 @@ type Statement struct {
 
 	// The row and column of the beginning of the Statement in an IAM policy.
 	StartPosition *Position
+
+	noSmithyDocumentSerde
 }
 
 // A structure that represents user-provided metadata that can be associated with
@@ -1526,6 +1619,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains details about the most recent attempt to access an action within the
@@ -1558,6 +1653,8 @@ type TrackedActionLastAccessed struct {
 	// access the service within the reporting period
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_policies_access-advisor.html#service-last-accessed-reporting-period).
 	LastAccessedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an IAM user entity. This data type is used as a
@@ -1639,6 +1736,8 @@ type User struct {
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_tags.html) in the IAM User
 	// Guide.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an IAM user, including all the user's policies and
@@ -1692,6 +1791,8 @@ type UserDetail struct {
 
 	// A list of the inline policies embedded in the user.
 	UserPolicyList []PolicyDetail
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a virtual MFA device.
@@ -1725,4 +1826,8 @@ type VirtualMFADevice struct {
 
 	// The IAM user associated with this virtual MFA device.
 	User *User
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

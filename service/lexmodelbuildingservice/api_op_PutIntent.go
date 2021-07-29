@@ -192,6 +192,8 @@ type PutIntentInput struct {
 	// from the user using prompts defined in the slots. For more information, see
 	// how-it-works.
 	Slots []types.Slot
+
+	noSmithyDocumentSerde
 }
 
 type PutIntentOutput struct {
@@ -267,6 +269,8 @@ type PutIntentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutIntentMiddlewares(stack *middleware.Stack, options Options) (err error) {

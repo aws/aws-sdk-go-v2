@@ -48,6 +48,8 @@ type GetBotChannelAssociationInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetBotChannelAssociationOutput struct {
@@ -93,6 +95,8 @@ type GetBotChannelAssociationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetBotChannelAssociationMiddlewares(stack *middleware.Stack, options Options) (err error) {

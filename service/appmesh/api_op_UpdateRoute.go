@@ -59,6 +59,8 @@ type UpdateRouteInput struct {
 	// more information about mesh sharing, see Working with shared meshes
 	// (https://docs.aws.amazon.com/app-mesh/latest/userguide/sharing.html).
 	MeshOwner *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -71,6 +73,8 @@ type UpdateRouteOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateRouteMiddlewares(stack *middleware.Stack, options Options) (err error) {

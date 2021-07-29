@@ -42,6 +42,8 @@ type DetectSyntaxInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectSyntaxOutput struct {
@@ -54,6 +56,8 @@ type DetectSyntaxOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectSyntaxMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -32,11 +32,15 @@ type DeleteModelPackageGroupPolicyInput struct {
 	//
 	// This member is required.
 	ModelPackageGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteModelPackageGroupPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteModelPackageGroupPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

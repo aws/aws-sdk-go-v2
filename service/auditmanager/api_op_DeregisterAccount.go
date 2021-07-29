@@ -28,6 +28,7 @@ func (c *Client) DeregisterAccount(ctx context.Context, params *DeregisterAccoun
 }
 
 type DeregisterAccountInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeregisterAccountOutput struct {
@@ -37,6 +38,8 @@ type DeregisterAccountOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

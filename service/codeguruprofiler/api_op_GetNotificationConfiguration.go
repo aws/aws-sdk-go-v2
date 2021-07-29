@@ -35,6 +35,8 @@ type GetNotificationConfigurationInput struct {
 	//
 	// This member is required.
 	ProfilingGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 // The structure representing the GetNotificationConfigurationResponse.
@@ -47,6 +49,8 @@ type GetNotificationConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetNotificationConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

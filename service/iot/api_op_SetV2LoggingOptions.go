@@ -37,11 +37,15 @@ type SetV2LoggingOptionsInput struct {
 
 	// The ARN of the role that allows IoT to write to Cloudwatch logs.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type SetV2LoggingOptionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetV2LoggingOptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type ListV2LoggingLevelsInput struct {
 
 	// The type of resource for which you are configuring logging. Must be THING_Group.
 	TargetType types.LogTargetType
+
+	noSmithyDocumentSerde
 }
 
 type ListV2LoggingLevelsOutput struct {
@@ -52,6 +54,8 @@ type ListV2LoggingLevelsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListV2LoggingLevelsMiddlewares(stack *middleware.Stack, options Options) (err error) {

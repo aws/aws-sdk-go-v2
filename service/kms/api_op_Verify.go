@@ -115,6 +115,8 @@ type VerifyInput struct {
 	// parameter is a message digest. If you use the DIGEST value with a raw message,
 	// the security of the verification operation can be compromised.
 	MessageType types.MessageType
+
+	noSmithyDocumentSerde
 }
 
 type VerifyOutput struct {
@@ -135,6 +137,8 @@ type VerifyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVerifyMiddlewares(stack *middleware.Stack, options Options) (err error) {

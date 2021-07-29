@@ -36,6 +36,7 @@ func (c *Client) GetSMSSandboxAccountStatus(ctx context.Context, params *GetSMSS
 }
 
 type GetSMSSandboxAccountStatusInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetSMSSandboxAccountStatusOutput struct {
@@ -47,6 +48,8 @@ type GetSMSSandboxAccountStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSMSSandboxAccountStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

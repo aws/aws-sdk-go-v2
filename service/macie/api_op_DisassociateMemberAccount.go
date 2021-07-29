@@ -32,11 +32,15 @@ type DisassociateMemberAccountInput struct {
 	//
 	// This member is required.
 	MemberAccountId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateMemberAccountOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateMemberAccountMiddlewares(stack *middleware.Stack, options Options) (err error) {

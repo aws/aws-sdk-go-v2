@@ -42,6 +42,8 @@ type DeleteBotAliasInput struct {
 	// When this parameter is true, Amazon Lex doesn't check to see if any other
 	// resource is using the alias before it is deleted.
 	SkipResourceInUseCheck bool
+
+	noSmithyDocumentSerde
 }
 
 type DeleteBotAliasOutput struct {
@@ -59,6 +61,8 @@ type DeleteBotAliasOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteBotAliasMiddlewares(stack *middleware.Stack, options Options) (err error) {

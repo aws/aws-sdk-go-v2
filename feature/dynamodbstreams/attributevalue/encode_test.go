@@ -1,6 +1,8 @@
 package attributevalue
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
+	"github.com/google/go-cmp/cmp/cmpopts"
 	"reflect"
 	"strconv"
 	"testing"
@@ -107,7 +109,7 @@ func TestMarshalListOmitEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual); len(diff) != 0 {
+	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -143,7 +145,7 @@ func TestMarshalMapOmitEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual); len(diff) != 0 {
+	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -173,7 +175,7 @@ func TestMarshalListNullEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual); len(diff) != 0 {
+	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }
@@ -211,7 +213,7 @@ func TestMarshalMapNullEmptyElem(t *testing.T) {
 	if err != nil {
 		t.Errorf("expect nil, got %v", err)
 	}
-	if diff := cmp.Diff(expect, actual); len(diff) != 0 {
+	if diff := cmp.Diff(expect, actual, cmpopts.IgnoreTypes(smithydocument.NoSerde{})); len(diff) != 0 {
 		t.Errorf("expect match\n%s", diff)
 	}
 }

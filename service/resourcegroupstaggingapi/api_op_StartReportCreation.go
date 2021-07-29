@@ -40,11 +40,15 @@ type StartReportCreationInput struct {
 	//
 	// This member is required.
 	S3Bucket *string
+
+	noSmithyDocumentSerde
 }
 
 type StartReportCreationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartReportCreationMiddlewares(stack *middleware.Stack, options Options) (err error) {

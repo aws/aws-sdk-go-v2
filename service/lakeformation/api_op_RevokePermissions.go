@@ -56,11 +56,15 @@ type RevokePermissionsInput struct {
 	// Indicates a list of permissions for which to revoke the grant option allowing
 	// the principal to pass permissions to other principals.
 	PermissionsWithGrantOption []types.Permission
+
+	noSmithyDocumentSerde
 }
 
 type RevokePermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRevokePermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

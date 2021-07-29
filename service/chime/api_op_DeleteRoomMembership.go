@@ -42,11 +42,15 @@ type DeleteRoomMembershipInput struct {
 	//
 	// This member is required.
 	RoomId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRoomMembershipOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRoomMembershipMiddlewares(stack *middleware.Stack, options Options) (err error) {

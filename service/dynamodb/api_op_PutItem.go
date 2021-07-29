@@ -237,6 +237,8 @@ type PutItemInput struct {
 	// operations; however, PutItem does not recognize any values other than NONE or
 	// ALL_OLD.
 	ReturnValues types.ReturnValue
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output of a PutItem operation.
@@ -278,6 +280,8 @@ type PutItemOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutItemMiddlewares(stack *middleware.Stack, options Options) (err error) {

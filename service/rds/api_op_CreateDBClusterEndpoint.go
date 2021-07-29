@@ -57,6 +57,8 @@ type CreateDBClusterEndpointInput struct {
 
 	// The tags to be assigned to the Amazon RDS resource.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // This data type represents the information you need to connect to an Amazon
@@ -116,6 +118,8 @@ type CreateDBClusterEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDBClusterEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

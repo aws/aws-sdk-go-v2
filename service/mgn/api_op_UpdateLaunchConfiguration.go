@@ -51,6 +51,8 @@ type UpdateLaunchConfigurationInput struct {
 
 	// Update Launch configuration Target instance right sizing request.
 	TargetInstanceTypeRightSizingMethod types.TargetInstanceTypeRightSizingMethod
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLaunchConfigurationOutput struct {
@@ -81,6 +83,8 @@ type UpdateLaunchConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

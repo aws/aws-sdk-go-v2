@@ -39,6 +39,8 @@ type StopUserImportJobInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server to the request to stop the user import
@@ -50,6 +52,8 @@ type StopUserImportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopUserImportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

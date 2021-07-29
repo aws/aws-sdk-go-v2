@@ -51,6 +51,8 @@ type DescribeAutomationStepExecutionsInput struct {
 	// Indicates whether to list step executions in reverse order by start time. The
 	// default value is 'false'.
 	ReverseOrder bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAutomationStepExecutionsOutput struct {
@@ -65,6 +67,8 @@ type DescribeAutomationStepExecutionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAutomationStepExecutionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

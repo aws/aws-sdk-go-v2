@@ -40,6 +40,8 @@ type ListPolicyGenerationsInput struct {
 	// Use this with ListGeneratedPolicies to filter the results to only include
 	// results for a specific principal.
 	PrincipalArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPolicyGenerationsOutput struct {
@@ -54,6 +56,8 @@ type ListPolicyGenerationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPolicyGenerationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

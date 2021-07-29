@@ -46,6 +46,8 @@ type ExportSnapshotInput struct {
 	//
 	// This member is required.
 	SourceSnapshotName *string
+
+	noSmithyDocumentSerde
 }
 
 type ExportSnapshotOutput struct {
@@ -57,6 +59,8 @@ type ExportSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationExportSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

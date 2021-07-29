@@ -34,6 +34,8 @@ type DescribeNotificationRuleInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeNotificationRuleOutput struct {
@@ -82,6 +84,8 @@ type DescribeNotificationRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

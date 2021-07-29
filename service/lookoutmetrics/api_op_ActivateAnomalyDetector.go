@@ -32,11 +32,15 @@ type ActivateAnomalyDetectorInput struct {
 	//
 	// This member is required.
 	AnomalyDetectorArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ActivateAnomalyDetectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationActivateAnomalyDetectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

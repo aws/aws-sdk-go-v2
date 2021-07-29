@@ -44,6 +44,8 @@ type DeleteRemediationExceptionsInput struct {
 	//
 	// This member is required.
 	ResourceKeys []types.RemediationExceptionResourceKey
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRemediationExceptionsOutput struct {
@@ -54,6 +56,8 @@ type DeleteRemediationExceptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRemediationExceptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

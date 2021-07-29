@@ -11,6 +11,8 @@ type ForbiddenException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ForbiddenException) Error() string {
@@ -29,6 +31,8 @@ type InternalFailureException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalFailureException) Error() string {
@@ -47,6 +51,8 @@ type InvalidRequestException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -65,6 +71,8 @@ type PreconditionFailedException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *PreconditionFailedException) Error() string {
@@ -83,6 +91,8 @@ type RangeNotSatisfiableException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *RangeNotSatisfiableException) Error() string {
@@ -101,6 +111,8 @@ type ResourceConflictException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceConflictException) Error() string {
@@ -119,6 +131,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	Code *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {

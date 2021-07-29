@@ -41,6 +41,8 @@ type DescribeGlobalNetworksInput struct {
 
 	// The token for the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeGlobalNetworksOutput struct {
@@ -53,6 +55,8 @@ type DescribeGlobalNetworksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeGlobalNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {

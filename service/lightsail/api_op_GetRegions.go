@@ -39,6 +39,8 @@ type GetRegionsInput struct {
 	// databases in your get regions request. Availability Zones are indicated with a
 	// letter (e.g., us-east-2a).
 	IncludeRelationalDatabaseAvailabilityZones *bool
+
+	noSmithyDocumentSerde
 }
 
 type GetRegionsOutput struct {
@@ -49,6 +51,8 @@ type GetRegionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

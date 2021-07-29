@@ -49,6 +49,8 @@ type GetGroupsForCapacityReservationInput struct {
 
 	// The token to use to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetGroupsForCapacityReservationOutput struct {
@@ -63,6 +65,8 @@ type GetGroupsForCapacityReservationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetGroupsForCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {

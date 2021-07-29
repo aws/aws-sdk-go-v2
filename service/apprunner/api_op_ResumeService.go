@@ -37,6 +37,8 @@ type ResumeServiceInput struct {
 	//
 	// This member is required.
 	ServiceArn *string
+
+	noSmithyDocumentSerde
 }
 
 type ResumeServiceOutput struct {
@@ -52,6 +54,8 @@ type ResumeServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResumeServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

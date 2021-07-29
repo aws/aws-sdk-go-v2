@@ -54,11 +54,15 @@ type DeleteAccessPointForObjectLambdaInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAccessPointForObjectLambdaOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAccessPointForObjectLambdaMiddlewares(stack *middleware.Stack, options Options) (err error) {

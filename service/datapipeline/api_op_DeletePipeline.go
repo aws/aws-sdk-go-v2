@@ -45,11 +45,15 @@ type DeletePipelineInput struct {
 	//
 	// This member is required.
 	PipelineId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePipelineOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePipelineMiddlewares(stack *middleware.Stack, options Options) (err error) {

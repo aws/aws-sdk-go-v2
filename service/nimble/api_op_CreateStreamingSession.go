@@ -58,6 +58,8 @@ type CreateStreamingSessionInput struct {
 	// A collection of labels, in the form of key:value pairs, that apply to this
 	// resource.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateStreamingSessionOutput struct {
@@ -67,6 +69,8 @@ type CreateStreamingSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStreamingSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

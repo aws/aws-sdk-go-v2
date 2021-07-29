@@ -33,6 +33,8 @@ type GetPublicKeyConfigInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPublicKeyConfigOutput struct {
@@ -45,6 +47,8 @@ type GetPublicKeyConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPublicKeyConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

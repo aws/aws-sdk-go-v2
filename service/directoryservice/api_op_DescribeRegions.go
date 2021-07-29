@@ -41,6 +41,8 @@ type DescribeRegionsInput struct {
 
 	// The name of the Region. For example, us-east-1.
 	RegionName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRegionsOutput struct {
@@ -55,6 +57,8 @@ type DescribeRegionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

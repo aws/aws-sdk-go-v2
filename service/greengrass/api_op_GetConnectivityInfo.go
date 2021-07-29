@@ -33,6 +33,8 @@ type GetConnectivityInfoInput struct {
 	//
 	// This member is required.
 	ThingName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetConnectivityInfoOutput struct {
@@ -45,6 +47,8 @@ type GetConnectivityInfoOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetConnectivityInfoMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -33,6 +33,8 @@ type GetContainerRecipePolicyInput struct {
 	//
 	// This member is required.
 	ContainerRecipeArn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetContainerRecipePolicyOutput struct {
@@ -45,6 +47,8 @@ type GetContainerRecipePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContainerRecipePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

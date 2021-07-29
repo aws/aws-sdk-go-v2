@@ -101,6 +101,8 @@ type CreateApplicationInput struct {
 	// application.You can specify only one of templateBody and templateUrl; otherwise
 	// an error results.
 	TemplateUrl *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateApplicationOutput struct {
@@ -156,6 +158,8 @@ type CreateApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

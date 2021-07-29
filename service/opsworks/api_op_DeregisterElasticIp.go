@@ -38,11 +38,15 @@ type DeregisterElasticIpInput struct {
 	//
 	// This member is required.
 	ElasticIp *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterElasticIpOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterElasticIpMiddlewares(stack *middleware.Stack, options Options) (err error) {

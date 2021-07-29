@@ -59,6 +59,8 @@ type DescribeRegionsInput struct {
 	// The names of the Regions. You can specify any Regions, whether they are enabled
 	// and disabled for your account.
 	RegionNames []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeRegionsOutput struct {
@@ -68,6 +70,8 @@ type DescribeRegionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeRegionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

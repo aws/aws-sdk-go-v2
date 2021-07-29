@@ -39,6 +39,8 @@ type DescribeVirtualInterfacesInput struct {
 
 	// The ID of the virtual interface.
 	VirtualInterfaceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVirtualInterfacesOutput struct {
@@ -48,6 +50,8 @@ type DescribeVirtualInterfacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVirtualInterfacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

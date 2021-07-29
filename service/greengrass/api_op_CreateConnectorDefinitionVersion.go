@@ -40,6 +40,8 @@ type CreateConnectorDefinitionVersionInput struct {
 	// A list of references to connectors in this version, with their corresponding
 	// configuration settings.
 	Connectors []types.Connector
+
+	noSmithyDocumentSerde
 }
 
 type CreateConnectorDefinitionVersionOutput struct {
@@ -58,6 +60,8 @@ type CreateConnectorDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateConnectorDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

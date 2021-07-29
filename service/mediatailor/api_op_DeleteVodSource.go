@@ -37,11 +37,15 @@ type DeleteVodSourceInput struct {
 	//
 	// This member is required.
 	VodSourceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteVodSourceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVodSourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

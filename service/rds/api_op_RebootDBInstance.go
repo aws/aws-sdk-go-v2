@@ -50,6 +50,8 @@ type RebootDBInstanceInput struct {
 	// failover. Constraint: You can't enable force failover if the instance isn't
 	// configured for Multi-AZ.
 	ForceFailover *bool
+
+	noSmithyDocumentSerde
 }
 
 type RebootDBInstanceOutput struct {
@@ -60,6 +62,8 @@ type RebootDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRebootDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

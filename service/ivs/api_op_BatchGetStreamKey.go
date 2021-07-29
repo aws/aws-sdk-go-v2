@@ -33,6 +33,8 @@ type BatchGetStreamKeyInput struct {
 	//
 	// This member is required.
 	Arns []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetStreamKeyOutput struct {
@@ -42,6 +44,8 @@ type BatchGetStreamKeyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetStreamKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

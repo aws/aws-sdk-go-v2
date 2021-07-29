@@ -173,6 +173,8 @@ type CreateImageBuilderInput struct {
 
 	// The VPC configuration for the image builder. You can specify only one subnet.
 	VpcConfig *types.VpcConfig
+
+	noSmithyDocumentSerde
 }
 
 type CreateImageBuilderOutput struct {
@@ -182,6 +184,8 @@ type CreateImageBuilderOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateImageBuilderMiddlewares(stack *middleware.Stack, options Options) (err error) {

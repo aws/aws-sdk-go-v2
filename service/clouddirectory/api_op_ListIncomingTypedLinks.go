@@ -60,6 +60,8 @@ type ListIncomingTypedLinksInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListIncomingTypedLinksOutput struct {
@@ -72,6 +74,8 @@ type ListIncomingTypedLinksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIncomingTypedLinksMiddlewares(stack *middleware.Stack, options Options) (err error) {

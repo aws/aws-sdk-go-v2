@@ -37,11 +37,15 @@ type DeleteRevisionInput struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRevisionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRevisionMiddlewares(stack *middleware.Stack, options Options) (err error) {

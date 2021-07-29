@@ -28,6 +28,7 @@ func (c *Client) GetSubscriptionState(ctx context.Context, params *GetSubscripti
 }
 
 type GetSubscriptionStateInput struct {
+	noSmithyDocumentSerde
 }
 
 type GetSubscriptionStateOutput struct {
@@ -39,6 +40,8 @@ type GetSubscriptionStateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSubscriptionStateMiddlewares(stack *middleware.Stack, options Options) (err error) {

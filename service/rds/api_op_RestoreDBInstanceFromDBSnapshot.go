@@ -269,6 +269,8 @@ type RestoreDBInstanceFromDBSnapshotInput struct {
 	// A list of EC2 VPC security groups to associate with this DB instance. Default:
 	// The default EC2 VPC security group for the DB subnet group's VPC.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreDBInstanceFromDBSnapshotOutput struct {
@@ -279,6 +281,8 @@ type RestoreDBInstanceFromDBSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreDBInstanceFromDBSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

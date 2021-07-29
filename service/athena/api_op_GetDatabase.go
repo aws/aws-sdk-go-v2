@@ -38,6 +38,8 @@ type GetDatabaseInput struct {
 	//
 	// This member is required.
 	DatabaseName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDatabaseOutput struct {
@@ -47,6 +49,8 @@ type GetDatabaseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDatabaseMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type GetPullRequestApprovalStatesInput struct {
 	//
 	// This member is required.
 	RevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetPullRequestApprovalStatesOutput struct {
@@ -49,6 +51,8 @@ type GetPullRequestApprovalStatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetPullRequestApprovalStatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

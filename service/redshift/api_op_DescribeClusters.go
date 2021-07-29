@@ -83,6 +83,8 @@ type DescribeClustersInput struct {
 	// response with the clusters that have either or both of these tag values
 	// associated with them.
 	TagValues []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output from the DescribeClusters action.
@@ -100,6 +102,8 @@ type DescribeClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

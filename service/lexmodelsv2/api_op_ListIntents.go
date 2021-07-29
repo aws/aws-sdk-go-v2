@@ -66,6 +66,8 @@ type ListIntentsInput struct {
 	// can choose to sort by the intent name or last updated date in either ascending
 	// or descending order.
 	SortBy *types.IntentSortBy
+
+	noSmithyDocumentSerde
 }
 
 type ListIntentsOutput struct {
@@ -93,6 +95,8 @@ type ListIntentsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListIntentsMiddlewares(stack *middleware.Stack, options Options) (err error) {

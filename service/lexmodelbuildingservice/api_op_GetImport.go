@@ -34,6 +34,8 @@ type GetImportInput struct {
 	//
 	// This member is required.
 	ImportId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetImportOutput struct {
@@ -63,6 +65,8 @@ type GetImportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetImportMiddlewares(stack *middleware.Stack, options Options) (err error) {

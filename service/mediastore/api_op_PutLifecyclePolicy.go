@@ -43,11 +43,15 @@ type PutLifecyclePolicyInput struct {
 	//
 	// This member is required.
 	LifecyclePolicy *string
+
+	noSmithyDocumentSerde
 }
 
 type PutLifecyclePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutLifecyclePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

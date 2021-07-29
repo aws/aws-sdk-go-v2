@@ -38,6 +38,8 @@ type GetFlowTemplateInput struct {
 
 	// The number of the workflow revision to retrieve.
 	RevisionNumber *int64
+
+	noSmithyDocumentSerde
 }
 
 type GetFlowTemplateOutput struct {
@@ -47,6 +49,8 @@ type GetFlowTemplateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFlowTemplateMiddlewares(stack *middleware.Stack, options Options) (err error) {

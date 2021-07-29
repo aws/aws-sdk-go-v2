@@ -46,6 +46,8 @@ type ListChannelModeratorsInput struct {
 	// The token passed by previous API calls until all requested moderators are
 	// returned.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListChannelModeratorsOutput struct {
@@ -62,6 +64,8 @@ type ListChannelModeratorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListChannelModeratorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

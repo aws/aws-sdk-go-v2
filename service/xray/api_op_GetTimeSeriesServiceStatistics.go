@@ -61,6 +61,8 @@ type GetTimeSeriesServiceStatisticsInput struct {
 
 	// Aggregation period in seconds.
 	Period *int32
+
+	noSmithyDocumentSerde
 }
 
 type GetTimeSeriesServiceStatisticsOutput struct {
@@ -78,6 +80,8 @@ type GetTimeSeriesServiceStatisticsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTimeSeriesServiceStatisticsMiddlewares(stack *middleware.Stack, options Options) (err error) {

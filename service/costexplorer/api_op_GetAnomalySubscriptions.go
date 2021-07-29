@@ -42,6 +42,8 @@ type GetAnomalySubscriptionsInput struct {
 
 	// A list of cost anomaly subscription ARNs.
 	SubscriptionArnList []string
+
+	noSmithyDocumentSerde
 }
 
 type GetAnomalySubscriptionsOutput struct {
@@ -58,6 +60,8 @@ type GetAnomalySubscriptionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetAnomalySubscriptionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

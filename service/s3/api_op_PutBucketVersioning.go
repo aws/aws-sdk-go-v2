@@ -84,11 +84,15 @@ type PutBucketVersioningInput struct {
 	// The concatenation of the authentication device's serial number, a space, and the
 	// value that is displayed on your authentication device.
 	MFA *string
+
+	noSmithyDocumentSerde
 }
 
 type PutBucketVersioningOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutBucketVersioningMiddlewares(stack *middleware.Stack, options Options) (err error) {

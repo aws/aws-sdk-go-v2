@@ -37,11 +37,15 @@ type AssociateIpGroupsInput struct {
 	//
 	// This member is required.
 	GroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateIpGroupsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateIpGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

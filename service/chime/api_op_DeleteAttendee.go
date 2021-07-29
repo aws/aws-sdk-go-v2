@@ -42,11 +42,15 @@ type DeleteAttendeeInput struct {
 	//
 	// This member is required.
 	MeetingId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteAttendeeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteAttendeeMiddlewares(stack *middleware.Stack, options Options) (err error) {

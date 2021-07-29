@@ -84,6 +84,8 @@ type PutIntegrationResponseInput struct {
 
 	// Specifies the selection pattern of a put integration response.
 	SelectionPattern *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents an integration response. The status code must map to an existing
@@ -140,6 +142,8 @@ type PutIntegrationResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

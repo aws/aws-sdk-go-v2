@@ -39,11 +39,15 @@ type PutDataCatalogEncryptionSettingsInput struct {
 	// The ID of the Data Catalog to set the security configuration for. If none is
 	// provided, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type PutDataCatalogEncryptionSettingsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDataCatalogEncryptionSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

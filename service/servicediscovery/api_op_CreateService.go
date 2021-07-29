@@ -121,6 +121,8 @@ type CreateServiceInput struct {
 	// DiscoverInstances API operation. No DNS records is registered for the service
 	// instances. The only valid value is HTTP.
 	Type types.ServiceTypeOption
+
+	noSmithyDocumentSerde
 }
 
 type CreateServiceOutput struct {
@@ -130,6 +132,8 @@ type CreateServiceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateServiceMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -53,6 +53,8 @@ type CreateArchiveInput struct {
 	// The number of days to retain events for. Default value is 0. If set to 0, events
 	// are retained indefinitely
 	RetentionDays *int32
+
+	noSmithyDocumentSerde
 }
 
 type CreateArchiveOutput struct {
@@ -71,6 +73,8 @@ type CreateArchiveOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateArchiveMiddlewares(stack *middleware.Stack, options Options) (err error) {

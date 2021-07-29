@@ -29,6 +29,7 @@ func (c *Client) ListDomainNames(ctx context.Context, params *ListDomainNamesInp
 }
 
 type ListDomainNamesInput struct {
+	noSmithyDocumentSerde
 }
 
 // The result of a ListDomainNames operation. Contains the names of all
@@ -40,6 +41,8 @@ type ListDomainNamesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDomainNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {

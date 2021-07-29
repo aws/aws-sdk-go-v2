@@ -46,6 +46,8 @@ type DescribeForecastExportJobInput struct {
 	//
 	// This member is required.
 	ForecastExportJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeForecastExportJobOutput struct {
@@ -105,6 +107,8 @@ type DescribeForecastExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeForecastExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

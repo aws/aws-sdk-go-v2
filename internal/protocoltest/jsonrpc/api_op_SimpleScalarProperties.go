@@ -29,6 +29,8 @@ type SimpleScalarPropertiesInput struct {
 	DoubleValue *float64
 
 	FloatValue *float32
+
+	noSmithyDocumentSerde
 }
 
 type SimpleScalarPropertiesOutput struct {
@@ -38,6 +40,8 @@ type SimpleScalarPropertiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSimpleScalarPropertiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

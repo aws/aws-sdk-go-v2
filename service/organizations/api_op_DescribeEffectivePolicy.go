@@ -59,6 +59,8 @@ type DescribeEffectivePolicyInput struct {
 	// that you want details about. Specifying an organization root or organizational
 	// unit (OU) as the target is not supported.
 	TargetId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEffectivePolicyOutput struct {
@@ -68,6 +70,8 @@ type DescribeEffectivePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEffectivePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

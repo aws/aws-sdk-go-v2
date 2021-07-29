@@ -10,6 +10,8 @@ import (
 // An attachment with the specified ID could not be found.
 type AttachmentIdNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AttachmentIdNotFound) Error() string {
@@ -28,6 +30,8 @@ func (e *AttachmentIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // has been exceeded.
 type AttachmentLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AttachmentLimitExceeded) Error() string {
@@ -46,6 +50,8 @@ func (e *AttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy
 // after it is created.
 type AttachmentSetExpired struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AttachmentSetExpired) Error() string {
@@ -63,6 +69,8 @@ func (e *AttachmentSetExpired) ErrorFault() smithy.ErrorFault { return smithy.Fa
 // An attachment set with the specified ID could not be found.
 type AttachmentSetIdNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AttachmentSetIdNotFound) Error() string {
@@ -81,6 +89,8 @@ func (e *AttachmentSetIdNotFound) ErrorFault() smithy.ErrorFault { return smithy
 // three attachments and 5 MB per attachment.
 type AttachmentSetSizeLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AttachmentSetSizeLimitExceeded) Error() string {
@@ -98,6 +108,8 @@ func (e *AttachmentSetSizeLimitExceeded) ErrorFault() smithy.ErrorFault { return
 // The case creation limit for the account has been exceeded.
 type CaseCreationLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CaseCreationLimitExceeded) Error() string {
@@ -115,6 +127,8 @@ func (e *CaseCreationLimitExceeded) ErrorFault() smithy.ErrorFault { return smit
 // The requested caseId couldn't be located.
 type CaseIdNotFound struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *CaseIdNotFound) Error() string {
@@ -133,6 +147,8 @@ func (e *CaseIdNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultCli
 // time has been exceeded.
 type DescribeAttachmentLimitExceeded struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DescribeAttachmentLimitExceeded) Error() string {
@@ -152,6 +168,8 @@ func (e *DescribeAttachmentLimitExceeded) ErrorFault() smithy.ErrorFault { retur
 // An internal server error occurred.
 type InternalServerError struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerError) Error() string {

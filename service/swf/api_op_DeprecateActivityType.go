@@ -67,11 +67,15 @@ type DeprecateActivityTypeInput struct {
 	//
 	// This member is required.
 	Domain *string
+
+	noSmithyDocumentSerde
 }
 
 type DeprecateActivityTypeOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeprecateActivityTypeMiddlewares(stack *middleware.Stack, options Options) (err error) {

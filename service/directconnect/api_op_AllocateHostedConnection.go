@@ -66,6 +66,8 @@ type AllocateHostedConnectionInput struct {
 
 	// The tags associated with the connection.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about an Direct Connect connection.
@@ -175,6 +177,8 @@ type AllocateHostedConnectionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAllocateHostedConnectionMiddlewares(stack *middleware.Stack, options Options) (err error) {

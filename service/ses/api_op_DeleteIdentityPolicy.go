@@ -54,12 +54,16 @@ type DeleteIdentityPolicyInput struct {
 	//
 	// This member is required.
 	PolicyName *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type DeleteIdentityPolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteIdentityPolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

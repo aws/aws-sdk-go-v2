@@ -51,6 +51,8 @@ type UpdateBackendJobInput struct {
 	// Filters the list of response objects to include only those with the specified
 	// status.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateBackendJobOutput struct {
@@ -81,6 +83,8 @@ type UpdateBackendJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateBackendJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -73,6 +73,8 @@ type ModifyCapacityReservationInput struct {
 
 	// The number of instances for which to reserve capacity.
 	InstanceCount *int32
+
+	noSmithyDocumentSerde
 }
 
 type ModifyCapacityReservationOutput struct {
@@ -82,6 +84,8 @@ type ModifyCapacityReservationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyCapacityReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {

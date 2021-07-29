@@ -45,6 +45,8 @@ type CreateDeploymentInput struct {
 	// unique upload URL per file. Otherwise, the service will only generate a single
 	// upload URL for the zipped files.
 	FileMap map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The result structure for the create a new deployment request.
@@ -67,6 +69,8 @@ type CreateDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

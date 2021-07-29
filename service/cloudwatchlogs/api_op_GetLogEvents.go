@@ -71,6 +71,8 @@ type GetLogEventsInput struct {
 	// this time are included. Events with a timestamp earlier than this time are not
 	// included.
 	StartTime *int64
+
+	noSmithyDocumentSerde
 }
 
 type GetLogEventsOutput struct {
@@ -90,6 +92,8 @@ type GetLogEventsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLogEventsMiddlewares(stack *middleware.Stack, options Options) (err error) {

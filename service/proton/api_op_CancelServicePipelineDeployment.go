@@ -50,6 +50,8 @@ type CancelServicePipelineDeploymentInput struct {
 	//
 	// This member is required.
 	ServiceName *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelServicePipelineDeploymentOutput struct {
@@ -61,6 +63,8 @@ type CancelServicePipelineDeploymentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelServicePipelineDeploymentMiddlewares(stack *middleware.Stack, options Options) (err error) {

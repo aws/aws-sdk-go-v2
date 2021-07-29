@@ -34,6 +34,8 @@ type GetTopicRuleInput struct {
 	//
 	// This member is required.
 	RuleName *string
+
+	noSmithyDocumentSerde
 }
 
 // The output from the GetTopicRule operation.
@@ -47,6 +49,8 @@ type GetTopicRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTopicRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

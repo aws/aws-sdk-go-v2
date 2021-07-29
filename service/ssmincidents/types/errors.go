@@ -10,6 +10,8 @@ import (
 // You don't have sufficient access to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -30,6 +32,8 @@ type ConflictException struct {
 
 	ResourceIdentifier *string
 	ResourceType       ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -48,6 +52,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // failure.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -68,6 +74,8 @@ type ResourceNotFoundException struct {
 
 	ResourceIdentifier *string
 	ResourceType       ResourceType
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -90,6 +98,8 @@ type ServiceQuotaExceededException struct {
 	ResourceType       ResourceType
 	ServiceCode        ServiceCode
 	QuotaCode          *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -110,6 +120,8 @@ type ThrottlingException struct {
 
 	ServiceCode ServiceCode
 	QuotaCode   *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ThrottlingException) Error() string {
@@ -127,6 +139,8 @@ func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The input fails to satisfy the constraints specified by an AWS service.
 type ValidationException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

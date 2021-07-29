@@ -74,6 +74,8 @@ type CreateWorkteamInput struct {
 
 	// The name of the workforce.
 	WorkforceName *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorkteamOutput struct {
@@ -84,6 +86,8 @@ type CreateWorkteamOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkteamMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type ListFacetNamesInput struct {
 
 	// The pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFacetNamesOutput struct {
@@ -51,6 +53,8 @@ type ListFacetNamesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFacetNamesMiddlewares(stack *middleware.Stack, options Options) (err error) {

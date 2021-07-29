@@ -63,6 +63,8 @@ type GetRateBasedStatementManagedKeysInput struct {
 	//
 	// This member is required.
 	WebACLName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetRateBasedStatementManagedKeysOutput struct {
@@ -75,6 +77,8 @@ type GetRateBasedStatementManagedKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRateBasedStatementManagedKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

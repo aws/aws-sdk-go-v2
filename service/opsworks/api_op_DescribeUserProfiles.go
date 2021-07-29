@@ -34,6 +34,8 @@ type DescribeUserProfilesInput struct {
 
 	// An array of IAM or federated user ARNs that identify the users to be described.
 	IamUserArns []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the response to a DescribeUserProfiles request.
@@ -44,6 +46,8 @@ type DescribeUserProfilesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeUserProfilesMiddlewares(stack *middleware.Stack, options Options) (err error) {

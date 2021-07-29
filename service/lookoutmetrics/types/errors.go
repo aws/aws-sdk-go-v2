@@ -10,6 +10,8 @@ import (
 // You do not have sufficient permissions to perform this action.
 type AccessDeniedException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -30,6 +32,8 @@ type ConflictException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -48,6 +52,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // failure.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -69,6 +75,8 @@ type ResourceNotFoundException struct {
 
 	ResourceId   *string
 	ResourceType *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -92,6 +100,8 @@ type ServiceQuotaExceededException struct {
 	ResourceType *string
 	QuotaCode    *string
 	ServiceCode  *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -110,6 +120,8 @@ func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return 
 // time.
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -131,6 +143,8 @@ type ValidationException struct {
 
 	Reason ValidationExceptionReason
 	Fields []ValidationExceptionField
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

@@ -53,6 +53,8 @@ type AssociateVPCWithHostedZoneInput struct {
 
 	// Optional: A comment about the association request.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response information for the
@@ -66,6 +68,8 @@ type AssociateVPCWithHostedZoneOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateVPCWithHostedZoneMiddlewares(stack *middleware.Stack, options Options) (err error) {

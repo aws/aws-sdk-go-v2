@@ -175,11 +175,15 @@ type DeregisterScalableTargetInput struct {
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterScalableTargetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterScalableTargetMiddlewares(stack *middleware.Stack, options Options) (err error) {

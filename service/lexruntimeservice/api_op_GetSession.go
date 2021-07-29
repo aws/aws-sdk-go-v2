@@ -49,6 +49,8 @@ type GetSessionInput struct {
 	// structure. When you specify a filter, only intents with their checkpointLabel
 	// field set to that string are returned.
 	CheckpointLabelFilter *string
+
+	noSmithyDocumentSerde
 }
 
 type GetSessionOutput struct {
@@ -79,6 +81,8 @@ type GetSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

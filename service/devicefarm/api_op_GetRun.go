@@ -34,6 +34,8 @@ type GetRunInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of a get run request.
@@ -44,6 +46,8 @@ type GetRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

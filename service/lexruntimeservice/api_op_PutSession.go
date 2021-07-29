@@ -113,6 +113,8 @@ type PutSessionInput struct {
 	// contains application information passed between Amazon Lex and a client
 	// application.
 	SessionAttributes map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type PutSessionOutput struct {
@@ -209,6 +211,8 @@ type PutSessionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutSessionMiddlewares(stack *middleware.Stack, options Options) (err error) {

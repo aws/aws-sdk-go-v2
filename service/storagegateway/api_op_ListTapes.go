@@ -57,6 +57,8 @@ type ListTapesInput struct {
 	// The Amazon Resource Name (ARN) of each of the tapes you want to list. If you
 	// don't specify a tape ARN, the response lists all tapes in both your VTL and VTS.
 	TapeARNs []string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the following fields:
@@ -80,6 +82,8 @@ type ListTapesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListTapesMiddlewares(stack *middleware.Stack, options Options) (err error) {

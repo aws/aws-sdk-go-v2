@@ -11,6 +11,8 @@ import (
 // contact AWS customer support.
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {

@@ -74,6 +74,8 @@ type DeleteFileInput struct {
 	// The name of the author of the commit that deletes the file. If no name is
 	// specified, the user's ARN is used as the author name and committer name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFileOutput struct {
@@ -102,6 +104,8 @@ type DeleteFileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFileMiddlewares(stack *middleware.Stack, options Options) (err error) {

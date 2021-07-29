@@ -235,11 +235,15 @@ type PutScheduledActionInput struct {
 	// https://www.joda.org/joda-time/timezones.html
 	// (https://www.joda.org/joda-time/timezones.html).
 	Timezone *string
+
+	noSmithyDocumentSerde
 }
 
 type PutScheduledActionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutScheduledActionMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -56,6 +56,8 @@ type ReportTaskProgressInput struct {
 	// Key-value pairs that define the properties of the ReportTaskProgressInput
 	// object.
 	Fields []types.Field
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of ReportTaskProgress.
@@ -69,6 +71,8 @@ type ReportTaskProgressOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationReportTaskProgressMiddlewares(stack *middleware.Stack, options Options) (err error) {

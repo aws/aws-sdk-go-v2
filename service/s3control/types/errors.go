@@ -10,6 +10,8 @@ import (
 //
 type BadRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BadRequestException) Error() string {
@@ -29,6 +31,8 @@ func (e *BadRequestException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // and try again.
 type BucketAlreadyExists struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BucketAlreadyExists) Error() string {
@@ -46,6 +50,8 @@ func (e *BucketAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // The Outposts bucket you tried to create already exists, and you own it.
 type BucketAlreadyOwnedByYou struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *BucketAlreadyOwnedByYou) Error() string {
@@ -63,6 +69,8 @@ func (e *BucketAlreadyOwnedByYou) ErrorFault() smithy.ErrorFault { return smithy
 //
 type IdempotencyException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *IdempotencyException) Error() string {
@@ -80,6 +88,8 @@ func (e *IdempotencyException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 //
 type InternalServiceException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServiceException) Error() string {
@@ -97,6 +107,8 @@ func (e *InternalServiceException) ErrorFault() smithy.ErrorFault { return smith
 //
 type InvalidNextTokenException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidNextTokenException) Error() string {
@@ -114,6 +126,8 @@ func (e *InvalidNextTokenException) ErrorFault() smithy.ErrorFault { return smit
 //
 type InvalidRequestException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InvalidRequestException) Error() string {
@@ -131,6 +145,8 @@ func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy
 //
 type JobStatusException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *JobStatusException) Error() string {
@@ -149,6 +165,8 @@ func (e *JobStatusException) ErrorFault() smithy.ErrorFault { return smithy.Faul
 // against an account that doesn't have a PublicAccessBlockConfiguration set.
 type NoSuchPublicAccessBlockConfiguration struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NoSuchPublicAccessBlockConfiguration) Error() string {
@@ -170,6 +188,8 @@ func (e *NoSuchPublicAccessBlockConfiguration) ErrorFault() smithy.ErrorFault {
 //
 type NotFoundException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *NotFoundException) Error() string {
@@ -187,6 +207,8 @@ func (e *NotFoundException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 //
 type TooManyRequestsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyRequestsException) Error() string {
@@ -204,6 +226,8 @@ func (e *TooManyRequestsException) ErrorFault() smithy.ErrorFault { return smith
 // Amazon S3 throws this exception if you have too many tags in your tag set.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

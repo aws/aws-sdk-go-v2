@@ -29,11 +29,14 @@ func (c *Client) DeleteOrganization(ctx context.Context, params *DeleteOrganizat
 }
 
 type DeleteOrganizationInput struct {
+	noSmithyDocumentSerde
 }
 
 type DeleteOrganizationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteOrganizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

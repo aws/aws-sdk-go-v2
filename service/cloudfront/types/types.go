@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -26,6 +27,8 @@ type ActiveTrustedKeyGroups struct {
 	// group that CloudFront can use to verify the signatures of signed URLs and signed
 	// cookies.
 	Items []KGKeyPairIds
+
+	noSmithyDocumentSerde
 }
 
 // A list of accounts and the active CloudFront key pairs in each account that
@@ -48,6 +51,8 @@ type ActiveTrustedSigners struct {
 	// account that CloudFront can use to verify the signatures of signed URLs and
 	// signed cookies.
 	Items []Signer
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about CNAMEs (alternate domain names),
@@ -63,6 +68,8 @@ type Aliases struct {
 	// A complex type that contains the CNAME aliases, if any, that you want to
 	// associate with this distribution.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // Amazon Web Services services in China customers must file for an Internet
@@ -98,6 +105,8 @@ type AliasICPRecordal struct {
 	// in trying to determine the status. You can try again to see if the error is
 	// resolved in which case CloudFront returns an APPROVED or SUSPENDED status.
 	ICPRecordalStatus ICPRecordalStatus
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that controls which HTTP methods CloudFront processes and
@@ -146,6 +155,8 @@ type AllowedMethods struct {
 	// Access-Control-Request-Headers, and Origin headers for the responses to be
 	// cached correctly.
 	CachedMethods *CachedMethods
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that describes how CloudFront processes requests. You must create
@@ -391,6 +402,8 @@ type CacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	TrustedSigners *TrustedSigners
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains zero or more CacheBehavior elements.
@@ -404,6 +417,8 @@ type CacheBehaviors struct {
 	// Optional: A complex type that contains cache behaviors for this distribution. If
 	// Quantity is 0, you can omit Items.
 	Items []CacheBehavior
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that controls whether CloudFront caches the response to requests
@@ -433,6 +448,8 @@ type CachedMethods struct {
 	//
 	// This member is required.
 	Quantity *int32
+
+	noSmithyDocumentSerde
 }
 
 // A cache policy. When it’s attached to a cache behavior, the cache policy
@@ -468,6 +485,8 @@ type CachePolicy struct {
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A cache policy configuration. This configuration determines the following:
@@ -535,6 +554,8 @@ type CachePolicyConfig struct {
 	// The values included in the cache key are automatically included in requests that
 	// CloudFront sends to the origin.
 	ParametersInCacheKeyAndForwardedToOrigin *ParametersInCacheKeyAndForwardedToOrigin
+
+	noSmithyDocumentSerde
 }
 
 // An object that determines whether any cookies in viewer requests (and if so,
@@ -569,6 +590,8 @@ type CachePolicyCookiesConfig struct {
 
 	// Contains a list of cookie names.
 	Cookies *CookieNames
+
+	noSmithyDocumentSerde
 }
 
 // An object that determines whether any HTTP headers (and if so, which headers)
@@ -594,6 +617,8 @@ type CachePolicyHeadersConfig struct {
 
 	// Contains a list of HTTP header names.
 	Headers *Headers
+
+	noSmithyDocumentSerde
 }
 
 // A list of cache policies.
@@ -616,6 +641,8 @@ type CachePolicyList struct {
 	// present. It contains the value that you should use in the Marker field of a
 	// subsequent request to continue listing cache policies where you left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that determines whether any URL query strings in viewer requests (and
@@ -656,6 +683,8 @@ type CachePolicyQueryStringsConfig struct {
 	// whitelist (the listed query strings are included) or allExcept (the listed query
 	// strings are not included, but all other query strings are).
 	QueryStrings *QueryStringNames
+
+	noSmithyDocumentSerde
 }
 
 // Contains a cache policy.
@@ -671,6 +700,8 @@ type CachePolicySummary struct {
 	//
 	// This member is required.
 	Type CachePolicyType
+
+	noSmithyDocumentSerde
 }
 
 // CloudFront origin access identity.
@@ -689,6 +720,8 @@ type CloudFrontOriginAccessIdentity struct {
 
 	// The current configuration information for the identity.
 	CloudFrontOriginAccessIdentityConfig *CloudFrontOriginAccessIdentityConfig
+
+	noSmithyDocumentSerde
 }
 
 // Origin access identity configuration. Send a GET request to the /CloudFront API
@@ -715,6 +748,8 @@ type CloudFrontOriginAccessIdentityConfig struct {
 	//
 	// This member is required.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // Lists the origin access identities for CloudFront.Send a GET request to the
@@ -760,6 +795,8 @@ type CloudFrontOriginAccessIdentityList struct {
 	// use for the Marker request parameter to continue listing your origin access
 	// identities where they left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // Summary of the information about a CloudFront origin access identity.
@@ -782,6 +819,8 @@ type CloudFrontOriginAccessIdentitySummary struct {
 	//
 	// This member is required.
 	S3CanonicalUserId *string
+
+	noSmithyDocumentSerde
 }
 
 // An alias (also called a CNAME) and the CloudFront distribution and Amazon Web
@@ -801,6 +840,8 @@ type ConflictingAlias struct {
 	// The (partially hidden) ID of the CloudFront distribution associated with the
 	// alias.
 	DistributionId *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of aliases (also called CNAMEs) and the CloudFront distributions and
@@ -823,6 +864,8 @@ type ConflictingAliasesList struct {
 
 	// The number of conflicting aliases returned in the response.
 	Quantity *int32
+
+	noSmithyDocumentSerde
 }
 
 // A field-level encryption content type profile.
@@ -840,6 +883,8 @@ type ContentTypeProfile struct {
 
 	// The profile ID for a field-level encryption content type-profile mapping.
 	ProfileId *string
+
+	noSmithyDocumentSerde
 }
 
 // The configuration for a field-level encryption content type-profile mapping.
@@ -856,6 +901,8 @@ type ContentTypeProfileConfig struct {
 
 	// The configuration for a field-level encryption content type-profile.
 	ContentTypeProfiles *ContentTypeProfiles
+
+	noSmithyDocumentSerde
 }
 
 // Field-level encryption content type-profile.
@@ -868,6 +915,8 @@ type ContentTypeProfiles struct {
 
 	// Items in a field-level encryption content type-profile mapping.
 	Items []ContentTypeProfile
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of cookie names.
@@ -880,6 +929,8 @@ type CookieNames struct {
 
 	// A list of cookie names.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // This field is deprecated. We recommend that you use a cache policy or an origin
@@ -931,6 +982,8 @@ type CookiePreference struct {
 	// (https://docs.aws.amazon.com/general/latest/gr/xrefaws_service_limits.html#limits_cloudfront)
 	// in the Amazon Web Services General Reference.
 	WhitelistedNames *CookieNames
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that controls:
@@ -1008,6 +1061,8 @@ type CustomErrorResponse struct {
 	// to return 5xx errors, CloudFront can't get the files that you want to return to
 	// viewers because the origin server is unavailable.
 	ResponsePagePath *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that controls:
@@ -1035,6 +1090,8 @@ type CustomErrorResponses struct {
 	// code for which you want to specify a custom error page and/or a caching
 	// duration.
 	Items []CustomErrorResponse
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the list of Custom Headers for each origin.
@@ -1049,6 +1106,8 @@ type CustomHeaders struct {
 	// header that you want CloudFront to forward to the origin. If Quantity is 0, omit
 	// Items.
 	Items []OriginCustomHeader
+
+	noSmithyDocumentSerde
 }
 
 // A custom origin. A custom origin is any origin that is not an Amazon S3 bucket,
@@ -1106,6 +1165,8 @@ type CustomOriginConfig struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesOriginSSLProtocols)
 	// in the Amazon CloudFront Developer Guide.
 	OriginSslProtocols *OriginSslProtocols
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that describes the default cache behavior if you don’t specify a
@@ -1322,6 +1383,8 @@ type DefaultCacheBehavior struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html)
 	// in the Amazon CloudFront Developer Guide.
 	TrustedSigners *TrustedSigners
+
+	noSmithyDocumentSerde
 }
 
 // A distribution tells CloudFront where you want content to be delivered from, and
@@ -1393,6 +1456,8 @@ type Distribution struct {
 	// (https://docs.amazonaws.cn/en_us/aws/latest/userguide/accounts-and-credentials.html)
 	// in Getting Started with Amazon Web Services services in China.
 	AliasICPRecordals []AliasICPRecordal
+
+	noSmithyDocumentSerde
 }
 
 // A distribution configuration.
@@ -1561,6 +1626,8 @@ type DistributionConfig struct {
 	// about WAF, see the WAF Developer Guide
 	// (https://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html).
 	WebACLId *string
+
+	noSmithyDocumentSerde
 }
 
 // A distribution Configuration and a list of tags to be associated with the
@@ -1576,6 +1643,8 @@ type DistributionConfigWithTags struct {
 	//
 	// This member is required.
 	Tags *Tags
+
+	noSmithyDocumentSerde
 }
 
 // A list of distribution IDs.
@@ -1609,6 +1678,8 @@ type DistributionIdList struct {
 	// Contains the value that you should use in the Marker field of a subsequent
 	// request to continue listing distribution IDs where you left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // A distribution list.
@@ -1644,6 +1715,8 @@ type DistributionList struct {
 	// use for the Marker request parameter to continue listing your distributions
 	// where they left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the information about a CloudFront distribution.
@@ -1765,6 +1838,8 @@ type DistributionSummary struct {
 	// A complex type that contains information about origin groups for this
 	// distribution.
 	OriginGroups *OriginGroups
+
+	noSmithyDocumentSerde
 }
 
 // Complex data type for field-level encryption profiles that includes all of the
@@ -1780,6 +1855,8 @@ type EncryptionEntities struct {
 	// An array of field patterns in a field-level encryption content type-profile
 	// mapping.
 	Items []EncryptionEntity
+
+	noSmithyDocumentSerde
 }
 
 // Complex data type for field-level encryption profiles that includes the
@@ -1807,6 +1884,8 @@ type EncryptionEntity struct {
 	//
 	// This member is required.
 	PublicKeyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the Amazon Kinesis data stream where you are sending
@@ -1822,6 +1901,8 @@ type EndPoint struct {
 	// Contains information about the Amazon Kinesis data stream where you are sending
 	// real-time log data.
 	KinesisStreamConfig *KinesisStreamConfig
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type that includes the profile configurations and other options
@@ -1845,6 +1926,8 @@ type FieldLevelEncryption struct {
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type that includes the profile configurations specified for
@@ -1868,6 +1951,8 @@ type FieldLevelEncryptionConfig struct {
 	// A complex data type that specifies when to forward content if a profile isn't
 	// found and the profile that can be provided as a query argument in a request.
 	QueryArgProfileConfig *QueryArgProfileConfig
+
+	noSmithyDocumentSerde
 }
 
 // List of field-level encrpytion configurations.
@@ -1890,6 +1975,8 @@ type FieldLevelEncryptionList struct {
 	// the value that you can use for the Marker request parameter to continue listing
 	// your configurations where you left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type for field-level encryption profiles.
@@ -1912,6 +1999,8 @@ type FieldLevelEncryptionProfile struct {
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type of profiles for the field-level encryption.
@@ -1937,6 +2026,8 @@ type FieldLevelEncryptionProfileConfig struct {
 	// An optional comment for the field-level encryption profile. The comment cannot
 	// be longer than 128 characters.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // List of field-level encryption profiles.
@@ -1960,6 +2051,8 @@ type FieldLevelEncryptionProfileList struct {
 	// the value that you can use for the Marker request parameter to continue listing
 	// your profiles where you left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // The field-level encryption profile summary.
@@ -1990,6 +2083,8 @@ type FieldLevelEncryptionProfileSummary struct {
 	// An optional comment for the field-level encryption profile summary. The comment
 	// cannot be longer than 128 characters.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of a field-level encryption item.
@@ -2014,6 +2109,8 @@ type FieldLevelEncryptionSummary struct {
 
 	// A summary of a query argument-profile mapping.
 	QueryArgProfileConfig *QueryArgProfileConfig
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type that includes the field patterns to match for field-level
@@ -2027,6 +2124,8 @@ type FieldPatterns struct {
 
 	// An array of the field-level encryption field patterns.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // This field is deprecated. We recommend that you use a cache policy or an origin
@@ -2121,6 +2220,8 @@ type ForwardedValues struct {
 	// information about the query string parameters that you want CloudFront to use
 	// for caching for this cache behavior.
 	QueryStringCacheKeys *QueryStringCacheKeys
+
+	noSmithyDocumentSerde
 }
 
 // A CloudFront function that is associated with a cache behavior in a CloudFront
@@ -2138,6 +2239,8 @@ type FunctionAssociation struct {
 	//
 	// This member is required.
 	FunctionARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of CloudFront functions that are associated with a cache behavior in a
@@ -2154,6 +2257,8 @@ type FunctionAssociations struct {
 	// CloudFront distribution. CloudFront functions must be published to the LIVE
 	// stage to associate them with a cache behavior.
 	Items []FunctionAssociation
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information about a CloudFront function.
@@ -2168,6 +2273,8 @@ type FunctionConfig struct {
 	//
 	// This member is required.
 	Runtime FunctionRuntime
+
+	noSmithyDocumentSerde
 }
 
 // A list of CloudFront functions.
@@ -2190,6 +2297,8 @@ type FunctionList struct {
 	// present. It contains the value that you should use in the Marker field of a
 	// subsequent request to continue listing functions where you left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains metadata about a CloudFront function.
@@ -2215,6 +2324,8 @@ type FunctionMetadata struct {
 	// attach the function to a distribution’s cache behavior, using the function’s
 	// ARN.
 	Stage FunctionStage
+
+	noSmithyDocumentSerde
 }
 
 // Contains configuration information and metadata about a CloudFront function.
@@ -2237,6 +2348,8 @@ type FunctionSummary struct {
 
 	// The status of the CloudFront function.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that controls the countries in which your content is distributed.
@@ -2276,6 +2389,8 @@ type GeoRestriction struct {
 	// Organization for Standardization website. You can also refer to the country list
 	// on the CloudFront console, which includes both country names and codes.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of HTTP header names.
@@ -2288,6 +2403,8 @@ type Headers struct {
 
 	// A list of HTTP header names.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // An invalidation.
@@ -2313,6 +2430,8 @@ type Invalidation struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // An invalidation batch.
@@ -2342,6 +2461,8 @@ type InvalidationBatch struct {
 	//
 	// This member is required.
 	Paths *Paths
+
+	noSmithyDocumentSerde
 }
 
 // The InvalidationList complex type describes the list of invalidation objects.
@@ -2382,6 +2503,8 @@ type InvalidationList struct {
 	// can use for the Marker request parameter to continue listing your invalidation
 	// batches where they left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of an invalidation request.
@@ -2401,6 +2524,8 @@ type InvalidationSummary struct {
 	//
 	// This member is required.
 	Status *string
+
+	noSmithyDocumentSerde
 }
 
 // A key group. A key group contains a list of public keys that you can use with
@@ -2422,6 +2547,8 @@ type KeyGroup struct {
 	//
 	// This member is required.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // A key group configuration. A key group contains a list of public keys that you
@@ -2442,6 +2569,8 @@ type KeyGroupConfig struct {
 	// A comment to describe the key group. The comment cannot be longer than 128
 	// characters.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of key groups.
@@ -2464,6 +2593,8 @@ type KeyGroupList struct {
 	// present. It contains the value that you should use in the Marker field of a
 	// subsequent request to continue listing key groups.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a key group.
@@ -2473,6 +2604,8 @@ type KeyGroupSummary struct {
 	//
 	// This member is required.
 	KeyGroup *KeyGroup
+
+	noSmithyDocumentSerde
 }
 
 // A list of CloudFront key pair identifiers.
@@ -2485,6 +2618,8 @@ type KeyPairIds struct {
 
 	// A list of CloudFront key pair identifiers.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // A list of identifiers for the public keys that CloudFront can use to verify the
@@ -2496,6 +2631,8 @@ type KGKeyPairIds struct {
 
 	// A list of CloudFront key pair identifiers.
 	KeyPairIds *KeyPairIds
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the Amazon Kinesis data stream where you are sending
@@ -2516,6 +2653,8 @@ type KinesisStreamConfig struct {
 	//
 	// This member is required.
 	StreamARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains a Lambda@Edge function association.
@@ -2558,6 +2697,8 @@ type LambdaFunctionAssociation struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/lambda-include-body-access.html)
 	// in the Amazon CloudFront Developer Guide.
 	IncludeBody *bool
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that specifies a list of Lambda@Edge functions associations for a
@@ -2578,6 +2719,8 @@ type LambdaFunctionAssociations struct {
 	// Optional: A complex type that contains LambdaFunctionAssociation items for this
 	// cache behavior. If Quantity is 0, you can omit Items.
 	Items []LambdaFunctionAssociation
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that controls whether access logs are written for the
@@ -2617,6 +2760,8 @@ type LoggingConfig struct {
 	//
 	// This member is required.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // A monitoring subscription. This structure contains information about whether
@@ -2625,6 +2770,8 @@ type MonitoringSubscription struct {
 
 	// A subscription configuration for additional CloudWatch metrics.
 	RealtimeMetricsSubscriptionConfig *RealtimeMetricsSubscriptionConfig
+
+	noSmithyDocumentSerde
 }
 
 // An origin. An origin is the location where content is stored, and from which
@@ -2723,6 +2870,8 @@ type Origin struct {
 	// including an Amazon S3 bucket that is configured with static website hosting,
 	// use the CustomOriginConfig type instead.
 	S3OriginConfig *S3OriginConfig
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains HeaderName and HeaderValue elements, if any, for
@@ -2741,6 +2890,8 @@ type OriginCustomHeader struct {
 	//
 	// This member is required.
 	HeaderValue *string
+
+	noSmithyDocumentSerde
 }
 
 // An origin group includes two origins (a primary origin and a second origin to
@@ -2766,6 +2917,8 @@ type OriginGroup struct {
 	//
 	// This member is required.
 	Members *OriginGroupMembers
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type that includes information about the failover criteria for an
@@ -2778,6 +2931,8 @@ type OriginGroupFailoverCriteria struct {
 	//
 	// This member is required.
 	StatusCodes *StatusCodes
+
+	noSmithyDocumentSerde
 }
 
 // An origin in an origin group.
@@ -2787,6 +2942,8 @@ type OriginGroupMember struct {
 	//
 	// This member is required.
 	OriginId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type for the origins included in an origin group.
@@ -2801,6 +2958,8 @@ type OriginGroupMembers struct {
 	//
 	// This member is required.
 	Quantity *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type for the origin groups specified for a distribution.
@@ -2813,6 +2972,8 @@ type OriginGroups struct {
 
 	// The items (origin groups) in a distribution.
 	Items []OriginGroup
+
+	noSmithyDocumentSerde
 }
 
 // An origin request policy. When it’s attached to a cache behavior, the origin
@@ -2851,6 +3012,8 @@ type OriginRequestPolicy struct {
 	//
 	// This member is required.
 	OriginRequestPolicyConfig *OriginRequestPolicyConfig
+
+	noSmithyDocumentSerde
 }
 
 // An origin request policy configuration. This configuration determines the values
@@ -2899,6 +3062,8 @@ type OriginRequestPolicyConfig struct {
 	// A comment to describe the origin request policy. The comment cannot be longer
 	// than 128 characters.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that determines whether any cookies in viewer requests (and if so,
@@ -2925,6 +3090,8 @@ type OriginRequestPolicyCookiesConfig struct {
 
 	// Contains a list of cookie names.
 	Cookies *CookieNames
+
+	noSmithyDocumentSerde
 }
 
 // An object that determines whether any HTTP headers (and if so, which headers)
@@ -2956,6 +3123,8 @@ type OriginRequestPolicyHeadersConfig struct {
 
 	// Contains a list of HTTP header names.
 	Headers *Headers
+
+	noSmithyDocumentSerde
 }
 
 // A list of origin request policies.
@@ -2979,6 +3148,8 @@ type OriginRequestPolicyList struct {
 	// subsequent request to continue listing origin request policies where you left
 	// off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // An object that determines whether any URL query strings in viewer requests (and
@@ -3008,6 +3179,8 @@ type OriginRequestPolicyQueryStringsConfig struct {
 	// Contains a list of the query strings in viewer requests that are included in
 	// requests that CloudFront sends to the origin.
 	QueryStrings *QueryStringNames
+
+	noSmithyDocumentSerde
 }
 
 // Contains an origin request policy.
@@ -3023,6 +3196,8 @@ type OriginRequestPolicySummary struct {
 	//
 	// This member is required.
 	Type OriginRequestPolicyType
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the origins for this distribution.
@@ -3037,6 +3212,8 @@ type Origins struct {
 	//
 	// This member is required.
 	Quantity *int32
+
+	noSmithyDocumentSerde
 }
 
 // CloudFront Origin Shield. Using Origin Shield can help reduce the load on your
@@ -3062,6 +3239,8 @@ type OriginShield struct {
 	// (https://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/origin-shield.html#choose-origin-shield-region)
 	// in the Amazon CloudFront Developer Guide.
 	OriginShieldRegion *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the SSL/TLS protocols that
@@ -3078,6 +3257,8 @@ type OriginSslProtocols struct {
 	//
 	// This member is required.
 	Quantity *int32
+
+	noSmithyDocumentSerde
 }
 
 // This object determines the values that CloudFront includes in the cache key.
@@ -3170,6 +3351,8 @@ type ParametersInCacheKeyAndForwardedToOrigin struct {
 	// requests. In this case, you can manually add Accept-Encoding to the headers
 	// whitelist like any other HTTP header.
 	EnableAcceptEncodingBrotli *bool
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the objects that you want to
@@ -3186,6 +3369,8 @@ type Paths struct {
 
 	// A complex type that contains a list of the paths that you want to invalidate.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // A public key that you can use with signed URLs and signed cookies
@@ -3212,6 +3397,8 @@ type PublicKey struct {
 	//
 	// This member is required.
 	PublicKeyConfig *PublicKeyConfig
+
+	noSmithyDocumentSerde
 }
 
 // Configuration information about a public key that you can use with signed URLs
@@ -3243,6 +3430,8 @@ type PublicKeyConfig struct {
 	// A comment to describe the public key. The comment cannot be longer than 128
 	// characters.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of public keys that you can use with signed URLs and signed cookies
@@ -3268,6 +3457,8 @@ type PublicKeyList struct {
 	// the value that you can use for the Marker request parameter to continue listing
 	// your public keys where you left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a public key.
@@ -3296,6 +3487,8 @@ type PublicKeySummary struct {
 	// A comment to describe the public key. The comment cannot be longer than 128
 	// characters.
 	Comment *string
+
+	noSmithyDocumentSerde
 }
 
 // Query argument-profile mapping for field-level encryption.
@@ -3310,6 +3503,8 @@ type QueryArgProfile struct {
 	//
 	// This member is required.
 	QueryArg *string
+
+	noSmithyDocumentSerde
 }
 
 // Configuration for query argument-profile mapping for field-level encryption.
@@ -3325,6 +3520,8 @@ type QueryArgProfileConfig struct {
 	// Profiles specified for query argument-profile mapping for field-level
 	// encryption.
 	QueryArgProfiles *QueryArgProfiles
+
+	noSmithyDocumentSerde
 }
 
 // Query argument-profile mapping for field-level encryption.
@@ -3338,6 +3535,8 @@ type QueryArgProfiles struct {
 
 	// Number of items for query argument-profile mapping for field-level encryption.
 	Items []QueryArgProfile
+
+	noSmithyDocumentSerde
 }
 
 // This field is deprecated. We recommend that you use a cache policy or an origin
@@ -3358,6 +3557,8 @@ type QueryStringCacheKeys struct {
 	// as a basis for caching for a cache behavior. If Quantity is 0, you can omit
 	// Items.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of query string names.
@@ -3370,6 +3571,8 @@ type QueryStringNames struct {
 
 	// A list of query string names.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // A real-time log configuration.
@@ -3408,6 +3611,8 @@ type RealtimeLogConfig struct {
 	//
 	// This member is required.
 	SamplingRate *int64
+
+	noSmithyDocumentSerde
 }
 
 // A list of real-time log configurations.
@@ -3438,6 +3643,8 @@ type RealtimeLogConfigs struct {
 	// subsequent request to continue listing real-time log configurations where you
 	// left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // A subscription configuration for additional CloudWatch metrics.
@@ -3448,6 +3655,8 @@ type RealtimeMetricsSubscriptionConfig struct {
 	//
 	// This member is required.
 	RealtimeMetricsSubscriptionStatus RealtimeMetricsSubscriptionStatus
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that identifies ways in which you want to restrict distribution
@@ -3459,6 +3668,8 @@ type Restrictions struct {
 	//
 	// This member is required.
 	GeoRestriction *GeoRestriction
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the Amazon S3 bucket from which
@@ -3485,6 +3696,8 @@ type S3Origin struct {
 	//
 	// This member is required.
 	OriginAccessIdentity *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the Amazon S3 origin. If the
@@ -3510,6 +3723,8 @@ type S3OriginConfig struct {
 	//
 	// This member is required.
 	OriginAccessIdentity *string
+
+	noSmithyDocumentSerde
 }
 
 // A list of accounts and the active CloudFront key pairs in each account that
@@ -3524,6 +3739,8 @@ type Signer struct {
 
 	// A list of CloudFront key pair identifiers.
 	KeyPairIds *KeyPairIds
+
+	noSmithyDocumentSerde
 }
 
 // A complex data type for the status codes that you specify that, when returned by
@@ -3539,6 +3756,8 @@ type StatusCodes struct {
 	//
 	// This member is required.
 	Quantity *int32
+
+	noSmithyDocumentSerde
 }
 
 // A streaming distribution tells CloudFront where you want RTMP content to be
@@ -3591,6 +3810,8 @@ type StreamingDistribution struct {
 
 	// The date and time that the distribution was last modified.
 	LastModifiedTime *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // The RTMP distribution's configuration information.
@@ -3645,6 +3866,8 @@ type StreamingDistributionConfig struct {
 	// A complex type that contains information about price class for this streaming
 	// distribution.
 	PriceClass PriceClass
+
+	noSmithyDocumentSerde
 }
 
 // A streaming distribution Configuration and a list of tags to be associated with
@@ -3660,6 +3883,8 @@ type StreamingDistributionConfigWithTags struct {
 	//
 	// This member is required.
 	Tags *Tags
+
+	noSmithyDocumentSerde
 }
 
 // A streaming distribution list.
@@ -3695,6 +3920,8 @@ type StreamingDistributionList struct {
 	// use for the Marker request parameter to continue listing your RTMP distributions
 	// where they left off.
 	NextMarker *string
+
+	noSmithyDocumentSerde
 }
 
 // A summary of the information for a CloudFront streaming distribution.
@@ -3774,6 +4001,8 @@ type StreamingDistributionSummary struct {
 	//
 	// This member is required.
 	TrustedSigners *TrustedSigners
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that controls whether access logs are written for this streaming
@@ -3803,6 +4032,8 @@ type StreamingLoggingConfig struct {
 	//
 	// This member is required.
 	Prefix *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains Tag key and Tag value.
@@ -3819,6 +4050,8 @@ type Tag struct {
 	// between 0 and 256 characters. Valid characters include a-z, A-Z, 0-9, space, and
 	// the special characters _ - . : / = + @.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains zero or more Tag elements.
@@ -3826,6 +4059,8 @@ type TagKeys struct {
 
 	// A complex type that contains Tag key elements.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains zero or more Tag elements.
@@ -3833,6 +4068,8 @@ type Tags struct {
 
 	// A complex type that contains Tag elements.
 	Items []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Contains the result of testing a CloudFront function with TestFunction.
@@ -3859,6 +4096,8 @@ type TestResult struct {
 	// Contains configuration information and metadata about the CloudFront function
 	// that was tested.
 	FunctionSummary *FunctionSummary
+
+	noSmithyDocumentSerde
 }
 
 // A list of key groups whose public keys CloudFront can use to verify the
@@ -3879,6 +4118,8 @@ type TrustedKeyGroups struct {
 
 	// A list of key groups identifiers.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // A list of accounts whose public keys CloudFront can use to verify the signatures
@@ -3899,6 +4140,8 @@ type TrustedSigners struct {
 
 	// A list of account identifiers.
 	Items []string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that determines the distribution’s SSL/TLS configuration for
@@ -4055,4 +4298,8 @@ type ViewerCertificate struct {
 	// CloudFront domain name such as d111111abcdef8.cloudfront.net, don’t set a value
 	// for this field.
 	SSLSupportMethod SSLSupportMethod
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

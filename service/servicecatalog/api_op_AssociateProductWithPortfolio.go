@@ -50,11 +50,15 @@ type AssociateProductWithPortfolioInput struct {
 
 	// The identifier of the source portfolio.
 	SourcePortfolioId *string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateProductWithPortfolioOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateProductWithPortfolioMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -51,6 +51,8 @@ type StopModelInput struct {
 	// as in the first request. Using a different value for ClientToken is considered a
 	// new call to StopModel. An idempotency token is active for 8 hours.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type StopModelOutput struct {
@@ -60,6 +62,8 @@ type StopModelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStopModelMiddlewares(stack *middleware.Stack, options Options) (err error) {

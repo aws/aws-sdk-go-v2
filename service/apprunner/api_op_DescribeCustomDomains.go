@@ -47,6 +47,8 @@ type DescribeCustomDomainsInput struct {
 	// identical to the ones that are specified in the initial request. If you don't
 	// specify NextToken, the request retrieves the first result page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCustomDomainsOutput struct {
@@ -76,6 +78,8 @@ type DescribeCustomDomainsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCustomDomainsMiddlewares(stack *middleware.Stack, options Options) (err error) {

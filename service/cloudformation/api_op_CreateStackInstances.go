@@ -116,6 +116,8 @@ type CreateStackInstancesInput struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
 	// to update the stack set template.
 	ParameterOverrides []types.Parameter
+
+	noSmithyDocumentSerde
 }
 
 type CreateStackInstancesOutput struct {
@@ -125,6 +127,8 @@ type CreateStackInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateStackInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type BatchAssociateClientDeviceWithCoreDeviceInput struct {
 
 	// The list of client devices to associate.
 	Entries []types.AssociateClientDeviceWithCoreDeviceEntry
+
+	noSmithyDocumentSerde
 }
 
 type BatchAssociateClientDeviceWithCoreDeviceOutput struct {
@@ -58,6 +60,8 @@ type BatchAssociateClientDeviceWithCoreDeviceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchAssociateClientDeviceWithCoreDeviceMiddlewares(stack *middleware.Stack, options Options) (err error) {

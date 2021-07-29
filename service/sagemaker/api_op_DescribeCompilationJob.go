@@ -36,6 +36,8 @@ type DescribeCompilationJobInput struct {
 	//
 	// This member is required.
 	CompilationJobName *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCompilationJobOutput struct {
@@ -132,6 +134,8 @@ type DescribeCompilationJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCompilationJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

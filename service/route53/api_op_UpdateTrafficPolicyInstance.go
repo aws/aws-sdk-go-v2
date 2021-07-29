@@ -71,6 +71,8 @@ type UpdateTrafficPolicyInstanceInput struct {
 	//
 	// This member is required.
 	TrafficPolicyVersion *int32
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains information about the resource record sets that
@@ -84,6 +86,8 @@ type UpdateTrafficPolicyInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateTrafficPolicyInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

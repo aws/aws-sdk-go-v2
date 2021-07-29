@@ -37,6 +37,8 @@ type DeleteRelationalDatabaseSnapshotInput struct {
 	//
 	// This member is required.
 	RelationalDatabaseSnapshotName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRelationalDatabaseSnapshotOutput struct {
@@ -48,6 +50,8 @@ type DeleteRelationalDatabaseSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRelationalDatabaseSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

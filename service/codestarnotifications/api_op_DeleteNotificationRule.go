@@ -32,6 +32,8 @@ type DeleteNotificationRuleInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteNotificationRuleOutput struct {
@@ -41,6 +43,8 @@ type DeleteNotificationRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteNotificationRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

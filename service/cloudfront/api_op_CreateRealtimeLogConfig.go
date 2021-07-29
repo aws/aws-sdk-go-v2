@@ -59,6 +59,8 @@ type CreateRealtimeLogConfigInput struct {
 	//
 	// This member is required.
 	SamplingRate *int64
+
+	noSmithyDocumentSerde
 }
 
 type CreateRealtimeLogConfigOutput struct {
@@ -68,6 +70,8 @@ type CreateRealtimeLogConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRealtimeLogConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

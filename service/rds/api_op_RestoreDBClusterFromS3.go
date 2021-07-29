@@ -264,6 +264,8 @@ type RestoreDBClusterFromS3Input struct {
 
 	// A list of EC2 VPC security groups to associate with the restored DB cluster.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreDBClusterFromS3Output struct {
@@ -275,6 +277,8 @@ type RestoreDBClusterFromS3Output struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreDBClusterFromS3Middlewares(stack *middleware.Stack, options Options) (err error) {

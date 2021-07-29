@@ -35,11 +35,15 @@ type VerifyEmailAddressInput struct {
 	//
 	// This member is required.
 	EmailAddress *string
+
+	noSmithyDocumentSerde
 }
 
 type VerifyEmailAddressOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationVerifyEmailAddressMiddlewares(stack *middleware.Stack, options Options) (err error) {

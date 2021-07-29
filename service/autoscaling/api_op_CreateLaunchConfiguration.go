@@ -196,11 +196,15 @@ type CreateLaunchConfigurationInput struct {
 	// for you, and you can load the text from a file. Otherwise, you must provide
 	// base64-encoded text. User data is limited to 16 KB.
 	UserData *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateLaunchConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateLaunchConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

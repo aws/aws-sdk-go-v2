@@ -37,6 +37,8 @@ type CreateKeysAndCertificateInput struct {
 
 	// Specifies whether the certificate is active.
 	SetAsActive bool
+
+	noSmithyDocumentSerde
 }
 
 // The output of the CreateKeysAndCertificate operation.
@@ -57,6 +59,8 @@ type CreateKeysAndCertificateOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateKeysAndCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -42,11 +42,15 @@ type RedactConversationMessageInput struct {
 	//
 	// This member is required.
 	MessageId *string
+
+	noSmithyDocumentSerde
 }
 
 type RedactConversationMessageOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRedactConversationMessageMiddlewares(stack *middleware.Stack, options Options) (err error) {

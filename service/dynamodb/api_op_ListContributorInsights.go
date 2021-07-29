@@ -39,6 +39,8 @@ type ListContributorInsightsInput struct {
 
 	// The name of the table.
 	TableName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListContributorInsightsOutput struct {
@@ -51,6 +53,8 @@ type ListContributorInsightsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListContributorInsightsMiddlewares(stack *middleware.Stack, options Options) (err error) {

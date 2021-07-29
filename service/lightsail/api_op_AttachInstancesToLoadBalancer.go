@@ -47,6 +47,8 @@ type AttachInstancesToLoadBalancerInput struct {
 	//
 	// This member is required.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 type AttachInstancesToLoadBalancerOutput struct {
@@ -58,6 +60,8 @@ type AttachInstancesToLoadBalancerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAttachInstancesToLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -47,11 +47,15 @@ type RegisterTargetsInput struct {
 	//
 	// This member is required.
 	Targets []types.TargetDescription
+
+	noSmithyDocumentSerde
 }
 
 type RegisterTargetsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterTargetsMiddlewares(stack *middleware.Stack, options Options) (err error) {

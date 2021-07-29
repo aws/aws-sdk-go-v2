@@ -96,6 +96,8 @@ type ImportSnapshotInput struct {
 
 	// The tags to apply to the import snapshot task during creation.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type ImportSnapshotOutput struct {
@@ -114,6 +116,8 @@ type ImportSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationImportSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

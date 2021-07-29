@@ -40,6 +40,8 @@ type ListLedgersInput struct {
 	// results. If you received a value for NextToken in the response from a previous
 	// ListLedgers call, then you should use that value as input here.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListLedgersOutput struct {
@@ -61,6 +63,8 @@ type ListLedgersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListLedgersMiddlewares(stack *middleware.Stack, options Options) (err error) {

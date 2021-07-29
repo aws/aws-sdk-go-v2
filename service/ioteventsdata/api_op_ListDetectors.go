@@ -42,6 +42,8 @@ type ListDetectorsInput struct {
 
 	// A filter that limits results to those detectors (instances) in the given state.
 	StateName *string
+
+	noSmithyDocumentSerde
 }
 
 type ListDetectorsOutput struct {
@@ -55,6 +57,8 @@ type ListDetectorsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListDetectorsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -54,6 +54,8 @@ type ListRegionalBucketsInput struct {
 
 	// The ID of the AWS Outposts. This is required by Amazon S3 on Outposts buckets.
 	OutpostId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListRegionalBucketsOutput struct {
@@ -68,6 +70,8 @@ type ListRegionalBucketsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListRegionalBucketsMiddlewares(stack *middleware.Stack, options Options) (err error) {

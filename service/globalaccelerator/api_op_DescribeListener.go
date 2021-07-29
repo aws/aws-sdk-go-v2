@@ -33,6 +33,8 @@ type DescribeListenerInput struct {
 	//
 	// This member is required.
 	ListenerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeListenerOutput struct {
@@ -42,6 +44,8 @@ type DescribeListenerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeListenerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -53,6 +53,8 @@ type ListProvisionedConcurrencyConfigsInput struct {
 
 	// Specify a number to limit the number of configurations returned.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListProvisionedConcurrencyConfigsOutput struct {
@@ -65,6 +67,8 @@ type ListProvisionedConcurrencyConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListProvisionedConcurrencyConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

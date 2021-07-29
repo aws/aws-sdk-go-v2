@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -15,6 +16,8 @@ type AWSLocation struct {
 	// The Zone the device is located in. This can be the ID of an Availability Zone,
 	// Local Zone, Wavelength Zone, or an Outpost.
 	Zone *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes bandwidth information.
@@ -25,6 +28,8 @@ type Bandwidth struct {
 
 	// Upload speed in Mbps.
 	UploadSpeed *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a connection.
@@ -62,6 +67,8 @@ type Connection struct {
 
 	// The tags for the connection.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes the association between a customer gateway, a device, and a link.
@@ -81,6 +88,8 @@ type CustomerGatewayAssociation struct {
 
 	// The association state.
 	State CustomerGatewayAssociationState
+
+	noSmithyDocumentSerde
 }
 
 // Describes a device.
@@ -127,6 +136,8 @@ type Device struct {
 
 	// The device vendor.
 	Vendor *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a global network.
@@ -149,6 +160,8 @@ type GlobalNetwork struct {
 
 	// The tags for the global network.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a link.
@@ -186,6 +199,8 @@ type Link struct {
 
 	// The type of the link.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the association between a device and a link.
@@ -202,6 +217,8 @@ type LinkAssociation struct {
 
 	// The ID of the link.
 	LinkId *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a location.
@@ -215,6 +232,8 @@ type Location struct {
 
 	// The longitude.
 	Longitude *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a site.
@@ -243,6 +262,8 @@ type Site struct {
 
 	// The tags for the site.
 	Tags []Tag
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag.
@@ -253,6 +274,8 @@ type Tag struct {
 
 	// The tag value. Length Constraints: Maximum length of 256 characters.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a transit gateway Connect peer association.
@@ -272,6 +295,8 @@ type TransitGatewayConnectPeerAssociation struct {
 
 	// The Amazon Resource Name (ARN) of the transit gateway Connect peer.
 	TransitGatewayConnectPeerArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the registration of a transit gateway to a global network.
@@ -285,6 +310,8 @@ type TransitGatewayRegistration struct {
 
 	// The Amazon Resource Name (ARN) of the transit gateway.
 	TransitGatewayArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the status of a transit gateway registration.
@@ -295,6 +322,8 @@ type TransitGatewayRegistrationStateReason struct {
 
 	// The message for the state reason.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a validation exception for a field.
@@ -309,4 +338,8 @@ type ValidationExceptionField struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

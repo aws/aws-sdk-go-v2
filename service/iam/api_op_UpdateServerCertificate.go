@@ -69,11 +69,15 @@ type UpdateServerCertificateInput struct {
 	// and lowercase alphanumeric characters with no spaces. You can also include any
 	// of the following characters: _+=,.@-
 	NewServerCertificateName *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateServerCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateServerCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

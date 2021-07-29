@@ -43,6 +43,8 @@ type ListNotificationRulesInput struct {
 	// An enumeration token that, when provided in a request, returns the next batch of
 	// the results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListNotificationRulesOutput struct {
@@ -57,6 +59,8 @@ type ListNotificationRulesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListNotificationRulesMiddlewares(stack *middleware.Stack, options Options) (err error) {

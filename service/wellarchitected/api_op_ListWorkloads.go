@@ -40,6 +40,8 @@ type ListWorkloadsInput struct {
 	// An optional string added to the beginning of each workload name returned in the
 	// results.
 	WorkloadNamePrefix *string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a list workloads call.
@@ -53,6 +55,8 @@ type ListWorkloadsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListWorkloadsMiddlewares(stack *middleware.Stack, options Options) (err error) {

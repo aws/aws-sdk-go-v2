@@ -32,11 +32,15 @@ type DeleteRetentionConfigurationInput struct {
 	//
 	// This member is required.
 	RetentionConfigurationName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRetentionConfigurationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRetentionConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

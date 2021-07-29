@@ -45,6 +45,8 @@ type DescribeVpcAttributeInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcAttributeOutput struct {
@@ -64,6 +66,8 @@ type DescribeVpcAttributeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcAttributeMiddlewares(stack *middleware.Stack, options Options) (err error) {

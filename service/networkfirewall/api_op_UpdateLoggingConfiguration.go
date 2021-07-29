@@ -62,6 +62,8 @@ type UpdateLoggingConfigurationInput struct {
 	// Defines how Network Firewall performs logging for a firewall. If you omit this
 	// setting, Network Firewall disables logging for the firewall.
 	LoggingConfiguration *types.LoggingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type UpdateLoggingConfigurationOutput struct {
@@ -78,6 +80,8 @@ type UpdateLoggingConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateLoggingConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

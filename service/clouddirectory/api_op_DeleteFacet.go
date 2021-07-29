@@ -39,11 +39,15 @@ type DeleteFacetInput struct {
 	//
 	// This member is required.
 	SchemaArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteFacetOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteFacetMiddlewares(stack *middleware.Stack, options Options) (err error) {

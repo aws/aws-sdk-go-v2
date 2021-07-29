@@ -37,11 +37,15 @@ type DisassociateContactFromAddressBookInput struct {
 	//
 	// This member is required.
 	ContactArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateContactFromAddressBookOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateContactFromAddressBookMiddlewares(stack *middleware.Stack, options Options) (err error) {

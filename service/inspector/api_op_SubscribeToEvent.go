@@ -45,11 +45,15 @@ type SubscribeToEventInput struct {
 	//
 	// This member is required.
 	TopicArn *string
+
+	noSmithyDocumentSerde
 }
 
 type SubscribeToEventOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSubscribeToEventMiddlewares(stack *middleware.Stack, options Options) (err error) {

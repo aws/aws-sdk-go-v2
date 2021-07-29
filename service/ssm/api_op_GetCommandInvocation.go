@@ -61,6 +61,8 @@ type GetCommandInvocationInput struct {
 	// ListCommandInvocations with the CommandId and Details parameters. The PluginName
 	// is the Name attribute of the CommandPlugin object in the CommandPlugins list.
 	PluginName *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCommandInvocationOutput struct {
@@ -191,6 +193,8 @@ type GetCommandInvocationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCommandInvocationMiddlewares(stack *middleware.Stack, options Options) (err error) {

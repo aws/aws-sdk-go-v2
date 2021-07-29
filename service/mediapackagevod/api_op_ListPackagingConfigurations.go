@@ -39,6 +39,8 @@ type ListPackagingConfigurationsInput struct {
 	// Returns MediaPackage VOD PackagingConfigurations associated with the specified
 	// PackagingGroup.
 	PackagingGroupId *string
+
+	noSmithyDocumentSerde
 }
 
 type ListPackagingConfigurationsOutput struct {
@@ -51,6 +53,8 @@ type ListPackagingConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPackagingConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

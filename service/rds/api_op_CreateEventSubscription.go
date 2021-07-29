@@ -110,6 +110,8 @@ type CreateEventSubscriptionInput struct {
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_Tagging.html) in
 	// the Amazon RDS User Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateEventSubscriptionOutput struct {
@@ -120,6 +122,8 @@ type CreateEventSubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateEventSubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

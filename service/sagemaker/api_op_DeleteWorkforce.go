@@ -38,11 +38,15 @@ type DeleteWorkforceInput struct {
 	//
 	// This member is required.
 	WorkforceName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteWorkforceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteWorkforceMiddlewares(stack *middleware.Stack, options Options) (err error) {

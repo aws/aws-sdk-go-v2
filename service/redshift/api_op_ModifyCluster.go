@@ -233,6 +233,8 @@ type ModifyClusterInput struct {
 	// A list of virtual private cloud (VPC) security groups to be associated with the
 	// cluster. This change is asynchronously applied as soon as possible.
 	VpcSecurityGroupIds []string
+
+	noSmithyDocumentSerde
 }
 
 type ModifyClusterOutput struct {
@@ -242,6 +244,8 @@ type ModifyClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

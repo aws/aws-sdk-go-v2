@@ -69,6 +69,8 @@ type CreateAccessPointInput struct {
 
 	// Creates tags associated with the access point. Each tag is a key-value pair.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Provides a description of an EFS file system access point.
@@ -109,6 +111,8 @@ type CreateAccessPointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAccessPointMiddlewares(stack *middleware.Stack, options Options) (err error) {

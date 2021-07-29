@@ -75,6 +75,8 @@ type CreateModelBiasJobDefinitionInput struct {
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html#allocation-whatURL)
 	// in the Amazon Web Services Billing and Cost Management User Guide.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 type CreateModelBiasJobDefinitionOutput struct {
@@ -86,6 +88,8 @@ type CreateModelBiasJobDefinitionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateModelBiasJobDefinitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

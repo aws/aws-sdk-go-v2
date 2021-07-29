@@ -48,6 +48,8 @@ type ListBotsInput struct {
 	// Specifies sorting parameters for the list of bots. You can specify that the list
 	// be sorted by bot name in ascending or descending order.
 	SortBy *types.BotSortBy
+
+	noSmithyDocumentSerde
 }
 
 type ListBotsOutput struct {
@@ -66,6 +68,8 @@ type ListBotsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListBotsMiddlewares(stack *middleware.Stack, options Options) (err error) {

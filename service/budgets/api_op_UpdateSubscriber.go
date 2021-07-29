@@ -55,12 +55,16 @@ type UpdateSubscriberInput struct {
 	//
 	// This member is required.
 	OldSubscriber *types.Subscriber
+
+	noSmithyDocumentSerde
 }
 
 // Response of UpdateSubscriber
 type UpdateSubscriberOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateSubscriberMiddlewares(stack *middleware.Stack, options Options) (err error) {

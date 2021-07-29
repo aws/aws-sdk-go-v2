@@ -35,6 +35,8 @@ type DeleteDirectConnectGatewayInput struct {
 	//
 	// This member is required.
 	DirectConnectGatewayId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDirectConnectGatewayOutput struct {
@@ -44,6 +46,8 @@ type DeleteDirectConnectGatewayOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDirectConnectGatewayMiddlewares(stack *middleware.Stack, options Options) (err error) {

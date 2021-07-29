@@ -41,6 +41,8 @@ type InviteMembersInput struct {
 	//
 	// This member is required.
 	AccountIds []string
+
+	noSmithyDocumentSerde
 }
 
 type InviteMembersOutput struct {
@@ -51,6 +53,8 @@ type InviteMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInviteMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

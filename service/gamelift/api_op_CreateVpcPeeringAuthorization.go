@@ -72,6 +72,8 @@ type CreateVpcPeeringAuthorizationInput struct {
 	//
 	// This member is required.
 	PeerVpcId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the returned data in response to a request operation.
@@ -82,6 +84,8 @@ type CreateVpcPeeringAuthorizationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateVpcPeeringAuthorizationMiddlewares(stack *middleware.Stack, options Options) (err error) {

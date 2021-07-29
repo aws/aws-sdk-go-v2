@@ -36,6 +36,8 @@ type GetHealthCheckInput struct {
 	//
 	// This member is required.
 	HealthCheckId *string
+
+	noSmithyDocumentSerde
 }
 
 // A complex type that contains the response to a GetHealthCheck request.
@@ -49,6 +51,8 @@ type GetHealthCheckOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetHealthCheckMiddlewares(stack *middleware.Stack, options Options) (err error) {

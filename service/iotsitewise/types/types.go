@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -37,6 +38,8 @@ type AccessPolicySummary struct {
 
 	// The date the access policy was last updated, in Unix epoch time.
 	LastUpdateDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains aggregated asset property values (for example, average, minimum, and
@@ -55,6 +58,8 @@ type AggregatedValue struct {
 
 	// The quality of the aggregated data.
 	Quality Quality
+
+	noSmithyDocumentSerde
 }
 
 // Contains the (pre-calculated) aggregate values for an asset property.
@@ -77,6 +82,8 @@ type Aggregates struct {
 
 	// The sum of the time series over a time interval window.
 	Sum *float64
+
+	noSmithyDocumentSerde
 }
 
 // Contains the configuration information of an alarm created in an IoT SiteWise
@@ -102,6 +109,8 @@ type Alarms struct {
 	// (https://docs.aws.amazon.com/iotevents/latest/developerguide/lambda-support.html)
 	// in the IoT Events Developer Guide.
 	NotificationLambdaArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a composite model in an asset. This object contains
@@ -126,6 +135,8 @@ type AssetCompositeModel struct {
 
 	// The description of the composite model.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains error details for the requested associate project asset action.
@@ -145,6 +156,8 @@ type AssetErrorDetails struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an asset hierarchy that contains a hierarchy's name and ID.
@@ -161,6 +174,8 @@ type AssetHierarchy struct {
 
 	// The ID of the hierarchy. This ID is a hierarchyId.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a parent asset and a child asset that are related
@@ -172,6 +187,8 @@ type AssetHierarchyInfo struct {
 
 	// The ID of the parent asset in this asset relationship.
 	ParentAssetId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a composite model in an asset model. This object
@@ -194,6 +211,8 @@ type AssetModelCompositeModel struct {
 
 	// The asset property definitions for this composite model.
 	Properties []AssetModelProperty
+
+	noSmithyDocumentSerde
 }
 
 // Contains a composite model definition in an asset model. This composite model
@@ -216,6 +235,8 @@ type AssetModelCompositeModelDefinition struct {
 
 	// The asset property definitions for this composite model.
 	Properties []AssetModelPropertyDefinition
+
+	noSmithyDocumentSerde
 }
 
 // Describes an asset hierarchy that contains a hierarchy's name, ID, and child
@@ -240,6 +261,8 @@ type AssetModelHierarchy struct {
 
 	// The ID of the asset model hierarchy. This ID is a hierarchyId.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an asset model hierarchy used in asset model creation. An asset model
@@ -260,6 +283,8 @@ type AssetModelHierarchyDefinition struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an asset model property.
@@ -289,6 +314,8 @@ type AssetModelProperty struct {
 
 	// The unit of the asset model property, such as Newtons or RPM.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an asset model property definition. This property definition is applied
@@ -320,6 +347,8 @@ type AssetModelPropertyDefinition struct {
 
 	// The unit of the property definition, such as Newtons or RPM.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains current status information for an asset model. For more information,
@@ -335,6 +364,8 @@ type AssetModelStatus struct {
 
 	// Contains associated error information, if any.
 	Error *ErrorDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of an asset model.
@@ -377,6 +408,8 @@ type AssetModelSummary struct {
 	//
 	// This member is required.
 	Status *AssetModelStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains asset property information.
@@ -415,6 +448,8 @@ type AssetProperty struct {
 
 	// The unit (such as Newtons or RPM) of the asset property.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains asset property value information.
@@ -432,6 +467,8 @@ type AssetPropertyValue struct {
 
 	// The quality of the asset property value.
 	Quality Quality
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about assets that are related to one another.
@@ -450,6 +487,8 @@ type AssetRelationshipSummary struct {
 	// The assets that are related through an asset hierarchy. This object is present
 	// if the relationshipType is HIERARCHY.
 	HierarchyInfo *AssetHierarchyInfo
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the current status of an asset. For more information,
@@ -465,6 +504,8 @@ type AssetStatus struct {
 
 	// Contains associated error information, if any.
 	Error *ErrorDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of an asset.
@@ -513,6 +554,8 @@ type AssetSummary struct {
 	//
 	// This member is required.
 	Status *AssetStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of an associated asset.
@@ -561,6 +604,8 @@ type AssociatedAssetsSummary struct {
 	//
 	// This member is required.
 	Status *AssetStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains an asset attribute property. For more information, see Attributes
@@ -575,6 +620,8 @@ type Attribute struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/update-attribute-values.html)
 	// in the IoT SiteWise User Guide.
 	DefaultValue *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains error information from updating a batch of asset property values.
@@ -594,6 +641,8 @@ type BatchPutAssetPropertyError struct {
 	//
 	// This member is required.
 	Timestamps []TimeInNanos
+
+	noSmithyDocumentSerde
 }
 
 // Contains error information for asset property value entries that are associated
@@ -611,6 +660,8 @@ type BatchPutAssetPropertyErrorEntry struct {
 	//
 	// This member is required.
 	Errors []BatchPutAssetPropertyError
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a composite model property on an asset.
@@ -630,6 +681,8 @@ type CompositeModelProperty struct {
 	//
 	// This member is required.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an IoT SiteWise configuration error.
@@ -644,6 +697,8 @@ type ConfigurationErrorDetails struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains current status information for the configuration.
@@ -656,6 +711,8 @@ type ConfigurationStatus struct {
 
 	// Contains associated error information, if any.
 	Error *ConfigurationErrorDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about a customer managed Amazon S3 bucket.
@@ -678,6 +735,8 @@ type CustomerManagedS3Storage struct {
 	//
 	// This member is required.
 	S3ResourceArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a dashboard summary.
@@ -701,6 +760,8 @@ type DashboardSummary struct {
 
 	// The date the dashboard was last updated, in Unix epoch time.
 	LastUpdateDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of an IoT SiteWise error.
@@ -715,6 +776,8 @@ type ErrorDetails struct {
 	//
 	// This member is required.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains expression variable information.
@@ -729,6 +792,8 @@ type ExpressionVariable struct {
 	//
 	// This member is required.
 	Value *VariableValue
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of a gateway capability configuration.
@@ -756,6 +821,8 @@ type GatewayCapabilitySummary struct {
 	//
 	// This member is required.
 	CapabilitySyncStatus CapabilitySyncStatus
+
+	noSmithyDocumentSerde
 }
 
 // Contains a gateway's platform information.
@@ -765,6 +832,8 @@ type GatewayPlatform struct {
 	//
 	// This member is required.
 	Greengrass *Greengrass
+
+	noSmithyDocumentSerde
 }
 
 // Contains a summary of a gateway.
@@ -796,6 +865,8 @@ type GatewaySummary struct {
 	// DescribeGatewayCapabilityConfiguration
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html).
 	GatewayCapabilitySummaries []GatewayCapabilitySummary
+
+	noSmithyDocumentSerde
 }
 
 // Contains details for a gateway that runs on IoT Greengrass. To create a gateway
@@ -818,6 +889,8 @@ type Greengrass struct {
 	//
 	// This member is required.
 	GroupArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information for a group identity in an access policy.
@@ -827,6 +900,8 @@ type GroupIdentity struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Identity and Access Management role. For more
@@ -841,6 +916,8 @@ type IAMRoleIdentity struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an Identity and Access Management user.
@@ -854,6 +931,8 @@ type IAMUserIdentity struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an identity that can access an IoT SiteWise Monitor resource.
@@ -874,6 +953,8 @@ type Identity struct {
 
 	// An Amazon Web Services SSO user identity.
 	User *UserIdentity
+
+	noSmithyDocumentSerde
 }
 
 // Contains an image that is one of the following:
@@ -890,6 +971,8 @@ type Image struct {
 
 	// The ID of an existing image. Specify this parameter to keep an existing image.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an image file.
@@ -905,6 +988,8 @@ type ImageFile struct {
 	//
 	// This member is required.
 	Type ImageFileType
+
+	noSmithyDocumentSerde
 }
 
 // Contains an image that is uploaded to IoT SiteWise and available at a URL.
@@ -920,6 +1005,8 @@ type ImageLocation struct {
 	//
 	// This member is required.
 	Url *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about an interpolated asset property value.
@@ -934,6 +1021,8 @@ type InterpolatedAssetPropertyValue struct {
 	//
 	// This member is required.
 	Value *Variant
+
+	noSmithyDocumentSerde
 }
 
 // Contains logging options.
@@ -943,12 +1032,15 @@ type LoggingOptions struct {
 	//
 	// This member is required.
 	Level LoggingLevel
+
+	noSmithyDocumentSerde
 }
 
 // Contains an asset measurement property. For more information, see Measurements
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements)
 // in the IoT SiteWise User Guide.
 type Measurement struct {
+	noSmithyDocumentSerde
 }
 
 // Contains an asset metric property. With metrics, you can calculate aggregate
@@ -982,6 +1074,8 @@ type Metric struct {
 	//
 	// This member is required.
 	Window *MetricWindow
+
+	noSmithyDocumentSerde
 }
 
 // Contains a time interval window used for data aggregate computations (for
@@ -990,6 +1084,8 @@ type MetricWindow struct {
 
 	// The tumbling time interval window.
 	Tumbling *TumblingWindow
+
+	noSmithyDocumentSerde
 }
 
 // Contains IoT SiteWise Monitor error details.
@@ -1000,6 +1096,8 @@ type MonitorErrorDetails struct {
 
 	// The error message.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the storage destination.
@@ -1009,6 +1107,8 @@ type MultiLayerStorage struct {
 	//
 	// This member is required.
 	CustomerManagedS3Storage *CustomerManagedS3Storage
+
+	noSmithyDocumentSerde
 }
 
 // Identifies an IoT SiteWise Monitor portal.
@@ -1018,6 +1118,8 @@ type PortalResource struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information about the current status of a portal.
@@ -1030,6 +1132,8 @@ type PortalStatus struct {
 
 	// Contains associated error information, if any.
 	Error *MonitorErrorDetails
+
+	noSmithyDocumentSerde
 }
 
 // Contains a portal summary.
@@ -1075,6 +1179,8 @@ type PortalSummary struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/monitor-service-role.html)
 	// in the IoT SiteWise User Guide.
 	RoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a specific IoT SiteWise Monitor project.
@@ -1084,6 +1190,8 @@ type ProjectResource struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains project summary information.
@@ -1107,6 +1215,8 @@ type ProjectSummary struct {
 
 	// The date the project was last updated, in Unix epoch time.
 	LastUpdateDate *time.Time
+
+	noSmithyDocumentSerde
 }
 
 // Contains asset property information.
@@ -1144,6 +1254,8 @@ type Property struct {
 
 	// The unit (such as Newtons or RPM) of the asset property.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains asset property value notification information. When the notification
@@ -1163,6 +1275,8 @@ type PropertyNotification struct {
 	//
 	// This member is required.
 	Topic *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains a property type, which can be one of attribute, measurement, metric, or
@@ -1190,6 +1304,8 @@ type PropertyType struct {
 	// expression that maps a property's data points from one form to another, such as
 	// a unit conversion from Celsius to Fahrenheit.
 	Transform *Transform
+
+	noSmithyDocumentSerde
 }
 
 // Contains a list of value updates for an asset property in the list of asset
@@ -1222,6 +1338,8 @@ type PutAssetPropertyValueEntry struct {
 
 	// The ID of the asset property for this entry.
 	PropertyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an IoT SiteWise Monitor resource ID for a portal or project.
@@ -1232,6 +1350,8 @@ type Resource struct {
 
 	// A project resource.
 	Project *ProjectResource
+
+	noSmithyDocumentSerde
 }
 
 // Contains a timestamp with optional nanosecond granularity.
@@ -1245,6 +1365,8 @@ type TimeInNanos struct {
 
 	// The nanosecond offset from timeInSeconds.
 	OffsetInNanos *int32
+
+	noSmithyDocumentSerde
 }
 
 // Contains an asset transform property. A transform is a one-to-one mapping of a
@@ -1270,6 +1392,8 @@ type Transform struct {
 	//
 	// This member is required.
 	Variables []ExpressionVariable
+
+	noSmithyDocumentSerde
 }
 
 // Contains a tumbling window, which is a repeating fixed-sized, non-overlapping,
@@ -1288,6 +1412,8 @@ type TumblingWindow struct {
 	//
 	// This member is required.
 	Interval *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains information for a user identity in an access policy.
@@ -1297,6 +1423,8 @@ type UserIdentity struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 // Identifies a property value used in an expression.
@@ -1317,6 +1445,8 @@ type VariableValue struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-hierarchies.html)
 	// in the IoT SiteWise User Guide.
 	HierarchyId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains an asset property value (of a single type only).
@@ -1333,4 +1463,8 @@ type Variant struct {
 
 	// Asset property data of type string (sequence of characters).
 	StringValue *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

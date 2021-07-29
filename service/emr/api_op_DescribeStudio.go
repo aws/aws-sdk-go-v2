@@ -34,6 +34,8 @@ type DescribeStudioInput struct {
 	//
 	// This member is required.
 	StudioId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStudioOutput struct {
@@ -43,6 +45,8 @@ type DescribeStudioOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStudioMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type DescribeQueueInput struct {
 	//
 	// This member is required.
 	QueueId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeQueueOutput struct {
@@ -49,6 +51,8 @@ type DescribeQueueOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeQueueMiddlewares(stack *middleware.Stack, options Options) (err error) {

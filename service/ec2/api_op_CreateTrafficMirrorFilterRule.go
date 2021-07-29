@@ -89,6 +89,8 @@ type CreateTrafficMirrorFilterRuleInput struct {
 
 	// The source port range.
 	SourcePortRange *types.TrafficMirrorPortRangeRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateTrafficMirrorFilterRuleOutput struct {
@@ -103,6 +105,8 @@ type CreateTrafficMirrorFilterRuleOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateTrafficMirrorFilterRuleMiddlewares(stack *middleware.Stack, options Options) (err error) {

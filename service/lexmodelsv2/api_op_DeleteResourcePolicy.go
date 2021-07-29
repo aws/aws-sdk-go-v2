@@ -39,6 +39,8 @@ type DeleteResourcePolicyInput struct {
 	// revision number, Amazon Lex returns an exception If you don't specify a revision
 	// ID, Amazon Lex will delete the current policy.
 	ExpectedRevisionId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourcePolicyOutput struct {
@@ -54,6 +56,8 @@ type DeleteResourcePolicyOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

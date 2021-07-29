@@ -43,6 +43,8 @@ type BatchEvaluateGeofencesInput struct {
 	//
 	// This member is required.
 	DevicePositionUpdates []types.DevicePositionUpdate
+
+	noSmithyDocumentSerde
 }
 
 type BatchEvaluateGeofencesOutput struct {
@@ -55,6 +57,8 @@ type BatchEvaluateGeofencesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchEvaluateGeofencesMiddlewares(stack *middleware.Stack, options Options) (err error) {

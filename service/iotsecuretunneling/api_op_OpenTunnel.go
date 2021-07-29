@@ -41,6 +41,8 @@ type OpenTunnelInput struct {
 
 	// Timeout configuration for a tunnel.
 	TimeoutConfig *types.TimeoutConfig
+
+	noSmithyDocumentSerde
 }
 
 type OpenTunnelOutput struct {
@@ -62,6 +64,8 @@ type OpenTunnelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationOpenTunnelMiddlewares(stack *middleware.Stack, options Options) (err error) {

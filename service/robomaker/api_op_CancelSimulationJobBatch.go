@@ -33,11 +33,15 @@ type CancelSimulationJobBatchInput struct {
 	//
 	// This member is required.
 	Batch *string
+
+	noSmithyDocumentSerde
 }
 
 type CancelSimulationJobBatchOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCancelSimulationJobBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

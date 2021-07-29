@@ -32,6 +32,8 @@ type GetCatalogImportStatusInput struct {
 	// The ID of the catalog to migrate. Currently, this should be the Amazon Web
 	// Services account ID.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCatalogImportStatusOutput struct {
@@ -41,6 +43,8 @@ type GetCatalogImportStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCatalogImportStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

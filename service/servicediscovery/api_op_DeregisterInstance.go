@@ -40,6 +40,8 @@ type DeregisterInstanceInput struct {
 	//
 	// This member is required.
 	ServiceId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeregisterInstanceOutput struct {
@@ -51,6 +53,8 @@ type DeregisterInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeregisterInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

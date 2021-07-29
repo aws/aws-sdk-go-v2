@@ -34,6 +34,8 @@ type CreateWorkspacesInput struct {
 	//
 	// This member is required.
 	Workspaces []types.WorkspaceRequest
+
+	noSmithyDocumentSerde
 }
 
 type CreateWorkspacesOutput struct {
@@ -49,6 +51,8 @@ type CreateWorkspacesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkspacesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -55,6 +55,8 @@ type StartInstancesInput struct {
 	// required permissions, the error response is DryRunOperation. Otherwise, it is
 	// UnauthorizedOperation.
 	DryRun *bool
+
+	noSmithyDocumentSerde
 }
 
 type StartInstancesOutput struct {
@@ -64,6 +66,8 @@ type StartInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

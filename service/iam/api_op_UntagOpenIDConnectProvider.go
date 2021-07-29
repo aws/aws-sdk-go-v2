@@ -47,11 +47,15 @@ type UntagOpenIDConnectProviderInput struct {
 	//
 	// This member is required.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 type UntagOpenIDConnectProviderOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUntagOpenIDConnectProviderMiddlewares(stack *middleware.Stack, options Options) (err error) {

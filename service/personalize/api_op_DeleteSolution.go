@@ -37,11 +37,15 @@ type DeleteSolutionInput struct {
 	//
 	// This member is required.
 	SolutionArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteSolutionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteSolutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

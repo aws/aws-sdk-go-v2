@@ -35,6 +35,8 @@ type GetEmailChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetEmailChannelOutput struct {
@@ -47,6 +49,8 @@ type GetEmailChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetEmailChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

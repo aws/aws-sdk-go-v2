@@ -76,6 +76,8 @@ type ListJobsInput struct {
 	// This token should be treated as an opaque identifier that's only used to
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListJobsOutput struct {
@@ -93,6 +95,8 @@ type ListJobsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListJobsMiddlewares(stack *middleware.Stack, options Options) (err error) {

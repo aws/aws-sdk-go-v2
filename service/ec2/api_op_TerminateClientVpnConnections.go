@@ -49,6 +49,8 @@ type TerminateClientVpnConnectionsInput struct {
 	// all active connections for the specified user. This option can only be used if
 	// the user has established up to five connections.
 	Username *string
+
+	noSmithyDocumentSerde
 }
 
 type TerminateClientVpnConnectionsOutput struct {
@@ -64,6 +66,8 @@ type TerminateClientVpnConnectionsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationTerminateClientVpnConnectionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

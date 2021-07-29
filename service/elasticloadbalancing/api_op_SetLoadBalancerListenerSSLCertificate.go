@@ -48,12 +48,16 @@ type SetLoadBalancerListenerSSLCertificateInput struct {
 	//
 	// This member is required.
 	SSLCertificateId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of SetLoadBalancerListenerSSLCertificate.
 type SetLoadBalancerListenerSSLCertificateOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSetLoadBalancerListenerSSLCertificateMiddlewares(stack *middleware.Stack, options Options) (err error) {

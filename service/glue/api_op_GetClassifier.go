@@ -33,6 +33,8 @@ type GetClassifierInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type GetClassifierOutput struct {
@@ -42,6 +44,8 @@ type GetClassifierOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetClassifierMiddlewares(stack *middleware.Stack, options Options) (err error) {

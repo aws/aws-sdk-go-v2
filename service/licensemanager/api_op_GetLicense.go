@@ -36,6 +36,8 @@ type GetLicenseInput struct {
 
 	// License version.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type GetLicenseOutput struct {
@@ -45,6 +47,8 @@ type GetLicenseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetLicenseMiddlewares(stack *middleware.Stack, options Options) (err error) {

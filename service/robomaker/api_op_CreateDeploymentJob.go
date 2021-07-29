@@ -59,6 +59,8 @@ type CreateDeploymentJobInput struct {
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateDeploymentJobOutput struct {
@@ -112,6 +114,8 @@ type CreateDeploymentJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeploymentJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

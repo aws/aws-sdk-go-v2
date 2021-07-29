@@ -38,6 +38,8 @@ type BatchGetQueryExecutionInput struct {
 	//
 	// This member is required.
 	QueryExecutionIds []string
+
+	noSmithyDocumentSerde
 }
 
 type BatchGetQueryExecutionOutput struct {
@@ -50,6 +52,8 @@ type BatchGetQueryExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchGetQueryExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

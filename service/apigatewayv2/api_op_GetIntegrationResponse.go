@@ -43,6 +43,8 @@ type GetIntegrationResponseInput struct {
 	//
 	// This member is required.
 	IntegrationResponseId *string
+
+	noSmithyDocumentSerde
 }
 
 type GetIntegrationResponseOutput struct {
@@ -86,6 +88,8 @@ type GetIntegrationResponseOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetIntegrationResponseMiddlewares(stack *middleware.Stack, options Options) (err error) {

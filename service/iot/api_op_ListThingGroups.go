@@ -45,6 +45,8 @@ type ListThingGroupsInput struct {
 
 	// If true, return child groups as well.
 	Recursive *bool
+
+	noSmithyDocumentSerde
 }
 
 type ListThingGroupsOutput struct {
@@ -58,6 +60,8 @@ type ListThingGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListThingGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

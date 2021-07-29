@@ -47,6 +47,8 @@ type StartSimulationJobBatchInput struct {
 	// A map that contains tag keys and tag values that are attached to the deployment
 	// job batch.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type StartSimulationJobBatchOutput struct {
@@ -106,6 +108,8 @@ type StartSimulationJobBatchOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartSimulationJobBatchMiddlewares(stack *middleware.Stack, options Options) (err error) {

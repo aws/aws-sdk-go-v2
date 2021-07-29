@@ -47,6 +47,8 @@ type DisableAvailabilityZonesForLoadBalancerInput struct {
 	//
 	// This member is required.
 	LoadBalancerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output for DisableAvailabilityZonesForLoadBalancer.
@@ -57,6 +59,8 @@ type DisableAvailabilityZonesForLoadBalancerOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisableAvailabilityZonesForLoadBalancerMiddlewares(stack *middleware.Stack, options Options) (err error) {

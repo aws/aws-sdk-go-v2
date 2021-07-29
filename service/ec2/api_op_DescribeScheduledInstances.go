@@ -64,6 +64,8 @@ type DescribeScheduledInstancesInput struct {
 
 	// The time period for the first schedule to start.
 	SlotStartTimeRange *types.SlotStartTimeRangeRequest
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribeScheduledInstances.
@@ -78,6 +80,8 @@ type DescribeScheduledInstancesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScheduledInstancesMiddlewares(stack *middleware.Stack, options Options) (err error) {

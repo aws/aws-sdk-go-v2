@@ -39,6 +39,8 @@ type AddCustomAttributesInput struct {
 	//
 	// This member is required.
 	UserPoolId *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the response from the server for the request to add custom
@@ -46,6 +48,8 @@ type AddCustomAttributesInput struct {
 type AddCustomAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAddCustomAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

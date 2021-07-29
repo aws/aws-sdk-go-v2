@@ -36,6 +36,8 @@ type CreateAnomalySubscriptionInput struct {
 	//
 	// This member is required.
 	AnomalySubscription *types.AnomalySubscription
+
+	noSmithyDocumentSerde
 }
 
 type CreateAnomalySubscriptionOutput struct {
@@ -47,6 +49,8 @@ type CreateAnomalySubscriptionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateAnomalySubscriptionMiddlewares(stack *middleware.Stack, options Options) (err error) {

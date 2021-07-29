@@ -36,6 +36,8 @@ type StartFlowInput struct {
 	//
 	// This member is required.
 	FlowName *string
+
+	noSmithyDocumentSerde
 }
 
 type StartFlowOutput struct {
@@ -52,6 +54,8 @@ type StartFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -40,6 +40,8 @@ type GetContactMethodsInput struct {
 	// messaging). Specify a protocol in your request to return information about a
 	// specific contact method protocol.
 	Protocols []types.ContactProtocol
+
+	noSmithyDocumentSerde
 }
 
 type GetContactMethodsOutput struct {
@@ -49,6 +51,8 @@ type GetContactMethodsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetContactMethodsMiddlewares(stack *middleware.Stack, options Options) (err error) {

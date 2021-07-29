@@ -39,6 +39,8 @@ type ResetPersonalPINInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetPersonalPINOutput struct {
@@ -48,6 +50,8 @@ type ResetPersonalPINOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetPersonalPINMiddlewares(stack *middleware.Stack, options Options) (err error) {

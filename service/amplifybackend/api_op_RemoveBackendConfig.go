@@ -32,6 +32,8 @@ type RemoveBackendConfigInput struct {
 	//
 	// This member is required.
 	AppId *string
+
+	noSmithyDocumentSerde
 }
 
 type RemoveBackendConfigOutput struct {
@@ -41,6 +43,8 @@ type RemoveBackendConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveBackendConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

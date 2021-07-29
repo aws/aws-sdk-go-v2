@@ -57,6 +57,8 @@ type AssociateIdentityProviderConfigInput struct {
 	// organization. Each tag consists of a key and an optional value, both of which
 	// you define.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type AssociateIdentityProviderConfigOutput struct {
@@ -69,6 +71,8 @@ type AssociateIdentityProviderConfigOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssociateIdentityProviderConfigMiddlewares(stack *middleware.Stack, options Options) (err error) {

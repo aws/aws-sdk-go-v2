@@ -55,11 +55,15 @@ type RestoreCertificateAuthorityInput struct {
 	//
 	// This member is required.
 	CertificateAuthorityArn *string
+
+	noSmithyDocumentSerde
 }
 
 type RestoreCertificateAuthorityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRestoreCertificateAuthorityMiddlewares(stack *middleware.Stack, options Options) (err error) {

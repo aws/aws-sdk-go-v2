@@ -30,11 +30,15 @@ type DeleteResourcePolicyInput struct {
 
 	// The name of the registry.
 	RegistryName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResourcePolicyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResourcePolicyMiddlewares(stack *middleware.Stack, options Options) (err error) {

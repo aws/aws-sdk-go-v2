@@ -51,6 +51,8 @@ type ValidateConfigurationSettingsInput struct {
 	// The name of the configuration template to validate the settings against.
 	// Condition: You cannot specify both this and an environment name.
 	TemplateName *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides a list of validation messages.
@@ -61,6 +63,8 @@ type ValidateConfigurationSettingsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationValidateConfigurationSettingsMiddlewares(stack *middleware.Stack, options Options) (err error) {

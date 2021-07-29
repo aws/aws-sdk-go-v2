@@ -50,6 +50,8 @@ type PutLifecycleEventHookExecutionStatusInput struct {
 	// The result of a Lambda function that validates a deployment lifecycle event.
 	// Succeeded and Failed are the only valid values for status.
 	Status types.LifecycleEventStatus
+
+	noSmithyDocumentSerde
 }
 
 type PutLifecycleEventHookExecutionStatusOutput struct {
@@ -60,6 +62,8 @@ type PutLifecycleEventHookExecutionStatusOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutLifecycleEventHookExecutionStatusMiddlewares(stack *middleware.Stack, options Options) (err error) {

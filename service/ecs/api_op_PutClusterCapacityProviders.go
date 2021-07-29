@@ -76,6 +76,8 @@ type PutClusterCapacityProvidersInput struct {
 	//
 	// This member is required.
 	DefaultCapacityProviderStrategy []types.CapacityProviderStrategyItem
+
+	noSmithyDocumentSerde
 }
 
 type PutClusterCapacityProvidersOutput struct {
@@ -85,6 +87,8 @@ type PutClusterCapacityProvidersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutClusterCapacityProvidersMiddlewares(stack *middleware.Stack, options Options) (err error) {

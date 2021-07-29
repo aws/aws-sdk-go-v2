@@ -67,6 +67,8 @@ type UpdateAddonInput struct {
 	// (https://docs.aws.amazon.com/eks/latest/userguide/enable-iam-roles-for-service-accounts.html)
 	// in the Amazon EKS User Guide.
 	ServiceAccountRoleArn *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateAddonOutput struct {
@@ -76,6 +78,8 @@ type UpdateAddonOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateAddonMiddlewares(stack *middleware.Stack, options Options) (err error) {

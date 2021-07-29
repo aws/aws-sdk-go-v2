@@ -54,11 +54,15 @@ type AssignInstanceInput struct {
 	//
 	// This member is required.
 	LayerIds []string
+
+	noSmithyDocumentSerde
 }
 
 type AssignInstanceOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAssignInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

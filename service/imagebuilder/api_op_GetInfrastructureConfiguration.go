@@ -35,6 +35,8 @@ type GetInfrastructureConfigurationInput struct {
 	//
 	// This member is required.
 	InfrastructureConfigurationArn *string
+
+	noSmithyDocumentSerde
 }
 
 // GetInfrastructureConfiguration response object.
@@ -48,6 +50,8 @@ type GetInfrastructureConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetInfrastructureConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

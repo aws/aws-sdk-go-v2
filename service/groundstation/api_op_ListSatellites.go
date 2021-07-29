@@ -37,6 +37,8 @@ type ListSatellitesInput struct {
 	// Next token that can be supplied in the next call to get the next page of
 	// satellites.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 //
@@ -51,6 +53,8 @@ type ListSatellitesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListSatellitesMiddlewares(stack *middleware.Stack, options Options) (err error) {

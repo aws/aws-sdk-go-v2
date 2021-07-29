@@ -39,6 +39,8 @@ type DescribeAddressesInput struct {
 	// ADDRESS objects, you have the option of specifying a value for NextToken as the
 	// starting point for your list of returned addresses.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeAddressesOutput struct {
@@ -53,6 +55,8 @@ type DescribeAddressesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeAddressesMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -41,6 +41,8 @@ type ListAssociatedAttributeGroupsInput struct {
 
 	// The token to use to get the next page of results after a previous API call.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListAssociatedAttributeGroupsOutput struct {
@@ -53,6 +55,8 @@ type ListAssociatedAttributeGroupsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListAssociatedAttributeGroupsMiddlewares(stack *middleware.Stack, options Options) (err error) {

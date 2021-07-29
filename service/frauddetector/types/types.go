@@ -2,6 +2,10 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Provides the error of the batch create variable API.
 type BatchCreateVariableError struct {
 
@@ -13,6 +17,8 @@ type BatchCreateVariableError struct {
 
 	// The name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the error of the batch get variable API.
@@ -26,6 +32,8 @@ type BatchGetVariableError struct {
 
 	// The error name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The batch prediction details.
@@ -76,6 +84,8 @@ type BatchPrediction struct {
 
 	// The total number of records in the batch prediction job.
 	TotalRecordsCount *int32
+
+	noSmithyDocumentSerde
 }
 
 // The model training validation messages.
@@ -86,6 +96,8 @@ type DataValidationMetrics struct {
 
 	// The file-specific model training validation messages.
 	FileLevelMessages []FileValidationMessage
+
+	noSmithyDocumentSerde
 }
 
 // The detector.
@@ -108,6 +120,8 @@ type Detector struct {
 
 	// Timestamp of when the detector was last updated.
 	LastUpdatedTime *string
+
+	noSmithyDocumentSerde
 }
 
 // The summary of the detector version.
@@ -124,6 +138,8 @@ type DetectorVersionSummary struct {
 
 	// The detector version status.
 	Status DetectorVersionStatus
+
+	noSmithyDocumentSerde
 }
 
 // The entity details.
@@ -139,6 +155,8 @@ type Entity struct {
 	//
 	// This member is required.
 	EntityType *string
+
+	noSmithyDocumentSerde
 }
 
 // The entity type details.
@@ -158,6 +176,8 @@ type EntityType struct {
 
 	// The entity type name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The event type details.
@@ -186,6 +206,8 @@ type EventType struct {
 
 	// The event type name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Details for the external events data used for model version training.
@@ -201,6 +223,8 @@ type ExternalEventsDetail struct {
 	//
 	// This member is required.
 	DataLocation *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon SageMaker model.
@@ -232,6 +256,8 @@ type ExternalModel struct {
 
 	// The output configuration.
 	OutputConfiguration *ModelOutputConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // The message details.
@@ -251,6 +277,8 @@ type FieldValidationMessage struct {
 
 	// The message type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The message details.
@@ -264,6 +292,8 @@ type FileValidationMessage struct {
 
 	// The message type.
 	Type *string
+
+	noSmithyDocumentSerde
 }
 
 // The KMS key details.
@@ -271,6 +301,8 @@ type KMSKey struct {
 
 	// The encryption key ARN.
 	KmsEncryptionKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 // The label details.
@@ -290,6 +322,8 @@ type Label struct {
 
 	// The label name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // The label schema.
@@ -305,6 +339,8 @@ type LabelSchema struct {
 	//
 	// This member is required.
 	LabelMapper map[string][]string
+
+	noSmithyDocumentSerde
 }
 
 // The logit metric details.
@@ -324,6 +360,8 @@ type LogitMetric struct {
 	//
 	// This member is required.
 	VariableType *string
+
+	noSmithyDocumentSerde
 }
 
 // Model performance metrics data points.
@@ -345,6 +383,8 @@ type MetricDataPoint struct {
 	// The true positive rate. This is the percentage of total fraud the model detects.
 	// Also known as capture rate.
 	Tpr *float32
+
+	noSmithyDocumentSerde
 }
 
 // The model.
@@ -370,6 +410,8 @@ type Model struct {
 
 	// The model type.
 	ModelType ModelTypeEnum
+
+	noSmithyDocumentSerde
 }
 
 // A pre-formed Amazon SageMaker model input you can include if your detector
@@ -382,6 +424,8 @@ type ModelEndpointDataBlob struct {
 
 	// The content type of the Amazon SageMaker model endpoint input data blob.
 	ContentType *string
+
+	noSmithyDocumentSerde
 }
 
 // The Amazon SageMaker model input configuration.
@@ -408,6 +452,8 @@ type ModelInputConfiguration struct {
 	// event-evaluation, the placeholders for variable names in the template will be
 	// replaced with the variable values before being sent to SageMaker.
 	JsonInputTemplate *string
+
+	noSmithyDocumentSerde
 }
 
 // Provides the Amazon Sagemaker model output configuration.
@@ -425,6 +471,8 @@ type ModelOutputConfiguration struct {
 	// A map of JSON keys in response from SageMaker to the Amazon Fraud Detector
 	// variables.
 	JsonKeyToVariableMap map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // The fraud prediction scores.
@@ -435,6 +483,8 @@ type ModelScores struct {
 
 	// The model's fraud prediction scores.
 	Scores map[string]float32
+
+	noSmithyDocumentSerde
 }
 
 // The model version.
@@ -457,6 +507,8 @@ type ModelVersion struct {
 
 	// The model version ARN.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the model version.
@@ -494,6 +546,8 @@ type ModelVersionDetail struct {
 
 	// The training results.
 	TrainingResult *TrainingResult
+
+	noSmithyDocumentSerde
 }
 
 // The outcome.
@@ -513,6 +567,8 @@ type Outcome struct {
 
 	// The outcome name.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // A rule.
@@ -532,6 +588,8 @@ type Rule struct {
 	//
 	// This member is required.
 	RuleVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The details of the rule.
@@ -566,6 +624,8 @@ type RuleDetail struct {
 
 	// The rule version.
 	RuleVersion *string
+
+	noSmithyDocumentSerde
 }
 
 // The rule results.
@@ -576,6 +636,8 @@ type RuleResult struct {
 
 	// The rule ID that was matched, based on the rule execution mode.
 	RuleId *string
+
+	noSmithyDocumentSerde
 }
 
 // A key and value pair.
@@ -590,6 +652,8 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // The training data schema.
@@ -604,6 +668,8 @@ type TrainingDataSchema struct {
 	//
 	// This member is required.
 	ModelVariables []string
+
+	noSmithyDocumentSerde
 }
 
 // The training metric details.
@@ -616,6 +682,8 @@ type TrainingMetrics struct {
 
 	// The data points details.
 	MetricDataPoints []MetricDataPoint
+
+	noSmithyDocumentSerde
 }
 
 // The training result details.
@@ -629,6 +697,8 @@ type TrainingResult struct {
 
 	// The variable importance metrics.
 	VariableImportanceMetrics *VariableImportanceMetrics
+
+	noSmithyDocumentSerde
 }
 
 // The variable.
@@ -668,6 +738,8 @@ type Variable struct {
 	// SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME | SHIPPING_PHONE |
 	// SHIPPING_STATE | SHIPPING_ZIP | USERAGENT
 	VariableType *string
+
+	noSmithyDocumentSerde
 }
 
 // A variable in the list of variables for the batch create variable request.
@@ -698,6 +770,8 @@ type VariableEntry struct {
 	// SHIPPING_ADDRESS_L2 | SHIPPING_CITY | SHIPPING_COUNTRY | SHIPPING_NAME |
 	// SHIPPING_PHONE | SHIPPING_STATE | SHIPPING_ZIP | USERAGENT
 	VariableType *string
+
+	noSmithyDocumentSerde
 }
 
 // The variable importance metrics details.
@@ -705,4 +779,8 @@ type VariableImportanceMetrics struct {
 
 	// List of variable metrics.
 	LogitMetrics []LogitMetric
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

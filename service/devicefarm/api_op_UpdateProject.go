@@ -40,6 +40,8 @@ type UpdateProjectInput struct {
 
 	// A string that represents the new name of the project that you are updating.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the result of an update project request.
@@ -50,6 +52,8 @@ type UpdateProjectOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateProjectMiddlewares(stack *middleware.Stack, options Options) (err error) {

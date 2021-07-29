@@ -29,6 +29,7 @@ func (c *Client) DescribeEventConfigurations(ctx context.Context, params *Descri
 }
 
 type DescribeEventConfigurationsInput struct {
+	noSmithyDocumentSerde
 }
 
 type DescribeEventConfigurationsOutput struct {
@@ -44,6 +45,8 @@ type DescribeEventConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

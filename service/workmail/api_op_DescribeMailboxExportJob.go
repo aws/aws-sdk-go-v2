@@ -39,6 +39,8 @@ type DescribeMailboxExportJobInput struct {
 	//
 	// This member is required.
 	OrganizationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMailboxExportJobOutput struct {
@@ -83,6 +85,8 @@ type DescribeMailboxExportJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMailboxExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

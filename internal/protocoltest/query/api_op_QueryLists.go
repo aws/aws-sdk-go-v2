@@ -38,11 +38,15 @@ type QueryListsInput struct {
 	ListArgWithXmlNameMember []string
 
 	NestedWithList *types.NestedStructWithList
+
+	noSmithyDocumentSerde
 }
 
 type QueryListsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationQueryListsMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type DescribeStatementInput struct {
 	//
 	// This member is required.
 	Id *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeStatementOutput struct {
@@ -126,6 +128,8 @@ type DescribeStatementOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeStatementMiddlewares(stack *middleware.Stack, options Options) (err error) {

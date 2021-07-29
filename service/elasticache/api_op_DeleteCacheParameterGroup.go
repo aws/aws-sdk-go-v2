@@ -36,11 +36,15 @@ type DeleteCacheParameterGroupInput struct {
 	//
 	// This member is required.
 	CacheParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteCacheParameterGroupOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteCacheParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

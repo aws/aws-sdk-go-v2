@@ -35,6 +35,8 @@ type GetDeviceInstanceInput struct {
 	//
 	// This member is required.
 	Arn *string
+
+	noSmithyDocumentSerde
 }
 
 type GetDeviceInstanceOutput struct {
@@ -44,6 +46,8 @@ type GetDeviceInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDeviceInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

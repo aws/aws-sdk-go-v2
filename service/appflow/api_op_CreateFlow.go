@@ -73,6 +73,8 @@ type CreateFlowInput struct {
 
 	// The tags used to organize, track, or control access for your flow.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 type CreateFlowOutput struct {
@@ -85,6 +87,8 @@ type CreateFlowOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateFlowMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -39,6 +39,8 @@ type StartLoggingInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -46,6 +48,8 @@ type StartLoggingInput struct {
 type StartLoggingOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartLoggingMiddlewares(stack *middleware.Stack, options Options) (err error) {

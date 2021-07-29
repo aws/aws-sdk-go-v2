@@ -52,6 +52,8 @@ type DescribeEventDetailsInput struct {
 	// The locale (language) to return information in. English (en) is the default and
 	// the only supported value at this time.
 	Locale *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeEventDetailsOutput struct {
@@ -64,6 +66,8 @@ type DescribeEventDetailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeEventDetailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

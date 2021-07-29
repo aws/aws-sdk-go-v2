@@ -39,6 +39,8 @@ type ListFiltersInput struct {
 	// A token returned from the previous call to ListFilters for getting the next set
 	// of filters (if they exist).
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListFiltersOutput struct {
@@ -51,6 +53,8 @@ type ListFiltersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListFiltersMiddlewares(stack *middleware.Stack, options Options) (err error) {

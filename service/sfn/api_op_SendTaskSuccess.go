@@ -44,11 +44,15 @@ type SendTaskSuccessInput struct {
 	//
 	// This member is required.
 	TaskToken *string
+
+	noSmithyDocumentSerde
 }
 
 type SendTaskSuccessOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationSendTaskSuccessMiddlewares(stack *middleware.Stack, options Options) (err error) {

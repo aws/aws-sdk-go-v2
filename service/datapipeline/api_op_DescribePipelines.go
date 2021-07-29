@@ -57,6 +57,8 @@ type DescribePipelinesInput struct {
 	//
 	// This member is required.
 	PipelineIds []string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the output of DescribePipelines.
@@ -69,6 +71,8 @@ type DescribePipelinesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribePipelinesMiddlewares(stack *middleware.Stack, options Options) (err error) {

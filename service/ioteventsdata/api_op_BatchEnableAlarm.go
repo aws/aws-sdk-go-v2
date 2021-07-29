@@ -35,6 +35,8 @@ type BatchEnableAlarmInput struct {
 	//
 	// This member is required.
 	EnableActionRequests []types.EnableAlarmActionRequest
+
+	noSmithyDocumentSerde
 }
 
 type BatchEnableAlarmOutput struct {
@@ -46,6 +48,8 @@ type BatchEnableAlarmOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationBatchEnableAlarmMiddlewares(stack *middleware.Stack, options Options) (err error) {

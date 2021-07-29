@@ -12,6 +12,8 @@ type AccessDeniedException struct {
 	Message *string
 
 	Reason AccessDeniedExceptionReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *AccessDeniedException) Error() string {
@@ -32,6 +34,8 @@ func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.F
 // in the Amazon Elastic Compute Cloud User Guide.
 type ConcurrentLimitExceededException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConcurrentLimitExceededException) Error() string {
@@ -51,6 +55,8 @@ func (e *ConcurrentLimitExceededException) ErrorFault() smithy.ErrorFault { retu
 // The request uses the same client token as a previous, but non-identical request.
 type ConflictException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *ConflictException) Error() string {
@@ -68,6 +74,8 @@ func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.Fault
 // An internal error has occurred.
 type InternalServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *InternalServerException) Error() string {
@@ -88,6 +96,8 @@ type RequestThrottledException struct {
 	Message *string
 
 	Reason RequestThrottledExceptionReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *RequestThrottledException) Error() string {
@@ -107,6 +117,8 @@ type ResourceNotFoundException struct {
 	Message *string
 
 	Reason ResourceNotFoundExceptionReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *ResourceNotFoundException) Error() string {
@@ -126,6 +138,8 @@ type ServiceQuotaExceededException struct {
 	Message *string
 
 	Reason ServiceQuotaExceededExceptionReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *ServiceQuotaExceededException) Error() string {
@@ -145,6 +159,8 @@ type ValidationException struct {
 	Message *string
 
 	Reason ValidationExceptionReason
+
+	noSmithyDocumentSerde
 }
 
 func (e *ValidationException) Error() string {

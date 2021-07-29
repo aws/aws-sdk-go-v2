@@ -28,6 +28,7 @@ func (c *Client) UnpeerVpc(ctx context.Context, params *UnpeerVpcInput, optFns .
 }
 
 type UnpeerVpcInput struct {
+	noSmithyDocumentSerde
 }
 
 type UnpeerVpcOutput struct {
@@ -39,6 +40,8 @@ type UnpeerVpcOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUnpeerVpcMiddlewares(stack *middleware.Stack, options Options) (err error) {

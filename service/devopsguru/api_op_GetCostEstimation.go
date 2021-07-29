@@ -36,6 +36,8 @@ type GetCostEstimationInput struct {
 	// The pagination token to use to retrieve the next page of results for this
 	// operation. If this value is null, it retrieves the first page.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetCostEstimationOutput struct {
@@ -66,6 +68,8 @@ type GetCostEstimationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetCostEstimationMiddlewares(stack *middleware.Stack, options Options) (err error) {

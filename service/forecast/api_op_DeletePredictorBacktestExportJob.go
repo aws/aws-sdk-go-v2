@@ -32,11 +32,15 @@ type DeletePredictorBacktestExportJobInput struct {
 	//
 	// This member is required.
 	PredictorBacktestExportJobArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeletePredictorBacktestExportJobOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeletePredictorBacktestExportJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

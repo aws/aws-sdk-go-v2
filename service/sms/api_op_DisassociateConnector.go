@@ -33,11 +33,15 @@ type DisassociateConnectorInput struct {
 	//
 	// This member is required.
 	ConnectorId *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateConnectorOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateConnectorMiddlewares(stack *middleware.Stack, options Options) (err error) {

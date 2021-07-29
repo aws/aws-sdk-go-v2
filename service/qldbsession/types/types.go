@@ -2,8 +2,13 @@
 
 package types
 
+import (
+	smithydocument "github.com/aws/smithy-go/document"
+)
+
 // Contains the details of the transaction to abort.
 type AbortTransactionRequest struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the aborted transaction.
@@ -11,6 +16,8 @@ type AbortTransactionResult struct {
 
 	// Contains server-side performance information for the command.
 	TimingInformation *TimingInformation
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the transaction to commit.
@@ -31,6 +38,8 @@ type CommitTransactionRequest struct {
 	//
 	// This member is required.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the committed transaction.
@@ -47,10 +56,13 @@ type CommitTransactionResult struct {
 
 	// The transaction ID of the committed transaction.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a request to end the session.
 type EndSessionRequest struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the ended session.
@@ -58,6 +70,8 @@ type EndSessionResult struct {
 
 	// Contains server-side performance information for the command.
 	TimingInformation *TimingInformation
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a request to execute a statement.
@@ -75,6 +89,8 @@ type ExecuteStatementRequest struct {
 
 	// Specifies the parameters for the parameterized statement in the request.
 	Parameters []ValueHolder
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the executed statement.
@@ -88,6 +104,8 @@ type ExecuteStatementResult struct {
 
 	// Contains server-side performance information for the command.
 	TimingInformation *TimingInformation
+
+	noSmithyDocumentSerde
 }
 
 // Specifies the details of the page to be fetched.
@@ -102,6 +120,8 @@ type FetchPageRequest struct {
 	//
 	// This member is required.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the page that was fetched.
@@ -115,6 +135,8 @@ type FetchPageResult struct {
 
 	// Contains server-side performance information for the command.
 	TimingInformation *TimingInformation
+
+	noSmithyDocumentSerde
 }
 
 // Contains I/O usage metrics for a command that was invoked.
@@ -125,6 +147,8 @@ type IOUsage struct {
 
 	// The number of write I/O requests that the command made.
 	WriteIOs int64
+
+	noSmithyDocumentSerde
 }
 
 // Contains details of the fetched page.
@@ -135,6 +159,8 @@ type Page struct {
 
 	// A structure that contains values in multiple encoding formats.
 	Values []ValueHolder
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a request to start a new session.
@@ -144,6 +170,8 @@ type StartSessionRequest struct {
 	//
 	// This member is required.
 	LedgerName *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the started session.
@@ -155,10 +183,13 @@ type StartSessionResult struct {
 
 	// Contains server-side performance information for the command.
 	TimingInformation *TimingInformation
+
+	noSmithyDocumentSerde
 }
 
 // Specifies a request to start a transaction.
 type StartTransactionRequest struct {
+	noSmithyDocumentSerde
 }
 
 // Contains the details of the started transaction.
@@ -169,6 +200,8 @@ type StartTransactionResult struct {
 
 	// The transaction ID of the started transaction.
 	TransactionId *string
+
+	noSmithyDocumentSerde
 }
 
 // Contains server-side performance information for a command. Amazon QLDB captures
@@ -179,6 +212,8 @@ type TimingInformation struct {
 	// The amount of time that QLDB spent on processing the command, measured in
 	// milliseconds.
 	ProcessingTimeMilliseconds int64
+
+	noSmithyDocumentSerde
 }
 
 // A structure that can contain a value in multiple encoding formats.
@@ -189,4 +224,8 @@ type ValueHolder struct {
 
 	// An Amazon Ion plaintext value contained in a ValueHolder structure.
 	IonText *string
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

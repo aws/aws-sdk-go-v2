@@ -104,6 +104,8 @@ type AbortMultipartUploadInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html)
 	// in the Amazon S3 User Guide.
 	RequestPayer types.RequestPayer
+
+	noSmithyDocumentSerde
 }
 
 type AbortMultipartUploadOutput struct {
@@ -114,6 +116,8 @@ type AbortMultipartUploadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationAbortMultipartUploadMiddlewares(stack *middleware.Stack, options Options) (err error) {

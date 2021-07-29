@@ -41,6 +41,8 @@ type DeleteResolverEndpointInput struct {
 	//
 	// This member is required.
 	ResolverEndpointId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteResolverEndpointOutput struct {
@@ -51,6 +53,8 @@ type DeleteResolverEndpointOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteResolverEndpointMiddlewares(stack *middleware.Stack, options Options) (err error) {

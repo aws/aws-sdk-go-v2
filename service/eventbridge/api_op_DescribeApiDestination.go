@@ -34,6 +34,8 @@ type DescribeApiDestinationInput struct {
 	//
 	// This member is required.
 	Name *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeApiDestinationOutput struct {
@@ -76,6 +78,8 @@ type DescribeApiDestinationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeApiDestinationMiddlewares(stack *middleware.Stack, options Options) (err error) {

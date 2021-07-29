@@ -33,11 +33,15 @@ type PutKMSEncryptionKeyInput struct {
 	//
 	// This member is required.
 	KmsEncryptionKeyArn *string
+
+	noSmithyDocumentSerde
 }
 
 type PutKMSEncryptionKeyOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutKMSEncryptionKeyMiddlewares(stack *middleware.Stack, options Options) (err error) {

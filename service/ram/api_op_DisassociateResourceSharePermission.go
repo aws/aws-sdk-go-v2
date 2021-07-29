@@ -41,6 +41,8 @@ type DisassociateResourceSharePermissionInput struct {
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DisassociateResourceSharePermissionOutput struct {
@@ -54,6 +56,8 @@ type DisassociateResourceSharePermissionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDisassociateResourceSharePermissionMiddlewares(stack *middleware.Stack, options Options) (err error) {

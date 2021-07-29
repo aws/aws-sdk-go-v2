@@ -37,6 +37,8 @@ type DeleteDBInstanceInput struct {
 	//
 	// This member is required.
 	DBInstanceIdentifier *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteDBInstanceOutput struct {
@@ -46,6 +48,8 @@ type DeleteDBInstanceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteDBInstanceMiddlewares(stack *middleware.Stack, options Options) (err error) {

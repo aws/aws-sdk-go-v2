@@ -40,6 +40,8 @@ type DescribeScriptInput struct {
 	//
 	// This member is required.
 	ScriptId *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeScriptOutput struct {
@@ -49,6 +51,8 @@ type DescribeScriptOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeScriptMiddlewares(stack *middleware.Stack, options Options) (err error) {

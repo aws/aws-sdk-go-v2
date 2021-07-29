@@ -37,11 +37,15 @@ type DeleteEntityRecognizerInput struct {
 	//
 	// This member is required.
 	EntityRecognizerArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteEntityRecognizerOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteEntityRecognizerMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -10,6 +10,8 @@ import (
 // One or more parameters are not valid.
 type DirectConnectClientException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectConnectClientException) Error() string {
@@ -27,6 +29,8 @@ func (e *DirectConnectClientException) ErrorFault() smithy.ErrorFault { return s
 // A server-side error occurred.
 type DirectConnectServerException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DirectConnectServerException) Error() string {
@@ -44,6 +48,8 @@ func (e *DirectConnectServerException) ErrorFault() smithy.ErrorFault { return s
 // A tag key was specified more than once.
 type DuplicateTagKeysException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *DuplicateTagKeysException) Error() string {
@@ -61,6 +67,8 @@ func (e *DuplicateTagKeysException) ErrorFault() smithy.ErrorFault { return smit
 // You have reached the limit on the number of tags that can be assigned.
 type TooManyTagsException struct {
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 func (e *TooManyTagsException) Error() string {

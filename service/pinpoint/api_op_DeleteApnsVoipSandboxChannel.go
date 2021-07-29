@@ -35,6 +35,8 @@ type DeleteApnsVoipSandboxChannelInput struct {
 	//
 	// This member is required.
 	ApplicationId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteApnsVoipSandboxChannelOutput struct {
@@ -47,6 +49,8 @@ type DeleteApnsVoipSandboxChannelOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteApnsVoipSandboxChannelMiddlewares(stack *middleware.Stack, options Options) (err error) {

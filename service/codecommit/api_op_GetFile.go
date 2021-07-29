@@ -46,6 +46,8 @@ type GetFileInput struct {
 	// reference such as refs/heads/master. If none is provided, the head commit is
 	// used.
 	CommitSpecifier *string
+
+	noSmithyDocumentSerde
 }
 
 type GetFileOutput struct {
@@ -86,6 +88,8 @@ type GetFileOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetFileMiddlewares(stack *middleware.Stack, options Options) (err error) {

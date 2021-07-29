@@ -43,6 +43,8 @@ type DescribeCertificatesInput struct {
 	// included in the response so that the remaining results can be retrieved.
 	// Default: 10
 	MaxRecords *int32
+
+	noSmithyDocumentSerde
 }
 
 type DescribeCertificatesOutput struct {
@@ -56,6 +58,8 @@ type DescribeCertificatesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeCertificatesMiddlewares(stack *middleware.Stack, options Options) (err error) {

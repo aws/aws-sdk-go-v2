@@ -3,6 +3,7 @@
 package types
 
 import (
+	smithydocument "github.com/aws/smithy-go/document"
 	"time"
 )
 
@@ -56,6 +57,8 @@ type Activity struct {
 
 	// A friendly, more verbose description of the activity status.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a policy adjustment type.
@@ -64,6 +67,8 @@ type AdjustmentType struct {
 	// The policy adjustment type. The valid values are ChangeInCapacity,
 	// ExactCapacity, and PercentChangeInCapacity.
 	AdjustmentType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an alarm.
@@ -74,6 +79,8 @@ type Alarm struct {
 
 	// The name of the alarm.
 	AlarmName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an Auto Scaling group.
@@ -195,6 +202,8 @@ type AutoScalingGroup struct {
 
 	// The current size of the warm pool.
 	WarmPoolSize *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an EC2 instance associated with an Auto Scaling group.
@@ -255,6 +264,8 @@ type AutoScalingInstanceDetails struct {
 	// The number of capacity units contributed by the instance based on its instance
 	// type. Valid Range: Minimum value of 1. Maximum value of 999.
 	WeightedCapacity *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a block device mapping.
@@ -281,6 +292,8 @@ type BlockDeviceMapping struct {
 	// The name of the virtual device (for example, ephemeral0). You can specify either
 	// VirtualName or Ebs, but not both.
 	VirtualName *string
+
+	noSmithyDocumentSerde
 }
 
 // A GetPredictiveScalingForecast call returns the capacity forecast for a
@@ -297,6 +310,8 @@ type CapacityForecast struct {
 	//
 	// This member is required.
 	Values []float64
+
+	noSmithyDocumentSerde
 }
 
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
@@ -341,6 +356,8 @@ type CustomizedMetricSpecification struct {
 
 	// The unit of the metric.
 	Unit *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes information used to set up an Amazon EBS volume specified in a block
@@ -424,6 +441,8 @@ type Ebs struct {
 	// Amazon EC2 User Guide for Linux Instances. Valid Values: standard | io1 | gp2 |
 	// st1 | sc1 | gp3
 	VolumeType *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an enabled metric.
@@ -481,6 +500,8 @@ type EnabledMetric struct {
 	//
 	// * GroupAndWarmPoolTotalCapacity
 	Metric *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a scheduled action that could not be created, updated, or deleted.
@@ -496,6 +517,8 @@ type FailedScheduledUpdateGroupActionRequest struct {
 
 	// The error message accompanying the error code.
 	ErrorMessage *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a filter that is used to return a more specific list of results when
@@ -511,6 +534,8 @@ type Filter struct {
 
 	// One or more filter values. Filter values are case-sensitive.
 	Values []string
+
+	noSmithyDocumentSerde
 }
 
 // Describes an EC2 instance.
@@ -560,6 +585,8 @@ type Instance struct {
 	// The number of capacity units contributed by the instance based on its instance
 	// type. Valid Range: Minimum value of 1. Maximum value of 999.
 	WeightedCapacity *string
+
+	noSmithyDocumentSerde
 }
 
 // The metadata options for the instances. For more information, see Configuring
@@ -588,6 +615,8 @@ type InstanceMetadataOptions struct {
 	// credentials always returns the version 2.0 credentials; the version 1.0
 	// credentials are not available.
 	HttpTokens InstanceMetadataHttpTokensState
+
+	noSmithyDocumentSerde
 }
 
 // Describes whether detailed monitoring is enabled for the Auto Scaling instances.
@@ -595,6 +624,8 @@ type InstanceMonitoring struct {
 
 	// If true, detailed monitoring is enabled. Otherwise, basic monitoring is enabled.
 	Enabled *bool
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instance refresh for an Auto Scaling group.
@@ -650,6 +681,8 @@ type InstanceRefresh struct {
 
 	// Provides more details about the current status of the instance refresh.
 	StatusReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Reports the progress of an instance refresh on instances that are in the Auto
@@ -665,6 +698,8 @@ type InstanceRefreshLivePoolProgress struct {
 	// healthy and the specified warm-up time passes, the instance is considered
 	// updated and is added to the percentage complete.
 	PercentageComplete *int32
+
+	noSmithyDocumentSerde
 }
 
 // Reports the progress of an instance refresh on an Auto Scaling group that has a
@@ -679,6 +714,8 @@ type InstanceRefreshProgressDetails struct {
 	// Indicates the progress of an instance refresh on instances that are in the warm
 	// pool.
 	WarmPoolProgress *InstanceRefreshWarmPoolProgress
+
+	noSmithyDocumentSerde
 }
 
 // Reports the progress of an instance refresh on instances that are in the warm
@@ -694,6 +731,8 @@ type InstanceRefreshWarmPoolProgress struct {
 	// and the specified warm-up time passes, the instance is considered updated and is
 	// added to the percentage complete.
 	PercentageComplete *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes an instances distribution for an Auto Scaling group with a
@@ -757,6 +796,8 @@ type InstancesDistribution struct {
 	// On-Demand price as the maximum Spot price. To remove a value that you previously
 	// set, include the property but specify an empty string ("") for the value.
 	SpotMaxPrice *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a launch configuration.
@@ -890,6 +931,8 @@ type LaunchConfiguration struct {
 	// for you, and you can load the text from a file. Otherwise, you must provide
 	// base64-encoded text. User data is limited to 16 KB.
 	UserData *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a launch template and overrides. You specify these properties as part
@@ -907,6 +950,8 @@ type LaunchTemplate struct {
 	// template. If not provided, Amazon EC2 Auto Scaling uses the instance type
 	// specified in the launch template when it launches an instance.
 	Overrides []LaunchTemplateOverrides
+
+	noSmithyDocumentSerde
 }
 
 // Describes an override for a launch template. The maximum number of instance
@@ -947,6 +992,8 @@ type LaunchTemplateOverrides struct {
 	// in the Amazon EC2 Auto Scaling User Guide. Value must be in the range of 1 to
 	// 999.
 	WeightedCapacity *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the Amazon EC2 launch template and the launch template version that
@@ -989,6 +1036,8 @@ type LaunchTemplateSpecification struct {
 	// Amazon EC2 Auto Scaling selects the default version of the launch template when
 	// launching instances. The default value is $Default.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a lifecycle hook, which tells Amazon EC2 Auto Scaling that you want to
@@ -1037,6 +1086,8 @@ type LifecycleHook struct {
 	// The ARN of the IAM role that allows the Auto Scaling group to publish to the
 	// specified notification target.
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes information used to specify a lifecycle hook for an Auto Scaling
@@ -1110,6 +1161,8 @@ type LifecycleHookSpecification struct {
 	// specified notification target, for example, an Amazon SNS topic or an Amazon SQS
 	// queue.
 	RoleARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the state of a Classic Load Balancer.
@@ -1137,6 +1190,8 @@ type LoadBalancerState struct {
 	// * Removed - All Auto Scaling
 	// instances are deregistered from the load balancer.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the state of a target group.
@@ -1164,6 +1219,8 @@ type LoadBalancerTargetGroupState struct {
 	// * Removed - All Auto Scaling instances are
 	// deregistered from the target group.
 	State *string
+
+	noSmithyDocumentSerde
 }
 
 // A GetPredictiveScalingForecast call returns the load forecast for a predictive
@@ -1185,6 +1242,8 @@ type LoadForecast struct {
 	//
 	// This member is required.
 	Values []float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes a metric.
@@ -1239,6 +1298,8 @@ type MetricCollectionType struct {
 	//
 	// * GroupAndWarmPoolTotalCapacity
 	Metric *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the dimension of a metric.
@@ -1253,6 +1314,8 @@ type MetricDimension struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a granularity of a metric.
@@ -1260,6 +1323,8 @@ type MetricGranularityType struct {
 
 	// The granularity. The only valid value is 1Minute.
 	Granularity *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a mixed instances policy for an Auto Scaling group. With mixed
@@ -1282,6 +1347,8 @@ type MixedInstancesPolicy struct {
 	// (overrides) that are used to provision EC2 instances to fulfill On-Demand and
 	// Spot capacities. Required when creating a mixed instances policy.
 	LaunchTemplate *LaunchTemplate
+
+	noSmithyDocumentSerde
 }
 
 // Describes a notification.
@@ -1309,6 +1376,8 @@ type NotificationConfiguration struct {
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (Amazon
 	// SNS) topic.
 	TopicARN *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a predefined metric for a target tracking scaling policy to use with
@@ -1357,6 +1426,8 @@ type PredefinedMetricSpecification struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	ResourceLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a predictive scaling policy configuration to use with Amazon EC2 Auto
@@ -1409,6 +1480,8 @@ type PredictiveScalingConfiguration struct {
 	// forecast interval duration of 3600 seconds (60 minutes). Defaults to 300 seconds
 	// if not specified.
 	SchedulingBufferTime *int32
+
+	noSmithyDocumentSerde
 }
 
 // This structure specifies the metrics and target utilization settings for a
@@ -1462,6 +1535,8 @@ type PredictiveScalingMetricSpecification struct {
 
 	// The scaling metric specification.
 	PredefinedScalingMetricSpecification *PredictiveScalingPredefinedScalingMetric
+
+	noSmithyDocumentSerde
 }
 
 // Describes a load metric for a predictive scaling policy. When returned in the
@@ -1497,6 +1572,8 @@ type PredictiveScalingPredefinedLoadMetric struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	ResourceLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a metric pair for a predictive scaling policy.
@@ -1534,6 +1611,8 @@ type PredictiveScalingPredefinedMetricPair struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	ResourceLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a scaling metric for a predictive scaling policy. When returned in the
@@ -1569,6 +1648,8 @@ type PredictiveScalingPredefinedScalingMetric struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeTargetGroups.html)
 	// API operation.
 	ResourceLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a process type. For more information, see Scaling processes
@@ -1600,6 +1681,8 @@ type ProcessType struct {
 	//
 	// This member is required.
 	ProcessName *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes information used to start an instance refresh. All properties are
@@ -1633,6 +1716,8 @@ type RefreshPreferences struct {
 	// desired capacity of the Auto Scaling group (rounded up to the nearest integer).
 	// The default is 90.
 	MinHealthyPercentage *int32
+
+	noSmithyDocumentSerde
 }
 
 // Describes a scaling policy.
@@ -1711,6 +1796,8 @@ type ScalingPolicy struct {
 
 	// A target tracking scaling policy.
 	TargetTrackingConfiguration *TargetTrackingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 // Describes a scheduled scaling action.
@@ -1753,6 +1840,8 @@ type ScheduledUpdateGroupAction struct {
 
 	// The time zone for the cron expression.
 	TimeZone *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes information used for one or more scheduled scaling action updates in a
@@ -1801,6 +1890,8 @@ type ScheduledUpdateGroupActionRequest struct {
 	// https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 	// (https://en.wikipedia.org/wiki/List_of_tz_database_time_zones).
 	TimeZone *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes information used to create a step adjustment for a step scaling
@@ -1859,6 +1950,8 @@ type StepAdjustment struct {
 	// threshold plus the upper bound). A null value indicates positive infinity. The
 	// upper bound must be greater than the lower bound.
 	MetricIntervalUpperBound *float64
+
+	noSmithyDocumentSerde
 }
 
 // Describes an auto scaling process that has been suspended. For more information,
@@ -1872,6 +1965,8 @@ type SuspendedProcess struct {
 
 	// The reason that the process was suspended.
 	SuspensionReason *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag for an Auto Scaling group.
@@ -1894,6 +1989,8 @@ type Tag struct {
 
 	// The tag value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes a tag for an Auto Scaling group.
@@ -1914,6 +2011,8 @@ type TagDescription struct {
 
 	// The tag value.
 	Value *string
+
+	noSmithyDocumentSerde
 }
 
 // Represents a target tracking scaling policy configuration to use with Amazon EC2
@@ -1938,6 +2037,8 @@ type TargetTrackingConfiguration struct {
 	// A predefined metric. You must specify either a predefined metric or a customized
 	// metric.
 	PredefinedMetricSpecification *PredefinedMetricSpecification
+
+	noSmithyDocumentSerde
 }
 
 // Describes a warm pool configuration.
@@ -1955,4 +2056,8 @@ type WarmPoolConfiguration struct {
 
 	// The status of a warm pool that is marked for deletion.
 	Status WarmPoolStatus
+
+	noSmithyDocumentSerde
 }
+
+type noSmithyDocumentSerde = smithydocument.NoSerde

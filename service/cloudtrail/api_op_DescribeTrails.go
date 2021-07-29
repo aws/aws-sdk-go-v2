@@ -58,6 +58,8 @@ type DescribeTrailsInput struct {
 	// region. To return information about a trail in another region, you must specify
 	// its trail ARN.
 	TrailNameList []string
+
+	noSmithyDocumentSerde
 }
 
 // Returns the objects or data listed below if successful. Otherwise, returns an
@@ -73,6 +75,8 @@ type DescribeTrailsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeTrailsMiddlewares(stack *middleware.Stack, options Options) (err error) {

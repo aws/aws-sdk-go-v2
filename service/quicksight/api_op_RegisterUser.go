@@ -144,6 +144,8 @@ type RegisterUserInput struct {
 	// The Amazon QuickSight user name that you want to create for the user you are
 	// registering.
 	UserName *string
+
+	noSmithyDocumentSerde
 }
 
 type RegisterUserOutput struct {
@@ -163,6 +165,8 @@ type RegisterUserOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRegisterUserMiddlewares(stack *middleware.Stack, options Options) (err error) {

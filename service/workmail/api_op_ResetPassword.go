@@ -43,11 +43,15 @@ type ResetPasswordInput struct {
 	//
 	// This member is required.
 	UserId *string
+
+	noSmithyDocumentSerde
 }
 
 type ResetPasswordOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationResetPasswordMiddlewares(stack *middleware.Stack, options Options) (err error) {

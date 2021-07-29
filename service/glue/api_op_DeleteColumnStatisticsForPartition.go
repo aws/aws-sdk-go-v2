@@ -52,11 +52,15 @@ type DeleteColumnStatisticsForPartitionInput struct {
 	// The ID of the Data Catalog where the partitions in question reside. If none is
 	// supplied, the Amazon Web Services account ID is used by default.
 	CatalogId *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteColumnStatisticsForPartitionOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteColumnStatisticsForPartitionMiddlewares(stack *middleware.Stack, options Options) (err error) {

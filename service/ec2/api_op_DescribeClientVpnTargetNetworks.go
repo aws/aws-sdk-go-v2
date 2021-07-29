@@ -63,6 +63,8 @@ type DescribeClientVpnTargetNetworksInput struct {
 
 	// The token to retrieve the next page of results.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeClientVpnTargetNetworksOutput struct {
@@ -76,6 +78,8 @@ type DescribeClientVpnTargetNetworksOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeClientVpnTargetNetworksMiddlewares(stack *middleware.Stack, options Options) (err error) {

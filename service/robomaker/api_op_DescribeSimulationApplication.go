@@ -37,6 +37,8 @@ type DescribeSimulationApplicationInput struct {
 
 	// The version of the simulation application to describe.
 	ApplicationVersion *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeSimulationApplicationOutput struct {
@@ -74,6 +76,8 @@ type DescribeSimulationApplicationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeSimulationApplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -35,11 +35,15 @@ type StartOnDemandAppReplicationInput struct {
 
 	// The description of the replication run.
 	Description *string
+
+	noSmithyDocumentSerde
 }
 
 type StartOnDemandAppReplicationOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartOnDemandAppReplicationMiddlewares(stack *middleware.Stack, options Options) (err error) {

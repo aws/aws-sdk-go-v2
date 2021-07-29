@@ -70,6 +70,8 @@ type ModifyReplicationGroupShardConfigurationInput struct {
 	// availability zones for you. You can specify this parameter only if the value of
 	// NodeGroupCount is greater than the current number of node groups (shards).
 	ReshardingConfiguration []types.ReshardingConfiguration
+
+	noSmithyDocumentSerde
 }
 
 type ModifyReplicationGroupShardConfigurationOutput struct {
@@ -79,6 +81,8 @@ type ModifyReplicationGroupShardConfigurationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationModifyReplicationGroupShardConfigurationMiddlewares(stack *middleware.Stack, options Options) (err error) {

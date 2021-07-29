@@ -93,6 +93,8 @@ type UpdateApiInput struct {
 
 	// A version identifier for the API.
 	Version *string
+
+	noSmithyDocumentSerde
 }
 
 type UpdateApiOutput struct {
@@ -164,6 +166,8 @@ type UpdateApiOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateApiMiddlewares(stack *middleware.Stack, options Options) (err error) {

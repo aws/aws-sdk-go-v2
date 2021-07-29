@@ -39,6 +39,8 @@ type DescribeMigrationTaskInput struct {
 	//
 	// This member is required.
 	ProgressUpdateStream *string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeMigrationTaskOutput struct {
@@ -48,6 +50,8 @@ type DescribeMigrationTaskOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeMigrationTaskMiddlewares(stack *middleware.Stack, options Options) (err error) {

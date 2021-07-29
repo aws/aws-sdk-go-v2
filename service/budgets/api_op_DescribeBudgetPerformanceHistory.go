@@ -52,6 +52,8 @@ type DescribeBudgetPerformanceHistoryInput struct {
 	// Retrieves how often the budget went into an ALARM state for the specified time
 	// period.
 	TimePeriod *types.TimePeriod
+
+	noSmithyDocumentSerde
 }
 
 type DescribeBudgetPerformanceHistoryOutput struct {
@@ -68,6 +70,8 @@ type DescribeBudgetPerformanceHistoryOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeBudgetPerformanceHistoryMiddlewares(stack *middleware.Stack, options Options) (err error) {

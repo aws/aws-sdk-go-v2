@@ -38,6 +38,8 @@ type ListPublicKeysInput struct {
 
 	// The maximum number of public keys you want in the response body.
 	MaxItems *int32
+
+	noSmithyDocumentSerde
 }
 
 type ListPublicKeysOutput struct {
@@ -48,6 +50,8 @@ type ListPublicKeysOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListPublicKeysMiddlewares(stack *middleware.Stack, options Options) (err error) {

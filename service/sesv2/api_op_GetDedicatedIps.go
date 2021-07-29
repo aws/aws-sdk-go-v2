@@ -43,6 +43,8 @@ type GetDedicatedIpsInput struct {
 
 	// The name of the IP pool that the dedicated IP address is associated with.
 	PoolName *string
+
+	noSmithyDocumentSerde
 }
 
 // Information about the dedicated IP addresses that are associated with your AWS
@@ -59,6 +61,8 @@ type GetDedicatedIpsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetDedicatedIpsMiddlewares(stack *middleware.Stack, options Options) (err error) {

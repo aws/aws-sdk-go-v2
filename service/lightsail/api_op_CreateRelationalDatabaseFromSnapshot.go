@@ -97,6 +97,8 @@ type CreateRelationalDatabaseFromSnapshotInput struct {
 	// of true restores from the latest backup time. Default: false Constraints: Cannot
 	// be specified if the restore time parameter is provided.
 	UseLatestRestorableTime *bool
+
+	noSmithyDocumentSerde
 }
 
 type CreateRelationalDatabaseFromSnapshotOutput struct {
@@ -108,6 +110,8 @@ type CreateRelationalDatabaseFromSnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateRelationalDatabaseFromSnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

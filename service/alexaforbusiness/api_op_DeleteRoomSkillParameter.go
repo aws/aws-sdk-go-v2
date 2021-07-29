@@ -40,11 +40,15 @@ type DeleteRoomSkillParameterInput struct {
 
 	// The ARN of the room from which to remove the room skill parameter details.
 	RoomArn *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteRoomSkillParameterOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteRoomSkillParameterMiddlewares(stack *middleware.Stack, options Options) (err error) {

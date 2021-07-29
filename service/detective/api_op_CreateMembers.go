@@ -67,6 +67,8 @@ type CreateMembersInput struct {
 	// Customized message text to include in the invitation email message to the
 	// invited member accounts.
 	Message *string
+
+	noSmithyDocumentSerde
 }
 
 type CreateMembersOutput struct {
@@ -84,6 +86,8 @@ type CreateMembersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateMembersMiddlewares(stack *middleware.Stack, options Options) (err error) {

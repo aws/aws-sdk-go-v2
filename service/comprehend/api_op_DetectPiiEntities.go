@@ -40,6 +40,8 @@ type DetectPiiEntitiesInput struct {
 	//
 	// This member is required.
 	Text *string
+
+	noSmithyDocumentSerde
 }
 
 type DetectPiiEntitiesOutput struct {
@@ -51,6 +53,8 @@ type DetectPiiEntitiesOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectPiiEntitiesMiddlewares(stack *middleware.Stack, options Options) (err error) {

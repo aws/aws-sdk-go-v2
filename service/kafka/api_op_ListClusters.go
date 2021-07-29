@@ -42,6 +42,8 @@ type ListClustersInput struct {
 	// call returns NextToken in the response. To get the next batch, provide this
 	// token in your next request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListClustersOutput struct {
@@ -56,6 +58,8 @@ type ListClustersOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListClustersMiddlewares(stack *middleware.Stack, options Options) (err error) {

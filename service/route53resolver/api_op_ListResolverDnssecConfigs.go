@@ -45,6 +45,8 @@ type ListResolverDnssecConfigsInput struct {
 	// and subsequent requests, get the value of NextToken from the previous response
 	// and specify that value for NextToken in the request.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type ListResolverDnssecConfigsOutput struct {
@@ -66,6 +68,8 @@ type ListResolverDnssecConfigsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListResolverDnssecConfigsMiddlewares(stack *middleware.Stack, options Options) (err error) {

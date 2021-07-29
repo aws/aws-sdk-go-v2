@@ -40,6 +40,8 @@ type PutDedicatedIpWarmupAttributesInput struct {
 	//
 	// This member is required.
 	WarmupPercentage *int32
+
+	noSmithyDocumentSerde
 }
 
 // An HTTP 200 response if the request succeeds, or an error message if the request
@@ -47,6 +49,8 @@ type PutDedicatedIpWarmupAttributesInput struct {
 type PutDedicatedIpWarmupAttributesOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutDedicatedIpWarmupAttributesMiddlewares(stack *middleware.Stack, options Options) (err error) {

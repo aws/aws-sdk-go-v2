@@ -66,11 +66,15 @@ type GrantPermissionsInput struct {
 	// users. These permissions may only be a subset of the permissions granted in the
 	// Privileges.
 	PermissionsWithGrantOption []types.Permission
+
+	noSmithyDocumentSerde
 }
 
 type GrantPermissionsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGrantPermissionsMiddlewares(stack *middleware.Stack, options Options) (err error) {

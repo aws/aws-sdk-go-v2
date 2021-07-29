@@ -72,6 +72,8 @@ type StartCopyJobInput struct {
 	// to cold. Only Amazon EFS file system backups can be transitioned to cold
 	// storage.
 	Lifecycle *types.Lifecycle
+
+	noSmithyDocumentSerde
 }
 
 type StartCopyJobOutput struct {
@@ -87,6 +89,8 @@ type StartCopyJobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartCopyJobMiddlewares(stack *middleware.Stack, options Options) (err error) {

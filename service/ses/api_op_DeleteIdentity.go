@@ -36,12 +36,16 @@ type DeleteIdentityInput struct {
 	//
 	// This member is required.
 	Identity *string
+
+	noSmithyDocumentSerde
 }
 
 // An empty element returned on a successful request.
 type DeleteIdentityOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteIdentityMiddlewares(stack *middleware.Stack, options Options) (err error) {

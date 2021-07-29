@@ -95,6 +95,8 @@ type UpdateEnvironmentInput struct {
 	// application version to the environment. If no such application version is found,
 	// returns an InvalidParameterValue error.
 	VersionLabel *string
+
+	noSmithyDocumentSerde
 }
 
 // Describes the properties of an environment.
@@ -208,6 +210,8 @@ type UpdateEnvironmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationUpdateEnvironmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

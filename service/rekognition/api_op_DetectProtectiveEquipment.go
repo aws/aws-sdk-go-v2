@@ -72,6 +72,8 @@ type DetectProtectiveEquipmentInput struct {
 
 	// An array of PPE types that you want to summarize.
 	SummarizationAttributes *types.ProtectiveEquipmentSummarizationAttributes
+
+	noSmithyDocumentSerde
 }
 
 type DetectProtectiveEquipmentOutput struct {
@@ -88,6 +90,8 @@ type DetectProtectiveEquipmentOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDetectProtectiveEquipmentMiddlewares(stack *middleware.Stack, options Options) (err error) {

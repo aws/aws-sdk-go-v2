@@ -58,6 +58,8 @@ type StartTaskExecutionInput struct {
 	// execution by specifying an overriding Options value to StartTaskExecution
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/API_StartTaskExecution.html).
 	OverrideOptions *types.Options
+
+	noSmithyDocumentSerde
 }
 
 // StartTaskExecutionResponse
@@ -68,6 +70,8 @@ type StartTaskExecutionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartTaskExecutionMiddlewares(stack *middleware.Stack, options Options) (err error) {

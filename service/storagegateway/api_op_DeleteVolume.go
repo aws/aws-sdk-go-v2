@@ -46,6 +46,8 @@ type DeleteVolumeInput struct {
 	//
 	// This member is required.
 	VolumeARN *string
+
+	noSmithyDocumentSerde
 }
 
 // A JSON object containing the Amazon Resource Name (ARN) of the storage volume
@@ -58,6 +60,8 @@ type DeleteVolumeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteVolumeMiddlewares(stack *middleware.Stack, options Options) (err error) {

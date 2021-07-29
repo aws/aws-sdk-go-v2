@@ -49,6 +49,8 @@ type ListItemsInput struct {
 
 	// The path in the container from which to retrieve items. Format: //
 	Path *string
+
+	noSmithyDocumentSerde
 }
 
 type ListItemsOutput struct {
@@ -64,6 +66,8 @@ type ListItemsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationListItemsMiddlewares(stack *middleware.Stack, options Options) (err error) {

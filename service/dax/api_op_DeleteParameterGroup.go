@@ -33,6 +33,8 @@ type DeleteParameterGroupInput struct {
 	//
 	// This member is required.
 	ParameterGroupName *string
+
+	noSmithyDocumentSerde
 }
 
 type DeleteParameterGroupOutput struct {
@@ -43,6 +45,8 @@ type DeleteParameterGroupOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDeleteParameterGroupMiddlewares(stack *middleware.Stack, options Options) (err error) {

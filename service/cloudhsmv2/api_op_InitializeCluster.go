@@ -53,6 +53,8 @@ type InitializeClusterInput struct {
 	//
 	// This member is required.
 	TrustAnchor *string
+
+	noSmithyDocumentSerde
 }
 
 type InitializeClusterOutput struct {
@@ -65,6 +67,8 @@ type InitializeClusterOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationInitializeClusterMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -66,6 +66,8 @@ type StartEntitiesDetectionV2JobInput struct {
 	// An AWS Key Management Service key to encrypt your output files. If you do not
 	// specify a key, the files are written in plain text.
 	KMSKey *string
+
+	noSmithyDocumentSerde
 }
 
 type StartEntitiesDetectionV2JobOutput struct {
@@ -76,6 +78,8 @@ type StartEntitiesDetectionV2JobOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartEntitiesDetectionV2JobMiddlewares(stack *middleware.Stack, options Options) (err error) {

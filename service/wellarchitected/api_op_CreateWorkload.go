@@ -164,6 +164,8 @@ type CreateWorkloadInput struct {
 
 	// The tags to be associated with the workload.
 	Tags map[string]string
+
+	noSmithyDocumentSerde
 }
 
 // Output of a create workload call.
@@ -177,6 +179,8 @@ type CreateWorkloadOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateWorkloadMiddlewares(stack *middleware.Stack, options Options) (err error) {

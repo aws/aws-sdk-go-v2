@@ -28,6 +28,7 @@ func (c *Client) GetRegistrationCode(ctx context.Context, params *GetRegistratio
 
 // The input to the GetRegistrationCode operation.
 type GetRegistrationCodeInput struct {
+	noSmithyDocumentSerde
 }
 
 // The output from the GetRegistrationCode operation.
@@ -38,6 +39,8 @@ type GetRegistrationCodeOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetRegistrationCodeMiddlewares(stack *middleware.Stack, options Options) (err error) {

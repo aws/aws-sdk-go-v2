@@ -122,6 +122,8 @@ type CopySnapshotInput struct {
 	// (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/backups-exporting.html)
 	// in the Amazon ElastiCache User Guide.
 	TargetBucket *string
+
+	noSmithyDocumentSerde
 }
 
 type CopySnapshotOutput struct {
@@ -132,6 +134,8 @@ type CopySnapshotOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCopySnapshotMiddlewares(stack *middleware.Stack, options Options) (err error) {

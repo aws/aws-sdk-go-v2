@@ -44,6 +44,8 @@ type PurchaseReservedNodeOfferingInput struct {
 
 	// The number of reserved nodes that you want to purchase. Default: 1
 	NodeCount *int32
+
+	noSmithyDocumentSerde
 }
 
 type PurchaseReservedNodeOfferingOutput struct {
@@ -54,6 +56,8 @@ type PurchaseReservedNodeOfferingOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseReservedNodeOfferingMiddlewares(stack *middleware.Stack, options Options) (err error) {

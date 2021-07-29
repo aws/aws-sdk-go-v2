@@ -56,11 +56,15 @@ type PutThirdPartyJobSuccessResultInput struct {
 	// The details of the actions taken and results produced on an artifact as it
 	// passes through stages in the pipeline.
 	ExecutionDetails *types.ExecutionDetails
+
+	noSmithyDocumentSerde
 }
 
 type PutThirdPartyJobSuccessResultOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPutThirdPartyJobSuccessResultMiddlewares(stack *middleware.Stack, options Options) (err error) {

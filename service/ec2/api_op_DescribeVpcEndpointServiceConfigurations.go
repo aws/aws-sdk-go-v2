@@ -69,6 +69,8 @@ type DescribeVpcEndpointServiceConfigurationsInput struct {
 
 	// The IDs of one or more services.
 	ServiceIds []string
+
+	noSmithyDocumentSerde
 }
 
 type DescribeVpcEndpointServiceConfigurationsOutput struct {
@@ -82,6 +84,8 @@ type DescribeVpcEndpointServiceConfigurationsOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationDescribeVpcEndpointServiceConfigurationsMiddlewares(stack *middleware.Stack, options Options) (err error) {

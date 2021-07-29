@@ -50,6 +50,8 @@ type RemoveTagsFromResourceInput struct {
 	//
 	// This member is required.
 	TagKeys []string
+
+	noSmithyDocumentSerde
 }
 
 // Represents the output from the AddTagsToResource, ListTagsForResource, and
@@ -61,6 +63,8 @@ type RemoveTagsFromResourceOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationRemoveTagsFromResourceMiddlewares(stack *middleware.Stack, options Options) (err error) {

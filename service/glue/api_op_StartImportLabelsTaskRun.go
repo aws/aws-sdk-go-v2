@@ -62,6 +62,8 @@ type StartImportLabelsTaskRunInput struct {
 
 	// Indicates whether to overwrite your existing labels.
 	ReplaceAllLabels bool
+
+	noSmithyDocumentSerde
 }
 
 type StartImportLabelsTaskRunOutput struct {
@@ -71,6 +73,8 @@ type StartImportLabelsTaskRunOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartImportLabelsTaskRunMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -62,6 +62,8 @@ type CreateDeliverabilityTestReportInput struct {
 	// An array of objects that define the tags (keys and values) that you want to
 	// associate with the predictive inbox placement test.
 	Tags []types.Tag
+
+	noSmithyDocumentSerde
 }
 
 // Information about the predictive inbox placement test that you created.
@@ -83,6 +85,8 @@ type CreateDeliverabilityTestReportOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateDeliverabilityTestReportMiddlewares(stack *middleware.Stack, options Options) (err error) {

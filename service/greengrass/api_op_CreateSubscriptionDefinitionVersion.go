@@ -39,6 +39,8 @@ type CreateSubscriptionDefinitionVersionInput struct {
 
 	// A list of subscriptions.
 	Subscriptions []types.Subscription
+
+	noSmithyDocumentSerde
 }
 
 type CreateSubscriptionDefinitionVersionOutput struct {
@@ -57,6 +59,8 @@ type CreateSubscriptionDefinitionVersionOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationCreateSubscriptionDefinitionVersionMiddlewares(stack *middleware.Stack, options Options) (err error) {

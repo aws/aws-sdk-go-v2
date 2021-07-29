@@ -37,6 +37,8 @@ type GetTraceGraphInput struct {
 
 	// Pagination token.
 	NextToken *string
+
+	noSmithyDocumentSerde
 }
 
 type GetTraceGraphOutput struct {
@@ -49,6 +51,8 @@ type GetTraceGraphOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationGetTraceGraphMiddlewares(stack *middleware.Stack, options Options) (err error) {

@@ -48,6 +48,8 @@ type StartBgpFailoverTestInput struct {
 	// The time in minutes that the virtual interface failover test will last. Maximum
 	// value: 180 minutes (3 hours). Default: 180 minutes (3 hours).
 	TestDurationInMinutes *int32
+
+	noSmithyDocumentSerde
 }
 
 type StartBgpFailoverTestOutput struct {
@@ -57,6 +59,8 @@ type StartBgpFailoverTestOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationStartBgpFailoverTestMiddlewares(stack *middleware.Stack, options Options) (err error) {

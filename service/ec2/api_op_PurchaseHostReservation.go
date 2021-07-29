@@ -61,6 +61,8 @@ type PurchaseHostReservationInput struct {
 
 	// The tags to apply to the Dedicated Host Reservation during purchase.
 	TagSpecifications []types.TagSpecification
+
+	noSmithyDocumentSerde
 }
 
 type PurchaseHostReservationOutput struct {
@@ -85,6 +87,8 @@ type PurchaseHostReservationOutput struct {
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
+
+	noSmithyDocumentSerde
 }
 
 func (c *Client) addOperationPurchaseHostReservationMiddlewares(stack *middleware.Stack, options Options) (err error) {
