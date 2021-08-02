@@ -826,42 +826,6 @@ func addOpUpdateScheduleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateSchedule{}, middleware.After)
 }
 
-func validateColumnStatisticsConfiguration(v *types.ColumnStatisticsConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ColumnStatisticsConfiguration"}
-	if v.Statistics == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistics"))
-	} else if v.Statistics != nil {
-		if err := validateStatisticsConfiguration(v.Statistics); err != nil {
-			invalidParams.AddNested("Statistics", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateColumnStatisticsConfigurationList(v []types.ColumnStatisticsConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ColumnStatisticsConfigurationList"}
-	for i := range v {
-		if err := validateColumnStatisticsConfiguration(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateConditionExpression(v *types.ConditionExpression) error {
 	if v == nil {
 		return nil
@@ -911,45 +875,6 @@ func validateDatabaseInputDefinition(v *types.DatabaseInputDefinition) error {
 	if v.TempDirectory != nil {
 		if err := validateS3Location(v.TempDirectory); err != nil {
 			invalidParams.AddNested("TempDirectory", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateDatabaseOutput(v *types.DatabaseOutput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DatabaseOutput"}
-	if v.GlueConnectionName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GlueConnectionName"))
-	}
-	if v.DatabaseOptions == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("DatabaseOptions"))
-	} else if v.DatabaseOptions != nil {
-		if err := validateDatabaseTableOutputOptions(v.DatabaseOptions); err != nil {
-			invalidParams.AddNested("DatabaseOptions", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateDatabaseOutputList(v []types.DatabaseOutput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "DatabaseOutputList"}
-	for i := range v {
-		if err := validateDatabaseOutput(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1228,28 +1153,6 @@ func validatePathParametersMap(v map[string]types.DatasetParameter) error {
 	}
 }
 
-func validateProfileConfiguration(v *types.ProfileConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ProfileConfiguration"}
-	if v.DatasetStatisticsConfiguration != nil {
-		if err := validateStatisticsConfiguration(v.DatasetStatisticsConfiguration); err != nil {
-			invalidParams.AddNested("DatasetStatisticsConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.ColumnStatisticsConfigurations != nil {
-		if err := validateColumnStatisticsConfigurationList(v.ColumnStatisticsConfigurations); err != nil {
-			invalidParams.AddNested("ColumnStatisticsConfigurations", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateRecipeAction(v *types.RecipeAction) error {
 	if v == nil {
 		return nil
@@ -1370,58 +1273,6 @@ func validateSample(v *types.Sample) error {
 	}
 }
 
-func validateStatisticOverride(v *types.StatisticOverride) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StatisticOverride"}
-	if v.Statistic == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Statistic"))
-	}
-	if v.Parameters == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Parameters"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateStatisticOverrideList(v []types.StatisticOverride) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StatisticOverrideList"}
-	for i := range v {
-		if err := validateStatisticOverride(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateStatisticsConfiguration(v *types.StatisticsConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StatisticsConfiguration"}
-	if v.Overrides != nil {
-		if err := validateStatisticOverrideList(v.Overrides); err != nil {
-			invalidParams.AddNested("Overrides", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateViewFrame(v *types.ViewFrame) error {
 	if v == nil {
 		return nil
@@ -1498,11 +1349,6 @@ func validateOpCreateProfileJobInput(v *CreateProfileJobInput) error {
 	} else if v.OutputLocation != nil {
 		if err := validateS3Location(v.OutputLocation); err != nil {
 			invalidParams.AddNested("OutputLocation", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.Configuration != nil {
-		if err := validateProfileConfiguration(v.Configuration); err != nil {
-			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RoleArn == nil {
@@ -1582,11 +1428,6 @@ func validateOpCreateRecipeJobInput(v *CreateRecipeJobInput) error {
 	if v.DataCatalogOutputs != nil {
 		if err := validateDataCatalogOutputList(v.DataCatalogOutputs); err != nil {
 			invalidParams.AddNested("DataCatalogOutputs", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DatabaseOutputs != nil {
-		if err := validateDatabaseOutputList(v.DatabaseOutputs); err != nil {
-			invalidParams.AddNested("DatabaseOutputs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RecipeReference != nil {
@@ -1994,11 +1835,6 @@ func validateOpUpdateProfileJobInput(v *UpdateProfileJobInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateProfileJobInput"}
-	if v.Configuration != nil {
-		if err := validateProfileConfiguration(v.Configuration); err != nil {
-			invalidParams.AddNested("Configuration", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
@@ -2078,11 +1914,6 @@ func validateOpUpdateRecipeJobInput(v *UpdateRecipeJobInput) error {
 	if v.DataCatalogOutputs != nil {
 		if err := validateDataCatalogOutputList(v.DataCatalogOutputs); err != nil {
 			invalidParams.AddNested("DataCatalogOutputs", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.DatabaseOutputs != nil {
-		if err := validateDatabaseOutputList(v.DatabaseOutputs); err != nil {
-			invalidParams.AddNested("DatabaseOutputs", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.RoleArn == nil {

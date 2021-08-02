@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-// Lists information about dataset contents that have been created.
+// Lists information about data set contents that have been created.
 func (c *Client) ListDatasetContents(ctx context.Context, params *ListDatasetContentsInput, optFns ...func(*Options)) (*ListDatasetContentsOutput, error) {
 	if params == nil {
 		params = &ListDatasetContentsInput{}
@@ -31,7 +31,7 @@ func (c *Client) ListDatasetContents(ctx context.Context, params *ListDatasetCon
 
 type ListDatasetContentsInput struct {
 
-	// The name of the dataset whose contents information you want to list.
+	// The name of the data set whose contents information you want to list.
 	//
 	// This member is required.
 	DatasetName *string
@@ -42,12 +42,12 @@ type ListDatasetContentsInput struct {
 	// The token for the next set of results.
 	NextToken *string
 
-	// A filter to limit results to those dataset contents whose creation is scheduled
+	// A filter to limit results to those data set contents whose creation is scheduled
 	// before the given time. See the field triggers.schedule in the CreateDataset
 	// request. (timestamp)
 	ScheduledBefore *time.Time
 
-	// A filter to limit results to those dataset contents whose creation is scheduled
+	// A filter to limit results to those data set contents whose creation is scheduled
 	// on or after the given time. See the field triggers.schedule in the CreateDataset
 	// request. (timestamp)
 	ScheduledOnOrAfter *time.Time
@@ -57,7 +57,7 @@ type ListDatasetContentsInput struct {
 
 type ListDatasetContentsOutput struct {
 
-	// Summary information about dataset contents that have been created.
+	// Summary information about data set contents that have been created.
 	DatasetContentSummaries []types.DatasetContentSummary
 
 	// The token to retrieve the next set of results, or null if there are no more

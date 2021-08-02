@@ -155,19 +155,6 @@ func awsRestxml_deserializeOpDocumentCreateAccessPointOutput(v **CreateAccessPoi
 				sv.AccessPointArn = ptr.String(xtv)
 			}
 
-		case strings.EqualFold("Alias", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				sv.Alias = ptr.String(xtv)
-			}
-
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -1822,32 +1809,6 @@ func awsRestxml_deserializeOpDocumentGetAccessPointOutput(v **GetAccessPointOutp
 		originalDecoder := decoder
 		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
 		switch {
-		case strings.EqualFold("AccessPointArn", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				sv.AccessPointArn = ptr.String(xtv)
-			}
-
-		case strings.EqualFold("Alias", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				sv.Alias = ptr.String(xtv)
-			}
-
 		case strings.EqualFold("Bucket", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -1876,12 +1837,6 @@ func awsRestxml_deserializeOpDocumentGetAccessPointOutput(v **GetAccessPointOutp
 					return err
 				}
 				sv.CreationDate = ptr.Time(t)
-			}
-
-		case strings.EqualFold("Endpoints", t.Name.Local):
-			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentEndpoints(&sv.Endpoints, nodeDecoder); err != nil {
-				return err
 			}
 
 		case strings.EqualFold("Name", t.Name.Local):
@@ -6404,19 +6359,6 @@ func awsRestxml_deserializeDocumentAccessPoint(v **types.AccessPoint, decoder sm
 				sv.AccessPointArn = ptr.String(xtv)
 			}
 
-		case strings.EqualFold("Alias", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				sv.Alias = ptr.String(xtv)
-			}
-
 		case strings.EqualFold("Bucket", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -6951,104 +6893,6 @@ func awsRestxml_deserializeDocumentBucketsUnwrapped(v *[]string, decoder smithyx
 			mv = xtv
 		}
 		sv = append(sv, mv)
-	}
-	*v = sv
-	return nil
-}
-func awsRestxml_deserializeDocumentEndpoints(v *map[string]string, decoder smithyxml.NodeDecoder) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	var sv map[string]string
-	if *v == nil {
-		sv = make(map[string]string, 0)
-	} else {
-		sv = *v
-	}
-
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			break
-		}
-		switch {
-		case strings.EqualFold("entry", t.Name.Local):
-			entryDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
-			if err := awsRestxml_deserializeDocumentEndpointsUnwrapped(&sv, entryDecoder); err != nil {
-				return err
-			}
-
-		default:
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestxml_deserializeDocumentEndpointsUnwrapped(v *map[string]string, decoder smithyxml.NodeDecoder) error {
-	var sv map[string]string
-	if *v == nil {
-		sv = make(map[string]string, 0)
-	} else {
-		sv = *v
-	}
-
-	var ek string
-	var ev string
-	for {
-		t, done, err := decoder.Token()
-		if err != nil {
-			return err
-		}
-		if done {
-			sv[ek] = ev
-			break
-		}
-		originalDecoder := decoder
-		decoder = smithyxml.WrapNodeDecoder(originalDecoder.Decoder, t)
-		switch {
-		case strings.EqualFold("key", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				ek = xtv
-			}
-
-		case strings.EqualFold("value", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				ev = xtv
-			}
-
-		default:
-			err = decoder.Decoder.Skip()
-			if err != nil {
-				return err
-			}
-
-		}
-		decoder = originalDecoder
 	}
 	*v = sv
 	return nil

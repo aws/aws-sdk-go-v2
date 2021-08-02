@@ -14,7 +14,7 @@ import (
 // Disables the standards specified by the provided StandardsSubscriptionArns. For
 // more information, see Security Standards
 // (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html)
-// section of the Security Hub User Guide.
+// section of the AWS Security Hub User Guide.
 func (c *Client) BatchDisableStandards(ctx context.Context, params *BatchDisableStandardsInput, optFns ...func(*Options)) (*BatchDisableStandardsOutput, error) {
 	if params == nil {
 		params = &BatchDisableStandardsInput{}

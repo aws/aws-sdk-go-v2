@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters an account in Audit Manager.
+// Deregisters an account in AWS Audit Manager.
 func (c *Client) DeregisterAccount(ctx context.Context, params *DeregisterAccountInput, optFns ...func(*Options)) (*DeregisterAccountOutput, error) {
 	if params == nil {
 		params = &DeregisterAccountInput{}

@@ -58,7 +58,6 @@
                     "name": "identitystore"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>The AWS Single Sign-On (SSO) Identity Store service provides a single place to retrieve all of your\n         identities (users and groups). For more information about AWS, see the <a href=\"https://docs.aws.amazon.com/singlesignon/latest/userguide/what-is.html\">AWS Single Sign-On User\n            Guide</a>.</p>",
                 "smithy.api#title": "AWS SSO Identity Store"
             }
         },
@@ -88,7 +87,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}  ]+$"
+                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}  ]+"
             }
         },
         "com.amazonaws.identitystore#DescribeGroup": {
@@ -126,7 +125,7 @@
                 "IdentityStoreId": {
                     "target": "com.amazonaws.identitystore#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains number and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -152,7 +151,7 @@
                 "DisplayName": {
                     "target": "com.amazonaws.identitystore#GroupDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the group’s display name value. The length limit is 1,024 characters. This\n         value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new\n         line, carriage return, space, and nonbreaking space in this attribute. The characters\n            <code><>;:%</code> are excluded. This value is specified at the time that the\n         group is created and stored as an attribute of the group object in the identity\n         store.</p>",
+                        "smithy.api#documentation": "<p>Contains the group’s display name value. The length limit is 1024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space and non breaking space in this attribute. The characters “<>;:%” are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -193,7 +192,7 @@
                 "IdentityStoreId": {
                     "target": "com.amazonaws.identitystore#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains number and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -212,7 +211,7 @@
                 "UserName": {
                     "target": "com.amazonaws.identitystore#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the user’s user name value. The length limit is 128 characters. This value can\n         consist of letters, accented characters, symbols, numbers, and punctuation. The characters\n            <code><>;:%</code> are excluded. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>",
+                        "smithy.api#documentation": "<p>Contains the user’s username value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers and punctuation. The characters “<>;:%” are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -231,7 +230,7 @@
                 "AttributePath": {
                     "target": "com.amazonaws.identitystore#AttributePath",
                     "traits": {
-                        "smithy.api#documentation": "<p>The attribute path that is used to specify which attribute name to search. Length limit\n         is 255 characters. For example, <code>UserName</code> is a valid attribute path for the\n            <code>ListUsers</code> API, and <code>DisplayName</code> is a valid attribute path for\n         the <code>ListGroups</code> API.</p>",
+                        "smithy.api#documentation": "<p>The attribute path used to specify which attribute name to search. Length limit is 255 characters.  For example, <code>UserName</code> is a valid attribute path for the <code>ListUsers</code> API, and <code>DisplayName</code> is a valid attribute path for the <code>ListGroups</code> API.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -244,7 +243,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A query filter used by <code>ListUsers</code> and <code>ListGroup</code>. This filter object provides the attribute name and attribute value to\n         search users or groups.</p>"
+                "smithy.api#documentation": "<p>A query filter used by <code>ListUsers</code> and <code>ListGroup</code>. This filter object provides the attribute name and attribute value to search users or groups.</p>"
             }
         },
         "com.amazonaws.identitystore#Filters": {
@@ -266,7 +265,7 @@
                 "DisplayName": {
                     "target": "com.amazonaws.identitystore#GroupDisplayName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the group’s display name value. The length limit is 1,024 characters. This\n         value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new\n         line, carriage return, space, and nonbreaking space in this attribute. The characters\n            <code><>;:%</code> are excluded. This value is specified at the time the group\n         is created and stored as an attribute of the group object in the identity store.</p>",
+                        "smithy.api#documentation": "<p>Contains the group’s display name value. The length limit is 1024 characters. This value can consist of letters, accented characters, symbols, numbers, punctuation, tab, new line, carriage return, space and non breaking space in this attribute. The characters “<>;:%” are excluded. This value is specified at the time the group is created and stored as an attribute of the group object in the identity store.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -282,7 +281,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$"
+                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+"
             }
         },
         "com.amazonaws.identitystore#Groups": {
@@ -346,7 +345,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the attribute name and value of the group that you specified in the search. We only support <code>DisplayName</code> as a valid filter\n         attribute path currently, and filter is required. This API returns minimum attributes, including <code>GroupId</code> and group\n            <code>DisplayName</code> in the response.</p>",
+                "smithy.api#documentation": "<p>Lists the attribute name and value of the group that you specified in the search. We only support <code>DisplayName</code> as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including <code>GroupId</code> and group <code>DisplayName</code> in the response.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -360,20 +359,20 @@
                 "IdentityStoreId": {
                     "target": "com.amazonaws.identitystore#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains number and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.identitystore#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request, which is used in the <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results to return in one page. The length limit is 50 characters.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.identitystore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API\n         operations. This value is generated by the identity store service. It is returned in the\n         API response if the total results are more than the size of one page. This token is also\n         returned when it is used in the API request to search for the next page.</p>"
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.</p>"
                     }
                 },
                 "Filters": {
@@ -397,7 +396,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.identitystore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API\n         operations. This value is generated by the identity store service. It is returned in the\n         API response if the total results are more than the size of one page. This token is also\n         returned when it1 is used in the API request to search for the next page.</p>"
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.</p>"
                     }
                 }
             }
@@ -428,7 +427,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the attribute name and value of the user that you specified in the search. We only support <code>UserName</code> as a valid filter attribute\n         path currently, and filter is required. This API returns minimum attributes, including <code>UserId</code> and <code>UserName</code> in the\n         response.</p>",
+                "smithy.api#documentation": "<p>Lists the attribute name and value of the user that you specified in the search. We only support <code>UserName</code> as a valid filter attribute path currently, and filter is required. This API returns minimum attributes, including <code>UserId</code> and <code>UserName</code> in the response.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -442,20 +441,20 @@
                 "IdentityStoreId": {
                     "target": "com.amazonaws.identitystore#IdentityStoreId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as\n         <code>d-1234567890</code>. In this example, <code>d-</code> is a fixed prefix, and\n            <code>1234567890</code> is a randomly generated string that contains number and lower\n         case letters. This value is generated at the time that a new identity store is\n         created.</p>",
+                        "smithy.api#documentation": "<p>The globally unique identifier for the identity store, such as d-1234567890. In this example, d- is a fixed prefix, and 1234567890 is a randomly generated string which contains number and lower case letters. This value is generated at the time that a new identity store is created.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "MaxResults": {
                     "target": "com.amazonaws.identitystore#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request. This parameter is used in the\n            <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results\n         to return in one page. The length limit is 50 characters.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of results to be returned per request, which is used in the <code>ListUsers</code> and <code>ListGroups</code> request to specify how many results to return in one page. The length limit is 50 characters.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.identitystore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API\n         operations. This value is generated by the identity store service. It is returned in the\n         API response if the total results are more than the size of one page. This token is also\n         returned when it is used in the API request to search for the next page.</p>"
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.</p>"
                     }
                 },
                 "Filters": {
@@ -479,7 +478,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.identitystore#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> API\n         operations. This value is generated by the identity store service. It is returned in the\n         API response if the total results are more than the size of one page. This token is also\n         returned when it is used in the API request to search for the next page.</p>"
+                        "smithy.api#documentation": "<p>The pagination token used for the <code>ListUsers</code> and <code>ListGroups</code> APIs. This value is generated by the identity store service and is returned in the API response if the total results are more than the size of one page, and when this token is used in the API request to search for the next page.</p>"
                     }
                 }
             }
@@ -510,13 +509,13 @@
                     "min": 1,
                     "max": 65535
                 },
-                "smithy.api#pattern": "^[-a-zA-Z0-9+=/:]*$"
+                "smithy.api#pattern": "^[-a-zA-Z0-9+=/:]*"
             }
         },
         "com.amazonaws.identitystore#RequestId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}$"
+                "smithy.api#pattern": "[A-Fa-f0-9]{8}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{4}-[A-Fa-f0-9]{12}"
             }
         },
         "com.amazonaws.identitystore#ResourceId": {
@@ -586,7 +585,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+$",
+                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}\\t\\n\\r  ]+",
                 "smithy.api#sensitive": {}
             }
         },
@@ -615,7 +614,7 @@
                 "UserName": {
                     "target": "com.amazonaws.identitystore#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains the user’s user name value. The length limit is 128 characters. This value can\n         consist of letters, accented characters, symbols, numbers, and punctuation. The characters\n            <code><>;:%</code> are excluded. This value is specified at the time the user is\n         created and stored as an attribute of the user object in the identity store.</p>",
+                        "smithy.api#documentation": "<p>Contains the user’s username value. The length limit is 128 characters. This value can consist of letters, accented characters, symbols, numbers and punctuation. The characters “<>;:%” are excluded. This value is specified at the time the user is created and stored as an attribute of the user object in the identity store.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -638,7 +637,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+$",
+                "smithy.api#pattern": "[\\p{L}\\p{M}\\p{S}\\p{N}\\p{P}]+",
                 "smithy.api#sensitive": {}
             }
         },

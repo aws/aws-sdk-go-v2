@@ -19,8 +19,8 @@ import (
 // Pinpoint (https://console.aws.amazon.com/pinpoint/home/). Cognito will use the
 // the registered number automatically. Otherwise, Cognito users that must receive
 // SMS messages might be unable to sign up, activate their accounts, or sign in. If
-// you have never used SMS text messages with Amazon Cognito or any other Amazon
-// Web Service, Amazon SNS might place your account in SMS sandbox. In sandbox mode
+// you have never used SMS text messages with Amazon Cognito or any other AWS
+// service, Amazon SNS might place your account in SMS sandbox. In sandbox mode
 // (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you’ll have
 // limitations, such as sending messages to only verified phone numbers. After
 // testing in the sandbox environment, you can move out of the SMS sandbox and into
@@ -94,7 +94,7 @@ type CreateUserPoolInput struct {
 	// for these event sources to invoke your Lambda function. For more information on
 	// using the Lambda API to add permission, see  AddPermission
 	// (https://docs.aws.amazon.com/lambda/latest/dg/API_AddPermission.html). For
-	// adding permission using the CLI, see  add-permission
+	// adding permission using the AWS CLI, see  add-permission
 	// (https://docs.aws.amazon.com/cli/latest/reference/lambda/add-permission.html).
 	LambdaConfig *types.LambdaConfigType
 

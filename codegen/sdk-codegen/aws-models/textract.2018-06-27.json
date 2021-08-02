@@ -142,72 +142,6 @@
                 }
             }
         },
-        "com.amazonaws.textract#AnalyzeExpense": {
-            "type": "operation",
-            "input": {
-                "target": "com.amazonaws.textract#AnalyzeExpenseRequest"
-            },
-            "output": {
-                "target": "com.amazonaws.textract#AnalyzeExpenseResponse"
-            },
-            "errors": [
-                {
-                    "target": "com.amazonaws.textract#AccessDeniedException"
-                },
-                {
-                    "target": "com.amazonaws.textract#BadDocumentException"
-                },
-                {
-                    "target": "com.amazonaws.textract#DocumentTooLargeException"
-                },
-                {
-                    "target": "com.amazonaws.textract#InternalServerError"
-                },
-                {
-                    "target": "com.amazonaws.textract#InvalidParameterException"
-                },
-                {
-                    "target": "com.amazonaws.textract#InvalidS3ObjectException"
-                },
-                {
-                    "target": "com.amazonaws.textract#ProvisionedThroughputExceededException"
-                },
-                {
-                    "target": "com.amazonaws.textract#ThrottlingException"
-                },
-                {
-                    "target": "com.amazonaws.textract#UnsupportedDocumentException"
-                }
-            ],
-            "traits": {
-                "smithy.api#documentation": "<p>Analyzes an input document for financially related relationships between text.</p>\n         <p>Information is returned as <code>ExpenseDocuments</code> and seperated as follows.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>LineItemGroups</code>- A data set containing <code>LineItems</code> which\n         store information about the lines of text, such as an item purchased and its price on a receipt.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SummaryFields</code>- Contains all other information a receipt, such as header information\n         or the vendors name.</p>\n            </li>\n         </ul>"
-            }
-        },
-        "com.amazonaws.textract#AnalyzeExpenseRequest": {
-            "type": "structure",
-            "members": {
-                "Document": {
-                    "target": "com.amazonaws.textract#Document",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.textract#AnalyzeExpenseResponse": {
-            "type": "structure",
-            "members": {
-                "DocumentMetadata": {
-                    "target": "com.amazonaws.textract#DocumentMetadata"
-                },
-                "ExpenseDocuments": {
-                    "target": "com.amazonaws.textract#ExpenseDocumentList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The expenses detected by Amazon Textract.</p>"
-                    }
-                }
-            }
-        },
         "com.amazonaws.textract#BadDocumentException": {
             "type": "structure",
             "members": {
@@ -247,7 +181,7 @@
                 "TextType": {
                     "target": "com.amazonaws.textract#TextType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The kind of text that Amazon Textract has detected. Can check for handwritten text and\n         printed text.</p>"
+                        "smithy.api#documentation": "<p>The kind of text that Amazon Textract has detected. Can check for handwritten text and printed text.</p>"
                     }
                 },
                 "RowIndex": {
@@ -265,13 +199,13 @@
                 "RowSpan": {
                     "target": "com.amazonaws.textract#UInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of rows that a table cell spans. Currently this value is always 1, even if\n         the number of rows spanned is greater than 1. <code>RowSpan</code> isn't returned by\n            <code>DetectDocumentText</code> and <code>GetDocumentTextDetection</code>.</p>"
+                        "smithy.api#documentation": "<p>The number of rows that a table cell spans. Currently this value is always 1, even\n         if the number of rows spanned is greater than 1. <code>RowSpan</code> isn't returned by\n            <code>DetectDocumentText</code> and <code>GetDocumentTextDetection</code>.</p>"
                     }
                 },
                 "ColumnSpan": {
                     "target": "com.amazonaws.textract#UInteger",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of columns that a table cell spans. Currently this value is always 1, even if\n         the number of columns spanned is greater than 1. <code>ColumnSpan</code> isn't returned by\n            <code>DetectDocumentText</code> and <code>GetDocumentTextDetection</code>. </p>"
+                        "smithy.api#documentation": "<p>The number of columns that a table cell spans. Currently this value is always 1, even\n         if the number of columns spanned is greater than 1. <code>ColumnSpan</code> isn't returned by\n            <code>DetectDocumentText</code> and <code>GetDocumentTextDetection</code>. </p>"
                     }
                 },
                 "Geometry": {
@@ -301,7 +235,7 @@
                 "SelectionStatus": {
                     "target": "com.amazonaws.textract#SelectionStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The selection status of a selection element, such as an option button or check box.\n      </p>"
+                        "smithy.api#documentation": "<p>The selection status of a selection element, such as an option button or check box. </p>"
                     }
                 },
                 "Page": {
@@ -385,7 +319,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The bounding box around the detected page, text, key-value pair, table, table cell, or\n         selection element on a document page. The <code>left</code> (x-coordinate) and\n            <code>top</code> (y-coordinate) are coordinates that represent the top and left sides of\n         the bounding box. Note that the upper-left corner of the image is the origin (0,0). </p>\n         <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall\n         document page size. For example, if the input image is 700 x 200 pixels, and the top-left\n         coordinate of the bounding box is 350 x 50 pixels, the API returns a <code>left</code>\n         value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p>\n         <p>The <code>width</code> and <code>height</code> values represent the dimensions of the\n         bounding box as a ratio of the overall document page dimension. For example, if the\n         document page size is 700 x 200 pixels, and the bounding box width is 70 pixels, the width\n         returned is 0.1. </p>"
+                "smithy.api#documentation": "<p>The bounding box around the detected page, text, key-value pair, table, table cell, or selection element on a\n         document page. The <code>left</code> (x-coordinate) and <code>top</code> (y-coordinate) are\n         coordinates that represent the top and left sides of the bounding box. Note that the\n         upper-left corner of the image is the origin (0,0). </p>\n         <p>The <code>top</code> and <code>left</code> values returned are ratios of the overall\n         document page size. For example, if the input image is 700 x 200 pixels, and the top-left\n         coordinate of the bounding box is 350 x 50 pixels, the API returns a <code>left</code>\n         value of 0.5 (350/700) and a <code>top</code> value of 0.25 (50/200).</p>\n         <p>The <code>width</code> and <code>height</code> values represent the dimensions of the\n         bounding box as a ratio of the overall document page dimension. For example, if the\n         document page size is 700 x 200 pixels, and the bounding box width is 70 pixels, the width\n         returned is 0.1. </p>"
             }
         },
         "com.amazonaws.textract#ClientRequestToken": {
@@ -588,119 +522,6 @@
         "com.amazonaws.textract#ErrorCode": {
             "type": "string"
         },
-        "com.amazonaws.textract#ExpenseDetection": {
-            "type": "structure",
-            "members": {
-                "Text": {
-                    "target": "com.amazonaws.textract#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The word or line of text recognized by Amazon Textract</p>"
-                    }
-                },
-                "Geometry": {
-                    "target": "com.amazonaws.textract#Geometry"
-                },
-                "Confidence": {
-                    "target": "com.amazonaws.textract#Percent",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The confidence in detection, as a percentage</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>An object used to store information about the Value or Label detected by Amazon Textract.</p>"
-            }
-        },
-        "com.amazonaws.textract#ExpenseDocument": {
-            "type": "structure",
-            "members": {
-                "ExpenseIndex": {
-                    "target": "com.amazonaws.textract#UInteger",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Denotes which invoice or receipt in the document the information is coming from. \n      First document will be 1, the second 2, and so on.</p>"
-                    }
-                },
-                "SummaryFields": {
-                    "target": "com.amazonaws.textract#ExpenseFieldList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Any information found outside of a table by Amazon Textract.</p>"
-                    }
-                },
-                "LineItemGroups": {
-                    "target": "com.amazonaws.textract#LineItemGroupList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Information detected on each table of a document, seperated into <code>LineItems</code>.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>The structure holding all the information returned by AnalyzeExpense</p>"
-            }
-        },
-        "com.amazonaws.textract#ExpenseDocumentList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.textract#ExpenseDocument"
-            }
-        },
-        "com.amazonaws.textract#ExpenseField": {
-            "type": "structure",
-            "members": {
-                "Type": {
-                    "target": "com.amazonaws.textract#ExpenseType",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The implied label of a detected element. Present alongside LabelDetection for explicit elements.</p>"
-                    }
-                },
-                "LabelDetection": {
-                    "target": "com.amazonaws.textract#ExpenseDetection",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The explicitly stated label of a detected element.</p>"
-                    }
-                },
-                "ValueDetection": {
-                    "target": "com.amazonaws.textract#ExpenseDetection",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The value of a detected element. Present in explicit and implicit elements.</p>"
-                    }
-                },
-                "PageNumber": {
-                    "target": "com.amazonaws.textract#UInteger",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The page number the value was detected on.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Breakdown of detected information, seperated into \n         the catagories Type, LableDetection, and ValueDetection</p>"
-            }
-        },
-        "com.amazonaws.textract#ExpenseFieldList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.textract#ExpenseField"
-            }
-        },
-        "com.amazonaws.textract#ExpenseType": {
-            "type": "structure",
-            "members": {
-                "Text": {
-                    "target": "com.amazonaws.textract#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The word or line of text detected by Amazon Textract.</p>"
-                    }
-                },
-                "Confidence": {
-                    "target": "com.amazonaws.textract#Percent",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The confidence of accuracy, as a percentage.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>An object used to store information about the Type detected by Amazon Textract.</p>"
-            }
-        },
         "com.amazonaws.textract#FeatureType": {
             "type": "string",
             "traits": {
@@ -771,9 +592,6 @@
                 },
                 {
                     "target": "com.amazonaws.textract#InvalidJobIdException"
-                },
-                {
-                    "target": "com.amazonaws.textract#InvalidKMSKeyException"
                 },
                 {
                     "target": "com.amazonaws.textract#InvalidParameterException"
@@ -882,9 +700,6 @@
                     "target": "com.amazonaws.textract#InvalidJobIdException"
                 },
                 {
-                    "target": "com.amazonaws.textract#InvalidKMSKeyException"
-                },
-                {
                     "target": "com.amazonaws.textract#InvalidParameterException"
                 },
                 {
@@ -990,12 +805,12 @@
                 "HumanLoopActivationConditionsEvaluationResults": {
                     "target": "com.amazonaws.textract#SynthesizedJsonHumanLoopActivationConditionsEvaluationResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the result of condition evaluations, including those conditions which activated a\n         human review.</p>"
+                        "smithy.api#documentation": "<p>Shows the result of condition evaluations, including those conditions which activated a human review.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the\n         input did not trigger human review.</p>"
+                "smithy.api#documentation": "<p>Shows the results of the human in the loop evaluation. If there is no HumanLoopArn, the input \n         did not trigger human review.</p>"
             }
         },
         "com.amazonaws.textract#HumanLoopActivationReason": {
@@ -1027,7 +842,7 @@
                 "HumanLoopName": {
                     "target": "com.amazonaws.textract#HumanLoopName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the human workflow used for this image. This should be kept unique within a\n         region.</p>",
+                        "smithy.api#documentation": "<p>The name of the human workflow used for this image. This should be kept unique within a region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1046,7 +861,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets up the human review workflow the document will be sent to if one of the conditions\n         is met. You can also set certain attributes of the image before review. </p>"
+                "smithy.api#documentation": "<p>Sets up the human review workflow the document will be sent to if one of the conditions is met. You can also set certain attributes \n         of the image before review. </p>"
             }
         },
         "com.amazonaws.textract#HumanLoopDataAttributes": {
@@ -1055,12 +870,12 @@
                 "ContentClassifiers": {
                     "target": "com.amazonaws.textract#ContentClassifiers",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets whether the input image is free of personally identifiable information or adult\n         content.</p>"
+                        "smithy.api#documentation": "<p>Sets whether the input image is free of personally identifiable information or adult content.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Allows you to set attributes of the image. Currently, you can declare an image as free\n         of personally identifiable information and adult content. </p>"
+                "smithy.api#documentation": "<p>Allows you to set attributes of the image. Currently, you can declare an image as free of\n         personally identifiable information and adult content. </p>"
             }
         },
         "com.amazonaws.textract#HumanLoopName": {
@@ -1070,7 +885,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9])*$"
+                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9])*"
             }
         },
         "com.amazonaws.textract#HumanLoopQuotaExceededException": {
@@ -1252,7 +1067,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-:]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_.\\-:]+"
             }
         },
         "com.amazonaws.textract#KMSKeyId": {
@@ -1280,52 +1095,6 @@
                 "smithy.api#error": "client"
             }
         },
-        "com.amazonaws.textract#LineItemFields": {
-            "type": "structure",
-            "members": {
-                "LineItemExpenseFields": {
-                    "target": "com.amazonaws.textract#ExpenseFieldList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>ExpenseFields used to show information from detected lines on a table.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>A structure that holds information about the different lines found in a document's tables.</p>"
-            }
-        },
-        "com.amazonaws.textract#LineItemGroup": {
-            "type": "structure",
-            "members": {
-                "LineItemGroupIndex": {
-                    "target": "com.amazonaws.textract#UInteger",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The number used to identify a specific table in a document. The first table encountered will have a LineItemGroupIndex of 1, the second 2, etc.</p>"
-                    }
-                },
-                "LineItems": {
-                    "target": "com.amazonaws.textract#LineItemList",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The breakdown of information on a particular line of a table. </p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>A grouping of tables which contain LineItems, with each table identified by the table's <code>LineItemGroupIndex</code>.</p>"
-            }
-        },
-        "com.amazonaws.textract#LineItemGroupList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.textract#LineItemGroup"
-            }
-        },
-        "com.amazonaws.textract#LineItemList": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.textract#LineItemFields"
-            }
-        },
         "com.amazonaws.textract#MaxResults": {
             "type": "integer",
             "traits": {
@@ -1338,7 +1107,7 @@
         "com.amazonaws.textract#NonEmptyString": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\S"
+                "smithy.api#pattern": ".*\\S.*"
             }
         },
         "com.amazonaws.textract#NotificationChannel": {
@@ -1376,12 +1145,12 @@
                 "S3Prefix": {
                     "target": "com.amazonaws.textract#S3ObjectName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The prefix of the object key that the output will be saved to. When not enabled, the\n         prefix will be “textract_output\".</p>"
+                        "smithy.api#documentation": "<p>The prefix of the object key that the output will be saved to. When \n         not enabled, the prefix will be “textract_output\".</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sets whether or not your output will go to a user created bucket. Used to set the name\n         of the bucket, and the prefix on the output file.</p>\n         <p>\n            <code>OutputConfig</code> is an optional parameter which lets you adjust where your output will be placed. \n         By default, Amazon Textract will store the results internally and can only be accessed by the Get \n         API operations. With OutputConfig enabled, you can set the name of the bucket the output will be \n         sent to and the file prefix of the results where you can download your results. Additionally, you \n         can set the <code>KMSKeyID</code> parameter to a customer master key (CMK) to encrypt your output. Without this\n         parameter set Amazon Textract will encrypt server-side using the AWS managed CMK for Amazon S3.</p>\n         <p>Decryption of Customer Content is necessary for processing of the documents by Amazon Textract. If your account \n         is opted out under an AI services opt out policy then all unencrypted Customer Content is immediately and permanently deleted after \n         the Customer Content has been processed by the service. No copy of of the output is retained by Amazon Textract. For information about how to opt out, see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html\"> Managing AI services opt-out policy. </a>\n         </p>\n         <p>For more information on data privacy,\n         see the <a href=\"https://aws.amazon.com/compliance/data-privacy-faq/\">Data Privacy\n            FAQ</a>.</p>"
+                "smithy.api#documentation": "<p>Sets whether or not your output will go to a user created bucket. \n         Used to set the name of the bucket, and the prefix on the output \n         file.</p>"
             }
         },
         "com.amazonaws.textract#Pages": {
@@ -1397,7 +1166,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "\\S"
+                "smithy.api#pattern": ".*\\S.*"
             }
         },
         "com.amazonaws.textract#Percent": {
@@ -1457,7 +1226,7 @@
                 "Type": {
                     "target": "com.amazonaws.textract#RelationshipType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of relationship that the blocks in the IDs array have with the current block.\n         The relationship can be <code>VALUE</code> or <code>CHILD</code>. A relationship of type\n         VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a\n         key-value pair. A relationship of type CHILD is a list of IDs that identify WORD blocks in\n         the case of lines Cell blocks in the case of Tables, and WORD blocks in the case of\n         Selection Elements.</p>"
+                        "smithy.api#documentation": "<p>The type of relationship that the blocks in the IDs array have with the current block.\n         The relationship can be <code>VALUE</code> or <code>CHILD</code>. A relationship of type \n         VALUE is a list that contains the ID of the VALUE block that's associated with the KEY of a key-value pair. \n         A relationship of type CHILD is a list of IDs that identify WORD blocks in the case of lines\n         Cell blocks in the case of Tables, and WORD blocks in the case of Selection Elements.</p>"
                     }
                 },
                 "Ids": {
@@ -1503,7 +1272,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+                "smithy.api#pattern": "arn:([a-z\\d-]+):iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"
             }
         },
         "com.amazonaws.textract#S3Bucket": {
@@ -1513,7 +1282,7 @@
                     "min": 3,
                     "max": 255
                 },
-                "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]*$"
+                "smithy.api#pattern": "[0-9A-Za-z\\.\\-_]*"
             }
         },
         "com.amazonaws.textract#S3Object": {
@@ -1522,7 +1291,7 @@
                 "Bucket": {
                     "target": "com.amazonaws.textract#S3Bucket",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the S3 bucket. Note that the # character is not valid in the file\n         name.</p>"
+                        "smithy.api#documentation": "<p>The name of the S3 bucket.</p>"
                     }
                 },
                 "Name": {
@@ -1549,7 +1318,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "\\S"
+                "smithy.api#pattern": ".*\\S.*"
             }
         },
         "com.amazonaws.textract#S3ObjectVersion": {
@@ -1559,7 +1328,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "\\S"
+                "smithy.api#pattern": ".*\\S.*"
             }
         },
         "com.amazonaws.textract#SNSTopicArn": {
@@ -1569,7 +1338,7 @@
                     "min": 20,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^(^arn:([a-z\\d-]+):sns:[a-zA-Z\\d-]{1,20}:\\w{12}:.+$)$"
+                "smithy.api#pattern": "(^arn:([a-z\\d-]+):sns:[a-zA-Z\\d-]{1,20}:\\w{12}:.+$)"
             }
         },
         "com.amazonaws.textract#SelectionStatus": {
@@ -1837,9 +1606,6 @@
             "operations": [
                 {
                     "target": "com.amazonaws.textract#AnalyzeDocument"
-                },
-                {
-                    "target": "com.amazonaws.textract#AnalyzeExpense"
                 },
                 {
                     "target": "com.amazonaws.textract#DetectDocumentText"

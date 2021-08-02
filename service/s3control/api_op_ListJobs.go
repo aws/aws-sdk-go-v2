@@ -16,8 +16,8 @@ import (
 )
 
 // Lists current S3 Batch Operations jobs and jobs that have ended within the last
-// 30 days for the account making the request. For more information, see S3 Batch
-// Operations
+// 30 days for the AWS account making the request. For more information, see S3
+// Batch Operations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html) in the
 // Amazon S3 User Guide. Related actions include:
 //
@@ -52,7 +52,7 @@ func (c *Client) ListJobs(ctx context.Context, params *ListJobsInput, optFns ...
 
 type ListJobsInput struct {
 
-	// The account ID associated with the S3 Batch Operations job.
+	// The AWS account ID associated with the S3 Batch Operations job.
 	//
 	// This member is required.
 	AccountId *string

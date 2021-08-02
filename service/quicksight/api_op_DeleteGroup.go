@@ -28,9 +28,8 @@ func (c *Client) DeleteGroup(ctx context.Context, params *DeleteGroupInput, optF
 
 type DeleteGroupInput struct {
 
-	// The ID for the Amazon Web Services account; that the group is in. Currently, you
-	// use the ID for the Amazon Web Services account; that contains your Amazon
-	// QuickSight account.
+	// The ID for the AWS account that the group is in. Currently, you use the ID for
+	// the AWS account that contains your Amazon QuickSight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -50,7 +49,7 @@ type DeleteGroupInput struct {
 
 type DeleteGroupOutput struct {
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

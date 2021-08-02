@@ -60,9 +60,6 @@ type DescribeWorldTemplateOutput struct {
 	// template.
 	Tags map[string]string
 
-	// The version of the world template that you're using.
-	Version *string
-
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata
 

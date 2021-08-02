@@ -12,9 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for analyses that belong to the user specified in the filter. This
-// operation is eventually consistent. The results are best effort and may not
-// reflect very recent updates and changes.
+// Searches for analyses that belong to the user specified in the filter.
 func (c *Client) SearchAnalyses(ctx context.Context, params *SearchAnalysesInput, optFns ...func(*Options)) (*SearchAnalysesOutput, error) {
 	if params == nil {
 		params = &SearchAnalysesInput{}
@@ -32,8 +30,7 @@ func (c *Client) SearchAnalyses(ctx context.Context, params *SearchAnalysesInput
 
 type SearchAnalysesInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the analyses that
-	// you're searching for.
+	// The ID of the AWS account that contains the analyses that you're searching for.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -60,7 +57,7 @@ type SearchAnalysesOutput struct {
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

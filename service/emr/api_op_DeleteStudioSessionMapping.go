@@ -45,8 +45,8 @@ type DeleteStudioSessionMappingInput struct {
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId)
 	// and GroupId
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId)
-	// in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName
-	// or IdentityId must be specified.
+	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId
+	// must be specified.
 	IdentityId *string
 
 	// The name of the user name or group to remove from the Amazon EMR Studio. For
@@ -54,8 +54,8 @@ type DeleteStudioSessionMappingInput struct {
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName)
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
-	// in the Amazon Web Services SSO Store API Reference. Either IdentityName or
-	// IdentityId must be specified.
+	// in the AWS SSO Identity Store API Reference. Either IdentityName or IdentityId
+	// must be specified.
 	IdentityName *string
 
 	noSmithyDocumentSerde

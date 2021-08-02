@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Authorizes the Shield Response Team (SRT) to use email and phone to notify
-// contacts about escalations to the SRT and to initiate proactive customer
+// Authorizes the DDoS Response Team (DRT) to use email and phone to notify
+// contacts about escalations to the DRT and to initiate proactive customer
 // support.
 func (c *Client) EnableProactiveEngagement(ctx context.Context, params *EnableProactiveEngagementInput, optFns ...func(*Options)) (*EnableProactiveEngagementOutput, error) {
 	if params == nil {

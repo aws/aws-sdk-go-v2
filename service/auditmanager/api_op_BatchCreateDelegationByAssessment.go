@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Create a batch of delegations for a specified assessment in Audit Manager.
+// Create a batch of delegations for a specified assessment in AWS Audit Manager.
 func (c *Client) BatchCreateDelegationByAssessment(ctx context.Context, params *BatchCreateDelegationByAssessmentInput, optFns ...func(*Options)) (*BatchCreateDelegationByAssessmentOutput, error) {
 	if params == nil {
 		params = &BatchCreateDelegationByAssessmentInput{}
@@ -34,7 +34,7 @@ type BatchCreateDelegationByAssessmentInput struct {
 	// This member is required.
 	AssessmentId *string
 
-	// The API request to batch create delegations in Audit Manager.
+	// The API request to batch create delegations in AWS Audit Manager.
 	//
 	// This member is required.
 	CreateDelegationRequests []types.CreateDelegationRequest

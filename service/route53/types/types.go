@@ -79,24 +79,24 @@ type AlarmIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// Alias resource record sets only: Information about the Amazon Web Services
-// resource, such as a CloudFront distribution or an Amazon S3 bucket, that you
-// want to route traffic to. When creating resource record sets for a private
-// hosted zone, note the following:
+// Alias resource record sets only: Information about the AWS resource, such as a
+// CloudFront distribution or an Amazon S3 bucket, that you want to route traffic
+// to. When creating resource record sets for a private hosted zone, note the
+// following:
 //
-// * Creating geolocation alias resource record
-// sets or latency alias resource record sets in a private hosted zone is
-// unsupported.
+// * Creating geolocation alias resource record sets or latency alias
+// resource record sets in a private hosted zone is unsupported.
 //
-// * For information about creating failover resource record sets in
-// a private hosted zone, see Configuring Failover in a Private Hosted Zone
+// * For information
+// about creating failover resource record sets in a private hosted zone, see
+// Configuring Failover in a Private Hosted Zone
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html).
 type AliasTarget struct {
 
 	// Alias resource record sets only: The value that you specify depends on where you
 	// want to route queries: Amazon API Gateway custom regional APIs and
 	// edge-optimized APIs Specify the applicable domain name for your API. You can get
-	// the applicable value using the CLI command get-domain-names
+	// the applicable value using the AWS CLI command get-domain-names
 	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html):
 	//
 	// *
@@ -113,8 +113,8 @@ type AliasTarget struct {
 	// endpoint, such as
 	// vpce-123456789abcdef01-example-us-east-1a.elasticloadbalancing.us-east-1.vpce.amazonaws.com.
 	// For edge-optimized APIs, this is the domain name for the corresponding
-	// CloudFront distribution. You can get the value of DnsName using the CLI command
-	// describe-vpc-endpoints
+	// CloudFront distribution. You can get the value of DnsName using the AWS CLI
+	// command describe-vpc-endpoints
 	// (https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html).
 	// CloudFront distribution Specify the domain name that CloudFront assigned when
 	// you created your distribution. Your CloudFront distribution must include an
@@ -145,40 +145,41 @@ type AliasTarget struct {
 	// attribute for the environment. You can use the following methods to get the
 	// value of the CNAME attribute:
 	//
-	// * Management Console: For information about how
-	// to get the value by using the console, see Using Custom Domains with Elastic
-	// Beanstalk
+	// * AWS Management Console: For information about
+	// how to get the value by using the console, see Using Custom Domains with AWS
+	// Elastic Beanstalk
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html) in
-	// the Elastic Beanstalk Developer Guide.
+	// the AWS Elastic Beanstalk Developer Guide.
 	//
 	// * Elastic Beanstalk API: Use the
 	// DescribeEnvironments action to get the value of the CNAME attribute. For more
 	// information, see DescribeEnvironments
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/api/API_DescribeEnvironments.html)
-	// in the Elastic Beanstalk API Reference.
+	// in the AWS Elastic Beanstalk API Reference.
 	//
-	// * CLI: Use the describe-environments
-	// command to get the value of the CNAME attribute. For more information, see
-	// describe-environments
+	// * AWS CLI: Use the
+	// describe-environments command to get the value of the CNAME attribute. For more
+	// information, see describe-environments
 	// (https://docs.aws.amazon.com/cli/latest/reference/elasticbeanstalk/describe-environments.html)
-	// in the CLI Command Reference.
+	// in the AWS CLI Command Reference.
 	//
-	// ELB load balancer Specify the DNS name that is
-	// associated with the load balancer. Get the DNS name by using the Management
-	// Console, the ELB API, or the CLI.
+	// ELB load balancer Specify the DNS name that
+	// is associated with the load balancer. Get the DNS name by using the AWS
+	// Management Console, the ELB API, or the AWS CLI.
 	//
-	// * Management Console: Go to the EC2 page,
-	// choose Load Balancers in the navigation pane, choose the load balancer, choose
-	// the Description tab, and get the value of the DNS name field. If you're routing
-	// traffic to a Classic Load Balancer, get the value that begins with dualstack. If
-	// you're routing traffic to another type of load balancer, get the value that
-	// applies to the record type, A or AAAA.
+	// * AWS Management Console: Go
+	// to the EC2 page, choose Load Balancers in the navigation pane, choose the load
+	// balancer, choose the Description tab, and get the value of the DNS name field.
+	// If you're routing traffic to a Classic Load Balancer, get the value that begins
+	// with dualstack. If you're routing traffic to another type of load balancer, get
+	// the value that applies to the record type, A or AAAA.
 	//
-	// * Elastic Load Balancing API: Use
-	// DescribeLoadBalancers to get the value of DNSName. For more information, see the
-	// applicable guide:
+	// * Elastic Load Balancing
+	// API: Use DescribeLoadBalancers to get the value of DNSName. For more
+	// information, see the applicable guide:
 	//
-	// * Classic Load Balancers: DescribeLoadBalancers
+	// * Classic Load Balancers:
+	// DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html)
 	//
 	// *
@@ -186,7 +187,7 @@ type AliasTarget struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	//
 	// *
-	// CLI: Use describe-load-balancers to get the value of DNSName. For more
+	// AWS CLI: Use describe-load-balancers to get the value of DNSName. For more
 	// information, see the applicable guide:
 	//
 	// * Classic Load Balancers:
@@ -197,15 +198,15 @@ type AliasTarget struct {
 	// Application and Network Load Balancers: describe-load-balancers
 	// (http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html)
 	//
-	// Global
-	// Accelerator accelerator Specify the DNS name for your accelerator:
+	// AWS
+	// Global Accelerator accelerator Specify the DNS name for your accelerator:
 	//
-	// * Global
-	// Accelerator API: To get the DNS name, use DescribeAccelerator
+	// *
+	// Global Accelerator API: To get the DNS name, use DescribeAccelerator
 	// (https://docs.aws.amazon.com/global-accelerator/latest/api/API_DescribeAccelerator.html).
 	//
 	// *
-	// CLI: To get the DNS name, use describe-accelerator
+	// AWS CLI: To get the DNS name, use describe-accelerator
 	// (https://docs.aws.amazon.com/cli/latest/reference/globalaccelerator/describe-accelerator.html).
 	//
 	// Amazon
@@ -231,14 +232,14 @@ type AliasTarget struct {
 
 	// Applies only to alias, failover alias, geolocation alias, latency alias, and
 	// weighted alias resource record sets: When EvaluateTargetHealth is true, an alias
-	// resource record set inherits the health of the referenced Amazon Web Services
-	// resource, such as an ELB load balancer or another resource record set in the
-	// hosted zone. Note the following: CloudFront distributions You can't set
-	// EvaluateTargetHealth to true when the alias target is a CloudFront distribution.
-	// Elastic Beanstalk environments that have regionalized subdomains If you specify
-	// an Elastic Beanstalk environment in DNSName and the environment contains an ELB
-	// load balancer, Elastic Load Balancing routes queries only to the healthy Amazon
-	// EC2 instances that are registered with the load balancer. (An environment
+	// resource record set inherits the health of the referenced AWS resource, such as
+	// an ELB load balancer or another resource record set in the hosted zone. Note the
+	// following: CloudFront distributions You can't set EvaluateTargetHealth to true
+	// when the alias target is a CloudFront distribution. Elastic Beanstalk
+	// environments that have regionalized subdomains If you specify an Elastic
+	// Beanstalk environment in DNSName and the environment contains an ELB load
+	// balancer, Elastic Load Balancing routes queries only to the healthy Amazon EC2
+	// instances that are registered with the load balancer. (An environment
 	// automatically contains an ELB load balancer if it includes more than one Amazon
 	// EC2 instance.) If you set EvaluateTargetHealth to true and either no Amazon EC2
 	// instances are healthy or the load balancer itself is unhealthy, Route 53 routes
@@ -273,12 +274,11 @@ type AliasTarget struct {
 	// but they perform a similar function. Do not create Route 53 health checks for
 	// the EC2 instances that you register with an ELB load balancer. S3 buckets There
 	// are no special requirements for setting EvaluateTargetHealth to true when the
-	// alias target is an S3 bucket. Other records in the same hosted zone If the
-	// Amazon Web Services resource that you specify in DNSName is a record or a group
-	// of records (for example, a group of weighted records) but is not another alias
-	// record, we recommend that you associate a health check with all of the records
-	// in the alias target. For more information, see What Happens When You Omit Health
-	// Checks?
+	// alias target is an S3 bucket. Other records in the same hosted zone If the AWS
+	// resource that you specify in DNSName is a record or a group of records (for
+	// example, a group of weighted records) but is not another alias record, we
+	// recommend that you associate a health check with all of the records in the alias
+	// target. For more information, see What Happens When You Omit Health Checks?
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-complex-configs.html#dns-failover-complex-configs-hc-omitting)
 	// in the Amazon Route 53 Developer Guide. For more information and examples, see
 	// Amazon Route 53 Health Checks and DNS Failover
@@ -291,7 +291,7 @@ type AliasTarget struct {
 	// Alias resource records sets only: The value used depends on where you want to
 	// route traffic: Amazon API Gateway custom regional APIs and edge-optimized APIs
 	// Specify the hosted zone ID for your API. You can get the applicable value using
-	// the CLI command get-domain-names
+	// the AWS CLI command get-domain-names
 	// (https://docs.aws.amazon.com/cli/latest/reference/apigateway/get-domain-names.html):
 	//
 	// *
@@ -302,18 +302,18 @@ type AliasTarget struct {
 	//
 	// Amazon
 	// Virtual Private Cloud interface VPC endpoint Specify the hosted zone ID for your
-	// interface endpoint. You can get the value of HostedZoneId using the CLI command
-	// describe-vpc-endpoints
+	// interface endpoint. You can get the value of HostedZoneId using the AWS CLI
+	// command describe-vpc-endpoints
 	// (https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-vpc-endpoints.html).
 	// CloudFront distribution Specify Z2FDTNDATAQYW2. Alias resource record sets for
 	// CloudFront can't be created in a private zone. Elastic Beanstalk environment
 	// Specify the hosted zone ID for the region that you created the environment in.
 	// The environment must have a regionalized subdomain. For a list of regions and
-	// the corresponding hosted zone IDs, see Elastic Beanstalk endpoints and quotas
-	// (https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html) in the the
-	// Amazon Web Services General Reference. ELB load balancer Specify the value of
-	// the hosted zone ID for the load balancer. Use the following methods to get the
-	// hosted zone ID:
+	// the corresponding hosted zone IDs, see AWS Elastic Beanstalk endpoints and
+	// quotas (https://docs.aws.amazon.com/general/latest/gr/elasticbeanstalk.html) in
+	// the the Amazon Web Services General Reference. ELB load balancer Specify the
+	// value of the hosted zone ID for the load balancer. Use the following methods to
+	// get the hosted zone ID:
 	//
 	// * Elastic Load Balancing endpoints and quotas
 	// (https://docs.aws.amazon.com/general/latest/gr/elb.html) topic in the Amazon Web
@@ -321,7 +321,7 @@ type AliasTarget struct {
 	// you created your load balancer in. Note that there are separate columns for
 	// Application and Classic Load Balancers and for Network Load Balancers.
 	//
-	// *
+	// * AWS
 	// Management Console: Go to the Amazon EC2 page, choose Load Balancers in the
 	// navigation pane, select the load balancer, and get the value of the Hosted zone
 	// field on the Description tab.
@@ -339,11 +339,11 @@ type AliasTarget struct {
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// to get the value of CanonicalHostedZoneId.
 	//
-	// * CLI: Use describe-load-balancers
-	// to get the applicable value. For more information, see the applicable guide:
+	// * AWS CLI: Use
+	// describe-load-balancers to get the applicable value. For more information, see
+	// the applicable guide:
 	//
-	// *
-	// Classic Load Balancers: Use describe-load-balancers
+	// * Classic Load Balancers: Use describe-load-balancers
 	// (http://docs.aws.amazon.com/cli/latest/reference/elb/describe-load-balancers.html)
 	// to get the value of CanonicalHostedZoneNameId.
 	//
@@ -352,7 +352,7 @@ type AliasTarget struct {
 	// (http://docs.aws.amazon.com/cli/latest/reference/elbv2/describe-load-balancers.html)
 	// to get the value of CanonicalHostedZoneId.
 	//
-	// Global Accelerator accelerator
+	// AWS Global Accelerator accelerator
 	// Specify Z2BJ6XQ5FK7U4H. An Amazon S3 bucket configured as a static website
 	// Specify the hosted zone ID for the region that you created the bucket in. For
 	// more information about valid values, see the table Amazon S3 Website Endpoints
@@ -418,9 +418,7 @@ type ChangeBatch struct {
 // hosted zone.
 type ChangeInfo struct {
 
-	// This element contains an ID that you use when performing a GetChange
-	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
-	// action to get detailed information about the change.
+	// The ID of the request.
 	//
 	// This member is required.
 	Id *string
@@ -439,7 +437,11 @@ type ChangeInfo struct {
 	// This member is required.
 	SubmittedAt *time.Time
 
-	// A comment you can provide.
+	// A complex type that describes change information about changes made to your
+	// hosted zone. This element contains an ID that you use when performing a
+	// GetChange
+	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_GetChange.html)
+	// action to get detailed information about the change.
 	Comment *string
 
 	noSmithyDocumentSerde
@@ -640,7 +642,7 @@ type GeoLocationDetails struct {
 }
 
 // A complex type that contains information about one health check that is
-// associated with the current Amazon Web Services account.
+// associated with the current AWS account.
 type HealthCheck struct {
 
 	// A unique string that you specified when you created the health check.
@@ -721,13 +723,8 @@ type HealthCheckConfig struct {
 	// consider to be healthy and compares that number with the value of
 	// HealthThreshold.
 	//
-	// * RECOVERY_CONTROL: The health check is assocated with a
-	// Route53 Application Recovery Controller routing control. If the routing control
-	// state is ON, the health check is considered healthy. If the state is OFF, the
-	// health check is considered unhealthy.
-	//
-	// For more information, see How Route 53
-	// Determines Whether an Endpoint Is Healthy
+	// For more information, see How Route 53 Determines Whether an
+	// Endpoint Is Healthy
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-determining-health-of-endpoints.html)
 	// in the Amazon Route 53 Developer Guide.
 	//
@@ -920,10 +917,9 @@ type HealthCheckConfig struct {
 	Inverted *bool
 
 	// Specify whether you want Amazon Route 53 to measure the latency between health
-	// checkers in multiple Amazon Web Services regions and your endpoint, and to
-	// display CloudWatch latency graphs on the Health Checks page in the Route 53
-	// console. You can't change the value of MeasureLatency after you create a health
-	// check.
+	// checkers in multiple AWS regions and your endpoint, and to display CloudWatch
+	// latency graphs on the Health Checks page in the Route 53 console. You can't
+	// change the value of MeasureLatency after you create a health check.
 	MeasureLatency *bool
 
 	// The port on the endpoint that you want Amazon Route 53 to perform health checks
@@ -954,10 +950,6 @@ type HealthCheckConfig struct {
 	// file /docs/route53-health-check.html. You can also include query string
 	// parameters, for example, /welcome.html?language=jp&login=y.
 	ResourcePath *string
-
-	// The Amazon Resource Name (ARN) for Route53 Application Recovery Controller
-	// routing control.
-	RoutingControlArn *string
 
 	// If the value of Type is HTTP_STR_MATCH or HTTPS_STR_MATCH, the string that you
 	// want Amazon Route 53 to search for in the response body from the specified
@@ -1070,18 +1062,18 @@ type HostedZoneLimit struct {
 // OwningAccount, there is no value for OwningService, and vice versa.
 type HostedZoneOwner struct {
 
-	// If the hosted zone was created by an account, or was created by an Amazon Web
-	// Services service that creates hosted zones using the current account,
-	// OwningAccount contains the account ID of that account. For example, when you use
-	// Cloud Map to create a hosted zone, Cloud Map creates the hosted zone using the
-	// current account.
+	// If the hosted zone was created by an AWS account, or was created by an AWS
+	// service that creates hosted zones using the current account, OwningAccount
+	// contains the account ID of that account. For example, when you use AWS Cloud Map
+	// to create a hosted zone, Cloud Map creates the hosted zone using the current AWS
+	// account.
 	OwningAccount *string
 
-	// If an Amazon Web Services service uses its own account to create a hosted zone
-	// and associate the specified VPC with that hosted zone, OwningService contains an
-	// abbreviation that identifies the service. For example, if Amazon Elastic File
-	// System (Amazon EFS) created a hosted zone and associated a VPC with the hosted
-	// zone, the value of OwningService is efs.amazonaws.com.
+	// If an AWS service uses its own account to create a hosted zone and associate the
+	// specified VPC with that hosted zone, OwningService contains an abbreviation that
+	// identifies the service. For example, if Amazon Elastic File System (Amazon EFS)
+	// created a hosted zone and associated a VPC with the hosted zone, the value of
+	// OwningService is efs.amazonaws.com.
 	OwningService *string
 
 	noSmithyDocumentSerde
@@ -1105,7 +1097,7 @@ type HostedZoneSummary struct {
 	Name *string
 
 	// The owner of a private hosted zone that the specified VPC is associated with.
-	// The owner can be either an account or an Amazon Web Services service.
+	// The owner can be either an AWS account or an AWS service.
 	//
 	// This member is required.
 	Owner *HostedZoneOwner
@@ -1154,26 +1146,27 @@ type KeySigningKey struct {
 	KeyTag int32
 
 	// The Amazon resource name (ARN) used to identify the customer managed customer
-	// master key (CMK) in Key Management Service (KMS). The KmsArn must be unique for
-	// each key-signing key (KSK) in a single hosted zone. You must configure the CMK
-	// as follows: Status Enabled Key spec ECC_NIST_P256 Key usage Sign and verify Key
-	// policy The key policy must give permission for the following actions:
+	// master key (CMK) in AWS Key Management Service (AWS KMS). The KmsArn must be
+	// unique for each key-signing key (KSK) in a single hosted zone. You must
+	// configure the CMK as follows: Status Enabled Key spec ECC_NIST_P256 Key usage
+	// Sign and verify Key policy The key policy must give permission for the following
+	// actions:
 	//
-	// *
-	// DescribeKey
+	// * DescribeKey
 	//
 	// * GetPublicKey
 	//
 	// * Sign
 	//
-	// The key policy must also include the Amazon
-	// Route 53 service in the principal for your account. Specify the following:
+	// The key policy must also
+	// include the Amazon Route 53 service in the principal for your account. Specify
+	// the following:
 	//
-	// *
-	// "Service": "dnssec-route53.amazonaws.com"
+	// * "Service": "api-service.dnssec.route53.aws.internal"
 	//
-	// For more information about working
-	// with the customer managed CMK in KMS, see Key Management Service concepts
+	// For more
+	// information about working with the customer managed CMK in AWS KMS, see AWS Key
+	// Management Service concepts
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html).
 	KmsArn *string
 
@@ -1368,21 +1361,21 @@ type ResourceRecordSet struct {
 	// This member is required.
 	Type RRType
 
-	// Alias resource record sets only: Information about the Amazon Web Services
-	// resource, such as a CloudFront distribution or an Amazon S3 bucket, that you
-	// want to route traffic to. If you're creating resource records sets for a private
-	// hosted zone, note the following:
+	// Alias resource record sets only: Information about the AWS resource, such as a
+	// CloudFront distribution or an Amazon S3 bucket, that you want to route traffic
+	// to. If you're creating resource records sets for a private hosted zone, note the
+	// following:
 	//
-	// * You can't create an alias resource record
-	// set in a private hosted zone to route traffic to a CloudFront distribution.
+	// * You can't create an alias resource record set in a private hosted
+	// zone to route traffic to a CloudFront distribution.
 	//
-	// *
-	// Creating geolocation alias resource record sets or latency alias resource record
-	// sets in a private hosted zone is unsupported.
+	// * Creating geolocation
+	// alias resource record sets or latency alias resource record sets in a private
+	// hosted zone is unsupported.
 	//
-	// * For information about creating
-	// failover resource record sets in a private hosted zone, see Configuring Failover
-	// in a Private Hosted Zone
+	// * For information about creating failover resource
+	// record sets in a private hosted zone, see Configuring Failover in a Private
+	// Hosted Zone
 	// (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/dns-failover-private-hosted-zones.html)
 	// in the Amazon Route 53 Developer Guide.
 	AliasTarget *AliasTarget
@@ -1603,30 +1596,29 @@ type ResourceRecordSet struct {
 
 	// Latency-based resource record sets only: The Amazon EC2 Region where you created
 	// the resource that this resource record set refers to. The resource typically is
-	// an Amazon Web Services resource, such as an EC2 instance or an ELB load
-	// balancer, and is referred to by an IP address or a DNS domain name, depending on
-	// the record type. Although creating latency and latency alias resource record
-	// sets in a private hosted zone is allowed, it's not supported. When Amazon Route
-	// 53 receives a DNS query for a domain name and type for which you have created
-	// latency resource record sets, Route 53 selects the latency resource record set
-	// that has the lowest latency between the end user and the associated Amazon EC2
-	// Region. Route 53 then returns the value that is associated with the selected
-	// resource record set. Note the following:
+	// an AWS resource, such as an EC2 instance or an ELB load balancer, and is
+	// referred to by an IP address or a DNS domain name, depending on the record type.
+	// Although creating latency and latency alias resource record sets in a private
+	// hosted zone is allowed, it's not supported. When Amazon Route 53 receives a DNS
+	// query for a domain name and type for which you have created latency resource
+	// record sets, Route 53 selects the latency resource record set that has the
+	// lowest latency between the end user and the associated Amazon EC2 Region. Route
+	// 53 then returns the value that is associated with the selected resource record
+	// set. Note the following:
 	//
-	// * You can only specify one
-	// ResourceRecord per latency resource record set.
+	// * You can only specify one ResourceRecord per latency
+	// resource record set.
 	//
-	// * You can only create one
-	// latency resource record set for each Amazon EC2 Region.
+	// * You can only create one latency resource record set for
+	// each Amazon EC2 Region.
 	//
-	// * You aren't required
-	// to create latency resource record sets for all Amazon EC2 Regions. Route 53 will
-	// choose the region with the best latency from among the regions that you create
-	// latency resource record sets for.
+	// * You aren't required to create latency resource record
+	// sets for all Amazon EC2 Regions. Route 53 will choose the region with the best
+	// latency from among the regions that you create latency resource record sets
+	// for.
 	//
-	// * You can't create non-latency resource
-	// record sets that have the same values for the Name and Type elements as latency
-	// resource record sets.
+	// * You can't create non-latency resource record sets that have the same
+	// values for the Name and Type elements as latency resource record sets.
 	Region ResourceRecordSetRegion
 
 	// Information about the resource records to act upon. If you're creating an alias
@@ -1909,7 +1901,7 @@ type TrafficPolicyInstance struct {
 }
 
 // A complex type that contains information about the latest version of one traffic
-// policy that is associated with the current account.
+// policy that is associated with the current AWS account.
 type TrafficPolicySummary struct {
 
 	// The ID that Amazon Route 53 assigned to the traffic policy when you created it.
@@ -1927,7 +1919,7 @@ type TrafficPolicySummary struct {
 	// This member is required.
 	Name *string
 
-	// The number of traffic policies that are associated with the current account.
+	// The number of traffic policies that are associated with the current AWS account.
 	//
 	// This member is required.
 	TrafficPolicyCount *int32

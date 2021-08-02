@@ -15,7 +15,7 @@ import (
 	"strings"
 )
 
-// Retrieves the PublicAccessBlock configuration for an account. For more
+// Retrieves the PublicAccessBlock configuration for an AWS account. For more
 // information, see  Using Amazon S3 block public access
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html).
 // Related actions include:
@@ -43,8 +43,8 @@ func (c *Client) GetPublicAccessBlock(ctx context.Context, params *GetPublicAcce
 
 type GetPublicAccessBlockInput struct {
 
-	// The account ID for the account whose PublicAccessBlock configuration you want to
-	// retrieve.
+	// The account ID for the AWS account whose PublicAccessBlock configuration you
+	// want to retrieve.
 	//
 	// This member is required.
 	AccountId *string
@@ -54,7 +54,7 @@ type GetPublicAccessBlockInput struct {
 
 type GetPublicAccessBlockOutput struct {
 
-	// The PublicAccessBlock configuration currently in effect for this account.
+	// The PublicAccessBlock configuration currently in effect for this AWS account.
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
 	// Metadata pertaining to the operation's result.

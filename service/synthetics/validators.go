@@ -250,38 +250,6 @@ func addOpUpdateCanaryValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateCanary{}, middleware.After)
 }
 
-func validateBaseScreenshot(v *types.BaseScreenshot) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "BaseScreenshot"}
-	if v.ScreenshotName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ScreenshotName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateBaseScreenshots(v []types.BaseScreenshot) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "BaseScreenshots"}
-	for i := range v {
-		if err := validateBaseScreenshot(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateCanaryCodeInput(v *types.CanaryCodeInput) error {
 	if v == nil {
 		return nil
@@ -304,26 +272,6 @@ func validateCanaryScheduleInput(v *types.CanaryScheduleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CanaryScheduleInput"}
 	if v.Expression == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Expression"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateVisualReferenceInput(v *types.VisualReferenceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "VisualReferenceInput"}
-	if v.BaseScreenshots != nil {
-		if err := validateBaseScreenshots(v.BaseScreenshots); err != nil {
-			invalidParams.AddNested("BaseScreenshots", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.BaseCanaryRunId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("BaseCanaryRunId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -512,11 +460,6 @@ func validateOpUpdateCanaryInput(v *UpdateCanaryInput) error {
 	if v.Schedule != nil {
 		if err := validateCanaryScheduleInput(v.Schedule); err != nil {
 			invalidParams.AddNested("Schedule", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.VisualReference != nil {
-		if err := validateVisualReferenceInput(v.VisualReference); err != nil {
-			invalidParams.AddNested("VisualReference", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

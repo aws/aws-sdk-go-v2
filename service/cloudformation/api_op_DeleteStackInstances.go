@@ -49,7 +49,7 @@ type DeleteStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of the accounts that you want to delete
+	// [Self-managed permissions] The names of the AWS accounts that you want to delete
 	// stack instances for. You can specify Accounts or DeploymentTargets, but not
 	// both.
 	Accounts []string
@@ -63,27 +63,28 @@ type DeleteStackInstancesInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your AWS account must be
+	// registered as a delegated administrator in the management account. For more
+	// information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the CloudFormation User Guide.
+	// in the AWS CloudFormation User Guide.
 	CallAs types.CallAs
 
-	// [Service-managed permissions] The Organizations accounts from which to delete
-	// stack instances. You can specify Accounts or DeploymentTargets, but not both.
+	// [Service-managed permissions] The AWS Organizations accounts from which to
+	// delete stack instances. You can specify Accounts or DeploymentTargets, but not
+	// both.
 	DeploymentTargets *types.DeploymentTargets
 
 	// The unique identifier for this stack set operation. If you don't specify an
 	// operation ID, the SDK generates one automatically. The operation ID also
-	// functions as an idempotency token, to ensure that CloudFormation performs the
-	// stack set operation only once, even if you retry the request multiple times. You
-	// can retry stack set operation requests to ensure that CloudFormation
+	// functions as an idempotency token, to ensure that AWS CloudFormation performs
+	// the stack set operation only once, even if you retry the request multiple times.
+	// You can retry stack set operation requests to ensure that AWS CloudFormation
 	// successfully received them. Repeating this stack set operation with a new
 	// operation ID retries all stack instances whose status is OUTDATED.
 	OperationId *string
 
-	// Preferences for how CloudFormation performs this stack set operation.
+	// Preferences for how AWS CloudFormation performs this stack set operation.
 	OperationPreferences *types.StackSetOperationPreferences
 
 	noSmithyDocumentSerde

@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists data sources in current Region; that belong to this Amazon Web Services
-// account;.
+// Lists data sources in current AWS Region that belong to this AWS account.
 func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInput, optFns ...func(*Options)) (*ListDataSourcesOutput, error) {
 	if params == nil {
 		params = &ListDataSourcesInput{}
@@ -31,7 +30,7 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 
 type ListDataSourcesInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -53,7 +52,7 @@ type ListDataSourcesOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables an account within the organization as the delegated administrator for
-// Audit Manager.
+// Enables an AWS account within the organization as the delegated administrator
+// for AWS Audit Manager.
 func (c *Client) RegisterOrganizationAdminAccount(ctx context.Context, params *RegisterOrganizationAdminAccountInput, optFns ...func(*Options)) (*RegisterOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &RegisterOrganizationAdminAccountInput{}
@@ -42,7 +42,7 @@ type RegisterOrganizationAdminAccountOutput struct {
 	// The identifier for the specified delegated administrator account.
 	AdminAccountId *string
 
-	// The identifier for the specified organization.
+	// The identifier for the specified AWS organization.
 	OrganizationId *string
 
 	// Metadata pertaining to the operation's result.

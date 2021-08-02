@@ -15,7 +15,7 @@ import (
 // Calculates a route
 // (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html)
 // given the following required parameters: DeparturePostiton and
-// DestinationPosition. Requires that you first create a route calculator resource
+// DestinationPosition. Requires that you first create aroute calculator resource
 // (https://docs.aws.amazon.com/location-routes/latest/APIReference/API_CreateRouteCalculator.html)
 // By default, a request that doesn't specify a departure time uses the best time
 // of day to travel with the best traffic conditions when calculating the route.
@@ -30,7 +30,7 @@ import (
 //
 // * Specifying a travel mode
 // (https://docs.aws.amazon.com/location/latest/developerguide/calculate-route.html#travel-mode)
-// using TravelMode. This lets you specify an additional route preference such as
+// using TravelMode. This lets you specify additional route preference such as
 // CarModeOptions if traveling by Car, or TruckModeOptions if traveling by Truck.
 func (c *Client) CalculateRoute(ctx context.Context, params *CalculateRouteInput, optFns ...func(*Options)) (*CalculateRouteOutput, error) {
 	if params == nil {
@@ -153,7 +153,7 @@ type CalculateRouteOutput struct {
 
 	// Contains details about each path between a pair of positions included along a
 	// route such as: StartPosition, EndPosition, Distance, DurationSeconds, Geometry,
-	// and Steps. The number of legs returned corresponds to one fewer than the total
+	// and Steps. The number of legs returned corresponds to one less than the total
 	// number of positions in the request. For example, a route with a departure
 	// position and destination position returns one leg with the positions snapped to
 	// a nearby road
@@ -167,19 +167,19 @@ type CalculateRouteOutput struct {
 	//
 	// A route with a waypoint between the departure and
 	// destination position returns two legs with the positions snapped to a nearby
-	// road:
+	// road.:
 	//
-	// * Leg 1: The StartPosition is the departure position . The EndPosition is
-	// the waypoint positon.
+	// * Leg 1: The StartPosition is the departure position . The EndPosition
+	// is the waypoint positon.
 	//
-	// * Leg 2: The StartPosition is the waypoint position. The
-	// EndPosition is the destination position.
+	// * Leg 2: The StartPosition is the waypoint position.
+	// The EndPosition is the destination position.
 	//
 	// This member is required.
 	Legs []types.Leg
 
 	// Contains information about the whole route, such as: RouteBBox, DataSource,
-	// Distance, DistanceUnit, and DurationSeconds.
+	// Distance, DistanceUnit, and DurationSeconds
 	//
 	// This member is required.
 	Summary *types.CalculateRouteSummary

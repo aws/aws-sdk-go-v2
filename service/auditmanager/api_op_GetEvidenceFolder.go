@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an evidence folder from the specified assessment in Audit Manager.
+// Returns an evidence folder from the specified assessment in AWS Audit Manager.
 func (c *Client) GetEvidenceFolder(ctx context.Context, params *GetEvidenceFolderInput, optFns ...func(*Options)) (*GetEvidenceFolderOutput, error) {
 	if params == nil {
 		params = &GetEvidenceFolderInput{}

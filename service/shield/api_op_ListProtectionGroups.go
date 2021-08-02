@@ -54,8 +54,8 @@ type ListProtectionGroupsOutput struct {
 	ProtectionGroups []types.ProtectionGroup
 
 	// If you specify a value for MaxResults and you have more protection groups than
-	// the value of MaxResults, Shield Advanced returns this token that you can use in
-	// your next request, to get the next batch of objects.
+	// the value of MaxResults, AWS Shield Advanced returns this token that you can use
+	// in your next request, to get the next batch of objects.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

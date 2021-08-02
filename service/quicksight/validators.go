@@ -1170,46 +1170,6 @@ func (m *validateOpDescribeUser) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpGenerateEmbedUrlForAnonymousUser struct {
-}
-
-func (*validateOpGenerateEmbedUrlForAnonymousUser) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGenerateEmbedUrlForAnonymousUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GenerateEmbedUrlForAnonymousUserInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGenerateEmbedUrlForAnonymousUserInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpGenerateEmbedUrlForRegisteredUser struct {
-}
-
-func (*validateOpGenerateEmbedUrlForRegisteredUser) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpGenerateEmbedUrlForRegisteredUser) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*GenerateEmbedUrlForRegisteredUserInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpGenerateEmbedUrlForRegisteredUserInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpGetDashboardEmbedUrl struct {
 }
 
@@ -2502,14 +2462,6 @@ func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUser{}, middleware.After)
 }
 
-func addOpGenerateEmbedUrlForAnonymousUserValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGenerateEmbedUrlForAnonymousUser{}, middleware.After)
-}
-
-func addOpGenerateEmbedUrlForRegisteredUserValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpGenerateEmbedUrlForRegisteredUser{}, middleware.After)
-}
-
 func addOpGetDashboardEmbedUrlValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetDashboardEmbedUrl{}, middleware.After)
 }
@@ -2768,38 +2720,6 @@ func validateAnalysisSourceTemplate(v *types.AnalysisSourceTemplate) error {
 	}
 	if v.Arn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Arn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAnonymousUserDashboardEmbeddingConfiguration(v *types.AnonymousUserDashboardEmbeddingConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AnonymousUserDashboardEmbeddingConfiguration"}
-	if v.InitialDashboardId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InitialDashboardId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateAnonymousUserEmbeddingExperienceConfiguration(v *types.AnonymousUserEmbeddingExperienceConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AnonymousUserEmbeddingExperienceConfiguration"}
-	if v.Dashboard != nil {
-		if err := validateAnonymousUserDashboardEmbeddingConfiguration(v.Dashboard); err != nil {
-			invalidParams.AddNested("Dashboard", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3777,38 +3697,6 @@ func validateRedshiftParameters(v *types.RedshiftParameters) error {
 	}
 }
 
-func validateRegisteredUserDashboardEmbeddingConfiguration(v *types.RegisteredUserDashboardEmbeddingConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RegisteredUserDashboardEmbeddingConfiguration"}
-	if v.InitialDashboardId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("InitialDashboardId"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateRegisteredUserEmbeddingExperienceConfiguration(v *types.RegisteredUserEmbeddingExperienceConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RegisteredUserEmbeddingExperienceConfiguration"}
-	if v.Dashboard != nil {
-		if err := validateRegisteredUserDashboardEmbeddingConfiguration(v.Dashboard); err != nil {
-			invalidParams.AddNested("Dashboard", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateRelationalTable(v *types.RelationalTable) error {
 	if v == nil {
 		return nil
@@ -3905,60 +3793,6 @@ func validateRowLevelPermissionDataSet(v *types.RowLevelPermissionDataSet) error
 	}
 }
 
-func validateRowLevelPermissionTagConfiguration(v *types.RowLevelPermissionTagConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RowLevelPermissionTagConfiguration"}
-	if v.TagRules == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagRules"))
-	} else if v.TagRules != nil {
-		if err := validateRowLevelPermissionTagRuleList(v.TagRules); err != nil {
-			invalidParams.AddNested("TagRules", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateRowLevelPermissionTagRule(v *types.RowLevelPermissionTagRule) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RowLevelPermissionTagRule"}
-	if v.TagKey == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TagKey"))
-	}
-	if v.ColumnName == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateRowLevelPermissionTagRuleList(v []types.RowLevelPermissionTagRule) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "RowLevelPermissionTagRuleList"}
-	for i := range v {
-		if err := validateRowLevelPermissionTagRule(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateS3Parameters(v *types.S3Parameters) error {
 	if v == nil {
 		return nil
@@ -4007,41 +3841,6 @@ func validateServiceNowParameters(v *types.ServiceNowParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ServiceNowParameters"}
 	if v.SiteBaseUrl == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SiteBaseUrl"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateSessionTag(v *types.SessionTag) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "SessionTag"}
-	if v.Key == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Key"))
-	}
-	if v.Value == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Value"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateSessionTagList(v []types.SessionTag) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "SessionTagList"}
-	for i := range v {
-		if err := validateSessionTag(&v[i]); err != nil {
-			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4549,11 +4348,6 @@ func validateOpCreateDataSetInput(v *CreateDataSetInput) error {
 	if v.RowLevelPermissionDataSet != nil {
 		if err := validateRowLevelPermissionDataSet(v.RowLevelPermissionDataSet); err != nil {
 			invalidParams.AddNested("RowLevelPermissionDataSet", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RowLevelPermissionTagConfiguration != nil {
-		if err := validateRowLevelPermissionTagConfiguration(v.RowLevelPermissionTagConfiguration); err != nil {
-			invalidParams.AddNested("RowLevelPermissionTagConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if v.Tags != nil {
@@ -5682,64 +5476,6 @@ func validateOpDescribeUserInput(v *DescribeUserInput) error {
 	}
 }
 
-func validateOpGenerateEmbedUrlForAnonymousUserInput(v *GenerateEmbedUrlForAnonymousUserInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GenerateEmbedUrlForAnonymousUserInput"}
-	if v.AwsAccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
-	}
-	if v.Namespace == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Namespace"))
-	}
-	if v.SessionTags != nil {
-		if err := validateSessionTagList(v.SessionTags); err != nil {
-			invalidParams.AddNested("SessionTags", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.AuthorizedResourceArns == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AuthorizedResourceArns"))
-	}
-	if v.ExperienceConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExperienceConfiguration"))
-	} else if v.ExperienceConfiguration != nil {
-		if err := validateAnonymousUserEmbeddingExperienceConfiguration(v.ExperienceConfiguration); err != nil {
-			invalidParams.AddNested("ExperienceConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpGenerateEmbedUrlForRegisteredUserInput(v *GenerateEmbedUrlForRegisteredUserInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "GenerateEmbedUrlForRegisteredUserInput"}
-	if v.AwsAccountId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("AwsAccountId"))
-	}
-	if v.UserArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserArn"))
-	}
-	if v.ExperienceConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ExperienceConfiguration"))
-	} else if v.ExperienceConfiguration != nil {
-		if err := validateRegisteredUserEmbeddingExperienceConfiguration(v.ExperienceConfiguration); err != nil {
-			invalidParams.AddNested("ExperienceConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpGetDashboardEmbedUrlInput(v *GetDashboardEmbedUrlInput) error {
 	if v == nil {
 		return nil
@@ -6513,11 +6249,6 @@ func validateOpUpdateDataSetInput(v *UpdateDataSetInput) error {
 	if v.RowLevelPermissionDataSet != nil {
 		if err := validateRowLevelPermissionDataSet(v.RowLevelPermissionDataSet); err != nil {
 			invalidParams.AddNested("RowLevelPermissionDataSet", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.RowLevelPermissionTagConfiguration != nil {
-		if err := validateRowLevelPermissionTagConfiguration(v.RowLevelPermissionTagConfiguration); err != nil {
-			invalidParams.AddNested("RowLevelPermissionTagConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

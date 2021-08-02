@@ -59,7 +59,7 @@ type ListTypesInput struct {
 	// previous response object's NextToken parameter is set to null.
 	NextToken *string
 
-	// For resource types, the provisioning behavior of the resource type.
+	// For resource types, the provisioning behavior of the resource type. AWS
 	// CloudFormation determines the provisioning type during registration, based on
 	// the types of handlers in the schema handler package submitted. Valid values
 	// include:

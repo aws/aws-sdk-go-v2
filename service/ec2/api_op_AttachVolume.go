@@ -18,26 +18,25 @@ import (
 // Amazon EBS encryption
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 // Amazon Elastic Compute Cloud User Guide. After you attach an EBS volume, you
-// must make it available. For more information, see Make an EBS volume available
+// must make it available. For more information, see Making an EBS volume available
 // for use
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-using-volumes.html). If
-// a volume has an Amazon Web Services Marketplace product code:
+// a volume has an AWS Marketplace product code:
 //
-// * The volume can
-// be attached only to a stopped instance.
+// * The volume can be attached only
+// to a stopped instance.
 //
-// * Amazon Web Services Marketplace
-// product codes are copied from the volume to the instance.
+// * AWS Marketplace product codes are copied from the
+// volume to the instance.
 //
-// * You must be
-// subscribed to the product.
+// * You must be subscribed to the product.
 //
-// * The instance type and operating system of the
-// instance must support the product. For example, you can't detach a volume from a
-// Windows instance and attach it to a Linux instance.
+// * The
+// instance type and operating system of the instance must support the product. For
+// example, you can't detach a volume from a Windows instance and attach it to a
+// Linux instance.
 //
-// For more information, see
-// Attach an Amazon EBS volume to an instance
+// For more information, see Attaching Amazon EBS volumes
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-attaching-volume.html)
 // in the Amazon Elastic Compute Cloud User Guide.
 func (c *Client) AttachVolume(ctx context.Context, params *AttachVolumeInput, optFns ...func(*Options)) (*AttachVolumeOutput, error) {

@@ -28,32 +28,8 @@ func (c *Client) GetMapGlyphs(ctx context.Context, params *GetMapGlyphsInput, op
 
 type GetMapGlyphsInput struct {
 
-	// A comma-separated list of fonts to load glyphs from in order of preference. For
-	// example, Noto Sans Regular, Arial Unicode. Valid fonts for Esri
-	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
-	// styles:
-	//
-	// * VectorEsriDarkGrayCanvas – Ubuntu Medium Italic | Ubuntu Medium |
-	// Ubuntu Italic | Ubuntu Regular | Ubuntu Bold
-	//
-	// * VectorEsriLightGrayCanvas –
-	// Ubuntu Italic | Ubuntu Regular | Ubuntu Light | Ubuntu Bold
-	//
-	// *
-	// VectorEsriTopographic – Noto Sans Italic | Noto Sans Regular | Noto Sans Bold |
-	// Noto Serif Regular | Roboto Condensed Light Italic
-	//
-	// * VectorEsriStreets – Arial
-	// Regular | Arial Italic | Arial Bold
-	//
-	// * VectorEsriNavigation – Arial Regular |
-	// Arial Italic | Arial Bold
-	//
-	// Valid fonts for HERE Technologies
-	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
-	// styles:
-	//
-	// * VectorHereBerlin – Fira GO Regular | Fira GO Bold
+	// A comma-separated list of fonts to load glyphs from in order of preference.. For
+	// example, Noto Sans, Arial Unicode.
 	//
 	// This member is required.
 	FontStack *string

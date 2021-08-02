@@ -12,7 +12,7 @@ import (
 )
 
 // Describes the settings that were used when your QuickSight subscription was
-// first created in this Amazon Web Services account;.
+// first created in this AWS account.
 func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAccountSettingsInput, optFns ...func(*Options)) (*DescribeAccountSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountSettingsInput{}
@@ -30,8 +30,7 @@ func (c *Client) DescribeAccountSettings(ctx context.Context, params *DescribeAc
 
 type DescribeAccountSettingsInput struct {
 
-	// The ID for the Amazon Web Services account; that contains the settings that you
-	// want to list.
+	// The ID for the AWS account that contains the settings that you want to list.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -41,17 +40,16 @@ type DescribeAccountSettingsInput struct {
 
 type DescribeAccountSettingsOutput struct {
 
-	// The QuickSight settings for this Amazon Web Services account;. This information
-	// includes the edition of Amazon QuickSight that you subscribed to (Standard or
-	// Enterprise) and the notification email for the QuickSight subscription. In the
-	// QuickSight console, the QuickSight subscription is sometimes referred to as a
-	// QuickSight "account" even though it's technically not an account by itself.
-	// Instead, it's a subscription to the QuickSight service for your Amazon Web
-	// Services account;. The edition that you subscribe to applies to QuickSight in
-	// every Region; where you use it.
+	// The QuickSight settings for this AWS account. This information includes the
+	// edition of Amazon QuickSight that you subscribed to (Standard or Enterprise) and
+	// the notification email for the QuickSight subscription. In the QuickSight
+	// console, the QuickSight subscription is sometimes referred to as a QuickSight
+	// "account" even though it's technically not an account by itself. Instead, it's a
+	// subscription to the QuickSight service for your AWS account. The edition that
+	// you subscribe to applies to QuickSight in every AWS Region where you use it.
 	AccountSettings *types.AccountSettings
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

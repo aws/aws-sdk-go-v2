@@ -35,8 +35,7 @@ type UpdateAnalysisInput struct {
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the Amazon Web Services account; that contains the analysis that
-	// you're updating.
+	// The ID of the AWS account that contains the analysis that you're updating.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -74,7 +73,7 @@ type UpdateAnalysisOutput struct {
 	// The ARN of the analysis that you're updating.
 	Arn *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

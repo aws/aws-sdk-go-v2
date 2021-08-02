@@ -11,11 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables the attributes-based access control (ABAC) feature for the specified
-// Amazon Web Services SSO instance. You can also specify new attributes to add to
-// your ABAC configuration during the enabling process. For more information about
-// ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User
-// Guide.
+// Enables the attributes-based access control (ABAC) feature for the specified AWS
+// SSO instance. You can also specify new attributes to add to your ABAC
+// configuration during the enabling process. For more information about ABAC, see
+// Attribute-Based Access Control in the AWS SSO User Guide.
 func (c *Client) CreateInstanceAccessControlAttributeConfiguration(ctx context.Context, params *CreateInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*CreateInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateInstanceAccessControlAttributeConfigurationInput{}
@@ -33,13 +32,12 @@ func (c *Client) CreateInstanceAccessControlAttributeConfiguration(ctx context.C
 
 type CreateInstanceAccessControlAttributeConfigurationInput struct {
 
-	// Specifies the Amazon Web Services SSO identity store attributes to add to your
-	// ABAC configuration. When using an external identity provider as an identity
-	// source, you can pass attributes through the SAML assertion. Doing so provides an
-	// alternative to configuring attributes from the Amazon Web Services SSO identity
-	// store. If a SAML assertion passes any of these attributes, Amazon Web Services
-	// SSO will replace the attribute value with the value from the Amazon Web Services
-	// SSO identity store.
+	// Specifies the AWS SSO identity store attributes to add to your ABAC
+	// configuration. When using an external identity provider as an identity source,
+	// you can pass attributes through the SAML assertion as an alternative to
+	// configuring attributes from the AWS SSO identity store. If a SAML assertion
+	// passes any of these attributes, AWS SSO will replace the attribute value with
+	// the value from the AWS SSO identity store.
 	//
 	// This member is required.
 	InstanceAccessControlAttributeConfiguration *types.InstanceAccessControlAttributeConfiguration

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates a list of evidence to an assessment report in an Audit Manager
+// Associates a list of evidence to an assessment report in an AWS Audit Manager
 // assessment.
 func (c *Client) BatchAssociateAssessmentReportEvidence(ctx context.Context, params *BatchAssociateAssessmentReportEvidenceInput, optFns ...func(*Options)) (*BatchAssociateAssessmentReportEvidenceOutput, error) {
 	if params == nil {

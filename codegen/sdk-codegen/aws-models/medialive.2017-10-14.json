@@ -824,30 +824,6 @@
                 ]
             }
         },
-        "com.amazonaws.medialive#AudioHlsRenditionSelection": {
-            "type": "structure",
-            "members": {
-                "GroupId": {
-                    "target": "com.amazonaws.medialive#__stringMin1",
-                    "traits": {
-                        "smithy.api#documentation": "Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio rendition.",
-                        "smithy.api#jsonName": "groupId",
-                        "smithy.api#required": {}
-                    }
-                },
-                "Name": {
-                    "target": "com.amazonaws.medialive#__stringMin1",
-                    "traits": {
-                        "smithy.api#documentation": "Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.",
-                        "smithy.api#jsonName": "name",
-                        "smithy.api#required": {}
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "Audio Hls Rendition Selection"
-            }
-        },
         "com.amazonaws.medialive#AudioLanguageSelection": {
             "type": "structure",
             "members": {
@@ -1062,12 +1038,6 @@
         "com.amazonaws.medialive#AudioSelectorSettings": {
             "type": "structure",
             "members": {
-                "AudioHlsRenditionSelection": {
-                    "target": "com.amazonaws.medialive#AudioHlsRenditionSelection",
-                    "traits": {
-                        "smithy.api#jsonName": "audioHlsRenditionSelection"
-                    }
-                },
                 "AudioLanguageSelection": {
                     "target": "com.amazonaws.medialive#AudioLanguageSelection",
                     "traits": {
@@ -20135,33 +20105,9 @@
         },
         "com.amazonaws.medialive#WebvttDestinationSettings": {
             "type": "structure",
-            "members": {
-                "StyleControl": {
-                    "target": "com.amazonaws.medialive#WebvttDestinationStyleControl",
-                    "traits": {
-                        "smithy.api#documentation": "Controls whether the color and position of the source captions is passed through to the WebVTT output captions.  PASSTHROUGH - Valid only if the source captions are EMBEDDED or TELETEXT.  NO_STYLE_DATA - Don't pass through the style. The output captions will not contain any font styling information.",
-                        "smithy.api#jsonName": "styleControl"
-                    }
-                }
-            },
+            "members": {},
             "traits": {
                 "smithy.api#documentation": "Webvtt Destination Settings"
-            }
-        },
-        "com.amazonaws.medialive#WebvttDestinationStyleControl": {
-            "type": "string",
-            "traits": {
-                "smithy.api#documentation": "Webvtt Destination Style Control",
-                "smithy.api#enum": [
-                    {
-                        "value": "NO_STYLE_DATA",
-                        "name": "NO_STYLE_DATA"
-                    },
-                    {
-                        "value": "PASSTHROUGH",
-                        "name": "PASSTHROUGH"
-                    }
-                ]
             }
         },
         "com.amazonaws.medialive#__double": {

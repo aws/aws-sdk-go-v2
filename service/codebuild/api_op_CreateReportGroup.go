@@ -46,8 +46,8 @@ type CreateReportGroupInput struct {
 	Type types.ReportType
 
 	// A list of tag key and value pairs associated with this report group. These tags
-	// are available for use by AWS services that support AWS CodeBuild report group
-	// tags.
+	// are available for use by Amazon Web Services services that support CodeBuild
+	// report group tags.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

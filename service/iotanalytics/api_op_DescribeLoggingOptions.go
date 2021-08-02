@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the current settings of the IoT Analytics logging options.
+// Retrieves the current settings of the AWS IoT Analytics logging options.
 func (c *Client) DescribeLoggingOptions(ctx context.Context, params *DescribeLoggingOptionsInput, optFns ...func(*Options)) (*DescribeLoggingOptionsOutput, error) {
 	if params == nil {
 		params = &DescribeLoggingOptionsInput{}
@@ -33,7 +33,7 @@ type DescribeLoggingOptionsInput struct {
 
 type DescribeLoggingOptionsOutput struct {
 
-	// The current settings of the IoT Analytics logging options.
+	// The current settings of the AWS IoT Analytics logging options.
 	LoggingOptions *types.LoggingOptions
 
 	// Metadata pertaining to the operation's result.

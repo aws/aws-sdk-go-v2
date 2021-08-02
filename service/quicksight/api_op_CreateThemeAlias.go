@@ -36,8 +36,7 @@ type CreateThemeAliasInput struct {
 	// This member is required.
 	AliasName *string
 
-	// The ID of the Amazon Web Services account; that contains the theme for the new
-	// theme alias.
+	// The ID of the AWS account that contains the theme for the new theme alias.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -57,7 +56,7 @@ type CreateThemeAliasInput struct {
 
 type CreateThemeAliasOutput struct {
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

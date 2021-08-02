@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the description of an event integration.
+// The Amazon AppIntegrations APIs are in preview release and are subject to
+// change. Updates the description of an event integration.
 func (c *Client) UpdateEventIntegration(ctx context.Context, params *UpdateEventIntegrationInput, optFns ...func(*Options)) (*UpdateEventIntegrationOutput, error) {
 	if params == nil {
 		params = &UpdateEventIntegrationInput{}

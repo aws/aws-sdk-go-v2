@@ -63,8 +63,6 @@
         "api_op_DescribeThemeAlias.go",
         "api_op_DescribeThemePermissions.go",
         "api_op_DescribeUser.go",
-        "api_op_GenerateEmbedUrlForAnonymousUser.go",
-        "api_op_GenerateEmbedUrlForRegisteredUser.go",
         "api_op_GetDashboardEmbedUrl.go",
         "api_op_GetSessionEmbedUrl.go",
         "api_op_ListAnalyses.go",

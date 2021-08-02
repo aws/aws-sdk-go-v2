@@ -28,27 +28,6 @@ func (e *ActiveStatementsExceededException) ErrorCode() string {
 }
 func (e *ActiveStatementsExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An SQL statement encountered an environmental error while running.
-type BatchExecuteStatementException struct {
-	Message *string
-
-	StatementId *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *BatchExecuteStatementException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *BatchExecuteStatementException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *BatchExecuteStatementException) ErrorCode() string             { return "BatchExecuteStatementException" }
-func (e *BatchExecuteStatementException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
-
 // The SQL statement encountered an environmental error while running.
 type ExecuteStatementException struct {
 	Message *string

@@ -11,12 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the list of Amazon Web Services SSO identity store attributes that have
-// been configured to work with attributes-based access control (ABAC) for the
-// specified Amazon Web Services SSO instance. This will not return attributes
-// configured and sent by an external identity provider. For more information about
-// ABAC, see Attribute-Based Access Control in the Amazon Web Services SSO User
-// Guide.
+// Returns the list of AWS SSO identity store attributes that have been configured
+// to work with attributes-based access control (ABAC) for the specified AWS SSO
+// instance. This will not return attributes configured and sent by an external
+// identity provider. For more information about ABAC, see Attribute-Based Access
+// Control in the AWS SSO User Guide.
 func (c *Client) DescribeInstanceAccessControlAttributeConfiguration(ctx context.Context, params *DescribeInstanceAccessControlAttributeConfigurationInput, optFns ...func(*Options)) (*DescribeInstanceAccessControlAttributeConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeInstanceAccessControlAttributeConfigurationInput{}
@@ -44,8 +43,8 @@ type DescribeInstanceAccessControlAttributeConfigurationInput struct {
 
 type DescribeInstanceAccessControlAttributeConfigurationOutput struct {
 
-	// Gets the list of Amazon Web Services SSO identity store attributes that have
-	// been added to your ABAC configuration.
+	// Gets the list of AWS SSO identity store attributes added to your ABAC
+	// configuration.
 	InstanceAccessControlAttributeConfiguration *types.InstanceAccessControlAttributeConfiguration
 
 	// The status of the attribute configuration process.

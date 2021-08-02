@@ -70,7 +70,7 @@ type DescribeTypeOutput struct {
 	// Whether CloudFormation automatically updates the extension in this account and
 	// region when a new minor version is published by the extension publisher. Major
 	// versions released by the publisher must be manually updated. For more
-	// information, see Activating public extensions for use in your account in the
+	// information, see Activating public extensions for use in your account in the AWS
 	// CloudFormation User Guide.
 	AutoUpdate *bool
 
@@ -116,12 +116,11 @@ type DescribeTypeOutput struct {
 	// extension. This applies only to private extensions you have registered in your
 	// account. For more information, see RegisterType
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_RegisterType.html).
-	// If the registered extension calls any Amazon Web Services APIs, you must create
-	// an IAM execution role
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that includes
-	// the necessary permissions to call those Amazon Web Services APIs, and provision
-	// that execution role in your account. CloudFormation then assumes that execution
-	// role to provide your extension with the appropriate credentials.
+	// If the registered extension calls any AWS APIs, you must create an IAM execution
+	// role (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that
+	// includes the necessary permissions to call those AWS APIs, and provision that
+	// execution role in your account. CloudFormation then assumes that execution role
+	// to provide your extension with the appropriate credentials.
 	ExecutionRoleArn *string
 
 	// Whether or not the extension is activated in the account and region. This only
@@ -175,8 +174,8 @@ type DescribeTypeOutput struct {
 	OriginalTypeName *string
 
 	// For resource type extensions, the provisioning behavior of the resource type.
-	// CloudFormation determines the provisioning type during registration, based on
-	// the types of handlers in the schema handler package submitted. Valid values
+	// AWS CloudFormation determines the provisioning type during registration, based
+	// on the types of handlers in the schema handler package submitted. Valid values
 	// include:
 	//
 	// * FULLY_MUTABLE: The resource type includes an update handler to
@@ -269,8 +268,8 @@ type DescribeTypeOutput struct {
 	// operations. Valid values include:
 	//
 	// * PRIVATE: The extension is only visible and
-	// usable within the account in which it is registered. CloudFormation marks any
-	// extensions you register as PRIVATE.
+	// usable within the account in which it is registered. AWS CloudFormation marks
+	// any extensions you register as PRIVATE.
 	//
 	// * PUBLIC: The extension is publically
 	// visible and usable within any Amazon account.

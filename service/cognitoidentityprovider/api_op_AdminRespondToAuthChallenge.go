@@ -19,8 +19,8 @@ import (
 // (https://console.aws.amazon.com/pinpoint/home/). Cognito will use the the
 // registered number automatically. Otherwise, Cognito users that must receive SMS
 // messages might be unable to sign up, activate their accounts, or sign in. If you
-// have never used SMS text messages with Amazon Cognito or any other Amazon Web
-// Service, Amazon SNS might place your account in SMS sandbox. In sandbox mode
+// have never used SMS text messages with Amazon Cognito or any other AWS service,
+// Amazon SNS might place your account in SMS sandbox. In sandbox mode
 // (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you’ll have
 // limitations, such as sending messages to only verified phone numbers. After
 // testing in the sandbox environment, you can move out of the SMS sandbox and into
@@ -97,7 +97,7 @@ type AdminRespondToAuthChallengeInput struct {
 
 	// A map of custom key-value pairs that you can provide as input for any custom
 	// workflows that this action triggers. You create custom workflows by assigning
-	// Lambda functions to user pool triggers. When you use the
+	// AWS Lambda functions to user pool triggers. When you use the
 	// AdminRespondToAuthChallenge API action, Amazon Cognito invokes any functions
 	// that are assigned to the following triggers: pre sign-up, custom message, post
 	// authentication, user migration, pre token generation, define auth challenge,
@@ -105,8 +105,8 @@ type AdminRespondToAuthChallengeInput struct {
 	// invokes any of these functions, it passes a JSON payload, which the function
 	// receives as input. This payload contains a clientMetadata attribute, which
 	// provides the data that you assigned to the ClientMetadata parameter in your
-	// AdminRespondToAuthChallenge request. In your function code in Lambda, you can
-	// process the clientMetadata value to enhance your workflow for your specific
+	// AdminRespondToAuthChallenge request. In your function code in AWS Lambda, you
+	// can process the clientMetadata value to enhance your workflow for your specific
 	// needs. For more information, see Customizing User Pool Workflows with Lambda
 	// Triggers
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/cognito-user-identity-pools-working-with-aws-lambda-triggers.html)
@@ -114,7 +114,7 @@ type AdminRespondToAuthChallengeInput struct {
 	// consideration when you use the ClientMetadata parameter:
 	//
 	// * Amazon Cognito does
-	// not store the ClientMetadata value. This data is available only to Lambda
+	// not store the ClientMetadata value. This data is available only to AWS Lambda
 	// triggers that are assigned to a user pool to support custom workflows. If your
 	// user pool configuration does not include triggers, the ClientMetadata parameter
 	// serves no purpose.

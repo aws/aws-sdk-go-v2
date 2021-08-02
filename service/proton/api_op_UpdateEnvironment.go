@@ -16,7 +16,7 @@ import (
 // to update or connect to an environment account connection. You can only update
 // to a new environment account connection if it was created in the same
 // environment account that the current environment account connection was created
-// in and is associated with the current environment. If the environment isn't
+// in and associated with the current environment. If the environment isn't
 // associated with an environment account connection, don't update or include the
 // environmentAccountConnectionId parameter to update or connect to an environment
 // account connection. You can update either the environmentAccountConnectionId or
@@ -78,12 +78,12 @@ type UpdateEnvironmentInput struct {
 
 	// The ID of the environment account connection. You can only update to a new
 	// environment account connection if it was created in the same environment account
-	// that the current environment account connection was created in and is associated
+	// that the current environment account connection was created in and associated
 	// with the current environment.
 	EnvironmentAccountConnectionId *string
 
-	// The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS
-	// Proton to make API calls to other services your behalf.
+	// The ARN of the AWS Proton service role that allows AWS Proton to make API calls
+	// to other services your behalf.
 	ProtonServiceRoleArn *string
 
 	// The formatted specification that defines the update.

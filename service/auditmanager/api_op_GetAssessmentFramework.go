@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a framework from Audit Manager.
+// Returns a framework from AWS Audit Manager.
 func (c *Client) GetAssessmentFramework(ctx context.Context, params *GetAssessmentFrameworkInput, optFns ...func(*Options)) (*GetAssessmentFrameworkOutput, error) {
 	if params == nil {
 		params = &GetAssessmentFrameworkInput{}

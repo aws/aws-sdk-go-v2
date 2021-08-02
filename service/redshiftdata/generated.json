@@ -5,7 +5,6 @@
     },
     "files": [
         "api_client.go",
-        "api_op_BatchExecuteStatement.go",
         "api_op_CancelStatement.go",
         "api_op_DescribeStatement.go",
         "api_op_DescribeTable.go",

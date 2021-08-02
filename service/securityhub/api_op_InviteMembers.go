@@ -11,14 +11,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Invites other Amazon Web Services accounts to become member accounts for the
-// Security Hub administrator account that the invitation is sent from. This
-// operation is only used to invite accounts that do not belong to an organization.
-// Organization accounts do not receive invitations. Before you can use this action
-// to invite a member, you must first use the CreateMembers action to create the
-// member account in Security Hub. When the account owner enables Security Hub and
-// accepts the invitation to become a member account, the administrator account can
-// view the findings generated from the member account.
+// Invites other AWS accounts to become member accounts for the Security Hub
+// administrator account that the invitation is sent from. This operation is only
+// used to invite accounts that do not belong to an organization. Organization
+// accounts do not receive invitations. Before you can use this action to invite a
+// member, you must first use the CreateMembers action to create the member account
+// in Security Hub. When the account owner enables Security Hub and accepts the
+// invitation to become a member account, the administrator account can view the
+// findings generated from the member account.
 func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, optFns ...func(*Options)) (*InviteMembersOutput, error) {
 	if params == nil {
 		params = &InviteMembersInput{}
@@ -36,8 +36,8 @@ func (c *Client) InviteMembers(ctx context.Context, params *InviteMembersInput, 
 
 type InviteMembersInput struct {
 
-	// The list of account IDs of the Amazon Web Services accounts to invite to
-	// Security Hub as members.
+	// The list of account IDs of the AWS accounts to invite to Security Hub as
+	// members.
 	//
 	// This member is required.
 	AccountIds []string
@@ -47,8 +47,8 @@ type InviteMembersInput struct {
 
 type InviteMembersOutput struct {
 
-	// The list of Amazon Web Services accounts that could not be processed. For each
-	// account, the list includes the account ID and the email address.
+	// The list of AWS accounts that could not be processed. For each account, the list
+	// includes the account ID and the email address.
 	UnprocessedAccounts []types.Result
 
 	// Metadata pertaining to the operation's result.

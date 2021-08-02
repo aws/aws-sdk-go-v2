@@ -6,7 +6,6 @@
     "files": [
         "api_client.go",
         "api_op_AnalyzeDocument.go",
-        "api_op_AnalyzeExpense.go",
         "api_op_DetectDocumentText.go",
         "api_op_GetDocumentAnalysis.go",
         "api_op_GetDocumentTextDetection.go",

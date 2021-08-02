@@ -12,8 +12,8 @@ import (
 )
 
 // Creates or updates a metric stream. Metric streams can automatically stream
-// CloudWatch metrics to Amazon Web Services destinations including Amazon S3 and
-// to many third-party solutions. For more information, see  Using Metric Streams
+// CloudWatch metrics to AWS destinations including Amazon S3 and to many
+// third-party solutions. For more information, see  Using Metric Streams
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/Metric-Streams.html).
 // To create a metric stream, you must be logged on to an account that has the
 // iam:PassRole permission and either the CloudWatchFullAccess policy or the
@@ -99,13 +99,7 @@ type PutMetricStreamInput struct {
 	// as many as 50 tags with a metric stream. Tags can help you organize and
 	// categorize your resources. You can also use them to scope user permissions by
 	// granting a user permission to access or change only resources with certain tag
-	// values. You can use this parameter only when you are creating a new metric
-	// stream. If you are using this operation to update an existing metric stream, any
-	// tags you specify in this parameter are ignored. To change the tags of an
-	// existing metric stream, use TagResource
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_TagResource.html)
-	// or UntagResource
-	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/APIReference/API_UntagResource.html).
+	// values.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

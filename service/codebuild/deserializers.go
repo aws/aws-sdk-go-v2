@@ -5577,15 +5577,6 @@ func awsAwsjson11_deserializeDocumentBuildArtifacts(v **types.BuildArtifacts, va
 				sv.ArtifactIdentifier = ptr.String(jtv)
 			}
 
-		case "bucketOwnerAccess":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected BucketOwnerAccess to be of type string, got %T instead", value)
-				}
-				sv.BucketOwnerAccess = types.BucketOwnerAccess(jtv)
-			}
-
 		case "encryptionDisabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -8492,15 +8483,6 @@ func awsAwsjson11_deserializeDocumentProjectArtifacts(v **types.ProjectArtifacts
 				sv.ArtifactIdentifier = ptr.String(jtv)
 			}
 
-		case "bucketOwnerAccess":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected BucketOwnerAccess to be of type string, got %T instead", value)
-				}
-				sv.BucketOwnerAccess = types.BucketOwnerAccess(jtv)
-			}
-
 		case "encryptionDisabled":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -10186,15 +10168,6 @@ func awsAwsjson11_deserializeDocumentS3LogsConfig(v **types.S3LogsConfig, value 
 
 	for key, value := range shape {
 		switch key {
-		case "bucketOwnerAccess":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected BucketOwnerAccess to be of type string, got %T instead", value)
-				}
-				sv.BucketOwnerAccess = types.BucketOwnerAccess(jtv)
-			}
-
 		case "encryptionDisabled":
 			if value != nil {
 				jtv, ok := value.(bool)

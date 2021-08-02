@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves your account's CloudFormation limits, such as the maximum number of
-// stacks that you can create in your account. For more information about account
-// limits, see CloudFormation Limits
+// Retrieves your account's AWS CloudFormation limits, such as the maximum number
+// of stacks that you can create in your account. For more information about
+// account limits, see AWS CloudFormation Limits
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
-// in the CloudFormation User Guide.
+// in the AWS CloudFormation User Guide.
 func (c *Client) DescribeAccountLimits(ctx context.Context, params *DescribeAccountLimitsInput, optFns ...func(*Options)) (*DescribeAccountLimitsOutput, error) {
 	if params == nil {
 		params = &DescribeAccountLimitsInput{}
@@ -44,8 +44,8 @@ type DescribeAccountLimitsInput struct {
 // The output for the DescribeAccountLimits action.
 type DescribeAccountLimitsOutput struct {
 
-	// An account limit structure that contain a list of CloudFormation account limits
-	// and their values.
+	// An account limit structure that contain a list of AWS CloudFormation account
+	// limits and their values.
 	AccountLimits []types.AccountLimit
 
 	// If the output exceeds 1 MB in size, a string that identifies the next page of

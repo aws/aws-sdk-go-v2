@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a template from an existing Amazon QuickSight analysis or template. You
-// can use the resulting template to create a dashboard. A template is an entity in
+// Creates a template from an existing QuickSight analysis or template. You can use
+// the resulting template to create a dashboard. A template is an entity in
 // QuickSight that encapsulates the metadata required to create an analysis and
 // that you can use to create s dashboard. A template adds a layer of abstraction
 // by using placeholders to replace the dataset associated with the analysis. You
@@ -36,9 +36,8 @@ func (c *Client) CreateTemplate(ctx context.Context, params *CreateTemplateInput
 
 type CreateTemplateInput struct {
 
-	// The ID for the Amazon Web Services account; that the group is in. Currently, you
-	// use the ID for the Amazon Web Services account; that contains your Amazon
-	// QuickSight account.
+	// The ID for the AWS account that the group is in. Currently, you use the ID for
+	// the AWS account that contains your Amazon QuickSight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -48,17 +47,16 @@ type CreateTemplateInput struct {
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
 	// require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of
 	// the source template. For SourceAnalysis, specify the ARN of the source analysis.
-	// The SourceTemplate ARN can contain any Amazon Web Services account; and any
-	// QuickSight-supported Region;. Use the DataSetReferences entity within
-	// SourceTemplate or SourceAnalysis to list the replacement datasets for the
-	// placeholders listed in the original. The schema in each dataset must match its
-	// placeholder.
+	// The SourceTemplate ARN can contain any AWS Account and any QuickSight-supported
+	// AWS Region. Use the DataSetReferences entity within SourceTemplate or
+	// SourceAnalysis to list the replacement datasets for the placeholders listed in
+	// the original. The schema in each dataset must match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.TemplateSourceEntity
 
-	// An ID for the template that you want to create. This template is unique per
-	// Region; in each Amazon Web Services account;.
+	// An ID for the template that you want to create. This template is unique per AWS
+	// Region in each AWS account.
 	//
 	// This member is required.
 	TemplateId *string
@@ -90,7 +88,7 @@ type CreateTemplateOutput struct {
 	// The template creation status.
 	CreationStatus types.ResourceStatus
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

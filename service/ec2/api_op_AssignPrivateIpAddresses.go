@@ -27,12 +27,7 @@ import (
 // asynchronous operation. When you move an IP address from one network interface
 // to another, check network/interfaces/macs/mac/local-ipv4s in the instance
 // metadata to confirm that the remapping is complete. You must specify either the
-// IP addresses or the IP address count in the request. You can optionally use
-// Prefix Delegation on the network interface. You must specify either the IPv4
-// Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For
-// information, see Prefix Delegation
-// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation) in
-// the Amazon Elastic Compute Cloud User Guide.
+// IP addresses or the IP address count in the request.
 func (c *Client) AssignPrivateIpAddresses(ctx context.Context, params *AssignPrivateIpAddressesInput, optFns ...func(*Options)) (*AssignPrivateIpAddressesOutput, error) {
 	if params == nil {
 		params = &AssignPrivateIpAddressesInput{}
@@ -61,15 +56,6 @@ type AssignPrivateIpAddressesInput struct {
 	// interface.
 	AllowReassignment *bool
 
-	// The number of IPv4 Prefix Delegation prefixes that AWS automatically assigns to
-	// the network interface. You cannot use this option if you use the Ipv4 Prefixes
-	// option.
-	Ipv4PrefixCount *int32
-
-	// One or more IPv4 Prefix Delegation prefixes assigned to the network interface.
-	// You cannot use this option if you use the Ipv4PrefixCount option.
-	Ipv4Prefixes []string
-
 	// One or more IP addresses to be assigned as a secondary private IP address to the
 	// network interface. You can't specify this parameter when also specifying a
 	// number of secondary IP addresses. If you don't specify an IP address, Amazon EC2
@@ -84,9 +70,6 @@ type AssignPrivateIpAddressesInput struct {
 }
 
 type AssignPrivateIpAddressesOutput struct {
-
-	// The IPv4 Prefix Delegation prefixes that are assigned to the network interface.
-	AssignedIpv4Prefixes []types.Ipv4PrefixSpecification
 
 	// The private IP addresses assigned to the network interface.
 	AssignedPrivateIpAddresses []types.AssignedPrivateIpAddress

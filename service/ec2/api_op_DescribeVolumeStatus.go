@@ -25,7 +25,7 @@ import (
 // checks pass, the overall status of the volume is ok. If the check fails, the
 // overall status is impaired. If the status is insufficient-data, then the checks
 // might still be taking place on your volume at the time. We recommend that you
-// retry the request. For more information about volume status, see Monitor the
+// retry the request. For more information about volume status, see Monitoring the
 // status of your volumes
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/monitoring-volume-status.html)
 // in the Amazon Elastic Compute Cloud User Guide. Events: Reflect the cause of a

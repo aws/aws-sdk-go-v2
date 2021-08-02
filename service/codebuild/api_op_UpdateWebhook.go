@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the webhook associated with an AWS CodeBuild build project. If you use
+// Updates the webhook associated with an CodeBuild build project. If you use
 // Bitbucket for your repository, rotateSecret is ignored.
 func (c *Client) UpdateWebhook(ctx context.Context, params *UpdateWebhookInput, optFns ...func(*Options)) (*UpdateWebhookOutput, error) {
 	if params == nil {
@@ -30,7 +30,7 @@ func (c *Client) UpdateWebhook(ctx context.Context, params *UpdateWebhookInput, 
 
 type UpdateWebhookInput struct {
 
-	// The name of the AWS CodeBuild project.
+	// The name of the CodeBuild project.
 	//
 	// This member is required.
 	ProjectName *string
@@ -60,7 +60,7 @@ type UpdateWebhookInput struct {
 type UpdateWebhookOutput struct {
 
 	// Information about a repository's webhook that is associated with a project in
-	// AWS CodeBuild.
+	// CodeBuild.
 	Webhook *types.Webhook
 
 	// Metadata pertaining to the operation's result.

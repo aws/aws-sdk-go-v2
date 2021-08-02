@@ -46,11 +46,6 @@ type UpdateProfileJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// Configuration for profile jobs. Used to select columns, do evaluations, and
-	// override default parameters of evaluations. When configuration is null, the
-	// profile job will run with default settings.
-	Configuration *types.ProfileConfiguration
-
 	// The Amazon Resource Name (ARN) of an encryption key that is used to protect the
 	// job.
 	EncryptionKeyArn *string

@@ -2031,62 +2031,6 @@ func (m *awsAwsquery_serializeOpGetTemplateSummary) HandleSerialize(ctx context.
 	return next.HandleSerialize(ctx, in)
 }
 
-type awsAwsquery_serializeOpImportStacksToStackSet struct {
-}
-
-func (*awsAwsquery_serializeOpImportStacksToStackSet) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsAwsquery_serializeOpImportStacksToStackSet) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*ImportStacksToStackSetInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	request.Request.URL.Path = "/"
-	request.Request.Method = "POST"
-	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
-
-	bodyWriter := bytes.NewBuffer(nil)
-	bodyEncoder := query.NewEncoder(bodyWriter)
-	body := bodyEncoder.Object()
-	body.Key("Action").String("ImportStacksToStackSet")
-	body.Key("Version").String("2010-05-15")
-
-	if err := awsAwsquery_serializeOpDocumentImportStacksToStackSetInput(input, bodyEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	err = bodyEncoder.Encode()
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-
 type awsAwsquery_serializeOpListChangeSets struct {
 }
 
@@ -3926,19 +3870,6 @@ func awsAwsquery_serializeDocumentRollbackTriggers(v []types.RollbackTrigger, va
 	return nil
 }
 
-func awsAwsquery_serializeDocumentStackIdList(v []string, value query.Value) error {
-	if len(v) == 0 {
-		return nil
-	}
-	array := value.Array("member")
-
-	for i := range v {
-		av := array.Value()
-		av.String(v[i])
-	}
-	return nil
-}
-
 func awsAwsquery_serializeDocumentStackInstanceFilter(v *types.StackInstanceFilter, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4576,11 +4507,6 @@ func awsAwsquery_serializeOpDocumentCreateStackSetInput(v *CreateStackSetInput, 
 	if len(v.PermissionModel) > 0 {
 		objectKey := object.Key("PermissionModel")
 		objectKey.String(string(v.PermissionModel))
-	}
-
-	if v.StackId != nil {
-		objectKey := object.Key("StackId")
-		objectKey.String(*v.StackId)
 	}
 
 	if v.StackSetName != nil {
@@ -5222,42 +5148,6 @@ func awsAwsquery_serializeOpDocumentGetTemplateSummaryInput(v *GetTemplateSummar
 	if v.TemplateURL != nil {
 		objectKey := object.Key("TemplateURL")
 		objectKey.String(*v.TemplateURL)
-	}
-
-	return nil
-}
-
-func awsAwsquery_serializeOpDocumentImportStacksToStackSetInput(v *ImportStacksToStackSetInput, value query.Value) error {
-	object := value.Object()
-	_ = object
-
-	if len(v.CallAs) > 0 {
-		objectKey := object.Key("CallAs")
-		objectKey.String(string(v.CallAs))
-	}
-
-	if v.OperationId != nil {
-		objectKey := object.Key("OperationId")
-		objectKey.String(*v.OperationId)
-	}
-
-	if v.OperationPreferences != nil {
-		objectKey := object.Key("OperationPreferences")
-		if err := awsAwsquery_serializeDocumentStackSetOperationPreferences(v.OperationPreferences, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.StackIds != nil {
-		objectKey := object.Key("StackIds")
-		if err := awsAwsquery_serializeDocumentStackIdList(v.StackIds, objectKey); err != nil {
-			return err
-		}
-	}
-
-	if v.StackSetName != nil {
-		objectKey := object.Key("StackSetName")
-		objectKey.String(*v.StackSetName)
 	}
 
 	return nil

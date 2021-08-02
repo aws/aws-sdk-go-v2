@@ -211,7 +211,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new ledger in your account in the current Region.</p>",
+                "smithy.api#documentation": "<p>Creates a new ledger in your AWS account in the current Region.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ledgers",
@@ -225,7 +225,7 @@
                 "Name": {
                     "target": "com.amazonaws.qldb#LedgerName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the ledger that you want to create. The name must be unique among all of\n         the ledgers in your account in the current Region.</p>\n         <p>Naming constraints for ledger names are defined in <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming\">Quotas in Amazon QLDB</a>\n         in the <i>Amazon QLDB Developer Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The name of the ledger that you want to create. The name must be unique among all of\n         your ledgers in the current AWS Region.</p>\n         <p>Naming constraints for ledger names are defined in <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming\">Quotas in Amazon QLDB</a>\n         in the <i>Amazon QLDB Developer Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -246,12 +246,6 @@
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
                         "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
-                    }
-                },
-                "KmsKey": {
-                    "target": "com.amazonaws.qldb#KmsKey",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The key in Key Management Service (KMS) to use for encryption of data at rest in the ledger. For\n         more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in\n         the <i>Amazon QLDB Developer Guide</i>.</p>\n         <p>Use one of the following options to specify this parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_OWNED_KMS_KEY</code>: Use an KMS key that is owned and managed by Amazon Web Services\n               on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Undefined</b>: By default, use an Amazon Web Services owned KMS\n               key.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A valid symmetric customer managed KMS key</b>: Use\n               the specified KMS key in your account that you create, own, and manage.</p>\n               <p>Amazon QLDB does not support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>\n         <p>To specify a customer managed KMS key, you can use its key ID, Amazon Resource Name\n         (ARN), alias name, or alias ARN. When using an alias name, prefix it with\n            <code>\"alias/\"</code>. To specify a key in a different account, you must use the key\n         ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n                  <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN:\n               <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in\n         the <i>Key Management Service Developer Guide</i>.</p>"
                     }
                 }
             }
@@ -293,12 +287,6 @@
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
                         "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
-                    }
-                },
-                "KmsKeyArn": {
-                    "target": "com.amazonaws.qldb#Arn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the customer managed KMS key that the ledger uses for encryption at rest. If\n         this parameter is undefined, the ledger uses an Amazon Web Services owned KMS key for encryption.</p>"
                     }
                 }
             }
@@ -482,7 +470,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a ledger, including its state, permissions mode, encryption at\n         rest settings, and when it was created.</p>",
+                "smithy.api#documentation": "<p>Returns information about a ledger, including its state and when it was created.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers/{Name}",
@@ -541,12 +529,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
                     }
-                },
-                "EncryptionDescription": {
-                    "target": "com.amazonaws.qldb#LedgerEncryptionDescription",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Information about the encryption of data at rest in the ledger. This includes the\n         current status, the KMS key, and when the key became inaccessible (in the case of an\n         error).</p>"
-                    }
                 }
             }
         },
@@ -557,25 +539,6 @@
                     "min": 32,
                     "max": 32
                 }
-            }
-        },
-        "com.amazonaws.qldb#EncryptionStatus": {
-            "type": "string",
-            "traits": {
-                "smithy.api#enum": [
-                    {
-                        "value": "ENABLED",
-                        "name": "ENABLED"
-                    },
-                    {
-                        "value": "UPDATING",
-                        "name": "UPDATING"
-                    },
-                    {
-                        "value": "KMS_KEY_INACCESSIBLE",
-                        "name": "KMS_KEY_INACCESSIBLE"
-                    }
-                ]
             }
         },
         "com.amazonaws.qldb#ErrorCause": {
@@ -656,7 +619,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a\n         journal export job to do the following:</p>\n         <ul>\n            <li>\n               <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p>\n            </li>\n            <li>\n               <p>(Optional) Use your customer master key (CMK) in Key Management Service (KMS) for server-side\n               encryption of your exported data.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a\n         journal export job to do the following:</p>\n         <ul>\n            <li>\n               <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p>\n            </li>\n            <li>\n               <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS\n               KMS) for server-side encryption of your exported data.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -958,7 +921,7 @@
                 "ExclusiveEndTime": {
                     "target": "com.amazonaws.qldb#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The exclusive date and time that specifies when the stream ends. If this parameter is\n         undefined, the stream runs indefinitely until you cancel it.</p>"
+                        "smithy.api#documentation": "<p>The exclusive date and time that specifies when the stream ends. If this parameter is\n         blank, the stream runs indefinitely until you cancel it.</p>"
                     }
                 },
                 "RoleArn": {
@@ -1073,7 +1036,7 @@
                 "RoleArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a\n         journal export job to do the following:</p>\n         <ul>\n            <li>\n               <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p>\n            </li>\n            <li>\n               <p>(Optional) Use your customer master key (CMK) in Key Management Service (KMS) for server-side\n               encryption of your exported data.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that grants QLDB permissions for a\n         journal export job to do the following:</p>\n         <ul>\n            <li>\n               <p>Write objects into your Amazon Simple Storage Service (Amazon S3) bucket.</p>\n            </li>\n            <li>\n               <p>(Optional) Use your customer master key (CMK) in AWS Key Management Service (AWS\n               KMS) for server-side encryption of your exported data.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1107,43 +1070,6 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>The configuration settings of the Amazon Kinesis Data Streams destination for an Amazon QLDB journal\n         stream.</p>"
-            }
-        },
-        "com.amazonaws.qldb#KmsKey": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 1600
-                }
-            }
-        },
-        "com.amazonaws.qldb#LedgerEncryptionDescription": {
-            "type": "structure",
-            "members": {
-                "KmsKeyArn": {
-                    "target": "com.amazonaws.qldb#Arn",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the customer managed KMS key that the ledger uses for\n         encryption at rest. If this parameter is undefined, the ledger uses an Amazon Web Services owned KMS key\n         for encryption.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "EncryptionStatus": {
-                    "target": "com.amazonaws.qldb#EncryptionStatus",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The current state of encryption at rest for the ledger. This can be one of the following\n         values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ENABLED</code>: Encryption is fully enabled using the specified key.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UPDATING</code>: The ledger is actively processing the specified key\n               change.</p>\n               <p>Key changes in QLDB are asynchronous. The ledger is fully accessible without any\n               performance impact while the key change is being processed. The amount of time it\n               takes to update a key varies depending on the ledger size.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KMS_KEY_INACCESSIBLE</code>: The specified customer managed KMS key is not\n               accessible, and the ledger is impaired. Either the key was disabled or deleted, or\n               the grants on the key were revoked. When a ledger is impaired, it is not accessible\n               and does not accept any read or write requests.</p>\n               <p>An impaired ledger automatically returns to an active state after you restore the\n               grants on the key, or re-enable the key that was disabled. However, deleting a\n               customer managed KMS key is irreversible. After a key is deleted, you can no longer\n               access the ledgers that are protected with that key, and the data becomes\n               unrecoverable permanently.</p>\n            </li>\n         </ul>",
-                        "smithy.api#required": {}
-                    }
-                },
-                "InaccessibleKmsKeyDateTime": {
-                    "target": "com.amazonaws.qldb#Timestamp",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The date and time, in epoch time format, when the KMS key first became inaccessible,\n         in the case of an error. (Epoch time format is the number of seconds that have elapsed\n         since 12:00:00 AM January 1, 1970 UTC.)</p>\n         <p>This parameter is undefined if the KMS key is accessible.</p>"
-                    }
-                }
-            },
-            "traits": {
-                "smithy.api#documentation": "<p>Information about the encryption of data at rest in an Amazon QLDB ledger. This includes\n         the current status, the key in Key Management Service (KMS), and when the key became inaccessible (in\n         the case of an error).</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in\n         the <i>Amazon QLDB Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.qldb#LedgerList": {
@@ -1316,7 +1242,7 @@
                 "target": "com.amazonaws.qldb#ListJournalS3ExportsResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of journal export job descriptions for all ledgers that are associated\n         with the current account and Region.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple\n         times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns an array of journal export job descriptions for all ledgers that are associated\n         with the current AWS account and Region.</p>\n         <p>This action returns a maximum of <code>MaxResults</code> items, and is paginated so that\n         you can retrieve all the items by calling <code>ListJournalS3Exports</code> multiple\n         times.</p>\n         <p>This action does not return any expired export jobs. For more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/export-journal.request.html#export-journal.request.expiration\">Export job expiration</a> in the <i>Amazon QLDB Developer\n         Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/journal-s3-exports",
@@ -1420,7 +1346,7 @@
                 "JournalS3Exports": {
                     "target": "com.amazonaws.qldb#JournalS3ExportList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of journal export job descriptions for all ledgers that are associated with\n         the current account and Region.</p>"
+                        "smithy.api#documentation": "<p>The array of journal export job descriptions for all ledgers that are associated with\n         the current AWS account and Region.</p>"
                     }
                 },
                 "NextToken": {
@@ -1440,7 +1366,7 @@
                 "target": "com.amazonaws.qldb#ListLedgersResponse"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of ledger summaries that are associated with the current account\n         and Region.</p>\n         <p>This action returns a maximum of 100 items and is paginated so that you can\n         retrieve all the items by calling <code>ListLedgers</code> multiple times.</p>",
+                "smithy.api#documentation": "<p>Returns an array of ledger summaries that are associated with the current AWS account\n         and Region.</p>\n         <p>This action returns a maximum of 100 items and is paginated so that you can\n         retrieve all the items by calling <code>ListLedgers</code> multiple times.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/ledgers",
@@ -1478,7 +1404,7 @@
                 "Ledgers": {
                     "target": "com.amazonaws.qldb#LedgerList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of ledger summaries that are associated with the current account and\n         Region.</p>"
+                        "smithy.api#documentation": "<p>The array of ledger summaries that are associated with the current AWS account and\n         Region.</p>"
                     }
                 },
                 "NextToken": {
@@ -1705,7 +1631,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.qldb#Arn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a symmetric customer master key (CMK) in Key Management Service\n         (KMS). Amazon S3 does not support asymmetric CMKs.</p>\n         <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the\n            <code>ObjectEncryptionType</code>.</p>\n         <p>\n            <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the\n            <code>ObjectEncryptionType</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for a symmetric customer master key (CMK) in AWS Key\n         Management Service (AWS KMS). Amazon S3 does not support asymmetric CMKs.</p>\n         <p>You must provide a <code>KmsKeyArn</code> if you specify <code>SSE_KMS</code> as the\n            <code>ObjectEncryptionType</code>.</p>\n         <p>\n            <code>KmsKeyArn</code> is not required if you specify <code>SSE_S3</code> as the\n            <code>ObjectEncryptionType</code>.</p>"
                     }
                 }
             },
@@ -2166,12 +2092,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
                     }
-                },
-                "KmsKey": {
-                    "target": "com.amazonaws.qldb#KmsKey",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The key in Key Management Service (KMS) to use for encryption of data at rest in the ledger. For\n         more information, see <a href=\"https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html\">Encryption at rest</a> in\n         the <i>Amazon QLDB Developer Guide</i>.</p>\n         <p>Use one of the following options to specify this parameter:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>AWS_OWNED_KMS_KEY</code>: Use an KMS key that is owned and managed by Amazon Web Services\n               on your behalf.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Undefined</b>: Make no changes to the KMS key of the\n               ledger.</p>\n            </li>\n            <li>\n               <p>\n                  <b>A valid symmetric customer managed KMS key</b>: Use\n               the specified KMS key in your account that you create, own, and manage.</p>\n               <p>Amazon QLDB does not support asymmetric keys. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html\">Using symmetric and asymmetric keys</a> in the <i>Key Management Service Developer\n                  Guide</i>.</p>\n            </li>\n         </ul>\n         <p>To specify a customer managed KMS key, you can use its key ID, Amazon Resource Name\n         (ARN), alias name, or alias ARN. When using an alias name, prefix it with\n            <code>\"alias/\"</code>. To specify a key in a different account, you must use the key\n         ARN or alias ARN.</p>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>Key ID: <code>1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Key ARN:\n                  <code>arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias name: <code>alias/ExampleAlias</code>\n               </p>\n            </li>\n            <li>\n               <p>Alias ARN:\n               <code>arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias</code>\n               </p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id\">Key identifiers (KeyId)</a> in\n         the <i>Key Management Service Developer Guide</i>.</p>"
-                    }
                 }
             }
         },
@@ -2206,12 +2126,6 @@
                     "target": "com.amazonaws.qldb#DeletionProtection",
                     "traits": {
                         "smithy.api#documentation": "<p>The flag that prevents a ledger from being deleted by any user. If not provided on\n      ledger creation, this feature is enabled (<code>true</code>) by default.</p>\n         <p>If deletion protection is enabled, you must first disable it before you can delete the\n      ledger. You can disable it by calling the <code>UpdateLedger</code> operation to set the flag to <code>false</code>.</p>"
-                    }
-                },
-                "EncryptionDescription": {
-                    "target": "com.amazonaws.qldb#LedgerEncryptionDescription",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Information about the encryption of data at rest in the ledger. This includes the\n         current status, the KMS key, and when the key became inaccessible (in the case of an\n         error).</p>"
                     }
                 }
             }

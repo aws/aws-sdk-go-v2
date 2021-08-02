@@ -21,13 +21,13 @@ import (
 // bucket. For more information, see Using Amazon S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 // Amazon S3 User Guide. If you are using an identity other than the root user of
-// the account that owns the Outposts bucket, the calling identity must have the
-// PutBucketPolicy permissions on the specified Outposts bucket and belong to the
-// bucket owner's account in order to use this action. If you don't have
+// the AWS account that owns the Outposts bucket, the calling identity must have
+// the PutBucketPolicy permissions on the specified Outposts bucket and belong to
+// the bucket owner's account in order to use this action. If you don't have
 // PutBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If you
 // have the correct permissions, but you're not using an identity that belongs to
 // the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error. As
-// a security precaution, the root user of the account that owns a bucket can
+// a security precaution, the root user of the AWS account that owns a bucket can
 // always use this action, even if the policy explicitly denies the root user the
 // ability to perform this action. For more information about bucket policies, see
 // Using Bucket Policies and User Policies
@@ -65,15 +65,15 @@ func (c *Client) PutBucketPolicy(ctx context.Context, params *PutBucketPolicyInp
 
 type PutBucketPolicyInput struct {
 
-	// The account ID of the Outposts bucket.
+	// The AWS account ID of the Outposts bucket.
 	//
 	// This member is required.
 	AccountId *string
 
 	// Specifies the bucket. For using this parameter with Amazon S3 on Outposts with
 	// the REST API, you must specify the name and the x-amz-outpost-id as well. For
-	// using this parameter with S3 on Outposts with the Amazon Web Services SDK and
-	// CLI, you must specify the ARN of the bucket accessed in the format
+	// using this parameter with S3 on Outposts with the AWS SDK and CLI, you must
+	// specify the ARN of the bucket accessed in the format
 	// arn:aws:s3-outposts:::outpost//bucket/. For example, to access the bucket
 	// reports through outpost my-outpost owned by account 123456789012 in Region
 	// us-west-2, use the URL encoding of

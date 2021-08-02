@@ -13213,55 +13213,6 @@ func awsRestjson1_deserializeDocumentAudioDescription(v **types.AudioDescription
 	return nil
 }
 
-func awsRestjson1_deserializeDocumentAudioHlsRenditionSelection(v **types.AudioHlsRenditionSelection, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.AudioHlsRenditionSelection
-	if *v == nil {
-		sv = &types.AudioHlsRenditionSelection{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "groupId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
-				}
-				sv.GroupId = ptr.String(jtv)
-			}
-
-		case "name":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected __stringMin1 to be of type string, got %T instead", value)
-				}
-				sv.Name = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
 func awsRestjson1_deserializeDocumentAudioLanguageSelection(v **types.AudioLanguageSelection, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13568,11 +13519,6 @@ func awsRestjson1_deserializeDocumentAudioSelectorSettings(v **types.AudioSelect
 
 	for key, value := range shape {
 		switch key {
-		case "audioHlsRenditionSelection":
-			if err := awsRestjson1_deserializeDocumentAudioHlsRenditionSelection(&sv.AudioHlsRenditionSelection, value); err != nil {
-				return err
-			}
-
 		case "audioLanguageSelection":
 			if err := awsRestjson1_deserializeDocumentAudioLanguageSelection(&sv.AudioLanguageSelection, value); err != nil {
 				return err
@@ -28214,15 +28160,6 @@ func awsRestjson1_deserializeDocumentWebvttDestinationSettings(v **types.WebvttD
 
 	for key, value := range shape {
 		switch key {
-		case "styleControl":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected WebvttDestinationStyleControl to be of type string, got %T instead", value)
-				}
-				sv.StyleControl = types.WebvttDestinationStyleControl(jtv)
-			}
-
 		default:
 			_, _ = key, value
 

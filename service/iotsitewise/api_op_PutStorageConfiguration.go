@@ -4,7 +4,6 @@ package iotsitewise
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
@@ -12,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures storage settings for IoT SiteWise. Exporting data to Amazon S3 is
-// currently in preview release and is subject to change. We recommend that you use
-// this feature only with test data, and not in production environments.
+// Configures storage settings for IoT SiteWise.
 func (c *Client) PutStorageConfiguration(ctx context.Context, params *PutStorageConfigurationInput, optFns ...func(*Options)) (*PutStorageConfigurationOutput, error) {
 	if params == nil {
 		params = &PutStorageConfigurationInput{}
@@ -126,9 +123,6 @@ func (c *Client) addOperationPutStorageConfigurationMiddlewares(stack *middlewar
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addEndpointPrefix_opPutStorageConfigurationMiddleware(stack); err != nil {
-		return err
-	}
 	if err = addOpPutStorageConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -145,33 +139,6 @@ func (c *Client) addOperationPutStorageConfigurationMiddlewares(stack *middlewar
 		return err
 	}
 	return nil
-}
-
-type endpointPrefix_opPutStorageConfigurationMiddleware struct {
-}
-
-func (*endpointPrefix_opPutStorageConfigurationMiddleware) ID() string {
-	return "EndpointHostPrefix"
-}
-
-func (m *endpointPrefix_opPutStorageConfigurationMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
-		return next.HandleSerialize(ctx, in)
-	}
-
-	req, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
-	}
-
-	req.URL.Host = "api." + req.URL.Host
-
-	return next.HandleSerialize(ctx, in)
-}
-func addEndpointPrefix_opPutStorageConfigurationMiddleware(stack *middleware.Stack) error {
-	return stack.Serialize.Insert(&endpointPrefix_opPutStorageConfigurationMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opPutStorageConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {

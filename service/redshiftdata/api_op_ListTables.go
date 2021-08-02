@@ -17,14 +17,14 @@ import (
 // page through the table list. Depending on the authorization method, use one of
 // the following combinations of request parameters:
 //
-// * Secrets Manager - specify
-// the Amazon Resource Name (ARN) of the secret, the database name, and the cluster
-// identifier that matches the cluster in the secret.
+// * AWS Secrets Manager -
+// specify the Amazon Resource Name (ARN) of the secret and the cluster identifier
+// that matches the cluster in the secret.
 //
-// * Temporary credentials -
-// specify the cluster identifier, the database name, and the database user name.
-// Permission to call the redshift:GetClusterCredentials operation is required to
-// use this method.
+// * Temporary credentials - specify the
+// cluster identifier, the database name, and the database user name. Permission to
+// call the redshift:GetClusterCredentials operation is required to use this
+// method.
 func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns ...func(*Options)) (*ListTablesOutput, error) {
 	if params == nil {
 		params = &ListTablesInput{}
@@ -43,7 +43,7 @@ func (c *Client) ListTables(ctx context.Context, params *ListTablesInput, optFns
 type ListTablesInput struct {
 
 	// The cluster identifier. This parameter is required when authenticating using
-	// either Secrets Manager or temporary credentials.
+	// either AWS Secrets Manager or temporary credentials.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -84,7 +84,7 @@ type ListTablesInput struct {
 	SchemaPattern *string
 
 	// The name or ARN of the secret that enables access to the database. This
-	// parameter is required when authenticating using Secrets Manager.
+	// parameter is required when authenticating using AWS Secrets Manager.
 	SecretArn *string
 
 	// A pattern to filter results by table name. Within a table pattern, "%" means

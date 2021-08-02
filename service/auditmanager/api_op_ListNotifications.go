@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of all Audit Manager notifications.
+// Returns a list of all AWS Audit Manager notifications.
 func (c *Client) ListNotifications(ctx context.Context, params *ListNotificationsInput, optFns ...func(*Options)) (*ListNotificationsOutput, error) {
 	if params == nil {
 		params = &ListNotificationsInput{}

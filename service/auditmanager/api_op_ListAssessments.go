@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of current and past assessments from Audit Manager.
+// Returns a list of current and past assessments from AWS Audit Manager.
 func (c *Client) ListAssessments(ctx context.Context, params *ListAssessmentsInput, optFns ...func(*Options)) (*ListAssessmentsOutput, error) {
 	if params == nil {
 		params = &ListAssessmentsInput{}

@@ -865,13 +865,6 @@ func awsRestjson1_serializeOpDocumentListJobsInput(v *ListJobsInput, value smith
 		ok.String(*v.ArrayJobId)
 	}
 
-	if v.Filters != nil {
-		ok := object.Key("filters")
-		if err := awsRestjson1_serializeDocumentListJobsFilterList(v.Filters, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.JobQueue != nil {
 		ok := object.Key("jobQueue")
 		ok.String(*v.JobQueue)
@@ -2233,25 +2226,6 @@ func awsRestjson1_serializeDocumentKeyValuePair(v *types.KeyValuePair, value smi
 	return nil
 }
 
-func awsRestjson1_serializeDocumentKeyValuesPair(v *types.KeyValuesPair, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Name != nil {
-		ok := object.Key("name")
-		ok.String(*v.Name)
-	}
-
-	if v.Values != nil {
-		ok := object.Key("values")
-		if err := awsRestjson1_serializeDocumentStringList(v.Values, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
 func awsRestjson1_serializeDocumentLaunchTemplateSpecification(v *types.LaunchTemplateSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2312,19 +2286,6 @@ func awsRestjson1_serializeDocumentLinuxParameters(v *types.LinuxParameters, val
 		}
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeDocumentListJobsFilterList(v []types.KeyValuesPair, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsRestjson1_serializeDocumentKeyValuesPair(&v[i], av); err != nil {
-			return err
-		}
-	}
 	return nil
 }
 

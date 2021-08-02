@@ -31,13 +31,13 @@ type CreateTemplateAliasInput struct {
 
 	// The name that you want to give to the template alias that you're creating. Don't
 	// start the alias name with the $ character. Alias names that start with $ are
-	// reserved by Amazon QuickSight.
+	// reserved by QuickSight.
 	//
 	// This member is required.
 	AliasName *string
 
-	// The ID of the Amazon Web Services account; that contains the template that you
-	// creating an alias for.
+	// The ID of the AWS account that contains the template that you creating an alias
+	// for.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -57,7 +57,7 @@ type CreateTemplateAliasInput struct {
 
 type CreateTemplateAliasOutput struct {
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

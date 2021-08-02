@@ -15,10 +15,10 @@ import (
 // associate a specified VPC with a hosted zone that was created by a different
 // account. You must use the account that created the hosted zone to submit a
 // DeleteVPCAssociationAuthorization request. Sending this request only prevents
-// the account that created the VPC from associating the VPC with the Amazon Route
-// 53 hosted zone in the future. If the VPC is already associated with the hosted
-// zone, DeleteVPCAssociationAuthorization won't disassociate the VPC from the
-// hosted zone. If you want to delete an existing association, use
+// the AWS account that created the VPC from associating the VPC with the Amazon
+// Route 53 hosted zone in the future. If the VPC is already associated with the
+// hosted zone, DeleteVPCAssociationAuthorization won't disassociate the VPC from
+// the hosted zone. If you want to delete an existing association, use
 // DisassociateVPCFromHostedZone.
 func (c *Client) DeleteVPCAssociationAuthorization(ctx context.Context, params *DeleteVPCAssociationAuthorizationInput, optFns ...func(*Options)) (*DeleteVPCAssociationAuthorizationOutput, error) {
 	if params == nil {
@@ -36,20 +36,20 @@ func (c *Client) DeleteVPCAssociationAuthorization(ctx context.Context, params *
 }
 
 // A complex type that contains information about the request to remove
-// authorization to associate a VPC that was created by one account with a hosted
-// zone that was created with a different account.
+// authorization to associate a VPC that was created by one AWS account with a
+// hosted zone that was created with a different AWS account.
 type DeleteVPCAssociationAuthorizationInput struct {
 
-	// When removing authorization to associate a VPC that was created by one account
-	// with a hosted zone that was created with a different account, the ID of the
-	// hosted zone.
+	// When removing authorization to associate a VPC that was created by one AWS
+	// account with a hosted zone that was created with a different AWS account, the ID
+	// of the hosted zone.
 	//
 	// This member is required.
 	HostedZoneId *string
 
-	// When removing authorization to associate a VPC that was created by one account
-	// with a hosted zone that was created with a different account, a complex type
-	// that includes the ID and region of the VPC.
+	// When removing authorization to associate a VPC that was created by one AWS
+	// account with a hosted zone that was created with a different AWS account, a
+	// complex type that includes the ID and region of the VPC.
 	//
 	// This member is required.
 	VPC *types.VPC

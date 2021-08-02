@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes all Amazon QuickSight customizations in this Region; for the specified
-// Amazon Web Services account; and QuickSight namespace.
+// Deletes all Amazon QuickSight customizations in this AWS Region for the
+// specified AWS account and QuickSight namespace.
 func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteAccountCustomizationInput, optFns ...func(*Options)) (*DeleteAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &DeleteAccountCustomizationInput{}
@@ -29,8 +29,8 @@ func (c *Client) DeleteAccountCustomization(ctx context.Context, params *DeleteA
 
 type DeleteAccountCustomizationInput struct {
 
-	// The ID for the Amazon Web Services account; that you want to delete QuickSight
-	// customizations from in this Region;.
+	// The ID for the AWS account that you want to delete QuickSight customizations
+	// from in this AWS Region.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -43,7 +43,7 @@ type DeleteAccountCustomizationInput struct {
 
 type DeleteAccountCustomizationOutput struct {
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -46,21 +46,9 @@ type DescribeDBClustersInput struct {
 	// A filter that specifies one or more DB clusters to describe. Supported
 	// filters:
 	//
-	// * clone-group-id - Accepts clone group identifiers. The results list
-	// will only include information about the DB clusters associated with these clone
-	// groups.
-	//
 	// * db-cluster-id - Accepts DB cluster identifiers and DB cluster Amazon
 	// Resource Names (ARNs). The results list will only include information about the
 	// DB clusters identified by these ARNs.
-	//
-	// * domain - Accepts Active Directory
-	// directory IDs. The results list will only include information about the DB
-	// clusters associated with these domains.
-	//
-	// * engine - Accepts engine names. The
-	// results list will only include information about the DB clusters for these
-	// engines.
 	Filters []types.Filter
 
 	// Optional Boolean parameter that specifies whether the output includes

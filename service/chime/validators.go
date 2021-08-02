@@ -2910,46 +2910,6 @@ func (m *validateOpSendChannelMessage) HandleInitialize(ctx context.Context, in 
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpStartMeetingTranscription struct {
-}
-
-func (*validateOpStartMeetingTranscription) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpStartMeetingTranscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*StartMeetingTranscriptionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpStartMeetingTranscriptionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
-type validateOpStopMeetingTranscription struct {
-}
-
-func (*validateOpStopMeetingTranscription) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpStopMeetingTranscription) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*StopMeetingTranscriptionInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpStopMeetingTranscriptionInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpTagAttendee struct {
 }
 
@@ -4070,14 +4030,6 @@ func addOpSendChannelMessageValidationMiddleware(stack *middleware.Stack) error 
 	return stack.Initialize.Add(&validateOpSendChannelMessage{}, middleware.After)
 }
 
-func addOpStartMeetingTranscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpStartMeetingTranscription{}, middleware.After)
-}
-
-func addOpStopMeetingTranscriptionValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpStopMeetingTranscription{}, middleware.After)
-}
-
 func addOpTagAttendeeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagAttendee{}, middleware.After)
 }
@@ -4344,42 +4296,6 @@ func validateEmergencyCallingConfiguration(v *types.EmergencyCallingConfiguratio
 	}
 }
 
-func validateEngineTranscribeMedicalSettings(v *types.EngineTranscribeMedicalSettings) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "EngineTranscribeMedicalSettings"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
-	if len(v.Specialty) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Specialty"))
-	}
-	if len(v.Type) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("Type"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateEngineTranscribeSettings(v *types.EngineTranscribeSettings) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "EngineTranscribeSettings"}
-	if len(v.LanguageCode) == 0 {
-		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateGeoMatchParams(v *types.GeoMatchParams) error {
 	if v == nil {
 		return nil
@@ -4515,28 +4431,6 @@ func validateTelephonySettings(v *types.TelephonySettings) error {
 	}
 	if v.SMS == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SMS"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateTranscriptionConfiguration(v *types.TranscriptionConfiguration) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "TranscriptionConfiguration"}
-	if v.EngineTranscribeSettings != nil {
-		if err := validateEngineTranscribeSettings(v.EngineTranscribeSettings); err != nil {
-			invalidParams.AddNested("EngineTranscribeSettings", err.(smithy.InvalidParamsError))
-		}
-	}
-	if v.EngineTranscribeMedicalSettings != nil {
-		if err := validateEngineTranscribeMedicalSettings(v.EngineTranscribeMedicalSettings); err != nil {
-			invalidParams.AddNested("EngineTranscribeMedicalSettings", err.(smithy.InvalidParamsError))
-		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -7202,43 +7096,6 @@ func validateOpSendChannelMessageInput(v *SendChannelMessageInput) error {
 	}
 	if v.ClientRequestToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClientRequestToken"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpStartMeetingTranscriptionInput(v *StartMeetingTranscriptionInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StartMeetingTranscriptionInput"}
-	if v.MeetingId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
-	}
-	if v.TranscriptionConfiguration == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("TranscriptionConfiguration"))
-	} else if v.TranscriptionConfiguration != nil {
-		if err := validateTranscriptionConfiguration(v.TranscriptionConfiguration); err != nil {
-			invalidParams.AddNested("TranscriptionConfiguration", err.(smithy.InvalidParamsError))
-		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpStopMeetingTranscriptionInput(v *StopMeetingTranscriptionInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "StopMeetingTranscriptionInput"}
-	if v.MeetingId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MeetingId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

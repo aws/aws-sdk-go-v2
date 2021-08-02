@@ -6,7 +6,7 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// An object representing an Batch array job.
+// An object representing an AWS Batch array job.
 type ArrayProperties struct {
 
 	// The size of the array job.
@@ -56,8 +56,8 @@ type AttemptContainerDetail struct {
 	ExitCode int32
 
 	// The name of the CloudWatch Logs log stream associated with the container. The
-	// log group for Batch jobs is /aws/batch/job. Each container attempt receives a
-	// log stream name when they reach the RUNNING status.
+	// log group for AWS Batch jobs is /aws/batch/job. Each container attempt receives
+	// a log stream name when they reach the RUNNING status.
 	LogStreamName *string
 
 	// The network interfaces associated with the job attempt.
@@ -97,7 +97,7 @@ type AttemptDetail struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing an Batch compute environment.
+// An object representing an AWS Batch compute environment.
 type ComputeEnvironmentDetail struct {
 
 	// The Amazon Resource Name (ARN) of the compute environment.
@@ -120,23 +120,23 @@ type ComputeEnvironmentDetail struct {
 	// The compute resources defined for the compute environment. For more information,
 	// see Compute Environments
 	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
-	// in the Batch User Guide.
+	// in the AWS Batch User Guide.
 	ComputeResources *ComputeResource
 
-	// The service role associated with the compute environment that allows Batch to
-	// make calls to Amazon Web Services API operations on your behalf. For more
-	// information, see Batch service IAM role
+	// The service role associated with the compute environment that allows AWS Batch
+	// to make calls to AWS API operations on your behalf. For more information, see
+	// AWS Batch service IAM role
 	// (https://docs.aws.amazon.com/batch/latest/userguide/service_IAM_role.html) in
-	// the Batch User Guide.
+	// the AWS Batch User Guide.
 	ServiceRole *string
 
 	// The state of the compute environment. The valid values are ENABLED or DISABLED.
-	// If the state is ENABLED, then the Batch scheduler can attempt to place jobs from
-	// an associated job queue on the compute resources within the environment. If the
-	// compute environment is managed, then it can scale its instances out or in
+	// If the state is ENABLED, then the AWS Batch scheduler can attempt to place jobs
+	// from an associated job queue on the compute resources within the environment. If
+	// the compute environment is managed, then it can scale its instances out or in
 	// automatically, based on the job queue demand. If the state is DISABLED, then the
-	// Batch scheduler doesn't attempt to place jobs within the environment. Jobs in a
-	// STARTING or RUNNING state continue to progress normally. Managed compute
+	// AWS Batch scheduler doesn't attempt to place jobs within the environment. Jobs
+	// in a STARTING or RUNNING state continue to progress normally. Managed compute
 	// environments in the DISABLED state don't scale out. However, they scale in to
 	// minvCpus value after instances become idle.
 	State CEState
@@ -154,7 +154,7 @@ type ComputeEnvironmentDetail struct {
 	// The type of the compute environment: MANAGED or UNMANAGED. For more information,
 	// see Compute Environments
 	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
-	// in the Batch User Guide.
+	// in the AWS Batch User Guide.
 	Type CEType
 
 	noSmithyDocumentSerde
@@ -168,7 +168,7 @@ type ComputeEnvironmentDetail struct {
 // queue. All of the compute environments must be either EC2 (EC2 or SPOT) or
 // Fargate (FARGATE or FARGATE_SPOT); EC2 and Fargate compute environments can't be
 // mixed. All compute environments that are associated with a job queue must share
-// the same architecture. Batch doesn't support mixing compute environment
+// the same architecture. AWS Batch doesn't support mixing compute environment
 // architecture types in a single job queue.
 type ComputeEnvironmentOrder struct {
 
@@ -188,25 +188,25 @@ type ComputeEnvironmentOrder struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing an Batch compute resource. For more information, see
+// An object representing an AWS Batch compute resource. For more information, see
 // Compute Environments
 // (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
-// in the Batch User Guide.
+// in the AWS Batch User Guide.
 type ComputeResource struct {
 
 	// The maximum number of Amazon EC2 vCPUs that a compute environment can reach.
 	// With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation
-	// strategies, Batch might need to exceed maxvCpus to meet your capacity
-	// requirements. In this event, Batch never exceeds maxvCpus by more than a single
-	// instance. For example, no more than a single instance from among those specified
-	// in your compute environment is allocated.
+	// strategies, AWS Batch might need to exceed maxvCpus to meet your capacity
+	// requirements. In this event, AWS Batch never exceeds maxvCpus by more than a
+	// single instance. For example, no more than a single instance from among those
+	// specified in your compute environment is allocated.
 	//
 	// This member is required.
 	MaxvCpus int32
 
-	// The VPC subnets where the compute resources are launched. These subnets must be
-	// within the same VPC. Fargate compute resources can contain up to 16 subnets. For
-	// more information, see VPCs and Subnets
+	// The VPC subnets into which the compute resources are launched. These subnets
+	// must be within the same VPC. Fargate compute resources can contain up to 16
+	// subnets. For more information, see VPCs and Subnets
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Subnets.html) in the
 	// Amazon VPC User Guide.
 	//
@@ -216,11 +216,11 @@ type ComputeResource struct {
 	// The type of compute environment: EC2, SPOT, FARGATE, or FARGATE_SPOT. For more
 	// information, see Compute Environments
 	// (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
-	// in the Batch User Guide. If you choose SPOT, you must also specify an Amazon EC2
-	// Spot Fleet role with the spotIamFleetRole parameter. For more information, see
-	// Amazon EC2 Spot Fleet role
+	// in the AWS Batch User Guide. If you choose SPOT, you must also specify an Amazon
+	// EC2 Spot Fleet role with the spotIamFleetRole parameter. For more information,
+	// see Amazon EC2 Spot Fleet role
 	// (https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html) in
-	// the Batch User Guide.
+	// the AWS Batch User Guide.
 	//
 	// This member is required.
 	Type CRType
@@ -231,28 +231,29 @@ type ComputeResource struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html).
 	// For more information, see Allocation Strategies
 	// (https://docs.aws.amazon.com/batch/latest/userguide/allocation-strategies.html)
-	// in the Batch User Guide. This parameter isn't applicable to jobs that are
-	// running on Fargate resources, and shouldn't be specified. BEST_FIT (default)
-	// Batch selects an instance type that best fits the needs of the jobs with a
-	// preference for the lowest-cost instance type. If additional instances of the
-	// selected instance type aren't available, Batch waits for the additional
-	// instances to be available. If there aren't enough instances available, or if the
-	// user is reaching Amazon EC2 service limits
+	// in the AWS Batch User Guide. This parameter isn't applicable to jobs running on
+	// Fargate resources, and shouldn't be specified. BEST_FIT (default) AWS Batch
+	// selects an instance type that best fits the needs of the jobs with a preference
+	// for the lowest-cost instance type. If additional instances of the selected
+	// instance type aren't available, AWS Batch waits for the additional instances to
+	// be available. If there aren't enough instances available, or if the user is
+	// hitting Amazon EC2 service limits
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-resource-limits.html)
 	// then additional jobs aren't run until the currently running jobs have completed.
 	// This allocation strategy keeps costs lower but can limit scaling. If you are
 	// using Spot Fleets with BEST_FIT then the Spot Fleet IAM Role must be specified.
-	// BEST_FIT_PROGRESSIVE Batch will select additional instance types that are large
-	// enough to meet the requirements of the jobs in the queue, with a preference for
-	// instance types with a lower cost per unit vCPU. If additional instances of the
-	// previously selected instance types aren't available, Batch will select new
-	// instance types. SPOT_CAPACITY_OPTIMIZED Batch will select one or more instance
-	// types that are large enough to meet the requirements of the jobs in the queue,
-	// with a preference for instance types that are less likely to be interrupted.
-	// This allocation strategy is only available for Spot Instance compute resources.
-	// With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED strategies, Batch
-	// might need to go above maxvCpus to meet your capacity requirements. In this
-	// event, Batch never exceeds maxvCpus by more than a single instance.
+	// BEST_FIT_PROGRESSIVE AWS Batch will select additional instance types that are
+	// large enough to meet the requirements of the jobs in the queue, with a
+	// preference for instance types with a lower cost per unit vCPU. If additional
+	// instances of the previously selected instance types aren't available, AWS Batch
+	// will select new instance types. SPOT_CAPACITY_OPTIMIZED AWS Batch will select
+	// one or more instance types that are large enough to meet the requirements of the
+	// jobs in the queue, with a preference for instance types that are less likely to
+	// be interrupted. This allocation strategy is only available for Spot Instance
+	// compute resources. With both BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED
+	// strategies, AWS Batch might need to go above maxvCpus to meet your capacity
+	// requirements. In this event, AWS Batch never exceeds maxvCpus by more than a
+	// single instance.
 	AllocationStrategy CRAllocationStrategy
 
 	// The maximum percentage that a Spot Instance price can be when compared with the
@@ -261,37 +262,37 @@ type ComputeResource struct {
 	// than 20% of the current On-Demand price for that Amazon EC2 instance. You always
 	// pay the lowest (market) price and never more than your maximum percentage. If
 	// you leave this field empty, the default value is 100% of the On-Demand price.
-	// This parameter isn't applicable to jobs that are running on Fargate resources,
-	// and shouldn't be specified.
+	// This parameter isn't applicable to jobs running on Fargate resources, and
+	// shouldn't be specified.
 	BidPercentage int32
 
-	// The desired number of Amazon EC2 vCPUS in the compute environment. Batch
+	// The desired number of Amazon EC2 vCPUS in the compute environment. AWS Batch
 	// modifies this value between the minimum and maximum values, based on job queue
-	// demand. This parameter isn't applicable to jobs that are running on Fargate
-	// resources, and shouldn't be specified.
+	// demand. This parameter isn't applicable to jobs running on Fargate resources,
+	// and shouldn't be specified.
 	DesiredvCpus int32
 
 	// Provides information used to select Amazon Machine Images (AMIs) for EC2
 	// instances in the compute environment. If Ec2Configuration isn't specified, the
-	// default is ECS_AL1. This parameter isn't applicable to jobs that are running on
-	// Fargate resources, and shouldn't be specified.
+	// default is ECS_AL1. This parameter isn't applicable to jobs running on Fargate
+	// resources, and shouldn't be specified.
 	Ec2Configuration []Ec2Configuration
 
 	// The Amazon EC2 key pair that's used for instances launched in the compute
 	// environment. You can use this key pair to log in to your instances with SSH.
-	// This parameter isn't applicable to jobs that are running on Fargate resources,
-	// and shouldn't be specified.
+	// This parameter isn't applicable to jobs running on Fargate resources, and
+	// shouldn't be specified.
 	Ec2KeyPair *string
 
 	// The Amazon Machine Image (AMI) ID used for instances launched in the compute
 	// environment. This parameter is overridden by the imageIdOverride member of the
-	// Ec2Configuration structure. This parameter isn't applicable to jobs that are
-	// running on Fargate resources, and shouldn't be specified. The AMI that you
-	// choose for a compute environment must match the architecture of the instance
-	// types that you intend to use for that compute environment. For example, if your
-	// compute environment uses A1 instance types, the compute resource AMI that you
-	// choose must support ARM instances. Amazon ECS vends both x86 and ARM versions of
-	// the Amazon ECS-optimized Amazon Linux 2 AMI. For more information, see Amazon
+	// Ec2Configuration structure. This parameter isn't applicable to jobs running on
+	// Fargate resources, and shouldn't be specified. The AMI that you choose for a
+	// compute environment must match the architecture of the instance types that you
+	// intend to use for that compute environment. For example, if your compute
+	// environment uses A1 instance types, the compute resource AMI that you choose
+	// must support ARM instances. Amazon ECS vends both x86 and ARM versions of the
+	// Amazon ECS-optimized Amazon Linux 2 AMI. For more information, see Amazon
 	// ECS-optimized Amazon Linux 2 AMI
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#ecs-optimized-ami-linux-variants.html)
 	// in the Amazon Elastic Container Service Developer Guide.
@@ -306,8 +307,8 @@ type ComputeResource struct {
 	// arn:aws:iam:::instance-profile/ecsInstanceRole . For more information, see
 	// Amazon ECS Instance Role
 	// (https://docs.aws.amazon.com/batch/latest/userguide/instance_IAM_role.html) in
-	// the Batch User Guide. This parameter isn't applicable to jobs that are running
-	// on Fargate resources, and shouldn't be specified.
+	// the AWS Batch User Guide. This parameter isn't applicable to jobs running on
+	// Fargate resources, and shouldn't be specified.
 	InstanceRole *string
 
 	// The instances types that can be launched. You can specify instance families to
@@ -315,13 +316,13 @@ type ComputeResource struct {
 	// can specify specific sizes within a family (such as c5.8xlarge). You can also
 	// choose optimal to select instance types (from the C4, M4, and R4 instance
 	// families) that match the demand of your job queues. This parameter isn't
-	// applicable to jobs that are running on Fargate resources, and shouldn't be
-	// specified. When you create a compute environment, the instance types that you
-	// select for the compute environment must share the same architecture. For
-	// example, you can't mix x86 and ARM instances in the same compute environment.
-	// Currently, optimal uses instance types from the C4, M4, and R4 instance
-	// families. In Regions that don't have instance types from those instance
-	// families, instance types from the C5, M5. and R5 instance families are used.
+	// applicable to jobs running on Fargate resources, and shouldn't be specified.
+	// When you create a compute environment, the instance types that you select for
+	// the compute environment must share the same architecture. For example, you can't
+	// mix x86 and ARM instances in the same compute environment. Currently, optimal
+	// uses instance types from the C4, M4, and R4 instance families. In Regions that
+	// don't have instance types from those instance families, instance types from the
+	// C5, M5. and R5 instance families are used.
 	InstanceTypes []string
 
 	// The launch template to use for your compute resources. Any other compute
@@ -330,13 +331,13 @@ type ComputeResource struct {
 	// launch template ID or launch template name in the request, but not both. For
 	// more information, see Launch Template Support
 	// (https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html) in
-	// the Batch User Guide. This parameter isn't applicable to jobs that are running
-	// on Fargate resources, and shouldn't be specified.
+	// the AWS Batch User Guide. This parameter isn't applicable to jobs running on
+	// Fargate resources, and shouldn't be specified.
 	LaunchTemplate *LaunchTemplateSpecification
 
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain (even
 	// if the compute environment is DISABLED). This parameter isn't applicable to jobs
-	// that are running on Fargate resources, and shouldn't be specified.
+	// running on Fargate resources, and shouldn't be specified.
 	MinvCpus int32
 
 	// The Amazon EC2 placement group to associate with your compute resources. If you
@@ -347,16 +348,16 @@ type ComputeResource struct {
 	// For more information, see Placement Groups
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/placement-groups.html) in
 	// the Amazon EC2 User Guide for Linux Instances. This parameter isn't applicable
-	// to jobs that are running on Fargate resources, and shouldn't be specified.
+	// to jobs running on Fargate resources, and shouldn't be specified.
 	PlacementGroup *string
 
 	// The Amazon EC2 security groups associated with instances launched in the compute
 	// environment. One or more security groups must be specified, either in
 	// securityGroupIds or using a launch template referenced in launchTemplate. This
-	// parameter is required for jobs that are running on Fargate resources and must
-	// contain at least one security group. Fargate doesn't support launch templates.
-	// If security groups are specified using both securityGroupIds and launchTemplate,
-	// the values in securityGroupIds are used.
+	// parameter is required for jobs running on Fargate resources and must contain at
+	// least one security group. Fargate doesn't support launch templates. If security
+	// groups are specified using both securityGroupIds and launchTemplate, the values
+	// in securityGroupIds is used.
 	SecurityGroupIds []string
 
 	// The Amazon Resource Name (ARN) of the Amazon EC2 Spot Fleet IAM role applied to
@@ -364,26 +365,26 @@ type ComputeResource struct {
 	// to BEST_FIT or if the allocation strategy isn't specified. For more information,
 	// see Amazon EC2 Spot Fleet Role
 	// (https://docs.aws.amazon.com/batch/latest/userguide/spot_fleet_IAM_role.html) in
-	// the Batch User Guide. This parameter isn't applicable to jobs that are running
-	// on Fargate resources, and shouldn't be specified. To tag your Spot Instances on
+	// the AWS Batch User Guide. This parameter isn't applicable to jobs running on
+	// Fargate resources, and shouldn't be specified. To tag your Spot Instances on
 	// creation, the Spot Fleet IAM role specified here must use the newer
 	// AmazonEC2SpotFleetTaggingRole managed policy. The previously recommended
 	// AmazonEC2SpotFleetRole managed policy doesn't have the required permissions to
 	// tag Spot Instances. For more information, see Spot Instances not tagged on
 	// creation
 	// (https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#spot-instance-no-tag)
-	// in the Batch User Guide.
+	// in the AWS Batch User Guide.
 	SpotIamFleetRole *string
 
 	// Key-value pair tags to be applied to EC2 resources that are launched in the
-	// compute environment. For Batch, these take the form of "String1": "String2",
+	// compute environment. For AWS Batch, these take the form of "String1": "String2",
 	// where String1 is the tag key and String2 is the tag value−for example, { "Name":
-	// "Batch Instance - C4OnDemand" }. This is helpful for recognizing your Batch
-	// instances in the Amazon EC2 console. These tags can't be updated or removed
-	// after the compute environment is created.Aany changes to these tags require that
-	// you create a new compute environment and remove the old compute environment.
-	// These tags aren't seen when using the Batch ListTagsForResource API operation.
-	// This parameter isn't applicable to jobs that are running on Fargate resources,
+	// "AWS Batch Instance - C4OnDemand" }. This is helpful for recognizing your AWS
+	// Batch instances in the Amazon EC2 console. These tags can't be updated or
+	// removed after the compute environment has been created; any changes require
+	// creating a new compute environment and removing the old compute environment.
+	// These tags aren't seen when using the AWS Batch ListTagsForResource API
+	// operation. This parameter isn't applicable to jobs running on Fargate resources,
 	// and shouldn't be specified.
 	Tags map[string]string
 
@@ -393,24 +394,25 @@ type ComputeResource struct {
 // An object representing the attributes of a compute environment that can be
 // updated. For more information, see Compute Environments
 // (https://docs.aws.amazon.com/batch/latest/userguide/compute_environments.html)
-// in the Batch User Guide.
+// in the AWS Batch User Guide.
 type ComputeResourceUpdate struct {
 
 	// The desired number of Amazon EC2 vCPUS in the compute environment. This
-	// parameter isn't applicable to jobs that are running on Fargate resources, and
-	// shouldn't be specified.
+	// parameter isn't applicable to jobs running on Fargate resources, and shouldn't
+	// be specified.
 	DesiredvCpus int32
 
 	// The maximum number of Amazon EC2 vCPUs that an environment can reach. With both
-	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies, Batch
-	// might need to exceed maxvCpus to meet your capacity requirements. In this event,
-	// Batch never exceeds maxvCpus by more than a single instance. That is, no more
-	// than a single instance from among those specified in your compute environment.
+	// BEST_FIT_PROGRESSIVE and SPOT_CAPACITY_OPTIMIZED allocation strategies, AWS
+	// Batch might need to exceed maxvCpus to meet your capacity requirements. In this
+	// event, AWS Batch never exceeds maxvCpus by more than a single instance. That is,
+	// no more than a single instance from among those specified in your compute
+	// environment.
 	MaxvCpus int32
 
 	// The minimum number of Amazon EC2 vCPUs that an environment should maintain. This
-	// parameter isn't applicable to jobs that are running on Fargate resources, and
-	// shouldn't be specified.
+	// parameter isn't applicable to jobs running on Fargate resources, and shouldn't
+	// be specified.
 	MinvCpus int32
 
 	// The Amazon EC2 security groups associated with instances launched in the compute
@@ -420,7 +422,7 @@ type ComputeResourceUpdate struct {
 	// specified and no change is made.
 	SecurityGroupIds []string
 
-	// The VPC subnets where the compute resources are launched. Fargate compute
+	// The VPC subnets that the compute resources are launched into. Fargate compute
 	// resources can contain up to 16 subnets. Providing an empty list will be handled
 	// as if this parameter wasn't specified and no change is made. This can't be
 	// specified for EC2 compute resources. For more information, see VPCs and Subnets
@@ -443,28 +445,27 @@ type ContainerDetail struct {
 
 	// The environment variables to pass to a container. Environment variables must not
 	// start with AWS_BATCH; this naming convention is reserved for variables that are
-	// set by the Batch service.
+	// set by the AWS Batch service.
 	Environment []KeyValuePair
 
-	// The Amazon Resource Name (ARN) of the execution role that Batch can assume. For
-	// more information, see Batch execution IAM role
+	// The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume.
+	// For more information, see AWS Batch execution IAM role
 	// (https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html) in
-	// the Batch User Guide.
+	// the AWS Batch User Guide.
 	ExecutionRoleArn *string
 
 	// The exit code to return upon completion.
 	ExitCode int32
 
-	// The platform configuration for jobs that are running on Fargate resources. Jobs
-	// that are running on EC2 resources must not specify this parameter.
+	// The platform configuration for jobs running on Fargate resources. Jobs running
+	// on EC2 resources must not specify this parameter.
 	FargatePlatformConfiguration *FargatePlatformConfiguration
 
 	// The image used to start the container.
 	Image *string
 
 	// The instance type of the underlying host infrastructure of a multi-node parallel
-	// job. This parameter isn't applicable to jobs that are running on Fargate
-	// resources.
+	// job. This parameter isn't applicable to jobs running on Fargate resources.
 	InstanceType *string
 
 	// The Amazon Resource Name (ARN) associated with the job upon execution.
@@ -488,7 +489,7 @@ type ContainerDetail struct {
 	// server for remote logging options. For more information on the options for
 	// different supported log drivers, see Configure logging drivers
 	// (https://docs.docker.com/engine/admin/logging/overview/) in the Docker
-	// documentation. Batch currently supports a subset of the logging drivers
+	// documentation. AWS Batch currently supports a subset of the logging drivers
 	// available to the Docker daemon (shown in the LogConfiguration data type).
 	// Additional log drivers might be available in future releases of the Amazon ECS
 	// container agent. This parameter requires version 1.18 of the Docker Remote API
@@ -505,8 +506,8 @@ type ContainerDetail struct {
 	LogConfiguration *LogConfiguration
 
 	// The name of the CloudWatch Logs log stream associated with the container. The
-	// log group for Batch jobs is /aws/batch/job. Each container attempt receives a
-	// log stream name when they reach the RUNNING status.
+	// log group for AWS Batch jobs is /aws/batch/job. Each container attempt receives
+	// a log stream name when they reach the RUNNING status.
 	LogStreamName *string
 
 	// For jobs run on EC2 resources that didn't specify memory requirements using
@@ -517,8 +518,8 @@ type ContainerDetail struct {
 	// The mount points for data volumes in your container.
 	MountPoints []MountPoint
 
-	// The network configuration for jobs that are running on Fargate resources. Jobs
-	// that are running on EC2 resources must not specify this parameter.
+	// The network configuration for jobs running on Fargate resources. Jobs running on
+	// EC2 resources must not specify this parameter.
 	NetworkConfiguration *NetworkConfiguration
 
 	// The network interfaces associated with the job.
@@ -526,8 +527,8 @@ type ContainerDetail struct {
 
 	// When this parameter is true, the container is given elevated permissions on the
 	// host container instance (similar to the root user). The default value is false.
-	// This parameter isn't applicable to jobs that are running on Fargate resources
-	// and shouldn't be provided, or specified as false.
+	// This parameter isn't applicable to jobs running on Fargate resources and
+	// shouldn't be provided, or specified as false.
 	Privileged bool
 
 	// When this parameter is true, the container is given read-only access to its root
@@ -549,7 +550,7 @@ type ContainerDetail struct {
 	// The secrets to pass to the container. For more information, see Specifying
 	// sensitive data
 	// (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
-	// in the Batch User Guide.
+	// in the AWS Batch User Guide.
 	Secrets []Secret
 
 	// The Amazon Resource Name (ARN) of the Amazon ECS task that's associated with the
@@ -562,7 +563,7 @@ type ContainerDetail struct {
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --ulimit
 	// option to docker run (https://docs.docker.com/engine/reference/run/). This
-	// parameter isn't applicable to jobs that are running on Fargate resources.
+	// parameter isn't applicable to jobs running on Fargate resources.
 	Ulimits []Ulimit
 
 	// The user name to use inside the container. This parameter maps to User in the
@@ -605,23 +606,20 @@ type ContainerOverrides struct {
 	// variables, which are added to the container at launch, or you can override the
 	// existing environment variables from the Docker image or the job definition.
 	// Environment variables must not start with AWS_BATCH; this naming convention is
-	// reserved for variables that are set by the Batch service.
+	// reserved for variables that are set by the AWS Batch service.
 	Environment []KeyValuePair
 
 	// The instance type to use for a multi-node parallel job. This parameter isn't
-	// applicable to single-node container jobs or jobs that run on Fargate resources,
-	// and shouldn't be provided.
+	// applicable to single-node container jobs or for jobs running on Fargate
+	// resources and shouldn't be provided.
 	InstanceType *string
 
 	// This parameter indicates the amount of memory (in MiB) that's reserved for the
 	// job. It overrides the memory parameter set in the job definition, but doesn't
 	// override any memory requirement specified in the ResourceRequirement structure
-	// in the job definition. To override memory requirements that are specified in the
-	// ResourceRequirement structure in the job definition, ResourceRequirement must be
-	// specified in the SubmitJob request, with type set to MEMORY and value set to the
-	// new value. This parameter is supported for jobs that run on EC2 resources, but
-	// isn't supported for jobs that run on Fargate resources. For these resources, use
-	// resourceRequirement instead.
+	// in the job definition. This parameter is supported for jobs that run on EC2
+	// resources, but isn't supported for jobs that run on Fargate resources. For these
+	// resources, use resourceRequirement instead.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Memory int32
@@ -634,19 +632,19 @@ type ContainerOverrides struct {
 	// This parameter indicates the number of vCPUs reserved for the container.It
 	// overrides the vcpus parameter that's set in the job definition, but doesn't
 	// override any vCPU requirement specified in the resourceRequirement structure in
-	// the job definition. To override vCPU requirements that are specified in the
-	// ResourceRequirement structure in the job definition, ResourceRequirement must be
-	// specified in the SubmitJob request, with type set to VCPU and value set to the
-	// new value. This parameter maps to CpuShares in the Create a container
+	// the job definition. This parameter is supported for jobs that run on EC2
+	// resources, but isn't supported for jobs that run on Fargate resources. For
+	// Fargate resources, you can only use resourceRequirement. For EC2 resources, you
+	// can use either this parameter or resourceRequirement but not both. This
+	// parameter maps to CpuShares in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --cpu-shares option to docker run
 	// (https://docs.docker.com/engine/reference/run/). Each vCPU is equivalent to
-	// 1,024 CPU shares. You must specify at least one vCPU. This parameter is
-	// supported for jobs that run on EC2 resources, but isn't supported for jobs that
-	// run on Fargate resources. For Fargate resources, you can only use
-	// resourceRequirement. For EC2 resources, you can use either this parameter or
-	// resourceRequirement but not both.
+	// 1,024 CPU shares. You must specify at least one vCPU. This parameter isn't
+	// applicable to jobs that run on Fargate resources and shouldn't be provided. For
+	// jobs that run on Fargate resources, you must specify the vCPU requirement for
+	// the job using resourceRequirements.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Vcpus int32
@@ -674,18 +672,19 @@ type ContainerProperties struct {
 	// option to docker run (https://docs.docker.com/engine/reference/run/). We don't
 	// recommend using plaintext environment variables for sensitive information, such
 	// as credential data. Environment variables must not start with AWS_BATCH; this
-	// naming convention is reserved for variables that are set by the Batch service.
+	// naming convention is reserved for variables that are set by the AWS Batch
+	// service.
 	Environment []KeyValuePair
 
-	// The Amazon Resource Name (ARN) of the execution role that Batch can assume. For
-	// jobs that run on Fargate resources, you must provide an execution role. For more
-	// information, see Batch execution IAM role
+	// The Amazon Resource Name (ARN) of the execution role that AWS Batch can assume.
+	// For jobs that run on Fargate resources, you must provide an execution role. For
+	// more information, see AWS Batch execution IAM role
 	// (https://docs.aws.amazon.com/batch/latest/userguide/execution-IAM-role.html) in
-	// the Batch User Guide.
+	// the AWS Batch User Guide.
 	ExecutionRoleArn *string
 
-	// The platform configuration for jobs that are running on Fargate resources. Jobs
-	// that are running on EC2 resources must not specify this parameter.
+	// The platform configuration for jobs running on Fargate resources. Jobs running
+	// on EC2 resources must not specify this parameter.
 	FargatePlatformConfiguration *FargatePlatformConfiguration
 
 	// The image used to start a container. This string is passed directly to the
@@ -718,12 +717,12 @@ type ContainerProperties struct {
 
 	// The instance type to use for a multi-node parallel job. All node groups in a
 	// multi-node parallel job must use the same instance type. This parameter isn't
-	// applicable to single-node container jobs or jobs that run on Fargate resources,
-	// and shouldn't be provided.
+	// applicable to single-node container jobs or for jobs that run on Fargate
+	// resources and shouldn't be provided.
 	InstanceType *string
 
 	// The Amazon Resource Name (ARN) of the IAM role that the container can assume for
-	// Amazon Web Services permissions. For more information, see IAM Roles for Tasks
+	// AWS permissions. For more information, see IAM Roles for Tasks
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	JobRoleArn *string
@@ -746,7 +745,7 @@ type ContainerProperties struct {
 	// For more information on the options for different supported log drivers, see
 	// Configure logging drivers
 	// (https://docs.docker.com/engine/admin/logging/overview/) in the Docker
-	// documentation. Batch currently supports a subset of the logging drivers
+	// documentation. AWS Batch currently supports a subset of the logging drivers
 	// available to the Docker daemon (shown in the LogConfiguration data type). This
 	// parameter requires version 1.18 of the Docker Remote API or greater on your
 	// container instance. To check the Docker Remote API version on your container
@@ -761,7 +760,7 @@ type ContainerProperties struct {
 	LogConfiguration *LogConfiguration
 
 	// This parameter indicates the memory hard limit (in MiB) for a container. If your
-	// container attempts to exceed the specified number, it's terminated. You must
+	// container attempts to exceed the specified number, it is terminated. You must
 	// specify at least 4 MiB of memory for a job using this parameter. The memory hard
 	// limit can be specified in several places. It must be specified for each node at
 	// least once. This parameter maps to Memory in the Create a container
@@ -770,11 +769,11 @@ type ContainerProperties struct {
 	// option to docker run (https://docs.docker.com/engine/reference/run/). This
 	// parameter is supported on EC2 resources but isn't supported on Fargate
 	// resources. For Fargate resources, you should specify the memory requirement
-	// using resourceRequirement. You can also do this for EC2 resources. If you're
-	// trying to maximize your resource utilization by providing your jobs as much
-	// memory as possible for a particular instance type, see Memory Management
+	// using resourceRequirement. You can do this for EC2 resources. If you're trying
+	// to maximize your resource utilization by providing your jobs as much memory as
+	// possible for a particular instance type, see Memory Management
 	// (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html) in
-	// the Batch User Guide.
+	// the AWS Batch User Guide.
 	//
 	// Deprecated: This field is deprecated, use resourceRequirements instead.
 	Memory int32
@@ -786,8 +785,8 @@ type ContainerProperties struct {
 	// option to docker run (https://docs.docker.com/engine/reference/run/).
 	MountPoints []MountPoint
 
-	// The network configuration for jobs that are running on Fargate resources. Jobs
-	// that are running on EC2 resources must not specify this parameter.
+	// The network configuration for jobs running on Fargate resources. Jobs running on
+	// EC2 resources must not specify this parameter.
 	NetworkConfiguration *NetworkConfiguration
 
 	// When this parameter is true, the container is given elevated permissions on the
@@ -797,8 +796,8 @@ type ContainerProperties struct {
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --privileged option to docker run
 	// (https://docs.docker.com/engine/reference/run/). The default value is false.
-	// This parameter isn't applicable to jobs that are running on Fargate resources
-	// and shouldn't be provided, or specified as false.
+	// This parameter isn't applicable to jobs running on Fargate resources and
+	// shouldn't be provided, or specified as false.
 	Privileged bool
 
 	// When this parameter is true, the container is given read-only access to its root
@@ -815,7 +814,7 @@ type ContainerProperties struct {
 	// The secrets for the container. For more information, see Specifying sensitive
 	// data
 	// (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
-	// in the Batch User Guide.
+	// in the AWS Batch User Guide.
 	Secrets []Secret
 
 	// A list of ulimits to set in the container. This parameter maps to Ulimits in the
@@ -823,8 +822,8 @@ type ContainerProperties struct {
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --ulimit
 	// option to docker run (https://docs.docker.com/engine/reference/run/). This
-	// parameter isn't applicable to jobs that are running on Fargate resources and
-	// shouldn't be provided.
+	// parameter isn't applicable to jobs running on Fargate resources and shouldn't be
+	// provided.
 	Ulimits []Ulimit
 
 	// The user name to use inside the container. This parameter maps to User in the
@@ -840,12 +839,12 @@ type ContainerProperties struct {
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --cpu-shares option to docker run
 	// (https://docs.docker.com/engine/reference/run/). The number of vCPUs must be
-	// specified but can be specified in several places. You must specify it at least
-	// once for each node. This parameter is supported on EC2 resources but isn't
+	// specified but can be be specified in several places. You must specify it at
+	// least once for each node. This parameter is supported on EC2 resources but isn't
 	// supported for jobs that run on Fargate resources. For these resources, use
 	// resourceRequirement instead. You can use this parameter or resourceRequirements
-	// structure but not both. This parameter isn't applicable to jobs that are running
-	// on Fargate resources and shouldn't be provided. For jobs that run on Fargate
+	// structure but not both. This parameter isn't applicable to jobs running on
+	// Fargate resources and shouldn't be provided. For jobs that run on Fargate
 	// resources, you must specify the vCPU requirement for the job using
 	// resourceRequirements.
 	//
@@ -872,8 +871,7 @@ type ContainerSummary struct {
 }
 
 // An object representing a container instance host device. This object isn't
-// applicable to jobs that are running on Fargate resources and shouldn't be
-// provided.
+// applicable to jobs running on Fargate resources and shouldn't be provided.
 type Device struct {
 
 	// The path for the device on the host container instance.
@@ -881,8 +879,8 @@ type Device struct {
 	// This member is required.
 	HostPath *string
 
-	// The path inside the container that's used to expose the host device. By default,
-	// the hostPath value is used.
+	// The path inside the container used to expose the host device. By default, the
+	// hostPath value is used.
 	ContainerPath *string
 
 	// The explicit permissions to provide to the container for the device. By default,
@@ -896,10 +894,10 @@ type Device struct {
 // in the compute environment. If Ec2Configuration isn't specified, the default is
 // currently ECS_AL1 (Amazon Linux
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami))
-// for non-GPU, non AWSGraviton instances. Starting on March 31, 2021, this default
+// for non-GPU, non-Graviton instances. Starting on March 31, 2021, this default
 // will be changing to ECS_AL2 (Amazon Linux 2
 // (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami)).
-// This object isn't applicable to jobs that are running on Fargate resources.
+// This object isn't applicable to jobs running on Fargate resources.
 type Ec2Configuration struct {
 
 	// The image type to match with the instance type to select an AMI. If the
@@ -911,16 +909,16 @@ type Ec2Configuration struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami)).
 	// ECS_AL2 Amazon Linux 2
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#al2ami)−
-	// Default for all Amazon Web Services Graviton-based instance families (for
-	// example, C6g, M6g, R6g, and T4g) and can be used for all non-GPU instance types.
-	// ECS_AL2_NVIDIA Amazon Linux 2 (GPU)
+	// Default for all AWS Graviton-based instance families (for example, C6g, M6g,
+	// R6g, and T4g) and can be used for all non-GPU instance types. ECS_AL2_NVIDIA
+	// Amazon Linux 2 (GPU)
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#gpuami)−Default
 	// for all GPU instance families (for example P4 and G4) and can be used for all
-	// non Amazon Web Services Graviton-based instance types. ECS_AL1 Amazon Linux
+	// non-AWS Graviton-based instance types. ECS_AL1 Amazon Linux
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-optimized_AMI.html#alami)−Default
-	// for all non-GPU, non Amazon Web Services Graviton instance families. Amazon
-	// Linux is reaching the end-of-life of standard support. For more information, see
-	// Amazon Linux AMI (http://aws.amazon.com/amazon-linux-ami/).
+	// for all non-GPU, non-AWS Graviton instance families. Amazon Linux is reaching
+	// the end-of-life of standard support. For more information, see Amazon Linux AMI
+	// (http://aws.amazon.com/amazon-linux-ami/).
 	//
 	// This member is required.
 	ImageType *string
@@ -945,23 +943,23 @@ type EFSAuthorizationConfig struct {
 	// Amazon Elastic File System User Guide.
 	AccessPointId *string
 
-	// Whether or not to use the Batch job IAM role defined in a job definition when
-	// mounting the Amazon EFS file system. If enabled, transit encryption must be
-	// enabled in the EFSVolumeConfiguration. If this parameter is omitted, the default
-	// value of DISABLED is used. For more information, see Using Amazon EFS Access
-	// Points
-	// (https://docs.aws.amazon.com/batch/latest/userguide/efs-volumes.html#efs-volume-accesspoints)
-	// in the Batch User Guide. EFS IAM authorization requires that TransitEncryption
-	// be ENABLED and that a JobRoleArn is specified.
+	// Whether or not to use the AWS Batch execution IAM role defined in a job
+	// definition when mounting the Amazon EFS file system. If enabled, transit
+	// encryption must be enabled in the EFSVolumeConfiguration. If this parameter is
+	// omitted, the default value of DISABLED is used. For more information, see Using
+	// Amazon EFS Access Points
+	// (https://docs.aws.amazon.com/batch/latest/ug/efs-volumes.html#efs-volume-accesspoints)
+	// in the AWS Batch User Guide. EFS IAM authorization requires that
+	// TransitEncryption be ENABLED and that a JobRoleArn is specified.
 	Iam EFSAuthorizationConfigIAM
 
 	noSmithyDocumentSerde
 }
 
-// This is used when you're using an Amazon Elastic File System file system for job
-// storage. For more information, see Amazon EFS Volumes
-// (https://docs.aws.amazon.com/batch/latest/userguide/efs-volumes.html) in the
-// Batch User Guide.
+// This parameter is specified when you are using an Amazon Elastic File System
+// file system for task storage. For more information, see Amazon EFS Volumes
+// (https://docs.aws.amazon.com/batch/latest/ug/efs-volumes.html) in the AWS Batch
+// User Guide.
 type EFSVolumeConfiguration struct {
 
 	// The Amazon EFS file system ID to use.
@@ -974,25 +972,24 @@ type EFSVolumeConfiguration struct {
 
 	// The directory within the Amazon EFS file system to mount as the root directory
 	// inside the host. If this parameter is omitted, the root of the Amazon EFS volume
-	// is used instead. Specifying / has the same effect as omitting this parameter.
-	// The maximum length is 4,096 characters. If an EFS access point is specified in
-	// the authorizationConfig, the root directory parameter must either be omitted or
-	// set to /, which enforces the path set on the Amazon EFS access point.
+	// will be used. Specifying / will have the same effect as omitting this parameter.
+	// If an EFS access point is specified in the authorizationConfig, the root
+	// directory parameter must either be omitted or set to / which will enforce the
+	// path set on the Amazon EFS access point.
 	RootDirectory *string
 
-	// Determines whether to enable encryption for Amazon EFS data in transit between
-	// the Amazon ECS host and the Amazon EFS server. Transit encryption must be
-	// enabled if Amazon EFS IAM authorization is used. If this parameter is omitted,
-	// the default value of DISABLED is used. For more information, see Encrypting data
-	// in transit
+	// Whether or not to enable encryption for Amazon EFS data in transit between the
+	// Amazon ECS host and the Amazon EFS server. Transit encryption must be enabled if
+	// Amazon EFS IAM authorization is used. If this parameter is omitted, the default
+	// value of DISABLED is used. For more information, see Encrypting data in transit
 	// (https://docs.aws.amazon.com/efs/latest/ug/encryption-in-transit.html) in the
 	// Amazon Elastic File System User Guide.
 	TransitEncryption EFSTransitEncryption
 
 	// The port to use when sending encrypted data between the Amazon ECS host and the
-	// Amazon EFS server. If you don't specify a transit encryption port, it uses the
-	// port selection strategy that the Amazon EFS mount helper uses. The value must be
-	// between 0 and 65,535. For more information, see EFS Mount Helper
+	// Amazon EFS server. If you do not specify a transit encryption port, it will use
+	// the port selection strategy that the Amazon EFS mount helper uses. For more
+	// information, see EFS Mount Helper
 	// (https://docs.aws.amazon.com/efs/latest/ug/efs-mount-helper.html) in the Amazon
 	// Elastic File System User Guide.
 	TransitEncryptionPort int32
@@ -1011,37 +1008,37 @@ type EvaluateOnExit struct {
 	Action RetryAction
 
 	// Contains a glob pattern to match against the decimal representation of the
-	// ExitCode returned for a job. The pattern can be up to 512 characters in length.
-	// It can contain only numbers, and can optionally end with an asterisk (*) so that
-	// only the start of the string needs to be an exact match.
+	// ExitCode returned for a job. The pattern can be up to 512 characters long, can
+	// contain only numbers, and can optionally end with an asterisk (*) so that only
+	// the start of the string needs to be an exact match.
 	OnExitCode *string
 
 	// Contains a glob pattern to match against the Reason returned for a job. The
-	// pattern can be up to 512 characters in length. It can contain letters, numbers,
+	// pattern can be up to 512 characters long, and can contain letters, numbers,
 	// periods (.), colons (:), and white space (including spaces and tabs). It can
 	// optionally end with an asterisk (*) so that only the start of the string needs
 	// to be an exact match.
 	OnReason *string
 
 	// Contains a glob pattern to match against the StatusReason returned for a job.
-	// The pattern can be up to 512 characters in length. It can contain letters,
-	// numbers, periods (.), colons (:), and white space (including spaces or tabs). It
-	// can optionally end with an asterisk (*) so that only the start of the string
-	// needs to be an exact match.
+	// The pattern can be up to 512 characters long, and can contain letters, numbers,
+	// periods (.), colons (:), and white space (including spaces or tabs). It can
+	// optionally end with an asterisk (*) so that only the start of the string needs
+	// to be an exact match.
 	OnStatusReason *string
 
 	noSmithyDocumentSerde
 }
 
-// The platform configuration for jobs that are running on Fargate resources. Jobs
-// that run on EC2 resources must not specify this parameter.
+// The platform configuration for jobs running on Fargate resources. For jobs that
+// run on EC2 resources, you shouldn't specify this parameter.
 type FargatePlatformConfiguration struct {
 
-	// The Fargate platform version where the jobs are running. A platform version is
-	// specified only for jobs that are running on Fargate resources. If one isn't
-	// specified, the LATEST platform version is used by default. This uses a recent,
-	// approved version of the Fargate platform for compute resources. For more
-	// information, see Fargate platform versions
+	// The AWS Fargate platform version where the jobs are running. A platform version
+	// is specified only for jobs running on Fargate resources. If one isn't specified,
+	// the LATEST platform version is used by default. This uses a recent, approved
+	// version of the AWS Fargate platform for compute resources. For more information,
+	// see AWS Fargate platform versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -1068,7 +1065,7 @@ type Host struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing an Batch job definition.
+// An object representing an AWS Batch job definition.
 type JobDefinition struct {
 
 	// The Amazon Resource Name (ARN) for the job definition.
@@ -1090,7 +1087,7 @@ type JobDefinition struct {
 	// multinode isn't supported. For more information about multi-node parallel jobs,
 	// see Creating a multi-node parallel job definition
 	// (https://docs.aws.amazon.com/batch/latest/userguide/multi-node-job-def.html) in
-	// the Batch User Guide.
+	// the AWS Batch User Guide.
 	//
 	// This member is required.
 	Type *string
@@ -1109,7 +1106,7 @@ type JobDefinition struct {
 	// job definition. For more information about specifying parameters, see Job
 	// Definition Parameters
 	// (https://docs.aws.amazon.com/batch/latest/userguide/job_definition_parameters.html)
-	// in the Batch User Guide.
+	// in the AWS Batch User Guide.
 	Parameters map[string]string
 
 	// The platform capabilities required by the job definition. If no value is
@@ -1135,17 +1132,17 @@ type JobDefinition struct {
 	Tags map[string]string
 
 	// The timeout configuration for jobs that are submitted with this job definition.
-	// You can specify a timeout duration after which Batch terminates your jobs if
+	// You can specify a timeout duration after which AWS Batch terminates your jobs if
 	// they haven't finished.
 	Timeout *JobTimeout
 
 	noSmithyDocumentSerde
 }
 
-// An object representing an Batch job dependency.
+// An object representing an AWS Batch job dependency.
 type JobDependency struct {
 
-	// The job ID of the Batch job associated with this dependency.
+	// The job ID of the AWS Batch job associated with this dependency.
 	JobId *string
 
 	// The type of the job dependency.
@@ -1154,7 +1151,7 @@ type JobDependency struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing an Batch job.
+// An object representing an AWS Batch job.
 type JobDetail struct {
 
 	// The job definition that's used by this job.
@@ -1187,7 +1184,7 @@ type JobDetail struct {
 	// The current status for the job. If your jobs don't progress to STARTING, see
 	// Jobs Stuck in RUNNABLE Status
 	// (https://docs.aws.amazon.com/batch/latest/userguide/troubleshooting.html#job_stuck_in_runnable)
-	// in the troubleshooting section of the Batch User Guide.
+	// in the troubleshooting section of the AWS Batch User Guide.
 	//
 	// This member is required.
 	Status JobStatus
@@ -1219,7 +1216,7 @@ type JobDetail struct {
 	NodeDetails *NodeDetails
 
 	// An object representing the node properties of a multi-node parallel job. This
-	// isn't applicable to jobs that are running on Fargate resources.
+	// isn't applicable to jobs running on Fargate resources.
 	NodeProperties *NodeProperties
 
 	// Additional parameters passed to the job that replace parameter substitution
@@ -1260,7 +1257,7 @@ type JobDetail struct {
 	noSmithyDocumentSerde
 }
 
-// An object representing the details of an Batch job queue.
+// An object representing the details of an AWS Batch job queue.
 type JobQueueDetail struct {
 
 	// The compute environments that are attached to the job queue and the order that
@@ -1305,9 +1302,10 @@ type JobQueueDetail struct {
 	// status of the job queue.
 	StatusReason *string
 
-	// The tags applied to the job queue. For more information, see Tagging your Batch
-	// resources (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html)
-	// in Batch User Guide.
+	// The tags applied to the job queue. For more information, see Tagging your AWS
+	// Batch resources
+	// (https://docs.aws.amazon.com/batch/latest/userguide/using-tags.html) in AWS
+	// Batch User Guide.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -1342,11 +1340,8 @@ type JobSummary struct {
 	// The Amazon Resource Name (ARN) of the job.
 	JobArn *string
 
-	// The Amazon Resource Name (ARN) of the job definition.
-	JobDefinition *string
-
 	// The node properties for a single node in a job summary list. This isn't
-	// applicable to jobs that are running on Fargate resources.
+	// applicable to jobs running on Fargate resources.
 	NodeProperties *NodePropertiesSummary
 
 	// The Unix timestamp for when the job was started (when the job transitioned from
@@ -1371,8 +1366,8 @@ type JobSummary struct {
 type JobTimeout struct {
 
 	// The time duration in seconds (measured from the job attempt's startedAt
-	// timestamp) after which Batch terminates your jobs if they have not finished. The
-	// minimum value for the timeout is 60 seconds.
+	// timestamp) after which AWS Batch terminates your jobs if they have not finished.
+	// The minimum value for the timeout is 60 seconds.
 	AttemptDurationSeconds int32
 
 	noSmithyDocumentSerde
@@ -1392,26 +1387,12 @@ type KeyValuePair struct {
 	noSmithyDocumentSerde
 }
 
-// A filter name and value pair that's used to return a more specific list of
-// results from a ListJobs API operation.
-type KeyValuesPair struct {
-
-	// The name of the filter. Filter names are case sensitive.
-	Name *string
-
-	// The filter values.
-	Values []string
-
-	noSmithyDocumentSerde
-}
-
 // An object representing a launch template associated with a compute resource. You
 // must specify either the launch template ID or launch template name in the
 // request, but not both. If security groups are specified using both the
 // securityGroupIds parameter of CreateComputeEnvironment and the launch template,
 // the values in the securityGroupIds parameter of CreateComputeEnvironment will be
-// used. This object isn't applicable to jobs that are running on Fargate
-// resources.
+// used. This object isn't applicable to jobs running on Fargate resources.
 type LaunchTemplateSpecification struct {
 
 	// The ID of the launch template.
@@ -1423,7 +1404,7 @@ type LaunchTemplateSpecification struct {
 	// The version number of the launch template, $Latest, or $Default. If the value is
 	// $Latest, the latest version of the launch template is used. If the value is
 	// $Default, the default version of the launch template is used. After the compute
-	// environment is created, the launch template version that's used isn't changed,
+	// environment is created, the launch template version used will not be changed,
 	// even if the $Default or $Latest version for the launch template is updated. To
 	// use a new launch template version, create a new compute environment, add the new
 	// compute environment to the existing job queue, remove the old compute
@@ -1443,8 +1424,8 @@ type LinuxParameters struct {
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --device
 	// option to docker run (https://docs.docker.com/engine/reference/run/). This
-	// parameter isn't applicable to jobs that are running on Fargate resources and
-	// shouldn't be provided.
+	// parameter isn't applicable to jobs running on Fargate resources and shouldn't be
+	// provided.
 	Devices []Device
 
 	// If true, run an init process inside the container that forwards signals and
@@ -1466,31 +1447,31 @@ type LinuxParameters struct {
 	// doesn't use swap. Accepted values are 0 or any positive integer. If the maxSwap
 	// parameter is omitted, the container doesn't use the swap configuration for the
 	// container instance it is running on. A maxSwap value must be set for the
-	// swappiness parameter to be used. This parameter isn't applicable to jobs that
-	// are running on Fargate resources and shouldn't be provided.
+	// swappiness parameter to be used. This parameter isn't applicable to jobs running
+	// on Fargate resources and shouldn't be provided.
 	MaxSwap int32
 
 	// The value for the size (in MiB) of the /dev/shm volume. This parameter maps to
 	// the --shm-size option to docker run
 	// (https://docs.docker.com/engine/reference/run/). This parameter isn't applicable
-	// to jobs that are running on Fargate resources and shouldn't be provided.
+	// to jobs running on Fargate resources and shouldn't be provided.
 	SharedMemorySize int32
 
 	// This allows you to tune a container's memory swappiness behavior. A swappiness
 	// value of 0 causes swapping not to happen unless absolutely necessary. A
 	// swappiness value of 100 causes pages to be swapped very aggressively. Accepted
 	// values are whole numbers between 0 and 100. If the swappiness parameter isn't
-	// specified, a default value of 60 is used. If a value isn't specified for
-	// maxSwap, then this parameter is ignored. If maxSwap is set to 0, the container
-	// doesn't use swap. This parameter maps to the --memory-swappiness option to
-	// docker run (https://docs.docker.com/engine/reference/run/). Consider the
-	// following when you use a per-container swap configuration.
+	// specified, a default value of 60 is used. If a value isn't specified for maxSwap
+	// then this parameter is ignored. If maxSwap is set to 0, the container doesn't
+	// use swap. This parameter maps to the --memory-swappiness option to docker run
+	// (https://docs.docker.com/engine/reference/run/). Consider the following when you
+	// use a per-container swap configuration.
 	//
-	// * Swap space must be
-	// enabled and allocated on the container instance for the containers to use. The
-	// Amazon ECS optimized AMIs don't have swap enabled by default. You must enable
-	// swap on the instance to use this feature. For more information, see Instance
-	// Store Swap Volumes
+	// * Swap space must be enabled and
+	// allocated on the container instance for the containers to use. The Amazon ECS
+	// optimized AMIs don't have swap enabled by default. You must enable swap on the
+	// instance to use this feature. For more information, see Instance Store Swap
+	// Volumes
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-store-swap-volumes.html)
 	// in the Amazon EC2 User Guide for Linux Instances or How do I allocate memory to
 	// work as swap space in an Amazon EC2 instance by using a swap file?
@@ -1505,14 +1486,14 @@ type LinuxParameters struct {
 	// total swap usage will be limited to two times the memory reservation of the
 	// container.
 	//
-	// This parameter isn't applicable to jobs that are running on Fargate
-	// resources and shouldn't be provided.
+	// This parameter isn't applicable to jobs running on Fargate resources
+	// and shouldn't be provided.
 	Swappiness int32
 
 	// The container path, mount options, and size (in MiB) of the tmpfs mount. This
 	// parameter maps to the --tmpfs option to docker run
 	// (https://docs.docker.com/engine/reference/run/). This parameter isn't applicable
-	// to jobs that are running on Fargate resources and shouldn't be provided.
+	// to jobs running on Fargate resources and shouldn't be provided.
 	Tmpfs []Tmpfs
 
 	noSmithyDocumentSerde
@@ -1524,12 +1505,12 @@ type LogConfiguration struct {
 	// The log driver to use for the container. The valid values listed for this
 	// parameter are log drivers that the Amazon ECS container agent can communicate
 	// with by default. The supported log drivers are awslogs, fluentd, gelf,
-	// json-file, journald, logentries, syslog, and splunk. Jobs that are running on
-	// Fargate resources are restricted to the awslogs and splunk log drivers. awslogs
+	// json-file, journald, logentries, syslog, and splunk. Jobs running on Fargate
+	// resources are restricted to the awslogs and splunk log drivers. awslogs
 	// Specifies the Amazon CloudWatch Logs logging driver. For more information, see
 	// Using the awslogs Log Driver
 	// (https://docs.aws.amazon.com/batch/latest/userguide/using_awslogs.html) in the
-	// Batch User Guide and Amazon CloudWatch Logs logging driver
+	// AWS Batch User Guide and Amazon CloudWatch Logs logging driver
 	// (https://docs.docker.com/config/containers/logging/awslogs/) in the Docker
 	// documentation. fluentd Specifies the Fluentd logging driver. For more
 	// information, including usage and options, see Fluentd logging driver
@@ -1573,7 +1554,7 @@ type LogConfiguration struct {
 	// The secrets to pass to the log configuration. For more information, see
 	// Specifying Sensitive Data
 	// (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
-	// in the Batch User Guide.
+	// in the AWS Batch User Guide.
 	SecretOptions []Secret
 
 	noSmithyDocumentSerde
@@ -1598,13 +1579,13 @@ type MountPoint struct {
 	noSmithyDocumentSerde
 }
 
-// The network configuration for jobs that are running on Fargate resources. Jobs
-// that are running on EC2 resources must not specify this parameter.
+// The network configuration for jobs running on Fargate resources. Jobs running on
+// EC2 resources must not specify this parameter.
 type NetworkConfiguration struct {
 
-	// Indicates whether the job should have a public IP address. For a job that is
-	// running on Fargate resources in a private subnet to send outbound traffic to the
-	// internet (for example, to pull container images), the private subnet requires a
+	// Indicates whether the job should have a public IP address. For a job running on
+	// Fargate resources in a private subnet to send outbound traffic to the internet
+	// (for example, in order to pull container images), the private subnet requires a
 	// NAT gateway be attached to route requests to the internet. For more information,
 	// see Amazon ECS task networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html).
@@ -1646,8 +1627,8 @@ type NodeDetails struct {
 }
 
 // Object representing any node overrides to a job definition that's used in a
-// SubmitJob API operation. This isn't applicable to jobs that are running on
-// Fargate resources and shouldn't be provided; use containerOverrides instead.
+// SubmitJob API operation. This isn't applicable to jobs running on Fargate
+// resources and shouldn't be provided; use containerOverrides instead.
 type NodeOverrides struct {
 
 	// The node property overrides for the job.
@@ -1767,11 +1748,11 @@ type ResourceRequirement struct {
 	// vary based on the type specified. type="GPU" The number of physical GPUs to
 	// reserve for the container. The number of GPUs reserved for all containers in a
 	// job shouldn't exceed the number of available GPUs on the compute resource that
-	// the job is launched on. GPUs are not available for jobs that are running on
-	// Fargate resources. type="MEMORY" The memory hard limit (in MiB) present to the
-	// container. This parameter is supported for jobs that are running on EC2
-	// resources. If your container attempts to exceed the memory specified, the
-	// container is terminated. This parameter maps to Memory in the Create a container
+	// the job is launched on. GPUs are not available for jobs running on Fargate
+	// resources. type="MEMORY" The memory hard limit (in MiB) present to the
+	// container. This parameter is supported for jobs running on EC2 resources. If
+	// your container attempts to exceed the memory specified, the container is
+	// terminated. This parameter maps to Memory in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the --memory
 	// option to docker run (https://docs.docker.com/engine/reference/run/). You must
@@ -1785,31 +1766,31 @@ type ResourceRequirement struct {
 	// trying to maximize your resource utilization by providing your jobs as much
 	// memory as possible for a particular instance type, see Memory Management
 	// (https://docs.aws.amazon.com/batch/latest/userguide/memory-management.html) in
-	// the Batch User Guide. For jobs that are running on Fargate resources, then value
-	// is the hard limit (in MiB), and must match one of the supported values and the
-	// VCPU values must be one of the values supported for that memory value. value =
-	// 512 VCPU = 0.25 value = 1024 VCPU = 0.25 or 0.5 value = 2048 VCPU = 0.25, 0.5,
-	// or 1 value = 3072 VCPU = 0.5, or 1 value = 4096 VCPU = 0.5, 1, or 2 value =
-	// 5120, 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, or 4 value = 9216,
-	// 10240, 11264, 12288, 13312, 14336, 15360, or 16384 VCPU = 2 or 4 value = 17408,
-	// 18432, 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672,
-	// 29696, or 30720 VCPU = 4 type="VCPU" The number of vCPUs reserved for the
-	// container. This parameter maps to CpuShares in the Create a container
+	// the AWS Batch User Guide. For jobs running on Fargate resources, then value is
+	// the hard limit (in MiB), and must match one of the supported values and the VCPU
+	// values must be one of the values supported for that memory value. value = 512
+	// VCPU = 0.25 value = 1024 VCPU = 0.25 or 0.5 value = 2048 VCPU = 0.25, 0.5, or 1
+	// value = 3072 VCPU = 0.5, or 1 value = 4096 VCPU = 0.5, 1, or 2 value = 5120,
+	// 6144, or 7168 VCPU = 1 or 2 value = 8192 VCPU = 1, 2, or 4 value = 9216, 10240,
+	// 11264, 12288, 13312, 14336, 15360, or 16384 VCPU = 2 or 4 value = 17408, 18432,
+	// 19456, 20480, 21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696, or
+	// 30720 VCPU = 4 type="VCPU" The number of vCPUs reserved for the container. This
+	// parameter maps to CpuShares in the Create a container
 	// (https://docs.docker.com/engine/api/v1.23/#create-a-container) section of the
 	// Docker Remote API (https://docs.docker.com/engine/api/v1.23/) and the
 	// --cpu-shares option to docker run
 	// (https://docs.docker.com/engine/reference/run/). Each vCPU is equivalent to
 	// 1,024 CPU shares. For EC2 resources, you must specify at least one vCPU. This is
 	// required but can be specified in several places; it must be specified for each
-	// node at least once. For jobs that are running on Fargate resources, then value
-	// must match one of the supported values and the MEMORY values must be one of the
-	// values supported for that VCPU value. The supported values are 0.25, 0.5, 1, 2,
-	// and 4 value = 0.25 MEMORY = 512, 1024, or 2048 value = 0.5 MEMORY = 1024, 2048,
-	// 3072, or 4096 value = 1 MEMORY = 2048, 3072, 4096, 5120, 6144, 7168, or 8192
-	// value = 2 MEMORY = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288,
-	// 13312, 14336, 15360, or 16384 value = 4 MEMORY = 8192, 9216, 10240, 11264,
-	// 12288, 13312, 14336, 15360, 16384, 17408, 18432, 19456, 20480, 21504, 22528,
-	// 23552, 24576, 25600, 26624, 27648, 28672, 29696, or 30720
+	// node at least once. For jobs running on Fargate resources, then value must match
+	// one of the supported values and the MEMORY values must be one of the values
+	// supported for that VCPU value. The supported values are 0.25, 0.5, 1, 2, and 4
+	// value = 0.25 MEMORY = 512, 1024, or 2048 value = 0.5 MEMORY = 1024, 2048, 3072,
+	// or 4096 value = 1 MEMORY = 2048, 3072, 4096, 5120, 6144, 7168, or 8192 value = 2
+	// MEMORY = 4096, 5120, 6144, 7168, 8192, 9216, 10240, 11264, 12288, 13312, 14336,
+	// 15360, or 16384 value = 4 MEMORY = 8192, 9216, 10240, 11264, 12288, 13312,
+	// 14336, 15360, 16384, 17408, 18432, 19456, 20480, 21504, 22528, 23552, 24576,
+	// 25600, 26624, 27648, 28672, 29696, or 30720
 	//
 	// This member is required.
 	Value *string
@@ -1819,7 +1800,7 @@ type ResourceRequirement struct {
 
 // The retry strategy associated with a job. For more information, see Automated
 // job retries
-// (https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html) in the
+// (https://docs.aws.amazon.com/batch/latest/userguide/job_retries.html) in the AWS
 // Batch User Guide.
 type RetryStrategy struct {
 
@@ -1849,7 +1830,7 @@ type RetryStrategy struct {
 // For more
 // information, see Specifying sensitive data
 // (https://docs.aws.amazon.com/batch/latest/userguide/specifying-sensitive-data.html)
-// in the Batch User Guide.
+// in the AWS Batch User Guide.
 type Secret struct {
 
 	// The name of the secret.
@@ -1858,11 +1839,11 @@ type Secret struct {
 	Name *string
 
 	// The secret to expose to the container. The supported values are either the full
-	// ARN of the Secrets Manager secret or the full ARN of the parameter in the Amazon
-	// Web Services Systems Manager Parameter Store. If the Amazon Web Services Systems
-	// Manager Parameter Store parameter exists in the same Region as the job you're
-	// launching, then you can use either the full ARN or name of the parameter. If the
-	// parameter exists in a different Region, then the full ARN must be specified.
+	// ARN of the AWS Secrets Manager secret or the full ARN of the parameter in the
+	// AWS Systems Manager Parameter Store. If the AWS Systems Manager Parameter Store
+	// parameter exists in the same Region as the job you're launching, then you can
+	// use either the full ARN or name of the parameter. If the parameter exists in a
+	// different Region, then the full ARN must be specified.
 	//
 	// This member is required.
 	ValueFrom *string
@@ -1871,7 +1852,7 @@ type Secret struct {
 }
 
 // The container path, mount options, and size of the tmpfs mount. This object
-// isn't applicable to jobs that are running on Fargate resources.
+// isn't applicable to jobs running on Fargate resources.
 type Tmpfs struct {
 
 	// The absolute file path in the container where the tmpfs volume is mounted.
@@ -1897,7 +1878,7 @@ type Tmpfs struct {
 }
 
 // The ulimit settings to pass to the container. This object isn't applicable to
-// jobs that are running on Fargate resources.
+// jobs running on Fargate resources.
 type Ulimit struct {
 
 	// The hard limit for the ulimit type.
@@ -1922,16 +1903,16 @@ type Ulimit struct {
 type Volume struct {
 
 	// This parameter is specified when you are using an Amazon Elastic File System
-	// file system for job storage. Jobs that are running on Fargate resources must
-	// specify a platformVersion of at least 1.4.0.
+	// file system for job storage. Jobs running on Fargate resources must specify a
+	// platformVersion of at least 1.4.0.
 	EfsVolumeConfiguration *EFSVolumeConfiguration
 
 	// The contents of the host parameter determine whether your data volume persists
 	// on the host container instance and where it is stored. If the host parameter is
 	// empty, then the Docker daemon assigns a host path for your data volume. However,
 	// the data isn't guaranteed to persist after the containers associated with it
-	// stop running. This parameter isn't applicable to jobs that are running on
-	// Fargate resources and shouldn't be provided.
+	// stop running. This parameter isn't applicable to jobs running on Fargate
+	// resources and shouldn't be provided.
 	Host *Host
 
 	// The name of the volume. Up to 255 letters (uppercase and lowercase), numbers,

@@ -1100,7 +1100,7 @@
                 "SourceAccessConfigurations": {
                     "target": "com.amazonaws.lambda#SourceAccessConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of authentication protocols or VPC components required to secure your event source.</p>"
+                        "smithy.api#documentation": "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
                     }
                 },
                 "SelfManagedEventSource": {
@@ -1584,9 +1584,6 @@
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
                 },
                 {
-                    "target": "com.amazonaws.lambda#ResourceConflictException"
-                },
-                {
                     "target": "com.amazonaws.lambda#ResourceNotFoundException"
                 },
                 {
@@ -2055,7 +2052,7 @@
                 "StartingPosition": {
                     "target": "com.amazonaws.lambda#EventSourcePosition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. <code>AT_TIMESTAMP</code> is supported only for Amazon Kinesis\n      streams.</p>"
+                        "smithy.api#documentation": "<p>The position in a stream from which to start reading. Required for Amazon Kinesis, Amazon DynamoDB, and Amazon MSK Streams\n      sources. <code>AT_TIMESTAMP</code> is only supported for Amazon Kinesis streams.</p>"
                     }
                 },
                 "StartingPositionTimestamp": {
@@ -2073,13 +2070,13 @@
                 "MaximumBatchingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#MaximumBatchingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams and Amazon SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.</p>"
+                        "smithy.api#documentation": "<p>(Streams and SQS standard queues) The maximum amount of time to gather records before invoking the function, in seconds. The default value is zero.</p>"
                     }
                 },
                 "ParallelizationFactor": {
                     "target": "com.amazonaws.lambda#ParallelizationFactor",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process concurrently from each shard. The default value is 1.</p>"
+                        "smithy.api#documentation": "<p>(Streams only) The number of batches to process from each shard concurrently. The default value is 1.</p>"
                     }
                 },
                 "EventSourceArn": {
@@ -2097,25 +2094,25 @@
                 "LastModified": {
                     "target": "com.amazonaws.lambda#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date that the event source mapping was last updated or that its state changed.</p>"
+                        "smithy.api#documentation": "<p>The date that the event source mapping was last updated, or its state changed.</p>"
                     }
                 },
                 "LastProcessingResult": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The result of the last Lambda invocation of your function.</p>"
+                        "smithy.api#documentation": "<p>The result of the last Lambda invocation of your Lambda function.</p>"
                     }
                 },
                 "State": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the event source mapping. It can be one of the following: <code>Creating</code>,\n        <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>,\n        <code>Updating</code>, or <code>Deleting</code>.</p>"
+                        "smithy.api#documentation": "<p>The state of the event source mapping. It can be one of the following: <code>Creating</code>,\n      <code>Enabling</code>, <code>Enabled</code>, <code>Disabling</code>, <code>Disabled</code>,\n      <code>Updating</code>, or <code>Deleting</code>.</p>"
                     }
                 },
                 "StateTransitionReason": {
                     "target": "com.amazonaws.lambda#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether a user or Lambda made the last change to the event source mapping.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the last change to the event source mapping was made by a user, or by the Lambda\n      service.</p>"
                     }
                 },
                 "DestinationConfig": {
@@ -2133,19 +2130,19 @@
                 "Queues": {
                     "target": "com.amazonaws.lambda#Queues",
                     "traits": {
-                        "smithy.api#documentation": "<p> (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.</p>"
+                        "smithy.api#documentation": "<p>\n      (MQ) The name of the Amazon MQ broker destination queue to consume.\n    </p>"
                     }
                 },
                 "SourceAccessConfigurations": {
                     "target": "com.amazonaws.lambda#SourceAccessConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of the authentication protocol, VPC components, or virtual host to secure and define your event source.</p>"
+                        "smithy.api#documentation": "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
                     }
                 },
                 "SelfManagedEventSource": {
                     "target": "com.amazonaws.lambda#SelfManagedEventSource",
                     "traits": {
-                        "smithy.api#documentation": "<p>The self-managed Apache Kafka cluster for your event source.</p>"
+                        "smithy.api#documentation": "<p>The Self-Managed Apache Kafka cluster for your event source.</p>"
                     }
                 },
                 "MaximumRecordAgeInSeconds": {
@@ -2169,7 +2166,7 @@
                 "TumblingWindowInSeconds": {
                     "target": "com.amazonaws.lambda#TumblingWindowInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Streams only) The duration in seconds of a processing window. The range is 1–900 seconds.</p>"
+                        "smithy.api#documentation": "<p>(Streams only) The duration in seconds of a processing window. The range is between 1 second up to 900 seconds.</p>"
                     }
                 },
                 "FunctionResponseTypes": {
@@ -2180,7 +2177,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A mapping between an Amazon Web Services resource and a Lambda function. For details, see <a>CreateEventSourceMapping</a>.</p>"
+                "smithy.api#documentation": "<p>A mapping between an Amazon Web Services resource and an Lambda function. See <a>CreateEventSourceMapping</a> for details.</p>"
             }
         },
         "com.amazonaws.lambda#EventSourceMappingsList": {
@@ -4696,7 +4693,7 @@
                 "MaxItems": {
                     "target": "com.amazonaws.lambda#MaxListItems",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of event source mappings to return. Note that ListEventSourceMappings returns\n      a maximum of 100 items in each response, even if you set the number higher.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of event source mappings to return.</p>",
                         "smithy.api#httpQuery": "MaxItems"
                     }
                 }
@@ -6062,9 +6059,6 @@
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
                 },
                 {
-                    "target": "com.amazonaws.lambda#ResourceConflictException"
-                },
-                {
                     "target": "com.amazonaws.lambda#ResourceNotFoundException"
                 },
                 {
@@ -6654,12 +6648,12 @@
                 "Endpoints": {
                     "target": "com.amazonaws.lambda#Endpoints",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of bootstrap servers for your Kafka brokers in the following format: <code>\"KAFKA_BOOTSTRAP_SERVERS\":\n        [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]</code>.</p>"
+                        "smithy.api#documentation": "<p>The list of bootstrap servers for your Kafka brokers in the following format: <code>\"KAFKA_BOOTSTRAP_SERVERS\": [\"abc.xyz.com:xxxx\",\"abc2.xyz.com:xxxx\"]</code>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The self-managed Apache Kafka cluster for your event source.</p>"
+                "smithy.api#documentation": "<p>The Self-Managed Apache Kafka cluster for your event source.</p>"
             }
         },
         "com.amazonaws.lambda#SensitiveString": {
@@ -6702,7 +6696,7 @@
                 "Type": {
                     "target": "com.amazonaws.lambda#SourceAccessType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of authentication protocol, VPC components, or virtual host for your event source. For example: <code>\"Type\":\"SASL_SCRAM_512_AUTH\"</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BASIC_AUTH</code> - (Amazon MQ) The Secrets Manager secret that stores your broker credentials.</p>\n            </li>\n            <li>\n               <p>\n                  <code>BASIC_AUTH</code> - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret key used for SASL/PLAIN authentication of your Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your self-managed Apache Kafka cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your self-managed Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your self-managed Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your self-managed Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VIRTUAL_HOST</code> - (Amazon MQ) The name of the virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the event source.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of authentication protocol or the VPC components for your event source. For example: <code>\"Type\":\"SASL_SCRAM_512_AUTH\"</code>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>BASIC_AUTH</code> - (MQ) The Secrets Manager secret that stores your broker credentials.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VPC_SUBNET</code> - The subnets associated with your VPC. Lambda connects to these subnets to fetch data from your Self-Managed Apache Kafka cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VPC_SECURITY_GROUP</code> - The VPC security group used to manage access to your Self-Managed Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SASL_SCRAM_256_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SASL_SCRAM_512_AUTH</code> - The Secrets Manager ARN of your secret key used for SASL SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.</p>\n            </li>\n            <li>\n               <p>\n                  <code>VIRTUAL_HOST</code> - The name of the virtual host in your RabbitMQ broker. Lambda will use this host as the event source.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "URI": {
@@ -6713,7 +6707,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>To secure and define access to your event source, you can specify the authentication protocol, VPC components, or virtual host.</p>"
+                "smithy.api#documentation": "<p>You can specify the authentication protocol, or the VPC components to secure access to your event source.</p>"
             }
         },
         "com.amazonaws.lambda#SourceAccessConfigurations": {
@@ -7467,7 +7461,7 @@
                 "SourceAccessConfigurations": {
                     "target": "com.amazonaws.lambda#SourceAccessConfigurations",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of authentication protocols or VPC components required to secure your event source.</p>"
+                        "smithy.api#documentation": "<p>An array of the authentication protocol, or the VPC components to secure your event source.</p>"
                     }
                 },
                 "TumblingWindowInSeconds": {
@@ -7754,9 +7748,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.lambda#InvalidParameterValueException"
-                },
-                {
-                    "target": "com.amazonaws.lambda#ResourceConflictException"
                 },
                 {
                     "target": "com.amazonaws.lambda#ResourceNotFoundException"

@@ -42,8 +42,7 @@ type EnableFastSnapshotRestoresInput struct {
 	AvailabilityZones []string
 
 	// The IDs of one or more snapshots. For example, snap-1234567890abcdef0. You can
-	// specify a snapshot that was shared with you from another Amazon Web Services
-	// account.
+	// specify a snapshot that was shared with you from another AWS account.
 	//
 	// This member is required.
 	SourceSnapshotIds []string

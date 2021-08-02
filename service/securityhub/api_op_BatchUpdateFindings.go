@@ -44,7 +44,7 @@ import (
 // be able to suppress findings or change the finding severity. See Configuring
 // access to BatchUpdateFindings
 // (https://docs.aws.amazon.com/securityhub/latest/userguide/finding-update-batchupdatefindings.html#batchupdatefindings-configure-access)
-// in the Security Hub User Guide.
+// in the AWS Security Hub User Guide.
 func (c *Client) BatchUpdateFindings(ctx context.Context, params *BatchUpdateFindingsInput, optFns ...func(*Options)) (*BatchUpdateFindingsOutput, error) {
 	if params == nil {
 		params = &BatchUpdateFindingsInput{}

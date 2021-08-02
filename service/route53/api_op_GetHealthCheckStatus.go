@@ -11,9 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets status of a specified health check. This API is intended for use during
-// development to diagnose behavior. It doesn’t support production use-cases with
-// high query rates that require immediate and actionable responses.
+// Gets status of a specified health check.
 func (c *Client) GetHealthCheckStatus(ctx context.Context, params *GetHealthCheckStatusInput, optFns ...func(*Options)) (*GetHealthCheckStatusOutput, error) {
 	if params == nil {
 		params = &GetHealthCheckStatusInput{}

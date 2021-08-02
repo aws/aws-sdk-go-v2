@@ -12,8 +12,7 @@ import (
 	"time"
 )
 
-// Returns information about a ledger, including its state, permissions mode,
-// encryption at rest settings, and when it was created.
+// Returns information about a ledger, including its state and when it was created.
 func (c *Client) DescribeLedger(ctx context.Context, params *DescribeLedgerInput, optFns ...func(*Options)) (*DescribeLedgerOutput, error) {
 	if params == nil {
 		params = &DescribeLedgerInput{}
@@ -55,11 +54,6 @@ type DescribeLedgerOutput struct {
 	// ledger. You can disable it by calling the UpdateLedger operation to set the flag
 	// to false.
 	DeletionProtection *bool
-
-	// Information about the encryption of data at rest in the ledger. This includes
-	// the current status, the KMS key, and when the key became inaccessible (in the
-	// case of an error).
-	EncryptionDescription *types.LedgerEncryptionDescription
 
 	// The name of the ledger.
 	Name *string

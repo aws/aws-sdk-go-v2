@@ -46,8 +46,7 @@ func (c *Client) CreateCanary(ctx context.Context, params *CreateCanaryInput, op
 type CreateCanaryInput struct {
 
 	// The location in Amazon S3 where Synthetics stores artifacts from the test runs
-	// of this canary. Artifacts include the log file, screenshots, and HAR files. The
-	// name of the S3 bucket can't include a period (.).
+	// of this canary. Artifacts include the log file, screenshots, and HAR files.
 	//
 	// This member is required.
 	ArtifactS3Location *string

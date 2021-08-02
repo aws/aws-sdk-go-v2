@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates an Amazon EMR block public access configuration for your
+// Creates or updates an Amazon EMR block public access configuration for your AWS
 // account in the current Region. For more information see Configure Block Public
 // Access for Amazon EMR
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)

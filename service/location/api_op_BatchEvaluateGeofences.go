@@ -11,20 +11,10 @@ import (
 )
 
 // Evaluates device positions against the geofence geometries from a given geofence
-// collection. This operation always returns an empty response because geofences
-// are asynchronously evaluated. The evaluation determines if the device has
-// entered or exited a geofenced area, and then publishes one of the following
-// events to Amazon EventBridge:
-//
-// * ENTER if Amazon Location determines that the
-// tracked device has entered a geofenced area.
-//
-// * EXIT if Amazon Location
-// determines that the tracked device has exited a geofenced area.
-//
-// The last
-// geofence that a device was observed within is tracked for 30 days after the most
-// recent device position update.
+// collection. The evaluation determines if the device has entered or exited a
+// geofenced area, which publishes ENTER or EXIT geofence events to Amazon
+// EventBridge. The last geofence that a device was observed within, if any, is
+// tracked for 30 days after the most recent device position update
 func (c *Client) BatchEvaluateGeofences(ctx context.Context, params *BatchEvaluateGeofencesInput, optFns ...func(*Options)) (*BatchEvaluateGeofencesOutput, error) {
 	if params == nil {
 		params = &BatchEvaluateGeofencesInput{}

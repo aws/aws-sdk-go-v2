@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Authorizes the account that created a specified VPC to submit an
+// Authorizes the AWS account that created a specified VPC to submit an
 // AssociateVPCWithHostedZone request to associate the VPC with a specified hosted
 // zone that was created by a different account. To submit a
 // CreateVPCAssociationAuthorization request, you must use the account that created

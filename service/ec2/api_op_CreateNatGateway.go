@@ -22,7 +22,7 @@ import (
 // private gateway. Common use cases include running large workloads behind a small
 // pool of allowlisted IPv4 addresses, preserving private IPv4 addresses, and
 // communicating between overlapping networks. For more information, see NAT
-// gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)
+// Gateways (https://docs.aws.amazon.com/vpc/latest/userguide/vpc-nat-gateway.html)
 // in the Amazon Virtual Private Cloud User Guide.
 func (c *Client) CreateNatGateway(ctx context.Context, params *CreateNatGatewayInput, optFns ...func(*Options)) (*CreateNatGatewayOutput, error) {
 	if params == nil {
@@ -53,7 +53,7 @@ type CreateNatGatewayInput struct {
 	AllocationId *string
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency
+	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
 	// Constraint: Maximum 64 ASCII characters.
 	ClientToken *string

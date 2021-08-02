@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters an Batch job definition. Job definitions are permanently deleted
+// Deregisters an AWS Batch job definition. Job definitions are permanently deleted
 // after 180 days.
 func (c *Client) DeregisterJobDefinition(ctx context.Context, params *DeregisterJobDefinitionInput, optFns ...func(*Options)) (*DeregisterJobDefinitionOutput, error) {
 	if params == nil {

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a custom framework in Audit Manager.
+// Deletes a custom framework in AWS Audit Manager.
 func (c *Client) DeleteAssessmentFramework(ctx context.Context, params *DeleteAssessmentFrameworkInput, optFns ...func(*Options)) (*DeleteAssessmentFrameworkOutput, error) {
 	if params == nil {
 		params = &DeleteAssessmentFrameworkInput{}

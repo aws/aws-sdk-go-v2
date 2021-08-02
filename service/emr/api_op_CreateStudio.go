@@ -54,8 +54,7 @@ type CreateStudioInput struct {
 	Name *string
 
 	// The IAM role that will be assumed by the Amazon EMR Studio. The service role
-	// provides a way for Amazon EMR Studio to interoperate with other Amazon Web
-	// Services services.
+	// provides a way for Amazon EMR Studio to interoperate with other AWS services.
 	//
 	// This member is required.
 	ServiceRole *string

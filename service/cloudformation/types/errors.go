@@ -170,7 +170,7 @@ func (e *InvalidStateTransitionException) ErrorFault() smithy.ErrorFault { retur
 // The quota for the resource has already been reached. For information on resource
 // and stack limitations, see Limits
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cloudformation-limits.html)
-// in the CloudFormation User Guide.
+// in the AWS CloudFormation User Guide.
 type LimitExceededException struct {
 	Message *string
 
@@ -309,26 +309,6 @@ func (e *StackInstanceNotFoundException) ErrorMessage() string {
 }
 func (e *StackInstanceNotFoundException) ErrorCode() string             { return "StackInstanceNotFoundException" }
 func (e *StackInstanceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// The specified stack ARN doesn’t exist or stack doesn’t exist corresponding to
-// the ARN in input.
-type StackNotFoundException struct {
-	Message *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *StackNotFoundException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *StackNotFoundException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *StackNotFoundException) ErrorCode() string             { return "StackNotFoundException" }
-func (e *StackNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // You can't yet delete this stack set, because it still contains one or more stack
 // instances. Delete all stack instances from the stack set before deleting the

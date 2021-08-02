@@ -33,8 +33,7 @@ type DeleteIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentName *string
 
-	// The Amazon Web Services account; ID where you want to delete the IAM policy
-	// assignment.
+	// The AWS account ID where you want to delete the IAM policy assignment.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -52,7 +51,7 @@ type DeleteIAMPolicyAssignmentOutput struct {
 	// The name of the assignment.
 	AssignmentName *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

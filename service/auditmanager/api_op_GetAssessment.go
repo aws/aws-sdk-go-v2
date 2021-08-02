@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an assessment from Audit Manager.
+// Returns an assessment from AWS Audit Manager.
 func (c *Client) GetAssessment(ctx context.Context, params *GetAssessmentInput, optFns ...func(*Options)) (*GetAssessmentOutput, error) {
 	if params == nil {
 		params = &GetAssessmentInput{}
@@ -39,11 +39,12 @@ type GetAssessmentInput struct {
 
 type GetAssessmentOutput struct {
 
-	// An entity that defines the scope of audit evidence collected by Audit Manager.
-	// An Audit Manager assessment is an implementation of an Audit Manager framework.
+	// An entity that defines the scope of audit evidence collected by AWS Audit
+	// Manager. An AWS Audit Manager assessment is an implementation of an AWS Audit
+	// Manager framework.
 	Assessment *types.Assessment
 
-	// The wrapper that contains the Audit Manager role information of the current
+	// The wrapper that contains the AWS Audit Manager role information of the current
 	// user, such as the role type and IAM Amazon Resource Name (ARN).
 	UserRole *types.Role
 

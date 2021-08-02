@@ -166,7 +166,7 @@ func (m *endpointPrefix_opListAssetsMiddleware) HandleSerialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "api." + req.URL.Host
+	req.URL.Host = "model." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

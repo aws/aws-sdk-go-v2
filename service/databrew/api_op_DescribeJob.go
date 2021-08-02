@@ -51,13 +51,9 @@ type DescribeJobOutput struct {
 	// The identifier (user name) of the user associated with the creation of the job.
 	CreatedBy *string
 
-	// One or more artifacts that represent the Glue Data Catalog output from running
-	// the job.
+	// One or more artifacts that represent the AWS Glue Data Catalog output from
+	// running the job.
 	DataCatalogOutputs []types.DataCatalogOutput
-
-	// Represents a list of JDBC database output objects which defines the output
-	// destination for a DataBrew recipe job to write into.
-	DatabaseOutputs []types.DatabaseOutput
 
 	// The dataset that the job acts upon.
 	DatasetName *string
@@ -97,11 +93,6 @@ type DescribeJobOutput struct {
 
 	// One or more artifacts that represent the output from running the job.
 	Outputs []types.Output
-
-	// Configuration for profile jobs. Used to select columns, do evaluations, and
-	// override default parameters of evaluations. When configuration is null, the
-	// profile job will run with default settings.
-	ProfileConfiguration *types.ProfileConfiguration
 
 	// The DataBrew project associated with this job.
 	ProjectName *string

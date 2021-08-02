@@ -11,7 +11,7 @@ import (
 )
 
 // Remove a tag from a resource. For more information, see AWS Proton resources and
-// tagging in the AWS Proton Administrator Guide
+// tagging in the AWS Proton Administration Guide
 // (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or AWS
 // Proton User Guide
 // (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).

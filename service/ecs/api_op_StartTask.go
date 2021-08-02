@@ -121,9 +121,9 @@ type StartTaskInput struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for Amazon Web
-	// Services use. You cannot edit or delete tag keys or values with this prefix.
-	// Tags with this prefix do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for AWS use. You
+	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
+	// do not count against your tags per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

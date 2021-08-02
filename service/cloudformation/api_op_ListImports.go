@@ -35,8 +35,8 @@ func (c *Client) ListImports(ctx context.Context, params *ListImportsInput, optF
 
 type ListImportsInput struct {
 
-	// The name of the exported output value. CloudFormation returns the stack names
-	// that are importing this value.
+	// The name of the exported output value. AWS CloudFormation returns the stack
+	// names that are importing this value.
 	//
 	// This member is required.
 	ExportName *string

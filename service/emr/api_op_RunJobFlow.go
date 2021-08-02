@@ -120,9 +120,9 @@ type RunJobFlowInput struct {
 	// the Amazon EMR Management Guide.
 	KerberosAttributes *types.KerberosAttributes
 
-	// The KMS key used for encrypting log files. If a value is not provided, the logs
-	// remain encrypted by AES-256. This attribute is only available with Amazon EMR
-	// version 5.30.0 and later, excluding Amazon EMR 6.0.0.
+	// The AWS KMS customer master key (CMK) used for encrypting log files. If a value
+	// is not provided, the logs remain encrypted by AES-256. This attribute is only
+	// available with Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.
 	LogEncryptionKmsKeyId *string
 
 	// The location in Amazon S3 to write the log files of the job flow. If a value is
@@ -203,8 +203,8 @@ type RunJobFlowInput struct {
 	// The name of a security configuration to apply to the cluster.
 	SecurityConfiguration *string
 
-	// The IAM role that will be assumed by the Amazon EMR service to access Amazon Web
-	// Services resources on your behalf.
+	// The IAM role that will be assumed by the Amazon EMR service to access AWS
+	// resources on your behalf.
 	ServiceRole *string
 
 	// Specifies the number of steps that can be executed concurrently. The default
@@ -230,17 +230,10 @@ type RunJobFlowInput struct {
 	// instances.
 	Tags []types.Tag
 
-	// Set this value to true so that IAM principals in the account associated with the
-	// cluster can perform EMR actions on the cluster that their IAM policies allow.
-	// This value defaults to false for clusters created using the EMR API or the CLI
-	// create-cluster
-	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
-	// command. When set to false, only the IAM principal that created the cluster and
-	// the account root user can perform EMR actions for the cluster, regardless of the
-	// IAM permissions policies attached to other IAM principals. For more information,
-	// see Understanding the EMR Cluster VisibleToAllUsers Setting
-	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
-	// in the Amazon EMR Management Guide.
+	// A value of true indicates that all IAM users in the AWS account can perform
+	// cluster actions if they have the proper IAM policy permissions. This is the
+	// default. A value of false indicates that only the IAM user who created the
+	// cluster can perform actions.
 	VisibleToAllUsers bool
 
 	noSmithyDocumentSerde

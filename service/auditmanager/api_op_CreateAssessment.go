@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an assessment in Audit Manager.
+// Creates an assessment in AWS Audit Manager.
 func (c *Client) CreateAssessment(ctx context.Context, params *CreateAssessmentInput, optFns ...func(*Options)) (*CreateAssessmentOutput, error) {
 	if params == nil {
 		params = &CreateAssessmentInput{}
@@ -50,7 +50,8 @@ type CreateAssessmentInput struct {
 	// This member is required.
 	Roles []types.Role
 
-	// The wrapper that contains the accounts and services in scope for the assessment.
+	// The wrapper that contains the AWS accounts and AWS services in scope for the
+	// assessment.
 	//
 	// This member is required.
 	Scope *types.Scope
@@ -66,8 +67,9 @@ type CreateAssessmentInput struct {
 
 type CreateAssessmentOutput struct {
 
-	// An entity that defines the scope of audit evidence collected by Audit Manager.
-	// An Audit Manager assessment is an implementation of an Audit Manager framework.
+	// An entity that defines the scope of audit evidence collected by AWS Audit
+	// Manager. An AWS Audit Manager assessment is an implementation of an AWS Audit
+	// Manager framework.
 	Assessment *types.Assessment
 
 	// Metadata pertaining to the operation's result.

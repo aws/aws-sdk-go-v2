@@ -331,7 +331,7 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.health#maxResultsLowerRange",
+                    "target": "com.amazonaws.health#maxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
                     }
@@ -787,7 +787,7 @@
                     }
                 },
                 "maxResults": {
-                    "target": "com.amazonaws.health#maxResultsLowerRange",
+                    "target": "com.amazonaws.health#maxResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The maximum number of items to return in one batch, between 10 and 100, inclusive.</p>"
                     }
@@ -1312,7 +1312,7 @@
                     "min": 3,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[^:/]{3,100}$"
+                "smithy.api#pattern": "[^:/]{3,100}"
             }
         },
         "com.amazonaws.health#EventTypeCategoryList": {
@@ -1674,7 +1674,7 @@
                     "min": 6,
                     "max": 18
                 },
-                "smithy.api#pattern": "^[a-z]{2}\\-[0-9a-z\\-]{4,16}$"
+                "smithy.api#pattern": "[a-z]{2}\\-[0-9a-z\\-]{4,16}"
             }
         },
         "com.amazonaws.health#availabilityZones": {
@@ -1717,7 +1717,7 @@
                     "min": 0,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^.{0,1600}$"
+                "smithy.api#pattern": ".{0,1600}"
             }
         },
         "com.amazonaws.health#entityArnList": {
@@ -1728,7 +1728,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 99
+                    "max": 100
                 }
             }
         },
@@ -1773,7 +1773,7 @@
                     "min": 0,
                     "max": 1224
                 },
-                "smithy.api#pattern": "^.{0,1224}$"
+                "smithy.api#pattern": ".{0,1224}"
             }
         },
         "com.amazonaws.health#entityValueList": {
@@ -1784,7 +1784,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 99
+                    "max": 100
                 }
             }
         },
@@ -1806,7 +1806,7 @@
                     "min": 0,
                     "max": 1600
                 },
-                "smithy.api#pattern": "^arn:aws(-[a-z]+(-[a-z]+)?)?:health:[^:]*:[^:]*:event(?:/[\\w-]+){3}$"
+                "smithy.api#pattern": "arn:aws(-[a-z]+(-[a-z]+)?)?:health:[^:]*:[^:]*:event(?:/[\\w-]+){3}"
             }
         },
         "com.amazonaws.health#eventArnList": {
@@ -1926,7 +1926,7 @@
                     "min": 3,
                     "max": 100
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\_\\-]{3,100}$"
+                "smithy.api#pattern": "[a-zA-Z0-9\\_\\-]{3,100}"
             }
         },
         "com.amazonaws.health#eventTypeList2": {
@@ -1951,7 +1951,7 @@
                     "min": 2,
                     "max": 256
                 },
-                "smithy.api#pattern": "^.{2,256}$"
+                "smithy.api#pattern": ".{2,256}"
             }
         },
         "com.amazonaws.health#maxResults": {
@@ -1960,16 +1960,6 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 10,
-                    "max": 100
-                }
-            }
-        },
-        "com.amazonaws.health#maxResultsLowerRange": {
-            "type": "integer",
-            "traits": {
-                "smithy.api#box": {},
-                "smithy.api#range": {
-                    "min": 1,
                     "max": 100
                 }
             }
@@ -1999,7 +1989,7 @@
                     "min": 4,
                     "max": 10000
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9=/+_.-]{4,10000}$"
+                "smithy.api#pattern": "[a-zA-Z0-9=/+_.-]{4,10000}"
             }
         },
         "com.amazonaws.health#region": {
@@ -2009,7 +1999,7 @@
                     "min": 2,
                     "max": 25
                 },
-                "smithy.api#pattern": "^[^:/]{2,25}$"
+                "smithy.api#pattern": "[^:/]{2,25}"
             }
         },
         "com.amazonaws.health#regionList": {
@@ -2031,7 +2021,7 @@
                     "min": 2,
                     "max": 30
                 },
-                "smithy.api#pattern": "^[^:/]{2,30}$"
+                "smithy.api#pattern": "[^:/]{2,30}"
             }
         },
         "com.amazonaws.health#serviceList": {
@@ -2068,7 +2058,7 @@
                     "min": 0,
                     "max": 127
                 },
-                "smithy.api#pattern": "^.{0,127}$"
+                "smithy.api#pattern": ".{0,127}"
             }
         },
         "com.amazonaws.health#tagSet": {
@@ -2093,7 +2083,7 @@
                     "min": 0,
                     "max": 255
                 },
-                "smithy.api#pattern": "^.{0,255}$"
+                "smithy.api#pattern": ".{0,255}"
             }
         },
         "com.amazonaws.health#timestamp": {

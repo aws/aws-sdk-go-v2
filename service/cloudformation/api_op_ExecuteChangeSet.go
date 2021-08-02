@@ -11,14 +11,14 @@ import (
 )
 
 // Updates a stack using the input information that was provided when the specified
-// change set was created. After the call successfully completes, CloudFormation
-// starts updating the stack. Use the DescribeStacks action to view the status of
-// the update. When you execute a change set, CloudFormation deletes all other
-// change sets associated with the stack because they aren't valid for the updated
-// stack. If a stack policy is associated with the stack, CloudFormation enforces
-// the policy during the update. You can't specify a temporary stack policy that
-// overrides the current policy. To create a change set for the entire stack
-// hierachy, IncludeNestedStacks must have been set to True.
+// change set was created. After the call successfully completes, AWS
+// CloudFormation starts updating the stack. Use the DescribeStacks action to view
+// the status of the update. When you execute a change set, AWS CloudFormation
+// deletes all other change sets associated with the stack because they aren't
+// valid for the updated stack. If a stack policy is associated with the stack, AWS
+// CloudFormation enforces the policy during the update. You can't specify a
+// temporary stack policy that overrides the current policy. To create a change set
+// for the entire stack hierachy, IncludeNestedStacks must have been set to True.
 func (c *Client) ExecuteChangeSet(ctx context.Context, params *ExecuteChangeSetInput, optFns ...func(*Options)) (*ExecuteChangeSetOutput, error) {
 	if params == nil {
 		params = &ExecuteChangeSetInput{}
@@ -44,10 +44,10 @@ type ExecuteChangeSetInput struct {
 	ChangeSetName *string
 
 	// A unique identifier for this ExecuteChangeSet request. Specify this token if you
-	// plan to retry requests so that CloudFormation knows that you're not attempting
-	// to execute a change set to update a stack with the same name. You might retry
-	// ExecuteChangeSet requests to ensure that CloudFormation successfully received
-	// them.
+	// plan to retry requests so that AWS CloudFormation knows that you're not
+	// attempting to execute a change set to update a stack with the same name. You
+	// might retry ExecuteChangeSet requests to ensure that AWS CloudFormation
+	// successfully received them.
 	ClientRequestToken *string
 
 	// If you specified the name of a change set, specify the stack name or ID (ARN)

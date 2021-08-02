@@ -12,7 +12,7 @@ import (
 )
 
 // Enables you to provide feedback to Amazon Kendra to improve the performance of
-// your index.
+// the service.
 func (c *Client) SubmitFeedback(ctx context.Context, params *SubmitFeedbackInput, optFns ...func(*Options)) (*SubmitFeedbackOutput, error) {
 	if params == nil {
 		params = &SubmitFeedbackInput{}

@@ -32,29 +32,21 @@ func (c *Client) CreatePlaceIndex(ctx context.Context, params *CreatePlaceIndexI
 type CreatePlaceIndexInput struct {
 
 	// Specifies the data provider of geospatial data. This field is case-sensitive.
-	// Enter the valid values as shown. For example, entering HERE returns an error.
-	// Valid values include:
+	// Enter the valid values as shown. For example, entering HERE will return an
+	// error. Valid values include:
 	//
-	// * Esri – For additional information about Esri
-	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)'s
-	// coverage in your region of interest, see Esri details on geocoding coverage
-	// (https://developers.arcgis.com/rest/geocode/api-reference/geocode-coverage.htm).
+	// * Esri
 	//
-	// *
-	// Here – For additional information about HERE Technologies
-	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)'s
-	// coverage in your region of interest, see HERE details on goecoding coverage
-	// (https://developer.here.com/documentation/geocoder/dev_guide/topics/coverage-geocoder.html).
-	// Place index resources using HERE Technologies as a data provider can't store
-	// results
+	// * Here Place index resources using HERE as
+	// a data provider can't be used to store
 	// (https://docs.aws.amazon.com/location-places/latest/APIReference/API_DataSourceConfiguration.html)
-	// for locations in Japan. For more information, see the AWS Service Terms
+	// results for locations in Japan. For more information, see the AWS Service Terms
 	// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
 	//
 	// For
-	// additional information , see Data providers
-	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html)
-	// on the Amazon Location Service Developer Guide.
+	// additional details on data providers, see the Amazon Location Service data
+	// providers page
+	// (https://docs.aws.amazon.com/location/latest/developerguide/what-is-data-provider.html).
 	//
 	// This member is required.
 	DataSource *string
@@ -80,7 +72,7 @@ type CreatePlaceIndexInput struct {
 	// This member is required.
 	PricingPlan types.PricingPlan
 
-	// Specifies the data storage option requesting Places.
+	// Specifies the data storage option for requesting Places.
 	DataSourceConfiguration *types.DataSourceConfiguration
 
 	// The optional description for the place index resource.
@@ -118,7 +110,7 @@ type CreatePlaceIndexOutput struct {
 	CreateTime *time.Time
 
 	// The Amazon Resource Name (ARN) for the place index resource. Used to specify a
-	// resource across AWS.
+	// resource across all AWS.
 	//
 	// * Format example:
 	// arn:aws:geo:region:account-id:place-index/ExamplePlaceIndex

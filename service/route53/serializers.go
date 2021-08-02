@@ -5242,17 +5242,6 @@ func awsRestxml_serializeDocumentHealthCheckConfig(v *types.HealthCheckConfig, v
 		el := value.MemberElement(root)
 		el.String(*v.ResourcePath)
 	}
-	if v.RoutingControlArn != nil {
-		rootAttr := []smithyxml.Attr{}
-		root := smithyxml.StartElement{
-			Name: smithyxml.Name{
-				Local: "RoutingControlArn",
-			},
-			Attr: rootAttr,
-		}
-		el := value.MemberElement(root)
-		el.String(*v.RoutingControlArn)
-	}
 	if v.SearchString != nil {
 		rootAttr := []smithyxml.Attr{}
 		root := smithyxml.StartElement{

@@ -12,7 +12,7 @@ import (
 )
 
 // Registers an extension with the CloudFormation service. Registering an extension
-// makes it available for use in CloudFormation templates in your account, and
+// makes it available for use in CloudFormation templates in your AWS account, and
 // includes:
 //
 // * Validating the extension schema
@@ -63,7 +63,7 @@ type RegisterTypeInput struct {
 	// GetObject (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html)
 	// permissions for the schema handler package. For more information, see Actions,
 	// Resources, and Condition Keys for Amazon S3
-	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html) in the
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/list_amazons3.html) in the AWS
 	// Identity and Access Management User Guide.
 	//
 	// This member is required.
@@ -107,15 +107,15 @@ type RegisterTypeInput struct {
 	// invoking the extension. For CloudFormation to assume the specified execution
 	// role, the role must contain a trust relationship with the CloudFormation service
 	// principle (resources.cloudformation.amazonaws.com). For more information on
-	// adding trust relationships, see Modifying a role trust policy in the Identity
-	// and Access Management User Guide. If your extension calls Amazon Web Services
-	// APIs in any of its handlers, you must create an IAM execution role
+	// adding trust relationships, see Modifying a role trust policy in the AWS
+	// Identity and Access Management User Guide. If your extension calls AWS APIs in
+	// any of its handlers, you must create an IAM execution role
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles.html) that includes
-	// the necessary permissions to call those Amazon Web Services APIs, and provision
-	// that execution role in your account. When CloudFormation needs to invoke the
-	// resource type handler, CloudFormation assumes this execution role to create a
-	// temporary session token, which it then passes to the resource type handler,
-	// thereby supplying your resource type with the appropriate credentials.
+	// the necessary permissions to call those AWS APIs, and provision that execution
+	// role in your account. When CloudFormation needs to invoke the resource type
+	// handler, CloudFormation assumes this execution role to create a temporary
+	// session token, which it then passes to the resource type handler, thereby
+	// supplying your resource type with the appropriate credentials.
 	ExecutionRoleArn *string
 
 	// Specifies logging configuration information for an extension.

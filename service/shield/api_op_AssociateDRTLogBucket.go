@@ -10,14 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Authorizes the Shield Response Team (SRT) to access the specified Amazon S3
-// bucket containing log data such as Application Load Balancer access logs,
-// CloudFront logs, or logs from third party sources. You can associate up to 10
-// Amazon S3 buckets with your subscription. To use the services of the SRT and
-// make an AssociateDRTLogBucket request, you must be subscribed to the Business
-// Support plan (https://aws.amazon.com/premiumsupport/business-support/) or the
-// Enterprise Support plan
-// (https://aws.amazon.com/premiumsupport/enterprise-support/).
+// Authorizes the DDoS Response Team (DRT) to access the specified Amazon S3 bucket
+// containing your AWS WAF logs. You can associate up to 10 Amazon S3 buckets with
+// your subscription. To use the services of the DRT and make an
+// AssociateDRTLogBucket request, you must be subscribed to the Business Support
+// plan (https://aws.amazon.com/premiumsupport/business-support/) or the Enterprise
+// Support plan (https://aws.amazon.com/premiumsupport/enterprise-support/).
 func (c *Client) AssociateDRTLogBucket(ctx context.Context, params *AssociateDRTLogBucketInput, optFns ...func(*Options)) (*AssociateDRTLogBucketOutput, error) {
 	if params == nil {
 		params = &AssociateDRTLogBucketInput{}
@@ -35,7 +33,7 @@ func (c *Client) AssociateDRTLogBucket(ctx context.Context, params *AssociateDRT
 
 type AssociateDRTLogBucketInput struct {
 
-	// The Amazon S3 bucket that contains the logs that you want to share.
+	// The Amazon S3 bucket that contains your AWS WAF logs.
 	//
 	// This member is required.
 	LogBucket *string

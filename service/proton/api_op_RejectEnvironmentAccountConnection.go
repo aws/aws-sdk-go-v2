@@ -15,9 +15,8 @@ import (
 // environment account. After you reject an environment account connection request,
 // you won’t be able to accept or use the rejected environment account connection.
 // You can’t reject an environment account connection that is connected to an
-// environment. For more information, see Environment account connections
-// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
-// in the AWS Proton Administrator guide.
+// environment. For more information, see Environment account connections in the
+// AWS Proton Administration guide.
 func (c *Client) RejectEnvironmentAccountConnection(ctx context.Context, params *RejectEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*RejectEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &RejectEnvironmentAccountConnectionInput{}

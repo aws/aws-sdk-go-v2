@@ -165,7 +165,6 @@ const (
 	LocaleDeDe  Locale = "de-DE"
 	LocaleEnAu  Locale = "en-AU"
 	LocaleEnGb  Locale = "en-GB"
-	LocaleEnIn  Locale = "en-IN"
 	LocaleEnUs  Locale = "en-US"
 	LocaleEs419 Locale = "es-419"
 	LocaleEsEs  Locale = "es-ES"
@@ -184,7 +183,6 @@ func (Locale) Values() []Locale {
 		"de-DE",
 		"en-AU",
 		"en-GB",
-		"en-IN",
 		"en-US",
 		"es-419",
 		"es-ES",

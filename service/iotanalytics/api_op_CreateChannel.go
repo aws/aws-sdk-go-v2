@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used to create a channel. A channel collects data from an MQTT topic and
-// archives the raw, unprocessed messages before publishing the data to a pipeline.
+// Creates a channel. A channel collects data from an MQTT topic and archives the
+// raw, unprocessed messages before publishing the data to a pipeline.
 func (c *Client) CreateChannel(ctx context.Context, params *CreateChannelInput, optFns ...func(*Options)) (*CreateChannelOutput, error) {
 	if params == nil {
 		params = &CreateChannelInput{}
@@ -37,7 +37,7 @@ type CreateChannelInput struct {
 
 	// Where channel data is stored. You can choose one of serviceManagedS3 or
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
-	// You can't change this storage option after the channel is created.
+	// You cannot change this storage option after the channel is created.
 	ChannelStorage *types.ChannelStorage
 
 	// How long, in days, message data is kept for the channel. When customerManagedS3

@@ -12,8 +12,8 @@ import (
 
 // Associates the specified tags to a resource with the specified resourceArn. If
 // existing tags on a resource aren't specified in the request parameters, they
-// aren't changed. When a resource is deleted, the tags that are associated with
-// that resource are deleted as well. Batch resources that support tags are compute
+// aren't changed. When a resource is deleted, the tags associated with that
+// resource are deleted as well. AWS Batch resources that support tags are compute
 // environments, jobs, job definitions, and job queues. ARNs for child jobs of
 // array and multi-node parallel (MNP) jobs are not supported.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
@@ -33,7 +33,7 @@ func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optF
 
 type TagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource that tags are added to. Batch
+	// The Amazon Resource Name (ARN) of the resource that tags are added to. AWS Batch
 	// resources that support tags are compute environments, jobs, job definitions, and
 	// job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are
 	// not supported.
@@ -43,9 +43,9 @@ type TagResourceInput struct {
 
 	// The tags that you apply to the resource to help you categorize and organize your
 	// resources. Each tag consists of a key and an optional value. For more
-	// information, see Tagging Amazon Web Services Resources
-	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in Amazon Web
-	// Services General Reference.
+	// information, see Tagging AWS Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in AWS General
+	// Reference.
 	//
 	// This member is required.
 	Tags map[string]string

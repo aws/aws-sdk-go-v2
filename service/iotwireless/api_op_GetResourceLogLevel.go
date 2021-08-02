@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Fetches the log-level override, if any, for a given resource-ID and
-// resource-type. It can be used for a wireless device or a wireless gateway.
+// Fetches the log-level override if any for a given resource-ID and resource-type,
+// coulde be a wireless device or a wireless gateway.
 func (c *Client) GetResourceLogLevel(ctx context.Context, params *GetResourceLogLevelInput, optFns ...func(*Options)) (*GetResourceLogLevelOutput, error) {
 	if params == nil {
 		params = &GetResourceLogLevelInput{}
@@ -31,12 +31,12 @@ func (c *Client) GetResourceLogLevel(ctx context.Context, params *GetResourceLog
 type GetResourceLogLevelInput struct {
 
 	// The identifier of the resource. For a Wireless Device, it is the wireless device
-	// ID. For a wireless gateway, it is the wireless gateway ID.
+	// id. For a wireless gateway, it is the wireless gateway id.
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice or WirelessGateway.
+	// The type of the resource, currently support WirelessDevice and WirelessGateway.
 	//
 	// This member is required.
 	ResourceType *string

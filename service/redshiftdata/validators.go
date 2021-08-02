@@ -10,26 +10,6 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
-type validateOpBatchExecuteStatement struct {
-}
-
-func (*validateOpBatchExecuteStatement) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpBatchExecuteStatement) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*BatchExecuteStatementInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpBatchExecuteStatementInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpCancelStatement struct {
 }
 
@@ -190,10 +170,6 @@ func (m *validateOpListTables) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
-func addOpBatchExecuteStatementValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpBatchExecuteStatement{}, middleware.After)
-}
-
 func addOpCancelStatementValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCancelStatement{}, middleware.After)
 }
@@ -261,27 +237,6 @@ func validateSqlParametersList(v []types.SqlParameter) error {
 	}
 }
 
-func validateOpBatchExecuteStatementInput(v *BatchExecuteStatementInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "BatchExecuteStatementInput"}
-	if v.Sqls == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Sqls"))
-	}
-	if v.ClusterIdentifier == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpCancelStatementInput(v *CancelStatementInput) error {
 	if v == nil {
 		return nil
@@ -341,9 +296,6 @@ func validateOpExecuteStatementInput(v *ExecuteStatementInput) error {
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
 	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
-	}
 	if v.Parameters != nil {
 		if err := validateSqlParametersList(v.Parameters); err != nil {
 			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
@@ -378,9 +330,6 @@ func validateOpListDatabasesInput(v *ListDatabasesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListDatabasesInput"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
-	}
-	if v.Database == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Database"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

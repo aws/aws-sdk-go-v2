@@ -16,7 +16,7 @@ import (
 // identifies QuickSight reports, created from analyses. You can share QuickSight
 // dashboards. With the right permissions, you can create scheduled email reports
 // from them. If you have the correct permissions, you can create a dashboard from
-// a template that exists in a different Amazon Web Services account;.
+// a template that exists in a different AWS account.
 func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInput, optFns ...func(*Options)) (*CreateDashboardOutput, error) {
 	if params == nil {
 		params = &CreateDashboardInput{}
@@ -34,8 +34,7 @@ func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInp
 
 type CreateDashboardInput struct {
 
-	// The ID of the Amazon Web Services account; where you want to create the
-	// dashboard.
+	// The ID of the AWS account where you want to create the dashboard.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -56,10 +55,10 @@ type CreateDashboardInput struct {
 	// you need to create a dashboard from an analysis, first convert the analysis to a
 	// template by using the CreateTemplate API operation. For SourceTemplate, specify
 	// the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can
-	// contain any Amazon Web Services account; and any QuickSight-supported Region;.
-	// Use the DataSetReferences entity within SourceTemplate to list the replacement
-	// datasets for the placeholders listed in the original. The schema in each dataset
-	// must match its placeholder.
+	// contain any AWS Account and any QuickSight-supported AWS Region. Use the
+	// DataSetReferences entity within SourceTemplate to list the replacement datasets
+	// for the placeholders listed in the original. The schema in each dataset must
+	// match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.DashboardSourceEntity
@@ -97,8 +96,8 @@ type CreateDashboardInput struct {
 
 	// The Amazon Resource Name (ARN) of the theme that is being used for this
 	// dashboard. If you add a value for this field, it overrides the value that is
-	// used in the source entity. The theme ARN must exist in the same Amazon Web
-	// Services account; where you create the dashboard.
+	// used in the source entity. The theme ARN must exist in the same AWS account
+	// where you create the dashboard.
 	ThemeArn *string
 
 	// A description for the first version of the dashboard being created.
@@ -118,7 +117,7 @@ type CreateDashboardOutput struct {
 	// The ID for the dashboard.
 	DashboardId *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

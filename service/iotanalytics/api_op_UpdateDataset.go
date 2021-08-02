@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the settings of a dataset.
+// Updates the settings of a data set.
 func (c *Client) UpdateDataset(ctx context.Context, params *UpdateDatasetInput, optFns ...func(*Options)) (*UpdateDatasetOutput, error) {
 	if params == nil {
 		params = &UpdateDatasetInput{}
@@ -34,7 +34,7 @@ type UpdateDatasetInput struct {
 	// This member is required.
 	Actions []types.DatasetAction
 
-	// The name of the dataset to update.
+	// The name of the data set to update.
 	//
 	// This member is required.
 	DatasetName *string
@@ -43,8 +43,8 @@ type UpdateDatasetInput struct {
 	// here.
 	ContentDeliveryRules []types.DatasetContentDeliveryRule
 
-	// A list of data rules that send notifications to CloudWatch, when data arrives
-	// late. To specify lateDataRules, the dataset must use a DeltaTimer
+	// A list of data rules that send notifications to Amazon CloudWatch, when data
+	// arrives late. To specify lateDataRules, the dataset must use a DeltaTimer
 	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_DeltaTime.html)
 	// filter.
 	LateDataRules []types.LateDataRule
@@ -59,10 +59,10 @@ type UpdateDatasetInput struct {
 	// Optional. How many versions of dataset contents are kept. If not specified or
 	// set to null, only the latest version plus the latest succeeded version (if they
 	// are different) are kept for the time period specified by the retentionPeriod
-	// parameter. For more information, see Keeping Multiple Versions of IoT Analytics
-	// datasets
+	// parameter. For more information, see Keeping Multiple Versions of AWS IoT
+	// Analytics Data Sets
 	// (https://docs.aws.amazon.com/iotanalytics/latest/userguide/getting-started.html#aws-iot-analytics-dataset-versions)
-	// in the IoT Analytics User Guide.
+	// in the AWS IoT Analytics User Guide.
 	VersioningConfiguration *types.VersioningConfiguration
 
 	noSmithyDocumentSerde

@@ -13,8 +13,9 @@ import (
 
 // Creates a job that exports data from your dataset to an Amazon S3 bucket. To
 // allow Amazon Personalize to export the training data, you must specify an
-// service-linked IAM role that gives Amazon Personalize PutObject permissions for
-// your Amazon S3 bucket. For information, see Exporting a dataset
+// service-linked AWS Identity and Access Management (IAM) role that gives Amazon
+// Personalize PutObject permissions for your Amazon S3 bucket. For information,
+// see Exporting a dataset
 // (https://docs.aws.amazon.com/personalize/latest/dg/export-data.html) in the
 // Amazon Personalize developer guide. Status A dataset export job can be in one of
 // the following states:
@@ -59,8 +60,8 @@ type CreateDatasetExportJobInput struct {
 	// This member is required.
 	JobOutput *types.DatasetExportJobOutput
 
-	// The Amazon Resource Name (ARN) of the IAM service role that has permissions to
-	// add data to your output Amazon S3 bucket.
+	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management service
+	// role that has permissions to add data to your output Amazon S3 bucket.
 	//
 	// This member is required.
 	RoleArn *string

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of Batch jobs. You must specify only one of the following
+// Returns a list of AWS Batch jobs. You must specify only one of the following
 // items:
 //
 // * A job queue ID to return a list of jobs in that job queue
@@ -48,42 +48,11 @@ type ListJobsInput struct {
 	// lists all child jobs from within the specified array.
 	ArrayJobId *string
 
-	// The filter to apply to the query. Only one filter can be used at a time. When
-	// the filter is used, jobStatus is ignored. The filter doesn't apply to child jobs
-	// in an array or multi-node parallel (MNP) jobs. The results are sorted by the
-	// createdAt field, with the most recent jobs being first. JOB_NAME The value of
-	// the filter is a case-insensitive match for the job name. If the value ends with
-	// an asterisk (*), the filter will match any job name that begins with the string
-	// before the '*'. This corresponds to the jobName value. For example, test1
-	// matches both Test1 and test1, and test1* matches both test1 and Test10. When the
-	// JOB_NAME filter is used, the results are grouped by the job name and version.
-	// JOB_DEFINITION The value for the filter is the name or Amazon Resource Name
-	// (ARN) of the job definition. This corresponds to the jobDefinition value. The
-	// value is case sensitive. When the value for the filter is the job definition
-	// name, the results include all the jobs that used any revision of that job
-	// definition name. If the value ends with an asterisk (*), the filter will match
-	// any job definition name that begins with the string before the '*'. For example,
-	// jd1 matches only jd1, and jd1* matches both jd1 and jd1A. The version of the job
-	// definition that's used doesn't affect the sort order. When the JOB_DEFINITION
-	// filter is used and the ARN is used (which is in the form
-	// arn:${Partition}:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}),
-	// the results include jobs that used the specified revision of the job definition.
-	// Asterisk (*) is not supported when the ARN is used. BEFORE_CREATED_AT The value
-	// for the filter is the time that's before the job was created. This corresponds
-	// to the createdAt value. The value is a string representation of the number of
-	// seconds since 00:00:00 UTC (midnight) on January 1, 1970. AFTER_CREATED_AT The
-	// value for the filter is the time that's after the job was created. This
-	// corresponds to the createdAt value. The value is a string representation of the
-	// number of seconds since 00:00:00 UTC (midnight) on January 1, 1970.
-	Filters []types.KeyValuesPair
-
 	// The name or full Amazon Resource Name (ARN) of the job queue used to list jobs.
 	JobQueue *string
 
-	// The job status used to filter jobs in the specified queue. If the filters
-	// parameter is specified, the jobStatus parameter is ignored and jobs with any
-	// status are returned. If you don't specify a status, only RUNNING jobs are
-	// returned.
+	// The job status used to filter jobs in the specified queue. If you don't specify
+	// a status, only RUNNING jobs are returned.
 	JobStatus types.JobStatus
 
 	// The maximum number of results returned by ListJobs in paginated output. When

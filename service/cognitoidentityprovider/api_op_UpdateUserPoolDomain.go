@@ -16,7 +16,7 @@ import (
 // (ARN) of a new certificate to Amazon Cognito. You cannot use it to change the
 // domain for a user pool. A custom domain is used to host the Amazon Cognito
 // hosted UI, which provides sign-up and sign-in pages for your application. When
-// you set up a custom domain, you provide a certificate that you manage with
+// you set up a custom domain, you provide a certificate that you manage with AWS
 // Certificate Manager (ACM). When necessary, you can use this operation to change
 // the certificate that you applied to your custom domain. Usually, this is
 // unnecessary following routine certificate renewal with ACM. When you renew your
@@ -25,7 +25,7 @@ import (
 // replace your existing certificate with a new one, ACM gives the new certificate
 // a new ARN. To apply the new certificate to your custom domain, you must provide
 // this ARN to Amazon Cognito. When you add your new certificate in ACM, you must
-// choose US East (N. Virginia) as the Region. After you submit your request,
+// choose US East (N. Virginia) as the AWS Region. After you submit your request,
 // Amazon Cognito requires up to 1 hour to distribute your new certificate to your
 // custom domain. For more information about adding a custom domain to your user
 // pool, see Using Your Own Domain for the Hosted UI

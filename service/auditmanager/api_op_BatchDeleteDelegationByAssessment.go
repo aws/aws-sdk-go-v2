@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the delegations in the specified Audit Manager assessment.
+// Deletes the delegations in the specified AWS Audit Manager assessment.
 func (c *Client) BatchDeleteDelegationByAssessment(ctx context.Context, params *BatchDeleteDelegationByAssessmentInput, optFns ...func(*Options)) (*BatchDeleteDelegationByAssessmentOutput, error) {
 	if params == nil {
 		params = &BatchDeleteDelegationByAssessmentInput{}

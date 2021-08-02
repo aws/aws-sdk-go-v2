@@ -35,10 +35,8 @@ type DescribeJobDefinitionsInput struct {
 	// The name of the job definition to describe.
 	JobDefinitionName *string
 
-	// A list of up to 100 job definitions. Each entry in the list can either be an ARN
-	// of the form
-	// arn:aws:batch:${Region}:${Account}:job-definition/${JobDefinitionName}:${Revision}
-	// or a short version using the form ${JobDefinitionName}:${Revision}.
+	// A list of up to 100 job definition names or full Amazon Resource Name (ARN)
+	// entries.
 	JobDefinitions []string
 
 	// The maximum number of results returned by DescribeJobDefinitions in paginated

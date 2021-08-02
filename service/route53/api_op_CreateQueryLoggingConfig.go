@@ -39,51 +39,51 @@ import (
 // * You must create the log group in the
 // us-east-1 region.
 //
-// * You must use the same account to create the log group and
-// the hosted zone that you want to configure query logging for.
+// * You must use the same AWS account to create the log group
+// and the hosted zone that you want to configure query logging for.
 //
-// * When you create
-// log groups for query logging, we recommend that you use a consistent prefix, for
-// example: /aws/route53/hosted zone name  In the next step, you'll create a
-// resource policy, which controls access to one or more log groups and the
-// associated Amazon Web Services resources, such as Route 53 hosted zones. There's
-// a limit on the number of resource policies that you can create, so we recommend
-// that you use a consistent prefix so you can use the same resource policy for all
-// the log groups that you create for query logging.
+// * When you
+// create log groups for query logging, we recommend that you use a consistent
+// prefix, for example: /aws/route53/hosted zone name  In the next step, you'll
+// create a resource policy, which controls access to one or more log groups and
+// the associated AWS resources, such as Route 53 hosted zones. There's a limit on
+// the number of resource policies that you can create, so we recommend that you
+// use a consistent prefix so you can use the same resource policy for all the log
+// groups that you create for query logging.
 //
-// * Create a CloudWatch Logs
-// resource policy, and give it the permissions that Route 53 needs to create log
-// streams and to send query logs to log streams. For the value of Resource,
-// specify the ARN for the log group that you created in the previous step. To use
-// the same resource policy for all the CloudWatch Logs log groups that you created
-// for query logging configurations, replace the hosted zone name with , for
-// example: arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/ You can't
-// use the CloudWatch console to create or edit a resource policy. You must use the
-// CloudWatch API, one of the Amazon Web Services SDKs, or the CLI.
+// * Create a CloudWatch Logs resource
+// policy, and give it the permissions that Route 53 needs to create log streams
+// and to send query logs to log streams. For the value of Resource, specify the
+// ARN for the log group that you created in the previous step. To use the same
+// resource policy for all the CloudWatch Logs log groups that you created for
+// query logging configurations, replace the hosted zone name with , for example:
+// arn:aws:logs:us-east-1:123412341234:log-group:/aws/route53/ You can't use the
+// CloudWatch console to create or edit a resource policy. You must use the
+// CloudWatch API, one of the AWS SDKs, or the AWS CLI.
 //
-// Log Streams
-// and Edge Locations When Route 53 finishes creating the configuration for DNS
-// query logging, it does the following:
+// Log Streams and Edge
+// Locations When Route 53 finishes creating the configuration for DNS query
+// logging, it does the following:
 //
-// * Creates a log stream for an edge
-// location the first time that the edge location responds to DNS queries for the
-// specified hosted zone. That log stream is used to log all queries that Route 53
-// responds to for that edge location.
+// * Creates a log stream for an edge location the
+// first time that the edge location responds to DNS queries for the specified
+// hosted zone. That log stream is used to log all queries that Route 53 responds
+// to for that edge location.
 //
-// * Begins to send query logs to the
-// applicable log stream.
+// * Begins to send query logs to the applicable log
+// stream.
 //
-// The name of each log stream is in the following format:
-// hosted zone ID/edge location code  The edge location code is a three-letter code
-// and an arbitrarily assigned number, for example, DFW3. The three-letter code
-// typically corresponds with the International Air Transport Association airport
-// code for an airport near the edge location. (These abbreviations might change in
-// the future.) For a list of edge locations, see "The Route 53 Global Network" on
-// the Route 53 Product Details (http://aws.amazon.com/route53/details/) page.
-// Queries That Are Logged Query logs contain only the queries that DNS resolvers
-// forward to Route 53. If a DNS resolver has already cached the response to a
-// query (such as the IP address for a load balancer for example.com), the resolver
-// will continue to return the cached response. It doesn't forward another query to
+// The name of each log stream is in the following format:  hosted zone
+// ID/edge location code  The edge location code is a three-letter code and an
+// arbitrarily assigned number, for example, DFW3. The three-letter code typically
+// corresponds with the International Air Transport Association airport code for an
+// airport near the edge location. (These abbreviations might change in the
+// future.) For a list of edge locations, see "The Route 53 Global Network" on the
+// Route 53 Product Details (http://aws.amazon.com/route53/details/) page. Queries
+// That Are Logged Query logs contain only the queries that DNS resolvers forward
+// to Route 53. If a DNS resolver has already cached the response to a query (such
+// as the IP address for a load balancer for example.com), the resolver will
+// continue to return the cached response. It doesn't forward another query to
 // Route 53 until the TTL for the corresponding resource record set expires.
 // Depending on how many DNS queries are submitted for a resource record set, and
 // depending on the TTL for that resource record set, query logs might contain
@@ -124,7 +124,7 @@ type CreateQueryLoggingConfigInput struct {
 	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DescribeLogGroups.html)
 	// API action, the describe-log-groups
 	// (https://docs.aws.amazon.com/cli/latest/reference/logs/describe-log-groups.html)
-	// command, or the applicable command in one of the Amazon Web Services SDKs.
+	// command, or the applicable command in one of the AWS SDKs.
 	//
 	// This member is required.
 	CloudWatchLogsLogGroupArn *string

@@ -13,7 +13,7 @@ import (
 )
 
 // List tags for a resource. For more information, see AWS Proton resources and
-// tagging in the AWS Proton Administrator Guide
+// tagging in the AWS Proton Administration Guide
 // (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or AWS
 // Proton User Guide
 // (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).
@@ -34,7 +34,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource for the listed tags.
+	// The ARN of the resource for the listed tags.
 	//
 	// This member is required.
 	ResourceArn *string

@@ -35,8 +35,8 @@ type DescribeAnalysisInput struct {
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the Amazon Web Services account; that contains the analysis. You must
-	// be using the Amazon Web Services account; that the analysis is in.
+	// The ID of the AWS account that contains the analysis. You must be using the AWS
+	// account that the analysis is in.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -50,7 +50,7 @@ type DescribeAnalysisOutput struct {
 	// you're describing.
 	Analysis *types.Analysis
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

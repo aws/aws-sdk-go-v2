@@ -32,8 +32,8 @@ func (c *Client) ListPermissionSetProvisioningStatus(ctx context.Context, params
 type ListPermissionSetProvisioningStatusInput struct {
 
 	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
+	// Namespaces in the AWS General Reference.
 	//
 	// This member is required.
 	InstanceArn *string

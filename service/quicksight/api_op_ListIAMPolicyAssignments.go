@@ -29,8 +29,7 @@ func (c *Client) ListIAMPolicyAssignments(ctx context.Context, params *ListIAMPo
 
 type ListIAMPolicyAssignmentsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains these IAM policy
-	// assignments.
+	// The ID of the AWS account that contains these IAM policy assignments.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -60,7 +59,7 @@ type ListIAMPolicyAssignmentsOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

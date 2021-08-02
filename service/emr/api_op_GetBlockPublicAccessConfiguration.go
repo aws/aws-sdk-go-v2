@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the Amazon EMR block public access configuration for your account in the
-// current Region. For more information see Configure Block Public Access for
+// Returns the Amazon EMR block public access configuration for your AWS account in
+// the current Region. For more information see Configure Block Public Access for
 // Amazon EMR
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)
 // in the Amazon EMR Management Guide.
@@ -54,7 +54,7 @@ type GetBlockPublicAccessConfigurationOutput struct {
 	// This member is required.
 	BlockPublicAccessConfiguration *types.BlockPublicAccessConfiguration
 
-	// Properties that describe the Amazon Web Services principal that created the
+	// Properties that describe the AWS principal that created the
 	// BlockPublicAccessConfiguration using the PutBlockPublicAccessConfiguration
 	// action as well as the date and time that the configuration was created. Each
 	// time a configuration for block public access is updated, Amazon EMR updates this

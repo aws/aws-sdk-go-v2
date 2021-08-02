@@ -31,7 +31,7 @@ func (c *Client) CreateProtectionGroup(ctx context.Context, params *CreateProtec
 
 type CreateProtectionGroupInput struct {
 
-	// Defines how Shield combines resource data for the group in order to detect,
+	// Defines how AWS Shield combines resource data for the group in order to detect,
 	// mitigate, and report events.
 	//
 	// * Sum - Use the total traffic across the group.
@@ -45,8 +45,8 @@ type CreateProtectionGroupInput struct {
 	// * Max -
 	// Use the highest traffic from each resource. This is useful for resources that
 	// don't share traffic and for resources that share that traffic in a non-uniform
-	// way. Examples include Amazon CloudFront and origin resources for CloudFront
-	// distributions.
+	// way. Examples include CloudFront distributions and origin resources for
+	// CloudFront distributions.
 	//
 	// This member is required.
 	Aggregation types.ProtectionGroupAggregation

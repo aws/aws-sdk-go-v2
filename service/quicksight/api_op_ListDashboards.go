@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists dashboards in an Amazon Web Services account;.
+// Lists dashboards in an AWS account.
 func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput, optFns ...func(*Options)) (*ListDashboardsOutput, error) {
 	if params == nil {
 		params = &ListDashboardsInput{}
@@ -30,8 +30,7 @@ func (c *Client) ListDashboards(ctx context.Context, params *ListDashboardsInput
 
 type ListDashboardsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboards that
-	// you're listing.
+	// The ID of the AWS account that contains the dashboards that you're listing.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -47,14 +46,14 @@ type ListDashboardsInput struct {
 
 type ListDashboardsOutput struct {
 
-	// A structure that contains all of the dashboards in your Amazon Web Services
-	// account;. This structure provides basic information about the dashboards.
+	// A structure that contains all of the dashboards in your AWS account. This
+	// structure provides basic information about the dashboards.
 	DashboardSummaryList []types.DashboardSummary
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

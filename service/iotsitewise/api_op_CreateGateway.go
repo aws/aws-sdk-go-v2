@@ -160,7 +160,7 @@ func (m *endpointPrefix_opCreateGatewayMiddleware) HandleSerialize(ctx context.C
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "api." + req.URL.Host
+	req.URL.Host = "edge." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

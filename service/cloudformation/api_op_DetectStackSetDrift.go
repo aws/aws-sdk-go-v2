@@ -75,17 +75,17 @@ type DetectStackSetDriftInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your AWS account must be
+	// registered as a delegated administrator in the management account. For more
+	// information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the CloudFormation User Guide.
+	// in the AWS CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// The ID of the stack set operation.
 	OperationId *string
 
-	// The user-specified preferences for how CloudFormation performs a stack set
+	// The user-specified preferences for how AWS CloudFormation performs a stack set
 	// operation. For more information on maximum concurrent accounts and failure
 	// tolerance, see Stack set operation options
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-concepts.html#stackset-ops-options).

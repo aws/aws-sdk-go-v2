@@ -15,7 +15,7 @@ import (
 // specific network interface, subnet, or VPC. Flow log data for a monitored
 // network interface is recorded as flow log records, which are log events
 // consisting of fields that describe the traffic flow. For more information, see
-// Flow log records
+// Flow Log Records
 // (https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records)
 // in the Amazon Virtual Private Cloud User Guide. When publishing to CloudWatch
 // Logs, flow log records are published to a log group, and each network interface
@@ -61,7 +61,7 @@ type CreateFlowLogsInput struct {
 	TrafficType types.TrafficType
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see How to ensure idempotency
+	// the request. For more information, see How to Ensure Idempotency
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html).
 	ClientToken *string
 
@@ -100,11 +100,11 @@ type CreateFlowLogsInput struct {
 	LogDestinationType types.LogDestinationType
 
 	// The fields to include in the flow log record, in the order in which they should
-	// appear. For a list of available fields, see Flow log records
+	// appear. For a list of available fields, see Flow Log Records
 	// (https://docs.aws.amazon.com/vpc/latest/userguide/flow-logs.html#flow-log-records).
 	// If you omit this parameter, the flow log is created using the default format. If
 	// you specify this parameter, you must specify at least one field. Specify the
-	// fields using the ${field-id} format, separated by spaces. For the CLI, use
+	// fields using the ${field-id} format, separated by spaces. For the AWS CLI, use
 	// single quotation marks (' ') to surround the parameter value.
 	LogFormat *string
 

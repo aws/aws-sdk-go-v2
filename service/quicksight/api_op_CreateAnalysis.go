@@ -35,7 +35,7 @@ type CreateAnalysisInput struct {
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the Amazon Web Services account; where you are creating an analysis.
+	// The ID of the AWS account where you are creating an analysis.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -59,9 +59,9 @@ type CreateAnalysisInput struct {
 
 	// A structure that describes the principals and the resource-level permissions on
 	// an analysis. You can use the Permissions structure to grant permissions by
-	// providing a list of Identity and Access Management (IAM) action information for
-	// each principal listed by Amazon Resource Name (ARN). To specify no permissions,
-	// omit Permissions.
+	// providing a list of AWS Identity and Access Management (IAM) action information
+	// for each principal listed by Amazon Resource Name (ARN). To specify no
+	// permissions, omit Permissions.
 	Permissions []types.ResourcePermission
 
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
@@ -86,7 +86,7 @@ type CreateAnalysisOutput struct {
 	// The status of the creation of the analysis.
 	CreationStatus types.ResourceStatus
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

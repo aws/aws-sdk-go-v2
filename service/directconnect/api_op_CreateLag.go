@@ -105,8 +105,8 @@ type CreateLagOutput struct {
 	// The Direct Connect endpoint that hosts the LAG.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
 	AwsLogicalDeviceId *string
 
 	// The connections bundled by the LAG.

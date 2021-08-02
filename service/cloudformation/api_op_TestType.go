@@ -27,7 +27,7 @@ import (
 // in the CloudFormation CLI User Guide. If you do not specify a version,
 // CloudFormation uses the default version of the extension in your account and
 // region for testing. To perform testing, CloudFormation assumes the execution
-// role specified when the type was registered. For more information, see
+// role specified when the test was registered. For more information, see
 // RegisterType. Once you've initiated testing on an extension using TestType, you
 // can use DescribeType
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DescribeType.html)
@@ -72,7 +72,7 @@ type TestTypeInput struct {
 	// For more information, see Actions, Resources, and Condition Keys for
 	// Amazon S3
 	// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_amazons3.html)
-	// in the Amazon Web Services Identity and Access Management User Guide.
+	// in the AWS Identity and Access Management User Guide.
 	LogDeliveryBucket *string
 
 	// The type of the extension to test. Conditional: You must specify Arn, or

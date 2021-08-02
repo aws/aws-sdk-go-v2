@@ -13,7 +13,7 @@ import (
 )
 
 // Describes one or more of your DHCP options sets. For more information, see DHCP
-// options sets
+// Options Sets
 // (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the
 // Amazon Virtual Private Cloud User Guide.
 func (c *Client) DescribeDhcpOptions(ctx context.Context, params *DescribeDhcpOptionsInput, optFns ...func(*Options)) (*DescribeDhcpOptionsOutput, error) {
@@ -53,18 +53,18 @@ type DescribeDhcpOptionsInput struct {
 	// * value - The value
 	// for one of the options.
 	//
-	// * owner-id - The ID of the Amazon Web Services account
-	// that owns the DHCP options set.
+	// * owner-id - The ID of the AWS account that owns the
+	// DHCP options set.
 	//
-	// * tag: - The key/value combination of a tag
-	// assigned to the resource. Use the tag key in the filter name and the tag value
-	// as the filter value. For example, to find all resources that have a tag with the
-	// key Owner and the value TeamA, specify tag:Owner for the filter name and TeamA
-	// for the filter value.
+	// * tag: - The key/value combination of a tag assigned to the
+	// resource. Use the tag key in the filter name and the tag value as the filter
+	// value. For example, to find all resources that have a tag with the key Owner and
+	// the value TeamA, specify tag:Owner for the filter name and TeamA for the filter
+	// value.
 	//
-	// * tag-key - The key of a tag assigned to the resource.
-	// Use this filter to find all resources assigned a tag with a specific key,
-	// regardless of the tag value.
+	// * tag-key - The key of a tag assigned to the resource. Use this filter
+	// to find all resources assigned a tag with a specific key, regardless of the tag
+	// value.
 	Filters []types.Filter
 
 	// The maximum number of results to return with a single call. To retrieve the

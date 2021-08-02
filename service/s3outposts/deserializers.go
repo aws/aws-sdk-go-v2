@@ -728,15 +728,6 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 
 	for key, value := range shape {
 		switch key {
-		case "AccessType":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected EndpointAccessType to be of type string, got %T instead", value)
-				}
-				sv.AccessType = types.EndpointAccessType(jtv)
-			}
-
 		case "CidrBlock":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -762,15 +753,6 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				}
 			}
 
-		case "CustomerOwnedIpv4Pool":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected CustomerOwnedIpv4Pool to be of type string, got %T instead", value)
-				}
-				sv.CustomerOwnedIpv4Pool = ptr.String(jtv)
-			}
-
 		case "EndpointArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -794,15 +776,6 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				sv.OutpostsId = ptr.String(jtv)
 			}
 
-		case "SecurityGroupId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected SecurityGroupId to be of type string, got %T instead", value)
-				}
-				sv.SecurityGroupId = ptr.String(jtv)
-			}
-
 		case "Status":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -810,24 +783,6 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 					return fmt.Errorf("expected EndpointStatus to be of type string, got %T instead", value)
 				}
 				sv.Status = types.EndpointStatus(jtv)
-			}
-
-		case "SubnetId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected SubnetId to be of type string, got %T instead", value)
-				}
-				sv.SubnetId = ptr.String(jtv)
-			}
-
-		case "VpcId":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected VpcId to be of type string, got %T instead", value)
-				}
-				sv.VpcId = ptr.String(jtv)
 			}
 
 		default:

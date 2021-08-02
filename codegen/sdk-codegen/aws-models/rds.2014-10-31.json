@@ -6946,7 +6946,7 @@
                 "SnapshotCreateTime": {
                     "target": "com.amazonaws.rds#TStamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies when the snapshot was taken in Coordinated Universal Time (UTC). Changes for the copy when the snapshot is copied.</p>"
+                        "smithy.api#documentation": "<p>Specifies when the snapshot was taken in Coordinated Universal Time (UTC).</p>"
                     }
                 },
                 "Engine": {
@@ -7042,7 +7042,7 @@
                 "SourceDBSnapshotIdentifier": {
                     "target": "com.amazonaws.rds#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has a value in the case of a cross-account or cross-Region copy.</p>"
+                        "smithy.api#documentation": "<p>The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from. It only has value in case of cross-customer or cross-region copy.</p>"
                     }
                 },
                 "StorageType": {
@@ -7101,12 +7101,6 @@
                 },
                 "TagList": {
                     "target": "com.amazonaws.rds#TagList"
-                },
-                "OriginalSnapshotCreateTime": {
-                    "target": "com.amazonaws.rds#TStamp",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Specifies the time of the CreateDBSnapshot operation in Coordinated Universal Time (UTC). Doesn't change when the snapshot is copied.</p>"
-                    }
                 }
             },
             "traits": {
@@ -8832,7 +8826,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A filter that specifies one or more DB clusters to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>clone-group-id</code> - Accepts clone group identifiers. \n\t\t\t  The results list will only include information about\n              the DB clusters associated with these clone groups.</p>\n            </li>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list will only include information about\n              the DB clusters identified by these ARNs.</p>\n            </li>\n            <li>\n               <p>\n                  <code>domain</code> - Accepts Active Directory directory IDs. \n              The results list will only include information about\n              the DB clusters associated with these domains.</p>\n            </li>\n            <li>\n               <p>\n                  <code>engine</code> - Accepts engine names. \n              The results list will only include information about\n              the DB clusters for these engines.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A filter that specifies one or more DB clusters to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list will only include information about\n              the DB clusters identified by these ARNs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxRecords": {
@@ -9029,9 +9023,6 @@
                     "items": "DBInstances",
                     "pageSize": "MaxRecords"
                 },
-                "smithy.api#suppress": [
-                    "WaitableTraitInvalidErrorType"
-                ],
                 "smithy.waiters#waitable": {
                     "DBInstanceAvailable": {
                         "acceptors": [
@@ -9091,67 +9082,6 @@
                                     "output": {
                                         "path": "DBInstances[].DBInstanceStatus",
                                         "expected": "incompatible-parameters",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            }
-                        ],
-                        "minDelay": 30
-                    },
-                    "DBInstanceDeleted": {
-                        "acceptors": [
-                            {
-                                "state": "success",
-                                "matcher": {
-                                    "output": {
-                                        "path": "length(DBInstances) == `0`",
-                                        "expected": "true",
-                                        "comparator": "booleanEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "success",
-                                "matcher": {
-                                    "errorType": "DBInstanceNotFound"
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "DBInstances[].DBInstanceStatus",
-                                        "expected": "creating",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "DBInstances[].DBInstanceStatus",
-                                        "expected": "modifying",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "DBInstances[].DBInstanceStatus",
-                                        "expected": "rebooting",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "DBInstances[].DBInstanceStatus",
-                                        "expected": "resetting-master-credentials",
                                         "comparator": "anyStringEquals"
                                     }
                                 }
@@ -9867,9 +9797,6 @@
                     "items": "DBSnapshots",
                     "pageSize": "MaxRecords"
                 },
-                "smithy.api#suppress": [
-                    "WaitableTraitInvalidErrorType"
-                ],
                 "smithy.waiters#waitable": {
                     "DBSnapshotAvailable": {
                         "acceptors": [
@@ -9929,67 +9856,6 @@
                                     "output": {
                                         "path": "DBSnapshots[].Status",
                                         "expected": "incompatible-parameters",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            }
-                        ],
-                        "minDelay": 30
-                    },
-                    "DBSnapshotDeleted": {
-                        "acceptors": [
-                            {
-                                "state": "success",
-                                "matcher": {
-                                    "output": {
-                                        "path": "length(DBSnapshots) == `0`",
-                                        "expected": "true",
-                                        "comparator": "booleanEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "success",
-                                "matcher": {
-                                    "errorType": "DBSnapshotNotFound"
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "DBSnapshots[].Status",
-                                        "expected": "creating",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "DBSnapshots[].Status",
-                                        "expected": "modifying",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "DBSnapshots[].Status",
-                                        "expected": "rebooting",
-                                        "comparator": "anyStringEquals"
-                                    }
-                                }
-                            },
-                            {
-                                "state": "failure",
-                                "matcher": {
-                                    "output": {
-                                        "path": "DBSnapshots[].Status",
-                                        "expected": "resetting-master-credentials",
                                         "comparator": "anyStringEquals"
                                     }
                                 }
@@ -10489,7 +10355,7 @@
                 "Filters": {
                     "target": "com.amazonaws.rds#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>This parameter isn't currently supported.</p>"
+                        "smithy.api#documentation": "<p>A filter that specifies one or more global DB clusters to describe.</p>\n         <p>Supported filters:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>db-cluster-id</code> - Accepts DB cluster identifiers and DB \n              cluster Amazon Resource Names (ARNs). The results list will only include information about\n              the DB clusters identified by these ARNs.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "MaxRecords": {

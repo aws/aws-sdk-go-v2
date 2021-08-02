@@ -12,9 +12,9 @@ import (
 )
 
 // Creates a delegation set (a group of four name servers) that can be reused by
-// multiple hosted zones that were created by the same account. You can also create
-// a reusable delegation set that uses the four name servers that are associated
-// with an existing hosted zone. Specify the hosted zone ID in the
+// multiple hosted zones that were created by the same AWS account. You can also
+// create a reusable delegation set that uses the four name servers that are
+// associated with an existing hosted zone. Specify the hosted zone ID in the
 // CreateReusableDelegationSet request. You can't associate a reusable delegation
 // set with a private hosted zone. For information about using a reusable
 // delegation set to configure white label name servers, see Configuring White

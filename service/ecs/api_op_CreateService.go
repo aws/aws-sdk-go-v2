@@ -190,16 +190,16 @@ type CreateServiceInput struct {
 	// Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type
-	// runs your tasks on Fargate On-Demand infrastructure. Fargate Spot infrastructure
-	// is available for use but a capacity provider strategy must be used. For more
-	// information, see Fargate capacity providers
+	// runs your tasks on AWS Fargate On-Demand infrastructure. Fargate Spot
+	// infrastructure is available for use but a capacity provider strategy must be
+	// used. For more information, see AWS Fargate capacity providers
 	// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html)
-	// in the Amazon ECS User Guide for Fargate. The EC2 launch type runs your tasks on
-	// Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs
-	// your tasks on your on-premise server or virtual machine (VM) capacity registered
-	// to your cluster. A service can use either a launch type or a capacity provider
-	// strategy. If a launchType is specified, the capacityProviderStrategy parameter
-	// must be omitted.
+	// in the Amazon ECS User Guide for AWS Fargate. The EC2 launch type runs your
+	// tasks on Amazon EC2 instances registered to your cluster. The EXTERNAL launch
+	// type runs your tasks on your on-premise server or virtual machine (VM) capacity
+	// registered to your cluster. A service can use either a launch type or a capacity
+	// provider strategy. If a launchType is specified, the capacityProviderStrategy
+	// parameter must be omitted.
 	LaunchType types.LaunchType
 
 	// A load balancer object representing the load balancers to use with your service.
@@ -214,16 +214,16 @@ type CreateServiceInput struct {
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/using-service-linked-roles.html)
 	// in the Amazon Elastic Container Service Developer Guide. If the service is using
 	// the CODE_DEPLOY deployment controller, the service is required to use either an
-	// Application Load Balancer or Network Load Balancer. When creating an CodeDeploy
-	// deployment group, you specify two target groups (referred to as a
-	// targetGroupPair). During a deployment, CodeDeploy determines which task set in
-	// your service has the status PRIMARY and associates one target group with it, and
-	// then associates the other target group with the replacement task set. The load
-	// balancer can also have up to two listeners: a required listener for production
-	// traffic and an optional listener that allows you perform validation tests with
-	// Lambda functions before routing production traffic to it. After you create a
-	// service using the ECS deployment controller, the load balancer name or target
-	// group ARN, container name, and container port specified in the service
+	// Application Load Balancer or Network Load Balancer. When creating an AWS
+	// CodeDeploy deployment group, you specify two target groups (referred to as a
+	// targetGroupPair). During a deployment, AWS CodeDeploy determines which task set
+	// in your service has the status PRIMARY and associates one target group with it,
+	// and then associates the other target group with the replacement task set. The
+	// load balancer can also have up to two listeners: a required listener for
+	// production traffic and an optional listener that allows you perform validation
+	// tests with Lambda functions before routing production traffic to it. After you
+	// create a service using the ECS deployment controller, the load balancer name or
+	// target group ARN, container name, and container port specified in the service
 	// definition are immutable. If you are using the CODE_DEPLOY deployment
 	// controller, these values can be changed when updating the service. For
 	// Application Load Balancers and Network Load Balancers, this object must contain
@@ -265,7 +265,7 @@ type CreateServiceInput struct {
 	// The platform version that your tasks in the service are running on. A platform
 	// version is specified only for tasks using the Fargate launch type. If one isn't
 	// specified, the LATEST platform version is used by default. For more information,
-	// see Fargate platform versions
+	// see AWS Fargate platform versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -355,9 +355,9 @@ type CreateServiceInput struct {
 	//
 	// * Do not use aws:, AWS:,
 	// or any upper or lowercase combination of such as a prefix for either keys or
-	// values as it is reserved for Amazon Web Services use. You cannot edit or delete
-	// tag keys or values with this prefix. Tags with this prefix do not count against
-	// your tags per resource limit.
+	// values as it is reserved for AWS use. You cannot edit or delete tag keys or
+	// values with this prefix. Tags with this prefix do not count against your tags
+	// per resource limit.
 	Tags []types.Tag
 
 	// The family and revision (family:revision) or full ARN of the task definition to
@@ -371,13 +371,12 @@ type CreateServiceInput struct {
 
 type CreateServiceOutput struct {
 
-	// The full description of your service following the create call. A service will
-	// return either a capacityProviderStrategy or launchType parameter, but not both,
-	// depending on which one was specified during creation. If a service is using the
-	// ECS deployment controller, the deploymentController and taskSets parameters will
-	// not be returned. If the service is using the CODE_DEPLOY deployment controller,
-	// the deploymentController, taskSets and deployments parameters will be returned,
-	// however the deployments parameter will be an empty list.
+	// The full description of your service following the create call. If a service is
+	// using the ECS deployment controller, the deploymentController and taskSets
+	// parameters will not be returned. If the service is using the CODE_DEPLOY
+	// deployment controller, the deploymentController, taskSets and deployments
+	// parameters will be returned, however the deployments parameter will be an empty
+	// list.
 	Service *types.Service
 
 	// Metadata pertaining to the operation's result.

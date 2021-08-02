@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the user pools associated with an account.
+// Lists the user pools associated with an AWS account.
 func (c *Client) ListUserPools(ctx context.Context, params *ListUserPoolsInput, optFns ...func(*Options)) (*ListUserPoolsOutput, error) {
 	if params == nil {
 		params = &ListUserPoolsInput{}

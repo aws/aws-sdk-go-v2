@@ -16,8 +16,8 @@ import (
 // control. For an example, see How do I create an IAM policy to control access to
 // Amazon EC2 resources using tags?
 // (http://aws.amazon.com/premiumsupport/knowledge-center/iam-ec2-resource-tags/)
-// in the Amazon Web Services Knowledge Center. Tags are visible on the tagged
-// dataset, but not on the ingestion resource.
+// in the AWS Knowledge Center. Tags are visible on the tagged dataset, but not on
+// the ingestion resource.
 func (c *Client) CreateIngestion(ctx context.Context, params *CreateIngestionInput, optFns ...func(*Options)) (*CreateIngestionOutput, error) {
 	if params == nil {
 		params = &CreateIngestionInput{}
@@ -35,7 +35,7 @@ func (c *Client) CreateIngestion(ctx context.Context, params *CreateIngestionInp
 
 type CreateIngestionInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -64,7 +64,7 @@ type CreateIngestionOutput struct {
 	// The ingestion status.
 	IngestionStatus types.IngestionStatus
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

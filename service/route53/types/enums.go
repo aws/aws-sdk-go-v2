@@ -195,7 +195,6 @@ const (
 	HealthCheckTypeTcp              HealthCheckType = "TCP"
 	HealthCheckTypeCalculated       HealthCheckType = "CALCULATED"
 	HealthCheckTypeCloudwatchMetric HealthCheckType = "CLOUDWATCH_METRIC"
-	HealthCheckTypeRecoveryControl  HealthCheckType = "RECOVERY_CONTROL"
 )
 
 // Values returns all known values for HealthCheckType. Note that this can be
@@ -210,7 +209,6 @@ func (HealthCheckType) Values() []HealthCheckType {
 		"TCP",
 		"CALCULATED",
 		"CLOUDWATCH_METRIC",
-		"RECOVERY_CONTROL",
 	}
 }
 

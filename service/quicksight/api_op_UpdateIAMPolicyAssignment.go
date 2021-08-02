@@ -32,13 +32,12 @@ func (c *Client) UpdateIAMPolicyAssignment(ctx context.Context, params *UpdateIA
 type UpdateIAMPolicyAssignmentInput struct {
 
 	// The name of the assignment, also called a rule. This name must be unique within
-	// an Amazon Web Services account;.
+	// an AWS account.
 	//
 	// This member is required.
 	AssignmentName *string
 
-	// The ID of the Amazon Web Services account; that contains the IAM policy
-	// assignment.
+	// The ID of the AWS account that contains the IAM policy assignment.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -99,7 +98,7 @@ type UpdateIAMPolicyAssignmentOutput struct {
 	// in this assignment.
 	PolicyArn *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -12,18 +12,18 @@ import (
 )
 
 // Lists all the private hosted zones that a specified VPC is associated with,
-// regardless of which account or Amazon Web Services service owns the hosted
-// zones. The HostedZoneOwner structure in the response contains one of the
-// following values:
+// regardless of which AWS account or AWS service owns the hosted zones. The
+// HostedZoneOwner structure in the response contains one of the following
+// values:
 //
-// * An OwningAccount element, which contains the account number
-// of either the current account or another account. Some services, such as Cloud
+// * An OwningAccount element, which contains the account number of either
+// the current AWS account or another AWS account. Some services, such as AWS Cloud
 // Map, create hosted zones using the current account.
 //
 // * An OwningService element,
-// which identifies the Amazon Web Services service that created and owns the
-// hosted zone. For example, if a hosted zone was created by Amazon Elastic File
-// System (Amazon EFS), the value of Owner is efs.amazonaws.com.
+// which identifies the AWS service that created and owns the hosted zone. For
+// example, if a hosted zone was created by Amazon Elastic File System (Amazon
+// EFS), the value of Owner is efs.amazonaws.com.
 func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZonesByVPCInput, optFns ...func(*Options)) (*ListHostedZonesByVPCOutput, error) {
 	if params == nil {
 		params = &ListHostedZonesByVPCInput{}
@@ -40,7 +40,7 @@ func (c *Client) ListHostedZonesByVPC(ctx context.Context, params *ListHostedZon
 }
 
 // Lists all the private hosted zones that a specified VPC is associated with,
-// regardless of which account created the hosted zones.
+// regardless of which AWS account created the hosted zones.
 type ListHostedZonesByVPCInput struct {
 
 	// The ID of the Amazon VPC that you want to list hosted zones for.
@@ -48,8 +48,8 @@ type ListHostedZonesByVPCInput struct {
 	// This member is required.
 	VPCId *string
 
-	// For the Amazon VPC that you specified for VPCId, the Amazon Web Services Region
-	// that you created the VPC in.
+	// For the Amazon VPC that you specified for VPCId, the AWS Region that you created
+	// the VPC in.
 	//
 	// This member is required.
 	VPCRegion types.VPCRegion
@@ -86,8 +86,8 @@ type ListHostedZonesByVPCOutput struct {
 	// This member is required.
 	MaxItems *int32
 
-	// The value that you will use for NextToken in the next ListHostedZonesByVPC
-	// request.
+	// The value that you specified for NextToken in the most recent
+	// ListHostedZonesByVPC request.
 	NextToken *string
 
 	// Metadata pertaining to the operation's result.

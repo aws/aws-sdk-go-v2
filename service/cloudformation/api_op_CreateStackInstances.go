@@ -34,7 +34,7 @@ func (c *Client) CreateStackInstances(ctx context.Context, params *CreateStackIn
 type CreateStackInstancesInput struct {
 
 	// The names of one or more Regions where you want to create stack instances using
-	// the specified accounts.
+	// the specified AWS account(s).
 	//
 	// This member is required.
 	Regions []string
@@ -45,9 +45,9 @@ type CreateStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of one or more accounts that you want to
-	// create stack instances in the specified Region(s) for. You can specify Accounts
-	// or DeploymentTargets, but not both.
+	// [Self-managed permissions] The names of one or more AWS accounts that you want
+	// to create stack instances in the specified Region(s) for. You can specify
+	// Accounts or DeploymentTargets, but not both.
 	Accounts []string
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
@@ -59,55 +59,60 @@ type CreateStackInstancesInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your AWS account must be
+	// registered as a delegated administrator in the management account. For more
+	// information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the CloudFormation User Guide.
+	// in the AWS CloudFormation User Guide.
 	CallAs types.CallAs
 
-	// [Service-managed permissions] The Organizations accounts for which to create
+	// [Service-managed permissions] The AWS Organizations accounts for which to create
 	// stack instances in the specified Regions. You can specify Accounts or
 	// DeploymentTargets, but not both.
 	DeploymentTargets *types.DeploymentTargets
 
 	// The unique identifier for this stack set operation. The operation ID also
-	// functions as an idempotency token, to ensure that CloudFormation performs the
-	// stack set operation only once, even if you retry the request multiple times. You
-	// might retry stack set operation requests to ensure that CloudFormation
+	// functions as an idempotency token, to ensure that AWS CloudFormation performs
+	// the stack set operation only once, even if you retry the request multiple times.
+	// You might retry stack set operation requests to ensure that AWS CloudFormation
 	// successfully received them. If you don't specify an operation ID, the SDK
 	// generates one automatically. Repeating this stack set operation with a new
 	// operation ID retries all stack instances whose status is OUTDATED.
 	OperationId *string
 
-	// Preferences for how CloudFormation performs this stack set operation.
+	// Preferences for how AWS CloudFormation performs this stack set operation.
 	OperationPreferences *types.StackSetOperationPreferences
 
 	// A list of stack set parameters whose values you want to override in the selected
 	// stack instances. Any overridden parameter values will be applied to all stack
 	// instances in the specified accounts and Regions. When specifying parameters and
-	// their values, be aware of how CloudFormation sets parameter values during stack
-	// instance operations:
+	// their values, be aware of how AWS CloudFormation sets parameter values during
+	// stack instance operations:
 	//
-	// * To override the current value for a parameter, include
-	// the parameter and specify its value.
+	// * To override the current value for a parameter,
+	// include the parameter and specify its value.
 	//
-	// * To leave an overridden parameter set to
-	// its present value, include the parameter and specify UsePreviousValue as true.
-	// (You cannot specify both a value and set UsePreviousValue to true.)
+	// * To leave a parameter set to its
+	// present value, you can do one of the following:
 	//
-	// * To set an
-	// overridden parameter back to the value specified in the stack set, specify a
-	// parameter list but do not include the parameter in the list.
+	// * Do not include the parameter
+	// in the list.
 	//
-	// * To leave all
-	// parameters set to their present values, do not specify this property at
-	// all.
+	// * Include the parameter and specify UsePreviousValue as true. (You
+	// cannot specify both a value and set UsePreviousValue to true.)
 	//
-	// During stack set updates, any parameter values overridden for a stack
-	// instance are not updated, but retain their overridden value. You can only
-	// override the parameter values that are specified in the stack set; to add or
-	// delete a parameter itself, use UpdateStackSet
+	// * To set all
+	// overridden parameter back to the values specified in the stack set, specify a
+	// parameter list but do not include any parameters.
+	//
+	// * To leave all parameters set
+	// to their present values, do not specify this property at all.
+	//
+	// During stack set
+	// updates, any parameter values overridden for a stack instance are not updated,
+	// but retain their overridden value. You can only override the parameter values
+	// that are specified in the stack set; to add or delete a parameter itself, use
+	// UpdateStackSet
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_UpdateStackSet.html)
 	// to update the stack set template.
 	ParameterOverrides []types.Parameter

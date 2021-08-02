@@ -7,14 +7,15 @@ import (
 	"time"
 )
 
-// An entity that defines the scope of audit evidence collected by Audit Manager.
-// An Audit Manager assessment is an implementation of an Audit Manager framework.
+// An entity that defines the scope of audit evidence collected by AWS Audit
+// Manager. An AWS Audit Manager assessment is an implementation of an AWS Audit
+// Manager framework.
 type Assessment struct {
 
 	// The Amazon Resource Name (ARN) of the assessment.
 	Arn *string
 
-	// The account associated with the assessment.
+	// The AWS account associated with the assessment.
 	AwsAccount *AWSAccount
 
 	// The framework from which the assessment was created.
@@ -29,8 +30,8 @@ type Assessment struct {
 	noSmithyDocumentSerde
 }
 
-// The control entity that represents a standard or custom control used in an Audit
-// Manager assessment.
+// The control entity that represents a standard or custom control used in an AWS
+// Audit Manager assessment.
 type AssessmentControl struct {
 
 	// The amount of evidence in the assessment report.
@@ -63,7 +64,7 @@ type AssessmentControl struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a set of controls in an Audit Manager assessment.
+// Represents a set of controls in an AWS Audit Manager assessment.
 type AssessmentControlSet struct {
 
 	// The list of controls contained with the control set.
@@ -95,7 +96,7 @@ type AssessmentControlSet struct {
 	noSmithyDocumentSerde
 }
 
-// The folder in which Audit Manager stores evidence for an assessment.
+// The folder in which AWS Audit Manager stores evidence for an assessment.
 type AssessmentEvidenceFolder struct {
 
 	// The identifier for the specified assessment.
@@ -116,27 +117,26 @@ type AssessmentEvidenceFolder struct {
 	// The identifier for the control set.
 	ControlSetId *string
 
-	// The Amazon Web Service from which the evidence was collected.
+	// The AWS service from which the evidence was collected.
 	DataSource *string
 
 	// The date when the first evidence was added to the evidence folder.
 	Date *time.Time
 
-	// The total number of Amazon Web Services resources assessed to generate the
-	// evidence.
+	// The total number of AWS resources assessed to generate the evidence.
 	EvidenceAwsServiceSourceCount int32
 
 	// The number of evidence that falls under the compliance check category. This
-	// evidence is collected from Config or Security Hub.
+	// evidence is collected from AWS Config or AWS Security Hub.
 	EvidenceByTypeComplianceCheckCount int32
 
-	// The total number of issues that were reported directly from Security Hub,
-	// Config, or both.
+	// The total number of issues that were reported directly from AWS Security Hub,
+	// AWS Config, or both.
 	EvidenceByTypeComplianceCheckIssuesCount int32
 
 	// The number of evidence that falls under the configuration data category. This
-	// evidence is collected from configuration snapshots of other Amazon Web Services
-	// services such as Amazon EC2, Amazon S3, or IAM.
+	// evidence is collected from configuration snapshots of other AWS services such as
+	// Amazon EC2, Amazon S3, or IAM.
 	EvidenceByTypeConfigurationDataCount int32
 
 	// The number of evidence that falls under the manual category. This evidence is
@@ -144,7 +144,7 @@ type AssessmentEvidenceFolder struct {
 	EvidenceByTypeManualCount int32
 
 	// The number of evidence that falls under the user activity category. This
-	// evidence is collected from CloudTrail logs.
+	// evidence is collected from AWS CloudTrail logs.
 	EvidenceByTypeUserActivityCount int32
 
 	// The amount of evidence included in the evidence folder.
@@ -162,8 +162,8 @@ type AssessmentEvidenceFolder struct {
 	noSmithyDocumentSerde
 }
 
-// The file used to structure and automate Audit Manager assessments for a given
-// compliance standard.
+// The file used to structure and automate AWS Audit Manager assessments for a
+// given compliance standard.
 type AssessmentFramework struct {
 
 	// The Amazon Resource Name (ARN) of the specified framework.
@@ -252,7 +252,7 @@ type AssessmentMetadata struct {
 	// The roles associated with the assessment.
 	Roles []Role
 
-	// The wrapper of accounts and services in scope for the assessment.
+	// The wrapper of AWS accounts and services in scope for the assessment.
 	Scope *Scope
 
 	// The overall status of the assessment.
@@ -261,7 +261,7 @@ type AssessmentMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A metadata object associated with an assessment in Audit Manager.
+// A metadata object associated with an assessment in AWS Audit Manager.
 type AssessmentMetadataItem struct {
 
 	// The name of the compliance standard related to the assessment, such as PCI-DSS.
@@ -291,9 +291,9 @@ type AssessmentMetadataItem struct {
 	noSmithyDocumentSerde
 }
 
-// A finalized document generated from an Audit Manager assessment. These reports
-// summarize the relevant evidence collected for your audit, and link to the
-// relevant evidence folders which are named and organized according to the
+// A finalized document generated from an AWS Audit Manager assessment. These
+// reports summarize the relevant evidence collected for your audit, and link to
+// the relevant evidence folders which are named and organized according to the
 // controls specified in your assessment.
 type AssessmentReport struct {
 
@@ -306,7 +306,7 @@ type AssessmentReport struct {
 	// The name of the user who created the assessment report.
 	Author *string
 
-	// The identifier for the specified account.
+	// The identifier for the specified AWS account.
 	AwsAccountId *string
 
 	// Specifies when the assessment report was created.
@@ -373,7 +373,7 @@ type AssessmentReportMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// The location in which Audit Manager saves assessment reports for the given
+// The location in which AWS Audit Manager saves assessment reports for the given
 // assessment.
 type AssessmentReportsDestination struct {
 
@@ -386,25 +386,26 @@ type AssessmentReportsDestination struct {
 	noSmithyDocumentSerde
 }
 
-// The wrapper of account details, such as account ID, email address, and so on.
+// The wrapper of AWS account details, such as account ID, email address, and so
+// on.
 type AWSAccount struct {
 
-	// The email address associated with the specified account.
+	// The email address associated with the specified AWS account.
 	EmailAddress *string
 
-	// The identifier for the specified account.
+	// The identifier for the specified AWS account.
 	Id *string
 
-	// The name of the specified account.
+	// The name of the specified AWS account.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// An Amazon Web Service such as Amazon S3, CloudTrail, and so on.
+// An AWS service such as Amazon S3, AWS CloudTrail, and so on.
 type AWSService struct {
 
-	// The name of the Amazon Web Service.
+	// The name of the AWS service.
 	ServiceName *string
 
 	noSmithyDocumentSerde
@@ -414,7 +415,7 @@ type AWSService struct {
 // provide more meaningful errors than a simple string message.
 type BatchCreateDelegationByAssessmentError struct {
 
-	// The API request to batch create delegations in Audit Manager.
+	// The API request to batch create delegations in AWS Audit Manager.
 	CreateDelegationRequest *CreateDelegationRequest
 
 	// The error code returned by the BatchCreateDelegationByAssessment API.
@@ -452,14 +453,14 @@ type BatchImportEvidenceToAssessmentControlError struct {
 	// The error message returned by the BatchImportEvidenceToAssessmentControl API.
 	ErrorMessage *string
 
-	// Manual evidence that cannot be collected automatically by Audit Manager.
+	// Manual evidence that cannot be collected automatically by AWS Audit Manager.
 	ManualEvidence *ManualEvidence
 
 	noSmithyDocumentSerde
 }
 
-// The record of a change within Audit Manager, such as a modified assessment, a
-// delegated control set, and so on.
+// The record of a change within AWS Audit Manager, such as a modified assessment,
+// a delegated control set, and so on.
 type ChangeLog struct {
 
 	// The action performed.
@@ -480,7 +481,7 @@ type ChangeLog struct {
 	noSmithyDocumentSerde
 }
 
-// A control in Audit Manager.
+// A control in AWS Audit Manager.
 type Control struct {
 
 	// The recommended actions to carry out if the control is not fulfilled.
@@ -495,8 +496,8 @@ type Control struct {
 	// The data mapping sources for the specified control.
 	ControlMappingSources []ControlMappingSource
 
-	// The data source that determines from where Audit Manager collects evidence for
-	// the control.
+	// The data source that determines from where AWS Audit Manager collects evidence
+	// for the control.
 	ControlSources *string
 
 	// Specifies when the control was created.
@@ -548,8 +549,8 @@ type ControlComment struct {
 	noSmithyDocumentSerde
 }
 
-// The data source that determines from where Audit Manager collects evidence for
-// the control.
+// The data source that determines from where AWS Audit Manager collects evidence
+// for the control.
 type ControlMappingSource struct {
 
 	// The description of the specified source.
@@ -561,8 +562,8 @@ type ControlMappingSource struct {
 	// The unique identifier for the specified source.
 	SourceId *string
 
-	// The keyword to search for in CloudTrail logs, Config rules, Security Hub checks,
-	// and Amazon Web Services API names.
+	// The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security
+	// Hub checks, and AWS API names.
 	SourceKeyword *SourceKeyword
 
 	// The name of the specified source.
@@ -587,8 +588,8 @@ type ControlMetadata struct {
 	// The Amazon Resource Name (ARN) of the specified control.
 	Arn *string
 
-	// The data source that determines from where Audit Manager collects evidence for
-	// the control.
+	// The data source that determines from where AWS Audit Manager collects evidence
+	// for the control.
 	ControlSources *string
 
 	// Specifies when the control was created.
@@ -606,7 +607,7 @@ type ControlMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// A set of controls in Audit Manager.
+// A set of controls in AWS Audit Manager.
 type ControlSet struct {
 
 	// The list of controls within the control set.
@@ -623,7 +624,7 @@ type ControlSet struct {
 }
 
 // Control entity attributes that uniquely identify an existing control to be added
-// to a framework in Audit Manager.
+// to a framework in AWS Audit Manager.
 type CreateAssessmentFrameworkControl struct {
 
 	// The unique identifier of the control.
@@ -632,8 +633,8 @@ type CreateAssessmentFrameworkControl struct {
 	noSmithyDocumentSerde
 }
 
-// A controlSet entity that represents a collection of controls in Audit Manager.
-// This does not contain the control set ID.
+// A controlSet entity that represents a collection of controls in AWS Audit
+// Manager. This does not contain the control set ID.
 type CreateAssessmentFrameworkControlSet struct {
 
 	// The name of the specified control set.
@@ -652,15 +653,15 @@ type CreateAssessmentFrameworkControlSet struct {
 // with related parameters and metadata. This does not contain mappingID.
 type CreateControlMappingSource struct {
 
-	// The description of the data source that determines from where Audit Manager
+	// The description of the data source that determines from where AWS Audit Manager
 	// collects evidence for the control.
 	SourceDescription *string
 
 	// The frequency of evidence collection for the specified control mapping source.
 	SourceFrequency SourceFrequency
 
-	// The keyword to search for in CloudTrail logs, Config rules, Security Hub checks,
-	// and Amazon Web Services API names.
+	// The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security
+	// Hub checks, and AWS API names.
 	SourceKeyword *SourceKeyword
 
 	// The name of the control mapping data source.
@@ -679,7 +680,7 @@ type CreateControlMappingSource struct {
 	noSmithyDocumentSerde
 }
 
-// A collection of attributes used to create a delegation for an assessment in
+// A collection of attributes used to create a delegation for an assessment in AWS
 // Audit Manager.
 type CreateDelegationRequest struct {
 
@@ -780,16 +781,17 @@ type Evidence struct {
 	// (such as allowUsersToChangePassword) and value (such as true or false).
 	Attributes map[string]string
 
-	// The identifier for the specified account.
+	// The identifier for the specified AWS account.
 	AwsAccountId *string
 
-	// The account from which the evidence is collected, and its organization path.
+	// The AWS account from which the evidence is collected, and its AWS organization
+	// path.
 	AwsOrganization *string
 
 	// The evaluation status for evidence that falls under the compliance check
-	// category. For evidence collected from Security Hub, a Pass or Fail result is
-	// shown. For evidence collected from Config, a Compliant or Noncompliant result is
-	// shown.
+	// category. For evidence collected from AWS Security Hub, a Pass or Fail result is
+	// shown. For evidence collected from AWS Config, a Compliant or Noncompliant
+	// result is shown.
 	ComplianceCheck *string
 
 	// The data source from which the specified evidence was collected.
@@ -798,10 +800,10 @@ type Evidence struct {
 	// The name of the specified evidence event.
 	EventName *string
 
-	// The Amazon Web Service from which the evidence is collected.
+	// The AWS service from which the evidence is collected.
 	EventSource *string
 
-	// The identifier for the specified account.
+	// The identifier for the specified AWS account.
 	EvidenceAwsAccountId *string
 
 	// The type of automated evidence.
@@ -825,8 +827,8 @@ type Evidence struct {
 	noSmithyDocumentSerde
 }
 
-// The file used to structure and automate Audit Manager assessments for a given
-// compliance standard.
+// The file used to structure and automate AWS Audit Manager assessments for a
+// given compliance standard.
 type Framework struct {
 
 	// The Amazon Resource Name (ARN) of the specified framework.
@@ -839,7 +841,7 @@ type Framework struct {
 	// The control sets associated with the framework.
 	ControlSets []ControlSet
 
-	// The sources from which Audit Manager collects evidence for the control.
+	// The sources from which AWS Audit Manager collects evidence for the control.
 	ControlSources *string
 
 	// Specifies when the framework was created.
@@ -893,7 +895,7 @@ type FrameworkMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// Evidence that is uploaded to Audit Manager manually.
+// Evidence that is uploaded to AWS Audit Manager manually.
 type ManualEvidence struct {
 
 	// The Amazon S3 URL that points to a manual evidence object.
@@ -902,7 +904,7 @@ type ManualEvidence struct {
 	noSmithyDocumentSerde
 }
 
-// The notification used to inform a user of an update in Audit Manager. For
+// The notification used to inform a user of an update in AWS Audit Manager. For
 // example, this includes the notification that is sent when a control set is
 // delegated for review.
 type Notification struct {
@@ -934,7 +936,7 @@ type Notification struct {
 	noSmithyDocumentSerde
 }
 
-// A system asset that is evaluated in an Audit Manager assessment.
+// A system asset that is evaluated in an AWS Audit Manager assessment.
 type Resource struct {
 
 	// The Amazon Resource Name (ARN) for the specified resource.
@@ -946,7 +948,7 @@ type Resource struct {
 	noSmithyDocumentSerde
 }
 
-// The wrapper that contains the Audit Manager role information of the current
+// The wrapper that contains the AWS Audit Manager role information of the current
 // user, such as the role type and IAM Amazon Resource Name (ARN).
 type Role struct {
 
@@ -961,38 +963,39 @@ type Role struct {
 	noSmithyDocumentSerde
 }
 
-// The wrapper that contains the accounts and services in scope for the assessment.
+// The wrapper that contains the AWS accounts and AWS services in scope for the
+// assessment.
 type Scope struct {
 
-	// The accounts included in the scope of the assessment.
+	// The AWS accounts included in the scope of the assessment.
 	AwsAccounts []AWSAccount
 
-	// The Amazon Web Services services included in the scope of the assessment.
+	// The AWS services included in the scope of the assessment.
 	AwsServices []AWSService
 
 	noSmithyDocumentSerde
 }
 
-// The metadata associated with the specified Amazon Web Service.
+// The metadata associated with the specified AWS service.
 type ServiceMetadata struct {
 
-	// The category in which the Amazon Web Service belongs, such as compute, storage,
+	// The category in which the AWS service belongs, such as compute, storage,
 	// database, and so on.
 	Category *string
 
-	// The description of the specified Amazon Web Service.
+	// The description of the specified AWS service.
 	Description *string
 
-	// The display name of the Amazon Web Service.
+	// The display name of the AWS service.
 	DisplayName *string
 
-	// The name of the Amazon Web Service.
+	// The name of the AWS service.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// The settings object that holds all supported Audit Manager settings.
+// The settings object that holds all supported AWS Audit Manager settings.
 type Settings struct {
 
 	// The default storage destination for assessment reports.
@@ -1001,10 +1004,10 @@ type Settings struct {
 	// The designated default audit owners.
 	DefaultProcessOwners []Role
 
-	// Specifies whether Organizations is enabled.
+	// Specifies whether AWS Organizations is enabled.
 	IsAwsOrgEnabled *bool
 
-	// The KMS key details.
+	// The AWS KMS key details.
 	KmsKey *string
 
 	// The designated Amazon Simple Notification Service (Amazon SNS) topic.
@@ -1013,23 +1016,22 @@ type Settings struct {
 	noSmithyDocumentSerde
 }
 
-// The keyword to search for in CloudTrail logs, Config rules, Security Hub checks,
-// and Amazon Web Services API names.
+// The keyword to search for in AWS CloudTrail logs, AWS Config rules, AWS Security
+// Hub checks, and AWS API names.
 type SourceKeyword struct {
 
 	// The method of input for the specified keyword.
 	KeywordInputType KeywordInputType
 
-	// The value of the keyword used to search CloudTrail logs, Config rules, Security
-	// Hub checks, and Amazon Web Services API names when mapping a control data
-	// source.
+	// The value of the keyword used to search AWS CloudTrail logs, AWS Config rules,
+	// AWS Security Hub checks, and AWS API names when mapping a control data source.
 	KeywordValue *string
 
 	noSmithyDocumentSerde
 }
 
-// A controlSet entity that represents a collection of controls in Audit Manager.
-// This does not contain the control set ID.
+// A controlSet entity that represents a collection of controls in AWS Audit
+// Manager. This does not contain the control set ID.
 type UpdateAssessmentFrameworkControlSet struct {
 
 	// The name of the control set.

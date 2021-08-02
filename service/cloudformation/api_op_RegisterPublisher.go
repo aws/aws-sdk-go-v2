@@ -12,7 +12,7 @@ import (
 
 // Registers your account as a publisher of public extensions in the CloudFormation
 // registry. Public extensions are available for use by all CloudFormation users.
-// This publisher ID applies to your account in all Regions. For information on
+// This publisher ID applies to your account in all AWS regions. For information on
 // requirements for registering as a public extension publisher, see Registering
 // your account to publish CloudFormation extensions
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs)
@@ -34,11 +34,10 @@ func (c *Client) RegisterPublisher(ctx context.Context, params *RegisterPublishe
 
 type RegisterPublisherInput struct {
 
-	// Whether you accept the Terms and Conditions
-	// (https://cloudformation-registry-documents.s3.amazonaws.com/Terms_and_Conditions_for_AWS_CloudFormation_Registry_Publishers.pdf)
-	// for publishing extensions in the CloudFormation registry. You must accept the
-	// terms and conditions in order to register to publish public extensions to the
-	// CloudFormation registry. The default is false.
+	// Whether you accept the terms and conditions for publishing extensions in the
+	// CloudFormation registry. You must accept the terms and conditions in order to
+	// register to publish public extensions to the CloudFormation registry. The
+	// default is false.
 	AcceptTermsAndConditions *bool
 
 	// If you are using a Bitbucket or GitHub account for identity verification, the

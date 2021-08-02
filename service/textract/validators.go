@@ -30,26 +30,6 @@ func (m *validateOpAnalyzeDocument) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpAnalyzeExpense struct {
-}
-
-func (*validateOpAnalyzeExpense) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpAnalyzeExpense) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*AnalyzeExpenseInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpAnalyzeExpenseInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpDetectDocumentText struct {
 }
 
@@ -154,10 +134,6 @@ func addOpAnalyzeDocumentValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAnalyzeDocument{}, middleware.After)
 }
 
-func addOpAnalyzeExpenseValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpAnalyzeExpense{}, middleware.After)
-}
-
 func addOpDetectDocumentTextValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDetectDocumentText{}, middleware.After)
 }
@@ -244,21 +220,6 @@ func validateOpAnalyzeDocumentInput(v *AnalyzeDocumentInput) error {
 		if err := validateHumanLoopConfig(v.HumanLoopConfig); err != nil {
 			invalidParams.AddNested("HumanLoopConfig", err.(smithy.InvalidParamsError))
 		}
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
-func validateOpAnalyzeExpenseInput(v *AnalyzeExpenseInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AnalyzeExpenseInput"}
-	if v.Document == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Document"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

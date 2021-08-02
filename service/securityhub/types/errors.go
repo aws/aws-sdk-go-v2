@@ -95,8 +95,8 @@ func (e *InvalidInputException) ErrorCode() string             { return "Invalid
 func (e *InvalidInputException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because it attempted to create resources beyond the
-// current Amazon Web Services account or throttling limits. The error code
-// describes the limit exceeded.
+// current AWS account or throttling limits. The error code describes the limit
+// exceeded.
 type LimitExceededException struct {
 	Message *string
 

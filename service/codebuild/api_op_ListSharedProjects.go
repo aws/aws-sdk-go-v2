@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of projects that are shared with other AWS accounts or users.
+// Gets a list of projects that are shared with other Amazon Web Services accounts
+// or users.
 func (c *Client) ListSharedProjects(ctx context.Context, params *ListSharedProjectsInput, optFns ...func(*Options)) (*ListSharedProjectsOutput, error) {
 	if params == nil {
 		params = &ListSharedProjectsInput{}
@@ -43,14 +44,14 @@ type ListSharedProjectsInput struct {
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The criterion to be used to list build projects shared with the current AWS
-	// account or user. Valid values include:
+	// The criterion to be used to list build projects shared with the current Amazon
+	// Web Services account or user. Valid values include:
 	//
-	// * ARN: List based on the ARN.
+	// * ARN: List based on the
+	// ARN.
 	//
-	// *
-	// MODIFIED_TIME: List based on when information about the shared project was last
-	// changed.
+	// * MODIFIED_TIME: List based on when information about the shared project
+	// was last changed.
 	SortBy types.SharedResourceSortByType
 
 	// The order in which to list shared build projects. Valid values include:
@@ -74,8 +75,8 @@ type ListSharedProjectsOutput struct {
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The list of ARNs for the build projects shared with the current AWS account or
-	// user.
+	// The list of ARNs for the build projects shared with the current Amazon Web
+	// Services account or user.
 	Projects []string
 
 	// Metadata pertaining to the operation's result.

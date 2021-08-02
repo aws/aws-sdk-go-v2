@@ -10,8 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of tags that are applied to the specified Amazon Location
-// resource.
+// Returns the tags for the specified Amazon Location Service resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -29,11 +28,7 @@ func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForRes
 
 type ListTagsForResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource whose tags you want to
-	// retrieve.
-	//
-	// * Format example:
-	// arn:aws:geo:region:account-id:resourcetype/ExampleResource
+	// The Amazon Resource Name (ARN) of the resource whose tags you want to retrieve.
 	//
 	// This member is required.
 	ResourceArn *string
@@ -43,11 +38,8 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// Tags that have been applied to the specified resource. Tags are mapped from the
-	// tag key to the tag value: "TagKey" : "TagValue".
-	//
-	// * Format example: {"tag1" :
-	// "value1", "tag2" : "value2"}
+	// The mapping from tag key to tag value for each tag associated with the specified
+	// resource.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

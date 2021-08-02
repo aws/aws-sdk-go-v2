@@ -354,15 +354,6 @@ func awsRestjson1_deserializeOpDocumentCreateLedgerOutput(v **CreateLedgerOutput
 				sv.DeletionProtection = ptr.Bool(jtv)
 			}
 
-		case "KmsKeyArn":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
-				}
-				sv.KmsKeyArn = ptr.String(jtv)
-			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -965,11 +956,6 @@ func awsRestjson1_deserializeOpDocumentDescribeLedgerOutput(v **DescribeLedgerOu
 					return fmt.Errorf("expected DeletionProtection to be of type *bool, got %T instead", value)
 				}
 				sv.DeletionProtection = ptr.Bool(jtv)
-			}
-
-		case "EncryptionDescription":
-			if err := awsRestjson1_deserializeDocumentLedgerEncryptionDescription(&sv.EncryptionDescription, value); err != nil {
-				return err
 			}
 
 		case "Name":
@@ -2914,11 +2900,6 @@ func awsRestjson1_deserializeOpDocumentUpdateLedgerOutput(v **UpdateLedgerOutput
 				sv.DeletionProtection = ptr.Bool(jtv)
 			}
 
-		case "EncryptionDescription":
-			if err := awsRestjson1_deserializeDocumentLedgerEncryptionDescription(&sv.EncryptionDescription, value); err != nil {
-				return err
-			}
-
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3756,71 +3737,6 @@ func awsRestjson1_deserializeDocumentKinesisConfiguration(v **types.KinesisConfi
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.StreamArn = ptr.String(jtv)
-			}
-
-		default:
-			_, _ = key, value
-
-		}
-	}
-	*v = sv
-	return nil
-}
-
-func awsRestjson1_deserializeDocumentLedgerEncryptionDescription(v **types.LedgerEncryptionDescription, value interface{}) error {
-	if v == nil {
-		return fmt.Errorf("unexpected nil of type %T", v)
-	}
-	if value == nil {
-		return nil
-	}
-
-	shape, ok := value.(map[string]interface{})
-	if !ok {
-		return fmt.Errorf("unexpected JSON type %v", value)
-	}
-
-	var sv *types.LedgerEncryptionDescription
-	if *v == nil {
-		sv = &types.LedgerEncryptionDescription{}
-	} else {
-		sv = *v
-	}
-
-	for key, value := range shape {
-		switch key {
-		case "EncryptionStatus":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected EncryptionStatus to be of type string, got %T instead", value)
-				}
-				sv.EncryptionStatus = types.EncryptionStatus(jtv)
-			}
-
-		case "InaccessibleKmsKeyDateTime":
-			if value != nil {
-				switch jtv := value.(type) {
-				case json.Number:
-					f64, err := jtv.Float64()
-					if err != nil {
-						return err
-					}
-					sv.InaccessibleKmsKeyDateTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
-
-				default:
-					return fmt.Errorf("expected Timestamp to be a JSON Number, got %T instead", value)
-
-				}
-			}
-
-		case "KmsKeyArn":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
-				}
-				sv.KmsKeyArn = ptr.String(jtv)
 			}
 
 		default:

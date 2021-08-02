@@ -11,10 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a dashboard in an Amazon Web Services account;. Updating a Dashboard
-// creates a new dashboard version but does not immediately publish the new
-// version. You can update the published version of a dashboard by using the
-// UpdateDashboardPublishedVersion API operation.
+// Updates a dashboard in an AWS account.
 func (c *Client) UpdateDashboard(ctx context.Context, params *UpdateDashboardInput, optFns ...func(*Options)) (*UpdateDashboardOutput, error) {
 	if params == nil {
 		params = &UpdateDashboardInput{}
@@ -32,8 +29,7 @@ func (c *Client) UpdateDashboard(ctx context.Context, params *UpdateDashboardInp
 
 type UpdateDashboardInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboard that
-	// you're updating.
+	// The ID of the AWS account that contains the dashboard that you're updating.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -54,10 +50,10 @@ type UpdateDashboardInput struct {
 	// you need to update a dashboard from an analysis, first convert the analysis to a
 	// template by using the CreateTemplate API operation. For SourceTemplate, specify
 	// the Amazon Resource Name (ARN) of the source template. The SourceTemplate ARN
-	// can contain any Amazon Web Services account; and any QuickSight-supported
-	// Region;. Use the DataSetReferences entity within SourceTemplate to list the
-	// replacement datasets for the placeholders listed in the original. The schema in
-	// each dataset must match its placeholder.
+	// can contain any AWS Account and any QuickSight-supported AWS Region. Use the
+	// DataSetReferences entity within SourceTemplate to list the replacement datasets
+	// for the placeholders listed in the original. The schema in each dataset must
+	// match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.DashboardSourceEntity
@@ -86,8 +82,8 @@ type UpdateDashboardInput struct {
 
 	// The Amazon Resource Name (ARN) of the theme that is being used for this
 	// dashboard. If you add a value for this field, it overrides the value that was
-	// originally associated with the entity. The theme ARN must exist in the same
-	// Amazon Web Services account; where you create the dashboard.
+	// originally associated with the entity. The theme ARN must exist in the same AWS
+	// account where you create the dashboard.
 	ThemeArn *string
 
 	// A description for the first version of the dashboard being created.
@@ -107,7 +103,7 @@ type UpdateDashboardOutput struct {
 	// The ID for the dashboard.
 	DashboardId *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

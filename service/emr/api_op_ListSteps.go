@@ -13,10 +13,8 @@ import (
 )
 
 // Provides a list of steps for the cluster in reverse order unless you specify
-// stepIds with the request or filter by StepStates. You can specify a maximum of
-// 10 stepIDs. The CLI automatically paginates results to return a list greater
-// than 50 steps. To return more than 50 steps using the CLI, specify a Marker,
-// which is a pagination token that indicates the next set of steps to retrieve.
+// stepIds with the request of filter by StepStates. You can specify a maximum of
+// 10 stepIDs.
 func (c *Client) ListSteps(ctx context.Context, params *ListStepsInput, optFns ...func(*Options)) (*ListStepsOutput, error) {
 	if params == nil {
 		params = &ListStepsInput{}
@@ -40,10 +38,7 @@ type ListStepsInput struct {
 	// This member is required.
 	ClusterId *string
 
-	// The maximum number of steps that a single ListSteps action returns is 50. To
-	// return a longer list of steps, use multiple ListSteps actions along with the
-	// Marker parameter, which is a pagination token that indicates the next set of
-	// results to retrieve.
+	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
 
 	// The filter to limit the step list based on the identifier of the steps. You can
@@ -61,10 +56,7 @@ type ListStepsInput struct {
 // that the last step is the first element in the list.
 type ListStepsOutput struct {
 
-	// The maximum number of steps that a single ListSteps action returns is 50. To
-	// return a longer list of steps, use multiple ListSteps actions along with the
-	// Marker parameter, which is a pagination token that indicates the next set of
-	// results to retrieve.
+	// The pagination token that indicates the next set of results to retrieve.
 	Marker *string
 
 	// The filtered list of steps for the cluster.

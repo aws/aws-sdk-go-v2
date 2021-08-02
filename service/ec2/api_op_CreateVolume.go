@@ -4,7 +4,6 @@ package ec2
 
 import (
 	"context"
-	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/ec2/types"
@@ -15,16 +14,16 @@ import (
 
 // Creates an EBS volume that can be attached to an instance in the same
 // Availability Zone. You can create a new empty volume or restore a volume from an
-// EBS snapshot. Any Amazon Web Services Marketplace product codes from the
-// snapshot are propagated to the volume. You can create encrypted volumes.
-// Encrypted volumes must be attached to instances that support Amazon EBS
-// encryption. Volumes that are created from encrypted snapshots are also
-// automatically encrypted. For more information, see Amazon EBS encryption
+// EBS snapshot. Any AWS Marketplace product codes from the snapshot are propagated
+// to the volume. You can create encrypted volumes. Encrypted volumes must be
+// attached to instances that support Amazon EBS encryption. Volumes that are
+// created from encrypted snapshots are also automatically encrypted. For more
+// information, see Amazon EBS encryption
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html) in the
 // Amazon Elastic Compute Cloud User Guide. You can tag your volumes during
-// creation. For more information, see Tag your Amazon EC2 resources
+// creation. For more information, see Tagging your Amazon EC2 resources
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html) in the
-// Amazon Elastic Compute Cloud User Guide. For more information, see Create an
+// Amazon Elastic Compute Cloud User Guide. For more information, see Creating an
 // Amazon EBS volume
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-creating-volume.html)
 // in the Amazon Elastic Compute Cloud User Guide.
@@ -49,11 +48,6 @@ type CreateVolumeInput struct {
 	//
 	// This member is required.
 	AvailabilityZone *string
-
-	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
-	// the request. For more information, see Ensure Idempotency
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html).
-	ClientToken *string
 
 	// Checks whether you have the required permissions for the action, without
 	// actually making the request, and provides an error response. If you have the
@@ -85,21 +79,21 @@ type CreateVolumeInput struct {
 	//
 	// * io2: 100-64,000 IOPS
 	//
-	// io1 and io2 volumes support up to
-	// 64,000 IOPS only on Instances built on the Nitro System
+	// For io1 and io2 volumes, we guarantee
+	// 64,000 IOPS only for Instances built on the Nitro System
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#ec2-nitro-instances).
-	// Other instance families support performance up to 32,000 IOPS. This parameter is
-	// required for io1 and io2 volumes. The default for gp3 volumes is 3,000 IOPS.
+	// Other instance families guarantee performance up to 32,000 IOPS. This parameter
+	// is required for io1 and io2 volumes. The default for gp3 volumes is 3,000 IOPS.
 	// This parameter is not supported for gp2, st1, sc1, or standard volumes.
 	Iops *int32
 
-	// The identifier of the Key Management Service (KMS) KMS key to use for Amazon EBS
-	// encryption. If this parameter is not specified, your KMS key for Amazon EBS is
-	// used. If KmsKeyId is specified, the encrypted state must be true. You can
-	// specify the KMS key using any of the following:
+	// The identifier of the AWS Key Management Service (AWS KMS) customer master key
+	// (CMK) to use for Amazon EBS encryption. If this parameter is not specified, your
+	// AWS managed CMK for EBS is used. If KmsKeyId is specified, the encrypted state
+	// must be true. You can specify the CMK using any of the following:
 	//
-	// * Key ID. For example,
-	// 1234abcd-12ab-34cd-56ef-1234567890ab.
+	// * Key ID. For
+	// example, 1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
 	// * Key alias. For example,
 	// alias/ExampleAlias.
@@ -111,10 +105,9 @@ type CreateVolumeInput struct {
 	// Alias ARN. For example,
 	// arn:aws:kms:us-east-1:012345678910:alias/ExampleAlias.
 	//
-	// Amazon Web Services
-	// authenticates the KMS key asynchronously. Therefore, if you specify an ID,
-	// alias, or ARN that is not valid, the action can appear to complete, but
-	// eventually fails.
+	// AWS authenticates the
+	// CMK asynchronously. Therefore, if you specify an ID, alias, or ARN that is not
+	// valid, the action can appear to complete, but eventually fails.
 	KmsKeyId *string
 
 	// Indicates whether to enable Amazon EBS Multi-Attach. If you enable Multi-Attach,
@@ -204,8 +197,9 @@ type CreateVolumeOutput struct {
 	// which the volume accumulates I/O credits for bursting.
 	Iops *int32
 
-	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS key that
-	// was used to protect the volume encryption key for the volume.
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used to protect the volume encryption key for
+	// the volume.
 	KmsKeyId *string
 
 	// Indicates whether Amazon EBS Multi-Attach is enabled.
@@ -286,9 +280,6 @@ func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, op
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = addIdempotencyToken_opCreateVolumeMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpCreateVolumeValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -305,39 +296,6 @@ func (c *Client) addOperationCreateVolumeMiddlewares(stack *middleware.Stack, op
 		return err
 	}
 	return nil
-}
-
-type idempotencyToken_initializeOpCreateVolume struct {
-	tokenProvider IdempotencyTokenProvider
-}
-
-func (*idempotencyToken_initializeOpCreateVolume) ID() string {
-	return "OperationIdempotencyTokenAutoFill"
-}
-
-func (m *idempotencyToken_initializeOpCreateVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	if m.tokenProvider == nil {
-		return next.HandleInitialize(ctx, in)
-	}
-
-	input, ok := in.Parameters.(*CreateVolumeInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateVolumeInput ")
-	}
-
-	if input.ClientToken == nil {
-		t, err := m.tokenProvider.GetIdempotencyToken()
-		if err != nil {
-			return out, metadata, err
-		}
-		input.ClientToken = &t
-	}
-	return next.HandleInitialize(ctx, in)
-}
-func addIdempotencyToken_opCreateVolumeMiddleware(stack *middleware.Stack, cfg Options) error {
-	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateVolume{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateVolume(region string) *awsmiddleware.RegisterServiceMetadata {

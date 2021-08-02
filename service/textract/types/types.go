@@ -219,72 +219,6 @@ type DocumentMetadata struct {
 	noSmithyDocumentSerde
 }
 
-// An object used to store information about the Value or Label detected by Amazon
-// Textract.
-type ExpenseDetection struct {
-
-	// The confidence in detection, as a percentage
-	Confidence *float32
-
-	// Information about where the following items are located on a document page:
-	// detected page, text, key-value pairs, tables, table cells, and selection
-	// elements.
-	Geometry *Geometry
-
-	// The word or line of text recognized by Amazon Textract
-	Text *string
-
-	noSmithyDocumentSerde
-}
-
-// The structure holding all the information returned by AnalyzeExpense
-type ExpenseDocument struct {
-
-	// Denotes which invoice or receipt in the document the information is coming from.
-	// First document will be 1, the second 2, and so on.
-	ExpenseIndex *int32
-
-	// Information detected on each table of a document, seperated into LineItems.
-	LineItemGroups []LineItemGroup
-
-	// Any information found outside of a table by Amazon Textract.
-	SummaryFields []ExpenseField
-
-	noSmithyDocumentSerde
-}
-
-// Breakdown of detected information, seperated into the catagories Type,
-// LableDetection, and ValueDetection
-type ExpenseField struct {
-
-	// The explicitly stated label of a detected element.
-	LabelDetection *ExpenseDetection
-
-	// The page number the value was detected on.
-	PageNumber *int32
-
-	// The implied label of a detected element. Present alongside LabelDetection for
-	// explicit elements.
-	Type *ExpenseType
-
-	// The value of a detected element. Present in explicit and implicit elements.
-	ValueDetection *ExpenseDetection
-
-	noSmithyDocumentSerde
-}
-
-// An object used to store information about the Type detected by Amazon Textract.
-type ExpenseType struct {
-
-	// The confidence of accuracy, as a percentage.
-	Confidence *float32
-
-	// The word or line of text detected by Amazon Textract.
-	Text *string
-
-	noSmithyDocumentSerde
-}
-
 // Information about where the following items are located on a document page:
 // detected page, text, key-value pairs, tables, table cells, and selection
 // elements.
@@ -352,30 +286,6 @@ type HumanLoopDataAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// A structure that holds information about the different lines found in a
-// document's tables.
-type LineItemFields struct {
-
-	// ExpenseFields used to show information from detected lines on a table.
-	LineItemExpenseFields []ExpenseField
-
-	noSmithyDocumentSerde
-}
-
-// A grouping of tables which contain LineItems, with each table identified by the
-// table's LineItemGroupIndex.
-type LineItemGroup struct {
-
-	// The number used to identify a specific table in a document. The first table
-	// encountered will have a LineItemGroupIndex of 1, the second 2, etc.
-	LineItemGroupIndex *int32
-
-	// The breakdown of information on a particular line of a table.
-	LineItems []LineItemFields
-
-	noSmithyDocumentSerde
-}
-
 // The Amazon Simple Notification Service (Amazon SNS) topic to which Amazon
 // Textract publishes the completion status of an asynchronous document operation,
 // such as StartDocumentTextDetection.
@@ -396,23 +306,7 @@ type NotificationChannel struct {
 }
 
 // Sets whether or not your output will go to a user created bucket. Used to set
-// the name of the bucket, and the prefix on the output file. OutputConfig is an
-// optional parameter which lets you adjust where your output will be placed. By
-// default, Amazon Textract will store the results internally and can only be
-// accessed by the Get API operations. With OutputConfig enabled, you can set the
-// name of the bucket the output will be sent to and the file prefix of the results
-// where you can download your results. Additionally, you can set the KMSKeyID
-// parameter to a customer master key (CMK) to encrypt your output. Without this
-// parameter set Amazon Textract will encrypt server-side using the AWS managed CMK
-// for Amazon S3. Decryption of Customer Content is necessary for processing of the
-// documents by Amazon Textract. If your account is opted out under an AI services
-// opt out policy then all unencrypted Customer Content is immediately and
-// permanently deleted after the Customer Content has been processed by the
-// service. No copy of of the output is retained by Amazon Textract. For
-// information about how to opt out, see  Managing AI services opt-out policy.
-// (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_manage_policies_ai-opt-out.html)
-// For more information on data privacy, see the Data Privacy FAQ
-// (https://aws.amazon.com/compliance/data-privacy-faq/).
+// the name of the bucket, and the prefix on the output file.
 type OutputConfig struct {
 
 	// The name of the bucket your output will go to.
@@ -472,8 +366,7 @@ type Relationship struct {
 // bucket, the user must have permission to access the S3 bucket and file.
 type S3Object struct {
 
-	// The name of the S3 bucket. Note that the # character is not valid in the file
-	// name.
+	// The name of the S3 bucket.
 	Bucket *string
 
 	// The file name of the input document. Synchronous operations can use image files

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a list of Batch jobs.
+// Describes a list of AWS Batch jobs.
 func (c *Client) DescribeJobs(ctx context.Context, params *DescribeJobsInput, optFns ...func(*Options)) (*DescribeJobsOutput, error) {
 	if params == nil {
 		params = &DescribeJobsInput{}

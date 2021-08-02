@@ -64,24 +64,24 @@ type DescribeAddressesInput struct {
 	// network-interface-id - [EC2-VPC] The ID of the network interface that the
 	// address is associated with, if any.
 	//
-	// * network-interface-owner-id - The Amazon
-	// Web Services account ID of the owner.
+	// * network-interface-owner-id - The account
+	// ID of the owner.
 	//
-	// * private-ip-address - [EC2-VPC] The
-	// private IP address associated with the Elastic IP address.
+	// * private-ip-address - [EC2-VPC] The private IP address
+	// associated with the Elastic IP address.
 	//
-	// * public-ip - The
-	// Elastic IP address, or the carrier IP address.
+	// * public-ip - The Elastic IP address,
+	// or the carrier IP address.
 	//
-	// * tag: - The key/value
-	// combination of a tag assigned to the resource. Use the tag key in the filter
-	// name and the tag value as the filter value. For example, to find all resources
-	// that have a tag with the key Owner and the value TeamA, specify tag:Owner for
-	// the filter name and TeamA for the filter value.
+	// * tag: - The key/value combination of a tag assigned
+	// to the resource. Use the tag key in the filter name and the tag value as the
+	// filter value. For example, to find all resources that have a tag with the key
+	// Owner and the value TeamA, specify tag:Owner for the filter name and TeamA for
+	// the filter value.
 	//
-	// * tag-key - The key of a tag
-	// assigned to the resource. Use this filter to find all resources assigned a tag
-	// with a specific key, regardless of the tag value.
+	// * tag-key - The key of a tag assigned to the resource. Use
+	// this filter to find all resources assigned a tag with a specific key, regardless
+	// of the tag value.
 	Filters []types.Filter
 
 	// One or more Elastic IP addresses. Default: Describes all your Elastic IP

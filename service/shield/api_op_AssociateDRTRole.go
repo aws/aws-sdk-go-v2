@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Authorizes the Shield Response Team (SRT) using the specified role, to access
-// your Amazon Web Services account to assist with DDoS attack mitigation during
-// potential attacks. This enables the SRT to inspect your WAF configuration and
-// create or update WAF rules and web ACLs. You can associate only one RoleArn with
-// your subscription. If you submit an AssociateDRTRole request for an account that
+// Authorizes the DDoS Response Team (DRT), using the specified role, to access
+// your AWS account to assist with DDoS attack mitigation during potential attacks.
+// This enables the DRT to inspect your AWS WAF configuration and create or update
+// AWS WAF rules and web ACLs. You can associate only one RoleArn with your
+// subscription. If you submit an AssociateDRTRole request for an account that
 // already has an associated role, the new RoleArn will replace the existing
 // RoleArn. Prior to making the AssociateDRTRole request, you must attach the
 // AWSShieldDRTAccessPolicy
@@ -25,14 +25,15 @@ import (
 // The role must also trust the service principal  drt.shield.amazonaws.com. For
 // more information, see IAM JSON Policy Elements: Principal
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html).
-// The SRT will have access only to your WAF and Shield resources. By submitting
-// this request, you authorize the SRT to inspect your WAF and Shield configuration
-// and create and update WAF rules and web ACLs on your behalf. The SRT takes these
-// actions only if explicitly authorized by you. You must have the iam:PassRole
-// permission to make an AssociateDRTRole request. For more information, see
-// Granting a User Permissions to Pass a Role to an Amazon Web Services Service
+// The DRT will have access only to your AWS WAF and Shield resources. By
+// submitting this request, you authorize the DRT to inspect your AWS WAF and
+// Shield configuration and create and update AWS WAF rules and web ACLs on your
+// behalf. The DRT takes these actions only if explicitly authorized by you. You
+// must have the iam:PassRole permission to make an AssociateDRTRole request. For
+// more information, see Granting a User Permissions to Pass a Role to an AWS
+// Service
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html).
-// To use the services of the SRT and make an AssociateDRTRole request, you must be
+// To use the services of the DRT and make an AssociateDRTRole request, you must be
 // subscribed to the Business Support plan
 // (https://aws.amazon.com/premiumsupport/business-support/) or the Enterprise
 // Support plan (https://aws.amazon.com/premiumsupport/enterprise-support/).
@@ -53,9 +54,9 @@ func (c *Client) AssociateDRTRole(ctx context.Context, params *AssociateDRTRoleI
 
 type AssociateDRTRoleInput struct {
 
-	// The Amazon Resource Name (ARN) of the role the SRT will use to access your
-	// Amazon Web Services account. Prior to making the AssociateDRTRole request, you
-	// must attach the AWSShieldDRTAccessPolicy
+	// The Amazon Resource Name (ARN) of the role the DRT will use to access your AWS
+	// account. Prior to making the AssociateDRTRole request, you must attach the
+	// AWSShieldDRTAccessPolicy
 	// (https://console.aws.amazon.com/iam/home?#/policies/arn:aws:iam::aws:policy/service-role/AWSShieldDRTAccessPolicy)
 	// managed policy to this role. For more information see Attaching and Detaching
 	// IAM Policies

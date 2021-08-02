@@ -5853,15 +5853,6 @@ func awsRestjson1_deserializeOpDocumentDescribeWorldOutput(v **DescribeWorldOutp
 				sv.Template = ptr.String(jtv)
 			}
 
-		case "worldDescriptionBody":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected Json to be of type string, got %T instead", value)
-				}
-				sv.WorldDescriptionBody = ptr.String(jtv)
-			}
-
 		default:
 			_, _ = key, value
 
@@ -6552,15 +6543,6 @@ func awsRestjson1_deserializeOpDocumentDescribeWorldTemplateOutput(v **DescribeW
 		case "tags":
 			if err := awsRestjson1_deserializeDocumentTagMap(&sv.Tags, value); err != nil {
 				return err
-			}
-
-		case "version":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
-				}
-				sv.Version = ptr.String(jtv)
 			}
 
 		default:
@@ -14609,15 +14591,6 @@ func awsRestjson1_deserializeDocumentTemplateSummary(v **types.TemplateSummary, 
 					return fmt.Errorf("expected TemplateName to be of type string, got %T instead", value)
 				}
 				sv.Name = ptr.String(jtv)
-			}
-
-		case "version":
-			if value != nil {
-				jtv, ok := value.(string)
-				if !ok {
-					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
-				}
-				sv.Version = ptr.String(jtv)
 			}
 
 		default:

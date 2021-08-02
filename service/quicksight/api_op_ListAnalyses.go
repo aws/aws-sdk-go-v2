@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists Amazon QuickSight analyses that exist in the specified Amazon Web Services
-// account;.
+// Lists Amazon QuickSight analyses that exist in the specified AWS account.
 func (c *Client) ListAnalyses(ctx context.Context, params *ListAnalysesInput, optFns ...func(*Options)) (*ListAnalysesOutput, error) {
 	if params == nil {
 		params = &ListAnalysesInput{}
@@ -31,7 +30,7 @@ func (c *Client) ListAnalyses(ctx context.Context, params *ListAnalysesInput, op
 
 type ListAnalysesInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the analyses.
+	// The ID of the AWS account that contains the analyses.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -53,7 +52,7 @@ type ListAnalysesOutput struct {
 	// A pagination token that can be used in a subsequent request.
 	NextToken *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

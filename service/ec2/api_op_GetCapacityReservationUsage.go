@@ -13,9 +13,8 @@ import (
 
 // Gets usage information about a Capacity Reservation. If the Capacity Reservation
 // is shared, it shows usage information for the Capacity Reservation owner and
-// each Amazon Web Services account that is currently using the shared capacity. If
-// the Capacity Reservation is not shared, it shows only the Capacity Reservation
-// owner's usage.
+// each account that is currently using the shared capacity. If the Capacity
+// Reservation is not shared, it shows only the Capacity Reservation owner's usage.
 func (c *Client) GetCapacityReservationUsage(ctx context.Context, params *GetCapacityReservationUsageInput, optFns ...func(*Options)) (*GetCapacityReservationUsageOutput, error) {
 	if params == nil {
 		params = &GetCapacityReservationUsageInput{}

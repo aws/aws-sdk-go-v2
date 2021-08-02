@@ -130,7 +130,7 @@ func (m *endpointPrefix_opPutLoggingOptionsMiddleware) HandleSerialize(ctx conte
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "api." + req.URL.Host
+	req.URL.Host = "model." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

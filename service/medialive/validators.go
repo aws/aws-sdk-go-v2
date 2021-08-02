@@ -1455,24 +1455,6 @@ func validateAudioDescription(v *types.AudioDescription) error {
 	}
 }
 
-func validateAudioHlsRenditionSelection(v *types.AudioHlsRenditionSelection) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "AudioHlsRenditionSelection"}
-	if v.GroupId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("GroupId"))
-	}
-	if v.Name == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Name"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateAudioLanguageSelection(v *types.AudioLanguageSelection) error {
 	if v == nil {
 		return nil
@@ -1542,11 +1524,6 @@ func validateAudioSelectorSettings(v *types.AudioSelectorSettings) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "AudioSelectorSettings"}
-	if v.AudioHlsRenditionSelection != nil {
-		if err := validateAudioHlsRenditionSelection(v.AudioHlsRenditionSelection); err != nil {
-			invalidParams.AddNested("AudioHlsRenditionSelection", err.(smithy.InvalidParamsError))
-		}
-	}
 	if v.AudioLanguageSelection != nil {
 		if err := validateAudioLanguageSelection(v.AudioLanguageSelection); err != nil {
 			invalidParams.AddNested("AudioLanguageSelection", err.(smithy.InvalidParamsError))

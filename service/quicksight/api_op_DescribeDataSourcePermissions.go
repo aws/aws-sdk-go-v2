@@ -29,13 +29,13 @@ func (c *Client) DescribeDataSourcePermissions(ctx context.Context, params *Desc
 
 type DescribeDataSourcePermissionsInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the data source. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	//
 	// This member is required.
 	DataSourceId *string
@@ -48,14 +48,14 @@ type DescribeDataSourcePermissionsOutput struct {
 	// The Amazon Resource Name (ARN) of the data source.
 	DataSourceArn *string
 
-	// The ID of the data source. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string
 
 	// A list of resource permissions on the data source.
 	Permissions []types.ResourcePermission
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

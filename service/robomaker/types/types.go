@@ -900,9 +900,6 @@ type TemplateSummary struct {
 	// The name of the template.
 	Name *string
 
-	// The version of the template that you're using.
-	Version *string
-
 	noSmithyDocumentSerde
 }
 

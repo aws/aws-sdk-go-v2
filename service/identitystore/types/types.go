@@ -10,10 +10,9 @@ import (
 // attribute name and attribute value to search users or groups.
 type Filter struct {
 
-	// The attribute path that is used to specify which attribute name to search.
-	// Length limit is 255 characters. For example, UserName is a valid attribute path
-	// for the ListUsers API, and DisplayName is a valid attribute path for the
-	// ListGroups API.
+	// The attribute path used to specify which attribute name to search. Length limit
+	// is 255 characters. For example, UserName is a valid attribute path for the
+	// ListUsers API, and DisplayName is a valid attribute path for the ListGroups API.
 	//
 	// This member is required.
 	AttributePath *string
@@ -30,10 +29,10 @@ type Filter struct {
 // A group object, which contains a specified group’s metadata and attributes.
 type Group struct {
 
-	// Contains the group’s display name value. The length limit is 1,024 characters.
+	// Contains the group’s display name value. The length limit is 1024 characters.
 	// This value can consist of letters, accented characters, symbols, numbers,
-	// punctuation, tab, new line, carriage return, space, and nonbreaking space in
-	// this attribute. The characters <>;:% are excluded. This value is specified at
+	// punctuation, tab, new line, carriage return, space and non breaking space in
+	// this attribute. The characters “<>;:%” are excluded. This value is specified at
 	// the time the group is created and stored as an attribute of the group object in
 	// the identity store.
 	//
@@ -56,9 +55,9 @@ type User struct {
 	// This member is required.
 	UserId *string
 
-	// Contains the user’s user name value. The length limit is 128 characters. This
-	// value can consist of letters, accented characters, symbols, numbers, and
-	// punctuation. The characters <>;:% are excluded. This value is specified at the
+	// Contains the user’s username value. The length limit is 128 characters. This
+	// value can consist of letters, accented characters, symbols, numbers and
+	// punctuation. The characters “<>;:%” are excluded. This value is specified at the
 	// time the user is created and stored as an attribute of the user object in the
 	// identity store.
 	//

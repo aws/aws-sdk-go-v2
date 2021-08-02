@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes Shield Advanced from an account. Shield Advanced requires a 1-year
-// subscription commitment. You cannot delete a subscription prior to the
+// Removes AWS Shield Advanced from an account. AWS Shield Advanced requires a
+// 1-year subscription commitment. You cannot delete a subscription prior to the
 // completion of that commitment.
 //
 // Deprecated: This operation has been deprecated.

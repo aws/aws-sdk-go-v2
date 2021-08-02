@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes specified tags from an Batch resource.
+// Deletes specified tags from an AWS Batch resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -28,10 +28,10 @@ func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, 
 
 type UntagResourceInput struct {
 
-	// The Amazon Resource Name (ARN) of the resource from which to delete tags. Batch
-	// resources that support tags are compute environments, jobs, job definitions, and
-	// job queues. ARNs for child jobs of array and multi-node parallel (MNP) jobs are
-	// not supported.
+	// The Amazon Resource Name (ARN) of the resource from which to delete tags. AWS
+	// Batch resources that support tags are compute environments, jobs, job
+	// definitions, and job queues. ARNs for child jobs of array and multi-node
+	// parallel (MNP) jobs are not supported.
 	//
 	// This member is required.
 	ResourceArn *string

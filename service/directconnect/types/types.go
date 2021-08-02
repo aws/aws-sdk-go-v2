@@ -43,11 +43,9 @@ type BGPPeer struct {
 	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string
 
-	// The Direct Connect endpoint that terminates the BGP peer.
+	// The Direct Connect endpoint on which the BGP peer terminates.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
 	AwsLogicalDeviceId *string
 
 	// The ID of the BGP peer.
@@ -98,11 +96,11 @@ type Connection struct {
 	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
-	// The Direct Connect endpoint that terminates the physical connection.
+	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
 	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
@@ -381,11 +379,11 @@ type Interconnect struct {
 	// Deprecated: This member has been deprecated.
 	AwsDevice *string
 
-	// The Direct Connect endpoint that terminates the physical connection.
+	// The Direct Connect endpoint on which the physical connection terminates.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
 	AwsLogicalDeviceId *string
 
 	// The bandwidth of the connection.
@@ -463,8 +461,8 @@ type Lag struct {
 	// The Direct Connect endpoint that hosts the LAG.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
 	AwsLogicalDeviceId *string
 
 	// The connections bundled by the LAG.
@@ -984,11 +982,11 @@ type VirtualInterface struct {
 	// of 6 characters and and a maximun lenth of 80 characters.
 	AuthKey *string
 
-	// The Direct Connect endpoint that terminates the physical connection.
+	// The Direct Connect endpoint on which the virtual interface terminates.
 	AwsDeviceV2 *string
 
-	// The Direct Connect endpoint that terminates the logical connection. This device
-	// might be different than the device that terminates the physical connection.
+	// The Direct Connect endpoint that terminates a physical connection's BGP
+	// sessions.
 	AwsLogicalDeviceId *string
 
 	// The BGP peers configured on this virtual interface.

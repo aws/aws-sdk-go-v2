@@ -29,8 +29,7 @@ func (c *Client) DescribeTemplate(ctx context.Context, params *DescribeTemplateI
 
 type DescribeTemplateInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the template that
-	// you're describing.
+	// The ID of the AWS account that contains the template that you're describing.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -55,7 +54,7 @@ type DescribeTemplateInput struct {
 
 type DescribeTemplateOutput struct {
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

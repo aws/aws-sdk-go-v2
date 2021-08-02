@@ -62,7 +62,7 @@ func (c *Client) BatchImportFindings(ctx context.Context, params *BatchImportFin
 type BatchImportFindingsInput struct {
 
 	// A list of findings to import. To successfully import a finding, it must follow
-	// the Amazon Web Services Security Finding Format
+	// the AWS Security Finding Format
 	// (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-findings-format.html).
 	// Maximum of 100 findings per request.
 	//

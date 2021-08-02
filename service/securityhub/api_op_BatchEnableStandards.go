@@ -15,7 +15,7 @@ import (
 // for a standard, use the DescribeStandards operation. For more information, see
 // the Security Standards
 // (https://docs.aws.amazon.com/securityhub/latest/userguide/securityhub-standards.html)
-// section of the Security Hub User Guide.
+// section of the AWS Security Hub User Guide.
 func (c *Client) BatchEnableStandards(ctx context.Context, params *BatchEnableStandardsInput, optFns ...func(*Options)) (*BatchEnableStandardsOutput, error) {
 	if params == nil {
 		params = &BatchEnableStandardsInput{}

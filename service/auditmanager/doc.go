@@ -3,26 +3,26 @@
 // Package auditmanager provides the API client, operations, and parameter types
 // for AWS Audit Manager.
 //
-// Welcome to the Audit Manager API reference. This guide is for developers who
-// need detailed information about the Audit Manager API operations, data types,
-// and errors. Audit Manager is a service that provides automated evidence
-// collection so that you can continuously audit your Amazon Web Services usage,
-// and assess the effectiveness of your controls to better manage risk and simplify
-// compliance. Audit Manager provides pre-built frameworks that structure and
+// Welcome to the AWS Audit Manager API reference. This guide is for developers who
+// need detailed information about the AWS Audit Manager API operations, data
+// types, and errors. AWS Audit Manager is a service that provides automated
+// evidence collection so that you can continuously audit your AWS usage, and
+// assess the effectiveness of your controls to better manage risk and simplify
+// compliance. AWS Audit Manager provides pre-built frameworks that structure and
 // automate assessments for a given compliance standard. Frameworks include a
 // pre-built collection of controls with descriptions and testing procedures, which
 // are grouped according to the requirements of the specified compliance standard
 // or regulation. You can also customize frameworks and controls to support
 // internal audits with unique requirements. Use the following links to get started
-// with the Audit Manager API:
+// with the AWS Audit Manager API:
 //
 // * Actions
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Operations.html):
-// An alphabetical list of all Audit Manager API operations.
+// An alphabetical list of all AWS Audit Manager API operations.
 //
 // * Data types
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/API_Types.html):
-// An alphabetical list of all Audit Manager data types.
+// An alphabetical list of all AWS Audit Manager data types.
 //
 // * Common parameters
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonParameters.html):
@@ -32,7 +32,7 @@
 // (https://docs.aws.amazon.com/audit-manager/latest/APIReference/CommonErrors.html):
 // Client and server errors that all operations can return.
 //
-// If you're new to Audit
-// Manager, we recommend that you review the  Audit Manager User Guide
+// If you're new to AWS
+// Audit Manager, we recommend that you review the  AWS Audit Manager User Guide
 // (https://docs.aws.amazon.com/audit-manager/latest/userguide/what-is.html).
 package auditmanager

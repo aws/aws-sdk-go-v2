@@ -35,8 +35,7 @@ type DeleteThemeAliasInput struct {
 	// This member is required.
 	AliasName *string
 
-	// The ID of the Amazon Web Services account; that contains the theme alias to
-	// delete.
+	// The ID of the AWS account that contains the theme alias to delete.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -57,7 +56,7 @@ type DeleteThemeAliasOutput struct {
 	// The Amazon Resource Name (ARN) of the theme resource using the deleted alias.
 	Arn *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

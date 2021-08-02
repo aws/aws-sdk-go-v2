@@ -7,17 +7,17 @@ import (
 	"time"
 )
 
-// These are Amazon Web Services SSO identity store attributes that you can
-// configure for use in attributes-based access control (ABAC). You can create
-// permissions policies that determine who can access your Amazon Web Services
-// resources based upon the configured attribute values. When you enable ABAC and
-// specify AccessControlAttributes, Amazon Web Services SSO passes the attribute
-// values of the authenticated user into IAM for use in policy evaluation.
+// These are AWS SSO identity store attributes that you can configure for use in
+// attributes-based access control (ABAC). You can create permission policies that
+// determine who can access your AWS resources based upon the configured attribute
+// value(s). When you enable ABAC and specify AccessControlAttributes, AWS SSO
+// passes the attribute(s) value of the authenticated user into IAM for use in
+// policy evaluation.
 type AccessControlAttribute struct {
 
 	// The name of the attribute associated with your identities in your identity
 	// source. This is used to map a specified attribute in your identity source with
-	// an attribute in Amazon Web Services SSO.
+	// an attribute in AWS SSO.
 	//
 	// This member is required.
 	Key *string
@@ -33,8 +33,7 @@ type AccessControlAttribute struct {
 // The value used for mapping a specified attribute to an identity source.
 type AccessControlAttributeValue struct {
 
-	// The identity source to use when mapping a specified attribute to Amazon Web
-	// Services SSO.
+	// The identity source to use when mapping a specified attribute to AWS SSO.
 	//
 	// This member is required.
 	Source []string
@@ -42,23 +41,22 @@ type AccessControlAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
-// The assignment that indicates a principal's limited access to a specified Amazon
-// Web Services account with a specified permission set. The term principal here
-// refers to a user or group that is defined in Amazon Web Services SSO.
+// The assignment that indicates a principal's limited access to a specified AWS
+// account with a specified permission set. The term principal here refers to a
+// user or group that is defined in AWS SSO.
 type AccountAssignment struct {
 
-	// The identifier of the Amazon Web Services account.
+	// The identifier of the AWS account.
 	AccountId *string
 
 	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
-	// Web Services General Reference.
+	// Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
 	PermissionSetArn *string
 
-	// An identifier for an object in Amazon Web Services SSO, such as a user or group.
-	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in Amazon Web Services SSO, see the Amazon
-	// Web Services SSO Identity Store API Reference.
+	// An identifier for an object in AWS SSO, such as a user or group. PrincipalIds
+	// are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more
+	// information about PrincipalIds in AWS SSO, see the AWS SSO Identity Store API
+	// Reference.
 	PrincipalId *string
 
 	// The entity type for which the assignment will be created.
@@ -78,14 +76,13 @@ type AccountAssignmentOperationStatus struct {
 	FailureReason *string
 
 	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
-	// Web Services General Reference.
+	// Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
 	PermissionSetArn *string
 
-	// An identifier for an object in Amazon Web Services SSO, such as a user or group.
-	// PrincipalIds are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For
-	// more information about PrincipalIds in Amazon Web Services SSO, see the Amazon
-	// Web Services SSO Identity Store API Reference.
+	// An identifier for an object in AWS SSO, such as a user or group. PrincipalIds
+	// are GUIDs (For example, f81d4fae-7dec-11d0-a765-00a0c91e6bf6). For more
+	// information about PrincipalIds in AWS SSO, see the AWS SSO Identity Store API
+	// Reference.
 	PrincipalId *string
 
 	// The entity type for which the assignment will be created.
@@ -98,8 +95,8 @@ type AccountAssignmentOperationStatus struct {
 	// The status of the permission set provisioning process.
 	Status StatusValues
 
-	// TargetID is an Amazon Web Services account identifier, typically a 10-12 digit
-	// string (For example, 123456789012).
+	// TargetID is an AWS account identifier, typically a 10-12 digit string (For
+	// example, 123456789012).
 	TargetId *string
 
 	// The entity type for which the assignment will be created.
@@ -128,8 +125,7 @@ type AccountAssignmentOperationStatusMetadata struct {
 type AttachedManagedPolicy struct {
 
 	// The ARN of the IAM managed policy. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
-	// Web Services General Reference.
+	// Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
 	Arn *string
 
 	// The name of the IAM managed policy.
@@ -142,8 +138,8 @@ type AttachedManagedPolicy struct {
 // configuration.
 type InstanceAccessControlAttributeConfiguration struct {
 
-	// Lists the attributes that are configured for ABAC in the specified Amazon Web
-	// Services SSO instance.
+	// Lists the attributes that are configured for ABAC in the specified AWS SSO
+	// instance.
 	//
 	// This member is required.
 	AccessControlAttributes []AccessControlAttribute
@@ -158,8 +154,8 @@ type InstanceMetadata struct {
 	IdentityStoreId *string
 
 	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
-	// Service Namespaces in the Amazon Web Services General Reference.
+	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
+	// Namespaces in the AWS General Reference.
 	InstanceArn *string
 
 	noSmithyDocumentSerde
@@ -187,8 +183,7 @@ type PermissionSet struct {
 	Name *string
 
 	// The ARN of the permission set. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and Amazon Web Services Service Namespaces in the Amazon
-	// Web Services General Reference.
+	// Resource Names (ARNs) and AWS Service Namespaces in the AWS General Reference.
 	PermissionSetArn *string
 
 	// Used to redirect users within the application during the federation
@@ -206,8 +201,7 @@ type PermissionSet struct {
 // a specified permission set.
 type PermissionSetProvisioningStatus struct {
 
-	// The identifier of the Amazon Web Services account from which to list the
-	// assignments.
+	// The identifier of the AWS account from which to list the assignments.
 	AccountId *string
 
 	// The date that the permission set was created.
@@ -217,8 +211,8 @@ type PermissionSetProvisioningStatus struct {
 	FailureReason *string
 
 	// The ARN of the permission set that is being provisioned. For more information
-	// about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services Service
-	// Namespaces in the Amazon Web Services General Reference.
+	// about ARNs, see Amazon Resource Names (ARNs) and AWS Service Namespaces in the
+	// AWS General Reference.
 	PermissionSetArn *string
 
 	// The identifier for tracking the request operation that is generated by the
@@ -248,8 +242,8 @@ type PermissionSetProvisioningStatusMetadata struct {
 }
 
 // A set of key-value pairs that are used to manage the resource. Tags can only be
-// applied to permission sets and cannot be applied to corresponding roles that
-// Amazon Web Services SSO creates in Amazon Web Services accounts.
+// applied to permission sets and cannot be applied to corresponding roles that AWS
+// SSO creates in AWS accounts.
 type Tag struct {
 
 	// The key for the tag.

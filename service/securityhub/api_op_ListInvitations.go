@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all Security Hub membership invitations that were sent to the current
-// Amazon Web Services account. This operation is only used by accounts that are
-// managed by invitation. Accounts that are managed using the integration with
-// Organizations do not receive invitations.
+// Lists all Security Hub membership invitations that were sent to the current AWS
+// account. This operation is only used by accounts that are managed by invitation.
+// Accounts that are managed using the integration with AWS Organizations do not
+// receive invitations.
 func (c *Client) ListInvitations(ctx context.Context, params *ListInvitationsInput, optFns ...func(*Options)) (*ListInvitationsOutput, error) {
 	if params == nil {
 		params = &ListInvitationsInput{}

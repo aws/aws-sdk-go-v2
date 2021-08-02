@@ -11,24 +11,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Amazon QuickSight customizations the current Region;. Currently, you can
-// add a custom default theme by using the CreateAccountCustomization or
+// Creates Amazon QuickSight customizations the current AWS Region. Currently, you
+// can add a custom default theme by using the CreateAccountCustomization or
 // UpdateAccountCustomization API operation. To further customize QuickSight by
 // removing QuickSight sample assets and videos for all new users, see Customizing
 // QuickSight
 // (https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html)
-// in the Amazon QuickSight User Guide. You can create customizations for your
-// Amazon Web Services account; or, if you specify a namespace, for a QuickSight
-// namespace instead. Customizations that apply to a namespace always override
-// customizations that apply to an Amazon Web Services account;. To find out which
-// customizations apply, use the DescribeAccountCustomization API operation. Before
-// you use the CreateAccountCustomization API operation to add a theme as the
-// namespace default, make sure that you first share the theme with the namespace.
-// If you don't share it with the namespace, the theme isn't visible to your users
-// even if you make it the default theme. To check if the theme is shared, view the
-// current permissions by using the DescribeThemePermissions API operation. To
-// share the theme, grant permissions by using the UpdateThemePermissions API
-// operation.
+// in the Amazon QuickSight User Guide. You can create customizations for your AWS
+// account or, if you specify a namespace, for a QuickSight namespace instead.
+// Customizations that apply to a namespace always override customizations that
+// apply to an AWS account. To find out which customizations apply, use the
+// DescribeAccountCustomization API operation. Before you use the
+// CreateAccountCustomization API operation to add a theme as the namespace
+// default, make sure that you first share the theme with the namespace. If you
+// don't share it with the namespace, the theme isn't visible to your users even if
+// you make it the default theme. To check if the theme is shared, view the current
+// permissions by using the DescribeThemePermissions API operation. To share the
+// theme, grant permissions by using the UpdateThemePermissions API operation.
 func (c *Client) CreateAccountCustomization(ctx context.Context, params *CreateAccountCustomizationInput, optFns ...func(*Options)) (*CreateAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &CreateAccountCustomizationInput{}
@@ -46,10 +45,10 @@ func (c *Client) CreateAccountCustomization(ctx context.Context, params *CreateA
 
 type CreateAccountCustomizationInput struct {
 
-	// The QuickSight customizations you're adding in the current Region;. You can add
-	// these to an Amazon Web Services account; and a QuickSight namespace. For
-	// example, you can add a default theme by setting AccountCustomization to the
-	// midnight theme: "AccountCustomization": { "DefaultTheme":
+	// The QuickSight customizations you're adding in the current AWS Region. You can
+	// add these to an AWS account and a QuickSight namespace. For example, you can add
+	// a default theme by setting AccountCustomization to the midnight theme:
+	// "AccountCustomization": { "DefaultTheme":
 	// "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a custom theme by
 	// specifying "AccountCustomization": { "DefaultTheme":
 	// "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
@@ -58,8 +57,7 @@ type CreateAccountCustomizationInput struct {
 	// This member is required.
 	AccountCustomization *types.AccountCustomization
 
-	// The ID for the Amazon Web Services account; that you want to customize
-	// QuickSight for.
+	// The ID for the AWS account that you want to customize QuickSight for.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -75,21 +73,20 @@ type CreateAccountCustomizationInput struct {
 
 type CreateAccountCustomizationOutput struct {
 
-	// The QuickSight customizations you're adding in the current Region;.
+	// The QuickSight customizations you're adding in the current AWS Region.
 	AccountCustomization *types.AccountCustomization
 
 	// The Amazon Resource Name (ARN) for the customization that you created for this
-	// Amazon Web Services account;.
+	// AWS account.
 	Arn *string
 
-	// The ID for the Amazon Web Services account; that you want to customize
-	// QuickSight for.
+	// The ID for the AWS account that you want to customize QuickSight for.
 	AwsAccountId *string
 
 	// The namespace associated with the customization you're creating.
 	Namespace *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -42,8 +42,8 @@ type DeclineInvitationsInput struct {
 
 type DeclineInvitationsOutput struct {
 
-	// The list of Amazon Web Services accounts that were not processed. For each
-	// account, the list includes the account ID and the email address.
+	// The list of AWS accounts that were not processed. For each account, the list
+	// includes the account ID and the email address.
 	UnprocessedAccounts []types.Result
 
 	// Metadata pertaining to the operation's result.

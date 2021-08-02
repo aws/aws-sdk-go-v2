@@ -7,8 +7,8 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// The request was denied because of insufficient access or permissions. Check with
-// an administrator to verify your permissions.
+// The request was denied due to insufficient access or permission. Check with an
+// administrator to verify your permissions.
 type AccessDeniedException struct {
 	Message *string
 
@@ -27,7 +27,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was unsuccessful because of a conflict.
+// The request was unsuccessful due to a conflict.
 type ConflictException struct {
 	Message *string
 
@@ -85,28 +85,7 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The operation was denied because the request would exceed the maximum quota
-// (https://docs.aws.amazon.com/location/latest/developerguide/location-quotas.html)
-// set for Amazon Location Service.
-type ServiceQuotaExceededException struct {
-	Message *string
-
-	noSmithyDocumentSerde
-}
-
-func (e *ServiceQuotaExceededException) Error() string {
-	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
-}
-func (e *ServiceQuotaExceededException) ErrorMessage() string {
-	if e.Message == nil {
-		return ""
-	}
-	return *e.Message
-}
-func (e *ServiceQuotaExceededException) ErrorCode() string             { return "ServiceQuotaExceededException" }
-func (e *ServiceQuotaExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
-
-// The request was denied because of request throttling.
+// The request was denied due to request throttling.
 type ThrottlingException struct {
 	Message *string
 

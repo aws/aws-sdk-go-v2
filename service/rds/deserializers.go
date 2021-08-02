@@ -30436,23 +30436,6 @@ func awsAwsquery_deserializeDocumentDBSnapshot(v **types.DBSnapshot, decoder smi
 				sv.OptionGroupName = ptr.String(xtv)
 			}
 
-		case strings.EqualFold("OriginalSnapshotCreateTime", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				t, err := smithytime.ParseDateTime(xtv)
-				if err != nil {
-					return err
-				}
-				sv.OriginalSnapshotCreateTime = ptr.Time(t)
-			}
-
 		case strings.EqualFold("PercentProgress", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

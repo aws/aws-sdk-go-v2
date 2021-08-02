@@ -10,16 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM
-// principals in the account can perform EMR cluster actions that their IAM
-// policies allow. When false, only the IAM principal that created the cluster and
-// the account root user can perform EMR actions on the cluster, regardless of IAM
-// permissions policies attached to other IAM principals. This action works on
-// running clusters. When you create a cluster, use the
-// RunJobFlowInput$VisibleToAllUsers parameter. For more information, see
-// Understanding the EMR Cluster VisibleToAllUsers Setting
-// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
-// in the Amazon EMR Management Guide.
+// Sets the Cluster$VisibleToAllUsers value, which determines whether the cluster
+// is visible to all IAM users of the AWS account associated with the cluster. Only
+// the IAM user who created the cluster or the AWS account root user can call this
+// action. The default value, true, indicates that all IAM users in the AWS account
+// can perform cluster actions if they have the proper IAM policy permissions. If
+// set to false, only the IAM user that created the cluster can perform actions.
+// This action works on running clusters. You can override the default true setting
+// when you create a cluster by using the VisibleToAllUsers parameter with
+// RunJobFlow.
 func (c *Client) SetVisibleToAllUsers(ctx context.Context, params *SetVisibleToAllUsersInput, optFns ...func(*Options)) (*SetVisibleToAllUsersOutput, error) {
 	if params == nil {
 		params = &SetVisibleToAllUsersInput{}
@@ -43,10 +42,10 @@ type SetVisibleToAllUsersInput struct {
 	// This member is required.
 	JobFlowIds []string
 
-	// A value of true indicates that an IAM principal in the account can perform EMR
-	// actions on the cluster that the IAM policies attached to the principal allow. A
-	// value of false indicates that only the IAM principal that created the cluster
-	// and the Amazon Web Services root user can perform EMR actions on the cluster.
+	// A value of true indicates that all IAM users in the AWS account can perform
+	// cluster actions if they have the proper IAM policy permissions. This is the
+	// default. A value of false indicates that only the IAM user who created the
+	// cluster can perform actions.
 	//
 	// This member is required.
 	VisibleToAllUsers bool

@@ -229,22 +229,10 @@ type ComponentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The defining characteristics of a specific version of an TOE component.
+// A high-level overview of a component semantic version.
 type ComponentVersion struct {
 
-	// The Amazon Resource Name (ARN) of the component. Semantic versioning is included
-	// in each object's Amazon Resource Name (ARN), at the level that applies to that
-	// object as follows:
-	//
-	// * Versionless ARNs and Name ARNs do not include specific
-	// values in any of the nodes. The nodes are either left off entirely, or they are
-	// specified as wildcards, for example: x.x.x.
-	//
-	// * Version ARNs have only the first
-	// three nodes: ..
-	//
-	// * Build version ARNs have all four nodes, and point to a
-	// specific build for a specific version of an object.
+	// The Amazon Resource Name (ARN) of the component.
 	Arn *string
 
 	// The date that the component was created.
@@ -271,20 +259,7 @@ type ComponentVersion struct {
 	// image or only to test it.
 	Type ComponentType
 
-	// The semantic version of the component. The semantic version has four nodes: ../.
-	// You can assign values for the first three, and can filter on all of them.
-	// Assignment: For the first three nodes you can assign any positive integer value,
-	// including zero, with an upper limit of 2^30-1, or 1073741823 for each node.
-	// Image Builder automatically assigns the build number, and that is not open for
-	// updates. Patterns: You can use any numeric pattern that adheres to the
-	// assignment requirements for the nodes that you can assign. For example, you
-	// might choose a software version pattern, such as 1.0.0, or a date, such as
-	// 2021.01.01. Filtering: When you retrieve or reference a resource with a semantic
-	// version, you can use wildcards (x) to filter your results. When you use a
-	// wildcard in any node, all nodes to the right of the first wildcard must also be
-	// wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list
-	// results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify
-	// the build - Image Builder automatically uses a wildcard for that, if applicable.
+	// The semantic version of the component.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -324,19 +299,7 @@ type ContainerDistributionConfiguration struct {
 // A container recipe.
 type ContainerRecipe struct {
 
-	// The Amazon Resource Name (ARN) of the container recipe. Semantic versioning is
-	// included in each object's Amazon Resource Name (ARN), at the level that applies
-	// to that object as follows:
-	//
-	// * Versionless ARNs and Name ARNs do not include
-	// specific values in any of the nodes. The nodes are either left off entirely, or
-	// they are specified as wildcards, for example: x.x.x.
-	//
-	// * Version ARNs have only
-	// the first three nodes: ..
-	//
-	// * Build version ARNs have all four nodes, and point
-	// to a specific build for a specific version of an object.
+	// The Amazon Resource Name (ARN) of the container recipe.
 	Arn *string
 
 	// Components for build and test that are included in the container recipe.
@@ -386,20 +349,7 @@ type ContainerRecipe struct {
 	// The destination repository for the container image.
 	TargetRepository *TargetContainerRepository
 
-	// The semantic version of the container recipe. The semantic version has four
-	// nodes: ../. You can assign values for the first three, and can filter on all of
-	// them. Assignment: For the first three nodes you can assign any positive integer
-	// value, including zero, with an upper limit of 2^30-1, or 1073741823 for each
-	// node. Image Builder automatically assigns the build number, and that is not open
-	// for updates. Patterns: You can use any numeric pattern that adheres to the
-	// assignment requirements for the nodes that you can assign. For example, you
-	// might choose a software version pattern, such as 1.0.0, or a date, such as
-	// 2021.01.01. Filtering: When you retrieve or reference a resource with a semantic
-	// version, you can use wildcards (x) to filter your results. When you use a
-	// wildcard in any node, all nodes to the right of the first wildcard must also be
-	// wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list
-	// results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify
-	// the build - Image Builder automatically uses a wildcard for that, if applicable.
+	// The semantic version of the container recipe (..).
 	Version *string
 
 	// The working directory for use during build and test workflows.
@@ -565,27 +515,13 @@ type Filter struct {
 	noSmithyDocumentSerde
 }
 
-// An Image Builder image. You must specify exactly one recipe for the image –
-// either a container recipe (containerRecipe), which creates a container image, or
-// an image recipe (imageRecipe), which creates an AMI.
+// An image build version.
 type Image struct {
 
-	// The Amazon Resource Name (ARN) of the image. Semantic versioning is included in
-	// each object's Amazon Resource Name (ARN), at the level that applies to that
-	// object as follows:
-	//
-	// * Versionless ARNs and Name ARNs do not include specific
-	// values in any of the nodes. The nodes are either left off entirely, or they are
-	// specified as wildcards, for example: x.x.x.
-	//
-	// * Version ARNs have only the first
-	// three nodes: ..
-	//
-	// * Build version ARNs have all four nodes, and point to a
-	// specific build for a specific version of an object.
+	// The Amazon Resource Name (ARN) of the image.
 	Arn *string
 
-	// The recipe that is used to create an Image Builder container image.
+	// The container recipe used to create the container image type.
 	ContainerRecipe *ContainerRecipe
 
 	// The date on which this image was created.
@@ -636,20 +572,7 @@ type Image struct {
 	// Specifies whether this is an AMI or container image.
 	Type ImageType
 
-	// The semantic version of the image. The semantic version has four nodes: ../. You
-	// can assign values for the first three, and can filter on all of them.
-	// Assignment: For the first three nodes you can assign any positive integer value,
-	// including zero, with an upper limit of 2^30-1, or 1073741823 for each node.
-	// Image Builder automatically assigns the build number, and that is not open for
-	// updates. Patterns: You can use any numeric pattern that adheres to the
-	// assignment requirements for the nodes that you can assign. For example, you
-	// might choose a software version pattern, such as 1.0.0, or a date, such as
-	// 2021.01.01. Filtering: When you retrieve or reference a resource with a semantic
-	// version, you can use wildcards (x) to filter your results. When you use a
-	// wildcard in any node, all nodes to the right of the first wildcard must also be
-	// wildcards. For example, specifying "1.2.x", or "1.x.x" works to filter list
-	// results, but neither "1.x.2", nor "x.2.x" will work. You do not have to specify
-	// the build - Image Builder automatically uses a wildcard for that, if applicable.
+	// The semantic version of the image.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -873,58 +796,32 @@ type ImageTestsConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The defining characteristics of a specific version of an Image Builder image.
+// An image semantic version.
 type ImageVersion struct {
 
-	// The Amazon Resource Name (ARN) of a specific version of an Image Builder image.
-	// Semantic versioning is included in each object's Amazon Resource Name (ARN), at
-	// the level that applies to that object as follows:
-	//
-	// * Versionless ARNs and Name
-	// ARNs do not include specific values in any of the nodes. The nodes are either
-	// left off entirely, or they are specified as wildcards, for example: x.x.x.
-	//
-	// *
-	// Version ARNs have only the first three nodes: ..
-	//
-	// * Build version ARNs have all
-	// four nodes, and point to a specific build for a specific version of an object.
+	// The Amazon Resource Name (ARN) of the image semantic version.
 	Arn *string
 
-	// The date on which this specific version of the Image Builder image was created.
+	// The date at which this image semantic version was created.
 	DateCreated *string
 
-	// The name of this specific version of an Image Builder image.
+	// The name of the image semantic version.
 	Name *string
 
-	// The operating system version of the Amazon EC2 build instance. For example,
-	// Amazon Linux 2, Ubuntu 18, or Microsoft Windows Server 2019.
+	// The operating system version of the instance. For example, Amazon Linux 2,
+	// Ubuntu 18, or Microsoft Windows Server 2019.
 	OsVersion *string
 
-	// The owner of the image version.
+	// The owner of the image semantic version.
 	Owner *string
 
-	// The platform of the image version, for example "Windows" or "Linux".
+	// The platform of the image semantic version.
 	Platform Platform
 
-	// Specifies whether this image is an AMI or a container image.
+	// Specifies whether this is an AMI or container image.
 	Type ImageType
 
-	// Details for a specific version of an Image Builder image. This version follows
-	// the semantic version syntax. The semantic version has four nodes: ../. You can
-	// assign values for the first three, and can filter on all of them. Assignment:
-	// For the first three nodes you can assign any positive integer value, including
-	// zero, with an upper limit of 2^30-1, or 1073741823 for each node. Image Builder
-	// automatically assigns the build number, and that is not open for updates.
-	// Patterns: You can use any numeric pattern that adheres to the assignment
-	// requirements for the nodes that you can assign. For example, you might choose a
-	// software version pattern, such as 1.0.0, or a date, such as 2021.01.01.
-	// Filtering: When you retrieve or reference a resource with a semantic version,
-	// you can use wildcards (x) to filter your results. When you use a wildcard in any
-	// node, all nodes to the right of the first wildcard must also be wildcards. For
-	// example, specifying "1.2.x", or "1.x.x" works to filter list results, but
-	// neither "1.x.2", nor "x.2.x" will work. You do not have to specify the build -
-	// Image Builder automatically uses a wildcard for that, if applicable.
+	// The semantic version of the image semantic version.
 	Version *string
 
 	noSmithyDocumentSerde
@@ -1155,10 +1052,10 @@ type Schedule struct {
 // Contains settings for the SSM agent on your build instance.
 type SystemsManagerAgent struct {
 
-	// Controls whether the SSM agent is removed from your final build image, prior to
-	// creating the new AMI. If this is set to true, then the agent is removed from the
-	// final image. If it's set to false, then the agent is left in, so that it is
-	// included in the new AMI. The default value is false.
+	// This property defaults to true. If Image Builder installs the SSM agent on a
+	// build instance, it removes the agent before creating a snapshot for the AMI. To
+	// ensure that the AMI you create includes the SSM agent, set this property to
+	// false.
 	UninstallAfterBuild *bool
 
 	noSmithyDocumentSerde

@@ -19,9 +19,9 @@ import (
 // address, it is released to the IP address pool. Be sure to update your DNS
 // records and any servers or devices that communicate with the address. If you
 // attempt to release an Elastic IP address that you already released, you'll get
-// an AuthFailure error if the address is already allocated to another Amazon Web
-// Services account. [EC2-VPC] After you release an Elastic IP address for use in a
-// VPC, you might be able to recover it. For more information, see AllocateAddress.
+// an AuthFailure error if the address is already allocated to another account.
+// [EC2-VPC] After you release an Elastic IP address for use in a VPC, you might be
+// able to recover it. For more information, see AllocateAddress.
 func (c *Client) ReleaseAddress(ctx context.Context, params *ReleaseAddressInput, optFns ...func(*Options)) (*ReleaseAddressOutput, error) {
 	if params == nil {
 		params = &ReleaseAddressInput{}

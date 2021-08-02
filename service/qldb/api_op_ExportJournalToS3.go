@@ -66,8 +66,8 @@ type ExportJournalToS3Input struct {
 	// Simple Storage Service (Amazon S3) bucket.
 	//
 	// * (Optional) Use your customer
-	// master key (CMK) in Key Management Service (KMS) for server-side encryption of
-	// your exported data.
+	// master key (CMK) in AWS Key Management Service (AWS KMS) for server-side
+	// encryption of your exported data.
 	//
 	// This member is required.
 	RoleArn *string

@@ -16,10 +16,9 @@ import (
 // that are registered for that namespace. Users that access the namespace can
 // share assets only with other users or groups in the same namespace. They can't
 // see users and groups in other namespaces. You can create a namespace after your
-// Amazon Web Services account; is subscribed to QuickSight. The namespace must be
-// unique within the Amazon Web Services account;. By default, there is a limit of
-// 100 namespaces per Amazon Web Services account;. To increase your limit, create
-// a ticket with Amazon Web Services Support.
+// AWS account is subscribed to QuickSight. The namespace must be unique within the
+// AWS account. By default, there is a limit of 100 namespaces per AWS account. To
+// increase your limit, create a ticket with AWS Support.
 func (c *Client) CreateNamespace(ctx context.Context, params *CreateNamespaceInput, optFns ...func(*Options)) (*CreateNamespaceOutput, error) {
 	if params == nil {
 		params = &CreateNamespaceInput{}
@@ -37,8 +36,7 @@ func (c *Client) CreateNamespace(ctx context.Context, params *CreateNamespaceInp
 
 type CreateNamespaceInput struct {
 
-	// The ID for the Amazon Web Services account; that you want to create the
-	// QuickSight namespace in.
+	// The ID for the AWS account that you want to create the QuickSight namespace in.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -65,7 +63,7 @@ type CreateNamespaceOutput struct {
 	// The ARN of the QuickSight namespace you created.
 	Arn *string
 
-	// The Region; that you want to use for the free SPICE capacity for the new
+	// The AWS Region that you want to use for the free SPICE capacity for the new
 	// namespace. This is set to the region that you run CreateNamespace in.
 	CapacityRegion *string
 
@@ -82,7 +80,7 @@ type CreateNamespaceOutput struct {
 	// The name of the new namespace that you created.
 	Name *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

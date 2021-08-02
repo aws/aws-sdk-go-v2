@@ -61,8 +61,8 @@ type CreateTaskSetInput struct {
 	// defaultCapacityProviderStrategy for the cluster is used. If specifying a
 	// capacity provider that uses an Auto Scaling group, the capacity provider must
 	// already be created. New capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The Fargate
+	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
+	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
 	// capacity providers are available to all accounts and only need to be associated
 	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
 	// to update the list of available capacity providers for a cluster after the
@@ -75,8 +75,8 @@ type CreateTaskSetInput struct {
 
 	// An optional non-unique tag that identifies this task set in external systems. If
 	// the task set is associated with a service discovery registry, the tasks in this
-	// task set will have the ECS_TASK_SET_EXTERNAL_ID Cloud Map attribute set to the
-	// provided value.
+	// task set will have the ECS_TASK_SET_EXTERNAL_ID AWS Cloud Map attribute set to
+	// the provided value.
 	ExternalId *string
 
 	// The launch type that new tasks in the task set will use. For more information,
@@ -134,9 +134,9 @@ type CreateTaskSetInput struct {
 	//
 	// * Do not use aws:, AWS:,
 	// or any upper or lowercase combination of such as a prefix for either keys or
-	// values as it is reserved for Amazon Web Services use. You cannot edit or delete
-	// tag keys or values with this prefix. Tags with this prefix do not count against
-	// your tags per resource limit.
+	// values as it is reserved for AWS use. You cannot edit or delete tag keys or
+	// values with this prefix. Tags with this prefix do not count against your tags
+	// per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -144,7 +144,7 @@ type CreateTaskSetInput struct {
 
 type CreateTaskSetOutput struct {
 
-	// Information about a set of Amazon ECS tasks in either an CodeDeploy or an
+	// Information about a set of Amazon ECS tasks in either an AWS CodeDeploy or an
 	// EXTERNAL deployment. A task set includes details such as the desired number of
 	// tasks, how many tasks are running, and whether the task set serves production
 	// traffic.

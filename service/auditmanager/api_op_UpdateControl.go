@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a custom control in Audit Manager.
+// Updates a custom control in AWS Audit Manager.
 func (c *Client) UpdateControl(ctx context.Context, params *UpdateControlInput, optFns ...func(*Options)) (*UpdateControlOutput, error) {
 	if params == nil {
 		params = &UpdateControlInput{}

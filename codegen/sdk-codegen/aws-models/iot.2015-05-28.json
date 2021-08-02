@@ -880,7 +880,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+$"
+                "smithy.api#pattern": "arn:aws(-cn|-us-gov|-iso-b|-iso)?:acm:[a-z]{2}-(gov-|iso-|isob-)?[a-z]{4,9}-\\d{1}:\\d{12}:certificate/[a-zA-Z0-9/-]+"
             }
         },
         "com.amazonaws.iot#Action": {
@@ -1631,7 +1631,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Attaches the specified policy to the specified principal (certificate or other\n         credential).</p>",
+                "smithy.api#documentation": "<p>Attaches a policy to the specified target.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/target-policies/{policyName}",
@@ -1861,7 +1861,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_.,@/:#-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_.,@/:#-]+"
             }
         },
         "com.amazonaws.iot#AttributePayload": {
@@ -1891,7 +1891,7 @@
                     "min": 0,
                     "max": 800
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_.,@/:#-]*$"
+                "smithy.api#pattern": "[a-zA-Z0-9_.,@/:#-]*"
             }
         },
         "com.amazonaws.iot#Attributes": {
@@ -2047,7 +2047,7 @@
                     "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^[\\p{Graph}\\x20]*$"
+                "smithy.api#pattern": "[\\p{Graph}\\x20]*"
             }
         },
         "com.amazonaws.iot#AuditDetails": {
@@ -2471,7 +2471,7 @@
                     "min": 1,
                     "max": 40
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9\\-]+"
             }
         },
         "com.amazonaws.iot#AuditTaskMetadata": {
@@ -2748,7 +2748,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\w=,@-]+$"
+                "smithy.api#pattern": "[\\w=,@-]+"
             }
         },
         "com.amazonaws.iot#AuthorizerStatus": {
@@ -2817,7 +2817,7 @@
                     "min": 12,
                     "max": 12
                 },
-                "smithy.api#pattern": "^[0-9]+$"
+                "smithy.api#pattern": "[0-9]+"
             }
         },
         "com.amazonaws.iot#AwsArn": {
@@ -3245,7 +3245,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#Behaviors": {
@@ -3270,7 +3270,7 @@
                     "min": 0,
                     "max": 2028
                 },
-                "smithy.api#pattern": "^[\\p{Graph}\\x20]*$"
+                "smithy.api#pattern": "[\\p{Graph}\\x20]*"
             }
         },
         "com.amazonaws.iot#BillingGroupId": {
@@ -3280,7 +3280,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9\\-]+"
             }
         },
         "com.amazonaws.iot#BillingGroupMetadata": {
@@ -3304,7 +3304,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#BillingGroupNameAndArnList": {
@@ -4047,7 +4047,7 @@
                     "min": 64,
                     "max": 64
                 },
-                "smithy.api#pattern": "^(0x)?[a-fA-F0-9]+$"
+                "smithy.api#pattern": "(0x)?[a-fA-F0-9]+"
             }
         },
         "com.amazonaws.iot#CertificateMode": {
@@ -4194,7 +4194,7 @@
                     "min": 2,
                     "max": 43
                 },
-                "smithy.api#pattern": "^[a-fA-F0-9:\\.\\/]+$"
+                "smithy.api#pattern": "[a-fA-F0-9:\\.\\/]+"
             }
         },
         "com.amazonaws.iot#Cidrs": {
@@ -4450,7 +4450,7 @@
                     "min": 0,
                     "max": 2028
                 },
-                "smithy.api#pattern": "^[^\\p{C}]+$"
+                "smithy.api#pattern": "[^\\p{C}]+"
             }
         },
         "com.amazonaws.iot#ComparisonOperator": {
@@ -7301,7 +7301,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 900,
-                    "max": 43200
+                    "max": 3600
                 }
             }
         },
@@ -7347,7 +7347,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\p{Graph}\\x20]*$"
+                "smithy.api#pattern": "[\\p{Graph}\\x20]*"
             }
         },
         "com.amazonaws.iot#CustomMetricType": {
@@ -11962,7 +11962,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#DetailsMap": {
@@ -11980,7 +11980,7 @@
                 "smithy.api#length": {
                     "min": 1
                 },
-                "smithy.api#pattern": "^[^\\p{C}]+$"
+                "smithy.api#pattern": "[^\\p{C}]+"
             }
         },
         "com.amazonaws.iot#DetectMitigationActionExecution": {
@@ -12268,7 +12268,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#DimensionNames": {
@@ -12384,7 +12384,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\w.-]+$"
+                "smithy.api#pattern": "[\\w.-]+"
             }
         },
         "com.amazonaws.iot#DomainConfigurationStatus": {
@@ -12677,7 +12677,7 @@
         "com.amazonaws.iot#ElasticsearchEndpoint": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^https?://"
+                "smithy.api#pattern": "https?://.*"
             }
         },
         "com.amazonaws.iot#ElasticsearchId": {
@@ -12811,7 +12811,7 @@
         "com.amazonaws.iot#EvaluationStatistic": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(p0|p0\\.1|p0\\.01|p1|p10|p50|p90|p99|p99\\.9|p99\\.99|p100)$"
+                "smithy.api#pattern": "(p0|p0\\.1|p0\\.01|p1|p10|p50|p90|p99|p99\\.9|p99\\.99|p100)"
             }
         },
         "com.amazonaws.iot#EventConfigurations": {
@@ -13064,7 +13064,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#FindingIds": {
@@ -13116,7 +13116,7 @@
         "com.amazonaws.iot#FirehoseSeparator": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^([\\n\\t])|(\\r\\n)|(,)$"
+                "smithy.api#pattern": "([\\n\\t])|(\\r\\n)|(,)"
             }
         },
         "com.amazonaws.iot#Flag": {
@@ -14518,7 +14518,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#IndexNamesList": {
@@ -14927,7 +14927,7 @@
                     "min": 0,
                     "max": 2028
                 },
-                "smithy.api#pattern": "^[^\\p{C}]+$"
+                "smithy.api#pattern": "[^\\p{C}]+"
             }
         },
         "com.amazonaws.iot#JobDocument": {
@@ -15215,7 +15215,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#JobProcessDetails": {
@@ -15393,7 +15393,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#JobTemplateSummary": {
@@ -15488,7 +15488,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#KeyPair": {
@@ -20410,7 +20410,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9+/]+={0,2}$"
+                "smithy.api#pattern": "[A-Za-z0-9+/]+={0,2}"
             }
         },
         "com.amazonaws.iot#MaxJobExecutionsPerMin": {
@@ -20506,7 +20506,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#MetricNames": {
@@ -20684,7 +20684,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#MitigationActionNameList": {
@@ -20781,7 +20781,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#ModelStatus": {
@@ -20863,7 +20863,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#NextToken": {
@@ -20960,7 +20960,7 @@
                     "min": 0,
                     "max": 2028
                 },
-                "smithy.api#pattern": "^[^\\p{C}]+$"
+                "smithy.api#pattern": "[^\\p{C}]+"
             }
         },
         "com.amazonaws.iot#OTAUpdateErrorMessage": {
@@ -21032,7 +21032,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#OTAUpdateInfo": {
@@ -21392,7 +21392,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\w+=,.@-]+$"
+                "smithy.api#pattern": "[\\w+=,.@-]+"
             }
         },
         "com.amazonaws.iot#PolicyNames": {
@@ -21450,7 +21450,7 @@
         "com.amazonaws.iot#PolicyVersionId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[0-9]+$"
+                "smithy.api#pattern": "[0-9]+"
             }
         },
         "com.amazonaws.iot#PolicyVersionIdentifier": {
@@ -21534,7 +21534,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9]+"
             }
         },
         "com.amazonaws.iot#Principals": {
@@ -21861,7 +21861,7 @@
                     "min": 0,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\p{Upper}\\p{Digit}_]+$"
+                "smithy.api#pattern": "[\\p{Upper}\\p{Digit}_]+"
             }
         },
         "com.amazonaws.iot#ReasonForNonCompliance": {
@@ -22266,7 +22266,7 @@
                     "min": 64,
                     "max": 64
                 },
-                "smithy.api#pattern": "^(0x)?[a-fA-F0-9]+$"
+                "smithy.api#pattern": "(0x)?[a-fA-F0-9]+"
             }
         },
         "com.amazonaws.iot#RegistrationCodeValidationException": {
@@ -22322,7 +22322,7 @@
                     "min": 3,
                     "max": 256
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9._-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9._-]+"
             }
         },
         "com.amazonaws.iot#RegistryS3KeyName": {
@@ -22332,7 +22332,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9!_.*'()-\\/]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9!_.*'()-\\/]+"
             }
         },
         "com.amazonaws.iot#RejectCertificateTransfer": {
@@ -22704,7 +22704,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\w.:-]+$"
+                "smithy.api#pattern": "[\\w.:-]+"
             }
         },
         "com.amazonaws.iot#Resource": {
@@ -22899,7 +22899,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[\\w=,@-]+$"
+                "smithy.api#pattern": "[\\w=,@-]+"
             }
         },
         "com.amazonaws.iot#RoleAliasArn": {
@@ -23146,7 +23146,7 @@
                     "min": 0,
                     "max": 2000
                 },
-                "smithy.api#pattern": "^https://ingestion-[a-zA-Z0-9]{1,12}\\.[a-zA-Z0-9]+\\.((sfdc-matrix\\.net)|(sfdcnow\\.com))/streams/\\w{1,20}/\\w{1,20}/event$"
+                "smithy.api#pattern": "https://ingestion-[a-zA-Z0-9]{1,12}\\.[a-zA-Z0-9]+\\.((sfdc-matrix\\.net)|(sfdcnow\\.com))/streams/\\w{1,20}/\\w{1,20}/event"
             }
         },
         "com.amazonaws.iot#SalesforceToken": {
@@ -23211,7 +23211,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#SearchIndex": {
@@ -23347,7 +23347,7 @@
                     "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "^[\\p{Graph}\\x20]*$"
+                "smithy.api#pattern": "[\\p{Graph}\\x20]*"
             }
         },
         "com.amazonaws.iot#SecurityProfileIdentifier": {
@@ -23385,7 +23385,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#SecurityProfileTarget": {
@@ -24550,7 +24550,7 @@
                     "min": 0,
                     "max": 2028
                 },
-                "smithy.api#pattern": "^[^\\p{C}]+$"
+                "smithy.api#pattern": "[^\\p{C}]+"
             }
         },
         "com.amazonaws.iot#StreamFile": {
@@ -24592,7 +24592,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#StreamInfo": {
@@ -25062,7 +25062,7 @@
                     "min": 0,
                     "max": 500
                 },
-                "smithy.api#pattern": "^[^\\p{C}]*$"
+                "smithy.api#pattern": "[^\\p{C}]*"
             }
         },
         "com.amazonaws.iot#TemplateName": {
@@ -25441,7 +25441,7 @@
                     "min": 0,
                     "max": 2028
                 },
-                "smithy.api#pattern": "^[\\p{Graph}\\x20]*$"
+                "smithy.api#pattern": "[\\p{Graph}\\x20]*"
             }
         },
         "com.amazonaws.iot#ThingGroupDocument": {
@@ -25495,7 +25495,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9\\-]+"
             }
         },
         "com.amazonaws.iot#ThingGroupIndexingConfiguration": {
@@ -25579,7 +25579,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#ThingGroupNameAndArnList": {
@@ -25688,7 +25688,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#ThingNameList": {
@@ -25739,7 +25739,7 @@
                     "min": 0,
                     "max": 2028
                 },
-                "smithy.api#pattern": "^[\\p{Graph}\\x20]*$"
+                "smithy.api#pattern": "[\\p{Graph}\\x20]*"
             }
         },
         "com.amazonaws.iot#ThingTypeId": {
@@ -25784,7 +25784,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9:_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9:_-]+"
             }
         },
         "com.amazonaws.iot#ThingTypeProperties": {
@@ -26002,7 +26002,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9_-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9_-]+"
             }
         },
         "com.amazonaws.iot#TokenSignature": {
@@ -26012,7 +26012,7 @@
                     "min": 1,
                     "max": 2560
                 },
-                "smithy.api#pattern": "^[A-Za-z0-9+/]+={0,2}$"
+                "smithy.api#pattern": "[A-Za-z0-9+/]+={0,2}"
             }
         },
         "com.amazonaws.iot#Topic": {
@@ -28724,7 +28724,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9\\-]+$"
+                "smithy.api#pattern": "[a-zA-Z0-9\\-]+"
             }
         },
         "com.amazonaws.iot#VpcDestinationConfiguration": {

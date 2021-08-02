@@ -29,13 +29,13 @@ func (c *Client) DeleteDataSource(ctx context.Context, params *DeleteDataSourceI
 
 type DeleteDataSourceInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the data source. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	//
 	// This member is required.
 	DataSourceId *string
@@ -48,11 +48,11 @@ type DeleteDataSourceOutput struct {
 	// The Amazon Resource Name (ARN) of the data source that you deleted.
 	Arn *string
 
-	// The ID of the data source. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

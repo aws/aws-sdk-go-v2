@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves the contents of a dataset as presigned URIs.
+// Retrieves the contents of a data set as presigned URIs.
 func (c *Client) GetDatasetContent(ctx context.Context, params *GetDatasetContentInput, optFns ...func(*Options)) (*GetDatasetContentOutput, error) {
 	if params == nil {
 		params = &GetDatasetContentInput{}
@@ -30,14 +30,14 @@ func (c *Client) GetDatasetContent(ctx context.Context, params *GetDatasetConten
 
 type GetDatasetContentInput struct {
 
-	// The name of the dataset whose contents are retrieved.
+	// The name of the data set whose contents are retrieved.
 	//
 	// This member is required.
 	DatasetName *string
 
-	// The version of the dataset whose contents are retrieved. You can also use the
+	// The version of the data set whose contents are retrieved. You can also use the
 	// strings "$LATEST" or "$LATEST_SUCCEEDED" to retrieve the contents of the latest
-	// or latest successfully completed dataset. If not specified, "$LATEST_SUCCEEDED"
+	// or latest successfully completed data set. If not specified, "$LATEST_SUCCEEDED"
 	// is the default.
 	VersionId *string
 
@@ -49,7 +49,7 @@ type GetDatasetContentOutput struct {
 	// A list of DatasetEntry objects.
 	Entries []types.DatasetEntry
 
-	// The status of the dataset content.
+	// The status of the data set content.
 	Status *types.DatasetContentStatus
 
 	// The time when the request was made.

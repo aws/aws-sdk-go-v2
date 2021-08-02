@@ -147,11 +147,11 @@ type CreateCapacityReservationInput struct {
 	// have one of the following tenancy settings:
 	//
 	// * default - The Capacity
-	// Reservation is created on hardware that is shared with other Amazon Web Services
-	// accounts.
+	// Reservation is created on hardware that is shared with other accounts.
 	//
-	// * dedicated - The Capacity Reservation is created on single-tenant
-	// hardware that is dedicated to a single Amazon Web Services account.
+	// *
+	// dedicated - The Capacity Reservation is created on single-tenant hardware that
+	// is dedicated to a single account.
 	Tenancy types.CapacityReservationTenancy
 
 	noSmithyDocumentSerde

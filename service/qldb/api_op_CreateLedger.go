@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates a new ledger in your account in the current Region.
+// Creates a new ledger in your AWS account in the current Region.
 func (c *Client) CreateLedger(ctx context.Context, params *CreateLedgerInput, optFns ...func(*Options)) (*CreateLedgerOutput, error) {
 	if params == nil {
 		params = &CreateLedgerInput{}
@@ -31,8 +31,8 @@ func (c *Client) CreateLedger(ctx context.Context, params *CreateLedgerInput, op
 type CreateLedgerInput struct {
 
 	// The name of the ledger that you want to create. The name must be unique among
-	// all of the ledgers in your account in the current Region. Naming constraints for
-	// ledger names are defined in Quotas in Amazon QLDB
+	// all of your ledgers in the current AWS Region. Naming constraints for ledger
+	// names are defined in Quotas in Amazon QLDB
 	// (https://docs.aws.amazon.com/qldb/latest/developerguide/limits.html#limits.naming)
 	// in the Amazon QLDB Developer Guide.
 	//
@@ -73,48 +73,6 @@ type CreateLedgerInput struct {
 	// to false.
 	DeletionProtection *bool
 
-	// The key in Key Management Service (KMS) to use for encryption of data at rest in
-	// the ledger. For more information, see Encryption at rest
-	// (https://docs.aws.amazon.com/qldb/latest/developerguide/encryption-at-rest.html)
-	// in the Amazon QLDB Developer Guide. Use one of the following options to specify
-	// this parameter:
-	//
-	// * AWS_OWNED_KMS_KEY: Use an KMS key that is owned and managed
-	// by Amazon Web Services on your behalf.
-	//
-	// * Undefined: By default, use an Amazon
-	// Web Services owned KMS key.
-	//
-	// * A valid symmetric customer managed KMS key: Use
-	// the specified KMS key in your account that you create, own, and manage. Amazon
-	// QLDB does not support asymmetric keys. For more information, see Using symmetric
-	// and asymmetric keys
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-	// in the Key Management Service Developer Guide.
-	//
-	// To specify a customer managed
-	// KMS key, you can use its key ID, Amazon Resource Name (ARN), alias name, or
-	// alias ARN. When using an alias name, prefix it with "alias/". To specify a key
-	// in a different account, you must use the key ARN or alias ARN. For example:
-	//
-	// *
-	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// * Key ARN:
-	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
-	//
-	// *
-	// Alias name: alias/ExampleAlias
-	//
-	// * Alias ARN:
-	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
-	//
-	// For more information, see
-	// Key identifiers (KeyId)
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id) in
-	// the Key Management Service Developer Guide.
-	KmsKey *string
-
 	// The key-value pairs to add as tags to the ledger that you want to create. Tag
 	// keys are case sensitive. Tag values are case sensitive and can be null.
 	Tags map[string]*string
@@ -138,11 +96,6 @@ type CreateLedgerOutput struct {
 	// ledger. You can disable it by calling the UpdateLedger operation to set the flag
 	// to false.
 	DeletionProtection *bool
-
-	// The ARN of the customer managed KMS key that the ledger uses for encryption at
-	// rest. If this parameter is undefined, the ledger uses an Amazon Web Services
-	// owned KMS key for encryption.
-	KmsKeyArn *string
 
 	// The name of the ledger.
 	Name *string

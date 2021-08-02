@@ -14,10 +14,10 @@ import (
 
 // Returns drift information for the resources that have been checked for drift in
 // the specified stack. This includes actual and expected configuration values for
-// resources where CloudFormation detects configuration drift. For a given stack,
-// there will be one StackResourceDrift for each stack resource that has been
-// checked for drift. Resources that have not yet been checked for drift are not
-// included. Resources that do not currently support drift detection are not
+// resources where AWS CloudFormation detects configuration drift. For a given
+// stack, there will be one StackResourceDrift for each stack resource that has
+// been checked for drift. Resources that have not yet been checked for drift are
+// not included. Resources that do not currently support drift detection are not
 // checked, and so not included. For a list of resources that support drift
 // detection, see Resources that Support Drift Detection
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
@@ -67,7 +67,7 @@ type DescribeStackResourceDriftsInput struct {
 	// resources's actual configuration matches its expected template configuration.
 	//
 	// *
-	// NOT_CHECKED: CloudFormation does not currently return this value.
+	// NOT_CHECKED: AWS CloudFormation does not currently return this value.
 	StackResourceDriftStatusFilters []types.StackResourceDriftStatus
 
 	noSmithyDocumentSerde
@@ -77,12 +77,12 @@ type DescribeStackResourceDriftsOutput struct {
 
 	// Drift information for the resources that have been checked for drift in the
 	// specified stack. This includes actual and expected configuration values for
-	// resources where CloudFormation detects drift. For a given stack, there will be
-	// one StackResourceDrift for each stack resource that has been checked for drift.
-	// Resources that have not yet been checked for drift are not included. Resources
-	// that do not currently support drift detection are not checked, and so not
-	// included. For a list of resources that support drift detection, see Resources
-	// that Support Drift Detection
+	// resources where AWS CloudFormation detects drift. For a given stack, there will
+	// be one StackResourceDrift for each stack resource that has been checked for
+	// drift. Resources that have not yet been checked for drift are not included.
+	// Resources that do not currently support drift detection are not checked, and so
+	// not included. For a list of resources that support drift detection, see
+	// Resources that Support Drift Detection
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-drift-resource-list.html).
 	//
 	// This member is required.

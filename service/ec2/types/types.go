@@ -96,7 +96,7 @@ type Address struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
-	// The ID of the Amazon Web Services account that owns the network interface.
+	// The ID of the account that owns the network interface.
 	NetworkInterfaceOwnerId *string
 
 	// The private IP address associated with the Elastic IP address.
@@ -251,7 +251,7 @@ type AnalysisRouteTableRoute struct {
 	// The destination IPv4 address, in CIDR notation.
 	DestinationCidr *string
 
-	// The prefix of the Amazon Web Service.
+	// The prefix of the AWS service.
 	DestinationPrefixListId *string
 
 	// The ID of an egress-only internet gateway.
@@ -733,7 +733,7 @@ type CapacityReservation struct {
 	// was created.
 	OutpostArn *string
 
-	// The ID of the Amazon Web Services account that owns the Capacity Reservation.
+	// The ID of the account that owns the Capacity Reservation.
 	OwnerId *string
 
 	// The date and time at which the Capacity Reservation was started.
@@ -769,11 +769,11 @@ type CapacityReservation struct {
 	// have one of the following tenancy settings:
 	//
 	// * default - The Capacity
-	// Reservation is created on hardware that is shared with other Amazon Web Services
-	// accounts.
+	// Reservation is created on hardware that is shared with other accounts.
 	//
-	// * dedicated - The Capacity Reservation is created on single-tenant
-	// hardware that is dedicated to a single Amazon Web Services account.
+	// *
+	// dedicated - The Capacity Reservation is created on single-tenant hardware that
+	// is dedicated to a single account.
 	Tenancy CapacityReservationTenancy
 
 	// The total number of instances for which the Capacity Reservation reserves
@@ -789,7 +789,7 @@ type CapacityReservationGroup struct {
 	// The ARN of the resource group.
 	GroupArn *string
 
-	// The ID of the Amazon Web Services account that owns the resource group.
+	// The ID of the account that owns the resource group.
 	OwnerId *string
 
 	noSmithyDocumentSerde
@@ -931,7 +931,7 @@ type CarrierGateway struct {
 	// The ID of the carrier gateway.
 	CarrierGatewayId *string
 
-	// The Amazon Web Services account ID of the owner of the carrier gateway.
+	// The AWS account ID of the owner of the carrier gateway.
 	OwnerId *string
 
 	// The state of the carrier gateway.
@@ -967,8 +967,8 @@ type CertificateAuthenticationRequest struct {
 }
 
 // Provides authorization for Amazon to bring a specific IP address range to a
-// specific Amazon Web Services account using bring your own IP addresses (BYOIP).
-// For more information, see Configuring your BYOIP address range
+// specific account using bring your own IP addresses (BYOIP). For more
+// information, see Configuring your BYOIP address range
 // (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-byoip.html#prepare-for-byoip)
 // in the Amazon Elastic Compute Cloud User Guide.
 type CidrAuthorizationContext struct {
@@ -1647,7 +1647,7 @@ type CreateVolumePermission struct {
 	// The group to be added or removed. The possible value is all.
 	Group PermissionGroup
 
-	// The ID of the Amazon Web Services account to be added or removed.
+	// The AWS account ID to be added or removed.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -1656,10 +1656,10 @@ type CreateVolumePermission struct {
 // Describes modifications to the list of create volume permissions for a volume.
 type CreateVolumePermissionModifications struct {
 
-	// Adds the specified Amazon Web Services account ID or group to the list.
+	// Adds the specified AWS account ID or group to the list.
 	Add []CreateVolumePermission
 
-	// Removes the specified Amazon Web Services account ID or group from the list.
+	// Removes the specified AWS account ID or group from the list.
 	Remove []CreateVolumePermission
 
 	noSmithyDocumentSerde
@@ -1841,12 +1841,11 @@ type DescribeFastSnapshotRestoreSuccessItem struct {
 	// The time at which fast snapshot restores entered the optimizing state.
 	OptimizingTime *time.Time
 
-	// The Amazon Web Services owner alias that enabled fast snapshot restores on the
-	// snapshot. This is intended for future use.
+	// The AWS owner alias that enabled fast snapshot restores on the snapshot. This is
+	// intended for future use.
 	OwnerAlias *string
 
-	// The ID of the Amazon Web Services account that enabled fast snapshot restores on
-	// the snapshot.
+	// The ID of the AWS account that enabled fast snapshot restores on the snapshot.
 	OwnerId *string
 
 	// The ID of the snapshot.
@@ -1938,7 +1937,7 @@ type DhcpOptions struct {
 	// The ID of the set of DHCP options.
 	DhcpOptionsId *string
 
-	// The ID of the Amazon Web Services account that owns the DHCP options set.
+	// The ID of the AWS account that owns the DHCP options set.
 	OwnerId *string
 
 	// Any tags assigned to the DHCP options set.
@@ -2024,12 +2023,11 @@ type DisableFastSnapshotRestoreSuccessItem struct {
 	// The time at which fast snapshot restores entered the optimizing state.
 	OptimizingTime *time.Time
 
-	// The Amazon Web Services owner alias that enabled fast snapshot restores on the
-	// snapshot. This is intended for future use.
+	// The AWS owner alias that enabled fast snapshot restores on the snapshot. This is
+	// intended for future use.
 	OwnerAlias *string
 
-	// The ID of the Amazon Web Services account that enabled fast snapshot restores on
-	// the snapshot.
+	// The ID of the AWS account that enabled fast snapshot restores on the snapshot.
 	OwnerId *string
 
 	// The ID of the snapshot.
@@ -2538,12 +2536,11 @@ type EnableFastSnapshotRestoreSuccessItem struct {
 	// The time at which fast snapshot restores entered the optimizing state.
 	OptimizingTime *time.Time
 
-	// The Amazon Web Services owner alias that enabled fast snapshot restores on the
-	// snapshot. This is intended for future use.
+	// The AWS owner alias that enabled fast snapshot restores on the snapshot. This is
+	// intended for future use.
 	OwnerAlias *string
 
-	// The ID of the Amazon Web Services account that enabled fast snapshot restores on
-	// the snapshot.
+	// The ID of the AWS account that enabled fast snapshot restores on the snapshot.
 	OwnerId *string
 
 	// The ID of the snapshot.
@@ -3688,7 +3685,7 @@ type Host struct {
 	// group; otherwise, it is not.
 	MemberOfServiceLinkedResourceGroup *bool
 
-	// The ID of the Amazon Web Services account that owns the Dedicated Host.
+	// The ID of the account that owns the Dedicated Host.
 	OwnerId *string
 
 	// The time that the Dedicated Host was released.
@@ -3712,7 +3709,7 @@ type HostInstance struct {
 	// The instance type (for example, m3.medium) of the running instance.
 	InstanceType *string
 
-	// The ID of the Amazon Web Services account that owns the instance.
+	// The ID of the account that owns the instance.
 	OwnerId *string
 
 	noSmithyDocumentSerde
@@ -4537,133 +4534,6 @@ type InstanceCreditSpecificationRequest struct {
 	noSmithyDocumentSerde
 }
 
-// The event window.
-type InstanceEventWindow struct {
-
-	// One or more targets associated with the event window.
-	AssociationTarget *InstanceEventWindowAssociationTarget
-
-	// The cron expression defined for the event window.
-	CronExpression *string
-
-	// The ID of the event window.
-	InstanceEventWindowId *string
-
-	// The name of the event window.
-	Name *string
-
-	// The current state of the event window.
-	State InstanceEventWindowState
-
-	// The instance tags associated with the event window.
-	Tags []Tag
-
-	// One or more time ranges defined for the event window.
-	TimeRanges []InstanceEventWindowTimeRange
-
-	noSmithyDocumentSerde
-}
-
-// One or more targets associated with the specified event window. Only one type of
-// target (instance ID, instance tag, or Dedicated Host ID) can be associated with
-// an event window.
-type InstanceEventWindowAssociationRequest struct {
-
-	// The IDs of the Dedicated Hosts to associate with the event window.
-	DedicatedHostIds []string
-
-	// The IDs of the instances to associate with the event window. If the instance is
-	// on a Dedicated Host, you can't specify the Instance ID parameter; you must use
-	// the Dedicated Host ID parameter.
-	InstanceIds []string
-
-	// The instance tags to associate with the event window. Any instances associated
-	// with the tags will be associated with the event window.
-	InstanceTags []Tag
-
-	noSmithyDocumentSerde
-}
-
-// One or more targets associated with the event window.
-type InstanceEventWindowAssociationTarget struct {
-
-	// The IDs of the Dedicated Hosts associated with the event window.
-	DedicatedHostIds []string
-
-	// The IDs of the instances associated with the event window.
-	InstanceIds []string
-
-	// The instance tags associated with the event window. Any instances associated
-	// with the tags will be associated with the event window.
-	Tags []Tag
-
-	noSmithyDocumentSerde
-}
-
-// The targets to disassociate from the specified event window.
-type InstanceEventWindowDisassociationRequest struct {
-
-	// The IDs of the Dedicated Hosts to disassociate from the event window.
-	DedicatedHostIds []string
-
-	// The IDs of the instances to disassociate from the event window.
-	InstanceIds []string
-
-	// The instance tags to disassociate from the event window. Any instances
-	// associated with the tags will be disassociated from the event window.
-	InstanceTags []Tag
-
-	noSmithyDocumentSerde
-}
-
-// The state of the event window.
-type InstanceEventWindowStateChange struct {
-
-	// The ID of the event window.
-	InstanceEventWindowId *string
-
-	// The current state of the event window.
-	State InstanceEventWindowState
-
-	noSmithyDocumentSerde
-}
-
-// The start day and time and the end day and time of the time range, in UTC.
-type InstanceEventWindowTimeRange struct {
-
-	// The hour when the time range ends.
-	EndHour *int32
-
-	// The day on which the time range ends.
-	EndWeekDay WeekDay
-
-	// The hour when the time range begins.
-	StartHour *int32
-
-	// The day on which the time range begins.
-	StartWeekDay WeekDay
-
-	noSmithyDocumentSerde
-}
-
-// The start day and time and the end day and time of the time range, in UTC.
-type InstanceEventWindowTimeRangeRequest struct {
-
-	// The hour when the time range ends.
-	EndHour *int32
-
-	// The day on which the time range ends.
-	EndWeekDay WeekDay
-
-	// The hour when the time range begins.
-	StartHour *int32
-
-	// The day on which the time range begins.
-	StartWeekDay WeekDay
-
-	noSmithyDocumentSerde
-}
-
 // Describes an instance to export.
 type InstanceExportDetails struct {
 
@@ -4690,15 +4560,6 @@ type InstanceFamilyCreditSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an IPv4 delegated prefix.
-type InstanceIpv4Prefix struct {
-
-	// One or more IPv4 delegated prefixes assigned to the network interface.
-	Ipv4Prefix *string
-
-	noSmithyDocumentSerde
-}
-
 // Describes an IPv6 address.
 type InstanceIpv6Address struct {
 
@@ -4713,15 +4574,6 @@ type InstanceIpv6AddressRequest struct {
 
 	// The IPv6 address.
 	Ipv6Address *string
-
-	noSmithyDocumentSerde
-}
-
-// Information about an IPv6 delegated prefix.
-type InstanceIpv6Prefix struct {
-
-	// One or more IPv6 delegated prefixes assigned to the network interface.
-	Ipv6Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -4831,14 +4683,8 @@ type InstanceNetworkInterface struct {
 	// Describes the type of network interface. Valid values: interface | efa | trunk
 	InterfaceType *string
 
-	// The IPv4 delegated prefixes that are assigned to the network interface.
-	Ipv4Prefixes []InstanceIpv4Prefix
-
 	// One or more IPv6 addresses associated with the network interface.
 	Ipv6Addresses []InstanceIpv6Address
-
-	// The IPv6 delegated prefixes that are assigned to the network interface.
-	Ipv6Prefixes []InstanceIpv6Prefix
 
 	// The MAC address.
 	MacAddress *string
@@ -4846,7 +4692,7 @@ type InstanceNetworkInterface struct {
 	// The ID of the network interface.
 	NetworkInterfaceId *string
 
-	// The ID of the Amazon Web Services account that created the network interface.
+	// The ID of the account that created the network interface.
 	OwnerId *string
 
 	// The private DNS name.
@@ -4956,14 +4802,6 @@ type InstanceNetworkInterfaceSpecification struct {
 	// Elastic Compute Cloud User Guide. Valid values: interface | efa
 	InterfaceType *string
 
-	// The number of IPv4 delegated prefixes to be automatically assigned to the
-	// network interface. You cannot use this option if you use the Ipv4Prefix option.
-	Ipv4PrefixCount *int32
-
-	// One or more IPv4 delegated prefixes to be assigned to the network interface. You
-	// cannot use this option if you use the Ipv4PrefixCount option.
-	Ipv4Prefixes []Ipv4PrefixSpecificationRequest
-
 	// A number of IPv6 addresses to assign to the network interface. Amazon EC2
 	// chooses the IPv6 addresses from the range of the subnet. You cannot specify this
 	// option and the option to assign specific IPv6 addresses in the same request. You
@@ -4976,14 +4814,6 @@ type InstanceNetworkInterfaceSpecification struct {
 	// same request. You cannot specify this option if you've specified a minimum
 	// number of instances to launch.
 	Ipv6Addresses []InstanceIpv6Address
-
-	// The number of IPv6 delegated prefixes to be automatically assigned to the
-	// network interface. You cannot use this option if you use the Ipv6Prefix option.
-	Ipv6PrefixCount *int32
-
-	// One or more IPv6 delegated prefixes to be assigned to the network interface. You
-	// cannot use this option if you use the Ipv6PrefixCount option.
-	Ipv6Prefixes []Ipv6PrefixSpecificationRequest
 
 	// The index of the network card. Some instance types support multiple network
 	// cards. The primary network interface must be assigned to network card index 0.
@@ -5323,12 +5153,10 @@ type InstanceTypeOffering struct {
 // Information about the Capacity Reservation usage.
 type InstanceUsage struct {
 
-	// The ID of the Amazon Web Services account that is making use of the Capacity
-	// Reservation.
+	// The ID of the account that is making use of the Capacity Reservation.
 	AccountId *string
 
-	// The number of instances the Amazon Web Services account currently has in the
-	// Capacity Reservation.
+	// The number of instances the account currently has in the Capacity Reservation.
 	UsedInstanceCount *int32
 
 	noSmithyDocumentSerde
@@ -5352,7 +5180,7 @@ type InternetGateway struct {
 	// The ID of the internet gateway.
 	InternetGatewayId *string
 
-	// The ID of the Amazon Web Services account that owns the internet gateway.
+	// The ID of the AWS account that owns the internet gateway.
 	OwnerId *string
 
 	// Any tags assigned to the internet gateway.
@@ -5427,37 +5255,6 @@ type IpRange struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an IPv4 Prefix Delegation.
-type Ipv4PrefixSpecification struct {
-
-	// The IPv4 Prefix Delegation prefix. For information, see Prefix Delegation
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation) in
-	// the Amazon Elastic Compute Cloud User Guide.
-	Ipv4Prefix *string
-
-	noSmithyDocumentSerde
-}
-
-// Describes the IPv4 Prefix Delegation option for a network interface.
-type Ipv4PrefixSpecificationRequest struct {
-
-	// The IPv4 Prefix Delegation prefix. For information, see Prefix Delegation
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation) in
-	// the Amazon Elastic Compute Cloud User Guide.
-	Ipv4Prefix *string
-
-	noSmithyDocumentSerde
-}
-
-// Information about the IPv4 delegated prefixes assigned to a network interface.
-type Ipv4PrefixSpecificationResponse struct {
-
-	// One or more IPv4 delegated prefixes assigned to the network interface.
-	Ipv4Prefix *string
-
-	noSmithyDocumentSerde
-}
-
 // Describes an IPv6 CIDR block association.
 type Ipv6CidrAssociation struct {
 
@@ -5493,33 +5290,6 @@ type Ipv6Pool struct {
 
 	// Any tags for the address pool.
 	Tags []Tag
-
-	noSmithyDocumentSerde
-}
-
-// Describes the IPv6 Prefix Delegation.
-type Ipv6PrefixSpecification struct {
-
-	// The IPv6 Prefix Delegation prefix.
-	Ipv6Prefix *string
-
-	noSmithyDocumentSerde
-}
-
-// Describes the IPv4 Prefix Delegation option for a network interface.
-type Ipv6PrefixSpecificationRequest struct {
-
-	// The IPv6 Prefix Delegation prefix.
-	Ipv6Prefix *string
-
-	noSmithyDocumentSerde
-}
-
-// Information about the IPv6 delegated prefixes assigned to a network interface.
-type Ipv6PrefixSpecificationResponse struct {
-
-	// One or more IPv6 delegated prefixes assigned to the network interface.
-	Ipv6Prefix *string
 
 	noSmithyDocumentSerde
 }
@@ -5832,7 +5602,7 @@ type LaunchTemplateEbsBlockDevice struct {
 	// The number of I/O operations per second (IOPS) that the volume supports.
 	Iops *int32
 
-	// The ARN of the Key Management Service (KMS) CMK used for encryption.
+	// The ARN of the AWS Key Management Service (AWS KMS) CMK used for encryption.
 	KmsKeyId *string
 
 	// The ID of the snapshot.
@@ -5882,7 +5652,8 @@ type LaunchTemplateEbsBlockDeviceRequest struct {
 	// for gp2, st1, sc1, or standard volumes.
 	Iops *int32
 
-	// The ARN of the symmetric Key Management Service (KMS) CMK used for encryption.
+	// The ARN of the symmetric AWS Key Management Service (AWS KMS) CMK used for
+	// encryption.
 	KmsKeyId *string
 
 	// The ID of the snapshot.
@@ -5944,26 +5715,23 @@ type LaunchTemplateElasticInferenceAcceleratorResponse struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether the instance is enabled for Amazon Web Services Nitro
-// Enclaves.
+// Indicates whether the instance is enabled for AWS Nitro Enclaves.
 type LaunchTemplateEnclaveOptions struct {
 
-	// If this parameter is set to true, the instance is enabled for Amazon Web
-	// Services Nitro Enclaves; otherwise, it is not enabled for Amazon Web Services
-	// Nitro Enclaves.
+	// If this parameter is set to true, the instance is enabled for AWS Nitro
+	// Enclaves; otherwise, it is not enabled for AWS Nitro Enclaves.
 	Enabled *bool
 
 	noSmithyDocumentSerde
 }
 
-// Indicates whether the instance is enabled for Amazon Web Services Nitro
-// Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves?
-// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the
-// Amazon Web Services Nitro Enclaves User Guide.
+// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
+// information, see  What is AWS Nitro Enclaves?
+// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the AWS
+// Nitro Enclaves User Guide.
 type LaunchTemplateEnclaveOptionsRequest struct {
 
-	// To enable the instance for Amazon Web Services Nitro Enclaves, set this
-	// parameter to true.
+	// To enable the instance for AWS Nitro Enclaves, set this parameter to true.
 	Enabled *bool
 
 	noSmithyDocumentSerde
@@ -6115,7 +5883,7 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// want to associate a Carrier IP address with the network interface. For more
 	// information about Carrier IP addresses, see Carrier IP addresses
 	// (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
-	// in the Wavelength Developer Guide.
+	// in the AWS Wavelength Developer Guide.
 	AssociateCarrierIpAddress *bool
 
 	// Indicates whether to associate a public IPv4 address with eth0 for a new network
@@ -6138,25 +5906,11 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// The type of network interface.
 	InterfaceType *string
 
-	// The number of IPv4 delegated prefixes that AWS automatically assigned to the
-	// network interface.
-	Ipv4PrefixCount *int32
-
-	// One or more IPv4 delegated prefixes assigned to the network interface.
-	Ipv4Prefixes []Ipv4PrefixSpecificationResponse
-
 	// The number of IPv6 addresses for the network interface.
 	Ipv6AddressCount *int32
 
 	// The IPv6 addresses for the network interface.
 	Ipv6Addresses []InstanceIpv6Address
-
-	// The number of IPv6 delegated prefixes that AWS automatically assigned to the
-	// network interface.
-	Ipv6PrefixCount *int32
-
-	// One or more IPv6 delegated prefixes assigned to the network interface.
-	Ipv6Prefixes []Ipv6PrefixSpecificationResponse
 
 	// The index of the network card.
 	NetworkCardIndex *int32
@@ -6187,7 +5941,7 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// Carrier IP address with the network interface. For more information about
 	// Carrier IP addresses, see Carrier IP addresses
 	// (https://docs.aws.amazon.com/wavelength/latest/developerguide/how-wavelengths-work.html#provider-owned-ip)
-	// in the Wavelength Developer Guide.
+	// in the AWS Wavelength Developer Guide.
 	AssociateCarrierIpAddress *bool
 
 	// Associates a public IPv4 address with eth0 for a new network interface.
@@ -6213,14 +5967,6 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// interface or omit this parameter. Valid values: interface | efa
 	InterfaceType *string
 
-	// The number of IPv4 delegated prefixes to be automatically assigned to the
-	// network interface. You cannot use this option if you use the Ipv4Prefix option.
-	Ipv4PrefixCount *int32
-
-	// One or more IPv4 delegated prefixes to be assigned to the network interface. You
-	// cannot use this option if you use the Ipv4PrefixCount option.
-	Ipv4Prefixes []Ipv4PrefixSpecificationRequest
-
 	// The number of IPv6 addresses to assign to a network interface. Amazon EC2
 	// automatically selects the IPv6 addresses from the subnet range. You can't use
 	// this option if specifying specific IPv6 addresses.
@@ -6230,14 +5976,6 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// subnet. You can't use this option if you're specifying a number of IPv6
 	// addresses.
 	Ipv6Addresses []InstanceIpv6AddressRequest
-
-	// The number of IPv6 delegated prefixes to be automatically assigned to the
-	// network interface. You cannot use this option if you use the Ipv6Prefix option.
-	Ipv6PrefixCount *int32
-
-	// One or more IPv6 delegated prefixes to be assigned to the network interface. You
-	// cannot use this option if you use the Ipv6PrefixCount option.
-	Ipv6Prefixes []Ipv6PrefixSpecificationRequest
 
 	// The index of the network card. Some instance types support multiple network
 	// cards. The primary network interface must be assigned to network card index 0.
@@ -7136,7 +6874,7 @@ type NetworkAcl struct {
 	// The ID of the network ACL.
 	NetworkAclId *string
 
-	// The ID of the Amazon Web Services account that owns the network ACL.
+	// The ID of the AWS account that owns the network ACL.
 	OwnerId *string
 
 	// Any tags assigned to the network ACL.
@@ -7261,8 +6999,8 @@ type NetworkInsightsAnalysis struct {
 	// (https://docs.aws.amazon.com/vpc/latest/reachability/explanation-codes.html).
 	Explanations []Explanation
 
-	// The Amazon Resource Names (ARN) of the Amazon Web Services resources that the
-	// path must traverse.
+	// The Amazon Resource Names (ARN) of the AWS resources that the path must
+	// traverse.
 	FilterInArns []string
 
 	// The components in the path from source to destination.
@@ -7304,11 +7042,10 @@ type NetworkInsightsPath struct {
 	// The time stamp when the path was created.
 	CreatedDate *time.Time
 
-	// The Amazon Web Services resource that is the destination of the path.
+	// The AWS resource that is the destination of the path.
 	Destination *string
 
-	// The IP address of the Amazon Web Services resource that is the destination of
-	// the path.
+	// The IP address of the AWS resource that is the destination of the path.
 	DestinationIp *string
 
 	// The destination port.
@@ -7323,11 +7060,10 @@ type NetworkInsightsPath struct {
 	// The protocol.
 	Protocol Protocol
 
-	// The Amazon Web Services resource that is the source of the path.
+	// The AWS resource that is the source of the path.
 	Source *string
 
-	// The IP address of the Amazon Web Services resource that is the source of the
-	// path.
+	// The IP address of the AWS resource that is the source of the path.
 	SourceIp *string
 
 	// The tags associated with the path.
@@ -7358,14 +7094,8 @@ type NetworkInterface struct {
 	// The type of network interface.
 	InterfaceType NetworkInterfaceType
 
-	// The IPv4 Prefix Delegation prefixes that are assigned to the network interface.
-	Ipv4Prefixes []Ipv4PrefixSpecification
-
 	// The IPv6 addresses associated with the network interface.
 	Ipv6Addresses []NetworkInterfaceIpv6Address
-
-	// The IPv6 Prefix Delegation prefixes that are assigned to the network interface.
-	Ipv6Prefixes []Ipv6PrefixSpecification
 
 	// The MAC address.
 	MacAddress *string
@@ -7376,7 +7106,7 @@ type NetworkInterface struct {
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
-	// The Amazon Web Services account ID of the owner of the network interface.
+	// The account ID of the owner of the network interface.
 	OwnerId *string
 
 	// The private DNS name.
@@ -7388,8 +7118,8 @@ type NetworkInterface struct {
 	// The private IPv4 addresses associated with the network interface.
 	PrivateIpAddresses []NetworkInterfacePrivateIpAddress
 
-	// The alias or Amazon Web Services account ID of the principal or service that
-	// created the network interface.
+	// The alias or account ID of the principal or service that created the network
+	// interface.
 	RequesterId *string
 
 	// Indicates whether the network interface is being managed by Amazon Web Services.
@@ -7463,7 +7193,7 @@ type NetworkInterfaceAttachment struct {
 	// The ID of the instance.
 	InstanceId *string
 
-	// The Amazon Web Services account ID of the owner of the instance.
+	// The account ID of the owner of the instance.
 	InstanceOwnerId *string
 
 	// The index of the network card.
@@ -7500,7 +7230,7 @@ type NetworkInterfaceIpv6Address struct {
 // Describes a permission for a network interface.
 type NetworkInterfacePermission struct {
 
-	// The Amazon Web Services account ID.
+	// The account ID.
 	AwsAccountId *string
 
 	// The Amazon Web Service.
@@ -8346,7 +8076,7 @@ type ReferencedSecurityGroup struct {
 	// The status of a VPC peering connection, if applicable.
 	PeeringStatus *string
 
-	// The Amazon Web Services account ID.
+	// The account ID.
 	UserId *string
 
 	// The ID of the VPC.
@@ -8491,17 +8221,17 @@ type RequestLaunchTemplateData struct {
 	// The elastic inference accelerator for the instance.
 	ElasticInferenceAccelerators []LaunchTemplateElasticInferenceAccelerator
 
-	// Indicates whether the instance is enabled for Amazon Web Services Nitro
-	// Enclaves. For more information, see  What is Amazon Web Services Nitro Enclaves?
-	// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the
-	// Amazon Web Services Nitro Enclaves User Guide. You can't enable Amazon Web
-	// Services Nitro Enclaves and hibernation on the same instance.
+	// Indicates whether the instance is enabled for AWS Nitro Enclaves. For more
+	// information, see  What is AWS Nitro Enclaves?
+	// (https://docs.aws.amazon.com/enclaves/latest/user/nitro-enclave.html) in the AWS
+	// Nitro Enclaves User Guide. You can't enable AWS Nitro Enclaves and hibernation
+	// on the same instance.
 	EnclaveOptions *LaunchTemplateEnclaveOptionsRequest
 
 	// Indicates whether an instance is enabled for hibernation. This parameter is
 	// valid only if the instance meets the hibernation prerequisites
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html#hibernating-prerequisites).
-	// For more information, see Hibernate your instance
+	// For more information, see Hibernate Your Instance
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	HibernationOptions *LaunchTemplateHibernationOptionsRequest
@@ -8543,7 +8273,7 @@ type RequestLaunchTemplateData struct {
 	LicenseSpecifications []LaunchTemplateLicenseConfigurationRequest
 
 	// The metadata options for the instance. For more information, see Instance
-	// metadata and user data
+	// Metadata and User Data
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	MetadataOptions *LaunchTemplateInstanceMetadataOptionsRequest
@@ -8670,11 +8400,11 @@ type Reservation struct {
 	// The instances.
 	Instances []Instance
 
-	// The ID of the Amazon Web Services account that owns the reservation.
+	// The ID of the account that owns the reservation.
 	OwnerId *string
 
 	// The ID of the requester that launched the instances on your behalf (for example,
-	// Amazon Web Services Management Console or Auto Scaling).
+	// Management Console or Auto Scaling).
 	RequesterId *string
 
 	// The ID of the reservation.
@@ -8990,7 +8720,7 @@ type ResponseLaunchTemplateData struct {
 	CapacityReservationSpecification *LaunchTemplateCapacityReservationSpecificationResponse
 
 	// The CPU options for the instance. For more information, see Optimizing CPU
-	// options
+	// Options
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-optimize-cpu.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	CpuOptions *LaunchTemplateCpuOptions
@@ -9011,12 +8741,11 @@ type ResponseLaunchTemplateData struct {
 	// The elastic inference accelerator for the instance.
 	ElasticInferenceAccelerators []LaunchTemplateElasticInferenceAcceleratorResponse
 
-	// Indicates whether the instance is enabled for Amazon Web Services Nitro
-	// Enclaves.
+	// Indicates whether the instance is enabled for AWS Nitro Enclaves.
 	EnclaveOptions *LaunchTemplateEnclaveOptions
 
 	// Indicates whether an instance is configured for hibernation. For more
-	// information, see Hibernate your instance
+	// information, see Hibernate Your Instance
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Hibernate.html) in the
 	// Amazon Elastic Compute Cloud User Guide.
 	HibernationOptions *LaunchTemplateHibernationOptions
@@ -9047,7 +8776,7 @@ type ResponseLaunchTemplateData struct {
 	LicenseSpecifications []LaunchTemplateLicenseConfiguration
 
 	// The metadata options for the instance. For more information, see Instance
-	// metadata and user data
+	// Metadata and User Data
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-instance-metadata.html)
 	// in the Amazon Elastic Compute Cloud User Guide.
 	MetadataOptions *LaunchTemplateInstanceMetadataOptions
@@ -9091,7 +8820,7 @@ type Route struct {
 	// The IPv6 CIDR block used for the destination match.
 	DestinationIpv6CidrBlock *string
 
-	// The prefix of the Amazon Web Service.
+	// The prefix of the AWS service.
 	DestinationPrefixListId *string
 
 	// The ID of the egress-only internet gateway.
@@ -9103,7 +8832,7 @@ type Route struct {
 	// The ID of a NAT instance in your VPC.
 	InstanceId *string
 
-	// The ID of Amazon Web Services account that owns the instance.
+	// The AWS account ID of the owner of the instance.
 	InstanceOwnerId *string
 
 	// The ID of the local gateway.
@@ -9147,7 +8876,7 @@ type RouteTable struct {
 	// The associations between the route table and one or more subnets or a gateway.
 	Associations []RouteTableAssociation
 
-	// The ID of the Amazon Web Services account that owns the route table.
+	// The ID of the AWS account that owns the route table.
 	OwnerId *string
 
 	// Any virtual private gateway (VGW) propagating routes.
@@ -9709,7 +9438,7 @@ type SecurityGroupRule struct {
 	// The ID of the security group.
 	GroupId *string
 
-	// The ID of the Amazon Web Services account that owns the security group.
+	// The ID of the account that owns the security group.
 	GroupOwnerId *string
 
 	// The IP protocol name (tcp, udp, icmp, icmpv6) or number (see Protocol Numbers
@@ -9970,22 +9699,22 @@ type Snapshot struct {
 	// Indicates whether the snapshot is encrypted.
 	Encrypted *bool
 
-	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS key that
-	// was used to protect the volume encryption key for the parent volume.
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used to protect the volume encryption key for
+	// the parent volume.
 	KmsKeyId *string
 
-	// The ARN of the Outpost on which the snapshot is stored. For more information,
-	// see Amazon EBS local snapshots on Outposts
+	// The ARN of the AWS Outpost on which the snapshot is stored. For more
+	// information, see EBS Local Snapshot on Outposts
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html) in
 	// the Amazon Elastic Compute Cloud User Guide.
 	OutpostArn *string
 
-	// The Amazon Web Services owner alias, from an Amazon-maintained list (amazon).
-	// This is not the user-configured Amazon Web Services account alias set using the
-	// IAM console.
+	// The AWS owner alias, from an Amazon-maintained list (amazon). This is not the
+	// user-configured AWS account alias set using the IAM console.
 	OwnerAlias *string
 
-	// The ID of the Amazon Web Services account that owns the EBS snapshot.
+	// The AWS account ID of the EBS snapshot owner.
 	OwnerId *string
 
 	// The progress of the snapshot, as a percentage.
@@ -10002,7 +9731,7 @@ type Snapshot struct {
 	State SnapshotState
 
 	// Encrypted Amazon EBS snapshots are copied asynchronously. If a snapshot copy
-	// operation fails (for example, if the proper Key Management Service (KMS)
+	// operation fails (for example, if the proper AWS Key Management Service (AWS KMS)
 	// permissions are not obtained) this field displays error state details to help
 	// you diagnose why the error occurred. This parameter is only returned by
 	// DescribeSnapshots.
@@ -10087,8 +9816,8 @@ type SnapshotInfo struct {
 	// Indicates whether the snapshot is encrypted.
 	Encrypted *bool
 
-	// The ARN of the Outpost on which the snapshot is stored. For more information,
-	// see Amazon EBS local snapshots on Outposts
+	// The ARN of the AWS Outpost on which the snapshot is stored. For more
+	// information, see EBS Local Snapshot on Outposts
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html) in
 	// the Amazon Elastic Compute Cloud User Guide.
 	OutpostArn *string
@@ -10189,7 +9918,7 @@ type SpotDatafeedSubscription struct {
 	// The fault codes for the Spot Instance request, if any.
 	Fault *SpotInstanceStateFault
 
-	// The Amazon Web Services account ID of the account.
+	// The account ID of the account.
 	OwnerId *string
 
 	// The prefix for the data feed files.
@@ -10652,7 +10381,16 @@ type SpotMaintenanceStrategies struct {
 // The options for Spot Instances.
 type SpotMarketOptions struct {
 
-	// Deprecated.
+	// The required duration for the Spot Instances (also known as Spot blocks), in
+	// minutes. This value must be a multiple of 60 (60, 120, 180, 240, 300, or 360).
+	// The duration period starts as soon as your Spot Instance receives its instance
+	// ID. At the end of the duration period, Amazon EC2 marks the Spot Instance for
+	// termination and provides a Spot Instance termination notice, which gives the
+	// instance a two-minute warning before it terminates. You can't specify an
+	// Availability Zone group or a launch group if you specify a duration. New
+	// accounts or accounts with no previous billing history with Amazon Web Services
+	// are not eligible for Spot Instances with a defined duration (also known as Spot
+	// blocks).
 	BlockDurationMinutes *int32
 
 	// The behavior when a Spot Instance is interrupted. The default is terminate.
@@ -11039,7 +10777,7 @@ type Subnet struct {
 	// The Amazon Resource Name (ARN) of the Outpost.
 	OutpostArn *string
 
-	// The ID of the Amazon Web Services account that owns the subnet.
+	// The ID of the AWS account that owns the subnet.
 	OwnerId *string
 
 	// The current state of the subnet.
@@ -11080,33 +10818,6 @@ type SubnetCidrBlockState struct {
 
 	// A message about the status of the CIDR block, if applicable.
 	StatusMessage *string
-
-	noSmithyDocumentSerde
-}
-
-// Describes a subnet CIDR reservation.
-type SubnetCidrReservation struct {
-
-	// The CIDR that has been reserved.
-	Cidr *string
-
-	// The description assigned to the subnet CIDR reservation.
-	Description *string
-
-	// The ID of the account that owns the subnet CIDR reservation.
-	OwnerId *string
-
-	// The type of reservation.
-	ReservationType SubnetCidrReservationType
-
-	// The ID of the subnet CIDR reservation.
-	SubnetCidrReservationId *string
-
-	// The ID of the subnet.
-	SubnetId *string
-
-	// The tags assigned to the subnet CIDR reservation.
-	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -11185,18 +10896,17 @@ type TagSpecification struct {
 	// customer-gateway | dedicated-host | dhcp-options | egress-only-internet-gateway
 	// | elastic-ip | elastic-gpu | export-image-task | export-instance-task | fleet |
 	// fpga-image | host-reservation | image| import-image-task | import-snapshot-task
-	// | instance | instance-event-window | internet-gateway | ipv4pool-ec2 |
-	// ipv6pool-ec2 | key-pair | launch-template |
-	// local-gateway-route-table-vpc-association | placement-group | prefix-list |
-	// natgateway | network-acl | network-interface | reserved-instances |route-table |
-	// security-group| snapshot | spot-fleet-request | spot-instances-request |
-	// snapshot | subnet | traffic-mirror-filter | traffic-mirror-session |
-	// traffic-mirror-target | transit-gateway | transit-gateway-attachment |
-	// transit-gateway-multicast-domain | transit-gateway-route-table | volume |vpc |
-	// vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) |
-	// vpc-endpoint-service (for Amazon Web Services PrivateLink) | vpc-flow-log |
-	// vpn-connection | vpn-gateway. To tag a resource after it has been created, see
-	// CreateTags
+	// | instance | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 | key-pair |
+	// launch-template | local-gateway-route-table-vpc-association | placement-group |
+	// prefix-list | natgateway | network-acl | network-interface | reserved-instances
+	// |route-table | security-group| snapshot | spot-fleet-request |
+	// spot-instances-request | snapshot | subnet | traffic-mirror-filter |
+	// traffic-mirror-session | traffic-mirror-target | transit-gateway |
+	// transit-gateway-attachment | transit-gateway-multicast-domain |
+	// transit-gateway-route-table | volume |vpc |  vpc-peering-connection |
+	// vpc-endpoint (for interface and gateway endpoints) | vpc-endpoint-service (for
+	// AWS PrivateLink) | vpc-flow-log | vpn-connection | vpn-gateway. To tag a
+	// resource after it has been created, see CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	ResourceType ResourceType
 
@@ -12410,7 +12120,7 @@ type UnsuccessfulItem struct {
 }
 
 // Information about the error that occurred. For more information about errors,
-// see Error codes
+// see Error Codes
 // (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/errors-overview.html).
 type UnsuccessfulItemError struct {
 
@@ -12594,8 +12304,9 @@ type Volume struct {
 	// which the volume accumulates I/O credits for bursting.
 	Iops *int32
 
-	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) KMS key that
-	// was used to protect the volume encryption key for the volume.
+	// The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS)
+	// customer master key (CMK) that was used to protect the volume encryption key for
+	// the volume.
 	KmsKeyId *string
 
 	// Indicates whether Amazon EBS Multi-Attach is enabled.
@@ -12845,7 +12556,7 @@ type Vpc struct {
 	// Indicates whether the VPC is the default VPC.
 	IsDefault *bool
 
-	// The ID of the Amazon Web Services account that owns the VPC.
+	// The ID of the AWS account that owns the VPC.
 	OwnerId *string
 
 	// The current state of the VPC.
@@ -13094,7 +12805,7 @@ type VpcPeeringConnectionVpcInfo struct {
 	// The IPv6 CIDR block for the VPC.
 	Ipv6CidrBlockSet []Ipv6CidrBlock
 
-	// The ID of the Amazon Web Services account that owns the VPC.
+	// The AWS account ID of the VPC owner.
 	OwnerId *string
 
 	// Information about the VPC peering connection options for the accepter or

@@ -29,44 +29,6 @@
         ]
     },
     "shapes": {
-        "com.amazonaws.synthetics#BaseScreenshot": {
-            "type": "structure",
-            "members": {
-                "ScreenshotName": {
-                    "target": "com.amazonaws.synthetics#String",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                },
-                "IgnoreCoordinates": {
-                    "target": "com.amazonaws.synthetics#BaseScreenshotIgnoreCoordinates"
-                }
-            }
-        },
-        "com.amazonaws.synthetics#BaseScreenshotConfigIgnoreCoordinate": {
-            "type": "string",
-            "traits": {
-                "smithy.api#pattern": "^(-?\\d{1,5}\\.?\\d{0,2},){3}(-?\\d{1,5}\\.?\\d{0,2}){1}$"
-            }
-        },
-        "com.amazonaws.synthetics#BaseScreenshotIgnoreCoordinates": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.synthetics#BaseScreenshotConfigIgnoreCoordinate"
-            },
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 20
-                }
-            }
-        },
-        "com.amazonaws.synthetics#BaseScreenshots": {
-            "type": "list",
-            "member": {
-                "target": "com.amazonaws.synthetics#BaseScreenshot"
-            }
-        },
         "com.amazonaws.synthetics#Blob": {
             "type": "blob",
             "traits": {
@@ -166,9 +128,6 @@
                 "VpcConfig": {
                     "target": "com.amazonaws.synthetics#VpcConfigOutput"
                 },
-                "VisualReference": {
-                    "target": "com.amazonaws.synthetics#VisualReferenceOutput"
-                },
                 "Tags": {
                     "target": "com.amazonaws.synthetics#TagMap",
                     "traits": {
@@ -187,7 +146,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:canary:[0-9a-z_\\-]{1,21}$"
+                "smithy.api#pattern": "arn:(aws[a-zA-Z-]*)?:synthetics:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:canary:[0-9a-z_\\-]{1,21}"
             }
         },
         "com.amazonaws.synthetics#CanaryCodeInput": {
@@ -196,7 +155,7 @@
                 "S3Bucket": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>If your canary script is located in S3, specify the bucket name here. Do not include <code>s3://</code> as the \n         start of the bucket name.</p>"
+                        "smithy.api#documentation": "<p>If your canary script is located in S3, specify the full bucket name here. The bucket\n         must already exist. Specify the full bucket name, including <code>s3://</code> as the \n         start of the bucket name.</p>"
                     }
                 },
                 "S3Key": {
@@ -214,13 +173,13 @@
                 "ZipFile": {
                     "target": "com.amazonaws.synthetics#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3\n         location, the value of this parameter is the base64-encoded contents of the .zip file that \n         contains the script. It can be\n         up to 5 MB.</p>"
+                        "smithy.api#documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3\n         location, the value of this parameter is the .zip file that contains the script. It can be\n         up to 5 MB.</p>"
                     }
                 },
                 "Handler": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entry point to use for the source code when running the canary. This value must end\n         with the string <code>.handler</code>. The string is limited to 29 characters or fewer.</p>",
+                        "smithy.api#documentation": "<p>The entry point to use for the source code when running the canary. This value must end\n         with the string <code>.handler</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -335,7 +294,7 @@
                 "ActiveTracing": {
                     "target": "com.amazonaws.synthetics#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether this canary is to use active X-Ray tracing when it runs. Active tracing \n         enables\n         this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does \n         not hit an endpoint that has X-Ray tracing enabled. Using X-Ray tracing incurs charges.\n      For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html\">\n         Canaries and X-Ray tracing</a>.</p>\n         <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> \n      or later for their canary runtime.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether this canary is to use active AWS X-Ray tracing when it runs. Active tracing \n         enables\n      this canary run to be displayed in the ServiceLens and X-Ray service maps even if the canary does \n      not hit an endpoint that has X-ray tracing enabled. Using X-Ray tracing incurs charges.\n      For more information, see  <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_tracing.html\">\n         Canaries and X-Ray tracing</a>.</p>\n         <p>You can enable active tracing only for canaries that use version <code>syn-nodejs-2.0</code> \n      or later for their canary runtime.</p>"
                     }
                 },
                 "EnvironmentVariables": {
@@ -367,7 +326,7 @@
                 "ActiveTracing": {
                     "target": "com.amazonaws.synthetics#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Displays whether this canary run used active X-Ray tracing. </p>"
+                        "smithy.api#documentation": "<p>Displays whether this canary run used active AWS X-Ray tracing. </p>"
                     }
                 }
             },
@@ -467,7 +426,7 @@
                 "Expression": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p>\n         <p>For a rate expression, The syntax is\n               <code>rate(<i>number unit</i>)</code>. <i>unit</i>\n         can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p>\n         <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every \n      10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can\n         specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p>\n         <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value \n         that causes the \n         canary to run only once when it is started.</p>\n         <p>Use <code>cron(<i>expression</i>)</code> to specify a cron \n         expression. You can't schedule a canary to wait for more than a year before running. For information about the syntax for cron expressions, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html\">\n            Scheduling canary runs using cron</a>.</p>",
+                        "smithy.api#documentation": "<p>A rate expression that defines how often the canary is to run. The syntax is\n               <code>rate(<i>number unit</i>)</code>. <i>unit</i>\n         can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p>\n         <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every \n      10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can\n         specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p>\n         <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value \n         that causes the \n         canary to run only once when it is started.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -488,7 +447,7 @@
                 "Expression": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>rate</code> expression or a <code>cron</code> expression that defines how often the canary is to run.</p>\n         <p>For a rate expression, The syntax is\n         <code>rate(<i>number unit</i>)</code>. <i>unit</i>\n         can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p>\n         <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every \n         10 minutes, and <code>rate(1 hour)</code> runs it once every hour. You can\n         specify a frequency between <code>rate(1 minute)</code> and <code>rate(1 hour)</code>.</p>\n         <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value \n         that causes the \n         canary to run only once when it is started.</p>\n         <p>Use <code>cron(<i>expression</i>)</code> to specify a cron \n         expression. For information about the syntax for cron expressions, see \n         <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_cron.html\">\n            Scheduling canary runs using cron</a>.</p>"
+                        "smithy.api#documentation": "<p>A rate expression that defines how often the canary is to run. The syntax is\n         <code>rate(<i>number unit</i>)</code>. <i>unit</i>\n         can be <code>minute</code>, <code>minutes</code>, or <code>hour</code>. </p>\n         <p>For example, <code>rate(1 minute)</code> runs the canary once a minute, <code>rate(10 minutes)</code> runs it once every \n         10 minutes, and <code>rate(1 hour)</code> runs it once every hour.</p>\n         <p>Specifying <code>rate(0 minute)</code> or <code>rate(0 hour)</code> is a special value \n         that causes the \n         canary to run only once when it is started.</p>"
                     }
                 },
                 "DurationInSeconds": {
@@ -672,7 +631,7 @@
                 "ArtifactS3Location": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this\n         canary. Artifacts include the log file, screenshots, and HAR files.  The name of the \n         S3 bucket can't include a period (.).</p>",
+                        "smithy.api#documentation": "<p>The location in Amazon S3 where Synthetics stores artifacts from the test runs of this\n         canary. Artifacts include the log file, screenshots, and HAR files.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -983,7 +942,7 @@
         "com.amazonaws.synthetics#EnvironmentVariableName": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^[a-zA-Z]([a-zA-Z0-9_])+$"
+                "smithy.api#pattern": "[a-zA-Z]([a-zA-Z0-9_])+"
             }
         },
         "com.amazonaws.synthetics#EnvironmentVariableValue": {
@@ -1008,7 +967,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?$"
+                "smithy.api#pattern": "arn:(aws[a-zA-Z-]*)?:lambda:[a-z]{2}((-gov)|(-iso(b?)))?-[a-z]+-\\d{1}:\\d{12}:function:[a-zA-Z0-9-_]+(:(\\$LATEST|[a-zA-Z0-9-_]+))?"
             }
         },
         "com.amazonaws.synthetics#GetCanary": {
@@ -1286,7 +1245,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "^arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
+                "smithy.api#pattern": "arn:(aws[a-zA-Z-]*)?:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"
             }
         },
         "com.amazonaws.synthetics#RuntimeVersion": {
@@ -1579,7 +1538,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified canary. </p>\n         <p>Tags can help you organize and categorize your\n         resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with\n         certain tag values.</p>\n         <p>Tags don't have any semantic meaning to Amazon Web Services and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, \n         this tag is appended to the list of tags associated\n         with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces\n         the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a canary.</p>",
+                "smithy.api#documentation": "<p>Assigns one or more tags (key-value pairs) to the specified canary. </p>\n         <p>Tags can help you organize and categorize your\n         resources. You can also use them to scope user permissions, by granting a user permission to access or change only resources with\n         certain tag values.</p>\n         <p>Tags don't have any semantic meaning to AWS and are interpreted strictly as strings of characters.</p>\n         <p>You can use the <code>TagResource</code> action with a canary that already has tags. If you specify a new tag key for the alarm, \n         this tag is appended to the list of tags associated\n         with the alarm. If you specify a tag key that is already associated with the alarm, the new tag value that you specify replaces\n         the previous value for that tag.</p>\n         <p>You can associate as many as 50 tags with a canary.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{ResourceArn}",
@@ -1780,9 +1739,6 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If this canary is to test an endpoint in a VPC, this structure contains\n         information about the subnet and security groups of the VPC endpoint. \n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_VPC.html\">\n            Running a Canary in a VPC</a>.</p>"
                     }
-                },
-                "VisualReference": {
-                    "target": "com.amazonaws.synthetics#VisualReferenceInput"
                 }
             }
         },
@@ -1801,31 +1757,6 @@
                 "smithy.api#documentation": "<p>A parameter could not be validated.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
-            }
-        },
-        "com.amazonaws.synthetics#VisualReferenceInput": {
-            "type": "structure",
-            "members": {
-                "BaseScreenshots": {
-                    "target": "com.amazonaws.synthetics#BaseScreenshots"
-                },
-                "BaseCanaryRunId": {
-                    "target": "com.amazonaws.synthetics#String",
-                    "traits": {
-                        "smithy.api#required": {}
-                    }
-                }
-            }
-        },
-        "com.amazonaws.synthetics#VisualReferenceOutput": {
-            "type": "structure",
-            "members": {
-                "BaseScreenshots": {
-                    "target": "com.amazonaws.synthetics#BaseScreenshots"
-                },
-                "BaseCanaryRunId": {
-                    "target": "com.amazonaws.synthetics#String"
-                }
             }
         },
         "com.amazonaws.synthetics#VpcConfigInput": {

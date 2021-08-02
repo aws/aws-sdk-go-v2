@@ -20,7 +20,7 @@ import (
 // dynamic references to restrict sensitive configuration definitions, such as
 // third-party credentials. For more details on dynamic references, see Using
 // dynamic references to specify template values (https://docs.aws.amazon.com/) in
-// the CloudFormation User Guide.
+// the AWS CloudFormation User Guide.
 func (c *Client) SetTypeConfiguration(ctx context.Context, params *SetTypeConfigurationInput, optFns ...func(*Options)) (*SetTypeConfigurationOutput, error) {
 	if params == nil {
 		params = &SetTypeConfigurationInput{}

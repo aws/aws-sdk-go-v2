@@ -582,13 +582,6 @@ func awsRestjson1_serializeOpDocumentCreateDataSetInput(v *CreateDataSetInput, v
 		}
 	}
 
-	if v.RowLevelPermissionTagConfiguration != nil {
-		ok := object.Key("RowLevelPermissionTagConfiguration")
-		if err := awsRestjson1_serializeDocumentRowLevelPermissionTagConfiguration(v.RowLevelPermissionTagConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
 	if v.Tags != nil {
 		ok := object.Key("Tags")
 		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
@@ -4742,206 +4735,6 @@ func awsRestjson1_serializeOpHttpBindingsDescribeUserInput(v *DescribeUserInput,
 	return nil
 }
 
-type awsRestjson1_serializeOpGenerateEmbedUrlForAnonymousUser struct {
-}
-
-func (*awsRestjson1_serializeOpGenerateEmbedUrlForAnonymousUser) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpGenerateEmbedUrlForAnonymousUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*GenerateEmbedUrlForAnonymousUserInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/embed-url/anonymous-user")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeOpHttpBindingsGenerateEmbedUrlForAnonymousUserInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGenerateEmbedUrlForAnonymousUserInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsGenerateEmbedUrlForAnonymousUserInput(v *GenerateEmbedUrlForAnonymousUserInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
-	}
-	if v.AwsAccountId != nil {
-		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGenerateEmbedUrlForAnonymousUserInput(v *GenerateEmbedUrlForAnonymousUserInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.AuthorizedResourceArns != nil {
-		ok := object.Key("AuthorizedResourceArns")
-		if err := awsRestjson1_serializeDocumentArnList(v.AuthorizedResourceArns, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.ExperienceConfiguration != nil {
-		ok := object.Key("ExperienceConfiguration")
-		if err := awsRestjson1_serializeDocumentAnonymousUserEmbeddingExperienceConfiguration(v.ExperienceConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.Namespace != nil {
-		ok := object.Key("Namespace")
-		ok.String(*v.Namespace)
-	}
-
-	if v.SessionLifetimeInMinutes != nil {
-		ok := object.Key("SessionLifetimeInMinutes")
-		ok.Long(*v.SessionLifetimeInMinutes)
-	}
-
-	if v.SessionTags != nil {
-		ok := object.Key("SessionTags")
-		if err := awsRestjson1_serializeDocumentSessionTagList(v.SessionTags, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-type awsRestjson1_serializeOpGenerateEmbedUrlForRegisteredUser struct {
-}
-
-func (*awsRestjson1_serializeOpGenerateEmbedUrlForRegisteredUser) ID() string {
-	return "OperationSerializer"
-}
-
-func (m *awsRestjson1_serializeOpGenerateEmbedUrlForRegisteredUser) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
-	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
-) {
-	request, ok := in.Request.(*smithyhttp.Request)
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
-	}
-
-	input, ok := in.Parameters.(*GenerateEmbedUrlForRegisteredUserInput)
-	_ = input
-	if !ok {
-		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
-	}
-
-	opPath, opQuery := httpbinding.SplitURI("/accounts/{AwsAccountId}/embed-url/registered-user")
-	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
-	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
-	request.Method = "POST"
-	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
-	if err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if err := awsRestjson1_serializeOpHttpBindingsGenerateEmbedUrlForRegisteredUserInput(input, restEncoder); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	restEncoder.SetHeader("Content-Type").String("application/json")
-
-	jsonEncoder := smithyjson.NewEncoder()
-	if err := awsRestjson1_serializeOpDocumentGenerateEmbedUrlForRegisteredUserInput(input, jsonEncoder.Value); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-
-	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
-		return out, metadata, &smithy.SerializationError{Err: err}
-	}
-	in.Request = request
-
-	return next.HandleSerialize(ctx, in)
-}
-func awsRestjson1_serializeOpHttpBindingsGenerateEmbedUrlForRegisteredUserInput(v *GenerateEmbedUrlForRegisteredUserInput, encoder *httpbinding.Encoder) error {
-	if v == nil {
-		return fmt.Errorf("unsupported serialization of nil %T", v)
-	}
-
-	if v.AwsAccountId == nil || len(*v.AwsAccountId) == 0 {
-		return &smithy.SerializationError{Err: fmt.Errorf("input member AwsAccountId must not be empty")}
-	}
-	if v.AwsAccountId != nil {
-		if err := encoder.SetURI("AwsAccountId").String(*v.AwsAccountId); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeOpDocumentGenerateEmbedUrlForRegisteredUserInput(v *GenerateEmbedUrlForRegisteredUserInput, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.ExperienceConfiguration != nil {
-		ok := object.Key("ExperienceConfiguration")
-		if err := awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguration(v.ExperienceConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.SessionLifetimeInMinutes != nil {
-		ok := object.Key("SessionLifetimeInMinutes")
-		ok.Long(*v.SessionLifetimeInMinutes)
-	}
-
-	if v.UserArn != nil {
-		ok := object.Key("UserArn")
-		ok.String(*v.UserArn)
-	}
-
-	return nil
-}
-
 type awsRestjson1_serializeOpGetDashboardEmbedUrl struct {
 }
 
@@ -8167,13 +7960,6 @@ func awsRestjson1_serializeOpDocumentUpdateDataSetInput(v *UpdateDataSetInput, v
 		}
 	}
 
-	if v.RowLevelPermissionTagConfiguration != nil {
-		ok := object.Key("RowLevelPermissionTagConfiguration")
-		if err := awsRestjson1_serializeDocumentRowLevelPermissionTagConfiguration(v.RowLevelPermissionTagConfiguration, ok); err != nil {
-			return err
-		}
-	}
-
 	return nil
 }
 
@@ -9741,43 +9527,6 @@ func awsRestjson1_serializeDocumentAnalysisSourceTemplate(v *types.AnalysisSourc
 	return nil
 }
 
-func awsRestjson1_serializeDocumentAnonymousUserDashboardEmbeddingConfiguration(v *types.AnonymousUserDashboardEmbeddingConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.InitialDashboardId != nil {
-		ok := object.Key("InitialDashboardId")
-		ok.String(*v.InitialDashboardId)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentAnonymousUserEmbeddingExperienceConfiguration(v *types.AnonymousUserEmbeddingExperienceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Dashboard != nil {
-		ok := object.Key("Dashboard")
-		if err := awsRestjson1_serializeDocumentAnonymousUserDashboardEmbeddingConfiguration(v.Dashboard, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentArnList(v []string, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		av.String(v[i])
-	}
-	return nil
-}
-
 func awsRestjson1_serializeDocumentAthenaParameters(v *types.AthenaParameters, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11190,51 +10939,6 @@ func awsRestjson1_serializeDocumentRedshiftParameters(v *types.RedshiftParameter
 	return nil
 }
 
-func awsRestjson1_serializeDocumentRegisteredUserDashboardEmbeddingConfiguration(v *types.RegisteredUserDashboardEmbeddingConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.InitialDashboardId != nil {
-		ok := object.Key("InitialDashboardId")
-		ok.String(*v.InitialDashboardId)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentRegisteredUserEmbeddingExperienceConfiguration(v *types.RegisteredUserEmbeddingExperienceConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Dashboard != nil {
-		ok := object.Key("Dashboard")
-		if err := awsRestjson1_serializeDocumentRegisteredUserDashboardEmbeddingConfiguration(v.Dashboard, ok); err != nil {
-			return err
-		}
-	}
-
-	if v.QuickSightConsole != nil {
-		ok := object.Key("QuickSightConsole")
-		if err := awsRestjson1_serializeDocumentRegisteredUserQuickSightConsoleEmbeddingConfiguration(v.QuickSightConsole, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentRegisteredUserQuickSightConsoleEmbeddingConfiguration(v *types.RegisteredUserQuickSightConsoleEmbeddingConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.InitialPath != nil {
-		ok := object.Key("InitialPath")
-		ok.String(*v.InitialPath)
-	}
-
-	return nil
-}
-
 func awsRestjson1_serializeDocumentRelationalTable(v *types.RelationalTable, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -11342,70 +11046,6 @@ func awsRestjson1_serializeDocumentRowLevelPermissionDataSet(v *types.RowLevelPe
 		ok.String(string(v.PermissionPolicy))
 	}
 
-	if len(v.Status) > 0 {
-		ok := object.Key("Status")
-		ok.String(string(v.Status))
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentRowLevelPermissionTagConfiguration(v *types.RowLevelPermissionTagConfiguration, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if len(v.Status) > 0 {
-		ok := object.Key("Status")
-		ok.String(string(v.Status))
-	}
-
-	if v.TagRules != nil {
-		ok := object.Key("TagRules")
-		if err := awsRestjson1_serializeDocumentRowLevelPermissionTagRuleList(v.TagRules, ok); err != nil {
-			return err
-		}
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentRowLevelPermissionTagRule(v *types.RowLevelPermissionTagRule, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.ColumnName != nil {
-		ok := object.Key("ColumnName")
-		ok.String(*v.ColumnName)
-	}
-
-	if v.MatchAllValue != nil {
-		ok := object.Key("MatchAllValue")
-		ok.String(*v.MatchAllValue)
-	}
-
-	if v.TagKey != nil {
-		ok := object.Key("TagKey")
-		ok.String(*v.TagKey)
-	}
-
-	if v.TagMultiValueDelimiter != nil {
-		ok := object.Key("TagMultiValueDelimiter")
-		ok.String(*v.TagMultiValueDelimiter)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentRowLevelPermissionTagRuleList(v []types.RowLevelPermissionTagRule, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsRestjson1_serializeDocumentRowLevelPermissionTagRule(&v[i], av); err != nil {
-			return err
-		}
-	}
 	return nil
 }
 
@@ -11458,36 +11098,6 @@ func awsRestjson1_serializeDocumentServiceNowParameters(v *types.ServiceNowParam
 		ok.String(*v.SiteBaseUrl)
 	}
 
-	return nil
-}
-
-func awsRestjson1_serializeDocumentSessionTag(v *types.SessionTag, value smithyjson.Value) error {
-	object := value.Object()
-	defer object.Close()
-
-	if v.Key != nil {
-		ok := object.Key("Key")
-		ok.String(*v.Key)
-	}
-
-	if v.Value != nil {
-		ok := object.Key("Value")
-		ok.String(*v.Value)
-	}
-
-	return nil
-}
-
-func awsRestjson1_serializeDocumentSessionTagList(v []types.SessionTag, value smithyjson.Value) error {
-	array := value.Array()
-	defer array.Close()
-
-	for i := range v {
-		av := array.Value()
-		if err := awsRestjson1_serializeDocumentSessionTag(&v[i], av); err != nil {
-			return err
-		}
-	}
 	return nil
 }
 

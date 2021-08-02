@@ -29,13 +29,13 @@ func (c *Client) UpdateDataSourcePermissions(ctx context.Context, params *Update
 
 type UpdateDataSourcePermissionsInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID of the data source. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	//
 	// This member is required.
 	DataSourceId *string
@@ -54,11 +54,11 @@ type UpdateDataSourcePermissionsOutput struct {
 	// The Amazon Resource Name (ARN) of the data source.
 	DataSourceArn *string
 
-	// The ID of the data source. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -13,13 +13,14 @@ import (
 // Assigns one or more tags (key-value pairs) to the specified Amazon Location
 // Service resource. Tags can help you organize and categorize your resources. You
 // can also use them to scope user permissions, by granting a user permission to
-// access or change only resources with certain tag values. You can use the
-// TagResource operation with an Amazon Location Service resource that already has
-// tags. If you specify a new tag key for the resource, this tag is appended to the
-// tags already associated with the resource. If you specify a tag key that's
-// already associated with the resource, the new tag value that you specify
-// replaces the previous value for that tag. You can associate up to 50 tags with a
-// resource.
+// access or change only resources with certain tag values. Tags don't have any
+// semantic meaning to AWS and are interpreted strictly as strings of characters.
+// You can use the TagResource action with an Amazon Location Service resource that
+// already has tags. If you specify a new tag key for the resource, this tag is
+// appended to the tags already associated with the resource. If you specify a tag
+// key that is already associated with the resource, the new tag value that you
+// specify replaces the previous value for that tag. You can associate as many as
+// 50 tags with a resource.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -39,17 +40,11 @@ type TagResourceInput struct {
 
 	// The Amazon Resource Name (ARN) of the resource whose tags you want to update.
 	//
-	// *
-	// Format example: arn:aws:geo:region:account-id:resourcetype/ExampleResource
-	//
 	// This member is required.
 	ResourceArn *string
 
-	// Tags that have been applied to the specified resource. Tags are mapped from the
-	// tag key to the tag value: "TagKey" : "TagValue".
-	//
-	// * Format example: {"tag1" :
-	// "value1", "tag2" : "value2"}
+	// The mapping from tag key to tag value for each tag associated with the specified
+	// resource.
 	//
 	// This member is required.
 	Tags map[string]string

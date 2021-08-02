@@ -13,10 +13,10 @@ import (
 
 // Requests a VPC peering connection between two VPCs: a requester VPC that you own
 // and an accepter VPC with which to create the connection. The accepter VPC can
-// belong to another Amazon Web Services account and can be in a different Region
-// to the requester VPC. The requester VPC and accepter VPC cannot have overlapping
-// CIDR blocks. Limitations and rules apply to a VPC peering connection. For more
-// information, see the limitations
+// belong to another AWS account and can be in a different Region to the requester
+// VPC. The requester VPC and accepter VPC cannot have overlapping CIDR blocks.
+// Limitations and rules apply to a VPC peering connection. For more information,
+// see the limitations
 // (https://docs.aws.amazon.com/vpc/latest/peering/vpc-peering-basics.html#vpc-peering-limitations)
 // section in the VPC Peering Guide. The owner of the accepter VPC must accept the
 // peering request to activate the peering connection. The VPC peering connection
@@ -46,8 +46,8 @@ type CreateVpcPeeringConnectionInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The Amazon Web Services account ID of the owner of the accepter VPC. Default:
-	// Your Amazon Web Services account ID
+	// The AWS account ID of the owner of the accepter VPC. Default: Your AWS account
+	// ID
 	PeerOwnerId *string
 
 	// The Region code for the accepter VPC, if the accepter VPC is located in a Region

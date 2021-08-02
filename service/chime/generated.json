@@ -166,8 +166,6 @@
         "api_op_RestorePhoneNumber.go",
         "api_op_SearchAvailablePhoneNumbers.go",
         "api_op_SendChannelMessage.go",
-        "api_op_StartMeetingTranscription.go",
-        "api_op_StopMeetingTranscription.go",
         "api_op_TagAttendee.go",
         "api_op_TagMeeting.go",
         "api_op_TagResource.go",

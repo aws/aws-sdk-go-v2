@@ -35,8 +35,8 @@ type DescribeIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentName *string
 
-	// The ID of the Amazon Web Services account; that contains the assignment that you
-	// want to describe.
+	// The ID of the AWS account that contains the assignment that you want to
+	// describe.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -54,7 +54,7 @@ type DescribeIAMPolicyAssignmentOutput struct {
 	// Information describing the IAM policy assignment.
 	IAMPolicyAssignment *types.IAMPolicyAssignment
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

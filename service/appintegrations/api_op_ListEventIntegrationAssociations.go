@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a paginated list of event integration associations in the account.
+// The Amazon AppIntegrations APIs are in preview release and are subject to
+// change. Returns a paginated list of event integration associations in the
+// account.
 func (c *Client) ListEventIntegrationAssociations(ctx context.Context, params *ListEventIntegrationAssociationsInput, optFns ...func(*Options)) (*ListEventIntegrationAssociationsOutput, error) {
 	if params == nil {
 		params = &ListEventIntegrationAssociationsInput{}

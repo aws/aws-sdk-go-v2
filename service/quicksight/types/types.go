@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// The Amazon QuickSight customizations associated with your Amazon Web Services
-// account; or a QuickSight namespace in a specific Region;.
+// The Amazon QuickSight customizations associated with your AWS account or a
+// QuickSight namespace in a specific AWS Region.
 type AccountCustomization struct {
 
 	// The default theme for this QuickSight subscription.
@@ -17,15 +17,15 @@ type AccountCustomization struct {
 	noSmithyDocumentSerde
 }
 
-// The QuickSight settings associated with your Amazon Web Services account;.
+// The QuickSight settings associated with your AWS account.
 type AccountSettings struct {
 
-	// The "account name" you provided for the QuickSight subscription in your Amazon
-	// Web Services account;. You create this name when you sign up for QuickSight. It
-	// is unique in all of Amazon Web Services and it appears only when users sign in.
+	// The "account name" you provided for the QuickSight subscription in your AWS
+	// account. You create this name when you sign up for QuickSight. It is unique in
+	// all of AWS and it appears only in the console when users sign in.
 	AccountName *string
 
-	// The default QuickSight namespace for your Amazon Web Services account;.
+	// The default QuickSight namespace for your AWS account.
 	DefaultNamespace *string
 
 	// The edition of QuickSight that you're currently subscribed to: Enterprise
@@ -38,7 +38,7 @@ type AccountSettings struct {
 	noSmithyDocumentSerde
 }
 
-// The active Identity and Access Management (IAM) policy assignment.
+// The active AWS Identity and Access Management (IAM) policy assignment.
 type ActiveIAMPolicyAssignment struct {
 
 	// A name for the IAM policy assignment.
@@ -187,31 +187,6 @@ type AnalysisSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the dashboard that you want to embed.
-type AnonymousUserDashboardEmbeddingConfiguration struct {
-
-	// The dashboard ID for the dashboard that you want the user to see first. This ID
-	// is included in the output URL. When the URL in response is accessed, Amazon
-	// QuickSight renders this dashboard. The Amazon Resource Name (ARN) of this
-	// dashboard must be included in the AuthorizedResourceArns parameter. Otherwise,
-	// the request will fail with InvalidParameterValueException.
-	//
-	// This member is required.
-	InitialDashboardId *string
-
-	noSmithyDocumentSerde
-}
-
-// The type of experience you want to embed. For anonymous users, you can embed an
-// Amazon QuickSight dashboard.
-type AnonymousUserEmbeddingExperienceConfiguration struct {
-
-	// The type of embedding experience. In this case, an Amazon QuickSight dashboard.
-	Dashboard *AnonymousUserDashboardEmbeddingConfiguration
-
-	noSmithyDocumentSerde
-}
-
 // Amazon Athena parameters.
 type AthenaParameters struct {
 
@@ -263,7 +238,7 @@ type AuroraPostgreSqlParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Web Services IoT Analytics parameters.
+// AWS IoT Analytics parameters.
 type AwsIotAnalyticsParameters struct {
 
 	// Dataset name.
@@ -731,9 +706,6 @@ type DataSet struct {
 	// The row-level security configuration for the dataset.
 	RowLevelPermissionDataSet *RowLevelPermissionDataSet
 
-	// The element you can use to define tags for row-level security.
-	RowLevelPermissionTagConfiguration *RowLevelPermissionTagConfiguration
-
 	noSmithyDocumentSerde
 }
 
@@ -804,9 +776,6 @@ type DataSetSummary struct {
 	// The row-level security configuration for the dataset.
 	RowLevelPermissionDataSet *RowLevelPermissionDataSet
 
-	// Whether or not the row level permission tags are applied.
-	RowLevelPermissionTagConfigurationApplied bool
-
 	noSmithyDocumentSerde
 }
 
@@ -830,8 +799,8 @@ type DataSource struct {
 	// The time that this data source was created.
 	CreatedTime *time.Time
 
-	// The ID of the data source. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the data source. This ID is unique per AWS Region for each AWS
+	// account.
 	DataSourceId *string
 
 	// The parameters that Amazon QuickSight uses to connect to your underlying source.
@@ -960,7 +929,7 @@ type DataSourceParametersMemberAuroraPostgreSqlParameters struct {
 
 func (*DataSourceParametersMemberAuroraPostgreSqlParameters) isDataSourceParameters() {}
 
-// Amazon Web Services IoT Analytics parameters.
+// AWS IoT Analytics parameters.
 type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
 	Value AwsIotAnalyticsParameters
 
@@ -1326,7 +1295,7 @@ type GutterStyle struct {
 	noSmithyDocumentSerde
 }
 
-// An Identity and Access Management (IAM) policy assignment.
+// An AWS Identity and Access Management (IAM) policy assignment.
 type IAMPolicyAssignment struct {
 
 	// Assignment ID.
@@ -1338,7 +1307,7 @@ type IAMPolicyAssignment struct {
 	// Assignment status.
 	AssignmentStatus AssignmentStatus
 
-	// The Amazon Web Services account; ID.
+	// The AWS account ID.
 	AwsAccountId *string
 
 	// Identities.
@@ -1625,7 +1594,7 @@ type NamespaceInfoV2 struct {
 	// The namespace ARN.
 	Arn *string
 
-	// The namespace Region;.
+	// The namespace AWS Region.
 	CapacityRegion *string
 
 	// The creation status of a namespace that is not yet completely created.
@@ -1845,89 +1814,6 @@ type RedshiftParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the dashboard you want to embed.
-type RegisteredUserDashboardEmbeddingConfiguration struct {
-
-	// The dashboard ID for the dashboard that you want the user to see first. This ID
-	// is included in the output URL. When the URL in response is accessed, Amazon
-	// QuickSight renders this dashboard if the user has permissions to view it. If the
-	// user does not have permission to view this dashboard, they see a permissions
-	// error message.
-	//
-	// This member is required.
-	InitialDashboardId *string
-
-	noSmithyDocumentSerde
-}
-
-// The type of experience you want to embed. For registered users, you can embed an
-// Amazon QuickSight dashboard or the Amazon QuickSight console. Exactly one of the
-// experience configurations is required. You can choose Dashboard or
-// QuickSightConsole. You cannot choose more than one experience configuraton.
-type RegisteredUserEmbeddingExperienceConfiguration struct {
-
-	// The configuration details for providing a dashboard embedding experience.
-	Dashboard *RegisteredUserDashboardEmbeddingConfiguration
-
-	// The configuration details for providing an Amazon QuickSight console embedding
-	// experience. This can be used along with custom permissions to restrict access to
-	// certain features. For more information, see Customizing Access to the Amazon
-	// QuickSight Console
-	// (https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
-	// in the Amazon QuickSight User Guide. Use GenerateEmbedUrlForRegisteredUser where
-	// you want to provide an authoring portal that allows users to create data
-	// sources, datasets, analyses, and dashboards. The users who accesses an embedded
-	// Amazon QuickSight console needs to belong to the author or admin security
-	// cohort. If you want to restrict permissions to some of these features, add a
-	// custom permissions profile to the user with the UpdateUser API operation. Use
-	// RegisterUser API operation to add a new user with a custom permission profile
-	// attached. For more information, see the following sections in the Amazon
-	// QuickSight User Guide:
-	//
-	// * Embedding the Full Functionality of the Amazon
-	// QuickSight Console for Authenticated Users
-	// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users.html)
-	//
-	// *
-	// Customizing Access to the Amazon QuickSight Console
-	// (https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html)
-	//
-	// For
-	// more information about the high-level steps for embedding and for an interactive
-	// demo of the ways you can customize embedding, visit the Amazon QuickSight
-	// Developer Portal
-	// (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
-	QuickSightConsole *RegisteredUserQuickSightConsoleEmbeddingConfiguration
-
-	noSmithyDocumentSerde
-}
-
-// Information about the Amazon QuickSight console that you want to embed.
-type RegisteredUserQuickSightConsoleEmbeddingConfiguration struct {
-
-	// The initial URL path for the Amazon QuickSight console. InitialPath is required.
-	// The entry point URL is constrained to the following paths:
-	//
-	// * /start
-	//
-	// *
-	// /start/analyses
-	//
-	// * /start/dashboards
-	//
-	// * /start/favorites
-	//
-	// *
-	// /dashboards/DashboardId. DashboardId is the actual ID key from the Amazon
-	// QuickSight console URL of the dashboard.
-	//
-	// * /analyses/AnalysisId. AnalysisId is
-	// the actual ID key from the Amazon QuickSight console URL of the analysis.
-	InitialPath *string
-
-	noSmithyDocumentSerde
-}
-
 // A physical table type for relational data sources.
 type RelationalTable struct {
 
@@ -1989,10 +1875,9 @@ type ResourcePermission struct {
 	// user, group, or namespace associated with an analysis, dashboard, template, or
 	// theme. (This is common.)
 	//
-	// * The ARN of an Amazon Web Services account; root:
-	// This is an IAM ARN rather than a QuickSight ARN. Use this option only to share
-	// resources (templates) across Amazon Web Services accounts. (This is less
-	// common.)
+	// * The ARN of an AWS account root: This is an IAM ARN
+	// rather than a QuickSight ARN. Use this option only to share resources
+	// (templates) across AWS accounts. (This is less common.)
 	//
 	// This member is required.
 	Principal *string
@@ -2040,51 +1925,6 @@ type RowLevelPermissionDataSet struct {
 	// The namespace associated with the dataset that contains permissions for RLS.
 	Namespace *string
 
-	// The status of the row-level security permission dataset. If enabled, the status
-	// is ENABLED. If disabled, the status is DISABLED.
-	Status Status
-
-	noSmithyDocumentSerde
-}
-
-// The configuration of tags on a dataset to set row-level security.
-type RowLevelPermissionTagConfiguration struct {
-
-	// A set of rules associated with row-level security, such as the tag names and
-	// columns that they are assigned to.
-	//
-	// This member is required.
-	TagRules []RowLevelPermissionTagRule
-
-	// The status of row-level security tags. If enabled, the status is ENABLED. If
-	// disabled, the status is DISABLED.
-	Status Status
-
-	noSmithyDocumentSerde
-}
-
-// A set of rules associated with a tag.
-type RowLevelPermissionTagRule struct {
-
-	// The column name that a tag key is assigned to.
-	//
-	// This member is required.
-	ColumnName *string
-
-	// The unique key for a tag.
-	//
-	// This member is required.
-	TagKey *string
-
-	// A string that you want to use to filter by all the values in a column in the
-	// dataset and don’t want to list the values one by one. For example, you can use
-	// an asterisk as your match all value.
-	MatchAllValue *string
-
-	// A string that you want to use to delimit the values when you pass the values at
-	// run time. For example, you can delimit the values with a comma.
-	TagMultiValueDelimiter *string
-
 	noSmithyDocumentSerde
 }
 
@@ -2092,7 +1932,7 @@ type RowLevelPermissionTagRule struct {
 type S3Parameters struct {
 
 	// Location of the Amazon S3 manifest file. This is NULL if the manifest file was
-	// uploaded into QuickSight.
+	// uploaded in the console.
 	//
 	// This member is required.
 	ManifestFileLocation *ManifestFileLocation
@@ -2131,27 +1971,12 @@ type ServiceNowParameters struct {
 	noSmithyDocumentSerde
 }
 
-// The key-value pair used for the row-level security tags feature.
-type SessionTag struct {
-
-	// The key for the tag.
-	//
-	// This member is required.
-	Key *string
-
-	// The value that you want to assign the tag.
-	//
-	// This member is required.
-	Value *string
-
-	noSmithyDocumentSerde
-}
-
 // A sheet, which is an object that contains a set of visuals that are viewed
-// together on one page in Amazon QuickSight. Every analysis and dashboard contains
-// at least one sheet. Each sheet contains at least one visualization widget, for
-// example a chart, pivot table, or narrative insight. Sheets can be associated
-// with other components, such as controls, filters, and so on.
+// together on one page in the Amazon QuickSight console. Every analysis and
+// dashboard contains at least one sheet. Each sheet contains at least one
+// visualization widget, for example a chart, pivot table, or narrative insight.
+// Sheets can be associated with other components, such as controls, filters, and
+// so on.
 type Sheet struct {
 
 	// The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
@@ -2294,8 +2119,8 @@ type TagColumnOperation struct {
 	// This member is required.
 	ColumnName *string
 
-	// The dataset column tag, currently only used for geospatial type tagging. This is
-	// not tags for the Amazon Web Services tagging feature.
+	// The dataset column tag, currently only used for geospatial type tagging. . This
+	// is not tags for the AWS tagging feature. .
 	//
 	// This member is required.
 	Tags []ColumnTag
@@ -2309,9 +2134,8 @@ type TagColumnOperation struct {
 // replace the dataset associated with an analysis. You can use templates to create
 // dashboards by replacing dataset placeholders with datasets that follow the same
 // schema that was used to create the source analysis and template. You can share
-// templates across Amazon Web Services accounts by allowing users in other Amazon
-// Web Services accounts to create a template or a dashboard from an existing
-// template.
+// templates across AWS accounts by allowing users in other AWS accounts to create
+// a template or a dashboard from an existing template.
 type Template struct {
 
 	// The Amazon Resource Name (ARN) of the template.
@@ -2326,8 +2150,7 @@ type Template struct {
 	// The display name of the template.
 	Name *string
 
-	// The ID for the template. This is unique per Region; for each Amazon Web Services
-	// account;.
+	// The ID for the template. This is unique per AWS Region for each AWS account.
 	TemplateId *string
 
 	// A structure describing the versions of the template.
@@ -2421,8 +2244,7 @@ type TemplateSummary struct {
 	// A display name for the template.
 	Name *string
 
-	// The ID of the template. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the template. This ID is unique per AWS Region for each AWS account.
 	TemplateId *string
 
 	noSmithyDocumentSerde
@@ -2597,8 +2419,7 @@ type ThemeSummary struct {
 	// the display name for the theme.
 	Name *string
 
-	// The ID of the theme. This ID is unique per Region; for each Amazon Web Services
-	// account;.
+	// The ID of the theme. This ID is unique per AWS Region for each AWS account.
 	ThemeId *string
 
 	noSmithyDocumentSerde

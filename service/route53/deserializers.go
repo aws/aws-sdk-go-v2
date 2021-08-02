@@ -107,9 +107,6 @@ func awsRestxml_deserializeOpErrorActivateKeySigningKey(response *smithyhttp.Res
 	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsRestxml_deserializeErrorConcurrentModification(response, errorBody)
 
-	case strings.EqualFold("InvalidInput", errorCode):
-		return awsRestxml_deserializeErrorInvalidInput(response, errorBody)
-
 	case strings.EqualFold("InvalidKMSArn", errorCode):
 		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
 
@@ -2186,9 +2183,6 @@ func awsRestxml_deserializeOpErrorDeactivateKeySigningKey(response *smithyhttp.R
 	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsRestxml_deserializeErrorConcurrentModification(response, errorBody)
 
-	case strings.EqualFold("InvalidInput", errorCode):
-		return awsRestxml_deserializeErrorInvalidInput(response, errorBody)
-
 	case strings.EqualFold("InvalidKeySigningKeyStatus", errorCode):
 		return awsRestxml_deserializeErrorInvalidKeySigningKeyStatus(response, errorBody)
 
@@ -2562,9 +2556,6 @@ func awsRestxml_deserializeOpErrorDeleteKeySigningKey(response *smithyhttp.Respo
 	switch {
 	case strings.EqualFold("ConcurrentModification", errorCode):
 		return awsRestxml_deserializeErrorConcurrentModification(response, errorBody)
-
-	case strings.EqualFold("InvalidInput", errorCode):
-		return awsRestxml_deserializeErrorInvalidInput(response, errorBody)
 
 	case strings.EqualFold("InvalidKMSArn", errorCode):
 		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
@@ -3098,9 +3089,6 @@ func awsRestxml_deserializeOpErrorDisableHostedZoneDNSSEC(response *smithyhttp.R
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
 
-	case strings.EqualFold("InvalidInput", errorCode):
-		return awsRestxml_deserializeErrorInvalidInput(response, errorBody)
-
 	case strings.EqualFold("InvalidKMSArn", errorCode):
 		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
 
@@ -3407,9 +3395,6 @@ func awsRestxml_deserializeOpErrorEnableHostedZoneDNSSEC(response *smithyhttp.Re
 
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
-
-	case strings.EqualFold("InvalidInput", errorCode):
-		return awsRestxml_deserializeErrorInvalidInput(response, errorBody)
 
 	case strings.EqualFold("InvalidKMSArn", errorCode):
 		return awsRestxml_deserializeErrorInvalidKMSArn(response, errorBody)
@@ -3987,9 +3972,6 @@ func awsRestxml_deserializeOpErrorGetDNSSEC(response *smithyhttp.Response, metad
 	switch {
 	case strings.EqualFold("InvalidArgument", errorCode):
 		return awsRestxml_deserializeErrorInvalidArgument(response, errorBody)
-
-	case strings.EqualFold("InvalidInput", errorCode):
-		return awsRestxml_deserializeErrorInvalidInput(response, errorBody)
 
 	case strings.EqualFold("NoSuchHostedZone", errorCode):
 		return awsRestxml_deserializeErrorNoSuchHostedZone(response, errorBody)
@@ -14828,19 +14810,6 @@ func awsRestxml_deserializeDocumentHealthCheckConfig(v **types.HealthCheckConfig
 			{
 				xtv := string(val)
 				sv.ResourcePath = ptr.String(xtv)
-			}
-
-		case strings.EqualFold("RoutingControlArn", t.Name.Local):
-			val, err := decoder.Value()
-			if err != nil {
-				return err
-			}
-			if val == nil {
-				break
-			}
-			{
-				xtv := string(val)
-				sv.RoutingControlArn = ptr.String(xtv)
 			}
 
 		case strings.EqualFold("SearchString", t.Name.Local):

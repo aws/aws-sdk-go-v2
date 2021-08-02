@@ -11,9 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the log-level override for a resource-ID and resource-type. This option can
-// be specified for a wireless gateway or a wireless device. A limit of 200 log
-// level override can be set per account.
+// Sets the log-level override for a resource-ID and resource-type, could be a
+// wireless gateway or a wireless device.
 func (c *Client) PutResourceLogLevel(ctx context.Context, params *PutResourceLogLevelInput, optFns ...func(*Options)) (*PutResourceLogLevelOutput, error) {
 	if params == nil {
 		params = &PutResourceLogLevelInput{}
@@ -37,12 +36,12 @@ type PutResourceLogLevelInput struct {
 	LogLevel types.LogLevel
 
 	// The identifier of the resource. For a Wireless Device, it is the wireless device
-	// ID. For a wireless gateway, it is the wireless gateway ID.
+	// id. For a wireless gateway, it is the wireless gateway id.
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, which can be WirelessDevice or WirelessGateway.
+	// The type of the resource, currently support WirelessDevice and WirelessGateway.
 	//
 	// This member is required.
 	ResourceType *string

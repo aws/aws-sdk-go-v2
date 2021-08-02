@@ -230,7 +230,7 @@ type CalculateRouteSummary struct {
 	DurationSeconds *float64
 
 	// Specifies a geographical box surrounding a route. Used to zoom into a route when
-	// displaying it in a map. For example, [min x, min y, max x, max y]. The first 2
+	// displaying it in a map. For example, [min x, min y, max x, max y] The first 2
 	// bbox parameters describe the lower southwest corner:
 	//
 	// * The first bbox position
@@ -279,20 +279,7 @@ type CalculateRouteTruckModeOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the data storage option chosen for requesting Places. When using
-// Amazon Location Places:
-//
-// * If using HERE Technologies as a data provider, you
-// can't store results for locations in Japan by setting IntendedUse to Storage.
-// parameter.
-//
-// * Under the MobileAssetTracking or MobilAssetManagement pricing
-// plan, you can't store results from your place index resources by setting
-// IntendedUse to Storage. This returns a validation exception error.
-//
-// For more
-// information, see the AWS Service Terms (https://aws.amazon.com/service-terms/)
-// for Amazon Location Service.
+// Specifies the data storage option chosen for requesting Places.
 type DataSourceConfiguration struct {
 
 	// Specifies how the results of an operation will be stored by the caller. Valid
@@ -301,8 +288,10 @@ type DataSourceConfiguration struct {
 	// * SingleUse specifies that the results won't be stored.
 	//
 	// *
-	// Storage specifies that the result can be cached or stored in a
-	// database.
+	// Storage specifies that the result can be cached or stored in a database. Place
+	// index resources using HERE as a data provider can't be configured to store
+	// results for locations in Japan when choosing Storage for the IntendedUse
+	// parameter.
 	//
 	// Default value: SingleUse
 	IntendedUse IntendedUse
@@ -383,7 +372,7 @@ type GeofenceGeometry struct {
 }
 
 // Contains the calculated route's details for each path between a pair of
-// positions. The number of legs returned corresponds to one fewer than the total
+// positions. The number of legs returned corresponds to one less than the total
 // number of positions in the request. For example, a route with a departure
 // position and destination position returns one leg with the positions snapped to
 // a nearby road
@@ -397,13 +386,13 @@ type GeofenceGeometry struct {
 //
 // A route with a waypoint between the departure and
 // destination position returns two legs with the positions snapped to a nearby
-// road:
+// road.:
 //
-// * Leg 1: The StartPosition is the departure position . The EndPosition is
-// the waypoint positon.
+// * Leg 1: The StartPosition is the departure position . The EndPosition
+// is the waypoint positon.
 //
-// * Leg 2: The StartPosition is the waypoint position. The
-// EndPosition is the destination position.
+// * Leg 2: The StartPosition is the waypoint position.
+// The EndPosition is the destination position.
 type Leg struct {
 
 	// The distance between the leg's StartPosition and EndPosition along a calculated
@@ -768,50 +757,13 @@ type ListTrackersResponseEntry struct {
 // Specifies the map tile style selected from an available provider.
 type MapConfiguration struct {
 
-	// Specifies the map style selected from an available data provider. For additional
-	// information on each map style and to preview each map style, see Esri map styles
-	// and HERE map styles. Valid Esri
-	// (https://docs.aws.amazon.com/location/latest/developerguide/esri.html)
-	// styles:
-	//
-	// * VectorEsriDarkGrayCanvas – The Esri Dark Gray Canvas map style. A
-	// vector basemap with a dark gray, neutral background with minimal colors, labels,
-	// and features that's designed to draw attention to your thematic content.
-	//
-	// *
-	// RasterEsriImagery – The Esri Imagery map style. A raster basemap that provides
-	// one meter or better satellite and aerial imagery in many parts of the world and
-	// lower resolution satellite imagery worldwide.
-	//
-	// * VectorEsriLightGrayCanvas – The
-	// Esri Light Gray Canvas map style, which provides a detailed vector basemap with
-	// a light gray, neutral background style with minimal colors, labels, and features
-	// that's designed to draw attention to your thematic content.
-	//
-	// *
-	// VectorEsriTopographic – The Esri Light map style, which provides a detailed
-	// vector basemap with a classic Esri map style.
-	//
-	// * VectorEsriStreets – The Esri
-	// World Streets map style, which provides a detailed vector basemap for the world
-	// symbolized with a classic Esri street map style. The vector tile layer is
-	// similar in content and style to the World Street Map raster map.
-	//
-	// *
-	// VectorEsriNavigation – The Esri World Navigation map style, which provides a
-	// detailed basemap for the world symbolized with a custom navigation map style
-	// that's designed for use during the day in mobile devices.
-	//
-	// Valid HERE
-	// Technologies
-	// (https://docs.aws.amazon.com/location/latest/developerguide/HERE.html)
-	// styles:
-	//
-	// * VectorHereBerlin – The HERE Berlin map style is a high contrast
-	// detailed base map of the world that blends 3D and 2D rendering. When using HERE
-	// as your data provider, and selecting the Style VectorHereBerlin, you may not use
-	// HERE Technologies maps for Asset Management. See the AWS Service Terms
-	// (https://aws.amazon.com/service-terms/) for Amazon Location Service.
+	// Specifies the map style selected from an available data provider. Valid styles:
+	// RasterEsriImagery, VectorEsriStreets, VectorEsriTopographic,
+	// VectorEsriNavigation, VectorEsriDarkGrayCanvas, VectorEsriLightGrayCanvas,
+	// VectorHereBerlin. When using HERE as your data provider, and selecting the Style
+	// VectorHereBerlin, you may not use HERE Maps for Asset Management. See the AWS
+	// Service Terms (https://aws.amazon.com/service-terms/) for Amazon Location
+	// Service.
 	//
 	// This member is required.
 	Style *string

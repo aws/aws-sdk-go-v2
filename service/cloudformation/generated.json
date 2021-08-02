@@ -42,7 +42,6 @@
         "api_op_GetStackPolicy.go",
         "api_op_GetTemplate.go",
         "api_op_GetTemplateSummary.go",
-        "api_op_ImportStacksToStackSet.go",
         "api_op_ListChangeSets.go",
         "api_op_ListExports.go",
         "api_op_ListImports.go",

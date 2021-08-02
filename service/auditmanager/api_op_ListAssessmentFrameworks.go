@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of the frameworks available in the Audit Manager framework
+// Returns a list of the frameworks available in the AWS Audit Manager framework
 // library.
 func (c *Client) ListAssessmentFrameworks(ctx context.Context, params *ListAssessmentFrameworksInput, optFns ...func(*Options)) (*ListAssessmentFrameworksOutput, error) {
 	if params == nil {

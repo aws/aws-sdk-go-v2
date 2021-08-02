@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provides details about the Shield Advanced subscription for an account.
+// Provides details about the AWS Shield Advanced subscription for an account.
 func (c *Client) DescribeSubscription(ctx context.Context, params *DescribeSubscriptionInput, optFns ...func(*Options)) (*DescribeSubscriptionOutput, error) {
 	if params == nil {
 		params = &DescribeSubscriptionInput{}
@@ -33,7 +33,7 @@ type DescribeSubscriptionInput struct {
 
 type DescribeSubscriptionOutput struct {
 
-	// The Shield Advanced subscription details for an account.
+	// The AWS Shield Advanced subscription details for an account.
 	Subscription *types.Subscription
 
 	// Metadata pertaining to the operation's result.

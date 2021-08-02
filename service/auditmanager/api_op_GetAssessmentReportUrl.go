@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the URL of a specified assessment report in Audit Manager.
+// Returns the URL of a specified assessment report in AWS Audit Manager.
 func (c *Client) GetAssessmentReportUrl(ctx context.Context, params *GetAssessmentReportUrlInput, optFns ...func(*Options)) (*GetAssessmentReportUrlOutput, error) {
 	if params == nil {
 		params = &GetAssessmentReportUrlInput{}

@@ -56,13 +56,9 @@ type DescribeJobRunOutput struct {
 	// The date and time when the job completed processing.
 	CompletedOn *time.Time
 
-	// One or more artifacts that represent the Glue Data Catalog output from running
-	// the job.
+	// One or more artifacts that represent the AWS Glue Data Catalog output from
+	// running the job.
 	DataCatalogOutputs []types.DataCatalogOutput
-
-	// Represents a list of JDBC database output objects which defines the output
-	// destination for a DataBrew recipe job to write into.
-	DatabaseOutputs []types.DatabaseOutput
 
 	// The name of the dataset for the job to process.
 	DatasetName *string
@@ -88,11 +84,6 @@ type DescribeJobRunOutput struct {
 
 	// One or more output artifacts from a job run.
 	Outputs []types.Output
-
-	// Configuration for profile jobs. Used to select columns, do evaluations, and
-	// override default parameters of evaluations. When configuration is null, the
-	// profile job will run with default settings.
-	ProfileConfiguration *types.ProfileConfiguration
 
 	// Represents the name and version of a DataBrew recipe.
 	RecipeReference *types.RecipeReference

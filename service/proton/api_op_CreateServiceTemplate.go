@@ -19,7 +19,7 @@ import (
 // infrastructure defined by the selected service template. For more information,
 // see Service Templates
 // (https://docs.aws.amazon.com/proton/latest/adminguide/managing-svc-templates.html)
-// in the AWS Proton Administrator Guide.
+// in the AWS Proton Administration Guide.
 func (c *Client) CreateServiceTemplate(ctx context.Context, params *CreateServiceTemplateInput, optFns ...func(*Options)) (*CreateServiceTemplateOutput, error) {
 	if params == nil {
 		params = &CreateServiceTemplateInput{}
@@ -55,12 +55,12 @@ type CreateServiceTemplateInput struct {
 	// included, this parameter indicates that an AWS Proton service pipeline won't be
 	// included for your service. Once specified, this parameter can't be changed. For
 	// more information, see Service template bundles
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-template-bundles.html)
-	// in the AWS Proton Administrator Guide.
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-svc-template-bundles.html)
+	// in the AWS Proton Administration Guide.
 	PipelineProvisioning types.Provisioning
 
 	// Create tags for your service template. For more information, see AWS Proton
-	// resources and tagging in the AWS Proton Administrator Guide
+	// resources and tagging in the AWS Proton Administration Guide
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or AWS
 	// Proton User Guide
 	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).

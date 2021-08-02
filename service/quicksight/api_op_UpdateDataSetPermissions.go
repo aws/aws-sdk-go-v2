@@ -30,13 +30,13 @@ func (c *Client) UpdateDataSetPermissions(ctx context.Context, params *UpdateDat
 
 type UpdateDataSetPermissionsInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The AWS account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The ID for the dataset whose permissions you want to update. This ID is unique
-	// per Region; for each Amazon Web Services account;.
+	// per AWS Region for each AWS account.
 	//
 	// This member is required.
 	DataSetId *string
@@ -56,10 +56,10 @@ type UpdateDataSetPermissionsOutput struct {
 	DataSetArn *string
 
 	// The ID for the dataset whose permissions you want to update. This ID is unique
-	// per Region; for each Amazon Web Services account;.
+	// per AWS Region for each AWS account.
 	DataSetId *string
 
-	// The Amazon Web Services request ID for this operation.
+	// The AWS request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.
