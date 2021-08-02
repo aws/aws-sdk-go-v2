@@ -3,8 +3,7 @@
 // Package appintegrations provides the API client, operations, and parameter types
 // for Amazon AppIntegrations Service.
 //
-// The Amazon AppIntegrations APIs are in preview release and are subject to
-// change. The Amazon AppIntegrations service enables you to configure and reuse
+// The Amazon AppIntegrations service enables you to configure and reuse
 // connections to external applications. For information about how you can use
 // external applications with Amazon Connect, see Set up pre-built integrations
 // (https://docs.aws.amazon.com/connect/latest/adminguide/crm.html) in the Amazon

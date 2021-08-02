@@ -31,7 +31,7 @@ func (c *Client) UpdateProtectionGroup(ctx context.Context, params *UpdateProtec
 
 type UpdateProtectionGroupInput struct {
 
-	// Defines how AWS Shield combines resource data for the group in order to detect,
+	// Defines how Shield combines resource data for the group in order to detect,
 	// mitigate, and report events.
 	//
 	// * Sum - Use the total traffic across the group.
@@ -45,7 +45,7 @@ type UpdateProtectionGroupInput struct {
 	// * Max -
 	// Use the highest traffic from each resource. This is useful for resources that
 	// don't share traffic and for resources that share that traffic in a non-uniform
-	// way. Examples include CloudFront distributions and origin resources for
+	// way. Examples include Amazon CloudFront distributions and origin resources for
 	// CloudFront distributions.
 	//
 	// This member is required.

@@ -11,8 +11,8 @@ import (
 )
 
 // Deletes the Amazon QuickSight user that is associated with the identity of the
-// AWS Identity and Access Management (IAM) user or role that's making the call.
-// The IAM user isn't deleted as a result of this call.
+// Identity and Access Management (IAM) user or role that's making the call. The
+// IAM user isn't deleted as a result of this call.
 func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns ...func(*Options)) (*DeleteUserOutput, error) {
 	if params == nil {
 		params = &DeleteUserInput{}
@@ -30,8 +30,9 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 
 type DeleteUserInput struct {
 
-	// The ID for the AWS account that the user is in. Currently, you use the ID for
-	// the AWS account that contains your Amazon QuickSight account.
+	// The ID for the Amazon Web Services account; that the user is in. Currently, you
+	// use the ID for the Amazon Web Services account; that contains your Amazon
+	// QuickSight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -51,7 +52,7 @@ type DeleteUserInput struct {
 
 type DeleteUserOutput struct {
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -34,6 +34,22 @@ func (CompressionFormat) Values() []CompressionFormat {
 	}
 }
 
+type DatabaseOutputMode string
+
+// Enum values for DatabaseOutputMode
+const (
+	DatabaseOutputModeNewTable DatabaseOutputMode = "NEW_TABLE"
+)
+
+// Values returns all known values for DatabaseOutputMode. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DatabaseOutputMode) Values() []DatabaseOutputMode {
+	return []DatabaseOutputMode{
+		"NEW_TABLE",
+	}
+}
+
 type EncryptionMode string
 
 // Enum values for EncryptionMode

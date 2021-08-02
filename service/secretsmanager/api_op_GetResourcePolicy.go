@@ -83,10 +83,10 @@ type GetResourcePolicyOutput struct {
 	// the attached secret. These permissions are combined with any permissions that
 	// are associated with the user or role that attempts to access this secret. The
 	// combined permissions specify who can access the secret and what actions they can
-	// perform. For more information, see Authentication and Access Control for AWS
-	// Secrets Manager
+	// perform. For more information, see Authentication and Access Control for Amazon
+	// Web Services Secrets Manager
 	// (http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access.html)
-	// in the AWS Secrets Manager User Guide.
+	// in the Amazon Web Services Secrets Manager User Guide.
 	ResourcePolicy *string
 
 	// Metadata pertaining to the operation's result.

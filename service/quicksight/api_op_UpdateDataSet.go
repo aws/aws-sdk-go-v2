@@ -29,13 +29,13 @@ func (c *Client) UpdateDataSet(ctx context.Context, params *UpdateDataSetInput, 
 
 type UpdateDataSetInput struct {
 
-	// The AWS account ID.
+	// The Amazon Web Services account; ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dataset that you want to update. This ID is unique per AWS Region
-	// for each AWS account.
+	// The ID for the dataset that you want to update. This ID is unique per Region;
+	// for each Amazon Web Services account;.
 	//
 	// This member is required.
 	DataSetId *string
@@ -72,6 +72,10 @@ type UpdateDataSetInput struct {
 	// The row-level security configuration for the data you want to create.
 	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
 
+	// The configuration of tags on a dataset to set row-level security. Row-level
+	// security tags are currently supported for anonymous embedding only.
+	RowLevelPermissionTagConfiguration *types.RowLevelPermissionTagConfiguration
+
 	noSmithyDocumentSerde
 }
 
@@ -80,8 +84,8 @@ type UpdateDataSetOutput struct {
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
 
-	// The ID for the dataset that you want to create. This ID is unique per AWS Region
-	// for each AWS account.
+	// The ID for the dataset that you want to create. This ID is unique per Region;
+	// for each Amazon Web Services account;.
 	DataSetId *string
 
 	// The ARN for the ingestion, which is triggered as a result of dataset creation if
@@ -92,7 +96,7 @@ type UpdateDataSetOutput struct {
 	// the import mode is SPICE.
 	IngestionId *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

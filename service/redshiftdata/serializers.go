@@ -14,6 +14,53 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+type awsAwsjson11_serializeOpBatchExecuteStatement struct {
+}
+
+func (*awsAwsjson11_serializeOpBatchExecuteStatement) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpBatchExecuteStatement) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*BatchExecuteStatementInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("RedshiftData.BatchExecuteStatement")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentBatchExecuteStatementInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpCancelStatement struct {
 }
 
@@ -436,6 +483,17 @@ func (m *awsAwsjson11_serializeOpListTables) HandleSerialize(ctx context.Context
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentSqlList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSqlParameter(v *types.SqlParameter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -463,6 +521,50 @@ func awsAwsjson11_serializeDocumentSqlParametersList(v []types.SqlParameter, val
 			return err
 		}
 	}
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentBatchExecuteStatementInput(v *BatchExecuteStatementInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterIdentifier != nil {
+		ok := object.Key("ClusterIdentifier")
+		ok.String(*v.ClusterIdentifier)
+	}
+
+	if v.Database != nil {
+		ok := object.Key("Database")
+		ok.String(*v.Database)
+	}
+
+	if v.DbUser != nil {
+		ok := object.Key("DbUser")
+		ok.String(*v.DbUser)
+	}
+
+	if v.SecretArn != nil {
+		ok := object.Key("SecretArn")
+		ok.String(*v.SecretArn)
+	}
+
+	if v.Sqls != nil {
+		ok := object.Key("Sqls")
+		if err := awsAwsjson11_serializeDocumentSqlList(v.Sqls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.StatementName != nil {
+		ok := object.Key("StatementName")
+		ok.String(*v.StatementName)
+	}
+
+	if v.WithEvent != nil {
+		ok := object.Key("WithEvent")
+		ok.Boolean(*v.WithEvent)
+	}
+
 	return nil
 }
 

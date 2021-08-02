@@ -18,32 +18,33 @@ import (
 // configuration parameters, the operation starts a rotation with the values
 // already stored in the secret. After the rotation completes, the protected
 // service and its clients all use the new version of the secret. This required
-// configuration information includes the ARN of an AWS Lambda function and the
-// time between scheduled rotations. The Lambda rotation function creates a new
-// version of the secret and creates or updates the credentials on the protected
-// service to match. After testing the new credentials, the function marks the new
-// secret with the staging label AWSCURRENT so that your clients all immediately
-// begin to use the new version. For more information about rotating secrets and
-// how to configure a Lambda function to rotate the secrets for your protected
-// service, see Rotating Secrets in AWS Secrets Manager
+// configuration information includes the ARN of an Amazon Web Services Lambda
+// function and optionally, the time between scheduled rotations. The Lambda
+// rotation function creates a new version of the secret and creates or updates the
+// credentials on the protected service to match. After testing the new
+// credentials, the function marks the new secret with the staging label AWSCURRENT
+// so that your clients all immediately begin to use the new version. For more
+// information about rotating secrets and how to configure a Lambda function to
+// rotate the secrets for your protected service, see Rotating Secrets in Amazon
+// Web Services Secrets Manager
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/rotating-secrets.html)
-// in the AWS Secrets Manager User Guide. Secrets Manager schedules the next
-// rotation when the previous one completes. Secrets Manager schedules the date by
-// adding the rotation interval (number of days) to the actual date of the last
-// rotation. The service chooses the hour within that 24-hour date window randomly.
-// The minute is also chosen somewhat randomly, but weighted towards the top of the
-// hour and influenced by a variety of factors that help distribute load. The
-// rotation function must end with the versions of the secret in one of two
-// states:
+// in the Amazon Web Services Secrets Manager User Guide. Secrets Manager schedules
+// the next rotation when the previous one completes. Secrets Manager schedules the
+// date by adding the rotation interval (number of days) to the actual date of the
+// last rotation. The service chooses the hour within that 24-hour date window
+// randomly. The minute is also chosen somewhat randomly, but weighted towards the
+// top of the hour and influenced by a variety of factors that help distribute
+// load. The rotation function must end with the versions of the secret in one of
+// two states:
 //
-// * The AWSPENDING and AWSCURRENT staging labels are attached to the same
-// version of the secret, or
+// * The AWSPENDING and AWSCURRENT staging labels are attached to the
+// same version of the secret, or
 //
-// * The AWSPENDING staging label is not attached to any
-// version of the secret.
+// * The AWSPENDING staging label is not attached
+// to any version of the secret.
 //
-// If the AWSPENDING staging label is present but not
-// attached to the same version as AWSCURRENT then any later invocation of
+// If the AWSPENDING staging label is present but
+// not attached to the same version as AWSCURRENT then any later invocation of
 // RotateSecret assumes that a previous rotation request is still in progress and
 // returns an error. Minimum permissions To run this command, you must have the
 // following permissions:
@@ -105,15 +106,15 @@ type RotateSecretInput struct {
 	SecretId *string
 
 	// (Optional) Specifies a unique identifier for the new version of the secret that
-	// helps ensure idempotency. If you use the AWS CLI or one of the AWS SDK to call
-	// this operation, then you can leave this parameter empty. The CLI or SDK
-	// generates a random UUID for you and includes that in the request for this
-	// parameter. If you don't use the SDK and instead generate a raw HTTP request to
-	// the Secrets Manager service endpoint, then you must generate a
-	// ClientRequestToken yourself for new versions and include that value in the
-	// request. You only need to specify your own value if you implement your own retry
-	// logic and want to ensure that a given secret is not created twice. We recommend
-	// that you generate a UUID-type
+	// helps ensure idempotency. If you use the Amazon Web Services CLI or one of the
+	// Amazon Web Services SDK to call this operation, then you can leave this
+	// parameter empty. The CLI or SDK generates a random UUID for you and includes
+	// that in the request for this parameter. If you don't use the SDK and instead
+	// generate a raw HTTP request to the Secrets Manager service endpoint, then you
+	// must generate a ClientRequestToken yourself for new versions and include that
+	// value in the request. You only need to specify your own value if you implement
+	// your own retry logic and want to ensure that a given secret is not created
+	// twice. We recommend that you generate a UUID-type
 	// (https://wikipedia.org/wiki/Universally_unique_identifier) value to ensure
 	// uniqueness within the specified secret. Secrets Manager uses this value to
 	// prevent the accidental creation of duplicate versions if there are failures and

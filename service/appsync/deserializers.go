@@ -6368,6 +6368,11 @@ func awsRestjson1_deserializeDocumentAdditionalAuthenticationProvider(v **types.
 				sv.AuthenticationType = types.AuthenticationType(jtv)
 			}
 
+		case "lambdaAuthorizerConfig":
+			if err := awsRestjson1_deserializeDocumentLambdaAuthorizerConfig(&sv.LambdaAuthorizerConfig, value); err != nil {
+				return err
+			}
+
 		case "openIDConnectConfig":
 			if err := awsRestjson1_deserializeDocumentOpenIDConnectConfig(&sv.OpenIDConnectConfig, value); err != nil {
 				return err
@@ -7610,6 +7615,11 @@ func awsRestjson1_deserializeDocumentGraphqlApi(v **types.GraphqlApi, value inte
 				sv.AuthenticationType = types.AuthenticationType(jtv)
 			}
 
+		case "lambdaAuthorizerConfig":
+			if err := awsRestjson1_deserializeDocumentLambdaAuthorizerConfig(&sv.LambdaAuthorizerConfig, value); err != nil {
+				return err
+			}
+
 		case "logConfig":
 			if err := awsRestjson1_deserializeDocumentLogConfig(&sv.LogConfig, value); err != nil {
 				return err
@@ -7819,6 +7829,68 @@ func awsRestjson1_deserializeDocumentInternalFailureException(v **types.Internal
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentLambdaAuthorizerConfig(v **types.LambdaAuthorizerConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaAuthorizerConfig
+	if *v == nil {
+		sv = &types.LambdaAuthorizerConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authorizerResultTtlInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected TTL to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AuthorizerResultTtlInSeconds = int32(i64)
+			}
+
+		case "authorizerUri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.AuthorizerUri = ptr.String(jtv)
+			}
+
+		case "identityValidationExpression":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.IdentityValidationExpression = ptr.String(jtv)
 			}
 
 		default:

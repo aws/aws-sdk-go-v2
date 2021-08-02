@@ -34,7 +34,8 @@ type UpdateThemeAliasInput struct {
 	// This member is required.
 	AliasName *string
 
-	// The ID of the AWS account that contains the theme alias that you're updating.
+	// The ID of the Amazon Web Services account; that contains the theme alias that
+	// you're updating.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -54,7 +55,7 @@ type UpdateThemeAliasInput struct {
 
 type UpdateThemeAliasOutput struct {
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

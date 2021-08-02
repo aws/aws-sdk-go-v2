@@ -235,7 +235,8 @@ type Receipt struct {
 // specified contacts or contact methods.
 type Stage struct {
 
-	// The time to wait until beginning the next stage.
+	// The time to wait until beginning the next stage. The duration can only be set to
+	// 0 if a target is specified.
 	//
 	// This member is required.
 	DurationInMinutes *int32

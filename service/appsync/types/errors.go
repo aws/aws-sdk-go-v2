@@ -149,7 +149,7 @@ func (e *GraphQLSchemaException) ErrorMessage() string {
 func (e *GraphQLSchemaException) ErrorCode() string             { return "GraphQLSchemaException" }
 func (e *GraphQLSchemaException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An internal AWS AppSync error occurred. Try your request again.
+// An internal AppSync error occurred. Try your request again.
 type InternalFailureException struct {
 	Message *string
 

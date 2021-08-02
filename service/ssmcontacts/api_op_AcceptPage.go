@@ -44,6 +44,15 @@ type AcceptPageInput struct {
 	// This member is required.
 	PageId *string
 
+	// An optional field that Incident Manager uses to ENFORCEAcceptCode validation
+	// when acknowledging an page. Acknowledgement can occur by replying to a page, or
+	// when entering the AcceptCode in the console. Enforcing AcceptCode validation
+	// causes Incident Manager to verify that the code entered by the user matches the
+	// code sent by Incident Manager with the page. Incident Manager can also
+	// IGNOREAcceptCode validation. Ignoring AcceptCode validation causes Incident
+	// Manager to accept any value entered for the AcceptCode.
+	AcceptCodeValidation types.AcceptCodeValidation
+
 	// The ARN of the contact channel.
 	ContactChannelId *string
 

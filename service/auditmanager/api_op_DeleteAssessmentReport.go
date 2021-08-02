@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an assessment report from an assessment in AWS Audit Manager.
+// Deletes an assessment report from an assessment in Audit Manager.
 func (c *Client) DeleteAssessmentReport(ctx context.Context, params *DeleteAssessmentReportInput, optFns ...func(*Options)) (*DeleteAssessmentReportOutput, error) {
 	if params == nil {
 		params = &DeleteAssessmentReportInput{}

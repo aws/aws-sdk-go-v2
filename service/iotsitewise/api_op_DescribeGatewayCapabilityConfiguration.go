@@ -178,7 +178,7 @@ func (m *endpointPrefix_opDescribeGatewayCapabilityConfigurationMiddleware) Hand
 		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
 	}
 
-	req.URL.Host = "edge." + req.URL.Host
+	req.URL.Host = "api." + req.URL.Host
 
 	return next.HandleSerialize(ctx, in)
 }

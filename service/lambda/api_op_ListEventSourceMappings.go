@@ -67,7 +67,9 @@ type ListEventSourceMappingsInput struct {
 	// A pagination token returned by a previous call.
 	Marker *string
 
-	// The maximum number of event source mappings to return.
+	// The maximum number of event source mappings to return. Note that
+	// ListEventSourceMappings returns a maximum of 100 items in each response, even if
+	// you set the number higher.
 	MaxItems *int32
 
 	noSmithyDocumentSerde
@@ -159,7 +161,9 @@ var _ ListEventSourceMappingsAPIClient = (*Client)(nil)
 // ListEventSourceMappingsPaginatorOptions is the paginator options for
 // ListEventSourceMappings
 type ListEventSourceMappingsPaginatorOptions struct {
-	// The maximum number of event source mappings to return.
+	// The maximum number of event source mappings to return. Note that
+	// ListEventSourceMappings returns a maximum of 100 items in each response, even if
+	// you set the number higher.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

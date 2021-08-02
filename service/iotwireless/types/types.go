@@ -495,6 +495,9 @@ type SidewalkAccountInfoWithFingerprint struct {
 // Sidewalk device object.
 type SidewalkDevice struct {
 
+	// The Sidewalk Amazon ID.
+	AmazonId *string
+
 	// The sidewalk device certificates for Ed25519 and P256r1.
 	DeviceCertificates []CertificateList
 
@@ -546,7 +549,7 @@ type SidewalkListDevice struct {
 // Information about a Sidewalk router.
 type SidewalkSendDataToDevice struct {
 
-	// Sidewalk device message type.
+	// Sidewalk device message type. Default value is CUSTOM_COMMAND_ID_NOTIFY.
 	MessageType MessageType
 
 	// The sequence number.
@@ -610,10 +613,10 @@ type UpdateWirelessGatewayTaskEntry struct {
 	noSmithyDocumentSerde
 }
 
-// The log option for a wireless device event. Can be used to set log level for a
-// specific wireless device event. For a LoRaWAN device, the possible events for a
-// log messsage are: Join, Rejoin, Downlink_Data, Uplink_Data. For a Sidewalk
-// device, the possible events for a log message are: Registration, Downlink_Data,
+// The log options for a wireless device event and can be used to set log levels
+// for a specific wireless device event. For a LoRaWAN device, possible events for
+// a log messsage are: Join, Rejoin, Downlink_Data, and Uplink_Data. For a Sidewalk
+// device, possible events for a log message are Registration, Downlink_Data, and
 // Uplink_Data.
 type WirelessDeviceEventLogOption struct {
 
@@ -630,8 +633,8 @@ type WirelessDeviceEventLogOption struct {
 	noSmithyDocumentSerde
 }
 
-// The log option for wireless devices. Can be used to set log level for a specific
-// type of wireless device.
+// The log options for wireless devices and can be used to set log levels for a
+// specific type of wireless device.
 type WirelessDeviceLogOption struct {
 
 	// The log level for a log message.
@@ -680,9 +683,9 @@ type WirelessDeviceStatistics struct {
 	noSmithyDocumentSerde
 }
 
-// The log option for a wireless gateway event. Can be used to set log level for a
-// specific wireless gateway event. For a LoRaWAN gateway, the possible events for
-// a log message are: CUPS_Request, Certificate.
+// The log options for a wireless gateway event and can be used to set log levels
+// for a specific wireless gateway event. For a LoRaWAN gateway, possible events
+// for a log message are CUPS_Request and Certificate.
 type WirelessGatewayEventLogOption struct {
 
 	// The event for a log message, if the log message is tied to a wireless gateway.
@@ -698,7 +701,7 @@ type WirelessGatewayEventLogOption struct {
 	noSmithyDocumentSerde
 }
 
-// The log option for wireless gateways. Can be used to set log level for a
+// The log options for wireless gateways and can be used to set log levels for a
 // specific type of wireless gateway.
 type WirelessGatewayLogOption struct {
 

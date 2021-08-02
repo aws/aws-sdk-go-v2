@@ -96,6 +96,7 @@ const (
 	AuthenticationTypeAwsIam                 AuthenticationType = "AWS_IAM"
 	AuthenticationTypeAmazonCognitoUserPools AuthenticationType = "AMAZON_COGNITO_USER_POOLS"
 	AuthenticationTypeOpenidConnect          AuthenticationType = "OPENID_CONNECT"
+	AuthenticationTypeAwsLambda              AuthenticationType = "AWS_LAMBDA"
 )
 
 // Values returns all known values for AuthenticationType. Note that this can be
@@ -107,6 +108,7 @@ func (AuthenticationType) Values() []AuthenticationType {
 		"AWS_IAM",
 		"AMAZON_COGNITO_USER_POOLS",
 		"OPENID_CONNECT",
+		"AWS_LAMBDA",
 	}
 }
 

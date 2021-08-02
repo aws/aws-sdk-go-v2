@@ -36,7 +36,7 @@ type BatchPutMessageInput struct {
 
 	// The list of messages to be sent. Each message has the format: { "messageId":
 	// "string", "payload": "string"}. The field names of message payloads (data) that
-	// you send to AWS IoT Analytics:
+	// you send to IoT Analytics:
 	//
 	// * Must contain only alphanumeric characters and
 	// undescores (_). No other special characters are allowed.

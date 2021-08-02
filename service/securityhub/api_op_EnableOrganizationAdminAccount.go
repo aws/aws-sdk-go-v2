@@ -29,8 +29,8 @@ func (c *Client) EnableOrganizationAdminAccount(ctx context.Context, params *Ena
 
 type EnableOrganizationAdminAccountInput struct {
 
-	// The AWS account identifier of the account to designate as the Security Hub
-	// administrator account.
+	// The Amazon Web Services account identifier of the account to designate as the
+	// Security Hub administrator account.
 	//
 	// This member is required.
 	AdminAccountId *string

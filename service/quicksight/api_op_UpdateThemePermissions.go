@@ -77,7 +77,7 @@ func (c *Client) UpdateThemePermissions(ctx context.Context, params *UpdateTheme
 
 type UpdateThemePermissionsInput struct {
 
-	// The ID of the AWS account that contains the theme.
+	// The ID of the Amazon Web Services account; that contains the theme.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -101,7 +101,7 @@ type UpdateThemePermissionsOutput struct {
 	// The resulting list of resource permissions for the theme.
 	Permissions []types.ResourcePermission
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

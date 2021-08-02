@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the status of an assessment in AWS Audit Manager.
+// Updates the status of an assessment in Audit Manager.
 func (c *Client) UpdateAssessmentStatus(ctx context.Context, params *UpdateAssessmentStatusInput, optFns ...func(*Options)) (*UpdateAssessmentStatusOutput, error) {
 	if params == nil {
 		params = &UpdateAssessmentStatusInput{}

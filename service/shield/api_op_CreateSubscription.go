@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates AWS Shield Advanced for an account. When you initally create a
+// Activates Shield Advanced for an account. When you initally create a
 // subscription, your subscription is set to be automatically renewed at the end of
 // the existing subscription period. You can change this by submitting an
 // UpdateSubscription request.

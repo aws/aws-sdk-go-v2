@@ -764,6 +764,22 @@ type DashboardSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Contains detailed error information.
+type DetailedError struct {
+
+	// The error code.
+	//
+	// This member is required.
+	Code DetailedErrorCode
+
+	// The error message.
+	//
+	// This member is required.
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
 // Contains the details of an IoT SiteWise error.
 type ErrorDetails struct {
 
@@ -776,6 +792,9 @@ type ErrorDetails struct {
 	//
 	// This member is required.
 	Message *string
+
+	// A list of detailed errors.
+	Details []DetailedError
 
 	noSmithyDocumentSerde
 }
@@ -792,6 +811,17 @@ type ExpressionVariable struct {
 	//
 	// This member is required.
 	Value *VariableValue
+
+	noSmithyDocumentSerde
+}
+
+// The forwarding configuration for a given property.
+type ForwardingConfig struct {
+
+	// The forwarding state for the given property.
+	//
+	// This member is required.
+	State ForwardingConfigState
 
 	noSmithyDocumentSerde
 }
@@ -829,9 +859,10 @@ type GatewayCapabilitySummary struct {
 type GatewayPlatform struct {
 
 	// A gateway that runs on IoT Greengrass.
-	//
-	// This member is required.
 	Greengrass *Greengrass
+
+	// A gateway that runs on IoT Greengrass V2.
+	GreengrassV2 *GreengrassV2
 
 	noSmithyDocumentSerde
 }
@@ -866,6 +897,9 @@ type GatewaySummary struct {
 	// (https://docs.aws.amazon.com/iot-sitewise/latest/APIReference/API_DescribeGatewayCapabilityConfiguration.html).
 	GatewayCapabilitySummaries []GatewayCapabilitySummary
 
+	// Contains a gateway's platform information.
+	GatewayPlatform *GatewayPlatform
+
 	noSmithyDocumentSerde
 }
 
@@ -889,6 +923,24 @@ type Greengrass struct {
 	//
 	// This member is required.
 	GroupArn *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains details for a gateway that runs on IoT Greengrass V2. To create a
+// gateway that runs on IoT Greengrass V2, you must deploy the IoT SiteWise Edge
+// component to your gateway device. Your Greengrass device role
+// (https://docs.aws.amazon.com/greengrass/v2/developerguide/device-service-role.html)
+// must use the AWSIoTSiteWiseEdgeAccess policy. For more information, see Using
+// IoT SiteWise at the edge
+// (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/sw-gateways.html) in
+// the IoT SiteWise User Guide.
+type GreengrassV2 struct {
+
+	// The name of the IoT thing for your IoT Greengrass V2 core device.
+	//
+	// This member is required.
+	CoreDeviceThingName *string
 
 	noSmithyDocumentSerde
 }
@@ -1040,6 +1092,25 @@ type LoggingOptions struct {
 // (https://docs.aws.amazon.com/iot-sitewise/latest/userguide/asset-properties.html#measurements)
 // in the IoT SiteWise User Guide.
 type Measurement struct {
+
+	// The processing configuration for the given measurement property. You can
+	// configure measurements to be kept at the edge or forwarded to the Amazon Web
+	// Services Cloud. By default, measurements are forwarded to the cloud.
+	ProcessingConfig *MeasurementProcessingConfig
+
+	noSmithyDocumentSerde
+}
+
+// The processing configuration for the given measurement property. You can
+// configure measurements to be kept at the edge or forwarded to the Amazon Web
+// Services Cloud. By default, measurements are forwarded to the cloud.
+type MeasurementProcessingConfig struct {
+
+	// The forwarding configuration for the given measurement property.
+	//
+	// This member is required.
+	ForwardingConfig *ForwardingConfig
+
 	noSmithyDocumentSerde
 }
 
@@ -1074,6 +1145,24 @@ type Metric struct {
 	//
 	// This member is required.
 	Window *MetricWindow
+
+	// The processing configuration for the given metric property. You can configure
+	// metrics to be computed at the edge or in the Amazon Web Services Cloud. By
+	// default, metrics are forwarded to the cloud.
+	ProcessingConfig *MetricProcessingConfig
+
+	noSmithyDocumentSerde
+}
+
+// The processing configuration for the given metric property. You can configure
+// metrics to be computed at the edge or in the Amazon Web Services Cloud. By
+// default, metrics are forwarded to the cloud.
+type MetricProcessingConfig struct {
+
+	// The compute location for the given metric property.
+	//
+	// This member is required.
+	ComputeLocation ComputeLocation
 
 	noSmithyDocumentSerde
 }
@@ -1392,6 +1481,27 @@ type Transform struct {
 	//
 	// This member is required.
 	Variables []ExpressionVariable
+
+	// The processing configuration for the given transform property. You can configure
+	// transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud.
+	// You can also configure transforms to be computed at the edge or in the cloud.
+	ProcessingConfig *TransformProcessingConfig
+
+	noSmithyDocumentSerde
+}
+
+// The processing configuration for the given transform property. You can configure
+// transforms to be kept at the edge or forwarded to the Amazon Web Services Cloud.
+// You can also configure transforms to be computed at the edge or in the cloud.
+type TransformProcessingConfig struct {
+
+	// The compute location for the given transform property.
+	//
+	// This member is required.
+	ComputeLocation ComputeLocation
+
+	// The forwarding configuration for a given property.
+	ForwardingConfig *ForwardingConfig
 
 	noSmithyDocumentSerde
 }

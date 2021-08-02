@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the datasets belonging to the current AWS account in an AWS Region.
-// The permissions resource is arn:aws:quicksight:region:aws-account-id:dataset/*.
+// Lists all of the datasets belonging to the current Amazon Web Services account;
+// in an Region;. The permissions resource is
+// arn:aws:quicksight:region:aws-account-id:dataset/*.
 func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, optFns ...func(*Options)) (*ListDataSetsOutput, error) {
 	if params == nil {
 		params = &ListDataSetsInput{}
@@ -31,7 +32,7 @@ func (c *Client) ListDataSets(ctx context.Context, params *ListDataSetsInput, op
 
 type ListDataSetsInput struct {
 
-	// The AWS account ID.
+	// The Amazon Web Services account; ID.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -53,7 +54,7 @@ type ListDataSetsOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

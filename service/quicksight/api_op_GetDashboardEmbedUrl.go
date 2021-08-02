@@ -31,7 +31,10 @@ import (
 // For more information, see
 // Embedded Analytics
 // (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html) in
-// the Amazon QuickSight User Guide.
+// the Amazon QuickSight User Guide. For more information about the high-level
+// steps for embedding and for an interactive demo of the ways you can customize
+// embedding, visit the Amazon QuickSight Developer Portal
+// (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).
 func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardEmbedUrlInput, optFns ...func(*Options)) (*GetDashboardEmbedUrlOutput, error) {
 	if params == nil {
 		params = &GetDashboardEmbedUrlInput{}
@@ -49,13 +52,14 @@ func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardE
 
 type GetDashboardEmbedUrlInput struct {
 
-	// The ID for the AWS account that contains the dashboard that you're embedding.
+	// The ID for the Amazon Web Services account; that contains the dashboard that
+	// you're embedding.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dashboard, also added to the AWS Identity and Access Management
-	// (IAM) policy.
+	// The ID for the dashboard, also added to the Identity and Access Management (IAM)
+	// policy.
 	//
 	// This member is required.
 	DashboardId *string
@@ -72,8 +76,8 @@ type GetDashboardEmbedUrlInput struct {
 	// dash_id3 identity-type ANONYMOUS", the session can access all three dashboards.
 	AdditionalDashboardIds []string
 
-	// The QuickSight namespace that contains the dashboard IDs in this request. If
-	// you're not using a custom namespace, set this to "default".
+	// The Amazon QuickSight namespace that the user virtually belongs to. If you are
+	// not using an Amazon QuickSight custom namespace, set this to default.
 	Namespace *string
 
 	// Remove the reset button on the embedded dashboard. The default is FALSE, which
@@ -126,7 +130,7 @@ type GetDashboardEmbedUrlOutput struct {
 	// session that is valid for 10 hours.
 	EmbedUrl *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

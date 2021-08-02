@@ -16,7 +16,12 @@ type AttackDetail struct {
 	// The unique identifier (ID) of the attack.
 	AttackId *string
 
-	// The array of AttackProperty objects.
+	// The array of objects that provide details of the Shield event. For
+	// infrastructure layer events (L3 and L4 events) after January 25, 2021, you can
+	// view metrics for top contributors in Amazon CloudWatch metrics. For more
+	// information, see Shield metrics and alarms
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
+	// in the WAF Developer Guide.
 	AttackProperties []AttackProperty
 
 	// The time the attack ended, in Unix time in seconds. For more information see
@@ -42,28 +47,30 @@ type AttackDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Details of the described attack.
+// Details of a Shield event. This is provided as part of an AttackDetail.
 type AttackProperty struct {
 
-	// The type of distributed denial of service (DDoS) event that was observed.
-	// NETWORK indicates layer 3 and layer 4 events and APPLICATION indicates layer 7
-	// events.
+	// The type of Shield event that was observed. NETWORK indicates layer 3 and layer
+	// 4 events and APPLICATION indicates layer 7 events. For infrastructure layer
+	// events (L3 and L4 events) after January 25, 2021, you can view metrics for top
+	// contributors in Amazon CloudWatch metrics. For more information, see Shield
+	// metrics and alarms
+	// (https://docs.aws.amazon.com/waf/latest/developerguide/monitoring-cloudwatch.html#set-ddos-alarms)
+	// in the WAF Developer Guide.
 	AttackLayer AttackLayer
 
-	// Defines the DDoS attack property information that is provided. The
+	// Defines the Shield event property information that is provided. The
 	// WORDPRESS_PINGBACK_REFLECTOR and WORDPRESS_PINGBACK_SOURCE values are valid only
-	// for WordPress reflective pingback DDoS attacks.
+	// for WordPress reflective pingback events.
 	AttackPropertyIdentifier AttackPropertyIdentifier
 
-	// The array of contributor objects that includes the top five contributors to an
-	// attack.
+	// Contributor objects for the top five contributors to a Shield event.
 	TopContributors []Contributor
 
-	// The total contributions made to this attack by all contributors, not just the
-	// five listed in the TopContributors list.
+	// The total contributions made to this Shield event by all contributors.
 	Total int64
 
-	// The unit of the Value of the contributions.
+	// The unit used for the ContributorValue property.
 	Unit Unit
 
 	noSmithyDocumentSerde
@@ -211,8 +218,8 @@ type Contributor struct {
 	noSmithyDocumentSerde
 }
 
-// Contact information that the DRT can use to contact you if you have proactive
-// engagement enabled, for escalations to the DRT and to initiate proactive
+// Contact information that the SRT can use to contact you if you have proactive
+// engagement enabled, for escalations to the SRT and to initiate proactive
 // customer support.
 type EmergencyContact struct {
 
@@ -267,18 +274,19 @@ type Protection struct {
 	// The ARN (Amazon Resource Name) of the protection.
 	ProtectionArn *string
 
-	// The ARN (Amazon Resource Name) of the AWS resource that is protected.
+	// The ARN (Amazon Resource Name) of the Amazon Web Services resource that is
+	// protected.
 	ResourceArn *string
 
 	noSmithyDocumentSerde
 }
 
-// A grouping of protected resources that you and AWS Shield Advanced can monitor
-// as a collective. This resource grouping improves the accuracy of detection and
+// A grouping of protected resources that you and Shield Advanced can monitor as a
+// collective. This resource grouping improves the accuracy of detection and
 // reduces false positives.
 type ProtectionGroup struct {
 
-	// Defines how AWS Shield combines resource data for the group in order to detect,
+	// Defines how Shield combines resource data for the group in order to detect,
 	// mitigate, and report events.
 	//
 	// * Sum - Use the total traffic across the group.
@@ -292,7 +300,7 @@ type ProtectionGroup struct {
 	// * Max -
 	// Use the highest traffic from each resource. This is useful for resources that
 	// don't share traffic and for resources that share that traffic in a non-uniform
-	// way. Examples include CloudFront distributions and origin resources for
+	// way. Examples include Amazon CloudFront distributions and origin resources for
 	// CloudFront distributions.
 	//
 	// This member is required.
@@ -400,7 +408,7 @@ type SubResourceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the AWS Shield Advanced subscription for an account.
+// Information about the Shield Advanced subscription for an account.
 type Subscription struct {
 
 	// Limits settings for your subscription.
@@ -421,11 +429,11 @@ type Subscription struct {
 	// Specifies how many protections of a given type you can create.
 	Limits []Limit
 
-	// If ENABLED, the DDoS Response Team (DRT) will use email and phone to notify
-	// contacts about escalations to the DRT and to initiate proactive customer
+	// If ENABLED, the Shield Response Team (SRT) will use email and phone to notify
+	// contacts about escalations to the SRT and to initiate proactive customer
 	// support. If PENDING, you have requested proactive engagement and the request is
 	// pending. The status changes to ENABLED when your request is fully processed. If
-	// DISABLED, the DRT will not proactively notify contacts about escalations or to
+	// DISABLED, the SRT will not proactively notify contacts about escalations or to
 	// initiate proactive customer support.
 	ProactiveEngagementStatus ProactiveEngagementStatus
 
@@ -437,7 +445,7 @@ type Subscription struct {
 	// The ARN (Amazon Resource Name) of the subscription.
 	SubscriptionArn *string
 
-	// The length, in seconds, of the AWS Shield Advanced subscription for the account.
+	// The length, in seconds, of the Shield Advanced subscription for the account.
 	TimeCommitmentInSeconds int64
 
 	noSmithyDocumentSerde
@@ -497,13 +505,14 @@ type SummarizedCounter struct {
 	noSmithyDocumentSerde
 }
 
-// A tag associated with an AWS resource. Tags are key:value pairs that you can use
-// to categorize and manage your resources, for purposes like billing or other
-// management. Typically, the tag key represents a category, such as "environment",
-// and the tag value represents a specific value within that category, such as
-// "test," "development," or "production". Or you might set the tag key to
-// "customer" and the value to the customer name or ID. You can specify one or more
-// tags to add to each AWS resource, up to 50 tags for a resource.
+// A tag associated with an Amazon Web Services resource. Tags are key:value pairs
+// that you can use to categorize and manage your resources, for purposes like
+// billing or other management. Typically, the tag key represents a category, such
+// as "environment", and the tag value represents a specific value within that
+// category, such as "test," "development," or "production". Or you might set the
+// tag key to "customer" and the value to the customer name or ID. You can specify
+// one or more tags to add to each Amazon Web Services resource, up to 50 tags for
+// a resource.
 type Tag struct {
 
 	// Part of the key:value pair that defines a tag. You can use a tag key to describe

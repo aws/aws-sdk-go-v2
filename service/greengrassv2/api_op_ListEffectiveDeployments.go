@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of deployment jobs that AWS IoT Greengrass sends to
-// AWS IoT Greengrass core devices.
+// Retrieves a paginated list of deployment jobs that IoT Greengrass sends to
+// Greengrass core devices.
 func (c *Client) ListEffectiveDeployments(ctx context.Context, params *ListEffectiveDeploymentsInput, optFns ...func(*Options)) (*ListEffectiveDeploymentsOutput, error) {
 	if params == nil {
 		params = &ListEffectiveDeploymentsInput{}
@@ -31,7 +31,7 @@ func (c *Client) ListEffectiveDeployments(ctx context.Context, params *ListEffec
 
 type ListEffectiveDeploymentsInput struct {
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	//
 	// This member is required.
 	CoreDeviceThingName *string

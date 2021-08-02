@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the latest device positions for requested devices.
+// A batch request to retrieve all device positions.
 func (c *Client) ListDevicePositions(ctx context.Context, params *ListDevicePositionsInput, optFns ...func(*Options)) (*ListDevicePositionsOutput, error) {
 	if params == nil {
 		params = &ListDevicePositionsInput{}

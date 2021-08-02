@@ -12,10 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of the secrets that are stored by Secrets Manager in the AWS account.
-// To list the versions currently stored for a specific secret, use
-// ListSecretVersionIds. The encrypted fields SecretString and SecretBinary are not
-// included in the output. To get that information, call the GetSecretValue
+// Lists all of the secrets that are stored by Secrets Manager in the Amazon Web
+// Services account. To list the versions currently stored for a specific secret,
+// use ListSecretVersionIds. The encrypted fields SecretString and SecretBinary are
+// not included in the output. To get that information, call the GetSecretValue
 // operation. Always check the NextToken response parameter when calling any of the
 // List* operations. These operations can occasionally return an empty or shorter
 // than expected list of results even when there more results become available.

@@ -35,8 +35,9 @@ type UpdateAnalysisPermissionsInput struct {
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the AWS account that contains the analysis whose permissions you're
-	// updating. You must be using the AWS account that the analysis is in.
+	// The ID of the Amazon Web Services account; that contains the analysis whose
+	// permissions you're updating. You must be using the Amazon Web Services account;
+	// that the analysis is in.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -64,7 +65,7 @@ type UpdateAnalysisPermissionsOutput struct {
 	// an analysis.
 	Permissions []types.ResourcePermission
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

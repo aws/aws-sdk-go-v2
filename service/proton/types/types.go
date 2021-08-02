@@ -92,7 +92,7 @@ type Environment struct {
 	// This member is required.
 	TemplateMinorVersion *string
 
-	// The ARN of the environment template.
+	// The Amazon Resource Name (ARN) of the environment template.
 	//
 	// This member is required.
 	TemplateName *string
@@ -111,8 +111,8 @@ type Environment struct {
 	// are provisioned in.
 	EnvironmentAccountId *string
 
-	// The ARN of the AWS Proton service role that allows AWS Proton to make calls to
-	// other services on your behalf.
+	// The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS
+	// Proton to make calls to other services on your behalf.
 	ProtonServiceRoleArn *string
 
 	// When included, indicates that the environment template is for customer
@@ -296,8 +296,8 @@ type EnvironmentSummary struct {
 	// are provisioned in.
 	EnvironmentAccountId *string
 
-	// The ARN of the AWS Proton service role that allows AWS Proton to make calls to
-	// other services on your behalf.
+	// The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS
+	// Proton to make calls to other services on your behalf.
 	ProtonServiceRoleArn *string
 
 	// When included, indicates that the environment template is for customer
@@ -577,11 +577,11 @@ type Service struct {
 	// The service pipeline detail data.
 	Pipeline *ServicePipeline
 
-	// The ARN of the repository connection. For more information, see Set up a
-	// repository connection
+	// The Amazon Resource Name (ARN) of the repository connection. For more
+	// information, see Set up a repository connection
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol)
-	// in the AWS Proton Administration Guide and Getting started
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ug-getting-started.html#getting-started-step1)
+	// in the AWS Proton Administrator Guide and Setting up with AWS Proton
+	// (https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection)
 	// in the AWS Proton User Guide.
 	RepositoryConnectionArn *string
 

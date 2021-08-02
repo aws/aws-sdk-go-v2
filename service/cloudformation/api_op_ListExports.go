@@ -16,8 +16,7 @@ import (
 // this action. Use this action to see the exported output values that you can
 // import into other stacks. To import values, use the Fn::ImportValue
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html)
-// function. For more information, see  AWS CloudFormation Export Stack Output
-// Values
+// function. For more information, see  CloudFormation Export Stack Output Values
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html).
 func (c *Client) ListExports(ctx context.Context, params *ListExportsInput, optFns ...func(*Options)) (*ListExportsOutput, error) {
 	if params == nil {

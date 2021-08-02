@@ -5090,6 +5090,15 @@ func awsRestjson1_deserializeDocumentJobSummary(v **types.JobSummary, value inte
 				sv.JobArn = ptr.String(jtv)
 			}
 
+		case "jobDefinition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.JobDefinition = ptr.String(jtv)
+			}
+
 		case "jobId":
 			if value != nil {
 				jtv, ok := value.(string)

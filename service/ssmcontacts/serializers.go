@@ -1476,6 +1476,11 @@ func awsAwsjson11_serializeOpDocumentAcceptPageInput(v *AcceptPageInput, value s
 		ok.String(*v.AcceptCode)
 	}
 
+	if len(v.AcceptCodeValidation) > 0 {
+		ok := object.Key("AcceptCodeValidation")
+		ok.String(string(v.AcceptCodeValidation))
+	}
+
 	if len(v.AcceptType) > 0 {
 		ok := object.Key("AcceptType")
 		ok.String(string(v.AcceptType))

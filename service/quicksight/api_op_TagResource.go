@@ -29,7 +29,7 @@ import (
 // taggable resources.
 //
 // * QuickSight doesn't currently support the Tag Editor for
-// AWS Resource Groups.
+// Resource Groups.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -63,7 +63,7 @@ type TagResourceInput struct {
 
 type TagResourceOutput struct {
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

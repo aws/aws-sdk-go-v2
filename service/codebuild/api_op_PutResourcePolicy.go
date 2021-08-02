@@ -32,7 +32,7 @@ type PutResourcePolicyInput struct {
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/project-sharing.html#project-sharing-share)
 	// and Sharing a Report Group
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/report-groups-sharing.html#report-groups-sharing-share)
-	// in the CodeBuild User Guide.
+	// in the AWS CodeBuild User Guide.
 	//
 	// This member is required.
 	Policy *string

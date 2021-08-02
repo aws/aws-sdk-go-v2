@@ -4,6 +4,7 @@ package greengrassv2
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/greengrassv2/types"
@@ -11,19 +12,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a continuous deployment for a target, which is a AWS IoT Greengrass core
-// device or group of core devices. When you add a new core device to a group of
-// core devices that has a deployment, AWS IoT Greengrass deploys that group's
-// deployment to the new device. You can define one deployment for each target.
-// When you create a new deployment for a target that has an existing deployment,
-// you replace the previous deployment. AWS IoT Greengrass applies the new
-// deployment to the target devices. Every deployment has a revision number that
-// indicates how many deployment revisions you define for a target. Use this
-// operation to create a new revision of an existing deployment. This operation
-// returns the revision number of the new deployment when you create it. For more
-// information, see the Create deployments
+// Creates a continuous deployment for a target, which is a Greengrass core device
+// or group of core devices. When you add a new core device to a group of core
+// devices that has a deployment, IoT Greengrass deploys that group's deployment to
+// the new device. You can define one deployment for each target. When you create a
+// new deployment for a target that has an existing deployment, you replace the
+// previous deployment. IoT Greengrass applies the new deployment to the target
+// devices. Every deployment has a revision number that indicates how many
+// deployment revisions you define for a target. Use this operation to create a new
+// revision of an existing deployment. This operation returns the revision number
+// of the new deployment when you create it. For more information, see the Create
+// deployments
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
-// in the AWS IoT Greengrass V2 Developer Guide.
+// in the IoT Greengrass V2 Developer Guide.
 func (c *Client) CreateDeployment(ctx context.Context, params *CreateDeploymentInput, optFns ...func(*Options)) (*CreateDeploymentOutput, error) {
 	if params == nil {
 		params = &CreateDeploymentInput{}
@@ -43,20 +44,26 @@ type CreateDeploymentInput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target AWS IoT thing or thing group.
+	// the target IoT thing or thing group.
 	//
 	// This member is required.
 	TargetArn *string
+
+	// A unique, case-sensitive identifier that you can provide to ensure that the
+	// request is idempotent. Idempotency means that the request is successfully
+	// processed only once, even if you send the request multiple times. When a request
+	// succeeds, and you specify the same client token for subsequent successful
+	// requests, the IoT Greengrass V2 service returns the successful response that it
+	// caches from the previous request. IoT Greengrass V2 caches successful responses
+	// for idempotent requests for up to 8 hours.
+	ClientToken *string
 
 	// The components to deploy. This is a dictionary, where each key is the name of a
 	// component, and each key's value is the version and configuration to deploy for
 	// that component.
 	Components map[string]types.ComponentDeploymentSpecification
 
-	// The name of the deployment. You can create deployments without names. If you
-	// create a deployment without a name, the AWS IoT Greengrass V2 console shows the
-	// deployment name as :, where targetType and targetName are the type and name of
-	// the deployment target.
+	// The name of the deployment.
 	DeploymentName *string
 
 	// The deployment policies for the deployment. These policies define how the
@@ -71,7 +78,7 @@ type CreateDeploymentInput struct {
 	// A list of key-value pairs that contain metadata for the resource. For more
 	// information, see Tag your resources
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the AWS IoT Greengrass V2 Developer Guide.
+	// the IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 
 	noSmithyDocumentSerde
@@ -84,10 +91,10 @@ type CreateDeploymentOutput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the AWS IoT job that applies the deployment to target devices.
+	// the IoT job that applies the deployment to target devices.
 	IotJobArn *string
 
-	// The ID of the AWS IoT job that applies the deployment to target devices.
+	// The ID of the IoT job that applies the deployment to target devices.
 	IotJobId *string
 
 	// Metadata pertaining to the operation's result.
@@ -141,6 +148,9 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addIdempotencyToken_opCreateDeploymentMiddleware(stack, options); err != nil {
+		return err
+	}
 	if err = addOpCreateDeploymentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -157,6 +167,39 @@ func (c *Client) addOperationCreateDeploymentMiddlewares(stack *middleware.Stack
 		return err
 	}
 	return nil
+}
+
+type idempotencyToken_initializeOpCreateDeployment struct {
+	tokenProvider IdempotencyTokenProvider
+}
+
+func (*idempotencyToken_initializeOpCreateDeployment) ID() string {
+	return "OperationIdempotencyTokenAutoFill"
+}
+
+func (m *idempotencyToken_initializeOpCreateDeployment) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	if m.tokenProvider == nil {
+		return next.HandleInitialize(ctx, in)
+	}
+
+	input, ok := in.Parameters.(*CreateDeploymentInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("expected middleware input to be of type *CreateDeploymentInput ")
+	}
+
+	if input.ClientToken == nil {
+		t, err := m.tokenProvider.GetIdempotencyToken()
+		if err != nil {
+			return out, metadata, err
+		}
+		input.ClientToken = &t
+	}
+	return next.HandleInitialize(ctx, in)
+}
+func addIdempotencyToken_opCreateDeploymentMiddleware(stack *middleware.Stack, cfg Options) error {
+	return stack.Initialize.Add(&idempotencyToken_initializeOpCreateDeployment{tokenProvider: cfg.IdempotencyTokenProvider}, middleware.Before)
 }
 
 func newServiceMetadataMiddleware_opCreateDeployment(region string) *awsmiddleware.RegisterServiceMetadata {

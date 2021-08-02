@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates a list of evidence from the specified assessment report in AWS
-// Audit Manager.
+// Disassociates a list of evidence from the specified assessment report in Audit
+// Manager.
 func (c *Client) BatchDisassociateAssessmentReportEvidence(ctx context.Context, params *BatchDisassociateAssessmentReportEvidenceInput, optFns ...func(*Options)) (*BatchDisassociateAssessmentReportEvidenceOutput, error) {
 	if params == nil {
 		params = &BatchDisassociateAssessmentReportEvidenceInput{}

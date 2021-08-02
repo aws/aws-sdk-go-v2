@@ -26,7 +26,7 @@ import (
 // Both routes apply to the traffic destined for 192.0.2.3. However, the
 // second route in the list covers a smaller number of IP addresses and is
 // therefore more specific, so we use that route to determine where to target the
-// traffic. For more information about route tables, see Route Tables
+// traffic. For more information about route tables, see Route tables
 // (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
 // Amazon Virtual Private Cloud User Guide.
 func (c *Client) CreateRoute(ctx context.Context, params *CreateRouteInput, optFns ...func(*Options)) (*CreateRouteOutput, error) {

@@ -44,7 +44,8 @@ func (c *Client) GetSessionEmbedUrl(ctx context.Context, params *GetSessionEmbed
 
 type GetSessionEmbedUrlInput struct {
 
-	// The ID for the AWS account associated with your QuickSight subscription.
+	// The ID for the Amazon Web Services account; associated with your QuickSight
+	// subscription.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -83,7 +84,7 @@ type GetSessionEmbedUrlInput struct {
 	// * Invited
 	// nonfederated users
 	//
-	// * AWS Identity and Access Management (IAM) users and IAM
+	// * Identity and Access Management (IAM) users and IAM
 	// role-based sessions authenticated through Federated Single Sign-On using SAML,
 	// OpenID Connect, or IAM federation
 	//
@@ -102,7 +103,7 @@ type GetSessionEmbedUrlOutput struct {
 	// user session that is valid for 10 hours.
 	EmbedUrl *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

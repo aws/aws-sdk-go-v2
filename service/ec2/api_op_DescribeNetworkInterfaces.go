@@ -120,47 +120,47 @@ type DescribeNetworkInterfacesInput struct {
 	// * network-interface-id - The ID of the network interface.
 	//
 	// *
-	// owner-id - The account ID of the network interface owner.
-	//
-	// * private-ip-address
-	// - The private IPv4 address or addresses of the network interface.
+	// owner-id - The Amazon Web Services account ID of the network interface owner.
 	//
 	// *
-	// private-dns-name - The private DNS name of the network interface (IPv4).
-	//
-	// *
-	// requester-id - The alias or account ID of the principal or service that created
-	// the network interface.
-	//
-	// * requester-managed - Indicates whether the network
-	// interface is being managed by an Amazon Web Service (for example, Management
-	// Console, Auto Scaling, and so on).
-	//
-	// * source-dest-check - Indicates whether the
-	// network interface performs source/destination checking. A value of true means
-	// checking is enabled, and false means checking is disabled. The value must be
-	// false for the network interface to perform network address translation (NAT) in
-	// your VPC.
-	//
-	// * status - The status of the network interface. If the network
-	// interface is not attached to an instance, the status is available; if a network
-	// interface is attached to an instance the status is in-use.
-	//
-	// * subnet-id - The ID
-	// of the subnet for the network interface.
-	//
-	// * tag: - The key/value combination of
-	// a tag assigned to the resource. Use the tag key in the filter name and the tag
-	// value as the filter value. For example, to find all resources that have a tag
-	// with the key Owner and the value TeamA, specify tag:Owner for the filter name
-	// and TeamA for the filter value.
-	//
-	// * tag-key - The key of a tag assigned to the
-	// resource. Use this filter to find all resources assigned a tag with a specific
-	// key, regardless of the tag value.
-	//
-	// * vpc-id - The ID of the VPC for the network
+	// private-ip-address - The private IPv4 address or addresses of the network
 	// interface.
+	//
+	// * private-dns-name - The private DNS name of the network interface
+	// (IPv4).
+	//
+	// * requester-id - The alias or Amazon Web Services account ID of the
+	// principal or service that created the network interface.
+	//
+	// * requester-managed -
+	// Indicates whether the network interface is being managed by an Amazon Web
+	// Service (for example, Amazon Web Services Management Console, Auto Scaling, and
+	// so on).
+	//
+	// * source-dest-check - Indicates whether the network interface performs
+	// source/destination checking. A value of true means checking is enabled, and
+	// false means checking is disabled. The value must be false for the network
+	// interface to perform network address translation (NAT) in your VPC.
+	//
+	// * status -
+	// The status of the network interface. If the network interface is not attached to
+	// an instance, the status is available; if a network interface is attached to an
+	// instance the status is in-use.
+	//
+	// * subnet-id - The ID of the subnet for the
+	// network interface.
+	//
+	// * tag: - The key/value combination of a tag assigned to the
+	// resource. Use the tag key in the filter name and the tag value as the filter
+	// value. For example, to find all resources that have a tag with the key Owner and
+	// the value TeamA, specify tag:Owner for the filter name and TeamA for the filter
+	// value.
+	//
+	// * tag-key - The key of a tag assigned to the resource. Use this filter
+	// to find all resources assigned a tag with a specific key, regardless of the tag
+	// value.
+	//
+	// * vpc-id - The ID of the VPC for the network interface.
 	Filters []types.Filter
 
 	// The maximum number of items to return for this request. The request returns a

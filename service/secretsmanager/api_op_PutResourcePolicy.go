@@ -16,10 +16,11 @@ import (
 // the policy statement's Resources element. You can also use a combination of both
 // identity-based and resource-based policies. The affected users and roles receive
 // the permissions that are permitted by all of the relevant policies. For more
-// information, see Using Resource-Based Policies for AWS Secrets Manager
+// information, see Using Resource-Based Policies for Amazon Web Services Secrets
+// Manager
 // (http://docs.aws.amazon.com/secretsmanager/latest/userguide/auth-and-access_resource-based-policies.html).
-// For the complete description of the AWS policy syntax and grammar, see IAM JSON
-// Policy Reference
+// For the complete description of the Amazon Web Services policy syntax and
+// grammar, see IAM JSON Policy Reference
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
 // the IAM User Guide. Minimum permissions To run this command, you must have the
 // following permissions:
@@ -55,12 +56,12 @@ func (c *Client) PutResourcePolicy(ctx context.Context, params *PutResourcePolic
 type PutResourcePolicyInput struct {
 
 	// A JSON-formatted string constructed according to the grammar and syntax for an
-	// AWS resource-based policy. The policy in the string identifies who can access or
-	// manage this secret and its versions. For information on how to format a JSON
-	// parameter for the various command line tool environments, see Using JSON for
-	// Parameters
+	// Amazon Web Services resource-based policy. The policy in the string identifies
+	// who can access or manage this secret and its versions. For information on how to
+	// format a JSON parameter for the various command line tool environments, see
+	// Using JSON for Parameters
 	// (http://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide.
+	// in the CLI User Guide.
 	//
 	// This member is required.
 	ResourcePolicy *string

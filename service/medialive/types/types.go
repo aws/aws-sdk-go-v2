@@ -269,6 +269,23 @@ type AudioDescription struct {
 	noSmithyDocumentSerde
 }
 
+// Audio Hls Rendition Selection
+type AudioHlsRenditionSelection struct {
+
+	// Specifies the GROUP-ID in the #EXT-X-MEDIA tag of the target HLS audio
+	// rendition.
+	//
+	// This member is required.
+	GroupId *string
+
+	// Specifies the NAME in the #EXT-X-MEDIA tag of the target HLS audio rendition.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Audio Language Selection
 type AudioLanguageSelection struct {
 
@@ -368,6 +385,9 @@ type AudioSelector struct {
 
 // Audio Selector Settings
 type AudioSelectorSettings struct {
+
+	// Audio Hls Rendition Selection
+	AudioHlsRenditionSelection *AudioHlsRenditionSelection
 
 	// Audio Language Selection
 	AudioLanguageSelection *AudioLanguageSelection
@@ -5427,6 +5447,13 @@ type WavSettings struct {
 
 // Webvtt Destination Settings
 type WebvttDestinationSettings struct {
+
+	// Controls whether the color and position of the source captions is passed through
+	// to the WebVTT output captions. PASSTHROUGH - Valid only if the source captions
+	// are EMBEDDED or TELETEXT. NO_STYLE_DATA - Don't pass through the style. The
+	// output captions will not contain any font styling information.
+	StyleControl WebvttDestinationStyleControl
+
 	noSmithyDocumentSerde
 }
 

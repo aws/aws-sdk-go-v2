@@ -4,6 +4,7 @@ package iotsitewise
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/iotsitewise/types"
@@ -13,6 +14,9 @@ import (
 )
 
 // Retrieves information about the storage configuration for IoT SiteWise.
+// Exporting data to Amazon S3 is currently in preview release and is subject to
+// change. We recommend that you use this feature only with test data, and not in
+// production environments.
 func (c *Client) DescribeStorageConfiguration(ctx context.Context, params *DescribeStorageConfigurationInput, optFns ...func(*Options)) (*DescribeStorageConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeStorageConfigurationInput{}
@@ -109,6 +113,9 @@ func (c *Client) addOperationDescribeStorageConfigurationMiddlewares(stack *midd
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opDescribeStorageConfigurationMiddleware(stack); err != nil {
+		return err
+	}
 	if err = stack.Initialize.Add(newServiceMetadataMiddleware_opDescribeStorageConfiguration(options.Region), middleware.Before); err != nil {
 		return err
 	}
@@ -122,6 +129,33 @@ func (c *Client) addOperationDescribeStorageConfigurationMiddlewares(stack *midd
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opDescribeStorageConfigurationMiddleware struct {
+}
+
+func (*endpointPrefix_opDescribeStorageConfigurationMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opDescribeStorageConfigurationMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opDescribeStorageConfigurationMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opDescribeStorageConfigurationMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opDescribeStorageConfiguration(region string) *awsmiddleware.RegisterServiceMetadata {

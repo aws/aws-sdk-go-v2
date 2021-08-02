@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables AWS Audit Manager for the specified AWS account.
+// Enables Audit Manager for the specified account.
 func (c *Client) RegisterAccount(ctx context.Context, params *RegisterAccountInput, optFns ...func(*Options)) (*RegisterAccountOutput, error) {
 	if params == nil {
 		params = &RegisterAccountInput{}
@@ -29,10 +29,10 @@ func (c *Client) RegisterAccount(ctx context.Context, params *RegisterAccountInp
 
 type RegisterAccountInput struct {
 
-	// The delegated administrator account for AWS Audit Manager.
+	// The delegated administrator account for Audit Manager.
 	DelegatedAdminAccount *string
 
-	// The AWS KMS key details.
+	// The KMS key details.
 	KmsKey *string
 
 	noSmithyDocumentSerde

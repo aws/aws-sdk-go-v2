@@ -29,13 +29,13 @@ func (c *Client) CreateDataSet(ctx context.Context, params *CreateDataSetInput, 
 
 type CreateDataSetInput struct {
 
-	// The AWS account ID.
+	// The Amazon Web Services account; ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// An ID for the dataset that you want to create. This ID is unique per AWS Region
-	// for each AWS account.
+	// An ID for the dataset that you want to create. This ID is unique per Region; for
+	// each Amazon Web Services account;.
 	//
 	// This member is required.
 	DataSetId *string
@@ -75,6 +75,10 @@ type CreateDataSetInput struct {
 	// The row-level security configuration for the data that you want to create.
 	RowLevelPermissionDataSet *types.RowLevelPermissionDataSet
 
+	// The configuration of tags on a dataset to set row-level security. Row-level
+	// security tags are currently supported for anonymous embedding only.
+	RowLevelPermissionTagConfiguration *types.RowLevelPermissionTagConfiguration
+
 	// Contains a map of the key-value pairs for the resource tag or tags assigned to
 	// the dataset.
 	Tags []types.Tag
@@ -87,8 +91,8 @@ type CreateDataSetOutput struct {
 	// The Amazon Resource Name (ARN) of the dataset.
 	Arn *string
 
-	// The ID for the dataset that you want to create. This ID is unique per AWS Region
-	// for each AWS account.
+	// The ID for the dataset that you want to create. This ID is unique per Region;
+	// for each Amazon Web Services account;.
 	DataSetId *string
 
 	// The ARN for the ingestion, which is triggered as a result of dataset creation if
@@ -99,7 +103,7 @@ type CreateDataSetOutput struct {
 	// the import mode is SPICE.
 	IngestionId *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

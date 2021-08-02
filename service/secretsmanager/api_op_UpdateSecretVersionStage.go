@@ -17,24 +17,24 @@ import (
 // then it is moved--removed from the other version first and then attached to this
 // one. For more information about staging labels, see Staging Labels
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/terms-concepts.html#term_staging-label)
-// in the AWS Secrets Manager User Guide. The staging labels that you specify in
-// the VersionStage parameter are added to the existing list of staging
-// labels--they don't replace it. You can move the AWSCURRENT staging label to this
-// version by including it in this call. Whenever you move AWSCURRENT, Secrets
-// Manager automatically moves the label AWSPREVIOUS to the version that AWSCURRENT
-// was removed from. If this action results in the last label being removed from a
-// version, then the version is considered to be 'deprecated' and can be deleted by
-// Secrets Manager. Minimum permissions To run this command, you must have the
-// following permissions:
+// in the Amazon Web Services Secrets Manager User Guide. The staging labels that
+// you specify in the VersionStage parameter are added to the existing list of
+// staging labels--they don't replace it. You can move the AWSCURRENT staging label
+// to this version by including it in this call. Whenever you move AWSCURRENT,
+// Secrets Manager automatically moves the label AWSPREVIOUS to the version that
+// AWSCURRENT was removed from. If this action results in the last label being
+// removed from a version, then the version is considered to be 'deprecated' and
+// can be deleted by Secrets Manager. Minimum permissions To run this command, you
+// must have the following permissions:
 //
-// * secretsmanager:UpdateSecretVersionStage
+// *
+// secretsmanager:UpdateSecretVersionStage
 //
-// Related
-// operations
+// Related operations
 //
-// * To get the list of staging labels that are currently associated
-// with a version of a secret, use DescribeSecret and examine the
-// SecretVersionsToStages response value.
+// * To get the list
+// of staging labels that are currently associated with a version of a secret, use
+// DescribeSecret and examine the SecretVersionsToStages response value.
 func (c *Client) UpdateSecretVersionStage(ctx context.Context, params *UpdateSecretVersionStageInput, optFns ...func(*Options)) (*UpdateSecretVersionStageOutput, error) {
 	if params == nil {
 		params = &UpdateSecretVersionStageInput{}

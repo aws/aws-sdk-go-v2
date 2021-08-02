@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Remove log-level override if any for a specific resource-ID and resource-type,
-// could be a wireless device or a wireless gateway.
+// Removes the log-level override, if any, for a specific resource-ID and
+// resource-type. It can be used for a wireless device or a wireless gateway.
 func (c *Client) ResetResourceLogLevel(ctx context.Context, params *ResetResourceLogLevelInput, optFns ...func(*Options)) (*ResetResourceLogLevelOutput, error) {
 	if params == nil {
 		params = &ResetResourceLogLevelInput{}
@@ -30,12 +30,12 @@ func (c *Client) ResetResourceLogLevel(ctx context.Context, params *ResetResourc
 type ResetResourceLogLevelInput struct {
 
 	// The identifier of the resource. For a Wireless Device, it is the wireless device
-	// id. For a wireless gateway, it is the wireless gateway id.
+	// ID. For a wireless gateway, it is the wireless gateway ID.
 	//
 	// This member is required.
 	ResourceIdentifier *string
 
-	// The type of the resource, currently support WirelessDevice and WirelessGateway.
+	// The type of the resource, which can be WirelessDevice or WirelessGateway.
 	//
 	// This member is required.
 	ResourceType *string

@@ -78,7 +78,7 @@ type SecretListEntry struct {
 	// The Amazon Resource Name (ARN) of the secret. For more information about ARNs in
 	// Secrets Manager, see Policy Resources
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_iam-permissions.html#iam-resources)
-	// in the AWS Secrets Manager User Guide.
+	// in the Amazon Web Services Secrets Manager User Guide.
 	ARN *string
 
 	// The date and time when a secret was created.
@@ -93,10 +93,11 @@ type SecretListEntry struct {
 	// The user-provided description of the secret.
 	Description *string
 
-	// The ARN or alias of the AWS KMS customer master key (CMK) used to encrypt the
-	// SecretString and SecretBinary fields in each version of the secret. If you don't
-	// provide a key, then Secrets Manager defaults to encrypting the secret fields
-	// with the default KMS CMK, the key named awssecretsmanager, for this account.
+	// The ARN or alias of the Amazon Web Services KMS customer master key (CMK) used
+	// to encrypt the SecretString and SecretBinary fields in each version of the
+	// secret. If you don't provide a key, then Secrets Manager defaults to encrypting
+	// the secret fields with the default KMS CMK, the key named awssecretsmanager, for
+	// this account.
 	KmsKeyId *string
 
 	// The last date that this secret was accessed. This value is truncated to midnight
@@ -125,9 +126,9 @@ type SecretListEntry struct {
 	// Indicates whether automatic, scheduled rotation is enabled for this secret.
 	RotationEnabled bool
 
-	// The ARN of an AWS Lambda function invoked by Secrets Manager to rotate and
-	// expire the secret either automatically per the schedule or manually by a call to
-	// RotateSecret.
+	// The ARN of an Amazon Web Services Lambda function invoked by Secrets Manager to
+	// rotate and expire the secret either automatically per the schedule or manually
+	// by a call to RotateSecret.
 	RotationLambdaARN *string
 
 	// A structure that defines the rotation configuration for the secret.
@@ -152,6 +153,9 @@ type SecretVersionsListEntry struct {
 
 	// The date and time this version of the secret was created.
 	CreatedDate *time.Time
+
+	// The KMS keys used to encrypt the secret version.
+	KmsKeyIds []string
 
 	// The date that this version of the secret was last accessed. Note that the
 	// resolution of this field is at the date level and does not include the time.

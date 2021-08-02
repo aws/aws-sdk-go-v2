@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Searches for dashboards that belong to a user.
+// Searches for dashboards that belong to a user. This operation is eventually
+// consistent. The results are best effort and may not reflect very recent updates
+// and changes.
 func (c *Client) SearchDashboards(ctx context.Context, params *SearchDashboardsInput, optFns ...func(*Options)) (*SearchDashboardsOutput, error) {
 	if params == nil {
 		params = &SearchDashboardsInput{}
@@ -30,8 +32,8 @@ func (c *Client) SearchDashboards(ctx context.Context, params *SearchDashboardsI
 
 type SearchDashboardsInput struct {
 
-	// The ID of the AWS account that contains the user whose dashboards you're
-	// searching for.
+	// The ID of the Amazon Web Services account; that contains the user whose
+	// dashboards you're searching for.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -61,7 +63,7 @@ type SearchDashboardsOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -12,8 +12,9 @@ import (
 )
 
 // In an environment account, update an environment account connection to use a new
-// IAM role. For more information, see Environment account connections in the AWS
-// Proton Administration guide.
+// IAM role. For more information, see Environment account connections
+// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
+// in the AWS Proton Administrator guide.
 func (c *Client) UpdateEnvironmentAccountConnection(ctx context.Context, params *UpdateEnvironmentAccountConnectionInput, optFns ...func(*Options)) (*UpdateEnvironmentAccountConnectionOutput, error) {
 	if params == nil {
 		params = &UpdateEnvironmentAccountConnectionInput{}

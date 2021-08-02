@@ -1943,6 +1943,28 @@ func (InstanceAttributeName) Values() []InstanceAttributeName {
 	}
 }
 
+type InstanceEventWindowState string
+
+// Enum values for InstanceEventWindowState
+const (
+	InstanceEventWindowStateCreating InstanceEventWindowState = "creating"
+	InstanceEventWindowStateDeleting InstanceEventWindowState = "deleting"
+	InstanceEventWindowStateActive   InstanceEventWindowState = "active"
+	InstanceEventWindowStateDeleted  InstanceEventWindowState = "deleted"
+)
+
+// Values returns all known values for InstanceEventWindowState. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (InstanceEventWindowState) Values() []InstanceEventWindowState {
+	return []InstanceEventWindowState{
+		"creating",
+		"deleting",
+		"active",
+		"deleted",
+	}
+}
+
 type InstanceHealthStatus string
 
 // Enum values for InstanceHealthStatus
@@ -2337,6 +2359,8 @@ const (
 	InstanceTypeG38xlarge       InstanceType = "g3.8xlarge"
 	InstanceTypeG316xlarge      InstanceType = "g3.16xlarge"
 	InstanceTypeG3sXlarge       InstanceType = "g3s.xlarge"
+	InstanceTypeG4adXlarge      InstanceType = "g4ad.xlarge"
+	InstanceTypeG4ad2xlarge     InstanceType = "g4ad.2xlarge"
 	InstanceTypeG4ad4xlarge     InstanceType = "g4ad.4xlarge"
 	InstanceTypeG4ad8xlarge     InstanceType = "g4ad.8xlarge"
 	InstanceTypeG4ad16xlarge    InstanceType = "g4ad.16xlarge"
@@ -2750,6 +2774,8 @@ func (InstanceType) Values() []InstanceType {
 		"g3.8xlarge",
 		"g3.16xlarge",
 		"g3s.xlarge",
+		"g4ad.xlarge",
+		"g4ad.2xlarge",
 		"g4ad.4xlarge",
 		"g4ad.8xlarge",
 		"g4ad.16xlarge",
@@ -3989,6 +4015,7 @@ const (
 	ResourceTypeImportImageTask                      ResourceType = "import-image-task"
 	ResourceTypeImportSnapshotTask                   ResourceType = "import-snapshot-task"
 	ResourceTypeInstance                             ResourceType = "instance"
+	ResourceTypeInstanceEventWindow                  ResourceType = "instance-event-window"
 	ResourceTypeInternetGateway                      ResourceType = "internet-gateway"
 	ResourceTypeKeyPair                              ResourceType = "key-pair"
 	ResourceTypeLaunchTemplate                       ResourceType = "launch-template"
@@ -4044,6 +4071,7 @@ func (ResourceType) Values() []ResourceType {
 		"import-image-task",
 		"import-snapshot-task",
 		"instance",
+		"instance-event-window",
 		"internet-gateway",
 		"key-pair",
 		"launch-template",
@@ -4542,6 +4570,24 @@ func (SubnetCidrBlockStateCode) Values() []SubnetCidrBlockStateCode {
 		"disassociated",
 		"failing",
 		"failed",
+	}
+}
+
+type SubnetCidrReservationType string
+
+// Enum values for SubnetCidrReservationType
+const (
+	SubnetCidrReservationTypePrefix   SubnetCidrReservationType = "prefix"
+	SubnetCidrReservationTypeExplicit SubnetCidrReservationType = "explicit"
+)
+
+// Values returns all known values for SubnetCidrReservationType. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SubnetCidrReservationType) Values() []SubnetCidrReservationType {
+	return []SubnetCidrReservationType{
+		"prefix",
+		"explicit",
 	}
 }
 
@@ -5532,5 +5578,33 @@ const (
 func (VpnStaticRouteSource) Values() []VpnStaticRouteSource {
 	return []VpnStaticRouteSource{
 		"Static",
+	}
+}
+
+type WeekDay string
+
+// Enum values for WeekDay
+const (
+	WeekDaySunday    WeekDay = "sunday"
+	WeekDayMonday    WeekDay = "monday"
+	WeekDayTuesday   WeekDay = "tuesday"
+	WeekDayWednesday WeekDay = "wednesday"
+	WeekDayThursday  WeekDay = "thursday"
+	WeekDayFriday    WeekDay = "friday"
+	WeekDaySaturday  WeekDay = "saturday"
+)
+
+// Values returns all known values for WeekDay. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (WeekDay) Values() []WeekDay {
+	return []WeekDay{
+		"sunday",
+		"monday",
+		"tuesday",
+		"wednesday",
+		"thursday",
+		"friday",
+		"saturday",
 	}
 }

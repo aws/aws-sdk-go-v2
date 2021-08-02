@@ -12,7 +12,7 @@ import (
 )
 
 // Deletes a hosted zone. If the hosted zone was created by another service, such
-// as AWS Cloud Map, see Deleting Public Hosted Zones That Were Created by Another
+// as Cloud Map, see Deleting Public Hosted Zones That Were Created by Another
 // Service
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeleteHostedZone.html#delete-public-hosted-zone-created-by-another-service)
 // in the Amazon Route 53 Developer Guide for information about how to delete it.
@@ -50,7 +50,7 @@ import (
 //
 // * Use
 // the ListHostedZones action to get a list of the hosted zones associated with the
-// current AWS account.
+// current account.
 func (c *Client) DeleteHostedZone(ctx context.Context, params *DeleteHostedZoneInput, optFns ...func(*Options)) (*DeleteHostedZoneOutput, error) {
 	if params == nil {
 		params = &DeleteHostedZoneInput{}

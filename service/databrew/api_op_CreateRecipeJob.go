@@ -42,9 +42,13 @@ type CreateRecipeJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// One or more artifacts that represent the AWS Glue Data Catalog output from
-	// running the job.
+	// One or more artifacts that represent the Glue Data Catalog output from running
+	// the job.
 	DataCatalogOutputs []types.DataCatalogOutput
+
+	// Represents a list of JDBC database output objects which defines the output
+	// destination for a DataBrew recipe job to write to.
+	DatabaseOutputs []types.DatabaseOutput
 
 	// The name of the dataset that this job processes.
 	DatasetName *string

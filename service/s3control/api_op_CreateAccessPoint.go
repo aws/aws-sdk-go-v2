@@ -59,7 +59,7 @@ func (c *Client) CreateAccessPoint(ctx context.Context, params *CreateAccessPoin
 
 type CreateAccessPointInput struct {
 
-	// The AWS account ID for the owner of the bucket for which you want to create an
+	// The account ID for the owner of the bucket for which you want to create an
 	// access point.
 	//
 	// This member is required.
@@ -68,10 +68,10 @@ type CreateAccessPointInput struct {
 	// The name of the bucket that you want to associate this access point with. For
 	// using this parameter with Amazon S3 on Outposts with the REST API, you must
 	// specify the name and the x-amz-outpost-id as well. For using this parameter with
-	// S3 on Outposts with the AWS SDK and CLI, you must specify the ARN of the bucket
-	// accessed in the format arn:aws:s3-outposts:::outpost//bucket/. For example, to
-	// access the bucket reports through outpost my-outpost owned by account
-	// 123456789012 in Region us-west-2, use the URL encoding of
+	// S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the
+	// ARN of the bucket accessed in the format arn:aws:s3-outposts:::outpost//bucket/.
+	// For example, to access the bucket reports through outpost my-outpost owned by
+	// account 123456789012 in Region us-west-2, use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
 	// The value must be URL encoded.
 	//
@@ -98,6 +98,9 @@ type CreateAccessPointOutput struct {
 
 	// The ARN of the access point. This is only supported by Amazon S3 on Outposts.
 	AccessPointArn *string
+
+	// The name or alias of the access point.
+	Alias *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

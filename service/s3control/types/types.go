@@ -42,9 +42,12 @@ type AccessPoint struct {
 	// The ARN for the access point.
 	AccessPointArn *string
 
+	// The name or alias of the access point.
+	Alias *string
+
 	// The virtual private cloud (VPC) configuration for this access point, if one
 	// exists. This element is empty if this access point is an Amazon S3 on Outposts
-	// access point that is used by other AWS services.
+	// access point that is used by other Amazon Web Services.
 	VpcConfiguration *VpcConfiguration
 
 	noSmithyDocumentSerde
@@ -73,11 +76,10 @@ type ActivityMetrics struct {
 	noSmithyDocumentSerde
 }
 
-// AWS Lambda function used to transform objects through an Object Lambda Access
-// Point.
+// Lambda function used to transform objects through an Object Lambda Access Point.
 type AwsLambdaTransformation struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Lambda function.
+	// The Amazon Resource Name (ARN) of the Lambda function.
 	//
 	// This member is required.
 	FunctionArn *string
@@ -181,8 +183,8 @@ type JobDescriptor struct {
 	// requested one in the Create Job request.
 	Report *JobReport
 
-	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM)
-	// role assigned to run the tasks for this job.
+	// The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) role
+	// assigned to run the tasks for this job.
 	RoleArn *string
 
 	// The current status of the specified job.
@@ -316,8 +318,8 @@ type JobManifestSpec struct {
 // the Amazon S3 User Guide.
 type JobOperation struct {
 
-	// Directs the specified job to invoke an AWS Lambda function on every object in
-	// the manifest.
+	// Directs the specified job to invoke an Lambda function on every object in the
+	// manifest.
 	LambdaInvoke *LambdaInvokeOperation
 
 	// Directs the specified job to execute a DELETE Object tagging call on every
@@ -405,8 +407,8 @@ type JobReport struct {
 // Contains the configuration parameters for a Lambda Invoke operation.
 type LambdaInvokeOperation struct {
 
-	// The Amazon Resource Name (ARN) for the AWS Lambda function that the specified
-	// job will invoke on every object in the manifest.
+	// The Amazon Resource Name (ARN) for the Lambda function that the specified job
+	// will invoke on every object in the manifest.
 	FunctionArn *string
 
 	noSmithyDocumentSerde
@@ -577,8 +579,8 @@ type NoncurrentVersionTransition struct {
 	noSmithyDocumentSerde
 }
 
-// An access point with an attached AWS Lambda function used to access transformed
-// data from an Amazon S3 bucket.
+// An access point with an attached Lambda function used to access transformed data
+// from an Amazon S3 bucket.
 type ObjectLambdaAccessPoint struct {
 
 	// The name of the Object Lambda Access Point.
@@ -623,7 +625,7 @@ type ObjectLambdaContentTransformation interface {
 	isObjectLambdaContentTransformation()
 }
 
-// A container for an AWS Lambda function.
+// A container for an Lambda function.
 type ObjectLambdaContentTransformationMemberAwsLambda struct {
 	Value AwsLambdaTransformation
 
@@ -727,11 +729,11 @@ type PublicAccessBlockConfiguration struct {
 
 	// Specifies whether Amazon S3 should restrict public bucket policies for buckets
 	// in this account. Setting this element to TRUE restricts access to buckets with
-	// public policies to only AWS service principals and authorized users within this
-	// account. Enabling this setting doesn't affect previously stored bucket policies,
-	// except that public and cross-account access within any public bucket policy,
-	// including non-public delegation to specific accounts, is blocked. This is not
-	// supported for Amazon S3 on Outposts.
+	// public policies to only Amazon Web Service principals and authorized users
+	// within this account. Enabling this setting doesn't affect previously stored
+	// bucket policies, except that public and cross-account access within any public
+	// bucket policy, including non-public delegation to specific accounts, is blocked.
+	// This is not supported for Amazon S3 on Outposts.
 	RestrictPublicBuckets bool
 
 	noSmithyDocumentSerde
@@ -758,7 +760,7 @@ type RegionalBucket struct {
 	// The Amazon Resource Name (ARN) for the regional bucket.
 	BucketArn *string
 
-	// The AWS Outposts ID of the regional bucket.
+	// The Outposts ID of the regional bucket.
 	OutpostId *string
 
 	noSmithyDocumentSerde
@@ -835,10 +837,10 @@ type S3CopyObjectOperation struct {
 	AccessControlGrants []S3Grant
 
 	// Specifies whether Amazon S3 should use an S3 Bucket Key for object encryption
-	// with server-side encryption using AWS KMS (SSE-KMS). Setting this header to true
-	// causes Amazon S3 to use an S3 Bucket Key for object encryption with SSE-KMS.
-	// Specifying this header with an object action doesn’t affect bucket-level
-	// settings for S3 Bucket Key.
+	// with server-side encryption using Amazon Web Services KMS (SSE-KMS). Setting
+	// this header to true causes Amazon S3 to use an S3 Bucket Key for object
+	// encryption with SSE-KMS. Specifying this header with an object action doesn’t
+	// affect bucket-level settings for S3 Bucket Key.
 	BucketKeyEnabled bool
 
 	//
@@ -1156,11 +1158,11 @@ type SSES3 struct {
 	noSmithyDocumentSerde
 }
 
-// The AWS organization for your S3 Storage Lens.
+// The Amazon Web Services organization for your S3 Storage Lens.
 type StorageLensAwsOrg struct {
 
-	// A container for the Amazon Resource Name (ARN) of the AWS organization. This
-	// property is read-only and follows the following format:
+	// A container for the Amazon Resource Name (ARN) of the Amazon Web Services
+	// organization. This property is read-only and follows the following format:
 	// arn:aws:organizations:us-east-1:example-account-id:organization/o-ex2l495dck
 	//
 	// This member is required.
@@ -1188,7 +1190,8 @@ type StorageLensConfiguration struct {
 	// This member is required.
 	IsEnabled bool
 
-	// A container for the AWS organization for this S3 Storage Lens configuration.
+	// A container for the Amazon Web Services organization for this S3 Storage Lens
+	// configuration.
 	AwsOrg *StorageLensAwsOrg
 
 	// A container to specify the properties of your S3 Storage Lens metrics export

@@ -2,6 +2,32 @@
 
 package types
 
+type StatementStatusString string
+
+// Enum values for StatementStatusString
+const (
+	StatementStatusStringSubmitted StatementStatusString = "SUBMITTED"
+	StatementStatusStringPicked    StatementStatusString = "PICKED"
+	StatementStatusStringStarted   StatementStatusString = "STARTED"
+	StatementStatusStringFinished  StatementStatusString = "FINISHED"
+	StatementStatusStringAborted   StatementStatusString = "ABORTED"
+	StatementStatusStringFailed    StatementStatusString = "FAILED"
+)
+
+// Values returns all known values for StatementStatusString. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (StatementStatusString) Values() []StatementStatusString {
+	return []StatementStatusString{
+		"SUBMITTED",
+		"PICKED",
+		"STARTED",
+		"FINISHED",
+		"ABORTED",
+		"FAILED",
+	}
+}
+
 type StatusString string
 
 // Enum values for StatusString

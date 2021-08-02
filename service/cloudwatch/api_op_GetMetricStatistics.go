@@ -60,7 +60,8 @@ import (
 // 5 minutes. After 63 days, the data is further aggregated and is available with a
 // resolution of 1 hour. CloudWatch started retaining 5-minute and 1-hour metric
 // data as of July 9, 2016. For information about metrics and dimensions supported
-// by AWS services, see the Amazon CloudWatch Metrics and Dimensions Reference
+// by Amazon Web Services services, see the Amazon CloudWatch Metrics and
+// Dimensions Reference
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html)
 // in the Amazon CloudWatch User Guide.
 func (c *Client) GetMetricStatistics(ctx context.Context, params *GetMetricStatisticsInput, optFns ...func(*Options)) (*GetMetricStatisticsOutput, error) {

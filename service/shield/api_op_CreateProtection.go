@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables AWS Shield Advanced for a specific AWS resource. The resource can be an
-// Amazon CloudFront distribution, Elastic Load Balancing load balancer, AWS Global
-// Accelerator accelerator, Elastic IP Address, or an Amazon Route 53 hosted zone.
-// You can add protection to only a single resource with each CreateProtection
-// request. If you want to add protection to multiple resources at once, use the
-// AWS WAF console (https://console.aws.amazon.com/waf/). For more information see
-// Getting Started with AWS Shield Advanced
+// Enables Shield Advanced for a specific Amazon Web Services resource. The
+// resource can be an Amazon CloudFront distribution, Elastic Load Balancing load
+// balancer, Global Accelerator accelerator, Elastic IP Address, or an Amazon Route
+// 53 hosted zone. You can add protection to only a single resource with each
+// CreateProtection request. If you want to add protection to multiple resources at
+// once, use the WAF console (https://console.aws.amazon.com/waf/). For more
+// information see Getting Started with Shield Advanced
 // (https://docs.aws.amazon.com/waf/latest/developerguide/getting-started-ddos.html)
-// and Add AWS Shield Advanced Protection to more AWS Resources
+// and Add Shield Advanced Protection to more Amazon Web Services Resources
 // (https://docs.aws.amazon.com/waf/latest/developerguide/configure-new-protection.html).
 func (c *Client) CreateProtection(ctx context.Context, params *CreateProtectionInput, optFns ...func(*Options)) (*CreateProtectionOutput, error) {
 	if params == nil {
@@ -54,10 +54,10 @@ type CreateProtectionInput struct {
 	// arn:aws:elasticloadbalancing:region:account-id:loadbalancer/load-balancer-name
 	//
 	// *
-	// For an AWS CloudFront distribution:
+	// For an Amazon CloudFront distribution:
 	// arn:aws:cloudfront::account-id:distribution/distribution-id
 	//
-	// * For an AWS Global
+	// * For an Global
 	// Accelerator accelerator:
 	// arn:aws:globalaccelerator::account-id:accelerator/accelerator-id
 	//

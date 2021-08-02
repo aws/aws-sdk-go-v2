@@ -10748,6 +10748,15 @@ func awsRestjson1_deserializeDocumentSidewalkDevice(v **types.SidewalkDevice, va
 
 	for key, value := range shape {
 		switch key {
+		case "AmazonId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AmazonId to be of type string, got %T instead", value)
+				}
+				sv.AmazonId = ptr.String(jtv)
+			}
+
 		case "DeviceCertificates":
 			if err := awsRestjson1_deserializeDocumentDeviceCertificateList(&sv.DeviceCertificates, value); err != nil {
 				return err

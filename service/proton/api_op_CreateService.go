@@ -15,7 +15,7 @@ import (
 // service template and often includes several service instances and pipeline. For
 // more information, see Services
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-services.html) in the
-// AWS Proton Administration Guide and Services
+// AWS Proton Administrator Guide and Services
 // (https://docs.aws.amazon.com/proton/latest/userguide/ug-service.html) in the AWS
 // Proton User Guide.
 func (c *Client) CreateService(ctx context.Context, params *CreateServiceInput, optFns ...func(*Options)) (*CreateServiceOutput, error) {
@@ -45,7 +45,7 @@ type CreateServiceInput struct {
 	// inputs in the spec if your service template doesn’t include a service pipeline.
 	// For more information, see Create a service
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-create-svc.html.html)
-	// in the AWS Proton Administration Guide and Create a service
+	// in the AWS Proton Administrator Guide and Create a service
 	// (https://docs.aws.amazon.com/proton/latest/userguide/ug-svc-create.html) in the
 	// AWS Proton User Guide.
 	//
@@ -73,11 +73,11 @@ type CreateServiceInput struct {
 	// A description of the AWS Proton service.
 	Description *string
 
-	// The ARN of the repository connection. For more information, see Set up
-	// repository connection
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#settingSS-up-vcontrol)
-	// in the AWS Proton Administration Guide and Getting started
-	// (https://docs.aws.amazon.com/proton/latest/userguide/ug-getting-started.html#getting-started-step1)
+	// The Amazon Resource Name (ARN) of the repository connection. For more
+	// information, see Set up repository connection
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/setting-up-for-service.html#setting-up-vcontrol)
+	// in the AWS Proton Administrator Guide and Setting up with AWS Proton
+	// (https://docs.aws.amazon.com/proton/latest/userguide/proton-setup.html#setup-repo-connection)
 	// in the AWS Proton User Guide. Don't include this parameter if your service
 	// template doesn't include a service pipeline.
 	RepositoryConnectionArn *string
@@ -87,7 +87,7 @@ type CreateServiceInput struct {
 	RepositoryId *string
 
 	// Create tags for your service. For more information, see AWS Proton resources and
-	// tagging in the AWS Proton Administration Guide
+	// tagging in the AWS Proton Administrator Guide
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or AWS
 	// Proton User Guide
 	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).

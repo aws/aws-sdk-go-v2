@@ -1819,6 +1819,10 @@ type DBSnapshot struct {
 	// Provides the option group name for the DB snapshot.
 	OptionGroupName *string
 
+	// Specifies the time of the CreateDBSnapshot operation in Coordinated Universal
+	// Time (UTC). Doesn't change when the snapshot is copied.
+	OriginalSnapshotCreateTime *time.Time
+
 	// The percentage of the estimated data that has been transferred.
 	PercentProgress int32
 
@@ -1831,13 +1835,14 @@ type DBSnapshot struct {
 	ProcessorFeatures []ProcessorFeature
 
 	// Specifies when the snapshot was taken in Coordinated Universal Time (UTC).
+	// Changes for the copy when the snapshot is copied.
 	SnapshotCreateTime *time.Time
 
 	// Provides the type of the DB snapshot.
 	SnapshotType *string
 
 	// The DB snapshot Amazon Resource Name (ARN) that the DB snapshot was copied from.
-	// It only has value in case of cross-customer or cross-region copy.
+	// It only has a value in the case of a cross-account or cross-Region copy.
 	SourceDBSnapshotIdentifier *string
 
 	// The Amazon Web Services Region that the DB snapshot was created in or copied

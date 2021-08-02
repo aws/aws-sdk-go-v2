@@ -1024,6 +1024,25 @@ func validateDatastoreActivity(v *types.DatastoreActivity) error {
 	}
 }
 
+func validateDatastoreIotSiteWiseMultiLayerStorage(v *types.DatastoreIotSiteWiseMultiLayerStorage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DatastoreIotSiteWiseMultiLayerStorage"}
+	if v.CustomerManagedS3Storage == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CustomerManagedS3Storage"))
+	} else if v.CustomerManagedS3Storage != nil {
+		if err := validateIotSiteWiseCustomerManagedDatastoreS3Storage(v.CustomerManagedS3Storage); err != nil {
+			invalidParams.AddNested("CustomerManagedS3Storage", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDatastorePartition(v *types.DatastorePartition) error {
 	if v == nil {
 		return nil
@@ -1072,6 +1091,11 @@ func validateDatastoreStorage(v types.DatastoreStorage) error {
 	case *types.DatastoreStorageMemberCustomerManagedS3:
 		if err := validateCustomerManagedDatastoreS3Storage(&uv.Value); err != nil {
 			invalidParams.AddNested("[customerManagedS3]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DatastoreStorageMemberIotSiteWiseMultiLayerStorage:
+		if err := validateDatastoreIotSiteWiseMultiLayerStorage(&uv.Value); err != nil {
+			invalidParams.AddNested("[iotSiteWiseMultiLayerStorage]", err.(smithy.InvalidParamsError))
 		}
 
 	}
@@ -1226,6 +1250,21 @@ func validateIotEventsDestinationConfiguration(v *types.IotEventsDestinationConf
 	}
 	if v.RoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateIotSiteWiseCustomerManagedDatastoreS3Storage(v *types.IotSiteWiseCustomerManagedDatastoreS3Storage) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "IotSiteWiseCustomerManagedDatastoreS3Storage"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

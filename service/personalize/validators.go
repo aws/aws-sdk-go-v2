@@ -968,9 +968,6 @@ func validateOpCreateCampaignInput(v *CreateCampaignInput) error {
 	if v.SolutionVersionArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SolutionVersionArn"))
 	}
-	if v.MinProvisionedTPS == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("MinProvisionedTPS"))
-	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {

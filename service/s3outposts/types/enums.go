@@ -2,12 +2,31 @@
 
 package types
 
+type EndpointAccessType string
+
+// Enum values for EndpointAccessType
+const (
+	EndpointAccessTypePrivate         EndpointAccessType = "Private"
+	EndpointAccessTypeCustomerOwnedIp EndpointAccessType = "CustomerOwnedIp"
+)
+
+// Values returns all known values for EndpointAccessType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EndpointAccessType) Values() []EndpointAccessType {
+	return []EndpointAccessType{
+		"Private",
+		"CustomerOwnedIp",
+	}
+}
+
 type EndpointStatus string
 
 // Enum values for EndpointStatus
 const (
-	EndpointStatusPending   EndpointStatus = "PENDING"
-	EndpointStatusAvailable EndpointStatus = "AVAILABLE"
+	EndpointStatusPending   EndpointStatus = "Pending"
+	EndpointStatusAvailable EndpointStatus = "Available"
+	EndpointStatusDeleting  EndpointStatus = "Deleting"
 )
 
 // Values returns all known values for EndpointStatus. Note that this can be
@@ -15,7 +34,8 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (EndpointStatus) Values() []EndpointStatus {
 	return []EndpointStatus{
-		"PENDING",
-		"AVAILABLE",
+		"Pending",
+		"Available",
+		"Deleting",
 	}
 }

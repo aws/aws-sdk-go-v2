@@ -49,7 +49,7 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS IoT Greengrass can't process your request right now. Try again later.
+// IoT Greengrass can't process your request right now. Try again later.
 type InternalServerException struct {
 	Message *string
 
@@ -69,6 +69,29 @@ func (e *InternalServerException) ErrorMessage() string {
 }
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
+
+// The request is already in progress. This exception occurs when you use a client
+// token for multiple requests while IoT Greengrass is still processing an earlier
+// request that uses the same client token.
+type RequestAlreadyInProgressException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *RequestAlreadyInProgressException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *RequestAlreadyInProgressException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *RequestAlreadyInProgressException) ErrorCode() string {
+	return "RequestAlreadyInProgressException"
+}
+func (e *RequestAlreadyInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The requested resource can't be found.
 type ResourceNotFoundException struct {

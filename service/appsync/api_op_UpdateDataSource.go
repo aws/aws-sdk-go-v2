@@ -56,7 +56,7 @@ type UpdateDataSourceInput struct {
 	// The new HTTP endpoint configuration.
 	HttpConfig *types.HttpDataSourceConfig
 
-	// The new AWS Lambda configuration.
+	// The new Amazon Web Services Lambda configuration.
 	LambdaConfig *types.LambdaDataSourceConfig
 
 	// The new relational database configuration.

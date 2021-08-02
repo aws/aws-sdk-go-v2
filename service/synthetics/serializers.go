@@ -998,6 +998,13 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 		ok.Integer(*v.SuccessRetentionPeriodInDays)
 	}
 
+	if v.VisualReference != nil {
+		ok := object.Key("VisualReference")
+		if err := awsRestjson1_serializeDocumentVisualReferenceInput(v.VisualReference, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.VpcConfig != nil {
 		ok := object.Key("VpcConfig")
 		if err := awsRestjson1_serializeDocumentVpcConfigInput(v.VpcConfig, ok); err != nil {
@@ -1005,6 +1012,49 @@ func awsRestjson1_serializeOpDocumentUpdateCanaryInput(v *UpdateCanaryInput, val
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBaseScreenshot(v *types.BaseScreenshot, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IgnoreCoordinates != nil {
+		ok := object.Key("IgnoreCoordinates")
+		if err := awsRestjson1_serializeDocumentBaseScreenshotIgnoreCoordinates(v.IgnoreCoordinates, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ScreenshotName != nil {
+		ok := object.Key("ScreenshotName")
+		ok.String(*v.ScreenshotName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBaseScreenshotIgnoreCoordinates(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBaseScreenshots(v []types.BaseScreenshot, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentBaseScreenshot(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 
@@ -1127,6 +1177,25 @@ func awsRestjson1_serializeDocumentTagMap(v map[string]string, value smithyjson.
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentVisualReferenceInput(v *types.VisualReferenceInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BaseCanaryRunId != nil {
+		ok := object.Key("BaseCanaryRunId")
+		ok.String(*v.BaseCanaryRunId)
+	}
+
+	if v.BaseScreenshots != nil {
+		ok := object.Key("BaseScreenshots")
+		if err := awsRestjson1_serializeDocumentBaseScreenshots(v.BaseScreenshots, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 

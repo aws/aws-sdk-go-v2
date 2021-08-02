@@ -2657,7 +2657,7 @@ func awsRestjson1_deserializeDocumentContainerProvider(v **types.ContainerProvid
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected ClusterId to be of type string, got %T instead", value)
 				}
 				sv.Id = ptr.String(jtv)
 			}
@@ -2711,7 +2711,7 @@ func awsRestjson1_deserializeDocumentEksInfo(v **types.EksInfo, value interface{
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+					return fmt.Errorf("expected KubernetesNamespace to be of type string, got %T instead", value)
 				}
 				sv.Namespace = ptr.String(jtv)
 			}
@@ -2795,6 +2795,15 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 				sv.ExecutionRoleArn = ptr.String(jtv)
 			}
 
+		case "failureReason":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FailureReason to be of type string, got %T instead", value)
+				}
+				sv.FailureReason = types.FailureReason(jtv)
+			}
+
 		case "id":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -2847,6 +2856,15 @@ func awsRestjson1_deserializeDocumentEndpoint(v **types.Endpoint, value interfac
 					return fmt.Errorf("expected EndpointState to be of type string, got %T instead", value)
 				}
 				sv.State = types.EndpointState(jtv)
+			}
+
+		case "stateDetails":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.StateDetails = ptr.String(jtv)
 			}
 
 		case "subnetIds":

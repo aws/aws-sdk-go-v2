@@ -42,7 +42,7 @@ type UpdateJobQueueInput struct {
 	// queue. All of the compute environments must be either EC2 (EC2 or SPOT) or
 	// Fargate (FARGATE or FARGATE_SPOT). EC2 and Fargate compute environments can't be
 	// mixed. All compute environments that are associated with a job queue must share
-	// the same architecture. AWS Batch doesn't support mixing compute environment
+	// the same architecture. Batch doesn't support mixing compute environment
 	// architecture types in a single job queue.
 	ComputeEnvironmentOrder []types.ComputeEnvironmentOrder
 

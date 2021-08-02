@@ -1555,16 +1555,34 @@ func validateExpressionVariables(v []types.ExpressionVariable) error {
 	}
 }
 
+func validateForwardingConfig(v *types.ForwardingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ForwardingConfig"}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateGatewayPlatform(v *types.GatewayPlatform) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "GatewayPlatform"}
-	if v.Greengrass == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("Greengrass"))
-	} else if v.Greengrass != nil {
+	if v.Greengrass != nil {
 		if err := validateGreengrass(v.Greengrass); err != nil {
 			invalidParams.AddNested("Greengrass", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.GreengrassV2 != nil {
+		if err := validateGreengrassV2(v.GreengrassV2); err != nil {
+			invalidParams.AddNested("GreengrassV2", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1581,6 +1599,21 @@ func validateGreengrass(v *types.Greengrass) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Greengrass"}
 	if v.GroupArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("GroupArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateGreengrassV2(v *types.GreengrassV2) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GreengrassV2"}
+	if v.CoreDeviceThingName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CoreDeviceThingName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1716,6 +1749,42 @@ func validateLoggingOptions(v *types.LoggingOptions) error {
 	}
 }
 
+func validateMeasurement(v *types.Measurement) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Measurement"}
+	if v.ProcessingConfig != nil {
+		if err := validateMeasurementProcessingConfig(v.ProcessingConfig); err != nil {
+			invalidParams.AddNested("ProcessingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMeasurementProcessingConfig(v *types.MeasurementProcessingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MeasurementProcessingConfig"}
+	if v.ForwardingConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ForwardingConfig"))
+	} else if v.ForwardingConfig != nil {
+		if err := validateForwardingConfig(v.ForwardingConfig); err != nil {
+			invalidParams.AddNested("ForwardingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateMetric(v *types.Metric) error {
 	if v == nil {
 		return nil
@@ -1737,6 +1806,26 @@ func validateMetric(v *types.Metric) error {
 		if err := validateMetricWindow(v.Window); err != nil {
 			invalidParams.AddNested("Window", err.(smithy.InvalidParamsError))
 		}
+	}
+	if v.ProcessingConfig != nil {
+		if err := validateMetricProcessingConfig(v.ProcessingConfig); err != nil {
+			invalidParams.AddNested("ProcessingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateMetricProcessingConfig(v *types.MetricProcessingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "MetricProcessingConfig"}
+	if len(v.ComputeLocation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeLocation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1816,6 +1905,11 @@ func validatePropertyType(v *types.PropertyType) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "PropertyType"}
+	if v.Measurement != nil {
+		if err := validateMeasurement(v.Measurement); err != nil {
+			invalidParams.AddNested("Measurement", err.(smithy.InvalidParamsError))
+		}
+	}
 	if v.Transform != nil {
 		if err := validateTransform(v.Transform); err != nil {
 			invalidParams.AddNested("Transform", err.(smithy.InvalidParamsError))
@@ -1922,6 +2016,31 @@ func validateTransform(v *types.Transform) error {
 	} else if v.Variables != nil {
 		if err := validateExpressionVariables(v.Variables); err != nil {
 			invalidParams.AddNested("Variables", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ProcessingConfig != nil {
+		if err := validateTransformProcessingConfig(v.ProcessingConfig); err != nil {
+			invalidParams.AddNested("ProcessingConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTransformProcessingConfig(v *types.TransformProcessingConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TransformProcessingConfig"}
+	if len(v.ComputeLocation) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ComputeLocation"))
+	}
+	if v.ForwardingConfig != nil {
+		if err := validateForwardingConfig(v.ForwardingConfig); err != nil {
+			invalidParams.AddNested("ForwardingConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

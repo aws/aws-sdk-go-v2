@@ -21,13 +21,14 @@ import (
 // the Amazon S3 API Reference. Sets the tags for an S3 on Outposts bucket. For
 // more information, see Using Amazon S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
-// Amazon S3 User Guide. Use tags to organize your AWS bill to reflect your own
-// cost structure. To do this, sign up to get your AWS account bill with tag key
-// values included. Then, to see the cost of combined resources, organize your
-// billing information according to resources with the same tag key values. For
-// example, you can tag several resources with a specific application name, and
-// then organize your billing information to see the total cost of that application
-// across several services. For more information, see Cost allocation and tagging
+// Amazon S3 User Guide. Use tags to organize your Amazon Web Services bill to
+// reflect your own cost structure. To do this, sign up to get your account bill
+// with tag key values included. Then, to see the cost of combined resources,
+// organize your billing information according to resources with the same tag key
+// values. For example, you can tag several resources with a specific application
+// name, and then organize your billing information to see the total cost of that
+// application across several services. For more information, see Cost allocation
+// and tagging
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html).
 // Within a bucket, if you add a tag that has the same key as an existing tag, the
 // new value overwrites the old value. For more information, see  Using cost
@@ -50,7 +51,7 @@ import (
 // can occur if the tag did not pass input validation. For information about tag
 // restrictions, see  User-Defined Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
-// and  AWS-Generated Cost Allocation Tag Restrictions
+// and  Amazon Web Services-Generated Cost Allocation Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html).
 //
 // *
@@ -103,7 +104,7 @@ func (c *Client) PutBucketTagging(ctx context.Context, params *PutBucketTaggingI
 
 type PutBucketTaggingInput struct {
 
-	// The AWS account ID of the Outposts bucket.
+	// The account ID of the Outposts bucket.
 	//
 	// This member is required.
 	AccountId *string
@@ -111,10 +112,10 @@ type PutBucketTaggingInput struct {
 	// The Amazon Resource Name (ARN) of the bucket. For using this parameter with
 	// Amazon S3 on Outposts with the REST API, you must specify the name and the
 	// x-amz-outpost-id as well. For using this parameter with S3 on Outposts with the
-	// AWS SDK and CLI, you must specify the ARN of the bucket accessed in the format
-	// arn:aws:s3-outposts:::outpost//bucket/. For example, to access the bucket
-	// reports through outpost my-outpost owned by account 123456789012 in Region
-	// us-west-2, use the URL encoding of
+	// Amazon Web Services SDK and CLI, you must specify the ARN of the bucket accessed
+	// in the format arn:aws:s3-outposts:::outpost//bucket/. For example, to access the
+	// bucket reports through outpost my-outpost owned by account 123456789012 in
+	// Region us-west-2, use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
 	// The value must be URL encoded.
 	//

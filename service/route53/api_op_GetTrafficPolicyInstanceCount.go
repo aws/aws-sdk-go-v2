@@ -11,7 +11,7 @@ import (
 )
 
 // Gets the number of traffic policy instances that are associated with the current
-// AWS account.
+// account.
 func (c *Client) GetTrafficPolicyInstanceCount(ctx context.Context, params *GetTrafficPolicyInstanceCountInput, optFns ...func(*Options)) (*GetTrafficPolicyInstanceCountOutput, error) {
 	if params == nil {
 		params = &GetTrafficPolicyInstanceCountInput{}
@@ -28,7 +28,7 @@ func (c *Client) GetTrafficPolicyInstanceCount(ctx context.Context, params *GetT
 }
 
 // Request to get the number of traffic policy instances that are associated with
-// the current AWS account.
+// the current account.
 type GetTrafficPolicyInstanceCountInput struct {
 	noSmithyDocumentSerde
 }
@@ -37,7 +37,7 @@ type GetTrafficPolicyInstanceCountInput struct {
 // Amazon Route 53 created based on a specified traffic policy.
 type GetTrafficPolicyInstanceCountOutput struct {
 
-	// The number of traffic policy instances that are associated with the current AWS
+	// The number of traffic policy instances that are associated with the current
 	// account.
 	//
 	// This member is required.

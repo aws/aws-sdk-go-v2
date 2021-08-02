@@ -30,7 +30,7 @@ func (c *Client) ListIngestions(ctx context.Context, params *ListIngestionsInput
 
 type ListIngestionsInput struct {
 
-	// The AWS account ID.
+	// The Amazon Web Services account; ID.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -57,7 +57,7 @@ type ListIngestionsOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

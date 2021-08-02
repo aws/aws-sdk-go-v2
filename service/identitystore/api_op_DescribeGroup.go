@@ -35,7 +35,7 @@ type DescribeGroupInput struct {
 
 	// The globally unique identifier for the identity store, such as d-1234567890. In
 	// this example, d- is a fixed prefix, and 1234567890 is a randomly generated
-	// string which contains number and lower case letters. This value is generated at
+	// string that contains number and lower case letters. This value is generated at
 	// the time that a new identity store is created.
 	//
 	// This member is required.
@@ -46,12 +46,12 @@ type DescribeGroupInput struct {
 
 type DescribeGroupOutput struct {
 
-	// Contains the group’s display name value. The length limit is 1024 characters.
+	// Contains the group’s display name value. The length limit is 1,024 characters.
 	// This value can consist of letters, accented characters, symbols, numbers,
-	// punctuation, tab, new line, carriage return, space and non breaking space in
-	// this attribute. The characters “<>;:%” are excluded. This value is specified at
-	// the time the group is created and stored as an attribute of the group object in
-	// the identity store.
+	// punctuation, tab, new line, carriage return, space, and nonbreaking space in
+	// this attribute. The characters <>;:% are excluded. This value is specified at
+	// the time that the group is created and stored as an attribute of the group
+	// object in the identity store.
 	//
 	// This member is required.
 	DisplayName *string

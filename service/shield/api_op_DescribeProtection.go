@@ -34,9 +34,10 @@ type DescribeProtectionInput struct {
 	// ResourceArn or the ProtectionID, but not both.
 	ProtectionId *string
 
-	// The ARN (Amazon Resource Name) of the AWS resource for the Protection object
-	// that is described. When submitting the DescribeProtection request you must
-	// provide either the ResourceArn or the ProtectionID, but not both.
+	// The ARN (Amazon Resource Name) of the Amazon Web Services resource for the
+	// Protection object that is described. When submitting the DescribeProtection
+	// request you must provide either the ResourceArn or the ProtectionID, but not
+	// both.
 	ResourceArn *string
 
 	noSmithyDocumentSerde

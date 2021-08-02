@@ -56,7 +56,7 @@ func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsI
 
 type ListAccessPointsInput struct {
 
-	// The AWS account ID for owner of the bucket whose access points you want to list.
+	// The account ID for owner of the bucket whose access points you want to list.
 	//
 	// This member is required.
 	AccountId *string
@@ -64,10 +64,10 @@ type ListAccessPointsInput struct {
 	// The name of the bucket whose associated access points you want to list. For
 	// using this parameter with Amazon S3 on Outposts with the REST API, you must
 	// specify the name and the x-amz-outpost-id as well. For using this parameter with
-	// S3 on Outposts with the AWS SDK and CLI, you must specify the ARN of the bucket
-	// accessed in the format arn:aws:s3-outposts:::outpost//bucket/. For example, to
-	// access the bucket reports through outpost my-outpost owned by account
-	// 123456789012 in Region us-west-2, use the URL encoding of
+	// S3 on Outposts with the Amazon Web Services SDK and CLI, you must specify the
+	// ARN of the bucket accessed in the format arn:aws:s3-outposts:::outpost//bucket/.
+	// For example, to access the bucket reports through outpost my-outpost owned by
+	// account 123456789012 in Region us-west-2, use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/bucket/reports.
 	// The value must be URL encoded.
 	Bucket *string

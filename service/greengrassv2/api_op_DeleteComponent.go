@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a version of a component from AWS IoT Greengrass. This operation deletes
-// the component's recipe and artifacts. As a result, deployments that refer to
-// this component version will fail. If you have deployments that use this
-// component version, you can remove the component from the deployment or update
-// the deployment to use a valid version.
+// Deletes a version of a component from IoT Greengrass. This operation deletes the
+// component's recipe and artifacts. As a result, deployments that refer to this
+// component version will fail. If you have deployments that use this component
+// version, you can remove the component from the deployment or update the
+// deployment to use a valid version.
 func (c *Client) DeleteComponent(ctx context.Context, params *DeleteComponentInput, optFns ...func(*Options)) (*DeleteComponentOutput, error) {
 	if params == nil {
 		params = &DeleteComponentInput{}

@@ -59,10 +59,10 @@ type DeleteAccessPointInput struct {
 	// The name of the access point you want to delete. For using this parameter with
 	// Amazon S3 on Outposts with the REST API, you must specify the name and the
 	// x-amz-outpost-id as well. For using this parameter with S3 on Outposts with the
-	// AWS SDK and CLI, you must specify the ARN of the access point accessed in the
-	// format arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the
-	// access point reports-ap through outpost my-outpost owned by account 123456789012
-	// in Region us-west-2, use the URL encoding of
+	// Amazon Web Services SDK and CLI, you must specify the ARN of the access point
+	// accessed in the format arn:aws:s3-outposts:::outpost//accesspoint/. For example,
+	// to access the access point reports-ap through outpost my-outpost owned by
+	// account 123456789012 in Region us-west-2, use the URL encoding of
 	// arn:aws:s3-outposts:us-west-2:123456789012:outpost/my-outpost/accesspoint/reports-ap.
 	// The value must be URL encoded.
 	//

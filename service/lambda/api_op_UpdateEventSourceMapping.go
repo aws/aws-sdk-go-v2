@@ -124,7 +124,7 @@ type UpdateEventSourceMappingInput struct {
 	// (Streams only) The number of batches to process from each shard concurrently.
 	ParallelizationFactor *int32
 
-	// An array of the authentication protocol, or the VPC components to secure your
+	// An array of authentication protocols or VPC components required to secure your
 	// event source.
 	SourceAccessConfigurations []types.SourceAccessConfiguration
 
@@ -135,8 +135,8 @@ type UpdateEventSourceMappingInput struct {
 	noSmithyDocumentSerde
 }
 
-// A mapping between an Amazon Web Services resource and an Lambda function. See
-// CreateEventSourceMapping for details.
+// A mapping between an Amazon Web Services resource and a Lambda function. For
+// details, see CreateEventSourceMapping.
 type UpdateEventSourceMappingOutput struct {
 
 	// The maximum number of items to retrieve in a single batch.
@@ -160,14 +160,15 @@ type UpdateEventSourceMappingOutput struct {
 	// mapping.
 	FunctionResponseTypes []types.FunctionResponseType
 
-	// The date that the event source mapping was last updated, or its state changed.
+	// The date that the event source mapping was last updated or that its state
+	// changed.
 	LastModified *time.Time
 
-	// The result of the last Lambda invocation of your Lambda function.
+	// The result of the last Lambda invocation of your function.
 	LastProcessingResult *string
 
-	// (Streams and SQS standard queues) The maximum amount of time to gather records
-	// before invoking the function, in seconds. The default value is zero.
+	// (Streams and Amazon SQS standard queues) The maximum amount of time to gather
+	// records before invoking the function, in seconds. The default value is zero.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Streams only) Discard records older than the specified age. The default value
@@ -181,23 +182,23 @@ type UpdateEventSourceMappingOutput struct {
 	// expires in the event source.
 	MaximumRetryAttempts *int32
 
-	// (Streams only) The number of batches to process from each shard concurrently.
+	// (Streams only) The number of batches to process concurrently from each shard.
 	// The default value is 1.
 	ParallelizationFactor *int32
 
-	// (MQ) The name of the Amazon MQ broker destination queue to consume.
+	// (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
-	// The Self-Managed Apache Kafka cluster for your event source.
+	// The self-managed Apache Kafka cluster for your event source.
 	SelfManagedEventSource *types.SelfManagedEventSource
 
-	// An array of the authentication protocol, or the VPC components to secure your
-	// event source.
+	// An array of the authentication protocol, VPC components, or virtual host to
+	// secure and define your event source.
 	SourceAccessConfigurations []types.SourceAccessConfiguration
 
 	// The position in a stream from which to start reading. Required for Amazon
-	// Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. AT_TIMESTAMP is only
-	// supported for Amazon Kinesis streams.
+	// Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. AT_TIMESTAMP is
+	// supported only for Amazon Kinesis streams.
 	StartingPosition types.EventSourcePosition
 
 	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading.
@@ -207,15 +208,15 @@ type UpdateEventSourceMappingOutput struct {
 	// Enabling, Enabled, Disabling, Disabled, Updating, or Deleting.
 	State *string
 
-	// Indicates whether the last change to the event source mapping was made by a
-	// user, or by the Lambda service.
+	// Indicates whether a user or Lambda made the last change to the event source
+	// mapping.
 	StateTransitionReason *string
 
 	// The name of the Kafka topic.
 	Topics []string
 
 	// (Streams only) The duration in seconds of a processing window. The range is
-	// between 1 second up to 900 seconds.
+	// 1–900 seconds.
 	TumblingWindowInSeconds *int32
 
 	// The identifier of the event source mapping.

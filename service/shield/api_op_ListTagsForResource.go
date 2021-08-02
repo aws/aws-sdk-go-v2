@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about AWS tags for a specified Amazon Resource Name (ARN) in
-// AWS Shield.
+// Gets information about Amazon Web Services tags for a specified Amazon Resource
+// Name (ARN) in Shield.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon AppIntegrations APIs are in preview release and are subject to
-// change. Return information about the event integration.
+// Return information about the event integration.
 func (c *Client) GetEventIntegration(ctx context.Context, params *GetEventIntegrationInput, optFns ...func(*Options)) (*GetEventIntegrationOutput, error) {
 	if params == nil {
 		params = &GetEventIntegrationInput{}
@@ -43,7 +42,7 @@ type GetEventIntegrationOutput struct {
 	// The description of the event integration.
 	Description *string
 
-	// The Eventbridge bus.
+	// The EventBridge bus.
 	EventBridgeBus *string
 
 	// The event filter.

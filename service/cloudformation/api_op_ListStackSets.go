@@ -16,12 +16,12 @@ import (
 // user.
 //
 // * [Self-managed permissions] If you set the CallAs parameter to SELF
-// while signed in to your AWS account, ListStackSets returns all self-managed
-// stack sets in your AWS account.
+// while signed in to your account, ListStackSets returns all self-managed stack
+// sets in your account.
 //
-// * [Service-managed permissions] If you set the
-// CallAs parameter to SELF while signed in to the organization's management
-// account, ListStackSets returns all stack sets in the management account.
+// * [Service-managed permissions] If you set the CallAs
+// parameter to SELF while signed in to the organization's management account,
+// ListStackSets returns all stack sets in the management account.
 //
 // *
 // [Service-managed permissions] If you set the CallAs parameter to DELEGATED_ADMIN
@@ -53,11 +53,11 @@ type ListStackSetsInput struct {
 	// specify SELF.
 	//
 	// * If you are signed in to a delegated administrator account,
-	// specify DELEGATED_ADMIN. Your AWS account must be registered as a delegated
+	// specify DELEGATED_ADMIN. Your account must be registered as a delegated
 	// administrator in the management account. For more information, see Register a
 	// delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the AWS CloudFormation User Guide.
+	// in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// The maximum number of results to be returned with a single call. If the number

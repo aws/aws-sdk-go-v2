@@ -13,7 +13,7 @@ import (
 // operation consumes a list of these requests.
 type AssociateClientDeviceWithCoreDeviceEntry struct {
 
-	// The name of the AWS IoT thing that represents the client device to associate.
+	// The name of the IoT thing that represents the client device to associate.
 	//
 	// This member is required.
 	ThingName *string
@@ -33,7 +33,7 @@ type AssociateClientDeviceWithCoreDeviceErrorEntry struct {
 	// A message that provides additional information about the error.
 	Message *string
 
-	// The name of the AWS IoT thing whose associate request failed.
+	// The name of the IoT thing whose associate request failed.
 	ThingName *string
 
 	noSmithyDocumentSerde
@@ -46,22 +46,22 @@ type AssociatedClientDevice struct {
 	// The time that the client device was associated, expressed in ISO 8601 format.
 	AssociationTimestamp *time.Time
 
-	// The name of the AWS IoT thing that represents the associated client device.
+	// The name of the IoT thing that represents the associated client device.
 	ThingName *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains the status of a component in the AWS IoT Greengrass service.
+// Contains the status of a component in the IoT Greengrass service.
 type CloudComponentStatus struct {
 
 	// The state of the component.
 	ComponentState CloudComponentState
 
 	// A dictionary of errors that communicate why the component is in an error state.
-	// For example, if AWS IoT Greengrass can't access an artifact for the component,
-	// then errors contains the artifact's URI as a key, and the error message as the
-	// value for that key.
+	// For example, if IoT Greengrass can't access an artifact for the component, then
+	// errors contains the artifact's URI as a key, and the error message as the value
+	// for that key.
 	Errors map[string]string
 
 	// A message that communicates details, such as errors, about the status of the
@@ -88,8 +88,8 @@ type Component struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a component that is a candidate to deploy to a AWS
-// IoT Greengrass core device.
+// Contains information about a component that is a candidate to deploy to a
+// Greengrass core device.
 type ComponentCandidate struct {
 
 	// The name of the component.
@@ -98,10 +98,10 @@ type ComponentCandidate struct {
 	// The version of the component.
 	ComponentVersion *string
 
-	// The version requirements for the component's dependencies. AWS IoT Greengrass
-	// core devices get the version requirements from component recipes. AWS IoT
-	// Greengrass V2 uses semantic version constraints. For more information, see
-	// Semantic Versioning (https://semver.org/).
+	// The version requirements for the component's dependencies. Greengrass core
+	// devices get the version requirements from component recipes. IoT Greengrass V2
+	// uses semantic version constraints. For more information, see Semantic Versioning
+	// (https://semver.org/).
 	VersionRequirements map[string]string
 
 	noSmithyDocumentSerde
@@ -111,7 +111,7 @@ type ComponentCandidate struct {
 // on Greengrass core devices. For more information, see Update component
 // configurations
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html)
-// in the AWS IoT Greengrass V2 Developer Guide.
+// in the IoT Greengrass V2 Developer Guide.
 type ComponentConfigurationUpdate struct {
 
 	// A serialized JSON string that contains the configuration object to merge to
@@ -122,7 +122,7 @@ type ComponentConfigurationUpdate struct {
 	// for keys and values that you don't specify in this object. For more information,
 	// see Merge configuration updates
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#merge-configuration-update)
-	// in the AWS IoT Greengrass V2 Developer Guide.
+	// in the IoT Greengrass V2 Developer Guide.
 	Merge *string
 
 	// The list of configuration nodes to reset to default values on target devices.
@@ -131,7 +131,7 @@ type ComponentConfigurationUpdate struct {
 	// the object. For more information, see the JSON pointer specification
 	// (https://tools.ietf.org/html/rfc6901) and Reset configuration updates
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html#reset-configuration-update)
-	// in the AWS IoT Greengrass V2 Developer Guide.
+	// in the IoT Greengrass V2 Developer Guide.
 	Reset []string
 
 	noSmithyDocumentSerde
@@ -152,9 +152,9 @@ type ComponentDependencyRequirement struct {
 	// Default: HARD
 	DependencyType ComponentDependencyType
 
-	// The component version requirement for the component dependency. AWS IoT
-	// Greengrass V2 uses semantic version constraints. For more information, see
-	// Semantic Versioning (https://semver.org/).
+	// The component version requirement for the component dependency. IoT Greengrass
+	// V2 uses semantic version constraints. For more information, see Semantic
+	// Versioning (https://semver.org/).
 	VersionRequirement *string
 
 	noSmithyDocumentSerde
@@ -169,20 +169,20 @@ type ComponentDeploymentSpecification struct {
 	// The configuration updates to deploy for the component. You can define reset
 	// updates and merge updates. A reset updates the keys that you specify to the
 	// default configuration for the component. A merge updates the core device's
-	// component configuration with the keys and values that you specify. The AWS IoT
+	// component configuration with the keys and values that you specify. The IoT
 	// Greengrass Core software applies reset updates before it applies merge updates.
 	// For more information, see Update component configurations
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/update-component-configurations.html)
-	// in the AWS IoT Greengrass V2 Developer Guide.
+	// in the IoT Greengrass V2 Developer Guide.
 	ConfigurationUpdate *ComponentConfigurationUpdate
 
-	// The system user and group that the AWS IoT Greengrass Core software uses to run
-	// component processes on the core device. If you omit this parameter, the AWS IoT
+	// The system user and group that the IoT Greengrass Core software uses to run
+	// component processes on the core device. If you omit this parameter, the IoT
 	// Greengrass Core software uses the system user and group that you configure for
 	// the core device. For more information, see Configure the user and group that run
 	// components
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user)
-	// in the AWS IoT Greengrass V2 Developer Guide.
+	// in the IoT Greengrass V2 Developer Guide.
 	RunWith *ComponentRunWith
 
 	noSmithyDocumentSerde
@@ -217,35 +217,46 @@ type ComponentLatestVersion struct {
 // Contains information about a platform that a component supports.
 type ComponentPlatform struct {
 
-	// A dictionary of attributes for the platform. The AWS IoT Greengrass Core
-	// software defines the os and platform by default. You can specify additional
-	// platform attributes for a core device when you deploy the AWS IoT Greengrass
-	// nucleus component. For more information, see the AWS IoT Greengrass nucleus
-	// component
+	// A dictionary of attributes for the platform. The IoT Greengrass Core software
+	// defines the os and platform by default. You can specify additional platform
+	// attributes for a core device when you deploy the Greengrass nucleus component.
+	// For more information, see the Greengrass nucleus component
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html)
-	// in the AWS IoT Greengrass V2 Developer Guide.
+	// in the IoT Greengrass V2 Developer Guide.
 	Attributes map[string]string
 
 	// The friendly name of the platform. This name helps you identify the platform. If
-	// you omit this parameter, AWS IoT Greengrass creates a friendly name from the os
-	// and architecture of the platform.
+	// you omit this parameter, IoT Greengrass creates a friendly name from the os and
+	// architecture of the platform.
 	Name *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains information system user and group that the AWS IoT Greengrass Core
-// software uses to run component processes on the core device. For more
-// information, see Configure the user and group that run components
+// Contains information system user and group that the IoT Greengrass Core software
+// uses to run component processes on the core device. For more information, see
+// Configure the user and group that run components
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user)
-// in the AWS IoT Greengrass V2 Developer Guide.
+// in the IoT Greengrass V2 Developer Guide.
 type ComponentRunWith struct {
 
 	// The POSIX system user and (optional) group to use to run this component. Specify
 	// the user and group separated by a colon (:) in the following format: user:group.
-	// The group is optional. If you don't specify a group, the AWS IoT Greengrass Core
-	// software uses the primary user for the group.
+	// The group is optional. If you don't specify a group, the IoT Greengrass Core
+	// software uses the primary user for the group. If you omit this parameter, the
+	// IoT Greengrass Core software uses the default system user and group that you
+	// configure on the Greengrass nucleus component. For more information, see
+	// Configure the user and group that run components
+	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-user).
 	PosixUser *string
+
+	// The system resource limits to apply to this component's process on the core
+	// device. If you omit this parameter, the IoT Greengrass Core software uses the
+	// default system resource limits that you configure on the Greengrass nucleus
+	// component. For more information, see Configure system resource limits for
+	// components
+	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits).
+	SystemResourceLimits *SystemResourceLimits
 
 	noSmithyDocumentSerde
 }
@@ -267,11 +278,11 @@ type ComponentVersionListItem struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a AWS IoT Greengrass core device, which is an AWS IoT
-// thing that runs the AWS IoT Greengrass Core software.
+// Contains information about a Greengrass core device, which is an IoT thing that
+// runs the IoT Greengrass Core software.
 type CoreDevice struct {
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	CoreDeviceThingName *string
 
 	// The time at which the core device's status last updated, expressed in ISO 8601
@@ -281,11 +292,11 @@ type CoreDevice struct {
 	// The status of the core device. Core devices can have the following statuses:
 	//
 	// *
-	// HEALTHY – The AWS IoT Greengrass Core software and all components run on the
-	// core device without issue.
+	// HEALTHY – The IoT Greengrass Core software and all components run on the core
+	// device without issue.
 	//
-	// * UNHEALTHY – The AWS IoT Greengrass Core software
-	// or a component is in a failed state on the core device.
+	// * UNHEALTHY – The IoT Greengrass Core software or a
+	// component is in a failed state on the core device.
 	Status CoreDeviceStatus
 
 	noSmithyDocumentSerde
@@ -300,10 +311,7 @@ type Deployment struct {
 	// The ID of the deployment.
 	DeploymentId *string
 
-	// The name of the deployment. You can create deployments without names. If you
-	// create a deployment without a name, the AWS IoT Greengrass V2 console shows the
-	// deployment name as :, where targetType and targetName are the type and name of
-	// the deployment target.
+	// The name of the deployment.
 	DeploymentName *string
 
 	// The status of the deployment.
@@ -317,7 +325,7 @@ type Deployment struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target AWS IoT thing or thing group.
+	// the target IoT thing or thing group.
 	TargetArn *string
 
 	noSmithyDocumentSerde
@@ -344,7 +352,7 @@ type DeploymentComponentUpdatePolicy struct {
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-defercomponentupdate)
 	// IPC operation. For more information, see Create deployments
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
-	// in the AWS IoT Greengrass V2 Developer Guide.
+	// in the IoT Greengrass V2 Developer Guide.
 	//
 	// * SKIP_NOTIFY_COMPONENTS – The
 	// deployment doesn't notify components or wait for them to be safe to
@@ -371,7 +379,7 @@ type DeploymentComponentUpdatePolicy struct {
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/interprocess-communication.html#ipc-operation-sendconfigurationvalidityreport)
 // IPC operation. For more information, see Create deployments
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/create-deployments.html)
-// in the AWS IoT Greengrass V2 Developer Guide.
+// in the IoT Greengrass V2 Developer Guide.
 type DeploymentConfigurationValidationPolicy struct {
 
 	// The amount of time in seconds that a component can validate its configuration
@@ -382,7 +390,7 @@ type DeploymentConfigurationValidationPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an AWS IoT job configuration.
+// Contains information about an IoT job configuration.
 type DeploymentIoTJobConfiguration struct {
 
 	// The stop configuration for the job. This configuration defines when and how to
@@ -425,7 +433,7 @@ type DeploymentPolicies struct {
 // operation consumes a list of these requests.
 type DisassociateClientDeviceFromCoreDeviceEntry struct {
 
-	// The name of the AWS IoT thing that represents the client device to disassociate.
+	// The name of the IoT thing that represents the client device to disassociate.
 	//
 	// This member is required.
 	ThingName *string
@@ -445,17 +453,17 @@ type DisassociateClientDeviceFromCoreDeviceErrorEntry struct {
 	// A message that provides additional information about the error.
 	Message *string
 
-	// The name of the AWS IoT thing whose disassociate request failed.
+	// The name of the IoT thing whose disassociate request failed.
 	ThingName *string
 
 	noSmithyDocumentSerde
 }
 
-// Contains information about a deployment job that AWS IoT Greengrass sends to a
-// AWS IoT Greengrass core device.
+// Contains information about a deployment job that IoT Greengrass sends to a
+// Greengrass core device.
 type EffectiveDeployment struct {
 
-	// The status of the deployment job on the AWS IoT Greengrass core device.
+	// The status of the deployment job on the Greengrass core device.
 	//
 	// This member is required.
 	CoreDeviceExecutionStatus EffectiveDeploymentExecutionStatus
@@ -470,10 +478,7 @@ type EffectiveDeployment struct {
 	// This member is required.
 	DeploymentId *string
 
-	// The name of the deployment. You can create deployments without names. If you
-	// create a deployment without a name, the AWS IoT Greengrass V2 console shows the
-	// deployment name as :, where targetType and targetName are the type and name of
-	// the deployment target.
+	// The name of the deployment.
 	//
 	// This member is required.
 	DeploymentName *string
@@ -486,7 +491,7 @@ type EffectiveDeployment struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target AWS IoT thing or thing group.
+	// the target IoT thing or thing group.
 	//
 	// This member is required.
 	TargetArn *string
@@ -496,10 +501,10 @@ type EffectiveDeployment struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the AWS IoT job that applies the deployment to target devices.
+	// the IoT job that applies the deployment to target devices.
 	IotJobArn *string
 
-	// The ID of the AWS IoT job that applies the deployment to target devices.
+	// The ID of the IoT job that applies the deployment to target devices.
 	IotJobId *string
 
 	// The reason code for the update, if the job was updated.
@@ -508,7 +513,7 @@ type EffectiveDeployment struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a component on a AWS IoT Greengrass core device.
+// Contains information about a component on a Greengrass core device.
 type InstalledComponent struct {
 
 	// The name of the component.
@@ -647,8 +652,8 @@ type IoTJobTimeoutConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a container in which AWS Lambda functions run on AWS
-// IoT Greengrass core devices.
+// Contains information about a container in which Lambda functions run on
+// Greengrass core devices.
 type LambdaContainerParams struct {
 
 	// The list of system devices that the container can access.
@@ -687,7 +692,7 @@ type LambdaDeviceMount struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an event source for an AWS Lambda function. The event
+// Contains information about an event source for an Lambda function. The event
 // source defines the topics on which this Lambda function subscribes to receive
 // messages that run the function.
 type LambdaEventSource struct {
@@ -704,8 +709,8 @@ type LambdaEventSource struct {
 	// support MQTT wildcards (+ and #) in the event source topic.
 	//
 	// * IOT_CORE –
-	// Subscribe to AWS IoT Core MQTT messages. This event source type supports MQTT
-	// wildcards (+ and #) in the event source topic.
+	// Subscribe to Amazon Web Services IoT Core MQTT messages. This event source type
+	// supports MQTT wildcards (+ and #) in the event source topic.
 	//
 	// This member is required.
 	Type LambdaEventSourceType
@@ -713,7 +718,7 @@ type LambdaEventSource struct {
 	noSmithyDocumentSerde
 }
 
-// Contains parameters for a Lambda function that runs on AWS IoT Greengrass.
+// Contains parameters for a Lambda function that runs on IoT Greengrass.
 type LambdaExecutionParameters struct {
 
 	// The map of environment variables that are available to the Lambda function when
@@ -722,8 +727,8 @@ type LambdaExecutionParameters struct {
 
 	// The list of event sources to which to subscribe to receive work messages. The
 	// Lambda function runs when it receives a message from an event source. You can
-	// subscribe this function to local publish/subscribe messages and AWS IoT Core
-	// MQTT messages.
+	// subscribe this function to local publish/subscribe messages and Amazon Web
+	// Services IoT Core MQTT messages.
 	EventSources []LambdaEventSource
 
 	// The list of arguments to pass to the Lambda function when it runs.
@@ -736,28 +741,28 @@ type LambdaExecutionParameters struct {
 	LinuxProcessParams *LambdaLinuxProcessParams
 
 	// The maximum amount of time in seconds that a non-pinned Lambda function can idle
-	// before the AWS IoT Greengrass Core software stops its process.
+	// before the IoT Greengrass Core software stops its process.
 	MaxIdleTimeInSeconds int32
 
 	// The maximum number of instances that a non-pinned Lambda function can run at the
 	// same time.
 	MaxInstancesCount int32
 
-	// The maximum size of the message queue for the Lambda function component. The AWS
-	// IoT Greengrass core stores messages in a FIFO (first-in-first-out) queue until
-	// it can run the Lambda function to consume each message.
+	// The maximum size of the message queue for the Lambda function component. The IoT
+	// Greengrass core stores messages in a FIFO (first-in-first-out) queue until it
+	// can run the Lambda function to consume each message.
 	MaxQueueSize int32
 
 	// Whether or not the Lambda function is pinned, or long-lived.
 	//
 	// * A pinned Lambda
-	// function starts when AWS IoT Greengrass starts and keeps running in its own
+	// function starts when IoT Greengrass starts and keeps running in its own
 	// container.
 	//
 	// * A non-pinned Lambda function starts only when it receives a work
 	// item and exists after it idles for maxIdleTimeInSeconds. If the function has
-	// multiple work items, the AWS IoT Greengrass Core software creates multiple
-	// instances of the function.
+	// multiple work items, the IoT Greengrass Core software creates multiple instances
+	// of the function.
 	//
 	// Default: true
 	Pinned bool
@@ -773,8 +778,7 @@ type LambdaExecutionParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an AWS Lambda function to import to create a
-// component.
+// Contains information about an Lambda function to import to create a component.
 type LambdaFunctionRecipeSource struct {
 
 	// The ARN
@@ -788,8 +792,8 @@ type LambdaFunctionRecipeSource struct {
 	// The component versions on which this Lambda function component depends.
 	ComponentDependencies map[string]ComponentDependencyRequirement
 
-	// The system and runtime parameters for the Lambda function as it runs on the AWS
-	// IoT Greengrass core device.
+	// The system and runtime parameters for the Lambda function as it runs on the
+	// Greengrass core device.
 	ComponentLambdaParameters *LambdaExecutionParameters
 
 	// The name of the component. Defaults to the name of the Lambda function.
@@ -806,14 +810,14 @@ type LambdaFunctionRecipeSource struct {
 	noSmithyDocumentSerde
 }
 
-// Contains parameters for a Linux process that contains an AWS Lambda function.
+// Contains parameters for a Linux process that contains an Lambda function.
 type LambdaLinuxProcessParams struct {
 
 	// The parameters for the container in which the Lambda function runs.
 	ContainerParams *LambdaContainerParams
 
 	// The isolation mode for the process that contains the Lambda function. The
-	// process can run in an isolated runtime environment inside the AWS IoT Greengrass
+	// process can run in an isolated runtime environment inside the IoT Greengrass
 	// container, or as a regular process outside any container. Default:
 	// GreengrassContainer
 	IsolationMode LambdaIsolationMode
@@ -822,8 +826,8 @@ type LambdaLinuxProcessParams struct {
 }
 
 // Contains information about a volume that Linux processes in a container can
-// access. When you define a volume, the AWS IoT Greengrass Core software mounts
-// the source files to the destination inside the container.
+// access. When you define a volume, the IoT Greengrass Core software mounts the
+// source files to the destination inside the container.
 type LambdaVolumeMount struct {
 
 	// The path to the logical volume in the file system.
@@ -836,8 +840,8 @@ type LambdaVolumeMount struct {
 	// This member is required.
 	SourcePath *string
 
-	// Whether or not to add the AWS IoT Greengrass user group as an owner of the
-	// volume. Default: false
+	// Whether or not to add the IoT Greengrass user group as an owner of the volume.
+	// Default: false
 	AddGroupOwner bool
 
 	// The permission to access the volume: read/only (ro) or read/write (rw). Default:
@@ -848,7 +852,7 @@ type LambdaVolumeMount struct {
 }
 
 // Contains information about a component version that is compatible to run on a
-// AWS IoT Greengrass core device.
+// Greengrass core device.
 type ResolvedComponentVersion struct {
 
 	// The ARN
@@ -864,6 +868,29 @@ type ResolvedComponentVersion struct {
 
 	// The recipe of the component version.
 	Recipe []byte
+
+	noSmithyDocumentSerde
+}
+
+// Contains information about system resource limits that the IoT Greengrass Core
+// software applies to a component's processes. For more information, see Configure
+// system resource limits for components
+// (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-greengrass-core-v2.html#configure-component-system-resource-limits).
+type SystemResourceLimits struct {
+
+	// The maximum amount of CPU time that a component's processes can use on the core
+	// device. A core device's total CPU time is equivalent to the device's number of
+	// CPU cores. For example, on a core device with 4 CPU cores, you can set this
+	// value to 2 to limit the component's processes to 50 percent usage of each CPU
+	// core. On a device with 1 CPU core, you can set this value to 0.25 to limit the
+	// component's processes to 25 percent usage of the CPU. If you set this value to a
+	// number greater than the number of CPU cores, the IoT Greengrass Core software
+	// doesn't limit the component's CPU usage.
+	Cpus float64
+
+	// The maximum amount of RAM, expressed in kilobytes, that a component's processes
+	// can use on the core device.
+	Memory int64
 
 	noSmithyDocumentSerde
 }

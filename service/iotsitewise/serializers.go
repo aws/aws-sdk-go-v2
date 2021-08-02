@@ -4852,6 +4852,18 @@ func awsRestjson1_serializeDocumentExpressionVariables(v []types.ExpressionVaria
 	return nil
 }
 
+func awsRestjson1_serializeDocumentForwardingConfig(v *types.ForwardingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.State) > 0 {
+		ok := object.Key("state")
+		ok.String(string(v.State))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentGatewayPlatform(v *types.GatewayPlatform, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4859,6 +4871,13 @@ func awsRestjson1_serializeDocumentGatewayPlatform(v *types.GatewayPlatform, val
 	if v.Greengrass != nil {
 		ok := object.Key("greengrass")
 		if err := awsRestjson1_serializeDocumentGreengrass(v.Greengrass, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.GreengrassV2 != nil {
+		ok := object.Key("greengrassV2")
+		if err := awsRestjson1_serializeDocumentGreengrassV2(v.GreengrassV2, ok); err != nil {
 			return err
 		}
 	}
@@ -4873,6 +4892,18 @@ func awsRestjson1_serializeDocumentGreengrass(v *types.Greengrass, value smithyj
 	if v.GroupArn != nil {
 		ok := object.Key("groupArn")
 		ok.String(*v.GroupArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentGreengrassV2(v *types.GreengrassV2, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CoreDeviceThingName != nil {
+		ok := object.Key("coreDeviceThingName")
+		ok.String(*v.CoreDeviceThingName)
 	}
 
 	return nil
@@ -5012,6 +5043,27 @@ func awsRestjson1_serializeDocumentMeasurement(v *types.Measurement, value smith
 	object := value.Object()
 	defer object.Close()
 
+	if v.ProcessingConfig != nil {
+		ok := object.Key("processingConfig")
+		if err := awsRestjson1_serializeDocumentMeasurementProcessingConfig(v.ProcessingConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMeasurementProcessingConfig(v *types.MeasurementProcessingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ForwardingConfig != nil {
+		ok := object.Key("forwardingConfig")
+		if err := awsRestjson1_serializeDocumentForwardingConfig(v.ForwardingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5022,6 +5074,13 @@ func awsRestjson1_serializeDocumentMetric(v *types.Metric, value smithyjson.Valu
 	if v.Expression != nil {
 		ok := object.Key("expression")
 		ok.String(*v.Expression)
+	}
+
+	if v.ProcessingConfig != nil {
+		ok := object.Key("processingConfig")
+		if err := awsRestjson1_serializeDocumentMetricProcessingConfig(v.ProcessingConfig, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Variables != nil {
@@ -5036,6 +5095,18 @@ func awsRestjson1_serializeDocumentMetric(v *types.Metric, value smithyjson.Valu
 		if err := awsRestjson1_serializeDocumentMetricWindow(v.Window, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentMetricProcessingConfig(v *types.MetricProcessingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComputeLocation) > 0 {
+		ok := object.Key("computeLocation")
+		ok.String(string(v.ComputeLocation))
 	}
 
 	return nil
@@ -5233,9 +5304,35 @@ func awsRestjson1_serializeDocumentTransform(v *types.Transform, value smithyjso
 		ok.String(*v.Expression)
 	}
 
+	if v.ProcessingConfig != nil {
+		ok := object.Key("processingConfig")
+		if err := awsRestjson1_serializeDocumentTransformProcessingConfig(v.ProcessingConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Variables != nil {
 		ok := object.Key("variables")
 		if err := awsRestjson1_serializeDocumentExpressionVariables(v.Variables, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTransformProcessingConfig(v *types.TransformProcessingConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ComputeLocation) > 0 {
+		ok := object.Key("computeLocation")
+		ok.String(string(v.ComputeLocation))
+	}
+
+	if v.ForwardingConfig != nil {
+		ok := object.Key("forwardingConfig")
+		if err := awsRestjson1_serializeDocumentForwardingConfig(v.ForwardingConfig, ok); err != nil {
 			return err
 		}
 	}

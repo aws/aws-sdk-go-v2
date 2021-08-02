@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Gets a deployment. Deployments define the components that run on AWS IoT
-// Greengrass core devices.
+// Gets a deployment. Deployments define the components that run on Greengrass core
+// devices.
 func (c *Client) GetDeployment(ctx context.Context, params *GetDeploymentInput, optFns ...func(*Options)) (*GetDeploymentOutput, error) {
 	if params == nil {
 		params = &GetDeploymentInput{}
@@ -52,10 +52,7 @@ type GetDeploymentOutput struct {
 	// The ID of the deployment.
 	DeploymentId *string
 
-	// The name of the deployment. You can create deployments without names. If you
-	// create a deployment without a name, the AWS IoT Greengrass V2 console shows the
-	// deployment name as :, where targetType and targetName are the type and name of
-	// the deployment target.
+	// The name of the deployment.
 	DeploymentName *string
 
 	// The deployment policies for the deployment. These policies define how the
@@ -67,7 +64,7 @@ type GetDeploymentOutput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the AWS IoT job that applies the deployment to target devices.
+	// the IoT job that applies the deployment to target devices.
 	IotJobArn *string
 
 	// The job configuration for the deployment configuration. The job configuration
@@ -75,7 +72,7 @@ type GetDeploymentOutput struct {
 	// configuration.
 	IotJobConfiguration *types.DeploymentIoTJobConfiguration
 
-	// The ID of the AWS IoT job that applies the deployment to target devices.
+	// The ID of the IoT job that applies the deployment to target devices.
 	IotJobId *string
 
 	// Whether or not the deployment is the latest revision for its target.
@@ -87,12 +84,12 @@ type GetDeploymentOutput struct {
 	// A list of key-value pairs that contain metadata for the resource. For more
 	// information, see Tag your resources
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the AWS IoT Greengrass V2 Developer Guide.
+	// the IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target AWS IoT thing or thing group.
+	// the target IoT thing or thing group.
 	TargetArn *string
 
 	// Metadata pertaining to the operation's result.

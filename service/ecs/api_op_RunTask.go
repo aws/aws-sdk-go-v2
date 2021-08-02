@@ -63,7 +63,8 @@ type RunTaskInput struct {
 	// The capacity provider strategy to use for the task. If a
 	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
 	// If no capacityProviderStrategy or launchType is specified, the
-	// defaultCapacityProviderStrategy for the cluster is used.
+	// defaultCapacityProviderStrategy for the cluster is used. When you use cluster
+	// auto scaling, you must specify capacityProviderStrategy and not launchType.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster on which to run
@@ -93,16 +94,17 @@ type RunTaskInput struct {
 	// see Amazon ECS launch types
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/launch_types.html)
 	// in the Amazon Elastic Container Service Developer Guide. The FARGATE launch type
-	// runs your tasks on AWS Fargate On-Demand infrastructure. Fargate Spot
-	// infrastructure is available for use but a capacity provider strategy must be
-	// used. For more information, see AWS Fargate capacity providers
+	// runs your tasks on Fargate On-Demand infrastructure. Fargate Spot infrastructure
+	// is available for use but a capacity provider strategy must be used. For more
+	// information, see Fargate capacity providers
 	// (https://docs.aws.amazon.com/AmazonECS/latest/userguide/fargate-capacity-providers.html)
-	// in the Amazon ECS User Guide for AWS Fargate. The EC2 launch type runs your
-	// tasks on Amazon EC2 instances registered to your cluster. The EXTERNAL launch
-	// type runs your tasks on your on-premise server or virtual machine (VM) capacity
-	// registered to your cluster. A task can use either a launch type or a capacity
-	// provider strategy. If a launchType is specified, the capacityProviderStrategy
-	// parameter must be omitted.
+	// in the Amazon ECS User Guide for Fargate. The EC2 launch type runs your tasks on
+	// Amazon EC2 instances registered to your cluster. The EXTERNAL launch type runs
+	// your tasks on your on-premise server or virtual machine (VM) capacity registered
+	// to your cluster. A task can use either a launch type or a capacity provider
+	// strategy. If a launchType is specified, the capacityProviderStrategy parameter
+	// must be omitted. When you use cluster auto scaling, you must specify
+	// capacityProviderStrategy and not launchType.
 	LaunchType types.LaunchType
 
 	// The network configuration for the task. This parameter is required for task
@@ -134,8 +136,8 @@ type RunTaskInput struct {
 
 	// The platform version the task should run. A platform version is only specified
 	// for tasks using the Fargate launch type. If one is not specified, the LATEST
-	// platform version is used by default. For more information, see AWS Fargate
-	// Platform Versions
+	// platform version is used by default. For more information, see Fargate Platform
+	// Versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -185,9 +187,9 @@ type RunTaskInput struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for AWS use. You
-	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-	// do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for Amazon Web
+	// Services use. You cannot edit or delete tag keys or values with this prefix.
+	// Tags with this prefix do not count against your tags per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

@@ -6,8 +6,7 @@ import (
 	smithydocument "github.com/aws/smithy-go/document"
 )
 
-// The Amazon AppIntegrations APIs are in preview release and are subject to
-// change. The event filter.
+// The event filter.
 type EventFilter struct {
 
 	// The source of the events.
@@ -18,14 +17,13 @@ type EventFilter struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon AppIntegrations APIs are in preview release and are subject to
-// change. The event integration.
+// The event integration.
 type EventIntegration struct {
 
 	// The event integration description.
 	Description *string
 
-	// The Amazon Eventbridge bus for the event integration.
+	// The Amazon EventBridge bus for the event integration.
 	EventBridgeBus *string
 
 	// The event integration filter.
@@ -43,8 +41,7 @@ type EventIntegration struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon AppIntegrations APIs are in preview release and are subject to
-// change. The event integration association.
+// The event integration association.
 type EventIntegrationAssociation struct {
 
 	// The metadata associated with the client.
@@ -53,7 +50,7 @@ type EventIntegrationAssociation struct {
 	// The identifier for the client that is associated with the event integration.
 	ClientId *string
 
-	// The name of the Eventbridge rule.
+	// The name of the EventBridge rule.
 	EventBridgeRuleName *string
 
 	// The Amazon Resource Name (ARN) for the event integration association.

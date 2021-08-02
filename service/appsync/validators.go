@@ -985,6 +985,11 @@ func validateAdditionalAuthenticationProvider(v *types.AdditionalAuthenticationP
 			invalidParams.AddNested("UserPoolConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.LambdaAuthorizerConfig != nil {
+		if err := validateLambdaAuthorizerConfig(v.LambdaAuthorizerConfig); err != nil {
+			invalidParams.AddNested("LambdaAuthorizerConfig", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -1087,6 +1092,21 @@ func validateHttpDataSourceConfig(v *types.HttpDataSourceConfig) error {
 		if err := validateAuthorizationConfig(v.AuthorizationConfig); err != nil {
 			invalidParams.AddNested("AuthorizationConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateLambdaAuthorizerConfig(v *types.LambdaAuthorizerConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "LambdaAuthorizerConfig"}
+	if v.AuthorizerUri == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthorizerUri"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1294,6 +1314,11 @@ func validateOpCreateGraphqlApiInput(v *CreateGraphqlApiInput) error {
 	if v.AdditionalAuthenticationProviders != nil {
 		if err := validateAdditionalAuthenticationProviders(v.AdditionalAuthenticationProviders); err != nil {
 			invalidParams.AddNested("AdditionalAuthenticationProviders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaAuthorizerConfig != nil {
+		if err := validateLambdaAuthorizerConfig(v.LambdaAuthorizerConfig); err != nil {
+			invalidParams.AddNested("LambdaAuthorizerConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1928,6 +1953,11 @@ func validateOpUpdateGraphqlApiInput(v *UpdateGraphqlApiInput) error {
 	if v.AdditionalAuthenticationProviders != nil {
 		if err := validateAdditionalAuthenticationProviders(v.AdditionalAuthenticationProviders); err != nil {
 			invalidParams.AddNested("AdditionalAuthenticationProviders", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.LambdaAuthorizerConfig != nil {
+		if err := validateLambdaAuthorizerConfig(v.LambdaAuthorizerConfig); err != nil {
+			invalidParams.AddNested("LambdaAuthorizerConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

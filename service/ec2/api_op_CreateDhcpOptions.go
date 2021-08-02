@@ -52,7 +52,7 @@ import (
 // (AmazonProvidedDNS). If you create a set of options, and if your VPC has an
 // internet gateway, make sure to set the domain-name-servers option either to
 // AmazonProvidedDNS or to a domain name server of your choice. For more
-// information, see DHCP Options Sets
+// information, see DHCP options sets
 // (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_DHCP_Options.html) in the
 // Amazon Virtual Private Cloud User Guide.
 func (c *Client) CreateDhcpOptions(ctx context.Context, params *CreateDhcpOptionsInput, optFns ...func(*Options)) (*CreateDhcpOptionsOutput, error) {

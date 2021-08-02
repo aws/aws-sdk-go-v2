@@ -51,20 +51,20 @@ import (
 // an existing resource record set that has the specified values.
 //
 // * UPSERT: If a
-// resource record set does not already exist, AWS creates it. If a resource set
-// does exist, Route 53 updates it with the values in the request.
+// resource record set does not already exist, Amazon Web Services creates it. If a
+// resource set does exist, Route 53 updates it with the values in the
+// request.
 //
-// Syntaxes for
-// Creating, Updating, and Deleting Resource Record Sets The syntax for a request
-// depends on the type of resource record set that you want to create, delete, or
-// update, such as weighted, alias, or failover. The XML elements in your request
-// must appear in the order listed in the syntax. For an example for each type of
-// resource record set, see "Examples." Don't refer to the syntax in the "Parameter
-// Syntax" section, which includes all of the elements for every kind of resource
-// record set that you can create, delete, or update by using
-// ChangeResourceRecordSets. Change Propagation to Route 53 DNS Servers When you
-// submit a ChangeResourceRecordSets request, Route 53 propagates your changes to
-// all of the Route 53 authoritative DNS servers. While your changes are
+// Syntaxes for Creating, Updating, and Deleting Resource Record Sets The
+// syntax for a request depends on the type of resource record set that you want to
+// create, delete, or update, such as weighted, alias, or failover. The XML
+// elements in your request must appear in the order listed in the syntax. For an
+// example for each type of resource record set, see "Examples." Don't refer to the
+// syntax in the "Parameter Syntax" section, which includes all of the elements for
+// every kind of resource record set that you can create, delete, or update by
+// using ChangeResourceRecordSets. Change Propagation to Route 53 DNS Servers When
+// you submit a ChangeResourceRecordSets request, Route 53 propagates your changes
+// to all of the Route 53 authoritative DNS servers. While your changes are
 // propagating, GetChange returns a status of PENDING. When propagation is
 // complete, GetChange returns a status of INSYNC. Changes generally propagate to
 // all Route 53 name servers within 60 seconds. For more information, see GetChange

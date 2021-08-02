@@ -215,7 +215,7 @@ func (e *InvalidEmailRoleAccessPolicyException) ErrorFault() smithy.ErrorFault {
 }
 
 // This exception is thrown when the Amazon Cognito service encounters an invalid
-// AWS Lambda response.
+// Lambda response.
 type InvalidLambdaResponseException struct {
 	Message *string
 
@@ -366,8 +366,8 @@ func (e *InvalidUserPoolConfigurationException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// This exception is thrown when a user exceeds the limit for a requested AWS
-// resource.
+// This exception is thrown when a user exceeds the limit for a requested Amazon
+// Web Services resource.
 type LimitExceededException struct {
 	Message *string
 
@@ -585,7 +585,7 @@ func (e *UnauthorizedException) ErrorCode() string             { return "Unautho
 func (e *UnauthorizedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the Amazon Cognito service encounters an
-// unexpected exception with the AWS Lambda service.
+// unexpected exception with the Lambda service.
 type UnexpectedLambdaException struct {
 	Message *string
 
@@ -706,7 +706,7 @@ func (e *UserImportInProgressException) ErrorCode() string             { return 
 func (e *UserImportInProgressException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // This exception is thrown when the Amazon Cognito service encounters a user
-// validation exception with the AWS Lambda service.
+// validation exception with the Lambda service.
 type UserLambdaValidationException struct {
 	Message *string
 

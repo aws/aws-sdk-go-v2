@@ -2,6 +2,24 @@
 
 package types
 
+type AcceptCodeValidation string
+
+// Enum values for AcceptCodeValidation
+const (
+	AcceptCodeValidationIgnore  AcceptCodeValidation = "IGNORE"
+	AcceptCodeValidationEnforce AcceptCodeValidation = "ENFORCE"
+)
+
+// Values returns all known values for AcceptCodeValidation. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AcceptCodeValidation) Values() []AcceptCodeValidation {
+	return []AcceptCodeValidation{
+		"IGNORE",
+		"ENFORCE",
+	}
+}
+
 type AcceptType string
 
 // Enum values for AcceptType

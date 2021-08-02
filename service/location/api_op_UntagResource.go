@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes one or more tags from the specified Amazon Location Service resource.
+// Removes one or more tags from the specified Amazon Location resource.
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}
@@ -31,10 +31,13 @@ type UntagResourceInput struct {
 	// The Amazon Resource Name (ARN) of the resource from which you want to remove
 	// tags.
 	//
+	// * Format example:
+	// arn:aws:geo:region:account-id:resourcetype/ExampleResource
+	//
 	// This member is required.
 	ResourceArn *string
 
-	// The list of tag keys to remove from the resource.
+	// The list of tag keys to remove from the specified resource.
 	//
 	// This member is required.
 	TagKeys []string

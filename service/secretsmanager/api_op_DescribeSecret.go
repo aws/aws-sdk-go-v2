@@ -30,8 +30,8 @@ import (
 // retrieve the encrypted secret information in a version of the secret, use
 // GetSecretValue.
 //
-// * To list all of the secrets in the AWS account, use
-// ListSecrets.
+// * To list all of the secrets in the Amazon Web Services
+// account, use ListSecrets.
 func (c *Client) DescribeSecret(ctx context.Context, params *DescribeSecretInput, optFns ...func(*Options)) (*DescribeSecretOutput, error) {
 	if params == nil {
 		params = &DescribeSecretInput{}
@@ -91,11 +91,11 @@ type DescribeSecretOutput struct {
 	// The user-provided description of the secret.
 	Description *string
 
-	// The ARN or alias of the AWS KMS customer master key (CMK) that's used to encrypt
-	// the SecretString or SecretBinary fields in each version of the secret. If you
-	// don't provide a key, then Secrets Manager defaults to encrypting the secret
-	// fields with the default AWS KMS CMK (the one named awssecretsmanager) for this
-	// account.
+	// The ARN or alias of the Amazon Web Services KMS customer master key (CMK) that's
+	// used to encrypt the SecretString or SecretBinary fields in each version of the
+	// secret. If you don't provide a key, then Secrets Manager defaults to encrypting
+	// the secret fields with the default Amazon Web Services KMS CMK (the one named
+	// awssecretsmanager) for this account.
 	KmsKeyId *string
 
 	// The last date that this secret was accessed. This value is truncated to midnight

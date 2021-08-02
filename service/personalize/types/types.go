@@ -450,8 +450,8 @@ type DatasetExportJob struct {
 	// updated.
 	LastUpdatedDateTime *time.Time
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management service
-	// role that has permissions to add data to your output Amazon S3 bucket.
+	// The Amazon Resource Name (ARN) of the IAM service role that has permissions to
+	// add data to your output Amazon S3 bucket.
 	RoleArn *string
 
 	// The status of the dataset export job. A dataset export job can be in one of the
@@ -510,7 +510,7 @@ type DatasetExportJobSummary struct {
 // a dataset and add it to a dataset group by calling CreateDataset. The dataset
 // group is used to create and train a solution by calling CreateSolution. A
 // dataset group can contain only one of each type of dataset. You can specify an
-// AWS Key Management Service (KMS) key to encrypt the datasets in the group.
+// Key Management Service (KMS) key to encrypt the datasets in the group.
 type DatasetGroup struct {
 
 	// The creation date and time (in Unix time) of the dataset group.
@@ -522,7 +522,8 @@ type DatasetGroup struct {
 	// If creating a dataset group fails, provides the reason why.
 	FailureReason *string
 
-	// The Amazon Resource Name (ARN) of the KMS key used to encrypt the datasets.
+	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to
+	// encrypt the datasets.
 	KmsKeyArn *string
 
 	// The last update date and time (in Unix time) of the dataset group.
@@ -606,8 +607,8 @@ type DatasetImportJob struct {
 	// The date and time (in Unix time) the dataset was last updated.
 	LastUpdatedDateTime *time.Time
 
-	// The ARN of the AWS Identity and Access Management (IAM) role that has
-	// permissions to read from the Amazon S3 data source.
+	// The ARN of the IAM role that has permissions to read from the Amazon S3 data
+	// source.
 	RoleArn *string
 
 	// The status of the dataset import job. A dataset import job can be in one of the
@@ -817,7 +818,7 @@ type DefaultIntegerHyperParameterRange struct {
 // Provides information about an event tracker.
 type EventTracker struct {
 
-	// The Amazon AWS account that owns the event tracker.
+	// The Amazon Web Services account that owns the event tracker.
 	AccountId *string
 
 	// The date and time (in Unix format) that the event tracker was created.
@@ -1138,9 +1139,9 @@ type S3DataConfig struct {
 	// This member is required.
 	Path *string
 
-	// The Amazon Resource Name (ARN) of the Amazon Key Management Service (KMS) key
-	// that Amazon Personalize uses to encrypt or decrypt the input and output files of
-	// a batch inference job.
+	// The Amazon Resource Name (ARN) of the Key Management Service (KMS) key that
+	// Amazon Personalize uses to encrypt or decrypt the input and output files of a
+	// batch inference job.
 	KmsKeyArn *string
 
 	noSmithyDocumentSerde
