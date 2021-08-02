@@ -707,11 +707,14 @@
                 "awsDeviceV2": {
                     "target": "com.amazonaws.directconnect#AwsDeviceV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Direct Connect endpoint on which the BGP peer terminates.</p>"
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the BGP peer.</p>"
                     }
                 },
                 "awsLogicalDeviceId": {
-                    "target": "com.amazonaws.directconnect#AwsLogicalDeviceId"
+                    "target": "com.amazonaws.directconnect#AwsLogicalDeviceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be\n      different than the device that terminates the physical connection.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1069,13 +1072,13 @@
                 "awsDeviceV2": {
                     "target": "com.amazonaws.directconnect#AwsDeviceV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Direct Connect endpoint on which the physical connection terminates.</p>"
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
                     }
                 },
                 "awsLogicalDeviceId": {
                     "target": "com.amazonaws.directconnect#AwsLogicalDeviceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates a physical connection's BGP sessions.</p>"
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be\n      different than the device that terminates the physical connection.</p>"
                     }
                 },
                 "hasLogicalRedundancy": {
@@ -3461,13 +3464,13 @@
                 "awsDeviceV2": {
                     "target": "com.amazonaws.directconnect#AwsDeviceV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Direct Connect endpoint on which the physical connection terminates.</p>"
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
                     }
                 },
                 "awsLogicalDeviceId": {
                     "target": "com.amazonaws.directconnect#AwsLogicalDeviceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates a physical connection's BGP sessions.</p>"
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be\n      different than the device that terminates the physical connection.</p>"
                     }
                 },
                 "hasLogicalRedundancy": {
@@ -3629,7 +3632,7 @@
                 "awsLogicalDeviceId": {
                     "target": "com.amazonaws.directconnect#AwsLogicalDeviceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates a physical connection's BGP sessions.</p>"
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be\n      different than the device that terminates the physical connection.</p>"
                     }
                 },
                 "connections": {
@@ -5382,13 +5385,13 @@
                 "awsDeviceV2": {
                     "target": "com.amazonaws.directconnect#AwsDeviceV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Direct Connect endpoint on which the virtual interface terminates.</p>"
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the physical connection.</p>"
                     }
                 },
                 "awsLogicalDeviceId": {
                     "target": "com.amazonaws.directconnect#AwsLogicalDeviceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates a physical connection's BGP sessions.</p>"
+                        "smithy.api#documentation": "<p>The Direct Connect endpoint that terminates the logical connection. This device might be\n      different than the device that terminates the physical connection.</p>"
                     }
                 },
                 "tags": {

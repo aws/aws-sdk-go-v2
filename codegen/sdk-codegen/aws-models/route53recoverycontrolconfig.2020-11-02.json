@@ -1,0 +1,2333 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>403 response - AccessDeniedException. You do not have sufficient access to perform this action.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#AssertionRule": {
+            "type": "structure",
+            "members": {
+                "AssertedControls": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three Amazon Web Services Regions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Name of the assertion rule. You can use any non-white space character in the name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleConfig": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#RuleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria that you set for specific assertion controls (routing controls) that designate how many controls must be enabled as the result of a transaction. For example, if you have three assertion controls, you might specify atleast 2 for your rule configuration. This means that at least two assertion controls must be enabled, so that at least two Amazon Web Services Regions are enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SafetyRuleArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the assertion rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment status of an assertion rule. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitPeriodMs": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#AssertionRuleUpdate": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the assertion rule. You can use any non-white space character in the name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SafetyRuleArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the assertion rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitPeriodMs": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An update to an assertion rule. You can update the name or the evaluation period (wait period). If you don't specify one of the items to update, the item is unchanged.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#Cluster": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster.</p>"
+                    }
+                },
+                "ClusterEndpoints": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOfClusterEndpoint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Endpoints for a cluster. Specify one of these endpoints when you want to set or retrieve a routing control state in the cluster.</p> <p>To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Cluster (Data Plane) Actions.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Deployment status of a resource. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A cluster is a set of five consensus-forming Regional endpoints that represent the infrastructure that hosts your routing controls. Typically, you host together on one cluster all of the routing controls for your applications.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ClusterEndpoint": {
+            "type": "structure",
+            "members": {
+                "Endpoint": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max128",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A cluster endpoint. Specify an endpoint and Amazon Web Services Region when you want to set or retrieve a routing control state in the cluster.</p> <p>To get or update the routing control state, see the Amazon Route 53 Application Recovery Controller Cluster (Data Plane) Actions.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max32",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region for a cluster endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A cluster endpoint. Specify an endpoint when you want to set or retrieve a routing control state in the cluster.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>409 response - ConflictException.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ControlPanel": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster that includes the control panel.</p>"
+                    }
+                },
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel.</p>"
+                    }
+                },
+                "DefaultControlPanel": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag that Amazon Route 53 Application Recovery Controller sets to true to designate the default control panel for a cluster. When you create a cluster, Amazon Route 53 Application Recovery Controller creates a control panel, and sets this flag for that control panel. If you create a control panel yourself, this flag is set to false.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the control panel. You can use any non-white space character in the name.</p>"
+                    }
+                },
+                "RoutingControlCount": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of routing controls in the control panel.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment status of control panel. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A control panel represents a group of routing controls that can be changed together in a single transaction.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#CreateClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#CreateClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Create a new cluster. A cluster is a set of redundant Regional endpoints against which you can run API calls to update or get the state of one or more routing controls. Each cluster has a name, status, Amazon Resource Name (ARN), and an array of the five cluster endpoints (one for each supported Amazon Web Services Region) that you can use with API calls to the Amazon Route 53 Application Recovery Controller cluster data plane.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/cluster",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateClusterRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique client idempotency token.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ClusterName": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the cluster.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a cluster.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateClusterResponse": {
+            "type": "structure",
+            "members": {
+                "Cluster": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster that was created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateControlPanel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#CreateControlPanelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#CreateControlPanelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new control panel. A control panel represents a group of routing controls that can be changed together in a single transaction. You can use a control panel to centrally view the operational status of applications across your organization, and trigger multi-app failovers in a single transaction, for example, to fail over an Availability Zone or AWS Region.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/controlpanel",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateControlPanelRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique client idempotency token.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster for the control panel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ControlPanelName": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the control panel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the control panel that you're creating.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateControlPanelResponse": {
+            "type": "structure",
+            "members": {
+                "ControlPanel": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ControlPanel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about a control panel.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateRoutingControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#CreateRoutingControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#CreateRoutingControlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a new routing control.</p> <p>A routing control has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control traffic routing.</p> <p>To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/routingcontrol",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateRoutingControlRequest": {
+            "type": "structure",
+            "members": {
+                "ClientToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique client idempotency token.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "ClusterArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster that includes the routing control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel that includes the routing control.</p>"
+                    }
+                },
+                "RoutingControlName": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the routing control.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the routing control that you're creating.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateRoutingControlResponse": {
+            "type": "structure",
+            "members": {
+                "RoutingControl": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#RoutingControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing control that is created.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateSafetyRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#CreateSafetyRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#CreateSafetyRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a safety rule in a control panel. Safety rules let you add safeguards around enabling and disabling routing controls, to help prevent unexpected outcomes.</p> <p>There are two types of safety rules: assertion rules and gating rules.</p> <p>Assertion rule: An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.</p> <p>Gating rule: A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/safetyrule",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateSafetyRuleRequest": {
+            "type": "structure",
+            "members": {
+                "AssertionRule": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#NewAssertionRule"
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax64",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique client idempotency token.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "GatingRule": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#NewGatingRule"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request body that you include when you create a safety rule.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#CreateSafetyRuleResponse": {
+            "type": "structure",
+            "members": {
+                "AssertionRule": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AssertionRule"
+                },
+                "GatingRule": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#GatingRule"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DeleteClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DeleteClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Delete a cluster.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/cluster/{ClusterArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteClusterRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster that you're deleting.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteClusterResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteControlPanel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DeleteControlPanelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DeleteControlPanelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a control panel.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/controlpanel/{ControlPanelArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteControlPanelRequest": {
+            "type": "structure",
+            "members": {
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel that you're deleting.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteControlPanelResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteRoutingControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DeleteRoutingControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DeleteRoutingControlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a routing control.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/routingcontrol/{RoutingControlArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteRoutingControlRequest": {
+            "type": "structure",
+            "members": {
+                "RoutingControlArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the routing control that you're deleting.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteRoutingControlResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteSafetyRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DeleteSafetyRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DeleteSafetyRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a safety rule.</p>/&gt;",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/safetyrule/{SafetyRuleArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteSafetyRuleRequest": {
+            "type": "structure",
+            "members": {
+                "SafetyRuleArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request body that you include when you update a safety rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DeleteSafetyRuleResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DescribeClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DescribeClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Display the details about a cluster. The response includes the cluster name, endpoints, status, and Amazon Resource Name (ARN).</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/cluster/{ClusterArn}",
+                    "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "ClusterCreated": {
+                        "documentation": "Wait until a cluster is created",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Cluster.Status",
+                                        "expected": "DEPLOYED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Cluster.Status",
+                                        "expected": "PENDING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerException"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    },
+                    "ClusterDeleted": {
+                        "documentation": "Wait for a cluster to be deleted",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "Cluster.Status",
+                                        "expected": "PENDING_DELETION",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerException"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeClusterRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the cluster that you're getting details for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeClusterResponse": {
+            "type": "structure",
+            "members": {
+                "Cluster": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#Cluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster for the DescribeCluster request.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeControlPanel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DescribeControlPanelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DescribeControlPanelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays details about a control panel.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/controlpanel/{ControlPanelArn}",
+                    "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "ControlPanelCreated": {
+                        "documentation": "Wait until a control panel is created",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ControlPanel.Status",
+                                        "expected": "DEPLOYED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ControlPanel.Status",
+                                        "expected": "PENDING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerException"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    },
+                    "ControlPanelDeleted": {
+                        "documentation": "Wait until a control panel is deleted",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ControlPanel.Status",
+                                        "expected": "PENDING_DELETION",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerException"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeControlPanelRequest": {
+            "type": "structure",
+            "members": {
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel that you're getting details for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeControlPanelResponse": {
+            "type": "structure",
+            "members": {
+                "ControlPanel": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ControlPanel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the control panel.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeRoutingControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DescribeRoutingControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DescribeRoutingControlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Displays details about a routing control. A routing control has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control routing.</p> <p>To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/routingcontrol/{RoutingControlArn}",
+                    "code": 200
+                },
+                "smithy.waiters#waitable": {
+                    "RoutingControlCreated": {
+                        "documentation": "Wait until a routing control is created",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "RoutingControl.Status",
+                                        "expected": "DEPLOYED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "RoutingControl.Status",
+                                        "expected": "PENDING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerException"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    },
+                    "RoutingControlDeleted": {
+                        "documentation": "Wait for a routing control to be deleted",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "output": {
+                                        "path": "RoutingControl.Status",
+                                        "expected": "PENDING_DELETION",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "retry",
+                                "matcher": {
+                                    "errorType": "InternalServerException"
+                                }
+                            }
+                        ],
+                        "minDelay": 5
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeRoutingControlRequest": {
+            "type": "structure",
+            "members": {
+                "RoutingControlArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the routing control that you're getting details for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeRoutingControlResponse": {
+            "type": "structure",
+            "members": {
+                "RoutingControl": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#RoutingControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the routing control.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeSafetyRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DescribeSafetyRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#DescribeSafetyRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the safety rules (that is, the assertion rules and gating rules) for the routing controls in a control panel.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/safetyrule/{SafetyRuleArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeSafetyRuleRequest": {
+            "type": "structure",
+            "members": {
+                "SafetyRuleArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request body that you include when you update a safety rule.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#DescribeSafetyRuleResponse": {
+            "type": "structure",
+            "members": {
+                "AssertionRule": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AssertionRule"
+                },
+                "GatingRule": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#GatingRule"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#GatingRule": {
+            "type": "structure",
+            "members": {
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GatingControls": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gating controls for the gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the gating rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleConfig": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#RuleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria that you set for specific gating controls (routing controls) that designates how many controls must be enabled to allow you to change (set or unset) the target controls.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SafetyRuleArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gating rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment status of a gating rule. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetControls": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify ATLEAST 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true.</p> <p>In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitPeriodMs": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#GatingRuleUpdate": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the gating rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SafetyRuleArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the gating rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitPeriodMs": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Update to a gating rule. You can update the name or the evaluation period (wait period). If you don't specify one of the items to update, the item is unchanged.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#InternalServerException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>500 response - InternalServiceError. Temporary service error. Retry the request.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListAssociatedRoute53HealthChecks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListAssociatedRoute53HealthChecksRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListAssociatedRoute53HealthChecksResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of all Amazon Route 53 health checks associated with a specific routing control.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/routingcontrol/{RoutingControlArn}/associatedRoute53HealthChecks",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListAssociatedRoute53HealthChecksRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "RoutingControlArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the routing control that you're getting details for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListAssociatedRoute53HealthChecksResponse": {
+            "type": "structure",
+            "members": {
+                "HealthCheckIds": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifiers for the health checks.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax8096",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListClusters": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListClustersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListClustersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of all the clusters in an account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/cluster",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListClustersRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListClustersResponse": {
+            "type": "structure",
+            "members": {
+                "Clusters": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOfCluster",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of the clusters in an account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax8096",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListControlPanels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListControlPanelsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListControlPanelsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of control panels for a cluster.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/controlpanels",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListControlPanelsRequest": {
+            "type": "structure",
+            "members": {
+                "ClusterArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a cluster.</p>",
+                        "smithy.api#httpQuery": "ClusterArn"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListControlPanelsResponse": {
+            "type": "structure",
+            "members": {
+                "ControlPanels": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOfControlPanel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The result of a successful ListControlPanel request.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax8096",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListRoutingControls": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListRoutingControlsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListRoutingControlsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns an array of routing controls for a control panel. A routing control is an Amazon Route 53 Application Recovery Controller construct that has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control routing.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/controlpanel/{ControlPanelArn}/routingcontrols",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListRoutingControlsRequest": {
+            "type": "structure",
+            "members": {
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel that you're getting routing control details for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListRoutingControlsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax8096",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>"
+                    }
+                },
+                "RoutingControls": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOfRoutingControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of routing controls.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListSafetyRules": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListSafetyRulesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ListSafetyRulesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List the safety rules (the assertion rules and gating rules) that you've defined for the routing controls in a control panel.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/controlpanel/{ControlPanelArn}/safetyrules",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListSafetyRulesRequest": {
+            "type": "structure",
+            "members": {
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel that you're getting details for.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of objects that you want to return with this call.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ListSafetyRulesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMax8096",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token that identifies which batch of results you want to see.</p>"
+                    }
+                },
+                "SafetyRules": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOfRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of safety rules in a control panel.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#NewAssertionRule": {
+            "type": "structure",
+            "members": {
+                "AssertedControls": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing controls that are part of transactions that are evaluated to determine if a request to change a routing control state is allowed. For example, you might include three routing controls, one for each of three Amazon Web Services Regions.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the control panel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the assertion rule. You can use any non-white space character in the name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleConfig": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#RuleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria that you set for specific assertion controls (routing controls) that designate how many controls must be enabled as the result of a transaction. For example, if you have three assertion controls, you might specify atleast 2 for your rule configuration. This means that at least two assertion controls must be enabled, so that at least two Amazon Web Services Regions are enabled.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitPeriodMs": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A new assertion rule for a control panel.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#NewGatingRule": {
+            "type": "structure",
+            "members": {
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "GatingControls": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The gating controls for the new gating rule. That is, routing controls that are evaluated by the rule configuration that you specify.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name for the new gating rule.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RuleConfig": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#RuleConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The criteria that you set for specific gating controls (routing controls) that designates how many controls must be enabled to allow you to change (set or unset) the target controls.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "TargetControls": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__listOf__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Routing controls that can only be set or unset if the specified RuleConfig evaluates to true for the specified GatingControls. For example, say you have three gating controls, one for each of three Amazon Web Services Regions. Now you specify AtLeast 2 as your RuleConfig. With these settings, you can only change (set or unset) the routing controls that you have specified as TargetControls if that rule evaluates to true.</p> <p>In other words, your ability to change the routing controls that you have specified as TargetControls is gated by the rule that you set for the routing controls in GatingControls.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WaitPeriodMs": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An evaluation period, in milliseconds (ms), during which any request against the target routing controls will fail. This helps prevent \"flapping\" of state. The wait period is 5000 ms by default, but you can choose a custom value.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A new gating rule for a control panel.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>404 response - The query string contains a syntax error or resource not found.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 404
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#Route53RecoveryControlConfig": {
+            "type": "service",
+            "version": "2020-11-02",
+            "operations": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#CreateCluster"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#CreateControlPanel"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#CreateRoutingControl"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#CreateSafetyRule"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#DeleteCluster"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#DeleteControlPanel"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#DeleteRoutingControl"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#DeleteSafetyRule"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#DescribeCluster"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#DescribeControlPanel"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#DescribeRoutingControl"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#DescribeSafetyRule"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ListAssociatedRoute53HealthChecks"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ListClusters"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ListControlPanels"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ListRoutingControls"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ListSafetyRules"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#UpdateControlPanel"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#UpdateRoutingControl"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#UpdateSafetyRule"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Route53 Recovery Control Config",
+                    "arnNamespace": "route53-recovery-control-config",
+                    "cloudFormationName": "Route53RecoveryControlConfig",
+                    "cloudTrailEventSource": "route53recoverycontrolconfig.amazonaws.com",
+                    "endpointPrefix": "route53-recovery-control-config"
+                },
+                "aws.auth#sigv4": {
+                    "name": "route53-recovery-control-config"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>Recovery Control Configuration API Reference for Amazon Route 53 Application Recovery Controller</p>",
+                "smithy.api#title": "AWS Route53 Recovery Control Config"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#RoutingControl": {
+            "type": "structure",
+            "members": {
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel that includes the routing control.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the routing control.</p>"
+                    }
+                },
+                "RoutingControlArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the routing control.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment status of a routing control. Status can be one of the following: PENDING, DEPLOYED, PENDING_DELETION.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A routing control has one of two states: ON and OFF. You can map the routing control state to the state of an Amazon Route 53 health check, which can be used to control traffic routing.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#Rule": {
+            "type": "structure",
+            "members": {
+                "ASSERTION": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AssertionRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An assertion rule enforces that, when a routing control state is changed, the criteria set by the rule configuration is met. Otherwise, the change to the routing control is not accepted.</p>"
+                    }
+                },
+                "GATING": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#GatingRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A gating rule verifies that a set of gating controls evaluates as true, based on a rule configuration that you specify. If the gating rule evaluates to true, Amazon Route 53 Application Recovery Controller allows a set of routing control state changes to run and complete against the set of target controls.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A safety rule. A safety rule can be an assertion rule or a gating rule.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#RuleConfig": {
+            "type": "structure",
+            "members": {
+                "Inverted": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Logical negation of the rule. If the rule would usually evaluate true, it's evaluated as false, and vice versa.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Threshold": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of N, when you specify an ATLEAST rule type. That is, Threshold is the number of controls that must be set when you specify an ATLEAST type.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#RuleType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A rule can be one of the following: ATLEAST, AND, or OR.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rule configuration for an assertion rule. That is, the criteria that you set for specific assertion controls (routing controls) that specify how many controls must be enabled after a transaction completes.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#RuleType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>An enumerated type that determines how the evaluated rules are processed. RuleType can be one of the following:</p> <p>ATLEAST - At least N routing controls must be set. You specify N as the Threshold in the rule configuration.</p> <p>AND - All routing controls must be set. This is a shortcut for \"At least N,\" where N is the total number of controls in the rule.</p> <p>OR - Any control must be set. This is a shortcut for \"At least N,\" where N is 1.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "ATLEAST",
+                        "name": "ATLEAST"
+                    },
+                    {
+                        "value": "AND",
+                        "name": "AND"
+                    },
+                    {
+                        "value": "OR",
+                        "name": "OR"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ServiceQuotaExceededException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>402 response</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 402
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#Status": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "<p>The deployment status of a resource. Status can be one of the following:</p> <p>PENDING: Amazon Route 53 Application Recovery Controller is creating the resource.</p> <p>DEPLOYED: The resource is deployed and ready to use.</p> <p>PENDING_DELETION: Amazon Route 53 Application Recovery Controller is deleting the resource.</p>",
+                "smithy.api#enum": [
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "DEPLOYED",
+                        "name": "DEPLOYED"
+                    },
+                    {
+                        "value": "PENDING_DELETION",
+                        "name": "PENDING_DELETION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ThrottlingException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>429 response - ThrottlingException.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateControlPanel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#UpdateControlPanelRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#UpdateControlPanelResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a control panel. The only update you can make to a control panel is to change the name of the control panel.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/controlpanel",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateControlPanelRequest": {
+            "type": "structure",
+            "members": {
+                "ControlPanelArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the control panel.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ControlPanelName": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the control panel.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the control panel that you're updating.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateControlPanelResponse": {
+            "type": "structure",
+            "members": {
+                "ControlPanel": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ControlPanel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The control panel to update.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateRoutingControl": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#UpdateRoutingControlRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#UpdateRoutingControlResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a routing control. You can only update the name of the routing control. To get or update the routing control state, see the Recovery Cluster (data plane) API actions for Amazon Route 53 Application Recovery Controller.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/routingcontrol",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateRoutingControlRequest": {
+            "type": "structure",
+            "members": {
+                "RoutingControlArn": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the routing control.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RoutingControlName": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the routing control.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the routing control that you're updating.</p>"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateRoutingControlResponse": {
+            "type": "structure",
+            "members": {
+                "RoutingControl": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#RoutingControl",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The routing control that was updated.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateSafetyRule": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#UpdateSafetyRuleRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#UpdateSafetyRuleResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Update a safety rule (an assertion rule or gating rule) for the routing controls in a control panel. You can only update the name and the waiting period for a safety rule. To make other updates, delete the safety rule and create a new safety rule.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/safetyrule",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateSafetyRuleRequest": {
+            "type": "structure",
+            "members": {
+                "AssertionRuleUpdate": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AssertionRuleUpdate"
+                },
+                "GatingRuleUpdate": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#GatingRuleUpdate"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#UpdateSafetyRuleResponse": {
+            "type": "structure",
+            "members": {
+                "AssertionRule": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#AssertionRule"
+                },
+                "GatingRule": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#GatingRule"
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#ValidationException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.route53recoverycontrolconfig#__string",
+                    "traits": {
+                        "smithy.api#jsonName": "message",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>400 response - Multiple causes. For example, you might have a malformed query string and input parameter might be out of range, or you used parameters together incorrectly.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__boolean": {
+            "type": "boolean"
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__integer": {
+            "type": "integer"
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__listOfCluster": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#Cluster"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__listOfClusterEndpoint": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ClusterEndpoint"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__listOfControlPanel": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#ControlPanel"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__listOfRoutingControl": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#RoutingControl"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__listOfRule": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#Rule"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__listOf__string": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.route53recoverycontrolconfig#__string"
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__string": {
+            "type": "string"
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__stringMax64": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__stringMax8096": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8096
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max128": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max32": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 32
+                }
+            }
+        },
+        "com.amazonaws.route53recoverycontrolconfig#__stringMin1Max64PatternS": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        }
+    }
+}

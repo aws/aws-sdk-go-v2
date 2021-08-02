@@ -659,6 +659,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalServerException",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>An unexpected error occurred.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -814,6 +818,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFoundException",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>The specified resource was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -938,7 +946,7 @@
         "com.amazonaws.savingsplans#SavingsPlanArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws:[a-z]+:([a-z]{2}-[a-z]+-\\d{1}|):(\\d{12}):savingsplan\\/([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$"
+                "smithy.api#pattern": "^arn:aws:[a-z]+:([a-z]{2}-[a-z]+-\\d{1}|):(\\d{12}):savingsplan\\/([0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12})$"
             }
         },
         "com.amazonaws.savingsplans#SavingsPlanArnList": {
@@ -1809,6 +1817,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ServiceQuotaExceededException",
+                    "httpResponseCode": 402
+                },
                 "smithy.api#documentation": "<p>A service quota has been exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 402
@@ -1898,7 +1910,7 @@
         "com.amazonaws.savingsplans#UUID": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "^(([0-9a-f]+)(-?))+$"
+                "smithy.api#pattern": "^[a-f0-9]+(-[a-f0-9]+)*$"
             }
         },
         "com.amazonaws.savingsplans#UUIDs": {
@@ -1969,6 +1981,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ValidationException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>One of the input parameters is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400

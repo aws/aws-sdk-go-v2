@@ -55,7 +55,7 @@
                     "min": 1,
                     "max": 1224
                 },
-                "smithy.api#pattern": "arn:.*"
+                "smithy.api#pattern": "^arn:"
             }
         },
         "com.amazonaws.robomaker#Arns": {
@@ -458,7 +458,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_\\-=]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-=]*$"
             }
         },
         "com.amazonaws.robomaker#Command": {
@@ -468,7 +468,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]*$"
             }
         },
         "com.amazonaws.robomaker#Compute": {
@@ -2573,7 +2573,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[0-9]*"
+                "smithy.api#pattern": "^[0-9]*$"
             }
         },
         "com.amazonaws.robomaker#DeregisterRobot": {
@@ -3756,6 +3756,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world.</p>"
                     }
+                },
+                "worldDescriptionBody": {
+                    "target": "com.amazonaws.robomaker#Json",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the JSON formatted string that describes the contents of your world.</p>"
+                    }
                 }
             }
         },
@@ -3840,6 +3846,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A map that contains tag keys and tag values that are attached to the world\n         template.</p>"
                     }
+                },
+                "version": {
+                    "target": "com.amazonaws.robomaker#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the world template that you're using.</p>"
+                    }
                 }
             }
         },
@@ -3850,7 +3862,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[A-Z_][A-Z0-9_]*"
+                "smithy.api#pattern": "^[A-Z_][A-Z0-9_]*$"
             }
         },
         "com.amazonaws.robomaker#EnvironmentVariableMap": {
@@ -4183,7 +4195,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "arn:aws:iam::\\w+:role/.*"
+                "smithy.api#pattern": "^arn:aws:iam::\\w+:role/"
             }
         },
         "com.amazonaws.robomaker#Id": {
@@ -4254,7 +4266,7 @@
                     "min": 1,
                     "max": 262144
                 },
-                "smithy.api#pattern": "[\\S\\s]+"
+                "smithy.api#pattern": "^[\\S\\s]+$"
             }
         },
         "com.amazonaws.robomaker#LastStartedAt": {
@@ -5223,7 +5235,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_\\-]*$"
             }
         },
         "com.amazonaws.robomaker#NetworkInterface": {
@@ -5259,7 +5271,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.robomaker#NonSystemPort": {
@@ -5298,7 +5310,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-\\/+=]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-\\/+=]*$"
             }
         },
         "com.amazonaws.robomaker#Path": {
@@ -5534,7 +5546,7 @@
                     "min": 1,
                     "max": 4
                 },
-                "smithy.api#pattern": "1.x"
+                "smithy.api#pattern": "^1.x$"
             }
         },
         "com.amazonaws.robomaker#ResourceAlreadyExistsException": {
@@ -5620,7 +5632,7 @@
                     "min": 1,
                     "max": 40
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]*$"
             }
         },
         "com.amazonaws.robomaker#Robot": {
@@ -6008,7 +6020,7 @@
                     "min": 3,
                     "max": 63
                 },
-                "smithy.api#pattern": "[a-z0-9][a-z0-9.\\-]*[a-z0-9]"
+                "smithy.api#pattern": "^[a-z0-9][a-z0-9.\\-]*[a-z0-9]$"
             }
         },
         "com.amazonaws.robomaker#S3Etag": {
@@ -6851,7 +6863,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "7|9|11|Kinetic|Melodic|Dashing|Foxy"
+                "smithy.api#pattern": "^7|9|11|Kinetic|Melodic|Dashing|Foxy$"
             }
         },
         "com.amazonaws.robomaker#SimulationTimeMillis": {
@@ -7205,7 +7217,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9 _.\\-\\/+=:]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9 _.\\-\\/+=:]*$"
             }
         },
         "com.amazonaws.robomaker#TagKeyList": {
@@ -7291,7 +7303,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9 _.\\-\\/+=:]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9 _.\\-\\/+=:]*$"
             }
         },
         "com.amazonaws.robomaker#TemplateLocation": {
@@ -7357,6 +7369,12 @@
                     "target": "com.amazonaws.robomaker#TemplateName",
                     "traits": {
                         "smithy.api#documentation": "<p>The name of the template.</p>"
+                    }
+                },
+                "version": {
+                    "target": "com.amazonaws.robomaker#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The version of the template that you're using.</p>"
                     }
                 }
             },
@@ -7958,7 +7976,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "(\\$LATEST)|[0-9]*"
+                "smithy.api#pattern": "^(\\$LATEST)|[0-9]*$"
             }
         },
         "com.amazonaws.robomaker#VersionQualifier": {
@@ -7968,7 +7986,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "ALL"
+                "smithy.api#pattern": "^ALL$"
             }
         },
         "com.amazonaws.robomaker#WorldConfig": {

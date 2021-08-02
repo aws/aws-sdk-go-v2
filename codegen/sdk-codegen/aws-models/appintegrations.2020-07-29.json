@@ -86,7 +86,7 @@
                     "name": "app-integrations"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n  \n         <p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p>\n         <p>For information about how you can use external applications with Amazon Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/crm.html\">Set up pre-built integrations</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>The Amazon AppIntegrations service enables you to configure and reuse connections to external applications.</p>\n         <p>For information about how you can use external applications with Amazon Connect, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/crm.html\">Set up pre-built integrations</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#title": "Amazon AppIntegrations Service"
             }
         },
@@ -148,7 +148,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Creates an EventIntegration, given a specified name, description, and a reference to an\n      Amazon Eventbridge bus in your account and a partner event source that will push events to that bus. No\n      objects are created in the your account, only metadata that is persisted on the EventIntegration\n      control plane.</p>",
+                "smithy.api#documentation": "<p>Creates an EventIntegration, given a specified name, description, and a reference to an\n      Amazon EventBridge bus in your account and a partner event source that pushes events to that bus. No\n      objects are created in the your account, only metadata that is persisted on the EventIntegration\n      control plane.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/eventIntegrations",
@@ -182,7 +182,7 @@
                 "EventBridgeBus": {
                     "target": "com.amazonaws.appintegrations#EventBridgeBus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Eventbridge bus.</p>",
+                        "smithy.api#documentation": "<p>The EventBridge bus.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -238,7 +238,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Deletes the specified existing event integration. If the event integration is associated\n      with clients, the request is rejected.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified existing event integration. If the event integration is associated\n      with clients, the request is rejected.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/eventIntegrations/{Name}",
@@ -318,7 +318,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>The event filter.</p>"
+                "smithy.api#documentation": "<p>The event filter.</p>"
             }
         },
         "com.amazonaws.appintegrations#EventIntegration": {
@@ -351,7 +351,7 @@
                 "EventBridgeBus": {
                     "target": "com.amazonaws.appintegrations#EventBridgeBus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Eventbridge bus for the event integration.</p>"
+                        "smithy.api#documentation": "<p>The Amazon EventBridge bus for the event integration.</p>"
                     }
                 },
                 "Tags": {
@@ -362,7 +362,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>The event integration.</p>"
+                "smithy.api#documentation": "<p>The event integration.</p>"
             }
         },
         "com.amazonaws.appintegrations#EventIntegrationAssociation": {
@@ -395,7 +395,7 @@
                 "EventBridgeRuleName": {
                     "target": "com.amazonaws.appintegrations#EventBridgeRuleName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the Eventbridge rule.</p>"
+                        "smithy.api#documentation": "<p>The name of the EventBridge rule.</p>"
                     }
                 },
                 "ClientAssociationMetadata": {
@@ -406,7 +406,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>The event integration association.</p>"
+                "smithy.api#documentation": "<p>The event integration association.</p>"
             }
         },
         "com.amazonaws.appintegrations#EventIntegrationAssociationsList": {
@@ -459,7 +459,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Return information about the event integration.</p>",
+                "smithy.api#documentation": "<p>Return information about the event integration.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/eventIntegrations/{Name}",
@@ -504,7 +504,7 @@
                 "EventBridgeBus": {
                     "target": "com.amazonaws.appintegrations#EventBridgeBus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Eventbridge bus.</p>"
+                        "smithy.api#documentation": "<p>The EventBridge bus.</p>"
                     }
                 },
                 "EventFilter": {
@@ -583,7 +583,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Returns a paginated list of event integration associations in the account. </p>",
+                "smithy.api#documentation": "<p>Returns a paginated list of event integration associations in the account. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/eventIntegrations/{EventIntegrationName}/associations",
@@ -658,7 +658,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Returns a paginated list of event integrations in the account.</p>",
+                "smithy.api#documentation": "<p>Returns a paginated list of event integrations in the account.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/eventIntegrations",
@@ -725,7 +725,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Lists the tags for the specified resource.</p>",
+                "smithy.api#documentation": "<p>Lists the tags for the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{resourceArn}",
@@ -797,7 +797,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.appintegrations#ResourceNotFoundException": {
@@ -896,7 +896,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Adds the specified tags to the specified resource.</p>",
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -953,7 +953,7 @@
         "com.amazonaws.appintegrations#UUID": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}"
+                "smithy.api#pattern": "^[a-f0-9]{8}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{4}-[a-f0-9]{12}$"
             }
         },
         "com.amazonaws.appintegrations#UntagResource": {
@@ -979,7 +979,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Removes the specified tags from the specified resource.</p>",
+                "smithy.api#documentation": "<p>Removes the specified tags from the specified resource.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/tags/{resourceArn}",
@@ -1038,7 +1038,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon AppIntegrations APIs are in preview release and are subject to change.</p> \n         <p>Updates the description of an event integration.</p>",
+                "smithy.api#documentation": "<p>Updates the description of an event integration.</p>",
                 "smithy.api#http": {
                     "method": "PATCH",
                     "uri": "/eventIntegrations/{Name}",

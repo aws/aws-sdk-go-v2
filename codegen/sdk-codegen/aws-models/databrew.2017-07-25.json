@@ -335,6 +335,69 @@
                 }
             }
         },
+        "com.amazonaws.databrew#ColumnSelector": {
+            "type": "structure",
+            "members": {
+                "Regex": {
+                    "target": "com.amazonaws.databrew#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A regular expression for selecting a column from a dataset.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.databrew#ColumnName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a column from a dataset.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Selector of a column from a dataset for profile job configuration. One selector includes either a column name or a regular \n            expression.</p>"
+            }
+        },
+        "com.amazonaws.databrew#ColumnSelectorList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#ColumnSelector"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.databrew#ColumnStatisticsConfiguration": {
+            "type": "structure",
+            "members": {
+                "Selectors": {
+                    "target": "com.amazonaws.databrew#ColumnSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of column selectors. Selectors can be used to select columns from the dataset. \n            When selectors are undefined, configuration will be applied to all supported columns.\n        </p>"
+                    }
+                },
+                "Statistics": {
+                    "target": "com.amazonaws.databrew#StatisticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for evaluations. Statistics can be used to select evaluations and override \n            parameters of evaluations. \n        </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for column evaluations for a profile job. ColumnStatisticsConfiguration can be used to select \n            evaluations and override parameters of evaluations for particular columns. \n        </p>"
+            }
+        },
+        "com.amazonaws.databrew#ColumnStatisticsConfigurationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#ColumnStatisticsConfiguration"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
         "com.amazonaws.databrew#CompressionFormat": {
             "type": "string",
             "traits": {
@@ -616,6 +679,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "Configuration": {
+                    "target": "com.amazonaws.databrew#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for profile jobs. Used to select columns, do evaluations, \n            and override default parameters of evaluations. When configuration is null, the\n            profile job will run with default settings.</p>"
+                    }
+                },
                 "RoleArn": {
                     "target": "com.amazonaws.databrew#Arn",
                     "traits": {
@@ -857,7 +926,13 @@
                 "DataCatalogOutputs": {
                     "target": "com.amazonaws.databrew#DataCatalogOutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output from running the job.</p>"
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the Glue Data Catalog output from running the job.</p>"
+                    }
+                },
+                "DatabaseOutputs": {
+                    "target": "com.amazonaws.databrew#DatabaseOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of JDBC database output objects which defines the output destination for \n            a DataBrew recipe job to write to. </p>"
                     }
                 },
                 "ProjectName": {
@@ -1059,7 +1134,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew will write a comma-separated value (CSV) file.</p>"
+                "smithy.api#documentation": "<p>Represents a set of options that define how DataBrew will write a \n            comma-separated value (CSV) file.</p>"
             }
         },
         "com.amazonaws.databrew#DataCatalogInputDefinition": {
@@ -1102,7 +1177,7 @@
                 "CatalogId": {
                     "target": "com.amazonaws.databrew#CatalogId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the AWS account that holds the Data Catalog that stores the data.</p>"
+                        "smithy.api#documentation": "<p>The unique identifier of the Amazon Web Services account that holds the Data Catalog that stores the data.</p>"
                     }
                 },
                 "DatabaseName": {
@@ -1122,7 +1197,7 @@
                 "S3Options": {
                     "target": "com.amazonaws.databrew#S3TableOutputOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the S3 output generated \n            by recipe jobs.</p>"
+                        "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the Amazon S3 output generated \n            by recipe jobs.</p>"
                     }
                 },
                 "DatabaseOptions": {
@@ -1139,7 +1214,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the output generated by recipe \n            jobs.</p>"
+                "smithy.api#documentation": "<p>Represents options that specify how and where in the Glue Data Catalog DataBrew \n            writes the output generated by recipe jobs.</p>"
             }
         },
         "com.amazonaws.databrew#DataCatalogOutputList": {
@@ -1185,6 +1260,56 @@
                     "min": 1,
                     "max": 255
                 }
+            }
+        },
+        "com.amazonaws.databrew#DatabaseOutput": {
+            "type": "structure",
+            "members": {
+                "GlueConnectionName": {
+                    "target": "com.amazonaws.databrew#GlueConnectionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Glue connection that stores the connection information for the \n            target database.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseOptions": {
+                    "target": "com.amazonaws.databrew#DatabaseTableOutputOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the database output \n            generated by recipe jobs.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DatabaseOutputMode": {
+                    "target": "com.amazonaws.databrew#DatabaseOutputMode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The output mode to write into the database. Currently supported option: NEW_TABLE.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Represents a JDBC database output object which defines the output destination for \n            a DataBrew recipe job to write into.</p>"
+            }
+        },
+        "com.amazonaws.databrew#DatabaseOutputList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#DatabaseOutput"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.databrew#DatabaseOutputMode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "NEW_TABLE",
+                        "name": "NEW_TABLE"
+                    }
+                ]
             }
         },
         "com.amazonaws.databrew#DatabaseTableName": {
@@ -1921,13 +2046,25 @@
                 "DataCatalogOutputs": {
                     "target": "com.amazonaws.databrew#DataCatalogOutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output from running the job.</p>"
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the Glue Data Catalog output from running the job.</p>"
+                    }
+                },
+                "DatabaseOutputs": {
+                    "target": "com.amazonaws.databrew#DatabaseOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of JDBC database output objects which defines the output \n            destination for a DataBrew recipe job to write into.</p>"
                     }
                 },
                 "ProjectName": {
                     "target": "com.amazonaws.databrew#ProjectName",
                     "traits": {
                         "smithy.api#documentation": "<p>The DataBrew project associated with this job.</p>"
+                    }
+                },
+                "ProfileConfiguration": {
+                    "target": "com.amazonaws.databrew#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for profile jobs. Used to select columns, do evaluations, \n            and override default parameters of evaluations. When configuration is null, the\n            profile job will run with default settings.</p>"
                     }
                 },
                 "RecipeReference": {
@@ -2051,6 +2188,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "ProfileConfiguration": {
+                    "target": "com.amazonaws.databrew#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for profile jobs. Used to select columns, do evaluations, \n            and override default parameters of evaluations. When configuration is null, the\n            profile job will run with default settings.</p>"
+                    }
+                },
                 "RunId": {
                     "target": "com.amazonaws.databrew#JobRunId",
                     "traits": {
@@ -2084,7 +2227,13 @@
                 "DataCatalogOutputs": {
                     "target": "com.amazonaws.databrew#DataCatalogOutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output from running the job.</p>"
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the Glue Data Catalog output from running the job.</p>"
+                    }
+                },
+                "DatabaseOutputs": {
+                    "target": "com.amazonaws.databrew#DatabaseOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of JDBC database output objects which defines the output \n            destination for a DataBrew recipe job to write into.</p>"
                     }
                 },
                 "RecipeReference": {
@@ -2780,7 +2929,13 @@
                 "DataCatalogOutputs": {
                     "target": "com.amazonaws.databrew#DataCatalogOutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output \n            from running the job.</p>"
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the Glue Data Catalog output \n            from running the job.</p>"
+                    }
+                },
+                "DatabaseOutputs": {
+                    "target": "com.amazonaws.databrew#DatabaseOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of JDBC database output objects which defines the output \n            destination for a DataBrew recipe job to write into.</p>"
                     }
                 },
                 "ProjectName": {
@@ -2929,7 +3084,13 @@
                 "DataCatalogOutputs": {
                     "target": "com.amazonaws.databrew#DataCatalogOutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output \n            from running the job.</p>"
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the Glue Data Catalog output \n            from running the job.</p>"
+                    }
+                },
+                "DatabaseOutputs": {
+                    "target": "com.amazonaws.databrew#DatabaseOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of JDBC database output objects which defines the output \n            destination for a DataBrew recipe job to write into.</p>"
                     }
                 },
                 "RecipeReference": {
@@ -3794,7 +3955,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the output generated by\n            recipe jobs or profile jobs.</p>"
+                "smithy.api#documentation": "<p>Represents options that specify how and where in Amazon S3 DataBrew writes the output generated by\n            recipe jobs or profile jobs.</p>"
             }
         },
         "com.amazonaws.databrew#OutputFormat": {
@@ -3903,7 +4064,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 12288
+                    "max": 32768
                 }
             }
         },
@@ -3960,6 +4121,32 @@
         },
         "com.amazonaws.databrew#Preview": {
             "type": "boolean"
+        },
+        "com.amazonaws.databrew#ProfileConfiguration": {
+            "type": "structure",
+            "members": {
+                "DatasetStatisticsConfiguration": {
+                    "target": "com.amazonaws.databrew#StatisticsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for inter-column evaluations. Configuration can be used to select evaluations and override \n            parameters of evaluations. When configuration is undefined, the profile job will run all supported \n            inter-column evaluations.\n        </p>"
+                    }
+                },
+                "ProfileColumns": {
+                    "target": "com.amazonaws.databrew#ColumnSelectorList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of column selectors. ProfileColumns can be used to select columns from the dataset. When \n            ProfileColumns is undefined, the profile job will profile all supported columns.\n        </p>"
+                    }
+                },
+                "ColumnStatisticsConfigurations": {
+                    "target": "com.amazonaws.databrew#ColumnStatisticsConfigurationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of configurations for column evaluations. ColumnStatisticsConfigurations are used to \n            select evaluations and override parameters of evaluations for particular columns. When \n            ColumnStatisticsConfigurations is undefined,  the profile job will profile all supported columns \n            and run all supported  evaluations.\n        </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration for profile jobs. Configuration can be used to select columns, do evaluations, and override default \n            parameters of evaluations. When configuration is undefined, the profile job will apply default settings to all \n            supported columns.\n        </p>"
+            }
         },
         "com.amazonaws.databrew#Project": {
             "type": "structure",
@@ -4417,7 +4604,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the S3 output generated by \n            recipe jobs.</p>"
+                "smithy.api#documentation": "<p>Represents options that specify how and where DataBrew writes the Amazon S3 output generated by \n            recipe jobs.</p>"
             }
         },
         "com.amazonaws.databrew#Sample": {
@@ -4916,6 +5103,80 @@
         "com.amazonaws.databrew#StartedBy": {
             "type": "string"
         },
+        "com.amazonaws.databrew#Statistic": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[A-Z\\_]+$"
+            }
+        },
+        "com.amazonaws.databrew#StatisticList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#Statistic"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.databrew#StatisticOverride": {
+            "type": "structure",
+            "members": {
+                "Statistic": {
+                    "target": "com.amazonaws.databrew#Statistic",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an evaluation</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.databrew#ParameterMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A map that includes overrides of an evaluation’s parameters.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Override of a particular evaluation for a profile job. </p>"
+            }
+        },
+        "com.amazonaws.databrew#StatisticOverrideList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databrew#StatisticOverride"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.databrew#StatisticsConfiguration": {
+            "type": "structure",
+            "members": {
+                "IncludedStatistics": {
+                    "target": "com.amazonaws.databrew#StatisticList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of included evaluations. When the list is undefined, all supported \n            evaluations will be included.</p>"
+                    }
+                },
+                "Overrides": {
+                    "target": "com.amazonaws.databrew#StatisticOverrideList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of overrides for evaluations.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Configuration of evaluations for a profile job. This configuration can be used to select \n            evaluations and override the parameters of selected evaluations.\n        </p>"
+            }
+        },
         "com.amazonaws.databrew#StepIndex": {
             "type": "integer",
             "traits": {
@@ -5274,6 +5535,12 @@
         "com.amazonaws.databrew#UpdateProfileJobRequest": {
             "type": "structure",
             "members": {
+                "Configuration": {
+                    "target": "com.amazonaws.databrew#ProfileConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for profile jobs. Used to select columns, do evaluations, \n            and override default parameters of evaluations. When configuration is null, the\n            profile job will run with default settings.</p>"
+                    }
+                },
                 "EncryptionKeyArn": {
                     "target": "com.amazonaws.databrew#EncryptionKeyArn",
                     "traits": {
@@ -5520,7 +5787,13 @@
                 "DataCatalogOutputs": {
                     "target": "com.amazonaws.databrew#DataCatalogOutputList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more artifacts that represent the AWS Glue Data Catalog output from running the job.</p>"
+                        "smithy.api#documentation": "<p>One or more artifacts that represent the Glue Data Catalog output from running the job.</p>"
+                    }
+                },
+                "DatabaseOutputs": {
+                    "target": "com.amazonaws.databrew#DatabaseOutputList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Represents a list of JDBC database output objects which defines the output destination for a \n            DataBrew recipe job to write into.</p>"
                     }
                 },
                 "RoleArn": {

@@ -169,7 +169,7 @@
                     "name": "appsync"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS AppSync provides API actions for creating and interacting with data sources using\n         GraphQL from your application.</p>",
+                "smithy.api#documentation": "<p>AppSync  provides API actions for creating and interacting with data sources using\n         GraphQL from your application.</p>",
                 "smithy.api#title": "AWS AppSync",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://appsync.amazonaws.com"
@@ -195,7 +195,7 @@
                 "authenticationType": {
                     "target": "com.amazonaws.appsync#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.</p>"
+                        "smithy.api#documentation": "<p>The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.</p>"
                     }
                 },
                 "openIDConnectConfig": {
@@ -208,6 +208,12 @@
                     "target": "com.amazonaws.appsync#CognitoUserPoolConfig",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Cognito user pool configuration.</p>"
+                    }
+                },
+                "lambdaAuthorizerConfig": {
+                    "target": "com.amazonaws.appsync#LambdaAuthorizerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for AWS Lambda function authorization.</p>"
                     }
                 }
             },
@@ -403,7 +409,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an API key.</p>\n         <p>Customers invoke AWS AppSync GraphQL API operations with API keys as an identity\n         mechanism. There are two key versions:</p>\n         <p>\n            <b>da1</b>: This version was introduced at launch in November\n         2017. These keys always expire after 7 days. Key expiration is managed by Amazon DynamoDB\n         TTL. The keys ceased to be valid after February 21, 2018 and should not be used after that\n         date.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ListApiKeys</code> returns the expiration time in milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateApiKey</code> returns the expiration time in\n               milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateApiKey</code> is not available for this key version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteApiKey</code> deletes the item from the table.</p>\n            </li>\n            <li>\n               <p>Expiration is stored in Amazon DynamoDB as milliseconds. This results in a bug\n               where keys are not automatically deleted because DynamoDB expects the TTL to be\n               stored in seconds. As a one-time action, we will delete these keys from the table\n               after February 21, 2018.</p>\n            </li>\n         </ul>\n         <p>\n            <b>da2</b>: This version was introduced in February 2018 when\n         AppSync added support to extend key expiration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ListApiKeys</code> returns the expiration time and deletion time\n               in seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateApiKey</code> returns the expiration time and deletion time\n               in seconds and accepts a user-provided expiration time in seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateApiKey</code> returns the expiration time and and deletion time\n               in seconds and accepts a user-provided expiration time in seconds. Expired API keys\n               are kept for 60 days after the expiration time. Key expiration time can be updated\n               while the key is not deleted. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteApiKey</code> deletes the item from the table.</p>\n            </li>\n            <li>\n               <p>Expiration is stored in Amazon DynamoDB as seconds. After the expiration\n               time, using the key to authenticate will fail. But the key can be reinstated before\n               deletion.</p>\n            </li>\n            <li>\n               <p>Deletion is stored in Amazon DynamoDB as seconds. The key will be deleted\n               after deletion time. </p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Describes an API key.</p>\n         <p>Customers invoke AppSync GraphQL API operations with API keys as an identity\n         mechanism. There are two key versions:</p>\n         <p>\n            <b>da1</b>: This version was introduced at launch in November\n         2017. These keys always expire after 7 days. Key expiration is managed by Amazon DynamoDB\n         TTL. The keys ceased to be valid after February 21, 2018 and should not be used after that\n         date.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ListApiKeys</code> returns the expiration time in milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateApiKey</code> returns the expiration time in\n               milliseconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateApiKey</code> is not available for this key version.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteApiKey</code> deletes the item from the table.</p>\n            </li>\n            <li>\n               <p>Expiration is stored in Amazon DynamoDB as milliseconds. This results in a bug\n               where keys are not automatically deleted because DynamoDB expects the TTL to be\n               stored in seconds. As a one-time action, we will delete these keys from the table\n               after February 21, 2018.</p>\n            </li>\n         </ul>\n         <p>\n            <b>da2</b>: This version was introduced in February 2018 when\n         AppSync added support to extend key expiration.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ListApiKeys</code> returns the expiration time and deletion time\n               in seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreateApiKey</code> returns the expiration time and deletion time\n               in seconds and accepts a user-provided expiration time in seconds.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UpdateApiKey</code> returns the expiration time and and deletion time\n               in seconds and accepts a user-provided expiration time in seconds. Expired API keys\n               are kept for 60 days after the expiration time. Key expiration time can be updated\n               while the key is not deleted. </p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteApiKey</code> deletes the item from the table.</p>\n            </li>\n            <li>\n               <p>Expiration is stored in Amazon DynamoDB as seconds. After the expiration\n               time, using the key to authenticate will fail. But the key can be reinstated before\n               deletion.</p>\n            </li>\n            <li>\n               <p>Deletion is stored in Amazon DynamoDB as seconds. The key will be deleted\n               after deletion time. </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.appsync#ApiKeyLimitExceededException": {
@@ -470,6 +476,10 @@
                     {
                         "value": "OPENID_CONNECT",
                         "name": "OPENID_CONNECT"
+                    },
+                    {
+                        "value": "AWS_LAMBDA",
+                        "name": "AWS_LAMBDA"
                     }
                 ]
             }
@@ -487,7 +497,7 @@
                 "awsIamConfig": {
                     "target": "com.amazonaws.appsync#AwsIamConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM settings.</p>"
+                        "smithy.api#documentation": "<p>The Identity and Access Management settings.</p>"
                     }
                 }
             },
@@ -512,18 +522,18 @@
                 "signingRegion": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signing region for AWS IAM authorization.</p>"
+                        "smithy.api#documentation": "<p>The signing region for Identity and Access Management authorization.</p>"
                     }
                 },
                 "signingServiceName": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The signing service name for AWS IAM authorization.</p>"
+                        "smithy.api#documentation": "<p>The signing service name for Identity and Access Management authorization.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The AWS IAM configuration.</p>"
+                "smithy.api#documentation": "<p>The Identity and Access Management configuration.</p>"
             }
         },
         "com.amazonaws.appsync#BadRequestException": {
@@ -590,7 +600,7 @@
                 "awsRegion": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region in which the user pool was created.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region in which the user pool was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -897,7 +907,7 @@
                 "serviceRoleArn": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM service role ARN for the data source. The system assumes this role when\n         accessing the data source.</p>"
+                        "smithy.api#documentation": "<p>The Identity and Access Management service role ARN for the data source. The system assumes this role when\n         accessing the data source.</p>"
                     }
                 },
                 "dynamodbConfig": {
@@ -909,7 +919,7 @@
                 "lambdaConfig": {
                     "target": "com.amazonaws.appsync#LambdaDataSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS Lambda settings.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services Lambda settings.</p>"
                     }
                 },
                 "elasticsearchConfig": {
@@ -1096,7 +1106,7 @@
                 "authenticationType": {
                     "target": "com.amazonaws.appsync#AuthenticationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.</p>",
+                        "smithy.api#documentation": "<p>The authentication type: API key, Identity and Access Management, OIDC, or Amazon Cognito user pools.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1128,6 +1138,12 @@
                     "target": "com.amazonaws.appsync#Boolean",
                     "traits": {
                         "smithy.api#documentation": "<p>A flag indicating whether to enable X-Ray tracing for the\n         <code>GraphqlApi</code>.</p>"
+                    }
+                },
+                "lambdaAuthorizerConfig": {
+                    "target": "com.amazonaws.appsync#LambdaAuthorizerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for AWS Lambda function authorization.</p>"
                     }
                 }
             }
@@ -1351,13 +1367,13 @@
                 "type": {
                     "target": "com.amazonaws.appsync#DataSourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the data source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AMAZON_DYNAMODB</b>: The data source is an Amazon\n               DynamoDB table.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_ELASTICSEARCH</b>: The data source is an\n               Amazon Elasticsearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AWS_LAMBDA</b>: The data source is an AWS Lambda\n               function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NONE</b>: There is no data source. This type is\n               used when you wish to invoke a GraphQL operation without connecting to a data source,\n               such as performing data transformation with resolvers or triggering a subscription to\n               be invoked from a mutation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP</b>: The data source is an HTTP\n               endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <b>RELATIONAL_DATABASE</b>: The data source is a\n               relational database.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of the data source.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>AMAZON_DYNAMODB</b>: The data source is an Amazon\n               DynamoDB table.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AMAZON_ELASTICSEARCH</b>: The data source is an\n               Amazon Elasticsearch Service domain.</p>\n            </li>\n            <li>\n               <p>\n                  <b>AWS_LAMBDA</b>: The data source is an Amazon Web Services Lambda\n               function.</p>\n            </li>\n            <li>\n               <p>\n                  <b>NONE</b>: There is no data source. This type is\n               used when you wish to invoke a GraphQL operation without connecting to a data source,\n               such as performing data transformation with resolvers or triggering a subscription to\n               be invoked from a mutation.</p>\n            </li>\n            <li>\n               <p>\n                  <b>HTTP</b>: The data source is an HTTP\n               endpoint.</p>\n            </li>\n            <li>\n               <p>\n                  <b>RELATIONAL_DATABASE</b>: The data source is a\n               relational database.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "serviceRoleArn": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS IAM service role ARN for the data source. The system assumes this role when\n         accessing the data source.</p>"
+                        "smithy.api#documentation": "<p>The Identity and Access Management service role ARN for the data source. The system assumes this role when\n         accessing the data source.</p>"
                     }
                 },
                 "dynamodbConfig": {
@@ -1369,7 +1385,7 @@
                 "lambdaConfig": {
                     "target": "com.amazonaws.appsync#LambdaDataSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS Lambda settings.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services Lambda settings.</p>"
                     }
                 },
                 "elasticsearchConfig": {
@@ -1891,7 +1907,7 @@
                 "awsRegion": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1931,7 +1947,7 @@
                 "awsRegion": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2697,7 +2713,13 @@
                 "wafWebAclArn": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the AWS Web Application Firewall (WAF) ACL associated with this\n         <code>GraphqlApi</code>, if one exists.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the WAF ACL associated with this\n         <code>GraphqlApi</code>, if one exists.</p>"
+                    }
+                },
+                "lambdaAuthorizerConfig": {
+                    "target": "com.amazonaws.appsync#LambdaAuthorizerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p></p>\n         <p>Configuration for AWS Lambda function authorization.</p>"
                     }
                 }
             },
@@ -2717,7 +2739,7 @@
                 "endpoint": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The HTTP URL endpoint. You can either specify the domain name or IP, and port\n         combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AWS\n         AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS\n         endpoints.</p>"
+                        "smithy.api#documentation": "<p>The HTTP URL endpoint. You can either specify the domain name or IP, and port\n         combination, and the URL scheme must be HTTP or HTTPS. If the port is not specified, AppSync uses the default port 80 for the HTTP endpoint and port 443 for HTTPS\n         endpoints.</p>"
                     }
                 },
                 "authorizationConfig": {
@@ -2739,9 +2761,36 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An internal AWS AppSync error occurred. Try your request again.</p>",
+                "smithy.api#documentation": "<p>An internal AppSync error occurred. Try your request again.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.appsync#LambdaAuthorizerConfig": {
+            "type": "structure",
+            "members": {
+                "authorizerResultTtlInSeconds": {
+                    "target": "com.amazonaws.appsync#TTL",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds a response should be cached for. The default is 5 minutes (300 seconds).\n         The Lambda function can override this by returning a\n            <code>ttlOverride</code> key in its response. A value of 0 disables caching of\n         responses.</p>"
+                    }
+                },
+                "authorizerUri": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the lambda function to be called for authorization. This may be a standard\n         Lambda ARN, a version ARN (<code>.../v3</code>) or alias ARN. </p>\n         <p>\n            <i>Note</i>: This Lambda function must have the following resource-based\n         policy assigned to it. When configuring Lambda authorizers in the Console, this is done for\n         you. To do so with the AWS CLI, run the following:</p>\n         <p>\n            <code>aws lambda add-permission --function-name \"arn:aws:lambda:us-east-2:111122223333:function:my-function\" --statement-id \"appsync\" --principal appsync.amazonaws.com --action lambda:InvokeFunction</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "identityValidationExpression": {
+                    "target": "com.amazonaws.appsync#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A regular expression for validation of tokens before the Lambda Function is called.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A <code>LambdaAuthorizerConfig</code> holds configuration on how to authorize AppSync API access when using\n      the <code>AWS_LAMBDA</code> authorizer mode. Be aware that an AppSync API may have only one Lambda authorizer configured\n      at a time.</p>"
             }
         },
         "com.amazonaws.appsync#LambdaConflictHandlerConfig": {
@@ -2770,7 +2819,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an AWS Lambda data source configuration.</p>"
+                "smithy.api#documentation": "<p>Describes an Amazon Web Services Lambda data source configuration.</p>"
             }
         },
         "com.amazonaws.appsync#LimitExceededException": {
@@ -3401,7 +3450,7 @@
                 "cloudWatchLogsRoleArn": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The service role that AWS AppSync will assume to publish to Amazon CloudWatch logs in\n         your account. </p>",
+                        "smithy.api#documentation": "<p>The service role that AppSync will assume to publish to Amazon CloudWatch logs in\n         your account. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3472,7 +3521,7 @@
                 "clientId": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The client identifier of the Relying party at the OpenID identity provider. This\n         identifier is typically obtained when the Relying party is registered with the OpenID\n         identity provider. You can specify a regular expression so the AWS AppSync can validate\n         against multiple client identifiers at a time.</p>"
+                        "smithy.api#documentation": "<p>The client identifier of the Relying party at the OpenID identity provider. This\n         identifier is typically obtained when the Relying party is registered with the OpenID\n         identity provider. You can specify a regular expression so the AppSync can validate\n         against multiple client identifiers at a time.</p>"
                     }
                 },
                 "iatTTL": {
@@ -3514,7 +3563,7 @@
                     "min": 1,
                     "max": 65536
                 },
-                "smithy.api#pattern": "[\\\\S]+"
+                "smithy.api#pattern": "^[\\\\S]+$"
             }
         },
         "com.amazonaws.appsync#PipelineConfig": {
@@ -3537,7 +3586,7 @@
                 "awsRegion": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS Region for RDS HTTP endpoint.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services Region for RDS HTTP endpoint.</p>"
                     }
                 },
                 "dbClusterIdentifier": {
@@ -3561,7 +3610,7 @@
                 "awsSecretStoreArn": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>AWS secret store ARN for database credentials.</p>"
+                        "smithy.api#documentation": "<p>Amazon Web Services secret store ARN for database credentials.</p>"
                     }
                 }
             },
@@ -3706,7 +3755,7 @@
                     "min": 1,
                     "max": 65536
                 },
-                "smithy.api#pattern": "[_A-Za-z][_0-9A-Za-z]*"
+                "smithy.api#pattern": "^[_A-Za-z][_0-9A-Za-z]*$"
             }
         },
         "com.amazonaws.appsync#SchemaStatus": {
@@ -3834,6 +3883,15 @@
                 "smithy.api#documentation": "<p>Describes a Sync configuration for a resolver.</p>\n         <p>Contains information on which Conflict Detection as well as Resolution strategy should\n         be performed when the resolver is invoked.</p>"
             }
         },
+        "com.amazonaws.appsync#TTL": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 3600
+                }
+            }
+        },
         "com.amazonaws.appsync#TagKey": {
             "type": "string",
             "traits": {
@@ -3842,7 +3900,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
+                "smithy.api#pattern": "^(?!aws:)[ a-zA-Z+-=._:/]+$"
             }
         },
         "com.amazonaws.appsync#TagKeyList": {
@@ -4325,7 +4383,7 @@
                 "lambdaConfig": {
                     "target": "com.amazonaws.appsync#LambdaDataSourceConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new AWS Lambda configuration.</p>"
+                        "smithy.api#documentation": "<p>The new Amazon Web Services Lambda configuration.</p>"
                     }
                 },
                 "elasticsearchConfig": {
@@ -4554,6 +4612,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A flag indicating whether to enable X-Ray tracing for the\n         <code>GraphqlApi</code>.</p>"
                     }
+                },
+                "lambdaAuthorizerConfig": {
+                    "target": "com.amazonaws.appsync#LambdaAuthorizerConfig",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration for AWS Lambda function authorization.</p>"
+                    }
                 }
             }
         },
@@ -4773,7 +4837,7 @@
                 "awsRegion": {
                     "target": "com.amazonaws.appsync#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region in which the user pool was created.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region in which the user pool was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
