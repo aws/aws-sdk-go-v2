@@ -26,6 +26,9 @@ type Account struct {
 	// This member is required.
 	Name *string
 
+	// The status of the account.
+	AccountStatus AccountStatus
+
 	// The Amazon Chime account type. For more information about different account
 	// types, see Managing Your Amazon Chime Accounts
 	// (https://docs.aws.amazon.com/chime/latest/ag/manage-chime-account.html) in the
@@ -652,6 +655,58 @@ type EmergencyCallingConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Settings specific to the Amazon Transcribe Medical engine.
+type EngineTranscribeMedicalSettings struct {
+
+	// The language code specified for the Amazon Transcribe Medical engine.
+	//
+	// This member is required.
+	LanguageCode TranscribeMedicalLanguageCode
+
+	// The specialty specified for the Amazon Transcribe Medical engine.
+	//
+	// This member is required.
+	Specialty TranscribeMedicalSpecialty
+
+	// The type of transcription.
+	//
+	// This member is required.
+	Type TranscribeMedicalType
+
+	// The AWS Region passed to Amazon Transcribe Medical. If you don't specify a
+	// Region, Amazon Chime uses the Region closest to the meeting's Region.
+	Region TranscribeMedicalRegion
+
+	// The name of the vocabulary passed to Amazon Transcribe Medical.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
+// Settings specific to the Amazon Transcribe engine.
+type EngineTranscribeSettings struct {
+
+	// The language code specified for the Amazon Transcribe engine.
+	//
+	// This member is required.
+	LanguageCode TranscribeLanguageCode
+
+	// The AWS Region passed to Amazon Transcribe. If you don't specify a Region,
+	// Amazon Chime uses the Region closest to the meeting's Region.
+	Region TranscribeRegion
+
+	// The filtering method passed to Amazon Transcribe.
+	VocabularyFilterMethod TranscribeVocabularyFilterMethod
+
+	// The name of the vocabulary filter passed to Amazon Transcribe.
+	VocabularyFilterName *string
+
+	// The name of the vocabulary passed to Amazon Transcribe.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration that allows a bot to receive outgoing events. Can be either an
 // HTTPS endpoint or a Lambda function ARN.
 type EventsConfiguration struct {
@@ -758,7 +813,7 @@ type MediaCapturePipeline struct {
 	noSmithyDocumentSerde
 }
 
-// A set of endpoints used by clients to connect to the media service group for a
+// A set of endpoints used by clients to connect to the media service group for an
 // Amazon Chime SDK meeting.
 type MediaPlacement struct {
 
@@ -768,7 +823,7 @@ type MediaPlacement struct {
 	// The audio host URL.
 	AudioHostUrl *string
 
-	// The event ingestion URL.
+	// The URL of the S3 bucket used to store the captured media.
 	EventIngestionUrl *string
 
 	// The screen data URL.
@@ -1445,6 +1500,19 @@ type TerminationHealth struct {
 
 	// The timestamp, in ISO 8601 format.
 	Timestamp *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// The configuration for the current transcription operation. Must contain
+// EngineTranscribeSettings or EngineTranscribeMedicalSettings.
+type TranscriptionConfiguration struct {
+
+	// The transcription configuration settings passed to Amazon Transcribe.
+	EngineTranscribeMedicalSettings *EngineTranscribeMedicalSettings
+
+	// The transcription configuration settings passed to Amazon Transcribe.
+	EngineTranscribeSettings *EngineTranscribeSettings
 
 	noSmithyDocumentSerde
 }

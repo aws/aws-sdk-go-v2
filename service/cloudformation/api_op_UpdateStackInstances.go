@@ -59,10 +59,10 @@ type UpdateStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of one or more AWS accounts for which you
-	// want to update parameter values for stack instances. The overridden parameter
-	// values will be applied to all stack instances in the specified accounts and
-	// Regions. You can specify Accounts or DeploymentTargets, but not both.
+	// [Self-managed permissions] The names of one or more accounts for which you want
+	// to update parameter values for stack instances. The overridden parameter values
+	// will be applied to all stack instances in the specified accounts and Regions.
+	// You can specify Accounts or DeploymentTargets, but not both.
 	Accounts []string
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
@@ -74,15 +74,15 @@ type UpdateStackInstancesInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your AWS account must be
-	// registered as a delegated administrator in the management account. For more
-	// information, see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
+	// as a delegated administrator in the management account. For more information,
+	// see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the AWS CloudFormation User Guide.
+	// in the CloudFormation User Guide.
 	CallAs types.CallAs
 
-	// [Service-managed permissions] The AWS Organizations accounts for which you want
-	// to update parameter values for stack instances. If your update targets OUs, the
+	// [Service-managed permissions] The Organizations accounts for which you want to
+	// update parameter values for stack instances. If your update targets OUs, the
 	// overridden parameter values only apply to the accounts that are currently in the
 	// target OUs and their child OUs. Accounts added to the target OUs and their child
 	// OUs in the future won't use the overridden values. You can specify Accounts or
@@ -90,41 +90,36 @@ type UpdateStackInstancesInput struct {
 	DeploymentTargets *types.DeploymentTargets
 
 	// The unique identifier for this stack set operation. The operation ID also
-	// functions as an idempotency token, to ensure that AWS CloudFormation performs
-	// the stack set operation only once, even if you retry the request multiple times.
-	// You might retry stack set operation requests to ensure that AWS CloudFormation
+	// functions as an idempotency token, to ensure that CloudFormation performs the
+	// stack set operation only once, even if you retry the request multiple times. You
+	// might retry stack set operation requests to ensure that CloudFormation
 	// successfully received them. If you don't specify an operation ID, the SDK
 	// generates one automatically.
 	OperationId *string
 
-	// Preferences for how AWS CloudFormation performs this stack set operation.
+	// Preferences for how CloudFormation performs this stack set operation.
 	OperationPreferences *types.StackSetOperationPreferences
 
 	// A list of input parameters whose values you want to update for the specified
 	// stack instances. Any overridden parameter values will be applied to all stack
 	// instances in the specified accounts and Regions. When specifying parameters and
-	// their values, be aware of how AWS CloudFormation sets parameter values during
-	// stack instance update operations:
+	// their values, be aware of how CloudFormation sets parameter values during stack
+	// instance update operations:
 	//
-	// * To override the current value for a
-	// parameter, include the parameter and specify its value.
+	// * To override the current value for a parameter,
+	// include the parameter and specify its value.
 	//
-	// * To leave a parameter
-	// set to its present value, you can do one of the following:
-	//
-	// * Do not include the
-	// parameter in the list.
-	//
-	// * Include the parameter and specify UsePreviousValue as
+	// * To leave an overridden parameter
+	// set to its present value, include the parameter and specify UsePreviousValue as
 	// true. (You cannot specify both a value and set UsePreviousValue to true.)
 	//
 	// * To
-	// set all overridden parameter back to the values specified in the stack set,
-	// specify a parameter list but do not include any parameters.
+	// set an overridden parameter back to the value specified in the stack set,
+	// specify a parameter list but do not include the parameter in the list.
 	//
-	// * To leave all
-	// parameters set to their present values, do not specify this property at
-	// all.
+	// * To
+	// leave all parameters set to their present values, do not specify this property
+	// at all.
 	//
 	// During stack set updates, any parameter values overridden for a stack
 	// instance are not updated, but retain their overridden value. You can only

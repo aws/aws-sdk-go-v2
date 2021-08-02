@@ -13,11 +13,11 @@ import (
 	"time"
 )
 
-// Provides the status of all clusters visible to this AWS account. Allows you to
+// Provides the status of all clusters visible to this account. Allows you to
 // filter the list of clusters based on certain criteria; for example, filtering by
 // cluster creation date and time or by status. This call returns a maximum of 50
-// clusters per call, but returns a marker to track the paging of the cluster list
-// across multiple ListClusters calls.
+// clusters in unsorted order per call, but returns a marker to track the paging of
+// the cluster list across multiple ListClusters calls.
 func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, optFns ...func(*Options)) (*ListClustersOutput, error) {
 	if params == nil {
 		params = &ListClustersInput{}
@@ -37,7 +37,9 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 // that it returns.
 type ListClustersInput struct {
 
-	// The cluster state filters to apply when listing clusters.
+	// The cluster state filters to apply when listing clusters. Clusters that change
+	// state while this action runs may be not be returned as expected in the list of
+	// clusters.
 	ClusterStates []types.ClusterState
 
 	// The creation date and time beginning value filter for listing clusters.

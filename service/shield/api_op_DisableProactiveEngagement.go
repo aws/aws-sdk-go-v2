@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes authorization from the DDoS Response Team (DRT) to notify contacts about
-// escalations to the DRT and to initiate proactive customer support.
+// Removes authorization from the Shield Response Team (SRT) to notify contacts
+// about escalations to the SRT and to initiate proactive customer support.
 func (c *Client) DisableProactiveEngagement(ctx context.Context, params *DisableProactiveEngagementInput, optFns ...func(*Options)) (*DisableProactiveEngagementOutput, error) {
 	if params == nil {
 		params = &DisableProactiveEngagementInput{}

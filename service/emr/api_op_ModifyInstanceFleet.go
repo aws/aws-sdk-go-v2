@@ -38,7 +38,7 @@ type ModifyInstanceFleetInput struct {
 	// This member is required.
 	ClusterId *string
 
-	// The unique identifier of the instance fleet.
+	// The configuration parameters of the instance fleet.
 	//
 	// This member is required.
 	InstanceFleet *types.InstanceFleetModifyConfig

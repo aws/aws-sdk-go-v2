@@ -50,7 +50,8 @@ type DeleteTagsInput struct {
 	// with this key regardless of its value. If you specify a tag key with an empty
 	// string as the tag value, we delete the tag only if its value is an empty string.
 	// If you omit this parameter, we delete all user-defined tags for the specified
-	// resources. We do not delete AWS-generated tags (tags that have the aws: prefix).
+	// resources. We do not delete Amazon Web Services-generated tags (tags that have
+	// the aws: prefix).
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

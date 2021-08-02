@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the themes in the current AWS account.
+// Lists all the themes in the current Amazon Web Services account;.
 func (c *Client) ListThemes(ctx context.Context, params *ListThemesInput, optFns ...func(*Options)) (*ListThemesOutput, error) {
 	if params == nil {
 		params = &ListThemesInput{}
@@ -30,7 +30,8 @@ func (c *Client) ListThemes(ctx context.Context, params *ListThemesInput, optFns
 
 type ListThemesInput struct {
 
-	// The ID of the AWS account that contains the themes that you're listing.
+	// The ID of the Amazon Web Services account; that contains the themes that you're
+	// listing.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -50,7 +51,7 @@ type ListThemesInput struct {
 	// only the themes created by people using Amazon QuickSight.
 	//
 	// * QUICKSIGHT -
-	// Display only the starting themes defined by QuickSight.
+	// Display only the starting themes defined by Amazon QuickSight.
 	Type types.ThemeType
 
 	noSmithyDocumentSerde
@@ -61,7 +62,7 @@ type ListThemesOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

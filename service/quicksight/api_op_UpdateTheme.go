@@ -29,13 +29,14 @@ func (c *Client) UpdateTheme(ctx context.Context, params *UpdateThemeInput, optF
 
 type UpdateThemeInput struct {
 
-	// The ID of the AWS account that contains the theme that you're updating.
+	// The ID of the Amazon Web Services account; that contains the theme that you're
+	// updating.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The theme ID, defined by Amazon QuickSight, that a custom theme inherits from.
-	// All themes initially inherit from a default QuickSight theme.
+	// All themes initially inherit from a default Amazon QuickSight theme.
 	//
 	// This member is required.
 	BaseThemeId *string
@@ -67,7 +68,7 @@ type UpdateThemeOutput struct {
 	// The creation status of the theme.
 	CreationStatus types.ResourceStatus
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

@@ -847,6 +847,24 @@ func (RowLevelPermissionPolicy) Values() []RowLevelPermissionPolicy {
 	}
 }
 
+type Status string
+
+// Enum values for Status
+const (
+	StatusEnabled  Status = "ENABLED"
+	StatusDisabled Status = "DISABLED"
+)
+
+// Values returns all known values for Status. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Status) Values() []Status {
+	return []Status{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
 type TemplateErrorType string
 
 // Enum values for TemplateErrorType

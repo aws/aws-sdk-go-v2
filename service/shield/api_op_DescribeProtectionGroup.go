@@ -41,8 +41,8 @@ type DescribeProtectionGroupInput struct {
 
 type DescribeProtectionGroupOutput struct {
 
-	// A grouping of protected resources that you and AWS Shield Advanced can monitor
-	// as a collective. This resource grouping improves the accuracy of detection and
+	// A grouping of protected resources that you and Shield Advanced can monitor as a
+	// collective. This resource grouping improves the accuracy of detection and
 	// reduces false positives.
 	//
 	// This member is required.

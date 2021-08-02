@@ -49,12 +49,12 @@ type ListStatementsInput struct {
 	// default is true.
 	RoleLevel *bool
 
-	// The name of the SQL statement specified as input to ExecuteStatement to identify
-	// the query. You can list multiple statements by providing a prefix that matches
-	// the beginning of the statement name. For example, to list myStatement1,
-	// myStatement2, myStatement3, and so on, then provide the a value of myStatement.
-	// Data API does a case-sensitive match of SQL statement names to the prefix value
-	// you provide.
+	// The name of the SQL statement specified as input to BatchExecuteStatement or
+	// ExecuteStatement to identify the query. You can list multiple statements by
+	// providing a prefix that matches the beginning of the statement name. For
+	// example, to list myStatement1, myStatement2, myStatement3, and so on, then
+	// provide the a value of myStatement. Data API does a case-sensitive match of SQL
+	// statement names to the prefix value you provide.
 	StatementName *string
 
 	// The status of the SQL statement to list. Status values are defined as

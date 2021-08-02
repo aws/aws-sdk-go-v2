@@ -86,10 +86,10 @@ type AutoScalingGroupRecommendationOption struct {
 	// instance, including CPU, memory, EBS throughput, EBS IOPS, disk throughput, disk
 	// IOPS, network throughput, and network PPS. The performance risk of the
 	// recommended instance is calculated as the maximum performance risk score across
-	// the analyzed resource specifications. The value ranges from 0 to 5, with 0
+	// the analyzed resource specifications. The value ranges from 0 - 4, with 0
 	// meaning that the recommended resource is predicted to always provide enough
 	// hardware capability. The higher the performance risk is, the more likely you
-	// should validate whether the recommended resource meets the performance
+	// should validate whether the recommendation will meet the performance
 	// requirements of your workload before migrating your resource.
 	PerformanceRisk float64
 
@@ -500,7 +500,7 @@ type InstanceRecommendationOption struct {
 	// including CPU, memory, EBS throughput, EBS IOPS, disk throughput, disk IOPS,
 	// network throughput, and network PPS. The performance risk of the recommended
 	// instance is calculated as the maximum performance risk score across the analyzed
-	// resource specifications. The value ranges from 0 to 5, with 0 meaning that the
+	// resource specifications. The value ranges from 0 - 4, with 0 meaning that the
 	// recommended resource is predicted to always provide enough hardware capability.
 	// The higher the performance risk is, the more likely you should validate whether
 	// the recommendation will meet the performance requirements of your workload
@@ -1187,7 +1187,7 @@ type VolumeRecommendationOption struct {
 
 	// The performance risk of the volume recommendation option. Performance risk is
 	// the likelihood of the recommended volume type meeting the performance
-	// requirement of your workload. The value ranges from 0 to 5, with 0 meaning that
+	// requirement of your workload. The value ranges from 0 - 4, with 0 meaning that
 	// the recommended resource is predicted to always provide enough hardware
 	// capability. The higher the performance risk is, the more likely you should
 	// validate whether the recommendation will meet the performance requirements of

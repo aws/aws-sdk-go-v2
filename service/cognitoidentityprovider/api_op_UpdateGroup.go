@@ -12,8 +12,7 @@ import (
 )
 
 // Updates the specified group with the specified attributes. Calling this action
-// requires developer credentials. If you don't provide a value for an attribute,
-// it will be set to the default value.
+// requires developer credentials.
 func (c *Client) UpdateGroup(ctx context.Context, params *UpdateGroupInput, optFns ...func(*Options)) (*UpdateGroupOutput, error) {
 	if params == nil {
 		params = &UpdateGroupInput{}

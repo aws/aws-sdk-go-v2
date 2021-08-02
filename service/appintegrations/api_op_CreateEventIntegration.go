@@ -12,10 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon AppIntegrations APIs are in preview release and are subject to
-// change. Creates an EventIntegration, given a specified name, description, and a
-// reference to an Amazon Eventbridge bus in your account and a partner event
-// source that will push events to that bus. No objects are created in the your
+// Creates an EventIntegration, given a specified name, description, and a
+// reference to an Amazon EventBridge bus in your account and a partner event
+// source that pushes events to that bus. No objects are created in the your
 // account, only metadata that is persisted on the EventIntegration control plane.
 func (c *Client) CreateEventIntegration(ctx context.Context, params *CreateEventIntegrationInput, optFns ...func(*Options)) (*CreateEventIntegrationOutput, error) {
 	if params == nil {
@@ -34,7 +33,7 @@ func (c *Client) CreateEventIntegration(ctx context.Context, params *CreateEvent
 
 type CreateEventIntegrationInput struct {
 
-	// The Eventbridge bus.
+	// The EventBridge bus.
 	//
 	// This member is required.
 	EventBridgeBus *string

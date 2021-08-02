@@ -4,6 +4,7 @@ package iotsitewise
 
 import (
 	"context"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/smithy-go/middleware"
@@ -99,6 +100,9 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
+	if err = addEndpointPrefix_opTagResourceMiddleware(stack); err != nil {
+		return err
+	}
 	if err = addOpTagResourceValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -115,6 +119,33 @@ func (c *Client) addOperationTagResourceMiddlewares(stack *middleware.Stack, opt
 		return err
 	}
 	return nil
+}
+
+type endpointPrefix_opTagResourceMiddleware struct {
+}
+
+func (*endpointPrefix_opTagResourceMiddleware) ID() string {
+	return "EndpointHostPrefix"
+}
+
+func (m *endpointPrefix_opTagResourceMiddleware) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	if smithyhttp.GetHostnameImmutable(ctx) || smithyhttp.IsEndpointHostPrefixDisabled(ctx) {
+		return next.HandleSerialize(ctx, in)
+	}
+
+	req, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown transport type %T", in.Request)
+	}
+
+	req.URL.Host = "api." + req.URL.Host
+
+	return next.HandleSerialize(ctx, in)
+}
+func addEndpointPrefix_opTagResourceMiddleware(stack *middleware.Stack) error {
+	return stack.Serialize.Insert(&endpointPrefix_opTagResourceMiddleware{}, `OperationSerializer`, middleware.After)
 }
 
 func newServiceMetadataMiddleware_opTagResource(region string) *awsmiddleware.RegisterServiceMetadata {

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the registration status of an account in AWS Audit Manager.
+// Returns the registration status of an account in Audit Manager.
 func (c *Client) GetAccountStatus(ctx context.Context, params *GetAccountStatusInput, optFns ...func(*Options)) (*GetAccountStatusOutput, error) {
 	if params == nil {
 		params = &GetAccountStatusInput{}
@@ -33,7 +33,7 @@ type GetAccountStatusInput struct {
 
 type GetAccountStatusOutput struct {
 
-	// The status of the specified AWS account.
+	// The status of the specified account.
 	Status types.AccountStatus
 
 	// Metadata pertaining to the operation's result.

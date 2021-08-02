@@ -15,8 +15,8 @@ import (
 	"strings"
 )
 
-// Creates or modifies the PublicAccessBlock configuration for an AWS account. For
-// more information, see  Using Amazon S3 block public access
+// Creates or modifies the PublicAccessBlock configuration for an account. For more
+// information, see  Using Amazon S3 block public access
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html).
 // Related actions include:
 //
@@ -43,13 +43,13 @@ func (c *Client) PutPublicAccessBlock(ctx context.Context, params *PutPublicAcce
 
 type PutPublicAccessBlockInput struct {
 
-	// The account ID for the AWS account whose PublicAccessBlock configuration you
-	// want to set.
+	// The account ID for the account whose PublicAccessBlock configuration you want to
+	// set.
 	//
 	// This member is required.
 	AccountId *string
 
-	// The PublicAccessBlock configuration that you want to apply to the specified AWS
+	// The PublicAccessBlock configuration that you want to apply to the specified
 	// account.
 	//
 	// This member is required.

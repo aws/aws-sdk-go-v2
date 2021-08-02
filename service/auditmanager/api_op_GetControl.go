@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a control from AWS Audit Manager.
+// Returns a control from Audit Manager.
 func (c *Client) GetControl(ctx context.Context, params *GetControlInput, optFns ...func(*Options)) (*GetControlOutput, error) {
 	if params == nil {
 		params = &GetControlInput{}

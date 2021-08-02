@@ -7188,6 +7188,11 @@ func awsAwsjson11_deserializeDocumentDataSourceConfiguration(v **types.DataSourc
 				return err
 			}
 
+		case "WorkDocsConfiguration":
+			if err := awsAwsjson11_deserializeDocumentWorkDocsConfiguration(&sv.WorkDocsConfiguration, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12509,6 +12514,79 @@ func awsAwsjson11_deserializeDocumentWebCrawlerConfiguration(v **types.WebCrawle
 		case "Urls":
 			if err := awsAwsjson11_deserializeDocumentUrls(&sv.Urls, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentWorkDocsConfiguration(v **types.WorkDocsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.WorkDocsConfiguration
+	if *v == nil {
+		sv = &types.WorkDocsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CrawlComments":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrawlComments = jtv
+			}
+
+		case "ExclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.ExclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "FieldMappings":
+			if err := awsAwsjson11_deserializeDocumentDataSourceToIndexFieldMappingList(&sv.FieldMappings, value); err != nil {
+				return err
+			}
+
+		case "InclusionPatterns":
+			if err := awsAwsjson11_deserializeDocumentDataSourceInclusionsExclusionsStrings(&sv.InclusionPatterns, value); err != nil {
+				return err
+			}
+
+		case "OrganizationId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OrganizationId to be of type string, got %T instead", value)
+				}
+				sv.OrganizationId = ptr.String(jtv)
+			}
+
+		case "UseChangeLog":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.UseChangeLog = jtv
 			}
 
 		default:

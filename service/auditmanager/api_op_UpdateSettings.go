@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates AWS Audit Manager settings for the current user account.
+// Updates Audit Manager settings for the current user account.
 func (c *Client) UpdateSettings(ctx context.Context, params *UpdateSettingsInput, optFns ...func(*Options)) (*UpdateSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateSettingsInput{}
@@ -35,11 +35,11 @@ type UpdateSettingsInput struct {
 	// A list of the default audit owners.
 	DefaultProcessOwners []types.Role
 
-	// The AWS KMS key details.
+	// The KMS key details.
 	KmsKey *string
 
-	// The Amazon Simple Notification Service (Amazon SNS) topic to which AWS Audit
-	// Manager sends notifications.
+	// The Amazon Simple Notification Service (Amazon SNS) topic to which Audit Manager
+	// sends notifications.
 	SnsTopic *string
 
 	noSmithyDocumentSerde

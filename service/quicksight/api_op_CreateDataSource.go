@@ -29,13 +29,13 @@ func (c *Client) CreateDataSource(ctx context.Context, params *CreateDataSourceI
 
 type CreateDataSourceInput struct {
 
-	// The AWS account ID.
+	// The Amazon Web Services account; ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// An ID for the data source. This ID is unique per AWS Region for each AWS
-	// account.
+	// An ID for the data source. This ID is unique per Region; for each Amazon Web
+	// Services account;.
 	//
 	// This member is required.
 	DataSourceId *string
@@ -87,11 +87,11 @@ type CreateDataSourceOutput struct {
 	// The status of creating the data source.
 	CreationStatus types.ResourceStatus
 
-	// The ID of the data source. This ID is unique per AWS Region for each AWS
-	// account.
+	// The ID of the data source. This ID is unique per Region; for each Amazon Web
+	// Services account;.
 	DataSourceId *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

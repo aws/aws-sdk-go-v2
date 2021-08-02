@@ -298,8 +298,8 @@ type ContextDataType struct {
 // webpages for your application.
 type CustomDomainConfigType struct {
 
-	// The Amazon Resource Name (ARN) of an AWS Certificate Manager SSL certificate.
-	// You use this certificate for the subdomain of your custom domain.
+	// The Amazon Resource Name (ARN) of an Certificate Manager SSL certificate. You
+	// use this certificate for the subdomain of your custom domain.
 	//
 	// This member is required.
 	CertificateArn *string
@@ -394,7 +394,7 @@ type DeviceType struct {
 // A container for information about a domain.
 type DomainDescriptionType struct {
 
-	// The AWS account ID for the user pool owner.
+	// The account ID for the user pool owner.
 	AWSAccountId *string
 
 	// The ARN of the CloudFront distribution.
@@ -437,12 +437,12 @@ type EmailConfigurationType struct {
 	// * Event publishing – Amazon
 	// SES can track the number of send, delivery, open, click, bounce, and complaint
 	// events for each email sent. Use event publishing to send information about these
-	// events to other AWS services such as SNS and CloudWatch.
+	// events to other Amazon Web Services services such as SNS and CloudWatch.
 	//
-	// * IP pool management –
-	// When leasing dedicated IP addresses with Amazon SES, you can create groups of IP
-	// addresses, called dedicated IP pools. You can then associate the dedicated IP
-	// pools with configuration sets.
+	// * IP
+	// pool management – When leasing dedicated IP addresses with Amazon SES, you can
+	// create groups of IP addresses, called dedicated IP pools. You can then associate
+	// the dedicated IP pools with configuration sets.
 	ConfigurationSet *string
 
 	// Specifies whether Amazon Cognito emails your users by using its built-in email
@@ -487,15 +487,15 @@ type EmailConfigurationType struct {
 	// SES configuration. Amazon Cognito calls Amazon SES on your behalf to send email
 	// from your verified email address. When you use this option, the email delivery
 	// limits are the same limits that apply to your Amazon SES verified email address
-	// in your AWS account. If you use this option, you must provide the ARN of an
-	// Amazon SES verified email address for the SourceArn parameter. Before Amazon
-	// Cognito can email your users, it requires additional permissions to call Amazon
-	// SES on your behalf. When you update your user pool with this option, Amazon
-	// Cognito creates a service-linked role, which is a type of IAM role, in your AWS
-	// account. This role contains the permissions that allow Amazon Cognito to access
-	// Amazon SES and send email messages with your address. For more information about
-	// the service-linked role that Amazon Cognito creates, see Using Service-Linked
-	// Roles for Amazon Cognito
+	// in your account. If you use this option, you must provide the ARN of an Amazon
+	// SES verified email address for the SourceArn parameter. Before Amazon Cognito
+	// can email your users, it requires additional permissions to call Amazon SES on
+	// your behalf. When you update your user pool with this option, Amazon Cognito
+	// creates a service-linked role, which is a type of IAM role, in your account.
+	// This role contains the permissions that allow Amazon Cognito to access Amazon
+	// SES and send email messages with your address. For more information about the
+	// service-linked role that Amazon Cognito creates, see Using Service-Linked Roles
+	// for Amazon Cognito
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/using-service-linked-roles.html)
 	// in the Amazon Cognito Developer Guide.
 	EmailSendingAccount EmailSendingAccountType
@@ -728,19 +728,19 @@ type IdentityProviderType struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the configuration for AWS Lambda triggers.
+// Specifies the configuration for Lambda triggers.
 type LambdaConfigType struct {
 
 	// Creates an authentication challenge.
 	CreateAuthChallenge *string
 
-	// A custom email sender AWS Lambda trigger.
+	// A custom email sender Lambda trigger.
 	CustomEmailSender *CustomEmailLambdaVersionConfigType
 
-	// A custom Message AWS Lambda trigger.
+	// A custom Message Lambda trigger.
 	CustomMessage *string
 
-	// A custom SMS sender AWS Lambda trigger.
+	// A custom SMS sender Lambda trigger.
 	CustomSMSSender *CustomSMSLambdaVersionConfigType
 
 	// Defines the authentication challenge.
@@ -751,16 +751,16 @@ type LambdaConfigType struct {
 	// CustomEmailSender and CustomSMSSender.
 	KMSKeyID *string
 
-	// A post-authentication AWS Lambda trigger.
+	// A post-authentication Lambda trigger.
 	PostAuthentication *string
 
-	// A post-confirmation AWS Lambda trigger.
+	// A post-confirmation Lambda trigger.
 	PostConfirmation *string
 
-	// A pre-authentication AWS Lambda trigger.
+	// A pre-authentication Lambda trigger.
 	PreAuthentication *string
 
-	// A pre-registration AWS Lambda trigger.
+	// A pre-registration Lambda trigger.
 	PreSignUp *string
 
 	// A Lambda trigger that is invoked before token generation.
@@ -1083,14 +1083,14 @@ type SchemaAttributeType struct {
 }
 
 // The SMS configuration type that includes the settings the Cognito User Pool
-// needs to call for the Amazon SNS service to send an SMS message from your AWS
+// needs to call for the Amazon SNS service to send an SMS message from your
 // account. The Cognito User Pool makes the request to the Amazon SNS Service by
-// using an AWS IAM role that you provide for your AWS account.
+// using an IAM role that you provide for your account.
 type SmsConfigurationType struct {
 
 	// The Amazon Resource Name (ARN) of the Amazon Simple Notification Service (SNS)
-	// caller. This is the ARN of the IAM role in your AWS account which Cognito will
-	// use to send SMS messages. SMS messages are subject to a spending limit
+	// caller. This is the ARN of the IAM role in your account which Cognito will use
+	// to send SMS messages. SMS messages are subject to a spending limit
 	// (https://docs.aws.amazon.com/cognito/latest/developerguide/user-pool-settings-email-phone-verification.html).
 	//
 	// This member is required.
@@ -1104,7 +1104,7 @@ type SmsConfigurationType struct {
 	// role for SMS MFA, Cognito will create a role with the required permissions and a
 	// trust policy that demonstrates use of the ExternalId. For more information about
 	// the ExternalId of a role, see How to use an external ID when granting access to
-	// your AWS resources to a third party
+	// your Amazon Web Services resources to a third party
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_create_for-user_externalid.html)
 	ExternalId *string
 
@@ -1387,7 +1387,7 @@ type UserPoolClientType struct {
 	AllowedOAuthFlowsUserPoolClient bool
 
 	// The allowed OAuth scopes. Possible values provided by OAuth are: phone, email,
-	// openid, and profile. Possible values provided by AWS are:
+	// openid, and profile. Possible values provided by Amazon Web Services are:
 	// aws.cognito.signin.user.admin. Custom scopes created in Resource Servers are
 	// also supported.
 	AllowedOAuthScopes []string
@@ -1537,7 +1537,7 @@ type UserPoolDescriptionType struct {
 	// The ID in a user pool description.
 	Id *string
 
-	// The AWS Lambda configuration information in a user pool description.
+	// The Lambda configuration information in a user pool description.
 	LambdaConfig *LambdaConfigType
 
 	// The date the user pool description was last modified.
@@ -1619,7 +1619,7 @@ type UserPoolType struct {
 	// The ID of the user pool.
 	Id *string
 
-	// The AWS Lambda triggers associated with the user pool.
+	// The Lambda triggers associated with the user pool.
 	LambdaConfig *LambdaConfigType
 
 	// The date the user pool was last modified.
@@ -1664,10 +1664,10 @@ type UserPoolType struct {
 	// (https://docs.aws.amazon.com/cognito-user-identity-pools/latest/APIReference/API_SmsConfigurationType.html).
 	//
 	// *
-	// SNSSandbox - The AWS account is in SNS Sandbox and messages won’t reach
-	// unverified end users. This parameter won’t get populated with SNSSandbox if the
-	// IAM user creating the user pool doesn’t have SNS permissions. To learn how to
-	// move your AWS account out of the sandbox, see Moving out of the SMS sandbox
+	// SNSSandbox - The account is in SNS Sandbox and messages won’t reach unverified
+	// end users. This parameter won’t get populated with SNSSandbox if the IAM user
+	// creating the user pool doesn’t have SNS permissions. To learn how to move your
+	// account out of the sandbox, see Moving out of the SMS sandbox
 	// (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox-moving-to-production.html).
 	SmsConfigurationFailure *string
 

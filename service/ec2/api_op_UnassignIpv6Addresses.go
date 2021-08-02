@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unassigns one or more IPv6 addresses from a network interface.
+// Unassigns one or more IPv6 addresses IPv4 Prefix Delegation prefixes from a
+// network interface.
 func (c *Client) UnassignIpv6Addresses(ctx context.Context, params *UnassignIpv6AddressesInput, optFns ...func(*Options)) (*UnassignIpv6AddressesOutput, error) {
 	if params == nil {
 		params = &UnassignIpv6AddressesInput{}
@@ -28,15 +29,17 @@ func (c *Client) UnassignIpv6Addresses(ctx context.Context, params *UnassignIpv6
 
 type UnassignIpv6AddressesInput struct {
 
-	// The IPv6 addresses to unassign from the network interface.
-	//
-	// This member is required.
-	Ipv6Addresses []string
-
 	// The ID of the network interface.
 	//
 	// This member is required.
 	NetworkInterfaceId *string
+
+	// The IPv6 addresses to unassign from the network interface.
+	Ipv6Addresses []string
+
+	// One or moreIPv6 Prefix Delegation prefixes to unassign from the network
+	// interface.
+	Ipv6Prefixes []string
 
 	noSmithyDocumentSerde
 }
@@ -48,6 +51,10 @@ type UnassignIpv6AddressesOutput struct {
 
 	// The IPv6 addresses that have been unassigned from the network interface.
 	UnassignedIpv6Addresses []string
+
+	// The IPv4 Prefix Delegation prefixes that have been unassigned from the network
+	// interface.
+	UnassignedIpv6Prefixes []string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

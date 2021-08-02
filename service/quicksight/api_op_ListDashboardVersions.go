@@ -30,8 +30,8 @@ func (c *Client) ListDashboardVersions(ctx context.Context, params *ListDashboar
 
 type ListDashboardVersionsInput struct {
 
-	// The ID of the AWS account that contains the dashboard that you're listing
-	// versions for.
+	// The ID of the Amazon Web Services account; that contains the dashboard that
+	// you're listing versions for.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -58,7 +58,7 @@ type ListDashboardVersionsOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

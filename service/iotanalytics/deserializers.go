@@ -7178,6 +7178,78 @@ func awsRestjson1_deserializeDocumentDatastoreActivity(v **types.DatastoreActivi
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDatastoreIotSiteWiseMultiLayerStorage(v **types.DatastoreIotSiteWiseMultiLayerStorage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatastoreIotSiteWiseMultiLayerStorage
+	if *v == nil {
+		sv = &types.DatastoreIotSiteWiseMultiLayerStorage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customerManagedS3Storage":
+			if err := awsRestjson1_deserializeDocumentIotSiteWiseCustomerManagedDatastoreS3Storage(&sv.CustomerManagedS3Storage, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDatastoreIotSiteWiseMultiLayerStorageSummary(v **types.DatastoreIotSiteWiseMultiLayerStorageSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DatastoreIotSiteWiseMultiLayerStorageSummary
+	if *v == nil {
+		sv = &types.DatastoreIotSiteWiseMultiLayerStorageSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "customerManagedS3Storage":
+			if err := awsRestjson1_deserializeDocumentIotSiteWiseCustomerManagedDatastoreS3StorageSummary(&sv.CustomerManagedS3Storage, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentDatastorePartition(v **types.DatastorePartition, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7321,6 +7393,16 @@ loop:
 			uv = &types.DatastoreStorageMemberCustomerManagedS3{Value: mv}
 			break loop
 
+		case "iotSiteWiseMultiLayerStorage":
+			var mv types.DatastoreIotSiteWiseMultiLayerStorage
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentDatastoreIotSiteWiseMultiLayerStorage(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.DatastoreStorageMemberIotSiteWiseMultiLayerStorage{Value: mv}
+			break loop
+
 		case "serviceManagedS3":
 			var mv types.ServiceManagedDatastoreS3Storage
 			destAddr := &mv
@@ -7365,6 +7447,11 @@ func awsRestjson1_deserializeDocumentDatastoreStorageSummary(v **types.Datastore
 		switch key {
 		case "customerManagedS3":
 			if err := awsRestjson1_deserializeDocumentCustomerManagedDatastoreS3StorageSummary(&sv.CustomerManagedS3, value); err != nil {
+				return err
+			}
+
+		case "iotSiteWiseMultiLayerStorage":
+			if err := awsRestjson1_deserializeDocumentDatastoreIotSiteWiseMultiLayerStorageSummary(&sv.IotSiteWiseMultiLayerStorage, value); err != nil {
 				return err
 			}
 
@@ -8128,6 +8215,104 @@ func awsRestjson1_deserializeDocumentIotEventsDestinationConfiguration(v **types
 					return fmt.Errorf("expected RoleArn to be of type string, got %T instead", value)
 				}
 				sv.RoleArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIotSiteWiseCustomerManagedDatastoreS3Storage(v **types.IotSiteWiseCustomerManagedDatastoreS3Storage, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IotSiteWiseCustomerManagedDatastoreS3Storage
+	if *v == nil {
+		sv = &types.IotSiteWiseCustomerManagedDatastoreS3Storage{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "keyPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3KeyPrefix to be of type string, got %T instead", value)
+				}
+				sv.KeyPrefix = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentIotSiteWiseCustomerManagedDatastoreS3StorageSummary(v **types.IotSiteWiseCustomerManagedDatastoreS3StorageSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.IotSiteWiseCustomerManagedDatastoreS3StorageSummary
+	if *v == nil {
+		sv = &types.IotSiteWiseCustomerManagedDatastoreS3StorageSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "bucket":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BucketName to be of type string, got %T instead", value)
+				}
+				sv.Bucket = ptr.String(jtv)
+			}
+
+		case "keyPrefix":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3KeyPrefix to be of type string, got %T instead", value)
+				}
+				sv.KeyPrefix = ptr.String(jtv)
 			}
 
 		default:

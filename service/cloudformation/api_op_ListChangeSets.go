@@ -13,7 +13,7 @@ import (
 )
 
 // Returns the ID and status of each active change set for a stack. For example,
-// AWS CloudFormation lists change sets that are in the CREATE_IN_PROGRESS or
+// CloudFormation lists change sets that are in the CREATE_IN_PROGRESS or
 // CREATE_PENDING state.
 func (c *Client) ListChangeSets(ctx context.Context, params *ListChangeSetsInput, optFns ...func(*Options)) (*ListChangeSetsOutput, error) {
 	if params == nil {

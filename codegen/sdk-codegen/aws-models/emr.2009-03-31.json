@@ -558,7 +558,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Properties that describe the AWS principal that created the\n            <code>BlockPublicAccessConfiguration</code> using the\n            <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that\n         the configuration was created. Each time a configuration for block public access is\n         updated, Amazon EMR updates this metadata.</p>"
+                "smithy.api#documentation": "<p>Properties that describe the Amazon Web Services principal that created the\n            <code>BlockPublicAccessConfiguration</code> using the\n            <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that\n         the configuration was created. Each time a configuration for block public access is\n         updated, Amazon EMR updates this metadata.</p>"
             }
         },
         "com.amazonaws.emr#Boolean": {
@@ -635,7 +635,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Cancels a pending step or steps in a running cluster. Available only in Amazon EMR\n         versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in\n         each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee\n         that a step will be canceled, even if the request is successfully submitted. You can only\n         cancel steps that are in a <code>PENDING</code> state.</p>"
+                "smithy.api#documentation": "<p>Cancels a pending step or steps in a running cluster. Available only in Amazon EMR\n         versions 4.8.0 and later, excluding version 5.0.0. A maximum of 256 steps are allowed in\n         each CancelSteps request. CancelSteps is idempotent but asynchronous; it does not guarantee\n         that a step will be canceled, even if the request is successfully submitted. When you use Amazon EMR versions 5.28.0 and later, you can cancel steps that are in a <code>PENDING</code> or <code>RUNNING</code> state. In earlier versions of Amazon EMR, you can only cancel steps that are in a <code>PENDING</code> state. </p>"
             }
         },
         "com.amazonaws.emr#CancelStepsInfo": {
@@ -835,7 +835,7 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is\n         only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. </p>"
+                        "smithy.api#documentation": "<p> The KMS key used for encrypting log files. This attribute is\n         only available with EMR version 5.30.0 and later, excluding EMR 6.0.0. </p>"
                     }
                 },
                 "RequestedAmiVersion": {
@@ -871,7 +871,7 @@
                 "VisibleToAllUsers": {
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the cluster is visible to all IAM users of the AWS account associated\n         with the cluster. The default value, <code>true</code>, indicates that all IAM users in the\n         AWS account can perform cluster actions if they have the proper IAM policy permissions. If\n         this value is <code>false</code>, only the IAM user that created the cluster can perform\n         actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of\n            <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code>\n         parameter of the <code>RunJobFlow</code> action.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the cluster is visible to IAM principals in the account associated\n         with the cluster. When <code>true</code>, IAM principals in the\n         account can perform EMR cluster actions on the cluster that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p>\n         <p>The default value is <code>false</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command or the CLI <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command. The default value is <code>true</code> when a cluster is created using the Management Console. IAM principals that are allowed to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users\">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>"
                     }
                 },
                 "Applications": {
@@ -889,7 +889,7 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on\n         your behalf.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on\n         your behalf.</p>"
                     }
                 },
                 "NormalizedInstanceHours": {
@@ -1451,7 +1451,7 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a\n         way for Amazon EMR Studio to interoperate with other AWS services.</p>",
+                        "smithy.api#documentation": "<p>The IAM role that will be assumed by the Amazon EMR Studio. The service role provides a\n         way for Amazon EMR Studio to interoperate with other Amazon Web Services services.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1538,13 +1538,13 @@
                 "IdentityId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group from the AWS SSO Identity\n         Store. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity\n         Store. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityType": {
@@ -1557,7 +1557,7 @@
                 "SessionPolicyArn": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the session policy that will be applied to the user\n         or group. Session policies refine Studio user permissions without the need to use multiple\n         IAM user roles.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the session policy that will be applied to the user\n         or group. You should specify the ARN for the session policy that you want to apply, not the ARN of your user role. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-user-role.html\">Create an EMR Studio User Role with Session Policies</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1661,13 +1661,13 @@
                 "IdentityId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group to remove from the Amazon EMR\n         Studio. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group to remove from the Amazon EMR\n         Studio. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user name or group to remove from the Amazon EMR Studio. For more information, see\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The name of the user name or group to remove from the Amazon EMR Studio. For more information, see\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityType": {
@@ -1913,6 +1913,72 @@
                     "target": "com.amazonaws.emr#NotebookExecution",
                     "traits": {
                         "smithy.api#documentation": "<p>Properties of the notebook execution.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emr#DescribeReleaseLabel": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#DescribeReleaseLabelInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#DescribeReleaseLabelOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides EMR release label details, such as releases available the region where the API request is run, and the available applications for a specific EMR release label. Can also list EMR release versions that support a specified version of Spark.</p>"
+            }
+        },
+        "com.amazonaws.emr#DescribeReleaseLabelInput": {
+            "type": "structure",
+            "members": {
+                "ReleaseLabel": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target release label to be described.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token. Reserved for future use. Currently set to null.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.emr#MaxResultsNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Reserved for future use. Currently set to null.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emr#DescribeReleaseLabelOutput": {
+            "type": "structure",
+            "members": {
+                "ReleaseLabel": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The target release label described in the response.</p>"
+                    }
+                },
+                "Applications": {
+                    "target": "com.amazonaws.emr#SimplifiedApplicationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of applications available for the target release label. <code>Name</code> is the name of the application. <code>Version</code> is the concise version of the application.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pagination token. Reserved for future use. Currently set to null.</p>"
                     }
                 }
             }
@@ -2340,6 +2406,9 @@
                     "target": "com.amazonaws.emr#DescribeNotebookExecution"
                 },
                 {
+                    "target": "com.amazonaws.emr#DescribeReleaseLabel"
+                },
+                {
                     "target": "com.amazonaws.emr#DescribeSecurityConfiguration"
                 },
                 {
@@ -2374,6 +2443,9 @@
                 },
                 {
                     "target": "com.amazonaws.emr#ListNotebookExecutions"
+                },
+                {
+                    "target": "com.amazonaws.emr#ListReleaseLabels"
                 },
                 {
                     "target": "com.amazonaws.emr#ListSecurityConfigurations"
@@ -2451,7 +2523,7 @@
                     "name": "elasticmapreduce"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon EMR is a web service that makes it easier to process large amounts of data\n         efficiently. Amazon EMR uses Hadoop processing combined with several AWS services to do\n         tasks such as web indexing, data mining, log file analysis, machine learning, scientific\n         simulation, and data warehouse management.</p>",
+                "smithy.api#documentation": "<p>Amazon EMR is a web service that makes it easier to process large amounts of data\n         efficiently. Amazon EMR uses Hadoop processing combined with several Amazon Web Services services to do\n         tasks such as web indexing, data mining, log file analysis, machine learning, scientific\n         simulation, and data warehouse management.</p>",
                 "smithy.api#title": "Amazon Elastic MapReduce",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://elasticmapreduce.amazonaws.com/doc/2009-03-31"
@@ -2551,7 +2623,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the Amazon EMR block public access configuration for your AWS account in the\n         current Region. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html\">Configure Block\n            Public Access for Amazon EMR</a> in the <i>Amazon EMR Management\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Returns the Amazon EMR block public access configuration for your account in the\n         current Region. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html\">Configure Block\n            Public Access for Amazon EMR</a> in the <i>Amazon EMR Management\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.emr#GetBlockPublicAccessConfigurationInput": {
@@ -2571,7 +2643,7 @@
                 "BlockPublicAccessConfigurationMetadata": {
                     "target": "com.amazonaws.emr#BlockPublicAccessConfigurationMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Properties that describe the AWS principal that created the\n            <code>BlockPublicAccessConfiguration</code> using the\n            <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that\n         the configuration was created. Each time a configuration for block public access is\n         updated, Amazon EMR updates this metadata.</p>",
+                        "smithy.api#documentation": "<p>Properties that describe the Amazon Web Services principal that created the\n            <code>BlockPublicAccessConfiguration</code> using the\n            <code>PutBlockPublicAccessConfiguration</code> action as well as the date and time that\n         the configuration was created. Each time a configuration for block public access is\n         updated, Amazon EMR updates this metadata.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2645,13 +2717,13 @@
                 "IdentityId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group. For more information, see\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group. For more information, see\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group to fetch. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group to fetch. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityType": {
@@ -2826,7 +2898,7 @@
                 "EbsVolumes": {
                     "target": "com.amazonaws.emr#EbsVolumeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of EBS volumes that are attached to this instance.</p>"
+                        "smithy.api#documentation": "<p>The list of Amazon EBS volumes that are attached to this instance.</p>"
                     }
                 }
             },
@@ -2903,7 +2975,7 @@
                 "InstanceTypeSpecifications": {
                     "target": "com.amazonaws.emr#InstanceTypeSpecificationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The specification for the instance types that comprise an instance fleet. Up to five\n         unique instance specifications may be defined for each instance fleet. </p>"
+                        "smithy.api#documentation": "<p>An array of specifications for the instance types that comprise an instance fleet.</p>"
                     }
                 },
                 "LaunchSpecifications": {
@@ -3233,7 +3305,7 @@
                 "Configurations": {
                     "target": "com.amazonaws.emr#ConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or later.</p>\n         </note>\n         <p>The list of configurations supplied for an EMR cluster instance group. You can specify a\n         separate configuration for each instance group (master, core, and task).</p>"
+                        "smithy.api#documentation": "<note>\n            <p>Amazon EMR releases 4.x or later.</p>\n         </note>\n         <p>The list of configurations supplied for an Amazon EMR cluster instance group. You can specify a\n         separate configuration for each instance group (master, core, and task).</p>"
                     }
                 },
                 "ConfigurationsVersion": {
@@ -3883,7 +3955,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.emr#InstanceTypeConfig": {
@@ -3917,7 +3989,7 @@
                 "EbsConfiguration": {
                     "target": "com.amazonaws.emr#EbsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance\n         as defined by <code>InstanceType</code>. </p>"
+                        "smithy.api#documentation": "<p>The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance\n         as defined by <code>InstanceType</code>. </p>"
                     }
                 },
                 "Configurations": {
@@ -3928,7 +4000,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An instance type configuration for each instance type in an instance fleet, which\n         determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot\n         target capacities. There can be a maximum of five instance type configurations in a\n         fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and\n            later, excluding 5.0.x versions.</p>\n         </note>"
+                "smithy.api#documentation": "<p>An instance type configuration for each instance type in an instance fleet, which\n         determines the EC2 instances Amazon EMR attempts to provision to fulfill On-Demand and Spot\n         target capacities. When you use an allocation strategy, you can include a maximum of 30 instance type configurations for a fleet. For more information about how to use an allocation strategy, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-instance-fleet.html\">Configure Instance Fleets</a>. Without an allocation strategy, you may specify a maximum of five instance type configurations for a fleet.</p>\n         <note>\n            <p>The instance fleet configuration is available only in Amazon EMR versions 4.8.0 and\n            later, excluding 5.0.x versions.</p>\n         </note>"
             }
         },
         "com.amazonaws.emr#InstanceTypeConfigList": {
@@ -3973,7 +4045,7 @@
                 "EbsBlockDevices": {
                     "target": "com.amazonaws.emr#EbsBlockDeviceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of Amazon Elastic Block Storage (Amazon EBS) attached to each instance\n         as defined by <code>InstanceType</code>.</p>"
+                        "smithy.api#documentation": "<p>The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each instance\n         as defined by <code>InstanceType</code>.</p>"
                     }
                 },
                 "EbsOptimized": {
@@ -4003,6 +4075,10 @@
             "type": "structure",
             "members": {},
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalFailure",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>Indicates that an error occurred while processing the request and that the request was\n         not completed.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -4070,7 +4146,7 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS KMS customer master key (CMK) used for encrypting log files. This attribute is\n         only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.</p>"
+                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. This attribute is\n         only available with EMR version 5.30.0 and later, excluding EMR 6.0.0.</p>"
                     }
                 },
                 "AmiVersion": {
@@ -4114,7 +4190,7 @@
                 "VisibleToAllUsers": {
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the cluster is visible to all IAM users of the AWS account associated\n         with the cluster. The default value, <code>true</code>, indicates that all IAM users in the\n         AWS account can perform cluster actions if they have the proper IAM policy permissions. If\n         this value is <code>false</code>, only the IAM user that created the cluster can perform\n         actions. This value can be changed on a running cluster by using the <a>SetVisibleToAllUsers</a> action. You can override the default value of\n            <code>true</code> when you create a cluster by using the <code>VisibleToAllUsers</code>\n         parameter of the <code>RunJobFlow</code> action.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the cluster is visible to IAM principals in the account associated\n         with the cluster. When <code>true</code>, IAM principals in the\n         account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions, regardless of IAM permissions policies attached to other IAM principals.</p>\n         <p>The default value is <code>false</code> if a value is not provided when creating a cluster using the EMR API <a>RunJobFlow</a> command or the CLI <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command. The default value is <code>true</code> when a cluster is created using the Management Console. IAM principals that are authorized to perform actions on the cluster can use the <a>SetVisibleToAllUsers</a> action to change the value on a running cluster. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users\">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>"
                     }
                 },
                 "JobFlowRole": {
@@ -4126,7 +4202,7 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that is assumed by the Amazon EMR service to access AWS resources on your\n         behalf.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that is assumed by the Amazon EMR service to access Amazon Web Services resources on your\n         behalf.</p>"
                     }
                 },
                 "AutoScalingRole": {
@@ -4292,7 +4368,7 @@
                 "KeepJobFlowAliveWhenNoSteps": {
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the cluster should remain available after completing all steps.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the cluster should remain available after completing all steps. Defaults to <code>true</code>. For more information about configuring cluster termination, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html\">Control Cluster Termination</a> in the <i>EMR Management Guide</i>.</p>"
                     }
                 },
                 "TerminationProtected": {
@@ -4322,13 +4398,13 @@
                 "EmrManagedMasterSecurityGroup": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon EC2 security group for the master node.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon EC2 security group for the master node. If you specify <code>EmrManagedMasterSecurityGroup</code>, you must also specify <code>EmrManagedSlaveSecurityGroup</code>.</p>"
                     }
                 },
                 "EmrManagedSlaveSecurityGroup": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the Amazon EC2 security group for the core and task nodes.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the Amazon EC2 security group for the core and task nodes. If you specify <code>EmrManagedSlaveSecurityGroup</code>, you must also specify <code>EmrManagedMasterSecurityGroup</code>.</p>"
                     }
                 },
                 "ServiceAccessSecurityGroup": {
@@ -4592,7 +4668,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides the status of all clusters visible to this AWS account. Allows you to filter\n         the list of clusters based on certain criteria; for example, filtering by cluster creation\n         date and time or by status. This call returns a maximum of 50 clusters per call, but\n         returns a marker to track the paging of the cluster list across multiple ListClusters\n         calls.</p>",
+                "smithy.api#documentation": "<p>Provides the status of all clusters visible to this account. Allows you to filter\n         the list of clusters based on certain criteria; for example, filtering by cluster creation\n         date and time or by status. This call returns a maximum of 50 clusters in unsorted order per call, but\n         returns a marker to track the paging of the cluster list across multiple ListClusters\n         calls.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -4618,7 +4694,7 @@
                 "ClusterStates": {
                     "target": "com.amazonaws.emr#ClusterStateList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cluster state filters to apply when listing clusters.</p>"
+                        "smithy.api#documentation": "<p>The cluster state filters to apply when listing clusters. Clusters that change state while this action runs may be not be returned as expected in the list of clusters.</p>"
                     }
                 },
                 "Marker": {
@@ -4951,6 +5027,71 @@
                 }
             }
         },
+        "com.amazonaws.emr#ListReleaseLabels": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.emr#ListReleaseLabelsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.emr#ListReleaseLabelsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.emr#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.emr#InvalidRequestException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves release labels of EMR services in the region where the API is called.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.emr#ListReleaseLabelsInput": {
+            "type": "structure",
+            "members": {
+                "Filters": {
+                    "target": "com.amazonaws.emr#ReleaseLabelFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the results of the request. <code>Prefix</code> specifies the prefix of release labels to return. <code>Application</code> specifies the application (with/without version) of release labels to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the next page of results. If <code>NextToken</code> is not specified, which is usually the case for the first request of ListReleaseLabels, the first page of results are determined by other filtering parameters or by the latest version. The <code>ListReleaseLabels</code> request fails if the identity (AWS AccountID) and all filtering parameters are different from the original request, or if the <code>NextToken</code> is expired or tampered with.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.emr#MaxResultsNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the maximum number of release labels to return in a single response. The default is <code>100</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.emr#ListReleaseLabelsOutput": {
+            "type": "structure",
+            "members": {
+                "ReleaseLabels": {
+                    "target": "com.amazonaws.emr#StringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned release labels.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to paginate the next page of results if specified in the next <code>ListReleaseLabels</code> request.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.emr#ListSecurityConfigurations": {
             "type": "operation",
             "input": {
@@ -5021,7 +5162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides a list of steps for the cluster in reverse order unless you specify\n            <code>stepIds</code> with the request of filter by <code>StepStates</code>. You can\n         specify a maximum of 10 <code>stepIDs</code>.</p>",
+                "smithy.api#documentation": "<p>Provides a list of steps for the cluster in reverse order unless you specify\n            <code>stepIds</code> with the request or filter by <code>StepStates</code>. You can\n         specify a maximum of 10 <code>stepIDs</code>. The CLI automatically paginates results to return a list greater than 50 steps. To return more than 50 steps using the CLI, specify a <code>Marker</code>, which is a pagination token that indicates the next set of steps to retrieve.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5054,7 +5195,7 @@
                 "Marker": {
                     "target": "com.amazonaws.emr#Marker",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of steps that a single <code>ListSteps</code> action returns is 50. To return a longer list of steps, use multiple <code>ListSteps</code> actions along with the <code>Marker</code> parameter, which is a pagination token that indicates the next set of results to retrieve.</p>"
                     }
                 }
             },
@@ -5074,7 +5215,7 @@
                 "Marker": {
                     "target": "com.amazonaws.emr#Marker",
                     "traits": {
-                        "smithy.api#documentation": "<p>The pagination token that indicates the next set of results to retrieve.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of steps that a single <code>ListSteps</code> action returns is 50. To return a longer list of steps, use multiple <code>ListSteps</code> actions along with the <code>Marker</code> parameter, which is a pagination token that indicates the next set of results to retrieve.</p>"
                     }
                 }
             },
@@ -5164,7 +5305,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all Amazon EMR Studios associated with the AWS account. The list\n         includes details such as ID, Studio Access URL, and creation time for each Studio.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all Amazon EMR Studios associated with the account. The list\n         includes details such as ID, Studio Access URL, and creation time for each Studio.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5235,6 +5376,16 @@
                 ]
             }
         },
+        "com.amazonaws.emr#MaxResultsNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.emr#MetricDimension": {
             "type": "structure",
             "members": {
@@ -5294,7 +5445,7 @@
                 "StepConcurrencyLevel": {
                     "target": "com.amazonaws.emr#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256\n         steps. </p>"
+                        "smithy.api#documentation": "<p>The number of steps that can be executed concurrently. You can specify a minimum of 1 step and a maximum of 256 steps. We recommend that you do not change this parameter while steps are running or the <code>ActionOnFailure</code> setting may not behave as expected. For more information see <a>Step$ActionOnFailure</a>.</p>"
                     }
                 }
             }
@@ -5340,7 +5491,7 @@
                 "InstanceFleet": {
                     "target": "com.amazonaws.emr#InstanceFleetModifyConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the instance fleet.</p>",
+                        "smithy.api#documentation": "<p>The configuration parameters of the instance fleet.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5569,7 +5720,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p></p>"
+                "smithy.api#documentation": "<p>Details for a notebook execution. The details include information such as the unique ID and status of the notebook execution.</p>"
             }
         },
         "com.amazonaws.emr#NotebookExecutionSummaryList": {
@@ -5584,7 +5735,7 @@
                 "UsageStrategy": {
                     "target": "com.amazonaws.emr#OnDemandCapacityReservationUsageStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p>\n         <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code>).</p>\n         <p>If you do not specify a value, the fleet fulfils the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to use unused Capacity Reservations for fulfilling On-Demand capacity.</p>\n         <p>If you specify <code>use-capacity-reservations-first</code>, the fleet uses unused Capacity Reservations to fulfill On-Demand capacity up to the target On-Demand capacity. If multiple instance pools have unused Capacity Reservations, the On-Demand allocation strategy (<code>lowest-price</code>) is applied. If the number of unused Capacity Reservations is less than the On-Demand target capacity, the remaining On-Demand target capacity is launched according to the On-Demand allocation strategy (<code>lowest-price</code>).</p>\n         <p>If you do not specify a value, the fleet fulfills the On-Demand capacity according to the chosen On-Demand allocation strategy.</p>"
                     }
                 },
                 "CapacityReservationPreference": {
@@ -5862,7 +6013,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates or updates an Amazon EMR block public access configuration for your AWS account\n         in the current Region. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html\">Configure Block\n            Public Access for Amazon EMR</a> in the <i>Amazon EMR Management\n            Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates or updates an Amazon EMR block public access configuration for your account\n         in the current Region. For more information see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html\">Configure Block\n            Public Access for Amazon EMR</a> in the <i>Amazon EMR Management\n            Guide</i>.</p>"
             }
         },
         "com.amazonaws.emr#PutBlockPublicAccessConfigurationInput": {
@@ -5915,6 +6066,26 @@
         "com.amazonaws.emr#PutManagedScalingPolicyOutput": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.emr#ReleaseLabelFilter": {
+            "type": "structure",
+            "members": {
+                "Prefix": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional release label version prefix filter. For example, <code>emr-5</code>.</p>"
+                    }
+                },
+                "Application": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Optional release label application filter. For example, <code>spark@2.1.0</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The release label filters by application or version prefix.</p>"
+            }
         },
         "com.amazonaws.emr#RemoveAutoScalingPolicy": {
             "type": "operation",
@@ -6082,7 +6253,7 @@
                 "LogEncryptionKmsKeyId": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS KMS customer master key (CMK) used for encrypting log files. If a value is not\n         provided, the logs remain encrypted by AES-256. This attribute is only available with\n         Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.</p>"
+                        "smithy.api#documentation": "<p>The KMS key used for encrypting log files. If a value is not\n         provided, the logs remain encrypted by AES-256. This attribute is only available with\n         Amazon EMR version 5.30.0 and later, excluding Amazon EMR 6.0.0.</p>"
                     }
                 },
                 "AdditionalInfo": {
@@ -6149,7 +6320,7 @@
                 "VisibleToAllUsers": {
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value of <code>true</code> indicates that all IAM users in the AWS account can perform\n         cluster actions if they have the proper IAM policy permissions. This is the default. A\n         value of <code>false</code> indicates that only the IAM user who created the cluster can\n         perform actions.</p>"
+                        "smithy.api#documentation": "<p>Set this value to <code>true</code> so that IAM principals in the account associated with the cluster can perform EMR actions on the cluster that their IAM policies allow. This value defaults to <code>false</code> for clusters created using the EMR API or the CLI <a href=\"https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html\">create-cluster</a> command.</p> \n         <p>When set to <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions for the cluster, regardless of the IAM permissions policies attached to other IAM principals. For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users\">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>"
                     }
                 },
                 "JobFlowRole": {
@@ -6161,7 +6332,7 @@
                 "ServiceRole": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IAM role that will be assumed by the Amazon EMR service to access AWS resources on\n         your behalf.</p>"
+                        "smithy.api#documentation": "<p>The IAM role that will be assumed by the Amazon EMR service to access Amazon Web Services resources on\n         your behalf.</p>"
                     }
                 },
                 "Tags": {
@@ -6375,7 +6546,7 @@
                 "Path": {
                     "target": "com.amazonaws.emr#XmlString",
                     "traits": {
-                        "smithy.api#documentation": "<p>Location of the script to run during a bootstrap action. Can be either a location in\n         Amazon S3 or on a local file system.</p>",
+                        "smithy.api#documentation": "<p>Location in Amazon S3 of the script to run during a bootstrap action.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6440,7 +6611,7 @@
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API\n         Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API\n         Reference</i>.</p>"
                     }
                 },
                 "IdentityType": {
@@ -6484,13 +6655,13 @@
                 "IdentityId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group from the AWS SSO Identity\n         Store.</p>"
+                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group from the Amazon Web Services SSO Identity\n         Store.</p>"
                     }
                 },
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API\n         Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API\n         Reference</i>.</p>"
                     }
                 },
                 "IdentityType": {
@@ -6533,7 +6704,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>SetTerminationProtection locks a cluster (job flow) so the EC2 instances in the cluster\n         cannot be terminated by user intervention, an API call, or in the event of a job-flow\n         error. The cluster still terminates upon successful completion of the job flow. Calling\n            <code>SetTerminationProtection</code> on a cluster is similar to calling the Amazon EC2\n            <code>DisableAPITermination</code> API on all EC2 instances in a cluster.</p>\n         <p>\n            <code>SetTerminationProtection</code> is used to prevent accidental termination of a\n         cluster and to ensure that in the event of an error, the instances persist so that you can\n         recover any data stored in their ephemeral instance storage.</p>\n         <p> To terminate a cluster that has been locked by setting\n            <code>SetTerminationProtection</code> to <code>true</code>, you must first unlock the\n         job flow by a subsequent call to <code>SetTerminationProtection</code> in which you set the\n         value to <code>false</code>. </p>\n         <p> For more information, see<a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html\">Managing Cluster\n            Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>"
+                "smithy.api#documentation": "<p>SetTerminationProtection locks a cluster (job flow) so the EC2 instances in the cluster\n         cannot be terminated by user intervention, an API call, or in the event of a job-flow\n         error. The cluster still terminates upon successful completion of the job flow. Calling\n         <code>SetTerminationProtection</code> on a cluster is similar to calling the Amazon EC2\n            <code>DisableAPITermination</code> API on all EC2 instances in a cluster.</p>\n         <p>\n            <code>SetTerminationProtection</code> is used to prevent accidental termination of a\n         cluster and to ensure that in the event of an error, the instances persist so that you can\n         recover any data stored in their ephemeral instance storage.</p>\n         <p> To terminate a cluster that has been locked by setting\n            <code>SetTerminationProtection</code> to <code>true</code>, you must first unlock the\n         job flow by a subsequent call to <code>SetTerminationProtection</code> in which you set the\n         value to <code>false</code>. </p>\n         <p> For more information, see<a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/UsingEMR_TerminationProtection.html\">Managing Cluster\n            Termination</a> in the <i>Amazon EMR Management Guide</i>. </p>"
             }
         },
         "com.amazonaws.emr#SetTerminationProtectionInput": {
@@ -6569,7 +6740,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the <a>Cluster$VisibleToAllUsers</a> value, which determines whether the\n         cluster is visible to all IAM users of the AWS account associated with the cluster. Only\n         the IAM user who created the cluster or the AWS account root user can call this action. The\n         default value, <code>true</code>, indicates that all IAM users in the AWS account can\n         perform cluster actions if they have the proper IAM policy permissions. If set to\n            <code>false</code>, only the IAM user that created the cluster can perform actions. This\n         action works on running clusters. You can override the default <code>true</code> setting\n         when you create a cluster by using the <code>VisibleToAllUsers</code> parameter with\n            <code>RunJobFlow</code>.</p>"
+                "smithy.api#documentation": "<p>Sets the <a>Cluster$VisibleToAllUsers</a> value for an EMR cluster. When <code>true</code>, IAM principals in the\n         account can perform EMR cluster actions that their IAM policies allow. When <code>false</code>, only the IAM principal that created the cluster and the account root user can perform EMR actions on the cluster, regardless of IAM permissions policies attached to other IAM principals.</p>\n         <p>This action works on running clusters. When you create a cluster, use the <a>RunJobFlowInput$VisibleToAllUsers</a> parameter.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users\">Understanding the EMR Cluster VisibleToAllUsers Setting</a> in the <i>Amazon EMR Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.emr#SetVisibleToAllUsersInput": {
@@ -6585,7 +6756,7 @@
                 "VisibleToAllUsers": {
                     "target": "com.amazonaws.emr#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value of <code>true</code> indicates that all IAM users in the AWS account can perform\n         cluster actions if they have the proper IAM policy permissions. This is the default. A\n         value of <code>false</code> indicates that only the IAM user who created the cluster can\n         perform actions.</p>",
+                        "smithy.api#documentation": "<p>A value of <code>true</code> indicates that an IAM principal in the account can perform\n         EMR actions on the cluster that the IAM policies attached to the principal allow. A\n         value of <code>false</code> indicates that only the IAM principal that created the cluster and the Amazon Web Services root user can perform EMR actions on the cluster.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6639,6 +6810,32 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>An automatic scaling configuration, which describes how the policy adds or removes\n         instances, the cooldown period, and the number of EC2 instances that will be added each\n         time the CloudWatch metric alarm condition is satisfied.</p>"
+            }
+        },
+        "com.amazonaws.emr#SimplifiedApplication": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned release label application name. For example, <code>hadoop</code>.</p>"
+                    }
+                },
+                "Version": {
+                    "target": "com.amazonaws.emr#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The returned release label application version. For example, <code>3.2.1</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The returned release label application names or versions.</p>"
+            }
+        },
+        "com.amazonaws.emr#SimplifiedApplicationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.emr#SimplifiedApplication"
             }
         },
         "com.amazonaws.emr#SpotProvisioningAllocationStrategy": {
@@ -6840,7 +7037,7 @@
                 "ActionOnFailure": {
                     "target": "com.amazonaws.emr#ActionOnFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER,\n         CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility.\n         We recommend using TERMINATE_CLUSTER instead.</p>"
+                        "smithy.api#documentation": "<p>The action to take when the cluster step fails. Possible values are <code>TERMINATE_CLUSTER</code>,\n         <code>CANCEL_AND_WAIT</code>, and <code>CONTINUE</code>. <code>TERMINATE_JOB_FLOW</code> is provided for backward compatibility.\n         We recommend using <code>TERMINATE_CLUSTER</code> instead.</p>\n         <p>If a cluster's <code>StepConcurrencyLevel</code> is greater than <code>1</code>, do not use <code>AddJobFlowSteps</code> to submit a step with this parameter set to <code>CANCEL_AND_WAIT</code> or <code>TERMINATE_CLUSTER</code>. The step is not submitted and the action fails with a message that the <code>ActionOnFailure</code> setting is not valid.</p>\n         <p>If you change a cluster's <code>StepConcurrencyLevel</code> to be greater than 1 while a step is running, the <code>ActionOnFailure</code> parameter may not behave as you expect. In this case, for a step that fails with this parameter set to <code>CANCEL_AND_WAIT</code>, pending steps and the running step are not canceled; for a step that fails with this parameter set to <code>TERMINATE_CLUSTER</code>, the cluster does not terminate.</p>"
                     }
                 },
                 "Status": {
@@ -6882,7 +7079,7 @@
                 "ActionOnFailure": {
                     "target": "com.amazonaws.emr#ActionOnFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER,\n         CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is provided for backward compatibility.\n         We recommend using TERMINATE_CLUSTER instead.</p>"
+                        "smithy.api#documentation": "<p>The action to take when the step fails. Use one of the following values:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>TERMINATE_CLUSTER</code> - Shuts down the cluster.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CANCEL_AND_WAIT</code> - Cancels any pending steps and returns the cluster to the <code>WAITING</code> state.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CONTINUE</code> - Continues to the next step in the queue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>TERMINATE_JOB_FLOW</code> - Shuts down the cluster. <code>TERMINATE_JOB_FLOW</code> is provided for backward compatibility. We recommend using <code>TERMINATE_CLUSTER</code> instead.</p>\n            </li>\n         </ul>\n         <p>If a cluster's <code>StepConcurrencyLevel</code> is greater than <code>1</code>, do not use <code>AddJobFlowSteps</code> to submit a step with this parameter set to <code>CANCEL_AND_WAIT</code> or <code>TERMINATE_CLUSTER</code>. The step is not submitted and the action fails with a message that the <code>ActionOnFailure</code> setting is not valid.</p>\n         <p>If you change a cluster's <code>StepConcurrencyLevel</code> to be greater than 1 while a step is running, the <code>ActionOnFailure</code> parameter may not behave as you expect. In this case, for a step that fails with this parameter set to <code>CANCEL_AND_WAIT</code>, pending steps and the running step are not canceled; for a step that fails with this parameter set to <code>TERMINATE_CLUSTER</code>, the cluster does not terminate.</p>"
                     }
                 },
                 "HadoopJarStep": {
@@ -6894,7 +7091,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specification of a cluster (job flow) step.</p>"
+                "smithy.api#documentation": "<p>Specification for a cluster (job flow) step.</p>"
             }
         },
         "com.amazonaws.emr#StepConfigList": {
@@ -7143,7 +7340,7 @@
                 "ActionOnFailure": {
                     "target": "com.amazonaws.emr#ActionOnFailure",
                     "traits": {
-                        "smithy.api#documentation": "<p>The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER,\n         CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility.\n         We recommend using TERMINATE_CLUSTER instead.</p>"
+                        "smithy.api#documentation": "<p>The action to take when the cluster step fails. Possible values are TERMINATE_CLUSTER,\n         CANCEL_AND_WAIT, and CONTINUE. TERMINATE_JOB_FLOW is available for backward compatibility.</p>"
                     }
                 },
                 "Status": {
@@ -7433,7 +7630,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A key-value pair containing user-defined metadata that you can associate with an Amazon\n         EMR resource. Tags make it easier to associate clusters in various ways, such as grouping\n         clusters to track your Amazon EMR resource allocation costs. For more information, see\n            <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag\n            Clusters</a>. </p>"
+                "smithy.api#documentation": "<p>A key-value pair containing user-defined metadata that you can associate with an Amazon EMR resource. Tags make it easier to associate clusters in various ways, such as grouping\n         clusters to track your Amazon EMR resource allocation costs. For more information, see\n            <a href=\"https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html\">Tag\n            Clusters</a>. </p>"
             }
         },
         "com.amazonaws.emr#TagList": {
@@ -7669,13 +7866,13 @@
                 "IdentityId": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group. For more information, see\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The globally unique identifier (GUID) of the user or group. For more information, see\n            <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserId\">UserId</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId\">GroupId</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityName": {
                     "target": "com.amazonaws.emr#XmlStringMaxLen256",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the user or group to update. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>AWS SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
+                        "smithy.api#documentation": "<p>The name of the user or group to update. For more information, see <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_User.html#singlesignon-Type-User-UserName\">UserName</a> and <a href=\"https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName\">DisplayName</a> in the <i>Amazon Web Services SSO Identity Store API Reference</i>.\n         Either <code>IdentityName</code> or <code>IdentityId</code> must be specified.</p>"
                     }
                 },
                 "IdentityType": {
@@ -7738,7 +7935,7 @@
                     "min": 0,
                     "max": 10280
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.emr#XmlStringList": {
@@ -7754,7 +7951,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.emr#XmlStringMaxLen256List": {

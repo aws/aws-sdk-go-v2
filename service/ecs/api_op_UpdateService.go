@@ -23,10 +23,10 @@ import (
 // deployment controller, only the desired count, deployment configuration, task
 // placement constraints and strategies, and health check grace period can be
 // updated using this API. If the network configuration, platform version, or task
-// definition need to be updated, a new AWS CodeDeploy deployment should be
-// created. For more information, see CreateDeployment
+// definition need to be updated, a new CodeDeploy deployment should be created.
+// For more information, see CreateDeployment
 // (https://docs.aws.amazon.com/codedeploy/latest/APIReference/API_CreateDeployment.html)
-// in the AWS CodeDeploy API Reference. For services using an external deployment
+// in the CodeDeploy API Reference. For services using an external deployment
 // controller, you can update only the desired count, task placement constraints
 // and strategies, and health check grace period using this API. If the launch
 // type, load balancer, network configuration, platform version, or task definition
@@ -140,8 +140,8 @@ type UpdateServiceInput struct {
 	// cluster. Only capacity providers with an ACTIVE or UPDATING status can be used.
 	// If specifying a capacity provider that uses an Auto Scaling group, the capacity
 	// provider must already be created. New capacity providers can be created with the
-	// CreateCapacityProvider API operation. To use a AWS Fargate capacity provider,
-	// specify either the FARGATE or FARGATE_SPOT capacity providers. The AWS Fargate
+	// CreateCapacityProvider API operation. To use a Fargate capacity provider,
+	// specify either the FARGATE or FARGATE_SPOT capacity providers. The Fargate
 	// capacity providers are available to all accounts and only need to be associated
 	// with a cluster to be used. The PutClusterCapacityProviders API operation is used
 	// to update the list of available capacity providers for a cluster after the
@@ -207,7 +207,7 @@ type UpdateServiceInput struct {
 	// The platform version on which your tasks in the service are running. A platform
 	// version is only specified for tasks using the Fargate launch type. If a platform
 	// version is not specified, the LATEST platform version is used by default. For
-	// more information, see AWS Fargate Platform Versions
+	// more information, see Fargate Platform Versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string

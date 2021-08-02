@@ -49,7 +49,7 @@ func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPoin
 
 type PutAccessPointPolicyInput struct {
 
-	// The AWS account ID for owner of the bucket associated with the specified access
+	// The account ID for owner of the bucket associated with the specified access
 	// point.
 	//
 	// This member is required.
@@ -58,8 +58,8 @@ type PutAccessPointPolicyInput struct {
 	// The name of the access point that you want to associate with the specified
 	// policy. For using this parameter with Amazon S3 on Outposts with the REST API,
 	// you must specify the name and the x-amz-outpost-id as well. For using this
-	// parameter with S3 on Outposts with the AWS SDK and CLI, you must specify the ARN
-	// of the access point accessed in the format
+	// parameter with S3 on Outposts with the Amazon Web Services SDK and CLI, you must
+	// specify the ARN of the access point accessed in the format
 	// arn:aws:s3-outposts:::outpost//accesspoint/. For example, to access the access
 	// point reports-ap through outpost my-outpost owned by account 123456789012 in
 	// Region us-west-2, use the URL encoding of

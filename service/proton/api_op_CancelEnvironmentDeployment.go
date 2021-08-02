@@ -14,7 +14,7 @@ import (
 // Attempts to cancel an environment deployment on an UpdateEnvironment action, if
 // the deployment is IN_PROGRESS. For more information, see Update an environment
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-update.html) in the
-// AWS Proton Administration guide. The following list includes potential
+// AWS Proton Administrator guide. The following list includes potential
 // cancellation scenarios.
 //
 // * If the cancellation attempt succeeds, the resulting

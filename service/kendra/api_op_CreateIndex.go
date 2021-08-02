@@ -59,7 +59,9 @@ type CreateIndexInput struct {
 	// indexes intended for development, testing, or proof of concept. Use
 	// ENTERPRISE_EDITION for your production databases. Once you set the edition for
 	// an index, it can't be changed. The Edition parameter is optional. If you don't
-	// supply a value, the default is ENTERPRISE_EDITION.
+	// supply a value, the default is ENTERPRISE_EDITION. For more information on quota
+	// limits for enterprise and developer editions, see Quotas
+	// (https://docs.aws.amazon.com/kendra/latest/dg/quotas.html).
 	Edition types.IndexEdition
 
 	// The identifier of the KMScustomer managed key (CMK) to use to encrypt data

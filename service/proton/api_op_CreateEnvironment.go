@@ -15,7 +15,7 @@ import (
 // environment template that defines infrastructure and resources that can be
 // shared across services. For more information, see the Environments
 // (https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html) in
-// the AWS Proton Administration Guide.
+// the AWS Proton Administrator Guide.
 func (c *Client) CreateEnvironment(ctx context.Context, params *CreateEnvironmentInput, optFns ...func(*Options)) (*CreateEnvironmentOutput, error) {
 	if params == nil {
 		params = &CreateEnvironmentInput{}
@@ -40,8 +40,8 @@ type CreateEnvironmentInput struct {
 
 	// A link to a YAML formatted spec file that provides inputs as defined in the
 	// environment template bundle schema file. For more information, see Environments
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-managing-environments.html)
-	// in the AWS Proton Administration Guide.
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-environments.html) in
+	// the AWS Proton Administrator Guide.
 	//
 	// This value conforms to the media type: application/yaml
 	//
@@ -55,8 +55,8 @@ type CreateEnvironmentInput struct {
 
 	// The name of the environment template. For more information, see Environment
 	// Templates
-	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-templates.html) in
-	// the AWS Proton Administration Guide.
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-templates.html) in the
+	// AWS Proton Administrator Guide.
 	//
 	// This member is required.
 	TemplateName *string
@@ -68,7 +68,9 @@ type CreateEnvironmentInput struct {
 	// provisioning your environment infrastructure resources to an environment
 	// account. You must include either the environmentAccountConnectionId or
 	// protonServiceRoleArn parameter and value. For more information, see Environment
-	// account connections in the AWS Proton Administration guide.
+	// account connections
+	// (https://docs.aws.amazon.com/proton/latest/adminguide/ag-env-account-connections.html)
+	// in the AWS Proton Administrator guide.
 	EnvironmentAccountConnectionId *string
 
 	// The Amazon Resource Name (ARN) of the AWS Proton service role that allows AWS
@@ -77,7 +79,7 @@ type CreateEnvironmentInput struct {
 	ProtonServiceRoleArn *string
 
 	// Create tags for your environment. For more information, see AWS Proton resources
-	// and tagging in the AWS Proton Administration Guide
+	// and tagging in the AWS Proton Administrator Guide
 	// (https://docs.aws.amazon.com/proton/latest/adminguide/resources.html) or AWS
 	// Proton User Guide
 	// (https://docs.aws.amazon.com/proton/latest/userguide/resources.html).

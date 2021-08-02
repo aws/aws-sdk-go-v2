@@ -23,7 +23,7 @@
 // applications that are running on AWS Proton, developers need permissions to the
 // service create, list, update and delete API operations and the service instance
 // list and update API operations. To learn more about AWS Proton administration,
-// see the AWS Proton Administration Guide
+// see the AWS Proton Administrator Guide
 // (https://docs.aws.amazon.com/proton/latest/adminguide/Welcome.html). To learn
 // more about deploying serverless and containerized applications on AWS Proton,
 // see the AWS Proton User Guide

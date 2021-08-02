@@ -14,7 +14,7 @@ import (
 // Lists tags for one health check or hosted zone. For information about using tags
 // for cost allocation, see Using Cost Allocation Tags
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
-// in the AWS Billing and Cost Management User Guide.
+// in the Billing and Cost Management User Guide.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

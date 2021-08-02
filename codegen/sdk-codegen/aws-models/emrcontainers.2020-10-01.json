@@ -175,7 +175,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.emrcontainers#CloudWatchMonitoringConfiguration": {
@@ -197,6 +197,16 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>A configuration for CloudWatch monitoring. You can configure your jobs to send log information to CloudWatch Logs.</p>"
+            }
+        },
+        "com.amazonaws.emrcontainers#ClusterId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^[0-9A-Za-z][A-Za-z0-9\\-_]*$"
             }
         },
         "com.amazonaws.emrcontainers#Configuration": {
@@ -283,7 +293,7 @@
                     }
                 },
                 "id": {
-                    "target": "com.amazonaws.emrcontainers#String256",
+                    "target": "com.amazonaws.emrcontainers#ClusterId",
                     "traits": {
                         "smithy.api#documentation": "<p>The ID of the container cluster.</p>",
                         "smithy.api#required": {}
@@ -811,7 +821,7 @@
             "type": "structure",
             "members": {
                 "namespace": {
-                    "target": "com.amazonaws.emrcontainers#String256",
+                    "target": "com.amazonaws.emrcontainers#KubernetesNamespace",
                     "traits": {
                         "smithy.api#documentation": "<p>The namespaces of the EKS cluster.</p>"
                     }
@@ -908,6 +918,18 @@
                         "smithy.api#documentation": "<p>The subnet IDs of the endpoint.\n      </p>"
                     }
                 },
+                "stateDetails": {
+                    "target": "com.amazonaws.emrcontainers#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         Additional details of the endpoint state.\n      </p>"
+                    }
+                },
+                "failureReason": {
+                    "target": "com.amazonaws.emrcontainers#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n         The reasons why the endpoint has failed.\n      </p>"
+                    }
+                },
                 "tags": {
                     "target": "com.amazonaws.emrcontainers#TagMap",
                     "traits": {
@@ -975,7 +997,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.emrcontainers#EndpointTypes": {
@@ -1003,7 +1025,7 @@
                     "min": 1,
                     "max": 10280
                 },
-                "smithy.api#pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+                "smithy.api#pattern": "^(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1020,7 +1042,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+                "smithy.api#pattern": "^(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1255,6 +1277,16 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.emrcontainers#JobRun"
+            }
+        },
+        "com.amazonaws.emrcontainers#KubernetesNamespace": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
             }
         },
         "com.amazonaws.emrcontainers#ListJobRuns": {
@@ -1621,7 +1653,7 @@
                     "min": 1,
                     "max": 512
                 },
-                "smithy.api#pattern": "[\\.\\-_/#A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.emrcontainers#MonitoringConfiguration": {
@@ -1657,7 +1689,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.emrcontainers#PersistentAppUI": {
@@ -1682,7 +1714,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\.\\-_/A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_/A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.emrcontainers#RequestIdentityUserArn": {
@@ -1702,7 +1734,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[0-9a-z]+"
+                "smithy.api#pattern": "^[0-9a-z]+$"
             }
         },
         "com.amazonaws.emrcontainers#ResourceNameString": {
@@ -1712,7 +1744,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "[\\.\\-_/#A-Za-z0-9]+"
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.emrcontainers#ResourceNotFoundException": {
@@ -1801,9 +1833,9 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 1,
-                    "max": 1024
+                    "max": 102400
                 },
-                "smithy.api#pattern": "(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)",
+                "smithy.api#pattern": "^(?!\\s*$)(^[^';|\\u0026\\u003C\\u003E*?`$(){}\\[\\]!#\\\\]*$)$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -1931,7 +1963,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.emrcontainers#String128": {
@@ -1941,7 +1973,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.emrcontainers#String256": {
@@ -1951,7 +1983,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.emrcontainers#StringEmpty256": {
@@ -1961,7 +1993,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.emrcontainers#SubnetIds": {
@@ -2109,7 +2141,7 @@
                     "min": 1,
                     "max": 10280
                 },
-                "smithy.api#pattern": "[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\r\\n\\t]*"
+                "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDBFF-\\uDC00\\uDFFF\\r\\n\\t]*$"
             }
         },
         "com.amazonaws.emrcontainers#ValidationException": {

@@ -46,11 +46,11 @@ type GetTemplateSummaryInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your AWS account must be
-	// registered as a delegated administrator in the management account. For more
-	// information, see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
+	// as a delegated administrator in the management account. For more information,
+	// see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
-	// in the AWS CloudFormation User Guide.
+	// in the CloudFormation User Guide.
 	CallAs types.CallAs
 
 	// The name or the stack ID that is associated with the stack, which are not always
@@ -69,16 +69,16 @@ type GetTemplateSummaryInput struct {
 	// maximum length of 51,200 bytes. For more information about templates, see
 	// Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide. Conditional: You must specify only one of
-	// the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
+	// in the CloudFormation User Guide. Conditional: You must specify only one of the
+	// following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
 	TemplateBody *string
 
 	// Location of file containing the template body. The URL must point to a template
 	// (max size: 460,800 bytes) that is located in an Amazon S3 bucket or a Systems
 	// Manager document. For more information about templates, see Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide. Conditional: You must specify only one of
-	// the following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
+	// in the CloudFormation User Guide. Conditional: You must specify only one of the
+	// following parameters: StackName, StackSetName, TemplateBody, or TemplateURL.
 	TemplateURL *string
 
 	noSmithyDocumentSerde
@@ -91,8 +91,7 @@ type GetTemplateSummaryOutput struct {
 	// resources, you must specify the CAPABILITY_IAM or CAPABILITY_NAMED_IAM value for
 	// this parameter when you use the CreateStack or UpdateStack actions with your
 	// template; otherwise, those actions return an InsufficientCapabilities error. For
-	// more information, see Acknowledging IAM Resources in AWS CloudFormation
-	// Templates
+	// more information, see Acknowledging IAM Resources in CloudFormation Templates
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities).
 	Capabilities []types.Capability
 
@@ -123,8 +122,8 @@ type GetTemplateSummaryOutput struct {
 	// as AWS::EC2::Instance, AWS::Dynamo::Table, and Custom::MyCustomInstance.
 	ResourceTypes []string
 
-	// The AWS template format version, which identifies the capabilities of the
-	// template.
+	// The Amazon Web Services template format version, which identifies the
+	// capabilities of the template.
 	Version *string
 
 	// Metadata pertaining to the operation's result.

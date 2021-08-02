@@ -12,7 +12,7 @@ import (
 )
 
 // Uploads one or more pieces of evidence to the specified control in the
-// assessment in AWS Audit Manager.
+// assessment in Audit Manager.
 func (c *Client) BatchImportEvidenceToAssessmentControl(ctx context.Context, params *BatchImportEvidenceToAssessmentControlInput, optFns ...func(*Options)) (*BatchImportEvidenceToAssessmentControlOutput, error) {
 	if params == nil {
 		params = &BatchImportEvidenceToAssessmentControlInput{}

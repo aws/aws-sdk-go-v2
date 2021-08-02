@@ -45,7 +45,9 @@ type PublishTypeInput struct {
 	// format, and adhere to semantic versioning when assigning a version number to
 	// your extension: MAJOR.MINOR.PATCH For more information, see Semantic Versioning
 	// 2.0.0 (https://semver.org/). If you do not specify a version number,
-	// CloudFormation increments the version number by one minor version release.
+	// CloudFormation increments the version number by one minor version release. The
+	// first time you publish a type, CloudFormation sets the version number to 1.0.0,
+	// regardless of the value you specify.
 	PublicVersionNumber *string
 
 	// The type of the extension. Conditional: You must specify Arn, or TypeName and

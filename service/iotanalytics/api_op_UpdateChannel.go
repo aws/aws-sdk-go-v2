@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the settings of a channel.
+// Used to update the settings of a channel.
 func (c *Client) UpdateChannel(ctx context.Context, params *UpdateChannelInput, optFns ...func(*Options)) (*UpdateChannelOutput, error) {
 	if params == nil {
 		params = &UpdateChannelInput{}
@@ -36,11 +36,11 @@ type UpdateChannelInput struct {
 
 	// Where channel data is stored. You can choose one of serviceManagedS3 or
 	// customerManagedS3 storage. If not specified, the default is serviceManagedS3.
-	// You cannot change this storage option after the channel is created.
+	// You can't change this storage option after the channel is created.
 	ChannelStorage *types.ChannelStorage
 
 	// How long, in days, message data is kept for the channel. The retention period
-	// cannot be updated if the channel's S3 storage is customer-managed.
+	// can't be updated if the channel's Amazon S3 storage is customer-managed.
 	RetentionPeriod *types.RetentionPeriod
 
 	noSmithyDocumentSerde

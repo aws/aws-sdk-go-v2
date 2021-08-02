@@ -510,6 +510,26 @@ func (m *validateOpGetStackPolicy) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpImportStacksToStackSet struct {
+}
+
+func (*validateOpImportStacksToStackSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpImportStacksToStackSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ImportStacksToStackSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpImportStacksToStackSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListChangeSets struct {
 }
 
@@ -928,6 +948,10 @@ func addOpExecuteChangeSetValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpGetStackPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetStackPolicy{}, middleware.After)
+}
+
+func addOpImportStacksToStackSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpImportStacksToStackSet{}, middleware.After)
 }
 
 func addOpListChangeSetsValidationMiddleware(stack *middleware.Stack) error {
@@ -1560,6 +1584,24 @@ func validateOpGetStackPolicyInput(v *GetStackPolicyInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetStackPolicyInput"}
 	if v.StackName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpImportStacksToStackSetInput(v *ImportStacksToStackSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ImportStacksToStackSetInput"}
+	if v.StackSetName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackSetName"))
+	}
+	if v.StackIds == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackIds"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

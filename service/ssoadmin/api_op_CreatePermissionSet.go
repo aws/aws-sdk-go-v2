@@ -12,7 +12,8 @@ import (
 )
 
 // Creates a permission set within a specified SSO instance. To grant users and
-// groups access to AWS account resources, use CreateAccountAssignment.
+// groups access to Amazon Web Services account resources, use
+// CreateAccountAssignment.
 func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissionSetInput, optFns ...func(*Options)) (*CreatePermissionSetOutput, error) {
 	if params == nil {
 		params = &CreatePermissionSetInput{}
@@ -31,8 +32,8 @@ func (c *Client) CreatePermissionSet(ctx context.Context, params *CreatePermissi
 type CreatePermissionSetInput struct {
 
 	// The ARN of the SSO instance under which the operation will be executed. For more
-	// information about ARNs, see Amazon Resource Names (ARNs) and AWS Service
-	// Namespaces in the AWS General Reference.
+	// information about ARNs, see Amazon Resource Names (ARNs) and Amazon Web Services
+	// Service Namespaces in the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	InstanceArn *string
@@ -61,7 +62,7 @@ type CreatePermissionSetInput struct {
 
 type CreatePermissionSetOutput struct {
 
-	// Defines the level of access on an AWS account.
+	// Defines the level of access on an Amazon Web Services account.
 	PermissionSet *types.PermissionSet
 
 	// Metadata pertaining to the operation's result.

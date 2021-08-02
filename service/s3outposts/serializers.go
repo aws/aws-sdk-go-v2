@@ -73,6 +73,16 @@ func awsRestjson1_serializeOpDocumentCreateEndpointInput(v *CreateEndpointInput,
 	object := value.Object()
 	defer object.Close()
 
+	if len(v.AccessType) > 0 {
+		ok := object.Key("AccessType")
+		ok.String(string(v.AccessType))
+	}
+
+	if v.CustomerOwnedIpv4Pool != nil {
+		ok := object.Key("CustomerOwnedIpv4Pool")
+		ok.String(*v.CustomerOwnedIpv4Pool)
+	}
+
 	if v.OutpostId != nil {
 		ok := object.Key("OutpostId")
 		ok.String(*v.OutpostId)

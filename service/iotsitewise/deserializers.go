@@ -12569,6 +12569,89 @@ func awsRestjson1_deserializeDocumentDashboardSummary(v **types.DashboardSummary
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentDetailedError(v **types.DetailedError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DetailedError
+	if *v == nil {
+		sv = &types.DetailedError{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "code":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DetailedErrorCode to be of type string, got %T instead", value)
+				}
+				sv.Code = types.DetailedErrorCode(jtv)
+			}
+
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DetailedErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDetailedErrors(v *[]types.DetailedError, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DetailedError
+	if *v == nil {
+		cv = []types.DetailedError{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DetailedError
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentDetailedError(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentErrorDetails(v **types.ErrorDetails, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -12598,6 +12681,11 @@ func awsRestjson1_deserializeDocumentErrorDetails(v **types.ErrorDetails, value 
 					return fmt.Errorf("expected ErrorCode to be of type string, got %T instead", value)
 				}
 				sv.Code = types.ErrorCode(jtv)
+			}
+
+		case "details":
+			if err := awsRestjson1_deserializeDocumentDetailedErrors(&sv.Details, value); err != nil {
+				return err
 			}
 
 		case "message":
@@ -12694,6 +12782,46 @@ func awsRestjson1_deserializeDocumentExpressionVariables(v *[]types.ExpressionVa
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentForwardingConfig(v **types.ForwardingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ForwardingConfig
+	if *v == nil {
+		sv = &types.ForwardingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "state":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ForwardingConfigState to be of type string, got %T instead", value)
+				}
+				sv.State = types.ForwardingConfigState(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -12807,6 +12935,11 @@ func awsRestjson1_deserializeDocumentGatewayPlatform(v **types.GatewayPlatform, 
 				return err
 			}
 
+		case "greengrassV2":
+			if err := awsRestjson1_deserializeDocumentGreengrassV2(&sv.GreengrassV2, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -12911,6 +13044,11 @@ func awsRestjson1_deserializeDocumentGatewaySummary(v **types.GatewaySummary, va
 				sv.GatewayName = ptr.String(jtv)
 			}
 
+		case "gatewayPlatform":
+			if err := awsRestjson1_deserializeDocumentGatewayPlatform(&sv.GatewayPlatform, value); err != nil {
+				return err
+			}
+
 		case "lastUpdateDate":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -12965,6 +13103,46 @@ func awsRestjson1_deserializeDocumentGreengrass(v **types.Greengrass, value inte
 					return fmt.Errorf("expected ARN to be of type string, got %T instead", value)
 				}
 				sv.GroupArn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentGreengrassV2(v **types.GreengrassV2, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.GreengrassV2
+	if *v == nil {
+		sv = &types.GreengrassV2{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "coreDeviceThingName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CoreDeviceThingName to be of type string, got %T instead", value)
+				}
+				sv.CoreDeviceThingName = ptr.String(jtv)
 			}
 
 		default:
@@ -13453,6 +13631,47 @@ func awsRestjson1_deserializeDocumentMeasurement(v **types.Measurement, value in
 
 	for key, value := range shape {
 		switch key {
+		case "processingConfig":
+			if err := awsRestjson1_deserializeDocumentMeasurementProcessingConfig(&sv.ProcessingConfig, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMeasurementProcessingConfig(v **types.MeasurementProcessingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MeasurementProcessingConfig
+	if *v == nil {
+		sv = &types.MeasurementProcessingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "forwardingConfig":
+			if err := awsRestjson1_deserializeDocumentForwardingConfig(&sv.ForwardingConfig, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -13493,6 +13712,11 @@ func awsRestjson1_deserializeDocumentMetric(v **types.Metric, value interface{})
 				sv.Expression = ptr.String(jtv)
 			}
 
+		case "processingConfig":
+			if err := awsRestjson1_deserializeDocumentMetricProcessingConfig(&sv.ProcessingConfig, value); err != nil {
+				return err
+			}
+
 		case "variables":
 			if err := awsRestjson1_deserializeDocumentExpressionVariables(&sv.Variables, value); err != nil {
 				return err
@@ -13501,6 +13725,46 @@ func awsRestjson1_deserializeDocumentMetric(v **types.Metric, value interface{})
 		case "window":
 			if err := awsRestjson1_deserializeDocumentMetricWindow(&sv.Window, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentMetricProcessingConfig(v **types.MetricProcessingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MetricProcessingConfig
+	if *v == nil {
+		sv = &types.MetricProcessingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "computeLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeLocation to be of type string, got %T instead", value)
+				}
+				sv.ComputeLocation = types.ComputeLocation(jtv)
 			}
 
 		default:
@@ -14641,8 +14905,58 @@ func awsRestjson1_deserializeDocumentTransform(v **types.Transform, value interf
 				sv.Expression = ptr.String(jtv)
 			}
 
+		case "processingConfig":
+			if err := awsRestjson1_deserializeDocumentTransformProcessingConfig(&sv.ProcessingConfig, value); err != nil {
+				return err
+			}
+
 		case "variables":
 			if err := awsRestjson1_deserializeDocumentExpressionVariables(&sv.Variables, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentTransformProcessingConfig(v **types.TransformProcessingConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TransformProcessingConfig
+	if *v == nil {
+		sv = &types.TransformProcessingConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "computeLocation":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComputeLocation to be of type string, got %T instead", value)
+				}
+				sv.ComputeLocation = types.ComputeLocation(jtv)
+			}
+
+		case "forwardingConfig":
+			if err := awsRestjson1_deserializeDocumentForwardingConfig(&sv.ForwardingConfig, value); err != nil {
 				return err
 			}
 

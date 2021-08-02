@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// For an existing CodeBuild build project that has its source code stored in a
-// GitHub or Bitbucket repository, stops CodeBuild from rebuilding the source code
-// every time a code change is pushed to the repository.
+// For an existing AWS CodeBuild build project that has its source code stored in a
+// GitHub or Bitbucket repository, stops AWS CodeBuild from rebuilding the source
+// code every time a code change is pushed to the repository.
 func (c *Client) DeleteWebhook(ctx context.Context, params *DeleteWebhookInput, optFns ...func(*Options)) (*DeleteWebhookOutput, error) {
 	if params == nil {
 		params = &DeleteWebhookInput{}
@@ -30,7 +30,7 @@ func (c *Client) DeleteWebhook(ctx context.Context, params *DeleteWebhookInput, 
 
 type DeleteWebhookInput struct {
 
-	// The name of the CodeBuild project.
+	// The name of the AWS CodeBuild project.
 	//
 	// This member is required.
 	ProjectName *string

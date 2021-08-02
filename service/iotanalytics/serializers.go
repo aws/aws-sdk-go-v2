@@ -2824,6 +2824,20 @@ func awsRestjson1_serializeDocumentDatastoreActivity(v *types.DatastoreActivity,
 	return nil
 }
 
+func awsRestjson1_serializeDocumentDatastoreIotSiteWiseMultiLayerStorage(v *types.DatastoreIotSiteWiseMultiLayerStorage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CustomerManagedS3Storage != nil {
+		ok := object.Key("customerManagedS3Storage")
+		if err := awsRestjson1_serializeDocumentIotSiteWiseCustomerManagedDatastoreS3Storage(v.CustomerManagedS3Storage, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentDatastorePartition(v *types.DatastorePartition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2867,6 +2881,12 @@ func awsRestjson1_serializeDocumentDatastoreStorage(v types.DatastoreStorage, va
 	case *types.DatastoreStorageMemberCustomerManagedS3:
 		av := object.Key("customerManagedS3")
 		if err := awsRestjson1_serializeDocumentCustomerManagedDatastoreS3Storage(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DatastoreStorageMemberIotSiteWiseMultiLayerStorage:
+		av := object.Key("iotSiteWiseMultiLayerStorage")
+		if err := awsRestjson1_serializeDocumentDatastoreIotSiteWiseMultiLayerStorage(&uv.Value, av); err != nil {
 			return err
 		}
 
@@ -3048,6 +3068,23 @@ func awsRestjson1_serializeDocumentIotEventsDestinationConfiguration(v *types.Io
 	if v.RoleArn != nil {
 		ok := object.Key("roleArn")
 		ok.String(*v.RoleArn)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentIotSiteWiseCustomerManagedDatastoreS3Storage(v *types.IotSiteWiseCustomerManagedDatastoreS3Storage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Bucket != nil {
+		ok := object.Key("bucket")
+		ok.String(*v.Bucket)
+	}
+
+	if v.KeyPrefix != nil {
+		ok := object.Key("keyPrefix")
+		ok.String(*v.KeyPrefix)
 	}
 
 	return nil

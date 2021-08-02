@@ -31,7 +31,7 @@ func (c *Client) ListBuildsForProject(ctx context.Context, params *ListBuildsFor
 
 type ListBuildsForProjectInput struct {
 
-	// The name of the CodeBuild project.
+	// The name of the AWS CodeBuild project.
 	//
 	// This member is required.
 	ProjectName *string

@@ -29,8 +29,9 @@ func (c *Client) DeleteUserByPrincipalId(ctx context.Context, params *DeleteUser
 //
 type DeleteUserByPrincipalIdInput struct {
 
-	// The ID for the AWS account that the user is in. Currently, you use the ID for
-	// the AWS account that contains your Amazon QuickSight account.
+	// The ID for the Amazon Web Services account; that the user is in. Currently, you
+	// use the ID for the Amazon Web Services account; that contains your Amazon
+	// QuickSight account.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -50,7 +51,7 @@ type DeleteUserByPrincipalIdInput struct {
 
 type DeleteUserByPrincipalIdOutput struct {
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

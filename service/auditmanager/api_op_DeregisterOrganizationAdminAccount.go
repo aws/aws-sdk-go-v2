@@ -10,7 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deregisters the delegated AWS administrator account from the AWS organization.
+// Removes the specified member account as a delegated administrator for Audit
+// Manager. When you remove a delegated administrator from your Audit Manager
+// settings, or when you deregister a delegated administrator from Organizations,
+// you continue to have access to the evidence that you previously collected under
+// that account. However, Audit Manager will stop collecting and attaching evidence
+// to that delegated administrator account moving forward.
 func (c *Client) DeregisterOrganizationAdminAccount(ctx context.Context, params *DeregisterOrganizationAdminAccountInput, optFns ...func(*Options)) (*DeregisterOrganizationAdminAccountOutput, error) {
 	if params == nil {
 		params = &DeregisterOrganizationAdminAccountInput{}

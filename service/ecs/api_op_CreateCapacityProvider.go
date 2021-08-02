@@ -14,9 +14,9 @@ import (
 // Creates a new capacity provider. Capacity providers are associated with an
 // Amazon ECS cluster and are used in capacity provider strategies to facilitate
 // cluster auto scaling. Only capacity providers using an Auto Scaling group can be
-// created. Amazon ECS tasks on AWS Fargate use the FARGATE and FARGATE_SPOT
-// capacity providers which are already created and available to all accounts in
-// Regions supported by AWS Fargate.
+// created. Amazon ECS tasks on Fargate use the FARGATE and FARGATE_SPOT capacity
+// providers which are already created and available to all accounts in Regions
+// supported by Fargate.
 func (c *Client) CreateCapacityProvider(ctx context.Context, params *CreateCapacityProviderInput, optFns ...func(*Options)) (*CreateCapacityProviderOutput, error) {
 	if params == nil {
 		params = &CreateCapacityProviderInput{}
@@ -71,9 +71,9 @@ type CreateCapacityProviderInput struct {
 	// case-sensitive.
 	//
 	// * Do not use aws:, AWS:, or any upper or lowercase combination
-	// of such as a prefix for either keys or values as it is reserved for AWS use. You
-	// cannot edit or delete tag keys or values with this prefix. Tags with this prefix
-	// do not count against your tags per resource limit.
+	// of such as a prefix for either keys or values as it is reserved for Amazon Web
+	// Services use. You cannot edit or delete tag keys or values with this prefix.
+	// Tags with this prefix do not count against your tags per resource limit.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

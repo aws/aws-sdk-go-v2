@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the current role and list of Amazon S3 log buckets used by the DDoS
-// Response Team (DRT) to access your AWS account while assisting with attack
-// mitigation.
+// Returns the current role and list of Amazon S3 log buckets used by the Shield
+// Response Team (SRT) to access your Amazon Web Services account while assisting
+// with attack mitigation.
 func (c *Client) DescribeDRTAccess(ctx context.Context, params *DescribeDRTAccessInput, optFns ...func(*Options)) (*DescribeDRTAccessOutput, error) {
 	if params == nil {
 		params = &DescribeDRTAccessInput{}
@@ -34,11 +34,11 @@ type DescribeDRTAccessInput struct {
 
 type DescribeDRTAccessOutput struct {
 
-	// The list of Amazon S3 buckets accessed by the DRT.
+	// The list of Amazon S3 buckets accessed by the SRT.
 	LogBucketList []string
 
-	// The Amazon Resource Name (ARN) of the role the DRT used to access your AWS
-	// account.
+	// The Amazon Resource Name (ARN) of the role the SRT used to access your Amazon
+	// Web Services account.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

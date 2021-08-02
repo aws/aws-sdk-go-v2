@@ -39,7 +39,7 @@ type ListTagsForResourceInput struct {
 
 type ListTagsForResourceOutput struct {
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

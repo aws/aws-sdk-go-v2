@@ -199,14 +199,14 @@ type Datapoint struct {
 // of your metrics, you are creating a new variation of that metric.
 type Dimension struct {
 
-	// The name of the dimension. Dimension names cannot contain blank spaces or
-	// non-ASCII characters.
+	// The name of the dimension. Dimension names must contain only ASCII characters
+	// and must include at least one non-whitespace character.
 	//
 	// This member is required.
 	Name *string
 
-	// The value of the dimension. Dimension values cannot contain blank spaces or
-	// non-ASCII characters.
+	// The value of the dimension. Dimension values must contain only ASCII characters
+	// and must include at least one non-whitespace character.
 	//
 	// This member is required.
 	Value *string
@@ -376,6 +376,10 @@ type LabelOptions struct {
 }
 
 // A message returned by the GetMetricDataAPI, including a code and a description.
+// If a cross-Region GetMetricData operation fails with a code of Forbidden and a
+// value of Authentication too complex to retrieve cross region data, you can
+// correct the problem by running the GetMetricData operation in the same Region
+// where the metric data is.
 type MessageData struct {
 
 	// The error code or status code associated with the message.
@@ -537,6 +541,11 @@ type MetricDataQuery struct {
 	//
 	// This member is required.
 	Id *string
+
+	// The ID of the account where the metrics are located, if this is a cross-account
+	// alarm. Use this field only for PutMetricAlarm operations. It is not used in
+	// GetMetricData operations.
+	AccountId *string
 
 	// The math expression to be performed on the returned data, if this object is
 	// performing a math expression. This expression can use the Id of the other

@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns evidence from AWS Audit Manager.
+// Returns evidence from Audit Manager.
 func (c *Client) GetEvidence(ctx context.Context, params *GetEvidenceInput, optFns ...func(*Options)) (*GetEvidenceOutput, error) {
 	if params == nil {
 		params = &GetEvidenceInput{}

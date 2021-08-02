@@ -208,9 +208,10 @@ type WirelessDeviceIdType string
 
 // Enum values for WirelessDeviceIdType
 const (
-	WirelessDeviceIdTypeWirelessDeviceId WirelessDeviceIdType = "WirelessDeviceId"
-	WirelessDeviceIdTypeDevEui           WirelessDeviceIdType = "DevEui"
-	WirelessDeviceIdTypeThingName        WirelessDeviceIdType = "ThingName"
+	WirelessDeviceIdTypeWirelessDeviceId        WirelessDeviceIdType = "WirelessDeviceId"
+	WirelessDeviceIdTypeDevEui                  WirelessDeviceIdType = "DevEui"
+	WirelessDeviceIdTypeThingName               WirelessDeviceIdType = "ThingName"
+	WirelessDeviceIdTypeSidewalkManufacturingSn WirelessDeviceIdType = "SidewalkManufacturingSn"
 )
 
 // Values returns all known values for WirelessDeviceIdType. Note that this can be
@@ -221,6 +222,7 @@ func (WirelessDeviceIdType) Values() []WirelessDeviceIdType {
 		"WirelessDeviceId",
 		"DevEui",
 		"ThingName",
+		"SidewalkManufacturingSn",
 	}
 }
 

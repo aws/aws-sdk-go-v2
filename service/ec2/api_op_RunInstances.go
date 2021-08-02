@@ -337,11 +337,11 @@ type RunInstancesOutput struct {
 	// The instances.
 	Instances []types.Instance
 
-	// The ID of the account that owns the reservation.
+	// The ID of the Amazon Web Services account that owns the reservation.
 	OwnerId *string
 
 	// The ID of the requester that launched the instances on your behalf (for example,
-	// Management Console or Auto Scaling).
+	// Amazon Web Services Management Console or Auto Scaling).
 	RequesterId *string
 
 	// The ID of the reservation.

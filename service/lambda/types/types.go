@@ -221,8 +221,8 @@ type EnvironmentResponse struct {
 	noSmithyDocumentSerde
 }
 
-// A mapping between an Amazon Web Services resource and an Lambda function. See
-// CreateEventSourceMapping for details.
+// A mapping between an Amazon Web Services resource and a Lambda function. For
+// details, see CreateEventSourceMapping.
 type EventSourceMappingConfiguration struct {
 
 	// The maximum number of items to retrieve in a single batch.
@@ -246,14 +246,15 @@ type EventSourceMappingConfiguration struct {
 	// mapping.
 	FunctionResponseTypes []FunctionResponseType
 
-	// The date that the event source mapping was last updated, or its state changed.
+	// The date that the event source mapping was last updated or that its state
+	// changed.
 	LastModified *time.Time
 
-	// The result of the last Lambda invocation of your Lambda function.
+	// The result of the last Lambda invocation of your function.
 	LastProcessingResult *string
 
-	// (Streams and SQS standard queues) The maximum amount of time to gather records
-	// before invoking the function, in seconds. The default value is zero.
+	// (Streams and Amazon SQS standard queues) The maximum amount of time to gather
+	// records before invoking the function, in seconds. The default value is zero.
 	MaximumBatchingWindowInSeconds *int32
 
 	// (Streams only) Discard records older than the specified age. The default value
@@ -267,23 +268,23 @@ type EventSourceMappingConfiguration struct {
 	// expires in the event source.
 	MaximumRetryAttempts *int32
 
-	// (Streams only) The number of batches to process from each shard concurrently.
+	// (Streams only) The number of batches to process concurrently from each shard.
 	// The default value is 1.
 	ParallelizationFactor *int32
 
-	// (MQ) The name of the Amazon MQ broker destination queue to consume.
+	// (Amazon MQ) The name of the Amazon MQ broker destination queue to consume.
 	Queues []string
 
-	// The Self-Managed Apache Kafka cluster for your event source.
+	// The self-managed Apache Kafka cluster for your event source.
 	SelfManagedEventSource *SelfManagedEventSource
 
-	// An array of the authentication protocol, or the VPC components to secure your
-	// event source.
+	// An array of the authentication protocol, VPC components, or virtual host to
+	// secure and define your event source.
 	SourceAccessConfigurations []SourceAccessConfiguration
 
 	// The position in a stream from which to start reading. Required for Amazon
-	// Kinesis, Amazon DynamoDB, and Amazon MSK Streams sources. AT_TIMESTAMP is only
-	// supported for Amazon Kinesis streams.
+	// Kinesis, Amazon DynamoDB, and Amazon MSK stream sources. AT_TIMESTAMP is
+	// supported only for Amazon Kinesis streams.
 	StartingPosition EventSourcePosition
 
 	// With StartingPosition set to AT_TIMESTAMP, the time from which to start reading.
@@ -293,15 +294,15 @@ type EventSourceMappingConfiguration struct {
 	// Enabling, Enabled, Disabling, Disabled, Updating, or Deleting.
 	State *string
 
-	// Indicates whether the last change to the event source mapping was made by a
-	// user, or by the Lambda service.
+	// Indicates whether a user or Lambda made the last change to the event source
+	// mapping.
 	StateTransitionReason *string
 
 	// The name of the Kafka topic.
 	Topics []string
 
 	// (Streams only) The duration in seconds of a processing window. The range is
-	// between 1 second up to 900 seconds.
+	// 1–900 seconds.
 	TumblingWindowInSeconds *int32
 
 	// The identifier of the event source mapping.
@@ -708,7 +709,7 @@ type ProvisionedConcurrencyConfigListItem struct {
 	noSmithyDocumentSerde
 }
 
-// The Self-Managed Apache Kafka cluster for your event source.
+// The self-managed Apache Kafka cluster for your event source.
 type SelfManagedEventSource struct {
 
 	// The list of bootstrap servers for your Kafka brokers in the following format:
@@ -718,34 +719,39 @@ type SelfManagedEventSource struct {
 	noSmithyDocumentSerde
 }
 
-// You can specify the authentication protocol, or the VPC components to secure
-// access to your event source.
+// To secure and define access to your event source, you can specify the
+// authentication protocol, VPC components, or virtual host.
 type SourceAccessConfiguration struct {
 
-	// The type of authentication protocol or the VPC components for your event source.
-	// For example: "Type":"SASL_SCRAM_512_AUTH".
+	// The type of authentication protocol, VPC components, or virtual host for your
+	// event source. For example: "Type":"SASL_SCRAM_512_AUTH".
 	//
-	// * BASIC_AUTH - (MQ) The Secrets
-	// Manager secret that stores your broker credentials.
-	//
-	// * VPC_SUBNET - The subnets
-	// associated with your VPC. Lambda connects to these subnets to fetch data from
-	// your Self-Managed Apache Kafka cluster.
-	//
-	// * VPC_SECURITY_GROUP - The VPC security
-	// group used to manage access to your Self-Managed Apache Kafka brokers.
+	// * BASIC_AUTH - (Amazon
+	// MQ) The Secrets Manager secret that stores your broker credentials.
 	//
 	// *
-	// SASL_SCRAM_256_AUTH - The Secrets Manager ARN of your secret key used for SASL
-	// SCRAM-256 authentication of your Self-Managed Apache Kafka brokers.
+	// BASIC_AUTH - (Self-managed Apache Kafka) The Secrets Manager ARN of your secret
+	// key used for SASL/PLAIN authentication of your Apache Kafka brokers.
 	//
 	// *
-	// SASL_SCRAM_512_AUTH - The Secrets Manager ARN of your secret key used for SASL
-	// SCRAM-512 authentication of your Self-Managed Apache Kafka brokers.
+	// VPC_SUBNET - The subnets associated with your VPC. Lambda connects to these
+	// subnets to fetch data from your self-managed Apache Kafka cluster.
 	//
 	// *
-	// VIRTUAL_HOST - The name of the virtual host in your RabbitMQ broker. Lambda will
-	// use this host as the event source.
+	// VPC_SECURITY_GROUP - The VPC security group used to manage access to your
+	// self-managed Apache Kafka brokers.
+	//
+	// * SASL_SCRAM_256_AUTH - The Secrets Manager
+	// ARN of your secret key used for SASL SCRAM-256 authentication of your
+	// self-managed Apache Kafka brokers.
+	//
+	// * SASL_SCRAM_512_AUTH - The Secrets Manager
+	// ARN of your secret key used for SASL SCRAM-512 authentication of your
+	// self-managed Apache Kafka brokers.
+	//
+	// * VIRTUAL_HOST - (Amazon MQ) The name of the
+	// virtual host in your RabbitMQ broker. Lambda uses this RabbitMQ host as the
+	// event source.
 	Type SourceAccessType
 
 	// The value for your chosen configuration in Type. For example: "URI":

@@ -1,5 +1,5 @@
-github.com/aws/smithy-go v1.6.1-0.20210719175327-4970553d9934 h1:H/cJ5RmCmecKKWw+u9fwLGx/p0d51cywdjYDRnXOYjI=
-github.com/aws/smithy-go v1.6.1-0.20210719175327-4970553d9934/go.mod h1:SObp3lf9smib00L/v3U2eAKG8FyQ7iLrJnQiAmR5n+E=
+github.com/aws/smithy-go v1.6.1-0.20210729222435-d3a155d0ce54 h1:CkBR6T9z72f58dOEq0Q5HKBJUWkrO+c8Iw7NFONY/sU=
+github.com/aws/smithy-go v1.6.1-0.20210729222435-d3a155d0ce54/go.mod h1:SObp3lf9smib00L/v3U2eAKG8FyQ7iLrJnQiAmR5n+E=
 github.com/google/go-cmp v0.5.4 h1:L8R9j+yAqZuZjsqh/z+F1NCffTKKLShY6zXTItVIZ8M=
 github.com/google/go-cmp v0.5.4/go.mod h1:v8dTdLbMG2kIc/vJvl+f65V22dbkXbowE6jgT/gNBxE=
 golang.org/x/xerrors v0.0.0-20191204190536-9bdfabe68543 h1:E7g+9GITq07hpfrRu66IVDexMakfv52eLZ2CXBWiKr4=

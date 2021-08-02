@@ -13,7 +13,7 @@ import (
 // Replaces an existing route within a route table in a VPC. You must provide only
 // one of the following: internet gateway, virtual private gateway, NAT instance,
 // NAT gateway, VPC peering connection, network interface, egress-only internet
-// gateway, or transit gateway. For more information, see Route Tables
+// gateway, or transit gateway. For more information, see Route tables
 // (https://docs.aws.amazon.com/vpc/latest/userguide/VPC_Route_Tables.html) in the
 // Amazon Virtual Private Cloud User Guide.
 func (c *Client) ReplaceRoute(ctx context.Context, params *ReplaceRouteInput, optFns ...func(*Options)) (*ReplaceRouteOutput, error) {

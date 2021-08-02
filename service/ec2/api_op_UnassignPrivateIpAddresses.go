@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Unassigns one or more secondary private IP addresses from a network interface.
+// Unassigns one or more secondary private IP addresses, or IPv4 Prefix Delegation
+// prefixes from a network interface.
 func (c *Client) UnassignPrivateIpAddresses(ctx context.Context, params *UnassignPrivateIpAddressesInput, optFns ...func(*Options)) (*UnassignPrivateIpAddressesOutput, error) {
 	if params == nil {
 		params = &UnassignPrivateIpAddressesInput{}
@@ -34,10 +35,11 @@ type UnassignPrivateIpAddressesInput struct {
 	// This member is required.
 	NetworkInterfaceId *string
 
+	// The IPv4 Prefix Delegation prefixes to unassign from the network interface.
+	Ipv4Prefixes []string
+
 	// The secondary private IP addresses to unassign from the network interface. You
 	// can specify this option multiple times to unassign more than one IP address.
-	//
-	// This member is required.
 	PrivateIpAddresses []string
 
 	noSmithyDocumentSerde

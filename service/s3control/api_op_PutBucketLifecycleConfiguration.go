@@ -55,7 +55,7 @@ func (c *Client) PutBucketLifecycleConfiguration(ctx context.Context, params *Pu
 
 type PutBucketLifecycleConfigurationInput struct {
 
-	// The AWS account ID of the Outposts bucket.
+	// The account ID of the Outposts bucket.
 	//
 	// This member is required.
 	AccountId *string

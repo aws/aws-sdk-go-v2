@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the number of hosted zones that are associated with the current AWS
+// Retrieves the number of hosted zones that are associated with the current
 // account.
 func (c *Client) GetHostedZoneCount(ctx context.Context, params *GetHostedZoneCountInput, optFns ...func(*Options)) (*GetHostedZoneCountOutput, error) {
 	if params == nil {
@@ -28,7 +28,7 @@ func (c *Client) GetHostedZoneCount(ctx context.Context, params *GetHostedZoneCo
 }
 
 // A request to retrieve a count of all the hosted zones that are associated with
-// the current AWS account.
+// the current account.
 type GetHostedZoneCountInput struct {
 	noSmithyDocumentSerde
 }
@@ -37,7 +37,7 @@ type GetHostedZoneCountInput struct {
 type GetHostedZoneCountOutput struct {
 
 	// The total number of public and private hosted zones that are associated with the
-	// current AWS account.
+	// current account.
 	//
 	// This member is required.
 	HostedZoneCount *int64

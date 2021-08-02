@@ -10,13 +10,16 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// S3 on Outposts access points simplify managing data access at scale for shared
-// datasets in Amazon S3 on Outposts. S3 on Outposts uses endpoints to connect to
+// Amazon S3 on Outposts Access Points simplify managing data access at scale for
+// shared datasets in S3 on Outposts. S3 on Outposts uses endpoints to connect to
 // Outposts buckets so that you can perform actions within your virtual private
-// cloud (VPC). This action deletes an endpoint. Related actions include:
+// cloud (VPC). For more information, see  Accessing S3 on Outposts using VPC only
+// access points
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/AccessingS3Outposts.html).
+// This action deletes an endpoint. It can take up to 5 minutes for this action to
+// complete. Related actions include:
 //
-// *
-// CreateEndpoint
+// * CreateEndpoint
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_s3outposts_CreateEndpoint.html)
 //
 // *
@@ -39,12 +42,12 @@ func (c *Client) DeleteEndpoint(ctx context.Context, params *DeleteEndpointInput
 
 type DeleteEndpointInput struct {
 
-	// The ID of the end point.
+	// The ID of the endpoint.
 	//
 	// This member is required.
 	EndpointId *string
 
-	// The ID of the AWS Outpost.
+	// The ID of the AWS Outposts.
 	//
 	// This member is required.
 	OutpostId *string

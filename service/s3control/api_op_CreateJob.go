@@ -57,7 +57,7 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 type CreateJobInput struct {
 
-	// The AWS account ID that creates the job.
+	// The account ID that creates the job.
 	//
 	// This member is required.
 	AccountId *string
@@ -91,9 +91,9 @@ type CreateJobInput struct {
 	// This member is required.
 	Report *types.JobReport
 
-	// The Amazon Resource Name (ARN) for the AWS Identity and Access Management (IAM)
-	// role that Batch Operations will use to run this job's action on every object in
-	// the manifest.
+	// The Amazon Resource Name (ARN) for the Identity and Access Management (IAM) role
+	// that Batch Operations will use to run this job's action on every object in the
+	// manifest.
 	//
 	// This member is required.
 	RoleArn *string

@@ -69,7 +69,9 @@ type AdditionalResultAttributeValue struct {
 //
 // If you use more than 2 layers, you
 // receive a ValidationException exception with the message "AttributeFilter cannot
-// have a depth of more than 2."
+// have a depth of more than 2." If you use more than 10 attribute filters, you
+// receive a ValidationException exception with the message "AttributeFilter cannot
+// have a length of more than 10".
 type AttributeFilter struct {
 
 	// Performs a logical AND operation on all supplied filters.
@@ -205,20 +207,21 @@ type CapacityUnitsConfiguration struct {
 
 	// The amount of extra query capacity for an index and GetQuerySuggestions
 	// (https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html)
-	// capacity. A single extra capacity unit for an index provides 0.5 queries per
-	// second or approximately 40,000 queries per day. GetQuerySuggestions capacity is
-	// 5 times the provisioned query capacity for an index. For example, the base
-	// capacity for an index is 0.5 queries per second, so GetQuerySuggestions capacity
-	// is 2.5 calls per second. If adding another 0.5 queries per second to total 1
-	// queries per second for an index, the GetQuerySuggestions capacity is 5 calls per
-	// second.
+	// capacity. A single extra capacity unit for an index provides 0.1 queries per
+	// second or approximately 8,000 queries per day. GetQuerySuggestions capacity is
+	// five times the provisioned query capacity for an index, or the base capacity of
+	// 2.5 calls per second, whichever is higher. For example, the base capacity for an
+	// index is 0.1 queries per second, and GetQuerySuggestions capacity has a base of
+	// 2.5 calls per second. If you add another 0.1 queries per second to total 0.2
+	// queries per second for an index, the GetQuerySuggestions capacity is 2.5 calls
+	// per second (higher than five times 0.2 queries per second).
 	//
 	// This member is required.
 	QueryCapacityUnits *int32
 
-	// The amount of extra storage capacity for an index. A single capacity unit for an
-	// index provides 150 GB of storage space or 500,000 documents, whichever is
-	// reached first.
+	// The amount of extra storage capacity for an index. A single capacity unit
+	// provides 30 GB of storage space or 100,000 documents, whichever is reached
+	// first.
 	//
 	// This member is required.
 	StorageCapacityUnits *int32
@@ -515,11 +518,11 @@ type ConnectionConfiguration struct {
 	// This member is required.
 	DatabasePort *int32
 
-	// The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The
+	// The Amazon Resource Name (ARN) of credentials stored in Secrets Manager. The
 	// credentials should be a user/password pair. For more information, see Using a
 	// Database Data Source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html). For
-	// more information about AWS Secrets Manager, see  What Is AWS Secrets Manager
+	// more information about Secrets Manager, see  What Is Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
 	// Secrets Manager user guide.
 	//
@@ -599,6 +602,10 @@ type DataSourceConfiguration struct {
 
 	// Provides the configuration information required for Amazon Kendra web crawler.
 	WebCrawlerConfiguration *WebCrawlerConfiguration
+
+	// Provides the configuration information to connect to WorkDocs as your data
+	// source.
+	WorkDocsConfiguration *WorkDocsConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -2058,12 +2065,12 @@ type ServiceNowServiceCatalogConfiguration struct {
 // source.
 type SharePointConfiguration struct {
 
-	// The Amazon Resource Name (ARN) of credentials stored in AWS Secrets Manager. The
-	// credentials should be a user/password pair. If you use SharePoint Sever, you
+	// The Amazon Resource Name (ARN) of credentials stored in Secrets Manager. The
+	// credentials should be a user/password pair. If you use SharePoint Server, you
 	// also need to provide the sever domain name as part of the credentials. For more
 	// information, see Using a Microsoft SharePoint Data Source
 	// (https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html). For
-	// more information about AWS Secrets Manager, see  What Is AWS Secrets Manager
+	// more information about Secrets Manager, see  What Is Secrets Manager
 	// (https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html) in the
 	// Secrets Manager user guide.
 	//
@@ -2490,6 +2497,60 @@ type WebCrawlerConfiguration struct {
 	// regular expression pattern to exclude certain URLs that conflicts with the
 	// include pattern, the exclude pattern takes precedence.
 	UrlInclusionPatterns []string
+
+	noSmithyDocumentSerde
+}
+
+// Provides the configuration information to connect to Amazon WorkDocs as your
+// data source. Amazon WorkDocs connector is available in Oregon, North Virginia,
+// Sydney, Singapore and Ireland regions.
+type WorkDocsConfiguration struct {
+
+	// The identifier of the directory corresponding to your Amazon WorkDocs site
+	// repository. You can find the organization ID in the AWS Directory Service
+	// (https://console.aws.amazon.com/directoryservicev2/) by going to Active
+	// Directory, then Directories. Your Amazon WorkDocs site directory has an ID,
+	// which is the organization ID. You can also set up a new Amazon WorkDocs
+	// directory in the AWS Directory Service console and enable a Amazon WorkDocs site
+	// for the directory in the Amazon WorkDocs console.
+	//
+	// This member is required.
+	OrganizationId *string
+
+	// TRUE to include comments on documents in your index. Including comments in your
+	// index means each comment is a document that can be searched on. The default is
+	// set to FALSE.
+	CrawlComments bool
+
+	// A list of regular expression patterns to exclude certain files in your Amazon
+	// WorkDocs site repository. Files that match the patterns are excluded from the
+	// index. Files that don’t match the patterns are included in the index. If a file
+	// matches both an inclusion pattern and an exclusion pattern, the exclusion
+	// pattern takes precedence and the file isn’t included in the index.
+	ExclusionPatterns []string
+
+	// A list of DataSourceToIndexFieldMapping objects that map Amazon WorkDocs field
+	// names to custom index field names in Amazon Kendra. You must first create the
+	// custom index fields using the UpdateIndex operation before you map to Amazon
+	// WorkDocs fields. For more information, see Mapping Data Source Fields
+	// (https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html). The Amazon
+	// WorkDocs data source field names need to exist in your Amazon WorkDocs custom
+	// metadata.
+	FieldMappings []DataSourceToIndexFieldMapping
+
+	// A list of regular expression patterns to include certain files in your Amazon
+	// WorkDocs site repository. Files that match the patterns are included in the
+	// index. Files that don't match the patterns are excluded from the index. If a
+	// file matches both an inclusion pattern and an exclusion pattern, the exclusion
+	// pattern takes precedence and the file isn’t included in the index.
+	InclusionPatterns []string
+
+	// TRUE to use the change logs to update documents in your index instead of
+	// scanning all documents. If you are syncing your Amazon WorkDocs data source with
+	// your index for the first time, all documents are scanned. After your first sync,
+	// you can use the change logs to update your documents in your index for future
+	// syncs. The default is set to FALSE.
+	UseChangeLog bool
 
 	noSmithyDocumentSerde
 }

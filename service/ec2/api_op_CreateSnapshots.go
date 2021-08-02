@@ -54,7 +54,7 @@ type CreateSnapshotsInput struct {
 	// UnauthorizedOperation.
 	DryRun *bool
 
-	// The Amazon Resource Name (ARN) of the AWS Outpost on which to create the local
+	// The Amazon Resource Name (ARN) of the Outpost on which to create the local
 	// snapshots.
 	//
 	// * To create snapshots from an instance in a Region, omit this
@@ -70,7 +70,7 @@ type CreateSnapshotsInput struct {
 	// snapshots must be created on the same Outpost as the instance.
 	//
 	// For more
-	// information, see  Creating multi-volume local snapshots from instances on an
+	// information, see  Create multi-volume local snapshots from instances on an
 	// Outpost
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshots-outposts.html#create-multivol-snapshot)
 	// in the Amazon Elastic Compute Cloud User Guide.

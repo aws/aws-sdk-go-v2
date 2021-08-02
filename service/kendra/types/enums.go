@@ -278,6 +278,7 @@ const (
 	DataSourceTypeConfluence  DataSourceType = "CONFLUENCE"
 	DataSourceTypeGoogledrive DataSourceType = "GOOGLEDRIVE"
 	DataSourceTypeWebcrawler  DataSourceType = "WEBCRAWLER"
+	DataSourceTypeWorkdocs    DataSourceType = "WORKDOCS"
 )
 
 // Values returns all known values for DataSourceType. Note that this can be
@@ -295,6 +296,7 @@ func (DataSourceType) Values() []DataSourceType {
 		"CONFLUENCE",
 		"GOOGLEDRIVE",
 		"WEBCRAWLER",
+		"WORKDOCS",
 	}
 }
 

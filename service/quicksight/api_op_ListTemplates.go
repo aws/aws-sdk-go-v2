@@ -30,7 +30,8 @@ func (c *Client) ListTemplates(ctx context.Context, params *ListTemplatesInput, 
 
 type ListTemplatesInput struct {
 
-	// The ID of the AWS account that contains the templates that you're listing.
+	// The ID of the Amazon Web Services account; that contains the templates that
+	// you're listing.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -49,7 +50,7 @@ type ListTemplatesOutput struct {
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

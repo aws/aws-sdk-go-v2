@@ -61,7 +61,7 @@ type ListResourcesInProtectionGroupOutput struct {
 	ResourceArns []string
 
 	// If you specify a value for MaxResults and you have more resources in the
-	// protection group than the value of MaxResults, AWS Shield Advanced returns this
+	// protection group than the value of MaxResults, Shield Advanced returns this
 	// token that you can use in your next request, to get the next batch of objects.
 	NextToken *string
 

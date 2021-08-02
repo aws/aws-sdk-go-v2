@@ -2,6 +2,26 @@
 
 package types
 
+type EncryptionStatus string
+
+// Enum values for EncryptionStatus
+const (
+	EncryptionStatusEnabled            EncryptionStatus = "ENABLED"
+	EncryptionStatusUpdating           EncryptionStatus = "UPDATING"
+	EncryptionStatusKmsKeyInaccessible EncryptionStatus = "KMS_KEY_INACCESSIBLE"
+)
+
+// Values returns all known values for EncryptionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EncryptionStatus) Values() []EncryptionStatus {
+	return []EncryptionStatus{
+		"ENABLED",
+		"UPDATING",
+		"KMS_KEY_INACCESSIBLE",
+	}
+}
+
 type ErrorCause string
 
 // Enum values for ErrorCause

@@ -10,9 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// The Amazon AppIntegrations APIs are in preview release and are subject to
-// change. Deletes the specified existing event integration. If the event
-// integration is associated with clients, the request is rejected.
+// Deletes the specified existing event integration. If the event integration is
+// associated with clients, the request is rejected.
 func (c *Client) DeleteEventIntegration(ctx context.Context, params *DeleteEventIntegrationInput, optFns ...func(*Options)) (*DeleteEventIntegrationOutput, error) {
 	if params == nil {
 		params = &DeleteEventIntegrationInput{}

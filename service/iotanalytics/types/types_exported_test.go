@@ -14,6 +14,9 @@ func ExampleDatastoreStorage_outputUsage() {
 	case *types.DatastoreStorageMemberCustomerManagedS3:
 		_ = v.Value // Value is types.CustomerManagedDatastoreS3Storage
 
+	case *types.DatastoreStorageMemberIotSiteWiseMultiLayerStorage:
+		_ = v.Value // Value is types.DatastoreIotSiteWiseMultiLayerStorage
+
 	case *types.DatastoreStorageMemberServiceManagedS3:
 		_ = v.Value // Value is types.ServiceManagedDatastoreS3Storage
 
@@ -28,3 +31,4 @@ func ExampleDatastoreStorage_outputUsage() {
 
 var _ *types.ServiceManagedDatastoreS3Storage
 var _ *types.CustomerManagedDatastoreS3Storage
+var _ *types.DatastoreIotSiteWiseMultiLayerStorage

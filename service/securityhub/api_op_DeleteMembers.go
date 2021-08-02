@@ -41,8 +41,8 @@ type DeleteMembersInput struct {
 
 type DeleteMembersOutput struct {
 
-	// The list of AWS accounts that were not deleted. For each account, the list
-	// includes the account ID and the email address.
+	// The list of Amazon Web Services accounts that were not deleted. For each
+	// account, the list includes the account ID and the email address.
 	UnprocessedAccounts []types.Result
 
 	// Metadata pertaining to the operation's result.

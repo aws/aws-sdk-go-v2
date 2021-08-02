@@ -18,8 +18,8 @@ import (
 // (https://console.aws.amazon.com/pinpoint/home/). Cognito will use the the
 // registered number automatically. Otherwise, Cognito users that must receive SMS
 // messages might be unable to sign up, activate their accounts, or sign in. If you
-// have never used SMS text messages with Amazon Cognito or any other AWS service,
-// Amazon SNS might place your account in SMS sandbox. In sandbox mode
+// have never used SMS text messages with Amazon Cognito or any other Amazon Web
+// Service, Amazon SNS might place your account in SMS sandbox. In sandbox mode
 // (https://docs.aws.amazon.com/sns/latest/dg/sns-sms-sandbox.html) , you’ll have
 // limitations, such as sending messages to only verified phone numbers. After
 // testing in the sandbox environment, you can move out of the SMS sandbox and into
@@ -113,8 +113,8 @@ type InitiateAuthInput struct {
 
 	// A map of custom key-value pairs that you can provide as input for certain custom
 	// workflows that this action triggers. You create custom workflows by assigning
-	// AWS Lambda functions to user pool triggers. When you use the InitiateAuth API
-	// action, Amazon Cognito invokes the AWS Lambda functions that are specified for
+	// Lambda functions to user pool triggers. When you use the InitiateAuth API
+	// action, Amazon Cognito invokes the Lambda functions that are specified for
 	// various triggers. The ClientMetadata value is passed as input to the functions
 	// for only the following triggers:
 	//
@@ -129,7 +129,7 @@ type InitiateAuthInput struct {
 	// passes a JSON payload, which the function receives as input. This payload
 	// contains a validationData attribute, which provides the data that you assigned
 	// to the ClientMetadata parameter in your InitiateAuth request. In your function
-	// code in AWS Lambda, you can process the validationData value to enhance your
+	// code in Lambda, you can process the validationData value to enhance your
 	// workflow for your specific needs. When you use the InitiateAuth API action,
 	// Amazon Cognito also invokes the functions for the following triggers, but it
 	// does not provide the ClientMetadata value as input:
@@ -155,7 +155,7 @@ type InitiateAuthInput struct {
 	// consideration when you use the ClientMetadata parameter:
 	//
 	// * Amazon Cognito does
-	// not store the ClientMetadata value. This data is available only to AWS Lambda
+	// not store the ClientMetadata value. This data is available only to Lambda
 	// triggers that are assigned to a user pool to support custom workflows. If your
 	// user pool configuration does not include triggers, the ClientMetadata parameter
 	// serves no purpose.

@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of report groups that are shared with other Amazon Web Services
-// accounts or users.
+// Gets a list of report groups that are shared with other AWS accounts or users.
 func (c *Client) ListSharedReportGroups(ctx context.Context, params *ListSharedReportGroupsInput, optFns ...func(*Options)) (*ListSharedReportGroupsOutput, error) {
 	if params == nil {
 		params = &ListSharedReportGroupsInput{}
@@ -44,14 +43,14 @@ type ListSharedReportGroupsInput struct {
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The criterion to be used to list report groups shared with the current Amazon
-	// Web Services account or user. Valid values include:
+	// The criterion to be used to list report groups shared with the current AWS
+	// account or user. Valid values include:
 	//
-	// * ARN: List based on the
-	// ARN.
+	// * ARN: List based on the ARN.
 	//
-	// * MODIFIED_TIME: List based on when information about the shared report
-	// group was last changed.
+	// *
+	// MODIFIED_TIME: List based on when information about the shared report group was
+	// last changed.
 	SortBy types.SharedResourceSortByType
 
 	// The order in which to list shared report groups. Valid values include:
@@ -75,8 +74,8 @@ type ListSharedReportGroupsOutput struct {
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The list of ARNs for the report groups shared with the current Amazon Web
-	// Services account or user.
+	// The list of ARNs for the report groups shared with the current AWS account or
+	// user.
 	ReportGroups []string
 
 	// Metadata pertaining to the operation's result.

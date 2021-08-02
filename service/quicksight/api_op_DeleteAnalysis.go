@@ -45,7 +45,7 @@ type DeleteAnalysisInput struct {
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the AWS account where you want to delete an analysis.
+	// The ID of the Amazon Web Services account; where you want to delete an analysis.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -74,7 +74,7 @@ type DeleteAnalysisOutput struct {
 	// The date and time that the analysis is scheduled to be deleted.
 	DeletionTime *time.Time
 
-	// The AWS request ID for this operation.
+	// The Amazon Web Services request ID for this operation.
 	RequestId *string
 
 	// The HTTP status of the request.

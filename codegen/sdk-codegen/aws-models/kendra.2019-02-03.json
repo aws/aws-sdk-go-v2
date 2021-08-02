@@ -355,7 +355,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides filtering the query results based on document\n         attributes.</p>\n         <p>When you use the <code>AndAllFilters</code> or\n            <code>OrAllFilters</code>, filters you can use 2 layers under the\n         first attribute filter. For example, you can use:</p>\n         <p>\n            <code><AndAllFilters></code>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <code> <OrAllFilters></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code> <EqualTo></code>\n               </p>\n            </li>\n         </ol>\n         <p>If you use more than 2 layers, you receive a\n            <code>ValidationException</code> exception with the message\n            \"<code>AttributeFilter</code> cannot have a depth of more than\n         2.\"</p>"
+                "smithy.api#documentation": "<p>Provides filtering the query results based on document\n         attributes.</p>\n         <p>When you use the <code>AndAllFilters</code> or\n            <code>OrAllFilters</code>, filters you can use 2 layers under the\n         first attribute filter. For example, you can use:</p>\n         <p>\n            <code><AndAllFilters></code>\n         </p>\n         <ol>\n            <li>\n               <p>\n                  <code> <OrAllFilters></code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code> <EqualTo></code>\n               </p>\n            </li>\n         </ol>\n         <p>If you use more than 2 layers, you receive a\n            <code>ValidationException</code> exception with the message\n            \"<code>AttributeFilter</code> cannot have a depth of more than\n         2.\"</p>\n         <p>If you use more than 10 attribute filters, you receive a \n         <code>ValidationException</code> exception with the message \n         \"<code>AttributeFilter</code> cannot have a length of more than 10\".</p>"
             }
         },
         "com.amazonaws.kendra#AttributeFilterList": {
@@ -731,14 +731,14 @@
                 "StorageCapacityUnits": {
                     "target": "com.amazonaws.kendra#StorageCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. A single capacity\n            unit for an index provides 150 GB of storage space or \n            500,000 documents, whichever is reached first.</p>",
+                        "smithy.api#documentation": "<p>The amount of extra storage capacity for an index. \n            A single capacity unit provides 30 GB of storage space or 100,000 documents, \n            whichever is reached first.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "QueryCapacityUnits": {
                     "target": "com.amazonaws.kendra#QueryCapacityUnit",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.5 queries per second or \n            approximately 40,000 queries per day.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is 5 times the provisioned query \n            capacity for an index. For example, the base capacity for an index is 0.5 \n            queries per second, so GetQuerySuggestions capacity is 2.5 calls per second. \n            If adding another 0.5 queries per second to total 1 queries per second for an \n            index, the <code>GetQuerySuggestions</code> capacity is 5 calls per second.</p>",
+                        "smithy.api#documentation": "<p>The amount of extra query capacity for an index and \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/API_GetQuerySuggestions.html\">GetQuerySuggestions</a> \n            capacity.</p>\n        <p>A single extra capacity unit for an index provides 0.1 queries per second or approximately \n            8,000 queries per day.</p>\n        <p>\n            <code>GetQuerySuggestions</code> capacity is five times the \n            provisioned query capacity for an index, or the base capacity of 2.5 calls per second, \n            whichever is higher. For example, the base capacity for an index is 0.1 queries per \n            second, and <code>GetQuerySuggestions</code> capacity has a base of 2.5 calls per second. \n            If you add another 0.1 queries per second to total 0.2 queries per second for an index, the \n            <code>GetQuerySuggestions</code> capacity is 2.5 calls per second \n            (higher than five times 0.2 queries per second).</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1462,7 +1462,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html\">Using a\n                Database Data Source</a>. For more information about AWS\n            Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i> Secrets Manager\n                </i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in Secrets Manager.\n            The credentials should be a user/password pair. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-database.html\">Using a\n                Database Data Source</a>. For more information about \n            Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is \n                Secrets Manager</a> in the <i> Secrets Manager\n                </i> user guide.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1773,7 +1773,7 @@
                 "Edition": {
                     "target": "com.amazonaws.kendra#IndexEdition",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Kendra edition to use for the index. Choose\n        <code>DEVELOPER_EDITION</code> for indexes intended for development,\n      testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your\n      production databases. Once you set the edition for an index, it can't be\n      changed. </p>\n         <p>The <code>Edition</code> parameter is optional. If you don't supply a\n      value, the default is <code>ENTERPRISE_EDITION</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Kendra edition to use for the index. Choose\n        <code>DEVELOPER_EDITION</code> for indexes intended for development,\n      testing, or proof of concept. Use <code>ENTERPRISE_EDITION</code> for your\n      production databases. Once you set the edition for an index, it can't be\n      changed.</p>\n         <p>The <code>Edition</code> parameter is optional. If you don't supply a\n      value, the default is <code>ENTERPRISE_EDITION</code>.</p>\n         <p>For more information on quota limits for enterprise and developer editions, \n      see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/quotas.html\">Quotas</a>.</p>"
                     }
                 },
                 "RoleArn": {
@@ -2082,6 +2082,12 @@
                 },
                 "WebCrawlerConfiguration": {
                     "target": "com.amazonaws.kendra#WebCrawlerConfiguration"
+                },
+                "WorkDocsConfiguration": {
+                    "target": "com.amazonaws.kendra#WorkDocsConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the configuration information to connect to WorkDocs \n            as your data source.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2509,6 +2515,10 @@
                     {
                         "value": "WEBCRAWLER",
                         "name": "WEBCRAWLER"
+                    },
+                    {
+                        "value": "WORKDOCS",
+                        "name": "WORKDOCS"
                     }
                 ]
             }
@@ -6026,6 +6036,16 @@
                 ]
             }
         },
+        "com.amazonaws.kendra#OrganizationId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 12,
+                    "max": 12
+                },
+                "smithy.api#pattern": "^d-[0-9a-fA-F]{10}$"
+            }
+        },
         "com.amazonaws.kendra#Port": {
             "type": "integer",
             "traits": {
@@ -7682,7 +7702,7 @@
                 "SecretArn": {
                     "target": "com.amazonaws.kendra#SecretArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in AWS\n            Secrets Manager. The credentials should be a user/password pair. \n            If you use SharePoint Sever, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about AWS Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is AWS\n                Secrets Manager </a> in the <i>Secrets Manager\n                </i> user guide.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of credentials stored in \n            Secrets Manager. The credentials should be a user/password pair. \n            If you use SharePoint Server, you also need to provide the sever \n            domain name as part of the credentials. For\n            more information, see <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/data-source-sharepoint.html\">Using a\n                Microsoft SharePoint Data Source</a>. For more information\n            about Secrets Manager, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/intro.html\"> What Is \n                Secrets Manager</a> in the <i>Secrets Manager\n                </i> user guide.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8054,7 +8074,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables you to provide feedback to Amazon Kendra to improve the\n            performance of the service. </p>"
+                "smithy.api#documentation": "<p>Enables you to provide feedback to Amazon Kendra to improve the\n            performance of your index. </p>"
             }
         },
         "com.amazonaws.kendra#SubmitFeedbackRequest": {
@@ -9219,6 +9239,51 @@
                         "name": "EVERYTHING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.kendra#WorkDocsConfiguration": {
+            "type": "structure",
+            "members": {
+                "OrganizationId": {
+                    "target": "com.amazonaws.kendra#OrganizationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the directory corresponding to your \n            Amazon WorkDocs site repository.</p>\n        <p>You can find the organization ID in the \n            <a href=\"https://console.aws.amazon.com/directoryservicev2/\">AWS Directory Service</a> by going to \n            <b>Active Directory</b>, then \n            <b>Directories</b>. Your Amazon WorkDocs site directory has an \n            ID, which is the organization ID. You can also set up a new Amazon WorkDocs \n            directory in the AWS Directory Service console and enable a Amazon WorkDocs site \n            for the directory in the Amazon WorkDocs console.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "CrawlComments": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to include comments on documents \n            in your index. Including comments in your index means each comment \n            is a document that can be searched on.</p>\n        <p>The default is set to <code>FALSE</code>.</p>"
+                    }
+                },
+                "UseChangeLog": {
+                    "target": "com.amazonaws.kendra#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>TRUE</code> to use the change logs to update documents in your \n            index instead of scanning all documents.</p>\n        <p>If you are syncing your Amazon WorkDocs data source with your index for the \n            first time, all documents are scanned. After your first sync, you can \n            use the change logs to update your documents in your index for \n            future syncs.</p>\n        <p>The default is set to <code>FALSE</code>.</p>"
+                    }
+                },
+                "InclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to include certain files \n            in your Amazon WorkDocs site repository. Files that match the patterns \n            are included in the index. Files that don't match the patterns are \n            excluded from the index. If a file matches both an inclusion pattern \n            and an exclusion pattern, the exclusion pattern takes precedence and \n            the file isn’t included in the index.</p>"
+                    }
+                },
+                "ExclusionPatterns": {
+                    "target": "com.amazonaws.kendra#DataSourceInclusionsExclusionsStrings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of regular expression patterns to exclude certain files \n            in your Amazon WorkDocs site repository. Files that match the patterns \n            are excluded from the index. Files that don’t match the patterns \n            are included in the index. If a file matches both an inclusion \n            pattern and an exclusion pattern, the exclusion pattern takes \n            precedence and the file isn’t included in the index.</p>"
+                    }
+                },
+                "FieldMappings": {
+                    "target": "com.amazonaws.kendra#DataSourceToIndexFieldMappingList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>DataSourceToIndexFieldMapping</code> objects that map \n            Amazon WorkDocs field names to custom index field names in Amazon Kendra. You must first \n            create the custom index fields using the <code>UpdateIndex</code> operation before \n            you map to Amazon WorkDocs fields. For more information, see \n            <a href=\"https://docs.aws.amazon.com/kendra/latest/dg/field-mapping.html\">Mapping \n                Data Source Fields</a>. The Amazon WorkDocs data source field names \n            need to exist in your Amazon WorkDocs custom metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides the configuration information to connect to Amazon WorkDocs \n            as your data source.</p>\n        <p>Amazon WorkDocs connector is available in Oregon, North Virginia, Sydney, Singapore and Ireland \n            regions.</p>"
             }
         }
     }

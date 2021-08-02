@@ -12,7 +12,7 @@ import (
 )
 
 // Retrieves a list of the reusable delegation sets that are associated with the
-// current AWS account.
+// current account.
 func (c *Client) ListReusableDelegationSets(ctx context.Context, params *ListReusableDelegationSetsInput, optFns ...func(*Options)) (*ListReusableDelegationSetsOutput, error) {
 	if params == nil {
 		params = &ListReusableDelegationSetsInput{}
@@ -29,7 +29,7 @@ func (c *Client) ListReusableDelegationSets(ctx context.Context, params *ListReu
 }
 
 // A request to get a list of the reusable delegation sets that are associated with
-// the current AWS account.
+// the current account.
 type ListReusableDelegationSetsInput struct {
 
 	// If the value of IsTruncated in the previous response was true, you have more
@@ -50,11 +50,11 @@ type ListReusableDelegationSetsInput struct {
 }
 
 // A complex type that contains information about the reusable delegation sets that
-// are associated with the current AWS account.
+// are associated with the current account.
 type ListReusableDelegationSetsOutput struct {
 
 	// A complex type that contains one DelegationSet element for each reusable
-	// delegation set that was created by the current AWS account.
+	// delegation set that was created by the current account.
 	//
 	// This member is required.
 	DelegationSets []types.DelegationSet

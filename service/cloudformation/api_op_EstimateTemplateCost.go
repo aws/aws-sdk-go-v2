@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the estimated monthly cost of a template. The return value is an AWS
-// Simple Monthly Calculator URL with a query string that describes the resources
-// required to run the template.
+// Returns the estimated monthly cost of a template. The return value is an Amazon
+// Web Services Simple Monthly Calculator URL with a query string that describes
+// the resources required to run the template.
 func (c *Client) EstimateTemplateCost(ctx context.Context, params *EstimateTemplateCostInput, optFns ...func(*Options)) (*EstimateTemplateCostOutput, error) {
 	if params == nil {
 		params = &EstimateTemplateCostInput{}
@@ -38,15 +38,15 @@ type EstimateTemplateCostInput struct {
 	// Structure containing the template body with a minimum length of 1 byte and a
 	// maximum length of 51,200 bytes. (For more information, go to Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide.) Conditional: You must pass TemplateBody
-	// or TemplateURL. If both are passed, only TemplateBody is used.
+	// in the CloudFormation User Guide.) Conditional: You must pass TemplateBody or
+	// TemplateURL. If both are passed, only TemplateBody is used.
 	TemplateBody *string
 
 	// Location of file containing the template body. The URL must point to a template
 	// that is located in an Amazon S3 bucket or a Systems Manager document. For more
 	// information, go to Template Anatomy
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html)
-	// in the AWS CloudFormation User Guide. Conditional: You must pass TemplateURL or
+	// in the CloudFormation User Guide. Conditional: You must pass TemplateURL or
 	// TemplateBody. If both are passed, only TemplateBody is used.
 	TemplateURL *string
 
@@ -56,8 +56,8 @@ type EstimateTemplateCostInput struct {
 // The output for a EstimateTemplateCost action.
 type EstimateTemplateCostOutput struct {
 
-	// An AWS Simple Monthly Calculator URL with a query string that describes the
-	// resources required to run the template.
+	// An Amazon Web Services Simple Monthly Calculator URL with a query string that
+	// describes the resources required to run the template.
 	Url *string
 
 	// Metadata pertaining to the operation's result.
