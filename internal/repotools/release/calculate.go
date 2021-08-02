@@ -94,7 +94,7 @@ func Calculate(finder ModuleFinder, tags git.ModuleTags, config repotools.Config
 						continue
 					}
 
-					treeFiles, err := git.LsTree(rootDir, latestVersion, subModuleDir)
+					treeFiles, err := git.LsTree(rootDir, startTag, subModuleDir)
 					if err != nil {
 						return nil, fmt.Errorf("failed to list git tree: %v", err)
 					}
