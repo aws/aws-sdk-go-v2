@@ -28,7 +28,7 @@ project by running the following Go command.
 go mod init example
 ```
 
-After initializing your Go Module project you will be able to retrieve the SDK, and it's required dependencies using
+After initializing your Go Module project you will be able to retrieve the SDK, and its required dependencies using
 the `go get` command. These dependencies will be recorded in the `go.mod` file which was created by the previous
 command.
 
