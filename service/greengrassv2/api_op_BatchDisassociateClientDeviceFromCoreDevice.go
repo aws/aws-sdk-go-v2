@@ -32,7 +32,7 @@ func (c *Client) BatchDisassociateClientDeviceFromCoreDevice(ctx context.Context
 
 type BatchDisassociateClientDeviceFromCoreDeviceInput struct {
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	//
 	// This member is required.
 	CoreDeviceThingName *string
@@ -46,7 +46,7 @@ type BatchDisassociateClientDeviceFromCoreDeviceInput struct {
 type BatchDisassociateClientDeviceFromCoreDeviceOutput struct {
 
 	// The list of errors (if any) for the entries in the request. Each error entry
-	// contains the name of the AWS IoT thing that failed to disassociate.
+	// contains the name of the IoT thing that failed to disassociate.
 	ErrorEntries []types.DisassociateClientDeviceFromCoreDeviceErrorEntry
 
 	// Metadata pertaining to the operation's result.

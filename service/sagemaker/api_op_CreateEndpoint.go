@@ -16,9 +16,8 @@ import (
 // create the endpoint configuration with the CreateEndpointConfig API. Use this
 // API to deploy models using Amazon SageMaker hosting services. For an example
 // that calls this method when deploying a model to Amazon SageMaker hosting
-// services, see Deploy the Model to Amazon SageMaker Hosting Services (Amazon Web
-// Services SDK for Python (Boto 3)).
-// (https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto)
+// services, see the Create Endpoint example notebook.
+// (https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb)
 // You must not delete an EndpointConfig that is in use by an endpoint that is live
 // or while the UpdateEndpoint or CreateEndpoint operations are being performed on
 // the endpoint. To update an endpoint, you must create a new EndpointConfig. The

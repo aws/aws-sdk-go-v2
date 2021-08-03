@@ -13,17 +13,17 @@ import (
 
 // Associate a list of client devices with a core device. Use this API operation to
 // specify which client devices can discover a core device through cloud discovery.
-// With cloud discovery, client devices connect to AWS IoT Greengrass to retrieve
+// With cloud discovery, client devices connect to IoT Greengrass to retrieve
 // associated core devices' connectivity information and certificates. For more
 // information, see Configure cloud discovery
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/configure-cloud-discovery.html)
-// in the AWS IoT Greengrass V2 Developer Guide. Client devices are local IoT
-// devices that connect to and communicate with an AWS IoT Greengrass core device
-// over MQTT. You can connect client devices to a core device to sync MQTT messages
-// and data to AWS IoT Core and interact with client devices in AWS IoT Greengrass
+// in the IoT Greengrass V2 Developer Guide. Client devices are local IoT devices
+// that connect to and communicate with an IoT Greengrass core device over MQTT.
+// You can connect client devices to a core device to sync MQTT messages and data
+// to Amazon Web Services IoT Core and interact with client devices in Greengrass
 // components. For more information, see Interact with local IoT devices
 // (https://docs.aws.amazon.com/greengrass/v2/developerguide/interact-with-local-iot-devices.html)
-// in the AWS IoT Greengrass V2 Developer Guide.
+// in the IoT Greengrass V2 Developer Guide.
 func (c *Client) BatchAssociateClientDeviceWithCoreDevice(ctx context.Context, params *BatchAssociateClientDeviceWithCoreDeviceInput, optFns ...func(*Options)) (*BatchAssociateClientDeviceWithCoreDeviceOutput, error) {
 	if params == nil {
 		params = &BatchAssociateClientDeviceWithCoreDeviceInput{}
@@ -41,7 +41,7 @@ func (c *Client) BatchAssociateClientDeviceWithCoreDevice(ctx context.Context, p
 
 type BatchAssociateClientDeviceWithCoreDeviceInput struct {
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	//
 	// This member is required.
 	CoreDeviceThingName *string
@@ -55,7 +55,7 @@ type BatchAssociateClientDeviceWithCoreDeviceInput struct {
 type BatchAssociateClientDeviceWithCoreDeviceOutput struct {
 
 	// The list of any errors for the entries in the request. Each error entry contains
-	// the name of the AWS IoT thing that failed to associate.
+	// the name of the IoT thing that failed to associate.
 	ErrorEntries []types.AssociateClientDeviceWithCoreDeviceErrorEntry
 
 	// Metadata pertaining to the operation's result.

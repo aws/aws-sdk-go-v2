@@ -29,7 +29,8 @@ func (c *Client) CreateGraphqlApi(ctx context.Context, params *CreateGraphqlApiI
 
 type CreateGraphqlApiInput struct {
 
-	// The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+	// The authentication type: API key, Identity and Access Management, OIDC, or
+	// Amazon Cognito user pools.
 	//
 	// This member is required.
 	AuthenticationType types.AuthenticationType
@@ -41,6 +42,9 @@ type CreateGraphqlApiInput struct {
 
 	// A list of additional authentication providers for the GraphqlApi API.
 	AdditionalAuthenticationProviders []types.AdditionalAuthenticationProvider
+
+	// Configuration for AWS Lambda function authorization.
+	LambdaAuthorizerConfig *types.LambdaAuthorizerConfig
 
 	// The Amazon CloudWatch Logs configuration.
 	LogConfig *types.LogConfig

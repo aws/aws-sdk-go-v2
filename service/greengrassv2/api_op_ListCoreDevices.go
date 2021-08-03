@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of AWS IoT Greengrass core devices.
+// Retrieves a paginated list of Greengrass core devices.
 func (c *Client) ListCoreDevices(ctx context.Context, params *ListCoreDevicesInput, optFns ...func(*Options)) (*ListCoreDevicesOutput, error) {
 	if params == nil {
 		params = &ListCoreDevicesInput{}
@@ -40,17 +40,17 @@ type ListCoreDevicesInput struct {
 	// list includes only core devices that have this status. Choose one of the
 	// following options:
 	//
-	// * HEALTHY – The AWS IoT Greengrass Core software and all
+	// * HEALTHY – The IoT Greengrass Core software and all
 	// components run on the core device without issue.
 	//
-	// * UNHEALTHY – The AWS IoT
+	// * UNHEALTHY – The IoT
 	// Greengrass Core software or a component is in a failed state on the core device.
 	Status types.CoreDeviceStatus
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the AWS IoT thing group by which to filter. If you specify this parameter, the
-	// list includes only core devices that are members of this thing group.
+	// the IoT thing group by which to filter. If you specify this parameter, the list
+	// includes only core devices that are members of this thing group.
 	ThingGroupArn *string
 
 	noSmithyDocumentSerde

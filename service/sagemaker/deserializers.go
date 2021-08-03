@@ -37600,6 +37600,51 @@ func awsAwsjson11_deserializeDocumentLabelingJobSummaryList(v *[]types.LabelingJ
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentLambdaStepMetadata(v **types.LambdaStepMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LambdaStepMetadata
+	if *v == nil {
+		sv = &types.LambdaStepMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String256 to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
+		case "OutputParameters":
+			if err := awsAwsjson11_deserializeDocumentOutputParameterList(&sv.OutputParameters, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentLineageEntityParameters(v *map[string]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -43416,6 +43461,11 @@ func awsAwsjson11_deserializeDocumentPipelineExecutionStepMetadata(v **types.Pip
 
 		case "Condition":
 			if err := awsAwsjson11_deserializeDocumentConditionStepMetadata(&sv.Condition, value); err != nil {
+				return err
+			}
+
+		case "Lambda":
+			if err := awsAwsjson11_deserializeDocumentLambdaStepMetadata(&sv.Lambda, value); err != nil {
 				return err
 			}
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds tags to an AWS IoT Greengrass resource. If a tag already exists for the
+// Adds tags to an IoT Greengrass resource. If a tag already exists for the
 // resource, this operation updates the tag's value.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
@@ -39,7 +39,7 @@ type TagResourceInput struct {
 	// A list of key-value pairs that contain metadata for the resource. For more
 	// information, see Tag your resources
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the AWS IoT Greengrass V2 Developer Guide.
+	// the IoT Greengrass V2 Developer Guide.
 	//
 	// This member is required.
 	Tags map[string]string

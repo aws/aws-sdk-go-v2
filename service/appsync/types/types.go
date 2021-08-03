@@ -9,8 +9,12 @@ import (
 // Describes an additional authentication provider.
 type AdditionalAuthenticationProvider struct {
 
-	// The authentication type: API key, AWS IAM, OIDC, or Amazon Cognito user pools.
+	// The authentication type: API key, Identity and Access Management, OIDC, or
+	// Amazon Cognito user pools.
 	AuthenticationType AuthenticationType
+
+	// Configuration for AWS Lambda function authorization.
+	LambdaAuthorizerConfig *LambdaAuthorizerConfig
 
 	// The OpenID Connect configuration.
 	OpenIDConnectConfig *OpenIDConnectConfig
@@ -105,20 +109,20 @@ type ApiCache struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an API key. Customers invoke AWS AppSync GraphQL API operations with
-// API keys as an identity mechanism. There are two key versions: da1: This version
-// was introduced at launch in November 2017. These keys always expire after 7
-// days. Key expiration is managed by Amazon DynamoDB TTL. The keys ceased to be
-// valid after February 21, 2018 and should not be used after that date.
+// Describes an API key. Customers invoke AppSync GraphQL API operations with API
+// keys as an identity mechanism. There are two key versions: da1: This version was
+// introduced at launch in November 2017. These keys always expire after 7 days.
+// Key expiration is managed by Amazon DynamoDB TTL. The keys ceased to be valid
+// after February 21, 2018 and should not be used after that date.
 //
-// *
-// ListApiKeys returns the expiration time in milliseconds.
+// * ListApiKeys
+// returns the expiration time in milliseconds.
 //
-// * CreateApiKey returns
-// the expiration time in milliseconds.
+// * CreateApiKey returns the
+// expiration time in milliseconds.
 //
-// * UpdateApiKey is not available for this
-// key version.
+// * UpdateApiKey is not available for this key
+// version.
 //
 // * DeleteApiKey deletes the item from the table.
 //
@@ -182,19 +186,19 @@ type AuthorizationConfig struct {
 	// This member is required.
 	AuthorizationType AuthorizationType
 
-	// The AWS IAM settings.
+	// The Identity and Access Management settings.
 	AwsIamConfig *AwsIamConfig
 
 	noSmithyDocumentSerde
 }
 
-// The AWS IAM configuration.
+// The Identity and Access Management configuration.
 type AwsIamConfig struct {
 
-	// The signing region for AWS IAM authorization.
+	// The signing region for Identity and Access Management authorization.
 	SigningRegion *string
 
-	// The signing service name for AWS IAM authorization.
+	// The signing service name for Identity and Access Management authorization.
 	SigningServiceName *string
 
 	noSmithyDocumentSerde
@@ -218,7 +222,7 @@ type CachingConfig struct {
 // Describes an Amazon Cognito user pool configuration.
 type CognitoUserPoolConfig struct {
 
-	// The AWS Region in which the user pool was created.
+	// The Amazon Web Services Region in which the user pool was created.
 	//
 	// This member is required.
 	AwsRegion *string
@@ -253,7 +257,7 @@ type DataSource struct {
 	// HTTP endpoint settings.
 	HttpConfig *HttpDataSourceConfig
 
-	// AWS Lambda settings.
+	// Amazon Web Services Lambda settings.
 	LambdaConfig *LambdaDataSourceConfig
 
 	// The name of the data source.
@@ -262,8 +266,8 @@ type DataSource struct {
 	// Relational database settings.
 	RelationalDatabaseConfig *RelationalDatabaseDataSourceConfig
 
-	// The AWS IAM service role ARN for the data source. The system assumes this role
-	// when accessing the data source.
+	// The Identity and Access Management service role ARN for the data source. The
+	// system assumes this role when accessing the data source.
 	ServiceRoleArn *string
 
 	// The type of the data source.
@@ -274,18 +278,18 @@ type DataSource struct {
 	// * AMAZON_ELASTICSEARCH: The data source is an Amazon
 	// Elasticsearch Service domain.
 	//
-	// * AWS_LAMBDA: The data source is an AWS Lambda
-	// function.
+	// * AWS_LAMBDA: The data source is an Amazon Web
+	// Services Lambda function.
 	//
-	// * NONE: There is no data source. This type is used when you wish to
-	// invoke a GraphQL operation without connecting to a data source, such as
-	// performing data transformation with resolvers or triggering a subscription to be
-	// invoked from a mutation.
+	// * NONE: There is no data source. This type is used
+	// when you wish to invoke a GraphQL operation without connecting to a data source,
+	// such as performing data transformation with resolvers or triggering a
+	// subscription to be invoked from a mutation.
 	//
-	// * HTTP: The data source is an HTTP endpoint.
+	// * HTTP: The data source is an HTTP
+	// endpoint.
 	//
-	// *
-	// RELATIONAL_DATABASE: The data source is a relational database.
+	// * RELATIONAL_DATABASE: The data source is a relational database.
 	Type DataSourceType
 
 	noSmithyDocumentSerde
@@ -309,7 +313,7 @@ type DeltaSyncConfig struct {
 // Describes an Amazon DynamoDB data source configuration.
 type DynamodbDataSourceConfig struct {
 
-	// The AWS Region.
+	// The Amazon Web Services Region.
 	//
 	// This member is required.
 	AwsRegion *string
@@ -334,7 +338,7 @@ type DynamodbDataSourceConfig struct {
 // Describes an Elasticsearch data source configuration.
 type ElasticsearchDataSourceConfig struct {
 
-	// The AWS Region.
+	// The Amazon Web Services Region.
 	//
 	// This member is required.
 	AwsRegion *string
@@ -400,6 +404,9 @@ type GraphqlApi struct {
 	// The authentication type.
 	AuthenticationType AuthenticationType
 
+	// Configuration for AWS Lambda function authorization.
+	LambdaAuthorizerConfig *LambdaAuthorizerConfig
+
 	// The Amazon CloudWatch Logs configuration.
 	LogConfig *LogConfig
 
@@ -418,8 +425,7 @@ type GraphqlApi struct {
 	// The Amazon Cognito user pool configuration.
 	UserPoolConfig *UserPoolConfig
 
-	// The ARN of the AWS Web Application Firewall (WAF) ACL associated with this
-	// GraphqlApi, if one exists.
+	// The ARN of the WAF ACL associated with this GraphqlApi, if one exists.
 	WafWebAclArn *string
 
 	// A flag representing whether X-Ray tracing is enabled for this GraphqlApi.
@@ -436,9 +442,37 @@ type HttpDataSourceConfig struct {
 
 	// The HTTP URL endpoint. You can either specify the domain name or IP, and port
 	// combination, and the URL scheme must be HTTP or HTTPS. If the port is not
-	// specified, AWS AppSync uses the default port 80 for the HTTP endpoint and port
-	// 443 for HTTPS endpoints.
+	// specified, AppSync uses the default port 80 for the HTTP endpoint and port 443
+	// for HTTPS endpoints.
 	Endpoint *string
+
+	noSmithyDocumentSerde
+}
+
+// A LambdaAuthorizerConfig holds configuration on how to authorize AppSync API
+// access when using the AWS_LAMBDA authorizer mode. Be aware that an AppSync API
+// may have only one Lambda authorizer configured at a time.
+type LambdaAuthorizerConfig struct {
+
+	// The ARN of the lambda function to be called for authorization. This may be a
+	// standard Lambda ARN, a version ARN (.../v3) or alias ARN. Note: This Lambda
+	// function must have the following resource-based policy assigned to it. When
+	// configuring Lambda authorizers in the Console, this is done for you. To do so
+	// with the AWS CLI, run the following: aws lambda add-permission --function-name
+	// "arn:aws:lambda:us-east-2:111122223333:function:my-function" --statement-id
+	// "appsync" --principal appsync.amazonaws.com --action lambda:InvokeFunction
+	//
+	// This member is required.
+	AuthorizerUri *string
+
+	// The number of seconds a response should be cached for. The default is 5 minutes
+	// (300 seconds). The Lambda function can override this by returning a ttlOverride
+	// key in its response. A value of 0 disables caching of responses.
+	AuthorizerResultTtlInSeconds int32
+
+	// A regular expression for validation of tokens before the Lambda Function is
+	// called.
+	IdentityValidationExpression *string
 
 	noSmithyDocumentSerde
 }
@@ -453,7 +487,7 @@ type LambdaConflictHandlerConfig struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an AWS Lambda data source configuration.
+// Describes an Amazon Web Services Lambda data source configuration.
 type LambdaDataSourceConfig struct {
 
 	// The ARN for the Lambda function.
@@ -467,8 +501,8 @@ type LambdaDataSourceConfig struct {
 // The CloudWatch Logs configuration.
 type LogConfig struct {
 
-	// The service role that AWS AppSync will assume to publish to Amazon CloudWatch
-	// logs in your account.
+	// The service role that AppSync will assume to publish to Amazon CloudWatch logs
+	// in your account.
 	//
 	// This member is required.
 	CloudWatchLogsRoleArn *string
@@ -521,8 +555,8 @@ type OpenIDConnectConfig struct {
 
 	// The client identifier of the Relying party at the OpenID identity provider. This
 	// identifier is typically obtained when the Relying party is registered with the
-	// OpenID identity provider. You can specify a regular expression so the AWS
-	// AppSync can validate against multiple client identifiers at a time.
+	// OpenID identity provider. You can specify a regular expression so the AppSync
+	// can validate against multiple client identifiers at a time.
 	ClientId *string
 
 	// The number of milliseconds a token is valid after being issued to a user.
@@ -543,10 +577,10 @@ type PipelineConfig struct {
 // The Amazon RDS HTTP endpoint configuration.
 type RdsHttpEndpointConfig struct {
 
-	// AWS Region for RDS HTTP endpoint.
+	// Amazon Web Services Region for RDS HTTP endpoint.
 	AwsRegion *string
 
-	// AWS secret store ARN for database credentials.
+	// Amazon Web Services secret store ARN for database credentials.
 	AwsSecretStoreArn *string
 
 	// Logical database name.
@@ -677,7 +711,7 @@ type Type struct {
 // Describes an Amazon Cognito user pool configuration.
 type UserPoolConfig struct {
 
-	// The AWS Region in which the user pool was created.
+	// The Amazon Web Services Region in which the user pool was created.
 	//
 	// This member is required.
 	AwsRegion *string

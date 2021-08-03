@@ -28,50 +28,53 @@ import (
 //
 // * If you call an
 // operation to encrypt or decrypt the SecretString or SecretBinary for a secret in
-// the same account as the calling user and that secret doesn't specify a AWS KMS
-// encryption key, Secrets Manager uses the account's default AWS managed customer
-// master key (CMK) with the alias aws/secretsmanager. If this key doesn't already
-// exist in your account then Secrets Manager creates it for you automatically. All
-// users and roles in the same AWS account automatically have access to use the
-// default CMK. Note that if an Secrets Manager API call results in AWS creating
-// the account's AWS-managed CMK, it can result in a one-time significant delay in
-// returning the result.
+// the same account as the calling user and that secret doesn't specify a Amazon
+// Web Services KMS encryption key, Secrets Manager uses the account's default
+// Amazon Web Services managed customer master key (CMK) with the alias
+// aws/secretsmanager. If this key doesn't already exist in your account then
+// Secrets Manager creates it for you automatically. All users and roles in the
+// same Amazon Web Services account automatically have access to use the default
+// CMK. Note that if an Secrets Manager API call results in Amazon Web Services
+// creating the account's Amazon Web Services-managed CMK, it can result in a
+// one-time significant delay in returning the result.
 //
-// * If the secret resides in a different AWS account from
-// the credentials calling an API that requires encryption or decryption of the
-// secret value then you must create and use a custom AWS KMS CMK because you can't
-// access the default CMK for the account using credentials from a different AWS
+// * If the secret resides in
+// a different Amazon Web Services account from the credentials calling an API that
+// requires encryption or decryption of the secret value then you must create and
+// use a custom Amazon Web Services KMS CMK because you can't access the default
+// CMK for the account using credentials from a different Amazon Web Services
 // account. Store the ARN of the CMK in the secret when you create the secret or
 // when you update it by including it in the KMSKeyId. If you call an API that must
 // encrypt or decrypt SecretString or SecretBinary using credentials from a
-// different account then the AWS KMS key policy must grant cross-account access to
-// that other account's user or role for both the kms:GenerateDataKey and
-// kms:Decrypt operations.
+// different account then the Amazon Web Services KMS key policy must grant
+// cross-account access to that other account's user or role for both the
+// kms:GenerateDataKey and kms:Decrypt operations.
 //
-// Minimum permissions To run this command, you must have
-// the following permissions:
-//
-// * secretsmanager:CreateSecret
-//
-// * kms:GenerateDataKey
-// - needed only if you use a customer-managed AWS KMS key to encrypt the secret.
-// You do not need this permission to use the account default AWS managed CMK for
-// Secrets Manager.
-//
-// * kms:Decrypt - needed only if you use a customer-managed AWS
-// KMS key to encrypt the secret. You do not need this permission to use the
-// account default AWS managed CMK for Secrets Manager.
+// Minimum permissions To run this
+// command, you must have the following permissions:
 //
 // *
-// secretsmanager:TagResource - needed only if you include the Tags
-// parameter.
+// secretsmanager:CreateSecret
+//
+// * kms:GenerateDataKey - needed only if you use a
+// customer-managed Amazon Web Services KMS key to encrypt the secret. You do not
+// need this permission to use the account default Amazon Web Services managed CMK
+// for Secrets Manager.
+//
+// * kms:Decrypt - needed only if you use a customer-managed
+// Amazon Web Services KMS key to encrypt the secret. You do not need this
+// permission to use the account default Amazon Web Services managed CMK for
+// Secrets Manager.
+//
+// * secretsmanager:TagResource - needed only if you include the
+// Tags parameter.
 //
 // Related operations
 //
 // * To delete a secret, use DeleteSecret.
 //
-// * To
-// modify an existing secret, use UpdateSecret.
+// *
+// To modify an existing secret, use UpdateSecret.
 //
 // * To create a new version of a
 // secret, use PutSecretValue.
@@ -120,31 +123,31 @@ type CreateSecretInput struct {
 
 	// (Optional) If you include SecretString or SecretBinary, then an initial version
 	// is created as part of the secret, and this parameter specifies a unique
-	// identifier for the new version. If you use the AWS CLI or one of the AWS SDK to
-	// call this operation, then you can leave this parameter empty. The CLI or SDK
-	// generates a random UUID for you and includes it as the value for this parameter
-	// in the request. If you don't use the SDK and instead generate a raw HTTP request
-	// to the Secrets Manager service endpoint, then you must generate a
-	// ClientRequestToken yourself for the new version and include the value in the
-	// request. This value helps ensure idempotency. Secrets Manager uses this value to
-	// prevent the accidental creation of duplicate versions if there are failures and
-	// retries during a rotation. We recommend that you generate a UUID-type
-	// (https://wikipedia.org/wiki/Universally_unique_identifier) value to ensure
-	// uniqueness of your versions within the specified secret.
+	// identifier for the new version. If you use the Amazon Web Services CLI or one of
+	// the Amazon Web Services SDK to call this operation, then you can leave this
+	// parameter empty. The CLI or SDK generates a random UUID for you and includes it
+	// as the value for this parameter in the request. If you don't use the SDK and
+	// instead generate a raw HTTP request to the Secrets Manager service endpoint,
+	// then you must generate a ClientRequestToken yourself for the new version and
+	// include the value in the request. This value helps ensure idempotency. Secrets
+	// Manager uses this value to prevent the accidental creation of duplicate versions
+	// if there are failures and retries during a rotation. We recommend that you
+	// generate a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier)
+	// value to ensure uniqueness of your versions within the specified secret.
 	//
-	// * If the
-	// ClientRequestToken value isn't already associated with a version of the secret
-	// then a new version of the secret is created.
-	//
-	// * If a version with this value
-	// already exists and the version SecretString and SecretBinary values are the same
-	// as those in the request, then the request is ignored.
+	// * If
+	// the ClientRequestToken value isn't already associated with a version of the
+	// secret then a new version of the secret is created.
 	//
 	// * If a version with this
-	// value already exists and that version's SecretString and SecretBinary values are
-	// different from those in the request, then the request fails because you cannot
-	// modify an existing version. Instead, use PutSecretValue to create a new
-	// version.
+	// value already exists and the version SecretString and SecretBinary values are
+	// the same as those in the request, then the request is ignored.
+	//
+	// * If a version
+	// with this value already exists and that version's SecretString and SecretBinary
+	// values are different from those in the request, then the request fails because
+	// you cannot modify an existing version. Instead, use PutSecretValue to create a
+	// new version.
 	//
 	// This value becomes the VersionId of the new version.
 	ClientRequestToken *string
@@ -156,13 +159,14 @@ type CreateSecretInput struct {
 	// destination region.
 	ForceOverwriteReplicaSecret bool
 
-	// (Optional) Specifies the ARN, Key ID, or alias of the AWS KMS customer master
-	// key (CMK) to be used to encrypt the SecretString or SecretBinary values in the
-	// versions stored in this secret. You can specify any of the supported ways to
-	// identify a AWS KMS key ID. If you need to reference a CMK in a different
-	// account, you can use only the key ARN or the alias ARN. If you don't specify
-	// this value, then Secrets Manager defaults to using the AWS account's default CMK
-	// (the one named aws/secretsmanager). If a AWS KMS CMK with that name doesn't yet
+	// (Optional) Specifies the ARN, Key ID, or alias of the Amazon Web Services KMS
+	// customer master key (CMK) to be used to encrypt the SecretString or SecretBinary
+	// values in the versions stored in this secret. You can specify any of the
+	// supported ways to identify a Amazon Web Services KMS key ID. If you need to
+	// reference a CMK in a different account, you can use only the key ARN or the
+	// alias ARN. If you don't specify this value, then Secrets Manager defaults to
+	// using the Amazon Web Services account's default CMK (the one named
+	// aws/secretsmanager). If a Amazon Web Services KMS CMK with that name doesn't yet
 	// exist, then Secrets Manager creates it for you automatically the first time it
 	// needs to encrypt a version's SecretString or SecretBinary fields. You can use
 	// the account default CMK to encrypt and decrypt only if you call this operation
@@ -177,7 +181,8 @@ type CreateSecretInput struct {
 	// technique for your tool to pass the contents of the file as a parameter. Either
 	// SecretString or SecretBinary must have a value, but not both. They cannot both
 	// be empty. This parameter is not available using the Secrets Manager console. It
-	// can be accessed only by using the AWS CLI or one of the AWS SDKs.
+	// can be accessed only by using the Amazon Web Services CLI or one of the Amazon
+	// Web Services SDKs.
 	SecretBinary []byte
 
 	// (Optional) Specifies text data that you want to encrypt and store in this new
@@ -191,10 +196,10 @@ type CreateSecretInput struct {
 	// how to format a JSON parameter for the various command line tool environments,
 	// see Using JSON for Parameters
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide. For example:
-	// {"username":"bob","password":"abc123xyz456"} If your command-line tool or SDK
-	// requires quotation marks around the parameter, you should use single quotes to
-	// avoid confusion with the double quotes required in the JSON text.
+	// in the CLI User Guide. For example: {"username":"bob","password":"abc123xyz456"}
+	// If your command-line tool or SDK requires quotation marks around the parameter,
+	// you should use single quotes to avoid confusion with the double quotes required
+	// in the JSON text.
 	SecretString *string
 
 	// (Optional) Specifies a list of user-defined tags that are attached to the
@@ -216,7 +221,7 @@ type CreateSecretInput struct {
 	// parameter for the various command line tool environments, see Using JSON for
 	// Parameters
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide. For example:
+	// in the CLI User Guide. For example:
 	// [{"Key":"CostCenter","Value":"12345"},{"Key":"environment","Value":"production"}]
 	// If your command-line tool or SDK requires quotation marks around the parameter,
 	// you should use single quotes to avoid confusion with the double quotes required
@@ -234,14 +239,15 @@ type CreateSecretInput struct {
 	// values are case sensitive.
 	//
 	// * Do not use the aws: prefix in your tag names or
-	// values because AWS reserves it for AWS use. You can't edit or delete tag names
-	// or values with this prefix. Tags with this prefix do not count against your tags
-	// per secret limit.
+	// values because Amazon Web Services reserves it for Amazon Web Services use. You
+	// can't edit or delete tag names or values with this prefix. Tags with this prefix
+	// do not count against your tags per secret limit.
 	//
-	// * If you use your tagging schema across multiple services and
-	// resources, remember other services might have restrictions on allowed
-	// characters. Generally allowed characters: letters, spaces, and numbers
-	// representable in UTF-8, plus the following special characters: + - = . _ : / @.
+	// * If you use your tagging
+	// schema across multiple services and resources, remember other services might
+	// have restrictions on allowed characters. Generally allowed characters: letters,
+	// spaces, and numbers representable in UTF-8, plus the following special
+	// characters: + - = . _ : / @.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

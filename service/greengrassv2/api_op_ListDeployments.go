@@ -49,7 +49,7 @@ type ListDeploymentsInput struct {
 
 	// The ARN
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// the target AWS IoT thing or thing group.
+	// the target IoT thing or thing group.
 	TargetArn *string
 
 	noSmithyDocumentSerde

@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Retrieves metadata for a AWS IoT Greengrass core device.
+// Retrieves metadata for a Greengrass core device.
 func (c *Client) GetCoreDevice(ctx context.Context, params *GetCoreDeviceInput, optFns ...func(*Options)) (*GetCoreDeviceOutput, error) {
 	if params == nil {
 		params = &GetCoreDeviceInput{}
@@ -30,7 +30,7 @@ func (c *Client) GetCoreDevice(ctx context.Context, params *GetCoreDeviceInput, 
 
 type GetCoreDeviceInput struct {
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	//
 	// This member is required.
 	CoreDeviceThingName *string
@@ -43,15 +43,15 @@ type GetCoreDeviceOutput struct {
 	// The computer architecture of the core device.
 	Architecture *string
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	CoreDeviceThingName *string
 
-	// The version of the AWS IoT Greengrass Core software that the core device runs.
-	// This version is equivalent to the version of the AWS IoT Greengrass nucleus
-	// component that runs on the core device. For more information, see the AWS IoT
-	// Greengrass nucleus component
+	// The version of the IoT Greengrass Core software that the core device runs. This
+	// version is equivalent to the version of the Greengrass nucleus component that
+	// runs on the core device. For more information, see the Greengrass nucleus
+	// component
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/greengrass-nucleus-component.html)
-	// in the AWS IoT Greengrass V2 Developer Guide.
+	// in the IoT Greengrass V2 Developer Guide.
 	CoreVersion *string
 
 	// The time at which the core device's status last updated, expressed in ISO 8601
@@ -64,17 +64,17 @@ type GetCoreDeviceOutput struct {
 	// The status of the core device. The core device status can be:
 	//
 	// * HEALTHY – The
-	// AWS IoT Greengrass Core software and all components run on the core device
-	// without issue.
+	// IoT Greengrass Core software and all components run on the core device without
+	// issue.
 	//
-	// * UNHEALTHY – The AWS IoT Greengrass Core software or a
-	// component is in a failed state on the core device.
+	// * UNHEALTHY – The IoT Greengrass Core software or a component is in a
+	// failed state on the core device.
 	Status types.CoreDeviceStatus
 
 	// A list of key-value pairs that contain metadata for the resource. For more
 	// information, see Tag your resources
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the AWS IoT Greengrass V2 Developer Guide.
+	// the IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

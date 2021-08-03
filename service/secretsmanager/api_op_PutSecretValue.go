@@ -16,72 +16,75 @@ import (
 // contain a new SecretString value or a new SecretBinary value. You can also
 // specify the staging labels that are initially attached to the new version. The
 // Secrets Manager console uses only the SecretString field. To add binary data to
-// a secret with the SecretBinary field you must use the AWS CLI or one of the AWS
-// SDKs.
+// a secret with the SecretBinary field you must use the Amazon Web Services CLI or
+// one of the Amazon Web Services SDKs.
 //
-// * If this operation creates the first version for the secret then Secrets
-// Manager automatically attaches the staging label AWSCURRENT to the new
-// version.
+// * If this operation creates the first
+// version for the secret then Secrets Manager automatically attaches the staging
+// label AWSCURRENT to the new version.
 //
-// * If you do not specify a value for VersionStages then Secrets Manager
-// automatically moves the staging label AWSCURRENT to this new version.
+// * If you do not specify a value for
+// VersionStages then Secrets Manager automatically moves the staging label
+// AWSCURRENT to this new version.
 //
-// * If this
-// operation moves the staging label AWSCURRENT from another version to this
-// version, then Secrets Manager also automatically moves the staging label
-// AWSPREVIOUS to the version that AWSCURRENT was removed from.
+// * If this operation moves the staging label
+// AWSCURRENT from another version to this version, then Secrets Manager also
+// automatically moves the staging label AWSPREVIOUS to the version that AWSCURRENT
+// was removed from.
 //
-// * This operation
-// is idempotent. If a version with a VersionId with the same value as the
-// ClientRequestToken parameter already exists and you specify the same secret
-// data, the operation succeeds but does nothing. However, if the secret data is
-// different, then the operation fails because you cannot modify an existing
-// version; you can only create new ones.
+// * This operation is idempotent. If a version with a VersionId
+// with the same value as the ClientRequestToken parameter already exists and you
+// specify the same secret data, the operation succeeds but does nothing. However,
+// if the secret data is different, then the operation fails because you cannot
+// modify an existing version; you can only create new ones.
 //
-// * If you call an operation to encrypt or
-// decrypt the SecretString or SecretBinary for a secret in the same account as the
-// calling user and that secret doesn't specify a AWS KMS encryption key, Secrets
-// Manager uses the account's default AWS managed customer master key (CMK) with
-// the alias aws/secretsmanager. If this key doesn't already exist in your account
-// then Secrets Manager creates it for you automatically. All users and roles in
-// the same AWS account automatically have access to use the default CMK. Note that
-// if an Secrets Manager API call results in AWS creating the account's AWS-managed
-// CMK, it can result in a one-time significant delay in returning the result.
+// * If you call an
+// operation to encrypt or decrypt the SecretString or SecretBinary for a secret in
+// the same account as the calling user and that secret doesn't specify a Amazon
+// Web Services KMS encryption key, Secrets Manager uses the account's default
+// Amazon Web Services managed customer master key (CMK) with the alias
+// aws/secretsmanager. If this key doesn't already exist in your account then
+// Secrets Manager creates it for you automatically. All users and roles in the
+// same Amazon Web Services account automatically have access to use the default
+// CMK. Note that if an Secrets Manager API call results in Amazon Web Services
+// creating the account's Amazon Web Services-managed CMK, it can result in a
+// one-time significant delay in returning the result.
 //
-// *
-// If the secret resides in a different AWS account from the credentials calling an
-// API that requires encryption or decryption of the secret value then you must
-// create and use a custom AWS KMS CMK because you can't access the default CMK for
-// the account using credentials from a different AWS account. Store the ARN of the
-// CMK in the secret when you create the secret or when you update it by including
-// it in the KMSKeyId. If you call an API that must encrypt or decrypt SecretString
-// or SecretBinary using credentials from a different account then the AWS KMS key
-// policy must grant cross-account access to that other account's user or role for
-// both the kms:GenerateDataKey and kms:Decrypt operations.
+// * If the secret resides in
+// a different Amazon Web Services account from the credentials calling an API that
+// requires encryption or decryption of the secret value then you must create and
+// use a custom Amazon Web Services KMS CMK because you can't access the default
+// CMK for the account using credentials from a different Amazon Web Services
+// account. Store the ARN of the CMK in the secret when you create the secret or
+// when you update it by including it in the KMSKeyId. If you call an API that must
+// encrypt or decrypt SecretString or SecretBinary using credentials from a
+// different account then the Amazon Web Services KMS key policy must grant
+// cross-account access to that other account's user or role for both the
+// kms:GenerateDataKey and kms:Decrypt operations.
 //
-// Minimum permissions To
-// run this command, you must have the following permissions:
+// Minimum permissions To run this
+// command, you must have the following permissions:
 //
 // *
 // secretsmanager:PutSecretValue
 //
 // * kms:GenerateDataKey - needed only if you use a
-// customer-managed AWS KMS key to encrypt the secret. You do not need this
-// permission to use the account's default AWS managed CMK for Secrets
-// Manager.
+// customer-managed Amazon Web Services KMS key to encrypt the secret. You do not
+// need this permission to use the account's default Amazon Web Services managed
+// CMK for Secrets Manager.
 //
 // Related operations
 //
-// * To retrieve the encrypted value you store in the
-// version of a secret, use GetSecretValue.
+// * To retrieve the encrypted value
+// you store in the version of a secret, use GetSecretValue.
 //
-// * To create a secret, use
-// CreateSecret.
+// * To create a secret,
+// use CreateSecret.
 //
 // * To get the details for a secret, use DescribeSecret.
 //
-// * To list
-// the versions attached to a secret, use ListSecretVersionIds.
+// * To
+// list the versions attached to a secret, use ListSecretVersionIds.
 func (c *Client) PutSecretValue(ctx context.Context, params *PutSecretValueInput, optFns ...func(*Options)) (*PutSecretValueOutput, error) {
 	if params == nil {
 		params = &PutSecretValueInput{}
@@ -121,33 +124,33 @@ type PutSecretValueInput struct {
 	SecretId *string
 
 	// (Optional) Specifies a unique identifier for the new version of the secret. If
-	// you use the AWS CLI or one of the AWS SDK to call this operation, then you can
-	// leave this parameter empty. The CLI or SDK generates a random UUID for you and
-	// includes that in the request. If you don't use the SDK and instead generate a
-	// raw HTTP request to the Secrets Manager service endpoint, then you must generate
-	// a ClientRequestToken yourself for new versions and include that value in the
-	// request. This value helps ensure idempotency. Secrets Manager uses this value to
-	// prevent the accidental creation of duplicate versions if there are failures and
-	// retries during the Lambda rotation function's processing. We recommend that you
-	// generate a UUID-type (https://wikipedia.org/wiki/Universally_unique_identifier)
-	// value to ensure uniqueness within the specified secret.
+	// you use the Amazon Web Services CLI or one of the Amazon Web Services SDK to
+	// call this operation, then you can leave this parameter empty. The CLI or SDK
+	// generates a random UUID for you and includes that in the request. If you don't
+	// use the SDK and instead generate a raw HTTP request to the Secrets Manager
+	// service endpoint, then you must generate a ClientRequestToken yourself for new
+	// versions and include that value in the request. This value helps ensure
+	// idempotency. Secrets Manager uses this value to prevent the accidental creation
+	// of duplicate versions if there are failures and retries during the Lambda
+	// rotation function's processing. We recommend that you generate a UUID-type
+	// (https://wikipedia.org/wiki/Universally_unique_identifier) value to ensure
+	// uniqueness within the specified secret.
 	//
-	// * If the
-	// ClientRequestToken value isn't already associated with a version of the secret
-	// then a new version of the secret is created.
+	// * If the ClientRequestToken value isn't
+	// already associated with a version of the secret then a new version of the secret
+	// is created.
 	//
-	// * If a version with this value
-	// already exists and that version's SecretString or SecretBinary values are the
-	// same as those in the request then the request is ignored (the operation is
-	// idempotent).
+	// * If a version with this value already exists and that version's
+	// SecretString or SecretBinary values are the same as those in the request then
+	// the request is ignored (the operation is idempotent).
 	//
-	// * If a version with this value already exists and the version of
-	// the SecretString and SecretBinary values are different from those in the request
-	// then the request fails because you cannot modify an existing secret version. You
-	// can only create new versions to store new secret values.
+	// * If a version with this
+	// value already exists and the version of the SecretString and SecretBinary values
+	// are different from those in the request then the request fails because you
+	// cannot modify an existing secret version. You can only create new versions to
+	// store new secret values.
 	//
-	// This value becomes the
-	// VersionId of the new version.
+	// This value becomes the VersionId of the new version.
 	ClientRequestToken *string
 
 	// (Optional) Specifies binary data that you want to encrypt and store in the new
@@ -170,7 +173,7 @@ type PutSecretValueInput struct {
 	// information on how to format a JSON parameter for the various command line tool
 	// environments, see Using JSON for Parameters
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide. For example:
+	// in the CLI User Guide. For example:
 	// [{"username":"bob"},{"password":"abc123xyz456"}] If your command-line tool or
 	// SDK requires quotation marks around the parameter, you should use single quotes
 	// to avoid confusion with the double quotes required in the JSON text.

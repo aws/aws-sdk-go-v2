@@ -299,6 +299,11 @@ func awsRestjson1_serializeOpDocumentCreateComponentVersionInput(v *CreateCompon
 	object := value.Object()
 	defer object.Close()
 
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
+
 	if v.InlineRecipe != nil {
 		ok := object.Key("inlineRecipe")
 		ok.Base64EncodeBytes(v.InlineRecipe)
@@ -380,6 +385,11 @@ func awsRestjson1_serializeOpHttpBindingsCreateDeploymentInput(v *CreateDeployme
 func awsRestjson1_serializeOpDocumentCreateDeploymentInput(v *CreateDeploymentInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.ClientToken != nil {
+		ok := object.Key("clientToken")
+		ok.String(*v.ClientToken)
+	}
 
 	if v.Components != nil {
 		ok := object.Key("components")
@@ -1782,6 +1792,13 @@ func awsRestjson1_serializeDocumentComponentRunWith(v *types.ComponentRunWith, v
 		ok.String(*v.PosixUser)
 	}
 
+	if v.SystemResourceLimits != nil {
+		ok := object.Key("systemResourceLimits")
+		if err := awsRestjson1_serializeDocumentSystemResourceLimits(v.SystemResourceLimits, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -2354,6 +2371,36 @@ func awsRestjson1_serializeDocumentPlatformAttributesMap(v map[string]string, va
 		om := object.Key(key)
 		om.String(v[key])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSystemResourceLimits(v *types.SystemResourceLimits, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Cpus != 0 {
+		ok := object.Key("cpus")
+		switch {
+		case math.IsNaN(v.Cpus):
+			ok.String("NaN")
+
+		case math.IsInf(v.Cpus, 1):
+			ok.String("Infinity")
+
+		case math.IsInf(v.Cpus, -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Double(v.Cpus)
+
+		}
+	}
+
+	if v.Memory != 0 {
+		ok := object.Key("memory")
+		ok.Long(v.Memory)
+	}
+
 	return nil
 }
 

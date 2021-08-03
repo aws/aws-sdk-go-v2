@@ -65,14 +65,14 @@ type DescribeComponentOutput struct {
 	// The publisher of the component version.
 	Publisher *string
 
-	// The status of the component version in AWS IoT Greengrass V2. This status is
+	// The status of the component version in IoT Greengrass V2. This status is
 	// different from the status of the component on a core device.
 	Status *types.CloudComponentStatus
 
 	// A list of key-value pairs that contain metadata for the resource. For more
 	// information, see Tag your resources
 	// (https://docs.aws.amazon.com/greengrass/v2/developerguide/tag-resources.html) in
-	// the AWS IoT Greengrass V2 Developer Guide.
+	// the IoT Greengrass V2 Developer Guide.
 	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.

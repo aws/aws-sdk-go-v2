@@ -28,33 +28,33 @@ import (
 // * Tag keys and values are case
 // sensitive.
 //
-// * Do not use the aws: prefix in your tag names or values because AWS
-// reserves it for AWS use. You can't edit or delete tag names or values with this
-// prefix. Tags with this prefix do not count against your tags per secret
-// limit.
+// * Do not use the aws: prefix in your tag names or values because
+// Amazon Web Services reserves it for Amazon Web Services use. You can't edit or
+// delete tag names or values with this prefix. Tags with this prefix do not count
+// against your tags per secret limit.
 //
-// * If you use your tagging schema across multiple services and resources,
-// remember other services might have restrictions on allowed characters. Generally
-// allowed characters: letters, spaces, and numbers representable in UTF-8, plus
-// the following special characters: + - = . _ : / @.
+// * If you use your tagging schema across
+// multiple services and resources, remember other services might have restrictions
+// on allowed characters. Generally allowed characters: letters, spaces, and
+// numbers representable in UTF-8, plus the following special characters: + - = . _
+// : / @.
 //
-// If you use tags as part of
-// your security strategy, then adding or removing a tag can change permissions. If
-// successfully completing this operation would result in you losing your
-// permissions for this secret, then the operation is blocked and returns an Access
-// Denied error. Minimum permissions To run this command, you must have the
-// following permissions:
+// If you use tags as part of your security strategy, then adding or
+// removing a tag can change permissions. If successfully completing this operation
+// would result in you losing your permissions for this secret, then the operation
+// is blocked and returns an Access Denied error. Minimum permissions To run this
+// command, you must have the following permissions:
 //
-// * secretsmanager:TagResource
+// *
+// secretsmanager:TagResource
 //
 // Related operations
 //
-// * To
-// remove one or more tags from the collection attached to a secret, use
-// UntagResource.
+// * To remove one or more tags
+// from the collection attached to a secret, use UntagResource.
 //
-// * To view the list of tags attached to a secret, use
-// DescribeSecret.
+// * To view the list
+// of tags attached to a secret, use DescribeSecret.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -98,7 +98,7 @@ type TagResourceInput struct {
 	// information on how to format a JSON parameter for the various command line tool
 	// environments, see Using JSON for Parameters
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide. For the AWS CLI, you can also use the syntax: --Tags
+	// in the CLI User Guide. For the CLI, you can also use the syntax: --Tags
 	// Key="Key1",Value="Value1" Key="Key2",Value="Value2"[,…]
 	//
 	// This member is required.

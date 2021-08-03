@@ -72,7 +72,7 @@ type UntagResourceInput struct {
 	// parameter for the various command line tool environments, see Using JSON for
 	// Parameters
 	// (https://docs.aws.amazon.com/cli/latest/userguide/cli-using-param.html#cli-using-param-json)
-	// in the AWS CLI User Guide.
+	// in the CLI User Guide.
 	//
 	// This member is required.
 	TagKeys []string

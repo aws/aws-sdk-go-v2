@@ -10,12 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a AWS IoT Greengrass core device, which is an AWS IoT thing. This
-// operation removes the core device from the list of core devices. This operation
-// doesn't delete the AWS IoT thing. For more information about how to delete the
-// AWS IoT thing, see DeleteThing
+// Deletes a Greengrass core device, which is an IoT thing. This operation removes
+// the core device from the list of core devices. This operation doesn't delete the
+// IoT thing. For more information about how to delete the IoT thing, see
+// DeleteThing
 // (https://docs.aws.amazon.com/iot/latest/apireference/API_DeleteThing.html) in
-// the AWS IoT API Reference.
+// the IoT API Reference.
 func (c *Client) DeleteCoreDevice(ctx context.Context, params *DeleteCoreDeviceInput, optFns ...func(*Options)) (*DeleteCoreDeviceOutput, error) {
 	if params == nil {
 		params = &DeleteCoreDeviceInput{}
@@ -33,7 +33,7 @@ func (c *Client) DeleteCoreDevice(ctx context.Context, params *DeleteCoreDeviceI
 
 type DeleteCoreDeviceInput struct {
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	//
 	// This member is required.
 	CoreDeviceThingName *string

@@ -831,6 +831,38 @@
                         "name": "ML_M5_24XLARGE"
                     },
                     {
+                        "value": "ml.m5d.large",
+                        "name": "ML_M5D_LARGE"
+                    },
+                    {
+                        "value": "ml.m5d.xlarge",
+                        "name": "ML_M5D_XLARGE"
+                    },
+                    {
+                        "value": "ml.m5d.2xlarge",
+                        "name": "ML_M5D_2XLARGE"
+                    },
+                    {
+                        "value": "ml.m5d.4xlarge",
+                        "name": "ML_M5D_4XLARGE"
+                    },
+                    {
+                        "value": "ml.m5d.8xlarge",
+                        "name": "ML_M5D_8XLARGE"
+                    },
+                    {
+                        "value": "ml.m5d.12xlarge",
+                        "name": "ML_M5D_12XLARGE"
+                    },
+                    {
+                        "value": "ml.m5d.16xlarge",
+                        "name": "ML_M5D_16XLARGE"
+                    },
+                    {
+                        "value": "ml.m5d.24xlarge",
+                        "name": "ML_M5D_24XLARGE"
+                    },
+                    {
                         "value": "ml.c5.large",
                         "name": "ML_C5_LARGE"
                     },
@@ -875,6 +907,10 @@
                         "name": "ML_P3_16XLARGE"
                     },
                     {
+                        "value": "ml.p3dn.24xlarge",
+                        "name": "ML_P3DN_24XLARGE"
+                    },
+                    {
                         "value": "ml.g4dn.xlarge",
                         "name": "ML_G4DN_XLARGE"
                     },
@@ -897,6 +933,38 @@
                     {
                         "value": "ml.g4dn.16xlarge",
                         "name": "ML_G4DN_16XLARGE"
+                    },
+                    {
+                        "value": "ml.r5.large",
+                        "name": "ML_R5_LARGE"
+                    },
+                    {
+                        "value": "ml.r5.xlarge",
+                        "name": "ML_R5_XLARGE"
+                    },
+                    {
+                        "value": "ml.r5.2xlarge",
+                        "name": "ML_R5_2XLARGE"
+                    },
+                    {
+                        "value": "ml.r5.4xlarge",
+                        "name": "ML_R5_4XLARGE"
+                    },
+                    {
+                        "value": "ml.r5.8xlarge",
+                        "name": "ML_R5_8XLARGE"
+                    },
+                    {
+                        "value": "ml.r5.12xlarge",
+                        "name": "ML_R5_12XLARGE"
+                    },
+                    {
+                        "value": "ml.r5.16xlarge",
+                        "name": "ML_R5_16XLARGE"
+                    },
+                    {
+                        "value": "ml.r5.24xlarge",
+                        "name": "ML_R5_24XLARGE"
                     }
                 ]
             }
@@ -4747,7 +4815,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker\n            uses the endpoint to provision resources and deploy models. You create the endpoint\n            configuration with the <a>CreateEndpointConfig</a> API. </p>\n        <p> Use this API to deploy models using Amazon SageMaker hosting services. </p>\n        <p>For an example that calls this method when deploying a model to Amazon SageMaker hosting services,\n            see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/ex1-deploy-model.html#ex1-deploy-model-boto\">Deploy the\n                Model to Amazon SageMaker Hosting Services (Amazon Web Services SDK for Python (Boto\n            3)).</a>\n         </p>\n        <note>\n            <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint\n                that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n        </note>\n        <p>The endpoint name must be unique within an Amazon Web Services Region in your Amazon Web Services account. </p>\n        <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML\n            compute instances), and deploys the model(s) on them. </p>\n        \n        <note>\n            <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to\n                verify that your endpoint configuration exists. When you read data from a DynamoDB\n                table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n                  <code>Eventually Consistent Reads</code>\n               </a>, the response might not\n                reflect the results of a recently completed write operation. The response might\n                include some stale data. If the dependent entities are not yet in DynamoDB, this\n                causes a validation error. If you repeat your read request after a short time, the\n                response should return the latest data. So retry logic is recommended to handle\n                these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p>\n        </note>\n        <p>When Amazon SageMaker receives the request, it sets the endpoint status to\n                <code>Creating</code>. After it creates the endpoint, it sets the status to\n                <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To\n            check the status of an endpoint, use the <a>DescribeEndpoint</a>\n            API.</p>\n        <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location,\n            Amazon SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you\n            provided. Amazon Web Services STS is activated in your IAM user account by default. If you previously\n            deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For\n            more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n        <note>\n            <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose\n                Roles in the left navigation pane. Search the IAM role that you want to grant\n                access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to\n                the role. </p>\n            <ul>\n               <li>\n                    <p>Option 1: For a full Amazon SageMaker access, search and attach the\n                            <code>AmazonSageMakerFullAccess</code> policy.</p>\n                </li>\n               <li>\n                    <p>Option 2: For granting a limited access to an IAM role, paste the\n                        following Action elements manually into the JSON file of the IAM role: </p>\n                    <p>\n                     <code>\"Action\": [\"sagemaker:CreateEndpoint\",\n                            \"sagemaker:CreateEndpointConfig\"]</code>\n                  </p>\n                    <p>\n                     <code>\"Resource\": [</code>\n                  </p>\n                    <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code>\n                  </p>\n                    <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code>\n                  </p>\n                    <p>\n                     <code>]</code>\n                  </p>\n                    <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">Amazon SageMaker API\n                            Permissions: Actions, Permissions, and Resources\n                        Reference</a>.</p>\n                </li>\n            </ul>\n\n        </note>"
+                "smithy.api#documentation": "<p>Creates an endpoint using the endpoint configuration specified in the request. Amazon SageMaker\n            uses the endpoint to provision resources and deploy models. You create the endpoint\n            configuration with the <a>CreateEndpointConfig</a> API. </p>\n        <p> Use this API to deploy models using Amazon SageMaker hosting services. </p>\n        <p>For an example that calls this method when deploying a model to Amazon SageMaker hosting services,\n            see the <a href=\"https://github.com/aws/amazon-sagemaker-examples/blob/master/sagemaker-fundamentals/create-endpoint/create_endpoint.ipynb\">Create Endpoint example notebook.</a>\n         </p>\n        <note>\n            <p> You must not delete an <code>EndpointConfig</code> that is in use by an endpoint\n                that is live or while the <code>UpdateEndpoint</code> or <code>CreateEndpoint</code>\n                operations are being performed on the endpoint. To update an endpoint, you must\n                create a new <code>EndpointConfig</code>.</p>\n        </note>\n        <p>The endpoint name must be unique within an Amazon Web Services Region in your Amazon Web Services account. </p>\n        <p>When it receives the request, Amazon SageMaker creates the endpoint, launches the resources (ML\n            compute instances), and deploys the model(s) on them. </p>\n        \n        <note>\n            <p>When you call <a>CreateEndpoint</a>, a load call is made to DynamoDB to\n                verify that your endpoint configuration exists. When you read data from a DynamoDB\n                table supporting <a href=\"https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/HowItWorks.ReadConsistency.html\">\n                  <code>Eventually Consistent Reads</code>\n               </a>, the response might not\n                reflect the results of a recently completed write operation. The response might\n                include some stale data. If the dependent entities are not yet in DynamoDB, this\n                causes a validation error. If you repeat your read request after a short time, the\n                response should return the latest data. So retry logic is recommended to handle\n                these possible issues. We also recommend that customers call <a>DescribeEndpointConfig</a> before calling <a>CreateEndpoint</a> to minimize the potential impact of a DynamoDB eventually consistent read.</p>\n        </note>\n        <p>When Amazon SageMaker receives the request, it sets the endpoint status to\n                <code>Creating</code>. After it creates the endpoint, it sets the status to\n                <code>InService</code>. Amazon SageMaker can then process incoming requests for inferences. To\n            check the status of an endpoint, use the <a>DescribeEndpoint</a>\n            API.</p>\n        <p>If any of the models hosted at this endpoint get model data from an Amazon S3 location,\n            Amazon SageMaker uses Amazon Web Services Security Token Service to download model artifacts from the S3 path you\n            provided. Amazon Web Services STS is activated in your IAM user account by default. If you previously\n            deactivated Amazon Web Services STS for a region, you need to reactivate Amazon Web Services STS for that region. For\n            more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_enable-regions.html\">Activating and\n                Deactivating Amazon Web Services STS in an Amazon Web Services Region</a> in the <i>Amazon Web Services Identity and Access Management User\n                Guide</i>.</p>\n        <note>\n            <p> To add the IAM role policies for using this API operation, go to the <a href=\"https://console.aws.amazon.com/iam/\">IAM console</a>, and choose\n                Roles in the left navigation pane. Search the IAM role that you want to grant\n                access to use the <a>CreateEndpoint</a> and <a>CreateEndpointConfig</a> API operations, add the following policies to\n                the role. </p>\n            <ul>\n               <li>\n                    <p>Option 1: For a full Amazon SageMaker access, search and attach the\n                            <code>AmazonSageMakerFullAccess</code> policy.</p>\n                </li>\n               <li>\n                    <p>Option 2: For granting a limited access to an IAM role, paste the\n                        following Action elements manually into the JSON file of the IAM role: </p>\n                    <p>\n                     <code>\"Action\": [\"sagemaker:CreateEndpoint\",\n                            \"sagemaker:CreateEndpointConfig\"]</code>\n                  </p>\n                    <p>\n                     <code>\"Resource\": [</code>\n                  </p>\n                    <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint/endpointName\"</code>\n                  </p>\n                    <p>\n                     <code>\"arn:aws:sagemaker:region:account-id:endpoint-config/endpointConfigName\"</code>\n                  </p>\n                    <p>\n                     <code>]</code>\n                  </p>\n                    <p>For more information, see <a href=\"https://docs.aws.amazon.com/sagemaker/latest/dg/api-permissions-reference.html\">Amazon SageMaker API\n                            Permissions: Actions, Permissions, and Resources\n                        Reference</a>.</p>\n                </li>\n            </ul>\n\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#CreateEndpointConfig": {
@@ -11267,7 +11335,101 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a SageMaker image.</p>"
+                "smithy.api#documentation": "<p>Describes a SageMaker image.</p>",
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
+                "smithy.waiters#waitable": {
+                    "ImageCreated": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageStatus",
+                                        "expected": "CREATED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageStatus",
+                                        "expected": "CREATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "ValidationException"
+                                }
+                            }
+                        ],
+                        "minDelay": 60
+                    },
+                    "ImageDeleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageStatus",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "ValidationException"
+                                }
+                            }
+                        ],
+                        "minDelay": 60
+                    },
+                    "ImageUpdated": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageStatus",
+                                        "expected": "CREATED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageStatus",
+                                        "expected": "UPDATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "ValidationException"
+                                }
+                            }
+                        ],
+                        "minDelay": 60
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#DescribeImageRequest": {
@@ -11355,7 +11517,70 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes a version of a SageMaker image.</p>"
+                "smithy.api#documentation": "<p>Describes a version of a SageMaker image.</p>",
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
+                "smithy.waiters#waitable": {
+                    "ImageVersionCreated": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageVersionStatus",
+                                        "expected": "CREATED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageVersionStatus",
+                                        "expected": "CREATE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "ValidationException"
+                                }
+                            }
+                        ],
+                        "minDelay": 60
+                    },
+                    "ImageVersionDeleted": {
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "ResourceNotFoundException"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "ImageVersionStatus",
+                                        "expected": "DELETE_FAILED",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "errorType": "ValidationException"
+                                }
+                            }
+                        ],
+                        "minDelay": 60
+                    }
+                }
             }
         },
         "com.amazonaws.sagemaker#DescribeImageVersionRequest": {
@@ -19156,6 +19381,26 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^arn:aws[a-z\\-]*:lambda:[a-z0-9\\-]*:[0-9]{12}:function:"
+            }
+        },
+        "com.amazonaws.sagemaker#LambdaStepMetadata": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.sagemaker#String256",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function that was run by this step execution.</p>"
+                    }
+                },
+                "OutputParameters": {
+                    "target": "com.amazonaws.sagemaker#OutputParameterList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the output parameters of the Lambda step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata for a Lambda step.</p>"
             }
         },
         "com.amazonaws.sagemaker#LastModifiedTime": {
@@ -27842,23 +28087,32 @@
                 "Model": {
                     "target": "com.amazonaws.sagemaker#ModelStepMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata for the Model step.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model that was created by this step execution.</p>"
                     }
                 },
                 "RegisterModel": {
                     "target": "com.amazonaws.sagemaker#RegisterModelStepMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>Metadata for the RegisterModel step.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the model package the model was registered to by this step execution.</p>"
                     }
                 },
                 "Condition": {
                     "target": "com.amazonaws.sagemaker#ConditionStepMetadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this is a Condition step metadata object, details on the condition.</p>"
+                        "smithy.api#documentation": "<p>The outcome of the condition evaluation that was run by this step execution.</p>"
                     }
                 },
                 "Callback": {
-                    "target": "com.amazonaws.sagemaker#CallbackStepMetadata"
+                    "target": "com.amazonaws.sagemaker#CallbackStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The URL of the Amazon SQS queue used by this step execution, the pipeline generated token,\n        and a list of output parameters.</p>"
+                    }
+                },
+                "Lambda": {
+                    "target": "com.amazonaws.sagemaker#LambdaStepMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Lambda function that was run by this step execution and a list of\n        output parameters.</p>"
+                    }
                 }
             },
             "traits": {
@@ -32870,7 +33124,7 @@
                 "MaxRuntimeInSeconds": {
                     "target": "com.amazonaws.sagemaker#MaxRuntimeInSeconds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run. If\n            the job does not complete during this time, Amazon SageMaker ends the job.</p>\n        <p>When <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt.</p>\n        <p>The default value is 1 day. The maximum value is 28 days.</p>"
+                        "smithy.api#documentation": "<p>The maximum length of time, in seconds, that a training or compilation job can run.</p> \n        <p>For compilation jobs, if the job does not complete during this time, you will \n            receive a <code>TimeOut</code> error. We recommend starting with 900 seconds and increase as \n            necessary based on your model.</p>  \n        <p>For all other jobs, if the job does not complete during this time, Amazon SageMaker ends the job. When \n            <code>RetryStrategy</code> is specified in the job request,\n                <code>MaxRuntimeInSeconds</code> specifies the maximum time for all of the attempts\n            in total, not each individual attempt. The default value is 1 day. The maximum value is 28 days.</p>"
                     }
                 },
                 "MaxWaitTimeInSeconds": {
@@ -32881,7 +33135,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a limit to how long a model training job, model compilation job, or\n            hyperparameter tuning job can run. It also specifies how long a managed Spot training\n            job has to complete. When the job reaches the time limit, Amazon SageMaker ends the training or\n            compilation job. Use this API to cap model training costs.</p>\n        <p>To stop a job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>\n        <p>The training algorithms provided by Amazon SageMaker automatically save the intermediate results\n            of a model training job when possible. This attempt to save artifacts is only a best\n            effort case as model might not be in a state from which it can be saved. For example, if\n            training has just started, the model might not be ready to save. When saved, this\n            intermediate data is a valid model artifact. You can use it to create a model with\n                <code>CreateModel</code>.</p>\n        <note>\n            <p>The Neural Topic Model (NTM) currently does not support saving intermediate model\n                artifacts. When training NTMs, make sure that the maximum runtime is sufficient for\n                the training job to complete.</p>\n        </note>"
+                "smithy.api#documentation": "<p>Specifies a limit to how long a model training job, model compilation job, or\n            hyperparameter tuning job can run. It also specifies how long a managed Spot training\n            job has to complete. When the job reaches the time limit, Amazon SageMaker ends the training or\n            compilation job. Use this API to cap model training costs.</p>\n        <p>To stop a training job, Amazon SageMaker sends the algorithm the <code>SIGTERM</code> signal, which delays\n            job termination for 120 seconds. Algorithms can use this 120-second window to save the\n            model artifacts, so the results of training are not lost. </p>\n        <p>The training algorithms provided by Amazon SageMaker automatically save the intermediate results\n            of a model training job when possible. This attempt to save artifacts is only a best\n            effort case as model might not be in a state from which it can be saved. For example, if\n            training has just started, the model might not be ready to save. When saved, this\n            intermediate data is a valid model artifact. You can use it to create a model with\n                <code>CreateModel</code>.</p>\n        <note>\n            <p>The Neural Topic Model (NTM) currently does not support saving intermediate model\n                artifacts. When training NTMs, make sure that the maximum runtime is sufficient for\n                the training job to complete.</p>\n        </note>"
             }
         },
         "com.amazonaws.sagemaker#String": {

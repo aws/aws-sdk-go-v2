@@ -39,6 +39,21 @@
                 "smithy.api#pattern": "^[0-9]*$"
             }
         },
+        "com.amazonaws.ssmcontacts#AcceptCodeValidation": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IGNORE",
+                        "name": "IGNORE"
+                    },
+                    {
+                        "value": "ENFORCE",
+                        "name": "ENFORCE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.ssmcontacts#AcceptPage": {
             "type": "operation",
             "input": {
@@ -102,6 +117,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The accept code is a 6-digit code used to acknowledge the page.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "AcceptCodeValidation": {
+                    "target": "com.amazonaws.ssmcontacts#AcceptCodeValidation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An\n         optional field that Incident Manager uses to <code>ENFORCE</code>\n            <code>AcceptCode</code> validation when acknowledging an page.\n         Acknowledgement can occur by replying to a page, or when entering the AcceptCode in the\n         console. Enforcing AcceptCode validation causes Incident Manager to verify that the code\n         entered by the user matches the code sent by Incident Manager with the page.</p>\n         <p>Incident Manager can also <code>IGNORE</code>\n            <code>AcceptCode</code> validation. Ignoring <code>AcceptCode</code> validation causes\n         Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>"
                     }
                 }
             }
@@ -2322,7 +2343,7 @@
                     "name": "ssm-contacts"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>AWS Systems Manager Incident Manager is an incident management console designed to help\n        users mitigate and recover from incidents affecting their AWS-hosted applications. An incident\n        is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n        highlighting relevant troubleshooting data, and providing collaboration tools to get services\n        back up and running. To achieve the primary goal of reducing the time-to-resolution of\n        critical incidents, Incident Manager automates response plans and enables responder team\n        escalation. </p>",
                 "smithy.api#title": "AWS Systems Manager Incident Manager Contacts"
             }
         },
@@ -2454,7 +2475,7 @@
                 "DurationInMinutes": {
                     "target": "com.amazonaws.ssmcontacts#StageDurationInMins",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time to wait until beginning the next stage.</p>",
+                        "smithy.api#documentation": "<p>The time to wait until beginning the next stage. The duration can only be set to 0 if a\n         target is specified.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2700,7 +2721,7 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 0,
-                    "max": 200
+                    "max": 50
                 }
             }
         },

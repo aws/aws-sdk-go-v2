@@ -109,6 +109,14 @@ const (
 	AppInstanceTypeMlM512xlarge   AppInstanceType = "ml.m5.12xlarge"
 	AppInstanceTypeMlM516xlarge   AppInstanceType = "ml.m5.16xlarge"
 	AppInstanceTypeMlM524xlarge   AppInstanceType = "ml.m5.24xlarge"
+	AppInstanceTypeMlM5dLarge     AppInstanceType = "ml.m5d.large"
+	AppInstanceTypeMlM5dXlarge    AppInstanceType = "ml.m5d.xlarge"
+	AppInstanceTypeMlM5d2xlarge   AppInstanceType = "ml.m5d.2xlarge"
+	AppInstanceTypeMlM5d4xlarge   AppInstanceType = "ml.m5d.4xlarge"
+	AppInstanceTypeMlM5d8xlarge   AppInstanceType = "ml.m5d.8xlarge"
+	AppInstanceTypeMlM5d12xlarge  AppInstanceType = "ml.m5d.12xlarge"
+	AppInstanceTypeMlM5d16xlarge  AppInstanceType = "ml.m5d.16xlarge"
+	AppInstanceTypeMlM5d24xlarge  AppInstanceType = "ml.m5d.24xlarge"
 	AppInstanceTypeMlC5Large      AppInstanceType = "ml.c5.large"
 	AppInstanceTypeMlC5Xlarge     AppInstanceType = "ml.c5.xlarge"
 	AppInstanceTypeMlC52xlarge    AppInstanceType = "ml.c5.2xlarge"
@@ -120,12 +128,21 @@ const (
 	AppInstanceTypeMlP32xlarge    AppInstanceType = "ml.p3.2xlarge"
 	AppInstanceTypeMlP38xlarge    AppInstanceType = "ml.p3.8xlarge"
 	AppInstanceTypeMlP316xlarge   AppInstanceType = "ml.p3.16xlarge"
+	AppInstanceTypeMlP3dn24xlarge AppInstanceType = "ml.p3dn.24xlarge"
 	AppInstanceTypeMlG4dnXlarge   AppInstanceType = "ml.g4dn.xlarge"
 	AppInstanceTypeMlG4dn2xlarge  AppInstanceType = "ml.g4dn.2xlarge"
 	AppInstanceTypeMlG4dn4xlarge  AppInstanceType = "ml.g4dn.4xlarge"
 	AppInstanceTypeMlG4dn8xlarge  AppInstanceType = "ml.g4dn.8xlarge"
 	AppInstanceTypeMlG4dn12xlarge AppInstanceType = "ml.g4dn.12xlarge"
 	AppInstanceTypeMlG4dn16xlarge AppInstanceType = "ml.g4dn.16xlarge"
+	AppInstanceTypeMlR5Large      AppInstanceType = "ml.r5.large"
+	AppInstanceTypeMlR5Xlarge     AppInstanceType = "ml.r5.xlarge"
+	AppInstanceTypeMlR52xlarge    AppInstanceType = "ml.r5.2xlarge"
+	AppInstanceTypeMlR54xlarge    AppInstanceType = "ml.r5.4xlarge"
+	AppInstanceTypeMlR58xlarge    AppInstanceType = "ml.r5.8xlarge"
+	AppInstanceTypeMlR512xlarge   AppInstanceType = "ml.r5.12xlarge"
+	AppInstanceTypeMlR516xlarge   AppInstanceType = "ml.r5.16xlarge"
+	AppInstanceTypeMlR524xlarge   AppInstanceType = "ml.r5.24xlarge"
 )
 
 // Values returns all known values for AppInstanceType. Note that this can be
@@ -148,6 +165,14 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.m5.12xlarge",
 		"ml.m5.16xlarge",
 		"ml.m5.24xlarge",
+		"ml.m5d.large",
+		"ml.m5d.xlarge",
+		"ml.m5d.2xlarge",
+		"ml.m5d.4xlarge",
+		"ml.m5d.8xlarge",
+		"ml.m5d.12xlarge",
+		"ml.m5d.16xlarge",
+		"ml.m5d.24xlarge",
 		"ml.c5.large",
 		"ml.c5.xlarge",
 		"ml.c5.2xlarge",
@@ -159,12 +184,21 @@ func (AppInstanceType) Values() []AppInstanceType {
 		"ml.p3.2xlarge",
 		"ml.p3.8xlarge",
 		"ml.p3.16xlarge",
+		"ml.p3dn.24xlarge",
 		"ml.g4dn.xlarge",
 		"ml.g4dn.2xlarge",
 		"ml.g4dn.4xlarge",
 		"ml.g4dn.8xlarge",
 		"ml.g4dn.12xlarge",
 		"ml.g4dn.16xlarge",
+		"ml.r5.large",
+		"ml.r5.xlarge",
+		"ml.r5.2xlarge",
+		"ml.r5.4xlarge",
+		"ml.r5.8xlarge",
+		"ml.r5.12xlarge",
+		"ml.r5.16xlarge",
+		"ml.r5.24xlarge",
 	}
 }
 

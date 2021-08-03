@@ -4,11 +4,17 @@ package sagemaker
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/sagemaker/types"
+	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/middleware"
+	smithytime "github.com/aws/smithy-go/time"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	smithywaiter "github.com/aws/smithy-go/waiter"
+	"github.com/jmespath/go-jmespath"
 	"time"
 )
 
@@ -137,6 +143,371 @@ func (c *Client) addOperationDescribeImageVersionMiddlewares(stack *middleware.S
 		return err
 	}
 	return nil
+}
+
+// DescribeImageVersionAPIClient is a client that implements the
+// DescribeImageVersion operation.
+type DescribeImageVersionAPIClient interface {
+	DescribeImageVersion(context.Context, *DescribeImageVersionInput, ...func(*Options)) (*DescribeImageVersionOutput, error)
+}
+
+var _ DescribeImageVersionAPIClient = (*Client)(nil)
+
+// ImageVersionCreatedWaiterOptions are waiter options for
+// ImageVersionCreatedWaiter
+type ImageVersionCreatedWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// ImageVersionCreatedWaiter will use default minimum delay of 60 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, ImageVersionCreatedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeImageVersionInput, *DescribeImageVersionOutput, error) (bool, error)
+}
+
+// ImageVersionCreatedWaiter defines the waiters for ImageVersionCreated
+type ImageVersionCreatedWaiter struct {
+	client DescribeImageVersionAPIClient
+
+	options ImageVersionCreatedWaiterOptions
+}
+
+// NewImageVersionCreatedWaiter constructs a ImageVersionCreatedWaiter.
+func NewImageVersionCreatedWaiter(client DescribeImageVersionAPIClient, optFns ...func(*ImageVersionCreatedWaiterOptions)) *ImageVersionCreatedWaiter {
+	options := ImageVersionCreatedWaiterOptions{}
+	options.MinDelay = 60 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = imageVersionCreatedStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &ImageVersionCreatedWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for ImageVersionCreated waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
+func (w *ImageVersionCreatedWaiter) Wait(ctx context.Context, params *DescribeImageVersionInput, maxWaitDur time.Duration, optFns ...func(*ImageVersionCreatedWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeImageVersion(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for ImageVersionCreated waiter")
+}
+
+func imageVersionCreatedStateRetryable(ctx context.Context, input *DescribeImageVersionInput, output *DescribeImageVersionOutput, err error) (bool, error) {
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ImageVersionStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "CREATED"
+		value, ok := pathValue.(types.ImageVersionStatus)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected types.ImageVersionStatus value, got %T", pathValue)
+		}
+
+		if string(value) == expectedValue {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ImageVersionStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "CREATE_FAILED"
+		value, ok := pathValue.(types.ImageVersionStatus)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected types.ImageVersionStatus value, got %T", pathValue)
+		}
+
+		if string(value) == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ValidationException" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	return true, nil
+}
+
+// ImageVersionDeletedWaiterOptions are waiter options for
+// ImageVersionDeletedWaiter
+type ImageVersionDeletedWaiterOptions struct {
+
+	// Set of options to modify how an operation is invoked. These apply to all
+	// operations invoked for this client. Use functional options on operation call to
+	// modify this list for per operation behavior.
+	APIOptions []func(*middleware.Stack) error
+
+	// MinDelay is the minimum amount of time to delay between retries. If unset,
+	// ImageVersionDeletedWaiter will use default minimum delay of 60 seconds. Note
+	// that MinDelay must resolve to a value lesser than or equal to the MaxDelay.
+	MinDelay time.Duration
+
+	// MaxDelay is the maximum amount of time to delay between retries. If unset or set
+	// to zero, ImageVersionDeletedWaiter will use default max delay of 120 seconds.
+	// Note that MaxDelay must resolve to value greater than or equal to the MinDelay.
+	MaxDelay time.Duration
+
+	// LogWaitAttempts is used to enable logging for waiter retry attempts
+	LogWaitAttempts bool
+
+	// Retryable is function that can be used to override the service defined
+	// waiter-behavior based on operation output, or returned error. This function is
+	// used by the waiter to decide if a state is retryable or a terminal state. By
+	// default service-modeled logic will populate this option. This option can thus be
+	// used to define a custom waiter state with fall-back to service-modeled waiter
+	// state mutators.The function returns an error in case of a failure state. In case
+	// of retry state, this function returns a bool value of true and nil error, while
+	// in case of success it returns a bool value of false and nil error.
+	Retryable func(context.Context, *DescribeImageVersionInput, *DescribeImageVersionOutput, error) (bool, error)
+}
+
+// ImageVersionDeletedWaiter defines the waiters for ImageVersionDeleted
+type ImageVersionDeletedWaiter struct {
+	client DescribeImageVersionAPIClient
+
+	options ImageVersionDeletedWaiterOptions
+}
+
+// NewImageVersionDeletedWaiter constructs a ImageVersionDeletedWaiter.
+func NewImageVersionDeletedWaiter(client DescribeImageVersionAPIClient, optFns ...func(*ImageVersionDeletedWaiterOptions)) *ImageVersionDeletedWaiter {
+	options := ImageVersionDeletedWaiterOptions{}
+	options.MinDelay = 60 * time.Second
+	options.MaxDelay = 120 * time.Second
+	options.Retryable = imageVersionDeletedStateRetryable
+
+	for _, fn := range optFns {
+		fn(&options)
+	}
+	return &ImageVersionDeletedWaiter{
+		client:  client,
+		options: options,
+	}
+}
+
+// Wait calls the waiter function for ImageVersionDeleted waiter. The maxWaitDur is
+// the maximum wait duration the waiter will wait. The maxWaitDur is required and
+// must be greater than zero.
+func (w *ImageVersionDeletedWaiter) Wait(ctx context.Context, params *DescribeImageVersionInput, maxWaitDur time.Duration, optFns ...func(*ImageVersionDeletedWaiterOptions)) error {
+	if maxWaitDur <= 0 {
+		return fmt.Errorf("maximum wait time for waiter must be greater than zero")
+	}
+
+	options := w.options
+	for _, fn := range optFns {
+		fn(&options)
+	}
+
+	if options.MaxDelay <= 0 {
+		options.MaxDelay = 120 * time.Second
+	}
+
+	if options.MinDelay > options.MaxDelay {
+		return fmt.Errorf("minimum waiter delay %v must be lesser than or equal to maximum waiter delay of %v.", options.MinDelay, options.MaxDelay)
+	}
+
+	ctx, cancelFn := context.WithTimeout(ctx, maxWaitDur)
+	defer cancelFn()
+
+	logger := smithywaiter.Logger{}
+	remainingTime := maxWaitDur
+
+	var attempt int64
+	for {
+
+		attempt++
+		apiOptions := options.APIOptions
+		start := time.Now()
+
+		if options.LogWaitAttempts {
+			logger.Attempt = attempt
+			apiOptions = append([]func(*middleware.Stack) error{}, options.APIOptions...)
+			apiOptions = append(apiOptions, logger.AddLogger)
+		}
+
+		out, err := w.client.DescribeImageVersion(ctx, params, func(o *Options) {
+			o.APIOptions = append(o.APIOptions, apiOptions...)
+		})
+
+		retryable, err := options.Retryable(ctx, params, out, err)
+		if err != nil {
+			return err
+		}
+		if !retryable {
+			return nil
+		}
+
+		remainingTime -= time.Since(start)
+		if remainingTime < options.MinDelay || remainingTime <= 0 {
+			break
+		}
+
+		// compute exponential backoff between waiter retries
+		delay, err := smithywaiter.ComputeDelay(
+			attempt, options.MinDelay, options.MaxDelay, remainingTime,
+		)
+		if err != nil {
+			return fmt.Errorf("error computing waiter delay, %w", err)
+		}
+
+		remainingTime -= delay
+		// sleep for the delay amount before invoking a request
+		if err := smithytime.SleepWithContext(ctx, delay); err != nil {
+			return fmt.Errorf("request cancelled while waiting, %w", err)
+		}
+	}
+	return fmt.Errorf("exceeded max wait time for ImageVersionDeleted waiter")
+}
+
+func imageVersionDeletedStateRetryable(ctx context.Context, input *DescribeImageVersionInput, output *DescribeImageVersionOutput, err error) (bool, error) {
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ResourceNotFoundException" == apiErr.ErrorCode() {
+			return false, nil
+		}
+	}
+
+	if err == nil {
+		pathValue, err := jmespath.Search("ImageVersionStatus", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "DELETE_FAILED"
+		value, ok := pathValue.(types.ImageVersionStatus)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected types.ImageVersionStatus value, got %T", pathValue)
+		}
+
+		if string(value) == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	if err != nil {
+		var apiErr smithy.APIError
+		ok := errors.As(err, &apiErr)
+		if !ok {
+			return false, fmt.Errorf("expected err to be of type smithy.APIError, got %w", err)
+		}
+
+		if "ValidationException" == apiErr.ErrorCode() {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
+	return true, nil
 }
 
 func newServiceMetadataMiddleware_opDescribeImageVersion(region string) *awsmiddleware.RegisterServiceMetadata {

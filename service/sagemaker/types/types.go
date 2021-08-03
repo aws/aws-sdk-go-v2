@@ -6259,6 +6259,19 @@ type LabelingJobSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Metadata for a Lambda step.
+type LambdaStepMetadata struct {
+
+	// The Amazon Resource Name (ARN) of the Lambda function that was run by this step
+	// execution.
+	Arn *string
+
+	// A list of the output parameters of the Lambda step.
+	OutputParameters []OutputParameter
+
+	noSmithyDocumentSerde
+}
+
 // Defines an Amazon Cognito or your own OIDC IdP user group that is part of a work
 // team.
 type MemberDefinition struct {
@@ -8272,20 +8285,27 @@ type PipelineExecutionStep struct {
 // Metadata for a step execution.
 type PipelineExecutionStepMetadata struct {
 
-	// Metadata about a callback step.
+	// The URL of the Amazon SQS queue used by this step execution, the pipeline
+	// generated token, and a list of output parameters.
 	Callback *CallbackStepMetadata
 
-	// If this is a Condition step metadata object, details on the condition.
+	// The outcome of the condition evaluation that was run by this step execution.
 	Condition *ConditionStepMetadata
 
-	// Metadata for the Model step.
+	// The Amazon Resource Name (ARN) of the Lambda function that was run by this step
+	// execution and a list of output parameters.
+	Lambda *LambdaStepMetadata
+
+	// The Amazon Resource Name (ARN) of the model that was created by this step
+	// execution.
 	Model *ModelStepMetadata
 
 	// The Amazon Resource Name (ARN) of the processing job that was run by this step
 	// execution.
 	ProcessingJob *ProcessingJobStepMetadata
 
-	// Metadata for the RegisterModel step.
+	// The Amazon Resource Name (ARN) of the model package the model was registered to
+	// by this step execution.
 	RegisterModel *RegisterModelStepMetadata
 
 	// The Amazon Resource Name (ARN) of the training job that was run by this step
@@ -9988,10 +10008,10 @@ type SourceIpConfig struct {
 // hyperparameter tuning job can run. It also specifies how long a managed Spot
 // training job has to complete. When the job reaches the time limit, Amazon
 // SageMaker ends the training or compilation job. Use this API to cap model
-// training costs. To stop a job, Amazon SageMaker sends the algorithm the SIGTERM
-// signal, which delays job termination for 120 seconds. Algorithms can use this
-// 120-second window to save the model artifacts, so the results of training are
-// not lost. The training algorithms provided by Amazon SageMaker automatically
+// training costs. To stop a training job, Amazon SageMaker sends the algorithm the
+// SIGTERM signal, which delays job termination for 120 seconds. Algorithms can use
+// this 120-second window to save the model artifacts, so the results of training
+// are not lost. The training algorithms provided by Amazon SageMaker automatically
 // save the intermediate results of a model training job when possible. This
 // attempt to save artifacts is only a best effort case as model might not be in a
 // state from which it can be saved. For example, if training has just started, the
@@ -10003,10 +10023,13 @@ type SourceIpConfig struct {
 type StoppingCondition struct {
 
 	// The maximum length of time, in seconds, that a training or compilation job can
-	// run. If the job does not complete during this time, Amazon SageMaker ends the
-	// job. When RetryStrategy is specified in the job request, MaxRuntimeInSeconds
-	// specifies the maximum time for all of the attempts in total, not each individual
-	// attempt. The default value is 1 day. The maximum value is 28 days.
+	// run. For compilation jobs, if the job does not complete during this time, you
+	// will receive a TimeOut error. We recommend starting with 900 seconds and
+	// increase as necessary based on your model. For all other jobs, if the job does
+	// not complete during this time, Amazon SageMaker ends the job. When RetryStrategy
+	// is specified in the job request, MaxRuntimeInSeconds specifies the maximum time
+	// for all of the attempts in total, not each individual attempt. The default value
+	// is 1 day. The maximum value is 28 days.
 	MaxRuntimeInSeconds int32
 
 	// The maximum length of time, in seconds, that a managed Spot training job has to

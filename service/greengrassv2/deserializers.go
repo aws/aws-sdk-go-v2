@@ -614,6 +614,9 @@ func awsRestjson1_deserializeOpErrorCreateComponentVersion(response *smithyhttp.
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
 
+	case strings.EqualFold("RequestAlreadyInProgressException", errorCode):
+		return awsRestjson1_deserializeErrorRequestAlreadyInProgressException(response, errorBody)
+
 	case strings.EqualFold("ServiceQuotaExceededException", errorCode):
 		return awsRestjson1_deserializeErrorServiceQuotaExceededException(response, errorBody)
 
@@ -815,6 +818,9 @@ func awsRestjson1_deserializeOpErrorCreateDeployment(response *smithyhttp.Respon
 
 	case strings.EqualFold("InternalServerException", errorCode):
 		return awsRestjson1_deserializeErrorInternalServerException(response, errorBody)
+
+	case strings.EqualFold("RequestAlreadyInProgressException", errorCode):
+		return awsRestjson1_deserializeErrorRequestAlreadyInProgressException(response, errorBody)
 
 	case strings.EqualFold("ResourceNotFoundException", errorCode):
 		return awsRestjson1_deserializeErrorResourceNotFoundException(response, errorBody)
@@ -3961,6 +3967,42 @@ func awsRestjson1_deserializeErrorInternalServerException(response *smithyhttp.R
 	return output
 }
 
+func awsRestjson1_deserializeErrorRequestAlreadyInProgressException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	output := &types.RequestAlreadyInProgressException{}
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	err := awsRestjson1_deserializeDocumentRequestAlreadyInProgressException(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+
+	return output
+}
+
 func awsRestjson1_deserializeErrorResourceNotFoundException(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	output := &types.ResourceNotFoundException{}
 	var buff [1024]byte
@@ -4835,6 +4877,11 @@ func awsRestjson1_deserializeDocumentComponentRunWith(v **types.ComponentRunWith
 					return fmt.Errorf("expected NonEmptyString to be of type string, got %T instead", value)
 				}
 				sv.PosixUser = ptr.String(jtv)
+			}
+
+		case "systemResourceLimits":
+			if err := awsRestjson1_deserializeDocumentSystemResourceLimits(&sv.SystemResourceLimits, value); err != nil {
+				return err
 			}
 
 		default:
@@ -6282,6 +6329,46 @@ func awsRestjson1_deserializeDocumentPlatformAttributesMap(v *map[string]string,
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentRequestAlreadyInProgressException(v **types.RequestAlreadyInProgressException, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RequestAlreadyInProgressException
+	if *v == nil {
+		sv = &types.RequestAlreadyInProgressException{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentResolvedComponentVersion(v **types.ResolvedComponentVersion, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6554,6 +6641,84 @@ func awsRestjson1_deserializeDocumentStringMap(v *map[string]string, value inter
 
 	}
 	*v = mv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSystemResourceLimits(v **types.SystemResourceLimits, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SystemResourceLimits
+	if *v == nil {
+		sv = &types.SystemResourceLimits{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "cpus":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.Cpus = f64
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.Cpus = f64
+
+				default:
+					return fmt.Errorf("expected CPU to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "memory":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Memory to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Memory = i64
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 

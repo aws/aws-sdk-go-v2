@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves a paginated list of the components that a AWS IoT Greengrass core
-// device runs.
+// Retrieves a paginated list of the components that a Greengrass core device runs.
 func (c *Client) ListInstalledComponents(ctx context.Context, params *ListInstalledComponentsInput, optFns ...func(*Options)) (*ListInstalledComponentsOutput, error) {
 	if params == nil {
 		params = &ListInstalledComponentsInput{}
@@ -31,7 +30,7 @@ func (c *Client) ListInstalledComponents(ctx context.Context, params *ListInstal
 
 type ListInstalledComponentsInput struct {
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	//
 	// This member is required.
 	CoreDeviceThingName *string

@@ -19,17 +19,17 @@ import (
 // secretsmanager:GetSecretValue
 //
 // * kms:Decrypt - required only if you use a
-// customer-managed AWS KMS key to encrypt the secret. You do not need this
-// permission to use the account's default AWS managed CMK for Secrets
-// Manager.
+// customer-managed Amazon Web Services KMS key to encrypt the secret. You do not
+// need this permission to use the account's default Amazon Web Services managed
+// CMK for Secrets Manager.
 //
 // Related operations
 //
-// * To create a new version of the secret with
-// different encrypted information, use PutSecretValue.
+// * To create a new version of the
+// secret with different encrypted information, use PutSecretValue.
 //
-// * To retrieve the
-// non-encrypted details for the secret, use DescribeSecret.
+// * To retrieve
+// the non-encrypted details for the secret, use DescribeSecret.
 func (c *Client) GetSecretValue(ctx context.Context, params *GetSecretValueInput, optFns ...func(*Options)) (*GetSecretValueOutput, error) {
 	if params == nil {
 		params = &GetSecretValueInput{}

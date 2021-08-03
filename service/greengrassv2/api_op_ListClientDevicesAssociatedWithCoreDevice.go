@@ -31,7 +31,7 @@ func (c *Client) ListClientDevicesAssociatedWithCoreDevice(ctx context.Context, 
 
 type ListClientDevicesAssociatedWithCoreDeviceInput struct {
 
-	// The name of the core device. This is also the name of the AWS IoT thing.
+	// The name of the core device. This is also the name of the IoT thing.
 	//
 	// This member is required.
 	CoreDeviceThingName *string

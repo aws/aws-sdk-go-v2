@@ -517,6 +517,13 @@ func awsRestjson1_serializeOpDocumentCreateGraphqlApiInput(v *CreateGraphqlApiIn
 		ok.String(string(v.AuthenticationType))
 	}
 
+	if v.LambdaAuthorizerConfig != nil {
+		ok := object.Key("lambdaAuthorizerConfig")
+		if err := awsRestjson1_serializeDocumentLambdaAuthorizerConfig(v.LambdaAuthorizerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogConfig != nil {
 		ok := object.Key("logConfig")
 		if err := awsRestjson1_serializeDocumentLogConfig(v.LogConfig, ok); err != nil {
@@ -3103,6 +3110,13 @@ func awsRestjson1_serializeOpDocumentUpdateGraphqlApiInput(v *UpdateGraphqlApiIn
 		ok.String(string(v.AuthenticationType))
 	}
 
+	if v.LambdaAuthorizerConfig != nil {
+		ok := object.Key("lambdaAuthorizerConfig")
+		if err := awsRestjson1_serializeDocumentLambdaAuthorizerConfig(v.LambdaAuthorizerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.LogConfig != nil {
 		ok := object.Key("logConfig")
 		if err := awsRestjson1_serializeDocumentLogConfig(v.LogConfig, ok); err != nil {
@@ -3376,6 +3390,13 @@ func awsRestjson1_serializeDocumentAdditionalAuthenticationProvider(v *types.Add
 		ok.String(string(v.AuthenticationType))
 	}
 
+	if v.LambdaAuthorizerConfig != nil {
+		ok := object.Key("lambdaAuthorizerConfig")
+		if err := awsRestjson1_serializeDocumentLambdaAuthorizerConfig(v.LambdaAuthorizerConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.OpenIDConnectConfig != nil {
 		ok := object.Key("openIDConnectConfig")
 		if err := awsRestjson1_serializeDocumentOpenIDConnectConfig(v.OpenIDConnectConfig, ok); err != nil {
@@ -3592,6 +3613,28 @@ func awsRestjson1_serializeDocumentHttpDataSourceConfig(v *types.HttpDataSourceC
 	if v.Endpoint != nil {
 		ok := object.Key("endpoint")
 		ok.String(*v.Endpoint)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLambdaAuthorizerConfig(v *types.LambdaAuthorizerConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthorizerResultTtlInSeconds != 0 {
+		ok := object.Key("authorizerResultTtlInSeconds")
+		ok.Integer(v.AuthorizerResultTtlInSeconds)
+	}
+
+	if v.AuthorizerUri != nil {
+		ok := object.Key("authorizerUri")
+		ok.String(*v.AuthorizerUri)
+	}
+
+	if v.IdentityValidationExpression != nil {
+		ok := object.Key("identityValidationExpression")
+		ok.String(*v.IdentityValidationExpression)
 	}
 
 	return nil
