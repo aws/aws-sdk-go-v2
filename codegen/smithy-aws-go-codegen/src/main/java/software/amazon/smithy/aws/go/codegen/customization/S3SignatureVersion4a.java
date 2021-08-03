@@ -26,12 +26,11 @@ import software.amazon.smithy.utils.ListUtils;
  */
 public class S3SignatureVersion4a implements GoIntegration {
     private static final String RESOLVE_CREDENTIAL_PROVIDER = "resolveCredentialProvider";
-    public static final String REGISTER_MIDDLEWARE_FUNCTION = "swapWithCustomHTTPSignerMiddleware";
-    public static final String V4A_SIGNER_INTERFACE_NAME = "httpSignerV4a";
-    public static final String SIGNER_OPTION_FIELD_NAME = V4A_SIGNER_INTERFACE_NAME;
-    public static final String NEW_SIGNER_FUNC_NAME = "newDefaultV4aSigner";
-    public static final String SIGNER_RESOLVER = "resolveHTTPSignerV4a";
-    public static final String CREDENTIALS_CONFIG_NAME = "Credentials";
+    private static final String REGISTER_MIDDLEWARE_FUNCTION = "swapWithCustomHTTPSignerMiddleware";
+    private static final String V4A_SIGNER_INTERFACE_NAME = "httpSignerV4a";
+    private static final String SIGNER_OPTION_FIELD_NAME = V4A_SIGNER_INTERFACE_NAME;
+    private static final String NEW_SIGNER_FUNC_NAME = "newDefaultV4aSigner";
+    private static final String SIGNER_RESOLVER = "resolveHTTPSignerV4a";
 
     /**
      * Return true if service is Amazon S3.

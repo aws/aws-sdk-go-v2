@@ -91,13 +91,13 @@ func parseS3ObjectLambdaAccessPointResource(a awsarn.ARN, resParts []string) (ar
 		return arn.S3ObjectLambdaAccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: fmt.Sprintf("service is not %s", s3ObjectsLambdaNamespace)}
 	}
 
+	if len(a.Region) == 0 {
+		return arn.S3ObjectLambdaAccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: fmt.Sprintf("%s region not set", s3ObjectsLambdaNamespace)}
+	}
+
 	accessPointARN, err := arn.ParseAccessPointResource(a, resParts[1:])
 	if err != nil {
 		return arn.S3ObjectLambdaAccessPointARN{}, err
-	}
-
-	if len(accessPointARN.Region) == 0 {
-		return arn.S3ObjectLambdaAccessPointARN{}, arn.InvalidARNError{ARN: a, Reason: fmt.Sprintf("%s region not set", s3ObjectsLambdaNamespace)}
 	}
 
 	return arn.S3ObjectLambdaAccessPointARN{

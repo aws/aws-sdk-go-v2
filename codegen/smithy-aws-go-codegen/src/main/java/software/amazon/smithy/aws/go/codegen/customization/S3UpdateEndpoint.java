@@ -190,7 +190,7 @@ public class S3UpdateEndpoint implements GoIntegration {
         private static final String USE_PATH_STYLE_OPTION = "UsePathStyle";
         private static final String USE_ACCELERATE_OPTION = "UseAccelerate";
         private static final String DISABLE_MRAP_OPTION = "DisableMultiRegionAccessPoints";
-        public static final String  V4A_SIGNER_INTERFACE_NAME = "httpSignerV4a";
+        private static final String  V4A_SIGNER_INTERFACE_NAME = "httpSignerV4a";
 
         // private function getter constant
         private static final String NOP_BUCKET_ACCESSOR = "nopGetBucketAccessor";

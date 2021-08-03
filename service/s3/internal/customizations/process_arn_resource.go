@@ -116,7 +116,8 @@ func (m *processARNResource) HandleSerialize(
 		if resourceRequest.UseFips() {
 			// Do not allow Fips support within multi-region arns.
 			if len(resolveRegion) == 0 {
-				return out, metadata, s3shared.NewInvalidARNWithFIPSError(tv, nil)
+				return out, metadata, s3shared.NewClientConfiguredForFIPSError(
+					tv, resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 			}
 
 			// if use arn region is enabled and request signing region is not same as arn region

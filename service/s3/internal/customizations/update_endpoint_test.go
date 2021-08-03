@@ -1268,6 +1268,23 @@ func TestMultiRegionAccessPoints_UpdateEndpoint(t *testing.T) {
 			expectedSigningName:   "s3",
 			expectedSigningRegion: "*",
 		},
+		"with client region as fips": {
+			options: s3.Options{
+				Region: "fips-us-west-2",
+			},
+			bucket:      "arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedErr: "client configured for fips but cross-region resource ARN provided",
+		},
+		"Accesspoint ARN with region and MRAP disabled": {
+			options: s3.Options{
+				Region:                         "us-west-2",
+				DisableMultiRegionAccessPoints: false,
+			},
+			bucket:                "arn:aws:s3:us-west-2:123456789012:accesspoint:mfzwi23gnjvgw.mrap",
+			expectedReqURL:        "https://mfzwi23gnjvgw.mrap-123456789012.s3-accesspoint.us-west-2.amazonaws.com/",
+			expectedSigningName:   "s3",
+			expectedSigningRegion: "us-west-2",
+		},
 	}
 
 	for name, c := range cases {
