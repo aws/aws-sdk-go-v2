@@ -61,8 +61,8 @@ type DescribeNodeConfigurationOptionsInput struct {
 	// Constraints: minimum 100, maximum 500.
 	MaxRecords *int32
 
-	// The account used to create or copy the snapshot. Required if you are restoring a
-	// snapshot you do not own, optional if you own the snapshot.
+	// The Amazon Web Services account used to create or copy the snapshot. Required if
+	// you are restoring a snapshot you do not own, optional if you own the snapshot.
 	OwnerAccount *string
 
 	// The identifier of the snapshot to evaluate for possible node configurations.

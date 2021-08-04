@@ -37,9 +37,10 @@ type CreateVocabularyInput struct {
 	// This member is required.
 	LanguageCode types.LanguageCode
 
-	// The name of the vocabulary. The name must be unique within an AWS account. The
-	// name is case sensitive. If you try to create a vocabulary with the same name as
-	// a previous vocabulary you will receive a ConflictException error.
+	// The name of the vocabulary. The name must be unique within an Amazon Web
+	// Services account. The name is case sensitive. If you try to create a vocabulary
+	// with the same name as a previous vocabulary you will receive a ConflictException
+	// error.
 	//
 	// This member is required.
 	VocabularyName *string
@@ -51,10 +52,10 @@ type CreateVocabularyInput struct {
 	// vocabulary. The URI must be in the same region as the API endpoint that you are
 	// calling. The general form is For more information about S3 object names, see
 	// Object Keys
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide. For more information about custom
 	// vocabularies, see Custom Vocabularies
-	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary).
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary).
 	VocabularyFileUri *string
 
 	noSmithyDocumentSerde

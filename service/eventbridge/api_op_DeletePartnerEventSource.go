@@ -11,9 +11,9 @@ import (
 )
 
 // This operation is used by SaaS partners to delete a partner event source. This
-// operation is not used by AWS customers. When you delete an event source, the
-// status of the corresponding partner event bus in the AWS customer account
-// becomes DELETED.
+// operation is not used by Amazon Web Services customers. When you delete an event
+// source, the status of the corresponding partner event bus in the Amazon Web
+// Services customer account becomes DELETED.
 func (c *Client) DeletePartnerEventSource(ctx context.Context, params *DeletePartnerEventSourceInput, optFns ...func(*Options)) (*DeletePartnerEventSourceOutput, error) {
 	if params == nil {
 		params = &DeletePartnerEventSourceInput{}
@@ -31,7 +31,8 @@ func (c *Client) DeletePartnerEventSource(ctx context.Context, params *DeletePar
 
 type DeletePartnerEventSourceInput struct {
 
-	// The AWS account ID of the AWS customer that the event source was created for.
+	// The Amazon Web Services account ID of the Amazon Web Services customer that the
+	// event source was created for.
 	//
 	// This member is required.
 	Account *string

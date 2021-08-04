@@ -656,15 +656,15 @@ type ConnectionInput struct {
 	// an Amazon Virtual Private Cloud environment (Amazon VPC).
 	//
 	// * MARKETPLACE - Uses
-	// configuration settings contained in a connector purchased from Marketplace to
-	// read from and write to data stores that are not natively supported by Glue.
+	// configuration settings contained in a connector purchased from Amazon Web
+	// Services Marketplace to read from and write to data stores that are not natively
+	// supported by Glue.
 	//
-	// *
-	// CUSTOM - Uses configuration settings contained in a custom connector to read
-	// from and write to data stores that are not natively supported by Glue.
+	// * CUSTOM - Uses configuration settings contained in a custom
+	// connector to read from and write to data stores that are not natively supported
+	// by Glue.
 	//
-	// SFTP is
-	// not supported.
+	// SFTP is not supported.
 	//
 	// This member is required.
 	ConnectionType ConnectionType

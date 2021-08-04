@@ -63,7 +63,7 @@ type ModifyEndpointAccessOutput struct {
 	// The port number on which the cluster accepts incoming connections.
 	Port int32
 
-	// The account ID of the owner of the cluster.
+	// The Amazon Web Services account ID of the owner of the cluster.
 	ResourceOwner *string
 
 	// The subnet group name where Amazon Redshift chooses to deploy the endpoint.

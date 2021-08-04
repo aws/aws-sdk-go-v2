@@ -14,9 +14,6 @@ import (
 )
 
 // Retrieves information about the storage configuration for IoT SiteWise.
-// Exporting data to Amazon S3 is currently in preview release and is subject to
-// change. We recommend that you use this feature only with test data, and not in
-// production environments.
 func (c *Client) DescribeStorageConfiguration(ctx context.Context, params *DescribeStorageConfigurationInput, optFns ...func(*Options)) (*DescribeStorageConfigurationOutput, error) {
 	if params == nil {
 		params = &DescribeStorageConfigurationInput{}

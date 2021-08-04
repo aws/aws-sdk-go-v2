@@ -30,7 +30,7 @@ func (c *Client) RevokeEndpointAccess(ctx context.Context, params *RevokeEndpoin
 
 type RevokeEndpointAccessInput struct {
 
-	// The account ID whose access is to be revoked.
+	// The Amazon Web Services account ID whose access is to be revoked.
 	Account *string
 
 	// The cluster to revoke access from.
@@ -47,7 +47,7 @@ type RevokeEndpointAccessInput struct {
 }
 
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
-// endpoint access to a cluster across accounts.
+// endpoint access to a cluster across Amazon Web Services accounts.
 type RevokeEndpointAccessOutput struct {
 
 	// Indicates whether all VPCs in the grantee account are allowed access to the
@@ -69,10 +69,10 @@ type RevokeEndpointAccessOutput struct {
 	// The number of Redshift-managed VPC endpoints created for the authorization.
 	EndpointCount int32
 
-	// The account ID of the grantee of the cluster.
+	// The Amazon Web Services account ID of the grantee of the cluster.
 	Grantee *string
 
-	// The account ID of the cluster owner.
+	// The Amazon Web Services account ID of the cluster owner.
 	Grantor *string
 
 	// The status of the authorization action.

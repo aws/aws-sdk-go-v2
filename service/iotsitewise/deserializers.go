@@ -15000,6 +15000,15 @@ func awsRestjson1_deserializeDocumentTumblingWindow(v **types.TumblingWindow, va
 				sv.Interval = ptr.String(jtv)
 			}
 
+		case "offset":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Offset to be of type string, got %T instead", value)
+				}
+				sv.Offset = ptr.String(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

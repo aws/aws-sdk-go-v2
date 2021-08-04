@@ -33,7 +33,18 @@ type ListImagesInput struct {
 	// Requests a list of images with a specific recipe name.
 	ByName bool
 
-	// The filters.
+	// Use the following filters to streamline results:
+	//
+	// * name
+	//
+	// * osVersion
+	//
+	// *
+	// platform
+	//
+	// * type
+	//
+	// * version
 	Filters []types.Filter
 
 	// Includes deprecated images in the response list.

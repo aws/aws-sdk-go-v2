@@ -7,6 +7,340 @@ import (
 	"time"
 )
 
+// A time range, set in seconds, between two points in the call.
+type AbsoluteTimeRange struct {
+
+	// A value that indicates the end of the time range in milliseconds. To set
+	// absolute time range, you must specify a start time and an end time. For example,
+	// if you specify the following values:
+	//
+	// * StartTime - 10000
+	//
+	// * Endtime -
+	// 50000
+	//
+	// The time range is set between 10,000 milliseconds and 50,000 milliseconds
+	// into the call.
+	EndTime *int64
+
+	// A time range from the beginning of the call to the value that you've specified.
+	// For example, if you specify 100000, the time range is set to the first 100,000
+	// milliseconds of the call.
+	First *int64
+
+	// A time range from the value that you've specified to the end of the call. For
+	// example, if you specify 100000, the time range is set to the last 100,000
+	// milliseconds of the call.
+	Last *int64
+
+	// A value that indicates the beginning of the time range in seconds. To set
+	// absolute time range, you must specify a start time and an end time. For example,
+	// if you specify the following values:
+	//
+	// * StartTime - 10000
+	//
+	// * Endtime -
+	// 50000
+	//
+	// The time range is set between 10,000 milliseconds and 50,000 milliseconds
+	// into the call.
+	StartTime *int64
+
+	noSmithyDocumentSerde
+}
+
+// Describes an asynchronous analytics job that was created with the
+// StartAnalyticsJob operation.
+type CallAnalyticsJob struct {
+
+	// The name of the call analytics job.
+	CallAnalyticsJobName *string
+
+	// The status of the analytics job.
+	CallAnalyticsJobStatus CallAnalyticsJobStatus
+
+	// Shows numeric values to indicate the channel assigned to the agent's audio and
+	// the channel assigned to the customer's audio.
+	ChannelDefinitions []ChannelDefinition
+
+	// A timestamp that shows when the analytics job was completed.
+	CompletionTime *time.Time
+
+	// A timestamp that shows when the analytics job was created.
+	CreationTime *time.Time
+
+	// The Amazon Resource Number (ARN) that you use to get access to the analytics
+	// job.
+	DataAccessRoleArn *string
+
+	// If the AnalyticsJobStatus is FAILED, this field contains information about why
+	// the job failed. The FailureReason field can contain one of the following
+	// values:
+	//
+	// * Unsupported media format: The media format specified in the
+	// MediaFormat field of the request isn't valid. See the description of the
+	// MediaFormat field for a list of valid values.
+	//
+	// * The media format provided does
+	// not match the detected media format: The media format of the audio file doesn't
+	// match the format specified in the MediaFormat field in the request. Check the
+	// media format of your media file and make sure the two values match.
+	//
+	// * Invalid
+	// sample rate for audio file: The sample rate specified in the
+	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
+	// 8000 and 48000 Hertz.
+	//
+	// * The sample rate provided does not match the detected
+	// sample rate: The sample rate in the audio file doesn't match the sample rate
+	// specified in the MediaSampleRateHertz field in the request. Check the sample
+	// rate of your media file and make sure that the two values match.
+	//
+	// * Invalid file
+	// size: file size too large: The size of your audio file is larger than what
+	// Amazon Transcribe Medical can process. For more information, see Guidelines and
+	// Quotas in the Amazon Transcribe Medical Guide
+	//
+	// * Invalid number of channels:
+	// number of channels too large: Your audio contains more channels than Amazon
+	// Transcribe Medical is configured to process. To request additional channels, see
+	// Amazon Transcribe Medical Endpoints and Quotas in the Amazon Web Services
+	// General Reference (https://docs.aws.amazon.com/general/latest/gr/Welcome.html).
+	FailureReason *string
+
+	// A value between zero and one that Amazon Transcribe assigned to the language
+	// that it identified in the source audio. This value appears only when you don't
+	// provide a single language code. Larger values indicate that Amazon Transcribe
+	// has higher confidence in the language that it identified
+	IdentifiedLanguageScore *float32
+
+	// If you know the language spoken between the customer and the agent, specify a
+	// language code for this field. If you don't know the language, you can leave this
+	// field blank, and Amazon Transcribe will use machine learning to automatically
+	// identify the language. To improve the accuracy of language identification, you
+	// can provide an array containing the possible language codes for the language
+	// spoken in your audio. The following list shows the supported languages and
+	// corresponding language codes for call analytics jobs:
+	//
+	// * Gulf Arabic (ar-AE)
+	//
+	// *
+	// Mandarin Chinese, Mainland (zh-CN)
+	//
+	// * Australian English (en-AU)
+	//
+	// * British
+	// English (en-GB)
+	//
+	// * Indian English (en-IN)
+	//
+	// * Irish English (en-IE)
+	//
+	// * Scottish
+	// English (en-AB)
+	//
+	// * US English (en-US)
+	//
+	// * Welsh English (en-WL)
+	//
+	// * Spanish
+	// (es-ES)
+	//
+	// * US Spanish (es-US)
+	//
+	// * French (fr-FR)
+	//
+	// * Canadian French (fr-CA)
+	//
+	// *
+	// German (de-DE)
+	//
+	// * Swiss German (de-CH)
+	//
+	// * Indian Hindi (hi-IN)
+	//
+	// * Italian
+	// (it-IT)
+	//
+	// * Japanese (ja-JP)
+	//
+	// * Korean (ko-KR)
+	//
+	// * Portuguese (pt-PT)
+	//
+	// * Brazilian
+	// Portuguese (pt-BR)
+	LanguageCode LanguageCode
+
+	// Describes the input media file in a transcription request.
+	Media *Media
+
+	// The format of the input audio file. Note: for call analytics jobs, only the
+	// following media formats are supported: MP3, MP4, WAV, FLAC, OGG, and WebM.
+	MediaFormat MediaFormat
+
+	// The sample rate, in Hertz, of the audio.
+	MediaSampleRateHertz *int32
+
+	// Provides information about the settings used to run a transcription job.
+	Settings *CallAnalyticsJobSettings
+
+	// A timestamp that shows when the analytics job started processing.
+	StartTime *time.Time
+
+	// Identifies the location of a transcription.
+	Transcript *Transcript
+
+	noSmithyDocumentSerde
+}
+
+// Provides optional settings for the CallAnalyticsJob operation.
+type CallAnalyticsJobSettings struct {
+
+	// Settings for content redaction within a transcription job.
+	ContentRedaction *ContentRedaction
+
+	// The structure used to describe a custom language model.
+	LanguageModelName *string
+
+	// When you run a call analytics job, you can specify the language spoken in the
+	// audio, or you can have Amazon Transcribe identify the language for you. To
+	// specify a language, specify an array with one language code. If you don't know
+	// the language, you can leave this field blank and Amazon Transcribe will use
+	// machine learning to identify the language for you. To improve the ability of
+	// Amazon Transcribe to correctly identify the language, you can provide an array
+	// of the languages that can be present in the audio. The following list shows the
+	// supported languages and corresponding language codes for call analytics jobs:
+	//
+	// *
+	// Gulf Arabic (ar-AE)
+	//
+	// * Mandarin Chinese, Mainland (zh-CN)
+	//
+	// * Australian English
+	// (en-AU)
+	//
+	// * British English (en-GB)
+	//
+	// * Indian English (en-IN)
+	//
+	// * Irish English
+	// (en-IE)
+	//
+	// * Scottish English (en-AB)
+	//
+	// * US English (en-US)
+	//
+	// * Welsh English
+	// (en-WL)
+	//
+	// * Spanish (es-ES)
+	//
+	// * US Spanish (es-US)
+	//
+	// * French (fr-FR)
+	//
+	// * Canadian
+	// French (fr-CA)
+	//
+	// * German (de-DE)
+	//
+	// * Swiss German (de-CH)
+	//
+	// * Indian Hindi
+	// (hi-IN)
+	//
+	// * Italian (it-IT)
+	//
+	// * Japanese (ja-JP)
+	//
+	// * Korean (ko-KR)
+	//
+	// * Portuguese
+	// (pt-PT)
+	//
+	// * Brazilian Portuguese (pt-BR)
+	LanguageOptions []LanguageCode
+
+	// Set to mask to remove filtered text from the transcript and replace it with
+	// three asterisks ("***") as placeholder text. Set to remove to remove filtered
+	// text from the transcript without using placeholder text. Set to tag to mark the
+	// word in the transcription output that matches the vocabulary filter. When you
+	// set the filter method to tag, the words matching your vocabulary filter are not
+	// masked or removed.
+	VocabularyFilterMethod VocabularyFilterMethod
+
+	// The name of the vocabulary filter to use when running a call analytics job. The
+	// filter that you specify must have the same language code as the analytics job.
+	VocabularyFilterName *string
+
+	// The name of a vocabulary to use when processing the call analytics job.
+	VocabularyName *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides summary information about a call analytics job.
+type CallAnalyticsJobSummary struct {
+
+	// The name of the call analytics job.
+	CallAnalyticsJobName *string
+
+	// The status of the call analytics job.
+	CallAnalyticsJobStatus CallAnalyticsJobStatus
+
+	// A timestamp that shows when the job was completed.
+	CompletionTime *time.Time
+
+	// A timestamp that shows when the call analytics job was created.
+	CreationTime *time.Time
+
+	// If the CallAnalyticsJobStatus is FAILED, a description of the error.
+	FailureReason *string
+
+	// The language of the transcript in the source audio file.
+	LanguageCode LanguageCode
+
+	// A timestamp that shows when the job began processing.
+	StartTime *time.Time
+
+	noSmithyDocumentSerde
+}
+
+// An object that contains the rules and additional information about a call
+// analytics category.
+type CategoryProperties struct {
+
+	// The name of the call analytics category.
+	CategoryName *string
+
+	// A timestamp that shows when the call analytics category was created.
+	CreateTime *time.Time
+
+	// A timestamp that shows when the call analytics category was most recently
+	// updated.
+	LastUpdateTime *time.Time
+
+	// The rules used to create a call analytics category.
+	Rules []Rule
+
+	noSmithyDocumentSerde
+}
+
+// For a call analytics job, an object that indicates the audio channel that
+// belongs to the agent and the audio channel that belongs to the customer.
+type ChannelDefinition struct {
+
+	// A value that indicates the audio channel.
+	ChannelId int32
+
+	// Indicates whether the person speaking on the audio channel is the agent or
+	// customer.
+	ParticipantRole ParticipantRole
+
+	noSmithyDocumentSerde
+}
+
 // Settings for content redaction within a transcription job.
 type ContentRedaction struct {
 
@@ -47,6 +381,36 @@ type InputDataConfig struct {
 	// The Amazon S3 prefix you specify to access the plain text files that you use to
 	// tune your custom language model.
 	TuningDataS3Uri *string
+
+	noSmithyDocumentSerde
+}
+
+// An object that enables you to configure your category to be applied to call
+// analytics jobs where either the customer or agent was interrupted.
+type InterruptionFilter struct {
+
+	// An object you can use to specify a time range (in milliseconds) for when you'd
+	// want to find the interruption. For example, you could search for an interruption
+	// between the 30,000 millisecond mark and the 45,000 millisecond mark. You could
+	// also specify the time period as the first 15,000 milliseconds or the last 15,000
+	// milliseconds.
+	AbsoluteTimeRange *AbsoluteTimeRange
+
+	// Set to TRUE to look for a time period where there was no interruption.
+	Negate *bool
+
+	// Indicates whether the caller or customer was interrupting.
+	ParticipantRole ParticipantRole
+
+	// An object that allows percentages to specify the proportion of the call where
+	// there was a interruption. For example, you can specify the first half of the
+	// call. You can also specify the period of time between halfway through to
+	// three-quarters of the way through the call. Because the length of conversation
+	// can vary between calls, you can apply relative time ranges across all calls.
+	RelativeTimeRange *RelativeTimeRange
+
+	// The duration of the interruption.
+	Threshold *int64
 
 	noSmithyDocumentSerde
 }
@@ -117,9 +481,13 @@ type Media struct {
 	// The S3 object location of the input media file. The URI must be in the same
 	// region as the API endpoint that you are calling. The general form is: For
 	// example: For more information about S3 object names, see Object Keys
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide.
 	MediaFileUri *string
+
+	// The S3 object location for your redacted output media file. This is only
+	// supported for call analytics jobs.
+	RedactedMediaFileUri *string
 
 	noSmithyDocumentSerde
 }
@@ -203,8 +571,8 @@ type MedicalTranscriptionJob struct {
 	// If you don't specify the sample rate, Amazon Transcribe Medical determines it
 	// for you. If you choose to specify the sample rate, it must match the rate
 	// detected by Amazon Transcribe Medical. In most cases, you should leave the
-	// MediaSampleHertz blank and let Amazon Transcribe Medical determine the sample
-	// rate.
+	// MedicalMediaSampleHertz blank and let Amazon Transcribe Medical determine the
+	// sample rate.
 	MediaSampleRateHertz *int32
 
 	// The name for a given medical transcription job.
@@ -233,7 +601,9 @@ type MedicalTranscriptionJob struct {
 
 	// The type of speech in the transcription job. CONVERSATION is generally used for
 	// patient-physician dialogues. DICTATION is the setting for physicians speaking
-	// their notes after seeing a patient. For more information, see how-it-works-med
+	// their notes after seeing a patient. For more information, see What is Amazon
+	// Transcribe Medical?
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/what-is-transcribe-med.html).
 	Type Type
 
 	noSmithyDocumentSerde
@@ -335,6 +705,163 @@ type ModelSettings struct {
 	noSmithyDocumentSerde
 }
 
+// An object that enables you to configure your category to be applied to call
+// analytics jobs where either the customer or agent was interrupted.
+type NonTalkTimeFilter struct {
+
+	// An object you can use to specify a time range (in milliseconds) for when no one
+	// is talking. For example, you could specify a time period between the 30,000
+	// millisecond mark and the 45,000 millisecond mark. You could also specify the
+	// time period as the first 15,000 milliseconds or the last 15,000 milliseconds.
+	AbsoluteTimeRange *AbsoluteTimeRange
+
+	// Set to TRUE to look for a time period when people were talking.
+	Negate *bool
+
+	// An object that allows percentages to specify the proportion of the call where
+	// there was silence. For example, you can specify the first half of the call. You
+	// can also specify the period of time between halfway through to three-quarters of
+	// the way through the call. Because the length of conversation can vary between
+	// calls, you can apply relative time ranges across all calls.
+	RelativeTimeRange *RelativeTimeRange
+
+	// The duration of the period when neither the customer nor agent was talking.
+	Threshold *int64
+
+	noSmithyDocumentSerde
+}
+
+// An object that allows percentages to specify the proportion of the call where
+// you would like to apply a filter. For example, you can specify the first half of
+// the call. You can also specify the period of time between halfway through to
+// three-quarters of the way through the call. Because the length of conversation
+// can vary between calls, you can apply relative time ranges across all calls.
+type RelativeTimeRange struct {
+
+	// A value that indicates the percentage of the end of the time range. To set a
+	// relative time range, you must specify a start percentage and an end percentage.
+	// For example, if you specify the following values:
+	//
+	// * StartPercentage - 10
+	//
+	// *
+	// EndPercentage - 50
+	//
+	// This looks at the time range starting from 10% of the way
+	// into the call to 50% of the way through the call. For a call that lasts 100,000
+	// milliseconds, this example range would apply from the 10,000 millisecond mark to
+	// the 50,000 millisecond mark.
+	EndPercentage *int32
+
+	// A range that takes the portion of the call up to the time in milliseconds set by
+	// the value that you've specified. For example, if you specify 120000, the time
+	// range is set for the first 120,000 milliseconds of the call.
+	First *int32
+
+	// A range that takes the portion of the call from the time in milliseconds set by
+	// the value that you've specified to the end of the call. For example, if you
+	// specify 120000, the time range is set for the last 120,000 milliseconds of the
+	// call.
+	Last *int32
+
+	// A value that indicates the percentage of the beginning of the time range. To set
+	// a relative time range, you must specify a start percentage and an end
+	// percentage. For example, if you specify the following values:
+	//
+	// * StartPercentage
+	// - 10
+	//
+	// * EndPercentage - 50
+	//
+	// This looks at the time range starting from 10% of
+	// the way into the call to 50% of the way through the call. For a call that lasts
+	// 100,000 milliseconds, this example range would apply from the 10,000 millisecond
+	// mark to the 50,000 millisecond mark.
+	StartPercentage *int32
+
+	noSmithyDocumentSerde
+}
+
+// A condition in the call between the customer and the agent that you want to
+// filter for.
+//
+// The following types satisfy this interface:
+//  RuleMemberNonTalkTimeFilter
+//  RuleMemberInterruptionFilter
+//  RuleMemberTranscriptFilter
+//  RuleMemberSentimentFilter
+type Rule interface {
+	isRule()
+}
+
+// A condition for a time period when neither the customer nor the agent was
+// talking.
+type RuleMemberNonTalkTimeFilter struct {
+	Value NonTalkTimeFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleMemberNonTalkTimeFilter) isRule() {}
+
+// A condition for a time period when either the customer or agent was interrupting
+// the other person.
+type RuleMemberInterruptionFilter struct {
+	Value InterruptionFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleMemberInterruptionFilter) isRule() {}
+
+// A condition that catches particular words or phrases based on a exact match. For
+// example, if you set the phrase "I want to speak to the manager", only that exact
+// phrase will be returned.
+type RuleMemberTranscriptFilter struct {
+	Value TranscriptFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleMemberTranscriptFilter) isRule() {}
+
+// A condition that is applied to a particular customer sentiment.
+type RuleMemberSentimentFilter struct {
+	Value SentimentFilter
+
+	noSmithyDocumentSerde
+}
+
+func (*RuleMemberSentimentFilter) isRule() {}
+
+// An object that enables you to specify a particular customer or agent sentiment.
+// If at least 50 percent of the conversation turns (the back-and-forth between two
+// speakers) in a specified time period match the specified sentiment, Amazon
+// Transcribe will consider the sentiment a match.
+type SentimentFilter struct {
+
+	// An array that enables you to specify sentiments for the customer or agent. You
+	// can specify one or more values.
+	//
+	// This member is required.
+	Sentiments []SentimentValue
+
+	// The time range, measured in seconds, of the sentiment.
+	AbsoluteTimeRange *AbsoluteTimeRange
+
+	// Set to TRUE to look for sentiments that weren't specified in the request.
+	Negate *bool
+
+	// A value that determines whether the sentiment belongs to the customer or the
+	// agent.
+	ParticipantRole ParticipantRole
+
+	// The time range, set in percentages, that correspond to proportion of the call.
+	RelativeTimeRange *RelativeTimeRange
+
+	noSmithyDocumentSerde
+}
+
 // Provides optional settings for the StartTranscriptionJob operation.
 type Settings struct {
 
@@ -406,6 +933,43 @@ type Transcript struct {
 	// Amazon Transcribe, this is a shareable URL that provides secure access to that
 	// location.
 	TranscriptFileUri *string
+
+	noSmithyDocumentSerde
+}
+
+// Matches the output of the transcription to either the specific phrases that you
+// specify, or the intent of the phrases that you specify.
+type TranscriptFilter struct {
+
+	// The phrases that you're specifying for the transcript filter to match.
+	//
+	// This member is required.
+	Targets []string
+
+	// Matches the phrase to the transcription output in a word for word fashion. For
+	// example, if you specify the phrase "I want to speak to the manager." Amazon
+	// Transcribe attempts to match that specific phrase to the transcription.
+	//
+	// This member is required.
+	TranscriptFilterType TranscriptFilterType
+
+	// A time range, set in seconds, between two points in the call.
+	AbsoluteTimeRange *AbsoluteTimeRange
+
+	// If TRUE, the rule that you specify is applied to everything except for the
+	// phrases that you specify.
+	Negate *bool
+
+	// Determines whether the customer or the agent is speaking the phrases that you've
+	// specified.
+	ParticipantRole ParticipantRole
+
+	// An object that allows percentages to specify the proportion of the call where
+	// you would like to apply a filter. For example, you can specify the first half of
+	// the call. You can also specify the period of time between halfway through to
+	// three-quarters of the way through the call. Because the length of conversation
+	// can vary between calls, you can apply relative time ranges across all calls.
+	RelativeTimeRange *RelativeTimeRange
 
 	noSmithyDocumentSerde
 }
@@ -598,3 +1162,14 @@ type VocabularyInfo struct {
 }
 
 type noSmithyDocumentSerde = smithydocument.NoSerde
+
+// UnknownUnionMember is returned when a union member is returned over the wire,
+// but has an unknown tag.
+type UnknownUnionMember struct {
+	Tag   string
+	Value []byte
+
+	noSmithyDocumentSerde
+}
+
+func (*UnknownUnionMember) isRule() {}

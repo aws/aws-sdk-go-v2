@@ -52,7 +52,7 @@ type CreateClusterInput struct {
 	// with a hyphen or contain two consecutive hyphens.
 	//
 	// * Must be unique for all
-	// clusters within an account.
+	// clusters within an Amazon Web Services account.
 	//
 	// Example: myexamplecluster
 	//
@@ -119,13 +119,13 @@ type CreateClusterInput struct {
 	// Accelerator) when it is created. Possible values include the following.
 	//
 	// *
-	// enabled - Use AQUA if it is available for the current Region and Amazon Redshift
-	// node type.
+	// enabled - Use AQUA if it is available for the current Amazon Web Services Region
+	// and Amazon Redshift node type.
 	//
 	// * disabled - Don't use AQUA.
 	//
-	// * auto - Amazon Redshift determines
-	// whether to use AQUA.
+	// * auto - Amazon
+	// Redshift determines whether to use AQUA.
 	AquaConfigurationStatus types.AquaConfigurationStatus
 
 	// The number of days that automated snapshots are retained. If the value is 0,

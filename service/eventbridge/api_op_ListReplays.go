@@ -30,7 +30,7 @@ func (c *Client) ListReplays(ctx context.Context, params *ListReplaysInput, optF
 
 type ListReplaysInput struct {
 
-	// The ARN of the event source associated with the replay.
+	// The ARN of the archive from which the events are replayed.
 	EventSourceArn *string
 
 	// The maximum number of replays to retrieve.

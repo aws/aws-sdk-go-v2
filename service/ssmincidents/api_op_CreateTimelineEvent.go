@@ -33,12 +33,8 @@ func (c *Client) CreateTimelineEvent(ctx context.Context, params *CreateTimeline
 
 type CreateTimelineEventInput struct {
 
-	// A token ensuring that the action is called only once with the specified details.
-	//
-	// This member is required.
-	ClientToken *string
-
-	// A short description of the event.
+	// A valid JSON string. There is no other schema imposed. A short description of
+	// the event.
 	//
 	// This member is required.
 	EventData *string
@@ -58,6 +54,9 @@ type CreateTimelineEventInput struct {
 	//
 	// This member is required.
 	IncidentRecordArn *string
+
+	// A token ensuring that the action is called only once with the specified details.
+	ClientToken *string
 
 	noSmithyDocumentSerde
 }

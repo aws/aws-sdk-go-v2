@@ -47,8 +47,8 @@ type CreateEndpointAccessInput struct {
 	// The cluster identifier of the cluster to access.
 	ClusterIdentifier *string
 
-	// The account ID of the owner of the cluster. This is only required if the cluster
-	// is in another account.
+	// The Amazon Web Services account ID of the owner of the cluster. This is only
+	// required if the cluster is in another Amazon Web Services account.
 	ResourceOwner *string
 
 	// The security group that defines the ports, protocols, and sources for inbound
@@ -79,7 +79,7 @@ type CreateEndpointAccessOutput struct {
 	// The port number on which the cluster accepts incoming connections.
 	Port int32
 
-	// The account ID of the owner of the cluster.
+	// The Amazon Web Services account ID of the owner of the cluster.
 	ResourceOwner *string
 
 	// The subnet group name where Amazon Redshift chooses to deploy the endpoint.

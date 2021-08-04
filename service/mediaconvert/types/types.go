@@ -2447,6 +2447,23 @@ type EsamSignalProcessingNotification struct {
 	noSmithyDocumentSerde
 }
 
+// Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h
+// Content Advisory.
+type ExtendedDataServices struct {
+
+	// The action to take on copy and redistribution control XDS packets. If you select
+	// PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will
+	// be removed in output captions.
+	CopyProtectionAction CopyProtectionAction
+
+	// The action to take on content advisory XDS packets. If you select PASSTHROUGH,
+	// packets will not be changed. If you select STRIP, any packets will be removed in
+	// output captions.
+	VchipAction VchipAction
+
+	noSmithyDocumentSerde
+}
+
 // Settings for F4v container
 type F4vSettings struct {
 
@@ -4219,6 +4236,10 @@ type JobSettings struct {
 	// you can ignore these settings.
 	Esam *EsamSettings
 
+	// Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h
+	// Content Advisory.
+	ExtendedDataServices *ExtendedDataServices
+
 	// Use Inputs (inputs) to define source file used in the transcode job. There can
 	// be multiple inputs add in a job. These inputs will be concantenated together to
 	// create the output.
@@ -4354,6 +4375,10 @@ type JobTemplateSettings struct {
 	// Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion,
 	// you can ignore these settings.
 	Esam *EsamSettings
+
+	// Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h
+	// Content Advisory.
+	ExtendedDataServices *ExtendedDataServices
 
 	// Use Inputs (inputs) to define the source file used in the transcode job. There
 	// can only be one input in a job template. Using the API, you can include multiple

@@ -42,9 +42,9 @@ type StartMedicalTranscriptionJobInput struct {
 	Media *types.Media
 
 	// The name of the medical transcription job. You can't use the strings "." or ".."
-	// by themselves as the job name. The name must also be unique within an AWS
-	// account. If you try to create a medical transcription job with the same name as
-	// a previous medical transcription job, you get a ConflictException error.
+	// by themselves as the job name. The name must also be unique within an Amazon Web
+	// Services account. If you try to create a medical transcription job with the same
+	// name as a previous medical transcription job, you get a ConflictException error.
 	//
 	// This member is required.
 	MedicalTranscriptionJobName *string
@@ -57,10 +57,11 @@ type StartMedicalTranscriptionJobInput struct {
 	// Transcribe Medical to put files in the bucket. For more information, see
 	// Permissions Required for IAM User Roles
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user).
-	// You can specify an AWS Key Management Service (KMS) key to encrypt the output of
-	// your transcription using the OutputEncryptionKMSKeyId parameter. If you don't
-	// specify a KMS key, Amazon Transcribe Medical uses the default Amazon S3 key for
-	// server-side encryption of transcripts that are placed in your S3 bucket.
+	// You can specify an Amazon Web Services Key Management Service (KMS) key to
+	// encrypt the output of your transcription using the OutputEncryptionKMSKeyId
+	// parameter. If you don't specify a KMS key, Amazon Transcribe Medical uses the
+	// default Amazon S3 key for server-side encryption of transcripts that are placed
+	// in your S3 bucket.
 	//
 	// This member is required.
 	OutputBucketName *string
@@ -95,32 +96,32 @@ type StartMedicalTranscriptionJobInput struct {
 	// sample rate.
 	MediaSampleRateHertz *int32
 
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used
-	// to encrypt the output of the transcription job. The user calling the
-	// StartMedicalTranscriptionJob operation must have permission to use the specified
-	// KMS key. You use either of the following to identify a KMS key in the current
-	// account:
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service
+	// (KMS) key used to encrypt the output of the transcription job. The user calling
+	// the StartMedicalTranscriptionJob operation must have permission to use the
+	// specified KMS key. You use either of the following to identify a KMS key in the
+	// current account:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * KMS Key Alias:
-	// "alias/ExampleAlias"
+	// * KMS
+	// Key Alias: "alias/ExampleAlias"
 	//
-	// You can use either of the following to identify a KMS key
-	// in the current account or another account:
+	// You can use either of the following to identify
+	// a KMS key in the current account or another account:
 	//
-	// * Amazon Resource Name (ARN) of a
-	// KMS key in the current account or another account: "arn:aws:kms:region:account
-	// ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * Amazon Resource Name
+	// (ARN) of a KMS key in the current account or another account:
+	// "arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * ARN of a KMS Key Alias:
-	// "arn:aws:kms:region:account ID:alias/ExampleAlias"
+	// * ARN
+	// of a KMS Key Alias: "arn:aws:kms:region:account ID:alias/ExampleAlias"
 	//
-	// If you don't specify an
-	// encryption key, the output of the medical transcription job is encrypted with
-	// the default Amazon S3 key (SSE-S3). If you specify a KMS key to encrypt your
-	// output, you must also specify an output location in the OutputBucketName
-	// parameter.
+	// If you
+	// don't specify an encryption key, the output of the medical transcription job is
+	// encrypted with the default Amazon S3 key (SSE-S3). If you specify a KMS key to
+	// encrypt your output, you must also specify an output location in the
+	// OutputBucketName parameter.
 	OutputEncryptionKMSKeyId *string
 
 	// You can specify a location in an Amazon S3 bucket to store the output of your

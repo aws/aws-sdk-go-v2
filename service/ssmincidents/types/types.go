@@ -275,8 +275,7 @@ type IncidentRecord struct {
 	// The chat channel used for collaboration during an incident.
 	ChatChannel ChatChannel
 
-	// The SNS targets that AWS Chatbot uses to notify the chat channels and perform
-	// actions on the incident record.
+	// The SNS targets that are notified when updates are made to an incident.
 	NotificationTargets []NotificationTargetItem
 
 	// The time at which the incident was resolved. This appears as a timeline event.
@@ -371,9 +370,7 @@ type IncidentTemplate struct {
 	// same incident.
 	DedupeString *string
 
-	// The SNS targets that AWS Chatbot uses to notify the chat channel of updates to
-	// an incident. You can also make updates to the incident through the chat channel
-	// using the SNS topics.
+	// The SNS targets that are notified when updates are made to an incident.
 	NotificationTargets []NotificationTargetItem
 
 	// The summary of the incident. The summary is a brief synopsis of what occurred,
@@ -450,7 +447,7 @@ type ItemValueMemberMetricDefinition struct {
 
 func (*ItemValueMemberMetricDefinition) isItemValue() {}
 
-// The SNS topic that's used by AWS Chatbot to notify the incidents chat channel.
+// The SNS targets that are notified when updates are made to an incident.
 //
 // The following types satisfy this interface:
 //  NotificationTargetItemMemberSnsTopicArn
@@ -581,6 +578,9 @@ type ReplicationSet struct {
 	//
 	// This member is required.
 	Status ReplicationSetStatus
+
+	// The Amazon Resource Name (ARN) of the replication set.
+	Arn *string
 
 	noSmithyDocumentSerde
 }

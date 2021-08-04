@@ -18,16 +18,16 @@ import (
 
 // Returns one or more snapshot objects, which contain metadata about your cluster
 // snapshots. By default, this operation returns information about all snapshots of
-// all clusters that are owned by your account. No information is returned for
-// snapshots owned by inactive accounts. If you specify both tag keys and tag
-// values in the same request, Amazon Redshift returns all snapshots that match any
-// combination of the specified keys and values. For example, if you have owner and
-// environment for tag keys, and admin and test for tag values, all snapshots that
-// have any combination of those values are returned. Only snapshots that you own
-// are returned in the response; shared snapshots are not returned with the tag key
-// and tag value request parameters. If both tag keys and values are omitted from
-// the request, snapshots are returned regardless of whether they have tag keys or
-// values associated with them.
+// all clusters that are owned by your Amazon Web Services account. No information
+// is returned for snapshots owned by inactive Amazon Web Services accounts. If you
+// specify both tag keys and tag values in the same request, Amazon Redshift
+// returns all snapshots that match any combination of the specified keys and
+// values. For example, if you have owner and environment for tag keys, and admin
+// and test for tag values, all snapshots that have any combination of those values
+// are returned. Only snapshots that you own are returned in the response; shared
+// snapshots are not returned with the tag key and tag value request parameters. If
+// both tag keys and values are omitted from the request, snapshots are returned
+// regardless of whether they have tag keys or values associated with them.
 func (c *Client) DescribeClusterSnapshots(ctx context.Context, params *DescribeClusterSnapshotsInput, optFns ...func(*Options)) (*DescribeClusterSnapshotsOutput, error) {
 	if params == nil {
 		params = &DescribeClusterSnapshotsInput{}
@@ -90,9 +90,10 @@ type DescribeClusterSnapshotsInput struct {
 	// Constraints: minimum 20, maximum 100.
 	MaxRecords *int32
 
-	// The account used to create or copy the snapshot. Use this field to filter the
-	// results to snapshots owned by a particular account. To describe snapshots you
-	// own, either specify your account, or do not specify the parameter.
+	// The Amazon Web Services account used to create or copy the snapshot. Use this
+	// field to filter the results to snapshots owned by a particular account. To
+	// describe snapshots you own, either specify your Amazon Web Services account, or
+	// do not specify the parameter.
 	OwnerAccount *string
 
 	// The snapshot identifier of the snapshot about which to return information.

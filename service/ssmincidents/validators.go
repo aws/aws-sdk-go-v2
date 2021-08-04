@@ -979,9 +979,6 @@ func validateOpCreateTimelineEventInput(v *CreateTimelineEventInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateTimelineEventInput"}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if v.IncidentRecordArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IncidentRecordArn"))
 	}
@@ -1408,9 +1405,6 @@ func validateOpUpdateTimelineEventInput(v *UpdateTimelineEventInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateTimelineEventInput"}
-	if v.ClientToken == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
-	}
 	if v.IncidentRecordArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("IncidentRecordArn"))
 	}

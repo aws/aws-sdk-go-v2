@@ -4548,6 +4548,23 @@ func awsRestjson1_serializeDocumentEsamSignalProcessingNotification(v *types.Esa
 	return nil
 }
 
+func awsRestjson1_serializeDocumentExtendedDataServices(v *types.ExtendedDataServices, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.CopyProtectionAction) > 0 {
+		ok := object.Key("copyProtectionAction")
+		ok.String(string(v.CopyProtectionAction))
+	}
+
+	if len(v.VchipAction) > 0 {
+		ok := object.Key("vchipAction")
+		ok.String(string(v.VchipAction))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentF4vSettings(v *types.F4vSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -5988,6 +6005,13 @@ func awsRestjson1_serializeDocumentJobSettings(v *types.JobSettings, value smith
 		}
 	}
 
+	if v.ExtendedDataServices != nil {
+		ok := object.Key("extendedDataServices")
+		if err := awsRestjson1_serializeDocumentExtendedDataServices(v.ExtendedDataServices, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Inputs != nil {
 		ok := object.Key("inputs")
 		if err := awsRestjson1_serializeDocument__listOfInput(v.Inputs, ok); err != nil {
@@ -6066,6 +6090,13 @@ func awsRestjson1_serializeDocumentJobTemplateSettings(v *types.JobTemplateSetti
 	if v.Esam != nil {
 		ok := object.Key("esam")
 		if err := awsRestjson1_serializeDocumentEsamSettings(v.Esam, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ExtendedDataServices != nil {
+		ok := object.Key("extendedDataServices")
+		if err := awsRestjson1_serializeDocumentExtendedDataServices(v.ExtendedDataServices, ok); err != nil {
 			return err
 		}
 	}

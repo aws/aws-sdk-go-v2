@@ -10,6 +10,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateCallAnalyticsCategory struct {
+}
+
+func (*validateOpCreateCallAnalyticsCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateCallAnalyticsCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateCallAnalyticsCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateCallAnalyticsCategoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateLanguageModel struct {
 }
 
@@ -85,6 +105,46 @@ func (m *validateOpCreateVocabulary) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateVocabularyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCallAnalyticsCategory struct {
+}
+
+func (*validateOpDeleteCallAnalyticsCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCallAnalyticsCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCallAnalyticsCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCallAnalyticsCategoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteCallAnalyticsJob struct {
+}
+
+func (*validateOpDeleteCallAnalyticsJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteCallAnalyticsJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteCallAnalyticsJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteCallAnalyticsJobInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +290,46 @@ func (m *validateOpDescribeLanguageModel) HandleInitialize(ctx context.Context, 
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetCallAnalyticsCategory struct {
+}
+
+func (*validateOpGetCallAnalyticsCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCallAnalyticsCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCallAnalyticsCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCallAnalyticsCategoryInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetCallAnalyticsJob struct {
+}
+
+func (*validateOpGetCallAnalyticsJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetCallAnalyticsJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetCallAnalyticsJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetCallAnalyticsJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetMedicalTranscriptionJob struct {
 }
 
@@ -330,6 +430,26 @@ func (m *validateOpGetVocabulary) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartCallAnalyticsJob struct {
+}
+
+func (*validateOpStartCallAnalyticsJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartCallAnalyticsJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartCallAnalyticsJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartCallAnalyticsJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartMedicalTranscriptionJob struct {
 }
 
@@ -365,6 +485,26 @@ func (m *validateOpStartTranscriptionJob) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpStartTranscriptionJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateCallAnalyticsCategory struct {
+}
+
+func (*validateOpUpdateCallAnalyticsCategory) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateCallAnalyticsCategory) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateCallAnalyticsCategoryInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateCallAnalyticsCategoryInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -430,6 +570,10 @@ func (m *validateOpUpdateVocabulary) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateCallAnalyticsCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateCallAnalyticsCategory{}, middleware.After)
+}
+
 func addOpCreateLanguageModelValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateLanguageModel{}, middleware.After)
 }
@@ -444,6 +588,14 @@ func addOpCreateVocabularyFilterValidationMiddleware(stack *middleware.Stack) er
 
 func addOpCreateVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateVocabulary{}, middleware.After)
+}
+
+func addOpDeleteCallAnalyticsCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCallAnalyticsCategory{}, middleware.After)
+}
+
+func addOpDeleteCallAnalyticsJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteCallAnalyticsJob{}, middleware.After)
 }
 
 func addOpDeleteLanguageModelValidationMiddleware(stack *middleware.Stack) error {
@@ -474,6 +626,14 @@ func addOpDescribeLanguageModelValidationMiddleware(stack *middleware.Stack) err
 	return stack.Initialize.Add(&validateOpDescribeLanguageModel{}, middleware.After)
 }
 
+func addOpGetCallAnalyticsCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCallAnalyticsCategory{}, middleware.After)
+}
+
+func addOpGetCallAnalyticsJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetCallAnalyticsJob{}, middleware.After)
+}
+
 func addOpGetMedicalTranscriptionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMedicalTranscriptionJob{}, middleware.After)
 }
@@ -494,12 +654,20 @@ func addOpGetVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetVocabulary{}, middleware.After)
 }
 
+func addOpStartCallAnalyticsJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartCallAnalyticsJob{}, middleware.After)
+}
+
 func addOpStartMedicalTranscriptionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartMedicalTranscriptionJob{}, middleware.After)
 }
 
 func addOpStartTranscriptionJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartTranscriptionJob{}, middleware.After)
+}
+
+func addOpUpdateCallAnalyticsCategoryValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateCallAnalyticsCategory{}, middleware.After)
 }
 
 func addOpUpdateMedicalVocabularyValidationMiddleware(stack *middleware.Stack) error {
@@ -512,6 +680,23 @@ func addOpUpdateVocabularyFilterValidationMiddleware(stack *middleware.Stack) er
 
 func addOpUpdateVocabularyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateVocabulary{}, middleware.After)
+}
+
+func validateCallAnalyticsJobSettings(v *types.CallAnalyticsJobSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CallAnalyticsJobSettings"}
+	if v.ContentRedaction != nil {
+		if err := validateContentRedaction(v.ContentRedaction); err != nil {
+			invalidParams.AddNested("ContentRedaction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateContentRedaction(v *types.ContentRedaction) error {
@@ -542,6 +727,102 @@ func validateInputDataConfig(v *types.InputDataConfig) error {
 	}
 	if v.DataAccessRoleArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRule(v types.Rule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Rule"}
+	switch uv := v.(type) {
+	case *types.RuleMemberSentimentFilter:
+		if err := validateSentimentFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[SentimentFilter]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.RuleMemberTranscriptFilter:
+		if err := validateTranscriptFilter(&uv.Value); err != nil {
+			invalidParams.AddNested("[TranscriptFilter]", err.(smithy.InvalidParamsError))
+		}
+
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRuleList(v []types.Rule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RuleList"}
+	for i := range v {
+		if err := validateRule(v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSentimentFilter(v *types.SentimentFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SentimentFilter"}
+	if v.Sentiments == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Sentiments"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTranscriptFilter(v *types.TranscriptFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TranscriptFilter"}
+	if len(v.TranscriptFilterType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("TranscriptFilterType"))
+	}
+	if v.Targets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateCallAnalyticsCategoryInput(v *CreateCallAnalyticsCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateCallAnalyticsCategoryInput"}
+	if v.CategoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CategoryName"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -627,6 +908,36 @@ func validateOpCreateVocabularyInput(v *CreateVocabularyInput) error {
 	}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCallAnalyticsCategoryInput(v *DeleteCallAnalyticsCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCallAnalyticsCategoryInput"}
+	if v.CategoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CategoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteCallAnalyticsJobInput(v *DeleteCallAnalyticsJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteCallAnalyticsJobInput"}
+	if v.CallAnalyticsJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallAnalyticsJobName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -740,6 +1051,36 @@ func validateOpDescribeLanguageModelInput(v *DescribeLanguageModelInput) error {
 	}
 }
 
+func validateOpGetCallAnalyticsCategoryInput(v *GetCallAnalyticsCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCallAnalyticsCategoryInput"}
+	if v.CategoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CategoryName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetCallAnalyticsJobInput(v *GetCallAnalyticsJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetCallAnalyticsJobInput"}
+	if v.CallAnalyticsJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallAnalyticsJobName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetMedicalTranscriptionJobInput(v *GetMedicalTranscriptionJobInput) error {
 	if v == nil {
 		return nil
@@ -815,6 +1156,32 @@ func validateOpGetVocabularyInput(v *GetVocabularyInput) error {
 	}
 }
 
+func validateOpStartCallAnalyticsJobInput(v *StartCallAnalyticsJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartCallAnalyticsJobInput"}
+	if v.CallAnalyticsJobName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CallAnalyticsJobName"))
+	}
+	if v.Media == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Media"))
+	}
+	if v.DataAccessRoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataAccessRoleArn"))
+	}
+	if v.Settings != nil {
+		if err := validateCallAnalyticsJobSettings(v.Settings); err != nil {
+			invalidParams.AddNested("Settings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartMedicalTranscriptionJobInput(v *StartMedicalTranscriptionJobInput) error {
 	if v == nil {
 		return nil
@@ -859,6 +1226,28 @@ func validateOpStartTranscriptionJobInput(v *StartTranscriptionJobInput) error {
 	if v.ContentRedaction != nil {
 		if err := validateContentRedaction(v.ContentRedaction); err != nil {
 			invalidParams.AddNested("ContentRedaction", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateCallAnalyticsCategoryInput(v *UpdateCallAnalyticsCategoryInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateCallAnalyticsCategoryInput"}
+	if v.CategoryName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CategoryName"))
+	}
+	if v.Rules == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	} else if v.Rules != nil {
+		if err := validateRuleList(v.Rules); err != nil {
+			invalidParams.AddNested("Rules", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

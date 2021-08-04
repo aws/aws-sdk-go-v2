@@ -1095,7 +1095,7 @@ func (e *InsufficientS3BucketPolicyFault) ErrorFault() smithy.ErrorFault { retur
 
 // The authentication profile request is not valid. The profile name can't be null
 // or empty. The authentication profile API operation must be available in the
-// Region.
+// Amazon Web Services Region.
 type InvalidAuthenticationProfileRequestFault struct {
 	Message *string
 
@@ -1308,6 +1308,25 @@ func (e *InvalidClusterTrackFault) ErrorMessage() string {
 func (e *InvalidClusterTrackFault) ErrorCode() string             { return "InvalidClusterTrack" }
 func (e *InvalidClusterTrackFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// There is an error with the datashare.
+type InvalidDataShareFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidDataShareFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidDataShareFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidDataShareFault) ErrorCode() string             { return "InvalidDataShareFault" }
+func (e *InvalidDataShareFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The Elastic IP (EIP) is invalid or cannot be found.
 type InvalidElasticIpFault struct {
 	Message *string
@@ -1391,6 +1410,26 @@ func (e *InvalidHsmConfigurationStateFault) ErrorCode() string {
 	return "InvalidHsmConfigurationStateFault"
 }
 func (e *InvalidHsmConfigurationStateFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// The namespace isn't valid because the namespace doesn't exist. Provide a valid
+// namespace.
+type InvalidNamespaceFault struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *InvalidNamespaceFault) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *InvalidNamespaceFault) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *InvalidNamespaceFault) ErrorCode() string             { return "InvalidNamespaceFault" }
+func (e *InvalidNamespaceFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Indicates that the Reserved Node being exchanged is not in an active state.
 type InvalidReservedNodeStateFault struct {
@@ -2099,8 +2138,8 @@ func (e *SnapshotCopyGrantNotFoundFault) ErrorMessage() string {
 func (e *SnapshotCopyGrantNotFoundFault) ErrorCode() string             { return "SnapshotCopyGrantNotFoundFault" }
 func (e *SnapshotCopyGrantNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The account has exceeded the maximum number of snapshot copy grants in this
-// region.
+// The Amazon Web Services account has exceeded the maximum number of snapshot copy
+// grants in this region.
 type SnapshotCopyGrantQuotaExceededFault struct {
 	Message *string
 

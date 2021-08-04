@@ -14,13 +14,14 @@ import (
 
 // Returns information about the specified Amazon Redshift HSM configuration. If no
 // configuration ID is specified, returns information about all the HSM
-// configurations owned by your account. If you specify both tag keys and tag
-// values in the same request, Amazon Redshift returns all HSM connections that
-// match any combination of the specified keys and values. For example, if you have
-// owner and environment for tag keys, and admin and test for tag values, all HSM
-// connections that have any combination of those values are returned. If both tag
-// keys and values are omitted from the request, HSM connections are returned
-// regardless of whether they have tag keys or values associated with them.
+// configurations owned by your Amazon Web Services account. If you specify both
+// tag keys and tag values in the same request, Amazon Redshift returns all HSM
+// connections that match any combination of the specified keys and values. For
+// example, if you have owner and environment for tag keys, and admin and test for
+// tag values, all HSM connections that have any combination of those values are
+// returned. If both tag keys and values are omitted from the request, HSM
+// connections are returned regardless of whether they have tag keys or values
+// associated with them.
 func (c *Client) DescribeHsmConfigurations(ctx context.Context, params *DescribeHsmConfigurationsInput, optFns ...func(*Options)) (*DescribeHsmConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeHsmConfigurationsInput{}
@@ -41,7 +42,7 @@ type DescribeHsmConfigurationsInput struct {
 
 	// The identifier of a specific Amazon Redshift HSM configuration to be described.
 	// If no identifier is specified, information is returned for all HSM
-	// configurations owned by your account.
+	// configurations owned by your Amazon Web Services account.
 	HsmConfigurationIdentifier *string
 
 	// An optional parameter that specifies the starting point to return a set of

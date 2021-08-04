@@ -14,14 +14,14 @@ import (
 
 // Returns information about the specified HSM client certificate. If no
 // certificate ID is specified, returns information about all the HSM certificates
-// owned by your account. If you specify both tag keys and tag values in the same
-// request, Amazon Redshift returns all HSM client certificates that match any
-// combination of the specified keys and values. For example, if you have owner and
-// environment for tag keys, and admin and test for tag values, all HSM client
-// certificates that have any combination of those values are returned. If both tag
-// keys and values are omitted from the request, HSM client certificates are
-// returned regardless of whether they have tag keys or values associated with
-// them.
+// owned by your Amazon Web Services account. If you specify both tag keys and tag
+// values in the same request, Amazon Redshift returns all HSM client certificates
+// that match any combination of the specified keys and values. For example, if you
+// have owner and environment for tag keys, and admin and test for tag values, all
+// HSM client certificates that have any combination of those values are returned.
+// If both tag keys and values are omitted from the request, HSM client
+// certificates are returned regardless of whether they have tag keys or values
+// associated with them.
 func (c *Client) DescribeHsmClientCertificates(ctx context.Context, params *DescribeHsmClientCertificatesInput, optFns ...func(*Options)) (*DescribeHsmClientCertificatesOutput, error) {
 	if params == nil {
 		params = &DescribeHsmClientCertificatesInput{}
@@ -42,7 +42,7 @@ type DescribeHsmClientCertificatesInput struct {
 
 	// The identifier of a specific HSM client certificate for which you want
 	// information. If no identifier is specified, information is returned for all HSM
-	// client certificates owned by your account.
+	// client certificates owned by your Amazon Web Services account.
 	HsmClientCertificateIdentifier *string
 
 	// An optional parameter that specifies the starting point to return a set of

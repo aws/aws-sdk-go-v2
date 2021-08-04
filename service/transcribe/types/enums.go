@@ -20,6 +20,28 @@ func (BaseModelName) Values() []BaseModelName {
 	}
 }
 
+type CallAnalyticsJobStatus string
+
+// Enum values for CallAnalyticsJobStatus
+const (
+	CallAnalyticsJobStatusQueued     CallAnalyticsJobStatus = "QUEUED"
+	CallAnalyticsJobStatusInProgress CallAnalyticsJobStatus = "IN_PROGRESS"
+	CallAnalyticsJobStatusFailed     CallAnalyticsJobStatus = "FAILED"
+	CallAnalyticsJobStatusCompleted  CallAnalyticsJobStatus = "COMPLETED"
+)
+
+// Values returns all known values for CallAnalyticsJobStatus. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CallAnalyticsJobStatus) Values() []CallAnalyticsJobStatus {
+	return []CallAnalyticsJobStatus{
+		"QUEUED",
+		"IN_PROGRESS",
+		"FAILED",
+		"COMPLETED",
+	}
+}
+
 type CLMLanguageCode string
 
 // Enum values for CLMLanguageCode
@@ -213,6 +235,24 @@ func (OutputLocationType) Values() []OutputLocationType {
 	}
 }
 
+type ParticipantRole string
+
+// Enum values for ParticipantRole
+const (
+	ParticipantRoleAgent    ParticipantRole = "AGENT"
+	ParticipantRoleCustomer ParticipantRole = "CUSTOMER"
+)
+
+// Values returns all known values for ParticipantRole. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ParticipantRole) Values() []ParticipantRole {
+	return []ParticipantRole{
+		"AGENT",
+		"CUSTOMER",
+	}
+}
+
 type RedactionOutput string
 
 // Enum values for RedactionOutput
@@ -247,6 +287,28 @@ func (RedactionType) Values() []RedactionType {
 	}
 }
 
+type SentimentValue string
+
+// Enum values for SentimentValue
+const (
+	SentimentValuePositive SentimentValue = "POSITIVE"
+	SentimentValueNegative SentimentValue = "NEGATIVE"
+	SentimentValueNeutral  SentimentValue = "NEUTRAL"
+	SentimentValueMixed    SentimentValue = "MIXED"
+)
+
+// Values returns all known values for SentimentValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SentimentValue) Values() []SentimentValue {
+	return []SentimentValue{
+		"POSITIVE",
+		"NEGATIVE",
+		"NEUTRAL",
+		"MIXED",
+	}
+}
+
 type Specialty string
 
 // Enum values for Specialty
@@ -260,6 +322,22 @@ const (
 func (Specialty) Values() []Specialty {
 	return []Specialty{
 		"PRIMARYCARE",
+	}
+}
+
+type TranscriptFilterType string
+
+// Enum values for TranscriptFilterType
+const (
+	TranscriptFilterTypeExact TranscriptFilterType = "EXACT"
+)
+
+// Values returns all known values for TranscriptFilterType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TranscriptFilterType) Values() []TranscriptFilterType {
+	return []TranscriptFilterType{
+		"EXACT",
 	}
 }
 

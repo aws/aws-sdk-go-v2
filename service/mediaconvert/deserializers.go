@@ -10116,6 +10116,55 @@ func awsRestjson1_deserializeDocumentEsamSignalProcessingNotification(v **types.
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentExtendedDataServices(v **types.ExtendedDataServices, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ExtendedDataServices
+	if *v == nil {
+		sv = &types.ExtendedDataServices{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "copyProtectionAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CopyProtectionAction to be of type string, got %T instead", value)
+				}
+				sv.CopyProtectionAction = types.CopyProtectionAction(jtv)
+			}
+
+		case "vchipAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VchipAction to be of type string, got %T instead", value)
+				}
+				sv.VchipAction = types.VchipAction(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentF4vSettings(v **types.F4vSettings, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -13600,6 +13649,11 @@ func awsRestjson1_deserializeDocumentJobSettings(v **types.JobSettings, value in
 				return err
 			}
 
+		case "extendedDataServices":
+			if err := awsRestjson1_deserializeDocumentExtendedDataServices(&sv.ExtendedDataServices, value); err != nil {
+				return err
+			}
+
 		case "inputs":
 			if err := awsRestjson1_deserializeDocument__listOfInput(&sv.Inputs, value); err != nil {
 				return err
@@ -13845,6 +13899,11 @@ func awsRestjson1_deserializeDocumentJobTemplateSettings(v **types.JobTemplateSe
 
 		case "esam":
 			if err := awsRestjson1_deserializeDocumentEsamSettings(&sv.Esam, value); err != nil {
+				return err
+			}
+
+		case "extendedDataServices":
+			if err := awsRestjson1_deserializeDocumentExtendedDataServices(&sv.ExtendedDataServices, value); err != nil {
 				return err
 			}
 

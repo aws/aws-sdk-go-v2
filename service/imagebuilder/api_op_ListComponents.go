@@ -41,7 +41,20 @@ type ListComponentsInput struct {
 	// Returns the list of component build versions for the specified name.
 	ByName bool
 
-	// The filters.
+	// Use the following filters to streamline results:
+	//
+	// * description
+	//
+	// * name
+	//
+	// *
+	// platform
+	//
+	// * supportedOsVersion
+	//
+	// * type
+	//
+	// * version
 	Filters []types.Filter
 
 	// The maximum items to return in a request.

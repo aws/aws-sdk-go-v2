@@ -38,18 +38,19 @@ type EnableSnapshotCopyInput struct {
 	// This member is required.
 	ClusterIdentifier *string
 
-	// The destination Region that you want to copy snapshots to. Constraints: Must be
-	// the name of a valid Region. For more information, see Regions and Endpoints
+	// The destination Amazon Web Services Region that you want to copy snapshots to.
+	// Constraints: Must be the name of a valid Amazon Web Services Region. For more
+	// information, see Regions and Endpoints
 	// (https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region) in
 	// the Amazon Web Services General Reference.
 	//
 	// This member is required.
 	DestinationRegion *string
 
-	// The number of days to retain newly copied snapshots in the destination Region
-	// after they are copied from the source Region. If the value is -1, the manual
-	// snapshot is retained indefinitely. The value must be either -1 or an integer
-	// between 1 and 3,653.
+	// The number of days to retain newly copied snapshots in the destination Amazon
+	// Web Services Region after they are copied from the source Amazon Web Services
+	// Region. If the value is -1, the manual snapshot is retained indefinitely. The
+	// value must be either -1 or an integer between 1 and 3,653.
 	ManualSnapshotRetentionPeriod *int32
 
 	// The number of days to retain automated snapshots in the destination region after

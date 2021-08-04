@@ -5349,6 +5349,11 @@ func awsRestjson1_serializeDocumentTumblingWindow(v *types.TumblingWindow, value
 		ok.String(*v.Interval)
 	}
 
+	if v.Offset != nil {
+		ok := object.Key("offset")
+		ok.String(*v.Offset)
+	}
+
 	return nil
 }
 

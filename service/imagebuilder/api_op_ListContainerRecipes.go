@@ -30,8 +30,16 @@ func (c *Client) ListContainerRecipes(ctx context.Context, params *ListContainer
 
 type ListContainerRecipesInput struct {
 
-	// Request filters that are used to narrow the list of container images that are
-	// returned.
+	// Use the following filters to streamline results:
+	//
+	// * containerType
+	//
+	// * name
+	//
+	// *
+	// parentImage
+	//
+	// * platform
 	Filters []types.Filter
 
 	// The maximum number of results to return in the list.

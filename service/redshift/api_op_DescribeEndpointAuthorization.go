@@ -30,8 +30,8 @@ func (c *Client) DescribeEndpointAuthorization(ctx context.Context, params *Desc
 
 type DescribeEndpointAuthorizationInput struct {
 
-	// The Aaccount ID of either the cluster owner (grantor) or grantee. If Grantee
-	// parameter is true, then the Account value is of the grantor.
+	// The AAmazon Web Services account ID of either the cluster owner (grantor) or
+	// grantee. If Grantee parameter is true, then the Account value is of the grantor.
 	Account *string
 
 	// The cluster identifier of the cluster to access.

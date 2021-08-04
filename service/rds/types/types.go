@@ -371,6 +371,9 @@ type DBCluster struct {
 	// Services on your behalf.
 	AssociatedRoles []DBClusterRole
 
+	// The time when a stopped DB cluster is restarted automatically.
+	AutomaticRestartTime *time.Time
+
 	// Provides the list of Availability Zones (AZs) where instances in the DB cluster
 	// can be created.
 	AvailabilityZones []string
@@ -991,7 +994,7 @@ type DBInstance struct {
 	// The status of the database activity stream.
 	ActivityStreamStatus ActivityStreamStatus
 
-	// Specifies the allocated storage size specified in gibibytes.
+	// Specifies the allocated storage size specified in gibibytes (GiB).
 	AllocatedStorage int32
 
 	// The Amazon Web Services Identity and Access Management (IAM) roles associated
@@ -1000,6 +1003,9 @@ type DBInstance struct {
 
 	// A value that indicates that minor version patches are applied automatically.
 	AutoMinorVersionUpgrade bool
+
+	// The time when a stopped DB instance is restarted automatically.
+	AutomaticRestartTime *time.Time
 
 	// Specifies the name of the Availability Zone the DB instance is located in.
 	AvailabilityZone *string
@@ -1107,7 +1113,8 @@ type DBInstance struct {
 	// the Amazon RDS User Guide.
 	EnabledCloudwatchLogsExports []string
 
-	// Specifies the connection endpoint.
+	// Specifies the connection endpoint. The endpoint might not be shown for instances
+	// whose status is creating.
 	Endpoint *Endpoint
 
 	// The name of the database engine to be used for this DB instance.
@@ -1159,8 +1166,8 @@ type DBInstance struct {
 	// Contains the master username for the DB instance.
 	MasterUsername *string
 
-	// The upper limit to which Amazon RDS can automatically scale the storage of the
-	// DB instance.
+	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
+	// the storage of the DB instance.
 	MaxAllocatedStorage *int32
 
 	// The interval, in seconds, between points when Enhanced Monitoring metrics are
@@ -2888,7 +2895,7 @@ type PendingMaintenanceAction struct {
 // and contains changes that will be applied during the next maintenance window.
 type PendingModifiedValues struct {
 
-	// The allocated storage size for the DB instance specified in gibibytes .
+	// The allocated storage size for the DB instance specified in gibibytes (GiB).
 	AllocatedStorage *int32
 
 	// The number of days for which automated backups are retained.
@@ -3434,7 +3441,7 @@ type ValidStorageOptions struct {
 	// The valid range of provisioned IOPS. For example, 1000-20000.
 	ProvisionedIops []Range
 
-	// The valid range of storage in gibibytes. For example, 100 to 16384.
+	// The valid range of storage in gibibytes (GiB). For example, 100 to 16384.
 	StorageSize []Range
 
 	// The valid storage types for your DB instance. For example, gp2, io1.

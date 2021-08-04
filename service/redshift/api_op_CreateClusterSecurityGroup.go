@@ -43,9 +43,10 @@ type CreateClusterSecurityGroupInput struct {
 	// * Must not be "Default".
 	//
 	// * Must be unique for all security groups
-	// that are created by your account.
+	// that are created by your Amazon Web Services account.
 	//
-	// Example: examplesecuritygroup
+	// Example:
+	// examplesecuritygroup
 	//
 	// This member is required.
 	ClusterSecurityGroupName *string

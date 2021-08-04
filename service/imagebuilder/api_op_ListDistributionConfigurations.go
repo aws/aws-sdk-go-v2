@@ -30,9 +30,7 @@ func (c *Client) ListDistributionConfigurations(ctx context.Context, params *Lis
 
 type ListDistributionConfigurationsInput struct {
 
-	// The filters.
-	//
-	// * name - The name of this distribution configuration.
+	// You can filter on name to streamline results.
 	Filters []types.Filter
 
 	// The maximum items to return in a request.
