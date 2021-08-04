@@ -157,122 +157,6 @@
                 }
             }
         },
-        "com.amazonaws.ssmincidents#SSMIncidents": {
-            "type": "service",
-            "version": "2018-05-10",
-            "operations": [
-                {
-                    "target": "com.amazonaws.ssmincidents#CreateReplicationSet"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#CreateResponsePlan"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#CreateTimelineEvent"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#DeleteIncidentRecord"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#DeleteReplicationSet"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#DeleteResourcePolicy"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#DeleteResponsePlan"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#DeleteTimelineEvent"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#GetIncidentRecord"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#GetReplicationSet"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#GetResourcePolicies"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#GetResponsePlan"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#GetTimelineEvent"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#ListIncidentRecords"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#ListRelatedItems"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#ListReplicationSets"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#ListResponsePlans"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#ListTagsForResource"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#ListTimelineEvents"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#PutResourcePolicy"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#StartIncident"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#TagResource"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#UntagResource"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#UpdateDeletionProtection"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#UpdateIncidentRecord"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#UpdateRelatedItems"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#UpdateReplicationSet"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#UpdateResponsePlan"
-                },
-                {
-                    "target": "com.amazonaws.ssmincidents#UpdateTimelineEvent"
-                }
-            ],
-            "traits": {
-                "aws.api#service": {
-                    "sdkId": "SSM Incidents",
-                    "arnNamespace": "ssm-incidents",
-                    "cloudFormationName": "SSMIncidents",
-                    "cloudTrailEventSource": "ssm-incidents.amazonaws.com",
-                    "endpointPrefix": "ssm-incidents"
-                },
-                "aws.auth#sigv4": {
-                    "name": "ssm-incidents"
-                },
-                "aws.protocols#restJson1": {},
-                "smithy.api#cors": {
-                    "additionalAllowedHeaders": [
-                        "x-amz-content-sha256",
-                        "x-amz-user-agent",
-                        "content-type",
-                        "x-amzn-platform-id"
-                    ]
-                },
-                "smithy.api#documentation": "<p>AWS Systems Manager Incident Manager is an incident management console designed to help\n      users mitigate and recover from incidents affecting their AWS-hosted applications. An incident\n      is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n      highlighting relevant troubleshooting data, and providing collaboration tools to get services\n      back up and running. To achieve the primary goal of reducing the time-to-resolution of\n      critical incidents, Incident Manager automates response plans and enables responder team\n      escalation. </p>",
-                "smithy.api#title": "AWS Systems Manager Incident Manager"
-            }
-        },
         "com.amazonaws.ssmincidents#Condition": {
             "type": "union",
             "members": {
@@ -546,8 +430,7 @@
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
-                        "smithy.api#idempotencyToken": {},
-                        "smithy.api#required": {}
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "incidentRecordArn": {
@@ -574,7 +457,7 @@
                 "eventData": {
                     "target": "com.amazonaws.ssmincidents#EventData",
                     "traits": {
-                        "smithy.api#documentation": "<p>A short description of the event.</p>",
+                        "smithy.api#documentation": "<p>A valid JSON string. There is no other schema imposed. A short description of the event.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1555,7 +1438,7 @@
                 "notificationTargets": {
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SNS targets that\n         AWS Chatbot uses\n         to notify the chat channels and perform actions on the incident record.</p>"
+                        "smithy.api#documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>"
                     }
                 }
             },
@@ -1727,7 +1610,7 @@
                 "notificationTargets": {
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an\n         incident. You can also make updates to the incident through the chat channel using the SNS\n         topics. </p>"
+                        "smithy.api#documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>"
                     }
                 }
             },
@@ -2349,7 +2232,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The SNS topic that's used by\n         AWS\n         Chatbot to notify the incidents chat channel.</p>"
+                "smithy.api#documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>"
             }
         },
         "com.amazonaws.ssmincidents#NotificationTargetSet": {
@@ -2618,6 +2501,12 @@
         "com.amazonaws.ssmincidents#ReplicationSet": {
             "type": "structure",
             "members": {
+                "arn": {
+                    "target": "com.amazonaws.ssmincidents#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the replication set.</p>"
+                    }
+                },
                 "regionMap": {
                     "target": "com.amazonaws.ssmincidents#RegionInfoMap",
                     "traits": {
@@ -2872,6 +2761,122 @@
                     "max": 1000
                 },
                 "smithy.api#pattern": "^arn:aws(-cn|-us-gov)?:iam::([0-9]{12})?:role/.+$"
+            }
+        },
+        "com.amazonaws.ssmincidents#SSMIncidents": {
+            "type": "service",
+            "version": "2018-05-10",
+            "operations": [
+                {
+                    "target": "com.amazonaws.ssmincidents#CreateReplicationSet"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#CreateResponsePlan"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#CreateTimelineEvent"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteIncidentRecord"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteReplicationSet"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteResponsePlan"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#DeleteTimelineEvent"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetIncidentRecord"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetReplicationSet"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetResourcePolicies"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetResponsePlan"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#GetTimelineEvent"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListIncidentRecords"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListRelatedItems"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListReplicationSets"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListResponsePlans"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#ListTimelineEvents"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#PutResourcePolicy"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#StartIncident"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateDeletionProtection"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateIncidentRecord"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateRelatedItems"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateReplicationSet"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateResponsePlan"
+                },
+                {
+                    "target": "com.amazonaws.ssmincidents#UpdateTimelineEvent"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "SSM Incidents",
+                    "arnNamespace": "ssm-incidents",
+                    "cloudFormationName": "SSMIncidents",
+                    "cloudTrailEventSource": "ssm-incidents.amazonaws.com",
+                    "endpointPrefix": "ssm-incidents"
+                },
+                "aws.auth#sigv4": {
+                    "name": "ssm-incidents"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#cors": {
+                    "additionalAllowedHeaders": [
+                        "x-amz-content-sha256",
+                        "x-amz-user-agent",
+                        "content-type",
+                        "x-amzn-platform-id"
+                    ]
+                },
+                "smithy.api#documentation": "<p>AWS Systems Manager Incident Manager is an incident management console designed to help\n      users mitigate and recover from incidents affecting their AWS-hosted applications. An incident\n      is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n      highlighting relevant troubleshooting data, and providing collaboration tools to get services\n      back up and running. To achieve the primary goal of reducing the time-to-resolution of\n      critical incidents, Incident Manager automates response plans and enables responder team\n      escalation. </p>",
+                "smithy.api#title": "AWS Systems Manager Incident Manager"
             }
         },
         "com.amazonaws.ssmincidents#ServiceCode": {
@@ -3649,7 +3654,7 @@
                 "notificationTargets": {
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SNS targets that AWS Chatbot uses to notify the chat channel of updates to an\n            incident. You can also make updates to the incident through the chat channel using the\n            SNS topics. </p>\n        <p>Using multiple SNS topics creates redundancy in the case that a Region is down during\n            the incident.</p>"
+                        "smithy.api#documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>\n        <p>Using multiple SNS topics creates redundancy in the case that a Region is down during\n            the incident.</p>"
                     }
                 }
             }
@@ -3902,13 +3907,13 @@
                 "incidentTemplateNotificationTargets": {
                     "target": "com.amazonaws.ssmincidents#NotificationTargetSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>The SNS targets that\n            AWS\n            Chatbot uses to notify the chat channels and perform actions on the\n            incident record.</p>"
+                        "smithy.api#documentation": "<p>The SNS targets that are notified when updates are made to an incident.</p>"
                     }
                 },
                 "chatChannel": {
                     "target": "com.amazonaws.ssmincidents#ChatChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The\n            AWS\n            Chatbot chat channel used for collaboration during an\n            incident.</p>"
+                        "smithy.api#documentation": "<p>The\n            AWS\n            Chatbot chat channel used for collaboration during an\n            incident.</p>\n        <p>Use the empty structure to remove the chat channel from the response plan.</p>"
                     }
                 },
                 "engagements": {
@@ -3974,8 +3979,7 @@
                     "target": "com.amazonaws.ssmincidents#ClientToken",
                     "traits": {
                         "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
-                        "smithy.api#idempotencyToken": {},
-                        "smithy.api#required": {}
+                        "smithy.api#idempotencyToken": {}
                     }
                 },
                 "incidentRecordArn": {

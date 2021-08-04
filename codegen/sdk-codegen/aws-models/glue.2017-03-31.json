@@ -2800,7 +2800,7 @@
                 "ConnectionType": {
                     "target": "com.amazonaws.glue#ConnectionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of the connection. Currently, these types are supported:</p>\n\t        <ul>\n            <li>\n               <p>\n                  <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p>\n            </li>\n            <li>\n               <p>\n                  <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from Marketplace to read from and write to data stores that are not natively supported by Glue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p>\n            </li>\n         </ul>\n         <p>SFTP is not supported.</p>",
+                        "smithy.api#documentation": "<p>The type of the connection. Currently, these types are supported:</p>\n\t        <ul>\n            <li>\n               <p>\n                  <code>JDBC</code> - Designates a connection to a database through Java Database Connectivity (JDBC).</p>\n            </li>\n            <li>\n               <p>\n                  <code>KAFKA</code> - Designates a connection to an Apache Kafka streaming platform.</p>\n            </li>\n            <li>\n               <p>\n                  <code>MONGODB</code> - Designates a connection to a MongoDB document database.</p>\n            </li>\n            <li>\n               <p>\n                  <code>NETWORK</code> - Designates a network connection to a data source within an Amazon Virtual Private Cloud environment (Amazon VPC).</p>\n            </li>\n            <li>\n               <p>\n                  <code>MARKETPLACE</code> - Uses configuration settings contained in a connector purchased from Amazon Web Services Marketplace to read from and write to data stores that are not natively supported by Glue.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CUSTOM</code> - Uses configuration settings contained in a custom connector to read from and write to data stores that are not natively supported by Glue.</p>\n            </li>\n         </ul>\n         <p>SFTP is not supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3762,6 +3762,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
                 },
                 {
                     "target": "com.amazonaws.glue#GlueEncryptionException"
@@ -4955,6 +4958,9 @@
                     "target": "com.amazonaws.glue#AlreadyExistsException"
                 },
                 {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
                 {
@@ -6016,6 +6022,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
                 {
@@ -6600,6 +6609,9 @@
                 "target": "com.amazonaws.glue#DeleteTableResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },
@@ -14440,7 +14452,7 @@
                 "EnableHybrid": {
                     "target": "com.amazonaws.glue#EnableHybridValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>If <code>'TRUE'</code>, indicates that you are using both methods to grant cross-account\n      access to Data Catalog resources:</p>\n         <ul>\n            <li>\n               <p>By directly updating the resource policy with <code>PutResourePolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>By using the <b>Grant permissions</b> command on the Management Console.</p>\n            </li>\n         </ul>\n         <p>Must be set to <code>'TRUE'</code> if you have already used the Management Console to\n      grant cross-account access, otherwise the call fails. Default is 'FALSE'.</p>"
+                        "smithy.api#documentation": "<p>If <code>'TRUE'</code>, indicates that you are using both methods to grant cross-account\n      access to Data Catalog resources:</p>\n         <ul>\n            <li>\n               <p>By directly updating the resource policy with <code>PutResourePolicy</code>\n               </p>\n            </li>\n            <li>\n               <p>By using the <b>Grant permissions</b> command on the Amazon Web Services Management Console.</p>\n            </li>\n         </ul>\n         <p>Must be set to <code>'TRUE'</code> if you have already used the Management Console to\n      grant cross-account access, otherwise the call fails. Default is 'FALSE'.</p>"
                     }
                 }
             }
@@ -18658,6 +18670,9 @@
                 "target": "com.amazonaws.glue#UpdateDatabaseResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
                 {
                     "target": "com.amazonaws.glue#EntityNotFoundException"
                 },

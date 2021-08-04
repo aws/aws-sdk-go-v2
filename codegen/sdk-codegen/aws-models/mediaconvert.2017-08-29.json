@@ -3577,6 +3577,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#CopyProtectionAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PASSTHROUGH",
+                        "name": "PASSTHROUGH"
+                    },
+                    {
+                        "value": "STRIP",
+                        "name": "STRIP"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#CreateJob": {
             "type": "operation",
             "input": {
@@ -6269,6 +6285,28 @@
             },
             "traits": {
                 "smithy.api#documentation": "ESAM SignalProcessingNotification data defined by OC-SP-ESAM-API-I03-131025."
+            }
+        },
+        "com.amazonaws.mediaconvert#ExtendedDataServices": {
+            "type": "structure",
+            "members": {
+                "CopyProtectionAction": {
+                    "target": "com.amazonaws.mediaconvert#CopyProtectionAction",
+                    "traits": {
+                        "smithy.api#documentation": "The action to take on copy and redistribution control XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.",
+                        "smithy.api#jsonName": "copyProtectionAction"
+                    }
+                },
+                "VchipAction": {
+                    "target": "com.amazonaws.mediaconvert#VchipAction",
+                    "traits": {
+                        "smithy.api#documentation": "The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.",
+                        "smithy.api#jsonName": "vchipAction"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory."
             }
         },
         "com.amazonaws.mediaconvert#F4vMoovPlacement": {
@@ -10206,6 +10244,13 @@
                         "smithy.api#jsonName": "esam"
                     }
                 },
+                "ExtendedDataServices": {
+                    "target": "com.amazonaws.mediaconvert#ExtendedDataServices",
+                    "traits": {
+                        "smithy.api#documentation": "Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.",
+                        "smithy.api#jsonName": "extendedDataServices"
+                    }
+                },
                 "Inputs": {
                     "target": "com.amazonaws.mediaconvert#__listOfInput",
                     "traits": {
@@ -10438,6 +10483,13 @@
                     "traits": {
                         "smithy.api#documentation": "Settings for Event Signaling And Messaging (ESAM). If you don't do ad insertion, you can ignore these settings.",
                         "smithy.api#jsonName": "esam"
+                    }
+                },
+                "ExtendedDataServices": {
+                    "target": "com.amazonaws.mediaconvert#ExtendedDataServices",
+                    "traits": {
+                        "smithy.api#documentation": "Hexadecimal value as per EIA-608 Line 21 Data Services, section 9.5.1.5 05h Content Advisory.",
+                        "smithy.api#jsonName": "extendedDataServices"
                     }
                 },
                 "Inputs": {
@@ -16854,6 +16906,22 @@
                     {
                         "value": "HARD",
                         "name": "HARD"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediaconvert#VchipAction": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "The action to take on content advisory XDS packets.  If you select PASSTHROUGH, packets will not be changed. If you select STRIP, any packets will be removed in output captions.",
+                "smithy.api#enum": [
+                    {
+                        "value": "PASSTHROUGH",
+                        "name": "PASSTHROUGH"
+                    },
+                    {
+                        "value": "STRIP",
+                        "name": "STRIP"
                     }
                 ]
             }

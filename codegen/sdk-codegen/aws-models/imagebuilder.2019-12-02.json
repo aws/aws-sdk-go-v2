@@ -73,7 +73,7 @@
                 "region": {
                     "target": "com.amazonaws.imagebuilder#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region of the Amazon EC2 AMI.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region of the Amazon EC2 AMI.</p>"
                     }
                 },
                 "image": {
@@ -144,7 +144,7 @@
                 "launchPermission": {
                     "target": "com.amazonaws.imagebuilder#LaunchPermissionConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p> Launch permissions can be used to configure which accounts can use the AMI to launch\n\t\t\tinstances.</p>"
+                        "smithy.api#documentation": "<p> Launch permissions can be used to configure which Amazon Web Services accounts can use the AMI to launch\n\t\t\tinstances.</p>"
                     }
                 }
             },
@@ -717,7 +717,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The defining characteristics of a specific version of an TOE component.</p>"
+                "smithy.api#documentation": "<p>The defining characteristics of a specific version of an Amazon Web Services TOE component.</p>"
             }
         },
         "com.amazonaws.imagebuilder#ComponentVersionArn": {
@@ -4844,7 +4844,7 @@
                 "userIds": {
                     "target": "com.amazonaws.imagebuilder#AccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID.</p>"
                     }
                 },
                 "userGroups": {
@@ -5071,7 +5071,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>description</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>supportedOsVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "byName": {
@@ -5175,7 +5175,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Request filters that are used to narrow the list of container images that are returned.</p>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>containerType</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>parentImage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
@@ -5267,7 +5267,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>\n\t\t       <ul>\n            <li>\n\t\t\t\t           <p>\n\t\t\t\t\t             <code>name</code> - The name of this distribution configuration.</p>\n\t\t\t         </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>You can filter on <code>name</code> to streamline results.</p>"
                     }
                 },
                 "maxResults": {
@@ -5366,7 +5366,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>osVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
@@ -5564,7 +5564,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
@@ -5656,7 +5656,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>description</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>distributionConfigurationArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>imageRecipeArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>infrastructureConfigurationArn</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>status</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
@@ -5754,7 +5754,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>parentImage</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "maxResults": {
@@ -5852,7 +5852,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>"
+                        "smithy.api#documentation": "<p>Use the following filters to streamline results:</p>\n\t\t       <ul>\n            <li>\n               <p>\n                  <code>name</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>osVersion</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>platform</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>version</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "byName": {
@@ -5956,7 +5956,7 @@
                 "filters": {
                     "target": "com.amazonaws.imagebuilder#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The filters.</p>"
+                        "smithy.api#documentation": "<p>You can filter on <code>name</code> to streamline results.</p>"
                     }
                 },
                 "maxResults": {
