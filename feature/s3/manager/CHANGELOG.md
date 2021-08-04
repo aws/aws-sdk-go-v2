@@ -1,3 +1,9 @@
+# v1.4.0 (2021-08-04)
+
+* **Feature**: adds error handling for defered close calls
+* **Dependency Update**: Updated `github.com/aws/smithy-go` to latest version.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.2 (2021-07-15)
 
 * **Dependency Update**: Updated `github.com/aws/smithy-go` to latest version
