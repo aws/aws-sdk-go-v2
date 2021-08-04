@@ -12,7 +12,7 @@ import (
 )
 
 // This is used by SaaS partners to write events to a customer's partner event bus.
-// AWS customers do not use this operation.
+// Amazon Web Services customers do not use this operation.
 func (c *Client) PutPartnerEvents(ctx context.Context, params *PutPartnerEventsInput, optFns ...func(*Options)) (*PutPartnerEventsOutput, error) {
 	if params == nil {
 		params = &PutPartnerEventsInput{}

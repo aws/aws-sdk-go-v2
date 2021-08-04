@@ -36,7 +36,7 @@ type DescribeResizeInput struct {
 
 	// The unique identifier of a cluster whose resize progress you are requesting.
 	// This parameter is case-sensitive. By default, resize operations for all clusters
-	// defined for an account are returned.
+	// defined for an Amazon Web Services account are returned.
 	//
 	// This member is required.
 	ClusterIdentifier *string

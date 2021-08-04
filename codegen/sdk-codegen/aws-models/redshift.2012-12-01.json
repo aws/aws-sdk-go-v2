@@ -165,7 +165,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of an account authorized to restore a\n            snapshot.</p>"
+                        "smithy.api#documentation": "<p>The identifier of an Amazon Web Services account authorized to restore a\n            snapshot.</p>"
                     }
                 },
                 "AccountAlias": {
@@ -176,7 +176,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an account authorized to restore a snapshot.</p>"
+                "smithy.api#documentation": "<p>Describes an Amazon Web Services account authorized to restore a snapshot.</p>"
             }
         },
         "com.amazonaws.redshift#AccountsWithRestoreAccessList": {
@@ -242,7 +242,7 @@
                 "AquaConfigurationStatus": {
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -286,6 +286,50 @@
                         "name": "APPLYING"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.redshift#AssociateDataShareConsumer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#AssociateDataShareConsumerMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DataShare"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#InvalidDataShareFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidNamespaceFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>From a datashare consumer account, associates a datashare with the\n            account (AssociateEntireAccount) or the specified namespace (ConsumerArn). If you make this association, the consumer\n            can consume the datashare.</p>"
+            }
+        },
+        "com.amazonaws.redshift#AssociateDataShareConsumerMessage": {
+            "type": "structure",
+            "members": {
+                "DataShareArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare that the consumer is to use with the account or the namespace.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AssociateEntireAccount": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies whether the datashare is associated with the entire account.</p>"
+                    }
+                },
+                "ConsumerArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer that is associated with the\n            datashare.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.redshift#AssociatedClusterList": {
@@ -514,7 +558,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether\n            the application accessing your cluster is running on the Internet or an Amazon EC2\n            instance, you can authorize inbound access to either a Classless Interdomain Routing\n            (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as\n            many as 20 ingress rules to an Amazon Redshift security group.</p>\n        <p>If you authorize access to an Amazon EC2 security group, specify\n                <i>EC2SecurityGroupName</i> and\n                <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and\n            Amazon Redshift cluster must be in the same Region. </p>\n        <p>If you authorize access to a CIDR/IP address range, specify\n                <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia\n            article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p>\n        <p>You must also associate the security group with a cluster so that clients running\n            on these IP addresses or the EC2 instance are authorized to connect to the cluster. For\n            information about managing security groups, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security\n                Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Adds an inbound (ingress) rule to an Amazon Redshift security group. Depending on whether\n            the application accessing your cluster is running on the Internet or an Amazon EC2\n            instance, you can authorize inbound access to either a Classless Interdomain Routing\n            (CIDR)/Internet Protocol (IP) range or to an Amazon EC2 security group. You can add as\n            many as 20 ingress rules to an Amazon Redshift security group.</p>\n        <p>If you authorize access to an Amazon EC2 security group, specify\n                <i>EC2SecurityGroupName</i> and\n                <i>EC2SecurityGroupOwnerId</i>. The Amazon EC2 security group and\n            Amazon Redshift cluster must be in the same Amazon Web Services Region. </p>\n        <p>If you authorize access to a CIDR/IP address range, specify\n                <i>CIDRIP</i>. For an overview of CIDR blocks, see the Wikipedia\n            article on <a href=\"http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing\">Classless Inter-Domain Routing</a>. </p>\n        <p>You must also associate the security group with a cluster so that clients running\n            on these IP addresses or the EC2 instance are authorized to connect to the cluster. For\n            information about managing security groups, go to <a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-security-groups.html\">Working with Security\n                Groups</a> in the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#AuthorizeClusterSecurityGroupIngressMessage": {
@@ -542,7 +586,7 @@
                 "EC2SecurityGroupOwnerId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account number of the owner of the security group specified by the\n            <i>EC2SecurityGroupName</i> parameter. The Amazon Web Services Access Key ID is not an\n            acceptable value. </p>\n        <p>Example: <code>111122223333</code>\n        </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account number of the owner of the security group specified by the\n            <i>EC2SecurityGroupName</i> parameter. The Amazon Web Services Access Key ID is not an\n            acceptable value. </p>\n        <p>Example: <code>111122223333</code>\n        </p>"
                     }
                 }
             },
@@ -555,6 +599,42 @@
             "members": {
                 "ClusterSecurityGroup": {
                     "target": "com.amazonaws.redshift#ClusterSecurityGroup"
+                }
+            }
+        },
+        "com.amazonaws.redshift#AuthorizeDataShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#AuthorizeDataShareMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DataShare"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#InvalidDataShareFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>From a data producer account, authorizes the sharing of a datashare with one or more\n            consumer accounts. To authorize a datashare for a data consumer, the producer account\n            must have the correct access privileges.</p>"
+            }
+        },
+        "com.amazonaws.redshift#AuthorizeDataShareMessage": {
+            "type": "structure",
+            "members": {
+                "DataShareArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare that producers are to authorize\n            sharing for.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConsumerIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data consumer that is authorized to access the datashare. This identifier is an AWS account ID.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -602,7 +682,7 @@
                 "Account": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID to grant access to.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID to grant access to.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -643,7 +723,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Authorizes the specified account to restore the specified\n            snapshot.</p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Authorizes the specified Amazon Web Services account to restore the specified\n            snapshot.</p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#AuthorizeSnapshotAccessMessage": {
@@ -665,7 +745,7 @@
                 "AccountWithRestoreAccess": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the account authorized to restore the specified\n            snapshot.</p>\n        <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account authorized to restore the specified\n            snapshot.</p>\n        <p>To share a snapshot with Amazon Web Services Support, specify amazon-redshift-support.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2197,7 +2277,7 @@
                 "TargetSnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier given to the new manual snapshot.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Cannot be null, empty, or blank.</p>\n            </li>\n            <li>\n                <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n                <p>First character must be a letter.</p>\n            </li>\n            <li>\n                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n                <p>Must be unique for the account that is making the request.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier given to the new manual snapshot.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Cannot be null, empty, or blank.</p>\n            </li>\n            <li>\n                <p>Must contain from 1 to 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n                <p>First character must be a letter.</p>\n            </li>\n            <li>\n                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n                <p>Must be unique for the Amazon Web Services account that is making the request.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2388,7 +2468,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the cluster. You use this identifier to refer to the\n            cluster for any subsequent cluster operations such as deleting or modifying. The\n            identifier also appears in the Amazon Redshift console.</p> \n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an account.</p>\n            </li>\n         </ul>\n\n            <p>Example: <code>myexamplecluster</code>\n        </p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the cluster. You use this identifier to refer to the\n            cluster for any subsequent cluster operations such as deleting or modifying. The\n            identifier also appears in the Amazon Redshift console.</p> \n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an Amazon Web Services account.</p>\n            </li>\n         </ul>\n\n            <p>Example: <code>myexamplecluster</code>\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2572,7 +2652,7 @@
                 "AquaConfigurationStatus": {
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) when it is created. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2612,14 +2692,14 @@
                 "ParameterGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the cluster parameter group.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be 1 to 255 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n                <p>First character must be a letter.</p>\n            </li>\n            <li>\n                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n                <p>Must be unique withing your account.</p>\n            </li>\n         </ul>\n        <note>\n            <p>This value is stored as a lower-case string.</p>\n        </note>",
+                        "smithy.api#documentation": "<p>The name of the cluster parameter group.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must be 1 to 255 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n                <p>First character must be a letter.</p>\n            </li>\n            <li>\n                <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n                <p>Must be unique withing your Amazon Web Services account.</p>\n            </li>\n         </ul>\n        <note>\n            <p>This value is stored as a lower-case string.</p>\n        </note>",
                         "smithy.api#required": {}
                     }
                 },
                 "ParameterGroupFamily": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Redshift engine version to which the cluster parameter group applies. The\n            cluster engine version determines the set of parameters.</p>\n        <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of\n            all the parameter groups that are owned by your account, including the default\n            parameter groups for each Amazon Redshift engine version. The parameter group family names\n            associated with the default parameter groups provide you the valid values. For example,\n            a valid family name is \"redshift-1.0\". </p>",
+                        "smithy.api#documentation": "<p>The Amazon Redshift engine version to which the cluster parameter group applies. The\n            cluster engine version determines the set of parameters.</p>\n        <p>To get a list of valid parameter group family names, you can call <a>DescribeClusterParameterGroups</a>. By default, Amazon Redshift returns a list of\n            all the parameter groups that are owned by your Amazon Web Services account, including the default\n            parameter groups for each Amazon Redshift engine version. The parameter group family names\n            associated with the default parameter groups provide you the valid values. For example,\n            a valid family name is \"redshift-1.0\". </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2689,7 +2769,7 @@
                 "ClusterSecurityGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the security group. Amazon Redshift stores the value as a lowercase\n            string.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain no more than 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n                <p>Must not be \"Default\".</p>\n            </li>\n            <li>\n                <p>Must be unique for all security groups that are created by your account.</p>\n            </li>\n         </ul>\n        <p>Example: <code>examplesecuritygroup</code>\n        </p>",
+                        "smithy.api#documentation": "<p>The name for the security group. Amazon Redshift stores the value as a lowercase\n            string.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain no more than 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n                <p>Must not be \"Default\".</p>\n            </li>\n            <li>\n                <p>Must be unique for all security groups that are created by your Amazon Web Services account.</p>\n            </li>\n         </ul>\n        <p>Example: <code>examplesecuritygroup</code>\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2760,7 +2840,7 @@
                 "SnapshotIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique identifier for the snapshot that you are requesting. This identifier must\n            be unique for all snapshots within the account.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Cannot be null, empty, or blank</p>\n            </li>\n            <li>\n                <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n                <p>First character must be a letter</p>\n            </li>\n            <li>\n                <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n        <p>Example: <code>my-snapshot-id</code>\n        </p>",
+                        "smithy.api#documentation": "<p>A unique identifier for the snapshot that you are requesting. This identifier must\n            be unique for all snapshots within the Amazon Web Services account.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Cannot be null, empty, or blank</p>\n            </li>\n            <li>\n                <p>Must contain from 1 to 255 alphanumeric characters or hyphens</p>\n            </li>\n            <li>\n                <p>First character must be a letter</p>\n            </li>\n            <li>\n                <p>Cannot end with a hyphen or contain two consecutive hyphens</p>\n            </li>\n         </ul>\n        <p>Example: <code>my-snapshot-id</code>\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2840,7 +2920,7 @@
                 "ClusterSubnetGroupName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase\n            string.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain no more than 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n                <p>Must not be \"Default\".</p>\n            </li>\n            <li>\n                <p>Must be unique for all subnet groups that are created by your account.</p>\n            </li>\n         </ul>\n        <p>Example: <code>examplesubnetgroup</code>\n        </p>",
+                        "smithy.api#documentation": "<p>The name for the subnet group. Amazon Redshift stores the value as a lowercase\n            string.</p>\n        <p>Constraints:</p>\n        <ul>\n            <li>\n                <p>Must contain no more than 255 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n                <p>Must not be \"Default\".</p>\n            </li>\n            <li>\n                <p>Must be unique for all subnet groups that are created by your Amazon Web Services account.</p>\n            </li>\n         </ul>\n        <p>Example: <code>examplesubnetgroup</code>\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2933,7 +3013,7 @@
                 "ResourceOwner": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the owner of the cluster. This is only required if the cluster is in another account.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the owner of the cluster. This is only required if the cluster is in another Amazon Web Services account.</p>"
                     }
                 },
                 "EndpointName": {
@@ -3002,7 +3082,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN\n            (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console,\n            the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you\n            must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in\n            the SNS console.</p>\n        <p>You can specify the source type, and lists of Amazon Redshift source IDs, event\n            categories, and event severities. Notifications will be sent for all events you want\n            that match those criteria. For example, you can specify source type = cluster, source ID\n            = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity =\n            ERROR. The subscription will only send notifications for those ERROR events in the\n            Availability and Backup categories for the specified clusters.</p>\n        <p>If you specify both the source type and source IDs, such as source type = cluster\n            and source identifier = my-cluster-1, notifications will be sent for all the cluster\n            events for my-cluster-1. If you specify a source type but do not specify a source\n            identifier, you will receive notice of the events for the objects of that type in your\n            account. If you do not specify either the SourceType nor the SourceIdentifier, you\n            will be notified of events generated from all Amazon Redshift sources belonging to your account. You must specify a source type if you specify a source ID.</p>"
+                "smithy.api#documentation": "<p>Creates an Amazon Redshift event notification subscription. This action requires an ARN\n            (Amazon Resource Name) of an Amazon SNS topic created by either the Amazon Redshift console,\n            the Amazon SNS console, or the Amazon SNS API. To obtain an ARN with Amazon SNS, you\n            must create a topic in Amazon SNS and subscribe to the topic. The ARN is displayed in\n            the SNS console.</p>\n        <p>You can specify the source type, and lists of Amazon Redshift source IDs, event\n            categories, and event severities. Notifications will be sent for all events you want\n            that match those criteria. For example, you can specify source type = cluster, source ID\n            = my-cluster-1 and mycluster2, event categories = Availability, Backup, and severity =\n            ERROR. The subscription will only send notifications for those ERROR events in the\n            Availability and Backup categories for the specified clusters.</p>\n        <p>If you specify both the source type and source IDs, such as source type = cluster\n            and source identifier = my-cluster-1, notifications will be sent for all the cluster\n            events for my-cluster-1. If you specify a source type but do not specify a source\n            identifier, you will receive notice of the events for the objects of that type in your\n            Amazon Web Services account. If you do not specify either the SourceType nor the SourceIdentifier, you\n            will be notified of events generated from all Amazon Redshift sources belonging to your Amazon Web Services account. You must specify a source type if you specify a source ID.</p>"
             }
         },
         "com.amazonaws.redshift#CreateEventSubscriptionMessage": {
@@ -3025,7 +3105,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of source that will be generating the events. For example, if you want to\n            be notified of events generated by a cluster, you would set this parameter to cluster.\n            If this value is not specified, events are returned for all Amazon Redshift objects in your\n            account. You must specify a source type in order to specify source IDs.</p>\n        <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>"
+                        "smithy.api#documentation": "<p>The type of source that will be generating the events. For example, if you want to\n            be notified of events generated by a cluster, you would set this parameter to cluster.\n            If this value is not specified, events are returned for all Amazon Redshift objects in your\n            Amazon Web Services account. You must specify a source type in order to specify source IDs.</p>\n        <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>"
                     }
                 },
                 "SourceIds": {
@@ -3037,7 +3117,7 @@
                 "EventCategories": {
                     "target": "com.amazonaws.redshift#EventCategoriesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Redshift event categories to be published by the event notification\n            subscription.</p>\n        <p>Values: configuration, management, monitoring, security</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon Redshift event categories to be published by the event notification\n            subscription.</p>\n        <p>Values: configuration, management, monitoring, security, pending</p>"
                     }
                 },
                 "Severity": {
@@ -3343,7 +3423,7 @@
                 "SnapshotCopyGrantName": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the snapshot copy grant. This name must be unique in the region for the\n            account.</p> \n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an account.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The name of the snapshot copy grant. This name must be unique in the region for the\n            Amazon Web Services account.</p> \n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an Amazon Web Services account.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3593,6 +3673,152 @@
                 }
             }
         },
+        "com.amazonaws.redshift#DataShare": {
+            "type": "structure",
+            "members": {
+                "DataShareArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that references the datashare that is owned by a specific namespace of the producer cluster. A datashare ARN is in the <code>arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name}</code> format.</p>"
+                    }
+                },
+                "ProducerArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the producer.</p>"
+                    }
+                },
+                "AllowPubliclyAccessibleConsumers": {
+                    "target": "com.amazonaws.redshift#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies whether the datashare can be shared to a publicly accessible  cluster.</p>"
+                    }
+                },
+                "DataShareAssociations": {
+                    "target": "com.amazonaws.redshift#DataShareAssociationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies when the datashare has an association between a producer and data consumers.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DataShareAssociation": {
+            "type": "structure",
+            "members": {
+                "ConsumerIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the consumer accounts that have an association with a producer\n            datashare.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshift#DataShareStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the datashare that is associated.</p>"
+                    }
+                },
+                "CreatedDate": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date of the datashare that is associated.</p>"
+                    }
+                },
+                "StatusChangeDate": {
+                    "target": "com.amazonaws.redshift#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status change data of the datashare that is associated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The association of a datashare from a producer account with a data consumer.\n        </p>"
+            }
+        },
+        "com.amazonaws.redshift#DataShareAssociationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#DataShareAssociation"
+            }
+        },
+        "com.amazonaws.redshift#DataShareList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.redshift#DataShare"
+            }
+        },
+        "com.amazonaws.redshift#DataShareStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "PENDING_AUTHORIZATION",
+                        "name": "PENDING_AUTHORIZATION"
+                    },
+                    {
+                        "value": "AUTHORIZED",
+                        "name": "AUTHORIZED"
+                    },
+                    {
+                        "value": "DEAUTHORIZED",
+                        "name": "DEAUTHORIZED"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshift#DataShareStatusForConsumer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "AVAILABLE",
+                        "name": "AVAILABLE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.redshift#DataShareStatusForProducer": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "AUTHORIZED",
+                        "name": "AUTHORIZED"
+                    },
+                    {
+                        "value": "PENDING_AUTHORIZATION",
+                        "name": "PENDING_AUTHORIZATION"
+                    },
+                    {
+                        "value": "DEAUTHORIZED",
+                        "name": "DEAUTHORIZED"
+                    },
+                    {
+                        "value": "REJECTED",
+                        "name": "REJECTED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.redshift#DataTransferProgress": {
             "type": "structure",
             "members": {
@@ -3643,6 +3869,42 @@
                 "target": "com.amazonaws.redshift#String",
                 "traits": {
                     "smithy.api#xmlName": "DbGroup"
+                }
+            }
+        },
+        "com.amazonaws.redshift#DeauthorizeDataShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DeauthorizeDataShareMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DataShare"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#InvalidDataShareFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>From the producer account, removes authorization from the specified datashare. </p>"
+            }
+        },
+        "com.amazonaws.redshift#DeauthorizeDataShareMessage": {
+            "type": "structure",
+            "members": {
+                "DataShareArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to remove authorization from.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ConsumerIdentifier": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the data consumer that is to have authorization removed from the datashare. \n            This identifier is an AWS account ID.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -4647,7 +4909,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns one or more snapshot objects, which contain metadata about your cluster\n            snapshots. By default, this operation returns information about all snapshots of all\n            clusters that are owned by your account. No information is returned for\n            snapshots owned by inactive accounts.</p>\n        <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns\n            all snapshots that match any combination of the specified keys and values. For example,\n            if you have <code>owner</code> and <code>environment</code> for tag keys, and\n                <code>admin</code> and <code>test</code> for tag values, all snapshots that have any\n            combination of those values are returned. Only snapshots that you own are returned in\n            the response; shared snapshots are not returned with the tag key and tag value request\n            parameters.</p>\n        <p>If both tag keys and values are omitted from the request, snapshots are returned\n            regardless of whether they have tag keys or values associated with them.</p>",
+                "smithy.api#documentation": "<p>Returns one or more snapshot objects, which contain metadata about your cluster\n            snapshots. By default, this operation returns information about all snapshots of all\n            clusters that are owned by your Amazon Web Services account. No information is returned for\n            snapshots owned by inactive Amazon Web Services accounts.</p>\n        <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns\n            all snapshots that match any combination of the specified keys and values. For example,\n            if you have <code>owner</code> and <code>environment</code> for tag keys, and\n                <code>admin</code> and <code>test</code> for tag values, all snapshots that have any\n            combination of those values are returned. Only snapshots that you own are returned in\n            the response; shared snapshots are not returned with the tag key and tag value request\n            parameters.</p>\n        <p>If both tag keys and values are omitted from the request, snapshots are returned\n            regardless of whether they have tag keys or values associated with them.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -4741,7 +5003,7 @@
                 "OwnerAccount": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account used to create or copy the snapshot. Use this field to\n            filter the results to snapshots owned by a particular account. To describe snapshots you\n            own, either specify your account, or do not specify the\n            parameter.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account used to create or copy the snapshot. Use this field to\n            filter the results to snapshots owned by a particular account. To describe snapshots you\n            own, either specify your Amazon Web Services account, or do not specify the\n            parameter.</p>"
                     }
                 },
                 "TagKeys": {
@@ -4790,7 +5052,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns one or more cluster subnet group objects, which contain metadata about your\n            cluster subnet groups. By default, this operation returns information about all cluster\n            subnet groups that are defined in your account.</p>\n        <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns\n            all subnet groups that match any combination of the specified keys and values. For\n            example, if you have <code>owner</code> and <code>environment</code> for tag keys, and\n                <code>admin</code> and <code>test</code> for tag values, all subnet groups that have\n            any combination of those values are returned.</p>\n        <p>If both tag keys and values are omitted from the request, subnet groups are\n            returned regardless of whether they have tag keys or values associated with\n            them.</p>",
+                "smithy.api#documentation": "<p>Returns one or more cluster subnet group objects, which contain metadata about your\n            cluster subnet groups. By default, this operation returns information about all cluster\n            subnet groups that are defined in your Amazon Web Services account.</p>\n        <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns\n            all subnet groups that match any combination of the specified keys and values. For\n            example, if you have <code>owner</code> and <code>environment</code> for tag keys, and\n                <code>admin</code> and <code>test</code> for tag values, all subnet groups that have\n            any combination of those values are returned.</p>\n        <p>If both tag keys and values are omitted from the request, subnet groups are\n            returned regardless of whether they have tag keys or values associated with\n            them.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5092,6 +5354,189 @@
                 "smithy.api#documentation": "<p></p>"
             }
         },
+        "com.amazonaws.redshift#DescribeDataShares": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DescribeDataSharesMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DescribeDataSharesResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#InvalidDataShareFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Shows the status of any inbound or outbound datashares available in the specified\n            account.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DescribeDataSharesForConsumer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DescribeDataSharesForConsumerMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DescribeDataSharesForConsumerResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#InvalidNamespaceFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of datashares where the account identifier being called is a consumer account identifier.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DescribeDataSharesForConsumerMessage": {
+            "type": "structure",
+            "members": {
+                "ConsumerArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer that returns in the list of datashares.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshift#DataShareStatusForConsumer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier giving the status of a datashare in the consumer cluster. If this field is specified, Amazon\n            Redshift returns the list of datashares that have the specified status.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value. </p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForConsumer</a> request\n            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeDataSharesForConsumerResult": {
+            "type": "structure",
+            "members": {
+                "DataShares": {
+                    "target": "com.amazonaws.redshift#DataShareList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the results of datashares available for consumers.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForConsumer</a> request\n            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeDataSharesForProducer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DescribeDataSharesForProducerMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DescribeDataSharesForProducerResult"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#InvalidNamespaceFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of datashares when the account identifier being called is a producer account identifier.</p>"
+            }
+        },
+        "com.amazonaws.redshift#DescribeDataSharesForProducerMessage": {
+            "type": "structure",
+            "members": {
+                "ProducerArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the producer that returns in the list of datashares.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.redshift#DataShareStatusForProducer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier giving the status of a datashare in the producer. If this field is specified, Amazon\n            Redshift returns the list of datashares that have the specified status.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value. </p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForProducer</a> request\n            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeDataSharesForProducerResult": {
+            "type": "structure",
+            "members": {
+                "DataShares": {
+                    "target": "com.amazonaws.redshift#DataShareList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows the results of datashares available for producers.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response\n            records. When the results of a <a>DescribeDataSharesForProducer</a> request\n            exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the\n            <code>Marker</code> field of the response. You can retrieve the next set of response\n            records by providing the returned marker value in the <code>Marker</code> parameter and\n            retrying the request. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeDataSharesMessage": {
+            "type": "structure",
+            "members": {
+                "DataShareArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the datashare to describe details of.</p>"
+                    }
+                },
+                "MaxRecords": {
+                    "target": "com.amazonaws.redshift#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of response records to return in each call. If the number of\n            remaining response records exceeds the specified <code>MaxRecords</code> value, a value\n            is returned in a <code>marker</code> field of the response. You can retrieve the next\n            set of records by retrying the command with the returned marker value. </p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.redshift#DescribeDataSharesResult": {
+            "type": "structure",
+            "members": {
+                "DataShares": {
+                    "target": "com.amazonaws.redshift#DataShareList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The results returned from describing datashares.</p>"
+                    }
+                },
+                "Marker": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies the starting point to return a set of response records. When the results of a <a>DescribeDataShares</a> request exceed the value specified in <code>MaxRecords</code>, AWS returns a value in the <code>Marker</code> field of the response. You can retrieve the next set of response records by providing the returned marker value in the <code>Marker</code> parameter and retrying the request. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#DescribeDefaultClusterParameters": {
             "type": "operation",
             "input": {
@@ -5186,7 +5631,7 @@
                 "ResourceOwner": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the owner of the cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the owner of the cluster.</p>"
                     }
                 },
                 "EndpointName": {
@@ -5253,7 +5698,7 @@
                 "Account": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Aaccount ID of either the cluster owner (grantor) or grantee. \n       If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.</p>"
+                        "smithy.api#documentation": "<p>The AAmazon Web Services account ID of either the cluster owner (grantor) or grantee. \n       If <code>Grantee</code> parameter is true, then the <code>Account</code> value is of the grantor.</p>"
                     }
                 },
                 "Grantee": {
@@ -5451,7 +5896,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the specified HSM client certificate. If no certificate\n            ID is specified, returns information about all the HSM certificates owned by your account.</p>\n        <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns\n            all HSM client certificates that match any combination of the specified keys and values.\n            For example, if you have <code>owner</code> and <code>environment</code> for tag keys,\n            and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates\n            that have any combination of those values are returned.</p>\n        <p>If both tag keys and values are omitted from the request, HSM client certificates\n            are returned regardless of whether they have tag keys or values associated with\n            them.</p>",
+                "smithy.api#documentation": "<p>Returns information about the specified HSM client certificate. If no certificate\n            ID is specified, returns information about all the HSM certificates owned by your Amazon Web Services account.</p>\n        <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns\n            all HSM client certificates that match any combination of the specified keys and values.\n            For example, if you have <code>owner</code> and <code>environment</code> for tag keys,\n            and <code>admin</code> and <code>test</code> for tag values, all HSM client certificates\n            that have any combination of those values are returned.</p>\n        <p>If both tag keys and values are omitted from the request, HSM client certificates\n            are returned regardless of whether they have tag keys or values associated with\n            them.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5466,7 +5911,7 @@
                 "HsmClientCertificateIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of a specific HSM client certificate for which you want information.\n            If no identifier is specified, information is returned for all HSM client certificates\n            owned by your account.</p>"
+                        "smithy.api#documentation": "<p>The identifier of a specific HSM client certificate for which you want information.\n            If no identifier is specified, information is returned for all HSM client certificates\n            owned by your Amazon Web Services account.</p>"
                     }
                 },
                 "MaxRecords": {
@@ -5515,7 +5960,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about the specified Amazon Redshift HSM configuration. If no\n            configuration ID is specified, returns information about all the HSM configurations\n            owned by your account.</p>\n        <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns\n            all HSM connections that match any combination of the specified keys and values. For\n            example, if you have <code>owner</code> and <code>environment</code> for tag keys, and\n                <code>admin</code> and <code>test</code> for tag values, all HSM connections that\n            have any combination of those values are returned.</p>\n        <p>If both tag keys and values are omitted from the request, HSM connections are\n            returned regardless of whether they have tag keys or values associated with\n            them.</p>",
+                "smithy.api#documentation": "<p>Returns information about the specified Amazon Redshift HSM configuration. If no\n            configuration ID is specified, returns information about all the HSM configurations\n            owned by your Amazon Web Services account.</p>\n        <p>If you specify both tag keys and tag values in the same request, Amazon Redshift returns\n            all HSM connections that match any combination of the specified keys and values. For\n            example, if you have <code>owner</code> and <code>environment</code> for tag keys, and\n                <code>admin</code> and <code>test</code> for tag values, all HSM connections that\n            have any combination of those values are returned.</p>\n        <p>If both tag keys and values are omitted from the request, HSM connections are\n            returned regardless of whether they have tag keys or values associated with\n            them.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5530,7 +5975,7 @@
                 "HsmConfigurationIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of a specific Amazon Redshift HSM configuration to be described. If no\n            identifier is specified, information is returned for all HSM configurations owned by\n            your account.</p>"
+                        "smithy.api#documentation": "<p>The identifier of a specific Amazon Redshift HSM configuration to be described. If no\n            identifier is specified, information is returned for all HSM configurations owned by\n            your Amazon Web Services account.</p>"
                     }
                 },
                 "MaxRecords": {
@@ -5651,7 +6096,7 @@
                 "OwnerAccount": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account used to create or copy the snapshot. \n            Required if you are restoring a snapshot you do not own, \n            optional if you own the snapshot.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account used to create or copy the snapshot. \n            Required if you are restoring a snapshot you do not own, \n            optional if you own the snapshot.</p>"
                     }
                 },
                 "Filters": {
@@ -5684,7 +6129,7 @@
                 "target": "com.amazonaws.redshift#OrderableClusterOptionsMessage"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of orderable cluster options. Before you create a new cluster you\n            can use this operation to find what options are available, such as the EC2 Availability\n            Zones (AZ) in the specific Region that you can specify, and the node types you can\n            request. The node types differ by available storage, memory, CPU and price. With the\n            cost involved you might want to obtain a list of cluster options in the specific region\n            and specify values when creating a cluster. \nFor more information about managing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Returns a list of orderable cluster options. Before you create a new cluster you\n            can use this operation to find what options are available, such as the EC2 Availability\n            Zones (AZ) in the specific Amazon Web Services Region that you can specify, and the node types you can\n            request. The node types differ by available storage, memory, CPU and price. With the\n            cost involved you might want to obtain a list of cluster options in the specific region\n            and specify values when creating a cluster. \nFor more information about managing clusters, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html\">Amazon Redshift Clusters</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -5751,7 +6196,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region ID that owns the cluster.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5920,7 +6365,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of a cluster whose resize progress you are requesting. This\n            parameter is case-sensitive.</p>\n        <p>By default, resize operations for all clusters defined for an account are\n            returned.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of a cluster whose resize progress you are requesting. This\n            parameter is case-sensitive.</p>\n        <p>By default, resize operations for all clusters defined for an Amazon Web Services account are\n            returned.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6025,7 +6470,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of snapshot copy grants owned by the account in the destination\n            region.</p>\n        <p>\nFor more information about managing snapshot copy grants, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
+                "smithy.api#documentation": "<p>Returns a list of snapshot copy grants owned by the Amazon Web Services account in the destination\n            region.</p>\n        <p>\nFor more information about managing snapshot copy grants, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html\">Amazon Redshift Database Encryption</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.\n</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -6442,6 +6887,50 @@
                 }
             }
         },
+        "com.amazonaws.redshift#DisassociateDataShareConsumer": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#DisassociateDataShareConsumerMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DataShare"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#InvalidDataShareFault"
+                },
+                {
+                    "target": "com.amazonaws.redshift#InvalidNamespaceFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>From a consumer account, remove association for the specified datashare.\n            </p>"
+            }
+        },
+        "com.amazonaws.redshift#DisassociateDataShareConsumerMessage": {
+            "type": "structure",
+            "members": {
+                "DataShareArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to remove association for. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisassociateEntireAccount": {
+                    "target": "com.amazonaws.redshift#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies whether association for the datashare is removed from the\n            entire account.</p>"
+                    }
+                },
+                "ConsumerArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the consumer that association for\n            the datashare is removed from.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.redshift#Double": {
             "type": "double"
         },
@@ -6469,7 +6958,7 @@
                 "EC2SecurityGroupOwnerId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the owner of the EC2 security group specified in the\n                <code>EC2SecurityGroupName</code> field. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the owner of the EC2 security group specified in the\n                <code>EC2SecurityGroupName</code> field. </p>"
                     }
                 },
                 "Tags": {
@@ -6641,7 +7130,7 @@
                 "DestinationRegion": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The destination Region that you want to copy snapshots to.</p>\n        <p>Constraints: Must be the name of a valid Region. For more information, see\n                <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference.\n        </p>",
+                        "smithy.api#documentation": "<p>The destination Amazon Web Services Region that you want to copy snapshots to.</p>\n        <p>Constraints: Must be the name of a valid Amazon Web Services Region. For more information, see\n                <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#redshift_region\">Regions and Endpoints</a> in the Amazon Web Services General Reference.\n        </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6660,7 +7149,7 @@
                 "ManualSnapshotRetentionPeriod": {
                     "target": "com.amazonaws.redshift#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days to retain newly copied snapshots in the destination Region\n            after they are copied from the source Region. If the value is -1, the manual\n            snapshot is retained indefinitely. </p>\n        <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
+                        "smithy.api#documentation": "<p>The number of days to retain newly copied snapshots in the destination Amazon Web Services Region\n            after they are copied from the source Amazon Web Services Region. If the value is -1, the manual\n            snapshot is retained indefinitely. </p>\n        <p>The value must be either -1 or an integer between 1 and 3,653.</p>"
                     }
                 }
             },
@@ -6714,7 +7203,7 @@
                 "ResourceOwner": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the owner of the cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the owner of the cluster.</p>"
                     }
                 },
                 "SubnetGroupName": {
@@ -6813,13 +7302,13 @@
                 "Grantor": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the cluster owner.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the cluster owner.</p>"
                     }
                 },
                 "Grantee": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the grantee of the cluster.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the grantee of the cluster.</p>"
                     }
                 },
                 "ClusterIdentifier": {
@@ -6866,7 +7355,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across accounts.</p>"
+                "smithy.api#documentation": "<p>Describes an endpoint authorization for authorizing Redshift-managed VPC endpoint access to a cluster across Amazon Web Services accounts.</p>"
             }
         },
         "com.amazonaws.redshift#EndpointAuthorizationAlreadyExistsFault": {
@@ -7018,7 +7507,7 @@
                 "EventCategories": {
                     "target": "com.amazonaws.redshift#EventCategoriesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the event categories.</p>\n        <p>Values: Configuration, Management, Monitoring, Security</p>"
+                        "smithy.api#documentation": "<p>A list of the event categories.</p>\n        <p>Values: Configuration, Management, Monitoring, Security, Pending</p>"
                     }
                 },
                 "Severity": {
@@ -7152,7 +7641,7 @@
                 "CustomerAwsId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account associated with the Amazon Redshift event notification\n            subscription.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account associated with the Amazon Redshift event notification\n            subscription.</p>"
                     }
                 },
                 "CustSubscriptionId": {
@@ -7194,7 +7683,7 @@
                 "EventCategoriesList": {
                     "target": "com.amazonaws.redshift#EventCategoriesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of Amazon Redshift event categories specified in the event notification\n            subscription.</p>\n        <p>Values: Configuration, Management, Monitoring, Security</p>"
+                        "smithy.api#documentation": "<p>The list of Amazon Redshift event categories specified in the event notification\n            subscription.</p>\n        <p>Values: Configuration, Management, Monitoring, Security, Pending</p>"
                     }
                 },
                 "Severity": {
@@ -7838,7 +8327,7 @@
                     "code": "InvalidAuthenticationProfileRequestFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The authentication profile request is not valid. The profile name can't be null or empty. \n            The authentication profile API operation must be available in the Region.</p>",
+                "smithy.api#documentation": "<p>The authentication profile request is not valid. The profile name can't be null or empty. \n            The authentication profile API operation must be available in the Amazon Web Services Region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -7996,6 +8485,23 @@
                 "smithy.api#httpError": 400
             }
         },
+        "com.amazonaws.redshift#InvalidDataShareFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidDataShareFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>There is an error with the datashare.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
         "com.amazonaws.redshift#InvalidElasticIpFault": {
             "type": "structure",
             "members": {
@@ -8060,6 +8566,23 @@
                     "httpResponseCode": 400
                 },
                 "smithy.api#documentation": "<p>The specified HSM configuration is not in the <code>available</code> state, or it\n            is still in use by one or more Amazon Redshift clusters.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.redshift#InvalidNamespaceFault": {
+            "type": "structure",
+            "members": {
+                "message": {
+                    "target": "com.amazonaws.redshift#ExceptionMessage"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidNamespaceFault",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>The namespace isn't valid because the namespace doesn't exist. Provide a valid namespace.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -8449,7 +8972,7 @@
                 "AquaConfigurationStatus": {
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new value of AQUA configuration status. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The new value of AQUA configuration status. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -8867,7 +9390,7 @@
                 "NewClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new identifier for the cluster.</p> \n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an account.</p>\n            </li>\n         </ul>\n\n            <p>Example: <code>examplecluster</code>\n        </p>"
+                        "smithy.api#documentation": "<p>The new identifier for the cluster.</p> \n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an Amazon Web Services account.</p>\n            </li>\n         </ul>\n\n            <p>Example: <code>examplecluster</code>\n        </p>"
                     }
                 },
                 "PubliclyAccessible": {
@@ -8946,7 +9469,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the parameters of a parameter group.</p>\n        <p>\nFor more information about parameters and parameter groups, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Modifies the parameters of a parameter group. For the parameters parameter, it can't contain ASCII characters.</p>\n        <p>\nFor more information about parameters and parameter groups, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-parameter-groups.html\">Amazon Redshift Parameter Groups</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#ModifyClusterParameterGroupMessage": {
@@ -9256,7 +9779,7 @@
                 "SourceType": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of source that will be generating the events. For example, if you want to\n            be notified of events generated by a cluster, you would set this parameter to cluster.\n            If this value is not specified, events are returned for all Amazon Redshift objects in your\n            account. You must specify a source type in order to specify source IDs.</p>\n        <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>"
+                        "smithy.api#documentation": "<p>The type of source that will be generating the events. For example, if you want to\n            be notified of events generated by a cluster, you would set this parameter to cluster.\n            If this value is not specified, events are returned for all Amazon Redshift objects in your\n            Amazon Web Services account. You must specify a source type in order to specify source IDs.</p>\n        <p>Valid values: cluster, cluster-parameter-group, cluster-security-group, cluster-snapshot, and scheduled-action.</p>"
                     }
                 },
                 "SourceIds": {
@@ -9268,7 +9791,7 @@
                 "EventCategories": {
                     "target": "com.amazonaws.redshift#EventCategoriesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Redshift event categories to be published by the event notification\n            subscription.</p>\n        <p>Values: configuration, management, monitoring, security</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon Redshift event categories to be published by the event notification\n            subscription.</p>\n        <p>Values: configuration, management, monitoring, security, pending</p>"
                     }
                 },
                 "Severity": {
@@ -9405,7 +9928,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Modifies the number of days to retain snapshots in the destination Region after\n            they are copied from the source Region. By default, this operation only changes the\n            retention period of copied automated snapshots. The retention periods for both new and\n            existing copied automated snapshots are updated with the new retention period. You can\n            set the manual option to change only the retention periods of copied manual snapshots.\n            If you set this option, only newly copied manual snapshots have the new retention\n            period. </p>"
+                "smithy.api#documentation": "<p>Modifies the number of days to retain snapshots in the destination Amazon Web Services Region after\n            they are copied from the source Amazon Web Services Region. By default, this operation only changes the\n            retention period of copied automated snapshots. The retention periods for both new and\n            existing copied automated snapshots are updated with the new retention period. You can\n            set the manual option to change only the retention periods of copied manual snapshots.\n            If you set this option, only newly copied manual snapshots have the new retention\n            period. </p>"
             }
         },
         "com.amazonaws.redshift#ModifySnapshotCopyRetentionPeriodMessage": {
@@ -9414,14 +9937,14 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique identifier of the cluster for which you want to change the retention\n            period for either automated or manual snapshots that are copied to a destination Region.</p>\n        <p>Constraints: Must be the valid name of an existing cluster that has cross-region\n            snapshot copy enabled.</p>",
+                        "smithy.api#documentation": "<p>The unique identifier of the cluster for which you want to change the retention\n            period for either automated or manual snapshots that are copied to a destination Amazon Web Services Region.</p>\n        <p>Constraints: Must be the valid name of an existing cluster that has cross-region\n            snapshot copy enabled.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "RetentionPeriod": {
                     "target": "com.amazonaws.redshift#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of days to retain automated snapshots in the destination Region\n            after they are copied from the source Region.</p>\n        <p>By default, this only changes the retention period of copied automated snapshots. </p>\n        <p>If you decrease the retention period for automated snapshots that are copied to a\n            destination Region, Amazon Redshift deletes any existing automated snapshots that were\n            copied to the destination Region and that fall outside of the new retention\n            period.</p>\n        <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p>\n        <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will\n            have the new retention period. </p>\n        <p>If you specify the value of -1 newly copied manual snapshots are retained\n            indefinitely.</p>\n        <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653\n            for manual snapshots.</p>",
+                        "smithy.api#documentation": "<p>The number of days to retain automated snapshots in the destination Amazon Web Services Region\n            after they are copied from the source Amazon Web Services Region.</p>\n        <p>By default, this only changes the retention period of copied automated snapshots. </p>\n        <p>If you decrease the retention period for automated snapshots that are copied to a\n            destination Amazon Web Services Region, Amazon Redshift deletes any existing automated snapshots that were\n            copied to the destination Amazon Web Services Region and that fall outside of the new retention\n            period.</p>\n        <p>Constraints: Must be at least 1 and no more than 35 for automated snapshots. </p>\n        <p>If you specify the <code>manual</code> option, only newly copied manual snapshots will\n            have the new retention period. </p>\n        <p>If you specify the value of -1 newly copied manual snapshots are retained\n            indefinitely.</p>\n        <p>Constraints: The number of days must be either -1 or an integer between 1 and 3,653\n            for manual snapshots.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10005,7 +10528,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region ID that owns the cluster.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -10370,7 +10893,13 @@
                     "target": "com.amazonaws.redshift#AddPartner"
                 },
                 {
+                    "target": "com.amazonaws.redshift#AssociateDataShareConsumer"
+                },
+                {
                     "target": "com.amazonaws.redshift#AuthorizeClusterSecurityGroupIngress"
+                },
+                {
+                    "target": "com.amazonaws.redshift#AuthorizeDataShare"
                 },
                 {
                     "target": "com.amazonaws.redshift#AuthorizeEndpointAccess"
@@ -10434,6 +10963,9 @@
                 },
                 {
                     "target": "com.amazonaws.redshift#CreateUsageLimit"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DeauthorizeDataShare"
                 },
                 {
                     "target": "com.amazonaws.redshift#DeleteAuthenticationProfile"
@@ -10517,6 +11049,15 @@
                     "target": "com.amazonaws.redshift#DescribeClusterVersions"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DescribeDataShares"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DescribeDataSharesForConsumer"
+                },
+                {
+                    "target": "com.amazonaws.redshift#DescribeDataSharesForProducer"
+                },
+                {
                     "target": "com.amazonaws.redshift#DescribeDefaultClusterParameters"
                 },
                 {
@@ -10589,6 +11130,9 @@
                     "target": "com.amazonaws.redshift#DisableSnapshotCopy"
                 },
                 {
+                    "target": "com.amazonaws.redshift#DisassociateDataShareConsumer"
+                },
+                {
                     "target": "com.amazonaws.redshift#EnableLogging"
                 },
                 {
@@ -10658,6 +11202,9 @@
                     "target": "com.amazonaws.redshift#RebootCluster"
                 },
                 {
+                    "target": "com.amazonaws.redshift#RejectDataShare"
+                },
+                {
                     "target": "com.amazonaws.redshift#ResetClusterParameterGroup"
                 },
                 {
@@ -10704,6 +11251,35 @@
                 "smithy.api#title": "Amazon Redshift",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://redshift.amazonaws.com/doc/2012-12-01/"
+                }
+            }
+        },
+        "com.amazonaws.redshift#RejectDataShare": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.redshift#RejectDataShareMessage"
+            },
+            "output": {
+                "target": "com.amazonaws.redshift#DataShare"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.redshift#InvalidDataShareFault"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>From the consumer account, rejects the specified datashare.</p>"
+            }
+        },
+        "com.amazonaws.redshift#RejectDataShareMessage": {
+            "type": "structure",
+            "members": {
+                "DataShareArn": {
+                    "target": "com.amazonaws.redshift#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the datashare to reject.</p>",
+                        "smithy.api#required": {}
+                    }
                 }
             }
         },
@@ -11410,7 +11986,7 @@
                 "ClusterIdentifier": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the cluster that will be created from restoring the\n            snapshot.</p> \n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an account.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>The identifier of the cluster that will be created from restoring the\n            snapshot.</p> \n         <p>Constraints:</p>\n         <ul>\n            <li>\n               <p>Must contain from 1 to 63 alphanumeric characters or hyphens.</p>\n            </li>\n            <li>\n               <p>Alphabetic characters must be lowercase.</p>\n            </li>\n            <li>\n               <p>First character must be a letter.</p>\n            </li>\n            <li>\n               <p>Cannot end with a hyphen or contain two consecutive hyphens.</p>\n            </li>\n            <li>\n               <p>Must be unique for all clusters within an Amazon Web Services account.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11460,7 +12036,7 @@
                 "OwnerAccount": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account used to create or copy the snapshot. Required if you are\n            restoring a snapshot you do not own, optional if you own the snapshot.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account used to create or copy the snapshot. Required if you are\n            restoring a snapshot you do not own, optional if you own the snapshot.</p>"
                     }
                 },
                 "HsmClientCertificateIdentifier": {
@@ -11574,7 +12150,7 @@
                 "AquaConfigurationStatus": {
                     "target": "com.amazonaws.redshift#AquaConfigurationStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The value represents how the cluster is configured to use AQUA (Advanced Query Accelerator) after the cluster is restored. Possible values include the following.</p>\n        <ul>\n            <li>\n               <p>enabled - Use AQUA if it is available for the current Amazon Web Services Region and Amazon Redshift node type.</p>\n            </li>\n            <li>\n               <p>disabled - Don't use AQUA. </p>\n            </li>\n            <li>\n               <p>auto - Amazon Redshift determines whether to use AQUA.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -11873,7 +12449,7 @@
                 "EC2SecurityGroupOwnerId": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account number of the owner of the security group specified in the\n                <code>EC2SecurityGroupName</code> parameter. The Amazon Web Services access key ID is not an\n            acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified,\n                <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code>\n            cannot be provided. </p>\n        <p>Example: <code>111122223333</code>\n        </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account number of the owner of the security group specified in the\n                <code>EC2SecurityGroupName</code> parameter. The Amazon Web Services access key ID is not an\n            acceptable value. If <code>EC2SecurityGroupOwnerId</code> is specified,\n                <code>EC2SecurityGroupName</code> must also be provided. and <code>CIDRIP</code>\n            cannot be provided. </p>\n        <p>Example: <code>111122223333</code>\n        </p>"
                     }
                 }
             },
@@ -11936,7 +12512,7 @@
                 "Account": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID whose access is to be revoked.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID whose access is to be revoked.</p>"
                     }
                 },
                 "VpcIds": {
@@ -11973,7 +12549,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes the ability of the specified  account to restore the specified\n            snapshot. If the account is currently restoring the snapshot, the restore will run to\n            completion.</p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Removes the ability of the specified  Amazon Web Services account to restore the specified\n            snapshot. If the account is currently restoring the snapshot, the restore will run to\n            completion.</p>\n        <p>\nFor more information about working with snapshots, go to \n<a href=\"https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-snapshots.html\">Amazon Redshift Snapshots</a> \nin the <i>Amazon Redshift Cluster Management Guide</i>.</p>"
             }
         },
         "com.amazonaws.redshift#RevokeSnapshotAccessMessage": {
@@ -11995,7 +12571,7 @@
                 "AccountWithRestoreAccess": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the account that can no longer restore the specified\n            snapshot.</p>",
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Web Services account that can no longer restore the specified\n            snapshot.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -12554,13 +13130,13 @@
                 "AccountsWithRestoreAccess": {
                     "target": "com.amazonaws.redshift#AccountsWithRestoreAccessList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of the accounts authorized to restore the snapshot. Returns\n                <code>null</code> if no accounts are authorized. Visible only to the snapshot owner.\n        </p>"
+                        "smithy.api#documentation": "<p>A list of the Amazon Web Services accounts authorized to restore the snapshot. Returns\n                <code>null</code> if no accounts are authorized. Visible only to the snapshot owner.\n        </p>"
                     }
                 },
                 "OwnerAccount": {
                     "target": "com.amazonaws.redshift#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>For manual snapshots, the account used to create or copy the snapshot.\n            For automatic snapshots, the owner of the cluster. The owner can perform all snapshot\n            actions, such as sharing a manual snapshot.</p>"
+                        "smithy.api#documentation": "<p>For manual snapshots, the Amazon Web Services account used to create or copy the snapshot.\n            For automatic snapshots, the owner of the cluster. The owner can perform all snapshot\n            actions, such as sharing a manual snapshot.</p>"
                     }
                 },
                 "TotalBackupSizeInMegaBytes": {
@@ -12823,7 +13399,7 @@
                     "code": "SnapshotCopyGrantQuotaExceededFault",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p>The account has exceeded the maximum number of snapshot copy grants in this\n            region.</p>",
+                "smithy.api#documentation": "<p>The Amazon Web Services account has exceeded the maximum number of snapshot copy grants in this\n            region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -13768,7 +14344,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.redshift#PartnerIntegrationAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region ID that owns the cluster.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the cluster.</p>",
                         "smithy.api#required": {}
                     }
                 },

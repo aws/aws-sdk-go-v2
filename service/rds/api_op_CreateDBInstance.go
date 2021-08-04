@@ -94,7 +94,7 @@ type CreateDBInstanceInput struct {
 	// This member is required.
 	Engine *string
 
-	// The amount of storage (in gibibytes) to allocate for the DB instance. Type:
+	// The amount of storage in gibibytes (GiB) to allocate for the DB instance. Type:
 	// Integer Amazon Aurora Not applicable. Aurora cluster volumes automatically grow
 	// as the amount of data in your database increases, though you are only charged
 	// for the space that you use in an Aurora cluster volume. MySQL Constraints to the
@@ -494,10 +494,10 @@ type CreateDBInstanceInput struct {
 	// * Can't be a reserved word for the chosen database engine.
 	MasterUsername *string
 
-	// The upper limit to which Amazon RDS can automatically scale the storage of the
-	// DB instance. For more information about this setting, including limitations that
-	// apply to it, see  Managing capacity automatically with Amazon RDS storage
-	// autoscaling
+	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
+	// the storage of the DB instance. For more information about this setting,
+	// including limitations that apply to it, see  Managing capacity automatically
+	// with Amazon RDS storage autoscaling
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
 	// in the Amazon RDS User Guide.
 	MaxAllocatedStorage *int32

@@ -188,10 +188,10 @@ type RestoreDBInstanceToPointInTimeInput struct {
 	// Valid values: license-included | bring-your-own-license | general-public-license
 	LicenseModel *string
 
-	// The upper limit to which Amazon RDS can automatically scale the storage of the
-	// DB instance. For more information about this setting, including limitations that
-	// apply to it, see  Managing capacity automatically with Amazon RDS storage
-	// autoscaling
+	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
+	// the storage of the DB instance. For more information about this setting,
+	// including limitations that apply to it, see  Managing capacity automatically
+	// with Amazon RDS storage autoscaling
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
 	// in the Amazon RDS User Guide.
 	MaxAllocatedStorage *int32

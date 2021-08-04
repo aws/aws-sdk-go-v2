@@ -18,9 +18,9 @@ import (
 // security group. You can add as many as 20 ingress rules to an Amazon Redshift
 // security group. If you authorize access to an Amazon EC2 security group, specify
 // EC2SecurityGroupName and EC2SecurityGroupOwnerId. The Amazon EC2 security group
-// and Amazon Redshift cluster must be in the same Region. If you authorize access
-// to a CIDR/IP address range, specify CIDRIP. For an overview of CIDR blocks, see
-// the Wikipedia article on Classless Inter-Domain Routing
+// and Amazon Redshift cluster must be in the same Amazon Web Services Region. If
+// you authorize access to a CIDR/IP address range, specify CIDRIP. For an overview
+// of CIDR blocks, see the Wikipedia article on Classless Inter-Domain Routing
 // (http://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing). You must also
 // associate the security group with a cluster so that clients running on these IP
 // addresses or the EC2 instance are authorized to connect to the cluster. For
@@ -56,9 +56,9 @@ type AuthorizeClusterSecurityGroupIngressInput struct {
 	// The EC2 security group to be added the Amazon Redshift security group.
 	EC2SecurityGroupName *string
 
-	// The account number of the owner of the security group specified by the
-	// EC2SecurityGroupName parameter. The Amazon Web Services Access Key ID is not an
-	// acceptable value. Example: 111122223333
+	// The Amazon Web Services account number of the owner of the security group
+	// specified by the EC2SecurityGroupName parameter. The Amazon Web Services Access
+	// Key ID is not an acceptable value. Example: 111122223333
 	EC2SecurityGroupOwnerId *string
 
 	noSmithyDocumentSerde

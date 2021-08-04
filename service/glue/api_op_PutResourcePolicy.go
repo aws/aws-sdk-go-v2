@@ -40,11 +40,11 @@ type PutResourcePolicyInput struct {
 	// * By directly updating the resource policy
 	// with PutResourePolicy
 	//
-	// * By using the Grant permissions command on the
-	// Management Console.
+	// * By using the Grant permissions command on the Amazon
+	// Web Services Management Console.
 	//
-	// Must be set to 'TRUE' if you have already used the
-	// Management Console to grant cross-account access, otherwise the call fails.
+	// Must be set to 'TRUE' if you have already used
+	// the Management Console to grant cross-account access, otherwise the call fails.
 	// Default is 'FALSE'.
 	EnableHybrid types.EnableHybridValues
 

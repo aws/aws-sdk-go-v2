@@ -12,8 +12,9 @@ import (
 )
 
 // You can use this to see all the partner event sources that have been shared with
-// your AWS account. For more information about partner event sources, see
-// CreateEventBus.
+// your Amazon Web Services account. For more information about partner event
+// sources, see CreateEventBus
+// (https://docs.aws.amazon.com/eventbridge/latest/APIReference/API_CreateEventBus.html).
 func (c *Client) ListEventSources(ctx context.Context, params *ListEventSourcesInput, optFns ...func(*Options)) (*ListEventSourcesOutput, error) {
 	if params == nil {
 		params = &ListEventSourcesInput{}

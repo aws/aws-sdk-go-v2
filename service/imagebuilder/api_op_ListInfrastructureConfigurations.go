@@ -30,7 +30,7 @@ func (c *Client) ListInfrastructureConfigurations(ctx context.Context, params *L
 
 type ListInfrastructureConfigurationsInput struct {
 
-	// The filters.
+	// You can filter on name to streamline results.
 	Filters []types.Filter
 
 	// The maximum items to return in a request.

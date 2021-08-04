@@ -29,7 +29,7 @@ func (c *Client) UpdatePartnerStatus(ctx context.Context, params *UpdatePartnerS
 
 type UpdatePartnerStatusInput struct {
 
-	// The Region ID that owns the cluster.
+	// The Amazon Web Services account ID that owns the cluster.
 	//
 	// This member is required.
 	AccountId *string

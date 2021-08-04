@@ -30,11 +30,6 @@ func (c *Client) UpdateTimelineEvent(ctx context.Context, params *UpdateTimeline
 
 type UpdateTimelineEventInput struct {
 
-	// A token ensuring that the action is called only once with the specified details.
-	//
-	// This member is required.
-	ClientToken *string
-
 	// The ID of the event you are updating. You can find this by using
 	// ListTimelineEvents.
 	//
@@ -46,6 +41,9 @@ type UpdateTimelineEventInput struct {
 	//
 	// This member is required.
 	IncidentRecordArn *string
+
+	// A token ensuring that the action is called only once with the specified details.
+	ClientToken *string
 
 	// A short description of the event.
 	EventData *string

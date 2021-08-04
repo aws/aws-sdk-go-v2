@@ -29,6 +29,38 @@
         ]
     },
     "shapes": {
+        "com.amazonaws.transcribe#AbsoluteTimeRange": {
+            "type": "structure",
+            "members": {
+                "StartTime": {
+                    "target": "com.amazonaws.transcribe#TimestampMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the beginning of the time range in seconds. To set absolute time\n            range, you must specify a start time and an end time. For example, if you specify the\n            following values:</p> \n        <ul>\n            <li>\n               <p>StartTime - 10000</p>\n            </li>\n            <li>\n               <p>Endtime - 50000</p>\n            </li>\n         </ul>\n            <p>The time range is set between 10,000 milliseconds and 50,000 milliseconds into the call.</p>"
+                    }
+                },
+                "EndTime": {
+                    "target": "com.amazonaws.transcribe#TimestampMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the end of the time range in milliseconds. To set absolute time\n           range, you must specify a start time and an end time. For example, if you specify the\n           following values:</p>\n         <ul>\n            <li>\n               <p>StartTime - 10000</p>\n            </li>\n            <li>\n               <p>Endtime - 50000</p>\n            </li>\n         </ul>\n         <p>The time range is set between 10,000 milliseconds and 50,000 milliseconds into the call. </p>"
+                    }
+                },
+                "First": {
+                    "target": "com.amazonaws.transcribe#TimestampMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A time range from the beginning of the call to the value that you've specified. For\n           example, if you specify 100000, the time range is set to the first 100,000 milliseconds of\n           the call.</p>"
+                    }
+                },
+                "Last": {
+                    "target": "com.amazonaws.transcribe#TimestampMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A time range from the value that you've specified to the end of the call. For example, if\n           you specify 100000, the time range is set to the last 100,000 milliseconds of the call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A time range, set in seconds, between two points in the call.</p>"
+            }
+        },
         "com.amazonaws.transcribe#BadRequestException": {
             "type": "structure",
             "members": {
@@ -90,6 +122,317 @@
                 ]
             }
         },
+        "com.amazonaws.transcribe#CallAnalyticsJob": {
+            "type": "structure",
+            "members": {
+                "CallAnalyticsJobName": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the call analytics job.</p>"
+                    }
+                },
+                "CallAnalyticsJobStatus": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the analytics job.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribe#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you know the language spoken between the customer and the agent, specify a language\n            code for this field.</p>\n        <p>If you don't know the language, you can leave this field blank, and Amazon Transcribe will use machine \n            learning to automatically identify the language. To improve the accuracy of language identification, \n            you can provide an array containing the possible language codes for the language spoken in your \n            audio.</p>\n        <p>The following list shows the supported languages and corresponding language codes for\n            call analytics jobs:</p>\n        <ul>\n            <li>\n               <p>Gulf Arabic (ar-AE)</p>\n            </li>\n            <li>\n               <p>Mandarin Chinese, Mainland (zh-CN)</p>\n            </li>\n            <li>\n               <p>Australian English (en-AU)</p>\n            </li>\n            <li>\n               <p>British English (en-GB)</p>\n            </li>\n            <li>\n               <p>Indian English (en-IN)</p>\n            </li>\n            <li>\n               <p>Irish English (en-IE)</p>\n            </li>\n            <li>\n               <p>Scottish English (en-AB)</p>\n            </li>\n            <li>\n               <p>US English (en-US)</p>\n            </li>\n            <li>\n               <p>Welsh English (en-WL)</p>\n            </li>\n            <li>\n               <p>Spanish (es-ES)</p>\n            </li>\n            <li>\n               <p>US Spanish (es-US)</p>\n            </li>\n            <li>\n               <p>French (fr-FR)</p>\n            </li>\n            <li>\n               <p>Canadian French (fr-CA)</p>\n            </li>\n            <li>\n               <p>German (de-DE)</p>\n            </li>\n            <li>\n               <p>Swiss German (de-CH)</p>\n            </li>\n            <li>\n               <p>Indian Hindi (hi-IN)</p>\n            </li>\n            <li>\n               <p>Italian (it-IT)</p>\n            </li>\n            <li>\n               <p>Japanese (ja-JP)</p>\n            </li>\n            <li>\n               <p>Korean (ko-KR)</p>\n            </li>\n            <li>\n               <p>Portuguese (pt-PT)</p>\n            </li>\n            <li>\n               <p>Brazilian Portuguese (pt-BR)</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "MediaSampleRateHertz": {
+                    "target": "com.amazonaws.transcribe#MediaSampleRateHertz",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sample rate, in Hertz, of the audio.</p>"
+                    }
+                },
+                "MediaFormat": {
+                    "target": "com.amazonaws.transcribe#MediaFormat",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The format of the input audio file. Note: for call analytics jobs, only the following media formats are supported: MP3, MP4, WAV, FLAC, OGG, and WebM. </p>"
+                    }
+                },
+                "Media": {
+                    "target": "com.amazonaws.transcribe#Media"
+                },
+                "Transcript": {
+                    "target": "com.amazonaws.transcribe#Transcript"
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.transcribe#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the analytics job started processing.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.transcribe#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the analytics job was created.</p>"
+                    }
+                },
+                "CompletionTime": {
+                    "target": "com.amazonaws.transcribe#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the analytics job was completed.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.transcribe#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the <code>AnalyticsJobStatus</code> is <code>FAILED</code>, this field contains\n            information about why the job failed.</p>\n        <p>The <code>FailureReason</code> field can contain one of the following values:</p>\n            <ul>\n            <li>\n               <p>\n                  <code>Unsupported media format</code>: The media format \n                    specified in the <code>MediaFormat</code> field of the request isn't valid. See the \n                    description of the <code>MediaFormat</code> field for a list of valid values.</p>\n            </li>\n            <li>\n               <p>\n                  <code>The media format provided does not match the detected media\n                    format</code>: The media format of the audio file doesn't match the format specified in\n                    the <code>MediaFormat</code> field in the request. Check the media format of your media file\n                    and make sure the two values match.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid sample rate for audio file</code>: The sample rate specified in the\n                    <code>MediaSampleRateHertz</code> of the request isn't valid. The sample rate must be\n                    between 8000 and 48000 Hertz.</p>\n            </li>\n            <li>\n               <p>\n                  <code>The sample rate provided does not match the detected sample rate</code>:\n                    The sample rate in the audio file doesn't match the sample rate specified in the\n                    <code>MediaSampleRateHertz</code> field in the request. Check the sample rate of your media\n                    file and make sure that the two values match.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid file size: file size too large</code>: The size of your audio file is\n                    larger than what Amazon Transcribe Medical can process. For more information,\n                    see <i>Guidelines and Quotas</i> in the Amazon Transcribe Medical Guide</p>\n            </li>\n            <li>\n               <p>\n                  <code>Invalid number of channels: number of channels too large</code>:\n                    Your audio contains more channels than Amazon Transcribe Medical is configured to\n                    process. To request additional channels, see Amazon Transcribe Medical Endpoints and Quotas in the \n                    <a href=\"https://docs.aws.amazon.com/general/latest/gr/Welcome.html\">Amazon Web \n                        Services General Reference</a>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "DataAccessRoleArn": {
+                    "target": "com.amazonaws.transcribe#DataAccessRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) that you use to get access to the analytics job.</p>"
+                    }
+                },
+                "IdentifiedLanguageScore": {
+                    "target": "com.amazonaws.transcribe#IdentifiedLanguageScore",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value between zero and one that Amazon Transcribe assigned to the language that it\n            identified in the source audio. This value appears only when you don't provide a single\n            language code. Larger values indicate that Amazon Transcribe has higher confidence in the language \n            that it identified</p>"
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides information about the settings used to run a transcription job.</p>"
+                    }
+                },
+                "ChannelDefinitions": {
+                    "target": "com.amazonaws.transcribe#ChannelDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Shows numeric values to indicate the channel assigned to the agent's audio and the\n            channel assigned to the customer's audio. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes an asynchronous analytics job that was created with the <code>StartAnalyticsJob</code>\n           operation.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsJobName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsJobSettings": {
+            "type": "structure",
+            "members": {
+                "VocabularyName": {
+                    "target": "com.amazonaws.transcribe#VocabularyName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a vocabulary to use when processing the call analytics job.</p>"
+                    }
+                },
+                "VocabularyFilterName": {
+                    "target": "com.amazonaws.transcribe#VocabularyFilterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the vocabulary filter to use when running a call analytics job. The filter that\n           you specify must have the same language code as the analytics job.</p>"
+                    }
+                },
+                "VocabularyFilterMethod": {
+                    "target": "com.amazonaws.transcribe#VocabularyFilterMethod",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to mask to remove filtered text from the transcript and replace it with three asterisks\n            (\"***\") as placeholder text. Set to <code>remove</code> to remove filtered text from the transcript\n            without using placeholder text. Set to <code>tag</code> to mark the word in the transcription output\n            that matches the vocabulary filter. When you set the filter method to <code>tag</code>, the words\n            matching your vocabulary filter are not masked or removed.</p>"
+                    }
+                },
+                "LanguageModelName": {
+                    "target": "com.amazonaws.transcribe#ModelName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure used to describe a custom language model.</p>"
+                    }
+                },
+                "ContentRedaction": {
+                    "target": "com.amazonaws.transcribe#ContentRedaction"
+                },
+                "LanguageOptions": {
+                    "target": "com.amazonaws.transcribe#LanguageOptions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you run a call analytics job, you can specify the language spoken in the audio, or\n            you can have Amazon Transcribe identify the language for you.</p>\n        <p>To specify a language, specify an array with one language code. If you don't know the \n            language, you can leave this field blank and Amazon Transcribe will use machine learning to identify the \n            language for you. To improve the ability of Amazon Transcribe to correctly identify the language, you can \n            provide an array of the languages that can be present in the audio.</p>\n        <p>The following list shows the supported languages and corresponding language codes for\n            call analytics jobs:</p>\n        <ul>\n            <li>\n               <p>Gulf Arabic (ar-AE)</p>\n            </li>\n            <li>\n               <p>Mandarin Chinese, Mainland (zh-CN)</p>\n            </li>\n            <li>\n               <p>Australian English (en-AU)</p>\n            </li>\n            <li>\n               <p>British English (en-GB)</p>\n            </li>\n            <li>\n               <p>Indian English (en-IN)</p>\n            </li>\n            <li>\n               <p>Irish English (en-IE)</p>\n            </li>\n            <li>\n               <p>Scottish English (en-AB)</p>\n            </li>\n            <li>\n               <p>US English (en-US)</p>\n            </li>\n            <li>\n               <p>Welsh English (en-WL)</p>\n            </li>\n            <li>\n               <p>Spanish (es-ES)</p>\n            </li>\n            <li>\n               <p>US Spanish (es-US)</p>\n            </li>\n            <li>\n               <p>French (fr-FR)</p>\n            </li>\n            <li>\n               <p>Canadian French (fr-CA)</p>\n            </li>\n            <li>\n               <p>German (de-DE)</p>\n            </li>\n            <li>\n               <p>Swiss German (de-CH)</p>\n            </li>\n            <li>\n               <p>Indian Hindi (hi-IN)</p>\n            </li>\n            <li>\n               <p>Italian (it-IT)</p>\n            </li>\n            <li>\n               <p>Japanese (ja-JP)</p>\n            </li>\n            <li>\n               <p>Korean (ko-KR)</p>\n            </li>\n            <li>\n               <p>Portuguese (pt-PT)</p>\n            </li>\n            <li>\n               <p>Brazilian Portuguese (pt-BR)</p>\n            </li>\n         </ul>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides optional settings for the <code>CallAnalyticsJob</code> operation. </p>"
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsJobStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "QUEUED",
+                        "name": "QUEUED"
+                    },
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsJobSummaries": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#CallAnalyticsJobSummary"
+            }
+        },
+        "com.amazonaws.transcribe#CallAnalyticsJobSummary": {
+            "type": "structure",
+            "members": {
+                "CallAnalyticsJobName": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the call analytics job.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.transcribe#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the call analytics job was created.</p>"
+                    }
+                },
+                "StartTime": {
+                    "target": "com.amazonaws.transcribe#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the job began processing.</p>"
+                    }
+                },
+                "CompletionTime": {
+                    "target": "com.amazonaws.transcribe#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the job was completed.</p>"
+                    }
+                },
+                "LanguageCode": {
+                    "target": "com.amazonaws.transcribe#LanguageCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The language of the transcript in the source audio file.</p>"
+                    }
+                },
+                "CallAnalyticsJobStatus": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the call analytics job.</p>"
+                    }
+                },
+                "FailureReason": {
+                    "target": "com.amazonaws.transcribe#FailureReason",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the <code>CallAnalyticsJobStatus</code> is <code>FAILED</code>, a description of \n            the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides summary information about a call analytics job.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#CategoryName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
+            }
+        },
+        "com.amazonaws.transcribe#CategoryProperties": {
+            "type": "structure",
+            "members": {
+                "CategoryName": {
+                    "target": "com.amazonaws.transcribe#CategoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the call analytics category.</p>"
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.transcribe#RuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules used to create a call analytics category.</p>"
+                    }
+                },
+                "CreateTime": {
+                    "target": "com.amazonaws.transcribe#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the call analytics category was created.</p>"
+                    }
+                },
+                "LastUpdateTime": {
+                    "target": "com.amazonaws.transcribe#DateTime",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A timestamp that shows when the call analytics category was most recently updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that contains the rules and additional information about a call analytics category.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#CategoryPropertiesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#CategoryProperties"
+            }
+        },
+        "com.amazonaws.transcribe#ChannelDefinition": {
+            "type": "structure",
+            "members": {
+                "ChannelId": {
+                    "target": "com.amazonaws.transcribe#ChannelId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the audio channel.</p>"
+                    }
+                },
+                "ParticipantRole": {
+                    "target": "com.amazonaws.transcribe#ParticipantRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the person speaking on the audio channel is the agent or customer.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>For a call analytics job, an object that indicates the audio channel that belongs to the agent and\n           the audio channel that belongs to the customer.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#ChannelDefinitions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#ChannelDefinition"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 2
+                }
+            }
+        },
+        "com.amazonaws.transcribe#ChannelId": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.transcribe#ConflictException": {
             "type": "structure",
             "members": {
@@ -123,6 +466,68 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Settings for content redaction within a transcription job.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#CreateCallAnalyticsCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#CreateCallAnalyticsCategoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#CreateCallAnalyticsCategoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an analytics category. Amazon Transcribe applies the conditions specified by your\n            analytics categories to your call analytics jobs. For each analytics category, you specify one or\n            more rules. For example, you can specify a rule that the customer sentiment was neutral or\n            negative within that category. If you start a call analytics job, Amazon Transcribe applies the\n            category to the analytics job that you've specified.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/callanalyticscategories/{CategoryName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.transcribe#CreateCallAnalyticsCategoryRequest": {
+            "type": "structure",
+            "members": {
+                "CategoryName": {
+                    "target": "com.amazonaws.transcribe#CategoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that you choose for your category when you create it. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.transcribe#RuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>To create a category, you must specify between 1 and 20 rules. For each rule, you specify a\n            filter to be applied to the attributes of the call. For example, you can specify a sentiment\n            filter to detect if the customer's sentiment was negative or neutral. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#CreateCallAnalyticsCategoryResponse": {
+            "type": "structure",
+            "members": {
+                "CategoryProperties": {
+                    "target": "com.amazonaws.transcribe#CategoryProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules and associated metadata used to create a category.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.transcribe#CreateLanguageModel": {
@@ -262,7 +667,7 @@
                 "VocabularyName": {
                     "target": "com.amazonaws.transcribe#VocabularyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the custom vocabulary. This case-sensitive name must be unique within an\n            AWS account. If you try to create a vocabulary with the same name as a previous\n            vocabulary, you get a <code>ConflictException</code> error.</p>",
+                        "smithy.api#documentation": "<p>The name of the custom vocabulary. This case-sensitive name must be unique within an\n                Amazon Web Services account. If you try to create a vocabulary with the same name as\n            a previous vocabulary, you get a <code>ConflictException</code> error.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -277,7 +682,7 @@
                 "VocabularyFileUri": {
                     "target": "com.amazonaws.transcribe#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location in Amazon S3 of the text file you use to define your custom vocabulary. The\n            URI must be in the same AWS Region as the\n            resource\n            that you're calling. Enter information about your\n                <code>VocabularyFileUri</code> in the following format:</p>\n        <p>\n            <code>\n                https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>\n            </code>\n        </p>\n        <p>The following is an example URI for a vocabulary file that is stored in Amazon S3:</p>\n        <p>\n            <code>https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt</code>\n         </p>\n        <p>For more information about Amazon S3 object names, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies, see <a href=\"http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med\">Medical Custom Vocabularies</a>.</p>",
+                        "smithy.api#documentation": "<p>The location in Amazon S3 of the text file you use to define your custom vocabulary. The\n            URI must be in the same Amazon Web Services Region as the\n            resource\n            that you're calling. Enter information about your\n                <code>VocabularyFileUri</code> in the following format:</p>\n        <p>\n            <code>\n                https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>\n            </code>\n        </p>\n        <p>The following is an example URI for a vocabulary file that is stored in Amazon S3:</p>\n        <p>\n            <code>https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt</code>\n         </p>\n        <p>For more information about Amazon S3 object names, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med\">Medical Custom Vocabularies</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -289,7 +694,7 @@
                 "VocabularyName": {
                     "target": "com.amazonaws.transcribe#VocabularyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the vocabulary. The name must be unique within an AWS account and is case\n            sensitive.</p>"
+                        "smithy.api#documentation": "<p>The name of the vocabulary. The name must be unique within an Amazon Web Services account and is case\n            sensitive.</p>"
                     }
                 },
                 "LanguageCode": {
@@ -441,7 +846,7 @@
                 "VocabularyName": {
                     "target": "com.amazonaws.transcribe#VocabularyName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the vocabulary. The name must be unique within an AWS account. The name is\n            case sensitive. If you try to create a vocabulary with the same name as a previous\n            vocabulary you will receive a <code>ConflictException</code> error.</p>",
+                        "smithy.api#documentation": "<p>The name of the vocabulary. The name must be unique within an Amazon Web Services\n            account. The name is case sensitive. If you try to create a vocabulary with the same\n            name as a previous vocabulary you will receive a <code>ConflictException</code>\n            error.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -462,7 +867,7 @@
                 "VocabularyFileUri": {
                     "target": "com.amazonaws.transcribe#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 location of the text file that contains the definition of the custom\n            vocabulary. The URI must be in the same region as the API endpoint that you are calling.\n            The general form is </p>\n        \n        \n        \n        <p>For more information about S3 object names, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies, see <a href=\"http://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary\">Custom\n                Vocabularies</a>.</p>"
+                        "smithy.api#documentation": "<p>The S3 location of the text file that contains the definition of the custom\n            vocabulary. The URI must be in the same region as the API endpoint that you are calling.\n            The general form is </p>\n        \n        \n        \n        <p>For more information about S3 object names, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-vocabulary\">Custom\n                Vocabularies</a>.</p>"
                     }
                 }
             }
@@ -514,6 +919,99 @@
         },
         "com.amazonaws.transcribe#DateTime": {
             "type": "timestamp"
+        },
+        "com.amazonaws.transcribe#DeleteCallAnalyticsCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#DeleteCallAnalyticsCategoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#DeleteCallAnalyticsCategoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a call analytics category using its name.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/callanalyticscategories/{CategoryName}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.transcribe#DeleteCallAnalyticsCategoryRequest": {
+            "type": "structure",
+            "members": {
+                "CategoryName": {
+                    "target": "com.amazonaws.transcribe#CategoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the call analytics category that you're choosing to delete. The value is case\n            sensitive. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#DeleteCallAnalyticsCategoryResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.transcribe#DeleteCallAnalyticsJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#DeleteCallAnalyticsJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#DeleteCallAnalyticsJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a call analytics job using its name.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/callanalyticsjobs/{CallAnalyticsJobName}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.transcribe#DeleteCallAnalyticsJobRequest": {
+            "type": "structure",
+            "members": {
+                "CallAnalyticsJobName": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the call analytics job you want to delete.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#DeleteCallAnalyticsJobResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.transcribe#DeleteLanguageModel": {
             "type": "operation",
@@ -775,7 +1273,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets information about a single custom language model. Use this information to see\n            details about the language model in your AWS account. You can also see whether the base\n            language model used to create your custom language model has been updated. If Amazon Transcribe has\n            updated the base model, you can create a new custom language model using the updated\n            base model. If the language model wasn't created, you can use this operation to\n            understand why Amazon Transcribe couldn't create it. </p>",
+                "smithy.api#documentation": "<p>Gets information about a single custom language model. Use this information to see\n            details about the language model in your Amazon Web Services account. You can also see\n            whether the base language model used to create your custom language model has been\n            updated. If Amazon Transcribe has updated the base model, you can create a new custom language model\n            using the updated base model. If the language model wasn't created, you can use this\n            operation to understand why Amazon Transcribe couldn't create it. </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/languagemodels/{ModelName}",
@@ -809,6 +1307,116 @@
         },
         "com.amazonaws.transcribe#FailureReason": {
             "type": "string"
+        },
+        "com.amazonaws.transcribe#GetCallAnalyticsCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#GetCallAnalyticsCategoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#GetCallAnalyticsCategoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a call analytics category.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/callanalyticscategories/{CategoryName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.transcribe#GetCallAnalyticsCategoryRequest": {
+            "type": "structure",
+            "members": {
+                "CategoryName": {
+                    "target": "com.amazonaws.transcribe#CategoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the category you want information about. This value is case sensitive.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#GetCallAnalyticsCategoryResponse": {
+            "type": "structure",
+            "members": {
+                "CategoryProperties": {
+                    "target": "com.amazonaws.transcribe#CategoryProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules you've defined for a category.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#GetCallAnalyticsJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#GetCallAnalyticsJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#GetCallAnalyticsJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns information about a call analytics job. To see the status of the job, check the\n            <code>CallAnalyticsJobStatus</code> field. If the status is <code>COMPLETED</code>, the job\n            is finished and you can find the results at the location specified in the <code>TranscriptFileUri</code> \n            field. If you enable personally identifiable information (PII) redaction, the redacted transcript appears\n            in the <code>RedactedTranscriptFileUri</code> field.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/callanalyticsjobs/{CallAnalyticsJobName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.transcribe#GetCallAnalyticsJobRequest": {
+            "type": "structure",
+            "members": {
+                "CallAnalyticsJobName": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the analytics job you want information about. This value is case\n            sensitive. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#GetCallAnalyticsJobResponse": {
+            "type": "structure",
+            "members": {
+                "CallAnalyticsJob": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that contains the results of your call analytics job.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.transcribe#GetMedicalTranscriptionJob": {
             "type": "operation",
@@ -1210,6 +1818,44 @@
                 "smithy.api#httpError": 500
             }
         },
+        "com.amazonaws.transcribe#InterruptionFilter": {
+            "type": "structure",
+            "members": {
+                "Threshold": {
+                    "target": "com.amazonaws.transcribe#TimestampMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the interruption.</p>"
+                    }
+                },
+                "ParticipantRole": {
+                    "target": "com.amazonaws.transcribe#ParticipantRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the caller or customer was interrupting.</p>"
+                    }
+                },
+                "AbsoluteTimeRange": {
+                    "target": "com.amazonaws.transcribe#AbsoluteTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object you can use to specify a time range (in milliseconds) for when you'd want to find\n            the interruption. For example, you could search for an interruption between the 30,000\n            millisecond mark and the 45,000 millisecond mark. You could also specify the time\n            period as the first 15,000 milliseconds or the last 15,000 milliseconds. </p>"
+                    }
+                },
+                "RelativeTimeRange": {
+                    "target": "com.amazonaws.transcribe#RelativeTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that allows percentages to specify the proportion of the call where there\n            was a interruption. For example, you can specify the first half of the call. You can also\n            specify the period of time between halfway through to three-quarters of the way through\n            the call. Because the length of conversation can vary between calls, you can apply\n            relative time ranges across all calls.</p>"
+                    }
+                },
+                "Negate": {
+                    "target": "com.amazonaws.transcribe#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>TRUE</code> to look for a time period where there was no interruption.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that enables you to configure your category to be applied to call analytics jobs where\n           either the customer or agent was interrupted.</p>"
+            }
+        },
         "com.amazonaws.transcribe#JobExecutionSettings": {
             "type": "structure",
             "members": {
@@ -1460,7 +2106,7 @@
             },
             "traits": {
                 "smithy.api#length": {
-                    "min": 2
+                    "min": 1
                 }
             }
         },
@@ -1475,6 +2121,164 @@
                 "smithy.api#documentation": "<p>Either you have sent too many requests or your input file is too long. Wait before you\n            resend your request, or use a smaller file and resend the request.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.transcribe#ListCallAnalyticsCategories": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#ListCallAnalyticsCategoriesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#ListCallAnalyticsCategoriesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Provides more information about the call analytics categories that you've created. You \n            can use the information in this list to find a specific category. You can then use the\n             operation to get more information about it.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/callanalyticscategories",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.transcribe#ListCallAnalyticsCategoriesRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.transcribe#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When included, <code>NextToken</code>fetches the next set of categories if the result \n            of the previous request was truncated.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.transcribe#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of categories to return in the response. If there are fewer results in\n            the list, the response contains only the actual results.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#ListCallAnalyticsCategoriesResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.transcribe#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The  operation returns a page of jobs at a time. The\n            maximum size of the list is set by the <code>MaxResults</code> parameter. If there are \n            more categories in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> \n            token. Include the token in the next request to the \n            operation to return the next page of analytics categories.</p>"
+                    }
+                },
+                "Categories": {
+                    "target": "com.amazonaws.transcribe#CategoryPropertiesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing information about analytics categories.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#ListCallAnalyticsJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#ListCallAnalyticsJobsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#ListCallAnalyticsJobsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List call analytics jobs with a specified status or substring that matches their names.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/callanalyticsjobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.transcribe#ListCallAnalyticsJobsRequest": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When specified, returns only call analytics jobs with the specified status. Jobs are ordered\n            by creation date, with the most recent jobs returned first. If you don't specify a status, Amazon Transcribe \n            returns all analytics jobs ordered by creation date.</p>",
+                        "smithy.api#httpQuery": "Status"
+                    }
+                },
+                "JobNameContains": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When specified, the jobs returned in the list are limited to jobs whose name contains the\n            specified string.</p>",
+                        "smithy.api#httpQuery": "JobNameContains"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.transcribe#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If you receive a truncated result in the previous request of \n            , \n            include <code>NextToken</code> to fetch the next set of jobs.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.transcribe#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of call analytics jobs to return in the response. If there are fewer\n            results in the list, this response contains only the actual results. </p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#ListCallAnalyticsJobsResponse": {
+            "type": "structure",
+            "members": {
+                "Status": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When specified, returns only call analytics jobs with that status. Jobs are ordered\n            by creation date, with the most recent jobs returned first. If you don't specify a status, Amazon Transcribe\n            returns all transcription jobs ordered by creation date.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.transcribe#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The  operation returns a page of jobs at a time. The \n            maximum size of the page is set by the <code>MaxResults</code> parameter. If there are more\n            jobs in the list than the page size, Amazon Transcribe returns the <code>NextPage</code> token. Include the \n            token in your next request to the  operation to return next page of jobs.</p>"
+                    }
+                },
+                "CallAnalyticsJobSummaries": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobSummaries",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of objects containing summary information for a transcription job.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.transcribe#ListLanguageModels": {
@@ -2028,7 +2832,13 @@
                 "MediaFileUri": {
                     "target": "com.amazonaws.transcribe#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 object location of the input media file. The URI must be in the same region as\n            the API endpoint that you are calling. The general form is:</p>\n        \n        <p>For example:</p>\n        \n        \n        <p>For more information about S3 object names, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The S3 object location of the input media file. The URI must be in the same region as\n            the API endpoint that you are calling. The general form is:</p>\n        \n        <p>For example:</p>\n        \n        \n        <p>For more information about S3 object names, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>"
+                    }
+                },
+                "RedactedMediaFileUri": {
+                    "target": "com.amazonaws.transcribe#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The S3 object location for your redacted output media file. This is only supported for call analytics jobs.</p>"
                     }
                 }
             },
@@ -2130,7 +2940,7 @@
                 "MediaSampleRateHertz": {
                     "target": "com.amazonaws.transcribe#MediaSampleRateHertz",
                     "traits": {
-                        "smithy.api#documentation": "<p>The sample rate, in Hertz, of the source audio containing medical information.</p>\n        <p>If you don't specify the sample rate, Amazon Transcribe Medical determines it for you. If you choose to\n            specify the sample rate, it must match the rate detected by Amazon Transcribe Medical. In most cases, you\n            should leave the <code>MediaSampleHertz</code> blank and let Amazon Transcribe Medical determine the sample\n            rate.</p>"
+                        "smithy.api#documentation": "<p>The sample rate, in Hertz, of the source audio containing medical information.</p>\n        <p>If you don't specify the sample rate, Amazon Transcribe Medical determines it for you. If you choose to\n            specify the sample rate, it must match the rate detected by Amazon Transcribe Medical. In most cases, you\n            should leave the <code>MedicalMediaSampleHertz</code> blank and let Amazon Transcribe Medical determine the sample\n            rate.</p>"
                     }
                 },
                 "MediaFormat": {
@@ -2193,7 +3003,7 @@
                 "Type": {
                     "target": "com.amazonaws.transcribe#Type",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of speech in the transcription job. <code>CONVERSATION</code> is generally\n            used for patient-physician dialogues. <code>DICTATION</code> is the setting for\n            physicians speaking their notes after seeing a patient. For more information, see <a>how-it-works-med</a>\n         </p>"
+                        "smithy.api#documentation": "<p>The type of speech in the transcription job. <code>CONVERSATION</code> is generally\n            used for patient-physician dialogues. <code>DICTATION</code> is the setting for\n            physicians speaking their notes after seeing a patient. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/what-is-transcribe-med.html\">What is\n                Amazon Transcribe Medical?</a>.</p>"
                     }
                 }
             },
@@ -2267,7 +3077,7 @@
                 "ContentIdentificationType": {
                     "target": "com.amazonaws.transcribe#MedicalContentIdentificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Shows the type of information you've configured Amazon Transcribe Medical to identify in a transcription\n            job. If the value is <code>PHI</code>, you've configured the transcription job to identify\n            personal health information (PHI).</p>"
+                        "smithy.api#documentation": "<p>Shows the type of information you've configured Amazon Transcribe Medical to identify in a transcription\n            job. If the value is <code>PHI</code>, you've configured the transcription job to\n            identify personal health information (PHI).</p>"
                     }
                 },
                 "Type": {
@@ -2332,7 +3142,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
             }
         },
         "com.amazonaws.transcribe#ModelSettings": {
@@ -2381,7 +3191,49 @@
                     "min": 0,
                     "max": 8192
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.transcribe#NonEmptyString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2000
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.transcribe#NonTalkTimeFilter": {
+            "type": "structure",
+            "members": {
+                "Threshold": {
+                    "target": "com.amazonaws.transcribe#TimestampMilliseconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The duration of the period when neither the customer nor agent was talking.</p>"
+                    }
+                },
+                "AbsoluteTimeRange": {
+                    "target": "com.amazonaws.transcribe#AbsoluteTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object you can use to specify a time range (in milliseconds) for when no one is talking.\n           For example, you could specify a time period between the 30,000 millisecond mark and\n           the 45,000 millisecond mark. You could also specify the time period as the first 15,000\n           milliseconds or the last 15,000 milliseconds.</p>"
+                    }
+                },
+                "RelativeTimeRange": {
+                    "target": "com.amazonaws.transcribe#RelativeTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that allows percentages to specify the proportion of the call where there\n           was silence. For example, you can specify the first half of the call. You can also\n           specify the period of time between halfway through to three-quarters of the way through\n           the call. Because the length of conversation can vary between calls, you can apply\n           relative time ranges across all calls.</p>"
+                    }
+                },
+                "Negate": {
+                    "target": "com.amazonaws.transcribe#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>TRUE</code> to look for a time period when people were talking.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that enables you to configure your category to be applied to call analytics jobs where\n           either the customer or agent was interrupted.</p>"
             }
         },
         "com.amazonaws.transcribe#NotFoundException": {
@@ -2404,7 +3256,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]"
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
             }
         },
         "com.amazonaws.transcribe#OutputKey": {
@@ -2414,7 +3266,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9-_.!*'()/]{1,1024}$"
+                "smithy.api#pattern": "^[a-zA-Z0-9-_.!*'()/]{1,1024}$"
             }
         },
         "com.amazonaws.transcribe#OutputLocationType": {
@@ -2432,6 +3284,31 @@
                 ]
             }
         },
+        "com.amazonaws.transcribe#ParticipantRole": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "AGENT",
+                        "name": "AGENT"
+                    },
+                    {
+                        "value": "CUSTOMER",
+                        "name": "CUSTOMER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribe#Percentage": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
+                }
+            }
+        },
         "com.amazonaws.transcribe#Phrase": {
             "type": "string",
             "traits": {
@@ -2439,7 +3316,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.transcribe#Phrases": {
@@ -2472,6 +3349,155 @@
                         "name": "PII"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.transcribe#RelativeTimeRange": {
+            "type": "structure",
+            "members": {
+                "StartPercentage": {
+                    "target": "com.amazonaws.transcribe#Percentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the percentage of the beginning of the time range. To set a relative\n            time range, you must specify a start percentage and an end percentage. For example, if\n            you specify the following values:</p>       \n            <ul>\n            <li>\n               <p>StartPercentage - 10</p>\n            </li>\n            <li>\n               <p>EndPercentage - 50</p>\n            </li>\n         </ul>\n        <p>This looks at the time range starting from 10% of the way into the call to 50% of the way\n            through the call. For a call that lasts 100,000 milliseconds, this example range would\n            apply from the 10,000 millisecond mark to the 50,000 millisecond mark. </p>"
+                    }
+                },
+                "EndPercentage": {
+                    "target": "com.amazonaws.transcribe#Percentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that indicates the percentage of the end of the time range. To set a relative time\n           range, you must specify a start percentage and an end percentage. For example, if you\n           specify the following values:</p>\n         <ul>\n            <li>\n               <p>StartPercentage - 10</p>\n            </li>\n            <li>\n               <p>EndPercentage - 50</p>\n            </li>\n         </ul>\n         <p>This looks at the time range starting from 10% of the way into the call to 50% of the way\n           through the call. For a call that lasts 100,000 milliseconds, this example range would\n           apply from the 10,000 millisecond mark to the 50,000 millisecond mark.</p>"
+                    }
+                },
+                "First": {
+                    "target": "com.amazonaws.transcribe#Percentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A range that takes the portion of the call up to the time in milliseconds set by the value\n           that you've specified. For example, if you specify <code>120000</code>, the time range is set for the\n           first 120,000 milliseconds of the call.</p>"
+                    }
+                },
+                "Last": {
+                    "target": "com.amazonaws.transcribe#Percentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A range that takes the portion of the call from the time in milliseconds set by the value\n          that you've specified to the end of the call. For example, if you specify <code>120000</code>, the time\n          range is set for the last 120,000 milliseconds of the call.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that allows percentages to specify the proportion of the call where you would like\n           to apply a filter. For example, you can specify the first half of the call. You can also specify the\n           period of time between halfway through to three-quarters of the way through the call. Because\n           the length of conversation can vary between calls, you can apply relative time ranges across all\n           calls. </p>"
+            }
+        },
+        "com.amazonaws.transcribe#Rule": {
+            "type": "union",
+            "members": {
+                "NonTalkTimeFilter": {
+                    "target": "com.amazonaws.transcribe#NonTalkTimeFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A condition for a time period when neither the customer nor the agent was talking.</p>"
+                    }
+                },
+                "InterruptionFilter": {
+                    "target": "com.amazonaws.transcribe#InterruptionFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A condition for a time period when either the customer or agent was interrupting the\n            other person. </p>"
+                    }
+                },
+                "TranscriptFilter": {
+                    "target": "com.amazonaws.transcribe#TranscriptFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A condition that catches particular words or phrases based on a exact match. For example, \n            if you set the phrase \"I want to speak to the manager\", only that exact phrase will be returned.</p>"
+                    }
+                },
+                "SentimentFilter": {
+                    "target": "com.amazonaws.transcribe#SentimentFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A condition that is applied to a particular customer sentiment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A condition in the call between the customer and the agent that you want to filter for.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#RuleList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#Rule"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.transcribe#SentimentFilter": {
+            "type": "structure",
+            "members": {
+                "Sentiments": {
+                    "target": "com.amazonaws.transcribe#SentimentValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array that enables you to specify sentiments for the customer or agent. You can\n            specify one or more values.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AbsoluteTimeRange": {
+                    "target": "com.amazonaws.transcribe#AbsoluteTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time range, measured in seconds, of the sentiment.</p>"
+                    }
+                },
+                "RelativeTimeRange": {
+                    "target": "com.amazonaws.transcribe#RelativeTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time range, set in percentages, that correspond to proportion of the call.</p>"
+                    }
+                },
+                "ParticipantRole": {
+                    "target": "com.amazonaws.transcribe#ParticipantRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that determines whether the sentiment belongs to the customer or the agent.</p>"
+                    }
+                },
+                "Negate": {
+                    "target": "com.amazonaws.transcribe#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Set to <code>TRUE</code> to look for sentiments that weren't specified in the request. </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that enables you to specify a particular customer or agent sentiment. If at least \n           50 percent of the conversation turns (the back-and-forth between two speakers) in a specified\n           time period match the specified sentiment, Amazon Transcribe will consider the sentiment a match.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#SentimentValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "POSITIVE",
+                        "name": "POSITIVE"
+                    },
+                    {
+                        "value": "NEGATIVE",
+                        "name": "NEGATIVE"
+                    },
+                    {
+                        "value": "NEUTRAL",
+                        "name": "NEUTRAL"
+                    },
+                    {
+                        "value": "MIXED",
+                        "name": "MIXED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transcribe#SentimentValueList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#SentimentValue"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
             }
         },
         "com.amazonaws.transcribe#Settings": {
@@ -2541,6 +3567,98 @@
                 ]
             }
         },
+        "com.amazonaws.transcribe#StartCallAnalyticsJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#StartCallAnalyticsJobRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#StartCallAnalyticsJobResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an asynchronous analytics job that not only transcribes the audio recording of a caller and\n            agent, but also returns additional insights. These insights include how quickly or loudly the caller\n            or agent was speaking. To retrieve additional insights with your analytics jobs, create\n            categories. A category is a way to classify analytics jobs based on attributes, such as a customer's\n            sentiment or a particular phrase being used during the call. For more information, see the\n             operation. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/callanalyticsjobs/{CallAnalyticsJobName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.transcribe#StartCallAnalyticsJobRequest": {
+            "type": "structure",
+            "members": {
+                "CallAnalyticsJobName": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the call analytics job. You can't use the string \".\" or \"..\" by themselves as the\n            job name. The name must also be unique within an AWS account. If you try to create a\n            call analytics job with the same name as a previous call analytics job, you get a\n            <code>ConflictException</code> error.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Media": {
+                    "target": "com.amazonaws.transcribe#Media",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                },
+                "OutputLocation": {
+                    "target": "com.amazonaws.transcribe#Uri",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 location where the output of the call analytics job is stored.\n            You can provide the following location types to store the output of call analytics job:</p>\n        <ul>\n            <li>\n               <p>s3://DOC-EXAMPLE-BUCKET1</p>\n                <p> If you specify a bucket, Amazon Transcribe saves the output of the analytics job\n                    as a JSON file at the root level of the bucket.</p>\n            </li>\n            <li>\n               <p>s3://DOC-EXAMPLE-BUCKET1/folder/</p>\n                <p>f you specify a path, Amazon Transcribe saves the output of the analytics job as\n                    s3://DOC-EXAMPLE-BUCKET1/folder/your-transcription-job-name.json</p>\n                <p>If you specify a folder, you must provide a trailing slash.</p>\n            </li>\n            <li>\n               <p>s3://DOC-EXAMPLE-BUCKET1/folder/filename.json</p>\n                <p> If you provide a path that has the filename specified, Amazon Transcribe saves\n                    the output of the analytics job as s3://DOC-EXAMPLEBUCKET1/folder/filename.json</p>\n            </li>\n         </ul> \n        <p>You can specify an AWS Key Management Service key to encrypt the output of our\n            analytics job using the <code>OutputEncryptionKMSKeyId</code> parameter. If you don't specify a\n            KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption\n            of the analytics job output that is placed in your S3 bucket. </p>"
+                    }
+                },
+                "OutputEncryptionKMSKeyId": {
+                    "target": "com.amazonaws.transcribe#KMSKeyId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service key used to\n            encrypt the output of the call analytics job. The user calling the \n            operation must have permission to use the specified KMS key.</p>\n        <p>You use either of the following to identify an AWS KMS key in the current account:</p>\n            <ul>\n            <li>\n               <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n               <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p> You can use either of the following to identify a KMS key in the current account or\n            another account:</p>\n           <ul>\n            <li>\n               <p>Amazon Resource Name (ARN) of a KMS key in the current account or another\n                   account: \"arn:aws:kms:region:account ID:key/1234abcd-12ab-34cd-56ef1234567890ab\"</p>\n            </li>\n            <li>\n               <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the call analytics job is encrypted\n            with the default Amazon S3 key (SSE-S3).</p> \n        <p>If you specify a KMS key to encrypt your output, you must also specify an output\n            location in the <code>OutputLocation</code> parameter. </p>"
+                    }
+                },
+                "DataAccessRoleArn": {
+                    "target": "com.amazonaws.transcribe#DataAccessRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of a role that has access to the S3 bucket that\n            contains your input files. Amazon Transcribe assumes this role to read queued audio files.\n            If you have specified an output S3 bucket for your transcription results, this role should\n            have access to the output bucket as well.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Settings": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJobSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A <code>Settings</code> object that provides optional settings for a call analytics job. </p>"
+                    }
+                },
+                "ChannelDefinitions": {
+                    "target": "com.amazonaws.transcribe#ChannelDefinitions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When you start a call analytics job, you must pass an array that maps the agent and the\n            customer to specific audio channels. The values you can assign to a channel are 0\n            and 1. The agent and the customer must each have their own channel. You can't assign more\n            than one channel to an agent or customer. </p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#StartCallAnalyticsJobResponse": {
+            "type": "structure",
+            "members": {
+                "CallAnalyticsJob": {
+                    "target": "com.amazonaws.transcribe#CallAnalyticsJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object containing the details of the asynchronous call analytics job.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transcribe#StartMedicalTranscriptionJob": {
             "type": "operation",
             "input": {
@@ -2578,7 +3696,7 @@
                 "MedicalTranscriptionJobName": {
                     "target": "com.amazonaws.transcribe#TranscriptionJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the medical transcription job. You can't use the strings \"<code>.</code>\"\n            or \"<code>..</code>\" by themselves as the job name. The name must also be unique within\n            an AWS account. If you try to create a medical transcription job with the same name as a\n            previous medical transcription job, you get a <code>ConflictException</code>\n            error.</p>",
+                        "smithy.api#documentation": "<p>The name of the medical transcription job. You can't use the strings \"<code>.</code>\"\n            or \"<code>..</code>\" by themselves as the job name. The name must also be unique within\n            an Amazon Web Services account. If you try to create a medical transcription job with the\n            same name as a previous medical transcription job, you get a\n                <code>ConflictException</code> error.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2611,7 +3729,7 @@
                 "OutputBucketName": {
                     "target": "com.amazonaws.transcribe#OutputBucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location where the transcription is stored.</p>\n        <p>You must set <code>OutputBucketName</code> for Amazon Transcribe Medical to store the transcription\n            results. Your transcript appears in the S3 location you specify. When you call the <a>GetMedicalTranscriptionJob</a>, the operation returns this location in the\n                <code>TranscriptFileUri</code> field. The S3 bucket must have permissions that allow\n            Amazon Transcribe Medical to put files in the bucket. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user\">Permissions Required for IAM User Roles</a>.</p>\n        <p>You can specify an AWS Key Management Service (KMS) key to encrypt the output of your\n            transcription using the <code>OutputEncryptionKMSKeyId</code> parameter. If you don't\n            specify a KMS key, Amazon Transcribe Medical uses the default Amazon S3 key for server-side encryption of\n            transcripts that are placed in your S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 location where the transcription is stored.</p>\n        <p>You must set <code>OutputBucketName</code> for Amazon Transcribe Medical to store the transcription\n            results. Your transcript appears in the S3 location you specify. When you call the <a>GetMedicalTranscriptionJob</a>, the operation returns this location in the\n                <code>TranscriptFileUri</code> field. The S3 bucket must have permissions that allow\n            Amazon Transcribe Medical to put files in the bucket. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user\">Permissions Required for IAM User Roles</a>.</p>\n        <p>You can specify an Amazon Web Services Key Management Service (KMS) key to encrypt the\n            output of your transcription using the <code>OutputEncryptionKMSKeyId</code> parameter.\n            If you don't specify a KMS key, Amazon Transcribe Medical uses the default Amazon S3 key for server-side\n            encryption of transcripts that are placed in your S3 bucket.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2624,7 +3742,7 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribe#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used to\n            encrypt the output of the transcription job. The user calling the <a>StartMedicalTranscriptionJob</a> operation must have permission to use the\n            specified KMS key.</p>\n        <p>You use either of the following to identify a KMS key in the current account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or\n            another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS key in the current account or another\n                    account: \"arn:aws:kms:region:account\n                    ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account\n                    ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the medical transcription job is\n            encrypted with the default Amazon S3 key (SSE-S3).</p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output\n            location in the <code>OutputBucketName</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS)\n            key used to encrypt the output of the transcription job. The user calling the <a>StartMedicalTranscriptionJob</a> operation must have permission to use the\n            specified KMS key.</p>\n        <p>You use either of the following to identify a KMS key in the current account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or\n            another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS key in the current account or another\n                    account: \"arn:aws:kms:region:account\n                    ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account\n                    ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the medical transcription job is\n            encrypted with the default Amazon S3 key (SSE-S3).</p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output\n            location in the <code>OutputBucketName</code> parameter.</p>"
                     }
                 },
                 "Settings": {
@@ -2636,7 +3754,7 @@
                 "ContentIdentificationType": {
                     "target": "com.amazonaws.transcribe#MedicalContentIdentificationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>You can configure Amazon Transcribe Medical to label content in the transcription output. If you specify\n                <code>PHI</code>, Amazon Transcribe Medical labels the personal health information (PHI) that it identifies in the transcription\n            output.</p>"
+                        "smithy.api#documentation": "<p>You can configure Amazon Transcribe Medical to label content in the transcription output. If you specify\n                <code>PHI</code>, Amazon Transcribe Medical labels the personal health information (PHI) that it\n            identifies in the transcription output.</p>"
                     }
                 },
                 "Specialty": {
@@ -2703,7 +3821,7 @@
                 "TranscriptionJobName": {
                     "target": "com.amazonaws.transcribe#TranscriptionJobName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the job. You can't use the strings \"<code>.</code>\" or \"<code>..</code>\"\n            by themselves as the job name. The name must also be unique within an AWS account. If\n            you try to create a transcription job with the same name as a previous transcription\n            job, you get a <code>ConflictException</code> error.</p>",
+                        "smithy.api#documentation": "<p>The name of the job. You can't use the strings \"<code>.</code>\" or \"<code>..</code>\"\n            by themselves as the job name. The name must also be unique within an Amazon Web Services\n            account. If you try to create a transcription job with the same name as a previous\n            transcription job, you get a <code>ConflictException</code> error.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2736,7 +3854,7 @@
                 "OutputBucketName": {
                     "target": "com.amazonaws.transcribe#OutputBucketName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location where the transcription is stored.</p>\n        <p>If you set the <code>OutputBucketName</code>, Amazon Transcribe puts the transcript in the\n            specified S3 bucket. When you call the <a>GetTranscriptionJob</a> operation,\n            the operation returns this location in the <code>TranscriptFileUri</code> field. If you\n            enable content redaction, the redacted transcript appears in\n                <code>RedactedTranscriptFileUri</code>. If you enable content redaction and choose\n            to output an unredacted transcript, that transcript's location still appears in the\n                <code>TranscriptFileUri</code>. The S3 bucket must have permissions that allow Amazon Transcribe\n            to put files in the bucket. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user\">Permissions Required for IAM User Roles</a>.</p>\n        <p>You can specify an AWS Key Management Service (KMS) key to encrypt the output of your\n            transcription using the <code>OutputEncryptionKMSKeyId</code> parameter. If you don't\n            specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption of\n            transcripts that are placed in your S3 bucket.</p>\n        <p>If you don't set the <code>OutputBucketName</code>, Amazon Transcribe generates a pre-signed URL,\n            a shareable URL that provides secure access to your transcription, and returns it in the\n                <code>TranscriptFileUri</code> field. Use this URL to download the\n            transcription.</p>"
+                        "smithy.api#documentation": "<p>The location where the transcription is stored.</p>\n        <p>If you set the <code>OutputBucketName</code>, Amazon Transcribe puts the transcript in the\n            specified S3 bucket. When you call the <a>GetTranscriptionJob</a> operation,\n            the operation returns this location in the <code>TranscriptFileUri</code> field. If you\n            enable content redaction, the redacted transcript appears in\n                <code>RedactedTranscriptFileUri</code>. If you enable content redaction and choose\n            to output an unredacted transcript, that transcript's location still appears in the\n                <code>TranscriptFileUri</code>. The S3 bucket must have permissions that allow Amazon Transcribe\n            to put files in the bucket. For more information, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user\">Permissions Required for IAM User Roles</a>.</p>\n        <p>You can specify an Amazon Web Services Key Management Service (KMS) key to encrypt the\n            output of your transcription using the <code>OutputEncryptionKMSKeyId</code> parameter.\n            If you don't specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for server-side\n            encryption of transcripts that are placed in your S3 bucket.</p>\n        <p>If you don't set the <code>OutputBucketName</code>, Amazon Transcribe generates a pre-signed URL,\n            a shareable URL that provides secure access to your transcription, and returns it in the\n                <code>TranscriptFileUri</code> field. Use this URL to download the\n            transcription.</p>"
                     }
                 },
                 "OutputKey": {
@@ -2748,7 +3866,7 @@
                 "OutputEncryptionKMSKeyId": {
                     "target": "com.amazonaws.transcribe#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used to\n            encrypt the output of the transcription job. The user calling the\n                <code>StartTranscriptionJob</code> operation must have permission to use the\n            specified KMS key.</p>\n        <p>You can use either of the following to identify a KMS key in the current\n            account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or\n            another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS Key: \"arn:aws:kms:region:account\n                    ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account\n                    ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the transcription job is\n            encrypted with the default Amazon S3 key (SSE-S3). </p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output\n            location in the <code>OutputBucketName</code> parameter.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service (KMS)\n            key used to encrypt the output of the transcription job. The user calling the\n                <code>StartTranscriptionJob</code> operation must have permission to use the\n            specified KMS key.</p>\n        <p>You can use either of the following to identify a KMS key in the current\n            account:</p>\n        <ul>\n            <li>\n                <p>KMS Key ID: \"1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>KMS Key Alias: \"alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>You can use either of the following to identify a KMS key in the current account or\n            another account:</p>\n        <ul>\n            <li>\n                <p>Amazon Resource Name (ARN) of a KMS Key: \"arn:aws:kms:region:account\n                    ID:key/1234abcd-12ab-34cd-56ef-1234567890ab\"</p>\n            </li>\n            <li>\n                <p>ARN of a KMS Key Alias: \"arn:aws:kms:region:account\n                    ID:alias/ExampleAlias\"</p>\n            </li>\n         </ul>\n        <p>If you don't specify an encryption key, the output of the transcription job is\n            encrypted with the default Amazon S3 key (SSE-S3). </p>\n        <p>If you specify a KMS key to encrypt your output, you must also specify an output\n            location in the <code>OutputBucketName</code> parameter.</p>"
                     }
                 },
                 "Settings": {
@@ -2784,7 +3902,7 @@
                 "LanguageOptions": {
                     "target": "com.amazonaws.transcribe#LanguageOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>An object containing a list of languages that might be present in your collection of\n            audio files. Automatic language identification chooses a language that best matches the\n            source audio from that list.</p>"
+                        "smithy.api#documentation": "<p>An object containing a list of languages that might be present in your collection of\n            audio files. Automatic language identification chooses a language that best matches the\n            source audio from that list.</p>\n        <p>To transcribe speech in Modern Standard Arabic (ar-SA), your audio or video file must\n            be encoded at a sample rate of 16000 Hz or higher.</p>"
                     }
                 }
             }
@@ -2803,10 +3921,34 @@
         "com.amazonaws.transcribe#String": {
             "type": "string"
         },
+        "com.amazonaws.transcribe#StringTargetList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transcribe#NonEmptyString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1
+                }
+            }
+        },
+        "com.amazonaws.transcribe#TimestampMilliseconds": {
+            "type": "long",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 14400000
+                }
+            }
+        },
         "com.amazonaws.transcribe#Transcribe": {
             "type": "service",
             "version": "2017-10-26",
             "operations": [
+                {
+                    "target": "com.amazonaws.transcribe#CreateCallAnalyticsCategory"
+                },
                 {
                     "target": "com.amazonaws.transcribe#CreateLanguageModel"
                 },
@@ -2818,6 +3960,12 @@
                 },
                 {
                     "target": "com.amazonaws.transcribe#CreateVocabularyFilter"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#DeleteCallAnalyticsCategory"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#DeleteCallAnalyticsJob"
                 },
                 {
                     "target": "com.amazonaws.transcribe#DeleteLanguageModel"
@@ -2841,6 +3989,12 @@
                     "target": "com.amazonaws.transcribe#DescribeLanguageModel"
                 },
                 {
+                    "target": "com.amazonaws.transcribe#GetCallAnalyticsCategory"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#GetCallAnalyticsJob"
+                },
+                {
                     "target": "com.amazonaws.transcribe#GetMedicalTranscriptionJob"
                 },
                 {
@@ -2854,6 +4008,12 @@
                 },
                 {
                     "target": "com.amazonaws.transcribe#GetVocabularyFilter"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#ListCallAnalyticsCategories"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#ListCallAnalyticsJobs"
                 },
                 {
                     "target": "com.amazonaws.transcribe#ListLanguageModels"
@@ -2874,10 +4034,16 @@
                     "target": "com.amazonaws.transcribe#ListVocabularyFilters"
                 },
                 {
+                    "target": "com.amazonaws.transcribe#StartCallAnalyticsJob"
+                },
+                {
                     "target": "com.amazonaws.transcribe#StartMedicalTranscriptionJob"
                 },
                 {
                     "target": "com.amazonaws.transcribe#StartTranscriptionJob"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#UpdateCallAnalyticsCategory"
                 },
                 {
                     "target": "com.amazonaws.transcribe#UpdateMedicalVocabulary"
@@ -2923,6 +4089,63 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Identifies the location of a transcription.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#TranscriptFilter": {
+            "type": "structure",
+            "members": {
+                "TranscriptFilterType": {
+                    "target": "com.amazonaws.transcribe#TranscriptFilterType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Matches the phrase to the transcription output in a word for word \n            fashion. For example, if you specify the phrase \"I want to speak to the manager.\" Amazon Transcribe\n            attempts to match that specific phrase to the transcription.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AbsoluteTimeRange": {
+                    "target": "com.amazonaws.transcribe#AbsoluteTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A time range, set in seconds, between two points in the call.</p>"
+                    }
+                },
+                "RelativeTimeRange": {
+                    "target": "com.amazonaws.transcribe#RelativeTimeRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that allows percentages to specify the proportion of the call where you\n            would like to apply a filter. For example, you can specify the first half of the call. You\n            can also specify the period of time between halfway through to three-quarters of the way\n            through the call. Because the length of conversation can vary between calls, you can\n            apply relative time ranges across all calls.</p>"
+                    }
+                },
+                "ParticipantRole": {
+                    "target": "com.amazonaws.transcribe#ParticipantRole",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Determines whether the customer or the agent is speaking the phrases that you've\n            specified.</p>"
+                    }
+                },
+                "Negate": {
+                    "target": "com.amazonaws.transcribe#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If <code>TRUE</code>, the rule that you specify is applied to everything except for the phrases that you\n            specify.</p>"
+                    }
+                },
+                "Targets": {
+                    "target": "com.amazonaws.transcribe#StringTargetList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The phrases that you're specifying for the transcript filter to match.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Matches the output of the transcription to either the specific phrases that you specify, or the\n            intent of the phrases that you specify.</p>"
+            }
+        },
+        "com.amazonaws.transcribe#TranscriptFilterType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EXACT",
+                        "name": "EXACT"
+                    }
+                ]
             }
         },
         "com.amazonaws.transcribe#TranscriptionJob": {
@@ -3048,7 +4271,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
             }
         },
         "com.amazonaws.transcribe#TranscriptionJobStatus": {
@@ -3172,6 +4395,71 @@
                 ]
             }
         },
+        "com.amazonaws.transcribe#UpdateCallAnalyticsCategory": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transcribe#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#InternalFailureException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.transcribe#NotFoundException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the call analytics category with new values. The <code>UpdateCallAnalyticsCategory</code>\n            operation overwrites all of the existing information with the values that you provide in the\n            request. </p>",
+                "smithy.api#http": {
+                    "method": "PATCH",
+                    "uri": "/callanalyticscategories/{CategoryName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryRequest": {
+            "type": "structure",
+            "members": {
+                "CategoryName": {
+                    "target": "com.amazonaws.transcribe#CategoryName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the analytics category to update. The name is case sensitive. If you try to\n            update a call analytics category with the same name as a previous category you will receive a\n            <code>ConflictException</code> error. </p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Rules": {
+                    "target": "com.amazonaws.transcribe#RuleList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules used for the updated analytics category. The rules that you provide in this field\n            replace the ones that are currently being used. </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transcribe#UpdateCallAnalyticsCategoryResponse": {
+            "type": "structure",
+            "members": {
+                "CategoryProperties": {
+                    "target": "com.amazonaws.transcribe#CategoryProperties",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The attributes describing the analytics category. You can see information such as the\n            rules that you've used to update the category and when the category was originally\n            created. </p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.transcribe#UpdateMedicalVocabulary": {
             "type": "operation",
             "input": {
@@ -3227,7 +4515,7 @@
                 "VocabularyFileUri": {
                     "target": "com.amazonaws.transcribe#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location in Amazon S3 of the text file that contains\n            the\n            you use for your custom vocabulary. The URI must be in the same AWS\n            Region as the resource that you are calling. The following is the format for a\n            URI:</p>\n        <p>\n            <code>\n                https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>\n            </code>\n        </p>\n        <p>For example:</p>\n        <p>\n            <code>https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt</code>\n         </p>\n        <p>For more information about Amazon S3 object names, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies in Amazon Transcribe Medical, see <a href=\"http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary\">Medical Custom Vocabularies</a>.</p>"
+                        "smithy.api#documentation": "<p>The location in Amazon S3 of the text file that contains\n            the\n            you use for your custom vocabulary. The URI must be in the same Amazon Web Services\n            Region as the resource that you are calling. The following is the format for a\n            URI:</p>\n        <p>\n            <code>\n                https://s3.<aws-region>.amazonaws.com/<bucket-name>/<keyprefix>/<objectkey>\n            </code>\n        </p>\n        <p>For example:</p>\n        <p>\n            <code>https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt</code>\n         </p>\n        <p>For more information about Amazon S3 object names, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies in Amazon Transcribe Medical, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary\">Medical Custom Vocabularies</a>.</p>"
                     }
                 }
             }
@@ -3401,7 +4689,7 @@
                 "VocabularyFileUri": {
                     "target": "com.amazonaws.transcribe#Uri",
                     "traits": {
-                        "smithy.api#documentation": "<p>The S3 location of the text file that contains the definition of the custom\n            vocabulary. The URI must be in the same region as the API endpoint that you are calling.\n            The general form is </p>\n        \n        <p>For example:</p>\n        \n        <p>For more information about S3 object names, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies, see <a href=\"http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary\">Custom Vocabularies</a>.</p>"
+                        "smithy.api#documentation": "<p>The S3 location of the text file that contains the definition of the custom\n            vocabulary. The URI must be in the same region as the API endpoint that you are calling.\n            The general form is </p>\n        \n        <p>For example:</p>\n        \n        <p>For more information about S3 object names, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys\">Object Keys</a> in the <i>Amazon S3 Developer Guide</i>.</p>\n        <p>For more information about custom vocabularies, see <a href=\"https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary\">Custom Vocabularies</a>.</p>"
                     }
                 }
             }
@@ -3442,7 +4730,7 @@
                     "min": 1,
                     "max": 2000
                 },
-                "smithy.api#pattern": "(s3://|http(s*)://).+"
+                "smithy.api#pattern": "^(s3://|http(s*)://).+$"
             }
         },
         "com.amazonaws.transcribe#Vocabularies": {
@@ -3503,7 +4791,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
             }
         },
         "com.amazonaws.transcribe#VocabularyFilters": {
@@ -3551,7 +4839,7 @@
                     "min": 1,
                     "max": 200
                 },
-                "smithy.api#pattern": "^[0-9a-zA-Z._-]+"
+                "smithy.api#pattern": "^[0-9a-zA-Z._-]+$"
             }
         },
         "com.amazonaws.transcribe#VocabularyState": {

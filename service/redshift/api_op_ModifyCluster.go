@@ -191,7 +191,7 @@ type ModifyClusterInput struct {
 	// contain two consecutive hyphens.
 	//
 	// * Must be unique for all clusters within an
-	// account.
+	// Amazon Web Services account.
 	//
 	// Example: examplecluster
 	NewClusterIdentifier *string

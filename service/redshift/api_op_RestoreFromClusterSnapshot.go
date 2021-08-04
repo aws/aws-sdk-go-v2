@@ -55,7 +55,7 @@ type RestoreFromClusterSnapshotInput struct {
 	// Cannot end with a hyphen or contain two consecutive hyphens.
 	//
 	// * Must be unique
-	// for all clusters within an account.
+	// for all clusters within an Amazon Web Services account.
 	//
 	// This member is required.
 	ClusterIdentifier *string
@@ -77,13 +77,13 @@ type RestoreFromClusterSnapshotInput struct {
 	// Accelerator) after the cluster is restored. Possible values include the
 	// following.
 	//
-	// * enabled - Use AQUA if it is available for the current Region and
-	// Amazon Redshift node type.
+	// * enabled - Use AQUA if it is available for the current Amazon Web
+	// Services Region and Amazon Redshift node type.
 	//
 	// * disabled - Don't use AQUA.
 	//
-	// * auto - Amazon
-	// Redshift determines whether to use AQUA.
+	// *
+	// auto - Amazon Redshift determines whether to use AQUA.
 	AquaConfigurationStatus types.AquaConfigurationStatus
 
 	// The number of days that automated snapshots are retained. If the value is 0,
@@ -188,8 +188,8 @@ type RestoreFromClusterSnapshotInput struct {
 	// The number of nodes specified when provisioning the restored cluster.
 	NumberOfNodes *int32
 
-	// The account used to create or copy the snapshot. Required if you are restoring a
-	// snapshot you do not own, optional if you own the snapshot.
+	// The Amazon Web Services account used to create or copy the snapshot. Required if
+	// you are restoring a snapshot you do not own, optional if you own the snapshot.
 	OwnerAccount *string
 
 	// The port number on which the cluster accepts connections. Default: The same port

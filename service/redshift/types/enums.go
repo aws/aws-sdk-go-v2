@@ -80,6 +80,74 @@ func (AuthorizationStatus) Values() []AuthorizationStatus {
 	}
 }
 
+type DataShareStatus string
+
+// Enum values for DataShareStatus
+const (
+	DataShareStatusActive               DataShareStatus = "ACTIVE"
+	DataShareStatusPendingAuthorization DataShareStatus = "PENDING_AUTHORIZATION"
+	DataShareStatusAuthorized           DataShareStatus = "AUTHORIZED"
+	DataShareStatusDeauthorized         DataShareStatus = "DEAUTHORIZED"
+	DataShareStatusRejected             DataShareStatus = "REJECTED"
+	DataShareStatusAvailable            DataShareStatus = "AVAILABLE"
+)
+
+// Values returns all known values for DataShareStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (DataShareStatus) Values() []DataShareStatus {
+	return []DataShareStatus{
+		"ACTIVE",
+		"PENDING_AUTHORIZATION",
+		"AUTHORIZED",
+		"DEAUTHORIZED",
+		"REJECTED",
+		"AVAILABLE",
+	}
+}
+
+type DataShareStatusForConsumer string
+
+// Enum values for DataShareStatusForConsumer
+const (
+	DataShareStatusForConsumerActive    DataShareStatusForConsumer = "ACTIVE"
+	DataShareStatusForConsumerAvailable DataShareStatusForConsumer = "AVAILABLE"
+)
+
+// Values returns all known values for DataShareStatusForConsumer. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataShareStatusForConsumer) Values() []DataShareStatusForConsumer {
+	return []DataShareStatusForConsumer{
+		"ACTIVE",
+		"AVAILABLE",
+	}
+}
+
+type DataShareStatusForProducer string
+
+// Enum values for DataShareStatusForProducer
+const (
+	DataShareStatusForProducerActive               DataShareStatusForProducer = "ACTIVE"
+	DataShareStatusForProducerAuthorized           DataShareStatusForProducer = "AUTHORIZED"
+	DataShareStatusForProducerPendingAuthorization DataShareStatusForProducer = "PENDING_AUTHORIZATION"
+	DataShareStatusForProducerDeauthorized         DataShareStatusForProducer = "DEAUTHORIZED"
+	DataShareStatusForProducerRejected             DataShareStatusForProducer = "REJECTED"
+)
+
+// Values returns all known values for DataShareStatusForProducer. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DataShareStatusForProducer) Values() []DataShareStatusForProducer {
+	return []DataShareStatusForProducer{
+		"ACTIVE",
+		"AUTHORIZED",
+		"PENDING_AUTHORIZATION",
+		"DEAUTHORIZED",
+		"REJECTED",
+	}
+}
+
 type Mode string
 
 // Enum values for Mode

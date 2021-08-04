@@ -41,11 +41,11 @@ type ModifyDBInstanceInput struct {
 	// This member is required.
 	DBInstanceIdentifier *string
 
-	// The new amount of storage (in gibibytes) to allocate for the DB instance. For
-	// MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must be at least 10%
-	// greater than the current value. Values that are not at least 10% greater than
-	// the existing value are rounded up so that they are 10% greater than the current
-	// value. For the valid values for allocated storage for each engine, see
+	// The new amount of storage in gibibytes (GiB) to allocate for the DB instance.
+	// For MariaDB, MySQL, Oracle, and PostgreSQL, the value supplied must be at least
+	// 10% greater than the current value. Values that are not at least 10% greater
+	// than the existing value are rounded up so that they are 10% greater than the
+	// current value. For the valid values for allocated storage for each engine, see
 	// CreateDBInstance.
 	AllocatedStorage *int32
 
@@ -298,10 +298,10 @@ type ModifyDBInstanceInput struct {
 	// been accidentally revoked.
 	MasterUserPassword *string
 
-	// The upper limit to which Amazon RDS can automatically scale the storage of the
-	// DB instance. For more information about this setting, including limitations that
-	// apply to it, see  Managing capacity automatically with Amazon RDS storage
-	// autoscaling
+	// The upper limit in gibibytes (GiB) to which Amazon RDS can automatically scale
+	// the storage of the DB instance. For more information about this setting,
+	// including limitations that apply to it, see  Managing capacity automatically
+	// with Amazon RDS storage autoscaling
 	// (https://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/USER_PIOPS.StorageTypes.html#USER_PIOPS.Autoscaling)
 	// in the Amazon RDS User Guide.
 	MaxAllocatedStorage *int32

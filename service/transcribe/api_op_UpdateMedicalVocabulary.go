@@ -48,15 +48,15 @@ type UpdateMedicalVocabularyInput struct {
 	VocabularyName *string
 
 	// The location in Amazon S3 of the text file that contains the you use for your
-	// custom vocabulary. The URI must be in the same AWS Region as the resource that
-	// you are calling. The following is the format for a URI:
+	// custom vocabulary. The URI must be in the same Amazon Web Services Region as the
+	// resource that you are calling. The following is the format for a URI:
 	// https://s3..amazonaws.com///  For example:
 	// https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt For more
 	// information about Amazon S3 object names, see Object Keys
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide. For more information about custom vocabularies
 	// in Amazon Transcribe Medical, see Medical Custom Vocabularies
-	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary).
 	VocabularyFileUri *string
 
 	noSmithyDocumentSerde

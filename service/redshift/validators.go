@@ -50,6 +50,26 @@ func (m *validateOpAddPartner) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpAssociateDataShareConsumer struct {
+}
+
+func (*validateOpAssociateDataShareConsumer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAssociateDataShareConsumer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AssociateDataShareConsumerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAssociateDataShareConsumerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpAuthorizeClusterSecurityGroupIngress struct {
 }
 
@@ -65,6 +85,26 @@ func (m *validateOpAuthorizeClusterSecurityGroupIngress) HandleInitialize(ctx co
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpAuthorizeClusterSecurityGroupIngressInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpAuthorizeDataShare struct {
+}
+
+func (*validateOpAuthorizeDataShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpAuthorizeDataShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*AuthorizeDataShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpAuthorizeDataShareInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -465,6 +505,26 @@ func (m *validateOpCreateUsageLimit) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateUsageLimitInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeauthorizeDataShare struct {
+}
+
+func (*validateOpDeauthorizeDataShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeauthorizeDataShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeauthorizeDataShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeauthorizeDataShareInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -990,6 +1050,26 @@ func (m *validateOpDisableSnapshotCopy) HandleInitialize(ctx context.Context, in
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDisassociateDataShareConsumer struct {
+}
+
+func (*validateOpDisassociateDataShareConsumer) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDisassociateDataShareConsumer) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DisassociateDataShareConsumerInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDisassociateDataShareConsumerInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpEnableLogging struct {
 }
 
@@ -1450,6 +1530,26 @@ func (m *validateOpRebootCluster) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRejectDataShare struct {
+}
+
+func (*validateOpRejectDataShare) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRejectDataShare) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RejectDataShareInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRejectDataShareInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpResetClusterParameterGroup struct {
 }
 
@@ -1638,8 +1738,16 @@ func addOpAddPartnerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAddPartner{}, middleware.After)
 }
 
+func addOpAssociateDataShareConsumerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAssociateDataShareConsumer{}, middleware.After)
+}
+
 func addOpAuthorizeClusterSecurityGroupIngressValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAuthorizeClusterSecurityGroupIngress{}, middleware.After)
+}
+
+func addOpAuthorizeDataShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpAuthorizeDataShare{}, middleware.After)
 }
 
 func addOpAuthorizeEndpointAccessValidationMiddleware(stack *middleware.Stack) error {
@@ -1720,6 +1828,10 @@ func addOpCreateTagsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCreateUsageLimitValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUsageLimit{}, middleware.After)
+}
+
+func addOpDeauthorizeDataShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeauthorizeDataShare{}, middleware.After)
 }
 
 func addOpDeleteAuthenticationProfileValidationMiddleware(stack *middleware.Stack) error {
@@ -1826,6 +1938,10 @@ func addOpDisableSnapshotCopyValidationMiddleware(stack *middleware.Stack) error
 	return stack.Initialize.Add(&validateOpDisableSnapshotCopy{}, middleware.After)
 }
 
+func addOpDisassociateDataShareConsumerValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDisassociateDataShareConsumer{}, middleware.After)
+}
+
 func addOpEnableLoggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableLogging{}, middleware.After)
 }
@@ -1916,6 +2032,10 @@ func addOpPurchaseReservedNodeOfferingValidationMiddleware(stack *middleware.Sta
 
 func addOpRebootClusterValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRebootCluster{}, middleware.After)
+}
+
+func addOpRejectDataShareValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRejectDataShare{}, middleware.After)
 }
 
 func addOpResetClusterParameterGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -2167,6 +2287,21 @@ func validateOpAddPartnerInput(v *AddPartnerInput) error {
 	}
 }
 
+func validateOpAssociateDataShareConsumerInput(v *AssociateDataShareConsumerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AssociateDataShareConsumerInput"}
+	if v.DataShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataShareArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpAuthorizeClusterSecurityGroupIngressInput(v *AuthorizeClusterSecurityGroupIngressInput) error {
 	if v == nil {
 		return nil
@@ -2174,6 +2309,24 @@ func validateOpAuthorizeClusterSecurityGroupIngressInput(v *AuthorizeClusterSecu
 	invalidParams := smithy.InvalidParamsError{Context: "AuthorizeClusterSecurityGroupIngressInput"}
 	if v.ClusterSecurityGroupName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterSecurityGroupName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpAuthorizeDataShareInput(v *AuthorizeDataShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AuthorizeDataShareInput"}
+	if v.DataShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataShareArn"))
+	}
+	if v.ConsumerIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2557,6 +2710,24 @@ func validateOpCreateUsageLimitInput(v *CreateUsageLimitInput) error {
 	}
 	if len(v.LimitType) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LimitType"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeauthorizeDataShareInput(v *DeauthorizeDataShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeauthorizeDataShareInput"}
+	if v.DataShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataShareArn"))
+	}
+	if v.ConsumerIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConsumerIdentifier"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2974,6 +3145,21 @@ func validateOpDisableSnapshotCopyInput(v *DisableSnapshotCopyInput) error {
 	}
 }
 
+func validateOpDisassociateDataShareConsumerInput(v *DisassociateDataShareConsumerInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DisassociateDataShareConsumerInput"}
+	if v.DataShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataShareArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpEnableLoggingInput(v *EnableLoggingInput) error {
 	if v == nil {
 		return nil
@@ -3340,6 +3526,21 @@ func validateOpRebootClusterInput(v *RebootClusterInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "RebootClusterInput"}
 	if v.ClusterIdentifier == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ClusterIdentifier"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRejectDataShareInput(v *RejectDataShareInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RejectDataShareInput"}
+	if v.DataShareArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("DataShareArn"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

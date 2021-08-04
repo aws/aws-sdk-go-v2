@@ -64,10 +64,9 @@ type UpdateIncidentRecordInput struct {
 	// action is needed to avoid impact.
 	Impact *int32
 
-	// The SNS targets that AWS Chatbot uses to notify the chat channel of updates to
-	// an incident. You can also make updates to the incident through the chat channel
-	// using the SNS topics. Using multiple SNS topics creates redundancy in the case
-	// that a Region is down during the incident.
+	// The SNS targets that are notified when updates are made to an incident. Using
+	// multiple SNS topics creates redundancy in the case that a Region is down during
+	// the incident.
 	NotificationTargets []types.NotificationTargetItem
 
 	// The status of the incident. An incident can be Open or Resolved.

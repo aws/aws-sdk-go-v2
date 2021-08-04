@@ -12,9 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Configures storage settings for IoT SiteWise. Exporting data to Amazon S3 is
-// currently in preview release and is subject to change. We recommend that you use
-// this feature only with test data, and not in production environments.
+// Configures storage settings for IoT SiteWise.
 func (c *Client) PutStorageConfiguration(ctx context.Context, params *PutStorageConfigurationInput, optFns ...func(*Options)) (*PutStorageConfigurationOutput, error) {
 	if params == nil {
 		params = &PutStorageConfigurationInput{}

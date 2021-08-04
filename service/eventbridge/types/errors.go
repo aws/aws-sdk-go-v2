@@ -125,11 +125,12 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This rule was created by an AWS service on behalf of your account. It is managed
-// by that service. If you see this error in response to DeleteRule or
-// RemoveTargets, you can use the Force parameter in those calls to delete the rule
-// or remove targets from the rule. You cannot modify these managed rules by using
-// DisableRule, EnableRule, PutTargets, PutRule, TagResource, or UntagResource.
+// This rule was created by an Amazon Web Services service on behalf of your
+// account. It is managed by that service. If you see this error in response to
+// DeleteRule or RemoveTargets, you can use the Force parameter in those calls to
+// delete the rule or remove targets from the rule. You cannot modify these managed
+// rules by using DisableRule, EnableRule, PutTargets, PutRule, TagResource, or
+// UntagResource.
 type ManagedRuleException struct {
 	Message *string
 

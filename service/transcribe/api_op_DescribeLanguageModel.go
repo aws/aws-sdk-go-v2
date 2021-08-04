@@ -12,12 +12,12 @@ import (
 )
 
 // Gets information about a single custom language model. Use this information to
-// see details about the language model in your AWS account. You can also see
-// whether the base language model used to create your custom language model has
-// been updated. If Amazon Transcribe has updated the base model, you can create a
-// new custom language model using the updated base model. If the language model
-// wasn't created, you can use this operation to understand why Amazon Transcribe
-// couldn't create it.
+// see details about the language model in your Amazon Web Services account. You
+// can also see whether the base language model used to create your custom language
+// model has been updated. If Amazon Transcribe has updated the base model, you can
+// create a new custom language model using the updated base model. If the language
+// model wasn't created, you can use this operation to understand why Amazon
+// Transcribe couldn't create it.
 func (c *Client) DescribeLanguageModel(ctx context.Context, params *DescribeLanguageModelInput, optFns ...func(*Options)) (*DescribeLanguageModelOutput, error) {
 	if params == nil {
 		params = &DescribeLanguageModelInput{}

@@ -38,7 +38,8 @@ type UpdateResponsePlanInput struct {
 	// The actions that this response plan takes at the beginning of an incident.
 	Actions []types.Action
 
-	// The AWS Chatbot chat channel used for collaboration during an incident.
+	// The AWS Chatbot chat channel used for collaboration during an incident. Use the
+	// empty structure to remove the chat channel from the response plan.
 	ChatChannel types.ChatChannel
 
 	// A token ensuring that the action is called only once with the specified details.
@@ -69,8 +70,7 @@ type UpdateResponsePlanInput struct {
 	// * 1 - No impact
 	IncidentTemplateImpact *int32
 
-	// The SNS targets that AWS Chatbot uses to notify the chat channels and perform
-	// actions on the incident record.
+	// The SNS targets that are notified when updates are made to an incident.
 	IncidentTemplateNotificationTargets []types.NotificationTargetItem
 
 	// A brief summary of the incident. This typically contains what has happened,

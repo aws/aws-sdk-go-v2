@@ -5589,6 +5589,15 @@ func awsRestjson1_deserializeDocumentReplicationSet(v **types.ReplicationSet, va
 
 	for key, value := range shape {
 		switch key {
+		case "arn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.Arn = ptr.String(jtv)
+			}
+
 		case "createdBy":
 			if value != nil {
 				jtv, ok := value.(string)

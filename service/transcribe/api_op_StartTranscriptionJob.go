@@ -35,9 +35,9 @@ type StartTranscriptionJobInput struct {
 	Media *types.Media
 
 	// The name of the job. You can't use the strings "." or ".." by themselves as the
-	// job name. The name must also be unique within an AWS account. If you try to
-	// create a transcription job with the same name as a previous transcription job,
-	// you get a ConflictException error.
+	// job name. The name must also be unique within an Amazon Web Services account. If
+	// you try to create a transcription job with the same name as a previous
+	// transcription job, you get a ConflictException error.
 	//
 	// This member is required.
 	TranscriptionJobName *string
@@ -62,7 +62,9 @@ type StartTranscriptionJobInput struct {
 
 	// An object containing a list of languages that might be present in your
 	// collection of audio files. Automatic language identification chooses a language
-	// that best matches the source audio from that list.
+	// that best matches the source audio from that list. To transcribe speech in
+	// Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a
+	// sample rate of 16000 Hz or higher.
 	LanguageOptions []types.LanguageCode
 
 	// The format of the input media file.
@@ -89,31 +91,32 @@ type StartTranscriptionJobInput struct {
 	// Amazon Transcribe to put files in the bucket. For more information, see
 	// Permissions Required for IAM User Roles
 	// (https://docs.aws.amazon.com/transcribe/latest/dg/security_iam_id-based-policy-examples.html#auth-role-iam-user).
-	// You can specify an AWS Key Management Service (KMS) key to encrypt the output of
-	// your transcription using the OutputEncryptionKMSKeyId parameter. If you don't
-	// specify a KMS key, Amazon Transcribe uses the default Amazon S3 key for
-	// server-side encryption of transcripts that are placed in your S3 bucket. If you
-	// don't set the OutputBucketName, Amazon Transcribe generates a pre-signed URL, a
-	// shareable URL that provides secure access to your transcription, and returns it
-	// in the TranscriptFileUri field. Use this URL to download the transcription.
+	// You can specify an Amazon Web Services Key Management Service (KMS) key to
+	// encrypt the output of your transcription using the OutputEncryptionKMSKeyId
+	// parameter. If you don't specify a KMS key, Amazon Transcribe uses the default
+	// Amazon S3 key for server-side encryption of transcripts that are placed in your
+	// S3 bucket. If you don't set the OutputBucketName, Amazon Transcribe generates a
+	// pre-signed URL, a shareable URL that provides secure access to your
+	// transcription, and returns it in the TranscriptFileUri field. Use this URL to
+	// download the transcription.
 	OutputBucketName *string
 
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) key used
-	// to encrypt the output of the transcription job. The user calling the
-	// StartTranscriptionJob operation must have permission to use the specified KMS
-	// key. You can use either of the following to identify a KMS key in the current
-	// account:
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service
+	// (KMS) key used to encrypt the output of the transcription job. The user calling
+	// the StartTranscriptionJob operation must have permission to use the specified
+	// KMS key. You can use either of the following to identify a KMS key in the
+	// current account:
 	//
 	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
-	// * KMS Key Alias:
-	// "alias/ExampleAlias"
+	// * KMS
+	// Key Alias: "alias/ExampleAlias"
 	//
-	// You can use either of the following to identify a KMS key
-	// in the current account or another account:
+	// You can use either of the following to identify
+	// a KMS key in the current account or another account:
 	//
-	// * Amazon Resource Name (ARN) of a
-	// KMS Key: "arn:aws:kms:region:account
+	// * Amazon Resource Name
+	// (ARN) of a KMS Key: "arn:aws:kms:region:account
 	// ID:key/1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	// * ARN of a KMS Key Alias:

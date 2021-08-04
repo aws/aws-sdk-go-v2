@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of snapshot copy grants owned by the account in the destination
-// region. For more information about managing snapshot copy grants, go to Amazon
-// Redshift Database Encryption
+// Returns a list of snapshot copy grants owned by the Amazon Web Services account
+// in the destination region. For more information about managing snapshot copy
+// grants, go to Amazon Redshift Database Encryption
 // (https://docs.aws.amazon.com/redshift/latest/mgmt/working-with-db-encryption.html)
 // in the Amazon Redshift Cluster Management Guide.
 func (c *Client) DescribeSnapshotCopyGrants(ctx context.Context, params *DescribeSnapshotCopyGrantsInput, optFns ...func(*Options)) (*DescribeSnapshotCopyGrantsOutput, error) {

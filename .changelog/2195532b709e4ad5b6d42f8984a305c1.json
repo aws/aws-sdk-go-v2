@@ -1,7 +1,7 @@
 {
     "id": "2195532b-709e-4ad5-b6d4-2f8984a305c1",
     "type": "feature",
-    "description": "API client updated",
+    "description": "Updated to latest API model.",
     "modules": [
         "service/appintegrations",
         "service/appsync",
@@ -20,7 +20,9 @@
         "service/elasticloadbalancingv2",
         "service/emr",
         "service/emrcontainers",
+        "service/eventbridge",
         "service/greengrassv2",
+        "service/glue",
         "service/iam",
         "service/identitystore",
         "service/imagebuilder",
@@ -33,12 +35,14 @@
         "service/lexmodelbuildingservice",
         "service/lexmodelsv2",
         "service/location",
+        "service/mediaconvert",
         "service/medialive",
         "service/personalize",
         "service/proton",
         "service/qldb",
         "service/quicksight",
         "service/rds",
+        "service/redshift",
         "service/redshiftdata",
         "service/robomaker",
         "service/route53",
@@ -52,8 +56,10 @@
         "service/securityhub",
         "service/shield",
         "service/ssmcontacts",
+        "service/ssmincidents",
         "service/ssoadmin",
         "service/synthetics",
-        "service/textract"
+        "service/textract",
+        "service/transcribe"
     ]
 }

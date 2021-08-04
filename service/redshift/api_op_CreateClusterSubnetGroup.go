@@ -44,7 +44,7 @@ type CreateClusterSubnetGroupInput struct {
 	// * Must not be "Default".
 	//
 	// * Must be unique for all subnet groups that
-	// are created by your account.
+	// are created by your Amazon Web Services account.
 	//
 	// Example: examplesubnetgroup
 	//

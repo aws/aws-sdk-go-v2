@@ -19,7 +19,7 @@ type AccountAttribute struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an account authorized to restore a snapshot.
+// Describes an Amazon Web Services account authorized to restore a snapshot.
 type AccountWithRestoreAccess struct {
 
 	// The identifier of an Amazon Web Services support account authorized to restore a
@@ -27,7 +27,8 @@ type AccountWithRestoreAccess struct {
 	// amazon-redshift-support.
 	AccountAlias *string
 
-	// The identifier of an account authorized to restore a snapshot.
+	// The identifier of an Amazon Web Services account authorized to restore a
+	// snapshot.
 	AccountId *string
 
 	noSmithyDocumentSerde
@@ -40,12 +41,12 @@ type AquaConfiguration struct {
 	// include the following.
 	//
 	// * enabled - Use AQUA if it is available for the current
-	// Region and Amazon Redshift node type.
+	// Amazon Web Services Region and Amazon Redshift node type.
 	//
-	// * disabled - Don't use AQUA.
+	// * disabled - Don't
+	// use AQUA.
 	//
-	// * auto -
-	// Amazon Redshift determines whether to use AQUA.
+	// * auto - Amazon Redshift determines whether to use AQUA.
 	AquaConfigurationStatus AquaConfigurationStatus
 
 	// The value indicates the status of AQUA on the cluster. Possible values include
@@ -605,6 +606,47 @@ type ClusterVersion struct {
 	noSmithyDocumentSerde
 }
 
+type DataShare struct {
+
+	// A value that specifies whether the datashare can be shared to a publicly
+	// accessible cluster.
+	AllowPubliclyAccessibleConsumers bool
+
+	// An Amazon Resource Name (ARN) that references the datashare that is owned by a
+	// specific namespace of the producer cluster. A datashare ARN is in the
+	// arn:aws:redshift:{region}:{account-id}:{datashare}:{namespace-guid}/{datashare-name}
+	// format.
+	DataShareArn *string
+
+	// A value that specifies when the datashare has an association between a producer
+	// and data consumers.
+	DataShareAssociations []DataShareAssociation
+
+	// The Amazon Resource Name (ARN) of the producer.
+	ProducerArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The association of a datashare from a producer account with a data consumer.
+type DataShareAssociation struct {
+
+	// The name of the consumer accounts that have an association with a producer
+	// datashare.
+	ConsumerIdentifier *string
+
+	// The creation date of the datashare that is associated.
+	CreatedDate *time.Time
+
+	// The status of the datashare that is associated.
+	Status DataShareStatus
+
+	// The status change data of the datashare that is associated.
+	StatusChangeDate *time.Time
+
+	noSmithyDocumentSerde
+}
+
 // Describes the status of a cluster while it is in the process of resizing with an
 // incremental resize.
 type DataTransferProgress struct {
@@ -691,8 +733,8 @@ type EC2SecurityGroup struct {
 	// The name of the EC2 Security Group.
 	EC2SecurityGroupName *string
 
-	// The account ID of the owner of the EC2 security group specified in the
-	// EC2SecurityGroupName field.
+	// The Amazon Web Services account ID of the owner of the EC2 security group
+	// specified in the EC2SecurityGroupName field.
 	EC2SecurityGroupOwnerId *string
 
 	// The status of the EC2 security group.
@@ -752,7 +794,7 @@ type EndpointAccess struct {
 	// The port number on which the cluster accepts incoming connections.
 	Port int32
 
-	// The account ID of the owner of the cluster.
+	// The Amazon Web Services account ID of the owner of the cluster.
 	ResourceOwner *string
 
 	// The subnet group name where Amazon Redshift chooses to deploy the endpoint.
@@ -769,7 +811,7 @@ type EndpointAccess struct {
 }
 
 // Describes an endpoint authorization for authorizing Redshift-managed VPC
-// endpoint access to a cluster across accounts.
+// endpoint access to a cluster across Amazon Web Services accounts.
 type EndpointAuthorization struct {
 
 	// Indicates whether all VPCs in the grantee account are allowed access to the
@@ -791,10 +833,10 @@ type EndpointAuthorization struct {
 	// The number of Redshift-managed VPC endpoints created for the authorization.
 	EndpointCount int32
 
-	// The account ID of the grantee of the cluster.
+	// The Amazon Web Services account ID of the grantee of the cluster.
 	Grantee *string
 
-	// The account ID of the cluster owner.
+	// The Amazon Web Services account ID of the cluster owner.
 	Grantor *string
 
 	// The status of the authorization action.
@@ -810,7 +852,7 @@ type Event struct {
 	Date *time.Time
 
 	// A list of the event categories. Values: Configuration, Management, Monitoring,
-	// Security
+	// Security, Pending
 	EventCategories []string
 
 	// The identifier of the event.
@@ -868,7 +910,8 @@ type EventSubscription struct {
 	// The name of the Amazon Redshift event notification subscription.
 	CustSubscriptionId *string
 
-	// The account associated with the Amazon Redshift event notification subscription.
+	// The Amazon Web Services account associated with the Amazon Redshift event
+	// notification subscription.
 	CustomerAwsId *string
 
 	// A boolean value indicating whether the subscription is enabled; true indicates
@@ -876,7 +919,7 @@ type EventSubscription struct {
 	Enabled bool
 
 	// The list of Amazon Redshift event categories specified in the event notification
-	// subscription. Values: Configuration, Management, Monitoring, Security
+	// subscription. Values: Configuration, Management, Monitoring, Security, Pending
 	EventCategoriesList []string
 
 	// The event severity specified in the Amazon Redshift event notification
@@ -1515,8 +1558,8 @@ type ScheduledActionType struct {
 // Describes a snapshot.
 type Snapshot struct {
 
-	// A list of the accounts authorized to restore the snapshot. Returns null if no
-	// accounts are authorized. Visible only to the snapshot owner.
+	// A list of the Amazon Web Services accounts authorized to restore the snapshot.
+	// Returns null if no accounts are authorized. Visible only to the snapshot owner.
 	AccountsWithRestoreAccess []AccountWithRestoreAccess
 
 	// The size of the incremental backup.
@@ -1596,9 +1639,9 @@ type Snapshot struct {
 	// The number of nodes in the cluster.
 	NumberOfNodes int32
 
-	// For manual snapshots, the account used to create or copy the snapshot. For
-	// automatic snapshots, the owner of the cluster. The owner can perform all
-	// snapshot actions, such as sharing a manual snapshot.
+	// For manual snapshots, the Amazon Web Services account used to create or copy the
+	// snapshot. For automatic snapshots, the owner of the cluster. The owner can
+	// perform all snapshot actions, such as sharing a manual snapshot.
 	OwnerAccount *string
 
 	// The port that the cluster is listening on.

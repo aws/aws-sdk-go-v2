@@ -42,7 +42,7 @@ type Ami struct {
 	// The name of the Amazon EC2 AMI.
 	Name *string
 
-	// The Region of the Amazon EC2 AMI.
+	// The Amazon Web Services Region of the Amazon EC2 AMI.
 	Region *string
 
 	// Image state shows the image status and the reason for that status.
@@ -64,8 +64,8 @@ type AmiDistributionConfiguration struct {
 	// The KMS key identifier used to encrypt the distributed image.
 	KmsKeyId *string
 
-	// Launch permissions can be used to configure which accounts can use the AMI to
-	// launch instances.
+	// Launch permissions can be used to configure which Amazon Web Services accounts
+	// can use the AMI to launch instances.
 	LaunchPermission *LaunchPermissionConfiguration
 
 	// The name of the distribution configuration.
@@ -229,7 +229,8 @@ type ComponentSummary struct {
 	noSmithyDocumentSerde
 }
 
-// The defining characteristics of a specific version of an TOE component.
+// The defining characteristics of a specific version of an Amazon Web Services TOE
+// component.
 type ComponentVersion struct {
 
 	// The Amazon Resource Name (ARN) of the component. Semantic versioning is included
@@ -1062,7 +1063,7 @@ type LaunchPermissionConfiguration struct {
 	// The name of the group.
 	UserGroups []string
 
-	// The account ID.
+	// The Amazon Web Services account ID.
 	UserIds []string
 
 	noSmithyDocumentSerde

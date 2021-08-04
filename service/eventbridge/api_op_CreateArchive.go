@@ -39,7 +39,7 @@ type CreateArchiveInput struct {
 	// This member is required.
 	ArchiveName *string
 
-	// The ARN of the event source associated with the archive.
+	// The ARN of the event bus that sends events to the archive.
 	//
 	// This member is required.
 	EventSourceArn *string

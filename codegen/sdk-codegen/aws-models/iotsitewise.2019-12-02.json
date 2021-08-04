@@ -4387,7 +4387,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about the storage configuration for IoT SiteWise.</p>\n         <note>\n            <p>Exporting data to Amazon S3 is currently in preview release and is subject to change. We\n        recommend that you use this feature only with test data, and not in production\n        environments.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Retrieves information about the storage configuration for IoT SiteWise.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "api."
                 },
@@ -5603,9 +5603,8 @@
             "traits": {
                 "smithy.api#length": {
                     "min": 2,
-                    "max": 3
-                },
-                "smithy.api#pattern": "^1w|1d|1h|15m|5m|1m$"
+                    "max": 23
+                }
             }
         },
         "com.amazonaws.iotsitewise#IntervalInSeconds": {
@@ -6823,6 +6822,15 @@
                 "smithy.api#pattern": "^[A-Za-z0-9+/=]+$"
             }
         },
+        "com.amazonaws.iotsitewise#Offset": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 25
+                }
+            }
+        },
         "com.amazonaws.iotsitewise#OffsetInNanos": {
             "type": "integer",
             "traits": {
@@ -7453,7 +7461,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures storage settings for IoT SiteWise.</p>\n         <note>\n            <p>Exporting data to Amazon S3 is currently in preview release and is subject to change. We\n        recommend that you use this feature only with test data, and not in production\n        environments.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Configures storage settings for IoT SiteWise.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "api."
                 },
@@ -7958,13 +7966,19 @@
                 "interval": {
                     "target": "com.amazonaws.iotsitewise#Interval",
                     "traits": {
-                        "smithy.api#documentation": "<p>The time interval for the tumbling window. Note that <code>w</code> represents weeks,\n        <code>d</code> represents days, <code>h</code> represents hours, and <code>m</code>\n      represents minutes. IoT SiteWise computes the <code>1w</code> interval the end of Sunday at midnight\n      each week (UTC), the <code>1d</code> interval at the end of each day at midnight (UTC), the\n        <code>1h</code> interval at the end of each hour, and so on. </p>\n         <p>When IoT SiteWise aggregates data points for metric computations, the start of each interval is\n      exclusive and the end of each interval is inclusive. IoT SiteWise places the computed data point at\n      the end of the interval.</p>",
+                        "smithy.api#documentation": "<p>The time interval for the tumbling window. The interval time must be between 1 minute and 1 week.</p>\n         <p>IoT SiteWise computes the <code>1w</code> interval the end of Sunday at midnight\n      each week (UTC), the <code>1d</code> interval at the end of each day at midnight (UTC), the\n      <code>1h</code> interval at the end of each hour, and so on. </p>\n         <p>When IoT SiteWise aggregates data points for metric computations, the start of each interval is\n      exclusive and the end of each interval is inclusive. IoT SiteWise places the computed data point at\n      the end of the interval.</p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "offset": {
+                    "target": "com.amazonaws.iotsitewise#Offset",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The offset for the tumbling window. The <code>offset</code> parameter accepts the following:</p>\n         <ul>\n            <li>\n               <p>The offset time.</p>\n               <p>For example, if you specify <code>18h</code> for <code>offset</code> \n          and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p>\n               <ul>\n                  <li>\n                     <p>If you create the metric before or at 6:00 p.m. (UTC), \n              you get the first aggregation result at 6 p.m. (UTC) on the day when you create the metric.</p>\n                  </li>\n                  <li>\n                     <p>If you create the metric after 6:00 p.m. (UTC), \n              you get the first aggregation result at 6 p.m. (UTC) the next day.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The ISO 8601 format.</p>\n               <p>For example, if you specify <code>PT18H</code> for <code>offset</code> \n          and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p>\n               <ul>\n                  <li>\n                     <p>If you create the metric before or at 6:00 p.m. (UTC), \n              you get the first aggregation result at 6 p.m. (UTC) on the day when you create the metric.</p>\n                  </li>\n                  <li>\n                     <p>If you create the metric after 6:00 p.m. (UTC), \n              you get the first aggregation result at 6 p.m. (UTC) the next day.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>The 24-hour clock.</p>\n               <p>For example, if you specify <code>00:03:00</code> for <code>offset</code> \n          and <code>5m</code> for <code>interval</code>, and you create the metric at 2 p.m. (UTC), \n          you get the first aggregation result at 2:03 p.m. (UTC). \n          You get the second aggregation result at 2:08 p.m. (UTC). </p>\n            </li>\n            <li>\n               <p>The offset time zone.</p>\n               <p>For example, if you specify <code>2021-07-23T18:00-08</code> for <code>offset</code> \n          and <code>1d</code> for <code>interval</code>, IoT SiteWise aggregates data in one of the following ways:</p>\n               <ul>\n                  <li>\n                     <p>If you create the metric before or at 6:00 p.m. (PST), \n              you get the first aggregation result at 6 p.m. (PST) on the day when you create the metric.</p>\n                  </li>\n                  <li>\n                     <p>If you create the metric after 6:00 p.m. (PST), \n              you get the first aggregation result at 6 p.m. (PST) the next day.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and\n      contiguous time interval. This window is used in metric and aggregation computations.</p>"
+                "smithy.api#documentation": "<p>Contains a tumbling window, which is a repeating fixed-sized, non-overlapping, and\n      contiguous time window. You use this window in metrics to aggregate data from properties and other assets.</p>\n         <p>You can use <code>m</code>, <code>h</code>, <code>d</code>, and <code>w</code> \n      when you specify an interval or offset. Note that <code>m</code> represents minutes, \n      and <code>w</code> represents weeks. You can also use <code>s</code> to represent seconds \n      in <code>offset</code>.</p>\n         <p>The <code>interval</code> and <code>offset</code> parameters support the \n      <a href=\"https://en.wikipedia.org/wiki/ISO_8601\">ISO 8601 format</a>. \n      For example, <code>PT5S</code> represents five seconds, <code>PT5M</code> represents five minutes, \n      and <code>PT5H</code> represents five hours.</p>"
             }
         },
         "com.amazonaws.iotsitewise#UnauthorizedException": {

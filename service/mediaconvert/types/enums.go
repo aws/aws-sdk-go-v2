@@ -1702,6 +1702,24 @@ func (ContainerType) Values() []ContainerType {
 	}
 }
 
+type CopyProtectionAction string
+
+// Enum values for CopyProtectionAction
+const (
+	CopyProtectionActionPassthrough CopyProtectionAction = "PASSTHROUGH"
+	CopyProtectionActionStrip       CopyProtectionAction = "STRIP"
+)
+
+// Values returns all known values for CopyProtectionAction. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CopyProtectionAction) Values() []CopyProtectionAction {
+	return []CopyProtectionAction{
+		"PASSTHROUGH",
+		"STRIP",
+	}
+}
+
 type DashIsoGroupAudioChannelConfigSchemeIdUri string
 
 // Enum values for DashIsoGroupAudioChannelConfigSchemeIdUri
@@ -6828,6 +6846,24 @@ func (Vc3Telecine) Values() []Vc3Telecine {
 	return []Vc3Telecine{
 		"NONE",
 		"HARD",
+	}
+}
+
+type VchipAction string
+
+// Enum values for VchipAction
+const (
+	VchipActionPassthrough VchipAction = "PASSTHROUGH"
+	VchipActionStrip       VchipAction = "STRIP"
+)
+
+// Values returns all known values for VchipAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VchipAction) Values() []VchipAction {
+	return []VchipAction{
+		"PASSTHROUGH",
+		"STRIP",
 	}
 }
 

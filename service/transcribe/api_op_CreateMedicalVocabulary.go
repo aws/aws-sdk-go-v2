@@ -40,23 +40,23 @@ type CreateMedicalVocabularyInput struct {
 	LanguageCode types.LanguageCode
 
 	// The location in Amazon S3 of the text file you use to define your custom
-	// vocabulary. The URI must be in the same AWS Region as the resource that you're
-	// calling. Enter information about your VocabularyFileUri in the following format:
-	// https://s3..amazonaws.com///  The following is an example URI for a vocabulary
-	// file that is stored in Amazon S3:
+	// vocabulary. The URI must be in the same Amazon Web Services Region as the
+	// resource that you're calling. Enter information about your VocabularyFileUri in
+	// the following format:  https://s3..amazonaws.com///  The following is an example
+	// URI for a vocabulary file that is stored in Amazon S3:
 	// https://s3.us-east-1.amazonaws.com/AWSDOC-EXAMPLE-BUCKET/vocab.txt For more
 	// information about Amazon S3 object names, see Object Keys
-	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingMetadata.html#object-keys)
 	// in the Amazon S3 Developer Guide. For more information about custom
 	// vocabularies, see Medical Custom Vocabularies
-	// (http://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med).
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html#how-vocabulary-med).
 	//
 	// This member is required.
 	VocabularyFileUri *string
 
 	// The name of the custom vocabulary. This case-sensitive name must be unique
-	// within an AWS account. If you try to create a vocabulary with the same name as a
-	// previous vocabulary, you get a ConflictException error.
+	// within an Amazon Web Services account. If you try to create a vocabulary with
+	// the same name as a previous vocabulary, you get a ConflictException error.
 	//
 	// This member is required.
 	VocabularyName *string
@@ -77,8 +77,8 @@ type CreateMedicalVocabularyOutput struct {
 	// The date and time that you created the vocabulary.
 	LastModifiedTime *time.Time
 
-	// The name of the vocabulary. The name must be unique within an AWS account and is
-	// case sensitive.
+	// The name of the vocabulary. The name must be unique within an Amazon Web
+	// Services account and is case sensitive.
 	VocabularyName *string
 
 	// The processing state of your custom vocabulary in Amazon Transcribe Medical. If

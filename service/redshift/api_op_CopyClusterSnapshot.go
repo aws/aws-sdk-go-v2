@@ -60,8 +60,8 @@ type CopyClusterSnapshotInput struct {
 	// * Cannot end with a hyphen or
 	// contain two consecutive hyphens.
 	//
-	// * Must be unique for the account that is
-	// making the request.
+	// * Must be unique for the Amazon Web Services
+	// account that is making the request.
 	//
 	// This member is required.
 	TargetSnapshotIdentifier *string
