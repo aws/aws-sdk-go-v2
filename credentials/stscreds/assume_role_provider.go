@@ -215,6 +215,21 @@ type AssumeRoleOptions struct {
 	// If both TokenCode and TokenProvider is set, TokenProvider will be used and
 	// TokenCode is ignored.
 	TokenProvider func() (string, error)
+
+	// A list of session tags that you want to pass. Each session tag consists of a key
+	// name and an associated value. For more information about session tags, see
+	// Tagging STS Sessions
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html) in the
+	// IAM User Guide. This parameter is optional. You can pass up to 50 session tags.
+	Tags []types.Tag
+
+	// A list of keys for session tags that you want to set as transitive. If you set a
+	// tag key as transitive, the corresponding key and value passes to subsequent
+	// sessions in a role chain. For more information, see Chaining Roles with Session
+	// Tags
+	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_session-tags.html#id_session-tags_role-chaining)
+	// in the IAM User Guide. This parameter is optional.
+	TransitiveTagKeys []string
 }
 
 // NewAssumeRoleProvider constructs and returns a credentials provider that
@@ -246,11 +261,13 @@ func (p *AssumeRoleProvider) Retrieve(ctx context.Context) (aws.Credentials, err
 		p.options.Duration = DefaultDuration
 	}
 	input := &sts.AssumeRoleInput{
-		DurationSeconds: aws.Int32(int32(p.options.Duration / time.Second)),
-		PolicyArns:      p.options.PolicyARNs,
-		RoleArn:         aws.String(p.options.RoleARN),
-		RoleSessionName: aws.String(p.options.RoleSessionName),
-		ExternalId:      p.options.ExternalID,
+		DurationSeconds:   aws.Int32(int32(p.options.Duration / time.Second)),
+		PolicyArns:        p.options.PolicyARNs,
+		RoleArn:           aws.String(p.options.RoleARN),
+		RoleSessionName:   aws.String(p.options.RoleSessionName),
+		ExternalId:        p.options.ExternalID,
+		Tags:              p.options.Tags,
+		TransitiveTagKeys: p.options.TransitiveTagKeys,
 	}
 	if p.options.Policy != nil {
 		input.Policy = p.options.Policy

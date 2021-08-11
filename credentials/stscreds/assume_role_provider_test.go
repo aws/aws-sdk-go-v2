@@ -145,6 +145,83 @@ func TestAssumeRoleProvider_MFAWithNoToken(t *testing.T) {
 	}
 }
 
+func TestAssumeRoleProvider_WithTags(t *testing.T) {
+	stub := &mockAssumeRole{
+		TestInput: func(in *sts.AssumeRoleInput) {
+			if e, a := 1, len(in.Tags); e != a {
+				t.Fatalf("expect %v, got %v", e, a)
+			}
+			tag := in.Tags[0]
+			if e, a := "KEY", *tag.Key; e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+			if e, a := "value", *tag.Value; e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+		},
+	}
+	p := stscreds.NewAssumeRoleProvider(stub, roleARN, func(options *stscreds.AssumeRoleOptions) {
+		options.Tags = []types.Tag{
+			{
+				Key:   aws.String("KEY"),
+				Value: aws.String("value"),
+			},
+		}
+	})
+
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("Expect no error, %v", err)
+	}
+
+	if e, a := roleARN, creds.AccessKeyID; e != a {
+		t.Errorf("Expect access key ID to be reflected role ARN")
+	}
+	if e, a := "assumedSecretAccessKey", creds.SecretAccessKey; e != a {
+		t.Errorf("Expect secret access key to match")
+	}
+	if e, a := "assumedSessionToken", creds.SessionToken; e != a {
+		t.Errorf("Expect session token to match")
+	}
+}
+
+func TestAssumeRoleProvider_WithTransitiveTagKeys(t *testing.T) {
+	stub := &mockAssumeRole{
+		TestInput: func(in *sts.AssumeRoleInput) {
+			if e, a := 1, len(in.TransitiveTagKeys); e != a {
+				t.Fatalf("expect %v, got %v", e, a)
+			}
+			if e, a := "KEY", in.TransitiveTagKeys[0]; e != a {
+				t.Errorf("expect %v, got %v", e, a)
+			}
+		},
+	}
+	p := stscreds.NewAssumeRoleProvider(stub, roleARN, func(options *stscreds.AssumeRoleOptions) {
+		options.Tags = []types.Tag{
+			{
+				Key:   aws.String("KEY"),
+				Value: aws.String("value"),
+			},
+		}
+		options.TransitiveTagKeys = []string{"KEY"}
+	})
+
+	creds, err := p.Retrieve(context.Background())
+	if err != nil {
+		t.Fatalf("Expect no error, %v", err)
+	}
+
+	if e, a := roleARN, creds.AccessKeyID; e != a {
+		t.Errorf("Expect access key ID to be reflected role ARN")
+	}
+	if e, a := "assumedSecretAccessKey", creds.SecretAccessKey; e != a {
+		t.Errorf("Expect secret access key to match")
+	}
+	if e, a := "assumedSessionToken", creds.SessionToken; e != a {
+		t.Errorf("Expect session token to match")
+	}
+}
+
 func BenchmarkAssumeRoleProvider(b *testing.B) {
 	stub := &mockAssumeRole{}
 	p := stscreds.NewAssumeRoleProvider(stub, roleARN)
