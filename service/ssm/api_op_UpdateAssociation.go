@@ -107,8 +107,8 @@ type UpdateAssociationInput struct {
 	// configuration information for the instance. You can specify Amazon Web
 	// Services-predefined documents, documents you created, or a document that is
 	// shared with you from another account. For Systems Manager document (SSM
-	// document) that are shared with you from other accounts, you must specify the
-	// complete SSM document ARN, in the following format:
+	// document) that are shared with you from other Amazon Web Services accounts, you
+	// must specify the complete SSM document ARN, in the following format:
 	// arn:aws:ssm:region:account-id:document/document-name  For example:
 	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For Amazon Web
 	// Services-predefined documents and SSM documents you created in your account, you
@@ -138,9 +138,9 @@ type UpdateAssociationInput struct {
 	// PutComplianceItems API operation. By default, all associations use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
-	// A location is a combination of Regions and accounts where you want to run the
-	// association. Use this action to update an association in multiple Regions and
-	// multiple accounts.
+	// A location is a combination of Amazon Web Services Regions and Amazon Web
+	// Services accounts where you want to run the association. Use this action to
+	// update an association in multiple Regions and multiple accounts.
 	TargetLocations []types.TargetLocation
 
 	// The targets of the association.

@@ -871,7 +871,10 @@
             "type": "structure",
             "members": {
                 "InvitedBy": {
-                    "target": "com.amazonaws.chime#Identity"
+                    "target": "com.amazonaws.chime#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the member who invited another member.</p>"
+                    }
                 },
                 "Type": {
                     "target": "com.amazonaws.chime#ChannelMembershipType",
@@ -893,7 +896,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The membership information, including member ARNs, the channel ARN, and membership types.</p>"
+                "smithy.api#documentation": "<p>The membership information, including member ARNs, the channel ARN, and membership\n         types.</p>"
             }
         },
         "com.amazonaws.chime#BatchCreateAttendee": {
@@ -1011,7 +1014,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a specified number of users to a channel. </p>",
+                "smithy.api#documentation": "<p>Adds a specified number of users to a channel.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -1068,7 +1071,7 @@
                 "Type": {
                     "target": "com.amazonaws.chime#ChannelMembershipType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of \n            <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals \n            <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.</p>"
+                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default\n         members are always returned as part of <code>ListChannelMemberships</code>. Hidden members\n         are only returned if the type filter in <code>ListChannelMemberships</code> equals\n            <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported\n         by moderators.</p>"
                     }
                 },
                 "MemberArns": {
@@ -1099,7 +1102,7 @@
                 "Errors": {
                     "target": "com.amazonaws.chime#BatchCreateChannelMembershipErrors",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the action fails for one or more of the memberships in the request, a list of the memberships is returned, along with error codes and error messages.</p>"
+                        "smithy.api#documentation": "<p>If the action fails for one or more of the memberships in the request, a list of the\n         memberships is returned, along with error codes and error messages.</p>"
                     }
                 }
             }
@@ -1846,10 +1849,7 @@
                     "target": "com.amazonaws.chime#ChannelSummary"
                 },
                 "AppInstanceUserMembershipSummary": {
-                    "target": "com.amazonaws.chime#AppInstanceUserMembershipSummary",
-                    "traits": {
-                        "smithy.api#documentation": "<p>Returns the channel membership data for an <code>AppInstance</code>.</p>"
-                    }
+                    "target": "com.amazonaws.chime#AppInstanceUserMembershipSummary"
                 }
             },
             "traits": {
@@ -2088,7 +2088,10 @@
             "type": "structure",
             "members": {
                 "ChannelSummary": {
-                    "target": "com.amazonaws.chime#ChannelSummary"
+                    "target": "com.amazonaws.chime#ChannelSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Summary of the details of a <code>Channel</code>.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2264,7 +2267,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request could not be processed because of conflict in the current state of the\n            resource.</p>",
+                "smithy.api#documentation": "<p>The request could not be processed because of conflict in the current state of the\n         resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
             }
@@ -2907,7 +2910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a channel to which you can add users and send messages.</p>\n\n         <p>\n            <b>Restriction</b>: You can't change a channel's privacy.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a channel to which you can add users and send messages.</p>\n\n         <p>\n            <b>Restriction</b>: You can't change a channel's\n         privacy.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -2953,7 +2956,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Permanently bans a member from a channel. Moderators can't add banned members to a channel.\n            To undo a ban, you first have to <code>DeleteChannelBan</code>, and then\n                <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or\n            channels.</p>\n         <p>If you ban a user who is already part of a channel, that user is automatically kicked from the channel.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Permanently bans a member from a channel. Moderators can't add banned members to a\n         channel. To undo a ban, you first have to <code>DeleteChannelBan</code>, and then\n            <code>CreateChannelMembership</code>. Bans are cleaned up when you delete users or\n         channels.</p>\n         <p>If you ban a user who is already part of a channel, that user is automatically kicked\n         from the channel.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -3003,7 +3006,7 @@
                 "Member": {
                     "target": "com.amazonaws.chime#Identity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban response.</p>"
+                        "smithy.api#documentation": "<p>The <code>ChannelArn</code> and <code>BannedIdentity</code> of the member in the ban\n         response.</p>"
                     }
                 }
             }
@@ -3043,7 +3046,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the\n            request header. A channel member can:</p>\n\n         <ul>\n            <li>\n               <p>List messages</p>\n            </li>\n            <li>\n               <p>Send messages</p>\n            </li>\n            <li>\n               <p>Receive messages</p>\n            </li>\n            <li>\n               <p>Edit their own messages</p>\n            </li>\n            <li>\n               <p>Leave the channel</p>\n            </li>\n         </ul>\n\n         <p>Privacy settings impact this action as follows:</p>\n\n         <ul>\n            <li>\n               <p>Public Channels: You do not need to be a member to list messages, but you must be a member to send messages.</p>\n            </li>\n            <li>\n               <p>Private Channels: You must be a member to list or send messages.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Adds a user to a channel. The <code>InvitedBy</code> response field is derived from the\n         request header. A channel member can:</p>\n\n         <ul>\n            <li>\n               <p>List messages</p>\n            </li>\n            <li>\n               <p>Send messages</p>\n            </li>\n            <li>\n               <p>Receive messages</p>\n            </li>\n            <li>\n               <p>Edit their own messages</p>\n            </li>\n            <li>\n               <p>Leave the channel</p>\n            </li>\n         </ul>\n\n         <p>Privacy settings impact this action as follows:</p>\n\n         <ul>\n            <li>\n               <p>Public Channels: You do not need to be a member to list messages, but you must be\n               a member to send messages.</p>\n            </li>\n            <li>\n               <p>Private Channels: You must be a member to list or send messages.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -3075,7 +3078,7 @@
                 "Type": {
                     "target": "com.amazonaws.chime#ChannelMembershipType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of \n<code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals \n<code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported by moderators.</p>",
+                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default\n         members are always returned as part of <code>ListChannelMemberships</code>. Hidden members\n         are only returned if the type filter in <code>ListChannelMemberships</code> equals\n            <code>HIDDEN</code>. Otherwise hidden members are not returned. This is only supported\n         by moderators.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3140,7 +3143,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p>\n\n         <ul>\n            <li>\n               <p>Add and remove other members of the channel.</p>\n            </li>\n            <li>\n               <p>Add and remove other moderators of the channel.</p>\n            </li>\n            <li>\n               <p>Add and remove user bans for the channel.</p>\n            </li>\n            <li>\n               <p>Redact messages in the channel.</p>\n            </li>\n            <li>\n               <p>List messages in the channel.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a new <code>ChannelModerator</code>. A channel moderator can:</p>\n\n         <ul>\n            <li>\n               <p>Add and remove other members of the channel.</p>\n            </li>\n            <li>\n               <p>Add and remove other moderators of the channel.</p>\n            </li>\n            <li>\n               <p>Add and remove user bans for the channel.</p>\n            </li>\n            <li>\n               <p>Redact messages in the channel.</p>\n            </li>\n            <li>\n               <p>List messages in the channel.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -3215,13 +3218,13 @@
                 "Mode": {
                     "target": "com.amazonaws.chime#ChannelMode",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators, moderators, and channel members can add themselves \n    and other members to unrestricted channels. Only administrators and moderators can add members to restricted channels.</p>"
+                        "smithy.api#documentation": "<p>The channel mode: <code>UNRESTRICTED</code> or <code>RESTRICTED</code>. Administrators,\n         moderators, and channel members can add themselves and other members to unrestricted\n         channels. Only administrators and moderators can add members to restricted channels.</p>"
                     }
                 },
                 "Privacy": {
                     "target": "com.amazonaws.chime#ChannelPrivacy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The channel's privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private channels aren't discoverable by users outside the channel. \n    Public channels are discoverable by anyone in the <code>AppInstance</code>.</p>"
+                        "smithy.api#documentation": "<p>The channel's privacy level: <code>PUBLIC</code> or <code>PRIVATE</code>. Private\n         channels aren't discoverable by users outside the channel. Public channels are discoverable\n         by anyone in the <code>AppInstance</code>.</p>"
                     }
                 },
                 "Metadata": {
@@ -4919,7 +4922,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Immediately makes a channel and its memberships inaccessible and marks them for deletion. This is an irreversible process.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Immediately makes a channel and its memberships inaccessible and marks them for\n         deletion. This is an irreversible process.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -4956,7 +4959,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a user from a channel's ban list.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Removes a user from a channel's ban list.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -5024,7 +5027,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes a member from a channel.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Removes a member from a channel.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -5089,7 +5092,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a channel message. Only admins can perform this action. Deletion makes messages\n            inaccessible immediately. A background process deletes any revisions created by\n                <code>UpdateChannelMessage</code>.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a channel message. Only admins can perform this action. Deletion makes messages\n         inaccessible immediately. A background process deletes any revisions created by\n            <code>UpdateChannelMessage</code>.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -5154,7 +5157,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a channel moderator.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Deletes a channel moderator.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -6284,7 +6287,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns the full details of an \n<code>AppInstanceUser</code>\n.\n</p>",
+                "smithy.api#documentation": "<p>Returns the full details of an <code>AppInstanceUser</code>.</p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "identity-"
                 },
@@ -6348,7 +6351,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the full details of a channel in an Amazon Chime <code>AppInstance</code>.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns the full details of a channel in an Amazon Chime\n         <code>AppInstance</code>.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -6391,7 +6394,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the full details of a channel ban.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns the full details of a channel ban.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -6473,7 +6476,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the full details of a user's channel membership.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns the full details of a user's channel membership.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -6513,7 +6516,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nReturns the details of a channel based on the membership of the specified <code>AppInstanceUser</code>.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Returns the details of a channel based on the membership of the specified\n            <code>AppInstanceUser</code>.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -6631,7 +6634,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the full details of a channel moderated by the specified <code>AppInstanceUser</code>.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns the full details of a channel moderated by the specified\n            <code>AppInstanceUser</code>.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -6713,7 +6716,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the full details of a single ChannelModerator.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns the full details of a single ChannelModerator.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -7151,7 +7154,7 @@
                 "Region": {
                     "target": "com.amazonaws.chime#TranscribeMedicalRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.</p>"
+                        "smithy.api#documentation": "<p>The AWS Region passed to Amazon Transcribe Medical. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
                     }
                 }
             },
@@ -7190,7 +7193,7 @@
                 "Region": {
                     "target": "com.amazonaws.chime#TranscribeRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the Region closest to the meeting's Region.</p>"
+                        "smithy.api#documentation": "<p>The AWS Region passed to Amazon Transcribe. If you don't specify a Region, Amazon Chime uses the meeting's Region.</p>"
                     }
                 }
             },
@@ -7816,7 +7819,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the full details of a channel message.</p>\n\n         <note>\n            <p>The x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the \n        value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Gets the full details of a channel message.</p>\n\n         <note>\n            <p>The x-amz-chime-bearer request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -9905,7 +9908,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\nList all \n<code>AppInstanceUsers</code>\ncreated under a single <code>AppInstance</code>.\n</p>",
+                "smithy.api#documentation": "<p>List all <code>AppInstanceUsers</code>\n            created under a single <code>AppInstance</code>.\n        </p>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "identity-"
                 },
@@ -10331,7 +10334,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the users banned from a particular channel.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all the users banned from a particular channel.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10433,7 +10436,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all channel memberships in a channel.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all channel memberships in a channel.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10478,7 +10481,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an\n                <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their\n            own. </p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p> Lists all channels that a particular <code>AppInstanceUser</code> is a part of. Only an\n            <code>AppInstanceAdmin</code> can call the API with a user ARN that is not their own. </p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10558,7 +10561,7 @@
                 "Type": {
                     "target": "com.amazonaws.chime#ChannelMembershipType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default members are always returned as part of \n    <code>ListChannelMemberships</code>. Hidden members are only returned if the type filter in <code>ListChannelMemberships</code> equals \n    <code>HIDDEN</code>. Otherwise hidden members are not returned.</p>",
+                        "smithy.api#documentation": "<p>The membership type of a user, <code>DEFAULT</code> or <code>HIDDEN</code>. Default\n         members are always returned as part of <code>ListChannelMemberships</code>. Hidden members\n         are only returned if the type filter in <code>ListChannelMemberships</code> equals\n            <code>HIDDEN</code>. Otherwise hidden members are not returned.</p>",
                         "smithy.api#httpQuery": "type"
                     }
                 },
@@ -10572,7 +10575,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.chime#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested channel memberships are returned.</p>",
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested channel memberships are\n         returned.</p>",
                         "smithy.api#httpQuery": "next-token"
                     }
                 },
@@ -10603,7 +10606,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.chime#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested channel memberships are returned.</p>"
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested channel memberships are\n         returned.</p>"
                     }
                 }
             }
@@ -10637,7 +10640,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>List all the messages in a channel. Returns a paginated list of <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending order.</p>\n         <note>\n            <p>Redacted messages appear in the results as empty, since they are only redacted, not deleted.\n                Deleted messages do not appear in the results. This action always returns the latest\n                version of an edited message.</p>\n            <p>Also, the x-amz-chime-bearer request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes the API call as the \n        value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>List all the messages in a channel. Returns a paginated list of\n            <code>ChannelMessages</code>. By default, sorted by creation timestamp in descending\n         order.</p>\n         <note>\n            <p>Redacted messages appear in the results as empty, since they are only redacted, not\n            deleted. Deleted messages do not appear in the results. This action always returns the\n            latest version of an edited message.</p>\n            <p>Also, the x-amz-chime-bearer request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10667,7 +10670,7 @@
                 "SortOrder": {
                     "target": "com.amazonaws.chime#SortOrder",
                     "traits": {
-                        "smithy.api#documentation": "<p>The order in which you want messages sorted. Default is Descending, based on time created.</p>",
+                        "smithy.api#documentation": "<p>The order in which you want messages sorted. Default is Descending, based on time\n         created.</p>",
                         "smithy.api#httpQuery": "sort-order"
                     }
                 },
@@ -10760,7 +10763,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all the moderators for a channel.</p>\n\n         <note>\n\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all the moderators for a channel.</p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10797,7 +10800,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.chime#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested moderators are returned.</p>",
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested moderators are\n         returned.</p>",
                         "smithy.api#httpQuery": "next-token"
                     }
                 },
@@ -10822,7 +10825,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.chime#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested moderators are returned.</p>"
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested moderators are\n         returned.</p>"
                     }
                 },
                 "ChannelModerators": {
@@ -10862,7 +10865,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all Channels created under a single Chime App as a paginated list. You can specify filters to narrow results.</p>\n\n         <p class=\"title\">\n            <b>Functionality & restrictions</b>\n         </p>\n         <ul>\n            <li>\n               <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the account.</p>\n            </li>\n            <li>\n               <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to list the\n                    private channels in an account.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Lists all Channels created under a single Chime App as a paginated list. You can specify\n         filters to narrow results.</p>\n\n         <p class=\"title\">\n            <b>Functionality & restrictions</b>\n         </p>\n         <ul>\n            <li>\n               <p>Use privacy = <code>PUBLIC</code> to retrieve all public channels in the\n               account.</p>\n            </li>\n            <li>\n               <p>Only an <code>AppInstanceAdmin</code> can set privacy = <code>PRIVATE</code> to\n               list the private channels in an account.</p>\n            </li>\n         </ul>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10907,7 +10910,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A list of the channels moderated by an <code>AppInstanceUser</code>.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>A list of the channels moderated by an <code>AppInstanceUser</code>.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -10943,7 +10946,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.chime#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of channels moderated by the user is reached.</p>",
+                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of channels moderated by\n         the user is reached.</p>",
                         "smithy.api#httpQuery": "next-token"
                     }
                 },
@@ -10968,7 +10971,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.chime#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of channels moderated by the user is reached.</p>"
+                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of channels moderated by\n         the user is reached.</p>"
                     }
                 }
             }
@@ -10987,7 +10990,7 @@
                 "Privacy": {
                     "target": "com.amazonaws.chime#ChannelPrivacy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The privacy setting. <code>PUBLIC</code> retrieves all the public channels. <code>PRIVATE</code> retrieves private channels. Only an \n    <code>AppInstanceAdmin</code> can retrieve private channels.\n</p>",
+                        "smithy.api#documentation": "<p>The privacy setting. <code>PUBLIC</code> retrieves all the public channels.\n            <code>PRIVATE</code> retrieves private channels. Only an <code>AppInstanceAdmin</code>\n         can retrieve private channels. </p>",
                         "smithy.api#httpQuery": "privacy"
                     }
                 },
@@ -11026,7 +11029,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.chime#NextToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of channels is reached.</p>"
+                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of channels is\n         reached.</p>"
                     }
                 }
             }
@@ -14671,7 +14674,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Redacts message content, but not metadata. The message exists in the back end, but the action returns null content, and the state shows as redacted.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Redacts message content, but not metadata. The message exists in the back end, but the\n         action returns null content, and the state shows as redacted.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -15457,7 +15460,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends a message to a particular channel that the member is a part of.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n\n            <p>Also, <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata. <code>CONTROL</code> messages can contain 30 bytes of \n    data and no metadata.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Sends a message to a particular channel that the member is a part of.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n\n            <p>Also, <code>STANDARD</code> messages can contain 4KB of data and the 1KB of metadata.\n               <code>CONTROL</code> messages can contain 30 bytes of data and no metadata.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -16523,6 +16526,10 @@
                     {
                         "value": "eu-west-1",
                         "name": "EU_WEST_1"
+                    },
+                    {
+                        "value": "auto",
+                        "name": "AUTO"
                     }
                 ]
             }
@@ -16620,6 +16627,10 @@
                     {
                         "value": "sa-east-1",
                         "name": "SA_EAST_1"
+                    },
+                    {
+                        "value": "auto",
+                        "name": "AUTO"
                     }
                 ]
             }
@@ -17679,7 +17690,7 @@
                 "AppInstanceArn": {
                     "target": "com.amazonaws.chime#ChimeArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>. </p>"
                     }
                 }
             }
@@ -17874,7 +17885,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Update a channel's attributes.</p>\n         <p>\n            <b>Restriction</b>: You can't change a channel's privacy.\n</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Update a channel's attributes.</p>\n         <p>\n            <b>Restriction</b>: You can't change a channel's privacy. </p>\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -17917,7 +17928,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the content of a message.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Updates the content of a message.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },
@@ -18017,7 +18028,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>The details of the time when a user last read messages in a channel.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the <code>AppInstanceUserArn</code> of the user that makes \n        the API call as the value in the header.</p>\n         </note>",
+                "smithy.api#documentation": "<p>The details of the time when a user last read messages in a channel.</p>\n\n         <note>\n            <p>The <code>x-amz-chime-bearer</code> request header is mandatory. Use the\n               <code>AppInstanceUserArn</code> of the user that makes the API call as the value in\n            the header.</p>\n         </note>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "messaging-"
                 },

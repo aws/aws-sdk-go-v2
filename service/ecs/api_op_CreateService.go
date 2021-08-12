@@ -138,7 +138,8 @@ type CreateServiceInput struct {
 	// The capacity provider strategy to use for the service. If a
 	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
 	// If no capacityProviderStrategy or launchType is specified, the
-	// defaultCapacityProviderStrategy for the cluster is used.
+	// defaultCapacityProviderStrategy for the cluster is used. A capacity provider
+	// strategy may contain a maximum of 6 capacity providers.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// Unique, case-sensitive identifier that you provide to ensure the idempotency of
@@ -259,7 +260,7 @@ type CreateServiceInput struct {
 	PlacementConstraints []types.PlacementConstraint
 
 	// The placement strategy objects to use for tasks in your service. You can specify
-	// a maximum of five strategy rules per service.
+	// a maximum of 5 strategy rules per service.
 	PlacementStrategy []types.PlacementStrategy
 
 	// The platform version that your tasks in the service are running on. A platform

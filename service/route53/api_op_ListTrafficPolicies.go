@@ -12,9 +12,10 @@ import (
 )
 
 // Gets information about the latest version for every traffic policy that is
-// associated with the current account. Policies are listed in the order that they
-// were created in. For information about how of deleting a traffic policy affects
-// the response from ListTrafficPolicies, see DeleteTrafficPolicy
+// associated with the current Amazon Web Services account. Policies are listed in
+// the order that they were created in. For information about how of deleting a
+// traffic policy affects the response from ListTrafficPolicies, see
+// DeleteTrafficPolicy
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_DeleteTrafficPolicy.html).
 func (c *Client) ListTrafficPolicies(ctx context.Context, params *ListTrafficPoliciesInput, optFns ...func(*Options)) (*ListTrafficPoliciesOutput, error) {
 	if params == nil {
@@ -32,7 +33,8 @@ func (c *Client) ListTrafficPolicies(ctx context.Context, params *ListTrafficPol
 }
 
 // A complex type that contains the information about the request to list the
-// traffic policies that are associated with the current account.
+// traffic policies that are associated with the current Amazon Web Services
+// account.
 type ListTrafficPoliciesInput struct {
 
 	// (Optional) The maximum number of traffic policies that you want Amazon Route 53
@@ -77,7 +79,7 @@ type ListTrafficPoliciesOutput struct {
 	TrafficPolicyIdMarker *string
 
 	// A list that contains one TrafficPolicySummary element for each traffic policy
-	// that was created by the current account.
+	// that was created by the current Amazon Web Services account.
 	//
 	// This member is required.
 	TrafficPolicySummaries []types.TrafficPolicySummary

@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the full details of an AppInstanceUser .
+// Returns the full details of an AppInstanceUser.
 func (c *Client) DescribeAppInstanceUser(ctx context.Context, params *DescribeAppInstanceUserInput, optFns ...func(*Options)) (*DescribeAppInstanceUserOutput, error) {
 	if params == nil {
 		params = &DescribeAppInstanceUserInput{}

@@ -70,7 +70,9 @@ type StartLabelDetectionInput struct {
 	MinConfidence *float32
 
 	// The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the
-	// completion status of the label detection operation to.
+	// completion status of the label detection operation to. The Amazon SNS topic must
+	// have a topic name that begins with AmazonRekognition if you are using the
+	// AmazonRekognitionServiceRole permissions policy.
 	NotificationChannel *types.NotificationChannel
 
 	noSmithyDocumentSerde

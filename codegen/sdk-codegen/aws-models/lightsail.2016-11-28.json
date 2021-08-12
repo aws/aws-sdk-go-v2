@@ -92,10 +92,42 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The timestamp when the access key was created.</p>"
                     }
+                },
+                "lastUsed": {
+                    "target": "com.amazonaws.lightsail#AccessKeyLastUsed",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An object that describes the last time the access key was used.</p>\n\n         <note>\n            <p>This object does not include data in the response of a <a>CreateBucketAccessKey</a> action. If the access key has not been used, the\n          <code>region</code> and <code>serviceName</code> values are <code>N/A</code>, and the\n          <code>lastUsedDate</code> value is null.</p>\n         </note>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes an access key for an Amazon Lightsail bucket.</p>\n\n         <p>Access keys grant full programmatic access to the specified bucket and its objects. You\n      can have a maximum of two access keys per bucket. Use the <a>CreateBucketAccessKey</a> action to create an access key for a specific bucket. For\n      more information about access keys, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-creating-bucket-access-keys\">Creating access keys for a bucket in Amazon Lightsail</a> in the\n        <i>Amazon Lightsail Developer Guide</i>.</p>\n\n         <important>\n            <p>The <code>secretAccessKey</code> value is returned only in response to the\n          <code>CreateBucketAccessKey</code> action. You can get a secret access key only when you\n        first create an access key; you cannot get the secret access key later. If you lose the\n        secret access key, you must create a new access key.</p>\n         </important>"
+            }
+        },
+        "com.amazonaws.lightsail#AccessKeyLastUsed": {
+            "type": "structure",
+            "members": {
+                "lastUsedDate": {
+                    "target": "com.amazonaws.lightsail#IsoDate",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the access key was most recently used.</p>\n         <p>This value is null if the access key has not been used.</p>"
+                    }
+                },
+                "region": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AWS Region where this access key was most recently used.</p>\n         <p>This value is <code>N/A</code> if the access key has not been used.</p>"
+                    }
+                },
+                "serviceName": {
+                    "target": "com.amazonaws.lightsail#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the AWS service with which this access key was most recently used.</p>\n         <p>This value is <code>N/A</code> if the access key has not been used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the last time an access key was used.</p>\n\n         <note>\n            <p>This object does not include data in the response of a <a>CreateBucketAccessKey</a> action.</p>\n         </note>"
             }
         },
         "com.amazonaws.lightsail#AccessKeyList": {
@@ -2924,7 +2956,7 @@
                 "enableObjectVersioning": {
                     "target": "com.amazonaws.lightsail#boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to enable versioning of objects in the\n      bucket.</p>\n\n         <p>For more information about versioning, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning\">Enabling and suspending bucket object versioning in Amazon Lightsail</a> in the\n        <i>Amazon Lightsail Developer Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>A Boolean value that indicates whether to enable versioning of objects in the\n      bucket.</p>\n\n         <p>For more information about versioning, see <a href=\"https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning\">Enabling and suspending object versioning in a bucket in Amazon Lightsail</a> in the\n        <i>Amazon Lightsail Developer Guide</i>.</p>"
                     }
                 }
             }

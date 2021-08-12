@@ -48,7 +48,7 @@ type DescribeActivationsInput struct {
 
 type DescribeActivationsOutput struct {
 
-	// A list of activations for your account.
+	// A list of activations for your Amazon Web Services account.
 	ActivationList []types.Activation
 
 	// The token for the next set of items to return. Use this token to get the next

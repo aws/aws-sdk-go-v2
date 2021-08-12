@@ -47,6 +47,31 @@ func (e *WAFDuplicateItemException) ErrorMessage() string {
 func (e *WAFDuplicateItemException) ErrorCode() string             { return "WAFDuplicateItemException" }
 func (e *WAFDuplicateItemException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// The operation failed because the specified version for the managed rule group
+// has expired. You can retrieve the available versions for the managed rule group
+// by calling ListAvailableManagedRuleGroupVersions.
+type WAFExpiredManagedRuleGroupVersionException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *WAFExpiredManagedRuleGroupVersionException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *WAFExpiredManagedRuleGroupVersionException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *WAFExpiredManagedRuleGroupVersionException) ErrorCode() string {
+	return "WAFExpiredManagedRuleGroupVersionException"
+}
+func (e *WAFExpiredManagedRuleGroupVersionException) ErrorFault() smithy.ErrorFault {
+	return smithy.FaultClient
+}
+
 // Your request is valid, but WAF couldn’t perform the operation because of a
 // system problem. Retry your request.
 type WAFInternalErrorException struct {
@@ -187,8 +212,8 @@ func (e *WAFInvalidResourceException) ErrorCode() string             { return "W
 func (e *WAFInvalidResourceException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // WAF couldn’t perform the operation because you exceeded your resource limit. For
-// example, the maximum number of WebACL objects that you can create for an
-// account. For more information, see Limits
+// example, the maximum number of WebACL objects that you can create for an Amazon
+// Web Services account. For more information, see WAF quotas
 // (https://docs.aws.amazon.com/waf/latest/developerguide/limits.html) in the WAF
 // Developer Guide.
 type WAFLimitsExceededException struct {

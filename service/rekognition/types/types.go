@@ -68,6 +68,35 @@ type Beard struct {
 	noSmithyDocumentSerde
 }
 
+// A filter that allows you to control the black frame detection by specifying the
+// black levels and pixel coverage of black pixels in a frame. As videos can come
+// from multiple sources, formats, and time periods, they may contain different
+// standards and varying noise levels for black frames that need to be accounted
+// for. For more information, see StartSegmentDetection.
+type BlackFrame struct {
+
+	// A threshold used to determine the maximum luminance value for a pixel to be
+	// considered black. In a full color range video, luminance values range from
+	// 0-255. A pixel value of 0 is pure black, and the most strict filter. The maximum
+	// black pixel value is computed as follows: max_black_pixel_value =
+	// minimum_luminance + MaxPixelThreshold *luminance_range. For example, for a full
+	// range video with BlackPixelThreshold = 0.1, max_black_pixel_value is 0 + 0.1 *
+	// (255-0) = 25.5. The default value of MaxPixelThreshold is 0.2, which maps to a
+	// max_black_pixel_value of 51 for a full range video. You can lower this threshold
+	// to be more strict on black levels.
+	MaxPixelThreshold *float32
+
+	// The minimum percentage of pixels in a frame that need to have a luminance below
+	// the max_black_pixel_value for a frame to be considered a black frame. Luminance
+	// is calculated using the BT.709 matrix. The default value is 99, which means at
+	// least 99% of all pixels in the frame are black pixels as per the
+	// MaxPixelThreshold set. You can reduce this value to allow more noise on the
+	// black frame.
+	MinCoveragePercentage *float32
+
+	noSmithyDocumentSerde
+}
+
 // Identifies the bounding box around the label, face, text or personal protective
 // equipment. The left (x-coordinate) and top (y-coordinate) are coordinates
 // representing the top and left sides of the bounding box. Note that the
@@ -218,14 +247,15 @@ type CompareFacesMatch struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an unsafe content label detection in a stored video.
+// Information about an inappropriate, unwanted, or offensive content label
+// detection in a stored video.
 type ContentModerationDetection struct {
 
-	// The unsafe content label detected by in the stored video.
+	// The content moderation label detected by in the stored video.
 	ModerationLabel *ModerationLabel
 
-	// Time, in milliseconds from the beginning of the video, that the unsafe content
-	// label was detected.
+	// Time, in milliseconds from the beginning of the video, that the content
+	// moderation label was detected.
 	Timestamp int64
 
 	noSmithyDocumentSerde
@@ -778,10 +808,10 @@ type Landmark struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a single type of unsafe content found in an image or
-// video. Each type of moderated content has a label within a hierarchical
-// taxonomy. For more information, see Detecting Unsafe Content in the Amazon
-// Rekognition Developer Guide.
+// Provides information about a single type of inappropriate, unwanted, or
+// offensive content found in an image or video. Each type of moderated content has
+// a label within a hierarchical taxonomy. For more information, see Content
+// moderation in the Amazon Rekognition Developer Guide.
 type ModerationLabel struct {
 
 	// Specifies the confidence that Amazon Rekognition has that the label has been
@@ -828,7 +858,11 @@ type Mustache struct {
 
 // The Amazon Simple Notification Service topic to which Amazon Rekognition
 // publishes the completion status of a video analysis operation. For more
-// information, see api-video.
+// information, see api-video. Note that the Amazon SNS topic must have a topic
+// name that begins with AmazonRekognition if you are using the
+// AmazonRekognitionServiceRole permissions policy to access the topic. For more
+// information, see Giving access to multiple Amazon SNS topics
+// (https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics).
 type NotificationChannel struct {
 
 	// The ARN of an IAM role that gives Amazon Rekognition publishing permissions to
@@ -1164,11 +1198,18 @@ type S3Object struct {
 // returned by GetSegmentDetection.
 type SegmentDetection struct {
 
+	// The duration of a video segment, expressed in frames.
+	DurationFrames *int64
+
 	// The duration of the detected segment in milliseconds.
 	DurationMillis *int64
 
 	// The duration of the timecode for the detected segment in SMPTE format.
 	DurationSMPTE *string
+
+	// The frame number at the end of a video segment, using a frame index that starts
+	// with 0.
+	EndFrameNumber *int64
 
 	// The frame-accurate SMPTE timecode, from the start of a video, for the end of a
 	// detected segment. EndTimecode is in HH:MM:SS:fr format (and ;fr for drop
@@ -1182,6 +1223,10 @@ type SegmentDetection struct {
 	// If the segment is a shot detection, contains information about the shot
 	// detection.
 	ShotSegment *ShotSegment
+
+	// The frame number of the start of a video segment, using a frame index that
+	// starts with 0.
+	StartFrameNumber *int64
 
 	// The frame-accurate SMPTE timecode, from the start of a video, for the start of a
 	// detected segment. StartTimecode is in HH:MM:SS:fr format (and ;fr for drop
@@ -1275,6 +1320,12 @@ type StartShotDetectionFilter struct {
 // Filters for the technical segments returned by GetSegmentDetection. For more
 // information, see StartSegmentDetectionFilters.
 type StartTechnicalCueDetectionFilter struct {
+
+	// A filter that allows you to control the black frame detection by specifying the
+	// black levels and pixel coverage of black pixels in a frame. Videos can come from
+	// multiple sources, formats, and time periods, with different standards and
+	// varying noise levels for black frames that need to be accounted for.
+	BlackFrame *BlackFrame
 
 	// Specifies the minimum confidence that Amazon Rekognition Video must have in
 	// order to return a detected segment. Confidence represents how certain Amazon
@@ -1575,6 +1626,10 @@ type VideoMetadata struct {
 
 	// Type of compression used in the analyzed video.
 	Codec *string
+
+	// A description of the range of luminance values in a video, either LIMITED (16 to
+	// 235) or FULL (0 to 255).
+	ColorRange VideoColorRange
 
 	// Length of the video in milliseconds.
 	DurationMillis *int64

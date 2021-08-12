@@ -13250,6 +13250,19 @@ func awsAwsjson11_deserializeDocumentSegmentDetection(v **types.SegmentDetection
 
 	for key, value := range shape {
 		switch key {
+		case "DurationFrames":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationFrames = ptr.Int64(i64)
+			}
+
 		case "DurationMillis":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -13270,6 +13283,19 @@ func awsAwsjson11_deserializeDocumentSegmentDetection(v **types.SegmentDetection
 					return fmt.Errorf("expected Timecode to be of type string, got %T instead", value)
 				}
 				sv.DurationSMPTE = ptr.String(jtv)
+			}
+
+		case "EndFrameNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.EndFrameNumber = ptr.Int64(i64)
 			}
 
 		case "EndTimecodeSMPTE":
@@ -13297,6 +13323,19 @@ func awsAwsjson11_deserializeDocumentSegmentDetection(v **types.SegmentDetection
 		case "ShotSegment":
 			if err := awsAwsjson11_deserializeDocumentShotSegment(&sv.ShotSegment, value); err != nil {
 				return err
+			}
+
+		case "StartFrameNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected ULong to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.StartFrameNumber = ptr.Int64(i64)
 			}
 
 		case "StartTimecodeSMPTE":
@@ -14720,6 +14759,15 @@ func awsAwsjson11_deserializeDocumentVideoMetadata(v **types.VideoMetadata, valu
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.Codec = ptr.String(jtv)
+			}
+
+		case "ColorRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VideoColorRange to be of type string, got %T instead", value)
+				}
+				sv.ColorRange = types.VideoColorRange(jtv)
 			}
 
 		case "DurationMillis":

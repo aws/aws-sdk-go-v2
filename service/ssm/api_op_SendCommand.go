@@ -103,7 +103,8 @@ type SendCommandInput struct {
 	OutputS3KeyPrefix *string
 
 	// (Deprecated) You can no longer specify this parameter. The system ignores it.
-	// Instead, Systems Manager automatically determines the Region of the S3 bucket.
+	// Instead, Systems Manager automatically determines the Amazon Web Services Region
+	// of the S3 bucket.
 	OutputS3Region *string
 
 	// The required and optional parameters specified in the document being run.

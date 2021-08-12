@@ -14223,6 +14223,15 @@ func awsRestjson1_deserializeDocumentIntentClosingSetting(v **types.IntentClosin
 
 	for key, value := range shape {
 		switch key {
+		case "active":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Active = ptr.Bool(jtv)
+			}
+
 		case "closingResponse":
 			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.ClosingResponse, value); err != nil {
 				return err
@@ -14259,6 +14268,15 @@ func awsRestjson1_deserializeDocumentIntentConfirmationSetting(v **types.IntentC
 
 	for key, value := range shape {
 		switch key {
+		case "active":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Active = ptr.Bool(jtv)
+			}
+
 		case "declinationResponse":
 			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.DeclinationResponse, value); err != nil {
 				return err
@@ -16483,6 +16501,15 @@ func awsRestjson1_deserializeDocumentWaitAndContinueSpecification(v **types.Wait
 
 	for key, value := range shape {
 		switch key {
+		case "active":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BoxedBoolean to be of type *bool, got %T instead", value)
+				}
+				sv.Active = ptr.Bool(jtv)
+			}
+
 		case "continueResponse":
 			if err := awsRestjson1_deserializeDocumentResponseSpecification(&sv.ContinueResponse, value); err != nil {
 				return err

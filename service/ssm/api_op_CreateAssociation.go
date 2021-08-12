@@ -44,8 +44,8 @@ type CreateAssociationInput struct {
 	// configuration information for the instance. You can specify Amazon Web
 	// Services-predefined documents, documents you created, or a document that is
 	// shared with you from another account. For Systems Manager documents (SSM
-	// documents) that are shared with you from other accounts, you must specify the
-	// complete SSM document ARN, in the following format:
+	// documents) that are shared with you from other Amazon Web Services accounts, you
+	// must specify the complete SSM document ARN, in the following format:
 	// arn:partition:ssm:region:account-id:document/document-name  For example:
 	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For Amazon Web
 	// Services-predefined documents and SSM documents you created in your account, you
@@ -137,15 +137,15 @@ type CreateAssociationInput struct {
 	// associations use AUTO mode.
 	SyncCompliance types.AssociationSyncCompliance
 
-	// A location is a combination of Regions and accounts where you want to run the
-	// association. Use this action to create an association in multiple Regions and
-	// multiple accounts.
+	// A location is a combination of Amazon Web Services Regions and Amazon Web
+	// Services accounts where you want to run the association. Use this action to
+	// create an association in multiple Regions and multiple accounts.
 	TargetLocations []types.TargetLocation
 
 	// The targets for the association. You can target instances by using tags, Amazon
-	// Web Services resource groups, all instances in an account, or individual
-	// instance IDs. For more information about choosing targets for an association,
-	// see Using targets and rate controls with State Manager associations
+	// Web Services resource groups, all instances in an Amazon Web Services account,
+	// or individual instance IDs. For more information about choosing targets for an
+	// association, see Using targets and rate controls with State Manager associations
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Targets []types.Target

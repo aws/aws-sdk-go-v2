@@ -145,9 +145,9 @@ type AliasTarget struct {
 	// attribute for the environment. You can use the following methods to get the
 	// value of the CNAME attribute:
 	//
-	// * Management Console: For information about how
-	// to get the value by using the console, see Using Custom Domains with Elastic
-	// Beanstalk
+	// * Amazon Web Services Management Console: For
+	// information about how to get the value by using the console, see Using Custom
+	// Domains with Elastic Beanstalk
 	// (https://docs.aws.amazon.com/elasticbeanstalk/latest/dg/customdomains.html) in
 	// the Elastic Beanstalk Developer Guide.
 	//
@@ -164,21 +164,22 @@ type AliasTarget struct {
 	// in the CLI Command Reference.
 	//
 	// ELB load balancer Specify the DNS name that is
-	// associated with the load balancer. Get the DNS name by using the Management
-	// Console, the ELB API, or the CLI.
+	// associated with the load balancer. Get the DNS name by using the Amazon Web
+	// Services Management Console, the ELB API, or the CLI.
 	//
-	// * Management Console: Go to the EC2 page,
-	// choose Load Balancers in the navigation pane, choose the load balancer, choose
-	// the Description tab, and get the value of the DNS name field. If you're routing
-	// traffic to a Classic Load Balancer, get the value that begins with dualstack. If
-	// you're routing traffic to another type of load balancer, get the value that
-	// applies to the record type, A or AAAA.
+	// * Amazon Web Services
+	// Management Console: Go to the EC2 page, choose Load Balancers in the navigation
+	// pane, choose the load balancer, choose the Description tab, and get the value of
+	// the DNS name field. If you're routing traffic to a Classic Load Balancer, get
+	// the value that begins with dualstack. If you're routing traffic to another type
+	// of load balancer, get the value that applies to the record type, A or AAAA.
 	//
-	// * Elastic Load Balancing API: Use
-	// DescribeLoadBalancers to get the value of DNSName. For more information, see the
-	// applicable guide:
+	// *
+	// Elastic Load Balancing API: Use DescribeLoadBalancers to get the value of
+	// DNSName. For more information, see the applicable guide:
 	//
-	// * Classic Load Balancers: DescribeLoadBalancers
+	// * Classic Load
+	// Balancers: DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/2012-06-01/APIReference/API_DescribeLoadBalancers.html)
 	//
 	// *
@@ -321,10 +322,10 @@ type AliasTarget struct {
 	// you created your load balancer in. Note that there are separate columns for
 	// Application and Classic Load Balancers and for Network Load Balancers.
 	//
-	// *
-	// Management Console: Go to the Amazon EC2 page, choose Load Balancers in the
-	// navigation pane, select the load balancer, and get the value of the Hosted zone
-	// field on the Description tab.
+	// * Amazon
+	// Web Services Management Console: Go to the Amazon EC2 page, choose Load
+	// Balancers in the navigation pane, select the load balancer, and get the value of
+	// the Hosted zone field on the Description tab.
 	//
 	// * Elastic Load Balancing API: Use
 	// DescribeLoadBalancers to get the applicable value. For more information, see the
@@ -955,8 +956,10 @@ type HealthCheckConfig struct {
 	// parameters, for example, /welcome.html?language=jp&login=y.
 	ResourcePath *string
 
-	// The Amazon Resource Name (ARN) for Route53 Application Recovery Controller
-	// routing control.
+	// The Amazon Resource Name (ARN) for the Route 53 Application Recovery Controller
+	// routing control. For more information about Route 53 Application Recovery
+	// Controller, see Route 53 Application Recovery Controller Developer Guide.
+	// (https://docs.aws.amazon.com/r53recovery/latest/dg/what-is-route-53-recovery.html).
 	RoutingControlArn *string
 
 	// If the value of Type is HTTP_STR_MATCH or HTTPS_STR_MATCH, the string that you
@@ -1070,11 +1073,11 @@ type HostedZoneLimit struct {
 // OwningAccount, there is no value for OwningService, and vice versa.
 type HostedZoneOwner struct {
 
-	// If the hosted zone was created by an account, or was created by an Amazon Web
-	// Services service that creates hosted zones using the current account,
-	// OwningAccount contains the account ID of that account. For example, when you use
-	// Cloud Map to create a hosted zone, Cloud Map creates the hosted zone using the
-	// current account.
+	// If the hosted zone was created by an Amazon Web Services account, or was created
+	// by an Amazon Web Services service that creates hosted zones using the current
+	// account, OwningAccount contains the account ID of that account. For example,
+	// when you use Cloud Map to create a hosted zone, Cloud Map creates the hosted
+	// zone using the current Amazon Web Services account.
 	OwningAccount *string
 
 	// If an Amazon Web Services service uses its own account to create a hosted zone
@@ -1105,7 +1108,8 @@ type HostedZoneSummary struct {
 	Name *string
 
 	// The owner of a private hosted zone that the specified VPC is associated with.
-	// The owner can be either an account or an Amazon Web Services service.
+	// The owner can be either an Amazon Web Services account or an Amazon Web Services
+	// service.
 	//
 	// This member is required.
 	Owner *HostedZoneOwner
@@ -1909,7 +1913,7 @@ type TrafficPolicyInstance struct {
 }
 
 // A complex type that contains information about the latest version of one traffic
-// policy that is associated with the current account.
+// policy that is associated with the current Amazon Web Services account.
 type TrafficPolicySummary struct {
 
 	// The ID that Amazon Route 53 assigned to the traffic policy when you created it.
@@ -1927,7 +1931,8 @@ type TrafficPolicySummary struct {
 	// This member is required.
 	Name *string
 
-	// The number of traffic policies that are associated with the current account.
+	// The number of traffic policies that are associated with the current Amazon Web
+	// Services account.
 	//
 	// This member is required.
 	TrafficPolicyCount *int32

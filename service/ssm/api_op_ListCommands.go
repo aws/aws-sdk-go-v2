@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the commands requested by users of the account.
+// Lists the commands requested by users of the Amazon Web Services account.
 func (c *Client) ListCommands(ctx context.Context, params *ListCommandsInput, optFns ...func(*Options)) (*ListCommandsOutput, error) {
 	if params == nil {
 		params = &ListCommandsInput{}

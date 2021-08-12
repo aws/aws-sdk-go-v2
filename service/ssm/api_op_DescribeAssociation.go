@@ -13,10 +13,7 @@ import (
 
 // Describes the association for the specified target or instance. If you created
 // the association by using the Targets parameter, then you must retrieve the
-// association by using the association ID. If you created the association by
-// specifying an instance ID and an Amazon Web Services Systems Manager document
-// (SSM document), then you retrieve the association by specifying the document
-// name and the instance ID.
+// association by using the association ID.
 func (c *Client) DescribeAssociation(ctx context.Context, params *DescribeAssociationInput, optFns ...func(*Options)) (*DescribeAssociationOutput, error) {
 	if params == nil {
 		params = &DescribeAssociationInput{}

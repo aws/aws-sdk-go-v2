@@ -623,7 +623,7 @@ type IPSet struct {
 	// This member is required.
 	Addresses []string
 
-	// Specify IPV4 or IPV6.
+	// The version of the IP addresses, either IPV4 or IPV6.
 	//
 	// This member is required.
 	IPAddressVersion IPAddressVersion
@@ -791,15 +791,15 @@ type JsonBody struct {
 	// If you
 	// don't provide this setting, WAF parses and evaluates the content only up to the
 	// first parsing failure that it encounters. WAF does its best to parse the entire
-	// JSON body, but might be forced to stop for reasons such as characters that
-	// aren't valid, duplicate keys, truncation, and any content whose root node isn't
-	// an object or an array. WAF parses the JSON in the following examples as two
-	// valid key, value pairs:
+	// JSON body, but might be forced to stop for reasons such as invalid characters,
+	// duplicate keys, truncation, and any content whose root node isn't an object or
+	// an array. WAF parses the JSON in the following examples as two valid key, value
+	// pairs:
 	//
 	// * Missing comma: {"key1":"value1""key2":"value2"}
 	//
-	// *
-	// Missing colon: {"key1":"value1","key2""value2"}
+	// * Missing colon:
+	// {"key1":"value1","key2""value2"}
 	//
 	// * Extra colons:
 	// {"key1"::"value1","key2""value2"}
@@ -1000,6 +1000,12 @@ type ManagedRuleGroupStatement struct {
 	// as you can for a rule statement.
 	ScopeDownStatement *Statement
 
+	// The version of the managed rule group to use. If you specify this, the version
+	// setting is fixed until you change it. If you don't specify this, WAF uses the
+	// vendor's default version, and then keeps the version at the vendor's default
+	// when the vendor updates the managed rule group settings.
+	Version *string
+
 	noSmithyDocumentSerde
 }
 
@@ -1022,6 +1028,166 @@ type ManagedRuleGroupSummary struct {
 	// The name of the managed rule group vendor. You use this, along with the rule
 	// group name, to identify the rule group.
 	VendorName *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes a single version of a managed rule group.
+type ManagedRuleGroupVersion struct {
+
+	// The date and time that the managed rule group owner updated the rule group
+	// version information.
+	LastUpdateTimestamp *time.Time
+
+	// The version name.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// A set of rules that is managed by Amazon Web Services and Marketplace sellers to
+// provide versioned managed rule groups for customers of WAF. This is intended for
+// use only by vendors of managed rule sets. Vendors are Amazon Web Services and
+// Marketplace sellers. Vendors, you can use the managed rule set APIs to provide
+// controlled rollout of your versioned managed rule group offerings for your
+// customers. The APIs are ListManagedRuleSets, GetManagedRuleSet,
+// PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.
+type ManagedRuleSet struct {
+
+	// The Amazon Resource Name (ARN) of the entity.
+	//
+	// This member is required.
+	ARN *string
+
+	// A unique identifier for the managed rule set. The ID is returned in the
+	// responses to commands like list. You provide it to operations like get and
+	// update.
+	//
+	// This member is required.
+	Id *string
+
+	// The name of the managed rule set. You use this, along with the rule set ID, to
+	// identify the rule set. This name is assigned to the corresponding managed rule
+	// group, which your customers can access and use.
+	//
+	// This member is required.
+	Name *string
+
+	// A description of the set that helps with identification.
+	Description *string
+
+	// The label namespace prefix for the managed rule groups that are offered to
+	// customers from this managed rule set. All labels that are added by rules in the
+	// managed rule group have this prefix.
+	//
+	// * The syntax for the label namespace
+	// prefix for a managed rule group is the following: awswaf:managed:::
+	//
+	// * When a
+	// rule with a label matches a web request, WAF adds the fully qualified label to
+	// the request. A fully qualified label is made up of the label namespace from the
+	// rule group or web ACL where the rule is defined and the label from the rule,
+	// separated by a colon: :
+	LabelNamespace *string
+
+	// The versions of this managed rule set that are available for use by customers.
+	PublishedVersions map[string]ManagedRuleSetVersion
+
+	// The version that you would like your customers to use.
+	RecommendedVersion *string
+
+	noSmithyDocumentSerde
+}
+
+// High-level information for a managed rule set. This is intended for use only by
+// vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace
+// sellers. Vendors, you can use the managed rule set APIs to provide controlled
+// rollout of your versioned managed rule group offerings for your customers. The
+// APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and
+// UpdateManagedRuleSetVersionExpiryDate.
+type ManagedRuleSetSummary struct {
+
+	// The Amazon Resource Name (ARN) of the entity.
+	ARN *string
+
+	// A description of the set that helps with identification.
+	Description *string
+
+	// A unique identifier for the managed rule set. The ID is returned in the
+	// responses to commands like list. You provide it to operations like get and
+	// update.
+	Id *string
+
+	// The label namespace prefix for the managed rule groups that are offered to
+	// customers from this managed rule set. All labels that are added by rules in the
+	// managed rule group have this prefix.
+	//
+	// * The syntax for the label namespace
+	// prefix for a managed rule group is the following: awswaf:managed:::
+	//
+	// * When a
+	// rule with a label matches a web request, WAF adds the fully qualified label to
+	// the request. A fully qualified label is made up of the label namespace from the
+	// rule group or web ACL where the rule is defined and the label from the rule,
+	// separated by a colon: :
+	LabelNamespace *string
+
+	// A token used for optimistic locking. WAF returns a token to your get and list
+	// requests, to mark the state of the entity at the time of the request. To make
+	// changes to the entity associated with the token, you provide the token to
+	// operations like update and delete. WAF uses the token to ensure that no changes
+	// have been made to the entity since you last retrieved it. If a change has been
+	// made, the update fails with a WAFOptimisticLockException. If this happens,
+	// perform another get, and use the new token returned by that operation.
+	LockToken *string
+
+	// The name of the managed rule set. You use this, along with the rule set ID, to
+	// identify the rule set. This name is assigned to the corresponding managed rule
+	// group, which your customers can access and use.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// Information for a single version of a managed rule set. This is intended for use
+// only by vendors of managed rule sets. Vendors are Amazon Web Services and
+// Marketplace sellers. Vendors, you can use the managed rule set APIs to provide
+// controlled rollout of your versioned managed rule group offerings for your
+// customers. The APIs are ListManagedRuleSets, GetManagedRuleSet,
+// PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.
+type ManagedRuleSetVersion struct {
+
+	// The Amazon Resource Name (ARN) of the vendor rule group that's used to define
+	// the published version of your managed rule group.
+	AssociatedRuleGroupArn *string
+
+	// The web ACL capacity units (WCUs) required for this rule group. WAF uses WCUs to
+	// calculate and control the operating resources that are used to run your rules,
+	// rule groups, and web ACLs. WAF calculates capacity differently for each rule
+	// type, to reflect the relative cost of each rule. Simple rules that cost little
+	// to run use fewer WCUs than more complex rules that use more processing power.
+	// Rule group capacity is fixed at creation, which helps users plan their web ACL
+	// WCU usage when they use a rule group. The WCU limit for web ACLs is 1,500.
+	Capacity int64
+
+	// The time that this version is set to expire. Times are in Coordinated Universal
+	// Time (UTC) format. UTC format includes the special designator, Z. For example,
+	// "2016-09-27T14:50Z".
+	ExpiryTimestamp *time.Time
+
+	// The amount of time you expect this version of your managed rule group to last,
+	// in days.
+	ForecastedLifetime *int32
+
+	// The last time that you updated this version. Times are in Coordinated Universal
+	// Time (UTC) format. UTC format includes the special designator, Z. For example,
+	// "2016-09-27T14:50Z".
+	LastUpdateTimestamp *time.Time
+
+	// The time that you first published this version. Times are in Coordinated
+	// Universal Time (UTC) format. UTC format includes the special designator, Z. For
+	// example, "2016-09-27T14:50Z".
+	PublishTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }
@@ -1169,6 +1335,7 @@ type RateBasedStatementManagedKeysIPSet struct {
 	// The IP addresses that are currently blocked.
 	Addresses []string
 
+	// The version of the IP addresses, either IPV4 or IPV6.
 	IPAddressVersion IPAddressVersion
 
 	noSmithyDocumentSerde
@@ -1957,16 +2124,14 @@ type TextTransformation struct {
 	// consecutive occurrences are not compressed. Unterminated comments are also
 	// replaced with a space (ASCII 0x20). However, a standalone termination of a
 	// comment (/) is not acted upon. REPLACE_NULLS - Replace NULL bytes in the input
-	// with space characters (ASCII 0x20). SQL_HEX_DECODE - Decode the following ANSI C
-	// escape sequences: \a, \b, \f, \n, \r, \t, \v, \, ?, ', ", \xHH (hexadecimal),
-	// \0OOO (octal). Encodings that aren't valid remain in the output. URL_DECODE -
-	// Decode a URL-encoded value. URL_DECODE_UNI - Like URL_DECODE, but with support
-	// for Microsoft-specific %u encoding. If the code is in the full-width ASCII code
-	// range of FF01-FF5E, the higher byte is used to detect and adjust the lower byte.
-	// Otherwise, only the lower byte is used and the higher byte is zeroed.
-	// UTF8_TO_UNICODE - Convert all UTF-8 character sequences to Unicode. This helps
-	// input normalization, and minimizing false-positives and false-negatives for
-	// non-English languages.
+	// with space characters (ASCII 0x20). SQL_HEX_DECODE - Decode SQL hex data.
+	// Example (0x414243) will be decoded to (ABC). URL_DECODE - Decode a URL-encoded
+	// value. URL_DECODE_UNI - Like URL_DECODE, but with support for Microsoft-specific
+	// %u encoding. If the code is in the full-width ASCII code range of FF01-FF5E, the
+	// higher byte is used to detect and adjust the lower byte. Otherwise, only the
+	// lower byte is used and the higher byte is zeroed. UTF8_TO_UNICODE - Convert all
+	// UTF-8 character sequences to Unicode. This helps input normalization, and
+	// minimizing false-positives and false-negatives for non-English languages.
 	//
 	// This member is required.
 	Type TextTransformationType
@@ -2014,6 +2179,26 @@ type TimeWindow struct {
 // used only to indicate the web request component for WAF to inspect, in the
 // FieldToMatch specification.
 type UriPath struct {
+	noSmithyDocumentSerde
+}
+
+// A version of the named managed rule group, that the rule group's vendor
+// publishes for use by customers. This is intended for use only by vendors of
+// managed rule sets. Vendors are Amazon Web Services and Marketplace sellers.
+// Vendors, you can use the managed rule set APIs to provide controlled rollout of
+// your versioned managed rule group offerings for your customers. The APIs are
+// ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and
+// UpdateManagedRuleSetVersionExpiryDate.
+type VersionToPublish struct {
+
+	// The Amazon Resource Name (ARN) of the vendor's rule group that's used in the
+	// published managed rule group version.
+	AssociatedRuleGroupArn *string
+
+	// The amount of time the vendor expects this version of the managed rule group to
+	// last, in days.
+	ForecastedLifetime *int32
+
 	noSmithyDocumentSerde
 }
 

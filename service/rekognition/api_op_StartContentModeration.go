@@ -11,18 +11,20 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts asynchronous detection of unsafe content in a stored video. Amazon
-// Rekognition Video can moderate content in a video stored in an Amazon S3 bucket.
-// Use Video to specify the bucket name and the filename of the video.
+// Starts asynchronous detection of inappropriate, unwanted, or offensive content
+// in a stored video. For a list of moderation labels in Amazon Rekognition, see
+// Using the image and video moderation APIs
+// (https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api).
+// Amazon Rekognition Video can moderate content in a video stored in an Amazon S3
+// bucket. Use Video to specify the bucket name and the filename of the video.
 // StartContentModeration returns a job identifier (JobId) which you use to get the
-// results of the analysis. When unsafe content analysis is finished, Amazon
-// Rekognition Video publishes a completion status to the Amazon Simple
-// Notification Service topic that you specify in NotificationChannel. To get the
-// results of the unsafe content analysis, first check that the status value
-// published to the Amazon SNS topic is SUCCEEDED. If so, call GetContentModeration
-// and pass the job identifier (JobId) from the initial call to
-// StartContentModeration. For more information, see Detecting Unsafe Content in
-// the Amazon Rekognition Developer Guide.
+// results of the analysis. When content analysis is finished, Amazon Rekognition
+// Video publishes a completion status to the Amazon Simple Notification Service
+// topic that you specify in NotificationChannel. To get the results of the content
+// analysis, first check that the status value published to the Amazon SNS topic is
+// SUCCEEDED. If so, call GetContentModeration and pass the job identifier (JobId)
+// from the initial call to StartContentModeration. For more information, see
+// Content moderation in the Amazon Rekognition Developer Guide.
 func (c *Client) StartContentModeration(ctx context.Context, params *StartContentModerationInput, optFns ...func(*Options)) (*StartContentModerationOutput, error) {
 	if params == nil {
 		params = &StartContentModerationInput{}
@@ -40,8 +42,8 @@ func (c *Client) StartContentModeration(ctx context.Context, params *StartConten
 
 type StartContentModerationInput struct {
 
-	// The video in which you want to detect unsafe content. The video must be stored
-	// in an Amazon S3 bucket.
+	// The video in which you want to detect inappropriate, unwanted, or offensive
+	// content. The video must be stored in an Amazon S3 bucket.
 	//
 	// This member is required.
 	Video *types.Video
@@ -68,7 +70,9 @@ type StartContentModerationInput struct {
 	MinConfidence *float32
 
 	// The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the
-	// completion status of the unsafe content analysis to.
+	// completion status of the content analysis to. The Amazon SNS topic must have a
+	// topic name that begins with AmazonRekognition if you are using the
+	// AmazonRekognitionServiceRole permissions policy to access the topic.
 	NotificationChannel *types.NotificationChannel
 
 	noSmithyDocumentSerde
@@ -76,8 +80,8 @@ type StartContentModerationInput struct {
 
 type StartContentModerationOutput struct {
 
-	// The identifier for the unsafe content analysis job. Use JobId to identify the
-	// job in a subsequent call to GetContentModeration.
+	// The identifier for the content analysis job. Use JobId to identify the job in a
+	// subsequent call to GetContentModeration.
 	JobId *string
 
 	// Metadata pertaining to the operation's result.

@@ -50,7 +50,7 @@ import (
 //
 // * Use
 // the ListHostedZones action to get a list of the hosted zones associated with the
-// current account.
+// current Amazon Web Services account.
 func (c *Client) DeleteHostedZone(ctx context.Context, params *DeleteHostedZoneInput, optFns ...func(*Options)) (*DeleteHostedZoneOutput, error) {
 	if params == nil {
 		params = &DeleteHostedZoneInput{}

@@ -7,6 +7,54 @@ import (
 	"time"
 )
 
+// Contains information about an agent status.
+type AgentStatus struct {
+
+	// The Amazon Resource Name (ARN) of the agent status.
+	AgentStatusARN *string
+
+	// The identifier of the agent status.
+	AgentStatusId *string
+
+	// The description of the agent status.
+	Description *string
+
+	// The display order of the agent status.
+	DisplayOrder *int32
+
+	// The name of the agent status.
+	Name *string
+
+	// The state of the agent status.
+	State AgentStatusState
+
+	// One or more tags.
+	Tags map[string]string
+
+	// The type of agent status.
+	Type AgentStatusType
+
+	noSmithyDocumentSerde
+}
+
+// Summary information for an agent status.
+type AgentStatusSummary struct {
+
+	// The Amazon Resource Name (ARN) for the agent status.
+	Arn *string
+
+	// The identifier for an agent status.
+	Id *string
+
+	// The name of the agent status.
+	Name *string
+
+	// The type of the agent status.
+	Type AgentStatusType
+
+	noSmithyDocumentSerde
+}
+
 // A toggle for an individual feature at the instance level.
 type Attribute struct {
 
@@ -385,12 +433,18 @@ type HoursOfOperation struct {
 type HoursOfOperationConfig struct {
 
 	// The day that the hours of operation applies to.
+	//
+	// This member is required.
 	Day HoursOfOperationDays
 
 	// The end time that your contact center is closes.
+	//
+	// This member is required.
 	EndTime *HoursOfOperationTimeSlice
 
 	// The start time that your contact center is open.
+	//
+	// This member is required.
 	StartTime *HoursOfOperationTimeSlice
 
 	noSmithyDocumentSerde
@@ -415,9 +469,13 @@ type HoursOfOperationSummary struct {
 type HoursOfOperationTimeSlice struct {
 
 	// The hours.
+	//
+	// This member is required.
 	Hours int32
 
 	// The minutes.
+	//
+	// This member is required.
 	Minutes int32
 
 	noSmithyDocumentSerde

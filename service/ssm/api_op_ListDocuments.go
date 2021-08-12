@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all Systems Manager (SSM) documents in the current account and Region.
-// You can limit the results of this request by using a filter.
+// Returns all Systems Manager (SSM) documents in the current Amazon Web Services
+// account and Amazon Web Services Region. You can limit the results of this
+// request by using a filter.
 func (c *Client) ListDocuments(ctx context.Context, params *ListDocumentsInput, optFns ...func(*Options)) (*ListDocumentsOutput, error) {
 	if params == nil {
 		params = &ListDocumentsInput{}

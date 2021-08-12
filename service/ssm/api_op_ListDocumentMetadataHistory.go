@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Information about approval reviews for a version of an SSM document.
+// Information about approval reviews for a version of a change template in Change
+// Manager.
 func (c *Client) ListDocumentMetadataHistory(ctx context.Context, params *ListDocumentMetadataHistoryInput, optFns ...func(*Options)) (*ListDocumentMetadataHistoryOutput, error) {
 	if params == nil {
 		params = &ListDocumentMetadataHistoryInput{}
@@ -35,12 +36,12 @@ type ListDocumentMetadataHistoryInput struct {
 	// This member is required.
 	Metadata types.DocumentMetadataEnum
 
-	// The name of the document.
+	// The name of the change template.
 	//
 	// This member is required.
 	Name *string
 
-	// The version of the document.
+	// The version of the change template.
 	DocumentVersion *string
 
 	// The maximum number of items to return for this call. The call also returns a
@@ -56,16 +57,17 @@ type ListDocumentMetadataHistoryInput struct {
 
 type ListDocumentMetadataHistoryOutput struct {
 
-	// The user ID of the person in the organization who requested the document review.
+	// The user ID of the person in the organization who requested the review of the
+	// change template.
 	Author *string
 
-	// The version of the document.
+	// The version of the change template.
 	DocumentVersion *string
 
-	// Information about the response to the document approval request.
+	// Information about the response to the change template approval request.
 	Metadata *types.DocumentMetadataResponseInfo
 
-	// The name of the document.
+	// The name of the change template.
 	Name *string
 
 	// The maximum number of items to return for this call. The call also returns a

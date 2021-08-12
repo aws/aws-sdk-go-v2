@@ -26,6 +26,12 @@ type AccessKey struct {
 	// The timestamp when the access key was created.
 	CreatedAt *time.Time
 
+	// An object that describes the last time the access key was used. This object does
+	// not include data in the response of a CreateBucketAccessKey action. If the
+	// access key has not been used, the region and serviceName values are N/A, and the
+	// lastUsedDate value is null.
+	LastUsed *AccessKeyLastUsed
+
 	// The secret access key used to sign requests. You should store the secret access
 	// key in a safe location. We recommend that you delete the access key if the
 	// secret access key is compromised.
@@ -34,6 +40,25 @@ type AccessKey struct {
 	// The status of the access key. A status of Active means that the key is valid,
 	// while Inactive means it is not.
 	Status StatusType
+
+	noSmithyDocumentSerde
+}
+
+// Describes the last time an access key was used. This object does not include
+// data in the response of a CreateBucketAccessKey action.
+type AccessKeyLastUsed struct {
+
+	// The date and time when the access key was most recently used. This value is null
+	// if the access key has not been used.
+	LastUsedDate *time.Time
+
+	// The AWS Region where this access key was most recently used. This value is N/A
+	// if the access key has not been used.
+	Region *string
+
+	// The name of the AWS service with which this access key was most recently used.
+	// This value is N/A if the access key has not been used.
+	ServiceName *string
 
 	noSmithyDocumentSerde
 }

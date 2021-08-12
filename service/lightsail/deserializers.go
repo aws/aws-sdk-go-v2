@@ -19867,6 +19867,11 @@ func awsAwsjson11_deserializeDocumentAccessKey(v **types.AccessKey, value interf
 				}
 			}
 
+		case "lastUsed":
+			if err := awsAwsjson11_deserializeDocumentAccessKeyLastUsed(&sv.LastUsed, value); err != nil {
+				return err
+			}
+
 		case "secretAccessKey":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -19883,6 +19888,71 @@ func awsAwsjson11_deserializeDocumentAccessKey(v **types.AccessKey, value interf
 					return fmt.Errorf("expected StatusType to be of type string, got %T instead", value)
 				}
 				sv.Status = types.StatusType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentAccessKeyLastUsed(v **types.AccessKeyLastUsed, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.AccessKeyLastUsed
+	if *v == nil {
+		sv = &types.AccessKeyLastUsed{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "lastUsedDate":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.LastUsedDate = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected IsoDate to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "region":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.Region = ptr.String(jtv)
+			}
+
+		case "serviceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected string to be of type string, got %T instead", value)
+				}
+				sv.ServiceName = ptr.String(jtv)
 			}
 
 		default:

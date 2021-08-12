@@ -38,24 +38,25 @@ type PutParameterInput struct {
 	// * Parameter names are case
 	// sensitive.
 	//
-	// * A parameter name must be unique within an Region
+	// * A parameter name must be unique within an Amazon Web Services
+	// Region
 	//
-	// * A parameter
-	// name can't be prefixed with "aws" or "ssm" (case-insensitive).
+	// * A parameter name can't be prefixed with "aws" or "ssm"
+	// (case-insensitive).
 	//
-	// * Parameter
-	// names can include only the following symbols and letters: a-zA-Z0-9_.- In
-	// addition, the slash character ( / ) is used to delineate hierarchies in
-	// parameter names. For example: /Dev/Production/East/Project-ABC/MyParameter
+	// * Parameter names can include only the following symbols
+	// and letters: a-zA-Z0-9_.- In addition, the slash character ( / ) is used to
+	// delineate hierarchies in parameter names. For example:
+	// /Dev/Production/East/Project-ABC/MyParameter
 	//
-	// * A
-	// parameter name can't include spaces.
+	// * A parameter name can't include
+	// spaces.
 	//
-	// * Parameter hierarchies are limited to a
-	// maximum depth of fifteen levels.
+	// * Parameter hierarchies are limited to a maximum depth of fifteen
+	// levels.
 	//
-	// For additional information about valid values
-	// for parameter names, see Creating Systems Manager parameters
+	// For additional information about valid values for parameter names, see
+	// Creating Systems Manager parameters
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html)
 	// in the Amazon Web Services Systems Manager User Guide. The maximum length
 	// constraint listed below includes capacity for additional system attributes that
@@ -91,8 +92,9 @@ type PutParameterInput struct {
 	// When you create a String parameter and
 	// specify aws:ec2:image, Amazon Web Services Systems Manager validates the
 	// parameter value is in the required format, such as ami-12345abcdeEXAMPLE, and
-	// that the specified AMI is available in your account. For more information, see
-	// Native parameter support for Amazon Machine Image (AMI) IDs
+	// that the specified AMI is available in your Amazon Web Services account. For
+	// more information, see Native parameter support for Amazon Machine Image (AMI)
+	// IDs
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	DataType *string
@@ -102,17 +104,18 @@ type PutParameterInput struct {
 	Description *string
 
 	// The Key Management Service (KMS) ID that you want to use to encrypt a parameter.
-	// Either the default KMS key automatically assigned to your account or a custom
-	// key. Required for parameters that use the SecureString data type. If you don't
-	// specify a key ID, the system uses the default key associated with your
-	// account.
+	// Either the default KMS key automatically assigned to your Amazon Web Services
+	// account or a custom key. Required for parameters that use the SecureString data
+	// type. If you don't specify a key ID, the system uses the default key associated
+	// with your Amazon Web Services account.
 	//
-	// * To use your default KMS key, choose the SecureString data type, and
-	// do not specify the Key ID when you create the parameter. The system
-	// automatically populates Key ID with your default KMS key.
+	// * To use your default KMS key, choose
+	// the SecureString data type, and do not specify the Key ID when you create the
+	// parameter. The system automatically populates Key ID with your default KMS
+	// key.
 	//
-	// * To use a custom KMS
-	// key, choose the SecureString data type with the Key ID parameter.
+	// * To use a custom KMS key, choose the SecureString data type with the Key
+	// ID parameter.
 	KeyId *string
 
 	// Overwrite an existing parameter. The default value is false.
@@ -158,12 +161,12 @@ type PutParameterInput struct {
 	// The parameter tier to assign to a parameter. Parameter Store offers a standard
 	// tier and an advanced tier for parameters. Standard parameters have a content
 	// size limit of 4 KB and can't be configured to use parameter policies. You can
-	// create a maximum of 10,000 standard parameters for each Region in an account.
-	// Standard parameters are offered at no additional cost. Advanced parameters have
-	// a content size limit of 8 KB and can be configured to use parameter policies.
-	// You can create a maximum of 100,000 advanced parameters for each Region in an
-	// account. Advanced parameters incur a charge. For more information, see Standard
-	// and advanced parameter tiers
+	// create a maximum of 10,000 standard parameters for each Region in an Amazon Web
+	// Services account. Standard parameters are offered at no additional cost.
+	// Advanced parameters have a content size limit of 8 KB and can be configured to
+	// use parameter policies. You can create a maximum of 100,000 advanced parameters
+	// for each Region in an Amazon Web Services account. Advanced parameters incur a
+	// charge. For more information, see Standard and advanced parameter tiers
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html)
 	// in the Amazon Web Services Systems Manager User Guide. You can change a standard
 	// parameter to an advanced parameter any time. But you can't revert an advanced
@@ -204,10 +207,11 @@ type PutParameterInput struct {
 	// * The parameter uses a parameter policy.
 	//
 	// * More than 10,000 parameters
-	// already exist in your account in the current Region.
+	// already exist in your Amazon Web Services account in the current Amazon Web
+	// Services Region.
 	//
-	// For more information about
-	// configuring the default tier option, see Specifying a default parameter tier
+	// For more information about configuring the default tier
+	// option, see Specifying a default parameter tier
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	Tier types.ParameterTier

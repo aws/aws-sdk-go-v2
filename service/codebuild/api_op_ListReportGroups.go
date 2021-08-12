@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list ARNs for the report groups in the current AWS account.
+// Gets a list ARNs for the report groups in the current Amazon Web Services
+// account.
 func (c *Client) ListReportGroups(ctx context.Context, params *ListReportGroupsInput, optFns ...func(*Options)) (*ListReportGroupsOutput, error) {
 	if params == nil {
 		params = &ListReportGroupsInput{}
@@ -72,7 +73,8 @@ type ListReportGroupsOutput struct {
 	// token that is returned, until no more next tokens are returned.
 	NextToken *string
 
-	// The list of ARNs for the report groups in the current AWS account.
+	// The list of ARNs for the report groups in the current Amazon Web Services
+	// account.
 	ReportGroups []string
 
 	// Metadata pertaining to the operation's result.

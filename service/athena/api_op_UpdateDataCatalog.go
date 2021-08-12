@@ -30,17 +30,14 @@ func (c *Client) UpdateDataCatalog(ctx context.Context, params *UpdateDataCatalo
 type UpdateDataCatalogInput struct {
 
 	// The name of the data catalog to update. The catalog name must be unique for the
-	// AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or
-	// hyphen characters.
+	// Amazon Web Services account and can use a maximum of 128 alphanumeric,
+	// underscore, at sign, or hyphen characters.
 	//
 	// This member is required.
 	Name *string
 
 	// Specifies the type of data catalog to update. Specify LAMBDA for a federated
-	// catalog or HIVE for an external hive metastore. Do not use the GLUE type. This
-	// refers to the AwsDataCatalog that already exists in your account, of which you
-	// can have only one. Specifying the GLUE type will result in an INVALID_INPUT
-	// error.
+	// catalog, HIVE for an external hive metastore, or GLUE for an Glue Data Catalog.
 	//
 	// This member is required.
 	Type types.DataCatalogType

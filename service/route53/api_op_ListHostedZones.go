@@ -13,10 +13,10 @@ import (
 )
 
 // Retrieves a list of the public and private hosted zones that are associated with
-// the current account. The response includes a HostedZones child element for each
-// hosted zone. Amazon Route 53 returns a maximum of 100 items in each response. If
-// you have a lot of hosted zones, you can use the maxitems parameter to list them
-// in groups of up to 100.
+// the current Amazon Web Services account. The response includes a HostedZones
+// child element for each hosted zone. Amazon Route 53 returns a maximum of 100
+// items in each response. If you have a lot of hosted zones, you can use the
+// maxitems parameter to list them in groups of up to 100.
 func (c *Client) ListHostedZones(ctx context.Context, params *ListHostedZonesInput, optFns ...func(*Options)) (*ListHostedZonesOutput, error) {
 	if params == nil {
 		params = &ListHostedZonesInput{}
@@ -33,7 +33,7 @@ func (c *Client) ListHostedZones(ctx context.Context, params *ListHostedZonesInp
 }
 
 // A request to retrieve a list of the public and private hosted zones that are
-// associated with the current account.
+// associated with the current Amazon Web Services account.
 type ListHostedZonesInput struct {
 
 	// If you're using reusable delegation sets and you want to list all of the hosted

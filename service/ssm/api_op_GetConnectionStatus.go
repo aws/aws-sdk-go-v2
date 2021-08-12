@@ -30,7 +30,7 @@ func (c *Client) GetConnectionStatus(ctx context.Context, params *GetConnectionS
 
 type GetConnectionStatusInput struct {
 
-	// The ID of the instance.
+	// The instance ID.
 	//
 	// This member is required.
 	Target *string

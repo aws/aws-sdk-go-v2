@@ -3559,6 +3559,27 @@ func awsAwsquery_serializeDocumentCustomizedMetricSpecification(v *types.Customi
 	return nil
 }
 
+func awsAwsquery_serializeDocumentDesiredConfiguration(v *types.DesiredConfiguration, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.LaunchTemplate != nil {
+		objectKey := object.Key("LaunchTemplate")
+		if err := awsAwsquery_serializeDocumentLaunchTemplateSpecification(v.LaunchTemplate, objectKey); err != nil {
+			return err
+		}
+	}
+
+	if v.MixedInstancesPolicy != nil {
+		objectKey := object.Key("MixedInstancesPolicy")
+		if err := awsAwsquery_serializeDocumentMixedInstancesPolicy(v.MixedInstancesPolicy, objectKey); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeDocumentEbs(v *types.Ebs, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -4202,6 +4223,11 @@ func awsAwsquery_serializeDocumentRefreshPreferences(v *types.RefreshPreferences
 	if v.MinHealthyPercentage != nil {
 		objectKey := object.Key("MinHealthyPercentage")
 		objectKey.Integer(*v.MinHealthyPercentage)
+	}
+
+	if v.SkipMatching != nil {
+		objectKey := object.Key("SkipMatching")
+		objectKey.Boolean(*v.SkipMatching)
 	}
 
 	return nil
@@ -5959,6 +5985,13 @@ func awsAwsquery_serializeOpDocumentStartInstanceRefreshInput(v *StartInstanceRe
 	if v.AutoScalingGroupName != nil {
 		objectKey := object.Key("AutoScalingGroupName")
 		objectKey.String(*v.AutoScalingGroupName)
+	}
+
+	if v.DesiredConfiguration != nil {
+		objectKey := object.Key("DesiredConfiguration")
+		if err := awsAwsquery_serializeDocumentDesiredConfiguration(v.DesiredConfiguration, objectKey); err != nil {
+			return err
+		}
 	}
 
 	if v.Preferences != nil {

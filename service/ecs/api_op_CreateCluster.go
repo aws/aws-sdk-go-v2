@@ -64,7 +64,7 @@ type CreateClusterInput struct {
 
 	// The capacity provider strategy to set as the default for the cluster. When a
 	// default capacity provider strategy is set for a cluster, when calling the
-	// RunTask or CreateService APIs wtih no capacity provider strategy or launch type
+	// RunTask or CreateService APIs with no capacity provider strategy or launch type
 	// specified, the default capacity provider strategy for the cluster is used. If a
 	// default capacity provider strategy is not defined for a cluster during creation,
 	// it can be defined later with the PutClusterCapacityProviders API operation.

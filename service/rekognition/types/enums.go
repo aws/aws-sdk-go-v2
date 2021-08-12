@@ -484,9 +484,13 @@ type TechnicalCueType string
 
 // Enum values for TechnicalCueType
 const (
-	TechnicalCueTypeColorBars   TechnicalCueType = "ColorBars"
-	TechnicalCueTypeEndCredits  TechnicalCueType = "EndCredits"
-	TechnicalCueTypeBlackFrames TechnicalCueType = "BlackFrames"
+	TechnicalCueTypeColorBars      TechnicalCueType = "ColorBars"
+	TechnicalCueTypeEndCredits     TechnicalCueType = "EndCredits"
+	TechnicalCueTypeBlackFrames    TechnicalCueType = "BlackFrames"
+	TechnicalCueTypeOpeningCredits TechnicalCueType = "OpeningCredits"
+	TechnicalCueTypeStudioLogo     TechnicalCueType = "StudioLogo"
+	TechnicalCueTypeSlate          TechnicalCueType = "Slate"
+	TechnicalCueTypeContent        TechnicalCueType = "Content"
 )
 
 // Values returns all known values for TechnicalCueType. Note that this can be
@@ -497,6 +501,10 @@ func (TechnicalCueType) Values() []TechnicalCueType {
 		"ColorBars",
 		"EndCredits",
 		"BlackFrames",
+		"OpeningCredits",
+		"StudioLogo",
+		"Slate",
+		"Content",
 	}
 }
 
@@ -515,6 +523,24 @@ func (TextTypes) Values() []TextTypes {
 	return []TextTypes{
 		"LINE",
 		"WORD",
+	}
+}
+
+type VideoColorRange string
+
+// Enum values for VideoColorRange
+const (
+	VideoColorRangeFull    VideoColorRange = "FULL"
+	VideoColorRangeLimited VideoColorRange = "LIMITED"
+)
+
+// Values returns all known values for VideoColorRange. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VideoColorRange) Values() []VideoColorRange {
+	return []VideoColorRange{
+		"FULL",
+		"LIMITED",
 	}
 }
 

@@ -52,7 +52,7 @@ type CreateBucketInput struct {
 
 	// A Boolean value that indicates whether to enable versioning of objects in the
 	// bucket. For more information about versioning, see Enabling and suspending
-	// bucket object versioning in Amazon Lightsail
+	// object versioning in a bucket in Amazon Lightsail
 	// (https://lightsail.aws.amazon.com/ls/docs/en_us/articles/amazon-lightsail-managing-bucket-object-versioning)
 	// in the Amazon Lightsail Developer Guide.
 	EnableObjectVersioning *bool

@@ -2970,6 +2970,20 @@
                 }
             }
         },
+        "com.amazonaws.autoscaling#DesiredConfiguration": {
+            "type": "structure",
+            "members": {
+                "LaunchTemplate": {
+                    "target": "com.amazonaws.autoscaling#LaunchTemplateSpecification"
+                },
+                "MixedInstancesPolicy": {
+                    "target": "com.amazonaws.autoscaling#MixedInstancesPolicy"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the desired configuration for an instance refresh. </p>\n        <p>If you specify a desired configuration, you must specify either a\n                <code>LaunchTemplate</code> or a <code>MixedInstancesPolicy</code>. </p>"
+            }
+        },
         "com.amazonaws.autoscaling#DetachInstances": {
             "type": "operation",
             "input": {
@@ -3806,6 +3820,15 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Additional progress details for an Auto Scaling group that has a warm pool.</p>"
                     }
+                },
+                "Preferences": {
+                    "target": "com.amazonaws.autoscaling#RefreshPreferences"
+                },
+                "DesiredConfiguration": {
+                    "target": "com.amazonaws.autoscaling#DesiredConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes the specific update you want to deploy.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3979,7 +4002,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an instances distribution for an Auto Scaling group with a <a>MixedInstancesPolicy</a>.</p>\n        <p>The instances distribution specifies the distribution of On-Demand Instances and Spot\n            Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates\n            instance types to fulfill On-Demand and Spot capacities.</p>\n        <p>When you update <code>SpotAllocationStrategy</code>, <code>SpotInstancePools</code>,\n            or <code>SpotMaxPrice</code>, this update action does not deploy any changes across the\n            running Amazon EC2 instances in the group. Your existing Spot Instances continue to run\n            as long as the maximum price for those instances is higher than the current Spot price.\n            When scale out occurs, Amazon EC2 Auto Scaling launches instances based on the new settings. When scale\n            in occurs, Amazon EC2 Auto Scaling terminates instances according to the group's termination\n            policies.</p>"
+                "smithy.api#documentation": "<p>Describes an instances distribution for an Auto Scaling group with a <a>MixedInstancesPolicy</a>.</p>\n        <p>The instances distribution specifies the distribution of On-Demand Instances and Spot\n            Instances, the maximum price to pay for Spot Instances, and how the Auto Scaling group allocates\n            instance types to fulfill On-Demand and Spot capacities.</p>\n        <p>When you modify <code>SpotAllocationStrategy</code>, <code>SpotInstancePools</code>,\n            or <code>SpotMaxPrice</code> in the <a>UpdateAutoScalingGroup</a> API call,\n            this update action does not deploy any changes across the running Amazon EC2 instances\n            in the group. Your existing Spot Instances continue to run as long as the maximum price\n            for those instances is higher than the current Spot price. When scale out occurs,\n            Amazon EC2 Auto Scaling launches instances based on the new settings. When scale in occurs, Amazon EC2 Auto Scaling\n            terminates instances according to the group's termination policies.</p>"
             }
         },
         "com.amazonaws.autoscaling#InstancesToUpdate": {
@@ -4235,7 +4258,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a launch template and overrides. </p>\n        <p>You specify these properties as part of a mixed instances policy. </p>\n        <p>When you update the launch template or overrides, existing Amazon EC2 instances continue to\n            run. When scale out occurs, Amazon EC2 Auto Scaling launches instances to match the new settings. When\n            scale in occurs, Amazon EC2 Auto Scaling terminates instances according to the group's termination\n            policies.</p>"
+                "smithy.api#documentation": "<p>Describes a launch template and overrides. </p>\n        <p>You specify these properties as part of a mixed instances policy. </p>\n        <p>When you update the launch template or overrides in the <a>UpdateAutoScalingGroup</a> API call, existing Amazon EC2 instances continue to\n            run. When scale out occurs, Amazon EC2 Auto Scaling launches instances to match the new settings. When\n            scale in occurs, Amazon EC2 Auto Scaling terminates instances according to the group's termination\n            policies.</p>"
             }
         },
         "com.amazonaws.autoscaling#LaunchTemplateName": {
@@ -4297,7 +4320,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the Amazon EC2 launch template and the launch template version that can be used\n            by an Auto Scaling group to configure Amazon EC2 instances.</p>\n        <p>The launch template that is specified must be configured for use with an Auto Scaling group.\n            For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html\">Creating a launch\n                template for an Auto Scaling group</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Describes the launch template and the version of the launch template that Amazon EC2 Auto Scaling\n            uses to launch Amazon EC2 instances. For more information about launch templates, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html\">Launch\n                templates</a> in the <i>Amazon EC2 Auto Scaling User Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#LifecycleActionResult": {
@@ -4867,7 +4890,7 @@
                 "LaunchTemplate": {
                     "target": "com.amazonaws.autoscaling#LaunchTemplate",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the launch template to use and optionally the instance types (overrides)\n            that are used to provision EC2 instances to fulfill On-Demand and Spot capacities.\n            Required when creating a mixed instances policy.</p>"
+                        "smithy.api#documentation": "<p>Specifies the launch template to use and the instance types (overrides) that are used\n            to provision EC2 instances to fulfill On-Demand and Spot capacities. Required when\n            creating a mixed instances policy.</p>"
                     }
                 },
                 "InstancesDistribution": {
@@ -4878,7 +4901,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a mixed instances policy for an Auto Scaling group. With mixed instances, your Auto Scaling\n            group can provision a combination of On-Demand Instances and Spot Instances across\n            multiple instance types. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple\n                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User\n                Guide</i>.</p>\n        <p>You can create a mixed instances policy for a new Auto Scaling group, or you can create it for\n            an existing group by updating the group to specify <code>MixedInstancesPolicy</code> as\n            the top-level property instead of a launch configuration or launch template.</p>"
+                "smithy.api#documentation": "<p>Describes a mixed instances policy. A mixed instances policy contains the instance\n            types Amazon EC2 Auto Scaling can launch, and other information Amazon EC2 Auto Scaling can use to launch instances to\n            help you optimize your costs. For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html\">Auto Scaling groups with multiple\n                instance types and purchase options</a> in the <i>Amazon EC2 Auto Scaling User\n                Guide</i>.</p>"
             }
         },
         "com.amazonaws.autoscaling#MonitoringEnabled": {
@@ -5822,7 +5845,7 @@
                 "MinHealthyPercentage": {
                     "target": "com.amazonaws.autoscaling#IntPercent",
                     "traits": {
-                        "smithy.api#documentation": "<p>The amount of capacity in the Auto Scaling group that must remain healthy during an instance\n            refresh to allow the operation to continue, as a percentage of the desired capacity of\n            the Auto Scaling group (rounded up to the nearest integer). The default is <code>90</code>.\n        </p>"
+                        "smithy.api#documentation": "<p>The amount of capacity in the Auto Scaling group that must remain healthy during an instance\n            refresh to allow the operation to continue. The value is expressed as a percentage of\n            the desired capacity of the Auto Scaling group (rounded up to the nearest integer). The default\n            is <code>90</code>.</p>\n        <p>Setting the minimum healthy percentage to 100 percent limits the rate of replacement\n            to one instance at a time. In contrast, setting it to 0 percent has the effect of\n            replacing all instances at the same time. </p>"
                     }
                 },
                 "InstanceWarmup": {
@@ -5842,10 +5865,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The amount of time, in seconds, to wait after a checkpoint before continuing. This\n            property is optional, but if you specify a value for it, you must also specify a value\n            for <code>CheckpointPercentages</code>. If you specify a value for\n                <code>CheckpointPercentages</code> and not for <code>CheckpointDelay</code>, the\n                <code>CheckpointDelay</code> defaults to <code>3600</code> (1 hour). </p>"
                     }
+                },
+                "SkipMatching": {
+                    "target": "com.amazonaws.autoscaling#SkipMatching",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A boolean value that indicates whether skip matching is enabled. If true, then\n            Amazon EC2 Auto Scaling skips replacing instances that match the desired configuration. If no desired\n            configuration is specified, then it skips replacing instances that have the same\n            configuration that is already set on the group. The default is\n            <code>false</code>.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes information used to start an instance refresh. </p>\n        <p>All properties are optional. However, if you specify a value for\n                <code>CheckpointDelay</code>, you must also provide a value for\n                <code>CheckpointPercentages</code>. </p>"
+                "smithy.api#documentation": "<p>Describes the preferences for an instance refresh.</p>"
             }
         },
         "com.amazonaws.autoscaling#RefreshStrategy": {
@@ -6467,6 +6496,12 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.autoscaling#SkipMatching": {
+            "type": "boolean",
+            "traits": {
+                "smithy.api#box": {}
+            }
+        },
         "com.amazonaws.autoscaling#SpotInstancePools": {
             "type": "integer",
             "traits": {
@@ -6502,7 +6537,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts a new instance refresh operation, which triggers a rolling replacement of\n            previously launched instances in the Auto Scaling group with a new group of instances.</p>\n        <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group\n            after you make configuration changes.</p>\n        <p>If the call succeeds, it creates a new instance refresh request with a unique ID that\n            you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that\n            have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an\n            instance refresh operation in progress, use the <a>CancelInstanceRefresh</a>\n            API. </p>"
+                "smithy.api#documentation": "<p>Starts a new instance refresh operation. An instance refresh performs a rolling\n            replacement of all or some instances in an Auto Scaling group. Each instance is terminated first\n            and then replaced, which temporarily reduces the capacity available within your Auto Scaling\n            group.</p>\n        <p>This operation is part of the <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-instance-refresh.html\">instance refresh\n                feature</a> in Amazon EC2 Auto Scaling, which helps you update instances in your Auto Scaling group.\n            This feature is helpful, for example, when you have a new AMI or a new user data script.\n            You just need to create a new launch template that specifies the new AMI or user data\n            script. Then start an instance refresh to immediately begin the process of updating\n            instances in the group. </p>\n        <p>If the call succeeds, it creates a new instance refresh request with a unique ID that\n            you can use to track its progress. To query its status, call the <a>DescribeInstanceRefreshes</a> API. To describe the instance refreshes that\n            have already run, call the <a>DescribeInstanceRefreshes</a> API. To cancel an\n            instance refresh operation in progress, use the <a>CancelInstanceRefresh</a>\n            API. </p>"
             }
         },
         "com.amazonaws.autoscaling#StartInstanceRefreshAnswer": {
@@ -6529,13 +6564,19 @@
                 "Strategy": {
                     "target": "com.amazonaws.autoscaling#RefreshStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The strategy to use for the instance refresh. The only valid value is\n                <code>Rolling</code>.</p>\n        <p>A rolling update is an update that is applied to all instances in an Auto Scaling group until\n            all instances have been updated. A rolling update can fail due to failed health checks\n            or if instances are on standby or are protected from scale in. If the rolling update\n            process fails, any instances that were already replaced are not rolled back to their\n            previous configuration. </p>"
+                        "smithy.api#documentation": "<p>The strategy to use for the instance refresh. The only valid value is\n                <code>Rolling</code>.</p>\n        <p>A rolling update helps you update your instances gradually. A rolling update can fail\n            due to failed health checks or if instances are on standby or are protected from scale\n            in. If the rolling update process fails, any instances that are replaced are not rolled\n            back to their previous configuration. </p>"
+                    }
+                },
+                "DesiredConfiguration": {
+                    "target": "com.amazonaws.autoscaling#DesiredConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired configuration. For example, the desired configuration can specify a new\n            launch template or a new version of the current launch template.</p>\n        <p>Once the instance refresh succeeds, Amazon EC2 Auto Scaling updates the settings of the Auto Scaling group to\n            reflect the new desired configuration. </p>\n        <note>\n            <p>When you specify a new launch template or a new version of the current launch\n                template for your desired configuration, consider enabling the\n                    <code>SkipMatching</code> property in preferences. If it's enabled, Amazon EC2 Auto Scaling\n                skips replacing instances that already use the specified launch template and\n                version. This can help you reduce the number of replacements that are required to\n                apply updates. </p>\n        </note>"
                     }
                 },
                 "Preferences": {
                     "target": "com.amazonaws.autoscaling#RefreshPreferences",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set of preferences associated with the instance refresh request.</p>\n        <p>If not provided, the default values are used. For <code>MinHealthyPercentage</code>,\n            the default value is <code>90</code>. For <code>InstanceWarmup</code>, the default is to\n            use the value specified for the health check grace period for the Auto Scaling group.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/autoscaling/ec2/APIReference/API_RefreshPreferences.html\">RefreshPreferences</a> in the <i>Amazon EC2 Auto Scaling API\n            Reference</i>.</p>"
+                        "smithy.api#documentation": "<p>Set of preferences associated with the instance refresh request. If not provided, the\n            default values are used.</p>"
                     }
                 }
             }

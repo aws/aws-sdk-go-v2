@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the patch baselines in your account.
+// Lists the patch baselines in your Amazon Web Services account.
 func (c *Client) DescribePatchBaselines(ctx context.Context, params *DescribePatchBaselinesInput, optFns ...func(*Options)) (*DescribePatchBaselinesOutput, error) {
 	if params == nil {
 		params = &DescribePatchBaselinesInput{}

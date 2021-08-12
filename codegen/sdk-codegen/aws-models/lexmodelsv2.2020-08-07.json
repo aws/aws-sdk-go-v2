@@ -282,7 +282,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provided the identity of a the bot that was exported.</p>"
+                "smithy.api#documentation": "<p>Provides the identity of a the bot that was exported.</p>"
             }
         },
         "com.amazonaws.lexmodelsv2#BotFilter": {
@@ -2575,7 +2575,7 @@
                 "multipleValuesSetting": {
                     "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the slot returns multiple values in one response.\n         Multi-value slots are only available in the en-US locale. If you set\n         this value to <code>true</code> in any other locale, Amazon Lex throws a\n            <code>ValidationException</code>. </p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n      value is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the slot returns multiple values in one response.\n         Multi-value slots are only available in the en-US locale. If you set\n         this value to <code>true</code> in any other locale, Amazon Lex throws a\n            <code>ValidationException</code>. </p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n         value is <code>false</code>.</p>"
                     }
                 }
             }
@@ -5243,7 +5243,7 @@
                 "multipleValuesSetting": {
                     "target": "com.amazonaws.lexmodelsv2#MultipleValuesSetting",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the slot accepts multiple values in a\n         single utterance.</p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n         value is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the slot accepts multiple values in a single\n         utterance.</p>\n         <p>If the <code>multipleValuesSetting</code> is not set, the default\n         value is <code>false</code>.</p>"
                     }
                 }
             }
@@ -5990,6 +5990,12 @@
                         "smithy.api#documentation": "<p>The response that Amazon Lex sends to the user when the intent is\n         complete.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "active": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether an intent's closing response is used. When this\n         field is false, the closing response isn't sent to the user and no\n         closing input from the user is used. If the <code>active</code> field\n         isn't specified, the default is true.</p>"
+                    }
                 }
             },
             "traits": {
@@ -6011,6 +6017,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>When the user answers \"no\" to the question defined in\n            <code>promptSpecification</code>, Amazon Lex responds with this response\n         to acknowledge that the intent was canceled. </p>",
                         "smithy.api#required": {}
+                    }
+                },
+                "active": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the intent's confirmation is sent to the user.\n         When this field is false, confirmation and declination responses aren't\n         sent and processing continues as if the responses aren't present. If\n         the <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 }
             },
@@ -7778,7 +7790,7 @@
                 "allowMultipleValues": {
                     "target": "com.amazonaws.lexmodelsv2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether a slot can return multiple values. When\n            <code>true</code>, the slot may return more than one value in a\n         response. When <code>false</code>, the slot returns only a single\n         value.</p>\n         <p>Multi-value slots are only available in the en-US locale. If you\n         set this value to <code>true</code> in any other locale, Amazon Lex throws a\n         <code>ValidationException</code>.</p>      \n         <p>If the <code>allowMutlipleValues</code> is not set, the default\n            value is <code>false</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether a slot can return multiple values. When\n            <code>true</code>, the slot may return more than one value in a\n         response. When <code>false</code>, the slot returns only a single\n         value.</p>\n         <p>Multi-value slots are only available in the en-US locale. If you set\n         this value to <code>true</code> in any other locale, Amazon Lex throws a\n            <code>ValidationException</code>.</p>\n         <p>If the <code>allowMutlipleValues</code> is not set, the default\n         value is <code>false</code>.</p>"
                     }
                 }
             },
@@ -7992,7 +8004,7 @@
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 0,
-                    "max": 25
+                    "max": 100
                 }
             }
         },
@@ -10542,6 +10554,12 @@
                     "target": "com.amazonaws.lexmodelsv2#StillWaitingResponseSpecification",
                     "traits": {
                         "smithy.api#documentation": "<p>A response that Amazon Lex sends periodically to the user to indicate\n         that the bot is still waiting for input from the user.</p>"
+                    }
+                },
+                "active": {
+                    "target": "com.amazonaws.lexmodelsv2#BoxedBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether the bot will wait for a user to respond. When this\n         field is false, wait and continue responses for a slot aren't used and\n         the bot expects an appropriate response within the configured timeout.\n         If the <code>active</code> field isn't specified, the default is\n         true.</p>"
                     }
                 }
             },

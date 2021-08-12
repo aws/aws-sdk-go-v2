@@ -29,7 +29,7 @@ func (c *Client) StartBuild(ctx context.Context, params *StartBuildInput, optFns
 
 type StartBuildInput struct {
 
-	// The name of the AWS CodeBuild build project to start running a build.
+	// The name of the CodeBuild build project to start running a build.
 	//
 	// This member is required.
 	ProjectName *string
@@ -47,8 +47,8 @@ type StartBuildInput struct {
 	// already defined in the build project. If this value is set, it can be either an
 	// inline buildspec definition, the path to an alternate buildspec file relative to
 	// the value of the built-in CODEBUILD_SRC_DIR environment variable, or the path to
-	// an S3 bucket. The bucket must be in the same AWS Region as the build project.
-	// Specify the buildspec file using its ARN (for example,
+	// an S3 bucket. The bucket must be in the same Amazon Web Services Region as the
+	// build project. Specify the buildspec file using its ARN (for example,
 	// arn:aws:s3:::my-codebuild-sample2/buildspec.yml). If this value is not provided
 	// or is set to an empty string, the source code must contain a buildspec file in
 	// its root directory. For more information, see Buildspec File Name and Storage
@@ -73,12 +73,12 @@ type StartBuildInput struct {
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/session-manager.html).
 	DebugSessionEnabled *bool
 
-	// The AWS Key Management Service (AWS KMS) customer master key (CMK) that
-	// overrides the one specified in the build project. The CMK key encrypts the build
-	// output artifacts. You can use a cross-account KMS key to encrypt the build
-	// output artifacts if your service role has permission to that key. You can
-	// specify either the Amazon Resource Name (ARN) of the CMK or, if available, the
-	// CMK's alias (using the format alias/).
+	// The Key Management Service customer master key (CMK) that overrides the one
+	// specified in the build project. The CMK key encrypts the build output artifacts.
+	// You can use a cross-account KMS key to encrypt the build output artifacts if
+	// your service role has permission to that key. You can specify either the Amazon
+	// Resource Name (ARN) of the CMK or, if available, the CMK's alias (using the
+	// format alias/).
 	EncryptionKeyOverride *string
 
 	// A container type for this build that overrides the one specified in the build
@@ -93,27 +93,27 @@ type StartBuildInput struct {
 	// for this build only, any previous depth of history defined in the build project.
 	GitCloneDepthOverride *int32
 
-	// Information about the Git submodules configuration for this build of an AWS
+	// Information about the Git submodules configuration for this build of an
 	// CodeBuild build project.
 	GitSubmodulesConfigOverride *types.GitSubmodulesConfig
 
 	// A unique, case sensitive identifier you provide to ensure the idempotency of the
 	// StartBuild request. The token is included in the StartBuild request and is valid
 	// for 5 minutes. If you repeat the StartBuild request with the same token, but
-	// change a parameter, AWS CodeBuild returns a parameter mismatch error.
+	// change a parameter, CodeBuild returns a parameter mismatch error.
 	IdempotencyToken *string
 
 	// The name of an image for this build that overrides the one specified in the
 	// build project.
 	ImageOverride *string
 
-	// The type of credentials AWS CodeBuild uses to pull images in your build. There
-	// are two valid values: CODEBUILD Specifies that AWS CodeBuild uses its own
-	// credentials. This requires that you modify your ECR repository policy to trust
-	// AWS CodeBuild's service principal. SERVICE_ROLE Specifies that AWS CodeBuild
-	// uses your build project's service role. When using a cross-account or private
-	// registry image, you must use SERVICE_ROLE credentials. When using an AWS
-	// CodeBuild curated image, you must use CODEBUILD credentials.
+	// The type of credentials CodeBuild uses to pull images in your build. There are
+	// two valid values: CODEBUILD Specifies that CodeBuild uses its own credentials.
+	// This requires that you modify your ECR repository policy to trust CodeBuild's
+	// service principal. SERVICE_ROLE Specifies that CodeBuild uses your build
+	// project's service role. When using a cross-account or private registry image,
+	// you must use SERVICE_ROLE credentials. When using an CodeBuild curated image,
+	// you must use CODEBUILD credentials.
 	ImagePullCredentialsTypeOverride types.ImagePullCredentialsType
 
 	// Enable this flag to override the insecure SSL setting that is specified in the
@@ -143,8 +143,8 @@ type StartBuildInput struct {
 	// write access, the build status cannot be updated. For more information, see
 	// Source provider access
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html) in
-	// the AWS CodeBuild User Guide. The status of a build triggered by a webhook is
-	// always reported to your source provider.
+	// the CodeBuild User Guide. The status of a build triggered by a webhook is always
+	// reported to your source provider.
 	ReportBuildStatusOverride *bool
 
 	// An array of ProjectArtifacts objects.
@@ -176,8 +176,8 @@ type StartBuildInput struct {
 
 	// The version of the build input to be built, for this build only. If not
 	// specified, the latest version is used. If specified, the contents depends on the
-	// source provider: AWS CodeCommit The commit ID, branch, or Git tag to use. GitHub
-	// The commit ID, pull request ID, branch name, or tag name that corresponds to the
+	// source provider: CodeCommit The commit ID, branch, or Git tag to use. GitHub The
+	// commit ID, pull request ID, branch name, or tag name that corresponds to the
 	// version of the source code you want to build. If a pull request ID is specified,
 	// it must use the format pr/pull-request-ID (for example pr/25). If a branch name
 	// is specified, the branch's HEAD commit ID is used. If not specified, the default
@@ -189,7 +189,7 @@ type StartBuildInput struct {
 	// specified at the project level, then this sourceVersion (at the build level)
 	// takes precedence. For more information, see Source Version Sample with CodeBuild
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/sample-source-version.html)
-	// in the AWS CodeBuild User Guide.
+	// in the CodeBuild User Guide.
 	SourceVersion *string
 
 	// The number of build timeout minutes, from 5 to 480 (8 hours), that overrides,

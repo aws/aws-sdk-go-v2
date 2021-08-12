@@ -83,19 +83,18 @@ type Database struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about a data catalog in an AWS account.
+// Contains information about a data catalog in an Amazon Web Services account.
 type DataCatalog struct {
 
-	// The name of the data catalog. The catalog name must be unique for the AWS
-	// account and can use a maximum of 128 alphanumeric, underscore, at sign, or
-	// hyphen characters.
+	// The name of the data catalog. The catalog name must be unique for the Amazon Web
+	// Services account and can use a maximum of 128 alphanumeric, underscore, at sign,
+	// or hyphen characters.
 	//
 	// This member is required.
 	Name *string
 
-	// The type of data catalog: LAMBDA for a federated catalog or HIVE for an external
-	// hive metastore. GLUE refers to the AwsDataCatalog that already exists in your
-	// account, of which you can have only one.
+	// The type of data catalog to create: LAMBDA for a federated catalog, HIVE for an
+	// external hive metastore, or GLUE for an Glue Data Catalog.
 	//
 	// This member is required.
 	Type DataCatalogType
@@ -122,6 +121,18 @@ type DataCatalog struct {
 	// * If you
 	// have a composite Lambda function that processes both metadata and data, use the
 	// following syntax to specify your Lambda function. function=lambda_arn
+	//
+	// * The
+	// GLUE type takes a catalog ID parameter and is required. The  catalog_id  is the
+	// account ID of the Amazon Web Services account to which the Glue catalog belongs.
+	// catalog-id=catalog_id
+	//
+	// * The GLUE data catalog type also applies to the default
+	// AwsDataCatalog that already exists in your account, of which you can have only
+	// one and cannot modify.
+	//
+	// * Queries that specify a Glue Data Catalog other than
+	// the default AwsDataCatalog must be run on Athena engine version 2.
 	Parameters map[string]string
 
 	noSmithyDocumentSerde
@@ -275,7 +286,7 @@ type QueryExecution struct {
 	// The type of query statement that was run. DDL indicates DDL query statements.
 	// DML indicates DML (Data Manipulation Language) query statements, such as CREATE
 	// TABLE AS SELECT. UTILITY indicates query statements other than DDL and DML, such
-	// as SHOW CREATE TABLE, or DESCRIBE .
+	// as SHOW CREATE TABLE, or DESCRIBE TABLE.
 	StatementType StatementType
 
 	// Query execution statistics, such as the amount of data scanned, the amount of
@@ -298,7 +309,8 @@ type QueryExecutionContext struct {
 	// The name of the data catalog used in the query execution.
 	Catalog *string
 
-	// The name of the database used in the query execution.
+	// The name of the database used in the query execution. The database must exist in
+	// the catalog.
 	Database *string
 
 	noSmithyDocumentSerde

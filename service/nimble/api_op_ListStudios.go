@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List studios in your AWS account in the requested AWS Region.
+// List studios in your Amazon Web Services account in the requested Amazon Web
+// Services Region.
 func (c *Client) ListStudios(ctx context.Context, params *ListStudiosInput, optFns ...func(*Options)) (*ListStudiosOutput, error) {
 	if params == nil {
 		params = &ListStudiosInput{}

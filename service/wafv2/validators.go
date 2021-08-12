@@ -350,6 +350,26 @@ func (m *validateOpGetLoggingConfiguration) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetManagedRuleSet struct {
+}
+
+func (*validateOpGetManagedRuleSet) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetManagedRuleSet) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetManagedRuleSetInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetManagedRuleSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPermissionPolicy struct {
 }
 
@@ -490,6 +510,26 @@ func (m *validateOpListAvailableManagedRuleGroups) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListAvailableManagedRuleGroupVersions struct {
+}
+
+func (*validateOpListAvailableManagedRuleGroupVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAvailableManagedRuleGroupVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAvailableManagedRuleGroupVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAvailableManagedRuleGroupVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListIPSets struct {
 }
 
@@ -505,6 +545,26 @@ func (m *validateOpListIPSets) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListIPSetsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListManagedRuleSets struct {
+}
+
+func (*validateOpListManagedRuleSets) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListManagedRuleSets) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListManagedRuleSetsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListManagedRuleSetsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -630,6 +690,26 @@ func (m *validateOpPutLoggingConfiguration) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutManagedRuleSetVersions struct {
+}
+
+func (*validateOpPutManagedRuleSetVersions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutManagedRuleSetVersions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutManagedRuleSetVersionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutManagedRuleSetVersionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutPermissionPolicy struct {
 }
 
@@ -705,6 +785,26 @@ func (m *validateOpUpdateIPSet) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateIPSetInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateManagedRuleSetVersionExpiryDate struct {
+}
+
+func (*validateOpUpdateManagedRuleSetVersionExpiryDate) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateManagedRuleSetVersionExpiryDate) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateManagedRuleSetVersionExpiryDateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateManagedRuleSetVersionExpiryDateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -838,6 +938,10 @@ func addOpGetLoggingConfigurationValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpGetLoggingConfiguration{}, middleware.After)
 }
 
+func addOpGetManagedRuleSetValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetManagedRuleSet{}, middleware.After)
+}
+
 func addOpGetPermissionPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPermissionPolicy{}, middleware.After)
 }
@@ -866,8 +970,16 @@ func addOpListAvailableManagedRuleGroupsValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpListAvailableManagedRuleGroups{}, middleware.After)
 }
 
+func addOpListAvailableManagedRuleGroupVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAvailableManagedRuleGroupVersions{}, middleware.After)
+}
+
 func addOpListIPSetsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListIPSets{}, middleware.After)
+}
+
+func addOpListManagedRuleSetsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListManagedRuleSets{}, middleware.After)
 }
 
 func addOpListRegexPatternSetsValidationMiddleware(stack *middleware.Stack) error {
@@ -894,6 +1006,10 @@ func addOpPutLoggingConfigurationValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpPutLoggingConfiguration{}, middleware.After)
 }
 
+func addOpPutManagedRuleSetVersionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutManagedRuleSetVersions{}, middleware.After)
+}
+
 func addOpPutPermissionPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutPermissionPolicy{}, middleware.After)
 }
@@ -908,6 +1024,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateIPSetValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateIPSet{}, middleware.After)
+}
+
+func addOpUpdateManagedRuleSetVersionExpiryDateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateManagedRuleSetVersionExpiryDate{}, middleware.After)
 }
 
 func addOpUpdateRegexPatternSetValidationMiddleware(stack *middleware.Stack) error {
@@ -2490,6 +2610,27 @@ func validateOpGetLoggingConfigurationInput(v *GetLoggingConfigurationInput) err
 	}
 }
 
+func validateOpGetManagedRuleSetInput(v *GetManagedRuleSetInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetManagedRuleSetInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPermissionPolicyInput(v *GetPermissionPolicyInput) error {
 	if v == nil {
 		return nil
@@ -2629,11 +2770,47 @@ func validateOpListAvailableManagedRuleGroupsInput(v *ListAvailableManagedRuleGr
 	}
 }
 
+func validateOpListAvailableManagedRuleGroupVersionsInput(v *ListAvailableManagedRuleGroupVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAvailableManagedRuleGroupVersionsInput"}
+	if v.VendorName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VendorName"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListIPSetsInput(v *ListIPSetsInput) error {
 	if v == nil {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListIPSetsInput"}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListManagedRuleSetsInput(v *ListManagedRuleSetsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListManagedRuleSetsInput"}
 	if len(v.Scope) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
 	}
@@ -2738,6 +2915,30 @@ func validateOpPutLoggingConfigurationInput(v *PutLoggingConfigurationInput) err
 	}
 }
 
+func validateOpPutManagedRuleSetVersionsInput(v *PutManagedRuleSetVersionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutManagedRuleSetVersionsInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.LockToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LockToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutPermissionPolicyInput(v *PutPermissionPolicyInput) error {
 	if v == nil {
 		return nil
@@ -2815,6 +3016,36 @@ func validateOpUpdateIPSetInput(v *UpdateIPSetInput) error {
 	}
 	if v.LockToken == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("LockToken"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateManagedRuleSetVersionExpiryDateInput(v *UpdateManagedRuleSetVersionExpiryDateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateManagedRuleSetVersionExpiryDateInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.Scope) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Scope"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
+	}
+	if v.LockToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LockToken"))
+	}
+	if v.VersionToExpire == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VersionToExpire"))
+	}
+	if v.ExpiryTimestamp == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExpiryTimestamp"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

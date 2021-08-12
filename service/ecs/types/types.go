@@ -225,6 +225,7 @@ type CapacityProvider struct {
 // Fargate capacity provider, specify either the FARGATE or FARGATE_SPOT capacity
 // providers. The Fargate capacity providers are available to all accounts and only
 // need to be associated with a cluster to be used in a capacity provider strategy.
+// A capacity provider strategy may contain a maximum of 6 capacity providers.
 type CapacityProviderStrategyItem struct {
 
 	// The short name of the capacity provider.
@@ -284,9 +285,9 @@ type Cluster struct {
 	CapacityProviders []string
 
 	// The Amazon Resource Name (ARN) that identifies the cluster. The ARN contains the
-	// arn:aws:ecs namespace, followed by the Region of the cluster, the account ID of
-	// the cluster owner, the cluster namespace, and then the cluster name. For
-	// example, arn:aws:ecs:region:012345678910:cluster/test.
+	// arn:aws:ecs namespace, followed by the Region of the cluster, the Amazon Web
+	// Services account ID of the cluster owner, the cluster namespace, and then the
+	// cluster name. For example, arn:aws:ecs:region:012345678910:cluster/test.
 	ClusterArn *string
 
 	// A user-generated string that you use to identify your cluster.
@@ -1135,8 +1136,8 @@ type ContainerInstance struct {
 
 	// The Amazon Resource Name (ARN) of the container instance. The ARN contains the
 	// arn:aws:ecs namespace, followed by the Region of the container instance, the
-	// account ID of the container instance owner, the container-instance namespace,
-	// and then the container instance ID. For example,
+	// Amazon Web Services account ID of the container instance owner, the
+	// container-instance namespace, and then the container instance ID. For example,
 	// arn:aws:ecs:region:aws_account_id:container-instance/container_instance_ID.
 	ContainerInstanceArn *string
 
@@ -1889,9 +1890,13 @@ type HealthCheck struct {
 	// A string array representing the command that the container runs to determine if
 	// it is healthy. The string array must start with CMD to execute the command
 	// arguments directly, or CMD-SHELL to run the command with the container's default
-	// shell. For example: [ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ] An
-	// exit code of 0 indicates success, and non-zero exit code indicates failure. For
-	// more information, see HealthCheck in the Create a container
+	// shell. When you use the Amazon Web Services Management Console JSON panel, the
+	// Command Line Interface, or the APIs, you should enclose the list of commands in
+	// brackets, as shown below. [ "CMD-SHELL", "curl -f http://localhost/ || exit 1" ]
+	// You do not need to include the brackets when you use the Amazon Web Services
+	// Management Consoleas shown below.  "CMD-SHELL", "curl -f http://localhost/ ||
+	// exit 1"  An exit code of 0 indicates success, and non-zero exit code indicates
+	// failure. For more information, see HealthCheck in the Create a container
 	// (https://docs.docker.com/engine/api/v1.35/#operation/ContainerCreate) section of
 	// the Docker Remote API (https://docs.docker.com/engine/api/v1.35/).
 	//
@@ -2391,9 +2396,10 @@ type NetworkInterface struct {
 // Fargate launch type, task placement constraints are not supported.
 type PlacementConstraint struct {
 
-	// A cluster query language expression to apply to the constraint. You cannot
-	// specify an expression if the constraint type is distinctInstance. For more
-	// information, see Cluster Query Language
+	// A cluster query language expression to apply to the constraint. The expression
+	// can have a maximum length of 2000 characters. You can't specify an expression if
+	// the constraint type is distinctInstance. For more information, see Cluster query
+	// language
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/cluster-query-language.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	Expression *string
@@ -2794,8 +2800,8 @@ type Service struct {
 	SchedulingStrategy SchedulingStrategy
 
 	// The ARN that identifies the service. The ARN contains the arn:aws:ecs namespace,
-	// followed by the Region of the service, the account ID of the service owner, the
-	// service namespace, and then the service name. For example,
+	// followed by the Region of the service, the Amazon Web Services account ID of the
+	// service owner, the service namespace, and then the service name. For example,
 	// arn:aws:ecs:region:012345678910:service/my-service.
 	ServiceArn *string
 

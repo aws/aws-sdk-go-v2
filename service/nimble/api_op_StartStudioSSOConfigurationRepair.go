@@ -12,13 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Repairs the SSO configuration for a given studio. If the studio has a valid AWS
-// SSO configuration currently associated with it, this operation will fail with a
-// validation error. If the studio does not have a valid AWS SSO configuration
-// currently associated with it, then a new AWS SSO application is created for the
-// studio and the studio is changed to the READY state. After the AWS SSO
-// application is repaired, you must use the Amazon Nimble Studio console to add
-// administrators and users to your studio.
+// Repairs the SSO configuration for a given studio. If the studio has a valid
+// Amazon Web Services SSO configuration currently associated with it, this
+// operation will fail with a validation error. If the studio does not have a valid
+// Amazon Web Services SSO configuration currently associated with it, then a new
+// Amazon Web Services SSO application is created for the studio and the studio is
+// changed to the READY state. After the Amazon Web Services SSO application is
+// repaired, you must use the Amazon Nimble Studio console to add administrators
+// and users to your studio.
 func (c *Client) StartStudioSSOConfigurationRepair(ctx context.Context, params *StartStudioSSOConfigurationRepairInput, optFns ...func(*Options)) (*StartStudioSSOConfigurationRepairOutput, error) {
 	if params == nil {
 		params = &StartStudioSSOConfigurationRepairInput{}

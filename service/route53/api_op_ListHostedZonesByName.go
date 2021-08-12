@@ -13,16 +13,17 @@ import (
 
 // Retrieves a list of your hosted zones in lexicographic order. The response
 // includes a HostedZones child element for each hosted zone created by the current
-// account. ListHostedZonesByName sorts hosted zones by name with the labels
-// reversed. For example: com.example.www. Note the trailing dot, which can change
-// the sort order in some circumstances. If the domain name includes escape
-// characters or Punycode, ListHostedZonesByName alphabetizes the domain name using
-// the escaped or Punycoded value, which is the format that Amazon Route 53 saves
-// in its database. For example, to create a hosted zone for exämple.com, you
-// specify ex\344mple.com for the domain name. ListHostedZonesByName alphabetizes
-// it as: com.ex\344mple. The labels are reversed and alphabetized using the
-// escaped value. For more information about valid domain name formats, including
-// internationalized domain names, see DNS Domain Name Format
+// Amazon Web Services account. ListHostedZonesByName sorts hosted zones by name
+// with the labels reversed. For example: com.example.www. Note the trailing dot,
+// which can change the sort order in some circumstances. If the domain name
+// includes escape characters or Punycode, ListHostedZonesByName alphabetizes the
+// domain name using the escaped or Punycoded value, which is the format that
+// Amazon Route 53 saves in its database. For example, to create a hosted zone for
+// exämple.com, you specify ex\344mple.com for the domain name.
+// ListHostedZonesByName alphabetizes it as: com.ex\344mple. The labels are
+// reversed and alphabetized using the escaped value. For more information about
+// valid domain name formats, including internationalized domain names, see DNS
+// Domain Name Format
 // (https://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DomainNameFormat.html)
 // in the Amazon Route 53 Developer Guide. Route 53 returns up to 100 items in each
 // response. If you have a lot of hosted zones, use the MaxItems parameter to list
@@ -39,17 +40,17 @@ import (
 // current response.
 //
 // * If the value of IsTruncated in the response is true, there
-// are more hosted zones associated with the current account. If IsTruncated is
-// false, this response includes the last hosted zone that is associated with the
-// current account. The NextDNSName element and NextHostedZoneId elements are
-// omitted from the response.
+// are more hosted zones associated with the current Amazon Web Services account.
+// If IsTruncated is false, this response includes the last hosted zone that is
+// associated with the current account. The NextDNSName element and
+// NextHostedZoneId elements are omitted from the response.
 //
-// * The NextDNSName and NextHostedZoneId elements in
-// the response contain the domain name and the hosted zone ID of the next hosted
-// zone that is associated with the current account. If you want to list more
-// hosted zones, make another call to ListHostedZonesByName, and specify the value
-// of NextDNSName and NextHostedZoneId in the dnsname and hostedzoneid parameters,
-// respectively.
+// * The NextDNSName and
+// NextHostedZoneId elements in the response contain the domain name and the hosted
+// zone ID of the next hosted zone that is associated with the current Amazon Web
+// Services account. If you want to list more hosted zones, make another call to
+// ListHostedZonesByName, and specify the value of NextDNSName and NextHostedZoneId
+// in the dnsname and hostedzoneid parameters, respectively.
 func (c *Client) ListHostedZonesByName(ctx context.Context, params *ListHostedZonesByNameInput, optFns ...func(*Options)) (*ListHostedZonesByNameOutput, error) {
 	if params == nil {
 		params = &ListHostedZonesByNameInput{}
@@ -66,16 +67,16 @@ func (c *Client) ListHostedZonesByName(ctx context.Context, params *ListHostedZo
 }
 
 // Retrieves a list of the public and private hosted zones that are associated with
-// the current account in ASCII order by domain name.
+// the current Amazon Web Services account in ASCII order by domain name.
 type ListHostedZonesByNameInput struct {
 
 	// (Optional) For your first request to ListHostedZonesByName, include the dnsname
 	// parameter only if you want to specify the name of the first hosted zone in the
 	// response. If you don't include the dnsname parameter, Amazon Route 53 returns
-	// all of the hosted zones that were created by the current account, in ASCII
-	// order. For subsequent requests, include both dnsname and hostedzoneid
-	// parameters. For dnsname, specify the value of NextDNSName from the previous
-	// response.
+	// all of the hosted zones that were created by the current Amazon Web Services
+	// account, in ASCII order. For subsequent requests, include both dnsname and
+	// hostedzoneid parameters. For dnsname, specify the value of NextDNSName from the
+	// previous response.
 	DNSName *string
 
 	// (Optional) For your first request to ListHostedZonesByName, do not include the

@@ -102,7 +102,7 @@ type BotAliasSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Provided the identity of a the bot that was exported.
+// Provides the identity of a the bot that was exported.
 type BotExportSpecification struct {
 
 	// The identifier of the bot assigned by Amazon Lex.
@@ -827,6 +827,11 @@ type IntentClosingSetting struct {
 	// This member is required.
 	ClosingResponse *ResponseSpecification
 
+	// Specifies whether an intent's closing response is used. When this field is
+	// false, the closing response isn't sent to the user and no closing input from the
+	// user is used. If the active field isn't specified, the default is true.
+	Active *bool
+
 	noSmithyDocumentSerde
 }
 
@@ -850,6 +855,12 @@ type IntentConfirmationSetting struct {
 	//
 	// This member is required.
 	PromptSpecification *PromptSpecification
+
+	// Specifies whether the intent's confirmation is sent to the user. When this field
+	// is false, confirmation and declination responses aren't sent and processing
+	// continues as if the responses aren't present. If the active field isn't
+	// specified, the default is true.
+	Active *bool
 
 	noSmithyDocumentSerde
 }
@@ -1533,6 +1544,12 @@ type WaitAndContinueSpecification struct {
 	//
 	// This member is required.
 	WaitingResponse *ResponseSpecification
+
+	// Specifies whether the bot will wait for a user to respond. When this field is
+	// false, wait and continue responses for a slot aren't used and the bot expects an
+	// appropriate response within the configured timeout. If the active field isn't
+	// specified, the default is true.
+	Active *bool
 
 	// A response that Amazon Lex sends periodically to the user to indicate that the
 	// bot is still waiting for input from the user.

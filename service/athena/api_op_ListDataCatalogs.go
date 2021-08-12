@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the data catalogs in the current AWS account.
+// Lists the data catalogs in the current Amazon Web Services account.
 func (c *Client) ListDataCatalogs(ctx context.Context, params *ListDataCatalogsInput, optFns ...func(*Options)) (*ListDataCatalogsOutput, error) {
 	if params == nil {
 		params = &ListDataCatalogsInput{}

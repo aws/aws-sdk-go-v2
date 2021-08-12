@@ -59,7 +59,7 @@ type GetOpsSummaryInput struct {
 
 type GetOpsSummaryOutput struct {
 
-	// The list of aggregated and filtered OpsData.
+	// The list of aggregated details and filtered OpsData.
 	Entities []types.OpsEntity
 
 	// The token for the next set of items to return. Use this token to get the next

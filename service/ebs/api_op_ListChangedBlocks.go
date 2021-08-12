@@ -59,7 +59,7 @@ type ListChangedBlocksInput struct {
 
 type ListChangedBlocksOutput struct {
 
-	// The size of the block.
+	// The size of the blocks in the snapshot, in bytes.
 	BlockSize *int32
 
 	// An array of objects containing information about the changed blocks.

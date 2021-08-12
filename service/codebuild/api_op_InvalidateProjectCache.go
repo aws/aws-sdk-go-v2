@@ -28,7 +28,7 @@ func (c *Client) InvalidateProjectCache(ctx context.Context, params *InvalidateP
 
 type InvalidateProjectCacheInput struct {
 
-	// The name of the AWS CodeBuild build project that the cache is reset for.
+	// The name of the CodeBuild build project that the cache is reset for.
 	//
 	// This member is required.
 	ProjectName *string

@@ -1,0 +1,25 @@
+{
+    "id": "4bd5af6c-cf0b-4a1c-a436-59ea5c56b78d",
+    "type": "feature",
+    "description": "API client updated",
+    "modules": [
+        "service/athena",
+        "service/autoscaling",
+        "service/chime",
+        "service/chimesdkidentity",
+        "service/chimesdkmessaging",
+        "service/codebuild",
+        "service/connect",
+        "service/ebs",
+        "service/ecs",
+        "service/lexmodelsv2",
+        "service/lightsail",
+        "service/nimble",
+        "service/rekognition",
+        "service/route53",
+        "service/snowdevicemanagement",
+        "service/ssm",
+        "service/synthetics",
+        "service/wafv2"
+    ]
+}

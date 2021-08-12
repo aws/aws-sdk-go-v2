@@ -1,0 +1,1884 @@
+{
+    "smithy": "1.0",
+    "metadata": {
+        "suppressions": [
+            {
+                "id": "HttpMethodSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpResponseCodeSemantics",
+                "namespace": "*"
+            },
+            {
+                "id": "PaginatedTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpHeaderTrait",
+                "namespace": "*"
+            },
+            {
+                "id": "HttpUriConflict",
+                "namespace": "*"
+            },
+            {
+                "id": "Service",
+                "namespace": "*"
+            }
+        ]
+    },
+    "shapes": {
+        "com.amazonaws.chimesdkidentity#AppInstance": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the messaging instance.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an <code>AppInstance</code>.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkidentity#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which an <code>AppInstance</code> was created. In epoch milliseconds.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkidentity#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time an <code>AppInstance</code> was last updated. In epoch milliseconds.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkidentity#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata of an <code>AppInstance</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of an <code>AppInstance</code>, an instance of an Amazon Chime SDK messaging\n         application.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceAdmin": {
+            "type": "structure",
+            "members": {
+                "Admin": {
+                    "target": "com.amazonaws.chimesdkidentity#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstanceAdmin</code> data.</p>"
+                    }
+                },
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code> for which the user is an administrator.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkidentity#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which an administrator was created.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of an <code>AppInstanceAdmin</code>.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceAdminList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkidentity#AppInstanceAdminSummary"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceAdminSummary": {
+            "type": "structure",
+            "members": {
+                "Admin": {
+                    "target": "com.amazonaws.chimesdkidentity#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the <code>AppInstanceAdmin</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of the details of an <code>AppInstanceAdmin</code>.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkidentity#AppInstanceSummary"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceRetentionSettings": {
+            "type": "structure",
+            "members": {
+                "ChannelRetentionSettings": {
+                    "target": "com.amazonaws.chimesdkidentity#ChannelRetentionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The length of time in days to retain the messages in a channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the data-retention settings for an <code>AppInstance</code>.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceSummary": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>AppInstance</code> ARN.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the <code>AppInstance</code>.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkidentity#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata of the <code>AppInstance</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of the data for an <code>AppInstance</code>.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceUser": {
+            "type": "structure",
+            "members": {
+                "AppInstanceUserArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the <code>AppInstanceUser</code>.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkidentity#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata of the <code>AppInstanceUser</code>.</p>"
+                    }
+                },
+                "CreatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkidentity#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the <code>AppInstanceUser</code> was created.</p>"
+                    }
+                },
+                "LastUpdatedTimestamp": {
+                    "target": "com.amazonaws.chimesdkidentity#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the <code>AppInstanceUser</code> was last updated.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of an <code>AppInstanceUser</code>.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceUserList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkidentity#AppInstanceUserSummary"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#AppInstanceUserSummary": {
+            "type": "structure",
+            "members": {
+                "AppInstanceUserArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of an <code>AppInstanceUser</code>.</p>"
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkidentity#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata of the <code>AppInstanceUser</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary of the details of an <code>AppInstanceUser</code>.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#BadRequestException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkidentity#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkidentity#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The input parameters don't match the service's restrictions.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ChannelRetentionSettings": {
+            "type": "structure",
+            "members": {
+                "RetentionDays": {
+                    "target": "com.amazonaws.chimesdkidentity#RetentionDays",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time in days to retain the messages in a channel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of the retention settings for a channel.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ChimeArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 5,
+                    "max": 1600
+                },
+                "smithy.api#pattern": "^arn:[a-z0-9-\\.]{1,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[a-z0-9-\\.]{0,63}:[^/].{0,1023}$"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ChimeIdentityService": {
+            "type": "service",
+            "version": "2021-04-20",
+            "operations": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#CreateAppInstance"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#CreateAppInstanceAdmin"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#CreateAppInstanceUser"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#DeleteAppInstance"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#DeleteAppInstanceAdmin"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#DeleteAppInstanceUser"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#DescribeAppInstance"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#DescribeAppInstanceAdmin"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#DescribeAppInstanceUser"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#GetAppInstanceRetentionSettings"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ListAppInstanceAdmins"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ListAppInstances"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ListAppInstanceUsers"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#PutAppInstanceRetentionSettings"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UpdateAppInstance"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UpdateAppInstanceUser"
+                }
+            ],
+            "traits": {
+                "aws.api#service": {
+                    "sdkId": "Chime SDK Identity",
+                    "arnNamespace": "chime",
+                    "cloudFormationName": "ChimeSDKIdentity",
+                    "cloudTrailEventSource": "chimesdkidentity.amazonaws.com",
+                    "endpointPrefix": "identity-chime"
+                },
+                "aws.auth#sigv4": {
+                    "name": "chime"
+                },
+                "aws.protocols#restJson1": {},
+                "smithy.api#documentation": "<p>The Amazon Chime SDK Identity APIs in this section allow software developers to create\n         and manage unique instances of their messaging applications. These APIs provide the\n         overarching framework for creating and sending messages. For more information about the\n         identity APIs, refer to .</p>",
+                "smithy.api#title": "Amazon Chime SDK Identity"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ClientRequestToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 2,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[-_a-zA-Z0-9]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkidentity#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkidentity#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request could not be processed because of conflict in the current state of the\n         resource.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#CreateAppInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#CreateAppInstanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an Amazon Chime SDK messaging <code>AppInstance</code> under an AWS account.\n         Only SDK messaging customers use this API. <code>CreateAppInstance</code> supports\n         idempotency behavior as described in the AWS API Standard.</p>\n         <p>identity</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/app-instances",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstanceAdmin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#CreateAppInstanceAdminRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#CreateAppInstanceAdminResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Promotes an <code>AppInstanceUser</code> to an <code>AppInstanceAdmin</code>. The\n         promoted user can perform the following actions. </p>\n\n         <ul>\n            <li>\n               <p>\n                  <code>ChannelModerator</code> actions across all channels in the\n                  <code>AppInstance</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>DeleteChannelMessage</code> actions.</p>\n            </li>\n         </ul>\n\n         <p>Only an <code>AppInstanceUser</code> can be promoted to an <code>AppInstanceAdmin</code>\n         role.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/app-instances/{AppInstanceArn}/admins",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstanceAdminRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceAdminArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the administrator of the current <code>AppInstance</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstanceAdminResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceAdmin": {
+                    "target": "com.amazonaws.chimesdkidentity#Identity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name and ARN of the admin for the <code>AppInstance</code>.</p>"
+                    }
+                },
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the of the admin for the <code>AppInstance</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the <code>AppInstance</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkidentity#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata of the <code>AppInstance</code>. Limited to a 1KB string in UTF-8.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.chimesdkidentity#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The <code>ClientRequestToken</code> of the <code>AppInstance</code>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkidentity#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the <code>AppInstanceUser</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstanceResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Number (ARN) of the <code>AppInstance</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstanceUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#CreateAppInstanceUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#CreateAppInstanceUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a user under an Amazon Chime <code>AppInstance</code>. The request consists of a\n         unique <code>appInstanceUserId</code> and <code>Name</code> for that user.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/app-instance-users",
+                    "code": 201
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstanceUserRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppInstanceUserId": {
+                    "target": "com.amazonaws.chimesdkidentity#UserId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user ID of the <code>AppInstance</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's name.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkidentity#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request's metadata. Limited to a 1KB string in UTF-8.</p>"
+                    }
+                },
+                "ClientRequestToken": {
+                    "target": "com.amazonaws.chimesdkidentity#ClientRequestToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token assigned to the user requesting an <code>AppInstance</code>.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.chimesdkidentity#TagList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags assigned to the <code>AppInstanceUser</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#CreateAppInstanceUserResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceUserArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user's ARN.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DeleteAppInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#DeleteAppInstanceRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an <code>AppInstance</code> and all associated data asynchronously.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/app-instances/{AppInstanceArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DeleteAppInstanceAdmin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#DeleteAppInstanceAdminRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Demotes an <code>AppInstanceAdmin</code> to an <code>AppInstanceUser</code>. This action\n         does not delete the user.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/app-instances/{AppInstanceArn}/admins/{AppInstanceAdminArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DeleteAppInstanceAdminRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceAdminArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>'s administrator.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DeleteAppInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DeleteAppInstanceUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#DeleteAppInstanceUserRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an <code>AppInstanceUser</code>.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/app-instance-users/{AppInstanceUserArn}",
+                    "code": 204
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DeleteAppInstanceUserRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceUserArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the user request being deleted.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#DescribeAppInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#DescribeAppInstanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the full details of an <code>AppInstance</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app-instances/{AppInstanceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstanceAdmin": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#DescribeAppInstanceAdminRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#DescribeAppInstanceAdminResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the full details of an <code>AppInstanceAdmin</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app-instances/{AppInstanceArn}/admins/{AppInstanceAdminArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstanceAdminRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceAdminArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceAdmin</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstanceAdminResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceAdmin": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstanceAdmin",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN and name of the <code>AppInstanceUser</code>, the ARN of the\n            <code>AppInstance</code>, and the created and last-updated timestamps. All timestamps\n         use epoch milliseconds.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstanceResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstance": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstance",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN, metadata, created and last-updated timestamps, and the name of the\n            <code>AppInstance</code>. All timestamps use epoch milliseconds.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstanceUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#DescribeAppInstanceUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#DescribeAppInstanceUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the full details of an <code>AppInstanceUser</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app-instance-users/{AppInstanceUserArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstanceUserRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceUserArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#DescribeAppInstanceUserResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceUser": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstanceUser",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the <code>AppInstanceUser</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ErrorCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "BadRequest",
+                        "name": "BadRequest"
+                    },
+                    {
+                        "value": "Conflict",
+                        "name": "Conflict"
+                    },
+                    {
+                        "value": "Forbidden",
+                        "name": "Forbidden"
+                    },
+                    {
+                        "value": "NotFound",
+                        "name": "NotFound"
+                    },
+                    {
+                        "value": "PreconditionFailed",
+                        "name": "PreconditionFailed"
+                    },
+                    {
+                        "value": "ResourceLimitExceeded",
+                        "name": "ResourceLimitExceeded"
+                    },
+                    {
+                        "value": "ServiceFailure",
+                        "name": "ServiceFailure"
+                    },
+                    {
+                        "value": "AccessDenied",
+                        "name": "AccessDenied"
+                    },
+                    {
+                        "value": "ServiceUnavailable",
+                        "name": "ServiceUnavailable"
+                    },
+                    {
+                        "value": "Throttled",
+                        "name": "Throttled"
+                    },
+                    {
+                        "value": "Throttling",
+                        "name": "Throttling"
+                    },
+                    {
+                        "value": "Unauthorized",
+                        "name": "Unauthorized"
+                    },
+                    {
+                        "value": "Unprocessable",
+                        "name": "Unprocessable"
+                    },
+                    {
+                        "value": "VoiceConnectorGroupAssociationsExist",
+                        "name": "VoiceConnectorGroupAssociationsExist"
+                    },
+                    {
+                        "value": "PhoneNumberAssociationsExist",
+                        "name": "PhoneNumberAssociationsExist"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ForbiddenException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkidentity#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkidentity#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client is permanently forbidden from making the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 403
+            }
+        },
+        "com.amazonaws.chimesdkidentity#GetAppInstanceRetentionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#GetAppInstanceRetentionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#GetAppInstanceRetentionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the retention settings for an <code>AppInstance</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app-instances/{AppInstanceArn}/retention-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#GetAppInstanceRetentionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#GetAppInstanceRetentionSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceRetentionSettings": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstanceRetentionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The retention settings for the <code>AppInstance</code>.</p>"
+                    }
+                },
+                "InitiateDeletionTimestamp": {
+                    "target": "com.amazonaws.chimesdkidentity#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The timestamp representing the time at which the specified items are retained, in Epoch\n         Seconds.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#Identity": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN in an Identity.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name in an Identity.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a user.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstanceAdmins": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#ListAppInstanceAdminsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#ListAppInstanceAdminsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the administrators in the <code>AppInstance</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app-instances/{AppInstanceArn}/admins",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstanceAdminsRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chimesdkidentity#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of administrators that you want to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkidentity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of administrators is\n         reached.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstanceAdminsResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>"
+                    }
+                },
+                "AppInstanceAdmins": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstanceAdminList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information for each administrator.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkidentity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token returned from previous API requests until the number of administrators is\n         reached.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstanceUsers": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#ListAppInstanceUsersRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#ListAppInstanceUsersResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>List all <code>AppInstanceUsers</code> created under a single\n         <code>AppInstance</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app-instance-users",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstanceUsersRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpQuery": "app-instance-arn",
+                        "smithy.api#required": {}
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.chimesdkidentity#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of requests that you want returned.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkidentity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested users are returned.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstanceUsersResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>"
+                    }
+                },
+                "AppInstanceUsers": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstanceUserList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information for each requested <code>AppInstanceUser</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkidentity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token passed by previous API calls until all requested users are returned.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstances": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#ListAppInstancesRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#ListAppInstancesResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all Amazon Chime <code>AppInstance</code>s created under a single AWS\n         account.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/app-instances",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstancesRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.chimesdkidentity#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of <code>AppInstance</code>s that you want to return.</p>",
+                        "smithy.api#httpQuery": "max-results"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkidentity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token passed by previous API requests until you reach the maximum number of\n            <code>AppInstances</code>.</p>",
+                        "smithy.api#httpQuery": "next-token"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ListAppInstancesResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstances": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstanceList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information for each <code>AppInstance</code>.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.chimesdkidentity#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token passed by previous API requests until the maximum number of\n            <code>AppInstance</code>s is reached.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#MaxResults": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#Metadata": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": ".*",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#NextToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 2048
+                },
+                "smithy.api#pattern": ".*",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#NonEmptyResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#PutAppInstanceRetentionSettings": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#PutAppInstanceRetentionSettingsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#PutAppInstanceRetentionSettingsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sets the amount of time in days that a given <code>AppInstance</code> retains\n         data.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/app-instances/{AppInstanceArn}/retention-settings",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#PutAppInstanceRetentionSettingsRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AppInstanceRetentionSettings": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstanceRetentionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time in days to retain data. Data type: number.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#PutAppInstanceRetentionSettingsResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceRetentionSettings": {
+                    "target": "com.amazonaws.chimesdkidentity#AppInstanceRetentionSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time in days to retain data. Data type: number.</p>"
+                    }
+                },
+                "InitiateDeletionTimestamp": {
+                    "target": "com.amazonaws.chimesdkidentity#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time at which the API deletes data.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ResourceLimitExceededException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkidentity#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkidentity#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The request exceeds the resource limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 400
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ResourceName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u007E\\u0085\\u00A0-\\uD7FF\\uE000-\\uFFFD\\u10000-\\u10FFFF]*$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#RetentionDays": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 5475
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ServiceFailureException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkidentity#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkidentity#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service encountered an unexpected error.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 500
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ServiceUnavailableException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkidentity#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkidentity#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service is currently unavailable.</p>",
+                "smithy.api#error": "server",
+                "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.chimesdkidentity#String": {
+            "type": "string"
+        },
+        "com.amazonaws.chimesdkidentity#Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.chimesdkidentity#TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The key of the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.chimesdkidentity#TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of the tag.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes a tag applied to a resource.</p>"
+            }
+        },
+        "com.amazonaws.chimesdkidentity#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#TagList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.chimesdkidentity#Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#ThrottledClientException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkidentity#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkidentity#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client exceeded its request rate limit.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.chimesdkidentity#Timestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.chimesdkidentity#UnauthorizedClientException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.chimesdkidentity#ErrorCode"
+                },
+                "Message": {
+                    "target": "com.amazonaws.chimesdkidentity#String"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The client is not currently authorized to make the request.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 401
+            }
+        },
+        "com.amazonaws.chimesdkidentity#UpdateAppInstance": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#UpdateAppInstanceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#UpdateAppInstanceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates <code>AppInstance</code> metadata.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/app-instances/{AppInstanceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#UpdateAppInstanceRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#NonEmptyResourceName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name that you want to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkidentity#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata that you want to change.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#UpdateAppInstanceResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstance</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#UpdateAppInstanceUser": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.chimesdkidentity#UpdateAppInstanceUserRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.chimesdkidentity#UpdateAppInstanceUserResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.chimesdkidentity#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ForbiddenException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceFailureException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#ThrottledClientException"
+                },
+                {
+                    "target": "com.amazonaws.chimesdkidentity#UnauthorizedClientException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates the details of an <code>AppInstanceUser</code>. You can update names and\n         metadata.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/app-instance-users/{AppInstanceUserArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#UpdateAppInstanceUserRequest": {
+            "type": "structure",
+            "members": {
+                "AppInstanceUserArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.chimesdkidentity#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the <code>AppInstanceUser</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Metadata": {
+                    "target": "com.amazonaws.chimesdkidentity#Metadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metadata of the <code>AppInstanceUser</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#UpdateAppInstanceUserResponse": {
+            "type": "structure",
+            "members": {
+                "AppInstanceUserArn": {
+                    "target": "com.amazonaws.chimesdkidentity#ChimeArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the <code>AppInstanceUser</code>.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.chimesdkidentity#UserId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^[A-Za-z0-9]([A-Za-z0-9\\:\\-\\_\\.\\@]{0,62}[A-Za-z0-9])?$",
+                "smithy.api#sensitive": {}
+            }
+        },
+        "com.amazonaws.chimesdkidentity#UserName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "\\S",
+                "smithy.api#sensitive": {}
+            }
+        }
+    }
+}

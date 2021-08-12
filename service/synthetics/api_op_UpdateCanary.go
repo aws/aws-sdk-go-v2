@@ -86,6 +86,15 @@ type UpdateCanaryInput struct {
 	// The number of days to retain data about successful runs of this canary.
 	SuccessRetentionPeriodInDays *int32
 
+	// Defines the screenshots to use as the baseline for comparisons during visual
+	// monitoring comparisons during future runs of this canary. If you omit this
+	// parameter, no changes are made to any baseline screenshots that the canary might
+	// be using already. Visual monitoring is supported only on canaries running the
+	// syn-puppeteer-node-3.2 runtime or later. For more information, see  Visual
+	// monitoring
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html)
+	// and  Visual monitoring blueprint
+	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html)
 	VisualReference *types.VisualReferenceInput
 
 	// If this canary is to test an endpoint in a VPC, this structure contains
