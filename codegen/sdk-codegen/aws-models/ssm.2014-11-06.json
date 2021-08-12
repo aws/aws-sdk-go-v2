@@ -59,7 +59,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.ssm#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID where the current document is shared.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID where the current document is shared.</p>"
                     }
                 },
                 "SharedDocumentVersion": {
@@ -70,7 +70,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information includes the account ID where the current document is shared and the\n   version shared with that account.</p>"
+                "smithy.api#documentation": "<p>Information includes the Amazon Web Services account ID where the current document is shared and the\n   version shared with that account.</p>"
             }
         },
         "com.amazonaws.ssm#AccountSharingInfoList": {
@@ -82,7 +82,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A list of of accounts where the current document is shared and the version shared with\n   each account.</p>"
+                "smithy.api#documentation": "<p>A list of of Amazon Web Services accounts where the current document is shared and the version shared with\n   each account.</p>"
             }
         },
         "com.amazonaws.ssm#Accounts": {
@@ -829,7 +829,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                        "smithy.api#documentation": "<p>The instance ID.</p>"
                     }
                 },
                 "AssociationId": {
@@ -936,7 +936,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                        "smithy.api#documentation": "<p>The instance ID.</p>"
                     }
                 },
                 "AssociationVersion": {
@@ -1068,7 +1068,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The combination of Regions and accounts where you want to run the\n   association.</p>"
+                        "smithy.api#documentation": "<p>The combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the\n   association.</p>"
                     }
                 }
             },
@@ -1769,7 +1769,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The combination of Regions and accounts where you wanted to run the association\n   when this association version was created.</p>"
+                        "smithy.api#documentation": "<p>The combination of Amazon Web Services Regions and Amazon Web Services accounts where you wanted to run the association\n   when this association version was created.</p>"
                     }
                 }
             },
@@ -2203,7 +2203,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>The combination of Regions and/or accounts where you want to run the\n   Automation.</p>"
+                        "smithy.api#documentation": "<p>The combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the\n   Automation.</p>"
                     }
                 },
                 "ProgressCounters": {
@@ -2520,7 +2520,7 @@
                 "AutomationType": {
                     "target": "com.amazonaws.ssm#AutomationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or\n   CrossAccount. CrossAccount is an Automation that runs in multiple Regions and\n   accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple Regions and accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>Use this filter with <a>DescribeAutomationExecutions</a>. Specify either Local or\n   CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web Services Regions and\n   Amazon Web Services accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple Amazon Web Services Regions and accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
                     }
                 },
                 "AutomationSubtype": {
@@ -3104,7 +3104,7 @@
                 "OutputS3Region": {
                     "target": "com.amazonaws.ssm#S3Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager\n   automatically determines the Region of the S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager\n   automatically determines the Amazon Web Services Region of the S3 bucket.</p>"
                     }
                 },
                 "OutputS3BucketName": {
@@ -4142,7 +4142,7 @@
                 "IamRole": {
                     "target": "com.amazonaws.ssm#IamRole",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Identity and Access Management (IAM) role that you want to assign to the managed\n   instance. This IAMrole must provide AssumeRole permissions for the Amazon Web Services Systems Manager\n   service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an\n     IAM service role for a hybrid environment</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The name of the Identity and Access Management (IAM) role that you want to assign to\n   the managed instance. This IAM role must provide AssumeRole permissions for the\n   Amazon Web Services Systems Manager service principal <code>ssm.amazonaws.com</code>. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html\">Create an\n     IAM service role for a hybrid environment</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4310,14 +4310,14 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSM document that contains the configuration information for the instance.\n   You can specify Command or Automation runbooks.</p>\n         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is\n   shared with you from another account.</p>\n         <p>For SSM documents that are shared with you from other accounts, you must specify the\n   complete SSM document ARN, in the following format:</p>\n         <p>\n            <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>\n            </code>\n         </p>\n         <p>For example:</p>\n         <p>\n            <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>\n         </p>\n         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need\n   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or\n    <code>My-Document</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the SSM document that contains the configuration information for the instance.\n   You can specify Command or Automation runbooks.</p>\n         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is\n   shared with you from another account.</p>\n         <p>For SSM documents that are shared with you from other Amazon Web Services accounts, you must specify the\n   complete SSM document ARN, in the following format:</p>\n         <p>\n            <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>\n            </code>\n         </p>\n         <p>For example:</p>\n         <p>\n            <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>\n         </p>\n         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need\n   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or\n    <code>My-Document</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance. </p>"
+                        "smithy.api#documentation": "<p>The instance ID.</p>\n         <note>\n            <p>\n               <code>InstanceId</code> has been deprecated. To specify an instance ID for an association,\n    use the <code>Targets</code> parameter. Requests that include the\n    parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version\n    2.0 or later will fail. In addition, if you use the parameter\n     <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,\n     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,\n     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you\n    must use the <code>Targets</code> parameter.</p>\n         </note>"
                     }
                 },
                 "Parameters": {
@@ -4432,7 +4432,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSM Command document or Automation runbook that contains the configuration\n   information for the instance.</p>\n         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is\n   shared with you from another account.</p>\n         <p>For Systems Manager documents (SSM documents) that are shared with you from other accounts, you\n   must specify the complete SSM document ARN, in the following format:</p>\n         <p>\n            <code>arn:<i>partition</i>:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>\n            </code>\n         </p>\n         <p>For example:</p>\n         <p>\n            <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>\n         </p>\n         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need\n   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or\n    <code>My-Document</code>.</p>",
+                        "smithy.api#documentation": "<p>The name of the SSM Command document or Automation runbook that contains the configuration\n   information for the instance.</p>\n         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is\n   shared with you from another account.</p>\n         <p>For Systems Manager documents (SSM documents) that are shared with you from other Amazon Web Services accounts, you\n   must specify the complete SSM document ARN, in the following format:</p>\n         <p>\n            <code>arn:<i>partition</i>:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>\n            </code>\n         </p>\n         <p>For example:</p>\n         <p>\n            <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>\n         </p>\n         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need\n   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or\n    <code>My-Document</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4457,7 +4457,7 @@
                 "Targets": {
                     "target": "com.amazonaws.ssm#Targets",
                     "traits": {
-                        "smithy.api#documentation": "<p>The targets for the association. You can target instances by using tags, Amazon Web Services resource\n   groups, all instances in an account, or individual instance IDs. For more information about\n   choosing targets for an association, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html\">Using targets and rate controls with State Manager associations</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The targets for the association. You can target instances by using tags, Amazon Web Services resource\n   groups, all instances in an Amazon Web Services account, or individual instance IDs. For more information about\n   choosing targets for an association, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-state-manager-targets-and-rate-controls.html\">Using targets and rate controls with State Manager associations</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "ScheduleExpression": {
@@ -4523,7 +4523,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>A location is a combination of Regions and accounts where you want to run the\n   association. Use this action to create an association in multiple Regions and multiple\n   accounts.</p>"
+                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the\n   association. Use this action to create an association in multiple Regions and multiple\n   accounts.</p>"
                     }
                 }
             }
@@ -4950,7 +4950,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by\n   purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to\n   identify an environment or target Region. In this case, you could specify the following\n   key-value pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Region,Value=us-east-2</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   an OpsMetadata object. Tags enable you to categorize a resource in different ways, such as by\n   purpose, owner, or environment. For example, you might want to tag an OpsMetadata object to\n   identify an environment or target Amazon Web Services Region. In this case, you could specify the following\n   key-value pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Region,Value=us-east-2</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -5109,7 +5109,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A resource data sync helps you view data from multiple sources in a single location.\n   Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and\n    <code>SyncFromSource</code>.</p>\n         <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to\n   synchronize Inventory data from multiple Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html\">Configuring resource data\n    sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize\n   operational work items (OpsItems) and operational data (OpsData) from multiple Regions to a\n   single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple\n   accounts and Regions or <code>EntireOrganization</code> by using Organizations. For more\n   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html\">Setting up Systems Manager\n    Explorer to display data from multiple accounts and Regions</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>A resource data sync is an asynchronous operation that returns immediately. After a\n   successful initial sync is completed, the system continuously syncs data. To check the status of\n   a sync, use the <a>ListResourceDataSync</a>.</p>\n         <note>\n            <p>By default, data isn't encrypted in Amazon S3. We strongly recommend that you\n    enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you\n    secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p>\n         </note>"
+                "smithy.api#documentation": "<p>A resource data sync helps you view data from multiple sources in a single location.\n   Amazon Web Services Systems Manager offers two types of resource data sync: <code>SyncToDestination</code> and\n    <code>SyncFromSource</code>.</p>\n         <p>You can configure Systems Manager Inventory to use the <code>SyncToDestination</code> type to\n   synchronize Inventory data from multiple Amazon Web Services Regions to a single Amazon Simple Storage Service (Amazon S3) bucket. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-inventory-datasync.html\">Configuring resource data\n    sync for Inventory</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can configure Systems Manager Explorer to use the <code>SyncFromSource</code> type to synchronize\n   operational work items (OpsItems) and operational data (OpsData) from multiple Amazon Web Services Regions to a\n   single Amazon S3 bucket. This type can synchronize OpsItems and OpsData from multiple\n   Amazon Web Services accounts and Amazon Web Services Regions or <code>EntireOrganization</code> by using Organizations. For more\n   information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resource-data-sync.html\">Setting up Systems Manager\n    Explorer to display data from multiple accounts and Regions</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>A resource data sync is an asynchronous operation that returns immediately. After a\n   successful initial sync is completed, the system continuously syncs data. To check the status of\n   a sync, use the <a>ListResourceDataSync</a>.</p>\n         <note>\n            <p>By default, data isn't encrypted in Amazon S3. We strongly recommend that you\n    enable encryption in Amazon S3 to ensure secure data storage. We also recommend that you\n    secure access to the Amazon S3 bucket by creating a restrictive bucket policy. </p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#CreateResourceDataSyncRequest": {
@@ -5131,7 +5131,7 @@
                 "SyncType": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify <code>SyncToDestination</code> to create a resource data sync that synchronizes data\n   to an S3 bucket for Inventory. If you specify <code>SyncToDestination</code>, you must provide a\n   value for <code>S3Destination</code>. Specify <code>SyncFromSource</code> to synchronize data\n   from a single account and multiple Regions, or multiple accounts and Regions, as\n   listed in Organizations for Explorer. If you specify <code>SyncFromSource</code>, you must provide a\n   value for <code>SyncSource</code>. The default value is <code>SyncToDestination</code>.</p>"
+                        "smithy.api#documentation": "<p>Specify <code>SyncToDestination</code> to create a resource data sync that synchronizes data\n   to an S3 bucket for Inventory. If you specify <code>SyncToDestination</code>, you must provide a\n   value for <code>S3Destination</code>. Specify <code>SyncFromSource</code> to synchronize data\n   from a single account and multiple Regions, or multiple Amazon Web Services accounts and Amazon Web Services Regions, as\n   listed in Organizations for Explorer. If you specify <code>SyncFromSource</code>, you must provide a\n   value for <code>SyncSource</code>. The default value is <code>SyncToDestination</code>.</p>"
                     }
                 },
                 "SyncSource": {
@@ -5249,7 +5249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified\n   instance.</p>\n         <p>When you disassociate a document from an instance, it doesn't change the configuration of\n   the instance. To change the configuration state of an instance after you disassociate a document,\n   you must create a new document with the desired configuration and associate it with the\n   instance.</p>"
+                "smithy.api#documentation": "<p>Disassociates the specified Amazon Web Services Systems Manager document (SSM document) from the specified instance.\n   If you created the association by using the <code>Targets</code> parameter, then you must delete\n   the association by using the association ID.</p>\n         <p>When you disassociate a document from an instance, it doesn't change the configuration of\n   the instance. To change the configuration state of an instance after you disassociate a document,\n   you must create a new document with the desired configuration and associate it with the\n   instance.</p>"
             }
         },
         "com.amazonaws.ssm#DeleteAssociationRequest": {
@@ -5264,7 +5264,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                        "smithy.api#documentation": "<p>The instance ID.</p>\n         <note>\n            <p>\n               <code>InstanceId</code> has been deprecated. To specify an instance ID for an association,\n    use the <code>Targets</code> parameter. Requests that include the\n    parameter <code>InstanceID</code> with Systems Manager documents (SSM documents) that use schema version\n    2.0 or later will fail. In addition, if you use the parameter\n     <code>InstanceId</code>, you can't use the parameters <code>AssociationName</code>,\n     <code>DocumentVersion</code>, <code>MaxErrors</code>, <code>MaxConcurrency</code>,\n     <code>OutputLocation</code>, or <code>ScheduleExpression</code>. To use these parameters, you\n    must use the <code>Targets</code> parameter.</p>\n         </note>"
                     }
                 },
                 "AssociationId": {
@@ -5518,7 +5518,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a parameter from the system.</p>"
+                "smithy.api#documentation": "<p>Delete a parameter from the system. After deleting a parameter, wait for at least 30 seconds\n   to create a parameter with the same name.</p>"
             }
         },
         "com.amazonaws.ssm#DeleteParameterRequest": {
@@ -5551,7 +5551,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Delete a list of parameters.</p>"
+                "smithy.api#documentation": "<p>Delete a list of parameters. After deleting a parameter, wait for at least 30 seconds to\n   create a parameter with the same name.</p>"
             }
         },
         "com.amazonaws.ssm#DeleteParametersRequest": {
@@ -5560,7 +5560,7 @@
                 "Names": {
                     "target": "com.amazonaws.ssm#ParameterNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The names of the parameters to delete.</p>",
+                        "smithy.api#documentation": "<p>The names of the parameters to delete. After deleting a parameter, wait for at least 30\n   seconds to create a parameter with the same name.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5992,7 +5992,7 @@
                 "ActivationList": {
                     "target": "com.amazonaws.ssm#ActivationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of activations for your account.</p>"
+                        "smithy.api#documentation": "<p>A list of activations for your Amazon Web Services account.</p>"
                     }
                 },
                 "NextToken": {
@@ -6029,7 +6029,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the association for the specified target or instance. If you created the\n   association by using the <code>Targets</code> parameter, then you must retrieve the association\n   by using the association ID. If you created the association by specifying an instance ID and an\n   Amazon Web Services Systems Manager document (SSM document), then you retrieve the association by specifying the document\n   name and the instance ID. </p>"
+                "smithy.api#documentation": "<p>Describes the association for the specified target or instance. If you created the\n   association by using the <code>Targets</code> parameter, then you must retrieve the association\n   by using the association ID.</p>"
             }
         },
         "com.amazonaws.ssm#DescribeAssociationExecutionTargets": {
@@ -6512,7 +6512,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the\n   document, you are the owner. If a document is shared, it can either be shared privately (by\n   specifying a user's account ID) or publicly (<i>All</i>). </p>"
+                "smithy.api#documentation": "<p>Describes the permissions for a Amazon Web Services Systems Manager document (SSM document). If you created the\n   document, you are the owner. If a document is shared, it can either be shared privately (by\n   specifying a user's Amazon Web Services account ID) or publicly (<i>All</i>). </p>"
             }
         },
         "com.amazonaws.ssm#DescribeDocumentPermissionRequest": {
@@ -6553,13 +6553,13 @@
                 "AccountIds": {
                     "target": "com.amazonaws.ssm#AccountIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account IDs that have permission to use this document. The ID can be either an\n   account or <i>All</i>.</p>"
+                        "smithy.api#documentation": "<p>The account IDs that have permission to use this document. The ID can be either an\n   Amazon Web Services account or <i>All</i>.</p>"
                     }
                 },
                 "AccountSharingInfoList": {
                     "target": "com.amazonaws.ssm#AccountSharingInfoList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of accounts where the current document is shared and the version shared with\n   each account.</p>"
+                        "smithy.api#documentation": "<p>A list of Amazon Web Services accounts where the current document is shared and the version shared with\n   each account.</p>"
                     }
                 },
                 "NextToken": {
@@ -7671,7 +7671,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the maintenance windows in an account.</p>",
+                "smithy.api#documentation": "<p>Retrieves the maintenance windows in an Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -7951,7 +7951,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the patch baselines in your account.</p>",
+                "smithy.api#documentation": "<p>Lists the patch baselines in your Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -10043,7 +10043,7 @@
                 "Target": {
                     "target": "com.amazonaws.ssm#SessionTarget",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>",
+                        "smithy.api#documentation": "<p>The instance ID.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -10131,7 +10131,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the current snapshot for the patch baseline the instance uses. This API is\n   primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p>\n         <note>\n            <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local AWS credentials and the operation fails. To avoid\n    this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of\n    Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command.\n    For example, run the command using the <code>AWS-RunShellScript</code> document or the\n     <code>AWS-RunPowerShellScript</code> document.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Retrieves the current snapshot for the patch baseline the instance uses. This API is\n   primarily used by the <code>AWS-RunPatchBaseline</code> Systems Manager document (SSM document).</p>\n         <note>\n            <p>If you run the command locally, such as with the Command Line Interface (CLI), the system attempts to use your local Amazon Web Services credentials and the operation fails. To avoid\n    this, you can run the command in the Amazon Web Services Systems Manager console. Use Run Command, a capability of\n    Amazon Web Services Systems Manager, with an SSM document that enables you to target an instance with a script or command.\n    For example, run the command using the <code>AWS-RunShellScript</code> document or the\n     <code>AWS-RunPowerShellScript</code> document.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#GetDeployablePatchSnapshotForInstanceRequest": {
@@ -10165,7 +10165,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>"
+                        "smithy.api#documentation": "<p>The instance ID.</p>"
                     }
                 },
                 "SnapshotId": {
@@ -10356,7 +10356,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Query inventory information.</p>",
+                "smithy.api#documentation": "<p>Query inventory information. This includes instance status, such as <code>Stopped</code> or\n    <code>Terminated</code>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -11293,7 +11293,7 @@
                 "Entities": {
                     "target": "com.amazonaws.ssm#OpsEntityList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of aggregated and filtered OpsData.</p>"
+                        "smithy.api#documentation": "<p>The list of aggregated details and filtered OpsData.</p>"
                     }
                 },
                 "NextToken": {
@@ -11327,7 +11327,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get information about a parameter by using the parameter name. Don't confuse this API\n   operation with the <a>GetParameters</a> API operation.</p>"
+                "smithy.api#documentation": "<p>Get information about a single parameter by specifying the parameter name.</p>\n         <note>\n            <p>To get information about more than one parameter at a time, use the <a>GetParameters</a> operation.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#GetParameterHistory": {
@@ -11416,7 +11416,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the parameter you want to query.</p>",
+                        "smithy.api#documentation": "<p>The name of the parameter you want to query.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11457,7 +11457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Get details of a parameter. Don't confuse this API operation with the <a>GetParameter</a> API operation.</p>"
+                "smithy.api#documentation": "<p>Get information about one or more parameters by specifying multiple parameter names.</p>\n         <note>\n            <p>To get information about a single parameter, you can use the <a>GetParameter</a>\n    operation instead.</p>\n         </note>"
             }
         },
         "com.amazonaws.ssm#GetParametersByPath": {
@@ -11574,7 +11574,7 @@
                 "Names": {
                     "target": "com.amazonaws.ssm#ParameterNameList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Names of the parameters for which you want to query information.</p>",
+                        "smithy.api#documentation": "<p>Names of the parameters for which you want to query information.</p>\n         <p>To query by parameter label, use <code>\"Name\": \"name:label\"</code>. To query by parameter\n   version, use <code>\"Name\": \"name:version\"</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -11691,7 +11691,7 @@
                 "BaselineId": {
                     "target": "com.amazonaws.ssm#BaselineId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the patch baseline to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The ID of the patch baseline to retrieve.</p>\n         <note>\n            <p>To retrieve information about an Amazon Web Services managed patch baseline, specify the full Amazon\n    Resource Name (ARN) of the baseline. For example, for the baseline\n     <code>AWS-AmazonLinuxDefaultPatchBaseline</code>, specify\n     <code>arn:aws:ssm:us-east-2:733109147000:patchbaseline/pb-0e392de35e7c563b7</code> instead of\n     <code>pb-0e392de35e7c563b7</code>.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -11810,7 +11810,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n            <code>ServiceSetting</code> is an account-level setting for an Amazon Web Services service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services\n   service team might create a default setting of <code>false</code>. This means the user can't use\n   this feature unless they change the setting to <code>true</code> and intentionally opt in for a\n   paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. Amazon Web Services services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>UpdateServiceSetting</a> API operation to\n   change the default setting. Or use the <a>ResetServiceSetting</a> to change the value\n   back to the original value defined by the Amazon Web Services service team.</p>\n         <p>Query the current service setting for the account. </p>"
+                "smithy.api#documentation": "<p>\n            <code>ServiceSetting</code> is an account-level setting for an Amazon Web Services service. This setting\n   defines how a user interacts with or uses a service or a feature of a service. For example, if an\n   Amazon Web Services service charges money to the account based on feature or service usage, then the Amazon Web Services\n   service team might create a default setting of <code>false</code>. This means the user can't use\n   this feature unless they change the setting to <code>true</code> and intentionally opt in for a\n   paid feature.</p>\n         <p>Services map a <code>SettingId</code> object to a setting value. Amazon Web Services services teams define\n   the default value for a <code>SettingId</code>. You can't create a new <code>SettingId</code>,\n   but you can overwrite the default value if you have the <code>ssm:UpdateServiceSetting</code>\n   permission for the setting. Use the <a>UpdateServiceSetting</a> API operation to\n   change the default setting. Or use the <a>ResetServiceSetting</a> to change the value\n   back to the original value defined by the Amazon Web Services service team.</p>\n         <p>Query the current service setting for the Amazon Web Services account. </p>"
             }
         },
         "com.amazonaws.ssm#GetServiceSettingRequest": {
@@ -14399,7 +14399,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all State Manager associations in the current account and Region. You\n   can limit the results to a specific State Manager association document or instance by specifying\n   a filter. State Manager is a capability of Amazon Web Services Systems Manager.</p>",
+                "smithy.api#documentation": "<p>Returns all State Manager associations in the current Amazon Web Services account and Amazon Web Services Region. You\n   can limit the results to a specific State Manager association document or instance by specifying\n   a filter. State Manager is a capability of Amazon Web Services Systems Manager.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -14569,7 +14569,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the commands requested by users of the account.</p>",
+                "smithy.api#documentation": "<p>Lists the commands requested by users of the Amazon Web Services account.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -14812,7 +14812,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Information about approval reviews for a version of an SSM document.</p>"
+                "smithy.api#documentation": "<p>Information about approval reviews for a version of a change template in Change Manager.</p>"
             }
         },
         "com.amazonaws.ssm#ListDocumentMetadataHistoryRequest": {
@@ -14821,14 +14821,14 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the document.</p>",
+                        "smithy.api#documentation": "<p>The name of the change template.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the document.</p>"
+                        "smithy.api#documentation": "<p>The version of the change template.</p>"
                     }
                 },
                 "Metadata": {
@@ -14859,25 +14859,25 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the document.</p>"
+                        "smithy.api#documentation": "<p>The name of the change template.</p>"
                     }
                 },
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the document.</p>"
+                        "smithy.api#documentation": "<p>The version of the change template.</p>"
                     }
                 },
                 "Author": {
                     "target": "com.amazonaws.ssm#DocumentAuthor",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user ID of the person in the organization who requested the document review.</p>"
+                        "smithy.api#documentation": "<p>The user ID of the person in the organization who requested the review of the\n   change template.</p>"
                     }
                 },
                 "Metadata": {
                     "target": "com.amazonaws.ssm#DocumentMetadataResponseInfo",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the response to the document approval request.</p>"
+                        "smithy.api#documentation": "<p>Information about the response to the change template approval request.</p>"
                     }
                 },
                 "NextToken": {
@@ -14979,7 +14979,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all Systems Manager (SSM) documents in the current account and Region. You can\n   limit the results of this request by using a filter.</p>",
+                "smithy.api#documentation": "<p>Returns all Systems Manager (SSM) documents in the current Amazon Web Services account and Amazon Web Services Region. You can\n   limit the results of this request by using a filter.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -15166,7 +15166,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of all OpsItem events in the current Region and account. You can\n   limit the results to events associated with specific OpsItems by specifying a filter.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all OpsItem events in the current Amazon Web Services Region and Amazon Web Services account. You can\n   limit the results to events associated with specific OpsItems by specifying a filter.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -15468,7 +15468,7 @@
                 "SyncType": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncType",
                     "traits": {
-                        "smithy.api#documentation": "<p>View a list of resource data syncs according to the sync type. Specify\n    <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify <code>SyncFromSource</code> to view resource data syncs from Organizations\n   or from multiple Regions.</p>"
+                        "smithy.api#documentation": "<p>View a list of resource data syncs according to the sync type. Specify\n    <code>SyncToDestination</code> to view resource data syncs that synchronize data to an Amazon S3 bucket. Specify <code>SyncFromSource</code> to view resource data syncs from Organizations\n   or from multiple Amazon Web Services Regions.</p>"
                     }
                 },
                 "NextToken": {
@@ -15575,7 +15575,7 @@
                 "S3Region": {
                     "target": "com.amazonaws.ssm#S3Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region where the S3 bucket is located.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region where the S3 bucket is located.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -17336,7 +17336,7 @@
                 "CreatedBy": {
                     "target": "com.amazonaws.ssm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the account that created the OpsItem.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services account that created the OpsItem.</p>"
                     }
                 },
                 "OpsItemType": {
@@ -17360,7 +17360,7 @@
                 "LastModifiedBy": {
                     "target": "com.amazonaws.ssm#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the account that last updated the OpsItem.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon Web Services account that last updated the OpsItem.</p>"
                     }
                 },
                 "LastModifiedTime": {
@@ -17461,7 +17461,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational issues impacting the performance and health of their Amazon Web Services resources. For\n   more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
+                "smithy.api#documentation": "<p>Operations engineers and IT professionals use Amazon Web Services Systems Manager OpsCenter to view, investigate, and\n   remediate operational work items (OpsItems) impacting the performance and health of their Amazon Web Services\n   resources. OpsCenter is integrated with Amazon EventBridge and Amazon CloudWatch. This\n   means you can configure these services to automatically create an OpsItem in OpsCenter when a\n    CloudWatch alarm enters the ALARM state or when EventBridge processes an event from\n   any Amazon Web Services service that publishes events. Configuring Amazon CloudWatch alarms and EventBridge events to automatically create OpsItems allows you to quickly diagnose and remediate\n   issues with Amazon Web Services resources from a single console.</p>\n         <p>To help you diagnose issues, each OpsItem includes contextually relevant information such as\n   the name and ID of the Amazon Web Services resource that generated the OpsItem, alarm or event details, alarm\n   history, and an alarm timeline graph. For the Amazon Web Services resource, OpsCenter aggregates information\n   from Config, CloudTrail logs, and EventBridge, so you don't have\n   to navigate across multiple console pages during your investigation. For more information, see\n    <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html\">OpsCenter</a> in the <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
             }
         },
         "com.amazonaws.ssm#OpsItemAlreadyExistsException": {
@@ -19027,7 +19027,7 @@
                     "code": "ParameterLimitExceeded",
                     "httpResponseCode": 429
                 },
-                "smithy.api#documentation": "<p>You have exceeded the number of parameters for this account. Delete one or more\n   parameters and try again.</p>",
+                "smithy.api#documentation": "<p>You have exceeded the number of parameters for this Amazon Web Services account. Delete one or more\n   parameters and try again.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -20521,31 +20521,31 @@
                 "TotalSteps": {
                     "target": "com.amazonaws.ssm#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of steps run in all specified Regions and accounts for the\n   current Automation execution.</p>"
+                        "smithy.api#documentation": "<p>The total number of steps run in all specified Amazon Web Services Regions and Amazon Web Services accounts for the\n   current Automation execution.</p>"
                     }
                 },
                 "SuccessSteps": {
                     "target": "com.amazonaws.ssm#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of steps that successfully completed in all specified Regions and\n   accounts for the current Automation execution.</p>"
+                        "smithy.api#documentation": "<p>The total number of steps that successfully completed in all specified Amazon Web Services Regions and\n   Amazon Web Services accounts for the current Automation execution.</p>"
                     }
                 },
                 "FailedSteps": {
                     "target": "com.amazonaws.ssm#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of steps that failed to run in all specified Regions and\n   accounts for the current Automation execution.</p>"
+                        "smithy.api#documentation": "<p>The total number of steps that failed to run in all specified Amazon Web Services Regions and\n   Amazon Web Services accounts for the current Automation execution.</p>"
                     }
                 },
                 "CancelledSteps": {
                     "target": "com.amazonaws.ssm#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of steps that the system cancelled in all specified Regions and\n   accounts for the current Automation execution.</p>"
+                        "smithy.api#documentation": "<p>The total number of steps that the system cancelled in all specified Amazon Web Services Regions and\n   Amazon Web Services accounts for the current Automation execution.</p>"
                     }
                 },
                 "TimedOutSteps": {
                     "target": "com.amazonaws.ssm#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The total number of steps that timed out in all specified Regions and accounts\n   for the current Automation execution.</p>"
+                        "smithy.api#documentation": "<p>The total number of steps that timed out in all specified Amazon Web Services Regions and Amazon Web Services accounts\n   for the current Automation execution.</p>"
                     }
                 }
             },
@@ -20792,7 +20792,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#PSParameterName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The fully qualified name of the parameter that you want to add to the system. The fully\n   qualified name includes the complete hierarchy of the parameter path and name. For parameters in\n   a hierarchy, you must include a leading forward slash character (/) when you create or reference\n   a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code>\n         </p>\n         <p>Naming Constraints:</p>\n         <ul>\n            <li>\n               <p>Parameter names are case sensitive.</p>\n            </li>\n            <li>\n               <p>A parameter name must be unique within an Region</p>\n            </li>\n            <li>\n               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"\n     (case-insensitive).</p>\n            </li>\n            <li>\n               <p>Parameter names can include only the following symbols and letters:\n      <code>a-zA-Z0-9_.-</code>\n               </p>\n               <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter\n     names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code>\n               </p>\n            </li>\n            <li>\n               <p>A parameter name can't include spaces.</p>\n            </li>\n            <li>\n               <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>\n            </li>\n         </ul>\n         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>The maximum length constraint listed below includes capacity for additional system\n    attributes that aren't part of the name. The maximum length for a parameter name, including the\n    full length of the parameter ARN, is 1011 characters. For example, the length of the following\n    parameter name is 65 characters, not 20 characters:</p>\n            <p>\n               <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code>\n            </p>\n         </note>",
+                        "smithy.api#documentation": "<p>The fully qualified name of the parameter that you want to add to the system. The fully\n   qualified name includes the complete hierarchy of the parameter path and name. For parameters in\n   a hierarchy, you must include a leading forward slash character (/) when you create or reference\n   a parameter. For example: <code>/Dev/DBServer/MySQL/db-string13</code>\n         </p>\n         <p>Naming Constraints:</p>\n         <ul>\n            <li>\n               <p>Parameter names are case sensitive.</p>\n            </li>\n            <li>\n               <p>A parameter name must be unique within an Amazon Web Services Region</p>\n            </li>\n            <li>\n               <p>A parameter name can't be prefixed with \"<code>aws</code>\" or \"<code>ssm</code>\"\n     (case-insensitive).</p>\n            </li>\n            <li>\n               <p>Parameter names can include only the following symbols and letters:\n      <code>a-zA-Z0-9_.-</code>\n               </p>\n               <p>In addition, the slash character ( / ) is used to delineate hierarchies in parameter\n     names. For example: <code>/Dev/Production/East/Project-ABC/MyParameter</code>\n               </p>\n            </li>\n            <li>\n               <p>A parameter name can't include spaces.</p>\n            </li>\n            <li>\n               <p>Parameter hierarchies are limited to a maximum depth of fifteen levels.</p>\n            </li>\n         </ul>\n         <p>For additional information about valid values for parameter names, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-paramstore-su-create.html\">Creating Systems Manager parameters</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <note>\n            <p>The maximum length constraint listed below includes capacity for additional system\n    attributes that aren't part of the name. The maximum length for a parameter name, including the\n    full length of the parameter ARN, is 1011 characters. For example, the length of the following\n    parameter name is 65 characters, not 20 characters:</p>\n            <p>\n               <code>arn:aws:ssm:us-east-2:111122223333:parameter/ExampleParameterName</code>\n            </p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 },
@@ -20818,7 +20818,7 @@
                 "KeyId": {
                     "target": "com.amazonaws.ssm#ParameterKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Key Management Service (KMS) ID that you want to use to encrypt a\n   parameter. Either the default KMS key automatically assigned to your account\n   or a custom key. Required for parameters that use the <code>SecureString</code>\n   data type.</p>\n         <p>If you don't specify a key ID, the system uses the default key associated with your\n   account.</p>\n         <ul>\n            <li>\n               <p>To use your default KMS key, choose the <code>SecureString</code> data type, and do <i>not</i> specify the <code>Key ID</code> when you create the parameter. The system automatically populates\n      <code>Key ID</code> with your default KMS key.</p>\n            </li>\n            <li>\n               <p>To use a custom KMS key, choose the <code>SecureString</code>\n     data type with the <code>Key ID</code> parameter.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The Key Management Service (KMS) ID that you want to use to encrypt a\n   parameter. Either the default KMS key automatically assigned to your Amazon Web Services account\n   or a custom key. Required for parameters that use the <code>SecureString</code>\n   data type.</p>\n         <p>If you don't specify a key ID, the system uses the default key associated with your\n   Amazon Web Services account.</p>\n         <ul>\n            <li>\n               <p>To use your default KMS key, choose the <code>SecureString</code> data type, and do <i>not</i> specify the <code>Key ID</code> when you create the parameter. The system automatically populates\n      <code>Key ID</code> with your default KMS key.</p>\n            </li>\n            <li>\n               <p>To use a custom KMS key, choose the <code>SecureString</code>\n     data type with the <code>Key ID</code> parameter.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Overwrite": {
@@ -20843,7 +20843,7 @@
                 "Tier": {
                     "target": "com.amazonaws.ssm#ParameterTier",
                     "traits": {
-                        "smithy.api#documentation": "<p>The parameter tier to assign to a parameter.</p>\n         <p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard\n   parameters have a content size limit of 4 KB and can't be configured to use parameter policies.\n   You can create a maximum of 10,000 standard parameters for each Region in an account.\n   Standard parameters are offered at no additional cost. </p>\n         <p>Advanced parameters have a content size limit of 8 KB and can be configured to use parameter\n   policies. You can create a maximum of 100,000 advanced parameters for each Region in an\n   account. Advanced parameters incur a charge. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html\">Standard and\n    advanced parameter tiers</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can change a standard parameter to an advanced parameter any time. But you can't revert\n   an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard\n   parameter would result in data loss because the system would truncate the size of the parameter\n   from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly,\n   advanced parameters use a different form of encryption than standard parameters. </p>\n         <p>If you no longer need an advanced parameter, or if you no longer want to incur charges for\n   an advanced parameter, you must delete it and recreate it as a new standard parameter. </p>\n         <p>\n            <b>Using the Default Tier Configuration</b>\n         </p>\n         <p>In <code>PutParameter</code> requests, you can specify the tier to create the parameter in.\n   Whenever you specify a tier in the request, Parameter Store creates or updates the parameter\n   according to that request. However, if you don't specify a tier in a request, Parameter Store\n   assigns the tier based on the current Parameter Store default tier configuration.</p>\n         <p>The default tier when you begin using Parameter Store is the standard-parameter tier. If you\n   use the advanced-parameter tier, you can specify one of the following as the default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Advanced</b>: With this option, Parameter Store evaluates all\n     requests as advanced parameters. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Intelligent-Tiering</b>: With this option, Parameter Store\n     evaluates each request to determine if the parameter is standard or advanced. </p>\n               <p>If the request doesn't include any options that require an advanced parameter, the\n     parameter is created in the standard-parameter tier. If one or more options requiring an\n     advanced parameter are included in the request, Parameter Store create a parameter in the\n     advanced-parameter tier.</p>\n               <p>This approach helps control your parameter-related costs by always creating standard\n     parameters unless an advanced parameter is necessary. </p>\n            </li>\n         </ul>\n         <p>Options that require an advanced parameter include the following:</p>\n         <ul>\n            <li>\n               <p>The content size of the parameter is more than 4 KB.</p>\n            </li>\n            <li>\n               <p>The parameter uses a parameter policy.</p>\n            </li>\n            <li>\n               <p>More than 10,000 parameters already exist in your account in the current\n     Region.</p>\n            </li>\n         </ul>\n         <p>For more information about configuring the default tier option, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html\">Specifying a\n    default parameter tier</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The parameter tier to assign to a parameter.</p>\n         <p>Parameter Store offers a standard tier and an advanced tier for parameters. Standard\n   parameters have a content size limit of 4 KB and can't be configured to use parameter policies.\n   You can create a maximum of 10,000 standard parameters for each Region in an Amazon Web Services account.\n   Standard parameters are offered at no additional cost. </p>\n         <p>Advanced parameters have a content size limit of 8 KB and can be configured to use parameter\n   policies. You can create a maximum of 100,000 advanced parameters for each Region in an\n   Amazon Web Services account. Advanced parameters incur a charge. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-advanced-parameters.html\">Standard and\n    advanced parameter tiers</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         <p>You can change a standard parameter to an advanced parameter any time. But you can't revert\n   an advanced parameter to a standard parameter. Reverting an advanced parameter to a standard\n   parameter would result in data loss because the system would truncate the size of the parameter\n   from 8 KB to 4 KB. Reverting would also remove any policies attached to the parameter. Lastly,\n   advanced parameters use a different form of encryption than standard parameters. </p>\n         <p>If you no longer need an advanced parameter, or if you no longer want to incur charges for\n   an advanced parameter, you must delete it and recreate it as a new standard parameter. </p>\n         <p>\n            <b>Using the Default Tier Configuration</b>\n         </p>\n         <p>In <code>PutParameter</code> requests, you can specify the tier to create the parameter in.\n   Whenever you specify a tier in the request, Parameter Store creates or updates the parameter\n   according to that request. However, if you don't specify a tier in a request, Parameter Store\n   assigns the tier based on the current Parameter Store default tier configuration.</p>\n         <p>The default tier when you begin using Parameter Store is the standard-parameter tier. If you\n   use the advanced-parameter tier, you can specify one of the following as the default:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Advanced</b>: With this option, Parameter Store evaluates all\n     requests as advanced parameters. </p>\n            </li>\n            <li>\n               <p>\n                  <b>Intelligent-Tiering</b>: With this option, Parameter Store\n     evaluates each request to determine if the parameter is standard or advanced. </p>\n               <p>If the request doesn't include any options that require an advanced parameter, the\n     parameter is created in the standard-parameter tier. If one or more options requiring an\n     advanced parameter are included in the request, Parameter Store create a parameter in the\n     advanced-parameter tier.</p>\n               <p>This approach helps control your parameter-related costs by always creating standard\n     parameters unless an advanced parameter is necessary. </p>\n            </li>\n         </ul>\n         <p>Options that require an advanced parameter include the following:</p>\n         <ul>\n            <li>\n               <p>The content size of the parameter is more than 4 KB.</p>\n            </li>\n            <li>\n               <p>The parameter uses a parameter policy.</p>\n            </li>\n            <li>\n               <p>More than 10,000 parameters already exist in your Amazon Web Services account in the current\n     Amazon Web Services Region.</p>\n            </li>\n         </ul>\n         <p>For more information about configuring the default tier option, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/ps-default-tier.html\">Specifying a\n    default parameter tier</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 },
                 "Policies": {
@@ -20855,7 +20855,7 @@
                 "DataType": {
                     "target": "com.amazonaws.ssm#ParameterDataType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text\n   and Amazon Machine Image (AMI) IDs.</p>\n         <p>\n            <b>The following data type values are supported.</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>text</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ec2:image</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,\n   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as\n    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your\n   account. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support\n    for Amazon Machine Image (AMI) IDs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The data type for a <code>String</code> parameter. Supported data types include plain text\n   and Amazon Machine Image (AMI) IDs.</p>\n         <p>\n            <b>The following data type values are supported.</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>text</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>aws:ec2:image</code>\n               </p>\n            </li>\n         </ul>\n         <p>When you create a <code>String</code> parameter and specify <code>aws:ec2:image</code>,\n   Amazon Web Services Systems Manager validates the parameter value is in the required format, such as\n    <code>ami-12345abcdeEXAMPLE</code>, and that the specified AMI is available in your\n   Amazon Web Services account. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/parameter-store-ec2-aliases.html\">Native parameter support\n    for Amazon Machine Image (AMI) IDs</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 }
             }
@@ -21525,7 +21525,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the <code>AwsOrganizationsSource</code> resource data sync source. A sync\n   source of this type can synchronize data from Organizations or, if an Amazon Web Services organization isn't\n   present, from multiple Regions.</p>"
+                "smithy.api#documentation": "<p>Information about the <code>AwsOrganizationsSource</code> resource data sync source. A sync\n   source of this type can synchronize data from Organizations or, if an Amazon Web Services organization isn't\n   present, from multiple Amazon Web Services Regions.</p>"
             }
         },
         "com.amazonaws.ssm#ResourceDataSyncConflictException": {
@@ -21574,7 +21574,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Synchronize Amazon Web Services Systems Manager Inventory data from multiple accounts defined in Organizations to a\n   centralized Amazon S3 bucket. Data is synchronized to individual key prefixes in the\n   central bucket. Each key prefix represents a different account ID.</p>"
+                "smithy.api#documentation": "<p>Synchronize Amazon Web Services Systems Manager Inventory data from multiple Amazon Web Services accounts defined in Organizations to a\n   centralized Amazon S3 bucket. Data is synchronized to individual key prefixes in the\n   central bucket. Each key prefix represents a different Amazon Web Services account ID.</p>"
             }
         },
         "com.amazonaws.ssm#ResourceDataSyncDestinationDataSharingType": {
@@ -21620,7 +21620,7 @@
                 "SyncType": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>,\n   then the resource data sync synchronizes data to an S3 bucket. If the <code>SyncType</code> is\n    <code>SyncFromSource</code> then the resource data sync synchronizes data from Organizations or from\n   multiple Regions.</p>"
+                        "smithy.api#documentation": "<p>The type of resource data sync. If <code>SyncType</code> is <code>SyncToDestination</code>,\n   then the resource data sync synchronizes data to an S3 bucket. If the <code>SyncType</code> is\n    <code>SyncFromSource</code> then the resource data sync synchronizes data from Organizations or from\n   multiple Amazon Web Services Regions.</p>"
                     }
                 },
                 "SyncSource": {
@@ -21796,7 +21796,7 @@
                 "Region": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncS3Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region with the S3 bucket targeted by the resource data sync.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region with the S3 bucket targeted by the resource data sync.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -21865,20 +21865,20 @@
                 "SourceRegions": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncSourceRegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>SyncSource</code> Regions included in the resource data sync.</p>",
+                        "smithy.api#documentation": "<p>The <code>SyncSource</code> Amazon Web Services Regions included in the resource data sync.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IncludeFutureRegions": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncIncludeFutureRegions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to automatically synchronize and aggregate data from new Regions when those\n   Regions come online.</p>"
+                        "smithy.api#documentation": "<p>Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those\n   Regions come online.</p>"
                     }
                 },
                 "EnableAllOpsDataSources": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncEnableAllOpsDataSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager\n   automatically enables all OpsData sources in the selected Regions for all accounts in\n   your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager\n   automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in\n   your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 }
             },
@@ -21928,13 +21928,13 @@
                 "SourceRegions": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncSourceRegionList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>SyncSource</code> Regions included in the resource data sync.</p>"
+                        "smithy.api#documentation": "<p>The <code>SyncSource</code> Amazon Web Services Regions included in the resource data sync.</p>"
                     }
                 },
                 "IncludeFutureRegions": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncIncludeFutureRegions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether to automatically synchronize and aggregate data from new Regions when those\n   Regions come online.</p>"
+                        "smithy.api#documentation": "<p>Whether to automatically synchronize and aggregate data from new Amazon Web Services Regions when those\n   Regions come online.</p>"
                     }
                 },
                 "State": {
@@ -21946,7 +21946,7 @@
                 "EnableAllOpsDataSources": {
                     "target": "com.amazonaws.ssm#ResourceDataSyncEnableAllOpsDataSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager\n   automatically enables all OpsData sources in the selected Regions for all accounts in\n   your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>When you create a resource data sync, if you choose one of the Organizations options, then Systems Manager\n   automatically enables all OpsData sources in the selected Amazon Web Services Regions for all Amazon Web Services accounts in\n   your organization (or in the selected organization units). For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html\">About multiple account and Region resource data syncs</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
                     }
                 }
             },
@@ -22144,7 +22144,7 @@
                 "StreamUrl": {
                     "target": "com.amazonaws.ssm#StreamUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tRegion supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>.</p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
                 }
             }
@@ -22271,7 +22271,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the Regions and accounts targeted by the current Runbook\n   operation.</p>"
+                        "smithy.api#documentation": "<p>Information about the Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Runbook\n   operation.</p>"
                     }
                 }
             },
@@ -22563,7 +22563,7 @@
                 "OutputS3Region": {
                     "target": "com.amazonaws.ssm#S3Region",
                     "traits": {
-                        "smithy.api#documentation": "<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager\n   automatically determines the Region of the S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>(Deprecated) You can no longer specify this parameter. The system ignores it. Instead, Systems Manager\n   automatically determines the Amazon Web Services Region of the S3 bucket.</p>"
                     }
                 },
                 "OutputS3BucketName": {
@@ -23257,7 +23257,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>A location is a combination of Regions and/or accounts where you want to run the\n   automation. Use this operation to start an automation in multiple Regions and multiple\n   accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple Regions and accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
+                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and/or Amazon Web Services accounts where you want to run the\n   automation. Use this operation to start an automation in multiple Amazon Web Services Regions and multiple\n   Amazon Web Services accounts. For more information, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html\">Running Automation workflows in multiple Amazon Web Services Regions and Amazon Web Services accounts</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>. </p>"
                     }
                 },
                 "Tags": {
@@ -23364,7 +23364,7 @@
                 "Tags": {
                     "target": "com.amazonaws.ssm#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   a change request. Tags enable you to categorize a resource in different ways, such as by\n   purpose, owner, or environment. For example, you might want to tag a change request to identify\n   an environment or target Region. In this case, you could specify the following key-value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Region,Value=us-east-2</code>\n               </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Optional metadata that you assign to a resource. You can specify a maximum of five tags for\n   a change request. Tags enable you to categorize a resource in different ways, such as by\n   purpose, owner, or environment. For example, you might want to tag a change request to identify\n   an environment or target Amazon Web Services Region. In this case, you could specify the following key-value\n   pairs:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=Environment,Value=Production</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=Region,Value=us-east-2</code>\n               </p>\n            </li>\n         </ul>"
                     }
                 },
                 "ScheduledEndTime": {
@@ -23457,7 +23457,7 @@
                 "StreamUrl": {
                     "target": "com.amazonaws.ssm#StreamUrl",
                     "traits": {
-                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>\n         </p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tRegion supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
+                        "smithy.api#documentation": "<p>A URL back to SSM Agent on the instance that the Session Manager client uses to send commands and\n   receive output from the instance. Format: <code>wss://ssmmessages.<b>region</b>.amazonaws.com/v1/data-channel/<b>session-id</b>?stream=(input|output)</code>\n         </p>\n         <p>\n            <b>region</b> represents the Region identifier for an\n\t\t\t\t\t\tAmazon Web Services Region supported by Amazon Web Services Systems Manager, such as <code>us-east-2</code> for the US East (Ohio) Region.\n\t\t\t\t\t\tFor a list of supported <b>region</b> values, see the <b>Region</b> column in <a href=\"https://docs.aws.amazon.com/general/latest/gr/ssm.html#ssm_region\">Systems Manager service endpoints</a> in the\n        <i>Amazon Web Services General Reference</i>.</p>\n         <p>\n            <b>session-id</b> represents the ID of a Session Manager session, such as\n    <code>1a2b3c4dEXAMPLE</code>.</p>"
                     }
                 }
             }
@@ -23640,7 +23640,7 @@
                 "TargetLocation": {
                     "target": "com.amazonaws.ssm#TargetLocation",
                     "traits": {
-                        "smithy.api#documentation": "<p>The combination of Regions and accounts targeted by the current Automation\n   execution.</p>"
+                        "smithy.api#documentation": "<p>The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation\n   execution.</p>"
                     }
                 }
             },
@@ -23905,7 +23905,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An array of search criteria that targets instances using a key-value pair that you\n   specify.</p>\n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n     Lambda, and Step Functions). For more information about running tasks\n    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n       <code>Key=resource-groups:Name,Values=<i>resource-group-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n       <code>Key=ResourceGroup;Values=<i>resource-group-name</i>\n                  </code>\n               </p>\n            </li>\n         </ul>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n      <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code>\n               </p>\n               <p>This example demonstrates how to target all resources in the resource group <b>ProductionResourceGroup</b> in your maintenance window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i>\n                  </code>\n               </p>\n               <p>This example demonstrates how to target only Amazon Elastic Compute Cloud (Amazon EC2)\n     instances and VPCs in your maintenance window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n      <code>Key=ResourceGroup,Values=MyResourceGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>State Manager association targets only</b>:\n       <code>Key=InstanceIds,Values=<i>*</i>\n                  </code>\n               </p>\n               <p>This example demonstrates how to target all managed instances in the Region where\n     the association was created.</p>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target instances using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple instances</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>An array of search criteria that targets instances using a key-value pair that you\n   specify.</p>\n         <note>\n            <p> One or more targets must be specified for maintenance window Run Command-type tasks.\n    Depending on the task, targets are optional for other maintenance window task types (Automation,\n     Lambda, and Step Functions). For more information about running tasks\n    that don't specify targets, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/maintenance-windows-targetless-tasks.html\">Registering\n     maintenance window tasks without targets</a> in the\n    <i>Amazon Web Services Systems Manager User Guide</i>.</p>\n         </note>\n         <p>Supported formats include the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=<i>instance-id-1</i>,<i>instance-id-2</i>,<i>instance-id-3</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:<i>my-tag-key</i>,Values=<i>my-tag-value-1</i>,<i>my-tag-value-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=<i>my-tag-key-1</i>,<i>my-tag-key-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n       <code>Key=resource-groups:Name,Values=<i>resource-group-name</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>resource-type-1</i>,<i>resource-type-2</i>\n                  </code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n       <code>Key=ResourceGroup;Values=<i>resource-group-name</i>\n                  </code>\n               </p>\n            </li>\n         </ul>\n         <p>For example:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Key=InstanceIds,Values=i-02573cafcfEXAMPLE,i-0471e04240EXAMPLE,i-07782c72faEXAMPLE</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag:CostCenter,Values=CostCenter1,CostCenter2,CostCenter3</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>Key=tag-key,Values=Name,Instance-Type,CostCenter</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>Run Command and Maintenance window targets only</b>:\n      <code>Key=resource-groups:Name,Values=ProductionResourceGroup</code>\n               </p>\n               <p>This example demonstrates how to target all resources in the resource group <b>ProductionResourceGroup</b> in your maintenance window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Maintenance window targets only</b>:\n       <code>Key=resource-groups:ResourceTypeFilters,Values=<i>AWS::EC2::INSTANCE</i>,<i>AWS::EC2::VPC</i>\n                  </code>\n               </p>\n               <p>This example demonstrates how to target only Amazon Elastic Compute Cloud (Amazon EC2)\n     instances and VPCs in your maintenance window.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Automation targets only</b>:\n      <code>Key=ResourceGroup,Values=MyResourceGroup</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <b>State Manager association targets only</b>:\n       <code>Key=InstanceIds,Values=<i>*</i>\n                  </code>\n               </p>\n               <p>This example demonstrates how to target all managed instances in the Amazon Web Services Region where\n     the association was created.</p>\n            </li>\n         </ul>\n         <p>For more information about how to send commands that target instances using\n    <code>Key,Value</code> parameters, see <a href=\"https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting\">Targeting multiple instances</a> in the <i>Amazon Web Services Systems Manager User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ssm#TargetCount": {
@@ -23943,19 +23943,19 @@
                 "Accounts": {
                     "target": "com.amazonaws.ssm#Accounts",
                     "traits": {
-                        "smithy.api#documentation": "<p>The accounts targeted by the current Automation execution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services accounts targeted by the current Automation execution.</p>"
                     }
                 },
                 "Regions": {
                     "target": "com.amazonaws.ssm#Regions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Regions targeted by the current Automation execution.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Regions targeted by the current Automation execution.</p>"
                     }
                 },
                 "TargetLocationMaxConcurrency": {
                     "target": "com.amazonaws.ssm#MaxConcurrency",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of Regions and accounts allowed to run the Automation\n   concurrently.</p>"
+                        "smithy.api#documentation": "<p>The maximum number of Amazon Web Services Regions and Amazon Web Services accounts allowed to run the Automation\n   concurrently.</p>"
                     }
                 },
                 "TargetLocationMaxErrors": {
@@ -23972,7 +23972,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The combination of Regions and accounts targeted by the current Automation\n   execution.</p>"
+                "smithy.api#documentation": "<p>The combination of Amazon Web Services Regions and Amazon Web Services accounts targeted by the current Automation\n   execution.</p>"
             }
         },
         "com.amazonaws.ssm#TargetLocations": {
@@ -24489,7 +24489,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the SSM Command document or Automation runbook that contains the configuration\n   information for the instance.</p>\n         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is\n   shared with you from another account.</p>\n         <p>For Systems Manager document (SSM document) that are shared with you from other accounts, you\n   must specify the complete SSM document ARN, in the following format:</p>\n         <p>\n            <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>\n            </code>\n         </p>\n         <p>For example:</p>\n         <p>\n            <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>\n         </p>\n         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need\n   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or\n    <code>My-Document</code>.</p>"
+                        "smithy.api#documentation": "<p>The name of the SSM Command document or Automation runbook that contains the configuration\n   information for the instance.</p>\n         <p>You can specify Amazon Web Services-predefined documents, documents you created, or a document that is\n   shared with you from another account.</p>\n         <p>For Systems Manager document (SSM document) that are shared with you from other Amazon Web Services accounts, you\n   must specify the complete SSM document ARN, in the following format:</p>\n         <p>\n            <code>arn:aws:ssm:<i>region</i>:<i>account-id</i>:document/<i>document-name</i>\n            </code>\n         </p>\n         <p>For example:</p>\n         <p>\n            <code>arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document</code>\n         </p>\n         <p>For Amazon Web Services-predefined documents and SSM documents you created in your account, you only need\n   to specify the document name. For example, <code>AWS-ApplyPatchBaseline</code> or\n    <code>My-Document</code>.</p>"
                     }
                 },
                 "Targets": {
@@ -24555,7 +24555,7 @@
                 "TargetLocations": {
                     "target": "com.amazonaws.ssm#TargetLocations",
                     "traits": {
-                        "smithy.api#documentation": "<p>A location is a combination of Regions and accounts where you want to run the\n   association. Use this action to update an association in multiple Regions and multiple\n   accounts.</p>"
+                        "smithy.api#documentation": "<p>A location is a combination of Amazon Web Services Regions and Amazon Web Services accounts where you want to run the\n   association. Use this action to update an association in multiple Regions and multiple\n   accounts.</p>"
                     }
                 }
             }
@@ -24600,7 +24600,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified\n   instance.</p>"
+                "smithy.api#documentation": "<p>Updates the status of the Amazon Web Services Systems Manager document (SSM document) associated with the specified\n   instance.</p>\n         <p>\n            <code>UpdateAssociationStatus</code> is primarily used by the Amazon Web Services Systems Manager Agent (SSM Agent) to\n   report status updates about your associations and is only used for associations created with the\n    <code>InstanceId</code> legacy parameter.</p>"
             }
         },
         "com.amazonaws.ssm#UpdateAssociationStatusRequest": {
@@ -24616,7 +24616,7 @@
                 "InstanceId": {
                     "target": "com.amazonaws.ssm#InstanceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the instance.</p>",
+                        "smithy.api#documentation": "<p>The instance ID.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -24763,7 +24763,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates information related to approval reviews for a specific version of a document.</p>"
+                "smithy.api#documentation": "<p>Updates information related to approval reviews for a specific version of a change template\n   in Change Manager.</p>"
             }
         },
         "com.amazonaws.ssm#UpdateDocumentMetadataRequest": {
@@ -24772,20 +24772,20 @@
                 "Name": {
                     "target": "com.amazonaws.ssm#DocumentName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the document for which a version is to be updated.</p>",
+                        "smithy.api#documentation": "<p>The name of the change template for which a version's metadata is to be updated.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "DocumentVersion": {
                     "target": "com.amazonaws.ssm#DocumentVersion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of a document to update.</p>"
+                        "smithy.api#documentation": "<p>The version of a change template in which to update approval metadata.</p>"
                     }
                 },
                 "DocumentReviews": {
                     "target": "com.amazonaws.ssm#DocumentReviews",
                     "traits": {
-                        "smithy.api#documentation": "<p>The document review details to update.</p>",
+                        "smithy.api#documentation": "<p>The change template review details to update.</p>",
                         "smithy.api#required": {}
                     }
                 }

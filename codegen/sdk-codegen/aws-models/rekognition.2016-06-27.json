@@ -166,6 +166,26 @@
                 "smithy.api#documentation": "<p>Indicates whether or not the face has a beard, and the confidence level in the\n      determination.</p>"
             }
         },
+        "com.amazonaws.rekognition#BlackFrame": {
+            "type": "structure",
+            "members": {
+                "MaxPixelThreshold": {
+                    "target": "com.amazonaws.rekognition#MaxPixelThreshold",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A threshold used to determine the maximum luminance value for a pixel to be considered black. In a full color range video,\n      luminance values range from 0-255. A pixel value of 0 is pure black, and the most strict filter. The maximum black pixel\n      value is computed as follows: max_black_pixel_value = minimum_luminance + MaxPixelThreshold *luminance_range.\n    </p>\n         <p>For example, for a full range video with BlackPixelThreshold = 0.1,  max_black_pixel_value is 0 + 0.1 * (255-0) = 25.5.</p>\n         <p>The default value of MaxPixelThreshold is 0.2, which maps to a max_black_pixel_value of 51 for a full range video.\n      You can lower this threshold to be more strict on black levels.</p>"
+                    }
+                },
+                "MinCoveragePercentage": {
+                    "target": "com.amazonaws.rekognition#MinCoveragePercentage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The minimum percentage of pixels in a frame that need to have a luminance below the max_black_pixel_value for a frame to be considered\n      a black frame. Luminance is calculated using the BT.709 matrix.\n    </p>\n         <p>The default value is 99, which means at least 99% of all pixels in the frame are black pixels as per the <code>MaxPixelThreshold</code>\n      set. You can reduce this value to allow more noise on the black frame.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>\n      A filter that allows you to control the black frame detection by specifying the black levels\n      and pixel coverage of black pixels in a frame. As videos can come from multiple sources, formats,\n      and time periods, they may contain different standards and varying noise levels for black frames that need to be accounted for.\n      For more information, see <a>StartSegmentDetection</a>.\n    </p>"
+            }
+        },
         "com.amazonaws.rekognition#BodyPart": {
             "type": "string",
             "traits": {
@@ -396,7 +416,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]+$"
             }
         },
         "com.amazonaws.rekognition#CollectionIdList": {
@@ -638,18 +658,18 @@
                 "Timestamp": {
                     "target": "com.amazonaws.rekognition#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>Time, in milliseconds from the beginning of the video, that the unsafe content label was detected.</p>"
+                        "smithy.api#documentation": "<p>Time, in milliseconds from the beginning of the video, that the content moderation label was detected.</p>"
                     }
                 },
                 "ModerationLabel": {
                     "target": "com.amazonaws.rekognition#ModerationLabel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unsafe content label detected by in the stored video.</p>"
+                        "smithy.api#documentation": "<p>The content moderation label detected by in the stored video.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an unsafe content label detection in a stored video.</p>"
+                "smithy.api#documentation": "<p>Information about an inappropriate, unwanted, or offensive content label detection in a stored video.</p>"
             }
         },
         "com.amazonaws.rekognition#ContentModerationDetections": {
@@ -888,7 +908,7 @@
                 "OutputConfig": {
                     "target": "com.amazonaws.rekognition#OutputConfig",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 location to store the results of training.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket location to store the results of training.\n      The S3 bucket can be in any AWS account as long as the caller has\n      <code>s3:PutObject</code> permissions on the S3 bucket.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -915,7 +935,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.rekognition#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK).\n         You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your CMK,\n         or an alias for your CMK.\n         The key is used to encrypt training and test images copied into the service for model training. Your \n         source images are unaffected. The key is also used to encrypt training results and manifest files written\n         to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>\n         <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted\n         using a key that AWS owns and manages.</p>"
+                        "smithy.api#documentation": "<p>The identifier for your AWS Key Management Service (AWS KMS) customer master key (CMK).\n         You can supply the Amazon Resource Name (ARN) of your CMK, the ID of your CMK,\n         an alias for your CMK, or an alias ARN.\n         The key is used to encrypt training and test images copied into the service for model training.\n         Your source images are unaffected. The key is also used to encrypt training results\n         and manifest files written to the output Amazon S3 bucket (<code>OutputConfig</code>).</p>\n         <p>If you choose to use your own CMK, you need the following permissions on the CMK.</p>\n         <ul>\n            <li>\n               <p>kms:CreateGrant</p>\n            </li>\n            <li>\n               <p>kms:DescribeKey</p>\n            </li>\n            <li>\n               <p>kms:GenerateDataKey</p>\n            </li>\n            <li>\n               <p>kms:Decrypt</p>\n            </li>\n         </ul>\n         <p>If you don't specify a value for <code>KmsKeyId</code>, images copied into the service are encrypted\n         using a key that AWS owns and manages.</p>"
                     }
                 }
             }
@@ -2199,7 +2219,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Detects text in the input image and converts it into machine-readable text.</p>\n         <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an\n      Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a\n      reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not\n      supported. The image must be either a .png or .jpeg formatted file. </p>\n         <p>The <code>DetectText</code> operation returns text in an array of <a>TextDetection</a> elements, <code>TextDetections</code>. Each\n        <code>TextDetection</code> element provides information about a single word or line of text\n      that was detected in the image. </p>\n         <p>A word is one or more ISO basic latin script characters that are not separated by spaces.\n        <code>DetectText</code> can detect up to 50 words in an image.</p>\n         <p>A line is a string of equally spaced words. A line isn't necessarily a complete\n      sentence. For example, a driver's license number is detected as a line. A line ends when there\n      is no aligned text after it. Also, a line ends when there is a large gap between words,\n      relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition\n      may detect multiple lines in text aligned in the same direction. Periods don't represent the\n      end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation\n      returns multiple lines.</p>\n         <p>To determine whether a <code>TextDetection</code> element is a line of text or a word,\n      use the <code>TextDetection</code> object <code>Type</code> field. </p>\n         <p>To be detected, text must be within +/- 90 degrees orientation of the horizontal axis.</p>\n      \n         <p>For more information, see DetectText in the Amazon Rekognition Developer Guide.</p>"
+                "smithy.api#documentation": "<p>Detects text in the input image and converts it into machine-readable text.</p>\n         <p>Pass the input image as base64-encoded image bytes or as a reference to an image in an\n      Amazon S3 bucket. If you use the AWS CLI to call Amazon Rekognition operations, you must pass it as a\n      reference to an image in an Amazon S3 bucket. For the AWS CLI, passing image bytes is not\n      supported. The image must be either a .png or .jpeg formatted file. </p>\n         <p>The <code>DetectText</code> operation returns text in an array of <a>TextDetection</a> elements, <code>TextDetections</code>. Each\n        <code>TextDetection</code> element provides information about a single word or line of text\n      that was detected in the image. </p>\n         <p>A word is one or more ISO basic latin script characters that are not separated by spaces.\n        <code>DetectText</code> can detect up to 100 words in an image.</p>\n         <p>A line is a string of equally spaced words. A line isn't necessarily a complete\n      sentence. For example, a driver's license number is detected as a line. A line ends when there\n      is no aligned text after it. Also, a line ends when there is a large gap between words,\n      relative to the length of the words. This means, depending on the gap between words, Amazon Rekognition\n      may detect multiple lines in text aligned in the same direction. Periods don't represent the\n      end of a line. If a sentence spans multiple lines, the <code>DetectText</code> operation\n      returns multiple lines.</p>\n         <p>To determine whether a <code>TextDetection</code> element is a line of text or a word,\n      use the <code>TextDetection</code> object <code>Type</code> field. </p>\n         <p>To be detected, text must be within +/- 90 degrees orientation of the horizontal axis.</p>\n      \n         <p>For more information, see DetectText in the Amazon Rekognition Developer Guide.</p>"
             }
         },
         "com.amazonaws.rekognition#DetectTextFilters": {
@@ -2423,7 +2443,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-:]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-:]+$"
             }
         },
         "com.amazonaws.rekognition#EyeOpen": {
@@ -2652,7 +2672,7 @@
         "com.amazonaws.rekognition#FaceId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.rekognition#FaceIdList": {
@@ -3034,7 +3054,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the unsafe content analysis results for a Amazon Rekognition Video analysis started by\n       <a>StartContentModeration</a>.</p>\n\n         <p>Unsafe content analysis of a video is an asynchronous operation. You start analysis by calling\n       <a>StartContentModeration</a> which returns a job identifier (<code>JobId</code>).\n       When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service\n       topic registered in the initial call to <code>StartContentModeration</code>.\n       To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS\n       topic is <code>SUCCEEDED</code>. If so, call  <code>GetContentModeration</code> and pass the job identifier\n       (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p>\n       \n         <p>For more information, see Working with Stored Videos in the\n     Amazon Rekognition Devlopers Guide.</p>\n         <p>\n            <code>GetContentModeration</code> returns detected unsafe content labels,\n      and the time they are detected, in an array, <code>ModerationLabels</code>, of\n      <a>ContentModerationDetection</a> objects.\n     </p>\n         <p>By default, the moderated labels are returned sorted by time, in milliseconds from the start of the\n       video. You can also sort them by moderated label by specifying <code>NAME</code> for the <code>SortBy</code>\n       input parameter. </p>\n         <p>Since video analysis can return a large number of results, use the <code>MaxResults</code> parameter to limit\n      the number of labels returned in a single call to <code>GetContentModeration</code>. If there are more results than\n       specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a\n       pagination token for getting the next set of results. To get the next page of results, call <code>GetContentModeration</code>\n       and populate the <code>NextToken</code> request parameter with the value of <code>NextToken</code>\n       returned from the previous call to <code>GetContentModeration</code>.</p>\n     \n         <p>For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>",
+                "smithy.api#documentation": "<p>Gets the inappropriate, unwanted, or offensive content analysis results for a Amazon Rekognition Video analysis started by\n       <a>StartContentModeration</a>. For a list of moderation labels in Amazon Rekognition, see\n       <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api\">Using the image and video moderation APIs</a>.</p>\n\n         <p>Amazon Rekognition Video inappropriate or offensive content detection in a stored video is an asynchronous operation. You start analysis by calling\n       <a>StartContentModeration</a> which returns a job identifier (<code>JobId</code>).\n       When analysis finishes, Amazon Rekognition Video publishes a completion status to the Amazon Simple Notification Service\n       topic registered in the initial call to <code>StartContentModeration</code>.\n       To get the results of the content analysis, first check that the status value published to the Amazon SNS\n       topic is <code>SUCCEEDED</code>. If so, call  <code>GetContentModeration</code> and pass the job identifier\n       (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p>\n       \n         <p>For more information, see Working with Stored Videos in the\n     Amazon Rekognition Devlopers Guide.</p>\n         <p>\n            <code>GetContentModeration</code> returns detected inappropriate, unwanted, or offensive content moderation labels,\n      and the time they are detected, in an array, <code>ModerationLabels</code>, of\n      <a>ContentModerationDetection</a> objects.\n     </p>\n         <p>By default, the moderated labels are returned sorted by time, in milliseconds from the start of the\n       video. You can also sort them by moderated label by specifying <code>NAME</code> for the <code>SortBy</code>\n       input parameter. </p>\n         <p>Since video analysis can return a large number of results, use the <code>MaxResults</code> parameter to limit\n      the number of labels returned in a single call to <code>GetContentModeration</code>. If there are more results than\n       specified in <code>MaxResults</code>, the value of <code>NextToken</code> in the operation response contains a\n       pagination token for getting the next set of results. To get the next page of results, call <code>GetContentModeration</code>\n       and populate the <code>NextToken</code> request parameter with the value of <code>NextToken</code>\n       returned from the previous call to <code>GetContentModeration</code>.</p>\n     \n         <p>For more information, see Content moderation in the Amazon Rekognition Developer Guide.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -3048,7 +3068,7 @@
                 "JobId": {
                     "target": "com.amazonaws.rekognition#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the unsafe content job. Use <code>JobId</code> to identify the job in\n       a subsequent call to <code>GetContentModeration</code>.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the inappropriate, unwanted, or offensive content moderation job. Use <code>JobId</code> to identify the job in\n       a subsequent call to <code>GetContentModeration</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3061,7 +3081,7 @@
                 "NextToken": {
                     "target": "com.amazonaws.rekognition#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition\n        returns a pagination token in the response. You can use this pagination token\n        to retrieve the next set of unsafe content labels.</p>"
+                        "smithy.api#documentation": "<p>If the previous response was incomplete (because there is more data to retrieve), Amazon Rekognition\n        returns a pagination token in the response. You can use this pagination token\n        to retrieve the next set of content moderation labels.</p>"
                     }
                 },
                 "SortBy": {
@@ -3078,7 +3098,7 @@
                 "JobStatus": {
                     "target": "com.amazonaws.rekognition#VideoJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The current status of the unsafe content analysis job.</p>"
+                        "smithy.api#documentation": "<p>The current status of the content moderation analysis job.</p>"
                     }
                 },
                 "StatusMessage": {
@@ -3096,19 +3116,19 @@
                 "ModerationLabels": {
                     "target": "com.amazonaws.rekognition#ContentModerationDetections",
                     "traits": {
-                        "smithy.api#documentation": "<p>The detected unsafe content labels and the time(s) they were detected.</p>"
+                        "smithy.api#documentation": "<p>The detected inappropriate, unwanted, or offensive content moderation labels and the time(s) they were detected.</p>"
                     }
                 },
                 "NextToken": {
                     "target": "com.amazonaws.rekognition#PaginationToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent\n     request to retrieve the next set of unsafe content labels. </p>"
+                        "smithy.api#documentation": "<p>If the response is truncated, Amazon Rekognition Video returns this token that you can use in the subsequent\n     request to retrieve the next set of content moderation labels. </p>"
                     }
                 },
                 "ModerationModelVersion": {
                     "target": "com.amazonaws.rekognition#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Version number of the moderation detection model that was used to detect unsafe content.</p>"
+                        "smithy.api#documentation": "<p>Version number of the moderation detection model that was used to detect inappropriate, unwanted, or offensive content.</p>"
                     }
                 }
             }
@@ -3855,7 +3875,7 @@
                     "min": 1,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9])*"
+                "smithy.api#pattern": "^[a-z0-9](-*[a-z0-9])*$"
             }
         },
         "com.amazonaws.rekognition#HumanLoopQuotaExceededException": {
@@ -3951,7 +3971,7 @@
         "com.amazonaws.rekognition#ImageId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.rekognition#ImageQuality": {
@@ -4268,13 +4288,13 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-:]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-:]+$"
             }
         },
         "com.amazonaws.rekognition#KinesisDataArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^arn:([a-z\\d-]+):kinesis:([a-z\\d-]+):\\d{12}:.+$)"
+                "smithy.api#pattern": "^(^arn:([a-z\\d-]+):kinesis:([a-z\\d-]+):\\d{12}:.+$)$"
             }
         },
         "com.amazonaws.rekognition#KinesisDataStream": {
@@ -4294,7 +4314,7 @@
         "com.amazonaws.rekognition#KinesisVideoArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^arn:([a-z\\d-]+):kinesisvideo:([a-z\\d-]+):\\d{12}:.+$)"
+                "smithy.api#pattern": "^(^arn:([a-z\\d-]+):kinesisvideo:([a-z\\d-]+):\\d{12}:.+$)$"
             }
         },
         "com.amazonaws.rekognition#KinesisVideoStream": {
@@ -4894,12 +4914,32 @@
                 }
             }
         },
+        "com.amazonaws.rekognition#MaxPixelThreshold": {
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
         "com.amazonaws.rekognition#MaxResults": {
             "type": "integer",
             "traits": {
                 "smithy.api#box": {},
                 "smithy.api#range": {
                     "min": 1
+                }
+            }
+        },
+        "com.amazonaws.rekognition#MinCoveragePercentage": {
+            "type": "float",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 0,
+                    "max": 100
                 }
             }
         },
@@ -4926,7 +4966,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides information about a single type of unsafe content found in an image or video. Each type of\n      moderated content has a label within a hierarchical taxonomy. For more information, see\n      Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>"
+                "smithy.api#documentation": "<p>Provides information about a single type of inappropriate, unwanted, or offensive content found in an image or video. Each type of\n      moderated content has a label within a hierarchical taxonomy. For more information, see\n      Content moderation in the Amazon Rekognition Developer Guide.</p>"
             }
         },
         "com.amazonaws.rekognition#ModerationLabels": {
@@ -4994,7 +5034,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see\n            <a>api-video</a>.</p>"
+                "smithy.api#documentation": "<p>The Amazon Simple Notification Service topic to which Amazon Rekognition publishes the completion status of a video analysis operation. For more information, see\n          <a>api-video</a>. Note that the Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.\n          For more information, see <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/api-video-roles.html#api-video-roles-all-topics\">Giving access to multiple Amazon SNS topics</a>.</p>"
             }
         },
         "com.amazonaws.rekognition#OrientationCorrection": {
@@ -5250,7 +5290,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)"
+                "smithy.api#pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)$"
             }
         },
         "com.amazonaws.rekognition#ProjectDescription": {
@@ -5292,7 +5332,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]+$"
             }
         },
         "com.amazonaws.rekognition#ProjectStatus": {
@@ -5321,7 +5361,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/version\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)"
+                "smithy.api#pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:project\\/[a-zA-Z0-9_.\\-]{1,255}\\/version\\/[a-zA-Z0-9_.\\-]{1,255}\\/[0-9]+$)$"
             }
         },
         "com.amazonaws.rekognition#ProjectVersionDescription": {
@@ -5987,7 +6027,7 @@
         "com.amazonaws.rekognition#RekognitionUniqueId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9A-Za-z]*"
+                "smithy.api#pattern": "^[0-9A-Za-z]*$"
             }
         },
         "com.amazonaws.rekognition#ResourceAlreadyExistsException": {
@@ -6086,7 +6126,7 @@
         "com.amazonaws.rekognition#RoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+"
+                "smithy.api#pattern": "^arn:aws:iam::\\d{12}:role/?[a-zA-Z_0-9+=,.@\\-_/]+$"
             }
         },
         "com.amazonaws.rekognition#S3Bucket": {
@@ -6096,7 +6136,7 @@
                     "min": 3,
                     "max": 255
                 },
-                "smithy.api#pattern": "[0-9A-Za-z\\.\\-_]*"
+                "smithy.api#pattern": "^[0-9A-Za-z\\.\\-_]*$"
             }
         },
         "com.amazonaws.rekognition#S3KeyPrefix": {
@@ -6155,7 +6195,7 @@
         "com.amazonaws.rekognition#SNSTopicArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^arn:aws:sns:.*:\\w{12}:.+$)"
+                "smithy.api#pattern": "^(^arn:aws:sns:.*:\\w{12}:.+$)$"
             }
         },
         "com.amazonaws.rekognition#SearchFaces": {
@@ -6417,6 +6457,24 @@
                     "traits": {
                         "smithy.api#documentation": "<p>If the segment is a shot detection, contains information about the shot detection.</p>"
                     }
+                },
+                "StartFrameNumber": {
+                    "target": "com.amazonaws.rekognition#ULong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The frame number of the start of a video segment, using a frame index that starts with 0.\n    </p>"
+                    }
+                },
+                "EndFrameNumber": {
+                    "target": "com.amazonaws.rekognition#ULong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The frame number at the end of a video segment, using a frame index that starts with 0.\n    </p>"
+                    }
+                },
+                "DurationFrames": {
+                    "target": "com.amazonaws.rekognition#ULong",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The duration of a video segment, expressed in frames.\n    </p>"
+                    }
                 }
             },
             "traits": {
@@ -6603,7 +6661,7 @@
                 "NotificationChannel": {
                     "target": "com.amazonaws.rekognition#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the\n      celebrity recognition analysis to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the\n      celebrity recognition analysis to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>"
                     }
                 },
                 "JobTag": {
@@ -6663,7 +6721,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p> Starts asynchronous detection of unsafe content in a stored video.</p>\n         <p>Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n      and the filename of the video. <code>StartContentModeration</code>\n        returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis.\n        When unsafe content analysis is finished, Amazon Rekognition Video publishes a completion status\n        to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p>\n        <p>To get the results of the unsafe content analysis, first check that the status value published to the Amazon SNS\n        topic is <code>SUCCEEDED</code>. If so, call <a>GetContentModeration</a> and pass the job identifier\n        (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p>\n      \n         <p>For more information, see Detecting Unsafe Content in the Amazon Rekognition Developer Guide.</p>",
+                "smithy.api#documentation": "<p> Starts asynchronous detection of inappropriate, unwanted, or offensive content in a stored video. For a list of moderation labels in Amazon Rekognition, see\n      <a href=\"https://docs.aws.amazon.com/rekognition/latest/dg/moderation.html#moderation-api\">Using the image and video moderation APIs</a>.</p>\n         <p>Amazon Rekognition Video can moderate content in a video stored in an Amazon S3 bucket. Use <a>Video</a> to specify the bucket name\n      and the filename of the video. <code>StartContentModeration</code>\n        returns a job identifier (<code>JobId</code>) which you use to get the results of the analysis.\n        When content analysis is finished, Amazon Rekognition Video publishes a completion status\n        to the Amazon Simple Notification Service topic that you specify in <code>NotificationChannel</code>.</p>\n        <p>To get the results of the content analysis, first check that the status value published to the Amazon SNS\n        topic is <code>SUCCEEDED</code>. If so, call <a>GetContentModeration</a> and pass the job identifier\n        (<code>JobId</code>) from the initial call to <code>StartContentModeration</code>. </p>\n      \n         <p>For more information, see Content moderation in the Amazon Rekognition Developer Guide.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -6673,7 +6731,7 @@
                 "Video": {
                     "target": "com.amazonaws.rekognition#Video",
                     "traits": {
-                        "smithy.api#documentation": "<p>The video in which you want to detect unsafe content. The video must be stored\n      in an Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>The video in which you want to detect inappropriate, unwanted, or offensive content. The video must be stored\n      in an Amazon S3 bucket.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -6692,7 +6750,7 @@
                 "NotificationChannel": {
                     "target": "com.amazonaws.rekognition#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the\n      unsafe content analysis to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the completion status of the\n      content analysis to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>"
                     }
                 },
                 "JobTag": {
@@ -6709,7 +6767,7 @@
                 "JobId": {
                     "target": "com.amazonaws.rekognition#JobId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier for the unsafe content analysis job. Use <code>JobId</code> to identify the job in\n      a subsequent call to <code>GetContentModeration</code>.</p>"
+                        "smithy.api#documentation": "<p>The identifier for the content analysis job. Use <code>JobId</code> to identify the job in\n      a subsequent call to <code>GetContentModeration</code>.</p>"
                     }
                 }
             }
@@ -6775,7 +6833,7 @@
                 "NotificationChannel": {
                     "target": "com.amazonaws.rekognition#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the\n         face detection operation.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the\n         face detection operation. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>"
                     }
                 },
                 "FaceAttributes": {
@@ -6880,7 +6938,7 @@
                 "NotificationChannel": {
                     "target": "com.amazonaws.rekognition#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. </p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the search. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>"
                     }
                 },
                 "JobTag": {
@@ -6969,7 +7027,7 @@
                 "NotificationChannel": {
                     "target": "com.amazonaws.rekognition#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the label detection\n        operation to. </p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the label detection\n        operation to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>"
                     }
                 },
                 "JobTag": {
@@ -7052,7 +7110,7 @@
                 "NotificationChannel": {
                     "target": "com.amazonaws.rekognition#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection\n        operation to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon SNS topic ARN you want Amazon Rekognition Video to publish the completion status of the people detection\n        operation to. The Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy.</p>"
                     }
                 },
                 "JobTag": {
@@ -7222,7 +7280,7 @@
                 "NotificationChannel": {
                     "target": "com.amazonaws.rekognition#NotificationChannel",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the\n      segment detection operation.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to publish the completion status of the\n      segment detection operation. Note that the Amazon SNS topic must have a topic name that begins with <i>AmazonRekognition</i> if you are using the AmazonRekognitionServiceRole permissions policy to access the topic.</p>"
                     }
                 },
                 "JobTag": {
@@ -7329,6 +7387,12 @@
                     "target": "com.amazonaws.rekognition#SegmentConfidence",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the minimum confidence that Amazon Rekognition Video must have in order to return a detected segment. Confidence\n      represents how certain Amazon Rekognition is that a segment is correctly identified. 0 is the lowest confidence.\n      100 is the highest confidence.  Amazon Rekognition Video doesn't return any segments with a confidence level\n      lower than this specified value.</p>\n         <p>If you don't specify <code>MinSegmentConfidence</code>, <code>GetSegmentDetection</code> returns \n      segments with confidence values greater than or equal to 50 percent.</p>"
+                    }
+                },
+                "BlackFrame": {
+                    "target": "com.amazonaws.rekognition#BlackFrame",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A filter that allows you to control the black frame detection by specifying the black levels and pixel coverage of black pixels in a frame.\n      Videos can come from multiple sources, formats, and time periods, with different standards and varying noise levels for black frames that need to be accounted for.\n    </p>"
                     }
                 }
             },
@@ -7576,7 +7640,7 @@
         "com.amazonaws.rekognition#StreamProcessorArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:streamprocessor\\/.+$)"
+                "smithy.api#pattern": "^(^arn:[a-z\\d-]+:rekognition:[a-z\\d-]+:\\d{12}:streamprocessor\\/.+$)$"
             }
         },
         "com.amazonaws.rekognition#StreamProcessorInput": {
@@ -7606,7 +7670,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]+$"
             }
         },
         "com.amazonaws.rekognition#StreamProcessorOutput": {
@@ -7848,6 +7912,22 @@
                     {
                         "value": "BlackFrames",
                         "name": "BLACK_FRAMES"
+                    },
+                    {
+                        "value": "OpeningCredits",
+                        "name": "OPENING_CREDITS"
+                    },
+                    {
+                        "value": "StudioLogo",
+                        "name": "STUDIO_LOGO"
+                    },
+                    {
+                        "value": "Slate",
+                        "name": "SLATE"
+                    },
+                    {
+                        "value": "Content",
+                        "name": "CONTENT"
                     }
                 ]
             }
@@ -8185,7 +8265,7 @@
                     "min": 1,
                     "max": 255
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9_.\\-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9_.\\-]+$"
             }
         },
         "com.amazonaws.rekognition#VersionNames": {
@@ -8212,6 +8292,21 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Video file stored in an Amazon S3 bucket. Amazon Rekognition video start operations such as <a>StartLabelDetection</a> use <code>Video</code> to\n            specify a video for analysis. The supported file formats are .mp4, .mov and .avi.</p>"
+            }
+        },
+        "com.amazonaws.rekognition#VideoColorRange": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "FULL",
+                        "name": "FULL"
+                    },
+                    {
+                        "value": "LIMITED",
+                        "name": "LIMITED"
+                    }
+                ]
             }
         },
         "com.amazonaws.rekognition#VideoJobStatus": {
@@ -8270,6 +8365,12 @@
                     "target": "com.amazonaws.rekognition#ULong",
                     "traits": {
                         "smithy.api#documentation": "<p>Horizontal pixel dimension of the video.</p>"
+                    }
+                },
+                "ColorRange": {
+                    "target": "com.amazonaws.rekognition#VideoColorRange",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      A description of the range of luminance values in a video, either LIMITED (16 to 235) or FULL (0 to 255).\n    </p>"
                     }
                 }
             },

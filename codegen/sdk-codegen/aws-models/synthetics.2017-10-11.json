@@ -35,12 +35,19 @@
                 "ScreenshotName": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>The name of the screenshot. This is generated the first time the canary is run after the <code>UpdateCanary</code> operation that\n      specified for this canary to perform visual monitoring.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IgnoreCoordinates": {
-                    "target": "com.amazonaws.synthetics#BaseScreenshotIgnoreCoordinates"
+                    "target": "com.amazonaws.synthetics#BaseScreenshotIgnoreCoordinates",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Coordinates that define the part of a screen to ignore during screenshot comparisons. To obtain the coordinates to use here, use the \n         CloudWatch Logs console to draw the boundaries on the screen. For more information, see {LINK}</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A structure representing a screenshot that is used as a baseline during visual monitoring comparisons made by the canary.</p>"
             }
         },
         "com.amazonaws.synthetics#BaseScreenshotConfigIgnoreCoordinate": {
@@ -167,7 +174,10 @@
                     "target": "com.amazonaws.synthetics#VpcConfigOutput"
                 },
                 "VisualReference": {
-                    "target": "com.amazonaws.synthetics#VisualReferenceOutput"
+                    "target": "com.amazonaws.synthetics#VisualReferenceOutput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run to use as the baseline for screenshots, and the coordinates\n      of any parts of the screen to ignore during the visual monitoring comparison.</p>"
+                    }
                 },
                 "Tags": {
                     "target": "com.amazonaws.synthetics#TagMap",
@@ -214,7 +224,7 @@
                 "ZipFile": {
                     "target": "com.amazonaws.synthetics#Blob",
                     "traits": {
-                        "smithy.api#documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3\n         location, the value of this parameter is the base64-encoded contents of the .zip file that \n         contains the script. It can be\n         up to 5 MB.</p>"
+                        "smithy.api#documentation": "<p>If you input your canary script directly into the canary instead of referring to an S3\n         location, the value of this parameter is the base64-encoded contents of the .zip file that \n         contains the script. It must be smaller than 256 Kb.</p>"
                     }
                 },
                 "Handler": {
@@ -1782,7 +1792,10 @@
                     }
                 },
                 "VisualReference": {
-                    "target": "com.amazonaws.synthetics#VisualReferenceInput"
+                    "target": "com.amazonaws.synthetics#VisualReferenceInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Defines the screenshots to use as the baseline for comparisons during visual monitoring comparisons during future runs of this canary. If you omit this \n      parameter, no changes are made to any baseline screenshots that the canary might be using already.</p>\n         <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b>\n         runtime or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html\">\n            Visual monitoring</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html\">\n               Visual monitoring blueprint</a>\n         </p>"
+                    }
                 }
             }
         },
@@ -1807,25 +1820,41 @@
             "type": "structure",
             "members": {
                 "BaseScreenshots": {
-                    "target": "com.amazonaws.synthetics#BaseScreenshots"
+                    "target": "com.amazonaws.synthetics#BaseScreenshots",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of screenshots that will be used as the baseline for visual monitoring in future runs of this canary. If there is a screenshot that you don't want to be used for\n      visual monitoring, remove it from this array.</p>"
+                    }
                 },
                 "BaseCanaryRunId": {
                     "target": "com.amazonaws.synthetics#String",
                     "traits": {
+                        "smithy.api#documentation": "<p>Specifies which canary run to use the screenshots from as the baseline for future visual monitoring with this canary. Valid values are \n         <code>nextrun</code> to use the screenshots from the next run after this update is made, <code>lastrun</code> to use the screenshots from the most recent run \n         before this update was made, or the value of <code>Id</code> in the <a href=\"https://docs.aws.amazon.com/AmazonSynthetics/latest/APIReference/API_CanaryRun.html\">\n            CanaryRun</a> from any past run of this canary.</p>",
                         "smithy.api#required": {}
                     }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An object that specifies what screenshots to use as a baseline for visual monitoring by this canary, and optionally the parts of the screenshots to ignore during the visual monitoring comparison.</p>\n      \n         <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b>\n         runtime or later. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Library_SyntheticsLogger_VisualTesting.html\">\n            Visual monitoring</a> and <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CloudWatch_Synthetics_Canaries_Blueprints_VisualTesting.html\">\n               Visual monitoring blueprint</a>\n         </p>"
             }
         },
         "com.amazonaws.synthetics#VisualReferenceOutput": {
             "type": "structure",
             "members": {
                 "BaseScreenshots": {
-                    "target": "com.amazonaws.synthetics#BaseScreenshots"
+                    "target": "com.amazonaws.synthetics#BaseScreenshots",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An array of screenshots that are used as the baseline for comparisons during visual monitoring.</p>"
+                    }
                 },
                 "BaseCanaryRunId": {
-                    "target": "com.amazonaws.synthetics#String"
+                    "target": "com.amazonaws.synthetics#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the canary run that produced the screenshots that are used as the baseline for visual monitoring comparisons during future runs of this canary.</p>"
+                    }
                 }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>If this canary performs visual monitoring by comparing screenshots, this structure contains the ID of the canary run that is used as the baseline for screenshots, and the coordinates\n         of any parts of those screenshots that are ignored during visual monitoring comparison.</p>\n         <p>Visual monitoring is supported only on canaries running the <b>syn-puppeteer-node-3.2</b> runtime or later.</p>"
             }
         },
         "com.amazonaws.synthetics#VpcConfigInput": {

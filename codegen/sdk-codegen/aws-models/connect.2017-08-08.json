@@ -58,6 +58,177 @@
                 }
             }
         },
+        "com.amazonaws.connect#AgentStatus": {
+            "type": "structure",
+            "members": {
+                "AgentStatusARN": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent status.</p>"
+                    }
+                },
+                "AgentStatusId": {
+                    "target": "com.amazonaws.connect#AgentStatusId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the agent status.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#AgentStatusName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent status.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#AgentStatusDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the agent status.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#AgentStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of agent status.</p>"
+                    }
+                },
+                "DisplayOrder": {
+                    "target": "com.amazonaws.connect#AgentStatusOrderNumber",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The display order of the agent status.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.connect#AgentStatusState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the agent status.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information about an agent status.</p>"
+            }
+        },
+        "com.amazonaws.connect#AgentStatusDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.connect#AgentStatusId": {
+            "type": "string"
+        },
+        "com.amazonaws.connect#AgentStatusName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 127
+                }
+            }
+        },
+        "com.amazonaws.connect#AgentStatusOrderNumber": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.connect#AgentStatusState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ENABLED",
+                        "name": "ENABLED"
+                    },
+                    {
+                        "value": "DISABLED",
+                        "name": "DISABLED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connect#AgentStatusSummary": {
+            "type": "structure",
+            "members": {
+                "Id": {
+                    "target": "com.amazonaws.connect#AgentStatusId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for an agent status.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the agent status.</p>"
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#AgentStatusName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent status.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.connect#AgentStatusType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of the agent status.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Summary information for an agent status.</p>"
+            }
+        },
+        "com.amazonaws.connect#AgentStatusSummaryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AgentStatusSummary"
+            }
+        },
+        "com.amazonaws.connect#AgentStatusType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ROUTABLE",
+                        "name": "ROUTABLE"
+                    },
+                    {
+                        "value": "CUSTOM",
+                        "name": "CUSTOM"
+                    },
+                    {
+                        "value": "OFFLINE",
+                        "name": "OFFLINE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.connect#AgentStatusTypes": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.connect#AgentStatusType"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 3
+                }
+            }
+        },
         "com.amazonaws.connect#AgentUsername": {
             "type": "string",
             "traits": {
@@ -105,7 +276,13 @@
                     "target": "com.amazonaws.connect#AssociateSecurityKey"
                 },
                 {
+                    "target": "com.amazonaws.connect#CreateAgentStatus"
+                },
+                {
                     "target": "com.amazonaws.connect#CreateContactFlow"
+                },
+                {
+                    "target": "com.amazonaws.connect#CreateHoursOfOperation"
                 },
                 {
                     "target": "com.amazonaws.connect#CreateInstance"
@@ -132,6 +309,9 @@
                     "target": "com.amazonaws.connect#CreateUserHierarchyGroup"
                 },
                 {
+                    "target": "com.amazonaws.connect#DeleteHoursOfOperation"
+                },
+                {
                     "target": "com.amazonaws.connect#DeleteInstance"
                 },
                 {
@@ -148,6 +328,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#DeleteUserHierarchyGroup"
+                },
+                {
+                    "target": "com.amazonaws.connect#DescribeAgentStatus"
                 },
                 {
                     "target": "com.amazonaws.connect#DescribeContactFlow"
@@ -217,6 +400,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#GetMetricData"
+                },
+                {
+                    "target": "com.amazonaws.connect#ListAgentStatuses"
                 },
                 {
                     "target": "com.amazonaws.connect#ListApprovedOrigins"
@@ -318,6 +504,9 @@
                     "target": "com.amazonaws.connect#UntagResource"
                 },
                 {
+                    "target": "com.amazonaws.connect#UpdateAgentStatus"
+                },
+                {
                     "target": "com.amazonaws.connect#UpdateContactAttributes"
                 },
                 {
@@ -325,6 +514,9 @@
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateContactFlowName"
+                },
+                {
+                    "target": "com.amazonaws.connect#UpdateHoursOfOperation"
                 },
                 {
                     "target": "com.amazonaws.connect#UpdateInstanceAttribute"
@@ -965,6 +1157,9 @@
         "com.amazonaws.connect#AutoAccept": {
             "type": "boolean"
         },
+        "com.amazonaws.connect#Boolean": {
+            "type": "boolean"
+        },
         "com.amazonaws.connect#BotName": {
             "type": "string",
             "traits": {
@@ -1060,15 +1255,6 @@
                 "smithy.api#length": {
                     "min": 0,
                     "max": 500
-                }
-            }
-        },
-        "com.amazonaws.connect#CommonDescriptionLength250": {
-            "type": "string",
-            "traits": {
-                "smithy.api#length": {
-                    "min": 0,
-                    "max": 250
                 }
             }
         },
@@ -1318,6 +1504,109 @@
                 "target": "com.amazonaws.connect#Reference"
             }
         },
+        "com.amazonaws.connect#CreateAgentStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateAgentStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateAgentStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Creates an agent status for the specified Amazon Connect instance.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/agent-status/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateAgentStatusRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#AgentStatusName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#AgentStatusDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the status.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.connect#AgentStatusState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the status.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "DisplayOrder": {
+                    "target": "com.amazonaws.connect#AgentStatusOrderNumber",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The display order of the status.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateAgentStatusResponse": {
+            "type": "structure",
+            "members": {
+                "AgentStatusARN": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the agent status.</p>"
+                    }
+                },
+                "AgentStatusId": {
+                    "target": "com.amazonaws.connect#AgentStatusId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the agent status.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#CreateContactFlow": {
             "type": "operation",
             "input": {
@@ -1420,6 +1709,109 @@
                     "target": "com.amazonaws.connect#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact flow.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateHoursOfOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#CreateHoursOfOperationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#CreateHoursOfOperationResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Creates hours of operation. </p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/hours-of-operations/{InstanceId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateHoursOfOperationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#CommonNameLength127",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the hours of operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#HoursOfOperationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the hours of operation.</p>"
+                    }
+                },
+                "TimeZone": {
+                    "target": "com.amazonaws.connect#TimeZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone of the hours of operation.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.connect#HoursOfOperationConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information for the hours of operation: day, start time, and end time.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.connect#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One or more tags.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#CreateHoursOfOperationResponse": {
+            "type": "structure",
+            "members": {
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation.</p>"
+                    }
+                },
+                "HoursOfOperationArn": {
+                    "target": "com.amazonaws.connect#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the hours of operation.</p>"
                     }
                 }
             }
@@ -2421,6 +2813,58 @@
                 }
             }
         },
+        "com.amazonaws.connect#DeleteHoursOfOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DeleteHoursOfOperationRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Deletes an hours of operation.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DeleteHoursOfOperationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the hours of operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.connect#DeleteInstance": {
             "type": "operation",
             "input": {
@@ -2720,6 +3164,72 @@
                         "smithy.api#documentation": "<p>The identifier of the user.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeAgentStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#DescribeAgentStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#DescribeAgentStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Describes an agent status.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/agent-status/{InstanceId}/{AgentStatusId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeAgentStatusRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentStatusId": {
+                    "target": "com.amazonaws.connect#AgentStatusId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the agent status.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#DescribeAgentStatusResponse": {
+            "type": "structure",
+            "members": {
+                "AgentStatus": {
+                    "target": "com.amazonaws.connect#AgentStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The agent status.</p>"
                     }
                 }
             }
@@ -4916,7 +5426,7 @@
                     }
                 },
                 "Description": {
-                    "target": "com.amazonaws.connect#CommonDescriptionLength250",
+                    "target": "com.amazonaws.connect#HoursOfOperationDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description for the hours of operation.</p>"
                     }
@@ -4950,19 +5460,22 @@
                 "Day": {
                     "target": "com.amazonaws.connect#HoursOfOperationDays",
                     "traits": {
-                        "smithy.api#documentation": "<p>The day that the hours of operation applies to.</p>"
+                        "smithy.api#documentation": "<p>The day that the hours of operation applies to.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "StartTime": {
                     "target": "com.amazonaws.connect#HoursOfOperationTimeSlice",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start time that your contact center is open.</p>"
+                        "smithy.api#documentation": "<p>The start time that your contact center is open.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.connect#HoursOfOperationTimeSlice",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end time that your contact center is closes.</p>"
+                        "smithy.api#documentation": "<p>The end time that your contact center is closes.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -4974,6 +5487,12 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.connect#HoursOfOperationConfig"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.connect#HoursOfOperationDays": {
@@ -5009,6 +5528,15 @@
                         "name": "SATURDAY"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.connect#HoursOfOperationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 250
+                }
             }
         },
         "com.amazonaws.connect#HoursOfOperationId": {
@@ -5055,13 +5583,17 @@
                 "Hours": {
                     "target": "com.amazonaws.connect#Hours24Format",
                     "traits": {
-                        "smithy.api#documentation": "<p>The hours.</p>"
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The hours.</p>",
+                        "smithy.api#required": {}
                     }
                 },
                 "Minutes": {
                     "target": "com.amazonaws.connect#MinutesLimit60",
                     "traits": {
-                        "smithy.api#documentation": "<p>The minutes.</p>"
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The minutes.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             },
@@ -5698,6 +6230,98 @@
                 "smithy.api#documentation": "<p>The allowed limit for the resource has been exceeded.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 429
+            }
+        },
+        "com.amazonaws.connect#ListAgentStatusRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The token for the next set of results. Use the value returned in the previous \nresponse in the next request to retrieve the next set of results.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.connect#MaxResult1000",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The maximum number of results to return per page.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                },
+                "AgentStatusTypes": {
+                    "target": "com.amazonaws.connect#AgentStatusTypes",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Available agent status types.</p>",
+                        "smithy.api#httpQuery": "AgentStatusTypes"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListAgentStatusResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.connect#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are additional results, this is the token for the next set of results.</p>"
+                    }
+                },
+                "AgentStatusSummaryList": {
+                    "target": "com.amazonaws.connect#AgentStatusSummaryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A summary of agent statuses.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#ListAgentStatuses": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#ListAgentStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.connect#ListAgentStatusResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Lists agent statuses.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/agent-status/{InstanceId}",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "items": "AgentStatusSummaryList",
+                    "pageSize": "MaxResults"
+                }
             }
         },
         "com.amazonaws.connect#ListApprovedOrigins": {
@@ -10731,7 +11355,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, queues, quick connects, and\n   contact flows.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Adds the specified tags to the specified resource.</p>\n         <p>The supported resource types are users, routing profiles, queues, quick connects, \n   contact flows, agent status, and hours of operation.</p>\n         <p>For sample policies that use tags, see <a href=\"https://docs.aws.amazon.com/connect/latest/adminguide/security_iam_id-based-policy-examples.html\">Amazon Connect Identity-Based\n    Policy Examples</a> in the <i>Amazon Connect Administrator Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/tags/{resourceArn}",
@@ -10894,6 +11518,104 @@
                         "smithy.api#documentation": "<p>The tag keys.</p>",
                         "smithy.api#httpQuery": "tagKeys",
                         "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateAgentStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateAgentStatusRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Updates agent status.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/agent-status/{InstanceId}/{AgentStatusId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateAgentStatusDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateAgentStatusRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "AgentStatusId": {
+                    "target": "com.amazonaws.connect#AgentStatusId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the agent status.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#AgentStatusName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the agent status.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#UpdateAgentStatusDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the agent status.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.connect#AgentStatusState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the agent status.</p>"
+                    }
+                },
+                "DisplayOrder": {
+                    "target": "com.amazonaws.connect#AgentStatusOrderNumber",
+                    "traits": {
+                        "smithy.api#box": {},
+                        "smithy.api#documentation": "<p>The display order of the agent status.</p>"
+                    }
+                },
+                "ResetOrderNumber": {
+                    "target": "com.amazonaws.connect#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A number indicating the reset order of the agent status.</p>"
                     }
                 }
             }
@@ -11084,6 +11806,94 @@
                     "target": "com.amazonaws.connect#ContactFlowDescription",
                     "traits": {
                         "smithy.api#documentation": "<p>The description of the contact flow.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateHoursOfOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.connect#UpdateHoursOfOperationRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.connect#DuplicateResourceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.connect#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.connect#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and is subject to change.</p>\n         <p>Updates the hours of operation.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/hours-of-operations/{InstanceId}/{HoursOfOperationId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateHoursOfOperationDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 250
+                }
+            }
+        },
+        "com.amazonaws.connect#UpdateHoursOfOperationRequest": {
+            "type": "structure",
+            "members": {
+                "InstanceId": {
+                    "target": "com.amazonaws.connect#InstanceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Connect instance. You can find the instanceId in the ARN of the instance.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "HoursOfOperationId": {
+                    "target": "com.amazonaws.connect#HoursOfOperationId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the hours of operation.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.connect#CommonNameLength127",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the hours of operation.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.connect#UpdateHoursOfOperationDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the hours of operation.</p>"
+                    }
+                },
+                "TimeZone": {
+                    "target": "com.amazonaws.connect#TimeZone",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time zone of the hours of operation.</p>"
+                    }
+                },
+                "Config": {
+                    "target": "com.amazonaws.connect#HoursOfOperationConfigList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configuration information of the hours of operation.</p>"
                     }
                 }
             }

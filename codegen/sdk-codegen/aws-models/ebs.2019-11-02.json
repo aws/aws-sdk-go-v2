@@ -382,7 +382,7 @@
                     "name": "ebs"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create EBS snapshots, write data directly to \n    \t\tyour snapshots, read data on your snapshots, and identify the differences or changes between \n    \t\ttwo snapshots. If you’re an independent software vendor (ISV) who offers backup services for \n    \t\tAmazon EBS, the EBS direct APIs make it more efficient and cost-effective to track incremental changes on \n    \t\tyour EBS volumes through snapshots. This can be done without having to create new volumes \n    \t\tfrom snapshots, and then use Amazon Elastic Compute Cloud (Amazon EC2) instances to compare the differences.</p>\n    \t\t\n    \t    <p>You can create incremental snapshots directly from data on-premises into EBS volumes and the \n    \t\tcloud to use for quick disaster recovery. With the ability to write and read snapshots, you can \n    \t\twrite your on-premises data to an EBS snapshot during a disaster. Then after recovery, you can \n    \t\trestore it back to AWS or on-premises from the snapshot. You no longer need to build and \n    \t\tmaintain complex mechanisms to copy data to and from Amazon EBS.</p>\n\n\n        <p>This API reference provides detailed information about the actions, data types,\n            parameters, and errors of the EBS direct APIs. For more information about the elements that\n            make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User\n                Guide</i>. For more information about the supported AWS Regions, endpoints,\n            and service quotas for the EBS direct APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ebs-service.html\">Amazon Elastic Block Store Endpoints and Quotas</a> in\n            the <i>AWS General Reference</i>.</p>",
+                "smithy.api#documentation": "<p>You can use the Amazon Elastic Block Store (Amazon EBS) direct APIs to create Amazon EBS snapshots, write data directly to \n    \t\tyour snapshots, read data on your snapshots, and identify the differences or changes between \n    \t\ttwo snapshots. If you’re an independent software vendor (ISV) who offers backup services for \n    \t\tAmazon EBS, the EBS direct APIs make it more efficient and cost-effective to track incremental changes on \n    \t\tyour Amazon EBS volumes through snapshots. This can be done without having to create new volumes \n    \t\tfrom snapshots, and then use Amazon Elastic Compute Cloud (Amazon EC2) instances to compare the differences.</p>\n    \t\t\n    \t    <p>You can create incremental snapshots directly from data on-premises into volumes and the \n    \t\tcloud to use for quick disaster recovery. With the ability to write and read snapshots, you can \n    \t\twrite your on-premises data to an snapshot during a disaster. Then after recovery, you can \n    \t\trestore it back to Amazon Web Services or on-premises from the snapshot. You no longer need to build and \n    \t\tmaintain complex mechanisms to copy data to and from Amazon EBS.</p>\n\n\n        <p>This API reference provides detailed information about the actions, data types,\n            parameters, and errors of the EBS direct APIs. For more information about the elements that\n            make up the EBS direct APIs, and examples of how to use them effectively, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html\">Accessing the Contents of an Amazon EBS Snapshot</a> in the <i>Amazon Elastic Compute Cloud User\n                Guide</i>. For more information about the supported Amazon Web Services Regions, endpoints,\n            and service quotas for the EBS direct APIs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/ebs-service.html\">Amazon Elastic Block Store Endpoints and Quotas</a> in\n            the <i>Amazon Web Services General Reference</i>.</p>",
                 "smithy.api#title": "Amazon Elastic Block Store"
             }
         },
@@ -524,7 +524,7 @@
                     "min": 1,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:kms:.*:[0-9]{12}:key/.*",
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:kms:.*:[0-9]{12}:key/",
                 "smithy.api#sensitive": {}
             }
         },
@@ -635,7 +635,7 @@
                 "BlockSize": {
                     "target": "com.amazonaws.ebs#BlockSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the block.</p>"
+                        "smithy.api#documentation": "<p>The size of the blocks in the snapshot, in bytes.</p>"
                     }
                 },
                 "NextToken": {
@@ -746,7 +746,7 @@
                 "BlockSize": {
                     "target": "com.amazonaws.ebs#BlockSize",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the block.</p>"
+                        "smithy.api#documentation": "<p>The size of the blocks in the snapshot, in bytes.</p>"
                     }
                 },
                 "NextToken": {
@@ -774,7 +774,7 @@
                     "min": 1,
                     "max": 24
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.ebs#PageToken": {
@@ -830,7 +830,7 @@
                 "smithy.api#auth": [
                     "aws.auth#sigv4"
                 ],
-                "smithy.api#documentation": "<p>Writes a block of data to a snapshot. If the specified block contains\n            data, the existing data is overwritten. The target snapshot must be in the\n                <code>pending</code> state.</p>  \t\n    \t    <p>Data written to a snapshot must be aligned with 512-byte sectors.</p>",
+                "smithy.api#documentation": "<p>Writes a block of data to a snapshot. If the specified block contains\n            data, the existing data is overwritten. The target snapshot must be in the\n                <code>pending</code> state.</p>  \t\n    \t    <p>Data written to a snapshot must be aligned with 512-KiB sectors.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/snapshots/{SnapshotId}/blocks/{BlockIndex}",
@@ -868,7 +868,7 @@
                 "DataLength": {
                     "target": "com.amazonaws.ebs#DataLength",
                     "traits": {
-                        "smithy.api#documentation": "<p>The size of the data to write to the block, in bytes. Currently, the only supported\n            size is <code>524288</code>.</p>\n        <p>Valid values: <code>524288</code>\n         </p>",
+                        "smithy.api#documentation": "<p>The size of the data to write to the block, in bytes. Currently, the only supported\n            size is <code>524288</code> bytes.</p>\n        <p>Valid values: <code>524288</code>\n         </p>",
                         "smithy.api#httpHeader": "x-amz-Data-Length",
                         "smithy.api#required": {}
                     }
@@ -1099,20 +1099,20 @@
                 "ClientToken": {
                     "target": "com.amazonaws.ebs#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. Idempotency ensures that an API request completes only once. With an idempotent \n            request, if the original request completes successfully. The subsequent retries with the same \n            client token return the result from the original successful request and they have no additional \n            effect.</p>\n        <p>If you do not specify a client token, one is automatically generated by the AWS SDK.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html\">\n    \t\tIdempotency for StartSnapshot API</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n            request. Idempotency ensures that an API request completes only once. With an idempotent \n            request, if the original request completes successfully. The subsequent retries with the same \n            client token return the result from the original successful request and they have no additional \n            effect.</p>\n        <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services SDK.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-direct-api-idempotency.html\">\n    \t\tIdempotency for StartSnapshot API</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 },
                 "Encrypted": {
                     "target": "com.amazonaws.ebs#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify\n                <code>true</code>. To create an unencrypted snapshot, omit this parameter.</p>\n        <p>If you specify a value for <b>ParentSnapshotId</b>, omit\n            this parameter.</p>\n        <p>If you specify <code>true</code>, the snapshot is encrypted using the CMK specified\n            using the <b>KmsKeyArn</b> parameter. If no value is specified\n            for <b>KmsKeyArn</b>, the default CMK for your account is \n        \tused. If no default CMK has been specified for your account, the AWS managed CMK is used. \n        \tTo set a default CMK for your account, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html\">\n        \t\tModifyEbsDefaultKmsKeyId</a>.</p>\n        <p>If your account is enabled for encryption by default, you cannot set this parameter to\n                <code>false</code>. In this case, you can omit this parameter.</p>\n\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption\">\n                Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to encrypt the snapshot. To create an encrypted snapshot, specify\n                <code>true</code>. To create an unencrypted snapshot, omit this parameter.</p>\n        <p>If you specify a value for <b>ParentSnapshotId</b>, omit\n            this parameter.</p>\n        <p>If you specify <code>true</code>, the snapshot is encrypted using the KMS key specified\n            using the <b>KmsKeyArn</b> parameter. If no value is specified\n            for <b>KmsKeyArn</b>, the default KMS key for your account is \n            used. If no default KMS key has been specified for your account, the Amazon Web Services managed KMS key is used. \n            To set a default KMS key for your account, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ModifyEbsDefaultKmsKeyId.html\">\n        \t\tModifyEbsDefaultKmsKeyId</a>.</p>\n        <p>If your account is enabled for encryption by default, you cannot set this parameter to\n                <code>false</code>. In this case, you can omit this parameter.</p>\n\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ebs-accessing-snapshot.html#ebsapis-using-encryption\">\n                Using encryption</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "KmsKeyArn": {
                     "target": "com.amazonaws.ebs#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) \n        \tcustomer master key (CMK) to be used to encrypt the snapshot. If you do not specify a \n        \tCMK, the default AWS managed CMK is used.</p>\n        <p>If you specify a <b>ParentSnapshotId</b>, omit this\n            parameter; the snapshot will be encrypted using the same CMK that was used to encrypt\n            the parent snapshot.</p>\n        <p>If <b>Encrypted</b> is set to <code>true</code>, \n        \tyou must specify a CMK ARN. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) \n        \tkey to be used to encrypt the snapshot. If you do not specify a \n            KMS key, the default Amazon Web Services managed KMS key is used.</p>\n        <p>If you specify a <b>ParentSnapshotId</b>, omit this\n            parameter; the snapshot will be encrypted using the same KMS key that was used to encrypt\n            the parent snapshot.</p>\n        <p>If <b>Encrypted</b> is set to <code>true</code>, \n            you must specify a KMS key ARN. </p>"
                     }
                 },
                 "Timeout": {
@@ -1141,7 +1141,7 @@
                 "OwnerId": {
                     "target": "com.amazonaws.ebs#OwnerId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID of the snapshot owner.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the snapshot owner.</p>"
                     }
                 },
                 "Status": {
@@ -1183,7 +1183,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.ebs#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS Key Management Service (AWS KMS) customer\n            master key (CMK) used to encrypt the snapshot.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the Key Management Service (KMS) key used to encrypt the snapshot.</p>"
                     }
                 }
             }
