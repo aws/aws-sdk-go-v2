@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete a list of parameters.
+// Delete a list of parameters. After deleting a parameter, wait for at least 30
+// seconds to create a parameter with the same name.
 func (c *Client) DeleteParameters(ctx context.Context, params *DeleteParametersInput, optFns ...func(*Options)) (*DeleteParametersOutput, error) {
 	if params == nil {
 		params = &DeleteParametersInput{}
@@ -28,7 +29,8 @@ func (c *Client) DeleteParameters(ctx context.Context, params *DeleteParametersI
 
 type DeleteParametersInput struct {
 
-	// The names of the parameters to delete.
+	// The names of the parameters to delete. After deleting a parameter, wait for at
+	// least 30 seconds to create a parameter with the same name.
 	//
 	// This member is required.
 	Names []string

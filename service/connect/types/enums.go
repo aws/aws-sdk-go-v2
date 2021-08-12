@@ -2,6 +2,44 @@
 
 package types
 
+type AgentStatusState string
+
+// Enum values for AgentStatusState
+const (
+	AgentStatusStateEnabled  AgentStatusState = "ENABLED"
+	AgentStatusStateDisabled AgentStatusState = "DISABLED"
+)
+
+// Values returns all known values for AgentStatusState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AgentStatusState) Values() []AgentStatusState {
+	return []AgentStatusState{
+		"ENABLED",
+		"DISABLED",
+	}
+}
+
+type AgentStatusType string
+
+// Enum values for AgentStatusType
+const (
+	AgentStatusTypeRoutable AgentStatusType = "ROUTABLE"
+	AgentStatusTypeCustom   AgentStatusType = "CUSTOM"
+	AgentStatusTypeOffline  AgentStatusType = "OFFLINE"
+)
+
+// Values returns all known values for AgentStatusType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AgentStatusType) Values() []AgentStatusType {
+	return []AgentStatusType{
+		"ROUTABLE",
+		"CUSTOM",
+		"OFFLINE",
+	}
+}
+
 type Channel string
 
 // Enum values for Channel

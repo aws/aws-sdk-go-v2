@@ -18,8 +18,8 @@ import (
 // in the Amazon Route 53 Developer Guide. To request a higher limit, open a case
 // (https://console.aws.amazon.com/support/home#/case/create?issueType=service-limit-increase&limitType=service-code-route53).
 // You can also view account limits in Amazon Web Services Trusted Advisor. Sign in
-// to the Management Console and open the Trusted Advisor console at
-// https://console.aws.amazon.com/trustedadvisor/
+// to the Amazon Web Services Management Console and open the Trusted Advisor
+// console at https://console.aws.amazon.com/trustedadvisor/
 // (https://console.aws.amazon.com/trustedadvisor). Then choose Service limits in
 // the navigation pane.
 func (c *Client) GetAccountLimit(ctx context.Context, params *GetAccountLimitInput, optFns ...func(*Options)) (*GetAccountLimitOutput, error) {

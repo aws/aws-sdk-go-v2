@@ -7,11 +7,11 @@ import (
 	"time"
 )
 
-// Information includes the account ID where the current document is shared and the
-// version shared with that account.
+// Information includes the Amazon Web Services account ID where the current
+// document is shared and the version shared with that account.
 type AccountSharingInfo struct {
 
-	// The account ID where the current document is shared.
+	// The Amazon Web Services account ID where the current document is shared.
 	AccountId *string
 
 	// The version of the current document shared with the account.
@@ -78,7 +78,7 @@ type Association struct {
 	// The version of the document used in the association.
 	DocumentVersion *string
 
-	// The ID of the instance.
+	// The instance ID.
 	InstanceId *string
 
 	// The date on which the association was last run.
@@ -139,7 +139,7 @@ type AssociationDescription struct {
 	// The document version.
 	DocumentVersion *string
 
-	// The ID of the instance.
+	// The instance ID.
 	InstanceId *string
 
 	// The date on which the association was last run.
@@ -204,7 +204,8 @@ type AssociationDescription struct {
 	// PutComplianceItems API operation. By default, all associations use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
-	// The combination of Regions and accounts where you want to run the association.
+	// The combination of Amazon Web Services Regions and Amazon Web Services accounts
+	// where you want to run the association.
 	TargetLocations []TargetLocation
 
 	// The instances targeted by the request.
@@ -455,8 +456,9 @@ type AssociationVersionInfo struct {
 	// PutComplianceItems API operation. By default, all associations use AUTO mode.
 	SyncCompliance AssociationSyncCompliance
 
-	// The combination of Regions and accounts where you wanted to run the association
-	// when this association version was created.
+	// The combination of Amazon Web Services Regions and Amazon Web Services accounts
+	// where you wanted to run the association when this association version was
+	// created.
 	TargetLocations []TargetLocation
 
 	// The targets specified for the association when the association version was
@@ -628,7 +630,8 @@ type AutomationExecution struct {
 	// The target of the execution.
 	Target *string
 
-	// The combination of Regions and/or accounts where you want to run the Automation.
+	// The combination of Amazon Web Services Regions and/or Amazon Web Services
+	// accounts where you want to run the Automation.
 	TargetLocations []TargetLocation
 
 	// The specified key-value mapping of document parameters to target resources.
@@ -678,9 +681,10 @@ type AutomationExecutionMetadata struct {
 	AutomationSubtype AutomationSubtype
 
 	// Use this filter with DescribeAutomationExecutions. Specify either Local or
-	// CrossAccount. CrossAccount is an Automation that runs in multiple Regions and
-	// accounts. For more information, see Running Automation workflows in multiple
-	// Regions and accounts
+	// CrossAccount. CrossAccount is an Automation that runs in multiple Amazon Web
+	// Services Regions and Amazon Web Services accounts. For more information, see
+	// Running Automation workflows in multiple Amazon Web Services Regions and
+	// accounts
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/systems-manager-automation-multiple-accounts-and-regions.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	AutomationType AutomationType
@@ -893,7 +897,8 @@ type Command struct {
 	OutputS3KeyPrefix *string
 
 	// (Deprecated) You can no longer specify this parameter. The system ignores it.
-	// Instead, Systems Manager automatically determines the Region of the S3 bucket.
+	// Instead, Systems Manager automatically determines the Amazon Web Services Region
+	// of the S3 bucket.
 	OutputS3Region *string
 
 	// The parameter values to be inserted in the document when running the command.
@@ -1398,12 +1403,13 @@ type CreateAssociationBatchRequestEntry struct {
 	// instance. You can specify Command or Automation runbooks. You can specify Amazon
 	// Web Services-predefined documents, documents you created, or a document that is
 	// shared with you from another account. For SSM documents that are shared with you
-	// from other accounts, you must specify the complete SSM document ARN, in the
-	// following format: arn:aws:ssm:region:account-id:document/document-name  For
-	// example: arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For
-	// Amazon Web Services-predefined documents and SSM documents you created in your
-	// account, you only need to specify the document name. For example,
-	// AWS-ApplyPatchBaseline or My-Document.
+	// from other Amazon Web Services accounts, you must specify the complete SSM
+	// document ARN, in the following format:
+	// arn:aws:ssm:region:account-id:document/document-name  For example:
+	// arn:aws:ssm:us-east-2:12345678912:document/My-Shared-Document For Amazon Web
+	// Services-predefined documents and SSM documents you created in your account, you
+	// only need to specify the document name. For example, AWS-ApplyPatchBaseline or
+	// My-Document.
 	//
 	// This member is required.
 	Name *string
@@ -1435,7 +1441,13 @@ type CreateAssociationBatchRequestEntry struct {
 	// The document version.
 	DocumentVersion *string
 
-	// The ID of the instance.
+	// The instance ID. InstanceId has been deprecated. To specify an instance ID for
+	// an association, use the Targets parameter. Requests that include the parameter
+	// InstanceID with Systems Manager documents (SSM documents) that use schema
+	// version 2.0 or later will fail. In addition, if you use the parameter
+	// InstanceId, you can't use the parameters AssociationName, DocumentVersion,
+	// MaxErrors, MaxConcurrency, OutputLocation, or ScheduleExpression. To use these
+	// parameters, you must use the Targets parameter.
 	InstanceId *string
 
 	// The maximum number of targets allowed to run the association at the same time.
@@ -2650,7 +2662,7 @@ type LoggingInfo struct {
 	// This member is required.
 	S3BucketName *string
 
-	// The Region where the S3 bucket is located.
+	// The Amazon Web Services Region where the S3 bucket is located.
 	//
 	// This member is required.
 	S3Region *string
@@ -3242,9 +3254,21 @@ type OpsFilter struct {
 }
 
 // Operations engineers and IT professionals use Amazon Web Services Systems
-// Manager OpsCenter to view, investigate, and remediate operational issues
-// impacting the performance and health of their Amazon Web Services resources. For
-// more information, see OpsCenter
+// Manager OpsCenter to view, investigate, and remediate operational work items
+// (OpsItems) impacting the performance and health of their Amazon Web Services
+// resources. OpsCenter is integrated with Amazon EventBridge and Amazon
+// CloudWatch. This means you can configure these services to automatically create
+// an OpsItem in OpsCenter when a CloudWatch alarm enters the ALARM state or when
+// EventBridge processes an event from any Amazon Web Services service that
+// publishes events. Configuring Amazon CloudWatch alarms and EventBridge events to
+// automatically create OpsItems allows you to quickly diagnose and remediate
+// issues with Amazon Web Services resources from a single console. To help you
+// diagnose issues, each OpsItem includes contextually relevant information such as
+// the name and ID of the Amazon Web Services resource that generated the OpsItem,
+// alarm or event details, alarm history, and an alarm timeline graph. For the
+// Amazon Web Services resource, OpsCenter aggregates information from Config,
+// CloudTrail logs, and EventBridge, so you don't have to navigate across multiple
+// console pages during your investigation. For more information, see OpsCenter
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/OpsCenter.html) in
 // the Amazon Web Services Systems Manager User Guide.
 type OpsItem struct {
@@ -3261,7 +3285,7 @@ type OpsItem struct {
 	// Recovery, Security.
 	Category *string
 
-	// The ARN of the account that created the OpsItem.
+	// The ARN of the Amazon Web Services account that created the OpsItem.
 	CreatedBy *string
 
 	// The date and time the OpsItem was created.
@@ -3270,7 +3294,7 @@ type OpsItem struct {
 	// The OpsItem description.
 	Description *string
 
-	// The ARN of the account that last updated the OpsItem.
+	// The ARN of the Amazon Web Services account that last updated the OpsItem.
 	LastModifiedBy *string
 
 	// The date and time the OpsItem was last updated.
@@ -4164,24 +4188,27 @@ type PatchStatus struct {
 // execution.
 type ProgressCounters struct {
 
-	// The total number of steps that the system cancelled in all specified Regions and
-	// accounts for the current Automation execution.
+	// The total number of steps that the system cancelled in all specified Amazon Web
+	// Services Regions and Amazon Web Services accounts for the current Automation
+	// execution.
 	CancelledSteps int32
 
-	// The total number of steps that failed to run in all specified Regions and
-	// accounts for the current Automation execution.
+	// The total number of steps that failed to run in all specified Amazon Web
+	// Services Regions and Amazon Web Services accounts for the current Automation
+	// execution.
 	FailedSteps int32
 
-	// The total number of steps that successfully completed in all specified Regions
-	// and accounts for the current Automation execution.
+	// The total number of steps that successfully completed in all specified Amazon
+	// Web Services Regions and Amazon Web Services accounts for the current Automation
+	// execution.
 	SuccessSteps int32
 
-	// The total number of steps that timed out in all specified Regions and accounts
-	// for the current Automation execution.
+	// The total number of steps that timed out in all specified Amazon Web Services
+	// Regions and Amazon Web Services accounts for the current Automation execution.
 	TimedOutSteps int32
 
-	// The total number of steps run in all specified Regions and accounts for the
-	// current Automation execution.
+	// The total number of steps run in all specified Amazon Web Services Regions and
+	// Amazon Web Services accounts for the current Automation execution.
 	TotalSteps int32
 
 	noSmithyDocumentSerde
@@ -4246,7 +4273,7 @@ type ResourceComplianceSummaryItem struct {
 
 // Information about the AwsOrganizationsSource resource data sync source. A sync
 // source of this type can synchronize data from Organizations or, if an Amazon Web
-// Services organization isn't present, from multiple Regions.
+// Services organization isn't present, from multiple Amazon Web Services Regions.
 type ResourceDataSyncAwsOrganizationsSource struct {
 
 	// If an Amazon Web Services organization is present, this is either
@@ -4264,9 +4291,9 @@ type ResourceDataSyncAwsOrganizationsSource struct {
 }
 
 // Synchronize Amazon Web Services Systems Manager Inventory data from multiple
-// accounts defined in Organizations to a centralized Amazon S3 bucket. Data is
-// synchronized to individual key prefixes in the central bucket. Each key prefix
-// represents a different account ID.
+// Amazon Web Services accounts defined in Organizations to a centralized Amazon S3
+// bucket. Data is synchronized to individual key prefixes in the central bucket.
+// Each key prefix represents a different Amazon Web Services account ID.
 type ResourceDataSyncDestinationDataSharing struct {
 
 	// The sharing data type. Only Organization is supported.
@@ -4309,7 +4336,7 @@ type ResourceDataSyncItem struct {
 	// The type of resource data sync. If SyncType is SyncToDestination, then the
 	// resource data sync synchronizes data to an S3 bucket. If the SyncType is
 	// SyncFromSource then the resource data sync synchronizes data from Organizations
-	// or from multiple Regions.
+	// or from multiple Amazon Web Services Regions.
 	SyncType *string
 
 	noSmithyDocumentSerde
@@ -4332,7 +4359,8 @@ type ResourceDataSyncS3Destination struct {
 	// This member is required.
 	BucketName *string
 
-	// The Region with the S3 bucket targeted by the resource data sync.
+	// The Amazon Web Services Region with the S3 bucket targeted by the resource data
+	// sync.
 	//
 	// This member is required.
 	Region *string
@@ -4358,7 +4386,7 @@ type ResourceDataSyncS3Destination struct {
 // Information about the source of the data included in the resource data sync.
 type ResourceDataSyncSource struct {
 
-	// The SyncSource Regions included in the resource data sync.
+	// The SyncSource Amazon Web Services Regions included in the resource data sync.
 	//
 	// This member is required.
 	SourceRegions []string
@@ -4376,15 +4404,15 @@ type ResourceDataSyncSource struct {
 
 	// When you create a resource data sync, if you choose one of the Organizations
 	// options, then Systems Manager automatically enables all OpsData sources in the
-	// selected Regions for all accounts in your organization (or in the selected
-	// organization units). For more information, see About multiple account and Region
-	// resource data syncs
+	// selected Amazon Web Services Regions for all Amazon Web Services accounts in
+	// your organization (or in the selected organization units). For more information,
+	// see About multiple account and Region resource data syncs
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	EnableAllOpsDataSources bool
 
-	// Whether to automatically synchronize and aggregate data from new Regions when
-	// those Regions come online.
+	// Whether to automatically synchronize and aggregate data from new Amazon Web
+	// Services Regions when those Regions come online.
 	IncludeFutureRegions bool
 
 	noSmithyDocumentSerde
@@ -4405,18 +4433,18 @@ type ResourceDataSyncSourceWithState struct {
 
 	// When you create a resource data sync, if you choose one of the Organizations
 	// options, then Systems Manager automatically enables all OpsData sources in the
-	// selected Regions for all accounts in your organization (or in the selected
-	// organization units). For more information, see About multiple account and Region
-	// resource data syncs
+	// selected Amazon Web Services Regions for all Amazon Web Services accounts in
+	// your organization (or in the selected organization units). For more information,
+	// see About multiple account and Region resource data syncs
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/Explorer-resouce-data-sync-multiple-accounts-and-regions.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	EnableAllOpsDataSources bool
 
-	// Whether to automatically synchronize and aggregate data from new Regions when
-	// those Regions come online.
+	// Whether to automatically synchronize and aggregate data from new Amazon Web
+	// Services Regions when those Regions come online.
 	IncludeFutureRegions bool
 
-	// The SyncSource Regions included in the resource data sync.
+	// The SyncSource Amazon Web Services Regions included in the resource data sync.
 	SourceRegions []string
 
 	// The type of data source for the resource data sync. SourceType is either
@@ -4490,8 +4518,8 @@ type Runbook struct {
 	// StartChangeRequestExecution.
 	Parameters map[string][]string
 
-	// Information about the Regions and accounts targeted by the current Runbook
-	// operation.
+	// Information about the Amazon Web Services Regions and Amazon Web Services
+	// accounts targeted by the current Runbook operation.
 	TargetLocations []TargetLocation
 
 	// The name of the parameter used as the target resource for the rate-controlled
@@ -4791,8 +4819,8 @@ type StepExecution struct {
 	// The execution status for this step.
 	StepStatus AutomationExecutionStatus
 
-	// The combination of Regions and accounts targeted by the current Automation
-	// execution.
+	// The combination of Amazon Web Services Regions and Amazon Web Services accounts
+	// targeted by the current Automation execution.
 	TargetLocation *TargetLocation
 
 	// The targets for the step execution.
@@ -4905,11 +4933,11 @@ type Tag struct {
 //
 // * State Manager
 // association targets only: Key=InstanceIds,Values=*  This example demonstrates
-// how to target all managed instances in the Region where the association was
-// created.
+// how to target all managed instances in the Amazon Web Services Region where the
+// association was created.
 //
-// For more information about how to send commands that target instances
-// using Key,Value parameters, see Targeting multiple instances
+// For more information about how to send commands that
+// target instances using Key,Value parameters, see Targeting multiple instances
 // (https://docs.aws.amazon.com/systems-manager/latest/userguide/send-commands-multiple.html#send-commands-targeting)
 // in the Amazon Web Services Systems Manager User Guide.
 type Target struct {
@@ -4928,22 +4956,22 @@ type Target struct {
 	noSmithyDocumentSerde
 }
 
-// The combination of Regions and accounts targeted by the current Automation
-// execution.
+// The combination of Amazon Web Services Regions and Amazon Web Services accounts
+// targeted by the current Automation execution.
 type TargetLocation struct {
 
-	// The accounts targeted by the current Automation execution.
+	// The Amazon Web Services accounts targeted by the current Automation execution.
 	Accounts []string
 
 	// The Automation execution role used by the currently running Automation. If not
 	// specified, the default value is AWS-SystemsManager-AutomationExecutionRole.
 	ExecutionRoleName *string
 
-	// The Regions targeted by the current Automation execution.
+	// The Amazon Web Services Regions targeted by the current Automation execution.
 	Regions []string
 
-	// The maximum number of Regions and accounts allowed to run the Automation
-	// concurrently.
+	// The maximum number of Amazon Web Services Regions and Amazon Web Services
+	// accounts allowed to run the Automation concurrently.
 	TargetLocationMaxConcurrency *string
 
 	// The maximum number of errors allowed before the system stops queueing additional

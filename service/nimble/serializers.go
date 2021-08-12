@@ -419,6 +419,11 @@ func awsRestjson1_serializeOpDocumentCreateStreamingSessionInput(v *CreateStream
 		ok.String(*v.LaunchProfileId)
 	}
 
+	if v.OwnedBy != nil {
+		ok := object.Key("ownedBy")
+		ok.String(*v.OwnedBy)
+	}
+
 	if v.StreamingImageId != nil {
 		ok := object.Key("streamingImageId")
 		ok.String(*v.StreamingImageId)
@@ -2422,6 +2427,10 @@ func awsRestjson1_serializeOpHttpBindingsListStreamingSessionsInput(v *ListStrea
 
 	if v.NextToken != nil {
 		encoder.SetQuery("nextToken").String(*v.NextToken)
+	}
+
+	if v.OwnedBy != nil {
+		encoder.SetQuery("ownedBy").String(*v.OwnedBy)
 	}
 
 	if v.SessionIds != nil {

@@ -360,6 +360,30 @@ type CustomizedMetricSpecification struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the desired configuration for an instance refresh. If you specify a
+// desired configuration, you must specify either a LaunchTemplate or a
+// MixedInstancesPolicy.
+type DesiredConfiguration struct {
+
+	// Describes the launch template and the version of the launch template that Amazon
+	// EC2 Auto Scaling uses to launch Amazon EC2 instances. For more information about
+	// launch templates, see Launch templates
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html) in
+	// the Amazon EC2 Auto Scaling User Guide.
+	LaunchTemplate *LaunchTemplateSpecification
+
+	// Describes a mixed instances policy. A mixed instances policy contains the
+	// instance types Amazon EC2 Auto Scaling can launch, and other information Amazon
+	// EC2 Auto Scaling can use to launch instances to help you optimize your costs.
+	// For more information, see Auto Scaling groups with multiple instance types and
+	// purchase options
+	// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
+	// in the Amazon EC2 Auto Scaling User Guide.
+	MixedInstancesPolicy *MixedInstancesPolicy
+
+	noSmithyDocumentSerde
+}
+
 // Describes information used to set up an Amazon EBS volume specified in a block
 // device mapping.
 type Ebs struct {
@@ -634,6 +658,9 @@ type InstanceRefresh struct {
 	// The name of the Auto Scaling group.
 	AutoScalingGroupName *string
 
+	// Describes the specific update you want to deploy.
+	DesiredConfiguration *DesiredConfiguration
+
 	// The date and time at which the instance refresh ended.
 	EndTime *time.Time
 
@@ -650,6 +677,9 @@ type InstanceRefresh struct {
 	// specified warm-up time passes, the instance is considered updated and is added
 	// to the percentage complete.
 	PercentageComplete *int32
+
+	// Describes the preferences for an instance refresh.
+	Preferences *RefreshPreferences
 
 	// Additional progress details for an Auto Scaling group that has a warm pool.
 	ProgressDetails *InstanceRefreshProgressDetails
@@ -739,14 +769,14 @@ type InstanceRefreshWarmPoolProgress struct {
 // MixedInstancesPolicy. The instances distribution specifies the distribution of
 // On-Demand Instances and Spot Instances, the maximum price to pay for Spot
 // Instances, and how the Auto Scaling group allocates instance types to fulfill
-// On-Demand and Spot capacities. When you update SpotAllocationStrategy,
-// SpotInstancePools, or SpotMaxPrice, this update action does not deploy any
-// changes across the running Amazon EC2 instances in the group. Your existing Spot
-// Instances continue to run as long as the maximum price for those instances is
-// higher than the current Spot price. When scale out occurs, Amazon EC2 Auto
-// Scaling launches instances based on the new settings. When scale in occurs,
-// Amazon EC2 Auto Scaling terminates instances according to the group's
-// termination policies.
+// On-Demand and Spot capacities. When you modify SpotAllocationStrategy,
+// SpotInstancePools, or SpotMaxPrice in the UpdateAutoScalingGroup API call, this
+// update action does not deploy any changes across the running Amazon EC2
+// instances in the group. Your existing Spot Instances continue to run as long as
+// the maximum price for those instances is higher than the current Spot price.
+// When scale out occurs, Amazon EC2 Auto Scaling launches instances based on the
+// new settings. When scale in occurs, Amazon EC2 Auto Scaling terminates instances
+// according to the group's termination policies.
 type InstancesDistribution struct {
 
 	// Indicates how to allocate instance types to fulfill On-Demand capacity. The only
@@ -936,11 +966,11 @@ type LaunchConfiguration struct {
 }
 
 // Describes a launch template and overrides. You specify these properties as part
-// of a mixed instances policy. When you update the launch template or overrides,
-// existing Amazon EC2 instances continue to run. When scale out occurs, Amazon EC2
-// Auto Scaling launches instances to match the new settings. When scale in occurs,
-// Amazon EC2 Auto Scaling terminates instances according to the group's
-// termination policies.
+// of a mixed instances policy. When you update the launch template or overrides in
+// the UpdateAutoScalingGroup API call, existing Amazon EC2 instances continue to
+// run. When scale out occurs, Amazon EC2 Auto Scaling launches instances to match
+// the new settings. When scale in occurs, Amazon EC2 Auto Scaling terminates
+// instances according to the group's termination policies.
 type LaunchTemplate struct {
 
 	// The launch template to use.
@@ -996,13 +1026,11 @@ type LaunchTemplateOverrides struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the Amazon EC2 launch template and the launch template version that
-// can be used by an Auto Scaling group to configure Amazon EC2 instances. The
-// launch template that is specified must be configured for use with an Auto
-// Scaling group. For more information, see Creating a launch template for an Auto
-// Scaling group
-// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/create-launch-template.html)
-// in the Amazon EC2 Auto Scaling User Guide.
+// Describes the launch template and the version of the launch template that Amazon
+// EC2 Auto Scaling uses to launch Amazon EC2 instances. For more information about
+// launch templates, see Launch templates
+// (https://docs.aws.amazon.com/autoscaling/ec2/userguide/LaunchTemplates.html) in
+// the Amazon EC2 Auto Scaling User Guide.
 type LaunchTemplateSpecification struct {
 
 	// The ID of the launch template. To get the template ID, use the Amazon EC2
@@ -1327,25 +1355,22 @@ type MetricGranularityType struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a mixed instances policy for an Auto Scaling group. With mixed
-// instances, your Auto Scaling group can provision a combination of On-Demand
-// Instances and Spot Instances across multiple instance types. For more
-// information, see Auto Scaling groups with multiple instance types and purchase
-// options
+// Describes a mixed instances policy. A mixed instances policy contains the
+// instance types Amazon EC2 Auto Scaling can launch, and other information Amazon
+// EC2 Auto Scaling can use to launch instances to help you optimize your costs.
+// For more information, see Auto Scaling groups with multiple instance types and
+// purchase options
 // (https://docs.aws.amazon.com/autoscaling/ec2/userguide/asg-purchase-options.html)
-// in the Amazon EC2 Auto Scaling User Guide. You can create a mixed instances
-// policy for a new Auto Scaling group, or you can create it for an existing group
-// by updating the group to specify MixedInstancesPolicy as the top-level property
-// instead of a launch configuration or launch template.
+// in the Amazon EC2 Auto Scaling User Guide.
 type MixedInstancesPolicy struct {
 
 	// Specifies the instances distribution. If not provided, the value for each
 	// property in InstancesDistribution uses a default value.
 	InstancesDistribution *InstancesDistribution
 
-	// Specifies the launch template to use and optionally the instance types
-	// (overrides) that are used to provision EC2 instances to fulfill On-Demand and
-	// Spot capacities. Required when creating a mixed instances policy.
+	// Specifies the launch template to use and the instance types (overrides) that are
+	// used to provision EC2 instances to fulfill On-Demand and Spot capacities.
+	// Required when creating a mixed instances policy.
 	LaunchTemplate *LaunchTemplate
 
 	noSmithyDocumentSerde
@@ -1685,9 +1710,7 @@ type ProcessType struct {
 	noSmithyDocumentSerde
 }
 
-// Describes information used to start an instance refresh. All properties are
-// optional. However, if you specify a value for CheckpointDelay, you must also
-// provide a value for CheckpointPercentages.
+// Describes the preferences for an instance refresh.
 type RefreshPreferences struct {
 
 	// The amount of time, in seconds, to wait after a checkpoint before continuing.
@@ -1712,10 +1735,20 @@ type RefreshPreferences struct {
 	InstanceWarmup *int32
 
 	// The amount of capacity in the Auto Scaling group that must remain healthy during
-	// an instance refresh to allow the operation to continue, as a percentage of the
-	// desired capacity of the Auto Scaling group (rounded up to the nearest integer).
-	// The default is 90.
+	// an instance refresh to allow the operation to continue. The value is expressed
+	// as a percentage of the desired capacity of the Auto Scaling group (rounded up to
+	// the nearest integer). The default is 90. Setting the minimum healthy percentage
+	// to 100 percent limits the rate of replacement to one instance at a time. In
+	// contrast, setting it to 0 percent has the effect of replacing all instances at
+	// the same time.
 	MinHealthyPercentage *int32
+
+	// A boolean value that indicates whether skip matching is enabled. If true, then
+	// Amazon EC2 Auto Scaling skips replacing instances that match the desired
+	// configuration. If no desired configuration is specified, then it skips replacing
+	// instances that have the same configuration that is already set on the group. The
+	// default is false.
+	SkipMatching *bool
 
 	noSmithyDocumentSerde
 }

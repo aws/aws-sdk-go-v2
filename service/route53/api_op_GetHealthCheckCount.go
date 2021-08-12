@@ -11,7 +11,7 @@ import (
 )
 
 // Retrieves the number of health checks that are associated with the current
-// account.
+// Amazon Web Services account.
 func (c *Client) GetHealthCheckCount(ctx context.Context, params *GetHealthCheckCountInput, optFns ...func(*Options)) (*GetHealthCheckCountOutput, error) {
 	if params == nil {
 		params = &GetHealthCheckCountInput{}
@@ -28,7 +28,7 @@ func (c *Client) GetHealthCheckCount(ctx context.Context, params *GetHealthCheck
 }
 
 // A request for the number of health checks that are associated with the current
-// account.
+// Amazon Web Services account.
 type GetHealthCheckCountInput struct {
 	noSmithyDocumentSerde
 }
@@ -36,7 +36,8 @@ type GetHealthCheckCountInput struct {
 // A complex type that contains the response to a GetHealthCheckCount request.
 type GetHealthCheckCountOutput struct {
 
-	// The number of health checks associated with the current account.
+	// The number of health checks associated with the current Amazon Web Services
+	// account.
 	//
 	// This member is required.
 	HealthCheckCount *int64

@@ -47,6 +47,7 @@
         "api_op_StopBuild.go",
         "api_op_StopBuildBatch.go",
         "api_op_UpdateProject.go",
+        "api_op_UpdateProjectVisibility.go",
         "api_op_UpdateReportGroup.go",
         "api_op_UpdateWebhook.go",
         "deserializers.go",

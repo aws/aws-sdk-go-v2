@@ -61,7 +61,7 @@ type CreateIPSetInput struct {
 	// This member is required.
 	Addresses []string
 
-	// Specify IPV4 or IPV6.
+	// The version of the IP addresses, either IPV4 or IPV6.
 	//
 	// This member is required.
 	IPAddressVersion types.IPAddressVersion

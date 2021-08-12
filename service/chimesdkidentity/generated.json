@@ -1,0 +1,40 @@
+{
+    "dependencies": {
+        "github.com/aws/aws-sdk-go-v2": "v1.4.0",
+        "github.com/aws/smithy-go": "v1.4.0"
+    },
+    "files": [
+        "api_client.go",
+        "api_op_CreateAppInstance.go",
+        "api_op_CreateAppInstanceAdmin.go",
+        "api_op_CreateAppInstanceUser.go",
+        "api_op_DeleteAppInstance.go",
+        "api_op_DeleteAppInstanceAdmin.go",
+        "api_op_DeleteAppInstanceUser.go",
+        "api_op_DescribeAppInstance.go",
+        "api_op_DescribeAppInstanceAdmin.go",
+        "api_op_DescribeAppInstanceUser.go",
+        "api_op_GetAppInstanceRetentionSettings.go",
+        "api_op_ListAppInstanceAdmins.go",
+        "api_op_ListAppInstanceUsers.go",
+        "api_op_ListAppInstances.go",
+        "api_op_PutAppInstanceRetentionSettings.go",
+        "api_op_UpdateAppInstance.go",
+        "api_op_UpdateAppInstanceUser.go",
+        "deserializers.go",
+        "doc.go",
+        "endpoints.go",
+        "generated.json",
+        "internal/endpoints/endpoints.go",
+        "internal/endpoints/endpoints_test.go",
+        "protocol_test.go",
+        "serializers.go",
+        "types/enums.go",
+        "types/errors.go",
+        "types/types.go",
+        "validators.go"
+    ],
+    "go": "1.15",
+    "module": "github.com/aws/aws-sdk-go-v2/service/chimesdkidentity",
+    "unstable": false
+}

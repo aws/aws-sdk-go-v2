@@ -12,7 +12,7 @@ import (
 )
 
 // Updates information related to approval reviews for a specific version of a
-// document.
+// change template in Change Manager.
 func (c *Client) UpdateDocumentMetadata(ctx context.Context, params *UpdateDocumentMetadataInput, optFns ...func(*Options)) (*UpdateDocumentMetadataOutput, error) {
 	if params == nil {
 		params = &UpdateDocumentMetadataInput{}
@@ -30,17 +30,17 @@ func (c *Client) UpdateDocumentMetadata(ctx context.Context, params *UpdateDocum
 
 type UpdateDocumentMetadataInput struct {
 
-	// The document review details to update.
+	// The change template review details to update.
 	//
 	// This member is required.
 	DocumentReviews *types.DocumentReviews
 
-	// The name of the document for which a version is to be updated.
+	// The name of the change template for which a version's metadata is to be updated.
 	//
 	// This member is required.
 	Name *string
 
-	// The version of a document to update.
+	// The version of a change template in which to update approval metadata.
 	DocumentVersion *string
 
 	noSmithyDocumentSerde

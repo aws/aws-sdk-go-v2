@@ -20,10 +20,10 @@ import (
 // policy attached for the portal to function properly. You may optionally specify
 // a KMS key in the StudioEncryptionConfiguration. In Nimble Studio, resource
 // names, descriptions, initialization scripts, and other data you provide are
-// always encrypted at rest using an AWS KMS key. By default, this key is owned by
-// AWS and managed on your behalf. You may provide your own AWS KMS key when
-// calling CreateStudio to encrypt this data using a key you own and manage. When
-// providing an AWS KMS key during studio creation, Nimble Studio creates KMS
+// always encrypted at rest using an KMS key. By default, this key is owned by
+// Amazon Web Services and managed on your behalf. You may provide your own KMS key
+// when calling CreateStudio to encrypt this data using a key you own and manage.
+// When providing an KMS key during studio creation, Nimble Studio creates KMS
 // grants in your account to provide your studio user and admin roles access to
 // these KMS keys. If you delete this grant, the studio will no longer be
 // accessible to your portal users. If you delete the studio KMS key, your studio

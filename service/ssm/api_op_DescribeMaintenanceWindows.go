@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves the maintenance windows in an account.
+// Retrieves the maintenance windows in an Amazon Web Services account.
 func (c *Client) DescribeMaintenanceWindows(ctx context.Context, params *DescribeMaintenanceWindowsInput, optFns ...func(*Options)) (*DescribeMaintenanceWindowsOutput, error) {
 	if params == nil {
 		params = &DescribeMaintenanceWindowsInput{}

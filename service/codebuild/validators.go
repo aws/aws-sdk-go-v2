@@ -610,6 +610,26 @@ func (m *validateOpUpdateProject) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateProjectVisibility struct {
+}
+
+func (*validateOpUpdateProjectVisibility) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateProjectVisibility) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateProjectVisibilityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateProjectVisibilityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateReportGroup struct {
 }
 
@@ -768,6 +788,10 @@ func addOpStopBuildValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUpdateProjectValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateProject{}, middleware.After)
+}
+
+func addOpUpdateProjectVisibilityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateProjectVisibility{}, middleware.After)
 }
 
 func addOpUpdateReportGroupValidationMiddleware(stack *middleware.Stack) error {
@@ -1774,6 +1798,24 @@ func validateOpUpdateProjectInput(v *UpdateProjectInput) error {
 		if err := validateLogsConfig(v.LogsConfig); err != nil {
 			invalidParams.AddNested("LogsConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateProjectVisibilityInput(v *UpdateProjectVisibilityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateProjectVisibilityInput"}
+	if v.ProjectArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectArn"))
+	}
+	if len(v.ProjectVisibility) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ProjectVisibility"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

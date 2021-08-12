@@ -9496,11 +9496,20 @@ func awsRestjson1_deserializeDocumentStreamingSession(v **types.StreamingSession
 				sv.LaunchProfileId = ptr.String(jtv)
 			}
 
+		case "ownedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.OwnedBy = ptr.String(jtv)
+			}
+
 		case "sessionId":
 			if value != nil {
 				jtv, ok := value.(string)
 				if !ok {
-					return fmt.Errorf("expected StreamingImageSessionId to be of type string, got %T instead", value)
+					return fmt.Errorf("expected StreamingSessionId to be of type string, got %T instead", value)
 				}
 				sv.SessionId = ptr.String(jtv)
 			}
@@ -9679,6 +9688,15 @@ func awsRestjson1_deserializeDocumentStreamingSessionStream(v **types.StreamingS
 					return err
 				}
 				sv.ExpiresAt = ptr.Time(t)
+			}
+
+		case "ownedBy":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.OwnedBy = ptr.String(jtv)
 			}
 
 		case "state":

@@ -59,7 +59,9 @@ type StartCelebrityRecognitionInput struct {
 	JobTag *string
 
 	// The Amazon SNS topic ARN that you want Amazon Rekognition Video to publish the
-	// completion status of the celebrity recognition analysis to.
+	// completion status of the celebrity recognition analysis to. The Amazon SNS topic
+	// must have a topic name that begins with AmazonRekognition if you are using the
+	// AmazonRekognitionServiceRole permissions policy.
 	NotificationChannel *types.NotificationChannel
 
 	noSmithyDocumentSerde

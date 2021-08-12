@@ -245,7 +245,7 @@ type BatchChannelMemberships struct {
 	// The ARN of the channel to which you're adding users.
 	ChannelArn *string
 
-	// The details of a user.
+	// The identifier of the member who invited another member.
 	InvitedBy *Identity
 
 	// The users successfully added to the request.
@@ -404,7 +404,7 @@ type ChannelMembership struct {
 // Summary of the channel membership details of an AppInstanceUser.
 type ChannelMembershipForAppInstanceUserSummary struct {
 
-	// Returns the channel membership data for an AppInstance.
+	// Summary of the membership details of an AppInstanceUser.
 	AppInstanceUserMembershipSummary *AppInstanceUserMembershipSummary
 
 	// Summary of the details of a Channel.
@@ -674,7 +674,7 @@ type EngineTranscribeMedicalSettings struct {
 	Type TranscribeMedicalType
 
 	// The AWS Region passed to Amazon Transcribe Medical. If you don't specify a
-	// Region, Amazon Chime uses the Region closest to the meeting's Region.
+	// Region, Amazon Chime uses the meeting's Region.
 	Region TranscribeMedicalRegion
 
 	// The name of the vocabulary passed to Amazon Transcribe Medical.
@@ -692,7 +692,7 @@ type EngineTranscribeSettings struct {
 	LanguageCode TranscribeLanguageCode
 
 	// The AWS Region passed to Amazon Transcribe. If you don't specify a Region,
-	// Amazon Chime uses the Region closest to the meeting's Region.
+	// Amazon Chime uses the meeting's Region.
 	Region TranscribeRegion
 
 	// The filtering method passed to Amazon Transcribe.

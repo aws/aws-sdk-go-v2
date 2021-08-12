@@ -42,10 +42,11 @@ func (c *Client) CreateActivation(ctx context.Context, params *CreateActivationI
 
 type CreateActivationInput struct {
 
-	// The Identity and Access Management (IAM) role that you want to assign to the
-	// managed instance. This IAMrole must provide AssumeRole permissions for the
-	// Amazon Web Services Systems Manager service principal ssm.amazonaws.com. For
-	// more information, see Create an IAM service role for a hybrid environment
+	// The name of the Identity and Access Management (IAM) role that you want to
+	// assign to the managed instance. This IAM role must provide AssumeRole
+	// permissions for the Amazon Web Services Systems Manager service principal
+	// ssm.amazonaws.com. For more information, see Create an IAM service role for a
+	// hybrid environment
 	// (https://docs.aws.amazon.com/systems-manager/latest/userguide/sysman-service-role.html)
 	// in the Amazon Web Services Systems Manager User Guide.
 	//

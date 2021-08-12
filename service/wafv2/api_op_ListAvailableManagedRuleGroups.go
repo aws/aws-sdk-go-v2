@@ -12,8 +12,8 @@ import (
 )
 
 // Retrieves an array of managed rule groups that are available for you to use.
-// This list includes all Amazon Web Services Managed Rules rule groups and the
-// Marketplace managed rule groups that you're subscribed to.
+// This list includes all Amazon Web Services Managed Rules rule groups and all of
+// the Marketplace managed rule groups that you're subscribed to.
 func (c *Client) ListAvailableManagedRuleGroups(ctx context.Context, params *ListAvailableManagedRuleGroupsInput, optFns ...func(*Options)) (*ListAvailableManagedRuleGroupsOutput, error) {
 	if params == nil {
 		params = &ListAvailableManagedRuleGroupsInput{}

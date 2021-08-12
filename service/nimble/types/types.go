@@ -27,8 +27,8 @@ type ActiveDirectoryConfiguration struct {
 	// A collection of custom attributes for an Active Directory computer.
 	ComputerAttributes []ActiveDirectoryComputerAttribute
 
-	// The directory ID of the AWS Directory Service for Microsoft AD to access using
-	// this studio component.
+	// The directory ID of the Directory Service for Microsoft Active Directory to
+	// access using this studio component.
 	DirectoryId *string
 
 	// The distinguished name (DN) and organizational unit (OU) of an Active Directory
@@ -187,8 +187,8 @@ type LaunchProfileInitializationActiveDirectory struct {
 	// A collection of custom attributes for an Active Directory computer.
 	ComputerAttributes []ActiveDirectoryComputerAttribute
 
-	// The directory ID of the AWS Directory Service for Microsoft AD to access using
-	// this launch profile.
+	// The directory ID of the Directory Service for Microsoft Active Directory to
+	// access using this launch profile.
 	DirectoryId *string
 
 	// The directory name.
@@ -440,6 +440,9 @@ type StreamingSession struct {
 	// The ID of the launch profile used to control access from the streaming session.
 	LaunchProfileId *string
 
+	// The user ID of the user that owns the streaming session.
+	OwnedBy *string
+
 	// The session ID.
 	SessionId *string
 
@@ -483,6 +486,9 @@ type StreamingSessionStream struct {
 	// The Unix epoch timestamp in seconds for when the resource expires.
 	ExpiresAt *time.Time
 
+	// The user ID of the user that owns the streaming session.
+	OwnedBy *string
+
 	// The current state.
 	State StreamingSessionStreamState
 
@@ -514,11 +520,12 @@ type Studio struct {
 	// A friendly name for the studio.
 	DisplayName *string
 
-	// The AWS region where the studio resource is located.
+	// The Amazon Web Services Region where the studio resource is located.
 	HomeRegion *string
 
-	// The AWS SSO application client ID used to integrate with AWS SSO to enable AWS
-	// SSO users to log in to Nimble portal.
+	// The Amazon Web Services SSO application client ID used to integrate with Amazon
+	// Web Services SSO to enable Amazon Web Services SSO users to log in to Nimble
+	// portal.
 	SsoClientId *string
 
 	// The current state of the studio resource.

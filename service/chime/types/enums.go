@@ -756,6 +756,7 @@ const (
 	TranscribeMedicalRegionApSoutheast2 TranscribeMedicalRegion = "ap-southeast-2"
 	TranscribeMedicalRegionCaCentral1   TranscribeMedicalRegion = "ca-central-1"
 	TranscribeMedicalRegionEuWest1      TranscribeMedicalRegion = "eu-west-1"
+	TranscribeMedicalRegionAuto         TranscribeMedicalRegion = "auto"
 )
 
 // Values returns all known values for TranscribeMedicalRegion. Note that this can
@@ -769,6 +770,7 @@ func (TranscribeMedicalRegion) Values() []TranscribeMedicalRegion {
 		"ap-southeast-2",
 		"ca-central-1",
 		"eu-west-1",
+		"auto",
 	}
 }
 
@@ -831,6 +833,7 @@ const (
 	TranscribeRegionEuWest1      TranscribeRegion = "eu-west-1"
 	TranscribeRegionEuWest2      TranscribeRegion = "eu-west-2"
 	TranscribeRegionSaEast1      TranscribeRegion = "sa-east-1"
+	TranscribeRegionAuto         TranscribeRegion = "auto"
 )
 
 // Values returns all known values for TranscribeRegion. Note that this can be
@@ -849,6 +852,7 @@ func (TranscribeRegion) Values() []TranscribeRegion {
 		"eu-west-1",
 		"eu-west-2",
 		"sa-east-1",
+		"auto",
 	}
 }
 

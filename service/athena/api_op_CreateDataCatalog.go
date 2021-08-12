@@ -12,7 +12,8 @@ import (
 )
 
 // Creates (registers) a data catalog with the specified name and properties.
-// Catalogs created are visible to all users of the same AWS account.
+// Catalogs created are visible to all users of the same Amazon Web Services
+// account.
 func (c *Client) CreateDataCatalog(ctx context.Context, params *CreateDataCatalogInput, optFns ...func(*Options)) (*CreateDataCatalogOutput, error) {
 	if params == nil {
 		params = &CreateDataCatalogInput{}
@@ -31,16 +32,14 @@ func (c *Client) CreateDataCatalog(ctx context.Context, params *CreateDataCatalo
 type CreateDataCatalogInput struct {
 
 	// The name of the data catalog to create. The catalog name must be unique for the
-	// AWS account and can use a maximum of 128 alphanumeric, underscore, at sign, or
-	// hyphen characters.
+	// Amazon Web Services account and can use a maximum of 128 alphanumeric,
+	// underscore, at sign, or hyphen characters.
 	//
 	// This member is required.
 	Name *string
 
-	// The type of data catalog to create: LAMBDA for a federated catalog or HIVE for
-	// an external hive metastore. Do not use the GLUE type. This refers to the
-	// AwsDataCatalog that already exists in your account, of which you can have only
-	// one. Specifying the GLUE type will result in an INVALID_INPUT error.
+	// The type of data catalog to create: LAMBDA for a federated catalog, HIVE for an
+	// external hive metastore, or GLUE for an Glue Data Catalog.
 	//
 	// This member is required.
 	Type types.DataCatalogType
@@ -68,6 +67,22 @@ type CreateDataCatalogInput struct {
 	// * If you have a composite Lambda function that
 	// processes both metadata and data, use the following syntax to specify your
 	// Lambda function. function=lambda_arn
+	//
+	// * The GLUE type takes a catalog ID
+	// parameter and is required. The  catalog_id  is the account ID of the Amazon Web
+	// Services account to which the Glue Data Catalog belongs.
+	// catalog-id=catalog_id
+	//
+	// * The GLUE data catalog type also applies to the default
+	// AwsDataCatalog that already exists in your account, of which you can have only
+	// one and cannot modify.
+	//
+	// * Queries that specify a Glue Data Catalog other than
+	// the default AwsDataCatalog must be run on Athena engine version 2.
+	//
+	// * In Regions
+	// where Athena engine version 2 is not available, creating new Glue data catalogs
+	// results in an INVALID_INPUT error.
 	Parameters map[string]string
 
 	// A list of comma separated tags to add to the data catalog that is created.

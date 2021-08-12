@@ -57,6 +57,11 @@ type DescribeManagedRuleGroupInput struct {
 	// This member is required.
 	VendorName *string
 
+	// The version of the rule group. You can only use a version that is not scheduled
+	// for expiration. If you don't provide this, WAF uses the vendor's default
+	// version.
+	VersionName *string
+
 	noSmithyDocumentSerde
 }
 
@@ -94,6 +99,17 @@ type DescribeManagedRuleGroupOutput struct {
 
 	//
 	Rules []types.RuleSummary
+
+	// The Amazon resource name (ARN) of the Amazon Simple Notification Service SNS
+	// topic that's used to record changes to the managed rule group. You can subscribe
+	// to the SNS topic to receive notifications when the managed rule group is
+	// modified, such as for new versions and for version expiration. For more
+	// information, see the Amazon Simple Notification Service Developer Guide
+	// (https://docs.aws.amazon.com/sns/latest/dg/welcome.html).
+	SnsTopicArn *string
+
+	// The managed rule group's version.
+	VersionName *string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

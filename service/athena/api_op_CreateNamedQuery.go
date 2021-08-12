@@ -12,9 +12,10 @@ import (
 )
 
 // Creates a named query in the specified workgroup. Requires that you have access
-// to the workgroup. For code samples using the AWS SDK for Java, see Examples and
-// Code Samples (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in
-// the Amazon Athena User Guide.
+// to the workgroup. For code samples using the Amazon Web Services SDK for Java,
+// see Examples and Code Samples
+// (http://docs.aws.amazon.com/athena/latest/ug/code-samples.html) in the Amazon
+// Athena User Guide.
 func (c *Client) CreateNamedQuery(ctx context.Context, params *CreateNamedQueryInput, optFns ...func(*Options)) (*CreateNamedQueryOutput, error) {
 	if params == nil {
 		params = &CreateNamedQueryInput{}
@@ -51,9 +52,10 @@ type CreateNamedQueryInput struct {
 	// idempotent (executes only once). If another CreateNamedQuery request is
 	// received, the same response is returned and another query is not created. If a
 	// parameter has changed, for example, the QueryString, an error is returned. This
-	// token is listed as not required because AWS SDKs (for example the AWS SDK for
-	// Java) auto-generate the token for users. If you are not using the AWS SDK or the
-	// AWS CLI, you must provide this token or the action will fail.
+	// token is listed as not required because Amazon Web Services SDKs (for example
+	// the Amazon Web Services SDK for Java) auto-generate the token for users. If you
+	// are not using the Amazon Web Services SDK or the Amazon Web Services CLI, you
+	// must provide this token or the action will fail.
 	ClientRequestToken *string
 
 	// The query description.

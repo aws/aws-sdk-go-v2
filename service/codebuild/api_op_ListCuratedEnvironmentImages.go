@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about Docker images that are managed by AWS CodeBuild.
+// Gets information about Docker images that are managed by CodeBuild.
 func (c *Client) ListCuratedEnvironmentImages(ctx context.Context, params *ListCuratedEnvironmentImagesInput, optFns ...func(*Options)) (*ListCuratedEnvironmentImagesOutput, error) {
 	if params == nil {
 		params = &ListCuratedEnvironmentImagesInput{}
@@ -33,7 +33,7 @@ type ListCuratedEnvironmentImagesInput struct {
 
 type ListCuratedEnvironmentImagesOutput struct {
 
-	// Information about supported platforms for Docker images that are managed by AWS
+	// Information about supported platforms for Docker images that are managed by
 	// CodeBuild.
 	Platforms []types.EnvironmentPlatform
 

@@ -2449,6 +2449,49 @@ func awsAwsjson11_serializeDocumentAttributes(v []types.Attribute, value smithyj
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentBlackFrame(v *types.BlackFrame, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxPixelThreshold != nil {
+		ok := object.Key("MaxPixelThreshold")
+		switch {
+		case math.IsNaN(float64(*v.MaxPixelThreshold)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MaxPixelThreshold), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MaxPixelThreshold), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MaxPixelThreshold)
+
+		}
+	}
+
+	if v.MinCoveragePercentage != nil {
+		ok := object.Key("MinCoveragePercentage")
+		switch {
+		case math.IsNaN(float64(*v.MinCoveragePercentage)):
+			ok.String("NaN")
+
+		case math.IsInf(float64(*v.MinCoveragePercentage), 1):
+			ok.String("Infinity")
+
+		case math.IsInf(float64(*v.MinCoveragePercentage), -1):
+			ok.String("-Infinity")
+
+		default:
+			ok.Float(*v.MinCoveragePercentage)
+
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentBoundingBox(v *types.BoundingBox, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2943,6 +2986,13 @@ func awsAwsjson11_serializeDocumentStartShotDetectionFilter(v *types.StartShotDe
 func awsAwsjson11_serializeDocumentStartTechnicalCueDetectionFilter(v *types.StartTechnicalCueDetectionFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.BlackFrame != nil {
+		ok := object.Key("BlackFrame")
+		if err := awsAwsjson11_serializeDocumentBlackFrame(v.BlackFrame, ok); err != nil {
+			return err
+		}
+	}
 
 	if v.MinSegmentConfidence != nil {
 		ok := object.Key("MinSegmentConfidence")

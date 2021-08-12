@@ -170,6 +170,26 @@ func (m *validateOpAssociateSecurityKey) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateAgentStatus struct {
+}
+
+func (*validateOpCreateAgentStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateAgentStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateAgentStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateAgentStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateContactFlow struct {
 }
 
@@ -185,6 +205,26 @@ func (m *validateOpCreateContactFlow) HandleInitialize(ctx context.Context, in m
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateContactFlowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateHoursOfOperation struct {
+}
+
+func (*validateOpCreateHoursOfOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateHoursOfOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateHoursOfOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateHoursOfOperationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -350,6 +390,26 @@ func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteHoursOfOperation struct {
+}
+
+func (*validateOpDeleteHoursOfOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteHoursOfOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteHoursOfOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteHoursOfOperationInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteInstance struct {
 }
 
@@ -465,6 +525,26 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteUserInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeAgentStatus struct {
+}
+
+func (*validateOpDescribeAgentStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeAgentStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeAgentStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeAgentStatusInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -925,6 +1005,26 @@ func (m *validateOpGetMetricData) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpGetMetricDataInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListAgentStatuses struct {
+}
+
+func (*validateOpListAgentStatuses) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListAgentStatuses) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListAgentStatusesInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListAgentStatusesInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1570,6 +1670,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateAgentStatus struct {
+}
+
+func (*validateOpUpdateAgentStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateAgentStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateAgentStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateAgentStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateContactAttributes struct {
 }
 
@@ -1625,6 +1745,26 @@ func (m *validateOpUpdateContactFlowName) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUpdateContactFlowNameInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateHoursOfOperation struct {
+}
+
+func (*validateOpUpdateHoursOfOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateHoursOfOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateHoursOfOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateHoursOfOperationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2062,8 +2202,16 @@ func addOpAssociateSecurityKeyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpAssociateSecurityKey{}, middleware.After)
 }
 
+func addOpCreateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateAgentStatus{}, middleware.After)
+}
+
 func addOpCreateContactFlowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateContactFlow{}, middleware.After)
+}
+
+func addOpCreateHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateHoursOfOperation{}, middleware.After)
 }
 
 func addOpCreateInstanceValidationMiddleware(stack *middleware.Stack) error {
@@ -2098,6 +2246,10 @@ func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
 }
 
+func addOpDeleteHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteHoursOfOperation{}, middleware.After)
+}
+
 func addOpDeleteInstanceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteInstance{}, middleware.After)
 }
@@ -2120,6 +2272,10 @@ func addOpDeleteUserHierarchyGroupValidationMiddleware(stack *middleware.Stack) 
 
 func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
+}
+
+func addOpDescribeAgentStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeAgentStatus{}, middleware.After)
 }
 
 func addOpDescribeContactFlowValidationMiddleware(stack *middleware.Stack) error {
@@ -2212,6 +2368,10 @@ func addOpGetFederationTokenValidationMiddleware(stack *middleware.Stack) error 
 
 func addOpGetMetricDataValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetMetricData{}, middleware.After)
+}
+
+func addOpListAgentStatusesValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListAgentStatuses{}, middleware.After)
 }
 
 func addOpListApprovedOriginsValidationMiddleware(stack *middleware.Stack) error {
@@ -2342,6 +2502,10 @@ func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
 }
 
+func addOpUpdateAgentStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateAgentStatus{}, middleware.After)
+}
+
 func addOpUpdateContactAttributesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContactAttributes{}, middleware.After)
 }
@@ -2352,6 +2516,10 @@ func addOpUpdateContactFlowContentValidationMiddleware(stack *middleware.Stack) 
 
 func addOpUpdateContactFlowNameValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateContactFlowName{}, middleware.After)
+}
+
+func addOpUpdateHoursOfOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateHoursOfOperation{}, middleware.After)
 }
 
 func addOpUpdateInstanceAttributeValidationMiddleware(stack *middleware.Stack) error {
@@ -2533,6 +2701,64 @@ func validateHierarchyStructureUpdate(v *types.HierarchyStructureUpdate) error {
 			invalidParams.AddNested("LevelFive", err.(smithy.InvalidParamsError))
 		}
 	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHoursOfOperationConfig(v *types.HoursOfOperationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HoursOfOperationConfig"}
+	if len(v.Day) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Day"))
+	}
+	if v.StartTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StartTime"))
+	} else if v.StartTime != nil {
+		if err := validateHoursOfOperationTimeSlice(v.StartTime); err != nil {
+			invalidParams.AddNested("StartTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.EndTime == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("EndTime"))
+	} else if v.EndTime != nil {
+		if err := validateHoursOfOperationTimeSlice(v.EndTime); err != nil {
+			invalidParams.AddNested("EndTime", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHoursOfOperationConfigList(v []types.HoursOfOperationConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HoursOfOperationConfigList"}
+	for i := range v {
+		if err := validateHoursOfOperationConfig(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateHoursOfOperationTimeSlice(v *types.HoursOfOperationTimeSlice) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "HoursOfOperationTimeSlice"}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -3040,6 +3266,27 @@ func validateOpAssociateSecurityKeyInput(v *AssociateSecurityKeyInput) error {
 	}
 }
 
+func validateOpCreateAgentStatusInput(v *CreateAgentStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateAgentStatusInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if len(v.State) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("State"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateContactFlowInput(v *CreateContactFlowInput) error {
 	if v == nil {
 		return nil
@@ -3056,6 +3303,34 @@ func validateOpCreateContactFlowInput(v *CreateContactFlowInput) error {
 	}
 	if v.Content == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Content"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateHoursOfOperationInput(v *CreateHoursOfOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateHoursOfOperationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.TimeZone == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TimeZone"))
+	}
+	if v.Config == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Config"))
+	} else if v.Config != nil {
+		if err := validateHoursOfOperationConfigList(v.Config); err != nil {
+			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3267,6 +3542,24 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	}
 }
 
+func validateOpDeleteHoursOfOperationInput(v *DeleteHoursOfOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteHoursOfOperationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteInstanceInput(v *DeleteInstanceInput) error {
 	if v == nil {
 		return nil
@@ -3367,6 +3660,24 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	}
 	if v.UserId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeAgentStatusInput(v *DescribeAgentStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeAgentStatusInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AgentStatusId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentStatusId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -3800,6 +4111,21 @@ func validateOpGetMetricDataInput(v *GetMetricDataInput) error {
 	}
 	if v.HistoricalMetrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("HistoricalMetrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListAgentStatusesInput(v *ListAgentStatusesInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListAgentStatusesInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4371,6 +4697,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 }
 
+func validateOpUpdateAgentStatusInput(v *UpdateAgentStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateAgentStatusInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.AgentStatusId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AgentStatusId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateContactAttributesInput(v *UpdateContactAttributesInput) error {
 	if v == nil {
 		return nil
@@ -4423,6 +4767,29 @@ func validateOpUpdateContactFlowNameInput(v *UpdateContactFlowNameInput) error {
 	}
 	if v.ContactFlowId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ContactFlowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateHoursOfOperationInput(v *UpdateHoursOfOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateHoursOfOperationInput"}
+	if v.InstanceId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("InstanceId"))
+	}
+	if v.HoursOfOperationId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("HoursOfOperationId"))
+	}
+	if v.Config != nil {
+		if err := validateHoursOfOperationConfigList(v.Config); err != nil {
+			invalidParams.AddNested("Config", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

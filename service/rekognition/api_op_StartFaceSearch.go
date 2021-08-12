@@ -67,7 +67,9 @@ type StartFaceSearchInput struct {
 	JobTag *string
 
 	// The ARN of the Amazon SNS topic to which you want Amazon Rekognition Video to
-	// publish the completion status of the search.
+	// publish the completion status of the search. The Amazon SNS topic must have a
+	// topic name that begins with AmazonRekognition if you are using the
+	// AmazonRekognitionServiceRole permissions policy to access the topic.
 	NotificationChannel *types.NotificationChannel
 
 	noSmithyDocumentSerde

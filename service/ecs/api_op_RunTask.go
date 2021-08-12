@@ -64,7 +64,8 @@ type RunTaskInput struct {
 	// capacityProviderStrategy is specified, the launchType parameter must be omitted.
 	// If no capacityProviderStrategy or launchType is specified, the
 	// defaultCapacityProviderStrategy for the cluster is used. When you use cluster
-	// auto scaling, you must specify capacityProviderStrategy and not launchType.
+	// auto scaling, you must specify capacityProviderStrategy and not launchType. A
+	// capacity provider strategy may contain a maximum of 6 capacity providers.
 	CapacityProviderStrategy []types.CapacityProviderStrategyItem
 
 	// The short name or full Amazon Resource Name (ARN) of the cluster on which to run
@@ -110,7 +111,7 @@ type RunTaskInput struct {
 	// The network configuration for the task. This parameter is required for task
 	// definitions that use the awsvpc network mode to receive their own elastic
 	// network interface, and it is not supported for other network modes. For more
-	// information, see Task Networking
+	// information, see Task networking
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-networking.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	NetworkConfiguration *types.NetworkConfiguration
@@ -131,13 +132,12 @@ type RunTaskInput struct {
 	PlacementConstraints []types.PlacementConstraint
 
 	// The placement strategy objects to use for the task. You can specify a maximum of
-	// five strategy rules per task.
+	// 5 strategy rules per task.
 	PlacementStrategy []types.PlacementStrategy
 
-	// The platform version the task should run. A platform version is only specified
-	// for tasks using the Fargate launch type. If one is not specified, the LATEST
-	// platform version is used by default. For more information, see Fargate Platform
-	// Versions
+	// The platform version the task should use. A platform version is only specified
+	// for tasks hosted on Fargate. If one is not specified, the LATEST platform
+	// version is used by default. For more information, see Fargate platform versions
 	// (https://docs.aws.amazon.com/AmazonECS/latest/developerguide/platform_versions.html)
 	// in the Amazon Elastic Container Service Developer Guide.
 	PlatformVersion *string
@@ -149,7 +149,8 @@ type RunTaskInput struct {
 	// option when running a task.
 	PropagateTags types.PropagateTags
 
-	// The reference ID to use for the task.
+	// The reference ID to use for the task. The reference ID can have a maximum length
+	// of 1024 characters.
 	ReferenceId *string
 
 	// An optional tag specified when a task is started. For example, if you

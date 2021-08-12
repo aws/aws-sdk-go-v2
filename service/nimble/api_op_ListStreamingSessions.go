@@ -34,11 +34,14 @@ type ListStreamingSessionsInput struct {
 	// This member is required.
 	StudioId *string
 
-	// The user ID.
+	// The user ID of the user that created the streaming session.
 	CreatedBy *string
 
 	// The token for the next set of results, or null if there are no more results.
 	NextToken *string
+
+	// The user ID of the user that owns the streaming session.
+	OwnedBy *string
 
 	// A collection of session IDs.
 	SessionIds *string

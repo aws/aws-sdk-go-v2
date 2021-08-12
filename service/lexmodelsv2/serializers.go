@@ -5921,6 +5921,11 @@ func awsRestjson1_serializeDocumentIntentClosingSetting(v *types.IntentClosingSe
 	object := value.Object()
 	defer object.Close()
 
+	if v.Active != nil {
+		ok := object.Key("active")
+		ok.Boolean(*v.Active)
+	}
+
 	if v.ClosingResponse != nil {
 		ok := object.Key("closingResponse")
 		if err := awsRestjson1_serializeDocumentResponseSpecification(v.ClosingResponse, ok); err != nil {
@@ -5934,6 +5939,11 @@ func awsRestjson1_serializeDocumentIntentClosingSetting(v *types.IntentClosingSe
 func awsRestjson1_serializeDocumentIntentConfirmationSetting(v *types.IntentConfirmationSetting, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Active != nil {
+		ok := object.Key("active")
+		ok.Boolean(*v.Active)
+	}
 
 	if v.DeclinationResponse != nil {
 		ok := object.Key("declinationResponse")
@@ -6761,6 +6771,11 @@ func awsRestjson1_serializeDocumentVoiceSettings(v *types.VoiceSettings, value s
 func awsRestjson1_serializeDocumentWaitAndContinueSpecification(v *types.WaitAndContinueSpecification, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.Active != nil {
+		ok := object.Key("active")
+		ok.Boolean(*v.Active)
+	}
 
 	if v.ContinueResponse != nil {
 		ok := object.Key("continueResponse")

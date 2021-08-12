@@ -412,6 +412,24 @@ func (ProjectSortByType) Values() []ProjectSortByType {
 	}
 }
 
+type ProjectVisibilityType string
+
+// Enum values for ProjectVisibilityType
+const (
+	ProjectVisibilityTypePublicRead ProjectVisibilityType = "PUBLIC_READ"
+	ProjectVisibilityTypePrivate    ProjectVisibilityType = "PRIVATE"
+)
+
+// Values returns all known values for ProjectVisibilityType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ProjectVisibilityType) Values() []ProjectVisibilityType {
+	return []ProjectVisibilityType{
+		"PUBLIC_READ",
+		"PRIVATE",
+	}
+}
+
 type ReportCodeCoverageSortByType string
 
 // Enum values for ReportCodeCoverageSortByType

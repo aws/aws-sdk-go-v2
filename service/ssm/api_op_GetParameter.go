@@ -11,8 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Get information about a parameter by using the parameter name. Don't confuse
-// this API operation with the GetParameters API operation.
+// Get information about a single parameter by specifying the parameter name. To
+// get information about more than one parameter at a time, use the GetParameters
+// operation.
 func (c *Client) GetParameter(ctx context.Context, params *GetParameterInput, optFns ...func(*Options)) (*GetParameterOutput, error) {
 	if params == nil {
 		params = &GetParameterInput{}
@@ -30,7 +31,8 @@ func (c *Client) GetParameter(ctx context.Context, params *GetParameterInput, op
 
 type GetParameterInput struct {
 
-	// The name of the parameter you want to query.
+	// The name of the parameter you want to query. To query by parameter label, use
+	// "Name": "name:label". To query by parameter version, use "Name": "name:version".
 	//
 	// This member is required.
 	Name *string

@@ -24,7 +24,7 @@ import (
 // UpdateServiceSetting API operation to change the default setting. Or use the
 // ResetServiceSetting to change the value back to the original value defined by
 // the Amazon Web Services service team. Query the current service setting for the
-// account.
+// Amazon Web Services account.
 func (c *Client) GetServiceSetting(ctx context.Context, params *GetServiceSettingInput, optFns ...func(*Options)) (*GetServiceSettingOutput, error) {
 	if params == nil {
 		params = &GetServiceSettingInput{}
