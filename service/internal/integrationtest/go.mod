@@ -8,8 +8,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/applicationautoscaling v1.4.2
 	github.com/aws/aws-sdk-go-v2/service/applicationdiscoveryservice v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/appstream v1.5.2
-	github.com/aws/aws-sdk-go-v2/service/athena v1.4.2
-	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.10.1
+	github.com/aws/aws-sdk-go-v2/service/athena v1.5.0
+	github.com/aws/aws-sdk-go-v2/service/autoscaling v1.11.0
 	github.com/aws/aws-sdk-go-v2/service/batch v1.6.0
 	github.com/aws/aws-sdk-go-v2/service/cloudformation v1.8.0
 	github.com/aws/aws-sdk-go-v2/service/cloudfront v1.7.1
@@ -17,7 +17,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/cloudsearch v1.5.1
 	github.com/aws/aws-sdk-go-v2/service/cloudtrail v1.4.2
 	github.com/aws/aws-sdk-go-v2/service/cloudwatch v1.7.0
-	github.com/aws/aws-sdk-go-v2/service/codebuild v1.6.0
+	github.com/aws/aws-sdk-go-v2/service/codebuild v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/codecommit v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/codedeploy v1.5.2
 	github.com/aws/aws-sdk-go-v2/service/codepipeline v1.4.2
@@ -33,7 +33,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.4.2
 	github.com/aws/aws-sdk-go-v2/service/ec2 v1.13.0
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.4.2
-	github.com/aws/aws-sdk-go-v2/service/ecs v1.7.0
+	github.com/aws/aws-sdk-go-v2/service/ecs v1.8.0
 	github.com/aws/aws-sdk-go-v2/service/efs v1.5.2
 	github.com/aws/aws-sdk-go-v2/service/elasticache v1.8.1
 	github.com/aws/aws-sdk-go-v2/service/elasticbeanstalk v1.5.1
@@ -54,7 +54,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/kinesis v1.5.2
 	github.com/aws/aws-sdk-go-v2/service/kms v1.4.2
 	github.com/aws/aws-sdk-go-v2/service/lambda v1.6.0
-	github.com/aws/aws-sdk-go-v2/service/lightsail v1.8.1
+	github.com/aws/aws-sdk-go-v2/service/lightsail v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/marketplacecommerceanalytics v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/neptune v1.7.1
 	github.com/aws/aws-sdk-go-v2/service/opsworks v1.4.2
@@ -62,8 +62,8 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/polly v1.4.2
 	github.com/aws/aws-sdk-go-v2/service/rds v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/redshift v1.10.0
-	github.com/aws/aws-sdk-go-v2/service/rekognition v1.6.2
-	github.com/aws/aws-sdk-go-v2/service/route53 v1.8.0
+	github.com/aws/aws-sdk-go-v2/service/rekognition v1.7.0
+	github.com/aws/aws-sdk-go-v2/service/route53 v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/route53domains v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/route53resolver v1.5.2
 	github.com/aws/aws-sdk-go-v2/service/s3 v1.12.0
@@ -77,13 +77,13 @@ require (
 	github.com/aws/aws-sdk-go-v2/service/snowball v1.5.2
 	github.com/aws/aws-sdk-go-v2/service/sns v1.7.1
 	github.com/aws/aws-sdk-go-v2/service/sqs v1.7.1
-	github.com/aws/aws-sdk-go-v2/service/ssm v1.8.1
+	github.com/aws/aws-sdk-go-v2/service/ssm v1.9.0
 	github.com/aws/aws-sdk-go-v2/service/sts v1.6.1
 	github.com/aws/aws-sdk-go-v2/service/support v1.4.2
 	github.com/aws/aws-sdk-go-v2/service/timestreamwrite v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/waf v1.3.2
 	github.com/aws/aws-sdk-go-v2/service/wafregional v1.4.2
-	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.6.2
+	github.com/aws/aws-sdk-go-v2/service/wafv2 v1.7.0
 	github.com/aws/aws-sdk-go-v2/service/workspaces v1.5.2
 	github.com/aws/smithy-go v1.7.0
 	github.com/google/go-cmp v0.5.6

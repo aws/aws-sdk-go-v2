@@ -1,8 +1,0 @@
-{
-    "id": "2ed111ac-f01d-4504-a55d-6424b948a146",
-    "type": "bugfix",
-    "description": "Update to not escape HTML when encoding the policy.",
-    "modules": [
-        "feature/cloudfront/sign"
-    ]
-}

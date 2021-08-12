@@ -1,3 +1,7 @@
+# v1.3.1 (2021-08-12)
+
+* **Bug Fix**: Update to not escape HTML when encoding the policy.
+
 # v1.3.0 (2021-08-04)
 
 * **Feature**: adds error handling for defered close calls
