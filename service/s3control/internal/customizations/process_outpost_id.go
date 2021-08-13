@@ -3,11 +3,10 @@ package customizations
 import (
 	"context"
 	"fmt"
+	"net/url"
 	"strings"
 
-	"github.com/aws/aws-sdk-go-v2/aws"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
-	"github.com/aws/aws-sdk-go-v2/service/internal/s3shared"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
@@ -22,6 +21,12 @@ type processOutpostIDMiddleware struct {
 
 	// UseDualStack indicates of dual stack endpoints should be used
 	UseDualstack bool
+
+	// EndpointResolver used to resolve endpoints. This may be a custom endpoint resolver
+	EndpointResolver EndpointResolver
+
+	// EndpointResolverOptions used by endpoint resolver
+	EndpointResolverOptions EndpointResolverOptions
 }
 
 // ID returns the middleware ID.
@@ -57,30 +62,57 @@ func (m *processOutpostIDMiddleware) HandleSerialize(
 
 	requestRegion := awsmiddleware.GetRegion(ctx)
 
-	// validate if fips
-	if s3shared.IsFIPS(requestRegion) {
-		return out, metadata, fmt.Errorf("unsupported fips region provided for outposts request")
+	endpoint, err := m.EndpointResolver.ResolveEndpoint(requestRegion, m.EndpointResolverOptions)
+	if err != nil {
+		return out, metadata, err
 	}
+
+	// resolved endpoint with endpoint-id s3-control
+	endpointsID := "s3-control"
+
+	// resolved service label that must be used in case endpointsID is s3-control
+	resolveService := "s3-outposts"
+
 	// validate if dualstack
 	if m.UseDualstack {
 		return out, metadata, fmt.Errorf("dualstack is not supported for outposts request")
 	}
 
-	// if endpoint source is a custom endpoint source, do not modify host prefix.
-	// This is a requirement for s3 vpc interface endpoints.
-	if v := awsmiddleware.GetEndpointSource(ctx); v != aws.EndpointSourceCustom {
-		serviceEndpointLabel := "s3-outposts."
+	req.URL, err = url.Parse(endpoint.URL)
+	if err != nil {
+		return out, metadata, fmt.Errorf("failed to parse endpoint URL: %w", err)
+	}
 
-		// set request url
-		req.URL.Host = serviceEndpointLabel + requestRegion + ".amazonaws.com"
+	// redirect signer to use resolved endpoint signing name and region
+	if len(endpoint.SigningName) != 0 {
+		ctx = awsmiddleware.SetSigningName(ctx, endpoint.SigningName)
+	} else {
+		// assign resolved service from arn as signing name
+		ctx = awsmiddleware.SetSigningName(ctx, resolveService)
+	}
+
+	if len(endpoint.SigningRegion) != 0 {
+		// redirect signer to use resolved endpoint signing name and region
+		ctx = awsmiddleware.SetSigningRegion(ctx, endpoint.SigningRegion)
+	} else {
+		ctx = awsmiddleware.SetSigningRegion(ctx, requestRegion)
+	}
+
+	// add url host as s3-outposts
+	cfgHost := req.URL.Host
+	if strings.HasPrefix(cfgHost, endpointsID) {
+		req.URL.Host = resolveService + cfgHost[len(endpointsID):]
+
+		// update serviceID to resolved service
+		ctx = awsmiddleware.SetServiceID(ctx, resolveService)
+	}
+
+	// validate the endpoint host
+	if err := smithyhttp.ValidateEndpointHost(req.URL.Host); err != nil {
+		return out, metadata, err
 	}
 
 	// Disable endpoint host prefix for s3-control
 	ctx = smithyhttp.DisableEndpointHostPrefix(ctx, true)
-
-	// redirect signer
-	ctx = awsmiddleware.SetSigningName(ctx, "s3-outposts")
-	ctx = awsmiddleware.SetSigningRegion(ctx, requestRegion)
-
 	return next.HandleSerialize(ctx, in)
 }

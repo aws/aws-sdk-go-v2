@@ -94,6 +94,8 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 	err = stack.Serialize.Insert(&processOutpostIDMiddleware{
 		GetOutpostID: options.Accessor.GetOutpostIDInput,
 		UseDualstack: options.UseDualstack,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, (*processARNResource)(nil).ID(), middleware.Before)
 	if err != nil {
 		return err

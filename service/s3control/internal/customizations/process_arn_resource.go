@@ -23,6 +23,9 @@ const (
 
 	// account id header
 	accountIDHeader = "x-amz-account-id"
+
+	// fips label
+	fipsLabel = "-fips"
 )
 
 // processARNResource is used to process an ARN resource.
@@ -111,10 +114,16 @@ func (m *processARNResource) HandleSerialize(
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
 
-		// check if resource arn region is FIPS
-		if resourceRequest.UseFips() {
-			return out, metadata, s3shared.NewFIPSConfigurationError(tv, resourceRequest.PartitionID,
-				resourceRequest.RequestRegion, nil)
+		// check if request region is FIPS
+		if resourceRequest.UseFips() && resourceRequest.IsCrossRegion() {
+			// FIPS with cross region is not supported, the SDK must fail.
+			return out, metadata,
+				s3shared.NewClientConfiguredForCrossRegionFIPSError(
+					tv,
+					resourceRequest.PartitionID,
+					resourceRequest.RequestRegion,
+					nil,
+				)
 		}
 
 		// Disable endpoint host prefix for s3-control
@@ -153,10 +162,16 @@ func (m *processARNResource) HandleSerialize(
 				resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 		}
 
-		// check if resource arn region is FIPS
-		if resourceRequest.UseFips() {
-			return out, metadata, s3shared.NewFIPSConfigurationError(tv, resourceRequest.PartitionID,
-				resourceRequest.RequestRegion, nil)
+		// check if request region is FIPS
+		if resourceRequest.UseFips() && resourceRequest.IsCrossRegion() {
+			// FIPS with cross region is not supported, the SDK must fail.
+			return out, metadata,
+				s3shared.NewClientConfiguredForCrossRegionFIPSError(
+					tv,
+					resourceRequest.PartitionID,
+					resourceRequest.RequestRegion,
+					nil,
+				)
 		}
 
 		// Disable endpoint host prefix for s3-control
@@ -216,7 +231,7 @@ func validateResourceRequest(resourceRequest s3shared.ResourceRequest) error {
 
 	// check if resourceRequest leads to a cross region error
 	if !resourceRequest.AllowCrossRegion() && resourceRequest.IsCrossRegion() {
-		// if cross region, but not use ARN region is not enabled
+		// if cross region, but use ARN region is not enabled
 		return s3shared.NewClientRegionMismatchError(resourceRequest.Resource,
 			resourceRequest.PartitionID, resourceRequest.RequestRegion, nil)
 	}
@@ -314,6 +329,10 @@ func buildOutpostAccessPointRequest(ctx context.Context, options outpostAccessPo
 	if strings.HasPrefix(cfgHost, endpointsID) {
 		req.URL.Host = resolveService + cfgHost[len(endpointsID):]
 
+		if s3shared.IsFIPS(options.requestRegion) {
+			req.URL.Host = resolveService + fipsLabel + cfgHost[len(endpointsID):]
+		}
+
 		// update serviceID to resolved service
 		ctx = awsmiddleware.SetServiceID(ctx, resolveService)
 	}
@@ -388,6 +407,10 @@ func buildOutpostBucketRequest(ctx context.Context, options outpostBucketOptions
 	if strings.HasPrefix(cfgHost, endpointsID) {
 		// replace service endpointID label with resolved service
 		req.URL.Host = resolveService + cfgHost[len(endpointsID):]
+
+		if s3shared.IsFIPS(options.requestRegion) {
+			req.URL.Host = resolveService + fipsLabel + cfgHost[len(endpointsID):]
+		}
 
 		// update serviceID to resolved service
 		ctx = awsmiddleware.SetServiceID(ctx, resolveService)

@@ -1,0 +1,8 @@
+{
+    "id": "ec34db1b-1788-4f65-8162-4a941e056f03",
+    "type": "feature",
+    "description": "add fips support for s3control outpost accesspoint and bucket arns",
+    "modules": [
+        "service/s3control"
+    ]
+}

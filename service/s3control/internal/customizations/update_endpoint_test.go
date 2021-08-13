@@ -205,36 +205,58 @@ func TestEndpointWithARN(t *testing.T) {
 			expectedHeaderForAccountID: true,
 			expectedHeaderForOutpostID: "op-01234567890123456",
 		},
-		"Outpost AccessPoint with client region as FIPS": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+		"Outpost AccessPoint with client region with fips (suffix)": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
-				Region: "us-gov-east-1-fips",
+				Region: "us-gov-west-1-fips",
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-west-1",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
 		},
-		"Outpost AccessPoint with client FIPS region and use arn region enabled": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+		"Outpost AccessPoint with client region with fips (suffix) and use arn region enabled": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
-				Region:       "us-gov-east-1-fips",
+				Region:       "us-gov-west-1-fips",
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/myaccesspoint",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-west-1",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
 		},
-		"Outpost AccessPoint client FIPS region in Arn": {
+		"Invalid Outpost AccessPoint with client region fips (suffix) and cross region arn": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
-				Region:       "us-gov-east-1-fips",
-				UseARNRegion: true,
+				Region: "us-gov-west-1-fips",
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "client region does not match provided ARN region",
 		},
-		"Outpost AccessPoint client FIPS region with valid ARN region": {
+		"Invalid Outpost AccessPoint with client region fips (suffix), cross region arn and use ARN region enabled": {
 			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
-				Region:       "us-gov-east-1-fips",
+				Region: "us-gov-west-1-fips",
+			},
+			expectedErr: "client region does not match provided ARN region",
+		},
+		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (prefix)": {
+			bucket: "arn:aws-us-gov:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-west-2",
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedErr: "FIPS region not allowed in ARN",
+		},
+		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (suffix)": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
+			options: s3control.Options{
+				Region:       "us-west-2",
+				UseARNRegion: true,
+			},
+			expectedErr: "FIPS region not allowed in ARN",
 		},
 		"Outpost AccessPoint with DualStack": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
@@ -283,6 +305,8 @@ func TestEndpointWithARN(t *testing.T) {
 			},
 			expectedErr: "invalid Amazon s3-outposts ARN",
 		},
+
+		// ==== outpost bucket arn tests ===
 		"Outpost Bucket with no S3UseARNRegion flag set": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
 			options: s3control.Options{
@@ -346,7 +370,11 @@ func TestEndpointWithARN(t *testing.T) {
 				Region:       "us-gov-east-1-fips",
 				UseARNRegion: true,
 			},
-			expectedErr: "use of ARN is not supported when client or request is configured for FIPS",
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-east-1.amazonaws.com/v20180820/bucket/mybucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-east-1",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
 		},
 		"Outpost Bucket with DualStack": {
 			bucket: "arn:aws:s3-outposts:us-west-2:123456789012:outpost:op-01234567890123456:bucket:mybucket",
@@ -370,6 +398,43 @@ func TestEndpointWithARN(t *testing.T) {
 			},
 			expectedErr: "invalid Amazon s3-outposts ARN, unknown resource type",
 		},
+		"Outpost Bucket ARN with client region with fips (suffix)": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region: "us-gov-west-1-fips",
+			},
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/mybucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-west-1",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Outpost Bucket ARN  with client region with fips (suffix) and use arn region enabled": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region:       "us-gov-west-1-fips",
+				UseARNRegion: true,
+			},
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/mybucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-west-1",
+			expectedHeaderForAccountID: true,
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"Invalid Outpost Bucket ARN with client region fips (suffix) and cross region arn": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region: "us-gov-west-1-fips",
+			},
+			expectedErr: "client region does not match provided ARN region",
+		},
+		"Invalid Outpost Bucket ARN  with client region fips (suffix), cross region arn and use ARN region enabled": {
+			bucket: "arn:aws-us-gov:s3-outposts:us-gov-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
+			options: s3control.Options{
+				Region: "us-gov-west-1-fips",
+			},
+			expectedErr: "client region does not match provided ARN region",
+		},
 		"Invalid Outpost Bucket ARN with FIPS pseudo-region (prefix)": {
 			bucket: "arn:aws:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:bucket:mybucket",
 			options: s3control.Options{
@@ -380,22 +445,6 @@ func TestEndpointWithARN(t *testing.T) {
 		},
 		"Invalid Outpost Bucket ARN with FIPS pseudo-region (suffix)": {
 			bucket: "arn:aws:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:bucket:mybucket",
-			options: s3control.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
-		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (prefix)": {
-			bucket: "arn:aws-us-gov:s3-outposts:fips-us-east-1:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
-			options: s3control.Options{
-				Region:       "us-west-2",
-				UseARNRegion: true,
-			},
-			expectedErr: "FIPS region not allowed in ARN",
-		},
-		"Invalid Outpost AccessPoint ARN with FIPS pseudo-region (suffix)": {
-			bucket: "arn:aws-us-gov:s3-outposts:us-east-1-fips:123456789012:outpost:op-01234567890123456:accesspoint:myaccesspoint",
 			options: s3control.Options{
 				Region:       "us-west-2",
 				UseARNRegion: true,
@@ -509,6 +558,30 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: false,
 		},
+		"CreateBucketOperation with client region fips(suffix)": {
+			options: s3control.Options{
+				Region: "us-gov-west-1-fips",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.CreateBucket(ctx, &s3control.CreateBucketInput{
+					Bucket:    aws.String("mockBucket"),
+					OutpostId: aws.String("op-01234567890123456"),
+				}, func(options *s3control.Options) {
+					// append request retriever middleware for request inspection
+					options.APIOptions = append(options.APIOptions,
+						func(stack *middleware.Stack) error {
+							// adds AFTER operation serializer middleware
+							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
+							return nil
+						})
+				})
+			},
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket/mockBucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-west-1",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+			expectedHeaderForAccountID: false,
+		},
 		"ListRegionalBucketsOperation": {
 			options: s3control.Options{
 				Region: "us-west-2",
@@ -530,6 +603,30 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 			expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/bucket",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+			expectedHeaderForAccountID: true,
+		},
+		"ListRegionalBucketsOperation with client region fips (suffix)": {
+			options: s3control.Options{
+				Region: "us-gov-west-1-fips",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.ListRegionalBuckets(ctx, &s3control.ListRegionalBucketsInput{
+					AccountId: aws.String("123456789012"),
+					OutpostId: aws.String("op-01234567890123456"),
+				}, func(options *s3control.Options) {
+					// append request retriever middleware for request inspection
+					options.APIOptions = append(options.APIOptions,
+						func(stack *middleware.Stack) error {
+							// adds AFTER operation serializer middleware
+							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
+							return nil
+						})
+				})
+			},
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/bucket",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-west-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 			expectedHeaderForAccountID: true,
 		},
@@ -576,6 +673,30 @@ func TestCustomEndpoint_SpecialOperations(t *testing.T) {
 			expectedReqURL:             "https://s3-outposts.us-west-2.amazonaws.com/v20180820/accesspoint/mockName",
 			expectedSigningName:        "s3-outposts",
 			expectedSigningRegion:      "us-west-2",
+			expectedHeaderForOutpostID: "op-01234567890123456",
+		},
+		"CreateAccessPoint outpost bucket arn with client region fips (suffix)": {
+			options: s3control.Options{
+				Region: "us-gov-west-1-fips",
+			},
+			operation: func(ctx context.Context, svc *s3control.Client, fm *requestRetrieverMiddleware) (interface{}, error) {
+				return svc.CreateAccessPoint(ctx, &s3control.CreateAccessPointInput{
+					AccountId: aws.String("123456789012"),
+					Bucket:    aws.String("arn:aws-us-gov:s3-outposts:us-gov-west-1:123456789012:outpost:op-01234567890123456:bucket:mockBucket"),
+					Name:      aws.String("mockName"),
+				}, func(options *s3control.Options) {
+					// append request retriever middleware for request inspection
+					options.APIOptions = append(options.APIOptions,
+						func(stack *middleware.Stack) error {
+							// adds AFTER operation serializer middleware
+							stack.Serialize.Insert(fm, "OperationSerializer", middleware.After)
+							return nil
+						})
+				})
+			},
+			expectedReqURL:             "https://s3-outposts-fips.us-gov-west-1.amazonaws.com/v20180820/accesspoint/mockName",
+			expectedSigningName:        "s3-outposts",
+			expectedSigningRegion:      "us-gov-west-1",
 			expectedHeaderForOutpostID: "op-01234567890123456",
 		},
 	}
