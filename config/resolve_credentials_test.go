@@ -393,7 +393,7 @@ func TestSharedConfigCredentialSource(t *testing.T) {
 
 			var credChain []string
 
-			loadOptions := []func(*LoadOptions) error{
+			loadOptions := []LoadOptionsFunc{
 				WithEndpointResolver(endpointResolver),
 				WithAPIOptions([]func(*middleware.Stack) error{
 					func(stack *middleware.Stack) error {
