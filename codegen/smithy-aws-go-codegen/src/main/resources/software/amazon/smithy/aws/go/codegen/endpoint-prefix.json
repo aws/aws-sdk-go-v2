@@ -178,6 +178,7 @@
   "MediaStore": "mediastore",
   "MediaStore Data": "data.mediastore",
   "MediaTailor": "api.mediatailor",
+  "MemoryDB": "memory-db",
   "Mgn": "mgn",
   "Migration Hub": "mgh",
   "MigrationHub Config": "migrationhub-config",

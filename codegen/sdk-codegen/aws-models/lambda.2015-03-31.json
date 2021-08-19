@@ -4918,7 +4918,7 @@
                 "MasterRegion": {
                     "target": "com.amazonaws.lambda#MasterRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>For Lambda@Edge functions, the Region of the master function. For example, <code>us-east-1</code> filters\n      the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N.\n      Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.</p>",
+                        "smithy.api#documentation": "<p>For Lambda@Edge functions, the Amazon Web Services Region of the master function. For example, <code>us-east-1</code> filters\n      the list of functions to only include Lambda@Edge functions replicated from a master function in US East (N.\n      Virginia). If specified, you must set <code>FunctionVersion</code> to <code>ALL</code>.</p>",
                         "smithy.api#httpQuery": "MasterRegion"
                     }
                 },
@@ -6561,6 +6561,10 @@
                     {
                         "value": "python3.8",
                         "name": "python38"
+                    },
+                    {
+                        "value": "python3.9",
+                        "name": "python39"
                     },
                     {
                         "value": "dotnetcore1.0",

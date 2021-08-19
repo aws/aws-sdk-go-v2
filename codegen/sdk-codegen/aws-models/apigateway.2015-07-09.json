@@ -1628,6 +1628,12 @@
                 },
                 "mutualTlsAuthentication": {
                     "target": "com.amazonaws.apigateway#MutualTlsAuthenticationInput"
+                },
+                "ownershipVerificationCertificateArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3766,7 +3772,7 @@
                 "domainNameStatus": {
                     "target": "com.amazonaws.apigateway#DomainNameStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the <a>DomainName</a> migration. The valid values are <code>AVAILABLE</code> and <code>UPDATING</code>. If the status is <code>UPDATING</code>, the domain cannot be modified further until the existing operation is complete. If it is <code>AVAILABLE</code>, the domain can be updated.</p>"
+                        "smithy.api#documentation": "<p>The status of the <a>DomainName</a> migration. The valid values are <code>AVAILABLE</code>, <code>UPDATING</code>, <code>PENDING_CERTIFICATE_REIMPORT</code>, and <code>PENDING_OWNERSHIP_VERIFICATION</code>. If the status is <code>UPDATING</code>, the domain cannot be modified further until the existing operation is complete. If it is <code>AVAILABLE</code>, the domain can be updated.</p>"
                     }
                 },
                 "domainNameStatusMessage": {
@@ -3792,6 +3798,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The mutual TLS authentication configuration for a custom domain name. If specified, API Gateway performs two-way authentication between the client and the server. Clients must present a trusted certificate to access your API.</p>"
                     }
+                },
+                "ownershipVerificationCertificateArn": {
+                    "target": "com.amazonaws.apigateway#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn.</p>"
+                    }
                 }
             },
             "traits": {
@@ -3813,6 +3825,14 @@
                     {
                         "value": "PENDING",
                         "name": "PENDING"
+                    },
+                    {
+                        "value": "PENDING_CERTIFICATE_REIMPORT",
+                        "name": "PENDING_CERTIFICATE_REIMPORT"
+                    },
+                    {
+                        "value": "PENDING_OWNERSHIP_VERIFICATION",
+                        "name": "PENDING_OWNERSHIP_VERIFICATION"
                     }
                 ]
             }
@@ -7875,7 +7895,7 @@
                 "truststoreVersion": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the S3 object that contains your truststore. To\n            specify a version, you must have versioning enabled for the S3 bucket.</p>"
+                        "smithy.api#documentation": "<p>The version of the S3 object that contains your truststore. To\n           specify a version, you must have versioning enabled for the S3 bucket.</p>"
                     }
                 }
             },
@@ -9176,7 +9196,7 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The status code.</p>",
-                "smithy.api#pattern": "[1-5]\\d\\d"
+                "smithy.api#pattern": "^[1-5]\\d\\d$"
             }
         },
         "com.amazonaws.apigateway#String": {

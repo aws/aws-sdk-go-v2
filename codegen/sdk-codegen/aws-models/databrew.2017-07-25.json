@@ -3989,6 +3989,10 @@
                     {
                         "value": "XML",
                         "name": "XML"
+                    },
+                    {
+                        "value": "TABLEAUHYPER",
+                        "name": "TABLEAUHYPER"
                     }
                 ]
             }
