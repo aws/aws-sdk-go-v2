@@ -13,7 +13,7 @@ import (
 
 // Remove a secondary cluster from the Global datastore using the Global datastore
 // name. The secondary cluster will no longer receive updates from the primary
-// cluster, but will remain as a standalone cluster in that AWS region.
+// cluster, but will remain as a standalone cluster in that Amazon region.
 func (c *Client) DisassociateGlobalReplicationGroup(ctx context.Context, params *DisassociateGlobalReplicationGroupInput, optFns ...func(*Options)) (*DisassociateGlobalReplicationGroupOutput, error) {
 	if params == nil {
 		params = &DisassociateGlobalReplicationGroupInput{}
@@ -41,7 +41,8 @@ type DisassociateGlobalReplicationGroupInput struct {
 	// This member is required.
 	ReplicationGroupId *string
 
-	// The AWS region of secondary cluster you wish to remove from the Global datastore
+	// The Amazon region of secondary cluster you wish to remove from the Global
+	// datastore
 	//
 	// This member is required.
 	ReplicationGroupRegion *string
@@ -52,7 +53,7 @@ type DisassociateGlobalReplicationGroupInput struct {
 type DisassociateGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary
-	// cluster that resides in a different AWS region. The secondary cluster accepts
+	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
 	//

@@ -4660,6 +4660,40 @@ func validateArtifactSourceTypes(v []types.ArtifactSourceType) error {
 	}
 }
 
+func validateAsyncInferenceConfig(v *types.AsyncInferenceConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AsyncInferenceConfig"}
+	if v.OutputConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutputConfig"))
+	} else if v.OutputConfig != nil {
+		if err := validateAsyncInferenceOutputConfig(v.OutputConfig); err != nil {
+			invalidParams.AddNested("OutputConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAsyncInferenceOutputConfig(v *types.AsyncInferenceOutputConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AsyncInferenceOutputConfig"}
+	if v.S3OutputPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3OutputPath"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAthenaDatasetDefinition(v *types.AthenaDatasetDefinition) error {
 	if v == nil {
 		return nil
@@ -8846,6 +8880,11 @@ func validateOpCreateEndpointConfigInput(v *CreateEndpointConfigInput) error {
 	if v.Tags != nil {
 		if err := validateTagList(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.AsyncInferenceConfig != nil {
+		if err := validateAsyncInferenceConfig(v.AsyncInferenceConfig); err != nil {
+			invalidParams.AddNested("AsyncInferenceConfig", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

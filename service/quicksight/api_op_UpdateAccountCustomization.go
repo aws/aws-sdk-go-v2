@@ -11,12 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates Amazon QuickSight customizations the current Region;. Currently, the
-// only customization you can use is a theme. You can use customizations for your
-// Amazon Web Services account; or, if you specify a namespace, for a QuickSight
-// namespace instead. Customizations that apply to a namespace override
-// customizations that apply to an Amazon Web Services account;. To find out which
-// customizations apply, use the DescribeAccountCustomization API operation.
+// Updates Amazon QuickSight customizations the current Amazon Web Services
+// Region;. Currently, the only customization you can use is a theme. You can use
+// customizations for your Amazon Web Services account; or, if you specify a
+// namespace, for a QuickSight namespace instead. Customizations that apply to a
+// namespace override customizations that apply to an Amazon Web Services account;.
+// To find out which customizations apply, use the DescribeAccountCustomization API
+// operation.
 func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateAccountCustomizationInput, optFns ...func(*Options)) (*UpdateAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &UpdateAccountCustomizationInput{}
@@ -34,7 +35,8 @@ func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateA
 
 type UpdateAccountCustomizationInput struct {
 
-	// The QuickSight customizations you're updating in the current Region;.
+	// The QuickSight customizations you're updating in the current Amazon Web Services
+	// Region;.
 	//
 	// This member is required.
 	AccountCustomization *types.AccountCustomization
@@ -53,7 +55,8 @@ type UpdateAccountCustomizationInput struct {
 
 type UpdateAccountCustomizationOutput struct {
 
-	// The QuickSight customizations you're updating in the current Region;.
+	// The QuickSight customizations you're updating in the current Amazon Web Services
+	// Region;.
 	AccountCustomization *types.AccountCustomization
 
 	// The Amazon Resource Name (ARN) for the updated customization for this Amazon Web

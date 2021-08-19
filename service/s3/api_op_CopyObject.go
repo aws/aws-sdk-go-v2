@@ -94,11 +94,12 @@ import (
 // All headers with the x-amz- prefix, including
 // x-amz-copy-source, must be signed. Server-side encryption When you perform a
 // CopyObject operation, you can optionally use the appropriate encryption-related
-// headers to encrypt the object using server-side encryption with AWS managed
-// encryption keys (SSE-S3 or SSE-KMS) or a customer-provided encryption key. With
-// server-side encryption, Amazon S3 encrypts your data as it writes it to disks in
-// its data centers and decrypts the data when you access it. For more information
-// about server-side encryption, see Using Server-Side Encryption
+// headers to encrypt the object using server-side encryption with Amazon Web
+// Services managed encryption keys (SSE-S3 or SSE-KMS) or a customer-provided
+// encryption key. With server-side encryption, Amazon S3 encrypts your data as it
+// writes it to disks in its data centers and decrypts the data when you access it.
+// For more information about server-side encryption, see Using Server-Side
+// Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/serv-side-encryption.html). If
 // a target object uses SSE-KMS, you can enable an S3 Bucket Key for the object.
 // For more information, see Amazon S3 Bucket Keys
@@ -106,9 +107,10 @@ import (
 // S3 User Guide. Access Control List (ACL)-Specific Request Headers When copying
 // an object, you can optionally use headers to grant ACL-based permissions. By
 // default, all objects are private. Only the owner has full access control. When
-// adding a new object, you can grant permissions to individual AWS accounts or to
-// predefined groups defined by Amazon S3. These permissions are then added to the
-// ACL on the object. For more information, see Access Control List (ACL) Overview
+// adding a new object, you can grant permissions to individual Amazon Web Services
+// accounts or to predefined groups defined by Amazon S3. These permissions are
+// then added to the ACL on the object. For more information, see Access Control
+// List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
 // ACLs Using the REST API
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
@@ -161,17 +163,17 @@ type CopyObjectInput struct {
 	// The name of the destination bucket. When using this action with an access point,
 	// you must direct requests to the access point hostname. The access point hostname
 	// takes the form AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com.
-	// When using this action with an access point through the AWS SDKs, you provide
-	// the access point ARN in place of the bucket name. For more information about
-	// access point ARNs, see Using access points
+	// When using this action with an access point through the Amazon Web Services
+	// SDKs, you provide the access point ARN in place of the bucket name. For more
+	// information about access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
-	// bucket ARN in place of the bucket name. For more information about S3 on
-	// Outposts ARNs, see Using S3 on Outposts
+	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon S3 User Guide.
 	//
@@ -197,9 +199,9 @@ type CopyObjectInput struct {
 	// 123456789012 in Region us-west-2, use the URL encoding of
 	// arn:aws:s3:us-west-2:123456789012:accesspoint/my-access-point/object/reports/january.pdf.
 	// The value must be URL encoded. Amazon S3 supports copy operations using access
-	// points only when the source and destination buckets are in the same AWS Region.
-	// Alternatively, for objects accessed through Amazon S3 on Outposts, specify the
-	// ARN of the object as accessed in the format
+	// points only when the source and destination buckets are in the same Amazon Web
+	// Services Region. Alternatively, for objects accessed through Amazon S3 on
+	// Outposts, specify the ARN of the object as accessed in the format
 	// arn:aws:s3-outposts:::outpost//object/. For example, to copy the object
 	// reports/january.pdf through outpost my-outpost owned by account 123456789012 in
 	// Region us-west-2, use the URL encoding of
@@ -343,16 +345,16 @@ type CopyObjectInput struct {
 	// encryption key was transmitted without error.
 	SSECustomerKeyMD5 *string
 
-	// Specifies the AWS KMS Encryption Context to use for object encryption. The value
-	// of this header is a base64-encoded UTF-8 string holding JSON with the encryption
-	// context key-value pairs.
+	// Specifies the Amazon Web Services KMS Encryption Context to use for object
+	// encryption. The value of this header is a base64-encoded UTF-8 string holding
+	// JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
-	// Specifies the AWS KMS key ID to use for object encryption. All GET and PUT
-	// requests for an object protected by AWS KMS will fail if not made via SSL or
-	// using SigV4. For information about configuring using any of the officially
-	// supported AWS SDKs and AWS CLI, see Specifying the Signature Version in Request
-	// Authentication
+	// Specifies the Amazon Web Services KMS key ID to use for object encryption. All
+	// GET and PUT requests for an object protected by Amazon Web Services KMS will
+	// fail if not made via SSL or using SigV4. For information about configuring using
+	// any of the officially supported Amazon Web Services SDKs and Amazon Web Services
+	// CLI, see Specifying the Signature Version in Request Authentication
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingAWSSDK.html#specify-signature-version)
 	// in the Amazon S3 User Guide.
 	SSEKMSKeyId *string
@@ -390,7 +392,7 @@ type CopyObjectInput struct {
 type CopyObjectOutput struct {
 
 	// Indicates whether the copied object uses an S3 Bucket Key for server-side
-	// encryption with AWS KMS (SSE-KMS).
+	// encryption with Amazon Web Services KMS (SSE-KMS).
 	BucketKeyEnabled bool
 
 	// Container for all response elements.
@@ -415,14 +417,14 @@ type CopyObjectOutput struct {
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
 
-	// If present, specifies the AWS KMS Encryption Context to use for object
-	// encryption. The value of this header is a base64-encoded UTF-8 string holding
-	// JSON with the encryption context key-value pairs.
+	// If present, specifies the Amazon Web Services KMS Encryption Context to use for
+	// object encryption. The value of this header is a base64-encoded UTF-8 string
+	// holding JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
-	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
-	// symmetric customer managed customer master key (CMK) that was used for the
-	// object.
+	// If present, specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
+	// that was used for the object.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3

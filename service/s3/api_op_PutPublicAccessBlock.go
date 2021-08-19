@@ -75,8 +75,8 @@ type PutPublicAccessBlockInput struct {
 	PublicAccessBlockConfiguration *types.PublicAccessBlockConfiguration
 
 	// The MD5 hash of the PutPublicAccessBlock request body. For requests made using
-	// the AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated
-	// automatically.
+	// the Amazon Web Services Command Line Interface (CLI) or Amazon Web Services
+	// SDKs, this field is calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

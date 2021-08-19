@@ -1628,44 +1628,67 @@ type InstanceType string
 
 // Enum values for InstanceType
 const (
-	InstanceTypeMlT2Medium    InstanceType = "ml.t2.medium"
-	InstanceTypeMlT2Large     InstanceType = "ml.t2.large"
-	InstanceTypeMlT2Xlarge    InstanceType = "ml.t2.xlarge"
-	InstanceTypeMlT22xlarge   InstanceType = "ml.t2.2xlarge"
-	InstanceTypeMlT3Medium    InstanceType = "ml.t3.medium"
-	InstanceTypeMlT3Large     InstanceType = "ml.t3.large"
-	InstanceTypeMlT3Xlarge    InstanceType = "ml.t3.xlarge"
-	InstanceTypeMlT32xlarge   InstanceType = "ml.t3.2xlarge"
-	InstanceTypeMlM4Xlarge    InstanceType = "ml.m4.xlarge"
-	InstanceTypeMlM42xlarge   InstanceType = "ml.m4.2xlarge"
-	InstanceTypeMlM44xlarge   InstanceType = "ml.m4.4xlarge"
-	InstanceTypeMlM410xlarge  InstanceType = "ml.m4.10xlarge"
-	InstanceTypeMlM416xlarge  InstanceType = "ml.m4.16xlarge"
-	InstanceTypeMlM5Xlarge    InstanceType = "ml.m5.xlarge"
-	InstanceTypeMlM52xlarge   InstanceType = "ml.m5.2xlarge"
-	InstanceTypeMlM54xlarge   InstanceType = "ml.m5.4xlarge"
-	InstanceTypeMlM512xlarge  InstanceType = "ml.m5.12xlarge"
-	InstanceTypeMlM524xlarge  InstanceType = "ml.m5.24xlarge"
-	InstanceTypeMlC4Xlarge    InstanceType = "ml.c4.xlarge"
-	InstanceTypeMlC42xlarge   InstanceType = "ml.c4.2xlarge"
-	InstanceTypeMlC44xlarge   InstanceType = "ml.c4.4xlarge"
-	InstanceTypeMlC48xlarge   InstanceType = "ml.c4.8xlarge"
-	InstanceTypeMlC5Xlarge    InstanceType = "ml.c5.xlarge"
-	InstanceTypeMlC52xlarge   InstanceType = "ml.c5.2xlarge"
-	InstanceTypeMlC54xlarge   InstanceType = "ml.c5.4xlarge"
-	InstanceTypeMlC59xlarge   InstanceType = "ml.c5.9xlarge"
-	InstanceTypeMlC518xlarge  InstanceType = "ml.c5.18xlarge"
-	InstanceTypeMlC5dXlarge   InstanceType = "ml.c5d.xlarge"
-	InstanceTypeMlC5d2xlarge  InstanceType = "ml.c5d.2xlarge"
-	InstanceTypeMlC5d4xlarge  InstanceType = "ml.c5d.4xlarge"
-	InstanceTypeMlC5d9xlarge  InstanceType = "ml.c5d.9xlarge"
-	InstanceTypeMlC5d18xlarge InstanceType = "ml.c5d.18xlarge"
-	InstanceTypeMlP2Xlarge    InstanceType = "ml.p2.xlarge"
-	InstanceTypeMlP28xlarge   InstanceType = "ml.p2.8xlarge"
-	InstanceTypeMlP216xlarge  InstanceType = "ml.p2.16xlarge"
-	InstanceTypeMlP32xlarge   InstanceType = "ml.p3.2xlarge"
-	InstanceTypeMlP38xlarge   InstanceType = "ml.p3.8xlarge"
-	InstanceTypeMlP316xlarge  InstanceType = "ml.p3.16xlarge"
+	InstanceTypeMlT2Medium     InstanceType = "ml.t2.medium"
+	InstanceTypeMlT2Large      InstanceType = "ml.t2.large"
+	InstanceTypeMlT2Xlarge     InstanceType = "ml.t2.xlarge"
+	InstanceTypeMlT22xlarge    InstanceType = "ml.t2.2xlarge"
+	InstanceTypeMlT3Medium     InstanceType = "ml.t3.medium"
+	InstanceTypeMlT3Large      InstanceType = "ml.t3.large"
+	InstanceTypeMlT3Xlarge     InstanceType = "ml.t3.xlarge"
+	InstanceTypeMlT32xlarge    InstanceType = "ml.t3.2xlarge"
+	InstanceTypeMlM4Xlarge     InstanceType = "ml.m4.xlarge"
+	InstanceTypeMlM42xlarge    InstanceType = "ml.m4.2xlarge"
+	InstanceTypeMlM44xlarge    InstanceType = "ml.m4.4xlarge"
+	InstanceTypeMlM410xlarge   InstanceType = "ml.m4.10xlarge"
+	InstanceTypeMlM416xlarge   InstanceType = "ml.m4.16xlarge"
+	InstanceTypeMlM5Xlarge     InstanceType = "ml.m5.xlarge"
+	InstanceTypeMlM52xlarge    InstanceType = "ml.m5.2xlarge"
+	InstanceTypeMlM54xlarge    InstanceType = "ml.m5.4xlarge"
+	InstanceTypeMlM512xlarge   InstanceType = "ml.m5.12xlarge"
+	InstanceTypeMlM524xlarge   InstanceType = "ml.m5.24xlarge"
+	InstanceTypeMlM5dLarge     InstanceType = "ml.m5d.large"
+	InstanceTypeMlM5dXlarge    InstanceType = "ml.m5d.xlarge"
+	InstanceTypeMlM5d2xlarge   InstanceType = "ml.m5d.2xlarge"
+	InstanceTypeMlM5d4xlarge   InstanceType = "ml.m5d.4xlarge"
+	InstanceTypeMlM5d8xlarge   InstanceType = "ml.m5d.8xlarge"
+	InstanceTypeMlM5d12xlarge  InstanceType = "ml.m5d.12xlarge"
+	InstanceTypeMlM5d16xlarge  InstanceType = "ml.m5d.16xlarge"
+	InstanceTypeMlM5d24xlarge  InstanceType = "ml.m5d.24xlarge"
+	InstanceTypeMlC4Xlarge     InstanceType = "ml.c4.xlarge"
+	InstanceTypeMlC42xlarge    InstanceType = "ml.c4.2xlarge"
+	InstanceTypeMlC44xlarge    InstanceType = "ml.c4.4xlarge"
+	InstanceTypeMlC48xlarge    InstanceType = "ml.c4.8xlarge"
+	InstanceTypeMlC5Xlarge     InstanceType = "ml.c5.xlarge"
+	InstanceTypeMlC52xlarge    InstanceType = "ml.c5.2xlarge"
+	InstanceTypeMlC54xlarge    InstanceType = "ml.c5.4xlarge"
+	InstanceTypeMlC59xlarge    InstanceType = "ml.c5.9xlarge"
+	InstanceTypeMlC518xlarge   InstanceType = "ml.c5.18xlarge"
+	InstanceTypeMlC5dXlarge    InstanceType = "ml.c5d.xlarge"
+	InstanceTypeMlC5d2xlarge   InstanceType = "ml.c5d.2xlarge"
+	InstanceTypeMlC5d4xlarge   InstanceType = "ml.c5d.4xlarge"
+	InstanceTypeMlC5d9xlarge   InstanceType = "ml.c5d.9xlarge"
+	InstanceTypeMlC5d18xlarge  InstanceType = "ml.c5d.18xlarge"
+	InstanceTypeMlP2Xlarge     InstanceType = "ml.p2.xlarge"
+	InstanceTypeMlP28xlarge    InstanceType = "ml.p2.8xlarge"
+	InstanceTypeMlP216xlarge   InstanceType = "ml.p2.16xlarge"
+	InstanceTypeMlP32xlarge    InstanceType = "ml.p3.2xlarge"
+	InstanceTypeMlP38xlarge    InstanceType = "ml.p3.8xlarge"
+	InstanceTypeMlP316xlarge   InstanceType = "ml.p3.16xlarge"
+	InstanceTypeMlP3dn24xlarge InstanceType = "ml.p3dn.24xlarge"
+	InstanceTypeMlG4dnXlarge   InstanceType = "ml.g4dn.xlarge"
+	InstanceTypeMlG4dn2xlarge  InstanceType = "ml.g4dn.2xlarge"
+	InstanceTypeMlG4dn4xlarge  InstanceType = "ml.g4dn.4xlarge"
+	InstanceTypeMlG4dn8xlarge  InstanceType = "ml.g4dn.8xlarge"
+	InstanceTypeMlG4dn12xlarge InstanceType = "ml.g4dn.12xlarge"
+	InstanceTypeMlG4dn16xlarge InstanceType = "ml.g4dn.16xlarge"
+	InstanceTypeMlR5Large      InstanceType = "ml.r5.large"
+	InstanceTypeMlR5Xlarge     InstanceType = "ml.r5.xlarge"
+	InstanceTypeMlR52xlarge    InstanceType = "ml.r5.2xlarge"
+	InstanceTypeMlR54xlarge    InstanceType = "ml.r5.4xlarge"
+	InstanceTypeMlR58xlarge    InstanceType = "ml.r5.8xlarge"
+	InstanceTypeMlR512xlarge   InstanceType = "ml.r5.12xlarge"
+	InstanceTypeMlR516xlarge   InstanceType = "ml.r5.16xlarge"
+	InstanceTypeMlR524xlarge   InstanceType = "ml.r5.24xlarge"
 )
 
 // Values returns all known values for InstanceType. Note that this can be expanded
@@ -1691,6 +1714,14 @@ func (InstanceType) Values() []InstanceType {
 		"ml.m5.4xlarge",
 		"ml.m5.12xlarge",
 		"ml.m5.24xlarge",
+		"ml.m5d.large",
+		"ml.m5d.xlarge",
+		"ml.m5d.2xlarge",
+		"ml.m5d.4xlarge",
+		"ml.m5d.8xlarge",
+		"ml.m5d.12xlarge",
+		"ml.m5d.16xlarge",
+		"ml.m5d.24xlarge",
 		"ml.c4.xlarge",
 		"ml.c4.2xlarge",
 		"ml.c4.4xlarge",
@@ -1711,6 +1742,21 @@ func (InstanceType) Values() []InstanceType {
 		"ml.p3.2xlarge",
 		"ml.p3.8xlarge",
 		"ml.p3.16xlarge",
+		"ml.p3dn.24xlarge",
+		"ml.g4dn.xlarge",
+		"ml.g4dn.2xlarge",
+		"ml.g4dn.4xlarge",
+		"ml.g4dn.8xlarge",
+		"ml.g4dn.12xlarge",
+		"ml.g4dn.16xlarge",
+		"ml.r5.large",
+		"ml.r5.xlarge",
+		"ml.r5.2xlarge",
+		"ml.r5.4xlarge",
+		"ml.r5.8xlarge",
+		"ml.r5.12xlarge",
+		"ml.r5.16xlarge",
+		"ml.r5.24xlarge",
 	}
 }
 
@@ -1872,6 +1918,26 @@ func (ListWorkteamsSortByOptions) Values() []ListWorkteamsSortByOptions {
 	return []ListWorkteamsSortByOptions{
 		"Name",
 		"CreateDate",
+	}
+}
+
+type MetricSetSource string
+
+// Enum values for MetricSetSource
+const (
+	MetricSetSourceTrain      MetricSetSource = "Train"
+	MetricSetSourceValidation MetricSetSource = "Validation"
+	MetricSetSourceTest       MetricSetSource = "Test"
+)
+
+// Values returns all known values for MetricSetSource. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (MetricSetSource) Values() []MetricSetSource {
+	return []MetricSetSource{
+		"Train",
+		"Validation",
+		"Test",
 	}
 }
 

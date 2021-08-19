@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates Amazon QuickSight customizations the current Region;. Currently, you can
-// add a custom default theme by using the CreateAccountCustomization or
-// UpdateAccountCustomization API operation. To further customize QuickSight by
-// removing QuickSight sample assets and videos for all new users, see Customizing
-// QuickSight
+// Creates Amazon QuickSight customizations the current Amazon Web Services
+// Region;. Currently, you can add a custom default theme by using the
+// CreateAccountCustomization or UpdateAccountCustomization API operation. To
+// further customize QuickSight by removing QuickSight sample assets and videos for
+// all new users, see Customizing QuickSight
 // (https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html)
 // in the Amazon QuickSight User Guide. You can create customizations for your
 // Amazon Web Services account; or, if you specify a namespace, for a QuickSight
@@ -46,12 +46,12 @@ func (c *Client) CreateAccountCustomization(ctx context.Context, params *CreateA
 
 type CreateAccountCustomizationInput struct {
 
-	// The QuickSight customizations you're adding in the current Region;. You can add
-	// these to an Amazon Web Services account; and a QuickSight namespace. For
-	// example, you can add a default theme by setting AccountCustomization to the
-	// midnight theme: "AccountCustomization": { "DefaultTheme":
-	// "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a custom theme by
-	// specifying "AccountCustomization": { "DefaultTheme":
+	// The QuickSight customizations you're adding in the current Amazon Web Services
+	// Region;. You can add these to an Amazon Web Services account; and a QuickSight
+	// namespace. For example, you can add a default theme by setting
+	// AccountCustomization to the midnight theme: "AccountCustomization": {
+	// "DefaultTheme": "arn:aws:quicksight::aws:theme/MIDNIGHT" }. Or, you can add a
+	// custom theme by specifying "AccountCustomization": { "DefaultTheme":
 	// "arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639"
 	// }.
 	//
@@ -75,7 +75,8 @@ type CreateAccountCustomizationInput struct {
 
 type CreateAccountCustomizationOutput struct {
 
-	// The QuickSight customizations you're adding in the current Region;.
+	// The QuickSight customizations you're adding in the current Amazon Web Services
+	// Region;.
 	AccountCustomization *types.AccountCustomization
 
 	// The Amazon Resource Name (ARN) for the customization that you created for this

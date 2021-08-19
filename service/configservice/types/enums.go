@@ -659,6 +659,17 @@ const (
 	ResourceTypeSecret                           ResourceType = "AWS::SecretsManager::Secret"
 	ResourceTypeTopic                            ResourceType = "AWS::SNS::Topic"
 	ResourceTypeFileData                         ResourceType = "AWS::SSM::FileData"
+	ResourceTypeBackupPlan                       ResourceType = "AWS::Backup::BackupPlan"
+	ResourceTypeBackupSelection                  ResourceType = "AWS::Backup::BackupSelection"
+	ResourceTypeBackupVault                      ResourceType = "AWS::Backup::BackupVault"
+	ResourceTypeBackupRecoveryPoint              ResourceType = "AWS::Backup::RecoveryPoint"
+	ResourceTypeECRRepository                    ResourceType = "AWS::ECR::Repository"
+	ResourceTypeECSCluster                       ResourceType = "AWS::ECS::Cluster"
+	ResourceTypeECSService                       ResourceType = "AWS::ECS::Service"
+	ResourceTypeECSTaskDefinition                ResourceType = "AWS::ECS::TaskDefinition"
+	ResourceTypeEFSAccessPoint                   ResourceType = "AWS::EFS::AccessPoint"
+	ResourceTypeEFSFileSystem                    ResourceType = "AWS::EFS::FileSystem"
+	ResourceTypeEKSCluster                       ResourceType = "AWS::EKS::Cluster"
 )
 
 // Values returns all known values for ResourceType. Note that this can be expanded
@@ -763,6 +774,17 @@ func (ResourceType) Values() []ResourceType {
 		"AWS::SecretsManager::Secret",
 		"AWS::SNS::Topic",
 		"AWS::SSM::FileData",
+		"AWS::Backup::BackupPlan",
+		"AWS::Backup::BackupSelection",
+		"AWS::Backup::BackupVault",
+		"AWS::Backup::RecoveryPoint",
+		"AWS::ECR::Repository",
+		"AWS::ECS::Cluster",
+		"AWS::ECS::Service",
+		"AWS::ECS::TaskDefinition",
+		"AWS::EFS::AccessPoint",
+		"AWS::EFS::FileSystem",
+		"AWS::EKS::Cluster",
 	}
 }
 

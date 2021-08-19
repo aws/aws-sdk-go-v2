@@ -10080,7 +10080,7 @@
                 "target": "com.amazonaws.ec2#KeyPair"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public\n            key and displays the private key for you to save to a file. The private key is returned\n            as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name\n            already exists, Amazon EC2 returns an error.</p>\n         <p>You can have up to five thousand key pairs per Region.</p>\n\t\t       <p>The key pair returned to you is available only in the Region in which you create it.\n            If you prefer, you can create your own key pair using a third-party tool and upload it\n            to any Region using <a>ImportKeyPair</a>.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Creates an ED25519 or 2048-bit RSA key pair with the specified name. Amazon EC2 stores the public\n            key and displays the private key for you to save to a file. The private key is returned\n            as an unencrypted PEM encoded PKCS#1 private key. If a key with the specified name\n            already exists, Amazon EC2 returns an error.</p>\n\t\t       <p>The key pair returned to you is available only in the Amazon Web Services Region in which you create it.\n            If you prefer, you can create your own key pair using a third-party tool and upload it\n            to any Region using <a>ImportKeyPair</a>.</p>\n         <p>You can have up to 5,000 key pairs per Amazon Web Services Region.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateKeyPairRequest": {
@@ -10099,6 +10099,12 @@
                         "aws.protocols#ec2QueryName": "DryRun",
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, \n   and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. \n   Otherwise, it is <code>UnauthorizedOperation</code>.</p>",
                         "smithy.api#xmlName": "dryRun"
+                    }
+                },
+                "KeyType": {
+                    "target": "com.amazonaws.ec2#KeyType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of key pair. Note that ED25519 keys are not supported for Windows instances, EC2 Instance Connect, and EC2 Serial Console.</p>\n        <p>Default: <code>rsa</code>\n         </p>"
                     }
                 },
                 "TagSpecifications": {
@@ -11477,7 +11483,7 @@
                 "target": "com.amazonaws.ec2#CreateSecurityGroupResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a security group.</p>\n         <p>A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.\n         For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 Security Groups</a> in \n\t\t\t\tthe <i>Amazon Elastic Compute Cloud User Guide</i> and \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the\n\t\t\t\t<i>Amazon Virtual Private Cloud User Guide</i>.</p>\n         <p>When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name.</p>\n         <p>You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other.</p>\n         <p>You can add or remove rules from your security groups using \n\t\t\t\t\t<a>AuthorizeSecurityGroupIngress</a>,\n\t\t\t\t\t<a>AuthorizeSecurityGroupEgress</a>,\n\t\t\t\t\t<a>RevokeSecurityGroupIngress</a>, and\n\t\t\t\t\t<a>RevokeSecurityGroupEgress</a>.</p>\n         <p>For more information about VPC security group limits, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC Limits</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a security group.</p>\n         <p>A security group acts as a virtual firewall for your instance to control inbound and outbound traffic.\n         For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 security groups</a> in \n\t\t\t\tthe <i>Amazon Elastic Compute Cloud User Guide</i> and \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security groups for your VPC</a> in the\n\t\t\t\t<i>Amazon Virtual Private Cloud User Guide</i>.</p>\n         <p>When you create a security group, you specify a friendly name of your choice. You can have a security group for use in EC2-Classic with the same name as a security group for use in a VPC. However, you can't have two security groups for use in EC2-Classic with the same name or two security groups for use in a VPC with the same name.</p>\n         <p>You have a default security group for use in EC2-Classic and a default security group for use in your VPC. If you don't specify a security group when you launch an instance, the instance is launched into the appropriate default security group. A default security group includes a default rule that grants instances unrestricted network access to each other.</p>\n         <p>You can add or remove rules from your security groups using \n\t\t\t\t\t<a>AuthorizeSecurityGroupIngress</a>,\n\t\t\t\t\t<a>AuthorizeSecurityGroupEgress</a>,\n\t\t\t\t\t<a>RevokeSecurityGroupIngress</a>, and\n\t\t\t\t\t<a>RevokeSecurityGroupEgress</a>.</p>\n         <p>For more information about VPC security group limits, see <a href=\"https://docs.aws.amazon.com/vpc/latest/userguide/amazon-vpc-limits.html\">Amazon VPC Limits</a>.</p>"
             }
         },
         "com.amazonaws.ec2#CreateSecurityGroupRequest": {
@@ -21062,7 +21068,7 @@
                 "target": "com.amazonaws.ec2#DescribeKeyPairsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified key pairs or all of your key pairs.</p>\n         <p>For more information about key pairs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the specified key pairs or all of your key pairs.</p>\n         <p>For more information about key pairs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                 "smithy.api#suppress": [
                     "WaitableTraitInvalidErrorType"
                 ],
@@ -23856,7 +23862,7 @@
                 "target": "com.amazonaws.ec2#DescribeSecurityGroupsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the specified security groups or all of your security groups.</p>\n         <p>A security group is for use with instances either in the EC2-Classic platform  \n\t\t\t\tor in a specific VPC. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 Security Groups</a> in \n\t\t\t\tthe <i>Amazon Elastic Compute Cloud User Guide</i> and \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security Groups for Your VPC</a> in the\n\t\t\t\t<i>Amazon Virtual Private Cloud User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the specified security groups or all of your security groups.</p>\n         <p>A security group is for use with instances either in the EC2-Classic platform  \n\t\t\t\tor in a specific VPC. For more information, see\n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html\">Amazon EC2 security groups</a> in \n\t\t\t\tthe <i>Amazon Elastic Compute Cloud User Guide</i> and \n\t\t\t\t<a href=\"https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html\">Security groups for your VPC</a> in the\n\t\t\t\t<i>Amazon Virtual Private Cloud User Guide</i>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -31286,7 +31292,7 @@
                 "S3ExportLocation": {
                     "target": "com.amazonaws.ec2#ExportTaskS3LocationRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE\n   and READ_ACP permissions to the AWS account vm-import-export@amazon.com.</p>",
+                        "smithy.api#documentation": "<p>Information about the destination Amazon S3 bucket. The bucket must exist and grant WRITE\n   and READ_ACP permissions to the Amazon Web Services account vm-import-export@amazon.com.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -31659,7 +31665,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "S3Bucket",
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket for the destination image. The destination bucket must exist and grant\n   WRITE and READ_ACP permissions to the AWS account\n   <code>vm-import-export@amazon.com</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket for the destination image. The destination bucket must exist and grant\n   WRITE and READ_ACP permissions to the Amazon Web Services account <code>vm-import-export@amazon.com</code>.</p>",
                         "smithy.api#xmlName": "s3Bucket"
                     }
                 },
@@ -31699,7 +31705,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "S3Bucket",
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket for the destination image. The destination bucket must exist and grant\n   WRITE and READ_ACP permissions to the AWS account\n   <code>vm-import-export@amazon.com</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket for the destination image. The destination bucket must exist and grant\n   WRITE and READ_ACP permissions to the Amazon Web Services account <code>vm-import-export@amazon.com</code>.</p>",
                         "smithy.api#xmlName": "s3Bucket"
                     }
                 },
@@ -36492,7 +36498,7 @@
                 "Encrypted": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the destination AMI of the imported image should be encrypted. The default CMK for EBS is used\n   unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the\n    <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the destination AMI of the imported image should be encrypted. The default KMS key for EBS is used\n   unless you specify a non-default KMS key using <code>KmsKeyId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the\n    <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "Hypervisor": {
@@ -36504,13 +36510,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.ec2#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the\n   encrypted AMI. This parameter is only required if you want to use a non-default CMK; if this\n   parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is\n   specified, the <code>Encrypted</code> flag must also be set. </p>\n         <p>The CMK identifier may be provided in any of the following formats: </p>\n         <ul>\n            <li>\n               <p>Key ID</p>\n            </li>\n            <li>\n               <p>Key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p>\n            </li>\n            <li>\n               <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p>\n            </li>\n            <li>\n               <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p>\n            </li>\n         </ul>\n         <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even\n   though you provided an invalid identifier. This action will eventually report failure. </p>\n         <p>The specified CMK must exist in the Region that the AMI is being copied to.</p>\n         <p>Amazon EBS does not support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the symmetric KMS key to use when creating the\n   encrypted AMI. This parameter is only required if you want to use a non-default KMS key; if this\n   parameter is not specified, the default KMS key for EBS is used. If a <code>KmsKeyId</code> is\n   specified, the <code>Encrypted</code> flag must also be set. </p>\n         <p>The KMS key identifier may be provided in any of the following formats: </p>\n         <ul>\n            <li>\n               <p>Key ID</p>\n            </li>\n            <li>\n               <p>Key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the <code>alias</code> namespace, and then the key alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p>\n            </li>\n            <li>\n               <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the <code>key</code> namespace, and then the key ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p>\n            </li>\n            <li>\n               <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the <code>alias</code> namespace, and then the key alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p>\n            </li>\n         </ul>\n         <p>Amazon Web Services parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even\n   though you provided an invalid identifier. This action will eventually report failure. </p>\n         <p>The specified KMS key must exist in the Region that the AMI is being copied to.</p>\n         <p>Amazon EBS does not support asymmetric KMS keys.</p>"
                     }
                 },
                 "LicenseType": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p>\n         <p>By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify\n    <code>AWS</code> to replace the source-system license with an AWS license, if appropriate. Specify <code>BYOL</code>\n   to retain the source-system license, if appropriate.</p>\n         <p>To use <code>BYOL</code>, you must have existing licenses with rights to use these licenses in a third party\n   cloud, such as AWS. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image\">Prerequisites</a> in the\n   VM Import/Export User Guide.</p>"
+                        "smithy.api#documentation": "<p>The license type to be used for the Amazon Machine Image (AMI) after importing.</p>\n         <p>By default, we detect the source-system operating system (OS) and apply the appropriate license. Specify\n   <code>AWS</code> to replace the source-system license with an Amazon Web Services license, if appropriate. Specify <code>BYOL</code>\n   to retain the source-system license, if appropriate.</p>\n         <p>To use <code>BYOL</code>, you must have existing licenses with rights to use these licenses in a third party\n   cloud, such as Amazon Web Services. For more information, see <a href=\"https://docs.aws.amazon.com/vm-import/latest/userguide/vmimport-image-import.html#prerequisites-image\">Prerequisites</a> in the\n   VM Import/Export User Guide.</p>"
                     }
                 },
                 "Platform": {
@@ -36536,6 +36542,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to apply to the import image task during creation.</p>",
                         "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "UsageOperation": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The usage operation value. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html\">AMI billing information fields</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 }
             }
@@ -36595,7 +36607,7 @@
                     "target": "com.amazonaws.ec2#KmsKeyId",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KmsKeyId",
-                        "smithy.api#documentation": "<p>The identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key\n   (CMK) that was used to create the encrypted AMI.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the symmetric KMS key that was used to create the encrypted AMI.</p>",
                         "smithy.api#xmlName": "kmsKeyId"
                     }
                 },
@@ -36662,6 +36674,14 @@
                         "smithy.api#documentation": "<p>Any tags assigned to the import image task.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
+                },
+                "UsageOperation": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UsageOperation",
+                        "smithy.api#documentation": "<p>The usage operation value.</p>",
+                        "smithy.api#xmlName": "usageOperation"
+                    }
                 }
             }
         },
@@ -36720,7 +36740,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KmsKeyId",
-                        "smithy.api#documentation": "<p>The identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create\n   the encrypted image.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the KMS key that was used to create the encrypted image.</p>",
                         "smithy.api#xmlName": "kmsKeyId"
                     }
                 },
@@ -36787,6 +36807,14 @@
                         "smithy.api#documentation": "<p>The ARNs of the license configurations that are associated with the import image task.</p>",
                         "smithy.api#xmlName": "licenseSpecifications"
                     }
+                },
+                "UsageOperation": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "UsageOperation",
+                        "smithy.api#documentation": "<p>The usage operation value.</p>",
+                        "smithy.api#xmlName": "usageOperation"
+                    }
                 }
             },
             "traits": {
@@ -36814,7 +36842,7 @@
                 "target": "com.amazonaws.ec2#ImportInstanceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an import instance task using metadata from the specified disk image.</p>\n         <p>This API action supports only single-volume VMs. To import multi-volume VMs, use <a>ImportImage</a>\n   instead.</p>\n         <p>This API action is not supported by the AWS Command Line Interface (AWS CLI). For \n   information about using the Amazon EC2 CLI, which is deprecated, see\n   <a href=\"https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#UsingVirtualMachinesinAmazonEC2\">Importing a VM to Amazon EC2</a> in the <i>Amazon EC2 CLI Reference</i> PDF file.</p>\n         <p>For information about the import manifest referenced by this API action, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an import instance task using metadata from the specified disk image.</p>\n         <p>This API action supports only single-volume VMs. To import multi-volume VMs, use <a>ImportImage</a>\n   instead.</p>\n         <p>This API action is not supported by the Command Line Interface (CLI). For \n   information about using the Amazon EC2 CLI, which is deprecated, see\n   <a href=\"https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#UsingVirtualMachinesinAmazonEC2\">Importing a VM to Amazon EC2</a> in the <i>Amazon EC2 CLI Reference</i> PDF file.</p>\n         <p>For information about the import manifest referenced by this API action, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
             }
         },
         "com.amazonaws.ec2#ImportInstanceLaunchSpecification": {
@@ -37092,7 +37120,7 @@
                 "target": "com.amazonaws.ec2#ImportKeyPairResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Imports the public key from an RSA key pair that you created with a third-party tool. \n        Compare this with <a>CreateKeyPair</a>, in which Amazon Web Services creates the key pair and gives the keys to you \n        (Amazon Web Services keeps a copy of the public key). With ImportKeyPair, you create the key pair and give Amazon Web Services just the public key. \n        The private key is never transferred between you and Amazon Web Services.</p>\n         <p>For more information about key pairs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Key Pairs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Imports the public key from an RSA or ED25519 key pair that you created with a third-party tool. \n        Compare this with <a>CreateKeyPair</a>, in which Amazon Web Services creates the key pair and gives the keys to you \n        (Amazon Web Services keeps a copy of the public key). With ImportKeyPair, you create the key pair and give Amazon Web Services just the public key. \n        The private key is never transferred between you and Amazon Web Services.</p>\n         <p>For more information about key pairs, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html\">Amazon EC2 key pairs</a> \n\t\t\t\tin the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#ImportKeyPairRequest": {
@@ -37218,13 +37246,13 @@
                 "Encrypted": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the destination snapshot of the imported image should be encrypted. The default CMK for EBS is\n   used unless you specify a non-default AWS Key Management Service (AWS KMS) CMK using <code>KmsKeyId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the\n    <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the destination snapshot of the imported image should be encrypted. The default KMS key for EBS is\n   used unless you specify a non-default KMS key using <code>KmsKeyId</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/EBSEncryption.html\">Amazon EBS Encryption</a> in the\n    <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 },
                 "KmsKeyId": {
                     "target": "com.amazonaws.ec2#KmsKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An identifier for the symmetric AWS Key Management Service (AWS KMS) customer master key (CMK) to use when creating the\n   encrypted snapshot. This parameter is only required if you want to use a non-default CMK; if this\n   parameter is not specified, the default CMK for EBS is used. If a <code>KmsKeyId</code> is\n   specified, the <code>Encrypted</code> flag must also be set. </p>\n         <p>The CMK identifier may be provided in any of the following formats: </p>\n         <ul>\n            <li>\n               <p>Key ID</p>\n            </li>\n            <li>\n               <p>Key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p>\n            </li>\n            <li>\n               <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>key</code> namespace, and then the CMK ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p>\n            </li>\n            <li>\n               <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the CMK, the AWS account ID of the CMK owner, the <code>alias</code> namespace, and then the CMK alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p>\n            </li>\n         </ul>\n         <p>AWS parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even\n   though you provided an invalid identifier. This action will eventually report failure. </p>\n         <p>The specified CMK must exist in the Region that the snapshot is being copied to.</p>\n         <p>Amazon EBS does not support asymmetric CMKs.</p>"
+                        "smithy.api#documentation": "<p>An identifier for the symmetric KMS key to use when creating the\n   encrypted snapshot. This parameter is only required if you want to use a non-default KMS key; if this\n   parameter is not specified, the default KMS key for EBS is used. If a <code>KmsKeyId</code> is\n   specified, the <code>Encrypted</code> flag must also be set. </p>\n         <p>The KMS key identifier may be provided in any of the following formats: </p>\n         <ul>\n            <li>\n               <p>Key ID</p>\n            </li>\n            <li>\n               <p>Key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the <code>alias</code> namespace, and then the key alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>.</p>\n            </li>\n            <li>\n               <p>ARN using key ID. The ID ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the <code>key</code> namespace, and then the key ID. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:key/<i>abcd1234-a123-456a-a12b-a123b4cd56ef</i>.</p>\n            </li>\n            <li>\n               <p>ARN using key alias. The alias ARN contains the <code>arn:aws:kms</code> namespace, followed by the Region of the key, the Amazon Web Services account ID of the key owner, the <code>alias</code> namespace, and then the key alias. For example, arn:aws:kms:<i>us-east-1</i>:<i>012345678910</i>:alias/<i>ExampleAlias</i>. </p>\n            </li>\n         </ul>\n         <p>Amazon Web Services parses <code>KmsKeyId</code> asynchronously, meaning that the action you call may appear to complete even\n   though you provided an invalid identifier. This action will eventually report failure. </p>\n         <p>The specified KMS key must exist in the Region that the snapshot is being copied to.</p>\n         <p>Amazon EBS does not support asymmetric KMS keys.</p>"
                     }
                 },
                 "RoleName": {
@@ -37361,7 +37389,7 @@
                 "target": "com.amazonaws.ec2#ImportVolumeResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates an import volume task using metadata from the specified disk image.</p>\n         <p>This API action supports only single-volume VMs. To import multi-volume VMs, use \n   <a>ImportImage</a> instead. To import a disk to a snapshot, use\n   <a>ImportSnapshot</a> instead.</p>\n         <p>This API action is not supported by the AWS Command Line Interface (AWS CLI). For \n   information about using the Amazon EC2 CLI, which is deprecated, see <a href=\"https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#importing-your-volumes-into-amazon-ebs\">Importing Disks to Amazon EBS</a> in the <i>Amazon EC2 CLI Reference</i> PDF file.</p>\n         <p>For information about the import manifest referenced by this API action, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an import volume task using metadata from the specified disk image.</p>\n         <p>This API action supports only single-volume VMs. To import multi-volume VMs, use \n   <a>ImportImage</a> instead. To import a disk to a snapshot, use\n   <a>ImportSnapshot</a> instead.</p>\n         <p>This API action is not supported by the Command Line Interface (CLI). For \n   information about using the Amazon EC2 CLI, which is deprecated, see <a href=\"https://awsdocs.s3.amazonaws.com/EC2/ec2-clt.pdf#importing-your-volumes-into-amazon-ebs\">Importing Disks to Amazon EBS</a> in the <i>Amazon EC2 CLI Reference</i> PDF file.</p>\n         <p>For information about the import manifest referenced by this API action, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/manifest.html\">VM Import Manifest</a>.</p>"
             }
         },
         "com.amazonaws.ec2#ImportVolumeRequest": {
@@ -42547,7 +42575,7 @@
                     "target": "com.amazonaws.ec2#SensitiveUserData",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KeyMaterial",
-                        "smithy.api#documentation": "<p>An unencrypted PEM encoded RSA private key.</p>",
+                        "smithy.api#documentation": "<p>An unencrypted PEM encoded RSA or ED25519 private key.</p>",
                         "smithy.api#xmlName": "keyMaterial"
                     }
                 },
@@ -42607,7 +42635,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KeyFingerprint",
-                        "smithy.api#documentation": "<p>If you used <a>CreateKeyPair</a> to create the key pair, this is the SHA-1 digest of the DER encoded private key. \n        If you used <a>ImportKeyPair</a> to provide Amazon Web Services the public key, this is the MD5 public key fingerprint as specified in section 4 of RFC4716.</p>",
+                        "smithy.api#documentation": "<p>If you used <a>CreateKeyPair</a> to create the key pair:</p>\n         <ul>\n            <li>\n               <p>For RSA key pairs, the key fingerprint is the SHA-1 digest of the DER encoded private key. \n               </p>\n           </li>\n            <li>\n               <p>For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which \n                   is the default for OpenSSH, starting with <a href=\"http://www.openssh.com/txt/release-6.8\">OpenSSH 6.8</a>.</p>\n           </li>\n         </ul>\n         <p>If you used <a>ImportKeyPair</a> to provide Amazon Web Services the public key:</p>\n         <ul>\n            <li>\n               <p>For RSA key pairs, the key fingerprint is the MD5 public key fingerprint as specified in section 4 of RFC4716.</p>\n           </li>\n            <li>\n               <p>For ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256\n                    digest, which is the default for OpenSSH, starting with <a href=\"http://www.openssh.com/txt/release-6.8\">OpenSSH 6.8</a>.</p>\n           </li>\n         </ul>",
                         "smithy.api#xmlName": "keyFingerprint"
                     }
                 },
@@ -42617,6 +42645,14 @@
                         "aws.protocols#ec2QueryName": "KeyName",
                         "smithy.api#documentation": "<p>The name of the key pair.</p>",
                         "smithy.api#xmlName": "keyName"
+                    }
+                },
+                "KeyType": {
+                    "target": "com.amazonaws.ec2#KeyType",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "KeyType",
+                        "smithy.api#documentation": "<p>The type of key pair.</p>",
+                        "smithy.api#xmlName": "keyType"
                     }
                 },
                 "Tags": {
@@ -42643,6 +42679,21 @@
         },
         "com.amazonaws.ec2#KeyPairName": {
             "type": "string"
+        },
+        "com.amazonaws.ec2#KeyType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "rsa",
+                        "name": "rsa"
+                    },
+                    {
+                        "value": "ed25519",
+                        "name": "ed25519"
+                    }
+                ]
+            }
         },
         "com.amazonaws.ec2#KmsKeyId": {
             "type": "string"
@@ -60255,7 +60306,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "KmsKeyId",
-                        "smithy.api#documentation": "<p>The identifier for the AWS Key Management Service (AWS KMS) customer master key (CMK) that was used to create\n   the encrypted snapshot.</p>",
+                        "smithy.api#documentation": "<p>The identifier for the KMS key that was used to create the encrypted snapshot.</p>",
                         "smithy.api#xmlName": "kmsKeyId"
                     }
                 },
@@ -66706,7 +66757,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Data",
-                        "smithy.api#documentation": "<p>The user data. If you are using an AWS SDK or command line tool, Base64-encoding is performed for you, and you\n   can load the text from a file. Otherwise, you must provide Base64-encoded text.</p>",
+                        "smithy.api#documentation": "<p>The user data. If you are using an Amazon Web Services SDK or command line tool, Base64-encoding is performed for you, and you\n   can load the text from a file. Otherwise, you must provide Base64-encoded text.</p>",
                         "smithy.api#xmlName": "data"
                     }
                 }

@@ -43,74 +43,29 @@ import (
 // Specify access permissions explicitly with the x-amz-grant-read,
 // x-amz-grant-read-acp, x-amz-grant-write-acp, and x-amz-grant-full-control
 // headers. When using these headers, you specify explicit access permissions and
-// grantees (AWS accounts or Amazon S3 groups) who will receive the permission. If
-// you use these ACL-specific headers, you cannot use the x-amz-acl header to set a
-// canned ACL. These parameters map to the set of permissions that Amazon S3
-// supports in an ACL. For more information, see Access Control List (ACL) Overview
+// grantees (Amazon Web Services accounts or Amazon S3 groups) who will receive the
+// permission. If you use these ACL-specific headers, you cannot use the x-amz-acl
+// header to set a canned ACL. These parameters map to the set of permissions that
+// Amazon S3 supports in an ACL. For more information, see Access Control List
+// (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html). You specify
 // each grantee as a type=value pair, where the type is one of the following:
 //
 // * id
-// – if the value specified is the canonical user ID of an AWS account
+// – if the value specified is the canonical user ID of an Amazon Web Services
+// account
 //
-// * uri – if
-// you are granting permissions to a predefined group
-//
-// * emailAddress – if the
-// value specified is the email address of an AWS account Using email addresses to
-// specify a grantee is only supported in the following AWS Regions:
-//
-// * US East (N.
-// Virginia)
-//
-// * US West (N. California)
-//
-// * US West (Oregon)
-//
-// * Asia Pacific
-// (Singapore)
-//
-// * Asia Pacific (Sydney)
-//
-// * Asia Pacific (Tokyo)
-//
-// * Europe
-// (Ireland)
-//
-// * South America (São Paulo)
-//
-// For a list of all the Amazon S3
-// supported Regions and endpoints, see Regions and Endpoints
-// (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the AWS
-// General Reference.
-//
-// For example, the following x-amz-grant-write header grants
-// create, overwrite, and delete objects permission to LogDelivery group predefined
-// by Amazon S3 and two AWS accounts identified by their email addresses.
-// x-amz-grant-write: uri="http://acs.amazonaws.com/groups/s3/LogDelivery",
-// id="111122223333", id="555566667777"
-//
-// You can use either a canned ACL or specify
-// access permissions explicitly. You cannot do both. Grantee Values You can
-// specify the person (grantee) to whom you're assigning access rights (using
-// request elements) in the following ways:
-//
-// * By the person's ID:
-// <>ID<><>GranteesEmail<>  DisplayName is optional and ignored in the request
+// * uri – if you are granting permissions to a predefined group
 //
 // *
-// By URI: <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
-//
-// * By
-// Email address: <>Grantees@email.com<>lt;/Grantee> The grantee is resolved to the
-// CanonicalUser and, in a response to a GET Object acl request, appears as the
-// CanonicalUser. Using email addresses to specify a grantee is only supported in
-// the following AWS Regions:
+// emailAddress – if the value specified is the email address of an Amazon Web
+// Services account Using email addresses to specify a grantee is only supported in
+// the following Amazon Web Services Regions:
 //
 // * US East (N. Virginia)
 //
-// * US West (N.
-// California)
+// * US West
+// (N. California)
 //
 // * US West (Oregon)
 //
@@ -128,8 +83,56 @@ import (
 //
 // For a list of all the Amazon S3 supported Regions and endpoints, see
 // Regions and Endpoints
-// (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the AWS
-// General Reference.
+// (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the
+// Amazon Web Services General Reference.
+//
+// For example, the following
+// x-amz-grant-write header grants create, overwrite, and delete objects permission
+// to LogDelivery group predefined by Amazon S3 and two Amazon Web Services
+// accounts identified by their email addresses. x-amz-grant-write:
+// uri="http://acs.amazonaws.com/groups/s3/LogDelivery", id="111122223333",
+// id="555566667777"
+//
+// You can use either a canned ACL or specify access permissions
+// explicitly. You cannot do both. Grantee Values You can specify the person
+// (grantee) to whom you're assigning access rights (using request elements) in the
+// following ways:
+//
+// * By the person's ID: <>ID<><>GranteesEmail<>  DisplayName is
+// optional and ignored in the request
+//
+// * By URI:
+// <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
+//
+// * By Email
+// address: <>Grantees@email.com<>lt;/Grantee> The grantee is resolved to the
+// CanonicalUser and, in a response to a GET Object acl request, appears as the
+// CanonicalUser. Using email addresses to specify a grantee is only supported in
+// the following Amazon Web Services Regions:
+//
+// * US East (N. Virginia)
+//
+// * US West
+// (N. California)
+//
+// * US West (Oregon)
+//
+// * Asia Pacific (Singapore)
+//
+// * Asia Pacific
+// (Sydney)
+//
+// * Asia Pacific (Tokyo)
+//
+// * Europe (Ireland)
+//
+// * South America (São
+// Paulo)
+//
+// For a list of all the Amazon S3 supported Regions and endpoints, see
+// Regions and Endpoints
+// (https://docs.aws.amazon.com/general/latest/gr/rande.html#s3_region) in the
+// Amazon Web Services General Reference.
 //
 // Related Resources
 //
@@ -174,8 +177,9 @@ type PutBucketAclInput struct {
 	// The base64-encoded 128-bit MD5 digest of the data. This header must be used as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, go to RFC 1864.
-	// (http://www.ietf.org/rfc/rfc1864.txt) For requests made using the AWS Command
-	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
+	// (http://www.ietf.org/rfc/rfc1864.txt) For requests made using the Amazon Web
+	// Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is
+	// calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

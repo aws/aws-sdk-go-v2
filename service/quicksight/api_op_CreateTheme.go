@@ -57,8 +57,8 @@ type CreateThemeInput struct {
 	// This member is required.
 	Name *string
 
-	// An ID for the theme that you want to create. The theme ID is unique per Region;
-	// in each Amazon Web Services account;.
+	// An ID for the theme that you want to create. The theme ID is unique per Amazon
+	// Web Services Region; in each Amazon Web Services account;.
 	//
 	// This member is required.
 	ThemeId *string

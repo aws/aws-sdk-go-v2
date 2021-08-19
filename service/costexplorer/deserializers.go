@@ -4541,6 +4541,11 @@ func awsAwsjson11_deserializeDocumentCostCategory(v **types.CostCategory, value 
 				sv.RuleVersion = types.CostCategoryRuleVersion(jtv)
 			}
 
+		case "SplitChargeRules":
+			if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRulesList(&sv.SplitChargeRules, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4937,6 +4942,250 @@ func awsAwsjson11_deserializeDocumentCostCategoryRulesList(v *[]types.CostCatego
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRule(v **types.CostCategorySplitChargeRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CostCategorySplitChargeRule
+	if *v == nil {
+		sv = &types.CostCategorySplitChargeRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Method":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategorySplitChargeMethod to be of type string, got %T instead", value)
+				}
+				sv.Method = types.CostCategorySplitChargeMethod(jtv)
+			}
+
+		case "Parameters":
+			if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParametersList(&sv.Parameters, value); err != nil {
+				return err
+			}
+
+		case "Source":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+				}
+				sv.Source = ptr.String(jtv)
+			}
+
+		case "Targets":
+			if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleTargetsList(&sv.Targets, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParameter(v **types.CostCategorySplitChargeRuleParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CostCategorySplitChargeRuleParameter
+	if *v == nil {
+		sv = &types.CostCategorySplitChargeRuleParameter{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CostCategorySplitChargeRuleParameterType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.CostCategorySplitChargeRuleParameterType(jtv)
+			}
+
+		case "Values":
+			if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParameterValuesList(&sv.Values, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParametersList(v *[]types.CostCategorySplitChargeRuleParameter, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CostCategorySplitChargeRuleParameter
+	if *v == nil {
+		cv = []types.CostCategorySplitChargeRuleParameter{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CostCategorySplitChargeRuleParameter
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParameter(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleParameterValuesList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRulesList(v *[]types.CostCategorySplitChargeRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.CostCategorySplitChargeRule
+	if *v == nil {
+		cv = []types.CostCategorySplitChargeRule{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.CostCategorySplitChargeRule
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentCostCategorySplitChargeRule(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentCostCategorySplitChargeRuleTargetsList(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected GenericString to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
 		cv = append(cv, col)
 
 	}

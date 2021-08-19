@@ -8,7 +8,7 @@ import (
 )
 
 // The Amazon QuickSight customizations associated with your Amazon Web Services
-// account; or a QuickSight namespace in a specific Region;.
+// account; or a QuickSight namespace in a specific Amazon Web Services Region;.
 type AccountCustomization struct {
 
 	// The default theme for this QuickSight subscription.
@@ -830,8 +830,8 @@ type DataSource struct {
 	// The time that this data source was created.
 	CreatedTime *time.Time
 
-	// The ID of the data source. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the data source. This ID is unique per Amazon Web Services Region; for
+	// each Amazon Web Services account;.
 	DataSourceId *string
 
 	// The parameters that Amazon QuickSight uses to connect to your underlying source.
@@ -1625,7 +1625,7 @@ type NamespaceInfoV2 struct {
 	// The namespace ARN.
 	Arn *string
 
-	// The namespace Region;.
+	// The namespace Amazon Web Services Region;.
 	CapacityRegion *string
 
 	// The creation status of a namespace that is not yet completely created.
@@ -2326,8 +2326,8 @@ type Template struct {
 	// The display name of the template.
 	Name *string
 
-	// The ID for the template. This is unique per Region; for each Amazon Web Services
-	// account;.
+	// The ID for the template. This is unique per Amazon Web Services Region; for each
+	// Amazon Web Services account;.
 	TemplateId *string
 
 	// A structure describing the versions of the template.
@@ -2421,8 +2421,8 @@ type TemplateSummary struct {
 	// A display name for the template.
 	Name *string
 
-	// The ID of the template. This ID is unique per Region; for each Amazon Web
-	// Services account;.
+	// The ID of the template. This ID is unique per Amazon Web Services Region; for
+	// each Amazon Web Services account;.
 	TemplateId *string
 
 	noSmithyDocumentSerde
@@ -2597,8 +2597,8 @@ type ThemeSummary struct {
 	// the display name for the theme.
 	Name *string
 
-	// The ID of the theme. This ID is unique per Region; for each Amazon Web Services
-	// account;.
+	// The ID of the theme. This ID is unique per Amazon Web Services Region; for each
+	// Amazon Web Services account;.
 	ThemeId *string
 
 	noSmithyDocumentSerde

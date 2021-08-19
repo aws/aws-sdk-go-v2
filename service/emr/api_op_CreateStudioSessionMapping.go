@@ -56,7 +56,7 @@ type CreateStudioSessionMappingInput struct {
 	// and GroupId
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-GroupId)
 	// in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName
-	// or IdentityId must be specified.
+	// or IdentityId must be specified, but not both.
 	IdentityId *string
 
 	// The name of the user or group. For more information, see UserName
@@ -64,7 +64,7 @@ type CreateStudioSessionMappingInput struct {
 	// and DisplayName
 	// (https://docs.aws.amazon.com/singlesignon/latest/IdentityStoreAPIReference/API_Group.html#singlesignon-Type-Group-DisplayName)
 	// in the Amazon Web Services SSO Identity Store API Reference. Either IdentityName
-	// or IdentityId must be specified.
+	// or IdentityId must be specified, but not both.
 	IdentityName *string
 
 	noSmithyDocumentSerde

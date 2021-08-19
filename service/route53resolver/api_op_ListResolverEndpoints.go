@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the Resolver endpoints that were created using the current AWS
-// account.
+// Lists all the Resolver endpoints that were created using the current Amazon Web
+// Services account.
 func (c *Client) ListResolverEndpoints(ctx context.Context, params *ListResolverEndpointsInput, optFns ...func(*Options)) (*ListResolverEndpointsOutput, error) {
 	if params == nil {
 		params = &ListResolverEndpointsInput{}
@@ -61,8 +61,8 @@ type ListResolverEndpointsOutput struct {
 	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
-	// The Resolver endpoints that were created by using the current AWS account, and
-	// that match the specified filters, if any.
+	// The Resolver endpoints that were created by using the current Amazon Web
+	// Services account, and that match the specified filters, if any.
 	ResolverEndpoints []types.ResolverEndpoint
 
 	// Metadata pertaining to the operation's result.

@@ -14,8 +14,14 @@ import (
 
 // Places an Object Retention configuration on an object. For more information, see
 // Locking Objects
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). This action
-// is not supported by Amazon S3 on Outposts.
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock.html). Users or
+// accounts require the s3:PutObjectRetention permission in order to place an
+// Object Retention configuration on objects. Bypassing a Governance Retention
+// configuration requires the s3:BypassGovernanceRetention permission. This action
+// is not supported by Amazon S3 on Outposts. Permissions When the Object Lock
+// retention mode is set to compliance, you need s3:PutObjectRetention and
+// s3:BypassGovernanceRetention permissions. For other requests to
+// PutObjectRetention, only s3:PutObjectRetention permissions are required.
 func (c *Client) PutObjectRetention(ctx context.Context, params *PutObjectRetentionInput, optFns ...func(*Options)) (*PutObjectRetentionOutput, error) {
 	if params == nil {
 		params = &PutObjectRetentionInput{}
@@ -37,9 +43,9 @@ type PutObjectRetentionInput struct {
 	// configuration to. When using this action with an access point, you must direct
 	// requests to the access point hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// action with an access point through the AWS SDKs, you provide the access point
-	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using access points
+	// action with an access point through the Amazon Web Services SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide.
 	//
@@ -55,8 +61,9 @@ type PutObjectRetentionInput struct {
 	// Indicates whether this action should bypass Governance-mode restrictions.
 	BypassGovernanceRetention bool
 
-	// The MD5 hash for the request body. For requests made using the AWS Command Line
-	// Interface (CLI) or AWS SDKs, this field is calculated automatically.
+	// The MD5 hash for the request body. For requests made using the Amazon Web
+	// Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is
+	// calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes an existing trust relationship between your AWS Managed Microsoft AD
+// Deletes an existing trust relationship between your Managed Microsoft AD
 // directory and an external domain.
 func (c *Client) DeleteTrust(ctx context.Context, params *DeleteTrustInput, optFns ...func(*Options)) (*DeleteTrustOutput, error) {
 	if params == nil {
@@ -27,7 +27,7 @@ func (c *Client) DeleteTrust(ctx context.Context, params *DeleteTrustInput, optF
 	return out, nil
 }
 
-// Deletes the local side of an existing trust relationship between the AWS Managed
+// Deletes the local side of an existing trust relationship between the Managed
 // Microsoft AD directory and the external domain.
 type DeleteTrustInput struct {
 

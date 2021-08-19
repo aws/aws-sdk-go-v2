@@ -36,8 +36,8 @@ type EnableClientAuthenticationInput struct {
 
 	// The type of client authentication to enable. Currently only the value SmartCard
 	// is supported. Smart card authentication in AD Connector requires that you enable
-	// Kerberos Constrained Delegation for the Service User to the LDAP service in the
-	// on-premises AD.
+	// Kerberos Constrained Delegation for the Service User to the LDAP service in your
+	// self-managed AD.
 	//
 	// This member is required.
 	Type types.ClientAuthenticationType

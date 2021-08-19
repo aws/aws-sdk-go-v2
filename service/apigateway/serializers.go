@@ -739,6 +739,11 @@ func awsRestjson1_serializeOpDocumentCreateDomainNameInput(v *CreateDomainNameIn
 		}
 	}
 
+	if v.OwnershipVerificationCertificateArn != nil {
+		ok := object.Key("ownershipVerificationCertificateArn")
+		ok.String(*v.OwnershipVerificationCertificateArn)
+	}
+
 	if v.RegionalCertificateArn != nil {
 		ok := object.Key("regionalCertificateArn")
 		ok.String(*v.RegionalCertificateArn)

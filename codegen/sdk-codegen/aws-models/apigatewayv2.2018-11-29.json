@@ -3631,7 +3631,7 @@
                 "DomainNameStatus": {
                     "target": "com.amazonaws.apigatewayv2#DomainNameStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>",
+                        "smithy.api#documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>",
                         "smithy.api#jsonName": "domainNameStatus"
                     }
                 },
@@ -3662,6 +3662,13 @@
                         "smithy.api#documentation": "<p>The Transport Layer Security (TLS) version of the security policy for this domain name. The valid values are TLS_1_0 and TLS_1_2.</p>",
                         "smithy.api#jsonName": "securityPolicy"
                     }
+                },
+                "OwnershipVerificationCertificateArn": {
+                    "target": "com.amazonaws.apigatewayv2#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the public certificate issued by ACM to validate ownership of your custom domain. Only required when configuring mutual TLS and using an ACM imported or private CA certificate ARN as the regionalCertificateArn</p>",
+                        "smithy.api#jsonName": "ownershipVerificationCertificateArn"
+                    }
                 }
             },
             "traits": {
@@ -3680,7 +3687,7 @@
         "com.amazonaws.apigatewayv2#DomainNameStatus": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE and UPDATING. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>",
+                "smithy.api#documentation": "<p>The status of the domain name migration. The valid values are AVAILABLE, UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If the status is UPDATING, the domain cannot be modified further until the existing operation is complete. If it is AVAILABLE, the domain can be updated.</p>",
                 "smithy.api#enum": [
                     {
                         "value": "AVAILABLE",
@@ -3689,6 +3696,14 @@
                     {
                         "value": "UPDATING",
                         "name": "UPDATING"
+                    },
+                    {
+                        "value": "PENDING_CERTIFICATE_REIMPORT",
+                        "name": "PENDING_CERTIFICATE_REIMPORT"
+                    },
+                    {
+                        "value": "PENDING_OWNERSHIP_VERIFICATION",
+                        "name": "PENDING_OWNERSHIP_VERIFICATION"
                     }
                 ]
             }

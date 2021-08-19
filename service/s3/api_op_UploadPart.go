@@ -32,9 +32,10 @@ import (
 // when traversing the network, specify the Content-MD5 header in the upload part
 // request. Amazon S3 checks the part data against the provided MD5 value. If they
 // do not match, Amazon S3 returns an error. If the upload request is signed with
-// Signature Version 4, then AWS S3 uses the x-amz-content-sha256 header as a
-// checksum instead of Content-MD5. For more information see Authenticating
-// Requests: Using the Authorization Header (AWS Signature Version 4)
+// Signature Version 4, then Amazon Web Services S3 uses the x-amz-content-sha256
+// header as a checksum instead of Content-MD5. For more information see
+// Authenticating Requests: Using the Authorization Header (Amazon Web Services
+// Signature Version 4)
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/sigv4-auth-using-authorization-header.html).
 // Note: After you initiate multipart upload and upload one or more parts, you must
 // either complete or abort multipart upload in order to stop getting charged for
@@ -48,10 +49,10 @@ import (
 // Amazon S3 User Guide. You can optionally request server-side encryption where
 // Amazon S3 encrypts your data as it writes it to disks in its data centers and
 // decrypts it for you when you access it. You have the option of providing your
-// own encryption key, or you can use the AWS managed encryption keys. If you
-// choose to provide your own encryption key, the request headers you provide in
-// the request must match the headers you used in the request to initiate the
-// upload by using CreateMultipartUpload
+// own encryption key, or you can use the Amazon Web Services managed encryption
+// keys. If you choose to provide your own encryption key, the request headers you
+// provide in the request must match the headers you used in the request to
+// initiate the upload by using CreateMultipartUpload
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_CreateMultipartUpload.html).
 // For more information, go to Using Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html)
@@ -130,17 +131,17 @@ type UploadPartInput struct {
 	// this action with an access point, you must direct requests to the access point
 	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// action with an access point through the AWS SDKs, you provide the access point
-	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using access points
+	// action with an access point through the Amazon Web Services SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
-	// bucket ARN in place of the bucket name. For more information about S3 on
-	// Outposts ARNs, see Using S3 on Outposts
+	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon S3 User Guide.
 	//
@@ -210,7 +211,7 @@ type UploadPartInput struct {
 type UploadPartOutput struct {
 
 	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
-	// encryption with AWS KMS (SSE-KMS).
+	// encryption with Amazon Web Services KMS (SSE-KMS).
 	BucketKeyEnabled bool
 
 	// Entity tag for the uploaded object.
@@ -229,8 +230,9 @@ type UploadPartOutput struct {
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
 
-	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
-	// symmetric customer managed customer master key (CMK) was used for the object.
+	// If present, specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
+	// was used for the object.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3

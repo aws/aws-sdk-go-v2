@@ -18871,6 +18871,23 @@ func awsAwsquery_deserializeDocumentReplicationGroup(v **types.ReplicationGroup,
 				return err
 			}
 
+		case strings.EqualFold("ReplicationGroupCreateTime", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				t, err := smithytime.ParseDateTime(xtv)
+				if err != nil {
+					return err
+				}
+				sv.ReplicationGroupCreateTime = ptr.Time(t)
+			}
+
 		case strings.EqualFold("ReplicationGroupId", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

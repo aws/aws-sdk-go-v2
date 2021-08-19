@@ -118,6 +118,9 @@ type DescribeNotebookInstanceOutput struct {
 	// The status of the notebook instance.
 	NotebookInstanceStatus types.NotebookInstanceStatus
 
+	// The platform identifier of the notebook instance runtime environment.
+	PlatformIdentifier *string
+
 	// The Amazon Resource Name (ARN) of the IAM role associated with the instance.
 	RoleArn *string
 

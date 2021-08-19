@@ -9,8 +9,8 @@ import (
 // Represents a cross-account destination that receives subscription log events.
 type Destination struct {
 
-	// An IAM policy document that governs which AWS accounts can create subscription
-	// filters against this destination.
+	// An IAM policy document that governs which Amazon Web Services accounts can
+	// create subscription filters against this destination.
 	AccessPolicy *string
 
 	// The ARN of this destination.
@@ -157,8 +157,9 @@ type LogGroup struct {
 
 	// The number of days to retain the log events in the specified log group. Possible
 	// values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180, 365, 400, 545, 731, 1827,
-	// and 3653. If you omit retentionInDays in a PutRetentionPolicy operation, the
-	// events in the log group are always retained and never expire.
+	// and 3653. To set a log group to never have log events expire, use
+	// DeleteRetentionPolicy
+	// (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_DeleteRetentionPolicy.html).
 	RetentionInDays *int32
 
 	// The number of bytes stored.
@@ -302,7 +303,7 @@ type MetricTransformation struct {
 	// name/value pairs for the dimensions that you have specified within a certain
 	// amount of time. You can also set up a billing alarm to alert you if your charges
 	// are higher than expected. For more information, see  Creating a Billing Alarm to
-	// Monitor Your Estimated AWS Charges
+	// Monitor Your Estimated Amazon Web Services Charges
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).
 	Dimensions map[string]string
 

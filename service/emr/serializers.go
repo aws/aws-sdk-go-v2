@@ -2848,6 +2848,11 @@ func awsAwsjson11_serializeDocumentInstanceGroupConfig(v *types.InstanceGroupCon
 		}
 	}
 
+	if v.CustomAmiId != nil {
+		ok := object.Key("CustomAmiId")
+		ok.String(*v.CustomAmiId)
+	}
+
 	if v.EbsConfiguration != nil {
 		ok := object.Key("EbsConfiguration")
 		if err := awsAwsjson11_serializeDocumentEbsConfiguration(v.EbsConfiguration, ok); err != nil {
@@ -3027,6 +3032,11 @@ func awsAwsjson11_serializeDocumentInstanceTypeConfig(v *types.InstanceTypeConfi
 		if err := awsAwsjson11_serializeDocumentConfigurationList(v.Configurations, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.CustomAmiId != nil {
+		ok := object.Key("CustomAmiId")
+		ok.String(*v.CustomAmiId)
 	}
 
 	if v.EbsConfiguration != nil {

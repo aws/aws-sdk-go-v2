@@ -751,6 +751,24 @@ func validateMatchingRequest(v *types.MatchingRequest) error {
 	}
 }
 
+func validateObjectFilter(v *types.ObjectFilter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ObjectFilter"}
+	if v.KeyName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("KeyName"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateS3SourceProperties(v *types.S3SourceProperties) error {
 	if v == nil {
 		return nil
@@ -1260,6 +1278,11 @@ func validateOpListProfileObjectsInput(v *ListProfileObjectsInput) error {
 	}
 	if v.ProfileId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ProfileId"))
+	}
+	if v.ObjectFilter != nil {
+		if err := validateObjectFilter(v.ObjectFilter); err != nil {
+			invalidParams.AddNested("ObjectFilter", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

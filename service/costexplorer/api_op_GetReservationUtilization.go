@@ -85,12 +85,14 @@ type GetReservationUtilizationInput struct {
 	GroupBy []types.GroupDefinition
 
 	// The maximum number of objects that you returned for this request. If more
-	// objects are available, in the response, AWS provides a NextPageToken value that
-	// you can use in a subsequent call to get the next batch of objects.
+	// objects are available, in the response, Amazon Web Services provides a
+	// NextPageToken value that you can use in a subsequent call to get the next batch
+	// of objects.
 	MaxResults int32
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// The value by which you want to sort the data. The following values are supported
@@ -148,8 +150,9 @@ type GetReservationUtilizationOutput struct {
 	// This member is required.
 	UtilizationsByTime []types.UtilizationByTime
 
-	// The token for the next set of retrievable results. AWS provides the token when
-	// the response from a previous call has more results than the maximum page size.
+	// The token for the next set of retrievable results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextPageToken *string
 
 	// The total amount of time that you used your RIs.

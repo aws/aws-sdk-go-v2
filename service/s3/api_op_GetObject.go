@@ -44,12 +44,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/restoring-objects.html).
 // Encryption request headers, like x-amz-server-side-encryption, should not be
 // sent for GET requests if your object uses server-side encryption with CMKs
-// stored in AWS KMS (SSE-KMS) or server-side encryption with Amazon S3–managed
-// encryption keys (SSE-S3). If your object does use these types of keys, you’ll
-// get an HTTP 400 BadRequest error. If you encrypt an object by using server-side
-// encryption with customer-provided encryption keys (SSE-C) when you store the
-// object in Amazon S3, then when you GET the object, you must use the following
-// headers:
+// stored in Amazon Web Services KMS (SSE-KMS) or server-side encryption with
+// Amazon S3–managed encryption keys (SSE-S3). If your object does use these types
+// of keys, you’ll get an HTTP 400 BadRequest error. If you encrypt an object by
+// using server-side encryption with customer-provided encryption keys (SSE-C) when
+// you store the object in Amazon S3, then when you GET the object, you must use
+// the following headers:
 //
 // * x-amz-server-side-encryption-customer-algorithm
 //
@@ -83,10 +83,17 @@ import (
 // error.
 //
 // Versioning By default, the GET action returns the current version of an
-// object. To return a different version, use the versionId subresource. If the
-// current version of the object is a delete marker, Amazon S3 behaves as if the
-// object was deleted and includes x-amz-delete-marker: true in the response. For
-// more information about versioning, see PutBucketVersioning
+// object. To return a different version, use the versionId subresource.
+//
+// * You
+// need the s3:GetObjectVersion permission to access a specific version of an
+// object.
+//
+// * If the current version of the object is a delete marker, Amazon S3
+// behaves as if the object was deleted and includes x-amz-delete-marker: true in
+// the response.
+//
+// For more information about versioning, see PutBucketVersioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketVersioning.html).
 // Overriding Response Header Values There are times when you want to override
 // certain response header values in a GET response. For example, you might
@@ -155,17 +162,17 @@ type GetObjectInput struct {
 	// point, you must direct requests to the access point hostname. The access point
 	// hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// action with an access point through the AWS SDKs, you provide the access point
-	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using access points
+	// action with an access point through the Amazon Web Services SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
-	// bucket ARN in place of the bucket name. For more information about S3 on
-	// Outposts ARNs, see Using S3 on Outposts
+	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon S3 User Guide.
 	//
@@ -266,7 +273,7 @@ type GetObjectOutput struct {
 	Body io.ReadCloser
 
 	// Indicates whether the object uses an S3 Bucket Key for server-side encryption
-	// with AWS KMS (SSE-KMS).
+	// with Amazon Web Services KMS (SSE-KMS).
 	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
@@ -357,9 +364,9 @@ type GetObjectOutput struct {
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
 
-	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
-	// symmetric customer managed customer master key (CMK) that was used for the
-	// object.
+	// If present, specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
+	// that was used for the object.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3

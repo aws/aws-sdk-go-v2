@@ -188,9 +188,11 @@ type DomainNameStatus string
 
 // Enum values for DomainNameStatus
 const (
-	DomainNameStatusAvailable DomainNameStatus = "AVAILABLE"
-	DomainNameStatusUpdating  DomainNameStatus = "UPDATING"
-	DomainNameStatusPending   DomainNameStatus = "PENDING"
+	DomainNameStatusAvailable                    DomainNameStatus = "AVAILABLE"
+	DomainNameStatusUpdating                     DomainNameStatus = "UPDATING"
+	DomainNameStatusPending                      DomainNameStatus = "PENDING"
+	DomainNameStatusPendingCertificateReimport   DomainNameStatus = "PENDING_CERTIFICATE_REIMPORT"
+	DomainNameStatusPendingOwnershipVerification DomainNameStatus = "PENDING_OWNERSHIP_VERIFICATION"
 )
 
 // Values returns all known values for DomainNameStatus. Note that this can be
@@ -201,6 +203,8 @@ func (DomainNameStatus) Values() []DomainNameStatus {
 		"AVAILABLE",
 		"UPDATING",
 		"PENDING",
+		"PENDING_CERTIFICATE_REIMPORT",
+		"PENDING_OWNERSHIP_VERIFICATION",
 	}
 }
 

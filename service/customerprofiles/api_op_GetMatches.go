@@ -19,8 +19,8 @@ import (
 // (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html)
 // to enable identity resolution: set Matching to true. GetMatches returns
 // potentially matching profiles, based on the results of the latest run of a
-// machine learning process. Amazon Connect runs a batch process every Saturday at
-// 12AM UTC to identify matching profiles. The results are returned up to seven
+// machine learning process. Amazon Connect starts a batch process every Saturday
+// at 12AM UTC to identify matching profiles. The results are returned up to seven
 // days after the Saturday run. Amazon Connect uses the following profile
 // attributes to identify matches:
 //
@@ -43,6 +43,13 @@ import (
 // * FullName
 //
 // * BusinessName
+//
+// For
+// example, two or more profiles—with spelling mistakes such as John Doe and Jhn
+// Doe, or different casing email addresses such as JOHN_DOE@ANYCOMPANY.COM and
+// johndoe@anycompany.com, or different phone number formats such as 555-010-0000
+// and +1-555-010-0000—can be detected as belonging to the same customer John Doe
+// and merged into a unified profile.
 func (c *Client) GetMatches(ctx context.Context, params *GetMatchesInput, optFns ...func(*Options)) (*GetMatchesOutput, error) {
 	if params == nil {
 		params = &GetMatchesInput{}

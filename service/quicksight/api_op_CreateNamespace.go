@@ -65,8 +65,9 @@ type CreateNamespaceOutput struct {
 	// The ARN of the QuickSight namespace you created.
 	Arn *string
 
-	// The Region; that you want to use for the free SPICE capacity for the new
-	// namespace. This is set to the region that you run CreateNamespace in.
+	// The Amazon Web Services Region; that you want to use for the free SPICE capacity
+	// for the new namespace. This is set to the region that you run CreateNamespace
+	// in.
 	CapacityRegion *string
 
 	// The status of the creation of the namespace. This is an asynchronous process. A

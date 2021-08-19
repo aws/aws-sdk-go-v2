@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a conditional forwarder that has been set up for your AWS directory.
+// Updates a conditional forwarder that has been set up for your Amazon Web
+// Services directory.
 func (c *Client) UpdateConditionalForwarder(ctx context.Context, params *UpdateConditionalForwarderInput, optFns ...func(*Options)) (*UpdateConditionalForwarderOutput, error) {
 	if params == nil {
 		params = &UpdateConditionalForwarderInput{}
@@ -29,8 +30,8 @@ func (c *Client) UpdateConditionalForwarder(ctx context.Context, params *UpdateC
 // Updates a conditional forwarder.
 type UpdateConditionalForwarderInput struct {
 
-	// The directory ID of the AWS directory for which to update the conditional
-	// forwarder.
+	// The directory ID of the Amazon Web Services directory for which to update the
+	// conditional forwarder.
 	//
 	// This member is required.
 	DirectoryId *string

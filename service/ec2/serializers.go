@@ -35313,6 +35313,11 @@ func awsEc2query_serializeOpDocumentCreateKeyPairInput(v *CreateKeyPairInput, va
 		objectKey.String(*v.KeyName)
 	}
 
+	if len(v.KeyType) > 0 {
+		objectKey := object.Key("KeyType")
+		objectKey.String(string(v.KeyType))
+	}
+
 	if v.TagSpecifications != nil {
 		objectKey := object.FlatKey("TagSpecification")
 		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
@@ -44087,6 +44092,11 @@ func awsEc2query_serializeOpDocumentImportImageInput(v *ImportImageInput, value 
 		if err := awsEc2query_serializeDocumentTagSpecificationList(v.TagSpecifications, objectKey); err != nil {
 			return err
 		}
+	}
+
+	if v.UsageOperation != nil {
+		objectKey := object.Key("UsageOperation")
+		objectKey.String(*v.UsageOperation)
 	}
 
 	return nil

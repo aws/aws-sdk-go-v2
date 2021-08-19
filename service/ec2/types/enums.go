@@ -3022,6 +3022,24 @@ func (Ipv6SupportValue) Values() []Ipv6SupportValue {
 	}
 }
 
+type KeyType string
+
+// Enum values for KeyType
+const (
+	KeyTypeRsa     KeyType = "rsa"
+	KeyTypeEd25519 KeyType = "ed25519"
+)
+
+// Values returns all known values for KeyType. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (KeyType) Values() []KeyType {
+	return []KeyType{
+		"rsa",
+		"ed25519",
+	}
+}
+
 type LaunchTemplateErrorCode string
 
 // Enum values for LaunchTemplateErrorCode

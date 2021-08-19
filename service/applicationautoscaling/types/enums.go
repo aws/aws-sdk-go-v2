@@ -70,23 +70,26 @@ type MetricType string
 
 // Enum values for MetricType
 const (
-	MetricTypeDynamoDBReadCapacityUtilization          MetricType = "DynamoDBReadCapacityUtilization"
-	MetricTypeDynamoDBWriteCapacityUtilization         MetricType = "DynamoDBWriteCapacityUtilization"
-	MetricTypeALBRequestCountPerTarget                 MetricType = "ALBRequestCountPerTarget"
-	MetricTypeRDSReaderAverageCPUUtilization           MetricType = "RDSReaderAverageCPUUtilization"
-	MetricTypeRDSReaderAverageDatabaseConnections      MetricType = "RDSReaderAverageDatabaseConnections"
-	MetricTypeEC2SpotFleetRequestAverageCPUUtilization MetricType = "EC2SpotFleetRequestAverageCPUUtilization"
-	MetricTypeEC2SpotFleetRequestAverageNetworkIn      MetricType = "EC2SpotFleetRequestAverageNetworkIn"
-	MetricTypeEC2SpotFleetRequestAverageNetworkOut     MetricType = "EC2SpotFleetRequestAverageNetworkOut"
-	MetricTypeSageMakerVariantInvocationsPerInstance   MetricType = "SageMakerVariantInvocationsPerInstance"
-	MetricTypeECSServiceAverageCPUUtilization          MetricType = "ECSServiceAverageCPUUtilization"
-	MetricTypeECSServiceAverageMemoryUtilization       MetricType = "ECSServiceAverageMemoryUtilization"
-	MetricTypeAppStreamAverageCapacityUtilization      MetricType = "AppStreamAverageCapacityUtilization"
-	MetricTypeComprehendInferenceUtilization           MetricType = "ComprehendInferenceUtilization"
-	MetricTypeLambdaProvisionedConcurrencyUtilization  MetricType = "LambdaProvisionedConcurrencyUtilization"
-	MetricTypeCassandraReadCapacityUtilization         MetricType = "CassandraReadCapacityUtilization"
-	MetricTypeCassandraWriteCapacityUtilization        MetricType = "CassandraWriteCapacityUtilization"
-	MetricTypeKafkaBrokerStorageUtilization            MetricType = "KafkaBrokerStorageUtilization"
+	MetricTypeDynamoDBReadCapacityUtilization                         MetricType = "DynamoDBReadCapacityUtilization"
+	MetricTypeDynamoDBWriteCapacityUtilization                        MetricType = "DynamoDBWriteCapacityUtilization"
+	MetricTypeALBRequestCountPerTarget                                MetricType = "ALBRequestCountPerTarget"
+	MetricTypeRDSReaderAverageCPUUtilization                          MetricType = "RDSReaderAverageCPUUtilization"
+	MetricTypeRDSReaderAverageDatabaseConnections                     MetricType = "RDSReaderAverageDatabaseConnections"
+	MetricTypeEC2SpotFleetRequestAverageCPUUtilization                MetricType = "EC2SpotFleetRequestAverageCPUUtilization"
+	MetricTypeEC2SpotFleetRequestAverageNetworkIn                     MetricType = "EC2SpotFleetRequestAverageNetworkIn"
+	MetricTypeEC2SpotFleetRequestAverageNetworkOut                    MetricType = "EC2SpotFleetRequestAverageNetworkOut"
+	MetricTypeSageMakerVariantInvocationsPerInstance                  MetricType = "SageMakerVariantInvocationsPerInstance"
+	MetricTypeECSServiceAverageCPUUtilization                         MetricType = "ECSServiceAverageCPUUtilization"
+	MetricTypeECSServiceAverageMemoryUtilization                      MetricType = "ECSServiceAverageMemoryUtilization"
+	MetricTypeAppStreamAverageCapacityUtilization                     MetricType = "AppStreamAverageCapacityUtilization"
+	MetricTypeComprehendInferenceUtilization                          MetricType = "ComprehendInferenceUtilization"
+	MetricTypeLambdaProvisionedConcurrencyUtilization                 MetricType = "LambdaProvisionedConcurrencyUtilization"
+	MetricTypeCassandraReadCapacityUtilization                        MetricType = "CassandraReadCapacityUtilization"
+	MetricTypeCassandraWriteCapacityUtilization                       MetricType = "CassandraWriteCapacityUtilization"
+	MetricTypeKafkaBrokerStorageUtilization                           MetricType = "KafkaBrokerStorageUtilization"
+	MetricTypeElastiCachePrimaryEngineCPUUtilization                  MetricType = "ElastiCachePrimaryEngineCPUUtilization"
+	MetricTypeElastiCacheReplicaEngineCPUUtilization                  MetricType = "ElastiCacheReplicaEngineCPUUtilization"
+	MetricTypeElastiCacheDatabaseMemoryUsageCountedForEvictPercentage MetricType = "ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage"
 )
 
 // Values returns all known values for MetricType. Note that this can be expanded
@@ -111,6 +114,9 @@ func (MetricType) Values() []MetricType {
 		"CassandraReadCapacityUtilization",
 		"CassandraWriteCapacityUtilization",
 		"KafkaBrokerStorageUtilization",
+		"ElastiCachePrimaryEngineCPUUtilization",
+		"ElastiCacheReplicaEngineCPUUtilization",
+		"ElastiCacheDatabaseMemoryUsageCountedForEvictPercentage",
 	}
 }
 
@@ -153,6 +159,8 @@ const (
 	ScalableDimensionCassandraTableReadCapacityUnits                  ScalableDimension = "cassandra:table:ReadCapacityUnits"
 	ScalableDimensionCassandraTableWriteCapacityUnits                 ScalableDimension = "cassandra:table:WriteCapacityUnits"
 	ScalableDimensionKafkaBrokerStorageVolumeSize                     ScalableDimension = "kafka:broker-storage:VolumeSize"
+	ScalableDimensionElastiCacheReplicationGroupNodeGroups            ScalableDimension = "elasticache:replication-group:NodeGroups"
+	ScalableDimensionElastiCacheReplicationGroupReplicas              ScalableDimension = "elasticache:replication-group:Replicas"
 )
 
 // Values returns all known values for ScalableDimension. Note that this can be
@@ -177,6 +185,8 @@ func (ScalableDimension) Values() []ScalableDimension {
 		"cassandra:table:ReadCapacityUnits",
 		"cassandra:table:WriteCapacityUnits",
 		"kafka:broker-storage:VolumeSize",
+		"elasticache:replication-group:NodeGroups",
+		"elasticache:replication-group:Replicas",
 	}
 }
 
@@ -222,6 +232,7 @@ const (
 	ServiceNamespaceLambda         ServiceNamespace = "lambda"
 	ServiceNamespaceCassandra      ServiceNamespace = "cassandra"
 	ServiceNamespaceKafka          ServiceNamespace = "kafka"
+	ServiceNamespaceElasticache    ServiceNamespace = "elasticache"
 )
 
 // Values returns all known values for ServiceNamespace. Note that this can be
@@ -241,5 +252,6 @@ func (ServiceNamespace) Values() []ServiceNamespace {
 		"lambda",
 		"cassandra",
 		"kafka",
+		"elasticache",
 	}
 }

@@ -73,6 +73,25 @@ type CertificateInfo struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information about a client authentication method for a directory.
+type ClientAuthenticationSettingInfo struct {
+
+	// The date and time when the status of the client authentication type was last
+	// updated.
+	LastUpdatedDateTime *time.Time
+
+	// Whether the client authentication type is enabled or disabled for the specified
+	// directory.
+	Status ClientAuthenticationStatus
+
+	// The type of client authentication for the specified directory. If no type is
+	// specified, a list of all client authentication types that are supported for the
+	// directory is retrieved.
+	Type ClientAuthenticationType
+
+	noSmithyDocumentSerde
+}
+
 // Contains information about the client certificate authentication settings for
 // the RegisterCertificate and DescribeCertificate operations.
 type ClientCertAuthSettings struct {
@@ -116,7 +135,7 @@ type ConditionalForwarder struct {
 
 	// The replication scope of the conditional forwarder. The only allowed value is
 	// Domain, which will replicate the conditional forwarder to all of the domain
-	// controllers for your AWS directory.
+	// controllers for your Amazon Web Services directory.
 	ReplicationScope ReplicationScope
 
 	noSmithyDocumentSerde
@@ -126,17 +145,17 @@ type ConditionalForwarder struct {
 // directory is being created.
 type DirectoryConnectSettings struct {
 
-	// A list of one or more IP addresses of DNS servers or domain controllers in the
-	// on-premises directory.
+	// A list of one or more IP addresses of DNS servers or domain controllers in your
+	// self-managed directory.
 	//
 	// This member is required.
 	CustomerDnsIps []string
 
-	// The user name of an account in the on-premises directory that is used to connect
-	// to the directory. This account must have the following permissions:
+	// The user name of an account in your self-managed directory that is used to
+	// connect to the directory. This account must have the following permissions:
 	//
-	// * Read
-	// users and groups
+	// *
+	// Read users and groups
 	//
 	// * Create computer objects
 	//
@@ -167,7 +186,7 @@ type DirectoryConnectSettingsDescription struct {
 	// The IP addresses of the AD Connector servers.
 	ConnectIps []string
 
-	// The user name of the service account in the on-premises directory.
+	// The user name of the service account in your self-managed directory.
 	CustomerUserName *string
 
 	// The security group identifier for the AD Connector directory.
@@ -182,7 +201,7 @@ type DirectoryConnectSettingsDescription struct {
 	noSmithyDocumentSerde
 }
 
-// Contains information about an AWS Directory Service directory.
+// Contains information about an Directory Service directory.
 type DirectoryDescription struct {
 
 	// The access URL for the directory, such as http://.awsapps.com. If no alias has
@@ -212,7 +231,7 @@ type DirectoryDescription struct {
 	// The IP addresses of the DNS servers for the directory. For a Simple AD or
 	// Microsoft AD directory, these are the IP addresses of the Simple AD or Microsoft
 	// AD directory servers. For an AD Connector directory, these are the IP addresses
-	// of the DNS servers or domain controllers in the on-premises directory to which
+	// of the DNS servers or domain controllers in your self-managed directory to which
 	// the AD Connector is connected.
 	DnsIpAddrs []string
 
@@ -225,7 +244,7 @@ type DirectoryDescription struct {
 	// The fully qualified name of the directory.
 	Name *string
 
-	// Describes the AWS Managed Microsoft AD directory in the directory owner account.
+	// Describes the Managed Microsoft AD directory in the directory owner account.
 	OwnerDirectoryDescription *OwnerDirectoryDescription
 
 	// A RadiusSettings object that contains information about the RADIUS server
@@ -239,8 +258,9 @@ type DirectoryDescription struct {
 	RegionsInfo *RegionsInfo
 
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your AWS organization (ORGANIZATIONS) or with any AWS
-	// account by sending a shared directory request (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization (ORGANIZATIONS) or
+	// with any Amazon Web Services account by sending a shared directory request
+	// (HANDSHAKE).
 	ShareMethod ShareMethod
 
 	// A directory share request that is sent by the directory owner to the directory
@@ -248,7 +268,7 @@ type DirectoryDescription struct {
 	// administrator determine whether to approve or reject the share invitation.
 	ShareNotes *string
 
-	// Current directory status of the shared AWS Managed Microsoft AD directory.
+	// Current directory status of the shared Managed Microsoft AD directory.
 	ShareStatus ShareStatus
 
 	// The short name of the directory.
@@ -275,7 +295,7 @@ type DirectoryDescription struct {
 
 	// A DirectoryVpcSettingsDescription object that contains additional information
 	// about a directory. This member is only present if the directory is a Simple AD
-	// or Managed AD directory.
+	// or Managed Microsoft AD directory.
 	VpcSettings *DirectoryVpcSettingsDescription
 
 	noSmithyDocumentSerde
@@ -293,14 +313,13 @@ type DirectoryLimits struct {
 	// Indicates if the cloud directory limit has been reached.
 	CloudOnlyDirectoriesLimitReached bool
 
-	// The current number of AWS Managed Microsoft AD directories in the region.
+	// The current number of Managed Microsoft AD directories in the region.
 	CloudOnlyMicrosoftADCurrentCount *int32
 
-	// The maximum number of AWS Managed Microsoft AD directories allowed in the
-	// region.
+	// The maximum number of Managed Microsoft AD directories allowed in the region.
 	CloudOnlyMicrosoftADLimit *int32
 
-	// Indicates if the AWS Managed Microsoft AD directory limit has been reached.
+	// Indicates if the Managed Microsoft AD directory limit has been reached.
 	CloudOnlyMicrosoftADLimitReached bool
 
 	// The current number of connected directories in the Region.
@@ -319,8 +338,8 @@ type DirectoryLimits struct {
 type DirectoryVpcSettings struct {
 
 	// The identifiers of the subnets for the directory servers. The two subnets must
-	// be in different Availability Zones. AWS Directory Service creates a directory
-	// server and a DNS server in each of these subnets.
+	// be in different Availability Zones. Directory Service creates a directory server
+	// and a DNS server in each of these subnets.
 	//
 	// This member is required.
 	SubnetIds []string
@@ -387,34 +406,35 @@ type DomainController struct {
 	noSmithyDocumentSerde
 }
 
-// Information about SNS topic and AWS Directory Service directory associations.
+// Information about Amazon SNS topic and Directory Service directory associations.
 type EventTopic struct {
 
-	// The date and time of when you associated your directory with the SNS topic.
+	// The date and time of when you associated your directory with the Amazon SNS
+	// topic.
 	CreatedDateTime *time.Time
 
-	// The Directory ID of an AWS Directory Service directory that will publish status
-	// messages to an SNS topic.
+	// The Directory ID of an Directory Service directory that will publish status
+	// messages to an Amazon SNS topic.
 	DirectoryId *string
 
 	// The topic registration status.
 	Status TopicStatus
 
-	// The SNS topic ARN (Amazon Resource Name).
+	// The Amazon SNS topic ARN (Amazon Resource Name).
 	TopicArn *string
 
-	// The name of an AWS SNS topic the receives status messages from the directory.
+	// The name of an Amazon SNS topic the receives status messages from the directory.
 	TopicName *string
 
 	noSmithyDocumentSerde
 }
 
 // IP address block. This is often the address block of the DNS server used for
-// your on-premises domain.
+// your self-managed domain.
 type IpRoute struct {
 
 	// IP address block using CIDR format, for example 10.0.0.0/24. This is often the
-	// address block of the DNS server used for your on-premises domain. For a single
+	// address block of the DNS server used for your self-managed domain. For a single
 	// IP address use a CIDR address block with /32. For example 10.0.0.0/32.
 	CidrIp *string
 
@@ -487,8 +507,7 @@ type OwnerDirectoryDescription struct {
 	// Identifier of the directory owner account.
 	AccountId *string
 
-	// Identifier of the AWS Managed Microsoft AD directory in the directory owner
-	// account.
+	// Identifier of the Managed Microsoft AD directory in the directory owner account.
 	DirectoryId *string
 
 	// IP address of the directory’s domain controllers.
@@ -516,8 +535,8 @@ type RadiusSettings struct {
 	// Not currently used.
 	DisplayLabel *string
 
-	// The port that your RADIUS server is using for communications. Your on-premises
-	// network must allow inbound traffic over this port from the AWS Directory Service
+	// The port that your RADIUS server is using for communications. Your self-managed
+	// network must allow inbound traffic over this port from the Directory Service
 	// servers.
 	RadiusPort int32
 
@@ -584,7 +603,7 @@ type RegionsInfo struct {
 	// Region.
 	AdditionalRegions []string
 
-	// The Region where the AWS Managed Microsoft AD directory was originally created.
+	// The Region where the Managed Microsoft AD directory was originally created.
 	PrimaryRegion *string
 
 	noSmithyDocumentSerde
@@ -636,8 +655,9 @@ type SharedDirectory struct {
 	OwnerDirectoryId *string
 
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your AWS organization (ORGANIZATIONS) or with any AWS
-	// account by sending a shared directory request (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization (ORGANIZATIONS) or
+	// with any Amazon Web Services account by sending a shared directory request
+	// (HANDSHAKE).
 	ShareMethod ShareMethod
 
 	// A directory share request that is sent by the directory owner to the directory
@@ -645,7 +665,7 @@ type SharedDirectory struct {
 	// administrator determine whether to approve or reject the share invitation.
 	ShareNotes *string
 
-	// Current directory status of the shared AWS Managed Microsoft AD directory.
+	// Current directory status of the shared Managed Microsoft AD directory.
 	ShareStatus ShareStatus
 
 	// Identifier of the directory consumer account that has access to the shared
@@ -735,14 +755,15 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a trust relationship between an AWS Managed Microsoft AD directory and
-// an external domain.
+// Describes a trust relationship between an Managed Microsoft AD directory and an
+// external domain.
 type Trust struct {
 
 	// The date and time that the trust relationship was created.
 	CreatedDateTime *time.Time
 
-	// The Directory ID of the AWS directory involved in the trust relationship.
+	// The Directory ID of the Amazon Web Services directory involved in the trust
+	// relationship.
 	DirectoryId *string
 
 	// The date and time that the trust relationship was last updated.

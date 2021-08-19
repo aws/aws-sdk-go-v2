@@ -12,13 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the tags for a bucket. Use tags to organize your AWS bill to reflect your
-// own cost structure. To do this, sign up to get your AWS account bill with tag
-// key values included. Then, to see the cost of combined resources, organize your
-// billing information according to resources with the same tag key values. For
-// example, you can tag several resources with a specific application name, and
-// then organize your billing information to see the total cost of that application
-// across several services. For more information, see Cost Allocation and Tagging
+// Sets the tags for a bucket. Use tags to organize your Amazon Web Services bill
+// to reflect your own cost structure. To do this, sign up to get your Amazon Web
+// Services account bill with tag key values included. Then, to see the cost of
+// combined resources, organize your billing information according to resources
+// with the same tag key values. For example, you can tag several resources with a
+// specific application name, and then organize your billing information to see the
+// total cost of that application across several services. For more information,
+// see Cost Allocation and Tagging
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html)
 // and Using Cost Allocation in Amazon S3 Bucket Tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/CostAllocTagging.html). When
@@ -40,7 +41,7 @@ import (
 // can occur if the tag did not pass input validation. For information about tag
 // restrictions, see User-Defined Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
-// and AWS-Generated Cost Allocation Tag Restrictions
+// and Amazon Web Services-Generated Cost Allocation Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html).
 //
 // *
@@ -99,8 +100,9 @@ type PutBucketTaggingInput struct {
 	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, see RFC 1864
-	// (http://www.ietf.org/rfc/rfc1864.txt). For requests made using the AWS Command
-	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
+	// (http://www.ietf.org/rfc/rfc1864.txt). For requests made using the Amazon Web
+	// Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is
+	// calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

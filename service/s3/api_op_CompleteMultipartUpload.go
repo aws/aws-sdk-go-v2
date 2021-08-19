@@ -112,7 +112,23 @@ func (c *Client) CompleteMultipartUpload(ctx context.Context, params *CompleteMu
 
 type CompleteMultipartUploadInput struct {
 
-	// Name of the bucket to which the multipart upload was initiated.
+	// Name of the bucket to which the multipart upload was initiated. When using this
+	// action with an access point, you must direct requests to the access point
+	// hostname. The access point hostname takes the form
+	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
+	// action with an access point through the Amazon Web Services SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using access points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
+	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
+	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
+	// hostname takes the form
+	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
+	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using S3 on Outposts
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
+	// Amazon S3 User Guide.
 	//
 	// This member is required.
 	Bucket *string
@@ -147,27 +163,28 @@ type CompleteMultipartUploadInput struct {
 
 type CompleteMultipartUploadOutput struct {
 
-	// The name of the bucket that contains the newly created object. When using this
-	// action with an access point, you must direct requests to the access point
-	// hostname. The access point hostname takes the form
+	// The name of the bucket that contains the newly created object. Does not return
+	// the access point ARN or access point alias if used. When using this action with
+	// an access point, you must direct requests to the access point hostname. The
+	// access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// action with an access point through the AWS SDKs, you provide the access point
-	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using access points
+	// action with an access point through the Amazon Web Services SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
-	// bucket ARN in place of the bucket name. For more information about S3 on
-	// Outposts ARNs, see Using S3 on Outposts
+	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon S3 User Guide.
 	Bucket *string
 
 	// Indicates whether the multipart upload uses an S3 Bucket Key for server-side
-	// encryption with AWS KMS (SSE-KMS).
+	// encryption with Amazon Web Services KMS (SSE-KMS).
 	BucketKeyEnabled bool
 
 	// Entity tag that identifies the newly created object's data. Objects with
@@ -192,15 +209,15 @@ type CompleteMultipartUploadOutput struct {
 	// request.
 	RequestCharged types.RequestCharged
 
-	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
-	// symmetric customer managed customer master key (CMK) that was used for the
-	// object.
+	// If present, specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
+	// that was used for the object.
 	SSEKMSKeyId *string
 
 	// If you specified server-side encryption either with an Amazon S3-managed
-	// encryption key or an AWS KMS customer master key (CMK) in your initiate
-	// multipart upload request, the response includes this header. It confirms the
-	// encryption algorithm that Amazon S3 used to encrypt the object.
+	// encryption key or an Amazon Web Services KMS customer master key (CMK) in your
+	// initiate multipart upload request, the response includes this header. It
+	// confirms the encryption algorithm that Amazon S3 used to encrypt the object.
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Version ID of the newly created object, in case the bucket has versioning turned

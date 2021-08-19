@@ -711,6 +711,11 @@ func awsAwsjson11_serializeOpDocumentCreateEnvironmentEC2Input(v *CreateEnvironm
 		ok.String(*v.Description)
 	}
 
+	if v.DryRun != nil {
+		ok := object.Key("dryRun")
+		ok.Boolean(*v.DryRun)
+	}
+
 	if v.ImageId != nil {
 		ok := object.Key("imageId")
 		ok.String(*v.ImageId)
@@ -936,6 +941,11 @@ func awsAwsjson11_serializeOpDocumentUpdateEnvironmentInput(v *UpdateEnvironment
 	if v.EnvironmentId != nil {
 		ok := object.Key("environmentId")
 		ok.String(*v.EnvironmentId)
+	}
+
+	if len(v.ManagedCredentialsAction) > 0 {
+		ok := object.Key("managedCredentialsAction")
+		ok.String(string(v.ManagedCredentialsAction))
 	}
 
 	if v.Name != nil {

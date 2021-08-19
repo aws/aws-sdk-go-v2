@@ -87,8 +87,9 @@ type PutBucketCorsInput struct {
 	// The base64-encoded 128-bit MD5 digest of the data. This header must be used as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, go to RFC 1864.
-	// (http://www.ietf.org/rfc/rfc1864.txt) For requests made using the AWS Command
-	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
+	// (http://www.ietf.org/rfc/rfc1864.txt) For requests made using the Amazon Web
+	// Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is
+	// calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

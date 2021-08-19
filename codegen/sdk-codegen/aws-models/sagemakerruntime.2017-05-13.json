@@ -35,6 +35,9 @@
             "operations": [
                 {
                     "target": "com.amazonaws.sagemakerruntime#InvokeEndpoint"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerruntime#InvokeEndpointAsync"
                 }
             ],
             "traits": {
@@ -70,7 +73,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "\\p{ASCII}*",
+                "smithy.api#pattern": "^\\p{ASCII}*$",
                 "smithy.api#sensitive": {}
             }
         },
@@ -81,7 +84,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemakerruntime#Header": {
@@ -91,7 +94,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "\\p{ASCII}*"
+                "smithy.api#pattern": "^\\p{ASCII}*$"
             }
         },
         "com.amazonaws.sagemakerruntime#InferenceId": {
@@ -101,7 +104,17 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": "\\A\\S[\\p{Print}]*\\z"
+                "smithy.api#pattern": "^\\A\\S[\\p{Print}]*\\z$"
+            }
+        },
+        "com.amazonaws.sagemakerruntime#InputLocationHeader": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^(https|s3)://([^/]+)/?(.*)$"
             }
         },
         "com.amazonaws.sagemakerruntime#InternalFailure": {
@@ -145,6 +158,108 @@
                     "method": "POST",
                     "uri": "/endpoints/{EndpointName}/invocations",
                     "code": 200
+                }
+            }
+        },
+        "com.amazonaws.sagemakerruntime#InvokeEndpointAsync": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.sagemakerruntime#InvokeEndpointAsyncInput"
+            },
+            "output": {
+                "target": "com.amazonaws.sagemakerruntime#InvokeEndpointAsyncOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.sagemakerruntime#InternalFailure"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerruntime#ServiceUnavailable"
+                },
+                {
+                    "target": "com.amazonaws.sagemakerruntime#ValidationError"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>After you deploy a model into production using Amazon SageMaker hosting services, \n            your client applications use this API to get inferences from the model hosted at \n            the specified endpoint in an asynchronous manner.</p>\n        \n        <p>Inference requests sent to this API are enqueued for asynchronous processing. \n            The processing of the inference request may or may not complete before the \n            you receive a response from this API. The response from this API will \n            not contain the result of the inference request but contain information \n            about where you can locate it.</p>\n        \n        <p>Amazon SageMaker strips all <code>POST</code> headers except those supported by the API. \n            Amazon SageMaker might add additional headers. You should not rely on the behavior \n            of headers outside those enumerated in the request syntax.</p>\n        \n        <p>Calls to <code>InvokeEndpointAsync</code> are authenticated by using AWS Signature\n            Version 4. For information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html\">Authenticating Requests (AWS Signature Version 4)</a> in the <i>Amazon S3 API\n                Reference</i>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/endpoints/{EndpointName}/async-invocations",
+                    "code": 202
+                }
+            }
+        },
+        "com.amazonaws.sagemakerruntime#InvokeEndpointAsyncInput": {
+            "type": "structure",
+            "members": {
+                "EndpointName": {
+                    "target": "com.amazonaws.sagemakerruntime#EndpointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the endpoint that you specified when you created the endpoint using \n            the <a href=\"https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_CreateEndpoint.html\">\n               <code>CreateEndpoint</code>\n            </a> API.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ContentType": {
+                    "target": "com.amazonaws.sagemakerruntime#Header",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The MIME type of the input data in the request body.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Content-Type"
+                    }
+                },
+                "Accept": {
+                    "target": "com.amazonaws.sagemakerruntime#Header",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The desired MIME type of the inference in the response.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Accept"
+                    }
+                },
+                "CustomAttributes": {
+                    "target": "com.amazonaws.sagemakerruntime#CustomAttributesHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides additional information about a request for an inference submitted to \n            a model hosted at an Amazon SageMaker endpoint. The information is an opaque value that is \n            forwarded verbatim. You could use this value, for example, to provide an ID that you \n            can use to track a request or to provide other metadata that a service endpoint was \n            programmed to process. The value must consist of no more than 1024 \n            visible US-ASCII characters as specified in \n            <a href=\"https://datatracker.ietf.org/doc/html/rfc7230#section-3.2.6\">Section 3.3.6. \n                Field Value Components</a> of the Hypertext Transfer Protocol (HTTP/1.1). </p>\n        \n        <p>The code in your model is responsible for setting or updating any custom attributes \n            in the response. If your code does not set this value in the response, an empty \n            value is returned. For example, if a custom attribute represents the trace ID, \n            your model can prepend the custom attribute with <code>Trace ID</code>: in your post-processing function. </p>\n        \n        <p>This feature is currently supported in the AWS SDKs but not in the Amazon SageMaker Python SDK. </p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Custom-Attributes"
+                    }
+                },
+                "InferenceId": {
+                    "target": "com.amazonaws.sagemakerruntime#InferenceId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for the inference request. Amazon SageMaker will generate an identifier for you \n            if none is specified. </p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-Inference-Id"
+                    }
+                },
+                "InputLocation": {
+                    "target": "com.amazonaws.sagemakerruntime#InputLocationHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI where the inference request payload is stored.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-InputLocation",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestTTLSeconds": {
+                    "target": "com.amazonaws.sagemakerruntime#RequestTTLSecondsHeader",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum age in seconds a request can be in the queue before it is marked as expired.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-RequestTTLSeconds"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.sagemakerruntime#InvokeEndpointAsyncOutput": {
+            "type": "structure",
+            "members": {
+                "InferenceId": {
+                    "target": "com.amazonaws.sagemakerruntime#Header",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifier for an inference request. This will be the same as the <code>InferenceId</code> specified \n            in the input. Amazon SageMaker will generate an identifier for you if you do not specify one.</p>"
+                    }
+                },
+                "OutputLocation": {
+                    "target": "com.amazonaws.sagemakerruntime#Header",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon S3 URI where the inference response payload is stored.</p>",
+                        "smithy.api#httpHeader": "X-Amzn-SageMaker-OutputLocation"
+                    }
                 }
             }
         },
@@ -295,6 +410,16 @@
                 "smithy.api#httpError": 424
             }
         },
+        "com.amazonaws.sagemakerruntime#RequestTTLSecondsHeader": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 60,
+                    "max": 21600
+                }
+            }
+        },
         "com.amazonaws.sagemakerruntime#ServiceUnavailable": {
             "type": "structure",
             "members": {
@@ -321,7 +446,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemakerruntime#TargetModelHeader": {
@@ -331,7 +456,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "\\A\\S[\\p{Print}]*\\z"
+                "smithy.api#pattern": "^\\A\\S[\\p{Print}]*\\z$"
             }
         },
         "com.amazonaws.sagemakerruntime#TargetVariantHeader": {
@@ -341,7 +466,7 @@
                     "min": 0,
                     "max": 63
                 },
-                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*"
+                "smithy.api#pattern": "^[a-zA-Z0-9](-*[a-zA-Z0-9])*$"
             }
         },
         "com.amazonaws.sagemakerruntime#ValidationError": {

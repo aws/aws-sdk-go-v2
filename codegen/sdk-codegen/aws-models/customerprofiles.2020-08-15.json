@@ -233,7 +233,7 @@
                     "min": 3,
                     "max": 63
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.customerprofiles#BucketPrefix": {
@@ -291,7 +291,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\w/!@#+=.-]+"
+                "smithy.api#pattern": "^[\\w/!@#+=.-]+$"
             }
         },
         "com.amazonaws.customerprofiles#CreateDomain": {
@@ -320,7 +320,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can\n         be associated with one domain.</p>",
+                "smithy.api#documentation": "<p>Creates a domain, which is a container for all customer data, such as customer profile\n         attributes, object types, profile keys, and encryption keys. You can create multiple\n         domains, and each domain can have multiple third-party integrations.</p>\n         <p>Each Amazon Connect instance can be associated with only one domain. Multiple Amazon Connect instances can\n         be associated with one domain.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/domains/{DomainName}",
@@ -361,7 +361,7 @@
                 "Matching": {
                     "target": "com.amazonaws.customerprofiles#MatchingRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. \nAfter that batch process completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results.  </p>"
                     }
                 },
                 "Tags": {
@@ -404,7 +404,7 @@
                 "Matching": {
                     "target": "com.amazonaws.customerprofiles#MatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. \nAfter that batch process completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results.  </p>"
                     }
                 },
                 "CreatedAt": {
@@ -1448,7 +1448,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "[\\w!@#\\-.?,\\s]*"
+                "smithy.api#pattern": "^[\\w!@#\\-.?,\\s]*$"
             }
         },
         "com.amazonaws.customerprofiles#FlowName": {
@@ -1458,7 +1458,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][\\w!@#.-]+"
+                "smithy.api#pattern": "^[a-zA-Z0-9][\\w!@#.-]+$"
             }
         },
         "com.amazonaws.customerprofiles#Gender": {
@@ -1564,7 +1564,7 @@
                 "Matching": {
                     "target": "com.amazonaws.customerprofiles#MatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. \nAfter that batch process completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results.  </p>"
                     }
                 },
                 "CreatedAt": {
@@ -1715,7 +1715,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p>\n         <p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>Amazon Connect runs a batch process every Saturday at 12AM UTC to identify matching profiles.\n            The results are returned up to seven days after the Saturday run.</p>\n         </important>\n\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n            <li>\n               <p>BusinessName</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>This API is in preview release for Amazon Connect and subject to change.</p>\n         <p>Before calling this API, use <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> or\n            <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html\">UpdateDomain</a> to\n         enable identity resolution: set <code>Matching</code> to true.</p>\n         <p>GetMatches returns potentially matching profiles, based on the results of the latest run\n         of a machine learning process. </p>\n         <important>\n            <p>Amazon Connect starts a batch process every Saturday at 12AM UTC to identify matching profiles.\n            The results are returned up to seven days after the Saturday run.</p>\n         </important>\n\n         <p>Amazon Connect uses the following profile attributes to identify matches:</p>\n         <ul>\n            <li>\n               <p>PhoneNumber</p>\n            </li>\n            <li>\n               <p>HomePhoneNumber</p>\n            </li>\n            <li>\n               <p>BusinessPhoneNumber</p>\n            </li>\n            <li>\n               <p>MobilePhoneNumber</p>\n            </li>\n            <li>\n               <p>EmailAddress</p>\n            </li>\n            <li>\n               <p>PersonalEmailAddress</p>\n            </li>\n            <li>\n               <p>BusinessEmailAddress</p>\n            </li>\n            <li>\n               <p>FullName</p>\n            </li>\n            <li>\n               <p>BusinessName</p>\n            </li>\n         </ul>\n         <p>For example, two or more profiles—with spelling mistakes such as <b>John Doe</b> and <b>Jhn Doe</b>, or different casing\n         email addresses such as <b>JOHN_DOE@ANYCOMPANY.COM</b> and\n            <b>johndoe@anycompany.com</b>, or different phone number\n         formats such as <b>555-010-0000</b> and <b>+1-555-010-0000</b>—can be detected as belonging to the same customer <b>John Doe</b> and merged into a unified profile.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/domains/{DomainName}/matches",
@@ -2044,7 +2044,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws:kms:.*:[0-9]+:.*"
+                "smithy.api#pattern": "^arn:aws:kms:.*:[0-9]+:"
             }
         },
         "com.amazonaws.customerprofiles#ListAccountIntegrations": {
@@ -2668,6 +2668,12 @@
                         "smithy.api#documentation": "<p>The unique identifier of a customer profile.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "ObjectFilter": {
+                    "target": "com.amazonaws.customerprofiles#ObjectFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Applies a filter to the response to include profile objects with the specified index values.\n         This filter is only supported for ObjectTypeName _asset and _case.</p>"
+                    }
                 }
             }
         },
@@ -2940,7 +2946,7 @@
                 "FieldSourceProfileIds": {
                     "target": "com.amazonaws.customerprofiles#FieldSourceProfileIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifiers of the fields in the profile that has the information you want to apply to the\n         merge. For example, say you want to merge EmailAddress from Profile1 into MainProfile. This would be the \n         identifier of the EmailAddress field in Profile1. </p>"
+                        "smithy.api#documentation": "<p>The identifiers of the fields in the profile that has the information you want to apply\n         to the merge. For example, say you want to merge EmailAddress from Profile1 into\n         MainProfile. This would be the identifier of the EmailAddress field in Profile1. </p>"
                     }
                 }
             }
@@ -2963,7 +2969,29 @@
                     "min": 0,
                     "max": 512
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.customerprofiles#ObjectFilter": {
+            "type": "structure",
+            "members": {
+                "KeyName": {
+                    "target": "com.amazonaws.customerprofiles#name",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A searchable identifier of a standard profile object. The predefined keys you can use to search for _asset include: _assetId, _assetName, _serialNumber.\n         The predefined keys you can use to search for _case include: _caseId.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Values": {
+                    "target": "com.amazonaws.customerprofiles#requestValueList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of key values.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The filter applied to ListProfileObjects response to include profile objects with the specified index values.\n         This filter is only supported for ObjectTypeName _asset and _case.</p>"
             }
         },
         "com.amazonaws.customerprofiles#ObjectTypeField": {
@@ -2998,7 +3026,7 @@
                 "StandardIdentifiers": {
                     "target": "com.amazonaws.customerprofiles#StandardIdentifierList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1\n         UNIQUE key but multiple PROFILE keys. PROFILE means that this key can be used to tie an\n         object to a PROFILE. UNIQUE means that it can be used to uniquely identify an object. If a\n         key a is marked as SECONDARY, it will be used to search for profiles after all other\n         PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is\n         not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the\n         profile does not already exist before the object is ingested, otherwise it is only used for\n         matching objects to profiles.</p>"
+                        "smithy.api#documentation": "<p>The types of keys that a ProfileObject can have. Each ProfileObject can have only 1\n         UNIQUE key but multiple PROFILE keys. PROFILE, ASSET or CASE means that this key can be used to tie an\n         object to a PROFILE, ASSET or CASE respectively. UNIQUE means that it can be used to uniquely identify an object.\n         If a key a is marked as SECONDARY, it will be used to search for profiles after all other\n         PROFILE keys have been searched. A LOOKUP_ONLY key is only used to match a profile but is\n         not persisted to be used for searching of the profile. A NEW_ONLY key is only used if the\n         profile does not already exist before the object is ingested, otherwise it is only used for\n         matching objects to profiles.</p>"
                     }
                 },
                 "FieldNames": {
@@ -3289,7 +3317,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": ".+"
+                "smithy.api#pattern": "^.+$"
             }
         },
         "com.amazonaws.customerprofiles#PutIntegration": {
@@ -4281,6 +4309,14 @@
                         "name": "PROFILE"
                     },
                     {
+                        "value": "ASSET",
+                        "name": "ASSET"
+                    },
+                    {
+                        "value": "CASE",
+                        "name": "CASE"
+                    },
+                    {
                         "value": "UNIQUE",
                         "name": "UNIQUE"
                     },
@@ -4312,7 +4348,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "^arn:[a-z0-9]{1,10}:profile"
+                "smithy.api#pattern": "^arn:[a-z0-9]{1,10}:profile$"
             }
         },
         "com.amazonaws.customerprofiles#TagKey": {
@@ -4736,7 +4772,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue\n         or an encryption key.</p>\n         <p>After a domain is created, the name can’t be changed.</p>",
+                "smithy.api#documentation": "<p>Updates the properties of a domain, including creating or selecting a dead letter queue\n         or an encryption key.</p>\n         <p>After a domain is created, the name can’t be changed.</p>\n         <p>Use this API or <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html\">CreateDomain</a> to\n         enable <a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">identity\n            resolution</a>: set <code>Matching</code> to true. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/domains/{DomainName}",
@@ -4776,7 +4812,7 @@
                 "Matching": {
                     "target": "com.amazonaws.customerprofiles#MatchingRequest",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. \nAfter that batch process completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results.  </p>"
                     }
                 },
                 "Tags": {
@@ -4818,7 +4854,7 @@
                 "Matching": {
                     "target": "com.amazonaws.customerprofiles#MatchingResponse",
                     "traits": {
-                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. This process runs every Saturday at 12AM.</p>"
+                        "smithy.api#documentation": "<p>The process of matching duplicate profiles. If Matching = true, Amazon Connect Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to detect duplicate profiles in your domains. \nAfter that batch process completes, use the \n<a href=\"https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html\">GetMatches</a>\nAPI to return and review the results.  </p>"
                     }
                 },
                 "CreatedAt": {
@@ -5280,7 +5316,7 @@
         "com.amazonaws.customerprofiles#uuid": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-f0-9]{32}"
+                "smithy.api#pattern": "^[a-f0-9]{32}$"
             }
         }
     }

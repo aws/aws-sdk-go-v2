@@ -1534,40 +1534,39 @@ type TumblingWindow struct {
 	// for interval, IoT SiteWise aggregates data in one of the following ways:
 	//
 	// * If
-	// you create the metric before or at 6:00 p.m. (UTC), you get the first
-	// aggregation result at 6 p.m. (UTC) on the day when you create the metric.
+	// you create the metric before or at 6:00 PM (UTC), you get the first aggregation
+	// result at 6 PM (UTC) on the day when you create the metric.
+	//
+	// * If you create the
+	// metric after 6:00 PM (UTC), you get the first aggregation result at 6 PM (UTC)
+	// the next day.
+	//
+	// * The ISO 8601 format. For example, if you specify PT18H for
+	// offset and 1d for interval, IoT SiteWise aggregates data in one of the following
+	// ways:
+	//
+	// * If you create the metric before or at 6:00 PM (UTC), you get the first
+	// aggregation result at 6 PM (UTC) on the day when you create the metric.
 	//
 	// * If
-	// you create the metric after 6:00 p.m. (UTC), you get the first aggregation
-	// result at 6 p.m. (UTC) the next day.
+	// you create the metric after 6:00 PM (UTC), you get the first aggregation result
+	// at 6 PM (UTC) the next day.
 	//
-	// * The ISO 8601 format. For example, if you
-	// specify PT18H for offset and 1d for interval, IoT SiteWise aggregates data in
-	// one of the following ways:
+	// * The 24-hour clock. For example, if you specify
+	// 00:03:00 for offset and 5m for interval, and you create the metric at 2 PM
+	// (UTC), you get the first aggregation result at 2:03 PM (UTC). You get the second
+	// aggregation result at 2:08 PM (UTC).
 	//
-	// * If you create the metric before or at 6:00 p.m.
-	// (UTC), you get the first aggregation result at 6 p.m. (UTC) on the day when you
-	// create the metric.
+	// * The offset time zone. For example, if
+	// you specify 2021-07-23T18:00-08 for offset and 1d for interval, IoT SiteWise
+	// aggregates data in one of the following ways:
 	//
-	// * If you create the metric after 6:00 p.m. (UTC), you get
-	// the first aggregation result at 6 p.m. (UTC) the next day.
+	// * If you create the metric before
+	// or at 6:00 PM (PST), you get the first aggregation result at 6 PM (PST) on the
+	// day when you create the metric.
 	//
-	// * The 24-hour clock.
-	// For example, if you specify 00:03:00 for offset and 5m for interval, and you
-	// create the metric at 2 p.m. (UTC), you get the first aggregation result at 2:03
-	// p.m. (UTC). You get the second aggregation result at 2:08 p.m. (UTC).
-	//
-	// * The
-	// offset time zone. For example, if you specify 2021-07-23T18:00-08 for offset and
-	// 1d for interval, IoT SiteWise aggregates data in one of the following ways:
-	//
-	// *
-	// If you create the metric before or at 6:00 p.m. (PST), you get the first
-	// aggregation result at 6 p.m. (PST) on the day when you create the metric.
-	//
-	// * If
-	// you create the metric after 6:00 p.m. (PST), you get the first aggregation
-	// result at 6 p.m. (PST) the next day.
+	// * If you create the metric after 6:00 PM (PST),
+	// you get the first aggregation result at 6 PM (PST) the next day.
 	Offset *string
 
 	noSmithyDocumentSerde

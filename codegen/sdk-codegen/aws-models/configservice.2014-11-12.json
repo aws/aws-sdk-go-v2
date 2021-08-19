@@ -85,7 +85,7 @@
         "com.amazonaws.configservice#AccountId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "\\d{12}"
+                "smithy.api#pattern": "^\\d{12}$"
             }
         },
         "com.amazonaws.configservice#AggregateComplianceByConfigRule": {
@@ -1345,7 +1345,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.configservice#ConfigRuleNames": {
@@ -1491,7 +1491,7 @@
         "com.amazonaws.configservice#ConfigurationAggregatorArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:config:[a-z\\-\\d]+:\\d+:config-aggregator/config-aggregator-[a-z\\d]+"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:config:[a-z\\-\\d]+:\\d+:config-aggregator/config-aggregator-[a-z\\d]+$"
             }
         },
         "com.amazonaws.configservice#ConfigurationAggregatorList": {
@@ -1507,7 +1507,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\w\\-]+"
+                "smithy.api#pattern": "^[\\w\\-]+$"
             }
         },
         "com.amazonaws.configservice#ConfigurationAggregatorNameList": {
@@ -2080,7 +2080,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[a-zA-Z][-a-zA-Z0-9]*"
+                "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.configservice#ConformancePackNamesList": {
@@ -7523,7 +7523,7 @@
                     "min": 1,
                     "max": 64
                 },
-                "smithy.api#pattern": ".*\\S.*"
+                "smithy.api#pattern": "\\S"
             }
         },
         "com.amazonaws.configservice#OrganizationConfigRuleNames": {
@@ -7728,7 +7728,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z][-a-zA-Z0-9]*"
+                "smithy.api#pattern": "^[a-zA-Z][-a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.configservice#OrganizationConformancePackNames": {
@@ -9081,7 +9081,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\s\\S]*"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.configservice#QueryExpression": {
@@ -9091,7 +9091,7 @@
                     "min": 1,
                     "max": 4096
                 },
-                "smithy.api#pattern": "[\\s\\S]*"
+                "smithy.api#pattern": "^[\\s\\S]*$"
             }
         },
         "com.amazonaws.configservice#QueryId": {
@@ -10271,6 +10271,50 @@
                     {
                         "value": "AWS::SSM::FileData",
                         "name": "FileData"
+                    },
+                    {
+                        "value": "AWS::Backup::BackupPlan",
+                        "name": "BackupPlan"
+                    },
+                    {
+                        "value": "AWS::Backup::BackupSelection",
+                        "name": "BackupSelection"
+                    },
+                    {
+                        "value": "AWS::Backup::BackupVault",
+                        "name": "BackupVault"
+                    },
+                    {
+                        "value": "AWS::Backup::RecoveryPoint",
+                        "name": "BackupRecoveryPoint"
+                    },
+                    {
+                        "value": "AWS::ECR::Repository",
+                        "name": "ECRRepository"
+                    },
+                    {
+                        "value": "AWS::ECS::Cluster",
+                        "name": "ECSCluster"
+                    },
+                    {
+                        "value": "AWS::ECS::Service",
+                        "name": "ECSService"
+                    },
+                    {
+                        "value": "AWS::ECS::TaskDefinition",
+                        "name": "ECSTaskDefinition"
+                    },
+                    {
+                        "value": "AWS::EFS::AccessPoint",
+                        "name": "EFSAccessPoint"
+                    },
+                    {
+                        "value": "AWS::EFS::FileSystem",
+                        "name": "EFSFileSystem"
+                    },
+                    {
+                        "value": "AWS::EKS::Cluster",
+                        "name": "EKSCluster"
                     }
                 ]
             }
@@ -10381,7 +10425,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\w\\-]+"
+                "smithy.api#pattern": "^[\\w\\-]+$"
             }
         },
         "com.amazonaws.configservice#RetentionConfigurationNameList": {
@@ -10421,7 +10465,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[A-Za-z0-9-]+"
+                "smithy.api#pattern": "^[A-Za-z0-9-]+$"
             }
         },
         "com.amazonaws.configservice#Scope": {
@@ -11511,7 +11555,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "s3://.*"
+                "smithy.api#pattern": "^s3://"
             }
         },
         "com.amazonaws.configservice#TooManyTagsException": {

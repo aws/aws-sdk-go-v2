@@ -237,6 +237,7 @@ const (
 	RuntimePython36     Runtime = "python3.6"
 	RuntimePython37     Runtime = "python3.7"
 	RuntimePython38     Runtime = "python3.8"
+	RuntimePython39     Runtime = "python3.9"
 	RuntimeDotnetcore10 Runtime = "dotnetcore1.0"
 	RuntimeDotnetcore20 Runtime = "dotnetcore2.0"
 	RuntimeDotnetcore21 Runtime = "dotnetcore2.1"
@@ -268,6 +269,7 @@ func (Runtime) Values() []Runtime {
 		"python3.6",
 		"python3.7",
 		"python3.8",
+		"python3.9",
 		"dotnetcore1.0",
 		"dotnetcore2.0",
 		"dotnetcore2.1",

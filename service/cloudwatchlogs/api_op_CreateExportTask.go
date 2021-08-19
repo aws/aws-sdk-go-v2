@@ -45,7 +45,7 @@ func (c *Client) CreateExportTask(ctx context.Context, params *CreateExportTaskI
 type CreateExportTaskInput struct {
 
 	// The name of S3 bucket for the exported log data. The bucket must be in the same
-	// AWS region.
+	// Amazon Web Services region.
 	//
 	// This member is required.
 	Destination *string

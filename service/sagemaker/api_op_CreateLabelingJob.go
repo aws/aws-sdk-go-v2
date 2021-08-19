@@ -170,6 +170,17 @@ type CreateLabelingJobInput struct {
 	// attributes to your label category configuration file. To learn how, see Create a
 	// Labeling Category Configuration File for 3D Point Cloud Labeling Jobs
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-point-cloud-label-category-config.html).
+	// For named entity recognition jobs, in addition to "labels", you must provide
+	// worker instructions in the label category configuration file using the
+	// "instructions" parameter: "instructions": {"shortInstruction":"
+	// Add header
+	//
+	//
+	// Add Instructions
+	//
+	// ", "fullInstruction":"Add additional instructions."}. For
+	// details and an example, see Create a Named Entity Recognition Labeling Job (API)
+	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-named-entity-recg.html#sms-creating-ner-api).
 	// For all other built-in task types
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-task-types.html) and custom
 	// tasks

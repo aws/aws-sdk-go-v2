@@ -434,10 +434,10 @@ type DomainName struct {
 	// The custom domain name as an API host name, for example, my-api.example.com.
 	DomainName *string
 
-	// The status of the DomainName migration. The valid values are AVAILABLE and
-	// UPDATING. If the status is UPDATING, the domain cannot be modified further until
-	// the existing operation is complete. If it is AVAILABLE, the domain can be
-	// updated.
+	// The status of the DomainName migration. The valid values are AVAILABLE,
+	// UPDATING, PENDING_CERTIFICATE_REIMPORT, and PENDING_OWNERSHIP_VERIFICATION. If
+	// the status is UPDATING, the domain cannot be modified further until the existing
+	// operation is complete. If it is AVAILABLE, the domain can be updated.
 	DomainNameStatus DomainNameStatus
 
 	// An optional text message containing detailed information about status of the
@@ -452,6 +452,11 @@ type DomainName struct {
 	// specified, API Gateway performs two-way authentication between the client and
 	// the server. Clients must present a trusted certificate to access your API.
 	MutualTlsAuthentication *MutualTlsAuthentication
+
+	// The ARN of the public certificate issued by ACM to validate ownership of your
+	// custom domain. Only required when configuring mutual TLS and using an ACM
+	// imported or private CA certificate ARN as the regionalCertificateArn.
+	OwnershipVerificationCertificateArn *string
 
 	// The reference to an AWS-managed certificate that will be used for validating the
 	// regional domain name. AWS Certificate Manager is the only supported source.

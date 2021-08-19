@@ -26,27 +26,38 @@ import (
 // header, Amazon S3 checks the object against the provided MD5 value and, if they
 // do not match, returns an error. Additionally, you can calculate the MD5 while
 // putting an object to Amazon S3 and compare the returned ETag to the calculated
-// MD5 value. The Content-MD5 header is required for any request to upload an
+// MD5 value.
+//
+// * To successfully complete the PutObject request, you must have the
+// s3:PutObject in your IAM permissions.
+//
+// * To successfully change the objects acl
+// of your PutObject request, you must have the s3:PutObjectAcl in your IAM
+// permissions.
+//
+// * The Content-MD5 header is required for any request to upload an
 // object with a retention period configured using Amazon S3 Object Lock. For more
 // information about Amazon S3 Object Lock, see Amazon S3 Object Lock Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/object-lock-overview.html) in
-// the Amazon S3 User Guide. Server-side Encryption You can optionally request
+// the Amazon S3 User Guide.
+//
+// Server-side Encryption You can optionally request
 // server-side encryption. With server-side encryption, Amazon S3 encrypts your
 // data as it writes it to disks in its data centers and decrypts the data when you
-// access it. You have the option to provide your own encryption key or use AWS
-// managed encryption keys (SSE-S3 or SSE-KMS). For more information, see Using
-// Server-Side Encryption
+// access it. You have the option to provide your own encryption key or use Amazon
+// Web Services managed encryption keys (SSE-S3 or SSE-KMS). For more information,
+// see Using Server-Side Encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingServerSideEncryption.html).
-// If you request server-side encryption using AWS Key Management Service
-// (SSE-KMS), you can enable an S3 Bucket Key at the object-level. For more
+// If you request server-side encryption using Amazon Web Services Key Management
+// Service (SSE-KMS), you can enable an S3 Bucket Key at the object-level. For more
 // information, see Amazon S3 Bucket Keys
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in the Amazon
 // S3 User Guide. Access Control List (ACL)-Specific Request Headers You can use
 // headers to grant ACL- based permissions. By default, all objects are private.
 // Only the owner has full access control. When adding a new object, you can grant
-// permissions to individual AWS accounts or to predefined groups defined by Amazon
-// S3. These permissions are then added to the ACL on the object. For more
-// information, see Access Control List (ACL) Overview
+// permissions to individual Amazon Web Services accounts or to predefined groups
+// defined by Amazon S3. These permissions are then added to the ACL on the object.
+// For more information, see Access Control List (ACL) Overview
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html) and Managing
 // ACLs Using the REST API
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/acl-using-rest-api.html).
@@ -95,17 +106,17 @@ type PutObjectInput struct {
 	// with an access point, you must direct requests to the access point hostname. The
 	// access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// action with an access point through the AWS SDKs, you provide the access point
-	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using access points
+	// action with an access point through the Amazon Web Services SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
-	// bucket ARN in place of the bucket name. For more information about S3 on
-	// Outposts ARNs, see Using S3 on Outposts
+	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon S3 User Guide.
 	//
@@ -236,18 +247,20 @@ type PutObjectInput struct {
 	// encryption key was transmitted without error.
 	SSECustomerKeyMD5 *string
 
-	// Specifies the AWS KMS Encryption Context to use for object encryption. The value
-	// of this header is a base64-encoded UTF-8 string holding JSON with the encryption
-	// context key-value pairs.
+	// Specifies the Amazon Web Services KMS Encryption Context to use for object
+	// encryption. The value of this header is a base64-encoded UTF-8 string holding
+	// JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
 	// If x-amz-server-side-encryption is present and has the value of aws:kms, this
-	// header specifies the ID of the AWS Key Management Service (AWS KMS) symmetrical
-	// customer managed customer master key (CMK) that was used for the object. If you
-	// specify x-amz-server-side-encryption:aws:kms, but do not provide
-	// x-amz-server-side-encryption-aws-kms-key-id, Amazon S3 uses the AWS managed CMK
-	// in AWS to protect the data. If the KMS key does not exist in the same account
-	// issuing the command, you must use the full ARN and not just the ID.
+	// header specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetrical customer managed customer master key (CMK)
+	// that was used for the object. If you specify
+	// x-amz-server-side-encryption:aws:kms, but do not provide
+	// x-amz-server-side-encryption-aws-kms-key-id, Amazon S3 uses the Amazon Web
+	// Services managed CMK in Amazon Web Services to protect the data. If the KMS key
+	// does not exist in the same account issuing the command, you must use the full
+	// ARN and not just the ID.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing this object in Amazon S3
@@ -289,7 +302,7 @@ type PutObjectInput struct {
 type PutObjectOutput struct {
 
 	// Indicates whether the uploaded object uses an S3 Bucket Key for server-side
-	// encryption with AWS KMS (SSE-KMS).
+	// encryption with Amazon Web Services KMS (SSE-KMS).
 	BucketKeyEnabled bool
 
 	// Entity tag for the uploaded object.
@@ -316,20 +329,21 @@ type PutObjectOutput struct {
 	// verification of the customer-provided encryption key.
 	SSECustomerKeyMD5 *string
 
-	// If present, specifies the AWS KMS Encryption Context to use for object
-	// encryption. The value of this header is a base64-encoded UTF-8 string holding
-	// JSON with the encryption context key-value pairs.
+	// If present, specifies the Amazon Web Services KMS Encryption Context to use for
+	// object encryption. The value of this header is a base64-encoded UTF-8 string
+	// holding JSON with the encryption context key-value pairs.
 	SSEKMSEncryptionContext *string
 
 	// If x-amz-server-side-encryption is present and has the value of aws:kms, this
-	// header specifies the ID of the AWS Key Management Service (AWS KMS) symmetric
-	// customer managed customer master key (CMK) that was used for the object.
+	// header specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
+	// that was used for the object.
 	SSEKMSKeyId *string
 
-	// If you specified server-side encryption either with an AWS KMS customer master
-	// key (CMK) or Amazon S3-managed encryption key in your PUT request, the response
-	// includes this header. It confirms the encryption algorithm that Amazon S3 used
-	// to encrypt the object.
+	// If you specified server-side encryption either with an Amazon Web Services KMS
+	// customer master key (CMK) or Amazon S3-managed encryption key in your PUT
+	// request, the response includes this header. It confirms the encryption algorithm
+	// that Amazon S3 used to encrypt the object.
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Version of the object.

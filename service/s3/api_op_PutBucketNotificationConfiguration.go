@@ -25,7 +25,7 @@ import (
 // the request body. After Amazon S3 receives this request, it first verifies that
 // any Amazon Simple Notification Service (Amazon SNS) or Amazon Simple Queue
 // Service (Amazon SQS) destination exists, and that the bucket owner has
-// permission to publish to it by sending a test notification. In the case of AWS
+// permission to publish to it by sending a test notification. In the case of
 // Lambda destinations, Amazon S3 verifies that the Lambda function permissions
 // grant Amazon S3 permission to invoke the function from the Amazon S3 bucket. For
 // more information, see Configuring Notifications for Amazon S3 Events

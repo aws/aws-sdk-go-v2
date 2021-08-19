@@ -14,20 +14,20 @@ import (
 
 // Set the logging parameters for a bucket and to specify permissions for who can
 // view and modify the logging parameters. All logs are saved to buckets in the
-// same AWS Region as the source bucket. To set the logging status of a bucket, you
-// must be the bucket owner. The bucket owner is automatically granted FULL_CONTROL
-// to all logs. You use the Grantee request element to grant access to other
-// people. The Permissions request element specifies the kind of access the grantee
-// has to the logs. Grantee Values You can specify the person (grantee) to whom
-// you're assigning access rights (using request elements) in the following
-// ways:
+// same Amazon Web Services Region as the source bucket. To set the logging status
+// of a bucket, you must be the bucket owner. The bucket owner is automatically
+// granted FULL_CONTROL to all logs. You use the Grantee request element to grant
+// access to other people. The Permissions request element specifies the kind of
+// access the grantee has to the logs. Grantee Values You can specify the person
+// (grantee) to whom you're assigning access rights (using request elements) in the
+// following ways:
 //
-// * By the person's ID: <>ID<><>GranteesEmail<>  DisplayName is optional
-// and ignored in the request.
+// * By the person's ID: <>ID<><>GranteesEmail<>  DisplayName is
+// optional and ignored in the request.
 //
-// * By Email address:  <>Grantees@email.com<> The
-// grantee is resolved to the CanonicalUser and, in a response to a GET Object acl
-// request, appears as the CanonicalUser.
+// * By Email address:
+// <>Grantees@email.com<> The grantee is resolved to the CanonicalUser and, in a
+// response to a GET Object acl request, appears as the CanonicalUser.
 //
 // * By URI:
 // <>http://acs.amazonaws.com/groups/global/AuthenticatedUsers<>
@@ -86,8 +86,8 @@ type PutBucketLoggingInput struct {
 	BucketLoggingStatus *types.BucketLoggingStatus
 
 	// The MD5 hash of the PutBucketLogging request body. For requests made using the
-	// AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated
-	// automatically.
+	// Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs,
+	// this field is calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

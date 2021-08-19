@@ -90,6 +90,24 @@ func (EnvironmentType) Values() []EnvironmentType {
 	}
 }
 
+type ManagedCredentialsAction string
+
+// Enum values for ManagedCredentialsAction
+const (
+	ManagedCredentialsActionEnable  ManagedCredentialsAction = "ENABLE"
+	ManagedCredentialsActionDisable ManagedCredentialsAction = "DISABLE"
+)
+
+// Values returns all known values for ManagedCredentialsAction. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ManagedCredentialsAction) Values() []ManagedCredentialsAction {
+	return []ManagedCredentialsAction{
+		"ENABLE",
+		"DISABLE",
+	}
+}
+
 type ManagedCredentialsStatus string
 
 // Enum values for ManagedCredentialsStatus

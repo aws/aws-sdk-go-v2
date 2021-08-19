@@ -17,14 +17,13 @@ import (
 // group your data by various dimensions, such as SERVICE or AZ, in a specific time
 // range. For a complete list of valid dimensions, see the GetDimensionValues
 // (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
-// operation. Management account in an organization in AWS Organizations have
-// access to all member accounts. This API is currently available for the Amazon
-// Elastic Compute Cloud – Compute service only. This is an opt-in only feature.
-// You can enable this feature from the Cost Explorer Settings page. For
-// information on how to access the Settings page, see Controlling Access for Cost
-// Explorer
+// operation. Management account in an organization in Organizations have access to
+// all member accounts. This API is currently available for the Amazon Elastic
+// Compute Cloud – Compute service only. This is an opt-in only feature. You can
+// enable this feature from the Cost Explorer Settings page. For information on how
+// to access the Settings page, see Controlling Access for Cost Explorer
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/ce-access.html) in
-// the AWS Billing and Cost Management User Guide.
+// the Billing and Cost Management User Guide.
 func (c *Client) GetCostAndUsageWithResources(ctx context.Context, params *GetCostAndUsageWithResourcesInput, optFns ...func(*Options)) (*GetCostAndUsageWithResourcesOutput, error) {
 	if params == nil {
 		params = &GetCostAndUsageWithResourcesInput{}
@@ -55,9 +54,9 @@ type GetCostAndUsageWithResourcesInput struct {
 	// This member is required.
 	Filter *types.Expression
 
-	// Sets the AWS cost granularity to MONTHLY, DAILY, or HOURLY. If Granularity isn't
-	// set, the response object doesn't include the Granularity, MONTHLY, DAILY, or
-	// HOURLY.
+	// Sets the Amazon Web Services cost granularity to MONTHLY, DAILY, or HOURLY. If
+	// Granularity isn't set, the response object doesn't include the Granularity,
+	// MONTHLY, DAILY, or HOURLY.
 	//
 	// This member is required.
 	Granularity types.Granularity
@@ -90,8 +89,9 @@ type GetCostAndUsageWithResourcesInput struct {
 	// UsageTypeGroups. Metrics is required for GetCostAndUsageWithResources requests.
 	Metrics []string
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	noSmithyDocumentSerde
@@ -107,8 +107,9 @@ type GetCostAndUsageWithResourcesOutput struct {
 	// request.
 	GroupDefinitions []types.GroupDefinition
 
-	// The token for the next set of retrievable results. AWS provides the token when
-	// the response from a previous call has more results than the maximum page size.
+	// The token for the next set of retrievable results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextPageToken *string
 
 	// The time period that is covered by the results in the response.

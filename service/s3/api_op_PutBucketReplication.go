@@ -15,10 +15,7 @@ import (
 // Creates a replication configuration or replaces an existing one. For more
 // information, see Replication
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication.html) in the Amazon
-// S3 User Guide. To perform this operation, the user or role performing the action
-// must have the iam:PassRole
-// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
-// permission. Specify the replication configuration in the request body. In the
+// S3 User Guide. Specify the replication configuration in the request body. In the
 // replication configuration, you provide the name of the destination bucket or
 // buckets where you want Amazon S3 to replicate objects, the IAM role that Amazon
 // S3 can assume to replicate objects on your behalf, and other relevant
@@ -35,26 +32,31 @@ import (
 // delete markers differently. For more information, see Backward Compatibility
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-add-config.html#replication-backward-compat-considerations).
 // For information about enabling versioning on a bucket, see Using Versioning
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html). By default, a
-// resource owner, in this case the AWS account that created the bucket, can
-// perform this operation. The resource owner can also grant others permissions to
-// perform the operation. For more information about permissions, see Specifying
-// Permissions in a Policy
-// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html) and
-// Managing Access Permissions to Your Amazon S3 Resources
-// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
-// Handling Replication of Encrypted Objects By default, Amazon S3 doesn't
-// replicate objects that are stored at rest using server-side encryption with CMKs
-// stored in AWS KMS. To replicate AWS KMS-encrypted objects, add the following:
-// SourceSelectionCriteria, SseKmsEncryptedObjects, Status,
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html). Handling
+// Replication of Encrypted Objects By default, Amazon S3 doesn't replicate objects
+// that are stored at rest using server-side encryption with CMKs stored in Amazon
+// Web Services KMS. To replicate Amazon Web Services KMS-encrypted objects, add
+// the following: SourceSelectionCriteria, SseKmsEncryptedObjects, Status,
 // EncryptionConfiguration, and ReplicaKmsKeyID. For information about replication
-// configuration, see Replicating Objects Created with SSE Using CMKs stored in AWS
-// KMS
+// configuration, see Replicating Objects Created with SSE Using CMKs stored in
+// Amazon Web Services KMS
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html).
 // For information on PutBucketReplication errors, see List of replication-related
 // error codes
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html#ReplicationErrorCodeList)
-// The following operations are related to PutBucketReplication:
+// Permissions To create a PutBucketReplication request, you must have
+// s3:PutReplicationConfiguration permissions for the bucket. By default, a
+// resource owner, in this case the Amazon Web Services account that created the
+// bucket, can perform this operation. The resource owner can also grant others
+// permissions to perform the operation. For more information about permissions,
+// see Specifying Permissions in a Policy
+// (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html) and
+// Managing Access Permissions to Your Amazon S3 Resources
+// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html).
+// To perform this operation, the user or role performing the action must have the
+// iam:PassRole
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_use_passrole.html)
+// permission. The following operations are related to PutBucketReplication:
 //
 // *
 // GetBucketReplication
@@ -94,8 +96,9 @@ type PutBucketReplicationInput struct {
 	// The base64-encoded 128-bit MD5 digest of the data. You must use this header as a
 	// message integrity check to verify that the request body was not corrupted in
 	// transit. For more information, see RFC 1864
-	// (http://www.ietf.org/rfc/rfc1864.txt). For requests made using the AWS Command
-	// Line Interface (CLI) or AWS SDKs, this field is calculated automatically.
+	// (http://www.ietf.org/rfc/rfc1864.txt). For requests made using the Amazon Web
+	// Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is
+	// calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

@@ -21,8 +21,8 @@ import (
 // information, see the following sections in the Amazon QuickSight User Guide:
 //
 // *
-// Embedding the Amazon QuickSight Console
-// (https://docs.aws.amazon.com/quicksight/latest/user/embedding-the-quicksight-console.html)
+// Embedding the Amazon QuickSight Console Using GetSessionEmbedUrl
+// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users-get.html)
 //
 // *
 // Customizing Access to the Amazon QuickSight Console

@@ -30,14 +30,13 @@ import (
 // stream that belongs to the same account as the subscription filter, for
 // same-account delivery.
 //
-// * An AWS Lambda function that belongs to the same
-// account as the subscription filter, for same-account delivery.
+// * An Lambda function that belongs to the same account as
+// the subscription filter, for same-account delivery.
 //
-// Each log group
-// can have up to two subscription filters associated with it. If you are updating
-// an existing filter, you must specify the correct name in filterName. To perform
-// a PutSubscriptionFilter operation, you must also have the iam:PassRole
-// permission.
+// Each log group can have up
+// to two subscription filters associated with it. If you are updating an existing
+// filter, you must specify the correct name in filterName. To perform a
+// PutSubscriptionFilter operation, you must also have the iam:PassRole permission.
 func (c *Client) PutSubscriptionFilter(ctx context.Context, params *PutSubscriptionFilterInput, optFns ...func(*Options)) (*PutSubscriptionFilterOutput, error) {
 	if params == nil {
 		params = &PutSubscriptionFilterInput{}
@@ -72,9 +71,8 @@ type PutSubscriptionFilterInput struct {
 	// An Amazon Kinesis Firehose delivery stream belonging to the same account as the
 	// subscription filter, for same-account delivery.
 	//
-	// * An AWS Lambda function
-	// belonging to the same account as the subscription filter, for same-account
-	// delivery.
+	// * A Lambda function belonging
+	// to the same account as the subscription filter, for same-account delivery.
 	//
 	// This member is required.
 	DestinationArn *string

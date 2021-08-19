@@ -79,6 +79,7 @@ const (
 	ConnectorTypeUpsolver         ConnectorType = "Upsolver"
 	ConnectorTypeHoneycode        ConnectorType = "Honeycode"
 	ConnectorTypeCustomerprofiles ConnectorType = "CustomerProfiles"
+	ConnectorTypeSapodata         ConnectorType = "SAPOData"
 )
 
 // Values returns all known values for ConnectorType. Note that this can be
@@ -107,6 +108,7 @@ func (ConnectorType) Values() []ConnectorType {
 		"Upsolver",
 		"Honeycode",
 		"CustomerProfiles",
+		"SAPOData",
 	}
 }
 
@@ -535,6 +537,52 @@ func (PrefixType) Values() []PrefixType {
 	}
 }
 
+type PrivateConnectionProvisioningFailureCause string
+
+// Enum values for PrivateConnectionProvisioningFailureCause
+const (
+	PrivateConnectionProvisioningFailureCauseConnectorAuthentication PrivateConnectionProvisioningFailureCause = "CONNECTOR_AUTHENTICATION"
+	PrivateConnectionProvisioningFailureCauseConnectorServer         PrivateConnectionProvisioningFailureCause = "CONNECTOR_SERVER"
+	PrivateConnectionProvisioningFailureCauseInternalServer          PrivateConnectionProvisioningFailureCause = "INTERNAL_SERVER"
+	PrivateConnectionProvisioningFailureCauseAccessDenied            PrivateConnectionProvisioningFailureCause = "ACCESS_DENIED"
+	PrivateConnectionProvisioningFailureCauseValidation              PrivateConnectionProvisioningFailureCause = "VALIDATION"
+)
+
+// Values returns all known values for PrivateConnectionProvisioningFailureCause.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PrivateConnectionProvisioningFailureCause) Values() []PrivateConnectionProvisioningFailureCause {
+	return []PrivateConnectionProvisioningFailureCause{
+		"CONNECTOR_AUTHENTICATION",
+		"CONNECTOR_SERVER",
+		"INTERNAL_SERVER",
+		"ACCESS_DENIED",
+		"VALIDATION",
+	}
+}
+
+type PrivateConnectionProvisioningStatus string
+
+// Enum values for PrivateConnectionProvisioningStatus
+const (
+	PrivateConnectionProvisioningStatusFailed  PrivateConnectionProvisioningStatus = "FAILED"
+	PrivateConnectionProvisioningStatusPending PrivateConnectionProvisioningStatus = "PENDING"
+	PrivateConnectionProvisioningStatusCreated PrivateConnectionProvisioningStatus = "CREATED"
+)
+
+// Values returns all known values for PrivateConnectionProvisioningStatus. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (PrivateConnectionProvisioningStatus) Values() []PrivateConnectionProvisioningStatus {
+	return []PrivateConnectionProvisioningStatus{
+		"FAILED",
+		"PENDING",
+		"CREATED",
+	}
+}
+
 type S3ConnectorOperator string
 
 // Enum values for S3ConnectorOperator
@@ -621,6 +669,62 @@ const (
 // The ordering of this slice is not guaranteed to be stable across updates.
 func (SalesforceConnectorOperator) Values() []SalesforceConnectorOperator {
 	return []SalesforceConnectorOperator{
+		"PROJECTION",
+		"LESS_THAN",
+		"CONTAINS",
+		"GREATER_THAN",
+		"BETWEEN",
+		"LESS_THAN_OR_EQUAL_TO",
+		"GREATER_THAN_OR_EQUAL_TO",
+		"EQUAL_TO",
+		"NOT_EQUAL_TO",
+		"ADDITION",
+		"MULTIPLICATION",
+		"DIVISION",
+		"SUBTRACTION",
+		"MASK_ALL",
+		"MASK_FIRST_N",
+		"MASK_LAST_N",
+		"VALIDATE_NON_NULL",
+		"VALIDATE_NON_ZERO",
+		"VALIDATE_NON_NEGATIVE",
+		"VALIDATE_NUMERIC",
+		"NO_OP",
+	}
+}
+
+type SAPODataConnectorOperator string
+
+// Enum values for SAPODataConnectorOperator
+const (
+	SAPODataConnectorOperatorProjection           SAPODataConnectorOperator = "PROJECTION"
+	SAPODataConnectorOperatorLessThan             SAPODataConnectorOperator = "LESS_THAN"
+	SAPODataConnectorOperatorContains             SAPODataConnectorOperator = "CONTAINS"
+	SAPODataConnectorOperatorGreaterThan          SAPODataConnectorOperator = "GREATER_THAN"
+	SAPODataConnectorOperatorBetween              SAPODataConnectorOperator = "BETWEEN"
+	SAPODataConnectorOperatorLessThanOrEqualTo    SAPODataConnectorOperator = "LESS_THAN_OR_EQUAL_TO"
+	SAPODataConnectorOperatorGreaterThanOrEqualTo SAPODataConnectorOperator = "GREATER_THAN_OR_EQUAL_TO"
+	SAPODataConnectorOperatorEqualTo              SAPODataConnectorOperator = "EQUAL_TO"
+	SAPODataConnectorOperatorNotEqualTo           SAPODataConnectorOperator = "NOT_EQUAL_TO"
+	SAPODataConnectorOperatorAddition             SAPODataConnectorOperator = "ADDITION"
+	SAPODataConnectorOperatorMultiplication       SAPODataConnectorOperator = "MULTIPLICATION"
+	SAPODataConnectorOperatorDivision             SAPODataConnectorOperator = "DIVISION"
+	SAPODataConnectorOperatorSubtraction          SAPODataConnectorOperator = "SUBTRACTION"
+	SAPODataConnectorOperatorMaskAll              SAPODataConnectorOperator = "MASK_ALL"
+	SAPODataConnectorOperatorMaskFirstN           SAPODataConnectorOperator = "MASK_FIRST_N"
+	SAPODataConnectorOperatorMaskLastN            SAPODataConnectorOperator = "MASK_LAST_N"
+	SAPODataConnectorOperatorValidateNonNull      SAPODataConnectorOperator = "VALIDATE_NON_NULL"
+	SAPODataConnectorOperatorValidateNonZero      SAPODataConnectorOperator = "VALIDATE_NON_ZERO"
+	SAPODataConnectorOperatorValidateNonNegative  SAPODataConnectorOperator = "VALIDATE_NON_NEGATIVE"
+	SAPODataConnectorOperatorValidateNumeric      SAPODataConnectorOperator = "VALIDATE_NUMERIC"
+	SAPODataConnectorOperatorNoOp                 SAPODataConnectorOperator = "NO_OP"
+)
+
+// Values returns all known values for SAPODataConnectorOperator. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (SAPODataConnectorOperator) Values() []SAPODataConnectorOperator {
+	return []SAPODataConnectorOperator{
 		"PROJECTION",
 		"LESS_THAN",
 		"CONTAINS",

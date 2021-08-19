@@ -16,7 +16,12 @@ import (
 // profile attributes, object types, profile keys, and encryption keys. You can
 // create multiple domains, and each domain can have multiple third-party
 // integrations. Each Amazon Connect instance can be associated with only one
-// domain. Multiple Amazon Connect instances can be associated with one domain.
+// domain. Multiple Amazon Connect instances can be associated with one domain. Use
+// this API or UpdateDomain
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_UpdateDomain.html)
+// to enable identity resolution
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html):
+// set Matching to true.
 func (c *Client) CreateDomain(ctx context.Context, params *CreateDomainInput, optFns ...func(*Options)) (*CreateDomainOutput, error) {
 	if params == nil {
 		params = &CreateDomainInput{}
@@ -55,8 +60,12 @@ type CreateDomainInput struct {
 	// before it is placed in permanent or semi-permanent storage.
 	DefaultEncryptionKey *string
 
-	// The process of matching duplicate profiles. This process runs every Saturday at
-	// 12AM.
+	// The process of matching duplicate profiles. If Matching = true, Amazon Connect
+	// Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to
+	// detect duplicate profiles in your domains. After that batch process completes,
+	// use the GetMatches
+	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+	// API to return and review the results.
 	Matching *types.MatchingRequest
 
 	// The tags used to organize, track, or control access for this resource.
@@ -96,8 +105,12 @@ type CreateDomainOutput struct {
 	// before it is placed in permanent or semi-permanent storage.
 	DefaultEncryptionKey *string
 
-	// The process of matching duplicate profiles. This process runs every Saturday at
-	// 12AM.
+	// The process of matching duplicate profiles. If Matching = true, Amazon Connect
+	// Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to
+	// detect duplicate profiles in your domains. After that batch process completes,
+	// use the GetMatches
+	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+	// API to return and review the results.
 	Matching *types.MatchingResponse
 
 	// The tags used to organize, track, or control access for this resource.

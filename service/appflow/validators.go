@@ -379,6 +379,24 @@ func validateAmplitudeSourceProperties(v *types.AmplitudeSourceProperties) error
 	}
 }
 
+func validateBasicAuthCredentials(v *types.BasicAuthCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BasicAuthCredentials"}
+	if v.Username == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Username"))
+	}
+	if v.Password == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Password"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateConnectorProfileConfig(v *types.ConnectorProfileConfig) error {
 	if v == nil {
 		return nil
@@ -480,6 +498,11 @@ func validateConnectorProfileCredentials(v *types.ConnectorProfileCredentials) e
 			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.SAPOData != nil {
+		if err := validateSAPODataConnectorProfileCredentials(v.SAPOData); err != nil {
+			invalidParams.AddNested("SAPOData", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -540,6 +563,11 @@ func validateConnectorProfileProperties(v *types.ConnectorProfileProperties) err
 	if v.Zendesk != nil {
 		if err := validateZendeskConnectorProfileProperties(v.Zendesk); err != nil {
 			invalidParams.AddNested("Zendesk", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.SAPOData != nil {
+		if err := validateSAPODataConnectorProfileProperties(v.SAPOData); err != nil {
+			invalidParams.AddNested("SAPOData", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -918,6 +946,45 @@ func validateMarketoSourceProperties(v *types.MarketoSourceProperties) error {
 	}
 }
 
+func validateOAuthCredentials(v *types.OAuthCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OAuthCredentials"}
+	if v.ClientId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientId"))
+	}
+	if v.ClientSecret == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientSecret"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOAuthProperties(v *types.OAuthProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OAuthProperties"}
+	if v.TokenUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TokenUrl"))
+	}
+	if v.AuthCodeUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AuthCodeUrl"))
+	}
+	if v.OAuthScopes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OAuthScopes"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateRedshiftConnectorProfileCredentials(v *types.RedshiftConnectorProfileCredentials) error {
 	if v == nil {
 		return nil
@@ -1027,6 +1094,54 @@ func validateSalesforceSourceProperties(v *types.SalesforceSourceProperties) err
 	invalidParams := smithy.InvalidParamsError{Context: "SalesforceSourceProperties"}
 	if v.Object == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Object"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSAPODataConnectorProfileCredentials(v *types.SAPODataConnectorProfileCredentials) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SAPODataConnectorProfileCredentials"}
+	if v.BasicAuthCredentials != nil {
+		if err := validateBasicAuthCredentials(v.BasicAuthCredentials); err != nil {
+			invalidParams.AddNested("BasicAuthCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OAuthCredentials != nil {
+		if err := validateOAuthCredentials(v.OAuthCredentials); err != nil {
+			invalidParams.AddNested("OAuthCredentials", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateSAPODataConnectorProfileProperties(v *types.SAPODataConnectorProfileProperties) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SAPODataConnectorProfileProperties"}
+	if v.ApplicationHostUrl == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationHostUrl"))
+	}
+	if v.ApplicationServicePath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ApplicationServicePath"))
+	}
+	if v.ClientNumber == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientNumber"))
+	}
+	if v.OAuthProperties != nil {
+		if err := validateOAuthProperties(v.OAuthProperties); err != nil {
+			invalidParams.AddNested("OAuthProperties", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1854,7 +1969,9 @@ func validateOpUpdateFlowInput(v *UpdateFlowInput) error {
 			invalidParams.AddNested("TriggerConfig", err.(smithy.InvalidParamsError))
 		}
 	}
-	if v.SourceFlowConfig != nil {
+	if v.SourceFlowConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SourceFlowConfig"))
+	} else if v.SourceFlowConfig != nil {
 		if err := validateSourceFlowConfig(v.SourceFlowConfig); err != nil {
 			invalidParams.AddNested("SourceFlowConfig", err.(smithy.InvalidParamsError))
 		}

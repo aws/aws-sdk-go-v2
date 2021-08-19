@@ -367,6 +367,8 @@ type StandardIdentifier string
 // Enum values for StandardIdentifier
 const (
 	StandardIdentifierProfile    StandardIdentifier = "PROFILE"
+	StandardIdentifierAsset      StandardIdentifier = "ASSET"
+	StandardIdentifierCase       StandardIdentifier = "CASE"
 	StandardIdentifierUnique     StandardIdentifier = "UNIQUE"
 	StandardIdentifierSecondary  StandardIdentifier = "SECONDARY"
 	StandardIdentifierLookupOnly StandardIdentifier = "LOOKUP_ONLY"
@@ -379,6 +381,8 @@ const (
 func (StandardIdentifier) Values() []StandardIdentifier {
 	return []StandardIdentifier{
 		"PROFILE",
+		"ASSET",
+		"CASE",
 		"UNIQUE",
 		"SECONDARY",
 		"LOOKUP_ONLY",

@@ -1469,6 +1469,23 @@ func awsRestjson1_serializeDocumentAmplitudeSourceProperties(v *types.AmplitudeS
 	return nil
 }
 
+func awsRestjson1_serializeDocumentBasicAuthCredentials(v *types.BasicAuthCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Password != nil {
+		ok := object.Key("password")
+		ok.String(*v.Password)
+	}
+
+	if v.Username != nil {
+		ok := object.Key("username")
+		ok.String(*v.Username)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentConnectorOAuthRequest(v *types.ConnectorOAuthRequest, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1528,6 +1545,11 @@ func awsRestjson1_serializeDocumentConnectorOperator(v *types.ConnectorOperator,
 	if len(v.Salesforce) > 0 {
 		ok := object.Key("Salesforce")
 		ok.String(string(v.Salesforce))
+	}
+
+	if len(v.SAPOData) > 0 {
+		ok := object.Key("SAPOData")
+		ok.String(string(v.SAPOData))
 	}
 
 	if len(v.ServiceNow) > 0 {
@@ -1647,6 +1669,13 @@ func awsRestjson1_serializeDocumentConnectorProfileCredentials(v *types.Connecto
 	if v.Salesforce != nil {
 		ok := object.Key("Salesforce")
 		if err := awsRestjson1_serializeDocumentSalesforceConnectorProfileCredentials(v.Salesforce, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SAPOData != nil {
+		ok := object.Key("SAPOData")
+		if err := awsRestjson1_serializeDocumentSAPODataConnectorProfileCredentials(v.SAPOData, ok); err != nil {
 			return err
 		}
 	}
@@ -1777,6 +1806,13 @@ func awsRestjson1_serializeDocumentConnectorProfileProperties(v *types.Connector
 	if v.Salesforce != nil {
 		ok := object.Key("Salesforce")
 		if err := awsRestjson1_serializeDocumentSalesforceConnectorProfileProperties(v.Salesforce, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SAPOData != nil {
+		ok := object.Key("SAPOData")
+		if err := awsRestjson1_serializeDocumentSAPODataConnectorProfileProperties(v.SAPOData, ok); err != nil {
 			return err
 		}
 	}
@@ -2330,6 +2366,75 @@ func awsRestjson1_serializeDocumentMarketoSourceProperties(v *types.MarketoSourc
 	return nil
 }
 
+func awsRestjson1_serializeDocumentOAuthCredentials(v *types.OAuthCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AccessToken != nil {
+		ok := object.Key("accessToken")
+		ok.String(*v.AccessToken)
+	}
+
+	if v.ClientId != nil {
+		ok := object.Key("clientId")
+		ok.String(*v.ClientId)
+	}
+
+	if v.ClientSecret != nil {
+		ok := object.Key("clientSecret")
+		ok.String(*v.ClientSecret)
+	}
+
+	if v.OAuthRequest != nil {
+		ok := object.Key("oAuthRequest")
+		if err := awsRestjson1_serializeDocumentConnectorOAuthRequest(v.OAuthRequest, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RefreshToken != nil {
+		ok := object.Key("refreshToken")
+		ok.String(*v.RefreshToken)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOAuthProperties(v *types.OAuthProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthCodeUrl != nil {
+		ok := object.Key("authCodeUrl")
+		ok.String(*v.AuthCodeUrl)
+	}
+
+	if v.OAuthScopes != nil {
+		ok := object.Key("oAuthScopes")
+		if err := awsRestjson1_serializeDocumentOAuthScopeList(v.OAuthScopes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TokenUrl != nil {
+		ok := object.Key("tokenUrl")
+		ok.String(*v.TokenUrl)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOAuthScopeList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentPrefixConfig(v *types.PrefixConfig, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2581,6 +2686,83 @@ func awsRestjson1_serializeDocumentSalesforceSourceProperties(v *types.Salesforc
 	if v.Object != nil {
 		ok := object.Key("object")
 		ok.String(*v.Object)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSAPODataConnectorProfileCredentials(v *types.SAPODataConnectorProfileCredentials, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BasicAuthCredentials != nil {
+		ok := object.Key("basicAuthCredentials")
+		if err := awsRestjson1_serializeDocumentBasicAuthCredentials(v.BasicAuthCredentials, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OAuthCredentials != nil {
+		ok := object.Key("oAuthCredentials")
+		if err := awsRestjson1_serializeDocumentOAuthCredentials(v.OAuthCredentials, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSAPODataConnectorProfileProperties(v *types.SAPODataConnectorProfileProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ApplicationHostUrl != nil {
+		ok := object.Key("applicationHostUrl")
+		ok.String(*v.ApplicationHostUrl)
+	}
+
+	if v.ApplicationServicePath != nil {
+		ok := object.Key("applicationServicePath")
+		ok.String(*v.ApplicationServicePath)
+	}
+
+	if v.ClientNumber != nil {
+		ok := object.Key("clientNumber")
+		ok.String(*v.ClientNumber)
+	}
+
+	if v.LogonLanguage != nil {
+		ok := object.Key("logonLanguage")
+		ok.String(*v.LogonLanguage)
+	}
+
+	if v.OAuthProperties != nil {
+		ok := object.Key("oAuthProperties")
+		if err := awsRestjson1_serializeDocumentOAuthProperties(v.OAuthProperties, ok); err != nil {
+			return err
+		}
+	}
+
+	{
+		ok := object.Key("portNumber")
+		ok.Integer(v.PortNumber)
+	}
+
+	if v.PrivateLinkServiceName != nil {
+		ok := object.Key("privateLinkServiceName")
+		ok.String(*v.PrivateLinkServiceName)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSAPODataSourceProperties(v *types.SAPODataSourceProperties, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ObjectPath != nil {
+		ok := object.Key("objectPath")
+		ok.String(*v.ObjectPath)
 	}
 
 	return nil
@@ -2901,6 +3083,13 @@ func awsRestjson1_serializeDocumentSourceConnectorProperties(v *types.SourceConn
 		}
 	}
 
+	if v.SAPOData != nil {
+		ok := object.Key("SAPOData")
+		if err := awsRestjson1_serializeDocumentSAPODataSourceProperties(v.SAPOData, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ServiceNow != nil {
 		ok := object.Key("ServiceNow")
 		if err := awsRestjson1_serializeDocumentServiceNowSourceProperties(v.ServiceNow, ok); err != nil {
@@ -3207,6 +3396,26 @@ func awsRestjson1_serializeDocumentVeevaConnectorProfileProperties(v *types.Veev
 func awsRestjson1_serializeDocumentVeevaSourceProperties(v *types.VeevaSourceProperties, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DocumentType != nil {
+		ok := object.Key("documentType")
+		ok.String(*v.DocumentType)
+	}
+
+	if v.IncludeAllVersions {
+		ok := object.Key("includeAllVersions")
+		ok.Boolean(v.IncludeAllVersions)
+	}
+
+	if v.IncludeRenditions {
+		ok := object.Key("includeRenditions")
+		ok.Boolean(v.IncludeRenditions)
+	}
+
+	if v.IncludeSourceFiles {
+		ok := object.Key("includeSourceFiles")
+		ok.Boolean(v.IncludeSourceFiles)
+	}
 
 	if v.Object != nil {
 		ok := object.Key("object")

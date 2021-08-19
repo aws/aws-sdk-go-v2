@@ -209,7 +209,8 @@ func (e *ServiceUnavailableException) ErrorMessage() string {
 func (e *ServiceUnavailableException) ErrorCode() string             { return "ServiceUnavailableException" }
 func (e *ServiceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The most likely cause is an invalid AWS access key ID or secret key.
+// The most likely cause is an invalid Amazon Web Services access key ID or secret
+// key.
 type UnrecognizedClientException struct {
 	Message *string
 

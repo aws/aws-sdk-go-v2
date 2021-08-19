@@ -25,7 +25,8 @@ type Alarm struct {
 
 // Represents a CloudWatch metric of your choosing for a target tracking scaling
 // policy to use with Application Auto Scaling. For information about the available
-// metrics for a service, see AWS Services That Publish CloudWatch Metrics
+// metrics for a service, see Amazon Web Services Services That Publish CloudWatch
+// Metrics
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/aws-services-cloudwatch-metrics.html)
 // in the Amazon CloudWatch User Guide. To create your customized metric
 // specification:
@@ -90,10 +91,11 @@ type MetricDimension struct {
 }
 
 // Represents a predefined metric for a target tracking scaling policy to use with
-// Application Auto Scaling. Only the AWS services that you're using send metrics
-// to Amazon CloudWatch. To determine whether a desired metric already exists by
-// looking up its namespace and dimension using the CloudWatch metrics dashboard in
-// the console, follow the procedure in Building dashboards with CloudWatch
+// Application Auto Scaling. Only the Amazon Web Services that you're using send
+// metrics to Amazon CloudWatch. To determine whether a desired metric already
+// exists by looking up its namespace and dimension using the CloudWatch metrics
+// dashboard in the console, follow the procedure in Building dashboards with
+// CloudWatch
 // (https://docs.aws.amazon.com/autoscaling/application/userguide/monitoring-cloudwatch.html)
 // in the Application Auto Scaling User Guide.
 type PredefinedMetricSpecification struct {
@@ -109,17 +111,17 @@ type PredefinedMetricSpecification struct {
 	// target group attached to the Spot Fleet request or ECS service. You create the
 	// resource label by appending the final portion of the load balancer ARN and the
 	// final portion of the target group ARN into a single value, separated by a
-	// forward slash (/). The format is app///targetgroup//, where:
+	// forward slash (/). The format of the resource label is:
+	// app/my-alb/778d41231b141a0f/targetgroup/my-alb-target-group/943f017f100becff.
+	// Where:
 	//
-	// * app// is the
-	// final portion of the load balancer ARN
+	// * app// is the final portion of the load balancer ARN
 	//
-	// * targetgroup// is the final portion of
-	// the target group ARN.
+	// * targetgroup//
+	// is the final portion of the target group ARN.
 	//
-	// This is an example:
-	// app/EC2Co-EcsEl-1TKLTMITMM0EO/f37c06a68c1748aa/targetgroup/EC2Co-Defau-LDNM7Q3ZH1ZN/6d4ea56ca2d6a18d.
-	// To find the ARN for an Application Load Balancer, use the DescribeLoadBalancers
+	// To find the ARN for an
+	// Application Load Balancer, use the DescribeLoadBalancers
 	// (https://docs.aws.amazon.com/elasticloadbalancing/latest/APIReference/API_DescribeLoadBalancers.html)
 	// API operation. To find the ARN for the target group, use the
 	// DescribeTargetGroups
@@ -215,6 +217,11 @@ type ScalableTarget struct {
 	// unique identifier are specified using the cluster ARN. Example:
 	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
+	// *
+	// Amazon ElastiCache replication group - The resource type is replication-group
+	// and the unique identifier is the replication group name. Example:
+	// replication-group/mycluster.
+	//
 	// This member is required.
 	ResourceId *string
 
@@ -231,35 +238,36 @@ type ScalableTarget struct {
 	// ecs:service:DesiredCount - The desired task count of an ECS service.
 	//
 	// *
-	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
-	// request.
+	// elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
+	// Instance Group.
 	//
-	// * elasticmapreduce:instancegroup:InstanceCount - The instance count of
-	// an EMR Instance Group.
+	// * ec2:spot-fleet-request:TargetCapacity - The target capacity
+	// of a Spot Fleet request.
 	//
-	// * appstream:fleet:DesiredCapacity - The desired capacity
-	// of an AppStream 2.0 fleet.
+	// * appstream:fleet:DesiredCapacity - The desired
+	// capacity of an AppStream 2.0 fleet.
 	//
-	// * dynamodb:table:ReadCapacityUnits - The provisioned
-	// read capacity for a DynamoDB table.
-	//
-	// * dynamodb:table:WriteCapacityUnits - The
-	// provisioned write capacity for a DynamoDB table.
+	// * dynamodb:table:ReadCapacityUnits - The
+	// provisioned read capacity for a DynamoDB table.
 	//
 	// *
-	// dynamodb:index:ReadCapacityUnits - The provisioned read capacity for a DynamoDB
-	// global secondary index.
+	// dynamodb:table:WriteCapacityUnits - The provisioned write capacity for a
+	// DynamoDB table.
 	//
-	// * dynamodb:index:WriteCapacityUnits - The provisioned
-	// write capacity for a DynamoDB global secondary index.
+	// * dynamodb:index:ReadCapacityUnits - The provisioned read
+	// capacity for a DynamoDB global secondary index.
 	//
 	// *
-	// rds:cluster:ReadReplicaCount - The count of Aurora Replicas in an Aurora DB
-	// cluster. Available for Aurora MySQL-compatible edition and Aurora
-	// PostgreSQL-compatible edition.
+	// dynamodb:index:WriteCapacityUnits - The provisioned write capacity for a
+	// DynamoDB global secondary index.
 	//
-	// * sagemaker:variant:DesiredInstanceCount - The
-	// number of EC2 instances for an Amazon SageMaker model endpoint variant.
+	// * rds:cluster:ReadReplicaCount - The count of
+	// Aurora Replicas in an Aurora DB cluster. Available for Aurora MySQL-compatible
+	// edition and Aurora PostgreSQL-compatible edition.
+	//
+	// *
+	// sagemaker:variant:DesiredInstanceCount - The number of EC2 instances for an
+	// Amazon SageMaker model endpoint variant.
 	//
 	// *
 	// custom-resource:ResourceType:Property - The scalable dimension for a custom
@@ -287,11 +295,18 @@ type ScalableTarget struct {
 	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	// brokers in an Amazon MSK cluster.
 	//
+	// * elasticache:replication-group:NodeGroups -
+	// The number of node groups for an Amazon ElastiCache replication group.
+	//
+	// *
+	// elasticache:replication-group:Replicas - The number of replicas per node group
+	// for an Amazon ElastiCache replication group.
+	//
 	// This member is required.
 	ScalableDimension ScalableDimension
 
-	// The namespace of the AWS service that provides the resource, or a
-	// custom-resource.
+	// The namespace of the Amazon Web Services service that provides the resource, or
+	// a custom-resource.
 	//
 	// This member is required.
 	ServiceNamespace ServiceNamespace
@@ -410,6 +425,11 @@ type ScalingActivity struct {
 	// unique identifier are specified using the cluster ARN. Example:
 	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
+	// *
+	// Amazon ElastiCache replication group - The resource type is replication-group
+	// and the unique identifier is the replication group name. Example:
+	// replication-group/mycluster.
+	//
 	// This member is required.
 	ResourceId *string
 
@@ -419,12 +439,12 @@ type ScalingActivity struct {
 	// * ecs:service:DesiredCount - The desired task count
 	// of an ECS service.
 	//
-	// * ec2:spot-fleet-request:TargetCapacity - The target
-	// capacity of a Spot Fleet request.
+	// * elasticmapreduce:instancegroup:InstanceCount - The
+	// instance count of an EMR Instance Group.
 	//
 	// *
-	// elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
-	// Instance Group.
+	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
+	// request.
 	//
 	// * appstream:fleet:DesiredCapacity - The desired capacity of an
 	// AppStream 2.0 fleet.
@@ -476,11 +496,18 @@ type ScalingActivity struct {
 	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	// brokers in an Amazon MSK cluster.
 	//
+	// * elasticache:replication-group:NodeGroups -
+	// The number of node groups for an Amazon ElastiCache replication group.
+	//
+	// *
+	// elasticache:replication-group:Replicas - The number of replicas per node group
+	// for an Amazon ElastiCache replication group.
+	//
 	// This member is required.
 	ScalableDimension ScalableDimension
 
-	// The namespace of the AWS service that provides the resource, or a
-	// custom-resource.
+	// The namespace of the Amazon Web Services service that provides the resource, or
+	// a custom-resource.
 	//
 	// This member is required.
 	ServiceNamespace ServiceNamespace
@@ -601,6 +628,11 @@ type ScalingPolicy struct {
 	// unique identifier are specified using the cluster ARN. Example:
 	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
+	// *
+	// Amazon ElastiCache replication group - The resource type is replication-group
+	// and the unique identifier is the replication group name. Example:
+	// replication-group/mycluster.
+	//
 	// This member is required.
 	ResourceId *string
 
@@ -610,12 +642,12 @@ type ScalingPolicy struct {
 	// * ecs:service:DesiredCount - The desired task count
 	// of an ECS service.
 	//
-	// * ec2:spot-fleet-request:TargetCapacity - The target
-	// capacity of a Spot Fleet request.
+	// * elasticmapreduce:instancegroup:InstanceCount - The
+	// instance count of an EMR Instance Group.
 	//
 	// *
-	// elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
-	// Instance Group.
+	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
+	// request.
 	//
 	// * appstream:fleet:DesiredCapacity - The desired capacity of an
 	// AppStream 2.0 fleet.
@@ -667,11 +699,18 @@ type ScalingPolicy struct {
 	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	// brokers in an Amazon MSK cluster.
 	//
+	// * elasticache:replication-group:NodeGroups -
+	// The number of node groups for an Amazon ElastiCache replication group.
+	//
+	// *
+	// elasticache:replication-group:Replicas - The number of replicas per node group
+	// for an Amazon ElastiCache replication group.
+	//
 	// This member is required.
 	ScalableDimension ScalableDimension
 
-	// The namespace of the AWS service that provides the resource, or a
-	// custom-resource.
+	// The namespace of the Amazon Web Services service that provides the resource, or
+	// a custom-resource.
 	//
 	// This member is required.
 	ServiceNamespace ServiceNamespace
@@ -763,6 +802,11 @@ type ScheduledAction struct {
 	// unique identifier are specified using the cluster ARN. Example:
 	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
+	// *
+	// Amazon ElastiCache replication group - The resource type is replication-group
+	// and the unique identifier is the replication group name. Example:
+	// replication-group/mycluster.
+	//
 	// This member is required.
 	ResourceId *string
 
@@ -801,8 +845,8 @@ type ScheduledAction struct {
 	// This member is required.
 	ScheduledActionName *string
 
-	// The namespace of the AWS service that provides the resource, or a
-	// custom-resource.
+	// The namespace of the Amazon Web Services service that provides the resource, or
+	// a custom-resource.
 	//
 	// This member is required.
 	ServiceNamespace ServiceNamespace
@@ -816,12 +860,12 @@ type ScheduledAction struct {
 	// * ecs:service:DesiredCount - The desired task count
 	// of an ECS service.
 	//
-	// * ec2:spot-fleet-request:TargetCapacity - The target
-	// capacity of a Spot Fleet request.
+	// * elasticmapreduce:instancegroup:InstanceCount - The
+	// instance count of an EMR Instance Group.
 	//
 	// *
-	// elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
-	// Instance Group.
+	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
+	// request.
 	//
 	// * appstream:fleet:DesiredCapacity - The desired capacity of an
 	// AppStream 2.0 fleet.
@@ -872,6 +916,13 @@ type ScheduledAction struct {
 	// *
 	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	// brokers in an Amazon MSK cluster.
+	//
+	// * elasticache:replication-group:NodeGroups -
+	// The number of node groups for an Amazon ElastiCache replication group.
+	//
+	// *
+	// elasticache:replication-group:Replicas - The number of replicas per node group
+	// for an Amazon ElastiCache replication group.
 	ScalableDimension ScalableDimension
 
 	// The new minimum and maximum capacity. You can set both values or just one. At
@@ -980,7 +1031,8 @@ type StepScalingPolicyConfiguration struct {
 	// cooldown period after a scale-in activity, Application Auto Scaling scales out
 	// the target immediately. In this case, the cooldown period for the scale-in
 	// activity stops and doesn't complete. Application Auto Scaling provides a default
-	// value of 300 for the following scalable targets:
+	// value of 600 for Amazon ElastiCache replication groups and a default value of
+	// 300 for the following scalable targets:
 	//
 	// * ECS services
 	//
@@ -1097,8 +1149,55 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	// expired. However, if another alarm triggers a scale-out activity during the
 	// scale-in cooldown period, Application Auto Scaling scales out the target
 	// immediately. In this case, the scale-in cooldown period stops and doesn't
-	// complete. Application Auto Scaling provides a default value of 300 for the
-	// following scalable targets:
+	// complete. Application Auto Scaling provides a default value of 600 for Amazon
+	// ElastiCache replication groups and a default value of 300 for the following
+	// scalable targets:
+	//
+	// * ECS services
+	//
+	// * Spot Fleet requests
+	//
+	// * EMR clusters
+	//
+	// *
+	// AppStream 2.0 fleets
+	//
+	// * Aurora DB clusters
+	//
+	// * Amazon SageMaker endpoint
+	// variants
+	//
+	// * Custom resources
+	//
+	// For all other scalable targets, the default value
+	// is 0:
+	//
+	// * DynamoDB tables
+	//
+	// * DynamoDB global secondary indexes
+	//
+	// * Amazon
+	// Comprehend document classification and entity recognizer endpoints
+	//
+	// * Lambda
+	// provisioned concurrency
+	//
+	// * Amazon Keyspaces tables
+	//
+	// * Amazon MSK broker storage
+	ScaleInCooldown *int32
+
+	// The amount of time, in seconds, to wait for a previous scale-out activity to
+	// take effect. With the scale-out cooldown period, the intention is to
+	// continuously (but not excessively) scale out. After Application Auto Scaling
+	// successfully scales out using a target tracking scaling policy, it starts to
+	// calculate the cooldown time. The scaling policy won't increase the desired
+	// capacity again unless either a larger scale out is triggered or the cooldown
+	// period ends. While the cooldown period is in effect, the capacity added by the
+	// initiating scale-out activity is calculated as part of the desired capacity for
+	// the next scale-out activity. Application Auto Scaling provides a default value
+	// of 600 for Amazon ElastiCache replication groups and a default value of 300 for
+	// the following scalable targets:
 	//
 	// * ECS services
 	//
@@ -1133,52 +1232,6 @@ type TargetTrackingScalingPolicyConfiguration struct {
 	//
 	// * Amazon MSK broker
 	// storage
-	ScaleInCooldown *int32
-
-	// The amount of time, in seconds, to wait for a previous scale-out activity to
-	// take effect. With the scale-out cooldown period, the intention is to
-	// continuously (but not excessively) scale out. After Application Auto Scaling
-	// successfully scales out using a target tracking scaling policy, it starts to
-	// calculate the cooldown time. The scaling policy won't increase the desired
-	// capacity again unless either a larger scale out is triggered or the cooldown
-	// period ends. While the cooldown period is in effect, the capacity added by the
-	// initiating scale-out activity is calculated as part of the desired capacity for
-	// the next scale-out activity. Application Auto Scaling provides a default value
-	// of 300 for the following scalable targets:
-	//
-	// * ECS services
-	//
-	// * Spot Fleet
-	// requests
-	//
-	// * EMR clusters
-	//
-	// * AppStream 2.0 fleets
-	//
-	// * Aurora DB clusters
-	//
-	// * Amazon
-	// SageMaker endpoint variants
-	//
-	// * Custom resources
-	//
-	// For all other scalable targets,
-	// the default value is 0:
-	//
-	// * DynamoDB tables
-	//
-	// * DynamoDB global secondary
-	// indexes
-	//
-	// * Amazon Comprehend document classification and entity recognizer
-	// endpoints
-	//
-	// * Lambda provisioned concurrency
-	//
-	// * Amazon Keyspaces tables
-	//
-	// * Amazon
-	// MSK broker storage
 	ScaleOutCooldown *int32
 
 	noSmithyDocumentSerde

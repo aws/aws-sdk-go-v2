@@ -17,12 +17,12 @@ import (
 // replication groups, those actions will be replicated to all nodes in the
 // replication group. For more information, see Resource-level permissions
 // (http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html).
-// For example, you can use cost-allocation tags to your ElastiCache resources, AWS
-// generates a cost allocation report as a comma-separated value (CSV) file with
-// your usage and costs aggregated by your tags. You can apply tags that represent
-// business categories (such as cost centers, application names, or owners) to
-// organize your costs across multiple services. For more information, see Using
-// Cost Allocation Tags in Amazon ElastiCache
+// For example, you can use cost-allocation tags to your ElastiCache resources,
+// Amazon generates a cost allocation report as a comma-separated value (CSV) file
+// with your usage and costs aggregated by your tags. You can apply tags that
+// represent business categories (such as cost centers, application names, or
+// owners) to organize your costs across multiple services. For more information,
+// see Using Cost Allocation Tags in Amazon ElastiCache
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html) in
 // the ElastiCache User Guide.
 func (c *Client) AddTagsToResource(ctx context.Context, params *AddTagsToResourceInput, optFns ...func(*Options)) (*AddTagsToResourceOutput, error) {
@@ -47,7 +47,7 @@ type AddTagsToResourceInput struct {
 	// added, for example arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster or
 	// arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot. ElastiCache
 	// resources are cluster and snapshot. For more information about ARNs, see Amazon
-	// Resource Names (ARNs) and AWS Service Namespaces
+	// Resource Names (ARNs) and Amazon Service Namespaces
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html).
 	//
 	// This member is required.

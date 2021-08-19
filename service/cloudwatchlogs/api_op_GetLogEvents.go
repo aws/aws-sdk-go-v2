@@ -56,14 +56,13 @@ type GetLogEventsInput struct {
 	Limit *int32
 
 	// The token for the next set of items to return. (You received this token from a
-	// previous call.) Using this token works only when you specify true for
-	// startFromHead.
+	// previous call.)
 	NextToken *string
 
 	// If the value is true, the earliest log events are returned first. If the value
 	// is false, the latest log events are returned first. The default value is false.
-	// If you are using nextToken in this operation, you must specify true for
-	// startFromHead.
+	// If you are using a previous nextForwardToken value as the nextToken in this
+	// operation, you must specify true for startFromHead.
 	StartFromHead *bool
 
 	// The start of the time range, expressed as the number of milliseconds after Jan

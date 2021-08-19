@@ -113,11 +113,11 @@ type GetReservationCoverageInput struct {
 	// defaults to EC2. Cost category is also supported.
 	Filter *types.Expression
 
-	// The granularity of the AWS cost data for the reservation. Valid values are
-	// MONTHLY and DAILY. If GroupBy is set, Granularity can't be set. If Granularity
-	// isn't set, the response object doesn't include Granularity, either MONTHLY or
-	// DAILY. The GetReservationCoverage operation supports only DAILY and MONTHLY
-	// granularities.
+	// The granularity of the Amazon Web Services cost data for the reservation. Valid
+	// values are MONTHLY and DAILY. If GroupBy is set, Granularity can't be set. If
+	// Granularity isn't set, the response object doesn't include Granularity, either
+	// MONTHLY or DAILY. The GetReservationCoverage operation supports only DAILY and
+	// MONTHLY granularities.
 	Granularity types.Granularity
 
 	// You can group the data by the following attributes:
@@ -146,16 +146,18 @@ type GetReservationCoverageInput struct {
 	GroupBy []types.GroupDefinition
 
 	// The maximum number of objects that you returned for this request. If more
-	// objects are available, in the response, AWS provides a NextPageToken value that
-	// you can use in a subsequent call to get the next batch of objects.
+	// objects are available, in the response, Amazon Web Services provides a
+	// NextPageToken value that you can use in a subsequent call to get the next batch
+	// of objects.
 	MaxResults int32
 
 	// The measurement that you want your reservation coverage reported in. Valid
 	// values are Hour, Unit, and Cost. You can use multiple values in a request.
 	Metrics []string
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// The value by which you want to sort the data. The following values are supported
@@ -198,8 +200,9 @@ type GetReservationCoverageOutput struct {
 	// This member is required.
 	CoveragesByTime []types.CoverageByTime
 
-	// The token for the next set of retrievable results. AWS provides the token when
-	// the response from a previous call has more results than the maximum page size.
+	// The token for the next set of retrievable results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextPageToken *string
 
 	// The total amount of instance usage that a reservation covered.

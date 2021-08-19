@@ -26,7 +26,7 @@ import (
 // name/value pairs for the dimensions that you have specified within a certain
 // amount of time. You can also set up a billing alarm to alert you if your charges
 // are higher than expected. For more information, see  Creating a Billing Alarm to
-// Monitor Your Estimated AWS Charges
+// Monitor Your Estimated Amazon Web Services Charges
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/monitor_estimated_charges_with_cloudwatch.html).
 func (c *Client) PutMetricFilter(ctx context.Context, params *PutMetricFilterInput, optFns ...func(*Options)) (*PutMetricFilterOutput, error) {
 	if params == nil {

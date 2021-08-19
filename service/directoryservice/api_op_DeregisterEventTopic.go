@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified directory as a publisher to the specified SNS topic.
+// Removes the specified directory as a publisher to the specified Amazon SNS
+// topic.
 func (c *Client) DeregisterEventTopic(ctx context.Context, params *DeregisterEventTopicInput, optFns ...func(*Options)) (*DeregisterEventTopicOutput, error) {
 	if params == nil {
 		params = &DeregisterEventTopicInput{}
@@ -26,16 +27,18 @@ func (c *Client) DeregisterEventTopic(ctx context.Context, params *DeregisterEve
 	return out, nil
 }
 
-// Removes the specified directory as a publisher to the specified SNS topic.
+// Removes the specified directory as a publisher to the specified Amazon SNS
+// topic.
 type DeregisterEventTopicInput struct {
 
 	// The Directory ID to remove as a publisher. This directory will no longer send
-	// messages to the specified SNS topic.
+	// messages to the specified Amazon SNS topic.
 	//
 	// This member is required.
 	DirectoryId *string
 
-	// The name of the SNS topic from which to remove the directory as a publisher.
+	// The name of the Amazon SNS topic from which to remove the directory as a
+	// publisher.
 	//
 	// This member is required.
 	TopicName *string

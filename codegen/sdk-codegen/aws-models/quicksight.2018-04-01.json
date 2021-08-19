@@ -59,7 +59,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon QuickSight customizations associated with your Amazon Web Services account; or a QuickSight namespace in a specific Region;.</p>"
+                "smithy.api#documentation": "<p>The Amazon QuickSight customizations associated with your Amazon Web Services account; or a QuickSight namespace in a specific Amazon Web Services Region;.</p>"
             }
         },
         "com.amazonaws.quicksight#AccountSettings": {
@@ -1206,7 +1206,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates Amazon QuickSight customizations the current Region;. Currently, you can\n            add a custom default theme by using the <code>CreateAccountCustomization</code> or\n                <code>UpdateAccountCustomization</code> API operation. To further customize\n            QuickSight by removing QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>\n        <p>You can create customizations for your Amazon Web Services account; or, if you specify a namespace, for\n            a QuickSight namespace instead. Customizations that apply to a namespace always override\n            customizations that apply to an Amazon Web Services account;. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation.</p>\n        <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme \n            as the namespace default, make sure that you first share the theme with the namespace. \n            If you don't share it with the namespace, the theme isn't visible to your users \n            even if you make it the default theme. \n            To check if the theme is shared, view the current permissions by using the \n            <code>\n               <a>DescribeThemePermissions</a>\n            </code> API operation.\n            To share the theme, grant permissions by using the \n            <code>\n               <a>UpdateThemePermissions</a>\n            </code> API operation. </p>",
+                "smithy.api#documentation": "<p>Creates Amazon QuickSight customizations the current Amazon Web Services Region;. Currently, you can\n            add a custom default theme by using the <code>CreateAccountCustomization</code> or\n                <code>UpdateAccountCustomization</code> API operation. To further customize\n            QuickSight by removing QuickSight sample assets and videos for all new users, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-quicksight.html\">Customizing QuickSight</a> in the <i>Amazon QuickSight User\n                Guide.</i>\n         </p>\n        <p>You can create customizations for your Amazon Web Services account; or, if you specify a namespace, for\n            a QuickSight namespace instead. Customizations that apply to a namespace always override\n            customizations that apply to an Amazon Web Services account;. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation.</p>\n        <p>Before you use the <code>CreateAccountCustomization</code> API operation to add a theme \n            as the namespace default, make sure that you first share the theme with the namespace. \n            If you don't share it with the namespace, the theme isn't visible to your users \n            even if you make it the default theme. \n            To check if the theme is shared, view the current permissions by using the \n            <code>\n               <a>DescribeThemePermissions</a>\n            </code> API operation.\n            To share the theme, grant permissions by using the \n            <code>\n               <a>UpdateThemePermissions</a>\n            </code> API operation. </p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -1235,7 +1235,7 @@
                 "AccountCustomization": {
                     "target": "com.amazonaws.quicksight#AccountCustomization",
                     "traits": {
-                        "smithy.api#documentation": "<p>The QuickSight customizations you're adding in the current Region;. You can add\n            these to an Amazon Web Services account; and a QuickSight namespace. </p>\n        <p>For example, you can add a default theme by setting <code>AccountCustomization</code>\n            to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\":\n                \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }</code>. Or, you can add a custom theme by\n            specifying <code>\"AccountCustomization\": { \"DefaultTheme\":\n                \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\"\n                }</code>. </p>",
+                        "smithy.api#documentation": "<p>The QuickSight customizations you're adding in the current Amazon Web Services Region;. You can add\n            these to an Amazon Web Services account; and a QuickSight namespace. </p>\n        <p>For example, you can add a default theme by setting <code>AccountCustomization</code>\n            to the midnight theme: <code>\"AccountCustomization\": { \"DefaultTheme\":\n                \"arn:aws:quicksight::aws:theme/MIDNIGHT\" }</code>. Or, you can add a custom theme by\n            specifying <code>\"AccountCustomization\": { \"DefaultTheme\":\n                \"arn:aws:quicksight:us-west-2:111122223333:theme/bdb844d0-0fe9-4d9d-b520-0fe602d93639\"\n                }</code>. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1271,7 +1271,7 @@
                 "AccountCustomization": {
                     "target": "com.amazonaws.quicksight#AccountCustomization",
                     "traits": {
-                        "smithy.api#documentation": "<p>The QuickSight customizations you're adding in the current Region;. </p>"
+                        "smithy.api#documentation": "<p>The QuickSight customizations you're adding in the current Amazon Web Services Region;. </p>"
                     }
                 },
                 "RequestId": {
@@ -1520,7 +1520,7 @@
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#DashboardSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only create a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to create a dashboard from an analysis, first convert the analysis\n            to a template by using the <a>CreateTemplate</a> API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account; and any\n            QuickSight-supported Region;. </p>\n        <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>",
+                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only create a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to create a dashboard from an analysis, first convert the analysis\n            to a template by using the <a>CreateTemplate</a> API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code>ARN can contain any Amazon Web Services account; and any\n            QuickSight-supported Amazon Web Services Region;. </p>\n        <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1652,7 +1652,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>An ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1739,7 +1739,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "IngestionArn": {
@@ -1826,7 +1826,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ID for the data source. This ID is unique per Region; for each Amazon Web Services account;. </p>",
+                        "smithy.api#documentation": "<p>An ID for the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1894,7 +1894,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "CreationStatus": {
@@ -2699,7 +2699,7 @@
                 "CapacityRegion": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Region; that you want to use for the free SPICE capacity for the new namespace.\n            This is set to the region that you run CreateNamespace in. </p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region; that you want to use for the free SPICE capacity for the new namespace.\n            This is set to the region that you run CreateNamespace in. </p>"
                     }
                 },
                 "CreationStatus": {
@@ -2889,7 +2889,7 @@
                 "TemplateId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ID for the template that you want to create. This template is unique per Region; in\n\t\t\teach Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>An ID for the template that you want to create. This template is unique per Amazon Web Services Region; in\n\t\t\teach Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2909,7 +2909,7 @@
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#TemplateSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the template. In\n\t\t\t<code>SourceEntity</code>, you specify the type of object you're using as source:\n\t\t\t<code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an\n\t\t\tanalysis. Both of these require an Amazon Resource Name (ARN). For\n\t\t\t<code>SourceTemplate</code>, specify the ARN of the source template. For\n\t\t\t<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>\n\t\t\tARN can contain any Amazon Web Services account; and any QuickSight-supported Region;. </p>\n\t\t       <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or\n\t\t\t<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed\n\t\t\tin the original. The schema in each dataset must match its placeholder. </p>",
+                        "smithy.api#documentation": "<p>The entity that you are using as a source when you create the template. In\n\t\t\t<code>SourceEntity</code>, you specify the type of object you're using as source:\n\t\t\t<code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an\n\t\t\tanalysis. Both of these require an Amazon Resource Name (ARN). For\n\t\t\t<code>SourceTemplate</code>, specify the ARN of the source template. For\n\t\t\t<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>\n\t\t\tARN can contain any Amazon Web Services account; and any QuickSight-supported Amazon Web Services Region;. </p>\n\t\t       <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or\n\t\t\t<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed\n\t\t\tin the original. The schema in each dataset must match its placeholder. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3129,7 +3129,7 @@
                 "ThemeId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An ID for the theme that you want to create. The theme ID is unique per Region; in\n\t\t\teach Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>An ID for the theme that you want to create. The theme ID is unique per Amazon Web Services Region; in\n\t\t\teach Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4079,7 +4079,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each \n            Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each \n            Amazon Web Services account;.</p>"
                     }
                 },
                 "Name": {
@@ -4578,7 +4578,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes all Amazon QuickSight customizations in this Region; for the specified \n            Amazon Web Services account; and QuickSight namespace.</p>",
+                "smithy.api#documentation": "<p>Deletes all Amazon QuickSight customizations in this Amazon Web Services Region; for the specified \n            Amazon Web Services account; and QuickSight namespace.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -4592,7 +4592,7 @@
                 "AwsAccountId": {
                     "target": "com.amazonaws.quicksight#AwsAccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account; that you want to delete QuickSight customizations from in\n            this Region;.</p>",
+                        "smithy.api#documentation": "<p>The ID for the Amazon Web Services account; that you want to delete QuickSight customizations from in\n            this Amazon Web Services Region;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4875,7 +4875,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4894,7 +4894,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "RequestId": {
@@ -4960,7 +4960,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4979,7 +4979,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "RequestId": {
@@ -6148,7 +6148,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the customizations associated with the provided Amazon Web Services account; and Amazon\n            QuickSight namespace in an Region;. The QuickSight console evaluates which\n            customizations to apply by running this API operation with the <code>Resolved</code> flag\n            included. </p>\n        <p>To determine what customizations display when you run this command, it can help to\n            visualize the relationship of the entities involved. </p>\n        <ul>\n            <li>\n                <p>\n                  <code>Amazon Web Services account;</code> - The Amazon Web Services account; exists at the top of the hierarchy.\n                    It has the potential to use all of the Regions; and AWS Services. When you\n                    subscribe to QuickSight, you choose one Region; to use as your home Region.\n                    That's where your free SPICE capacity is located. You can use QuickSight in any\n                    supported Region;. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Region;</code> - In each Region; where you sign in to QuickSight\n                    at least once, QuickSight acts as a separate instance of the same service. If\n                    you have a user directory, it resides in us-east-1, which is the US East (N.\n                    Virginia). Generally speaking, these users have access to QuickSight in any \n                    Region;, unless they are constrained to a namespace. </p>\n                <p>To run the command in a different Region;, you change your Region settings.\n                    If you're using the AWS CLI, you can use one of the following options:</p>\n                <ul>\n                  <li>\n                        <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p>\n                    </li>\n                  <li>\n                        <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p>\n                    </li>\n                  <li>\n                        <p>Run <code>aws configure</code> to change your default Region;. Use\n                            Enter to key the same settings for your keys. For more information, see\n                            <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the AWS CLI</a>.</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                  <code>Namespace</code> - A QuickSight namespace is a partition that contains\n                    users and assets (data sources, datasets, dashboards, and so on). To access\n                    assets that are in a specific namespace, users and groups must also be part of\n                    the same namespace. People who share a namespace are completely isolated from\n                    users and assets in other namespaces, even if they are in the same Amazon Web Services account;\n                    and Region;.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Applied customizations</code> -  Within an Region;, a set of\n                    QuickSight customizations can apply to an Amazon Web Services account; or to a namespace.\n                    Settings that you apply to a namespace override settings that you apply to an\n                    Amazon Web Services account;. All settings are isolated to a single Region;. To apply them in\n                    other Regions;, run the <code>CreateAccountCustomization</code> command in\n                    each Region; where you want to apply the same customizations. </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Describes the customizations associated with the provided Amazon Web Services account; and Amazon\n            QuickSight namespace in an Amazon Web Services Region;. The QuickSight console evaluates which\n            customizations to apply by running this API operation with the <code>Resolved</code> flag\n            included. </p>\n        <p>To determine what customizations display when you run this command, it can help to\n            visualize the relationship of the entities involved. </p>\n        <ul>\n            <li>\n                <p>\n                  <code>Amazon Web Services account;</code> - The Amazon Web Services account; exists at the top of the hierarchy.\n                    It has the potential to use all of the Amazon Web Services Regions; and AWS Services. When you\n                    subscribe to QuickSight, you choose one Amazon Web Services Region; to use as your home Region.\n                    That's where your free SPICE capacity is located. You can use QuickSight in any\n                    supported Amazon Web Services Region;. </p>\n            </li>\n            <li>\n                <p>\n                  <code>Amazon Web Services Region;</code> - In each Amazon Web Services Region; where you sign in to QuickSight\n                    at least once, QuickSight acts as a separate instance of the same service. If\n                    you have a user directory, it resides in us-east-1, which is the US East (N.\n                    Virginia). Generally speaking, these users have access to QuickSight in any \n                    Amazon Web Services Region;, unless they are constrained to a namespace. </p>\n                <p>To run the command in a different Amazon Web Services Region;, you change your Region settings.\n                    If you're using the AWS CLI, you can use one of the following options:</p>\n                <ul>\n                  <li>\n                        <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-options.html\">command line options</a>. </p>\n                    </li>\n                  <li>\n                        <p>Use <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-configure-profiles.html\">named profiles</a>. </p>\n                    </li>\n                  <li>\n                        <p>Run <code>aws configure</code> to change your default Amazon Web Services Region;. Use\n                            Enter to key the same settings for your keys. For more information, see\n                            <a href=\"https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html\">Configuring the AWS CLI</a>.</p>\n                    </li>\n               </ul>\n            </li>\n            <li>\n                <p>\n                  <code>Namespace</code> - A QuickSight namespace is a partition that contains\n                    users and assets (data sources, datasets, dashboards, and so on). To access\n                    assets that are in a specific namespace, users and groups must also be part of\n                    the same namespace. People who share a namespace are completely isolated from\n                    users and assets in other namespaces, even if they are in the same Amazon Web Services account;\n                    and Amazon Web Services Region;.</p>\n            </li>\n            <li>\n                <p>\n                  <code>Applied customizations</code> -  Within an Amazon Web Services Region;, a set of\n                    QuickSight customizations can apply to an Amazon Web Services account; or to a namespace.\n                    Settings that you apply to a namespace override settings that you apply to an\n                    Amazon Web Services account;. All settings are isolated to a single Amazon Web Services Region;. To apply them in\n                    other Amazon Web Services Regions;, run the <code>CreateAccountCustomization</code> command in\n                    each Amazon Web Services Region; where you want to apply the same customizations. </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -6207,7 +6207,7 @@
                 "AccountCustomization": {
                     "target": "com.amazonaws.quicksight#AccountCustomization",
                     "traits": {
-                        "smithy.api#documentation": "<p>The QuickSight customizations that exist in the current Region;. </p>"
+                        "smithy.api#documentation": "<p>The QuickSight customizations that exist in the current Amazon Web Services Region;. </p>"
                     }
                 },
                 "RequestId": {
@@ -6281,7 +6281,7 @@
                 "AccountSettings": {
                     "target": "com.amazonaws.quicksight#AccountSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>The QuickSight settings for this Amazon Web Services account;. This information includes the edition of Amazon\n            QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the\n            QuickSight subscription. In the QuickSight console, the QuickSight subscription is sometimes\n            referred to as a QuickSight \"account\" even though it's technically not an account\n            by itself. Instead, it's a subscription to the QuickSight service for your Amazon Web Services account;. The\n            edition that you subscribe to applies to QuickSight in every Region; where you use it.</p>"
+                        "smithy.api#documentation": "<p>The QuickSight settings for this Amazon Web Services account;. This information includes the edition of Amazon\n            QuickSight that you subscribed to (Standard or Enterprise) and the notification email for the\n            QuickSight subscription. In the QuickSight console, the QuickSight subscription is sometimes\n            referred to as a QuickSight \"account\" even though it's technically not an account\n            by itself. Instead, it's a subscription to the QuickSight service for your Amazon Web Services account;. The\n            edition that you subscribe to applies to QuickSight in every Amazon Web Services Region; where you use it.</p>"
                     }
                 },
                 "RequestId": {
@@ -6741,7 +6741,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6760,7 +6760,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "Permissions": {
@@ -6798,7 +6798,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6911,7 +6911,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -6930,7 +6930,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "Permissions": {
@@ -6968,7 +6968,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -7606,7 +7606,7 @@
                 "Namespace": {
                     "target": "com.amazonaws.quicksight#NamespaceInfoV2",
                     "traits": {
-                        "smithy.api#documentation": "<p>The information about the namespace that you're describing. The response includes \n        the namespace ARN, name, Region;, creation status, and identity store. <code>DescribeNamespace</code> also\n        works for namespaces that are in the process of being created. For incomplete namespaces,\n        this API operation lists the namespace error types and messages associated with the creation process.</p>"
+                        "smithy.api#documentation": "<p>The information about the namespace that you're describing. The response includes \n        the namespace ARN, name, Amazon Web Services Region;, creation status, and identity store. <code>DescribeNamespace</code> also\n        works for namespaces that are in the process of being created. For incomplete namespaces,\n        this API operation lists the namespace error types and messages associated with the creation process.</p>"
                     }
                 },
                 "RequestId": {
@@ -9128,7 +9128,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed an Amazon\n            QuickSight read-only dashboard in your web server code. Before you use this command,\n            make sure that you have configured the dashboards and permissions. </p>\n        <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not\n            from the user's browser. The following rules apply to the combination of URL and\n            authorization code:</p>\n        <ul>\n            <li>\n                <p>They must be used together.</p>\n            </li>\n            <li>\n                <p>They can be used one time only.</p>\n            </li>\n            <li>\n                <p>They are valid for 5 minutes after you run this command.</p>\n            </li>\n            <li>\n                <p>The resulting user session is valid for 10 hours.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html\">Embedded Analytics</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
+                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed an Amazon\n            QuickSight read-only dashboard in your web server code. Before you use this command,\n            make sure that you have configured the dashboards and permissions. </p>\n        <p>Currently, you can use <code>GetDashboardEmbedURL</code> only from the server, not\n            from the user's browser. The following rules apply to the combination of URL and\n            authorization code:</p>\n        <ul>\n            <li>\n                <p>They must be used together.</p>\n            </li>\n            <li>\n                <p>They can be used one time only.</p>\n            </li>\n            <li>\n                <p>They are valid for 5 minutes after you run this command.</p>\n            </li>\n            <li>\n                <p>The resulting user session is valid for 10 hours.</p>\n            </li>\n         </ul>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html\">Embedding Analytics Using GetDashboardEmbedUrl</a> in the <i>Amazon QuickSight User\n            Guide</i>.</p>\n            <p>For more information about the high-level steps for embedding and for an interactive demo of the ways you can customize embedding, visit the <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html\">Amazon QuickSight Developer Portal</a>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/dashboards/{DashboardId}/embed-url",
@@ -9279,7 +9279,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed the Amazon\n            QuickSight console in your web server code. Use <code>GetSessionEmbedUrl</code> where\n            you want to provide an authoring portal that allows users to create data sources,\n            datasets, analyses, and dashboards. The users who access an embedded QuickSight console\n            need belong to the author or admin security cohort. If you want to restrict permissions\n            to some of these features, add a custom permissions profile to the user with the\n            <code>\n               <a>UpdateUser</a>\n            </code> API operation. Use <code>\n               <a>RegisterUser</a>\n            </code> API operation to add a new user with a custom permission profile attached. For more\n            information, see the following sections in the <i>Amazon QuickSight User\n            Guide</i>:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedding-the-quicksight-console.html\">Embedding the Amazon QuickSight Console</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Generates a session URL and authorization code that you can use to embed the Amazon\n            QuickSight console in your web server code. Use <code>GetSessionEmbedUrl</code> where\n            you want to provide an authoring portal that allows users to create data sources,\n            datasets, analyses, and dashboards. The users who access an embedded QuickSight console\n            need belong to the author or admin security cohort. If you want to restrict permissions\n            to some of these features, add a custom permissions profile to the user with the\n            <code>\n               <a>UpdateUser</a>\n            </code> API operation. Use <code>\n               <a>RegisterUser</a>\n            </code> API operation to add a new user with a custom permission profile attached. For more\n            information, see the following sections in the <i>Amazon QuickSight User\n            Guide</i>:</p>\n        <ul>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-full-console-for-authenticated-users-get.html\">Embedding the Amazon QuickSight Console Using GetSessionEmbedUrl</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/quicksight/latest/user/customizing-permissions-to-the-quicksight-console.html\">Customizing Access to the Amazon QuickSight Console</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/session-embed-url",
@@ -10566,7 +10566,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all of the datasets belonging to the current Amazon Web Services account; in an Region;.</p>\n\t\t       <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>",
+                "smithy.api#documentation": "<p>Lists all of the datasets belonging to the current Amazon Web Services account; in an Amazon Web Services Region;.</p>\n\t\t       <p>The permissions resource is <code>arn:aws:quicksight:region:aws-account-id:dataset/*</code>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/data-sets",
@@ -10663,7 +10663,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists data sources in current Region; that belong to this Amazon Web Services account;.</p>",
+                "smithy.api#documentation": "<p>Lists data sources in current Amazon Web Services Region; that belong to this Amazon Web Services account;.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/accounts/{AwsAccountId}/data-sources",
@@ -11580,7 +11580,7 @@
                 "Namespaces": {
                     "target": "com.amazonaws.quicksight#Namespaces",
                     "traits": {
-                        "smithy.api#documentation": "<p>The information about the namespaces in this Amazon Web Services account;. The response includes \n        the namespace ARN, name, Region;, notification email address, creation status, and \n        identity store.</p>"
+                        "smithy.api#documentation": "<p>The information about the namespaces in this Amazon Web Services account;. The response includes \n        the namespace ARN, name, Amazon Web Services Region;, notification email address, creation status, and \n        identity store.</p>"
                     }
                 },
                 "NextToken": {
@@ -12835,7 +12835,7 @@
                 "CapacityRegion": {
                     "target": "com.amazonaws.quicksight#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The namespace Region;.</p>"
+                        "smithy.api#documentation": "<p>The namespace Amazon Web Services Region;.</p>"
                     }
                 },
                 "CreationStatus": {
@@ -13631,7 +13631,7 @@
                     "name": "quicksight"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon QuickSight API Reference</fullname>\n        <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the\n            Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon QuickSight. </p>",
+                "smithy.api#documentation": "<fullname>Amazon QuickSight API Reference</fullname>\n        <p>Amazon QuickSight is a fully managed, serverless business intelligence service for the\n            Amazon Web Services Cloud that makes it easy to extend data and insights to every user in your\n            organization. This API reference contains documentation for a programming interface that\n            you can use to manage Amazon QuickSight. </p>",
                 "smithy.api#title": "Amazon QuickSight"
             }
         },
@@ -15336,7 +15336,7 @@
                 "TemplateId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the template. This is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID for the template. This is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "LastUpdatedTime": {
@@ -15526,7 +15526,7 @@
                 "TemplateId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the template. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID of the template. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "Name": {
@@ -15906,7 +15906,7 @@
                 "ThemeId": {
                     "target": "com.amazonaws.quicksight#RestrictiveResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the theme. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID of the theme. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "LatestVersionNumber": {
@@ -16462,7 +16462,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates Amazon QuickSight customizations the current Region;. Currently, the only\n            customization you can use is a theme.</p>\n        <p>You can use customizations for your Amazon Web Services account; or, if you specify a namespace, for a\n            QuickSight namespace instead. Customizations that apply to a namespace override\n            customizations that apply to an Amazon Web Services account;. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation. </p>",
+                "smithy.api#documentation": "<p>Updates Amazon QuickSight customizations the current Amazon Web Services Region;. Currently, the only\n            customization you can use is a theme.</p>\n        <p>You can use customizations for your Amazon Web Services account; or, if you specify a namespace, for a\n            QuickSight namespace instead. Customizations that apply to a namespace override\n            customizations that apply to an Amazon Web Services account;. To find out which customizations apply, use\n            the <code>DescribeAccountCustomization</code> API operation. </p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/accounts/{AwsAccountId}/customizations",
@@ -16491,7 +16491,7 @@
                 "AccountCustomization": {
                     "target": "com.amazonaws.quicksight#AccountCustomization",
                     "traits": {
-                        "smithy.api#documentation": "<p>The QuickSight customizations you're updating in the current Region;. </p>",
+                        "smithy.api#documentation": "<p>The QuickSight customizations you're updating in the current Amazon Web Services Region;. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -16521,7 +16521,7 @@
                 "AccountCustomization": {
                     "target": "com.amazonaws.quicksight#AccountCustomization",
                     "traits": {
-                        "smithy.api#documentation": "<p>The QuickSight customizations you're updating in the current Region;. </p>"
+                        "smithy.api#documentation": "<p>The QuickSight customizations you're updating in the current Amazon Web Services Region;. </p>"
                     }
                 },
                 "RequestId": {
@@ -17120,7 +17120,7 @@
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#DashboardSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that you are using as a source when you update the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only update a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to update a dashboard from an analysis, first convert the analysis\n            to a template by using the <a>CreateTemplate</a> API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account; and any\n            QuickSight-supported Region;. </p>\n        <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>",
+                        "smithy.api#documentation": "<p>The entity that you are using as a source when you update the dashboard. In\n            <code>SourceEntity</code>, you specify the type of object you're using as source. You\n            can only update a dashboard from a template, so you use a <code>SourceTemplate</code>\n            entity. If you need to update a dashboard from an analysis, first convert the analysis\n            to a template by using the <a>CreateTemplate</a> API operation. For\n            <code>SourceTemplate</code>, specify the Amazon Resource Name (ARN) of the source\n            template. The <code>SourceTemplate</code> ARN can contain any Amazon Web Services account; and any\n            QuickSight-supported Amazon Web Services Region;. </p>\n        <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> to\n            list the replacement datasets for the placeholders listed in the original. The schema in\n            each dataset must match its placeholder. </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -17285,7 +17285,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per \n\t\t\tRegion; for each Amazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per \n\t\t\tAmazon Web Services Region; for each Amazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17316,7 +17316,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per \n\t\t\tRegion; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID for the dataset whose permissions you want to update. This ID is unique per \n\t\t\tAmazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "RequestId": {
@@ -17348,7 +17348,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to update. This ID is unique per Region; for each\n\t\t\tAmazon Web Services account;.</p>",
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to update. This ID is unique per Amazon Web Services Region; for each\n\t\t\tAmazon Web Services account;.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17424,7 +17424,7 @@
                 "DataSetId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID for the dataset that you want to create. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "IngestionArn": {
@@ -17542,7 +17542,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;. </p>",
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17573,7 +17573,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "RequestId": {
@@ -17605,7 +17605,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;. </p>",
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;. </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -17655,7 +17655,7 @@
                 "DataSourceId": {
                     "target": "com.amazonaws.quicksight#ResourceId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Region; for each Amazon Web Services account;.</p>"
+                        "smithy.api#documentation": "<p>The ID of the data source. This ID is unique per Amazon Web Services Region; for each Amazon Web Services account;.</p>"
                     }
                 },
                 "UpdateStatus": {
@@ -18399,7 +18399,7 @@
                 "SourceEntity": {
                     "target": "com.amazonaws.quicksight#TemplateSourceEntity",
                     "traits": {
-                        "smithy.api#documentation": "<p>The entity that you are using as a source when you update the template. In\n\t\t\t<code>SourceEntity</code>, you specify the type of object you're using as source:\n\t\t\t<code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an\n\t\t\tanalysis. Both of these require an Amazon Resource Name (ARN). For\n\t\t\t<code>SourceTemplate</code>, specify the ARN of the source template. For\n\t\t\t<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>\n\t\t\tARN can contain any Amazon Web Services account; and any QuickSight-supported Region;. </p>\n\t\t       <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or\n\t\t\t<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed\n\t\t\tin the original. The schema in each dataset must match its placeholder. </p>",
+                        "smithy.api#documentation": "<p>The entity that you are using as a source when you update the template. In\n\t\t\t<code>SourceEntity</code>, you specify the type of object you're using as source:\n\t\t\t<code>SourceTemplate</code> for a template or <code>SourceAnalysis</code> for an\n\t\t\tanalysis. Both of these require an Amazon Resource Name (ARN). For\n\t\t\t<code>SourceTemplate</code>, specify the ARN of the source template. For\n\t\t\t<code>SourceAnalysis</code>, specify the ARN of the source analysis. The <code>SourceTemplate</code>\n\t\t\tARN can contain any Amazon Web Services account; and any QuickSight-supported Amazon Web Services Region;. </p>\n\t\t       <p>Use the <code>DataSetReferences</code> entity within <code>SourceTemplate</code> or\n\t\t\t<code>SourceAnalysis</code> to list the replacement datasets for the placeholders listed\n\t\t\tin the original. The schema in each dataset must match its placeholder. </p>",
                         "smithy.api#required": {}
                     }
                 },

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a conditional forwarder that has been set up for your AWS directory.
+// Deletes a conditional forwarder that has been set up for your Amazon Web
+// Services directory.
 func (c *Client) DeleteConditionalForwarder(ctx context.Context, params *DeleteConditionalForwarderInput, optFns ...func(*Options)) (*DeleteConditionalForwarderOutput, error) {
 	if params == nil {
 		params = &DeleteConditionalForwarderInput{}

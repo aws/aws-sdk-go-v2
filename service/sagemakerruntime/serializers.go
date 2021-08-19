@@ -115,3 +115,91 @@ func awsRestjson1_serializeOpHttpBindingsInvokeEndpointInput(v *InvokeEndpointIn
 
 	return nil
 }
+
+type awsRestjson1_serializeOpInvokeEndpointAsync struct {
+}
+
+func (*awsRestjson1_serializeOpInvokeEndpointAsync) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpInvokeEndpointAsync) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*InvokeEndpointAsyncInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/endpoints/{EndpointName}/async-invocations")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsInvokeEndpointAsyncInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsInvokeEndpointAsyncInput(v *InvokeEndpointAsyncInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Accept != nil && len(*v.Accept) > 0 {
+		locationName := "X-Amzn-Sagemaker-Accept"
+		encoder.SetHeader(locationName).String(*v.Accept)
+	}
+
+	if v.ContentType != nil && len(*v.ContentType) > 0 {
+		locationName := "X-Amzn-Sagemaker-Content-Type"
+		encoder.SetHeader(locationName).String(*v.ContentType)
+	}
+
+	if v.CustomAttributes != nil && len(*v.CustomAttributes) > 0 {
+		locationName := "X-Amzn-Sagemaker-Custom-Attributes"
+		encoder.SetHeader(locationName).String(*v.CustomAttributes)
+	}
+
+	if v.EndpointName == nil || len(*v.EndpointName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointName must not be empty")}
+	}
+	if v.EndpointName != nil {
+		if err := encoder.SetURI("EndpointName").String(*v.EndpointName); err != nil {
+			return err
+		}
+	}
+
+	if v.InferenceId != nil && len(*v.InferenceId) > 0 {
+		locationName := "X-Amzn-Sagemaker-Inference-Id"
+		encoder.SetHeader(locationName).String(*v.InferenceId)
+	}
+
+	if v.InputLocation != nil && len(*v.InputLocation) > 0 {
+		locationName := "X-Amzn-Sagemaker-Inputlocation"
+		encoder.SetHeader(locationName).String(*v.InputLocation)
+	}
+
+	if v.RequestTTLSeconds != nil {
+		locationName := "X-Amzn-Sagemaker-Requestttlseconds"
+		encoder.SetHeader(locationName).Integer(*v.RequestTTLSeconds)
+	}
+
+	return nil
+}

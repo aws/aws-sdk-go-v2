@@ -17,7 +17,12 @@ import (
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_UntagLogGroup.html).
 // For more information about tags, see Tag Log Groups in Amazon CloudWatch Logs
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/logs/Working-with-log-groups-and-streams.html#log-group-tagging)
-// in the Amazon CloudWatch Logs User Guide.
+// in the Amazon CloudWatch Logs User Guide. CloudWatch Logs doesn’t support IAM
+// policies that prevent users from assigning specified tags to log groups using
+// the aws:Resource/key-name  or aws:TagKeys condition keys. For more information
+// about using tags to control access, see Controlling access to Amazon Web
+// Services resources using tags
+// (https://docs.aws.amazon.com/IAM/latest/UserGuide/access_tags.html).
 func (c *Client) TagLogGroup(ctx context.Context, params *TagLogGroupInput, optFns ...func(*Options)) (*TagLogGroupOutput, error) {
 	if params == nil {
 		params = &TagLogGroupInput{}

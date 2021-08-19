@@ -30,14 +30,15 @@ func (c *Client) GetAnomalyMonitors(ctx context.Context, params *GetAnomalyMonit
 
 type GetAnomalyMonitorsInput struct {
 
-	// The number of entries a paginated response contains.
+	// The number of entries that a paginated response contains.
 	MaxResults *int32
 
 	// A list of cost anomaly monitor ARNs.
 	MonitorArnList []string
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	noSmithyDocumentSerde
@@ -51,8 +52,9 @@ type GetAnomalyMonitorsOutput struct {
 	// This member is required.
 	AnomalyMonitors []types.AnomalyMonitor
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

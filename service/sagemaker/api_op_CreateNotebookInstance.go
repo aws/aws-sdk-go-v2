@@ -137,6 +137,9 @@ type CreateNotebookInstanceInput struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/notebook-lifecycle-config.html).
 	LifecycleConfigName *string
 
+	// The platform identifier of the notebook instance runtime environment.
+	PlatformIdentifier *string
+
 	// Whether root access is enabled or disabled for users of the notebook instance.
 	// The default value is Enabled. Lifecycle configurations need root access to be
 	// able to set up a notebook instance. Because of this, lifecycle configurations

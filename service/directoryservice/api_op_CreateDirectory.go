@@ -13,10 +13,10 @@ import (
 
 // Creates a Simple AD directory. For more information, see Simple Active Directory
 // (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_simple_ad.html)
-// in the AWS Directory Service Admin Guide. Before you call CreateDirectory,
-// ensure that all of the required permissions have been explicitly granted through
-// a policy. For details about what permissions are required to run the
-// CreateDirectory operation, see AWS Directory Service API Permissions: Actions,
+// in the Directory Service Admin Guide. Before you call CreateDirectory, ensure
+// that all of the required permissions have been explicitly granted through a
+// policy. For details about what permissions are required to run the
+// CreateDirectory operation, see Directory Service API Permissions: Actions,
 // Resources, and Conditions Reference
 // (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
 func (c *Client) CreateDirectory(ctx context.Context, params *CreateDirectoryInput, optFns ...func(*Options)) (*CreateDirectoryOutput, error) {

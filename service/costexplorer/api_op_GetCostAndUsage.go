@@ -12,14 +12,14 @@ import (
 )
 
 // Retrieves cost and usage metrics for your account. You can specify which cost
-// and usage-related metric, such as BlendedCosts or UsageQuantity, that you want
-// the request to return. You can also filter and group your data by various
-// dimensions, such as SERVICE or AZ, in a specific time range. For a complete list
-// of valid dimensions, see the GetDimensionValues
+// and usage-related metric that you want the request to return. For example, you
+// can specify BlendedCosts or UsageQuantity. You can also filter and group your
+// data by various dimensions, such as SERVICE or AZ, in a specific time range. For
+// a complete list of valid dimensions, see the GetDimensionValues
 // (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_GetDimensionValues.html)
-// operation. Management account in an organization in AWS Organizations have
-// access to all member accounts. For information about filter limitations, see
-// Quotas and restrictions
+// operation. Management account in an organization in Organizations have access to
+// all member accounts. For information about filter limitations, see Quotas and
+// restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/billing-limits.html)
 // in the Billing and Cost Management User Guide.
 func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInput, optFns ...func(*Options)) (*GetCostAndUsageOutput, error) {
@@ -39,9 +39,9 @@ func (c *Client) GetCostAndUsage(ctx context.Context, params *GetCostAndUsageInp
 
 type GetCostAndUsageInput struct {
 
-	// Sets the AWS cost granularity to MONTHLY or DAILY, or HOURLY. If Granularity
-	// isn't set, the response object doesn't include the Granularity, either MONTHLY
-	// or DAILY, or HOURLY.
+	// Sets the Amazon Web Services cost granularity to MONTHLY or DAILY, or HOURLY. If
+	// Granularity isn't set, the response object doesn't include the Granularity,
+	// either MONTHLY or DAILY, or HOURLY.
 	//
 	// This member is required.
 	Granularity types.Granularity
@@ -55,37 +55,39 @@ type GetCostAndUsageInput struct {
 	// UsageQuantity metric, the service aggregates all usage numbers without taking
 	// into account the units. For example, if you aggregate usageQuantity across all
 	// of Amazon EC2, the results aren't meaningful because Amazon EC2 compute hours
-	// and data transfer are measured in different units (for example, hours vs. GB).
+	// and data transfer are measured in different units (for example, hours and GB).
 	// To get more meaningful UsageQuantity metrics, filter by UsageType or
 	// UsageTypeGroups. Metrics is required for GetCostAndUsage requests.
 	//
 	// This member is required.
 	Metrics []string
 
-	// Sets the start and end dates for retrieving AWS costs. The start date is
-	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
-	// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
-	// up to and including 2017-04-30 but not including 2017-05-01.
+	// Sets the start date and end date for retrieving Amazon Web Services costs. The
+	// start date is inclusive, but the end date is exclusive. For example, if start is
+	// 2017-01-01 and end is 2017-05-01, then the cost and usage data is retrieved from
+	// 2017-01-01 up to and including 2017-04-30 but not including 2017-05-01.
 	//
 	// This member is required.
 	TimePeriod *types.DateInterval
 
-	// Filters AWS costs by different dimensions. For example, you can specify SERVICE
-	// and LINKED_ACCOUNT and get the costs that are associated with that account's
-	// usage of that service. You can nest Expression objects to define any combination
-	// of dimension filters. For more information, see Expression
+	// Filters Amazon Web Services costs by different dimensions. For example, you can
+	// specify SERVICE and LINKED_ACCOUNT and get the costs that are associated with
+	// that account's usage of that service. You can nest Expression objects to define
+	// any combination of dimension filters. For more information, see Expression
 	// (https://docs.aws.amazon.com/aws-cost-management/latest/APIReference/API_Expression.html).
 	Filter *types.Expression
 
-	// You can group AWS costs using up to two different groups, either dimensions, tag
-	// keys, cost categories, or any two group by types. When you group by tag key, you
-	// get all tag values, including empty strings. Valid values are AZ, INSTANCE_TYPE,
-	// LEGAL_ENTITY_NAME, LINKED_ACCOUNT, OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE,
-	// TAGS, TENANCY, RECORD_TYPE, and USAGE_TYPE.
+	// You can group Amazon Web Services costs using up to two different groups, either
+	// dimensions, tag keys, cost categories, or any two group by types. Valid values
+	// for the DIMENSION type are AZ, INSTANCE_TYPE, LEGAL_ENTITY_NAME, LINKED_ACCOUNT,
+	// OPERATION, PLATFORM, PURCHASE_TYPE, SERVICE, TENANCY, RECORD_TYPE, and
+	// USAGE_TYPE. When you group by the TAG type and include a valid tag key, you get
+	// all tag values, including empty strings.
 	GroupBy []types.GroupDefinition
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	noSmithyDocumentSerde
@@ -101,11 +103,12 @@ type GetCostAndUsageOutput struct {
 	// request.
 	GroupDefinitions []types.GroupDefinition
 
-	// The token for the next set of retrievable results. AWS provides the token when
-	// the response from a previous call has more results than the maximum page size.
+	// The token for the next set of retrievable results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextPageToken *string
 
-	// The time period that is covered by the results in the response.
+	// The time period that's covered by the results in the response.
 	ResultsByTime []types.ResultByTime
 
 	// Metadata pertaining to the operation's result.

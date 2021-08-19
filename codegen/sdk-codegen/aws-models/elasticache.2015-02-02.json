@@ -114,7 +114,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A  tag is a key-value pair where the key and value are case-sensitive.            \n            You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. \n          For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n        <p>\n            For example, you can use cost-allocation tags to your ElastiCache resources, \n            AWS generates a cost allocation report as a comma-separated value (CSV) file \n            with your usage and costs aggregated by your tags. \n            You can apply tags that represent business categories (such as cost centers, application names, or owners) \n            to organize your costs across multiple services.</p>\n            <p>For more information, \n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html\">Using Cost Allocation Tags in Amazon ElastiCache</a> \n            in the <i>ElastiCache User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A  tag is a key-value pair where the key and value are case-sensitive.            \n            You can use tags to categorize and track all your ElastiCache resources, with the exception of global replication group. When you add or remove tags on replication groups, those actions will be replicated to all nodes in the replication group. \n          For more information, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n        <p>\n            For example, you can use cost-allocation tags to your ElastiCache resources, \n            Amazon generates a cost allocation report as a comma-separated value (CSV) file \n            with your usage and costs aggregated by your tags. \n            You can apply tags that represent business categories (such as cost centers, application names, or owners) \n            to organize your costs across multiple services.</p>\n            <p>For more information, \n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Tagging.html\">Using Cost Allocation Tags in Amazon ElastiCache</a> \n            in the <i>ElastiCache User Guide</i>.</p>"
             }
         },
         "com.amazonaws.elasticache#AddTagsToResourceMessage": {
@@ -123,7 +123,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the tags are to be added, \n            for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> \n            or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.\n            ElastiCache resources are <i>cluster</i> and <i>snapshot</i>.</p>\n        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource to which the tags are to be added, \n            for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> \n            or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.\n            ElastiCache resources are <i>cluster</i> and <i>snapshot</i>.</p>\n        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Service Namespaces</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -540,7 +540,7 @@
                 "EC2SecurityGroupOwnerId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account number of the Amazon EC2 security group owner. \n            Note that this is not the same thing as an AWS access key ID - \n            you must provide a valid AWS account number for this parameter.</p>",
+                        "smithy.api#documentation": "<p>The Amazon account number of the Amazon EC2 security group owner. \n            Note that this is not the same thing as an Amazon access key ID - \n            you must provide a valid Amazon account number for this parameter.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1036,7 +1036,7 @@
                 "CacheNodeId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The cache node identifier. A node ID is a numeric identifier (0001, 0002, etc.). The combination of cluster ID and node ID uniquely identifies every cache node used in a customer's AWS account.</p>"
+                        "smithy.api#documentation": "<p>The cache node identifier. A node ID is a numeric identifier (0001, 0002, etc.). The combination of cluster ID and node ID uniquely identifies every cache node used in a customer's Amazon account.</p>"
                     }
                 },
                 "CacheNodeStatus": {
@@ -1459,7 +1459,7 @@
                 "OwnerId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID of the cache security group owner.</p>"
+                        "smithy.api#documentation": "<p>The Amazon account ID of the cache security group owner.</p>"
                     }
                 },
                 "CacheSecurityGroupName": {
@@ -2467,7 +2467,7 @@
                 "GlobalReplicationGroupIdSuffix": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The suffix name of a Global datastore. Amazon ElastiCache automatically applies a prefix \n            to the Global datastore ID when it is created. Each AWS Region has its own prefix. For instance, a Global datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global datastore name across multiple regions.  </p>\n        <p>For a full list of AWS Regions and their respective Global datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html\">Using the AWS CLI with Global datastores </a>.</p>",
+                        "smithy.api#documentation": "<p>The suffix name of a Global datastore. Amazon ElastiCache automatically applies a prefix \n            to the Global datastore ID when it is created. Each Amazon Region has its own prefix. For instance, a Global datastore ID created in the US-West-1 region will begin with \"dsdfu\" along with the suffix name you provide. The suffix, combined with the auto-generated prefix, guarantees uniqueness of the Global datastore name across multiple regions.  </p>\n        <p>For a full list of Amazon Regions and their respective Global datastore iD prefixes, see <a href=\"http://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Redis-Global-Datastores-CLI.html\">Using the Amazon CLI with Global datastores </a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2562,7 +2562,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p>\n        <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global datastore.</p>\n        <p>A Redis (cluster mode disabled) replication group is a collection of clusters, \n            where one of the clusters is a read/write primary and the others are read-only replicas. \n            Writes to the primary are asynchronously propagated to the replicas.</p>\n        <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). \n            Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.\n            \n        </p>\n        <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between \n            83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. \n            Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html\">Creating a Subnet Group</a>. For versions below 5.0.6, \n            the limit is 250 per cluster.</p>\n        <p>To request a limit increase, see \n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">AWS Service Limits</a> \n            and choose the limit type <b>Nodes per cluster per instance type</b>. </p>\n        <p>When a Redis (cluster mode disabled) replication group has been successfully created, \n            you can add one or more read replicas to it, up to a total of 5 read replicas. \n            If you need to increase or decrease the number of node groups (console: shards), \n            you can avail yourself of ElastiCache for Redis' scaling. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html\">Scaling ElastiCache for Redis Clusters</a> in the <i>ElastiCache User Guide</i>.</p>\n        \n       \n        <note>\n            <p>This operation is valid for Redis only.</p>\n         </note>"
+                "smithy.api#documentation": "<p>Creates a Redis (cluster mode disabled) or a Redis (cluster mode enabled) replication group.</p>\n        <p>This API can be used to create a standalone regional replication group or a secondary replication group associated with a Global datastore.</p>\n        <p>A Redis (cluster mode disabled) replication group is a collection of clusters, \n            where one of the clusters is a read/write primary and the others are read-only replicas. \n            Writes to the primary are asynchronously propagated to the replicas.</p>\n        <p>A Redis cluster-mode enabled cluster is comprised of from 1 to 90 shards (API/CLI: node groups). \n            Each shard has a primary node and up to 5 read-only replica nodes. The configuration can range from 90 shards and 0 replicas to 15 shards and 5 replicas, which is the maximum number or replicas allowed.\n            \n        </p>\n        <p>The node or shard limit can be increased to a maximum of 500 per cluster if the Redis engine version is 5.0.6 or higher. For example, you can choose to configure a 500 node cluster that ranges between \n            83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. \n            Common pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. For more information, see \n            <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html\">Creating a Subnet Group</a>. For versions below 5.0.6, \n            the limit is 250 per cluster.</p>\n        <p>To request a limit increase, see \n            <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html\">Amazon Service Limits</a> \n            and choose the limit type <b>Nodes per cluster per instance type</b>. </p>\n        <p>When a Redis (cluster mode disabled) replication group has been successfully created, \n            you can add one or more read replicas to it, up to a total of 5 read replicas. \n            If you need to increase or decrease the number of node groups (console: shards), \n            you can avail yourself of ElastiCache for Redis' scaling. For more information,\n            see <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/Scaling.html\">Scaling ElastiCache for Redis Clusters</a> in the <i>ElastiCache User Guide</i>.</p>\n        \n       \n        <note>\n            <p>This operation is valid for Redis only.</p>\n         </note>"
             }
         },
         "com.amazonaws.elasticache#CreateReplicationGroupMessage": {
@@ -3689,6 +3689,9 @@
                     "items": "CacheClusters",
                     "pageSize": "MaxRecords"
                 },
+                "smithy.api#suppress": [
+                    "WaitableTraitInvalidErrorType"
+                ],
                 "smithy.waiters#waitable": {
                     "CacheClusterAvailable": {
                         "documentation": "Wait until ElastiCache cluster is available.",
@@ -3739,6 +3742,88 @@
                                     "output": {
                                         "path": "CacheClusters[].CacheClusterStatus",
                                         "expected": "restore-failed",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            }
+                        ],
+                        "minDelay": 15
+                    },
+                    "CacheClusterDeleted": {
+                        "documentation": "Wait until ElastiCache cluster is deleted.",
+                        "acceptors": [
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CacheClusters[].CacheClusterStatus",
+                                        "expected": "deleted",
+                                        "comparator": "allStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "success",
+                                "matcher": {
+                                    "errorType": "CacheClusterNotFound"
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CacheClusters[].CacheClusterStatus",
+                                        "expected": "available",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CacheClusters[].CacheClusterStatus",
+                                        "expected": "creating",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CacheClusters[].CacheClusterStatus",
+                                        "expected": "incompatible-network",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CacheClusters[].CacheClusterStatus",
+                                        "expected": "modifying",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CacheClusters[].CacheClusterStatus",
+                                        "expected": "restore-failed",
+                                        "comparator": "anyStringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "CacheClusters[].CacheClusterStatus",
+                                        "expected": "snapshotting",
                                         "comparator": "anyStringEquals"
                                     }
                                 }
@@ -5014,7 +5099,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that AWS region.</p>"
+                "smithy.api#documentation": "<p>Remove a secondary cluster from the Global datastore using the Global datastore name. The secondary cluster will no longer receive updates from the primary cluster, but will remain as a standalone cluster in that Amazon region.</p>"
             }
         },
         "com.amazonaws.elasticache#DisassociateGlobalReplicationGroupMessage": {
@@ -5037,7 +5122,7 @@
                 "ReplicationGroupRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region of secondary cluster you wish to remove from the Global datastore</p>",
+                        "smithy.api#documentation": "<p>The Amazon region of secondary cluster you wish to remove from the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -5089,7 +5174,7 @@
                 "EC2SecurityGroupOwnerId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID of the Amazon EC2 security group owner.</p>"
+                        "smithy.api#documentation": "<p>The Amazon account ID of the Amazon EC2 security group owner.</p>"
                     }
                 }
             },
@@ -5267,7 +5352,7 @@
                 "PrimaryRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region of the primary cluster of the Global datastore</p>",
+                        "smithy.api#documentation": "<p>The Amazon region of the primary cluster of the Global datastore</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5460,7 +5545,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different AWS region. The secondary cluster accepts only reads. The primary\n        cluster automatically replicates updates to the secondary cluster.</p>\n        \n        \n        <ul>\n            <li>\n               <p>The <b>GlobalReplicationGroupIdSuffix</b> represents the name of the Global datastore,\n            which is what you use to associate a secondary cluster.</p> \n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>Consists of a primary cluster that accepts writes and an associated secondary cluster that resides in a different Amazon region. The secondary cluster accepts only reads. The primary\n        cluster automatically replicates updates to the secondary cluster.</p>\n        \n        \n        <ul>\n            <li>\n               <p>The <b>GlobalReplicationGroupIdSuffix</b> represents the name of the Global datastore,\n            which is what you use to associate a secondary cluster.</p> \n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.elasticache#GlobalReplicationGroupAlreadyExistsFault": {
@@ -5521,7 +5606,7 @@
                 "ReplicationGroupRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region of the Global datastore member.</p>"
+                        "smithy.api#documentation": "<p>The Amazon region of the Global datastore member.</p>"
                     }
                 },
                 "Role": {
@@ -5544,7 +5629,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A member of a Global datastore. It contains the Replication Group Id, the AWS region and the role of the replication group. </p>"
+                "smithy.api#documentation": "<p>A member of a Global datastore. It contains the Replication Group Id, the Amazon region and the role of the replication group. </p>"
             }
         },
         "com.amazonaws.elasticache#GlobalReplicationGroupMemberList": {
@@ -5616,7 +5701,7 @@
                 "RegionalConfigurations": {
                     "target": "com.amazonaws.elasticache#RegionalConfigurationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Describes the replication group IDs, the AWS regions where they are stored and the shard configuration for each that comprise the Global datastore</p>"
+                        "smithy.api#documentation": "<p>Describes the replication group IDs, the Amazon regions where they are stored and the shard configuration for each that comprise the Global datastore</p>"
                     }
                 },
                 "ApplyImmediately": {
@@ -6114,7 +6199,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags, \n            for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> \n            or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p>\n        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource for which you want the list of tags, \n            for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> \n            or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p>\n        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Web Services Service Namespaces</a>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -6754,7 +6839,7 @@
                 "MultiAZEnabled": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of tags to be added to this resource. A tag is a key-value pair. A tag key must be accompanied by a tag value, although null is accepted.</p>"
+                        "smithy.api#documentation": "<p>A flag to indicate MultiAZ is enabled.</p>"
                     }
                 },
                 "NodeGroupId": {
@@ -8125,7 +8210,7 @@
                 "ReplicationGroupRegion": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region where the cluster is stored</p>",
+                        "smithy.api#documentation": "<p>The Amazon region where the cluster is stored</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8212,7 +8297,7 @@
                 "ResourceName": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which you want the tags removed, \n            for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> \n            or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p>\n        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and AWS Service Namespaces</a>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource from which you want the tags removed, \n            for example <code>arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster</code> \n            or <code>arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot</code>.</p>\n        <p>For more information about ARNs, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html\">Amazon Resource Names (ARNs) and Amazon Service Namespaces</a>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -8382,6 +8467,12 @@
                     "target": "com.amazonaws.elasticache#LogDeliveryConfigurationList",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the destination, format and type of the logs. </p>"
+                    }
+                },
+                "ReplicationGroupCreateTime": {
+                    "target": "com.amazonaws.elasticache#TStamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the cluster was created.</p>"
                     }
                 }
             },
@@ -8967,7 +9058,7 @@
                 "EC2SecurityGroupOwnerId": {
                     "target": "com.amazonaws.elasticache#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account number of the Amazon EC2 security group owner. \n            Note that this is not the same thing as an AWS access key ID - you must provide \n            a valid AWS account number for this parameter.</p>",
+                        "smithy.api#documentation": "<p>The Amazon account number of the Amazon EC2 security group owner. \n            Note that this is not the same thing as an Amazon access key ID - you must provide \n            a valid Amazon account number for this parameter.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -9814,7 +9905,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Represents the input of a <code>TestFailover</code> operation which test automatic failover on\n            a specified node group (called shard in the console) in a replication group (called cluster in the console).</p>\n        \n        <p class=\"title\">\n            <b>Note the following</b>\n         </p>\n         <ul>\n            <li>\n                <p>A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and AWS CLI) \n                    in any rolling 24-hour period.</p>\n            </li>\n            <li>\n                <p>If calling this operation on shards in different clusters (called replication groups in the API and CLI), the calls can be made concurrently.</p>\n                <p> </p>\n            </li>\n            <li>\n                <p>If calling this operation multiple times on different shards in the same Redis (cluster mode enabled) replication group, \n                    the first node replacement must complete before a subsequent call can be made.</p>\n            </li>\n            <li>\n                <p>To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console,\n                    the AWS CLI, or the ElastiCache API.\n                    Look for the following automatic failover related events, listed here in order of occurrance:</p> \n                <ol>\n                  <li>\n                        <p>Replication group message: <code>Test Failover API called for node group <node-group-id></code>\n                     </p>\n                  </li>\n                  <li>\n                        <p>Cache cluster message: <code>Failover from primary node <primary-node-id> to replica node <node-id> completed</code>\n                     </p>\n                  </li>\n                  <li>\n                        <p>Replication group message: <code>Failover from primary node <primary-node-id> to replica node <node-id> completed</code>\n                     </p>\n                  </li>\n                  <li>\n                        <p>Cache cluster message: <code>Recovering cache nodes <node-id></code>\n                     </p>\n                  </li>\n                  <li>\n                        <p>Cache cluster message: <code>Finished recovery for cache nodes <node-id></code>\n                     </p>\n                  </li>\n               </ol>\n                \n                <p>For more information see:</p>\n                <ul>\n                  <li>\n                        <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html\">Viewing ElastiCache Events</a>\n                            in the <i>ElastiCache User Guide</i>\n                     </p>\n                  </li>\n                  <li>\n                        <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html\">DescribeEvents</a> in the ElastiCache API Reference</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n        \n        <p>Also see, <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test\">Testing Multi-AZ </a> in the <i>ElastiCache User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Represents the input of a <code>TestFailover</code> operation which test automatic failover on\n            a specified node group (called shard in the console) in a replication group (called cluster in the console).</p>\n        \n        <p class=\"title\">\n            <b>Note the following</b>\n         </p>\n         <ul>\n            <li>\n                <p>A customer can use this operation to test automatic failover on up to 5 shards (called node groups in the ElastiCache API and Amazon CLI) \n                    in any rolling 24-hour period.</p>\n            </li>\n            <li>\n                <p>If calling this operation on shards in different clusters (called replication groups in the API and CLI), the calls can be made concurrently.</p>\n                <p> </p>\n            </li>\n            <li>\n                <p>If calling this operation multiple times on different shards in the same Redis (cluster mode enabled) replication group, \n                    the first node replacement must complete before a subsequent call can be made.</p>\n            </li>\n            <li>\n                <p>To determine whether the node replacement is complete you can check Events using the Amazon ElastiCache console,\n                    the Amazon CLI, or the ElastiCache API.\n                    Look for the following automatic failover related events, listed here in order of occurrance:</p> \n                <ol>\n                  <li>\n                        <p>Replication group message: <code>Test Failover API called for node group <node-group-id></code>\n                     </p>\n                  </li>\n                  <li>\n                        <p>Cache cluster message: <code>Failover from primary node <primary-node-id> to replica node <node-id> completed</code>\n                     </p>\n                  </li>\n                  <li>\n                        <p>Replication group message: <code>Failover from primary node <primary-node-id> to replica node <node-id> completed</code>\n                     </p>\n                  </li>\n                  <li>\n                        <p>Cache cluster message: <code>Recovering cache nodes <node-id></code>\n                     </p>\n                  </li>\n                  <li>\n                        <p>Cache cluster message: <code>Finished recovery for cache nodes <node-id></code>\n                     </p>\n                  </li>\n               </ol>\n                \n                <p>For more information see:</p>\n                <ul>\n                  <li>\n                        <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/ECEvents.Viewing.html\">Viewing ElastiCache Events</a>\n                            in the <i>ElastiCache User Guide</i>\n                     </p>\n                  </li>\n                  <li>\n                        <p>\n                        <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/APIReference/API_DescribeEvents.html\">DescribeEvents</a> in the ElastiCache API Reference</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n        \n        <p>Also see, <a href=\"https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/AutoFailover.html#auto-failover-test\">Testing Multi-AZ </a> in the <i>ElastiCache User Guide</i>.</p>"
             }
         },
         "com.amazonaws.elasticache#TestFailoverMessage": {

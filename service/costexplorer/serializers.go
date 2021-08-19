@@ -1615,6 +1615,104 @@ func awsAwsjson11_serializeDocumentCostCategoryRulesList(v []types.CostCategoryR
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCostCategorySplitChargeRule(v *types.CostCategorySplitChargeRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Method) > 0 {
+		ok := object.Key("Method")
+		ok.String(string(v.Method))
+	}
+
+	if v.Parameters != nil {
+		ok := object.Key("Parameters")
+		if err := awsAwsjson11_serializeDocumentCostCategorySplitChargeRuleParametersList(v.Parameters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Source != nil {
+		ok := object.Key("Source")
+		ok.String(*v.Source)
+	}
+
+	if v.Targets != nil {
+		ok := object.Key("Targets")
+		if err := awsAwsjson11_serializeDocumentCostCategorySplitChargeRuleTargetsList(v.Targets, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCostCategorySplitChargeRuleParameter(v *types.CostCategorySplitChargeRuleParameter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Type) > 0 {
+		ok := object.Key("Type")
+		ok.String(string(v.Type))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentCostCategorySplitChargeRuleParameterValuesList(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCostCategorySplitChargeRuleParametersList(v []types.CostCategorySplitChargeRuleParameter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCostCategorySplitChargeRuleParameter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCostCategorySplitChargeRuleParameterValuesList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCostCategorySplitChargeRulesList(v []types.CostCategorySplitChargeRule, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentCostCategorySplitChargeRule(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCostCategorySplitChargeRuleTargetsList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCostCategoryValues(v *types.CostCategoryValues, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2065,6 +2163,13 @@ func awsAwsjson11_serializeOpDocumentCreateCostCategoryDefinitionInput(v *Create
 	if len(v.RuleVersion) > 0 {
 		ok := object.Key("RuleVersion")
 		ok.String(string(v.RuleVersion))
+	}
+
+	if v.SplitChargeRules != nil {
+		ok := object.Key("SplitChargeRules")
+		if err := awsAwsjson11_serializeDocumentCostCategorySplitChargeRulesList(v.SplitChargeRules, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3050,6 +3155,13 @@ func awsAwsjson11_serializeOpDocumentUpdateCostCategoryDefinitionInput(v *Update
 	if len(v.RuleVersion) > 0 {
 		ok := object.Key("RuleVersion")
 		ok.String(string(v.RuleVersion))
+	}
+
+	if v.SplitChargeRules != nil {
+		ok := object.Key("SplitChargeRules")
+		if err := awsAwsjson11_serializeDocumentCostCategorySplitChargeRulesList(v.SplitChargeRules, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

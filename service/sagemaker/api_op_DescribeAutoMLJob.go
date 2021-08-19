@@ -122,7 +122,7 @@ type DescribeAutoMLJobOutput struct {
 	// Returns the job's problem type.
 	ProblemType types.ProblemType
 
-	// This contains ProblemType, AutoMLJobObjective and CompletionCriteria. If you do
+	// This contains ProblemType, AutoMLJobObjective, and CompletionCriteria. If you do
 	// not provide these values, they are auto-inferred. If you do provide them, the
 	// values used are the ones you provide.
 	ResolvedAttributes *types.ResolvedAttributes

@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a conditional forwarder associated with your AWS directory. Conditional
-// forwarders are required in order to set up a trust relationship with another
-// domain. The conditional forwarder points to the trusted domain.
+// Creates a conditional forwarder associated with your Amazon Web Services
+// directory. Conditional forwarders are required in order to set up a trust
+// relationship with another domain. The conditional forwarder points to the
+// trusted domain.
 func (c *Client) CreateConditionalForwarder(ctx context.Context, params *CreateConditionalForwarderInput, optFns ...func(*Options)) (*CreateConditionalForwarderOutput, error) {
 	if params == nil {
 		params = &CreateConditionalForwarderInput{}
@@ -28,13 +29,13 @@ func (c *Client) CreateConditionalForwarder(ctx context.Context, params *CreateC
 	return out, nil
 }
 
-// Initiates the creation of a conditional forwarder for your AWS Directory Service
-// for Microsoft Active Directory. Conditional forwarders are required in order to
-// set up a trust relationship with another domain.
+// Initiates the creation of a conditional forwarder for your Directory Service for
+// Microsoft Active Directory. Conditional forwarders are required in order to set
+// up a trust relationship with another domain.
 type CreateConditionalForwarderInput struct {
 
-	// The directory ID of the AWS directory for which you are creating the conditional
-	// forwarder.
+	// The directory ID of the Amazon Web Services directory for which you are creating
+	// the conditional forwarder.
 	//
 	// This member is required.
 	DirectoryId *string

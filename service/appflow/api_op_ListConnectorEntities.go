@@ -32,7 +32,8 @@ func (c *Client) ListConnectorEntities(ctx context.Context, params *ListConnecto
 type ListConnectorEntitiesInput struct {
 
 	// The name of the connector profile. The name is unique for each ConnectorProfile
-	// in the AWS account, and is used to query the downstream connector.
+	// in the Amazon Web Services account, and is used to query the downstream
+	// connector.
 	ConnectorProfileName *string
 
 	// The type of connector, such as Salesforce, Amplitude, and so on.

@@ -53,8 +53,8 @@ type PutBucketOwnershipControlsInput struct {
 	OwnershipControls *types.OwnershipControls
 
 	// The MD5 hash of the OwnershipControls request body. For requests made using the
-	// AWS Command Line Interface (CLI) or AWS SDKs, this field is calculated
-	// automatically.
+	// Amazon Web Services Command Line Interface (CLI) or Amazon Web Services SDKs,
+	// this field is calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

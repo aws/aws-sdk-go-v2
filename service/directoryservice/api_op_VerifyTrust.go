@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// AWS Directory Service for Microsoft Active Directory allows you to configure and
+// Directory Service for Microsoft Active Directory allows you to configure and
 // verify trust relationships. This action verifies a trust relationship between
-// your AWS Managed Microsoft AD directory and an external domain.
+// your Managed Microsoft AD directory and an external domain.
 func (c *Client) VerifyTrust(ctx context.Context, params *VerifyTrustInput, optFns ...func(*Options)) (*VerifyTrustOutput, error) {
 	if params == nil {
 		params = &VerifyTrustInput{}
@@ -28,8 +28,8 @@ func (c *Client) VerifyTrust(ctx context.Context, params *VerifyTrustInput, optF
 	return out, nil
 }
 
-// Initiates the verification of an existing trust relationship between an AWS
-// Managed Microsoft AD directory and an external domain.
+// Initiates the verification of an existing trust relationship between an Managed
+// Microsoft AD directory and an external domain.
 type VerifyTrustInput struct {
 
 	// The unique Trust ID of the trust relationship to verify.

@@ -767,6 +767,10 @@
                     {
                         "value": "PROVISIONAL",
                         "name": "PROVISIONAL"
+                    },
+                    {
+                        "value": "PERPETUAL",
+                        "name": "PERPETUAL"
                     }
                 ]
             }

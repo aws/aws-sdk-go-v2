@@ -31,7 +31,7 @@ import (
 // more information, see Creating a Subnet Group
 // (https://docs.aws.amazon.com/AmazonElastiCache/latest/red-ug/SubnetGroups.Creating.html).
 // For versions below 5.0.6, the limit is 250 per cluster. To request a limit
-// increase, see AWS Service Limits
+// increase, see Amazon Service Limits
 // (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html) and
 // choose the limit type Nodes per cluster per instance type. When a Redis (cluster
 // mode disabled) replication group has been successfully created, you can add one

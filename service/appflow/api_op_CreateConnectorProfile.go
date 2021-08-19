@@ -11,10 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new connector profile associated with your AWS account. There is a
-// soft quota of 100 connector profiles per AWS account. If you need more connector
-// profiles than this quota allows, you can submit a request to the Amazon AppFlow
-// team through the Amazon AppFlow support channel.
+// Creates a new connector profile associated with your Amazon Web Services
+// account. There is a soft quota of 100 connector profiles per Amazon Web Services
+// account. If you need more connector profiles than this quota allows, you can
+// submit a request to the Amazon AppFlow team through the Amazon AppFlow support
+// channel.
 func (c *Client) CreateConnectorProfile(ctx context.Context, params *CreateConnectorProfileInput, optFns ...func(*Options)) (*CreateConnectorProfileOutput, error) {
 	if params == nil {
 		params = &CreateConnectorProfileInput{}
@@ -33,8 +34,8 @@ func (c *Client) CreateConnectorProfile(ctx context.Context, params *CreateConne
 type CreateConnectorProfileInput struct {
 
 	// Indicates the connection mode and specifies whether it is public or private.
-	// Private flows use AWS PrivateLink to route data over AWS infrastructure without
-	// exposing it to the public internet.
+	// Private flows use Amazon Web Services PrivateLink to route data over Amazon Web
+	// Services infrastructure without exposing it to the public internet.
 	//
 	// This member is required.
 	ConnectionMode types.ConnectionMode
@@ -45,7 +46,7 @@ type CreateConnectorProfileInput struct {
 	ConnectorProfileConfig *types.ConnectorProfileConfig
 
 	// The name of the connector profile. The name is unique for each ConnectorProfile
-	// in your AWS account.
+	// in your Amazon Web Services account.
 	//
 	// This member is required.
 	ConnectorProfileName *string

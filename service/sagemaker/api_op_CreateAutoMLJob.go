@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an Autopilot job. Find the best performing model after you run an
+// Creates an Autopilot job. Find the best-performing model after you run an
 // Autopilot job by calling . For information about how to use Autopilot, see
 // Automate Model Development with Amazon SageMaker Autopilot
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/autopilot-automate-model-development.html).
@@ -88,7 +88,7 @@ type CreateAutoMLJobInput struct {
 
 type CreateAutoMLJobOutput struct {
 
-	// The unique ARN that is assigned to the AutoML job when it is created.
+	// The unique ARN assigned to the AutoML job when it is created.
 	//
 	// This member is required.
 	AutoMLJobArn *string

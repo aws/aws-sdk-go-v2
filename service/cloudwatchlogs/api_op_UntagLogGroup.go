@@ -15,6 +15,9 @@ import (
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_ListTagsLogGroup.html).
 // To add tags, use TagLogGroup
 // (https://docs.aws.amazon.com/AmazonCloudWatchLogs/latest/APIReference/API_TagLogGroup.html).
+// CloudWatch Logs doesn’t support IAM policies that prevent users from assigning
+// specified tags to log groups using the aws:Resource/key-name  or aws:TagKeys
+// condition keys.
 func (c *Client) UntagLogGroup(ctx context.Context, params *UntagLogGroupInput, optFns ...func(*Options)) (*UntagLogGroupOutput, error) {
 	if params == nil {
 		params = &UntagLogGroupInput{}
