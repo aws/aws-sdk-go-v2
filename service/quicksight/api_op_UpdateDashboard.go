@@ -54,10 +54,10 @@ type UpdateDashboardInput struct {
 	// you need to update a dashboard from an analysis, first convert the analysis to a
 	// template by using the CreateTemplate API operation. For SourceTemplate, specify
 	// the Amazon Resource Name (ARN) of the source template. The SourceTemplate ARN
-	// can contain any Amazon Web Services account; and any QuickSight-supported
-	// Region;. Use the DataSetReferences entity within SourceTemplate to list the
-	// replacement datasets for the placeholders listed in the original. The schema in
-	// each dataset must match its placeholder.
+	// can contain any Amazon Web Services account; and any QuickSight-supported Amazon
+	// Web Services Region;. Use the DataSetReferences entity within SourceTemplate to
+	// list the replacement datasets for the placeholders listed in the original. The
+	// schema in each dataset must match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.DashboardSourceEntity

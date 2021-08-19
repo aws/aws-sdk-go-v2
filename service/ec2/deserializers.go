@@ -60984,6 +60984,19 @@ func awsEc2query_deserializeDocumentImportImageTask(v **types.ImportImageTask, d
 				return err
 			}
 
+		case strings.EqualFold("usageOperation", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.UsageOperation = ptr.String(xtv)
+			}
+
 		default:
 			// Do nothing and ignore the unexpected tag element
 			err = decoder.Decoder.Skip()
@@ -69094,6 +69107,19 @@ func awsEc2query_deserializeDocumentKeyPairInfo(v **types.KeyPairInfo, decoder s
 			{
 				xtv := string(val)
 				sv.KeyPairId = ptr.String(xtv)
+			}
+
+		case strings.EqualFold("keyType", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.KeyType = types.KeyType(xtv)
 			}
 
 		case strings.EqualFold("tagSet", t.Name.Local):
@@ -122524,6 +122550,19 @@ func awsEc2query_deserializeOpDocumentImportImageOutput(v **ImportImageOutput, d
 			nodeDecoder := smithyxml.WrapNodeDecoder(decoder.Decoder, t)
 			if err := awsEc2query_deserializeDocumentTagList(&sv.Tags, nodeDecoder); err != nil {
 				return err
+			}
+
+		case strings.EqualFold("usageOperation", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.UsageOperation = ptr.String(xtv)
 			}
 
 		default:

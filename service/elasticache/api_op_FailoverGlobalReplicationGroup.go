@@ -36,7 +36,7 @@ type FailoverGlobalReplicationGroupInput struct {
 	// This member is required.
 	GlobalReplicationGroupId *string
 
-	// The AWS region of the primary cluster of the Global datastore
+	// The Amazon region of the primary cluster of the Global datastore
 	//
 	// This member is required.
 	PrimaryRegion *string
@@ -52,7 +52,7 @@ type FailoverGlobalReplicationGroupInput struct {
 type FailoverGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary
-	// cluster that resides in a different AWS region. The secondary cluster accepts
+	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
 	//

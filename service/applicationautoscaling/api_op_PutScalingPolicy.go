@@ -128,6 +128,11 @@ type PutScalingPolicyInput struct {
 	// unique identifier are specified using the cluster ARN. Example:
 	// arn:aws:kafka:us-east-1:123456789012:cluster/demo-cluster-1/6357e0b2-0e6a-4b86-a0b4-70df934c2e31-5.
 	//
+	// *
+	// Amazon ElastiCache replication group - The resource type is replication-group
+	// and the unique identifier is the replication group name. Example:
+	// replication-group/mycluster.
+	//
 	// This member is required.
 	ResourceId *string
 
@@ -137,12 +142,12 @@ type PutScalingPolicyInput struct {
 	// * ecs:service:DesiredCount - The desired task count
 	// of an ECS service.
 	//
-	// * ec2:spot-fleet-request:TargetCapacity - The target
-	// capacity of a Spot Fleet request.
+	// * elasticmapreduce:instancegroup:InstanceCount - The
+	// instance count of an EMR Instance Group.
 	//
 	// *
-	// elasticmapreduce:instancegroup:InstanceCount - The instance count of an EMR
-	// Instance Group.
+	// ec2:spot-fleet-request:TargetCapacity - The target capacity of a Spot Fleet
+	// request.
 	//
 	// * appstream:fleet:DesiredCapacity - The desired capacity of an
 	// AppStream 2.0 fleet.
@@ -194,11 +199,19 @@ type PutScalingPolicyInput struct {
 	// kafka:broker-storage:VolumeSize - The provisioned volume size (in GiB) for
 	// brokers in an Amazon MSK cluster.
 	//
+	// * elasticache:replication-group:NodeGroups -
+	// The number of node groups for an Amazon ElastiCache replication group.
+	//
+	// *
+	// elasticache:replication-group:Replicas - The number of replicas per node group
+	// for an Amazon ElastiCache replication group.
+	//
 	// This member is required.
 	ScalableDimension types.ScalableDimension
 
-	// The namespace of the AWS service that provides the resource. For a resource
-	// provided by your own application or service, use custom-resource instead.
+	// The namespace of the Amazon Web Services service that provides the resource. For
+	// a resource provided by your own application or service, use custom-resource
+	// instead.
 	//
 	// This member is required.
 	ServiceNamespace types.ServiceNamespace
@@ -206,8 +219,9 @@ type PutScalingPolicyInput struct {
 	// The policy type. This parameter is required if you are creating a scaling
 	// policy. The following policy types are supported: TargetTrackingScaling—Not
 	// supported for Amazon EMR StepScaling—Not supported for DynamoDB, Amazon
-	// Comprehend, Lambda, Amazon Keyspaces (for Apache Cassandra), or Amazon MSK. For
-	// more information, see Target tracking scaling policies
+	// Comprehend, Lambda, Amazon Keyspaces (for Apache Cassandra), Amazon MSK, or
+	// Amazon ElastiCache for Redis. For more information, see Target tracking scaling
+	// policies
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-target-tracking.html)
 	// and Step scaling policies
 	// (https://docs.aws.amazon.com/autoscaling/application/userguide/application-auto-scaling-step-scaling-policies.html)

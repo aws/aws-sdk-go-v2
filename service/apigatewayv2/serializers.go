@@ -6232,6 +6232,11 @@ func awsRestjson1_serializeDocumentDomainNameConfiguration(v *types.DomainNameCo
 		ok.String(*v.HostedZoneId)
 	}
 
+	if v.OwnershipVerificationCertificateArn != nil {
+		ok := object.Key("ownershipVerificationCertificateArn")
+		ok.String(*v.OwnershipVerificationCertificateArn)
+	}
+
 	if len(v.SecurityPolicy) > 0 {
 		ok := object.Key("securityPolicy")
 		ok.String(string(v.SecurityPolicy))

@@ -133,6 +133,44 @@ func (CostCategoryRuleVersion) Values() []CostCategoryRuleVersion {
 	}
 }
 
+type CostCategorySplitChargeMethod string
+
+// Enum values for CostCategorySplitChargeMethod
+const (
+	CostCategorySplitChargeMethodFixed        CostCategorySplitChargeMethod = "FIXED"
+	CostCategorySplitChargeMethodProportional CostCategorySplitChargeMethod = "PROPORTIONAL"
+	CostCategorySplitChargeMethodEven         CostCategorySplitChargeMethod = "EVEN"
+)
+
+// Values returns all known values for CostCategorySplitChargeMethod. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CostCategorySplitChargeMethod) Values() []CostCategorySplitChargeMethod {
+	return []CostCategorySplitChargeMethod{
+		"FIXED",
+		"PROPORTIONAL",
+		"EVEN",
+	}
+}
+
+type CostCategorySplitChargeRuleParameterType string
+
+// Enum values for CostCategorySplitChargeRuleParameterType
+const (
+	CostCategorySplitChargeRuleParameterTypeAllocationPercentages CostCategorySplitChargeRuleParameterType = "ALLOCATION_PERCENTAGES"
+)
+
+// Values returns all known values for CostCategorySplitChargeRuleParameterType.
+// Note that this can be expanded in the future, and so it is only as up to date as
+// the client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (CostCategorySplitChargeRuleParameterType) Values() []CostCategorySplitChargeRuleParameterType {
+	return []CostCategorySplitChargeRuleParameterType{
+		"ALLOCATION_PERCENTAGES",
+	}
+}
+
 type CostCategoryStatus string
 
 // Enum values for CostCategoryStatus

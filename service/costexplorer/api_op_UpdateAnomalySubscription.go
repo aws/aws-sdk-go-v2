@@ -34,8 +34,7 @@ type UpdateAnomalySubscriptionInput struct {
 	// This member is required.
 	SubscriptionArn *string
 
-	// The update to the frequency value at which subscribers will receive
-	// notifications.
+	// The update to the frequency value that subscribers receive notifications.
 	Frequency types.AnomalySubscriptionFrequency
 
 	// A list of cost anomaly monitor ARNs.
@@ -44,7 +43,7 @@ type UpdateAnomalySubscriptionInput struct {
 	// The update to the subscriber list.
 	Subscribers []types.Subscriber
 
-	// The subscription's new name.
+	// The new name of the subscription.
 	SubscriptionName *string
 
 	// The update to the threshold value for receiving notifications.

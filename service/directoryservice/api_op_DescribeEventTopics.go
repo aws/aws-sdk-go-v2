@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Obtains information about which SNS topics receive status messages from the
-// specified directory. If no input parameters are provided, such as DirectoryId or
-// TopicName, this request describes all of the associations in the account.
+// Obtains information about which Amazon SNS topics receive status messages from
+// the specified directory. If no input parameters are provided, such as
+// DirectoryId or TopicName, this request describes all of the associations in the
+// account.
 func (c *Client) DescribeEventTopics(ctx context.Context, params *DescribeEventTopicsInput, optFns ...func(*Options)) (*DescribeEventTopicsOutput, error) {
 	if params == nil {
 		params = &DescribeEventTopicsInput{}
@@ -32,13 +33,13 @@ func (c *Client) DescribeEventTopics(ctx context.Context, params *DescribeEventT
 // Describes event topics.
 type DescribeEventTopicsInput struct {
 
-	// The Directory ID for which to get the list of associated SNS topics. If this
-	// member is null, associations for all Directory IDs are returned.
+	// The Directory ID for which to get the list of associated Amazon SNS topics. If
+	// this member is null, associations for all Directory IDs are returned.
 	DirectoryId *string
 
-	// A list of SNS topic names for which to obtain the information. If this member is
-	// null, all associations for the specified Directory ID are returned. An empty
-	// list results in an InvalidParameterException being thrown.
+	// A list of Amazon SNS topic names for which to obtain the information. If this
+	// member is null, all associations for the specified Directory ID are returned. An
+	// empty list results in an InvalidParameterException being thrown.
 	TopicNames []string
 
 	noSmithyDocumentSerde
@@ -47,7 +48,7 @@ type DescribeEventTopicsInput struct {
 // The result of a DescribeEventTopic request.
 type DescribeEventTopicsOutput struct {
 
-	// A list of SNS topic names that receive status messages from the specified
+	// A list of Amazon SNS topic names that receive status messages from the specified
 	// Directory ID.
 	EventTopics []types.EventTopic
 

@@ -11,8 +11,8 @@ import (
 )
 
 // Enables single sign-on for a directory. Single sign-on allows users in your
-// directory to access certain AWS services from a computer joined to the directory
-// without having to enter their credentials separately.
+// directory to access certain Amazon Web Services services from a computer joined
+// to the directory without having to enter their credentials separately.
 func (c *Client) EnableSso(ctx context.Context, params *EnableSsoInput, optFns ...func(*Options)) (*EnableSsoOutput, error) {
 	if params == nil {
 		params = &EnableSsoInput{}

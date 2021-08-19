@@ -36,8 +36,8 @@ type GetDimensionValuesInput struct {
 	// This member is required.
 	Dimension types.Dimension
 
-	// The start and end dates for retrieving the dimension values. The start date is
-	// inclusive, but the end date is exclusive. For example, if start is 2017-01-01
+	// The start date and end date for retrieving the dimension values. The start date
+	// is inclusive, but the end date is exclusive. For example, if start is 2017-01-01
 	// and end is 2017-05-01, then the cost and usage data is retrieved from 2017-01-01
 	// up to and including 2017-04-30 but not including 2017-05-01.
 	//
@@ -62,44 +62,45 @@ type GetDimensionValuesInput struct {
 	// is m4.xlarge.
 	//
 	// * LEGAL_ENTITY_NAME - The name of the organization that sells you
-	// AWS services, such as Amazon Web Services.
+	// Amazon Web Services services, such as Amazon Web Services.
 	//
-	// * LINKED_ACCOUNT - The description
-	// in the attribute map that includes the full name of the member account. The
-	// value field contains the AWS ID of the member account.
+	// * LINKED_ACCOUNT -
+	// The description in the attribute map that includes the full name of the member
+	// account. The value field contains the Amazon Web Services ID of the member
+	// account.
 	//
-	// * OPERATING_SYSTEM - The
-	// operating system. Examples are Windows or Linux.
+	// * OPERATING_SYSTEM - The operating system. Examples are Windows or
+	// Linux.
 	//
-	// * OPERATION - The action
-	// performed. Examples include RunInstance and CreateBucket.
+	// * OPERATION - The action performed. Examples include RunInstance and
+	// CreateBucket.
 	//
-	// * PLATFORM - The
-	// Amazon EC2 operating system. Examples are Windows or Linux.
+	// * PLATFORM - The Amazon EC2 operating system. Examples are
+	// Windows or Linux.
 	//
-	// * PURCHASE_TYPE -
-	// The reservation type of the purchase to which this usage is related. Examples
-	// include On-Demand Instances and Standard Reserved Instances.
+	// * PURCHASE_TYPE - The reservation type of the purchase to
+	// which this usage is related. Examples include On-Demand Instances and Standard
+	// Reserved Instances.
 	//
-	// * SERVICE - The
-	// AWS service such as Amazon DynamoDB.
+	// * SERVICE - The Amazon Web Services service such as Amazon
+	// DynamoDB.
 	//
-	// * USAGE_TYPE - The type of usage. An
-	// example is DataTransfer-In-Bytes. The response for the GetDimensionValues
-	// operation includes a unit attribute. Examples include GB and Hrs.
+	// * USAGE_TYPE - The type of usage. An example is
+	// DataTransfer-In-Bytes. The response for the GetDimensionValues operation
+	// includes a unit attribute. Examples include GB and Hrs.
 	//
-	// *
-	// USAGE_TYPE_GROUP - The grouping of common usage types. An example is Amazon EC2:
-	// CloudWatch – Alarms. The response for this operation includes a unit
-	// attribute.
+	// * USAGE_TYPE_GROUP -
+	// The grouping of common usage types. An example is Amazon EC2: CloudWatch –
+	// Alarms. The response for this operation includes a unit attribute.
 	//
-	// * REGION - The AWS Region.
+	// * REGION -
+	// The Amazon Web Services Region.
 	//
-	// * RECORD_TYPE - The different types of
-	// charges such as RI fees, usage costs, tax refunds, and credits.
+	// * RECORD_TYPE - The different types of charges
+	// such as RI fees, usage costs, tax refunds, and credits.
 	//
-	// * RESOURCE_ID -
-	// The unique identifier of the resource. ResourceId is an opt-in feature only
+	// * RESOURCE_ID - The
+	// unique identifier of the resource. ResourceId is an opt-in feature only
 	// available for last 14 days for EC2-Compute Service.
 	//
 	// If you set the context to
@@ -120,44 +121,45 @@ type GetDimensionValuesInput struct {
 	//
 	// * LINKED_ACCOUNT - The description in the
 	// attribute map that includes the full name of the member account. The value field
-	// contains the AWS ID of the member account.
+	// contains the Amazon Web Services ID of the member account.
 	//
-	// * PLATFORM - The Amazon EC2
-	// operating system. Examples are Windows or Linux.
+	// * PLATFORM - The
+	// Amazon EC2 operating system. Examples are Windows or Linux.
 	//
-	// * REGION - The AWS Region.
+	// * REGION - The
+	// Amazon Web Services Region.
 	//
-	// *
-	// SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are
-	// regional or a single Availability Zone.
-	//
-	// * TAG (Coverage only) - The tags that
-	// are associated with a Reserved Instance (RI).
-	//
-	// * TENANCY - The tenancy of a
-	// resource. Examples are shared or dedicated.
-	//
-	// If you set the context to
-	// SAVINGS_PLANS, you can use the following dimensions for searching:
+	// * SCOPE (Utilization only) - The scope of a
+	// Reserved Instance (RI). Values are regional or a single Availability Zone.
 	//
 	// *
-	// SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2 Instance or Compute)
+	// TAG (Coverage only) - The tags that are associated with a Reserved Instance
+	// (RI).
+	//
+	// * TENANCY - The tenancy of a resource. Examples are shared or
+	// dedicated.
+	//
+	// If you set the context to SAVINGS_PLANS, you can use the following
+	// dimensions for searching:
+	//
+	// * SAVINGS_PLANS_TYPE - Type of Savings Plans (EC2
+	// Instance or Compute)
+	//
+	// * PAYMENT_OPTION - Payment option for the given Savings
+	// Plans (for example, All Upfront)
+	//
+	// * REGION - The Amazon Web Services Region.
 	//
 	// *
-	// PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All
-	// Upfront)
+	// INSTANCE_TYPE_FAMILY - The family of instances (For example, m5)
 	//
-	// * REGION - The AWS Region.
+	// *
+	// LINKED_ACCOUNT - The description in the attribute map that includes the full
+	// name of the member account. The value field contains the Amazon Web Services ID
+	// of the member account.
 	//
-	// * INSTANCE_TYPE_FAMILY - The family of
-	// instances (For example, m5)
-	//
-	// * LINKED_ACCOUNT - The description in the attribute
-	// map that includes the full name of the member account. The value field contains
-	// the AWS ID of the member account.
-	//
-	// * SAVINGS_PLAN_ARN - The unique identifier
-	// for your Savings Plan
+	// * SAVINGS_PLAN_ARN - The unique identifier for your
+	// Savings Plan
 	Context types.Context
 
 	// Use Expression to filter by cost or by usage. There are two patterns:
@@ -166,32 +168,33 @@ type GetDimensionValuesInput struct {
 	// dimension values - You can set the dimension name and values for the filters
 	// that you plan to use. For example, you can filter for REGION==us-east-1 OR
 	// REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full name
-	// (for example, REGION==US East (N. Virginia). The Expression example looks like:
-	// { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
-	// The list of dimension values are OR'd together to retrieve cost or usage data.
-	// You can create Expression and DimensionValues objects using either with* methods
-	// or set* methods in multiple lines.
+	// (for example, REGION==US East (N. Virginia). The Expression example is as
+	// follows: { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1”
+	// ] } } The list of dimension values are OR'd together to retrieve cost or usage
+	// data. You can create Expression and DimensionValues objects using either with*
+	// methods or set* methods in multiple lines.
 	//
-	// * Compound dimension values with logical
-	// operations - You can use multiple Expression types and the logical operators
-	// AND/OR/NOT to create a list of one or more Expression objects. This allows you
-	// to filter on more advanced options. For example, you can filter on ((REGION ==
-	// us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
-	// DataTransfer). The Expression for that looks like this: { "And": [ {"Or": [
-	// {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }},
-	// {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions":
-	// { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }  Because each
-	// Expression can have only one operator, the service returns an error if more than
-	// one is specified. The following example shows an Expression object that creates
-	// an error.  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE",
-	// "Values": [ "DataTransfer" ] } }
+	// * Compound dimension values with
+	// logical operations - You can use multiple Expression types and the logical
+	// operators AND/OR/NOT to create a list of one or more Expression objects. By
+	// doing this, you can filter on more advanced options. For example, you can filter
+	// on ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
+	// (USAGE_TYPE != DataTransfer). The Expression for that is as follows: { "And": [
+	// {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1"
+	// ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not":
+	// {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
+	// Because each Expression can have only one operator, the service returns an error
+	// if more than one is specified. The following example shows an Expression object
+	// that creates an error.  { "And": [ ... ], "DimensionValues": { "Dimension":
+	// "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
 	//
-	// For the GetRightsizingRecommendation action, a
-	// combination of OR and NOT is not supported. OR is not supported between
-	// different dimensions, or dimensions and tags. NOT operators aren't supported.
-	// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For
-	// the GetReservationPurchaseRecommendation action, only NOT is supported. AND and
-	// OR are not supported. Dimensions are limited to LINKED_ACCOUNT.
+	// For the
+	// GetRightsizingRecommendation action, a combination of OR and NOT isn't
+	// supported. OR isn't supported between different dimensions, or dimensions and
+	// tags. NOT operators aren't supported. Dimensions are also limited to
+	// LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For the
+	// GetReservationPurchaseRecommendation action, only NOT is supported. AND and OR
+	// aren't supported. Dimensions are limited to LINKED_ACCOUNT.
 	Filter *types.Expression
 
 	// This field is only used when SortBy is provided in the request. The maximum
@@ -201,8 +204,9 @@ type GetDimensionValuesInput struct {
 	// 1000.
 	MaxResults int32
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// The value that you want to search the filter values for.
@@ -252,75 +256,76 @@ type GetDimensionValuesOutput struct {
 	// Amazon EC2 instance. An example is m4.xlarge.
 	//
 	// * LEGAL_ENTITY_NAME - The name of
-	// the organization that sells you AWS services, such as Amazon Web Services.
+	// the organization that sells you Amazon Web Services services, such as Amazon Web
+	// Services.
+	//
+	// * LINKED_ACCOUNT - The description in the attribute map that includes
+	// the full name of the member account. The value field contains the Amazon Web
+	// Services ID of the member account.
+	//
+	// * OPERATING_SYSTEM - The operating system.
+	// Examples are Windows or Linux.
+	//
+	// * OPERATION - The action performed. Examples
+	// include RunInstance and CreateBucket.
+	//
+	// * PLATFORM - The Amazon EC2 operating
+	// system. Examples are Windows or Linux.
+	//
+	// * PURCHASE_TYPE - The reservation type
+	// of the purchase to which this usage is related. Examples include On-Demand
+	// Instances and Standard Reserved Instances.
+	//
+	// * SERVICE - The Amazon Web Services
+	// service such as Amazon DynamoDB.
+	//
+	// * USAGE_TYPE - The type of usage. An example
+	// is DataTransfer-In-Bytes. The response for the GetDimensionValues operation
+	// includes a unit attribute. Examples include GB and Hrs.
+	//
+	// * USAGE_TYPE_GROUP -
+	// The grouping of common usage types. An example is Amazon EC2: CloudWatch –
+	// Alarms. The response for this operation includes a unit attribute.
+	//
+	// *
+	// RECORD_TYPE - The different types of charges such as RI fees, usage costs, tax
+	// refunds, and credits.
+	//
+	// * RESOURCE_ID - The unique identifier of the resource.
+	// ResourceId is an opt-in feature only available for last 14 days for EC2-Compute
+	// Service.
+	//
+	// If you set the context to RESERVATIONS, you can use the following
+	// dimensions for searching:
+	//
+	// * AZ - The Availability Zone. An example is
+	// us-east-1a.
+	//
+	// * CACHE_ENGINE - The Amazon ElastiCache operating system. Examples
+	// are Windows or Linux.
+	//
+	// * DEPLOYMENT_OPTION - The scope of Amazon Relational
+	// Database Service deployments. Valid values are SingleAZ and MultiAZ.
+	//
+	// *
+	// INSTANCE_TYPE - The type of Amazon EC2 instance. An example is m4.xlarge.
 	//
 	// *
 	// LINKED_ACCOUNT - The description in the attribute map that includes the full
-	// name of the member account. The value field contains the AWS ID of the member
-	// account.
+	// name of the member account. The value field contains the Amazon Web Services ID
+	// of the member account.
 	//
-	// * OPERATING_SYSTEM - The operating system. Examples are Windows or
-	// Linux.
+	// * PLATFORM - The Amazon EC2 operating system. Examples
+	// are Windows or Linux.
 	//
-	// * OPERATION - The action performed. Examples include RunInstance and
-	// CreateBucket.
+	// * REGION - The Amazon Web Services Region.
 	//
-	// * PLATFORM - The Amazon EC2 operating system. Examples are
-	// Windows or Linux.
+	// * SCOPE
+	// (Utilization only) - The scope of a Reserved Instance (RI). Values are regional
+	// or a single Availability Zone.
 	//
-	// * PURCHASE_TYPE - The reservation type of the purchase to
-	// which this usage is related. Examples include On-Demand Instances and Standard
-	// Reserved Instances.
-	//
-	// * SERVICE - The AWS service such as Amazon DynamoDB.
-	//
-	// *
-	// USAGE_TYPE - The type of usage. An example is DataTransfer-In-Bytes. The
-	// response for the GetDimensionValues operation includes a unit attribute.
-	// Examples include GB and Hrs.
-	//
-	// * USAGE_TYPE_GROUP - The grouping of common usage
-	// types. An example is Amazon EC2: CloudWatch – Alarms. The response for this
-	// operation includes a unit attribute.
-	//
-	// * RECORD_TYPE - The different types of
-	// charges such as RI fees, usage costs, tax refunds, and credits.
-	//
-	// * RESOURCE_ID -
-	// The unique identifier of the resource. ResourceId is an opt-in feature only
-	// available for last 14 days for EC2-Compute Service.
-	//
-	// If you set the context to
-	// RESERVATIONS, you can use the following dimensions for searching:
-	//
-	// * AZ - The
-	// Availability Zone. An example is us-east-1a.
-	//
-	// * CACHE_ENGINE - The Amazon
-	// ElastiCache operating system. Examples are Windows or Linux.
-	//
-	// *
-	// DEPLOYMENT_OPTION - The scope of Amazon Relational Database Service deployments.
-	// Valid values are SingleAZ and MultiAZ.
-	//
-	// * INSTANCE_TYPE - The type of Amazon EC2
-	// instance. An example is m4.xlarge.
-	//
-	// * LINKED_ACCOUNT - The description in the
-	// attribute map that includes the full name of the member account. The value field
-	// contains the AWS ID of the member account.
-	//
-	// * PLATFORM - The Amazon EC2
-	// operating system. Examples are Windows or Linux.
-	//
-	// * REGION - The AWS Region.
-	//
-	// *
-	// SCOPE (Utilization only) - The scope of a Reserved Instance (RI). Values are
-	// regional or a single Availability Zone.
-	//
-	// * TAG (Coverage only) - The tags that
-	// are associated with a Reserved Instance (RI).
+	// * TAG (Coverage only) - The tags that are
+	// associated with a Reserved Instance (RI).
 	//
 	// * TENANCY - The tenancy of a
 	// resource. Examples are shared or dedicated.
@@ -335,22 +340,22 @@ type GetDimensionValuesOutput struct {
 	// PAYMENT_OPTION - Payment option for the given Savings Plans (for example, All
 	// Upfront)
 	//
-	// * REGION - The AWS Region.
+	// * REGION - The Amazon Web Services Region.
 	//
-	// * INSTANCE_TYPE_FAMILY - The family of
-	// instances (For example, m5)
+	// * INSTANCE_TYPE_FAMILY -
+	// The family of instances (For example, m5)
 	//
-	// * LINKED_ACCOUNT - The description in the attribute
-	// map that includes the full name of the member account. The value field contains
-	// the AWS ID of the member account.
+	// * LINKED_ACCOUNT - The description in
+	// the attribute map that includes the full name of the member account. The value
+	// field contains the Amazon Web Services ID of the member account.
 	//
-	// * SAVINGS_PLAN_ARN - The unique identifier
-	// for your Savings Plan
+	// *
+	// SAVINGS_PLAN_ARN - The unique identifier for your Savings Plan
 	//
 	// This member is required.
 	DimensionValues []types.DimensionValuesWithAttributes
 
-	// The number of results that AWS returned at one time.
+	// The number of results that Amazon Web Services returned at one time.
 	//
 	// This member is required.
 	ReturnSize *int32
@@ -360,8 +365,9 @@ type GetDimensionValuesOutput struct {
 	// This member is required.
 	TotalSize *int32
 
-	// The token for the next set of retrievable results. AWS provides the token when
-	// the response from a previous call has more results than the maximum page size.
+	// The token for the next set of retrievable results. Amazon Web Services provides
+	// the token when the response from a previous call has more results than the
+	// maximum page size.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -13,19 +13,21 @@ import (
 
 // Gets recommendations for which reservations to purchase. These recommendations
 // could help you reduce your costs. Reservations provide a discounted hourly rate
-// (up to 75%) compared to On-Demand pricing. AWS generates your recommendations by
-// identifying your On-Demand usage during a specific time period and collecting
-// your usage into categories that are eligible for a reservation. After AWS has
-// these categories, it simulates every combination of reservations in each
-// category of usage to identify the best number of each type of RI to purchase to
-// maximize your estimated savings. For example, AWS automatically aggregates your
-// Amazon EC2 Linux, shared tenancy, and c4 family usage in the US West (Oregon)
-// Region and recommends that you buy size-flexible regional reservations to apply
-// to the c4 family usage. AWS recommends the smallest size instance in an instance
-// family. This makes it easier to purchase a size-flexible RI. AWS also shows the
-// equal number of normalized units so that you can purchase any instance size that
-// you want. For this example, your RI recommendation would be for c4.large because
-// that is the smallest size instance in the c4 instance family.
+// (up to 75%) compared to On-Demand pricing. Amazon Web Services generates your
+// recommendations by identifying your On-Demand usage during a specific time
+// period and collecting your usage into categories that are eligible for a
+// reservation. After Amazon Web Services has these categories, it simulates every
+// combination of reservations in each category of usage to identify the best
+// number of each type of RI to purchase to maximize your estimated savings. For
+// example, Amazon Web Services automatically aggregates your Amazon EC2 Linux,
+// shared tenancy, and c4 family usage in the US West (Oregon) Region and
+// recommends that you buy size-flexible regional reservations to apply to the c4
+// family usage. Amazon Web Services recommends the smallest size instance in an
+// instance family. This makes it easier to purchase a size-flexible RI. Amazon Web
+// Services also shows the equal number of normalized units so that you can
+// purchase any instance size that you want. For this example, your RI
+// recommendation would be for c4.large because that is the smallest size instance
+// in the c4 instance family.
 func (c *Client) GetReservationPurchaseRecommendation(ctx context.Context, params *GetReservationPurchaseRecommendationInput, optFns ...func(*Options)) (*GetReservationPurchaseRecommendationOutput, error) {
 	if params == nil {
 		params = &GetReservationPurchaseRecommendationInput{}
@@ -63,36 +65,37 @@ type GetReservationPurchaseRecommendationInput struct {
 	// dimension values - You can set the dimension name and values for the filters
 	// that you plan to use. For example, you can filter for REGION==us-east-1 OR
 	// REGION==us-west-1. For GetRightsizingRecommendation, the Region is a full name
-	// (for example, REGION==US East (N. Virginia). The Expression example looks like:
-	// { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1” ] } }
-	// The list of dimension values are OR'd together to retrieve cost or usage data.
-	// You can create Expression and DimensionValues objects using either with* methods
-	// or set* methods in multiple lines.
+	// (for example, REGION==US East (N. Virginia). The Expression example is as
+	// follows: { "Dimensions": { "Key": "REGION", "Values": [ "us-east-1", “us-west-1”
+	// ] } } The list of dimension values are OR'd together to retrieve cost or usage
+	// data. You can create Expression and DimensionValues objects using either with*
+	// methods or set* methods in multiple lines.
 	//
-	// * Compound dimension values with logical
-	// operations - You can use multiple Expression types and the logical operators
-	// AND/OR/NOT to create a list of one or more Expression objects. This allows you
-	// to filter on more advanced options. For example, you can filter on ((REGION ==
-	// us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND (USAGE_TYPE !=
-	// DataTransfer). The Expression for that looks like this: { "And": [ {"Or": [
-	// {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1" ] }},
-	// {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not": {"Dimensions":
-	// { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }  Because each
-	// Expression can have only one operator, the service returns an error if more than
-	// one is specified. The following example shows an Expression object that creates
-	// an error.  { "And": [ ... ], "DimensionValues": { "Dimension": "USAGE_TYPE",
-	// "Values": [ "DataTransfer" ] } }
+	// * Compound dimension values with
+	// logical operations - You can use multiple Expression types and the logical
+	// operators AND/OR/NOT to create a list of one or more Expression objects. By
+	// doing this, you can filter on more advanced options. For example, you can filter
+	// on ((REGION == us-east-1 OR REGION == us-west-1) OR (TAG.Type == Type1)) AND
+	// (USAGE_TYPE != DataTransfer). The Expression for that is as follows: { "And": [
+	// {"Or": [ {"Dimensions": { "Key": "REGION", "Values": [ "us-east-1", "us-west-1"
+	// ] }}, {"Tags": { "Key": "TagName", "Values": ["Value1"] } } ]}, {"Not":
+	// {"Dimensions": { "Key": "USAGE_TYPE", "Values": ["DataTransfer"] }}} ] }
+	// Because each Expression can have only one operator, the service returns an error
+	// if more than one is specified. The following example shows an Expression object
+	// that creates an error.  { "And": [ ... ], "DimensionValues": { "Dimension":
+	// "USAGE_TYPE", "Values": [ "DataTransfer" ] } }
 	//
-	// For the GetRightsizingRecommendation action, a
-	// combination of OR and NOT is not supported. OR is not supported between
-	// different dimensions, or dimensions and tags. NOT operators aren't supported.
-	// Dimensions are also limited to LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For
-	// the GetReservationPurchaseRecommendation action, only NOT is supported. AND and
-	// OR are not supported. Dimensions are limited to LINKED_ACCOUNT.
+	// For the
+	// GetRightsizingRecommendation action, a combination of OR and NOT isn't
+	// supported. OR isn't supported between different dimensions, or dimensions and
+	// tags. NOT operators aren't supported. Dimensions are also limited to
+	// LINKED_ACCOUNT, REGION, or RIGHTSIZING_TYPE. For the
+	// GetReservationPurchaseRecommendation action, only NOT is supported. AND and OR
+	// aren't supported. Dimensions are limited to LINKED_ACCOUNT.
 	Filter *types.Expression
 
-	// The number of previous days that you want AWS to consider when it calculates
-	// your recommendations.
+	// The number of previous days that you want Amazon Web Services to consider when
+	// it calculates your recommendations.
 	LookbackPeriodInDays types.LookbackPeriodInDays
 
 	// The pagination token that indicates the next set of results that you want to

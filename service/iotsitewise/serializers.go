@@ -2527,6 +2527,10 @@ func awsRestjson1_serializeOpHttpBindingsGetInterpolatedAssetPropertyValuesInput
 		encoder.SetQuery("intervalInSeconds").Long(*v.IntervalInSeconds)
 	}
 
+	if v.IntervalWindowInSeconds != nil {
+		encoder.SetQuery("intervalWindowInSeconds").Long(*v.IntervalWindowInSeconds)
+	}
+
 	if v.MaxResults != nil {
 		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
 	}

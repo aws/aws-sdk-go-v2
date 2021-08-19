@@ -14,15 +14,16 @@ import (
 
 // This action uses the encryption subresource to configure default encryption and
 // Amazon S3 Bucket Key for an existing bucket. Default encryption for a bucket can
-// use server-side encryption with Amazon S3-managed keys (SSE-S3) or AWS KMS
-// customer master keys (SSE-KMS). If you specify default encryption using SSE-KMS,
-// you can also configure Amazon S3 Bucket Key. For information about default
-// encryption, see Amazon S3 default bucket encryption
+// use server-side encryption with Amazon S3-managed keys (SSE-S3) or Amazon Web
+// Services KMS customer master keys (SSE-KMS). If you specify default encryption
+// using SSE-KMS, you can also configure Amazon S3 Bucket Key. For information
+// about default encryption, see Amazon S3 default bucket encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the
 // Amazon S3 User Guide. For more information about S3 Bucket Keys, see Amazon S3
 // Bucket Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in
-// the Amazon S3 User Guide. This action requires AWS Signature Version 4. For more
-// information, see  Authenticating Requests (AWS Signature Version 4)
+// the Amazon S3 User Guide. This action requires Amazon Web Services Signature
+// Version 4. For more information, see  Authenticating Requests (Amazon Web
+// Services Signature Version 4)
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/sig-v4-authenticating-requests.html).
 // To use this operation, you must have permissions to perform the
 // s3:PutEncryptionConfiguration action. The bucket owner has this permission by
@@ -58,9 +59,9 @@ func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncry
 type PutBucketEncryptionInput struct {
 
 	// Specifies default encryption for a bucket using server-side encryption with
-	// Amazon S3-managed keys (SSE-S3) or customer master keys stored in AWS KMS
-	// (SSE-KMS). For information about the Amazon S3 default encryption feature, see
-	// Amazon S3 Default Bucket Encryption
+	// Amazon S3-managed keys (SSE-S3) or customer master keys stored in Amazon Web
+	// Services KMS (SSE-KMS). For information about the Amazon S3 default encryption
+	// feature, see Amazon S3 Default Bucket Encryption
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the
 	// Amazon S3 User Guide.
 	//
@@ -73,8 +74,9 @@ type PutBucketEncryptionInput struct {
 	ServerSideEncryptionConfiguration *types.ServerSideEncryptionConfiguration
 
 	// The base64-encoded 128-bit MD5 digest of the server-side encryption
-	// configuration. For requests made using the AWS Command Line Interface (CLI) or
-	// AWS SDKs, this field is calculated automatically.
+	// configuration. For requests made using the Amazon Web Services Command Line
+	// Interface (CLI) or Amazon Web Services SDKs, this field is calculated
+	// automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

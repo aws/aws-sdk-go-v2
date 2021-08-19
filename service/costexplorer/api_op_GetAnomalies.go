@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Retrieves all of the cost anomalies detected on your account, during the time
-// period specified by the DateInterval object.
+// Retrieves all of the cost anomalies detected on your account during the time
+// period that's specified by the DateInterval object.
 func (c *Client) GetAnomalies(ctx context.Context, params *GetAnomaliesInput, optFns ...func(*Options)) (*GetAnomaliesOutput, error) {
 	if params == nil {
 		params = &GetAnomaliesInput{}
@@ -46,8 +46,9 @@ type GetAnomaliesInput struct {
 	// Amazon Resource Name (ARN).
 	MonitorArn *string
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// Filters anomaly results by the total impact field on the anomaly object. For
@@ -65,8 +66,9 @@ type GetAnomaliesOutput struct {
 	// This member is required.
 	Anomalies []types.Anomaly
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

@@ -14,7 +14,11 @@ import (
 
 // Updates the properties of a domain, including creating or selecting a dead
 // letter queue or an encryption key. After a domain is created, the name can’t be
-// changed.
+// changed. Use this API or CreateDomain
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_CreateDomain.html)
+// to enable identity resolution
+// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html):
+// set Matching to true.
 func (c *Client) UpdateDomain(ctx context.Context, params *UpdateDomainInput, optFns ...func(*Options)) (*UpdateDomainOutput, error) {
 	if params == nil {
 		params = &UpdateDomainInput{}
@@ -53,8 +57,12 @@ type UpdateDomainInput struct {
 	// The default number of days until the data within the domain expires.
 	DefaultExpirationDays *int32
 
-	// The process of matching duplicate profiles. This process runs every Saturday at
-	// 12AM.
+	// The process of matching duplicate profiles. If Matching = true, Amazon Connect
+	// Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to
+	// detect duplicate profiles in your domains. After that batch process completes,
+	// use the GetMatches
+	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+	// API to return and review the results.
 	Matching *types.MatchingRequest
 
 	// The tags used to organize, track, or control access for this resource.
@@ -92,8 +100,12 @@ type UpdateDomainOutput struct {
 	// The default number of days until the data within the domain expires.
 	DefaultExpirationDays *int32
 
-	// The process of matching duplicate profiles. This process runs every Saturday at
-	// 12AM.
+	// The process of matching duplicate profiles. If Matching = true, Amazon Connect
+	// Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to
+	// detect duplicate profiles in your domains. After that batch process completes,
+	// use the GetMatches
+	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+	// API to return and review the results.
 	Matching *types.MatchingResponse
 
 	// The tags used to organize, track, or control access for this resource.

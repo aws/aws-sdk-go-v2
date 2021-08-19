@@ -718,6 +718,84 @@ func validateAnomalySubscription(v *types.AnomalySubscription) error {
 	}
 }
 
+func validateCostCategorySplitChargeRule(v *types.CostCategorySplitChargeRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CostCategorySplitChargeRule"}
+	if v.Source == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Source"))
+	}
+	if v.Targets == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Targets"))
+	}
+	if len(v.Method) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Method"))
+	}
+	if v.Parameters != nil {
+		if err := validateCostCategorySplitChargeRuleParametersList(v.Parameters); err != nil {
+			invalidParams.AddNested("Parameters", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCostCategorySplitChargeRuleParameter(v *types.CostCategorySplitChargeRuleParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CostCategorySplitChargeRuleParameter"}
+	if len(v.Type) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Values == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Values"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCostCategorySplitChargeRuleParametersList(v []types.CostCategorySplitChargeRuleParameter) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CostCategorySplitChargeRuleParametersList"}
+	for i := range v {
+		if err := validateCostCategorySplitChargeRuleParameter(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCostCategorySplitChargeRulesList(v []types.CostCategorySplitChargeRule) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CostCategorySplitChargeRulesList"}
+	for i := range v {
+		if err := validateCostCategorySplitChargeRule(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDateInterval(v *types.DateInterval) error {
 	if v == nil {
 		return nil
@@ -849,6 +927,11 @@ func validateOpCreateCostCategoryDefinitionInput(v *CreateCostCategoryDefinition
 	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	}
+	if v.SplitChargeRules != nil {
+		if err := validateCostCategorySplitChargeRulesList(v.SplitChargeRules); err != nil {
+			invalidParams.AddNested("SplitChargeRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1356,6 +1439,11 @@ func validateOpUpdateCostCategoryDefinitionInput(v *UpdateCostCategoryDefinition
 	}
 	if v.Rules == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Rules"))
+	}
+	if v.SplitChargeRules != nil {
+		if err := validateCostCategorySplitChargeRulesList(v.SplitChargeRules); err != nil {
+			invalidParams.AddNested("SplitChargeRules", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

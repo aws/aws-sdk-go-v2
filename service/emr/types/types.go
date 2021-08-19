@@ -393,17 +393,15 @@ type Cluster struct {
 	// perform EMR cluster actions on the cluster that their IAM policies allow. When
 	// false, only the IAM principal that created the cluster and the account root user
 	// can perform EMR actions, regardless of IAM permissions policies attached to
-	// other IAM principals. The default value is false if a value is not provided when
-	// creating a cluster using the EMR API RunJobFlow command or the CLI
-	// create-cluster
+	// other IAM principals. The default value is true if a value is not provided when
+	// creating a cluster using the EMR API RunJobFlow command, the CLI create-cluster
 	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
-	// command. The default value is true when a cluster is created using the
-	// Management Console. IAM principals that are allowed to perform actions on the
-	// cluster can use the SetVisibleToAllUsers action to change the value on a running
-	// cluster. For more information, see Understanding the EMR Cluster
-	// VisibleToAllUsers Setting
+	// command, or the Management Console. IAM principals that are allowed to perform
+	// actions on the cluster can use the SetVisibleToAllUsers action to change the
+	// value on a running cluster. For more information, see Understanding the EMR
+	// Cluster VisibleToAllUsers Setting
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
-	// in the Amazon EMR Management Guide.
+	// in the Amazon EMRManagement Guide.
 	VisibleToAllUsers bool
 
 	noSmithyDocumentSerde
@@ -1087,6 +1085,9 @@ type InstanceGroup struct {
 	// instance group.
 	ConfigurationsVersion int64
 
+	// The custom AMI ID to use for the provisioned instance group.
+	CustomAmiId *string
+
 	// The EBS block devices that are mapped to this instance group.
 	EbsBlockDevices []EbsBlockDevice
 
@@ -1168,6 +1169,9 @@ type InstanceGroupConfig struct {
 	// instance group (master, core, and task).
 	Configurations []Configuration
 
+	// The custom AMI ID to use for the provisioned instance group.
+	CustomAmiId *string
+
 	// EBS configurations that will be attached to each EC2 instance in the instance
 	// group.
 	EbsConfiguration *EbsConfiguration
@@ -1224,6 +1228,9 @@ type InstanceGroupDetail struct {
 	// maximum price you are willing to pay for Spot Instances. Specify OnDemandPrice
 	// to set the amount equal to the On-Demand price, or specify an amount in USD.
 	BidPrice *string
+
+	// The custom AMI ID to use for the provisioned instance group.
+	CustomAmiId *string
 
 	// The date/time the instance group was terminated.
 	EndDateTime *time.Time
@@ -1404,6 +1411,9 @@ type InstanceTypeConfig struct {
 	// cluster.
 	Configurations []Configuration
 
+	// The custom AMI ID to use for the instance type.
+	CustomAmiId *string
+
 	// The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each
 	// instance as defined by InstanceType.
 	EbsConfiguration *EbsConfiguration
@@ -1434,6 +1444,9 @@ type InstanceTypeSpecification struct {
 	// which can include configurations for applications and software bundled with
 	// Amazon EMR.
 	Configurations []Configuration
+
+	// The custom AMI ID to use for the instance type.
+	CustomAmiId *string
 
 	// The configuration of Amazon Elastic Block Store (Amazon EBS) attached to each
 	// instance as defined by InstanceType.
@@ -1533,16 +1546,15 @@ type JobFlowDetail struct {
 	// perform EMR cluster actions that their IAM policies allow. When false, only the
 	// IAM principal that created the cluster and the account root user can perform EMR
 	// actions, regardless of IAM permissions policies attached to other IAM
-	// principals. The default value is false if a value is not provided when creating
-	// a cluster using the EMR API RunJobFlow command or the CLI create-cluster
+	// principals. The default value is true if a value is not provided when creating a
+	// cluster using the EMR API RunJobFlow command, the CLI create-cluster
 	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
-	// command. The default value is true when a cluster is created using the
-	// Management Console. IAM principals that are authorized to perform actions on the
-	// cluster can use the SetVisibleToAllUsers action to change the value on a running
-	// cluster. For more information, see Understanding the EMR Cluster
-	// VisibleToAllUsers Setting
+	// command, or the Management Console. IAM principals that are authorized to
+	// perform actions on the cluster can use the SetVisibleToAllUsers action to change
+	// the value on a running cluster. For more information, see Understanding the EMR
+	// Cluster VisibleToAllUsers Setting
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
-	// in the Amazon EMR Management Guide.
+	// in the Amazon EMRManagement Guide.
 	VisibleToAllUsers bool
 
 	noSmithyDocumentSerde

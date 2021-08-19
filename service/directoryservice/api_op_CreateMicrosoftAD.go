@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a Microsoft AD directory in the AWS Cloud. For more information, see AWS
-// Managed Microsoft AD
+// Creates a Microsoft AD directory in the Amazon Web Services Cloud. For more
+// information, see Managed Microsoft AD
 // (https://docs.aws.amazon.com/directoryservice/latest/admin-guide/directory_microsoft_ad.html)
-// in the AWS Directory Service Admin Guide. Before you call CreateMicrosoftAD,
-// ensure that all of the required permissions have been explicitly granted through
-// a policy. For details about what permissions are required to run the
-// CreateMicrosoftAD operation, see AWS Directory Service API Permissions: Actions,
+// in the Directory Service Admin Guide. Before you call CreateMicrosoftAD, ensure
+// that all of the required permissions have been explicitly granted through a
+// policy. For details about what permissions are required to run the
+// CreateMicrosoftAD operation, see Directory Service API Permissions: Actions,
 // Resources, and Conditions Reference
 // (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
 func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftADInput, optFns ...func(*Options)) (*CreateMicrosoftADOutput, error) {
@@ -35,12 +35,12 @@ func (c *Client) CreateMicrosoftAD(ctx context.Context, params *CreateMicrosoftA
 	return out, nil
 }
 
-// Creates an AWS Managed Microsoft AD directory.
+// Creates an Managed Microsoft AD directory.
 type CreateMicrosoftADInput struct {
 
-	// The fully qualified domain name for the AWS Managed Microsoft AD directory, such
-	// as corp.example.com. This name will resolve inside your VPC only. It does not
-	// need to be publicly resolvable.
+	// The fully qualified domain name for the Managed Microsoft AD directory, such as
+	// corp.example.com. This name will resolve inside your VPC only. It does not need
+	// to be publicly resolvable.
 	//
 	// This member is required.
 	Name *string
@@ -57,11 +57,11 @@ type CreateMicrosoftADInput struct {
 	// This member is required.
 	VpcSettings *types.DirectoryVpcSettings
 
-	// A description for the directory. This label will appear on the AWS console
-	// Directory Details page after the directory is created.
+	// A description for the directory. This label will appear on the Amazon Web
+	// Services console Directory Details page after the directory is created.
 	Description *string
 
-	// AWS Managed Microsoft AD is available in two editions: Standard and Enterprise.
+	// Managed Microsoft AD is available in two editions: Standard and Enterprise.
 	// Enterprise is the default.
 	Edition types.DirectoryEdition
 
@@ -70,7 +70,7 @@ type CreateMicrosoftADInput struct {
 	// for the directory DNS corp.example.com.
 	ShortName *string
 
-	// The tags to be assigned to the AWS Managed Microsoft AD directory.
+	// The tags to be assigned to the Managed Microsoft AD directory.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde

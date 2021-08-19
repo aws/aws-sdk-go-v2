@@ -46,6 +46,24 @@ func (CertificateType) Values() []CertificateType {
 	}
 }
 
+type ClientAuthenticationStatus string
+
+// Enum values for ClientAuthenticationStatus
+const (
+	ClientAuthenticationStatusEnabled  ClientAuthenticationStatus = "Enabled"
+	ClientAuthenticationStatusDisabled ClientAuthenticationStatus = "Disabled"
+)
+
+// Values returns all known values for ClientAuthenticationStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (ClientAuthenticationStatus) Values() []ClientAuthenticationStatus {
+	return []ClientAuthenticationStatus{
+		"Enabled",
+		"Disabled",
+	}
+}
+
 type ClientAuthenticationType string
 
 // Enum values for ClientAuthenticationType

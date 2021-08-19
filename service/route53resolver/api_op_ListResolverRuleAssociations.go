@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the associations that were created between Resolver rules and VPCs using
-// the current AWS account.
+// the current Amazon Web Services account.
 func (c *Client) ListResolverRuleAssociations(ctx context.Context, params *ListResolverRuleAssociationsInput, optFns ...func(*Options)) (*ListResolverRuleAssociationsOutput, error) {
 	if params == nil {
 		params = &ListResolverRuleAssociationsInput{}
@@ -64,7 +64,8 @@ type ListResolverRuleAssociationsOutput struct {
 	NextToken *string
 
 	// The associations that were created between Resolver rules and VPCs using the
-	// current AWS account, and that match the specified filters, if any.
+	// current Amazon Web Services account, and that match the specified filters, if
+	// any.
 	ResolverRuleAssociations []types.ResolverRuleAssociation
 
 	// Metadata pertaining to the operation's result.

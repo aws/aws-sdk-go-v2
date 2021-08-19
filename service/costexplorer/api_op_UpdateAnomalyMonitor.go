@@ -11,7 +11,7 @@ import (
 )
 
 // Updates an existing cost anomaly monitor. The changes made are applied going
-// forward, and does not change anomalies detected in the past.
+// forward, and doesn'tt change anomalies detected in the past.
 func (c *Client) UpdateAnomalyMonitor(ctx context.Context, params *UpdateAnomalyMonitorInput, optFns ...func(*Options)) (*UpdateAnomalyMonitorOutput, error) {
 	if params == nil {
 		params = &UpdateAnomalyMonitorInput{}

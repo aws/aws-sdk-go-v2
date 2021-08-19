@@ -45,8 +45,8 @@ type IncreaseNodeGroupsInGlobalReplicationGroupInput struct {
 	// This member is required.
 	NodeGroupCount int32
 
-	// Describes the replication group IDs, the AWS regions where they are stored and
-	// the shard configuration for each that comprise the Global datastore
+	// Describes the replication group IDs, the Amazon regions where they are stored
+	// and the shard configuration for each that comprise the Global datastore
 	RegionalConfigurations []types.RegionalConfiguration
 
 	noSmithyDocumentSerde
@@ -55,7 +55,7 @@ type IncreaseNodeGroupsInGlobalReplicationGroupInput struct {
 type IncreaseNodeGroupsInGlobalReplicationGroupOutput struct {
 
 	// Consists of a primary cluster that accepts writes and an associated secondary
-	// cluster that resides in a different AWS region. The secondary cluster accepts
+	// cluster that resides in a different Amazon region. The secondary cluster accepts
 	// only reads. The primary cluster automatically replicates updates to the
 	// secondary cluster.
 	//

@@ -40,7 +40,7 @@ type UpdateConnectorProfileInput struct {
 	ConnectorProfileConfig *types.ConnectorProfileConfig
 
 	// The name of the connector profile and is unique for each ConnectorProfile in the
-	// AWS Account.
+	// Amazon Web Services account.
 	//
 	// This member is required.
 	ConnectorProfileName *string

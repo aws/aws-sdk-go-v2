@@ -232,7 +232,7 @@ type RunJobFlowInput struct {
 
 	// Set this value to true so that IAM principals in the account associated with the
 	// cluster can perform EMR actions on the cluster that their IAM policies allow.
-	// This value defaults to false for clusters created using the EMR API or the CLI
+	// This value defaults to true for clusters created using the EMR API or the CLI
 	// create-cluster
 	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
 	// command. When set to false, only the IAM principal that created the cluster and
@@ -240,7 +240,7 @@ type RunJobFlowInput struct {
 	// IAM permissions policies attached to other IAM principals. For more information,
 	// see Understanding the EMR Cluster VisibleToAllUsers Setting
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
-	// in the Amazon EMR Management Guide.
+	// in the Amazon EMRManagement Guide.
 	VisibleToAllUsers bool
 
 	noSmithyDocumentSerde

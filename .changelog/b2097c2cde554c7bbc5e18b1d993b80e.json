@@ -1,0 +1,32 @@
+{
+    "id": "b2097c2c-de55-4c7b-bc5e-18b1d993b80e",
+    "type": "feature",
+    "description": "API client updated",
+    "modules": [
+        "service/apigateway",
+        "service/apigatewayv2",
+        "service/appflow",
+        "service/applicationautoscaling",
+        "service/cloud9",
+        "service/clouddirectory",
+        "service/cloudwatchlogs",
+        "service/codebuild",
+        "service/configservice",
+        "service/costexplorer",
+        "service/customerprofiles",
+        "service/databrew",
+        "service/directoryservice",
+        "service/ec2",
+        "service/elasticache",
+        "service/emr",
+        "service/iotsitewise",
+        "service/lambda",
+        "service/licensemanager",
+        "service/quicksight",
+        "service/route53",
+        "service/route53resolver",
+        "service/s3",
+        "service/sagemaker",
+        "service/sagemakerruntime"
+    ]
+}

@@ -18,12 +18,13 @@ import (
 // of the objects in the bucket on a daily or weekly basis, and the results are
 // published to a flat file. The bucket that is inventoried is called the source
 // bucket, and the bucket where the inventory flat file is stored is called the
-// destination bucket. The destination bucket must be in the same AWS Region as the
-// source bucket. When you configure an inventory for a source bucket, you specify
-// the destination bucket where you want the inventory to be stored, and whether to
-// generate the inventory daily or weekly. You can also configure what object
-// metadata to include and whether to inventory all object versions or only current
-// versions. For more information, see Amazon S3 Inventory
+// destination bucket. The destination bucket must be in the same Amazon Web
+// Services Region as the source bucket. When you configure an inventory for a
+// source bucket, you specify the destination bucket where you want the inventory
+// to be stored, and whether to generate the inventory daily or weekly. You can
+// also configure what object metadata to include and whether to inventory all
+// object versions or only current versions. For more information, see Amazon S3
+// Inventory
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/storage-inventory.html) in the
 // Amazon S3 User Guide. You must create a bucket policy on the destination bucket
 // to grant permissions to Amazon S3 to write objects to the bucket in the defined

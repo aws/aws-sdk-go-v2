@@ -35,6 +35,7 @@ type CheckoutType string
 // Enum values for CheckoutType
 const (
 	CheckoutTypeProvisional CheckoutType = "PROVISIONAL"
+	CheckoutTypePerpetual   CheckoutType = "PERPETUAL"
 )
 
 // Values returns all known values for CheckoutType. Note that this can be expanded
@@ -43,6 +44,7 @@ const (
 func (CheckoutType) Values() []CheckoutType {
 	return []CheckoutType{
 		"PROVISIONAL",
+		"PERPETUAL",
 	}
 }
 

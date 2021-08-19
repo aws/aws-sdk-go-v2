@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Specifies an AWS rule that you want to share with another account, the account
-// that you want to share the rule with, and the operations that you want the
-// account to be able to perform on the rule.
+// Specifies an Amazon Web Services rule that you want to share with another
+// account, the account that you want to share the rule with, and the operations
+// that you want the account to be able to perform on the rule.
 func (c *Client) PutResolverRulePolicy(ctx context.Context, params *PutResolverRulePolicyInput, optFns ...func(*Options)) (*PutResolverRulePolicyOutput, error) {
 	if params == nil {
 		params = &PutResolverRulePolicyInput{}
@@ -36,15 +36,15 @@ type PutResolverRulePolicyInput struct {
 	// This member is required.
 	Arn *string
 
-	// An AWS Identity and Access Management policy statement that lists the rules that
-	// you want to share with another AWS account and the operations that you want the
-	// account to be able to perform. You can specify the following operations in the
-	// Action section of the statement:
-	//
-	// * route53resolver:GetResolverRule
+	// An Identity and Access Management policy statement that lists the rules that you
+	// want to share with another Amazon Web Services account and the operations that
+	// you want the account to be able to perform. You can specify the following
+	// operations in the Action section of the statement:
 	//
 	// *
-	// route53resolver:AssociateResolverRule
+	// route53resolver:GetResolverRule
+	//
+	// * route53resolver:AssociateResolverRule
 	//
 	// *
 	// route53resolver:DisassociateResolverRule

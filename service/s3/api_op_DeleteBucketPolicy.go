@@ -13,16 +13,17 @@ import (
 
 // This implementation of the DELETE action uses the policy subresource to delete
 // the policy of a specified bucket. If you are using an identity other than the
-// root user of the AWS account that owns the bucket, the calling identity must
-// have the DeleteBucketPolicy permissions on the specified bucket and belong to
-// the bucket owner's account to use this operation. If you don't have
-// DeleteBucketPolicy permissions, Amazon S3 returns a 403 Access Denied error. If
-// you have the correct permissions, but you're not using an identity that belongs
-// to the bucket owner's account, Amazon S3 returns a 405 Method Not Allowed error.
-// As a security precaution, the root user of the AWS account that owns a bucket
-// can always use this operation, even if the policy explicitly denies the root
-// user the ability to perform this action. For more information about bucket
-// policies, see Using Bucket Policies and UserPolicies
+// root user of the Amazon Web Services account that owns the bucket, the calling
+// identity must have the DeleteBucketPolicy permissions on the specified bucket
+// and belong to the bucket owner's account to use this operation. If you don't
+// have DeleteBucketPolicy permissions, Amazon S3 returns a 403 Access Denied
+// error. If you have the correct permissions, but you're not using an identity
+// that belongs to the bucket owner's account, Amazon S3 returns a 405 Method Not
+// Allowed error. As a security precaution, the root user of the Amazon Web
+// Services account that owns a bucket can always use this operation, even if the
+// policy explicitly denies the root user the ability to perform this action. For
+// more information about bucket policies, see Using Bucket Policies and
+// UserPolicies
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html). The
 // following operations are related to DeleteBucketPolicy
 //

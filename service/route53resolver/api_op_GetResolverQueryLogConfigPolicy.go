@@ -12,7 +12,7 @@ import (
 
 // Gets information about a query logging policy. A query logging policy specifies
 // the Resolver query logging operations and resources that you want to allow
-// another AWS account to be able to use.
+// another Amazon Web Services account to be able to use.
 func (c *Client) GetResolverQueryLogConfigPolicy(ctx context.Context, params *GetResolverQueryLogConfigPolicyInput, optFns ...func(*Options)) (*GetResolverQueryLogConfigPolicyOutput, error) {
 	if params == nil {
 		params = &GetResolverQueryLogConfigPolicyInput{}

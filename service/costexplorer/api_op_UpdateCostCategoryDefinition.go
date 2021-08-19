@@ -51,6 +51,10 @@ type UpdateCostCategoryDefinitionInput struct {
 	// The default value for the cost category.
 	DefaultValue *string
 
+	// The split charge rules used to allocate your charges between your Cost Category
+	// values.
+	SplitChargeRules []types.CostCategorySplitChargeRule
+
 	noSmithyDocumentSerde
 }
 

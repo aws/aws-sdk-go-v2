@@ -71,17 +71,17 @@ type ListPartsInput struct {
 	// action with an access point, you must direct requests to the access point
 	// hostname. The access point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// action with an access point through the AWS SDKs, you provide the access point
-	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using access points
+	// action with an access point through the Amazon Web Services SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
-	// bucket ARN in place of the bucket name. For more information about S3 on
-	// Outposts ARNs, see Using S3 on Outposts
+	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon S3 User Guide.
 	//
@@ -138,13 +138,14 @@ type ListPartsOutput struct {
 	// incomplete multipart uploads.
 	AbortRuleId *string
 
-	// The name of the bucket to which the multipart upload was initiated.
+	// The name of the bucket to which the multipart upload was initiated. Does not
+	// return the access point ARN or access point alias if used.
 	Bucket *string
 
 	// Container element that identifies who initiated the multipart upload. If the
-	// initiator is an AWS account, this element provides the same information as the
-	// Owner element. If the initiator is an IAM User, this element provides the user
-	// ARN and display name.
+	// initiator is an Amazon Web Services account, this element provides the same
+	// information as the Owner element. If the initiator is an IAM User, this element
+	// provides the user ARN and display name.
 	Initiator *types.Initiator
 
 	// Indicates whether the returned list of parts is truncated. A true value

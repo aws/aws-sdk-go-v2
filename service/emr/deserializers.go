@@ -8072,6 +8072,15 @@ func awsAwsjson11_deserializeDocumentInstanceGroup(v **types.InstanceGroup, valu
 				sv.ConfigurationsVersion = i64
 			}
 
+		case "CustomAmiId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
+				}
+				sv.CustomAmiId = ptr.String(jtv)
+			}
+
 		case "EbsBlockDevices":
 			if err := awsAwsjson11_deserializeDocumentEbsBlockDeviceList(&sv.EbsBlockDevices, value); err != nil {
 				return err
@@ -8239,6 +8248,15 @@ func awsAwsjson11_deserializeDocumentInstanceGroupDetail(v **types.InstanceGroup
 					return fmt.Errorf("expected Date to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "CustomAmiId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
+				}
+				sv.CustomAmiId = ptr.String(jtv)
 			}
 
 		case "EndDateTime":
@@ -9003,6 +9021,15 @@ func awsAwsjson11_deserializeDocumentInstanceTypeSpecification(v **types.Instanc
 		case "Configurations":
 			if err := awsAwsjson11_deserializeDocumentConfigurationList(&sv.Configurations, value); err != nil {
 				return err
+			}
+
+		case "CustomAmiId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
+				}
+				sv.CustomAmiId = ptr.String(jtv)
 			}
 
 		case "EbsBlockDevices":

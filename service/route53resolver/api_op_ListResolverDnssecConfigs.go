@@ -13,7 +13,7 @@ import (
 )
 
 // Lists the configurations for DNSSEC validation that are associated with the
-// current AWS account.
+// current Amazon Web Services account.
 func (c *Client) ListResolverDnssecConfigs(ctx context.Context, params *ListResolverDnssecConfigsInput, optFns ...func(*Options)) (*ListResolverDnssecConfigsOutput, error) {
 	if params == nil {
 		params = &ListResolverDnssecConfigsInput{}
@@ -39,11 +39,11 @@ type ListResolverDnssecConfigsInput struct {
 	// for MaxResults, Route 53 returns up to 100 configuration per page.
 	MaxResults *int32
 
-	// (Optional) If the current AWS account has more than MaxResults DNSSEC
-	// configurations, use NextToken to get the second and subsequent pages of results.
-	// For the first ListResolverDnssecConfigs request, omit this value. For the second
-	// and subsequent requests, get the value of NextToken from the previous response
-	// and specify that value for NextToken in the request.
+	// (Optional) If the current Amazon Web Services account has more than MaxResults
+	// DNSSEC configurations, use NextToken to get the second and subsequent pages of
+	// results. For the first ListResolverDnssecConfigs request, omit this value. For
+	// the second and subsequent requests, get the value of NextToken from the previous
+	// response and specify that value for NextToken in the request.
 	NextToken *string
 
 	noSmithyDocumentSerde
@@ -52,9 +52,9 @@ type ListResolverDnssecConfigsInput struct {
 type ListResolverDnssecConfigsOutput struct {
 
 	// If a response includes the last of the DNSSEC configurations that are associated
-	// with the current AWS account, NextToken doesn't appear in the response. If a
-	// response doesn't include the last of the configurations, you can get more
-	// configurations by submitting another ListResolverDnssecConfigs
+	// with the current Amazon Web Services account, NextToken doesn't appear in the
+	// response. If a response doesn't include the last of the configurations, you can
+	// get more configurations by submitting another ListResolverDnssecConfigs
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ListResolverDnssecConfigs.html)
 	// request. Get the value of NextToken that Amazon Route 53 returned in the
 	// previous response and include it in NextToken in the next request.
@@ -63,7 +63,7 @@ type ListResolverDnssecConfigsOutput struct {
 	// An array that contains one ResolverDnssecConfig
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_ResolverDnssecConfig.html)
 	// element for each configuration for DNSSEC validation that is associated with the
-	// current AWS account.
+	// current Amazon Web Services account.
 	ResolverDnssecConfigs []types.ResolverDnssecConfig
 
 	// Metadata pertaining to the operation's result.

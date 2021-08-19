@@ -26,29 +26,33 @@ import (
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html), in
 // addition to RequestRoute, RequestToken, StatusCode, ErrorCode, and ErrorMessage.
 // The GetObject response metadata is supported so that the WriteGetObjectResponse
-// caller, typically an AWS Lambda function, can provide the same metadata when it
+// caller, typically an Lambda function, can provide the same metadata when it
 // internally invokes GetObject. When WriteGetObjectResponse is called by a
 // customer-owned Lambda function, the metadata returned to the end user GetObject
-// call might differ from what Amazon S3 would normally return. AWS provides some
-// prebuilt Lambda functions that you can use with S3 Object Lambda to detect and
-// redact personally identifiable information (PII) and decompress S3 objects.
-// These Lambda functions are available in the AWS Serverless Application
-// Repository, and can be selected through the AWS Management Console when you
-// create your Object Lambda Access Point. Example 1: PII Access Control - This
-// Lambda function uses Amazon Comprehend, a natural language processing (NLP)
-// service using machine learning to find insights and relationships in text. It
-// automatically detects personally identifiable information (PII) such as names,
-// addresses, dates, credit card numbers, and social security numbers from
-// documents in your Amazon S3 bucket. Example 2: PII Redaction - This Lambda
-// function uses Amazon Comprehend, a natural language processing (NLP) service
-// using machine learning to find insights and relationships in text. It
-// automatically redacts personally identifiable information (PII) such as names,
-// addresses, dates, credit card numbers, and social security numbers from
-// documents in your Amazon S3 bucket. Example 3: Decompression - The Lambda
-// function S3ObjectLambdaDecompression, is equipped to decompress objects stored
-// in S3 in one of six compressed file formats including bzip2, gzip, snappy, zlib,
-// zstandard and ZIP. For information on how to view and use these functions, see
-// Using AWS built Lambda functions
+// call might differ from what Amazon S3 would normally return. You can include any
+// number of metadata headers. When including a metadata header, it should be
+// prefaced with x-amz-meta. For example, x-amz-meta-my-custom-header:
+// MyCustomValue. The primary use case for this is to forward GetObject metadata.
+// Amazon Web Services provides some prebuilt Lambda functions that you can use
+// with S3 Object Lambda to detect and redact personally identifiable information
+// (PII) and decompress S3 objects. These Lambda functions are available in the
+// Amazon Web Services Serverless Application Repository, and can be selected
+// through the Amazon Web Services Management Console when you create your Object
+// Lambda Access Point. Example 1: PII Access Control - This Lambda function uses
+// Amazon Comprehend, a natural language processing (NLP) service using machine
+// learning to find insights and relationships in text. It automatically detects
+// personally identifiable information (PII) such as names, addresses, dates,
+// credit card numbers, and social security numbers from documents in your Amazon
+// S3 bucket. Example 2: PII Redaction - This Lambda function uses Amazon
+// Comprehend, a natural language processing (NLP) service using machine learning
+// to find insights and relationships in text. It automatically redacts personally
+// identifiable information (PII) such as names, addresses, dates, credit card
+// numbers, and social security numbers from documents in your Amazon S3 bucket.
+// Example 3: Decompression - The Lambda function S3ObjectLambdaDecompression, is
+// equipped to decompress objects stored in S3 in one of six compressed file
+// formats including bzip2, gzip, snappy, zlib, zstandard and ZIP. For information
+// on how to view and use these functions, see Using Amazon Web Services built
+// Lambda functions
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/olap-examples.html) in
 // the Amazon S3 User Guide.
 func (c *Client) WriteGetObjectResponse(ctx context.Context, params *WriteGetObjectResponseInput, optFns ...func(*Options)) (*WriteGetObjectResponseOutput, error) {
@@ -86,7 +90,7 @@ type WriteGetObjectResponseInput struct {
 	Body io.Reader
 
 	// Indicates whether the object stored in Amazon S3 uses an S3 bucket key for
-	// server-side encryption with AWS KMS (SSE-KMS).
+	// server-side encryption with Amazon Web Services KMS (SSE-KMS).
 	BucketKeyEnabled bool
 
 	// Specifies caching behavior along the request/reply chain.
@@ -189,9 +193,9 @@ type WriteGetObjectResponseInput struct {
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/ServerSideEncryptionCustomerKeys.html).
 	SSECustomerKeyMD5 *string
 
-	// If present, specifies the ID of the AWS Key Management Service (AWS KMS)
-	// symmetric customer managed customer master key (CMK) that was used for stored in
-	// Amazon S3 object.
+	// If present, specifies the ID of the Amazon Web Services Key Management Service
+	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
+	// that was used for stored in Amazon S3 object.
 	SSEKMSKeyId *string
 
 	// The server-side encryption algorithm used when storing requested object in

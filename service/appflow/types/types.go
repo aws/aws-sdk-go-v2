@@ -56,6 +56,22 @@ type AmplitudeSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The basic auth credentials required for basic authentication.
+type BasicAuthCredentials struct {
+
+	// The password to use to connect to a resource.
+	//
+	// This member is required.
+	Password *string
+
+	// The username to use to connect to a resource.
+	//
+	// This member is required.
+	Username *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration settings related to a given connector.
 type ConnectorConfiguration struct {
 
@@ -177,6 +193,9 @@ type ConnectorMetadata struct {
 	// The connector metadata specific to Amazon S3.
 	S3 *S3Metadata
 
+	// The connector metadata specific to SAPOData.
+	SAPOData *SAPODataMetadata
+
 	// The connector metadata specific to Salesforce.
 	Salesforce *SalesforceMetadata
 
@@ -246,6 +265,9 @@ type ConnectorOperator struct {
 	// The operation to be performed on the provided Amazon S3 source fields.
 	S3 S3ConnectorOperator
 
+	// The operation to be performed on the provided SAPOData source fields.
+	SAPOData SAPODataConnectorOperator
+
 	// The operation to be performed on the provided Salesforce source fields.
 	Salesforce SalesforceConnectorOperator
 
@@ -284,7 +306,7 @@ type ConnectorProfile struct {
 	ConnectorProfileArn *string
 
 	// The name of the connector profile. The name is unique for each ConnectorProfile
-	// in the AWS account.
+	// in the Amazon Web Services account.
 	ConnectorProfileName *string
 
 	// The connector-specific properties of the profile configuration.
@@ -301,6 +323,9 @@ type ConnectorProfile struct {
 
 	// Specifies when the connector profile was last updated.
 	LastUpdatedAt *time.Time
+
+	// Specifies the private connection provisioning state.
+	PrivateConnectionProvisioningState *PrivateConnectionProvisioningState
 
 	noSmithyDocumentSerde
 }
@@ -348,6 +373,9 @@ type ConnectorProfileCredentials struct {
 
 	// The connector-specific credentials required when using Amazon Redshift.
 	Redshift *RedshiftConnectorProfileCredentials
+
+	// The connector-specific profile credentials required when using SAPOData.
+	SAPOData *SAPODataConnectorProfileCredentials
 
 	// The connector-specific credentials required when using Salesforce.
 	Salesforce *SalesforceConnectorProfileCredentials
@@ -402,6 +430,9 @@ type ConnectorProfileProperties struct {
 
 	// The connector-specific properties required by Amazon Redshift.
 	Redshift *RedshiftConnectorProfileProperties
+
+	// The connector-specific profile properties required when using SAPOData.
+	SAPOData *SAPODataConnectorProfileProperties
 
 	// The connector-specific properties required by Salesforce.
 	Salesforce *SalesforceConnectorProfileProperties
@@ -574,7 +605,7 @@ type DestinationFlowConfig struct {
 	DestinationConnectorProperties *DestinationConnectorProperties
 
 	// The name of the connector profile. This name must be unique for each connector
-	// profile in the AWS account.
+	// profile in the Amazon Web Services account.
 	ConnectorProfileName *string
 
 	noSmithyDocumentSerde
@@ -1031,6 +1062,56 @@ type MarketoSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The OAuth credentials required for OAuth type authentication.
+type OAuthCredentials struct {
+
+	// The identifier for the desired client.
+	//
+	// This member is required.
+	ClientId *string
+
+	// The client secret used by the OAuth client to authenticate to the authorization
+	// server.
+	//
+	// This member is required.
+	ClientSecret *string
+
+	// The access token used to access protected SAPOData resources.
+	AccessToken *string
+
+	// The OAuth requirement needed to request security tokens from the connector
+	// endpoint.
+	OAuthRequest *ConnectorOAuthRequest
+
+	// The refresh token used to refresh expired access token.
+	RefreshToken *string
+
+	noSmithyDocumentSerde
+}
+
+// The OAuth properties required for OAuth type authentication.
+type OAuthProperties struct {
+
+	// The authorization code url required to redirect to SAP Login Page to fetch
+	// authorization code for OAuth type authentication.
+	//
+	// This member is required.
+	AuthCodeUrl *string
+
+	// The OAuth scopes required for OAuth type authentication.
+	//
+	// This member is required.
+	OAuthScopes []string
+
+	// The token url required to fetch access/refresh tokens using authorization code
+	// and also to refresh expired access token using refresh token.
+	//
+	// This member is required.
+	TokenUrl *string
+
+	noSmithyDocumentSerde
+}
+
 // Determines the prefix that Amazon AppFlow applies to the destination folder
 // name. You can name your destination folders according to the flow frequency and
 // date.
@@ -1042,6 +1123,21 @@ type PrefixConfig struct {
 	// Determines the format of the prefix, and whether it applies to the file name,
 	// file path, or both.
 	PrefixType PrefixType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the private connection provisioning state.
+type PrivateConnectionProvisioningState struct {
+
+	// Specifies the private connection provisioning failure cause.
+	FailureCause PrivateConnectionProvisioningFailureCause
+
+	// Specifies the private connection provisioning failure reason.
+	FailureMessage *string
+
+	// Specifies the private connection provisioning status.
+	Status PrivateConnectionProvisioningStatus
 
 	noSmithyDocumentSerde
 }
@@ -1263,6 +1359,67 @@ type SalesforceSourceProperties struct {
 	noSmithyDocumentSerde
 }
 
+// The connector-specific profile credentials required when using SAPOData.
+type SAPODataConnectorProfileCredentials struct {
+
+	// The SAPOData basic authentication credentials.
+	BasicAuthCredentials *BasicAuthCredentials
+
+	// The SAPOData OAuth type authentication credentials.
+	OAuthCredentials *OAuthCredentials
+
+	noSmithyDocumentSerde
+}
+
+// The connector-specific profile properties required when using SAPOData.
+type SAPODataConnectorProfileProperties struct {
+
+	// The location of the SAPOData resource.
+	//
+	// This member is required.
+	ApplicationHostUrl *string
+
+	// The application path to catalog service.
+	//
+	// This member is required.
+	ApplicationServicePath *string
+
+	// The client number for the client creating the connection.
+	//
+	// This member is required.
+	ClientNumber *string
+
+	// The port number of the SAPOData instance.
+	//
+	// This member is required.
+	PortNumber int32
+
+	// The logon language of SAPOData instance.
+	LogonLanguage *string
+
+	// The SAPOData OAuth properties required for OAuth type authentication.
+	OAuthProperties *OAuthProperties
+
+	// The SAPOData Private Link service name to be used for private data transfers.
+	PrivateLinkServiceName *string
+
+	noSmithyDocumentSerde
+}
+
+// The connector metadata specific to SAPOData.
+type SAPODataMetadata struct {
+	noSmithyDocumentSerde
+}
+
+// The properties that are applied when using SAPOData as a flow source.
+type SAPODataSourceProperties struct {
+
+	// The object path specified in the SAPOData flow source.
+	ObjectPath *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the configuration details of a schedule-triggered flow as defined by
 // the user. Currently, these settings only apply to the Scheduled trigger type.
 type ScheduledTriggerProperties struct {
@@ -1474,7 +1631,7 @@ type SnowflakeConnectorProfileProperties struct {
 	// The Snowflake Private Link service name to be used for private data transfers.
 	PrivateLinkServiceName *string
 
-	// The AWS Region of the Snowflake account.
+	// The Amazon Web Services Region of the Snowflake account.
 	Region *string
 
 	noSmithyDocumentSerde
@@ -1511,7 +1668,7 @@ type SnowflakeDestinationProperties struct {
 // The connector metadata specific to Snowflake.
 type SnowflakeMetadata struct {
 
-	// Specifies the supported AWS Regions when using Snowflake.
+	// Specifies the supported Amazon Web Services Regions when using Snowflake.
 	SupportedRegions []string
 
 	noSmithyDocumentSerde
@@ -1540,6 +1697,9 @@ type SourceConnectorProperties struct {
 
 	// Specifies the information that is required for querying Amazon S3.
 	S3 *S3SourceProperties
+
+	// The properties that are applied when using SAPOData as a flow source.
+	SAPOData *SAPODataSourceProperties
 
 	// Specifies the information that is required for querying Salesforce.
 	Salesforce *SalesforceSourceProperties
@@ -1594,7 +1754,7 @@ type SourceFlowConfig struct {
 	SourceConnectorProperties *SourceConnectorProperties
 
 	// The name of the connector profile. This name must be unique for each connector
-	// profile in the AWS account.
+	// profile in the Amazon Web Services account.
 	ConnectorProfileName *string
 
 	// Defines the configuration for a scheduled incremental data pull. If a valid
@@ -1793,6 +1953,18 @@ type VeevaSourceProperties struct {
 	//
 	// This member is required.
 	Object *string
+
+	// The document type specified in the Veeva document extract flow.
+	DocumentType *string
+
+	// Boolean value to include All Versions of files in Veeva document extract flow.
+	IncludeAllVersions bool
+
+	// Boolean value to include file renditions in Veeva document extract flow.
+	IncludeRenditions bool
+
+	// Boolean value to include source files in Veeva document extract flow.
+	IncludeSourceFiles bool
 
 	noSmithyDocumentSerde
 }

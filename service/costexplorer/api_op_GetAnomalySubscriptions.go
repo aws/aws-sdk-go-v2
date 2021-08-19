@@ -36,8 +36,9 @@ type GetAnomalySubscriptionsInput struct {
 	// Cost anomaly monitor ARNs.
 	MonitorArn *string
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// A list of cost anomaly subscription ARNs.
@@ -54,8 +55,9 @@ type GetAnomalySubscriptionsOutput struct {
 	// This member is required.
 	AnomalySubscriptions []types.AnomalySubscription
 
-	// The token to retrieve the next set of results. AWS provides the token when the
-	// response from a previous call has more results than the maximum page size.
+	// The token to retrieve the next set of results. Amazon Web Services provides the
+	// token when the response from a previous call has more results than the maximum
+	// page size.
 	NextPageToken *string
 
 	// Metadata pertaining to the operation's result.

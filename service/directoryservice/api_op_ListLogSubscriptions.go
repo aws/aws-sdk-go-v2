@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the active log subscriptions for the AWS account.
+// Lists the active log subscriptions for the Amazon Web Services account.
 func (c *Client) ListLogSubscriptions(ctx context.Context, params *ListLogSubscriptionsInput, optFns ...func(*Options)) (*ListLogSubscriptionsOutput, error) {
 	if params == nil {
 		params = &ListLogSubscriptionsInput{}
@@ -31,8 +31,9 @@ type ListLogSubscriptionsInput struct {
 
 	// If a DirectoryID is provided, lists only the log subscription associated with
 	// that directory. If no DirectoryId is provided, lists all log subscriptions
-	// associated with your AWS account. If there are no log subscriptions for the AWS
-	// account or the directory, an empty list will be returned.
+	// associated with your Amazon Web Services account. If there are no log
+	// subscriptions for the Amazon Web Services account or the directory, an empty
+	// list will be returned.
 	DirectoryId *string
 
 	// The maximum number of items returned.
@@ -46,7 +47,8 @@ type ListLogSubscriptionsInput struct {
 
 type ListLogSubscriptionsOutput struct {
 
-	// A list of active LogSubscription objects for calling the AWS account.
+	// A list of active LogSubscription objects for calling the Amazon Web Services
+	// account.
 	LogSubscriptions []types.LogSubscription
 
 	// The token for the next set of items to return.

@@ -41,11 +41,11 @@ import (
 //
 // *
 // Define an output location for the select query's output. This must be an Amazon
-// S3 bucket in the same AWS Region as the bucket that contains the archive object
-// that is being queried. The AWS account that initiates the job must have
-// permissions to write to the S3 bucket. You can specify the storage class and
-// encryption for the output objects stored in the bucket. For more information
-// about output, see Querying Archived Objects
+// S3 bucket in the same Amazon Web Services Region as the bucket that contains the
+// archive object that is being queried. The Amazon Web Services account that
+// initiates the job must have permissions to write to the S3 bucket. You can
+// specify the storage class and encryption for the output objects stored in the
+// bucket. For more information about output, see Querying Archived Objects
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/querying-glacier-archives.html)
 // in the Amazon S3 User Guide. For more information about the S3 structure in the
 // request body, see the following:
@@ -251,17 +251,17 @@ type RestoreObjectInput struct {
 	// access point, you must direct requests to the access point hostname. The access
 	// point hostname takes the form
 	// AccessPointName-AccountId.s3-accesspoint.Region.amazonaws.com. When using this
-	// action with an access point through the AWS SDKs, you provide the access point
-	// ARN in place of the bucket name. For more information about access point ARNs,
-	// see Using access points
+	// action with an access point through the Amazon Web Services SDKs, you provide
+	// the access point ARN in place of the bucket name. For more information about
+	// access point ARNs, see Using access points
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-access-points.html)
 	// in the Amazon S3 User Guide. When using this action with Amazon S3 on Outposts,
 	// you must direct requests to the S3 on Outposts hostname. The S3 on Outposts
 	// hostname takes the form
 	// AccessPointName-AccountId.outpostID.s3-outposts.Region.amazonaws.com. When using
-	// this action using S3 on Outposts through the AWS SDKs, you provide the Outposts
-	// bucket ARN in place of the bucket name. For more information about S3 on
-	// Outposts ARNs, see Using S3 on Outposts
+	// this action using S3 on Outposts through the Amazon Web Services SDKs, you
+	// provide the Outposts bucket ARN in place of the bucket name. For more
+	// information about S3 on Outposts ARNs, see Using S3 on Outposts
 	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 	// Amazon S3 User Guide.
 	//

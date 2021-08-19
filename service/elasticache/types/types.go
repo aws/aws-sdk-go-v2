@@ -329,7 +329,7 @@ type CacheNode struct {
 
 	// The cache node identifier. A node ID is a numeric identifier (0001, 0002, etc.).
 	// The combination of cluster ID and node ID uniquely identifies every cache node
-	// used in a customer's AWS account.
+	// used in a customer's Amazon account.
 	CacheNodeId *string
 
 	// The current state of this cache node, one of the following values: available,
@@ -501,7 +501,7 @@ type CacheSecurityGroup struct {
 	// security group.
 	EC2SecurityGroups []EC2SecurityGroup
 
-	// The AWS account ID of the cache security group owner.
+	// The Amazon account ID of the cache security group owner.
 	OwnerId *string
 
 	noSmithyDocumentSerde
@@ -632,7 +632,7 @@ type EC2SecurityGroup struct {
 	// The name of the Amazon EC2 security group.
 	EC2SecurityGroupName *string
 
-	// The AWS account ID of the Amazon EC2 security group owner.
+	// The Amazon account ID of the Amazon EC2 security group owner.
 	EC2SecurityGroupOwnerId *string
 
 	// The status of the Amazon EC2 security group.
@@ -726,7 +726,7 @@ type GlobalNodeGroup struct {
 }
 
 // Consists of a primary cluster that accepts writes and an associated secondary
-// cluster that resides in a different AWS region. The secondary cluster accepts
+// cluster that resides in a different Amazon region. The secondary cluster accepts
 // only reads. The primary cluster automatically replicates updates to the
 // secondary cluster.
 //
@@ -800,7 +800,7 @@ type GlobalReplicationGroupInfo struct {
 	noSmithyDocumentSerde
 }
 
-// A member of a Global datastore. It contains the Replication Group Id, the AWS
+// A member of a Global datastore. It contains the Replication Group Id, the Amazon
 // region and the role of the replication group.
 type GlobalReplicationGroupMember struct {
 
@@ -810,7 +810,7 @@ type GlobalReplicationGroupMember struct {
 	// The replication group id of the Global datastore member.
 	ReplicationGroupId *string
 
-	// The AWS region of the Global datastore member.
+	// The Amazon region of the Global datastore member.
 	ReplicationGroupRegion *string
 
 	// Indicates the role of the replication group, primary or secondary.
@@ -1199,7 +1199,7 @@ type RegionalConfiguration struct {
 	// This member is required.
 	ReplicationGroupId *string
 
-	// The AWS region where the cluster is stored
+	// The Amazon region where the cluster is stored
 	//
 	// This member is required.
 	ReplicationGroupRegion *string
@@ -1282,6 +1282,9 @@ type ReplicationGroup struct {
 	// A group of settings to be applied to the replication group, either immediately
 	// or during the next maintenance window.
 	PendingModifiedValues *ReplicationGroupPendingModifiedValues
+
+	// The date and time when the cluster was created.
+	ReplicationGroupCreateTime *time.Time
 
 	// The identifier for the replication group.
 	ReplicationGroupId *string

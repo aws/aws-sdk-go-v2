@@ -26,7 +26,7 @@ import (
 //
 // * You can only enable Object
 // Lock for new buckets. If you want to turn on Object Lock for an existing bucket,
-// contact AWS Support.
+// contact Amazon Web Services Support.
 func (c *Client) PutObjectLockConfiguration(ctx context.Context, params *PutObjectLockConfigurationInput, optFns ...func(*Options)) (*PutObjectLockConfigurationOutput, error) {
 	if params == nil {
 		params = &PutObjectLockConfigurationInput{}
@@ -49,8 +49,9 @@ type PutObjectLockConfigurationInput struct {
 	// This member is required.
 	Bucket *string
 
-	// The MD5 hash for the request body. For requests made using the AWS Command Line
-	// Interface (CLI) or AWS SDKs, this field is calculated automatically.
+	// The MD5 hash for the request body. For requests made using the Amazon Web
+	// Services Command Line Interface (CLI) or Amazon Web Services SDKs, this field is
+	// calculated automatically.
 	ContentMD5 *string
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

@@ -29,9 +29,9 @@ import (
 // resulting user session is valid for 10 hours.
 //
 // For more information, see
-// Embedded Analytics
-// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics.html) in
-// the Amazon QuickSight User Guide. For more information about the high-level
+// Embedding Analytics Using GetDashboardEmbedUrl
+// (https://docs.aws.amazon.com/quicksight/latest/user/embedded-analytics-deprecated.html)
+// in the Amazon QuickSight User Guide. For more information about the high-level
 // steps for embedding and for an interactive demo of the ways you can customize
 // embedding, visit the Amazon QuickSight Developer Portal
 // (https://docs.aws.amazon.com/quicksight/latest/user/quicksight-dev-portal.html).

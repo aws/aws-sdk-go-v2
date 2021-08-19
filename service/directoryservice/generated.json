@@ -27,6 +27,7 @@
         "api_op_DeregisterCertificate.go",
         "api_op_DeregisterEventTopic.go",
         "api_op_DescribeCertificate.go",
+        "api_op_DescribeClientAuthenticationSettings.go",
         "api_op_DescribeConditionalForwarders.go",
         "api_op_DescribeDirectories.go",
         "api_op_DescribeDomainControllers.go",

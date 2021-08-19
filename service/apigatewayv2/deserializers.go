@@ -14502,6 +14502,15 @@ func awsRestjson1_deserializeDocumentDomainNameConfiguration(v **types.DomainNam
 				sv.HostedZoneId = ptr.String(jtv)
 			}
 
+		case "ownershipVerificationCertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.OwnershipVerificationCertificateArn = ptr.String(jtv)
+			}
+
 		case "securityPolicy":
 			if value != nil {
 				jtv, ok := value.(string)

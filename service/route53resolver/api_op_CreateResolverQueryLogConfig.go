@@ -19,10 +19,10 @@ import (
 // AssociateResolverQueryLogConfig. For more information, see
 // AssociateResolverQueryLogConfig
 // (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_AssociateResolverQueryLogConfig.html).
-// You can optionally use AWS Resource Access Manager (AWS RAM) to share a query
-// logging configuration with other AWS accounts. The other accounts can then
-// associate VPCs with the configuration. The query logs that Resolver creates for
-// a configuration include all DNS queries that originate in all VPCs that are
+// You can optionally use Resource Access Manager (RAM) to share a query logging
+// configuration with other Amazon Web Services accounts. The other accounts can
+// then associate VPCs with the configuration. The query logs that Resolver creates
+// for a configuration include all DNS queries that originate in all VPCs that are
 // associated with the configuration.
 func (c *Client) CreateResolverQueryLogConfig(ctx context.Context, params *CreateResolverQueryLogConfigInput, optFns ...func(*Options)) (*CreateResolverQueryLogConfigOutput, error) {
 	if params == nil {

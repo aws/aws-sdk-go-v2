@@ -63,6 +63,12 @@ type CreateEnvironmentEC2Input struct {
 	// The description of the environment to create.
 	Description *string
 
+	// Checks whether you have the required permissions for the action, without
+	// actually making the request, and provides an error response. If you have the
+	// required permissions, the error response is DryRunOperation. Otherwise, it is
+	// UnauthorizedOperation.
+	DryRun *bool
+
 	// The identifier for the Amazon Machine Image (AMI) that's used to create the EC2
 	// instance. To choose an AMI for the instance, you must specify a valid AMI alias
 	// or a valid Amazon EC2 Systems Manager (SSM) path. The default AMI is used if the

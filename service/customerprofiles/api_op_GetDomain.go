@@ -67,8 +67,12 @@ type GetDomainOutput struct {
 	// The default number of days until the data within the domain expires.
 	DefaultExpirationDays *int32
 
-	// The process of matching duplicate profiles. This process runs every Saturday at
-	// 12AM.
+	// The process of matching duplicate profiles. If Matching = true, Amazon Connect
+	// Customer Profiles starts a weekly batch process every Saturday at 12AM UTC to
+	// detect duplicate profiles in your domains. After that batch process completes,
+	// use the GetMatches
+	// (https://docs.aws.amazon.com/customerprofiles/latest/APIReference/API_GetMatches.html)
+	// API to return and review the results.
 	Matching *types.MatchingResponse
 
 	// Usage-specific statistics about the domain.

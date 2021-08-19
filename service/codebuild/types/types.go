@@ -1616,7 +1616,9 @@ type ProjectSource struct {
 	// status cannot be updated. For more information, see Source provider access
 	// (https://docs.aws.amazon.com/codebuild/latest/userguide/access-tokens.html) in
 	// the CodeBuild User Guide. The status of a build triggered by a webhook is always
-	// reported to your source provider.
+	// reported to your source provider. If your project's builds are triggered by a
+	// webhook, you must push a new commit to the repo for a change to this property to
+	// take effect.
 	ReportBuildStatus *bool
 
 	// An identifier for this project source. The identifier can only contain

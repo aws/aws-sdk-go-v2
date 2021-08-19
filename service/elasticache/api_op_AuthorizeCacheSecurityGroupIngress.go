@@ -44,9 +44,9 @@ type AuthorizeCacheSecurityGroupIngressInput struct {
 	// This member is required.
 	EC2SecurityGroupName *string
 
-	// The AWS account number of the Amazon EC2 security group owner. Note that this is
-	// not the same thing as an AWS access key ID - you must provide a valid AWS
-	// account number for this parameter.
+	// The Amazon account number of the Amazon EC2 security group owner. Note that this
+	// is not the same thing as an Amazon access key ID - you must provide a valid
+	// Amazon account number for this parameter.
 	//
 	// This member is required.
 	EC2SecurityGroupOwnerId *string

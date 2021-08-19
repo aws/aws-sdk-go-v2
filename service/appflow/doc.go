@@ -7,9 +7,9 @@
 // need detailed information about the Amazon AppFlow API operations, data types,
 // and errors. Amazon AppFlow is a fully managed integration service that enables
 // you to securely transfer data between software as a service (SaaS) applications
-// like Salesforce, Marketo, Slack, and ServiceNow, and AWS services like Amazon S3
-// and Amazon Redshift. Use the following links to get started on the Amazon
-// AppFlow API:
+// like Salesforce, Marketo, Slack, and ServiceNow, and Amazon Web Services like
+// Amazon S3 and Amazon Redshift. Use the following links to get started on the
+// Amazon AppFlow API:
 //
 // * Actions
 // (https://docs.aws.amazon.com/appflow/1.0/APIReference/API_Operations.html): An

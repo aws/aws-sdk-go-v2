@@ -1489,6 +1489,13 @@ func awsRestjson1_serializeOpDocumentListProfileObjectsInput(v *ListProfileObjec
 	object := value.Object()
 	defer object.Close()
 
+	if v.ObjectFilter != nil {
+		ok := object.Key("ObjectFilter")
+		if err := awsRestjson1_serializeDocumentObjectFilter(v.ObjectFilter, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ObjectTypeName != nil {
 		ok := object.Key("ObjectTypeName")
 		ok.String(*v.ObjectTypeName)
@@ -2979,6 +2986,25 @@ func awsRestjson1_serializeDocumentMatchingRequest(v *types.MatchingRequest, val
 	if v.Enabled != nil {
 		ok := object.Key("Enabled")
 		ok.Boolean(*v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentObjectFilter(v *types.ObjectFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KeyName != nil {
+		ok := object.Key("KeyName")
+		ok.String(*v.KeyName)
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsRestjson1_serializeDocumentRequestValueList(v.Values, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

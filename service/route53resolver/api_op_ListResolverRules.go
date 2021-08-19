@@ -12,7 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the Resolver rules that were created using the current AWS account.
+// Lists the Resolver rules that were created using the current Amazon Web Services
+// account.
 func (c *Client) ListResolverRules(ctx context.Context, params *ListResolverRulesInput, optFns ...func(*Options)) (*ListResolverRulesOutput, error) {
 	if params == nil {
 		params = &ListResolverRulesInput{}
@@ -61,8 +62,8 @@ type ListResolverRulesOutput struct {
 	// the next request, specify the value of NextToken from the previous response.
 	NextToken *string
 
-	// The Resolver rules that were created using the current AWS account and that
-	// match the specified filters, if any.
+	// The Resolver rules that were created using the current Amazon Web Services
+	// account and that match the specified filters, if any.
 	ResolverRules []types.ResolverRule
 
 	// Metadata pertaining to the operation's result.

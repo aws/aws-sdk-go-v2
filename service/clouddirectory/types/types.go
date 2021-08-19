@@ -678,6 +678,8 @@ type BatchListObjectParentPathsResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Lists parent objects that are associated with a given object in pagination
+// fashion.
 type BatchListObjectParents struct {
 
 	// The reference that identifies an object.
@@ -685,16 +687,23 @@ type BatchListObjectParents struct {
 	// This member is required.
 	ObjectReference *ObjectReference
 
+	// The maximum number of items to be retrieved in a single call. This is an
+	// approximate number.
 	MaxResults *int32
 
+	// The pagination token.
 	NextToken *string
 
 	noSmithyDocumentSerde
 }
 
+// Represents the output of a ListObjectParents response operation.
 type BatchListObjectParentsResponse struct {
+
+	// The pagination token.
 	NextToken *string
 
+	// Returns a list of parent reference and LinkName Tuples.
 	ParentLinks []ObjectIdentifierAndLinkNameTuple
 
 	noSmithyDocumentSerde
@@ -885,6 +894,8 @@ type BatchReadOperation struct {
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 	ListObjectParentPaths *BatchListObjectParentPaths
 
+	// Lists parent objects that are associated with a given object in pagination
+	// fashion.
 	ListObjectParents *BatchListObjectParents
 
 	// Returns policies attached to an object in pagination fashion.
@@ -960,6 +971,7 @@ type BatchReadSuccessfulResponse struct {
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/key_concepts_directorystructure.html).
 	ListObjectParentPaths *BatchListObjectParentPathsResponse
 
+	// The list of parent objects to retrieve.
 	ListObjectParents *BatchListObjectParentsResponse
 
 	// Returns policies attached to an object in pagination fashion.
@@ -1397,12 +1409,14 @@ type ObjectReference struct {
 	// An object identifier is an opaque string provided by Amazon Cloud Directory.
 	// When creating objects, the system will provide you with the identifier of the
 	// created object. An object’s identifier is immutable and no two objects will ever
-	// share the same object identifier
+	// share the same object identifier. To identify an object with ObjectIdentifier,
+	// the ObjectIdentifier must be wrapped in double quotes.
 	//
-	// * /some/path - Identifies the object based on
-	// path
+	// * /some/path -
+	// Identifies the object based on path
 	//
-	// * #SomeBatchReference - Identifies the object in a batch call
+	// * #SomeBatchReference - Identifies the
+	// object in a batch call
 	Selector *string
 
 	noSmithyDocumentSerde
@@ -1467,13 +1481,14 @@ type Rule struct {
 // A facet.
 type SchemaFacet struct {
 
-	// The name of the facet.
+	// The name of the facet. If this value is set, SchemaArn must also be set.
 	FacetName *string
 
 	// The ARN of the schema that contains the facet with no minor component. See arns
 	// and In-Place Schema Upgrade
 	// (https://docs.aws.amazon.com/clouddirectory/latest/developerguide/schemas_inplaceschemaupgrade.html)
-	// for a description of when to provide minor versions.
+	// for a description of when to provide minor versions. If this value is set,
+	// FacetName must also be set.
 	SchemaArn *string
 
 	noSmithyDocumentSerde

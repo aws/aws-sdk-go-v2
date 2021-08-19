@@ -21,8 +21,7 @@ import (
 const ServiceID = "EMR"
 const ServiceAPIVersion = "2009-03-31"
 
-// Client provides the API client to make operations call for Amazon Elastic
-// MapReduce.
+// Client provides the API client to make operations call for Amazon EMR.
 type Client struct {
 	options Options
 }

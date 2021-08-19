@@ -11,19 +11,21 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Shares a specified directory (DirectoryId) in your AWS account (directory owner)
-// with another AWS account (directory consumer). With this operation you can use
-// your directory from any AWS account and from any Amazon VPC within an AWS
-// Region. When you share your AWS Managed Microsoft AD directory, AWS Directory
-// Service creates a shared directory in the directory consumer account. This
-// shared directory contains the metadata to provide access to the directory within
-// the directory owner account. The shared directory is visible in all VPCs in the
-// directory consumer account. The ShareMethod parameter determines whether the
-// specified directory can be shared between AWS accounts inside the same AWS
+// Shares a specified directory (DirectoryId) in your Amazon Web Services account
+// (directory owner) with another Amazon Web Services account (directory consumer).
+// With this operation you can use your directory from any Amazon Web Services
+// account and from any Amazon VPC within an Amazon Web Services Region. When you
+// share your Managed Microsoft AD directory, Directory Service creates a shared
+// directory in the directory consumer account. This shared directory contains the
+// metadata to provide access to the directory within the directory owner account.
+// The shared directory is visible in all VPCs in the directory consumer account.
+// The ShareMethod parameter determines whether the specified directory can be
+// shared between Amazon Web Services accounts inside the same Amazon Web Services
 // organization (ORGANIZATIONS). It also determines whether you can share the
-// directory with any other AWS account either inside or outside of the
-// organization (HANDSHAKE). The ShareNotes parameter is only used when HANDSHAKE
-// is called, which sends a directory sharing request to the directory consumer.
+// directory with any other Amazon Web Services account either inside or outside of
+// the organization (HANDSHAKE). The ShareNotes parameter is only used when
+// HANDSHAKE is called, which sends a directory sharing request to the directory
+// consumer.
 func (c *Client) ShareDirectory(ctx context.Context, params *ShareDirectoryInput, optFns ...func(*Options)) (*ShareDirectoryOutput, error) {
 	if params == nil {
 		params = &ShareDirectoryInput{}
@@ -41,15 +43,16 @@ func (c *Client) ShareDirectory(ctx context.Context, params *ShareDirectoryInput
 
 type ShareDirectoryInput struct {
 
-	// Identifier of the AWS Managed Microsoft AD directory that you want to share with
-	// other AWS accounts.
+	// Identifier of the Managed Microsoft AD directory that you want to share with
+	// other Amazon Web Services accounts.
 	//
 	// This member is required.
 	DirectoryId *string
 
 	// The method used when sharing a directory to determine whether the directory
-	// should be shared within your AWS organization (ORGANIZATIONS) or with any AWS
-	// account by sending a directory sharing request (HANDSHAKE).
+	// should be shared within your Amazon Web Services organization (ORGANIZATIONS) or
+	// with any Amazon Web Services account by sending a directory sharing request
+	// (HANDSHAKE).
 	//
 	// This member is required.
 	ShareMethod types.ShareMethod

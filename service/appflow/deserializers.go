@@ -3731,6 +3731,11 @@ func awsRestjson1_deserializeDocumentConnectorMetadata(v **types.ConnectorMetada
 				return err
 			}
 
+		case "SAPOData":
+			if err := awsRestjson1_deserializeDocumentSAPODataMetadata(&sv.SAPOData, value); err != nil {
+				return err
+			}
+
 		case "ServiceNow":
 			if err := awsRestjson1_deserializeDocumentServiceNowMetadata(&sv.ServiceNow, value); err != nil {
 				return err
@@ -3872,6 +3877,15 @@ func awsRestjson1_deserializeDocumentConnectorOperator(v **types.ConnectorOperat
 					return fmt.Errorf("expected SalesforceConnectorOperator to be of type string, got %T instead", value)
 				}
 				sv.Salesforce = types.SalesforceConnectorOperator(jtv)
+			}
+
+		case "SAPOData":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SAPODataConnectorOperator to be of type string, got %T instead", value)
+				}
+				sv.SAPOData = types.SAPODataConnectorOperator(jtv)
 			}
 
 		case "ServiceNow":
@@ -4041,6 +4055,11 @@ func awsRestjson1_deserializeDocumentConnectorProfile(v **types.ConnectorProfile
 				}
 			}
 
+		case "privateConnectionProvisioningState":
+			if err := awsRestjson1_deserializeDocumentPrivateConnectionProvisioningState(&sv.PrivateConnectionProvisioningState, value); err != nil {
+				return err
+			}
+
 		default:
 			_, _ = key, value
 
@@ -4148,6 +4167,11 @@ func awsRestjson1_deserializeDocumentConnectorProfileProperties(v **types.Connec
 
 		case "Salesforce":
 			if err := awsRestjson1_deserializeDocumentSalesforceConnectorProfileProperties(&sv.Salesforce, value); err != nil {
+				return err
+			}
+
+		case "SAPOData":
+			if err := awsRestjson1_deserializeDocumentSAPODataConnectorProfileProperties(&sv.SAPOData, value); err != nil {
 				return err
 			}
 
@@ -6155,6 +6179,60 @@ func awsRestjson1_deserializeDocumentMarketoSourceProperties(v **types.MarketoSo
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentOAuthProperties(v **types.OAuthProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OAuthProperties
+	if *v == nil {
+		sv = &types.OAuthProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "authCodeUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthCodeUrl to be of type string, got %T instead", value)
+				}
+				sv.AuthCodeUrl = ptr.String(jtv)
+			}
+
+		case "oAuthScopes":
+			if err := awsRestjson1_deserializeDocumentOAuthScopeList(&sv.OAuthScopes, value); err != nil {
+				return err
+			}
+
+		case "tokenUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TokenUrl to be of type string, got %T instead", value)
+				}
+				sv.TokenUrl = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentOAuthScopeList(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6229,6 +6307,64 @@ func awsRestjson1_deserializeDocumentPrefixConfig(v **types.PrefixConfig, value 
 					return fmt.Errorf("expected PrefixType to be of type string, got %T instead", value)
 				}
 				sv.PrefixType = types.PrefixType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentPrivateConnectionProvisioningState(v **types.PrivateConnectionProvisioningState, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.PrivateConnectionProvisioningState
+	if *v == nil {
+		sv = &types.PrivateConnectionProvisioningState{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "failureCause":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrivateConnectionProvisioningFailureCause to be of type string, got %T instead", value)
+				}
+				sv.FailureCause = types.PrivateConnectionProvisioningFailureCause(jtv)
+			}
+
+		case "failureMessage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrivateConnectionProvisioningFailureMessage to be of type string, got %T instead", value)
+				}
+				sv.FailureMessage = ptr.String(jtv)
+			}
+
+		case "status":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrivateConnectionProvisioningStatus to be of type string, got %T instead", value)
+				}
+				sv.Status = types.PrivateConnectionProvisioningStatus(jtv)
 			}
 
 		default:
@@ -6852,6 +6988,171 @@ func awsRestjson1_deserializeDocumentSalesforceSourceProperties(v **types.Salesf
 					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
 				}
 				sv.Object = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSAPODataConnectorProfileProperties(v **types.SAPODataConnectorProfileProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SAPODataConnectorProfileProperties
+	if *v == nil {
+		sv = &types.SAPODataConnectorProfileProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "applicationHostUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationHostUrl to be of type string, got %T instead", value)
+				}
+				sv.ApplicationHostUrl = ptr.String(jtv)
+			}
+
+		case "applicationServicePath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ApplicationServicePath to be of type string, got %T instead", value)
+				}
+				sv.ApplicationServicePath = ptr.String(jtv)
+			}
+
+		case "clientNumber":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ClientNumber to be of type string, got %T instead", value)
+				}
+				sv.ClientNumber = ptr.String(jtv)
+			}
+
+		case "logonLanguage":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LogonLanguage to be of type string, got %T instead", value)
+				}
+				sv.LogonLanguage = ptr.String(jtv)
+			}
+
+		case "oAuthProperties":
+			if err := awsRestjson1_deserializeDocumentOAuthProperties(&sv.OAuthProperties, value); err != nil {
+				return err
+			}
+
+		case "portNumber":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected PortNumber to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.PortNumber = int32(i64)
+			}
+
+		case "privateLinkServiceName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected PrivateLinkServiceName to be of type string, got %T instead", value)
+				}
+				sv.PrivateLinkServiceName = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSAPODataMetadata(v **types.SAPODataMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SAPODataMetadata
+	if *v == nil {
+		sv = &types.SAPODataMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentSAPODataSourceProperties(v **types.SAPODataSourceProperties, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SAPODataSourceProperties
+	if *v == nil {
+		sv = &types.SAPODataSourceProperties{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "objectPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Object to be of type string, got %T instead", value)
+				}
+				sv.ObjectPath = ptr.String(jtv)
 			}
 
 		default:
@@ -7639,6 +7940,11 @@ func awsRestjson1_deserializeDocumentSourceConnectorProperties(v **types.SourceC
 
 		case "Salesforce":
 			if err := awsRestjson1_deserializeDocumentSalesforceSourceProperties(&sv.Salesforce, value); err != nil {
+				return err
+			}
+
+		case "SAPOData":
+			if err := awsRestjson1_deserializeDocumentSAPODataSourceProperties(&sv.SAPOData, value); err != nil {
 				return err
 			}
 
@@ -8630,6 +8936,42 @@ func awsRestjson1_deserializeDocumentVeevaSourceProperties(v **types.VeevaSource
 
 	for key, value := range shape {
 		switch key {
+		case "documentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentType to be of type string, got %T instead", value)
+				}
+				sv.DocumentType = ptr.String(jtv)
+			}
+
+		case "includeAllVersions":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeAllVersions = jtv
+			}
+
+		case "includeRenditions":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeRenditions = jtv
+			}
+
+		case "includeSourceFiles":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.IncludeSourceFiles = jtv
+			}
+
 		case "object":
 			if value != nil {
 				jtv, ok := value.(string)

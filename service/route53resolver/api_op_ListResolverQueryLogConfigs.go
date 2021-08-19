@@ -76,34 +76,35 @@ type ListResolverQueryLogConfigsInput struct {
 	// * Name: The name of the configuration
 	//
 	// *
-	// OwnerId: The AWS account number of the account that created the configuration
+	// OwnerId: The Amazon Web Services account number of the account that created the
+	// configuration
+	//
+	// * ShareStatus: Whether the configuration is shared with other
+	// Amazon Web Services accounts or shared with the current account by another
+	// Amazon Web Services account. Sharing is configured through Resource Access
+	// Manager (RAM).
+	//
+	// * Status: The current status of the configuration. Valid values
+	// include the following:
+	//
+	// * CREATING: Resolver is creating the query logging
+	// configuration.
+	//
+	// * CREATED: The query logging configuration was successfully
+	// created. Resolver is logging queries that originate in the specified VPC.
 	//
 	// *
-	// ShareStatus: Whether the configuration is shared with other AWS accounts or
-	// shared with the current account by another AWS account. Sharing is configured
-	// through AWS Resource Access Manager (AWS RAM).
+	// DELETING: Resolver is deleting this query logging configuration.
 	//
-	// * Status: The current status of
-	// the configuration. Valid values include the following:
+	// * FAILED:
+	// Resolver either couldn't create or couldn't delete the query logging
+	// configuration. Here are two common causes:
 	//
-	// * CREATING: Resolver is
-	// creating the query logging configuration.
+	// * The specified destination (for
+	// example, an Amazon S3 bucket) was deleted.
 	//
-	// * CREATED: The query logging
-	// configuration was successfully created. Resolver is logging queries that
-	// originate in the specified VPC.
-	//
-	// * DELETING: Resolver is deleting this query
-	// logging configuration.
-	//
-	// * FAILED: Resolver either couldn't create or couldn't
-	// delete the query logging configuration. Here are two common causes:
-	//
-	// * The
-	// specified destination (for example, an Amazon S3 bucket) was deleted.
-	//
-	// *
-	// Permissions don't allow sending logs to the destination.
+	// * Permissions don't allow sending
+	// logs to the destination.
 	SortBy *string
 
 	// If you specified a value for SortBy, the order that you want query logging

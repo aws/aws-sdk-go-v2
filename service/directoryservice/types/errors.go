@@ -163,7 +163,7 @@ func (e *ClientException) ErrorMessage() string {
 func (e *ClientException) ErrorCode() string             { return "ClientException" }
 func (e *ClientException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Region you specified is the same Region where the AWS Managed Microsoft AD
+// The Region you specified is the same Region where the Managed Microsoft AD
 // directory was created. Specify a different Region and try again.
 type DirectoryAlreadyInRegionException struct {
 	Message *string
@@ -187,7 +187,8 @@ func (e *DirectoryAlreadyInRegionException) ErrorCode() string {
 }
 func (e *DirectoryAlreadyInRegionException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified directory has already been shared with this AWS account.
+// The specified directory has already been shared with this Amazon Web Services
+// account.
 type DirectoryAlreadySharedException struct {
 	Message *string
 
@@ -256,7 +257,8 @@ func (e *DirectoryLimitExceededException) ErrorCode() string {
 }
 func (e *DirectoryLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The specified directory has not been shared with this AWS account.
+// The specified directory has not been shared with this Amazon Web Services
+// account.
 type DirectoryNotSharedException struct {
 	Message *string
 
@@ -586,7 +588,8 @@ func (e *NoAvailableCertificateException) ErrorCode() string {
 }
 func (e *NoAvailableCertificateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Exception encountered while trying to access your AWS organization.
+// Exception encountered while trying to access your Amazon Web Services
+// organization.
 type OrganizationsException struct {
 	Message *string
 
@@ -629,7 +632,7 @@ func (e *RegionLimitExceededException) ErrorMessage() string {
 func (e *RegionLimitExceededException) ErrorCode() string             { return "RegionLimitExceededException" }
 func (e *RegionLimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// An exception has occurred in AWS Directory Service.
+// An exception has occurred in Directory Service.
 type ServiceException struct {
 	Message *string
 
@@ -650,8 +653,8 @@ func (e *ServiceException) ErrorMessage() string {
 func (e *ServiceException) ErrorCode() string             { return "ServiceException" }
 func (e *ServiceException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The maximum number of AWS accounts that you can share with this directory has
-// been reached.
+// The maximum number of Amazon Web Services accounts that you can share with this
+// directory has been reached.
 type ShareLimitExceededException struct {
 	Message *string
 

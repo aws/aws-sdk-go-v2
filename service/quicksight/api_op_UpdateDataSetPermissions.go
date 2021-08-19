@@ -36,7 +36,7 @@ type UpdateDataSetPermissionsInput struct {
 	AwsAccountId *string
 
 	// The ID for the dataset whose permissions you want to update. This ID is unique
-	// per Region; for each Amazon Web Services account;.
+	// per Amazon Web Services Region; for each Amazon Web Services account;.
 	//
 	// This member is required.
 	DataSetId *string
@@ -56,7 +56,7 @@ type UpdateDataSetPermissionsOutput struct {
 	DataSetArn *string
 
 	// The ID for the dataset whose permissions you want to update. This ID is unique
-	// per Region; for each Amazon Web Services account;.
+	// per Amazon Web Services Region; for each Amazon Web Services account;.
 	DataSetId *string
 
 	// The Amazon Web Services request ID for this operation.

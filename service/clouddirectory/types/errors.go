@@ -7,7 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// Access denied. Check your permissions.
+// Access denied or directory not found. Either you don't have permissions for this
+// directory or the directory does not exist. Try calling ListDirectories and check
+// your permissions.
 type AccessDeniedException struct {
 	Message *string
 

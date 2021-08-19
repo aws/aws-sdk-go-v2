@@ -36,7 +36,7 @@ type DescribeConnectorEntityInput struct {
 	ConnectorEntityName *string
 
 	// The name of the connector profile. The name is unique for each ConnectorProfile
-	// in the AWS account.
+	// in the Amazon Web Services account.
 	ConnectorProfileName *string
 
 	// The type of connector application, such as Salesforce, Amplitude, and so on.

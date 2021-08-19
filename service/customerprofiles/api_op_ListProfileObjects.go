@@ -51,6 +51,10 @@ type ListProfileObjectsInput struct {
 	// The pagination token from the previous call to ListProfileObjects.
 	NextToken *string
 
+	// Applies a filter to the response to include profile objects with the specified
+	// index values. This filter is only supported for ObjectTypeName _asset and _case.
+	ObjectFilter *types.ObjectFilter
+
 	noSmithyDocumentSerde
 }
 

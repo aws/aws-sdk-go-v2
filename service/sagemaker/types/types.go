@@ -435,7 +435,7 @@ type AnnotationConsolidationConfig struct {
 	// estimate the true class of text based on annotations from individual workers.
 	//
 	// *
-	// rn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass
+	// arn:aws:lambda:us-east-1:432418664414:function:ACS-TextMultiClass
 	//
 	// *
 	// arn:aws:lambda:us-east-2:266458841044:function:ACS-TextMultiClass
@@ -1336,6 +1336,68 @@ type AssociationSummary struct {
 	noSmithyDocumentSerde
 }
 
+// Configures the behavior of the client used by Amazon SageMaker to interact with
+// the model container during asynchronous inference.
+type AsyncInferenceClientConfig struct {
+
+	// The maximum number of concurrent requests sent by the SageMaker client to the
+	// model container. If no value is provided, Amazon SageMaker will choose an
+	// optimal value for you.
+	MaxConcurrentInvocationsPerInstance *int32
+
+	noSmithyDocumentSerde
+}
+
+// Specifies configuration for how an endpoint performs asynchronous inference.
+type AsyncInferenceConfig struct {
+
+	// Specifies the configuration for asynchronous inference invocation outputs.
+	//
+	// This member is required.
+	OutputConfig *AsyncInferenceOutputConfig
+
+	// Configures the behavior of the client used by Amazon SageMaker to interact with
+	// the model container during asynchronous inference.
+	ClientConfig *AsyncInferenceClientConfig
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration for notifications of inference results for
+// asynchronous inference.
+type AsyncInferenceNotificationConfig struct {
+
+	// Amazon SNS topic to post a notification to when inference fails. If no topic is
+	// provided, no notification is sent on failure.
+	ErrorTopic *string
+
+	// Amazon SNS topic to post a notification to when inference completes
+	// successfully. If no topic is provided, no notification is sent on success.
+	SuccessTopic *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration for asynchronous inference invocation outputs.
+type AsyncInferenceOutputConfig struct {
+
+	// The Amazon S3 location to upload inference responses to.
+	//
+	// This member is required.
+	S3OutputPath *string
+
+	// The Amazon Web Services Key Management Service (Amazon Web Services KMS) key
+	// that Amazon SageMaker uses to encrypt the asynchronous inference output in
+	// Amazon S3.
+	KmsKeyId *string
+
+	// Specifies the configuration for notifications of inference results for
+	// asynchronous inference.
+	NotificationConfig *AsyncInferenceNotificationConfig
+
+	noSmithyDocumentSerde
+}
+
 // Configuration for Athena Dataset Definition input.
 type AthenaDatasetDefinition struct {
 
@@ -1378,8 +1440,8 @@ type AthenaDatasetDefinition struct {
 	noSmithyDocumentSerde
 }
 
-// An Autopilot job returns recommendations, or candidates. Each candidate has
-// futher details about the steps involved and the status.
+// Information about a candidate produced by an AutoML training job, including its
+// status, steps, and other properties.
 type AutoMLCandidate struct {
 
 	// The name of the candidate.
@@ -1412,7 +1474,7 @@ type AutoMLCandidate struct {
 	// This member is required.
 	ObjectiveStatus ObjectiveStatus
 
-	// The AutoML candidate's properties.
+	// The properties of an AutoML candidate job.
 	CandidateProperties *CandidateProperties
 
 	// The end time.
@@ -1476,7 +1538,8 @@ type AutoMLChannel struct {
 // up an AutoML candidate. For more information, see .
 type AutoMLContainerDefinition struct {
 
-	// The ECR path of the container. For more information, see .
+	// The Amazon Elastic Container Registry (Amazon ECR) path of the container. For
+	// more information, see .
 	//
 	// This member is required.
 	Image *string
@@ -1557,7 +1620,7 @@ type AutoMLJobObjective struct {
 	// MSE: The mean squared error (MSE) is the average of the squared differences
 	// between the predicted and actual values. It is used for regression. MSE values
 	// are always positive: the better a model is at predicting the actual values, the
-	// smaller the MSE value. When the data contains outliers, they tend to dominate
+	// smaller the MSE value is. When the data contains outliers, they tend to dominate
 	// the MSE, which might cause subpar prediction performance.
 	//
 	// * Accuracy: The ratio
@@ -1632,7 +1695,7 @@ type AutoMLJobSummary struct {
 	// This member is required.
 	AutoMLJobArn *string
 
-	// The name of the AutoML you are requesting.
+	// The name of the AutoML job you are requesting.
 	//
 	// This member is required.
 	AutoMLJobName *string
@@ -1800,6 +1863,9 @@ type CandidateProperties struct {
 
 	// The Amazon S3 prefix to the artifacts generated for an AutoML candidate.
 	CandidateArtifactLocations *CandidateArtifactLocations
+
+	// Information about the candidate metrics for an AutoML job.
+	CandidateMetrics []MetricDatum
 
 	noSmithyDocumentSerde
 }
@@ -6323,6 +6389,21 @@ type MetricData struct {
 	noSmithyDocumentSerde
 }
 
+// Information about the metric for a candidate produced by an AutoML job.
+type MetricDatum struct {
+
+	// The name of the metric.
+	MetricName AutoMLMetricEnum
+
+	// The dataset split from which the AutoML job produced the metric.
+	Set MetricSetSource
+
+	// The value of the metric.
+	Value float32
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a metric that the training algorithm writes to stderr or stdout.
 // Amazon SageMakerhyperparameter tuning captures all defined metrics. You specify
 // one metric that a hyperparameter tuning job uses as its objective metric to
@@ -7629,10 +7710,11 @@ type NotebookInstanceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Configures SNS notifications of available or expiring work items for work teams.
+// Configures Amazon SNS notifications of available or expiring work items for work
+// teams.
 type NotificationConfiguration struct {
 
-	// The ARN for the SNS topic to which notifications should be published.
+	// The ARN for the Amazon SNS topic to which notifications should be published.
 	NotificationTopicArn *string
 
 	noSmithyDocumentSerde
@@ -11389,17 +11471,25 @@ type TuningJobStepMetaData struct {
 	noSmithyDocumentSerde
 }
 
-// Provided configuration information for the worker UI for a labeling job.
+// Provided configuration information for the worker UI for a labeling job. Provide
+// either HumanTaskUiArn or UiTemplateS3Uri. For named entity recognition, 3D point
+// cloud and video frame labeling jobs, use HumanTaskUiArn. For all other Ground
+// Truth built-in task types and custom task types, use UiTemplateS3Uri to specify
+// the location of a worker task template in Amazon S3.
 type UiConfig struct {
 
 	// The ARN of the worker task template used to render the worker UI and tools for
 	// labeling job tasks. Use this parameter when you are creating a labeling job for
-	// 3D point cloud and video fram labeling jobs. Use your labeling job task type to
-	// select one of the following ARNs and use it with this parameter when you create
-	// a labeling job. Replace aws-region with the Amazon Web Services region you are
-	// creating your labeling job in. 3D Point Cloud HumanTaskUiArns Use this
-	// HumanTaskUiArn for 3D point cloud object detection and 3D point cloud object
-	// detection adjustment labeling jobs.
+	// named entity recognition, 3D point cloud and video frame labeling jobs. Use your
+	// labeling job task type to select one of the following ARNs and use it with this
+	// parameter when you create a labeling job. Replace aws-region with the Amazon Web
+	// Services Region you are creating your labeling job in. For example, replace
+	// aws-region with us-west-1 if you create a labeling job in US West (N.
+	// California). Named Entity Recognition Use the following HumanTaskUiArn for named
+	// entity recognition labeling jobs:
+	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/NamedEntityRecognition
+	// 3D Point Cloud HumanTaskUiArns Use this HumanTaskUiArn for 3D point cloud object
+	// detection and 3D point cloud object detection adjustment labeling jobs.
 	//
 	// *
 	// arn:aws:sagemaker:aws-region:394669845002:human-task-ui/PointCloudObjectDetection

@@ -19,7 +19,7 @@ import (
 // RunJobFlowInput$VisibleToAllUsers parameter. For more information, see
 // Understanding the EMR Cluster VisibleToAllUsers Setting
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
-// in the Amazon EMR Management Guide.
+// in the Amazon EMRManagement Guide.
 func (c *Client) SetVisibleToAllUsers(ctx context.Context, params *SetVisibleToAllUsersInput, optFns ...func(*Options)) (*SetVisibleToAllUsersOutput, error) {
 	if params == nil {
 		params = &SetVisibleToAllUsersInput{}

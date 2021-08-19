@@ -29,7 +29,7 @@ func (c *Client) UnshareDirectory(ctx context.Context, params *UnshareDirectoryI
 
 type UnshareDirectoryInput struct {
 
-	// The identifier of the AWS Managed Microsoft AD directory that you want to stop
+	// The identifier of the Managed Microsoft AD directory that you want to stop
 	// sharing.
 	//
 	// This member is required.

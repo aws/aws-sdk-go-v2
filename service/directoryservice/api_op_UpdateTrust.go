@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the trust that has been set up between your AWS Managed Microsoft AD
-// directory and an on-premises Active Directory.
+// Updates the trust that has been set up between your Managed Microsoft AD
+// directory and an self-managed Active Directory.
 func (c *Client) UpdateTrust(ctx context.Context, params *UpdateTrustInput, optFns ...func(*Options)) (*UpdateTrustOutput, error) {
 	if params == nil {
 		params = &UpdateTrustInput{}
@@ -43,7 +43,7 @@ type UpdateTrustInput struct {
 
 type UpdateTrustOutput struct {
 
-	// The AWS request identifier.
+	// The Amazon Web Services request identifier.
 	RequestId *string
 
 	// Identifier of the trust relationship.

@@ -117,8 +117,7 @@ type ModifyReplicationGroupInput struct {
 	// Specifies the destination, format and type of the logs.
 	LogDeliveryConfigurations []types.LogDeliveryConfigurationRequest
 
-	// A list of tags to be added to this resource. A tag is a key-value pair. A tag
-	// key must be accompanied by a tag value, although null is accepted.
+	// A flag to indicate MultiAZ is enabled.
 	MultiAZEnabled *bool
 
 	// Deprecated. This parameter is not used.

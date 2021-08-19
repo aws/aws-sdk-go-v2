@@ -48,8 +48,8 @@ type ListNamespacesInput struct {
 type ListNamespacesOutput struct {
 
 	// The information about the namespaces in this Amazon Web Services account;. The
-	// response includes the namespace ARN, name, Region;, notification email address,
-	// creation status, and identity store.
+	// response includes the namespace ARN, name, Amazon Web Services Region;,
+	// notification email address, creation status, and identity store.
 	Namespaces []types.NamespaceInfoV2
 
 	// A pagination token that can be used in a subsequent request.

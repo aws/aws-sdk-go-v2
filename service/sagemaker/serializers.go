@@ -11297,6 +11297,80 @@ func awsAwsjson11_serializeDocumentArtifactSourceTypes(v []types.ArtifactSourceT
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentAsyncInferenceClientConfig(v *types.AsyncInferenceClientConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxConcurrentInvocationsPerInstance != nil {
+		ok := object.Key("MaxConcurrentInvocationsPerInstance")
+		ok.Integer(*v.MaxConcurrentInvocationsPerInstance)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAsyncInferenceConfig(v *types.AsyncInferenceConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientConfig != nil {
+		ok := object.Key("ClientConfig")
+		if err := awsAwsjson11_serializeDocumentAsyncInferenceClientConfig(v.ClientConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutputConfig != nil {
+		ok := object.Key("OutputConfig")
+		if err := awsAwsjson11_serializeDocumentAsyncInferenceOutputConfig(v.OutputConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAsyncInferenceNotificationConfig(v *types.AsyncInferenceNotificationConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ErrorTopic != nil {
+		ok := object.Key("ErrorTopic")
+		ok.String(*v.ErrorTopic)
+	}
+
+	if v.SuccessTopic != nil {
+		ok := object.Key("SuccessTopic")
+		ok.String(*v.SuccessTopic)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAsyncInferenceOutputConfig(v *types.AsyncInferenceOutputConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.KmsKeyId != nil {
+		ok := object.Key("KmsKeyId")
+		ok.String(*v.KmsKeyId)
+	}
+
+	if v.NotificationConfig != nil {
+		ok := object.Key("NotificationConfig")
+		if err := awsAwsjson11_serializeDocumentAsyncInferenceNotificationConfig(v.NotificationConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.S3OutputPath != nil {
+		ok := object.Key("S3OutputPath")
+		ok.String(*v.S3OutputPath)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentAthenaDatasetDefinition(v *types.AthenaDatasetDefinition, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17667,6 +17741,13 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointConfigInput(v *CreateEndpoint
 	object := value.Object()
 	defer object.Close()
 
+	if v.AsyncInferenceConfig != nil {
+		ok := object.Key("AsyncInferenceConfig")
+		if err := awsAwsjson11_serializeDocumentAsyncInferenceConfig(v.AsyncInferenceConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.DataCaptureConfig != nil {
 		ok := object.Key("DataCaptureConfig")
 		if err := awsAwsjson11_serializeDocumentDataCaptureConfig(v.DataCaptureConfig, ok); err != nil {
@@ -18515,6 +18596,11 @@ func awsAwsjson11_serializeOpDocumentCreateNotebookInstanceInput(v *CreateNotebo
 	if v.NotebookInstanceName != nil {
 		ok := object.Key("NotebookInstanceName")
 		ok.String(*v.NotebookInstanceName)
+	}
+
+	if v.PlatformIdentifier != nil {
+		ok := object.Key("PlatformIdentifier")
+		ok.String(*v.PlatformIdentifier)
 	}
 
 	if v.RoleArn != nil {

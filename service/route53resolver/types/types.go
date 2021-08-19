@@ -49,7 +49,7 @@ type Filter struct {
 	// endpoints. If you specify DIRECTION for Name, specify INBOUND or OUTBOUND for
 	// Values.
 	//
-	// * HostVpcId: The ID of the VPC that inbound DNS queries pass through on
+	// * HostVPCId: The ID of the VPC that inbound DNS queries pass through on
 	// the way from your network to your VPCs in a region, or the VPC that outbound
 	// queries pass through on the way from your VPCs to your network. In a
 	// CreateResolverEndpoint
@@ -133,38 +133,39 @@ type Filter struct {
 	// * CreatorRequestId: A unique string that identifies the request that
 	// created the query logging configuration.
 	//
-	// * Destination: The AWS service that
-	// you want to forward query logs to. Valid values include the following:
+	// * Destination: The Amazon Web Services
+	// service that you want to forward query logs to. Valid values include the
+	// following:
 	//
 	// * S3
 	//
-	// *
-	// CloudWatchLogs
+	// * CloudWatchLogs
 	//
 	// * KinesisFirehose
 	//
-	// * DestinationArn: The ARN of the location
-	// that Resolver is sending query logs to. This value can be the ARN for an S3
-	// bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose delivery
-	// stream.
+	// * DestinationArn: The ARN
+	// of the location that Resolver is sending query logs to. This value can be the
+	// ARN for an S3 bucket, a CloudWatch Logs log group, or a Kinesis Data Firehose
+	// delivery stream.
 	//
 	// * Id: The ID of the query logging configuration
 	//
-	// * Name: The name of
-	// the query logging configuration
+	// * Name: The
+	// name of the query logging configuration
 	//
-	// * OwnerId: The AWS account ID for the account
-	// that created the query logging configuration.
+	// * OwnerId: The Amazon Web Services
+	// account ID for the account that created the query logging configuration.
 	//
-	// * ShareStatus: An indication of
-	// whether the query logging configuration is shared with other AWS accounts, or
-	// was shared with the current account by another AWS account. Valid values
-	// include: NOT_SHARED, SHARED_WITH_ME, or SHARED_BY_ME.
+	// *
+	// ShareStatus: An indication of whether the query logging configuration is shared
+	// with other Amazon Web Services accounts, or was shared with the current account
+	// by another Amazon Web Services account. Valid values include: NOT_SHARED,
+	// SHARED_WITH_ME, or SHARED_BY_ME.
 	//
-	// * Status: The status of
-	// the query logging configuration. If you specify Status for Name, specify the
-	// applicable status code for Values: CREATING, CREATED, DELETING, or FAILED. For
-	// more information, see Status
+	// * Status: The status of the query logging
+	// configuration. If you specify Status for Name, specify the applicable status
+	// code for Values: CREATING, CREATED, DELETING, or FAILED. For more information,
+	// see Status
 	// (https://docs.aws.amazon.com/Route53/latest/APIReference/API_route53resolver_ResolverQueryLogConfig.html#Route53Resolver-Type-route53resolver_ResolverQueryLogConfig-Status).
 	//
 	// ListResolverQueryLogConfigAssociations
@@ -227,8 +228,8 @@ type FirewallConfig struct {
 	// The ID of the firewall configuration.
 	Id *string
 
-	// The AWS account ID of the owner of the VPC that this firewall configuration
-	// applies to.
+	// The Amazon Web Services account ID of the owner of the VPC that this firewall
+	// configuration applies to.
 	OwnerId *string
 
 	// The ID of the VPC that this firewall configuration applies to.
@@ -410,17 +411,17 @@ type FirewallRuleGroup struct {
 	// The name of the rule group.
 	Name *string
 
-	// The AWS account ID for the account that created the rule group. When a rule
-	// group is shared with your account, this is the account that has shared the rule
-	// group with you.
+	// The Amazon Web Services account ID for the account that created the rule group.
+	// When a rule group is shared with your account, this is the account that has
+	// shared the rule group with you.
 	OwnerId *string
 
 	// The number of rules in the rule group.
 	RuleCount *int32
 
-	// Whether the rule group is shared with other AWS accounts, or was shared with the
-	// current account by another AWS account. Sharing is configured through AWS
-	// Resource Access Manager (AWS RAM).
+	// Whether the rule group is shared with other Amazon Web Services accounts, or was
+	// shared with the current account by another Amazon Web Services account. Sharing
+	// is configured through Resource Access Manager (RAM).
 	ShareStatus ShareStatus
 
 	// The status of the domain list.
@@ -455,8 +456,8 @@ type FirewallRuleGroupAssociation struct {
 	Id *string
 
 	// The owner of the association, used only for associations that are not managed by
-	// you. If you use AWS Firewall Manager to manage your DNS Firewalls, then this
-	// reports Firewall Manager as the managed owner.
+	// you. If you use Firewall Manager to manage your DNS Firewalls, then this reports
+	// Firewall Manager as the managed owner.
 	ManagedOwnerName *string
 
 	// The date and time that the association was last modified, in Unix time format
@@ -507,14 +508,14 @@ type FirewallRuleGroupMetadata struct {
 	// The name of the rule group.
 	Name *string
 
-	// The AWS account ID for the account that created the rule group. When a rule
-	// group is shared with your account, this is the account that has shared the rule
-	// group with you.
+	// The Amazon Web Services account ID for the account that created the rule group.
+	// When a rule group is shared with your account, this is the account that has
+	// shared the rule group with you.
 	OwnerId *string
 
-	// Whether the rule group is shared with other AWS accounts, or was shared with the
-	// current account by another AWS account. Sharing is configured through AWS
-	// Resource Access Manager (AWS RAM).
+	// Whether the rule group is shared with other Amazon Web Services accounts, or was
+	// shared with the current account by another Amazon Web Services account. Sharing
+	// is configured through Resource Access Manager (RAM).
 	ShareStatus ShareStatus
 
 	noSmithyDocumentSerde
@@ -768,12 +769,14 @@ type ResolverQueryLogConfig struct {
 	// The name of the query logging configuration.
 	Name *string
 
-	// The AWS account ID for the account that created the query logging configuration.
+	// The Amazon Web Services account ID for the account that created the query
+	// logging configuration.
 	OwnerId *string
 
 	// An indication of whether the query logging configuration is shared with other
-	// AWS accounts, or was shared with the current account by another AWS account.
-	// Sharing is configured through AWS Resource Access Manager (AWS RAM).
+	// Amazon Web Services accounts, or was shared with the current account by another
+	// Amazon Web Services account. Sharing is configured through Resource Access
+	// Manager (RAM).
 	ShareStatus ShareStatus
 
 	// The status of the specified query logging configuration. Valid values include
@@ -909,8 +912,8 @@ type ResolverRule struct {
 	// Resolver rule.
 	Name *string
 
-	// When a rule is shared with another AWS account, the account ID of the account
-	// that the rule is shared with.
+	// When a rule is shared with another Amazon Web Services account, the account ID
+	// of the account that the rule is shared with.
 	OwnerId *string
 
 	// The ID of the endpoint that the rule is associated with.

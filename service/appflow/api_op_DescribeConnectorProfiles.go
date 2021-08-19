@@ -35,7 +35,7 @@ func (c *Client) DescribeConnectorProfiles(ctx context.Context, params *Describe
 type DescribeConnectorProfilesInput struct {
 
 	// The name of the connector profile. The name is unique for each ConnectorProfile
-	// in the AWS account.
+	// in the Amazon Web Services account.
 	ConnectorProfileNames []string
 
 	// The type of connector, such as Salesforce, Amplitude, and so on.

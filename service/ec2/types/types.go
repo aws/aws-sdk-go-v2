@@ -2920,8 +2920,8 @@ type ExportToS3Task struct {
 	DiskImageFormat DiskImageFormat
 
 	// The Amazon S3 bucket for the destination image. The destination bucket must
-	// exist and grant WRITE and READ_ACP permissions to the AWS account
-	// vm-import-export@amazon.com.
+	// exist and grant WRITE and READ_ACP permissions to the Amazon Web Services
+	// account vm-import-export@amazon.com.
 	S3Bucket *string
 
 	// The encryption key for your S3 bucket.
@@ -2941,8 +2941,8 @@ type ExportToS3TaskSpecification struct {
 	DiskImageFormat DiskImageFormat
 
 	// The Amazon S3 bucket for the destination image. The destination bucket must
-	// exist and grant WRITE and READ_ACP permissions to the AWS account
-	// vm-import-export@amazon.com.
+	// exist and grant WRITE and READ_ACP permissions to the Amazon Web Services
+	// account vm-import-export@amazon.com.
 	S3Bucket *string
 
 	// The image is written to a single object in the Amazon S3 bucket at the S3 key
@@ -4090,8 +4090,7 @@ type ImportImageTask struct {
 	// The ID of the import image task.
 	ImportTaskId *string
 
-	// The identifier for the AWS Key Management Service (AWS KMS) customer master key
-	// (CMK) that was used to create the encrypted image.
+	// The identifier for the KMS key that was used to create the encrypted image.
 	KmsKeyId *string
 
 	// The ARNs of the license configurations that are associated with the import image
@@ -4118,6 +4117,9 @@ type ImportImageTask struct {
 
 	// The tags for the import image task.
 	Tags []Tag
+
+	// The usage operation value.
+	UsageOperation *string
 
 	noSmithyDocumentSerde
 }
@@ -5542,10 +5544,26 @@ type Ipv6Range struct {
 // Describes a key pair.
 type KeyPairInfo struct {
 
-	// If you used CreateKeyPair to create the key pair, this is the SHA-1 digest of
-	// the DER encoded private key. If you used ImportKeyPair to provide Amazon Web
-	// Services the public key, this is the MD5 public key fingerprint as specified in
-	// section 4 of RFC4716.
+	// If you used CreateKeyPair to create the key pair:
+	//
+	// * For RSA key pairs, the key
+	// fingerprint is the SHA-1 digest of the DER encoded private key.
+	//
+	// * For ED25519
+	// key pairs, the key fingerprint is the base64-encoded SHA-256 digest, which is
+	// the default for OpenSSH, starting with OpenSSH 6.8
+	// (http://www.openssh.com/txt/release-6.8).
+	//
+	// If you used ImportKeyPair to provide
+	// Amazon Web Services the public key:
+	//
+	// * For RSA key pairs, the key fingerprint is
+	// the MD5 public key fingerprint as specified in section 4 of RFC4716.
+	//
+	// * For
+	// ED25519 key pairs, the key fingerprint is the base64-encoded SHA-256 digest,
+	// which is the default for OpenSSH, starting with OpenSSH 6.8
+	// (http://www.openssh.com/txt/release-6.8).
 	KeyFingerprint *string
 
 	// The name of the key pair.
@@ -5553,6 +5571,9 @@ type KeyPairInfo struct {
 
 	// The ID of the key pair.
 	KeyPairId *string
+
+	// The type of key pair.
+	KeyType KeyType
 
 	// Any tags applied to the key pair.
 	Tags []Tag
@@ -10136,8 +10157,7 @@ type SnapshotTaskDetail struct {
 	// The format of the disk image from which the snapshot is created.
 	Format *string
 
-	// The identifier for the AWS Key Management Service (AWS KMS) customer master key
-	// (CMK) that was used to create the encrypted snapshot.
+	// The identifier for the KMS key that was used to create the encrypted snapshot.
 	KmsKeyId *string
 
 	// The percentage of completion for the import snapshot task.
@@ -12450,9 +12470,9 @@ type UserBucketDetails struct {
 // Describes the user data for an instance.
 type UserData struct {
 
-	// The user data. If you are using an AWS SDK or command line tool, Base64-encoding
-	// is performed for you, and you can load the text from a file. Otherwise, you must
-	// provide Base64-encoded text.
+	// The user data. If you are using an Amazon Web Services SDK or command line tool,
+	// Base64-encoding is performed for you, and you can load the text from a file.
+	// Otherwise, you must provide Base64-encoded text.
 	Data *string
 
 	noSmithyDocumentSerde

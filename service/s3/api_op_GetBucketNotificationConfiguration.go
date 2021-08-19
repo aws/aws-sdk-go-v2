@@ -60,7 +60,7 @@ type GetBucketNotificationConfigurationInput struct {
 // element is empty, notifications are turned off for the bucket.
 type GetBucketNotificationConfigurationOutput struct {
 
-	// Describes the AWS Lambda functions to invoke and the events for which to invoke
+	// Describes the Lambda functions to invoke and the events for which to invoke
 	// them.
 	LambdaFunctionConfigurations []types.LambdaFunctionConfiguration
 

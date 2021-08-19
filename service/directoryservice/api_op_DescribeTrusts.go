@@ -29,13 +29,13 @@ func (c *Client) DescribeTrusts(ctx context.Context, params *DescribeTrustsInput
 	return out, nil
 }
 
-// Describes the trust relationships for a particular AWS Managed Microsoft AD
-// directory. If no input parameters are are provided, such as directory ID or
-// trust ID, this request describes all the trust relationships.
+// Describes the trust relationships for a particular Managed Microsoft AD
+// directory. If no input parameters are provided, such as directory ID or trust
+// ID, this request describes all the trust relationships.
 type DescribeTrustsInput struct {
 
-	// The Directory ID of the AWS directory that is a part of the requested trust
-	// relationship.
+	// The Directory ID of the Amazon Web Services directory that is a part of the
+	// requested trust relationship.
 	DirectoryId *string
 
 	// The maximum number of objects to return.

@@ -1500,6 +1500,15 @@ func awsRestjson1_deserializeOpDocumentCreateDomainNameOutput(v **CreateDomainNa
 				return err
 			}
 
+		case "ownershipVerificationCertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OwnershipVerificationCertificateArn = ptr.String(jtv)
+			}
+
 		case "regionalCertificateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8789,6 +8798,15 @@ func awsRestjson1_deserializeOpDocumentGetDomainNameOutput(v **GetDomainNameOutp
 		case "mutualTlsAuthentication":
 			if err := awsRestjson1_deserializeDocumentMutualTlsAuthentication(&sv.MutualTlsAuthentication, value); err != nil {
 				return err
+			}
+
+		case "ownershipVerificationCertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OwnershipVerificationCertificateArn = ptr.String(jtv)
 			}
 
 		case "regionalCertificateArn":
@@ -18767,6 +18785,15 @@ func awsRestjson1_deserializeOpDocumentUpdateDomainNameOutput(v **UpdateDomainNa
 				return err
 			}
 
+		case "ownershipVerificationCertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OwnershipVerificationCertificateArn = ptr.String(jtv)
+			}
+
 		case "regionalCertificateArn":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -22992,6 +23019,15 @@ func awsRestjson1_deserializeDocumentDomainName(v **types.DomainName, value inte
 		case "mutualTlsAuthentication":
 			if err := awsRestjson1_deserializeDocumentMutualTlsAuthentication(&sv.MutualTlsAuthentication, value); err != nil {
 				return err
+			}
+
+		case "ownershipVerificationCertificateArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String to be of type string, got %T instead", value)
+				}
+				sv.OwnershipVerificationCertificateArn = ptr.String(jtv)
 			}
 
 		case "regionalCertificateArn":

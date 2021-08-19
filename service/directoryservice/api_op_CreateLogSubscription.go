@@ -11,7 +11,8 @@ import (
 )
 
 // Creates a subscription to forward real-time Directory Service domain controller
-// security logs to the specified Amazon CloudWatch log group in your AWS account.
+// security logs to the specified Amazon CloudWatch log group in your Amazon Web
+// Services account.
 func (c *Client) CreateLogSubscription(ctx context.Context, params *CreateLogSubscriptionInput, optFns ...func(*Options)) (*CreateLogSubscriptionOutput, error) {
 	if params == nil {
 		params = &CreateLogSubscriptionInput{}

@@ -192,13 +192,14 @@ type OutputFormat string
 
 // Enum values for OutputFormat
 const (
-	OutputFormatCsv         OutputFormat = "CSV"
-	OutputFormatJson        OutputFormat = "JSON"
-	OutputFormatParquet     OutputFormat = "PARQUET"
-	OutputFormatGlueparquet OutputFormat = "GLUEPARQUET"
-	OutputFormatAvro        OutputFormat = "AVRO"
-	OutputFormatOrc         OutputFormat = "ORC"
-	OutputFormatXml         OutputFormat = "XML"
+	OutputFormatCsv          OutputFormat = "CSV"
+	OutputFormatJson         OutputFormat = "JSON"
+	OutputFormatParquet      OutputFormat = "PARQUET"
+	OutputFormatGlueparquet  OutputFormat = "GLUEPARQUET"
+	OutputFormatAvro         OutputFormat = "AVRO"
+	OutputFormatOrc          OutputFormat = "ORC"
+	OutputFormatXml          OutputFormat = "XML"
+	OutputFormatTableauhyper OutputFormat = "TABLEAUHYPER"
 )
 
 // Values returns all known values for OutputFormat. Note that this can be expanded
@@ -213,6 +214,7 @@ func (OutputFormat) Values() []OutputFormat {
 		"AVRO",
 		"ORC",
 		"XML",
+		"TABLEAUHYPER",
 	}
 }
 

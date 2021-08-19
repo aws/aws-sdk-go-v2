@@ -11,10 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AD Connector to connect to an on-premises directory. Before you call
+// Creates an AD Connector to connect to a self-managed directory. Before you call
 // ConnectDirectory, ensure that all of the required permissions have been
 // explicitly granted through a policy. For details about what permissions are
-// required to run the ConnectDirectory operation, see AWS Directory Service API
+// required to run the ConnectDirectory operation, see Directory Service API
 // Permissions: Actions, Resources, and Conditions Reference
 // (http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html).
 func (c *Client) ConnectDirectory(ctx context.Context, params *ConnectDirectoryInput, optFns ...func(*Options)) (*ConnectDirectoryOutput, error) {
@@ -41,12 +41,13 @@ type ConnectDirectoryInput struct {
 	// This member is required.
 	ConnectSettings *types.DirectoryConnectSettings
 
-	// The fully qualified name of the on-premises directory, such as corp.example.com.
+	// The fully qualified name of your self-managed directory, such as
+	// corp.example.com.
 	//
 	// This member is required.
 	Name *string
 
-	// The password for the on-premises user account.
+	// The password for your self-managed user account.
 	//
 	// This member is required.
 	Password *string
@@ -59,7 +60,7 @@ type ConnectDirectoryInput struct {
 	// A description for the directory.
 	Description *string
 
-	// The NetBIOS name of the on-premises directory, such as CORP.
+	// The NetBIOS name of your self-managed directory, such as CORP.
 	ShortName *string
 
 	// The tags to be assigned to AD Connector.
