@@ -1,3 +1,62 @@
+# Release (2021-08-19)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/service/apigateway`: [v1.6.0](service/apigateway/CHANGELOG.md#v160-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/apigatewayv2`: [v1.5.0](service/apigatewayv2/CHANGELOG.md#v150-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/appflow`: [v1.6.0](service/appflow/CHANGELOG.md#v160-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/applicationautoscaling`: [v1.5.0](service/applicationautoscaling/CHANGELOG.md#v150-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloud9`: [v1.6.0](service/cloud9/CHANGELOG.md#v160-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/clouddirectory`: [v1.4.0](service/clouddirectory/CHANGELOG.md#v140-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/cloudwatchlogs`: [v1.6.0](service/cloudwatchlogs/CHANGELOG.md#v160-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/codebuild`: [v1.8.0](service/codebuild/CHANGELOG.md#v180-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/configservice`: [v1.7.0](service/configservice/CHANGELOG.md#v170-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/costexplorer`: [v1.8.0](service/costexplorer/CHANGELOG.md#v180-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/customerprofiles`: [v1.8.0](service/customerprofiles/CHANGELOG.md#v180-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/databrew`: [v1.8.0](service/databrew/CHANGELOG.md#v180-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/directoryservice`: [v1.4.0](service/directoryservice/CHANGELOG.md#v140-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ec2`: [v1.14.0](service/ec2/CHANGELOG.md#v1140-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.9.0](service/elasticache/CHANGELOG.md#v190-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.6.0](service/emr/CHANGELOG.md#v160-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/iotsitewise`: [v1.10.0](service/iotsitewise/CHANGELOG.md#v1100-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lambda`: [v1.7.0](service/lambda/CHANGELOG.md#v170-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/licensemanager`: [v1.6.0](service/licensemanager/CHANGELOG.md#v160-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/memorydb`: [v1.0.0](service/memorydb/CHANGELOG.md#v100-2021-08-19)
+  * **Release**: New AWS service client module
+* `github.com/aws/aws-sdk-go-v2/service/quicksight`: [v1.8.0](service/quicksight/CHANGELOG.md#v180-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/route53`: [v1.10.0](service/route53/CHANGELOG.md#v1100-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/route53resolver`: [v1.6.0](service/route53resolver/CHANGELOG.md#v160-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/s3`: [v1.13.0](service/s3/CHANGELOG.md#v1130-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.12.0](service/sagemaker/CHANGELOG.md#v1120-2021-08-19)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemakerruntime`: [v1.5.0](service/sagemakerruntime/CHANGELOG.md#v150-2021-08-19)
+  * **Feature**: API client updated
+
 # Release (2021-08-12)
 
 ## Module Highlights

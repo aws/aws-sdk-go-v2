@@ -1,3 +1,7 @@
+# v1.3.2 (2021-08-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.1 (2021-08-12)
 
 * **Bug Fix**: Update to not escape HTML when encoding the policy.

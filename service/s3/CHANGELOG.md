@@ -1,3 +1,8 @@
+# v1.13.0 (2021-08-19)
+
+* **Feature**: API client updated
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.12.0 (2021-08-04)
 
 * **Feature**: Add `HeadObject` presign support. ([#1346](https://github.com/aws/aws-sdk-go-v2/pull/1346))

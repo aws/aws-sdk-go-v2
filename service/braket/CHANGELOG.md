@@ -1,3 +1,7 @@
+# v1.5.3 (2021-08-19)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.5.2 (2021-08-04)
 
 * **Bug Fix**: Fixed an issue that caused one or more API operations to fail when attempting to resolve the service endpoint. ([#1349](https://github.com/aws/aws-sdk-go-v2/pull/1349))
