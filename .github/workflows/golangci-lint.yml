@@ -11,16 +11,18 @@ jobs:
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
-        go-version: [1.16.x]
+        go-version: [1.17.x]
         os: [ubuntu-latest]  # other options: macos-latest, windows-latest
     steps:
       - uses: actions/checkout@v2
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
-          # Required: the version of golangci-lint is required and must be specified without patch version
+          # Required: the version of golangci-lint is required and must be
+          # specified without patch version
           version: latest
-          # the following causes golangci-init to do nothing, so all it does is install golang and golangci
+          # the following causes golangci-init to do nothing, so all it does is
+          # install golang and golangci
           args: --version
           # Show only new issues if it's a pull request. The default value is `false`.
           # only-new-issues: true
