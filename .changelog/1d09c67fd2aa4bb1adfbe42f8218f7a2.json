@@ -1,0 +1,8 @@
+{
+    "id": "1d09c67f-d2aa-4bb1-adfb-e42f8218f7a2",
+    "type": "bugfix",
+    "description": "Fix unmarshaler's decoding of AttributeValueMemberN into a type that is a string alias.",
+    "modules": [
+        "feature/dynamodb/attributevalue"
+    ]
+}
