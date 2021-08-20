@@ -155,7 +155,11 @@ ctx := context.TODO() // or appropriate context.Context value for your applicati
 
 client := s3.NewFromConfig(cfg)
 
-resp, err := client.GetObject(context.WithTimeout(ctx, 5*time.Second), &s3.GetObjectInput{
+// create a new context from the previous ctx with a timeout, e.g. 5 seconds
+ctx, cancel := context.WithTimeout(ctx, 5*time.Second)
+defer cancel()
+
+resp, err := client.GetObject(ctx, &s3.GetObjectInput{
 	// input parameters
 })
 if err != nil {
