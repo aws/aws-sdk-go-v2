@@ -517,7 +517,8 @@ type BlobAttributeValue struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a block device mapping.
+// Describes a block device mapping, which defines the EBS volumes and instance
+// store volumes to attach to an instance at launch.
 type BlockDeviceMapping struct {
 
 	// The device name (for example, /dev/sdh or xvdh).
@@ -527,7 +528,9 @@ type BlockDeviceMapping struct {
 	// launched.
 	Ebs *EbsBlockDevice
 
-	// To omit the device from the block device mapping, specify an empty string.
+	// To omit the device from the block device mapping, specify an empty string. When
+	// this property is specified, the device is removed from the block device mapping
+	// regardless of the assigned value.
 	NoDevice *string
 
 	// The virtual device name (ephemeralN). Instance store volumes are numbered
@@ -2637,7 +2640,7 @@ type EventInformation struct {
 	// modify the EC2 Fleet or Spot Fleet request was accepted and is in progress.
 	//
 	// *
-	// modify_successful - The EC2 Fleet or Spot Fleet request was modified.
+	// modify_succeeded - The EC2 Fleet or Spot Fleet request was modified.
 	//
 	// *
 	// price_update - The price for a launch configuration was adjusted because it was
@@ -4692,10 +4695,10 @@ type InstanceFamilyCreditSpecification struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an IPv4 delegated prefix.
+// Information about an IPv4 prefix.
 type InstanceIpv4Prefix struct {
 
-	// One or more IPv4 delegated prefixes assigned to the network interface.
+	// One or more IPv4 prefixes assigned to the network interface.
 	Ipv4Prefix *string
 
 	noSmithyDocumentSerde
@@ -4719,10 +4722,10 @@ type InstanceIpv6AddressRequest struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an IPv6 delegated prefix.
+// Information about an IPv6 prefix.
 type InstanceIpv6Prefix struct {
 
-	// One or more IPv6 delegated prefixes assigned to the network interface.
+	// One or more IPv6 prefixes assigned to the network interface.
 	Ipv6Prefix *string
 
 	noSmithyDocumentSerde
@@ -7245,6 +7248,10 @@ type NetworkInfo struct {
 
 	// Indicates whether Elastic Network Adapter (ENA) is supported.
 	EnaSupport EnaSupport
+
+	// Indicates whether the instance type automatically encrypts in-transit traffic
+	// between instances.
+	EncryptionInTransitSupported *bool
 
 	// The maximum number of IPv4 addresses per network interface.
 	Ipv4AddressesPerInterface *int32

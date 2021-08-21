@@ -5233,6 +5233,9 @@ func awsAwsjson11_deserializeOpErrorStartDocumentClassificationJob(response *smi
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -5352,6 +5355,9 @@ func awsAwsjson11_deserializeOpErrorStartDominantLanguageDetectionJob(response *
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5479,6 +5485,9 @@ func awsAwsjson11_deserializeOpErrorStartEntitiesDetectionJob(response *smithyht
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -5598,6 +5607,9 @@ func awsAwsjson11_deserializeOpErrorStartEventsDetectionJob(response *smithyhttp
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5719,6 +5731,9 @@ func awsAwsjson11_deserializeOpErrorStartKeyPhrasesDetectionJob(response *smithy
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -5838,6 +5853,9 @@ func awsAwsjson11_deserializeOpErrorStartPiiEntitiesDetectionJob(response *smith
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -5959,6 +5977,9 @@ func awsAwsjson11_deserializeOpErrorStartSentimentDetectionJob(response *smithyh
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
 
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -6078,6 +6099,9 @@ func awsAwsjson11_deserializeOpErrorStartTopicsDetectionJob(response *smithyhttp
 
 	case strings.EqualFold("TooManyRequestsException", errorCode):
 		return awsAwsjson11_deserializeErrorTooManyRequestsException(response, errorBody)
+
+	case strings.EqualFold("TooManyTagsException", errorCode):
+		return awsAwsjson11_deserializeErrorTooManyTagsException(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -8990,6 +9014,15 @@ func awsAwsjson11_deserializeDocumentDocumentClassificationJobProperties(v **typ
 				return err
 			}
 
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -9671,6 +9704,15 @@ func awsAwsjson11_deserializeDocumentDominantLanguageDetectionJobProperties(v **
 				return err
 			}
 
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10012,6 +10054,15 @@ func awsAwsjson11_deserializeDocumentEntitiesDetectionJobProperties(v **types.En
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
+			}
+
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
 			}
 
 		case "JobId":
@@ -11297,6 +11348,15 @@ func awsAwsjson11_deserializeDocumentEventsDetectionJobProperties(v **types.Even
 				return err
 			}
 
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -11770,6 +11830,15 @@ func awsAwsjson11_deserializeDocumentKeyPhrasesDetectionJobProperties(v **types.
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
+			}
+
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
 			}
 
 		case "JobId":
@@ -12588,6 +12657,15 @@ func awsAwsjson11_deserializeDocumentPiiEntitiesDetectionJobProperties(v **types
 				return err
 			}
 
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -13160,6 +13238,15 @@ func awsAwsjson11_deserializeDocumentSentimentDetectionJobProperties(v **types.S
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
+			}
+
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
 			}
 
 		case "JobId":
@@ -13901,6 +13988,15 @@ func awsAwsjson11_deserializeDocumentTopicsDetectionJobProperties(v **types.Topi
 		case "InputDataConfig":
 			if err := awsAwsjson11_deserializeDocumentInputDataConfig(&sv.InputDataConfig, value); err != nil {
 				return err
+			}
+
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
 			}
 
 		case "JobId":
@@ -15789,6 +15885,15 @@ func awsAwsjson11_deserializeOpDocumentStartDocumentClassificationJobOutput(v **
 
 	for key, value := range shape {
 		switch key {
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15838,6 +15943,15 @@ func awsAwsjson11_deserializeOpDocumentStartDominantLanguageDetectionJobOutput(v
 
 	for key, value := range shape {
 		switch key {
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15887,6 +16001,15 @@ func awsAwsjson11_deserializeOpDocumentStartEntitiesDetectionJobOutput(v **Start
 
 	for key, value := range shape {
 		switch key {
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15936,6 +16059,15 @@ func awsAwsjson11_deserializeOpDocumentStartEventsDetectionJobOutput(v **StartEv
 
 	for key, value := range shape {
 		switch key {
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -15985,6 +16117,15 @@ func awsAwsjson11_deserializeOpDocumentStartKeyPhrasesDetectionJobOutput(v **Sta
 
 	for key, value := range shape {
 		switch key {
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16034,6 +16175,15 @@ func awsAwsjson11_deserializeOpDocumentStartPiiEntitiesDetectionJobOutput(v **St
 
 	for key, value := range shape {
 		switch key {
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16083,6 +16233,15 @@ func awsAwsjson11_deserializeOpDocumentStartSentimentDetectionJobOutput(v **Star
 
 	for key, value := range shape {
 		switch key {
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -16132,6 +16291,15 @@ func awsAwsjson11_deserializeOpDocumentStartTopicsDetectionJobOutput(v **StartTo
 
 	for key, value := range shape {
 		switch key {
+		case "JobArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ComprehendArn to be of type string, got %T instead", value)
+				}
+				sv.JobArn = ptr.String(jtv)
+			}
+
 		case "JobId":
 			if value != nil {
 				jtv, ok := value.(string)

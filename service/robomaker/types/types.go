@@ -636,8 +636,9 @@ type SimulationJob struct {
 	// The data sources for the simulation job.
 	DataSources []DataSource
 
-	// The failure behavior the simulation job. Continue Restart the simulation job in
-	// the same host instance. Fail Stop the simulation job and terminate the instance.
+	// The failure behavior the simulation job. Continue Leaves the host running for
+	// its maximum timeout duration after a 4XX error code. Fail Stop the simulation
+	// job and terminate the instance.
 	FailureBehavior FailureBehavior
 
 	// The failure code of the simulation job if it failed.
@@ -759,8 +760,9 @@ type SimulationJobRequest struct {
 	// DataSourceConfig objects.
 	DataSources []DataSourceConfig
 
-	// The failure behavior the simulation job. Continue Restart the simulation job in
-	// the same host instance. Fail Stop the simulation job and terminate the instance.
+	// The failure behavior the simulation job. Continue Leaves the host running for
+	// its maximum timeout duration after a 4XX error code. Fail Stop the simulation
+	// job and terminate the instance.
 	FailureBehavior FailureBehavior
 
 	// The IAM role name that allows the simulation instance to call the AWS APIs that

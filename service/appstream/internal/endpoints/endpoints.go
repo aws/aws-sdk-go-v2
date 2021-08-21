@@ -73,6 +73,7 @@ var defaultPartitions = endpoints.Partitions{
 			"ap-southeast-2": endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
+			"eu-west-2":      endpoints.Endpoint{},
 			"fips": endpoints.Endpoint{
 				Hostname: "appstream2-fips.us-west-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{

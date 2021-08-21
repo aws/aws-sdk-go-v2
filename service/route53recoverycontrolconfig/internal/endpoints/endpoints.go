@@ -62,6 +62,14 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"aws-global": endpoints.Endpoint{
+				Hostname: "route53-recovery-control-config.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-cn",

@@ -74,6 +74,12 @@ type StartEntitiesDetectionJobInput struct {
 	// The identifier of the job.
 	JobName *string
 
+	// Tags to be associated with the entities detection job. A tag is a key-value pair
+	// that adds metadata to a resource used by Amazon Comprehend. For example, a tag
+	// with "Sales" as the key might be added to a resource to indicate its use by the
+	// sales department.
+	Tags []types.Tag
+
 	// ID for the AWS Key Management Service (KMS) key that Amazon Comprehend uses to
 	// encrypt data on the storage volume attached to the ML compute instance(s) that
 	// process the analysis job. The VolumeKmsKeyId can be either of the following
@@ -96,6 +102,13 @@ type StartEntitiesDetectionJobInput struct {
 }
 
 type StartEntitiesDetectionJobOutput struct {
+
+	// The Amazon Resource Name (ARN) of the entities detection job. It is a unique,
+	// fully qualified identifier for the job. It includes the AWS account, Region, and
+	// the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::entities-detection-job/ The following is an example job ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
 
 	// The identifier generated for the job. To get the status of job, use this
 	// identifier with the operation.

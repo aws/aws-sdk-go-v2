@@ -75520,6 +75520,22 @@ func awsEc2query_deserializeDocumentNetworkInfo(v **types.NetworkInfo, decoder s
 				sv.EnaSupport = types.EnaSupport(xtv)
 			}
 
+		case strings.EqualFold("encryptionInTransitSupported", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv, err := strconv.ParseBool(string(val))
+				if err != nil {
+					return fmt.Errorf("expected EncryptionInTransitSupported to be of type *bool, got %T instead", val)
+				}
+				sv.EncryptionInTransitSupported = ptr.Bool(xtv)
+			}
+
 		case strings.EqualFold("ipv4AddressesPerInterface", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

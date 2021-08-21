@@ -69,9 +69,28 @@ var defaultPartitions = endpoints.Partitions{
 			"ap-southeast-2": endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-west-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"eu-west-2":      endpoints.Endpoint{},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "session.qldb-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "session.qldb-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "session.qldb-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
+			"us-east-1": endpoints.Endpoint{},
+			"us-east-2": endpoints.Endpoint{},
+			"us-west-2": endpoints.Endpoint{},
 		},
 	},
 	{

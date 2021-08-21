@@ -87,6 +87,12 @@ var defaultPartitions = endpoints.Partitions{
 					Region: "ap-northeast-2",
 				},
 			},
+			"ap-northeast-3": endpoints.Endpoint{
+				Hostname: "waf-regional.ap-northeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
+				},
+			},
 			"ap-south-1": endpoints.Endpoint{
 				Hostname: "waf-regional.ap-south-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
@@ -169,6 +175,12 @@ var defaultPartitions = endpoints.Partitions{
 				Hostname: "waf-regional-fips.ap-northeast-2.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "ap-northeast-2",
+				},
+			},
+			"fips-ap-northeast-3": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.ap-northeast-3.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ap-northeast-3",
 				},
 			},
 			"fips-ap-south-1": endpoints.Endpoint{
@@ -314,6 +326,32 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"cn-north-1": endpoints.Endpoint{
+				Hostname: "waf-regional.cn-north-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-north-1",
+				},
+			},
+			"cn-northwest-1": endpoints.Endpoint{
+				Hostname: "waf-regional.cn-northwest-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
+			"fips-cn-north-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.cn-north-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-north-1",
+				},
+			},
+			"fips-cn-northwest-1": endpoints.Endpoint{
+				Hostname: "waf-regional-fips.cn-northwest-1.amazonaws.com.cn",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "cn-northwest-1",
+				},
+			},
+		},
 	},
 	{
 		ID: "aws-iso",

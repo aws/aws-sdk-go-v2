@@ -64,6 +64,7 @@ var defaultPartitions = endpoints.Partitions{
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
 			"af-south-1":     endpoints.Endpoint{},
+			"ap-northeast-2": endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},
 			"eu-central-1":   endpoints.Endpoint{},
 			"eu-north-1":     endpoints.Endpoint{},
