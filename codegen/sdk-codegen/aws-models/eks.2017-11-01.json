@@ -334,6 +334,10 @@
                     {
                         "value": "UnsupportedAddonModification",
                         "name": "UNSUPPORTED_ADDON_MODIFICATION"
+                    },
+                    {
+                        "value": "K8sResourceNotFound",
+                        "name": "K8S_RESOURCE_NOT_FOUND"
                     }
                 ]
             }
@@ -1391,6 +1395,13 @@
                         "smithy.api#documentation": "<p>The name of the add-on. The name must match one of the names returned by <a href=\"https://docs.aws.amazon.com/eks/latest/APIReference/API_ListAddons.html\">\n               <code>ListAddons</code>\n            </a>.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
+                    }
+                },
+                "preserve": {
+                    "target": "com.amazonaws.eks#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifying this option preserves the add-on software on your cluster but Amazon EKS stops managing any settings for the add-on. If an IAM account is associated with the add-on, it is not removed.</p>",
+                        "smithy.api#httpQuery": "preserve"
                     }
                 }
             }
@@ -2469,6 +2480,10 @@
                     {
                         "value": "UnsupportedAddonModification",
                         "name": "UNSUPPORTED_ADDON_MODIFICATION"
+                    },
+                    {
+                        "value": "K8sResourceNotFound",
+                        "name": "K8S_RESOURCE_NOT_FOUND"
                     }
                 ]
             }

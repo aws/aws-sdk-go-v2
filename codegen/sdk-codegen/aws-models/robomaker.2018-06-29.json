@@ -1393,7 +1393,7 @@
                 "failureBehavior": {
                     "target": "com.amazonaws.robomaker#FailureBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Restart the simulation job in the same host instance.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the instance running for its maximum timeout duration after a <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "robotApplications": {
@@ -6295,7 +6295,7 @@
                 "failureBehavior": {
                     "target": "com.amazonaws.robomaker#FailureBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Restart the simulation job in the same host instance.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "failureCode": {
@@ -6659,7 +6659,7 @@
                 "failureBehavior": {
                     "target": "com.amazonaws.robomaker#FailureBehavior",
                     "traits": {
-                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Restart the simulation job in the same host instance.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
+                        "smithy.api#documentation": "<p>The failure behavior the simulation job.</p>\n         <dl>\n            <dt>Continue</dt>\n            <dd>\n               <p>Leaves the host running for its maximum timeout duration after a <code>4XX</code> error code.</p>\n            </dd>\n            <dt>Fail</dt>\n            <dd>\n               <p>Stop the simulation job and terminate the instance.</p>\n            </dd>\n         </dl>"
                     }
                 },
                 "useDefaultApplications": {
