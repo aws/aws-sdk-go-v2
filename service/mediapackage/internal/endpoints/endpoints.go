@@ -75,6 +75,7 @@ var defaultPartitions = endpoints.Partitions{
 			"eu-west-3":      endpoints.Endpoint{},
 			"sa-east-1":      endpoints.Endpoint{},
 			"us-east-1":      endpoints.Endpoint{},
+			"us-east-2":      endpoints.Endpoint{},
 			"us-west-1":      endpoints.Endpoint{},
 			"us-west-2":      endpoints.Endpoint{},
 		},

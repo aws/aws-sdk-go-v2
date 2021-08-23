@@ -119,6 +119,9 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIsoB,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"us-isob-east-1": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-us-gov",

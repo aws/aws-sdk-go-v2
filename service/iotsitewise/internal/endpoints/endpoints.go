@@ -72,9 +72,6 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsCn,
 		IsRegionalized: true,
-		Endpoints: endpoints.Endpoints{
-			"cn-north-1": endpoints.Endpoint{},
-		},
 	},
 	{
 		ID: "aws-iso",

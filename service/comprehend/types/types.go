@@ -248,6 +248,14 @@ type DocumentClassificationJobProperties struct {
 	// classification job.
 	InputDataConfig *InputDataConfig
 
+	// The Amazon Resource Name (ARN) of the document classification job. It is a
+	// unique, fully qualified identifier for the job. It includes the AWS account,
+	// Region, and the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::document-classification-job/ The following is an example job
+	// ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:document-classification-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
+
 	// The identifier assigned to the document classification job.
 	JobId *string
 
@@ -545,6 +553,14 @@ type DominantLanguageDetectionJobProperties struct {
 	// language detection job.
 	InputDataConfig *InputDataConfig
 
+	// The Amazon Resource Name (ARN) of the dominant language detection job. It is a
+	// unique, fully qualified identifier for the job. It includes the AWS account,
+	// Region, and the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::dominant-language-detection-job/ The following is an example
+	// job ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:dominant-language-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
+
 	// The identifier assigned to the dominant language detection job.
 	JobId *string
 
@@ -686,6 +702,13 @@ type EntitiesDetectionJobProperties struct {
 	// The input data configuration that you supplied when you created the entities
 	// detection job.
 	InputDataConfig *InputDataConfig
+
+	// The Amazon Resource Name (ARN) of the entities detection job. It is a unique,
+	// fully qualified identifier for the job. It includes the AWS account, Region, and
+	// the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::entities-detection-job/ The following is an example job ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:entities-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
 
 	// The identifier assigned to the entities detection job.
 	JobId *string
@@ -1092,6 +1115,13 @@ type EventsDetectionJobProperties struct {
 	// detection job.
 	InputDataConfig *InputDataConfig
 
+	// The Amazon Resource Name (ARN) of the events detection job. It is a unique,
+	// fully qualified identifier for the job. It includes the AWS account, Region, and
+	// the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::events-detection-job/ The following is an example job ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:events-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
+
 	// The identifier assigned to the events detection job.
 	JobId *string
 
@@ -1210,6 +1240,14 @@ type KeyPhrasesDetectionJobProperties struct {
 	// The input data configuration that you supplied when you created the key phrases
 	// detection job.
 	InputDataConfig *InputDataConfig
+
+	// The Amazon Resource Name (ARN) of the key phrases detection job. It is a unique,
+	// fully qualified identifier for the job. It includes the AWS account, Region, and
+	// the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::key-phrases-detection-job/ The following is an example job
+	// ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:key-phrases-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
 
 	// The identifier assigned to the key phrases detection job.
 	JobId *string
@@ -1342,6 +1380,14 @@ type PiiEntitiesDetectionJobProperties struct {
 	// The input properties for a PII entities detection job.
 	InputDataConfig *InputDataConfig
 
+	// The Amazon Resource Name (ARN) of the PII entities detection job. It is a
+	// unique, fully qualified identifier for the job. It includes the AWS account,
+	// Region, and the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::pii-entities-detection-job/ The following is an example job
+	// ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:pii-entities-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
+
 	// The identifier assigned to the PII entities detection job.
 	JobId *string
 
@@ -1473,6 +1519,13 @@ type SentimentDetectionJobProperties struct {
 	// The input data configuration that you supplied when you created the sentiment
 	// detection job.
 	InputDataConfig *InputDataConfig
+
+	// The Amazon Resource Name (ARN) of the sentiment detection job. It is a unique,
+	// fully qualified identifier for the job. It includes the AWS account, Region, and
+	// the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::sentiment-detection-job/ The following is an example job ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:sentiment-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
 
 	// The identifier assigned to the sentiment detection job.
 	JobId *string
@@ -1625,6 +1678,13 @@ type TopicsDetectionJobProperties struct {
 
 	// The input data configuration supplied when you created the topic detection job.
 	InputDataConfig *InputDataConfig
+
+	// The Amazon Resource Name (ARN) of the topics detection job. It is a unique,
+	// fully qualified identifier for the job. It includes the AWS account, Region, and
+	// the job ID. The format of the ARN is as follows:
+	// arn::comprehend:::topics-detection-job/ The following is an example job ARN:
+	// arn:aws:comprehend:us-west-2:111122223333:topics-detection-job/1234abcd12ab34cd56ef1234567890ab
+	JobArn *string
 
 	// The identifier assigned to the topic detection job.
 	JobId *string

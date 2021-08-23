@@ -247,6 +247,15 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"fips-us-iso-east-1": endpoints.Endpoint{
+				Hostname: "elasticfilesystem-fips.us-iso-east-1.c2s.ic.gov",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-iso-east-1",
+				},
+			},
+			"us-iso-east-1": endpoints.Endpoint{},
+		},
 	},
 	{
 		ID: "aws-iso-b",

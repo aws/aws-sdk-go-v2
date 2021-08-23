@@ -59,8 +59,9 @@ type CreateSimulationJobInput struct {
 	// DataSourceConfig objects.
 	DataSources []types.DataSourceConfig
 
-	// The failure behavior the simulation job. Continue Restart the simulation job in
-	// the same host instance. Fail Stop the simulation job and terminate the instance.
+	// The failure behavior the simulation job. Continue Leaves the instance running
+	// for its maximum timeout duration after a 4XX error code. Fail Stop the
+	// simulation job and terminate the instance.
 	FailureBehavior types.FailureBehavior
 
 	// The logging configuration.

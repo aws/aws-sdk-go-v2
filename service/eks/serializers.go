@@ -778,6 +778,10 @@ func awsRestjson1_serializeOpHttpBindingsDeleteAddonInput(v *DeleteAddonInput, e
 		}
 	}
 
+	if v.Preserve {
+		encoder.SetQuery("preserve").Boolean(v.Preserve)
+	}
+
 	return nil
 }
 

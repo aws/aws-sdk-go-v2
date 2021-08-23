@@ -2057,6 +2057,11 @@ func validateOpStartDocumentClassificationJobInput(v *StartDocumentClassificatio
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2089,6 +2094,11 @@ func validateOpStartDominantLanguageDetectionJobInput(v *StartDominantLanguageDe
 	if v.VpcConfig != nil {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -2128,6 +2138,11 @@ func validateOpStartEntitiesDetectionJobInput(v *StartEntitiesDetectionJobInput)
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2162,6 +2177,11 @@ func validateOpStartEventsDetectionJobInput(v *StartEventsDetectionJobInput) err
 	}
 	if v.TargetEventTypes == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TargetEventTypes"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2200,6 +2220,11 @@ func validateOpStartKeyPhrasesDetectionJobInput(v *StartKeyPhrasesDetectionJobIn
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2234,6 +2259,11 @@ func validateOpStartPiiEntitiesDetectionJobInput(v *StartPiiEntitiesDetectionJob
 	}
 	if len(v.LanguageCode) == 0 {
 		invalidParams.Add(smithy.NewErrParamRequired("LanguageCode"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2272,6 +2302,11 @@ func validateOpStartSentimentDetectionJobInput(v *StartSentimentDetectionJobInpu
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -2304,6 +2339,11 @@ func validateOpStartTopicsDetectionJobInput(v *StartTopicsDetectionJobInput) err
 	if v.VpcConfig != nil {
 		if err := validateVpcConfig(v.VpcConfig); err != nil {
 			invalidParams.AddNested("VpcConfig", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

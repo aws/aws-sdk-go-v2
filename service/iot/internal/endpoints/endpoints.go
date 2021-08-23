@@ -78,12 +78,42 @@ var defaultPartitions = endpoints.Partitions{
 			"eu-west-1":      endpoints.Endpoint{},
 			"eu-west-2":      endpoints.Endpoint{},
 			"eu-west-3":      endpoints.Endpoint{},
-			"me-south-1":     endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"fips-ca-central-1": endpoints.Endpoint{
+				Hostname: "iot-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Service: "execute-api",
+				},
+			},
+			"fips-us-east-1": endpoints.Endpoint{
+				Hostname: "iot-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Service: "execute-api",
+				},
+			},
+			"fips-us-east-2": endpoints.Endpoint{
+				Hostname: "iot-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Service: "execute-api",
+				},
+			},
+			"fips-us-west-1": endpoints.Endpoint{
+				Hostname: "iot-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Service: "execute-api",
+				},
+			},
+			"fips-us-west-2": endpoints.Endpoint{
+				Hostname: "iot-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Service: "execute-api",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{},
+			"sa-east-1":  endpoints.Endpoint{},
+			"us-east-1":  endpoints.Endpoint{},
+			"us-east-2":  endpoints.Endpoint{},
+			"us-west-1":  endpoints.Endpoint{},
+			"us-west-2":  endpoints.Endpoint{},
 		},
 	},
 	{
@@ -136,6 +166,18 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"fips-us-gov-east-1": endpoints.Endpoint{
+				Hostname: "iot-fips.us-gov-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Service: "execute-api",
+				},
+			},
+			"fips-us-gov-west-1": endpoints.Endpoint{
+				Hostname: "iot-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Service: "execute-api",
+				},
+			},
 			"us-gov-east-1": endpoints.Endpoint{},
 			"us-gov-west-1": endpoints.Endpoint{},
 		},

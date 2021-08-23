@@ -13,6 +13,7 @@ const (
 	AddonIssueCodeConfigurationConflict        AddonIssueCode = "ConfigurationConflict"
 	AddonIssueCodeAdmissionRequestDenied       AddonIssueCode = "AdmissionRequestDenied"
 	AddonIssueCodeUnsupportedAddonModification AddonIssueCode = "UnsupportedAddonModification"
+	AddonIssueCodeK8sResourceNotFound          AddonIssueCode = "K8sResourceNotFound"
 )
 
 // Values returns all known values for AddonIssueCode. Note that this can be
@@ -27,6 +28,7 @@ func (AddonIssueCode) Values() []AddonIssueCode {
 		"ConfigurationConflict",
 		"AdmissionRequestDenied",
 		"UnsupportedAddonModification",
+		"K8sResourceNotFound",
 	}
 }
 
@@ -162,6 +164,7 @@ const (
 	ErrorCodeConfigurationConflict        ErrorCode = "ConfigurationConflict"
 	ErrorCodeAdmissionRequestDenied       ErrorCode = "AdmissionRequestDenied"
 	ErrorCodeUnsupportedAddonModification ErrorCode = "UnsupportedAddonModification"
+	ErrorCodeK8sResourceNotFound          ErrorCode = "K8sResourceNotFound"
 )
 
 // Values returns all known values for ErrorCode. Note that this can be expanded in
@@ -185,6 +188,7 @@ func (ErrorCode) Values() []ErrorCode {
 		"ConfigurationConflict",
 		"AdmissionRequestDenied",
 		"UnsupportedAddonModification",
+		"K8sResourceNotFound",
 	}
 }
 

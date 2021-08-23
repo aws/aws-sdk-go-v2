@@ -66,27 +66,60 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"af-south-1":     endpoints.Endpoint{},
-			"ap-east-1":      endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{},
 			"ap-northeast-2": endpoints.Endpoint{},
-			"ap-northeast-3": endpoints.Endpoint{},
 			"ap-south-1":     endpoints.Endpoint{},
 			"ap-southeast-1": endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},
 			"ca-central-1":   endpoints.Endpoint{},
-			"eu-central-1":   endpoints.Endpoint{},
-			"eu-north-1":     endpoints.Endpoint{},
-			"eu-south-1":     endpoints.Endpoint{},
-			"eu-west-1":      endpoints.Endpoint{},
-			"eu-west-2":      endpoints.Endpoint{},
-			"eu-west-3":      endpoints.Endpoint{},
-			"me-south-1":     endpoints.Endpoint{},
-			"sa-east-1":      endpoints.Endpoint{},
-			"us-east-1":      endpoints.Endpoint{},
-			"us-east-2":      endpoints.Endpoint{},
-			"us-west-1":      endpoints.Endpoint{},
-			"us-west-2":      endpoints.Endpoint{},
+			"ca-central-1-fips": endpoints.Endpoint{
+				Hostname: "dynamodb-fips.ca-central-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "ca-central-1",
+				},
+			},
+			"eu-central-1": endpoints.Endpoint{},
+			"eu-north-1":   endpoints.Endpoint{},
+			"eu-west-1":    endpoints.Endpoint{},
+			"eu-west-2":    endpoints.Endpoint{},
+			"eu-west-3":    endpoints.Endpoint{},
+			"local": endpoints.Endpoint{
+				Hostname:  "localhost:8000",
+				Protocols: []string{"http"},
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"me-south-1": endpoints.Endpoint{},
+			"sa-east-1":  endpoints.Endpoint{},
+			"us-east-1":  endpoints.Endpoint{},
+			"us-east-1-fips": endpoints.Endpoint{
+				Hostname: "dynamodb-fips.us-east-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-1",
+				},
+			},
+			"us-east-2": endpoints.Endpoint{},
+			"us-east-2-fips": endpoints.Endpoint{
+				Hostname: "dynamodb-fips.us-east-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-east-2",
+				},
+			},
+			"us-west-1": endpoints.Endpoint{},
+			"us-west-1-fips": endpoints.Endpoint{
+				Hostname: "dynamodb-fips.us-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-1",
+				},
+			},
+			"us-west-2": endpoints.Endpoint{},
+			"us-west-2-fips": endpoints.Endpoint{
+				Hostname: "dynamodb-fips.us-west-2.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-west-2",
+				},
+			},
 		},
 	},
 	{
@@ -110,7 +143,7 @@ var defaultPartitions = endpoints.Partitions{
 		ID: "aws-iso",
 		Defaults: endpoints.Endpoint{
 			Hostname:          "streams.dynamodb.{region}.c2s.ic.gov",
-			Protocols:         []string{"https"},
+			Protocols:         []string{"http", "https"},
 			SignatureVersions: []string{"v4"},
 			CredentialScope: endpoints.CredentialScope{
 				Service: "dynamodb",
@@ -119,7 +152,9 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.AwsIso,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
-			"us-iso-east-1": endpoints.Endpoint{},
+			"us-iso-east-1": endpoints.Endpoint{
+				Protocols: []string{"http", "https"},
+			},
 		},
 	},
 	{
@@ -153,14 +188,14 @@ var defaultPartitions = endpoints.Partitions{
 		Endpoints: endpoints.Endpoints{
 			"us-gov-east-1": endpoints.Endpoint{},
 			"us-gov-east-1-fips": endpoints.Endpoint{
-				Hostname: "streams.dynamodb.us-gov-east-1.amazonaws.com",
+				Hostname: "dynamodb.us-gov-east-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-east-1",
 				},
 			},
 			"us-gov-west-1": endpoints.Endpoint{},
 			"us-gov-west-1-fips": endpoints.Endpoint{
-				Hostname: "streams.dynamodb.us-gov-west-1.amazonaws.com",
+				Hostname: "dynamodb.us-gov-west-1.amazonaws.com",
 				CredentialScope: endpoints.CredentialScope{
 					Region: "us-gov-west-1",
 				},
