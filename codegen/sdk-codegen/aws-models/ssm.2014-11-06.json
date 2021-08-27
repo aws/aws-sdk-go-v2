@@ -18765,7 +18765,10 @@
             }
         },
         "com.amazonaws.ssm#PSParameterValue": {
-            "type": "string"
+            "type": "string",
+            "traits": {
+                "smithy.api#sensitive": {}
+            }
         },
         "com.amazonaws.ssm#PSParameterVersion": {
             "type": "long"

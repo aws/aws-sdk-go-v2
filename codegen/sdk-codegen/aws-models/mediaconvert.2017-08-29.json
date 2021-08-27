@@ -2798,7 +2798,7 @@
                 "FragmentLength": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Length of fragments to generate (in seconds). Fragment length must be compatible with GOP size and Framerate. Note that fragments will end on the next keyframe after this number of seconds, so actual fragment length may be longer. When Emit Single File is checked, the fragmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.",
+                        "smithy.api#documentation": "Specify the length, in whole seconds, of the mp4 fragments. When you don't specify a value, MediaConvert defaults to 2. Related setting: Use Fragment length control (FragmentLengthControl) to specify whether the encoder enforces this value strictly.",
                         "smithy.api#jsonName": "fragmentLength"
                     }
                 },
@@ -2861,8 +2861,15 @@
                 "SegmentLength": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Use this setting to specify the length, in seconds, of each individual CMAF segment. This value applies to the whole package; that is, to every output in the output group. Note that segments end on the first keyframe after this number of seconds, so the actual segment length might be slightly longer. If you set Segment control (CmafSegmentControl) to single file, the service puts the content of each output in a single file that has metadata that marks these segments. If you set it to segmented files, the service creates multiple files for each output, each with the content of one segment.",
+                        "smithy.api#documentation": "Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 10. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (CmafSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.",
                         "smithy.api#jsonName": "segmentLength"
+                    }
+                },
+                "SegmentLengthControl": {
+                    "target": "com.amazonaws.mediaconvert#CmafSegmentLengthControl",
+                    "traits": {
+                        "smithy.api#documentation": "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
+                        "smithy.api#jsonName": "segmentLengthControl"
                     }
                 },
                 "StreamInfResolution": {
@@ -3033,6 +3040,22 @@
                     {
                         "value": "SEGMENTED_FILES",
                         "name": "SEGMENTED_FILES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediaconvert#CmafSegmentLengthControl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
+                "smithy.api#enum": [
+                    {
+                        "value": "EXACT",
+                        "name": "EXACT"
+                    },
+                    {
+                        "value": "GOP_MULTIPLE",
+                        "name": "GOP_MULTIPLE"
                     }
                 ]
             }
@@ -4219,8 +4242,15 @@
                 "SegmentLength": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Length of mpd segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer. When Emit Single File is checked, the segmentation is internal to a single output file and it does not cause the creation of many output files as in other output types.",
+                        "smithy.api#documentation": "Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 30. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (DashIsoSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.",
                         "smithy.api#jsonName": "segmentLength"
+                    }
+                },
+                "SegmentLengthControl": {
+                    "target": "com.amazonaws.mediaconvert#DashIsoSegmentLengthControl",
+                    "traits": {
+                        "smithy.api#documentation": "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
+                        "smithy.api#jsonName": "segmentLengthControl"
                     }
                 },
                 "WriteSegmentTimelineInRepresentation": {
@@ -4331,6 +4361,22 @@
                     {
                         "value": "SEGMENTED_FILES",
                         "name": "SEGMENTED_FILES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediaconvert#DashIsoSegmentLengthControl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
+                "smithy.api#enum": [
+                    {
+                        "value": "EXACT",
+                        "name": "EXACT"
+                    },
+                    {
+                        "value": "GOP_MULTIPLE",
+                        "name": "GOP_MULTIPLE"
                     }
                 ]
             }
@@ -6913,7 +6959,7 @@
         "com.amazonaws.mediaconvert#H264FieldEncoding": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields.",
+                "smithy.api#documentation": "The video encoding method for your MPEG-4 AVC output. Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF encoding for interlaced outputs.",
                 "smithy.api#enum": [
                     {
                         "value": "PAFF",
@@ -6922,6 +6968,10 @@
                     {
                         "value": "FORCE_FIELD",
                         "name": "FORCE_FIELD"
+                    },
+                    {
+                        "value": "MBAFF",
+                        "name": "MBAFF"
                     }
                 ]
             }
@@ -7223,7 +7273,7 @@
                 "FieldEncoding": {
                     "target": "com.amazonaws.mediaconvert#H264FieldEncoding",
                     "traits": {
-                        "smithy.api#documentation": "Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields.",
+                        "smithy.api#documentation": "The video encoding method for your MPEG-4 AVC output. Keep the default value, PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding and create separate interlaced fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF encoding for interlaced outputs.",
                         "smithy.api#jsonName": "fieldEncoding"
                     }
                 },
@@ -7328,7 +7378,7 @@
                 "NumberBFramesBetweenReferenceFrames": {
                     "target": "com.amazonaws.mediaconvert#__integerMin0Max7",
                     "traits": {
-                        "smithy.api#documentation": "Number of B-frames between reference frames.",
+                        "smithy.api#documentation": "Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don't specify a value, MediaConvert defaults to 2.",
                         "smithy.api#jsonName": "numberBFramesBetweenReferenceFrames"
                     }
                 },
@@ -8130,7 +8180,7 @@
                 "NumberBFramesBetweenReferenceFrames": {
                     "target": "com.amazonaws.mediaconvert#__integerMin0Max7",
                     "traits": {
-                        "smithy.api#documentation": "Number of B-frames between reference frames.",
+                        "smithy.api#documentation": "Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don't specify a value, MediaConvert defaults to 2.",
                         "smithy.api#jsonName": "numberBFramesBetweenReferenceFrames"
                     }
                 },
@@ -8957,8 +9007,15 @@
                 "SegmentLength": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Length of MPEG-2 Transport Stream segments to create (in seconds). Note that segments will end on the next keyframe after this number of seconds, so actual segment length may be longer.",
+                        "smithy.api#documentation": "Specify the length, in whole seconds, of each segment. When you don't specify a value, MediaConvert defaults to 10. Related settings: Use Segment length control (SegmentLengthControl) to specify whether the encoder enforces this value strictly. Use Segment control (HlsSegmentControl) to specify whether MediaConvert creates separate segment files or one content file that has metadata to mark the segment boundaries.",
                         "smithy.api#jsonName": "segmentLength"
+                    }
+                },
+                "SegmentLengthControl": {
+                    "target": "com.amazonaws.mediaconvert#HlsSegmentLengthControl",
+                    "traits": {
+                        "smithy.api#documentation": "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
+                        "smithy.api#jsonName": "segmentLengthControl"
                     }
                 },
                 "SegmentsPerSubdirectory": {
@@ -9197,6 +9254,22 @@
                     {
                         "value": "SEGMENTED_FILES",
                         "name": "SEGMENTED_FILES"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.mediaconvert#HlsSegmentLengthControl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Specify how you want MediaConvert to determine the segment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Segment length (SegmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
+                "smithy.api#enum": [
+                    {
+                        "value": "EXACT",
+                        "name": "EXACT"
+                    },
+                    {
+                        "value": "GOP_MULTIPLE",
+                        "name": "GOP_MULTIPLE"
                     }
                 ]
             }
@@ -11935,6 +12008,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#M2tsDataPtsControl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.",
+                "smithy.api#enum": [
+                    {
+                        "value": "AUTO",
+                        "name": "AUTO"
+                    },
+                    {
+                        "value": "ALIGN_TO_VIDEO",
+                        "name": "ALIGN_TO_VIDEO"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#M2tsEbpAudioInterval": {
             "type": "string",
             "traits": {
@@ -12169,6 +12258,13 @@
                     "traits": {
                         "smithy.api#documentation": "Controls what buffer model to use for accurate interleaving. If set to MULTIPLEX, use multiplex  buffer model. If set to NONE, this can lead to lower latency, but low-memory devices may not be able to play back the stream without interruptions.",
                         "smithy.api#jsonName": "bufferModel"
+                    }
+                },
+                "DataPTSControl": {
+                    "target": "com.amazonaws.mediaconvert#M2tsDataPtsControl",
+                    "traits": {
+                        "smithy.api#documentation": "If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.",
+                        "smithy.api#jsonName": "dataPTSControl"
                     }
                 },
                 "DvbNitSettings": {
@@ -12409,6 +12505,22 @@
                 ]
             }
         },
+        "com.amazonaws.mediaconvert#M3u8DataPtsControl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.",
+                "smithy.api#enum": [
+                    {
+                        "value": "AUTO",
+                        "name": "AUTO"
+                    },
+                    {
+                        "value": "ALIGN_TO_VIDEO",
+                        "name": "ALIGN_TO_VIDEO"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#M3u8NielsenId3": {
             "type": "string",
             "traits": {
@@ -12479,6 +12591,13 @@
                     "traits": {
                         "smithy.api#documentation": "Packet Identifier (PID) of the elementary audio stream(s) in the transport stream. Multiple values are accepted, and can be entered in ranges and/or by comma separation.",
                         "smithy.api#jsonName": "audioPids"
+                    }
+                },
+                "DataPTSControl": {
+                    "target": "com.amazonaws.mediaconvert#M3u8DataPtsControl",
+                    "traits": {
+                        "smithy.api#documentation": "If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with Presentation Timestamp (PTS) values greater than or equal to the first video packet PTS (MediaConvert drops captions and data packets with lesser PTS values). Keep the default value (AUTO) to allow all PTS values.",
+                        "smithy.api#jsonName": "dataPTSControl"
                     }
                 },
                 "MaxPcrInterval": {
@@ -13368,7 +13487,7 @@
         "com.amazonaws.mediaconvert#Mpeg2GopSizeUnits": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time.",
+                "smithy.api#documentation": "Specify the units for GOP size (GopSize). If you don't specify a value here, by default the encoder measures GOP size in frames.",
                 "smithy.api#enum": [
                     {
                         "value": "FRAMES",
@@ -13593,14 +13712,14 @@
                 "GopSize": {
                     "target": "com.amazonaws.mediaconvert#__doubleMin0",
                     "traits": {
-                        "smithy.api#documentation": "GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.",
+                        "smithy.api#documentation": "Specify the interval between keyframes, in seconds or frames, for this output. Default: 12 Related settings: When you specify the GOP size in seconds, set GOP mode control (GopSizeUnits) to Specified, seconds (SECONDS). The default value for GOP mode control (GopSizeUnits) is Frames (FRAMES).",
                         "smithy.api#jsonName": "gopSize"
                     }
                 },
                 "GopSizeUnits": {
                     "target": "com.amazonaws.mediaconvert#Mpeg2GopSizeUnits",
                     "traits": {
-                        "smithy.api#documentation": "Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds the system will convert the GOP Size into a frame count at run time.",
+                        "smithy.api#documentation": "Specify the units for GOP size (GopSize). If you don't specify a value here, by default the encoder measures GOP size in frames.",
                         "smithy.api#jsonName": "gopSizeUnits"
                     }
                 },
@@ -13649,7 +13768,7 @@
                 "NumberBFramesBetweenReferenceFrames": {
                     "target": "com.amazonaws.mediaconvert#__integerMin0Max7",
                     "traits": {
-                        "smithy.api#documentation": "Number of B-frames between reference frames.",
+                        "smithy.api#documentation": "Specify the number of B-frames that MediaConvert puts between reference frames in this output. Valid values are whole numbers from 0 through 7. When you don't specify a value, MediaConvert defaults to 2.",
                         "smithy.api#jsonName": "numberBFramesBetweenReferenceFrames"
                     }
                 },
@@ -13886,6 +14005,22 @@
                 "smithy.api#documentation": "If you are using DRM, set DRM System (MsSmoothEncryptionSettings) to specify the value SpekeKeyProvider."
             }
         },
+        "com.amazonaws.mediaconvert#MsSmoothFragmentLengthControl": {
+            "type": "string",
+            "traits": {
+                "smithy.api#documentation": "Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
+                "smithy.api#enum": [
+                    {
+                        "value": "EXACT",
+                        "name": "EXACT"
+                    },
+                    {
+                        "value": "GOP_MULTIPLE",
+                        "name": "GOP_MULTIPLE"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.mediaconvert#MsSmoothGroupSettings": {
             "type": "structure",
             "members": {
@@ -13927,8 +14062,15 @@
                 "FragmentLength": {
                     "target": "com.amazonaws.mediaconvert#__integerMin1Max2147483647",
                     "traits": {
-                        "smithy.api#documentation": "Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in seconds. Fragment length must be compatible with GOP size and frame rate.",
+                        "smithy.api#documentation": "Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
                         "smithy.api#jsonName": "fragmentLength"
+                    }
+                },
+                "FragmentLengthControl": {
+                    "target": "com.amazonaws.mediaconvert#MsSmoothFragmentLengthControl",
+                    "traits": {
+                        "smithy.api#documentation": "Specify how you want MediaConvert to determine the fragment length. Choose Exact (EXACT) to have the encoder use the exact length that you specify with the setting Fragment length (FragmentLength). This might result in extra I-frames. Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment lengths to match the next GOP boundary.",
+                        "smithy.api#jsonName": "fragmentLengthControl"
                     }
                 },
                 "ManifestEncoding": {
@@ -15622,6 +15764,13 @@
                     "traits": {
                         "smithy.api#documentation": "Specify how you want your data keys managed. AWS uses data keys to encrypt your content. AWS also encrypts the data keys themselves, using a customer master key (CMK), and then stores the encrypted data keys alongside your encrypted content. Use this setting to specify which AWS service manages the CMK. For simplest set up, choose Amazon S3 (SERVER_SIDE_ENCRYPTION_S3). If you want your master key to be managed by AWS Key Management Service (KMS), choose AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). By default, when you choose AWS KMS, KMS uses the AWS managed customer master key (CMK) associated with Amazon S3 to encrypt your data keys. You can optionally choose to specify a different, customer managed CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the setting  KMS ARN (kmsKeyArn).",
                         "smithy.api#jsonName": "encryptionType"
+                    }
+                },
+                "KmsEncryptionContext": {
+                    "target": "com.amazonaws.mediaconvert#__stringPatternAZaZ0902",
+                    "traits": {
+                        "smithy.api#documentation": "Optionally, specify the encryption context that you want to use alongside your KMS key. AWS KMS uses this encryption context as additional authenticated data (AAD) to support authenticated encryption. This value must be a base64-encoded UTF-8 string holding JSON which represents a string-string map. To use this setting, you must also set Server-side encryption (S3ServerSideEncryptionType) to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). For more information about encryption context, see: https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context.",
+                        "smithy.api#jsonName": "kmsEncryptionContext"
                     }
                 },
                 "KmsKeyArn": {

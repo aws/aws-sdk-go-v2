@@ -70,7 +70,7 @@
                     "min": 0,
                     "max": 120
                 },
-                "smithy.api#pattern": "[0-9A-Za-z _-]+"
+                "smithy.api#pattern": "^[0-9A-Za-z _-]+$"
             }
         },
         "com.amazonaws.dlm#AvailabilityZone": {
@@ -80,7 +80,7 @@
                     "min": 0,
                     "max": 16
                 },
-                "smithy.api#pattern": "([a-z]+-){2,3}\\d[a-z]"
+                "smithy.api#pattern": "^([a-z]+-){2,3}\\d[a-z]$"
             }
         },
         "com.amazonaws.dlm#AvailabilityZoneList": {
@@ -112,7 +112,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws(-[a-z]{1,3}){0,2}:kms:([a-z]+-){2,3}\\d:\\d+:key/.*"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,3}){0,2}:kms:([a-z]+-){2,3}\\d:\\d+:key/"
             }
         },
         "com.amazonaws.dlm#CopyTags": {
@@ -153,7 +153,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a policy to manage the lifecycle of the specified AWS resources. You can\n\t\t\tcreate up to 100 lifecycle policies.</p>",
+                "smithy.api#documentation": "<p>Creates a policy to manage the lifecycle of the specified Amazon Web Services resources. You can\n\t\t\tcreate up to 100 lifecycle policies.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/policies",
@@ -217,7 +217,7 @@
                 "Location": {
                     "target": "com.amazonaws.dlm#LocationValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the destination for snapshots created by the policy. To create snapshots in the same \n\t\t\tRegion as the source resource, specify <code>CLOUD</code>. To create snapshots on the same \n\t\t\tOutpost as the source resource, specify <code>OUTPOST_LOCAL</code>. If you omit this \n\t\t\tparameter, <code>CLOUD</code> is used by default.</p>\n\t\t       <p>If the policy targets resources in an AWS Region, then you must create snapshots in the same \n\t\t\tRegion as the source resource. </p>\n\t\t       <p>If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost \n\t\t\tas the source resource, or in the Region of that Outpost.</p>"
+                        "smithy.api#documentation": "<p>Specifies the destination for snapshots created by the policy. To create snapshots in the same \n\t\t\tRegion as the source resource, specify <code>CLOUD</code>. To create snapshots on the same \n\t\t\tOutpost as the source resource, specify <code>OUTPOST_LOCAL</code>. If you omit this \n\t\t\tparameter, <code>CLOUD</code> is used by default.</p>\n\t\t       <p>If the policy targets resources in an Amazon Web Services Region, then you must create snapshots in the same \n\t\t\tRegion as the source resource.</p>\n\t\t       <p>If the policy targets resources on an Outpost, then you can create snapshots on the same Outpost \n\t\t\tas the source resource, or in the Region of that Outpost.</p>"
                     }
                 },
                 "Interval": {
@@ -256,7 +256,7 @@
                     "min": 17,
                     "max": 106
                 },
-                "smithy.api#pattern": "cron\\([^\\n]{11,100}\\)"
+                "smithy.api#pattern": "^cron\\([^\\n]{11,100}\\)$"
             }
         },
         "com.amazonaws.dlm#CrossRegionCopyAction": {
@@ -296,6 +296,26 @@
                 }
             }
         },
+        "com.amazonaws.dlm#CrossRegionCopyDeprecateRule": {
+            "type": "structure",
+            "members": {
+                "Interval": {
+                    "target": "com.amazonaws.dlm#Interval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The period after which to deprecate the cross-Region AMI copies. The period must be less than or \n\t\t\tequal to the cross-Region AMI copy retention period, and it can't be greater than 10 years. This is \n\t\t\tequivalent to 120 months, 520 weeks, or 3650 days.</p>"
+                    }
+                },
+                "IntervalUnit": {
+                    "target": "com.amazonaws.dlm#RetentionIntervalUnitValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of time in which to measure the <b>Interval</b>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an AMI deprecation rule for cross-Region AMI copies created by a cross-Region copy rule.</p>"
+            }
+        },
         "com.amazonaws.dlm#CrossRegionCopyRetainRule": {
             "type": "structure",
             "members": {
@@ -322,13 +342,13 @@
                 "TargetRegion": {
                     "target": "com.amazonaws.dlm#TargetRegion",
                     "traits": {
-                        "smithy.api#documentation": "<p>The target Region for the snapshot copies.</p>\n\t\t       <p>If you specify a target Region, you must omit <b>Target</b>. You cannot \n\t\t\tspecify a target Region and a target Outpost in the same rule.</p>"
+                        "smithy.api#documentation": "<p>Avoid using this parameter when creating new policies. Instead, use <b>Target</b>\n\t\t\tto specify a target Region or a target Outpost for snapshot copies.</p>\n\t\t       <p>For policies created before the <b>Target</b> parameter \n\t\t\twas introduced, this parameter indicates the target Region for snapshot copies.</p>"
                     }
                 },
                 "Target": {
                     "target": "com.amazonaws.dlm#Target",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot copies.</p>\n\t\t       <p>If you specify an ARN, you must omit <b>TargetRegion</b>. You cannot \n\t\t\tspecify a target Region and a target Outpost in the same rule.</p>"
+                        "smithy.api#documentation": "<p>The target Region or the Amazon Resource Name (ARN) of the target Outpost for the \n\t\t\tsnapshot copies.</p>\n\t\t       <p>Use this parameter instead of <b>TargetRegion</b>. Do not \n\t\t\tspecify both.</p>"
                     }
                 },
                 "Encrypted": {
@@ -341,19 +361,25 @@
                 "CmkArn": {
                     "target": "com.amazonaws.dlm#CmkArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS\n\t\t\tencryption. If this parameter is not specified, your AWS managed CMK for EBS is\n\t\t\tused.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this \n\t\t\tparameter is not specified, the default KMS key for the account is used.</p>"
                     }
                 },
                 "CopyTags": {
                     "target": "com.amazonaws.dlm#CopyTagsNullable",
                     "traits": {
-                        "smithy.api#documentation": "<p>Copy all user-defined tags from the source snapshot to the copied snapshot.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether to copy all user-defined tags from the source snapshot to the cross-Region \n\t\t\tsnapshot copy.</p>"
                     }
                 },
                 "RetainRule": {
                     "target": "com.amazonaws.dlm#CrossRegionCopyRetainRule",
                     "traits": {
-                        "smithy.api#documentation": "<p>The retention rule.</p>"
+                        "smithy.api#documentation": "<p>The retention rule that indicates how long snapshot copies are to be retained in the \n\t\t\tdestination Region.</p>"
+                    }
+                },
+                "DeprecateRule": {
+                    "target": "com.amazonaws.dlm#CrossRegionCopyDeprecateRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AMI deprecation rule for cross-Region AMI copies created by the rule.</p>"
                     }
                 }
             },
@@ -418,6 +444,32 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.dlm#DeprecateRule": {
+            "type": "structure",
+            "members": {
+                "Count": {
+                    "target": "com.amazonaws.dlm#Count",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the schedule has a count-based retention rule, this parameter specifies the number of oldest \n\t\t\tAMIs to deprecate. The count must be less than or equal to the schedule's retention count, and it \n\t\t\tcan't be greater than 1000.</p>"
+                    }
+                },
+                "Interval": {
+                    "target": "com.amazonaws.dlm#Interval",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the schedule has an age-based retention rule, this parameter specifies the period after which \n\t\t\tto deprecate AMIs created by the schedule. The period must be less than or equal to the schedule's \n\t\t\tretention period, and it can't be greater than 10 years. This is equivalent to 120 months, 520 \n\t\t\tweeks, or 3650 days.</p>"
+                    }
+                },
+                "IntervalUnit": {
+                    "target": "com.amazonaws.dlm#RetentionIntervalUnitValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unit of time in which to measure the <b>Interval</b>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies an AMI deprecation rule for a schedule.</p>"
+            }
+        },
         "com.amazonaws.dlm#DescriptionRegex": {
             "type": "string",
             "traits": {
@@ -425,7 +477,7 @@
                     "min": 0,
                     "max": 1000
                 },
-                "smithy.api#pattern": "[\\p{all}]*"
+                "smithy.api#pattern": "^[\\p{all}]*$"
             }
         },
         "com.amazonaws.dlm#Encrypted": {
@@ -447,7 +499,7 @@
                 "CmkArn": {
                     "target": "com.amazonaws.dlm#CmkArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use for EBS \n\t\t\tencryption. If this parameter is not specified, your AWS managed CMK for EBS is used.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If \n\t\t\tthis parameter is not specified, the default KMS key for the account is used.</p>"
                     }
                 }
             },
@@ -474,7 +526,7 @@
                 "SnapshotOwner": {
                     "target": "com.amazonaws.dlm#SnapshotOwnerList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the AWS accounts that can trigger policy by sharing snapshots with your account. The \n\t\t\tpolicy only runs if one of the specified AWS accounts shares a snapshot with your account.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts that can trigger policy by sharing snapshots with your account. \n\t\t\tThe policy only runs if one of the specified Amazon Web Services accounts shares a snapshot with your account.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -496,7 +548,7 @@
                 "Type": {
                     "target": "com.amazonaws.dlm#EventSourceValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the event. Currently only managed AWS CloudWatch Events rules are supported.</p>",
+                        "smithy.api#documentation": "<p>The source of the event. Currently only managed CloudWatch Events rules are supported.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -546,7 +598,7 @@
                     "min": 0,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws(-[a-z]{1,3}){0,2}:iam::\\d+:role/.*"
+                "smithy.api#pattern": "^arn:aws(-[a-z]{1,3}){0,2}:iam::\\d+:role/"
             }
         },
         "com.amazonaws.dlm#FastRestoreRule": {
@@ -647,7 +699,7 @@
                 "TagsToAdd": {
                     "target": "com.amazonaws.dlm#TagsToAddFilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to add to objects created by the policy.</p>\n\t\t       <p>Tags are strings in the format <code>key=value</code>.</p>\n\t\t       <p>These user-defined tags are added in addition to the AWS-added lifecycle tags.</p>",
+                        "smithy.api#documentation": "<p>The tags to add to objects created by the policy.</p>\n\t\t       <p>Tags are strings in the format <code>key=value</code>.</p>\n\t\t       <p>These user-defined tags are added in addition to the Amazon Web Services-added lifecycle tags.</p>",
                         "smithy.api#httpQuery": "tagsToAdd"
                     }
                 }
@@ -1051,7 +1103,7 @@
                     "min": 0,
                     "max": 500
                 },
-                "smithy.api#pattern": "[0-9A-Za-z _-]+"
+                "smithy.api#pattern": "^[0-9A-Za-z _-]+$"
             }
         },
         "com.amazonaws.dlm#PolicyDetails": {
@@ -1060,7 +1112,7 @@
                 "PolicyType": {
                     "target": "com.amazonaws.dlm#PolicyTypeValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your AWS account.</p>\n\t\t       <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
+                        "smithy.api#documentation": "<p>The valid target resource types and actions a policy can manage. Specify <code>EBS_SNAPSHOT_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of Amazon EBS snapshots. Specify <code>IMAGE_MANAGEMENT</code> \n\t\t\tto create a lifecycle policy that manages the lifecycle of EBS-backed AMIs. Specify <code>EVENT_BASED_POLICY </code> \n\t\t\tto create an event-based policy that performs specific actions when a defined event occurs in your Amazon Web Services account.</p>\n\t\t       <p>The default is <code>EBS_SNAPSHOT_MANAGEMENT</code>.</p>"
                     }
                 },
                 "ResourceTypes": {
@@ -1072,7 +1124,7 @@
                 "ResourceLocations": {
                     "target": "com.amazonaws.dlm#ResourceLocationList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The location of the resources to backup. If the source resources are located in an AWS Region, specify \n\t\t\t<code>CLOUD</code>. If the source resources are located on an AWS Outpost \n\t\t\tin your account, specify <code>OUTPOST</code>. </p>\n\t\t\t      <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources \n\t\t\t\tof the specified type with matching target tags across all of the Outposts in your account.</p>"
+                        "smithy.api#documentation": "<p>The location of the resources to backup. If the source resources are located in an Amazon Web Services Region, \n\t\t\tspecify <code>CLOUD</code>. If the source resources are located on an Outpost \n\t\t\tin your account, specify <code>OUTPOST</code>. </p>\n\t\t\t      <p>If you specify <code>OUTPOST</code>, Amazon Data Lifecycle Manager backs up all resources \n\t\t\t\tof the specified type with matching target tags across all of the Outposts in your account.</p>"
                     }
                 },
                 "TargetTags": {
@@ -1117,7 +1169,7 @@
                     "min": 0,
                     "max": 64
                 },
-                "smithy.api#pattern": "policy-[A-Za-z0-9]+"
+                "smithy.api#pattern": "^policy-[A-Za-z0-9]+$"
             }
         },
         "com.amazonaws.dlm#PolicyIdList": {
@@ -1294,7 +1346,7 @@
                 "TagsToAdd": {
                     "target": "com.amazonaws.dlm#TagsToAddList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The tags to apply to policy-created resources. These user-defined tags are in addition\n\t\t\tto the AWS-added lifecycle tags.</p>"
+                        "smithy.api#documentation": "<p>The tags to apply to policy-created resources. These user-defined tags are in addition\n\t\t\tto the Amazon Web Services-added lifecycle tags.</p>"
                     }
                 },
                 "VariableTags": {
@@ -1330,7 +1382,13 @@
                 "ShareRules": {
                     "target": "com.amazonaws.dlm#ShareRules",
                     "traits": {
-                        "smithy.api#documentation": "<p>The rule for sharing snapshots with other AWS accounts.</p>"
+                        "smithy.api#documentation": "<p>The rule for sharing snapshots with other Amazon Web Services accounts.</p>"
+                    }
+                },
+                "DeprecateRule": {
+                    "target": "com.amazonaws.dlm#DeprecateRule",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The AMI deprecation rule for the schedule.</p>"
                     }
                 }
             },
@@ -1357,7 +1415,7 @@
                     "min": 0,
                     "max": 120
                 },
-                "smithy.api#pattern": "[0-9A-Za-z _-]+"
+                "smithy.api#pattern": "^[0-9A-Za-z _-]+$"
             }
         },
         "com.amazonaws.dlm#SettablePolicyStateValues": {
@@ -1381,14 +1439,14 @@
                 "TargetAccounts": {
                     "target": "com.amazonaws.dlm#ShareTargetAccountList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IDs of the AWS accounts with which to share the snapshots.</p>",
+                        "smithy.api#documentation": "<p>The IDs of the Amazon Web Services accounts with which to share the snapshots.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "UnshareInterval": {
                     "target": "com.amazonaws.dlm#Interval",
                     "traits": {
-                        "smithy.api#documentation": "<p>The period after which snapshots that are shared with other AWS accounts are automatically unshared.</p>"
+                        "smithy.api#documentation": "<p>The period after which snapshots that are shared with other Amazon Web Services accounts are automatically unshared.</p>"
                     }
                 },
                 "UnshareIntervalUnit": {
@@ -1399,7 +1457,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Specifies a rule for sharing snapshots across AWS accounts.</p>"
+                "smithy.api#documentation": "<p>Specifies a rule for sharing snapshots across Amazon Web Services accounts.</p>"
             }
         },
         "com.amazonaws.dlm#ShareRules": {
@@ -1444,7 +1502,7 @@
                     "min": 0,
                     "max": 500
                 },
-                "smithy.api#pattern": "[\\p{all}]*"
+                "smithy.api#pattern": "^[\\p{all}]*$"
             }
         },
         "com.amazonaws.dlm#String": {
@@ -1454,7 +1512,7 @@
                     "min": 0,
                     "max": 500
                 },
-                "smithy.api#pattern": "[\\p{all}]*"
+                "smithy.api#pattern": "^[\\p{all}]*$"
             }
         },
         "com.amazonaws.dlm#Tag": {
@@ -1486,7 +1544,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\p{all}]*"
+                "smithy.api#pattern": "^[\\p{all}]*$"
             }
         },
         "com.amazonaws.dlm#TagKey": {
@@ -1585,7 +1643,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\p{all}]*"
+                "smithy.api#pattern": "^[\\p{all}]*$"
             }
         },
         "com.amazonaws.dlm#TagsToAddFilterList": {
@@ -1629,7 +1687,7 @@
                     "min": 0,
                     "max": 16
                 },
-                "smithy.api#pattern": "([a-z]+-){2,3}\\d"
+                "smithy.api#pattern": "^([a-z]+-){2,3}\\d$"
             }
         },
         "com.amazonaws.dlm#TargetTagList": {
@@ -1859,7 +1917,7 @@
                     "name": "dlm"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>Amazon Data Lifecycle Manager</fullname>\n\t\t       <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your AWS resources. You create\n\t\t\tlifecycle policies, which are used to automate operations on the specified\n\t\t\tresources.</p>\n\t\t       <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM\n\t\t\twith Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">Automating the Amazon EBS\n\t\t\t\tSnapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>",
+                "smithy.api#documentation": "<fullname>Amazon Data Lifecycle Manager</fullname>\n\t\t       <p>With Amazon Data Lifecycle Manager, you can manage the lifecycle of your Amazon Web Services resources. You create\n\t\t\tlifecycle policies, which are used to automate operations on the specified\n\t\t\tresources.</p>\n\t\t       <p>Amazon DLM supports Amazon EBS volumes and snapshots. For information about using Amazon DLM\n\t\t\twith Amazon EBS, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/snapshot-lifecycle.html\">Automating the Amazon EBS\n\t\t\t\tSnapshot Lifecycle</a> in the <i>Amazon EC2 User Guide</i>.</p>",
                 "smithy.api#title": "Amazon Data Lifecycle Manager"
             }
         }

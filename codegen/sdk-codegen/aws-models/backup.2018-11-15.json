@@ -44,13 +44,13 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies an object containing resource type and backup options. The only supported\n         resource type is Amazon EC2 instances with Windows VSS. For an CloudFormation example, see\n         the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html\">sample\n            CloudFormation template to enable Windows VSS</a> in the <i>AWS Backup User\n            Guide</i>.</p>\n         <p>Valid values: <code>EC2</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies an object containing resource type and backup options. The only supported\n         resource type is Amazon EC2 instances with Windows Volume Shadow Copy Service\n         (VSS). For a CloudFormation example, see the <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html\">sample\n            CloudFormation template to enable Windows VSS</a> in the <i>Backup User Guide</i>.</p>\n         <p>Valid values: <code>EC2</code>.</p>"
                     }
                 },
                 "BackupOptions": {
                     "target": "com.amazonaws.backup#BackupOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the backup option for a selected resource. This option is only available for\n         Windows VSS backup jobs.</p>\n         <p>Valid values: </p>\n         <p>Set to <code>\"WindowsVSS\":\"enabled\"</code> to enable the WindowsVSS backup option and\n         create a VSS Windows backup. </p>\n         <p>Set to <code>\"WindowsVSS\":\"disabled\"</code> to create a regular backup. The WindowsVSS\n         option is not enabled by default.</p>\n         <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code>\n         exception.</p>\n         <p>For more information about Windows VSS backups, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html\">Creating a VSS-Enabled Windows\n            Backup</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the backup option for a selected resource. This option is only available for\n         Windows VSS backup jobs.</p>\n         <p>Valid values: </p>\n         <p>Set to <code>\"WindowsVSS\":\"enabled\"</code> to enable the <code>WindowsVSS</code> backup\n         option and create a Windows VSS backup. </p>\n         <p>Set to <code>\"WindowsVSS\":\"disabled\"</code> to create a regular backup. The\n            <code>WindowsVSS</code> option is not enabled by default.</p>\n         <p>If you specify an invalid option, you get an <code>InvalidParameterValueException</code>\n         exception.</p>\n         <p>For more information about Windows VSS backups, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html\">Creating a VSS-Enabled Windows\n            Backup</a>.</p>"
                     }
                 }
             },
@@ -115,13 +115,13 @@
                 "BackupJobId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Uniquely identifies a request to AWS Backup to back up a resource.</p>"
+                        "smithy.api#documentation": "<p>Uniquely identifies a request to Backup to back up a resource.</p>"
                     }
                 },
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>"
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>"
                     }
                 },
                 "BackupVaultArn": {
@@ -205,7 +205,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store\n         (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS\n         Windows backups, the only supported resource type is Amazon EC2.</p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only\n         supported resource type is Amazon EC2.</p>"
                     }
                 },
                 "BytesTransferred": {
@@ -217,7 +217,7 @@
                 "BackupOptions": {
                     "target": "com.amazonaws.backup#BackupOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the backup option for a selected resource. This option is only available for\n         Windows VSS backup jobs.</p>\n         <p>Valid values: Set to <code>\"WindowsVSS”:“enabled\"</code> to enable WindowsVSS backup\n         option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular\n         backup. If you specify an invalid option, you get an\n            <code>InvalidParameterValueException</code> exception.</p>"
+                        "smithy.api#documentation": "<p>Specifies the backup option for a selected resource. This option is only available for\n         Windows Volume Shadow Copy Service (VSS) backup jobs.</p>\n         <p>Valid values: Set to <code>\"WindowsVSS\":\"enabled\"</code> to enable the\n            <code>WindowsVSS</code> backup option and create a Windows VSS backup. Set to\n            <code>\"WindowsVSS\":\"disabled\"</code> to create a regular backup. If you specify an\n         invalid option, you get an <code>InvalidParameterValueException</code> exception.</p>"
                     }
                 },
                 "BackupType": {
@@ -322,7 +322,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains an optional backup plan display name and an array of <code>BackupRule</code>\n         objects, each of which specifies a backup rule. Each rule in a backup plan is a separate\n         scheduled task and can back up a different selection of AWS resources.</p>"
+                "smithy.api#documentation": "<p>Contains an optional backup plan display name and an array of <code>BackupRule</code>\n         objects, each of which specifies a backup rule. Each rule in a backup plan is a separate\n         scheduled task and can back up a different selection of Amazon Web Services\n         resources.</p>"
             }
         },
         "com.amazonaws.backup#BackupPlanInput": {
@@ -345,12 +345,12 @@
                 "AdvancedBackupSettings": {
                     "target": "com.amazonaws.backup#AdvancedBackupSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of <code>BackupOptions</code> for each resource type. These settings\n         are only available for Windows VSS backup jobs.</p>"
+                        "smithy.api#documentation": "<p>Specifies a list of <code>BackupOptions</code> for each resource type. These settings\n         are only available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains an optional backup plan display name and an array of <code>BackupRule</code>\n         objects, each of which specifies a backup rule. Each rule in a backup plan is a separate\n         scheduled task and can back up a different selection of AWS resources. </p>"
+                "smithy.api#documentation": "<p>Contains an optional backup plan display name and an array of <code>BackupRule</code>\n         objects, each of which specifies a backup rule. Each rule in a backup plan is a separate\n         scheduled task and can back up a different selection of Amazon Web Services resources.\n      </p>"
             }
         },
         "com.amazonaws.backup#BackupPlanName": {
@@ -469,14 +469,14 @@
                 "TargetBackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ScheduleExpression": {
                     "target": "com.amazonaws.backup#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CRON expression specifying when AWS Backup initiates a backup job. For more\n         information about cron expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User\n            Guide.</i>. Prior to specifying a value for this parameter, we recommend testing\n         your cron expression using one of the many available cron generator and testing\n         tools.</p>"
+                        "smithy.api#documentation": "<p>A cron expression in UTC specifying when Backup initiates a backup job. For\n         more information about cron expressions, see <a href=\"https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html\">Schedule Expressions for Rules</a> in the <i>Amazon CloudWatch Events User\n            Guide.</i>. Prior to specifying a value for this parameter, we recommend testing\n         your cron expression using one of the many available cron generator and testing\n         tools.</p>"
                     }
                 },
                 "StartWindowMinutes": {
@@ -488,13 +488,13 @@
                 "CompletionWindowMinutes": {
                     "target": "com.amazonaws.backup#WindowMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value in minutes after a backup job is successfully started before it must be\n         completed or it will be canceled by AWS Backup. This value is optional.</p>"
+                        "smithy.api#documentation": "<p>A value in minutes after a backup job is successfully started before it must be\n         completed or it will be canceled by Backup. This value is optional.</p>"
                     }
                 },
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup transitions and expires backups automatically according to\n         the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
                     }
                 },
                 "RecoveryPointTags": {
@@ -518,7 +518,7 @@
                 "EnableContinuousBackup": {
                     "target": "com.amazonaws.backup#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to\n         create continuous backups capable of point-in-time restore (PITR). False (or not specified)\n         causes AWS Backup to create snapshot backups.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether Backup creates continuous backups. True causes Backup to create continuous backups capable of point-in-time restore (PITR). False\n         (or not specified) causes Backup to create snapshot backups.</p>"
                     }
                 }
             },
@@ -539,14 +539,14 @@
                 "TargetBackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "ScheduleExpression": {
                     "target": "com.amazonaws.backup#CronExpression",
                     "traits": {
-                        "smithy.api#documentation": "<p>A CRON expression specifying when AWS Backup initiates a backup job.</p>"
+                        "smithy.api#documentation": "<p>A CRON expression in UTC specifying when Backup initiates a backup\n         job.</p>"
                     }
                 },
                 "StartWindowMinutes": {
@@ -558,13 +558,13 @@
                 "CompletionWindowMinutes": {
                     "target": "com.amazonaws.backup#WindowMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value in minutes after a backup job is successfully started before it must be\n         completed or it will be canceled by AWS Backup. This value is optional.</p>"
+                        "smithy.api#documentation": "<p>A value in minutes after a backup job is successfully started before it must be\n         completed or it will be canceled by Backup. This value is optional.</p>"
                     }
                 },
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup will transition and expire backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup will transition and expire backups automatically according\n         to the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
                     }
                 },
                 "RecoveryPointTags": {
@@ -582,7 +582,7 @@
                 "EnableContinuousBackup": {
                     "target": "com.amazonaws.backup#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether AWS Backup creates continuous backups. True causes AWS Backup to\n         create continuous backups capable of point-in-time restore (PITR). False (or not specified)\n         causes AWS Backup to create snapshot backups.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether Backup creates continuous backups. True causes Backup to create continuous backups capable of point-in-time restore (PITR). False\n         (or not specified) causes Backup to create snapshot backups.</p>"
                     }
                 }
             },
@@ -621,7 +621,7 @@
                 "IamRoleArn": {
                     "target": "com.amazonaws.backup#IAMRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the IAM role that AWS Backup uses to authenticate when backing up the target\n         resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the IAM role that Backup uses to authenticate when backing up the\n         target resource; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -783,7 +783,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>"
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>"
                     }
                 },
                 "BackupVaultArn": {
@@ -853,7 +853,19 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which\n         are used to specify a lifecycle for a recovery point.</p>\n         <p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold.</p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
+                "smithy.api#documentation": "<p>Contains <code>DeleteAt</code> and <code>MoveToColdStorageAt</code> timestamps, which\n         are used to specify a lifecycle for a recovery point.</p>\n         <p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup transitions and expires backups automatically according to\n         the lifecycle that you define.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold.</p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
+            }
+        },
+        "com.amazonaws.backup#ComplianceResourceIdList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#string"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                }
             }
         },
         "com.amazonaws.backup#Condition": {
@@ -901,6 +913,87 @@
         },
         "com.amazonaws.backup#ConditionValue": {
             "type": "string"
+        },
+        "com.amazonaws.backup#ConflictException": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.backup#string"
+                },
+                "Message": {
+                    "target": "com.amazonaws.backup#string"
+                },
+                "Type": {
+                    "target": "com.amazonaws.backup#string"
+                },
+                "Context": {
+                    "target": "com.amazonaws.backup#string"
+                }
+            },
+            "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConflictException",
+                    "httpResponseCode": 409
+                },
+                "smithy.api#documentation": "<p>Backup can't perform the action that you requested until it finishes\n         performing a previous action. Try again later.</p>",
+                "smithy.api#error": "client",
+                "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.backup#ControlInputParameter": {
+            "type": "structure",
+            "members": {
+                "ParameterName": {
+                    "target": "com.amazonaws.backup#ParameterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a parameter, for example, <code>BackupPlanFrequency</code>.</p>"
+                    }
+                },
+                "ParameterValue": {
+                    "target": "com.amazonaws.backup#ParameterValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value of parameter, for example, <code>hourly</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A list of parameters for a control. A control can have zero, one, or more than one\n         parameter. An example of a control with two parameters is: \"backup plan frequency is at\n         least <code>daily</code> and the retention period is at least <code>1 year</code>\". The\n         first parameter is <code>daily</code>. The second parameter is <code>1 year</code>.</p>"
+            }
+        },
+        "com.amazonaws.backup#ControlInputParameters": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#ControlInputParameter"
+            }
+        },
+        "com.amazonaws.backup#ControlName": {
+            "type": "string"
+        },
+        "com.amazonaws.backup#ControlScope": {
+            "type": "structure",
+            "members": {
+                "ComplianceResourceIds": {
+                    "target": "com.amazonaws.backup#ComplianceResourceIdList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether the control scope includes a specific resource identified by its\n         unique Amazon Resource Name (ARN).</p>"
+                    }
+                },
+                "ComplianceResourceTypes": {
+                    "target": "com.amazonaws.backup#ResourceTypeList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether the control scope includes one or more types of resources, such as\n            <code>EFS</code> or <code>RDS</code>.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.backup#stringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Describes whether the control scope includes resources with one or more tags. Each tag\n         is a key-value pair.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A framework consists of one or more controls. Each control has its own control scope.\n         The control scope defines what the control will evaluate. Three examples of control scopes\n         are: a specific backup plan, all backup plans with a specific tag, or all backup\n         plans.</p>\n         <note>\n            <p>To set a control scope that includes all of a particular resource, leave the\n               <code>ControlScope</code> empty or do not pass it when calling\n               <code>CreateFramework</code>.</p>\n         </note>"
+            }
         },
         "com.amazonaws.backup#CopyAction": {
             "type": "structure",
@@ -968,7 +1061,7 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS)\n         volume or an Amazon Relational Database Service (Amazon RDS) database.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store\n            (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)\n         database.</p>"
                     }
                 },
                 "CreationDate": {
@@ -1013,7 +1106,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS resource to be copied; for example, an Amazon Elastic Block Store\n         (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource to be copied; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>"
                     }
                 }
             },
@@ -1076,7 +1169,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a backup plan using a backup plan name and backup rules. A backup plan is a\n         document that contains information that AWS Backup uses to schedule tasks that create\n         recovery points for resources.</p>\n         <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, an\n            <code>AlreadyExistsException</code> is returned.</p>",
+                "smithy.api#documentation": "<p>Creates a backup plan using a backup plan name and backup rules. A backup plan is a\n         document that contains information that Backup uses to schedule tasks that\n         create recovery points for resources.</p>\n         <p>If you call <code>CreateBackupPlan</code> with a plan that already exists, you receive\n         an <code>AlreadyExistsException</code> exception.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/backup/plans",
@@ -1139,7 +1232,7 @@
                 "AdvancedBackupSettings": {
                     "target": "com.amazonaws.backup#AdvancedBackupSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of <code>BackupOptions</code> settings for a resource type. This option is only\n         available for Windows VSS backup jobs.</p>"
+                        "smithy.api#documentation": "<p>A list of <code>BackupOptions</code> settings for a resource type. This option is only\n         available for Windows Volume Shadow Copy Service (VSS) backup jobs.</p>"
                     }
                 }
             }
@@ -1170,7 +1263,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a JSON document that specifies a set of resources to assign to a backup plan.\n         Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected\n            <code>Resources</code>. </p>\n         <p>For example, consider the following patterns:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Resources: \"arn:aws:ec2:region:account-id:volume/volume-id\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConditionKey:\"department\"</code>\n               </p>\n               <p>\n                  <code>ConditionValue:\"finance\"</code>\n               </p>\n               <p>\n                  <code>ConditionType:\"StringEquals\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConditionKey:\"importance\"</code>\n               </p>\n               <p>\n                  <code>ConditionValue:\"critical\"</code>\n               </p>\n               <p>\n                  <code>ConditionType:\"StringEquals\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS) volumes\n         that are tagged as <code>\"department=finance\"</code>, <code>\"importance=critical\"</code>,\n         in addition to an EBS volume with the specified volume ID.</p>\n         <p>Resources and conditions are additive in that all resources that match the pattern are\n         selected. This shouldn't be confused with a logical AND, where all conditions must match.\n         The matching patterns are logically put together using the OR operator.\n         In other words, all patterns that match are selected for backup.</p>",
+                "smithy.api#documentation": "<p>Creates a JSON document that specifies a set of resources to assign to a backup plan.\n         Resources can be included by specifying patterns for a <code>ListOfTags</code> and selected\n            <code>Resources</code>. </p>\n         <p>For example, consider the following patterns:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>Resources: \"arn:aws:ec2:region:account-id:volume/volume-id\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConditionKey:\"department\"</code>\n               </p>\n               <p>\n                  <code>ConditionValue:\"finance\"</code>\n               </p>\n               <p>\n                  <code>ConditionType:\"StringEquals\"</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>ConditionKey:\"importance\"</code>\n               </p>\n               <p>\n                  <code>ConditionValue:\"critical\"</code>\n               </p>\n               <p>\n                  <code>ConditionType:\"StringEquals\"</code>\n               </p>\n            </li>\n         </ul>\n         <p>Using these patterns would back up all Amazon Elastic Block Store (Amazon EBS)\n         volumes that are tagged as <code>\"department=finance\"</code>,\n            <code>\"importance=critical\"</code>, in addition to an EBS volume with the specified\n         volume ID.</p>\n         <p>Resources and conditions are additive in that all resources that match the pattern are\n         selected. This shouldn't be confused with a logical AND, where all conditions must match.\n         The matching patterns are logically put together using the OR operator.\n         In other words, all patterns that match are selected for backup.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/backup/plans/{BackupPlanId}/selections",
@@ -1254,7 +1347,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a logical container where backups are stored. A <code>CreateBackupVault</code>\n         request includes a name, optionally one or more resource tags, an encryption key, and a\n         request ID.</p>\n         <note>\n            <p>Sensitive data, such as passport numbers, should not be included the name of a backup\n            vault.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Creates a logical container where backups are stored. A <code>CreateBackupVault</code>\n         request includes a name, optionally one or more resource tags, an encryption key, and a\n         request ID.</p>\n         <note>\n            <p>Do not include sensitive data, such as passport numbers, in the name of a backup\n            vault.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/backup-vaults/{BackupVaultName}",
@@ -1269,7 +1362,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of letters, numbers, and hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1317,6 +1410,193 @@
                 }
             }
         },
+        "com.amazonaws.backup#CreateFramework": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#CreateFrameworkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#CreateFrameworkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a framework with one or more controls. A framework is a collection of controls\n         that you can use to evaluate your backup practices. By using pre-built customizable\n         controls to define your policies, you can evaluate whether your backup practices comply\n         with your policies. To get insights into the compliance status of your frameworks, you can\n         set up automatic daily reports.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/audit/frameworks",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#CreateFrameworkInput": {
+            "type": "structure",
+            "members": {
+                "FrameworkName": {
+                    "target": "com.amazonaws.backup#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the framework. The name must be between 1 and 256 characters,\n         starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and\n         underscores (_).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "FrameworkDescription": {
+                    "target": "com.amazonaws.backup#FrameworkDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the framework with a maximum of 1,024 characters.</p>"
+                    }
+                },
+                "FrameworkControls": {
+                    "target": "com.amazonaws.backup#FrameworkControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the controls that make up the framework. Each control in the list has a name,\n         input parameters, and scope.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>CreateFrameworkInput</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                },
+                "FrameworkTags": {
+                    "target": "com.amazonaws.backup#stringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that you can assign to help organize the frameworks that you create. Each tag\n         is a key-value pair.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#CreateFrameworkOutput": {
+            "type": "structure",
+            "members": {
+                "FrameworkName": {
+                    "target": "com.amazonaws.backup#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the framework. The name must be between 1 and 256 characters,\n         starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and\n         underscores (_).</p>"
+                    }
+                },
+                "FrameworkArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#CreateReportPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#CreateReportPlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#CreateReportPlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a report plan. A report plan is a document that contains information about the\n         contents of the report and where Backup will deliver it.</p>\n         <p>If you call <code>CreateReportPlan</code> with a plan that already exists, you receive\n         an <code>AlreadyExistsException</code> exception.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/audit/report-plans",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#CreateReportPlanInput": {
+            "type": "structure",
+            "members": {
+                "ReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the report plan. The name must be between 1 and 256 characters,\n         starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and\n         underscores (_).</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportPlanDescription": {
+                    "target": "com.amazonaws.backup#ReportPlanDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the report plan with a maximum of 1,024 characters.</p>"
+                    }
+                },
+                "ReportDeliveryChannel": {
+                    "target": "com.amazonaws.backup#ReportDeliveryChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains information about where and how to deliver your reports,\n         specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your\n         reports.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportSetting": {
+                    "target": "com.amazonaws.backup#ReportSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the report template for the report. Reports are built using a report\n         template. The report templates are:</p>\n         <p>\n            <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportPlanTags": {
+                    "target": "com.amazonaws.backup#stringMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata that you can assign to help organize the frameworks that you create. Each tag\n         is a key-value pair.</p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>CreateReportPlanInput</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#CreateReportPlanOutput": {
+            "type": "structure",
+            "members": {
+                "ReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the report plan.</p>"
+                    }
+                },
+                "ReportPlanArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.backup#CronExpression": {
             "type": "string"
         },
@@ -1334,6 +1614,12 @@
                     "target": "com.amazonaws.backup#CreateBackupVault"
                 },
                 {
+                    "target": "com.amazonaws.backup#CreateFramework"
+                },
+                {
+                    "target": "com.amazonaws.backup#CreateReportPlan"
+                },
+                {
                     "target": "com.amazonaws.backup#DeleteBackupPlan"
                 },
                 {
@@ -1349,7 +1635,13 @@
                     "target": "com.amazonaws.backup#DeleteBackupVaultNotifications"
                 },
                 {
+                    "target": "com.amazonaws.backup#DeleteFramework"
+                },
+                {
                     "target": "com.amazonaws.backup#DeleteRecoveryPoint"
+                },
+                {
+                    "target": "com.amazonaws.backup#DeleteReportPlan"
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeBackupJob"
@@ -1359,6 +1651,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeCopyJob"
+                },
+                {
+                    "target": "com.amazonaws.backup#DescribeFramework"
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeGlobalSettings"
@@ -1371,6 +1666,12 @@
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeRegionSettings"
+                },
+                {
+                    "target": "com.amazonaws.backup#DescribeReportJob"
+                },
+                {
+                    "target": "com.amazonaws.backup#DescribeReportPlan"
                 },
                 {
                     "target": "com.amazonaws.backup#DescribeRestoreJob"
@@ -1427,6 +1728,9 @@
                     "target": "com.amazonaws.backup#ListCopyJobs"
                 },
                 {
+                    "target": "com.amazonaws.backup#ListFrameworks"
+                },
+                {
                     "target": "com.amazonaws.backup#ListProtectedResources"
                 },
                 {
@@ -1434,6 +1738,12 @@
                 },
                 {
                     "target": "com.amazonaws.backup#ListRecoveryPointsByResource"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListReportJobs"
+                },
+                {
+                    "target": "com.amazonaws.backup#ListReportPlans"
                 },
                 {
                     "target": "com.amazonaws.backup#ListRestoreJobs"
@@ -1454,6 +1764,9 @@
                     "target": "com.amazonaws.backup#StartCopyJob"
                 },
                 {
+                    "target": "com.amazonaws.backup#StartReportJob"
+                },
+                {
                     "target": "com.amazonaws.backup#StartRestoreJob"
                 },
                 {
@@ -1469,6 +1782,9 @@
                     "target": "com.amazonaws.backup#UpdateBackupPlan"
                 },
                 {
+                    "target": "com.amazonaws.backup#UpdateFramework"
+                },
+                {
                     "target": "com.amazonaws.backup#UpdateGlobalSettings"
                 },
                 {
@@ -1476,6 +1792,9 @@
                 },
                 {
                     "target": "com.amazonaws.backup#UpdateRegionSettings"
+                },
+                {
+                    "target": "com.amazonaws.backup#UpdateReportPlan"
                 }
             ],
             "traits": {
@@ -1490,7 +1809,7 @@
                     "name": "backup"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<fullname>AWS Backup</fullname>\n         <p>AWS Backup is a unified backup service designed to protect AWS services and their\n         associated data. AWS Backup simplifies the creation, migration, restoration, and deletion\n         of backups, while also providing reporting and auditing.</p>",
+                "smithy.api#documentation": "<fullname>Backup</fullname>\n         <p>Backup is a unified backup service designed to protect Amazon Web Services\n         services and their associated data. Backup simplifies the creation, migration,\n         restoration, and deletion of backups, while also providing reporting and\n         auditing.</p>",
                 "smithy.api#title": "AWS Backup"
             }
         },
@@ -1685,7 +2004,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1698,7 +2017,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1747,6 +2066,50 @@
                 }
             }
         },
+        "com.amazonaws.backup#DeleteFramework": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DeleteFrameworkInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the framework specified by a framework name.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/audit/frameworks/{FrameworkName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#DeleteFrameworkInput": {
+            "type": "structure",
+            "members": {
+                "FrameworkName": {
+                    "target": "com.amazonaws.backup#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a framework.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.backup#DeleteRecoveryPoint": {
             "type": "operation",
             "input": {
@@ -1788,7 +2151,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1797,6 +2160,51 @@
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
                         "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a recovery point; for example,\n            <code>arn:aws:backup:us-east-1:123456789012:recovery-point:1EB3B5E7-9EB0-435A-A80B-108B488B0D45</code>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#DeleteReportPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DeleteReportPlanInput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the report plan specified by a report plan name.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/audit/report-plans/{ReportPlanName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#DeleteReportPlanInput": {
+            "type": "structure",
+            "members": {
+                "ReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a report plan.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1826,7 +2234,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A dependent AWS service or resource returned an error to the AWS Backup service, and the\n         action cannot be completed.</p>",
+                "smithy.api#documentation": "<p>A dependent Amazon Web Services service or resource returned an error to the Backup service, and the action cannot be completed.</p>",
                 "smithy.api#error": "server"
             }
         },
@@ -1871,7 +2279,7 @@
                 "BackupJobId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Uniquely identifies a request to AWS Backup to back up a resource.</p>",
+                        "smithy.api#documentation": "<p>Uniquely identifies a request to Backup to back up a resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1890,13 +2298,13 @@
                 "BackupJobId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Uniquely identifies a request to AWS Backup to back up a resource.</p>"
+                        "smithy.api#documentation": "<p>Uniquely identifies a request to Backup to back up a resource.</p>"
                     }
                 },
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>"
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>"
                     }
                 },
                 "BackupVaultArn": {
@@ -1968,7 +2376,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS resource to be backed up; for example, an Amazon Elastic Block Store\n         (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource to be backed up; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>"
                     }
                 },
                 "BytesTransferred": {
@@ -1998,7 +2406,7 @@
                 "BackupType": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Represents the actual backup type selected for a backup job. For example, if a\n         successful WindowsVSS backup was taken, <code>BackupType</code> returns \"WindowsVSS\". If\n            <code>BackupType</code> is empty, then the backup type that was is a regular\n         backup.</p>"
+                        "smithy.api#documentation": "<p>Represents the actual backup type selected for a backup job. For example, if a\n         successful Windows Volume Shadow Copy Service (VSS) backup was taken,\n            <code>BackupType</code> returns <code>\"WindowsVSS\"</code>. If <code>BackupType</code> is\n         empty, then the backup type was a regular backup.</p>"
                     }
                 }
             }
@@ -2041,7 +2449,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2145,6 +2553,103 @@
                 }
             }
         },
+        "com.amazonaws.backup#DescribeFramework": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DescribeFrameworkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#DescribeFrameworkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the framework details for the specified <code>FrameworkName</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/audit/frameworks/{FrameworkName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#DescribeFrameworkInput": {
+            "type": "structure",
+            "members": {
+                "FrameworkName": {
+                    "target": "com.amazonaws.backup#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a framework.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#DescribeFrameworkOutput": {
+            "type": "structure",
+            "members": {
+                "FrameworkName": {
+                    "target": "com.amazonaws.backup#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a framework.</p>"
+                    }
+                },
+                "FrameworkArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
+                    }
+                },
+                "FrameworkDescription": {
+                    "target": "com.amazonaws.backup#FrameworkDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the framework.</p>"
+                    }
+                },
+                "FrameworkControls": {
+                    "target": "com.amazonaws.backup#FrameworkControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the controls that make up the framework. Each control in the list has a name,\n         input parameters, and scope.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a framework is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "DeploymentStatus": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment status of a framework. The statuses are:</p>\n         <p>\n            <code>CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED |\n            FAILED</code>\n         </p>"
+                    }
+                },
+                "FrameworkStatus": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A framework consists of one or more controls. Each control governs a resource, such as\n         backup plans, backup selections, backup vaults, or recovery points. You can also turn\n            Config recording on or off for each resource. The statuses are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>ACTIVE</code> when recording is turned on for all resources governed by the\n               framework.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PARTIALLY_ACTIVE</code> when recording is turned off for at least one\n               resource governed by the framework.</p>\n            </li>\n            <li>\n               <p>\n                  <code>INACTIVE</code> when recording is turned off for all resources governed by\n               the framework.</p>\n            </li>\n            <li>\n               <p>\n                  <code>UNAVAILABLE</code> when Backup is unable to validate recording\n               status at this time.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>DescribeFrameworkOutput</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.backup#DescribeGlobalSettings": {
             "type": "operation",
             "input": {
@@ -2162,7 +2667,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the global settings of the AWS account, including whether it is opted in to\n         cross-account backup.</p>",
+                "smithy.api#documentation": "<p>Describes whether the Amazon Web Services account is opted in to cross-account backup.\n         Returns an error if the account is not a member of an Organizations organization.\n         Example: <code>describe-global-settings --region us-west-2</code>\n         </p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/global-settings",
@@ -2180,13 +2685,13 @@
                 "GlobalSettings": {
                     "target": "com.amazonaws.backup#GlobalSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of resources along with the opt-in preferences for the account.</p>"
+                        "smithy.api#documentation": "<p>The status of the flag <code>isCrossAccountBackupEnabled</code>.</p>"
                     }
                 },
                 "LastUpdateTime": {
                     "target": "com.amazonaws.backup#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time that the global settings were last updated. This update is in Unix\n         format and Coordinated Universal Time (UTC). The value of <code>LastUpdateTime</code> is\n         accurate to milliseconds. For example, the value 1516925490.087 represents Friday, January\n         26, 2018 12:11:30.087 AM.</p>"
+                        "smithy.api#documentation": "<p>The date and time that the flag <code>isCrossAccountBackupEnabled</code> was last\n         updated. This update is in Unix format and Coordinated Universal Time (UTC). The value of\n            <code>LastUpdateTime</code> is accurate to milliseconds. For example, the value\n         1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
                     }
                 }
             }
@@ -2214,7 +2719,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns information about a saved resource, including the last time it was backed up,\n         its Amazon Resource Name (ARN), and the AWS service type of the saved resource.</p>",
+                "smithy.api#documentation": "<p>Returns information about a saved resource, including the last time it was backed up,\n         its Amazon Resource Name (ARN), and the Amazon Web Services service type of the saved\n         resource.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resources/{ResourceArn}",
@@ -2248,7 +2753,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS resource saved as a recovery point; for example, an EBS volume or an\n         Amazon RDS database.</p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource saved as a recovery point; for example, an\n            Amazon EBS volume or an Amazon RDS database.</p>"
                     }
                 },
                 "LastBackupTime": {
@@ -2297,7 +2802,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2336,7 +2841,7 @@
                 "SourceBackupVaultArn": {
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the source vault where the\n         resource was originally backed up in; for example,\n            <code>arn:aws:backup:us-east-1:123456789012:vault:BackupVault</code>. If the recovery is\n         restored to the same AWS account or Region, this value will be <code>null</code>.</p>"
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies the source vault where the\n         resource was originally backed up in; for example,\n            <code>arn:aws:backup:us-east-1:123456789012:vault:BackupVault</code>. If the recovery is\n         restored to the same Amazon Web Services account or Region, this value will be\n            <code>null</code>.</p>"
                     }
                 },
                 "ResourceArn": {
@@ -2348,7 +2853,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS resource to save as a recovery point; for example, an Amazon Elastic\n         Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)\n         database.</p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource to save as a recovery point; for example, an\n            Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.</p>"
                     }
                 },
                 "CreatedBy": {
@@ -2366,7 +2871,13 @@
                 "Status": {
                     "target": "com.amazonaws.backup#RecoveryPointStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status code specifying the state of the recovery point.</p>\n         <note>\n            <p>A partial status indicates that the recovery point was not successfully re-created\n            and must be retried.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A status code specifying the state of the recovery point.</p>\n         <p>\n            <code>PARTIAL</code> status indicates Backup could not create the recovery\n         point before the backup window closed. To increase your backup plan window using the API,\n         see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html\">UpdateBackupPlan</a>. You can also increase your backup plan window using the\n         Console by choosing and editing your backup plan.</p>\n         <p>\n            <code>EXPIRED</code> status indicates that the recovery point has exceeded its retention\n         period, but Backup lacks permission or is otherwise unable to delete it. To\n         manually delete these recovery points, see <a href=\"https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups\"> Step 3:\n            Delete the recovery points</a> in the <i>Clean up resources</i>\n         section of <i>Getting started</i>.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A status message explaining the reason for the recovery point deletion failure.</p>"
                     }
                 },
                 "CreationDate": {
@@ -2396,7 +2907,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups that are transitioned to cold storage must be stored in cold storage for a\n         minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than\n         the “transition to cold after days” setting. The “transition to cold after days” setting\n         cannot be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup transitions and expires backups automatically according to\n         the lifecycle that you define. </p>\n         <p>Backups that are transitioned to cold storage must be stored in cold storage for a\n         minimum of 90 days. Therefore, the “expire after days” setting must be 90 days greater than\n         the “transition to cold after days” setting. The “transition to cold after days” setting\n         cannot be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
                     }
                 },
                 "EncryptionKeyArn": {
@@ -2439,7 +2950,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the current service opt-in settings for the Region. If service-opt-in is enabled\n         for a service, AWS Backup tries to protect that service's resources in this Region, when\n         the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS\n         Backup does not try to protect that service's resources in this Region, AWS Backup does not\n         try to protect that service's resources in this Region.</p>",
+                "smithy.api#documentation": "<p>Returns the current service opt-in settings for the Region. If service opt-in is enabled\n         for a service, Backup tries to protect that service's resources in this Region,\n         when the resource is included in an on-demand backup or scheduled backup plan. Otherwise,\n            Backup does not try to protect that service's resources in this\n         Region.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/account-settings",
@@ -2458,6 +2969,113 @@
                     "target": "com.amazonaws.backup#ResourceTypeOptInPreference",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns a list of all services along with the opt-in preferences in the Region.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#DescribeReportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DescribeReportJobInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#DescribeReportJobOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the details associated with creating a report as specified by its\n            <code>ReportJobId</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/audit/report-jobs/{ReportJobId}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#DescribeReportJobInput": {
+            "type": "structure",
+            "members": {
+                "ReportJobId": {
+                    "target": "com.amazonaws.backup#ReportJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the report job. A unique, randomly generated, Unicode, UTF-8 encoded\n         string that is at most 1,024 bytes long. The report job ID cannot be edited.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#DescribeReportJobOutput": {
+            "type": "structure",
+            "members": {
+                "ReportJob": {
+                    "target": "com.amazonaws.backup#ReportJob",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of information about a report job, including its completion and creation times,\n         report destination, unique report job ID, Amazon Resource Name (ARN), report template,\n         status, and status message.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#DescribeReportPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#DescribeReportPlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#DescribeReportPlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all report plans for an Amazon Web Services account and Amazon Web Services Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/audit/report-plans/{ReportPlanName}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.backup#DescribeReportPlanInput": {
+            "type": "structure",
+            "members": {
+                "ReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a report plan.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#DescribeReportPlanOutput": {
+            "type": "structure",
+            "members": {
+                "ReportPlan": {
+                    "target": "com.amazonaws.backup#ReportPlan",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns details about the report plan that is specified by its name. These details\n         include the report plan's Amazon Resource Name (ARN), description, settings, delivery\n         channel, deployment status, creation time, and last attempted and successful run\n         times.</p>"
                     }
                 }
             }
@@ -2546,7 +3164,7 @@
                 "Status": {
                     "target": "com.amazonaws.backup#RestoreJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>Status code specifying the state of the job that is initiated by AWS Backup to restore a\n         recovery point.</p>"
+                        "smithy.api#documentation": "<p>Status code specifying the state of the job that is initiated by Backup to\n         restore a recovery point.</p>"
                     }
                 },
                 "StatusMessage": {
@@ -2619,7 +3237,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified continuous backup recovery point from AWS Backup and releases\n         control of that continuous backup to the source service, such as Amazon RDS. The source\n         service will continue to create and retain continuous backups using the lifecycle that you\n         specified in your original backup plan.</p>\n         <p>Does not support snapshot backup recovery points.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified continuous backup recovery point from Backup and\n         releases control of that continuous backup to the source service, such as Amazon RDS. The source service will continue to create and retain continuous backups using the\n         lifecycle that you specified in your original backup plan.</p>\n         <p>Does not support snapshot backup recovery points.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/backup-vaults/{BackupVaultName}/recovery-points/{RecoveryPointArn}/disassociate",
@@ -2633,7 +3251,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The unique name of an AWS Backup vault. Required.</p>",
+                        "smithy.api#documentation": "<p>The unique name of an Backup vault.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2641,7 +3259,7 @@
                 "RecoveryPointArn": {
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup recovery point.\n         Required.</p>",
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies an Backup recovery\n         point.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2701,6 +3319,115 @@
                         "smithy.api#documentation": "<p>The body of a backup plan template in JSON format.</p>\n         <note>\n            <p>This is a signed JSON document that cannot be modified before being passed to\n               <code>GetBackupPlanFromJSON.</code>\n            </p>\n         </note>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.backup#FormatList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#string"
+            }
+        },
+        "com.amazonaws.backup#Framework": {
+            "type": "structure",
+            "members": {
+                "FrameworkName": {
+                    "target": "com.amazonaws.backup#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a framework. This name is between 1 and 256 characters, starting with\n         a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).</p>"
+                    }
+                },
+                "FrameworkArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
+                    }
+                },
+                "FrameworkDescription": {
+                    "target": "com.amazonaws.backup#FrameworkDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the framework with a maximum 1,024 characters.</p>"
+                    }
+                },
+                "NumberOfControls": {
+                    "target": "com.amazonaws.backup#integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of controls contained by the framework.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a framework is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "DeploymentStatus": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment status of a framework. The statuses are:</p>\n         <p>\n            <code>CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED |\n            FAILED</code>\n         </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a framework. Frameworks contain controls, which\n         evaluate and report on your backup events and resources. Frameworks generate daily\n         compliance results.</p>"
+            }
+        },
+        "com.amazonaws.backup#FrameworkControl": {
+            "type": "structure",
+            "members": {
+                "ControlName": {
+                    "target": "com.amazonaws.backup#ControlName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a control. This name is between 1 and 256 characters.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ControlInputParameters": {
+                    "target": "com.amazonaws.backup#ControlInputParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of <code>ParameterName</code> and <code>ParameterValue</code> pairs.</p>"
+                    }
+                },
+                "ControlScope": {
+                    "target": "com.amazonaws.backup#ControlScope",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The scope of a control. The control scope defines what the control will evaluate. Three\n         examples of control scopes are: a specific backup plan, all backup plans with a specific\n         tag, or all backup plans. For more information, see <code>ControlScope</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about all of the controls of a framework. Each framework\n         must contain at least one control.</p>"
+            }
+        },
+        "com.amazonaws.backup#FrameworkControls": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#FrameworkControl"
+            }
+        },
+        "com.amazonaws.backup#FrameworkDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.backup#FrameworkList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#Framework"
+            }
+        },
+        "com.amazonaws.backup#FrameworkName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z][_a-zA-Z0-9]*$"
             }
         },
         "com.amazonaws.backup#GetBackupPlan": {
@@ -3052,7 +3779,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3120,7 +3847,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3194,7 +3921,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -3243,7 +3970,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the AWS resource types supported by AWS Backup.</p>",
+                "smithy.api#documentation": "<p>Returns the Amazon Web Services resource types supported by Backup.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/supported-resource-types",
@@ -3257,7 +3984,7 @@
                 "ResourceTypes": {
                     "target": "com.amazonaws.backup#ResourceTypes",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a string with the supported AWS resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Contains a string with the supported Amazon Web Services resource types:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for Storage Gateway</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -3360,7 +4087,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>AWS Backup is already performing an action on this recovery point. It can't perform the\n         action you requested until the first action finishes. Try again later.</p>",
+                "smithy.api#documentation": "<p>Backup is already performing an action on this recovery point. It can't\n         perform the action you requested until the first action finishes. Try again later.</p>",
                 "smithy.api#error": "client"
             }
         },
@@ -3479,7 +4206,7 @@
                 "ByBackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns only backup jobs that will be stored in the specified backup vault. Backup\n         vaults are identified by names that are unique to the account used to create them and the\n         AWS Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
+                        "smithy.api#documentation": "<p>Returns only backup jobs that will be stored in the specified backup vault. Backup\n         vaults are identified by names that are unique to the account used to create them and the\n            Amazon Web Services Region where they are created. They consist of lowercase letters,\n         numbers, and hyphens.</p>",
                         "smithy.api#httpQuery": "backupVaultName"
                     }
                 },
@@ -3500,14 +4227,14 @@
                 "ByResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns only backup jobs for the specified resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Returns only backup jobs for the specified resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for Storage Gateway</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "resourceType"
                     }
                 },
                 "ByAccountId": {
                     "target": "com.amazonaws.backup#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID to list the jobs from. Returns only backup jobs associated with the\n         specified account ID.</p>\n         <p>If used from an AWS Organizations management account, passing <code>*</code> returns all\n         jobs across the organization.</p>",
+                        "smithy.api#documentation": "<p>The account ID to list the jobs from. Returns only backup jobs associated with the\n         specified account ID.</p>\n         <p>If used from an Organizations management account, passing <code>*</code> returns\n         all jobs across the organization.</p>",
                         "smithy.api#httpQuery": "accountId"
                     }
                 }
@@ -3706,7 +4433,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of existing backup plans for an authenticated account. The list is\n         populated only if the advanced option is set for the backup plan. The list contains\n         information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion dates,\n         version IDs, plan names, and creator request IDs.</p>",
+                "smithy.api#documentation": "<p>Returns a list of all active backup plans for an authenticated account. The list\n         contains information such as Amazon Resource Names (ARNs), plan IDs, creation and deletion\n         dates, version IDs, plan names, and creator request IDs.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/backup/plans",
@@ -3995,7 +4722,7 @@
                 "ByResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Returns only backup jobs for the specified resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Returns only backup jobs for the specified resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for Storage Gateway</p>\n            </li>\n         </ul>",
                         "smithy.api#httpQuery": "resourceType"
                     }
                 },
@@ -4032,6 +4759,72 @@
                 }
             }
         },
+        "com.amazonaws.backup#ListFrameworks": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListFrameworksInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListFrameworksOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of all frameworks for an Amazon Web Services account and Amazon Web Services Region.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/audit/frameworks",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListFrameworksInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#MaxFrameworkInputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of desired results from 1 to 1000. Optional. If unspecified, the query will\n         return 1 MB of data.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#ListFrameworksOutput": {
+            "type": "structure",
+            "members": {
+                "Frameworks": {
+                    "target": "com.amazonaws.backup#FrameworkList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of frameworks with details for each framework, including the framework name,\n         Amazon Resource Name (ARN), description, number of controls, creation time, and deployment\n         status.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.backup#ListOfTags": {
             "type": "list",
             "member": {
@@ -4055,7 +4848,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns an array of resources successfully backed up by AWS Backup, including the time\n         the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource\n         type.</p>",
+                "smithy.api#documentation": "<p>Returns an array of resources successfully backed up by Backup, including\n         the time the resource was saved, an Amazon Resource Name (ARN) of the resource, and a\n         resource type.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resources",
@@ -4094,7 +4887,7 @@
                 "Results": {
                     "target": "com.amazonaws.backup#ProtectedResourcesList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of resources successfully backed up by AWS Backup including the time the\n         resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource\n         type.</p>"
+                        "smithy.api#documentation": "<p>An array of resources successfully backed up by Backup including the time\n         the resource was saved, an Amazon Resource Name (ARN) of the resource, and a resource\n         type.</p>"
                     }
                 },
                 "NextToken": {
@@ -4148,7 +4941,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>\n         <note>\n            <p>Backup vault name might not be available when a supported service creates the\n            backup.</p>\n         </note>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4244,7 +5037,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns detailed information about recovery points of the type specified by a resource\n         Amazon Resource Name (ARN).</p>",
+                "smithy.api#documentation": "<p>Returns detailed information about all the recovery points of the type specified by a\n         resource Amazon Resource Name (ARN).</p>\n         <note>\n            <p>For Amazon EFS and Amazon EC2, this action only lists recovery points\n            created by Backup.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/resources/{ResourceArn}/recovery-points",
@@ -4279,7 +5072,7 @@
                 "MaxResults": {
                     "target": "com.amazonaws.backup#MaxResults",
                     "traits": {
-                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>",
+                        "smithy.api#documentation": "<p>The maximum number of items to be returned.</p>\n         <note>\n            <p>Amazon RDS requires a value of at least 20.</p>\n         </note>",
                         "smithy.api#httpQuery": "maxResults"
                     }
                 }
@@ -4297,7 +5090,167 @@
                 "RecoveryPoints": {
                     "target": "com.amazonaws.backup#RecoveryPointByResourceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of objects that contain detailed information about recovery points of the\n         specified resource type.</p>"
+                        "smithy.api#documentation": "<p>An array of objects that contain detailed information about recovery points of the\n         specified resource type.</p>\n         <note>\n            <p>Only Amazon EFS and Amazon EC2 recovery points return\n            BackupVaultName.</p>\n         </note>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#ListReportJobs": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListReportJobsInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListReportJobsOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns details about your report jobs.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/audit/report-jobs",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListReportJobsInput": {
+            "type": "structure",
+            "members": {
+                "ByReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only report jobs with the specified report plan name.</p>",
+                        "smithy.api#httpQuery": "ReportPlanName"
+                    }
+                },
+                "ByCreationBefore": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only report jobs that were created before the date and time specified in Unix\n         format and Coordinated Universal Time (UTC). For example, the value 1516925490 represents\n         Friday, January 26, 2018 12:11:30 AM.</p>",
+                        "smithy.api#httpQuery": "CreationBefore"
+                    }
+                },
+                "ByCreationAfter": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only report jobs that were created after the date and time specified in Unix\n         format and Coordinated Universal Time (UTC). For example, the value 1516925490 represents\n         Friday, January 26, 2018 12:11:30 AM.</p>",
+                        "smithy.api#httpQuery": "CreationAfter"
+                    }
+                },
+                "ByStatus": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns only report jobs that are in the specified status. The statuses are:</p>\n         <p>\n            <code>CREATED | RUNNING | COMPLETED | FAILED</code>\n         </p>",
+                        "smithy.api#httpQuery": "Status"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of desired results from 1 to 1000. Optional. If unspecified, the query will\n         return 1 MB of data.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#ListReportJobsOutput": {
+            "type": "structure",
+            "members": {
+                "ReportJobs": {
+                    "target": "com.amazonaws.backup#ReportJobList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about your report jobs in JSON format.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#ListReportPlans": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#ListReportPlansInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#ListReportPlansOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of your report plans. For detailed information about a single report\n         plan, use <code>DescribeReportPlan</code>.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/audit/report-plans",
+                    "code": 200
+                },
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.backup#ListReportPlansInput": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.backup#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of desired results from 1 to 1000. Optional. If unspecified, the query will\n         return 1 MB of data.</p>",
+                        "smithy.api#httpQuery": "MaxResults"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>",
+                        "smithy.api#httpQuery": "NextToken"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#ListReportPlansOutput": {
+            "type": "structure",
+            "members": {
+                "ReportPlans": {
+                    "target": "com.amazonaws.backup#ReportPlanList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of your report plans with detailed information for each plan. This information\n         includes the Amazon Resource Name (ARN), report plan name, description, settings, delivery\n         channel, deployment status, creation time, and last times the report plan attempted to and\n         successfully ran.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An identifier that was returned from the previous call to this operation, which can be\n         used to return the next set of items in the list.</p>"
                     }
                 }
             }
@@ -4325,7 +5278,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of jobs that AWS Backup initiated to restore a saved resource, including\n         metadata about the recovery process.</p>",
+                "smithy.api#documentation": "<p>Returns a list of jobs that Backup initiated to restore a saved resource,\n         including details about the recovery process.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/restore-jobs",
@@ -4426,7 +5379,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of key-value pairs assigned to a target recovery point, backup plan, or\n         backup vault.</p>\n         <note>\n            <p>\n               <code>ListTags</code> are currently only supported with Amazon EFS backups.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns a list of key-value pairs assigned to a target recovery point, backup plan, or\n         backup vault.</p>\n         <note>\n            <p>\n               <code>ListTags</code> are currently only supported with Amazon EFS\n            backups.</p>\n         </note>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/tags/{ResourceArn}",
@@ -4493,6 +5446,16 @@
         "com.amazonaws.backup#Long2": {
             "type": "long"
         },
+        "com.amazonaws.backup#MaxFrameworkInputs": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1000
+                }
+            }
+        },
         "com.amazonaws.backup#MaxResults": {
             "type": "integer",
             "traits": {
@@ -4548,6 +5511,12 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.backup#ParameterName": {
+            "type": "string"
+        },
+        "com.amazonaws.backup#ParameterValue": {
+            "type": "string"
+        },
         "com.amazonaws.backup#ProtectedResource": {
             "type": "structure",
             "members": {
@@ -4560,7 +5529,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume\n         or an Amazon Relational Database Service (Amazon RDS) database. For VSS Windows backups,\n         the only supported resource type is Amazon EC2.</p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource; for example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For\n         Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is\n            Amazon EC2.</p>"
                     }
                 },
                 "LastBackupTime": {
@@ -4615,7 +5584,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4663,7 +5632,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -4678,7 +5647,7 @@
                 "BackupVaultEvents": {
                     "target": "com.amazonaws.backup#BackupVaultEvents",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup\n         vault.</p>",
+                        "smithy.api#documentation": "<p>An array of events that indicate the status of jobs to back up resources to the backup\n         vault.</p>\n         <note>\n            <p>The following events are supported:</p>\n            <p>\n               <code>BACKUP_JOB_STARTED</code>, <code>BACKUP_JOB_COMPLETED</code>,</p>\n            <p>\n               <code>COPY_JOB_STARTED</code>, <code>COPY_JOB_SUCCESSFUL</code>,\n               <code>COPY_JOB_FAILED</code>,</p>\n            <p>\n               <code>RESTORE_JOB_STARTED</code>, <code>RESTORE_JOB_COMPLETED</code>, and\n               <code>RECOVERY_POINT_MODIFIED</code>.</p>\n            <p>To find failed backup jobs, use <code>BACKUP_JOB_COMPLETED</code> and filter using\n            event metadata.</p>\n            <p>Other events in the following list are deprecated.</p>\n         </note>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4696,7 +5665,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>"
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>"
                     }
                 },
                 "BackupVaultArn": {
@@ -4720,7 +5689,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of AWS resource saved as a recovery point; for example, an Amazon Elastic Block\n         Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.\n         For VSS Windows backups, the only supported resource type is Amazon EC2.</p>"
+                        "smithy.api#documentation": "<p>The type of Amazon Web Services resource saved as a recovery point; for example, an\n            Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only\n         supported resource type is Amazon EC2.</p>"
                     }
                 },
                 "CreatedBy": {
@@ -4739,6 +5708,12 @@
                     "target": "com.amazonaws.backup#RecoveryPointStatus",
                     "traits": {
                         "smithy.api#documentation": "<p>A status code specifying the state of the recovery point.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message explaining the reason of the recovery point deletion failure.</p>"
                     }
                 },
                 "CreationDate": {
@@ -4768,7 +5743,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup transitions and expires backups automatically according to\n         the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
                     }
                 },
                 "EncryptionKeyArn": {
@@ -4821,6 +5796,12 @@
                         "smithy.api#documentation": "<p>A status code specifying the state of the recovery point.</p>"
                     }
                 },
+                "StatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message explaining the reason of the recovery point deletion failure.</p>"
+                    }
+                },
                 "EncryptionKeyArn": {
                     "target": "com.amazonaws.backup#ARN",
                     "traits": {
@@ -4836,7 +5817,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>"
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>"
                     }
                 }
             },
@@ -4879,7 +5860,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains information about the backup plan and rule that AWS Backup used to initiate the\n         recovery point backup.</p>"
+                "smithy.api#documentation": "<p>Contains information about the backup plan and rule that Backup used to\n         initiate the recovery point backup.</p>"
             }
         },
         "com.amazonaws.backup#RecoveryPointStatus": {
@@ -4903,6 +5884,221 @@
                         "name": "EXPIRED"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.backup#ReportDeliveryChannel": {
+            "type": "structure",
+            "members": {
+                "S3BucketName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the S3 bucket that receives your reports.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "S3KeyPrefix": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix for where Backup Audit Manager delivers your reports to Amazon S3. The prefix is this part of the following path:\n            s3://your-bucket-name/<code>prefix</code>/Backup/us-west-2/year/month/day/report-name.\n         If not specified, there is no prefix.</p>"
+                    }
+                },
+                "Formats": {
+                    "target": "com.amazonaws.backup#FormatList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the format of your reports: <code>CSV</code>, <code>JSON</code>, or both. If\n         not specified, the default format is <code>CSV</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information from your report plan about where to deliver your reports,\n         specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your\n         reports.</p>"
+            }
+        },
+        "com.amazonaws.backup#ReportDestination": {
+            "type": "structure",
+            "members": {
+                "S3BucketName": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the Amazon S3 bucket that receives your reports.</p>"
+                    }
+                },
+                "S3Keys": {
+                    "target": "com.amazonaws.backup#stringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key that uniquely identifies your reports in your S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains information from your report job about your report destination.</p>"
+            }
+        },
+        "com.amazonaws.backup#ReportJob": {
+            "type": "structure",
+            "members": {
+                "ReportJobId": {
+                    "target": "com.amazonaws.backup#ReportJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier for a report job. A unique, randomly generated, Unicode, UTF-8 encoded\n         string that is at most 1,024 bytes long. Report job IDs cannot be edited.</p>"
+                    }
+                },
+                "ReportPlanArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
+                    }
+                },
+                "ReportTemplate": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the report template for the report. Reports are built using a report\n         template. The report templates are: </p>\n         <p>\n            <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code>\n         </p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a report job is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "CompletionTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a report job is completed, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CompletionTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of a report job. The statuses are:</p>\n         <p>\n            <code>CREATED | RUNNING | COMPLETED | FAILED</code>\n         </p>\n         <p>\n            <code>COMPLETED</code> means that the report is available for your review at your\n         designated destination. If the status is <code>FAILED</code>, review the\n            <code>StatusMessage</code> for the reason.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A message explaining the status of the report job.</p>"
+                    }
+                },
+                "ReportDestination": {
+                    "target": "com.amazonaws.backup#ReportDestination",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The S3 bucket name and S3 keys for the destination where the report job publishes the\n         report.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a report job. A report job compiles a report based\n         on a report plan and publishes it to Amazon S3.</p>"
+            }
+        },
+        "com.amazonaws.backup#ReportJobId": {
+            "type": "string"
+        },
+        "com.amazonaws.backup#ReportJobList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#ReportJob"
+            }
+        },
+        "com.amazonaws.backup#ReportPlan": {
+            "type": "structure",
+            "members": {
+                "ReportPlanArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
+                    }
+                },
+                "ReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the report plan. This name is between 1 and 256 characters starting\n         with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores\n         (_).</p>"
+                    }
+                },
+                "ReportPlanDescription": {
+                    "target": "com.amazonaws.backup#ReportPlanDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the report plan with a maximum 1,024 characters.</p>"
+                    }
+                },
+                "ReportSetting": {
+                    "target": "com.amazonaws.backup#ReportSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the report template for the report. Reports are built using a report\n         template. The report templates are:</p>\n         <p>\n            <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code>\n         </p>"
+                    }
+                },
+                "ReportDeliveryChannel": {
+                    "target": "com.amazonaws.backup#ReportDeliveryChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Contains information about where and how to deliver your reports, specifically your\n            Amazon S3 bucket name, S3 key prefix, and the formats of your reports.</p>"
+                    }
+                },
+                "DeploymentStatus": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The deployment status of a report plan. The statuses are:</p>\n         <p>\n            <code>CREATE_IN_PROGRESS | UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS |\n         COMPLETED</code>\n         </p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a report plan is created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                },
+                "LastAttemptedExecutionTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a report job associated with this report plan last attempted to\n         run, in Unix format and Coordinated Universal Time (UTC). The value of\n            <code>LastAttemptedExecutionTime</code> is accurate to milliseconds. For example, the\n         value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
+                    }
+                },
+                "LastSuccessfulExecutionTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a report job associated with this report plan last successfully\n         ran, in Unix format and Coordinated Universal Time (UTC). The value of\n            <code>LastSuccessfulExecutionTime</code> is accurate to milliseconds. For example, the\n         value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a report plan.</p>"
+            }
+        },
+        "com.amazonaws.backup#ReportPlanDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "\\S"
+            }
+        },
+        "com.amazonaws.backup#ReportPlanList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#ReportPlan"
+            }
+        },
+        "com.amazonaws.backup#ReportPlanName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[a-zA-Z][_a-zA-Z0-9]*$"
+            }
+        },
+        "com.amazonaws.backup#ReportSetting": {
+            "type": "structure",
+            "members": {
+                "ReportTemplate": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the report template for the report. Reports are built using a report\n         template. The report templates are:</p>\n         <p>\n            <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code>\n         </p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains detailed information about a report setting.</p>"
             }
         },
         "com.amazonaws.backup#ResourceArns": {
@@ -4942,6 +6138,12 @@
             "type": "string",
             "traits": {
                 "smithy.api#pattern": "^[a-zA-Z0-9\\-\\_\\.]{1,50}$"
+            }
+        },
+        "com.amazonaws.backup#ResourceTypeList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#ARN"
             }
         },
         "com.amazonaws.backup#ResourceTypeOptInPreference": {
@@ -5031,7 +6233,7 @@
                 "Status": {
                     "target": "com.amazonaws.backup#RestoreJobStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>A status code specifying the state of the job initiated by AWS Backup to restore a\n         recovery point.</p>"
+                        "smithy.api#documentation": "<p>A status code specifying the state of the job initiated by Backup to restore\n         a recovery point.</p>"
                     }
                 },
                 "StatusMessage": {
@@ -5073,7 +6275,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store\n         (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For VSS\n         Windows backups, the only supported resource type is Amazon EC2.</p>"
+                        "smithy.api#documentation": "<p>The resource type of the listed restore jobs; for example, an Amazon Elastic Block Store\n            (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS) database.\n         For Windows Volume Shadow Copy Service (VSS) backups, the only supported resource type is\n            Amazon EC2.</p>"
                     }
                 }
             },
@@ -5152,7 +6354,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5173,7 +6375,7 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customer chosen string that can be used to distinguish between calls to\n            <code>StartBackupJob</code>.</p>"
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartBackupJob</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>"
                     }
                 },
                 "StartWindowMinutes": {
@@ -5191,7 +6393,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup will transition and expire backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup will transition and expire backups automatically according\n         to the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
                     }
                 },
                 "RecoveryPointTags": {
@@ -5203,7 +6405,7 @@
                 "BackupOptions": {
                     "target": "com.amazonaws.backup#BackupOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the backup option for a selected resource. This option is only available for\n         Windows VSS backup jobs.</p>\n         <p>Valid values: Set to <code>\"WindowsVSS”:“enabled\"</code> to enable WindowsVSS backup\n         option and create a VSS Windows backup. Set to “WindowsVSS”:”disabled” to create a regular\n         backup. The WindowsVSS option is not enabled by default.</p>"
+                        "smithy.api#documentation": "<p>Specifies the backup option for a selected resource. This option is only available for\n         Windows Volume Shadow Copy Service (VSS) backup jobs.</p>\n         <p>Valid values: Set to <code>\"WindowsVSS\":\"enabled\"</code> to enable the\n            <code>WindowsVSS</code> backup option and create a Windows VSS backup. Set to\n            <code>\"WindowsVSS\"\"disabled\"</code> to create a regular backup. The\n            <code>WindowsVSS</code> option is not enabled by default.</p>"
                     }
                 }
             }
@@ -5214,7 +6416,7 @@
                 "BackupJobId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Uniquely identifies a request to AWS Backup to back up a resource.</p>"
+                        "smithy.api#documentation": "<p>Uniquely identifies a request to Backup to back up a resource.</p>"
                     }
                 },
                 "RecoveryPointArn": {
@@ -5282,7 +6484,7 @@
                 "SourceBackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical source container where backups are stored. Backup vaults are\n         identified by names that are unique to the account used to create them and the AWS Region\n         where they are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical source container where backups are stored. Backup vaults are\n         identified by names that are unique to the account used to create them and the Amazon Web Services Region where they are created. They consist of lowercase letters, numbers,\n         and hyphens.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -5303,7 +6505,7 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customer chosen string that can be used to distinguish between calls to\n            <code>StartCopyJob</code>.</p>"
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartCopyJob</code>. Retrying a successful request with the same idempotency\n         token results in a success message with no action taken.</p>"
                     }
                 },
                 "Lifecycle": {
@@ -5324,6 +6526,69 @@
                     "target": "com.amazonaws.backup#timestamp",
                     "traits": {
                         "smithy.api#documentation": "<p>The date and time that a copy job is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#StartReportJob": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#StartReportJobInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#StartReportJobOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts an on-demand report job for the specified report plan.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/audit/report-jobs/{ReportPlanName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#StartReportJobInput": {
+            "type": "structure",
+            "members": {
+                "ReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a report plan.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartReportJobInput</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#StartReportJobOutput": {
+            "type": "structure",
+            "members": {
+                "ReportJobId": {
+                    "target": "com.amazonaws.backup#ReportJobId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the report job. A unique, randomly generated, Unicode, UTF-8 encoded\n         string that is at most 1,024 bytes long. The report job ID cannot be edited.</p>"
                     }
                 }
             }
@@ -5373,27 +6638,27 @@
                 "Metadata": {
                     "target": "com.amazonaws.backup#Metadata",
                     "traits": {
-                        "smithy.api#documentation": "<p>A set of metadata key-value pairs. Contains information, such as a resource name,\n         required to restore a recovery point.</p>\n         <p> You can get configuration metadata about a resource at the time it was backed up by\n         calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those\n         provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a\n         resource. For example, you might need to provide a new resource name if the original\n         already exists.</p>\n         <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon\n         EFS) instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>file-system-id</code>: The ID of the Amazon EFS file system that is backed\n               up by AWS Backup. Returned in <code>GetRecoveryPointRestoreMetadata</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Encrypted</code>: A Boolean value that, if true, specifies that the file\n               system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code>\n               must be set to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KmsKeyId</code>: Specifies the AWS KMS key that is used to encrypt the\n               restored file system. You can specify a key from another AWS account provided that\n               key it is properly shared with your account via AWS KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformanceMode</code>: Specifies the throughput mode of the file\n               system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationToken</code>: A user-supplied value that ensures the uniqueness\n               (idempotency) of the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>newFileSystem</code>: A Boolean value that, if true, specifies that the\n               recovery point is restored to a new Amazon EFS file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ItemsToRestore </code>: An array of one to five strings where each string is\n               a file path. Use <code>ItemsToRestore</code> to restore specific files or directories\n               rather than the entire file system. This parameter is optional. For example,\n                  <code>\"itemsToRestore\":\"[\\\"/my.test\\\"]\"</code>.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A set of metadata key-value pairs. Contains information, such as a resource name,\n         required to restore a recovery point.</p>\n         <p> You can get configuration metadata about a resource at the time it was backed up by\n         calling <code>GetRecoveryPointRestoreMetadata</code>. However, values in addition to those\n         provided by <code>GetRecoveryPointRestoreMetadata</code> might be required to restore a\n         resource. For example, you might need to provide a new resource name if the original\n         already exists.</p>\n         <p>You need to specify specific metadata to restore an Amazon Elastic File System (Amazon EFS) instance:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>file-system-id</code>: The ID of the Amazon EFS file system that is\n               backed up by Backup. Returned in\n                  <code>GetRecoveryPointRestoreMetadata</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Encrypted</code>: A Boolean value that, if true, specifies that the file\n               system is encrypted. If <code>KmsKeyId</code> is specified, <code>Encrypted</code>\n               must be set to <code>true</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>KmsKeyId</code>: Specifies the Amazon Web Services KMS key that is used to\n               encrypt the restored file system. You can specify a key from another Amazon Web Services account provided that key it is properly shared with your account via Amazon Web Services KMS.</p>\n            </li>\n            <li>\n               <p>\n                  <code>PerformanceMode</code>: Specifies the throughput mode of the file\n               system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CreationToken</code>: A user-supplied value that ensures the uniqueness\n               (idempotency) of the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>newFileSystem</code>: A Boolean value that, if true, specifies that the\n               recovery point is restored to a new Amazon EFS file system.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ItemsToRestore</code>: An array of one to five strings where each string is\n               a file path. Use <code>ItemsToRestore</code> to restore specific files or directories\n               rather than the entire file system. This parameter is optional. For example,\n                  <code>\"itemsToRestore\":\"[\\\"/my.test\\\"]\"</code>.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "IamRoleArn": {
                     "target": "com.amazonaws.backup#IAMRoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create the target\n         recovery point; for example, <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM role that Backup uses to create\n         the target recovery point; for example,\n            <code>arn:aws:iam::123456789012:role/S3Access</code>.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "IdempotencyToken": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>A customer chosen string that can be used to distinguish between calls to\n            <code>StartRestoreJob</code>.</p>"
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>StartRestoreJob</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>"
                     }
                 },
                 "ResourceType": {
                     "target": "com.amazonaws.backup#ResourceType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for AWS Storage Gateway</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Starts a job to restore a recovery point for one of the following resources:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>DynamoDB</code> for Amazon DynamoDB</p>\n            </li>\n            <li>\n               <p>\n                  <code>EBS</code> for Amazon Elastic Block Store</p>\n            </li>\n            <li>\n               <p>\n                  <code>EC2</code> for Amazon Elastic Compute Cloud</p>\n            </li>\n            <li>\n               <p>\n                  <code>EFS</code> for Amazon Elastic File System</p>\n            </li>\n            <li>\n               <p>\n                  <code>RDS</code> for Amazon Relational Database Service</p>\n            </li>\n            <li>\n               <p>\n                  <code>Aurora</code> for Amazon Aurora</p>\n            </li>\n            <li>\n               <p>\n                  <code>Storage Gateway</code> for Storage Gateway</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -5446,7 +6711,7 @@
                 "BackupJobId": {
                     "target": "com.amazonaws.backup#string",
                     "traits": {
-                        "smithy.api#documentation": "<p>Uniquely identifies a request to AWS Backup to back up a resource.</p>",
+                        "smithy.api#documentation": "<p>Uniquely identifies a request to Backup to back up a resource.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5670,7 +6935,7 @@
                 "CreationDate": {
                     "target": "com.amazonaws.backup#timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The date and time a backup plan is updated, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                        "smithy.api#documentation": "<p>The date and time a backup plan is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationDate</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
                 },
                 "VersionId": {
@@ -5683,6 +6948,99 @@
                     "target": "com.amazonaws.backup#AdvancedBackupSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Contains a list of <code>BackupOptions</code> for each resource type.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#UpdateFramework": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#UpdateFrameworkInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#UpdateFrameworkOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing framework identified by its <code>FrameworkName</code> with the\n         input document in JSON format.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/audit/frameworks/{FrameworkName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateFrameworkInput": {
+            "type": "structure",
+            "members": {
+                "FrameworkName": {
+                    "target": "com.amazonaws.backup#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a framework. This name is between 1 and 256 characters, starting with\n         a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "FrameworkDescription": {
+                    "target": "com.amazonaws.backup#FrameworkDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the framework with a maximum 1,024 characters.</p>"
+                    }
+                },
+                "FrameworkControls": {
+                    "target": "com.amazonaws.backup#FrameworkControls",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of the controls that make up the framework. Each control in the list has a name,\n         input parameters, and scope.</p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>UpdateFrameworkInput</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#UpdateFrameworkOutput": {
+            "type": "structure",
+            "members": {
+                "FrameworkName": {
+                    "target": "com.amazonaws.backup#FrameworkName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of a framework. This name is between 1 and 256 characters, starting with\n         a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores (_).</p>"
+                    }
+                },
+                "FrameworkArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a framework is created, in Unix format and Coordinated Universal\n         Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds. For\n         example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
                     }
                 }
             }
@@ -5707,7 +7065,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the current global settings for the AWS account. Use the\n            <code>DescribeGlobalSettings</code> API to determine the current settings.</p>",
+                "smithy.api#documentation": "<p>Updates whether the Amazon Web Services account is opted in to cross-account backup.\n         Returns an error if the account is not an Organizations management account. Use the\n            <code>DescribeGlobalSettings</code> API to determine the current settings.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/global-settings",
@@ -5721,7 +7079,7 @@
                 "GlobalSettings": {
                     "target": "com.amazonaws.backup#GlobalSettings",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of resources along with the opt-in preferences for the account.</p>"
+                        "smithy.api#documentation": "<p>A value for <code>isCrossAccountBackupEnabled</code> and a Region. Example:\n            <code>update-global-settings --global-settings isCrossAccountBackupEnabled=false\n            --region us-west-2</code>.</p>"
                     }
                 }
             }
@@ -5749,7 +7107,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sets the transition lifecycle of a recovery point.</p>\n         <p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold.</p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>\n         <p>Does not support continuous backups.</p>",
+                "smithy.api#documentation": "<p>Sets the transition lifecycle of a recovery point.</p>\n         <p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup transitions and expires backups automatically according to\n         the lifecycle that you define.</p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold.</p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>\n         <p>Does not support continuous backups.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/backup-vaults/{BackupVaultName}/recovery-points/{RecoveryPointArn}",
@@ -5764,7 +7122,7 @@
                 "BackupVaultName": {
                     "target": "com.amazonaws.backup#BackupVaultName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the AWS Region where they\n         are created. They consist of lowercase letters, numbers, and hyphens.</p>",
+                        "smithy.api#documentation": "<p>The name of a logical container where backups are stored. Backup vaults are identified\n         by names that are unique to the account used to create them and the Amazon Web Services\n         Region where they are created. They consist of lowercase letters, numbers, and\n         hyphens.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5780,7 +7138,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup transitions and expires backups automatically according to\n         the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>"
                     }
                 }
             }
@@ -5803,7 +7161,7 @@
                 "Lifecycle": {
                     "target": "com.amazonaws.backup#Lifecycle",
                     "traits": {
-                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. AWS Backup transitions and expires backups automatically according to the\n         lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
+                        "smithy.api#documentation": "<p>The lifecycle defines when a protected resource is transitioned to cold storage and when\n         it expires. Backup transitions and expires backups automatically according to\n         the lifecycle that you define. </p>\n         <p>Backups transitioned to cold storage must be stored in cold storage for a minimum of 90\n         days. Therefore, the “expire after days” setting must be 90 days greater than the\n         “transition to cold after days” setting. The “transition to cold after days” setting cannot\n         be changed after a backup has been transitioned to cold. </p>\n         <p>Only Amazon EFS file system backups can be transitioned to cold storage.</p>"
                     }
                 },
                 "CalculatedLifecycle": {
@@ -5831,7 +7189,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the current service opt-in settings for the Region. If service-opt-in is enabled\n         for a service, AWS Backup tries to protect that service's resources in this Region, when\n         the resource is included in an on-demand backup or scheduled backup plan. Otherwise, AWS\n         Backup does not try to protect that service's resources in this Region. Use the\n            <code>DescribeRegionSettings</code> API to determine the resource types that are\n         supported.</p>",
+                "smithy.api#documentation": "<p>Updates the current service opt-in settings for the Region. If service-opt-in is enabled\n         for a service, Backup tries to protect that service's resources in this Region,\n         when the resource is included in an on-demand backup or scheduled backup plan. Otherwise,\n            Backup does not try to protect that service's resources in this Region. Use\n         the <code>DescribeRegionSettings</code> API to determine the resource types that are\n         supported.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/account-settings",
@@ -5850,14 +7208,128 @@
                 }
             }
         },
+        "com.amazonaws.backup#UpdateReportPlan": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.backup#UpdateReportPlanInput"
+            },
+            "output": {
+                "target": "com.amazonaws.backup#UpdateReportPlanOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.backup#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.backup#InvalidParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#MissingParameterValueException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.backup#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates an existing report plan identified by its <code>ReportPlanName</code> with the\n         input document in JSON format.</p>",
+                "smithy.api#http": {
+                    "method": "PUT",
+                    "uri": "/audit/report-plans/{ReportPlanName}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.backup#UpdateReportPlanInput": {
+            "type": "structure",
+            "members": {
+                "ReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the report plan. This name is between 1 and 256 characters, starting\n         with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and underscores\n         (_).</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "ReportPlanDescription": {
+                    "target": "com.amazonaws.backup#ReportPlanDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional description of the report plan with a maximum 1,024 characters.</p>"
+                    }
+                },
+                "ReportDeliveryChannel": {
+                    "target": "com.amazonaws.backup#ReportDeliveryChannel",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that contains information about where to deliver your reports, specifically\n         your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.</p>"
+                    }
+                },
+                "ReportSetting": {
+                    "target": "com.amazonaws.backup#ReportSetting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Identifies the report template for the report. Reports are built using a report\n         template. The report templates are:</p>\n         <p>\n            <code>BACKUP_JOB_REPORT | COPY_JOB_REPORT | RESTORE_JOB_REPORT</code>\n         </p>"
+                    }
+                },
+                "IdempotencyToken": {
+                    "target": "com.amazonaws.backup#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A customer-chosen string that you can use to distinguish between otherwise identical\n         calls to <code>UpdateReportPlanInput</code>. Retrying a successful request with the same\n         idempotency token results in a success message with no action taken.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.backup#UpdateReportPlanOutput": {
+            "type": "structure",
+            "members": {
+                "ReportPlanName": {
+                    "target": "com.amazonaws.backup#ReportPlanName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The unique name of the report plan.</p>"
+                    }
+                },
+                "ReportPlanArn": {
+                    "target": "com.amazonaws.backup#ARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of the ARN\n         depends on the resource type.</p>"
+                    }
+                },
+                "CreationTime": {
+                    "target": "com.amazonaws.backup#timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that a report plan is created, in Unix format and Coordinated\n         Universal Time (UTC). The value of <code>CreationTime</code> is accurate to milliseconds.\n         For example, the value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087\n         AM.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.backup#WindowMinutes": {
             "type": "long",
             "traits": {
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.backup#integer": {
+            "type": "integer"
+        },
         "com.amazonaws.backup#string": {
             "type": "string"
+        },
+        "com.amazonaws.backup#stringList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.backup#string"
+            }
+        },
+        "com.amazonaws.backup#stringMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.backup#string"
+            },
+            "value": {
+                "target": "com.amazonaws.backup#string"
+            }
         },
         "com.amazonaws.backup#timestamp": {
             "type": "timestamp"
