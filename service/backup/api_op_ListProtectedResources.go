@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns an array of resources successfully backed up by AWS Backup, including
-// the time the resource was saved, an Amazon Resource Name (ARN) of the resource,
-// and a resource type.
+// Returns an array of resources successfully backed up by Backup, including the
+// time the resource was saved, an Amazon Resource Name (ARN) of the resource, and
+// a resource type.
 func (c *Client) ListProtectedResources(ctx context.Context, params *ListProtectedResourcesInput, optFns ...func(*Options)) (*ListProtectedResourcesOutput, error) {
 	if params == nil {
 		params = &ListProtectedResourcesInput{}
@@ -52,8 +52,8 @@ type ListProtectedResourcesOutput struct {
 	// token.
 	NextToken *string
 
-	// An array of resources successfully backed up by AWS Backup including the time
-	// the resource was saved, an Amazon Resource Name (ARN) of the resource, and a
+	// An array of resources successfully backed up by Backup including the time the
+	// resource was saved, an Amazon Resource Name (ARN) of the resource, and a
 	// resource type.
 	Results []types.ProtectedResource
 

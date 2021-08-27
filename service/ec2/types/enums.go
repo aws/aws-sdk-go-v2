@@ -2094,6 +2094,25 @@ func (InstanceMetadataOptionsState) Values() []InstanceMetadataOptionsState {
 	}
 }
 
+type InstanceMetadataProtocolState string
+
+// Enum values for InstanceMetadataProtocolState
+const (
+	InstanceMetadataProtocolStateDisabled InstanceMetadataProtocolState = "disabled"
+	InstanceMetadataProtocolStateEnabled  InstanceMetadataProtocolState = "enabled"
+)
+
+// Values returns all known values for InstanceMetadataProtocolState. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (InstanceMetadataProtocolState) Values() []InstanceMetadataProtocolState {
+	return []InstanceMetadataProtocolState{
+		"disabled",
+		"enabled",
+	}
+}
+
 type InstanceStateName string
 
 // Enum values for InstanceStateName

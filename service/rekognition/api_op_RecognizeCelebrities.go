@@ -64,19 +64,24 @@ type RecognizeCelebritiesInput struct {
 type RecognizeCelebritiesOutput struct {
 
 	// Details about each celebrity found in the image. Amazon Rekognition can detect a
-	// maximum of 64 celebrities in an image.
+	// maximum of 64 celebrities in an image. Each celebrity object includes the
+	// following attributes: Face, Confidence, Emotions, Landmarks, Pose, Quality,
+	// Smile, Id, KnownGender, MatchConfidence, Name, Urls.
 	CelebrityFaces []types.Celebrity
 
-	// The orientation of the input image (counterclockwise direction). If your
-	// application displays the image, you can use this value to correct the
-	// orientation. The bounding box coordinates returned in CelebrityFaces and
-	// UnrecognizedFaces represent face locations before the image orientation is
-	// corrected. If the input image is in .jpeg format, it might contain exchangeable
-	// image (Exif) metadata that includes the image's orientation. If so, and the Exif
-	// metadata for the input image populates the orientation field, the value of
-	// OrientationCorrection is null. The CelebrityFaces and UnrecognizedFaces bounding
-	// box coordinates represent face locations after Exif metadata is used to correct
-	// the image orientation. Images in .png format don't contain Exif metadata.
+	// Support for estimating image orientation using the the OrientationCorrection
+	// field has ceased as of August 2021. Any returned values for this field included
+	// in an API response will always be NULL. The orientation of the input image
+	// (counterclockwise direction). If your application displays the image, you can
+	// use this value to correct the orientation. The bounding box coordinates returned
+	// in CelebrityFaces and UnrecognizedFaces represent face locations before the
+	// image orientation is corrected. If the input image is in .jpeg format, it might
+	// contain exchangeable image (Exif) metadata that includes the image's
+	// orientation. If so, and the Exif metadata for the input image populates the
+	// orientation field, the value of OrientationCorrection is null. The
+	// CelebrityFaces and UnrecognizedFaces bounding box coordinates represent face
+	// locations after Exif metadata is used to correct the image orientation. Images
+	// in .png format don't contain Exif metadata.
 	OrientationCorrection types.OrientationCorrection
 
 	// Details about each unrecognized face in the image.

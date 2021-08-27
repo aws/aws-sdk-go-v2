@@ -10,8 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the current global settings for the AWS account. Use the
-// DescribeGlobalSettings API to determine the current settings.
+// Updates whether the Amazon Web Services account is opted in to cross-account
+// backup. Returns an error if the account is not an Organizations management
+// account. Use the DescribeGlobalSettings API to determine the current settings.
 func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalSettingsInput, optFns ...func(*Options)) (*UpdateGlobalSettingsOutput, error) {
 	if params == nil {
 		params = &UpdateGlobalSettingsInput{}
@@ -29,7 +30,9 @@ func (c *Client) UpdateGlobalSettings(ctx context.Context, params *UpdateGlobalS
 
 type UpdateGlobalSettingsInput struct {
 
-	// A list of resources along with the opt-in preferences for the account.
+	// A value for isCrossAccountBackupEnabled and a Region. Example:
+	// update-global-settings --global-settings isCrossAccountBackupEnabled=false
+	// --region us-west-2.
 	GlobalSettings map[string]string
 
 	noSmithyDocumentSerde

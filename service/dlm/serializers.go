@@ -718,6 +718,23 @@ func awsRestjson1_serializeDocumentCrossRegionCopyActionList(v []types.CrossRegi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCrossRegionCopyDeprecateRule(v *types.CrossRegionCopyDeprecateRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Interval != 0 {
+		ok := object.Key("Interval")
+		ok.Integer(v.Interval)
+	}
+
+	if len(v.IntervalUnit) > 0 {
+		ok := object.Key("IntervalUnit")
+		ok.String(string(v.IntervalUnit))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCrossRegionCopyRetainRule(v *types.CrossRegionCopyRetainRule, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -747,6 +764,13 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRule(v *types.CrossRegionCopyR
 	if v.CopyTags != nil {
 		ok := object.Key("CopyTags")
 		ok.Boolean(*v.CopyTags)
+	}
+
+	if v.DeprecateRule != nil {
+		ok := object.Key("DeprecateRule")
+		if err := awsRestjson1_serializeDocumentCrossRegionCopyDeprecateRule(v.DeprecateRule, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.Encrypted != nil {
@@ -784,6 +808,28 @@ func awsRestjson1_serializeDocumentCrossRegionCopyRules(v []types.CrossRegionCop
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDeprecateRule(v *types.DeprecateRule, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Count != 0 {
+		ok := object.Key("Count")
+		ok.Integer(v.Count)
+	}
+
+	if v.Interval != 0 {
+		ok := object.Key("Interval")
+		ok.Integer(v.Interval)
+	}
+
+	if len(v.IntervalUnit) > 0 {
+		ok := object.Key("IntervalUnit")
+		ok.String(string(v.IntervalUnit))
+	}
+
 	return nil
 }
 
@@ -1017,6 +1063,13 @@ func awsRestjson1_serializeDocumentSchedule(v *types.Schedule, value smithyjson.
 	if v.CrossRegionCopyRules != nil {
 		ok := object.Key("CrossRegionCopyRules")
 		if err := awsRestjson1_serializeDocumentCrossRegionCopyRules(v.CrossRegionCopyRules, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DeprecateRule != nil {
+		ok := object.Key("DeprecateRule")
+		if err := awsRestjson1_serializeDocumentDeprecateRule(v.DeprecateRule, ok); err != nil {
 			return err
 		}
 	}

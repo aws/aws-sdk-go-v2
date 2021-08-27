@@ -2599,6 +2599,17 @@ func (m *awsAwsjson11_serializeOpTestConnection) HandleSerialize(ctx context.Con
 
 	return next.HandleSerialize(ctx, in)
 }
+func awsAwsjson11_serializeDocumentArnList(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDmsTransferSettings(v *types.DmsTransferSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -2846,6 +2857,17 @@ func awsAwsjson11_serializeDocumentIncludeTestList(v []string, value smithyjson.
 	for i := range v {
 		av := array.Value()
 		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentIntegerList(v []int32, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.Integer(v[i])
 	}
 	return nil
 }
@@ -3362,6 +3384,13 @@ func awsAwsjson11_serializeDocumentOracleSettings(v *types.OracleSettings, value
 		ok.Boolean(*v.EnableHomogenousTablespace)
 	}
 
+	if v.ExtraArchivedLogDestIds != nil {
+		ok := object.Key("ExtraArchivedLogDestIds")
+		if err := awsAwsjson11_serializeDocumentIntegerList(v.ExtraArchivedLogDestIds, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FailTasksOnLobTruncation != nil {
 		ok := object.Key("FailTasksOnLobTruncation")
 		ok.Boolean(*v.FailTasksOnLobTruncation)
@@ -3587,6 +3616,48 @@ func awsAwsjson11_serializeDocumentPostgreSQLSettings(v *types.PostgreSQLSetting
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentRedisSettings(v *types.RedisSettings, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AuthPassword != nil {
+		ok := object.Key("AuthPassword")
+		ok.String(*v.AuthPassword)
+	}
+
+	if len(v.AuthType) > 0 {
+		ok := object.Key("AuthType")
+		ok.String(string(v.AuthType))
+	}
+
+	if v.AuthUserName != nil {
+		ok := object.Key("AuthUserName")
+		ok.String(*v.AuthUserName)
+	}
+
+	{
+		ok := object.Key("Port")
+		ok.Integer(v.Port)
+	}
+
+	if v.ServerName != nil {
+		ok := object.Key("ServerName")
+		ok.String(*v.ServerName)
+	}
+
+	if v.SslCaCertificateArn != nil {
+		ok := object.Key("SslCaCertificateArn")
+		ok.String(*v.SslCaCertificateArn)
+	}
+
+	if len(v.SslSecurityProtocol) > 0 {
+		ok := object.Key("SslSecurityProtocol")
+		ok.String(string(v.SslSecurityProtocol))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentRedshiftSettings(v *types.RedshiftSettings, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -3748,6 +3819,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	object := value.Object()
 	defer object.Close()
 
+	if v.AddColumnName != nil {
+		ok := object.Key("AddColumnName")
+		ok.Boolean(*v.AddColumnName)
+	}
+
 	if v.BucketFolder != nil {
 		ok := object.Key("BucketFolder")
 		ok.String(*v.BucketFolder)
@@ -3758,6 +3834,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 		ok.String(*v.BucketName)
 	}
 
+	if len(v.CannedAclForObjects) > 0 {
+		ok := object.Key("CannedAclForObjects")
+		ok.String(string(v.CannedAclForObjects))
+	}
+
 	if v.CdcInsertsAndUpdates != nil {
 		ok := object.Key("CdcInsertsAndUpdates")
 		ok.Boolean(*v.CdcInsertsAndUpdates)
@@ -3766,6 +3847,16 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	if v.CdcInsertsOnly != nil {
 		ok := object.Key("CdcInsertsOnly")
 		ok.Boolean(*v.CdcInsertsOnly)
+	}
+
+	if v.CdcMaxBatchInterval != nil {
+		ok := object.Key("CdcMaxBatchInterval")
+		ok.Integer(*v.CdcMaxBatchInterval)
+	}
+
+	if v.CdcMinFileSize != nil {
+		ok := object.Key("CdcMinFileSize")
+		ok.Integer(*v.CdcMinFileSize)
 	}
 
 	if v.CdcPath != nil {
@@ -3786,6 +3877,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	if v.CsvNoSupValue != nil {
 		ok := object.Key("CsvNoSupValue")
 		ok.String(*v.CsvNoSupValue)
+	}
+
+	if v.CsvNullValue != nil {
+		ok := object.Key("CsvNullValue")
+		ok.String(*v.CsvNullValue)
 	}
 
 	if v.CsvRowDelimiter != nil {
@@ -3843,9 +3939,19 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 		ok.String(*v.ExternalTableDefinition)
 	}
 
+	if v.IgnoreHeaderRows != nil {
+		ok := object.Key("IgnoreHeaderRows")
+		ok.Integer(*v.IgnoreHeaderRows)
+	}
+
 	if v.IncludeOpForFullLoad != nil {
 		ok := object.Key("IncludeOpForFullLoad")
 		ok.Boolean(*v.IncludeOpForFullLoad)
+	}
+
+	if v.MaxFileSize != nil {
+		ok := object.Key("MaxFileSize")
+		ok.Integer(*v.MaxFileSize)
 	}
 
 	if v.ParquetTimestampInMillisecond != nil {
@@ -3861,6 +3967,11 @@ func awsAwsjson11_serializeDocumentS3Settings(v *types.S3Settings, value smithyj
 	if v.PreserveTransactions != nil {
 		ok := object.Key("PreserveTransactions")
 		ok.Boolean(*v.PreserveTransactions)
+	}
+
+	if v.Rfc4180 != nil {
+		ok := object.Key("Rfc4180")
+		ok.Boolean(*v.Rfc4180)
 	}
 
 	if v.RowGroupLength != nil {
@@ -3992,6 +4103,11 @@ func awsAwsjson11_serializeDocumentTag(v *types.Tag, value smithyjson.Value) err
 	if v.Key != nil {
 		ok := object.Key("Key")
 		ok.String(*v.Key)
+	}
+
+	if v.ResourceArn != nil {
+		ok := object.Key("ResourceArn")
+		ok.String(*v.ResourceArn)
 	}
 
 	if v.Value != nil {
@@ -4220,6 +4336,13 @@ func awsAwsjson11_serializeOpDocumentCreateEndpointInput(v *CreateEndpointInput,
 	if v.PostgreSQLSettings != nil {
 		ok := object.Key("PostgreSQLSettings")
 		if err := awsAwsjson11_serializeDocumentPostgreSQLSettings(v.PostgreSQLSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RedisSettings != nil {
+		ok := object.Key("RedisSettings")
+		if err := awsAwsjson11_serializeDocumentRedisSettings(v.RedisSettings, ok); err != nil {
 			return err
 		}
 	}
@@ -5207,6 +5330,13 @@ func awsAwsjson11_serializeOpDocumentListTagsForResourceInput(v *ListTagsForReso
 		ok.String(*v.ResourceArn)
 	}
 
+	if v.ResourceArnList != nil {
+		ok := object.Key("ResourceArnList")
+		if err := awsAwsjson11_serializeDocumentArnList(v.ResourceArnList, ok); err != nil {
+			return err
+		}
+	}
+
 	return nil
 }
 
@@ -5356,6 +5486,13 @@ func awsAwsjson11_serializeOpDocumentModifyEndpointInput(v *ModifyEndpointInput,
 	if v.PostgreSQLSettings != nil {
 		ok := object.Key("PostgreSQLSettings")
 		if err := awsAwsjson11_serializeDocumentPostgreSQLSettings(v.PostgreSQLSettings, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.RedisSettings != nil {
+		ok := object.Key("RedisSettings")
+		if err := awsAwsjson11_serializeDocumentRedisSettings(v.RedisSettings, ok); err != nil {
 			return err
 		}
 	}

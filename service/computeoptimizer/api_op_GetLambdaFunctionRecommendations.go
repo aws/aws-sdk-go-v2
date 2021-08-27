@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns AWS Lambda function recommendations. AWS Compute Optimizer generates
+// Returns Lambda function recommendations. Compute Optimizer generates
 // recommendations for functions that meet a specific set of requirements. For more
 // information, see the Supported resources and requirements
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
-// the AWS Compute Optimizer User Guide.
+// the Compute Optimizer User Guide.
 func (c *Client) GetLambdaFunctionRecommendations(ctx context.Context, params *GetLambdaFunctionRecommendationsInput, optFns ...func(*Options)) (*GetLambdaFunctionRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetLambdaFunctionRecommendationsInput{}
@@ -33,13 +33,13 @@ func (c *Client) GetLambdaFunctionRecommendations(ctx context.Context, params *G
 
 type GetLambdaFunctionRecommendationsInput struct {
 
-	// The ID of the AWS account for which to return function recommendations. If your
-	// account is the management account of an organization, use this parameter to
-	// specify the member account for which you want to return function
-	// recommendations. Only one account ID can be specified per request.
+	// The ID of the Amazon Web Services account for which to return function
+	// recommendations. If your account is the management account of an organization,
+	// use this parameter to specify the member account for which you want to return
+	// function recommendations. Only one account ID can be specified per request.
 	AccountIds []string
 
-	// An array of objects that describe a filter that returns a more specific list of
+	// An array of objects to specify a filter that returns a more specific list of
 	// function recommendations.
 	Filters []types.LambdaFunctionRecommendationFilter
 
@@ -51,12 +51,12 @@ type GetLambdaFunctionRecommendationsInput struct {
 	// recommendations for the specified function version. For more information about
 	// using function versions, see Using versions
 	// (https://docs.aws.amazon.com/lambda/latest/dg/configuration-versions.html#versioning-versions-using)
-	// in the AWS Lambda Developer Guide.
+	// in the Lambda Developer Guide.
 	FunctionArns []string
 
 	// The maximum number of function recommendations to return with a single request.
 	// To retrieve the remaining results, make another request with the returned
-	// NextToken value.
+	// nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of function recommendations.

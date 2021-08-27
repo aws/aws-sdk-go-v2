@@ -1363,6 +1363,24 @@ func (CmafSegmentControl) Values() []CmafSegmentControl {
 	}
 }
 
+type CmafSegmentLengthControl string
+
+// Enum values for CmafSegmentLengthControl
+const (
+	CmafSegmentLengthControlExact       CmafSegmentLengthControl = "EXACT"
+	CmafSegmentLengthControlGopMultiple CmafSegmentLengthControl = "GOP_MULTIPLE"
+)
+
+// Values returns all known values for CmafSegmentLengthControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CmafSegmentLengthControl) Values() []CmafSegmentLengthControl {
+	return []CmafSegmentLengthControl{
+		"EXACT",
+		"GOP_MULTIPLE",
+	}
+}
+
 type CmafStreamInfResolution string
 
 // Enum values for CmafStreamInfResolution
@@ -1848,6 +1866,24 @@ func (DashIsoSegmentControl) Values() []DashIsoSegmentControl {
 	return []DashIsoSegmentControl{
 		"SINGLE_FILE",
 		"SEGMENTED_FILES",
+	}
+}
+
+type DashIsoSegmentLengthControl string
+
+// Enum values for DashIsoSegmentLengthControl
+const (
+	DashIsoSegmentLengthControlExact       DashIsoSegmentLengthControl = "EXACT"
+	DashIsoSegmentLengthControlGopMultiple DashIsoSegmentLengthControl = "GOP_MULTIPLE"
+)
+
+// Values returns all known values for DashIsoSegmentLengthControl. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DashIsoSegmentLengthControl) Values() []DashIsoSegmentLengthControl {
+	return []DashIsoSegmentLengthControl{
+		"EXACT",
+		"GOP_MULTIPLE",
 	}
 }
 
@@ -2923,6 +2959,7 @@ type H264FieldEncoding string
 const (
 	H264FieldEncodingPaff       H264FieldEncoding = "PAFF"
 	H264FieldEncodingForceField H264FieldEncoding = "FORCE_FIELD"
+	H264FieldEncodingMbaff      H264FieldEncoding = "MBAFF"
 )
 
 // Values returns all known values for H264FieldEncoding. Note that this can be
@@ -2932,6 +2969,7 @@ func (H264FieldEncoding) Values() []H264FieldEncoding {
 	return []H264FieldEncoding{
 		"PAFF",
 		"FORCE_FIELD",
+		"MBAFF",
 	}
 }
 
@@ -4167,6 +4205,24 @@ func (HlsSegmentControl) Values() []HlsSegmentControl {
 	}
 }
 
+type HlsSegmentLengthControl string
+
+// Enum values for HlsSegmentLengthControl
+const (
+	HlsSegmentLengthControlExact       HlsSegmentLengthControl = "EXACT"
+	HlsSegmentLengthControlGopMultiple HlsSegmentLengthControl = "GOP_MULTIPLE"
+)
+
+// Values returns all known values for HlsSegmentLengthControl. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (HlsSegmentLengthControl) Values() []HlsSegmentLengthControl {
+	return []HlsSegmentLengthControl{
+		"EXACT",
+		"GOP_MULTIPLE",
+	}
+}
+
 type HlsStreamInfResolution string
 
 // Enum values for HlsStreamInfResolution
@@ -4912,6 +4968,24 @@ func (M2tsBufferModel) Values() []M2tsBufferModel {
 	}
 }
 
+type M2tsDataPtsControl string
+
+// Enum values for M2tsDataPtsControl
+const (
+	M2tsDataPtsControlAuto         M2tsDataPtsControl = "AUTO"
+	M2tsDataPtsControlAlignToVideo M2tsDataPtsControl = "ALIGN_TO_VIDEO"
+)
+
+// Values returns all known values for M2tsDataPtsControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M2tsDataPtsControl) Values() []M2tsDataPtsControl {
+	return []M2tsDataPtsControl{
+		"AUTO",
+		"ALIGN_TO_VIDEO",
+	}
+}
+
 type M2tsEbpAudioInterval string
 
 // Enum values for M2tsEbpAudioInterval
@@ -5115,6 +5189,24 @@ func (M3u8AudioDuration) Values() []M3u8AudioDuration {
 	return []M3u8AudioDuration{
 		"DEFAULT_CODEC_DURATION",
 		"MATCH_VIDEO_DURATION",
+	}
+}
+
+type M3u8DataPtsControl string
+
+// Enum values for M3u8DataPtsControl
+const (
+	M3u8DataPtsControlAuto         M3u8DataPtsControl = "AUTO"
+	M3u8DataPtsControlAlignToVideo M3u8DataPtsControl = "ALIGN_TO_VIDEO"
+)
+
+// Values returns all known values for M3u8DataPtsControl. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (M3u8DataPtsControl) Values() []M3u8DataPtsControl {
+	return []M3u8DataPtsControl{
+		"AUTO",
+		"ALIGN_TO_VIDEO",
 	}
 }
 
@@ -5846,6 +5938,25 @@ func (MsSmoothAudioDeduplication) Values() []MsSmoothAudioDeduplication {
 	return []MsSmoothAudioDeduplication{
 		"COMBINE_DUPLICATE_STREAMS",
 		"NONE",
+	}
+}
+
+type MsSmoothFragmentLengthControl string
+
+// Enum values for MsSmoothFragmentLengthControl
+const (
+	MsSmoothFragmentLengthControlExact       MsSmoothFragmentLengthControl = "EXACT"
+	MsSmoothFragmentLengthControlGopMultiple MsSmoothFragmentLengthControl = "GOP_MULTIPLE"
+)
+
+// Values returns all known values for MsSmoothFragmentLengthControl. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (MsSmoothFragmentLengthControl) Values() []MsSmoothFragmentLengthControl {
+	return []MsSmoothFragmentLengthControl{
+		"EXACT",
+		"GOP_MULTIPLE",
 	}
 }
 

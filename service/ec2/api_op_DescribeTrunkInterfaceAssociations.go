@@ -12,7 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes one or more network interface trunk associations.
+// This API action is currently in limited preview only. If you are interested in
+// using this feature, contact your account manager. Describes one or more network
+// interface trunk associations.
 func (c *Client) DescribeTrunkInterfaceAssociations(ctx context.Context, params *DescribeTrunkInterfaceAssociationsInput, optFns ...func(*Options)) (*DescribeTrunkInterfaceAssociationsOutput, error) {
 	if params == nil {
 		params = &DescribeTrunkInterfaceAssociationsInput{}

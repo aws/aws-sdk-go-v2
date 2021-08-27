@@ -184,8 +184,9 @@ type LaunchType string
 
 // Enum values for LaunchType
 const (
-	LaunchTypeEc2     LaunchType = "EC2"
-	LaunchTypeFargate LaunchType = "FARGATE"
+	LaunchTypeEc2      LaunchType = "EC2"
+	LaunchTypeFargate  LaunchType = "FARGATE"
+	LaunchTypeExternal LaunchType = "EXTERNAL"
 )
 
 // Values returns all known values for LaunchType. Note that this can be expanded
@@ -195,6 +196,7 @@ func (LaunchType) Values() []LaunchType {
 	return []LaunchType{
 		"EC2",
 		"FARGATE",
+		"EXTERNAL",
 	}
 }
 

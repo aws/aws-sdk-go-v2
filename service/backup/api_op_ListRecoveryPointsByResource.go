@@ -12,8 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns detailed information about recovery points of the type specified by a
-// resource Amazon Resource Name (ARN).
+// Returns detailed information about all the recovery points of the type specified
+// by a resource Amazon Resource Name (ARN). For Amazon EFS and Amazon EC2, this
+// action only lists recovery points created by Backup.
 func (c *Client) ListRecoveryPointsByResource(ctx context.Context, params *ListRecoveryPointsByResourceInput, optFns ...func(*Options)) (*ListRecoveryPointsByResourceOutput, error) {
 	if params == nil {
 		params = &ListRecoveryPointsByResourceInput{}
@@ -37,7 +38,8 @@ type ListRecoveryPointsByResourceInput struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The maximum number of items to be returned.
+	// The maximum number of items to be returned. Amazon RDS requires a value of at
+	// least 20.
 	MaxResults *int32
 
 	// The next item following a partial list of returned items. For example, if a
@@ -58,7 +60,8 @@ type ListRecoveryPointsByResourceOutput struct {
 	NextToken *string
 
 	// An array of objects that contain detailed information about recovery points of
-	// the specified resource type.
+	// the specified resource type. Only Amazon EFS and Amazon EC2 recovery points
+	// return BackupVaultName.
 	RecoveryPoints []types.RecoveryPointByResource
 
 	// Metadata pertaining to the operation's result.
@@ -141,7 +144,8 @@ var _ ListRecoveryPointsByResourceAPIClient = (*Client)(nil)
 // ListRecoveryPointsByResourcePaginatorOptions is the paginator options for
 // ListRecoveryPointsByResource
 type ListRecoveryPointsByResourcePaginatorOptions struct {
-	// The maximum number of items to be returned.
+	// The maximum number of items to be returned. Amazon RDS requires a value of at
+	// least 20.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -140,6 +140,9 @@ type Celebrity struct {
 	// A unique identifier for the celebrity.
 	Id *string
 
+	// The known gender identity for the celebrity that matches the provided ID.
+	KnownGender *KnownGender
+
 	// The confidence, in percentage, that Amazon Rekognition has that the recognized
 	// face is the celebrity.
 	MatchConfidence *float32
@@ -204,6 +207,11 @@ type ComparedFace struct {
 	// Level of confidence that what the bounding box contains is a face.
 	Confidence *float32
 
+	// The emotions that appear to be expressed on the face, and the confidence level
+	// in the determination. Valid values include "Happy", "Sad", "Angry", "Confused",
+	// "Disgusted", "Surprised", "Calm", "Unknown", and "Fear".
+	Emotions []Emotion
+
 	// An array of facial landmarks.
 	Landmarks []Landmark
 
@@ -212,6 +220,10 @@ type ComparedFace struct {
 
 	// Identifies face image brightness and sharpness.
 	Quality *ImageQuality
+
+	// Indicates whether or not the face is smiling, and the confidence level in the
+	// determination.
+	Smile *Smile
 
 	noSmithyDocumentSerde
 }
@@ -749,6 +761,15 @@ type KinesisVideoStream struct {
 
 	// ARN of the Kinesis video stream stream that streams the source video.
 	Arn *string
+
+	noSmithyDocumentSerde
+}
+
+// The known gender identity for the celebrity that matches the provided ID.
+type KnownGender struct {
+
+	// A string value of the KnownGender info about the Celebrity.
+	Type KnownGenderType
 
 	noSmithyDocumentSerde
 }

@@ -7922,6 +7922,11 @@ func awsAwsjson11_deserializeDocumentCelebrity(v **types.Celebrity, value interf
 				sv.Id = ptr.String(jtv)
 			}
 
+		case "KnownGender":
+			if err := awsAwsjson11_deserializeDocumentKnownGender(&sv.KnownGender, value); err != nil {
+				return err
+			}
+
 		case "MatchConfidence":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -8291,6 +8296,11 @@ func awsAwsjson11_deserializeDocumentComparedFace(v **types.ComparedFace, value 
 				}
 			}
 
+		case "Emotions":
+			if err := awsAwsjson11_deserializeDocumentEmotions(&sv.Emotions, value); err != nil {
+				return err
+			}
+
 		case "Landmarks":
 			if err := awsAwsjson11_deserializeDocumentLandmarks(&sv.Landmarks, value); err != nil {
 				return err
@@ -8303,6 +8313,11 @@ func awsAwsjson11_deserializeDocumentComparedFace(v **types.ComparedFace, value 
 
 		case "Quality":
 			if err := awsAwsjson11_deserializeDocumentImageQuality(&sv.Quality, value); err != nil {
+				return err
+			}
+
+		case "Smile":
+			if err := awsAwsjson11_deserializeDocumentSmile(&sv.Smile, value); err != nil {
 				return err
 			}
 
@@ -10983,6 +10998,46 @@ func awsAwsjson11_deserializeDocumentKinesisVideoStream(v **types.KinesisVideoSt
 					return fmt.Errorf("expected KinesisVideoArn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentKnownGender(v **types.KnownGender, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.KnownGender
+	if *v == nil {
+		sv = &types.KnownGender{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Type":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KnownGenderType to be of type string, got %T instead", value)
+				}
+				sv.Type = types.KnownGenderType(jtv)
 			}
 
 		default:
@@ -15983,6 +16038,11 @@ func awsAwsjson11_deserializeOpDocumentGetCelebrityInfoOutput(v **GetCelebrityIn
 
 	for key, value := range shape {
 		switch key {
+		case "KnownGender":
+			if err := awsAwsjson11_deserializeDocumentKnownGender(&sv.KnownGender, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)

@@ -6,16 +6,17 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/rekognition/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the name and additional information about a celebrity based on his or her
-// Amazon Rekognition ID. The additional information is returned as an array of
-// URLs. If there is no additional information about the celebrity, this list is
-// empty. For more information, see Recognizing Celebrities in an Image in the
-// Amazon Rekognition Developer Guide. This operation requires permissions to
-// perform the rekognition:GetCelebrityInfo action.
+// Gets the name and additional information about a celebrity based on their Amazon
+// Rekognition ID. The additional information is returned as an array of URLs. If
+// there is no additional information about the celebrity, this list is empty. For
+// more information, see Recognizing Celebrities in an Image in the Amazon
+// Rekognition Developer Guide. This operation requires permissions to perform the
+// rekognition:GetCelebrityInfo action.
 func (c *Client) GetCelebrityInfo(ctx context.Context, params *GetCelebrityInfoInput, optFns ...func(*Options)) (*GetCelebrityInfoOutput, error) {
 	if params == nil {
 		params = &GetCelebrityInfoInput{}
@@ -43,6 +44,9 @@ type GetCelebrityInfoInput struct {
 }
 
 type GetCelebrityInfoOutput struct {
+
+	// Retrieves the known gender for the celebrity.
+	KnownGender *types.KnownGender
 
 	// The name of the celebrity.
 	Name *string

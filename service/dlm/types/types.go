@@ -45,10 +45,10 @@ type CreateRule struct {
 	// snapshots in the same Region as the source resource, specify CLOUD. To create
 	// snapshots on the same Outpost as the source resource, specify OUTPOST_LOCAL. If
 	// you omit this parameter, CLOUD is used by default. If the policy targets
-	// resources in an AWS Region, then you must create snapshots in the same Region as
-	// the source resource. If the policy targets resources on an Outpost, then you can
-	// create snapshots on the same Outpost as the source resource, or in the Region of
-	// that Outpost.
+	// resources in an Amazon Web Services Region, then you must create snapshots in
+	// the same Region as the source resource. If the policy targets resources on an
+	// Outpost, then you can create snapshots on the same Outpost as the source
+	// resource, or in the Region of that Outpost.
 	Location LocationValues
 
 	// The time, in UTC, to start the operation. The supported format is hh:mm. The
@@ -78,6 +78,22 @@ type CrossRegionCopyAction struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies an AMI deprecation rule for cross-Region AMI copies created by a
+// cross-Region copy rule.
+type CrossRegionCopyDeprecateRule struct {
+
+	// The period after which to deprecate the cross-Region AMI copies. The period must
+	// be less than or equal to the cross-Region AMI copy retention period, and it
+	// can't be greater than 10 years. This is equivalent to 120 months, 520 weeks, or
+	// 3650 days.
+	Interval int32
+
+	// The unit of time in which to measure the Interval.
+	IntervalUnit RetentionIntervalUnitValues
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the retention rule for cross-Region snapshot copies.
 type CrossRegionCopyRetainRule struct {
 
@@ -102,26 +118,51 @@ type CrossRegionCopyRule struct {
 	// This member is required.
 	Encrypted *bool
 
-	// The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use
-	// for EBS encryption. If this parameter is not specified, your AWS managed CMK for
-	// EBS is used.
+	// The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this
+	// parameter is not specified, the default KMS key for the account is used.
 	CmkArn *string
 
-	// Copy all user-defined tags from the source snapshot to the copied snapshot.
+	// Indicates whether to copy all user-defined tags from the source snapshot to the
+	// cross-Region snapshot copy.
 	CopyTags *bool
 
-	// The retention rule.
+	// The AMI deprecation rule for cross-Region AMI copies created by the rule.
+	DeprecateRule *CrossRegionCopyDeprecateRule
+
+	// The retention rule that indicates how long snapshot copies are to be retained in
+	// the destination Region.
 	RetainRule *CrossRegionCopyRetainRule
 
-	// The Amazon Resource Name (ARN) of the target AWS Outpost for the snapshot
-	// copies. If you specify an ARN, you must omit TargetRegion. You cannot specify a
-	// target Region and a target Outpost in the same rule.
+	// The target Region or the Amazon Resource Name (ARN) of the target Outpost for
+	// the snapshot copies. Use this parameter instead of TargetRegion. Do not specify
+	// both.
 	Target *string
 
-	// The target Region for the snapshot copies. If you specify a target Region, you
-	// must omit Target. You cannot specify a target Region and a target Outpost in the
-	// same rule.
+	// Avoid using this parameter when creating new policies. Instead, use Target to
+	// specify a target Region or a target Outpost for snapshot copies. For policies
+	// created before the Target parameter was introduced, this parameter indicates the
+	// target Region for snapshot copies.
 	TargetRegion *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies an AMI deprecation rule for a schedule.
+type DeprecateRule struct {
+
+	// If the schedule has a count-based retention rule, this parameter specifies the
+	// number of oldest AMIs to deprecate. The count must be less than or equal to the
+	// schedule's retention count, and it can't be greater than 1000.
+	Count int32
+
+	// If the schedule has an age-based retention rule, this parameter specifies the
+	// period after which to deprecate AMIs created by the schedule. The period must be
+	// less than or equal to the schedule's retention period, and it can't be greater
+	// than 10 years. This is equivalent to 120 months, 520 weeks, or 3650 days.
+	Interval int32
+
+	// The unit of time in which to measure the Interval.
+	IntervalUnit RetentionIntervalUnitValues
 
 	noSmithyDocumentSerde
 }
@@ -138,9 +179,8 @@ type EncryptionConfiguration struct {
 	// This member is required.
 	Encrypted *bool
 
-	// The Amazon Resource Name (ARN) of the AWS KMS customer master key (CMK) to use
-	// for EBS encryption. If this parameter is not specified, your AWS managed CMK for
-	// EBS is used.
+	// The Amazon Resource Name (ARN) of the KMS key to use for EBS encryption. If this
+	// parameter is not specified, the default KMS key for the account is used.
 	CmkArn *string
 
 	noSmithyDocumentSerde
@@ -164,9 +204,9 @@ type EventParameters struct {
 	// This member is required.
 	EventType EventTypeValues
 
-	// The IDs of the AWS accounts that can trigger policy by sharing snapshots with
-	// your account. The policy only runs if one of the specified AWS accounts shares a
-	// snapshot with your account.
+	// The IDs of the Amazon Web Services accounts that can trigger policy by sharing
+	// snapshots with your account. The policy only runs if one of the specified Amazon
+	// Web Services accounts shares a snapshot with your account.
 	//
 	// This member is required.
 	SnapshotOwner []string
@@ -177,7 +217,7 @@ type EventParameters struct {
 // Specifies an event that triggers an event-based policy.
 type EventSource struct {
 
-	// The source of the event. Currently only managed AWS CloudWatch Events rules are
+	// The source of the event. Currently only managed CloudWatch Events rules are
 	// supported.
 	//
 	// This member is required.
@@ -314,14 +354,15 @@ type PolicyDetails struct {
 	// of Amazon EBS snapshots. Specify IMAGE_MANAGEMENT to create a lifecycle policy
 	// that manages the lifecycle of EBS-backed AMIs. Specify EVENT_BASED_POLICY  to
 	// create an event-based policy that performs specific actions when a defined event
-	// occurs in your AWS account. The default is EBS_SNAPSHOT_MANAGEMENT.
+	// occurs in your Amazon Web Services account. The default is
+	// EBS_SNAPSHOT_MANAGEMENT.
 	PolicyType PolicyTypeValues
 
 	// The location of the resources to backup. If the source resources are located in
-	// an AWS Region, specify CLOUD. If the source resources are located on an AWS
-	// Outpost in your account, specify OUTPOST. If you specify OUTPOST, Amazon Data
-	// Lifecycle Manager backs up all resources of the specified type with matching
-	// target tags across all of the Outposts in your account.
+	// an Amazon Web Services Region, specify CLOUD. If the source resources are
+	// located on an Outpost in your account, specify OUTPOST. If you specify OUTPOST,
+	// Amazon Data Lifecycle Manager backs up all resources of the specified type with
+	// matching target tags across all of the Outposts in your account.
 	ResourceLocations []ResourceLocationValues
 
 	// The target resource type for snapshot and AMI lifecycle policies. Use VOLUME to
@@ -379,6 +420,9 @@ type Schedule struct {
 	// copied to up to three Regions or Outposts.
 	CrossRegionCopyRules []CrossRegionCopyRule
 
+	// The AMI deprecation rule for the schedule.
+	DeprecateRule *DeprecateRule
+
 	// The rule for enabling fast snapshot restore.
 	FastRestoreRule *FastRestoreRule
 
@@ -388,11 +432,11 @@ type Schedule struct {
 	// The retention rule.
 	RetainRule *RetainRule
 
-	// The rule for sharing snapshots with other AWS accounts.
+	// The rule for sharing snapshots with other Amazon Web Services accounts.
 	ShareRules []ShareRule
 
 	// The tags to apply to policy-created resources. These user-defined tags are in
-	// addition to the AWS-added lifecycle tags.
+	// addition to the Amazon Web Services-added lifecycle tags.
 	TagsToAdd []Tag
 
 	// A collection of key/value pairs with values determined dynamically when the
@@ -404,16 +448,16 @@ type Schedule struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies a rule for sharing snapshots across AWS accounts.
+// Specifies a rule for sharing snapshots across Amazon Web Services accounts.
 type ShareRule struct {
 
-	// The IDs of the AWS accounts with which to share the snapshots.
+	// The IDs of the Amazon Web Services accounts with which to share the snapshots.
 	//
 	// This member is required.
 	TargetAccounts []string
 
-	// The period after which snapshots that are shared with other AWS accounts are
-	// automatically unshared.
+	// The period after which snapshots that are shared with other Amazon Web Services
+	// accounts are automatically unshared.
 	UnshareInterval int32
 
 	// The unit of time for the automatic unsharing interval.

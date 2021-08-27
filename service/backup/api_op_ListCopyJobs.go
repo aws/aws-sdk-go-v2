@@ -67,7 +67,7 @@ type ListCopyJobsInput struct {
 	//
 	// * Aurora for Amazon Aurora
 	//
-	// * Storage Gateway for AWS Storage
+	// * Storage Gateway for Storage
 	// Gateway
 	ByResourceType *string
 

@@ -1348,6 +1348,11 @@ func awsAwsjson11_serializeDocumentPolicy(v *types.Policy, value smithyjson.Valu
 	object := value.Object()
 	defer object.Close()
 
+	if v.DeleteUnusedFMManagedResources {
+		ok := object.Key("DeleteUnusedFMManagedResources")
+		ok.Boolean(v.DeleteUnusedFMManagedResources)
+	}
+
 	if v.ExcludeMap != nil {
 		ok := object.Key("ExcludeMap")
 		if err := awsAwsjson11_serializeDocumentCustomerPolicyScopeMap(v.ExcludeMap, ok); err != nil {

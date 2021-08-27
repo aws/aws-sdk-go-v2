@@ -12,14 +12,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of agents owned by an AWS account in the AWS Region specified in
-// the request. The returned list is ordered by agent Amazon Resource Name (ARN).
-// By default, this operation returns a maximum of 100 agents. This operation
-// supports pagination that enables you to optionally reduce the number of agents
-// returned in a response. If you have more agents than are returned in a response
-// (that is, the response returns only a truncated list of your agents), the
-// response contains a marker that you can specify in your next request to fetch
-// the next page of agents.
+// Returns a list of agents owned by an Amazon Web Services account in the Amazon
+// Web Services Region specified in the request. The returned list is ordered by
+// agent Amazon Resource Name (ARN). By default, this operation returns a maximum
+// of 100 agents. This operation supports pagination that enables you to optionally
+// reduce the number of agents returned in a response. If you have more agents than
+// are returned in a response (that is, the response returns only a truncated list
+// of your agents), the response contains a marker that you can specify in your
+// next request to fetch the next page of agents.
 func (c *Client) ListAgents(ctx context.Context, params *ListAgentsInput, optFns ...func(*Options)) (*ListAgentsOutput, error) {
 	if params == nil {
 		params = &ListAgentsInput{}

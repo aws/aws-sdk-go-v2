@@ -45,7 +45,8 @@ type DescribeTaskExecutionOutput struct {
 	// The physical number of bytes transferred over the network.
 	BytesTransferred int64
 
-	// The number of logical bytes written to the destination AWS storage resource.
+	// The number of logical bytes written to the destination Amazon Web Services
+	// storage resource.
 	BytesWritten int64
 
 	// The estimated physical number of bytes that is to be transferred over the
@@ -101,7 +102,7 @@ type DescribeTaskExecutionOutput struct {
 	StartTime *time.Time
 
 	// The status of the task execution. For detailed information about task execution
-	// statuses, see Understanding Task Statuses in the AWS DataSync User Guide.
+	// statuses, see Understanding Task Statuses in the DataSync User Guide.
 	Status types.TaskExecutionStatus
 
 	// The Amazon Resource Name (ARN) of the task execution that was described.

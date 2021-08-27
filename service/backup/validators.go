@@ -70,6 +70,46 @@ func (m *validateOpCreateBackupVault) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFramework struct {
+}
+
+func (*validateOpCreateFramework) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFramework) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFrameworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFrameworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateReportPlan struct {
+}
+
+func (*validateOpCreateReportPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateReportPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateReportPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateReportPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBackupPlan struct {
 }
 
@@ -170,6 +210,26 @@ func (m *validateOpDeleteBackupVaultNotifications) HandleInitialize(ctx context.
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteFramework struct {
+}
+
+func (*validateOpDeleteFramework) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFramework) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFrameworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFrameworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteRecoveryPoint struct {
 }
 
@@ -185,6 +245,26 @@ func (m *validateOpDeleteRecoveryPoint) HandleInitialize(ctx context.Context, in
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteRecoveryPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteReportPlan struct {
+}
+
+func (*validateOpDeleteReportPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteReportPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteReportPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteReportPlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -250,6 +330,26 @@ func (m *validateOpDescribeCopyJob) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFramework struct {
+}
+
+func (*validateOpDescribeFramework) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFramework) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFrameworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFrameworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeProtectedResource struct {
 }
 
@@ -285,6 +385,46 @@ func (m *validateOpDescribeRecoveryPoint) HandleInitialize(ctx context.Context, 
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeRecoveryPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeReportJob struct {
+}
+
+func (*validateOpDescribeReportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeReportPlan struct {
+}
+
+func (*validateOpDescribeReportPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeReportPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeReportPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeReportPlanInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -670,6 +810,26 @@ func (m *validateOpStartCopyJob) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartReportJob struct {
+}
+
+func (*validateOpStartReportJob) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartReportJob) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartReportJobInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartReportJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartRestoreJob struct {
 }
 
@@ -770,6 +930,26 @@ func (m *validateOpUpdateBackupPlan) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFramework struct {
+}
+
+func (*validateOpUpdateFramework) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFramework) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFrameworkInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFrameworkInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateRecoveryPointLifecycle struct {
 }
 
@@ -790,6 +970,26 @@ func (m *validateOpUpdateRecoveryPointLifecycle) HandleInitialize(ctx context.Co
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateReportPlan struct {
+}
+
+func (*validateOpUpdateReportPlan) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateReportPlan) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateReportPlanInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateReportPlanInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpCreateBackupPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackupPlan{}, middleware.After)
 }
@@ -800,6 +1000,14 @@ func addOpCreateBackupSelectionValidationMiddleware(stack *middleware.Stack) err
 
 func addOpCreateBackupVaultValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateBackupVault{}, middleware.After)
+}
+
+func addOpCreateFrameworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFramework{}, middleware.After)
+}
+
+func addOpCreateReportPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateReportPlan{}, middleware.After)
 }
 
 func addOpDeleteBackupPlanValidationMiddleware(stack *middleware.Stack) error {
@@ -822,8 +1030,16 @@ func addOpDeleteBackupVaultNotificationsValidationMiddleware(stack *middleware.S
 	return stack.Initialize.Add(&validateOpDeleteBackupVaultNotifications{}, middleware.After)
 }
 
+func addOpDeleteFrameworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFramework{}, middleware.After)
+}
+
 func addOpDeleteRecoveryPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteRecoveryPoint{}, middleware.After)
+}
+
+func addOpDeleteReportPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteReportPlan{}, middleware.After)
 }
 
 func addOpDescribeBackupJobValidationMiddleware(stack *middleware.Stack) error {
@@ -838,12 +1054,24 @@ func addOpDescribeCopyJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeCopyJob{}, middleware.After)
 }
 
+func addOpDescribeFrameworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFramework{}, middleware.After)
+}
+
 func addOpDescribeProtectedResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeProtectedResource{}, middleware.After)
 }
 
 func addOpDescribeRecoveryPointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeRecoveryPoint{}, middleware.After)
+}
+
+func addOpDescribeReportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReportJob{}, middleware.After)
+}
+
+func addOpDescribeReportPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeReportPlan{}, middleware.After)
 }
 
 func addOpDescribeRestoreJobValidationMiddleware(stack *middleware.Stack) error {
@@ -922,6 +1150,10 @@ func addOpStartCopyJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCopyJob{}, middleware.After)
 }
 
+func addOpStartReportJobValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartReportJob{}, middleware.After)
+}
+
 func addOpStartRestoreJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartRestoreJob{}, middleware.After)
 }
@@ -942,8 +1174,16 @@ func addOpUpdateBackupPlanValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateBackupPlan{}, middleware.After)
 }
 
+func addOpUpdateFrameworkValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFramework{}, middleware.After)
+}
+
 func addOpUpdateRecoveryPointLifecycleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateRecoveryPointLifecycle{}, middleware.After)
+}
+
+func addOpUpdateReportPlanValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateReportPlan{}, middleware.After)
 }
 
 func validateBackupPlanInput(v *types.BackupPlanInput) error {
@@ -1084,6 +1324,38 @@ func validateCopyActions(v []types.CopyAction) error {
 	}
 }
 
+func validateFrameworkControl(v *types.FrameworkControl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FrameworkControl"}
+	if v.ControlName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ControlName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateFrameworkControls(v []types.FrameworkControl) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "FrameworkControls"}
+	for i := range v {
+		if err := validateFrameworkControl(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateListOfTags(v []types.Condition) error {
 	if v == nil {
 		return nil
@@ -1093,6 +1365,36 @@ func validateListOfTags(v []types.Condition) error {
 		if err := validateCondition(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReportDeliveryChannel(v *types.ReportDeliveryChannel) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportDeliveryChannel"}
+	if v.S3BucketName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("S3BucketName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateReportSetting(v *types.ReportSetting) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ReportSetting"}
+	if v.ReportTemplate == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportTemplate"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1149,6 +1451,57 @@ func validateOpCreateBackupVaultInput(v *CreateBackupVaultInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBackupVaultInput"}
 	if v.BackupVaultName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("BackupVaultName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateFrameworkInput(v *CreateFrameworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFrameworkInput"}
+	if v.FrameworkName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameworkName"))
+	}
+	if v.FrameworkControls == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameworkControls"))
+	} else if v.FrameworkControls != nil {
+		if err := validateFrameworkControls(v.FrameworkControls); err != nil {
+			invalidParams.AddNested("FrameworkControls", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateReportPlanInput(v *CreateReportPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateReportPlanInput"}
+	if v.ReportPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportPlanName"))
+	}
+	if v.ReportDeliveryChannel == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportDeliveryChannel"))
+	} else if v.ReportDeliveryChannel != nil {
+		if err := validateReportDeliveryChannel(v.ReportDeliveryChannel); err != nil {
+			invalidParams.AddNested("ReportDeliveryChannel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportSetting == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportSetting"))
+	} else if v.ReportSetting != nil {
+		if err := validateReportSetting(v.ReportSetting); err != nil {
+			invalidParams.AddNested("ReportSetting", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1235,6 +1588,21 @@ func validateOpDeleteBackupVaultNotificationsInput(v *DeleteBackupVaultNotificat
 	}
 }
 
+func validateOpDeleteFrameworkInput(v *DeleteFrameworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFrameworkInput"}
+	if v.FrameworkName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameworkName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteRecoveryPointInput(v *DeleteRecoveryPointInput) error {
 	if v == nil {
 		return nil
@@ -1245,6 +1613,21 @@ func validateOpDeleteRecoveryPointInput(v *DeleteRecoveryPointInput) error {
 	}
 	if v.RecoveryPointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteReportPlanInput(v *DeleteReportPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteReportPlanInput"}
+	if v.ReportPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportPlanName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1298,6 +1681,21 @@ func validateOpDescribeCopyJobInput(v *DescribeCopyJobInput) error {
 	}
 }
 
+func validateOpDescribeFrameworkInput(v *DescribeFrameworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFrameworkInput"}
+	if v.FrameworkName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameworkName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeProtectedResourceInput(v *DescribeProtectedResourceInput) error {
 	if v == nil {
 		return nil
@@ -1323,6 +1721,36 @@ func validateOpDescribeRecoveryPointInput(v *DescribeRecoveryPointInput) error {
 	}
 	if v.RecoveryPointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeReportJobInput(v *DescribeReportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReportJobInput"}
+	if v.ReportJobId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportJobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeReportPlanInput(v *DescribeReportPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeReportPlanInput"}
+	if v.ReportPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportPlanName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1646,6 +2074,21 @@ func validateOpStartCopyJobInput(v *StartCopyJobInput) error {
 	}
 }
 
+func validateOpStartReportJobInput(v *StartReportJobInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartReportJobInput"}
+	if v.ReportPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportPlanName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartRestoreJobInput(v *StartRestoreJobInput) error {
 	if v == nil {
 		return nil
@@ -1740,6 +2183,26 @@ func validateOpUpdateBackupPlanInput(v *UpdateBackupPlanInput) error {
 	}
 }
 
+func validateOpUpdateFrameworkInput(v *UpdateFrameworkInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFrameworkInput"}
+	if v.FrameworkName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FrameworkName"))
+	}
+	if v.FrameworkControls != nil {
+		if err := validateFrameworkControls(v.FrameworkControls); err != nil {
+			invalidParams.AddNested("FrameworkControls", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpUpdateRecoveryPointLifecycleInput(v *UpdateRecoveryPointLifecycleInput) error {
 	if v == nil {
 		return nil
@@ -1750,6 +2213,31 @@ func validateOpUpdateRecoveryPointLifecycleInput(v *UpdateRecoveryPointLifecycle
 	}
 	if v.RecoveryPointArn == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RecoveryPointArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateReportPlanInput(v *UpdateReportPlanInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateReportPlanInput"}
+	if v.ReportPlanName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ReportPlanName"))
+	}
+	if v.ReportDeliveryChannel != nil {
+		if err := validateReportDeliveryChannel(v.ReportDeliveryChannel); err != nil {
+			invalidParams.AddNested("ReportDeliveryChannel", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.ReportSetting != nil {
+		if err := validateReportSetting(v.ReportSetting); err != nil {
+			invalidParams.AddNested("ReportSetting", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

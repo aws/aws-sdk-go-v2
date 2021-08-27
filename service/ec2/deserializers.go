@@ -64153,6 +64153,19 @@ func awsEc2query_deserializeDocumentInstanceMetadataOptionsResponse(v **types.In
 				sv.HttpEndpoint = types.InstanceMetadataEndpointState(xtv)
 			}
 
+		case strings.EqualFold("httpProtocolIpv6", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HttpProtocolIpv6 = types.InstanceMetadataProtocolState(xtv)
+			}
+
 		case strings.EqualFold("httpPutResponseHopLimit", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

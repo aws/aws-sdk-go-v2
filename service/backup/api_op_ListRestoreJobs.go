@@ -13,8 +13,8 @@ import (
 	"time"
 )
 
-// Returns a list of jobs that AWS Backup initiated to restore a saved resource,
-// including metadata about the recovery process.
+// Returns a list of jobs that Backup initiated to restore a saved resource,
+// including details about the recovery process.
 func (c *Client) ListRestoreJobs(ctx context.Context, params *ListRestoreJobsInput, optFns ...func(*Options)) (*ListRestoreJobsOutput, error) {
 	if params == nil {
 		params = &ListRestoreJobsInput{}

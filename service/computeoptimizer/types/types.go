@@ -7,6 +7,28 @@ import (
 	"time"
 )
 
+// Describes the enrollment status of an organization's member accounts in Compute
+// Optimizer.
+type AccountEnrollmentStatus struct {
+
+	// The Amazon Web Services account ID.
+	AccountId *string
+
+	// The Unix epoch timestamp, in seconds, of when the account enrollment status was
+	// last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// The account enrollment status.
+	Status Status
+
+	// The reason for the account enrollment status. For example, an account might show
+	// a status of Pending because member accounts of an organization require more time
+	// to be enrolled in the service.
+	StatusReason *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration of an Auto Scaling group.
 type AutoScalingGroupConfiguration struct {
 
@@ -28,7 +50,7 @@ type AutoScalingGroupConfiguration struct {
 // Describes an Auto Scaling group recommendation.
 type AutoScalingGroupRecommendation struct {
 
-	// The AWS account ID of the Auto Scaling group.
+	// The Amazon Web Services account ID of the Auto Scaling group.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the Auto Scaling group.
@@ -45,17 +67,17 @@ type AutoScalingGroupRecommendation struct {
 	// groups include:
 	//
 	// * NotOptimized —An Auto Scaling group is considered not
-	// optimized when AWS Compute Optimizer identifies a recommendation that can
-	// provide better performance for your workload.
+	// optimized when Compute Optimizer identifies a recommendation that can provide
+	// better performance for your workload.
 	//
-	// * Optimized —An Auto Scaling
-	// group is considered optimized when Compute Optimizer determines that the group
-	// is correctly provisioned to run your workload based on the chosen instance type.
+	// * Optimized —An Auto Scaling group is
+	// considered optimized when Compute Optimizer determines that the group is
+	// correctly provisioned to run your workload based on the chosen instance type.
 	// For optimized resources, Compute Optimizer might recommend a new generation
 	// instance type.
 	Finding Finding
 
-	// The time stamp of when the Auto Scaling group recommendation was last refreshed.
+	// The timestamp of when the Auto Scaling group recommendation was last refreshed.
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the Auto
@@ -119,7 +141,7 @@ type AutoScalingGroupRecommendationOption struct {
 type EBSFilter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific finding classification (e.g., NotOptimized).
+	// specific finding classification (for example, NotOptimized).
 	Name EBSFilterName
 
 	// The value of the filter. The valid values are Optimized, or NotOptimized.
@@ -152,15 +174,14 @@ type EBSUtilizationMetric struct {
 	// specified period of time. Unit: Bytes
 	Name EBSMetricName
 
-	// The statistic of the utilization metric. The Compute Optimizer API, AWS Command
-	// Line Interface (AWS CLI), and SDKs return utilization metrics using only the
-	// Maximum statistic, which is the highest value observed during the specified
-	// period. The Compute Optimizer console displays graphs for some utilization
-	// metrics using the Average statistic, which is the value of Sum / SampleCount
-	// during the specified period. For more information, see Viewing resource
-	// recommendations
+	// The statistic of the utilization metric. The Compute Optimizer API, Command Line
+	// Interface (CLI), and SDKs return utilization metrics using only the Maximum
+	// statistic, which is the highest value observed during the specified period. The
+	// Compute Optimizer console displays graphs for some utilization metrics using the
+	// Average statistic, which is the value of Sum / SampleCount during the specified
+	// period. For more information, see Viewing resource recommendations
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
-	// in the AWS Compute Optimizer User Guide. You can also get averaged utilization
+	// in the Compute Optimizer User Guide. You can also get averaged utilization
 	// metric data for your resources using Amazon CloudWatch. For more information,
 	// see the Amazon CloudWatch User Guide
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
@@ -168,6 +189,21 @@ type EBSUtilizationMetric struct {
 
 	// The value of the utilization metric.
 	Value float64
+
+	noSmithyDocumentSerde
+}
+
+// Describes a filter that returns a more specific list of account enrollment
+// statuses. Use this filter with the GetEnrollmentStatusesForOrganization action.
+type EnrollmentFilter struct {
+
+	// The name of the filter. Specify Status to return accounts with a specific
+	// enrollment status (for example, Active).
+	Name EnrollmentFilterName
+
+	// The value of the filter. The valid values are Active, Inactive, Pending, and
+	// Failed.
+	Values []string
 
 	noSmithyDocumentSerde
 }
@@ -192,10 +228,10 @@ type ExportDestination struct {
 type Filter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific finding classification (e.g., Underprovisioned). Specify
+	// specific finding classification (for example, Underprovisioned). Specify
 	// RecommendationSourceType to return recommendations of a specific resource type
-	// (e.g., Ec2Instance). Specify FindingReasonCodes to return recommendations with a
-	// specific finding reason code (e.g., CPUUnderprovisioned).
+	// (for example, Ec2Instance). Specify FindingReasonCodes to return recommendations
+	// with a specific finding reason code (for example, CPUUnderprovisioned).
 	Name FilterName
 
 	// The value of the filter. The valid values for this parameter are as follows,
@@ -315,7 +351,7 @@ type GetRecommendationError struct {
 // Describes an Amazon EC2 instance recommendation.
 type InstanceRecommendation struct {
 
-	// The AWS account ID of the instance.
+	// The Amazon Web Services account ID of the instance.
 	AccountId *string
 
 	// The instance type of the current instance.
@@ -339,8 +375,8 @@ type InstanceRecommendation struct {
 	// * Optimized —An instance is considered optimized when all
 	// specifications of your instance, such as CPU, memory, and network, meet the
 	// performance requirements of your workload and is not over provisioned. For
-	// optimized resources, AWS Compute Optimizer might recommend a new generation
-	// instance type.
+	// optimized resources, Compute Optimizer might recommend a new generation instance
+	// type.
 	Finding Finding
 
 	// The reason for the finding classification of the instance. Finding reason codes
@@ -371,7 +407,7 @@ type InstanceRecommendation struct {
 	// the unified CloudWatch agent installed on them. For more information, see
 	// Enabling memory utilization with the Amazon CloudWatch Agent
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent)
-	// in the AWS Compute Optimizer User Guide. On Linux instances, Compute Optimizer
+	// in the Compute Optimizer User Guide. On Linux instances, Compute Optimizer
 	// analyses the mem_used_percent metric in the CWAgent namespace, or the legacy
 	// MemoryUtilization metric in the System/Linux namespace. On Windows instances,
 	// Compute Optimizer analyses the Memory % Committed Bytes In Use metric in the
@@ -469,7 +505,7 @@ type InstanceRecommendation struct {
 	// The name of the current instance.
 	InstanceName *string
 
-	// The time stamp of when the instance recommendation was last refreshed.
+	// The timestamp of when the instance recommendation was last refreshed.
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the instance.
@@ -534,9 +570,9 @@ type InstanceRecommendationOption struct {
 	// interface of the recommended instance type is different than that of the current
 	// instance. For example, the recommended instance type supports enhanced
 	// networking and the current instance might not. To enable enhanced networking for
-	// the recommended instance type, you will need to install the Elastic Network
-	// Adapter (ENA) driver or the Intel 82599 Virtual Function driver. For more
-	// information, see Networking and storage features
+	// the recommended instance type, you must install the Elastic Network Adapter
+	// (ENA) driver or the Intel 82599 Virtual Function driver. For more information,
+	// see Networking and storage features
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage)
 	// and Enhanced networking on Linux
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/enhanced-networking.html)
@@ -568,8 +604,8 @@ type InstanceRecommendationOption struct {
 	// see How do I back up an instance store volume on my Amazon EC2 instance to
 	// Amazon EBS?
 	// (https://aws.amazon.com/premiumsupport/knowledge-center/back-up-instance-store-ebs/)
-	// in the AWS Premium Support Knowledge Base. For more information, see Networking
-	// and storage features
+	// in the Amazon Web Services Premium Support Knowledge Base. For more information,
+	// see Networking and storage features
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html#instance-networking-storage)
 	// and Amazon EC2 instance store
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/InstanceStorage.html) in
@@ -588,6 +624,16 @@ type InstanceRecommendationOption struct {
 	// in the Amazon EC2 User Guide for Linux, or Windows AMI virtualization types
 	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/windows-ami-version-history.html#virtualization-types)
 	// in the Amazon EC2 User Guide for Windows.
+	//
+	// * Architecture — The CPU architecture
+	// between the recommended instance type and the current instance is different. For
+	// example, the recommended instance type might use an x86 CPU architecture and the
+	// current instance type might use a different one, such as ARM. Before migrating,
+	// you should consider recompiling the software on your instance for the new
+	// architecture. Alternatively, you might switch to an Amazon Machine Image (AMI)
+	// that supports the new architecture. For more information about the CPU
+	// architecture for each instance type, see Amazon EC2 Instance Types
+	// (http://aws.amazon.com/ec2/instance-types/).
 	PlatformDifferences []PlatformDifference
 
 	// An array of objects that describe the projected utilization metrics of the
@@ -615,8 +661,8 @@ type InstanceRecommendationOption struct {
 type JobFilter struct {
 
 	// The name of the filter. Specify ResourceType to return export jobs of a specific
-	// resource type (e.g., Ec2Instance). Specify JobStatus to return export jobs with
-	// a specific status (e.g, Complete).
+	// resource type (for example, Ec2Instance). Specify JobStatus to return export
+	// jobs with a specific status (e.g, Complete).
 	Name JobFilterName
 
 	// The value of the filter. The valid values for this parameter are as follows,
@@ -634,8 +680,8 @@ type JobFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a projected utilization metric of an AWS Lambda function
-// recommendation option.
+// Describes a projected utilization metric of an Lambda function recommendation
+// option.
 type LambdaFunctionMemoryProjectedMetric struct {
 
 	// The name of the projected utilization metric.
@@ -650,7 +696,7 @@ type LambdaFunctionMemoryProjectedMetric struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a recommendation option for an AWS Lambda function.
+// Describes a recommendation option for an Lambda function.
 type LambdaFunctionMemoryRecommendationOption struct {
 
 	// The memory size, in MB, of the function recommendation option.
@@ -667,10 +713,10 @@ type LambdaFunctionMemoryRecommendationOption struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an AWS Lambda function recommendation.
+// Describes an Lambda function recommendation.
 type LambdaFunctionRecommendation struct {
 
-	// The AWS account ID of the function.
+	// The Amazon Web Services account ID of the function.
 	AccountId *string
 
 	// The amount of memory, in MB, that's allocated to the current function.
@@ -721,7 +767,7 @@ type LambdaFunctionRecommendation struct {
 	// have sufficient metric data for Compute Optimizer to generate a recommendation.
 	// For more information, see the Supported resources and requirements
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
-	// the AWS Compute Optimizer User Guide. This finding reason code is part of the
+	// the Compute Optimizer User Guide. This finding reason code is part of the
 	// Unavailable finding classification.
 	//
 	// * Inconclusive — The function does not
@@ -736,7 +782,7 @@ type LambdaFunctionRecommendation struct {
 	// The version number of the current function.
 	FunctionVersion *string
 
-	// The time stamp of when the function recommendation was last refreshed.
+	// The timestamp of when the function recommendation was last refreshed.
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the function.
@@ -746,7 +792,7 @@ type LambdaFunctionRecommendation struct {
 	// options for the function.
 	MemorySizeRecommendationOptions []LambdaFunctionMemoryRecommendationOption
 
-	// The number of times your function code was executed during the look-back period.
+	// The number of times your function code was applied during the look-back period.
 	NumberOfInvocations int64
 
 	// An array of objects that describe the utilization metrics of the function.
@@ -755,7 +801,7 @@ type LambdaFunctionRecommendation struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a filter that returns a more specific list of AWS Lambda function
+// Describes a filter that returns a more specific list of Lambda function
 // recommendations. Use this filter with the GetLambdaFunctionRecommendations
 // action. You can use EBSFilter with the GetEBSVolumeRecommendations action,
 // JobFilter with the DescribeRecommendationExportJobs action, and Filter with the
@@ -763,9 +809,9 @@ type LambdaFunctionRecommendation struct {
 type LambdaFunctionRecommendationFilter struct {
 
 	// The name of the filter. Specify Finding to return recommendations with a
-	// specific finding classification (e.g., NotOptimized). Specify FindingReasonCode
-	// to return recommendations with a specific finding reason code (e.g.,
-	// MemoryUnderprovisioned).
+	// specific finding classification (for example, NotOptimized). Specify
+	// FindingReasonCode to return recommendations with a specific finding reason code
+	// (for example, MemoryUnderprovisioned).
 	Name LambdaFunctionRecommendationFilterName
 
 	// The value of the filter. The valid values for this parameter are as follows,
@@ -782,7 +828,7 @@ type LambdaFunctionRecommendationFilter struct {
 	noSmithyDocumentSerde
 }
 
-// Describes a utilization metric of an AWS Lambda function.
+// Describes a utilization metric of an Lambda function.
 type LambdaFunctionUtilizationMetric struct {
 
 	// The name of the utilization metric. The following utilization metrics are
@@ -794,15 +840,14 @@ type LambdaFunctionUtilizationMetric struct {
 	// * Memory - The amount of memory used per invocation.
 	Name LambdaFunctionMetricName
 
-	// The statistic of the utilization metric. The Compute Optimizer API, AWS Command
-	// Line Interface (AWS CLI), and SDKs return utilization metrics using only the
-	// Maximum statistic, which is the highest value observed during the specified
-	// period. The Compute Optimizer console displays graphs for some utilization
-	// metrics using the Average statistic, which is the value of Sum / SampleCount
-	// during the specified period. For more information, see Viewing resource
-	// recommendations
+	// The statistic of the utilization metric. The Compute Optimizer API, Command Line
+	// Interface (CLI), and SDKs return utilization metrics using only the Maximum
+	// statistic, which is the highest value observed during the specified period. The
+	// Compute Optimizer console displays graphs for some utilization metrics using the
+	// Average statistic, which is the value of Sum / SampleCount during the specified
+	// period. For more information, see Viewing resource recommendations
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
-	// in the AWS Compute Optimizer User Guide. You can also get averaged utilization
+	// in the Compute Optimizer User Guide. You can also get averaged utilization
 	// metric data for your resources using Amazon CloudWatch. For more information,
 	// see the Amazon CloudWatch User Guide
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
@@ -848,7 +893,7 @@ type ProjectedMetric struct {
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html#cw-agent).
 	Name MetricName
 
-	// The time stamps of the projected utilization metric.
+	// The timestamps of the projected utilization metric.
 	Timestamps []time.Time
 
 	// The values of the projected utilization metrics.
@@ -899,6 +944,29 @@ type RecommendationExportJob struct {
 	noSmithyDocumentSerde
 }
 
+// Describes preferences for recommendations.
+type RecommendationPreferences struct {
+
+	// Specifies the CPU vendor and architecture for Amazon EC2 instance and Auto
+	// Scaling group recommendations. For example, when you specify AWS_ARM64 with:
+	//
+	// *
+	// A GetEC2InstanceRecommendations or GetAutoScalingGroupRecommendations request,
+	// Compute Optimizer returns recommendations that consist of Graviton2 instance
+	// types only.
+	//
+	// * A GetEC2RecommendationProjectedMetrics request, Compute Optimizer
+	// returns projected utilization metrics for Graviton2 instance type
+	// recommendations only.
+	//
+	// * A ExportEC2InstanceRecommendations or
+	// ExportAutoScalingGroupRecommendations request, Compute Optimizer exports
+	// recommendations that consist of Graviton2 instance types only.
+	CpuVendorArchitectures []CpuVendorArchitecture
+
+	noSmithyDocumentSerde
+}
+
 // Describes the source of a recommendation, such as an Amazon EC2 instance or Auto
 // Scaling group.
 type RecommendationSource struct {
@@ -915,7 +983,7 @@ type RecommendationSource struct {
 // A summary of a recommendation.
 type RecommendationSummary struct {
 
-	// The AWS account ID of the recommendation summary.
+	// The Amazon Web Services account ID of the recommendation summary.
 	AccountId *string
 
 	// The resource type of the recommendation.
@@ -981,7 +1049,7 @@ type S3Destination struct {
 // in the policy that you add to the S3 bucket. For more information, see Amazon S3
 // Bucket Policy for Compute Optimizer
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
-// in the Compute Optimizer user guide.
+// in the Compute Optimizer User Guide.
 type S3DestinationConfig struct {
 
 	// The name of the Amazon S3 bucket to use as the destination for an export job.
@@ -1091,15 +1159,14 @@ type UtilizationMetric struct {
 	// in terms of the number of packets on a single instance.
 	Name MetricName
 
-	// The statistic of the utilization metric. The Compute Optimizer API, AWS Command
-	// Line Interface (AWS CLI), and SDKs return utilization metrics using only the
-	// Maximum statistic, which is the highest value observed during the specified
-	// period. The Compute Optimizer console displays graphs for some utilization
-	// metrics using the Average statistic, which is the value of Sum / SampleCount
-	// during the specified period. For more information, see Viewing resource
-	// recommendations
+	// The statistic of the utilization metric. The Compute Optimizer API, Command Line
+	// Interface (CLI), and SDKs return utilization metrics using only the Maximum
+	// statistic, which is the highest value observed during the specified period. The
+	// Compute Optimizer console displays graphs for some utilization metrics using the
+	// Average statistic, which is the value of Sum / SampleCount during the specified
+	// period. For more information, see Viewing resource recommendations
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/viewing-recommendations.html)
-	// in the AWS Compute Optimizer User Guide. You can also get averaged utilization
+	// in the Compute Optimizer User Guide. You can also get averaged utilization
 	// metric data for your resources using Amazon CloudWatch. For more information,
 	// see the Amazon CloudWatch User Guide
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/WhatIsCloudWatch.html).
@@ -1141,7 +1208,7 @@ type VolumeConfiguration struct {
 // Describes an Amazon Elastic Block Store (Amazon EBS) volume recommendation.
 type VolumeRecommendation struct {
 
-	// The AWS account ID of the volume.
+	// The Amazon Web Services account ID of the volume.
 	AccountId *string
 
 	// An array of objects that describe the current configuration of the volume.
@@ -1150,7 +1217,7 @@ type VolumeRecommendation struct {
 	// The finding classification of the volume. Findings for volumes include:
 	//
 	// *
-	// NotOptimized —A volume is considered not optimized when AWS Compute Optimizer
+	// NotOptimized —A volume is considered not optimized when Compute Optimizer
 	// identifies a recommendation that can provide better performance for your
 	// workload.
 	//
@@ -1160,7 +1227,7 @@ type VolumeRecommendation struct {
 	// recommend a new generation volume type.
 	Finding EBSFinding
 
-	// The time stamp of when the volume recommendation was last refreshed.
+	// The timestamp of when the volume recommendation was last refreshed.
 	LastRefreshTimestamp *time.Time
 
 	// The number of days for which utilization metrics were analyzed for the volume.

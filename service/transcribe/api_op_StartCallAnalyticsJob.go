@@ -36,9 +36,9 @@ func (c *Client) StartCallAnalyticsJob(ctx context.Context, params *StartCallAna
 type StartCallAnalyticsJobInput struct {
 
 	// The name of the call analytics job. You can't use the string "." or ".." by
-	// themselves as the job name. The name must also be unique within an AWS account.
-	// If you try to create a call analytics job with the same name as a previous call
-	// analytics job, you get a ConflictException error.
+	// themselves as the job name. The name must also be unique within an Amazon Web
+	// Services account. If you try to create a call analytics job with the same name
+	// as a previous call analytics job, you get a ConflictException error.
 	//
 	// This member is required.
 	CallAnalyticsJobName *string
@@ -62,13 +62,13 @@ type StartCallAnalyticsJobInput struct {
 	// channel. You can't assign more than one channel to an agent or customer.
 	ChannelDefinitions []types.ChannelDefinition
 
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service key used to
-	// encrypt the output of the call analytics job. The user calling the operation
-	// must have permission to use the specified KMS key. You use either of the
-	// following to identify an AWS KMS key in the current account:
+	// The Amazon Resource Name (ARN) of the Amazon Web Services Key Management Service
+	// key used to encrypt the output of the call analytics job. The user calling the
+	// operation must have permission to use the specified KMS key. You use either of
+	// the following to identify an Amazon Web Services KMS key in the current
+	// account:
 	//
-	// * KMS Key ID:
-	// "1234abcd-12ab-34cd-56ef-1234567890ab"
+	// * KMS Key ID: "1234abcd-12ab-34cd-56ef-1234567890ab"
 	//
 	// * KMS Key Alias:
 	// "alias/ExampleAlias"
@@ -107,11 +107,11 @@ type StartCallAnalyticsJobInput struct {
 	// filename specified, Amazon Transcribe saves the output of the analytics job as
 	// s3://DOC-EXAMPLEBUCKET1/folder/filename.json
 	//
-	// You can specify an AWS Key
-	// Management Service key to encrypt the output of our analytics job using the
-	// OutputEncryptionKMSKeyId parameter. If you don't specify a KMS key, Amazon
-	// Transcribe uses the default Amazon S3 key for server-side encryption of the
-	// analytics job output that is placed in your S3 bucket.
+	// You can specify an Amazon Web
+	// Services Key Management Service (KMS) key to encrypt the output of our analytics
+	// job using the OutputEncryptionKMSKeyId parameter. If you don't specify a KMS
+	// key, Amazon Transcribe uses the default Amazon S3 key for server-side encryption
+	// of the analytics job output that is placed in your S3 bucket.
 	OutputLocation *string
 
 	// A Settings object that provides optional settings for a call analytics job.

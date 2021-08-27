@@ -32,8 +32,32 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// A dependent AWS service or resource returned an error to the AWS Backup service,
-// and the action cannot be completed.
+// Backup can't perform the action that you requested until it finishes performing
+// a previous action. Try again later.
+type ConflictException struct {
+	Message *string
+
+	Code    *string
+	Type    *string
+	Context *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ConflictException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ConflictException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
+func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A dependent Amazon Web Services service or resource returned an error to the
+// Backup service, and the action cannot be completed.
 type DependencyFailureException struct {
 	Message *string
 
@@ -104,9 +128,8 @@ func (e *InvalidRequestException) ErrorMessage() string {
 func (e *InvalidRequestException) ErrorCode() string             { return "InvalidRequestException" }
 func (e *InvalidRequestException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS Backup is already performing an action on this recovery point. It can't
-// perform the action you requested until the first action finishes. Try again
-// later.
+// Backup is already performing an action on this recovery point. It can't perform
+// the action you requested until the first action finishes. Try again later.
 type InvalidResourceStateException struct {
 	Message *string
 

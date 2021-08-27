@@ -12,7 +12,8 @@ import (
 )
 
 // An SaaS partner can use this operation to list all the partner event source
-// names that they have created. This operation is not used by AWS customers.
+// names that they have created. This operation is not used by Amazon Web Services
+// customers.
 func (c *Client) ListPartnerEventSources(ctx context.Context, params *ListPartnerEventSourcesInput, optFns ...func(*Options)) (*ListPartnerEventSourcesOutput, error) {
 	if params == nil {
 		params = &ListPartnerEventSourcesInput{}

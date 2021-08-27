@@ -12,8 +12,8 @@ import (
 )
 
 // Returns information about a saved resource, including the last time it was
-// backed up, its Amazon Resource Name (ARN), and the AWS service type of the saved
-// resource.
+// backed up, its Amazon Resource Name (ARN), and the Amazon Web Services service
+// type of the saved resource.
 func (c *Client) DescribeProtectedResource(ctx context.Context, params *DescribeProtectedResourceInput, optFns ...func(*Options)) (*DescribeProtectedResourceOutput, error) {
 	if params == nil {
 		params = &DescribeProtectedResourceInput{}
@@ -52,8 +52,8 @@ type DescribeProtectedResourceOutput struct {
 	// resource type.
 	ResourceArn *string
 
-	// The type of AWS resource saved as a recovery point; for example, an EBS volume
-	// or an Amazon RDS database.
+	// The type of Amazon Web Services resource saved as a recovery point; for example,
+	// an Amazon EBS volume or an Amazon RDS database.
 	ResourceType *string
 
 	// Metadata pertaining to the operation's result.

@@ -12,8 +12,8 @@ import (
 
 // Deletes an agent. To specify which agent to delete, use the Amazon Resource Name
 // (ARN) of the agent in your request. The operation disassociates the agent from
-// your AWS account. However, it doesn't delete the agent virtual machine (VM) from
-// your on-premises environment.
+// your Amazon Web Services account. However, it doesn't delete the agent virtual
+// machine (VM) from your on-premises environment.
 func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optFns ...func(*Options)) (*DeleteAgentOutput, error) {
 	if params == nil {
 		params = &DeleteAgentInput{}
@@ -33,7 +33,8 @@ func (c *Client) DeleteAgent(ctx context.Context, params *DeleteAgentInput, optF
 type DeleteAgentInput struct {
 
 	// The Amazon Resource Name (ARN) of the agent to delete. Use the ListAgents
-	// operation to return a list of agents for your account and AWS Region.
+	// operation to return a list of agents for your account and Amazon Web Services
+	// Region.
 	//
 	// This member is required.
 	AgentArn *string

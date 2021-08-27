@@ -100,7 +100,7 @@ type GetEventPredictionOutput struct {
 	// corresponds to an estimated 2% false positive rate.
 	ModelScores []types.ModelScores
 
-	// The results.
+	// The results from the rules.
 	RuleResults []types.RuleResult
 
 	// Metadata pertaining to the operation's result.

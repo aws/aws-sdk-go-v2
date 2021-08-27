@@ -30,7 +30,7 @@ func (c *Client) DescribeBackupJob(ctx context.Context, params *DescribeBackupJo
 
 type DescribeBackupJobInput struct {
 
-	// Uniquely identifies a request to AWS Backup to back up a resource.
+	// Uniquely identifies a request to Backup to back up a resource.
 	//
 	// This member is required.
 	BackupJobId *string
@@ -43,7 +43,7 @@ type DescribeBackupJobOutput struct {
 	// Returns the account ID that owns the backup job.
 	AccountId *string
 
-	// Uniquely identifies a request to AWS Backup to back up a resource.
+	// Uniquely identifies a request to Backup to back up a resource.
 	BackupJobId *string
 
 	// Represents the options specified as part of backup plan or on-demand backup job.
@@ -53,8 +53,9 @@ type DescribeBackupJobOutput struct {
 	BackupSizeInBytes *int64
 
 	// Represents the actual backup type selected for a backup job. For example, if a
-	// successful WindowsVSS backup was taken, BackupType returns "WindowsVSS". If
-	// BackupType is empty, then the backup type that was is a regular backup.
+	// successful Windows Volume Shadow Copy Service (VSS) backup was taken, BackupType
+	// returns "WindowsVSS". If BackupType is empty, then the backup type was a regular
+	// backup.
 	BackupType *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup vault; for
@@ -63,8 +64,8 @@ type DescribeBackupJobOutput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	BackupVaultName *string
 
 	// The size in bytes transferred to a backup vault at the time that the job status
@@ -110,9 +111,9 @@ type DescribeBackupJobOutput struct {
 	// on the resource type.
 	ResourceArn *string
 
-	// The type of AWS resource to be backed up; for example, an Amazon Elastic Block
-	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
-	// database.
+	// The type of Amazon Web Services resource to be backed up; for example, an Amazon
+	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
+	// (Amazon RDS) database.
 	ResourceType *string
 
 	// Specifies the time in Unix format and Coordinated Universal Time (UTC) when a

@@ -53,15 +53,16 @@ type DescribeTaskOutput struct {
 	// The Amazon Resource Name (ARN) of the task execution that is syncing files.
 	CurrentTaskExecutionArn *string
 
-	// The Amazon Resource Name (ARN) of the AWS storage resource's location.
+	// The Amazon Resource Name (ARN) of the Amazon Web Services storage resource's
+	// location.
 	DestinationLocationArn *string
 
 	// The Amazon Resource Name (ARN) of the destination ENIs (Elastic Network
 	// Interface) that was created for your subnet.
 	DestinationNetworkInterfaceArns []string
 
-	// Errors that AWS DataSync encountered during execution of the task. You can use
-	// this error code to help troubleshoot issues.
+	// Errors that DataSync encountered during execution of the task. You can use this
+	// error code to help troubleshoot issues.
 	ErrorCode *string
 
 	// Detailed description of an error that was encountered during the task execution.
@@ -73,6 +74,12 @@ type DescribeTaskOutput struct {
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example:
 	// "/folder1|/folder2"
 	Excludes []types.FilterRule
+
+	// A list of filter rules that determines which files to include when running a
+	// task. The pattern should contain a single filter string that consists of the
+	// patterns to include. The patterns are delimited by "|" (that is, a pipe). For
+	// example: "/folder1|/folder2"
+	Includes []types.FilterRule
 
 	// The name of the task that was described.
 	Name *string
@@ -99,8 +106,7 @@ type DescribeTaskOutput struct {
 	SourceNetworkInterfaceArns []string
 
 	// The status of the task that was described. For detailed information about task
-	// execution statuses, see Understanding Task Statuses in the AWS DataSync User
-	// Guide.
+	// execution statuses, see Understanding Task Statuses in the DataSync User Guide.
 	Status types.TaskStatus
 
 	// The Amazon Resource Name (ARN) of the task that was described.

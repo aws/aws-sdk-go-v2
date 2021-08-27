@@ -13,9 +13,9 @@ import (
 )
 
 // Creates a backup plan using a backup plan name and backup rules. A backup plan
-// is a document that contains information that AWS Backup uses to schedule tasks
-// that create recovery points for resources. If you call CreateBackupPlan with a
-// plan that already exists, an AlreadyExistsException is returned.
+// is a document that contains information that Backup uses to schedule tasks that
+// create recovery points for resources. If you call CreateBackupPlan with a plan
+// that already exists, you receive an AlreadyExistsException exception.
 func (c *Client) CreateBackupPlan(ctx context.Context, params *CreateBackupPlanInput, optFns ...func(*Options)) (*CreateBackupPlanOutput, error) {
 	if params == nil {
 		params = &CreateBackupPlanInput{}
@@ -56,7 +56,7 @@ type CreateBackupPlanInput struct {
 type CreateBackupPlanOutput struct {
 
 	// A list of BackupOptions settings for a resource type. This option is only
-	// available for Windows VSS backup jobs.
+	// available for Windows Volume Shadow Copy Service (VSS) backup jobs.
 	AdvancedBackupSettings []types.AdvancedBackupSetting
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for

@@ -45,6 +45,10 @@ type CreateVocabularyFilterInput struct {
 	// This member is required.
 	VocabularyFilterName *string
 
+	// Adds one or more tags, each in the form of a key:value pair, to a new Amazon
+	// Transcribe vocabulary filter at the time you create this new vocabulary filter.
+	Tags []types.Tag
+
 	// The Amazon S3 location of a text file used as input to create the vocabulary
 	// filter. Only use characters from the character set defined for custom
 	// vocabularies. For a list of character sets, see Character Sets for Custom

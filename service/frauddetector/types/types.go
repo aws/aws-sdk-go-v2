@@ -343,10 +343,12 @@ type LabelSchema struct {
 	noSmithyDocumentSerde
 }
 
-// The logit metric details.
-type LogitMetric struct {
+// The log odds metric details.
+type LogOddsMetric struct {
 
-	// The relative importance of the variable.
+	// The relative importance of the variable. For more information, see Model
+	// variable importance
+	// (https://docs.aws.amazon.com/frauddetector/latest/ug/model-variable-importance.html).
 	//
 	// This member is required.
 	VariableImportance *float32
@@ -778,7 +780,7 @@ type VariableEntry struct {
 type VariableImportanceMetrics struct {
 
 	// List of variable metrics.
-	LogitMetrics []LogitMetric
+	LogOddsMetrics []LogOddsMetric
 
 	noSmithyDocumentSerde
 }

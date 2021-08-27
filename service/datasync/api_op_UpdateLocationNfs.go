@@ -59,7 +59,7 @@ type UpdateLocationNfsInput struct {
 	// DataSync to access have permissions that allow read access for all users. Doing
 	// either option enables the agent to read the files. For the agent to access
 	// directories, you must additionally enable all execute access. If you are copying
-	// data to or from your AWS Snowcone device, see NFS Server on AWS Snowcone
+	// data to or from your Snowcone device, see NFS Server on Snowcone
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-nfs-location.html#nfs-on-snowcone)
 	// for more information. For information about NFS export configuration, see 18.7.
 	// The /etc/exports Configuration File in the Red Hat Enterprise Linux

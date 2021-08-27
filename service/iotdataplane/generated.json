@@ -6,8 +6,10 @@
     "files": [
         "api_client.go",
         "api_op_DeleteThingShadow.go",
+        "api_op_GetRetainedMessage.go",
         "api_op_GetThingShadow.go",
         "api_op_ListNamedShadowsForThing.go",
+        "api_op_ListRetainedMessages.go",
         "api_op_Publish.go",
         "api_op_UpdateThingShadow.go",
         "deserializers.go",

@@ -3067,7 +3067,7 @@
                 "target": "com.amazonaws.ec2#AssignIpv6AddressesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more IPv6 addresses to the specified network interface. You can\n            specify one or more specific IPv6 addresses, or you can specify the number of IPv6\n            addresses to be automatically assigned from within the subnet's IPv6 CIDR block range.\n            You can assign as many IPv6 addresses to a network interface as you can assign private\n            IPv4 addresses, and the limit varies per instance type. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI\">IP Addresses Per Network Interface Per Instance Type</a>\n            in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        <p>You must specify either the IPv6 addresses or the IPv6 address count in the request. </p>\n        <p>You can optionally use Prefix Delegation on the network interface. You must specify\n            either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation\">Prefix Delegation</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Assigns one or more IPv6 addresses to the specified network interface. You can\n            specify one or more specific IPv6 addresses, or you can specify the number of IPv6\n            addresses to be automatically assigned from within the subnet's IPv6 CIDR block range.\n            You can assign as many IPv6 addresses to a network interface as you can assign private\n            IPv4 addresses, and the limit varies per instance type. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI\">IP Addresses Per Network Interface Per Instance Type</a>\n            in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        <p>You must specify either the IPv6 addresses or the IPv6 address count in the request. </p>\n        <p>You can optionally use Prefix Delegation on the network interface. You must specify\n            either the IPV6 Prefix Delegation prefixes, or the IPv6 Prefix Delegation count. For\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html\">\n                Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#AssignIpv6AddressesRequest": {
@@ -3092,13 +3092,13 @@
                 "Ipv6PrefixCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of IPv6 Prefix Delegation prefixes that AWS automatically assigns to the\n            network interface. You cannot use this option if you use the <code>Ipv6Prefixes</code>\n            option.</p>"
+                        "smithy.api#documentation": "<p>The number of IPv6 prefixes that Amazon Web Services automatically assigns to the\n            network interface. You cannot use this option if you use the <code>Ipv6Prefixes</code>\n            option.</p>"
                     }
                 },
                 "Ipv6Prefixes": {
                     "target": "com.amazonaws.ec2#IpPrefixList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more IPv6 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv6 prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
                         "smithy.api#xmlName": "Ipv6Prefix"
                     }
                 },
@@ -3128,7 +3128,7 @@
                     "target": "com.amazonaws.ec2#IpPrefixList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AssignedIpv6PrefixSet",
-                        "smithy.api#documentation": "<p>The IPv6 Prefix Delegation prefixes\n            that are\n            assigned to the network interface.</p>",
+                        "smithy.api#documentation": "<p>The IPv6 prefixes that are assigned to the network interface.</p>",
                         "smithy.api#xmlName": "assignedIpv6PrefixSet"
                     }
                 },
@@ -3151,7 +3151,7 @@
                 "target": "com.amazonaws.ec2#AssignPrivateIpAddressesResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Assigns one or more secondary private IP addresses to the specified network interface.</p> \n        <p>You can specify one or more specific secondary IP addresses, or you can specify the number \n            of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. \n            The number of secondary IP addresses that you can assign to an instance varies by instance type.\n            For information about instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about \n            Elastic IP addresses, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        <p>When you move a secondary private IP address to another network interface, any Elastic IP address \n            that is associated with the IP address is also moved.</p>\n        <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network\n            interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance\n            metadata to confirm that the remapping is complete.</p>\n        <p>You must specify either the IP addresses or the IP address count in the request.</p>\n        <p>You can optionally use Prefix Delegation on the network interface. You must specify\n            either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation\">Prefix Delegation</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<p>Assigns one or more secondary private IP addresses to the specified network interface.</p> \n        <p>You can specify one or more specific secondary IP addresses, or you can specify the number \n            of secondary IP addresses to be automatically assigned within the subnet's CIDR block range. \n            The number of secondary IP addresses that you can assign to an instance varies by instance type.\n            For information about instance types, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html\">Instance Types</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>. For more information about \n            Elastic IP addresses, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html\">Elastic IP Addresses</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>\n        <p>When you move a secondary private IP address to another network interface, any Elastic IP address \n            that is associated with the IP address is also moved.</p>\n        <p>Remapping an IP address is an asynchronous operation. When you move an IP address from one network\n            interface to another, check <code>network/interfaces/macs/mac/local-ipv4s</code> in the instance\n            metadata to confirm that the remapping is complete.</p>\n        <p>You must specify either the IP addresses or the IP address count in the request.</p>\n        <p>You can optionally use Prefix Delegation on the network interface. You must specify\n            either the IPv4 Prefix Delegation prefixes, or the IPv4 Prefix Delegation count. For\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html\">\n                Assigning prefixes to Amazon EC2 network interfaces</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
             }
         },
         "com.amazonaws.ec2#AssignPrivateIpAddressesRequest": {
@@ -3193,14 +3193,14 @@
                 "Ipv4Prefixes": {
                     "target": "com.amazonaws.ec2#IpPrefixList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more IPv4 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv4 prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
                         "smithy.api#xmlName": "Ipv4Prefix"
                     }
                 },
                 "Ipv4PrefixCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of IPv4 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv4 Prefixes</code> option.</p>"
+                        "smithy.api#documentation": "<p>The number of IPv4 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv4 Prefixes</code> option.</p>"
                     }
                 }
             },
@@ -3231,7 +3231,7 @@
                     "target": "com.amazonaws.ec2#Ipv4PrefixesList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "AssignedIpv4PrefixSet",
-                        "smithy.api#documentation": "<p>The IPv4 Prefix Delegation prefixes\n            that are\n            assigned to the network interface.</p>",
+                        "smithy.api#documentation": "<p>The IPv4 prefixes that are assigned to the network interface.</p>",
                         "smithy.api#xmlName": "assignedIpv4PrefixSet"
                     }
                 }
@@ -3735,7 +3735,7 @@
                 "target": "com.amazonaws.ec2#AssociateTransitGatewayMulticastDomainResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Associates the specified subnets and transit gateway attachments with the specified transit gateway multicast domain.</p>\n        <p>The transit gateway attachment must be in the available state before you can add a resource. Use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html\">DescribeTransitGatewayAttachments</a> to see the state of the attachment.</p>"
+                "smithy.api#documentation": "<p>Associates the specified subnets and transit gateway attachments with the specified transit gateway multicast domain.</p>\n        <p>The transit gateway attachment must be in the available state before you can add a resource. Use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeTransitGatewayAttachments.html\">DescribeTransitGatewayAttachments</a> \n            to see the state of the attachment.</p>"
             }
         },
         "com.amazonaws.ec2#AssociateTransitGatewayMulticastDomainRequest": {
@@ -3839,7 +3839,7 @@
                 "target": "com.amazonaws.ec2#AssociateTrunkInterfaceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Associates a branch network interface with a trunk network interface.</p>\n        <p>Before you create the association, run the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">create-network-interface</a> command and set\n            <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p>\n        <p>For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/eni-trunking.html\">\n            Network interface trunking</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                "smithy.api#documentation": "<note>\n            <p>This API action is currently in <b>limited preview only</b>. \n                If you are interested in using this feature, contact your account manager.</p>\n        </note>\n        \n        <p>Associates a branch network interface with a trunk network interface.</p>\n        <p>Before you create the association, run the <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateNetworkInterface.html\">create-network-interface</a> command and set\n            <code>--interface-type</code> to <code>trunk</code>. You must also create a network interface for each branch network interface that you want to associate with the trunk network interface.</p>"
             }
         },
         "com.amazonaws.ec2#AssociateTrunkInterfaceRequest": {
@@ -10934,27 +10934,27 @@
                 "Ipv4Prefixes": {
                     "target": "com.amazonaws.ec2#Ipv4PrefixList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or moreIPv4 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv4 prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
                         "smithy.api#xmlName": "Ipv4Prefix"
                     }
                 },
                 "Ipv4PrefixCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of IPv4 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv4 Prefixes</code> option.</p>"
+                        "smithy.api#documentation": "<p>The number of IPv4 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv4 Prefixes</code> option.</p>"
                     }
                 },
                 "Ipv6Prefixes": {
                     "target": "com.amazonaws.ec2#Ipv6PrefixList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or moreIPv6 Prefix Delegation prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv6 prefixes assigned to the network interface. You cannot use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
                         "smithy.api#xmlName": "Ipv6Prefix"
                     }
                 },
                 "Ipv6PrefixCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of IPv6 Prefix Delegation prefixes that AWS automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv6Prefixes</code> option.</p>"
+                        "smithy.api#documentation": "<p>The number of IPv6 prefixes that Amazon Web Services automatically assigns to the network interface. You cannot use this option if you use the <code>Ipv6Prefixes</code> option.</p>"
                     }
                 },
                 "InterfaceType": {
@@ -12358,7 +12358,7 @@
                 "target": "com.amazonaws.ec2#CreateTransitGatewayConnectResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance.</p>\n        <p>A Connect attachment uses an existing VPC or AWS Direct Connect attachment as the underlying transport mechanism. </p>"
+                "smithy.api#documentation": "<p>Creates a Connect attachment from a specified transit gateway attachment. A Connect attachment is a GRE-based tunnel attachment that you can use to establish a connection between a transit gateway and an appliance.</p>\n        <p>A Connect attachment uses an existing VPC or Amazon Web Services Direct Connect attachment as the underlying transport mechanism.</p>"
             }
         },
         "com.amazonaws.ec2#CreateTransitGatewayConnectPeer": {
@@ -12443,7 +12443,7 @@
                 "TransportTransitGatewayAttachmentId": {
                     "target": "com.amazonaws.ec2#TransitGatewayAttachmentId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment. You can specify a VPC attachment or a AWS Direct Connect attachment.</p>",
+                        "smithy.api#documentation": "<p>The ID of the transit gateway attachment. You can specify a VPC attachment or Amazon Web Services Direct Connect attachment.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -12588,7 +12588,7 @@
                 "target": "com.amazonaws.ec2#CreateTransitGatewayPeeringAttachmentResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Requests a transit gateway peering attachment between the specified transit gateway\n            (requester) and a peer transit gateway (accepter). The transit gateways must be in\n            different Regions. The peer transit gateway can be in your account or a different AWS\n            account. </p>\n         <p>After you create the peering attachment, the owner of the accepter\n            transit gateway must accept the attachment request.</p>"
+                "smithy.api#documentation": "<p>Requests a transit gateway peering attachment between the specified transit gateway\n            (requester) and a peer transit gateway (accepter). The transit gateways must be in\n            different Regions. The peer transit gateway can be in your account or a different \n            Amazon Web Services account.</p>\n        <p>After you create the peering attachment, the owner of the accepter transit gateway \n            must accept the attachment request.</p>"
             }
         },
         "com.amazonaws.ec2#CreateTransitGatewayPeeringAttachmentRequest": {
@@ -12611,7 +12611,7 @@
                 "PeerAccountId": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID of the owner of the peer transit gateway.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the peer transit gateway.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -25385,7 +25385,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> |\n               <code>disassociating</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-id</code> - The ID of the resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-owner-id</code> - The ID of the AWS account that owns the resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-type</code> - The resource type. Valid values are <code>vpc</code>\n                    | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>\n                    | <code>connect</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> |  <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-id</code> - The ID of the transit gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-owner-id</code> - The ID of the AWS account that owns the transit gateway.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>association.state</code> - The state of the association (<code>associating</code> | <code>associated</code> |\n               <code>disassociating</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>association.transit-gateway-route-table-id</code> - The ID of the route table for the transit gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-id</code> - The ID of the resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-owner-id</code> - The ID of the Amazon Web Services account that owns the resource.</p>\n            </li>\n            <li>\n               <p>\n                  <code>resource-type</code> - The resource type. Valid values are <code>vpc</code>\n                    | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>peering</code>\n                    | <code>connect</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> |  <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-attachment-id</code> - The ID of the attachment.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-id</code> - The ID of the transit gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-owner-id</code> - The ID of the Amazon Web Services account that owns the transit gateway.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -25685,7 +25685,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>transit-gateway-attachment-id</code> - The ID of the transit gateway attachment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>local-owner-id</code> - The ID of your AWS account.</p>\n            </li>\n            <li>\n                <p>\n                  <code>remote-owner-id</code> - The ID of the AWS account in the remote Region that owns the transit gateway.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the peering attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> |  <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-id</code> - The ID of the transit gateway.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>transit-gateway-attachment-id</code> - The ID of the transit gateway attachment.</p>\n            </li>\n            <li>\n                <p>\n                  <code>local-owner-id</code> - The ID of your Amazon Web Services account.</p>\n            </li>\n            <li>\n                <p>\n                  <code>remote-owner-id</code> - The ID of the Amazon Web Services account in the remote Region that owns the transit gateway.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the peering attachment. Valid values are <code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>failed</code> |  <code>failing</code> | <code>initiatingRequest</code> | <code>modifying</code> | <code>pendingAcceptance</code> | <code>pending</code> | <code>rollingBack</code> | <code>rejected</code> | <code>rejecting</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag</code>:<key> - The key/value combination of a tag assigned to the resource. Use the tag key in the filter name and the tag value as the filter value.\n    For example, to find all resources that have a tag with the key <code>Owner</code> and the value <code>TeamA</code>, specify <code>tag:Owner</code> for the filter name and <code>TeamA</code> for the filter value.</p>\n            </li>\n            <li>\n               <p>\n                  <code>tag-key</code> - The key of a tag assigned to the resource. Use this filter to find all resources that have a tag with a specific key, regardless of the tag value.</p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-id</code> - The ID of the transit gateway.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -25910,7 +25910,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>options.propagation-default-route-table-id</code> - The ID of the default propagation route table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.amazon-side-asn</code> - The private ASN for the Amazon side of a BGP session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.association-default-route-table-id</code> - The ID of the default association route table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.auto-accept-shared-attachments</code> - Indicates whether there is automatic acceptance of attachment requests (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically \n               associated with the default association route table (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate \n               routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.dns-support</code> - Indicates whether DNS support is enabled (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.vpn-ecmp-support</code> - Indicates whether Equal Cost Multipath Protocol support is enabled  (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The ID of the AWS account that owns the transit gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the transit gateway (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>modifying</code> | <code>pending</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-id</code> - The ID of the transit gateway.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>options.propagation-default-route-table-id</code> - The ID of the default propagation route table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.amazon-side-asn</code> - The private ASN for the Amazon side of a BGP session.</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.association-default-route-table-id</code> - The ID of the default association route table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.auto-accept-shared-attachments</code> - Indicates whether there is automatic acceptance of attachment requests (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.default-route-table-association</code> - Indicates whether resource attachments are automatically \n               associated with the default association route table (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.default-route-table-propagation</code> - Indicates whether resource attachments automatically propagate \n               routes to the default propagation route table (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.dns-support</code> - Indicates whether DNS support is enabled (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>options.vpn-ecmp-support</code> - Indicates whether Equal Cost Multipath Protocol support is enabled  (<code>enable</code> | <code>disable</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>owner-id</code> - The ID of the Amazon Web Services account that owns the transit gateway.</p>\n            </li>\n            <li>\n               <p>\n                  <code>state</code> - The state of the transit gateway (<code>available</code> | <code>deleted</code> | <code>deleting</code> | <code>modifying</code> | <code>pending</code>).</p>\n            </li>\n            <li>\n               <p>\n                  <code>transit-gateway-id</code> - The ID of the transit gateway.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -25964,7 +25964,7 @@
                 "target": "com.amazonaws.ec2#DescribeTrunkInterfaceAssociationsResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes one or more network interface trunk associations.</p>",
+                "smithy.api#documentation": "<note>\n            <p>This API action is currently in <b>limited preview only</b>. \n                If you are interested in using this feature, contact your account manager.</p>\n        </note>\n        <p>Describes one or more network interface trunk associations.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
                     "outputToken": "NextToken",
@@ -28853,7 +28853,7 @@
                 "target": "com.amazonaws.ec2#DisassociateTrunkInterfaceResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Removes an association between a branch network interface with a trunk network interface.</p>"
+                "smithy.api#documentation": "<note>\n            <p>This API action is currently in <b>limited preview only</b>. \n                If you are interested in using this feature, contact your account manager.</p>\n        </note>\n        <p>Removes an association between a branch network interface with a trunk network interface.</p>"
             }
         },
         "com.amazonaws.ec2#DisassociateTrunkInterfaceRequest": {
@@ -28862,7 +28862,7 @@
                 "AssociationId": {
                     "target": "com.amazonaws.ec2#TrunkInterfaceAssociationId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID ofthe association</p>",
+                        "smithy.api#documentation": "<p>The ID of the association</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -39043,6 +39043,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If\n            the parameter is not specified, the default state is <code>enabled</code>.</p>\n        <note>\n            <p>If you specify a value of <code>disabled</code>, you will not be able to access your\n                instance metadata.</p>\n        </note>"
                     }
+                },
+                "HttpProtocolIpv6": {
+                    "target": "com.amazonaws.ec2#InstanceMetadataProtocolState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p>"
+                    }
                 }
             },
             "traits": {
@@ -39083,6 +39089,14 @@
                         "smithy.api#documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If\n            the parameter is not specified, the default state is <code>enabled</code>.</p>\n        <note>\n            <p>If you specify a value of <code>disabled</code>, you will not be able to access your\n                instance metadata.</p>\n        </note>",
                         "smithy.api#xmlName": "httpEndpoint"
                     }
+                },
+                "HttpProtocolIpv6": {
+                    "target": "com.amazonaws.ec2#InstanceMetadataProtocolState",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HttpProtocolIpv6",
+                        "smithy.api#documentation": "<p>Whether or not the IPv6 endpoint for the instance metadata service is enabled or disabled.</p>",
+                        "smithy.api#xmlName": "httpProtocolIpv6"
+                    }
                 }
             },
             "traits": {
@@ -39100,6 +39114,21 @@
                     {
                         "value": "applied",
                         "name": "applied"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#InstanceMetadataProtocolState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "disabled",
+                        "name": "disabled"
+                    },
+                    {
+                        "value": "enabled",
+                        "name": "enabled"
                     }
                 ]
             }
@@ -39507,7 +39536,7 @@
                 "NetworkCardIndex": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The index of the network card. Some instance types support multiple network cards. \n            The primary network interface must be assigned to network card index 0. \n            The default is network card index 0.</p>"
+                        "smithy.api#documentation": "<p>The index of the network card. Some instance types support multiple network cards. \n            The primary network interface must be assigned to network card index 0. \n            The default is network card index 0.</p>\n        <p>If you are using <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html\">RequestSpotInstances</a> to create Spot Instances, omit this parameter because\n            you can’t specify the network card index when using this API. To specify the network\n            card index, use <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html\">RunInstances</a>.</p>"
                     }
                 },
                 "Ipv4Prefixes": {
@@ -42281,13 +42310,13 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv4Prefix",
-                        "smithy.api#documentation": "<p>The IPv4 Prefix Delegation prefix. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation\">Prefix Delegation</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
+                        "smithy.api#documentation": "<p>The IPv4 prefix. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html\">\n            Assigning prefixes to Amazon EC2 network interfaces</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>.</p>",
                         "smithy.api#xmlName": "ipv4Prefix"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes an IPv4 Prefix Delegation.</p>"
+                "smithy.api#documentation": "<p>Describes an IPv4 prefix.</p>"
             }
         },
         "com.amazonaws.ec2#Ipv4PrefixSpecificationRequest": {
@@ -42296,12 +42325,12 @@
                 "Ipv4Prefix": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 Prefix Delegation prefix. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation\">Prefix Delegation</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>The IPv4 prefix. For information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html\">\n            Assigning prefixes to Amazon EC2 network interfaces</a> in the\n                <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the IPv4 Prefix Delegation option for a network interface.</p>"
+                "smithy.api#documentation": "<p>Describes the IPv4 prefix option for a network interface.</p>"
             }
         },
         "com.amazonaws.ec2#Ipv4PrefixSpecificationResponse": {
@@ -42500,13 +42529,13 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv6Prefix",
-                        "smithy.api#documentation": "<p>The IPv6 Prefix Delegation prefix.</p>",
+                        "smithy.api#documentation": "<p>The IPv6 prefix.</p>",
                         "smithy.api#xmlName": "ipv6Prefix"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the IPv6 Prefix Delegation.</p>"
+                "smithy.api#documentation": "<p>Describes the IPv6 prefix.</p>"
             }
         },
         "com.amazonaws.ec2#Ipv6PrefixSpecificationRequest": {
@@ -42515,12 +42544,12 @@
                 "Ipv6Prefix": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv6 Prefix Delegation prefix.</p>"
+                        "smithy.api#documentation": "<p>The IPv6 prefix.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes the IPv4 Prefix Delegation option for a network interface.</p>"
+                "smithy.api#documentation": "<p>Describes the IPv4 prefix option for a network interface.</p>"
             }
         },
         "com.amazonaws.ec2#Ipv6PrefixSpecificationResponse": {
@@ -46869,6 +46898,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Checks whether you have the required permissions for the action, without actually making the request, and provides an error response. If you have the required permissions, the error response is <code>DryRunOperation</code>. Otherwise, it is <code>UnauthorizedOperation</code>.</p>"
                     }
+                },
+                "HttpProtocolIpv6": {
+                    "target": "com.amazonaws.ec2#InstanceMetadataProtocolState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p>"
+                    }
                 }
             }
         },
@@ -47087,6 +47122,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>One or more entries to remove from the prefix list.</p>",
                         "smithy.api#xmlName": "RemoveEntry"
+                    }
+                },
+                "MaxEntries": {
+                    "target": "com.amazonaws.ec2#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum number of entries for the prefix list. You cannot modify the entries  \n            of a prefix list and modify the size of a prefix list at the same time.</p>"
                     }
                 }
             }
@@ -47930,7 +47971,7 @@
                 "Options": {
                     "target": "com.amazonaws.ec2#ModifyTransitGatewayVpcAttachmentRequestOptions",
                     "traits": {
-                        "smithy.api#documentation": "<p>The new VPC attachment options.</p>\n         <note>\n            <p>You cannot modify the IPv6 options.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>The new VPC attachment options.</p>"
                     }
                 },
                 "DryRun": {
@@ -50030,7 +50071,7 @@
                     "target": "com.amazonaws.ec2#Ipv4PrefixesList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv4PrefixSet",
-                        "smithy.api#documentation": "<p>The IPv4 Prefix Delegation prefixes\n            that are\n            assigned to the network interface.</p>",
+                        "smithy.api#documentation": "<p>The IPv4 prefixes that are assigned to the network interface.</p>",
                         "smithy.api#xmlName": "ipv4PrefixSet"
                     }
                 },
@@ -50038,7 +50079,7 @@
                     "target": "com.amazonaws.ec2#Ipv6PrefixesList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv6PrefixSet",
-                        "smithy.api#documentation": "<p>The IPv6 Prefix Delegation prefixes\n            that are\n            assigned to the network interface.</p>",
+                        "smithy.api#documentation": "<p>The IPv6 prefixes that are assigned to the network interface.</p>",
                         "smithy.api#xmlName": "ipv6PrefixSet"
                     }
                 },
@@ -51100,7 +51141,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The AWS account ID of the owner of the transit gateway.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -58961,7 +59002,7 @@
                 "Filters": {
                     "target": "com.amazonaws.ec2#FilterList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>group-ip-address</code> - The IP address of the  transit gateway multicast group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>is-group-member</code> - The resource is a group member. Valid values are <code>true</code> | <code>false</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>is-group-source</code> - The resource is a group source. Valid values are <code>true</code> | <code>false</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>member-type</code> - The member type. Valid values are <code>igmp</code> | <code>static</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>resource-id</code> - The ID of the resource.</p>\n            </li>\n            <li>\n                <p>\n                  <code>resource-type</code> - The type of resource. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>tgw-peering</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>source-type</code> - The source type. Valid values are <code>igmp</code> | <code>static</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>state</code> - The state of the subnet association. Valid values are <code>associated</code> | <code>associated</code> | <code>disassociated</code> | <code>disassociating</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-id</code> - The ID of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-attachment-id</code> - The id of the transit gateway attachment.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>One or more filters. The possible values are:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>group-ip-address</code> - The IP address of the  transit gateway multicast group.</p>\n            </li>\n            <li>\n                <p>\n                  <code>is-group-member</code> - The resource is a group member. Valid values are <code>true</code> | <code>false</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>is-group-source</code> - The resource is a group source. Valid values are <code>true</code> | <code>false</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>member-type</code> - The member type. Valid values are <code>igmp</code> | <code>static</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>resource-id</code> - The ID of the resource.</p>\n            </li>\n            <li>\n                <p>\n                  <code>resource-type</code> - The type of resource. Valid values are <code>vpc</code> | <code>vpn</code> | <code>direct-connect-gateway</code> | <code>tgw-peering</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>source-type</code> - The source type. Valid values are <code>igmp</code> | <code>static</code>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>subnet-id</code> - The ID of the subnet.</p>\n            </li>\n            <li>\n                <p>\n                  <code>transit-gateway-attachment-id</code> - The id of the transit gateway attachment.</p>\n            </li>\n         </ul>",
                         "smithy.api#xmlName": "Filter"
                     }
                 },
@@ -63845,7 +63886,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p>The ID of the AWS account ID that owns the transit gateway.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -63980,7 +64021,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "TransitGatewayOwnerId",
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the transit gateway.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the transit gateway.</p>",
                         "smithy.api#xmlName": "transitGatewayOwnerId"
                     }
                 },
@@ -63988,7 +64029,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceOwnerId",
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the resource.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the resource.</p>",
                         "smithy.api#xmlName": "resourceOwnerId"
                     }
                 },
@@ -64687,7 +64728,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "OwnerId",
-                        "smithy.api#documentation": "<p> The ID of the AWS account that owns the transit gateway multiicast domain.</p>",
+                        "smithy.api#documentation": "<p> The ID of the Amazon Web Services account that owns the transit gateway multicast domain.</p>",
                         "smithy.api#xmlName": "ownerId"
                     }
                 },
@@ -64759,7 +64800,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceOwnerId",
-                        "smithy.api#documentation": "<p> The ID of the AWS account that owns the transit gateway multicast domain association resource.</p>",
+                        "smithy.api#documentation": "<p> The ID of the Amazon Web Services account that owns the transit gateway multicast domain association resource.</p>",
                         "smithy.api#xmlName": "resourceOwnerId"
                     }
                 },
@@ -64824,7 +64865,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceOwnerId",
-                        "smithy.api#documentation": "<p> The ID of the AWS account that owns the resource.</p>",
+                        "smithy.api#documentation": "<p> The ID of the Amazon Web Services account that owns the resource.</p>",
                         "smithy.api#xmlName": "resourceOwnerId"
                     }
                 },
@@ -64964,7 +65005,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "ResourceOwnerId",
-                        "smithy.api#documentation": "<p> The ID of the AWS account that owns the transit gateway multicast domain group resource.</p>",
+                        "smithy.api#documentation": "<p> The ID of the Amazon Web Services account that owns the transit gateway multicast domain group resource.</p>",
                         "smithy.api#xmlName": "resourceOwnerId"
                     }
                 },
@@ -65916,7 +65957,7 @@
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
                         "aws.protocols#ec2QueryName": "VpcOwnerId",
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the VPC.</p>",
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the VPC.</p>",
                         "smithy.api#xmlName": "vpcOwnerId"
                     }
                 },
@@ -66076,13 +66117,13 @@
                     "target": "com.amazonaws.ec2#TagList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "TagSet",
-                        "smithy.api#documentation": "<p> The tags.</p>",
+                        "smithy.api#documentation": "<p>The tags for the trunk interface association.</p>",
                         "smithy.api#xmlName": "tagSet"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an association between a branch network interface with a trunk network interface.</p>"
+                "smithy.api#documentation": "<note>\n            <p>Currently available in <b>limited preview only</b>. \n                If you are interested in using this feature, contact your account manager.</p>\n        </note>\n        <p>Information about an association between a branch network interface with a trunk network interface.</p>"
             }
         },
         "com.amazonaws.ec2#TrunkInterfaceAssociationId": {
@@ -66316,7 +66357,7 @@
                 "Ipv6Prefixes": {
                     "target": "com.amazonaws.ec2#IpPrefixList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or moreIPv6 Prefix Delegation prefixes to unassign from the network interface.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv6 prefixes to unassign from the network interface.</p>",
                         "smithy.api#xmlName": "Ipv6Prefix"
                     }
                 },
@@ -66354,7 +66395,7 @@
                     "target": "com.amazonaws.ec2#IpPrefixList",
                     "traits": {
                         "aws.protocols#ec2QueryName": "UnassignedIpv6PrefixSet",
-                        "smithy.api#documentation": "<p>The IPv4 Prefix Delegation prefixes that have been unassigned from  the network interface.</p>",
+                        "smithy.api#documentation": "<p>The IPv4 prefixes that have been unassigned from  the network interface.</p>",
                         "smithy.api#xmlName": "unassignedIpv6PrefixSet"
                     }
                 }
@@ -66392,7 +66433,7 @@
                 "Ipv4Prefixes": {
                     "target": "com.amazonaws.ec2#IpPrefixList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 Prefix Delegation prefixes to unassign from  the network interface.</p>",
+                        "smithy.api#documentation": "<p>The IPv4 prefixes to unassign from  the network interface.</p>",
                         "smithy.api#xmlName": "Ipv4Prefix"
                     }
                 }

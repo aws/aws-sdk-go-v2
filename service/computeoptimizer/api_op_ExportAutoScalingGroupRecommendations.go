@@ -13,12 +13,12 @@ import (
 
 // Exports optimization recommendations for Auto Scaling groups. Recommendations
 // are exported in a comma-separated values (.csv) file, and its metadata in a
-// JavaScript Object Notation (.json) file, to an existing Amazon Simple Storage
-// Service (Amazon S3) bucket that you specify. For more information, see Exporting
-// Recommendations
+// JavaScript Object Notation (JSON) (.json) file, to an existing Amazon Simple
+// Storage Service (Amazon S3) bucket that you specify. For more information, see
+// Exporting Recommendations
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/exporting-recommendations.html)
 // in the Compute Optimizer User Guide. You can have only one Auto Scaling group
-// export job in progress per AWS Region.
+// export job in progress per Amazon Web Services Region.
 func (c *Client) ExportAutoScalingGroupRecommendations(ctx context.Context, params *ExportAutoScalingGroupRecommendationsInput, optFns ...func(*Options)) (*ExportAutoScalingGroupRecommendationsOutput, error) {
 	if params == nil {
 		params = &ExportAutoScalingGroupRecommendationsInput{}
@@ -40,22 +40,22 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// bucket name and key prefix for the export job. You must create the destination
 	// Amazon S3 bucket for your recommendations export before you create the export
 	// job. Compute Optimizer does not create the S3 bucket for you. After you create
-	// the S3 bucket, ensure that it has the required permission policy to allow
+	// the S3 bucket, ensure that it has the required permissions policy to allow
 	// Compute Optimizer to write the export file to it. If you plan to specify an
 	// object prefix when you create the export job, you must include the object prefix
 	// in the policy that you add to the S3 bucket. For more information, see Amazon S3
 	// Bucket Policy for Compute Optimizer
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/create-s3-bucket-policy-for-compute-optimizer.html)
-	// in the Compute Optimizer user guide.
+	// in the Compute Optimizer User Guide.
 	//
 	// This member is required.
 	S3DestinationConfig *types.S3DestinationConfig
 
-	// The IDs of the AWS accounts for which to export Auto Scaling group
-	// recommendations. If your account is the management account of an organization,
-	// use this parameter to specify the member account for which you want to export
-	// recommendations. This parameter cannot be specified together with the include
-	// member accounts parameter. The parameters are mutually exclusive.
+	// The IDs of the Amazon Web Services accounts for which to export Auto Scaling
+	// group recommendations. If your account is the management account of an
+	// organization, use this parameter to specify the member account for which you
+	// want to export recommendations. This parameter cannot be specified together with
+	// the include member accounts parameter. The parameters are mutually exclusive.
 	// Recommendations for member accounts are not included in the export if this
 	// parameter, or the include member accounts parameter, is omitted. You can specify
 	// multiple account IDs per request.
@@ -71,7 +71,7 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// is Csv.
 	FileFormat types.FileFormat
 
-	// An array of objects that describe a filter to export a more specific set of Auto
+	// An array of objects to specify a filter that exports a more specific set of Auto
 	// Scaling group recommendations.
 	Filters []types.Filter
 
@@ -79,16 +79,20 @@ type ExportAutoScalingGroupRecommendationsInput struct {
 	// accounts of the organization if your account is the management account of an
 	// organization. The member accounts must also be opted in to Compute Optimizer,
 	// and trusted access for Compute Optimizer must be enabled in the organization
-	// account. For more information, see Compute Optimizer and AWS Organizations
-	// trusted access
+	// account. For more information, see Compute Optimizer and Amazon Web Services
+	// Organizations trusted access
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html#trusted-service-access)
-	// in the AWS Compute Optimizer User Guide. Recommendations for member accounts of
-	// the organization are not included in the export file if this parameter is
-	// omitted. This parameter cannot be specified together with the account IDs
-	// parameter. The parameters are mutually exclusive. Recommendations for member
-	// accounts are not included in the export if this parameter, or the account IDs
-	// parameter, is omitted.
+	// in the Compute Optimizer User Guide. Recommendations for member accounts of the
+	// organization are not included in the export file if this parameter is omitted.
+	// This parameter cannot be specified together with the account IDs parameter. The
+	// parameters are mutually exclusive. Recommendations for member accounts are not
+	// included in the export if this parameter, or the account IDs parameter, is
+	// omitted.
 	IncludeMemberAccounts bool
+
+	// An object to specify the preferences for the Auto Scaling group recommendations
+	// to export.
+	RecommendationPreferences *types.RecommendationPreferences
 
 	noSmithyDocumentSerde
 }

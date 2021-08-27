@@ -85,7 +85,7 @@ type DescribeRestoreJobOutput struct {
 	// Uniquely identifies the job that restores a recovery point.
 	RestoreJobId *string
 
-	// Status code specifying the state of the job that is initiated by AWS Backup to
+	// Status code specifying the state of the job that is initiated by Backup to
 	// restore a recovery point.
 	Status types.RestoreJobStatus
 

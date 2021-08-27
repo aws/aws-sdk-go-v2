@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an endpoint for an Amazon S3 bucket. For more information, see
-// https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli
-// in the AWS DataSync User Guide.
+// Creates an endpoint for an Amazon S3 bucket. For more information, see Create an
+// Amazon S3 location
+// (https://docs.aws.amazon.com/datasync/latest/userguide/create-locations-cli.html#create-location-s3-cli)
+// in the DataSync User Guide.
 func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3Input, optFns ...func(*Options)) (*CreateLocationS3Output, error) {
 	if params == nil {
 		params = &CreateLocationS3Input{}
@@ -32,35 +33,34 @@ func (c *Client) CreateLocationS3(ctx context.Context, params *CreateLocationS3I
 // CreateLocationS3Request
 type CreateLocationS3Input struct {
 
-	// The ARN of the Amazon S3 bucket. If the bucket is on an AWS Outpost, this must
-	// be an access point ARN.
+	// The ARN of the Amazon S3 bucket. If the bucket is on an Amazon Web Services
+	// Outpost, this must be an access point ARN.
 	//
 	// This member is required.
 	S3BucketArn *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that is used to access an Amazon S3 bucket. For detailed information about
-	// using such a role, see Creating a Location for Amazon S3 in the AWS DataSync
-	// User Guide.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// that is used to access an Amazon S3 bucket. For detailed information about using
+	// such a role, see Creating a Location for Amazon S3 in the DataSync User Guide.
 	//
 	// This member is required.
 	S3Config *types.S3Config
 
-	// If you are using DataSync on an AWS Outpost, specify the Amazon Resource Names
-	// (ARNs) of the DataSync agents deployed on your Outpost. For more information
-	// about launching a DataSync agent on an AWS Outpost, see Deploy your DataSync
-	// agent on AWS Outposts
+	// If you are using DataSync on an Amazon Web Services Outpost, specify the Amazon
+	// Resource Names (ARNs) of the DataSync agents deployed on your Outpost. For more
+	// information about launching a DataSync agent on an Amazon Web Services Outpost,
+	// see Deploy your DataSync agent on Outposts
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent).
 	AgentArns []string
 
 	// The Amazon S3 storage class that you want to store your files in when this
-	// location is used as a task destination. For buckets in AWS Regions, the storage
-	// class defaults to Standard. For buckets on AWS Outposts, the storage class
-	// defaults to AWS S3 Outposts. For more information about S3 storage classes, see
-	// Amazon S3 Storage Classes (http://aws.amazon.com/s3/storage-classes/). Some
-	// storage classes have behaviors that can affect your S3 storage cost. For
-	// detailed information, see Considerations when working with S3 storage classes in
-	// DataSync
+	// location is used as a task destination. For buckets in Amazon Web Services
+	// Regions, the storage class defaults to Standard. For buckets on Outposts, the
+	// storage class defaults to Amazon Web Services S3 Outposts. For more information
+	// about S3 storage classes, see Amazon S3 Storage Classes
+	// (http://aws.amazon.com/s3/storage-classes/). Some storage classes have behaviors
+	// that can affect your S3 storage cost. For detailed information, see
+	// Considerations when working with S3 storage classes in DataSync
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes).
 	S3StorageClass types.S3StorageClass
 

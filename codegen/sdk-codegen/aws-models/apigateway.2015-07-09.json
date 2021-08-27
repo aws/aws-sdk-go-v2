@@ -55,7 +55,7 @@
                 "cloudwatchRoleArn": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>. </p>"
+                        "smithy.api#documentation": "<p>The ARN of an Amazon CloudWatch role for the current <a>Account</a>.</p>"
                     }
                 },
                 "throttleSettings": {
@@ -1122,6 +1122,9 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
@@ -1229,6 +1232,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -1541,6 +1547,9 @@
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
                 },
                 {
@@ -1732,6 +1741,9 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
@@ -1866,6 +1878,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#LimitExceededException"
@@ -2129,6 +2144,9 @@
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -2235,6 +2253,12 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
                 },
                 {
@@ -2290,6 +2314,12 @@
                 "target": "com.amazonaws.apigateway#DeleteApiKeyRequest"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -2445,6 +2475,9 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -2487,6 +2520,12 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -2649,6 +2688,9 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -2728,7 +2770,7 @@
                 "responseType": {
                     "target": "com.amazonaws.apigateway#GatewayResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>",
+                        "smithy.api#documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -2744,6 +2786,9 @@
                 "target": "com.amazonaws.apigateway#DeleteIntegrationRequest"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
@@ -3175,6 +3220,9 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -3217,6 +3265,12 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -3269,6 +3323,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -3368,6 +3425,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -3736,7 +3796,7 @@
                 "regionalHostedZoneId": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and  <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>. </p>"
+                        "smithy.api#documentation": "<p>The region-specific Amazon Route 53 Hosted Zone ID of the regional endpoint. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and  <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>.</p>"
                     }
                 },
                 "regionalCertificateName": {
@@ -3760,7 +3820,7 @@
                 "distributionHostedZoneId": {
                     "target": "com.amazonaws.apigateway#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is <code>Z2FDTNDATAQYW2</code> for all the regions. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>. </p>"
+                        "smithy.api#documentation": "<p>The region-agnostic Amazon Route 53 Hosted Zone ID of the edge-optimized endpoint. The valid value is <code>Z2FDTNDATAQYW2</code> for all the regions. For more information, see <a href=\"https://docs.aws.amazon.com/apigateway/latest/developerguide/apigateway-regional-api-custom-domain-create.html\">Set up a Regional Custom Domain Name</a> and <a href=\"https://docs.aws.amazon.com/general/latest/gr/rande.html#apigateway_region\">AWS Regions and Endpoints for API Gateway</a>.</p>"
                     }
                 },
                 "endpointConfiguration": {
@@ -3941,6 +4001,12 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -3993,6 +4059,12 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -4041,7 +4113,7 @@
                 "responseType": {
                     "target": "com.amazonaws.apigateway#GatewayResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p>"
+                        "smithy.api#documentation": "<p>The response type of the associated <a>GatewayResponse</a>.</p>"
                     }
                 },
                 "statusCode": {
@@ -4156,6 +4228,10 @@
                     {
                         "value": "QUOTA_EXCEEDED",
                         "name": "QUOTA_EXCEEDED"
+                    },
+                    {
+                        "value": "WAF_FILTERED",
+                        "name": "WAF_FILTERED"
                     }
                 ]
             }
@@ -4191,6 +4267,12 @@
                 "target": "com.amazonaws.apigateway#ClientCertificate"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
@@ -4240,6 +4322,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -4274,6 +4359,9 @@
                 "target": "com.amazonaws.apigateway#ApiKey"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -4327,6 +4415,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
@@ -4402,6 +4493,9 @@
                 "target": "com.amazonaws.apigateway#Authorizer"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -4516,6 +4610,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -4567,6 +4664,9 @@
                 "target": "com.amazonaws.apigateway#BasePathMappings"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -4632,6 +4732,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -4677,6 +4780,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
@@ -4731,6 +4837,9 @@
                 "target": "com.amazonaws.apigateway#Deployment"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -4863,6 +4972,9 @@
                 "target": "com.amazonaws.apigateway#DocumentationPart"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -5114,10 +5226,10 @@
             },
             "errors": [
                 {
-                    "target": "com.amazonaws.apigateway#NotFoundException"
+                    "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
-                    "target": "com.amazonaws.apigateway#ServiceUnavailableException"
+                    "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
@@ -5162,6 +5274,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
@@ -5221,6 +5336,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -5297,6 +5415,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -5329,7 +5450,7 @@
                 "responseType": {
                     "target": "com.amazonaws.apigateway#GatewayResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>",
+                        "smithy.api#documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -5410,6 +5531,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -5469,6 +5593,9 @@
                 "target": "com.amazonaws.apigateway#IntegrationResponse"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -5666,6 +5793,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -5846,6 +5976,9 @@
                 "target": "com.amazonaws.apigateway#RequestValidator"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -6093,6 +6226,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -6138,6 +6274,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
@@ -6197,6 +6336,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -6266,6 +6408,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -6308,6 +6453,12 @@
                 "target": "com.amazonaws.apigateway#SdkTypes"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
                 },
@@ -6354,6 +6505,15 @@
                 "target": "com.amazonaws.apigateway#Stage"
             },
             "errors": [
+                {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
@@ -6407,6 +6567,15 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -6459,9 +6628,6 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
-                },
-                {
-                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -6738,9 +6904,6 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
-                    "target": "com.amazonaws.apigateway#ConflictException"
-                },
-                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -6857,6 +7020,9 @@
             },
             "errors": [
                 {
+                    "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -6902,6 +7068,9 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
@@ -7028,6 +7197,9 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
@@ -7103,6 +7275,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#TooManyRequestsException"
@@ -8016,6 +8191,9 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
@@ -8051,7 +8229,7 @@
                 "responseType": {
                     "target": "com.amazonaws.apigateway#GatewayResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>",
+                        "smithy.api#documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -8093,6 +8271,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -9666,6 +9847,9 @@
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -9721,6 +9905,12 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -9767,6 +9957,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -9820,6 +10013,12 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -9886,6 +10085,9 @@
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -9947,6 +10149,12 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -9998,6 +10206,12 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -10133,6 +10347,9 @@
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -10196,6 +10413,9 @@
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -10249,6 +10469,12 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -10281,7 +10507,7 @@
                 "responseType": {
                     "target": "com.amazonaws.apigateway#GatewayResponseType",
                     "traits": {
-                        "smithy.api#documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>. Valid values are <ul><li>ACCESS_DENIED</li><li>API_CONFIGURATION_ERROR</li><li>AUTHORIZER_FAILURE</li><li> AUTHORIZER_CONFIGURATION_ERROR</li><li>BAD_REQUEST_PARAMETERS</li><li>BAD_REQUEST_BODY</li><li>DEFAULT_4XX</li><li>DEFAULT_5XX</li><li>EXPIRED_TOKEN</li><li>INVALID_SIGNATURE</li><li>INTEGRATION_FAILURE</li><li>INTEGRATION_TIMEOUT</li><li>INVALID_API_KEY</li><li>MISSING_AUTHENTICATION_TOKEN</li><li> QUOTA_EXCEEDED</li><li>REQUEST_TOO_LARGE</li><li>RESOURCE_NOT_FOUND</li><li>THROTTLED</li><li>UNAUTHORIZED</li><li>UNSUPPORTED_MEDIA_TYPE</li></ul> </p></p>",
+                        "smithy.api#documentation": "<p>[Required] <p>The response type of the associated <a>GatewayResponse</a>.</p></p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -10311,6 +10537,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -10383,6 +10612,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -10620,6 +10852,9 @@
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -10679,6 +10914,12 @@
             "errors": [
                 {
                     "target": "com.amazonaws.apigateway#BadRequestException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -10809,6 +11050,9 @@
                     "target": "com.amazonaws.apigateway#ConflictException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -10863,6 +11107,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -10926,6 +11173,12 @@
                     "target": "com.amazonaws.apigateway#BadRequestException"
                 },
                 {
+                    "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
+                },
+                {
                     "target": "com.amazonaws.apigateway#NotFoundException"
                 },
                 {
@@ -10958,6 +11211,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"
@@ -11044,6 +11300,9 @@
                 },
                 {
                     "target": "com.amazonaws.apigateway#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.apigateway#LimitExceededException"
                 },
                 {
                     "target": "com.amazonaws.apigateway#NotFoundException"

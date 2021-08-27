@@ -9,11 +9,14 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/computeoptimizer/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
+	"time"
 )
 
-// Returns the enrollment (opt in) status of an account to the AWS Compute
-// Optimizer service. If the account is the management account of an organization,
-// this action also confirms the enrollment status of member accounts within the
+// Returns the enrollment (opt in) status of an account to the Compute Optimizer
+// service. If the account is the management account of an organization, this
+// action also confirms the enrollment status of member accounts of the
+// organization. Use the GetEnrollmentStatusesForOrganization action to get
+// detailed information about the enrollment status of member accounts of an
 // organization.
 func (c *Client) GetEnrollmentStatus(ctx context.Context, params *GetEnrollmentStatusInput, optFns ...func(*Options)) (*GetEnrollmentStatusOutput, error) {
 	if params == nil {
@@ -36,9 +39,17 @@ type GetEnrollmentStatusInput struct {
 
 type GetEnrollmentStatusOutput struct {
 
-	// Confirms the enrollment status of member accounts within the organization, if
-	// the account is a management account of an organization.
+	// The Unix epoch timestamp, in seconds, of when the account enrollment status was
+	// last updated.
+	LastUpdatedTimestamp *time.Time
+
+	// Confirms the enrollment status of member accounts of the organization, if the
+	// account is a management account of an organization.
 	MemberAccountsEnrolled bool
+
+	// The count of organization member accounts that are opted in to the service, if
+	// your account is an organization management account.
+	NumberOfMemberAccountsOptedIn *int32
 
 	// The enrollment status of the account.
 	Status types.Status

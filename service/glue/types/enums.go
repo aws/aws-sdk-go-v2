@@ -26,6 +26,50 @@ func (BackfillErrorCode) Values() []BackfillErrorCode {
 	}
 }
 
+type BlueprintRunState string
+
+// Enum values for BlueprintRunState
+const (
+	BlueprintRunStateRunning     BlueprintRunState = "RUNNING"
+	BlueprintRunStateSucceeded   BlueprintRunState = "SUCCEEDED"
+	BlueprintRunStateFailed      BlueprintRunState = "FAILED"
+	BlueprintRunStateRollingBack BlueprintRunState = "ROLLING_BACK"
+)
+
+// Values returns all known values for BlueprintRunState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BlueprintRunState) Values() []BlueprintRunState {
+	return []BlueprintRunState{
+		"RUNNING",
+		"SUCCEEDED",
+		"FAILED",
+		"ROLLING_BACK",
+	}
+}
+
+type BlueprintStatus string
+
+// Enum values for BlueprintStatus
+const (
+	BlueprintStatusCreating BlueprintStatus = "CREATING"
+	BlueprintStatusActive   BlueprintStatus = "ACTIVE"
+	BlueprintStatusUpdating BlueprintStatus = "UPDATING"
+	BlueprintStatusFailed   BlueprintStatus = "FAILED"
+)
+
+// Values returns all known values for BlueprintStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (BlueprintStatus) Values() []BlueprintStatus {
+	return []BlueprintStatus{
+		"CREATING",
+		"ACTIVE",
+		"UPDATING",
+		"FAILED",
+	}
+}
+
 type CatalogEncryptionMode string
 
 // Enum values for CatalogEncryptionMode

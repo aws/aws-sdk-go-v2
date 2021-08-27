@@ -76,8 +76,8 @@ type SynthesisTask struct {
 	// Optional language code for a synthesis task. This is only necessary if using a
 	// bilingual voice, such as Aditi, which can be used for either Indian English
 	// (en-IN) or Hindi (hi-IN). If a bilingual voice is used and no language code is
-	// specified, Amazon Polly will use the default language of the bilingual voice.
-	// The default language for any voice is the one returned by the DescribeVoices
+	// specified, Amazon Polly uses the default language of the bilingual voice. The
+	// default language for any voice is the one returned by the DescribeVoices
 	// (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html) operation
 	// for the LanguageCode parameter. For example, if no language code is specified,
 	// Aditi will use Indian English rather than Hindi.

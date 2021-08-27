@@ -36,64 +36,61 @@ import (
 // * Amazon EC2
 // CreateSnapshot API call
 //
-// * EC2 Image Builder
+// * Amazon EC2 RebootInstances API call
 //
-// * Amazon EC2 RebootInstances API
-// call
+// * Amazon EC2
+// StopInstances API call
 //
-// * Amazon EC2 StopInstances API call
+// * Amazon EC2 TerminateInstances API call
 //
-// * Amazon EC2 TerminateInstances API
-// call
+// * Amazon ECS
+// tasks
 //
-// * Amazon ECS tasks
+// * Event bus in a different Amazon Web Services account or Region. You can
+// use an event bus in the US East (N. Virginia) us-east-1, US West (Oregon)
+// us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a rule.
 //
-// * Event bus in a different Amazon Web Services account
-// or Region. You can use an event bus in the US East (N. Virginia) us-east-1, US
-// West (Oregon) us-west-2, or Europe (Ireland) eu-west-1 Regions as a target for a
-// rule.
+// *
+// Firehose delivery stream (Kinesis Data Firehose)
 //
-// * Firehose delivery stream (Kinesis Data Firehose)
+// * Inspector assessment
+// template (Amazon Inspector)
 //
-// * Inspector
-// assessment template (Amazon Inspector)
+// * Kinesis stream (Kinesis Data Stream)
 //
-// * Kinesis stream (Kinesis Data
-// Stream)
+// * Lambda
+// function
 //
-// * Lambda function
+// * Redshift clusters (Data API statement execution)
 //
-// * Redshift clusters (Data API statement
-// execution)
-//
-// * Amazon SNS topic
+// * Amazon SNS
+// topic
 //
 // * Amazon SQS queues (includes FIFO queues
 //
-// * SSM
-// Automation
+// * SSM Automation
 //
-// * SSM OpsItem
+// * SSM
+// OpsItem
 //
 // * SSM Run Command
 //
-// * Step Functions state
-// machines
+// * Step Functions state machines
 //
-// Creating rules with built-in targets is supported only in the Amazon
-// Web Services Management Console. The built-in targets are EC2 CreateSnapshot API
-// call, EC2 RebootInstances API call, EC2 StopInstances API call, and EC2
-// TerminateInstances API call. For some target types, PutTargets provides
-// target-specific parameters. If the target is a Kinesis data stream, you can
-// optionally specify which shard the event goes to by using the KinesisParameters
-// argument. To invoke a command on multiple EC2 instances with one rule, you can
-// use the RunCommandParameters field. To be able to make API calls against the
-// resources that you own, Amazon EventBridge needs the appropriate permissions.
-// For Lambda and Amazon SNS resources, EventBridge relies on resource-based
-// policies. For EC2 instances, Kinesis Data Streams, Step Functions state machines
-// and API Gateway REST APIs, EventBridge relies on IAM roles that you specify in
-// the RoleARN argument in PutTargets. For more information, see Authentication and
-// Access Control
+// Creating rules with
+// built-in targets is supported only in the Amazon Web Services Management
+// Console. The built-in targets are EC2 CreateSnapshot API call, EC2
+// RebootInstances API call, EC2 StopInstances API call, and EC2 TerminateInstances
+// API call. For some target types, PutTargets provides target-specific parameters.
+// If the target is a Kinesis data stream, you can optionally specify which shard
+// the event goes to by using the KinesisParameters argument. To invoke a command
+// on multiple EC2 instances with one rule, you can use the RunCommandParameters
+// field. To be able to make API calls against the resources that you own, Amazon
+// EventBridge needs the appropriate permissions. For Lambda and Amazon SNS
+// resources, EventBridge relies on resource-based policies. For EC2 instances,
+// Kinesis Data Streams, Step Functions state machines and API Gateway REST APIs,
+// EventBridge relies on IAM roles that you specify in the RoleARN argument in
+// PutTargets. For more information, see Authentication and Access Control
 // (https://docs.aws.amazon.com/eventbridge/latest/userguide/auth-and-access-control-eventbridge.html)
 // in the Amazon EventBridge User Guide. If another Amazon Web Services account is
 // in the same region and has granted you permission (using PutPermission), you can

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the AWS resource types supported by AWS Backup.
+// Returns the Amazon Web Services resource types supported by Backup.
 func (c *Client) GetSupportedResourceTypes(ctx context.Context, params *GetSupportedResourceTypesInput, optFns ...func(*Options)) (*GetSupportedResourceTypesOutput, error) {
 	if params == nil {
 		params = &GetSupportedResourceTypesInput{}
@@ -32,25 +32,25 @@ type GetSupportedResourceTypesInput struct {
 
 type GetSupportedResourceTypesOutput struct {
 
-	// Contains a string with the supported AWS resource types:
+	// Contains a string with the supported Amazon Web Services resource types:
 	//
-	// * DynamoDB for Amazon
-	// DynamoDB
+	// *
+	// DynamoDB for Amazon DynamoDB
 	//
 	// * EBS for Amazon Elastic Block Store
 	//
-	// * EC2 for Amazon Elastic Compute
-	// Cloud
+	// * EC2 for
+	// Amazon Elastic Compute Cloud
 	//
 	// * EFS for Amazon Elastic File System
 	//
-	// * RDS for Amazon Relational
-	// Database Service
+	// * RDS for
+	// Amazon Relational Database Service
 	//
 	// * Aurora for Amazon Aurora
 	//
-	// * Storage Gateway for AWS Storage
-	// Gateway
+	// * Storage
+	// Gateway for Storage Gateway
 	ResourceTypes []string
 
 	// Metadata pertaining to the operation's result.

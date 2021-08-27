@@ -4751,6 +4751,9 @@ type InstanceMetadataOptionsRequest struct {
 	// a value of disabled, you will not be able to access your instance metadata.
 	HttpEndpoint InstanceMetadataEndpointState
 
+	// Enables or disables the IPv6 endpoint for the instance metadata service.
+	HttpProtocolIpv6 InstanceMetadataProtocolState
+
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
 	// Possible values: Integers from 1 to 64
@@ -4778,6 +4781,10 @@ type InstanceMetadataOptionsResponse struct {
 	// If the parameter is not specified, the default state is enabled. If you specify
 	// a value of disabled, you will not be able to access your instance metadata.
 	HttpEndpoint InstanceMetadataEndpointState
+
+	// Whether or not the IPv6 endpoint for the instance metadata service is enabled or
+	// disabled.
+	HttpProtocolIpv6 InstanceMetadataProtocolState
 
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
@@ -4992,7 +4999,12 @@ type InstanceNetworkInterfaceSpecification struct {
 
 	// The index of the network card. Some instance types support multiple network
 	// cards. The primary network interface must be assigned to network card index 0.
-	// The default is network card index 0.
+	// The default is network card index 0. If you are using RequestSpotInstances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RequestSpotInstances.html)
+	// to create Spot Instances, omit this parameter because you can’t specify the
+	// network card index when using this API. To specify the network card index, use
+	// RunInstances
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_RunInstances.html).
 	NetworkCardIndex *int32
 
 	// The ID of the network interface. If you are creating a Spot Fleet, omit this
@@ -5432,23 +5444,25 @@ type IpRange struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an IPv4 Prefix Delegation.
+// Describes an IPv4 prefix.
 type Ipv4PrefixSpecification struct {
 
-	// The IPv4 Prefix Delegation prefix. For information, see Prefix Delegation
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation) in
-	// the Amazon Elastic Compute Cloud User Guide.
+	// The IPv4 prefix. For information, see  Assigning prefixes to Amazon EC2 network
+	// interfaces
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
 	Ipv4Prefix *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes the IPv4 Prefix Delegation option for a network interface.
+// Describes the IPv4 prefix option for a network interface.
 type Ipv4PrefixSpecificationRequest struct {
 
-	// The IPv4 Prefix Delegation prefix. For information, see Prefix Delegation
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-delegation) in
-	// the Amazon Elastic Compute Cloud User Guide.
+	// The IPv4 prefix. For information, see  Assigning prefixes to Amazon EC2 network
+	// interfaces
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-prefix-eni.html) in the
+	// Amazon Elastic Compute Cloud User Guide.
 	Ipv4Prefix *string
 
 	noSmithyDocumentSerde
@@ -5502,19 +5516,19 @@ type Ipv6Pool struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the IPv6 Prefix Delegation.
+// Describes the IPv6 prefix.
 type Ipv6PrefixSpecification struct {
 
-	// The IPv6 Prefix Delegation prefix.
+	// The IPv6 prefix.
 	Ipv6Prefix *string
 
 	noSmithyDocumentSerde
 }
 
-// Describes the IPv4 Prefix Delegation option for a network interface.
+// Describes the IPv4 prefix option for a network interface.
 type Ipv6PrefixSpecificationRequest struct {
 
-	// The IPv6 Prefix Delegation prefix.
+	// The IPv6 prefix.
 	Ipv6Prefix *string
 
 	noSmithyDocumentSerde
@@ -7386,13 +7400,13 @@ type NetworkInterface struct {
 	// The type of network interface.
 	InterfaceType NetworkInterfaceType
 
-	// The IPv4 Prefix Delegation prefixes that are assigned to the network interface.
+	// The IPv4 prefixes that are assigned to the network interface.
 	Ipv4Prefixes []Ipv4PrefixSpecification
 
 	// The IPv6 addresses associated with the network interface.
 	Ipv6Addresses []NetworkInterfaceIpv6Address
 
-	// The IPv6 Prefix Delegation prefixes that are assigned to the network interface.
+	// The IPv6 prefixes that are assigned to the network interface.
 	Ipv6Prefixes []Ipv6PrefixSpecification
 
 	// The MAC address.
@@ -7767,7 +7781,7 @@ type PeeringConnectionOptionsRequest struct {
 // Information about the transit gateway in the peering attachment.
 type PeeringTgwInfo struct {
 
-	// The AWS account ID of the owner of the transit gateway.
+	// The ID of the Amazon Web Services account that owns the transit gateway.
 	OwnerId *string
 
 	// The Region of the transit gateway.
@@ -11576,7 +11590,7 @@ type TransitGateway struct {
 	// The transit gateway options.
 	Options *TransitGatewayOptions
 
-	// The ID of the AWS account ID that owns the transit gateway.
+	// The ID of the Amazon Web Services account that owns the transit gateway.
 	OwnerId *string
 
 	// The state of the transit gateway.
@@ -11628,7 +11642,7 @@ type TransitGatewayAttachment struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The ID of the AWS account that owns the resource.
+	// The ID of the Amazon Web Services account that owns the resource.
 	ResourceOwnerId *string
 
 	// The resource type. Note that the tgw-peering resource type has been deprecated.
@@ -11646,7 +11660,7 @@ type TransitGatewayAttachment struct {
 	// The ID of the transit gateway.
 	TransitGatewayId *string
 
-	// The ID of the AWS account that owns the transit gateway.
+	// The ID of the Amazon Web Services account that owns the transit gateway.
 	TransitGatewayOwnerId *string
 
 	noSmithyDocumentSerde
@@ -11826,7 +11840,8 @@ type TransitGatewayMulticastDomain struct {
 	// The options for the transit gateway multicast domain.
 	Options *TransitGatewayMulticastDomainOptions
 
-	// The ID of the AWS account that owns the transit gateway multiicast domain.
+	// The ID of the Amazon Web Services account that owns the transit gateway
+	// multicast domain.
 	OwnerId *string
 
 	// The state of the transit gateway multicast domain.
@@ -11853,8 +11868,8 @@ type TransitGatewayMulticastDomainAssociation struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The ID of the AWS account that owns the transit gateway multicast domain
-	// association resource.
+	// The ID of the Amazon Web Services account that owns the transit gateway
+	// multicast domain association resource.
 	ResourceOwnerId *string
 
 	// The type of resource, for example a VPC attachment.
@@ -11875,7 +11890,7 @@ type TransitGatewayMulticastDomainAssociations struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The ID of the AWS account that owns the resource.
+	// The ID of the Amazon Web Services account that owns the resource.
 	ResourceOwnerId *string
 
 	// The type of resource, for example a VPC attachment.
@@ -11932,8 +11947,8 @@ type TransitGatewayMulticastGroup struct {
 	// The ID of the resource.
 	ResourceId *string
 
-	// The ID of the AWS account that owns the transit gateway multicast domain group
-	// resource.
+	// The ID of the Amazon Web Services account that owns the transit gateway
+	// multicast domain group resource.
 	ResourceOwnerId *string
 
 	// The type of resource, for example a VPC attachment.
@@ -12276,7 +12291,7 @@ type TransitGatewayVpcAttachment struct {
 	// The ID of the VPC.
 	VpcId *string
 
-	// The ID of the AWS account that owns the VPC.
+	// The ID of the Amazon Web Services account that owns the VPC.
 	VpcOwnerId *string
 
 	noSmithyDocumentSerde
@@ -12297,8 +12312,9 @@ type TransitGatewayVpcAttachmentOptions struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an association between a branch network interface with a trunk
-// network interface.
+// Currently available in limited preview only. If you are interested in using this
+// feature, contact your account manager. Information about an association between
+// a branch network interface with a trunk network interface.
 type TrunkInterfaceAssociation struct {
 
 	// The ID of the association.
@@ -12313,7 +12329,7 @@ type TrunkInterfaceAssociation struct {
 	// The interface protocol. Valid values are VLAN and GRE.
 	InterfaceProtocol InterfaceProtocolType
 
-	// The tags.
+	// The tags for the trunk interface association.
 	Tags []Tag
 
 	// The ID of the trunk network interface.

@@ -131,7 +131,8 @@ type CreateEndpointInput struct {
 	// An KMS key identifier that is used to encrypt the connection parameters for the
 	// endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS uses
 	// your default encryption key. KMS creates the default encryption key for your
-	// account. Your account has a different default encryption key for each Region.
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// Settings in JSON format for the source and target Microsoft SQL Server endpoint.
@@ -190,6 +191,9 @@ type CreateEndpointInput struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.PostgreSQL.html#CHAP_Target.PostgreSQL.ConnectionAttrib)
 	// in the Database Migration Service User Guide.
 	PostgreSQLSettings *types.PostgreSQLSettings
+
+	// Settings in JSON format for the target Redis endpoint.
+	RedisSettings *types.RedisSettings
 
 	// Provides information that defines an Amazon Redshift endpoint.
 	RedshiftSettings *types.RedshiftSettings

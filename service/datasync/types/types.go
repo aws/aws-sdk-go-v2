@@ -49,8 +49,8 @@ type Ec2Config struct {
 // transferring files from source to destination.
 type FilterRule struct {
 
-	// The type of filter rule to apply. AWS DataSync only supports the SIMPLE_PATTERN
-	// rule type.
+	// The type of filter rule to apply. DataSync only supports the SIMPLE_PATTERN rule
+	// type.
 	FilterType FilterType
 
 	// A single filter string that consists of the patterns to include or exclude. The
@@ -172,14 +172,14 @@ type Options struct {
 	// when the file was read or written to). If you set Atime to BEST_EFFORT, DataSync
 	// attempts to preserve the original Atime attribute on all source files (that is,
 	// the version before the PREPARING phase). However, Atime's behavior is not fully
-	// standard across platforms, so AWS DataSync can only do this on a best-effort
-	// basis. Default value: BEST_EFFORT. BEST_EFFORT: Attempt to preserve the per-file
-	// Atime value (recommended). NONE: Ignore Atime. If Atime is set to BEST_EFFORT,
-	// Mtime must be set to PRESERVE. If Atime is set to NONE, Mtime must also be NONE.
+	// standard across platforms, so DataSync can only do this on a best-effort basis.
+	// Default value: BEST_EFFORT. BEST_EFFORT: Attempt to preserve the per-file Atime
+	// value (recommended). NONE: Ignore Atime. If Atime is set to BEST_EFFORT, Mtime
+	// must be set to PRESERVE. If Atime is set to NONE, Mtime must also be NONE.
 	Atime Atime
 
-	// A value that limits the bandwidth used by AWS DataSync. For example, if you want
-	// AWS DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
+	// A value that limits the bandwidth used by DataSync. For example, if you want
+	// DataSync to use a maximum of 1 MB, set this value to 1048576 (=1024*1024).
 	BytesPerSecond *int64
 
 	// The POSIX group ID (GID) of the file's owners. This option should only be set
@@ -217,7 +217,7 @@ type Options struct {
 	// information, see Considerations when working with Amazon S3 storage classes in
 	// DataSync
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
-	// in the AWS DataSync User Guide.
+	// in the DataSync User Guide.
 	OverwriteMode OverwriteMode
 
 	// A value that determines which users or groups can access a file for a specific
@@ -226,7 +226,7 @@ type Options struct {
 	// metadata is copied by DataSync, see Metadata Copied by DataSync
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/special-files.html#metadata-copied).
 	// Default value: PRESERVE. PRESERVE: Preserve POSIX-style permissions
-	// (recommended). NONE: Ignore permissions. AWS DataSync can preserve extant
+	// (recommended). NONE: Ignore permissions. DataSync can preserve extant
 	// permissions of a source location.
 	PosixPermissions PosixPermissions
 
@@ -236,19 +236,19 @@ type Options struct {
 	// charges for certain storage classes. For detailed information, see
 	// Considerations when working with Amazon S3 storage classes in DataSync
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/create-s3-location.html#using-storage-classes)
-	// in the AWS DataSync User Guide. Default value: PRESERVE. PRESERVE: Ignore such
+	// in the DataSync User Guide. Default value: PRESERVE. PRESERVE: Ignore such
 	// destination files (recommended). REMOVE: Delete destination files that aren’t
 	// present in the source.
 	PreserveDeletedFiles PreserveDeletedFiles
 
-	// A value that determines whether AWS DataSync should preserve the metadata of
-	// block and character devices in the source file system, and re-create the files
-	// with that device name and metadata on the destination. DataSync does not copy
-	// the contents of such devices, only the name and metadata. AWS DataSync can't
-	// sync the actual contents of such devices, because they are nonterminal and don't
-	// return an end-of-file (EOF) marker. Default value: NONE. NONE: Ignore special
-	// devices (recommended). PRESERVE: Preserve character and block device metadata.
-	// This option isn't currently supported for Amazon EFS.
+	// A value that determines whether DataSync should preserve the metadata of block
+	// and character devices in the source file system, and re-create the files with
+	// that device name and metadata on the destination. DataSync does not copy the
+	// contents of such devices, only the name and metadata. DataSync can't sync the
+	// actual contents of such devices, because they are nonterminal and don't return
+	// an end-of-file (EOF) marker. Default value: NONE. NONE: Ignore special devices
+	// (recommended). PRESERVE: Preserve character and block device metadata. This
+	// option isn't currently supported for Amazon EFS.
 	PreserveDevices PreserveDevices
 
 	// A value that determines which components of the SMB security descriptor are
@@ -358,10 +358,9 @@ type PrivateLinkConfig struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-// role that is used to access an Amazon S3 bucket. For detailed information about
-// using such a role, see Creating a Location for Amazon S3 in the AWS DataSync
-// User Guide.
+// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+// that is used to access an Amazon S3 bucket. For detailed information about using
+// such a role, see Creating a Location for Amazon S3 in the DataSync User Guide.
 type S3Config struct {
 
 	// The Amazon S3 bucket to access. This bucket is used as a parameter in the
@@ -394,12 +393,12 @@ type SmbMountOptions struct {
 // operation is called.
 type TagListEntry struct {
 
-	// The key for an AWS resource tag.
+	// The key for an Amazon Web Services resource tag.
 	//
 	// This member is required.
 	Key *string
 
-	// The value for an AWS resource tag.
+	// The value for an Amazon Web Services resource tag.
 	Value *string
 
 	noSmithyDocumentSerde
@@ -426,32 +425,31 @@ type TaskExecutionListEntry struct {
 // and the errors encountered.
 type TaskExecutionResultDetail struct {
 
-	// Errors that AWS DataSync encountered during execution of the task. You can use
-	// this error code to help troubleshoot issues.
+	// Errors that DataSync encountered during execution of the task. You can use this
+	// error code to help troubleshoot issues.
 	ErrorCode *string
 
 	// Detailed description of an error that was encountered during the task execution.
 	// You can use this information to help troubleshoot issues.
 	ErrorDetail *string
 
-	// The total time in milliseconds that AWS DataSync spent in the PREPARING phase.
+	// The total time in milliseconds that DataSync spent in the PREPARING phase.
 	PrepareDuration *int64
 
 	// The status of the PREPARING phase.
 	PrepareStatus PhaseStatus
 
-	// The total time in milliseconds that AWS DataSync took to transfer the file from
-	// the source to the destination location.
+	// The total time in milliseconds that DataSync took to transfer the file from the
+	// source to the destination location.
 	TotalDuration *int64
 
-	// The total time in milliseconds that AWS DataSync spent in the TRANSFERRING
-	// phase.
+	// The total time in milliseconds that DataSync spent in the TRANSFERRING phase.
 	TransferDuration *int64
 
 	// The status of the TRANSFERRING phase.
 	TransferStatus PhaseStatus
 
-	// The total time in milliseconds that AWS DataSync spent in the VERIFYING phase.
+	// The total time in milliseconds that DataSync spent in the VERIFYING phase.
 	VerifyDuration *int64
 
 	// The status of the VERIFYING phase.
@@ -513,8 +511,8 @@ type TaskListEntry struct {
 // (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html).
 type TaskSchedule struct {
 
-	// A cron expression that specifies when AWS DataSync initiates a scheduled
-	// transfer from a source to a destination location.
+	// A cron expression that specifies when DataSync initiates a scheduled transfer
+	// from a source to a destination location.
 	//
 	// This member is required.
 	ScheduleExpression *string

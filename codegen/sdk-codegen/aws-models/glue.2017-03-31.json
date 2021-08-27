@@ -49,6 +49,9 @@
                     "target": "com.amazonaws.glue#BatchDeleteTableVersion"
                 },
                 {
+                    "target": "com.amazonaws.glue#BatchGetBlueprints"
+                },
+                {
                     "target": "com.amazonaws.glue#BatchGetCrawlers"
                 },
                 {
@@ -77,6 +80,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#CheckSchemaVersionValidity"
+                },
+                {
+                    "target": "com.amazonaws.glue#CreateBlueprint"
                 },
                 {
                     "target": "com.amazonaws.glue#CreateClassifier"
@@ -128,6 +134,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#CreateWorkflow"
+                },
+                {
+                    "target": "com.amazonaws.glue#DeleteBlueprint"
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteClassifier"
@@ -191,6 +200,15 @@
                 },
                 {
                     "target": "com.amazonaws.glue#DeleteWorkflow"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetBlueprint"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetBlueprintRun"
+                },
+                {
+                    "target": "com.amazonaws.glue#GetBlueprintRuns"
                 },
                 {
                     "target": "com.amazonaws.glue#GetCatalogImportStatus"
@@ -352,6 +370,9 @@
                     "target": "com.amazonaws.glue#ImportCatalogToGlue"
                 },
                 {
+                    "target": "com.amazonaws.glue#ListBlueprints"
+                },
+                {
                     "target": "com.amazonaws.glue#ListCrawlers"
                 },
                 {
@@ -409,6 +430,9 @@
                     "target": "com.amazonaws.glue#SearchTables"
                 },
                 {
+                    "target": "com.amazonaws.glue#StartBlueprintRun"
+                },
+                {
                     "target": "com.amazonaws.glue#StartCrawler"
                 },
                 {
@@ -452,6 +476,9 @@
                 },
                 {
                     "target": "com.amazonaws.glue#UntagResource"
+                },
+                {
+                    "target": "com.amazonaws.glue#UpdateBlueprint"
                 },
                 {
                     "target": "com.amazonaws.glue#UpdateClassifier"
@@ -1037,6 +1064,82 @@
                     "target": "com.amazonaws.glue#TableVersionErrors",
                     "traits": {
                         "smithy.api#documentation": "<p>A list of errors encountered while trying to delete\n      the specified table versions.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#BatchGetBlueprintNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#OrchestrationNameString"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 25
+                }
+            }
+        },
+        "com.amazonaws.glue#BatchGetBlueprints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#BatchGetBlueprintsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#BatchGetBlueprintsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves information about a list of blueprints.</p>"
+            }
+        },
+        "com.amazonaws.glue#BatchGetBlueprintsRequest": {
+            "type": "structure",
+            "members": {
+                "Names": {
+                    "target": "com.amazonaws.glue#BatchGetBlueprintNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A list of blueprint names.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeBlueprint": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not to include the blueprint in the response.</p>"
+                    }
+                },
+                "IncludeParameterSpec": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not to include the parameters, as a JSON string, for the blueprint in the response.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#BatchGetBlueprintsResponse": {
+            "type": "structure",
+            "members": {
+                "Blueprints": {
+                    "target": "com.amazonaws.glue#Blueprints",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of blueprint as a <code>Blueprints</code> object.</p>"
+                    }
+                },
+                "MissingBlueprints": {
+                    "target": "com.amazonaws.glue#BlueprintNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of <code>BlueprintNames</code> that were not found.</p>"
                     }
                 }
             }
@@ -1708,6 +1811,244 @@
         },
         "com.amazonaws.glue#Blob": {
             "type": "blob"
+        },
+        "com.amazonaws.glue#Blueprint": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the blueprint.</p>"
+                    }
+                },
+                "CreatedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the blueprint was registered.</p>"
+                    }
+                },
+                "LastModifiedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the blueprint was last modified.</p>"
+                    }
+                },
+                "ParameterSpec": {
+                    "target": "com.amazonaws.glue#BlueprintParameterSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON string that indicates the list of parameter specifications for the blueprint.</p>"
+                    }
+                },
+                "BlueprintLocation": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the path in Amazon S3 where the blueprint is published.</p>"
+                    }
+                },
+                "BlueprintServiceLocation": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a path in Amazon S3 where the blueprint is copied when you call <code>CreateBlueprint/UpdateBlueprint</code> to register the blueprint in Glue.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.glue#BlueprintStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the blueprint registration.</p>\n\t\n\t        <ul>\n            <li>\n               <p>Creating — The blueprint registration is in progress.</p>\n            </li>\n            <li>\n               <p>Active — The blueprint has been successfully registered.</p>\n            </li>\n            <li>\n               <p>Updating — An update to the blueprint registration is in progress.</p>\n            </li>\n            <li>\n               <p>Failed — The blueprint registration failed.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.glue#ErrorString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An error message.</p>"
+                    }
+                },
+                "LastActiveDefinition": {
+                    "target": "com.amazonaws.glue#LastActiveDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a blueprint.</p>"
+            }
+        },
+        "com.amazonaws.glue#BlueprintDetails": {
+            "type": "structure",
+            "members": {
+                "BlueprintName": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>"
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.glue#IdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run ID for this blueprint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a blueprint.</p>"
+            }
+        },
+        "com.amazonaws.glue#BlueprintNames": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#OrchestrationNameString"
+            }
+        },
+        "com.amazonaws.glue#BlueprintParameterSpec": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 131072
+                }
+            }
+        },
+        "com.amazonaws.glue#BlueprintParameters": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 131072
+                }
+            }
+        },
+        "com.amazonaws.glue#BlueprintRun": {
+            "type": "structure",
+            "members": {
+                "BlueprintName": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>"
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.glue#IdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run ID for this blueprint run.</p>"
+                    }
+                },
+                "WorkflowName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of a workflow that is created as a result of a successful blueprint run. If a blueprint run has an error, there will not be a workflow created.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.glue#BlueprintRunState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the blueprint run. Possible values are:</p>\n\t\n\t        <ul>\n            <li>\n               <p>Running — The blueprint run is in progress.</p>\n            </li>\n            <li>\n               <p>Succeeded — The blueprint run completed successfully.</p>\n            </li>\n            <li>\n               <p>Failed — The blueprint run failed and rollback is complete.</p>\n            </li>\n            <li>\n               <p>Rolling Back — The blueprint run failed and rollback is in progress.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "StartedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the blueprint run started.</p>"
+                    }
+                },
+                "CompletedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time that the blueprint run completed.</p>"
+                    }
+                },
+                "ErrorMessage": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates any errors that are seen while running the blueprint.</p>"
+                    }
+                },
+                "RollbackErrorMessage": {
+                    "target": "com.amazonaws.glue#MessageString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If there are any errors while creating the entities of a workflow, we try to roll back the created entities until that point and delete them. This attribute indicates the errors seen while trying to delete the entities that are created.</p>"
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.glue#BlueprintParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The blueprint parameters as a string. You will have to provide a value for each key that is required from the parameter spec that is defined in the <code>Blueprint$ParameterSpec</code>.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.glue#OrchestrationIAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The role ARN. This role will be assumed by the Glue service and will be used to create the workflow and other entities of a workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details of a blueprint run.</p>"
+            }
+        },
+        "com.amazonaws.glue#BlueprintRunState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RUNNING",
+                        "name": "RUNNING"
+                    },
+                    {
+                        "value": "SUCCEEDED",
+                        "name": "SUCCEEDED"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    },
+                    {
+                        "value": "ROLLING_BACK",
+                        "name": "ROLLING_BACK"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.glue#BlueprintRuns": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#BlueprintRun"
+            }
+        },
+        "com.amazonaws.glue#BlueprintStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "ACTIVE",
+                        "name": "ACTIVE"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "FAILED",
+                        "name": "FAILED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.glue#Blueprints": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.glue#Blueprint"
+            }
         },
         "com.amazonaws.glue#Boolean": {
             "type": "boolean"
@@ -3471,6 +3812,77 @@
                 "smithy.api#documentation": "<p>Specifies data stores to crawl.</p>"
             }
         },
+        "com.amazonaws.glue#CreateBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#CreateBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#CreateBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#AlreadyExistsException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Registers a blueprint with Glue.</p>"
+            }
+        },
+        "com.amazonaws.glue#CreateBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the blueprint.</p>"
+                    }
+                },
+                "BlueprintLocation": {
+                    "target": "com.amazonaws.glue#OrchestrationS3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a path in Amazon S3 where the blueprint is published.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tags to be applied to this blueprint.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#CreateBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the name of the blueprint that was registered.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#CreateClassifier": {
             "type": "operation",
             "input": {
@@ -5117,7 +5529,10 @@
                     }
                 },
                 "EventBatchingCondition": {
-                    "target": "com.amazonaws.glue#EventBatchingCondition"
+                    "target": "com.amazonaws.glue#EventBatchingCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Batch condition that must be met (specified number of events received or batch time window expired)\n      before EventBridge event trigger fires.</p>"
+                    }
                 }
             }
         },
@@ -5741,6 +6156,52 @@
                         "name": "DEPRECATE_IN_DATABASE"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.glue#DeleteBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#DeleteBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#DeleteBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes an existing blueprint.</p>"
+            }
+        },
+        "com.amazonaws.glue#DeleteBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint to delete.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#DeleteBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the name of the blueprint that was deleted.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#DeleteClassifier": {
@@ -7542,6 +8003,15 @@
                 "smithy.api#pattern": "^[\\u0020-\\uD7FF\\uE000-\\uFFFD\\uD800\\uDC00-\\uDBFF\\uDFFF\\t]*$"
             }
         },
+        "com.amazonaws.glue#Generic512CharString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                }
+            }
+        },
         "com.amazonaws.glue#GenericBoundedDouble": {
             "type": "double",
             "traits": {
@@ -7563,6 +8033,192 @@
         },
         "com.amazonaws.glue#GenericString": {
             "type": "string"
+        },
+        "com.amazonaws.glue#GetBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a blueprint.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "IncludeBlueprint": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not to include the blueprint in the response.</p>"
+                    }
+                },
+                "IncludeParameterSpec": {
+                    "target": "com.amazonaws.glue#NullableBoolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies whether or not to include the parameter specification.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "Blueprint": {
+                    "target": "com.amazonaws.glue#Blueprint",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a <code>Blueprint</code> object.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetBlueprintRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetBlueprintRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetBlueprintRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of a blueprint run.</p>"
+            }
+        },
+        "com.amazonaws.glue#GetBlueprintRunRequest": {
+            "type": "structure",
+            "members": {
+                "BlueprintName": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RunId": {
+                    "target": "com.amazonaws.glue#IdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run ID for the blueprint run you want to retrieve.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetBlueprintRunResponse": {
+            "type": "structure",
+            "members": {
+                "BlueprintRun": {
+                    "target": "com.amazonaws.glue#BlueprintRun",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a <code>BlueprintRun</code> object.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetBlueprintRuns": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#GetBlueprintRunsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#GetBlueprintRunsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the details of blueprint runs for a specified blueprint.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#GetBlueprintRunsRequest": {
+            "type": "structure",
+            "members": {
+                "BlueprintName": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of a list to return.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#GetBlueprintRunsResponse": {
+            "type": "structure",
+            "members": {
+                "BlueprintRuns": {
+                    "target": "com.amazonaws.glue#BlueprintRuns",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns a list of <code>BlueprintRun</code> objects.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if not all blueprint runs have been returned.</p>"
+                    }
+                }
+            }
         },
         "com.amazonaws.glue#GetCatalogImportStatus": {
             "type": "operation",
@@ -11487,6 +12143,17 @@
                 "smithy.api#error": "client"
             }
         },
+        "com.amazonaws.glue#IllegalBlueprintStateException": {
+            "type": "structure",
+            "members": {
+                "Message": {
+                    "target": "com.amazonaws.glue#MessageString"
+                }
+            },
+            "traits": {
+                "smithy.api#error": "client"
+            }
+        },
         "com.amazonaws.glue#IllegalWorkflowStateException": {
             "type": "structure",
             "members": {
@@ -12343,6 +13010,44 @@
                 ]
             }
         },
+        "com.amazonaws.glue#LastActiveDefinition": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The description of the blueprint.</p>"
+                    }
+                },
+                "LastModifiedOn": {
+                    "target": "com.amazonaws.glue#TimestampValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time the blueprint was last modified.</p>"
+                    }
+                },
+                "ParameterSpec": {
+                    "target": "com.amazonaws.glue#BlueprintParameterSpec",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A JSON string specifying the parameters for the blueprint.</p>"
+                    }
+                },
+                "BlueprintLocation": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a path in Amazon S3 where the blueprint is published by the Glue developer.</p>"
+                    }
+                },
+                "BlueprintServiceLocation": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a path in Amazon S3 where the blueprint is copied when you create or update the blueprint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>When there are multiple versions of a blueprint and the latest version has some errors, this attribute indicates the last successful blueprint definition that is available with the service.</p>"
+            }
+        },
         "com.amazonaws.glue#LastCrawlInfo": {
             "type": "structure",
             "members": {
@@ -12421,6 +13126,74 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Specifies data lineage configuration settings for the crawler.</p>"
+            }
+        },
+        "com.amazonaws.glue#ListBlueprints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#ListBlueprintsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#ListBlueprintsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all the blueprint names in an account.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.glue#ListBlueprintsRequest": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if this is a continuation request.</p>"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.glue#PageSize",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum size of a list to return.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.glue#TagsMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Filters the list by an Amazon Web Services resource tag.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#ListBlueprintsResponse": {
+            "type": "structure",
+            "members": {
+                "Blueprints": {
+                    "target": "com.amazonaws.glue#BlueprintNames",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of names of blueprints in the account.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.glue#GenericString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A continuation token, if not all blueprint names have been returned.</p>"
+                    }
+                }
             }
         },
         "com.amazonaws.glue#ListCrawlers": {
@@ -13765,6 +14538,36 @@
             "traits": {
                 "smithy.api#documentation": "<p>The operation timed out.</p>",
                 "smithy.api#error": "client"
+            }
+        },
+        "com.amazonaws.glue#OrchestrationIAMRoleArn": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:aws[^:]*:iam::[0-9]*:role/.+$"
+            }
+        },
+        "com.amazonaws.glue#OrchestrationNameString": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^[\\.\\-_A-Za-z0-9]+$"
+            }
+        },
+        "com.amazonaws.glue#OrchestrationS3Location": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 8192
+                },
+                "smithy.api#pattern": "^s3://([^/]+)/([^/]+/)*([^/]+)$"
             }
         },
         "com.amazonaws.glue#OrchestrationStringList": {
@@ -16089,6 +16892,74 @@
                 ]
             }
         },
+        "com.amazonaws.glue#StartBlueprintRun": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#StartBlueprintRunRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#StartBlueprintRunResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IllegalBlueprintStateException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                },
+                {
+                    "target": "com.amazonaws.glue#ResourceNumberLimitExceededException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Starts a new run of the specified blueprint.</p>"
+            }
+        },
+        "com.amazonaws.glue#StartBlueprintRunRequest": {
+            "type": "structure",
+            "members": {
+                "BlueprintName": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Parameters": {
+                    "target": "com.amazonaws.glue#BlueprintParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the parameters as a <code>BlueprintParameters</code> object.</p>"
+                    }
+                },
+                "RoleArn": {
+                    "target": "com.amazonaws.glue#OrchestrationIAMRoleArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IAM role used to create the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#StartBlueprintRunResponse": {
+            "type": "structure",
+            "members": {
+                "RunId": {
+                    "target": "com.amazonaws.glue#IdString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The run ID for this blueprint run.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#StartCrawler": {
             "type": "operation",
             "input": {
@@ -18165,6 +19036,74 @@
                 ]
             }
         },
+        "com.amazonaws.glue#UpdateBlueprint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.glue#UpdateBlueprintRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.glue#UpdateBlueprintResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.glue#ConcurrentModificationException"
+                },
+                {
+                    "target": "com.amazonaws.glue#EntityNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.glue#IllegalBlueprintStateException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InternalServiceException"
+                },
+                {
+                    "target": "com.amazonaws.glue#InvalidInputException"
+                },
+                {
+                    "target": "com.amazonaws.glue#OperationTimeoutException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Updates a registered blueprint.</p>"
+            }
+        },
+        "com.amazonaws.glue#UpdateBlueprintRequest": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#OrchestrationNameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the blueprint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.glue#Generic512CharString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A description of the blueprint.</p>"
+                    }
+                },
+                "BlueprintLocation": {
+                    "target": "com.amazonaws.glue#OrchestrationS3Location",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies a path in Amazon S3 where the blueprint is published.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.glue#UpdateBlueprintResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.glue#NameString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the name of the blueprint that was updated.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.glue#UpdateClassifier": {
             "type": "operation",
             "input": {
@@ -19773,7 +20712,7 @@
                 "DefaultRunProperties": {
                     "target": "com.amazonaws.glue#WorkflowRunProperties",
                     "traits": {
-                        "smithy.api#documentation": "<p>A collection of properties to be used as part of each execution of the workflow.\n      The run properties are made available to each job in the workflow. A job can modify\n      the properties for the next jobs in the flow.</p>"
+                        "smithy.api#documentation": "<p>A collection of properties to be used as part of each execution of the workflow.\n    The run properties are made available to each job in the workflow. A job can modify\n    the properties for the next jobs in the flow.</p>"
                     }
                 },
                 "CreatedOn": {
@@ -19804,6 +20743,12 @@
                     "target": "com.amazonaws.glue#NullableInteger",
                     "traits": {
                         "smithy.api#documentation": "<p>You can use this parameter to prevent unwanted multiple updates to data, to control costs, or in some cases, to prevent exceeding the maximum number of concurrent runs of any of the component jobs. If you leave this parameter blank, there is no limit to the number of concurrent workflow runs.</p>"
+                    }
+                },
+                "BlueprintDetails": {
+                    "target": "com.amazonaws.glue#BlueprintDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>This structure indicates the details of the blueprint that this particular workflow is created from.</p>"
                     }
                 }
             },

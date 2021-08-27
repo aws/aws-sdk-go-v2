@@ -42,9 +42,10 @@ type DescribeLocationS3Input struct {
 // DescribeLocationS3Response
 type DescribeLocationS3Output struct {
 
-	// If you are using DataSync on an AWS Outpost, the Amazon Resource Name (ARNs) of
-	// the EC2 agents deployed on your Outpost. For more information about launching a
-	// DataSync agent on an AWS Outpost, see Deploy your DataSync agent on AWS Outposts
+	// If you are using DataSync on an Amazon Web Services Outpost, the Amazon Resource
+	// Name (ARNs) of the EC2 agents deployed on your Outpost. For more information
+	// about launching a DataSync agent on an Amazon Web Services Outpost, see Deploy
+	// your DataSync agent on Outposts
 	// (https://docs.aws.amazon.com/datasync/latest/userguide/deploy-agents.html#outposts-agent).
 	AgentArns []string
 
@@ -57,10 +58,9 @@ type DescribeLocationS3Output struct {
 	// The URL of the Amazon S3 location that was described.
 	LocationUri *string
 
-	// The Amazon Resource Name (ARN) of the AWS Identity and Access Management (IAM)
-	// role that is used to access an Amazon S3 bucket. For detailed information about
-	// using such a role, see Creating a Location for Amazon S3 in the AWS DataSync
-	// User Guide.
+	// The Amazon Resource Name (ARN) of the Identity and Access Management (IAM) role
+	// that is used to access an Amazon S3 bucket. For detailed information about using
+	// such a role, see Creating a Location for Amazon S3 in the DataSync User Guide.
 	S3Config *types.S3Config
 
 	// The Amazon S3 storage class that you chose to store your files in when this

@@ -40,6 +40,36 @@ func (AuthTypeValue) Values() []AuthTypeValue {
 	}
 }
 
+type CannedAclForObjectsValue string
+
+// Enum values for CannedAclForObjectsValue
+const (
+	CannedAclForObjectsValueNone                   CannedAclForObjectsValue = "none"
+	CannedAclForObjectsValuePrivate                CannedAclForObjectsValue = "private"
+	CannedAclForObjectsValuePublicRead             CannedAclForObjectsValue = "public-read"
+	CannedAclForObjectsValuePublicReadWrite        CannedAclForObjectsValue = "public-read-write"
+	CannedAclForObjectsValueAuthenticatedRead      CannedAclForObjectsValue = "authenticated-read"
+	CannedAclForObjectsValueAwsExecRead            CannedAclForObjectsValue = "aws-exec-read"
+	CannedAclForObjectsValueBucketOwnerRead        CannedAclForObjectsValue = "bucket-owner-read"
+	CannedAclForObjectsValueBucketOwnerFullControl CannedAclForObjectsValue = "bucket-owner-full-control"
+)
+
+// Values returns all known values for CannedAclForObjectsValue. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CannedAclForObjectsValue) Values() []CannedAclForObjectsValue {
+	return []CannedAclForObjectsValue{
+		"none",
+		"private",
+		"public-read",
+		"public-read-write",
+		"authenticated-read",
+		"aws-exec-read",
+		"bucket-owner-read",
+		"bucket-owner-full-control",
+	}
+}
+
 type CharLengthSemantics string
 
 // Enum values for CharLengthSemantics
@@ -340,6 +370,26 @@ func (PluginNameValue) Values() []PluginNameValue {
 	}
 }
 
+type RedisAuthTypeValue string
+
+// Enum values for RedisAuthTypeValue
+const (
+	RedisAuthTypeValueNone      RedisAuthTypeValue = "none"
+	RedisAuthTypeValueAuthRole  RedisAuthTypeValue = "auth-role"
+	RedisAuthTypeValueAuthToken RedisAuthTypeValue = "auth-token"
+)
+
+// Values returns all known values for RedisAuthTypeValue. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (RedisAuthTypeValue) Values() []RedisAuthTypeValue {
+	return []RedisAuthTypeValue{
+		"none",
+		"auth-role",
+		"auth-token",
+	}
+}
+
 type RefreshSchemasStatusTypeValue string
 
 // Enum values for RefreshSchemasStatusTypeValue
@@ -446,6 +496,24 @@ const (
 func (SourceType) Values() []SourceType {
 	return []SourceType{
 		"replication-instance",
+	}
+}
+
+type SslSecurityProtocolValue string
+
+// Enum values for SslSecurityProtocolValue
+const (
+	SslSecurityProtocolValuePlaintext     SslSecurityProtocolValue = "plaintext"
+	SslSecurityProtocolValueSslEncryption SslSecurityProtocolValue = "ssl-encryption"
+)
+
+// Values returns all known values for SslSecurityProtocolValue. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SslSecurityProtocolValue) Values() []SslSecurityProtocolValue {
+	return []SslSecurityProtocolValue{
+		"plaintext",
+		"ssl-encryption",
 	}
 }
 

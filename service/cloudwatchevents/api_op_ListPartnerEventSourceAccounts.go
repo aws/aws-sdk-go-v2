@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// An SaaS partner can use this operation to display the AWS account ID that a
-// particular partner event source name is associated with. This operation is not
-// used by AWS customers.
+// An SaaS partner can use this operation to display the Amazon Web Services
+// account ID that a particular partner event source name is associated with. This
+// operation is not used by Amazon Web Services customers.
 func (c *Client) ListPartnerEventSourceAccounts(ctx context.Context, params *ListPartnerEventSourceAccountsInput, optFns ...func(*Options)) (*ListPartnerEventSourceAccountsOutput, error) {
 	if params == nil {
 		params = &ListPartnerEventSourceAccountsInput{}

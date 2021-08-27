@@ -50,7 +50,7 @@
                 "AccountQuotaName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the DMS quota for this account.</p>"
+                        "smithy.api#documentation": "<p>The name of the DMS quota for this Amazon Web Services account.</p>"
                     }
                 },
                 "Used": {
@@ -67,7 +67,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a quota for an account, for example the number of replication instances\n         allowed.</p>"
+                "smithy.api#documentation": "<p>Describes a quota for an Amazon Web Services account, for example the number of replication instances\n         allowed.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#AccountQuotaList": {
@@ -374,6 +374,12 @@
                 "smithy.api#documentation": "<p></p>"
             }
         },
+        "com.amazonaws.databasemigrationservice#ArnList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#String"
+            }
+        },
         "com.amazonaws.databasemigrationservice#AuthMechanismValue": {
             "type": "string",
             "traits": {
@@ -419,7 +425,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The name of an Availability Zone for use during database migration.\n            <code>AvailabilityZone</code> is an optional parameter to the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html\">\n               <code>CreateReplicationInstance</code>\n            </a> operation, and it’s value relates to\n         the Region of an endpoint. For example, the availability zone of an endpoint in the\n         us-east-1 region might be us-east-1a, us-east-1b, us-east-1c, or us-east-1d.</p>"
+                "smithy.api#documentation": "<p>The name of an Availability Zone for use during database migration.\n            <code>AvailabilityZone</code> is an optional parameter to the <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html\">\n               <code>CreateReplicationInstance</code>\n            </a> operation, and it’s value relates to\n         the Amazon Web Services Region of an endpoint. For example, the availability zone of an endpoint in the\n         us-east-1 region might be us-east-1a, us-east-1b, us-east-1c, or us-east-1d.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#AvailabilityZonesList": {
@@ -487,6 +493,45 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p></p>"
+            }
+        },
+        "com.amazonaws.databasemigrationservice#CannedAclForObjectsValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "none",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "private",
+                        "name": "PRIVATE"
+                    },
+                    {
+                        "value": "public-read",
+                        "name": "PUBLIC_READ"
+                    },
+                    {
+                        "value": "public-read-write",
+                        "name": "PUBLIC_READ_WRITE"
+                    },
+                    {
+                        "value": "authenticated-read",
+                        "name": "AUTHENTICATED_READ"
+                    },
+                    {
+                        "value": "aws-exec-read",
+                        "name": "AWS_EXEC_READ"
+                    },
+                    {
+                        "value": "bucket-owner-read",
+                        "name": "BUCKET_OWNER_READ"
+                    },
+                    {
+                        "value": "bucket-owner-full-control",
+                        "name": "BUCKET_OWNER_FULL_CONTROL"
+                    }
+                ]
             }
         },
         "com.amazonaws.databasemigrationservice#Certificate": {
@@ -754,7 +799,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n           DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your account. Your account has a\n         different default encryption key for each Region.</p>"
+                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n           DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a\n         different default encryption key for each Amazon Web Services Region.</p>"
                     }
                 },
                 "Tags": {
@@ -882,6 +927,12 @@
                 },
                 "DocDbSettings": {
                     "target": "com.amazonaws.databasemigrationservice#DocDbSettings"
+                },
+                "RedisSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#RedisSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings in JSON format for the target Redis endpoint.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1088,7 +1139,7 @@
                 "AvailabilityZone": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Availability Zone where the replication instance will be created. The default\n         value is a random, system-chosen Availability Zone in the endpoint's Region, for\n         example: <code>us-east-1d</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The Availability Zone where the replication instance will be created. The default\n         value is a random, system-chosen Availability Zone in the endpoint's Amazon Web Services Region, for\n         example: <code>us-east-1d</code>\n         </p>"
                     }
                 },
                 "ReplicationSubnetGroupIdentifier": {
@@ -1100,7 +1151,7 @@
                 "PreferredMaintenanceWindow": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, in Universal\n         Coordinated Time (UTC).</p>\n         <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>\n         <p>Default: A 30-minute window selected at random from an 8-hour block of time per Region,\n          occurring on a random day of the week.</p>\n         <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n         <p>Constraints: Minimum 30-minute window.</p>"
+                        "smithy.api#documentation": "<p>The weekly time range during which system maintenance can occur, in Universal\n         Coordinated Time (UTC).</p>\n         <p> Format: <code>ddd:hh24:mi-ddd:hh24:mi</code>\n         </p>\n         <p>Default: A 30-minute window selected at random from an 8-hour block of time per Amazon Web Services Region,\n          occurring on a random day of the week.</p>\n         <p>Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun</p>\n         <p>Constraints: Minimum 30-minute window.</p>"
                     }
                 },
                 "MultiAZ": {
@@ -1130,7 +1181,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the data on the replication\n           instance.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n           DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your account. Your account has a\n         different default encryption key for each Region.</p>"
+                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the data on the replication\n           instance.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n           DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a\n         different default encryption key for each Amazon Web Services Region.</p>"
                     }
                 },
                 "PubliclyAccessible": {
@@ -1877,7 +1928,7 @@
                 "UniqueAccountIdentifier": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique DMS identifier for an account in a particular Region. The value of this\n         identifier has the following format: <code>c99999999999</code>. DMS uses this identifier to\n         name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket\n         for storing task assessment reports in a given Region. The format of this S3 bucket\n         name is the following:\n               <code>dms-<i>AccountNumber</i>-<i>UniqueAccountIdentifier</i>.</code>\n         Here is an example name for this default S3 bucket:\n            <code>dms-111122223333-c44445555666</code>.</p>\n         <note>\n            <p>DMS supports the <code>UniqueAccountIdentifier</code> parameter in\n            versions 3.1.4 and later.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A unique DMS identifier for an account in a particular Amazon Web Services Region. The value of this\n         identifier has the following format: <code>c99999999999</code>. DMS uses this identifier to\n         name artifacts. For example, DMS uses this identifier to name the default Amazon S3 bucket\n         for storing task assessment reports in a given Amazon Web Services Region. The format of this S3 bucket\n         name is the following:\n               <code>dms-<i>AccountNumber</i>-<i>UniqueAccountIdentifier</i>.</code>\n         Here is an example name for this default S3 bucket:\n            <code>dms-111122223333-c44445555666</code>.</p>\n         <note>\n            <p>DMS supports the <code>UniqueAccountIdentifier</code> parameter in\n            versions 3.1.4 and later.</p>\n         </note>"
                     }
                 }
             },
@@ -3065,7 +3116,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns the task assessment results from the Amazon S3 bucket that DMS creates in your\n          account.  This action always returns the\n         latest results.</p>\n         <p>For more information about DMS task assessments, see  \n           <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html\">Creating a task assessment report</a>\n           in the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">\n               Database Migration Service User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>Returns the task assessment results from the Amazon S3 bucket that DMS creates in your\n          Amazon Web Services account.  This action always returns the\n         latest results.</p>\n         <p>For more information about DMS task assessments, see  \n           <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Tasks.AssessmentReport.html\">Creating a task assessment report</a>\n           in the <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/dms/latest/userguide/Welcome.html\">\n               Database Migration Service User Guide</a>.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "Marker",
                     "outputToken": "Marker",
@@ -3930,7 +3981,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier that is used to encrypt the content on the replication\n         instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n         DMS uses your default encryption key. KMS creates the default encryption key for\n         your account. Your account has a different default encryption key for each Region.</p>"
+                        "smithy.api#documentation": "<p>The KMS key identifier that is used to encrypt the content on the replication\n         instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n         DMS uses your default encryption key. KMS creates the default encryption key for\n         your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
                     }
                 },
                 "SecretsManagerAccessRoleArn": {
@@ -4099,7 +4150,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n           DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your account. Your account has a\n         different default encryption key for each Region.</p>"
+                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the connection parameters for the endpoint.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n           DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a\n         different default encryption key for each Amazon Web Services Region.</p>"
                     }
                 },
                 "EndpointArn": {
@@ -4230,6 +4281,12 @@
                 },
                 "DocDbSettings": {
                     "target": "com.amazonaws.databasemigrationservice#DocDbSettings"
+                },
+                "RedisSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#RedisSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The settings for the Redis target endpoint. For more information, see the \n         <code>RedisSettings</code> structure.</p>"
+                    }
                 }
             },
             "traits": {
@@ -4709,6 +4766,12 @@
         "com.amazonaws.databasemigrationservice#Integer": {
             "type": "integer"
         },
+        "com.amazonaws.databasemigrationservice#IntegerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.databasemigrationservice#Integer"
+            }
+        },
         "com.amazonaws.databasemigrationservice#IntegerOptional": {
             "type": "integer",
             "traits": {
@@ -4957,7 +5020,7 @@
                 "SslCaCertificateArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert that DMS uses \n         to securely connect to your Kafka target endpoint.</p>"
+                        "smithy.api#documentation": "<p> The Amazon Resource Name (ARN) for the private certificate authority (CA) cert that DMS uses \n         to securely connect to your Kafka target endpoint.</p>"
                     }
                 },
                 "SaslUsername": {
@@ -4975,7 +5038,7 @@
                 "NoHexPrefix": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this attribute is Y, it allows hexadecimal values that don't have the\n            <code>0x</code> prefix when migrated to a Kafka target. If this attribute is N, all\n         hexadecimal values include this prefix when migrated to Kafka.</p>"
+                        "smithy.api#documentation": "<p>Set this optional parameter to <code>true</code> to avoid adding a '0x' prefix\n         to raw data in hexadecimal format. For example, by default, DMS adds a '0x'\n         prefix to the LOB column type in hexadecimal format moving from an Oracle source to a Kafka\n         target. Use the <code>NoHexPrefix</code> endpoint setting to enable migration of RAW data\n         type columns without adding the '0x' prefix.</p>"
                     }
                 }
             },
@@ -5049,7 +5112,7 @@
                 "NoHexPrefix": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this attribute is Y, it allows hexadecimal values that don't have the\n            <code>0x</code> prefix when migrated to a Kinesis target. If this attribute is N, all\n         hexadecimal values include this prefix when migrated to Kinesis.</p>"
+                        "smithy.api#documentation": "<p>Set this optional parameter to <code>true</code> to avoid adding a '0x' prefix\n         to raw data in hexadecimal format. For example, by default, DMS adds a '0x'\n         prefix to the LOB column type in hexadecimal format moving from an Oracle source to an\n         Amazon Kinesis target. Use the <code>NoHexPrefix</code> endpoint setting to enable\n         migration of RAW data type columns without adding the '0x' prefix.</p>"
                     }
                 }
             },
@@ -5080,8 +5143,13 @@
                 "ResourceArn": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the DMS\n         resource.</p>",
-                        "smithy.api#required": {}
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the DMS resource to\n         list tags for. This returns a list of keys (names of tags) created for the resource and\n         their associated tag values.</p>"
+                    }
+                },
+                "ResourceArnList": {
+                    "target": "com.amazonaws.databasemigrationservice#ArnList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>List of ARNs that identify multiple DMS resources that you want to list tags for. This\n         returns a list of keys (tag names) and their associated tag values. It also returns each\n         tag's associated <code>ResourceArn</code> value, which is the ARN of the resource for which\n         each listed tag is created. </p>"
                     }
                 }
             },
@@ -5440,6 +5508,12 @@
                     "target": "com.amazonaws.databasemigrationservice#DocDbSettings",
                     "traits": {
                         "smithy.api#documentation": "<p>Settings in JSON format for the source DocumentDB endpoint. For more information about the\n         available settings, see the configuration properties section in <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Source.DocumentDB.html\"> Using DocumentDB as a Target for Database Migration Service\n             </a> in the <i>Database Migration Service User\n               Guide.</i>\n         </p>"
+                    }
+                },
+                "RedisSettings": {
+                    "target": "com.amazonaws.databasemigrationservice#RedisSettings",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Settings in JSON format for the Redis target endpoint.</p>"
                     }
                 },
                 "ExactSettings": {
@@ -5934,7 +6008,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key identifier that is used to encrypt the content on the replication\n         instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n         DMS uses your default encryption key. KMS creates the default encryption key for\n         your account. Your account has a different default encryption key for each Region.</p>"
+                        "smithy.api#documentation": "<p>The KMS key identifier that is used to encrypt the content on the replication\n         instance. If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n         DMS uses your default encryption key. KMS creates the default encryption key for\n         your Amazon Web Services account. Your Amazon Web Services account has a different default encryption key for each Amazon Web Services Region.</p>"
                     }
                 },
                 "SecretsManagerAccessRoleArn": {
@@ -5974,6 +6048,9 @@
                 },
                 {
                     "target": "com.amazonaws.databasemigrationservice#ResourceNotFoundFault"
+                },
+                {
+                    "target": "com.amazonaws.databasemigrationservice#ResourceQuotaExceededFault"
                 }
             ],
             "traits": {
@@ -6194,6 +6271,12 @@
                     "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
                     "traits": {
                         "smithy.api#documentation": "<p>Set this attribute with <code>ArchivedLogDestId</code> in a primary/\n         standby setup. This attribute is useful in the case of a\n         switchover. In this case, DMS needs to know which\n         destination to get archive redo logs from to read changes.\n         This need arises because the previous primary instance is\n         now a standby instance after switchover.</p>\n         <p>Although DMS supports the use of the Oracle\n         <code>RESETLOGS</code> option to open the database, never\n         use <code>RESETLOGS</code> unless necessary. For additional\n         information about <code>RESETLOGS</code>, see <a href=\"https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B\">RMAN Data Repair Concepts</a> in the\n         <i>Oracle Database Backup and Recovery User's Guide</i>.</p>"
+                    }
+                },
+                "ExtraArchivedLogDestIds": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the IDs of one more destinations for one or more archived redo logs. These IDs\n         are the values of the <code>dest_id</code> column in the <code>v$archived_log</code> view.\n         Use this setting with the <code>archivedLogDestId</code> extra connection attribute in a\n         primary-to-single setup or a primary-to-multiple-standby setup. </p>\n         <p>This setting is useful in a switchover when you use an Oracle Data Guard database as a\n         source. In this case, DMS needs information about what destination to get archive redo\n         logs from to read changes. DMS needs this because after the switchover the previous\n         primary is a standby instance. For example, in a primary-to-single standby setup you might\n         apply the following settings. </p>\n         <p>\n            <code>archivedLogDestId=1; ExtraArchivedLogDestIds=[2]</code>\n         </p>\n         <p>In a primary-to-multiple-standby setup, you might apply the following settings.</p>\n         <p>\n            <code>archivedLogDestId=1; ExtraArchivedLogDestIds=[2,3,4]</code>\n         </p>\n         <p>Although DMS supports the use of the Oracle <code>RESETLOGS</code> option to open the\n         database, never use <code>RESETLOGS</code> unless it's necessary. For more information\n         about <code>RESETLOGS</code>, see <a href=\"https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B\"> RMAN Data Repair Concepts</a> in the <i>Oracle Database Backup and Recovery\n            User's Guide</i>.</p>"
                     }
                 },
                 "AllowSelectNestedTables": {
@@ -6632,7 +6715,7 @@
                 "HeartbeatEnable": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>If this attribute is set to true, the write-ahead log (WAL) heartbeat keeps\n         <code>restart_lsn</code> moving and prevents storage full scenarios.\n         The WAL heartbeat mimics a dummy transaction, so that idle\n         logical replication slots don't hold onto old WAL logs that result in storage full\n         situations on the source. \n         </p>"
+                        "smithy.api#documentation": "<p>The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing this,\n         it prevents idle logical replication slots from holding onto old WAL logs, which can result in\n         storage full situations on the source. This heartbeat keeps <code>restart_lsn</code> moving\n         and prevents storage full scenarios.</p>"
                     }
                 },
                 "HeartbeatSchema": {
@@ -6674,7 +6757,7 @@
                 "SlotName": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Sets the name of a previously created logical replication slot\n         for a CDC load of the PostgreSQL source instance.</p>\n         <p>When used with the DMS API <code>CdcStartPosition</code>\n         request parameter, this attribute also enables using native\n         CDC start points.</p>"
+                        "smithy.api#documentation": "<p>Sets the name of a previously created logical replication slot\n         for a change data capture (CDC) load of the PostgreSQL source instance. </p>\n         <p>When used with the <code>CdcStartPosition</code>\n         request parameter for the DMS API , this attribute also makes it possible to use native CDC\n         start points. DMS verifies that the specified logical\n         replication slot exists before starting the CDC load task. It\n         also verifies that the task was created with a valid setting of\n         <code>CdcStartPosition</code>. If the specified slot\n         doesn't exist or the task doesn't have a valid\n         <code>CdcStartPosition</code> setting, DMS raises an\n         error.</p>\n         <p>For more information about setting the <code>CdcStartPosition</code> request parameter,\n         see <a href=\"dms/latest/userguide/CHAP_Task.CDC.html#CHAP_Task.CDC.StartPoint.Native\">Determining a CDC native start point</a> in the <i>Database Migration Service User\n            Guide</i>. For more information about using <code>CdcStartPosition</code>, see\n            <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html\">CreateReplicationTask</a>, <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html\">StartReplicationTask</a>, and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html\">ModifyReplicationTask</a>.</p>"
                     }
                 },
                 "PluginName": {
@@ -6747,6 +6830,77 @@
                         "smithy.api#documentation": "<p>The replication instance that is being rebooted. </p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.databasemigrationservice#RedisAuthTypeValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "none",
+                        "name": "NONE"
+                    },
+                    {
+                        "value": "auth-role",
+                        "name": "AUTH_ROLE"
+                    },
+                    {
+                        "value": "auth-token",
+                        "name": "AUTH_TOKEN"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.databasemigrationservice#RedisSettings": {
+            "type": "structure",
+            "members": {
+                "ServerName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Fully qualified domain name of the endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Port": {
+                    "target": "com.amazonaws.databasemigrationservice#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Transmission Control Protocol (TCP) port for the endpoint.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SslSecurityProtocol": {
+                    "target": "com.amazonaws.databasemigrationservice#SslSecurityProtocolValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The connection to a Redis target endpoint using Transport Layer Security (TLS). Valid\n         values include <code>plaintext</code> and <code>ssl-encryption</code>. The default is\n            <code>ssl-encryption</code>. The <code>ssl-encryption</code> option makes an encrypted\n         connection. Optionally, you can identify an Amazon Resource Name (ARN) for an SSL certificate authority (CA) \n          using the <code>SslCaCertificateArn </code>setting. If an ARN isn't given for a CA, DMS\n         uses the Amazon root CA.</p>\n         <p>The <code>plaintext</code> option doesn't provide Transport Layer Security (TLS) \n         encryption for traffic between endpoint and database.</p>"
+                    }
+                },
+                "AuthType": {
+                    "target": "com.amazonaws.databasemigrationservice#RedisAuthTypeValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of authentication to perform when connecting to a Redis target. Options include\n            <code>none</code>, <code>auth-token</code>, and <code>auth-role</code>. The\n            <code>auth-token</code> option requires an <code>AuthPassword</code> value to be provided. The\n         <code>auth-role</code> option requires <code>AuthUserName</code> and <code>AuthPassword</code> values\n         to be provided.</p>"
+                    }
+                },
+                "AuthUserName": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user name provided with the <code>auth-role</code> option of the \n         <code>AuthType</code> setting for a Redis target endpoint.</p>"
+                    }
+                },
+                "AuthPassword": {
+                    "target": "com.amazonaws.databasemigrationservice#SecretString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The password provided with the <code>auth-role</code> and \n         <code>auth-token</code> options of the <code>AuthType</code> setting for a Redis \n         target endpoint.</p>"
+                    }
+                },
+                "SslCaCertificateArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses to\n         connect to your Redis target endpoint.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Provides information that defines a Redis target endpoint.</p>"
             }
         },
         "com.amazonaws.databasemigrationservice#RedshiftSettings": {
@@ -7283,7 +7437,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the data on the replication\n           instance.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n           DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your account. Your account has a\n         different default encryption key for each Region.</p>"
+                        "smithy.api#documentation": "<p>An KMS key identifier that is used to encrypt the data on the replication\n           instance.</p>\n         <p>If you don't specify a value for the <code>KmsKeyId</code> parameter, then\n           DMS uses your default encryption key.</p>\n         <p>KMS creates the default encryption key for your Amazon Web Services account. Your Amazon Web Services account has a\n         different default encryption key for each Amazon Web Services Region.</p>"
                     }
                 },
                 "ReplicationInstanceArn": {
@@ -8123,7 +8277,7 @@
                 "ParquetTimestampInMillisecond": {
                     "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>A value that specifies the precision of any <code>TIMESTAMP</code> column values that\n         are written to an Amazon S3 object file in .parquet format.</p>\n         <note>\n            <p>DMS supports the <code>ParquetTimestampInMillisecond</code> parameter in versions\n            3.1.4 and later.</p>\n         </note>\n         <p>When <code>ParquetTimestampInMillisecond</code> is set to <code>true</code> or\n            <code>y</code>, DMS writes all <code>TIMESTAMP</code> columns in a .parquet\n         formatted file with millisecond precision. Otherwise, DMS writes them with microsecond\n         precision.</p>\n         <p>Currently, Amazon Athena and Glue can handle only\n         millisecond precision for <code>TIMESTAMP</code> values. Set\n         this parameter to <code>true</code> for S3 endpoint object\n         files that are .parquet formatted only if you plan to query or process the data with Athena or Glue.</p>\n         <note>\n\n               <p>DMS writes any <code>TIMESTAMP</code> column\n                  values written to an S3 file in .csv format with\n                  microsecond precision.</p>\n\n               <p>Setting <code>ParquetTimestampInMillisecond</code> has no effect on the string\n            format of the timestamp column value that is inserted by setting the\n               <code>TimestampColumnName</code> parameter.</p>\n\n         </note>"
+                        "smithy.api#documentation": "<p>A value that specifies the precision of any <code>TIMESTAMP</code> column values that\n         are written to an Amazon S3 object file in .parquet format.</p>\n         <note>\n            <p>DMS supports the <code>ParquetTimestampInMillisecond</code> parameter in versions\n            3.1.4 and later.</p>\n         </note>\n         <p>When <code>ParquetTimestampInMillisecond</code> is set to <code>true</code> or\n            <code>y</code>, DMS writes all <code>TIMESTAMP</code> columns in a .parquet\n         formatted file with millisecond precision. Otherwise, DMS writes them with microsecond\n         precision.</p>\n         <p>Currently, Amazon Athena and Glue can handle only\n         millisecond precision for <code>TIMESTAMP</code> values. Set\n         this parameter to <code>true</code> for S3 endpoint object\n         files that are .parquet formatted only if you plan to query or process the data with Athena or Glue.</p>\n         <note>\n              <p>DMS writes any <code>TIMESTAMP</code> column\n                  values written to an S3 file in .csv format with\n                  microsecond precision.</p>\n\n               <p>Setting <code>ParquetTimestampInMillisecond</code> has no effect on the string\n            format of the timestamp column value that is inserted by setting the\n               <code>TimestampColumnName</code> parameter.</p>\n         </note>"
                     }
                 },
                 "CdcInsertsAndUpdates": {
@@ -8172,6 +8326,54 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the folder path of CDC files. For an S3 source, this setting is required if a\n         task captures change data; otherwise, it's optional. If <code>CdcPath</code> is set, DMS\n          reads CDC files from this path and replicates the data changes to the target endpoint.\n         For an S3 target if you set <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-PreserveTransactions\">\n               <code>PreserveTransactions</code>\n            </a> to <code>true</code>, DMS\n          verifies that you have set this parameter to a folder path on your S3 target where DMS\n          can save the transaction order for the CDC load. DMS creates this CDC folder path\n         in either your S3 target working directory or the S3 target location specified by <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketFolder\">\n               <code>BucketFolder</code>\n            </a> and <a href=\"https://docs.aws.amazon.com/dms/latest/APIReference/API_S3Settings.html#DMS-Type-S3Settings-BucketName\">\n               <code>BucketName</code>\n            </a>.</p>\n         <p>For example, if you specify <code>CdcPath</code> as <code>MyChangedData</code>, and you\n         specify <code>BucketName</code> as <code>MyTargetBucket</code> but do not specify\n            <code>BucketFolder</code>, DMS creates the CDC folder path following:\n            <code>MyTargetBucket/MyChangedData</code>.</p>\n         <p>If you specify the same <code>CdcPath</code>, and you specify <code>BucketName</code> as\n            <code>MyTargetBucket</code> and <code>BucketFolder</code> as <code>MyTargetData</code>,\n         DMS creates the CDC folder path following:\n            <code>MyTargetBucket/MyTargetData/MyChangedData</code>.</p>\n         <p>For more information on CDC including transaction order on an S3 target, see <a href=\"https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath\">Capturing data changes (CDC) including transaction order on the S3\n            target</a>.</p>\n         <note>\n            <p>This setting is supported in DMS versions 3.4.2 and later.</p>\n         </note>"
+                    }
+                },
+                "CannedAclForObjects": {
+                    "target": "com.amazonaws.databasemigrationservice#CannedAclForObjectsValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that enables DMS to specify a predefined (canned) access control list for\n         objects created in an Amazon S3 bucket as .csv or .parquet files. For more information\n         about Amazon S3 canned ACLs, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">Canned\n            ACL</a> in the <i>Amazon S3 Developer Guide.</i>\n         </p>\n         <p>The default value is NONE. Valid values include NONE, PRIVATE,\n         PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ,\n         AWS_EXEC_READ, BUCKET_OWNER_READ, and\n         BUCKET_OWNER_FULL_CONTROL.</p>"
+                    }
+                },
+                "AddColumnName": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that, when set to <code>true</code> or <code>y</code>, you can use\n         to add column name information to the .csv output file.</p>\n         <p>The default value is <code>false</code>. Valid values are <code>true</code>, <code>false</code>,\n         <code>y</code>, and <code>n</code>.</p>"
+                    }
+                },
+                "CdcMaxBatchInterval": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Maximum length of the interval, defined in seconds, after which to output a file to Amazon S3.</p>\n         <p>When <code>CdcMaxBatchInterval</code> and <code>CdcMinFileSize</code> are both specified, the\n         file write is triggered by whichever parameter condition is met first within an DMS\n         CloudFormation template.</p>\n         <p>The default value is 60 seconds.</p>"
+                    }
+                },
+                "CdcMinFileSize": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Minimum file size, defined in megabytes, to reach for a file output to Amazon S3.</p>\n         <p>When <code>CdcMinFileSize</code> and <code>CdcMaxBatchInterval</code> are both specified, the file \n         write is triggered by whichever parameter condition is met first within an DMS \n         CloudFormation template.</p>\n         <p>The default value is 32 MB.</p>"
+                    }
+                },
+                "CsvNullValue": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An optional parameter that specifies how DMS treats null\n         values. While handling the null value, you can use this\n         parameter to pass a user-defined string as null when writing to\n         the target. For example, when target columns are not nullable,\n         you can use this option to differentiate between the empty\n         string value and the null value. So, if you set this parameter\n         value to the empty string (\"\" or ''), DMS treats the empty\n         string as the null value instead of <code>NULL</code>.</p>\n         <p>The default value is <code>NULL</code>. Valid values include any valid string.</p>"
+                    }
+                },
+                "IgnoreHeaderRows": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When this value is set to 1, DMS ignores the first row header in a .csv file. A value\n         of 1 turns on the feature; a value of 0 turns off the feature.</p>\n         <p>The default is 0.</p>"
+                    }
+                },
+                "MaxFileSize": {
+                    "target": "com.amazonaws.databasemigrationservice#IntegerOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A value that specifies the maximum size (in KB) of any .csv\n         file to be created while migrating to an S3 target during full\n         load.</p>\n         <p>The default value is 1,048,576 KB (1 GB). Valid values include 1 to 1,048,576.</p>"
+                    }
+                },
+                "Rfc4180": {
+                    "target": "com.amazonaws.databasemigrationservice#BooleanOptional",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For an S3 source, when this value is set to <code>true</code> or <code>y</code>,\n         each leading double quotation mark has to be followed by an\n         ending double quotation mark. This formatting complies with RFC\n         4180. When this value is set to <code>false</code> or\n         <code>n</code>, string literals are copied to the target as\n         is. In this case, a delimiter (row or column) signals the end of\n         the field. Thus, you can't use a delimiter as part of the\n         string, because it signals the end of the value.</p>\n         <p>For an S3 target, an optional parameter used to set behavior to comply with RFC\n         4180 for data migrated to Amazon S3 using .csv file format only. When this\n         value is set to <code>true</code> or <code>y</code> using Amazon\n         S3 as a target, if the data has quotation marks or newline\n         characters in it, DMS encloses the entire column with an\n         additional pair of double quotation marks (\"). Every quotation\n         mark within the data is repeated twice.</p>\n         <p>The default value is <code>true</code>. Valid values include <code>true</code>, <code>false</code>,\n         <code>y</code>, and <code>n</code>.</p>"
                     }
                 }
             },
@@ -8256,6 +8458,21 @@
                     {
                         "value": "replication-instance",
                         "name": "replication_instance"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.databasemigrationservice#SslSecurityProtocolValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "plaintext",
+                        "name": "PLAINTEXT"
+                    },
+                    {
+                        "value": "ssl-encryption",
+                        "name": "SSL_ENCRYPTION"
                     }
                 ]
             }
@@ -8930,6 +9147,12 @@
                     "target": "com.amazonaws.databasemigrationservice#String",
                     "traits": {
                         "smithy.api#documentation": "<p>A value is the optional value of the tag. The string value can be 1-256 Unicode\n         characters in length and can't be prefixed with \"aws:\" or \"dms:\". The string can only\n         contain only the set of Unicode letters, digits, white-space, '_', '.', '/', '=', '+', '-'\n         (Java regular expressions: \"^([\\\\p{L}\\\\p{Z}\\\\p{N}_.:/=+\\\\-]*)$\").</p>"
+                    }
+                },
+                "ResourceArn": {
+                    "target": "com.amazonaws.databasemigrationservice#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) string that uniquely identifies the resource for which the tag is created.</p>"
                     }
                 }
             },
