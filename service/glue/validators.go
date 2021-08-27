@@ -110,6 +110,26 @@ func (m *validateOpBatchDeleteTableVersion) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpBatchGetBlueprints struct {
+}
+
+func (*validateOpBatchGetBlueprints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpBatchGetBlueprints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*BatchGetBlueprintsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpBatchGetBlueprintsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpBatchGetCrawlers struct {
 }
 
@@ -305,6 +325,26 @@ func (m *validateOpCheckSchemaVersionValidity) HandleInitialize(ctx context.Cont
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCheckSchemaVersionValidityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateBlueprint struct {
+}
+
+func (*validateOpCreateBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateBlueprintInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -645,6 +685,26 @@ func (m *validateOpCreateWorkflow) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpCreateWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteBlueprint struct {
+}
+
+func (*validateOpDeleteBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteBlueprintInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1045,6 +1105,66 @@ func (m *validateOpDeleteWorkflow) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBlueprint struct {
+}
+
+func (*validateOpGetBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBlueprintInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBlueprintRun struct {
+}
+
+func (*validateOpGetBlueprintRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBlueprintRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBlueprintRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBlueprintRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBlueprintRuns struct {
+}
+
+func (*validateOpGetBlueprintRuns) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBlueprintRuns) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBlueprintRunsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBlueprintRunsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1990,6 +2110,26 @@ func (m *validateOpResumeWorkflowRun) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpStartBlueprintRun struct {
+}
+
+func (*validateOpStartBlueprintRun) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpStartBlueprintRun) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*StartBlueprintRunInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpStartBlueprintRunInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpStartCrawler struct {
 }
 
@@ -2285,6 +2425,26 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpUntagResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateBlueprint struct {
+}
+
+func (*validateOpUpdateBlueprint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateBlueprint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateBlueprintInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateBlueprintInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -2650,6 +2810,10 @@ func addOpBatchDeleteTableVersionValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpBatchDeleteTableVersion{}, middleware.After)
 }
 
+func addOpBatchGetBlueprintsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpBatchGetBlueprints{}, middleware.After)
+}
+
 func addOpBatchGetCrawlersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchGetCrawlers{}, middleware.After)
 }
@@ -2688,6 +2852,10 @@ func addOpCancelMLTaskRunValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpCheckSchemaVersionValidityValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCheckSchemaVersionValidity{}, middleware.After)
+}
+
+func addOpCreateBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateBlueprint{}, middleware.After)
 }
 
 func addOpCreateClassifierValidationMiddleware(stack *middleware.Stack) error {
@@ -2756,6 +2924,10 @@ func addOpCreateUserDefinedFunctionValidationMiddleware(stack *middleware.Stack)
 
 func addOpCreateWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateWorkflow{}, middleware.After)
+}
+
+func addOpDeleteBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteBlueprint{}, middleware.After)
 }
 
 func addOpDeleteClassifierValidationMiddleware(stack *middleware.Stack) error {
@@ -2836,6 +3008,18 @@ func addOpDeleteUserDefinedFunctionValidationMiddleware(stack *middleware.Stack)
 
 func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteWorkflow{}, middleware.After)
+}
+
+func addOpGetBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBlueprint{}, middleware.After)
+}
+
+func addOpGetBlueprintRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBlueprintRun{}, middleware.After)
+}
+
+func addOpGetBlueprintRunsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBlueprintRuns{}, middleware.After)
 }
 
 func addOpGetClassifierValidationMiddleware(stack *middleware.Stack) error {
@@ -3026,6 +3210,10 @@ func addOpResumeWorkflowRunValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpResumeWorkflowRun{}, middleware.After)
 }
 
+func addOpStartBlueprintRunValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpStartBlueprintRun{}, middleware.After)
+}
+
 func addOpStartCrawlerValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpStartCrawler{}, middleware.After)
 }
@@ -3084,6 +3272,10 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func addOpUpdateBlueprintValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateBlueprint{}, middleware.After)
 }
 
 func addOpUpdateClassifierValidationMiddleware(stack *middleware.Stack) error {
@@ -4332,6 +4524,21 @@ func validateOpBatchDeleteTableVersionInput(v *BatchDeleteTableVersionInput) err
 	}
 }
 
+func validateOpBatchGetBlueprintsInput(v *BatchGetBlueprintsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "BatchGetBlueprintsInput"}
+	if v.Names == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Names"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpBatchGetCrawlersInput(v *BatchGetCrawlersInput) error {
 	if v == nil {
 		return nil
@@ -4503,6 +4710,24 @@ func validateOpCheckSchemaVersionValidityInput(v *CheckSchemaVersionValidityInpu
 	}
 	if v.SchemaDefinition == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("SchemaDefinition"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateBlueprintInput(v *CreateBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateBlueprintInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.BlueprintLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintLocation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4891,6 +5116,21 @@ func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
 	}
 }
 
+func validateOpDeleteBlueprintInput(v *DeleteBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteBlueprintInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteClassifierInput(v *DeleteClassifierInput) error {
 	if v == nil {
 		return nil
@@ -5225,6 +5465,54 @@ func validateOpDeleteWorkflowInput(v *DeleteWorkflowInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkflowInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBlueprintInput(v *GetBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBlueprintInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBlueprintRunInput(v *GetBlueprintRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBlueprintRunInput"}
+	if v.BlueprintName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintName"))
+	}
+	if v.RunId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RunId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBlueprintRunsInput(v *GetBlueprintRunsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBlueprintRunsInput"}
+	if v.BlueprintName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6065,6 +6353,24 @@ func validateOpResumeWorkflowRunInput(v *ResumeWorkflowRunInput) error {
 	}
 }
 
+func validateOpStartBlueprintRunInput(v *StartBlueprintRunInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "StartBlueprintRunInput"}
+	if v.BlueprintName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintName"))
+	}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpStartCrawlerInput(v *StartCrawlerInput) error {
 	if v == nil {
 		return nil
@@ -6300,6 +6606,24 @@ func validateOpUntagResourceInput(v *UntagResourceInput) error {
 	}
 	if v.TagsToRemove == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("TagsToRemove"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateBlueprintInput(v *UpdateBlueprintInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateBlueprintInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.BlueprintLocation == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BlueprintLocation"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

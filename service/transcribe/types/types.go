@@ -89,7 +89,7 @@ type CallAnalyticsJob struct {
 	// * Invalid
 	// sample rate for audio file: The sample rate specified in the
 	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
-	// 8000 and 48000 Hertz.
+	// 8,000 and 48,000 Hertz.
 	//
 	// * The sample rate provided does not match the detected
 	// sample rate: The sample rate in the audio file doesn't match the sample rate
@@ -99,7 +99,7 @@ type CallAnalyticsJob struct {
 	// * Invalid file
 	// size: file size too large: The size of your audio file is larger than what
 	// Amazon Transcribe Medical can process. For more information, see Guidelines and
-	// Quotas in the Amazon Transcribe Medical Guide
+	// Quotas in the Amazon Transcribe Medical Guide.
 	//
 	// * Invalid number of channels:
 	// number of channels too large: Your audio contains more channels than Amazon
@@ -119,57 +119,9 @@ type CallAnalyticsJob struct {
 	// field blank, and Amazon Transcribe will use machine learning to automatically
 	// identify the language. To improve the accuracy of language identification, you
 	// can provide an array containing the possible language codes for the language
-	// spoken in your audio. The following list shows the supported languages and
-	// corresponding language codes for call analytics jobs:
-	//
-	// * Gulf Arabic (ar-AE)
-	//
-	// *
-	// Mandarin Chinese, Mainland (zh-CN)
-	//
-	// * Australian English (en-AU)
-	//
-	// * British
-	// English (en-GB)
-	//
-	// * Indian English (en-IN)
-	//
-	// * Irish English (en-IE)
-	//
-	// * Scottish
-	// English (en-AB)
-	//
-	// * US English (en-US)
-	//
-	// * Welsh English (en-WL)
-	//
-	// * Spanish
-	// (es-ES)
-	//
-	// * US Spanish (es-US)
-	//
-	// * French (fr-FR)
-	//
-	// * Canadian French (fr-CA)
-	//
-	// *
-	// German (de-DE)
-	//
-	// * Swiss German (de-CH)
-	//
-	// * Indian Hindi (hi-IN)
-	//
-	// * Italian
-	// (it-IT)
-	//
-	// * Japanese (ja-JP)
-	//
-	// * Korean (ko-KR)
-	//
-	// * Portuguese (pt-PT)
-	//
-	// * Brazilian
-	// Portuguese (pt-BR)
+	// spoken in your audio. Refer to Supported languages and language-specific
+	// features (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html)
+	// for additional information.
 	LanguageCode LanguageCode
 
 	// Describes the input media file in a transcription request.
@@ -209,57 +161,10 @@ type CallAnalyticsJobSettings struct {
 	// the language, you can leave this field blank and Amazon Transcribe will use
 	// machine learning to identify the language for you. To improve the ability of
 	// Amazon Transcribe to correctly identify the language, you can provide an array
-	// of the languages that can be present in the audio. The following list shows the
-	// supported languages and corresponding language codes for call analytics jobs:
-	//
-	// *
-	// Gulf Arabic (ar-AE)
-	//
-	// * Mandarin Chinese, Mainland (zh-CN)
-	//
-	// * Australian English
-	// (en-AU)
-	//
-	// * British English (en-GB)
-	//
-	// * Indian English (en-IN)
-	//
-	// * Irish English
-	// (en-IE)
-	//
-	// * Scottish English (en-AB)
-	//
-	// * US English (en-US)
-	//
-	// * Welsh English
-	// (en-WL)
-	//
-	// * Spanish (es-ES)
-	//
-	// * US Spanish (es-US)
-	//
-	// * French (fr-FR)
-	//
-	// * Canadian
-	// French (fr-CA)
-	//
-	// * German (de-DE)
-	//
-	// * Swiss German (de-CH)
-	//
-	// * Indian Hindi
-	// (hi-IN)
-	//
-	// * Italian (it-IT)
-	//
-	// * Japanese (ja-JP)
-	//
-	// * Korean (ko-KR)
-	//
-	// * Portuguese
-	// (pt-PT)
-	//
-	// * Brazilian Portuguese (pt-BR)
+	// of the languages that can be present in the audio. Refer to Supported languages
+	// and language-specific features
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/how-it-works.html) for
+	// additional information.
 	LanguageOptions []LanguageCode
 
 	// Set to mask to remove filtered text from the transcript and replace it with
@@ -534,7 +439,7 @@ type MedicalTranscriptionJob struct {
 	// * Invalid
 	// sample rate for audio file- The sample rate specified in the
 	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
-	// 8000 and 48000 Hertz.
+	// 8,000 and 48,000 Hertz.
 	//
 	// * The sample rate provided does not match the detected
 	// sample rate- The sample rate in the audio file doesn't match the sample rate
@@ -582,15 +487,16 @@ type MedicalTranscriptionJob struct {
 	Settings *MedicalTranscriptionSetting
 
 	// The medical specialty of any clinicians providing a dictation or having a
-	// conversation. PRIMARYCARE is the only available setting for this object. This
-	// specialty enables you to generate transcriptions for the following medical
-	// fields:
-	//
-	// * Family Medicine
+	// conversation. Refer to Transcribing a medical conversation
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-medical-conversation.html)for
+	// a list of supported specialties.
 	Specialty Specialty
 
 	// A timestamp that shows when the job started processing.
 	StartTime *time.Time
+
+	// A key:value pair assigned to a given medical transcription job.
+	Tags []Tag
 
 	// An object that contains the MedicalTranscript. The MedicalTranscript contains
 	// the TranscriptFileUri.
@@ -632,12 +538,15 @@ type MedicalTranscriptionJobSummary struct {
 	// The name of a medical transcription job.
 	MedicalTranscriptionJobName *string
 
-	// Indicates the location of the transcription job's output. The CUSTOMER_BUCKET is
-	// the S3 location provided in the OutputBucketName field when the
+	// Indicates the location of the transcription job's output. This field must be the
+	// path of an S3 bucket; if you don't already have an S3 bucket, one is created
+	// based on the path you add.
 	OutputLocationType OutputLocationType
 
-	// The medical specialty of the transcription job. Primary care is the only valid
-	// value.
+	// The medical specialty of the transcription job. Refer to Transcribing a medical
+	// conversation
+	// (https://docs.aws.amazon.com/transcribe/latest/dg/transcribe-medical-conversation.html)for
+	// a list of supported specialties.
 	Specialty Specialty
 
 	// A timestamp that shows when the job began processing.
@@ -917,6 +826,26 @@ type Settings struct {
 	noSmithyDocumentSerde
 }
 
+// A key:value pair that adds metadata to a resource used by Amazon Transcribe. For
+// example, a tag with the key:value pair ‘Department’:’Sales’ might be added to a
+// resource to indicate its use by your organization's sales department.
+type Tag struct {
+
+	// The first part of a key:value pair that forms a tag associated with a given
+	// resource. For example, in the tag ‘Department’:’Sales’, the key is 'Department'.
+	//
+	// This member is required.
+	Key *string
+
+	// The second part of a key:value pair that forms a tag associated with a given
+	// resource. For example, in the tag ‘Department’:’Sales’, the value is 'Sales'.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Identifies the location of a transcription.
 type Transcript struct {
 
@@ -978,7 +907,7 @@ type TranscriptFilter struct {
 // StartTranscriptionJob operation.
 type TranscriptionJob struct {
 
-	// A timestamp that shows when the job was completed.
+	// A timestamp that shows when the job completed.
 	CompletionTime *time.Time
 
 	// An object that describes content redaction settings for the transcription job.
@@ -1003,7 +932,7 @@ type TranscriptionJob struct {
 	// *
 	// Invalid sample rate for audio file - The sample rate specified in the
 	// MediaSampleRateHertz of the request isn't valid. The sample rate must be between
-	// 8000 and 48000 Hertz.
+	// 8,000 and 48,000 Hertz.
 	//
 	// * The sample rate provided does not match the detected
 	// sample rate - The sample rate in the audio file doesn't match the sample rate
@@ -1061,8 +990,11 @@ type TranscriptionJob struct {
 	// transcription job.
 	Settings *Settings
 
-	// A timestamp that shows with the job was started processing.
+	// A timestamp that shows when the job started processing.
 	StartTime *time.Time
+
+	// A key:value pair assigned to a given transcription job.
+	Tags []Tag
 
 	// An object that describes the output of the transcription job.
 	Transcript *Transcript

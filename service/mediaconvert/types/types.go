@@ -1277,12 +1277,10 @@ type CmafGroupSettings struct {
 	// DRM settings.
 	Encryption *CmafEncryptionSettings
 
-	// Length of fragments to generate (in seconds). Fragment length must be compatible
-	// with GOP size and Framerate. Note that fragments will end on the next keyframe
-	// after this number of seconds, so actual fragment length may be longer. When Emit
-	// Single File is checked, the fragmentation is internal to a single output file
-	// and it does not cause the creation of many output files as in other output
-	// types.
+	// Specify the length, in whole seconds, of the mp4 fragments. When you don't
+	// specify a value, MediaConvert defaults to 2. Related setting: Use Fragment
+	// length control (FragmentLengthControl) to specify whether the encoder enforces
+	// this value strictly.
 	FragmentLength int32
 
 	// Specify whether MediaConvert generates images for trick play. Keep the default
@@ -1349,15 +1347,20 @@ type CmafGroupSettings struct {
 	// SEGMENTED_FILES, separate segment files will be created.
 	SegmentControl CmafSegmentControl
 
-	// Use this setting to specify the length, in seconds, of each individual CMAF
-	// segment. This value applies to the whole package; that is, to every output in
-	// the output group. Note that segments end on the first keyframe after this number
-	// of seconds, so the actual segment length might be slightly longer. If you set
-	// Segment control (CmafSegmentControl) to single file, the service puts the
-	// content of each output in a single file that has metadata that marks these
-	// segments. If you set it to segmented files, the service creates multiple files
-	// for each output, each with the content of one segment.
+	// Specify the length, in whole seconds, of each segment. When you don't specify a
+	// value, MediaConvert defaults to 10. Related settings: Use Segment length control
+	// (SegmentLengthControl) to specify whether the encoder enforces this value
+	// strictly. Use Segment control (CmafSegmentControl) to specify whether
+	// MediaConvert creates separate segment files or one content file that has
+	// metadata to mark the segment boundaries.
 	SegmentLength int32
+
+	// Specify how you want MediaConvert to determine the segment length. Choose Exact
+	// (EXACT) to have the encoder use the exact length that you specify with the
+	// setting Segment length (SegmentLength). This might result in extra I-frames.
+	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
+	// lengths to match the next GOP boundary.
+	SegmentLengthControl CmafSegmentLengthControl
 
 	// Include or exclude RESOLUTION attribute for video in EXT-X-STREAM-INF tag of
 	// variant manifest.
@@ -1735,12 +1738,20 @@ type DashIsoGroupSettings struct {
 	// SEGMENTED_FILES, separate segment files will be created.
 	SegmentControl DashIsoSegmentControl
 
-	// Length of mpd segments to create (in seconds). Note that segments will end on
-	// the next keyframe after this number of seconds, so actual segment length may be
-	// longer. When Emit Single File is checked, the segmentation is internal to a
-	// single output file and it does not cause the creation of many output files as in
-	// other output types.
+	// Specify the length, in whole seconds, of each segment. When you don't specify a
+	// value, MediaConvert defaults to 30. Related settings: Use Segment length control
+	// (SegmentLengthControl) to specify whether the encoder enforces this value
+	// strictly. Use Segment control (DashIsoSegmentControl) to specify whether
+	// MediaConvert creates separate segment files or one content file that has
+	// metadata to mark the segment boundaries.
 	SegmentLength int32
+
+	// Specify how you want MediaConvert to determine the segment length. Choose Exact
+	// (EXACT) to have the encoder use the exact length that you specify with the
+	// setting Segment length (SegmentLength). This might result in extra I-frames.
+	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
+	// lengths to match the next GOP boundary.
+	SegmentLengthControl DashIsoSegmentLengthControl
 
 	// If you get an HTTP error in the 400 range when you play back your DASH output,
 	// enable this setting and run your transcoding job again. When you enable this
@@ -2633,9 +2644,11 @@ type H264Settings struct {
 	// Entropy encoding mode. Use CABAC (must be in Main or High profile) or CAVLC.
 	EntropyEncoding H264EntropyEncoding
 
-	// Keep the default value, PAFF, to have MediaConvert use PAFF encoding for
-	// interlaced outputs. Choose Force field (FORCE_FIELD) to disable PAFF encoding
-	// and create separate interlaced fields.
+	// The video encoding method for your MPEG-4 AVC output. Keep the default value,
+	// PAFF, to have MediaConvert use PAFF encoding for interlaced outputs. Choose
+	// Force field (FORCE_FIELD) to disable PAFF encoding and create separate
+	// interlaced fields. Choose MBAFF to disable PAFF and have MediaConvert use MBAFF
+	// encoding for interlaced outputs.
 	FieldEncoding H264FieldEncoding
 
 	// Only use this setting when you change the default value, AUTO, for the setting
@@ -2743,7 +2756,9 @@ type H264Settings struct {
 	// Min-I-interval - 1
 	MinIInterval int32
 
-	// Number of B-frames between reference frames.
+	// Specify the number of B-frames that MediaConvert puts between reference frames
+	// in this output. Valid values are whole numbers from 0 through 7. When you don't
+	// specify a value, MediaConvert defaults to 2.
 	NumberBFramesBetweenReferenceFrames int32
 
 	// Number of reference frames to use. The encoder may use more than requested if
@@ -3078,7 +3093,9 @@ type H265Settings struct {
 	// Min-I-interval - 1
 	MinIInterval int32
 
-	// Number of B-frames between reference frames.
+	// Specify the number of B-frames that MediaConvert puts between reference frames
+	// in this output. Valid values are whole numbers from 0 through 7. When you don't
+	// specify a value, MediaConvert defaults to 2.
 	NumberBFramesBetweenReferenceFrames int32
 
 	// Number of reference frames to use. The encoder may use more than requested if
@@ -3518,10 +3535,20 @@ type HlsGroupSettings struct {
 	// uses #EXT-X-BYTERANGE tags to index segment for playback.
 	SegmentControl HlsSegmentControl
 
-	// Length of MPEG-2 Transport Stream segments to create (in seconds). Note that
-	// segments will end on the next keyframe after this number of seconds, so actual
-	// segment length may be longer.
+	// Specify the length, in whole seconds, of each segment. When you don't specify a
+	// value, MediaConvert defaults to 10. Related settings: Use Segment length control
+	// (SegmentLengthControl) to specify whether the encoder enforces this value
+	// strictly. Use Segment control (HlsSegmentControl) to specify whether
+	// MediaConvert creates separate segment files or one content file that has
+	// metadata to mark the segment boundaries.
 	SegmentLength int32
+
+	// Specify how you want MediaConvert to determine the segment length. Choose Exact
+	// (EXACT) to have the encoder use the exact length that you specify with the
+	// setting Segment length (SegmentLength). This might result in extra I-frames.
+	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
+	// lengths to match the next GOP boundary.
+	SegmentLengthControl HlsSegmentLengthControl
 
 	// Number of segments to write to a subdirectory before starting a new one.
 	// directoryStructure must be SINGLE_DIRECTORY for this setting to have an effect.
@@ -4576,6 +4603,12 @@ type M2tsSettings struct {
 	// interruptions.
 	BufferModel M2tsBufferModel
 
+	// If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with
+	// Presentation Timestamp (PTS) values greater than or equal to the first video
+	// packet PTS (MediaConvert drops captions and data packets with lesser PTS
+	// values). Keep the default value (AUTO) to allow all PTS values.
+	DataPTSControl M2tsDataPtsControl
+
 	// Use these settings to insert a DVB Network Information Table (NIT) in the
 	// transport stream of this output. When you work directly in your JSON job
 	// specification, include this object only when your job has a transport stream
@@ -4770,6 +4803,12 @@ type M3u8Settings struct {
 	// stream. Multiple values are accepted, and can be entered in ranges and/or by
 	// comma separation.
 	AudioPids []int32
+
+	// If you select ALIGN_TO_VIDEO, MediaConvert writes captions and data packets with
+	// Presentation Timestamp (PTS) values greater than or equal to the first video
+	// packet PTS (MediaConvert drops captions and data packets with lesser PTS
+	// values). Keep the default value (AUTO) to allow all PTS values.
+	DataPTSControl M3u8DataPtsControl
 
 	// Specify the maximum time, in milliseconds, between Program Clock References
 	// (PCRs) inserted into the transport stream.
@@ -5173,11 +5212,14 @@ type Mpeg2Settings struct {
 	// as possible. Setting this value to 0 will break output segmenting.
 	GopClosedCadence int32
 
-	// GOP Length (keyframe interval) in frames or seconds. Must be greater than zero.
+	// Specify the interval between keyframes, in seconds or frames, for this output.
+	// Default: 12 Related settings: When you specify the GOP size in seconds, set GOP
+	// mode control (GopSizeUnits) to Specified, seconds (SECONDS). The default value
+	// for GOP mode control (GopSizeUnits) is Frames (FRAMES).
 	GopSize float64
 
-	// Indicates if the GOP Size in MPEG2 is specified in frames or seconds. If seconds
-	// the system will convert the GOP Size into a frame count at run time.
+	// Specify the units for GOP size (GopSize). If you don't specify a value here, by
+	// default the encoder measures GOP size in frames.
 	GopSizeUnits Mpeg2GopSizeUnits
 
 	// Percentage of the buffer that should initially be filled (HRD buffer model).
@@ -5219,7 +5261,9 @@ type Mpeg2Settings struct {
 	// Min-I-interval - 1
 	MinIInterval int32
 
-	// Number of B-frames between reference frames.
+	// Specify the number of B-frames that MediaConvert puts between reference frames
+	// in this output. Valid values are whole numbers from 0 through 7. When you don't
+	// specify a value, MediaConvert defaults to 2.
 	NumberBFramesBetweenReferenceFrames int32
 
 	// Optional. Specify how the service determines the pixel aspect ratio (PAR) for
@@ -5410,9 +5454,19 @@ type MsSmoothGroupSettings struct {
 	// value SpekeKeyProvider.
 	Encryption *MsSmoothEncryptionSettings
 
-	// Use Fragment length (FragmentLength) to specify the mp4 fragment sizes in
-	// seconds. Fragment length must be compatible with GOP size and frame rate.
+	// Specify how you want MediaConvert to determine the fragment length. Choose Exact
+	// (EXACT) to have the encoder use the exact length that you specify with the
+	// setting Fragment length (FragmentLength). This might result in extra I-frames.
+	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
+	// lengths to match the next GOP boundary.
 	FragmentLength int32
+
+	// Specify how you want MediaConvert to determine the fragment length. Choose Exact
+	// (EXACT) to have the encoder use the exact length that you specify with the
+	// setting Fragment length (FragmentLength). This might result in extra I-frames.
+	// Choose Multiple of GOP (GOP_MULTIPLE) to have the encoder round up the segment
+	// lengths to match the next GOP boundary.
+	FragmentLengthControl MsSmoothFragmentLengthControl
 
 	// Use Manifest encoding (MsSmoothManifestEncoding) to specify the encoding format
 	// for the server and client manifest. Valid options are utf8 and utf16.
@@ -6340,6 +6394,16 @@ type S3EncryptionSettings struct {
 	// CMK. Do so by specifying the Amazon Resource Name (ARN) of the key for the
 	// setting KMS ARN (kmsKeyArn).
 	EncryptionType S3ServerSideEncryptionType
+
+	// Optionally, specify the encryption context that you want to use alongside your
+	// KMS key. AWS KMS uses this encryption context as additional authenticated data
+	// (AAD) to support authenticated encryption. This value must be a base64-encoded
+	// UTF-8 string holding JSON which represents a string-string map. To use this
+	// setting, you must also set Server-side encryption (S3ServerSideEncryptionType)
+	// to AWS KMS (SERVER_SIDE_ENCRYPTION_KMS). For more information about encryption
+	// context, see:
+	// https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context.
+	KmsEncryptionContext *string
 
 	// Optionally, specify the customer master key (CMK) that you want to use to
 	// encrypt the data key that AWS uses to encrypt your output content. Enter the

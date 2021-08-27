@@ -152,6 +152,122 @@ type BinaryColumnStatisticsData struct {
 	noSmithyDocumentSerde
 }
 
+// The details of a blueprint.
+type Blueprint struct {
+
+	// Specifies the path in Amazon S3 where the blueprint is published.
+	BlueprintLocation *string
+
+	// Specifies a path in Amazon S3 where the blueprint is copied when you call
+	// CreateBlueprint/UpdateBlueprint to register the blueprint in Glue.
+	BlueprintServiceLocation *string
+
+	// The date and time the blueprint was registered.
+	CreatedOn *time.Time
+
+	// The description of the blueprint.
+	Description *string
+
+	// An error message.
+	ErrorMessage *string
+
+	// When there are multiple versions of a blueprint and the latest version has some
+	// errors, this attribute indicates the last successful blueprint definition that
+	// is available with the service.
+	LastActiveDefinition *LastActiveDefinition
+
+	// The date and time the blueprint was last modified.
+	LastModifiedOn *time.Time
+
+	// The name of the blueprint.
+	Name *string
+
+	// A JSON string that indicates the list of parameter specifications for the
+	// blueprint.
+	ParameterSpec *string
+
+	// The status of the blueprint registration.
+	//
+	// * Creating — The blueprint
+	// registration is in progress.
+	//
+	// * Active — The blueprint has been successfully
+	// registered.
+	//
+	// * Updating — An update to the blueprint registration is in
+	// progress.
+	//
+	// * Failed — The blueprint registration failed.
+	Status BlueprintStatus
+
+	noSmithyDocumentSerde
+}
+
+// The details of a blueprint.
+type BlueprintDetails struct {
+
+	// The name of the blueprint.
+	BlueprintName *string
+
+	// The run ID for this blueprint.
+	RunId *string
+
+	noSmithyDocumentSerde
+}
+
+// The details of a blueprint run.
+type BlueprintRun struct {
+
+	// The name of the blueprint.
+	BlueprintName *string
+
+	// The date and time that the blueprint run completed.
+	CompletedOn *time.Time
+
+	// Indicates any errors that are seen while running the blueprint.
+	ErrorMessage *string
+
+	// The blueprint parameters as a string. You will have to provide a value for each
+	// key that is required from the parameter spec that is defined in the
+	// Blueprint$ParameterSpec.
+	Parameters *string
+
+	// The role ARN. This role will be assumed by the Glue service and will be used to
+	// create the workflow and other entities of a workflow.
+	RoleArn *string
+
+	// If there are any errors while creating the entities of a workflow, we try to
+	// roll back the created entities until that point and delete them. This attribute
+	// indicates the errors seen while trying to delete the entities that are created.
+	RollbackErrorMessage *string
+
+	// The run ID for this blueprint run.
+	RunId *string
+
+	// The date and time that the blueprint run started.
+	StartedOn *time.Time
+
+	// The state of the blueprint run. Possible values are:
+	//
+	// * Running — The blueprint
+	// run is in progress.
+	//
+	// * Succeeded — The blueprint run completed successfully.
+	//
+	// *
+	// Failed — The blueprint run failed and rollback is complete.
+	//
+	// * Rolling Back —
+	// The blueprint run failed and rollback is in progress.
+	State BlueprintRunState
+
+	// The name of a workflow that is created as a result of a successful blueprint
+	// run. If a blueprint run has an error, there will not be a workflow created.
+	WorkflowName *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines column statistics supported for Boolean data columns.
 type BooleanColumnStatisticsData struct {
 
@@ -2214,6 +2330,31 @@ type LabelingSetGenerationTaskRunProperties struct {
 	noSmithyDocumentSerde
 }
 
+// When there are multiple versions of a blueprint and the latest version has some
+// errors, this attribute indicates the last successful blueprint definition that
+// is available with the service.
+type LastActiveDefinition struct {
+
+	// Specifies a path in Amazon S3 where the blueprint is published by the Glue
+	// developer.
+	BlueprintLocation *string
+
+	// Specifies a path in Amazon S3 where the blueprint is copied when you create or
+	// update the blueprint.
+	BlueprintServiceLocation *string
+
+	// The description of the blueprint.
+	Description *string
+
+	// The date and time the blueprint was last modified.
+	LastModifiedOn *time.Time
+
+	// A JSON string specifying the parameters for the blueprint.
+	ParameterSpec *string
+
+	noSmithyDocumentSerde
+}
+
 // Status and error information about the most recent crawl.
 type LastCrawlInfo struct {
 
@@ -3810,6 +3951,10 @@ type UserDefinedFunctionInput struct {
 // run to complete a complex ETL task. A workflow manages the execution and
 // monitoring of all its jobs and crawlers.
 type Workflow struct {
+
+	// This structure indicates the details of the blueprint that this particular
+	// workflow is created from.
+	BlueprintDetails *BlueprintDetails
 
 	// The date and time when the workflow was created.
 	CreatedOn *time.Time

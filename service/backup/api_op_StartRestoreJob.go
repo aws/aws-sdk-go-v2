@@ -28,8 +28,8 @@ func (c *Client) StartRestoreJob(ctx context.Context, params *StartRestoreJobInp
 
 type StartRestoreJobInput struct {
 
-	// The Amazon Resource Name (ARN) of the IAM role that AWS Backup uses to create
-	// the target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
+	// The Amazon Resource Name (ARN) of the IAM role that Backup uses to create the
+	// target recovery point; for example, arn:aws:iam::123456789012:role/S3Access.
 	//
 	// This member is required.
 	IamRoleArn *string
@@ -44,32 +44,32 @@ type StartRestoreJobInput struct {
 	// System (Amazon EFS) instance:
 	//
 	// * file-system-id: The ID of the Amazon EFS file
-	// system that is backed up by AWS Backup. Returned in
+	// system that is backed up by Backup. Returned in
 	// GetRecoveryPointRestoreMetadata.
 	//
 	// * Encrypted: A Boolean value that, if true,
 	// specifies that the file system is encrypted. If KmsKeyId is specified, Encrypted
 	// must be set to true.
 	//
-	// * KmsKeyId: Specifies the AWS KMS key that is used to
-	// encrypt the restored file system. You can specify a key from another AWS account
-	// provided that key it is properly shared with your account via AWS KMS.
+	// * KmsKeyId: Specifies the Amazon Web Services KMS key that
+	// is used to encrypt the restored file system. You can specify a key from another
+	// Amazon Web Services account provided that key it is properly shared with your
+	// account via Amazon Web Services KMS.
 	//
-	// *
-	// PerformanceMode: Specifies the throughput mode of the file system.
+	// * PerformanceMode: Specifies the
+	// throughput mode of the file system.
 	//
-	// *
-	// CreationToken: A user-supplied value that ensures the uniqueness (idempotency)
-	// of the request.
+	// * CreationToken: A user-supplied value that
+	// ensures the uniqueness (idempotency) of the request.
 	//
-	// * newFileSystem: A Boolean value that, if true, specifies that
-	// the recovery point is restored to a new Amazon EFS file system.
+	// * newFileSystem: A Boolean
+	// value that, if true, specifies that the recovery point is restored to a new
+	// Amazon EFS file system.
 	//
-	// *
-	// ItemsToRestore : An array of one to five strings where each string is a file
-	// path. Use ItemsToRestore to restore specific files or directories rather than
-	// the entire file system. This parameter is optional. For example,
-	// "itemsToRestore":"[\"/my.test\"]".
+	// * ItemsToRestore: An array of one to five strings where
+	// each string is a file path. Use ItemsToRestore to restore specific files or
+	// directories rather than the entire file system. This parameter is optional. For
+	// example, "itemsToRestore":"[\"/my.test\"]".
 	//
 	// This member is required.
 	Metadata map[string]string
@@ -80,8 +80,9 @@ type StartRestoreJobInput struct {
 	// This member is required.
 	RecoveryPointArn *string
 
-	// A customer chosen string that can be used to distinguish between calls to
-	// StartRestoreJob.
+	// A customer-chosen string that you can use to distinguish between otherwise
+	// identical calls to StartRestoreJob. Retrying a successful request with the same
+	// idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
 	// Starts a job to restore a recovery point for one of the following resources:
@@ -102,7 +103,7 @@ type StartRestoreJobInput struct {
 	// * Aurora for Amazon Aurora
 	//
 	// * Storage
-	// Gateway for AWS Storage Gateway
+	// Gateway for Storage Gateway
 	ResourceType *string
 
 	noSmithyDocumentSerde

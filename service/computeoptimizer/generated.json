@@ -15,6 +15,7 @@
         "api_op_GetEC2InstanceRecommendations.go",
         "api_op_GetEC2RecommendationProjectedMetrics.go",
         "api_op_GetEnrollmentStatus.go",
+        "api_op_GetEnrollmentStatusesForOrganization.go",
         "api_op_GetLambdaFunctionRecommendations.go",
         "api_op_GetRecommendationSummaries.go",
         "api_op_UpdateEnrollmentStatus.go",

@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a policy to manage the lifecycle of the specified AWS resources. You can
-// create up to 100 lifecycle policies.
+// Creates a policy to manage the lifecycle of the specified Amazon Web Services
+// resources. You can create up to 100 lifecycle policies.
 func (c *Client) CreateLifecyclePolicy(ctx context.Context, params *CreateLifecyclePolicyInput, optFns ...func(*Options)) (*CreateLifecyclePolicyOutput, error) {
 	if params == nil {
 		params = &CreateLifecyclePolicyInput{}

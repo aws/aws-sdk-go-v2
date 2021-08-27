@@ -243,6 +243,24 @@ func (e *IdempotentParameterMismatchException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
+type IllegalBlueprintStateException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *IllegalBlueprintStateException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *IllegalBlueprintStateException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *IllegalBlueprintStateException) ErrorCode() string             { return "IllegalBlueprintStateException" }
+func (e *IllegalBlueprintStateException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The workflow is in an invalid state to perform a requested operation.
 type IllegalWorkflowStateException struct {
 	Message *string

@@ -57,14 +57,14 @@ type StartTranscriptionJobInput struct {
 
 	// The language code for the language used in the input media file. To transcribe
 	// speech in Modern Standard Arabic (ar-SA), your audio or video file must be
-	// encoded at a sample rate of 16000 Hz or higher.
+	// encoded at a sample rate of 16,000 Hz or higher.
 	LanguageCode types.LanguageCode
 
 	// An object containing a list of languages that might be present in your
 	// collection of audio files. Automatic language identification chooses a language
 	// that best matches the source audio from that list. To transcribe speech in
 	// Modern Standard Arabic (ar-SA), your audio or video file must be encoded at a
-	// sample rate of 16000 Hz or higher.
+	// sample rate of 16,000 Hz or higher.
 	LanguageOptions []types.LanguageCode
 
 	// The format of the input media file.
@@ -145,6 +145,9 @@ type StartTranscriptionJobInput struct {
 
 	// A Settings object that provides optional settings for a transcription job.
 	Settings *types.Settings
+
+	// Add tags to an Amazon Transcribe transcription job.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

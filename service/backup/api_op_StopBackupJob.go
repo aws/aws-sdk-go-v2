@@ -28,7 +28,7 @@ func (c *Client) StopBackupJob(ctx context.Context, params *StopBackupJobInput, 
 
 type StopBackupJobInput struct {
 
-	// Uniquely identifies a request to AWS Backup to back up a resource.
+	// Uniquely identifies a request to Backup to back up a resource.
 	//
 	// This member is required.
 	BackupJobId *string

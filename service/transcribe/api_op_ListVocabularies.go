@@ -31,8 +31,9 @@ func (c *Client) ListVocabularies(ctx context.Context, params *ListVocabulariesI
 
 type ListVocabulariesInput struct {
 
-	// The maximum number of vocabularies to return in the response. If there are fewer
-	// results in the list, this response contains only the actual results.
+	// The maximum number of vocabularies to return in each page of results. If there
+	// are fewer results than the value you specify, only the actual results are
+	// returned. If you do not specify a value, the default of 5 is used.
 	MaxResults *int32
 
 	// When specified, the vocabularies returned in the list are limited to
@@ -144,8 +145,9 @@ var _ ListVocabulariesAPIClient = (*Client)(nil)
 
 // ListVocabulariesPaginatorOptions is the paginator options for ListVocabularies
 type ListVocabulariesPaginatorOptions struct {
-	// The maximum number of vocabularies to return in the response. If there are fewer
-	// results in the list, this response contains only the actual results.
+	// The maximum number of vocabularies to return in each page of results. If there
+	// are fewer results than the value you specify, only the actual results are
+	// returned. If you do not specify a value, the default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

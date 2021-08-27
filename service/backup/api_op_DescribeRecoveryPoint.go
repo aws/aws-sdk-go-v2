@@ -33,8 +33,8 @@ type DescribeRecoveryPointInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -104,7 +104,7 @@ type DescribeRecoveryPointOutput struct {
 	LastRestoreTime *time.Time
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
-	// and when it expires. AWS Backup transitions and expires backups automatically
+	// and when it expires. Backup transitions and expires backups automatically
 	// according to the lifecycle that you define. Backups that are transitioned to
 	// cold storage must be stored in cold storage for a minimum of 90 days. Therefore,
 	// the “expire after days” setting must be 90 days greater than the “transition to
@@ -121,21 +121,33 @@ type DescribeRecoveryPointOutput struct {
 	// on the resource type.
 	ResourceArn *string
 
-	// The type of AWS resource to save as a recovery point; for example, an Amazon
-	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
-	// (Amazon RDS) database.
+	// The type of Amazon Web Services resource to save as a recovery point; for
+	// example, an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon
+	// Relational Database Service (Amazon RDS) database.
 	ResourceType *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies the source vault where
 	// the resource was originally backed up in; for example,
 	// arn:aws:backup:us-east-1:123456789012:vault:BackupVault. If the recovery is
-	// restored to the same AWS account or Region, this value will be null.
+	// restored to the same Amazon Web Services account or Region, this value will be
+	// null.
 	SourceBackupVaultArn *string
 
-	// A status code specifying the state of the recovery point. A partial status
-	// indicates that the recovery point was not successfully re-created and must be
-	// retried.
+	// A status code specifying the state of the recovery point. PARTIAL status
+	// indicates Backup could not create the recovery point before the backup window
+	// closed. To increase your backup plan window using the API, see UpdateBackupPlan
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/API_UpdateBackupPlan.html).
+	// You can also increase your backup plan window using the Console by choosing and
+	// editing your backup plan. EXPIRED status indicates that the recovery point has
+	// exceeded its retention period, but Backup lacks permission or is otherwise
+	// unable to delete it. To manually delete these recovery points, see  Step 3:
+	// Delete the recovery points
+	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/gs-cleanup-resources.html#cleanup-backups)
+	// in the Clean up resources section of Getting started.
 	Status types.RecoveryPointStatus
+
+	// A status message explaining the reason for the recovery point deletion failure.
+	StatusMessage *string
 
 	// Specifies the storage class of the recovery point. Valid values are WARM or
 	// COLD.

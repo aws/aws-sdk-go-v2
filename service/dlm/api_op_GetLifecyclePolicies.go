@@ -40,8 +40,8 @@ type GetLifecyclePoliciesInput struct {
 	State types.GettablePolicyStateValues
 
 	// The tags to add to objects created by the policy. Tags are strings in the format
-	// key=value. These user-defined tags are added in addition to the AWS-added
-	// lifecycle tags.
+	// key=value. These user-defined tags are added in addition to the Amazon Web
+	// Services-added lifecycle tags.
 	TagsToAdd []string
 
 	// The target tag for a policy. Tags are strings in the format key=value.

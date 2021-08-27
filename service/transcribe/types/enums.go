@@ -106,6 +106,10 @@ const (
 	LanguageCodeTeIn LanguageCode = "te-IN"
 	LanguageCodeTrTr LanguageCode = "tr-TR"
 	LanguageCodeZhCn LanguageCode = "zh-CN"
+	LanguageCodeZhTw LanguageCode = "zh-TW"
+	LanguageCodeThTh LanguageCode = "th-TH"
+	LanguageCodeEnZa LanguageCode = "en-ZA"
+	LanguageCodeEnNz LanguageCode = "en-NZ"
 )
 
 // Values returns all known values for LanguageCode. Note that this can be expanded
@@ -149,6 +153,10 @@ func (LanguageCode) Values() []LanguageCode {
 		"te-IN",
 		"tr-TR",
 		"zh-CN",
+		"zh-TW",
+		"th-TH",
+		"en-ZA",
+		"en-NZ",
 	}
 }
 

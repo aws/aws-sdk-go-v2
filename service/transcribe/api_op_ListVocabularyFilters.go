@@ -30,8 +30,9 @@ func (c *Client) ListVocabularyFilters(ctx context.Context, params *ListVocabula
 
 type ListVocabularyFiltersInput struct {
 
-	// The maximum number of filters to return in the response. If there are fewer
-	// results in the list, this response contains only the actual results.
+	// The maximum number of filters to return in each page of results. If there are
+	// fewer results than the value you specify, only the actual results are returned.
+	// If you do not specify a value, the default of 5 is used.
 	MaxResults *int32
 
 	// Filters the response so that it only contains vocabulary filters whose name
@@ -137,8 +138,9 @@ var _ ListVocabularyFiltersAPIClient = (*Client)(nil)
 // ListVocabularyFiltersPaginatorOptions is the paginator options for
 // ListVocabularyFilters
 type ListVocabularyFiltersPaginatorOptions struct {
-	// The maximum number of filters to return in the response. If there are fewer
-	// results in the list, this response contains only the actual results.
+	// The maximum number of filters to return in each page of results. If there are
+	// fewer results than the value you specify, only the actual results are returned.
+	// If you do not specify a value, the default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

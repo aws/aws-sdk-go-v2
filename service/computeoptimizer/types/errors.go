@@ -45,7 +45,7 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// An invalid or out-of-range value was supplied for the input parameter.
+// The value supplied for the input parameter is out of range or not valid.
 type InvalidParameterValueException struct {
 	Message *string
 
@@ -83,8 +83,8 @@ func (e *LimitExceededException) ErrorMessage() string {
 func (e *LimitExceededException) ErrorCode() string             { return "LimitExceededException" }
 func (e *LimitExceededException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request must contain either a valid (registered) AWS access key ID or X.509
-// certificate.
+// The request must contain either a valid (registered) Amazon Web Services access
+// key ID or X.509 certificate.
 type MissingAuthenticationToken struct {
 	Message *string
 
@@ -103,7 +103,7 @@ func (e *MissingAuthenticationToken) ErrorMessage() string {
 func (e *MissingAuthenticationToken) ErrorCode() string             { return "MissingAuthenticationToken" }
 func (e *MissingAuthenticationToken) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The account is not opted in to AWS Compute Optimizer.
+// The account is not opted in to Compute Optimizer.
 type OptInRequiredException struct {
 	Message *string
 

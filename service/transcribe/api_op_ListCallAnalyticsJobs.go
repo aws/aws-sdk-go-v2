@@ -35,8 +35,9 @@ type ListCallAnalyticsJobsInput struct {
 	// contains the specified string.
 	JobNameContains *string
 
-	// The maximum number of call analytics jobs to return in the response. If there
-	// are fewer results in the list, this response contains only the actual results.
+	// The maximum number of call analytics jobs to return in each page of results. If
+	// there are fewer results than the value you specify, only the actual results are
+	// returned. If you do not specify a value, the default of 5 is used.
 	MaxResults *int32
 
 	// If you receive a truncated result in the previous request of , include NextToken
@@ -146,8 +147,9 @@ var _ ListCallAnalyticsJobsAPIClient = (*Client)(nil)
 // ListCallAnalyticsJobsPaginatorOptions is the paginator options for
 // ListCallAnalyticsJobs
 type ListCallAnalyticsJobsPaginatorOptions struct {
-	// The maximum number of call analytics jobs to return in the response. If there
-	// are fewer results in the list, this response contains only the actual results.
+	// The maximum number of call analytics jobs to return in each page of results. If
+	// there are fewer results than the value you specify, only the actual results are
+	// returned. If you do not specify a value, the default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

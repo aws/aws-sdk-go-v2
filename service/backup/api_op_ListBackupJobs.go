@@ -34,14 +34,14 @@ func (c *Client) ListBackupJobs(ctx context.Context, params *ListBackupJobsInput
 type ListBackupJobsInput struct {
 
 	// The account ID to list the jobs from. Returns only backup jobs associated with
-	// the specified account ID. If used from an AWS Organizations management account,
+	// the specified account ID. If used from an Organizations management account,
 	// passing * returns all jobs across the organization.
 	ByAccountId *string
 
 	// Returns only backup jobs that will be stored in the specified backup vault.
 	// Backup vaults are identified by names that are unique to the account used to
-	// create them and the AWS Region where they are created. They consist of lowercase
-	// letters, numbers, and hyphens.
+	// create them and the Amazon Web Services Region where they are created. They
+	// consist of lowercase letters, numbers, and hyphens.
 	ByBackupVaultName *string
 
 	// Returns only backup jobs that were created after the specified date.
@@ -71,7 +71,7 @@ type ListBackupJobsInput struct {
 	//
 	// * Aurora for Amazon Aurora
 	//
-	// * Storage Gateway for AWS Storage
+	// * Storage Gateway for Storage
 	// Gateway
 	ByResourceType *string
 

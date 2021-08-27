@@ -3543,6 +3543,11 @@ func awsRestjson1_serializeDocumentCmafGroupSettings(v *types.CmafGroupSettings,
 		ok.Integer(v.SegmentLength)
 	}
 
+	if len(v.SegmentLengthControl) > 0 {
+		ok := object.Key("segmentLengthControl")
+		ok.String(string(v.SegmentLengthControl))
+	}
+
 	if len(v.StreamInfResolution) > 0 {
 		ok := object.Key("streamInfResolution")
 		ok.String(string(v.StreamInfResolution))
@@ -3864,6 +3869,11 @@ func awsRestjson1_serializeDocumentDashIsoGroupSettings(v *types.DashIsoGroupSet
 	if v.SegmentLength != 0 {
 		ok := object.Key("segmentLength")
 		ok.Integer(v.SegmentLength)
+	}
+
+	if len(v.SegmentLengthControl) > 0 {
+		ok := object.Key("segmentLengthControl")
+		ok.String(string(v.SegmentLengthControl))
 	}
 
 	if len(v.WriteSegmentTimelineInRepresentation) > 0 {
@@ -5479,6 +5489,11 @@ func awsRestjson1_serializeDocumentHlsGroupSettings(v *types.HlsGroupSettings, v
 		ok.Integer(v.SegmentLength)
 	}
 
+	if len(v.SegmentLengthControl) > 0 {
+		ok := object.Key("segmentLengthControl")
+		ok.String(string(v.SegmentLengthControl))
+	}
+
 	if v.SegmentsPerSubdirectory != 0 {
 		ok := object.Key("segmentsPerSubdirectory")
 		ok.Integer(v.SegmentsPerSubdirectory)
@@ -6293,6 +6308,11 @@ func awsRestjson1_serializeDocumentM2tsSettings(v *types.M2tsSettings, value smi
 		ok.String(string(v.BufferModel))
 	}
 
+	if len(v.DataPTSControl) > 0 {
+		ok := object.Key("dataPTSControl")
+		ok.String(string(v.DataPTSControl))
+	}
+
 	if v.DvbNitSettings != nil {
 		ok := object.Key("dvbNitSettings")
 		if err := awsRestjson1_serializeDocumentDvbNitSettings(v.DvbNitSettings, ok); err != nil {
@@ -6519,6 +6539,11 @@ func awsRestjson1_serializeDocumentM3u8Settings(v *types.M3u8Settings, value smi
 		if err := awsRestjson1_serializeDocument__listOf__integerMin32Max8182(v.AudioPids, ok); err != nil {
 			return err
 		}
+	}
+
+	if len(v.DataPTSControl) > 0 {
+		ok := object.Key("dataPTSControl")
+		ok.String(string(v.DataPTSControl))
 	}
 
 	if v.MaxPcrInterval != 0 {
@@ -7080,6 +7105,11 @@ func awsRestjson1_serializeDocumentMsSmoothGroupSettings(v *types.MsSmoothGroupS
 	if v.FragmentLength != 0 {
 		ok := object.Key("fragmentLength")
 		ok.Integer(v.FragmentLength)
+	}
+
+	if len(v.FragmentLengthControl) > 0 {
+		ok := object.Key("fragmentLengthControl")
+		ok.String(string(v.FragmentLengthControl))
 	}
 
 	if len(v.ManifestEncoding) > 0 {
@@ -7764,6 +7794,11 @@ func awsRestjson1_serializeDocumentS3EncryptionSettings(v *types.S3EncryptionSet
 	if len(v.EncryptionType) > 0 {
 		ok := object.Key("encryptionType")
 		ok.String(string(v.EncryptionType))
+	}
+
+	if v.KmsEncryptionContext != nil {
+		ok := object.Key("kmsEncryptionContext")
+		ok.String(*v.KmsEncryptionContext)
 	}
 
 	if v.KmsKeyArn != nil {

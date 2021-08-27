@@ -79,7 +79,9 @@ func (e *InternalServerException) ErrorMessage() string {
 func (e *InternalServerException) ErrorCode() string             { return "InternalServerException" }
 func (e *InternalServerException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// An exception indicating the specified resource was not found.
+// An exception indicating the specified resource was not found. This can occur if
+// you submit a request, such as CreateBatchPredictionJob, but the detector name or
+// version does not exist.
 type ResourceNotFoundException struct {
 	Message *string
 
@@ -97,6 +99,26 @@ func (e *ResourceNotFoundException) ErrorMessage() string {
 }
 func (e *ResourceNotFoundException) ErrorCode() string             { return "ResourceNotFoundException" }
 func (e *ResourceNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// An exception indicating that the attached customer-owned (external) model threw
+// an exception when Amazon Fraud Detector invoked the model.
+type ResourceUnavailableException struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *ResourceUnavailableException) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *ResourceUnavailableException) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *ResourceUnavailableException) ErrorCode() string             { return "ResourceUnavailableException" }
+func (e *ResourceUnavailableException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An exception indicating a throttling error.
 type ThrottlingException struct {

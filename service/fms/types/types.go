@@ -766,6 +766,13 @@ type Policy struct {
 	// This member is required.
 	SecurityServicePolicyData *SecurityServicePolicyData
 
+	// Indicates whether Firewall Manager should delete Firewall Manager managed
+	// resources, such as web ACLs and security groups, when they are not in use by the
+	// Firewall Manager policy. By default, Firewall Manager doesn't delete unused
+	// Firewall Manager managed resources. This option is not available for Shield
+	// Advanced or WAF Classic policies.
+	DeleteUnusedFMManagedResources bool
+
 	// Specifies the Amazon Web Services account IDs and Organizations organizational
 	// units (OUs) to exclude from the policy. Specifying an OU is the equivalent of
 	// specifying all accounts in the OU and in any of its child OUs, including any
@@ -899,6 +906,13 @@ type PolicyComplianceStatus struct {
 
 // Details of the Firewall Manager policy.
 type PolicySummary struct {
+
+	// Indicates whether Firewall Manager should delete Firewall Manager managed
+	// resources, such as web ACLs and security groups, when they are not in use by the
+	// Firewall Manager policy. By default, Firewall Manager doesn't delete unused
+	// Firewall Manager managed resources. This option is not available for Shield
+	// Advanced or WAF Classic policies.
+	DeleteUnusedFMManagedResources bool
 
 	// The Amazon Resource Name (ARN) of the specified policy.
 	PolicyArn *string
@@ -1231,14 +1245,15 @@ type SecurityServicePolicyData struct {
 	//
 	// * Example:
 	// DNS_FIREWALL"{\"type\":\"DNS_FIREWALL\",\"preProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-1\",\"priority\":10}],\"postProcessRuleGroups\":[{\"ruleGroupId\":\"rslvr-frg-2\",\"priority\":9911}]}"
+	// Valid values for preProcessRuleGroups are between 1 and 99. Valid values for
+	// postProcessRuleGroups are between 9901 and 10000.
 	//
-	// *
-	// Example:
+	// * Example:
 	// NETWORK_FIREWALL"{\"type\":\"NETWORK_FIREWALL\",\"networkFirewallStatelessRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateless-rulegroup/rulegroup2\",\"priority\":10}],\"networkFirewallStatelessDefaultActions\":[\"aws:pass\",\"custom1\"],\"networkFirewallStatelessFragmentDefaultActions\":[\"custom2\",\"aws:pass\"],\"networkFirewallStatelessCustomActions\":[{\"actionName\":\"custom1\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension1\"}]}}},{\"actionName\":\"custom2\",\"actionDefinition\":{\"publishMetricAction\":{\"dimensions\":[{\"value\":\"dimension2\"}]}}}],\"networkFirewallStatefulRuleGroupReferences\":[{\"resourceARN\":\"arn:aws:network-firewall:us-west-1:1234567891011:stateful-rulegroup/rulegroup1\"}],\"networkFirewallOrchestrationConfig\":{\"singleFirewallEndpointPerVPC\":true,\"allowedIPV4CidrList\":[\"10.24.34.0/28\"]}
 	// }"
 	//
 	// * Example:
-	// WAFV2"{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAmazonIpReputationList\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
+	// WAFV2"{\"type\":\"WAFV2\",\"preProcessRuleGroups\":[{\"ruleGroupArn\":null,\"overrideAction\":{\"type\":\"NONE\"},\"managedRuleGroupIdentifier\":{\"version\":null,\"vendorName\":\"AWS\",\"managedRuleGroupName\":\"AWSManagedRulesAmazonIpReputationList\"},\"ruleGroupType\":\"ManagedRuleGroup\",\"excludeRules\":[{\"name\":\"NoUserAgent_HEADER\"}]}],\"postProcessRuleGroups\":[],\"defaultAction\":{\"type\":\"ALLOW\"},\"overrideCustomerWebACLAssociation\":false,\"loggingConfiguration\":{\"logDestinationConfigs\":[\"arn:aws:firehose:us-west-2:12345678912:deliverystream/aws-waf-logs-fms-admin-destination\"],\"redactedFields\":[{\"redactedFieldType\":\"SingleHeader\",\"redactedFieldValue\":\"Cookies\"},{\"redactedFieldType\":\"Method\"}]}}"
 	// In the loggingConfiguration, you can specify one logDestinationConfigs, you can
 	// optionally provide up to 20 redactedFields, and the RedactedFieldType must be
 	// one of URI, QUERY_STRING, HEADER, or METHOD.

@@ -1416,6 +1416,59 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyActionList(v *[]types.CrossR
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentCrossRegionCopyDeprecateRule(v **types.CrossRegionCopyDeprecateRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.CrossRegionCopyDeprecateRule
+	if *v == nil {
+		sv = &types.CrossRegionCopyDeprecateRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Interval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Interval to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Interval = int32(i64)
+			}
+
+		case "IntervalUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RetentionIntervalUnitValues to be of type string, got %T instead", value)
+				}
+				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentCrossRegionCopyRetainRule(v **types.CrossRegionCopyRetainRule, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -1509,6 +1562,11 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRule(v **types.CrossRegionCo
 				sv.CopyTags = ptr.Bool(jtv)
 			}
 
+		case "DeprecateRule":
+			if err := awsRestjson1_deserializeDocumentCrossRegionCopyDeprecateRule(&sv.DeprecateRule, value); err != nil {
+				return err
+			}
+
 		case "Encrypted":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -1581,6 +1639,72 @@ func awsRestjson1_deserializeDocumentCrossRegionCopyRules(v *[]types.CrossRegion
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDeprecateRule(v **types.DeprecateRule, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeprecateRule
+	if *v == nil {
+		sv = &types.DeprecateRule{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Count":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Count to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Count = int32(i64)
+			}
+
+		case "Interval":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Interval to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Interval = int32(i64)
+			}
+
+		case "IntervalUnit":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RetentionIntervalUnitValues to be of type string, got %T instead", value)
+				}
+				sv.IntervalUnit = types.RetentionIntervalUnitValues(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -2637,6 +2761,11 @@ func awsRestjson1_deserializeDocumentSchedule(v **types.Schedule, value interfac
 
 		case "CrossRegionCopyRules":
 			if err := awsRestjson1_deserializeDocumentCrossRegionCopyRules(&sv.CrossRegionCopyRules, value); err != nil {
+				return err
+			}
+
+		case "DeprecateRule":
+			if err := awsRestjson1_deserializeDocumentDeprecateRule(&sv.DeprecateRule, value); err != nil {
 				return err
 			}
 

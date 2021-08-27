@@ -12,7 +12,7 @@ import (
 	"time"
 )
 
-// Creates a new custom vocabulary that you can use to change how Amazon Transcribe
+// Creates a new custom vocabulary that you can use to modify how Amazon Transcribe
 // Medical transcribes your audio file.
 func (c *Client) CreateMedicalVocabulary(ctx context.Context, params *CreateMedicalVocabularyInput, optFns ...func(*Options)) (*CreateMedicalVocabularyOutput, error) {
 	if params == nil {
@@ -60,6 +60,10 @@ type CreateMedicalVocabularyInput struct {
 	//
 	// This member is required.
 	VocabularyName *string
+
+	// Adds one or more tags, each in the form of a key:value pair, to a new medical
+	// vocabulary at the time you create this new vocabulary.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

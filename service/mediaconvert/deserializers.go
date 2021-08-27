@@ -7785,6 +7785,15 @@ func awsRestjson1_deserializeDocumentCmafGroupSettings(v **types.CmafGroupSettin
 				sv.SegmentLength = int32(i64)
 			}
 
+		case "segmentLengthControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected CmafSegmentLengthControl to be of type string, got %T instead", value)
+				}
+				sv.SegmentLengthControl = types.CmafSegmentLengthControl(jtv)
+			}
+
 		case "streamInfResolution":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -8438,6 +8447,15 @@ func awsRestjson1_deserializeDocumentDashIsoGroupSettings(v **types.DashIsoGroup
 					return err
 				}
 				sv.SegmentLength = int32(i64)
+			}
+
+		case "segmentLengthControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DashIsoSegmentLengthControl to be of type string, got %T instead", value)
+				}
+				sv.SegmentLengthControl = types.DashIsoSegmentLengthControl(jtv)
 			}
 
 		case "writeSegmentTimelineInRepresentation":
@@ -12237,6 +12255,15 @@ func awsRestjson1_deserializeDocumentHlsGroupSettings(v **types.HlsGroupSettings
 				sv.SegmentLength = int32(i64)
 			}
 
+		case "segmentLengthControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected HlsSegmentLengthControl to be of type string, got %T instead", value)
+				}
+				sv.SegmentLengthControl = types.HlsSegmentLengthControl(jtv)
+			}
+
 		case "segmentsPerSubdirectory":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -14257,6 +14284,15 @@ func awsRestjson1_deserializeDocumentM2tsSettings(v **types.M2tsSettings, value 
 				sv.BufferModel = types.M2tsBufferModel(jtv)
 			}
 
+		case "dataPTSControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M2tsDataPtsControl to be of type string, got %T instead", value)
+				}
+				sv.DataPTSControl = types.M2tsDataPtsControl(jtv)
+			}
+
 		case "dvbNitSettings":
 			if err := awsRestjson1_deserializeDocumentDvbNitSettings(&sv.DvbNitSettings, value); err != nil {
 				return err
@@ -14699,6 +14735,15 @@ func awsRestjson1_deserializeDocumentM3u8Settings(v **types.M3u8Settings, value 
 		case "audioPids":
 			if err := awsRestjson1_deserializeDocument__listOf__integerMin32Max8182(&sv.AudioPids, value); err != nil {
 				return err
+			}
+
+		case "dataPTSControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected M3u8DataPtsControl to be of type string, got %T instead", value)
+				}
+				sv.DataPTSControl = types.M3u8DataPtsControl(jtv)
 			}
 
 		case "maxPcrInterval":
@@ -16022,6 +16067,15 @@ func awsRestjson1_deserializeDocumentMsSmoothGroupSettings(v **types.MsSmoothGro
 					return err
 				}
 				sv.FragmentLength = int32(i64)
+			}
+
+		case "fragmentLengthControl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected MsSmoothFragmentLengthControl to be of type string, got %T instead", value)
+				}
+				sv.FragmentLengthControl = types.MsSmoothFragmentLengthControl(jtv)
 			}
 
 		case "manifestEncoding":
@@ -18119,6 +18173,15 @@ func awsRestjson1_deserializeDocumentS3EncryptionSettings(v **types.S3Encryption
 					return fmt.Errorf("expected S3ServerSideEncryptionType to be of type string, got %T instead", value)
 				}
 				sv.EncryptionType = types.S3ServerSideEncryptionType(jtv)
+			}
+
+		case "kmsEncryptionContext":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __stringPatternAZaZ0902 to be of type string, got %T instead", value)
+				}
+				sv.KmsEncryptionContext = ptr.String(jtv)
 			}
 
 		case "kmsKeyArn":

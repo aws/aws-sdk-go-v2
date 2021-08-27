@@ -36,7 +36,7 @@ func (c *Client) GetEC2RecommendationProjectedMetrics(ctx context.Context, param
 
 type GetEC2RecommendationProjectedMetricsInput struct {
 
-	// The time stamp of the last projected metrics data point to return.
+	// The timestamp of the last projected metrics data point to return.
 	//
 	// This member is required.
 	EndTime *time.Time
@@ -52,7 +52,7 @@ type GetEC2RecommendationProjectedMetricsInput struct {
 	// This member is required.
 	Period int32
 
-	// The time stamp of the first projected metrics data point to return.
+	// The timestamp of the first projected metrics data point to return.
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -62,12 +62,16 @@ type GetEC2RecommendationProjectedMetricsInput struct {
 	// This member is required.
 	Stat types.MetricStatistic
 
+	// An object to specify the preferences for the Amazon EC2 recommendation projected
+	// metrics to return in the response.
+	RecommendationPreferences *types.RecommendationPreferences
+
 	noSmithyDocumentSerde
 }
 
 type GetEC2RecommendationProjectedMetricsOutput struct {
 
-	// An array of objects that describe a projected metrics.
+	// An array of objects that describes projected metrics.
 	RecommendedOptionProjectedMetrics []types.RecommendedOptionProjectedMetric
 
 	// Metadata pertaining to the operation's result.

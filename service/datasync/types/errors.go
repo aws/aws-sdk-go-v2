@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// This exception is thrown when an error occurs in the AWS DataSync service.
+// This exception is thrown when an error occurs in the DataSync service.
 type InternalException struct {
 	Message *string
 

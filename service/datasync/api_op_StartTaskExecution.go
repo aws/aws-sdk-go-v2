@@ -16,7 +16,7 @@ import (
 // time. TaskExecution has the following transition phases: INITIALIZING |
 // PREPARING | TRANSFERRING | VERIFYING | SUCCESS/FAILURE. For detailed
 // information, see the Task Execution section in the Components and Terminology
-// topic in the AWS DataSync User Guide.
+// topic in the DataSync User Guide.
 func (c *Client) StartTaskExecution(ctx context.Context, params *StartTaskExecutionInput, optFns ...func(*Options)) (*StartTaskExecutionOutput, error) {
 	if params == nil {
 		params = &StartTaskExecutionInput{}
@@ -39,6 +39,12 @@ type StartTaskExecutionInput struct {
 	//
 	// This member is required.
 	TaskArn *string
+
+	// A list of filter rules that determines which files to exclude from a task. The
+	// list should contain a single filter string that consists of the patterns to
+	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
+	// "/folder1|/folder2".
+	Excludes []types.FilterRule
 
 	// A list of filter rules that determines which files to include when running a
 	// task. The pattern should contain a single filter string that consists of the

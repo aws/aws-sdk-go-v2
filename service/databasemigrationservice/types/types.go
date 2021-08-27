@@ -7,11 +7,11 @@ import (
 	"time"
 )
 
-// Describes a quota for an account, for example the number of replication
-// instances allowed.
+// Describes a quota for an Amazon Web Services account, for example the number of
+// replication instances allowed.
 type AccountQuota struct {
 
-	// The name of the DMS quota for this account.
+	// The name of the DMS quota for this Amazon Web Services account.
 	AccountQuotaName *string
 
 	// The maximum allowed value for the quota.
@@ -26,9 +26,9 @@ type AccountQuota struct {
 // The name of an Availability Zone for use during database migration.
 // AvailabilityZone is an optional parameter to the CreateReplicationInstance
 // (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationInstance.html)
-// operation, and it’s value relates to the Region of an endpoint. For example, the
-// availability zone of an endpoint in the us-east-1 region might be us-east-1a,
-// us-east-1b, us-east-1c, or us-east-1d.
+// operation, and it’s value relates to the Amazon Web Services Region of an
+// endpoint. For example, the availability zone of an endpoint in the us-east-1
+// region might be us-east-1a, us-east-1b, us-east-1c, or us-east-1d.
 type AvailabilityZone struct {
 
 	// The name of the Availability Zone.
@@ -145,7 +145,8 @@ type DocDbSettings struct {
 	// The KMS key identifier that is used to encrypt the content on the replication
 	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
 	// your default encryption key. KMS creates the default encryption key for your
-	// account. Your account has a different default encryption key for each Region.
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// Specifies either document or table mode. Default value is "none". Specify "none"
@@ -318,7 +319,8 @@ type Endpoint struct {
 	// An KMS key identifier that is used to encrypt the connection parameters for the
 	// endpoint. If you don't specify a value for the KmsKeyId parameter, then DMS uses
 	// your default encryption key. KMS creates the default encryption key for your
-	// account. Your account has a different default encryption key for each Region.
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// The settings for the Microsoft SQL Server source and target endpoint. For more
@@ -347,6 +349,10 @@ type Endpoint struct {
 	// The settings for the PostgreSQL source and target endpoint. For more
 	// information, see the PostgreSQLSettings structure.
 	PostgreSQLSettings *PostgreSQLSettings
+
+	// The settings for the Redis target endpoint. For more information, see the
+	// RedisSettings structure.
+	RedisSettings *RedisSettings
 
 	// Settings for the Amazon Redshift endpoint.
 	RedshiftSettings *RedshiftSettings
@@ -609,9 +615,11 @@ type KafkaSettings struct {
 	// 1,000,000.
 	MessageMaxBytes *int32
 
-	// If this attribute is Y, it allows hexadecimal values that don't have the 0x
-	// prefix when migrated to a Kafka target. If this attribute is N, all hexadecimal
-	// values include this prefix when migrated to Kafka.
+	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data in
+	// hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB
+	// column type in hexadecimal format moving from an Oracle source to a Kafka
+	// target. Use the NoHexPrefix endpoint setting to enable migration of RAW data
+	// type columns without adding the '0x' prefix.
 	NoHexPrefix *bool
 
 	// Prefixes schema and table names to partition values, when the partition type is
@@ -637,7 +645,7 @@ type KafkaSettings struct {
 	// sasl-ssl requires SaslUsername and SaslPassword.
 	SecurityProtocol KafkaSecurityProtocol
 
-	// The Amazon Resource Name (ARN) for the private Certification Authority (CA) cert
+	// The Amazon Resource Name (ARN) for the private certificate authority (CA) cert
 	// that DMS uses to securely connect to your Kafka target endpoint.
 	SslCaCertificateArn *string
 
@@ -692,9 +700,11 @@ type KinesisSettings struct {
 	// JSON (default) or JSON_UNFORMATTED (a single line with no tab).
 	MessageFormat MessageFormatValue
 
-	// If this attribute is Y, it allows hexadecimal values that don't have the 0x
-	// prefix when migrated to a Kinesis target. If this attribute is N, all
-	// hexadecimal values include this prefix when migrated to Kinesis.
+	// Set this optional parameter to true to avoid adding a '0x' prefix to raw data in
+	// hexadecimal format. For example, by default, DMS adds a '0x' prefix to the LOB
+	// column type in hexadecimal format moving from an Oracle source to an Amazon
+	// Kinesis target. Use the NoHexPrefix endpoint setting to enable migration of RAW
+	// data type columns without adding the '0x' prefix.
 	NoHexPrefix *bool
 
 	// Prefixes schema and table names to partition values, when the partition type is
@@ -832,7 +842,8 @@ type MongoDbSettings struct {
 	// The KMS key identifier that is used to encrypt the content on the replication
 	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
 	// your default encryption key. KMS creates the default encryption key for your
-	// account. Your account has a different default encryption key for each Region.
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// Specifies either document or table mode. Default value is "none". Specify "none"
@@ -1093,6 +1104,24 @@ type OracleSettings struct {
 	// Set this attribute to enable homogenous tablespace replication and create
 	// existing tables or indexes under the same tablespace on the target.
 	EnableHomogenousTablespace *bool
+
+	// Specifies the IDs of one more destinations for one or more archived redo logs.
+	// These IDs are the values of the dest_id column in the v$archived_log view. Use
+	// this setting with the archivedLogDestId extra connection attribute in a
+	// primary-to-single setup or a primary-to-multiple-standby setup. This setting is
+	// useful in a switchover when you use an Oracle Data Guard database as a source.
+	// In this case, DMS needs information about what destination to get archive redo
+	// logs from to read changes. DMS needs this because after the switchover the
+	// previous primary is a standby instance. For example, in a primary-to-single
+	// standby setup you might apply the following settings. archivedLogDestId=1;
+	// ExtraArchivedLogDestIds=[2] In a primary-to-multiple-standby setup, you might
+	// apply the following settings. archivedLogDestId=1;
+	// ExtraArchivedLogDestIds=[2,3,4] Although DMS supports the use of the Oracle
+	// RESETLOGS option to open the database, never use RESETLOGS unless it's
+	// necessary. For more information about RESETLOGS, see  RMAN Data Repair Concepts
+	// (https://docs.oracle.com/en/database/oracle/oracle-database/19/bradv/rman-data-repair-concepts.html#GUID-1805CCF7-4AF2-482D-B65A-998192F89C2B)
+	// in the Oracle Database Backup and Recovery User's Guide.
+	ExtraArchivedLogDestIds []int32
 
 	// When set to true, this attribute causes a task to fail if the actual size of an
 	// LOB column is greater than the specified LobMaxSize. If a task is set to limited
@@ -1373,10 +1402,10 @@ type PostgreSQLSettings struct {
 	// LOB data.
 	FailTasksOnLobTruncation *bool
 
-	// If this attribute is set to true, the write-ahead log (WAL) heartbeat keeps
-	// restart_lsn moving and prevents storage full scenarios. The WAL heartbeat mimics
-	// a dummy transaction, so that idle logical replication slots don't hold onto old
-	// WAL logs that result in storage full situations on the source.
+	// The write-ahead log (WAL) heartbeat feature mimics a dummy transaction. By doing
+	// this, it prevents idle logical replication slots from holding onto old WAL logs,
+	// which can result in storage full situations on the source. This heartbeat keeps
+	// restart_lsn moving and prevents storage full scenarios.
 	HeartbeatEnable *bool
 
 	// Sets the WAL heartbeat frequency (in minutes).
@@ -1420,13 +1449,70 @@ type PostgreSQLSettings struct {
 	// Fully qualified domain name of the endpoint.
 	ServerName *string
 
-	// Sets the name of a previously created logical replication slot for a CDC load of
-	// the PostgreSQL source instance. When used with the DMS API CdcStartPosition
-	// request parameter, this attribute also enables using native CDC start points.
+	// Sets the name of a previously created logical replication slot for a change data
+	// capture (CDC) load of the PostgreSQL source instance. When used with the
+	// CdcStartPosition request parameter for the DMS API , this attribute also makes
+	// it possible to use native CDC start points. DMS verifies that the specified
+	// logical replication slot exists before starting the CDC load task. It also
+	// verifies that the task was created with a valid setting of CdcStartPosition. If
+	// the specified slot doesn't exist or the task doesn't have a valid
+	// CdcStartPosition setting, DMS raises an error. For more information about
+	// setting the CdcStartPosition request parameter, see Determining a CDC native
+	// start point in the Database Migration Service User Guide. For more information
+	// about using CdcStartPosition, see CreateReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_CreateReplicationTask.html),
+	// StartReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_StartReplicationTask.html),
+	// and ModifyReplicationTask
+	// (https://docs.aws.amazon.com/dms/latest/APIReference/API_ModifyReplicationTask.html).
 	SlotName *string
 
 	// Endpoint connection user name.
 	Username *string
+
+	noSmithyDocumentSerde
+}
+
+// Provides information that defines a Redis target endpoint.
+type RedisSettings struct {
+
+	// Transmission Control Protocol (TCP) port for the endpoint.
+	//
+	// This member is required.
+	Port int32
+
+	// Fully qualified domain name of the endpoint.
+	//
+	// This member is required.
+	ServerName *string
+
+	// The password provided with the auth-role and auth-token options of the AuthType
+	// setting for a Redis target endpoint.
+	AuthPassword *string
+
+	// The type of authentication to perform when connecting to a Redis target. Options
+	// include none, auth-token, and auth-role. The auth-token option requires an
+	// AuthPassword value to be provided. The auth-role option requires AuthUserName
+	// and AuthPassword values to be provided.
+	AuthType RedisAuthTypeValue
+
+	// The user name provided with the auth-role option of the AuthType setting for a
+	// Redis target endpoint.
+	AuthUserName *string
+
+	// The Amazon Resource Name (ARN) for the certificate authority (CA) that DMS uses
+	// to connect to your Redis target endpoint.
+	SslCaCertificateArn *string
+
+	// The connection to a Redis target endpoint using Transport Layer Security (TLS).
+	// Valid values include plaintext and ssl-encryption. The default is
+	// ssl-encryption. The ssl-encryption option makes an encrypted connection.
+	// Optionally, you can identify an Amazon Resource Name (ARN) for an SSL
+	// certificate authority (CA) using the SslCaCertificateArn setting. If an ARN
+	// isn't given for a CA, DMS uses the Amazon root CA. The plaintext option doesn't
+	// provide Transport Layer Security (TLS) encryption for traffic between endpoint
+	// and database.
+	SslSecurityProtocol SslSecurityProtocolValue
 
 	noSmithyDocumentSerde
 }
@@ -1661,7 +1747,8 @@ type ReplicationInstance struct {
 	// An KMS key identifier that is used to encrypt the data on the replication
 	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
 	// your default encryption key. KMS creates the default encryption key for your
-	// account. Your account has a different default encryption key for each Region.
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
@@ -2243,6 +2330,11 @@ type ResourcePendingMaintenanceActions struct {
 // Settings for exporting data to Amazon S3.
 type S3Settings struct {
 
+	// An optional parameter that, when set to true or y, you can use to add column
+	// name information to the .csv output file. The default value is false. Valid
+	// values are true, false, y, and n.
+	AddColumnName *bool
+
 	// An optional parameter to set a folder name in the S3 bucket. If provided, tables
 	// are created in the path  bucketFolder/schema_name/table_name/. If this parameter
 	// isn't specified, then the path used is  schema_name/table_name/.
@@ -2250,6 +2342,15 @@ type S3Settings struct {
 
 	// The name of the S3 bucket.
 	BucketName *string
+
+	// A value that enables DMS to specify a predefined (canned) access control list
+	// for objects created in an Amazon S3 bucket as .csv or .parquet files. For more
+	// information about Amazon S3 canned ACLs, see Canned ACL
+	// (http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl) in
+	// the Amazon S3 Developer Guide. The default value is NONE. Valid values include
+	// NONE, PRIVATE, PUBLIC_READ, PUBLIC_READ_WRITE, AUTHENTICATED_READ,
+	// AWS_EXEC_READ, BUCKET_OWNER_READ, and BUCKET_OWNER_FULL_CONTROL.
+	CannedAclForObjects CannedAclForObjectsValue
 
 	// A value that enables a change data capture (CDC) load to write INSERT and UPDATE
 	// operations to .csv or .parquet (columnar storage) output files. The default
@@ -2291,6 +2392,18 @@ type S3Settings struct {
 	// can't both be set to true for the same endpoint. Set either CdcInsertsOnly or
 	// CdcInsertsAndUpdates to true for the same endpoint, but not both.
 	CdcInsertsOnly *bool
+
+	// Maximum length of the interval, defined in seconds, after which to output a file
+	// to Amazon S3. When CdcMaxBatchInterval and CdcMinFileSize are both specified,
+	// the file write is triggered by whichever parameter condition is met first within
+	// an DMS CloudFormation template. The default value is 60 seconds.
+	CdcMaxBatchInterval *int32
+
+	// Minimum file size, defined in megabytes, to reach for a file output to Amazon
+	// S3. When CdcMinFileSize and CdcMaxBatchInterval are both specified, the file
+	// write is triggered by whichever parameter condition is met first within an DMS
+	// CloudFormation template. The default value is 32 MB.
+	CdcMinFileSize *int32
 
 	// Specifies the folder path of CDC files. For an S3 source, this setting is
 	// required if a task captures change data; otherwise, it's optional. If CdcPath is
@@ -2334,6 +2447,15 @@ type S3Settings struct {
 	// uses the null value for these columns regardless of the UseCsvNoSupValue
 	// setting. This setting is supported in DMS versions 3.4.1 and later.
 	CsvNoSupValue *string
+
+	// An optional parameter that specifies how DMS treats null values. While handling
+	// the null value, you can use this parameter to pass a user-defined string as null
+	// when writing to the target. For example, when target columns are not nullable,
+	// you can use this option to differentiate between the empty string value and the
+	// null value. So, if you set this parameter value to the empty string ("" or ''),
+	// DMS treats the empty string as the null value instead of NULL. The default value
+	// is NULL. Valid values include any valid string.
+	CsvNullValue *string
 
 	// The delimiter used to separate rows in the .csv file for both source and target.
 	// The default is a carriage return (\n).
@@ -2434,6 +2556,11 @@ type S3Settings struct {
 	// Specifies how tables are defined in the S3 source files only.
 	ExternalTableDefinition *string
 
+	// When this value is set to 1, DMS ignores the first row header in a .csv file. A
+	// value of 1 turns on the feature; a value of 0 turns off the feature. The default
+	// is 0.
+	IgnoreHeaderRows *int32
+
 	// A value that enables a full load to write INSERT operations to the
 	// comma-separated value (.csv) output files only to indicate how the rows were
 	// added to the source database. DMS supports the IncludeOpForFullLoad parameter in
@@ -2450,6 +2577,11 @@ type S3Settings struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.Configuring.InsertOps)
 	// in the Database Migration Service User Guide..
 	IncludeOpForFullLoad *bool
+
+	// A value that specifies the maximum size (in KB) of any .csv file to be created
+	// while migrating to an S3 target during full load. The default value is 1,048,576
+	// KB (1 GB). Valid values include 1 to 1,048,576.
+	MaxFileSize *int32
 
 	// A value that specifies the precision of any TIMESTAMP column values that are
 	// written to an Amazon S3 object file in .parquet format. DMS supports the
@@ -2478,6 +2610,20 @@ type S3Settings struct {
 	// (https://docs.aws.amazon.com/dms/latest/userguide/CHAP_Target.S3.html#CHAP_Target.S3.EndpointSettings.CdcPath).
 	// This setting is supported in DMS versions 3.4.2 and later.
 	PreserveTransactions *bool
+
+	// For an S3 source, when this value is set to true or y, each leading double
+	// quotation mark has to be followed by an ending double quotation mark. This
+	// formatting complies with RFC 4180. When this value is set to false or n, string
+	// literals are copied to the target as is. In this case, a delimiter (row or
+	// column) signals the end of the field. Thus, you can't use a delimiter as part of
+	// the string, because it signals the end of the value. For an S3 target, an
+	// optional parameter used to set behavior to comply with RFC 4180 for data
+	// migrated to Amazon S3 using .csv file format only. When this value is set to
+	// true or y using Amazon S3 as a target, if the data has quotation marks or
+	// newline characters in it, DMS encloses the entire column with an additional pair
+	// of double quotation marks ("). Every quotation mark within the data is repeated
+	// twice. The default value is true. Valid values include true, false, y, and n.
+	Rfc4180 *bool
 
 	// The number of rows in a row group. A smaller row group size provides faster
 	// reads. But as the number of row groups grows, the slower writes become. This
@@ -2751,6 +2897,10 @@ type Tag struct {
 	// '/', '=', '+', '-' (Java regular expressions:
 	// "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-]*)$").
 	Key *string
+
+	// The Amazon Resource Name (ARN) string that uniquely identifies the resource for
+	// which the tag is created.
+	ResourceArn *string
 
 	// A value is the optional value of the tag. The string value can be 1-256 Unicode
 	// characters in length and can't be prefixed with "aws:" or "dms:". The string can

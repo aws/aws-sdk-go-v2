@@ -2359,6 +2359,13 @@ func awsAwsjson11_serializeOpDocumentCreateTaskInput(v *CreateTaskInput, value s
 		}
 	}
 
+	if v.Includes != nil {
+		ok := object.Key("Includes")
+		if err := awsAwsjson11_serializeDocumentFilterList(v.Includes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
@@ -2650,6 +2657,13 @@ func awsAwsjson11_serializeOpDocumentStartTaskExecutionInput(v *StartTaskExecuti
 	object := value.Object()
 	defer object.Close()
 
+	if v.Excludes != nil {
+		ok := object.Key("Excludes")
+		if err := awsAwsjson11_serializeDocumentFilterList(v.Excludes, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Includes != nil {
 		ok := object.Key("Includes")
 		if err := awsAwsjson11_serializeDocumentFilterList(v.Includes, ok); err != nil {
@@ -2879,6 +2893,13 @@ func awsAwsjson11_serializeOpDocumentUpdateTaskInput(v *UpdateTaskInput, value s
 	if v.Excludes != nil {
 		ok := object.Key("Excludes")
 		if err := awsAwsjson11_serializeDocumentFilterList(v.Excludes, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Includes != nil {
+		ok := object.Key("Includes")
+		if err := awsAwsjson11_serializeDocumentFilterList(v.Includes, ok); err != nil {
 			return err
 		}
 	}

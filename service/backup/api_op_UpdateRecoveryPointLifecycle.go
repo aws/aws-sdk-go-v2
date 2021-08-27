@@ -12,14 +12,14 @@ import (
 )
 
 // Sets the transition lifecycle of a recovery point. The lifecycle defines when a
-// protected resource is transitioned to cold storage and when it expires. AWS
-// Backup transitions and expires backups automatically according to the lifecycle
-// that you define. Backups transitioned to cold storage must be stored in cold
-// storage for a minimum of 90 days. Therefore, the “expire after days” setting
-// must be 90 days greater than the “transition to cold after days” setting. The
-// “transition to cold after days” setting cannot be changed after a backup has
-// been transitioned to cold. Only Amazon EFS file system backups can be
-// transitioned to cold storage. Does not support continuous backups.
+// protected resource is transitioned to cold storage and when it expires. Backup
+// transitions and expires backups automatically according to the lifecycle that
+// you define. Backups transitioned to cold storage must be stored in cold storage
+// for a minimum of 90 days. Therefore, the “expire after days” setting must be 90
+// days greater than the “transition to cold after days” setting. The “transition
+// to cold after days” setting cannot be changed after a backup has been
+// transitioned to cold. Only Amazon EFS file system backups can be transitioned to
+// cold storage. Does not support continuous backups.
 func (c *Client) UpdateRecoveryPointLifecycle(ctx context.Context, params *UpdateRecoveryPointLifecycleInput, optFns ...func(*Options)) (*UpdateRecoveryPointLifecycleOutput, error) {
 	if params == nil {
 		params = &UpdateRecoveryPointLifecycleInput{}
@@ -39,8 +39,8 @@ type UpdateRecoveryPointLifecycleInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -53,7 +53,7 @@ type UpdateRecoveryPointLifecycleInput struct {
 	RecoveryPointArn *string
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
-	// and when it expires. AWS Backup transitions and expires backups automatically
+	// and when it expires. Backup transitions and expires backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
@@ -75,7 +75,7 @@ type UpdateRecoveryPointLifecycleOutput struct {
 	CalculatedLifecycle *types.CalculatedLifecycle
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
-	// and when it expires. AWS Backup transitions and expires backups automatically
+	// and when it expires. Backup transitions and expires backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after

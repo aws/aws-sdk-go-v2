@@ -28193,6 +28193,11 @@ func awsEc2query_serializeDocumentInstanceMetadataOptionsRequest(v *types.Instan
 		objectKey.String(string(v.HttpEndpoint))
 	}
 
+	if len(v.HttpProtocolIpv6) > 0 {
+		objectKey := object.Key("HttpProtocolIpv6")
+		objectKey.String(string(v.HttpProtocolIpv6))
+	}
+
 	if v.HttpPutResponseHopLimit != nil {
 		objectKey := object.Key("HttpPutResponseHopLimit")
 		objectKey.Integer(*v.HttpPutResponseHopLimit)
@@ -44936,6 +44941,11 @@ func awsEc2query_serializeOpDocumentModifyInstanceMetadataOptionsInput(v *Modify
 		objectKey.String(string(v.HttpEndpoint))
 	}
 
+	if len(v.HttpProtocolIpv6) > 0 {
+		objectKey := object.Key("HttpProtocolIpv6")
+		objectKey.String(string(v.HttpProtocolIpv6))
+	}
+
 	if v.HttpPutResponseHopLimit != nil {
 		objectKey := object.Key("HttpPutResponseHopLimit")
 		objectKey.Integer(*v.HttpPutResponseHopLimit)
@@ -45047,6 +45057,11 @@ func awsEc2query_serializeOpDocumentModifyManagedPrefixListInput(v *ModifyManage
 	if v.DryRun != nil {
 		objectKey := object.Key("DryRun")
 		objectKey.Boolean(*v.DryRun)
+	}
+
+	if v.MaxEntries != nil {
+		objectKey := object.Key("MaxEntries")
+		objectKey.Integer(*v.MaxEntries)
 	}
 
 	if v.PrefixListId != nil {

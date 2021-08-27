@@ -6800,6 +6800,11 @@ func awsAwsjson11_deserializeOpDocumentDescribeTaskOutput(v **DescribeTaskOutput
 				return err
 			}
 
+		case "Includes":
+			if err := awsAwsjson11_deserializeDocumentFilterList(&sv.Includes, value); err != nil {
+				return err
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)

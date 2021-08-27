@@ -252,6 +252,7 @@ const (
 	GatewayResponseTypeRequestTooLarge              GatewayResponseType = "REQUEST_TOO_LARGE"
 	GatewayResponseTypeThrottled                    GatewayResponseType = "THROTTLED"
 	GatewayResponseTypeQuotaExceeded                GatewayResponseType = "QUOTA_EXCEEDED"
+	GatewayResponseTypeWafFiltered                  GatewayResponseType = "WAF_FILTERED"
 )
 
 // Values returns all known values for GatewayResponseType. Note that this can be
@@ -279,6 +280,7 @@ func (GatewayResponseType) Values() []GatewayResponseType {
 		"REQUEST_TOO_LARGE",
 		"THROTTLED",
 		"QUOTA_EXCEEDED",
+		"WAF_FILTERED",
 	}
 }
 

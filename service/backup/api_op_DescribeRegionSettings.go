@@ -10,12 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the current service opt-in settings for the Region. If service-opt-in is
-// enabled for a service, AWS Backup tries to protect that service's resources in
-// this Region, when the resource is included in an on-demand backup or scheduled
-// backup plan. Otherwise, AWS Backup does not try to protect that service's
-// resources in this Region, AWS Backup does not try to protect that service's
-// resources in this Region.
+// Returns the current service opt-in settings for the Region. If service opt-in is
+// enabled for a service, Backup tries to protect that service's resources in this
+// Region, when the resource is included in an on-demand backup or scheduled backup
+// plan. Otherwise, Backup does not try to protect that service's resources in this
+// Region.
 func (c *Client) DescribeRegionSettings(ctx context.Context, params *DescribeRegionSettingsInput, optFns ...func(*Options)) (*DescribeRegionSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeRegionSettingsInput{}

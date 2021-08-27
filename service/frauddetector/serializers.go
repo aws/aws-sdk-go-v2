@@ -2778,7 +2778,7 @@ func awsAwsjson11_serializeDocumentLabelMapper(v map[string][]string, value smit
 		if vv := v[key]; vv == nil {
 			continue
 		}
-		if err := awsAwsjson11_serializeDocumentListOfStrings(v[key], om); err != nil {
+		if err := awsAwsjson11_serializeDocumentNonEmptyListOfStrings(v[key], om); err != nil {
 			return err
 		}
 	}

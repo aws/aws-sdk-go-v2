@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the configuration of a location used by AWS DataSync.
+// Deletes the configuration of a location used by DataSync.
 func (c *Client) DeleteLocation(ctx context.Context, params *DeleteLocationInput, optFns ...func(*Options)) (*DeleteLocationOutput, error) {
 	if params == nil {
 		params = &DeleteLocationInput{}

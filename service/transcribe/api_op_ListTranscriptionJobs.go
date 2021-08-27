@@ -34,11 +34,12 @@ type ListTranscriptionJobsInput struct {
 	// contains the specified string.
 	JobNameContains *string
 
-	// The maximum number of jobs to return in the response. If there are fewer results
-	// in the list, this response contains only the actual results.
+	// The maximum number of jobs to return in each page of results. If there are fewer
+	// results than the value you specify, only the actual results are returned. If you
+	// do not specify a value, the default of 5 is used.
 	MaxResults *int32
 
-	// If the result of the previous request to ListTranscriptionJobs was truncated,
+	// If the result of the previous request to ListTranscriptionJobs is truncated,
 	// include the NextToken to fetch the next set of jobs.
 	NextToken *string
 
@@ -143,8 +144,9 @@ var _ ListTranscriptionJobsAPIClient = (*Client)(nil)
 // ListTranscriptionJobsPaginatorOptions is the paginator options for
 // ListTranscriptionJobs
 type ListTranscriptionJobsPaginatorOptions struct {
-	// The maximum number of jobs to return in the response. If there are fewer results
-	// in the list, this response contains only the actual results.
+	// The maximum number of jobs to return in each page of results. If there are fewer
+	// results than the value you specify, only the actual results are returned. If you
+	// do not specify a value, the default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

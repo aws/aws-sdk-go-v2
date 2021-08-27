@@ -73,7 +73,7 @@ type StartMedicalTranscriptionJobInput struct {
 
 	// The type of speech in the input audio. CONVERSATION refers to conversations
 	// between two or more speakers, e.g., a conversations between doctors and
-	// patients. DICTATION refers to single-speaker dictated speech, e.g., for clinical
+	// patients. DICTATION refers to single-speaker dictated speech, such as clinical
 	// notes.
 	//
 	// This member is required.
@@ -141,6 +141,9 @@ type StartMedicalTranscriptionJobInput struct {
 
 	// Optional settings for the medical transcription job.
 	Settings *types.MedicalTranscriptionSetting
+
+	// Add tags to an Amazon Transcribe medical transcription job.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

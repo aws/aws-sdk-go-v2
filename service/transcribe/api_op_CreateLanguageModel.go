@@ -33,9 +33,9 @@ type CreateLanguageModelInput struct {
 
 	// The Amazon Transcribe standard language model, or base model used to create your
 	// custom language model. If you want to use your custom language model to
-	// transcribe audio with a sample rate of 16 kHz or greater, choose Wideband. If
+	// transcribe audio with a sample rate of 16,000 Hz or greater, choose Wideband. If
 	// you want to use your custom language model to transcribe audio with a sample
-	// rate that is less than 16 kHz, choose Narrowband.
+	// rate that is less than 16,000 Hz, choose Narrowband.
 	//
 	// This member is required.
 	BaseModelName types.BaseModelName
@@ -55,6 +55,10 @@ type CreateLanguageModelInput struct {
 	//
 	// This member is required.
 	ModelName *string
+
+	// Adds one or more tags, each in the form of a key:value pair, to a new language
+	// model at the time you create this new model.
+	Tags []types.Tag
 
 	noSmithyDocumentSerde
 }

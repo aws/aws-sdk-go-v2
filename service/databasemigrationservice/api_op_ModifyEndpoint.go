@@ -206,6 +206,9 @@ type ModifyEndpointInput struct {
 	// in the Database Migration Service User Guide.
 	PostgreSQLSettings *types.PostgreSQLSettings
 
+	// Settings in JSON format for the Redis target endpoint.
+	RedisSettings *types.RedisSettings
+
 	// Provides information that defines an Amazon Redshift endpoint.
 	RedshiftSettings *types.RedshiftSettings
 

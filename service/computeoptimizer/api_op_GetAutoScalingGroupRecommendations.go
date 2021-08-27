@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Auto Scaling group recommendations. AWS Compute Optimizer generates
+// Returns Auto Scaling group recommendations. Compute Optimizer generates
 // recommendations for Amazon EC2 Auto Scaling groups that meet a specific set of
 // requirements. For more information, see the Supported resources and requirements
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
-// the AWS Compute Optimizer User Guide.
+// the Compute Optimizer User Guide.
 func (c *Client) GetAutoScalingGroupRecommendations(ctx context.Context, params *GetAutoScalingGroupRecommendationsInput, optFns ...func(*Options)) (*GetAutoScalingGroupRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetAutoScalingGroupRecommendationsInput{}
@@ -33,7 +33,7 @@ func (c *Client) GetAutoScalingGroupRecommendations(ctx context.Context, params 
 
 type GetAutoScalingGroupRecommendationsInput struct {
 
-	// The ID of the AWS account for which to return Auto Scaling group
+	// The ID of the Amazon Web Services account for which to return Auto Scaling group
 	// recommendations. If your account is the management account of an organization,
 	// use this parameter to specify the member account for which you want to return
 	// Auto Scaling group recommendations. Only one account ID can be specified per
@@ -44,17 +44,21 @@ type GetAutoScalingGroupRecommendationsInput struct {
 	// recommendations.
 	AutoScalingGroupArns []string
 
-	// An array of objects that describe a filter that returns a more specific list of
+	// An array of objects to specify a filter that returns a more specific list of
 	// Auto Scaling group recommendations.
 	Filters []types.Filter
 
 	// The maximum number of Auto Scaling group recommendations to return with a single
 	// request. To retrieve the remaining results, make another request with the
-	// returned NextToken value.
+	// returned nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of Auto Scaling group recommendations.
 	NextToken *string
+
+	// An object to specify the preferences for the Auto Scaling group recommendations
+	// to return in the response.
+	RecommendationPreferences *types.RecommendationPreferences
 
 	noSmithyDocumentSerde
 }

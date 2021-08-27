@@ -10,11 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified continuous backup recovery point from AWS Backup and
-// releases control of that continuous backup to the source service, such as Amazon
-// RDS. The source service will continue to create and retain continuous backups
-// using the lifecycle that you specified in your original backup plan. Does not
-// support snapshot backup recovery points.
+// Deletes the specified continuous backup recovery point from Backup and releases
+// control of that continuous backup to the source service, such as Amazon RDS. The
+// source service will continue to create and retain continuous backups using the
+// lifecycle that you specified in your original backup plan. Does not support
+// snapshot backup recovery points.
 func (c *Client) DisassociateRecoveryPoint(ctx context.Context, params *DisassociateRecoveryPointInput, optFns ...func(*Options)) (*DisassociateRecoveryPointOutput, error) {
 	if params == nil {
 		params = &DisassociateRecoveryPointInput{}
@@ -32,13 +32,12 @@ func (c *Client) DisassociateRecoveryPoint(ctx context.Context, params *Disassoc
 
 type DisassociateRecoveryPointInput struct {
 
-	// The unique name of an AWS Backup vault. Required.
+	// The unique name of an Backup vault.
 	//
 	// This member is required.
 	BackupVaultName *string
 
-	// An Amazon Resource Name (ARN) that uniquely identifies an AWS Backup recovery
-	// point. Required.
+	// An Amazon Resource Name (ARN) that uniquely identifies an Backup recovery point.
 	//
 	// This member is required.
 	RecoveryPointArn *string

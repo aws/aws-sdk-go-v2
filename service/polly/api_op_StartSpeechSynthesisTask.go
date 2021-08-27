@@ -17,7 +17,8 @@ import (
 // store the output of the synthesis task and two optional parameters
 // (OutputS3KeyPrefix and SnsTopicArn). Once the synthesis task is created, this
 // operation will return a SpeechSynthesisTask object, which will include an
-// identifier of this task as well as the current status.
+// identifier of this task as well as the current status. The SpeechSynthesisTask
+// object is available for 72 hours after starting the asynchronous synthesis task.
 func (c *Client) StartSpeechSynthesisTask(ctx context.Context, params *StartSpeechSynthesisTaskInput, optFns ...func(*Options)) (*StartSpeechSynthesisTaskOutput, error) {
 	if params == nil {
 		params = &StartSpeechSynthesisTaskInput{}
@@ -65,7 +66,7 @@ type StartSpeechSynthesisTaskInput struct {
 	// Optional language code for the Speech Synthesis request. This is only necessary
 	// if using a bilingual voice, such as Aditi, which can be used for either Indian
 	// English (en-IN) or Hindi (hi-IN). If a bilingual voice is used and no language
-	// code is specified, Amazon Polly will use the default language of the bilingual
+	// code is specified, Amazon Polly uses the default language of the bilingual
 	// voice. The default language for any voice is the one returned by the
 	// DescribeVoices
 	// (https://docs.aws.amazon.com/polly/latest/dg/API_DescribeVoices.html) operation

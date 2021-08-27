@@ -11,8 +11,9 @@ import (
 	"time"
 )
 
-// Describes the global settings of the AWS account, including whether it is opted
-// in to cross-account backup.
+// Describes whether the Amazon Web Services account is opted in to cross-account
+// backup. Returns an error if the account is not a member of an Organizations
+// organization. Example: describe-global-settings --region us-west-2
 func (c *Client) DescribeGlobalSettings(ctx context.Context, params *DescribeGlobalSettingsInput, optFns ...func(*Options)) (*DescribeGlobalSettingsOutput, error) {
 	if params == nil {
 		params = &DescribeGlobalSettingsInput{}
@@ -34,13 +35,13 @@ type DescribeGlobalSettingsInput struct {
 
 type DescribeGlobalSettingsOutput struct {
 
-	// A list of resources along with the opt-in preferences for the account.
+	// The status of the flag isCrossAccountBackupEnabled.
 	GlobalSettings map[string]string
 
-	// The date and time that the global settings were last updated. This update is in
-	// Unix format and Coordinated Universal Time (UTC). The value of LastUpdateTime is
-	// accurate to milliseconds. For example, the value 1516925490.087 represents
-	// Friday, January 26, 2018 12:11:30.087 AM.
+	// The date and time that the flag isCrossAccountBackupEnabled was last updated.
+	// This update is in Unix format and Coordinated Universal Time (UTC). The value of
+	// LastUpdateTime is accurate to milliseconds. For example, the value
+	// 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
 	LastUpdateTime *time.Time
 
 	// Metadata pertaining to the operation's result.

@@ -6065,6 +6065,15 @@ func awsAwsjson11_deserializeDocumentPolicy(v **types.Policy, value interface{})
 
 	for key, value := range shape {
 		switch key {
+		case "DeleteUnusedFMManagedResources":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DeleteUnusedFMManagedResources = jtv
+			}
+
 		case "ExcludeMap":
 			if err := awsAwsjson11_deserializeDocumentCustomerPolicyScopeMap(&sv.ExcludeMap, value); err != nil {
 				return err
@@ -6395,6 +6404,15 @@ func awsAwsjson11_deserializeDocumentPolicySummary(v **types.PolicySummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "DeleteUnusedFMManagedResources":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DeleteUnusedFMManagedResources = jtv
+			}
+
 		case "PolicyArn":
 			if value != nil {
 				jtv, ok := value.(string)

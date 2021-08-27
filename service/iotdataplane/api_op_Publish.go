@@ -10,9 +10,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Publishes state information. For more information, see HTTP Protocol
-// (http://docs.aws.amazon.com/iot/latest/developerguide/protocols.html#http) in
-// the AWS IoT Developer Guide.
+// Publishes an MQTT message. Requires permission to access the Publish
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action. For more information about MQTT messages, see MQTT Protocol
+// (http://docs.aws.amazon.com/iot/latest/developerguide/mqtt.html) in the IoT
+// Developer Guide. For more information about messaging costs, see IoT Core
+// pricing - Messaging (http://aws.amazon.com/iot-core/pricing/#Messaging).
 func (c *Client) Publish(ctx context.Context, params *PublishInput, optFns ...func(*Options)) (*PublishOutput, error) {
 	if params == nil {
 		params = &PublishInput{}
@@ -36,11 +39,18 @@ type PublishInput struct {
 	// This member is required.
 	Topic *string
 
-	// The state information, in JSON format.
+	// The message body. MQTT accepts text, binary, and empty (null) message payloads.
+	// Publishing an empty (null) payload with retain = true deletes the retained
+	// message identified by topic from IoT Core.
 	Payload []byte
 
 	// The Quality of Service (QoS) level.
 	Qos int32
+
+	// A Boolean value that determines whether to set the RETAIN flag when the message
+	// is published. Setting the RETAIN flag causes the message to be retained and sent
+	// to new subscribers to the topic. Valid values: true | false Default value: false
+	Retain bool
 
 	noSmithyDocumentSerde
 }

@@ -11,19 +11,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Activates an AWS DataSync agent that you have deployed on your host. The
-// activation process associates your agent with your account. In the activation
-// process, you specify information such as the AWS Region that you want to
-// activate the agent in. You activate the agent in the AWS Region where your
-// target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are created in
-// this AWS Region. You can activate the agent in a VPC (virtual private cloud) or
-// provide the agent access to a VPC endpoint so you can run tasks without going
-// over the public internet. You can use an agent for more than one location. If a
-// task uses multiple agents, all of them need to have status AVAILABLE for the
-// task to run. If you use multiple agents for a source location, the status of all
-// the agents must be AVAILABLE for the task to run. Agents are automatically
-// updated by AWS on a regular basis, using a mechanism that ensures minimal
-// interruption to your tasks.
+// Activates an DataSync agent that you have deployed on your host. The activation
+// process associates your agent with your account. In the activation process, you
+// specify information such as the Amazon Web Services Region that you want to
+// activate the agent in. You activate the agent in the Amazon Web Services Region
+// where your target locations (in Amazon S3 or Amazon EFS) reside. Your tasks are
+// created in this Amazon Web Services Region. You can activate the agent in a VPC
+// (virtual private cloud) or provide the agent access to a VPC endpoint so you can
+// run tasks without going over the public internet. You can use an agent for more
+// than one location. If a task uses multiple agents, all of them need to have
+// status AVAILABLE for the task to run. If you use multiple agents for a source
+// location, the status of all the agents must be AVAILABLE for the task to run.
+// Agents are automatically updated by Amazon Web Services on a regular basis,
+// using a mechanism that ensures minimal interruption to your tasks.
 func (c *Client) CreateAgent(ctx context.Context, params *CreateAgentInput, optFns ...func(*Options)) (*CreateAgentOutput, error) {
 	if params == nil {
 		params = &CreateAgentInput{}
@@ -44,12 +44,12 @@ type CreateAgentInput struct {
 
 	// Your agent activation key. You can get the activation key either by sending an
 	// HTTP GET request with redirects that enable you to get the agent IP address
-	// (port 80). Alternatively, you can get it from the AWS DataSync console. The
-	// redirect URL returned in the response provides you the activation key for your
-	// agent in the query string parameter activationKey. It might also include other
+	// (port 80). Alternatively, you can get it from the DataSync console. The redirect
+	// URL returned in the response provides you the activation key for your agent in
+	// the query string parameter activationKey. It might also include other
 	// activation-related parameters; however, these are merely defaults. The arguments
 	// you pass to this API call determine the actual configuration of your agent. For
-	// more information, see Activating an Agent in the AWS DataSync User Guide.
+	// more information, see Activating an Agent in the DataSync User Guide.
 	//
 	// This member is required.
 	ActivationKey *string
@@ -95,7 +95,7 @@ type CreateAgentInput struct {
 type CreateAgentOutput struct {
 
 	// The Amazon Resource Name (ARN) of the agent. Use the ListAgents operation to
-	// return a list of agents for your account and AWS Region.
+	// return a list of agents for your account and Amazon Web Services Region.
 	AgentArn *string
 
 	// Metadata pertaining to the operation's result.

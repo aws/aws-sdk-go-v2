@@ -13,8 +13,8 @@ import (
 
 // Creates a logical container where backups are stored. A CreateBackupVault
 // request includes a name, optionally one or more resource tags, an encryption
-// key, and a request ID. Sensitive data, such as passport numbers, should not be
-// included the name of a backup vault.
+// key, and a request ID. Do not include sensitive data, such as passport numbers,
+// in the name of a backup vault.
 func (c *Client) CreateBackupVault(ctx context.Context, params *CreateBackupVaultInput, optFns ...func(*Options)) (*CreateBackupVaultOutput, error) {
 	if params == nil {
 		params = &CreateBackupVaultInput{}
@@ -34,8 +34,8 @@ type CreateBackupVaultInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of letters, numbers, and
-	// hyphens.
+	// Amazon Web Services Region where they are created. They consist of letters,
+	// numbers, and hyphens.
 	//
 	// This member is required.
 	BackupVaultName *string

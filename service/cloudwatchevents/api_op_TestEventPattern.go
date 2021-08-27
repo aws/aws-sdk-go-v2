@@ -11,10 +11,10 @@ import (
 )
 
 // Tests whether the specified event pattern matches the provided event. Most
-// services in AWS treat : or / as the same character in Amazon Resource Names
-// (ARNs). However, EventBridge uses an exact match in event patterns and rules. Be
-// sure to use the correct ARN characters when creating event patterns so that they
-// match the ARN syntax in the event you want to match.
+// services in Amazon Web Services treat : or / as the same character in Amazon
+// Resource Names (ARNs). However, EventBridge uses an exact match in event
+// patterns and rules. Be sure to use the correct ARN characters when creating
+// event patterns so that they match the ARN syntax in the event you want to match.
 func (c *Client) TestEventPattern(ctx context.Context, params *TestEventPatternInput, optFns ...func(*Options)) (*TestEventPatternOutput, error) {
 	if params == nil {
 		params = &TestEventPatternInput{}
@@ -33,7 +33,7 @@ func (c *Client) TestEventPattern(ctx context.Context, params *TestEventPatternI
 type TestEventPatternInput struct {
 
 	// The event, in JSON format, to test against the event pattern. The JSON must
-	// follow the format specified in AWS Events
+	// follow the format specified in Amazon Web Services Events
 	// (https://docs.aws.amazon.com/eventbridge/latest/userguide/aws-events.html), and
 	// the following fields are mandatory:
 	//

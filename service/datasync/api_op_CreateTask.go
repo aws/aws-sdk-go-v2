@@ -16,14 +16,15 @@ import (
 // transfers data from the source location to the destination location. The
 // configuration specifies options such as task scheduling, bandwidth limits, etc.
 // A task is the complete definition of a data transfer. When you create a task
-// that transfers data between AWS services in different AWS Regions, one of the
-// two locations that you specify must reside in the Region where DataSync is being
-// used. The other location must be specified in a different Region. You can
-// transfer data between commercial AWS Regions except for China, or between AWS
-// GovCloud (US-East and US-West) Regions. When you use DataSync to copy files or
-// objects between AWS Regions, you pay for data transfer between Regions. This is
-// billed as data transfer OUT from your source Region to your destination Region.
-// For more information, see Data Transfer pricing
+// that transfers data between Amazon Web Services services in different Amazon Web
+// Services Regions, one of the two locations that you specify must reside in the
+// Region where DataSync is being used. The other location must be specified in a
+// different Region. You can transfer data between commercial Amazon Web Services
+// Regions except for China, or between Amazon Web Services GovCloud (US) Regions.
+// When you use DataSync to copy files or objects between Amazon Web Services
+// Regions, you pay for data transfer between Regions. This is billed as data
+// transfer OUT from your source Region to your destination Region. For more
+// information, see Data Transfer pricing
 // (http://aws.amazon.com/ec2/pricing/on-demand/#Data_Transfer).
 func (c *Client) CreateTask(ctx context.Context, params *CreateTaskInput, optFns ...func(*Options)) (*CreateTaskOutput, error) {
 	if params == nil {
@@ -43,7 +44,8 @@ func (c *Client) CreateTask(ctx context.Context, params *CreateTaskInput, optFns
 // CreateTaskRequest
 type CreateTaskInput struct {
 
-	// The Amazon Resource Name (ARN) of an AWS storage resource's location.
+	// The Amazon Resource Name (ARN) of an Amazon Web Services storage resource's
+	// location.
 	//
 	// This member is required.
 	DestinationLocationArn *string
@@ -62,6 +64,12 @@ type CreateTaskInput struct {
 	// exclude. The patterns are delimited by "|" (that is, a pipe), for example,
 	// "/folder1|/folder2".
 	Excludes []types.FilterRule
+
+	// A list of filter rules that determines which files to include when running a
+	// task. The pattern should contain a single filter string that consists of the
+	// patterns to include. The patterns are delimited by "|" (that is, a pipe). For
+	// example: "/folder1|/folder2"
+	Includes []types.FilterRule
 
 	// The name of a task. This value is a text reference that is used to identify the
 	// task in the console.

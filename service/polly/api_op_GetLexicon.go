@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the content of the specified pronunciation lexicon stored in an AWS
-// Region. For more information, see Managing Lexicons
+// Returns the content of the specified pronunciation lexicon stored in an Amazon
+// Web Services Region. For more information, see Managing Lexicons
 // (https://docs.aws.amazon.com/polly/latest/dg/managing-lexicons.html).
 func (c *Client) GetLexicon(ctx context.Context, params *GetLexiconInput, optFns ...func(*Options)) (*GetLexiconOutput, error) {
 	if params == nil {

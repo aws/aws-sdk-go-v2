@@ -11,18 +11,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the enrollment (opt in and opt out) status of an account to the AWS
-// Compute Optimizer service. If the account is a management account of an
-// organization, this action can also be used to enroll member accounts within the
-// organization. You must have the appropriate permissions to opt in to Compute
-// Optimizer, to view its recommendations, and to opt out. For more information,
-// see Controlling access with AWS Identity and Access Management
+// Updates the enrollment (opt in and opt out) status of an account to the Compute
+// Optimizer service. If the account is a management account of an organization,
+// this action can also be used to enroll member accounts of the organization. You
+// must have the appropriate permissions to opt in to Compute Optimizer, to view
+// its recommendations, and to opt out. For more information, see Controlling
+// access with Amazon Web Services Identity and Access Management
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/security-iam.html) in
-// the AWS Compute Optimizer User Guide. When you opt in, Compute Optimizer
-// automatically creates a Service-Linked Role in your account to access its data.
-// For more information, see Using Service-Linked Roles for AWS Compute Optimizer
+// the Compute Optimizer User Guide. When you opt in, Compute Optimizer
+// automatically creates a service-linked role in your account to access its data.
+// For more information, see Using Service-Linked Roles for Compute Optimizer
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/using-service-linked-roles.html)
-// in the AWS Compute Optimizer User Guide.
+// in the Compute Optimizer User Guide.
 func (c *Client) UpdateEnrollmentStatus(ctx context.Context, params *UpdateEnrollmentStatusInput, optFns ...func(*Options)) (*UpdateEnrollmentStatusOutput, error) {
 	if params == nil {
 		params = &UpdateEnrollmentStatusInput{}
@@ -45,10 +45,10 @@ type UpdateEnrollmentStatusInput struct {
 	//
 	// * Active - Opts in your account to the Compute Optimizer service.
 	// Compute Optimizer begins analyzing the configuration and utilization metrics of
-	// your AWS resources after you opt in. For more information, see Metrics analyzed
-	// by AWS Compute Optimizer
+	// your Amazon Web Services resources after you opt in. For more information, see
+	// Metrics analyzed by Compute Optimizer
 	// (https://docs.aws.amazon.com/compute-optimizer/latest/ug/metrics.html) in the
-	// AWS Compute Optimizer User Guide.
+	// Compute Optimizer User Guide.
 	//
 	// * Inactive - Opts out your account from the
 	// Compute Optimizer service. Your account's recommendations and related metrics

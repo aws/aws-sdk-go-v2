@@ -710,26 +710,6 @@ func (m *validateOpImportCertificate) HandleInitialize(ctx context.Context, in m
 	return next.HandleInitialize(ctx, in)
 }
 
-type validateOpListTagsForResource struct {
-}
-
-func (*validateOpListTagsForResource) ID() string {
-	return "OperationInputValidation"
-}
-
-func (m *validateOpListTagsForResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
-	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
-) {
-	input, ok := in.Parameters.(*ListTagsForResourceInput)
-	if !ok {
-		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
-	}
-	if err := validateOpListTagsForResourceInput(input); err != nil {
-		return out, metadata, err
-	}
-	return next.HandleInitialize(ctx, in)
-}
-
 type validateOpModifyEndpoint struct {
 }
 
@@ -1170,10 +1150,6 @@ func addOpImportCertificateValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportCertificate{}, middleware.After)
 }
 
-func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
-	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
-}
-
 func addOpModifyEndpointValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpModifyEndpoint{}, middleware.After)
 }
@@ -1320,6 +1296,21 @@ func validateNeptuneSettings(v *types.NeptuneSettings) error {
 	}
 }
 
+func validateRedisSettings(v *types.RedisSettings) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RedisSettings"}
+	if v.ServerName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ServerName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateTableListToReload(v []types.TableToReload) error {
 	if v == nil {
 		return nil
@@ -1436,6 +1427,11 @@ func validateOpCreateEndpointInput(v *CreateEndpointInput) error {
 	if v.NeptuneSettings != nil {
 		if err := validateNeptuneSettings(v.NeptuneSettings); err != nil {
 			invalidParams.AddNested("NeptuneSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RedisSettings != nil {
+		if err := validateRedisSettings(v.RedisSettings); err != nil {
+			invalidParams.AddNested("RedisSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -1971,21 +1967,6 @@ func validateOpImportCertificateInput(v *ImportCertificateInput) error {
 	}
 }
 
-func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
-	if v == nil {
-		return nil
-	}
-	invalidParams := smithy.InvalidParamsError{Context: "ListTagsForResourceInput"}
-	if v.ResourceArn == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("ResourceArn"))
-	}
-	if invalidParams.Len() > 0 {
-		return invalidParams
-	} else {
-		return nil
-	}
-}
-
 func validateOpModifyEndpointInput(v *ModifyEndpointInput) error {
 	if v == nil {
 		return nil
@@ -2007,6 +1988,11 @@ func validateOpModifyEndpointInput(v *ModifyEndpointInput) error {
 	if v.NeptuneSettings != nil {
 		if err := validateNeptuneSettings(v.NeptuneSettings); err != nil {
 			invalidParams.AddNested("NeptuneSettings", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.RedisSettings != nil {
+		if err := validateRedisSettings(v.RedisSettings); err != nil {
+			invalidParams.AddNested("RedisSettings", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

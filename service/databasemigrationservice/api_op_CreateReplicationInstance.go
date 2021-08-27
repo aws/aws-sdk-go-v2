@@ -74,7 +74,7 @@ type CreateReplicationInstanceInput struct {
 
 	// The Availability Zone where the replication instance will be created. The
 	// default value is a random, system-chosen Availability Zone in the endpoint's
-	// Region, for example: us-east-1d
+	// Amazon Web Services Region, for example: us-east-1d
 	AvailabilityZone *string
 
 	// A list of custom DNS name servers supported for the replication instance to
@@ -92,7 +92,8 @@ type CreateReplicationInstanceInput struct {
 	// An KMS key identifier that is used to encrypt the data on the replication
 	// instance. If you don't specify a value for the KmsKeyId parameter, then DMS uses
 	// your default encryption key. KMS creates the default encryption key for your
-	// account. Your account has a different default encryption key for each Region.
+	// Amazon Web Services account. Your Amazon Web Services account has a different
+	// default encryption key for each Amazon Web Services Region.
 	KmsKeyId *string
 
 	// Specifies whether the replication instance is a Multi-AZ deployment. You can't
@@ -101,9 +102,9 @@ type CreateReplicationInstanceInput struct {
 
 	// The weekly time range during which system maintenance can occur, in Universal
 	// Coordinated Time (UTC). Format: ddd:hh24:mi-ddd:hh24:mi Default: A 30-minute
-	// window selected at random from an 8-hour block of time per Region, occurring on
-	// a random day of the week. Valid Days: Mon, Tue, Wed, Thu, Fri, Sat, Sun
-	// Constraints: Minimum 30-minute window.
+	// window selected at random from an 8-hour block of time per Amazon Web Services
+	// Region, occurring on a random day of the week. Valid Days: Mon, Tue, Wed, Thu,
+	// Fri, Sat, Sun Constraints: Minimum 30-minute window.
 	PreferredMaintenanceWindow *string
 
 	// Specifies the accessibility options for the replication instance. A value of

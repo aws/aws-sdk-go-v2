@@ -12,20 +12,20 @@ type AdvancedBackupSetting struct {
 
 	// Specifies the backup option for a selected resource. This option is only
 	// available for Windows VSS backup jobs. Valid values: Set to
-	// "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a VSS
-	// Windows backup. Set to "WindowsVSS":"disabled" to create a regular backup. The
-	// WindowsVSS option is not enabled by default. If you specify an invalid option,
-	// you get an InvalidParameterValueException exception. For more information about
-	// Windows VSS backups, see Creating a VSS-Enabled Windows Backup
+	// "WindowsVSS":"enabled" to enable the WindowsVSS backup option and create a
+	// Windows VSS backup. Set to "WindowsVSS":"disabled" to create a regular backup.
+	// The WindowsVSS option is not enabled by default. If you specify an invalid
+	// option, you get an InvalidParameterValueException exception. For more
+	// information about Windows VSS backups, see Creating a VSS-Enabled Windows Backup
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/windows-backups.html).
 	BackupOptions map[string]string
 
 	// Specifies an object containing resource type and backup options. The only
-	// supported resource type is Amazon EC2 instances with Windows VSS. For an
-	// CloudFormation example, see the sample CloudFormation template to enable Windows
-	// VSS
+	// supported resource type is Amazon EC2 instances with Windows Volume Shadow Copy
+	// Service (VSS). For a CloudFormation example, see the sample CloudFormation
+	// template to enable Windows VSS
 	// (https://docs.aws.amazon.com/aws-backup/latest/devguide/integrate-cloudformation-with-aws-backup.html)
-	// in the AWS Backup User Guide. Valid values: EC2.
+	// in the Backup User Guide. Valid values: EC2.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -37,15 +37,15 @@ type BackupJob struct {
 	// The account ID that owns the backup job.
 	AccountId *string
 
-	// Uniquely identifies a request to AWS Backup to back up a resource.
+	// Uniquely identifies a request to Backup to back up a resource.
 	BackupJobId *string
 
 	// Specifies the backup option for a selected resource. This option is only
-	// available for Windows VSS backup jobs. Valid values: Set to
-	// "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS
-	// Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. If
-	// you specify an invalid option, you get an InvalidParameterValueException
-	// exception.
+	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid
+	// values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and
+	// create a Windows VSS backup. Set to "WindowsVSS":"disabled" to create a regular
+	// backup. If you specify an invalid option, you get an
+	// InvalidParameterValueException exception.
 	BackupOptions map[string]string
 
 	// The size, in bytes, of a backup.
@@ -60,8 +60,8 @@ type BackupJob struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	BackupVaultName *string
 
 	// The size in bytes transferred to a backup vault at the time that the job status
@@ -109,10 +109,10 @@ type BackupJob struct {
 	// resource type.
 	ResourceArn *string
 
-	// The type of AWS resource to be backed up; for example, an Amazon Elastic Block
-	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
-	// database. For VSS Windows backups, the only supported resource type is Amazon
-	// EC2.
+	// The type of Amazon Web Services resource to be backed up; for example, an Amazon
+	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
+	// (Amazon RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the
+	// only supported resource type is Amazon EC2.
 	ResourceType *string
 
 	// Specifies the time in Unix format and Coordinated Universal Time (UTC) when a
@@ -135,7 +135,8 @@ type BackupJob struct {
 
 // Contains an optional backup plan display name and an array of BackupRule
 // objects, each of which specifies a backup rule. Each rule in a backup plan is a
-// separate scheduled task and can back up a different selection of AWS resources.
+// separate scheduled task and can back up a different selection of Amazon Web
+// Services resources.
 type BackupPlan struct {
 
 	// The display name of a backup plan.
@@ -157,7 +158,8 @@ type BackupPlan struct {
 
 // Contains an optional backup plan display name and an array of BackupRule
 // objects, each of which specifies a backup rule. Each rule in a backup plan is a
-// separate scheduled task and can back up a different selection of AWS resources.
+// separate scheduled task and can back up a different selection of Amazon Web
+// Services resources.
 type BackupPlanInput struct {
 
 	// The optional display name of a backup plan.
@@ -172,7 +174,7 @@ type BackupPlanInput struct {
 	Rules []BackupRuleInput
 
 	// Specifies a list of BackupOptions for each resource type. These settings are
-	// only available for Windows VSS backup jobs.
+	// only available for Windows Volume Shadow Copy Service (VSS) backup jobs.
 	AdvancedBackupSettings []AdvancedBackupSetting
 
 	noSmithyDocumentSerde
@@ -246,27 +248,27 @@ type BackupRule struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	//
 	// This member is required.
 	TargetBackupVaultName *string
 
 	// A value in minutes after a backup job is successfully started before it must be
-	// completed or it will be canceled by AWS Backup. This value is optional.
+	// completed or it will be canceled by Backup. This value is optional.
 	CompletionWindowMinutes *int64
 
 	// An array of CopyAction objects, which contains the details of the copy
 	// operation.
 	CopyActions []CopyAction
 
-	// Specifies whether AWS Backup creates continuous backups. True causes AWS Backup
-	// to create continuous backups capable of point-in-time restore (PITR). False (or
-	// not specified) causes AWS Backup to create snapshot backups.
+	// Specifies whether Backup creates continuous backups. True causes Backup to
+	// create continuous backups capable of point-in-time restore (PITR). False (or not
+	// specified) causes Backup to create snapshot backups.
 	EnableContinuousBackup *bool
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
-	// and when it expires. AWS Backup transitions and expires backups automatically
+	// and when it expires. Backup transitions and expires backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
@@ -283,7 +285,7 @@ type BackupRule struct {
 	// resources.
 	RuleId *string
 
-	// A CRON expression specifying when AWS Backup initiates a backup job. For more
+	// A cron expression in UTC specifying when Backup initiates a backup job. For more
 	// information about cron expressions, see Schedule Expressions for Rules
 	// (https://docs.aws.amazon.com/AmazonCloudWatch/latest/events/ScheduledEvents.html)
 	// in the Amazon CloudWatch Events User Guide.. Prior to specifying a value for
@@ -308,27 +310,27 @@ type BackupRuleInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	//
 	// This member is required.
 	TargetBackupVaultName *string
 
 	// A value in minutes after a backup job is successfully started before it must be
-	// completed or it will be canceled by AWS Backup. This value is optional.
+	// completed or it will be canceled by Backup. This value is optional.
 	CompletionWindowMinutes *int64
 
 	// An array of CopyAction objects, which contains the details of the copy
 	// operation.
 	CopyActions []CopyAction
 
-	// Specifies whether AWS Backup creates continuous backups. True causes AWS Backup
-	// to create continuous backups capable of point-in-time restore (PITR). False (or
-	// not specified) causes AWS Backup to create snapshot backups.
+	// Specifies whether Backup creates continuous backups. True causes Backup to
+	// create continuous backups capable of point-in-time restore (PITR). False (or not
+	// specified) causes Backup to create snapshot backups.
 	EnableContinuousBackup *bool
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
-	// and when it expires. AWS Backup will transition and expire backups automatically
+	// and when it expires. Backup will transition and expire backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
@@ -341,7 +343,7 @@ type BackupRuleInput struct {
 	// resources that you create. Each tag is a key-value pair.
 	RecoveryPointTags map[string]string
 
-	// A CRON expression specifying when AWS Backup initiates a backup job.
+	// A CRON expression in UTC specifying when Backup initiates a backup job.
 	ScheduleExpression *string
 
 	// A value in minutes after a backup is scheduled before a job will be canceled if
@@ -354,7 +356,7 @@ type BackupRuleInput struct {
 // Used to specify a set of resources to a backup plan.
 type BackupSelection struct {
 
-	// The ARN of the IAM role that AWS Backup uses to authenticate when backing up the
+	// The ARN of the IAM role that Backup uses to authenticate when backing up the
 	// target resource; for example, arn:aws:iam::123456789012:role/S3Access.
 	//
 	// This member is required.
@@ -415,8 +417,8 @@ type BackupVaultListMember struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	BackupVaultName *string
 
 	// The date and time a resource backup is created, in Unix format and Coordinated
@@ -442,14 +444,14 @@ type BackupVaultListMember struct {
 
 // Contains DeleteAt and MoveToColdStorageAt timestamps, which are used to specify
 // a lifecycle for a recovery point. The lifecycle defines when a protected
-// resource is transitioned to cold storage and when it expires. AWS Backup
-// transitions and expires backups automatically according to the lifecycle that
-// you define. Backups transitioned to cold storage must be stored in cold storage
-// for a minimum of 90 days. Therefore, the “expire after days” setting must be 90
-// days greater than the “transition to cold after days” setting. The “transition
-// to cold after days” setting cannot be changed after a backup has been
-// transitioned to cold. Only Amazon EFS file system backups can be transitioned to
-// cold storage.
+// resource is transitioned to cold storage and when it expires. Backup transitions
+// and expires backups automatically according to the lifecycle that you define.
+// Backups transitioned to cold storage must be stored in cold storage for a
+// minimum of 90 days. Therefore, the “expire after days” setting must be 90 days
+// greater than the “transition to cold after days” setting. The “transition to
+// cold after days” setting cannot be changed after a backup has been transitioned
+// to cold. Only Amazon EFS file system backups can be transitioned to cold
+// storage.
 type CalculatedLifecycle struct {
 
 	// A timestamp that specifies when to delete a recovery point.
@@ -483,6 +485,44 @@ type Condition struct {
 	//
 	// This member is required.
 	ConditionValue *string
+
+	noSmithyDocumentSerde
+}
+
+// A list of parameters for a control. A control can have zero, one, or more than
+// one parameter. An example of a control with two parameters is: "backup plan
+// frequency is at least daily and the retention period is at least 1 year". The
+// first parameter is daily. The second parameter is 1 year.
+type ControlInputParameter struct {
+
+	// The name of a parameter, for example, BackupPlanFrequency.
+	ParameterName *string
+
+	// The value of parameter, for example, hourly.
+	ParameterValue *string
+
+	noSmithyDocumentSerde
+}
+
+// A framework consists of one or more controls. Each control has its own control
+// scope. The control scope defines what the control will evaluate. Three examples
+// of control scopes are: a specific backup plan, all backup plans with a specific
+// tag, or all backup plans. To set a control scope that includes all of a
+// particular resource, leave the ControlScope empty or do not pass it when calling
+// CreateFramework.
+type ControlScope struct {
+
+	// Describes whether the control scope includes a specific resource identified by
+	// its unique Amazon Resource Name (ARN).
+	ComplianceResourceIds []string
+
+	// Describes whether the control scope includes one or more types of resources,
+	// such as EFS or RDS.
+	ComplianceResourceTypes []string
+
+	// Describes whether the control scope includes resources with one or more tags.
+	// Each tag is a key-value pair.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }
@@ -528,8 +568,8 @@ type CopyJob struct {
 	// Uniquely identifies a copy job.
 	CopyJobId *string
 
-	// Contains information about the backup plan and rule that AWS Backup used to
-	// initiate the recovery point backup.
+	// Contains information about the backup plan and rule that Backup used to initiate
+	// the recovery point backup.
 	CreatedBy *RecoveryPointCreator
 
 	// The date and time a copy job is created, in Unix format and Coordinated
@@ -550,14 +590,14 @@ type CopyJob struct {
 	// arn:aws:iam::123456789012:role/S3Access.
 	IamRoleArn *string
 
-	// The AWS resource to be copied; for example, an Amazon Elastic Block Store
-	// (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
-	// database.
+	// The Amazon Web Services resource to be copied; for example, an Amazon Elastic
+	// Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon
+	// RDS) database.
 	ResourceArn *string
 
-	// The type of AWS resource to be copied; for example, an Amazon Elastic Block
-	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
-	// database.
+	// The type of Amazon Web Services resource to be copied; for example, an Amazon
+	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
+	// (Amazon RDS) database.
 	ResourceType *string
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a source copy vault; for
@@ -573,6 +613,60 @@ type CopyJob struct {
 
 	// A detailed message explaining the status of the job to copy a resource.
 	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about a framework. Frameworks contain controls,
+// which evaluate and report on your backup events and resources. Frameworks
+// generate daily compliance results.
+type Framework struct {
+
+	// The date and time that a framework is created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	CreationTime *time.Time
+
+	// The deployment status of a framework. The statuses are: CREATE_IN_PROGRESS |
+	// UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED | FAILED
+	DeploymentStatus *string
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
+	// the ARN depends on the resource type.
+	FrameworkArn *string
+
+	// An optional description of the framework with a maximum 1,024 characters.
+	FrameworkDescription *string
+
+	// The unique name of a framework. This name is between 1 and 256 characters,
+	// starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and
+	// underscores (_).
+	FrameworkName *string
+
+	// The number of controls contained by the framework.
+	NumberOfControls int32
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about all of the controls of a framework. Each
+// framework must contain at least one control.
+type FrameworkControl struct {
+
+	// The name of a control. This name is between 1 and 256 characters.
+	//
+	// This member is required.
+	ControlName *string
+
+	// A list of ParameterName and ParameterValue pairs.
+	ControlInputParameters []ControlInputParameter
+
+	// The scope of a control. The control scope defines what the control will
+	// evaluate. Three examples of control scopes are: a specific backup plan, all
+	// backup plans with a specific tag, or all backup plans. For more information, see
+	// ControlScope.
+	ControlScope *ControlScope
 
 	noSmithyDocumentSerde
 }
@@ -611,9 +705,10 @@ type ProtectedResource struct {
 	// the ARN depends on the resource type.
 	ResourceArn *string
 
-	// The type of AWS resource; for example, an Amazon Elastic Block Store (Amazon
-	// EBS) volume or an Amazon Relational Database Service (Amazon RDS) database. For
-	// VSS Windows backups, the only supported resource type is Amazon EC2.
+	// The type of Amazon Web Services resource; for example, an Amazon Elastic Block
+	// Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon RDS)
+	// database. For Windows Volume Shadow Copy Service (VSS) backups, the only
+	// supported resource type is Amazon EC2.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -632,8 +727,8 @@ type RecoveryPointByBackupVault struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	BackupVaultName *string
 
 	// A CalculatedLifecycle object containing DeleteAt and MoveToColdStorageAt
@@ -677,7 +772,7 @@ type RecoveryPointByBackupVault struct {
 	LastRestoreTime *time.Time
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
-	// and when it expires. AWS Backup transitions and expires backups automatically
+	// and when it expires. Backup transitions and expires backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
@@ -695,10 +790,10 @@ type RecoveryPointByBackupVault struct {
 	// resource type.
 	ResourceArn *string
 
-	// The type of AWS resource saved as a recovery point; for example, an Amazon
-	// Elastic Block Store (Amazon EBS) volume or an Amazon Relational Database Service
-	// (Amazon RDS) database. For VSS Windows backups, the only supported resource type
-	// is Amazon EC2.
+	// The type of Amazon Web Services resource saved as a recovery point; for example,
+	// an Amazon Elastic Block Store (Amazon EBS) volume or an Amazon Relational
+	// Database Service (Amazon RDS) database. For Windows Volume Shadow Copy Service
+	// (VSS) backups, the only supported resource type is Amazon EC2.
 	ResourceType *string
 
 	// The backup vault where the recovery point was originally copied from. If the
@@ -707,6 +802,9 @@ type RecoveryPointByBackupVault struct {
 
 	// A status code specifying the state of the recovery point.
 	Status RecoveryPointStatus
+
+	// A message explaining the reason of the recovery point deletion failure.
+	StatusMessage *string
 
 	noSmithyDocumentSerde
 }
@@ -719,8 +817,8 @@ type RecoveryPointByResource struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	BackupVaultName *string
 
 	// The date and time a recovery point is created, in Unix format and Coordinated
@@ -742,11 +840,14 @@ type RecoveryPointByResource struct {
 	// A status code specifying the state of the recovery point.
 	Status RecoveryPointStatus
 
+	// A message explaining the reason of the recovery point deletion failure.
+	StatusMessage *string
+
 	noSmithyDocumentSerde
 }
 
-// Contains information about the backup plan and rule that AWS Backup used to
-// initiate the recovery point backup.
+// Contains information about the backup plan and rule that Backup used to initiate
+// the recovery point backup.
 type RecoveryPointCreator struct {
 
 	// An Amazon Resource Name (ARN) that uniquely identifies a backup plan; for
@@ -764,6 +865,149 @@ type RecoveryPointCreator struct {
 	// Uniquely identifies a rule used to schedule the backup of a selection of
 	// resources.
 	BackupRuleId *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information from your report plan about where to deliver your reports,
+// specifically your Amazon S3 bucket name, S3 key prefix, and the formats of your
+// reports.
+type ReportDeliveryChannel struct {
+
+	// The unique name of the S3 bucket that receives your reports.
+	//
+	// This member is required.
+	S3BucketName *string
+
+	// A list of the format of your reports: CSV, JSON, or both. If not specified, the
+	// default format is CSV.
+	Formats []string
+
+	// The prefix for where Backup Audit Manager delivers your reports to Amazon S3.
+	// The prefix is this part of the following path:
+	// s3://your-bucket-name/prefix/Backup/us-west-2/year/month/day/report-name. If not
+	// specified, there is no prefix.
+	S3KeyPrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains information from your report job about your report destination.
+type ReportDestination struct {
+
+	// The unique name of the Amazon S3 bucket that receives your reports.
+	S3BucketName *string
+
+	// The object key that uniquely identifies your reports in your S3 bucket.
+	S3Keys []string
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about a report job. A report job compiles a report
+// based on a report plan and publishes it to Amazon S3.
+type ReportJob struct {
+
+	// The date and time that a report job is completed, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CompletionTime is accurate to milliseconds.
+	// For example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	CompletionTime *time.Time
+
+	// The date and time that a report job is created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	CreationTime *time.Time
+
+	// The S3 bucket name and S3 keys for the destination where the report job
+	// publishes the report.
+	ReportDestination *ReportDestination
+
+	// The identifier for a report job. A unique, randomly generated, Unicode, UTF-8
+	// encoded string that is at most 1,024 bytes long. Report job IDs cannot be
+	// edited.
+	ReportJobId *string
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
+	// the ARN depends on the resource type.
+	ReportPlanArn *string
+
+	// Identifies the report template for the report. Reports are built using a report
+	// template. The report templates are: BACKUP_JOB_REPORT | COPY_JOB_REPORT |
+	// RESTORE_JOB_REPORT
+	ReportTemplate *string
+
+	// The status of a report job. The statuses are: CREATED | RUNNING | COMPLETED |
+	// FAILEDCOMPLETED means that the report is available for your review at your
+	// designated destination. If the status is FAILED, review the StatusMessage for
+	// the reason.
+	Status *string
+
+	// A message explaining the status of the report job.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about a report plan.
+type ReportPlan struct {
+
+	// The date and time that a report plan is created, in Unix format and Coordinated
+	// Universal Time (UTC). The value of CreationTime is accurate to milliseconds. For
+	// example, the value 1516925490.087 represents Friday, January 26, 2018
+	// 12:11:30.087 AM.
+	CreationTime *time.Time
+
+	// The deployment status of a report plan. The statuses are: CREATE_IN_PROGRESS |
+	// UPDATE_IN_PROGRESS | DELETE_IN_PROGRESS | COMPLETED
+	DeploymentStatus *string
+
+	// The date and time that a report job associated with this report plan last
+	// attempted to run, in Unix format and Coordinated Universal Time (UTC). The value
+	// of LastAttemptedExecutionTime is accurate to milliseconds. For example, the
+	// value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	LastAttemptedExecutionTime *time.Time
+
+	// The date and time that a report job associated with this report plan last
+	// successfully ran, in Unix format and Coordinated Universal Time (UTC). The value
+	// of LastSuccessfulExecutionTime is accurate to milliseconds. For example, the
+	// value 1516925490.087 represents Friday, January 26, 2018 12:11:30.087 AM.
+	LastSuccessfulExecutionTime *time.Time
+
+	// Contains information about where and how to deliver your reports, specifically
+	// your Amazon S3 bucket name, S3 key prefix, and the formats of your reports.
+	ReportDeliveryChannel *ReportDeliveryChannel
+
+	// An Amazon Resource Name (ARN) that uniquely identifies a resource. The format of
+	// the ARN depends on the resource type.
+	ReportPlanArn *string
+
+	// An optional description of the report plan with a maximum 1,024 characters.
+	ReportPlanDescription *string
+
+	// The unique name of the report plan. This name is between 1 and 256 characters
+	// starting with a letter, and consisting of letters (a-z, A-Z), numbers (0-9), and
+	// underscores (_).
+	ReportPlanName *string
+
+	// Identifies the report template for the report. Reports are built using a report
+	// template. The report templates are: BACKUP_JOB_REPORT | COPY_JOB_REPORT |
+	// RESTORE_JOB_REPORT
+	ReportSetting *ReportSetting
+
+	noSmithyDocumentSerde
+}
+
+// Contains detailed information about a report setting.
+type ReportSetting struct {
+
+	// Identifies the report template for the report. Reports are built using a report
+	// template. The report templates are: BACKUP_JOB_REPORT | COPY_JOB_REPORT |
+	// RESTORE_JOB_REPORT
+	//
+	// This member is required.
+	ReportTemplate *string
 
 	noSmithyDocumentSerde
 }
@@ -811,15 +1055,15 @@ type RestoreJobsListMember struct {
 
 	// The resource type of the listed restore jobs; for example, an Amazon Elastic
 	// Block Store (Amazon EBS) volume or an Amazon Relational Database Service (Amazon
-	// RDS) database. For VSS Windows backups, the only supported resource type is
-	// Amazon EC2.
+	// RDS) database. For Windows Volume Shadow Copy Service (VSS) backups, the only
+	// supported resource type is Amazon EC2.
 	ResourceType *string
 
 	// Uniquely identifies the job that restores a recovery point.
 	RestoreJobId *string
 
-	// A status code specifying the state of the job initiated by AWS Backup to restore
-	// a recovery point.
+	// A status code specifying the state of the job initiated by Backup to restore a
+	// recovery point.
 	Status RestoreJobStatus
 
 	// A detailed message explaining the status of the job to restore a recovery point.

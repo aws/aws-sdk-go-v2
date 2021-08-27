@@ -16,8 +16,8 @@ import (
 // However, if you start a new task execution on the same task and you allow the
 // task execution to complete, file content on the destination is complete and
 // consistent. This applies to other unexpected failures that interrupt a task
-// execution. In all of these cases, AWS DataSync successfully complete the
-// transfer when you start the next task execution.
+// execution. In all of these cases, DataSync successfully complete the transfer
+// when you start the next task execution.
 func (c *Client) CancelTaskExecution(ctx context.Context, params *CancelTaskExecutionInput, optFns ...func(*Options)) (*CancelTaskExecutionOutput, error) {
 	if params == nil {
 		params = &CancelTaskExecutionInput{}

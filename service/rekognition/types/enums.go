@@ -182,6 +182,24 @@ func (GenderType) Values() []GenderType {
 	}
 }
 
+type KnownGenderType string
+
+// Enum values for KnownGenderType
+const (
+	KnownGenderTypeMale   KnownGenderType = "Male"
+	KnownGenderTypeFemale KnownGenderType = "Female"
+)
+
+// Values returns all known values for KnownGenderType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (KnownGenderType) Values() []KnownGenderType {
+	return []KnownGenderType{
+		"Male",
+		"Female",
+	}
+}
+
 type LabelDetectionSortBy string
 
 // Enum values for LabelDetectionSortBy

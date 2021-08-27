@@ -32,7 +32,9 @@ func (c *Client) ListMedicalVocabularies(ctx context.Context, params *ListMedica
 
 type ListMedicalVocabulariesInput struct {
 
-	// The maximum number of vocabularies to return in the response.
+	// The maximum number of vocabularies to return in each page of results. If there
+	// are fewer results than the value you specify, only the actual results are
+	// returned. If you do not specify a value, the default of 5 is used.
 	MaxResults *int32
 
 	// Returns vocabularies whose names contain the specified string. The search is not
@@ -146,7 +148,9 @@ var _ ListMedicalVocabulariesAPIClient = (*Client)(nil)
 // ListMedicalVocabulariesPaginatorOptions is the paginator options for
 // ListMedicalVocabularies
 type ListMedicalVocabulariesPaginatorOptions struct {
-	// The maximum number of vocabularies to return in the response.
+	// The maximum number of vocabularies to return in each page of results. If there
+	// are fewer results than the value you specify, only the actual results are
+	// returned. If you do not specify a value, the default of 5 is used.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

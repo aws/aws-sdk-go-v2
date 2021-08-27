@@ -32,8 +32,8 @@ type StartBackupJobInput struct {
 
 	// The name of a logical container where backups are stored. Backup vaults are
 	// identified by names that are unique to the account used to create them and the
-	// AWS Region where they are created. They consist of lowercase letters, numbers,
-	// and hyphens.
+	// Amazon Web Services Region where they are created. They consist of lowercase
+	// letters, numbers, and hyphens.
 	//
 	// This member is required.
 	BackupVaultName *string
@@ -51,10 +51,10 @@ type StartBackupJobInput struct {
 	ResourceArn *string
 
 	// Specifies the backup option for a selected resource. This option is only
-	// available for Windows VSS backup jobs. Valid values: Set to
-	// "WindowsVSS”:“enabled" to enable WindowsVSS backup option and create a VSS
-	// Windows backup. Set to “WindowsVSS”:”disabled” to create a regular backup. The
-	// WindowsVSS option is not enabled by default.
+	// available for Windows Volume Shadow Copy Service (VSS) backup jobs. Valid
+	// values: Set to "WindowsVSS":"enabled" to enable the WindowsVSS backup option and
+	// create a Windows VSS backup. Set to "WindowsVSS""disabled" to create a regular
+	// backup. The WindowsVSS option is not enabled by default.
 	BackupOptions map[string]string
 
 	// A value in minutes during which a successfully started backup must complete, or
@@ -63,12 +63,13 @@ type StartBackupJobInput struct {
 	// time for StartWindowMinutes, or if the backup started later than scheduled.
 	CompleteWindowMinutes *int64
 
-	// A customer chosen string that can be used to distinguish between calls to
-	// StartBackupJob.
+	// A customer-chosen string that you can use to distinguish between otherwise
+	// identical calls to StartBackupJob. Retrying a successful request with the same
+	// idempotency token results in a success message with no action taken.
 	IdempotencyToken *string
 
 	// The lifecycle defines when a protected resource is transitioned to cold storage
-	// and when it expires. AWS Backup will transition and expire backups automatically
+	// and when it expires. Backup will transition and expire backups automatically
 	// according to the lifecycle that you define. Backups transitioned to cold storage
 	// must be stored in cold storage for a minimum of 90 days. Therefore, the “expire
 	// after days” setting must be 90 days greater than the “transition to cold after
@@ -91,7 +92,7 @@ type StartBackupJobInput struct {
 
 type StartBackupJobOutput struct {
 
-	// Uniquely identifies a request to AWS Backup to back up a resource.
+	// Uniquely identifies a request to Backup to back up a resource.
 	BackupJobId *string
 
 	// The date and time that a backup job is created, in Unix format and Coordinated

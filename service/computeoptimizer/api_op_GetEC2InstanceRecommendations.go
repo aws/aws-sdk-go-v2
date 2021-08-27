@@ -11,12 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns Amazon EC2 instance recommendations. AWS Compute Optimizer generates
+// Returns Amazon EC2 instance recommendations. Compute Optimizer generates
 // recommendations for Amazon Elastic Compute Cloud (Amazon EC2) instances that
 // meet a specific set of requirements. For more information, see the Supported
 // resources and requirements
 // (https://docs.aws.amazon.com/compute-optimizer/latest/ug/requirements.html) in
-// the AWS Compute Optimizer User Guide.
+// the Compute Optimizer User Guide.
 func (c *Client) GetEC2InstanceRecommendations(ctx context.Context, params *GetEC2InstanceRecommendationsInput, optFns ...func(*Options)) (*GetEC2InstanceRecommendationsOutput, error) {
 	if params == nil {
 		params = &GetEC2InstanceRecommendationsInput{}
@@ -34,13 +34,13 @@ func (c *Client) GetEC2InstanceRecommendations(ctx context.Context, params *GetE
 
 type GetEC2InstanceRecommendationsInput struct {
 
-	// The ID of the AWS account for which to return instance recommendations. If your
-	// account is the management account of an organization, use this parameter to
-	// specify the member account for which you want to return instance
-	// recommendations. Only one account ID can be specified per request.
+	// The ID of the Amazon Web Services account for which to return instance
+	// recommendations. If your account is the management account of an organization,
+	// use this parameter to specify the member account for which you want to return
+	// instance recommendations. Only one account ID can be specified per request.
 	AccountIds []string
 
-	// An array of objects that describe a filter that returns a more specific list of
+	// An array of objects to specify a filter that returns a more specific list of
 	// instance recommendations.
 	Filters []types.Filter
 
@@ -50,11 +50,15 @@ type GetEC2InstanceRecommendationsInput struct {
 
 	// The maximum number of instance recommendations to return with a single request.
 	// To retrieve the remaining results, make another request with the returned
-	// NextToken value.
+	// nextToken value.
 	MaxResults *int32
 
 	// The token to advance to the next page of instance recommendations.
 	NextToken *string
+
+	// An object to specify the preferences for the Amazon EC2 instance recommendations
+	// to return in the response.
+	RecommendationPreferences *types.RecommendationPreferences
 
 	noSmithyDocumentSerde
 }

@@ -21,18 +21,23 @@ import (
 // (CustomLabel) object in an array (CustomLabels). Each CustomLabel object
 // provides the label name (Name), the level of confidence that the image contains
 // the object (Confidence), and object location information, if it exists, for the
-// label on the image (Geometry). During training model calculates a threshold
-// value that determines if a prediction for a label is true. By default,
-// DetectCustomLabels doesn't return labels whose confidence value is below the
-// model's calculated threshold value. To filter labels that are returned, specify
-// a value for MinConfidence that is higher than the model's calculated threshold.
-// You can get the model's calculated threshold from the model's training results
-// shown in the Amazon Rekognition Custom Labels console. To get all labels,
-// regardless of confidence, specify a MinConfidence value of 0. You can also add
-// the MaxResults parameter to limit the number of labels returned. This is a
-// stateless API operation. That is, the operation does not persist any data. This
-// operation requires permissions to perform the rekognition:DetectCustomLabels
-// action.
+// label on the image (Geometry). To filter labels that are returned, specify a
+// value for MinConfidence. DetectCustomLabelsLabels only returns labels with a
+// confidence that's higher than the specified value. The value of MinConfidence
+// maps to the assumed threshold values created during training. For more
+// information, see Assumed threshold in the Amazon Rekognition Custom Labels
+// Developer Guide. Amazon Rekognition Custom Labels metrics expresses an assumed
+// threshold as a floating point value between 0-1. The range of MinConfidence
+// normalizes the threshold value to a percentage value (0-100). Confidence
+// responses from DetectCustomLabels are also returned as a percentage. You can use
+// MinConfidence to change the precision and recall or your model. For more
+// information, see Analyzing an image in the Amazon Rekognition Custom Labels
+// Developer Guide. If you don't specify a value for MinConfidence,
+// DetectCustomLabels returns labels based on the assumed threshold of each label.
+// This is a stateless API operation. That is, the operation does not persist any
+// data. This operation requires permissions to perform the
+// rekognition:DetectCustomLabels action. For more information, see Analyzing an
+// image in the Amazon Rekognition Custom Labels Developer Guide.
 func (c *Client) DetectCustomLabels(ctx context.Context, params *DetectCustomLabelsInput, optFns ...func(*Options)) (*DetectCustomLabelsOutput, error) {
 	if params == nil {
 		params = &DetectCustomLabelsInput{}
@@ -81,10 +86,12 @@ type DetectCustomLabelsInput struct {
 	// highest confidence to lowest.
 	MaxResults *int32
 
-	// Specifies the minimum confidence level for the labels to return. Amazon
-	// Rekognition doesn't return any labels with a confidence lower than this
-	// specified value. If you specify a value of 0, all labels are return, regardless
-	// of the default thresholds that the model version applies.
+	// Specifies the minimum confidence level for the labels to return.
+	// DetectCustomLabels doesn't return any labels with a confidence value that's
+	// lower than this specified value. If you specify a value of 0, DetectCustomLabels
+	// returns all labels, regardless of the assumed threshold applied to each label.
+	// If you don't specify a value for MinConfidence, DetectCustomLabels returns
+	// labels based on the assumed threshold of each label.
 	MinConfidence *float32
 
 	noSmithyDocumentSerde

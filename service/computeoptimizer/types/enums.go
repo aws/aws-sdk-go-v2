@@ -2,6 +2,24 @@
 
 package types
 
+type CpuVendorArchitecture string
+
+// Enum values for CpuVendorArchitecture
+const (
+	CpuVendorArchitectureAwsArm64 CpuVendorArchitecture = "AWS_ARM64"
+	CpuVendorArchitectureCurrent  CpuVendorArchitecture = "CURRENT"
+)
+
+// Values returns all known values for CpuVendorArchitecture. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CpuVendorArchitecture) Values() []CpuVendorArchitecture {
+	return []CpuVendorArchitecture{
+		"AWS_ARM64",
+		"CURRENT",
+	}
+}
+
 type EBSFilterName string
 
 // Enum values for EBSFilterName
@@ -55,6 +73,22 @@ func (EBSMetricName) Values() []EBSMetricName {
 		"VolumeWriteOpsPerSecond",
 		"VolumeReadBytesPerSecond",
 		"VolumeWriteBytesPerSecond",
+	}
+}
+
+type EnrollmentFilterName string
+
+// Enum values for EnrollmentFilterName
+const (
+	EnrollmentFilterNameStatus EnrollmentFilterName = "Status"
+)
+
+// Values returns all known values for EnrollmentFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (EnrollmentFilterName) Values() []EnrollmentFilterName {
+	return []EnrollmentFilterName{
+		"Status",
 	}
 }
 
@@ -754,6 +788,7 @@ const (
 	PlatformDifferenceStorageInterface          PlatformDifference = "StorageInterface"
 	PlatformDifferenceInstanceStoreAvailability PlatformDifference = "InstanceStoreAvailability"
 	PlatformDifferenceVirtualizationType        PlatformDifference = "VirtualizationType"
+	PlatformDifferenceArchitecture              PlatformDifference = "Architecture"
 )
 
 // Values returns all known values for PlatformDifference. Note that this can be
@@ -766,6 +801,7 @@ func (PlatformDifference) Values() []PlatformDifference {
 		"StorageInterface",
 		"InstanceStoreAvailability",
 		"VirtualizationType",
+		"Architecture",
 	}
 }
 
