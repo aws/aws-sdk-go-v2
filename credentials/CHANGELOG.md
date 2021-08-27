@@ -1,3 +1,9 @@
+# v1.4.0 (2021-08-27)
+
+* **Feature**: Adds support for Tags and TransitiveTagKeys to stscreds.AssumeRoleProvider. Closes https://github.com/aws/aws-sdk-go-v2/issues/723
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.3.3 (2021-08-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

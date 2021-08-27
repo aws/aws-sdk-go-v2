@@ -1,3 +1,9 @@
+# v1.2.0 (2021-08-27)
+
+* **Feature**: Updated `github.com/aws/smithy-go` to latest version
+* **Bug Fix**: Fix unmarshaler's decoding of AttributeValueMemberN into a type that is a string alias.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.1.5 (2021-08-19)
 
 * **Dependency Update**: Updated to the latest SDK module versions

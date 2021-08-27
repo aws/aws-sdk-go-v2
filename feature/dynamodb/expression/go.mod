@@ -3,9 +3,9 @@ module github.com/aws/aws-sdk-go-v2/feature/dynamodb/expression
 go 1.15
 
 require (
-	github.com/aws/aws-sdk-go-v2 v1.8.1
-	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.1.5
-	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.4.3
+	github.com/aws/aws-sdk-go-v2 v1.9.0
+	github.com/aws/aws-sdk-go-v2/feature/dynamodb/attributevalue v1.2.0
+	github.com/aws/aws-sdk-go-v2/service/dynamodb v1.5.0
 )
 
 replace github.com/aws/aws-sdk-go-v2 => ../../../
