@@ -1,0 +1,8 @@
+{
+    "id": "e5e27637-9e8a-463b-9c96-b884a9231a44",
+    "type": "bugfix",
+    "description": "Updated API model to latest revision.",
+    "modules": [
+        "service/robomaker"
+    ]
+}
