@@ -550,6 +550,10 @@
                     {
                         "value": "en-NZ",
                         "name": "en_NZ"
+                    },
+                    {
+                        "value": "en-ZA",
+                        "name": "en_ZA"
                     }
                 ]
             }
@@ -1935,6 +1939,10 @@
                     {
                         "value": "Aria",
                         "name": "Aria"
+                    },
+                    {
+                        "value": "Ayanda",
+                        "name": "Ayanda"
                     }
                 ]
             }
