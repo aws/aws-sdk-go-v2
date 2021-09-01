@@ -10,29 +10,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Associates an existing AWS KMS alias with a different customer master key (CMK).
-// Each alias is associated with only one CMK at a time, although a CMK can have
-// multiple aliases. The alias and the CMK must be in the same AWS account and
-// Region. Adding, deleting, or updating an alias can allow or deny permission to
-// the CMK. For details, see Using ABAC in AWS KMS
-// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the AWS Key
-// Management Service Developer Guide. The current and new CMK must be the same
+// Associates an existing KMS alias with a different KMS key. Each alias is
+// associated with only one KMS key at a time, although a KMS key can have multiple
+// aliases. The alias and the KMS key must be in the same Amazon Web Services
+// account and Region. Adding, deleting, or updating an alias can allow or deny
+// permission to the KMS key. For details, see Using ABAC in KMS
+// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
+// Management Service Developer Guide. The current and new KMS key must be the same
 // type (both symmetric or both asymmetric), and they must have the same key usage
 // (ENCRYPT_DECRYPT or SIGN_VERIFY). This restriction prevents errors in code that
-// uses aliases. If you must assign an alias to a different type of CMK, use
+// uses aliases. If you must assign an alias to a different type of KMS key, use
 // DeleteAlias to delete the old alias and CreateAlias to create a new alias. You
 // cannot use UpdateAlias to change an alias name. To change an alias name, use
 // DeleteAlias to delete the old alias and CreateAlias to create a new alias.
-// Because an alias is not a property of a CMK, you can create, update, and delete
-// the aliases of a CMK without affecting the CMK. Also, aliases do not appear in
-// the response from the DescribeKey operation. To get the aliases of all CMKs in
-// the account, use the ListAliases operation. The CMK that you use for this
-// operation must be in a compatible key state. For details, see Key state: Effect
-// on your CMK
+// Because an alias is not a property of a KMS key, you can create, update, and
+// delete the aliases of a KMS key without affecting the KMS key. Also, aliases do
+// not appear in the response from the DescribeKey operation. To get the aliases of
+// all KMS keys in the account, use the ListAliases operation. The KMS key that you
+// use for this operation must be in a compatible key state. For details, see Key
+// state: Effect on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
-// perform this operation on a CMK in a different AWS account. Required
-// permissions
+// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a KMS key in a different Amazon Web Services account.
+// Required permissions
 //
 // * kms:UpdateAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
@@ -40,15 +40,15 @@ import (
 //
 // * kms:UpdateAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
-// on the current CMK (key policy).
+// on the current KMS key (key policy).
 //
 // * kms:UpdateAlias
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
-// on the new CMK (key policy).
+// on the new KMS key (key policy).
 //
 // For details, see Controlling access to aliases
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-alias.html#alias-access)
-// in the AWS Key Management Service Developer Guide. Related operations:
+// in the Key Management Service Developer Guide. Related operations:
 //
 // *
 // CreateAlias
@@ -73,22 +73,22 @@ func (c *Client) UpdateAlias(ctx context.Context, params *UpdateAliasInput, optF
 
 type UpdateAliasInput struct {
 
-	// Identifies the alias that is changing its CMK. This value must begin with alias/
-	// followed by the alias name, such as alias/ExampleAlias. You cannot use
+	// Identifies the alias that is changing its KMS key. This value must begin with
+	// alias/ followed by the alias name, such as alias/ExampleAlias. You cannot use
 	// UpdateAlias to change the alias name.
 	//
 	// This member is required.
 	AliasName *string
 
-	// Identifies the customer managed CMK
+	// Identifies the customer managed key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#customer-cmk)
 	// to associate with the alias. You don't have permission to associate an alias
-	// with an AWS managed CMK
+	// with an Amazon Web Services managed key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#aws-managed-cmk).
-	// The CMK must be in the same AWS account and Region as the alias. Also, the new
-	// target CMK must be the same type as the current target CMK (both symmetric or
-	// both asymmetric) and they must have the same key usage. Specify the key ID or
-	// key ARN of the CMK. For example:
+	// The KMS key must be in the same Amazon Web Services account and Region as the
+	// alias. Also, the new target KMS key must be the same type as the current target
+	// KMS key (both symmetric or both asymmetric) and they must have the same key
+	// usage. Specify the key ID or key ARN of the KMS key. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -97,8 +97,8 @@ type UpdateAliasInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. To verify
-	// that the alias is mapped to the correct CMK, use ListAliases.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey. To verify
+	// that the alias is mapped to the correct KMS key, use ListAliases.
 	//
 	// This member is required.
 	TargetKeyId *string

@@ -11,7 +11,9 @@ import (
 )
 
 // Attaches the specified policy to the specified principal (certificate or other
-// credential).
+// credential). Requires permission to access the AttachPolicy
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) AttachPolicy(ctx context.Context, params *AttachPolicyInput, optFns ...func(*Options)) (*AttachPolicyOutput, error) {
 	if params == nil {
 		params = &AttachPolicyInput{}

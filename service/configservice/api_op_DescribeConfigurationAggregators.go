@@ -36,7 +36,7 @@ type DescribeConfigurationAggregatorsInput struct {
 	ConfigurationAggregatorNames []string
 
 	// The maximum number of configuration aggregators returned on each page. The
-	// default is maximum. If you specify 0, AWS Config uses the default.
+	// default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -133,7 +133,7 @@ var _ DescribeConfigurationAggregatorsAPIClient = (*Client)(nil)
 // DescribeConfigurationAggregators
 type DescribeConfigurationAggregatorsPaginatorOptions struct {
 	// The maximum number of configuration aggregators returned on each page. The
-	// default is maximum. If you specify 0, AWS Config uses the default.
+	// default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

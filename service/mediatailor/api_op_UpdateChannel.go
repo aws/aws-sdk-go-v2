@@ -57,13 +57,17 @@ type UpdateChannelOutput struct {
 	// The timestamp of when the channel was created.
 	CreationTime *time.Time
 
+	// Contains information about the slate used to fill gaps between programs in the
+	// schedule.
+	FillerSlate *types.SlateSource
+
 	// The timestamp of when the channel was last modified.
 	LastModifiedTime *time.Time
 
 	// The channel's output properties.
 	Outputs []types.ResponseOutputItem
 
-	// The type of playback for this channel. The only supported value is LOOP.
+	// The channel's playback mode.
 	PlaybackMode *string
 
 	// The tags assigned to the channel.

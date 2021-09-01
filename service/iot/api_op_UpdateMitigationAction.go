@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the definition for the specified mitigation action.
+// Updates the definition for the specified mitigation action. Requires permission
+// to access the UpdateMitigationAction
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateMitigationAction(ctx context.Context, params *UpdateMitigationActionInput, optFns ...func(*Options)) (*UpdateMitigationActionOutput, error) {
 	if params == nil {
 		params = &UpdateMitigationActionInput{}

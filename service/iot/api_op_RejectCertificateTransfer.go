@@ -10,12 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Rejects a pending certificate transfer. After AWS IoT rejects a certificate
+// Rejects a pending certificate transfer. After IoT rejects a certificate
 // transfer, the certificate status changes from PENDING_TRANSFER to INACTIVE. To
 // check for pending certificate transfers, call ListCertificates to enumerate your
 // certificates. This operation can only be called by the transfer destination.
 // After it is called, the certificate will be returned to the source's account in
-// the INACTIVE state.
+// the INACTIVE state. Requires permission to access the RejectCertificateTransfer
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) RejectCertificateTransfer(ctx context.Context, params *RejectCertificateTransferInput, optFns ...func(*Options)) (*RejectCertificateTransferOutput, error) {
 	if params == nil {
 		params = &RejectCertificateTransferInput{}

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns compliance details of a conformance pack for all AWS resources that are
-// monitered by conformance pack.
+// Returns compliance details of a conformance pack for all Amazon Web Services
+// resources that are monitered by conformance pack.
 func (c *Client) GetConformancePackComplianceDetails(ctx context.Context, params *GetConformancePackComplianceDetailsInput, optFns ...func(*Options)) (*GetConformancePackComplianceDetailsOutput, error) {
 	if params == nil {
 		params = &GetConformancePackComplianceDetailsInput{}
@@ -40,7 +40,7 @@ type GetConformancePackComplianceDetailsInput struct {
 	Filters *types.ConformancePackEvaluationFilters
 
 	// The maximum number of evaluation results returned on each page. If you do no
-	// specify a number, AWS Config uses the default. The default is 100.
+	// specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// The nextToken string returned in a previous request that you use to request the
@@ -145,7 +145,7 @@ var _ GetConformancePackComplianceDetailsAPIClient = (*Client)(nil)
 // GetConformancePackComplianceDetails
 type GetConformancePackComplianceDetailsPaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. If you do no
-	// specify a number, AWS Config uses the default. The default is 100.
+	// specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

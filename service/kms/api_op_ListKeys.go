@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a list of all customer master keys (CMKs) in the caller's AWS account and
-// Region. Cross-account use: No. You cannot perform this operation on a CMK in a
-// different AWS account. Required permissions: kms:ListKeys
+// Gets a list of all KMS keys in the caller's Amazon Web Services account and
+// Region. Cross-account use: No. You cannot perform this operation on a KMS key in
+// a different Amazon Web Services account. Required permissions: kms:ListKeys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations:
 //
@@ -44,10 +44,10 @@ func (c *Client) ListKeys(ctx context.Context, params *ListKeysInput, optFns ...
 type ListKeysInput struct {
 
 	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer. This value is optional. If you include a
-	// value, it must be between 1 and 1000, inclusive. If you do not include a value,
-	// it defaults to 100.
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer. This value is optional. If you include a value, it
+	// must be between 1 and 1000, inclusive. If you do not include a value, it
+	// defaults to 100.
 	Limit *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -60,7 +60,7 @@ type ListKeysInput struct {
 
 type ListKeysOutput struct {
 
-	// A list of customer master keys (CMKs).
+	// A list of KMS keys.
 	Keys []types.KeyListEntry
 
 	// When Truncated is true, this element is present and contains the value to use
@@ -149,10 +149,10 @@ var _ ListKeysAPIClient = (*Client)(nil)
 // ListKeysPaginatorOptions is the paginator options for ListKeys
 type ListKeysPaginatorOptions struct {
 	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer. This value is optional. If you include a
-	// value, it must be between 1 and 1000, inclusive. If you do not include a value,
-	// it defaults to 100.
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer. This value is optional. If you include a value, it
+	// must be between 1 and 1000, inclusive. If you do not include a value, it
+	// defaults to 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

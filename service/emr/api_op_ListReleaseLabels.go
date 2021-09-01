@@ -42,9 +42,9 @@ type ListReleaseLabelsInput struct {
 	// Specifies the next page of results. If NextToken is not specified, which is
 	// usually the case for the first request of ListReleaseLabels, the first page of
 	// results are determined by other filtering parameters or by the latest version.
-	// The ListReleaseLabels request fails if the identity (account ID) and all
-	// filtering parameters are different from the original request, or if the
-	// NextToken is expired or tampered with.
+	// The ListReleaseLabels request fails if the identity (Amazon Web Services account
+	// ID) and all filtering parameters are different from the original request, or if
+	// the NextToken is expired or tampered with.
 	NextToken *string
 
 	noSmithyDocumentSerde

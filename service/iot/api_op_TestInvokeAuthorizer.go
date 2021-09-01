@@ -13,7 +13,10 @@ import (
 
 // Tests a custom authorization behavior by invoking a specified custom authorizer.
 // Use this to test and debug the custom authorization behavior of devices that
-// connect to the AWS IoT device gateway.
+// connect to the IoT device gateway. Requires permission to access the
+// TestInvokeAuthorizer
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) TestInvokeAuthorizer(ctx context.Context, params *TestInvokeAuthorizerInput, optFns ...func(*Options)) (*TestInvokeAuthorizerOutput, error) {
 	if params == nil {
 		params = &TestInvokeAuthorizerInput{}

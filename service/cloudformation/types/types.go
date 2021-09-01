@@ -190,8 +190,8 @@ type ChangeSetSummary struct {
 // operations, specify OrganizationalUnitIds.
 type DeploymentTargets struct {
 
-	// The names of one or more accounts for which you want to deploy stack set
-	// updates.
+	// The names of one or more Amazon Web Services accounts for which you want to
+	// deploy stack set updates.
 	Accounts []string
 
 	// Returns the value of the AccountsUrl property.
@@ -329,7 +329,7 @@ type ParameterDeclaration struct {
 	Description *string
 
 	// Flag that indicates whether the parameter value is shown as plain text in logs
-	// and in the Management Console.
+	// and in the Amazon Web Services Management Console.
 	NoEcho *bool
 
 	// The criteria that CloudFormation uses to validate parameter values.
@@ -929,8 +929,8 @@ type StackEvent struct {
 // stack and the stack status.
 type StackInstance struct {
 
-	// [Self-managed permissions] The name of the account that the stack instance is
-	// associated with.
+	// [Self-managed permissions] The name of the Amazon Web Services account that the
+	// stack instance is associated with.
 	Account *string
 
 	// Status of the stack instance's actual configuration compared to the expected
@@ -966,7 +966,8 @@ type StackInstance struct {
 	// overridden in this stack instance.
 	ParameterOverrides []Parameter
 
-	// The name of the Region that the stack instance is associated with.
+	// The name of the Amazon Web Services Region that the stack instance is associated
+	// with.
 	Region *string
 
 	// The ID of the stack instance.
@@ -1056,8 +1057,8 @@ type StackInstanceFilter struct {
 // The structure that contains summary information about a stack instance.
 type StackInstanceSummary struct {
 
-	// [Self-managed permissions] The name of the account that the stack instance is
-	// associated with.
+	// [Self-managed permissions] The name of the Amazon Web Services account that the
+	// stack instance is associated with.
 	Account *string
 
 	// Status of the stack instance's actual configuration compared to the expected
@@ -1089,7 +1090,8 @@ type StackInstanceSummary struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitId *string
 
-	// The name of the Region that the stack instance is associated with.
+	// The name of the Amazon Web Services Region that the stack instance is associated
+	// with.
 	Region *string
 
 	// The ID of the stack instance.
@@ -1455,9 +1457,10 @@ type StackResourceSummary struct {
 }
 
 // A structure that contains information about a stack set. A stack set enables you
-// to provision stacks into accounts and across Regions by using a single
-// CloudFormation template. In the stack set, you specify the template to use, as
-// well as any parameters and capabilities that the template requires.
+// to provision stacks into Amazon Web Services accounts and across Regions by
+// using a single CloudFormation template. In the stack set, you specify the
+// template to use, as well as any parameters and capabilities that the template
+// requires.
 type StackSet struct {
 
 	// The Amazon Resource Number (ARN) of the IAM role used to create or update the
@@ -1474,9 +1477,10 @@ type StackSet struct {
 	AutoDeployment *AutoDeployment
 
 	// The capabilities that are allowed in the stack set. Some stack set templates
-	// might include resources that can affect permissions in your account—for example,
-	// by creating new Identity and Access Management (IAM) users. For more
-	// information, see Acknowledging IAM Resources in CloudFormation Templates.
+	// might include resources that can affect permissions in your Amazon Web Services
+	// account—for example, by creating new Identity and Access Management (IAM) users.
+	// For more information, see Acknowledging IAM Resources in CloudFormation
+	// Templates.
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html#capabilities)
 	Capabilities []Capability
 
@@ -1779,7 +1783,8 @@ type StackSetOperationPreferences struct {
 // for a given account in a given Region.
 type StackSetOperationResultSummary struct {
 
-	// [Self-managed permissions] The name of the account for this operation result.
+	// [Self-managed permissions] The name of the Amazon Web Services account for this
+	// operation result.
 	Account *string
 
 	// The results of the account gate function CloudFormation invokes, if present,
@@ -1791,7 +1796,7 @@ type StackSetOperationResultSummary struct {
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/APIReference/API_DeploymentTargets.html).
 	OrganizationalUnitId *string
 
-	// The name of the Region for this operation result.
+	// The name of the Amazon Web Services Region for this operation result.
 	Region *string
 
 	// The result status of the stack set operation for the given account in the given

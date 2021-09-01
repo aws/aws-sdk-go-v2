@@ -11,8 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the principals associated with the specified policy. Note: This API is
-// deprecated. Please use ListTargetsForPolicy instead.
+// Lists the principals associated with the specified policy. Note: This action is
+// deprecated. Please use ListTargetsForPolicy instead. Requires permission to
+// access the ListPolicyPrincipals
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) ListPolicyPrincipals(ctx context.Context, params *ListPolicyPrincipalsInput, optFns ...func(*Options)) (*ListPolicyPrincipalsOutput, error) {

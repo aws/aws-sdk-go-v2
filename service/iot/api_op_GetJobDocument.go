@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a job document.
+// Gets a job document. Requires permission to access the GetJobDocument
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) GetJobDocument(ctx context.Context, params *GetJobDocumentInput, optFns ...func(*Options)) (*GetJobDocumentOutput, error) {
 	if params == nil {
 		params = &GetJobDocumentInput{}

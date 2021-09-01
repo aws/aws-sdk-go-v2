@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the evaluation results for the specified AWS resource. The results
-// indicate which AWS Config rules were used to evaluate the resource, when each
-// rule was last used, and whether the resource complies with each rule.
+// Returns the evaluation results for the specified Amazon Web Services resource.
+// The results indicate which Config rules were used to evaluate the resource, when
+// each rule was last used, and whether the resource complies with each rule.
 func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *GetComplianceDetailsByResourceInput, optFns ...func(*Options)) (*GetComplianceDetailsByResourceOutput, error) {
 	if params == nil {
 		params = &GetComplianceDetailsByResourceInput{}
@@ -33,12 +33,14 @@ func (c *Client) GetComplianceDetailsByResource(ctx context.Context, params *Get
 //
 type GetComplianceDetailsByResourceInput struct {
 
-	// The ID of the AWS resource for which you want compliance information.
+	// The ID of the Amazon Web Services resource for which you want compliance
+	// information.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// The type of the AWS resource for which you want compliance information.
+	// The type of the Amazon Web Services resource for which you want compliance
+	// information.
 	//
 	// This member is required.
 	ResourceType *string
@@ -57,7 +59,8 @@ type GetComplianceDetailsByResourceInput struct {
 //
 type GetComplianceDetailsByResourceOutput struct {
 
-	// Indicates whether the specified AWS resource complies each AWS Config rule.
+	// Indicates whether the specified Amazon Web Services resource complies each
+	// Config rule.
 	EvaluationResults []types.EvaluationResult
 
 	// The string that you use in a subsequent request to get the next page of results

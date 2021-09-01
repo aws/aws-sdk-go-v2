@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a scheduled audit.
+// Deletes a scheduled audit. Requires permission to access the
+// DeleteScheduledAudit
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DeleteScheduledAudit(ctx context.Context, params *DeleteScheduledAuditInput, optFns ...func(*Options)) (*DeleteScheduledAuditOutput, error) {
 	if params == nil {
 		params = &DeleteScheduledAuditInput{}

@@ -14,6 +14,9 @@ import (
 )
 
 // Gets a list of audit mitigation action tasks that match the specified filters.
+// Requires permission to access the ListAuditMitigationActionsTasks
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListAuditMitigationActionsTasks(ctx context.Context, params *ListAuditMitigationActionsTasksInput, optFns ...func(*Options)) (*ListAuditMitigationActionsTasksOutput, error) {
 	if params == nil {
 		params = &ListAuditMitigationActionsTasksInput{}

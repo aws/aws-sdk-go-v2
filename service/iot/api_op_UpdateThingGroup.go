@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Update a thing group.
+// Update a thing group. Requires permission to access the UpdateThingGroup
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateThingGroup(ctx context.Context, params *UpdateThingGroupInput, optFns ...func(*Options)) (*UpdateThingGroupOutput, error) {
 	if params == nil {
 		params = &UpdateThingGroupInput{}

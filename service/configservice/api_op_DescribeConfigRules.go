@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns details about your AWS Config rules.
+// Returns details about your Config rules.
 func (c *Client) DescribeConfigRules(ctx context.Context, params *DescribeConfigRulesInput, optFns ...func(*Options)) (*DescribeConfigRulesOutput, error) {
 	if params == nil {
 		params = &DescribeConfigRulesInput{}
@@ -31,8 +31,8 @@ func (c *Client) DescribeConfigRules(ctx context.Context, params *DescribeConfig
 //
 type DescribeConfigRulesInput struct {
 
-	// The names of the AWS Config rules for which you want details. If you do not
-	// specify any names, AWS Config returns details for all your rules.
+	// The names of the Config rules for which you want details. If you do not specify
+	// any names, Config returns details for all your rules.
 	ConfigRuleNames []string
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -45,7 +45,7 @@ type DescribeConfigRulesInput struct {
 //
 type DescribeConfigRulesOutput struct {
 
-	// The details about your AWS Config rules.
+	// The details about your Config rules.
 	ConfigRules []types.ConfigRule
 
 	// The string that you use in a subsequent request to get the next page of results

@@ -37,7 +37,7 @@ func (c *Client) DescribeOrganizationConfigRuleStatuses(ctx context.Context, par
 type DescribeOrganizationConfigRuleStatusesInput struct {
 
 	// The maximum number of OrganizationConfigRuleStatuses returned on each page. If
-	// you do no specify a number, AWS Config uses the default. The default is 100.
+	// you do no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -45,8 +45,8 @@ type DescribeOrganizationConfigRuleStatusesInput struct {
 	NextToken *string
 
 	// The names of organization config rules for which you want status details. If you
-	// do not specify any names, AWS Config returns details for all your organization
-	// AWS Confg rules.
+	// do not specify any names, Config returns details for all your organization
+	// Config rules.
 	OrganizationConfigRuleNames []string
 
 	noSmithyDocumentSerde
@@ -139,7 +139,7 @@ var _ DescribeOrganizationConfigRuleStatusesAPIClient = (*Client)(nil)
 // for DescribeOrganizationConfigRuleStatuses
 type DescribeOrganizationConfigRuleStatusesPaginatorOptions struct {
 	// The maximum number of OrganizationConfigRuleStatuses returned on each page. If
-	// you do no specify a number, AWS Config uses the default. The default is 100.
+	// you do no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

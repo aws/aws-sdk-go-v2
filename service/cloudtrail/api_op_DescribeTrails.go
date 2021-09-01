@@ -70,7 +70,7 @@ type DescribeTrailsOutput struct {
 	// values for the objects exist in a trail's configuration. For example,
 	// SNSTopicName and SNSTopicARN are only returned in results if a trail is
 	// configured to send SNS notifications. Similarly, KMSKeyId only appears in
-	// results if a trail's log files are encrypted with AWS KMS-managed keys.
+	// results if a trail's log files are encrypted with KMS customer managed keys.
 	TrailList []types.Trail
 
 	// Metadata pertaining to the operation's result.

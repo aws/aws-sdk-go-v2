@@ -13,7 +13,10 @@ import (
 // Detaches the specified principal from the specified thing. A principal can be
 // X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or
 // federated identities. This call is asynchronous. It might take several seconds
-// for the detachment to propagate.
+// for the detachment to propagate. Requires permission to access the
+// DetachThingPrincipal
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DetachThingPrincipal(ctx context.Context, params *DetachThingPrincipalInput, optFns ...func(*Options)) (*DetachThingPrincipalOutput, error) {
 	if params == nil {
 		params = &DetachThingPrincipalInput{}

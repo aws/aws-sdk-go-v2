@@ -12,11 +12,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the evaluation results for the specified AWS Config rule for a specific
-// resource in a rule. The results indicate which AWS resources were evaluated by
-// the rule, when each resource was last evaluated, and whether each resource
-// complies with the rule. The results can return an empty result page. But if you
-// have a nextToken, the results are displayed on the next page.
+// Returns the evaluation results for the specified Config rule for a specific
+// resource in a rule. The results indicate which Amazon Web Services resources
+// were evaluated by the rule, when each resource was last evaluated, and whether
+// each resource complies with the rule. The results can return an empty result
+// page. But if you have a nextToken, the results are displayed on the next page.
 func (c *Client) GetAggregateComplianceDetailsByConfigRule(ctx context.Context, params *GetAggregateComplianceDetailsByConfigRuleInput, optFns ...func(*Options)) (*GetAggregateComplianceDetailsByConfigRuleOutput, error) {
 	if params == nil {
 		params = &GetAggregateComplianceDetailsByConfigRuleInput{}
@@ -44,7 +44,7 @@ type GetAggregateComplianceDetailsByConfigRuleInput struct {
 	// This member is required.
 	AwsRegion *string
 
-	// The name of the AWS Config rule for which you want compliance information.
+	// The name of the Config rule for which you want compliance information.
 	//
 	// This member is required.
 	ConfigRuleName *string
@@ -55,14 +55,14 @@ type GetAggregateComplianceDetailsByConfigRuleInput struct {
 	ConfigurationAggregatorName *string
 
 	// The resource compliance status. For the
-	// GetAggregateComplianceDetailsByConfigRuleRequest data type, AWS Config supports
-	// only the COMPLIANT and NON_COMPLIANT. AWS Config does not support the
-	// NOT_APPLICABLE and INSUFFICIENT_DATA values.
+	// GetAggregateComplianceDetailsByConfigRuleRequest data type, Config supports only
+	// the COMPLIANT and NON_COMPLIANT. Config does not support the NOT_APPLICABLE and
+	// INSUFFICIENT_DATA values.
 	ComplianceType types.ComplianceType
 
 	// The maximum number of evaluation results returned on each page. The default is
-	// 50. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// 50. You cannot specify a number greater than 100. If you specify 0, Config uses
+	// the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -162,8 +162,8 @@ var _ GetAggregateComplianceDetailsByConfigRuleAPIClient = (*Client)(nil)
 // options for GetAggregateComplianceDetailsByConfigRule
 type GetAggregateComplianceDetailsByConfigRulePaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. The default is
-	// 50. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// 50. You cannot specify a number greater than 100. If you specify 0, Config uses
+	// the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

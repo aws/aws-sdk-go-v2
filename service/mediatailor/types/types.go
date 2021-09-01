@@ -184,13 +184,21 @@ type Channel struct {
 	// This member is required.
 	Outputs []ResponseOutputItem
 
-	// The type of playback mode for this channel. Possible values: ONCE or LOOP.
+	// The type of playback mode for this channel. LINEAR - Programs play back-to-back
+	// only once. LOOP - Programs play back-to-back in an endless loop. When the last
+	// program in the schedule plays, playback loops back to the first program in the
+	// schedule.
 	//
 	// This member is required.
 	PlaybackMode *string
 
 	// The timestamp of when the channel was created.
 	CreationTime *time.Time
+
+	// Contains information about the slate used to fill gaps between programs in the
+	// schedule. You must configure FillerSlate if your channel uses an LINEAR
+	// PlaybackMode.
+	FillerSlate *SlateSource
 
 	// The timestamp of when the channel was last modified.
 	LastModifiedTime *time.Time
@@ -467,7 +475,7 @@ type PlaybackConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// The ouput configuration for this channel.
+// The output configuration for this channel.
 type RequestOutputItem struct {
 
 	// The name of the manifest for the channel. The name appears in the PlaybackUrl.
@@ -586,6 +594,9 @@ type ScheduleEntry struct {
 	// The schedule's ad break properties.
 	ScheduleAdBreaks []ScheduleAdBreak
 
+	// The type of schedule entry. Valid values: PROGRAM or FILLER_SLATE.
+	ScheduleEntryType ScheduleEntryType
+
 	noSmithyDocumentSerde
 }
 
@@ -690,13 +701,20 @@ type SpliceInsertMessage struct {
 type Transition struct {
 
 	// The position where this program will be inserted relative to the
-	// RelativeProgram. Possible values are: AFTER_PROGRAM, and BEFORE_PROGRAM.
+	// RelativePosition.
 	//
 	// This member is required.
 	RelativePosition RelativePosition
 
-	// When the program should be played. RELATIVE means that programs will be played
-	// back-to-back.
+	// Defines when the program plays in the schedule. You can set the value to
+	// ABSOLUTE or RELATIVE. ABSOLUTE - The program plays at a specific wall clock
+	// time. This setting can only be used for channels using the LINEAR PlaybackMode.
+	// Note the following considerations when using ABSOLUTE transitions: If the
+	// preceding program in the schedule has a duration that extends past the wall
+	// clock time, MediaTailor truncates the preceding program on a common segment
+	// boundary. If there are gaps in playback, MediaTailor plays the FillerSlate you
+	// configured for your linear channel. RELATIVE - The program is inserted into the
+	// schedule either before or after a program that you specify via RelativePosition.
 	//
 	// This member is required.
 	Type *string
@@ -704,6 +722,9 @@ type Transition struct {
 	// The name of the program that this program will be inserted next to, as defined
 	// by RelativePosition.
 	RelativeProgram *string
+
+	// The date and time that the program is scheduled to start, in epoch milliseconds.
+	ScheduledStartTimeMillis int64
 
 	noSmithyDocumentSerde
 }

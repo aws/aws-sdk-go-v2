@@ -13,7 +13,9 @@ import (
 )
 
 // Use this API to define a Custom Metric published by your devices to Device
-// Defender.
+// Defender. Requires permission to access the CreateCustomMetric
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateCustomMetric(ctx context.Context, params *CreateCustomMetricInput, optFns ...func(*Options)) (*CreateCustomMetricOutput, error) {
 	if params == nil {
 		params = &CreateCustomMetricInput{}
@@ -33,8 +35,8 @@ type CreateCustomMetricInput struct {
 
 	// Each custom metric must have a unique client request token. If you try to create
 	// a new custom metric that already exists with a different token, an exception
-	// occurs. If you omit this value, AWS SDKs will automatically generate a unique
-	// client request.
+	// occurs. If you omit this value, Amazon Web Services SDKs will automatically
+	// generate a unique client request.
 	//
 	// This member is required.
 	ClientRequestToken *string

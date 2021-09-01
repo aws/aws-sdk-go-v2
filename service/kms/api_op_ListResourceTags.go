@@ -11,14 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns all tags on the specified customer master key (CMK). For general
-// information about tags, including the format and syntax, see Tagging AWS
-// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
-// the Amazon Web Services General Reference. For information about using tags in
-// AWS KMS, see Tagging keys
+// Returns all tags on the specified KMS key. For general information about tags,
+// including the format and syntax, see Tagging Amazon Web Services resources
+// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+// Web Services General Reference. For information about using tags in KMS, see
+// Tagging keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/tagging-keys.html).
-// Cross-account use: No. You cannot perform this operation on a CMK in a different
-// AWS account. Required permissions: kms:ListResourceTags
+// Cross-account use: No. You cannot perform this operation on a KMS key in a
+// different Amazon Web Services account. Required permissions:
+// kms:ListResourceTags
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //
@@ -47,26 +48,25 @@ func (c *Client) ListResourceTags(ctx context.Context, params *ListResourceTagsI
 
 type ListResourceTagsInput struct {
 
-	// Gets tags on the specified customer master key (CMK). Specify the key ID or key
-	// ARN of the CMK. For example:
+	// Gets tags on the specified KMS key. Specify the key ID or key ARN of the KMS
+	// key. For example:
 	//
 	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// *
-	// Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
 
 	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer. This value is optional. If you include a
-	// value, it must be between 1 and 50, inclusive. If you do not include a value, it
-	// defaults to 50.
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer. This value is optional. If you include a value, it
+	// must be between 1 and 50, inclusive. If you do not include a value, it defaults
+	// to 50.
 	Limit *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -86,9 +86,9 @@ type ListResourceTagsOutput struct {
 	NextMarker *string
 
 	// A list of tags. Each tag consists of a tag key and a tag value. Tagging or
-	// untagging a CMK can allow or deny permission to the CMK. For details, see Using
-	// ABAC in AWS KMS
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the AWS Key
+	// untagging a KMS key can allow or deny permission to the KMS key. For details,
+	// see Using ABAC in KMS
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/abac.html) in the Key
 	// Management Service Developer Guide.
 	Tags []types.Tag
 

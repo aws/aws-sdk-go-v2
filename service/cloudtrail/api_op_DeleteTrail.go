@@ -31,8 +31,9 @@ func (c *Client) DeleteTrail(ctx context.Context, params *DeleteTrailInput, optF
 // The request that specifies the name of a trail to delete.
 type DeleteTrailInput struct {
 
-	// Specifies the name or the CloudTrail ARN of the trail to be deleted. The format
-	// of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	// Specifies the name or the CloudTrail ARN of the trail to be deleted. The
+	// following is the format of a trail ARN.
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.
 	Name *string

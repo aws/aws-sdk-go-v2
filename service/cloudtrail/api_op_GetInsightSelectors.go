@@ -18,7 +18,7 @@ import (
 // operation throws the exception InsightNotEnabledException For more information,
 // see Logging CloudTrail Insights Events for Trails
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html)
-// in the AWS CloudTrail User Guide.
+// in the CloudTrail User Guide.
 func (c *Client) GetInsightSelectors(ctx context.Context, params *GetInsightSelectorsInput, optFns ...func(*Options)) (*GetInsightSelectorsOutput, error) {
 	if params == nil {
 		params = &GetInsightSelectorsInput{}

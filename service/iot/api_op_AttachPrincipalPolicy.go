@@ -11,7 +11,10 @@ import (
 )
 
 // Attaches the specified policy to the specified principal (certificate or other
-// credential). Note: This API is deprecated. Please use AttachPolicy instead.
+// credential). Note: This action is deprecated. Please use AttachPolicy instead.
+// Requires permission to access the AttachPrincipalPolicy
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) AttachPrincipalPolicy(ctx context.Context, params *AttachPrincipalPolicyInput, optFns ...func(*Options)) (*AttachPrincipalPolicyOutput, error) {

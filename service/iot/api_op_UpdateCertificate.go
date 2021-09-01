@@ -12,9 +12,11 @@ import (
 )
 
 // Updates the status of the specified certificate. This operation is idempotent.
-// Certificates must be in the ACTIVE state to authenticate devices that use a
-// certificate to connect to AWS IoT. Within a few minutes of updating a
-// certificate from the ACTIVE state to any other state, AWS IoT disconnects all
+// Requires permission to access the UpdateCertificate
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action. Certificates must be in the ACTIVE state to authenticate devices that
+// use a certificate to connect to IoT. Within a few minutes of updating a
+// certificate from the ACTIVE state to any other state, IoT disconnects all
 // devices that used that certificate to connect. Devices cannot use a certificate
 // that is not in the ACTIVE state to reconnect.
 func (c *Client) UpdateCertificate(ctx context.Context, params *UpdateCertificateInput, optFns ...func(*Options)) (*UpdateCertificateOutput, error) {
@@ -43,7 +45,7 @@ type UpdateCertificateInput struct {
 
 	// The new status. Note: Setting the status to PENDING_TRANSFER or
 	// PENDING_ACTIVATION will result in an exception being thrown. PENDING_TRANSFER
-	// and PENDING_ACTIVATION are statuses used internally by AWS IoT. They are not
+	// and PENDING_ACTIVATION are statuses used internally by IoT. They are not
 	// intended for developer use. Note: The status value REGISTER_INACTIVE is
 	// deprecated and should not be used.
 	//

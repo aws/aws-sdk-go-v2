@@ -15,7 +15,10 @@ import (
 
 // Lists the Device Defender security profile violations discovered during the
 // given time period. You can use filters to limit the results to those alerts
-// issued for a particular security profile, behavior, or thing (device).
+// issued for a particular security profile, behavior, or thing (device). Requires
+// permission to access the ListViolationEvents
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListViolationEvents(ctx context.Context, params *ListViolationEventsInput, optFns ...func(*Options)) (*ListViolationEventsOutput, error) {
 	if params == nil {
 		params = &ListViolationEventsInput{}

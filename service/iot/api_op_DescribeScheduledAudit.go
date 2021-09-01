@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about a scheduled audit.
+// Gets information about a scheduled audit. Requires permission to access the
+// DescribeScheduledAudit
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeScheduledAudit(ctx context.Context, params *DescribeScheduledAuditInput, optFns ...func(*Options)) (*DescribeScheduledAuditOutput, error) {
 	if params == nil {
 		params = &DescribeScheduledAuditInput{}

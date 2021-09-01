@@ -1922,6 +1922,131 @@ func awsRestjson1_serializeOpDocumentCreateDynamicThingGroupInput(v *CreateDynam
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateFleetMetric struct {
+}
+
+func (*awsRestjson1_serializeOpCreateFleetMetric) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateFleetMetric) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateFleetMetricInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/fleet-metric/{metricName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateFleetMetricInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateFleetMetricInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateFleetMetricInput(v *CreateFleetMetricInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MetricName == nil || len(*v.MetricName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member metricName must not be empty")}
+	}
+	if v.MetricName != nil {
+		if err := encoder.SetURI("metricName").String(*v.MetricName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateFleetMetricInput(v *CreateFleetMetricInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AggregationField != nil {
+		ok := object.Key("aggregationField")
+		ok.String(*v.AggregationField)
+	}
+
+	if v.AggregationType != nil {
+		ok := object.Key("aggregationType")
+		if err := awsRestjson1_serializeDocumentAggregationType(v.AggregationType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("indexName")
+		ok.String(*v.IndexName)
+	}
+
+	if v.Period != nil {
+		ok := object.Key("period")
+		ok.Integer(*v.Period)
+	}
+
+	if v.QueryString != nil {
+		ok := object.Key("queryString")
+		ok.String(*v.QueryString)
+	}
+
+	if v.QueryVersion != nil {
+		ok := object.Key("queryVersion")
+		ok.String(*v.QueryVersion)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentTagList(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("unit")
+		ok.String(string(v.Unit))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateJob struct {
 }
 
@@ -4365,6 +4490,68 @@ func awsRestjson1_serializeOpHttpBindingsDeleteDynamicThingGroupInput(v *DeleteD
 	return nil
 }
 
+type awsRestjson1_serializeOpDeleteFleetMetric struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteFleetMetric) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteFleetMetric) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteFleetMetricInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/fleet-metric/{metricName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteFleetMetricInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteFleetMetricInput(v *DeleteFleetMetricInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ExpectedVersion != nil {
+		encoder.SetQuery("expectedVersion").Long(*v.ExpectedVersion)
+	}
+
+	if v.MetricName == nil || len(*v.MetricName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member metricName must not be empty")}
+	}
+	if v.MetricName != nil {
+		if err := encoder.SetURI("metricName").String(*v.MetricName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDeleteJob struct {
 }
 
@@ -6565,6 +6752,64 @@ func awsRestjson1_serializeOpHttpBindingsDescribeEventConfigurationsInput(v *Des
 	return nil
 }
 
+type awsRestjson1_serializeOpDescribeFleetMetric struct {
+}
+
+func (*awsRestjson1_serializeOpDescribeFleetMetric) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDescribeFleetMetric) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeFleetMetricInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/fleet-metric/{metricName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDescribeFleetMetricInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDescribeFleetMetricInput(v *DescribeFleetMetricInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MetricName == nil || len(*v.MetricName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member metricName must not be empty")}
+	}
+	if v.MetricName != nil {
+		if err := encoder.SetURI("metricName").String(*v.MetricName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpDescribeIndex struct {
 }
 
@@ -7898,6 +8143,96 @@ func awsRestjson1_serializeOpHttpBindingsGetBehaviorModelTrainingSummariesInput(
 
 	if v.SecurityProfileName != nil {
 		encoder.SetQuery("securityProfileName").String(*v.SecurityProfileName)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetBucketsAggregation struct {
+}
+
+func (*awsRestjson1_serializeOpGetBucketsAggregation) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetBucketsAggregation) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetBucketsAggregationInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/indices/buckets")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentGetBucketsAggregationInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetBucketsAggregationInput(v *GetBucketsAggregationInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentGetBucketsAggregationInput(v *GetBucketsAggregationInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AggregationField != nil {
+		ok := object.Key("aggregationField")
+		ok.String(*v.AggregationField)
+	}
+
+	if v.BucketsAggregationType != nil {
+		ok := object.Key("bucketsAggregationType")
+		if err := awsRestjson1_serializeDocumentBucketsAggregationType(v.BucketsAggregationType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("indexName")
+		ok.String(*v.IndexName)
+	}
+
+	if v.QueryString != nil {
+		ok := object.Key("queryString")
+		ok.String(*v.QueryString)
+	}
+
+	if v.QueryVersion != nil {
+		ok := object.Key("queryVersion")
+		ok.String(*v.QueryVersion)
 	}
 
 	return nil
@@ -9964,6 +10299,63 @@ func awsRestjson1_serializeOpHttpBindingsListDomainConfigurationsInput(v *ListDo
 
 	if len(v.ServiceType) > 0 {
 		encoder.SetQuery("serviceType").String(string(v.ServiceType))
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpListFleetMetrics struct {
+}
+
+func (*awsRestjson1_serializeOpListFleetMetrics) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpListFleetMetrics) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*ListFleetMetricsInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/fleet-metrics")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsListFleetMetricsInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsListFleetMetricsInput(v *ListFleetMetricsInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MaxResults != nil {
+		encoder.SetQuery("maxResults").Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		encoder.SetQuery("nextToken").String(*v.NextToken)
 	}
 
 	return nil
@@ -15184,6 +15576,129 @@ func awsRestjson1_serializeOpDocumentUpdateEventConfigurationsInput(v *UpdateEve
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateFleetMetric struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateFleetMetric) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateFleetMetric) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateFleetMetricInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/fleet-metric/{metricName}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateFleetMetricInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateFleetMetricInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateFleetMetricInput(v *UpdateFleetMetricInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.MetricName == nil || len(*v.MetricName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member metricName must not be empty")}
+	}
+	if v.MetricName != nil {
+		if err := encoder.SetURI("metricName").String(*v.MetricName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateFleetMetricInput(v *UpdateFleetMetricInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AggregationField != nil {
+		ok := object.Key("aggregationField")
+		ok.String(*v.AggregationField)
+	}
+
+	if v.AggregationType != nil {
+		ok := object.Key("aggregationType")
+		if err := awsRestjson1_serializeDocumentAggregationType(v.AggregationType, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Description != nil {
+		ok := object.Key("description")
+		ok.String(*v.Description)
+	}
+
+	if v.ExpectedVersion != nil {
+		ok := object.Key("expectedVersion")
+		ok.Long(*v.ExpectedVersion)
+	}
+
+	if v.IndexName != nil {
+		ok := object.Key("indexName")
+		ok.String(*v.IndexName)
+	}
+
+	if v.Period != nil {
+		ok := object.Key("period")
+		ok.Integer(*v.Period)
+	}
+
+	if v.QueryString != nil {
+		ok := object.Key("queryString")
+		ok.String(*v.QueryString)
+	}
+
+	if v.QueryVersion != nil {
+		ok := object.Key("queryVersion")
+		ok.String(*v.QueryVersion)
+	}
+
+	if len(v.Unit) > 0 {
+		ok := object.Key("unit")
+		ok.String(string(v.Unit))
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateIndexingConfiguration struct {
 }
 
@@ -16679,6 +17194,36 @@ func awsRestjson1_serializeDocumentAddThingsToThingGroupParams(v *types.AddThing
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAggregationType(v *types.AggregationType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("values")
+		if err := awsRestjson1_serializeDocumentAggregationTypeValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentAggregationTypeValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAlertTarget(v *types.AlertTarget, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -17272,6 +17817,20 @@ func awsRestjson1_serializeDocumentBillingGroupProperties(v *types.BillingGroupP
 	if v.BillingGroupDescription != nil {
 		ok := object.Key("billingGroupDescription")
 		ok.String(*v.BillingGroupDescription)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentBucketsAggregationType(v *types.BucketsAggregationType, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.TermsAggregation != nil {
+		ok := object.Key("termsAggregation")
+		if err := awsRestjson1_serializeDocumentTermsAggregation(v.TermsAggregation, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -19150,6 +19709,18 @@ func awsRestjson1_serializeDocumentTargetViolationIdsForDetectMitigationActions(
 		av := array.Value()
 		av.String(v[i])
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentTermsAggregation(v *types.TermsAggregation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.MaxBuckets != 0 {
+		ok := object.Key("maxBuckets")
+		ok.Integer(v.MaxBuckets)
+	}
+
 	return nil
 }
 

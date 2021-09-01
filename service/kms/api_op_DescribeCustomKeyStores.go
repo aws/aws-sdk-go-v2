@@ -16,26 +16,26 @@ import (
 // in the account and Region. This operation is part of the Custom Key Store
 // feature
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-// feature in AWS KMS, which combines the convenience and extensive integration of
-// AWS KMS with the isolation and control of a single-tenant key store. By default,
-// this operation returns information about all custom key stores in the account
-// and Region. To get only information about a particular custom key store, use
-// either the CustomKeyStoreName or CustomKeyStoreId parameter (but not both). To
-// determine whether the custom key store is connected to its AWS CloudHSM cluster,
-// use the ConnectionState element in the response. If an attempt to connect the
-// custom key store failed, the ConnectionState value is FAILED and the
+// feature in KMS, which combines the convenience and extensive integration of KMS
+// with the isolation and control of a single-tenant key store. By default, this
+// operation returns information about all custom key stores in the account and
+// Region. To get only information about a particular custom key store, use either
+// the CustomKeyStoreName or CustomKeyStoreId parameter (but not both). To
+// determine whether the custom key store is connected to its CloudHSM cluster, use
+// the ConnectionState element in the response. If an attempt to connect the custom
+// key store failed, the ConnectionState value is FAILED and the
 // ConnectionErrorCode element in the response indicates the cause of the failure.
 // For help interpreting the ConnectionErrorCode, see CustomKeyStoresListEntry.
 // Custom key stores have a DISCONNECTED connection state if the key store has
 // never been connected or you use the DisconnectCustomKeyStore operation to
 // disconnect it. If your custom key store state is CONNECTED but you are having
-// trouble using it, make sure that its associated AWS CloudHSM cluster is active
-// and contains the minimum number of HSMs required for the operation, if any. For
-// help repairing your custom key store, see the Troubleshooting Custom Key Stores
+// trouble using it, make sure that its associated CloudHSM cluster is active and
+// contains the minimum number of HSMs required for the operation, if any. For help
+// repairing your custom key store, see the Troubleshooting Custom Key Stores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) topic
-// in the AWS Key Management Service Developer Guide. Cross-account use: No. You
-// cannot perform this operation on a custom key store in a different AWS account.
-// Required permissions: kms:DescribeCustomKeyStores
+// in the Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a custom key store in a different Amazon Web Services
+// account. Required permissions: kms:DescribeCustomKeyStores
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations:
 //
@@ -82,8 +82,8 @@ type DescribeCustomKeyStoresInput struct {
 	CustomKeyStoreName *string
 
 	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer.
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer.
 	Limit *int32
 
 	// Use this parameter in a subsequent request after you receive a response with

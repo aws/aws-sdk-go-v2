@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Gets information about a Device Defender security profile.
+// Gets information about a Device Defender security profile. Requires permission
+// to access the DescribeSecurityProfile
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeSecurityProfile(ctx context.Context, params *DescribeSecurityProfileInput, optFns ...func(*Options)) (*DescribeSecurityProfileOutput, error) {
 	if params == nil {
 		params = &DescribeSecurityProfileInput{}

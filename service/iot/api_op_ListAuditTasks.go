@@ -14,7 +14,9 @@ import (
 )
 
 // Lists the Device Defender audits that have been performed during a given time
-// period.
+// period. Requires permission to access the ListAuditTasks
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListAuditTasks(ctx context.Context, params *ListAuditTasksInput, optFns ...func(*Options)) (*ListAuditTasksOutput, error) {
 	if params == nil {
 		params = &ListAuditTasksInput{}

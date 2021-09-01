@@ -7,8 +7,8 @@ import (
 	"time"
 )
 
-// Represents a Service Catalog AppRegistry application that is the top-level node
-// in a hierarchy of related cloud resource abstractions.
+// Represents a Amazon Web Services Service Catalog AppRegistry application that is
+// the top-level node in a hierarchy of related cloud resource abstractions.
 type Application struct {
 
 	// The Amazon resource name (ARN) that specifies the application across services.
@@ -37,7 +37,7 @@ type Application struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of a Service Catalog AppRegistry application.
+// Summary of a Amazon Web Services Service Catalog AppRegistry application.
 type ApplicationSummary struct {
 
 	// The Amazon resource name (ARN) that specifies the application across services.
@@ -63,8 +63,8 @@ type ApplicationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Represents a Service Catalog AppRegistry attribute group that is rich metadata
-// which describes an application and its components.
+// Represents a Amazon Web Services Service Catalog AppRegistry attribute group
+// that is rich metadata which describes an application and its components.
 type AttributeGroup struct {
 
 	// The Amazon resource name (ARN) that specifies the attribute group across
@@ -94,7 +94,7 @@ type AttributeGroup struct {
 	noSmithyDocumentSerde
 }
 
-// Summary of a Service Catalog AppRegistry attribute group.
+// Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.
 type AttributeGroupSummary struct {
 
 	// The Amazon resource name (ARN) that specifies the attribute group across
@@ -121,7 +121,55 @@ type AttributeGroupSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the resource.
+// The information about the service integration.
+type Integrations struct {
+
+	// The information about the resource group integration.
+	ResourceGroup *ResourceGroup
+
+	noSmithyDocumentSerde
+}
+
+// The information about the resource.
+type Resource struct {
+
+	// The Amazon resource name (ARN) of the resource.
+	Arn *string
+
+	// The time the resource was associated with the application.
+	AssociationTime *time.Time
+
+	// The service integration information about the resource.
+	Integrations *ResourceIntegrations
+
+	// The name of the resource.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The information about the resource group integration.
+type ResourceGroup struct {
+
+	// The Amazon resource name (ARN) of the resource group.
+	Arn *string
+
+	// The error message that generates when the propagation process for the resource
+	// group fails.
+	ErrorMessage *string
+
+	// The state of the propagation process for the resource group. The states
+	// includes: CREATING if the resource group is in the process of being created.
+	// CREATE_COMPLETE if the resource group was created successfully. CREATE_FAILED if
+	// the resource group failed to be created. UPDATING if the resource group is in
+	// the process of being updated. UPDATE_COMPLETE if the resource group updated
+	// successfully. UPDATE_FAILED if the resource group could not update successfully.
+	State ResourceGroupState
+
+	noSmithyDocumentSerde
+}
+
+// The information about the resource.
 type ResourceInfo struct {
 
 	// The Amazon resource name (ARN) that specifies the resource across services.
@@ -129,6 +177,15 @@ type ResourceInfo struct {
 
 	// The name of the resource.
 	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The service integration information about the resource.
+type ResourceIntegrations struct {
+
+	// The information about the integration of Resource Groups.
+	ResourceGroup *ResourceGroup
 
 	noSmithyDocumentSerde
 }

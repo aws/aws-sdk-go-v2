@@ -305,6 +305,25 @@ type DestinationDescription struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration of the dynamic partitioning mechanism that creates smaller
+// data sets from the streaming data by partitioning it based on partition keys.
+// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
+// For more information, see
+// https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+// (https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html)
+type DynamicPartitioningConfiguration struct {
+
+	// Specifies that the dynamic partitioning is enabled for this Kinesis Data
+	// Firehose delivery stream.
+	Enabled *bool
+
+	// The retry behavior in case Kinesis Data Firehose is unable to deliver data to an
+	// Amazon S3 prefix.
+	RetryOptions *RetryOptions
+
+	noSmithyDocumentSerde
+}
+
 // Describes the buffering to perform before delivering data to the Amazon ES
 // destination.
 type ElasticsearchBufferingHints struct {
@@ -580,6 +599,14 @@ type ExtendedS3DestinationConfiguration struct {
 	// format to the Parquet or ORC format before writing it to Amazon S3.
 	DataFormatConversionConfiguration *DataFormatConversionConfiguration
 
+	// The configuration of the dynamic partitioning mechanism that creates smaller
+	// data sets from the streaming data by partitioning it based on partition keys.
+	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
+	// For more information, see
+	// https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+	// (https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html)
+	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration
+
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
 	EncryptionConfiguration *EncryptionConfiguration
@@ -650,6 +677,14 @@ type ExtendedS3DestinationDescription struct {
 	// format to the Parquet or ORC format before writing it to Amazon S3.
 	DataFormatConversionConfiguration *DataFormatConversionConfiguration
 
+	// The configuration of the dynamic partitioning mechanism that creates smaller
+	// data sets from the streaming data by partitioning it based on partition keys.
+	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
+	// For more information, see
+	// https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+	// (https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html)
+	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration
+
 	// A prefix that Kinesis Data Firehose evaluates and adds to failed records before
 	// writing them to S3. This prefix appears immediately following the bucket name.
 	// For information about how to specify this prefix, see Custom Prefixes for Amazon
@@ -694,6 +729,14 @@ type ExtendedS3DestinationUpdate struct {
 	// The serializer, deserializer, and schema for converting data from the JSON
 	// format to the Parquet or ORC format before writing it to Amazon S3.
 	DataFormatConversionConfiguration *DataFormatConversionConfiguration
+
+	// The configuration of the dynamic partitioning mechanism that creates smaller
+	// data sets from the streaming data by partitioning it based on partition keys.
+	// Currently, dynamic partitioning is only supported for Amazon S3 destinations.
+	// For more information, see
+	// https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html
+	// (https://docs.aws.amazon.com/firehose/latest/dev/dynamic-partitioning.html)
+	DynamicPartitioningConfiguration *DynamicPartitioningConfiguration
 
 	// The encryption configuration. If no value is specified, the default is no
 	// encryption.
@@ -809,7 +852,10 @@ type HttpEndpointCommonAttribute struct {
 // delivers data.
 type HttpEndpointConfiguration struct {
 
-	// The URL of the HTTP endpoint selected as the destination.
+	// The URL of the HTTP endpoint selected as the destination. If you choose an HTTP
+	// endpoint as your destination, review and follow the instructions in the Appendix
+	// - HTTP Endpoint Delivery Request and Response Specifications
+	// (https://docs.aws.amazon.com/firehose/latest/dev/httpdeliveryrequestresponse.html).
 	//
 	// This member is required.
 	Url *string
@@ -1447,6 +1493,17 @@ type RedshiftRetryOptions struct {
 	noSmithyDocumentSerde
 }
 
+// The retry behavior in case Kinesis Data Firehose is unable to deliver data to an
+// Amazon S3 prefix.
+type RetryOptions struct {
+
+	// The period of time during which Kinesis Data Firehose retries to deliver data to
+	// the specified Amazon S3 prefix.
+	DurationInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
 // Describes the configuration of a destination in Amazon S3.
 type S3DestinationConfiguration struct {
 
@@ -1603,7 +1660,9 @@ type SchemaConfiguration struct {
 	CatalogId *string
 
 	// Specifies the name of the AWS Glue database that contains the schema for the
-	// output data.
+	// output data. If the SchemaConfiguration request parameter is used as part of
+	// invoking the CreateDeliveryStream API, then the DatabaseName property is
+	// required and its value must be specified.
 	DatabaseName *string
 
 	// If you don't specify an AWS Region, the default is the current Region.
@@ -1611,11 +1670,15 @@ type SchemaConfiguration struct {
 
 	// The role that Kinesis Data Firehose can use to access AWS Glue. This role must
 	// be in the same account you use for Kinesis Data Firehose. Cross-account roles
-	// aren't allowed.
+	// aren't allowed. If the SchemaConfiguration request parameter is used as part of
+	// invoking the CreateDeliveryStream API, then the RoleARN property is required and
+	// its value must be specified.
 	RoleARN *string
 
 	// Specifies the AWS Glue table that contains the column information that
-	// constitutes your data schema.
+	// constitutes your data schema. If the SchemaConfiguration request parameter is
+	// used as part of invoking the CreateDeliveryStream API, then the TableName
+	// property is required and its value must be specified.
 	TableName *string
 
 	// Specifies the table version for the output data schema. If you don't specify

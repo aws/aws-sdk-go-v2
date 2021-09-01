@@ -10,8 +10,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the specified policy from the specified certificate. Note: This API is
-// deprecated. Please use DetachPolicy instead.
+// Removes the specified policy from the specified certificate. This action is
+// deprecated. Please use DetachPolicy instead. Requires permission to access the
+// DetachPrincipalPolicy
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 //
 // Deprecated: This operation has been deprecated.
 func (c *Client) DetachPrincipalPolicy(ctx context.Context, params *DetachPrincipalPolicyInput, optFns ...func(*Options)) (*DetachPrincipalPolicyOutput, error) {

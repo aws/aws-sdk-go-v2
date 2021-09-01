@@ -30,7 +30,7 @@ func (e *ConformancePackTemplateValidationException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// Your Amazon S3 bucket policy does not permit AWS Config to write to it.
+// Your Amazon S3 bucket policy does not permit Config to write to it.
 type InsufficientDeliveryPolicyException struct {
 	Message *string
 
@@ -56,11 +56,11 @@ func (e *InsufficientDeliveryPolicyException) ErrorFault() smithy.ErrorFault {
 // Indicates one of the following errors:
 //
 // * For PutConfigRule, the rule cannot be
-// created because the IAM role assigned to AWS Config lacks permissions to perform
-// the config:Put* action.
+// created because the IAM role assigned to Config lacks permissions to perform the
+// config:Put* action.
 //
-// * For PutConfigRule, the AWS Lambda function cannot be
-// invoked. Check the function ARN, and check the function's permissions.
+// * For PutConfigRule, the Lambda function cannot be invoked.
+// Check the function ARN, and check the function's permissions.
 //
 // * For
 // PutOrganizationConfigRule, organization config rule cannot be created because
@@ -219,8 +219,8 @@ func (e *InvalidParameterValueException) ErrorMessage() string {
 func (e *InvalidParameterValueException) ErrorCode() string             { return "InvalidParameterValueException" }
 func (e *InvalidParameterValueException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS Config throws an exception if the recording group does not contain a valid
-// list of resource types. Invalid values might also be incorrectly formatted.
+// Config throws an exception if the recording group does not contain a valid list
+// of resource types. Invalid values might also be incorrectly formatted.
 type InvalidRecordingGroupException struct {
 	Message *string
 
@@ -424,9 +424,9 @@ func (e *MaxActiveResourcesExceededException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Failed to add the AWS Config rule because the account already contains the
-// maximum number of 150 rules. Consider deleting any deactivated rules before you
-// add new rules.
+// Failed to add the Config rule because the account already contains the maximum
+// number of 150 rules. Consider deleting any deactivated rules before you add new
+// rules.
 type MaxNumberOfConfigRulesExceededException struct {
 	Message *string
 
@@ -473,7 +473,7 @@ func (e *MaxNumberOfConfigurationRecordersExceededException) ErrorFault() smithy
 }
 
 // You have reached the limit (6) of the number of conformance packs in an account
-// (6 conformance pack with 25 AWS Config rules per pack).
+// (6 conformance pack with 25 Config rules per pack).
 type MaxNumberOfConformancePacksExceededException struct {
 	Message *string
 
@@ -544,8 +544,7 @@ func (e *MaxNumberOfOrganizationConfigRulesExceededException) ErrorFault() smith
 }
 
 // You have reached the limit (6) of the number of organization conformance packs
-// in an account (6 conformance pack with 25 AWS Config rules per pack per
-// account).
+// in an account (6 conformance pack with 25 Config rules per pack per account).
 type MaxNumberOfOrganizationConformancePacksExceededException struct {
 	Message *string
 
@@ -702,8 +701,8 @@ func (e *NoSuchBucketException) ErrorMessage() string {
 func (e *NoSuchBucketException) ErrorCode() string             { return "NoSuchBucketException" }
 func (e *NoSuchBucketException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One or more AWS Config rules in the request are invalid. Verify that the rule
-// names are correct and try again.
+// One or more Config rules in the request are invalid. Verify that the rule names
+// are correct and try again.
 type NoSuchConfigRuleException struct {
 	Message *string
 
@@ -722,7 +721,7 @@ func (e *NoSuchConfigRuleException) ErrorMessage() string {
 func (e *NoSuchConfigRuleException) ErrorCode() string             { return "NoSuchConfigRuleException" }
 func (e *NoSuchConfigRuleException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS Config rule that you passed in the filter does not exist.
+// Config rule that you passed in the filter does not exist.
 type NoSuchConfigRuleInConformancePackException struct {
 	Message *string
 
@@ -852,7 +851,7 @@ func (e *NoSuchOrganizationConfigRuleException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// AWS Config organization conformance pack that you passed in the filter does not
+// Config organization conformance pack that you passed in the filter does not
 // exist. For DeleteOrganizationConformancePack, you tried to delete an
 // organization conformance pack that does not exist.
 type NoSuchOrganizationConformancePackException struct {
@@ -877,7 +876,7 @@ func (e *NoSuchOrganizationConformancePackException) ErrorFault() smithy.ErrorFa
 	return smithy.FaultClient
 }
 
-// You specified an AWS Config rule without a remediation configuration.
+// You specified an Config rule without a remediation configuration.
 type NoSuchRemediationConfigurationException struct {
 	Message *string
 
@@ -952,25 +951,25 @@ func (e *NoSuchRetentionConfigurationException) ErrorFault() smithy.ErrorFault {
 // * No permission to call EnableAWSServiceAccess API
 //
 // * The
-// configuration aggregator cannot be updated because your AWS Organization
-// management account or the delegated administrator role changed. Delete this
-// aggregator and create a new one with the current AWS Organization.
+// configuration aggregator cannot be updated because your Amazon Web Services
+// Organization management account or the delegated administrator role changed.
+// Delete this aggregator and create a new one with the current Amazon Web Services
+// Organization.
 //
-// * The
-// configuration aggregator is associated with a previous AWS Organization and AWS
-// Config cannot aggregate data with current AWS Organization. Delete this
-// aggregator and create a new one with the current AWS Organization.
+// * The configuration aggregator is associated with a previous
+// Amazon Web Services Organization and Config cannot aggregate data with current
+// Amazon Web Services Organization. Delete this aggregator and create a new one
+// with the current Amazon Web Services Organization.
 //
-// * You are
-// not a registered delegated administrator for AWS Config with permissions to call
+// * You are not a registered
+// delegated administrator for Config with permissions to call
 // ListDelegatedAdministrators API. Ensure that the management account registers
-// delagated administrator for AWS Config service principle name before the
-// delegated administrator creates an aggregator.
+// delagated administrator for Config service principle name before the delegated
+// administrator creates an aggregator.
 //
-// For all OrganizationConfigRule
-// and OrganizationConformancePack APIs, AWS Config throws an exception if APIs are
-// called from member accounts. All APIs must be called from organization master
-// account.
+// For all OrganizationConfigRule and
+// OrganizationConformancePack APIs, Config throws an exception if APIs are called
+// from member accounts. All APIs must be called from organization master account.
 type OrganizationAccessDeniedException struct {
 	Message *string
 
@@ -991,8 +990,8 @@ func (e *OrganizationAccessDeniedException) ErrorCode() string {
 }
 func (e *OrganizationAccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// AWS Config resource cannot be created because your organization does not have
-// all features enabled.
+// Config resource cannot be created because your organization does not have all
+// features enabled.
 type OrganizationAllFeaturesNotEnabledException struct {
 	Message *string
 
@@ -1061,8 +1060,8 @@ func (e *OversizedConfigurationItemException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// Remediation action is in progress. You can either cancel execution in AWS
-// Systems Manager or wait and try again later.
+// Remediation action is in progress. You can either cancel execution in Amazon Web
+// Services Systems Manager or wait and try again later.
 type RemediationInProgressException struct {
 	Message *string
 
@@ -1107,31 +1106,31 @@ func (e *ResourceConcurrentModificationException) ErrorFault() smithy.ErrorFault
 
 // You see this exception in the following cases:
 //
-// * For DeleteConfigRule, AWS
-// Config is deleting this rule. Try your request again later.
+// * For DeleteConfigRule, Config
+// is deleting this rule. Try your request again later.
+//
+// * For DeleteConfigRule,
+// the rule is deleting your evaluation results. Try your request again later.
+//
+// *
+// For DeleteConfigRule, a remediation action is associated with the rule and
+// Config cannot delete this rule. Delete the remediation action associated with
+// the rule before deleting the rule and try your request again later.
 //
 // * For
-// DeleteConfigRule, the rule is deleting your evaluation results. Try your request
-// again later.
+// PutConfigOrganizationRule, organization config rule deletion is in progress. Try
+// your request again later.
 //
-// * For DeleteConfigRule, a remediation action is associated with
-// the rule and AWS Config cannot delete this rule. Delete the remediation action
-// associated with the rule before deleting the rule and try your request again
-// later.
+// * For DeleteOrganizationConfigRule, organization
+// config rule creation is in progress. Try your request again later.
 //
-// * For PutConfigOrganizationRule, organization config rule deletion is in
-// progress. Try your request again later.
+// * For
+// PutConformancePack and PutOrganizationConformancePack, a conformance pack
+// creation, update, and deletion is in progress. Try your request again later.
 //
-// * For DeleteOrganizationConfigRule,
-// organization config rule creation is in progress. Try your request again
-// later.
-//
-// * For PutConformancePack and PutOrganizationConformancePack, a
-// conformance pack creation, update, and deletion is in progress. Try your request
-// again later.
-//
-// * For DeleteConformancePack, a conformance pack creation, update,
-// and deletion is in progress. Try your request again later.
+// *
+// For DeleteConformancePack, a conformance pack creation, update, and deletion is
+// in progress. Try your request again later.
 type ResourceInUseException struct {
 	Message *string
 

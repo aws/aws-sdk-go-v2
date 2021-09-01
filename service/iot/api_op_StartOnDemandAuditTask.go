@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts an on-demand Device Defender audit.
+// Starts an on-demand Device Defender audit. Requires permission to access the
+// StartOnDemandAuditTask
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) StartOnDemandAuditTask(ctx context.Context, params *StartOnDemandAuditTaskInput, optFns ...func(*Options)) (*StartOnDemandAuditTaskOutput, error) {
 	if params == nil {
 		params = &StartOnDemandAuditTaskInput{}

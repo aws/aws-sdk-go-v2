@@ -60820,6 +60820,19 @@ func awsEc2query_deserializeDocumentImportImageTask(v **types.ImportImageTask, d
 				sv.Architecture = ptr.String(xtv)
 			}
 
+		case strings.EqualFold("bootMode", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.BootMode = types.BootModeValues(xtv)
+			}
+
 		case strings.EqualFold("description", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {
@@ -70791,6 +70804,19 @@ func awsEc2query_deserializeDocumentLaunchTemplateInstanceMetadataOptions(v **ty
 			{
 				xtv := string(val)
 				sv.HttpEndpoint = types.LaunchTemplateInstanceMetadataEndpointState(xtv)
+			}
+
+		case strings.EqualFold("httpProtocolIpv6", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				sv.HttpProtocolIpv6 = types.LaunchTemplateInstanceMetadataProtocolIpv6(xtv)
 			}
 
 		case strings.EqualFold("httpPutResponseHopLimit", t.Name.Local):

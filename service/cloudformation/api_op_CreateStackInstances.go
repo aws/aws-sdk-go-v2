@@ -34,7 +34,7 @@ func (c *Client) CreateStackInstances(ctx context.Context, params *CreateStackIn
 type CreateStackInstancesInput struct {
 
 	// The names of one or more Regions where you want to create stack instances using
-	// the specified accounts.
+	// the specified Amazon Web Services accounts.
 	//
 	// This member is required.
 	Regions []string
@@ -45,9 +45,9 @@ type CreateStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of one or more accounts that you want to
-	// create stack instances in the specified Region(s) for. You can specify Accounts
-	// or DeploymentTargets, but not both.
+	// [Self-managed permissions] The names of one or more Amazon Web Services accounts
+	// that you want to create stack instances in the specified Region(s) for. You can
+	// specify Accounts or DeploymentTargets, but not both.
 	Accounts []string
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
@@ -59,9 +59,9 @@ type CreateStackInstancesInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
+	// must be registered as a delegated administrator in the management account. For
+	// more information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
 	// in the CloudFormation User Guide.
 	CallAs types.CallAs

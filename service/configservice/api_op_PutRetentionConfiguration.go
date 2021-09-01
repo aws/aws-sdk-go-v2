@@ -12,11 +12,11 @@ import (
 )
 
 // Creates and updates the retention configuration with details about retention
-// period (number of days) that AWS Config stores your historical information. The
-// API creates the RetentionConfiguration object and names the object as default.
-// When you have a RetentionConfiguration object named default, calling the API
-// modifies the default object. Currently, AWS Config supports only one retention
-// configuration per region in your account.
+// period (number of days) that Config stores your historical information. The API
+// creates the RetentionConfiguration object and names the object as default. When
+// you have a RetentionConfiguration object named default, calling the API modifies
+// the default object. Currently, Config supports only one retention configuration
+// per region in your account.
 func (c *Client) PutRetentionConfiguration(ctx context.Context, params *PutRetentionConfigurationInput, optFns ...func(*Options)) (*PutRetentionConfigurationOutput, error) {
 	if params == nil {
 		params = &PutRetentionConfigurationInput{}
@@ -34,7 +34,7 @@ func (c *Client) PutRetentionConfiguration(ctx context.Context, params *PutReten
 
 type PutRetentionConfigurationInput struct {
 
-	// Number of days AWS Config stores your historical information. Currently, only
+	// Number of days Config stores your historical information. Currently, only
 	// applicable to the configuration item history.
 	//
 	// This member is required.

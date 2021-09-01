@@ -38,8 +38,8 @@ type AbortCriteria struct {
 	MinNumberOfExecutedThings *int32
 
 	// The minimum percentage of job execution failures that must occur to initiate the
-	// job abort. AWS IoT supports up to two digits after the decimal (for example,
-	// 10.9 and 10.99, but not 10.999).
+	// job abort. Amazon Web Services IoT Core supports up to two digits after the
+	// decimal (for example, 10.9 and 10.99, but not 10.999).
 	//
 	// This member is required.
 	ThresholdPercentage *float64
@@ -76,14 +76,14 @@ type Action struct {
 	// Send data to an HTTPS endpoint.
 	Http *HttpAction
 
-	// Sends message data to an AWS IoT Analytics channel.
+	// Sends message data to an IoT Analytics channel.
 	IotAnalytics *IotAnalyticsAction
 
-	// Sends an input to an AWS IoT Events detector.
+	// Sends an input to an IoT Events detector.
 	IotEvents *IotEventsAction
 
-	// Sends data from the MQTT message that triggered the rule to AWS IoT SiteWise
-	// asset properties.
+	// Sends data from the MQTT message that triggered the rule to IoT SiteWise asset
+	// properties.
 	IotSiteWise *IotSiteWiseAction
 
 	// Send messages to an Amazon Managed Streaming for Apache Kafka (Amazon MSK) or
@@ -167,6 +167,20 @@ type AddThingsToThingGroupParams struct {
 	// Specifies if this mitigation action can move the things that triggered the
 	// mitigation action even if they are part of one or more dynamic thing groups.
 	OverrideDynamicGroups bool
+
+	noSmithyDocumentSerde
+}
+
+// The type of aggregation queries.
+type AggregationType struct {
+
+	// The name of the aggregation type.
+	//
+	// This member is required.
+	Name AggregationTypeName
+
+	// A list of the values of aggregation types.
+	Values []string
 
 	noSmithyDocumentSerde
 }
@@ -559,8 +573,7 @@ type AuthorizerDescription struct {
 	// The UNIX timestamp of when the authorizer was last updated.
 	LastModifiedDate *time.Time
 
-	// Specifies whether AWS IoT validates the token signature in an authorization
-	// request.
+	// Specifies whether IoT validates the token signature in an authorization request.
 	SigningDisabled *bool
 
 	// The status of the authorizer.
@@ -642,8 +655,8 @@ type AwsJobAbortCriteria struct {
 	MinNumberOfExecutedThings *int32
 
 	// The minimum percentage of job execution failures that must occur to initiate the
-	// job abort. AWS IoT supports up to two digits after the decimal (for example,
-	// 10.9 and 10.99, but not 10.999).
+	// job abort. Amazon Web Services IoT Core supports up to two digits after the
+	// decimal (for example, 10.9 and 10.99, but not 10.999).
 	//
 	// This member is required.
 	ThresholdPercentage *float64
@@ -680,8 +693,9 @@ type AwsJobExponentialRolloutRate struct {
 	// This member is required.
 	IncrementFactor float64
 
-	// The criteria to initiate the increase in rate of rollout for a job. AWS IoT
-	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+	// The criteria to initiate the increase in rate of rollout for a job. Amazon Web
+	// Services IoT Core supports up to one digit after the decimal (for example, 1.5,
+	// but not 1.55).
 	//
 	// This member is required.
 	RateIncreaseCriteria *AwsJobRateIncreaseCriteria
@@ -850,6 +864,28 @@ type BillingGroupProperties struct {
 	noSmithyDocumentSerde
 }
 
+// A count of documents that meets a specific aggregation criteria.
+type Bucket struct {
+
+	// The number of documents that have the value counted for the particular bucket.
+	Count int32
+
+	// The value counted for the particular bucket.
+	KeyValue *string
+
+	noSmithyDocumentSerde
+}
+
+// The type of bucketed aggregation performed.
+type BucketsAggregationType struct {
+
+	// Performs an aggregation that will return a list of buckets. The list of buckets
+	// is a ranked list of the number of occurrences of an aggregation field value.
+	TermsAggregation *TermsAggregation
+
+	noSmithyDocumentSerde
+}
+
 // A CA certificate.
 type CACertificate struct {
 
@@ -962,10 +998,11 @@ type CertificateDescription struct {
 	// The date and time the certificate was last modified.
 	LastModifiedDate *time.Time
 
-	// The ID of the AWS account that owns the certificate.
+	// The ID of the Amazon Web Services account that owns the certificate.
 	OwnedBy *string
 
-	// The ID of the AWS account of the previous owner of the certificate.
+	// The ID of the Amazon Web Services account of the previous owner of the
+	// certificate.
 	PreviousOwnedBy *string
 
 	// The status of the certificate.
@@ -1259,7 +1296,7 @@ type DetectMitigationActionsTaskTarget struct {
 
 // The summary of a domain configuration. A domain configuration specifies custom
 // IoT-specific information about a domain. A domain configuration can be
-// associated with an AWS-managed domain (for example,
+// associated with an Amazon Web Services-managed domain (for example,
 // dbc123defghijk.iot.us-west-2.amazonaws.com), a customer managed domain, or a
 // default endpoint.
 //
@@ -1403,7 +1440,8 @@ type ElasticsearchAction struct {
 	noSmithyDocumentSerde
 }
 
-// Parameters used when defining a mitigation action that enable AWS IoT logging.
+// Parameters used when defining a mitigation action that enable Amazon Web
+// Services IoT Core logging.
 type EnableIoTLoggingParams struct {
 
 	// Specifies the type of information to be logged.
@@ -1450,8 +1488,9 @@ type ExponentialRolloutRate struct {
 	// This member is required.
 	BaseRatePerMinute *int32
 
-	// The exponential factor to increase the rate of rollout for a job. AWS IoT
-	// supports up to one digit after the decimal (for example, 1.5, but not 1.55).
+	// The exponential factor to increase the rate of rollout for a job. Amazon Web
+	// Services IoT Core supports up to one digit after the decimal (for example, 1.5,
+	// but not 1.55).
 	//
 	// This member is required.
 	IncrementFactor float64
@@ -1470,7 +1509,7 @@ type Field struct {
 	// The name of the field.
 	Name *string
 
-	// The datatype of the field.
+	// The data type of the field.
 	Type FieldType
 
 	noSmithyDocumentSerde
@@ -1518,6 +1557,18 @@ type FirehoseAction struct {
 	noSmithyDocumentSerde
 }
 
+// The name and ARN of a fleet metric.
+type FleetMetricNameAndArn struct {
+
+	// The fleet metric ARN.
+	MetricArn *string
+
+	// The fleet metric name.
+	MetricName *string
+
+	noSmithyDocumentSerde
+}
+
 // The name and ARN of a group.
 type GroupNameAndArn struct {
 
@@ -1543,12 +1594,12 @@ type HttpAction struct {
 	// The authentication method to use when sending data to an HTTPS endpoint.
 	Auth *HttpAuthorization
 
-	// The URL to which AWS IoT sends a confirmation message. The value of the
-	// confirmation URL must be a prefix of the endpoint URL. If you do not specify a
-	// confirmation URL AWS IoT uses the endpoint URL as the confirmation URL. If you
-	// use substitution templates in the confirmationUrl, you must create and enable
-	// topic rule destinations that match each possible value of the substitution
-	// template before traffic is allowed to your endpoint URL.
+	// The URL to which IoT sends a confirmation message. The value of the confirmation
+	// URL must be a prefix of the endpoint URL. If you do not specify a confirmation
+	// URL IoT uses the endpoint URL as the confirmation URL. If you use substitution
+	// templates in the confirmationUrl, you must create and enable topic rule
+	// destinations that match each possible value of the substitution template before
+	// traffic is allowed to your endpoint URL.
 	ConfirmationUrl *string
 
 	// The HTTP headers to send with the message data.
@@ -1599,8 +1650,8 @@ type HttpContext struct {
 // HTTP URL destination configuration used by the topic rule's HTTP action.
 type HttpUrlDestinationConfiguration struct {
 
-	// The URL AWS IoT uses to confirm ownership of or access to the topic rule
-	// destination URL.
+	// The URL IoT uses to confirm ownership of or access to the topic rule destination
+	// URL.
 	//
 	// This member is required.
 	ConfirmationUrl *string
@@ -1638,14 +1689,14 @@ type ImplicitDeny struct {
 	noSmithyDocumentSerde
 }
 
-// Sends message data to an AWS IoT Analytics channel.
+// Sends message data to an IoT Analytics channel.
 type IotAnalyticsAction struct {
 
 	// Whether to process the action as a batch. The default value is false. When
 	// batchMode is true and the rule SQL statement evaluates to an Array, each Array
 	// element is delivered as a separate message when passed by BatchPutMessage
 	// (https://docs.aws.amazon.com/iotanalytics/latest/APIReference/API_BatchPutMessage.html)
-	// to the AWS IoT Analytics channel. The resulting array can't have more than 100
+	// to the IoT Analytics channel. The resulting array can't have more than 100
 	// messages.
 	BatchMode *bool
 
@@ -1663,16 +1714,16 @@ type IotAnalyticsAction struct {
 	noSmithyDocumentSerde
 }
 
-// Sends an input to an AWS IoT Events detector.
+// Sends an input to an IoT Events detector.
 type IotEventsAction struct {
 
-	// The name of the AWS IoT Events input.
+	// The name of the IoT Events input.
 	//
 	// This member is required.
 	InputName *string
 
-	// The ARN of the role that grants AWS IoT permission to send an input to an AWS
-	// IoT Events detector. ("Action":"iotevents:BatchPutMessage").
+	// The ARN of the role that grants IoT permission to send an input to an IoT Events
+	// detector. ("Action":"iotevents:BatchPutMessage").
 	//
 	// This member is required.
 	RoleArn *string
@@ -1680,8 +1731,7 @@ type IotEventsAction struct {
 	// Whether to process the event actions as a batch. The default value is false.
 	// When batchMode is true, you can't specify a messageId. When batchMode is true
 	// and the rule SQL statement evaluates to an Array, each Array element is treated
-	// as a separate message when it's sent to AWS IoT Events by calling
-	// BatchPutMessage
+	// as a separate message when it's sent to IoT Events by calling BatchPutMessage
 	// (https://docs.aws.amazon.com/iotevents/latest/apireference/API_iotevents-data_BatchPutMessage.html).
 	// The resulting array can't have more than 10 messages.
 	BatchMode *bool
@@ -1689,14 +1739,14 @@ type IotEventsAction struct {
 	// The ID of the message. The default messageId is a new UUID value. When batchMode
 	// is true, you can't specify a messageId--a new UUID value will be assigned.
 	// Assign a value to this property to ensure that only one input (message) with a
-	// given messageId will be processed by an AWS IoT Events detector.
+	// given messageId will be processed by an IoT Events detector.
 	MessageId *string
 
 	noSmithyDocumentSerde
 }
 
 // Describes an action to send data from an MQTT message that triggered the rule to
-// AWS IoT SiteWise asset properties.
+// IoT SiteWise asset properties.
 type IotSiteWiseAction struct {
 
 	// A list of asset property value entries.
@@ -1704,9 +1754,9 @@ type IotSiteWiseAction struct {
 	// This member is required.
 	PutAssetPropertyValueEntries []PutAssetPropertyValueEntry
 
-	// The ARN of the role that grants AWS IoT permission to send an asset property
-	// value to AWS IoTSiteWise. ("Action": "iotsitewise:BatchPutAssetPropertyValue").
-	// The trust policy can restrict access to specific asset hierarchy paths.
+	// The ARN of the role that grants IoT permission to send an asset property value
+	// to IoT SiteWise. ("Action": "iotsitewise:BatchPutAssetPropertyValue"). The trust
+	// policy can restrict access to specific asset hierarchy paths.
 	//
 	// This member is required.
 	RoleArn *string
@@ -1755,8 +1805,8 @@ type Job struct {
 	LastUpdatedAt *time.Time
 
 	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
-	// MQTT topics that contain the value in the following format.
+	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
+	// notifications to MQTT topics that contain the value in the following format.
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
 	// namespaceId feature is in public preview.
 	NamespaceId *string
@@ -2224,8 +2274,8 @@ type MitigationActionParams struct {
 	// certificate to one or more specified thing groups, typically for quarantine.
 	AddThingsToThingGroupParams *AddThingsToThingGroupParams
 
-	// Parameters to define a mitigation action that enables AWS IoT logging at a
-	// specified level of detail.
+	// Parameters to define a mitigation action that enables Amazon Web Services IoT
+	// Core logging at a specified level of detail.
 	EnableIoTLoggingParams *EnableIoTLoggingParams
 
 	// Parameters to define a mitigation action that publishes findings to Amazon
@@ -2309,10 +2359,10 @@ type OTAUpdateInfo struct {
 	// A collection of name/value pairs
 	AdditionalParameters map[string]string
 
-	// The AWS IoT job ARN associated with the OTA update.
+	// The IoT job ARN associated with the OTA update.
 	AwsIotJobArn *string
 
-	// The AWS IoT job ID associated with the OTA update.
+	// The IoT job ID associated with the OTA update.
 	AwsIotJobId *string
 
 	// Configuration for the rollout of OTA updates.
@@ -2398,7 +2448,7 @@ type OutgoingCertificate struct {
 	// The transfer message.
 	TransferMessage *string
 
-	// The AWS account to which the transfer was made.
+	// The Amazon Web Services account to which the transfer was made.
 	TransferredTo *string
 
 	noSmithyDocumentSerde
@@ -2416,7 +2466,7 @@ type PercentPair struct {
 	noSmithyDocumentSerde
 }
 
-// Describes an AWS IoT policy.
+// Describes an IoT policy.
 type Policy struct {
 
 	// The policy ARN.
@@ -2549,7 +2599,7 @@ type PutAssetPropertyValueEntry struct {
 	// This member is required.
 	PropertyValues []AssetPropertyValue
 
-	// The ID of the AWS IoT SiteWise asset. You must specify either a propertyAlias or
+	// The ID of the IoT SiteWise asset. You must specify either a propertyAlias or
 	// both an aliasId and a propertyId. Accepts substitution templates.
 	AssetId *string
 
@@ -3072,7 +3122,7 @@ type StreamInfo struct {
 	// The date when the stream was last updated.
 	LastUpdatedAt *time.Time
 
-	// An IAM role AWS IoT assumes to access your S3 files.
+	// An IAM role IoT assumes to access your S3 files.
 	RoleArn *string
 
 	// The stream ARN.
@@ -3172,6 +3222,16 @@ type TaskStatisticsForAuditCheck struct {
 	noSmithyDocumentSerde
 }
 
+// Performs an aggregation that will return a list of buckets. The list of buckets
+// is a ranked list of the number of occurrences of an aggregation field value.
+type TermsAggregation struct {
+
+	// The number of buckets to return in the response. Default to 10.
+	MaxBuckets int32
+
+	noSmithyDocumentSerde
+}
+
 // The properties of the thing, including thing name, thing type name, and a list
 // of thing attributes.
 type ThingAttribute struct {
@@ -3197,12 +3257,15 @@ type ThingAttribute struct {
 // The connectivity status of the thing.
 type ThingConnectivity struct {
 
-	// True if the thing is connected to the AWS IoT service; false if it is not
-	// connected.
+	// True if the thing is connected to the Amazon Web Services IoT Core service;
+	// false if it is not connected.
 	Connected bool
 
+	// The reason why the client is disconnected.
+	DisconnectReason *string
+
 	// The epoch time (in milliseconds) when the thing last connected or disconnected.
-	// If the thing has been disconnected for more than a few weeks, the time value
+	// If the thing has been disconnected for approximately an hour, the time value
 	// might be missing.
 	Timestamp *int64
 
@@ -3215,7 +3278,8 @@ type ThingDocument struct {
 	// The attributes.
 	Attributes map[string]string
 
-	// Indicates whether the thing is connected to the AWS IoT service.
+	// Indicates whether the thing is connected to the Amazon Web Services IoT Core
+	// service.
 	Connectivity *ThingConnectivity
 
 	// The shadow.
@@ -3646,10 +3710,10 @@ type TopicRulePayload struct {
 	// This member is required.
 	Actions []Action
 
-	// The SQL statement used to query the topic. For more information, see AWS IoT SQL
+	// The SQL statement used to query the topic. For more information, see IoT SQL
 	// Reference
 	// (https://docs.aws.amazon.com/iot/latest/developerguide/iot-sql-reference.html)
-	// in the AWS IoT Developer Guide.
+	// in the IoT Developer Guide.
 	//
 	// This member is required.
 	Sql *string
@@ -3669,7 +3733,7 @@ type TopicRulePayload struct {
 	noSmithyDocumentSerde
 }
 
-// Data used to transfer a certificate to an AWS account.
+// Data used to transfer a certificate to an Amazon Web Services account.
 type TransferData struct {
 
 	// The date the transfer was accepted.

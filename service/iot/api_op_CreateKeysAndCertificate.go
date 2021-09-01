@@ -15,8 +15,11 @@ import (
 // public key. You can also call CreateKeysAndCertificate over MQTT from a device,
 // for more information, see Provisioning MQTT API
 // (https://docs.aws.amazon.com/iot/latest/developerguide/provision-wo-cert.html#provision-mqtt-api).
-// Note This is the only time AWS IoT issues the private key for this certificate,
-// so it is important to keep it in a secure location.
+// Note This is the only time IoT issues the private key for this certificate, so
+// it is important to keep it in a secure location. Requires permission to access
+// the CreateKeysAndCertificate
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKeysAndCertificateInput, optFns ...func(*Options)) (*CreateKeysAndCertificateOutput, error) {
 	if params == nil {
 		params = &CreateKeysAndCertificateInput{}
@@ -32,7 +35,10 @@ func (c *Client) CreateKeysAndCertificate(ctx context.Context, params *CreateKey
 	return out, nil
 }
 
-// The input for the CreateKeysAndCertificate operation.
+// The input for the CreateKeysAndCertificate operation. Requires permission to
+// access the CreateKeysAndCertificateRequest
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 type CreateKeysAndCertificateInput struct {
 
 	// Specifies whether the certificate is active.
@@ -47,8 +53,8 @@ type CreateKeysAndCertificateOutput struct {
 	// The ARN of the certificate.
 	CertificateArn *string
 
-	// The ID of the certificate. AWS IoT issues a default subject name for the
-	// certificate (for example, AWS IoT Certificate).
+	// The ID of the certificate. IoT issues a default subject name for the certificate
+	// (for example, IoT Certificate).
 	CertificateId *string
 
 	// The certificate data, in PEM format.

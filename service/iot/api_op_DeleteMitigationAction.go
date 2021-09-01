@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a defined mitigation action from your AWS account.
+// Deletes a defined mitigation action from your Amazon Web Services accounts.
+// Requires permission to access the DeleteMitigationAction
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DeleteMitigationAction(ctx context.Context, params *DeleteMitigationActionInput, optFns ...func(*Options)) (*DeleteMitigationActionOutput, error) {
 	if params == nil {
 		params = &DeleteMitigationActionInput{}

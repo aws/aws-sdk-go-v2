@@ -6,6 +6,7 @@ import (
 	"context"
 	awsmiddleware "github.com/aws/aws-sdk-go-v2/aws/middleware"
 	"github.com/aws/aws-sdk-go-v2/aws/signer/v4"
+	"github.com/aws/aws-sdk-go-v2/service/servicecatalogappregistry/types"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 	"time"
@@ -58,6 +59,10 @@ type GetApplicationOutput struct {
 
 	// The identifier of the application.
 	Id *string
+
+	// The information about the integration of the application with other services,
+	// such as Resource Groups.
+	Integrations *types.Integrations
 
 	// The ISO-8601 formatted timestamp of the moment when the application was last
 	// updated.

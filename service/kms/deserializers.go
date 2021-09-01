@@ -8708,6 +8708,15 @@ func awsAwsjson11_deserializeDocumentKeyMetadata(v **types.KeyMetadata, value in
 				sv.KeyManager = types.KeyManagerType(jtv)
 			}
 
+		case "KeySpec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeySpec to be of type string, got %T instead", value)
+				}
+				sv.KeySpec = types.KeySpec(jtv)
+			}
+
 		case "KeyState":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -10443,6 +10452,15 @@ func awsAwsjson11_deserializeOpDocumentGetPublicKeyOutput(v **GetPublicKeyOutput
 					return fmt.Errorf("expected KeyIdType to be of type string, got %T instead", value)
 				}
 				sv.KeyId = ptr.String(jtv)
+			}
+
+		case "KeySpec":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected KeySpec to be of type string, got %T instead", value)
+				}
+				sv.KeySpec = types.KeySpec(jtv)
 			}
 
 		case "KeyUsage":

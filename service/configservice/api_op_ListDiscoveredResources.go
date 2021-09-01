@@ -15,11 +15,11 @@ import (
 // Accepts a resource type and returns a list of resource identifiers for the
 // resources of that type. A resource identifier includes the resource type, ID,
 // and (if available) the custom resource name. The results consist of resources
-// that AWS Config has discovered, including those that AWS Config is not currently
+// that Config has discovered, including those that Config is not currently
 // recording. You can narrow the results to include only resources that have
 // specific resource IDs or a resource name. You can specify either resource IDs or
 // a resource name, but not both, in the same request. The response is paginated.
-// By default, AWS Config lists 100 resource identifiers on each page. You can
+// By default, Config lists 100 resource identifiers on each page. You can
 // customize this number with the limit parameter. The response includes a
 // nextToken string. To get the next page of results, run the request again and
 // specify the string for the nextToken parameter.
@@ -41,32 +41,32 @@ func (c *Client) ListDiscoveredResources(ctx context.Context, params *ListDiscov
 //
 type ListDiscoveredResourcesInput struct {
 
-	// The type of resources that you want AWS Config to list in the response.
+	// The type of resources that you want Config to list in the response.
 	//
 	// This member is required.
 	ResourceType types.ResourceType
 
-	// Specifies whether AWS Config includes deleted resources in the results. By
-	// default, deleted resources are not included.
+	// Specifies whether Config includes deleted resources in the results. By default,
+	// deleted resources are not included.
 	IncludeDeletedResources bool
 
 	// The maximum number of resource identifiers returned on each page. The default is
-	// 100. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// 100. You cannot specify a number greater than 100. If you specify 0, Config uses
+	// the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
 	// page of results in a paginated response.
 	NextToken *string
 
-	// The IDs of only those resources that you want AWS Config to list in the
-	// response. If you do not specify this parameter, AWS Config lists all resources
-	// of the specified type that it has discovered.
+	// The IDs of only those resources that you want Config to list in the response. If
+	// you do not specify this parameter, Config lists all resources of the specified
+	// type that it has discovered.
 	ResourceIds []string
 
-	// The custom name of only those resources that you want AWS Config to list in the
-	// response. If you do not specify this parameter, AWS Config lists all resources
-	// of the specified type that it has discovered.
+	// The custom name of only those resources that you want Config to list in the
+	// response. If you do not specify this parameter, Config lists all resources of
+	// the specified type that it has discovered.
 	ResourceName *string
 
 	noSmithyDocumentSerde
@@ -79,8 +79,8 @@ type ListDiscoveredResourcesOutput struct {
 	// in a paginated response.
 	NextToken *string
 
-	// The details that identify a resource that is discovered by AWS Config, including
-	// the resource type, ID, and (if available) the custom resource name.
+	// The details that identify a resource that is discovered by Config, including the
+	// resource type, ID, and (if available) the custom resource name.
 	ResourceIdentifiers []types.ResourceIdentifier
 
 	// Metadata pertaining to the operation's result.
@@ -164,8 +164,8 @@ var _ ListDiscoveredResourcesAPIClient = (*Client)(nil)
 // ListDiscoveredResources
 type ListDiscoveredResourcesPaginatorOptions struct {
 	// The maximum number of resource identifiers returned on each page. The default is
-	// 100. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// 100. You cannot specify a number greater than 100. If you specify 0, Config uses
+	// the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -10,18 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Cancels the deletion of a customer master key (CMK). When this operation
-// succeeds, the key state of the CMK is Disabled. To enable the CMK, use
-// EnableKey. For more information about scheduling and canceling deletion of a
-// CMK, see Deleting Customer Master Keys
+// Cancels the deletion of a KMS key. When this operation succeeds, the key state
+// of the KMS key is Disabled. To enable the KMS key, use EnableKey. For more
+// information about scheduling and canceling deletion of a KMS key, see Deleting
+// KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/deleting-keys.html) in
-// the AWS Key Management Service Developer Guide. The CMK that you use for this
+// the Key Management Service Developer Guide. The KMS key that you use for this
 // operation must be in a compatible key state. For details, see Key state: Effect
-// on your CMK
+// on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
-// perform this operation on a CMK in a different AWS account. Required
-// permissions: kms:CancelKeyDeletion
+// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a KMS key in a different Amazon Web Services account.
+// Required permissions: kms:CancelKeyDeletion
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations: ScheduleKeyDeletion
 func (c *Client) CancelKeyDeletion(ctx context.Context, params *CancelKeyDeletionInput, optFns ...func(*Options)) (*CancelKeyDeletionOutput, error) {
@@ -41,8 +41,8 @@ func (c *Client) CancelKeyDeletion(ctx context.Context, params *CancelKeyDeletio
 
 type CancelKeyDeletionInput struct {
 
-	// Identifies the customer master key (CMK) whose deletion is being canceled.
-	// Specify the key ID or key ARN of the CMK. For example:
+	// Identifies the KMS key whose deletion is being canceled. Specify the key ID or
+	// key ARN of the KMS key. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -51,7 +51,7 @@ type CancelKeyDeletionInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
@@ -63,7 +63,7 @@ type CancelKeyDeletionOutput struct {
 
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
-	// of the CMK whose deletion is canceled.
+	// of the KMS key whose deletion is canceled.
 	KeyId *string
 
 	// Metadata pertaining to the operation's result.

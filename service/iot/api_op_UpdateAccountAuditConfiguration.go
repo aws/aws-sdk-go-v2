@@ -13,7 +13,10 @@ import (
 
 // Configures or reconfigures the Device Defender audit settings for this account.
 // Settings include how audit notifications are sent and which audit checks are
-// enabled or disabled.
+// enabled or disabled. Requires permission to access the
+// UpdateAccountAuditConfiguration
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateAccountAuditConfiguration(ctx context.Context, params *UpdateAccountAuditConfigurationInput, optFns ...func(*Options)) (*UpdateAccountAuditConfigurationOutput, error) {
 	if params == nil {
 		params = &UpdateAccountAuditConfigurationInput{}
@@ -45,7 +48,7 @@ type UpdateAccountAuditConfigurationInput struct {
 	// Information about the targets to which audit notifications are sent.
 	AuditNotificationTargetConfigurations map[string]types.AuditNotificationTarget
 
-	// The Amazon Resource Name (ARN) of the role that grants permission to AWS IoT to
+	// The Amazon Resource Name (ARN) of the role that grants permission to IoT to
 	// access information about your devices, policies, certificates, and other items
 	// as required when performing an audit.
 	RoleArn *string

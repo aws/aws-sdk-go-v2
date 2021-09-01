@@ -14,7 +14,7 @@ import (
 
 // A remediation exception is when a specific resource is no longer considered for
 // auto-remediation. This API adds a new exception or updates an existing exception
-// for a specific resource with a specific AWS Config rule. AWS Config generates a
+// for a specific resource with a specific Config rule. Config generates a
 // remediation exception when a problem occurs executing a remediation action to a
 // specific resource. Remediation exceptions blocks auto-remediation until the
 // exception is cleared.
@@ -35,15 +35,14 @@ func (c *Client) PutRemediationExceptions(ctx context.Context, params *PutRemedi
 
 type PutRemediationExceptionsInput struct {
 
-	// The name of the AWS Config rule for which you want to create remediation
-	// exception.
+	// The name of the Config rule for which you want to create remediation exception.
 	//
 	// This member is required.
 	ConfigRuleName *string
 
 	// An exception list of resource exception keys to be processed with the current
-	// request. AWS Config adds exception for each resource key. For example, AWS
-	// Config adds 3 exceptions for 3 resource keys.
+	// request. Config adds exception for each resource key. For example, Config adds 3
+	// exceptions for 3 resource keys.
 	//
 	// This member is required.
 	ResourceKeys []types.RemediationExceptionResourceKey

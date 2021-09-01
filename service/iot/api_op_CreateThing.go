@@ -17,7 +17,10 @@ import (
 // ResourceAlreadyExistsException is thrown. This is a control plane operation. See
 // Authorization
 // (https://docs.aws.amazon.com/iot/latest/developerguide/iot-authorization.html)
-// for information about authorizing control plane actions.
+// for information about authorizing control plane actions. Requires permission to
+// access the CreateThing
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateThing(ctx context.Context, params *CreateThingInput, optFns ...func(*Options)) (*CreateThingOutput, error) {
 	if params == nil {
 		params = &CreateThingInput{}

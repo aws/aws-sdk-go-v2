@@ -12,9 +12,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns status information for each of your AWS managed Config rules. The status
-// includes information such as the last time AWS Config invoked the rule, the last
-// time AWS Config failed to invoke the rule, and the related error for the last
+// Returns status information for each of your Config managed rules. The status
+// includes information such as the last time Config invoked the rule, the last
+// time Config failed to invoke the rule, and the related error for the last
 // failure.
 func (c *Client) DescribeConfigRuleEvaluationStatus(ctx context.Context, params *DescribeConfigRuleEvaluationStatusInput, optFns ...func(*Options)) (*DescribeConfigRuleEvaluationStatusOutput, error) {
 	if params == nil {
@@ -34,17 +34,16 @@ func (c *Client) DescribeConfigRuleEvaluationStatus(ctx context.Context, params 
 //
 type DescribeConfigRuleEvaluationStatusInput struct {
 
-	// The name of the AWS managed Config rules for which you want status information.
-	// If you do not specify any names, AWS Config returns status information for all
-	// AWS managed Config rules that you use.
+	// The name of the Config managed rules for which you want status information. If
+	// you do not specify any names, Config returns status information for all Config
+	// managed rules that you use.
 	ConfigRuleNames []string
 
 	// The number of rule evaluation results that you want returned. This parameter is
 	// required if the rule limit for your account is more than the default of 150
-	// rules. For information about requesting a rule limit increase, see AWS Config
-	// Limits
+	// rules. For information about requesting a rule limit increase, see Config Limits
 	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
-	// in the AWS General Reference Guide.
+	// in the Amazon Web Services General Reference Guide.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -57,7 +56,7 @@ type DescribeConfigRuleEvaluationStatusInput struct {
 //
 type DescribeConfigRuleEvaluationStatusOutput struct {
 
-	// Status information about your AWS managed Config rules.
+	// Status information about your Config managed rules.
 	ConfigRulesEvaluationStatus []types.ConfigRuleEvaluationStatus
 
 	// The string that you use in a subsequent request to get the next page of results
@@ -143,10 +142,9 @@ var _ DescribeConfigRuleEvaluationStatusAPIClient = (*Client)(nil)
 type DescribeConfigRuleEvaluationStatusPaginatorOptions struct {
 	// The number of rule evaluation results that you want returned. This parameter is
 	// required if the rule limit for your account is more than the default of 150
-	// rules. For information about requesting a rule limit increase, see AWS Config
-	// Limits
+	// rules. For information about requesting a rule limit increase, see Config Limits
 	// (http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config)
-	// in the AWS General Reference Guide.
+	// in the Amazon Web Services General Reference Guide.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

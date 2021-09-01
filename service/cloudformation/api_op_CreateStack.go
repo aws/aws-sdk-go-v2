@@ -35,7 +35,7 @@ type CreateStackInput struct {
 	// The name that is associated with the stack. The name must be unique in the
 	// Region in which you are creating the stack. A stack name can contain only
 	// alphanumeric characters (case sensitive) and hyphens. It must start with an
-	// alphabetic character and cannot be longer than 128 characters.
+	// alphabetical character and cannot be longer than 128 characters.
 	//
 	// This member is required.
 	StackName *string
@@ -45,27 +45,27 @@ type CreateStackInput struct {
 	//
 	// *
 	// CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include
-	// resources that can affect permissions in your account; for example, by creating
-	// new Identity and Access Management (IAM) users. For those stacks, you must
-	// explicitly acknowledge this by specifying one of these capabilities. The
-	// following IAM resources require you to specify either the CAPABILITY_IAM or
-	// CAPABILITY_NAMED_IAM capability.
+	// resources that can affect permissions in your Amazon Web Services account; for
+	// example, by creating new Identity and Access Management (IAM) users. For those
+	// stacks, you must explicitly acknowledge this by specifying one of these
+	// capabilities. The following IAM resources require you to specify either the
+	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
 	//
-	// * If you have IAM resources, you can specify
-	// either capability.
+	// * If you have IAM resources,
+	// you can specify either capability.
 	//
-	// * If you have IAM resources with custom names, you must
-	// specify CAPABILITY_NAMED_IAM.
+	// * If you have IAM resources with custom
+	// names, you must specify CAPABILITY_NAMED_IAM.
 	//
-	// * If you don't specify either of these
-	// capabilities, CloudFormation returns an InsufficientCapabilities error.
+	// * If you don't specify either of
+	// these capabilities, CloudFormation returns an InsufficientCapabilities
+	// error.
 	//
-	// If your
-	// stack template contains these resources, we recommend that you review all
-	// permissions associated with them and edit their permissions if necessary.
+	// If your stack template contains these resources, we recommend that you
+	// review all permissions associated with them and edit their permissions if
+	// necessary.
 	//
-	// *
-	// AWS::IAM::AccessKey
+	// * AWS::IAM::AccessKey
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
 	//
 	// *

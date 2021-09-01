@@ -12,8 +12,8 @@ import (
 )
 
 // Creates or updates an Amazon EMR block public access configuration for your
-// account in the current Region. For more information see Configure Block Public
-// Access for Amazon EMR
+// Amazon Web Services account in the current Region. For more information see
+// Configure Block Public Access for Amazon EMR
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/configure-block-public-access.html)
 // in the Amazon EMR Management Guide.
 func (c *Client) PutBlockPublicAccessConfiguration(ctx context.Context, params *PutBlockPublicAccessConfigurationInput, optFns ...func(*Options)) (*PutBlockPublicAccessConfigurationOutput, error) {

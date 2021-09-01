@@ -2983,6 +2983,62 @@ func (m *awsAwsquery_serializeOpRegisterType) HandleSerialize(ctx context.Contex
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsquery_serializeOpRollbackStack struct {
+}
+
+func (*awsAwsquery_serializeOpRollbackStack) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsquery_serializeOpRollbackStack) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RollbackStackInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-www-form-urlencoded")
+
+	bodyWriter := bytes.NewBuffer(nil)
+	bodyEncoder := query.NewEncoder(bodyWriter)
+	body := bodyEncoder.Object()
+	body.Key("Action").String("RollbackStack")
+	body.Key("Version").String("2010-05-15")
+
+	if err := awsAwsquery_serializeOpDocumentRollbackStackInput(input, bodyEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	err = bodyEncoder.Encode()
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(bodyWriter.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsquery_serializeOpSetStackPolicy struct {
 }
 
@@ -5153,6 +5209,11 @@ func awsAwsquery_serializeOpDocumentExecuteChangeSetInput(v *ExecuteChangeSetInp
 		objectKey.String(*v.ClientRequestToken)
 	}
 
+	if v.DisableRollback != nil {
+		objectKey := object.Key("DisableRollback")
+		objectKey.Boolean(*v.DisableRollback)
+	}
+
 	if v.StackName != nil {
 		objectKey := object.Key("StackName")
 		objectKey.String(*v.StackName)
@@ -5723,6 +5784,28 @@ func awsAwsquery_serializeOpDocumentRegisterTypeInput(v *RegisterTypeInput, valu
 	return nil
 }
 
+func awsAwsquery_serializeOpDocumentRollbackStackInput(v *RollbackStackInput, value query.Value) error {
+	object := value.Object()
+	_ = object
+
+	if v.ClientRequestToken != nil {
+		objectKey := object.Key("ClientRequestToken")
+		objectKey.String(*v.ClientRequestToken)
+	}
+
+	if v.RoleARN != nil {
+		objectKey := object.Key("RoleARN")
+		objectKey.String(*v.RoleARN)
+	}
+
+	if v.StackName != nil {
+		objectKey := object.Key("StackName")
+		objectKey.String(*v.StackName)
+	}
+
+	return nil
+}
+
 func awsAwsquery_serializeOpDocumentSetStackPolicyInput(v *SetStackPolicyInput, value query.Value) error {
 	object := value.Object()
 	_ = object
@@ -5899,6 +5982,11 @@ func awsAwsquery_serializeOpDocumentUpdateStackInput(v *UpdateStackInput, value 
 	if v.ClientRequestToken != nil {
 		objectKey := object.Key("ClientRequestToken")
 		objectKey.String(*v.ClientRequestToken)
+	}
+
+	if v.DisableRollback != nil {
+		objectKey := object.Key("DisableRollback")
+		objectKey.Boolean(*v.DisableRollback)
 	}
 
 	if v.NotificationARNs != nil {

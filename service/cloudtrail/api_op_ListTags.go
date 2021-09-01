@@ -32,7 +32,7 @@ func (c *Client) ListTags(ctx context.Context, params *ListTagsInput, optFns ...
 type ListTagsInput struct {
 
 	// Specifies a list of trail ARNs whose tags will be listed. The list has a limit
-	// of 20 ARNs. The format of a trail ARN is:
+	// of 20 ARNs. The following is the format of a trail ARN.
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.

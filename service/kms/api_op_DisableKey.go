@@ -10,19 +10,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Sets the state of a customer master key (CMK) to disabled. This change
-// temporarily prevents use of the CMK for cryptographic operations
+// Sets the state of a KMS key to disabled. This change temporarily prevents use of
+// the KMS key for cryptographic operations
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations).
-// For more information about how key state affects the use of a CMK, see Key
-// state: Effect on your CMK
+// For more information about how key state affects the use of a KMS key, see Key
+// state: Effect on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide . The CMK that you use for this
+// Key Management Service Developer Guide . The KMS key that you use for this
 // operation must be in a compatible key state. For details, see Key state: Effect
-// on your CMK
+// on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
-// perform this operation on a CMK in a different AWS account. Required
-// permissions: kms:DisableKey
+// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a KMS key in a different Amazon Web Services account.
+// Required permissions: kms:DisableKey
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations: EnableKey
 func (c *Client) DisableKey(ctx context.Context, params *DisableKeyInput, optFns ...func(*Options)) (*DisableKeyOutput, error) {
@@ -42,17 +42,16 @@ func (c *Client) DisableKey(ctx context.Context, params *DisableKeyInput, optFns
 
 type DisableKeyInput struct {
 
-	// Identifies the customer master key (CMK) to disable. Specify the key ID or key
-	// ARN of the CMK. For example:
+	// Identifies the KMS key to disable. Specify the key ID or key ARN of the KMS key.
+	// For example:
 	//
 	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// *
-	// Key ARN:
+	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

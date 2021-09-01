@@ -10,18 +10,18 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Attaches a key policy to the specified customer master key (CMK). For more
-// information about key policies, see Key Policies
+// Attaches a key policy to the specified KMS key. For more information about key
+// policies, see Key Policies
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html) in the
-// AWS Key Management Service Developer Guide. For help writing and formatting a
-// JSON policy document, see the IAM JSON Policy Reference
+// Key Management Service Developer Guide. For help writing and formatting a JSON
+// policy document, see the IAM JSON Policy Reference
 // (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies.html) in
-// the IAM User Guide . For examples of adding a key policy in multiple programming
-// languages, see Setting a key policy
+// the Identity and Access Management User Guide . For examples of adding a key
+// policy in multiple programming languages, see Setting a key policy
 // (https://docs.aws.amazon.com/kms/latest/developerguide/programming-key-policies.html#put-policy)
-// in the AWS Key Management Service Developer Guide. Cross-account use: No. You
-// cannot perform this operation on a CMK in a different AWS account. Required
-// permissions: kms:PutKeyPolicy
+// in the Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a KMS key in a different Amazon Web Services account.
+// Required permissions: kms:PutKeyPolicy
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations: GetKeyPolicy
 func (c *Client) PutKeyPolicy(ctx context.Context, params *PutKeyPolicyInput, optFns ...func(*Options)) (*PutKeyPolicyOutput, error) {
@@ -41,46 +41,47 @@ func (c *Client) PutKeyPolicy(ctx context.Context, params *PutKeyPolicyInput, op
 
 type PutKeyPolicyInput struct {
 
-	// Sets the key policy on the specified customer master key (CMK). Specify the key
-	// ID or key ARN of the CMK. For example:
+	// Sets the key policy on the specified KMS key. Specify the key ID or key ARN of
+	// the KMS key. For example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// * Key ARN:
+	// * Key
+	// ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
 
-	// The key policy to attach to the CMK. The key policy must meet the following
+	// The key policy to attach to the KMS key. The key policy must meet the following
 	// criteria:
 	//
 	// * If you don't set BypassPolicyLockoutSafetyCheck to true, the key
 	// policy must allow the principal that is making the PutKeyPolicy request to make
-	// a subsequent PutKeyPolicy request on the CMK. This reduces the risk that the CMK
-	// becomes unmanageable. For more information, refer to the scenario in the Default
-	// Key Policy
+	// a subsequent PutKeyPolicy request on the KMS key. This reduces the risk that the
+	// KMS key becomes unmanageable. For more information, refer to the scenario in the
+	// Default Key Policy
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
-	// section of the AWS Key Management Service Developer Guide.
+	// section of the Key Management Service Developer Guide.
 	//
-	// * Each statement in
-	// the key policy must contain one or more principals. The principals in the key
-	// policy must exist and be visible to AWS KMS. When you create a new AWS principal
-	// (for example, an IAM user or role), you might need to enforce a delay before
-	// including the new principal in a key policy because the new principal might not
-	// be immediately visible to AWS KMS. For more information, see Changes that I make
-	// are not always immediately visible
+	// * Each statement in the
+	// key policy must contain one or more principals. The principals in the key policy
+	// must exist and be visible to KMS. When you create a new Amazon Web Services
+	// principal (for example, an IAM user or role), you might need to enforce a delay
+	// before including the new principal in a key policy because the new principal
+	// might not be immediately visible to KMS. For more information, see Changes that
+	// I make are not always immediately visible
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/troubleshoot_general.html#troubleshoot_general_eventual-consistency)
-	// in the AWS Identity and Access Management User Guide.
+	// in the Amazon Web Services Identity and Access Management User Guide.
 	//
-	// The key policy cannot
-	// exceed 32 kilobytes (32768 bytes). For more information, see Resource Quotas
+	// The key
+	// policy cannot exceed 32 kilobytes (32768 bytes). For more information, see
+	// Resource Quotas
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html) in
-	// the AWS Key Management Service Developer Guide.
+	// the Key Management Service Developer Guide.
 	//
 	// This member is required.
 	Policy *string
@@ -91,13 +92,13 @@ type PutKeyPolicyInput struct {
 	PolicyName *string
 
 	// A flag to indicate whether to bypass the key policy lockout safety check.
-	// Setting this value to true increases the risk that the CMK becomes unmanageable.
-	// Do not set this value to true indiscriminately. For more information, refer to
-	// the scenario in the Default Key Policy
+	// Setting this value to true increases the risk that the KMS key becomes
+	// unmanageable. Do not set this value to true indiscriminately. For more
+	// information, refer to the scenario in the Default Key Policy
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default-allow-root-enable-iam)
-	// section in the AWS Key Management Service Developer Guide. Use this parameter
-	// only when you intend to prevent the principal that is making the request from
-	// making a subsequent PutKeyPolicy request on the CMK. The default value is false.
+	// section in the Key Management Service Developer Guide. Use this parameter only
+	// when you intend to prevent the principal that is making the request from making
+	// a subsequent PutKeyPolicy request on the KMS key. The default value is false.
 	BypassPolicyLockoutSafetyCheck bool
 
 	noSmithyDocumentSerde

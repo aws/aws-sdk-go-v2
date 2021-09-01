@@ -15,7 +15,7 @@ type AccountAggregationSource struct {
 	// This member is required.
 	AccountIds []string
 
-	// If true, aggregate existing AWS Config regions and future regions.
+	// If true, aggregate existing Config regions and future regions.
 	AllAwsRegions bool
 
 	// The source regions being aggregated.
@@ -24,7 +24,7 @@ type AccountAggregationSource struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether an AWS Config rule is compliant based on account ID, region,
+// Indicates whether an Config rule is compliant based on account ID, region,
 // compliance, and rule name. A rule is compliant if all of the resources that the
 // rule evaluated comply with it. It is noncompliant if any of these resources do
 // not comply.
@@ -36,11 +36,11 @@ type AggregateComplianceByConfigRule struct {
 	// The source region from where the data is aggregated.
 	AwsRegion *string
 
-	// Indicates whether an AWS resource or AWS Config rule is compliant and provides
-	// the number of contributors that affect the compliance.
+	// Indicates whether an Amazon Web Services resource or Config rule is compliant
+	// and provides the number of contributors that affect the compliance.
 	Compliance *Compliance
 
-	// The name of the AWS Config rule.
+	// The name of the Config rule.
 	ConfigRuleName *string
 
 	noSmithyDocumentSerde
@@ -57,10 +57,10 @@ type AggregateComplianceByConfigRule struct {
 // INSUFFICIENT_DATA, the conformance pack shows compliant.
 type AggregateComplianceByConformancePack struct {
 
-	// The 12-digit AWS account ID of the source account.
+	// The 12-digit Amazon Web Services account ID of the source account.
 	AccountId *string
 
-	// The source AWS Region from where the data is aggregated.
+	// The source Amazon Web Services Region from where the data is aggregated.
 	AwsRegion *string
 
 	// The compliance status of the conformance pack.
@@ -76,7 +76,7 @@ type AggregateComplianceByConformancePack struct {
 // and regions in an aggregator.
 type AggregateComplianceCount struct {
 
-	// The number of compliant and noncompliant AWS Config rules.
+	// The number of compliant and noncompliant Config rules.
 	ComplianceSummary *ComplianceSummary
 
 	// The 12-digit account ID or region based on the GroupByKey value.
@@ -100,10 +100,10 @@ type AggregateConformancePackCompliance struct {
 	// The compliance status of the conformance pack.
 	ComplianceType ConformancePackComplianceType
 
-	// The number of compliant AWS Config Rules.
+	// The number of compliant Config Rules.
 	CompliantRuleCount int32
 
-	// The number of noncompliant AWS Config Rules.
+	// The number of noncompliant Config Rules.
 	NonCompliantRuleCount int32
 
 	// Total number of compliant rules, noncompliant rules, and the rules that do not
@@ -129,10 +129,10 @@ type AggregateConformancePackComplianceCount struct {
 // and the name of the conformance pack.
 type AggregateConformancePackComplianceFilters struct {
 
-	// The 12-digit AWS account ID of the source account.
+	// The 12-digit Amazon Web Services account ID of the source account.
 	AccountId *string
 
-	// The source AWS Region from where the data is aggregated.
+	// The source Amazon Web Services Region from where the data is aggregated.
 	AwsRegion *string
 
 	// The compliance status of the conformance pack.
@@ -150,7 +150,8 @@ type AggregateConformancePackComplianceSummary struct {
 	// Returns an AggregateConformancePackComplianceCount object.
 	ComplianceSummary *AggregateConformancePackComplianceCount
 
-	// Groups the result based on AWS Account ID or AWS Region.
+	// Groups the result based on Amazon Web Services account ID or Amazon Web Services
+	// Region.
 	GroupName *string
 
 	noSmithyDocumentSerde
@@ -159,10 +160,10 @@ type AggregateConformancePackComplianceSummary struct {
 // Filters the results based on account ID and region.
 type AggregateConformancePackComplianceSummaryFilters struct {
 
-	// The 12-digit AWS account ID of the source account.
+	// The 12-digit Amazon Web Services account ID of the source account.
 	AccountId *string
 
-	// The source AWS Region from where the data is aggregated.
+	// The source Amazon Web Services Region from where the data is aggregated.
 	AwsRegion *string
 
 	noSmithyDocumentSerde
@@ -174,7 +175,7 @@ type AggregatedSourceStatus struct {
 	// The region authorized to collect aggregated data.
 	AwsRegion *string
 
-	// The error code that AWS Config returned when the source account aggregation last
+	// The error code that Config returned when the source account aggregation last
 	// failed.
 	LastErrorCode *string
 
@@ -205,9 +206,9 @@ type AggregatedSourceStatus struct {
 	noSmithyDocumentSerde
 }
 
-// The details of an AWS Config evaluation for an account ID and region in an
-// aggregator. Provides the AWS resource that was evaluated, the compliance of the
-// resource, related time stamps, and supplementary information.
+// The details of an Config evaluation for an account ID and region in an
+// aggregator. Provides the Amazon Web Services resource that was evaluated, the
+// compliance of the resource, related time stamps, and supplementary information.
 type AggregateEvaluationResult struct {
 
 	// The 12-digit account ID of the source account.
@@ -221,33 +222,33 @@ type AggregateEvaluationResult struct {
 	AwsRegion *string
 
 	// The resource compliance status. For the AggregationEvaluationResult data type,
-	// AWS Config supports only the COMPLIANT and NON_COMPLIANT. AWS Config does not
-	// support the NOT_APPLICABLE and INSUFFICIENT_DATA value.
+	// Config supports only the COMPLIANT and NON_COMPLIANT. Config does not support
+	// the NOT_APPLICABLE and INSUFFICIENT_DATA value.
 	ComplianceType ComplianceType
 
-	// The time when the AWS Config rule evaluated the AWS resource.
+	// The time when the Config rule evaluated the Amazon Web Services resource.
 	ConfigRuleInvokedTime *time.Time
 
 	// Uniquely identifies the evaluation result.
 	EvaluationResultIdentifier *EvaluationResultIdentifier
 
-	// The time when AWS Config recorded the aggregate evaluation result.
+	// The time when Config recorded the aggregate evaluation result.
 	ResultRecordedTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// The details that identify a resource that is collected by AWS Config aggregator,
+// The details that identify a resource that is collected by Config aggregator,
 // including the resource type, ID, (if available) the custom resource name, the
 // source account, and source region.
 type AggregateResourceIdentifier struct {
 
-	// The ID of the AWS resource.
+	// The ID of the Amazon Web Services resource.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// The type of the AWS resource.
+	// The type of the Amazon Web Services resource.
 	//
 	// This member is required.
 	ResourceType ResourceType
@@ -262,7 +263,7 @@ type AggregateResourceIdentifier struct {
 	// This member is required.
 	SourceRegion *string
 
-	// The name of the AWS resource.
+	// The name of the Amazon Web Services resource.
 	ResourceName *string
 
 	noSmithyDocumentSerde
@@ -290,7 +291,7 @@ type AggregationAuthorization struct {
 // The detailed configuration of a specified resource.
 type BaseConfigurationItem struct {
 
-	// The 12-digit AWS account ID associated with the resource.
+	// The 12-digit Amazon Web Services account ID associated with the resource.
 	AccountId *string
 
 	// The Amazon Resource Name (ARN) of the resource.
@@ -343,10 +344,10 @@ type BaseConfigurationItem struct {
 	// The custom name of the resource, if available.
 	ResourceName *string
 
-	// The type of AWS resource.
+	// The type of Amazon Web Services resource.
 	ResourceType ResourceType
 
-	// Configuration attributes that AWS Config returns for certain resource types to
+	// Configuration attributes that Config returns for certain resource types to
 	// supplement the information returned for the configuration parameter.
 	SupplementaryConfiguration map[string]string
 
@@ -356,102 +357,103 @@ type BaseConfigurationItem struct {
 	noSmithyDocumentSerde
 }
 
-// Indicates whether an AWS resource or AWS Config rule is compliant and provides
-// the number of contributors that affect the compliance.
+// Indicates whether an Amazon Web Services resource or Config rule is compliant
+// and provides the number of contributors that affect the compliance.
 type Compliance struct {
 
-	// The number of AWS resources or AWS Config rules that cause a result of
-	// NON_COMPLIANT, up to a maximum number.
+	// The number of Amazon Web Services resources or Config rules that cause a result
+	// of NON_COMPLIANT, up to a maximum number.
 	ComplianceContributorCount *ComplianceContributorCount
 
-	// Indicates whether an AWS resource or AWS Config rule is compliant. A resource is
-	// compliant if it complies with all of the AWS Config rules that evaluate it. A
-	// resource is noncompliant if it does not comply with one or more of these rules.
-	// A rule is compliant if all of the resources that the rule evaluates comply with
-	// it. A rule is noncompliant if any of these resources do not comply. AWS Config
-	// returns the INSUFFICIENT_DATA value when no evaluation results are available for
-	// the AWS resource or AWS Config rule. For the Compliance data type, AWS Config
-	// supports only COMPLIANT, NON_COMPLIANT, and INSUFFICIENT_DATA values. AWS Config
-	// does not support the NOT_APPLICABLE value for the Compliance data type.
+	// Indicates whether an Amazon Web Services resource or Config rule is compliant. A
+	// resource is compliant if it complies with all of the Config rules that evaluate
+	// it. A resource is noncompliant if it does not comply with one or more of these
+	// rules. A rule is compliant if all of the resources that the rule evaluates
+	// comply with it. A rule is noncompliant if any of these resources do not comply.
+	// Config returns the INSUFFICIENT_DATA value when no evaluation results are
+	// available for the Amazon Web Services resource or Config rule. For the
+	// Compliance data type, Config supports only COMPLIANT, NON_COMPLIANT, and
+	// INSUFFICIENT_DATA values. Config does not support the NOT_APPLICABLE value for
+	// the Compliance data type.
 	ComplianceType ComplianceType
 
 	noSmithyDocumentSerde
 }
 
-// Indicates whether an AWS Config rule is compliant. A rule is compliant if all of
-// the resources that the rule evaluated comply with it. A rule is noncompliant if
-// any of these resources do not comply.
+// Indicates whether an Config rule is compliant. A rule is compliant if all of the
+// resources that the rule evaluated comply with it. A rule is noncompliant if any
+// of these resources do not comply.
 type ComplianceByConfigRule struct {
 
-	// Indicates whether the AWS Config rule is compliant.
+	// Indicates whether the Config rule is compliant.
 	Compliance *Compliance
 
-	// The name of the AWS Config rule.
+	// The name of the Config rule.
 	ConfigRuleName *string
 
 	noSmithyDocumentSerde
 }
 
-// Indicates whether an AWS resource that is evaluated according to one or more AWS
-// Config rules is compliant. A resource is compliant if it complies with all of
-// the rules that evaluate it. A resource is noncompliant if it does not comply
-// with one or more of these rules.
+// Indicates whether an Amazon Web Services resource that is evaluated according to
+// one or more Config rules is compliant. A resource is compliant if it complies
+// with all of the rules that evaluate it. A resource is noncompliant if it does
+// not comply with one or more of these rules.
 type ComplianceByResource struct {
 
-	// Indicates whether the AWS resource complies with all of the AWS Config rules
-	// that evaluated it.
+	// Indicates whether the Amazon Web Services resource complies with all of the
+	// Config rules that evaluated it.
 	Compliance *Compliance
 
-	// The ID of the AWS resource that was evaluated.
+	// The ID of the Amazon Web Services resource that was evaluated.
 	ResourceId *string
 
-	// The type of the AWS resource that was evaluated.
+	// The type of the Amazon Web Services resource that was evaluated.
 	ResourceType *string
 
 	noSmithyDocumentSerde
 }
 
-// The number of AWS resources or AWS Config rules responsible for the current
-// compliance of the item, up to a maximum number.
+// The number of Amazon Web Services resources or Config rules responsible for the
+// current compliance of the item, up to a maximum number.
 type ComplianceContributorCount struct {
 
 	// Indicates whether the maximum count is reached.
 	CapExceeded bool
 
-	// The number of AWS resources or AWS Config rules responsible for the current
-	// compliance of the item.
+	// The number of Amazon Web Services resources or Config rules responsible for the
+	// current compliance of the item.
 	CappedCount int32
 
 	noSmithyDocumentSerde
 }
 
-// The number of AWS Config rules or AWS resources that are compliant and
-// noncompliant.
+// The number of Config rules or Amazon Web Services resources that are compliant
+// and noncompliant.
 type ComplianceSummary struct {
 
-	// The time that AWS Config created the compliance summary.
+	// The time that Config created the compliance summary.
 	ComplianceSummaryTimestamp *time.Time
 
-	// The number of AWS Config rules or AWS resources that are compliant, up to a
-	// maximum of 25 for rules and 100 for resources.
+	// The number of Config rules or Amazon Web Services resources that are compliant,
+	// up to a maximum of 25 for rules and 100 for resources.
 	CompliantResourceCount *ComplianceContributorCount
 
-	// The number of AWS Config rules or AWS resources that are noncompliant, up to a
-	// maximum of 25 for rules and 100 for resources.
+	// The number of Config rules or Amazon Web Services resources that are
+	// noncompliant, up to a maximum of 25 for rules and 100 for resources.
 	NonCompliantResourceCount *ComplianceContributorCount
 
 	noSmithyDocumentSerde
 }
 
-// The number of AWS resources of a specific type that are compliant or
-// noncompliant, up to a maximum of 100 for each.
+// The number of Amazon Web Services resources of a specific type that are
+// compliant or noncompliant, up to a maximum of 100 for each.
 type ComplianceSummaryByResourceType struct {
 
-	// The number of AWS resources that are compliant or noncompliant, up to a maximum
-	// of 100 for each.
+	// The number of Amazon Web Services resources that are compliant or noncompliant,
+	// up to a maximum of 100 for each.
 	ComplianceSummary *ComplianceSummary
 
-	// The type of AWS resource.
+	// The type of Amazon Web Services resource.
 	ResourceType *string
 
 	noSmithyDocumentSerde
@@ -483,47 +485,48 @@ type ConfigExportDeliveryInfo struct {
 	noSmithyDocumentSerde
 }
 
-// An AWS Config rule represents an AWS Lambda function that you create for a
-// custom rule or a predefined function for an AWS managed rule. The function
-// evaluates configuration items to assess whether your AWS resources comply with
-// your desired configurations. This function can run when AWS Config detects a
-// configuration change to an AWS resource and at a periodic frequency that you
-// choose (for example, every 24 hours). You can use the AWS CLI and AWS SDKs if
-// you want to create a rule that triggers evaluations for your resources when AWS
-// Config delivers the configuration snapshot. For more information, see
-// ConfigSnapshotDeliveryProperties. For more information about developing and
-// using AWS Config rules, see Evaluating AWS Resource Configurations with AWS
-// Config
+// An Config rule represents an Lambda function that you create for a custom rule
+// or a predefined function for an Config managed rule. The function evaluates
+// configuration items to assess whether your Amazon Web Services resources comply
+// with your desired configurations. This function can run when Config detects a
+// configuration change to an Amazon Web Services resource and at a periodic
+// frequency that you choose (for example, every 24 hours). You can use the Amazon
+// Web Services CLI and Amazon Web Services SDKs if you want to create a rule that
+// triggers evaluations for your resources when Config delivers the configuration
+// snapshot. For more information, see ConfigSnapshotDeliveryProperties. For more
+// information about developing and using Config rules, see Evaluating Amazon Web
+// Services resource Configurations with Config
 // (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config.html)
-// in the AWS Config Developer Guide.
+// in the Config Developer Guide.
 type ConfigRule struct {
 
-	// Provides the rule owner (AWS or customer), the rule identifier, and the
-	// notifications that cause the function to evaluate your AWS resources.
+	// Provides the rule owner (Amazon Web Services or customer), the rule identifier,
+	// and the notifications that cause the function to evaluate your Amazon Web
+	// Services resources.
 	//
 	// This member is required.
 	Source *Source
 
-	// The Amazon Resource Name (ARN) of the AWS Config rule.
+	// The Amazon Resource Name (ARN) of the Config rule.
 	ConfigRuleArn *string
 
-	// The ID of the AWS Config rule.
+	// The ID of the Config rule.
 	ConfigRuleId *string
 
-	// The name that you assign to the AWS Config rule. The name is required if you are
+	// The name that you assign to the Config rule. The name is required if you are
 	// adding a new rule.
 	ConfigRuleName *string
 
-	// Indicates whether the AWS Config rule is active or is currently being deleted by
-	// AWS Config. It can also indicate the evaluation status for the AWS Config rule.
-	// AWS Config sets the state of the rule to EVALUATING temporarily after you use
-	// the StartConfigRulesEvaluation request to evaluate your resources against the
-	// AWS Config rule. AWS Config sets the state of the rule to DELETING_RESULTS
-	// temporarily after you use the DeleteEvaluationResults request to delete the
-	// current evaluation results for the AWS Config rule. AWS Config temporarily sets
-	// the state of a rule to DELETING after you use the DeleteConfigRule request to
-	// delete the rule. After AWS Config deletes the rule, the rule and all of its
-	// evaluations are erased and are no longer available.
+	// Indicates whether the Config rule is active or is currently being deleted by
+	// Config. It can also indicate the evaluation status for the Config rule. Config
+	// sets the state of the rule to EVALUATING temporarily after you use the
+	// StartConfigRulesEvaluation request to evaluate your resources against the Config
+	// rule. Config sets the state of the rule to DELETING_RESULTS temporarily after
+	// you use the DeleteEvaluationResults request to delete the current evaluation
+	// results for the Config rule. Config temporarily sets the state of a rule to
+	// DELETING after you use the DeleteConfigRule request to delete the rule. After
+	// Config deletes the rule, the rule and all of its evaluations are erased and are
+	// no longer available.
 	ConfigRuleState ConfigRuleState
 
 	// Service principal name of the service that created the rule. The field is
@@ -531,25 +534,25 @@ type ConfigRule struct {
 	// empty if you create your own rule.
 	CreatedBy *string
 
-	// The description that you provide for the AWS Config rule.
+	// The description that you provide for the Config rule.
 	Description *string
 
-	// A string, in JSON format, that is passed to the AWS Config rule Lambda function.
+	// A string, in JSON format, that is passed to the Config rule Lambda function.
 	InputParameters *string
 
-	// The maximum frequency with which AWS Config runs evaluations for a rule. You can
+	// The maximum frequency with which Config runs evaluations for a rule. You can
 	// specify a value for MaximumExecutionFrequency when:
 	//
-	// * You are using an AWS
+	// * You are using an Config
 	// managed rule that is triggered at a periodic frequency.
 	//
 	// * Your custom rule is
-	// triggered when AWS Config delivers the configuration snapshot. For more
-	// information, see ConfigSnapshotDeliveryProperties.
+	// triggered when Config delivers the configuration snapshot. For more information,
+	// see ConfigSnapshotDeliveryProperties.
 	//
-	// By default, rules with a
-	// periodic trigger are evaluated every 24 hours. To change the frequency, specify
-	// a valid value for the MaximumExecutionFrequency parameter.
+	// By default, rules with a periodic trigger
+	// are evaluated every 24 hours. To change the frequency, specify a valid value for
+	// the MaximumExecutionFrequency parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency
 
 	// Defines which resources can trigger an evaluation for the rule. The scope can
@@ -573,12 +576,12 @@ type ConfigRuleComplianceFilters struct {
 	// The source region where the data is aggregated.
 	AwsRegion *string
 
-	// The rule compliance status. For the ConfigRuleComplianceFilters data type, AWS
-	// Config supports only COMPLIANT and NON_COMPLIANT. AWS Config does not support
-	// the NOT_APPLICABLE and the INSUFFICIENT_DATA values.
+	// The rule compliance status. For the ConfigRuleComplianceFilters data type,
+	// Config supports only COMPLIANT and NON_COMPLIANT. Config does not support the
+	// NOT_APPLICABLE and the INSUFFICIENT_DATA values.
 	ComplianceType ComplianceType
 
-	// The name of the AWS Config rule.
+	// The name of the Config rule.
 	ConfigRuleName *string
 
 	noSmithyDocumentSerde
@@ -596,103 +599,102 @@ type ConfigRuleComplianceSummaryFilters struct {
 	noSmithyDocumentSerde
 }
 
-// Status information for your AWS managed Config rules. The status includes
+// Status information for your Config managed rules. The status includes
 // information such as the last time the rule ran, the last time it failed, and the
 // related error for the last failure. This action does not return status
-// information about custom AWS Config rules.
+// information about custom Config rules.
 type ConfigRuleEvaluationStatus struct {
 
-	// The Amazon Resource Name (ARN) of the AWS Config rule.
+	// The Amazon Resource Name (ARN) of the Config rule.
 	ConfigRuleArn *string
 
-	// The ID of the AWS Config rule.
+	// The ID of the Config rule.
 	ConfigRuleId *string
 
-	// The name of the AWS Config rule.
+	// The name of the Config rule.
 	ConfigRuleName *string
 
-	// The time that you first activated the AWS Config rule.
+	// The time that you first activated the Config rule.
 	FirstActivatedTime *time.Time
 
-	// Indicates whether AWS Config has evaluated your resources against the rule at
-	// least once.
+	// Indicates whether Config has evaluated your resources against the rule at least
+	// once.
 	//
-	// * true - AWS Config has evaluated your AWS resources against the
-	// rule at least once.
+	// * true - Config has evaluated your Amazon Web Services resources against
+	// the rule at least once.
 	//
-	// * false - AWS Config has not once finished evaluating your
-	// AWS resources against the rule.
+	// * false - Config has not once finished evaluating your
+	// Amazon Web Services resources against the rule.
 	FirstEvaluationStarted bool
 
-	// The time that you last turned off the AWS Config rule.
+	// The time that you last turned off the Config rule.
 	LastDeactivatedTime *time.Time
 
-	// The error code that AWS Config returned when the rule last failed.
+	// The error code that Config returned when the rule last failed.
 	LastErrorCode *string
 
-	// The error message that AWS Config returned when the rule last failed.
+	// The error message that Config returned when the rule last failed.
 	LastErrorMessage *string
 
-	// The time that AWS Config last failed to evaluate your AWS resources against the
-	// rule.
+	// The time that Config last failed to evaluate your Amazon Web Services resources
+	// against the rule.
 	LastFailedEvaluationTime *time.Time
 
-	// The time that AWS Config last failed to invoke the AWS Config rule to evaluate
-	// your AWS resources.
+	// The time that Config last failed to invoke the Config rule to evaluate your
+	// Amazon Web Services resources.
 	LastFailedInvocationTime *time.Time
 
-	// The time that AWS Config last successfully evaluated your AWS resources against
-	// the rule.
+	// The time that Config last successfully evaluated your Amazon Web Services
+	// resources against the rule.
 	LastSuccessfulEvaluationTime *time.Time
 
-	// The time that AWS Config last successfully invoked the AWS Config rule to
-	// evaluate your AWS resources.
+	// The time that Config last successfully invoked the Config rule to evaluate your
+	// Amazon Web Services resources.
 	LastSuccessfulInvocationTime *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Provides options for how often AWS Config delivers configuration snapshots to
-// the Amazon S3 bucket in your delivery channel. The frequency for a rule that
-// triggers evaluations for your resources when AWS Config delivers the
-// configuration snapshot is set by one of two values, depending on which is less
-// frequent:
-//
-// * The value for the deliveryFrequency parameter within the delivery
-// channel configuration, which sets how often AWS Config delivers configuration
-// snapshots. This value also sets how often AWS Config invokes evaluations for AWS
-// Config rules.
-//
-// * The value for the MaximumExecutionFrequency parameter, which
-// sets the maximum frequency with which AWS Config invokes evaluations for the
-// rule. For more information, see ConfigRule.
-//
-// If the deliveryFrequency value is
-// less frequent than the MaximumExecutionFrequency value for a rule, AWS Config
-// invokes the rule only as often as the deliveryFrequency value.
-//
-// * For example,
-// you want your rule to run evaluations when AWS Config delivers the configuration
-// snapshot.
-//
-// * You specify the MaximumExecutionFrequency value for Six_Hours.
+// Provides options for how often Config delivers configuration snapshots to the
+// Amazon S3 bucket in your delivery channel. The frequency for a rule that
+// triggers evaluations for your resources when Config delivers the configuration
+// snapshot is set by one of two values, depending on which is less frequent:
 //
 // *
-// You then specify the delivery channel deliveryFrequency value for
-// TwentyFour_Hours.
+// The value for the deliveryFrequency parameter within the delivery channel
+// configuration, which sets how often Config delivers configuration snapshots.
+// This value also sets how often Config invokes evaluations for Config rules.
 //
-// * Because the value for deliveryFrequency is less frequent
-// than MaximumExecutionFrequency, AWS Config invokes evaluations for the rule
-// every 24 hours.
+// *
+// The value for the MaximumExecutionFrequency parameter, which sets the maximum
+// frequency with which Config invokes evaluations for the rule. For more
+// information, see ConfigRule.
 //
-// You should set the MaximumExecutionFrequency value to be at
-// least as frequent as the deliveryFrequency value. You can view the
-// deliveryFrequency value by using the DescribeDeliveryChannnels action. To update
-// the deliveryFrequency with which AWS Config delivers your configuration
-// snapshots, use the PutDeliveryChannel action.
+// If the deliveryFrequency value is less frequent
+// than the MaximumExecutionFrequency value for a rule, Config invokes the rule
+// only as often as the deliveryFrequency value.
+//
+// * For example, you want your rule
+// to run evaluations when Config delivers the configuration snapshot.
+//
+// * You
+// specify the MaximumExecutionFrequency value for Six_Hours.
+//
+// * You then specify
+// the delivery channel deliveryFrequency value for TwentyFour_Hours.
+//
+// * Because
+// the value for deliveryFrequency is less frequent than MaximumExecutionFrequency,
+// Config invokes evaluations for the rule every 24 hours.
+//
+// You should set the
+// MaximumExecutionFrequency value to be at least as frequent as the
+// deliveryFrequency value. You can view the deliveryFrequency value by using the
+// DescribeDeliveryChannnels action. To update the deliveryFrequency with which
+// Config delivers your configuration snapshots, use the PutDeliveryChannel action.
 type ConfigSnapshotDeliveryProperties struct {
 
-	// The frequency with which AWS Config delivers configuration snapshots.
+	// The frequency with which Config delivers configuration snapshots.
 	DeliveryFrequency MaximumExecutionFrequency
 
 	noSmithyDocumentSerde
@@ -711,8 +713,8 @@ type ConfigStreamDeliveryInfo struct {
 	// Status of the last attempted delivery. Note Providing an SNS topic on a
 	// DeliveryChannel
 	// (https://docs.aws.amazon.com/config/latest/APIReference/API_DeliveryChannel.html)
-	// for AWS Config is optional. If the SNS delivery is turned off, the last status
-	// will be Not_Applicable.
+	// for Config is optional. If the SNS delivery is turned off, the last status will
+	// be Not_Applicable.
 	LastStatus DeliveryStatus
 
 	// The time from the last status change.
@@ -734,7 +736,7 @@ type ConfigurationAggregator struct {
 	// The name of the aggregator.
 	ConfigurationAggregatorName *string
 
-	// AWS service that created the configuration aggregator.
+	// Amazon Web Services service that created the configuration aggregator.
 	CreatedBy *string
 
 	// The time stamp when the configuration aggregator was created.
@@ -752,7 +754,7 @@ type ConfigurationAggregator struct {
 // A list that contains detailed configurations of a specified resource.
 type ConfigurationItem struct {
 
-	// The 12-digit AWS account ID associated with the resource.
+	// The 12-digit Amazon Web Services account ID associated with the resource.
 	AccountId *string
 
 	// Amazon Resource Name (ARN) associated with the resource.
@@ -803,16 +805,16 @@ type ConfigurationItem struct {
 
 	// A list of CloudTrail event IDs. A populated field indicates that the current
 	// configuration was initiated by the events recorded in the CloudTrail log. For
-	// more information about CloudTrail, see What Is AWS CloudTrail
+	// more information about CloudTrail, see What Is CloudTrail
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/what_is_cloud_trail_top_level.html).
 	// An empty field indicates that the current configuration was not initiated by any
 	// event. As of Version 1.3, the relatedEvents field is empty. You can access the
 	// LookupEvents API
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/APIReference/API_LookupEvents.html)
-	// in the AWS CloudTrail API Reference to retrieve the events for the resource.
+	// in the CloudTrail API Reference to retrieve the events for the resource.
 	RelatedEvents []string
 
-	// A list of related AWS resources.
+	// A list of related Amazon Web Services resources.
 	Relationships []Relationship
 
 	// The time stamp when the resource was created.
@@ -824,10 +826,10 @@ type ConfigurationItem struct {
 	// The custom name of the resource, if available.
 	ResourceName *string
 
-	// The type of AWS resource.
+	// The type of Amazon Web Services resource.
 	ResourceType ResourceType
 
-	// Configuration attributes that AWS Config returns for certain resource types to
+	// Configuration attributes that Config returns for certain resource types to
 	// supplement the information returned for the configuration parameter.
 	SupplementaryConfiguration map[string]string
 
@@ -840,21 +842,21 @@ type ConfigurationItem struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents the recording of configuration changes of an AWS
-// resource.
+// An object that represents the recording of configuration changes of an Amazon
+// Web Services resource.
 type ConfigurationRecorder struct {
 
-	// The name of the recorder. By default, AWS Config automatically assigns the name
+	// The name of the recorder. By default, Config automatically assigns the name
 	// "default" when creating the configuration recorder. You cannot change the
 	// assigned name.
 	Name *string
 
-	// Specifies the types of AWS resources for which AWS Config records configuration
-	// changes.
+	// Specifies the types of Amazon Web Services resources for which Config records
+	// configuration changes.
 	RecordingGroup *RecordingGroup
 
-	// Amazon Resource Name (ARN) of the IAM role used to describe the AWS resources
-	// associated with the account.
+	// Amazon Resource Name (ARN) of the IAM role used to describe the Amazon Web
+	// Services resources associated with the account.
 	RoleARN *string
 
 	noSmithyDocumentSerde
@@ -890,14 +892,14 @@ type ConfigurationRecorderStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Filters the conformance pack by compliance types and AWS Config rule names.
+// Filters the conformance pack by compliance types and Config rule names.
 type ConformancePackComplianceFilters struct {
 
 	// Filters the results by compliance. The allowed values are COMPLIANT and
 	// NON_COMPLIANT. INSUFFICIENT_DATA is not supported.
 	ComplianceType ConformancePackComplianceType
 
-	// Filters the results by AWS Config rule names.
+	// Filters the results by Config rule names.
 	ConfigRuleNames []string
 
 	noSmithyDocumentSerde
@@ -920,7 +922,7 @@ type ConformancePackComplianceSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Returns details of a conformance pack. A conformance pack is a collection of AWS
+// Returns details of a conformance pack. A conformance pack is a collection of
 // Config rules and remediation actions that can be easily deployed in an account
 // and a region.
 type ConformancePackDetail struct {
@@ -943,11 +945,11 @@ type ConformancePackDetail struct {
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []ConformancePackInputParameter
 
-	// AWS service that created the conformance pack.
+	// Amazon Web Services service that created the conformance pack.
 	CreatedBy *string
 
-	// Amazon S3 bucket where AWS Config stores conformance pack templates. This field
-	// is optional.
+	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
+	// This field is optional.
 	DeliveryS3Bucket *string
 
 	// The prefix for the Amazon S3 bucket. This field is optional.
@@ -959,15 +961,15 @@ type ConformancePackDetail struct {
 	noSmithyDocumentSerde
 }
 
-// Filters a conformance pack by AWS Config rule names, compliance types, AWS
-// resource types, and resource IDs.
+// Filters a conformance pack by Config rule names, compliance types, Amazon Web
+// Services resource types, and resource IDs.
 type ConformancePackEvaluationFilters struct {
 
 	// Filters the results by compliance. The allowed values are COMPLIANT and
 	// NON_COMPLIANT. INSUFFICIENT_DATA is not supported.
 	ComplianceType ConformancePackComplianceType
 
-	// Filters the results by AWS Config rule names.
+	// Filters the results by Config rule names.
 	ConfigRuleNames []string
 
 	// Filters the results by resource IDs. This is valid only when you provide
@@ -980,9 +982,9 @@ type ConformancePackEvaluationFilters struct {
 	noSmithyDocumentSerde
 }
 
-// The details of a conformance pack evaluation. Provides AWS Config rule and AWS
-// resource type that was evaluated, the compliance of the conformance pack,
-// related time stamps, and supplementary information.
+// The details of a conformance pack evaluation. Provides Config rule and Amazon
+// Web Services resource type that was evaluated, the compliance of the conformance
+// pack, related time stamps, and supplementary information.
 type ConformancePackEvaluationResult struct {
 
 	// The compliance type. The allowed values are COMPLIANT and NON_COMPLIANT.
@@ -991,7 +993,7 @@ type ConformancePackEvaluationResult struct {
 	// This member is required.
 	ComplianceType ConformancePackComplianceType
 
-	// The time when AWS Config rule evaluated AWS resource.
+	// The time when Config rule evaluated Amazon Web Services resource.
 	//
 	// This member is required.
 	ConfigRuleInvokedTime *time.Time
@@ -1001,7 +1003,7 @@ type ConformancePackEvaluationResult struct {
 	// This member is required.
 	EvaluationResultIdentifier *EvaluationResultIdentifier
 
-	// The time when AWS Config recorded the evaluation result.
+	// The time when Config recorded the evaluation result.
 	//
 	// This member is required.
 	ResultRecordedTime *time.Time
@@ -1030,12 +1032,12 @@ type ConformancePackInputParameter struct {
 	noSmithyDocumentSerde
 }
 
-// Compliance information of one or more AWS Config rules within a conformance
-// pack. You can filter using AWS Config rule names and compliance types.
+// Compliance information of one or more Config rules within a conformance pack.
+// You can filter using Config rule names and compliance types.
 type ConformancePackRuleCompliance struct {
 
-	// Compliance of the AWS Config rule. The allowed values are COMPLIANT,
-	// NON_COMPLIANT, and INSUFFICIENT_DATA.
+	// Compliance of the Config rule. The allowed values are COMPLIANT, NON_COMPLIANT,
+	// and INSUFFICIENT_DATA.
 	ComplianceType ConformancePackComplianceType
 
 	// Name of the config rule.
@@ -1067,20 +1069,20 @@ type ConformancePackStatusDetail struct {
 	// This member is required.
 	ConformancePackName *string
 
-	// Indicates deployment status of conformance pack. AWS Config sets the state of
-	// the conformance pack to:
+	// Indicates deployment status of conformance pack. Config sets the state of the
+	// conformance pack to:
 	//
-	// * CREATE_IN_PROGRESS when a conformance pack creation
-	// is in progress for an account.
+	// * CREATE_IN_PROGRESS when a conformance pack creation is
+	// in progress for an account.
 	//
-	// * CREATE_COMPLETE when a conformance pack has
-	// been successfully created in your account.
+	// * CREATE_COMPLETE when a conformance pack has been
+	// successfully created in your account.
 	//
-	// * CREATE_FAILED when a conformance
-	// pack creation failed in your account.
+	// * CREATE_FAILED when a conformance pack
+	// creation failed in your account.
 	//
-	// * DELETE_IN_PROGRESS when a conformance
-	// pack deletion is in progress.
+	// * DELETE_IN_PROGRESS when a conformance pack
+	// deletion is in progress.
 	//
 	// * DELETE_FAILED when a conformance pack deletion
 	// failed in your account.
@@ -1093,7 +1095,7 @@ type ConformancePackStatusDetail struct {
 	// This member is required.
 	LastUpdateRequestedTime *time.Time
 
-	// Amazon Resource Name (ARN) of AWS CloudFormation stack.
+	// Amazon Resource Name (ARN) of CloudFormation stack.
 	//
 	// This member is required.
 	StackArn *string
@@ -1107,44 +1109,44 @@ type ConformancePackStatusDetail struct {
 	noSmithyDocumentSerde
 }
 
-// The channel through which AWS Config delivers notifications and updated
+// The channel through which Config delivers notifications and updated
 // configuration states.
 type DeliveryChannel struct {
 
-	// The options for how often AWS Config delivers configuration snapshots to the
-	// Amazon S3 bucket.
+	// The options for how often Config delivers configuration snapshots to the Amazon
+	// S3 bucket.
 	ConfigSnapshotDeliveryProperties *ConfigSnapshotDeliveryProperties
 
-	// The name of the delivery channel. By default, AWS Config assigns the name
-	// "default" when creating the delivery channel. To change the delivery channel
-	// name, you must use the DeleteDeliveryChannel action to delete your current
-	// delivery channel, and then you must use the PutDeliveryChannel command to create
-	// a delivery channel that has the desired name.
+	// The name of the delivery channel. By default, Config assigns the name "default"
+	// when creating the delivery channel. To change the delivery channel name, you
+	// must use the DeleteDeliveryChannel action to delete your current delivery
+	// channel, and then you must use the PutDeliveryChannel command to create a
+	// delivery channel that has the desired name.
 	Name *string
 
-	// The name of the Amazon S3 bucket to which AWS Config delivers configuration
+	// The name of the Amazon S3 bucket to which Config delivers configuration
 	// snapshots and configuration history files. If you specify a bucket that belongs
-	// to another AWS account, that bucket must have policies that grant access
-	// permissions to AWS Config. For more information, see Permissions for the Amazon
-	// S3 Bucket
+	// to another Amazon Web Services account, that bucket must have policies that
+	// grant access permissions to Config. For more information, see Permissions for
+	// the Amazon S3 Bucket
 	// (https://docs.aws.amazon.com/config/latest/developerguide/s3-bucket-policy.html)
-	// in the AWS Config Developer Guide.
+	// in the Config Developer Guide.
 	S3BucketName *string
 
 	// The prefix for the specified Amazon S3 bucket.
 	S3KeyPrefix *string
 
-	// The Amazon Resource Name (ARN) of the AWS Key Management Service (KMS) customer
-	// managed key (CMK) used to encrypt objects delivered by AWS Config. Must belong
-	// to the same Region as the destination S3 bucket.
+	// The Amazon Resource Name (ARN) of the Key Management Service (KMS ) KMS key (KMS
+	// key) used to encrypt objects delivered by Config. Must belong to the same Region
+	// as the destination S3 bucket.
 	S3KmsKeyArn *string
 
-	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which AWS Config sends
+	// The Amazon Resource Name (ARN) of the Amazon SNS topic to which Config sends
 	// notifications about configuration changes. If you choose a topic from another
-	// account, the topic must have policies that grant access permissions to AWS
-	// Config. For more information, see Permissions for the Amazon SNS Topic
+	// account, the topic must have policies that grant access permissions to Config.
+	// For more information, see Permissions for the Amazon SNS Topic
 	// (https://docs.aws.amazon.com/config/latest/developerguide/sns-topic-policy.html)
-	// in the AWS Config Developer Guide.
+	// in the Config Developer Guide.
 	SnsTopicARN *string
 
 	noSmithyDocumentSerde
@@ -1171,36 +1173,36 @@ type DeliveryChannelStatus struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies an AWS resource and indicates whether it complies with the AWS Config
-// rule that it was evaluated against.
+// Identifies an Amazon Web Services resource and indicates whether it complies
+// with the Config rule that it was evaluated against.
 type Evaluation struct {
 
-	// The ID of the AWS resource that was evaluated.
+	// The ID of the Amazon Web Services resource that was evaluated.
 	//
 	// This member is required.
 	ComplianceResourceId *string
 
-	// The type of AWS resource that was evaluated.
+	// The type of Amazon Web Services resource that was evaluated.
 	//
 	// This member is required.
 	ComplianceResourceType *string
 
-	// Indicates whether the AWS resource complies with the AWS Config rule that it was
-	// evaluated against. For the Evaluation data type, AWS Config supports only the
-	// COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. AWS Config does not support
-	// the INSUFFICIENT_DATA value for this data type. Similarly, AWS Config does not
-	// accept INSUFFICIENT_DATA as the value for ComplianceType from a PutEvaluations
-	// request. For example, an AWS Lambda function for a custom AWS Config rule cannot
-	// pass an INSUFFICIENT_DATA value to AWS Config.
+	// Indicates whether the Amazon Web Services resource complies with the Config rule
+	// that it was evaluated against. For the Evaluation data type, Config supports
+	// only the COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. Config does not
+	// support the INSUFFICIENT_DATA value for this data type. Similarly, Config does
+	// not accept INSUFFICIENT_DATA as the value for ComplianceType from a
+	// PutEvaluations request. For example, an Lambda function for a custom Config rule
+	// cannot pass an INSUFFICIENT_DATA value to Config.
 	//
 	// This member is required.
 	ComplianceType ComplianceType
 
-	// The time of the event in AWS Config that triggered the evaluation. For
-	// event-based evaluations, the time indicates when AWS Config created the
-	// configuration item that triggered the evaluation. For periodic evaluations, the
-	// time indicates when AWS Config triggered the evaluation at the frequency that
-	// you specified (for example, every 24 hours).
+	// The time of the event in Config that triggered the evaluation. For event-based
+	// evaluations, the time indicates when Config created the configuration item that
+	// triggered the evaluation. For periodic evaluations, the time indicates when
+	// Config triggered the evaluation at the frequency that you specified (for
+	// example, every 24 hours).
 	//
 	// This member is required.
 	OrderingTimestamp *time.Time
@@ -1211,32 +1213,32 @@ type Evaluation struct {
 	noSmithyDocumentSerde
 }
 
-// The details of an AWS Config evaluation. Provides the AWS resource that was
-// evaluated, the compliance of the resource, related time stamps, and
+// The details of an Config evaluation. Provides the Amazon Web Services resource
+// that was evaluated, the compliance of the resource, related time stamps, and
 // supplementary information.
 type EvaluationResult struct {
 
 	// Supplementary information about how the evaluation determined the compliance.
 	Annotation *string
 
-	// Indicates whether the AWS resource complies with the AWS Config rule that
-	// evaluated it. For the EvaluationResult data type, AWS Config supports only the
-	// COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. AWS Config does not support
-	// the INSUFFICIENT_DATA value for the EvaluationResult data type.
+	// Indicates whether the Amazon Web Services resource complies with the Config rule
+	// that evaluated it. For the EvaluationResult data type, Config supports only the
+	// COMPLIANT, NON_COMPLIANT, and NOT_APPLICABLE values. Config does not support the
+	// INSUFFICIENT_DATA value for the EvaluationResult data type.
 	ComplianceType ComplianceType
 
-	// The time when the AWS Config rule evaluated the AWS resource.
+	// The time when the Config rule evaluated the Amazon Web Services resource.
 	ConfigRuleInvokedTime *time.Time
 
 	// Uniquely identifies the evaluation result.
 	EvaluationResultIdentifier *EvaluationResultIdentifier
 
-	// The time when AWS Config recorded the evaluation result.
+	// The time when Config recorded the evaluation result.
 	ResultRecordedTime *time.Time
 
-	// An encrypted token that associates an evaluation with an AWS Config rule. The
-	// token identifies the rule, the AWS resource being evaluated, and the event that
-	// triggered the evaluation.
+	// An encrypted token that associates an evaluation with an Config rule. The token
+	// identifies the rule, the Amazon Web Services resource being evaluated, and the
+	// event that triggered the evaluation.
 	ResultToken *string
 
 	noSmithyDocumentSerde
@@ -1245,36 +1247,36 @@ type EvaluationResult struct {
 // Uniquely identifies an evaluation result.
 type EvaluationResultIdentifier struct {
 
-	// Identifies an AWS Config rule used to evaluate an AWS resource, and provides the
-	// type and ID of the evaluated resource.
+	// Identifies an Config rule used to evaluate an Amazon Web Services resource, and
+	// provides the type and ID of the evaluated resource.
 	EvaluationResultQualifier *EvaluationResultQualifier
 
-	// The time of the event that triggered the evaluation of your AWS resources. The
-	// time can indicate when AWS Config delivered a configuration item change
-	// notification, or it can indicate when AWS Config delivered the configuration
+	// The time of the event that triggered the evaluation of your Amazon Web Services
+	// resources. The time can indicate when Config delivered a configuration item
+	// change notification, or it can indicate when Config delivered the configuration
 	// snapshot, depending on which event triggered the evaluation.
 	OrderingTimestamp *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Identifies an AWS Config rule that evaluated an AWS resource, and provides the
-// type and ID of the resource that the rule evaluated.
+// Identifies an Config rule that evaluated an Amazon Web Services resource, and
+// provides the type and ID of the resource that the rule evaluated.
 type EvaluationResultQualifier struct {
 
-	// The name of the AWS Config rule that was used in the evaluation.
+	// The name of the Config rule that was used in the evaluation.
 	ConfigRuleName *string
 
-	// The ID of the evaluated AWS resource.
+	// The ID of the evaluated Amazon Web Services resource.
 	ResourceId *string
 
-	// The type of AWS resource that was evaluated.
+	// The type of Amazon Web Services resource that was evaluated.
 	ResourceType *string
 
 	noSmithyDocumentSerde
 }
 
-// The controls that AWS Config uses for executing remediations.
+// The controls that Config uses for executing remediations.
 type ExecutionControls struct {
 
 	// A SsmControls object.
@@ -1283,23 +1285,24 @@ type ExecutionControls struct {
 	noSmithyDocumentSerde
 }
 
-// Identifies an AWS resource and indicates whether it complies with the AWS Config
-// rule that it was evaluated against.
+// Identifies an Amazon Web Services resource and indicates whether it complies
+// with the Config rule that it was evaluated against.
 type ExternalEvaluation struct {
 
-	// The evaluated compliance resource ID. AWS Config accepts only AWS account ID.
+	// The evaluated compliance resource ID. Config accepts only Amazon Web Services
+	// account ID.
 	//
 	// This member is required.
 	ComplianceResourceId *string
 
-	// The evaluated compliance resource type. AWS Config accepts AWS::::Account
-	// resource type.
+	// The evaluated compliance resource type. Config accepts AWS::::Account resource
+	// type.
 	//
 	// This member is required.
 	ComplianceResourceType *string
 
-	// The compliance of the AWS resource. The valid values are COMPLIANT,
-	// NON_COMPLIANT,  and NOT_APPLICABLE.
+	// The compliance of the Amazon Web Services resource. The valid values are
+	// COMPLIANT, NON_COMPLIANT,  and NOT_APPLICABLE.
 	//
 	// This member is required.
 	ComplianceType ComplianceType
@@ -1322,8 +1325,8 @@ type FailedDeleteRemediationExceptionsBatch struct {
 	// Returns remediation exception resource key object of the failed items.
 	FailedItems []RemediationExceptionResourceKey
 
-	// Returns a failure message for delete remediation exception. For example, AWS
-	// Config creates an exception due to an internal error.
+	// Returns a failure message for delete remediation exception. For example, Config
+	// creates an exception due to an internal error.
 	FailureMessage *string
 
 	noSmithyDocumentSerde
@@ -1400,35 +1403,34 @@ type MemberAccountStatus struct {
 	// PutOrganizationConfigRule action for the second time, config rule status is
 	// updated in the member account. Config rule status is deleted when the master
 	// account deletes OrganizationConfigRule and disables service access for
-	// config-multiaccountsetup.amazonaws.com. AWS Config sets the state of the rule
-	// to:
+	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
 	//
-	// * CREATE_SUCCESSFUL when config rule has been created in the member
-	// account.
+	// *
+	// CREATE_SUCCESSFUL when config rule has been created in the member account.
 	//
-	// * CREATE_IN_PROGRESS when config rule is being created in the member
-	// account.
+	// *
+	// CREATE_IN_PROGRESS when config rule is being created in the member account.
 	//
-	// * CREATE_FAILED when config rule creation has failed in the member
-	// account.
+	// *
+	// CREATE_FAILED when config rule creation has failed in the member account.
 	//
-	// * DELETE_FAILED when config rule deletion has failed in the member
-	// account.
+	// *
+	// DELETE_FAILED when config rule deletion has failed in the member account.
 	//
-	// * DELETE_IN_PROGRESS when config rule is being deleted in the member
-	// account.
+	// *
+	// DELETE_IN_PROGRESS when config rule is being deleted in the member account.
 	//
-	// * DELETE_SUCCESSFUL when config rule has been deleted in the member
-	// account.
+	// *
+	// DELETE_SUCCESSFUL when config rule has been deleted in the member account.
 	//
-	// * UPDATE_SUCCESSFUL when config rule has been updated in the member
-	// account.
+	// *
+	// UPDATE_SUCCESSFUL when config rule has been updated in the member account.
 	//
-	// * UPDATE_IN_PROGRESS when config rule is being updated in the member
-	// account.
+	// *
+	// UPDATE_IN_PROGRESS when config rule is being updated in the member account.
 	//
-	// * UPDATE_FAILED when config rule deletion has failed in the member
-	// account.
+	// *
+	// UPDATE_FAILED when config rule deletion has failed in the member account.
 	//
 	// This member is required.
 	MemberAccountRuleStatus MemberAccountRuleStatus
@@ -1451,13 +1453,13 @@ type MemberAccountStatus struct {
 // retrieve organization details.
 type OrganizationAggregationSource struct {
 
-	// ARN of the IAM role used to retrieve AWS Organization details associated with
-	// the aggregator account.
+	// ARN of the IAM role used to retrieve Amazon Web Services Organization details
+	// associated with the aggregator account.
 	//
 	// This member is required.
 	RoleArn *string
 
-	// If true, aggregate existing AWS Config regions and future regions.
+	// If true, aggregate existing Config regions and future regions.
 	AllAwsRegions bool
 
 	// The source regions being aggregated.
@@ -1466,8 +1468,8 @@ type OrganizationAggregationSource struct {
 	noSmithyDocumentSerde
 }
 
-// An organization config rule that has information about config rules that AWS
-// Config creates in member accounts.
+// An organization config rule that has information about config rules that Config
+// creates in member accounts.
 type OrganizationConfigRule struct {
 
 	// Amazon Resource Name (ARN) of organization config rule.
@@ -1511,28 +1513,28 @@ type OrganizationConfigRuleStatus struct {
 	// when one or more member accounts join or leave an organization. Config rule
 	// status is deleted when the master account deletes OrganizationConfigRule in all
 	// the member accounts and disables service access for
-	// config-multiaccountsetup.amazonaws.com. AWS Config sets the state of the rule
-	// to:
+	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
 	//
-	// * CREATE_SUCCESSFUL when an organization config rule has been successfully
-	// created in all the member accounts.
+	// *
+	// CREATE_SUCCESSFUL when an organization config rule has been successfully created
+	// in all the member accounts.
 	//
-	// * CREATE_IN_PROGRESS when an organization
-	// config rule creation is in progress.
+	// * CREATE_IN_PROGRESS when an organization config
+	// rule creation is in progress.
 	//
-	// * CREATE_FAILED when an organization
-	// config rule creation failed in one or more member accounts within that
-	// organization.
+	// * CREATE_FAILED when an organization config rule
+	// creation failed in one or more member accounts within that organization.
 	//
-	// * DELETE_FAILED when an organization config rule deletion failed
-	// in one or more member accounts within that organization.
+	// *
+	// DELETE_FAILED when an organization config rule deletion failed in one or more
+	// member accounts within that organization.
 	//
-	// * DELETE_IN_PROGRESS
-	// when an organization config rule deletion is in progress.
+	// * DELETE_IN_PROGRESS when an
+	// organization config rule deletion is in progress.
 	//
-	// * DELETE_SUCCESSFUL
-	// when an organization config rule has been successfully deleted from all the
-	// member accounts.
+	// * DELETE_SUCCESSFUL when an
+	// organization config rule has been successfully deleted from all the member
+	// accounts.
 	//
 	// * UPDATE_SUCCESSFUL when an organization config rule has been
 	// successfully updated in all the member accounts.
@@ -1562,7 +1564,7 @@ type OrganizationConfigRuleStatus struct {
 }
 
 // An organization conformance pack that has information about conformance packs
-// that AWS Config creates in member accounts.
+// that Config creates in member accounts.
 type OrganizationConformancePack struct {
 
 	// Last time when organization conformation pack was updated.
@@ -1583,8 +1585,8 @@ type OrganizationConformancePack struct {
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []ConformancePackInputParameter
 
-	// Amazon S3 bucket where AWS Config stores conformance pack templates. This field
-	// is optional.
+	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
+	// This field is optional.
 	DeliveryS3Bucket *string
 
 	// Any folder structure you want to add to an Amazon S3 bucket. This field is
@@ -1618,20 +1620,20 @@ type OrganizationConformancePackDetailedStatus struct {
 	// calls PutOrganizationConformancePack action for the second time, conformance
 	// pack status is updated in the member account. Conformance pack status is deleted
 	// when the master account deletes OrganizationConformancePack and disables service
-	// access for config-multiaccountsetup.amazonaws.com. AWS Config sets the state of
-	// the conformance pack to:
+	// access for config-multiaccountsetup.amazonaws.com. Config sets the state of the
+	// conformance pack to:
 	//
-	// * CREATE_SUCCESSFUL when conformance pack has been
+	// * CREATE_SUCCESSFUL when conformance pack has been created
+	// in the member account.
+	//
+	// * CREATE_IN_PROGRESS when conformance pack is being
 	// created in the member account.
 	//
-	// * CREATE_IN_PROGRESS when conformance pack is
-	// being created in the member account.
+	// * CREATE_FAILED when conformance pack creation
+	// has failed in the member account.
 	//
-	// * CREATE_FAILED when conformance pack
-	// creation has failed in the member account.
-	//
-	// * DELETE_FAILED when conformance
-	// pack deletion has failed in the member account.
+	// * DELETE_FAILED when conformance pack
+	// deletion has failed in the member account.
 	//
 	// * DELETE_IN_PROGRESS when
 	// conformance pack is being deleted in the member account.
@@ -1682,28 +1684,28 @@ type OrganizationConformancePackStatus struct {
 	// updated when one or more member accounts join or leave an organization.
 	// Conformance pack status is deleted when the master account deletes
 	// OrganizationConformancePack in all the member accounts and disables service
-	// access for config-multiaccountsetup.amazonaws.com. AWS Config sets the state of
-	// the conformance pack to:
+	// access for config-multiaccountsetup.amazonaws.com. Config sets the state of the
+	// conformance pack to:
 	//
-	// * CREATE_SUCCESSFUL when an organization conformance
-	// pack has been successfully created in all the member accounts.
+	// * CREATE_SUCCESSFUL when an organization conformance pack
+	// has been successfully created in all the member accounts.
 	//
-	// *
-	// CREATE_IN_PROGRESS when an organization conformance pack creation is in
-	// progress.
+	// * CREATE_IN_PROGRESS
+	// when an organization conformance pack creation is in progress.
 	//
-	// * CREATE_FAILED when an organization conformance pack creation failed
-	// in one or more member accounts within that organization.
+	// * CREATE_FAILED
+	// when an organization conformance pack creation failed in one or more member
+	// accounts within that organization.
 	//
-	// * DELETE_FAILED when
-	// an organization conformance pack deletion failed in one or more member accounts
-	// within that organization.
+	// * DELETE_FAILED when an organization
+	// conformance pack deletion failed in one or more member accounts within that
+	// organization.
 	//
-	// * DELETE_IN_PROGRESS when an organization conformance
-	// pack deletion is in progress.
+	// * DELETE_IN_PROGRESS when an organization conformance pack
+	// deletion is in progress.
 	//
-	// * DELETE_SUCCESSFUL when an organization
-	// conformance pack has been successfully deleted from all the member accounts.
+	// * DELETE_SUCCESSFUL when an organization conformance
+	// pack has been successfully deleted from all the member accounts.
 	//
 	// *
 	// UPDATE_SUCCESSFUL when an organization conformance pack has been successfully
@@ -1734,10 +1736,10 @@ type OrganizationConformancePackStatus struct {
 }
 
 // An object that specifies organization custom rule metadata such as resource
-// type, resource ID of AWS resource, Lamdba function ARN, and organization trigger
-// types that trigger AWS Config to evaluate your AWS resources against a rule. It
-// also provides the frequency with which you want AWS Config to run evaluations
-// for the rule if the trigger type is periodic.
+// type, resource ID of Amazon Web Services resource, Lambda function ARN, and
+// organization trigger types that trigger Config to evaluate your Amazon Web
+// Services resources against a rule. It also provides the frequency with which you
+// want Config to run evaluations for the rule if the trigger type is periodic.
 type OrganizationCustomRuleMetadata struct {
 
 	// The lambda function ARN.
@@ -1745,16 +1747,16 @@ type OrganizationCustomRuleMetadata struct {
 	// This member is required.
 	LambdaFunctionArn *string
 
-	// The type of notification that triggers AWS Config to run an evaluation for a
-	// rule. You can specify the following notification types:
+	// The type of notification that triggers Config to run an evaluation for a rule.
+	// You can specify the following notification types:
 	//
 	// *
-	// ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config
+	// ConfigurationItemChangeNotification - Triggers an evaluation when Config
 	// delivers a configuration item as a result of a resource change.
 	//
 	// *
-	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS
-	// Config delivers an oversized configuration item. AWS Config may generate this
+	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when
+	// Config delivers an oversized configuration item. Config may generate this
 	// notification type when a resource changes and the notification exceeds the
 	// maximum size allowed by Amazon SNS.
 	//
@@ -1771,17 +1773,17 @@ type OrganizationCustomRuleMetadata struct {
 	// function.
 	InputParameters *string
 
-	// The maximum frequency with which AWS Config runs evaluations for a rule. Your
-	// custom rule is triggered when AWS Config delivers the configuration snapshot.
-	// For more information, see ConfigSnapshotDeliveryProperties. By default, rules
-	// with a periodic trigger are evaluated every 24 hours. To change the frequency,
-	// specify a valid value for the MaximumExecutionFrequency parameter.
+	// The maximum frequency with which Config runs evaluations for a rule. Your custom
+	// rule is triggered when Config delivers the configuration snapshot. For more
+	// information, see ConfigSnapshotDeliveryProperties. By default, rules with a
+	// periodic trigger are evaluated every 24 hours. To change the frequency, specify
+	// a valid value for the MaximumExecutionFrequency parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency
 
-	// The ID of the AWS resource that was evaluated.
+	// The ID of the Amazon Web Services resource that was evaluated.
 	ResourceIdScope *string
 
-	// The type of the AWS resource that was evaluated.
+	// The type of the Amazon Web Services resource that was evaluated.
 	ResourceTypesScope []string
 
 	// One part of a key-value pair that make up a tag. A key is a general label that
@@ -1796,14 +1798,14 @@ type OrganizationCustomRuleMetadata struct {
 }
 
 // An object that specifies organization managed rule metadata such as resource
-// type and ID of AWS resource along with the rule identifier. It also provides the
-// frequency with which you want AWS Config to run evaluations for the rule if the
-// trigger type is periodic.
+// type and ID of Amazon Web Services resource along with the rule identifier. It
+// also provides the frequency with which you want Config to run evaluations for
+// the rule if the trigger type is periodic.
 type OrganizationManagedRuleMetadata struct {
 
 	// For organization config managed rules, a predefined identifier from a list. For
 	// example, IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see
-	// Using AWS Managed Config Rules
+	// Using Config managed rules
 	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html).
 	//
 	// This member is required.
@@ -1816,16 +1818,17 @@ type OrganizationManagedRuleMetadata struct {
 	// function.
 	InputParameters *string
 
-	// The maximum frequency with which AWS Config runs evaluations for a rule. You are
-	// using an AWS managed rule that is triggered at a periodic frequency. By default,
-	// rules with a periodic trigger are evaluated every 24 hours. To change the
-	// frequency, specify a valid value for the MaximumExecutionFrequency parameter.
+	// The maximum frequency with which Config runs evaluations for a rule. You are
+	// using an Config managed rule that is triggered at a periodic frequency. By
+	// default, rules with a periodic trigger are evaluated every 24 hours. To change
+	// the frequency, specify a valid value for the MaximumExecutionFrequency
+	// parameter.
 	MaximumExecutionFrequency MaximumExecutionFrequency
 
-	// The ID of the AWS resource that was evaluated.
+	// The ID of the Amazon Web Services resource that was evaluated.
 	ResourceIdScope *string
 
-	// The type of the AWS resource that was evaluated.
+	// The type of the Amazon Web Services resource that was evaluated.
 	ResourceTypesScope []string
 
 	// One part of a key-value pair that make up a tag. A key is a general label that
@@ -1852,20 +1855,20 @@ type OrganizationResourceDetailedStatusFilters struct {
 	// calls PutOrganizationConformancePack action for the second time, conformance
 	// pack status is updated in the member account. Conformance pack status is deleted
 	// when the master account deletes OrganizationConformancePack and disables service
-	// access for config-multiaccountsetup.amazonaws.com. AWS Config sets the state of
-	// the conformance pack to:
+	// access for config-multiaccountsetup.amazonaws.com. Config sets the state of the
+	// conformance pack to:
 	//
-	// * CREATE_SUCCESSFUL when conformance pack has been
+	// * CREATE_SUCCESSFUL when conformance pack has been created
+	// in the member account.
+	//
+	// * CREATE_IN_PROGRESS when conformance pack is being
 	// created in the member account.
 	//
-	// * CREATE_IN_PROGRESS when conformance pack is
-	// being created in the member account.
+	// * CREATE_FAILED when conformance pack creation
+	// has failed in the member account.
 	//
-	// * CREATE_FAILED when conformance pack
-	// creation has failed in the member account.
-	//
-	// * DELETE_FAILED when conformance
-	// pack deletion has failed in the member account.
+	// * DELETE_FAILED when conformance pack
+	// deletion has failed in the member account.
 	//
 	// * DELETE_IN_PROGRESS when
 	// conformance pack is being deleted in the member account.
@@ -1909,55 +1912,55 @@ type QueryInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Specifies the types of AWS resource for which AWS Config records configuration
-// changes. In the recording group, you specify whether all supported types or
-// specific types of resources are recorded. By default, AWS Config records
-// configuration changes for all supported types of regional resources that AWS
-// Config discovers in the region in which it is running. Regional resources are
-// tied to a region and can be used only in that region. Examples of regional
-// resources are EC2 instances and EBS volumes. You can also have AWS Config record
-// configuration changes for supported types of global resources (for example, IAM
-// resources). Global resources are not tied to an individual region and can be
-// used in all regions. The configuration details for any global resource are the
-// same in all regions. If you customize AWS Config in multiple regions to record
-// global resources, it will create multiple configuration items each time a global
-// resource changes: one configuration item for each region. These configuration
-// items will contain identical data. To prevent duplicate configuration items, you
-// should consider customizing AWS Config in only one region to record global
-// resources, unless you want the configuration items to be available in multiple
-// regions. If you don't want AWS Config to record all resources, you can specify
-// which types of resources it will record with the resourceTypes parameter. For a
-// list of supported resource types, see Supported Resource Types
+// Specifies the types of Amazon Web Services resource for which Config records
+// configuration changes. In the recording group, you specify whether all supported
+// types or specific types of resources are recorded. By default, Config records
+// configuration changes for all supported types of regional resources that Config
+// discovers in the region in which it is running. Regional resources are tied to a
+// region and can be used only in that region. Examples of regional resources are
+// EC2 instances and EBS volumes. You can also have Config record configuration
+// changes for supported types of global resources (for example, IAM resources).
+// Global resources are not tied to an individual region and can be used in all
+// regions. The configuration details for any global resource are the same in all
+// regions. If you customize Config in multiple regions to record global resources,
+// it will create multiple configuration items each time a global resource changes:
+// one configuration item for each region. These configuration items will contain
+// identical data. To prevent duplicate configuration items, you should consider
+// customizing Config in only one region to record global resources, unless you
+// want the configuration items to be available in multiple regions. If you don't
+// want Config to record all resources, you can specify which types of resources it
+// will record with the resourceTypes parameter. For a list of supported resource
+// types, see Supported Resource Types
 // (https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources).
-// For more information, see Selecting Which Resources AWS Config Records
+// For more information, see Selecting Which Resources Config Records
 // (https://docs.aws.amazon.com/config/latest/developerguide/select-resources.html).
 type RecordingGroup struct {
 
-	// Specifies whether AWS Config records configuration changes for every supported
-	// type of regional resource. If you set this option to true, when AWS Config adds
-	// support for a new type of regional resource, it starts recording resources of
-	// that type automatically. If you set this option to true, you cannot enumerate a
-	// list of resourceTypes.
+	// Specifies whether Config records configuration changes for every supported type
+	// of regional resource. If you set this option to true, when Config adds support
+	// for a new type of regional resource, it starts recording resources of that type
+	// automatically. If you set this option to true, you cannot enumerate a list of
+	// resourceTypes.
 	AllSupported bool
 
-	// Specifies whether AWS Config includes all supported types of global resources
-	// (for example, IAM resources) with the resources that it records. Before you can
-	// set this option to true, you must set the allSupported option to true. If you
-	// set this option to true, when AWS Config adds support for a new type of global
-	// resource, it starts recording resources of that type automatically. The
-	// configuration details for any global resource are the same in all regions. To
-	// prevent duplicate configuration items, you should consider customizing AWS
-	// Config in only one region to record global resources.
+	// Specifies whether Config includes all supported types of global resources (for
+	// example, IAM resources) with the resources that it records. Before you can set
+	// this option to true, you must set the allSupported option to true. If you set
+	// this option to true, when Config adds support for a new type of global resource,
+	// it starts recording resources of that type automatically. The configuration
+	// details for any global resource are the same in all regions. To prevent
+	// duplicate configuration items, you should consider customizing Config in only
+	// one region to record global resources.
 	IncludeGlobalResourceTypes bool
 
-	// A comma-separated list that specifies the types of AWS resources for which AWS
-	// Config records configuration changes (for example, AWS::EC2::Instance or
-	// AWS::CloudTrail::Trail). To record all configuration changes, you must set the
-	// allSupported option to true. If you set this option to false, when AWS Config
+	// A comma-separated list that specifies the types of Amazon Web Services resources
+	// for which Config records configuration changes (for example, AWS::EC2::Instance
+	// or AWS::CloudTrail::Trail). To record all configuration changes, you must set
+	// the allSupported option to true. If you set this option to false, when Config
 	// adds support for a new type of resource, it will not record resources of that
 	// type unless you manually add that type to your recording group. For a list of
-	// valid resourceTypes values, see the resourceType Value column in Supported AWS
-	// Resource Types
+	// valid resourceTypes values, see the resourceType Value column in Supported
+	// Amazon Web Services resource Types
 	// (https://docs.aws.amazon.com/config/latest/developerguide/resource-config-reference.html#supported-resources).
 	ResourceTypes []ResourceType
 
@@ -1986,7 +1989,7 @@ type Relationship struct {
 // includes the remediation action, parameters, and data to execute the action.
 type RemediationConfiguration struct {
 
-	// The name of the AWS Config rule.
+	// The name of the Config rule.
 	//
 	// This member is required.
 	ConfigRuleName *string
@@ -2015,7 +2018,7 @@ type RemediationConfiguration struct {
 
 	// The maximum number of failed attempts for auto-remediation. If you do not select
 	// a number, the default is 5. For example, if you specify MaximumAutomaticAttempts
-	// as 5 with RetryAttemptSeconds as 50 seconds, AWS Config will put a
+	// as 5 with RetryAttemptSeconds as 50 seconds, Config will put a
 	// RemediationException on your behalf for the failing resource after the 5th
 	// failed attempt within 50 seconds.
 	MaximumAutomaticAttempts *int32
@@ -2026,11 +2029,10 @@ type RemediationConfiguration struct {
 	// The type of a resource.
 	ResourceType *string
 
-	// Maximum time in seconds that AWS Config runs auto-remediation. If you do not
-	// select a number, the default is 60 seconds. For example, if you specify
-	// RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5, AWS Config
-	// will run auto-remediations 5 times within 50 seconds before throwing an
-	// exception.
+	// Maximum time in seconds that Config runs auto-remediation. If you do not select
+	// a number, the default is 60 seconds. For example, if you specify
+	// RetryAttemptSeconds as 50 seconds and MaximumAutomaticAttempts as 5, Config will
+	// run auto-remediations 5 times within 50 seconds before throwing an exception.
 	RetryAttemptSeconds *int64
 
 	// Version of the target. For example, version of the SSM document. If you make
@@ -2046,7 +2048,7 @@ type RemediationConfiguration struct {
 // exception will be deleted, the resource ID, and resource type.
 type RemediationException struct {
 
-	// The name of the AWS Config rule.
+	// The name of the Config rule.
 	//
 	// This member is required.
 	ConfigRuleName *string
@@ -2070,8 +2072,8 @@ type RemediationException struct {
 	noSmithyDocumentSerde
 }
 
-// The details that identify a resource within AWS Config, including the resource
-// type and resource ID.
+// The details that identify a resource within Config, including the resource type
+// and resource ID.
 type RemediationExceptionResourceKey struct {
 
 	// The ID of the resource (for example., sg-xxxxxx).
@@ -2093,8 +2095,8 @@ type RemediationExecutionStatus struct {
 	// The time when the remediation execution was last updated.
 	LastUpdatedTime *time.Time
 
-	// The details that identify a resource within AWS Config, including the resource
-	// type and resource ID.
+	// The details that identify a resource within Config, including the resource type
+	// and resource ID.
 	ResourceKey *ResourceKey
 
 	// ENUM of the values.
@@ -2161,7 +2163,7 @@ type ResourceCountFilters struct {
 	// The region where the account is located.
 	Region *string
 
-	// The type of the AWS resource.
+	// The type of the Amazon Web Services resource.
 	ResourceType ResourceType
 
 	noSmithyDocumentSerde
@@ -2186,8 +2188,8 @@ type ResourceFilters struct {
 	noSmithyDocumentSerde
 }
 
-// The details that identify a resource that is discovered by AWS Config, including
-// the resource type, ID, and (if available) the custom resource name.
+// The details that identify a resource that is discovered by Config, including the
+// resource type, ID, and (if available) the custom resource name.
 type ResourceIdentifier struct {
 
 	// The time that the resource was deleted.
@@ -2205,8 +2207,8 @@ type ResourceIdentifier struct {
 	noSmithyDocumentSerde
 }
 
-// The details that identify a resource within AWS Config, including the resource
-// type and resource ID.
+// The details that identify a resource within Config, including the resource type
+// and resource ID.
 type ResourceKey struct {
 
 	// The ID of the resource (for example., sg-xxxxxx).
@@ -2234,7 +2236,7 @@ type ResourceValue struct {
 }
 
 // An object with the name of the retention configuration and the retention period
-// in days. The object stores the configuration for data retention in AWS Config.
+// in days. The object stores the configuration for data retention in Config.
 type RetentionConfiguration struct {
 
 	// The name of the retention configuration object.
@@ -2242,7 +2244,7 @@ type RetentionConfiguration struct {
 	// This member is required.
 	Name *string
 
-	// Number of days AWS Config stores your historical information. Currently, only
+	// Number of days Config stores your historical information. Currently, only
 	// applicable to the configuration item history.
 	//
 	// This member is required.
@@ -2251,93 +2253,96 @@ type RetentionConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Defines which resources trigger an evaluation for an AWS Config rule. The scope
-// can include one or more resource types, a combination of a tag key and value, or
-// a combination of one resource type and one resource ID. Specify a scope to
+// Defines which resources trigger an evaluation for an Config rule. The scope can
+// include one or more resource types, a combination of a tag key and value, or a
+// combination of one resource type and one resource ID. Specify a scope to
 // constrain which resources trigger an evaluation for a rule. Otherwise,
 // evaluations for the rule are triggered when any resource in your recording group
 // changes in configuration.
 type Scope struct {
 
-	// The ID of the only AWS resource that you want to trigger an evaluation for the
-	// rule. If you specify a resource ID, you must specify one resource type for
-	// ComplianceResourceTypes.
+	// The ID of the only Amazon Web Services resource that you want to trigger an
+	// evaluation for the rule. If you specify a resource ID, you must specify one
+	// resource type for ComplianceResourceTypes.
 	ComplianceResourceId *string
 
-	// The resource types of only those AWS resources that you want to trigger an
-	// evaluation for the rule. You can only specify one type if you also specify a
-	// resource ID for ComplianceResourceId.
+	// The resource types of only those Amazon Web Services resources that you want to
+	// trigger an evaluation for the rule. You can only specify one type if you also
+	// specify a resource ID for ComplianceResourceId.
 	ComplianceResourceTypes []string
 
-	// The tag key that is applied to only those AWS resources that you want to trigger
-	// an evaluation for the rule.
+	// The tag key that is applied to only those Amazon Web Services resources that you
+	// want to trigger an evaluation for the rule.
 	TagKey *string
 
-	// The tag value applied to only those AWS resources that you want to trigger an
-	// evaluation for the rule. If you specify a value for TagValue, you must also
-	// specify a value for TagKey.
+	// The tag value applied to only those Amazon Web Services resources that you want
+	// to trigger an evaluation for the rule. If you specify a value for TagValue, you
+	// must also specify a value for TagKey.
 	TagValue *string
 
 	noSmithyDocumentSerde
 }
 
-// Provides the AWS Config rule owner (AWS or customer), the rule identifier, and
-// the events that trigger the evaluation of your AWS resources.
+// Provides the Config rule owner (Amazon Web Services or customer), the rule
+// identifier, and the events that trigger the evaluation of your Amazon Web
+// Services resources.
 type Source struct {
 
-	// Indicates whether AWS or the customer owns and manages the AWS Config rule.
+	// Indicates whether Amazon Web Services or the customer owns and manages the
+	// Config rule.
 	//
 	// This member is required.
 	Owner Owner
 
-	// For AWS Config managed rules, a predefined identifier from a list. For example,
+	// For Config managed rules, a predefined identifier from a list. For example,
 	// IAM_PASSWORD_POLICY is a managed rule. To reference a managed rule, see Using
-	// AWS Managed Config Rules
+	// Config managed rules
 	// (https://docs.aws.amazon.com/config/latest/developerguide/evaluate-config_use-managed-rules.html).
 	// For custom rules, the identifier is the Amazon Resource Name (ARN) of the rule's
-	// AWS Lambda function, such as
+	// Lambda function, such as
 	// arn:aws:lambda:us-east-2:123456789012:function:custom_rule_name.
 	//
 	// This member is required.
 	SourceIdentifier *string
 
-	// Provides the source and type of the event that causes AWS Config to evaluate
-	// your AWS resources.
+	// Provides the source and type of the event that causes Config to evaluate your
+	// Amazon Web Services resources.
 	SourceDetails []SourceDetail
 
 	noSmithyDocumentSerde
 }
 
-// Provides the source and the message types that trigger AWS Config to evaluate
-// your AWS resources against a rule. It also provides the frequency with which you
-// want AWS Config to run evaluations for the rule if the trigger type is periodic.
-// You can specify the parameter values for SourceDetail only for custom rules.
+// Provides the source and the message types that trigger Config to evaluate your
+// Amazon Web Services resources against a rule. It also provides the frequency
+// with which you want Config to run evaluations for the rule if the trigger type
+// is periodic. You can specify the parameter values for SourceDetail only for
+// custom rules.
 type SourceDetail struct {
 
-	// The source of the event, such as an AWS service, that triggers AWS Config to
-	// evaluate your AWS resources.
+	// The source of the event, such as an Amazon Web Services service, that triggers
+	// Config to evaluate your Amazon Web Services resources.
 	EventSource EventSource
 
-	// The frequency at which you want AWS Config to run evaluations for a custom rule
-	// with a periodic trigger. If you specify a value for MaximumExecutionFrequency,
-	// then MessageType must use the ScheduledNotification value. By default, rules
-	// with a periodic trigger are evaluated every 24 hours. To change the frequency,
-	// specify a valid value for the MaximumExecutionFrequency parameter. Based on the
-	// valid value you choose, AWS Config runs evaluations once for each valid value.
-	// For example, if you choose Three_Hours, AWS Config runs evaluations once every
-	// three hours. In this case, Three_Hours is the frequency of this rule.
+	// The frequency at which you want Config to run evaluations for a custom rule with
+	// a periodic trigger. If you specify a value for MaximumExecutionFrequency, then
+	// MessageType must use the ScheduledNotification value. By default, rules with a
+	// periodic trigger are evaluated every 24 hours. To change the frequency, specify
+	// a valid value for the MaximumExecutionFrequency parameter. Based on the valid
+	// value you choose, Config runs evaluations once for each valid value. For
+	// example, if you choose Three_Hours, Config runs evaluations once every three
+	// hours. In this case, Three_Hours is the frequency of this rule.
 	MaximumExecutionFrequency MaximumExecutionFrequency
 
-	// The type of notification that triggers AWS Config to run an evaluation for a
-	// rule. You can specify the following notification types:
+	// The type of notification that triggers Config to run an evaluation for a rule.
+	// You can specify the following notification types:
 	//
 	// *
-	// ConfigurationItemChangeNotification - Triggers an evaluation when AWS Config
+	// ConfigurationItemChangeNotification - Triggers an evaluation when Config
 	// delivers a configuration item as a result of a resource change.
 	//
 	// *
-	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when AWS
-	// Config delivers an oversized configuration item. AWS Config may generate this
+	// OversizedConfigurationItemChangeNotification - Triggers an evaluation when
+	// Config delivers an oversized configuration item. Config may generate this
 	// notification type when a resource changes and the notification exceeds the
 	// maximum size allowed by Amazon SNS.
 	//
@@ -2345,7 +2350,7 @@ type SourceDetail struct {
 	// periodic evaluation at the frequency specified for MaximumExecutionFrequency.
 	//
 	// *
-	// ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when AWS
+	// ConfigurationSnapshotDeliveryCompleted - Triggers a periodic evaluation when
 	// Config delivers a configuration snapshot.
 	//
 	// If you want your custom rule to be
@@ -2357,7 +2362,7 @@ type SourceDetail struct {
 	noSmithyDocumentSerde
 }
 
-// AWS Systems Manager (SSM) specific remediation controls.
+// Amazon Web Services Systems Manager (SSM) specific remediation controls.
 type SsmControls struct {
 
 	// The maximum percentage of remediation actions allowed to run in parallel on the
@@ -2400,35 +2405,34 @@ type StatusDetailFilters struct {
 	// PutOrganizationConfigRule action for the second time, config rule status is
 	// updated in the member account. Config rule status is deleted when the master
 	// account deletes OrganizationConfigRule and disables service access for
-	// config-multiaccountsetup.amazonaws.com. AWS Config sets the state of the rule
-	// to:
+	// config-multiaccountsetup.amazonaws.com. Config sets the state of the rule to:
 	//
-	// * CREATE_SUCCESSFUL when config rule has been created in the member
-	// account.
+	// *
+	// CREATE_SUCCESSFUL when config rule has been created in the member account.
 	//
-	// * CREATE_IN_PROGRESS when config rule is being created in the member
-	// account.
+	// *
+	// CREATE_IN_PROGRESS when config rule is being created in the member account.
 	//
-	// * CREATE_FAILED when config rule creation has failed in the member
-	// account.
+	// *
+	// CREATE_FAILED when config rule creation has failed in the member account.
 	//
-	// * DELETE_FAILED when config rule deletion has failed in the member
-	// account.
+	// *
+	// DELETE_FAILED when config rule deletion has failed in the member account.
 	//
-	// * DELETE_IN_PROGRESS when config rule is being deleted in the member
-	// account.
+	// *
+	// DELETE_IN_PROGRESS when config rule is being deleted in the member account.
 	//
-	// * DELETE_SUCCESSFUL when config rule has been deleted in the member
-	// account.
+	// *
+	// DELETE_SUCCESSFUL when config rule has been deleted in the member account.
 	//
-	// * UPDATE_SUCCESSFUL when config rule has been updated in the member
-	// account.
+	// *
+	// UPDATE_SUCCESSFUL when config rule has been updated in the member account.
 	//
-	// * UPDATE_IN_PROGRESS when config rule is being updated in the member
-	// account.
+	// *
+	// UPDATE_IN_PROGRESS when config rule is being updated in the member account.
 	//
-	// * UPDATE_FAILED when config rule deletion has failed in the member
-	// account.
+	// *
+	// UPDATE_FAILED when config rule deletion has failed in the member account.
 	MemberAccountRuleStatus MemberAccountRuleStatus
 
 	noSmithyDocumentSerde

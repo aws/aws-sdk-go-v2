@@ -11,13 +11,19 @@ import (
 )
 
 // Returns a random byte string that is cryptographically secure. By default, the
-// random byte string is generated in AWS KMS. To generate the byte string in the
-// AWS CloudHSM cluster that is associated with a custom key store
+// random byte string is generated in KMS. To generate the byte string in the
+// CloudHSM cluster that is associated with a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
-// specify the custom key store ID. For more information about entropy and random
-// number generation, see AWS Key Management Service Cryptographic Details
-// (https://docs.aws.amazon.com/kms/latest/cryptographic-details/). Required
-// permissions: kms:GenerateRandom
+// specify the custom key store ID. Applications in Amazon Web Services Nitro
+// Enclaves can call this operation by using the Amazon Web Services Nitro Enclaves
+// Development Kit (https://github.com/aws/aws-nitro-enclaves-sdk-c). For
+// information about the supporting parameters, see How Amazon Web Services Nitro
+// Enclaves use KMS
+// (https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html)
+// in the Key Management Service Developer Guide. For more information about
+// entropy and random number generation, see Key Management Service Cryptographic
+// Details (https://docs.aws.amazon.com/kms/latest/cryptographic-details/).
+// Required permissions: kms:GenerateRandom
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy)
 func (c *Client) GenerateRandom(ctx context.Context, params *GenerateRandomInput, optFns ...func(*Options)) (*GenerateRandomOutput, error) {
@@ -37,8 +43,8 @@ func (c *Client) GenerateRandom(ctx context.Context, params *GenerateRandomInput
 
 type GenerateRandomInput struct {
 
-	// Generates the random byte string in the AWS CloudHSM cluster that is associated
-	// with the specified custom key store
+	// Generates the random byte string in the CloudHSM cluster that is associated with
+	// the specified custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 	// To find the ID of a custom key store, use the DescribeCustomKeyStores operation.
 	CustomKeyStoreId *string
@@ -51,8 +57,8 @@ type GenerateRandomInput struct {
 
 type GenerateRandomOutput struct {
 
-	// The random byte string. When you use the HTTP API or the AWS CLI, the value is
-	// Base64-encoded. Otherwise, it is not Base64-encoded.
+	// The random byte string. When you use the HTTP API or the Amazon Web Services
+	// CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.
 	Plaintext []byte
 
 	// Metadata pertaining to the operation's result.

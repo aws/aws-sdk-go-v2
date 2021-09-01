@@ -8,11 +8,11 @@ import (
 )
 
 // Advanced event selectors let you create fine-grained selectors for the following
-// AWS CloudTrail event record ﬁelds. They help you control costs by logging only
-// those events that are important to you. For more information about advanced
-// event selectors, see Logging data events for trails
+// CloudTrail event record ﬁelds. They help you control costs by logging only those
+// events that are important to you. For more information about advanced event
+// selectors, see Logging data events for trails
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
-// in the AWS CloudTrail User Guide.
+// in the CloudTrail User Guide.
 //
 // * readOnly
 //
@@ -59,68 +59,84 @@ type AdvancedFieldSelector struct {
 	//
 	// * eventName - Can use any operator. You can
 	// use it to ﬁlter in or ﬁlter out any data event logged to CloudTrail, such as
-	// PutBucket. You can have multiple values for this ﬁeld, separated by commas.
+	// PutBucket or GetSnapshotBlock. You can have multiple values for this ﬁeld,
+	// separated by commas.
+	//
+	// * eventCategory - This is required. It must be set to
+	// Equals, and the value must be Management or Data.
+	//
+	// * resources.type - This ﬁeld
+	// is required. resources.type can only use the Equals operator, and the value can
+	// be one of the following: AWS::S3::Object, AWS::S3::AccessPoint,
+	// AWS::Lambda::Function, AWS::DynamoDB::Table, AWS::S3Outposts::Object,
+	// AWS::ManagedBlockchain::Node, AWS::S3ObjectLambda::AccessPoint, or
+	// AWS::EC2::Snapshot. You can have only one resources.type ﬁeld per selector. To
+	// log data events on more than one resource type, add another selector.
 	//
 	// *
-	// eventCategory - This is required. It must be set to Equals, and the value must
-	// be Management or Data.
+	// resources.ARN - You can use any operator with resources.ARN, but if you use
+	// Equals or NotEquals, the value must exactly match the ARN of a valid resource of
+	// the type you've speciﬁed in the template as the value of resources.type. For
+	// example, if resources.type equals AWS::S3::Object, the ARN must be in one of the
+	// following formats. To log all data events for all objects in a specific S3
+	// bucket, use the StartsWith operator, and include only the bucket ARN as the
+	// matching value. The trailing slash is intentional; do not exclude it. Replace
+	// the text between less than and greater than symbols (<>) with resource-specific
+	// information.
 	//
-	// * resources.type - This ﬁeld is required. resources.type
-	// can only use the Equals operator, and the value can be one of the following:
-	// AWS::S3::Object, AWS::Lambda::Function, AWS::DynamoDB::Table,
-	// AWS::S3Outposts::Object, AWS::ManagedBlockchain::Node, or
-	// AWS::S3ObjectLambda::AccessPoint. You can have only one resources.type ﬁeld per
-	// selector. To log data events on more than one resource type, add another
-	// selector.
+	// * arn::s3:::/
 	//
-	// * resources.ARN - You can use any operator with resources.ARN, but if
-	// you use Equals or NotEquals, the value must exactly match the ARN of a valid
-	// resource of the type you've speciﬁed in the template as the value of
-	// resources.type. For example, if resources.type equals AWS::S3::Object, the ARN
-	// must be in one of the following formats. To log all data events for all objects
-	// in a specific S3 bucket, use the StartsWith operator, and include only the
-	// bucket ARN as the matching value. The trailing slash is intentional; do not
-	// exclude it.
-	//
-	// * arn:partition:s3:::bucket_name/
-	//
-	// *
-	// arn:partition:s3:::bucket_name/object_or_file_name/
+	// * arn::s3::://
 	//
 	// When resources.type equals
-	// AWS::Lambda::Function, and the operator is set to Equals or NotEquals, the ARN
-	// must be in the following format:
+	// AWS::S3::AccessPoint, and the operator is set to Equals or NotEquals, the ARN
+	// must be in one of the following formats. To log events on all objects in an S3
+	// access point, we recommend that you use only the access point ARN, don’t include
+	// the object path, and use the StartsWith or NotStartsWith operators.
 	//
 	// *
-	// arn:partition:lambda:region:account_ID:function:function_name
+	// arn::s3:::accesspoint/
+	//
+	// * arn::s3:::accesspoint//object/
+	//
+	// When resources.type
+	// equals AWS::Lambda::Function, and the operator is set to Equals or NotEquals,
+	// the ARN must be in the following format:
+	//
+	// * arn::lambda:::function:
 	//
 	// When
 	// resources.type equals AWS::DynamoDB::Table, and the operator is set to Equals or
 	// NotEquals, the ARN must be in the following format:
 	//
 	// *
-	// arn:partition:dynamodb:region:account_ID:table:table_name
+	// arn::dynamodb:::table:
 	//
-	// When resources.type
-	// equals AWS::S3Outposts::Object, and the operator is set to Equals or NotEquals,
+	// When resources.type equals AWS::S3Outposts::Object, and
+	// the operator is set to Equals or NotEquals, the ARN must be in the following
+	// format:
+	//
+	// * arn::s3-outposts:::
+	//
+	// When resources.type equals
+	// AWS::ManagedBlockchain::Node, and the operator is set to Equals or NotEquals,
 	// the ARN must be in the following format:
 	//
 	// *
-	// arn:partition:s3-outposts:region:>account_ID:object_path
+	// arn::managedblockchain:::nodes/
 	//
-	// When resources.type
-	// equals AWS::ManagedBlockchain::Node, and the operator is set to Equals or
+	// When resources.type equals
+	// AWS::S3ObjectLambda::AccessPoint, and the operator is set to Equals or
 	// NotEquals, the ARN must be in the following format:
 	//
 	// *
-	// arn:partition:managedblockchain:region:account_ID:nodes/node_ID
+	// arn::s3-object-lambda:::accesspoint/
 	//
-	// When
-	// resources.type equals AWS::S3ObjectLambda::AccessPoint, and the operator is set
-	// to Equals or NotEquals, the ARN must be in the following format:
+	// When resources.type equals
+	// AWS::EC2::Snapshot, and the operator is set to Equals or NotEquals, the ARN must
+	// be in the following format:
 	//
-	// *
-	// arn:partition:s3-object-lambda:region:account_ID:accesspoint/access_point_name
+	// * arn::ec2:::snapshot/
 	//
 	// This member is required.
 	Field *string
@@ -153,7 +169,7 @@ type AdvancedFieldSelector struct {
 	noSmithyDocumentSerde
 }
 
-// The Amazon S3 buckets, AWS Lambda functions, or Amazon DynamoDB tables that you
+// The Amazon S3 buckets, Lambda functions, or Amazon DynamoDB tables that you
 // specify in your event selectors for your trail to log data events. Data events
 // provide information about the resource operations performed on or within a
 // resource itself. These are also known as data plane operations. You can specify
@@ -183,68 +199,68 @@ type AdvancedFieldSelector struct {
 // doesn’t log the event.
 //
 // The following example demonstrates how logging works
-// when you configure logging of AWS Lambda data events for a Lambda function named
-// MyLambdaFunction, but not for all AWS Lambda functions.
+// when you configure logging of Lambda data events for a Lambda function named
+// MyLambdaFunction, but not for all Lambda functions.
 //
-// * A user runs a script
-// that includes a call to the MyLambdaFunction function and the
-// MyOtherLambdaFunction function.
+// * A user runs a script that
+// includes a call to the MyLambdaFunction function and the MyOtherLambdaFunction
+// function.
 //
-// * The Invoke API operation on MyLambdaFunction
-// is an AWS Lambda API. It is recorded as a data event in CloudTrail. Because the
-// CloudTrail user specified logging data events for MyLambdaFunction, any
-// invocations of that function are logged. The trail processes and logs the
-// event.
+// * The Invoke API operation on MyLambdaFunction is an Lambda API. It
+// is recorded as a data event in CloudTrail. Because the CloudTrail user specified
+// logging data events for MyLambdaFunction, any invocations of that function are
+// logged. The trail processes and logs the event.
 //
-// * The Invoke API operation on MyOtherLambdaFunction is an AWS Lambda
-// API. Because the CloudTrail user did not specify logging data events for all
-// Lambda functions, the Invoke operation for MyOtherLambdaFunction does not match
-// the function specified for the trail. The trail doesn’t log the event.
+// * The Invoke API operation on
+// MyOtherLambdaFunction is an Lambda API. Because the CloudTrail user did not
+// specify logging data events for all Lambda functions, the Invoke operation for
+// MyOtherLambdaFunction does not match the function specified for the trail. The
+// trail doesn’t log the event.
 type DataResource struct {
 
 	// The resource type in which you want to log data events. You can specify
 	// AWS::S3::Object, AWS::Lambda::Function, or AWS::DynamoDB::Table resources. The
-	// AWS::S3Outposts::Object, AWS::ManagedBlockchain::Node, and
-	// AWS::S3ObjectLambda::AccessPoint resource types are not valid in basic event
-	// selectors. To log data events on these resource types, use advanced event
-	// selectors.
+	// AWS::S3Outposts::Object, AWS::ManagedBlockchain::Node,
+	// AWS::S3ObjectLambda::AccessPoint, and AWS::EC2::Snapshot resource types are not
+	// valid in basic event selectors. To log data events on these resource types, use
+	// advanced event selectors.
 	Type *string
 
 	// An array of Amazon Resource Name (ARN) strings or partial ARN strings for the
 	// specified objects.
 	//
 	// * To log data events for all objects in all S3 buckets in
-	// your AWS account, specify the prefix as arn:aws:s3:::. This will also enable
-	// logging of data event activity performed by any user or role in your AWS
-	// account, even if that activity is performed on a bucket that belongs to another
-	// AWS account.
+	// your Amazon Web Services account, specify the prefix as arn:aws:s3:::. This also
+	// enables logging of data event activity performed by any user or role in your
+	// Amazon Web Services account, even if that activity is performed on a bucket that
+	// belongs to another Amazon Web Services account.
 	//
-	// * To log data events for all objects in an S3 bucket, specify the
-	// bucket and an empty object prefix such as arn:aws:s3:::bucket-1/. The trail logs
-	// data events for all objects in this S3 bucket.
+	// * To log data events for all
+	// objects in an S3 bucket, specify the bucket and an empty object prefix such as
+	// arn:aws:s3:::bucket-1/. The trail logs data events for all objects in this S3
+	// bucket.
 	//
-	// * To log data events for
-	// specific objects, specify the S3 bucket and object prefix such as
-	// arn:aws:s3:::bucket-1/example-images. The trail logs data events for objects in
-	// this S3 bucket that match the prefix.
-	//
-	// * To log data events for all Lambda
-	// functions in your AWS account, specify the prefix as arn:aws:lambda. This will
-	// also enable logging of Invoke activity performed by any user or role in your AWS
-	// account, even if that activity is performed on a function that belongs to
-	// another AWS account.
-	//
-	// * To log data events for a specific Lambda function,
-	// specify the function ARN. Lambda function ARNs are exact. For example, if you
-	// specify a function ARN
-	// arn:aws:lambda:us-west-2:111111111111:function:helloworld, data events will only
-	// be logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld. They
-	// will not be logged for
-	// arn:aws:lambda:us-west-2:111111111111:function:helloworld2.
+	// * To log data events for specific objects, specify the S3 bucket and
+	// object prefix such as arn:aws:s3:::bucket-1/example-images. The trail logs data
+	// events for objects in this S3 bucket that match the prefix.
 	//
 	// * To log data
-	// events for all DynamoDB tables in your AWS account, specify the prefix as
-	// arn:aws:dynamodb.
+	// events for all Lambda functions in your Amazon Web Services account, specify the
+	// prefix as arn:aws:lambda. This also enables logging of Invoke activity performed
+	// by any user or role in your Amazon Web Services account, even if that activity
+	// is performed on a function that belongs to another Amazon Web Services
+	// account.
+	//
+	// * To log data events for a specific Lambda function, specify the
+	// function ARN. Lambda function ARNs are exact. For example, if you specify a
+	// function ARN arn:aws:lambda:us-west-2:111111111111:function:helloworld, data
+	// events will only be logged for
+	// arn:aws:lambda:us-west-2:111111111111:function:helloworld. They will not be
+	// logged for arn:aws:lambda:us-west-2:111111111111:function:helloworld2.
+	//
+	// * To log
+	// data events for all DynamoDB tables in your Amazon Web Services account, specify
+	// the prefix as arn:aws:dynamodb.
 	Values []string
 
 	noSmithyDocumentSerde
@@ -254,9 +270,9 @@ type DataResource struct {
 // result includes a representation of a CloudTrail event.
 type Event struct {
 
-	// The AWS access key ID that was used to sign the request. If the request was made
-	// with temporary security credentials, this is the access key ID of the temporary
-	// credentials.
+	// The Amazon Web Services access key ID that was used to sign the request. If the
+	// request was made with temporary security credentials, this is the access key ID
+	// of the temporary credentials.
 	AccessKeyId *string
 
 	// A JSON string that contains a representation of the event returned.
@@ -268,7 +284,7 @@ type Event struct {
 	// The name of the event returned.
 	EventName *string
 
-	// The AWS service that the request was made to.
+	// The Amazon Web Services service to which the request was made.
 	EventSource *string
 
 	// The date and time of the event returned.
@@ -298,33 +314,34 @@ type Event struct {
 // selectors to a trail.
 type EventSelector struct {
 
-	// CloudTrail supports data event logging for Amazon S3 objects and AWS Lambda
-	// functions with basic event selectors. You can specify up to 250 resources for an
-	// individual event selector, but the total number of data resources cannot exceed
-	// 250 across all event selectors in a trail. This limit does not apply if you
-	// configure resource logging for all data events. For more information, see Data
-	// Events
+	// CloudTrail supports data event logging for Amazon S3 objects, Lambda functions,
+	// and Amazon DynamoDB tables with basic event selectors. You can specify up to 250
+	// resources for an individual event selector, but the total number of data
+	// resources cannot exceed 250 across all event selectors in a trail. This limit
+	// does not apply if you configure resource logging for all data events. For more
+	// information, see Data Events
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events)
-	// and Limits in AWS CloudTrail
+	// and Limits in CloudTrail
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
-	// in the AWS CloudTrail User Guide.
+	// in the CloudTrail User Guide.
 	DataResources []DataResource
 
 	// An optional list of service event sources from which you do not want management
 	// events to be logged on your trail. In this release, the list can be empty
-	// (disables the filter), or it can filter out AWS Key Management Service events by
-	// containing "kms.amazonaws.com". By default, ExcludeManagementEventSources is
-	// empty, and AWS KMS events are included in events that are logged to your trail.
+	// (disables the filter), or it can filter out Key Management Service or Amazon RDS
+	// Data API events by containing kms.amazonaws.com or rdsdata.amazonaws.com. By
+	// default, ExcludeManagementEventSources is empty, and KMS and Amazon RDS Data API
+	// events are logged to your trail.
 	ExcludeManagementEventSources []string
 
 	// Specify if you want your event selector to include management events for your
 	// trail. For more information, see Management Events
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events)
-	// in the AWS CloudTrail User Guide. By default, the value is true. The first copy
-	// of management events is free. You are charged for additional copies of
-	// management events that you are logging on any subsequent trail in the same
-	// region. For more information about CloudTrail pricing, see AWS CloudTrail
-	// Pricing (http://aws.amazon.com/cloudtrail/pricing/).
+	// in the CloudTrail User Guide. By default, the value is true. The first copy of
+	// management events is free. You are charged for additional copies of management
+	// events that you are logging on any subsequent trail in the same region. For more
+	// information about CloudTrail pricing, see CloudTrail Pricing
+	// (http://aws.amazon.com/cloudtrail/pricing/).
 	IncludeManagementEvents *bool
 
 	// Specify if you want your trail to log read-only events, write-only events, or
@@ -338,8 +355,8 @@ type EventSelector struct {
 // A JSON string that contains a list of insight types that are logged on a trail.
 type InsightSelector struct {
 
-	// The type of insights to log on a trail. In this release, only ApiCallRateInsight
-	// is supported as an insight type.
+	// The type of Insights events to log on a trail. The valid Insights type in this
+	// release is ApiCallRateInsight.
 	InsightType InsightType
 
 	noSmithyDocumentSerde
@@ -390,9 +407,9 @@ type Resource struct {
 
 	// The type of a resource referenced by the event returned. When the resource type
 	// cannot be determined, null is returned. Some examples of resource types are:
-	// Instance for EC2, Trail for CloudTrail, DBInstance for RDS, and AccessKey for
-	// IAM. To learn more about how to look up and filter events by the resource types
-	// supported for a service, see Filtering CloudTrail Events
+	// Instance for EC2, Trail for CloudTrail, DBInstance for Amazon RDS, and AccessKey
+	// for IAM. To learn more about how to look up and filter events by the resource
+	// types supported for a service, see Filtering CloudTrail Events
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-console.html#filtering-cloudtrail-events).
 	ResourceType *string
 
@@ -448,8 +465,8 @@ type Trail struct {
 	// The region in which the trail was created.
 	HomeRegion *string
 
-	// Set to True to include AWS API calls from AWS global services such as IAM.
-	// Otherwise, False.
+	// Set to True to include Amazon Web Services API calls from Amazon Web Services
+	// global services such as IAM. Otherwise, False.
 	IncludeGlobalServiceEvents *bool
 
 	// Specifies whether the trail exists only in one region or exists in all regions.
@@ -459,7 +476,7 @@ type Trail struct {
 	IsOrganizationTrail *bool
 
 	// Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The
-	// value is a fully specified ARN to a KMS key in the format:
+	// value is a fully specified ARN to a KMS key in the following format.
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 
@@ -478,13 +495,13 @@ type Trail struct {
 	// Specifies the Amazon S3 key prefix that comes after the name of the bucket you
 	// have designated for log file delivery. For more information, see Finding Your
 	// CloudTrail Log Files
-	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).The
-	// maximum length is 200 characters.
+	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html).
+	// The maximum length is 200 characters.
 	S3KeyPrefix *string
 
 	// Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send
-	// notifications when log files are delivered. The format of a topic ARN is:
-	// arn:aws:sns:us-east-2:123456789012:MyTopic
+	// notifications when log files are delivered. The following is the format of a
+	// topic ARN. arn:aws:sns:us-east-2:123456789012:MyTopic
 	SnsTopicARN *string
 
 	// This field is no longer in use. Use SnsTopicARN.
@@ -492,7 +509,7 @@ type Trail struct {
 	// Deprecated: This member has been deprecated.
 	SnsTopicName *string
 
-	// Specifies the ARN of the trail. The format of a trail ARN is:
+	// Specifies the ARN of the trail. The following is the format of a trail ARN.
 	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	TrailARN *string
 
@@ -503,7 +520,7 @@ type Trail struct {
 // and Amazon Resource Name (ARN).
 type TrailInfo struct {
 
-	// The AWS region in which a trail was created.
+	// The Amazon Web Services Region in which a trail was created.
 	HomeRegion *string
 
 	// The name of a trail.

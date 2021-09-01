@@ -42,9 +42,9 @@ import (
 // thrown. You can configure up to five event selectors for each trail. For more
 // information, see Logging data and management events for trails
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
-// and Quotas in AWS CloudTrail
+// and Quotas in CloudTrail
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html)
-// in the AWS CloudTrail User Guide. You can add advanced event selectors, and
+// in the CloudTrail User Guide. You can add advanced event selectors, and
 // conditions for your advanced event selectors, up to a maximum of 500 values for
 // all conditions and selectors on a trail. You can use either
 // AdvancedEventSelectors or EventSelectors, but not both. If you apply
@@ -52,7 +52,7 @@ import (
 // For more information about advanced event selectors, see Logging data events for
 // trails
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
-// in the AWS CloudTrail User Guide.
+// in the CloudTrail User Guide.
 func (c *Client) PutEventSelectors(ctx context.Context, params *PutEventSelectorsInput, optFns ...func(*Options)) (*PutEventSelectorsOutput, error) {
 	if params == nil {
 		params = &PutEventSelectorsInput{}
@@ -83,13 +83,13 @@ type PutEventSelectorsInput struct {
 	// characters
 	//
 	// * Have no adjacent periods, underscores or dashes. Names like
-	// my-_namespace and my--namespace are invalid.
+	// my-_namespace and my--namespace are not valid.
 	//
-	// * Not be in IP address format (for
-	// example, 192.168.5.4)
+	// * Not be in IP address format
+	// (for example, 192.168.5.4)
 	//
-	// If you specify a trail ARN, it must be in the format:
-	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	// If you specify a trail ARN, it must be in the
+	// following format. arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	//
 	// This member is required.
 	TrailName *string
@@ -102,7 +102,7 @@ type PutEventSelectorsInput struct {
 	// For more information about advanced event selectors, see Logging data events for
 	// trails
 	// (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html)
-	// in the AWS CloudTrail User Guide.
+	// in the CloudTrail User Guide.
 	AdvancedEventSelectors []types.AdvancedEventSelector
 
 	// Specifies the settings for your event selectors. You can configure up to five
@@ -123,8 +123,9 @@ type PutEventSelectorsOutput struct {
 	// Specifies the event selectors configured for your trail.
 	EventSelectors []types.EventSelector
 
-	// Specifies the ARN of the trail that was updated with event selectors. The format
-	// of a trail ARN is: arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
+	// Specifies the ARN of the trail that was updated with event selectors. The
+	// following is the format of a trail ARN.
+	// arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 	TrailARN *string
 
 	// Metadata pertaining to the operation's result.

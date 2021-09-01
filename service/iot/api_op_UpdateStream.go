@@ -12,6 +12,9 @@ import (
 )
 
 // Updates an existing stream. The stream version will be incremented by one.
+// Requires permission to access the UpdateStream
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateStream(ctx context.Context, params *UpdateStreamInput, optFns ...func(*Options)) (*UpdateStreamOutput, error) {
 	if params == nil {
 		params = &UpdateStreamInput{}

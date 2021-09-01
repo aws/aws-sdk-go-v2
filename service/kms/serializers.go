@@ -2505,6 +2505,11 @@ func awsAwsjson11_serializeOpDocumentCreateKeyInput(v *CreateKeyInput, value smi
 		ok.String(*v.Description)
 	}
 
+	if len(v.KeySpec) > 0 {
+		ok := object.Key("KeySpec")
+		ok.String(string(v.KeySpec))
+	}
+
 	if len(v.KeyUsage) > 0 {
 		ok := object.Key("KeyUsage")
 		ok.String(string(v.KeyUsage))

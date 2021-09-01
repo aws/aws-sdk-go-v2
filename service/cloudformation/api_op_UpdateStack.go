@@ -46,27 +46,27 @@ type UpdateStackInput struct {
 	//
 	// *
 	// CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some stack templates might include
-	// resources that can affect permissions in your account; for example, by creating
-	// new Identity and Access Management (IAM) users. For those stacks, you must
-	// explicitly acknowledge this by specifying one of these capabilities. The
-	// following IAM resources require you to specify either the CAPABILITY_IAM or
-	// CAPABILITY_NAMED_IAM capability.
+	// resources that can affect permissions in your Amazon Web Services account; for
+	// example, by creating new Identity and Access Management (IAM) users. For those
+	// stacks, you must explicitly acknowledge this by specifying one of these
+	// capabilities. The following IAM resources require you to specify either the
+	// CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
 	//
-	// * If you have IAM resources, you can specify
-	// either capability.
+	// * If you have IAM resources,
+	// you can specify either capability.
 	//
-	// * If you have IAM resources with custom names, you must
-	// specify CAPABILITY_NAMED_IAM.
+	// * If you have IAM resources with custom
+	// names, you must specify CAPABILITY_NAMED_IAM.
 	//
-	// * If you don't specify either of these
-	// capabilities, CloudFormation returns an InsufficientCapabilities error.
+	// * If you don't specify either of
+	// these capabilities, CloudFormation returns an InsufficientCapabilities
+	// error.
 	//
-	// If your
-	// stack template contains these resources, we recommend that you review all
-	// permissions associated with them and edit their permissions if necessary.
+	// If your stack template contains these resources, we recommend that you
+	// review all permissions associated with them and edit their permissions if
+	// necessary.
 	//
-	// *
-	// AWS::IAM::AccessKey
+	// * AWS::IAM::AccessKey
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
 	//
 	// *
@@ -136,6 +136,10 @@ type UpdateStackInput struct {
 	// the console, each stack event would be assigned the same token in the following
 	// format: Console-CreateStack-7f59c3cf-00d2-40c7-b2ff-e75db0987002.
 	ClientRequestToken *string
+
+	// Preserve the state of previously provisioned resources when an operation fails.
+	// Default: False
+	DisableRollback *bool
 
 	// Amazon Simple Notification Service topic Amazon Resource Names (ARNs) that
 	// CloudFormation associates with the stack. Specify an empty list to remove all

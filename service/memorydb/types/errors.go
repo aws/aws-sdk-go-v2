@@ -620,6 +620,7 @@ func (e *ServiceUpdateNotFoundFault) ErrorMessage() string {
 func (e *ServiceUpdateNotFoundFault) ErrorCode() string             { return "ServiceUpdateNotFoundFault" }
 func (e *ServiceUpdateNotFoundFault) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+//
 type ShardNotFoundFault struct {
 	Message *string
 

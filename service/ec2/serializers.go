@@ -29001,6 +29001,11 @@ func awsEc2query_serializeDocumentLaunchTemplateInstanceMetadataOptionsRequest(v
 		objectKey.String(string(v.HttpEndpoint))
 	}
 
+	if len(v.HttpProtocolIpv6) > 0 {
+		objectKey := object.Key("HttpProtocolIpv6")
+		objectKey.String(string(v.HttpProtocolIpv6))
+	}
+
 	if v.HttpPutResponseHopLimit != nil {
 		objectKey := object.Key("HttpPutResponseHopLimit")
 		objectKey.Integer(*v.HttpPutResponseHopLimit)
@@ -44024,6 +44029,11 @@ func awsEc2query_serializeOpDocumentImportImageInput(v *ImportImageInput, value 
 	if v.Architecture != nil {
 		objectKey := object.Key("Architecture")
 		objectKey.String(*v.Architecture)
+	}
+
+	if len(v.BootMode) > 0 {
+		objectKey := object.Key("BootMode")
+		objectKey.String(string(v.BootMode))
 	}
 
 	if v.ClientData != nil {

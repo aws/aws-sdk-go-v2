@@ -11,13 +11,13 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates or updates a conformance pack. A conformance pack is a collection of AWS
+// Creates or updates a conformance pack. A conformance pack is a collection of
 // Config rules that can be easily deployed in an account and a region and across
-// AWS Organization. This API creates a service linked role
+// Amazon Web Services Organization. This API creates a service linked role
 // AWSServiceRoleForConfigConforms in your account. The service linked role is
 // created only when the role does not exist in your account. You must specify
 // either the TemplateS3Uri or the TemplateBody parameter, but not both. If you
-// provide both AWS Config uses the TemplateS3Uri parameter and ignores the
+// provide both Config uses the TemplateS3Uri parameter and ignores the
 // TemplateBody parameter.
 func (c *Client) PutConformancePack(ctx context.Context, params *PutConformancePackInput, optFns ...func(*Options)) (*PutConformancePackOutput, error) {
 	if params == nil {
@@ -44,8 +44,8 @@ type PutConformancePackInput struct {
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
-	// Amazon S3 bucket where AWS Config stores conformance pack templates. This field
-	// is optional.
+	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
+	// This field is optional.
 	DeliveryS3Bucket *string
 
 	// The prefix for the Amazon S3 bucket. This field is optional.

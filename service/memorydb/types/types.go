@@ -628,7 +628,7 @@ type SubnetGroup struct {
 // resources. When you add or remove tags on clusters, those actions will be
 // replicated to all nodes in the cluster. A tag with a null Value is permitted.
 // For more information, see Tagging your MemoryDB resources
-// (https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging-Resources.html)
+// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html)
 type Tag struct {
 
 	// The key for the tag. May not be null.

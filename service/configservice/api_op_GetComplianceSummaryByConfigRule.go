@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the number of AWS Config rules that are compliant and noncompliant, up
-// to a maximum of 25 for each.
+// Returns the number of Config rules that are compliant and noncompliant, up to a
+// maximum of 25 for each.
 func (c *Client) GetComplianceSummaryByConfigRule(ctx context.Context, params *GetComplianceSummaryByConfigRuleInput, optFns ...func(*Options)) (*GetComplianceSummaryByConfigRuleOutput, error) {
 	if params == nil {
 		params = &GetComplianceSummaryByConfigRuleInput{}
@@ -35,7 +35,7 @@ type GetComplianceSummaryByConfigRuleInput struct {
 //
 type GetComplianceSummaryByConfigRuleOutput struct {
 
-	// The number of AWS Config rules that are compliant and the number that are
+	// The number of Config rules that are compliant and the number that are
 	// noncompliant, up to a maximum of 25 for each.
 	ComplianceSummary *types.ComplianceSummary
 

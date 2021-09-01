@@ -13,7 +13,10 @@ import (
 )
 
 // Gets a list of domain configurations for the user. This list is sorted
-// alphabetically by domain configuration name.
+// alphabetically by domain configuration name. Requires permission to access the
+// ListDomainConfigurations
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListDomainConfigurations(ctx context.Context, params *ListDomainConfigurationsInput, optFns ...func(*Options)) (*ListDomainConfigurationsOutput, error) {
 	if params == nil {
 		params = &ListDomainConfigurationsInput{}

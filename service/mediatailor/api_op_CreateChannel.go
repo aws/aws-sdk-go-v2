@@ -40,10 +40,18 @@ type CreateChannelInput struct {
 	// This member is required.
 	Outputs []types.RequestOutputItem
 
-	// The type of playback mode for this channel. The only supported value is LOOP.
+	// The type of playback mode to use for this channel. LINEAR - The programs in the
+	// schedule play once back-to-back in the schedule. LOOP - The programs in the
+	// schedule play back-to-back in an endless loop. When the last program in the
+	// schedule stops playing, playback loops back to the first program in the
+	// schedule.
 	//
 	// This member is required.
 	PlaybackMode types.PlaybackMode
+
+	// The slate used to fill gaps between programs in the schedule. You must configure
+	// filler slate if your channel uses an LINEAR PlaybackMode.
+	FillerSlate *types.SlateSource
 
 	// The tags to assign to the channel.
 	Tags map[string]string
@@ -65,13 +73,17 @@ type CreateChannelOutput struct {
 	// The timestamp of when the channel was created.
 	CreationTime *time.Time
 
+	// Contains information about the slate used to fill gaps between programs in the
+	// schedule.
+	FillerSlate *types.SlateSource
+
 	// The timestamp of when the channel was last modified.
 	LastModifiedTime *time.Time
 
 	// The channel's output properties.
 	Outputs []types.ResponseOutputItem
 
-	// The type of playback for this channel. The only supported value is LOOP.
+	// The channel's playback mode.
 	PlaybackMode *string
 
 	// The tags assigned to the channel.

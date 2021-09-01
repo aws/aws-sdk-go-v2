@@ -13,9 +13,9 @@ import (
 )
 
 // Returns status information for sources within an aggregator. The status includes
-// information about the last time AWS Config verified authorization between the
-// source account and an aggregator account. In case of a failure, the status
-// contains the related error code or message.
+// information about the last time Config verified authorization between the source
+// account and an aggregator account. In case of a failure, the status contains the
+// related error code or message.
 func (c *Client) DescribeConfigurationAggregatorSourcesStatus(ctx context.Context, params *DescribeConfigurationAggregatorSourcesStatusInput, optFns ...func(*Options)) (*DescribeConfigurationAggregatorSourcesStatusOutput, error) {
 	if params == nil {
 		params = &DescribeConfigurationAggregatorSourcesStatusInput{}
@@ -39,7 +39,7 @@ type DescribeConfigurationAggregatorSourcesStatusInput struct {
 	ConfigurationAggregatorName *string
 
 	// The maximum number of AggregatorSourceStatus returned on each page. The default
-	// is maximum. If you specify 0, AWS Config uses the default.
+	// is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -150,7 +150,7 @@ var _ DescribeConfigurationAggregatorSourcesStatusAPIClient = (*Client)(nil)
 // options for DescribeConfigurationAggregatorSourcesStatus
 type DescribeConfigurationAggregatorSourcesStatusPaginatorOptions struct {
 	// The maximum number of AggregatorSourceStatus returned on each page. The default
-	// is maximum. If you specify 0, AWS Config uses the default.
+	// is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

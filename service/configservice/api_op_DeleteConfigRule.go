@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified AWS Config rule and all of its evaluation results. AWS
-// Config sets the state of a rule to DELETING until the deletion is complete. You
-// cannot update a rule while it is in this state. If you make a PutConfigRule or
+// Deletes the specified Config rule and all of its evaluation results. Config sets
+// the state of a rule to DELETING until the deletion is complete. You cannot
+// update a rule while it is in this state. If you make a PutConfigRule or
 // DeleteConfigRule request for the rule, you will receive a
 // ResourceInUseException. You can check the state of a rule by using the
 // DescribeConfigRules request.
@@ -34,7 +34,7 @@ func (c *Client) DeleteConfigRule(ctx context.Context, params *DeleteConfigRuleI
 //
 type DeleteConfigRuleInput struct {
 
-	// The name of the AWS Config rule that you want to delete.
+	// The name of the Config rule that you want to delete.
 	//
 	// This member is required.
 	ConfigRuleName *string

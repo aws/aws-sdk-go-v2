@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the role aliases registered in your account.
+// Lists the role aliases registered in your account. Requires permission to access
+// the ListRoleAliases
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListRoleAliases(ctx context.Context, params *ListRoleAliasesInput, optFns ...func(*Options)) (*ListRoleAliasesOutput, error) {
 	if params == nil {
 		params = &ListRoleAliasesInput{}

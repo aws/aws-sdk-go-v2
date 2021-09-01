@@ -193,6 +193,11 @@ func awsRestjson1_deserializeOpDocumentCreateChannelOutput(v **CreateChannelOutp
 				}
 			}
 
+		case "FillerSlate":
+			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.FillerSlate, value); err != nil {
+				return err
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -413,6 +418,22 @@ func awsRestjson1_deserializeOpDocumentCreateProgramOutput(v **CreateProgramOutp
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.ProgramName = ptr.String(jtv)
+			}
+
+		case "ScheduledStartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ScheduledStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected __timestampUnix to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "SourceLocationName":
@@ -1512,6 +1533,11 @@ func awsRestjson1_deserializeOpDocumentDescribeChannelOutput(v **DescribeChannel
 				}
 			}
 
+		case "FillerSlate":
+			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.FillerSlate, value); err != nil {
+				return err
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1732,6 +1758,22 @@ func awsRestjson1_deserializeOpDocumentDescribeProgramOutput(v **DescribeProgram
 					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
 				}
 				sv.ProgramName = ptr.String(jtv)
+			}
+
+		case "ScheduledStartTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.ScheduledStartTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected __timestampUnix to be a JSON Number, got %T instead", value)
+
+				}
 			}
 
 		case "SourceLocationName":
@@ -4520,6 +4562,11 @@ func awsRestjson1_deserializeOpDocumentUpdateChannelOutput(v **UpdateChannelOutp
 				}
 			}
 
+		case "FillerSlate":
+			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.FillerSlate, value); err != nil {
+				return err
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5840,6 +5887,11 @@ func awsRestjson1_deserializeDocumentChannel(v **types.Channel, value interface{
 				}
 			}
 
+		case "FillerSlate":
+			if err := awsRestjson1_deserializeDocumentSlateSource(&sv.FillerSlate, value); err != nil {
+				return err
+			}
+
 		case "LastModifiedTime":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6826,6 +6878,15 @@ func awsRestjson1_deserializeDocumentScheduleEntry(v **types.ScheduleEntry, valu
 		case "ScheduleAdBreaks":
 			if err := awsRestjson1_deserializeDocument__listOfScheduleAdBreak(&sv.ScheduleAdBreaks, value); err != nil {
 				return err
+			}
+
+		case "ScheduleEntryType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ScheduleEntryType to be of type string, got %T instead", value)
+				}
+				sv.ScheduleEntryType = types.ScheduleEntryType(jtv)
 			}
 
 		case "SourceLocationName":

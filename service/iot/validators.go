@@ -430,6 +430,26 @@ func (m *validateOpCreateDynamicThingGroup) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateFleetMetric struct {
+}
+
+func (*validateOpCreateFleetMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateFleetMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateFleetMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateFleetMetricInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateJob struct {
 }
 
@@ -965,6 +985,26 @@ func (m *validateOpDeleteDynamicThingGroup) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteDynamicThingGroupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteFleetMetric struct {
+}
+
+func (*validateOpDeleteFleetMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteFleetMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteFleetMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteFleetMetricInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -1610,6 +1650,26 @@ func (m *validateOpDescribeDomainConfiguration) HandleInitialize(ctx context.Con
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeFleetMetric struct {
+}
+
+func (*validateOpDescribeFleetMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeFleetMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeFleetMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeFleetMetricInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeIndex struct {
 }
 
@@ -2025,6 +2085,26 @@ func (m *validateOpEnableTopicRule) HandleInitialize(ctx context.Context, in mid
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpEnableTopicRuleInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetBucketsAggregation struct {
+}
+
+func (*validateOpGetBucketsAggregation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetBucketsAggregation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetBucketsAggregationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetBucketsAggregationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -3270,6 +3350,26 @@ func (m *validateOpUpdateDynamicThingGroup) HandleInitialize(ctx context.Context
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateFleetMetric struct {
+}
+
+func (*validateOpUpdateFleetMetric) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateFleetMetric) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateFleetMetricInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateFleetMetricInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpUpdateIndexingConfiguration struct {
 }
 
@@ -3594,6 +3694,10 @@ func addOpCreateDynamicThingGroupValidationMiddleware(stack *middleware.Stack) e
 	return stack.Initialize.Add(&validateOpCreateDynamicThingGroup{}, middleware.After)
 }
 
+func addOpCreateFleetMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateFleetMetric{}, middleware.After)
+}
+
 func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
 }
@@ -3700,6 +3804,10 @@ func addOpDeleteDomainConfigurationValidationMiddleware(stack *middleware.Stack)
 
 func addOpDeleteDynamicThingGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteDynamicThingGroup{}, middleware.After)
+}
+
+func addOpDeleteFleetMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteFleetMetric{}, middleware.After)
 }
 
 func addOpDeleteJobExecutionValidationMiddleware(stack *middleware.Stack) error {
@@ -3830,6 +3938,10 @@ func addOpDescribeDomainConfigurationValidationMiddleware(stack *middleware.Stac
 	return stack.Initialize.Add(&validateOpDescribeDomainConfiguration{}, middleware.After)
 }
 
+func addOpDescribeFleetMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeFleetMetric{}, middleware.After)
+}
+
 func addOpDescribeIndexValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeIndex{}, middleware.After)
 }
@@ -3912,6 +4024,10 @@ func addOpDisableTopicRuleValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpEnableTopicRuleValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpEnableTopicRule{}, middleware.After)
+}
+
+func addOpGetBucketsAggregationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetBucketsAggregation{}, middleware.After)
 }
 
 func addOpGetCardinalityValidationMiddleware(stack *middleware.Stack) error {
@@ -4160,6 +4276,10 @@ func addOpUpdateDomainConfigurationValidationMiddleware(stack *middleware.Stack)
 
 func addOpUpdateDynamicThingGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateDynamicThingGroup{}, middleware.After)
+}
+
+func addOpUpdateFleetMetricValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateFleetMetric{}, middleware.After)
 }
 
 func addOpUpdateIndexingConfigurationValidationMiddleware(stack *middleware.Stack) error {
@@ -4423,6 +4543,21 @@ func validateAddThingsToThingGroupParams(v *types.AddThingsToThingGroupParams) e
 	invalidParams := smithy.InvalidParamsError{Context: "AddThingsToThingGroupParams"}
 	if v.ThingGroupNames == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingGroupNames"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateAggregationType(v *types.AggregationType) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AggregationType"}
+	if len(v.Name) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -6112,6 +6247,42 @@ func validateOpCreateDynamicThingGroupInput(v *CreateDynamicThingGroupInput) err
 	}
 }
 
+func validateOpCreateFleetMetricInput(v *CreateFleetMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFleetMetricInput"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.AggregationType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationType"))
+	} else if v.AggregationType != nil {
+		if err := validateAggregationType(v.AggregationType); err != nil {
+			invalidParams.AddNested("AggregationType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Period == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Period"))
+	}
+	if v.AggregationField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationField"))
+	}
+	if v.Tags != nil {
+		if err := validateTagList(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpCreateJobInput(v *CreateJobInput) error {
 	if v == nil {
 		return nil
@@ -6696,6 +6867,21 @@ func validateOpDeleteDynamicThingGroupInput(v *DeleteDynamicThingGroupInput) err
 	}
 }
 
+func validateOpDeleteFleetMetricInput(v *DeleteFleetMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteFleetMetricInput"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteJobExecutionInput(v *DeleteJobExecutionInput) error {
 	if v == nil {
 		return nil
@@ -7194,6 +7380,21 @@ func validateOpDescribeDomainConfigurationInput(v *DescribeDomainConfigurationIn
 	}
 }
 
+func validateOpDescribeFleetMetricInput(v *DescribeFleetMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeFleetMetricInput"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeIndexInput(v *DescribeIndexInput) error {
 	if v == nil {
 		return nil
@@ -7519,6 +7720,27 @@ func validateOpEnableTopicRuleInput(v *EnableTopicRuleInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "EnableTopicRuleInput"}
 	if v.RuleName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("RuleName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetBucketsAggregationInput(v *GetBucketsAggregationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetBucketsAggregationInput"}
+	if v.QueryString == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("QueryString"))
+	}
+	if v.AggregationField == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AggregationField"))
+	}
+	if v.BucketsAggregationType == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BucketsAggregationType"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -8566,6 +8788,29 @@ func validateOpUpdateDynamicThingGroupInput(v *UpdateDynamicThingGroupInput) err
 	}
 	if v.ThingGroupProperties == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ThingGroupProperties"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateFleetMetricInput(v *UpdateFleetMetricInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateFleetMetricInput"}
+	if v.MetricName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("MetricName"))
+	}
+	if v.AggregationType != nil {
+		if err := validateAggregationType(v.AggregationType); err != nil {
+			invalidParams.AddNested("AggregationType", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.IndexName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("IndexName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -12,21 +12,21 @@ import (
 
 // Disables automatic rotation of the key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) for the
-// specified symmetric customer master key (CMK). You cannot enable automatic
-// rotation of asymmetric CMKs
+// specified symmetric KMS key. You cannot enable automatic rotation of asymmetric
+// KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks),
-// CMKs with imported key material
+// KMS keys with imported key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
-// CMKs in a custom key store
+// KMS keys in a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 // To enable or disable automatic rotation of a set of related multi-Region keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key),
-// set the property on the primary key. The CMK that you use for this operation
+// set the property on the primary key. The KMS key that you use for this operation
 // must be in a compatible key state. For details, see Key state: Effect on your
-// CMK (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in
-// the AWS Key Management Service Developer Guide. Cross-account use: No. You
-// cannot perform this operation on a CMK in a different AWS account. Required
-// permissions: kms:DisableKeyRotation
+// KMS key (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html)
+// in the Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a KMS key in a different Amazon Web Services account.
+// Required permissions: kms:DisableKeyRotation
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //
@@ -50,14 +50,14 @@ func (c *Client) DisableKeyRotation(ctx context.Context, params *DisableKeyRotat
 
 type DisableKeyRotationInput struct {
 
-	// Identifies a symmetric customer master key (CMK). You cannot enable or disable
-	// automatic rotation of asymmetric CMKs
+	// Identifies a symmetric KMS key. You cannot enable or disable automatic rotation
+	// of asymmetric KMS keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html#asymmetric-cmks),
-	// CMKs with imported key material
+	// KMS keys with imported key material
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
-	// CMKs in a custom key store
+	// KMS keys in a custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
-	// Specify the key ID or key ARN of the CMK. For example:
+	// Specify the key ID or key ARN of the KMS key. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -66,7 +66,7 @@ type DisableKeyRotationInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

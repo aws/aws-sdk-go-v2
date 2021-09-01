@@ -12,44 +12,45 @@ import (
 )
 
 // Creates a digital signature (https://en.wikipedia.org/wiki/Digital_signature)
-// for a message or message digest by using the private key in an asymmetric CMK.
-// To verify the signature, use the Verify operation, or use the public key in the
-// same asymmetric CMK outside of AWS KMS. For information about symmetric and
-// asymmetric CMKs, see Using Symmetric and Asymmetric CMKs
+// for a message or message digest by using the private key in an asymmetric KMS
+// key. To verify the signature, use the Verify operation, or use the public key in
+// the same asymmetric KMS key outside of KMS. For information about symmetric and
+// asymmetric KMS keys, see Using Symmetric and Asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-// in the AWS Key Management Service Developer Guide. Digital signatures are
-// generated and verified by using asymmetric key pair, such as an RSA or ECC pair
-// that is represented by an asymmetric customer master key (CMK). The key owner
-// (or an authorized user) uses their private key to sign a message. Anyone with
-// the public key can verify that the message was signed with that particular
-// private key and that the message hasn't changed since it was signed. To use the
-// Sign operation, provide the following information:
+// in the Key Management Service Developer Guide. Digital signatures are generated
+// and verified by using asymmetric key pair, such as an RSA or ECC pair that is
+// represented by an asymmetric KMS key. The key owner (or an authorized user) uses
+// their private key to sign a message. Anyone with the public key can verify that
+// the message was signed with that particular private key and that the message
+// hasn't changed since it was signed. To use the Sign operation, provide the
+// following information:
 //
-// * Use the KeyId parameter to
-// identify an asymmetric CMK with a KeyUsage value of SIGN_VERIFY. To get the
-// KeyUsage value of a CMK, use the DescribeKey operation. The caller must have
-// kms:Sign permission on the CMK.
+// * Use the KeyId parameter to identify an asymmetric KMS
+// key with a KeyUsage value of SIGN_VERIFY. To get the KeyUsage value of a KMS
+// key, use the DescribeKey operation. The caller must have kms:Sign permission on
+// the KMS key.
 //
-// * Use the Message parameter to specify the
-// message or message digest to sign. You can submit messages of up to 4096 bytes.
-// To sign a larger message, generate a hash digest of the message, and then
-// provide the hash digest in the Message parameter. To indicate whether the
-// message is a full message or a digest, use the MessageType parameter.
+// * Use the Message parameter to specify the message or message
+// digest to sign. You can submit messages of up to 4096 bytes. To sign a larger
+// message, generate a hash digest of the message, and then provide the hash digest
+// in the Message parameter. To indicate whether the message is a full message or a
+// digest, use the MessageType parameter.
 //
-// * Choose
-// a signing algorithm that is compatible with the CMK.
+// * Choose a signing algorithm that is
+// compatible with the KMS key.
 //
-// When signing a message, be
-// sure to record the CMK and the signing algorithm. This information is required
-// to verify the signature. To verify the signature that this operation generates,
-// use the Verify operation. Or use the GetPublicKey operation to download the
-// public key and then use the public key to verify the signature outside of AWS
-// KMS. The CMK that you use for this operation must be in a compatible key state.
-// For details, see Key state: Effect on your CMK
+// When signing a message, be sure to record the KMS
+// key and the signing algorithm. This information is required to verify the
+// signature. To verify the signature that this operation generates, use the Verify
+// operation. Or use the GetPublicKey operation to download the public key and then
+// use the public key to verify the signature outside of KMS. The KMS key that you
+// use for this operation must be in a compatible key state. For details, see Key
+// state: Effect on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide. Cross-account use: Yes. To perform
-// this operation with a CMK in a different AWS account, specify the key ARN or
-// alias ARN in the value of the KeyId parameter. Required permissions: kms:Sign
+// Key Management Service Developer Guide. Cross-account use: Yes. To perform this
+// operation with a KMS key in a different Amazon Web Services account, specify the
+// key ARN or alias ARN in the value of the KeyId parameter. Required permissions:
+// kms:Sign
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations: Verify
 func (c *Client) Sign(ctx context.Context, params *SignInput, optFns ...func(*Options)) (*SignOutput, error) {
@@ -69,12 +70,12 @@ func (c *Client) Sign(ctx context.Context, params *SignInput, optFns ...func(*Op
 
 type SignInput struct {
 
-	// Identifies an asymmetric CMK. AWS KMS uses the private key in the asymmetric CMK
-	// to sign the message. The KeyUsage type of the CMK must be SIGN_VERIFY. To find
-	// the KeyUsage of a CMK, use the DescribeKey operation. To specify a CMK, use its
-	// key ID, key ARN, alias name, or alias ARN. When using an alias name, prefix it
-	// with "alias/". To specify a CMK in a different AWS account, you must use the key
-	// ARN or alias ARN. For example:
+	// Identifies an asymmetric KMS key. KMS uses the private key in the asymmetric KMS
+	// key to sign the message. The KeyUsage type of the KMS key must be SIGN_VERIFY.
+	// To find the KeyUsage of a KMS key, use the DescribeKey operation. To specify a
+	// KMS key, use its key ID, key ARN, alias name, or alias ARN. When using an alias
+	// name, prefix it with "alias/". To specify a KMS key in a different Amazon Web
+	// Services account, you must use the key ARN or alias ARN. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -89,22 +90,22 @@ type SignInput struct {
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
-	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
-	// use ListAliases.
+	// ARN for a KMS key, use ListKeys or DescribeKey. To get the alias name and alias
+	// ARN, use ListAliases.
 	//
 	// This member is required.
 	KeyId *string
 
 	// Specifies the message or message digest to sign. Messages can be 0-4096 bytes.
 	// To sign a larger message, provide the message digest. If you provide a message,
-	// AWS KMS generates a hash digest of the message and then signs it.
+	// KMS generates a hash digest of the message and then signs it.
 	//
 	// This member is required.
 	Message []byte
 
 	// Specifies the signing algorithm to use when signing the message. Choose an
 	// algorithm that is compatible with the type and size of the specified asymmetric
-	// CMK.
+	// KMS key.
 	//
 	// This member is required.
 	SigningAlgorithm types.SigningAlgorithmSpec
@@ -112,11 +113,13 @@ type SignInput struct {
 	// A list of grant tokens. Use a grant token when your permission to call this
 	// operation comes from a new grant that has not yet achieved eventual consistency.
 	// For more information, see Grant token
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
-	// in the AWS Key Management Service Developer Guide.
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token)
+	// and Using a grant token
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token)
+	// in the Key Management Service Developer Guide.
 	GrantTokens []string
 
-	// Tells AWS KMS whether the value of the Message parameter is a message or message
+	// Tells KMS whether the value of the Message parameter is a message or message
 	// digest. The default value, RAW, indicates a message. To indicate a message
 	// digest, enter DIGEST.
 	MessageType types.MessageType
@@ -128,7 +131,7 @@ type SignOutput struct {
 
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
-	// of the asymmetric CMK that was used to sign the message.
+	// of the asymmetric KMS key that was used to sign the message.
 	KeyId *string
 
 	// The cryptographic signature that was generated for the message.
@@ -144,8 +147,8 @@ type SignOutput struct {
 	// commonly used signature format and is appropriate for most uses.
 	//
 	// When you use
-	// the HTTP API or the AWS CLI, the value is Base64-encoded. Otherwise, it is not
-	// Base64-encoded.
+	// the HTTP API or the Amazon Web Services CLI, the value is Base64-encoded.
+	// Otherwise, it is not Base64-encoded.
 	Signature []byte
 
 	// The signing algorithm that was used to sign the message.

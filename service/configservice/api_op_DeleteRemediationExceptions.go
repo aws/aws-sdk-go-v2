@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes one or more remediation exceptions mentioned in the resource keys. AWS
+// Deletes one or more remediation exceptions mentioned in the resource keys.
 // Config generates a remediation exception when a problem occurs executing a
 // remediation action to a specific resource. Remediation exceptions blocks
 // auto-remediation until the exception is cleared.
@@ -32,15 +32,15 @@ func (c *Client) DeleteRemediationExceptions(ctx context.Context, params *Delete
 
 type DeleteRemediationExceptionsInput struct {
 
-	// The name of the AWS Config rule for which you want to delete remediation
-	// exception configuration.
+	// The name of the Config rule for which you want to delete remediation exception
+	// configuration.
 	//
 	// This member is required.
 	ConfigRuleName *string
 
 	// An exception list of resource exception keys to be processed with the current
-	// request. AWS Config adds exception for each resource key. For example, AWS
-	// Config adds 3 exceptions for 3 resource keys.
+	// request. Config adds exception for each resource key. For example, Config adds 3
+	// exceptions for 3 resource keys.
 	//
 	// This member is required.
 	ResourceKeys []types.RemediationExceptionResourceKey

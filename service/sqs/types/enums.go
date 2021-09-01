@@ -73,6 +73,7 @@ const (
 	QueueAttributeNameKmsDataKeyReusePeriodSeconds          QueueAttributeName = "KmsDataKeyReusePeriodSeconds"
 	QueueAttributeNameDeduplicationScope                    QueueAttributeName = "DeduplicationScope"
 	QueueAttributeNameFifoThroughputLimit                   QueueAttributeName = "FifoThroughputLimit"
+	QueueAttributeNameRedriveAllowPolicy                    QueueAttributeName = "RedriveAllowPolicy"
 )
 
 // Values returns all known values for QueueAttributeName. Note that this can be
@@ -100,5 +101,6 @@ func (QueueAttributeName) Values() []QueueAttributeName {
 		"KmsDataKeyReusePeriodSeconds",
 		"DeduplicationScope",
 		"FifoThroughputLimit",
+		"RedriveAllowPolicy",
 	}
 }

@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Describes a bulk thing provisioning task.
+// Describes a bulk thing provisioning task. Requires permission to access the
+// DescribeThingRegistrationTask
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeThingRegistrationTask(ctx context.Context, params *DescribeThingRegistrationTaskInput, optFns ...func(*Options)) (*DescribeThingRegistrationTaskOutput, error) {
 	if params == nil {
 		params = &DescribeThingRegistrationTaskInput{}

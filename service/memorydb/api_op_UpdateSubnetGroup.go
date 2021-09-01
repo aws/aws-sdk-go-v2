@@ -12,7 +12,7 @@ import (
 )
 
 // Updates a subnet group. For more information, see Updating a subnet group
-// (https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/SubnetGroups.Modifying.html)
+// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/ubnetGroups.Modifying.html)
 func (c *Client) UpdateSubnetGroup(ctx context.Context, params *UpdateSubnetGroupInput, optFns ...func(*Options)) (*UpdateSubnetGroupOutput, error) {
 	if params == nil {
 		params = &UpdateSubnetGroupInput{}

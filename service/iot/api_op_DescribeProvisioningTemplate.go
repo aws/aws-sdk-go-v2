@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Returns information about a fleet provisioning template.
+// Returns information about a fleet provisioning template. Requires permission to
+// access the DescribeProvisioningTemplate
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeProvisioningTemplate(ctx context.Context, params *DescribeProvisioningTemplateInput, optFns ...func(*Options)) (*DescribeProvisioningTemplateOutput, error) {
 	if params == nil {
 		params = &DescribeProvisioningTemplateInput{}

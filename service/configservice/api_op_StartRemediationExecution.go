@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Runs an on-demand remediation for the specified AWS Config rules against the
-// last known remediation configuration. It runs an execution against the current
-// state of your resources. Remediation execution is asynchronous. You can specify
-// up to 100 resource keys per request. An existing StartRemediationExecution call
-// for the specified resource keys must complete before you can call the API again.
+// Runs an on-demand remediation for the specified Config rules against the last
+// known remediation configuration. It runs an execution against the current state
+// of your resources. Remediation execution is asynchronous. You can specify up to
+// 100 resource keys per request. An existing StartRemediationExecution call for
+// the specified resource keys must complete before you can call the API again.
 func (c *Client) StartRemediationExecution(ctx context.Context, params *StartRemediationExecutionInput, optFns ...func(*Options)) (*StartRemediationExecutionOutput, error) {
 	if params == nil {
 		params = &StartRemediationExecutionInput{}
@@ -33,7 +33,7 @@ func (c *Client) StartRemediationExecution(ctx context.Context, params *StartRem
 
 type StartRemediationExecutionInput struct {
 
-	// The list of names of AWS Config rules that you want to run remediation execution
+	// The list of names of Config rules that you want to run remediation execution
 	// for.
 	//
 	// This member is required.

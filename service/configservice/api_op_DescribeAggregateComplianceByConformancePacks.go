@@ -13,7 +13,7 @@ import (
 )
 
 // Returns a list of the conformance packs and their associated compliance status
-// with the count of compliant and noncompliant AWS Config rules within each
+// with the count of compliant and noncompliant Config rules within each
 // conformance pack. Also returns the total rule count which includes compliant
 // rules, noncompliant rules, and rules that cannot be evaluated due to
 // insufficient data. The results can return an empty result page, but if you have
@@ -44,7 +44,7 @@ type DescribeAggregateComplianceByConformancePacksInput struct {
 	Filters *types.AggregateConformancePackComplianceFilters
 
 	// The maximum number of conformance packs compliance details returned on each
-	// page. The default is maximum. If you specify 0, AWS Config uses the default.
+	// page. The default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -144,7 +144,7 @@ var _ DescribeAggregateComplianceByConformancePacksAPIClient = (*Client)(nil)
 // options for DescribeAggregateComplianceByConformancePacks
 type DescribeAggregateComplianceByConformancePacksPaginatorOptions struct {
 	// The maximum number of conformance packs compliance details returned on each
-	// page. The default is maximum. If you specify 0, AWS Config uses the default.
+	// page. The default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

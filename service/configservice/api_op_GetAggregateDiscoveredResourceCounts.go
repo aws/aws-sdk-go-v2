@@ -13,10 +13,10 @@ import (
 )
 
 // Returns the resource counts across accounts and regions that are present in your
-// AWS Config aggregator. You can request the resource counts by providing filters
-// and GroupByKey. For example, if the input contains accountID 12345678910 and
-// region us-east-1 in filters, the API returns the count of resources in account
-// ID 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a
+// Config aggregator. You can request the resource counts by providing filters and
+// GroupByKey. For example, if the input contains accountID 12345678910 and region
+// us-east-1 in filters, the API returns the count of resources in account ID
+// 12345678910 and region us-east-1. If the input contains ACCOUNT_ID as a
 // GroupByKey, the API returns resource counts for all source accounts that are
 // present in your aggregator.
 func (c *Client) GetAggregateDiscoveredResourceCounts(ctx context.Context, params *GetAggregateDiscoveredResourceCountsInput, optFns ...func(*Options)) (*GetAggregateDiscoveredResourceCountsOutput, error) {
@@ -49,7 +49,7 @@ type GetAggregateDiscoveredResourceCountsInput struct {
 
 	// The maximum number of GroupedResourceCount objects returned on each page. The
 	// default is 1000. You cannot specify a number greater than 1000. If you specify
-	// 0, AWS Config uses the default.
+	// 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -160,7 +160,7 @@ var _ GetAggregateDiscoveredResourceCountsAPIClient = (*Client)(nil)
 type GetAggregateDiscoveredResourceCountsPaginatorOptions struct {
 	// The maximum number of GroupedResourceCount objects returned on each page. The
 	// default is 1000. You cannot specify a number greater than 1000. If you specify
-	// 0, AWS Config uses the default.
+	// 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

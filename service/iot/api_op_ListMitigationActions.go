@@ -13,6 +13,9 @@ import (
 )
 
 // Gets a list of all mitigation actions that match the specified filter criteria.
+// Requires permission to access the ListMitigationActions
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListMitigationActions(ctx context.Context, params *ListMitigationActionsInput, optFns ...func(*Options)) (*ListMitigationActionsOutput, error) {
 	if params == nil {
 		params = &ListMitigationActionsInput{}

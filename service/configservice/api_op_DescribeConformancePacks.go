@@ -31,8 +31,8 @@ func (c *Client) DescribeConformancePacks(ctx context.Context, params *DescribeC
 type DescribeConformancePacksInput struct {
 
 	// Comma-separated list of conformance pack names for which you want details. If
-	// you do not specify any names, AWS Config returns details for all your
-	// conformance packs.
+	// you do not specify any names, Config returns details for all your conformance
+	// packs.
 	ConformancePackNames []string
 
 	// The maximum number of conformance packs returned on each page.

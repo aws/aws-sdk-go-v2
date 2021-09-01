@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new version of a fleet provisioning template.
+// Creates a new version of a fleet provisioning template. Requires permission to
+// access the CreateProvisioningTemplateVersion
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateProvisioningTemplateVersion(ctx context.Context, params *CreateProvisioningTemplateVersionInput, optFns ...func(*Options)) (*CreateProvisioningTemplateVersionOutput, error) {
 	if params == nil {
 		params = &CreateProvisioningTemplateVersionInput{}

@@ -59,6 +59,7 @@
         "api_op_RecordHandlerProgress.go",
         "api_op_RegisterPublisher.go",
         "api_op_RegisterType.go",
+        "api_op_RollbackStack.go",
         "api_op_SetStackPolicy.go",
         "api_op_SetTypeConfiguration.go",
         "api_op_SetTypeDefaultVersion.go",

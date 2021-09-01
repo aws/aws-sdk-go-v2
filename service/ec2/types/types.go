@@ -4078,6 +4078,9 @@ type ImportImageTask struct {
 	// The architecture of the virtual machine. Valid values: i386 | x86_64 | arm64
 	Architecture *string
 
+	// The boot mode of the virtual machine.
+	BootMode BootModeValues
+
 	// A description of the import task.
 	Description *string
 
@@ -6088,6 +6091,10 @@ type LaunchTemplateInstanceMetadataOptions struct {
 	// a value of disabled, you will not be able to access your instance metadata.
 	HttpEndpoint LaunchTemplateInstanceMetadataEndpointState
 
+	// Enables or disables the IPv6 endpoint for the instance metadata service.
+	// Default: disabled
+	HttpProtocolIpv6 LaunchTemplateInstanceMetadataProtocolIpv6
+
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
 	// Possible values: Integers from 1 to 64
@@ -6124,6 +6131,10 @@ type LaunchTemplateInstanceMetadataOptionsRequest struct {
 	// If the parameter is not specified, the default state is enabled. If you specify
 	// a value of disabled, you will not be able to access your instance metadata.
 	HttpEndpoint LaunchTemplateInstanceMetadataEndpointState
+
+	// Enables or disables the IPv6 endpoint for the instance metadata service.
+	// Default: disabled
+	HttpProtocolIpv6 LaunchTemplateInstanceMetadataProtocolIpv6
 
 	// The desired HTTP PUT response hop limit for instance metadata requests. The
 	// larger the number, the further instance metadata requests can travel. Default: 1
@@ -6176,11 +6187,11 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// The type of network interface.
 	InterfaceType *string
 
-	// The number of IPv4 delegated prefixes that AWS automatically assigned to the
-	// network interface.
+	// The number of IPv4 prefixes that Amazon Web Services automatically assigned to
+	// the network interface.
 	Ipv4PrefixCount *int32
 
-	// One or more IPv4 delegated prefixes assigned to the network interface.
+	// One or more IPv4 prefixes assigned to the network interface.
 	Ipv4Prefixes []Ipv4PrefixSpecificationResponse
 
 	// The number of IPv6 addresses for the network interface.
@@ -6189,11 +6200,11 @@ type LaunchTemplateInstanceNetworkInterfaceSpecification struct {
 	// The IPv6 addresses for the network interface.
 	Ipv6Addresses []InstanceIpv6Address
 
-	// The number of IPv6 delegated prefixes that AWS automatically assigned to the
-	// network interface.
+	// The number of IPv6 prefixes that Amazon Web Services automatically assigned to
+	// the network interface.
 	Ipv6PrefixCount *int32
 
-	// One or more IPv6 delegated prefixes assigned to the network interface.
+	// One or more IPv6 prefixes assigned to the network interface.
 	Ipv6Prefixes []Ipv6PrefixSpecificationResponse
 
 	// The index of the network card.
@@ -6251,12 +6262,12 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// interface or omit this parameter. Valid values: interface | efa
 	InterfaceType *string
 
-	// The number of IPv4 delegated prefixes to be automatically assigned to the
-	// network interface. You cannot use this option if you use the Ipv4Prefix option.
+	// The number of IPv4 prefixes to be automatically assigned to the network
+	// interface. You cannot use this option if you use the Ipv4Prefix option.
 	Ipv4PrefixCount *int32
 
-	// One or more IPv4 delegated prefixes to be assigned to the network interface. You
-	// cannot use this option if you use the Ipv4PrefixCount option.
+	// One or more IPv4 prefixes to be assigned to the network interface. You cannot
+	// use this option if you use the Ipv4PrefixCount option.
 	Ipv4Prefixes []Ipv4PrefixSpecificationRequest
 
 	// The number of IPv6 addresses to assign to a network interface. Amazon EC2
@@ -6269,12 +6280,12 @@ type LaunchTemplateInstanceNetworkInterfaceSpecificationRequest struct {
 	// addresses.
 	Ipv6Addresses []InstanceIpv6AddressRequest
 
-	// The number of IPv6 delegated prefixes to be automatically assigned to the
-	// network interface. You cannot use this option if you use the Ipv6Prefix option.
+	// The number of IPv6 prefixes to be automatically assigned to the network
+	// interface. You cannot use this option if you use the Ipv6Prefix option.
 	Ipv6PrefixCount *int32
 
-	// One or more IPv6 delegated prefixes to be assigned to the network interface. You
-	// cannot use this option if you use the Ipv6PrefixCount option.
+	// One or more IPv6 prefixes to be assigned to the network interface. You cannot
+	// use this option if you use the Ipv6PrefixCount option.
 	Ipv6Prefixes []Ipv6PrefixSpecificationRequest
 
 	// The index of the network card. Some instance types support multiple network
@@ -8625,12 +8636,18 @@ type RequestLaunchTemplateData struct {
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	TagSpecifications []LaunchTemplateTagSpecificationRequest
 
-	// The Base64-encoded user data to make available to the instance. For more
-	// information, see Running Commands on Your Linux Instance at Launch
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) (Linux) and
+	// The user data to make available to the instance. You must provide base64-encoded
+	// text. User data is limited to 16 KB. For more information, see Running Commands
+	// on Your Linux Instance at Launch
+	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html) (Linux) or
 	// Adding User Data
 	// (https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data)
-	// (Windows).
+	// (Windows). If you are creating the launch template for use with Batch, the user
+	// data must be provided in the  MIME multi-part archive format
+	// (https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive).
+	// For more information, see Amazon EC2 user data in launch templates
+	// (https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html) in
+	// the Batch User Guide.
 	UserData *string
 
 	noSmithyDocumentSerde

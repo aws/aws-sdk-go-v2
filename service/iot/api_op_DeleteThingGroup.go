@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a thing group.
+// Deletes a thing group. Requires permission to access the DeleteThingGroup
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DeleteThingGroup(ctx context.Context, params *DeleteThingGroupInput, optFns ...func(*Options)) (*DeleteThingGroupOutput, error) {
 	if params == nil {
 		params = &DeleteThingGroupInput{}

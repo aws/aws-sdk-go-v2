@@ -12,9 +12,9 @@ import (
 
 // Registers your account as a publisher of public extensions in the CloudFormation
 // registry. Public extensions are available for use by all CloudFormation users.
-// This publisher ID applies to your account in all Regions. For information on
-// requirements for registering as a public extension publisher, see Registering
-// your account to publish CloudFormation extensions
+// This publisher ID applies to your account in all Amazon Web Services Regions.
+// For information on requirements for registering as a public extension publisher,
+// see Registering your account to publish CloudFormation extensions
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/publish-extension.html#publish-extension-prereqs)
 // in the CloudFormation CLI User Guide.
 func (c *Client) RegisterPublisher(ctx context.Context, params *RegisterPublisherInput, optFns ...func(*Options)) (*RegisterPublisherOutput, error) {

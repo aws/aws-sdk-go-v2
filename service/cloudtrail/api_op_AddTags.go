@@ -16,8 +16,8 @@ import (
 // must be unique for a trail; you cannot have two keys with the same name but
 // different values. If you specify a key without a value, the tag will be created
 // with the specified key and a value of null. You can tag a trail that applies to
-// all AWS Regions only from the Region in which the trail was created (also known
-// as its home region).
+// all Amazon Web Services Regions only from the Region in which the trail was
+// created (also known as its home region).
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
 		params = &AddTagsInput{}
@@ -43,14 +43,13 @@ type AddTagsInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// Contains a list of CloudTrail tags, up to a limit of 50
+	// Contains a list of tags, up to a limit of 50
 	TagsList []types.Tag
 
 	noSmithyDocumentSerde
 }
 
-// Returns the objects or data listed below if successful. Otherwise, returns an
-// error.
+// Returns the objects or data if successful. Otherwise, returns an error.
 type AddTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

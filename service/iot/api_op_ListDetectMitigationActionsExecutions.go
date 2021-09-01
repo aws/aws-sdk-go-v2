@@ -14,7 +14,9 @@ import (
 )
 
 // Lists mitigation actions executions for a Device Defender ML Detect Security
-// Profile.
+// Profile. Requires permission to access the ListDetectMitigationActionsExecutions
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListDetectMitigationActionsExecutions(ctx context.Context, params *ListDetectMitigationActionsExecutionsInput, optFns ...func(*Options)) (*ListDetectMitigationActionsExecutionsOutput, error) {
 	if params == nil {
 		params = &ListDetectMitigationActionsExecutionsInput{}

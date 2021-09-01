@@ -11,9 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Syncs the resource with what is currently recorded in App registry.
-// Specifically, the resource’s App registry system tags are synced with its
-// associated application. The resource is removed if it is not associated with the
+// Syncs the resource with current AppRegistry records. Specifically, the
+// resource’s AppRegistry system tags sync with its associated application. We
+// remove the resource's AppRegistry system tags if it does not associate with the
 // application. The caller must have permissions to read and update the resource.
 func (c *Client) SyncResource(ctx context.Context, params *SyncResourceInput, optFns ...func(*Options)) (*SyncResourceOutput, error) {
 	if params == nil {
@@ -33,7 +33,8 @@ func (c *Client) SyncResource(ctx context.Context, params *SyncResourceInput, op
 type SyncResourceInput struct {
 
 	// An entity you can work with and specify with a name or ID. Examples include an
-	// Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.
+	// Amazon EC2 instance, an Amazon Web Services CloudFormation stack, or an Amazon
+	// S3 bucket.
 	//
 	// This member is required.
 	Resource *string

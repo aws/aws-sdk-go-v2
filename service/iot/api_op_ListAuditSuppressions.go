@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your Device Defender audit listings.
+// Lists your Device Defender audit listings. Requires permission to access the
+// ListAuditSuppressions
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListAuditSuppressions(ctx context.Context, params *ListAuditSuppressionsInput, optFns ...func(*Options)) (*ListAuditSuppressionsOutput, error) {
 	if params == nil {
 		params = &ListAuditSuppressionsInput{}

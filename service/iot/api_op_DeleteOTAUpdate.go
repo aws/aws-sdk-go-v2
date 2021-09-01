@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Delete an OTA update.
+// Delete an OTA update. Requires permission to access the DeleteOTAUpdate
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DeleteOTAUpdate(ctx context.Context, params *DeleteOTAUpdateInput, optFns ...func(*Options)) (*DeleteOTAUpdateOutput, error) {
 	if params == nil {
 		params = &DeleteOTAUpdateInput{}
@@ -38,7 +40,7 @@ type DeleteOTAUpdateInput struct {
 	// by the user.
 	DeleteStream bool
 
-	// When true, deletes the AWS job created by the OTAUpdate process even if it is
+	// When true, deletes the IoT job created by the OTAUpdate process even if it is
 	// "IN_PROGRESS". Otherwise, if the job is not in a terminal state ("COMPLETED" or
 	// "CANCELED") an exception will occur. The default is false.
 	ForceDeleteAWSJob bool

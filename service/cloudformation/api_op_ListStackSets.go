@@ -16,17 +16,18 @@ import (
 // user.
 //
 // * [Self-managed permissions] If you set the CallAs parameter to SELF
-// while signed in to your account, ListStackSets returns all self-managed stack
-// sets in your account.
+// while signed in to your Amazon Web Services account, ListStackSets returns all
+// self-managed stack sets in your Amazon Web Services account.
+//
+// * [Service-managed
+// permissions] If you set the CallAs parameter to SELF while signed in to the
+// organization's management account, ListStackSets returns all stack sets in the
+// management account.
 //
 // * [Service-managed permissions] If you set the CallAs
-// parameter to SELF while signed in to the organization's management account,
-// ListStackSets returns all stack sets in the management account.
-//
-// *
-// [Service-managed permissions] If you set the CallAs parameter to DELEGATED_ADMIN
-// while signed in to your member account, ListStackSets returns all stack sets
-// with service-managed permissions in the management account.
+// parameter to DELEGATED_ADMIN while signed in to your member account,
+// ListStackSets returns all stack sets with service-managed permissions in the
+// management account.
 func (c *Client) ListStackSets(ctx context.Context, params *ListStackSetsInput, optFns ...func(*Options)) (*ListStackSetsOutput, error) {
 	if params == nil {
 		params = &ListStackSetsInput{}
@@ -53,9 +54,9 @@ type ListStackSetsInput struct {
 	// specify SELF.
 	//
 	// * If you are signed in to a delegated administrator account,
-	// specify DELEGATED_ADMIN. Your account must be registered as a delegated
-	// administrator in the management account. For more information, see Register a
-	// delegated administrator
+	// specify DELEGATED_ADMIN. Your Amazon Web Services account must be registered as
+	// a delegated administrator in the management account. For more information, see
+	// Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
 	// in the CloudFormation User Guide.
 	CallAs types.CallAs

@@ -87,6 +87,13 @@ func awsRestjson1_serializeOpDocumentCreateChannelInput(v *CreateChannelInput, v
 	object := value.Object()
 	defer object.Close()
 
+	if v.FillerSlate != nil {
+		ok := object.Key("FillerSlate")
+		if err := awsRestjson1_serializeDocumentSlateSource(v.FillerSlate, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.Outputs != nil {
 		ok := object.Key("Outputs")
 		if err := awsRestjson1_serializeDocumentRequestOutputs(v.Outputs, ok); err != nil {
@@ -2779,6 +2786,11 @@ func awsRestjson1_serializeDocumentTransition(v *types.Transition, value smithyj
 	if v.RelativeProgram != nil {
 		ok := object.Key("RelativeProgram")
 		ok.String(*v.RelativeProgram)
+	}
+
+	if v.ScheduledStartTimeMillis != 0 {
+		ok := object.Key("ScheduledStartTimeMillis")
+		ok.Long(v.ScheduledStartTimeMillis)
 	}
 
 	if v.Type != nil {

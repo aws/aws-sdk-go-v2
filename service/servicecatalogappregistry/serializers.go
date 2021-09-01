@@ -648,6 +648,82 @@ func awsRestjson1_serializeOpHttpBindingsGetApplicationInput(v *GetApplicationIn
 	return nil
 }
 
+type awsRestjson1_serializeOpGetAssociatedResource struct {
+}
+
+func (*awsRestjson1_serializeOpGetAssociatedResource) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetAssociatedResource) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAssociatedResourceInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/applications/{application}/resources/{resourceType}/{resource}")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetAssociatedResourceInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetAssociatedResourceInput(v *GetAssociatedResourceInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.Application == nil || len(*v.Application) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member application must not be empty")}
+	}
+	if v.Application != nil {
+		if err := encoder.SetURI("application").String(*v.Application); err != nil {
+			return err
+		}
+	}
+
+	if v.Resource == nil || len(*v.Resource) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resource must not be empty")}
+	}
+	if v.Resource != nil {
+		if err := encoder.SetURI("resource").String(*v.Resource); err != nil {
+			return err
+		}
+	}
+
+	if len(v.ResourceType) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member resourceType must not be empty")}
+	}
+	if len(v.ResourceType) > 0 {
+		if err := encoder.SetURI("resourceType").String(string(v.ResourceType)); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpGetAttributeGroup struct {
 }
 

@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Stops recording configurations of the AWS resources you have selected to record
-// in your AWS account.
+// Stops recording configurations of the Amazon Web Services resources you have
+// selected to record in your Amazon Web Services account.
 func (c *Client) StopConfigurationRecorder(ctx context.Context, params *StopConfigurationRecorderInput, optFns ...func(*Options)) (*StopConfigurationRecorderOutput, error) {
 	if params == nil {
 		params = &StopConfigurationRecorderInput{}

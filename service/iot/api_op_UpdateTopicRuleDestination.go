@@ -12,7 +12,10 @@ import (
 )
 
 // Updates a topic rule destination. You use this to change the status, endpoint
-// URL, or confirmation URL of the destination.
+// URL, or confirmation URL of the destination. Requires permission to access the
+// UpdateTopicRuleDestination
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateTopicRuleDestination(ctx context.Context, params *UpdateTopicRuleDestinationInput, optFns ...func(*Options)) (*UpdateTopicRuleDestinationOutput, error) {
 	if params == nil {
 		params = &UpdateTopicRuleDestinationInput{}

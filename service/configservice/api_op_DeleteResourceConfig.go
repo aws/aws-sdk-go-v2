@@ -12,7 +12,7 @@ import (
 
 // Records the configuration state for a custom resource that has been deleted.
 // This API records a new ConfigurationItem with a ResourceDeleted status. You can
-// retrieve the ConfigurationItems recorded for this resource in your AWS Config
+// retrieve the ConfigurationItems recorded for this resource in your Config
 // History.
 func (c *Client) DeleteResourceConfig(ctx context.Context, params *DeleteResourceConfigInput, optFns ...func(*Options)) (*DeleteResourceConfigOutput, error) {
 	if params == nil {

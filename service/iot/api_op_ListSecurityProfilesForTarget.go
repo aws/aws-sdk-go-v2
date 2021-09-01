@@ -13,6 +13,9 @@ import (
 )
 
 // Lists the Device Defender security profiles attached to a target (thing group).
+// Requires permission to access the ListSecurityProfilesForTarget
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListSecurityProfilesForTarget(ctx context.Context, params *ListSecurityProfilesForTargetInput, optFns ...func(*Options)) (*ListSecurityProfilesForTargetOutput, error) {
 	if params == nil {
 		params = &ListSecurityProfilesForTargetInput{}

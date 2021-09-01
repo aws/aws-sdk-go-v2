@@ -39,7 +39,7 @@ type DescribeConformancePackComplianceInput struct {
 	// A ConformancePackComplianceFilters object.
 	Filters *types.ConformancePackComplianceFilters
 
-	// The maximum number of AWS Config rules within a conformance pack are returned on
+	// The maximum number of Config rules within a conformance pack are returned on
 	// each page.
 	Limit int32
 
@@ -146,7 +146,7 @@ var _ DescribeConformancePackComplianceAPIClient = (*Client)(nil)
 // DescribeConformancePackCompliancePaginatorOptions is the paginator options for
 // DescribeConformancePackCompliance
 type DescribeConformancePackCompliancePaginatorOptions struct {
-	// The maximum number of AWS Config rules within a conformance pack are returned on
+	// The maximum number of Config rules within a conformance pack are returned on
 	// each page.
 	Limit int32
 

@@ -12,9 +12,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the CA certificates registered for your AWS account. The results are
-// paginated with a default page size of 25. You can use the returned marker to
-// retrieve additional results.
+// Lists the CA certificates registered for your Amazon Web Services account. The
+// results are paginated with a default page size of 25. You can use the returned
+// marker to retrieve additional results. Requires permission to access the
+// ListCACertificates
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListCACertificates(ctx context.Context, params *ListCACertificatesInput, optFns ...func(*Options)) (*ListCACertificatesOutput, error) {
 	if params == nil {
 		params = &ListCACertificatesInput{}
@@ -48,7 +51,7 @@ type ListCACertificatesInput struct {
 // The output from the ListCACertificates operation.
 type ListCACertificatesOutput struct {
 
-	// The CA certificates registered in your AWS account.
+	// The CA certificates registered in your Amazon Web Services account.
 	Certificates []types.CACertificate
 
 	// The current position within the list of CA certificates.

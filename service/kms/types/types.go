@@ -20,11 +20,12 @@ type AliasListEntry struct {
 	// Region. Formatted as Unix time.
 	CreationDate *time.Time
 
-	// Date and time that the alias was most recently associated with a CMK in the
+	// Date and time that the alias was most recently associated with a KMS key in the
 	// account and Region. Formatted as Unix time.
 	LastUpdatedDate *time.Time
 
-	// String that contains the key identifier of the CMK associated with the alias.
+	// String that contains the key identifier of the KMS key associated with the
+	// alias.
 	TargetKeyId *string
 
 	noSmithyDocumentSerde
@@ -33,85 +34,84 @@ type AliasListEntry struct {
 // Contains information about each custom key store in the custom key store list.
 type CustomKeyStoresListEntry struct {
 
-	// A unique identifier for the AWS CloudHSM cluster that is associated with the
-	// custom key store.
+	// A unique identifier for the CloudHSM cluster that is associated with the custom
+	// key store.
 	CloudHsmClusterId *string
 
 	// Describes the connection error. This field appears in the response only when the
 	// ConnectionState is FAILED. For help resolving these errors, see How to Fix a
 	// Connection Failure
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
-	// in AWS Key Management Service Developer Guide. Valid values are:
+	// in Key Management Service Developer Guide. Valid values are:
 	//
 	// *
-	// CLUSTER_NOT_FOUND - AWS KMS cannot find the AWS CloudHSM cluster with the
-	// specified cluster ID.
+	// CLUSTER_NOT_FOUND - KMS cannot find the CloudHSM cluster with the specified
+	// cluster ID.
 	//
-	// * INSUFFICIENT_CLOUDHSM_HSMS - The associated AWS
-	// CloudHSM cluster does not contain any active HSMs. To connect a custom key store
-	// to its AWS CloudHSM cluster, the cluster must contain at least one active
-	// HSM.
+	// * INSUFFICIENT_CLOUDHSM_HSMS - The associated CloudHSM cluster does
+	// not contain any active HSMs. To connect a custom key store to its CloudHSM
+	// cluster, the cluster must contain at least one active HSM.
 	//
-	// * INTERNAL_ERROR - AWS KMS could not complete the request due to an
-	// internal error. Retry the request. For ConnectCustomKeyStore requests,
-	// disconnect the custom key store before trying to connect again.
+	// * INTERNAL_ERROR -
+	// KMS could not complete the request due to an internal error. Retry the request.
+	// For ConnectCustomKeyStore requests, disconnect the custom key store before
+	// trying to connect again.
 	//
-	// *
-	// INVALID_CREDENTIALS - AWS KMS does not have the correct password for the kmsuser
-	// crypto user in the AWS CloudHSM cluster. Before you can connect your custom key
-	// store to its AWS CloudHSM cluster, you must change the kmsuser account password
-	// and update the key store password value for the custom key store.
+	// * INVALID_CREDENTIALS - KMS does not have the correct
+	// password for the kmsuser crypto user in the CloudHSM cluster. Before you can
+	// connect your custom key store to its CloudHSM cluster, you must change the
+	// kmsuser account password and update the key store password value for the custom
+	// key store.
 	//
-	// *
-	// NETWORK_ERRORS - Network errors are preventing AWS KMS from connecting to the
-	// custom key store.
+	// * NETWORK_ERRORS - Network errors are preventing KMS from connecting
+	// to the custom key store.
 	//
-	// * SUBNET_NOT_FOUND - A subnet in the AWS CloudHSM cluster
-	// configuration was deleted. If AWS KMS cannot find all of the subnets in the
-	// cluster configuration, attempts to connect the custom key store to the AWS
-	// CloudHSM cluster fail. To fix this error, create a cluster from a recent backup
-	// and associate it with your custom key store. (This process creates a new cluster
-	// configuration with a VPC and private subnets.) For details, see How to Fix a
-	// Connection Failure
+	// * SUBNET_NOT_FOUND - A subnet in the CloudHSM cluster
+	// configuration was deleted. If KMS cannot find all of the subnets in the cluster
+	// configuration, attempts to connect the custom key store to the CloudHSM cluster
+	// fail. To fix this error, create a cluster from a recent backup and associate it
+	// with your custom key store. (This process creates a new cluster configuration
+	// with a VPC and private subnets.) For details, see How to Fix a Connection
+	// Failure
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-failed)
-	// in the AWS Key Management Service Developer Guide.
+	// in the Key Management Service Developer Guide.
 	//
-	// * USER_LOCKED_OUT - The
-	// kmsuser CU account is locked out of the associated AWS CloudHSM cluster due to
-	// too many failed password attempts. Before you can connect your custom key store
-	// to its AWS CloudHSM cluster, you must change the kmsuser account password and
-	// update the key store password value for the custom key store.
+	// * USER_LOCKED_OUT - The kmsuser
+	// CU account is locked out of the associated CloudHSM cluster due to too many
+	// failed password attempts. Before you can connect your custom key store to its
+	// CloudHSM cluster, you must change the kmsuser account password and update the
+	// key store password value for the custom key store.
 	//
-	// * USER_LOGGED_IN
-	// - The kmsuser CU account is logged into the the associated AWS CloudHSM cluster.
-	// This prevents AWS KMS from rotating the kmsuser account password and logging
-	// into the cluster. Before you can connect your custom key store to its AWS
-	// CloudHSM cluster, you must log the kmsuser CU out of the cluster. If you changed
-	// the kmsuser password to log into the cluster, you must also and update the key
-	// store password value for the custom key store. For help, see How to Log Out and
+	// * USER_LOGGED_IN - The
+	// kmsuser CU account is logged into the the associated CloudHSM cluster. This
+	// prevents KMS from rotating the kmsuser account password and logging into the
+	// cluster. Before you can connect your custom key store to its CloudHSM cluster,
+	// you must log the kmsuser CU out of the cluster. If you changed the kmsuser
+	// password to log into the cluster, you must also and update the key store
+	// password value for the custom key store. For help, see How to Log Out and
 	// Reconnect
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#login-kmsuser-2)
-	// in the AWS Key Management Service Developer Guide.
+	// in the Key Management Service Developer Guide.
 	//
-	// * USER_NOT_FOUND - AWS KMS
-	// cannot find a kmsuser CU account in the associated AWS CloudHSM cluster. Before
-	// you can connect your custom key store to its AWS CloudHSM cluster, you must
-	// create a kmsuser CU account in the cluster, and then update the key store
-	// password value for the custom key store.
+	// * USER_NOT_FOUND - KMS cannot
+	// find a kmsuser CU account in the associated CloudHSM cluster. Before you can
+	// connect your custom key store to its CloudHSM cluster, you must create a kmsuser
+	// CU account in the cluster, and then update the key store password value for the
+	// custom key store.
 	ConnectionErrorCode ConnectionErrorCodeType
 
-	// Indicates whether the custom key store is connected to its AWS CloudHSM cluster.
-	// You can create and use CMKs in your custom key stores only when its connection
+	// Indicates whether the custom key store is connected to its CloudHSM cluster. You
+	// can create and use KMS keys in your custom key stores only when its connection
 	// state is CONNECTED. The value is DISCONNECTED if the key store has never been
 	// connected or you use the DisconnectCustomKeyStore operation to disconnect it. If
 	// the value is CONNECTED but you are having trouble using the custom key store,
-	// make sure that its associated AWS CloudHSM cluster is active and contains at
-	// least one active HSM. A value of FAILED indicates that an attempt to connect was
+	// make sure that its associated CloudHSM cluster is active and contains at least
+	// one active HSM. A value of FAILED indicates that an attempt to connect was
 	// unsuccessful. The ConnectionErrorCode field in the response indicates the cause
 	// of the failure. For help resolving a connection failure, see Troubleshooting a
 	// Custom Key Store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
-	// AWS Key Management Service Developer Guide.
+	// Key Management Service Developer Guide.
 	ConnectionState ConnectionStateType
 
 	// The date and time when the custom key store was created.
@@ -123,7 +123,7 @@ type CustomKeyStoresListEntry struct {
 	// The user-specified friendly name for the custom key store.
 	CustomKeyStoreName *string
 
-	// The trust anchor certificate of the associated AWS CloudHSM cluster. When you
+	// The trust anchor certificate of the associated CloudHSM cluster. When you
 	// initialize the cluster
 	// (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr),
 	// you create this certificate and save it in the customerCA.crt file.
@@ -137,23 +137,24 @@ type CustomKeyStoresListEntry struct {
 // in the grant only when the operation request includes the specified encryption
 // context
 // (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context).
-// AWS KMS applies the grant constraints only to cryptographic operations that
-// support an encryption context, that is, all cryptographic operations with a
-// symmetric CMK
+// KMS applies the grant constraints only to cryptographic operations that support
+// an encryption context, that is, all cryptographic operations with a symmetric
+// KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#symmetric-cmks).
 // Grant constraints are not applied to operations that do not support an
-// encryption context, such as cryptographic operations with asymmetric CMKs and
-// management operations, such as DescribeKey or RetireGrant. In a cryptographic
-// operation, the encryption context in the decryption operation must be an exact,
-// case-sensitive match for the keys and values in the encryption context of the
-// encryption operation. Only the order of the pairs can vary. However, in a grant
-// constraint, the key in each key-value pair is not case sensitive, but the value
-// is case sensitive. To avoid confusion, do not use multiple encryption context
-// pairs that differ only by case. To require a fully case-sensitive encryption
-// context, use the kms:EncryptionContext: and kms:EncryptionContextKeys conditions
-// in an IAM or key policy. For details, see kms:EncryptionContext:
+// encryption context, such as cryptographic operations with asymmetric KMS keys
+// and management operations, such as DescribeKey or RetireGrant. In a
+// cryptographic operation, the encryption context in the decryption operation must
+// be an exact, case-sensitive match for the keys and values in the encryption
+// context of the encryption operation. Only the order of the pairs can vary.
+// However, in a grant constraint, the key in each key-value pair is not case
+// sensitive, but the value is case sensitive. To avoid confusion, do not use
+// multiple encryption context pairs that differ only by case. To require a fully
+// case-sensitive encryption context, use the kms:EncryptionContext: and
+// kms:EncryptionContextKeys conditions in an IAM or key policy. For details, see
+// kms:EncryptionContext:
 // (https://docs.aws.amazon.com/kms/latest/developerguide/policy-conditions.html#conditions-kms-encryption-context)
-// in the AWS Key Management Service Developer Guide .
+// in the Key Management Service Developer Guide .
 type GrantConstraints struct {
 
 	// A list of key-value pairs that must match the encryption context in the
@@ -190,16 +191,16 @@ type GrantListEntry struct {
 	// The identity that gets the permissions in the grant. The GranteePrincipal field
 	// in the ListGrants response usually contains the user or role designated as the
 	// grantee principal in the grant. However, when the grantee principal in the grant
-	// is an AWS service, the GranteePrincipal field contains the service principal
+	// is an Amazon Web Services service, the GranteePrincipal field contains the
+	// service principal
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#principal-services),
 	// which might represent several different grantee principals.
 	GranteePrincipal *string
 
-	// The AWS account under which the grant was issued.
+	// The Amazon Web Services account under which the grant was issued.
 	IssuingAccount *string
 
-	// The unique identifier for the customer master key (CMK) to which the grant
-	// applies.
+	// The unique identifier for the KMS key to which the grant applies.
 	KeyId *string
 
 	// The friendly name that identifies the grant. If a name was provided in the
@@ -227,157 +228,167 @@ type KeyListEntry struct {
 	noSmithyDocumentSerde
 }
 
-// Contains metadata about a customer master key (CMK). This data type is used as a
-// response element for the CreateKey and DescribeKey operations.
+// Contains metadata about a KMS key. This data type is used as a response element
+// for the CreateKey and DescribeKey operations.
 type KeyMetadata struct {
 
-	// The globally unique identifier for the CMK.
+	// The globally unique identifier for the KMS key.
 	//
 	// This member is required.
 	KeyId *string
 
-	// The twelve-digit account ID of the AWS account that owns the CMK.
+	// The twelve-digit account ID of the Amazon Web Services account that owns the KMS
+	// key.
 	AWSAccountId *string
 
-	// The Amazon Resource Name (ARN) of the CMK. For examples, see AWS Key Management
-	// Service (AWS KMS)
+	// The Amazon Resource Name (ARN) of the KMS key. For examples, see Key Management
+	// Service (KMS)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-kms)
-	// in the Example ARNs section of the AWS General Reference.
+	// in the Example ARNs section of the Amazon Web Services General Reference.
 	Arn *string
 
-	// The cluster ID of the AWS CloudHSM cluster that contains the key material for
-	// the CMK. When you create a CMK in a custom key store
+	// The cluster ID of the CloudHSM cluster that contains the key material for the
+	// KMS key. When you create a KMS key in a custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html),
-	// AWS KMS creates the key material for the CMK in the associated AWS CloudHSM
-	// cluster. This value is present only when the CMK is created in a custom key
-	// store.
+	// KMS creates the key material for the KMS key in the associated CloudHSM cluster.
+	// This value is present only when the KMS key is created in a custom key store.
 	CloudHsmClusterId *string
 
-	// The date and time when the CMK was created.
+	// The date and time when the KMS key was created.
 	CreationDate *time.Time
 
 	// A unique identifier for the custom key store
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-	// that contains the CMK. This value is present only when the CMK is created in a
-	// custom key store.
+	// that contains the KMS key. This value is present only when the KMS key is
+	// created in a custom key store.
 	CustomKeyStoreId *string
 
-	// Describes the type of key material in the CMK.
+	// Instead, use the KeySpec field. The KeySpec and CustomerMasterKeySpec fields
+	// have the same value. We recommend that you use the KeySpec field in your code.
+	// However, to avoid breaking changes, KMS will support both fields.
+	//
+	// Deprecated: This field has been deprecated. Instead, use the KeySpec field.
 	CustomerMasterKeySpec CustomerMasterKeySpec
 
-	// The date and time after which AWS KMS deletes this CMK. This value is present
-	// only when the CMK is scheduled for deletion, that is, when its KeyState is
+	// The date and time after which KMS deletes this KMS key. This value is present
+	// only when the KMS key is scheduled for deletion, that is, when its KeyState is
 	// PendingDeletion. When the primary key in a multi-Region key is scheduled for
 	// deletion but still has replica keys, its key state is PendingReplicaDeletion and
 	// the length of its waiting period is displayed in the PendingDeletionWindowInDays
 	// field.
 	DeletionDate *time.Time
 
-	// The description of the CMK.
+	// The description of the KMS key.
 	Description *string
 
-	// Specifies whether the CMK is enabled. When KeyState is Enabled this value is
+	// Specifies whether the KMS key is enabled. When KeyState is Enabled this value is
 	// true, otherwise it is false.
 	Enabled bool
 
-	// The encryption algorithms that the CMK supports. You cannot use the CMK with
-	// other encryption algorithms within AWS KMS. This value is present only when the
-	// KeyUsage of the CMK is ENCRYPT_DECRYPT.
+	// The encryption algorithms that the KMS key supports. You cannot use the KMS key
+	// with other encryption algorithms within KMS. This value is present only when the
+	// KeyUsage of the KMS key is ENCRYPT_DECRYPT.
 	EncryptionAlgorithms []EncryptionAlgorithmSpec
 
-	// Specifies whether the CMK's key material expires. This value is present only
+	// Specifies whether the KMS key's key material expires. This value is present only
 	// when Origin is EXTERNAL, otherwise this value is omitted.
 	ExpirationModel ExpirationModelType
 
-	// The manager of the CMK. CMKs in your AWS account are either customer managed or
-	// AWS managed. For more information about the difference, see Customer Master Keys
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#master_keys)
-	// in the AWS Key Management Service Developer Guide.
+	// The manager of the KMS key. KMS keys in your Amazon Web Services account are
+	// either customer managed or Amazon Web Services managed. For more information
+	// about the difference, see KMS keys
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#kms_keys)
+	// in the Key Management Service Developer Guide.
 	KeyManager KeyManagerType
 
-	// The current status of the CMK. For more information about how key state affects
-	// the use of a CMK, see Key state: Effect on your CMK
+	// Describes the type of key material in the KMS key.
+	KeySpec KeySpec
+
+	// The current status of the KMS key. For more information about how key state
+	// affects the use of a KMS key, see Key state: Effect on your KMS key
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-	// AWS Key Management Service Developer Guide.
+	// Key Management Service Developer Guide.
 	KeyState KeyState
 
 	// The cryptographic operations
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
-	// for which you can use the CMK.
+	// for which you can use the KMS key.
 	KeyUsage KeyUsageType
 
-	// Indicates whether the CMK is a multi-Region (True) or regional (False) key. This
-	// value is True for multi-Region primary and replica CMKs and False for regional
-	// CMKs. For more information about multi-Region keys, see Using multi-Region keys
+	// Indicates whether the KMS key is a multi-Region (True) or regional (False) key.
+	// This value is True for multi-Region primary and replica keys and False for
+	// regional KMS keys. For more information about multi-Region keys, see Using
+	// multi-Region keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
-	// in the AWS Key Management Service Developer Guide.
+	// in the Key Management Service Developer Guide.
 	MultiRegion *bool
 
-	// Lists the primary and replica CMKs in same multi-Region CMK. This field is
+	// Lists the primary and replica keys in same multi-Region key. This field is
 	// present only when the value of the MultiRegion field is True. For more
-	// information about any listed CMK, use the DescribeKey operation.
+	// information about any listed KMS key, use the DescribeKey operation.
 	//
 	// *
-	// MultiRegionKeyType indicates whether the CMK is a PRIMARY or REPLICA key.
+	// MultiRegionKeyType indicates whether the KMS key is a PRIMARY or REPLICA key.
 	//
 	// *
 	// PrimaryKey displays the key ARN and Region of the primary key. This field
-	// displays the current CMK if it is the primary key.
+	// displays the current KMS key if it is the primary key.
 	//
-	// * ReplicaKeys displays the
-	// key ARNs and Regions of all replica keys. This field includes the current CMK if
-	// it is a replica key.
+	// * ReplicaKeys displays
+	// the key ARNs and Regions of all replica keys. This field includes the current
+	// KMS key if it is a replica key.
 	MultiRegionConfiguration *MultiRegionConfiguration
 
-	// The source of the CMK's key material. When this value is AWS_KMS, AWS KMS
+	// The source of the key material for the KMS key. When this value is AWS_KMS, KMS
 	// created the key material. When this value is EXTERNAL, the key material was
-	// imported from your existing key management infrastructure or the CMK lacks key
-	// material. When this value is AWS_CLOUDHSM, the key material was created in the
-	// AWS CloudHSM cluster associated with a custom key store.
+	// imported or the KMS key doesn't have any key material. When this value is
+	// AWS_CLOUDHSM, the key material was created in the CloudHSM cluster associated
+	// with a custom key store.
 	Origin OriginType
 
 	// The waiting period before the primary key in a multi-Region key is deleted. This
 	// waiting period begins when the last of its replica keys is deleted. This value
-	// is present only when the KeyState of the CMK is PendingReplicaDeletion. That
-	// indicates that the CMK is the primary key in a multi-Region key, it is scheduled
-	// for deletion, and it still has existing replica keys. When a regional CMK or a
-	// replica key in a multi-Region key is scheduled for deletion, its deletion date
-	// is displayed in the DeletionDate field. However, when the primary key in a
-	// multi-Region key is scheduled for deletion, its waiting period doesn't begin
-	// until all of its replica keys are deleted. This value displays that waiting
-	// period. When the last replica key in the multi-Region key is deleted, the
-	// KeyState of the scheduled primary key changes from PendingReplicaDeletion to
-	// PendingDeletion and the deletion date appears in the DeletionDate field.
+	// is present only when the KeyState of the KMS key is PendingReplicaDeletion. That
+	// indicates that the KMS key is the primary key in a multi-Region key, it is
+	// scheduled for deletion, and it still has existing replica keys. When a
+	// single-Region KMS key or a multi-Region replica key is scheduled for deletion,
+	// its deletion date is displayed in the DeletionDate field. However, when the
+	// primary key in a multi-Region key is scheduled for deletion, its waiting period
+	// doesn't begin until all of its replica keys are deleted. This value displays
+	// that waiting period. When the last replica key in the multi-Region key is
+	// deleted, the KeyState of the scheduled primary key changes from
+	// PendingReplicaDeletion to PendingDeletion and the deletion date appears in the
+	// DeletionDate field.
 	PendingDeletionWindowInDays *int32
 
-	// The signing algorithms that the CMK supports. You cannot use the CMK with other
-	// signing algorithms within AWS KMS. This field appears only when the KeyUsage of
-	// the CMK is SIGN_VERIFY.
+	// The signing algorithms that the KMS key supports. You cannot use the KMS key
+	// with other signing algorithms within KMS. This field appears only when the
+	// KeyUsage of the KMS key is SIGN_VERIFY.
 	SigningAlgorithms []SigningAlgorithmSpec
 
 	// The time at which the imported key material expires. When the key material
-	// expires, AWS KMS deletes the key material and the CMK becomes unusable. This
-	// value is present only for CMKs whose Origin is EXTERNAL and whose
+	// expires, KMS deletes the key material and the KMS key becomes unusable. This
+	// value is present only for KMS keys whose Origin is EXTERNAL and whose
 	// ExpirationModel is KEY_MATERIAL_EXPIRES, otherwise this value is omitted.
 	ValidTo *time.Time
 
 	noSmithyDocumentSerde
 }
 
-// Describes the configuration of this multi-Region CMK. This field appears only
-// when the CMK is a primary or replica of a multi-Region CMK. For more information
-// about any listed CMK, use the DescribeKey operation.
+// Describes the configuration of this multi-Region key. This field appears only
+// when the KMS key is a primary or replica of a multi-Region key. For more
+// information about any listed KMS key, use the DescribeKey operation.
 type MultiRegionConfiguration struct {
 
-	// Indicates whether the CMK is a PRIMARY or REPLICA key.
+	// Indicates whether the KMS key is a PRIMARY or REPLICA key.
 	MultiRegionKeyType MultiRegionKeyType
 
 	// Displays the key ARN and Region of the primary key. This field includes the
-	// current CMK if it is the primary key.
+	// current KMS key if it is the primary key.
 	PrimaryKey *MultiRegionKey
 
 	// displays the key ARNs and Regions of all replica keys. This field includes the
-	// current CMK if it is a replica key.
+	// current KMS key if it is a replica key.
 	ReplicaKeys []MultiRegionKey
 
 	noSmithyDocumentSerde
@@ -389,7 +400,8 @@ type MultiRegionKey struct {
 	// Displays the key ARN of a primary or replica key of a multi-Region key.
 	Arn *string
 
-	// Displays the AWS Region of a primary or replica key in a multi-Region key.
+	// Displays the Amazon Web Services Region of a primary or replica key in a
+	// multi-Region key.
 	Region *string
 
 	noSmithyDocumentSerde
@@ -400,7 +412,7 @@ type MultiRegionKey struct {
 // information about the rules that apply to tag keys and tag values, see
 // User-Defined Tag Restrictions
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html)
-// in the AWS Billing and Cost Management User Guide.
+// in the Amazon Web Services Billing and Cost Management User Guide.
 type Tag struct {
 
 	// The key of the tag.

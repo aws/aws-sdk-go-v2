@@ -16,7 +16,9 @@ import (
 // "DELETION_IN_PROGRESS". Attempting to delete or cancel a job whose status is
 // already "DELETION_IN_PROGRESS" will result in an error. Only 10 jobs may have
 // status "DELETION_IN_PROGRESS" at the same time, or a LimitExceededException will
-// occur.
+// occur. Requires permission to access the DeleteJob
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DeleteJob(ctx context.Context, params *DeleteJobInput, optFns ...func(*Options)) (*DeleteJobOutput, error) {
 	if params == nil {
 		params = &DeleteJobInput{}
@@ -52,8 +54,8 @@ type DeleteJobInput struct {
 	Force bool
 
 	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
-	// MQTT topics that contain the value in the following format.
+	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
+	// notifications to MQTT topics that contain the value in the following format.
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
 	// namespaceId feature is in public preview.
 	NamespaceId *string

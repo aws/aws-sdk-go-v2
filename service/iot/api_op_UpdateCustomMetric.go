@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Updates a Device Defender detect custom metric.
+// Updates a Device Defender detect custom metric. Requires permission to access
+// the UpdateCustomMetric
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateCustomMetric(ctx context.Context, params *UpdateCustomMetricInput, optFns ...func(*Options)) (*UpdateCustomMetricOutput, error) {
 	if params == nil {
 		params = &UpdateCustomMetricInput{}
