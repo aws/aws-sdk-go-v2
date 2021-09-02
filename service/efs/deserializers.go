@@ -6808,6 +6808,15 @@ func awsRestjson1_deserializeDocumentLifecyclePolicy(v **types.LifecyclePolicy, 
 				sv.TransitionToIA = types.TransitionToIARules(jtv)
 			}
 
+		case "TransitionToPrimaryStorageClass":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TransitionToPrimaryStorageClassRules to be of type string, got %T instead", value)
+				}
+				sv.TransitionToPrimaryStorageClass = types.TransitionToPrimaryStorageClassRules(jtv)
+			}
+
 		default:
 			_, _ = key, value
 

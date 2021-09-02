@@ -34,6 +34,10 @@ type CreateDiscovererInput struct {
 	// This member is required.
 	SourceArn *string
 
+	// Support discovery of schemas in events sent to the bus from another account.
+	// (default: true).
+	CrossAccount bool
+
 	// A description for the discoverer.
 	Description *string
 
@@ -44,6 +48,10 @@ type CreateDiscovererInput struct {
 }
 
 type CreateDiscovererOutput struct {
+
+	// The Status if the discoverer will discover schemas from events sent from another
+	// account.
+	CrossAccount bool
 
 	// The description of the discoverer.
 	Description *string

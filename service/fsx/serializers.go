@@ -343,6 +343,147 @@ func (m *awsAwsjson11_serializeOpCreateFileSystemFromBackup) HandleSerialize(ctx
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpCreateStorageVirtualMachine struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateStorageVirtualMachine) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateStorageVirtualMachine) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateStorageVirtualMachineInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.CreateStorageVirtualMachine")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateStorageVirtualMachineInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateVolume struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateVolume) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateVolumeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.CreateVolume")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateVolumeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpCreateVolumeFromBackup struct {
+}
+
+func (*awsAwsjson11_serializeOpCreateVolumeFromBackup) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpCreateVolumeFromBackup) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateVolumeFromBackupInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.CreateVolumeFromBackup")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentCreateVolumeFromBackupInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpDeleteBackup struct {
 }
 
@@ -422,6 +563,100 @@ func (m *awsAwsjson11_serializeOpDeleteFileSystem) HandleSerialize(ctx context.C
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDeleteFileSystemInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteStorageVirtualMachine struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteStorageVirtualMachine) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteStorageVirtualMachine) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteStorageVirtualMachineInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DeleteStorageVirtualMachine")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteStorageVirtualMachineInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDeleteVolume struct {
+}
+
+func (*awsAwsjson11_serializeOpDeleteVolume) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDeleteVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteVolumeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DeleteVolume")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDeleteVolumeInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -610,6 +845,100 @@ func (m *awsAwsjson11_serializeOpDescribeFileSystems) HandleSerialize(ctx contex
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentDescribeFileSystemsInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeStorageVirtualMachines struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeStorageVirtualMachines) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeStorageVirtualMachines) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeStorageVirtualMachinesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DescribeStorageVirtualMachines")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeStorageVirtualMachinesInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpDescribeVolumes struct {
+}
+
+func (*awsAwsjson11_serializeOpDescribeVolumes) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpDescribeVolumes) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DescribeVolumesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.DescribeVolumes")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentDescribeVolumesInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -859,6 +1188,100 @@ func (m *awsAwsjson11_serializeOpUpdateFileSystem) HandleSerialize(ctx context.C
 
 	return next.HandleSerialize(ctx, in)
 }
+
+type awsAwsjson11_serializeOpUpdateStorageVirtualMachine struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateStorageVirtualMachine) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateStorageVirtualMachine) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateStorageVirtualMachineInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.UpdateStorageVirtualMachine")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateStorageVirtualMachineInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpUpdateVolume struct {
+}
+
+func (*awsAwsjson11_serializeOpUpdateVolume) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpUpdateVolume) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateVolumeInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("AWSSimbaAPIService_v20180301.UpdateVolume")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentUpdateVolumeInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
 func awsAwsjson11_serializeDocumentAlternateDNSNames(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -975,6 +1398,67 @@ func awsAwsjson11_serializeDocumentCreateFileSystemLustreConfiguration(v *types.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentCreateFileSystemOntapConfiguration(v *types.CreateFileSystemOntapConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutomaticBackupRetentionDays != nil {
+		ok := object.Key("AutomaticBackupRetentionDays")
+		ok.Integer(*v.AutomaticBackupRetentionDays)
+	}
+
+	if v.DailyAutomaticBackupStartTime != nil {
+		ok := object.Key("DailyAutomaticBackupStartTime")
+		ok.String(*v.DailyAutomaticBackupStartTime)
+	}
+
+	if len(v.DeploymentType) > 0 {
+		ok := object.Key("DeploymentType")
+		ok.String(string(v.DeploymentType))
+	}
+
+	if v.DiskIopsConfiguration != nil {
+		ok := object.Key("DiskIopsConfiguration")
+		if err := awsAwsjson11_serializeDocumentDiskIopsConfiguration(v.DiskIopsConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.EndpointIpAddressRange != nil {
+		ok := object.Key("EndpointIpAddressRange")
+		ok.String(*v.EndpointIpAddressRange)
+	}
+
+	if v.FsxAdminPassword != nil {
+		ok := object.Key("FsxAdminPassword")
+		ok.String(*v.FsxAdminPassword)
+	}
+
+	if v.PreferredSubnetId != nil {
+		ok := object.Key("PreferredSubnetId")
+		ok.String(*v.PreferredSubnetId)
+	}
+
+	if v.RouteTableIds != nil {
+		ok := object.Key("RouteTableIds")
+		if err := awsAwsjson11_serializeDocumentRouteTableIds(v.RouteTableIds, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ThroughputCapacity != nil {
+		ok := object.Key("ThroughputCapacity")
+		ok.Integer(*v.ThroughputCapacity)
+	}
+
+	if v.WeeklyMaintenanceStartTime != nil {
+		ok := object.Key("WeeklyMaintenanceStartTime")
+		ok.String(*v.WeeklyMaintenanceStartTime)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentCreateFileSystemWindowsConfiguration(v *types.CreateFileSystemWindowsConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1038,6 +1522,64 @@ func awsAwsjson11_serializeDocumentCreateFileSystemWindowsConfiguration(v *types
 	if v.WeeklyMaintenanceStartTime != nil {
 		ok := object.Key("WeeklyMaintenanceStartTime")
 		ok.String(*v.WeeklyMaintenanceStartTime)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCreateOntapVolumeConfiguration(v *types.CreateOntapVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JunctionPath != nil {
+		ok := object.Key("JunctionPath")
+		ok.String(*v.JunctionPath)
+	}
+
+	if len(v.SecurityStyle) > 0 {
+		ok := object.Key("SecurityStyle")
+		ok.String(string(v.SecurityStyle))
+	}
+
+	if v.SizeInMegabytes != nil {
+		ok := object.Key("SizeInMegabytes")
+		ok.Integer(*v.SizeInMegabytes)
+	}
+
+	if v.StorageEfficiencyEnabled != nil {
+		ok := object.Key("StorageEfficiencyEnabled")
+		ok.Boolean(*v.StorageEfficiencyEnabled)
+	}
+
+	if v.StorageVirtualMachineId != nil {
+		ok := object.Key("StorageVirtualMachineId")
+		ok.String(*v.StorageVirtualMachineId)
+	}
+
+	if v.TieringPolicy != nil {
+		ok := object.Key("TieringPolicy")
+		if err := awsAwsjson11_serializeDocumentTieringPolicy(v.TieringPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentCreateSvmActiveDirectoryConfiguration(v *types.CreateSvmActiveDirectoryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.NetBiosName != nil {
+		ok := object.Key("NetBiosName")
+		ok.String(*v.NetBiosName)
+	}
+
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		ok := object.Key("SelfManagedActiveDirectoryConfiguration")
+		if err := awsAwsjson11_serializeDocumentSelfManagedActiveDirectoryConfiguration(v.SelfManagedActiveDirectoryConfiguration, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1135,6 +1677,42 @@ func awsAwsjson11_serializeDocumentDeleteFileSystemWindowsConfiguration(v *types
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDeleteVolumeOntapConfiguration(v *types.DeleteVolumeOntapConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.FinalBackupTags != nil {
+		ok := object.Key("FinalBackupTags")
+		if err := awsAwsjson11_serializeDocumentTags(v.FinalBackupTags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SkipFinalBackup != nil {
+		ok := object.Key("SkipFinalBackup")
+		ok.Boolean(*v.SkipFinalBackup)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDiskIopsConfiguration(v *types.DiskIopsConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Iops != nil {
+		ok := object.Key("Iops")
+		ok.Long(*v.Iops)
+	}
+
+	if len(v.Mode) > 0 {
+		ok := object.Key("Mode")
+		ok.String(string(v.Mode))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentDnsIps(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1190,6 +1768,17 @@ func awsAwsjson11_serializeDocumentFilters(v []types.Filter, value smithyjson.Va
 }
 
 func awsAwsjson11_serializeDocumentFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRouteTableIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
 
@@ -1274,6 +1863,60 @@ func awsAwsjson11_serializeDocumentSelfManagedActiveDirectoryConfigurationUpdate
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentStorageVirtualMachineFilter(v *types.StorageVirtualMachineFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentStorageVirtualMachineFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStorageVirtualMachineFilters(v []types.StorageVirtualMachineFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentStorageVirtualMachineFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStorageVirtualMachineFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentStorageVirtualMachineIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentSubnetIds(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -1337,6 +1980,23 @@ func awsAwsjson11_serializeDocumentTaskIds(v []string, value smithyjson.Value) e
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentTieringPolicy(v *types.TieringPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CoolingPeriod != nil {
+		ok := object.Key("CoolingPeriod")
+		ok.Integer(*v.CoolingPeriod)
+	}
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.UpdateFileSystemLustreConfiguration, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1359,6 +2019,33 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemLustreConfiguration(v *types.
 	if len(v.DataCompressionType) > 0 {
 		ok := object.Key("DataCompressionType")
 		ok.String(string(v.DataCompressionType))
+	}
+
+	if v.WeeklyMaintenanceStartTime != nil {
+		ok := object.Key("WeeklyMaintenanceStartTime")
+		ok.String(*v.WeeklyMaintenanceStartTime)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateFileSystemOntapConfiguration(v *types.UpdateFileSystemOntapConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutomaticBackupRetentionDays != nil {
+		ok := object.Key("AutomaticBackupRetentionDays")
+		ok.Integer(*v.AutomaticBackupRetentionDays)
+	}
+
+	if v.DailyAutomaticBackupStartTime != nil {
+		ok := object.Key("DailyAutomaticBackupStartTime")
+		ok.String(*v.DailyAutomaticBackupStartTime)
+	}
+
+	if v.FsxAdminPassword != nil {
+		ok := object.Key("FsxAdminPassword")
+		ok.String(*v.FsxAdminPassword)
 	}
 
 	if v.WeeklyMaintenanceStartTime != nil {
@@ -1407,6 +2094,108 @@ func awsAwsjson11_serializeDocumentUpdateFileSystemWindowsConfiguration(v *types
 		ok.String(*v.WeeklyMaintenanceStartTime)
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateOntapVolumeConfiguration(v *types.UpdateOntapVolumeConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.JunctionPath != nil {
+		ok := object.Key("JunctionPath")
+		ok.String(*v.JunctionPath)
+	}
+
+	if len(v.SecurityStyle) > 0 {
+		ok := object.Key("SecurityStyle")
+		ok.String(string(v.SecurityStyle))
+	}
+
+	if v.SizeInMegabytes != nil {
+		ok := object.Key("SizeInMegabytes")
+		ok.Integer(*v.SizeInMegabytes)
+	}
+
+	if v.StorageEfficiencyEnabled != nil {
+		ok := object.Key("StorageEfficiencyEnabled")
+		ok.Boolean(*v.StorageEfficiencyEnabled)
+	}
+
+	if v.TieringPolicy != nil {
+		ok := object.Key("TieringPolicy")
+		if err := awsAwsjson11_serializeDocumentTieringPolicy(v.TieringPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentUpdateSvmActiveDirectoryConfiguration(v *types.UpdateSvmActiveDirectoryConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		ok := object.Key("SelfManagedActiveDirectoryConfiguration")
+		if err := awsAwsjson11_serializeDocumentSelfManagedActiveDirectoryConfigurationUpdates(v.SelfManagedActiveDirectoryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVolumeFilter(v *types.VolumeFilter, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Name) > 0 {
+		ok := object.Key("Name")
+		ok.String(string(v.Name))
+	}
+
+	if v.Values != nil {
+		ok := object.Key("Values")
+		if err := awsAwsjson11_serializeDocumentVolumeFilterValues(v.Values, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVolumeFilters(v []types.VolumeFilter, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsAwsjson11_serializeDocumentVolumeFilter(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVolumeFilterValues(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentVolumeIds(v []string, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(v[i])
+	}
 	return nil
 }
 
@@ -1526,6 +2315,11 @@ func awsAwsjson11_serializeOpDocumentCreateBackupInput(v *CreateBackupInput, val
 		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.VolumeId != nil {
+		ok := object.Key("VolumeId")
+		ok.String(*v.VolumeId)
 	}
 
 	return nil
@@ -1662,6 +2456,13 @@ func awsAwsjson11_serializeOpDocumentCreateFileSystemInput(v *CreateFileSystemIn
 		}
 	}
 
+	if v.OntapConfiguration != nil {
+		ok := object.Key("OntapConfiguration")
+		if err := awsAwsjson11_serializeDocumentCreateFileSystemOntapConfiguration(v.OntapConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SecurityGroupIds != nil {
 		ok := object.Key("SecurityGroupIds")
 		if err := awsAwsjson11_serializeDocumentSecurityGroupIds(v.SecurityGroupIds, ok); err != nil {
@@ -1698,6 +2499,124 @@ func awsAwsjson11_serializeOpDocumentCreateFileSystemInput(v *CreateFileSystemIn
 		if err := awsAwsjson11_serializeDocumentCreateFileSystemWindowsConfiguration(v.WindowsConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateStorageVirtualMachineInput(v *CreateStorageVirtualMachineInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActiveDirectoryConfiguration != nil {
+		ok := object.Key("ActiveDirectoryConfiguration")
+		if err := awsAwsjson11_serializeDocumentCreateSvmActiveDirectoryConfiguration(v.ActiveDirectoryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.FileSystemId != nil {
+		ok := object.Key("FileSystemId")
+		ok.String(*v.FileSystemId)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if len(v.RootVolumeSecurityStyle) > 0 {
+		ok := object.Key("RootVolumeSecurityStyle")
+		ok.String(string(v.RootVolumeSecurityStyle))
+	}
+
+	if v.SvmAdminPassword != nil {
+		ok := object.Key("SvmAdminPassword")
+		ok.String(*v.SvmAdminPassword)
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateVolumeFromBackupInput(v *CreateVolumeFromBackupInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackupId != nil {
+		ok := object.Key("BackupId")
+		ok.String(*v.BackupId)
+	}
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OntapConfiguration != nil {
+		ok := object.Key("OntapConfiguration")
+		if err := awsAwsjson11_serializeDocumentCreateOntapVolumeConfiguration(v.OntapConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentCreateVolumeInput(v *CreateVolumeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.Name != nil {
+		ok := object.Key("Name")
+		ok.String(*v.Name)
+	}
+
+	if v.OntapConfiguration != nil {
+		ok := object.Key("OntapConfiguration")
+		if err := awsAwsjson11_serializeDocumentCreateOntapVolumeConfiguration(v.OntapConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("Tags")
+		if err := awsAwsjson11_serializeDocumentTags(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.VolumeType) > 0 {
+		ok := object.Key("VolumeType")
+		ok.String(string(v.VolumeType))
 	}
 
 	return nil
@@ -1746,6 +2665,47 @@ func awsAwsjson11_serializeOpDocumentDeleteFileSystemInput(v *DeleteFileSystemIn
 		if err := awsAwsjson11_serializeDocumentDeleteFileSystemWindowsConfiguration(v.WindowsConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteStorageVirtualMachineInput(v *DeleteStorageVirtualMachineInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.StorageVirtualMachineId != nil {
+		ok := object.Key("StorageVirtualMachineId")
+		ok.String(*v.StorageVirtualMachineId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDeleteVolumeInput(v *DeleteVolumeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.OntapConfiguration != nil {
+		ok := object.Key("OntapConfiguration")
+		if err := awsAwsjson11_serializeDocumentDeleteVolumeOntapConfiguration(v.OntapConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeId != nil {
+		ok := object.Key("VolumeId")
+		ok.String(*v.VolumeId)
 	}
 
 	return nil
@@ -1864,6 +2824,68 @@ func awsAwsjson11_serializeOpDocumentDescribeFileSystemsInput(v *DescribeFileSys
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentDescribeStorageVirtualMachinesInput(v *DescribeStorageVirtualMachinesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentStorageVirtualMachineFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.StorageVirtualMachineIds != nil {
+		ok := object.Key("StorageVirtualMachineIds")
+		if err := awsAwsjson11_serializeDocumentStorageVirtualMachineIds(v.StorageVirtualMachineIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentDescribeVolumesInput(v *DescribeVolumesInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Filters != nil {
+		ok := object.Key("Filters")
+		if err := awsAwsjson11_serializeDocumentVolumeFilters(v.Filters, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.MaxResults != nil {
+		ok := object.Key("MaxResults")
+		ok.Integer(*v.MaxResults)
+	}
+
+	if v.NextToken != nil {
+		ok := object.Key("NextToken")
+		ok.String(*v.NextToken)
+	}
+
+	if v.VolumeIds != nil {
+		ok := object.Key("VolumeIds")
+		if err := awsAwsjson11_serializeDocumentVolumeIds(v.VolumeIds, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentDisassociateFileSystemAliasesInput(v *DisassociateFileSystemAliasesInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1969,6 +2991,13 @@ func awsAwsjson11_serializeOpDocumentUpdateFileSystemInput(v *UpdateFileSystemIn
 		}
 	}
 
+	if v.OntapConfiguration != nil {
+		ok := object.Key("OntapConfiguration")
+		if err := awsAwsjson11_serializeDocumentUpdateFileSystemOntapConfiguration(v.OntapConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.StorageCapacity != nil {
 		ok := object.Key("StorageCapacity")
 		ok.Integer(*v.StorageCapacity)
@@ -1979,6 +3008,59 @@ func awsAwsjson11_serializeOpDocumentUpdateFileSystemInput(v *UpdateFileSystemIn
 		if err := awsAwsjson11_serializeDocumentUpdateFileSystemWindowsConfiguration(v.WindowsConfiguration, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateStorageVirtualMachineInput(v *UpdateStorageVirtualMachineInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ActiveDirectoryConfiguration != nil {
+		ok := object.Key("ActiveDirectoryConfiguration")
+		if err := awsAwsjson11_serializeDocumentUpdateSvmActiveDirectoryConfiguration(v.ActiveDirectoryConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.StorageVirtualMachineId != nil {
+		ok := object.Key("StorageVirtualMachineId")
+		ok.String(*v.StorageVirtualMachineId)
+	}
+
+	if v.SvmAdminPassword != nil {
+		ok := object.Key("SvmAdminPassword")
+		ok.String(*v.SvmAdminPassword)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentUpdateVolumeInput(v *UpdateVolumeInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientRequestToken != nil {
+		ok := object.Key("ClientRequestToken")
+		ok.String(*v.ClientRequestToken)
+	}
+
+	if v.OntapConfiguration != nil {
+		ok := object.Key("OntapConfiguration")
+		if err := awsAwsjson11_serializeDocumentUpdateOntapVolumeConfiguration(v.OntapConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.VolumeId != nil {
+		ok := object.Key("VolumeId")
+		ok.String(*v.VolumeId)
 	}
 
 	return nil

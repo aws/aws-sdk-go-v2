@@ -12,23 +12,33 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a backup of an existing Amazon FSx file system. Creating regular backups
-// for your file system is a best practice, enabling you to restore a file system
-// from a backup if an issue arises with the original file system. For Amazon FSx
-// for Lustre file systems, you can create a backup only for file systems with the
-// following configuration:
+// Creates a backup of an existing Amazon FSx for Windows File Server or Amazon FSx
+// for Lustre file system, or of an Amazon FSx for NetApp ONTAP volume. Creating
+// regular backups is a best practice, enabling you to restore a file system or
+// volume from a backup if an issue arises with the original file system or volume.
+// For Amazon FSx for Lustre file systems, you can create a backup only for file
+// systems with the following configuration:
 //
 // * a Persistent deployment type
 //
-// * is not linked to a
-// data respository.
+// * is
+// not linked to a data repository.
 //
-// For more information about backing up Amazon FSx for Lustre
-// file systems, see Working with FSx for Lustre backups
-// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html). For
-// more information about backing up Amazon FSx for Windows file systems, see
-// Working with FSx for Windows backups
-// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html). If a
+// For more information about backups, see the
+// following:
+//
+// * For Amazon FSx for Lustre, see Working with FSx for Lustre backups
+// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/using-backups-fsx.html).
+//
+// *
+// For Amazon FSx for Windows, see Working with FSx for Windows backups
+// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/using-backups.html).
+//
+// * For
+// Amazon FSx for NetApp ONTAP, see Working with FSx for NetApp ONTAP backups
+// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/using-backups.html).
+//
+// If a
 // backup with the specified client request token exists, and the parameters match,
 // this operation returns the description of the existing backup. If a backup
 // specified client request token exists, and the parameters don't match, this
@@ -68,15 +78,13 @@ func (c *Client) CreateBackup(ctx context.Context, params *CreateBackupInput, op
 // The request object for the CreateBackup operation.
 type CreateBackupInput struct {
 
-	// The ID of the file system to back up.
-	//
-	// This member is required.
-	FileSystemId *string
-
 	// (Optional) A string of up to 64 ASCII characters that Amazon FSx uses to ensure
 	// idempotent creation. This string is automatically filled on your behalf when you
-	// use the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// use the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
+
+	// The ID of the file system to back up.
+	FileSystemId *string
 
 	// (Optional) The tags to apply to the backup at backup creation. The key value of
 	// the Name tag appears in the console as the backup name. If you have set
@@ -84,6 +92,9 @@ type CreateBackupInput struct {
 	// CreateBackup action, no existing file system tags are copied from the file
 	// system to the backup.
 	Tags []types.Tag
+
+	// The ID of he FSx for NetApp ONTAP volume to back up.
+	VolumeId *string
 
 	noSmithyDocumentSerde
 }

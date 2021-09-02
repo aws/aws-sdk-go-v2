@@ -7,6 +7,47 @@ import (
 	"time"
 )
 
+// Each step type has its own StepDetails structure.
+type CopyStepDetails struct {
+
+	// Specifies the location for the file being copied. Only applicable for the Copy
+	// type of workflow steps.
+	DestinationFileLocation *InputFileLocation
+
+	// The name of the step, used as an identifier.
+	Name *string
+
+	// A flag that indicates whether or not to overwrite an existing file of the same
+	// name. The default is FALSE.
+	OverwriteExisting OverwriteExisting
+
+	noSmithyDocumentSerde
+}
+
+// Each step type has its own StepDetails structure.
+type CustomStepDetails struct {
+
+	// The name of the step, used as an identifier.
+	Name *string
+
+	// The ARN for the lambda function that is being called.
+	Target *string
+
+	// Timeout, in seconds, for the step.
+	TimeoutSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// The name of the step, used to identify the step that is being deleted.
+type DeleteStepDetails struct {
+
+	// The name of the step, used as an identifier.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
 // Describes the properties of the access that was specified.
 type DescribedAccess struct {
 
@@ -34,21 +75,20 @@ type DescribedAccess struct {
 	// specify a target, it is displayed as is. You also must ensure that your Amazon
 	// Web Services Identity and Access Management (IAM) role provides access to paths
 	// in Target. This value can only be set when HomeDirectoryType is set to LOGICAL.
-	// In most cases, you can use this value instead of the scope-down policy to lock
-	// down the associated access to the designated home directory ("chroot"). To do
-	// this, you can set Entry to '/' and set Target to the HomeDirectory parameter
-	// value.
+	// In most cases, you can use this value instead of the session policy to lock down
+	// the associated access to the designated home directory ("chroot"). To do this,
+	// you can set Entry to '/' and set Target to the HomeDirectory parameter value.
 	HomeDirectoryMappings []HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the server. If you set it to PATH, the user will see the
 	// absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you will need to provide mappings in the
+	// clients. If you set it LOGICAL, you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to
 	// your users.
 	HomeDirectoryType HomeDirectoryType
 
-	// A scope-down policy for your user so that you can use the same IAM role across
+	// A session policy for your user so that you can use the same IAM role across
 	// multiple users. This policy scopes down user access to portions of their Amazon
 	// S3 bucket. Variables that you can use inside this policy include
 	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
@@ -68,6 +108,45 @@ type DescribedAccess struct {
 	// system. The IAM role should also contain a trust relationship that allows the
 	// server to access your resources when servicing your users' transfer requests.
 	Role *string
+
+	noSmithyDocumentSerde
+}
+
+// The details for an execution object.
+type DescribedExecution struct {
+
+	// A unique identifier for the execution of a workflow.
+	ExecutionId *string
+
+	// The IAM role associated with the execution.
+	ExecutionRole *string
+
+	// A structure that describes the Amazon S3 or EFS file location. This is the file
+	// location when the execution begins: if the file is being copied, this is the
+	// initial (as opposed to destination) file location.
+	InitialFileLocation *FileLocation
+
+	// The IAM logging role associated with the execution.
+	LoggingConfiguration *LoggingConfiguration
+
+	// The full POSIX identity, including user ID (Uid), group ID (Gid), and any
+	// secondary groups IDs (SecondaryGids), that controls your users' access to your
+	// Amazon EFS file systems. The POSIX permissions that are set on files and
+	// directories in your file system determine the level of access your users get
+	// when transferring files into and out of your Amazon EFS file systems.
+	PosixProfile *PosixProfile
+
+	// A structure that describes the execution results. This includes a list of the
+	// steps along with the details of each step, error type and message (if any), and
+	// the OnExceptionSteps structure.
+	Results *ExecutionResults
+
+	// A container object for the session details associated with a workflow.
+	ServiceMetadata *ServiceMetadata
+
+	// The status is one of the execution. Can be in progress, completed, exception
+	// encountered, or handling the exception.
+	Status ExecutionStatus
 
 	noSmithyDocumentSerde
 }
@@ -202,6 +281,10 @@ type DescribedServer struct {
 	// the ServerId.
 	UserCount *int32
 
+	// Specifies the workflow ID for the workflow to assign and the execution role used
+	// for executing the workflow.
+	WorkflowDetails *WorkflowDetails
+
 	noSmithyDocumentSerde
 }
 
@@ -225,20 +308,20 @@ type DescribedUser struct {
 	// specify a target, it is displayed as is. You also must ensure that your Amazon
 	// Web Services Identity and Access Management (IAM) role provides access to paths
 	// in Target. This value can only be set when HomeDirectoryType is set to LOGICAL.
-	// In most cases, you can use this value instead of the scope-down policy to lock
-	// your user down to the designated home directory ("chroot"). To do this, you can
-	// set Entry to '/' and set Target to the HomeDirectory parameter value.
+	// In most cases, you can use this value instead of the session policy to lock your
+	// user down to the designated home directory ("chroot"). To do this, you can set
+	// Entry to '/' and set Target to the HomeDirectory parameter value.
 	HomeDirectoryMappings []HomeDirectoryMapEntry
 
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the server. If you set it to PATH, the user will see the
 	// absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you will need to provide mappings in the
+	// clients. If you set it LOGICAL, you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to
 	// your users.
 	HomeDirectoryType HomeDirectoryType
 
-	// A scope-down policy for your user so that you can use the same IAM role across
+	// A session policy for your user so that you can use the same IAM role across
 	// multiple users. This policy scopes down user access to portions of their Amazon
 	// S3 bucket. Variables that you can use inside this policy include
 	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
@@ -272,6 +355,57 @@ type DescribedUser struct {
 	// are used for authentication purposes. This is the string that will be used by
 	// your user when they log in to your server.
 	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the properties of the specified workflow
+type DescribedWorkflow struct {
+
+	// Specifies the unique Amazon Resource Name (ARN) for the workflow.
+	//
+	// This member is required.
+	Arn *string
+
+	// Specifies the text description for the workflow.
+	Description *string
+
+	// Specifies the steps (actions) to take if any errors are encountered during
+	// execution of the workflow.
+	OnExceptionSteps []WorkflowStep
+
+	// Specifies the details for the steps that are in the specified workflow.
+	Steps []WorkflowStep
+
+	// Key-value pairs that can be used to group and search for workflows. Tags are
+	// metadata attached to workflows for any purpose.
+	Tags []Tag
+
+	// A unique identifier for the workflow.
+	WorkflowId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the details for the file location for the file being used in the
+// workflow. Only applicable if you are using Amazon EFS for storage. You need to
+// provide the file system ID and the pathname. The pathname can represent either a
+// path or a file. This is determined by whether or not you end the path value with
+// the forward slash (/) character. If the final character is "/", then your file
+// is copied to the folder, and its name does not change. If, rather, the final
+// character is alphanumeric, your uploaded file is renamed to the path value. In
+// this case, if a file with that name already exists, it is overwritten. For
+// example, if your path is shared-files/bob/, your uploaded files are copied to
+// the shared-files/bob/, folder. If your path is shared-files/today, each uploaded
+// file is copied to the shared-files folder and named today: each upload
+// overwrites the previous version of the bob file.
+type EfsFileLocation struct {
+
+	// The ID of the file system, assigned by Amazon EFS.
+	FileSystemId *string
+
+	// The pathname for the folder being used by a workflow.
+	Path *string
 
 	noSmithyDocumentSerde
 }
@@ -321,6 +455,80 @@ type EndpointDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the error message and type, for an error that occurs during the
+// execution of the workflow.
+type ExecutionError struct {
+
+	// Specifies the descriptive message that corresponds to the ErrorType.
+	//
+	// This member is required.
+	Message *string
+
+	// Specifies the error type: currently, the only valid value is PERMISSION_DENIED,
+	// which occurs if your policy does not contain the correct permissions to complete
+	// one or more of the steps in the workflow.
+	//
+	// This member is required.
+	Type ExecutionErrorType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the steps in the workflow, as well as the steps to execute in case of
+// any errors during workflow execution.
+type ExecutionResults struct {
+
+	// Specifies the steps (actions) to take if any errors are encountered during
+	// execution of the workflow.
+	OnExceptionSteps []ExecutionStepResult
+
+	// Specifies the details for the steps that are in the specified workflow.
+	Steps []ExecutionStepResult
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the following details for the step: error (if any), outputs (if any),
+// and the step type.
+type ExecutionStepResult struct {
+
+	// Specifies the details for an error, if it occurred during execution of the
+	// specified workfow step.
+	Error *ExecutionError
+
+	// The values for the key/value pair applied as a tag to the file. Only applicable
+	// if the step type is TAG.
+	Outputs *string
+
+	// One of the available step types.
+	//
+	// * Copy: copy the file to another location
+	//
+	// *
+	// Custom: custom step with a lambda target
+	//
+	// * Delete: delete the file
+	//
+	// * Tag: add
+	// a tag to the file
+	StepType WorkflowStepType
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the Amazon S3 or EFS file details to be used in the step.
+type FileLocation struct {
+
+	// Specifies the Amazon EFS ID and the path for the file being used.
+	EfsFileLocation *EfsFileLocation
+
+	// Specifies the S3 details for the file being used, such as bucket, Etag, and so
+	// forth.
+	S3FileLocation *S3FileLocation
+
+	noSmithyDocumentSerde
+}
+
 // Represents an object that contains entries and targets for
 // HomeDirectoryMappings. The following is an Entry and Target pair example for
 // chroot. [ { "Entry:": "/", "Target": "/bucket_name/home/mydirectory" } ] If the
@@ -364,6 +572,19 @@ type IdentityProviderDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Specifies the location for the file being copied. Only applicable for the Copy
+// type of workflow steps.
+type InputFileLocation struct {
+
+	// Specifies the details for the Amazon EFS file being copied.
+	EfsFileLocation *EfsFileLocation
+
+	// Specifies the details for the S3 file being copied.
+	S3FileLocation *S3InputFileLocation
+
+	noSmithyDocumentSerde
+}
+
 // Lists the properties for one or more specified associated accesses.
 type ListedAccess struct {
 
@@ -387,7 +608,7 @@ type ListedAccess struct {
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the server. If you set it to PATH, the user will see the
 	// absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you will need to provide mappings in the
+	// clients. If you set it LOGICAL, you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to
 	// your users.
 	HomeDirectoryType HomeDirectoryType
@@ -399,6 +620,27 @@ type ListedAccess struct {
 	// system. The IAM role should also contain a trust relationship that allows the
 	// server to access your resources when servicing your users' transfer requests.
 	Role *string
+
+	noSmithyDocumentSerde
+}
+
+// Returns properties of the execution that is specified.
+type ListedExecution struct {
+
+	// A unique identifier for the execution of a workflow.
+	ExecutionId *string
+
+	// A structure that describes the Amazon S3 or EFS file location. This is the file
+	// location when the execution begins: if the file is being copied, this is the
+	// initial (as opposed to destination) file location.
+	InitialFileLocation *FileLocation
+
+	// A container object for the session details associated with a workflow.
+	ServiceMetadata *ServiceMetadata
+
+	// The status is one of the execution. Can be in progress, completed, exception
+	// encountered, or handling the exception.
+	Status ExecutionStatus
 
 	noSmithyDocumentSerde
 }
@@ -473,7 +715,7 @@ type ListedUser struct {
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the server. If you set it to PATH, the user will see the
 	// absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you will need to provide mappings in the
+	// clients. If you set it LOGICAL, you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to
 	// your users.
 	HomeDirectoryType HomeDirectoryType
@@ -497,6 +739,38 @@ type ListedUser struct {
 	// Specifies the name of the user whose ARN was specified. User names are used for
 	// authentication purposes.
 	UserName *string
+
+	noSmithyDocumentSerde
+}
+
+// Contains the ID, text description, and Amazon Resource Name (ARN) for the
+// workflow.
+type ListedWorkflow struct {
+
+	// Specifies the unique Amazon Resource Name (ARN) for the workflow.
+	Arn *string
+
+	// Specifies the text description for the workflow.
+	Description *string
+
+	// A unique identifier for the workflow.
+	WorkflowId *string
+
+	noSmithyDocumentSerde
+}
+
+// Consists of the logging role and the log group name.
+type LoggingConfiguration struct {
+
+	// The name of the CloudWatch logging group for the Amazon Web Services Transfer
+	// server to which this workflow belongs.
+	LogGroupName *string
+
+	// Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and
+	// Access Management (IAM) role that allows a server to turn on Amazon CloudWatch
+	// logging for Amazon S3 or Amazon EFS events. When set, user activity can be
+	// viewed in your CloudWatch logs.
+	LoggingRole *string
 
 	noSmithyDocumentSerde
 }
@@ -532,8 +806,85 @@ type ProtocolDetails struct {
 	// IPv4 address, such as the external IP address of a firewall, router, or load
 	// balancer. For example:  aws transfer update-server --protocol-details
 	// PassiveIp=0.0.0.0  Replace  0.0.0.0  in the example above with the actual IP
-	// address you want to use.
+	// address you want to use. If you change the PassiveIp value, you must stop and
+	// then restart your Transfer server for the change to take effect. For details on
+	// using Passive IP (PASV) in a NAT environment, see Configuring your FTPS server
+	// behind a firewall or NAT with Amazon Web Services Transfer Family
+	// (http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/).
 	PassiveIp *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the details for the file location for the file being used in the
+// workflow. Only applicable if you are using S3 storage. You need to provide the
+// bucket and key. The key can represent either a path or a file. This is
+// determined by whether or not you end the key value with the forward slash (/)
+// character. If the final character is "/", then your file is copied to the
+// folder, and its name does not change. If, rather, the final character is
+// alphanumeric, your uploaded file is renamed to the path value. In this case, if
+// a file with that name already exists, it is overwritten. For example, if your
+// path is shared-files/bob/, your uploaded files are copied to the
+// shared-files/bob/, folder. If your path is shared-files/today, each uploaded
+// file is copied to the shared-files folder and named today: each upload
+// overwrites the previous version of the bob file.
+type S3FileLocation struct {
+
+	// Specifies the S3 bucket that contains the file being used.
+	Bucket *string
+
+	// The entity tag is a hash of the object. The ETag reflects changes only to the
+	// contents of an object, not its metadata.
+	Etag *string
+
+	// The name assigned to the file when it was created in S3. You use the object key
+	// to retrieve the object.
+	Key *string
+
+	// Specifies the file version.
+	VersionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the details for the S3 file being copied.
+type S3InputFileLocation struct {
+
+	// Specifies the S3 bucket that contains the file being copied.
+	Bucket *string
+
+	// The name assigned to the file when it was created in S3. You use the object key
+	// to retrieve the object.
+	Key *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the key-value pair that are assigned to a file during the execution of
+// a Tagging step.
+type S3Tag struct {
+
+	// The name assigned to the tag that you create.
+	//
+	// This member is required.
+	Key *string
+
+	// The value that corresponds to the key.
+	//
+	// This member is required.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// A container object for the session details associated with a workflow.
+type ServiceMetadata struct {
+
+	// The Server ID (ServerId), Session ID (SessionId) and user (UserName) make up the
+	// UserDetails.
+	//
+	// This member is required.
+	UserDetails *UserDetails
 
 	noSmithyDocumentSerde
 }
@@ -580,6 +931,113 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Each step type has its own StepDetails structure. The key/value pairs used to
+// tag a file during the execution of a workflow step.
+type TagStepDetails struct {
+
+	// The name of the step, used as an identifier.
+	Name *string
+
+	// Array that contains from 1 to 10 key/value pairs.
+	Tags []S3Tag
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the user name, server ID, and session ID for a workflow.
+type UserDetails struct {
+
+	// The system-assigned unique identifier for a Transfer server instance.
+	//
+	// This member is required.
+	ServerId *string
+
+	// A unique string that identifies a user account associated with a server.
+	//
+	// This member is required.
+	UserName *string
+
+	// The system-assigned unique identifier for a session that corresponds to the
+	// workflow.
+	SessionId *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the workflow ID for the workflow to assign and the execution role used
+// for executing the workflow.
+type WorkflowDetail struct {
+
+	// Includes the necessary permissions for S3, EFS, and Lambda operations that
+	// Transfer can assume, so that all workflow steps can operate on the required
+	// resources
+	//
+	// This member is required.
+	ExecutionRole *string
+
+	// A unique identifier for the workflow.
+	//
+	// This member is required.
+	WorkflowId *string
+
+	noSmithyDocumentSerde
+}
+
+// Container for the WorkflowDetail data type. It is used by actions that trigger a
+// workflow to begin execution.
+type WorkflowDetails struct {
+
+	// A trigger that starts a workflow: the workflow begins to execute after a file is
+	// uploaded.
+	//
+	// This member is required.
+	OnUpload []WorkflowDetail
+
+	noSmithyDocumentSerde
+}
+
+// The basic building block of a workflow.
+type WorkflowStep struct {
+
+	// Details for a step that performs a file copy. Consists of the following
+	// values:
+	//
+	// * A description
+	//
+	// * An S3 or EFS location for the destination of the
+	// file copy.
+	//
+	// * A flag that indicates whether or not to overwrite an existing file
+	// of the same name. The default is FALSE.
+	CopyStepDetails *CopyStepDetails
+
+	// Details for a step that invokes a lambda function. Consists of the lambda
+	// function name, target, and timeout (in seconds).
+	CustomStepDetails *CustomStepDetails
+
+	// You need to specify the name of the file to be deleted.
+	DeleteStepDetails *DeleteStepDetails
+
+	// Details for a step that creates one or more tags. You specify one or more tags:
+	// each tag contains a key/value pair.
+	TagStepDetails *TagStepDetails
+
+	// Currently, the following step types are supported.
+	//
+	// * Copy: copy the file to
+	// another location
+	//
+	// * Custom: custom step with a lambda target
+	//
+	// * Delete: delete
+	// the file
+	//
+	// * Tag: add a tag to the file
+	Type WorkflowStepType
 
 	noSmithyDocumentSerde
 }

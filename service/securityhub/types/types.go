@@ -147,6 +147,18 @@ type ActionTarget struct {
 	noSmithyDocumentSerde
 }
 
+// An adjustment to the CVSS metric.
+type Adjustment struct {
+
+	// The metric to adjust.
+	Metric *string
+
+	// The reason for the adjustment.
+	Reason *string
+
+	noSmithyDocumentSerde
+}
+
 // Represents a Security Hub administrator account designated by an organization
 // management account.
 type AdminAccount struct {
@@ -584,6 +596,152 @@ type AwsAutoScalingAutoScalingGroupDetails struct {
 
 	// The list of load balancers associated with the group.
 	LoadBalancerNames []string
+
+	noSmithyDocumentSerde
+}
+
+// A block device for the instance.
+type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails struct {
+
+	// The device name that is exposed to the EC2 instance. For example, /dev/sdh or
+	// xvdh.
+	DeviceName *string
+
+	// Parameters that are used to automatically set up Amazon EBS volumes when an
+	// instance is launched.
+	Ebs *AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails
+
+	// Whether to suppress the device that is included in the block device mapping of
+	// the Amazon Machine Image (AMI). If NoDevice is true, then you cannot specify
+	// Ebs.>
+	NoDevice bool
+
+	// The name of the virtual device (for example, ephemeral0). You can provide either
+	// VirtualName or Ebs, but not both.
+	VirtualName *string
+
+	noSmithyDocumentSerde
+}
+
+// Parameters that are used to automatically set up EBS volumes when an instance is
+// launched.
+type AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails struct {
+
+	// Whether to delete the volume when the instance is terminated.
+	DeleteOnTermination bool
+
+	// Whether to encrypt the volume.
+	Encrypted bool
+
+	// The number of input/output (I/O) operations per second (IOPS) to provision for
+	// the volume. Only supported for gp3 or io1 volumes. Required for io1 volumes. Not
+	// used with standard, gp2, st1, or sc1 volumes.
+	Iops int32
+
+	// The snapshot ID of the volume to use. You must specify either VolumeSize or
+	// SnapshotId.
+	SnapshotId *string
+
+	// The volume size, in GiBs. The following are the supported volumes sizes for each
+	// volume type:
+	//
+	// * gp2 and gp3: 1-16,384
+	//
+	// * io1: 4-16,384
+	//
+	// * st1 and sc1:
+	// 125-16,384
+	//
+	// * standard: 1-1,024
+	//
+	// You must specify either SnapshotId or
+	// VolumeSize. If you specify both SnapshotId and VolumeSize, the volume size must
+	// be equal or greater than the size of the snapshot.
+	VolumeSize int32
+
+	// The volume type.
+	VolumeType *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about a launch configuration.
+type AwsAutoScalingLaunchConfigurationDetails struct {
+
+	// For Auto Scaling groups that run in a VPC, specifies whether to assign a public
+	// IP address to the group's instances.
+	AssociatePublicIpAddress bool
+
+	// Specifies the block devices for the instance.
+	BlockDeviceMappings []AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails
+
+	// The identifier of a ClassicLink-enabled VPC that EC2-Classic instances are
+	// linked to.
+	ClassicLinkVpcId *string
+
+	// The identifiers of one or more security groups for the VPC that is specified in
+	// ClassicLinkVPCId.
+	ClassicLinkVpcSecurityGroups []string
+
+	// The creation date and time for the launch configuration. Uses the date-time
+	// format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	CreatedTime *string
+
+	// Whether the launch configuration is optimized for Amazon EBS I/O.
+	EbsOptimized bool
+
+	// The name or the ARN of the instance profile associated with the IAM role for the
+	// instance. The instance profile contains the IAM role.
+	IamInstanceProfile *string
+
+	// The identifier of the Amazon Machine Image (AMI) that is used to launch EC2
+	// instances.
+	ImageId *string
+
+	// Indicates the type of monitoring for instances in the group.
+	InstanceMonitoring *AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails
+
+	// The instance type for the instances.
+	InstanceType *string
+
+	// The identifier of the kernel associated with the AMI.
+	KernelId *string
+
+	// The name of the key pair.
+	KeyName *string
+
+	// The name of the launch configuration.
+	LaunchConfigurationName *string
+
+	// The tenancy of the instance. An instance with dedicated tenancy runs on
+	// isolated, single-tenant hardware and can only be launched into a VPC.
+	PlacementTenancy *string
+
+	// The identifier of the RAM disk associated with the AMI.
+	RamdiskId *string
+
+	// The security groups to assign to the instances in the Auto Scaling group.
+	SecurityGroups []string
+
+	// The maximum hourly price to be paid for any Spot Instance that is launched to
+	// fulfill the request.
+	SpotPrice *string
+
+	// The user data to make available to the launched EC2 instances. Must be
+	// base64-encoded text.
+	UserData *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the type of monitoring for instances in the group.
+type AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails struct {
+
+	// If set to true, then instances in the group launch with detailed monitoring. If
+	// set to false, then instances in the group launch with basic monitoring.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }
@@ -1072,9 +1230,9 @@ type AwsCloudTrailTrailDetails struct {
 // Information about an CodeBuild project.
 type AwsCodeBuildProjectDetails struct {
 
-	// The KMS customer master key (CMK) used to encrypt the build output artifacts.
-	// You can specify either the ARN of the CMK or, if available, the CMK alias (using
-	// the format alias/alias-name).
+	// The KMS key used to encrypt the build output artifacts. You can specify either
+	// the ARN of the KMS key or, if available, the KMS key alias (using the format
+	// alias/alias-name).
 	EncryptionKey *string
 
 	// Information about the build environment for this build project.
@@ -1482,8 +1640,8 @@ type AwsDynamoDbTableReplica struct {
 	// List of global secondary indexes for the replica.
 	GlobalSecondaryIndexes []AwsDynamoDbTableReplicaGlobalSecondaryIndex
 
-	// The identifier of the KMS customer master key (CMK) that will be used for KMS
-	// encryption for the replica.
+	// The identifier of the KMS key that will be used for KMS encryption for the
+	// replica.
 	KmsMasterKeyId *string
 
 	// Replica-specific configuration for the provisioned throughput.
@@ -1544,8 +1702,7 @@ type AwsDynamoDbTableSseDescription struct {
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	InaccessibleEncryptionDateTime *string
 
-	// The ARN of the KMS customer master key (CMK) that is used for the KMS
-	// encryption.
+	// The ARN of the KMS key that is used for the KMS encryption.
 	KmsMasterKeyArn *string
 
 	// The type of server-side encryption.
@@ -2030,8 +2187,8 @@ type AwsEc2VolumeDetails struct {
 	// Whether the volume is encrypted.
 	Encrypted bool
 
-	// The ARN of the KMS customer master key (CMK) that was used to protect the volume
-	// encryption key for the volume.
+	// The ARN of the KMS key that was used to protect the volume encryption key for
+	// the volume.
 	KmsKeyId *string
 
 	// The size of the volume, in GiBs.
@@ -2062,6 +2219,193 @@ type AwsEc2VpcDetails struct {
 
 	// The current state of the VPC.
 	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Details about an Amazon EC2 VPN connection.
+type AwsEc2VpnConnectionDetails struct {
+
+	// The category of the VPN connection. VPN indicates an Amazon Web Services VPN
+	// connection. VPN-Classic indicates an Amazon Web Services Classic VPN connection.
+	Category *string
+
+	// The configuration information for the VPN connection's customer gateway, in the
+	// native XML format.
+	CustomerGatewayConfiguration *string
+
+	// The identifier of the customer gateway that is at your end of the VPN
+	// connection.
+	CustomerGatewayId *string
+
+	// The VPN connection options.
+	Options *AwsEc2VpnConnectionOptionsDetails
+
+	// The static routes that are associated with the VPN connection.
+	Routes []AwsEc2VpnConnectionRoutesDetails
+
+	// The current state of the VPN connection.
+	State *string
+
+	// The identifier of the transit gateway that is associated with the VPN
+	// connection.
+	TransitGatewayId *string
+
+	// The type of VPN connection.
+	Type *string
+
+	// Information about the VPN tunnel.
+	VgwTelemetry []AwsEc2VpnConnectionVgwTelemetryDetails
+
+	// The identifier of the VPN connection.
+	VpnConnectionId *string
+
+	// The identifier of the virtual private gateway that is at the Amazon Web Services
+	// side of the VPN connection.
+	VpnGatewayId *string
+
+	noSmithyDocumentSerde
+}
+
+// VPN connection options.
+type AwsEc2VpnConnectionOptionsDetails struct {
+
+	// Whether the VPN connection uses static routes only.
+	StaticRoutesOnly bool
+
+	// The VPN tunnel options.
+	TunnelOptions []AwsEc2VpnConnectionOptionsTunnelOptionsDetails
+
+	noSmithyDocumentSerde
+}
+
+// The VPN tunnel options.
+type AwsEc2VpnConnectionOptionsTunnelOptionsDetails struct {
+
+	// The number of seconds after which a Dead Peer Detection (DPD) timeout occurs.
+	DpdTimeoutSeconds int32
+
+	// The Internet Key Exchange (IKE) versions that are permitted for the VPN tunnel.
+	IkeVersions []string
+
+	// The external IP address of the VPN tunnel.
+	OutsideIpAddress *string
+
+	// The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE
+	// negotiations.
+	Phase1DhGroupNumbers []int32
+
+	// The permitted encryption algorithms for the VPN tunnel for phase 1 IKE
+	// negotiations.
+	Phase1EncryptionAlgorithms []string
+
+	// The permitted integrity algorithms for the VPN tunnel for phase 1 IKE
+	// negotiations.
+	Phase1IntegrityAlgorithms []string
+
+	// The lifetime for phase 1 of the IKE negotiation, in seconds.
+	Phase1LifetimeSeconds int32
+
+	// The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE
+	// negotiations.
+	Phase2DhGroupNumbers []int32
+
+	// The permitted encryption algorithms for the VPN tunnel for phase 2 IKE
+	// negotiations.
+	Phase2EncryptionAlgorithms []string
+
+	// The permitted integrity algorithms for the VPN tunnel for phase 2 IKE
+	// negotiations.
+	Phase2IntegrityAlgorithms []string
+
+	// The lifetime for phase 2 of the IKE negotiation, in seconds.
+	Phase2LifetimeSeconds int32
+
+	// The preshared key to establish initial authentication between the virtual
+	// private gateway and the customer gateway.
+	PreSharedKey *string
+
+	// The percentage of the rekey window, which is determined by
+	// RekeyMarginTimeSeconds during which the rekey time is randomly selected.
+	RekeyFuzzPercentage int32
+
+	// The margin time, in seconds, before the phase 2 lifetime expires, during which
+	// the Amazon Web Services side of the VPN connection performs an IKE rekey.
+	RekeyMarginTimeSeconds int32
+
+	// The number of packets in an IKE replay window.
+	ReplayWindowSize int32
+
+	// The range of inside IPv4 addresses for the tunnel.
+	TunnelInsideCidr *string
+
+	noSmithyDocumentSerde
+}
+
+// A static routes associated with the VPN connection.
+type AwsEc2VpnConnectionRoutesDetails struct {
+
+	// The CIDR block associated with the local subnet of the customer data center.
+	DestinationCidrBlock *string
+
+	// The current state of the static route.
+	State *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about the VPN tunnel.
+type AwsEc2VpnConnectionVgwTelemetryDetails struct {
+
+	// The number of accepted routes.
+	AcceptedRouteCount int32
+
+	// The ARN of the VPN tunnel endpoint certificate.
+	CertificateArn *string
+
+	// The date and time of the last change in status. Uses the date-time format
+	// specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	LastStatusChange *string
+
+	// The Internet-routable IP address of the virtual private gateway's outside
+	// interface.
+	OutsideIpAddress *string
+
+	// The status of the VPN tunnel.
+	Status *string
+
+	// If an error occurs, a description of the error.
+	StatusMessage *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about an Amazon ECR image.
+type AwsEcrContainerImageDetails struct {
+
+	// The architecture of the image.
+	Architecture *string
+
+	// The sha256 digest of the image manifest.
+	ImageDigest *string
+
+	// The date and time when the image was pushed to the repository. Uses the
+	// date-time format specified in RFC 3339 section 5.6, Internet Date/Time Format
+	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
+	// spaces. For example, 2020-03-22T13:22:13.933Z.
+	ImagePublishedAt *string
+
+	// The list of tags that are associated with the image.
+	ImageTags []string
+
+	// The Amazon Web Services account identifier that is associated with the registry
+	// that the image belongs to.
+	RegistryId *string
+
+	// The name of the repository that the image belongs to.
+	RepositoryName *string
 
 	noSmithyDocumentSerde
 }
@@ -4123,15 +4467,15 @@ type AwsIamUserPolicy struct {
 	noSmithyDocumentSerde
 }
 
-// Contains metadata about a customer master key (CMK).
+// Contains metadata about an KMS key.
 type AwsKmsKeyDetails struct {
 
-	// The twelve-digit account ID of the Amazon Web Services account that owns the
-	// CMK.
+	// The twelve-digit account ID of the Amazon Web Services account that owns the KMS
+	// key.
 	AWSAccountId *string
 
-	// Indicates when the CMK was created. Uses the date-time format specified in RFC
-	// 3339 section 5.6, Internet Date/Time Format
+	// Indicates when the KMS key was created. Uses the date-time format specified in
+	// RFC 3339 section 5.6, Internet Date/Time Format
 	// (https://tools.ietf.org/html/rfc3339#section-5.6). The value cannot contain
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	CreationDate float64
@@ -4139,19 +4483,22 @@ type AwsKmsKeyDetails struct {
 	// A description of the key.
 	Description *string
 
-	// The globally unique identifier for the CMK.
+	// The globally unique identifier for the KMS key.
 	KeyId *string
 
-	// The manager of the CMK. CMKs in your Amazon Web Services account are either
-	// customer managed or Amazon Web Services managed.
+	// The manager of the KMS key. KMS keys in your Amazon Web Services account are
+	// either customer managed or Amazon Web Services managed.
 	KeyManager *string
 
-	// The state of the CMK.
+	// Whether the key has key rotation enabled.
+	KeyRotationStatus bool
+
+	// The state of the KMS key.
 	KeyState *string
 
-	// The source of the CMK's key material. When this value is AWS_KMS, KMS created
-	// the key material. When this value is EXTERNAL, the key material was imported
-	// from your existing key management infrastructure or the CMK lacks key material.
+	// The source of the KMS key material. When this value is AWS_KMS, KMS created the
+	// key material. When this value is EXTERNAL, the key material was imported from
+	// your existing key management infrastructure or the KMS key lacks key material.
 	// When this value is AWS_CLOUDHSM, the key material was created in the CloudHSM
 	// cluster associated with a custom key store.
 	Origin *string
@@ -4211,7 +4558,8 @@ type AwsLambdaFunctionDetails struct {
 	Handler *string
 
 	// The KMS key that is used to encrypt the function's environment variables. This
-	// key is only returned if you've configured a customer managed CMK.
+	// key is only returned if you've configured a customer managed customer managed
+	// key.
 	KmsKeyArn *string
 
 	// Indicates when the function was last updated. Uses the date-time format
@@ -5817,8 +6165,20 @@ type AwsS3BucketBucketLifecycleConfigurationRulesTransitionsDetails struct {
 // The details of an Amazon S3 bucket.
 type AwsS3BucketDetails struct {
 
+	// The access control list for the S3 bucket.
+	AccessControlList *string
+
 	// The lifecycle configuration for objects in the S3 bucket.
 	BucketLifecycleConfiguration *AwsS3BucketBucketLifecycleConfigurationDetails
+
+	// The logging configuration for the S3 bucket.
+	BucketLoggingConfiguration *AwsS3BucketLoggingConfiguration
+
+	// The notification configuration for the S3 bucket.
+	BucketNotificationConfiguration *AwsS3BucketNotificationConfiguration
+
+	// The website configuration parameters for the S3 bucket.
+	BucketWebsiteConfiguration *AwsS3BucketWebsiteConfiguration
 
 	// Indicates when the S3 bucket was created. Uses the date-time format specified in
 	// RFC 3339 section 5.6, Internet Date/Time Format
@@ -5842,11 +6202,84 @@ type AwsS3BucketDetails struct {
 	noSmithyDocumentSerde
 }
 
+// Information about logging for the S3 bucket
+type AwsS3BucketLoggingConfiguration struct {
+
+	// The name of the S3 bucket where log files for the S3 bucket are stored.
+	DestinationBucketName *string
+
+	// The prefix added to log files for the S3 bucket.
+	LogFilePrefix *string
+
+	noSmithyDocumentSerde
+}
+
+// The notification configuration for the S3 bucket.
+type AwsS3BucketNotificationConfiguration struct {
+
+	// Configurations for S3 bucket notifications.
+	Configurations []AwsS3BucketNotificationConfigurationDetail
+
+	noSmithyDocumentSerde
+}
+
+// Details for an S3 bucket notification configuration.
+type AwsS3BucketNotificationConfigurationDetail struct {
+
+	// The ARN of the Lambda function, Amazon SQS queue, or Amazon SNS topic that
+	// generates the notification.
+	Destination *string
+
+	// The list of events that trigger a notification.
+	Events []string
+
+	// The filters that determine which S3 buckets generate notifications.
+	Filter *AwsS3BucketNotificationConfigurationFilter
+
+	// Indicates the type of notification. Notifications can be generated using Lambda
+	// functions, Amazon SQS queues or Amazon SNS topics.
+	Type *string
+
+	noSmithyDocumentSerde
+}
+
+// Filtering information for the notifications. The filtering is based on Amazon S3
+// key names.
+type AwsS3BucketNotificationConfigurationFilter struct {
+
+	// Details for an Amazon S3 filter.
+	S3KeyFilter *AwsS3BucketNotificationConfigurationS3KeyFilter
+
+	noSmithyDocumentSerde
+}
+
+// Details for an Amazon S3 filter.
+type AwsS3BucketNotificationConfigurationS3KeyFilter struct {
+
+	// The filter rules for the filter.
+	FilterRules []AwsS3BucketNotificationConfigurationS3KeyFilterRule
+
+	noSmithyDocumentSerde
+}
+
+// Details for a filter rule.
+type AwsS3BucketNotificationConfigurationS3KeyFilterRule struct {
+
+	// Indicates whether the filter is based on the prefix or suffix of the Amazon S3
+	// key.
+	Name AwsS3BucketNotificationConfigurationS3KeyFilterRuleName
+
+	// The filter value.
+	Value *string
+
+	noSmithyDocumentSerde
+}
+
 // Specifies the default server-side encryption to apply to new objects in the
 // bucket.
 type AwsS3BucketServerSideEncryptionByDefault struct {
 
-	// KMS customer master key (CMK) ID to use for the default encryption.
+	// KMS key ID to use for the default encryption.
 	KMSMasterKeyID *string
 
 	// Server-side encryption algorithm to use for the default encryption.
@@ -5875,6 +6308,85 @@ type AwsS3BucketServerSideEncryptionRule struct {
 	noSmithyDocumentSerde
 }
 
+// Website parameters for the S3 bucket.
+type AwsS3BucketWebsiteConfiguration struct {
+
+	// The name of the error document for the website.
+	ErrorDocument *string
+
+	// The name of the index document for the website.
+	IndexDocumentSuffix *string
+
+	// The redirect behavior for requests to the website.
+	RedirectAllRequestsTo *AwsS3BucketWebsiteConfigurationRedirectTo
+
+	// The rules for applying redirects for requests to the website.
+	RoutingRules []AwsS3BucketWebsiteConfigurationRoutingRule
+
+	noSmithyDocumentSerde
+}
+
+// The redirect behavior for requests to the website.
+type AwsS3BucketWebsiteConfigurationRedirectTo struct {
+
+	// The name of the host to redirect requests to.
+	Hostname *string
+
+	// The protocol to use when redirecting requests. By default, uses the same
+	// protocol as the original request.
+	Protocol *string
+
+	noSmithyDocumentSerde
+}
+
+// A rule for redirecting requests to the website.
+type AwsS3BucketWebsiteConfigurationRoutingRule struct {
+
+	// Provides the condition that must be met in order to apply the routing rule.
+	Condition *AwsS3BucketWebsiteConfigurationRoutingRuleCondition
+
+	// Provides the rules to redirect the request if the condition in Condition is met.
+	Redirect *AwsS3BucketWebsiteConfigurationRoutingRuleRedirect
+
+	noSmithyDocumentSerde
+}
+
+// The condition that must be met in order to apply the routing rule.
+type AwsS3BucketWebsiteConfigurationRoutingRuleCondition struct {
+
+	// Indicates to redirect the request if the HTTP error code matches this value.
+	HttpErrorCodeReturnedEquals *string
+
+	// Indicates to redirect the request if the key prefix matches this value.
+	KeyPrefixEquals *string
+
+	noSmithyDocumentSerde
+}
+
+// The rules to redirect the request if the condition in Condition is met.
+type AwsS3BucketWebsiteConfigurationRoutingRuleRedirect struct {
+
+	// The host name to use in the redirect request.
+	Hostname *string
+
+	// The HTTP redirect code to use in the response.
+	HttpRedirectCode *string
+
+	// The protocol to use to redirect the request. By default, uses the protocol from
+	// the original request.
+	Protocol *string
+
+	// The object key prefix to use in the redirect request. Cannot be provided if
+	// ReplaceKeyWith is present.
+	ReplaceKeyPrefixWith *string
+
+	// The specific object key to use in the redirect request. Cannot be provided if
+	// ReplaceKeyPrefixWith is present.
+	ReplaceKeyWith *string
+
+	noSmithyDocumentSerde
+}
+
 // Details about an Amazon S3 object.
 type AwsS3ObjectDetails struct {
 
@@ -5891,8 +6403,8 @@ type AwsS3ObjectDetails struct {
 	// spaces. For example, 2020-03-22T13:22:13.933Z.
 	LastModified *string
 
-	// The identifier of the KMS symmetric customer managed customer master key (CMK)
-	// that was used for the object.
+	// The identifier of the KMS symmetric customer managed key that was used for the
+	// object.
 	SSEKMSKeyId *string
 
 	// If the object is stored using server-side encryption, the value of the
@@ -5914,8 +6426,8 @@ type AwsSecretsManagerSecretDetails struct {
 	// The user-provided description of the secret.
 	Description *string
 
-	// The ARN, Key ID, or alias of the KMS customer master key (CMK) used to encrypt
-	// the SecretString or SecretBinary values for versions of this secret.
+	// The ARN, Key ID, or alias of the KMS key used to encrypt the SecretString or
+	// SecretBinary values for versions of this secret.
 	KmsKeyId *string
 
 	// The name of the secret.
@@ -6096,7 +6608,7 @@ type AwsSecurityFinding struct {
 	// BatchImportFindings or BatchUpdateFindings. The exception to this is when you
 	// use a custom integration. When you use the Security Hub console to filter
 	// findings by product name, you use this attribute. When you use the Security Hub
-	// API to filter findings by product name, you use the aws/securityhub/ProductyName
+	// API to filter findings by product name, you use the aws/securityhub/ProductName
 	// attribute under ProductFields. Security Hub does not synchronize those two
 	// attributes.
 	ProductName *string
@@ -6540,8 +7052,8 @@ type AwsSecurityFindingIdentifier struct {
 // A wrapper type for the topic's ARN.
 type AwsSnsTopicDetails struct {
 
-	// The ID of an Amazon Web Services managed customer master key (CMK) for Amazon
-	// SNS or a custom CMK.
+	// The ID of an Amazon Web Services managed key for Amazon SNS or a customer
+	// managed key.
 	KmsMasterKeyId *string
 
 	// The subscription's owner.
@@ -6580,8 +7092,7 @@ type AwsSqsQueueDetails struct {
 	// encrypt or decrypt messages before calling KMS again.
 	KmsDataKeyReusePeriodSeconds int32
 
-	// The ID of an Amazon Web Services managed customer master key (CMK) for Amazon
-	// SQS or a custom CMK.
+	// The ID of an Amazon Web Services managed key for Amazon SQS or a custom KMS key.
 	KmsMasterKeyId *string
 
 	// The name of the new queue.
@@ -6958,11 +7469,17 @@ type CustomDataIdentifiersResult struct {
 // CVSS scores from the advisory related to the vulnerability.
 type Cvss struct {
 
+	// Adjustments to the CVSS metrics.
+	Adjustments []Adjustment
+
 	// The base CVSS score.
 	BaseScore float64
 
 	// The base scoring vector for the CVSS score.
 	BaseVector *string
+
+	// The origin of the original CVSS score and vector.
+	Source *string
 
 	// The version of CVSS for the CVSS score.
 	Version *string
@@ -7770,8 +8287,8 @@ type Product struct {
 
 	// For integrations with Amazon Web Services services, the Amazon Web Services
 	// Console URL from which to activate the service. For integrations with
-	// third-party products, the Marketplace URL from which to subscribe to or purchase
-	// the product.
+	// third-party products, the Amazon Web Services Marketplace URL from which to
+	// subscribe to or purchase the product.
 	MarketplaceUrl *string
 
 	// The name of the product.
@@ -7920,6 +8437,9 @@ type ResourceDetails struct {
 	// Details for an autoscaling group.
 	AwsAutoScalingAutoScalingGroup *AwsAutoScalingAutoScalingGroupDetails
 
+	// Provides details about a launch configuration.
+	AwsAutoScalingLaunchConfiguration *AwsAutoScalingLaunchConfigurationDetails
+
 	// Provides details about an Certificate Manager certificate.
 	AwsCertificateManagerCertificate *AwsCertificateManagerCertificateDetails
 
@@ -7959,6 +8479,12 @@ type ResourceDetails struct {
 	// Details for an EC2 VPC.
 	AwsEc2Vpc *AwsEc2VpcDetails
 
+	// Details about an EC2 VPN connection.
+	AwsEc2VpnConnection *AwsEc2VpnConnectionDetails
+
+	// information about an Amazon ECR image.
+	AwsEcrContainerImage *AwsEcrContainerImageDetails
+
 	// Details about an ECS cluster.
 	AwsEcsCluster *AwsEcsClusterDetails
 
@@ -7975,7 +8501,7 @@ type ResourceDetails struct {
 	// Details for an Elasticsearch domain.
 	AwsElasticsearchDomain *AwsElasticsearchDomainDetails
 
-	// contains details about a Classic Load Balancer.
+	// Contains details about a Classic Load Balancer.
 	AwsElbLoadBalancer *AwsElbLoadBalancerDetails
 
 	// Details about a load balancer.
@@ -8233,8 +8759,14 @@ type SoftwarePackage struct {
 	// The epoch of the software package.
 	Epoch *string
 
+	// The file system path to the package manager inventory file.
+	FilePath *string
+
 	// The name of the software package.
 	Name *string
+
+	// The source of the package.
+	PackageManager *string
 
 	// The release of the software package.
 	Release *string
@@ -8585,7 +9117,10 @@ type WafOverrideAction struct {
 // Provides information about the status of the investigation into a finding.
 type Workflow struct {
 
-	// The status of the investigation into the finding. The allowed values are the
+	// The status of the investigation into the finding. The workflow status is
+	// specific to an individual finding. It does not affect the generation of new
+	// findings. For example, setting the workflow status to SUPPRESSED or RESOLVED
+	// does not prevent a new finding for the same issue. The allowed values are the
 	// following.
 	//
 	// * NEW - The initial state of a finding, before it is reviewed.
@@ -8602,11 +9137,12 @@ type Workflow struct {
 	// about the security issue. Used when the initial reviewer is not the resource
 	// owner, and needs intervention from the resource owner.
 	//
-	// * SUPPRESSED - The
-	// finding will not be reviewed again and will not be acted upon.
+	// * SUPPRESSED - Indicates
+	// that you reviewed the finding and do not believe that any action is needed. The
+	// finding is no longer updated.
 	//
-	// * RESOLVED - The
-	// finding was reviewed and remediated and is now considered resolved.
+	// * RESOLVED - The finding was reviewed and
+	// remediated and is now considered resolved.
 	Status WorkflowStatus
 
 	noSmithyDocumentSerde
@@ -8615,7 +9151,10 @@ type Workflow struct {
 // Used to update information about the investigation into the finding.
 type WorkflowUpdate struct {
 
-	// The status of the investigation into the finding. The allowed values are the
+	// The status of the investigation into the finding. The workflow status is
+	// specific to an individual finding. It does not affect the generation of new
+	// findings. For example, setting the workflow status to SUPPRESSED or RESOLVED
+	// does not prevent a new finding for the same issue. The allowed values are the
 	// following.
 	//
 	// * NEW - The initial state of a finding, before it is reviewed.
@@ -8635,8 +9174,9 @@ type WorkflowUpdate struct {
 	// * RESOLVED - The finding
 	// was reviewed and remediated and is now considered resolved.
 	//
-	// * SUPPRESSED - The
-	// finding will not be reviewed again and will not be acted upon.
+	// * SUPPRESSED -
+	// Indicates that you reviewed the finding and do not believe that any action is
+	// needed. The finding is no longer updated.
 	Status WorkflowStatus
 
 	noSmithyDocumentSerde

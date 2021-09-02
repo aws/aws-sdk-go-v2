@@ -35,7 +35,7 @@ type DeleteThemeAliasInput struct {
 	// This member is required.
 	AliasName *string
 
-	// The ID of the Amazon Web Services account; that contains the theme alias to
+	// The ID of the Amazon Web Services account that contains the theme alias to
 	// delete.
 	//
 	// This member is required.

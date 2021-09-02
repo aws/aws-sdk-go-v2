@@ -29,7 +29,7 @@ func (c *Client) UpdateTheme(ctx context.Context, params *UpdateThemeInput, optF
 
 type UpdateThemeInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the theme that you're
+	// The ID of the Amazon Web Services account that contains the theme that you're
 	// updating.
 	//
 	// This member is required.

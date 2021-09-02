@@ -2,6 +2,26 @@
 
 package types
 
+type AsyncOperationName string
+
+// Enum values for AsyncOperationName
+const (
+	AsyncOperationNameCreateMultiRegionAccessPoint    AsyncOperationName = "CreateMultiRegionAccessPoint"
+	AsyncOperationNameDeleteMultiRegionAccessPoint    AsyncOperationName = "DeleteMultiRegionAccessPoint"
+	AsyncOperationNamePutMultiRegionAccessPointPolicy AsyncOperationName = "PutMultiRegionAccessPointPolicy"
+)
+
+// Values returns all known values for AsyncOperationName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AsyncOperationName) Values() []AsyncOperationName {
+	return []AsyncOperationName{
+		"CreateMultiRegionAccessPoint",
+		"DeleteMultiRegionAccessPoint",
+		"PutMultiRegionAccessPointPolicy",
+	}
+}
+
 type BucketCannedACL string
 
 // Enum values for BucketCannedACL
@@ -207,6 +227,32 @@ func (JobStatus) Values() []JobStatus {
 		"Preparing",
 		"Ready",
 		"Suspended",
+	}
+}
+
+type MultiRegionAccessPointStatus string
+
+// Enum values for MultiRegionAccessPointStatus
+const (
+	MultiRegionAccessPointStatusReady                     MultiRegionAccessPointStatus = "READY"
+	MultiRegionAccessPointStatusInconsistentAcrossRegions MultiRegionAccessPointStatus = "INCONSISTENT_ACROSS_REGIONS"
+	MultiRegionAccessPointStatusCreating                  MultiRegionAccessPointStatus = "CREATING"
+	MultiRegionAccessPointStatusPartiallyCreated          MultiRegionAccessPointStatus = "PARTIALLY_CREATED"
+	MultiRegionAccessPointStatusPartiallyDeleted          MultiRegionAccessPointStatus = "PARTIALLY_DELETED"
+	MultiRegionAccessPointStatusDeleting                  MultiRegionAccessPointStatus = "DELETING"
+)
+
+// Values returns all known values for MultiRegionAccessPointStatus. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (MultiRegionAccessPointStatus) Values() []MultiRegionAccessPointStatus {
+	return []MultiRegionAccessPointStatus{
+		"READY",
+		"INCONSISTENT_ACROSS_REGIONS",
+		"CREATING",
+		"PARTIALLY_CREATED",
+		"PARTIALLY_DELETED",
+		"DELETING",
 	}
 }
 

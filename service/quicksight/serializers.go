@@ -537,6 +537,13 @@ func awsRestjson1_serializeOpDocumentCreateDataSetInput(v *CreateDataSetInput, v
 		ok.String(*v.DataSetId)
 	}
 
+	if v.DataSetUsageConfiguration != nil {
+		ok := object.Key("DataSetUsageConfiguration")
+		if err := awsRestjson1_serializeDocumentDataSetUsageConfiguration(v.DataSetUsageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FieldFolders != nil {
 		ok := object.Key("FieldFolders")
 		if err := awsRestjson1_serializeDocumentFieldFolderMap(v.FieldFolders, ok); err != nil {
@@ -8129,6 +8136,13 @@ func awsRestjson1_serializeOpDocumentUpdateDataSetInput(v *UpdateDataSetInput, v
 		}
 	}
 
+	if v.DataSetUsageConfiguration != nil {
+		ok := object.Key("DataSetUsageConfiguration")
+		if err := awsRestjson1_serializeDocumentDataSetUsageConfiguration(v.DataSetUsageConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.FieldFolders != nil {
 		ok := object.Key("FieldFolders")
 		if err := awsRestjson1_serializeDocumentFieldFolderMap(v.FieldFolders, ok); err != nil {
@@ -10053,6 +10067,17 @@ func awsRestjson1_serializeDocumentColumnTagList(v []types.ColumnTag, value smit
 	return nil
 }
 
+func awsRestjson1_serializeDocumentColumnTagNames(v []types.ColumnTagName, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCreateColumnsOperation(v *types.CreateColumnsOperation, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10269,6 +10294,23 @@ func awsRestjson1_serializeDocumentDataSetReferenceList(v []types.DataSetReferen
 			return err
 		}
 	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDataSetUsageConfiguration(v *types.DataSetUsageConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DisableUseAsDirectQuerySource {
+		ok := object.Key("DisableUseAsDirectQuerySource")
+		ok.Boolean(v.DisableUseAsDirectQuerySource)
+	}
+
+	if v.DisableUseAsImportedSource {
+		ok := object.Key("DisableUseAsImportedSource")
+		ok.Boolean(v.DisableUseAsImportedSource)
+	}
+
 	return nil
 }
 
@@ -10863,6 +10905,11 @@ func awsRestjson1_serializeDocumentLogicalTableMap(v map[string]types.LogicalTab
 func awsRestjson1_serializeDocumentLogicalTableSource(v *types.LogicalTableSource, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.DataSetArn != nil {
+		ok := object.Key("DataSetArn")
+		ok.String(*v.DataSetArn)
+	}
 
 	if v.JoinInstruction != nil {
 		ok := object.Key("JoinInstruction")
@@ -11878,6 +11925,12 @@ func awsRestjson1_serializeDocumentTransformOperation(v types.TransformOperation
 			return err
 		}
 
+	case *types.TransformOperationMemberUntagColumnOperation:
+		av := object.Key("UntagColumnOperation")
+		if err := awsRestjson1_serializeDocumentUntagColumnOperation(&uv.Value, av); err != nil {
+			return err
+		}
+
 	default:
 		return fmt.Errorf("attempted to serialize unknown member type %T for union %T", uv, v)
 
@@ -12000,6 +12053,25 @@ func awsRestjson1_serializeDocumentUIColorPalette(v *types.UIColorPalette, value
 	if v.WarningForeground != nil {
 		ok := object.Key("WarningForeground")
 		ok.String(*v.WarningForeground)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUntagColumnOperation(v *types.UntagColumnOperation, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ColumnName != nil {
+		ok := object.Key("ColumnName")
+		ok.String(*v.ColumnName)
+	}
+
+	if v.TagNames != nil {
+		ok := object.Key("TagNames")
+		if err := awsRestjson1_serializeDocumentColumnTagNames(v.TagNames, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil

@@ -13,25 +13,25 @@ import (
 )
 
 // Returns the description of specific Amazon FSx backups, if a BackupIds value is
-// provided for that backup. Otherwise, it returns all backups owned by your AWS
-// account in the AWS Region of the endpoint that you're calling. When retrieving
-// all backups, you can optionally specify the MaxResults parameter to limit the
-// number of backups in a response. If more backups remain, Amazon FSx returns a
-// NextToken value in the response. In this case, send a later request with the
-// NextToken request parameter set to the value of NextToken from the last
-// response. This action is used in an iterative process to retrieve a list of your
-// backups. DescribeBackups is called first without a NextTokenvalue. Then the
-// action continues to be called with the NextToken parameter set to the value of
-// the last NextToken value until a response has no NextToken. When using this
-// action, keep the following in mind:
+// provided for that backup. Otherwise, it returns all backups owned by your Amazon
+// Web Services account in the Amazon Web Services Region of the endpoint that
+// you're calling. When retrieving all backups, you can optionally specify the
+// MaxResults parameter to limit the number of backups in a response. If more
+// backups remain, Amazon FSx returns a NextToken value in the response. In this
+// case, send a later request with the NextToken request parameter set to the value
+// of NextToken from the last response. This action is used in an iterative process
+// to retrieve a list of your backups. DescribeBackups is called first without a
+// NextTokenvalue. Then the action continues to be called with the NextToken
+// parameter set to the value of the last NextToken value until a response has no
+// NextToken. When using this action, keep the following in mind:
 //
-// * The implementation might return fewer
-// than MaxResults file system descriptions while still including a NextToken
-// value.
+// * The
+// implementation might return fewer than MaxResults backup descriptions while
+// still including a NextToken value.
 //
-// * The order of backups returned in the response of one DescribeBackups
-// call and the order of backups returned across the responses of a multi-call
-// iteration is unspecified.
+// * The order of backups returned in the
+// response of one DescribeBackups call and the order of backups returned across
+// the responses of a multi-call iteration is unspecified.
 func (c *Client) DescribeBackups(ctx context.Context, params *DescribeBackupsInput, optFns ...func(*Options)) (*DescribeBackupsOutput, error) {
 	if params == nil {
 		params = &DescribeBackupsInput{}
@@ -54,7 +54,8 @@ type DescribeBackupsInput struct {
 	// any IDs are not found, BackupNotFound will be thrown.
 	BackupIds []string
 
-	// Filters structure. Supported names are file-system-id and backup-type.
+	// Filters structure. Supported names are file-system-id, backup-type,
+	// file-system-type, and volume-id.
 	Filters []types.Filter
 
 	// Maximum number of backups to return in the response (integer). This parameter

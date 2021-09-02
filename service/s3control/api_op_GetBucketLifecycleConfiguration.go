@@ -78,7 +78,7 @@ func (c *Client) GetBucketLifecycleConfiguration(ctx context.Context, params *Ge
 
 type GetBucketLifecycleConfigurationInput struct {
 
-	// The account ID of the Outposts bucket.
+	// The Amazon Web Services account ID of the Outposts bucket.
 	//
 	// This member is required.
 	AccountId *string

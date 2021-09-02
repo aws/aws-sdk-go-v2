@@ -50,6 +50,18 @@ import (
 //
 // *
 // WeeklyMaintenanceStartTime
+//
+// For Amazon FSx for NetApp ONTAP file systems, you
+// can update the following properties:
+//
+// * AutomaticBackupRetentionDays
+//
+// *
+// DailyAutomaticBackupStartTime
+//
+// * FsxAdminPassword
+//
+// * WeeklyMaintenanceStartTime
 func (c *Client) UpdateFileSystem(ctx context.Context, params *UpdateFileSystemInput, optFns ...func(*Options)) (*UpdateFileSystemOutput, error) {
 	if params == nil {
 		params = &UpdateFileSystemInput{}
@@ -74,38 +86,41 @@ type UpdateFileSystemInput struct {
 	FileSystemId *string
 
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
-	// updates. This string is automatically filled on your behalf when you use the AWS
-	// Command Line Interface (AWS CLI) or an AWS SDK.
+	// updates. This string is automatically filled on your behalf when you use the
+	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
 	// The configuration object for Amazon FSx for Lustre file systems used in the
 	// UpdateFileSystem operation.
 	LustreConfiguration *types.UpdateFileSystemLustreConfiguration
 
-	// Use this parameter to increase the storage capacity of an Amazon FSx file
-	// system. Specifies the storage capacity target value, GiB, to increase the
-	// storage capacity for the file system that you're updating. You cannot make a
-	// storage capacity increase request if there is an existing storage capacity
-	// increase request in progress. For Windows file systems, the storage capacity
-	// target value must be at least 10 percent (%) greater than the current storage
-	// capacity value. In order to increase storage capacity, the file system must have
-	// at least 16 MB/s of throughput capacity. For Lustre file systems, the storage
-	// capacity target value can be the following:
+	// The configuration updates for an Amazon FSx for NetApp ONTAP file system.
+	OntapConfiguration *types.UpdateFileSystemOntapConfiguration
+
+	// Use this parameter to increase the storage capacity of an Amazon FSx for Windows
+	// File Server or Amazon FSx for Lustre file system. Specifies the storage capacity
+	// target value, GiB, to increase the storage capacity for the file system that
+	// you're updating. You cannot make a storage capacity increase request if there is
+	// an existing storage capacity increase request in progress. For Windows file
+	// systems, the storage capacity target value must be at least 10 percent (%)
+	// greater than the current storage capacity value. In order to increase storage
+	// capacity, the file system must have at least 16 MB/s of throughput capacity. For
+	// Lustre file systems, the storage capacity target value can be the following:
 	//
-	// * For SCRATCH_2 and PERSISTENT_1
-	// SSD deployment types, valid values are in multiples of 2400 GiB. The value must
-	// be greater than the current storage capacity.
+	// *
+	// For SCRATCH_2 and PERSISTENT_1 SSD deployment types, valid values are in
+	// multiples of 2400 GiB. The value must be greater than the current storage
+	// capacity.
 	//
-	// * For PERSISTENT HDD file
-	// systems, valid values are multiples of 6000 GiB for 12 MB/s/TiB file systems and
-	// multiples of 1800 GiB for 40 MB/s/TiB file systems. The values must be greater
-	// than the current storage capacity.
+	// * For PERSISTENT HDD file systems, valid values are multiples of 6000
+	// GiB for 12 MB/s/TiB file systems and multiples of 1800 GiB for 40 MB/s/TiB file
+	// systems. The values must be greater than the current storage capacity.
 	//
-	// * For SCRATCH_1 file systems, you cannot
-	// increase the storage capacity.
+	// * For
+	// SCRATCH_1 file systems, you cannot increase the storage capacity.
 	//
-	// For more information, see Managing storage
-	// capacity
+	// For more
+	// information, see Managing storage capacity
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/managing-storage-capacity.html)
 	// in the Amazon FSx for Windows File Server User Guide and Managing storage and
 	// throughput capacity

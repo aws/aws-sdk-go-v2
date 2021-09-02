@@ -4744,6 +4744,55 @@ func awsAwsjson11_deserializeDocumentMalformedCSRException(v **types.MalformedCS
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentOcspConfiguration(v **types.OcspConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OcspConfiguration
+	if *v == nil {
+		sv = &types.OcspConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = jtv
+			}
+
+		case "OcspCustomCname":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected String253 to be of type string, got %T instead", value)
+				}
+				sv.OcspCustomCname = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentOtherName(v **types.OtherName, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5139,6 +5188,11 @@ func awsAwsjson11_deserializeDocumentRevocationConfiguration(v **types.Revocatio
 		switch key {
 		case "CrlConfiguration":
 			if err := awsAwsjson11_deserializeDocumentCrlConfiguration(&sv.CrlConfiguration, value); err != nil {
+				return err
+			}
+
+		case "OcspConfiguration":
+			if err := awsAwsjson11_deserializeDocumentOcspConfiguration(&sv.OcspConfiguration, value); err != nil {
 				return err
 			}
 

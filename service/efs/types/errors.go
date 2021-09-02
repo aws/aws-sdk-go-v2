@@ -30,8 +30,8 @@ func (e *AccessPointAlreadyExists) ErrorMessage() string {
 func (e *AccessPointAlreadyExists) ErrorCode() string             { return "AccessPointAlreadyExists" }
 func (e *AccessPointAlreadyExists) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the AWS account has already created the maximum number of access
-// points allowed per file system.
+// Returned if the Amazon Web Services account has already created the maximum
+// number of access points allowed per file system.
 type AccessPointLimitExceeded struct {
 	Message *string
 
@@ -53,7 +53,7 @@ func (e *AccessPointLimitExceeded) ErrorCode() string             { return "Acce
 func (e *AccessPointLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the specified AccessPointId value doesn't exist in the requester's
-// AWS account.
+// Amazon Web Services account.
 type AccessPointNotFound struct {
 	Message *string
 
@@ -186,8 +186,8 @@ func (e *FileSystemInUse) ErrorMessage() string {
 func (e *FileSystemInUse) ErrorCode() string             { return "FileSystemInUse" }
 func (e *FileSystemInUse) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the AWS account has already created the maximum number of file
-// systems allowed per account.
+// Returned if the Amazon Web Services account has already created the maximum
+// number of file systems allowed per account.
 type FileSystemLimitExceeded struct {
 	Message *string
 
@@ -209,7 +209,7 @@ func (e *FileSystemLimitExceeded) ErrorCode() string             { return "FileS
 func (e *FileSystemLimitExceeded) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if the specified FileSystemId value doesn't exist in the requester's
-// AWS account.
+// Amazon Web Services account.
 type FileSystemNotFound struct {
 	Message *string
 
@@ -388,7 +388,7 @@ func (e *MountTargetConflict) ErrorCode() string             { return "MountTarg
 func (e *MountTargetConflict) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // Returned if there is no mount target with the specified ID found in the caller's
-// account.
+// Amazon Web Services account.
 type MountTargetNotFound struct {
 	Message *string
 
@@ -410,9 +410,9 @@ func (e *MountTargetNotFound) ErrorCode() string             { return "MountTarg
 func (e *MountTargetNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The calling account has reached the limit for elastic network interfaces for the
-// specific AWS Region. The client should try to delete some elastic network
-// interfaces or get the account limit raised. For more information, see Amazon VPC
-// Limits
+// specific Amazon Web Services Region. The client should try to delete some
+// elastic network interfaces or get the account limit raised. For more
+// information, see Amazon VPC Limits
 // (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html)
 // in the Amazon VPC User Guide (see the Network interfaces per VPC entry in the
 // table).
@@ -611,8 +611,8 @@ func (e *UnsupportedAvailabilityZone) ErrorMessage() string {
 func (e *UnsupportedAvailabilityZone) ErrorCode() string             { return "UnsupportedAvailabilityZone" }
 func (e *UnsupportedAvailabilityZone) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Returned if the AWS Backup service is not available in the Region in which the
-// request was made.
+// Returned if the Backup service is not available in the Amazon Web Services
+// Region in which the request was made.
 type ValidationException struct {
 	Message *string
 

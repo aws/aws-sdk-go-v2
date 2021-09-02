@@ -12,8 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the versions of the themes in the current Amazon Web Services
-// account;.
+// Lists all the versions of the themes in the current Amazon Web Services account.
 func (c *Client) ListThemeVersions(ctx context.Context, params *ListThemeVersionsInput, optFns ...func(*Options)) (*ListThemeVersionsOutput, error) {
 	if params == nil {
 		params = &ListThemeVersionsInput{}
@@ -31,7 +30,7 @@ func (c *Client) ListThemeVersions(ctx context.Context, params *ListThemeVersion
 
 type ListThemeVersionsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the themes that you're
+	// The ID of the Amazon Web Services account that contains the themes that you're
 	// listing.
 	//
 	// This member is required.

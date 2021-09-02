@@ -9,6 +9,10 @@ import (
 
 type DiscovererSummary struct {
 
+	// The Status if the discoverer will discover schemas from events sent from another
+	// account.
+	CrossAccount bool
+
 	// The ARN of the discoverer.
 	DiscovererArn *string
 

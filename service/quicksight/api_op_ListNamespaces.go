@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the namespaces for the specified Amazon Web Services account;.
+// Lists the namespaces for the specified Amazon Web Services account.
 func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput, optFns ...func(*Options)) (*ListNamespacesOutput, error) {
 	if params == nil {
 		params = &ListNamespacesInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListNamespaces(ctx context.Context, params *ListNamespacesInput
 
 type ListNamespacesInput struct {
 
-	// The ID for the Amazon Web Services account; that contains the QuickSight
+	// The ID for the Amazon Web Services account that contains the Amazon QuickSight
 	// namespaces that you want to list.
 	//
 	// This member is required.
@@ -47,7 +47,7 @@ type ListNamespacesInput struct {
 
 type ListNamespacesOutput struct {
 
-	// The information about the namespaces in this Amazon Web Services account;. The
+	// The information about the namespaces in this Amazon Web Services account. The
 	// response includes the namespace ARN, name, Amazon Web Services Region;,
 	// notification email address, creation status, and identity store.
 	Namespaces []types.NamespaceInfoV2

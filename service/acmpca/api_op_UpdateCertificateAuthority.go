@@ -43,7 +43,14 @@ type UpdateCertificateAuthorityInput struct {
 	// This member is required.
 	CertificateAuthorityArn *string
 
-	// Revocation information for your private CA.
+	// Contains information to enable Online Certificate Status Protocol (OCSP)
+	// support, to enable a certificate revocation list (CRL), to enable both, or to
+	// enable neither. If this parameter is not supplied, existing capibilites remain
+	// unchanged. For more information, see the OcspConfiguration
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_OcspConfiguration.html)
+	// and CrlConfiguration
+	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CrlConfiguration.html)
+	// types.
 	RevocationConfiguration *types.RevocationConfiguration
 
 	// Status of your private CA.

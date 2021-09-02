@@ -56,7 +56,8 @@ func (c *Client) ListAccessPoints(ctx context.Context, params *ListAccessPointsI
 
 type ListAccessPointsInput struct {
 
-	// The account ID for owner of the bucket whose access points you want to list.
+	// The Amazon Web Services account ID for owner of the bucket whose access points
+	// you want to list.
 	//
 	// This member is required.
 	AccountId *string

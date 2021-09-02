@@ -28,7 +28,7 @@ func (c *Client) DeleteDashboard(ctx context.Context, params *DeleteDashboardInp
 
 type DeleteDashboardInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboard that
+	// The ID of the Amazon Web Services account that contains the dashboard that
 	// you're deleting.
 	//
 	// This member is required.

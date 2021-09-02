@@ -12,18 +12,19 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Copies an existing backup within the same AWS account to another Region
-// (cross-Region copy) or within the same Region (in-Region copy). You can have up
-// to five backup copy requests in progress to a single destination Region per
-// account. You can use cross-Region backup copies for cross-region disaster
-// recovery. You periodically take backups and copy them to another Region so that
-// in the event of a disaster in the primary Region, you can restore from backup
-// and recover availability quickly in the other Region. You can make cross-Region
-// copies only within your AWS partition. You can also use backup copies to clone
-// your file data set to another Region or within the same Region. You can use the
-// SourceRegion parameter to specify the AWS Region from which the backup will be
-// copied. For example, if you make the call from the us-west-1 Region and want to
-// copy a backup from the us-east-2 Region, you specify us-east-2 in the
+// Copies an existing backup within the same Amazon Web Services account to another
+// Amazon Web Services Region (cross-Region copy) or within the same Amazon Web
+// Services Region (in-Region copy). You can have up to five backup copy requests
+// in progress to a single destination Region per account. You can use cross-Region
+// backup copies for cross-region disaster recovery. You periodically take backups
+// and copy them to another Region so that in the event of a disaster in the
+// primary Region, you can restore from backup and recover availability quickly in
+// the other Region. You can make cross-Region copies only within your Amazon Web
+// Services partition. You can also use backup copies to clone your file data set
+// to another Region or within the same Region. You can use the SourceRegion
+// parameter to specify the Amazon Web Services Region from which the backup will
+// be copied. For example, if you make the call from the us-west-1 Region and want
+// to copy a backup from the us-east-2 Region, you specify us-east-2 in the
 // SourceRegion parameter to make a cross-Region copy. If you don't specify a
 // Region, the backup copy is created in the same Region where the request is sent
 // from (in-Region copy). For more information on creating backup copies, see
@@ -57,7 +58,7 @@ type CopyBackupInput struct {
 
 	// (Optional) An idempotency token for resource creation, in a string of up to 64
 	// ASCII characters. This token is automatically filled on your behalf when you use
-	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
 	// A boolean flag indicating whether tags from the source backup should be copied
@@ -69,20 +70,21 @@ type CopyBackupInput struct {
 	// with the Tags parameter take precedence.
 	CopyTags *bool
 
-	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file
-	// system's data for Amazon FSx for Windows File Server file systems and Amazon FSx
-	// for Lustre PERSISTENT_1 file systems at rest. In either case, if not specified,
-	// the Amazon FSx managed key is used. The Amazon FSx for Lustre SCRATCH_1 and
-	// SCRATCH_2 file systems are always encrypted at rest using Amazon FSx managed
-	// keys. For more information, see Encrypt
+	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
+	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
+	// ONTAP file systems, and Amazon FSx for Lustre PERSISTENT_1 file systems at rest.
+	// If not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre
+	// SCRATCH_1 and SCRATCH_2 file systems are always encrypted at rest using Amazon
+	// FSx managed keys. For more information, see Encrypt
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
-	// AWS Key Management Service API Reference.
+	// Key Management Service API Reference.
 	KmsKeyId *string
 
-	// The source AWS Region of the backup. Specifies the AWS Region from which the
-	// backup is being copied. The source and destination Regions must be in the same
-	// AWS partition. If you don't specify a Region, it defaults to the Region where
-	// the request is sent from (in-Region copy).
+	// The source Amazon Web Services Region of the backup. Specifies the Amazon Web
+	// Services Region from which the backup is being copied. The source and
+	// destination Regions must be in the same Amazon Web Services partition. If you
+	// don't specify a Region, it defaults to the Region where the request is sent from
+	// (in-Region copy).
 	SourceRegion *string
 
 	// A list of Tag values, with a maximum of 50 elements.
@@ -93,7 +95,8 @@ type CopyBackupInput struct {
 
 type CopyBackupOutput struct {
 
-	// A backup of an Amazon FSx file system.
+	// A backup of an Amazon FSx for Windows File Server or Amazon FSx for Lustre file
+	// system, or of an Amazon FSx for NetApp ONTAP volume.
 	Backup *types.Backup
 
 	// Metadata pertaining to the operation's result.

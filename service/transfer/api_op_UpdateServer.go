@@ -145,6 +145,10 @@ type UpdateServerInput struct {
 	// Specifies the name of the security policy that is attached to the server.
 	SecurityPolicyName *string
 
+	// Specifies the workflow ID for the workflow to assign and the execution role used
+	// for executing the workflow.
+	WorkflowDetails *types.WorkflowDetails
+
 	noSmithyDocumentSerde
 }
 

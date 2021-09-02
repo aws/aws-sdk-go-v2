@@ -63,9 +63,11 @@ var defaultPartitions = endpoints.Partitions{
 		RegionRegex:    partitionRegexp.Aws,
 		IsRegionalized: true,
 		Endpoints: endpoints.Endpoints{
+			"af-south-1":     endpoints.Endpoint{},
 			"ap-east-1":      endpoints.Endpoint{},
 			"ap-northeast-1": endpoints.Endpoint{},
 			"ap-northeast-2": endpoints.Endpoint{},
+			"ap-northeast-3": endpoints.Endpoint{},
 			"ap-south-1":     endpoints.Endpoint{},
 			"ap-southeast-1": endpoints.Endpoint{},
 			"ap-southeast-2": endpoints.Endpoint{},

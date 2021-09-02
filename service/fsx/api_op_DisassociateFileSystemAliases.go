@@ -54,7 +54,7 @@ type DisassociateFileSystemAliasesInput struct {
 
 	// (Optional) An idempotency token for resource creation, in a string of up to 64
 	// ASCII characters. This token is automatically filled on your behalf when you use
-	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

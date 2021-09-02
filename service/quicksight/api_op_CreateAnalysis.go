@@ -35,13 +35,13 @@ type CreateAnalysisInput struct {
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the Amazon Web Services account; where you are creating an analysis.
+	// The ID of the Amazon Web Services account where you are creating an analysis.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// A descriptive name for the analysis that you're creating. This name displays for
-	// the analysis in the QuickSight console.
+	// the analysis in the Amazon QuickSight console.
 	//
 	// This member is required.
 	Name *string
@@ -69,7 +69,7 @@ type CreateAnalysisInput struct {
 	Tags []types.Tag
 
 	// The ARN for the theme to apply to the analysis that you're creating. To see the
-	// theme in the QuickSight console, make sure that you have access to it.
+	// theme in the Amazon QuickSight console, make sure that you have access to it.
 	ThemeArn *string
 
 	noSmithyDocumentSerde

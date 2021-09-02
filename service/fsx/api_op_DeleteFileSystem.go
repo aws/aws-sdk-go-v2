@@ -14,17 +14,19 @@ import (
 
 // Deletes a file system, deleting its contents. After deletion, the file system no
 // longer exists, and its data is gone. Any existing automatic backups will also be
-// deleted. By default, when you delete an Amazon FSx for Windows File Server file
-// system, a final backup is created upon deletion. This final backup is not
-// subject to the file system's retention policy, and must be manually deleted. The
-// DeleteFileSystem action returns while the file system has the DELETING status.
-// You can check the file system deletion status by calling the DescribeFileSystems
-// action, which returns a list of file systems in your account. If you pass the
-// file system ID for a deleted file system, the DescribeFileSystems returns a
-// FileSystemNotFound error. Deleting an Amazon FSx for Lustre file system will
-// fail with a 400 BadRequest if a data repository task is in a PENDING or
-// EXECUTING state. The data in a deleted file system is also deleted and can't be
-// recovered by any means.
+// deleted. To delete an Amazon FSx for NetApp ONTAP file system, first delete all
+// the volumes and SVMs on the file system. Then provide a FileSystemId value to
+// the DeleFileSystem operation. By default, when you delete an Amazon FSx for
+// Windows File Server file system, a final backup is created upon deletion. This
+// final backup is not subject to the file system's retention policy, and must be
+// manually deleted. The DeleteFileSystem action returns while the file system has
+// the DELETING status. You can check the file system deletion status by calling
+// the DescribeFileSystems action, which returns a list of file systems in your
+// account. If you pass the file system ID for a deleted file system, the
+// DescribeFileSystems returns a FileSystemNotFound error. Deleting an Amazon FSx
+// for Lustre file system will fail with a 400 BadRequest if a data repository task
+// is in a PENDING or EXECUTING state. The data in a deleted file system is also
+// deleted and can't be recovered by any means.
 func (c *Client) DeleteFileSystem(ctx context.Context, params *DeleteFileSystemInput, optFns ...func(*Options)) (*DeleteFileSystemOutput, error) {
 	if params == nil {
 		params = &DeleteFileSystemInput{}
@@ -49,8 +51,8 @@ type DeleteFileSystemInput struct {
 	FileSystemId *string
 
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
-	// deletion. This is automatically filled on your behalf when using the AWS CLI or
-	// SDK.
+	// deletion. This is automatically filled on your behalf when using the Command
+	// Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
 	// The configuration object for the Amazon FSx for Lustre file system being deleted

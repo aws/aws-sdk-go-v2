@@ -2,6 +2,24 @@
 
 package types
 
+type CustomStepStatus string
+
+// Enum values for CustomStepStatus
+const (
+	CustomStepStatusSuccess CustomStepStatus = "SUCCESS"
+	CustomStepStatusFailure CustomStepStatus = "FAILURE"
+)
+
+// Values returns all known values for CustomStepStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (CustomStepStatus) Values() []CustomStepStatus {
+	return []CustomStepStatus{
+		"SUCCESS",
+		"FAILURE",
+	}
+}
+
 type Domain string
 
 // Enum values for Domain
@@ -40,6 +58,44 @@ func (EndpointType) Values() []EndpointType {
 	}
 }
 
+type ExecutionErrorType string
+
+// Enum values for ExecutionErrorType
+const (
+	ExecutionErrorTypePermissionDenied ExecutionErrorType = "PERMISSION_DENIED"
+)
+
+// Values returns all known values for ExecutionErrorType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionErrorType) Values() []ExecutionErrorType {
+	return []ExecutionErrorType{
+		"PERMISSION_DENIED",
+	}
+}
+
+type ExecutionStatus string
+
+// Enum values for ExecutionStatus
+const (
+	ExecutionStatusInProgress        ExecutionStatus = "IN_PROGRESS"
+	ExecutionStatusCompleted         ExecutionStatus = "COMPLETED"
+	ExecutionStatusException         ExecutionStatus = "EXCEPTION"
+	ExecutionStatusHandlingException ExecutionStatus = "HANDLING_EXCEPTION"
+)
+
+// Values returns all known values for ExecutionStatus. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ExecutionStatus) Values() []ExecutionStatus {
+	return []ExecutionStatus{
+		"IN_PROGRESS",
+		"COMPLETED",
+		"EXCEPTION",
+		"HANDLING_EXCEPTION",
+	}
+}
+
 type HomeDirectoryType string
 
 // Enum values for HomeDirectoryType
@@ -75,6 +131,24 @@ func (IdentityProviderType) Values() []IdentityProviderType {
 		"SERVICE_MANAGED",
 		"API_GATEWAY",
 		"AWS_DIRECTORY_SERVICE",
+	}
+}
+
+type OverwriteExisting string
+
+// Enum values for OverwriteExisting
+const (
+	OverwriteExistingTrue  OverwriteExisting = "TRUE"
+	OverwriteExistingFalse OverwriteExisting = "FALSE"
+)
+
+// Values returns all known values for OverwriteExisting. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OverwriteExisting) Values() []OverwriteExisting {
+	return []OverwriteExisting{
+		"TRUE",
+		"FALSE",
 	}
 }
 
@@ -121,5 +195,27 @@ func (State) Values() []State {
 		"STOPPING",
 		"START_FAILED",
 		"STOP_FAILED",
+	}
+}
+
+type WorkflowStepType string
+
+// Enum values for WorkflowStepType
+const (
+	WorkflowStepTypeCopy   WorkflowStepType = "COPY"
+	WorkflowStepTypeCustom WorkflowStepType = "CUSTOM"
+	WorkflowStepTypeTag    WorkflowStepType = "TAG"
+	WorkflowStepTypeDelete WorkflowStepType = "DELETE"
+)
+
+// Values returns all known values for WorkflowStepType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (WorkflowStepType) Values() []WorkflowStepType {
+	return []WorkflowStepType{
+		"COPY",
+		"CUSTOM",
+		"TAG",
+		"DELETE",
 	}
 }

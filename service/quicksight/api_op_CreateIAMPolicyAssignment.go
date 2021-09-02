@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an assignment with one specified IAM policy, identified by its Amazon
+// Creates an assignment with one specified IAMpolicy, identified by its Amazon
 // Resource Name (ARN). This policy assignment is attached to the specified groups
 // or users of Amazon QuickSight. Assignment names are unique per Amazon Web
-// Services account;. To avoid overwriting rules in other namespaces, use
-// assignment names that are unique.
+// Services account. To avoid overwriting rules in other namespaces, use assignment
+// names that are unique.
 func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIAMPolicyAssignmentInput, optFns ...func(*Options)) (*CreateIAMPolicyAssignmentOutput, error) {
 	if params == nil {
 		params = &CreateIAMPolicyAssignmentInput{}
@@ -34,7 +34,7 @@ func (c *Client) CreateIAMPolicyAssignment(ctx context.Context, params *CreateIA
 type CreateIAMPolicyAssignmentInput struct {
 
 	// The name of the assignment, also called a rule. It must be unique within an
-	// Amazon Web Services account;.
+	// Amazon Web Services account.
 	//
 	// This member is required.
 	AssignmentName *string
@@ -54,8 +54,8 @@ type CreateIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentStatus types.AssignmentStatus
 
-	// The ID of the Amazon Web Services account; where you want to assign an IAM
-	// policy to QuickSight users or groups.
+	// The ID of the Amazon Web Services account where you want to assign an IAMpolicy
+	// to Amazon QuickSight users or groups.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -65,11 +65,12 @@ type CreateIAMPolicyAssignmentInput struct {
 	// This member is required.
 	Namespace *string
 
-	// The QuickSight users, groups, or both that you want to assign the policy to.
+	// The Amazon QuickSight users, groups, or both that you want to assign the policy
+	// to.
 	Identities map[string][]string
 
-	// The ARN for the IAM policy to apply to the QuickSight users and groups specified
-	// in this assignment.
+	// The ARN for the IAMpolicy to apply to the Amazon QuickSight users and groups
+	// specified in this assignment.
 	PolicyArn *string
 
 	noSmithyDocumentSerde
@@ -81,7 +82,7 @@ type CreateIAMPolicyAssignmentOutput struct {
 	AssignmentId *string
 
 	// The name of the assignment. This name must be unique within the Amazon Web
-	// Services account;.
+	// Services account.
 	AssignmentName *string
 
 	// The status of the assignment. Possible values are as follows:
@@ -97,11 +98,11 @@ type CreateIAMPolicyAssignmentOutput struct {
 	// source.
 	AssignmentStatus types.AssignmentStatus
 
-	// The QuickSight users, groups, or both that the IAM policy is assigned to.
+	// The Amazon QuickSight users, groups, or both that the IAMpolicy is assigned to.
 	Identities map[string][]string
 
-	// The ARN for the IAM policy that is applied to the QuickSight users and groups
-	// specified in this assignment.
+	// The ARN for the IAMpolicy that is applied to the Amazon QuickSight users and
+	// groups specified in this assignment.
 	PolicyArn *string
 
 	// The Amazon Web Services request ID for this operation.

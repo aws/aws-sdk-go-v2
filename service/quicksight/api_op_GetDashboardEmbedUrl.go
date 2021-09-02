@@ -12,16 +12,16 @@ import (
 )
 
 // Generates a session URL and authorization code that you can use to embed an
-// Amazon QuickSight read-only dashboard in your web server code. Before you use
-// this command, make sure that you have configured the dashboards and permissions.
-// Currently, you can use GetDashboardEmbedURL only from the server, not from the
-// user's browser. The following rules apply to the combination of URL and
-// authorization code:
+// Amazon Amazon QuickSight read-only dashboard in your web server code. Before you
+// use this command, make sure that you have configured the dashboards and
+// permissions. Currently, you can use GetDashboardEmbedURL only from the server,
+// not from the user's browser. The following rules apply to the combination of URL
+// and authorization code:
 //
 // * They must be used together.
 //
-// * They can be used one time
-// only.
+// * They can be used one
+// time only.
 //
 // * They are valid for 5 minutes after you run this command.
 //
@@ -52,7 +52,7 @@ func (c *Client) GetDashboardEmbedUrl(ctx context.Context, params *GetDashboardE
 
 type GetDashboardEmbedUrlInput struct {
 
-	// The ID for the Amazon Web Services account; that contains the dashboard that
+	// The ID for the Amazon Web Services account that contains the dashboard that
 	// you're embedding.
 	//
 	// This member is required.
@@ -71,13 +71,14 @@ type GetDashboardEmbedUrlInput struct {
 
 	// A list of one or more dashboard IDs that you want to add to a session that
 	// includes anonymous users. The IdentityType parameter must be set to ANONYMOUS
-	// for this to work, because other identity types authenticate as QuickSight or IAM
-	// users. For example, if you set "--dashboard-id dash_id1 --dashboard-id dash_id2
-	// dash_id3 identity-type ANONYMOUS", the session can access all three dashboards.
+	// for this to work, because other identity types authenticate as Amazon QuickSight
+	// or IAMusers. For example, if you set "--dashboard-id dash_id1 --dashboard-id
+	// dash_id2 dash_id3 identity-type ANONYMOUS", the session can access all three
+	// dashboards.
 	AdditionalDashboardIds []string
 
-	// The Amazon QuickSight namespace that the user virtually belongs to. If you are
-	// not using an Amazon QuickSight custom namespace, set this to default.
+	// The Amazon QuickSight namespace that contains the dashboard IDs in this request.
+	// If you're not using a custom namespace, set Namespace = default.
 	Namespace *string
 
 	// Remove the reset button on the embedded dashboard. The default is FALSE, which
@@ -90,11 +91,11 @@ type GetDashboardEmbedUrlInput struct {
 
 	// Adds persistence of state for the user session in an embedded dashboard.
 	// Persistence applies to the sheet and the parameter settings. These are control
-	// settings that the dashboard subscriber (QuickSight reader) chooses while viewing
-	// the dashboard. If this is set to TRUE, the settings are the same when the
-	// subscriber reopens the same dashboard URL. The state is stored in QuickSight,
-	// not in a browser cookie. If this is set to FALSE, the state of the user session
-	// is not persisted. The default is FALSE.
+	// settings that the dashboard subscriber (Amazon QuickSight reader) chooses while
+	// viewing the dashboard. If this is set to TRUE, the settings are the same when
+	// the subscriber reopens the same dashboard URL. The state is stored in Amazon
+	// QuickSight, not in a browser cookie. If this is set to FALSE, the state of the
+	// user session is not persisted. The default is FALSE.
 	StatePersistenceEnabled bool
 
 	// Remove the undo/redo button on the embedded dashboard. The default is FALSE,
@@ -110,12 +111,12 @@ type GetDashboardEmbedUrlInput struct {
 	//
 	// * Invited nonfederated users
 	//
-	// * IAM users
-	// and IAM role-based sessions authenticated through Federated Single Sign-On using
-	// SAML, OpenID Connect, or IAM federation.
+	// * IAMusers
+	// and IAMrole-based sessions authenticated through Federated Single Sign-On using
+	// SAML, OpenID Connect, or IAMfederation.
 	//
 	// Omit this parameter for users in the
-	// third group – IAM users and IAM role-based sessions.
+	// third group – IAMusers and IAM role-based sessions.
 	UserArn *string
 
 	noSmithyDocumentSerde

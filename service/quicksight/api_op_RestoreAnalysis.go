@@ -33,7 +33,7 @@ type RestoreAnalysisInput struct {
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the Amazon Web Services account; that contains the analysis.
+	// The ID of the Amazon Web Services account that contains the analysis.
 	//
 	// This member is required.
 	AwsAccountId *string

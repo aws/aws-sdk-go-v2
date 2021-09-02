@@ -240,6 +240,24 @@ func (DataRepositoryTaskType) Values() []DataRepositoryTaskType {
 	}
 }
 
+type DiskIopsConfigurationMode string
+
+// Enum values for DiskIopsConfigurationMode
+const (
+	DiskIopsConfigurationModeAutomatic       DiskIopsConfigurationMode = "AUTOMATIC"
+	DiskIopsConfigurationModeUserProvisioned DiskIopsConfigurationMode = "USER_PROVISIONED"
+)
+
+// Values returns all known values for DiskIopsConfigurationMode. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (DiskIopsConfigurationMode) Values() []DiskIopsConfigurationMode {
+	return []DiskIopsConfigurationMode{
+		"AUTOMATIC",
+		"USER_PROVISIONED",
+	}
+}
+
 type DriveCacheType string
 
 // Enum values for DriveCacheType
@@ -309,6 +327,7 @@ type FileSystemType string
 const (
 	FileSystemTypeWindows FileSystemType = "WINDOWS"
 	FileSystemTypeLustre  FileSystemType = "LUSTRE"
+	FileSystemTypeOntap   FileSystemType = "ONTAP"
 )
 
 // Values returns all known values for FileSystemType. Note that this can be
@@ -318,6 +337,7 @@ func (FileSystemType) Values() []FileSystemType {
 	return []FileSystemType{
 		"WINDOWS",
 		"LUSTRE",
+		"ONTAP",
 	}
 }
 
@@ -328,6 +348,7 @@ const (
 	FilterNameFileSystemId   FilterName = "file-system-id"
 	FilterNameBackupType     FilterName = "backup-type"
 	FilterNameFileSystemType FilterName = "file-system-type"
+	FilterNameVolumeId       FilterName = "volume-id"
 )
 
 // Values returns all known values for FilterName. Note that this can be expanded
@@ -338,6 +359,27 @@ func (FilterName) Values() []FilterName {
 		"file-system-id",
 		"backup-type",
 		"file-system-type",
+		"volume-id",
+	}
+}
+
+type FlexCacheEndpointType string
+
+// Enum values for FlexCacheEndpointType
+const (
+	FlexCacheEndpointTypeNone   FlexCacheEndpointType = "NONE"
+	FlexCacheEndpointTypeOrigin FlexCacheEndpointType = "ORIGIN"
+	FlexCacheEndpointTypeCache  FlexCacheEndpointType = "CACHE"
+)
+
+// Values returns all known values for FlexCacheEndpointType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FlexCacheEndpointType) Values() []FlexCacheEndpointType {
+	return []FlexCacheEndpointType{
+		"NONE",
+		"ORIGIN",
+		"CACHE",
 	}
 }
 
@@ -358,6 +400,42 @@ func (LustreDeploymentType) Values() []LustreDeploymentType {
 		"SCRATCH_1",
 		"SCRATCH_2",
 		"PERSISTENT_1",
+	}
+}
+
+type OntapDeploymentType string
+
+// Enum values for OntapDeploymentType
+const (
+	OntapDeploymentTypeMultiAz1 OntapDeploymentType = "MULTI_AZ_1"
+)
+
+// Values returns all known values for OntapDeploymentType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OntapDeploymentType) Values() []OntapDeploymentType {
+	return []OntapDeploymentType{
+		"MULTI_AZ_1",
+	}
+}
+
+type OntapVolumeType string
+
+// Enum values for OntapVolumeType
+const (
+	OntapVolumeTypeRw OntapVolumeType = "RW"
+	OntapVolumeTypeDp OntapVolumeType = "DP"
+	OntapVolumeTypeLs OntapVolumeType = "LS"
+)
+
+// Values returns all known values for OntapVolumeType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OntapVolumeType) Values() []OntapVolumeType {
+	return []OntapVolumeType{
+		"RW",
+		"DP",
+		"LS",
 	}
 }
 
@@ -393,16 +471,57 @@ func (ReportScope) Values() []ReportScope {
 	}
 }
 
+type ResourceType string
+
+// Enum values for ResourceType
+const (
+	ResourceTypeFileSystem ResourceType = "FILE_SYSTEM"
+	ResourceTypeVolume     ResourceType = "VOLUME"
+)
+
+// Values returns all known values for ResourceType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ResourceType) Values() []ResourceType {
+	return []ResourceType{
+		"FILE_SYSTEM",
+		"VOLUME",
+	}
+}
+
+type SecurityStyle string
+
+// Enum values for SecurityStyle
+const (
+	SecurityStyleUnix  SecurityStyle = "UNIX"
+	SecurityStyleNtfs  SecurityStyle = "NTFS"
+	SecurityStyleMixed SecurityStyle = "MIXED"
+)
+
+// Values returns all known values for SecurityStyle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SecurityStyle) Values() []SecurityStyle {
+	return []SecurityStyle{
+		"UNIX",
+		"NTFS",
+		"MIXED",
+	}
+}
+
 type ServiceLimit string
 
 // Enum values for ServiceLimit
 const (
-	ServiceLimitFileSystemCount            ServiceLimit = "FILE_SYSTEM_COUNT"
-	ServiceLimitTotalThroughputCapacity    ServiceLimit = "TOTAL_THROUGHPUT_CAPACITY"
-	ServiceLimitTotalStorage               ServiceLimit = "TOTAL_STORAGE"
-	ServiceLimitTotalUserInitiatedBackups  ServiceLimit = "TOTAL_USER_INITIATED_BACKUPS"
-	ServiceLimitTotalUserTags              ServiceLimit = "TOTAL_USER_TAGS"
-	ServiceLimitTotalInProgressCopyBackups ServiceLimit = "TOTAL_IN_PROGRESS_COPY_BACKUPS"
+	ServiceLimitFileSystemCount                     ServiceLimit = "FILE_SYSTEM_COUNT"
+	ServiceLimitTotalThroughputCapacity             ServiceLimit = "TOTAL_THROUGHPUT_CAPACITY"
+	ServiceLimitTotalStorage                        ServiceLimit = "TOTAL_STORAGE"
+	ServiceLimitTotalUserInitiatedBackups           ServiceLimit = "TOTAL_USER_INITIATED_BACKUPS"
+	ServiceLimitTotalUserTags                       ServiceLimit = "TOTAL_USER_TAGS"
+	ServiceLimitTotalInProgressCopyBackups          ServiceLimit = "TOTAL_IN_PROGRESS_COPY_BACKUPS"
+	ServiceLimitStorageVirtualMachinesPerFileSystem ServiceLimit = "STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM"
+	ServiceLimitVolumesPerFileSystem                ServiceLimit = "VOLUMES_PER_FILE_SYSTEM"
+	ServiceLimitTotalSsdIops                        ServiceLimit = "TOTAL_SSD_IOPS"
 )
 
 // Values returns all known values for ServiceLimit. Note that this can be expanded
@@ -416,6 +535,9 @@ func (ServiceLimit) Values() []ServiceLimit {
 		"TOTAL_USER_INITIATED_BACKUPS",
 		"TOTAL_USER_TAGS",
 		"TOTAL_IN_PROGRESS_COPY_BACKUPS",
+		"STORAGE_VIRTUAL_MACHINES_PER_FILE_SYSTEM",
+		"VOLUMES_PER_FILE_SYSTEM",
+		"TOTAL_SSD_IOPS",
 	}
 }
 
@@ -458,6 +580,175 @@ func (StorageType) Values() []StorageType {
 	return []StorageType{
 		"SSD",
 		"HDD",
+	}
+}
+
+type StorageVirtualMachineFilterName string
+
+// Enum values for StorageVirtualMachineFilterName
+const (
+	StorageVirtualMachineFilterNameFileSystemId StorageVirtualMachineFilterName = "file-system-id"
+)
+
+// Values returns all known values for StorageVirtualMachineFilterName. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StorageVirtualMachineFilterName) Values() []StorageVirtualMachineFilterName {
+	return []StorageVirtualMachineFilterName{
+		"file-system-id",
+	}
+}
+
+type StorageVirtualMachineLifecycle string
+
+// Enum values for StorageVirtualMachineLifecycle
+const (
+	StorageVirtualMachineLifecycleCreated       StorageVirtualMachineLifecycle = "CREATED"
+	StorageVirtualMachineLifecycleCreating      StorageVirtualMachineLifecycle = "CREATING"
+	StorageVirtualMachineLifecycleDeleting      StorageVirtualMachineLifecycle = "DELETING"
+	StorageVirtualMachineLifecycleFailed        StorageVirtualMachineLifecycle = "FAILED"
+	StorageVirtualMachineLifecycleMisconfigured StorageVirtualMachineLifecycle = "MISCONFIGURED"
+	StorageVirtualMachineLifecyclePending       StorageVirtualMachineLifecycle = "PENDING"
+)
+
+// Values returns all known values for StorageVirtualMachineLifecycle. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (StorageVirtualMachineLifecycle) Values() []StorageVirtualMachineLifecycle {
+	return []StorageVirtualMachineLifecycle{
+		"CREATED",
+		"CREATING",
+		"DELETING",
+		"FAILED",
+		"MISCONFIGURED",
+		"PENDING",
+	}
+}
+
+type StorageVirtualMachineRootVolumeSecurityStyle string
+
+// Enum values for StorageVirtualMachineRootVolumeSecurityStyle
+const (
+	StorageVirtualMachineRootVolumeSecurityStyleUnix  StorageVirtualMachineRootVolumeSecurityStyle = "UNIX"
+	StorageVirtualMachineRootVolumeSecurityStyleNtfs  StorageVirtualMachineRootVolumeSecurityStyle = "NTFS"
+	StorageVirtualMachineRootVolumeSecurityStyleMixed StorageVirtualMachineRootVolumeSecurityStyle = "MIXED"
+)
+
+// Values returns all known values for
+// StorageVirtualMachineRootVolumeSecurityStyle. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (StorageVirtualMachineRootVolumeSecurityStyle) Values() []StorageVirtualMachineRootVolumeSecurityStyle {
+	return []StorageVirtualMachineRootVolumeSecurityStyle{
+		"UNIX",
+		"NTFS",
+		"MIXED",
+	}
+}
+
+type StorageVirtualMachineSubtype string
+
+// Enum values for StorageVirtualMachineSubtype
+const (
+	StorageVirtualMachineSubtypeDefault         StorageVirtualMachineSubtype = "DEFAULT"
+	StorageVirtualMachineSubtypeDpDestination   StorageVirtualMachineSubtype = "DP_DESTINATION"
+	StorageVirtualMachineSubtypeSyncDestination StorageVirtualMachineSubtype = "SYNC_DESTINATION"
+	StorageVirtualMachineSubtypeSyncSource      StorageVirtualMachineSubtype = "SYNC_SOURCE"
+)
+
+// Values returns all known values for StorageVirtualMachineSubtype. Note that this
+// can be expanded in the future, and so it is only as up to date as the client.
+// The ordering of this slice is not guaranteed to be stable across updates.
+func (StorageVirtualMachineSubtype) Values() []StorageVirtualMachineSubtype {
+	return []StorageVirtualMachineSubtype{
+		"DEFAULT",
+		"DP_DESTINATION",
+		"SYNC_DESTINATION",
+		"SYNC_SOURCE",
+	}
+}
+
+type TieringPolicyName string
+
+// Enum values for TieringPolicyName
+const (
+	TieringPolicyNameSnapshotOnly TieringPolicyName = "SNAPSHOT_ONLY"
+	TieringPolicyNameAuto         TieringPolicyName = "AUTO"
+	TieringPolicyNameAll          TieringPolicyName = "ALL"
+	TieringPolicyNameNone         TieringPolicyName = "NONE"
+)
+
+// Values returns all known values for TieringPolicyName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (TieringPolicyName) Values() []TieringPolicyName {
+	return []TieringPolicyName{
+		"SNAPSHOT_ONLY",
+		"AUTO",
+		"ALL",
+		"NONE",
+	}
+}
+
+type VolumeFilterName string
+
+// Enum values for VolumeFilterName
+const (
+	VolumeFilterNameFileSystemId            VolumeFilterName = "file-system-id"
+	VolumeFilterNameStorageVirtualMachineId VolumeFilterName = "storage-virtual-machine-id"
+)
+
+// Values returns all known values for VolumeFilterName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VolumeFilterName) Values() []VolumeFilterName {
+	return []VolumeFilterName{
+		"file-system-id",
+		"storage-virtual-machine-id",
+	}
+}
+
+type VolumeLifecycle string
+
+// Enum values for VolumeLifecycle
+const (
+	VolumeLifecycleCreating      VolumeLifecycle = "CREATING"
+	VolumeLifecycleCreated       VolumeLifecycle = "CREATED"
+	VolumeLifecycleDeleting      VolumeLifecycle = "DELETING"
+	VolumeLifecycleFailed        VolumeLifecycle = "FAILED"
+	VolumeLifecycleMisconfigured VolumeLifecycle = "MISCONFIGURED"
+	VolumeLifecyclePending       VolumeLifecycle = "PENDING"
+)
+
+// Values returns all known values for VolumeLifecycle. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (VolumeLifecycle) Values() []VolumeLifecycle {
+	return []VolumeLifecycle{
+		"CREATING",
+		"CREATED",
+		"DELETING",
+		"FAILED",
+		"MISCONFIGURED",
+		"PENDING",
+	}
+}
+
+type VolumeType string
+
+// Enum values for VolumeType
+const (
+	VolumeTypeOntap VolumeType = "ONTAP"
+)
+
+// Values returns all known values for VolumeType. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (VolumeType) Values() []VolumeType {
+	return []VolumeType{
+		"ONTAP",
 	}
 }
 

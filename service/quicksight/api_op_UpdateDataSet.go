@@ -29,13 +29,13 @@ func (c *Client) UpdateDataSet(ctx context.Context, params *UpdateDataSetInput, 
 
 type UpdateDataSetInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The Amazon Web Services account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The ID for the dataset that you want to update. This ID is unique per Amazon Web
-	// Services Region; for each Amazon Web Services account;.
+	// Services Region; for each Amazon Web Services account.
 	//
 	// This member is required.
 	DataSetId *string
@@ -55,12 +55,16 @@ type UpdateDataSetInput struct {
 	// This member is required.
 	PhysicalTableMap map[string]types.PhysicalTable
 
-	// Groupings of columns that work together in certain QuickSight features.
+	// Groupings of columns that work together in certain Amazon QuickSight features.
 	// Currently, only geospatial hierarchy is supported.
 	ColumnGroups []types.ColumnGroup
 
 	// A set of one or more definitions of a ColumnLevelPermissionRule.
 	ColumnLevelPermissionRules []types.ColumnLevelPermissionRule
+
+	// The usage configuration to apply to child datasets that reference this dataset
+	// as a source.
+	DataSetUsageConfiguration *types.DataSetUsageConfiguration
 
 	// The folder that contains fields and nested subfolders for your dataset.
 	FieldFolders map[string]types.FieldFolder
@@ -85,7 +89,7 @@ type UpdateDataSetOutput struct {
 	Arn *string
 
 	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region; for each Amazon Web Services account;.
+	// Services Region; for each Amazon Web Services account.
 	DataSetId *string
 
 	// The ARN for the ingestion, which is triggered as a result of dataset creation if

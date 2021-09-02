@@ -12,11 +12,12 @@ import (
 )
 
 // Creates a dashboard from a template. To first create a template, see the
-// CreateTemplate API operation. A dashboard is an entity in QuickSight that
-// identifies QuickSight reports, created from analyses. You can share QuickSight
-// dashboards. With the right permissions, you can create scheduled email reports
-// from them. If you have the correct permissions, you can create a dashboard from
-// a template that exists in a different Amazon Web Services account;.
+// CreateTemplate API operation. A dashboard is an entity in Amazon QuickSight that
+// identifies Amazon QuickSight reports, created from analyses. You can share
+// Amazon QuickSight dashboards. With the right permissions, you can create
+// scheduled email reports from them. If you have the correct permissions, you can
+// create a dashboard from a template that exists in a different Amazon Web
+// Services account.
 func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInput, optFns ...func(*Options)) (*CreateDashboardOutput, error) {
 	if params == nil {
 		params = &CreateDashboardInput{}
@@ -34,13 +35,13 @@ func (c *Client) CreateDashboard(ctx context.Context, params *CreateDashboardInp
 
 type CreateDashboardInput struct {
 
-	// The ID of the Amazon Web Services account; where you want to create the
+	// The ID of the Amazon Web Services account where you want to create the
 	// dashboard.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dashboard, also added to the IAM policy.
+	// The ID for the dashboard, also added to the IAMpolicy.
 	//
 	// This member is required.
 	DashboardId *string
@@ -56,10 +57,10 @@ type CreateDashboardInput struct {
 	// you need to create a dashboard from an analysis, first convert the analysis to a
 	// template by using the CreateTemplate API operation. For SourceTemplate, specify
 	// the Amazon Resource Name (ARN) of the source template. The SourceTemplateARN can
-	// contain any Amazon Web Services account; and any QuickSight-supported Amazon Web
-	// Services Region;. Use the DataSetReferences entity within SourceTemplate to list
-	// the replacement datasets for the placeholders listed in the original. The schema
-	// in each dataset must match its placeholder.
+	// contain any Amazon Web Services account and any Amazon QuickSight-supported
+	// Amazon Web Services Region;. Use the DataSetReferences entity within
+	// SourceTemplate to list the replacement datasets for the placeholders listed in
+	// the original. The schema in each dataset must match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.DashboardSourceEntity
@@ -68,7 +69,7 @@ type CreateDashboardInput struct {
 	//
 	// * AvailabilityStatus
 	// for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When
-	// this is set to DISABLED, QuickSight disables the left filter pane on the
+	// this is set to DISABLED, Amazon QuickSight disables the left filter pane on the
 	// published dashboard, which can be used for ad hoc (one-time) filtering. This
 	// option is ENABLED by default.
 	//
@@ -87,7 +88,7 @@ type CreateDashboardInput struct {
 	Parameters *types.Parameters
 
 	// A structure that contains the permissions of the dashboard. You can use this
-	// structure for granting permissions by providing a list of IAM action information
+	// structure for granting permissions by providing a list of IAMaction information
 	// for each principal ARN. To specify no permissions, omit the permissions list.
 	Permissions []types.ResourcePermission
 
@@ -98,7 +99,7 @@ type CreateDashboardInput struct {
 	// The Amazon Resource Name (ARN) of the theme that is being used for this
 	// dashboard. If you add a value for this field, it overrides the value that is
 	// used in the source entity. The theme ARN must exist in the same Amazon Web
-	// Services account; where you create the dashboard.
+	// Services account where you create the dashboard.
 	ThemeArn *string
 
 	// A description for the first version of the dashboard being created.

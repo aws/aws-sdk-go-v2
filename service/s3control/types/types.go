@@ -76,6 +76,82 @@ type ActivityMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// Error details for the failed asynchronous operation.
+type AsyncErrorDetails struct {
+
+	// A string that uniquely identifies the error condition.
+	Code *string
+
+	// A generic descritpion of the error condition in English.
+	Message *string
+
+	// The ID of the request associated with the error.
+	RequestId *string
+
+	// The identifier of the resource associated with the error.
+	Resource *string
+
+	noSmithyDocumentSerde
+}
+
+// A container for the information about an asynchronous operation.
+type AsyncOperation struct {
+
+	// The time that the request was sent to the service.
+	CreationTime *time.Time
+
+	// The specific operation for the asynchronous request.
+	Operation AsyncOperationName
+
+	// The parameters associated with the request.
+	RequestParameters *AsyncRequestParameters
+
+	// The current status of the request.
+	RequestStatus *string
+
+	// The request token associated with the request.
+	RequestTokenARN *string
+
+	// The details of the response.
+	ResponseDetails *AsyncResponseDetails
+
+	noSmithyDocumentSerde
+}
+
+// A container for the request parameters associated with an asynchronous request.
+type AsyncRequestParameters struct {
+
+	// A container of the parameters for a CreateMultiRegionAccessPoint
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
+	// request.
+	CreateMultiRegionAccessPointRequest *CreateMultiRegionAccessPointInput
+
+	// A container of the parameters for a DeleteMultiRegionAccessPoint
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
+	// request.
+	DeleteMultiRegionAccessPointRequest *DeleteMultiRegionAccessPointInput
+
+	// A container of the parameters for a PutMultiRegionAccessPoint
+	// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html)
+	// request.
+	PutMultiRegionAccessPointPolicyRequest *PutMultiRegionAccessPointPolicyInput
+
+	noSmithyDocumentSerde
+}
+
+// A container for the response details that are returned when querying about an
+// asynchronous request.
+type AsyncResponseDetails struct {
+
+	// Error details for an asynchronous request.
+	ErrorDetails *AsyncErrorDetails
+
+	// The details for the Multi-Region Access Point.
+	MultiRegionAccessPointDetails *MultiRegionAccessPointsAsyncResponse
+
+	noSmithyDocumentSerde
+}
+
 // Lambda function used to transform objects through an Object Lambda Access Point.
 type AwsLambdaTransformation struct {
 
@@ -111,6 +187,59 @@ type CreateBucketConfiguration struct {
 	// bucket on the US East (N. Virginia) Region (us-east-1), you do not need to
 	// specify the location. This is not supported by Amazon S3 on Outposts buckets.
 	LocationConstraint BucketLocationConstraint
+
+	noSmithyDocumentSerde
+}
+
+// A container for the information associated with a CreateMultiRegionAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html)
+// request.
+type CreateMultiRegionAccessPointInput struct {
+
+	// The name of the Multi-Region Access Point associated with this request.
+	//
+	// This member is required.
+	Name *string
+
+	// The buckets in different Regions that are associated with the Multi-Region
+	// Access Point.
+	//
+	// This member is required.
+	Regions []Region
+
+	// The PublicAccessBlock configuration that you want to apply to this Amazon S3
+	// account. You can enable the configuration options in any combination. For more
+	// information about when Amazon S3 considers a bucket or object public, see The
+	// Meaning of "Public"
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
+	// in the Amazon S3 User Guide. This is not supported for Amazon S3 on Outposts.
+	PublicAccessBlock *PublicAccessBlockConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// A container for the information associated with a DeleteMultiRegionAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html)
+// request.
+type DeleteMultiRegionAccessPointInput struct {
+
+	// The name of the Multi-Region Access Point associated with this request.
+	//
+	// This member is required.
+	Name *string
+
+	noSmithyDocumentSerde
+}
+
+// The last established access control policy for a Multi-Region Access Point. When
+// you update the policy, the update is first listed as the proposed policy. After
+// the update is finished and all Regions have been updated, the proposed policy is
+// listed as the established policy. If both policies have the same version number,
+// the proposed policy is the established policy.
+type EstablishedMultiRegionAccessPointPolicy struct {
+
+	// The details of the last established policy.
+	Policy *string
 
 	noSmithyDocumentSerde
 }
@@ -549,6 +678,84 @@ type ListStorageLensConfigurationEntry struct {
 	noSmithyDocumentSerde
 }
 
+// The Multi-Region Access Point access control policy. When you update the policy,
+// the update is first listed as the proposed policy. After the update is finished
+// and all Regions have been updated, the proposed policy is listed as the
+// established policy. If both policies have the same version number, the proposed
+// policy is the established policy.
+type MultiRegionAccessPointPolicyDocument struct {
+
+	// The last established policy for the Multi-Region Access Point.
+	Established *EstablishedMultiRegionAccessPointPolicy
+
+	// The proposed policy for the Multi-Region Access Point.
+	Proposed *ProposedMultiRegionAccessPointPolicy
+
+	noSmithyDocumentSerde
+}
+
+// Status information for a single Multi-Region Access Point Region.
+type MultiRegionAccessPointRegionalResponse struct {
+
+	// The name of the Region in the Multi-Region Access Point.
+	Name *string
+
+	// The current status of the Multi-Region Access Point in this Region.
+	RequestStatus *string
+
+	noSmithyDocumentSerde
+}
+
+// A collection of statuses for a Multi-Region Access Point in the various Regions
+// it supports.
+type MultiRegionAccessPointReport struct {
+
+	// The alias for the Multi-Region Access Point. For more information about the
+	// distinction between the name and the alias of an Multi-Region Access Point, see
+	// Managing Multi-Region Access Points
+	// (https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming).
+	Alias *string
+
+	// When the Multi-Region Access Point create request was received.
+	CreatedAt *time.Time
+
+	// The name of the Multi-Region Access Point.
+	Name *string
+
+	// The PublicAccessBlock configuration that you want to apply to this Amazon S3
+	// account. You can enable the configuration options in any combination. For more
+	// information about when Amazon S3 considers a bucket or object public, see The
+	// Meaning of "Public"
+	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html#access-control-block-public-access-policy-status)
+	// in the Amazon S3 User Guide. This is not supported for Amazon S3 on Outposts.
+	PublicAccessBlock *PublicAccessBlockConfiguration
+
+	// A collection of the Regions and buckets associated with the Multi-Region Access
+	// Point.
+	Regions []RegionReport
+
+	// The current status of the Multi-Region Access Point. CREATING and DELETING are
+	// temporary states that exist while the request is propogating and being
+	// completed. If a Multi-Region Access Point has a status of PARTIALLY_CREATED, you
+	// can retry creation or send a request to delete the Multi-Region Access Point. If
+	// a Multi-Region Access Point has a status of PARTIALLY_DELETED, you can retry a
+	// delete request to finish the deletion of the Multi-Region Access Point.
+	Status MultiRegionAccessPointStatus
+
+	noSmithyDocumentSerde
+}
+
+// The Multi-Region Access Point details that are returned when querying about an
+// asynchronous request.
+type MultiRegionAccessPointsAsyncResponse struct {
+
+	// A collection of status information for the different Regions that a Multi-Region
+	// Access Point supports.
+	Regions []MultiRegionAccessPointRegionalResponse
+
+	noSmithyDocumentSerde
+}
+
 // The container of the noncurrent version expiration.
 type NoncurrentVersionExpiration struct {
 
@@ -688,6 +895,19 @@ type PrefixLevelStorageMetrics struct {
 	noSmithyDocumentSerde
 }
 
+// The proposed access control policy for the Multi-Region Access Point. When you
+// update the policy, the update is first listed as the proposed policy. After the
+// update is finished and all Regions have been updated, the proposed policy is
+// listed as the established policy. If both policies have the same version number,
+// the proposed policy is the established policy.
+type ProposedMultiRegionAccessPointPolicy struct {
+
+	// The details of the proposed policy.
+	Policy *string
+
+	noSmithyDocumentSerde
+}
+
 // The PublicAccessBlock configuration that you want to apply to this Amazon S3
 // account. You can enable the configuration options in any combination. For more
 // information about when Amazon S3 considers a bucket or object public, see The
@@ -739,6 +959,36 @@ type PublicAccessBlockConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// A container for the information associated with a PutMultiRegionAccessPoint
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html)
+// request.
+type PutMultiRegionAccessPointPolicyInput struct {
+
+	// The name of the Multi-Region Access Point associated with the request.
+	//
+	// This member is required.
+	Name *string
+
+	// The policy details for the PutMultiRegionAccessPoint request.
+	//
+	// This member is required.
+	Policy *string
+
+	noSmithyDocumentSerde
+}
+
+// A Region that supports a Multi-Region Access Point as well as the associated
+// bucket for the Region.
+type Region struct {
+
+	// The name of the associated bucket for the Region.
+	//
+	// This member is required.
+	Bucket *string
+
+	noSmithyDocumentSerde
+}
+
 // The container for the regional bucket.
 type RegionalBucket struct {
 
@@ -762,6 +1012,18 @@ type RegionalBucket struct {
 
 	// The Outposts ID of the regional bucket.
 	OutpostId *string
+
+	noSmithyDocumentSerde
+}
+
+// A combination of a bucket and Region that's part of a Multi-Region Access Point.
+type RegionReport struct {
+
+	// The name of the bucket.
+	Bucket *string
+
+	// The name of the Region.
+	Region *string
 
 	noSmithyDocumentSerde
 }

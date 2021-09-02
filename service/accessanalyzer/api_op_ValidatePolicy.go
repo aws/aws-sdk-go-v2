@@ -41,11 +41,12 @@ type ValidatePolicyInput struct {
 	// The type of policy to validate. Identity policies grant permissions to IAM
 	// principals. Identity policies include managed and inline policies for IAM roles,
 	// users, and groups. They also include service-control policies (SCPs) that are
-	// attached to an AWS organization, organizational unit (OU), or an account.
-	// Resource policies grant permissions on AWS resources. Resource policies include
-	// trust policies for IAM roles and bucket policies for S3 buckets. You can provide
-	// a generic input such as identity policy or resource policy or a specific input
-	// such as managed policy or S3 bucket policy.
+	// attached to an Amazon Web Services organization, organizational unit (OU), or an
+	// account. Resource policies grant permissions on Amazon Web Services resources.
+	// Resource policies include trust policies for IAM roles and bucket policies for
+	// Amazon S3 buckets. You can provide a generic input such as identity policy or
+	// resource policy or a specific input such as managed policy or Amazon S3 bucket
+	// policy.
 	//
 	// This member is required.
 	PolicyType types.PolicyType
@@ -64,8 +65,8 @@ type ValidatePolicyInput struct {
 
 type ValidatePolicyOutput struct {
 
-	// The list of findings in a policy returned by Access Analyzer based on its suite
-	// of policy checks.
+	// The list of findings in a policy returned by IAM Access Analyzer based on its
+	// suite of policy checks.
 	//
 	// This member is required.
 	Findings []types.ValidatePolicyFinding

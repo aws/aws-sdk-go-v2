@@ -28,7 +28,7 @@ func (c *Client) CancelIngestion(ctx context.Context, params *CancelIngestionInp
 
 type CancelIngestionInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The Amazon Web Services account ID.
 	//
 	// This member is required.
 	AwsAccountId *string

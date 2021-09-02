@@ -150,6 +150,66 @@ func (m *validateOpCreateFileSystem) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateStorageVirtualMachine struct {
+}
+
+func (*validateOpCreateStorageVirtualMachine) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateStorageVirtualMachine) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateStorageVirtualMachineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateStorageVirtualMachineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateVolumeFromBackup struct {
+}
+
+func (*validateOpCreateVolumeFromBackup) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVolumeFromBackup) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVolumeFromBackupInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVolumeFromBackupInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpCreateVolume struct {
+}
+
+func (*validateOpCreateVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteBackup struct {
 }
 
@@ -185,6 +245,46 @@ func (m *validateOpDeleteFileSystem) HandleInitialize(ctx context.Context, in mi
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDeleteFileSystemInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteStorageVirtualMachine struct {
+}
+
+func (*validateOpDeleteStorageVirtualMachine) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteStorageVirtualMachine) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteStorageVirtualMachineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteStorageVirtualMachineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDeleteVolume struct {
+}
+
+func (*validateOpDeleteVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteVolumeInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -310,6 +410,46 @@ func (m *validateOpUpdateFileSystem) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateStorageVirtualMachine struct {
+}
+
+func (*validateOpUpdateStorageVirtualMachine) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateStorageVirtualMachine) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateStorageVirtualMachineInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateStorageVirtualMachineInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpUpdateVolume struct {
+}
+
+func (*validateOpUpdateVolume) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateVolume) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateVolumeInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateVolumeInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpAssociateFileSystemAliasesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpAssociateFileSystemAliases{}, middleware.After)
 }
@@ -338,12 +478,32 @@ func addOpCreateFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateFileSystem{}, middleware.After)
 }
 
+func addOpCreateStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateStorageVirtualMachine{}, middleware.After)
+}
+
+func addOpCreateVolumeFromBackupValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVolumeFromBackup{}, middleware.After)
+}
+
+func addOpCreateVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateVolume{}, middleware.After)
+}
+
 func addOpDeleteBackupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteBackup{}, middleware.After)
 }
 
 func addOpDeleteFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteFileSystem{}, middleware.After)
+}
+
+func addOpDeleteStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteStorageVirtualMachine{}, middleware.After)
+}
+
+func addOpDeleteVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteVolume{}, middleware.After)
 }
 
 func addOpDescribeFileSystemAliasesValidationMiddleware(stack *middleware.Stack) error {
@@ -370,6 +530,14 @@ func addOpUpdateFileSystemValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateFileSystem{}, middleware.After)
 }
 
+func addOpUpdateStorageVirtualMachineValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateStorageVirtualMachine{}, middleware.After)
+}
+
+func addOpUpdateVolumeValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateVolume{}, middleware.After)
+}
+
 func validateCompletionReport(v *types.CompletionReport) error {
 	if v == nil {
 		return nil
@@ -377,6 +545,24 @@ func validateCompletionReport(v *types.CompletionReport) error {
 	invalidParams := smithy.InvalidParamsError{Context: "CompletionReport"}
 	if v.Enabled == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Enabled"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateFileSystemOntapConfiguration(v *types.CreateFileSystemOntapConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateFileSystemOntapConfiguration"}
+	if len(v.DeploymentType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DeploymentType"))
+	}
+	if v.ThroughputCapacity == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ThroughputCapacity"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -410,6 +596,50 @@ func validateCreateFileSystemWindowsConfiguration(v *types.CreateFileSystemWindo
 	}
 }
 
+func validateCreateOntapVolumeConfiguration(v *types.CreateOntapVolumeConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOntapVolumeConfiguration"}
+	if v.JunctionPath == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("JunctionPath"))
+	}
+	if v.SizeInMegabytes == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("SizeInMegabytes"))
+	}
+	if v.StorageEfficiencyEnabled == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageEfficiencyEnabled"))
+	}
+	if v.StorageVirtualMachineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateSvmActiveDirectoryConfiguration(v *types.CreateSvmActiveDirectoryConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateSvmActiveDirectoryConfiguration"}
+	if v.NetBiosName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("NetBiosName"))
+	}
+	if v.SelfManagedActiveDirectoryConfiguration != nil {
+		if err := validateSelfManagedActiveDirectoryConfiguration(v.SelfManagedActiveDirectoryConfiguration); err != nil {
+			invalidParams.AddNested("SelfManagedActiveDirectoryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateDeleteFileSystemLustreConfiguration(v *types.DeleteFileSystemLustreConfiguration) error {
 	if v == nil {
 		return nil
@@ -432,6 +662,23 @@ func validateDeleteFileSystemWindowsConfiguration(v *types.DeleteFileSystemWindo
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "DeleteFileSystemWindowsConfiguration"}
+	if v.FinalBackupTags != nil {
+		if err := validateTags(v.FinalBackupTags); err != nil {
+			invalidParams.AddNested("FinalBackupTags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteVolumeOntapConfiguration(v *types.DeleteVolumeOntapConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVolumeOntapConfiguration"}
 	if v.FinalBackupTags != nil {
 		if err := validateTags(v.FinalBackupTags); err != nil {
 			invalidParams.AddNested("FinalBackupTags", err.(smithy.InvalidParamsError))
@@ -596,9 +843,6 @@ func validateOpCreateBackupInput(v *CreateBackupInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "CreateBackupInput"}
-	if v.FileSystemId == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
-	}
 	if v.Tags != nil {
 		if err := validateTags(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
@@ -693,6 +937,95 @@ func validateOpCreateFileSystemInput(v *CreateFileSystemInput) error {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OntapConfiguration != nil {
+		if err := validateCreateFileSystemOntapConfiguration(v.OntapConfiguration); err != nil {
+			invalidParams.AddNested("OntapConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateStorageVirtualMachineInput(v *CreateStorageVirtualMachineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateStorageVirtualMachineInput"}
+	if v.ActiveDirectoryConfiguration != nil {
+		if err := validateCreateSvmActiveDirectoryConfiguration(v.ActiveDirectoryConfiguration); err != nil {
+			invalidParams.AddNested("ActiveDirectoryConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.FileSystemId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("FileSystemId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateVolumeFromBackupInput(v *CreateVolumeFromBackupInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVolumeFromBackupInput"}
+	if v.BackupId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("BackupId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.OntapConfiguration != nil {
+		if err := validateCreateOntapVolumeConfiguration(v.OntapConfiguration); err != nil {
+			invalidParams.AddNested("OntapConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateVolumeInput(v *CreateVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateVolumeInput"}
+	if len(v.VolumeType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeType"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.OntapConfiguration != nil {
+		if err := validateCreateOntapVolumeConfiguration(v.OntapConfiguration); err != nil {
+			invalidParams.AddNested("OntapConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -731,6 +1064,41 @@ func validateOpDeleteFileSystemInput(v *DeleteFileSystemInput) error {
 	if v.LustreConfiguration != nil {
 		if err := validateDeleteFileSystemLustreConfiguration(v.LustreConfiguration); err != nil {
 			invalidParams.AddNested("LustreConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteStorageVirtualMachineInput(v *DeleteStorageVirtualMachineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteStorageVirtualMachineInput"}
+	if v.StorageVirtualMachineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDeleteVolumeInput(v *DeleteVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteVolumeInput"}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
+	}
+	if v.OntapConfiguration != nil {
+		if err := validateDeleteVolumeOntapConfiguration(v.OntapConfiguration); err != nil {
+			invalidParams.AddNested("OntapConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {
@@ -840,6 +1208,36 @@ func validateOpUpdateFileSystemInput(v *UpdateFileSystemInput) error {
 		if err := validateUpdateFileSystemWindowsConfiguration(v.WindowsConfiguration); err != nil {
 			invalidParams.AddNested("WindowsConfiguration", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateStorageVirtualMachineInput(v *UpdateStorageVirtualMachineInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateStorageVirtualMachineInput"}
+	if v.StorageVirtualMachineId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StorageVirtualMachineId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateVolumeInput(v *UpdateVolumeInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateVolumeInput"}
+	if v.VolumeId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("VolumeId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

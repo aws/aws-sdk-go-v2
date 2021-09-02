@@ -16,26 +16,27 @@ import (
 // Creates a new, empty file system. The operation requires a creation token in the
 // request that Amazon EFS uses to ensure idempotent creation (calling the
 // operation with same creation token has no effect). If a file system does not
-// currently exist that is owned by the caller's AWS account with the specified
-// creation token, this operation does the following:
+// currently exist that is owned by the caller's Amazon Web Services account with
+// the specified creation token, this operation does the following:
 //
-// * Creates a new, empty file
-// system. The file system will have an Amazon EFS assigned ID, and an initial
-// lifecycle state creating.
+// * Creates a
+// new, empty file system. The file system will have an Amazon EFS assigned ID, and
+// an initial lifecycle state creating.
 //
-// * Returns with the description of the created file
-// system.
+// * Returns with the description of the
+// created file system.
 //
-// Otherwise, this operation returns a FileSystemAlreadyExists error with
-// the ID of the existing file system. For basic use cases, you can use a randomly
-// generated UUID for the creation token. The idempotent operation allows you to
-// retry a CreateFileSystem call without risk of creating an extra file system.
-// This can happen when an initial call fails in a way that leaves it uncertain
-// whether or not a file system was actually created. An example might be that a
-// transport level timeout occurred or your connection was reset. As long as you
-// use the same creation token, if the initial call had succeeded in creating a
-// file system, the client can learn of its existence from the
-// FileSystemAlreadyExists error. For more information, see Creating a file system
+// Otherwise, this operation returns a
+// FileSystemAlreadyExists error with the ID of the existing file system. For basic
+// use cases, you can use a randomly generated UUID for the creation token. The
+// idempotent operation allows you to retry a CreateFileSystem call without risk of
+// creating an extra file system. This can happen when an initial call fails in a
+// way that leaves it uncertain whether or not a file system was actually created.
+// An example might be that a transport level timeout occurred or your connection
+// was reset. As long as you use the same creation token, if the initial call had
+// succeeded in creating a file system, the client can learn of its existence from
+// the FileSystemAlreadyExists error. For more information, see Creating a file
+// system
 // (https://docs.aws.amazon.com/efs/latest/ug/creating-using-create-fs.html#creating-using-create-fs-part1)
 // in the Amazon EFS User Guide. The CreateFileSystem call returns while the file
 // system's lifecycle state is still creating. You can check the file system
@@ -80,12 +81,12 @@ type CreateFileSystemInput struct {
 	CreationToken *string
 
 	// Used to create a file system that uses One Zone storage classes. It specifies
-	// the AWS Availability Zone in which to create the file system. Use the format
-	// us-east-1a to specify the Availability Zone. For more information about One Zone
-	// storage classes, see Using EFS storage classes
+	// the Amazon Web Services Availability Zone in which to create the file system.
+	// Use the format us-east-1a to specify the Availability Zone. For more information
+	// about One Zone storage classes, see Using EFS storage classes
 	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
 	// EFS User Guide. One Zone storage classes are not available in all Availability
-	// Zones in AWS Regions where Amazon EFS is available.
+	// Zones in Amazon Web Services Regions where Amazon EFS is available.
 	AvailabilityZoneName *string
 
 	// Specifies whether automatic backups are enabled on the file system that you are
@@ -94,25 +95,25 @@ type CreateFileSystemInput struct {
 	// by default. For more information, see Automatic backups
 	// (https://docs.aws.amazon.com/efs/latest/ug/awsbackup.html#automatic-backups) in
 	// the Amazon EFS User Guide. Default is false. However, if you specify an
-	// AvailabilityZoneName, the default is true. AWS Backup is not available in all
-	// AWS Regions where Amazon EFS is available.
+	// AvailabilityZoneName, the default is true. Backup is not available in all Amazon
+	// Web Services Regionswhere Amazon EFS is available.
 	Backup *bool
 
 	// A Boolean value that, if true, creates an encrypted file system. When creating
 	// an encrypted file system, you have the option of specifying
-	// CreateFileSystemRequest$KmsKeyId for an existing AWS Key Management Service (AWS
-	// KMS) customer master key (CMK). If you don't specify a CMK, then the default CMK
-	// for Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file
+	// CreateFileSystemRequest$KmsKeyId for an existing Key Management Service (KMS
+	// customer master key (CMK). If you don't specify a CMK, then the default CMK for
+	// Amazon EFS, /aws/elasticfilesystem, is used to protect the encrypted file
 	// system.
 	Encrypted *bool
 
-	// The ID of the AWS KMS CMK that you want to use to protect the encrypted file
-	// system. This parameter is only required if you want to use a non-default KMS
-	// key. If this parameter is not specified, the default CMK for Amazon EFS is used.
-	// This ID can be in one of the following formats:
+	// The ID of the KMS CMK that you want to use to protect the encrypted file system.
+	// This parameter is only required if you want to use a non-default KMS key. If
+	// this parameter is not specified, the default CMK for Amazon EFS is used. This ID
+	// can be in one of the following formats:
 	//
-	// * Key ID - A unique identifier
-	// of the key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.
+	// * Key ID - A unique identifier of the
+	// key, for example 1234abcd-12ab-34cd-56ef-1234567890ab.
 	//
 	// * ARN - An Amazon
 	// Resource Name (ARN) for the key, for example
@@ -142,14 +143,18 @@ type CreateFileSystemInput struct {
 	// The throughput, measured in MiB/s, that you want to provision for a file system
 	// that you're creating. Valid values are 1-1024. Required if ThroughputMode is set
 	// to provisioned. The upper limit for throughput is 1024 MiB/s. To increase this
-	// limit, contact AWS Support. For more information, see Amazon EFS quotas that you
-	// can increase (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits)
-	// in the Amazon EFS User Guide.
+	// limit, contact Amazon Web Services Support. For more information, see Amazon EFS
+	// quotas that you can increase
+	// (https://docs.aws.amazon.com/efs/latest/ug/limits.html#soft-limits) in the
+	// Amazon EFS User Guide.
 	ProvisionedThroughputInMibps *float64
 
-	// A value that specifies to create one or more tags associated with the file
-	// system. Each tag is a user-defined key-value pair. Name your file system on
-	// creation by including a "Key":"Name","Value":"{value}" key-value pair.
+	// Use to create one or more tags associated with the file system. Each tag is a
+	// user-defined key-value pair. Name your file system on creation by including a
+	// "Key":"Name","Value":"{value}" key-value pair. Each key must be unique. For more
+	// information, see Tagging Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference Guide.
 	Tags []types.Tag
 
 	// Specifies the throughput mode for the file system, either bursting or
@@ -196,8 +201,9 @@ type CreateFileSystemOutput struct {
 	// This member is required.
 	NumberOfMountTargets int32
 
-	// The AWS account that created the file system. If the file system was created by
-	// an IAM user, the parent account to which the user belongs is the owner.
+	// The Amazon Web Services account that created the file system. If the file system
+	// was created by an IAM user, the parent account to which the user belongs is the
+	// owner.
 	//
 	// This member is required.
 	OwnerId *string
@@ -227,13 +233,13 @@ type CreateFileSystemOutput struct {
 
 	// The unique and consistent identifier of the Availability Zone in which the file
 	// system's One Zone storage classes exist. For example, use1-az1 is an
-	// Availability Zone ID for the us-east-1 AWS Region, and it has the same location
-	// in every AWS account.
+	// Availability Zone ID for the us-east-1 Amazon Web Services Region, and it has
+	// the same location in every Amazon Web Services account.
 	AvailabilityZoneId *string
 
-	// Describes the AWS Availability Zone in which the file system is located, and is
-	// valid only for file systems using One Zone storage classes. For more
-	// information, see Using EFS storage classes
+	// Describes the Amazon Web Services Availability Zone in which the file system is
+	// located, and is valid only for file systems using One Zone storage classes. For
+	// more information, see Using EFS storage classes
 	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
 	// EFS User Guide.
 	AvailabilityZoneName *string
@@ -247,8 +253,8 @@ type CreateFileSystemOutput struct {
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
-	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that
-	// was used to protect the encrypted file system.
+	// The ID of an Key Management Service customer master key (CMK) that was used to
+	// protect the encrypted file system.
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,

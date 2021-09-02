@@ -14,27 +14,30 @@ import (
 // Enables lifecycle management by creating a new LifecycleConfiguration object. A
 // LifecycleConfiguration object defines when files in an Amazon EFS file system
 // are automatically transitioned to the lower-cost EFS Infrequent Access (IA)
-// storage class. A LifecycleConfiguration applies to all files in a file system.
-// Each Amazon EFS file system supports one lifecycle configuration, which applies
-// to all files in the file system. If a LifecycleConfiguration object already
-// exists for the specified file system, a PutLifecycleConfiguration call modifies
-// the existing configuration. A PutLifecycleConfiguration call with an empty
-// LifecyclePolicies array in the request body deletes any existing
-// LifecycleConfiguration and disables lifecycle management. In the request,
-// specify the following:
+// storage class. To enable EFS Intelligent Tiering, set the value of
+// TransitionToPrimaryStorageClass to AFTER_1_ACCESS. For more information, see EFS
+// Lifecycle Management
+// (https://docs.aws.amazon.com/efs/latest/ug/lifecycle-management-efs.html). A
+// LifecycleConfiguration applies to all files in a file system. Each Amazon EFS
+// file system supports one lifecycle configuration, which applies to all files in
+// the file system. If a LifecycleConfiguration object already exists for the
+// specified file system, a PutLifecycleConfiguration call modifies the existing
+// configuration. A PutLifecycleConfiguration call with an empty LifecyclePolicies
+// array in the request body deletes any existing LifecycleConfiguration and
+// disables lifecycle management. In the request, specify the following:
 //
-// * The ID for the file system for which you are enabling,
-// disabling, or modifying lifecycle management.
+// * The ID
+// for the file system for which you are enabling, disabling, or modifying
+// lifecycle management.
 //
-// * A LifecyclePolicies array of
-// LifecyclePolicy objects that define when files are moved to the IA storage
-// class. The array can contain only one LifecyclePolicy item.
+// * A LifecyclePolicies array of LifecyclePolicy objects
+// that define when files are moved to the IA storage class. The array can contain
+// only one LifecyclePolicy item.
 //
-// This operation
-// requires permissions for the elasticfilesystem:PutLifecycleConfiguration
-// operation. To apply a LifecycleConfiguration object to an encrypted file system,
-// you need the same AWS Key Management Service (AWS KMS) permissions as when you
-// created the encrypted file system.
+// This operation requires permissions for the
+// elasticfilesystem:PutLifecycleConfiguration operation. To apply a
+// LifecycleConfiguration object to an encrypted file system, you need the same Key
+// Management Service permissions as when you created the encrypted file system.
 func (c *Client) PutLifecycleConfiguration(ctx context.Context, params *PutLifecycleConfigurationInput, optFns ...func(*Options)) (*PutLifecycleConfigurationOutput, error) {
 	if params == nil {
 		params = &PutLifecycleConfigurationInput{}
@@ -71,8 +74,8 @@ type PutLifecycleConfigurationInput struct {
 
 type PutLifecycleConfigurationOutput struct {
 
-	// An array of lifecycle management policies. Currently, EFS supports a maximum of
-	// one policy per file system.
+	// An array of lifecycle management policies. EFS supports a maximum of one policy
+	// per file system.
 	LifecyclePolicies []types.LifecyclePolicy
 
 	// Metadata pertaining to the operation's result.

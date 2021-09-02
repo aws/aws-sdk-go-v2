@@ -30,8 +30,8 @@ func (c *Client) DeleteUser(ctx context.Context, params *DeleteUserInput, optFns
 
 type DeleteUserInput struct {
 
-	// The ID for the Amazon Web Services account; that the user is in. Currently, you
-	// use the ID for the Amazon Web Services account; that contains your Amazon
+	// The ID for the Amazon Web Services account that the user is in. Currently, you
+	// use the ID for the Amazon Web Services account that contains your Amazon
 	// QuickSight account.
 	//
 	// This member is required.

@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an access preview that allows you to preview Access Analyzer findings
-// for your resource before deploying resource permissions.
+// Creates an access preview that allows you to preview IAM Access Analyzer
+// findings for your resource before deploying resource permissions.
 func (c *Client) CreateAccessPreview(ctx context.Context, params *CreateAccessPreviewInput, optFns ...func(*Options)) (*CreateAccessPreviewOutput, error) {
 	if params == nil {
 		params = &CreateAccessPreviewInput{}

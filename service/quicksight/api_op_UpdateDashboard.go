@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a dashboard in an Amazon Web Services account;. Updating a Dashboard
+// Updates a dashboard in an Amazon Web Services account. Updating a Dashboard
 // creates a new dashboard version but does not immediately publish the new
 // version. You can update the published version of a dashboard by using the
 // UpdateDashboardPublishedVersion API operation.
@@ -32,7 +32,7 @@ func (c *Client) UpdateDashboard(ctx context.Context, params *UpdateDashboardInp
 
 type UpdateDashboardInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboard that
+	// The ID of the Amazon Web Services account that contains the dashboard that
 	// you're updating.
 	//
 	// This member is required.
@@ -54,10 +54,10 @@ type UpdateDashboardInput struct {
 	// you need to update a dashboard from an analysis, first convert the analysis to a
 	// template by using the CreateTemplate API operation. For SourceTemplate, specify
 	// the Amazon Resource Name (ARN) of the source template. The SourceTemplate ARN
-	// can contain any Amazon Web Services account; and any QuickSight-supported Amazon
-	// Web Services Region;. Use the DataSetReferences entity within SourceTemplate to
-	// list the replacement datasets for the placeholders listed in the original. The
-	// schema in each dataset must match its placeholder.
+	// can contain any Amazon Web Services account and any Amazon QuickSight-supported
+	// Amazon Web Services Region;. Use the DataSetReferences entity within
+	// SourceTemplate to list the replacement datasets for the placeholders listed in
+	// the original. The schema in each dataset must match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.DashboardSourceEntity
@@ -66,7 +66,7 @@ type UpdateDashboardInput struct {
 	//
 	// * AvailabilityStatus
 	// for AdHocFilteringOption - This status can be either ENABLED or DISABLED. When
-	// this is set to DISABLED, QuickSight disables the left filter pane on the
+	// this is set to DISABLED, Amazon QuickSight disables the left filter pane on the
 	// published dashboard, which can be used for ad hoc (one-time) filtering. This
 	// option is ENABLED by default.
 	//
@@ -87,7 +87,7 @@ type UpdateDashboardInput struct {
 	// The Amazon Resource Name (ARN) of the theme that is being used for this
 	// dashboard. If you add a value for this field, it overrides the value that was
 	// originally associated with the entity. The theme ARN must exist in the same
-	// Amazon Web Services account; where you create the dashboard.
+	// Amazon Web Services account where you create the dashboard.
 	ThemeArn *string
 
 	// A description for the first version of the dashboard being created.

@@ -39,6 +39,10 @@ type DescribeDiscovererInput struct {
 
 type DescribeDiscovererOutput struct {
 
+	// The Status if the discoverer will discover schemas from events sent from another
+	// account.
+	CrossAccount bool
+
 	// The description of the discoverer.
 	Description *string
 

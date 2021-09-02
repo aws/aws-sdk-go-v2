@@ -90,7 +90,7 @@ func (c *Client) PutJobTagging(ctx context.Context, params *PutJobTaggingInput, 
 
 type PutJobTaggingInput struct {
 
-	// The account ID associated with the S3 Batch Operations job.
+	// The Amazon Web Services account ID associated with the S3 Batch Operations job.
 	//
 	// This member is required.
 	AccountId *string

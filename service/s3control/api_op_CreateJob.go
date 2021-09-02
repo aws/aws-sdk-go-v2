@@ -57,7 +57,7 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 type CreateJobInput struct {
 
-	// The account ID that creates the job.
+	// The Amazon Web Services account ID that creates the job.
 	//
 	// This member is required.
 	AccountId *string

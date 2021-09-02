@@ -36,7 +36,7 @@ type CreateTemplateAliasInput struct {
 	// This member is required.
 	AliasName *string
 
-	// The ID of the Amazon Web Services account; that contains the template that you
+	// The ID of the Amazon Web Services account that contains the template that you
 	// creating an alias for.
 	//
 	// This member is required.

@@ -38,6 +38,25 @@ func (AwsIamAccessKeyStatus) Values() []AwsIamAccessKeyStatus {
 	}
 }
 
+type AwsS3BucketNotificationConfigurationS3KeyFilterRuleName string
+
+// Enum values for AwsS3BucketNotificationConfigurationS3KeyFilterRuleName
+const (
+	AwsS3BucketNotificationConfigurationS3KeyFilterRuleNamePrefix AwsS3BucketNotificationConfigurationS3KeyFilterRuleName = "Prefix"
+	AwsS3BucketNotificationConfigurationS3KeyFilterRuleNameSuffix AwsS3BucketNotificationConfigurationS3KeyFilterRuleName = "Suffix"
+)
+
+// Values returns all known values for
+// AwsS3BucketNotificationConfigurationS3KeyFilterRuleName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AwsS3BucketNotificationConfigurationS3KeyFilterRuleName) Values() []AwsS3BucketNotificationConfigurationS3KeyFilterRuleName {
+	return []AwsS3BucketNotificationConfigurationS3KeyFilterRuleName{
+		"Prefix",
+		"Suffix",
+	}
+}
+
 type ComplianceStatus string
 
 // Enum values for ComplianceStatus

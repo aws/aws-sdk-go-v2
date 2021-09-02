@@ -52,7 +52,7 @@ func (c *Client) UpdateJobStatus(ctx context.Context, params *UpdateJobStatusInp
 
 type UpdateJobStatusInput struct {
 
-	// The account ID associated with the S3 Batch Operations job.
+	// The Amazon Web Services account ID associated with the S3 Batch Operations job.
 	//
 	// This member is required.
 	AccountId *string

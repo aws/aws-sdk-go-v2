@@ -48,7 +48,8 @@ func (c *Client) CreateAccessPointForObjectLambda(ctx context.Context, params *C
 
 type CreateAccessPointForObjectLambdaInput struct {
 
-	// The account ID for owner of the specified Object Lambda Access Point.
+	// The Amazon Web Services account ID for owner of the specified Object Lambda
+	// Access Point.
 	//
 	// This member is required.
 	AccountId *string

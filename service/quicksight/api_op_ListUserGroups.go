@@ -30,8 +30,8 @@ func (c *Client) ListUserGroups(ctx context.Context, params *ListUserGroupsInput
 
 type ListUserGroupsInput struct {
 
-	// The Amazon Web Services account; ID that the user is in. Currently, you use the
-	// ID for the Amazon Web Services account; that contains your Amazon QuickSight
+	// The Amazon Web Services account ID that the user is in. Currently, you use the
+	// ID for the Amazon Web Services account that contains your Amazon QuickSight
 	// account.
 	//
 	// This member is required.

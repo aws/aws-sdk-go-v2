@@ -33,15 +33,14 @@ func (c *Client) CreateTheme(ctx context.Context, params *CreateThemeInput, optF
 
 type CreateThemeInput struct {
 
-	// The ID of the Amazon Web Services account; where you want to store the new
-	// theme.
+	// The ID of the Amazon Web Services account where you want to store the new theme.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The ID of the theme that a custom theme will inherit from. All themes inherit
 	// from one of the starting themes defined by Amazon QuickSight. For a list of the
-	// starting themes, use ListThemes or choose Themes from within a QuickSight
+	// starting themes, use ListThemes or choose Themes from within a Amazon QuickSight
 	// analysis.
 	//
 	// This member is required.
@@ -58,7 +57,7 @@ type CreateThemeInput struct {
 	Name *string
 
 	// An ID for the theme that you want to create. The theme ID is unique per Amazon
-	// Web Services Region; in each Amazon Web Services account;.
+	// Web Services Region in each Amazon Web Services account.
 	//
 	// This member is required.
 	ThemeId *string

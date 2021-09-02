@@ -56,7 +56,8 @@ func (c *Client) CreateFileSystem(ctx context.Context, params *CreateFileSystemI
 // The request object used to create a new Amazon FSx file system.
 type CreateFileSystemInput struct {
 
-	// The type of Amazon FSx file system to create, either WINDOWS or LUSTRE.
+	// The type of Amazon FSx file system to create. Valid values are WINDOWS, LUSTRE,
+	// and ONTAP.
 	//
 	// This member is required.
 	FileSystemType types.FileSystemType
@@ -83,40 +84,52 @@ type CreateFileSystemInput struct {
 	// * If StorageType=HDD, valid values are 2000 GiB -
 	// 65,536 GiB (64 TiB).
 	//
+	// For ONTAP file systems:
+	//
+	// * Valid values are 1024 GiB -
+	// 196,608 GiB (192 TiB).
+	//
 	// This member is required.
 	StorageCapacity *int32
 
 	// Specifies the IDs of the subnets that the file system will be accessible from.
-	// For Windows MULTI_AZ_1 file system deployment types, provide exactly two subnet
-	// IDs, one for the preferred file server and one for the standby file server. You
-	// specify one of these subnets as the preferred subnet using the
-	// WindowsConfiguration > PreferredSubnetID property. For more information, see
-	// Availability and durability: Single-AZ and Multi-AZ file systems
-	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).
-	// For Windows SINGLE_AZ_1 and SINGLE_AZ_2 file system deployment types and Lustre
-	// file systems, provide exactly one subnet ID. The file server is launched in that
-	// subnet's Availability Zone.
+	// For Windows and ONTAP MULTI_AZ_1 file system deployment types, provide exactly
+	// two subnet IDs, one for the preferred file server and one for the standby file
+	// server. You specify one of these subnets as the preferred subnet using the
+	// WindowsConfiguration > PreferredSubnetID or OntapConfiguration >
+	// PreferredSubnetID properties. For more information, see  Availability and
+	// durability: Single-AZ and Multi-AZ file systems
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html)
+	// in the Amazon FSx for Windows User Guide and  Availability and durability
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/high-availability-multiAZ.html)
+	// in the Amazon FSx for ONTAP User Guide. For Windows SINGLE_AZ_1 and SINGLE_AZ_2
+	// file system deployment types and Lustre file systems, provide exactly one subnet
+	// ID. The file server is launched in that subnet's Availability Zone.
 	//
 	// This member is required.
 	SubnetIds []string
 
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// creation. This string is automatically filled on your behalf when you use the
-	// AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file
-	// system's data for Amazon FSx for Windows File Server file systems and Amazon FSx
-	// for Lustre PERSISTENT_1 file systems at rest. In either case, if not specified,
-	// the Amazon FSx managed key is used. The Amazon FSx for Lustre SCRATCH_1 and
-	// SCRATCH_2 file systems are always encrypted at rest using Amazon FSx managed
-	// keys. For more information, see Encrypt
+	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
+	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
+	// ONTAP file systems, and Amazon FSx for Lustre PERSISTENT_1 file systems at rest.
+	// If not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre
+	// SCRATCH_1 and SCRATCH_2 file systems are always encrypted at rest using Amazon
+	// FSx managed keys. For more information, see Encrypt
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
-	// AWS Key Management Service API Reference.
+	// Key Management Service API Reference.
 	KmsKeyId *string
 
 	// The Lustre configuration for the file system being created.
 	LustreConfiguration *types.CreateFileSystemLustreConfiguration
+
+	// The ONTAP configuration properties of the FSx for NetApp ONTAP file system that
+	// you are creating.
+	OntapConfiguration *types.CreateFileSystemOntapConfiguration
 
 	// A list of IDs specifying the security groups to apply to all network interfaces
 	// created for file system access. This list isn't returned in later requests to
@@ -127,11 +140,11 @@ type CreateFileSystemInput struct {
 	// and HDD.
 	//
 	// * Set to SSD to use solid state drive storage. SSD is supported on all
-	// Windows and Lustre deployment types.
+	// Windows, Lustre, and ONTAP deployment types.
 	//
-	// * Set to HDD to use hard disk drive
-	// storage. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file system
-	// deployment types, and on PERSISTENT Lustre file system deployment
+	// * Set to HDD to use hard disk
+	// drive storage. HDD is supported on SINGLE_AZ_2 and MULTI_AZ_1 Windows file
+	// system deployment types, and on PERSISTENT Lustre file system deployment
 	// types.
 	//
 	// Default value is SSD. For more information, see  Storage Type Options

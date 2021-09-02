@@ -30,8 +30,8 @@ func (c *Client) UpdateTemplate(ctx context.Context, params *UpdateTemplateInput
 
 type UpdateTemplateInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the template that
-	// you're updating.
+	// The ID of the Amazon Web Services account that contains the template that you're
+	// updating.
 	//
 	// This member is required.
 	AwsAccountId *string
@@ -41,11 +41,11 @@ type UpdateTemplateInput struct {
 	// SourceTemplate for a template or SourceAnalysis for an analysis. Both of these
 	// require an Amazon Resource Name (ARN). For SourceTemplate, specify the ARN of
 	// the source template. For SourceAnalysis, specify the ARN of the source analysis.
-	// The SourceTemplate ARN can contain any Amazon Web Services account; and any
-	// QuickSight-supported Amazon Web Services Region;. Use the DataSetReferences
-	// entity within SourceTemplate or SourceAnalysis to list the replacement datasets
-	// for the placeholders listed in the original. The schema in each dataset must
-	// match its placeholder.
+	// The SourceTemplate ARN can contain any Amazon Web Services account and any
+	// Amazon QuickSight-supported Amazon Web Services Region;. Use the
+	// DataSetReferences entity within SourceTemplate or SourceAnalysis to list the
+	// replacement datasets for the placeholders listed in the original. The schema in
+	// each dataset must match its placeholder.
 	//
 	// This member is required.
 	SourceEntity *types.TemplateSourceEntity

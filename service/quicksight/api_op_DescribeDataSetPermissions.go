@@ -30,13 +30,13 @@ func (c *Client) DescribeDataSetPermissions(ctx context.Context, params *Describ
 
 type DescribeDataSetPermissionsInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The Amazon Web Services account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region; for each Amazon Web Services account;.
+	// Services Region; for each Amazon Web Services account.
 	//
 	// This member is required.
 	DataSetId *string
@@ -50,7 +50,7 @@ type DescribeDataSetPermissionsOutput struct {
 	DataSetArn *string
 
 	// The ID for the dataset that you want to create. This ID is unique per Amazon Web
-	// Services Region; for each Amazon Web Services account;.
+	// Services Region; for each Amazon Web Services account.
 	DataSetId *string
 
 	// A list of resource permissions on the dataset.

@@ -13,7 +13,7 @@ import (
 )
 
 // Use this action to associate one or more Domain Name Server (DNS) aliases with
-// an existing Amazon FSx for Windows File Server file system. A file systen can
+// an existing Amazon FSx for Windows File Server file system. A file system can
 // have a maximum of 50 DNS aliases associated with it at any one time. If you try
 // to associate a DNS alias that is already associated with the file system, FSx
 // takes no action on that alias in the request. For more information, see Working
@@ -74,7 +74,7 @@ type AssociateFileSystemAliasesInput struct {
 
 	// (Optional) An idempotency token for resource creation, in a string of up to 64
 	// ASCII characters. This token is automatically filled on your behalf when you use
-	// the AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// the Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
 	noSmithyDocumentSerde

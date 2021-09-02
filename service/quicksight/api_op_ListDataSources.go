@@ -13,7 +13,7 @@ import (
 )
 
 // Lists data sources in current Amazon Web Services Region; that belong to this
-// Amazon Web Services account;.
+// Amazon Web Services account.
 func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInput, optFns ...func(*Options)) (*ListDataSourcesOutput, error) {
 	if params == nil {
 		params = &ListDataSourcesInput{}
@@ -31,7 +31,7 @@ func (c *Client) ListDataSources(ctx context.Context, params *ListDataSourcesInp
 
 type ListDataSourcesInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The Amazon Web Services account ID.
 	//
 	// This member is required.
 	AwsAccountId *string

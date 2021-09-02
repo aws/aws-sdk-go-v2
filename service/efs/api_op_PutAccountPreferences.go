@@ -11,6 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
+// Use this operation to set the account preference in the current Amazon Web
+// Services Region to use either long 17 character (63 bit) or short 8 character
+// (32 bit) IDs for new EFS file systems and mount targets created. All existing
+// resource IDs are not affected by any changes you make. You can set the ID
+// preference during the opt-in period as EFS transitions to long resource IDs. For
+// more information, see Managing Amazon EFS resource IDs.
 func (c *Client) PutAccountPreferences(ctx context.Context, params *PutAccountPreferencesInput, optFns ...func(*Options)) (*PutAccountPreferencesOutput, error) {
 	if params == nil {
 		params = &PutAccountPreferencesInput{}
@@ -28,8 +34,9 @@ func (c *Client) PutAccountPreferences(ctx context.Context, params *PutAccountPr
 
 type PutAccountPreferencesInput struct {
 
-	// A preference indicating a choice to use 63bit/32bit IDs for all applicable
-	// resources.
+	// Specifies the EFS resource ID preference to set for the user's Amazon Web
+	// Services account, in the current Amazon Web Services Region, either LONG_ID (17
+	// characters), or SHORT_ID (8 characters).
 	//
 	// This member is required.
 	ResourceIdType types.ResourceIdType
@@ -38,6 +45,9 @@ type PutAccountPreferencesInput struct {
 }
 
 type PutAccountPreferencesOutput struct {
+
+	// Describes the resource type and its ID preference for the user's Amazon Web
+	// Services account, in the current Amazon Web Services Region.
 	ResourceIdPreference *types.ResourceIdPreference
 
 	// Metadata pertaining to the operation's result.

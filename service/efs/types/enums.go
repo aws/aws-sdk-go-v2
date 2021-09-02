@@ -145,3 +145,20 @@ func (TransitionToIARules) Values() []TransitionToIARules {
 		"AFTER_90_DAYS",
 	}
 }
+
+type TransitionToPrimaryStorageClassRules string
+
+// Enum values for TransitionToPrimaryStorageClassRules
+const (
+	TransitionToPrimaryStorageClassRulesAfter1Access TransitionToPrimaryStorageClassRules = "AFTER_1_ACCESS"
+)
+
+// Values returns all known values for TransitionToPrimaryStorageClassRules. Note
+// that this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (TransitionToPrimaryStorageClassRules) Values() []TransitionToPrimaryStorageClassRules {
+	return []TransitionToPrimaryStorageClassRules{
+		"AFTER_1_ACCESS",
+	}
+}

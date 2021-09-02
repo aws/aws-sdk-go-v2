@@ -29,13 +29,13 @@ func (c *Client) DescribeDataSource(ctx context.Context, params *DescribeDataSou
 
 type DescribeDataSourceInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The Amazon Web Services account ID.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// The ID of the data source. This ID is unique per Amazon Web Services Region; for
-	// each Amazon Web Services account;.
+	// each Amazon Web Services account.
 	//
 	// This member is required.
 	DataSourceId *string

@@ -29,7 +29,7 @@ func (c *Client) DescribeDashboard(ctx context.Context, params *DescribeDashboar
 
 type DescribeDashboardInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboard that
+	// The ID of the Amazon Web Services account that contains the dashboard that
 	// you're describing.
 	//
 	// This member is required.

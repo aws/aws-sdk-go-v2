@@ -4305,6 +4305,11 @@ func validateTransformOperation(v types.TransformOperation) error {
 			invalidParams.AddNested("[TagColumnOperation]", err.(smithy.InvalidParamsError))
 		}
 
+	case *types.TransformOperationMemberUntagColumnOperation:
+		if err := validateUntagColumnOperation(&uv.Value); err != nil {
+			invalidParams.AddNested("[UntagColumnOperation]", err.(smithy.InvalidParamsError))
+		}
+
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -4337,6 +4342,24 @@ func validateTwitterParameters(v *types.TwitterParameters) error {
 	invalidParams := smithy.InvalidParamsError{Context: "TwitterParameters"}
 	if v.Query == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Query"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateUntagColumnOperation(v *types.UntagColumnOperation) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UntagColumnOperation"}
+	if v.ColumnName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ColumnName"))
+	}
+	if v.TagNames == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("TagNames"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
