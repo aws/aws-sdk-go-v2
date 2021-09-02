@@ -121,9 +121,6 @@ func (c *Client) addOperationGetBucketReplicationMiddlewares(stack *middleware.S
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpGetBucketReplicationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -175,14 +172,13 @@ func addGetBucketReplicationUpdateEndpoint(stack *middleware.Stack, options Opti
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: getGetBucketReplicationBucketMember,
 		},
-		UsePathStyle:                   options.UsePathStyle,
-		UseAccelerate:                  options.UseAccelerate,
-		SupportsAccelerate:             true,
-		TargetS3ObjectLambda:           false,
-		EndpointResolver:               options.EndpointResolver,
-		EndpointResolverOptions:        options.EndpointOptions,
-		UseDualstack:                   options.UseDualstack,
-		UseARNRegion:                   options.UseARNRegion,
-		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
 	})
 }

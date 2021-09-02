@@ -119,9 +119,6 @@ func (c *Client) addOperationPutBucketRequestPaymentMiddlewares(stack *middlewar
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutBucketRequestPaymentValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -176,14 +173,13 @@ func addPutBucketRequestPaymentUpdateEndpoint(stack *middleware.Stack, options O
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: getPutBucketRequestPaymentBucketMember,
 		},
-		UsePathStyle:                   options.UsePathStyle,
-		UseAccelerate:                  options.UseAccelerate,
-		SupportsAccelerate:             true,
-		TargetS3ObjectLambda:           false,
-		EndpointResolver:               options.EndpointResolver,
-		EndpointResolverOptions:        options.EndpointOptions,
-		UseDualstack:                   options.UseDualstack,
-		UseARNRegion:                   options.UseARNRegion,
-		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
 	})
 }

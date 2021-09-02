@@ -111,9 +111,6 @@ func (c *Client) addOperationDeleteBucketLifecycleMiddlewares(stack *middleware.
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpDeleteBucketLifecycleValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -165,14 +162,13 @@ func addDeleteBucketLifecycleUpdateEndpoint(stack *middleware.Stack, options Opt
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: getDeleteBucketLifecycleBucketMember,
 		},
-		UsePathStyle:                   options.UsePathStyle,
-		UseAccelerate:                  options.UseAccelerate,
-		SupportsAccelerate:             true,
-		TargetS3ObjectLambda:           false,
-		EndpointResolver:               options.EndpointResolver,
-		EndpointResolverOptions:        options.EndpointOptions,
-		UseDualstack:                   options.UseDualstack,
-		UseARNRegion:                   options.UseARNRegion,
-		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
 	})
 }

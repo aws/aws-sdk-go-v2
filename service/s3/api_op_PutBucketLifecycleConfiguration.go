@@ -163,9 +163,6 @@ func (c *Client) addOperationPutBucketLifecycleConfigurationMiddlewares(stack *m
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addOpPutBucketLifecycleConfigurationValidationMiddleware(stack); err != nil {
 		return err
 	}
@@ -220,14 +217,13 @@ func addPutBucketLifecycleConfigurationUpdateEndpoint(stack *middleware.Stack, o
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: getPutBucketLifecycleConfigurationBucketMember,
 		},
-		UsePathStyle:                   options.UsePathStyle,
-		UseAccelerate:                  options.UseAccelerate,
-		SupportsAccelerate:             true,
-		TargetS3ObjectLambda:           false,
-		EndpointResolver:               options.EndpointResolver,
-		EndpointResolverOptions:        options.EndpointOptions,
-		UseDualstack:                   options.UseDualstack,
-		UseARNRegion:                   options.UseARNRegion,
-		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    false,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
 	})
 }

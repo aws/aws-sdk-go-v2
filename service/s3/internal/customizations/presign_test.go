@@ -17,7 +17,7 @@ import (
 func TestPutObject_PresignURL(t *testing.T) {
 	cases := map[string]struct {
 		input                  s3.PutObjectInput
-		options                []func(*s3.PresignOptions)
+		options                s3.PresignOptions
 		expectPresignedURLHost string
 		expectRequestURIQuery  []string
 		expectSignedHeader     http.Header
@@ -125,45 +125,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 				"Host": []string{"mock-bucket.s3.us-west-2.amazonaws.com"},
 			},
 		},
-		"mrap presigned": {
-			input: s3.PutObjectInput{
-				Bucket: aws.String("arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap"),
-				Key:    aws.String("mockkey"),
-				Body:   strings.NewReader("hello-world"),
-			},
-			expectPresignedURLHost: "https://mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com/mockkey?",
-			expectRequestURIQuery: []string{
-				"X-Amz-Expires=900",
-				"X-Amz-Credential",
-				"X-Amz-Date",
-				"x-id=PutObject",
-				"X-Amz-Signature",
-				"X-Amz-Region-Set",
-			},
-			expectMethod: "PUT",
-			expectSignedHeader: http.Header{
-				"Content-Length": []string{"11"},
-				"Content-Type":   []string{"application/octet-stream"},
-				"Host":           []string{"mfzwi23gnjvgw.mrap.accesspoint.s3-global.amazonaws.com"},
-			},
-		},
-		"mrap presigned with mrap disabled": {
-			input: s3.PutObjectInput{
-				Bucket: aws.String("arn:aws:s3::123456789012:accesspoint:mfzwi23gnjvgw.mrap"),
-				Key:    aws.String("mockkey"),
-				Body:   strings.NewReader("hello-world"),
-			},
-			options: []func(option *s3.PresignOptions){
-				func(option *s3.PresignOptions) {
-					option.ClientOptions = []func(o *s3.Options){
-						func(o *s3.Options) {
-							o.DisableMultiRegionAccessPoints = true
-						},
-					}
-				},
-			},
-			expectError: "Multi-Region access point ARNs are disabled",
-		},
 	}
 
 	for name, c := range cases {
@@ -176,7 +137,9 @@ func TestPutObject_PresignURL(t *testing.T) {
 					return aws.NopRetryer{}
 				},
 			}
-			presignClient := s3.NewPresignClient(s3.NewFromConfig(cfg), c.options...)
+			presignClient := s3.NewPresignClient(s3.NewFromConfig(cfg), func(options *s3.PresignOptions) {
+				options = &c.options
+			})
 
 			req, err := presignClient.PresignPutObject(ctx, &c.input)
 			if err != nil {
@@ -187,7 +150,6 @@ func TestPutObject_PresignURL(t *testing.T) {
 				if e, a := c.expectError, err.Error(); !strings.Contains(a, e) {
 					t.Fatalf("expected error to be %s, got %s", e, a)
 				}
-				return
 			} else {
 				if len(c.expectError) != 0 {
 					t.Fatalf("expected error to be %v, got none", c.expectError)

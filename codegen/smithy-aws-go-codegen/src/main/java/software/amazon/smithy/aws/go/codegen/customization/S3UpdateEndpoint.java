@@ -189,9 +189,6 @@ public class S3UpdateEndpoint implements GoIntegration {
         // options to be generated on Client's options type
         private static final String USE_PATH_STYLE_OPTION = "UsePathStyle";
         private static final String USE_ACCELERATE_OPTION = "UseAccelerate";
-        private static final String DISABLE_MRAP_OPTION = "DisableMultiRegionAccessPoints";
-        private static final String  V4A_SIGNER_INTERFACE_NAME = "httpSignerV4a";
-
         // private function getter constant
         private static final String NOP_BUCKET_ACCESSOR = "nopGetBucketAccessor";
         // service shape representing s3
@@ -239,19 +236,6 @@ public class S3UpdateEndpoint implements GoIntegration {
                                                     + "accelerate enabled. If the bucket is not enabled for accelerate an error "
                                                     + "will be returned. The bucket name must be DNS compatible to work "
                                                     + "with accelerate.")
-                                            .build(),
-                                    ConfigField.builder()
-                                            .name(DISABLE_MRAP_OPTION)
-                                            .type(SymbolUtils.createValueSymbolBuilder("bool")
-                                                    .putProperty(SymbolUtils.GO_UNIVERSE_TYPE, true)
-                                                    .build())
-                                            .documentation("Allows you to disable S3 Multi-Region access points feature.")
-                                            .build(),
-                                    ConfigField.builder()
-                                            .name(V4A_SIGNER_INTERFACE_NAME)
-                                            .type(SymbolUtils.createValueSymbolBuilder(V4A_SIGNER_INTERFACE_NAME)
-                                                    .build())
-                                            .documentation("Signature Version 4a (SigV4a) Signer")
                                             .build()
                             ))
                             .build()
@@ -313,7 +297,6 @@ public class S3UpdateEndpoint implements GoIntegration {
                                         + "EndpointResolverOptions: options.EndpointOptions,\n"
                                         + "UseDualstack: options.$L,\n"
                                         + "UseARNRegion: options.$L,\n"
-                                        + "DisableMultiRegionAccessPoints: options.$L,\n"
                                         + "})",
                                 SymbolUtils.createValueSymbolBuilder(UPDATE_ENDPOINT_INTERNAL_ADDER,
                                         AwsCustomGoDependency.S3_CUSTOMIZATION).build(),
@@ -328,8 +311,7 @@ public class S3UpdateEndpoint implements GoIntegration {
                                 !NOT_SUPPORT_ACCELERATE.contains(operationName),
                                 TARGET_OBJECT_LAMBDAS.contains(operationName),
                                 USE_DUALSTACK_OPTION,
-                                USE_ARNREGION_OPTION,
-                                DISABLE_MRAP_OPTION
+                                USE_ARNREGION_OPTION
                         );
                     });
             writer.insertTrailingNewline();

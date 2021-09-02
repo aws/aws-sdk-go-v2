@@ -72,12 +72,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
     private static final Symbol presignerInterfaceSymbol = SymbolUtils.createPointableSymbolBuilder(
             "HTTPPresignerV4"
     ).build();
-
-    private static final Symbol presignerV4aInterfaceSymbol = SymbolUtils.createPointableSymbolBuilder(
-            "httpPresignerV4a"
-    ).build();
-
-
     private static final Symbol v4NewPresignerSymbol = SymbolUtils.createPointableSymbolBuilder(
             "NewSigner", AwsGoDependency.AWS_SIGNER_V4
     ).build();
@@ -181,9 +175,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         goDelegator.useShapeWriter(serviceShape, (writer) -> {
             // generate presigner interface
             writePresignInterface(writer, model, symbolProvider, serviceShape);
-
-            // generate s3 sigv4a presigner interface
-            writePresignV4aInterface(writer, model, symbolProvider, serviceShape);
 
             // generate presign options and helpers per service
             writePresignOptionType(writer, model, symbolProvider, serviceShape);
@@ -380,37 +371,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
 
                     // s3 service needs expires and sets unsignedPayload if input is stream
                     if (isS3ServiceShape(model, serviceShape)) {
-
-                        writer.write("");
-                        writer.write("// add multi-region access point presigner");
-
-                        // ==== multi-region access point support
-                       Symbol PresignConstructor =  SymbolUtils.createValueSymbolBuilder(
-                               "NewPresignHTTPRequestMiddleware", AwsCustomGoDependency.S3_CUSTOMIZATION
-                       ).build();
-
-                       Symbol PresignOptions = SymbolUtils.createValueSymbolBuilder(
-                         "PresignHTTPRequestMiddlewareOptions", AwsCustomGoDependency.S3_CUSTOMIZATION
-                       ).build();
-
-                       Symbol RegisterPresigningMiddleware = SymbolUtils.createValueSymbolBuilder(
-                               "RegisterPreSigningMiddleware", AwsCustomGoDependency.S3_CUSTOMIZATION
-                       ).build();
-
-                        writer.openBlock("signermv := $T($T{", "})",
-                                PresignConstructor,PresignOptions, () -> {
-                           writer.write("CredentialsProvider : options.Credentials,");
-                           writer.write("V4Presigner : c.Presigner,");
-                           writer.write("V4aPresigner : c.presignerV4a,");
-                           writer.write("LogSigning : options.ClientLogMode.IsSigning(),");
-                        });
-
-                        writer.write("err = $T(stack, signermv)", RegisterPresigningMiddleware);
-                        writer.write("if err != nil { return err }");
-                        writer.write("");
-
-                        // =======
-
                         writer.openBlock("if c.Expires < 0 {", "}", () -> {
                             writer.addUseImports(SmithyGoDependency.FMT);
                             writer.write(
@@ -477,13 +437,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                     });
                     writer.write("");
 
-                    if (isS3ServiceShape(model, serviceShape)) {
-                        writer.openBlock("if options.presignerV4a == nil {", "}", () -> {
-                            writer.write("options.presignerV4a = $L(c.options)", AwsSignatureVersion4.NEW_SIGNER_V4A_FUNC_NAME);
-                        });
-                        writer.write("");
-                    }
-
                     writer.openBlock("return &$L{", "}", presignClientSymbol, () -> {
                         writer.write("client: c,");
                         writer.write("options: options,");
@@ -541,38 +494,6 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         writer.write("");
     }
 
-
-    /**
-     * Writes the presigner sigv4a interface used by the presign url client
-     */
-    public void writePresignV4aInterface(
-            GoWriter writer,
-            Model model,
-            SymbolProvider symbolProvider,
-            ServiceShape serviceShape
-    ) {
-        if (!isS3ServiceShape(model, serviceShape)) {
-            return;
-        }
-
-        Symbol signerOptionsSymbol = SymbolUtils.createPointableSymbolBuilder(
-                "SignerOptions", AwsCustomGoDependency.S3_SIGV4A_CUSTOMIZATION).build();
-
-        writer.writeDocs(
-                String.format("%s represents sigv4a presigner interface used by presign url client",
-                        presignerV4aInterfaceSymbol.getName())
-        );
-        writer.openBlock("type $T interface {", "}", presignerV4aInterfaceSymbol, () -> {
-            writer.write("PresignHTTP(");
-            writer.write("ctx context.Context, credentials v4a.Credentials, r *http.Request,");
-            writer.write("payloadHash string, service string, regionSet []string, signingTime time.Time,");
-            writer.write("optFns ...func($P),", signerOptionsSymbol);
-            writer.write(") (url string, signedHeader http.Header, err error)");
-        });
-
-        writer.write("");
-    }
-
     /**
      * Writes the Presign client's type and methods.
      *
@@ -609,13 +530,8 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
                         )
                 );
                 writer.write("Expires time.Duration");
-                writer.write("");
-
-                writer.writeDocs("presignerV4a is the presigner used by the presign url client");
-                writer.write("presignerV4a $T", presignerV4aInterfaceSymbol);
             }
         });
-
         writer.openBlock("func (o $T) copy() $T {", "}", presignOptionsSymbol, presignOptionsSymbol, () -> {
             writer.write("clientOptions := make([]func(*Options), len(o.ClientOptions))");
             writer.write("copy(clientOptions, o.ClientOptions)");
@@ -632,7 +548,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         writer.openBlock("func $L(optFns ...func(*Options)) func($P) {", "}",
                 PRESIGN_OPTIONS_FROM_CLIENT_OPTIONS, presignOptionsSymbol, () -> {
                     writer.write("return $L(optFns).options", presignOptionsFromClientOptionsInternal.getName());
-        });
+                });
 
         writer.insertTrailingNewline();
 
@@ -640,7 +556,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
         writer.openBlock("func (w $L) options (o $P) {", "}",
                 presignOptionsFromClientOptionsInternal.getName(), presignOptionsSymbol, () -> {
                     writer.write("o.ClientOptions = append(o.ClientOptions, w...)");
-        }).insertTrailingNewline();
+                }).insertTrailingNewline();
 
 
         // s3 specific helpers
@@ -653,7 +569,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writer.openBlock("func $L(dur time.Duration) func($P) {", "}",
                     PRESIGN_OPTIONS_FROM_EXPIRES, presignOptionsSymbol, () -> {
                         writer.write("return $L(dur).options", presignOptionsFromExpiresInternal.getName());
-            });
+                    });
 
             writer.insertTrailingNewline();
 
@@ -661,7 +577,7 @@ public class AwsHttpPresignURLClientGenerator implements GoIntegration {
             writer.openBlock("func (w $L) options (o $P) {", "}",
                     presignOptionsFromExpiresInternal.getName(), presignOptionsSymbol, () -> {
                         writer.write("o.Expires = time.Duration(w)");
-            }).insertTrailingNewline();
+                    }).insertTrailingNewline();
         }
     }
 
