@@ -316,6 +316,14 @@ func TestNewEnvConfig(t *testing.T) {
 			},
 			Config: EnvConfig{},
 		},
+		24: {
+			Env: map[string]string{
+				"AWS_S3_DISABLE_MULTIREGION_ACCESS_POINTS": "true",
+			},
+			Config: EnvConfig{
+				S3DisableMultiRegionAccessPoints: ptr.Bool(true),
+			},
+		},
 	}
 
 	for i, c := range cases {

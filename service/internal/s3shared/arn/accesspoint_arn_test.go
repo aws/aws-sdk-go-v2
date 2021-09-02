@@ -14,15 +14,6 @@ func TestParseAccessPointResource(t *testing.T) {
 		ExpectErr string
 		ExpectARN AccessPointARN
 	}{
-		"region not set": {
-			ARN: arn.ARN{
-				Partition: "aws",
-				Service:   "s3",
-				AccountID: "012345678901",
-				Resource:  "accesspoint/myendpoint",
-			},
-			ExpectErr: "region not set",
-		},
 		"account-id not set": {
 			ARN: arn.ARN{
 				Partition: "aws",

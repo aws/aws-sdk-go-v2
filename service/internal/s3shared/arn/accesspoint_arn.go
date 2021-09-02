@@ -25,9 +25,6 @@ func (a AccessPointARN) GetARN() arn.ARN {
 //	- example: arn:aws:s3:us-west-2:012345678901:accesspoint/myaccesspoint
 //
 func ParseAccessPointResource(a arn.ARN, resParts []string) (AccessPointARN, error) {
-	if len(a.Region) == 0 {
-		return AccessPointARN{}, InvalidARNError{ARN: a, Reason: "region not set"}
-	}
 	if isFIPS(a.Region) {
 		return AccessPointARN{}, InvalidARNError{ARN: a, Reason: "FIPS region not allowed in ARN"}
 	}
