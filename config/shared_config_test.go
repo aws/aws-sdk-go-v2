@@ -151,14 +151,6 @@ func TestNewSharedConfig(t *testing.T) {
 				S3UseARNRegion: ptr.Bool(true),
 			},
 		},
-		"S3DisableMultiRegionAccessPoints property on profile": {
-			Profile:         "disable_mrap",
-			ConfigFilenames: []string{testConfigFilename},
-			Expected: SharedConfig{
-				Profile:                          "disable_mrap",
-				S3DisableMultiRegionAccessPoints: ptr.Bool(true),
-			},
-		},
 		"EndpointDiscovery property enabled on profile": {
 			Profile:         "endpoint_discovery_enabled",
 			ConfigFilenames: []string{testConfigFilename},

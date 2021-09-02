@@ -305,9 +305,6 @@ func (c *Client) addOperationWriteGetObjectResponseMiddlewares(stack *middleware
 	if err = smithyhttp.AddCloseResponseBodyMiddleware(stack); err != nil {
 		return err
 	}
-	if err = swapWithCustomHTTPSignerMiddleware(stack, options); err != nil {
-		return err
-	}
 	if err = addEndpointPrefix_opWriteGetObjectResponseMiddleware(stack); err != nil {
 		return err
 	}
@@ -390,14 +387,13 @@ func addWriteGetObjectResponseUpdateEndpoint(stack *middleware.Stack, options Op
 		Accessor: s3cust.UpdateEndpointParameterAccessor{
 			GetBucketFromInput: nopGetBucketAccessor,
 		},
-		UsePathStyle:                   options.UsePathStyle,
-		UseAccelerate:                  options.UseAccelerate,
-		SupportsAccelerate:             true,
-		TargetS3ObjectLambda:           true,
-		EndpointResolver:               options.EndpointResolver,
-		EndpointResolverOptions:        options.EndpointOptions,
-		UseDualstack:                   options.UseDualstack,
-		UseARNRegion:                   options.UseARNRegion,
-		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
+		UsePathStyle:            options.UsePathStyle,
+		UseAccelerate:           options.UseAccelerate,
+		SupportsAccelerate:      true,
+		TargetS3ObjectLambda:    true,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointOptions,
+		UseDualstack:            options.UseDualstack,
+		UseARNRegion:            options.UseARNRegion,
 	})
 }

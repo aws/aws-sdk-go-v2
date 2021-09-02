@@ -81,9 +81,6 @@ source_profile = assume_role_wo_creds
 [profile valid_arn_region]
 s3_use_arn_region=true
 
-[profile disable_mrap]
-s3_disable_multiregion_access_points=true
-
 [profile endpoint_discovery_enabled]
 endpoint_discovery_enabled=true
 

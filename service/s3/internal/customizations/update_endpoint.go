@@ -65,9 +65,6 @@ type UpdateEndpointOptions struct {
 
 	// EndpointResolverOptions used by endpoint resolver
 	EndpointResolverOptions EndpointResolverOptions
-
-	// DisableMultiRegionAccessPoints indicates multi-region access point support is disabled
-	DisableMultiRegionAccessPoints bool
 }
 
 // UpdateEndpoint adds the middleware to the middleware stack based on the UpdateEndpointOptions.
@@ -82,12 +79,11 @@ func UpdateEndpoint(stack *middleware.Stack, options UpdateEndpointOptions) (err
 
 	// process arn
 	err = stack.Serialize.Insert(&processARNResource{
-		UseARNRegion:                   options.UseARNRegion,
-		UseAccelerate:                  options.UseAccelerate,
-		UseDualstack:                   options.UseDualstack,
-		EndpointResolver:               options.EndpointResolver,
-		EndpointResolverOptions:        options.EndpointResolverOptions,
-		DisableMultiRegionAccessPoints: options.DisableMultiRegionAccessPoints,
+		UseARNRegion:            options.UseARNRegion,
+		UseAccelerate:           options.UseAccelerate,
+		UseDualstack:            options.UseDualstack,
+		EndpointResolver:        options.EndpointResolver,
+		EndpointResolverOptions: options.EndpointResolverOptions,
 	}, "OperationSerializer", middleware.Before)
 	if err != nil {
 		return err
