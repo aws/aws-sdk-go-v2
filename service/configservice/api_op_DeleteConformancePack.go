@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the specified conformance pack and all the AWS Config rules, remediation
-// actions, and all evaluation results within that conformance pack. AWS Config
-// sets the conformance pack to DELETE_IN_PROGRESS until the deletion is complete.
-// You cannot update a conformance pack while it is in this state.
+// Deletes the specified conformance pack and all the Config rules, remediation
+// actions, and all evaluation results within that conformance pack. Config sets
+// the conformance pack to DELETE_IN_PROGRESS until the deletion is complete. You
+// cannot update a conformance pack while it is in this state.
 func (c *Client) DeleteConformancePack(ctx context.Context, params *DeleteConformancePackInput, optFns ...func(*Options)) (*DeleteConformancePackOutput, error) {
 	if params == nil {
 		params = &DeleteConformancePackInput{}

@@ -8,31 +8,33 @@ import (
 )
 
 // The Amazon QuickSight customizations associated with your Amazon Web Services
-// account; or a QuickSight namespace in a specific Amazon Web Services Region;.
+// account or a Amazon QuickSight namespace in a specific Amazon Web Services
+// Region;.
 type AccountCustomization struct {
 
-	// The default theme for this QuickSight subscription.
+	// The default theme for this Amazon QuickSight subscription.
 	DefaultTheme *string
 
 	noSmithyDocumentSerde
 }
 
-// The QuickSight settings associated with your Amazon Web Services account;.
+// The Amazon QuickSight settings associated with your Amazon Web Services account.
 type AccountSettings struct {
 
-	// The "account name" you provided for the QuickSight subscription in your Amazon
-	// Web Services account;. You create this name when you sign up for QuickSight. It
-	// is unique in all of Amazon Web Services and it appears only when users sign in.
+	// The "account name" you provided for the Amazon QuickSight subscription in your
+	// Amazon Web Services account. You create this name when you sign up for Amazon
+	// QuickSight. It is unique in all of Amazon Web Services and it appears only when
+	// users sign in.
 	AccountName *string
 
-	// The default QuickSight namespace for your Amazon Web Services account;.
+	// The default Amazon QuickSight namespace for your Amazon Web Services account.
 	DefaultNamespace *string
 
-	// The edition of QuickSight that you're currently subscribed to: Enterprise
+	// The edition of Amazon QuickSight that you're currently subscribed to: Enterprise
 	// edition or Standard edition.
 	Edition Edition
 
-	// The main notification email for your QuickSight subscription.
+	// The main notification email for your Amazon QuickSight subscription.
 	NotificationEmail *string
 
 	noSmithyDocumentSerde
@@ -41,7 +43,7 @@ type AccountSettings struct {
 // The active Identity and Access Management (IAM) policy assignment.
 type ActiveIAMPolicyAssignment struct {
 
-	// A name for the IAM policy assignment.
+	// A name for the IAMpolicy assignment.
 	AssignmentName *string
 
 	// The Amazon Resource Name (ARN) of the resource.
@@ -59,10 +61,10 @@ type AdHocFilteringOption struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Elasticsearch Service parameters.
+// The parameters for Elasticsearch.
 type AmazonElasticsearchParameters struct {
 
-	// The Amazon Elasticsearch Service domain.
+	// The Elasticsearch domain.
 	//
 	// This member is required.
 	Domain *string
@@ -107,7 +109,7 @@ type Analysis struct {
 	noSmithyDocumentSerde
 }
 
-// A metadata error structure for an analysis.
+// Analysis error.
 type AnalysisError struct {
 
 	// The message associated with the analysis error.
@@ -178,7 +180,8 @@ type AnalysisSummary struct {
 	// The time that the analysis was last updated.
 	LastUpdatedTime *time.Time
 
-	// The name of the analysis. This name is displayed in the QuickSight console.
+	// The name of the analysis. This name is displayed in the Amazon QuickSight
+	// console.
 	Name *string
 
 	// The last known status for the analysis.
@@ -212,7 +215,7 @@ type AnonymousUserEmbeddingExperienceConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Athena parameters.
+// Parameters for Amazon Athena.
 type AthenaParameters struct {
 
 	// The workgroup that Amazon Athena uses.
@@ -221,7 +224,7 @@ type AthenaParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Aurora parameters.
+// Parameters for Amazon Aurora.
 type AuroraParameters struct {
 
 	// Database.
@@ -242,20 +245,20 @@ type AuroraParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Aurora with PostgreSQL compatibility parameters.
+// Parameters for Amazon Aurora PostgreSQL-Compatible Edition.
 type AuroraPostgreSqlParameters struct {
 
-	// Database.
+	// The Amazon Aurora PostgreSQL database to connect to.
 	//
 	// This member is required.
 	Database *string
 
-	// Host.
+	// The Amazon Aurora PostgreSQL-Compatible host to connect to.
 	//
 	// This member is required.
 	Host *string
 
-	// Port.
+	// The port that Amazon Aurora PostgreSQL is listening on.
 	//
 	// This member is required.
 	Port int32
@@ -263,7 +266,7 @@ type AuroraPostgreSqlParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Web Services IoT Analytics parameters.
+// The parameters for IoT Analytics.
 type AwsIotAnalyticsParameters struct {
 
 	// Dataset name.
@@ -377,7 +380,7 @@ type ColumnLevelPermissionRule struct {
 	// An array of column names.
 	ColumnNames []string
 
-	// An array of Amazon Resource Names (ARNs) for QuickSight users or groups.
+	// An array of Amazon Resource Names (ARNs) for Amazon QuickSight users or groups.
 	Principals []string
 
 	noSmithyDocumentSerde
@@ -705,6 +708,10 @@ type DataSet struct {
 	// The ID of the dataset.
 	DataSetId *string
 
+	// The usage configuration to apply to child datasets that reference this dataset
+	// as a source.
+	DataSetUsageConfiguration *DataSetUsageConfiguration
+
 	// The folder that contains fields and nested subfolders for your dataset.
 	FieldFolders map[string]FieldFolder
 
@@ -810,6 +817,21 @@ type DataSetSummary struct {
 	noSmithyDocumentSerde
 }
 
+// The usage configuration to apply to child datasets that reference this dataset
+// as a source.
+type DataSetUsageConfiguration struct {
+
+	// An option that controls whether a child dataset of a direct query can use this
+	// dataset as a source.
+	DisableUseAsDirectQuerySource bool
+
+	// An option that controls whether a child dataset that's stored in QuickSight can
+	// use this dataset as a source.
+	DisableUseAsImportedSource bool
+
+	noSmithyDocumentSerde
+}
+
 // The structure of a data source.
 type DataSource struct {
 
@@ -831,7 +853,7 @@ type DataSource struct {
 	CreatedTime *time.Time
 
 	// The ID of the data source. This ID is unique per Amazon Web Services Region; for
-	// each Amazon Web Services account;.
+	// each Amazon Web Services account.
 	DataSourceId *string
 
 	// The parameters that Amazon QuickSight uses to connect to your underlying source.
@@ -848,8 +870,8 @@ type DataSource struct {
 	// A display name for the data source.
 	Name *string
 
-	// Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
-	// underlying source.
+	// Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects
+	// to your underlying source.
 	SslProperties *SslProperties
 
 	// The HTTP status of the request.
@@ -860,8 +882,8 @@ type DataSource struct {
 	Type DataSourceType
 
 	// The VPC connection information. You need to use this parameter only when you
-	// want QuickSight to use a VPC connection when connecting to your underlying
-	// source.
+	// want Amazon QuickSight to use a VPC connection when connecting to your
+	// underlying source.
 	VpcConnectionProperties *VpcConnectionProperties
 
 	noSmithyDocumentSerde
@@ -924,7 +946,7 @@ type DataSourceParameters interface {
 	isDataSourceParameters()
 }
 
-// Amazon Elasticsearch Service parameters.
+// The parameters for Elasticsearch.
 type DataSourceParametersMemberAmazonElasticsearchParameters struct {
 	Value AmazonElasticsearchParameters
 
@@ -933,7 +955,7 @@ type DataSourceParametersMemberAmazonElasticsearchParameters struct {
 
 func (*DataSourceParametersMemberAmazonElasticsearchParameters) isDataSourceParameters() {}
 
-// Amazon Athena parameters.
+// The parameters for Amazon Athena.
 type DataSourceParametersMemberAthenaParameters struct {
 	Value AthenaParameters
 
@@ -942,7 +964,7 @@ type DataSourceParametersMemberAthenaParameters struct {
 
 func (*DataSourceParametersMemberAthenaParameters) isDataSourceParameters() {}
 
-// Amazon Aurora MySQL parameters.
+// The parameters for Amazon Aurora MySQL.
 type DataSourceParametersMemberAuroraParameters struct {
 	Value AuroraParameters
 
@@ -951,7 +973,7 @@ type DataSourceParametersMemberAuroraParameters struct {
 
 func (*DataSourceParametersMemberAuroraParameters) isDataSourceParameters() {}
 
-// Aurora PostgreSQL parameters.
+// The parameters for Amazon Aurora.
 type DataSourceParametersMemberAuroraPostgreSqlParameters struct {
 	Value AuroraPostgreSqlParameters
 
@@ -960,7 +982,7 @@ type DataSourceParametersMemberAuroraPostgreSqlParameters struct {
 
 func (*DataSourceParametersMemberAuroraPostgreSqlParameters) isDataSourceParameters() {}
 
-// Amazon Web Services IoT Analytics parameters.
+// The parameters for IoT Analytics.
 type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
 	Value AwsIotAnalyticsParameters
 
@@ -969,7 +991,7 @@ type DataSourceParametersMemberAwsIotAnalyticsParameters struct {
 
 func (*DataSourceParametersMemberAwsIotAnalyticsParameters) isDataSourceParameters() {}
 
-// Jira parameters.
+// The parameters for Jira.
 type DataSourceParametersMemberJiraParameters struct {
 	Value JiraParameters
 
@@ -978,7 +1000,7 @@ type DataSourceParametersMemberJiraParameters struct {
 
 func (*DataSourceParametersMemberJiraParameters) isDataSourceParameters() {}
 
-// MariaDB parameters.
+// The parameters for MariaDB.
 type DataSourceParametersMemberMariaDbParameters struct {
 	Value MariaDbParameters
 
@@ -987,7 +1009,7 @@ type DataSourceParametersMemberMariaDbParameters struct {
 
 func (*DataSourceParametersMemberMariaDbParameters) isDataSourceParameters() {}
 
-// MySQL parameters.
+// The parameters for MySQL.
 type DataSourceParametersMemberMySqlParameters struct {
 	Value MySqlParameters
 
@@ -996,7 +1018,7 @@ type DataSourceParametersMemberMySqlParameters struct {
 
 func (*DataSourceParametersMemberMySqlParameters) isDataSourceParameters() {}
 
-// Oracle parameters.
+// The parameters for Oracle.
 type DataSourceParametersMemberOracleParameters struct {
 	Value OracleParameters
 
@@ -1005,7 +1027,7 @@ type DataSourceParametersMemberOracleParameters struct {
 
 func (*DataSourceParametersMemberOracleParameters) isDataSourceParameters() {}
 
-// PostgreSQL parameters.
+// The parameters for PostgreSQL.
 type DataSourceParametersMemberPostgreSqlParameters struct {
 	Value PostgreSqlParameters
 
@@ -1014,7 +1036,7 @@ type DataSourceParametersMemberPostgreSqlParameters struct {
 
 func (*DataSourceParametersMemberPostgreSqlParameters) isDataSourceParameters() {}
 
-// Presto parameters.
+// The parameters for Presto.
 type DataSourceParametersMemberPrestoParameters struct {
 	Value PrestoParameters
 
@@ -1023,7 +1045,7 @@ type DataSourceParametersMemberPrestoParameters struct {
 
 func (*DataSourceParametersMemberPrestoParameters) isDataSourceParameters() {}
 
-// Amazon RDS parameters.
+// The parameters for Amazon RDS.
 type DataSourceParametersMemberRdsParameters struct {
 	Value RdsParameters
 
@@ -1032,7 +1054,7 @@ type DataSourceParametersMemberRdsParameters struct {
 
 func (*DataSourceParametersMemberRdsParameters) isDataSourceParameters() {}
 
-// Amazon Redshift parameters.
+// The parameters for Amazon Redshift.
 type DataSourceParametersMemberRedshiftParameters struct {
 	Value RedshiftParameters
 
@@ -1041,7 +1063,7 @@ type DataSourceParametersMemberRedshiftParameters struct {
 
 func (*DataSourceParametersMemberRedshiftParameters) isDataSourceParameters() {}
 
-// S3 parameters.
+// The parameters for S3.
 type DataSourceParametersMemberS3Parameters struct {
 	Value S3Parameters
 
@@ -1050,7 +1072,7 @@ type DataSourceParametersMemberS3Parameters struct {
 
 func (*DataSourceParametersMemberS3Parameters) isDataSourceParameters() {}
 
-// ServiceNow parameters.
+// The parameters for ServiceNow.
 type DataSourceParametersMemberServiceNowParameters struct {
 	Value ServiceNowParameters
 
@@ -1059,7 +1081,7 @@ type DataSourceParametersMemberServiceNowParameters struct {
 
 func (*DataSourceParametersMemberServiceNowParameters) isDataSourceParameters() {}
 
-// Snowflake parameters.
+// The parameters for Snowflake.
 type DataSourceParametersMemberSnowflakeParameters struct {
 	Value SnowflakeParameters
 
@@ -1068,7 +1090,7 @@ type DataSourceParametersMemberSnowflakeParameters struct {
 
 func (*DataSourceParametersMemberSnowflakeParameters) isDataSourceParameters() {}
 
-// Spark parameters.
+// The parameters for Spark.
 type DataSourceParametersMemberSparkParameters struct {
 	Value SparkParameters
 
@@ -1077,7 +1099,7 @@ type DataSourceParametersMemberSparkParameters struct {
 
 func (*DataSourceParametersMemberSparkParameters) isDataSourceParameters() {}
 
-// SQL Server parameters.
+// The parameters for SQL Server.
 type DataSourceParametersMemberSqlServerParameters struct {
 	Value SqlServerParameters
 
@@ -1086,7 +1108,7 @@ type DataSourceParametersMemberSqlServerParameters struct {
 
 func (*DataSourceParametersMemberSqlServerParameters) isDataSourceParameters() {}
 
-// Teradata parameters.
+// The parameters for Teradata.
 type DataSourceParametersMemberTeradataParameters struct {
 	Value TeradataParameters
 
@@ -1095,7 +1117,7 @@ type DataSourceParametersMemberTeradataParameters struct {
 
 func (*DataSourceParametersMemberTeradataParameters) isDataSourceParameters() {}
 
-// Twitter parameters.
+// The parameters for Twitter.
 type DataSourceParametersMemberTwitterParameters struct {
 	Value TwitterParameters
 
@@ -1338,19 +1360,19 @@ type IAMPolicyAssignment struct {
 	// Assignment status.
 	AssignmentStatus AssignmentStatus
 
-	// The Amazon Web Services account; ID.
+	// The Amazon Web Services account ID.
 	AwsAccountId *string
 
 	// Identities.
 	Identities map[string][]string
 
-	// The Amazon Resource Name (ARN) for the IAM policy.
+	// The Amazon Resource Name (ARN) for the IAMpolicy.
 	PolicyArn *string
 
 	noSmithyDocumentSerde
 }
 
-// IAM policy assignment summary.
+// IAMpolicy assignment summary.
 type IAMPolicyAssignmentSummary struct {
 
 	// Assignment name.
@@ -1439,7 +1461,7 @@ type IntegerParameter struct {
 	noSmithyDocumentSerde
 }
 
-// Jira parameters.
+// The parameters for Jira.
 type JiraParameters struct {
 
 	// The base URL of the Jira site.
@@ -1486,7 +1508,8 @@ type JoinInstruction struct {
 type JoinKeyProperties struct {
 
 	// A value that indicates that a row in a table is uniquely identified by the
-	// columns in a join key. This is used by QuickSight to optimize query performance.
+	// columns in a join key. This is used by Amazon QuickSight to optimize query
+	// performance.
 	UniqueKey bool
 
 	noSmithyDocumentSerde
@@ -1518,6 +1541,9 @@ type LogicalTable struct {
 // structure. For this structure to be valid, only one of the attributes can be
 // non-null.
 type LogicalTableSource struct {
+
+	// The Amazon Resource Number (ARN) of the parent dataset.
+	DataSetArn *string
 
 	// Specifies the result of a join of two logical tables.
 	JoinInstruction *JoinInstruction
@@ -1553,7 +1579,7 @@ type MarginStyle struct {
 	noSmithyDocumentSerde
 }
 
-// MariaDB parameters.
+// The parameters for MariaDB.
 type MariaDbParameters struct {
 
 	// Database.
@@ -1586,7 +1612,7 @@ type MemberIdArnPair struct {
 	noSmithyDocumentSerde
 }
 
-// MySQL parameters.
+// The parameters for MySQL.
 type MySqlParameters struct {
 
 	// Database.
@@ -1643,7 +1669,7 @@ type NamespaceInfoV2 struct {
 	noSmithyDocumentSerde
 }
 
-// Oracle parameters.
+// The parameters for Oracle.
 type OracleParameters struct {
 
 	// Database.
@@ -1679,19 +1705,19 @@ type OutputColumn struct {
 	noSmithyDocumentSerde
 }
 
-// A list of QuickSight parameters and the list's override values.
+// A list of Amazon QuickSight parameters and the list's override values.
 type Parameters struct {
 
-	// Date-time parameters.
+	// The parameters that have a data type of date-time.
 	DateTimeParameters []DateTimeParameter
 
-	// Decimal parameters.
+	// The parameters that have a data type of decimal.
 	DecimalParameters []DecimalParameter
 
-	// Integer parameters.
+	// The parameters that have a data type of integer.
 	IntegerParameters []IntegerParameter
 
-	// String parameters.
+	// The parameters that have a data type of string.
 	StringParameters []StringParameter
 
 	noSmithyDocumentSerde
@@ -1736,7 +1762,7 @@ type PhysicalTableMemberS3Source struct {
 
 func (*PhysicalTableMemberS3Source) isPhysicalTable() {}
 
-// PostgreSQL parameters.
+// The parameters for PostgreSQL.
 type PostgreSqlParameters struct {
 
 	// Database.
@@ -1757,7 +1783,7 @@ type PostgreSqlParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Presto parameters.
+// The parameters for Presto.
 type PrestoParameters struct {
 
 	// Catalog.
@@ -1807,7 +1833,7 @@ type QueueInfo struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon RDS parameters.
+// The parameters for Amazon RDS.
 type RdsParameters struct {
 
 	// Database.
@@ -1823,9 +1849,9 @@ type RdsParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Amazon Redshift parameters. The ClusterId field can be blank if Host and Port
-// are both set. The Host and Port fields can be blank if the ClusterId field is
-// set.
+// The parameters for Amazon Redshift. The ClusterId field can be blank if Host and
+// Port are both set. The Host and Port fields can be blank if the ClusterId field
+// is set.
 type RedshiftParameters struct {
 
 	// Database.
@@ -1974,7 +2000,7 @@ type RenameColumnOperation struct {
 // Permission for the resource.
 type ResourcePermission struct {
 
-	// The IAM action to grant or revoke permissions on.
+	// The IAMaction to grant or revoke permissions on.
 	//
 	// This member is required.
 	Actions []string
@@ -1989,8 +2015,8 @@ type ResourcePermission struct {
 	// user, group, or namespace associated with an analysis, dashboard, template, or
 	// theme. (This is common.)
 	//
-	// * The ARN of an Amazon Web Services account; root:
-	// This is an IAM ARN rather than a QuickSight ARN. Use this option only to share
+	// * The ARN of an Amazon Web Services account root: This
+	// is an IAMARN rather than a Amazon QuickSight ARN. Use this option only to share
 	// resources (templates) across Amazon Web Services accounts. (This is less
 	// common.)
 	//
@@ -2025,7 +2051,7 @@ type RowLevelPermissionDataSet struct {
 	// This member is required.
 	Arn *string
 
-	// The type of permissions to use when interpretting the permissions for RLS.
+	// The type of permissions to use when interpreting the permissions for RLS.
 	// DENY_ACCESS is included for backward compatibility only.
 	//
 	// This member is required.
@@ -2088,11 +2114,11 @@ type RowLevelPermissionTagRule struct {
 	noSmithyDocumentSerde
 }
 
-// S3 parameters.
+// The parameters for S3.
 type S3Parameters struct {
 
 	// Location of the Amazon S3 manifest file. This is NULL if the manifest file was
-	// uploaded into QuickSight.
+	// uploaded into Amazon QuickSight.
 	//
 	// This member is required.
 	ManifestFileLocation *ManifestFileLocation
@@ -2108,8 +2134,8 @@ type S3Source struct {
 	// This member is required.
 	DataSourceArn *string
 
-	// A physical table type for an S3 data source. For non-JSON files, only STRING
-	// data types are supported in input columns.
+	// A physical table type for an S3 data source. For files that aren't JSON, only
+	// STRING data types are supported in input columns.
 	//
 	// This member is required.
 	InputColumns []InputColumn
@@ -2120,7 +2146,7 @@ type S3Source struct {
 	noSmithyDocumentSerde
 }
 
-// ServiceNow parameters.
+// The parameters for ServiceNow.
 type ServiceNowParameters struct {
 
 	// URL of the base site.
@@ -2154,8 +2180,8 @@ type SessionTag struct {
 // with other components, such as controls, filters, and so on.
 type Sheet struct {
 
-	// The name of a sheet. This name is displayed on the sheet's tab in the QuickSight
-	// console.
+	// The name of a sheet. This name is displayed on the sheet's tab in the Amazon
+	// QuickSight console.
 	Name *string
 
 	// The unique identifier associated with a sheet.
@@ -2185,7 +2211,7 @@ type SheetStyle struct {
 	noSmithyDocumentSerde
 }
 
-// Snowflake parameters.
+// The parameters for Snowflake.
 type SnowflakeParameters struct {
 
 	// Database.
@@ -2206,7 +2232,7 @@ type SnowflakeParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Spark parameters.
+// The parameters for Spark.
 type SparkParameters struct {
 
 	// Host.
@@ -2222,7 +2248,7 @@ type SparkParameters struct {
 	noSmithyDocumentSerde
 }
 
-// SQL Server parameters.
+// The parameters for SQL Server.
 type SqlServerParameters struct {
 
 	// Database.
@@ -2243,8 +2269,8 @@ type SqlServerParameters struct {
 	noSmithyDocumentSerde
 }
 
-// Secure Socket Layer (SSL) properties that apply when QuickSight connects to your
-// underlying data source.
+// Secure Socket Layer (SSL) properties that apply when Amazon QuickSight connects
+// to your underlying data source.
 type SslProperties struct {
 
 	// A Boolean option to control whether SSL should be disabled.
@@ -2303,15 +2329,15 @@ type TagColumnOperation struct {
 	noSmithyDocumentSerde
 }
 
-// A template object. A template is an entity in QuickSight that encapsulates the
-// metadata required to create an analysis and that you can use to create a
-// dashboard. A template adds a layer of abstraction by using placeholders to
-// replace the dataset associated with an analysis. You can use templates to create
-// dashboards by replacing dataset placeholders with datasets that follow the same
-// schema that was used to create the source analysis and template. You can share
-// templates across Amazon Web Services accounts by allowing users in other Amazon
-// Web Services accounts to create a template or a dashboard from an existing
-// template.
+// A template object. A template is an entity in Amazon QuickSight that
+// encapsulates the metadata required to create an analysis and that you can use to
+// create a dashboard. A template adds a layer of abstraction by using placeholders
+// to replace the dataset associated with an analysis. You can use templates to
+// create dashboards by replacing dataset placeholders with datasets that follow
+// the same schema that was used to create the source analysis and template. You
+// can share templates across Amazon Web Services accounts by allowing users in
+// other Amazon Web Services accounts to create a template or a dashboard from an
+// existing template.
 type Template struct {
 
 	// The Amazon Resource Name (ARN) of the template.
@@ -2327,7 +2353,7 @@ type Template struct {
 	Name *string
 
 	// The ID for the template. This is unique per Amazon Web Services Region; for each
-	// Amazon Web Services account;.
+	// Amazon Web Services account.
 	TemplateId *string
 
 	// A structure describing the versions of the template.
@@ -2422,7 +2448,7 @@ type TemplateSummary struct {
 	Name *string
 
 	// The ID of the template. This ID is unique per Amazon Web Services Region; for
-	// each Amazon Web Services account;.
+	// each Amazon Web Services account.
 	TemplateId *string
 
 	noSmithyDocumentSerde
@@ -2486,7 +2512,7 @@ type TemplateVersionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Teradata parameters.
+// The parameters for Teradata.
 type TeradataParameters struct {
 
 	// Database.
@@ -2598,7 +2624,7 @@ type ThemeSummary struct {
 	Name *string
 
 	// The ID of the theme. This ID is unique per Amazon Web Services Region; for each
-	// Amazon Web Services account;.
+	// Amazon Web Services account.
 	ThemeId *string
 
 	noSmithyDocumentSerde
@@ -2611,7 +2637,7 @@ type ThemeVersion struct {
 	Arn *string
 
 	// The Amazon QuickSight-defined ID of the theme that a custom theme inherits from.
-	// All themes initially inherit from a default QuickSight theme.
+	// All themes initially inherit from a default Amazon QuickSight theme.
 	BaseThemeId *string
 
 	// The theme configuration, which contains all the theme display properties.
@@ -2687,6 +2713,7 @@ type TileStyle struct {
 //  TransformOperationMemberRenameColumnOperation
 //  TransformOperationMemberCastColumnTypeOperation
 //  TransformOperationMemberTagColumnOperation
+//  TransformOperationMemberUntagColumnOperation
 type TransformOperation interface {
 	isTransformOperation()
 }
@@ -2747,7 +2774,16 @@ type TransformOperationMemberTagColumnOperation struct {
 
 func (*TransformOperationMemberTagColumnOperation) isTransformOperation() {}
 
-// Twitter parameters.
+// A transform operation that removes tags associated with a column.
+type TransformOperationMemberUntagColumnOperation struct {
+	Value UntagColumnOperation
+
+	noSmithyDocumentSerde
+}
+
+func (*TransformOperationMemberUntagColumnOperation) isTransformOperation() {}
+
+// The parameters for Twitter.
 type TwitterParameters struct {
 
 	// Maximum number of rows to query Twitter.
@@ -2832,6 +2868,22 @@ type UIColorPalette struct {
 	noSmithyDocumentSerde
 }
 
+// A transform operation that removes tags associated with a column.
+type UntagColumnOperation struct {
+
+	// The column that this operation acts on.
+	//
+	// This member is required.
+	ColumnName *string
+
+	// The column tags to remove from this column.
+	//
+	// This member is required.
+	TagNames []ColumnTagName
+
+	noSmithyDocumentSerde
+}
+
 // Information about the format for a source file or files.
 type UploadSettings struct {
 
@@ -2871,8 +2923,8 @@ type User struct {
 	Email *string
 
 	// The type of supported external login provider that provides identity to let the
-	// user federate into Amazon QuickSight with an associated IAM role. The type can
-	// be one of the following.
+	// user federate into Amazon QuickSight with an associated IAMrole. The type can be
+	// one of the following.
 	//
 	// * COGNITO: Amazon Cognito. The provider URL is
 	// cognito-identity.amazonaws.com.
@@ -2902,7 +2954,7 @@ type User struct {
 	// A user who can create data sources, datasets, analyses, and dashboards.
 	//
 	// *
-	// ADMIN: A user who is an author, who can also manage Amazon QuickSight
+	// ADMIN: A user who is an author, who can also manage Amazon Amazon QuickSight
 	// settings.
 	//
 	// * RESTRICTED_READER: This role isn't currently available for use.

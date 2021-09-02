@@ -24,28 +24,28 @@ import (
 // store to the value that you specify.
 //
 // * Use the KeyStorePassword parameter tell
-// AWS KMS the current password of the kmsuser crypto user (CU)
+// KMS the current password of the kmsuser crypto user (CU)
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
-// in the associated AWS CloudHSM cluster. You can use this parameter to fix
-// connection failures
+// in the associated CloudHSM cluster. You can use this parameter to fix connection
+// failures
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html#fix-keystore-password)
-// that occur when AWS KMS cannot log into the associated cluster because the
-// kmsuser password has changed. This value does not change the password in the AWS
-// CloudHSM cluster.
+// that occur when KMS cannot log into the associated cluster because the kmsuser
+// password has changed. This value does not change the password in the CloudHSM
+// cluster.
 //
-// * Use the CloudHsmClusterId parameter to associate the custom
-// key store with a different, but related, AWS CloudHSM cluster. You can use this
-// parameter to repair a custom key store if its AWS CloudHSM cluster becomes
-// corrupted or is deleted, or when you need to create or restore a cluster from a
+// * Use the CloudHsmClusterId parameter to associate the custom key
+// store with a different, but related, CloudHSM cluster. You can use this
+// parameter to repair a custom key store if its CloudHSM cluster becomes corrupted
+// or is deleted, or when you need to create or restore a cluster from a
 // backup.
 //
 // If the operation succeeds, it returns a JSON object with no properties.
 // This operation is part of the Custom Key Store feature
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-// feature in AWS KMS, which combines the convenience and extensive integration of
-// AWS KMS with the isolation and control of a single-tenant key store.
-// Cross-account use: No. You cannot perform this operation on a custom key store
-// in a different AWS account. Required permissions: kms:UpdateCustomKeyStore
+// feature in KMS, which combines the convenience and extensive integration of KMS
+// with the isolation and control of a single-tenant key store. Cross-account use:
+// No. You cannot perform this operation on a custom key store in a different
+// Amazon Web Services account. Required permissions: kms:UpdateCustomKeyStore
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations:
 //
@@ -84,7 +84,7 @@ type UpdateCustomKeyStoreInput struct {
 	// This member is required.
 	CustomKeyStoreId *string
 
-	// Associates the custom key store with a related AWS CloudHSM cluster. Enter the
+	// Associates the custom key store with a related CloudHSM cluster. Enter the
 	// cluster ID of the cluster that you used to create the custom key store or a
 	// cluster that shares a backup history and has the same cluster certificate as the
 	// original cluster. You cannot use this parameter to associate a custom key store
@@ -97,14 +97,14 @@ type UpdateCustomKeyStoreInput struct {
 	// operation.
 	CloudHsmClusterId *string
 
-	// Enter the current password of the kmsuser crypto user (CU) in the AWS CloudHSM
-	// cluster that is associated with the custom key store. This parameter tells AWS
-	// KMS the current password of the kmsuser crypto user (CU). It does not set or
-	// change the password of any users in the AWS CloudHSM cluster.
+	// Enter the current password of the kmsuser crypto user (CU) in the CloudHSM
+	// cluster that is associated with the custom key store. This parameter tells KMS
+	// the current password of the kmsuser crypto user (CU). It does not set or change
+	// the password of any users in the CloudHSM cluster.
 	KeyStorePassword *string
 
 	// Changes the friendly name of the custom key store to the value that you specify.
-	// The custom key store name must be unique in the AWS account.
+	// The custom key store name must be unique in the Amazon Web Services account.
 	NewCustomKeyStoreName *string
 
 	noSmithyDocumentSerde

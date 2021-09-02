@@ -12,40 +12,38 @@ import (
 
 // Connects or reconnects a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html)
-// to its associated AWS CloudHSM cluster. The custom key store must be connected
-// before you can create customer master keys (CMKs) in the key store or use the
-// CMKs it contains. You can disconnect and reconnect a custom key store at any
-// time. To connect a custom key store, its associated AWS CloudHSM cluster must
-// have at least one active HSM. To get the number of active HSMs in a cluster, use
-// the DescribeClusters
+// to its associated CloudHSM cluster. The custom key store must be connected
+// before you can create KMS keys in the key store or use the KMS keys it contains.
+// You can disconnect and reconnect a custom key store at any time. To connect a
+// custom key store, its associated CloudHSM cluster must have at least one active
+// HSM. To get the number of active HSMs in a cluster, use the DescribeClusters
 // (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
 // operation. To add HSMs to the cluster, use the CreateHsm
 // (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html)
 // operation. Also, the kmsuser crypto user
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-store-concepts.html#concept-kmsuser)
-// (CU) must not be logged into the cluster. This prevents AWS KMS from using this
+// (CU) must not be logged into the cluster. This prevents KMS from using this
 // account to log in. The connection process can take an extended amount of time to
 // complete; up to 20 minutes. This operation starts the connection process, but it
 // does not wait for it to complete. When it succeeds, this operation quickly
 // returns an HTTP 200 response and a JSON object with no properties. However, this
 // response does not indicate that the custom key store is connected. To get the
 // connection state of the custom key store, use the DescribeCustomKeyStores
-// operation. During the connection process, AWS KMS finds the AWS CloudHSM cluster
-// that is associated with the custom key store, creates the connection
-// infrastructure, connects to the cluster, logs into the AWS CloudHSM client as
-// the kmsuser CU, and rotates its password. The ConnectCustomKeyStore operation
-// might fail for various reasons. To find the reason, use the
-// DescribeCustomKeyStores operation and see the ConnectionErrorCode in the
-// response. For help interpreting the ConnectionErrorCode, see
-// CustomKeyStoresListEntry. To fix the failure, use the DisconnectCustomKeyStore
-// operation to disconnect the custom key store, correct the error, use the
-// UpdateCustomKeyStore operation if necessary, and then use ConnectCustomKeyStore
-// again. If you are having trouble connecting or disconnecting a custom key store,
-// see Troubleshooting a Custom Key Store
+// operation. During the connection process, KMS finds the CloudHSM cluster that is
+// associated with the custom key store, creates the connection infrastructure,
+// connects to the cluster, logs into the CloudHSM client as the kmsuser CU, and
+// rotates its password. The ConnectCustomKeyStore operation might fail for various
+// reasons. To find the reason, use the DescribeCustomKeyStores operation and see
+// the ConnectionErrorCode in the response. For help interpreting the
+// ConnectionErrorCode, see CustomKeyStoresListEntry. To fix the failure, use the
+// DisconnectCustomKeyStore operation to disconnect the custom key store, correct
+// the error, use the UpdateCustomKeyStore operation if necessary, and then use
+// ConnectCustomKeyStore again. If you are having trouble connecting or
+// disconnecting a custom key store, see Troubleshooting a Custom Key Store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/fix-keystore.html) in the
-// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
-// perform this operation on a custom key store in a different AWS account.
-// Required permissions: kms:ConnectCustomKeyStore
+// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a custom key store in a different Amazon Web Services
+// account. Required permissions: kms:ConnectCustomKeyStore
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (IAM policy) Related operations
 //

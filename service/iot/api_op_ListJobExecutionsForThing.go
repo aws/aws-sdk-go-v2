@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the job executions for the specified thing.
+// Lists the job executions for the specified thing. Requires permission to access
+// the ListJobExecutionsForThing
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListJobExecutionsForThing(ctx context.Context, params *ListJobExecutionsForThingInput, optFns ...func(*Options)) (*ListJobExecutionsForThingOutput, error) {
 	if params == nil {
 		params = &ListJobExecutionsForThingInput{}
@@ -39,8 +42,8 @@ type ListJobExecutionsForThingInput struct {
 	MaxResults *int32
 
 	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
-	// MQTT topics that contain the value in the following format.
+	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
+	// notifications to MQTT topics that contain the value in the following format.
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
 	// namespaceId feature is in public preview.
 	NamespaceId *string

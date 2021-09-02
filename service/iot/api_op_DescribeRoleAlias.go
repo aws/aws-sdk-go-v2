@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a role alias.
+// Describes a role alias. Requires permission to access the DescribeRoleAlias
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeRoleAlias(ctx context.Context, params *DescribeRoleAliasInput, optFns ...func(*Options)) (*DescribeRoleAliasOutput, error) {
 	if params == nil {
 		params = &DescribeRoleAliasInput{}

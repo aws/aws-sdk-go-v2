@@ -13,25 +13,26 @@ import (
 // Deletes a grant. Typically, you retire a grant when you no longer need its
 // permissions. To identify the grant to retire, use a grant token
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token),
-// or both the grant ID and a key identifier (key ID or key ARN) of the customer
-// master key (CMK). The CreateGrant operation returns both values. This operation
-// can be called by the retiring principal for a grant, by the grantee principal if
-// the grant allows the RetireGrant operation, and by the AWS account (root user)
-// in which the grant is created. It can also be called by principals to whom
+// or both the grant ID and a key identifier (key ID or key ARN) of the KMS key.
+// The CreateGrant operation returns both values. This operation can be called by
+// the retiring principal for a grant, by the grantee principal if the grant allows
+// the RetireGrant operation, and by the Amazon Web Services account (root user) in
+// which the grant is created. It can also be called by principals to whom
 // permission for retiring a grant is delegated. For details, see Retiring and
 // revoking grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete)
-// in the AWS Key Management Service Developer Guide. For detailed information
-// about grants, including grant terminology, see Using grants
-// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the AWS
-// Key Management Service Developer Guide . For examples of working with grants in
+// in the Key Management Service Developer Guide. For detailed information about
+// grants, including grant terminology, see Using grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the Key
+// Management Service Developer Guide . For examples of working with grants in
 // several programming languages, see Programming grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html).
-// Cross-account use: Yes. You can retire a grant on a CMK in a different AWS
-// account. Required permissions::Permission to retire a grant is determined
-// primarily by the grant. For details, see Retiring and revoking grants
+// Cross-account use: Yes. You can retire a grant on a KMS key in a different
+// Amazon Web Services account. Required permissions::Permission to retire a grant
+// is determined primarily by the grant. For details, see Retiring and revoking
+// grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#grant-delete)
-// in the AWS Key Management Service Developer Guide. Related operations:
+// in the Key Management Service Developer Guide. Related operations:
 //
 // *
 // CreateGrant
@@ -71,11 +72,11 @@ type RetireGrantInput struct {
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token)
 	// and Eventual consistency
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency)
-	// in the AWS Key Management Service Developer Guide.
+	// in the Key Management Service Developer Guide.
 	GrantToken *string
 
-	// The key ARN CMK associated with the grant. To find the key ARN, use the ListKeys
-	// operation. For example:
+	// The key ARN KMS key associated with the grant. To find the key ARN, use the
+	// ListKeys operation. For example:
 	// arn:aws:kms:us-east-2:444455556666:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	KeyId *string
 

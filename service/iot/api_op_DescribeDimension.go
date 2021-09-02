@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Provides details about a dimension that is defined in your AWS account.
+// Provides details about a dimension that is defined in your Amazon Web Services
+// accounts. Requires permission to access the DescribeDimension
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeDimension(ctx context.Context, params *DescribeDimensionInput, optFns ...func(*Options)) (*DescribeDimensionOutput, error) {
 	if params == nil {
 		params = &DescribeDimensionInput{}

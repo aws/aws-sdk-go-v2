@@ -22,13 +22,13 @@ import (
 // more information, see Using Amazon S3 on Outposts
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html) in the
 // Amazon S3 User Guide. Use tags to organize your Amazon Web Services bill to
-// reflect your own cost structure. To do this, sign up to get your account bill
-// with tag key values included. Then, to see the cost of combined resources,
-// organize your billing information according to resources with the same tag key
-// values. For example, you can tag several resources with a specific application
-// name, and then organize your billing information to see the total cost of that
-// application across several services. For more information, see Cost allocation
-// and tagging
+// reflect your own cost structure. To do this, sign up to get your Amazon Web
+// Services account bill with tag key values included. Then, to see the cost of
+// combined resources, organize your billing information according to resources
+// with the same tag key values. For example, you can tag several resources with a
+// specific application name, and then organize your billing information to see the
+// total cost of that application across several services. For more information,
+// see Cost allocation and tagging
 // (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html).
 // Within a bucket, if you add a tag that has the same key as an existing tag, the
 // new value overwrites the old value. For more information, see  Using cost
@@ -104,7 +104,7 @@ func (c *Client) PutBucketTagging(ctx context.Context, params *PutBucketTaggingI
 
 type PutBucketTaggingInput struct {
 
-	// The account ID of the Outposts bucket.
+	// The Amazon Web Services account ID of the Outposts bucket.
 	//
 	// This member is required.
 	AccountId *string

@@ -10,13 +10,14 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Provisions a thing in the device registry. RegisterThing calls other AWS IoT
-// control plane APIs. These calls might exceed your account level  AWS IoT
-// Throttling Limits
+// Provisions a thing in the device registry. RegisterThing calls other IoT control
+// plane APIs. These calls might exceed your account level  IoT Throttling Limits
 // (https://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_iot)
-// and cause throttle errors. Please contact AWS Customer Support
+// and cause throttle errors. Please contact Amazon Web Services Customer Support
 // (https://console.aws.amazon.com/support/home) to raise your throttling limits if
-// necessary.
+// necessary. Requires permission to access the RegisterThing
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) RegisterThing(ctx context.Context, params *RegisterThingInput, optFns ...func(*Options)) (*RegisterThingOutput, error) {
 	if params == nil {
 		params = &RegisterThingInput{}

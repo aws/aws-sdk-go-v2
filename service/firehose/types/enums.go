@@ -352,9 +352,13 @@ type ProcessorParameterName string
 const (
 	ProcessorParameterNameLambdaArn               ProcessorParameterName = "LambdaArn"
 	ProcessorParameterNameLambdaNumberOfRetries   ProcessorParameterName = "NumberOfRetries"
+	ProcessorParameterNameMetadataExtractionQuery ProcessorParameterName = "MetadataExtractionQuery"
+	ProcessorParameterNameJsonParsingEngine       ProcessorParameterName = "JsonParsingEngine"
 	ProcessorParameterNameRoleArn                 ProcessorParameterName = "RoleArn"
 	ProcessorParameterNameBufferSizeInMb          ProcessorParameterName = "BufferSizeInMBs"
 	ProcessorParameterNameBufferIntervalInSeconds ProcessorParameterName = "BufferIntervalInSeconds"
+	ProcessorParameterNameSubRecordType           ProcessorParameterName = "SubRecordType"
+	ProcessorParameterNameDelimiter               ProcessorParameterName = "Delimiter"
 )
 
 // Values returns all known values for ProcessorParameterName. Note that this can
@@ -364,9 +368,13 @@ func (ProcessorParameterName) Values() []ProcessorParameterName {
 	return []ProcessorParameterName{
 		"LambdaArn",
 		"NumberOfRetries",
+		"MetadataExtractionQuery",
+		"JsonParsingEngine",
 		"RoleArn",
 		"BufferSizeInMBs",
 		"BufferIntervalInSeconds",
+		"SubRecordType",
+		"Delimiter",
 	}
 }
 
@@ -374,7 +382,10 @@ type ProcessorType string
 
 // Enum values for ProcessorType
 const (
-	ProcessorTypeLambda ProcessorType = "Lambda"
+	ProcessorTypeRecordDeAggregation     ProcessorType = "RecordDeAggregation"
+	ProcessorTypeLambda                  ProcessorType = "Lambda"
+	ProcessorTypeMetadataExtraction      ProcessorType = "MetadataExtraction"
+	ProcessorTypeAppendDelimiterToRecord ProcessorType = "AppendDelimiterToRecord"
 )
 
 // Values returns all known values for ProcessorType. Note that this can be
@@ -382,7 +393,10 @@ const (
 // ordering of this slice is not guaranteed to be stable across updates.
 func (ProcessorType) Values() []ProcessorType {
 	return []ProcessorType{
+		"RecordDeAggregation",
 		"Lambda",
+		"MetadataExtraction",
+		"AppendDelimiterToRecord",
 	}
 }
 

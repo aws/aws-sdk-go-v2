@@ -15,7 +15,10 @@ import (
 // StartAuditMitigationActionsTask. Only certain types of mitigation actions can be
 // applied to specific check names. For more information, see Mitigation actions
 // (https://docs.aws.amazon.com/iot/latest/developerguide/device-defender-mitigation-actions.html).
-// Each mitigation action can apply only one type of change.
+// Each mitigation action can apply only one type of change. Requires permission to
+// access the CreateMitigationAction
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateMitigationAction(ctx context.Context, params *CreateMitigationActionInput, optFns ...func(*Options)) (*CreateMitigationActionOutput, error) {
 	if params == nil {
 		params = &CreateMitigationActionInput{}

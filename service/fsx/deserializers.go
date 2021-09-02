@@ -519,6 +519,9 @@ func awsAwsjson11_deserializeOpErrorCreateBackup(response *smithyhttp.Response, 
 	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperation(response, errorBody)
 
+	case strings.EqualFold("VolumeNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorVolumeNotFound(response, errorBody)
+
 	default:
 		genericError := &smithy.GenericAPIError{
 			Code:    errorCode,
@@ -931,6 +934,399 @@ func awsAwsjson11_deserializeOpErrorCreateFileSystemFromBackup(response *smithyh
 	}
 }
 
+type awsAwsjson11_deserializeOpCreateStorageVirtualMachine struct {
+}
+
+func (*awsAwsjson11_deserializeOpCreateStorageVirtualMachine) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpCreateStorageVirtualMachine) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateStorageVirtualMachine(response, &metadata)
+	}
+	output := &CreateStorageVirtualMachineOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateStorageVirtualMachineOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorCreateStorageVirtualMachine(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("ActiveDirectoryError", errorCode):
+		return awsAwsjson11_deserializeErrorActiveDirectoryError(response, errorBody)
+
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("FileSystemNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorFileSystemNotFound(response, errorBody)
+
+	case strings.EqualFold("IncompatibleParameterError", errorCode):
+		return awsAwsjson11_deserializeErrorIncompatibleParameterError(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("ServiceLimitExceeded", errorCode):
+		return awsAwsjson11_deserializeErrorServiceLimitExceeded(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperation(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpCreateVolume struct {
+}
+
+func (*awsAwsjson11_deserializeOpCreateVolume) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpCreateVolume) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateVolume(response, &metadata)
+	}
+	output := &CreateVolumeOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateVolumeOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorCreateVolume(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("FileSystemNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorFileSystemNotFound(response, errorBody)
+
+	case strings.EqualFold("IncompatibleParameterError", errorCode):
+		return awsAwsjson11_deserializeErrorIncompatibleParameterError(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("MissingVolumeConfiguration", errorCode):
+		return awsAwsjson11_deserializeErrorMissingVolumeConfiguration(response, errorBody)
+
+	case strings.EqualFold("ServiceLimitExceeded", errorCode):
+		return awsAwsjson11_deserializeErrorServiceLimitExceeded(response, errorBody)
+
+	case strings.EqualFold("StorageVirtualMachineNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorStorageVirtualMachineNotFound(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperation(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpCreateVolumeFromBackup struct {
+}
+
+func (*awsAwsjson11_deserializeOpCreateVolumeFromBackup) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpCreateVolumeFromBackup) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorCreateVolumeFromBackup(response, &metadata)
+	}
+	output := &CreateVolumeFromBackupOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentCreateVolumeFromBackupOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorCreateVolumeFromBackup(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BackupNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorBackupNotFound(response, errorBody)
+
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("FileSystemNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorFileSystemNotFound(response, errorBody)
+
+	case strings.EqualFold("IncompatibleParameterError", errorCode):
+		return awsAwsjson11_deserializeErrorIncompatibleParameterError(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("MissingVolumeConfiguration", errorCode):
+		return awsAwsjson11_deserializeErrorMissingVolumeConfiguration(response, errorBody)
+
+	case strings.EqualFold("ServiceLimitExceeded", errorCode):
+		return awsAwsjson11_deserializeErrorServiceLimitExceeded(response, errorBody)
+
+	case strings.EqualFold("StorageVirtualMachineNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorStorageVirtualMachineNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpDeleteBackup struct {
 }
 
@@ -1183,6 +1579,246 @@ func awsAwsjson11_deserializeOpErrorDeleteFileSystem(response *smithyhttp.Respon
 	}
 }
 
+type awsAwsjson11_deserializeOpDeleteStorageVirtualMachine struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeleteStorageVirtualMachine) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeleteStorageVirtualMachine) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteStorageVirtualMachine(response, &metadata)
+	}
+	output := &DeleteStorageVirtualMachineOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteStorageVirtualMachineOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeleteStorageVirtualMachine(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("IncompatibleParameterError", errorCode):
+		return awsAwsjson11_deserializeErrorIncompatibleParameterError(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("StorageVirtualMachineNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorStorageVirtualMachineNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDeleteVolume struct {
+}
+
+func (*awsAwsjson11_deserializeOpDeleteVolume) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDeleteVolume) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDeleteVolume(response, &metadata)
+	}
+	output := &DeleteVolumeOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDeleteVolumeOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDeleteVolume(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("IncompatibleParameterError", errorCode):
+		return awsAwsjson11_deserializeErrorIncompatibleParameterError(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("VolumeNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorVolumeNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
 type awsAwsjson11_deserializeOpDescribeBackups struct {
 }
 
@@ -1292,6 +1928,9 @@ func awsAwsjson11_deserializeOpErrorDescribeBackups(response *smithyhttp.Respons
 
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("VolumeNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorVolumeNotFound(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -1646,6 +2285,240 @@ func awsAwsjson11_deserializeOpErrorDescribeFileSystems(response *smithyhttp.Res
 
 	case strings.EqualFold("InternalServerError", errorCode):
 		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDescribeStorageVirtualMachines struct {
+}
+
+func (*awsAwsjson11_deserializeOpDescribeStorageVirtualMachines) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDescribeStorageVirtualMachines) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeStorageVirtualMachines(response, &metadata)
+	}
+	output := &DescribeStorageVirtualMachinesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDescribeStorageVirtualMachinesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDescribeStorageVirtualMachines(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("StorageVirtualMachineNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorStorageVirtualMachineNotFound(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpDescribeVolumes struct {
+}
+
+func (*awsAwsjson11_deserializeOpDescribeVolumes) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpDescribeVolumes) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorDescribeVolumes(response, &metadata)
+	}
+	output := &DescribeVolumesOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentDescribeVolumesOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorDescribeVolumes(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("VolumeNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorVolumeNotFound(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -2261,6 +3134,252 @@ func awsAwsjson11_deserializeOpErrorUpdateFileSystem(response *smithyhttp.Respon
 
 	case strings.EqualFold("UnsupportedOperation", errorCode):
 		return awsAwsjson11_deserializeErrorUnsupportedOperation(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpUpdateStorageVirtualMachine struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateStorageVirtualMachine) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateStorageVirtualMachine) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateStorageVirtualMachine(response, &metadata)
+	}
+	output := &UpdateStorageVirtualMachineOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateStorageVirtualMachineOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateStorageVirtualMachine(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("IncompatibleParameterError", errorCode):
+		return awsAwsjson11_deserializeErrorIncompatibleParameterError(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("StorageVirtualMachineNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorStorageVirtualMachineNotFound(response, errorBody)
+
+	case strings.EqualFold("UnsupportedOperation", errorCode):
+		return awsAwsjson11_deserializeErrorUnsupportedOperation(response, errorBody)
+
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+type awsAwsjson11_deserializeOpUpdateVolume struct {
+}
+
+func (*awsAwsjson11_deserializeOpUpdateVolume) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsAwsjson11_deserializeOpUpdateVolume) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsAwsjson11_deserializeOpErrorUpdateVolume(response, &metadata)
+	}
+	output := &UpdateVolumeOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsAwsjson11_deserializeOpDocumentUpdateVolumeOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	return out, metadata, err
+}
+
+func awsAwsjson11_deserializeOpErrorUpdateVolume(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	case strings.EqualFold("BadRequest", errorCode):
+		return awsAwsjson11_deserializeErrorBadRequest(response, errorBody)
+
+	case strings.EqualFold("IncompatibleParameterError", errorCode):
+		return awsAwsjson11_deserializeErrorIncompatibleParameterError(response, errorBody)
+
+	case strings.EqualFold("InternalServerError", errorCode):
+		return awsAwsjson11_deserializeErrorInternalServerError(response, errorBody)
+
+	case strings.EqualFold("MissingVolumeConfiguration", errorCode):
+		return awsAwsjson11_deserializeErrorMissingVolumeConfiguration(response, errorBody)
+
+	case strings.EqualFold("VolumeNotFound", errorCode):
+		return awsAwsjson11_deserializeErrorVolumeNotFound(response, errorBody)
 
 	default:
 		genericError := &smithy.GenericAPIError{
@@ -3007,6 +4126,41 @@ func awsAwsjson11_deserializeErrorMissingFileSystemConfiguration(response *smith
 	return output
 }
 
+func awsAwsjson11_deserializeErrorMissingVolumeConfiguration(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.MissingVolumeConfiguration{}
+	err := awsAwsjson11_deserializeDocumentMissingVolumeConfiguration(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorNotServiceResourceError(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3182,6 +4336,41 @@ func awsAwsjson11_deserializeErrorSourceBackupUnavailable(response *smithyhttp.R
 	return output
 }
 
+func awsAwsjson11_deserializeErrorStorageVirtualMachineNotFound(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.StorageVirtualMachineNotFound{}
+	err := awsAwsjson11_deserializeDocumentStorageVirtualMachineNotFound(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
 func awsAwsjson11_deserializeErrorUnsupportedOperation(response *smithyhttp.Response, errorBody *bytes.Reader) error {
 	var buff [1024]byte
 	ringBuffer := smithyio.NewRingBuffer(buff[:])
@@ -3202,6 +4391,41 @@ func awsAwsjson11_deserializeErrorUnsupportedOperation(response *smithyhttp.Resp
 
 	output := &types.UnsupportedOperation{}
 	err := awsAwsjson11_deserializeDocumentUnsupportedOperation(&output, shape)
+
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	return output
+}
+
+func awsAwsjson11_deserializeErrorVolumeNotFound(response *smithyhttp.Response, errorBody *bytes.Reader) error {
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	output := &types.VolumeNotFound{}
+	err := awsAwsjson11_deserializeDocumentVolumeNotFound(&output, shape)
 
 	if err != nil {
 		var snapshot bytes.Buffer
@@ -3409,6 +4633,11 @@ func awsAwsjson11_deserializeDocumentAdministrativeAction(v **types.Administrati
 
 		case "TargetFileSystemValues":
 			if err := awsAwsjson11_deserializeDocumentFileSystem(&sv.TargetFileSystemValues, value); err != nil {
+				return err
+			}
+
+		case "TargetVolumeValues":
+			if err := awsAwsjson11_deserializeDocumentVolume(&sv.TargetVolumeValues, value); err != nil {
 				return err
 			}
 
@@ -3689,6 +4918,15 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 				sv.ResourceARN = ptr.String(jtv)
 			}
 
+		case "ResourceType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceType to be of type string, got %T instead", value)
+				}
+				sv.ResourceType = types.ResourceType(jtv)
+			}
+
 		case "SourceBackupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -3719,6 +4957,11 @@ func awsAwsjson11_deserializeDocumentBackup(v **types.Backup, value interface{})
 					return fmt.Errorf("expected BackupType to be of type string, got %T instead", value)
 				}
 				sv.Type = types.BackupType(jtv)
+			}
+
+		case "Volume":
+			if err := awsAwsjson11_deserializeDocumentVolume(&sv.Volume, value); err != nil {
+				return err
 			}
 
 		default:
@@ -4769,6 +6012,104 @@ func awsAwsjson11_deserializeDocumentDeleteFileSystemWindowsResponse(v **types.D
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDeleteVolumeOntapResponse(v **types.DeleteVolumeOntapResponse, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DeleteVolumeOntapResponse
+	if *v == nil {
+		sv = &types.DeleteVolumeOntapResponse{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FinalBackupId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected BackupId to be of type string, got %T instead", value)
+				}
+				sv.FinalBackupId = ptr.String(jtv)
+			}
+
+		case "FinalBackupTags":
+			if err := awsAwsjson11_deserializeDocumentTags(&sv.FinalBackupTags, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDiskIopsConfiguration(v **types.DiskIopsConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DiskIopsConfiguration
+	if *v == nil {
+		sv = &types.DiskIopsConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Iops":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected Iops to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.Iops = ptr.Int64(i64)
+			}
+
+		case "Mode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DiskIopsConfigurationMode to be of type string, got %T instead", value)
+				}
+				sv.Mode = types.DiskIopsConfigurationMode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentDnsIps(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -4908,6 +6249,11 @@ func awsAwsjson11_deserializeDocumentFileSystem(v **types.FileSystem, value inte
 				return err
 			}
 
+		case "OntapConfiguration":
+			if err := awsAwsjson11_deserializeDocumentOntapFileSystemConfiguration(&sv.OntapConfiguration, value); err != nil {
+				return err
+			}
+
 		case "OwnerId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4969,6 +6315,92 @@ func awsAwsjson11_deserializeDocumentFileSystem(v **types.FileSystem, value inte
 
 		case "WindowsConfiguration":
 			if err := awsAwsjson11_deserializeDocumentWindowsFileSystemConfiguration(&sv.WindowsConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFileSystemEndpoint(v **types.FileSystemEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileSystemEndpoint
+	if *v == nil {
+		sv = &types.FileSystemEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DNSName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DNSName to be of type string, got %T instead", value)
+				}
+				sv.DNSName = ptr.String(jtv)
+			}
+
+		case "IpAddresses":
+			if err := awsAwsjson11_deserializeDocumentOntapEndpointIpAddresses(&sv.IpAddresses, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentFileSystemEndpoints(v **types.FileSystemEndpoints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.FileSystemEndpoints
+	if *v == nil {
+		sv = &types.FileSystemEndpoints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Intercluster":
+			if err := awsAwsjson11_deserializeDocumentFileSystemEndpoint(&sv.Intercluster, value); err != nil {
+				return err
+			}
+
+		case "Management":
+			if err := awsAwsjson11_deserializeDocumentFileSystemEndpoint(&sv.Management, value); err != nil {
 				return err
 			}
 
@@ -5402,6 +6834,15 @@ func awsAwsjson11_deserializeDocumentInvalidNetworkSettings(v **types.InvalidNet
 
 	for key, value := range shape {
 		switch key {
+		case "InvalidRouteTableId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RouteTableId to be of type string, got %T instead", value)
+				}
+				sv.InvalidRouteTableId = ptr.String(jtv)
+			}
+
 		case "InvalidSecurityGroupId":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5534,6 +6975,46 @@ func awsAwsjson11_deserializeDocumentInvalidSourceKmsKey(v **types.InvalidSource
 	var sv *types.InvalidSourceKmsKey
 	if *v == nil {
 		sv = &types.InvalidSourceKmsKey{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentLifecycleTransitionReason(v **types.LifecycleTransitionReason, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.LifecycleTransitionReason
+	if *v == nil {
+		sv = &types.LifecycleTransitionReason{}
 	} else {
 		sv = *v
 	}
@@ -5723,6 +7204,46 @@ func awsAwsjson11_deserializeDocumentMissingFileSystemConfiguration(v **types.Mi
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentMissingVolumeConfiguration(v **types.MissingVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.MissingVolumeConfiguration
+	if *v == nil {
+		sv = &types.MissingVolumeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentNetworkInterfaceIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -5797,6 +7318,280 @@ func awsAwsjson11_deserializeDocumentNotServiceResourceError(v **types.NotServic
 					return fmt.Errorf("expected ResourceARN to be of type string, got %T instead", value)
 				}
 				sv.ResourceARN = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOntapEndpointIpAddresses(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected IpAddress to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOntapFileSystemConfiguration(v **types.OntapFileSystemConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OntapFileSystemConfiguration
+	if *v == nil {
+		sv = &types.OntapFileSystemConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "AutomaticBackupRetentionDays":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected AutomaticBackupRetentionDays to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.AutomaticBackupRetentionDays = ptr.Int32(int32(i64))
+			}
+
+		case "DailyAutomaticBackupStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DailyTime to be of type string, got %T instead", value)
+				}
+				sv.DailyAutomaticBackupStartTime = ptr.String(jtv)
+			}
+
+		case "DeploymentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OntapDeploymentType to be of type string, got %T instead", value)
+				}
+				sv.DeploymentType = types.OntapDeploymentType(jtv)
+			}
+
+		case "DiskIopsConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDiskIopsConfiguration(&sv.DiskIopsConfiguration, value); err != nil {
+				return err
+			}
+
+		case "EndpointIpAddressRange":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected IpAddressRange to be of type string, got %T instead", value)
+				}
+				sv.EndpointIpAddressRange = ptr.String(jtv)
+			}
+
+		case "Endpoints":
+			if err := awsAwsjson11_deserializeDocumentFileSystemEndpoints(&sv.Endpoints, value); err != nil {
+				return err
+			}
+
+		case "PreferredSubnetId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SubnetId to be of type string, got %T instead", value)
+				}
+				sv.PreferredSubnetId = ptr.String(jtv)
+			}
+
+		case "RouteTableIds":
+			if err := awsAwsjson11_deserializeDocumentRouteTableIds(&sv.RouteTableIds, value); err != nil {
+				return err
+			}
+
+		case "ThroughputCapacity":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected MegabytesPerSecond to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.ThroughputCapacity = ptr.Int32(int32(i64))
+			}
+
+		case "WeeklyMaintenanceStartTime":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected WeeklyTime to be of type string, got %T instead", value)
+				}
+				sv.WeeklyMaintenanceStartTime = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentOntapVolumeConfiguration(v **types.OntapVolumeConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.OntapVolumeConfiguration
+	if *v == nil {
+		sv = &types.OntapVolumeConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "FlexCacheEndpointType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FlexCacheEndpointType to be of type string, got %T instead", value)
+				}
+				sv.FlexCacheEndpointType = types.FlexCacheEndpointType(jtv)
+			}
+
+		case "JunctionPath":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected JunctionPath to be of type string, got %T instead", value)
+				}
+				sv.JunctionPath = ptr.String(jtv)
+			}
+
+		case "OntapVolumeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OntapVolumeType to be of type string, got %T instead", value)
+				}
+				sv.OntapVolumeType = types.OntapVolumeType(jtv)
+			}
+
+		case "SecurityStyle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SecurityStyle to be of type string, got %T instead", value)
+				}
+				sv.SecurityStyle = types.SecurityStyle(jtv)
+			}
+
+		case "SizeInMegabytes":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected VolumeCapacity to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.SizeInMegabytes = ptr.Int32(int32(i64))
+			}
+
+		case "StorageEfficiencyEnabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.StorageEfficiencyEnabled = ptr.Bool(jtv)
+			}
+
+		case "StorageVirtualMachineId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineId to be of type string, got %T instead", value)
+				}
+				sv.StorageVirtualMachineId = ptr.String(jtv)
+			}
+
+		case "StorageVirtualMachineRoot":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Flag to be of type *bool, got %T instead", value)
+				}
+				sv.StorageVirtualMachineRoot = ptr.Bool(jtv)
+			}
+
+		case "TieringPolicy":
+			if err := awsAwsjson11_deserializeDocumentTieringPolicy(&sv.TieringPolicy, value); err != nil {
+				return err
+			}
+
+		case "UUID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+				}
+				sv.UUID = ptr.String(jtv)
 			}
 
 		default:
@@ -5903,6 +7698,42 @@ func awsAwsjson11_deserializeDocumentResourceNotFound(v **types.ResourceNotFound
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRouteTableIds(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RouteTableId to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -6076,6 +7907,219 @@ func awsAwsjson11_deserializeDocumentSourceBackupUnavailable(v **types.SourceBac
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentStorageVirtualMachine(v **types.StorageVirtualMachine, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StorageVirtualMachine
+	if *v == nil {
+		sv = &types.StorageVirtualMachine{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ActiveDirectoryConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSvmActiveDirectoryConfiguration(&sv.ActiveDirectoryConfiguration, value); err != nil {
+				return err
+			}
+
+		case "CreationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreationTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "Endpoints":
+			if err := awsAwsjson11_deserializeDocumentSvmEndpoints(&sv.Endpoints, value); err != nil {
+				return err
+			}
+
+		case "FileSystemId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSystemId to be of type string, got %T instead", value)
+				}
+				sv.FileSystemId = ptr.String(jtv)
+			}
+
+		case "Lifecycle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineLifecycle to be of type string, got %T instead", value)
+				}
+				sv.Lifecycle = types.StorageVirtualMachineLifecycle(jtv)
+			}
+
+		case "LifecycleTransitionReason":
+			if err := awsAwsjson11_deserializeDocumentLifecycleTransitionReason(&sv.LifecycleTransitionReason, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "ResourceARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceARN to be of type string, got %T instead", value)
+				}
+				sv.ResourceARN = ptr.String(jtv)
+			}
+
+		case "RootVolumeSecurityStyle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineRootVolumeSecurityStyle to be of type string, got %T instead", value)
+				}
+				sv.RootVolumeSecurityStyle = types.StorageVirtualMachineRootVolumeSecurityStyle(jtv)
+			}
+
+		case "StorageVirtualMachineId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineId to be of type string, got %T instead", value)
+				}
+				sv.StorageVirtualMachineId = ptr.String(jtv)
+			}
+
+		case "Subtype":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineSubtype to be of type string, got %T instead", value)
+				}
+				sv.Subtype = types.StorageVirtualMachineSubtype(jtv)
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "UUID":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected UUID to be of type string, got %T instead", value)
+				}
+				sv.UUID = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStorageVirtualMachineNotFound(v **types.StorageVirtualMachineNotFound, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.StorageVirtualMachineNotFound
+	if *v == nil {
+		sv = &types.StorageVirtualMachineNotFound{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentStorageVirtualMachines(v *[]types.StorageVirtualMachine, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.StorageVirtualMachine
+	if *v == nil {
+		cv = []types.StorageVirtualMachine{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.StorageVirtualMachine
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentStorageVirtualMachine(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentSubnetIds(v *[]string, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6109,6 +8153,147 @@ func awsAwsjson11_deserializeDocumentSubnetIds(v *[]string, value interface{}) e
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSvmActiveDirectoryConfiguration(v **types.SvmActiveDirectoryConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SvmActiveDirectoryConfiguration
+	if *v == nil {
+		sv = &types.SvmActiveDirectoryConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NetBiosName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NetBiosAlias to be of type string, got %T instead", value)
+				}
+				sv.NetBiosName = ptr.String(jtv)
+			}
+
+		case "SelfManagedActiveDirectoryConfiguration":
+			if err := awsAwsjson11_deserializeDocumentSelfManagedActiveDirectoryAttributes(&sv.SelfManagedActiveDirectoryConfiguration, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSvmEndpoint(v **types.SvmEndpoint, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SvmEndpoint
+	if *v == nil {
+		sv = &types.SvmEndpoint{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DNSName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DNSName to be of type string, got %T instead", value)
+				}
+				sv.DNSName = ptr.String(jtv)
+			}
+
+		case "IpAddresses":
+			if err := awsAwsjson11_deserializeDocumentOntapEndpointIpAddresses(&sv.IpAddresses, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSvmEndpoints(v **types.SvmEndpoints, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SvmEndpoints
+	if *v == nil {
+		sv = &types.SvmEndpoints{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Iscsi":
+			if err := awsAwsjson11_deserializeDocumentSvmEndpoint(&sv.Iscsi, value); err != nil {
+				return err
+			}
+
+		case "Management":
+			if err := awsAwsjson11_deserializeDocumentSvmEndpoint(&sv.Management, value); err != nil {
+				return err
+			}
+
+		case "Nfs":
+			if err := awsAwsjson11_deserializeDocumentSvmEndpoint(&sv.Nfs, value); err != nil {
+				return err
+			}
+
+		case "Smb":
+			if err := awsAwsjson11_deserializeDocumentSvmEndpoint(&sv.Smb, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -6195,6 +8380,59 @@ func awsAwsjson11_deserializeDocumentTags(v *[]types.Tag, value interface{}) err
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentTieringPolicy(v **types.TieringPolicy, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.TieringPolicy
+	if *v == nil {
+		sv = &types.TieringPolicy{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CoolingPeriod":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected CoolingPeriod to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.CoolingPeriod = ptr.Int32(int32(i64))
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected TieringPolicyName to be of type string, got %T instead", value)
+				}
+				sv.Name = types.TieringPolicyName(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentUnsupportedOperation(v **types.UnsupportedOperation, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6232,6 +8470,196 @@ func awsAwsjson11_deserializeDocumentUnsupportedOperation(v **types.UnsupportedO
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVolume(v **types.Volume, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Volume
+	if *v == nil {
+		sv = &types.Volume{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "CreationTime":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.CreationTime = ptr.Time(smithytime.ParseEpochSeconds(f64))
+
+				default:
+					return fmt.Errorf("expected CreationTime to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "FileSystemId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected FileSystemId to be of type string, got %T instead", value)
+				}
+				sv.FileSystemId = ptr.String(jtv)
+			}
+
+		case "Lifecycle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeLifecycle to be of type string, got %T instead", value)
+				}
+				sv.Lifecycle = types.VolumeLifecycle(jtv)
+			}
+
+		case "LifecycleTransitionReason":
+			if err := awsAwsjson11_deserializeDocumentLifecycleTransitionReason(&sv.LifecycleTransitionReason, value); err != nil {
+				return err
+			}
+
+		case "Name":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeName to be of type string, got %T instead", value)
+				}
+				sv.Name = ptr.String(jtv)
+			}
+
+		case "OntapConfiguration":
+			if err := awsAwsjson11_deserializeDocumentOntapVolumeConfiguration(&sv.OntapConfiguration, value); err != nil {
+				return err
+			}
+
+		case "ResourceARN":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ResourceARN to be of type string, got %T instead", value)
+				}
+				sv.ResourceARN = ptr.String(jtv)
+			}
+
+		case "Tags":
+			if err := awsAwsjson11_deserializeDocumentTags(&sv.Tags, value); err != nil {
+				return err
+			}
+
+		case "VolumeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeId to be of type string, got %T instead", value)
+				}
+				sv.VolumeId = ptr.String(jtv)
+			}
+
+		case "VolumeType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeType to be of type string, got %T instead", value)
+				}
+				sv.VolumeType = types.VolumeType(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVolumeNotFound(v **types.VolumeNotFound, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.VolumeNotFound
+	if *v == nil {
+		sv = &types.VolumeNotFound{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Message":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
+				}
+				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentVolumes(v *[]types.Volume, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.Volume
+	if *v == nil {
+		cv = []types.Volume{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.Volume
+		destAddr := &col
+		if err := awsAwsjson11_deserializeDocumentVolume(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 
@@ -6707,6 +9135,114 @@ func awsAwsjson11_deserializeOpDocumentCreateFileSystemOutput(v **CreateFileSyst
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentCreateStorageVirtualMachineOutput(v **CreateStorageVirtualMachineOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateStorageVirtualMachineOutput
+	if *v == nil {
+		sv = &CreateStorageVirtualMachineOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StorageVirtualMachine":
+			if err := awsAwsjson11_deserializeDocumentStorageVirtualMachine(&sv.StorageVirtualMachine, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentCreateVolumeFromBackupOutput(v **CreateVolumeFromBackupOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateVolumeFromBackupOutput
+	if *v == nil {
+		sv = &CreateVolumeFromBackupOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Volume":
+			if err := awsAwsjson11_deserializeDocumentVolume(&sv.Volume, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentCreateVolumeOutput(v **CreateVolumeOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *CreateVolumeOutput
+	if *v == nil {
+		sv = &CreateVolumeOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Volume":
+			if err := awsAwsjson11_deserializeDocumentVolume(&sv.Volume, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentDeleteBackupOutput(v **DeleteBackupOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -6804,6 +9340,109 @@ func awsAwsjson11_deserializeOpDocumentDeleteFileSystemOutput(v **DeleteFileSyst
 		case "WindowsResponse":
 			if err := awsAwsjson11_deserializeDocumentDeleteFileSystemWindowsResponse(&sv.WindowsResponse, value); err != nil {
 				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDeleteStorageVirtualMachineOutput(v **DeleteStorageVirtualMachineOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteStorageVirtualMachineOutput
+	if *v == nil {
+		sv = &DeleteStorageVirtualMachineOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Lifecycle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineLifecycle to be of type string, got %T instead", value)
+				}
+				sv.Lifecycle = types.StorageVirtualMachineLifecycle(jtv)
+			}
+
+		case "StorageVirtualMachineId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected StorageVirtualMachineId to be of type string, got %T instead", value)
+				}
+				sv.StorageVirtualMachineId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDeleteVolumeOutput(v **DeleteVolumeOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DeleteVolumeOutput
+	if *v == nil {
+		sv = &DeleteVolumeOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Lifecycle":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeLifecycle to be of type string, got %T instead", value)
+				}
+				sv.Lifecycle = types.VolumeLifecycle(jtv)
+			}
+
+		case "OntapResponse":
+			if err := awsAwsjson11_deserializeDocumentDeleteVolumeOntapResponse(&sv.OntapResponse, value); err != nil {
+				return err
+			}
+
+		case "VolumeId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected VolumeId to be of type string, got %T instead", value)
+				}
+				sv.VolumeId = ptr.String(jtv)
 			}
 
 		default:
@@ -6995,6 +9634,96 @@ func awsAwsjson11_deserializeOpDocumentDescribeFileSystemsOutput(v **DescribeFil
 	return nil
 }
 
+func awsAwsjson11_deserializeOpDocumentDescribeStorageVirtualMachinesOutput(v **DescribeStorageVirtualMachinesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeStorageVirtualMachinesOutput
+	if *v == nil {
+		sv = &DescribeStorageVirtualMachinesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "StorageVirtualMachines":
+			if err := awsAwsjson11_deserializeDocumentStorageVirtualMachines(&sv.StorageVirtualMachines, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentDescribeVolumesOutput(v **DescribeVolumesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *DescribeVolumesOutput
+	if *v == nil {
+		sv = &DescribeVolumesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "NextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected NextToken to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		case "Volumes":
+			if err := awsAwsjson11_deserializeDocumentVolumes(&sv.Volumes, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeOpDocumentDisassociateFileSystemAliasesOutput(v **DisassociateFileSystemAliasesOutput, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7162,6 +9891,78 @@ func awsAwsjson11_deserializeOpDocumentUpdateFileSystemOutput(v **UpdateFileSyst
 		switch key {
 		case "FileSystem":
 			if err := awsAwsjson11_deserializeDocumentFileSystem(&sv.FileSystem, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUpdateStorageVirtualMachineOutput(v **UpdateStorageVirtualMachineOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateStorageVirtualMachineOutput
+	if *v == nil {
+		sv = &UpdateStorageVirtualMachineOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "StorageVirtualMachine":
+			if err := awsAwsjson11_deserializeDocumentStorageVirtualMachine(&sv.StorageVirtualMachine, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeOpDocumentUpdateVolumeOutput(v **UpdateVolumeOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *UpdateVolumeOutput
+	if *v == nil {
+		sv = &UpdateVolumeOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Volume":
+			if err := awsAwsjson11_deserializeDocumentVolume(&sv.Volume, value); err != nil {
 				return err
 			}
 

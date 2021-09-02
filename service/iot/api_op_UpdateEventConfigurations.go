@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the event configurations.
+// Updates the event configurations. Requires permission to access the
+// UpdateEventConfigurations
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateEventConfigurations(ctx context.Context, params *UpdateEventConfigurationsInput, optFns ...func(*Options)) (*UpdateEventConfigurationsOutput, error) {
 	if params == nil {
 		params = &UpdateEventConfigurationsInput{}

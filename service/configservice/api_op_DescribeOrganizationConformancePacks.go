@@ -34,7 +34,7 @@ func (c *Client) DescribeOrganizationConformancePacks(ctx context.Context, param
 type DescribeOrganizationConformancePacksInput struct {
 
 	// The maximum number of organization config packs returned on each page. If you do
-	// no specify a number, AWS Config uses the default. The default is 100.
+	// no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -134,7 +134,7 @@ var _ DescribeOrganizationConformancePacksAPIClient = (*Client)(nil)
 // for DescribeOrganizationConformancePacks
 type DescribeOrganizationConformancePacksPaginatorOptions struct {
 	// The maximum number of organization config packs returned on each page. If you do
-	// no specify a number, AWS Config uses the default. The default is 100.
+	// no specify a number, Config uses the default. The default is 100.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

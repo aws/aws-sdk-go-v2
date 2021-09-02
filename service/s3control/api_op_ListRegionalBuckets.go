@@ -41,7 +41,7 @@ func (c *Client) ListRegionalBuckets(ctx context.Context, params *ListRegionalBu
 
 type ListRegionalBucketsInput struct {
 
-	// The account ID of the Outposts bucket.
+	// The Amazon Web Services account ID of the Outposts bucket.
 	//
 	// This member is required.
 	AccountId *string

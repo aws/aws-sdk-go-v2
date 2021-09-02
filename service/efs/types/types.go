@@ -28,7 +28,7 @@ type AccessPointDescription struct {
 	// The name of the access point. This is the value of the Name tag.
 	Name *string
 
-	// Identified the AWS account that owns the access point resource.
+	// Identified the Amazon Web Services account that owns the access point resource.
 	OwnerId *string
 
 	// The full POSIX identity, including the user ID, group ID, and secondary group
@@ -136,8 +136,9 @@ type FileSystemDescription struct {
 	// This member is required.
 	NumberOfMountTargets int32
 
-	// The AWS account that created the file system. If the file system was created by
-	// an IAM user, the parent account to which the user belongs is the owner.
+	// The Amazon Web Services account that created the file system. If the file system
+	// was created by an IAM user, the parent account to which the user belongs is the
+	// owner.
 	//
 	// This member is required.
 	OwnerId *string
@@ -167,13 +168,13 @@ type FileSystemDescription struct {
 
 	// The unique and consistent identifier of the Availability Zone in which the file
 	// system's One Zone storage classes exist. For example, use1-az1 is an
-	// Availability Zone ID for the us-east-1 AWS Region, and it has the same location
-	// in every AWS account.
+	// Availability Zone ID for the us-east-1 Amazon Web Services Region, and it has
+	// the same location in every Amazon Web Services account.
 	AvailabilityZoneId *string
 
-	// Describes the AWS Availability Zone in which the file system is located, and is
-	// valid only for file systems using One Zone storage classes. For more
-	// information, see Using EFS storage classes
+	// Describes the Amazon Web Services Availability Zone in which the file system is
+	// located, and is valid only for file systems using One Zone storage classes. For
+	// more information, see Using EFS storage classes
 	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
 	// EFS User Guide.
 	AvailabilityZoneName *string
@@ -187,8 +188,8 @@ type FileSystemDescription struct {
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
-	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that
-	// was used to protect the encrypted file system.
+	// The ID of an Key Management Service customer master key (CMK) that was used to
+	// protect the encrypted file system.
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,
@@ -242,10 +243,14 @@ type FileSystemSize struct {
 // Infrequent Access (IA) storage class.
 type LifecyclePolicy struct {
 
-	// A value that describes the period of time that a file is not accessed, after
-	// which it transitions to the IA storage class. Metadata operations such as
-	// listing the contents of a directory don't count as file access events.
+	// Describes the period of time that a file is not accessed, after which it
+	// transitions to the IA storage class. Metadata operations such as listing the
+	// contents of a directory don't count as file access events.
 	TransitionToIA TransitionToIARules
+
+	// Describes the policy used to transition a file from infequent access storage to
+	// primary storage.
+	TransitionToPrimaryStorageClass TransitionToPrimaryStorageClassRules
 
 	noSmithyDocumentSerde
 }
@@ -275,13 +280,14 @@ type MountTargetDescription struct {
 
 	// The unique and consistent identifier of the Availability Zone that the mount
 	// target resides in. For example, use1-az1 is an AZ ID for the us-east-1 Region
-	// and it has the same location in every AWS account.
+	// and it has the same location in every Amazon Web Services account.
 	AvailabilityZoneId *string
 
 	// The name of the Availability Zone in which the mount target is located.
-	// Availability Zones are independently mapped to names for each AWS account. For
-	// example, the Availability Zone us-east-1a for your AWS account might not be the
-	// same location as us-east-1a for another AWS account.
+	// Availability Zones are independently mapped to names for each Amazon Web
+	// Services account. For example, the Availability Zone us-east-1a for your Amazon
+	// Web Services account might not be the same location as us-east-1a for another
+	// Amazon Web Services account.
 	AvailabilityZoneName *string
 
 	// Address at which the file system can be mounted by using the mount target.
@@ -291,7 +297,7 @@ type MountTargetDescription struct {
 	// mount target.
 	NetworkInterfaceId *string
 
-	// AWS account ID that owns the resource.
+	// Amazon Web Services account ID that owns the resource.
 	OwnerId *string
 
 	// The virtual private cloud (VPC) ID that the mount target is configured in.
@@ -322,13 +328,16 @@ type PosixUser struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the resource type and its ID preference for the user's Amazon Web
+// Services account, in the current Amazon Web Services Region.
 type ResourceIdPreference struct {
 
-	// A preference indicating a choice to use 63bit/32bit IDs for all applicable
-	// resources.
+	// Identifies the EFS resource ID preference, either LONG_ID (17 characters) or
+	// SHORT_ID (8 characters).
 	ResourceIdType ResourceIdType
 
-	// EFS resources to which a preference applies to.
+	// Identifies the Amazon EFS resources to which the ID preference setting applies,
+	// FILE_SYSTEM and MOUNT_TARGET.
 	Resources []Resource
 
 	noSmithyDocumentSerde

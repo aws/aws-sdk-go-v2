@@ -35,14 +35,14 @@ type UpdateAnalysisInput struct {
 	// This member is required.
 	AnalysisId *string
 
-	// The ID of the Amazon Web Services account; that contains the analysis that
-	// you're updating.
+	// The ID of the Amazon Web Services account that contains the analysis that you're
+	// updating.
 	//
 	// This member is required.
 	AwsAccountId *string
 
 	// A descriptive name for the analysis that you're updating. This name displays for
-	// the analysis in the QuickSight console.
+	// the analysis in the Amazon QuickSight console.
 	//
 	// This member is required.
 	Name *string
@@ -59,8 +59,8 @@ type UpdateAnalysisInput struct {
 	Parameters *types.Parameters
 
 	// The Amazon Resource Name (ARN) for the theme to apply to the analysis that
-	// you're creating. To see the theme in the QuickSight console, make sure that you
-	// have access to it.
+	// you're creating. To see the theme in the Amazon QuickSight console, make sure
+	// that you have access to it.
 	ThemeArn *string
 
 	noSmithyDocumentSerde

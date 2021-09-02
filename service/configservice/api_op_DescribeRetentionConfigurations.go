@@ -14,8 +14,8 @@ import (
 
 // Returns the details of one or more retention configurations. If the retention
 // configuration name is not specified, this action returns the details for all the
-// retention configurations for that account. Currently, AWS Config supports only
-// one retention configuration per region in your account.
+// retention configurations for that account. Currently, Config supports only one
+// retention configuration per region in your account.
 func (c *Client) DescribeRetentionConfigurations(ctx context.Context, params *DescribeRetentionConfigurationsInput, optFns ...func(*Options)) (*DescribeRetentionConfigurationsOutput, error) {
 	if params == nil {
 		params = &DescribeRetentionConfigurationsInput{}
@@ -38,9 +38,9 @@ type DescribeRetentionConfigurationsInput struct {
 	NextToken *string
 
 	// A list of names of retention configurations for which you want details. If you
-	// do not specify a name, AWS Config returns details for all the retention
-	// configurations for that account. Currently, AWS Config supports only one
-	// retention configuration per region in your account.
+	// do not specify a name, Config returns details for all the retention
+	// configurations for that account. Currently, Config supports only one retention
+	// configuration per region in your account.
 	RetentionConfigurationNames []string
 
 	noSmithyDocumentSerde

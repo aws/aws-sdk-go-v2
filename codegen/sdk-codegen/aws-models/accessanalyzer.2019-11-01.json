@@ -81,7 +81,7 @@
                 },
                 "aws.protocols#restJson1": {},
                 "smithy.api#cors": {},
-                "smithy.api#documentation": "<p>AWS IAM Access Analyzer helps identify potential resource-access risks by enabling you to identify\n         any policies that grant access to an external principal. It does this by using logic-based\n         reasoning to analyze resource-based policies in your AWS environment. An external\n         principal can be another AWS account, a root user, an IAM user or role, a federated\n         user, an AWS service, or an anonymous user. You can also use Access Analyzer to preview and\n         validate public and cross-account access to your resources before deploying permissions\n         changes. This guide describes the AWS IAM Access Analyzer operations that you can call\n         programmatically. For general information about Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">AWS IAM Access Analyzer</a> in the <b>IAM User Guide</b>.</p>\n         <p>To start using Access Analyzer, you first need to create an analyzer.</p>",
+                "smithy.api#documentation": "<p>Identity and Access Management Access Analyzer helps identify potential resource-access risks by enabling you to\n         identify any policies that grant access to an external principal. It does this by using\n         logic-based reasoning to analyze resource-based policies in your Amazon Web Services environment. An\n         external principal can be another Amazon Web Services account, a root user, an IAM user or role, a\n         federated user, an Amazon Web Services service, or an anonymous user. You can also use IAM Access Analyzer to\n         preview and validate public and cross-account access to your resources before deploying\n         permissions changes. This guide describes the Identity and Access Management Access Analyzer operations that you can\n         call programmatically. For general information about IAM Access Analyzer, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/what-is-access-analyzer.html\">Identity and Access Management Access Analyzer</a> in the <b>IAM User Guide</b>.</p>\n         <p>To start using IAM Access Analyzer, you first need to create an analyzer.</p>",
                 "smithy.api#paginated": {
                     "inputToken": "nextToken",
                     "outputToken": "nextToken",
@@ -109,7 +109,7 @@
         "com.amazonaws.accessanalyzer#AccessPointArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:[^:]*:s3:[^:]*:[^:]*:accesspoint/.*$"
+                "smithy.api#pattern": "^arn:[^:]*:s3:[^:]*:[^:]*:accesspoint/.*$"
             }
         },
         "com.amazonaws.accessanalyzer#AccessPointPolicy": {
@@ -177,7 +177,7 @@
                 "existingFindingId": {
                     "target": "com.amazonaws.accessanalyzer#FindingId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The existing ID of the finding in Access Analyzer, provided only for existing findings.</p>"
+                        "smithy.api#documentation": "<p>The existing ID of the finding in IAM Access Analyzer, provided only for existing\n         findings.</p>"
                     }
                 },
                 "existingFindingStatus": {
@@ -233,7 +233,7 @@
                 "changeType": {
                     "target": "com.amazonaws.accessanalyzer#FindingChangeType",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides context on how the access preview finding compares to existing access\n         identified in Access Analyzer.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>New</code> - The finding is for newly-introduced access.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Unchanged</code> - The preview finding is an existing finding that would\n               remain unchanged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Changed</code> - The preview finding is an existing finding with a change in\n               status.</p>\n            </li>\n         </ul>\n         <p>For example, a <code>Changed</code> finding with preview status <code>Resolved</code>\n         and existing status <code>Active</code> indicates the existing <code>Active</code> finding\n         would become <code>Resolved</code> as a result of the proposed permissions change.</p>",
+                        "smithy.api#documentation": "<p>Provides context on how the access preview finding compares to existing access\n         identified in IAM Access Analyzer.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>New</code> - The finding is for newly-introduced access.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Unchanged</code> - The preview finding is an existing finding that would\n               remain unchanged.</p>\n            </li>\n            <li>\n               <p>\n                  <code>Changed</code> - The preview finding is an existing finding with a change in\n               status.</p>\n            </li>\n         </ul>\n         <p>For example, a <code>Changed</code> finding with preview status <code>Resolved</code>\n         and existing status <code>Active</code> indicates the existing <code>Active</code> finding\n         would become <code>Resolved</code> as a result of the proposed permissions change.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -247,7 +247,7 @@
                 "resourceOwnerAccount": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the resource. For most AWS resources, the owning\n         account is the account in which the resource was created.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the resource. For most Amazon Web Services resources, the owning\n         account is the account in which the resource was created.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -386,7 +386,7 @@
                 "id": {
                     "target": "com.amazonaws.accessanalyzer#AclCanonicalId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The value specified is the canonical user ID of an AWS account.</p>"
+                        "smithy.api#documentation": "<p>The value specified is the canonical user ID of an Amazon Web Services account.</p>"
                     }
                 },
                 "uri": {
@@ -502,7 +502,7 @@
                 "resourceOwnerAccount": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -530,7 +530,7 @@
                 "resourceOwnerAccount": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -667,14 +667,14 @@
                 "status": {
                     "target": "com.amazonaws.accessanalyzer#AnalyzerStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors\n         supported resources and generates new findings. The analyzer is <code>Disabled</code> when\n         a user action, such as removing trusted access for AWS IAM Access Analyzer from AWS Organizations,\n         causes the analyzer to stop generating new findings. The status is <code>Creating</code>\n         when the analyzer creation is in progress and <code>Failed</code> when the analyzer\n         creation has failed. </p>",
+                        "smithy.api#documentation": "<p>The status of the analyzer. An <code>Active</code> analyzer successfully monitors\n         supported resources and generates new findings. The analyzer is <code>Disabled</code> when\n         a user action, such as removing trusted access for Identity and Access Management Access Analyzer from Organizations, causes\n         the analyzer to stop generating new findings. The status is <code>Creating</code> when the\n         analyzer creation is in progress and <code>Failed</code> when the analyzer creation has\n         failed. </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "statusReason": {
                     "target": "com.amazonaws.accessanalyzer#StatusReason",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>statusReason</code> provides more details about the current status of the\n         analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status\n         is returned. For an analyzer with organization as the type, this failure can be due to an\n         issue with creating the service-linked roles required in the member accounts of the AWS\n         organization.</p>"
+                        "smithy.api#documentation": "<p>The <code>statusReason</code> provides more details about the current status of the\n         analyzer. For example, if the creation for the analyzer fails, a <code>Failed</code> status\n         is returned. For an analyzer with organization as the type, this failure can be due to an\n         issue with creating the service-linked roles required in the member accounts of the Amazon Web Services\n         organization.</p>"
                     }
                 }
             },
@@ -878,7 +878,7 @@
         "com.amazonaws.accessanalyzer#CloudTrailArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:[^:]*:cloudtrail:[^:]*:[^:]*:trail/.{1,576}$"
+                "smithy.api#pattern": "^arn:[^:]*:cloudtrail:[^:]*:[^:]*:trail/.{1,576}$"
             }
         },
         "com.amazonaws.accessanalyzer#CloudTrailDetails": {
@@ -894,21 +894,21 @@
                 "accessRole": {
                     "target": "com.amazonaws.accessanalyzer#RoleArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the service role that Access Analyzer uses to access your CloudTrail trail and\n         service last accessed information.</p>",
+                        "smithy.api#documentation": "<p>The ARN of the service role that IAM Access Analyzer uses to access your CloudTrail trail and\n         service last accessed information.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "startTime": {
                     "target": "com.amazonaws.accessanalyzer#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time range for which Access Analyzer reviews your CloudTrail events. Events\n         with a timestamp before this time are not considered to generate a policy.</p>",
+                        "smithy.api#documentation": "<p>The start of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events\n         with a timestamp before this time are not considered to generate a policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.accessanalyzer#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with\n         a timestamp after this time are not considered to generate a policy. If this is not\n         included in the request, the default value is the current time.</p>"
+                        "smithy.api#documentation": "<p>The end of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events with\n         a timestamp after this time are not considered to generate a policy. If this is not\n         included in the request, the default value is the current time.</p>"
                     }
                 }
             },
@@ -929,14 +929,14 @@
                 "startTime": {
                     "target": "com.amazonaws.accessanalyzer#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The start of the time range for which Access Analyzer reviews your CloudTrail events. Events\n         with a timestamp before this time are not considered to generate a policy.</p>",
+                        "smithy.api#documentation": "<p>The start of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events\n         with a timestamp before this time are not considered to generate a policy.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "endTime": {
                     "target": "com.amazonaws.accessanalyzer#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The end of the time range for which Access Analyzer reviews your CloudTrail events. Events with\n         a timestamp after this time are not considered to generate a policy. If this is not\n         included in the request, the default value is the current time.</p>",
+                        "smithy.api#documentation": "<p>The end of the time range for which IAM Access Analyzer reviews your CloudTrail events. Events with\n         a timestamp after this time are not considered to generate a policy. If this is not\n         included in the request, the default value is the current time.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -984,7 +984,7 @@
                 "sqsQueue": {
                     "target": "com.amazonaws.accessanalyzer#SqsQueueConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The access control configuration is for an SQS queue. </p>"
+                        "smithy.api#documentation": "<p>The access control configuration is for an Amazon SQS queue. </p>"
                     }
                 }
             },
@@ -1066,7 +1066,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an access preview that allows you to preview Access Analyzer findings for your resource\n         before deploying resource permissions.</p>",
+                "smithy.api#documentation": "<p>Creates an access preview that allows you to preview IAM Access Analyzer findings for your\n         resource before deploying resource permissions.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/access-preview",
@@ -1235,7 +1235,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive\n         new findings that meet the criteria you define when you create the rule.</p>\n         <p>To learn about filter keys that you can use to create an archive rule, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">Access Analyzer filter keys</a> in the <b>IAM User\n         Guide</b>.</p>",
+                "smithy.api#documentation": "<p>Creates an archive rule for the specified analyzer. Archive rules automatically archive\n         new findings that meet the criteria you define when you create the rule.</p>\n         <p>To learn about filter keys that you can use to create an archive rule, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>",
                 "smithy.api#http": {
                     "method": "PUT",
                     "uri": "/analyzer/{analyzerName}/archive-rule",
@@ -1336,7 +1336,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes the specified analyzer. When you delete an analyzer, Access Analyzer is disabled for the\n         account or organization in the current or specific Region. All findings that were generated\n         by the analyzer are deleted. You cannot undo this action.</p>",
+                "smithy.api#documentation": "<p>Deletes the specified analyzer. When you delete an analyzer, IAM Access Analyzer is disabled\n         for the account or organization in the current or specific Region. All findings that were\n         generated by the analyzer are deleted. You cannot undo this action.</p>",
                 "smithy.api#http": {
                     "method": "DELETE",
                     "uri": "/analyzer/{analyzerName}",
@@ -1521,7 +1521,7 @@
                 "resourceOwnerAccount": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1597,7 +1597,7 @@
                 "accessPointArn": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the access point that generated the finding.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the access point that generated the finding. The ARN format depends on\n         whether the ARN represents an access point or a multi-region access point.</p>"
                     }
                 }
             },
@@ -1743,7 +1743,7 @@
                 "resourceOwnerAccount": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS account ID that owns the resource.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that owns the resource.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1797,7 +1797,7 @@
                 "isComplete": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>This value is set to <code>true</code> if the generated policy contains all possible actions for a\n         service that Access Analyzer identified from the CloudTrail trail that you specified, and\n         <code>false</code> otherwise.</p>"
+                        "smithy.api#documentation": "<p>This value is set to <code>true</code> if the generated policy contains all possible\n         actions for a service that IAM Access Analyzer identified from the CloudTrail trail that you specified,\n         and <code>false</code> otherwise.</p>"
                     }
                 },
                 "principalArn": {
@@ -1972,7 +1972,7 @@
                 "resource": {
                     "target": "com.amazonaws.accessanalyzer#AnalyzedResource",
                     "traits": {
-                        "smithy.api#documentation": "<p>An <code>AnalyzedResource</code> object that contains information that Access Analyzer found\n         when it analyzed the resource.</p>"
+                        "smithy.api#documentation": "<p>An <code>AnalyzedResource</code> object that contains information that IAM Access Analyzer\n         found when it analyzed the resource.</p>"
                     }
                 }
             },
@@ -2072,7 +2072,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves information about an archive rule.</p>\n         <p>To learn about filter keys that you can use to create an archive rule, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">Access Analyzer filter keys</a> in the <b>IAM User\n         Guide</b>.</p>",
+                "smithy.api#documentation": "<p>Retrieves information about an archive rule.</p>\n         <p>To learn about filter keys that you can use to create an archive rule, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>",
                 "smithy.api#http": {
                     "method": "GET",
                     "uri": "/analyzer/{analyzerName}/archive-rule/{ruleName}",
@@ -2245,7 +2245,7 @@
                 "includeServiceLevelTemplate": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>The level of detail that you want to generate. You can specify whether to generate\n         service-level policies. </p>\n         <p>Access Analyzer uses <code>iam:servicelastaccessed</code> to identify services that have been\n         used recently to create this service-level template.</p>",
+                        "smithy.api#documentation": "<p>The level of detail that you want to generate. You can specify whether to generate\n         service-level policies. </p>\n         <p>IAM Access Analyzer uses <code>iam:servicelastaccessed</code> to identify services that have\n         been used recently to create this service-level template.</p>",
                         "smithy.api#httpQuery": "includeServiceLevelTemplate"
                     }
                 }
@@ -2346,7 +2346,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>This configuration sets the Amazon S3 access point network origin to\n         <code>Internet</code>.</p>"
+                "smithy.api#documentation": "<p>This configuration sets the network origin for the Amazon S3 access point or multi-region\n         access point to <code>Internet</code>.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#IssueCode": {
@@ -2386,7 +2386,10 @@
                     }
                 },
                 "jobError": {
-                    "target": "com.amazonaws.accessanalyzer#JobError"
+                    "target": "com.amazonaws.accessanalyzer#JobError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The job error for the policy generation request.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2511,7 +2514,7 @@
                 "issuingAccount": {
                     "target": "com.amazonaws.accessanalyzer#IssuingAccount",
                     "traits": {
-                        "smithy.api#documentation": "<p> The AWS account under which the grant was issued. The account is used to propose KMS\n         grants issued by accounts other than the owner of the key.</p>",
+                        "smithy.api#documentation": "<p> The Amazon Web Services account under which the grant was issued. The account is used to propose\n         KMS grants issued by accounts other than the owner of the key.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2621,7 +2624,7 @@
                 "keyPolicies": {
                     "target": "com.amazonaws.accessanalyzer#KmsKeyPoliciesMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>Resource policy configuration for the KMS key. The only valid value for the name of the\n         key policy is <code>default</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default key\n            policy</a>.</p>"
+                        "smithy.api#documentation": "<p>Resource policy configuration for the KMS key. The only valid value for the name of\n         the key policy is <code>default</code>. For more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default key\n            policy</a>.</p>"
                     }
                 },
                 "grants": {
@@ -2632,7 +2635,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Proposed access control configuration for a KMS key. You can propose a configuration for\n         a new KMS key or an existing KMS key that you own by specifying the key policy and KMS\n         grant configuration. If the configuration is for an existing key and you do not specify the\n         key policy, the access preview uses the existing policy for the key. If the access preview\n         is for a new resource and you do not specify the key policy, then the access preview uses\n         the default key policy. The proposed key policy cannot be an empty string. For more\n         information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default key\n            policy</a>. For more information about key policy limits, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html\">Resource\n            quotas</a>.</p>\n         <p/>"
+                "smithy.api#documentation": "<p>Proposed access control configuration for a KMS key. You can propose a configuration\n         for a new KMS key or an existing KMS key that you own by specifying the key policy and\n         KMS grant configuration. If the configuration is for an existing key and you do not\n         specify the key policy, the access preview uses the existing policy for the key. If the\n         access preview is for a new resource and you do not specify the key policy, then the access\n         preview uses the default key policy. The proposed key policy cannot be an empty string. For\n         more information, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/key-policies.html#key-policy-default\">Default key\n            policy</a>. For more information about key policy limits, see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/resource-limits.html\">Resource\n            quotas</a>.</p>\n         <p/>"
             }
         },
         "com.amazonaws.accessanalyzer#KmsKeyPoliciesMap": {
@@ -3119,7 +3122,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer.</p>\n         <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">Access Analyzer filter keys</a> in the <b>IAM User\n         Guide</b>.</p>",
+                "smithy.api#documentation": "<p>Retrieves a list of findings generated by the specified analyzer.</p>\n         <p>To learn about filter keys that you can use to retrieve a list of findings, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/access-analyzer-reference-filter-keys.html\">IAM Access Analyzer filter keys</a> in the <b>IAM User Guide</b>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/finding",
@@ -3432,12 +3435,12 @@
                 "internetConfiguration": {
                     "target": "com.amazonaws.accessanalyzer#InternetConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration for the Amazon S3 access point with an <code>Internet</code> origin.</p>"
+                        "smithy.api#documentation": "<p>The configuration for the Amazon S3 access point or multi-region access point with an\n            <code>Internet</code> origin.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The proposed <code>InternetConfiguration</code> or <code>VpcConfiguration</code> to\n         apply to the Amazon S3 Access point. You can make the access point accessible from the internet,\n         or you can specify that all requests made through that access point must originate from a\n         specific virtual private cloud (VPC). You can specify only one type of network\n         configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access\n         points</a>.</p>"
+                "smithy.api#documentation": "<p>The proposed <code>InternetConfiguration</code> or <code>VpcConfiguration</code> to\n         apply to the Amazon S3 access point. <code>VpcConfiguration</code> does not apply to\n         multi-region access points. You can make the access point accessible from the internet, or\n         you can specify that all requests made through that access point must originate from a\n         specific virtual private cloud (VPC). You can specify only one type of network\n         configuration. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access\n         points</a>.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#OrderBy": {
@@ -3613,7 +3616,7 @@
         "com.amazonaws.accessanalyzer#PrincipalArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:[^:]*:iam::[^:]*:(role|user)/.{1,576}$"
+                "smithy.api#pattern": "^arn:[^:]*:iam::[^:]*:(role|user)/.{1,576}$"
             }
         },
         "com.amazonaws.accessanalyzer#PrincipalMap": {
@@ -3657,7 +3660,7 @@
         "com.amazonaws.accessanalyzer#ResourceArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$"
+                "smithy.api#pattern": "^arn:[^:]*:[^:]*:[^:]*:[^:]*:.*$"
             }
         },
         "com.amazonaws.accessanalyzer#ResourceNotFoundException": {
@@ -3731,7 +3734,7 @@
         "com.amazonaws.accessanalyzer#RoleArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:[^:]*:iam::[^:]*:role/.{1,576}$"
+                "smithy.api#pattern": "^arn:[^:]*:iam::[^:]*:role/.{1,576}$"
             }
         },
         "com.amazonaws.accessanalyzer#S3AccessPointConfiguration": {
@@ -3740,24 +3743,24 @@
                 "accessPointPolicy": {
                     "target": "com.amazonaws.accessanalyzer#AccessPointPolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The access point policy.</p>"
+                        "smithy.api#documentation": "<p>The access point or multi-region access point policy.</p>"
                     }
                 },
                 "publicAccessBlock": {
                     "target": "com.amazonaws.accessanalyzer#S3PublicAccessBlockConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The proposed <code>S3PublicAccessBlock</code> configuration to apply to this Amazon S3 Access\n         Point.</p>"
+                        "smithy.api#documentation": "<p>The proposed <code>S3PublicAccessBlock</code> configuration to apply to this Amazon S3 access\n         point or multi-region access point.</p>"
                     }
                 },
                 "networkOrigin": {
                     "target": "com.amazonaws.accessanalyzer#NetworkOriginConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The proposed <code>Internet</code> and <code>VpcConfiguration</code> to apply to this\n         Amazon S3 access point. If the access preview is for a new resource and neither is specified,\n         the access preview uses <code>Internet</code> for the network origin. If the access preview\n         is for an existing resource and neither is specified, the access preview uses the exiting\n         network origin.</p>"
+                        "smithy.api#documentation": "<p>The proposed <code>Internet</code> and <code>VpcConfiguration</code> to apply to this\n         Amazon S3 access point. <code>VpcConfiguration</code> does not apply to multi-region access\n         points. If the access preview is for a new resource and neither is specified, the access\n         preview uses <code>Internet</code> for the network origin. If the access preview is for an\n         existing resource and neither is specified, the access preview uses the exiting network\n         origin.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for an Amazon S3 access point for the bucket. You can propose up to 10\n         access points per bucket. If the proposed Amazon S3 access point configuration is for an\n         existing bucket, the access preview uses the proposed access point configuration in place\n         of the existing access points. To propose an access point without a policy, you can provide\n         an empty string as the access point policy. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access points</a>. For more information about access point policy limits,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html\">Access points\n            restrictions and limitations</a>.</p>"
+                "smithy.api#documentation": "<p>The configuration for an Amazon S3 access point or multi-region access point for the bucket.\n         You can propose up to 10 access points or multi-region access points per bucket. If the\n         proposed Amazon S3 access point configuration is for an existing bucket, the access preview uses\n         the proposed access point configuration in place of the existing access points. To propose\n         an access point without a policy, you can provide an empty string as the access point\n         policy. For more information, see <a href=\"https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html\">Creating access points</a>. For more information about access point policy limits,\n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html\">Access points\n            restrictions and limitations</a>.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#S3AccessPointConfigurationsMap": {
@@ -3821,12 +3824,12 @@
                 "accessPoints": {
                     "target": "com.amazonaws.accessanalyzer#S3AccessPointConfigurationsMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The configuration of Amazon S3 access points for the bucket.</p>"
+                        "smithy.api#documentation": "<p>The configuration of Amazon S3 access points or multi-region access points for the bucket.\n         You can propose up to 10 new access points per bucket.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Proposed access control configuration for an Amazon S3 bucket. You can propose a\n         configuration for a new Amazon S3 bucket or an existing Amazon S3 bucket that you own by specifying\n         the Amazon S3 bucket policy, bucket ACLs, bucket BPA settings, and Amazon S3 access points attached\n         to the bucket. If the configuration is for an existing Amazon S3 bucket and you do not specify\n         the Amazon S3 bucket policy, the access preview uses the existing policy attached to the bucket.\n         If the access preview is for a new resource and you do not specify the Amazon S3 bucket policy,\n         the access preview assumes a bucket without a policy. To propose deletion of an existing\n         bucket policy, you can specify an empty string. For more information about bucket policy\n         limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html\">Bucket Policy\n         Examples</a>.</p>"
+                "smithy.api#documentation": "<p>Proposed access control configuration for an Amazon S3 bucket. You can propose a\n         configuration for a new Amazon S3 bucket or an existing Amazon S3 bucket that you own by specifying\n         the Amazon S3 bucket policy, bucket ACLs, bucket BPA settings, Amazon S3 access points, and\n         multi-region access points attached to the bucket. If the configuration is for an existing\n         Amazon S3 bucket and you do not specify the Amazon S3 bucket policy, the access preview uses the\n         existing policy attached to the bucket. If the access preview is for a new resource and you\n         do not specify the Amazon S3 bucket policy, the access preview assumes a bucket without a\n         policy. To propose deletion of an existing bucket policy, you can specify an empty string.\n         For more information about bucket policy limits, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html\">Bucket Policy\n         Examples</a>.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#S3BucketPolicy": {
@@ -3851,7 +3854,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration to apply to this Amazon S3 bucket. If the\n         proposed configuration is for an existing Amazon S3 bucket and the configuration is not\n         specified, the access preview uses the existing setting. If the proposed configuration is\n         for a new bucket and the configuration is not specified, the access preview uses\n            <code>false</code>. If the proposed configuration is for a new access point and the\n         access point BPA configuration is not specified, the access preview uses <code>true</code>.\n         For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html\">PublicAccessBlockConfiguration</a>. </p>"
+                "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration to apply to this Amazon S3 bucket. If the\n         proposed configuration is for an existing Amazon S3 bucket and the configuration is not\n         specified, the access preview uses the existing setting. If the proposed configuration is\n         for a new bucket and the configuration is not specified, the access preview uses\n            <code>false</code>. If the proposed configuration is for a new access point or\n         multi-region access point and the access point BPA configuration is not specified, the\n         access preview uses <code>true</code>. For more information, see <a href=\"https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html\">PublicAccessBlockConfiguration</a>. </p>"
             }
         },
         "com.amazonaws.accessanalyzer#SecretsManagerSecretConfiguration": {
@@ -3860,7 +3863,7 @@
                 "kmsKeyId": {
                     "target": "com.amazonaws.accessanalyzer#SecretsManagerSecretKmsId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The proposed ARN, key ID, or alias of the AWS KMS customer master key (CMK).</p>"
+                        "smithy.api#documentation": "<p>The proposed ARN, key ID, or alias of the KMS customer master key (CMK).</p>"
                     }
                 },
                 "secretPolicy": {
@@ -3871,7 +3874,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The configuration for a Secrets Manager secret. For more information, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html\">CreateSecret</a>.</p>\n         <p>You can propose a configuration for a new secret or an existing secret that you own by\n         specifying the secret policy and optional KMS encryption key. If the configuration is for\n         an existing secret and you do not specify the secret policy, the access preview uses the\n         existing policy for the secret. If the access preview is for a new resource and you do not\n         specify the policy, the access preview assumes a secret without a policy. To propose\n         deletion of an existing policy, you can specify an empty string. If the proposed\n         configuration is for a new secret and you do not specify the KMS key ID, the access preview\n         uses the default CMK of the AWS account. If you specify an empty string for the KMS key\n         ID, the access preview uses the default CMK of the AWS account. For more information\n         about secret policy limits, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html\">Quotas for AWS Secrets\n            Manager.</a>.</p>"
+                "smithy.api#documentation": "<p>The configuration for a Secrets Manager secret. For more information, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/apireference/API_CreateSecret.html\">CreateSecret</a>.</p>\n         <p>You can propose a configuration for a new secret or an existing secret that you own by\n         specifying the secret policy and optional KMS encryption key. If the configuration is for\n         an existing secret and you do not specify the secret policy, the access preview uses the\n         existing policy for the secret. If the access preview is for a new resource and you do not\n         specify the policy, the access preview assumes a secret without a policy. To propose\n         deletion of an existing policy, you can specify an empty string. If the proposed\n         configuration is for a new secret and you do not specify the KMS key ID, the access\n         preview uses the default CMK of the Amazon Web Services account. If you specify an empty string for the\n         KMS key ID, the access preview uses the default CMK of the Amazon Web Services account. For more\n         information about secret policy limits, see <a href=\"https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html\">Quotas for\n            Secrets Manager.</a>.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#SecretsManagerSecretKmsId": {
@@ -3964,12 +3967,12 @@
                 "queuePolicy": {
                     "target": "com.amazonaws.accessanalyzer#SqsQueuePolicy",
                     "traits": {
-                        "smithy.api#documentation": "<p> The proposed resource policy for the SQS queue. </p>"
+                        "smithy.api#documentation": "<p> The proposed resource policy for the Amazon SQS queue. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The proposed access control configuration for an SQS queue. You can propose a\n         configuration for a new SQS queue or an existing SQS queue that you own by specifying the\n         SQS policy. If the configuration is for an existing SQS queue and you do not specify the\n         SQS policy, the access preview uses the existing SQS policy for the queue. If the access\n         preview is for a new resource and you do not specify the policy, the access preview assumes\n         an SQS queue without a policy. To propose deletion of an existing SQS queue policy, you can\n         specify an empty string for the SQS policy. For more information about SQS policy limits,\n         see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html\">Quotas related\n            to policies</a>.</p>"
+                "smithy.api#documentation": "<p>The proposed access control configuration for an Amazon SQS queue. You can propose a\n         configuration for a new Amazon SQS queue or an existing Amazon SQS queue that you own by specifying\n         the Amazon SQS policy. If the configuration is for an existing Amazon SQS queue and you do not\n         specify the Amazon SQS policy, the access preview uses the existing Amazon SQS policy for the queue.\n         If the access preview is for a new resource and you do not specify the policy, the access\n         preview assumes an Amazon SQS queue without a policy. To propose deletion of an existing Amazon SQS\n         queue policy, you can specify an empty string for the Amazon SQS policy. For more information\n         about Amazon SQS policy limits, see <a href=\"https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html\">Quotas related\n            to policies</a>.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#SqsQueuePolicy": {
@@ -4032,7 +4035,7 @@
                 "clientToken": {
                     "target": "smithy.api#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, the subsequent retries with the\n         same client token return the result from the original successful request and they have no\n         additional effect.</p>\n         <p>If you do not specify a client token, one is automatically generated by the AWS\n         SDK.</p>",
+                        "smithy.api#documentation": "<p>A unique, case-sensitive identifier that you provide to ensure the idempotency of the\n         request. Idempotency ensures that an API request completes only once. With an idempotent\n         request, if the original request completes successfully, the subsequent retries with the\n         same client token return the result from the original successful request and they have no\n         additional effect.</p>\n         <p>If you do not specify a client token, one is automatically generated by the Amazon Web Services\n         SDK.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -4115,7 +4118,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides more details about the current status of the analyzer. For example, if the\n         creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer\n         with organization as the type, this failure can be due to an issue with creating the\n         service-linked roles required in the member accounts of the AWS organization.</p>"
+                "smithy.api#documentation": "<p>Provides more details about the current status of the analyzer. For example, if the\n         creation for the analyzer fails, a <code>Failed</code> status is returned. For an analyzer\n         with organization as the type, this failure can be due to an issue with creating the\n         service-linked roles required in the member accounts of the Amazon Web Services organization.</p>"
             }
         },
         "com.amazonaws.accessanalyzer#Substring": {
@@ -4274,7 +4277,7 @@
                 "allRegions": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Possible values are <code>true</code> or <code>false</code>. If set to\n         <code>true</code>, Access Analyzer retrieves CloudTrail data from all regions to analyze and\n         generate a policy.</p>"
+                        "smithy.api#documentation": "<p>Possible values are <code>true</code> or <code>false</code>. If set to\n         <code>true</code>, IAM Access Analyzer retrieves CloudTrail data from all regions to analyze and\n         generate a policy.</p>"
                     }
                 }
             },
@@ -4307,7 +4310,7 @@
                 "allRegions": {
                     "target": "smithy.api#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Possible values are <code>true</code> or <code>false</code>. If set to\n         <code>true</code>, Access Analyzer retrieves CloudTrail data from all regions to analyze and\n         generate a policy.</p>"
+                        "smithy.api#documentation": "<p>Possible values are <code>true</code> or <code>false</code>. If set to\n         <code>true</code>, IAM Access Analyzer retrieves CloudTrail data from all regions to analyze and\n         generate a policy.</p>"
                     }
                 }
             },
@@ -4685,7 +4688,7 @@
                 "policyType": {
                     "target": "com.amazonaws.accessanalyzer#PolicyType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of policy to validate. Identity policies grant permissions to IAM principals.\n         Identity policies include managed and inline policies for IAM roles, users, and groups.\n         They also include service-control policies (SCPs) that are attached to an AWS\n         organization, organizational unit (OU), or an account.</p>\n         <p>Resource policies grant permissions on AWS resources. Resource policies include trust\n         policies for IAM roles and bucket policies for S3 buckets. You can provide a generic input\n         such as identity policy or resource policy or a specific input such as managed policy or S3\n         bucket policy. </p>",
+                        "smithy.api#documentation": "<p>The type of policy to validate. Identity policies grant permissions to IAM principals.\n         Identity policies include managed and inline policies for IAM roles, users, and groups.\n         They also include service-control policies (SCPs) that are attached to an Amazon Web Services\n         organization, organizational unit (OU), or an account.</p>\n         <p>Resource policies grant permissions on Amazon Web Services resources. Resource policies include trust\n         policies for IAM roles and bucket policies for Amazon S3 buckets. You can provide a generic\n         input such as identity policy or resource policy or a specific input such as managed policy\n         or Amazon S3 bucket policy. </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4697,7 +4700,7 @@
                 "findings": {
                     "target": "com.amazonaws.accessanalyzer#ValidatePolicyFindingList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of findings in a policy returned by Access Analyzer based on its suite of policy\n         checks.</p>",
+                        "smithy.api#documentation": "<p>The list of findings in a policy returned by IAM Access Analyzer based on its suite of policy\n         checks.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -4813,7 +4816,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p> The proposed virtual private cloud (VPC) configuration for the Amazon S3 access point. For\n         more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html\">VpcConfiguration</a>.\n      </p>"
+                "smithy.api#documentation": "<p>The proposed virtual private cloud (VPC) configuration for the Amazon S3 access point. VPC\n         configuration does not apply to multi-region access points. For more information, see\n            <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html\">VpcConfiguration</a>. </p>"
             }
         },
         "com.amazonaws.accessanalyzer#VpcId": {

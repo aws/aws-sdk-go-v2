@@ -30,7 +30,7 @@ func (c *Client) ListTemplateAliases(ctx context.Context, params *ListTemplateAl
 
 type ListTemplateAliasesInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the template aliases
+	// The ID of the Amazon Web Services account that contains the template aliases
 	// that you're listing.
 	//
 	// This member is required.

@@ -80,9 +80,9 @@ type UpdateStackSetInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
+	// must be registered as a delegated administrator in the management account. For
+	// more information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
 	// in the CloudFormation User Guide.
 	CallAs types.CallAs
@@ -93,26 +93,27 @@ type UpdateStackSetInput struct {
 	//
 	// * CAPABILITY_IAM and CAPABILITY_NAMED_IAM Some
 	// stack templates might include resources that can affect permissions in your
-	// account; for example, by creating new Identity and Access Management (IAM)
-	// users. For those stacks sets, you must explicitly acknowledge this by specifying
-	// one of these capabilities. The following IAM resources require you to specify
-	// either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM capability.
+	// Amazon Web Services account; for example, by creating new Identity and Access
+	// Management (IAM) users. For those stacks sets, you must explicitly acknowledge
+	// this by specifying one of these capabilities. The following IAM resources
+	// require you to specify either the CAPABILITY_IAM or CAPABILITY_NAMED_IAM
+	// capability.
 	//
-	// * If you have IAM
-	// resources, you can specify either capability.
+	// * If you have IAM resources, you can specify either capability.
 	//
-	// * If you have IAM resources with
-	// custom names, you must specify CAPABILITY_NAMED_IAM.
+	// *
+	// If you have IAM resources with custom names, you must specify
+	// CAPABILITY_NAMED_IAM.
 	//
-	// * If you don't specify
-	// either of these capabilities, CloudFormation returns an InsufficientCapabilities
-	// error.
+	// * If you don't specify either of these capabilities,
+	// CloudFormation returns an InsufficientCapabilities error.
 	//
-	// If your stack template contains these resources, we recommend that you
-	// review all permissions associated with them and edit their permissions if
-	// necessary.
+	// If your stack
+	// template contains these resources, we recommend that you review all permissions
+	// associated with them and edit their permissions if necessary.
 	//
-	// * AWS::IAM::AccessKey
+	// *
+	// AWS::IAM::AccessKey
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-iam-accesskey.html)
 	//
 	// *

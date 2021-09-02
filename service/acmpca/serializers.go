@@ -1551,6 +1551,23 @@ func awsAwsjson11_serializeDocumentKeyUsage(v *types.KeyUsage, value smithyjson.
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentOcspConfiguration(v *types.OcspConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	{
+		ok := object.Key("Enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	if v.OcspCustomCname != nil {
+		ok := object.Key("OcspCustomCname")
+		ok.String(*v.OcspCustomCname)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentOtherName(v *types.OtherName, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -1638,6 +1655,13 @@ func awsAwsjson11_serializeDocumentRevocationConfiguration(v *types.RevocationCo
 	if v.CrlConfiguration != nil {
 		ok := object.Key("CrlConfiguration")
 		if err := awsAwsjson11_serializeDocumentCrlConfiguration(v.CrlConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OcspConfiguration != nil {
+		ok := object.Key("OcspConfiguration")
+		if err := awsAwsjson11_serializeDocumentOcspConfiguration(v.OcspConfiguration, ok); err != nil {
 			return err
 		}
 	}

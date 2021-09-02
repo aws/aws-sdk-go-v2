@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes the default authorizer.
+// Describes the default authorizer. Requires permission to access the
+// DescribeDefaultAuthorizer
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeDefaultAuthorizer(ctx context.Context, params *DescribeDefaultAuthorizerInput, optFns ...func(*Options)) (*DescribeDefaultAuthorizerOutput, error) {
 	if params == nil {
 		params = &DescribeDefaultAuthorizerInput{}

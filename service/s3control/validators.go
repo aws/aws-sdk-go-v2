@@ -90,6 +90,26 @@ func (m *validateOpCreateJob) HandleInitialize(ctx context.Context, in middlewar
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateMultiRegionAccessPoint struct {
+}
+
+func (*validateOpCreateMultiRegionAccessPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateMultiRegionAccessPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateMultiRegionAccessPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateMultiRegionAccessPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAccessPointForObjectLambda struct {
 }
 
@@ -270,6 +290,26 @@ func (m *validateOpDeleteJobTagging) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteMultiRegionAccessPoint struct {
+}
+
+func (*validateOpDeleteMultiRegionAccessPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteMultiRegionAccessPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteMultiRegionAccessPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteMultiRegionAccessPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeletePublicAccessBlock struct {
 }
 
@@ -345,6 +385,26 @@ func (m *validateOpDescribeJob) HandleInitialize(ctx context.Context, in middlew
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeJobInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeMultiRegionAccessPointOperation struct {
+}
+
+func (*validateOpDescribeMultiRegionAccessPointOperation) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeMultiRegionAccessPointOperation) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeMultiRegionAccessPointOperationInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeMultiRegionAccessPointOperationInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -590,6 +650,66 @@ func (m *validateOpGetJobTagging) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetMultiRegionAccessPoint struct {
+}
+
+func (*validateOpGetMultiRegionAccessPoint) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMultiRegionAccessPoint) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMultiRegionAccessPointInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMultiRegionAccessPointInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMultiRegionAccessPointPolicy struct {
+}
+
+func (*validateOpGetMultiRegionAccessPointPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMultiRegionAccessPointPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMultiRegionAccessPointPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMultiRegionAccessPointPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpGetMultiRegionAccessPointPolicyStatus struct {
+}
+
+func (*validateOpGetMultiRegionAccessPointPolicyStatus) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetMultiRegionAccessPointPolicyStatus) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetMultiRegionAccessPointPolicyStatusInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetMultiRegionAccessPointPolicyStatusInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetPublicAccessBlock struct {
 }
 
@@ -705,6 +825,26 @@ func (m *validateOpListJobs) HandleInitialize(ctx context.Context, in middleware
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListJobsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpListMultiRegionAccessPoints struct {
+}
+
+func (*validateOpListMultiRegionAccessPoints) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListMultiRegionAccessPoints) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListMultiRegionAccessPointsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListMultiRegionAccessPointsInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -890,6 +1030,26 @@ func (m *validateOpPutJobTagging) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutMultiRegionAccessPointPolicy struct {
+}
+
+func (*validateOpPutMultiRegionAccessPointPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutMultiRegionAccessPointPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutMultiRegionAccessPointPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutMultiRegionAccessPointPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutPublicAccessBlock struct {
 }
 
@@ -1006,6 +1166,10 @@ func addOpCreateJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateJob{}, middleware.After)
 }
 
+func addOpCreateMultiRegionAccessPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateMultiRegionAccessPoint{}, middleware.After)
+}
+
 func addOpDeleteAccessPointForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccessPointForObjectLambda{}, middleware.After)
 }
@@ -1042,6 +1206,10 @@ func addOpDeleteJobTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteJobTagging{}, middleware.After)
 }
 
+func addOpDeleteMultiRegionAccessPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteMultiRegionAccessPoint{}, middleware.After)
+}
+
 func addOpDeletePublicAccessBlockValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeletePublicAccessBlock{}, middleware.After)
 }
@@ -1056,6 +1224,10 @@ func addOpDeleteStorageLensConfigurationTaggingValidationMiddleware(stack *middl
 
 func addOpDescribeJobValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeJob{}, middleware.After)
+}
+
+func addOpDescribeMultiRegionAccessPointOperationValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeMultiRegionAccessPointOperation{}, middleware.After)
 }
 
 func addOpGetAccessPointConfigurationForObjectLambdaValidationMiddleware(stack *middleware.Stack) error {
@@ -1106,6 +1278,18 @@ func addOpGetJobTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetJobTagging{}, middleware.After)
 }
 
+func addOpGetMultiRegionAccessPointValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMultiRegionAccessPoint{}, middleware.After)
+}
+
+func addOpGetMultiRegionAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMultiRegionAccessPointPolicy{}, middleware.After)
+}
+
+func addOpGetMultiRegionAccessPointPolicyStatusValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetMultiRegionAccessPointPolicyStatus{}, middleware.After)
+}
+
 func addOpGetPublicAccessBlockValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetPublicAccessBlock{}, middleware.After)
 }
@@ -1128,6 +1312,10 @@ func addOpListAccessPointsValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpListJobsValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListJobs{}, middleware.After)
+}
+
+func addOpListMultiRegionAccessPointsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListMultiRegionAccessPoints{}, middleware.After)
 }
 
 func addOpListRegionalBucketsValidationMiddleware(stack *middleware.Stack) error {
@@ -1164,6 +1352,10 @@ func addOpPutBucketTaggingValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpPutJobTaggingValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutJobTagging{}, middleware.After)
+}
+
+func addOpPutMultiRegionAccessPointPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutMultiRegionAccessPointPolicy{}, middleware.After)
 }
 
 func addOpPutPublicAccessBlockValidationMiddleware(stack *middleware.Stack) error {
@@ -1229,6 +1421,43 @@ func validateBucketLevel(v *types.BucketLevel) error {
 		if err := validatePrefixLevel(v.PrefixLevel); err != nil {
 			invalidParams.AddNested("PrefixLevel", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateCreateMultiRegionAccessPointInput(v *types.CreateMultiRegionAccessPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMultiRegionAccessPointInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Regions == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Regions"))
+	} else if v.Regions != nil {
+		if err := validateRegionCreationList(v.Regions); err != nil {
+			invalidParams.AddNested("Regions", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateDeleteMultiRegionAccessPointInput(v *types.DeleteMultiRegionAccessPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMultiRegionAccessPointInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1525,6 +1754,56 @@ func validatePrefixLevel(v *types.PrefixLevel) error {
 	invalidParams := smithy.InvalidParamsError{Context: "PrefixLevel"}
 	if v.StorageMetrics == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("StorageMetrics"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validatePutMultiRegionAccessPointPolicyInput(v *types.PutMultiRegionAccessPointPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMultiRegionAccessPointPolicyInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.Policy == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Policy"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegion(v *types.Region) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "Region"}
+	if v.Bucket == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Bucket"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateRegionCreationList(v []types.Region) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegionCreationList"}
+	for i := range v {
+		if err := validateRegion(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2009,6 +2288,31 @@ func validateOpCreateJobInput(v *CreateJobInput) error {
 	}
 }
 
+func validateOpCreateMultiRegionAccessPointInput(v *CreateMultiRegionAccessPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateMultiRegionAccessPointInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.Details == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Details"))
+	} else if v.Details != nil {
+		if err := validateCreateMultiRegionAccessPointInput(v.Details); err != nil {
+			invalidParams.AddNested("Details", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeleteAccessPointForObjectLambdaInput(v *DeleteAccessPointForObjectLambdaInput) error {
 	if v == nil {
 		return nil
@@ -2171,6 +2475,31 @@ func validateOpDeleteJobTaggingInput(v *DeleteJobTaggingInput) error {
 	}
 }
 
+func validateOpDeleteMultiRegionAccessPointInput(v *DeleteMultiRegionAccessPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteMultiRegionAccessPointInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.Details == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Details"))
+	} else if v.Details != nil {
+		if err := validateDeleteMultiRegionAccessPointInput(v.Details); err != nil {
+			invalidParams.AddNested("Details", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDeletePublicAccessBlockInput(v *DeletePublicAccessBlockInput) error {
 	if v == nil {
 		return nil
@@ -2232,6 +2561,24 @@ func validateOpDescribeJobInput(v *DescribeJobInput) error {
 	}
 	if v.JobId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("JobId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeMultiRegionAccessPointOperationInput(v *DescribeMultiRegionAccessPointOperationInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeMultiRegionAccessPointOperationInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.RequestTokenARN == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RequestTokenARN"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -2456,6 +2803,60 @@ func validateOpGetJobTaggingInput(v *GetJobTaggingInput) error {
 	}
 }
 
+func validateOpGetMultiRegionAccessPointInput(v *GetMultiRegionAccessPointInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMultiRegionAccessPointInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMultiRegionAccessPointPolicyInput(v *GetMultiRegionAccessPointPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMultiRegionAccessPointPolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetMultiRegionAccessPointPolicyStatusInput(v *GetMultiRegionAccessPointPolicyStatusInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetMultiRegionAccessPointPolicyStatusInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetPublicAccessBlockInput(v *GetPublicAccessBlockInput) error {
 	if v == nil {
 		return nil
@@ -2542,6 +2943,21 @@ func validateOpListJobsInput(v *ListJobsInput) error {
 		return nil
 	}
 	invalidParams := smithy.InvalidParamsError{Context: "ListJobsInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpListMultiRegionAccessPointsInput(v *ListMultiRegionAccessPointsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListMultiRegionAccessPointsInput"}
 	if v.AccountId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
 	}
@@ -2734,6 +3150,31 @@ func validateOpPutJobTaggingInput(v *PutJobTaggingInput) error {
 	} else if v.Tags != nil {
 		if err := validateS3TagSet(v.Tags); err != nil {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpPutMultiRegionAccessPointPolicyInput(v *PutMultiRegionAccessPointPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutMultiRegionAccessPointPolicyInput"}
+	if v.AccountId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("AccountId"))
+	}
+	if v.ClientToken == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClientToken"))
+	}
+	if v.Details == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Details"))
+	} else if v.Details != nil {
+		if err := validatePutMultiRegionAccessPointPolicyInput(v.Details); err != nil {
+			invalidParams.AddNested("Details", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

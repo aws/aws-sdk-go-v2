@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes the given thing from the billing group.
+// Removes the given thing from the billing group. Requires permission to access
+// the RemoveThingFromBillingGroup
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) RemoveThingFromBillingGroup(ctx context.Context, params *RemoveThingFromBillingGroupInput, optFns ...func(*Options)) (*RemoveThingFromBillingGroupOutput, error) {
 	if params == nil {
 		params = &RemoveThingFromBillingGroupInput{}

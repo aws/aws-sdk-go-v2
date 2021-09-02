@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a job execution.
+// Deletes a job execution. Requires permission to access the DeleteJobExecution
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DeleteJobExecution(ctx context.Context, params *DeleteJobExecutionInput, optFns ...func(*Options)) (*DeleteJobExecutionOutput, error) {
 	if params == nil {
 		params = &DeleteJobExecutionInput{}
@@ -56,8 +58,8 @@ type DeleteJobExecutionInput struct {
 	Force bool
 
 	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
-	// MQTT topics that contain the value in the following format.
+	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
+	// notifications to MQTT topics that contain the value in the following format.
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
 	// namespaceId feature is in public preview.
 	NamespaceId *string

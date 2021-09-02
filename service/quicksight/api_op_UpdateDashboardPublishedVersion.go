@@ -28,7 +28,7 @@ func (c *Client) UpdateDashboardPublishedVersion(ctx context.Context, params *Up
 
 type UpdateDashboardPublishedVersionInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboard that
+	// The ID of the Amazon Web Services account that contains the dashboard that
 	// you're updating.
 	//
 	// This member is required.

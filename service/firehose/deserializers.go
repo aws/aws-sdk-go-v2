@@ -2363,6 +2363,51 @@ func awsAwsjson11_deserializeDocumentDestinationDescriptionList(v *[]types.Desti
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentDynamicPartitioningConfiguration(v **types.DynamicPartitioningConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DynamicPartitioningConfiguration
+	if *v == nil {
+		sv = &types.DynamicPartitioningConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Enabled":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected BooleanObject to be of type *bool, got %T instead", value)
+				}
+				sv.Enabled = ptr.Bool(jtv)
+			}
+
+		case "RetryOptions":
+			if err := awsAwsjson11_deserializeDocumentRetryOptions(&sv.RetryOptions, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentElasticsearchBufferingHints(v **types.ElasticsearchBufferingHints, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -2685,6 +2730,11 @@ func awsAwsjson11_deserializeDocumentExtendedS3DestinationDescription(v **types.
 
 		case "DataFormatConversionConfiguration":
 			if err := awsAwsjson11_deserializeDocumentDataFormatConversionConfiguration(&sv.DataFormatConversionConfiguration, value); err != nil {
+				return err
+			}
+
+		case "DynamicPartitioningConfiguration":
+			if err := awsAwsjson11_deserializeDocumentDynamicPartitioningConfiguration(&sv.DynamicPartitioningConfiguration, value); err != nil {
 				return err
 			}
 
@@ -4471,6 +4521,50 @@ func awsAwsjson11_deserializeDocumentResourceNotFoundException(v **types.Resourc
 					return fmt.Errorf("expected ErrorMessage to be of type string, got %T instead", value)
 				}
 				sv.Message = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentRetryOptions(v **types.RetryOptions, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RetryOptions
+	if *v == nil {
+		sv = &types.RetryOptions{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DurationInSeconds":
+			if value != nil {
+				jtv, ok := value.(json.Number)
+				if !ok {
+					return fmt.Errorf("expected RetryDurationInSeconds to be json.Number, got %T instead", value)
+				}
+				i64, err := jtv.Int64()
+				if err != nil {
+					return err
+				}
+				sv.DurationInSeconds = ptr.Int32(int32(i64))
 			}
 
 		default:

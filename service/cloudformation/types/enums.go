@@ -600,6 +600,12 @@ const (
 	ResourceStatusImportRollbackInProgress ResourceStatus = "IMPORT_ROLLBACK_IN_PROGRESS"
 	ResourceStatusImportRollbackFailed     ResourceStatus = "IMPORT_ROLLBACK_FAILED"
 	ResourceStatusImportRollbackComplete   ResourceStatus = "IMPORT_ROLLBACK_COMPLETE"
+	ResourceStatusUpdateRollbackInProgress ResourceStatus = "UPDATE_ROLLBACK_IN_PROGRESS"
+	ResourceStatusUpdateRollbackComplete   ResourceStatus = "UPDATE_ROLLBACK_COMPLETE"
+	ResourceStatusUpdateRollbackFailed     ResourceStatus = "UPDATE_ROLLBACK_FAILED"
+	ResourceStatusRollbackInProgress       ResourceStatus = "ROLLBACK_IN_PROGRESS"
+	ResourceStatusRollbackComplete         ResourceStatus = "ROLLBACK_COMPLETE"
+	ResourceStatusRollbackFailed           ResourceStatus = "ROLLBACK_FAILED"
 )
 
 // Values returns all known values for ResourceStatus. Note that this can be
@@ -623,6 +629,12 @@ func (ResourceStatus) Values() []ResourceStatus {
 		"IMPORT_ROLLBACK_IN_PROGRESS",
 		"IMPORT_ROLLBACK_FAILED",
 		"IMPORT_ROLLBACK_COMPLETE",
+		"UPDATE_ROLLBACK_IN_PROGRESS",
+		"UPDATE_ROLLBACK_COMPLETE",
+		"UPDATE_ROLLBACK_FAILED",
+		"ROLLBACK_IN_PROGRESS",
+		"ROLLBACK_COMPLETE",
+		"ROLLBACK_FAILED",
 	}
 }
 
@@ -903,6 +915,7 @@ const (
 	StackStatusUpdateInProgress                        StackStatus = "UPDATE_IN_PROGRESS"
 	StackStatusUpdateCompleteCleanupInProgress         StackStatus = "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS"
 	StackStatusUpdateComplete                          StackStatus = "UPDATE_COMPLETE"
+	StackStatusUpdateFailed                            StackStatus = "UPDATE_FAILED"
 	StackStatusUpdateRollbackInProgress                StackStatus = "UPDATE_ROLLBACK_IN_PROGRESS"
 	StackStatusUpdateRollbackFailed                    StackStatus = "UPDATE_ROLLBACK_FAILED"
 	StackStatusUpdateRollbackCompleteCleanupInProgress StackStatus = "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS"
@@ -932,6 +945,7 @@ func (StackStatus) Values() []StackStatus {
 		"UPDATE_IN_PROGRESS",
 		"UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
 		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
 		"UPDATE_ROLLBACK_IN_PROGRESS",
 		"UPDATE_ROLLBACK_FAILED",
 		"UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",

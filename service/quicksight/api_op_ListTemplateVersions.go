@@ -31,7 +31,7 @@ func (c *Client) ListTemplateVersions(ctx context.Context, params *ListTemplateV
 
 type ListTemplateVersionsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the templates that
+	// The ID of the Amazon Web Services account that contains the templates that
 	// you're listing.
 	//
 	// This member is required.

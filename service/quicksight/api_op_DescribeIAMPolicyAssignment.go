@@ -11,8 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes an existing IAM policy assignment, as specified by the assignment
-// name.
+// Describes an existing IAMpolicy assignment, as specified by the assignment name.
 func (c *Client) DescribeIAMPolicyAssignment(ctx context.Context, params *DescribeIAMPolicyAssignmentInput, optFns ...func(*Options)) (*DescribeIAMPolicyAssignmentOutput, error) {
 	if params == nil {
 		params = &DescribeIAMPolicyAssignmentInput{}
@@ -35,7 +34,7 @@ type DescribeIAMPolicyAssignmentInput struct {
 	// This member is required.
 	AssignmentName *string
 
-	// The ID of the Amazon Web Services account; that contains the assignment that you
+	// The ID of the Amazon Web Services account that contains the assignment that you
 	// want to describe.
 	//
 	// This member is required.
@@ -51,7 +50,7 @@ type DescribeIAMPolicyAssignmentInput struct {
 
 type DescribeIAMPolicyAssignmentOutput struct {
 
-	// Information describing the IAM policy assignment.
+	// Information describing the IAMpolicy assignment.
 	IAMPolicyAssignment *types.IAMPolicyAssignment
 
 	// The Amazon Web Services request ID for this operation.

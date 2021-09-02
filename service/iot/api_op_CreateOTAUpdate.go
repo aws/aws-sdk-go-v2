@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an AWS IoT OTAUpdate on a target group of things or groups.
+// Creates an IoT OTA update on a target group of things or groups. Requires
+// permission to access the CreateOTAUpdate
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateOTAUpdate(ctx context.Context, params *CreateOTAUpdateInput, optFns ...func(*Options)) (*CreateOTAUpdateOutput, error) {
 	if params == nil {
 		params = &CreateOTAUpdateInput{}
@@ -39,8 +42,9 @@ type CreateOTAUpdateInput struct {
 	// This member is required.
 	OtaUpdateId *string
 
-	// The IAM role that grants AWS IoT access to the Amazon S3, AWS IoT jobs and AWS
-	// Code Signing resources to create an OTA update job.
+	// The IAM role that grants Amazon Web Services IoT Core access to the Amazon S3,
+	// IoT jobs and Amazon Web Services Code Signing resources to create an OTA update
+	// job.
 	//
 	// This member is required.
 	RoleArn *string
@@ -92,10 +96,10 @@ type CreateOTAUpdateInput struct {
 
 type CreateOTAUpdateOutput struct {
 
-	// The AWS IoT job ARN associated with the OTA update.
+	// The IoT job ARN associated with the OTA update.
 	AwsIotJobArn *string
 
-	// The AWS IoT job ID associated with the OTA update.
+	// The IoT job ID associated with the OTA update.
 	AwsIotJobId *string
 
 	// The OTA update ARN.

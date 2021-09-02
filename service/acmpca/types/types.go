@@ -183,8 +183,8 @@ type CertificateAuthority struct {
 	// action.
 	RestorableUntil *time.Time
 
-	// Information about the certificate revocation list (CRL) created and maintained
-	// by your private CA.
+	// Information about the Online Certificate Status Protocol (OCSP) configuration or
+	// certificate revocation list (CRL) created and maintained by your private CA.
 	RevocationConfiguration *RevocationConfiguration
 
 	// Serial number of your private CA.
@@ -252,56 +252,61 @@ type CertificateAuthorityConfiguration struct {
 // update or when a certificate is revoked. When a certificate is revoked, it is
 // recorded in the next CRL that is generated and in the next audit report. Only
 // time valid certificates are listed in the CRL. Expired certificates are not
-// included. CRLs contain the following fields:
+// included. A CRL is typically updated approximately 30 minutes after a
+// certificate is revoked. If for any reason a CRL update fails, ACM Private CA
+// makes further attempts every 15 minutes. CRLs contain the following fields:
 //
-// * Version: The current version
-// number defined in RFC 5280 is V2. The integer value is 0x1.
+// *
+// Version: The current version number defined in RFC 5280 is V2. The integer value
+// is 0x1.
 //
-// * Signature
-// Algorithm: The name of the algorithm used to sign the CRL.
+// * Signature Algorithm: The name of the algorithm used to sign the
+// CRL.
 //
-// * Issuer: The X.500
-// distinguished name of your private CA that issued the CRL.
+// * Issuer: The X.500 distinguished name of your private CA that issued the
+// CRL.
 //
-// * Last Update: The
-// issue date and time of this CRL.
+// * Last Update: The issue date and time of this CRL.
 //
-// * Next Update: The day and time by which the
-// next CRL will be issued.
+// * Next Update: The
+// day and time by which the next CRL will be issued.
 //
-// * Revoked Certificates: List of revoked certificates.
-// Each list item contains the following information.
+// * Revoked Certificates: List
+// of revoked certificates. Each list item contains the following information.
 //
-// * Serial Number: The serial
-// number, in hexadecimal format, of the revoked certificate.
+// *
+// Serial Number: The serial number, in hexadecimal format, of the revoked
+// certificate.
 //
-// * Revocation Date:
-// Date and time the certificate was revoked.
+// * Revocation Date: Date and time the certificate was revoked.
 //
-// * CRL Entry Extensions: Optional
-// extensions for the CRL entry.
+// *
+// CRL Entry Extensions: Optional extensions for the CRL entry.
 //
-// * X509v3 CRL Reason Code: Reason the certificate
-// was revoked.
+// * X509v3 CRL
+// Reason Code: Reason the certificate was revoked.
 //
-// * CRL Extensions: Optional extensions for the CRL.
+// * CRL Extensions: Optional
+// extensions for the CRL.
 //
-// * X509v3
-// Authority Key Identifier: Identifies the public key associated with the private
-// key used to sign the certificate.
+// * X509v3 Authority Key Identifier: Identifies the
+// public key associated with the private key used to sign the certificate.
 //
-// * X509v3 CRL Number:: Decimal sequence number
-// for the CRL.
+// *
+// X509v3 CRL Number:: Decimal sequence number for the CRL.
 //
-// * Signature Algorithm: Algorithm used by your private CA to sign
-// the CRL.
+// * Signature Algorithm:
+// Algorithm used by your private CA to sign the CRL.
 //
-// * Signature Value: Signature computed over the CRL.
+// * Signature Value: Signature
+// computed over the CRL.
 //
-// Certificate
-// revocation lists created by ACM Private CA are DER-encoded. You can use the
-// following OpenSSL command to list a CRL. openssl crl -inform DER -text -in
-// crl_path -noout
+// Certificate revocation lists created by ACM Private CA
+// are DER-encoded. You can use the following OpenSSL command to list a CRL.
+// openssl crl -inform DER -text -in crl_path -noout For more information, see
+// Planning a certificate revocation list (CRL)
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/crl-planning.html) in the
+// AWS Certificate Manager Private Certificate Authority (PCA) User Guide
 type CrlConfiguration struct {
 
 	// Boolean value that specifies whether certificate revocation lists (CRLs) are
@@ -328,7 +333,7 @@ type CrlConfiguration struct {
 	// Distribution Points extension of the issued certificate. You can change the name
 	// of your bucket by calling the UpdateCertificateAuthority
 	// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
-	// action. You must specify a bucket policy
+	// operation. You must specify a bucket policy
 	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/PcaCreateCa.html#s3-policies)
 	// that allows ACM Private CA to write the CRL to your bucket.
 	S3BucketName *string
@@ -497,6 +502,30 @@ type KeyUsage struct {
 	noSmithyDocumentSerde
 }
 
+// Contains information to enable and configure Online Certificate Status Protocol
+// (OCSP) for validating certificate revocation status. When you revoke a
+// certificate, OCSP responses may take up to 60 minutes to reflect the new status.
+type OcspConfiguration struct {
+
+	// Flag enabling use of the Online Certificate Status Protocol (OCSP) for
+	// validating certificate revocation status.
+	//
+	// This member is required.
+	Enabled bool
+
+	// By default, ACM Private CA injects an AWS domain into certificates being
+	// validated by the Online Certificate Status Protocol (OCSP). A customer can
+	// alternatively use this object to define a CNAME specifying a customized OCSP
+	// domain. Note: The value of the CNAME must not include a protocol prefix such as
+	// "http://" or "https://". For more information, see Customizing Online
+	// Certificate Status Protocol (OCSP)
+	// (https://docs.aws.amazon.com/acm-pca/latest/userguide/ocsp-customize.html) in
+	// the AWS Certificate Manager Private Certificate Authority (PCA) User Guide.
+	OcspCustomCname *string
+
+	noSmithyDocumentSerde
+}
+
 // Defines a custom ASN.1 X.400 GeneralName using an object identifier (OID) and
 // value. The OID must satisfy the regular expression shown below. For more
 // information, see NIST's definition of Object Identifier (OID)
@@ -605,15 +634,27 @@ type Qualifier struct {
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_CreateCertificateAuthority.html)
 // and UpdateCertificateAuthority
 // (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_UpdateCertificateAuthority.html)
-// actions. Your private certificate authority (CA) can create and maintain a
-// certificate revocation list (CRL). A CRL contains information about certificates
-// revoked by your CA. For more information, see RevokeCertificate
-// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html).
+// actions. Your private certificate authority (CA) can configure Online
+// Certificate Status Protocol (OCSP) support and/or maintain a certificate
+// revocation list (CRL). OCSP returns validation information about certificates as
+// requested by clients, and a CRL contains an updated list of certificates revoked
+// by your CA. For more information, see RevokeCertificate
+// (https://docs.aws.amazon.com/acm-pca/latest/APIReference/API_RevokeCertificate.html)
+// and Setting up a certificate revocation method
+// (https://docs.aws.amazon.com/acm-pca/latest/userguide/revocation-setup.html) in
+// the AWS Certificate Manager Private Certificate Authority (PCA) User Guide.
 type RevocationConfiguration struct {
 
 	// Configuration of the certificate revocation list (CRL), if any, maintained by
-	// your private CA.
+	// your private CA. A CRL is typically updated approximately 30 minutes after a
+	// certificate is revoked. If for any reason a CRL update fails, ACM Private CA
+	// makes further attempts every 15 minutes.
 	CrlConfiguration *CrlConfiguration
+
+	// Configuration of Online Certificate Status Protocol (OCSP) support, if any,
+	// maintained by your private CA. When you revoke a certificate, OCSP responses may
+	// take up to 60 minutes to reflect the new status.
+	OcspConfiguration *OcspConfiguration
 
 	noSmithyDocumentSerde
 }

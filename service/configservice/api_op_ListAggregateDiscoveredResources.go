@@ -43,7 +43,7 @@ type ListAggregateDiscoveredResourcesInput struct {
 	// This member is required.
 	ConfigurationAggregatorName *string
 
-	// The type of resources that you want AWS Config to list in the response.
+	// The type of resources that you want Config to list in the response.
 	//
 	// This member is required.
 	ResourceType types.ResourceType
@@ -52,8 +52,7 @@ type ListAggregateDiscoveredResourcesInput struct {
 	Filters *types.ResourceFilters
 
 	// The maximum number of resource identifiers returned on each page. You cannot
-	// specify a number greater than 100. If you specify 0, AWS Config uses the
-	// default.
+	// specify a number greater than 100. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -153,8 +152,7 @@ var _ ListAggregateDiscoveredResourcesAPIClient = (*Client)(nil)
 // ListAggregateDiscoveredResources
 type ListAggregateDiscoveredResourcesPaginatorOptions struct {
 	// The maximum number of resource identifiers returned on each page. You cannot
-	// specify a number greater than 100. If you specify 0, AWS Config uses the
-	// default.
+	// specify a number greater than 100. If you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

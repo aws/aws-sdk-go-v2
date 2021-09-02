@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a bulk thing provisioning task.
+// Creates a bulk thing provisioning task. Requires permission to access the
+// StartThingRegistrationTask
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) StartThingRegistrationTask(ctx context.Context, params *StartThingRegistrationTaskInput, optFns ...func(*Options)) (*StartThingRegistrationTaskOutput, error) {
 	if params == nil {
 		params = &StartThingRegistrationTaskInput{}

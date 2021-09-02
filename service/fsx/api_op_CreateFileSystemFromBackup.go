@@ -12,33 +12,34 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new Amazon FSx file system from an existing Amazon FSx backup. If a
-// file system with the specified client request token exists and the parameters
-// match, this operation returns the description of the file system. If a client
-// request token specified by the file system exists and the parameters don't
-// match, this call returns IncompatibleParameterError. If a file system with the
-// specified client request token doesn't exist, this operation does the
-// following:
+// Creates a new Amazon FSx for Lustre or Amazon FSx for Windows File Server file
+// system from an existing Amazon FSx backup. If a file system with the specified
+// client request token exists and the parameters match, this operation returns the
+// description of the file system. If a client request token specified by the file
+// system exists and the parameters don't match, this call returns
+// IncompatibleParameterError. If a file system with the specified client request
+// token doesn't exist, this operation does the following:
 //
-// * Creates a new Amazon FSx file system from backup with an assigned
-// ID, and an initial lifecycle state of CREATING.
+// * Creates a new Amazon
+// FSx file system from backup with an assigned ID, and an initial lifecycle state
+// of CREATING.
 //
-// * Returns the description of
-// the file system.
+// * Returns the description of the file system.
 //
-// Parameters like Active Directory, default share name,
-// automatic backup, and backup settings default to the parameters of the file
-// system that was backed up, unless overridden. You can explicitly supply other
-// settings. By using the idempotent operation, you can retry a
-// CreateFileSystemFromBackup call without the risk of creating an extra file
-// system. This approach can be useful when an initial call fails in a way that
-// makes it unclear whether a file system was created. Examples are if a transport
-// level timeout occurred, or your connection was reset. If you use the same client
-// request token and the initial call created a file system, the client receives
-// success as long as the parameters are the same. The CreateFileSystemFromBackup
-// call returns while the file system's lifecycle state is still CREATING. You can
-// check the file-system creation status by calling the DescribeFileSystems
-// operation, which returns the file system state along with other information.
+// Parameters like
+// Active Directory, default share name, automatic backup, and backup settings
+// default to the parameters of the file system that was backed up, unless
+// overridden. You can explicitly supply other settings. By using the idempotent
+// operation, you can retry a CreateFileSystemFromBackup call without the risk of
+// creating an extra file system. This approach can be useful when an initial call
+// fails in a way that makes it unclear whether a file system was created. Examples
+// are if a transport level timeout occurred, or your connection was reset. If you
+// use the same client request token and the initial call created a file system,
+// the client receives success as long as the parameters are the same. The
+// CreateFileSystemFromBackup call returns while the file system's lifecycle state
+// is still CREATING. You can check the file-system creation status by calling the
+// DescribeFileSystems operation, which returns the file system state along with
+// other information.
 func (c *Client) CreateFileSystemFromBackup(ctx context.Context, params *CreateFileSystemFromBackupInput, optFns ...func(*Options)) (*CreateFileSystemFromBackupOutput, error) {
 	if params == nil {
 		params = &CreateFileSystemFromBackupInput{}
@@ -75,17 +76,17 @@ type CreateFileSystemFromBackupInput struct {
 
 	// A string of up to 64 ASCII characters that Amazon FSx uses to ensure idempotent
 	// creation. This string is automatically filled on your behalf when you use the
-	// AWS Command Line Interface (AWS CLI) or an AWS SDK.
+	// Command Line Interface (CLI) or an Amazon Web Services SDK.
 	ClientRequestToken *string
 
-	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file
-	// system's data for Amazon FSx for Windows File Server file systems and Amazon FSx
-	// for Lustre PERSISTENT_1 file systems at rest. In either case, if not specified,
-	// the Amazon FSx managed key is used. The Amazon FSx for Lustre SCRATCH_1 and
-	// SCRATCH_2 file systems are always encrypted at rest using Amazon FSx managed
-	// keys. For more information, see Encrypt
+	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
+	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
+	// ONTAP file systems, and Amazon FSx for Lustre PERSISTENT_1 file systems at rest.
+	// If not specified, the Amazon FSx managed key is used. The Amazon FSx for Lustre
+	// SCRATCH_1 and SCRATCH_2 file systems are always encrypted at rest using Amazon
+	// FSx managed keys. For more information, see Encrypt
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
-	// AWS Key Management Service API Reference.
+	// Key Management Service API Reference.
 	KmsKeyId *string
 
 	// The Lustre configuration for the file system being created.

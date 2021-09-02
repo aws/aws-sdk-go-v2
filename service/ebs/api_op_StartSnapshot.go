@@ -34,7 +34,7 @@ func (c *Client) StartSnapshot(ctx context.Context, params *StartSnapshotInput, 
 
 type StartSnapshotInput struct {
 
-	// The size of the volume, in GiB. The maximum size is 16384 GiB (16 TiB).
+	// The size of the volume, in GiB. The maximum size is 65536 GiB (64 TiB).
 	//
 	// This member is required.
 	VolumeSize *int64

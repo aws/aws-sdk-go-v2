@@ -7,9 +7,9 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// This exception is thrown when trusted access has not been enabled between AWS
-// CloudTrail and AWS Organizations. For more information, see Enabling Trusted
-// Access with Other AWS Services
+// This exception is thrown when trusted access has not been enabled between
+// CloudTrail and Organizations. For more information, see Enabling Trusted Access
+// with Other Amazon Web Services Services
 // (https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html)
 // and Prepare For Creating a Trail For Your Organization
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
@@ -35,8 +35,8 @@ func (e *CloudTrailAccessNotEnabledException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// This exception is thrown when an operation is called with an invalid trail ARN.
-// The format of a trail ARN is:
+// This exception is thrown when an operation is called with a trail ARN that is
+// not valid. The following is the format of a trail ARN.
 // arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail
 type CloudTrailARNInvalidException struct {
 	Message *string
@@ -58,7 +58,8 @@ func (e *CloudTrailARNInvalidException) ErrorFault() smithy.ErrorFault { return 
 
 // This exception is thrown when a call results in the InvalidClientTokenId error
 // code. This can occur when you are creating or updating a trail to send
-// notifications to an Amazon SNS topic that is in a suspended AWS account.
+// notifications to an Amazon SNS topic that is in a suspended Amazon Web Services
+// account.
 type CloudTrailInvalidClientTokenIdException struct {
 	Message *string
 
@@ -220,7 +221,8 @@ func (e *InsufficientS3BucketPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the policy on the SNS topic is not sufficient.
+// This exception is thrown when the policy on the Amazon SNS topic is not
+// sufficient.
 type InsufficientSnsTopicPolicyException struct {
 	Message *string
 
@@ -243,7 +245,8 @@ func (e *InsufficientSnsTopicPolicyException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the provided CloudWatch log group is not valid.
+// This exception is thrown when the provided CloudWatch Logs log group is not
+// valid.
 type InvalidCloudWatchLogsLogGroupArnException struct {
 	Message *string
 
@@ -332,7 +335,7 @@ func (e *InvalidEventCategoryException) ErrorFault() smithy.ErrorFault { return 
 //
 // * Specify a valid value
 // for a parameter. For example, specifying the ReadWriteType parameter with a
-// value of read-only is invalid.
+// value of read-only is not valid.
 type InvalidEventSelectorsException struct {
 	Message *string
 
@@ -395,7 +398,7 @@ func (e *InvalidInsightSelectorsException) ErrorCode() string {
 }
 func (e *InvalidInsightSelectorsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the KMS key ARN is invalid.
+// This exception is thrown when the KMS key ARN is not valid.
 type InvalidKmsKeyIdException struct {
 	Message *string
 
@@ -414,7 +417,7 @@ func (e *InvalidKmsKeyIdException) ErrorMessage() string {
 func (e *InvalidKmsKeyIdException) ErrorCode() string             { return "InvalidKmsKeyIdException" }
 func (e *InvalidKmsKeyIdException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Occurs when an invalid lookup attribute is specified.
+// Occurs when a lookup attribute is specified that is not valid.
 type InvalidLookupAttributesException struct {
 	Message *string
 
@@ -435,7 +438,7 @@ func (e *InvalidLookupAttributesException) ErrorCode() string {
 }
 func (e *InvalidLookupAttributesException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown if the limit specified is invalid.
+// This exception is thrown if the limit specified is not valid.
 type InvalidMaxResultsException struct {
 	Message *string
 
@@ -454,8 +457,8 @@ func (e *InvalidMaxResultsException) ErrorMessage() string {
 func (e *InvalidMaxResultsException) ErrorCode() string             { return "InvalidMaxResultsException" }
 func (e *InvalidMaxResultsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Invalid token or token that was previously used in a request with different
-// parameters. This exception is thrown if the token is invalid.
+// A token that is not valid, or a token that was previously used in a request with
+// different parameters. This exception is thrown if the token is not valid.
 type InvalidNextTokenException struct {
 	Message *string
 
@@ -575,8 +578,8 @@ func (e *InvalidTagParameterException) ErrorMessage() string {
 func (e *InvalidTagParameterException) ErrorCode() string             { return "InvalidTagParameterException" }
 func (e *InvalidTagParameterException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// Occurs if the timestamp values are invalid. Either the start time occurs after
-// the end time or the time range is outside the range of possible values.
+// Occurs if the timestamp values are not valid. Either the start time occurs after
+// the end time, or the time range is outside the range of possible values.
 type InvalidTimeRangeException struct {
 	Message *string
 
@@ -627,10 +630,10 @@ func (e *InvalidTokenException) ErrorFault() smithy.ErrorFault { return smithy.F
 // characters
 //
 // * Have no adjacent periods, underscores or dashes. Names like
-// my-_namespace and my--namespace are invalid.
+// my-_namespace and my--namespace are not valid.
 //
-// * Not be in IP address format (for
-// example, 192.168.5.4)
+// * Not be in IP address format
+// (for example, 192.168.5.4)
 type InvalidTrailNameException struct {
 	Message *string
 
@@ -688,10 +691,9 @@ func (e *KmsKeyDisabledException) ErrorMessage() string {
 func (e *KmsKeyDisabledException) ErrorCode() string             { return "KmsKeyDisabledException" }
 func (e *KmsKeyDisabledException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the AWS KMS key does not exist, when the S3 bucket
-// and the AWS KMS key are not in the same region, or when the AWS KMS key
-// associated with the SNS topic either does not exist or is not in the same
-// region.
+// This exception is thrown when the KMS key does not exist, when the S3 bucket and
+// the KMS key are not in the same region, or when the KMS key associated with the
+// Amazon SNS topic either does not exist or is not in the same region.
 type KmsKeyNotFoundException struct {
 	Message *string
 
@@ -733,10 +735,10 @@ func (e *MaximumNumberOfTrailsExceededException) ErrorFault() smithy.ErrorFault 
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the AWS account making the request to create or
-// update an organization trail is not the master account for an organization in
-// AWS Organizations. For more information, see Prepare For Creating a Trail For
-// Your Organization
+// This exception is thrown when the Amazon Web Services account making the request
+// to create or update an organization trail is not the management account for an
+// organization in Organizations. For more information, see Prepare For Creating a
+// Trail For Your Organization
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
 type NotOrganizationMasterAccountException struct {
 	Message *string
@@ -779,10 +781,10 @@ func (e *OperationNotPermittedException) ErrorMessage() string {
 func (e *OperationNotPermittedException) ErrorCode() string             { return "OperationNotPermittedException" }
 func (e *OperationNotPermittedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when AWS Organizations is not configured to support all
-// features. All features must be enabled in AWS Organization to support creating
-// an organization trail. For more information, see Prepare For Creating a Trail
-// For Your Organization
+// This exception is thrown when Organizations is not configured to support all
+// features. All features must be enabled in Organizations to support creating an
+// organization trail. For more information, see Prepare For Creating a Trail For
+// Your Organization
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html).
 type OrganizationNotInAllFeaturesModeException struct {
 	Message *string
@@ -806,9 +808,9 @@ func (e *OrganizationNotInAllFeaturesModeException) ErrorFault() smithy.ErrorFau
 	return smithy.FaultClient
 }
 
-// This exception is thrown when the request is made from an AWS account that is
-// not a member of an organization. To make this request, sign in using the
-// credentials of an account that belongs to an organization.
+// This exception is thrown when the request is made from an Amazon Web Services
+// account that is not a member of an organization. To make this request, sign in
+// using the credentials of an account that belongs to an organization.
 type OrganizationsNotInUseException struct {
 	Message *string
 

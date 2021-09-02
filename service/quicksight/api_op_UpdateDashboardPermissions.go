@@ -29,7 +29,7 @@ func (c *Client) UpdateDashboardPermissions(ctx context.Context, params *UpdateD
 
 type UpdateDashboardPermissionsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboard whose
+	// The ID of the Amazon Web Services account that contains the dashboard whose
 	// permissions you're updating.
 	//
 	// This member is required.

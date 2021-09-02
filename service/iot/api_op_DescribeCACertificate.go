@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Describes a registered CA certificate.
+// Describes a registered CA certificate. Requires permission to access the
+// DescribeCACertificate
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeCACertificate(ctx context.Context, params *DescribeCACertificateInput, optFns ...func(*Options)) (*DescribeCACertificateOutput, error) {
 	if params == nil {
 		params = &DescribeCACertificateInput{}

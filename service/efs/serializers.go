@@ -2056,6 +2056,11 @@ func awsRestjson1_serializeDocumentLifecyclePolicy(v *types.LifecyclePolicy, val
 		ok.String(string(v.TransitionToIA))
 	}
 
+	if len(v.TransitionToPrimaryStorageClass) > 0 {
+		ok := object.Key("TransitionToPrimaryStorageClass")
+		ok.String(string(v.TransitionToPrimaryStorageClass))
+	}
+
 	return nil
 }
 

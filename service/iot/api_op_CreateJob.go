@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a job.
+// Creates a job. Requires permission to access the CreateJob
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns ...func(*Options)) (*CreateJobOutput, error) {
 	if params == nil {
 		params = &CreateJobInput{}
@@ -29,8 +31,9 @@ func (c *Client) CreateJob(ctx context.Context, params *CreateJobInput, optFns .
 
 type CreateJobInput struct {
 
-	// A job identifier which must be unique for your AWS account. We recommend using a
-	// UUID. Alpha-numeric characters, "-" and "_" are valid for use here.
+	// A job identifier which must be unique for your Amazon Web Services account. We
+	// recommend using a UUID. Alpha-numeric characters, "-" and "_" are valid for use
+	// here.
 	//
 	// This member is required.
 	JobId *string
@@ -64,8 +67,8 @@ type CreateJobInput struct {
 	JobTemplateArn *string
 
 	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
-	// MQTT topics that contain the value in the following format.
+	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
+	// notifications to MQTT topics that contain the value in the following format.
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
 	// namespaceId feature is in public preview.
 	NamespaceId *string

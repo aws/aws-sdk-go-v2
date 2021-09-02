@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Updates a Device Defender security profile.
+// Updates a Device Defender security profile. Requires permission to access the
+// UpdateSecurityProfile
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateSecurityProfile(ctx context.Context, params *UpdateSecurityProfileInput, optFns ...func(*Options)) (*UpdateSecurityProfileOutput, error) {
 	if params == nil {
 		params = &UpdateSecurityProfileInput{}

@@ -79,9 +79,9 @@ type CreateAccessInput struct {
 	// The following is an Entry and Target pair example. [ { "Entry":
 	// "your-personal-report.pdf", "Target":
 	// "/bucket3/customized-reports/${transfer:UserName}.pdf" } ] In most cases, you
-	// can use this value instead of the scope-down policy to lock down your user to
-	// the designated home directory ("chroot"). To do this, you can set Entry to / and
-	// set Target to the HomeDirectory parameter value. The following is an Entry and
+	// can use this value instead of the session policy to lock down your user to the
+	// designated home directory ("chroot"). To do this, you can set Entry to / and set
+	// Target to the HomeDirectory parameter value. The following is an Entry and
 	// Target pair example for chroot. [ { "Entry:": "/", "Target":
 	// "/bucket_name/home/mydirectory" } ] If the target of a logical directory entry
 	// does not exist in Amazon S3 or EFS, the entry is ignored. As a workaround, you
@@ -95,23 +95,24 @@ type CreateAccessInput struct {
 	// The type of landing directory (folder) you want your users' home directory to be
 	// when they log into the server. If you set it to PATH, the user will see the
 	// absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol
-	// clients. If you set it LOGICAL, you will need to provide mappings in the
+	// clients. If you set it LOGICAL, you need to provide mappings in the
 	// HomeDirectoryMappings for how you want to make Amazon S3 or EFS paths visible to
 	// your users.
 	HomeDirectoryType types.HomeDirectoryType
 
-	// A scope-down policy for your user so that you can use the same IAM role across
+	// A session policy for your user so that you can use the same IAM role across
 	// multiple users. This policy scopes down user access to portions of their Amazon
 	// S3 bucket. Variables that you can use inside this policy include
 	// ${Transfer:UserName}, ${Transfer:HomeDirectory}, and ${Transfer:HomeBucket}.
-	// This only applies when domain of ServerId is S3. Amazon EFS does not use
-	// scope-down policies. For scope-down policies, Amazon Web Services Transfer
-	// Family stores the policy as a JSON blob, instead of the Amazon Resource Name
-	// (ARN) of the policy. You save the policy as a JSON blob and pass it in the
-	// Policy argument. For an example of a scope-down policy, see Example scope-down
-	// policy
-	// (https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html).
-	// For more information, see AssumeRole
+	// This only applies when the domain of ServerId is S3. EFS does not use session
+	// policies. For session policies, Amazon Web Services Transfer Family stores the
+	// policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy.
+	// You save the policy as a JSON blob and pass it in the Policy argument.
+	//
+	// For an
+	// example of a session policy, see Example session policy
+	// (https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html). For
+	// more information, see AssumeRole
 	// (https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html) in the
 	// Amazon Web Services Security Token Service API Reference.
 	Policy *string

@@ -11,7 +11,7 @@ import (
 )
 
 // Schedules delivery of a configuration snapshot to the Amazon S3 bucket in the
-// specified delivery channel. After the delivery has started, AWS Config sends the
+// specified delivery channel. After the delivery has started, Config sends the
 // following notifications using an Amazon SNS topic that you have specified.
 //
 // *

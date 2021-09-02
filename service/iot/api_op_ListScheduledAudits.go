@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all of your scheduled audits.
+// Lists all of your scheduled audits. Requires permission to access the
+// ListScheduledAudits
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListScheduledAudits(ctx context.Context, params *ListScheduledAuditsInput, optFns ...func(*Options)) (*ListScheduledAuditsOutput, error) {
 	if params == nil {
 		params = &ListScheduledAuditsInput{}

@@ -101,8 +101,8 @@ type DeleteObjectsInput struct {
 	Delete *types.Delete
 
 	// Specifies whether you want to delete this object even if it has a
-	// Governance-type Object Lock in place. You must have sufficient permissions to
-	// perform this operation.
+	// Governance-type Object Lock in place. To use this header, you must have the
+	// s3:PutBucketPublicAccessBlock permission.
 	BypassGovernanceRetention bool
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

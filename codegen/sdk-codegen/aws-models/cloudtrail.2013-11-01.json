@@ -67,7 +67,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Adds one or more tags to a trail, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. \n         Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. \n          If you specify a key without a value, the tag will be created with the specified key and a value of null. \n          You can tag a trail that applies to all AWS Regions only from the Region in which the trail was created (also known as its home region).</p>",
+                "smithy.api#documentation": "<p>Adds one or more tags to a trail, up to a limit of 50. Overwrites an existing tag's value when a new value is specified for an existing tag key. \n         Tag key names must be unique for a trail; you cannot have two keys with the same name but different values. \n          If you specify a key without a value, the tag will be created with the specified key and a value of null. \n          You can tag a trail that applies to all Amazon Web Services Regions only from the Region in which the trail was created (also known as its home region).</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -84,7 +84,7 @@
                 "TagsList": {
                     "target": "com.amazonaws.cloudtrail#TagsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Contains a list of CloudTrail tags, up to a limit of 50</p>"
+                        "smithy.api#documentation": "<p>Contains a list of tags, up to a limit of 50</p>"
                     }
                 }
             },
@@ -96,7 +96,7 @@
             "type": "structure",
             "members": {},
             "traits": {
-                "smithy.api#documentation": "<p>Returns the objects or data listed below if successful. Otherwise, returns an error.</p>"
+                "smithy.api#documentation": "<p>Returns the objects or data if successful. Otherwise, returns an error.</p>"
             }
         },
         "com.amazonaws.cloudtrail#AdvancedEventSelector": {
@@ -117,7 +117,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Advanced event selectors let you create fine-grained selectors for the following AWS\n         CloudTrail event record ﬁelds. They help you control costs by logging only those events\n         that are important to you. For more information about advanced event selectors, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging data events for trails</a> in the <i>AWS\n            CloudTrail User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>readOnly</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventSource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventCategory</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resources.type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resources.ARN</code>\n               </p>\n            </li>\n         </ul>\n         <p>You cannot apply both event selectors and advanced event selectors to a trail.</p>"
+                "smithy.api#documentation": "<p>Advanced event selectors let you create fine-grained selectors for the following CloudTrail \n         event record ﬁelds. They help you control costs by logging only those events\n         that are important to you. For more information about advanced event selectors, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging data events for trails</a> in the <i>CloudTrail User Guide</i>.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>readOnly</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventSource</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventName</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>eventCategory</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resources.type</code>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <code>resources.ARN</code>\n               </p>\n            </li>\n         </ul>\n         <p>You cannot apply both event selectors and advanced event selectors to a trail.</p>"
             }
         },
         "com.amazonaws.cloudtrail#AdvancedEventSelectors": {
@@ -132,26 +132,26 @@
                 "Field": {
                     "target": "com.amazonaws.cloudtrail#SelectorField",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         A field in an event record on which to filter events to be logged. Supported fields include <code>readOnly</code>, <code>eventCategory</code>, \n         <code>eventSource</code> (for management events), <code>eventName</code>, <code>resources.type</code>, and <code>resources.ARN</code>.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>readOnly</code>\n                  </b> - Optional. Can be set to <code>Equals</code> a value of <code>true</code>\n            or <code>false</code>. A value of <code>false</code> logs both <code>read</code> and\n            <code>write</code> events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventSource</code>\n                  </b> - For filtering management events only. \n            This can be set only to <code>NotEquals</code> \n                  <code>kms.amazonaws.com</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventName</code>\n                  </b> - Can use any operator. You can use it to ﬁlter in\n            or ﬁlter out any data event logged to CloudTrail, such as <code>PutBucket</code>. You can have multiple values\n            for this ﬁeld, separated by commas.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventCategory</code>\n                  </b> - This is required. It must be set to <code>Equals</code>, and \n            the value must be <code>Management</code> or <code>Data</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.type</code>\n                  </b> - This ﬁeld is required.\n                  <code>resources.type</code> can only use the <code>Equals</code> operator, and the\n               value can be one of the following: <code>AWS::S3::Object</code>,\n                  <code>AWS::Lambda::Function</code>, <code>AWS::DynamoDB::Table</code>,\n                  <code>AWS::S3Outposts::Object</code>, <code>AWS::ManagedBlockchain::Node</code>,\n               or <code>AWS::S3ObjectLambda::AccessPoint</code>. You can have only one\n                  <code>resources.type</code> ﬁeld per selector. To log data events on more than one\n               resource type, add another selector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.ARN</code>\n                  </b> - You can use any operator with\n               resources.ARN, but if you use <code>Equals</code> or <code>NotEquals</code>, the\n               value must exactly match the ARN of a valid resource of the type you've speciﬁed in\n               the template as the value of resources.type. For example, if resources.type equals\n                  <code>AWS::S3::Object</code>, the ARN must be in one of the following formats. To\n               log all data events for all objects in a specific S3 bucket, use the\n                  <code>StartsWith</code> operator, and include only the bucket ARN as the matching\n               value.</p>\n               <p>The trailing slash is intentional; do not exclude it.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3:::bucket_name/</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3:::bucket_name/object_or_file_name/</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::Lambda::Function</code>, and the operator is set\n            to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:lambda:region:account_ID:function:function_name</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::DynamoDB::Table</code>, and the operator is\n               set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the\n               following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:dynamodb:region:account_ID:table:table_name</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3Outposts::Object</code>, and the operator \n               is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3-outposts:region:>account_ID:object_path</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::ManagedBlockchain::Node</code>,\n               and the operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN\n               must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:managedblockchain:region:account_ID:nodes/node_ID</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>, and the operator is set to\n                  <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following\n               format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:partition:s3-object-lambda:region:account_ID:accesspoint/access_point_name</code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>\n         A field in an event record on which to filter events to be logged. Supported fields include <code>readOnly</code>, <code>eventCategory</code>, \n         <code>eventSource</code> (for management events), <code>eventName</code>, <code>resources.type</code>, and <code>resources.ARN</code>.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <b>\n                     <code>readOnly</code>\n                  </b> - Optional. Can be set to <code>Equals</code> a value of <code>true</code>\n            or <code>false</code>. A value of <code>false</code> logs both <code>read</code> and\n            <code>write</code> events.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventSource</code>\n                  </b> - For filtering management events only. \n            This can be set only to <code>NotEquals</code> \n                  <code>kms.amazonaws.com</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventName</code>\n                  </b> - Can use any operator. You can use it to ﬁlter in\n            or ﬁlter out any data event logged to CloudTrail, such as <code>PutBucket</code> or <code>GetSnapshotBlock</code>. You can have multiple values\n            for this ﬁeld, separated by commas.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>eventCategory</code>\n                  </b> - This is required. It must be set to <code>Equals</code>, and \n            the value must be <code>Management</code> or <code>Data</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.type</code>\n                  </b> - This ﬁeld is required.\n                  <code>resources.type</code> can only use the <code>Equals</code> operator, and the\n               value can be one of the following: <code>AWS::S3::Object</code>,\n                  <code>AWS::S3::AccessPoint</code>,\n                  <code>AWS::Lambda::Function</code>, <code>AWS::DynamoDB::Table</code>,\n                  <code>AWS::S3Outposts::Object</code>, <code>AWS::ManagedBlockchain::Node</code>,\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>, or <code>AWS::EC2::Snapshot</code>.\n               You can have only one <code>resources.type</code> ﬁeld per selector. To log data\n               events on more than one resource type, add another selector.</p>\n            </li>\n            <li>\n               <p>\n                  <b>\n                     <code>resources.ARN</code>\n                  </b> - You can use any operator with\n               resources.ARN, but if you use <code>Equals</code> or <code>NotEquals</code>, the\n               value must exactly match the ARN of a valid resource of the type you've speciﬁed in\n               the template as the value of resources.type. For example, if resources.type equals\n                  <code>AWS::S3::Object</code>, the ARN must be in one of the following formats. To\n               log all data events for all objects in a specific S3 bucket, use the\n                  <code>StartsWith</code> operator, and include only the bucket ARN as the matching value.</p>\n               <p>The trailing slash is intentional; do not exclude it. Replace the text between\n               less than and greater than symbols (<>) with resource-specific information. </p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/</code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:::<bucket_name>/<object_path>/</code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3::AccessPoint</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               one of the following formats. To log events on all objects in an S3 access point, we\n               recommend that you use only the access point ARN, don’t include the object path, and\n               use the <code>StartsWith</code> or <code>NotStartsWith</code> operators.</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3:<region>:<account_ID>:accesspoint/<access_point_name>/object/<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::Lambda::Function</code>, and the operator is set\n            to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:lambda:<region>:<account_ID>:function:<function_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When resources.type equals <code>AWS::DynamoDB::Table</code>, and the operator is\n               set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the\n               following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:dynamodb:<region>:<account_ID>:table:<table_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::S3Outposts::Object</code>, and the operator \n               is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-outposts:<region>:<account_ID>:<object_path></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::ManagedBlockchain::Node</code>,\n               and the operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN\n               must be in the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:managedblockchain:<region>:<account_ID>:nodes/<node_ID></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals\n                  <code>AWS::S3ObjectLambda::AccessPoint</code>, and the operator is set to\n                  <code>Equals</code> or <code>NotEquals</code>, the ARN must be in the following\n               format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:s3-object-lambda:<region>:<account_ID>:accesspoint/<access_point_name></code>\n                     </p>\n                  </li>\n               </ul>\n               <p>When <code>resources.type</code> equals <code>AWS::EC2::Snapshot</code>, and the\n               operator is set to <code>Equals</code> or <code>NotEquals</code>, the ARN must be in\n               the following format:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>arn:<partition>:ec2:<region>::snapshot/<snapshot_ID></code>\n                     </p>\n                  </li>\n               </ul>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
                 "Equals": {
                     "target": "com.amazonaws.cloudtrail#Operator",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An operator that includes events that match the exact value of the event record field specified as the value of <code>Field</code>. This is the only valid operator \n         that you can use with the <code>readOnly</code>, <code>eventCategory</code>, and <code>resources.type</code> fields.\n      </p>"
+                        "smithy.api#documentation": "<p> An operator that includes events that match the exact value of the event record field\n         specified as the value of <code>Field</code>. This is the only valid operator that you can\n         use with the <code>readOnly</code>, <code>eventCategory</code>, and\n            <code>resources.type</code> fields.</p>"
                     }
                 },
                 "StartsWith": {
                     "target": "com.amazonaws.cloudtrail#Operator",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An operator that includes events that match the first few characters of the event record field specified as the value of <code>Field</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>An operator that includes events that match the first few characters of the event record\n         field specified as the value of <code>Field</code>.</p>"
                     }
                 },
                 "EndsWith": {
                     "target": "com.amazonaws.cloudtrail#Operator",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An operator that includes events that match the last few characters of the event record field specified as the value of <code>Field</code>.\n      </p>"
+                        "smithy.api#documentation": "<p>An operator that includes events that match the last few characters of the event record\n         field specified as the value of <code>Field</code>.</p>"
                     }
                 },
                 "NotEquals": {
@@ -208,7 +208,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when an operation is called with an invalid trail ARN. The format of a trail ARN is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "CloudTrailARNInvalid",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when an operation is called with a trail ARN that is not valid. The following is the format of a trail ARN.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -224,7 +228,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when trusted access has not been enabled between AWS CloudTrail and AWS Organizations. For more information, \n         see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">Enabling Trusted Access with Other AWS Services</a>\n         and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>. </p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "CloudTrailAccessNotEnabled",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when trusted access has not been enabled between CloudTrail and Organizations. For more information, \n         see <a href=\"https://docs.aws.amazon.com/organizations/latest/userguide/orgs_integrate_services.html\">Enabling Trusted Access with Other Amazon Web Services Services</a>\n         and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>. </p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -240,7 +248,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when a call results in the <code>InvalidClientTokenId</code> error code. This can occur when you are creating or updating a trail to send notifications to an Amazon SNS topic that \n      is in a suspended AWS account.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "CloudTrailInvalidClientTokenId",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when a call results in the <code>InvalidClientTokenId</code> error code. \n         This can occur when you are creating or updating a trail to send notifications to an Amazon SNS topic that \n         is in a suspended Amazon Web Services account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -316,7 +328,7 @@
                     "name": "cloudtrail"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<fullname>AWS CloudTrail</fullname>\n         <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p>\n         <p>CloudTrail is a web service that records AWS API calls for your AWS account and delivers log files to an Amazon S3 bucket. The recorded information includes the identity of the user, the start time of the AWS API call, the source IP address, the request parameters, and the response elements returned by the service.</p> \n      \n         <note>\n            <p>As an alternative to the API,\n         you can use one of the AWS SDKs, which consist of libraries and sample code for various\n         programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs\n         provide a convenient way to create programmatic access to AWSCloudTrail. For example, the SDKs\n         take care of cryptographically signing requests, managing errors, and retrying requests\n         automatically. For information about the AWS SDKs, including how to download and install\n         them, see the <a href=\"http://aws.amazon.com/tools/\">Tools for Amazon Web Services\n            page</a>.</p> \n         </note> \n         <p>See the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html\">AWS CloudTrail User Guide</a> for information about the data that is included with each AWS API call listed in the log files.</p>",
+                "smithy.api#documentation": "<fullname>CloudTrail</fullname>\n         <p>This is the CloudTrail API Reference. It provides descriptions of actions, data types, common parameters, and common errors for CloudTrail.</p>\n         <p>CloudTrail is a web service that records Amazon Web Services API calls for your Amazon Web Services account and delivers log files to an Amazon S3 bucket. \n         The recorded information includes the identity of the user, the start time of the Amazon Web Services API call, the source IP address, the request parameters, and the response elements returned by the service.</p> \n      \n         <note>\n            <p>As an alternative to the API,\n            you can use one of the Amazon Web Services SDKs, which consist of libraries and sample code for various\n         programming languages and platforms (Java, Ruby, .NET, iOS, Android, etc.). The SDKs\n         provide programmatic access to CloudTrail. For example, the SDKs\n         handle cryptographically signing requests, managing errors, and retrying requests\n         automatically. For more information about the Amazon Web Services SDKs, including how to download and install\n            them, see <a href=\"http://aws.amazon.com/tools/\">Tools to Build on Amazon Web Services</a>.</p> \n         </note> \n         <p>See the <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-user-guide.html\">CloudTrail User \n         Guide</a> for information about the data that is included with each Amazon Web Services API call listed in the log files.</p>",
                 "smithy.api#title": "AWS CloudTrail",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://cloudtrail.amazonaws.com/doc/2013-11-01/"
@@ -334,6 +346,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "CloudWatchLogsDeliveryUnavailable",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Cannot set a CloudWatch Logs delivery for this region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -350,6 +366,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ConflictException",
+                    "httpResponseCode": 409
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the specified resource is not ready for an operation. \n         This can occur when you try to run an operation on a trail before CloudTrail has time to fully load the trail. \n         If this exception occurs, wait a few minutes, and then try the operation again.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
@@ -450,7 +470,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. </p>",
+                "smithy.api#documentation": "<p>Creates a trail that specifies the settings for delivery of log data to an Amazon S3 bucket. \n         </p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -460,7 +480,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the trail. The name must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n            and <code>my--namespace</code> are invalid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>Specifies the name of the trail. The name must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n            and <code>my--namespace</code> are not valid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 },
@@ -498,13 +518,13 @@
                 "EnableLogFileValidation": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether log file integrity validation is enabled. The default is false.</p>\n         <note>\n            <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether log file integrity validation is enabled. The default is false.</p>\n         <note>\n            <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail does \n            not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. \n            For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable \n            it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on \n            January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p>\n         </note>"
                     }
                 },
                 "CloudWatchLogsLogGroupArn": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group \n         to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.</p>"
+                        "smithy.api#documentation": "<p>Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group \n         to which CloudTrail logs will be delivered. Not required unless you specify <code>CloudWatchLogsRoleArn</code>.</p>"
                     }
                 },
                 "CloudWatchLogsRoleArn": {
@@ -516,13 +536,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The\n         value can be an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully\n         specified ARN to a key, or a globally unique identifier.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>alias/MyAliasName</p>\n            </li>\n            <li>\n               <p>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</p>\n            </li>\n            <li>\n               <p>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</p>\n            </li>\n            <li>\n               <p>12345678-1234-1234-1234-123456789012</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The\n         value can be an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully\n         specified ARN to a key, or a globally unique identifier.</p>\n         <p>CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys,\n         see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Using multi-Region keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>alias/MyAliasName</p>\n            </li>\n            <li>\n               <p>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</p>\n            </li>\n            <li>\n               <p>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</p>\n            </li>\n            <li>\n               <p>12345678-1234-1234-1234-123456789012</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IsOrganizationTrail": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the trail is created for all accounts in an organization in AWS Organizations, or only for the current AWS account. \n      The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in \n      AWS Organizations.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the trail is created for all accounts in an organization in Organizations, or only for the current Amazon Web Services account. \n         The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account for an organization in \n         Organizations.</p>"
                     }
                 },
                 "TagsList": {
@@ -606,7 +626,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. \n         The value is a fully specified ARN to a KMS key in the following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 },
                 "IsOrganizationTrail": {
@@ -626,18 +646,18 @@
                 "Type": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type in which you want to log data events. You can specify\n            <code>AWS::S3::Object</code>, <code>AWS::Lambda::Function</code>, or\n            <code>AWS::DynamoDB::Table</code> resources.</p>\n         <p>The <code>AWS::S3Outposts::Object</code>, <code>AWS::ManagedBlockchain::Node</code>, and\n            <code>AWS::S3ObjectLambda::AccessPoint</code> resource types are not valid in basic\n         event selectors. To log data events on these resource types, use advanced event\n         selectors.</p>"
+                        "smithy.api#documentation": "<p>The resource type in which you want to log data events. You can specify\n            <code>AWS::S3::Object</code>, <code>AWS::Lambda::Function</code>, or\n            <code>AWS::DynamoDB::Table</code> resources.</p>\n         <p>The <code>AWS::S3Outposts::Object</code>, <code>AWS::ManagedBlockchain::Node</code>, \n            <code>AWS::S3ObjectLambda::AccessPoint</code>, and <code>AWS::EC2::Snapshot</code> resource types are not valid in basic\n         event selectors. To log data events on these resource types, use advanced event\n         selectors.</p>"
                     }
                 },
                 "Values": {
                     "target": "com.amazonaws.cloudtrail#DataResourceValues",
                     "traits": {
-                        "smithy.api#documentation": "<p>An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.</p>\n         <ul>\n            <li>\n               <p>To log data events for all objects in all S3 buckets in your AWS account, specify the \n         prefix as <code>arn:aws:s3:::</code>. </p>\n               <note>\n                  <p>This will also enable logging of data event activity performed by any user or role in your AWS account, \n         even if that activity is performed on a bucket that belongs to another AWS account. </p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty\n         object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for\n         all objects in this S3 bucket.</p>\n            </li>\n            <li>\n               <p>To log data events for specific objects, specify the S3 bucket and object prefix such\n         as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for\n         objects in this S3 bucket that match the prefix.</p>\n            </li>\n            <li>\n               <p>To log data events for all Lambda functions in your AWS account, specify the prefix as\n                  <code>arn:aws:lambda</code>.</p>\n               <note>\n                  <p>This will also enable logging of <code>Invoke</code> activity performed by any user or role in your AWS account, \n            even if that activity is performed on a function that belongs to another AWS account. </p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for a specific Lambda function, specify the function ARN.</p>\n               <note>\n                  <p>Lambda function ARNs are exact. For example, if you specify a \n            function ARN <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>, data events will\n            only be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>. They will\n            not be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld2</i>.</p>\n               </note> \n            </li>\n            <li>\n               <p>To log data events for all DynamoDB tables in your AWS account, specify the prefix\n               as <code>arn:aws:dynamodb</code>.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>An array of Amazon Resource Name (ARN) strings or partial ARN strings for the specified objects.</p>\n         <ul>\n            <li>\n               <p>To log data events for all objects in all S3 buckets in your Amazon Web Services account, specify the \n         prefix as <code>arn:aws:s3:::</code>.</p>\n               <note>\n                  <p>This also enables logging of data event activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a bucket that belongs to another Amazon Web Services account.</p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for all objects in an S3 bucket, specify the bucket and an empty\n         object prefix such as <code>arn:aws:s3:::bucket-1/</code>. The trail logs data events for\n         all objects in this S3 bucket.</p>\n            </li>\n            <li>\n               <p>To log data events for specific objects, specify the S3 bucket and object prefix such\n         as <code>arn:aws:s3:::bucket-1/example-images</code>. The trail logs data events for\n         objects in this S3 bucket that match the prefix.</p>\n            </li>\n            <li>\n               <p>To log data events for all Lambda functions in your Amazon Web Services account, specify the prefix as\n                  <code>arn:aws:lambda</code>.</p>\n               <note>\n                  <p>This also enables logging of <code>Invoke</code> activity performed by any user or role in your Amazon Web Services account, \n         even if that activity is performed on a function that belongs to another Amazon Web Services account. </p>\n               </note>\n            </li>\n            <li>\n               <p>To log data events for a specific Lambda function, specify the function ARN.</p>\n               <note>\n                  <p>Lambda function ARNs are exact. For example, if you specify a \n            function ARN <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>, data events will\n            only be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld</i>. They will\n            not be logged for <i>arn:aws:lambda:us-west-2:111111111111:function:helloworld2</i>.</p>\n               </note> \n            </li>\n            <li>\n               <p>To log data events for all DynamoDB tables in your Amazon Web Services account, specify the prefix\n               as <code>arn:aws:dynamodb</code>.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The Amazon S3 buckets, AWS Lambda functions, or Amazon DynamoDB tables that you specify\n         in your event selectors for your trail to log data events. Data events provide information\n         about the resource operations performed on or within a resource itself. These are also\n         known as data plane operations. You can specify up to 250 data resources for a\n         trail.</p>\n         <note>\n            <p>The total number of allowed data resources is 250. This number can be distributed between 1 and 5 event selectors, \n      but the total cannot exceed 250 across all selectors.</p>\n            <p>If you are using advanced event selectors, the maximum total number of values for\n            all conditions, across all advanced event selectors for the trail, is 500.</p>\n         </note>\n         <p>The following example demonstrates how logging works when you configure logging of all data events\n      for an S3 bucket named <code>bucket-1</code>. In this example, the CloudTrail user specified an empty prefix, \n      and the option to log both <code>Read</code> and <code>Write</code> data events.</p>\n         <ol>\n            <li>\n               <p>A user uploads an image file to <code>bucket-1</code>.</p>\n            </li>\n            <li>\n               <p>The <code>PutObject</code> API operation is an Amazon S3 object-level API. \n            It is recorded as a data event in CloudTrail. Because the CloudTrail user specified an S3 bucket\n            with an empty prefix, events that occur on any object in that bucket are logged. The trail processes and logs the\n               event.</p>\n            </li>\n            <li>\n               <p>A user uploads an object to an Amazon S3 bucket named\n                  <code>arn:aws:s3:::bucket-2</code>.</p>\n            </li>\n            <li>\n               <p>The <code>PutObject</code> API operation occurred for an object in an S3 bucket that the CloudTrail\n            user didn't specify for the trail. The trail doesn’t log the event.</p>\n            </li>\n         </ol>\n         <p>The following example demonstrates how logging works when you configure logging of AWS Lambda data events for a \n         Lambda function named <i>MyLambdaFunction</i>, but not for all AWS Lambda functions.</p>\n         <ol>\n            <li>\n               <p>A user runs a script that includes a call to the <i>MyLambdaFunction</i> function and the\n               <i>MyOtherLambdaFunction</i> function.</p>\n            </li>\n            <li>\n               <p>The <code>Invoke</code> API operation on <i>MyLambdaFunction</i> is an AWS Lambda API. \n               It is recorded as a data event in CloudTrail. Because the CloudTrail user specified logging data events for\n               <i>MyLambdaFunction</i>, any invocations of that function are logged. The trail processes and logs the event. </p>\n            </li>\n            <li>\n               <p>The <code>Invoke</code> API operation on <i>MyOtherLambdaFunction</i> is an AWS Lambda API. \n               Because the CloudTrail user did not specify logging data events for all Lambda functions,\n               the <code>Invoke</code> operation for <i>MyOtherLambdaFunction</i> does not match the function specified for the trail. \n               The trail doesn’t log the event. </p>\n            </li>\n         </ol>"
+                "smithy.api#documentation": "<p>The Amazon S3 buckets, Lambda functions, or Amazon DynamoDB tables that you specify\n         in your event selectors for your trail to log data events. Data events provide information\n         about the resource operations performed on or within a resource itself. These are also\n         known as data plane operations. You can specify up to 250 data resources for a\n         trail.</p>\n         <note>\n            <p>The total number of allowed data resources is 250. This number can be distributed between 1 and 5 event selectors, \n      but the total cannot exceed 250 across all selectors.</p>\n            <p>If you are using advanced event selectors, the maximum total number of values for\n            all conditions, across all advanced event selectors for the trail, is 500.</p>\n         </note>\n         <p>The following example demonstrates how logging works when you configure logging of all data events\n         for an S3 bucket named <code>bucket-1</code>. In this example, the CloudTrail user specified an empty prefix, \n      and the option to log both <code>Read</code> and <code>Write</code> data events.</p>\n         <ol>\n            <li>\n               <p>A user uploads an image file to <code>bucket-1</code>.</p>\n            </li>\n            <li>\n               <p>The <code>PutObject</code> API operation is an Amazon S3 object-level API. \n            It is recorded as a data event in CloudTrail. Because the CloudTrail user specified an S3 bucket\n            with an empty prefix, events that occur on any object in that bucket are logged. The trail processes and logs the\n               event.</p>\n            </li>\n            <li>\n               <p>A user uploads an object to an Amazon S3 bucket named\n                  <code>arn:aws:s3:::bucket-2</code>.</p>\n            </li>\n            <li>\n               <p>The <code>PutObject</code> API operation occurred for an object in an S3 bucket that the CloudTrail\n            user didn't specify for the trail. The trail doesn’t log the event.</p>\n            </li>\n         </ol>\n         <p>The following example demonstrates how logging works when you configure logging of Lambda data events for a \n         Lambda function named <i>MyLambdaFunction</i>, but not for all Lambda functions.</p>\n         <ol>\n            <li>\n               <p>A user runs a script that includes a call to the <i>MyLambdaFunction</i> function and the\n               <i>MyOtherLambdaFunction</i> function.</p>\n            </li>\n            <li>\n               <p>The <code>Invoke</code> API operation on <i>MyLambdaFunction</i> is an Lambda API. \n               It is recorded as a data event in CloudTrail. Because the CloudTrail user specified logging data events for\n               <i>MyLambdaFunction</i>, any invocations of that function are logged. The trail processes and logs the event.</p>\n            </li>\n            <li>\n               <p>The <code>Invoke</code> API operation on <i>MyOtherLambdaFunction</i> is an Lambda API. \n               Because the CloudTrail user did not specify logging data events for all Lambda functions,\n               the <code>Invoke</code> operation for <i>MyOtherLambdaFunction</i> does not match the function specified for the trail. \n               The trail doesn’t log the event. </p>\n            </li>\n         </ol>"
             }
         },
         "com.amazonaws.cloudtrail#DataResourceValues": {
@@ -700,7 +720,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail to be deleted. The format of a\n         trail ARN is:\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail to be deleted. The following is the format of a\n         trail ARN.\n         <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -766,7 +786,7 @@
                 "trailList": {
                     "target": "com.amazonaws.cloudtrail#TrailList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of trail objects. Trail objects with string values are only returned if values for the objects exist in a trail's configuration. \n         For example, <code>SNSTopicName</code> and <code>SNSTopicARN</code> are only returned in results if a trail is configured to send SNS notifications. Similarly, \n      <code>KMSKeyId</code> only appears in results if a trail's log files are encrypted with AWS KMS-managed keys.</p>"
+                        "smithy.api#documentation": "<p>The list of trail objects. Trail objects with string values are only returned if values for the objects exist in a trail's configuration. \n         For example, <code>SNSTopicName</code> and <code>SNSTopicARN</code> are only returned in results if a trail is configured to send SNS notifications. Similarly, \n         <code>KMSKeyId</code> only appears in results if a trail's log files are encrypted with KMS customer managed keys.</p>"
                     }
                 }
             },
@@ -801,7 +821,7 @@
                 "AccessKeyId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS access key ID that was used to sign the request. If the request was made \n         with temporary security credentials, this is the access key ID of the temporary credentials.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services access key ID that was used to sign the request. If the request was made \n         with temporary security credentials, this is the access key ID of the temporary credentials.</p>"
                     }
                 },
                 "EventTime": {
@@ -813,7 +833,7 @@
                 "EventSource": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS service that the request was made to.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services service to which the request was made.</p>"
                     }
                 },
                 "Username": {
@@ -862,19 +882,19 @@
                 "IncludeManagementEvents": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specify if you want your event selector to include management events for your trail.</p>\n         <p>\n         For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events\">Management Events</a> in the <i>AWS CloudTrail User Guide</i>.</p> \n      \n         <p>By default, the value is <code>true</code>.</p>\n         <p>The first copy of management events is free. You are charged for additional copies of management \n         events that you are logging on any subsequent trail in the same region. For more information about \n         CloudTrail pricing, see <a href=\"http://aws.amazon.com/cloudtrail/pricing/\">AWS CloudTrail Pricing</a>.</p>"
+                        "smithy.api#documentation": "<p>Specify if you want your event selector to include management events for your trail.</p>\n         <p>\n         For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-management-events\">Management Events</a> in the <i>CloudTrail User Guide</i>.</p> \n      \n         <p>By default, the value is <code>true</code>.</p>\n         <p>The first copy of management events is free. You are charged for additional copies of management \n         events that you are logging on any subsequent trail in the same region. For more information about \n         CloudTrail pricing, see <a href=\"http://aws.amazon.com/cloudtrail/pricing/\">CloudTrail Pricing</a>.</p>"
                     }
                 },
                 "DataResources": {
                     "target": "com.amazonaws.cloudtrail#DataResources",
                     "traits": {
-                        "smithy.api#documentation": "<p>CloudTrail supports data event logging for Amazon S3 objects and AWS Lambda functions\n         with basic event selectors. You can specify up to 250 resources for an individual event\n         selector, but the total number of data resources cannot exceed 250 across all event\n         selectors in a trail. This limit does not apply if you configure resource logging for all\n         data events. </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events\">Data Events</a> and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Limits in AWS CloudTrail</a> \n         in the <i>AWS CloudTrail User Guide</i>.</p>"
+                        "smithy.api#documentation": "<p>CloudTrail supports data event logging for Amazon S3 objects, Lambda functions, \n         and Amazon DynamoDB tables \n         with basic event selectors. You can specify up to 250 resources for an individual event\n         selector, but the total number of data resources cannot exceed 250 across all event\n         selectors in a trail. This limit does not apply if you configure resource logging for all\n         data events.</p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html#logging-data-events\">Data Events</a> and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Limits in CloudTrail</a> \n         in the <i>CloudTrail User Guide</i>.</p>"
                     }
                 },
                 "ExcludeManagementEventSources": {
                     "target": "com.amazonaws.cloudtrail#ExcludeManagementEventSources",
                     "traits": {
-                        "smithy.api#documentation": "<p>An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), or it can filter out AWS Key Management Service events by \n         containing <code>\"kms.amazonaws.com\"</code>. By default, <code>ExcludeManagementEventSources</code> is empty, and AWS KMS events are included in events that are logged to your trail. </p>"
+                        "smithy.api#documentation": "<p>An optional list of service event sources from which you do not want management events to be logged on your trail. In this release, the list can be empty (disables the filter), \n         or it can filter out Key Management Service or Amazon RDS Data API events by \n         containing <code>kms.amazonaws.com</code> or <code>rdsdata.amazonaws.com</code>. By default, <code>ExcludeManagementEventSources</code> is empty, and KMS and \n         Amazon RDS Data API events are logged to your trail.</p>"
                     }
                 }
             },
@@ -923,7 +943,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the settings for the event selectors that you configured for your trail.\n         The information returned for your event selectors includes the following:</p>\n         <ul>\n            <li>\n               <p>If your event selector includes read-only events, write-only events, or\n            all events. This applies to both management events and data events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes management events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes data events, the resources on which you are logging data\n               events.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html\">Logging Data and Management Events for Trails\n      </a> in the <i>AWS CloudTrail User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the settings for the event selectors that you configured for your trail.\n         The information returned for your event selectors includes the following:</p>\n         <ul>\n            <li>\n               <p>If your event selector includes read-only events, write-only events, or\n            all events. This applies to both management events and data events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes management events.</p>\n            </li>\n            <li>\n               <p>If your event selector includes data events, the resources on which you are logging data\n               events.</p>\n            </li>\n         </ul>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html\">Logging Data and Management Events for Trails\n      </a> in the <i>CloudTrail User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -988,7 +1008,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Describes the settings for the Insights event selectors that you configured for your trail. <code>GetInsightSelectors</code> shows \n         if CloudTrail Insights event logging is enabled on the trail, and if it is, which insight types are enabled. \n         If you run <code>GetInsightSelectors</code> on a trail that does not have Insights events enabled, the operation throws the exception\n         <code>InsightNotEnabledException</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Logging CloudTrail Insights Events for Trails\n      </a> in the <i>AWS CloudTrail User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Describes the settings for the Insights event selectors that you configured for your trail. <code>GetInsightSelectors</code> shows \n         if CloudTrail Insights event logging is enabled on the trail, and if it is, which insight types are enabled. \n         If you run <code>GetInsightSelectors</code> on a trail that does not have Insights events enabled, the operation throws the exception\n         <code>InsightNotEnabledException</code>\n         </p>\n         <p>For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-insights-events-with-cloudtrail.html\">Logging CloudTrail Insights Events for Trails\n      </a> in the <i>CloudTrail User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -1101,7 +1121,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a shadow trail (a replication of the trail in another region), you must specify its ARN. The format of a trail ARN is:</p>\n          <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which you are requesting status. To get the status of a \n         shadow trail (a replication of the trail in another region), you must specify its ARN. The following is the format of a trail ARN.</p>\n          <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1116,13 +1136,13 @@
                 "IsLogging": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Whether the CloudTrail is currently logging AWS API calls.</p>"
+                        "smithy.api#documentation": "<p>Whether the CloudTrail trail is currently logging Amazon Web Services API calls.</p>"
                     }
                 },
                 "LatestDeliveryError": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files\n         to the designated bucket. For more information see the topic <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error\n            Responses</a> in the Amazon S3 API Reference. </p>\n         <note>\n            <p>This error occurs only when there is a problem with the destination S3 bucket and will\n         not occur for timeouts. To resolve the issue, create a new bucket and call\n            <code>UpdateTrail</code> to specify the new bucket, or fix the existing objects so that\n         CloudTrail can again write to the bucket.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver log files\n         to the designated bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error\n            Responses</a> in the Amazon S3 API Reference. </p>\n         <note>\n            <p>This error occurs only when there is a problem with the destination S3 bucket, and does\n         not occur for requests that time out. To resolve the issue, create a new bucket, and then call\n            <code>UpdateTrail</code> to specify the new bucket; or fix the existing objects so that\n         CloudTrail can again write to the bucket.</p>\n         </note>"
                     }
                 },
                 "LatestNotificationError": {
@@ -1146,13 +1166,13 @@
                 "StartLoggingTime": {
                     "target": "com.amazonaws.cloudtrail#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the most recent date and time when CloudTrail started recording API calls for an AWS account.</p>"
+                        "smithy.api#documentation": "<p>Specifies the most recent date and time when CloudTrail started recording API calls for an Amazon Web Services account.</p>"
                     }
                 },
                 "StopLoggingTime": {
                     "target": "com.amazonaws.cloudtrail#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the most recent date and time when CloudTrail stopped recording API calls for an AWS account.</p>"
+                        "smithy.api#documentation": "<p>Specifies the most recent date and time when CloudTrail stopped recording API calls for an Amazon Web Services account.</p>"
                     }
                 },
                 "LatestCloudWatchLogsDeliveryError": {
@@ -1176,7 +1196,7 @@
                 "LatestDigestDeliveryError": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver a digest\n         file to the designated bucket. For more information see the topic <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error\n            Responses</a> in the Amazon S3 API Reference. </p>\n         <note>\n            <p>This error occurs only when there is a problem with the destination S3 bucket and will\n         not occur for timeouts. To resolve the issue, create a new bucket and call\n            <code>UpdateTrail</code> to specify the new bucket, or fix the existing objects so that\n         CloudTrail can again write to the bucket.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Displays any Amazon S3 error that CloudTrail encountered when attempting to deliver a digest\n         file to the designated bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/ErrorResponses.html\">Error\n            Responses</a> in the Amazon S3 API Reference. </p>\n         <note>\n            <p>This error occurs only when there is a problem with the destination S3 bucket, and does\n         not occur for requests that time out. To resolve the issue, create a new bucket, and then call\n            <code>UpdateTrail</code> to specify the new bucket; or fix the existing objects so that\n            CloudTrail can again write to the bucket.</p>\n         </note>"
                     }
                 },
                 "LatestDeliveryAttemptTime": {
@@ -1231,6 +1251,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsightNotEnabled",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>If you run <code>GetInsightSelectors</code> on a trail that does not have Insights events enabled, the operation throws the exception <code>InsightNotEnabledException</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1242,7 +1266,7 @@
                 "InsightType": {
                     "target": "com.amazonaws.cloudtrail#InsightType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of insights to log on a trail. In this release, only <code>ApiCallRateInsight</code> is supported as an insight type.</p>"
+                        "smithy.api#documentation": "<p>The type of Insights events to log on a trail. The valid Insights type in this release is <code>ApiCallRateInsight</code>.</p>"
                     }
                 }
             },
@@ -1278,6 +1302,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientDependencyServiceAccessPermission",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the IAM user or role that is used to create the organization trail is lacking one or more required permissions for \n         creating an organization trail in a required service. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1294,6 +1322,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientEncryptionPolicy",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the policy on the S3 bucket or KMS key is not sufficient.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1310,6 +1342,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientS3BucketPolicy",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the policy on the S3 bucket is not sufficient.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -1326,7 +1362,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the policy on the SNS topic is not sufficient.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InsufficientSnsTopicPolicy",
+                    "httpResponseCode": 403
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the policy on the Amazon SNS topic is not sufficient.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -1342,7 +1382,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the provided CloudWatch log group is not valid.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidCloudWatchLogsLogGroupArn",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the provided CloudWatch Logs log group is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1358,6 +1402,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidCloudWatchLogsRoleArn",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the provided role is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1374,6 +1422,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidEventCategory",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Occurs if an event category that is not valid is specified as a value of <code>EventCategory</code>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1390,7 +1442,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the <code>PutEventSelectors</code> operation is called with a number of event \n         selectors, advanced event selectors, or data resources that is not valid. The combination of event selectors or advanced event selectors and \n         data resources is not valid. A trail can have up to 5 event selectors. If a trail uses advanced event selectors, a maximum \n         of 500 total values for all conditions in all advanced event selectors is allowed. A trail is limited to 250 data resources. These data resources can be distributed across event selectors, but the overall total cannot exceed 250.</p>\n         <p>You can:</p>\n         <ul>\n            <li>\n               <p>Specify a valid number of event selectors (1 to 5) for a trail.</p>\n            </li>\n            <li>\n               <p>Specify a valid number of data resources (1 to 250) for an event selector. \n               The limit of number of resources on an individual event selector is configurable up to 250. \n               However, this upper limit is allowed only if the total number of data resources does not \n               exceed 250 across all event selectors for a trail.</p>\n            </li>\n            <li>\n               <p>Specify up to 500 values for all conditions in all advanced event selectors for a trail.</p>\n            </li>\n            <li>\n               <p>Specify a valid value for a parameter. For example, specifying the <code>ReadWriteType</code> \n               parameter with a value of <code>read-only</code> is invalid.</p>\n            </li>\n         </ul>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidEventSelectors",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the <code>PutEventSelectors</code> operation is called with a number of event \n         selectors, advanced event selectors, or data resources that is not valid. The combination of event selectors or advanced event selectors and \n         data resources is not valid. A trail can have up to 5 event selectors. If a trail uses advanced event selectors, a maximum \n         of 500 total values for all conditions in all advanced event selectors is allowed. A trail is limited to 250 data resources. These data resources can be distributed across event selectors, but the overall total cannot exceed 250.</p>\n         <p>You can:</p>\n         <ul>\n            <li>\n               <p>Specify a valid number of event selectors (1 to 5) for a trail.</p>\n            </li>\n            <li>\n               <p>Specify a valid number of data resources (1 to 250) for an event selector. \n               The limit of number of resources on an individual event selector is configurable up to 250. \n               However, this upper limit is allowed only if the total number of data resources does not \n               exceed 250 across all event selectors for a trail.</p>\n            </li>\n            <li>\n               <p>Specify up to 500 values for all conditions in all advanced event selectors for a trail.</p>\n            </li>\n            <li>\n               <p>Specify a valid value for a parameter. For example, specifying the <code>ReadWriteType</code> \n               parameter with a value of <code>read-only</code> is not valid.</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1406,6 +1462,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidHomeRegion",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when an operation is called on a trail from a region other than the region in which the trail was created.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1422,6 +1482,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidInsightSelectors",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The formatting or syntax of the <code>InsightSelectors</code> JSON statement in your <code>PutInsightSelectors</code> or <code>GetInsightSelectors</code> request \n         is not valid, or the specified insight type in the <code>InsightSelectors</code> statement is not a valid insight type.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1438,7 +1502,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the KMS key ARN is invalid.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidKmsKeyId",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the KMS key ARN is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1454,7 +1522,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Occurs when an invalid lookup attribute is specified.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidLookupAttributes",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>Occurs when a lookup attribute is specified that is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1470,7 +1542,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown if the limit specified is invalid.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidMaxResults",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown if the limit specified is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1486,7 +1562,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Invalid token or token that was previously used in a request with different parameters. This exception is thrown if the token is invalid.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidNextToken",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>A token that is not valid, or a token that was previously used in a request with different parameters. This exception is thrown if the token is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1502,6 +1582,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameterCombinationError",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the combination of parameters provided is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1518,6 +1602,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidS3BucketName",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the provided S3 bucket name is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1534,6 +1622,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidS3Prefix",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the provided S3 prefix is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1550,6 +1642,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidSnsTopicName",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the provided SNS topic name is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1566,6 +1662,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidTagParameter",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the specified tag key or values are not valid. \n         It can also occur if there are duplicate tags or too many tags on the resource.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1582,7 +1682,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Occurs if the timestamp values are invalid. Either the start time occurs after the end time or the time range is outside the range of possible values.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidTimeRange",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>Occurs if the timestamp values are not valid. Either the start time occurs after the end time, or the time range is outside the range of possible values.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1598,6 +1702,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidToken",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>Reserved for future use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1614,7 +1722,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n            and <code>my--namespace</code> are invalid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>",
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidTrailName",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the provided trail name is not valid. Trail names must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n            and <code>my--namespace</code> are not valid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1630,6 +1742,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KmsException",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when there is an issue with the specified KMS key and the trail can’t be updated.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1646,6 +1762,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "KmsKeyDisabled",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#deprecated": {},
                 "smithy.api#documentation": "<p>This exception is no longer in use.</p>",
                 "smithy.api#error": "client",
@@ -1663,7 +1783,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the AWS KMS key does not exist, when the S3 bucket and the\n         AWS KMS key are not in the same region, or when the AWS KMS key associated with the SNS\n         topic either does not exist or is not in the same region.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "KmsKeyNotFound",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the KMS key does not exist, when the S3 bucket and the\n         KMS key are not in the same region, or when the KMS key associated with the Amazon SNS\n         topic either does not exist or is not in the same region.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1691,7 +1815,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.</p>\n         <note>\n            <p>CloudTrail uses different private/public key pairs per region. Each digest file is signed with a private key unique to its region. Therefore, when you validate a digest file from a particular region, you must look in the same region for its corresponding public key.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Returns all public keys whose private keys were used to sign the digest files within the specified time range. The public key is needed to validate digest files that were signed with its corresponding private key.</p>\n         <note>\n            <p>CloudTrail uses different private and public key pairs per region. Each digest file is signed with a private key \n            unique to its region. When you validate a digest file from a specific region, you must look in the same region for its \n            corresponding public key.</p>\n         </note>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -1706,13 +1830,13 @@
                 "StartTime": {
                     "target": "com.amazonaws.cloudtrail#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used, and the current public key is returned.</p>"
+                        "smithy.api#documentation": "<p>Optionally specifies, in UTC, the start of the time range to look up public keys for CloudTrail digest files. \n         If not specified, the current time is used, and the current public key is returned.</p>"
                     }
                 },
                 "EndTime": {
                     "target": "com.amazonaws.cloudtrail#Date",
                     "traits": {
-                        "smithy.api#documentation": "<p>Optionally specifies, in UTC, the end of the time range to look up public keys for CloudTrail digest files. If not specified, the current time is used.</p>"
+                        "smithy.api#documentation": "<p>Optionally specifies, in UTC, the end of the time range to look up public keys for CloudTrail digest files. If not \n         specified, the current time is used.</p>"
                     }
                 },
                 "NextToken": {
@@ -1793,7 +1917,7 @@
                 "ResourceIdList": {
                     "target": "com.amazonaws.cloudtrail#ResourceIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The format of a trail ARN is:</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies a list of trail ARNs whose tags will be listed. The list has a limit of 20 ARNs. The following is the format of \n         a trail ARN.</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1981,7 +2105,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Looks up <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events\">management events</a> or \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events\">CloudTrail Insights events</a> that are captured by CloudTrail. \n         You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:</p>\n         <ul>\n            <li>\n               <p>AWS access key</p>\n            </li>\n            <li>\n               <p>Event ID</p>\n            </li>\n            <li>\n               <p>Event name</p>\n            </li>\n            <li>\n               <p>Event source</p>\n            </li>\n            <li>\n               <p>Read only</p>\n            </li>\n            <li>\n               <p>Resource name</p>\n            </li>\n            <li>\n               <p>Resource type</p>\n            </li>\n            <li>\n               <p>User name</p>\n            </li>\n         </ul>\n         <p>Lookup supports the following attributes for Insights events:</p>\n         <ul>\n            <li>\n               <p>Event ID</p>\n            </li>\n            <li>\n               <p>Event name</p>\n            </li>\n            <li>\n               <p>Event source</p>\n            </li>\n         </ul>\n         <p>All attributes are optional. The default number of results returned is 50, with a\n         maximum of 50 possible. The response includes a token that you can use to get the next page\n         of results.</p>\n         <important>\n            <p>The rate of lookup requests is limited to two per second, per account, per region. If this\n            limit is exceeded, a throttling error occurs.</p>\n         </important>",
+                "smithy.api#documentation": "<p>Looks up <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-management-events\">management events</a> or \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-concepts.html#cloudtrail-concepts-insights-events\">CloudTrail Insights events</a> that are captured by CloudTrail. \n         You can look up events that occurred in a region within the last 90 days. Lookup supports the following attributes for management events:</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services access key</p>\n            </li>\n            <li>\n               <p>Event ID</p>\n            </li>\n            <li>\n               <p>Event name</p>\n            </li>\n            <li>\n               <p>Event source</p>\n            </li>\n            <li>\n               <p>Read only</p>\n            </li>\n            <li>\n               <p>Resource name</p>\n            </li>\n            <li>\n               <p>Resource type</p>\n            </li>\n            <li>\n               <p>User name</p>\n            </li>\n         </ul>\n         <p>Lookup supports the following attributes for Insights events:</p>\n         <ul>\n            <li>\n               <p>Event ID</p>\n            </li>\n            <li>\n               <p>Event name</p>\n            </li>\n            <li>\n               <p>Event source</p>\n            </li>\n         </ul>\n         <p>All attributes are optional. The default number of results returned is 50, with a\n         maximum of 50 possible. The response includes a token that you can use to get the next page\n         of results.</p>\n         <important>\n            <p>The rate of lookup requests is limited to two per second, per account, per region. If this\n            limit is exceeded, a throttling error occurs.</p>\n         </important>",
                 "smithy.api#idempotent": {},
                 "smithy.api#paginated": {
                     "inputToken": "NextToken",
@@ -2076,6 +2200,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MaximumNumberOfTrailsExceeded",
+                    "httpResponseCode": 403
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the maximum number of trails is reached.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
@@ -2095,7 +2223,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the AWS account making the request to create or update an organization trail is not the master account for an \n         organization in AWS Organizations. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "NotOrganizationMasterAccount",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the Amazon Web Services account making the request to create or update an organization trail is not the management account for an \n         organization in Organizations. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2111,6 +2243,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OperationNotPermitted",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the requested operation is not permitted.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2148,7 +2284,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when AWS Organizations is not configured to support all features. All features must be enabled in AWS Organization to support\n         creating an organization trail. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "OrganizationNotInAllFeaturesMode",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when Organizations is not configured to support all features. All features must be enabled in Organizations to support\n         creating an organization trail. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/creating-an-organizational-trail-prepare.html\">Prepare For Creating a Trail For Your Organization</a>.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2164,7 +2304,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the request is made from an AWS account that is not a member of an organization. \n         To make this request, sign in using the credentials of an account that belongs to an organization.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "OrganizationsNotInUse",
+                    "httpResponseCode": 404
+                },
+                "smithy.api#documentation": "<p>This exception is thrown when the request is made from an Amazon Web Services account that is not a member of an organization. \n         To make this request, sign in using the credentials of an account that belongs to an organization.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2242,7 +2386,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Configures an event selector or advanced event selectors for your trail. \n         Use event selectors or advanced event selectors to specify management and data event settings for your trail. By\n         default, trails created without specific event selectors are configured to log all read and \n         write management events, and no data events.</p>\n         <p>When an event occurs in your account, CloudTrail\n         evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches \n         any event selector, the trail processes and logs the event. If the event doesn't match any event\n         selector, the trail doesn't log the event. </p>\n         <p>Example</p>\n         <ol>\n            <li>\n               <p>You create an event selector for a trail and specify that you want\n               write-only events.</p>\n            </li>\n            <li>\n               <p>The EC2 <code>GetConsoleOutput</code> and <code>RunInstances</code> API\n               operations occur in your account.</p>\n            </li>\n            <li>\n               <p>CloudTrail evaluates whether the events match your event\n               selectors.</p>\n            </li>\n            <li>\n               <p>The <code>RunInstances</code> is a write-only event and it matches your\n               event selector. The trail logs the event.</p>\n            </li>\n            <li>\n               <p>The <code>GetConsoleOutput</code> is a read-only event that doesn't\n               match your event selector. The trail doesn't log the event.\n         </p>\n            </li>\n         </ol>\n         <p>The <code>PutEventSelectors</code> operation must be called from the region in which\n         the trail was created; otherwise, an <code>InvalidHomeRegionException</code> exception is\n         thrown.</p>\n         <p>You can configure up to five event selectors for each trail. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html\">Logging data and management events for trails\n      </a> and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Quotas in AWS CloudTrail</a> \n         in the <i>AWS CloudTrail User Guide</i>.</p>\n         <p>You can add advanced event selectors, and conditions for your advanced \n         event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. \n         You can use either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If you apply <code>AdvancedEventSelectors</code> \n         to a trail, any existing <code>EventSelectors</code> are overwritten. For more information about \n         advanced event selectors, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging \n            data events for trails</a> in the <i>AWS CloudTrail User Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Configures an event selector or advanced event selectors for your trail. \n         Use event selectors or advanced event selectors to specify management and data event settings for your trail. By\n         default, trails created without specific event selectors are configured to log all read and \n         write management events, and no data events.</p>\n         <p>When an event occurs in your account, CloudTrail\n         evaluates the event selectors or advanced event selectors in all trails. For each trail, if the event matches \n         any event selector, the trail processes and logs the event. If the event doesn't match any event\n         selector, the trail doesn't log the event.</p>\n         <p>Example</p>\n         <ol>\n            <li>\n               <p>You create an event selector for a trail and specify that you want\n               write-only events.</p>\n            </li>\n            <li>\n               <p>The EC2 <code>GetConsoleOutput</code> and <code>RunInstances</code> API\n               operations occur in your account.</p>\n            </li>\n            <li>\n               <p>CloudTrail evaluates whether the events match your event\n               selectors.</p>\n            </li>\n            <li>\n               <p>The <code>RunInstances</code> is a write-only event and it matches your\n               event selector. The trail logs the event.</p>\n            </li>\n            <li>\n               <p>The <code>GetConsoleOutput</code> is a read-only event that doesn't\n               match your event selector. The trail doesn't log the event.\n         </p>\n            </li>\n         </ol>\n         <p>The <code>PutEventSelectors</code> operation must be called from the region in which\n         the trail was created; otherwise, an <code>InvalidHomeRegionException</code> exception is\n         thrown.</p>\n         <p>You can configure up to five event selectors for each trail. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html\">Logging data and management events for trails\n      </a> and <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/WhatIsCloudTrail-Limits.html\">Quotas in CloudTrail</a> \n         in the <i>CloudTrail User Guide</i>.</p>\n         <p>You can add advanced event selectors, and conditions for your advanced \n         event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. \n         You can use either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If you apply <code>AdvancedEventSelectors</code> \n         to a trail, any existing <code>EventSelectors</code> are overwritten. For more information about \n         advanced event selectors, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging \n            data events for trails</a> in the <i>CloudTrail User Guide</i>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2252,7 +2396,7 @@
                 "TrailName": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the trail or trail ARN. If you specify a trail name, the\n         string must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n               and <code>my--namespace</code> are invalid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>\n         <p>If you specify a trail ARN, it must be in the format:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name of the trail or trail ARN. If you specify a trail name, the\n         string must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n               and <code>my--namespace</code> are not valid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>\n         <p>If you specify a trail ARN, it must be in the following format.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2265,7 +2409,7 @@
                 "AdvancedEventSelectors": {
                     "target": "com.amazonaws.cloudtrail#AdvancedEventSelectors",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Specifies the settings for advanced event selectors. You can add advanced event selectors, and conditions for your advanced \n         event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. \n         You can use either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If you apply <code>AdvancedEventSelectors</code> \n         to a trail, any existing <code>EventSelectors</code> are overwritten. For more information about \n         advanced event selectors, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging \n            data events for trails</a> in the <i>AWS CloudTrail User Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         Specifies the settings for advanced event selectors. You can add advanced event selectors, and conditions for your advanced \n         event selectors, up to a maximum of 500 values for all conditions and selectors on a trail. \n         You can use either <code>AdvancedEventSelectors</code> or <code>EventSelectors</code>, but not both. If you apply <code>AdvancedEventSelectors</code> \n         to a trail, any existing <code>EventSelectors</code> are overwritten. For more information about \n         advanced event selectors, see \n         <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-data-events-with-cloudtrail.html\">Logging \n            data events for trails</a> in the <i>CloudTrail User Guide</i>.\n      </p>"
                     }
                 }
             }
@@ -2276,7 +2420,7 @@
                 "TrailARN": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the trail that was updated with event selectors. The format of a trail ARN\n         is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the ARN of the trail that was updated with event selectors. The following is the format of a trail ARN.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>"
                     }
                 },
                 "EventSelectors": {
@@ -2337,7 +2481,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lets you enable Insights event logging by specifying the Insights\n         selectors that you want to enable on an existing trail. You also use\n         <code>PutInsightSelectors</code> to turn off Insights event logging, by passing an empty list of insight types. \n         In this release, only <code>ApiCallRateInsight</code> is supported as an Insights selector.</p>",
+                "smithy.api#documentation": "<p>Lets you enable Insights event logging by specifying the Insights\n         selectors that you want to enable on an existing trail. You also use\n         <code>PutInsightSelectors</code> to turn off Insights event logging, by passing an empty list of insight types. \n         The valid Insights event type in this release is <code>ApiCallRateInsight</code>.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2354,7 +2498,7 @@
                 "InsightSelectors": {
                     "target": "com.amazonaws.cloudtrail#InsightSelectors",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string that contains the insight types you want to log on a trail. In this release, only <code>ApiCallRateInsight</code> is supported as an insight type.</p>",
+                        "smithy.api#documentation": "<p>A JSON string that contains the Insights types that you want to log on a trail. The valid Insights type in this release is <code>ApiCallRateInsight</code>.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -2372,7 +2516,7 @@
                 "InsightSelectors": {
                     "target": "com.amazonaws.cloudtrail#InsightSelectors",
                     "traits": {
-                        "smithy.api#documentation": "<p>A JSON string that contains the insight types you want to log on a trail. In this release, only <code>ApiCallRateInsight</code> is supported as an insight type.</p>"
+                        "smithy.api#documentation": "<p>A JSON string that contains the Insights event types that you want to log on a trail. The valid Insights type in this release is <code>ApiCallRateInsight</code>.</p>"
                     }
                 }
             }
@@ -2469,7 +2613,7 @@
                 "ResourceType": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of a resource referenced by the event returned. When the resource type cannot be\n         determined, null is returned. Some examples of resource types are: <b>Instance</b> for EC2,\n            <b>Trail</b> for CloudTrail, <b>DBInstance</b> for RDS, and <b>AccessKey</b> for IAM.\n         To learn more about how to look up and filter events by the resource types supported for a service, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-console.html#filtering-cloudtrail-events\">Filtering CloudTrail Events</a>.</p>"
+                        "smithy.api#documentation": "<p>The type of a resource referenced by the event returned. When the resource type cannot be\n         determined, null is returned. Some examples of resource types are: <b>Instance</b> for EC2,\n         <b>Trail</b> for CloudTrail, <b>DBInstance</b> for Amazon RDS, and <b>AccessKey</b> for IAM.\n         To learn more about how to look up and filter events by the resource types supported for a service, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/view-cloudtrail-events-console.html#filtering-cloudtrail-events\">Filtering CloudTrail Events</a>.</p>"
                     }
                 },
                 "ResourceName": {
@@ -2509,6 +2653,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceNotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the specified resource is not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2551,6 +2699,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceTypeNotSupported",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the specified resource type is not supported by CloudTrail.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2567,6 +2719,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "S3BucketDoesNotExist",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the specified S3 bucket does not exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2624,7 +2780,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Starts the recording of AWS API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.</p>",
+                "smithy.api#documentation": "<p>Starts the recording of Amazon Web Services API calls and log file delivery for a trail. For a trail that is enabled in all regions, this operation must be called from the region in which the trail was created. This operation cannot be called on the shadow trails (replicated trails in other regions) of a trail that is enabled in all regions.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2634,13 +2790,13 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs AWS API calls. The format of a trail ARN is:</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail logs Amazon Web Services API calls. \n         The following is the format of a trail ARN.</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The request to CloudTrail to start logging AWS API calls for an account.</p>"
+                "smithy.api#documentation": "<p>The request to CloudTrail to start logging Amazon Web Services API calls for an account.</p>"
             }
         },
         "com.amazonaws.cloudtrail#StartLoggingResponse": {
@@ -2682,7 +2838,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Suspends the recording of AWS API calls and log file delivery for the specified trail.\n         Under most circumstances, there is no need to use this action. You can update a trail\n         without stopping it first. This action is the only way to stop recording. For a trail\n         enabled in all regions, this operation must be called from the region in which the trail\n         was created, or an <code>InvalidHomeRegionException</code> will occur. This operation\n         cannot be called on the shadow trails (replicated trails in other regions) of a trail\n         enabled in all regions.</p>",
+                "smithy.api#documentation": "<p>Suspends the recording of Amazon Web Services API calls and log file delivery for the specified trail.\n         Under most circumstances, there is no need to use this action. You can update a trail\n         without stopping it first. This action is the only way to stop recording. For a trail\n         enabled in all regions, this operation must be called from the region in which the trail\n         was created, or an <code>InvalidHomeRegionException</code> will occur. This operation\n         cannot be called on the shadow trails (replicated trails in other regions) of a trail\n         enabled in all regions.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2692,13 +2848,13 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging AWS API calls. The format of a trail ARN is:</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name or the CloudTrail ARN of the trail for which CloudTrail will stop logging Amazon Web Services \n         API calls. The following is the format of a trail ARN.</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Passes the request to CloudTrail to stop logging AWS API calls for the specified account.</p>"
+                "smithy.api#documentation": "<p>Passes the request to CloudTrail to stop logging Amazon Web Services API calls for the specified account.</p>"
             }
         },
         "com.amazonaws.cloudtrail#StopLoggingResponse": {
@@ -2717,7 +2873,7 @@
                 "Key": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The key in a key-value pair. The key must be must be no longer than 128 Unicode characters. The key must be unique for the resource to which it applies.</p>",
+                        "smithy.api#documentation": "<p>The key in a key-value pair. The key must be must be no longer than 128 Unicode characters. \n         The key must be unique for the resource to which it applies.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -2743,6 +2899,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TagsLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The number of tags per trail has exceeded the permitted amount. Currently, the limit is 50.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2775,7 +2935,7 @@
                 "S3KeyPrefix": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated\n         for log file delivery. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your CloudTrail Log Files</a>.The maximum length is 200 characters.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated\n         for log file delivery. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your CloudTrail Log Files</a>. \n         The maximum length is 200 characters.</p>"
                     }
                 },
                 "SnsTopicName": {
@@ -2788,13 +2948,13 @@
                 "SnsTopicARN": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications\n         when log files are delivered. The format of a topic ARN is:</p> \n         <p>\n            <code>arn:aws:sns:us-east-2:123456789012:MyTopic</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications\n         when log files are delivered. The following is the format of a topic ARN.</p> \n         <p>\n            <code>arn:aws:sns:us-east-2:123456789012:MyTopic</code>\n         </p>"
                     }
                 },
                 "IncludeGlobalServiceEvents": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Set to <b>True</b> to include AWS API calls from AWS global services such as IAM.\n         Otherwise, <b>False</b>.</p>"
+                        "smithy.api#documentation": "<p>Set to <b>True</b> to include Amazon Web Services API calls from Amazon Web Services global services such as IAM.\n         Otherwise, <b>False</b>.</p>"
                     }
                 },
                 "IsMultiRegionTrail": {
@@ -2812,7 +2972,7 @@
                 "TrailARN": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the trail. The format of a trail ARN is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the ARN of the trail. The following is the format of a trail ARN.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>"
                     }
                 },
                 "LogFileValidationEnabled": {
@@ -2836,7 +2996,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. \n         The value is a fully specified ARN to a KMS key in the following format.</p>\n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 },
                 "HasCustomEventSelectors": {
@@ -2873,6 +3033,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TrailAlreadyExists",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the specified trail already exists.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2896,7 +3060,7 @@
                 "HomeRegion": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS region in which a trail was created.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services Region in which a trail was created.</p>"
                     }
                 }
             },
@@ -2927,6 +3091,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TrailNotFound",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the trail with the given name is not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2943,6 +3111,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TrailNotProvided",
+                    "httpResponseCode": 404
+                },
                 "smithy.api#documentation": "<p>This exception is no longer in use.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
@@ -2965,6 +3137,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "UnsupportedOperation",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>This exception is thrown when the requested operation is not supported.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3065,7 +3241,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates the settings that specify delivery of log files. Changes to a trail do not require\n         stopping the CloudTrail service. Use this action to designate an existing bucket for log\n         delivery. If the existing bucket has previously been a target for CloudTrail log files,\n         an IAM policy exists for the bucket. <code>UpdateTrail</code> must be called from the\n         region in which the trail was created; otherwise, an\n            <code>InvalidHomeRegionException</code> is thrown.</p>",
+                "smithy.api#documentation": "<p>Updates trail settings that control what events you are logging, and how to handle log files. Changes to a trail do not require\n         stopping the CloudTrail service. Use this action to designate an existing bucket for log\n         delivery. If the existing bucket has previously been a target for CloudTrail log files,\n         an IAM policy exists for the bucket. <code>UpdateTrail</code> must be called from the\n         region in which the trail was created; otherwise, an\n            <code>InvalidHomeRegionException</code> is thrown.</p>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -3075,7 +3251,7 @@
                 "Name": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the\n         string must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n            and <code>my--namespace</code> are invalid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>\n         <p>If <code>Name</code> is a trail ARN, it must be in the format:</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
+                        "smithy.api#documentation": "<p>Specifies the name of the trail or trail ARN. If <code>Name</code> is a trail name, the\n         string must meet the following requirements:</p>\n         <ul>\n            <li>\n               <p>Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.), underscores (_), or dashes (-)</p>\n            </li>\n            <li>\n               <p>Start with a letter or number, and end with a letter or number</p>\n            </li>\n            <li>\n               <p>Be between 3 and 128 characters</p>\n            </li>\n            <li>\n               <p>Have no adjacent periods, underscores or dashes. Names like <code>my-_namespace</code>\n            and <code>my--namespace</code> are not valid.</p>\n            </li>\n            <li>\n               <p>Not be in IP address format (for example, 192.168.5.4)</p>\n            </li>\n         </ul>\n         <p>If <code>Name</code> is a trail ARN, it must be in the following format.</p>\n            <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3112,13 +3288,13 @@
                 "EnableLogFileValidation": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether log file validation is enabled. The default is false.</p>\n         <note>\n            <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail will not create digest files for log files that were delivered during a period in which log file integrity validation was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Specifies whether log file validation is enabled. The default is false.</p>\n         <note>\n            <p>When you disable log file integrity validation, the chain of digest files is broken after one hour. CloudTrail \n            does not create digest files for log files that were delivered during a period in which log file integrity validation \n            was disabled. For example, if you enable log file integrity validation at noon on January 1, disable it at noon on \n            January 2, and re-enable it at noon on January 10, digest files will not be created for the log files delivered from noon \n            on January 2 to noon on January 10. The same applies whenever you stop CloudTrail logging or delete a trail.</p>\n         </note>"
                     }
                 },
                 "CloudWatchLogsLogGroupArn": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs will be delivered. Not required unless you specify CloudWatchLogsRoleArn.</p>"
+                        "smithy.api#documentation": "<p>Specifies a log group name using an Amazon Resource Name (ARN), a unique identifier that represents the log group to which CloudTrail logs are delivered. Not required unless you specify <code>CloudWatchLogsRoleArn</code>.</p>"
                     }
                 },
                 "CloudWatchLogsRoleArn": {
@@ -3130,13 +3306,13 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The\n         value can be an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully\n         specified ARN to a key, or a globally unique identifier.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>alias/MyAliasName</p>\n            </li>\n            <li>\n               <p>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</p>\n            </li>\n            <li>\n               <p>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</p>\n            </li>\n            <li>\n               <p>12345678-1234-1234-1234-123456789012</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The\n         value can be an alias name prefixed by \"alias/\", a fully specified ARN to an alias, a fully\n         specified ARN to a key, or a globally unique identifier.</p>\n         <p>CloudTrail also supports KMS multi-Region keys. For more information about multi-Region keys,\n         see <a href=\"https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html\">Using multi-Region keys</a> in the <i>Key Management Service Developer Guide</i>.</p>\n         <p>Examples:</p>\n         <ul>\n            <li>\n               <p>alias/MyAliasName</p>\n            </li>\n            <li>\n               <p>arn:aws:kms:us-east-2:123456789012:alias/MyAliasName</p>\n            </li>\n            <li>\n               <p>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</p>\n            </li>\n            <li>\n               <p>12345678-1234-1234-1234-123456789012</p>\n            </li>\n         </ul>"
                     }
                 },
                 "IsOrganizationTrail": {
                     "target": "com.amazonaws.cloudtrail#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the trail is applied to all accounts in an organization in AWS Organizations, or only for the current AWS account. \n         The default is false, and cannot be true unless the call is made on behalf of an AWS account that is the master account for an organization in \n         AWS Organizations. If the trail is not an organization trail and this is set to true, the trail will be created in all AWS accounts that belong\n         to the organization. If the trail is an organization trail and this is set to false, the trail will remain in the current AWS account but be \n         deleted from all member accounts in the organization.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the trail is applied to all accounts in an organization in Organizations, or only for the current Amazon Web Services account. \n         The default is false, and cannot be true unless the call is made on behalf of an Amazon Web Services account that is the management account for an organization in \n         Organizations. If the trail is not an organization trail and this is set to <code>true</code>, the trail will be created in all Amazon Web Services accounts that belong\n         to the organization. If the trail is an organization trail and this is set to <code>false</code>, the trail will remain in the current Amazon Web Services account but be \n         deleted from all member accounts in the organization.</p>"
                     }
                 }
             },
@@ -3162,20 +3338,20 @@
                 "S3KeyPrefix": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated\n         for log file delivery. For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your CloudTrail Log Files</a>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon S3 key prefix that comes after the name of the bucket you have designated\n         for log file delivery. \n         For more information, see <a href=\"https://docs.aws.amazon.com/awscloudtrail/latest/userguide/cloudtrail-find-log-files.html\">Finding Your IAM Log Files</a>.</p>"
                     }
                 },
                 "SnsTopicName": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
                         "smithy.api#deprecated": {},
-                        "smithy.api#documentation": "<p>This field is no longer in use. Use SnsTopicARN.</p>"
+                        "smithy.api#documentation": "<p>This field is no longer in use. Use <a>UpdateTrailResponse$SnsTopicARN</a>.</p>"
                     }
                 },
                 "SnsTopicARN": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications\n         when log files are delivered. The format of a topic ARN is:</p>\n         <p>\n            <code>arn:aws:sns:us-east-2:123456789012:MyTopic</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the ARN of the Amazon SNS topic that CloudTrail uses to send notifications\n         when log files are delivered. The following is the format of a topic ARN.</p>\n         <p>\n            <code>arn:aws:sns:us-east-2:123456789012:MyTopic</code>\n         </p>"
                     }
                 },
                 "IncludeGlobalServiceEvents": {
@@ -3193,7 +3369,7 @@
                 "TrailARN": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the ARN of the trail that was updated. The format of a trail ARN\n         is:</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the ARN of the trail that was updated. The following is the format of a trail ARN.</p>\n         <p>\n            <code>arn:aws:cloudtrail:us-east-2:123456789012:trail/MyTrail</code>\n         </p>"
                     }
                 },
                 "LogFileValidationEnabled": {
@@ -3205,7 +3381,7 @@
                 "CloudWatchLogsLogGroupArn": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs will be delivered.</p>"
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the log group to which CloudTrail logs are delivered.</p>"
                     }
                 },
                 "CloudWatchLogsRoleArn": {
@@ -3217,7 +3393,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.cloudtrail#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the format:</p>\n      \n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
+                        "smithy.api#documentation": "<p>Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The value is a fully specified ARN to a KMS key in the following format.</p>\n      \n         <p>\n            <code>arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012</code>\n         </p>"
                     }
                 },
                 "IsOrganizationTrail": {

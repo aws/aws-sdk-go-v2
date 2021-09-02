@@ -149,6 +149,9 @@ func ExampleTransformOperation_outputUsage() {
 	case *types.TransformOperationMemberTagColumnOperation:
 		_ = v.Value // Value is types.TagColumnOperation
 
+	case *types.TransformOperationMemberUntagColumnOperation:
+		_ = v.Value // Value is types.UntagColumnOperation
+
 	case *types.UnknownUnionMember:
 		fmt.Println("unknown tag:", v.Tag)
 
@@ -164,3 +167,4 @@ var _ *types.ProjectOperation
 var _ *types.CastColumnTypeOperation
 var _ *types.TagColumnOperation
 var _ *types.RenameColumnOperation
+var _ *types.UntagColumnOperation

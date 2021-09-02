@@ -330,6 +330,26 @@ func (m *validateOpDescribeStudio) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAutoTerminationPolicy struct {
+}
+
+func (*validateOpGetAutoTerminationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAutoTerminationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAutoTerminationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAutoTerminationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetManagedScalingPolicy struct {
 }
 
@@ -550,6 +570,26 @@ func (m *validateOpPutAutoScalingPolicy) HandleInitialize(ctx context.Context, i
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpPutAutoTerminationPolicy struct {
+}
+
+func (*validateOpPutAutoTerminationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpPutAutoTerminationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*PutAutoTerminationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpPutAutoTerminationPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpPutBlockPublicAccessConfiguration struct {
 }
 
@@ -605,6 +645,26 @@ func (m *validateOpRemoveAutoScalingPolicy) HandleInitialize(ctx context.Context
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpRemoveAutoScalingPolicyInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpRemoveAutoTerminationPolicy struct {
+}
+
+func (*validateOpRemoveAutoTerminationPolicy) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRemoveAutoTerminationPolicy) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RemoveAutoTerminationPolicyInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRemoveAutoTerminationPolicyInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -874,6 +934,10 @@ func addOpDescribeStudioValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeStudio{}, middleware.After)
 }
 
+func addOpGetAutoTerminationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAutoTerminationPolicy{}, middleware.After)
+}
+
 func addOpGetManagedScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetManagedScalingPolicy{}, middleware.After)
 }
@@ -918,6 +982,10 @@ func addOpPutAutoScalingPolicyValidationMiddleware(stack *middleware.Stack) erro
 	return stack.Initialize.Add(&validateOpPutAutoScalingPolicy{}, middleware.After)
 }
 
+func addOpPutAutoTerminationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpPutAutoTerminationPolicy{}, middleware.After)
+}
+
 func addOpPutBlockPublicAccessConfigurationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpPutBlockPublicAccessConfiguration{}, middleware.After)
 }
@@ -928,6 +996,10 @@ func addOpPutManagedScalingPolicyValidationMiddleware(stack *middleware.Stack) e
 
 func addOpRemoveAutoScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRemoveAutoScalingPolicy{}, middleware.After)
+}
+
+func addOpRemoveAutoTerminationPolicyValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRemoveAutoTerminationPolicy{}, middleware.After)
 }
 
 func addOpRemoveManagedScalingPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -2025,6 +2097,21 @@ func validateOpDescribeStudioInput(v *DescribeStudioInput) error {
 	}
 }
 
+func validateOpGetAutoTerminationPolicyInput(v *GetAutoTerminationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAutoTerminationPolicyInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpGetManagedScalingPolicyInput(v *GetManagedScalingPolicyInput) error {
 	if v == nil {
 		return nil
@@ -2212,6 +2299,21 @@ func validateOpPutAutoScalingPolicyInput(v *PutAutoScalingPolicyInput) error {
 	}
 }
 
+func validateOpPutAutoTerminationPolicyInput(v *PutAutoTerminationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "PutAutoTerminationPolicyInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpPutBlockPublicAccessConfigurationInput(v *PutBlockPublicAccessConfigurationInput) error {
 	if v == nil {
 		return nil
@@ -2263,6 +2365,21 @@ func validateOpRemoveAutoScalingPolicyInput(v *RemoveAutoScalingPolicyInput) err
 	}
 	if v.InstanceGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("InstanceGroupId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRemoveAutoTerminationPolicyInput(v *RemoveAutoTerminationPolicyInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RemoveAutoTerminationPolicyInput"}
+	if v.ClusterId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

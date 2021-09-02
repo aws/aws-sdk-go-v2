@@ -24677,6 +24677,42 @@ func awsRestjson1_deserializeDocumentColumnTagList(v *[]types.ColumnTag, value i
 	return nil
 }
 
+func awsRestjson1_deserializeDocumentColumnTagNames(v *[]types.ColumnTagName, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ColumnTagName
+	if *v == nil {
+		cv = []types.ColumnTagName{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ColumnTagName
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected ColumnTagName to be of type string, got %T instead", value)
+			}
+			col = types.ColumnTagName(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
 func awsRestjson1_deserializeDocumentConcurrentUpdatingException(v **types.ConcurrentUpdatingException, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -25600,6 +25636,11 @@ func awsRestjson1_deserializeDocumentDataSet(v **types.DataSet, value interface{
 				sv.DataSetId = ptr.String(jtv)
 			}
 
+		case "DataSetUsageConfiguration":
+			if err := awsRestjson1_deserializeDocumentDataSetUsageConfiguration(&sv.DataSetUsageConfiguration, value); err != nil {
+				return err
+			}
+
 		case "FieldFolders":
 			if err := awsRestjson1_deserializeDocumentFieldFolderMap(&sv.FieldFolders, value); err != nil {
 				return err
@@ -25982,6 +26023,55 @@ func awsRestjson1_deserializeDocumentDataSetSummaryList(v *[]types.DataSetSummar
 
 	}
 	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentDataSetUsageConfiguration(v **types.DataSetUsageConfiguration, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DataSetUsageConfiguration
+	if *v == nil {
+		sv = &types.DataSetUsageConfiguration{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DisableUseAsDirectQuerySource":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableUseAsDirectQuerySource = jtv
+			}
+
+		case "DisableUseAsImportedSource":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected Boolean to be of type *bool, got %T instead", value)
+				}
+				sv.DisableUseAsImportedSource = jtv
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
 	return nil
 }
 
@@ -28317,6 +28407,15 @@ func awsRestjson1_deserializeDocumentLogicalTableSource(v **types.LogicalTableSo
 
 	for key, value := range shape {
 		switch key {
+		case "DataSetArn":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
+				}
+				sv.DataSetArn = ptr.String(jtv)
+			}
+
 		case "JoinInstruction":
 			if err := awsRestjson1_deserializeDocumentJoinInstruction(&sv.JoinInstruction, value); err != nil {
 				return err
@@ -32446,6 +32545,16 @@ loop:
 			uv = &types.TransformOperationMemberTagColumnOperation{Value: mv}
 			break loop
 
+		case "UntagColumnOperation":
+			var mv types.UntagColumnOperation
+			destAddr := &mv
+			if err := awsRestjson1_deserializeDocumentUntagColumnOperation(&destAddr, value); err != nil {
+				return err
+			}
+			mv = *destAddr
+			uv = &types.TransformOperationMemberUntagColumnOperation{Value: mv}
+			break loop
+
 		default:
 			uv = &types.UnknownUnionMember{Tag: key}
 			break loop
@@ -32803,6 +32912,51 @@ func awsRestjson1_deserializeDocumentUnsupportedUserEditionException(v **types.U
 					return fmt.Errorf("expected String to be of type string, got %T instead", value)
 				}
 				sv.RequestId = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentUntagColumnOperation(v **types.UntagColumnOperation, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.UntagColumnOperation
+	if *v == nil {
+		sv = &types.UntagColumnOperation{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "ColumnName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ColumnName to be of type string, got %T instead", value)
+				}
+				sv.ColumnName = ptr.String(jtv)
+			}
+
+		case "TagNames":
+			if err := awsRestjson1_deserializeDocumentColumnTagNames(&sv.TagNames, value); err != nil {
+				return err
 			}
 
 		default:

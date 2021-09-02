@@ -11,15 +11,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds or updates the remediation configuration with a specific AWS Config rule
-// with the selected target or action. The API creates the RemediationConfiguration
-// object for the AWS Config rule. The AWS Config rule must already exist for you
-// to add a remediation configuration. The target (SSM document) must exist and
-// have permissions to use the target. If you make backward incompatible changes to
-// the SSM document, you must call this again to ensure the remediations can run.
-// This API does not support adding remediation configurations for service-linked
-// AWS Config Rules such as Organization Config rules, the rules deployed by
-// conformance packs, and rules deployed by AWS Security Hub.
+// Adds or updates the remediation configuration with a specific Config rule with
+// the selected target or action. The API creates the RemediationConfiguration
+// object for the Config rule. The Config rule must already exist for you to add a
+// remediation configuration. The target (SSM document) must exist and have
+// permissions to use the target. If you make backward incompatible changes to the
+// SSM document, you must call this again to ensure the remediations can run. This
+// API does not support adding remediation configurations for service-linked Config
+// Rules such as Organization Config rules, the rules deployed by conformance
+// packs, and rules deployed by Amazon Web Services Security Hub.
 func (c *Client) PutRemediationConfigurations(ctx context.Context, params *PutRemediationConfigurationsInput, optFns ...func(*Options)) (*PutRemediationConfigurationsOutput, error) {
 	if params == nil {
 		params = &PutRemediationConfigurationsInput{}

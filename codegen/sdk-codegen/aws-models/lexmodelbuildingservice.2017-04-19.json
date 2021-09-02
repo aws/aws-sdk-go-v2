@@ -4232,6 +4232,10 @@
                     {
                         "value": "ja-JP",
                         "name": "JA_JP"
+                    },
+                    {
+                        "value": "ko-KR",
+                        "name": "KO_KR"
                     }
                 ]
             }

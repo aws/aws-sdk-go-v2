@@ -12,8 +12,8 @@ import (
 )
 
 // Returns the stack instance that's associated with the specified stack set,
-// account, and Region. For a list of stack instances that are associated with a
-// specific stack set, use ListStackInstances.
+// Amazon Web Services account, and Region. For a list of stack instances that are
+// associated with a specific stack set, use ListStackInstances.
 func (c *Client) DescribeStackInstance(ctx context.Context, params *DescribeStackInstanceInput, optFns ...func(*Options)) (*DescribeStackInstanceOutput, error) {
 	if params == nil {
 		params = &DescribeStackInstanceInput{}
@@ -31,7 +31,8 @@ func (c *Client) DescribeStackInstance(ctx context.Context, params *DescribeStac
 
 type DescribeStackInstanceInput struct {
 
-	// The ID of an account that's associated with this stack instance.
+	// The ID of an Amazon Web Services account that's associated with this stack
+	// instance.
 	//
 	// This member is required.
 	StackInstanceAccount *string
@@ -56,9 +57,9 @@ type DescribeStackInstanceInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
+	// must be registered as a delegated administrator in the management account. For
+	// more information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
 	// in the CloudFormation User Guide.
 	CallAs types.CallAs

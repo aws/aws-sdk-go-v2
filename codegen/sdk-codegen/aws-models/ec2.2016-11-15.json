@@ -13481,13 +13481,6 @@
         "com.amazonaws.ec2#CreateVpcRequest": {
             "type": "structure",
             "members": {
-                "CidrBlock": {
-                    "target": "com.amazonaws.ec2#String",
-                    "traits": {
-                        "smithy.api#documentation": "<p>The IPv4 network range for the VPC, in CIDR notation. For example,\n\t\t        <code>10.0.0.0/16</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
-                        "smithy.api#required": {}
-                    }
-                },
                 "AmazonProvidedIpv6CidrBlock": {
                     "target": "com.amazonaws.ec2#Boolean",
                     "traits": {
@@ -13535,6 +13528,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The tags to assign to the VPC.</p>",
                         "smithy.api#xmlName": "TagSpecification"
+                    }
+                },
+                "CidrBlock": {
+                    "target": "com.amazonaws.ec2#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IPv4 network range for the VPC, in CIDR notation. For example,\n\t\t        <code>10.0.0.0/16</code>. We modify the specified CIDR block to its canonical form; for example, if you specify <code>100.68.0.18/18</code>, we modify it to <code>100.68.0.0/18</code>.</p>",
+                        "smithy.api#required": {}
                     }
                 }
             }
@@ -36561,6 +36561,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The usage operation value. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/billing-info-fields.html\">AMI billing information fields</a> in the <i>Amazon Elastic Compute Cloud User Guide</i>.</p>"
                     }
+                },
+                "BootMode": {
+                    "target": "com.amazonaws.ec2#BootModeValues",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The boot mode of the virtual machine.</p>"
+                    }
                 }
             }
         },
@@ -36826,6 +36832,14 @@
                         "aws.protocols#ec2QueryName": "UsageOperation",
                         "smithy.api#documentation": "<p>The usage operation value.</p>",
                         "smithy.api#xmlName": "usageOperation"
+                    }
+                },
+                "BootMode": {
+                    "target": "com.amazonaws.ec2#BootModeValues",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "BootMode",
+                        "smithy.api#documentation": "<p>The boot mode of the virtual machine.</p>",
+                        "smithy.api#xmlName": "bootMode"
                     }
                 }
             },
@@ -43741,6 +43755,14 @@
                         "smithy.api#documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p>\n        <note>\n            <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.\n            </p>\n        </note>",
                         "smithy.api#xmlName": "httpEndpoint"
                     }
+                },
+                "HttpProtocolIpv6": {
+                    "target": "com.amazonaws.ec2#LaunchTemplateInstanceMetadataProtocolIpv6",
+                    "traits": {
+                        "aws.protocols#ec2QueryName": "HttpProtocolIpv6",
+                        "smithy.api#documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p>\n        <p>Default: <code>disabled</code>\n         </p>",
+                        "smithy.api#xmlName": "httpProtocolIpv6"
+                    }
                 }
             },
             "traits": {
@@ -43767,6 +43789,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>This parameter enables or disables the HTTP metadata endpoint on your instances. If the parameter is not specified, the default state is <code>enabled</code>.</p>\n         <note>\n            <p>If you specify a value of <code>disabled</code>, you will not be able to access your instance metadata.\n</p>\n         </note>"
                     }
+                },
+                "HttpProtocolIpv6": {
+                    "target": "com.amazonaws.ec2#LaunchTemplateInstanceMetadataProtocolIpv6",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Enables or disables the IPv6 endpoint for the instance metadata service.</p>\n        <p>Default: <code>disabled</code>\n         </p>"
+                    }
                 }
             },
             "traits": {
@@ -43784,6 +43812,21 @@
                     {
                         "value": "applied",
                         "name": "applied"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.ec2#LaunchTemplateInstanceMetadataProtocolIpv6": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "disabled",
+                        "name": "disabled"
+                    },
+                    {
+                        "value": "enabled",
+                        "name": "enabled"
                     }
                 ]
             }
@@ -43915,7 +43958,7 @@
                     "target": "com.amazonaws.ec2#Ipv4PrefixListResponse",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv4PrefixSet",
-                        "smithy.api#documentation": "<p>One or more IPv4 delegated prefixes assigned to the network interface.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv4 prefixes assigned to the network interface.</p>",
                         "smithy.api#xmlName": "ipv4PrefixSet"
                     }
                 },
@@ -43923,7 +43966,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv4PrefixCount",
-                        "smithy.api#documentation": "<p>The number of IPv4 delegated prefixes that AWS automatically assigned to the \n            network interface.</p>",
+                        "smithy.api#documentation": "<p>The number of IPv4 prefixes that Amazon Web Services automatically assigned to the \n            network interface.</p>",
                         "smithy.api#xmlName": "ipv4PrefixCount"
                     }
                 },
@@ -43931,7 +43974,7 @@
                     "target": "com.amazonaws.ec2#Ipv6PrefixListResponse",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv6PrefixSet",
-                        "smithy.api#documentation": "<p>One or more IPv6 delegated prefixes assigned to the network interface.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv6 prefixes assigned to the network interface.</p>",
                         "smithy.api#xmlName": "ipv6PrefixSet"
                     }
                 },
@@ -43939,7 +43982,7 @@
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
                         "aws.protocols#ec2QueryName": "Ipv6PrefixCount",
-                        "smithy.api#documentation": "<p>The number of IPv6 delegated prefixes that AWS automatically assigned to the network \n            interface.</p>",
+                        "smithy.api#documentation": "<p>The number of IPv6 prefixes that Amazon Web Services automatically assigned to the network \n            interface.</p>",
                         "smithy.api#xmlName": "ipv6PrefixCount"
                     }
                 }
@@ -44054,27 +44097,27 @@
                 "Ipv4Prefixes": {
                     "target": "com.amazonaws.ec2#Ipv4PrefixList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more IPv4 delegated prefixes to be assigned to the network interface. You cannot use \n            this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv4 prefixes to be assigned to the network interface. You cannot use \n            this option if you use the <code>Ipv4PrefixCount</code> option.</p>",
                         "smithy.api#xmlName": "Ipv4Prefix"
                     }
                 },
                 "Ipv4PrefixCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of IPv4 delegated prefixes to be automatically assigned to the \n            network interface. You cannot use this option if you use the <code>Ipv4Prefix</code> option.</p>"
+                        "smithy.api#documentation": "<p>The number of IPv4 prefixes to be automatically assigned to the \n            network interface. You cannot use this option if you use the <code>Ipv4Prefix</code> option.</p>"
                     }
                 },
                 "Ipv6Prefixes": {
                     "target": "com.amazonaws.ec2#Ipv6PrefixList",
                     "traits": {
-                        "smithy.api#documentation": "<p>One or more IPv6 delegated prefixes to be assigned to the network interface. You cannot \n            use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
+                        "smithy.api#documentation": "<p>One or more IPv6 prefixes to be assigned to the network interface. You cannot \n            use this option if you use the <code>Ipv6PrefixCount</code> option.</p>",
                         "smithy.api#xmlName": "Ipv6Prefix"
                     }
                 },
                 "Ipv6PrefixCount": {
                     "target": "com.amazonaws.ec2#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of IPv6 delegated prefixes to be automatically assigned to the network \n            interface. You cannot use this option if you use the <code>Ipv6Prefix</code> option.</p>"
+                        "smithy.api#documentation": "<p>The number of IPv6 prefixes to be automatically assigned to the network \n            interface. You cannot use this option if you use the <code>Ipv6Prefix</code> option.</p>"
                     }
                 }
             },
@@ -54818,7 +54861,7 @@
                 "UserData": {
                     "target": "com.amazonaws.ec2#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Base64-encoded user data to make available to the instance. For more\n            information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running Commands on Your Linux Instance\n                at Launch</a> (Linux) and <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows).</p>"
+                        "smithy.api#documentation": "<p>The user data to make available to the instance. You must provide base64-encoded text. \n            User data is limited to 16 KB. For more information, see <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/user-data.html\">Running Commands on Your Linux Instance\n                at Launch</a> (Linux) or <a href=\"https://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/ec2-instance-metadata.html#instancedata-add-user-data\">Adding User Data</a> (Windows).</p>\n        \n        <p>If you are creating the launch template for use with Batch, the user data \n            must be provided in the <a href=\"https://cloudinit.readthedocs.io/en/latest/topics/format.html#mime-multi-part-archive\">\n                MIME multi-part archive format</a>.  For more information, see <a href=\"https://docs.aws.amazon.com/batch/latest/userguide/launch-templates.html\">Amazon EC2 user data in \n                    launch templates</a> in the <i>Batch User Guide</i>.</p>"
                     }
                 },
                 "TagSpecifications": {

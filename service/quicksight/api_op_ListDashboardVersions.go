@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists all the versions of the dashboards in the QuickSight subscription.
+// Lists all the versions of the dashboards in the Amazon QuickSight subscription.
 func (c *Client) ListDashboardVersions(ctx context.Context, params *ListDashboardVersionsInput, optFns ...func(*Options)) (*ListDashboardVersionsOutput, error) {
 	if params == nil {
 		params = &ListDashboardVersionsInput{}
@@ -30,7 +30,7 @@ func (c *Client) ListDashboardVersions(ctx context.Context, params *ListDashboar
 
 type ListDashboardVersionsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboard that
+	// The ID of the Amazon Web Services account that contains the dashboard that
 	// you're listing versions for.
 	//
 	// This member is required.

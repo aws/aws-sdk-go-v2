@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a dynamic thing group.
+// Creates a dynamic thing group. Requires permission to access the
+// CreateDynamicThingGroup
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateDynamicThingGroup(ctx context.Context, params *CreateDynamicThingGroupInput, optFns ...func(*Options)) (*CreateDynamicThingGroupOutput, error) {
 	if params == nil {
 		params = &CreateDynamicThingGroupInput{}
@@ -42,7 +45,7 @@ type CreateDynamicThingGroupInput struct {
 	ThingGroupName *string
 
 	// The dynamic thing group index name. Currently one index is supported:
-	// "AWS_Things".
+	// AWS_Things.
 	IndexName *string
 
 	// The dynamic thing group query version. Currently one query version is supported:

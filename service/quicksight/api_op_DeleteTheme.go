@@ -28,7 +28,7 @@ func (c *Client) DeleteTheme(ctx context.Context, params *DeleteThemeInput, optF
 
 type DeleteThemeInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the theme that you're
+	// The ID of the Amazon Web Services account that contains the theme that you're
 	// deleting.
 	//
 	// This member is required.

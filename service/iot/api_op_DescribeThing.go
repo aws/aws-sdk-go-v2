@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets information about the specified thing.
+// Gets information about the specified thing. Requires permission to access the
+// DescribeThing
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeThing(ctx context.Context, params *DescribeThingInput, optFns ...func(*Options)) (*DescribeThingOutput, error) {
 	if params == nil {
 		params = &DescribeThingInput{}
@@ -51,7 +54,7 @@ type DescribeThingOutput struct {
 	// thing's registry name and its use of MQTT client IDs, certificates, or shadow
 	// state, we recommend that you choose a thing name and use it as the MQTT client
 	// ID for the registry and the Device Shadow service. This lets you better organize
-	// your AWS IoT fleet without removing the flexibility of the underlying device
+	// your IoT fleet without removing the flexibility of the underlying device
 	// certificate model or shadows.
 	DefaultClientId *string
 

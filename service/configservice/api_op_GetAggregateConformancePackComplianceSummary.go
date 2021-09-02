@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the count of compliant and noncompliant conformance packs across all AWS
-// Accounts and AWS Regions in an aggregator. You can filter based on AWS Account
-// ID or AWS Region. The results can return an empty result page, but if you have a
+// Returns the count of compliant and noncompliant conformance packs across all
+// Amazon Web Services accounts and Amazon Web Services Regions in an aggregator.
+// You can filter based on Amazon Web Services account ID or Amazon Web Services
+// Region. The results can return an empty result page, but if you have a
 // nextToken, the results are displayed on the next page.
 func (c *Client) GetAggregateConformancePackComplianceSummary(ctx context.Context, params *GetAggregateConformancePackComplianceSummaryInput, optFns ...func(*Options)) (*GetAggregateConformancePackComplianceSummaryOutput, error) {
 	if params == nil {
@@ -42,11 +43,12 @@ type GetAggregateConformancePackComplianceSummaryInput struct {
 	// AggregateConformancePackComplianceSummaryFilters object.
 	Filters *types.AggregateConformancePackComplianceSummaryFilters
 
-	// Groups the result based on AWS Account ID or AWS Region.
+	// Groups the result based on Amazon Web Services account ID or Amazon Web Services
+	// Region.
 	GroupByKey types.AggregateConformancePackComplianceSummaryGroupKey
 
 	// The maximum number of results returned on each page. The default is maximum. If
-	// you specify 0, AWS Config uses the default.
+	// you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -61,7 +63,8 @@ type GetAggregateConformancePackComplianceSummaryOutput struct {
 	// Returns a list of AggregateConformancePackComplianceSummary object.
 	AggregateConformancePackComplianceSummaries []types.AggregateConformancePackComplianceSummary
 
-	// Groups the result based on AWS Account ID or AWS Region.
+	// Groups the result based on Amazon Web Services account ID or Amazon Web Services
+	// Region.
 	GroupByKey *string
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -149,7 +152,7 @@ var _ GetAggregateConformancePackComplianceSummaryAPIClient = (*Client)(nil)
 // options for GetAggregateConformancePackComplianceSummary
 type GetAggregateConformancePackComplianceSummaryPaginatorOptions struct {
 	// The maximum number of results returned on each page. The default is maximum. If
-	// you specify 0, AWS Config uses the default.
+	// you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

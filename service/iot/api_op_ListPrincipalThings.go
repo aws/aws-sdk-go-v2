@@ -13,7 +13,9 @@ import (
 
 // Lists the things associated with the specified principal. A principal can be
 // X.509 certificates, IAM users, groups, and roles, Amazon Cognito identities or
-// federated identities.
+// federated identities. Requires permission to access the ListPrincipalThings
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListPrincipalThings(ctx context.Context, params *ListPrincipalThingsInput, optFns ...func(*Options)) (*ListPrincipalThingsOutput, error) {
 	if params == nil {
 		params = &ListPrincipalThingsInput{}

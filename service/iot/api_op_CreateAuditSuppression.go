@@ -13,7 +13,10 @@ import (
 	"time"
 )
 
-// Creates a Device Defender audit suppression.
+// Creates a Device Defender audit suppression. Requires permission to access the
+// CreateAuditSuppression
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateAuditSuppression(ctx context.Context, params *CreateAuditSuppressionInput, optFns ...func(*Options)) (*CreateAuditSuppressionOutput, error) {
 	if params == nil {
 		params = &CreateAuditSuppressionInput{}

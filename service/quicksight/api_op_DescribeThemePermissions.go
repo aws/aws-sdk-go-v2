@@ -29,7 +29,7 @@ func (c *Client) DescribeThemePermissions(ctx context.Context, params *DescribeT
 
 type DescribeThemePermissionsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the theme that you're
+	// The ID of the Amazon Web Services account that contains the theme that you're
 	// describing.
 	//
 	// This member is required.

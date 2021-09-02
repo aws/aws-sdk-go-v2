@@ -189,6 +189,26 @@ func (m *validateOpGetApplication) HandleInitialize(ctx context.Context, in midd
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpGetAssociatedResource struct {
+}
+
+func (*validateOpGetAssociatedResource) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpGetAssociatedResource) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*GetAssociatedResourceInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpGetAssociatedResourceInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpGetAttributeGroup struct {
 }
 
@@ -405,6 +425,10 @@ func addOpGetApplicationValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetApplication{}, middleware.After)
 }
 
+func addOpGetAssociatedResourceValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpGetAssociatedResource{}, middleware.After)
+}
+
 func addOpGetAttributeGroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpGetAttributeGroup{}, middleware.After)
 }
@@ -595,6 +619,27 @@ func validateOpGetApplicationInput(v *GetApplicationInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "GetApplicationInput"}
 	if v.Application == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpGetAssociatedResourceInput(v *GetAssociatedResourceInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "GetAssociatedResourceInput"}
+	if v.Application == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Application"))
+	}
+	if len(v.ResourceType) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("ResourceType"))
+	}
+	if v.Resource == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Resource"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

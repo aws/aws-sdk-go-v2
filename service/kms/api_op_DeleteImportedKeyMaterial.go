@@ -11,19 +11,19 @@ import (
 )
 
 // Deletes key material that you previously imported. This operation makes the
-// specified customer master key (CMK) unusable. For more information about
-// importing key material into AWS KMS, see Importing Key Material
+// specified KMS key unusable. For more information about importing key material
+// into KMS, see Importing Key Material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html) in
-// the AWS Key Management Service Developer Guide. When the specified CMK is in the
-// PendingDeletion state, this operation does not change the CMK's state.
-// Otherwise, it changes the CMK's state to PendingImport. After you delete key
+// the Key Management Service Developer Guide. When the specified KMS key is in the
+// PendingDeletion state, this operation does not change the KMS key's state.
+// Otherwise, it changes the KMS key's state to PendingImport. After you delete key
 // material, you can use ImportKeyMaterial to reimport the same key material into
-// the CMK. The CMK that you use for this operation must be in a compatible key
-// state. For details, see Key state: Effect on your CMK
+// the KMS key. The KMS key that you use for this operation must be in a compatible
+// key state. For details, see Key state: Effect on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide. Cross-account use: No. You cannot
-// perform this operation on a CMK in a different AWS account. Required
-// permissions: kms:DeleteImportedKeyMaterial
+// Key Management Service Developer Guide. Cross-account use: No. You cannot
+// perform this operation on a KMS key in a different Amazon Web Services account.
+// Required permissions: kms:DeleteImportedKeyMaterial
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //
@@ -47,9 +47,9 @@ func (c *Client) DeleteImportedKeyMaterial(ctx context.Context, params *DeleteIm
 
 type DeleteImportedKeyMaterialInput struct {
 
-	// Identifies the CMK from which you are deleting imported key material. The Origin
-	// of the CMK must be EXTERNAL. Specify the key ID or key ARN of the CMK. For
-	// example:
+	// Identifies the KMS key from which you are deleting imported key material. The
+	// Origin of the KMS key must be EXTERNAL. Specify the key ID or key ARN of the KMS
+	// key. For example:
 	//
 	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
@@ -57,7 +57,7 @@ type DeleteImportedKeyMaterialInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

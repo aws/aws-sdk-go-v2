@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets a key policy attached to the specified customer master key (CMK).
-// Cross-account use: No. You cannot perform this operation on a CMK in a different
-// AWS account. Required permissions: kms:GetKeyPolicy
+// Gets a key policy attached to the specified KMS key. Cross-account use: No. You
+// cannot perform this operation on a KMS key in a different Amazon Web Services
+// account. Required permissions: kms:GetKeyPolicy
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations: PutKeyPolicy
 func (c *Client) GetKeyPolicy(ctx context.Context, params *GetKeyPolicyInput, optFns ...func(*Options)) (*GetKeyPolicyOutput, error) {
@@ -32,17 +32,17 @@ func (c *Client) GetKeyPolicy(ctx context.Context, params *GetKeyPolicyInput, op
 
 type GetKeyPolicyInput struct {
 
-	// Gets the key policy for the specified customer master key (CMK). Specify the key
-	// ID or key ARN of the CMK. For example:
+	// Gets the key policy for the specified KMS key. Specify the key ID or key ARN of
+	// the KMS key. For example:
 	//
-	// * Key ID:
-	// 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
-	// * Key ARN:
+	// * Key
+	// ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

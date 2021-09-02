@@ -27,7 +27,7 @@ import (
 //
 // For more information, see Logging Data and Management Events for Trails
 // (https://docs.aws.amazon.com/awscloudtrail/latest/userguide/logging-management-and-data-events-with-cloudtrail.html)
-// in the AWS CloudTrail User Guide.
+// in the CloudTrail User Guide.
 func (c *Client) GetEventSelectors(ctx context.Context, params *GetEventSelectorsInput, optFns ...func(*Options)) (*GetEventSelectorsOutput, error) {
 	if params == nil {
 		params = &GetEventSelectorsInput{}

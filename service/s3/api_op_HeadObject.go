@@ -82,9 +82,9 @@ import (
 // code.
 //
 // For more information about conditional requests, see RFC 7232
-// (https://tools.ietf.org/html/rfc7232). Permissions You need the s3:GetObject
-// permission for this operation. For more information, see Specifying Permissions
-// in a Policy
+// (https://tools.ietf.org/html/rfc7232). Permissions You need the relevant read
+// object (or version) permission for this operation. For more information, see
+// Specifying Permissions in a Policy
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/using-with-s3-actions.html). If
 // the object you request does not exist, the error Amazon S3 returns depends on
 // whether you also have the s3:ListBucket permission.

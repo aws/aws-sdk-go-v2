@@ -11,59 +11,66 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Decrypts ciphertext that was encrypted by a AWS KMS customer master key (CMK)
-// using any of the following operations:
+// Decrypts ciphertext that was encrypted by a KMS key using any of the following
+// operations:
 //
 // * Encrypt
 //
 // * GenerateDataKey
 //
-// *
-// GenerateDataKeyPair
-//
-// * GenerateDataKeyWithoutPlaintext
+// * GenerateDataKeyPair
 //
 // *
-// GenerateDataKeyPairWithoutPlaintext
+// GenerateDataKeyWithoutPlaintext
 //
-// You can use this operation to decrypt
-// ciphertext that was encrypted under a symmetric or asymmetric CMK. When the CMK
-// is asymmetric, you must specify the CMK and the encryption algorithm that was
-// used to encrypt the ciphertext. For information about symmetric and asymmetric
-// CMKs, see Using Symmetric and Asymmetric CMKs
+// * GenerateDataKeyPairWithoutPlaintext
+//
+// You can
+// use this operation to decrypt ciphertext that was encrypted under a symmetric or
+// asymmetric KMS key. When the KMS key is asymmetric, you must specify the KMS key
+// and the encryption algorithm that was used to encrypt the ciphertext. For
+// information about symmetric and asymmetric KMS keys, see Using Symmetric and
+// Asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
-// in the AWS Key Management Service Developer Guide. The Decrypt operation also
-// decrypts ciphertext that was encrypted outside of AWS KMS by the public key in
-// an AWS KMS asymmetric CMK. However, it cannot decrypt ciphertext produced by
-// other libraries, such as the AWS Encryption SDK
+// in the Key Management Service Developer Guide. The Decrypt operation also
+// decrypts ciphertext that was encrypted outside of KMS by the public key in an
+// KMS asymmetric KMS key. However, it cannot decrypt ciphertext produced by other
+// libraries, such as the Amazon Web Services Encryption SDK
 // (https://docs.aws.amazon.com/encryption-sdk/latest/developer-guide/) or Amazon
 // S3 client-side encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/UsingClientSideEncryption.html).
-// These libraries return a ciphertext format that is incompatible with AWS KMS. If
-// the ciphertext was encrypted under a symmetric CMK, the KeyId parameter is
-// optional. AWS KMS can get this information from metadata that it adds to the
+// These libraries return a ciphertext format that is incompatible with KMS. If the
+// ciphertext was encrypted under a symmetric KMS key, the KeyId parameter is
+// optional. KMS can get this information from metadata that it adds to the
 // symmetric ciphertext blob. This feature adds durability to your implementation
 // by ensuring that authorized users can decrypt ciphertext decades after it was
-// encrypted, even if they've lost track of the CMK ID. However, specifying the CMK
-// is always recommended as a best practice. When you use the KeyId parameter to
-// specify a CMK, AWS KMS only uses the CMK you specify. If the ciphertext was
-// encrypted under a different CMK, the Decrypt operation fails. This practice
-// ensures that you use the CMK that you intend. Whenever possible, use key
-// policies to give users permission to call the Decrypt operation on a particular
-// CMK, instead of using IAM policies. Otherwise, you might create an IAM user
-// policy that gives the user Decrypt permission on all CMKs. This user could
-// decrypt ciphertext that was encrypted by CMKs in other accounts if the key
-// policy for the cross-account CMK permits it. If you must use an IAM policy for
-// Decrypt permissions, limit the user to particular CMKs or particular trusted
-// accounts. For details, see Best practices for IAM policies
+// encrypted, even if they've lost track of the key ID. However, specifying the KMS
+// key is always recommended as a best practice. When you use the KeyId parameter
+// to specify a KMS key, KMS only uses the KMS key you specify. If the ciphertext
+// was encrypted under a different KMS key, the Decrypt operation fails. This
+// practice ensures that you use the KMS key that you intend. Whenever possible,
+// use key policies to give users permission to call the Decrypt operation on a
+// particular KMS key, instead of using IAM policies. Otherwise, you might create
+// an IAM user policy that gives the user Decrypt permission on all KMS keys. This
+// user could decrypt ciphertext that was encrypted by KMS keys in other accounts
+// if the key policy for the cross-account KMS key permits it. If you must use an
+// IAM policy for Decrypt permissions, limit the user to particular KMS keys or
+// particular trusted accounts. For details, see Best practices for IAM policies
 // (https://docs.aws.amazon.com/kms/latest/developerguide/iam-policies.html#iam-policies-best-practices)
-// in the AWS Key Management Service Developer Guide. The CMK that you use for this
+// in the Key Management Service Developer Guide. Applications in Amazon Web
+// Services Nitro Enclaves can call this operation by using the Amazon Web Services
+// Nitro Enclaves Development Kit
+// (https://github.com/aws/aws-nitro-enclaves-sdk-c). For information about the
+// supporting parameters, see How Amazon Web Services Nitro Enclaves use KMS
+// (https://docs.aws.amazon.com/kms/latest/developerguide/services-nitro-enclaves.html)
+// in the Key Management Service Developer Guide. The KMS key that you use for this
 // operation must be in a compatible key state. For details, see Key state: Effect
-// on your CMK
+// on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide. Cross-account use: Yes. You can
-// decrypt a ciphertext using a CMK in a different AWS account. Required
-// permissions: kms:Decrypt
+// Key Management Service Developer Guide. Cross-account use: Yes. To perform this
+// operation with a KMS key in a different Amazon Web Services account, specify the
+// key ARN or alias ARN in the value of the KeyId parameter. Required permissions:
+// kms:Decrypt
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //
@@ -100,46 +107,46 @@ type DecryptInput struct {
 	// Specifies the encryption algorithm that will be used to decrypt the ciphertext.
 	// Specify the same algorithm that was used to encrypt the data. If you specify a
 	// different algorithm, the Decrypt operation fails. This parameter is required
-	// only when the ciphertext was encrypted under an asymmetric CMK. The default
+	// only when the ciphertext was encrypted under an asymmetric KMS key. The default
 	// value, SYMMETRIC_DEFAULT, represents the only supported algorithm that is valid
-	// for symmetric CMKs.
+	// for symmetric KMS keys.
 	EncryptionAlgorithm types.EncryptionAlgorithmSpec
 
 	// Specifies the encryption context to use when decrypting the data. An encryption
 	// context is valid only for cryptographic operations
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#cryptographic-operations)
-	// with a symmetric CMK. The standard asymmetric encryption algorithms that AWS KMS
+	// with a symmetric KMS key. The standard asymmetric encryption algorithms that KMS
 	// uses do not support an encryption context. An encryption context is a collection
 	// of non-secret key-value pairs that represents additional authenticated data.
 	// When you use an encryption context to encrypt data, you must specify the same
 	// (an exact case-sensitive match) encryption context to decrypt the data. An
-	// encryption context is optional when encrypting with a symmetric CMK, but it is
-	// highly recommended. For more information, see Encryption Context
+	// encryption context is optional when encrypting with a symmetric KMS key, but it
+	// is highly recommended. For more information, see Encryption Context
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#encrypt_context)
-	// in the AWS Key Management Service Developer Guide.
+	// in the Key Management Service Developer Guide.
 	EncryptionContext map[string]string
 
 	// A list of grant tokens. Use a grant token when your permission to call this
-	// operation comes from a newly created grant that has not yet achieved eventual
-	// consistency. Use a grant token when your permission to call this operation comes
-	// from a new grant that has not yet achieved eventual consistency. For more
-	// information, see Grant token
-	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#grant_token)
-	// in the AWS Key Management Service Developer Guide.
+	// operation comes from a new grant that has not yet achieved eventual consistency.
+	// For more information, see Grant token
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#grant_token)
+	// and Using a grant token
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/grant-manage.html#using-grant-token)
+	// in the Key Management Service Developer Guide.
 	GrantTokens []string
 
-	// Specifies the customer master key (CMK) that AWS KMS uses to decrypt the
-	// ciphertext. Enter a key ID of the CMK that was used to encrypt the ciphertext.
-	// This parameter is required only when the ciphertext was encrypted under an
-	// asymmetric CMK. If you used a symmetric CMK, AWS KMS can get the CMK from
-	// metadata that it adds to the symmetric ciphertext blob. However, it is always
-	// recommended as a best practice. This practice ensures that you use the CMK that
-	// you intend. To specify a CMK, use its key ID, key ARN, alias name, or alias ARN.
-	// When using an alias name, prefix it with "alias/". To specify a CMK in a
-	// different AWS account, you must use the key ARN or alias ARN. For example:
+	// Specifies the KMS key that KMS uses to decrypt the ciphertext. Enter a key ID of
+	// the KMS key that was used to encrypt the ciphertext. This parameter is required
+	// only when the ciphertext was encrypted under an asymmetric KMS key. If you used
+	// a symmetric KMS key, KMS can get the KMS key from metadata that it adds to the
+	// symmetric ciphertext blob. However, it is always recommended as a best practice.
+	// This practice ensures that you use the KMS key that you intend. To specify a KMS
+	// key, use its key ID, key ARN, alias name, or alias ARN. When using an alias
+	// name, prefix it with "alias/". To specify a KMS key in a different Amazon Web
+	// Services account, you must use the key ARN or alias ARN. For example:
 	//
-	// *
-	// Key ID: 1234abcd-12ab-34cd-56ef-1234567890ab
+	// * Key ID:
+	// 1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// * Key ARN:
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
@@ -151,8 +158,8 @@ type DecryptInput struct {
 	// arn:aws:kms:us-east-2:111122223333:alias/ExampleAlias
 	//
 	// To get the key ID and key
-	// ARN for a CMK, use ListKeys or DescribeKey. To get the alias name and alias ARN,
-	// use ListAliases.
+	// ARN for a KMS key, use ListKeys or DescribeKey. To get the alias name and alias
+	// ARN, use ListAliases.
 	KeyId *string
 
 	noSmithyDocumentSerde
@@ -165,11 +172,11 @@ type DecryptOutput struct {
 
 	// The Amazon Resource Name (key ARN
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/concepts.html#key-id-key-ARN))
-	// of the CMK that was used to decrypt the ciphertext.
+	// of the KMS key that was used to decrypt the ciphertext.
 	KeyId *string
 
-	// Decrypted plaintext data. When you use the HTTP API or the AWS CLI, the value is
-	// Base64-encoded. Otherwise, it is not Base64-encoded.
+	// Decrypted plaintext data. When you use the HTTP API or the Amazon Web Services
+	// CLI, the value is Base64-encoded. Otherwise, it is not Base64-encoded.
 	Plaintext []byte
 
 	// Metadata pertaining to the operation's result.

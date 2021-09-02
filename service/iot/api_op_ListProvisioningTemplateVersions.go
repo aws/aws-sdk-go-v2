@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// A list of fleet provisioning template versions.
+// A list of fleet provisioning template versions. Requires permission to access
+// the ListProvisioningTemplateVersions
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListProvisioningTemplateVersions(ctx context.Context, params *ListProvisioningTemplateVersionsInput, optFns ...func(*Options)) (*ListProvisioningTemplateVersionsOutput, error) {
 	if params == nil {
 		params = &ListProvisioningTemplateVersionsInput{}

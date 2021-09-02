@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates the groups to which the thing belongs.
+// Updates the groups to which the thing belongs. Requires permission to access the
+// UpdateThingGroupsForThing
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateThingGroupsForThing(ctx context.Context, params *UpdateThingGroupsForThingInput, optFns ...func(*Options)) (*UpdateThingGroupsForThingOutput, error) {
 	if params == nil {
 		params = &UpdateThingGroupsForThingInput{}

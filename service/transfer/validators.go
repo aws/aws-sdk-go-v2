@@ -70,6 +70,26 @@ func (m *validateOpCreateUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpCreateWorkflow struct {
+}
+
+func (*validateOpCreateWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDeleteAccess struct {
 }
 
@@ -150,6 +170,26 @@ func (m *validateOpDeleteUser) HandleInitialize(ctx context.Context, in middlewa
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeleteWorkflow struct {
+}
+
+func (*validateOpDeleteWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeleteWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeleteWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeleteWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAccess struct {
 }
 
@@ -165,6 +205,26 @@ func (m *validateOpDescribeAccess) HandleInitialize(ctx context.Context, in midd
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpDescribeAccessInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpDescribeExecution struct {
+}
+
+func (*validateOpDescribeExecution) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeExecution) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeExecutionInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeExecutionInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -230,6 +290,26 @@ func (m *validateOpDescribeUser) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDescribeWorkflow struct {
+}
+
+func (*validateOpDescribeWorkflow) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDescribeWorkflow) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DescribeWorkflowInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDescribeWorkflowInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpImportSshPublicKey struct {
 }
 
@@ -270,6 +350,26 @@ func (m *validateOpListAccesses) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpListExecutions struct {
+}
+
+func (*validateOpListExecutions) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpListExecutions) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*ListExecutionsInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpListExecutionsInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpListTagsForResource struct {
 }
 
@@ -305,6 +405,26 @@ func (m *validateOpListUsers) HandleInitialize(ctx context.Context, in middlewar
 		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
 	}
 	if err := validateOpListUsersInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
+type validateOpSendWorkflowStepState struct {
+}
+
+func (*validateOpSendWorkflowStepState) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpSendWorkflowStepState) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*SendWorkflowStepStateInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpSendWorkflowStepStateInput(input); err != nil {
 		return out, metadata, err
 	}
 	return next.HandleInitialize(ctx, in)
@@ -482,6 +602,10 @@ func addOpCreateUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateUser{}, middleware.After)
 }
 
+func addOpCreateWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateWorkflow{}, middleware.After)
+}
+
 func addOpDeleteAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteAccess{}, middleware.After)
 }
@@ -498,8 +622,16 @@ func addOpDeleteUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteUser{}, middleware.After)
 }
 
+func addOpDeleteWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeleteWorkflow{}, middleware.After)
+}
+
 func addOpDescribeAccessValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAccess{}, middleware.After)
+}
+
+func addOpDescribeExecutionValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeExecution{}, middleware.After)
 }
 
 func addOpDescribeSecurityPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -514,6 +646,10 @@ func addOpDescribeUserValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeUser{}, middleware.After)
 }
 
+func addOpDescribeWorkflowValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDescribeWorkflow{}, middleware.After)
+}
+
 func addOpImportSshPublicKeyValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpImportSshPublicKey{}, middleware.After)
 }
@@ -522,12 +658,20 @@ func addOpListAccessesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListAccesses{}, middleware.After)
 }
 
+func addOpListExecutionsValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpListExecutions{}, middleware.After)
+}
+
 func addOpListTagsForResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListTagsForResource{}, middleware.After)
 }
 
 func addOpListUsersValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUsers{}, middleware.After)
+}
+
+func addOpSendWorkflowStepStateValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpSendWorkflowStepState{}, middleware.After)
 }
 
 func addOpStartServerValidationMiddleware(stack *middleware.Stack) error {
@@ -597,6 +741,23 @@ func validateHomeDirectoryMappings(v []types.HomeDirectoryMapEntry) error {
 	}
 }
 
+func validateOnUploadWorkflowDetails(v []types.WorkflowDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OnUploadWorkflowDetails"}
+	for i := range v {
+		if err := validateWorkflowDetail(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validatePosixProfile(v *types.PosixProfile) error {
 	if v == nil {
 		return nil
@@ -607,6 +768,41 @@ func validatePosixProfile(v *types.PosixProfile) error {
 	}
 	if v.Gid == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Gid"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3Tag(v *types.S3Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Tag"}
+	if v.Key == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Key"))
+	}
+	if v.Value == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Value"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateS3Tags(v []types.S3Tag) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "S3Tags"}
+	for i := range v {
+		if err := validateS3Tag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -640,6 +836,94 @@ func validateTags(v []types.Tag) error {
 	invalidParams := smithy.InvalidParamsError{Context: "Tags"}
 	for i := range v {
 		if err := validateTag(&v[i]); err != nil {
+			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateTagStepDetails(v *types.TagStepDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "TagStepDetails"}
+	if v.Tags != nil {
+		if err := validateS3Tags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWorkflowDetail(v *types.WorkflowDetail) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkflowDetail"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.ExecutionRole == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionRole"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWorkflowDetails(v *types.WorkflowDetails) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkflowDetails"}
+	if v.OnUpload == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OnUpload"))
+	} else if v.OnUpload != nil {
+		if err := validateOnUploadWorkflowDetails(v.OnUpload); err != nil {
+			invalidParams.AddNested("OnUpload", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWorkflowStep(v *types.WorkflowStep) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkflowStep"}
+	if v.TagStepDetails != nil {
+		if err := validateTagStepDetails(v.TagStepDetails); err != nil {
+			invalidParams.AddNested("TagStepDetails", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateWorkflowSteps(v []types.WorkflowStep) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "WorkflowSteps"}
+	for i := range v {
+		if err := validateWorkflowStep(&v[i]); err != nil {
 			invalidParams.AddNested(fmt.Sprintf("[%d]", i), err.(smithy.InvalidParamsError))
 		}
 	}
@@ -691,6 +975,11 @@ func validateOpCreateServerInput(v *CreateServerInput) error {
 			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.WorkflowDetails != nil {
+		if err := validateWorkflowDetails(v.WorkflowDetails); err != nil {
+			invalidParams.AddNested("WorkflowDetails", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -726,6 +1015,35 @@ func validateOpCreateUserInput(v *CreateUserInput) error {
 	}
 	if v.UserName == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("UserName"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpCreateWorkflowInput(v *CreateWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateWorkflowInput"}
+	if v.Steps == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Steps"))
+	} else if v.Steps != nil {
+		if err := validateWorkflowSteps(v.Steps); err != nil {
+			invalidParams.AddNested("Steps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OnExceptionSteps != nil {
+		if err := validateWorkflowSteps(v.OnExceptionSteps); err != nil {
+			invalidParams.AddNested("OnExceptionSteps", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.Tags != nil {
+		if err := validateTags(v.Tags); err != nil {
+			invalidParams.AddNested("Tags", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -806,6 +1124,21 @@ func validateOpDeleteUserInput(v *DeleteUserInput) error {
 	}
 }
 
+func validateOpDeleteWorkflowInput(v *DeleteWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeleteWorkflowInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAccessInput(v *DescribeAccessInput) error {
 	if v == nil {
 		return nil
@@ -816,6 +1149,24 @@ func validateOpDescribeAccessInput(v *DescribeAccessInput) error {
 	}
 	if v.ExternalId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ExternalId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpDescribeExecutionInput(v *DescribeExecutionInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeExecutionInput"}
+	if v.ExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
+	}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -872,6 +1223,21 @@ func validateOpDescribeUserInput(v *DescribeUserInput) error {
 	}
 }
 
+func validateOpDescribeWorkflowInput(v *DescribeWorkflowInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DescribeWorkflowInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpImportSshPublicKeyInput(v *ImportSshPublicKeyInput) error {
 	if v == nil {
 		return nil
@@ -908,6 +1274,21 @@ func validateOpListAccessesInput(v *ListAccessesInput) error {
 	}
 }
 
+func validateOpListExecutionsInput(v *ListExecutionsInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ListExecutionsInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpListTagsForResourceInput(v *ListTagsForResourceInput) error {
 	if v == nil {
 		return nil
@@ -930,6 +1311,30 @@ func validateOpListUsersInput(v *ListUsersInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListUsersInput"}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpSendWorkflowStepStateInput(v *SendWorkflowStepStateInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "SendWorkflowStepStateInput"}
+	if v.WorkflowId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("WorkflowId"))
+	}
+	if v.ExecutionId == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ExecutionId"))
+	}
+	if v.Token == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Token"))
+	}
+	if len(v.Status) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Status"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
@@ -1061,6 +1466,11 @@ func validateOpUpdateServerInput(v *UpdateServerInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "UpdateServerInput"}
 	if v.ServerId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServerId"))
+	}
+	if v.WorkflowDetails != nil {
+		if err := validateWorkflowDetails(v.WorkflowDetails); err != nil {
+			invalidParams.AddNested("WorkflowDetails", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

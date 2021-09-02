@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the fine grained logging options.
+// Gets the fine grained logging options. Requires permission to access the
+// GetV2LoggingOptions
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) GetV2LoggingOptions(ctx context.Context, params *GetV2LoggingOptionsInput, optFns ...func(*Options)) (*GetV2LoggingOptionsOutput, error) {
 	if params == nil {
 		params = &GetV2LoggingOptionsInput{}
@@ -39,7 +42,7 @@ type GetV2LoggingOptionsOutput struct {
 	// Disables all logs.
 	DisableAllLogs bool
 
-	// The IAM role ARN AWS IoT uses to write to your CloudWatch logs.
+	// The IAM role ARN IoT uses to write to your CloudWatch logs.
 	RoleArn *string
 
 	// Metadata pertaining to the operation's result.

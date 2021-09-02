@@ -16,13 +16,13 @@ import (
 // if one or more TaskIds values are provided in the request, or if filters are
 // used in the request. You can use filters to narrow the response to include just
 // tasks for specific file systems, or tasks in a specific lifecycle state.
-// Otherwise, it returns all data repository tasks owned by your AWS account in the
-// AWS Region of the endpoint that you're calling. When retrieving all tasks, you
-// can paginate the response by using the optional MaxResults parameter to limit
-// the number of tasks returned in a response. If more tasks remain, Amazon FSx
-// returns a NextToken value in the response. In this case, send a later request
-// with the NextToken request parameter set to the value of NextToken from the last
-// response.
+// Otherwise, it returns all data repository tasks owned by your Amazon Web
+// Services account in the Amazon Web Services Region of the endpoint that you're
+// calling. When retrieving all tasks, you can paginate the response by using the
+// optional MaxResults parameter to limit the number of tasks returned in a
+// response. If more tasks remain, Amazon FSx returns a NextToken value in the
+// response. In this case, send a later request with the NextToken request
+// parameter set to the value of NextToken from the last response.
 func (c *Client) DescribeDataRepositoryTasks(ctx context.Context, params *DescribeDataRepositoryTasksInput, optFns ...func(*Options)) (*DescribeDataRepositoryTasksOutput, error) {
 	if params == nil {
 		params = &DescribeDataRepositoryTasksInput{}

@@ -13,7 +13,7 @@ import (
 )
 
 // Lists Amazon QuickSight analyses that exist in the specified Amazon Web Services
-// account;.
+// account.
 func (c *Client) ListAnalyses(ctx context.Context, params *ListAnalysesInput, optFns ...func(*Options)) (*ListAnalysesOutput, error) {
 	if params == nil {
 		params = &ListAnalysesInput{}
@@ -31,7 +31,7 @@ func (c *Client) ListAnalyses(ctx context.Context, params *ListAnalysesInput, op
 
 type ListAnalysesInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the analyses.
+	// The ID of the Amazon Web Services account that contains the analyses.
 	//
 	// This member is required.
 	AwsAccountId *string

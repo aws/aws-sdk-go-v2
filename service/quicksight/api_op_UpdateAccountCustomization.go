@@ -13,11 +13,11 @@ import (
 
 // Updates Amazon QuickSight customizations the current Amazon Web Services
 // Region;. Currently, the only customization you can use is a theme. You can use
-// customizations for your Amazon Web Services account; or, if you specify a
-// namespace, for a QuickSight namespace instead. Customizations that apply to a
-// namespace override customizations that apply to an Amazon Web Services account;.
-// To find out which customizations apply, use the DescribeAccountCustomization API
-// operation.
+// customizations for your Amazon Web Services account or, if you specify a
+// namespace, for a Amazon QuickSight namespace instead. Customizations that apply
+// to a namespace override customizations that apply to an Amazon Web Services
+// account. To find out which customizations apply, use the
+// DescribeAccountCustomization API operation.
 func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateAccountCustomizationInput, optFns ...func(*Options)) (*UpdateAccountCustomizationOutput, error) {
 	if params == nil {
 		params = &UpdateAccountCustomizationInput{}
@@ -35,19 +35,19 @@ func (c *Client) UpdateAccountCustomization(ctx context.Context, params *UpdateA
 
 type UpdateAccountCustomizationInput struct {
 
-	// The QuickSight customizations you're updating in the current Amazon Web Services
-	// Region;.
+	// The Amazon QuickSight customizations you're updating in the current Amazon Web
+	// Services Region;.
 	//
 	// This member is required.
 	AccountCustomization *types.AccountCustomization
 
-	// The ID for the Amazon Web Services account; that you want to update QuickSight
-	// customizations for.
+	// The ID for the Amazon Web Services account that you want to update Amazon
+	// QuickSight customizations for.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The namespace that you want to update QuickSight customizations for.
+	// The namespace that you want to update Amazon QuickSight customizations for.
 	Namespace *string
 
 	noSmithyDocumentSerde
@@ -55,16 +55,16 @@ type UpdateAccountCustomizationInput struct {
 
 type UpdateAccountCustomizationOutput struct {
 
-	// The QuickSight customizations you're updating in the current Amazon Web Services
-	// Region;.
+	// The Amazon QuickSight customizations you're updating in the current Amazon Web
+	// Services Region;.
 	AccountCustomization *types.AccountCustomization
 
 	// The Amazon Resource Name (ARN) for the updated customization for this Amazon Web
-	// Services account;.
+	// Services account.
 	Arn *string
 
-	// The ID for the Amazon Web Services account; that you want to update QuickSight
-	// customizations for.
+	// The ID for the Amazon Web Services account that you want to update Amazon
+	// QuickSight customizations for.
 	AwsAccountId *string
 
 	// The namespace associated with the customization that you're updating.

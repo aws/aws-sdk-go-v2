@@ -742,6 +742,18 @@ func validateGeneralNameList(v []types.GeneralName) error {
 	}
 }
 
+func validateOcspConfiguration(v *types.OcspConfiguration) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OcspConfiguration"}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOtherName(v *types.OtherName) error {
 	if v == nil {
 		return nil
@@ -842,6 +854,11 @@ func validateRevocationConfiguration(v *types.RevocationConfiguration) error {
 	if v.CrlConfiguration != nil {
 		if err := validateCrlConfiguration(v.CrlConfiguration); err != nil {
 			invalidParams.AddNested("CrlConfiguration", err.(smithy.InvalidParamsError))
+		}
+	}
+	if v.OcspConfiguration != nil {
+		if err := validateOcspConfiguration(v.OcspConfiguration); err != nil {
+			invalidParams.AddNested("OcspConfiguration", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

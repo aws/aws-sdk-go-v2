@@ -81,8 +81,9 @@ type UpdateFileSystemOutput struct {
 	// This member is required.
 	NumberOfMountTargets int32
 
-	// The AWS account that created the file system. If the file system was created by
-	// an IAM user, the parent account to which the user belongs is the owner.
+	// The Amazon Web Services account that created the file system. If the file system
+	// was created by an IAM user, the parent account to which the user belongs is the
+	// owner.
 	//
 	// This member is required.
 	OwnerId *string
@@ -112,13 +113,13 @@ type UpdateFileSystemOutput struct {
 
 	// The unique and consistent identifier of the Availability Zone in which the file
 	// system's One Zone storage classes exist. For example, use1-az1 is an
-	// Availability Zone ID for the us-east-1 AWS Region, and it has the same location
-	// in every AWS account.
+	// Availability Zone ID for the us-east-1 Amazon Web Services Region, and it has
+	// the same location in every Amazon Web Services account.
 	AvailabilityZoneId *string
 
-	// Describes the AWS Availability Zone in which the file system is located, and is
-	// valid only for file systems using One Zone storage classes. For more
-	// information, see Using EFS storage classes
+	// Describes the Amazon Web Services Availability Zone in which the file system is
+	// located, and is valid only for file systems using One Zone storage classes. For
+	// more information, see Using EFS storage classes
 	// (https://docs.aws.amazon.com/efs/latest/ug/storage-classes.html) in the Amazon
 	// EFS User Guide.
 	AvailabilityZoneName *string
@@ -132,8 +133,8 @@ type UpdateFileSystemOutput struct {
 	// arn:aws:elasticfilesystem:us-west-2:1111333322228888:file-system/fs-01234567
 	FileSystemArn *string
 
-	// The ID of an AWS Key Management Service (AWS KMS) customer master key (CMK) that
-	// was used to protect the encrypted file system.
+	// The ID of an Key Management Service customer master key (CMK) that was used to
+	// protect the encrypted file system.
 	KmsKeyId *string
 
 	// You can add tags to a file system, including a Name tag. For more information,

@@ -10,7 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the stored query for a single AWS account and a single AWS Region.
+// Deletes the stored query for a single Amazon Web Services account and a single
+// Amazon Web Services Region.
 func (c *Client) DeleteStoredQuery(ctx context.Context, params *DeleteStoredQueryInput, optFns ...func(*Options)) (*DeleteStoredQueryOutput, error) {
 	if params == nil {
 		params = &DeleteStoredQueryInput{}

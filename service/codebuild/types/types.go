@@ -433,9 +433,8 @@ type BuildBatchPhase struct {
 
 	// The current status of the batch build phase. Valid values include: FAILED The
 	// build phase failed. FAULT The build phase faulted. IN_PROGRESS The build phase
-	// is still in progress. QUEUED The build has been submitted and is queued behind
-	// other submitted builds. STOPPED The build phase stopped. SUCCEEDED The build
-	// phase succeeded. TIMED_OUT The build phase timed out.
+	// is still in progress. STOPPED The build phase stopped. SUCCEEDED The build phase
+	// succeeded. TIMED_OUT The build phase timed out.
 	PhaseStatus StatusType
 
 	// The name of the batch build phase. Valid values include: COMBINE_ARTIFACTS Build
@@ -505,44 +504,20 @@ type BuildPhase struct {
 
 	// The current status of the build phase. Valid values include: FAILED The build
 	// phase failed. FAULT The build phase faulted. IN_PROGRESS The build phase is
-	// still in progress. QUEUED The build has been submitted and is queued behind
-	// other submitted builds. STOPPED The build phase stopped. SUCCEEDED The build
-	// phase succeeded. TIMED_OUT The build phase timed out.
+	// still in progress. STOPPED The build phase stopped. SUCCEEDED The build phase
+	// succeeded. TIMED_OUT The build phase timed out.
 	PhaseStatus StatusType
 
-	// The name of the build phase. Valid values include:
-	//
-	// * BUILD: Core build
-	// activities typically occur in this build phase.
-	//
-	// * COMPLETED: The build has been
-	// completed.
-	//
-	// * DOWNLOAD_SOURCE: Source code is being downloaded in this build
-	// phase.
-	//
-	// * FINALIZING: The build process is completing in this build phase.
-	//
-	// *
-	// INSTALL: Installation activities typically occur in this build phase.
-	//
-	// *
-	// POST_BUILD: Post-build activities typically occur in this build phase.
-	//
-	// *
-	// PRE_BUILD: Pre-build activities typically occur in this build phase.
-	//
-	// *
-	// PROVISIONING: The build environment is being set up.
-	//
-	// * QUEUED: The build has
-	// been submitted and is queued behind other submitted builds.
-	//
-	// * SUBMITTED: The
-	// build has been submitted.
-	//
-	// * UPLOAD_ARTIFACTS: Build output artifacts are being
-	// uploaded to the output location.
+	// The name of the build phase. Valid values include: BUILD Core build activities
+	// typically occur in this build phase. COMPLETED The build has been completed.
+	// DOWNLOAD_SOURCE Source code is being downloaded in this build phase. FINALIZING
+	// The build process is completing in this build phase. INSTALL Installation
+	// activities typically occur in this build phase. POST_BUILD Post-build activities
+	// typically occur in this build phase. PRE_BUILD Pre-build activities typically
+	// occur in this build phase. PROVISIONING The build environment is being set up.
+	// QUEUED The build has been submitted and is queued behind other submitted builds.
+	// SUBMITTED The build has been submitted. UPLOAD_ARTIFACTS Build output artifacts
+	// are being uploaded to the output location.
 	PhaseType BuildPhaseType
 
 	// When the build phase started, expressed in Unix time format.

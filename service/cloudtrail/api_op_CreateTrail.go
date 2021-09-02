@@ -44,7 +44,7 @@ type CreateTrailInput struct {
 	//
 	// * Have no adjacent
 	// periods, underscores or dashes. Names like my-_namespace and my--namespace are
-	// invalid.
+	// not valid.
 	//
 	// * Not be in IP address format (for example, 192.168.5.4)
 	//
@@ -69,7 +69,7 @@ type CreateTrailInput struct {
 
 	// Specifies whether log file integrity validation is enabled. The default is
 	// false. When you disable log file integrity validation, the chain of digest files
-	// is broken after one hour. CloudTrail will not create digest files for log files
+	// is broken after one hour. CloudTrail does not create digest files for log files
 	// that were delivered during a period in which log file integrity validation was
 	// disabled. For example, if you enable log file integrity validation at noon on
 	// January 1, disable it at noon on January 2, and re-enable it at noon on January
@@ -89,15 +89,19 @@ type CreateTrailInput struct {
 	IsMultiRegionTrail *bool
 
 	// Specifies whether the trail is created for all accounts in an organization in
-	// AWS Organizations, or only for the current AWS account. The default is false,
-	// and cannot be true unless the call is made on behalf of an AWS account that is
-	// the master account for an organization in AWS Organizations.
+	// Organizations, or only for the current Amazon Web Services account. The default
+	// is false, and cannot be true unless the call is made on behalf of an Amazon Web
+	// Services account that is the management account for an organization in
+	// Organizations.
 	IsOrganizationTrail *bool
 
 	// Specifies the KMS key ID to use to encrypt the logs delivered by CloudTrail. The
 	// value can be an alias name prefixed by "alias/", a fully specified ARN to an
 	// alias, a fully specified ARN to a key, or a globally unique identifier.
-	// Examples:
+	// CloudTrail also supports KMS multi-Region keys. For more information about
+	// multi-Region keys, see Using multi-Region keys
+	// (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html)
+	// in the Key Management Service Developer Guide. Examples:
 	//
 	// * alias/MyAliasName
 	//
@@ -151,7 +155,7 @@ type CreateTrailOutput struct {
 	IsOrganizationTrail *bool
 
 	// Specifies the KMS key ID that encrypts the logs delivered by CloudTrail. The
-	// value is a fully specified ARN to a KMS key in the format:
+	// value is a fully specified ARN to a KMS key in the following format.
 	// arn:aws:kms:us-east-2:123456789012:key/12345678-1234-1234-1234-123456789012
 	KmsKeyId *string
 

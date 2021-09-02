@@ -11,15 +11,15 @@ import (
 )
 
 // Records the configuration state for the resource provided in the request. The
-// configuration state of a resource is represented in AWS Config as Configuration
+// configuration state of a resource is represented in Config as Configuration
 // Items. Once this API records the configuration item, you can retrieve the list
-// of configuration items for the custom resource type using existing AWS Config
-// APIs. The custom resource type must be registered with AWS CloudFormation. This
-// API accepts the configuration item registered with AWS CloudFormation. When you
-// call this API, AWS Config only stores configuration state of the resource
-// provided in the request. This API does not change or remediate the configuration
-// of the resource. Write-only schema properites are not recorded as part of the
-// published configuration item.
+// of configuration items for the custom resource type using existing Config APIs.
+// The custom resource type must be registered with CloudFormation. This API
+// accepts the configuration item registered with CloudFormation. When you call
+// this API, Config only stores configuration state of the resource provided in the
+// request. This API does not change or remediate the configuration of the
+// resource. Write-only schema properites are not recorded as part of the published
+// configuration item.
 func (c *Client) PutResourceConfig(ctx context.Context, params *PutResourceConfigInput, optFns ...func(*Options)) (*PutResourceConfigOutput, error) {
 	if params == nil {
 		params = &PutResourceConfigInput{}
@@ -38,8 +38,8 @@ func (c *Client) PutResourceConfig(ctx context.Context, params *PutResourceConfi
 type PutResourceConfigInput struct {
 
 	// The configuration object of the resource in valid JSON format. It must match the
-	// schema registered with AWS CloudFormation. The configuration JSON must not
-	// exceed 64 KB.
+	// schema registered with CloudFormation. The configuration JSON must not exceed 64
+	// KB.
 	//
 	// This member is required.
 	Configuration *string
@@ -49,15 +49,15 @@ type PutResourceConfigInput struct {
 	// This member is required.
 	ResourceId *string
 
-	// The type of the resource. The custom resource type must be registered with AWS
-	// CloudFormation. You cannot use the organization names “aws”, “amzn”, “amazon”,
-	// “alexa”, “custom” with custom resource types. It is the first part of the
-	// ResourceType up to the first ::.
+	// The type of the resource. The custom resource type must be registered with
+	// CloudFormation. You cannot use the organization names “amzn”, “amazon”, “alexa”,
+	// “custom” with custom resource types. It is the first part of the ResourceType up
+	// to the first ::.
 	//
 	// This member is required.
 	ResourceType *string
 
-	// Version of the schema registered for the ResourceType in AWS CloudFormation.
+	// Version of the schema registered for the ResourceType in CloudFormation.
 	//
 	// This member is required.
 	SchemaVersionId *string

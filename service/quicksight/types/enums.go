@@ -94,6 +94,24 @@ func (ColumnDataType) Values() []ColumnDataType {
 	}
 }
 
+type ColumnTagName string
+
+// Enum values for ColumnTagName
+const (
+	ColumnTagNameColumnGeographicRole ColumnTagName = "COLUMN_GEOGRAPHIC_ROLE"
+	ColumnTagNameColumnDescription    ColumnTagName = "COLUMN_DESCRIPTION"
+)
+
+// Values returns all known values for ColumnTagName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ColumnTagName) Values() []ColumnTagName {
+	return []ColumnTagName{
+		"COLUMN_GEOGRAPHIC_ROLE",
+		"COLUMN_DESCRIPTION",
+	}
+}
+
 type DashboardBehavior string
 
 // Enum values for DashboardBehavior

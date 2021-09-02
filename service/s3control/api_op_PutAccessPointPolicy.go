@@ -49,8 +49,8 @@ func (c *Client) PutAccessPointPolicy(ctx context.Context, params *PutAccessPoin
 
 type PutAccessPointPolicyInput struct {
 
-	// The account ID for owner of the bucket associated with the specified access
-	// point.
+	// The Amazon Web Services account ID for owner of the bucket associated with the
+	// specified access point.
 	//
 	// This member is required.
 	AccountId *string

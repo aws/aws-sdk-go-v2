@@ -11,11 +11,11 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the names of the key policies that are attached to a customer master key
-// (CMK). This operation is designed to get policy names that you can use in a
-// GetKeyPolicy operation. However, the only valid policy name is default.
-// Cross-account use: No. You cannot perform this operation on a CMK in a different
-// AWS account. Required permissions: kms:ListKeyPolicies
+// Gets the names of the key policies that are attached to a KMS key. This
+// operation is designed to get policy names that you can use in a GetKeyPolicy
+// operation. However, the only valid policy name is default. Cross-account use:
+// No. You cannot perform this operation on a KMS key in a different Amazon Web
+// Services account. Required permissions: kms:ListKeyPolicies
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //
@@ -39,8 +39,8 @@ func (c *Client) ListKeyPolicies(ctx context.Context, params *ListKeyPoliciesInp
 
 type ListKeyPoliciesInput struct {
 
-	// Gets the names of key policies for the specified customer master key (CMK).
-	// Specify the key ID or key ARN of the CMK. For example:
+	// Gets the names of key policies for the specified KMS key. Specify the key ID or
+	// key ARN of the KMS key. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -49,16 +49,16 @@ type ListKeyPoliciesInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string
 
 	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer. This value is optional. If you include a
-	// value, it must be between 1 and 1000, inclusive. If you do not include a value,
-	// it defaults to 100. Only one policy can be attached to a key.
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer. This value is optional. If you include a value, it
+	// must be between 1 and 1000, inclusive. If you do not include a value, it
+	// defaults to 100. Only one policy can be attached to a key.
 	Limit *int32
 
 	// Use this parameter in a subsequent request after you receive a response with
@@ -164,10 +164,10 @@ var _ ListKeyPoliciesAPIClient = (*Client)(nil)
 // ListKeyPoliciesPaginatorOptions is the paginator options for ListKeyPolicies
 type ListKeyPoliciesPaginatorOptions struct {
 	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer. This value is optional. If you include a
-	// value, it must be between 1 and 1000, inclusive. If you do not include a value,
-	// it defaults to 100. Only one policy can be attached to a key.
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer. This value is optional. If you include a value, it
+	// must be between 1 and 1000, inclusive. If you do not include a value, it
+	// defaults to 100. Only one policy can be attached to a key.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

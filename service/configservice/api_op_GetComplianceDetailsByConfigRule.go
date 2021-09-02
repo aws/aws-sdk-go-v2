@@ -12,9 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns the evaluation results for the specified AWS Config rule. The results
-// indicate which AWS resources were evaluated by the rule, when each resource was
-// last evaluated, and whether each resource complies with the rule.
+// Returns the evaluation results for the specified Config rule. The results
+// indicate which Amazon Web Services resources were evaluated by the rule, when
+// each resource was last evaluated, and whether each resource complies with the
+// rule.
 func (c *Client) GetComplianceDetailsByConfigRule(ctx context.Context, params *GetComplianceDetailsByConfigRuleInput, optFns ...func(*Options)) (*GetComplianceDetailsByConfigRuleOutput, error) {
 	if params == nil {
 		params = &GetComplianceDetailsByConfigRuleInput{}
@@ -33,7 +34,7 @@ func (c *Client) GetComplianceDetailsByConfigRule(ctx context.Context, params *G
 //
 type GetComplianceDetailsByConfigRuleInput struct {
 
-	// The name of the AWS Config rule for which you want compliance information.
+	// The name of the Config rule for which you want compliance information.
 	//
 	// This member is required.
 	ConfigRuleName *string
@@ -43,8 +44,8 @@ type GetComplianceDetailsByConfigRuleInput struct {
 	ComplianceTypes []types.ComplianceType
 
 	// The maximum number of evaluation results returned on each page. The default is
-	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// 10. You cannot specify a number greater than 100. If you specify 0, Config uses
+	// the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -57,7 +58,8 @@ type GetComplianceDetailsByConfigRuleInput struct {
 //
 type GetComplianceDetailsByConfigRuleOutput struct {
 
-	// Indicates whether the AWS resource complies with the specified AWS Config rule.
+	// Indicates whether the Amazon Web Services resource complies with the specified
+	// Config rule.
 	EvaluationResults []types.EvaluationResult
 
 	// The string that you use in a subsequent request to get the next page of results
@@ -145,8 +147,8 @@ var _ GetComplianceDetailsByConfigRuleAPIClient = (*Client)(nil)
 // GetComplianceDetailsByConfigRule
 type GetComplianceDetailsByConfigRulePaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. The default is
-	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// 10. You cannot specify a number greater than 100. If you specify 0, Config uses
+	// the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

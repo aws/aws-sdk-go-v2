@@ -10,13 +10,15 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a new version of the specified AWS IoT policy. To update a policy,
-// create a new policy version. A managed policy can have up to five versions. If
-// the policy has five versions, you must use DeletePolicyVersion to delete an
-// existing version before you create a new one. Optionally, you can set the new
-// version as the policy's default version. The default version is the operative
-// version (that is, the version that is in effect for the certificates to which
-// the policy is attached).
+// Creates a new version of the specified IoT policy. To update a policy, create a
+// new policy version. A managed policy can have up to five versions. If the policy
+// has five versions, you must use DeletePolicyVersion to delete an existing
+// version before you create a new one. Optionally, you can set the new version as
+// the policy's default version. The default version is the operative version (that
+// is, the version that is in effect for the certificates to which the policy is
+// attached). Requires permission to access the CreatePolicyVersion
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreatePolicyVersion(ctx context.Context, params *CreatePolicyVersionInput, optFns ...func(*Options)) (*CreatePolicyVersionOutput, error) {
 	if params == nil {
 		params = &CreatePolicyVersionInput{}

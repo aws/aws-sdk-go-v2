@@ -50,9 +50,9 @@ type ListStackSetOperationResultsInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
+	// must be registered as a delegated administrator in the management account. For
+	// more information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
 	// in the CloudFormation User Guide.
 	CallAs types.CallAs

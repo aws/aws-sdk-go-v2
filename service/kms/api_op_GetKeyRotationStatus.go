@@ -13,33 +13,33 @@ import (
 // Gets a Boolean value that indicates whether automatic rotation of the key
 // material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/rotate-keys.html) is
-// enabled for the specified customer master key (CMK). You cannot enable automatic
-// rotation of asymmetric CMKs
+// enabled for the specified KMS key. You cannot enable automatic rotation of
+// asymmetric KMS keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/symm-asymm-concepts.html#asymmetric-cmks),
-// CMKs with imported key material
+// KMS keys with imported key material
 // (https://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html), or
-// CMKs in a custom key store
+// KMS keys in a custom key store
 // (https://docs.aws.amazon.com/kms/latest/developerguide/custom-key-store-overview.html).
 // To enable or disable automatic rotation of a set of related multi-Region keys
 // (https://docs.aws.amazon.com/kms/latest/developerguide/multi-region-keys-overview.html#mrk-replica-key),
-// set the property on the primary key. The key rotation status for these CMKs is
-// always false. The CMK that you use for this operation must be in a compatible
-// key state. For details, see Key state: Effect on your CMK
+// set the property on the primary key. The key rotation status for these KMS keys
+// is always false. The KMS key that you use for this operation must be in a
+// compatible key state. For details, see Key state: Effect on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide.
+// Key Management Service Developer Guide.
 //
 // * Disabled: The key rotation status
-// does not change when you disable a CMK. However, while the CMK is disabled, AWS
-// KMS does not rotate the backing key.
+// does not change when you disable a KMS key. However, while the KMS key is
+// disabled, KMS does not rotate the key material.
 //
-// * Pending deletion: While a CMK is pending
-// deletion, its key rotation status is false and AWS KMS does not rotate the
-// backing key. If you cancel the deletion, the original key rotation status is
-// restored.
+// * Pending deletion: While a KMS
+// key is pending deletion, its key rotation status is false and KMS does not
+// rotate the key material. If you cancel the deletion, the original key rotation
+// status is restored.
 //
-// Cross-account use: Yes. To perform this operation on a CMK in a
-// different AWS account, specify the key ARN in the value of the KeyId parameter.
-// Required permissions: kms:GetKeyRotationStatus
+// Cross-account use: Yes. To perform this operation on a KMS
+// key in a different Amazon Web Services account, specify the key ARN in the value
+// of the KeyId parameter. Required permissions: kms:GetKeyRotationStatus
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy) Related operations:
 //
@@ -63,9 +63,9 @@ func (c *Client) GetKeyRotationStatus(ctx context.Context, params *GetKeyRotatio
 
 type GetKeyRotationStatusInput struct {
 
-	// Gets the rotation status for the specified customer master key (CMK). Specify
-	// the key ID or key ARN of the CMK. To specify a CMK in a different AWS account,
-	// you must use the key ARN. For example:
+	// Gets the rotation status for the specified KMS key. Specify the key ID or key
+	// ARN of the KMS key. To specify a KMS key in a different Amazon Web Services
+	// account, you must use the key ARN. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -74,7 +74,7 @@ type GetKeyRotationStatusInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

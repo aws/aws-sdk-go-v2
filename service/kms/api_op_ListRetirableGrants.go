@@ -11,24 +11,29 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns information about all grants in the AWS account and Region that have the
-// specified retiring principal. For more information about grants, see Grants
-// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the AWS
-// Key Management Service Developer Guide . You can specify any principal in your
-// AWS account. The grants that are returned include grants for CMKs in your AWS
-// account and other AWS accounts. You might use this operation to determine which
-// grants you may retire. To retire a grant, use the RetireGrant operation.
-// Cross-account use: You must specify a principal in your AWS account. However,
-// this operation can return grants in any AWS account. You do not need
-// kms:ListRetirableGrants permission (or any other additional permission) in any
-// AWS account other than your own. Required permissions: kms:ListRetirableGrants
+// Returns information about all grants in the Amazon Web Services account and
+// Region that have the specified retiring principal. You can specify any principal
+// in your Amazon Web Services account. The grants that are returned include grants
+// for KMS keys in your Amazon Web Services account and other Amazon Web Services
+// accounts. You might use this operation to determine which grants you may retire.
+// To retire a grant, use the RetireGrant operation. For detailed information about
+// grants, including grant terminology, see Using grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the Key
+// Management Service Developer Guide . For examples of working with grants in
+// several programming languages, see Programming grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html).
+// Cross-account use: You must specify a principal in your Amazon Web Services
+// account. However, this operation can return grants in any Amazon Web Services
+// account. You do not need kms:ListRetirableGrants permission (or any other
+// additional permission) in any Amazon Web Services account other than your own.
+// Required permissions: kms:ListRetirableGrants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
-// (IAM policy) in your AWS account. Related operations:
-//
-// * CreateGrant
+// (IAM policy) in your Amazon Web Services account. Related operations:
 //
 // *
-// ListGrants
+// CreateGrant
+//
+// * ListGrants
 //
 // * RetireGrant
 //
@@ -50,12 +55,14 @@ func (c *Client) ListRetirableGrants(ctx context.Context, params *ListRetirableG
 
 type ListRetirableGrantsInput struct {
 
-	// The retiring principal for which to list grants. Enter a principal in your AWS
-	// account. To specify the retiring principal, use the Amazon Resource Name (ARN)
+	// The retiring principal for which to list grants. Enter a principal in your
+	// Amazon Web Services account. To specify the retiring principal, use the Amazon
+	// Resource Name (ARN)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) of
-	// an AWS principal. Valid AWS principals include AWS accounts (root), IAM users,
-	// federated users, and assumed role users. For examples of the ARN syntax for
-	// specifying a principal, see AWS Identity and Access Management (IAM)
+	// an Amazon Web Services principal. Valid Amazon Web Services principals include
+	// Amazon Web Services accounts (root), IAM users, federated users, and assumed
+	// role users. For examples of the ARN syntax for specifying a principal, see
+	// Amazon Web Services Identity and Access Management (IAM)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html#arn-syntax-iam)
 	// in the Example ARNs section of the Amazon Web Services General Reference.
 	//
@@ -63,10 +70,10 @@ type ListRetirableGrantsInput struct {
 	RetiringPrincipal *string
 
 	// Use this parameter to specify the maximum number of items to return. When this
-	// value is present, AWS KMS does not return more than the specified number of
-	// items, but it might return fewer. This value is optional. If you include a
-	// value, it must be between 1 and 100, inclusive. If you do not include a value,
-	// it defaults to 50.
+	// value is present, KMS does not return more than the specified number of items,
+	// but it might return fewer. This value is optional. If you include a value, it
+	// must be between 1 and 100, inclusive. If you do not include a value, it defaults
+	// to 50.
 	Limit *int32
 
 	// Use this parameter in a subsequent request after you receive a response with

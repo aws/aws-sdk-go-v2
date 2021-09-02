@@ -269,8 +269,7 @@ func (e *InternalServerError) ErrorMessage() string {
 func (e *InternalServerError) ErrorCode() string             { return "InternalServerError" }
 func (e *InternalServerError) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The AWS Key Management Service (AWS KMS) key of the destination backup is
-// invalid.
+// The Key Management Service (KMS) key of the destination backup is invalid.
 type InvalidDestinationKmsKey struct {
 	Message *string
 
@@ -327,16 +326,13 @@ func (e *InvalidImportPath) ErrorMessage() string {
 func (e *InvalidImportPath) ErrorCode() string             { return "InvalidImportPath" }
 func (e *InvalidImportPath) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// One or more network settings specified in the request are invalid. InvalidVpcId
-// means that the ID passed for the virtual private cloud (VPC) is invalid.
-// InvalidSubnetIds returns the list of IDs for subnets that are either invalid or
-// not part of the VPC specified. InvalidSecurityGroupIds returns the list of IDs
-// for security groups that are either invalid or not part of the VPC specified.
+// One or more network settings specified in the request are invalid.
 type InvalidNetworkSettings struct {
 	Message *string
 
 	InvalidSubnetId        *string
 	InvalidSecurityGroupId *string
+	InvalidRouteTableId    *string
 
 	noSmithyDocumentSerde
 }
@@ -375,8 +371,8 @@ func (e *InvalidPerUnitStorageThroughput) ErrorCode() string {
 }
 func (e *InvalidPerUnitStorageThroughput) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The Region provided for Source Region is invalid or is in a different AWS
-// partition.
+// The Region provided for Source Region is invalid or is in a different Amazon Web
+// Services partition.
 type InvalidRegion struct {
 	Message *string
 
@@ -395,7 +391,7 @@ func (e *InvalidRegion) ErrorMessage() string {
 func (e *InvalidRegion) ErrorCode() string             { return "InvalidRegion" }
 func (e *InvalidRegion) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The AWS Key Management Service (AWS KMS) key of the source backup is invalid.
+// The Key Management Service (KMS) key of the source backup is invalid.
 type InvalidSourceKmsKey struct {
 	Message *string
 
@@ -432,6 +428,25 @@ func (e *MissingFileSystemConfiguration) ErrorMessage() string {
 }
 func (e *MissingFileSystemConfiguration) ErrorCode() string             { return "MissingFileSystemConfiguration" }
 func (e *MissingFileSystemConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// A volume configuration is required for this operation.
+type MissingVolumeConfiguration struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *MissingVolumeConfiguration) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *MissingVolumeConfiguration) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *MissingVolumeConfiguration) ErrorCode() string             { return "MissingVolumeConfiguration" }
+func (e *MissingVolumeConfiguration) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The resource specified for the tagging operation is not a resource type owned by
 // Amazon FSx. Use the API of the relevant service to perform the operation.
@@ -498,7 +513,7 @@ func (e *ResourceNotFound) ErrorCode() string             { return "ResourceNotF
 func (e *ResourceNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // An error indicating that a particular service limit was exceeded. You can
-// increase some service limits by contacting AWS Support.
+// increase some service limits by contacting Amazon Web Services Support.
 type ServiceLimitExceeded struct {
 	Message *string
 
@@ -541,6 +556,26 @@ func (e *SourceBackupUnavailable) ErrorMessage() string {
 func (e *SourceBackupUnavailable) ErrorCode() string             { return "SourceBackupUnavailable" }
 func (e *SourceBackupUnavailable) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
+// No Amazon FSx for NetApp ONTAP SVMs were found based upon the supplied
+// parameters.
+type StorageVirtualMachineNotFound struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *StorageVirtualMachineNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *StorageVirtualMachineNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *StorageVirtualMachineNotFound) ErrorCode() string             { return "StorageVirtualMachineNotFound" }
+func (e *StorageVirtualMachineNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
 // The requested operation is not supported for this resource or API.
 type UnsupportedOperation struct {
 	Message *string
@@ -559,3 +594,23 @@ func (e *UnsupportedOperation) ErrorMessage() string {
 }
 func (e *UnsupportedOperation) ErrorCode() string             { return "UnsupportedOperation" }
 func (e *UnsupportedOperation) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
+
+// No Amazon FSx for NetApp ONTAP volumes were found based upon the supplied
+// parameters.
+type VolumeNotFound struct {
+	Message *string
+
+	noSmithyDocumentSerde
+}
+
+func (e *VolumeNotFound) Error() string {
+	return fmt.Sprintf("%s: %s", e.ErrorCode(), e.ErrorMessage())
+}
+func (e *VolumeNotFound) ErrorMessage() string {
+	if e.Message == nil {
+		return ""
+	}
+	return *e.Message
+}
+func (e *VolumeNotFound) ErrorCode() string             { return "VolumeNotFound" }
+func (e *VolumeNotFound) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }

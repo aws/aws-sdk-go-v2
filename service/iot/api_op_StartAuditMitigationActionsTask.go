@@ -13,6 +13,9 @@ import (
 )
 
 // Starts a task that applies a set of mitigation actions to the specified target.
+// Requires permission to access the StartAuditMitigationActionsTask
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) StartAuditMitigationActionsTask(ctx context.Context, params *StartAuditMitigationActionsTaskInput, optFns ...func(*Options)) (*StartAuditMitigationActionsTaskOutput, error) {
 	if params == nil {
 		params = &StartAuditMitigationActionsTaskInput{}
@@ -31,7 +34,7 @@ func (c *Client) StartAuditMitigationActionsTask(ctx context.Context, params *St
 type StartAuditMitigationActionsTaskInput struct {
 
 	// For an audit check, specifies which mitigation actions to apply. Those actions
-	// must be defined in your AWS account.
+	// must be defined in your Amazon Web Services accounts.
 	//
 	// This member is required.
 	AuditCheckToActionsMapping map[string][]string

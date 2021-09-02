@@ -252,6 +252,36 @@ func (KeyManagerType) Values() []KeyManagerType {
 	}
 }
 
+type KeySpec string
+
+// Enum values for KeySpec
+const (
+	KeySpecRsa2048          KeySpec = "RSA_2048"
+	KeySpecRsa3072          KeySpec = "RSA_3072"
+	KeySpecRsa4096          KeySpec = "RSA_4096"
+	KeySpecEccNistP256      KeySpec = "ECC_NIST_P256"
+	KeySpecEccNistP384      KeySpec = "ECC_NIST_P384"
+	KeySpecEccNistP521      KeySpec = "ECC_NIST_P521"
+	KeySpecEccSecgP256k1    KeySpec = "ECC_SECG_P256K1"
+	KeySpecSymmetricDefault KeySpec = "SYMMETRIC_DEFAULT"
+)
+
+// Values returns all known values for KeySpec. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (KeySpec) Values() []KeySpec {
+	return []KeySpec{
+		"RSA_2048",
+		"RSA_3072",
+		"RSA_4096",
+		"ECC_NIST_P256",
+		"ECC_NIST_P384",
+		"ECC_NIST_P521",
+		"ECC_SECG_P256K1",
+		"SYMMETRIC_DEFAULT",
+	}
+}
+
 type KeyState string
 
 // Enum values for KeyState

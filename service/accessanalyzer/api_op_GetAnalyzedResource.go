@@ -48,8 +48,8 @@ type GetAnalyzedResourceInput struct {
 // The response to the request.
 type GetAnalyzedResourceOutput struct {
 
-	// An AnalyzedResource object that contains information that Access Analyzer found
-	// when it analyzed the resource.
+	// An AnalyzedResource object that contains information that IAM Access Analyzer
+	// found when it analyzed the resource.
 	Resource *types.AnalyzedResource
 
 	// Metadata pertaining to the operation's result.

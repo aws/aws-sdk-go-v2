@@ -46,6 +46,9 @@
                     "target": "com.amazonaws.s3control#CreateJob"
                 },
                 {
+                    "target": "com.amazonaws.s3control#CreateMultiRegionAccessPoint"
+                },
+                {
                     "target": "com.amazonaws.s3control#DeleteAccessPoint"
                 },
                 {
@@ -73,6 +76,9 @@
                     "target": "com.amazonaws.s3control#DeleteJobTagging"
                 },
                 {
+                    "target": "com.amazonaws.s3control#DeleteMultiRegionAccessPoint"
+                },
+                {
                     "target": "com.amazonaws.s3control#DeletePublicAccessBlock"
                 },
                 {
@@ -83,6 +89,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#DescribeJob"
+                },
+                {
+                    "target": "com.amazonaws.s3control#DescribeMultiRegionAccessPointOperation"
                 },
                 {
                     "target": "com.amazonaws.s3control#GetAccessPoint"
@@ -121,6 +130,15 @@
                     "target": "com.amazonaws.s3control#GetJobTagging"
                 },
                 {
+                    "target": "com.amazonaws.s3control#GetMultiRegionAccessPoint"
+                },
+                {
+                    "target": "com.amazonaws.s3control#GetMultiRegionAccessPointPolicy"
+                },
+                {
+                    "target": "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyStatus"
+                },
+                {
                     "target": "com.amazonaws.s3control#GetPublicAccessBlock"
                 },
                 {
@@ -137,6 +155,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#ListJobs"
+                },
+                {
+                    "target": "com.amazonaws.s3control#ListMultiRegionAccessPoints"
                 },
                 {
                     "target": "com.amazonaws.s3control#ListRegionalBuckets"
@@ -164,6 +185,9 @@
                 },
                 {
                     "target": "com.amazonaws.s3control#PutJobTagging"
+                },
+                {
+                    "target": "com.amazonaws.s3control#PutMultiRegionAccessPointPolicy"
                 },
                 {
                     "target": "com.amazonaws.s3control#PutPublicAccessBlock"
@@ -332,6 +356,163 @@
                     "max": 63
                 },
                 "smithy.api#pattern": "^[0-9a-z\\\\-]{63}$"
+            }
+        },
+        "com.amazonaws.s3control#AsyncCreationTimestamp": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.s3control#AsyncErrorDetails": {
+            "type": "structure",
+            "members": {
+                "Code": {
+                    "target": "com.amazonaws.s3control#MaxLength1024String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A string that uniquely identifies the error condition.</p>"
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.s3control#MaxLength1024String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A generic descritpion of the error condition in English.</p>"
+                    }
+                },
+                "Resource": {
+                    "target": "com.amazonaws.s3control#MaxLength1024String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the resource associated with the error.</p>"
+                    }
+                },
+                "RequestId": {
+                    "target": "com.amazonaws.s3control#MaxLength1024String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the request associated with the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Error details for the failed asynchronous operation.</p>"
+            }
+        },
+        "com.amazonaws.s3control#AsyncOperation": {
+            "type": "structure",
+            "members": {
+                "CreationTime": {
+                    "target": "com.amazonaws.s3control#AsyncCreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time that the request was sent to the service.</p>"
+                    }
+                },
+                "Operation": {
+                    "target": "com.amazonaws.s3control#AsyncOperationName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific operation for the asynchronous request.</p>"
+                    }
+                },
+                "RequestTokenARN": {
+                    "target": "com.amazonaws.s3control#AsyncRequestTokenARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request token associated with the request.</p>"
+                    }
+                },
+                "RequestParameters": {
+                    "target": "com.amazonaws.s3control#AsyncRequestParameters",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The parameters associated with the request.</p>"
+                    }
+                },
+                "RequestStatus": {
+                    "target": "com.amazonaws.s3control#AsyncRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the request.</p>"
+                    }
+                },
+                "ResponseDetails": {
+                    "target": "com.amazonaws.s3control#AsyncResponseDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the response.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for the information about an asynchronous operation.</p>"
+            }
+        },
+        "com.amazonaws.s3control#AsyncOperationName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CreateMultiRegionAccessPoint",
+                        "name": "CreateMultiRegionAccessPoint"
+                    },
+                    {
+                        "value": "DeleteMultiRegionAccessPoint",
+                        "name": "DeleteMultiRegionAccessPoint"
+                    },
+                    {
+                        "value": "PutMultiRegionAccessPointPolicy",
+                        "name": "PutMultiRegionAccessPointPolicy"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.s3control#AsyncRequestParameters": {
+            "type": "structure",
+            "members": {
+                "CreateMultiRegionAccessPointRequest": {
+                    "target": "com.amazonaws.s3control#CreateMultiRegionAccessPointInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container of the parameters for a \n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a> \n         request.</p>"
+                    }
+                },
+                "DeleteMultiRegionAccessPointRequest": {
+                    "target": "com.amazonaws.s3control#DeleteMultiRegionAccessPointInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container of the parameters for a \n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a> \n         request.</p>"
+                    }
+                },
+                "PutMultiRegionAccessPointPolicyRequest": {
+                    "target": "com.amazonaws.s3control#PutMultiRegionAccessPointPolicyInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container of the parameters for a \n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html\">PutMultiRegionAccessPoint</a> \n         request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for the request parameters associated with an asynchronous request.</p>"
+            }
+        },
+        "com.amazonaws.s3control#AsyncRequestStatus": {
+            "type": "string"
+        },
+        "com.amazonaws.s3control#AsyncRequestTokenARN": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^arn:.+$"
+            }
+        },
+        "com.amazonaws.s3control#AsyncResponseDetails": {
+            "type": "structure",
+            "members": {
+                "MultiRegionAccessPointDetails": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointsAsyncResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details for the Multi-Region Access Point.</p>"
+                    }
+                },
+                "ErrorDetails": {
+                    "target": "com.amazonaws.s3control#AsyncErrorDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Error details for an asynchronous request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for the response details that are returned when querying about an\n            asynchronous request.</p>"
             }
         },
         "com.amazonaws.s3control#AwsLambdaTransformation": {
@@ -576,7 +757,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID for owner of the specified Object Lambda Access Point.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for owner of the specified Object Lambda Access Point.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -616,7 +797,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID for the owner of the bucket for which you want to create an access point.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the bucket for which you want to create an access point.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -843,7 +1024,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID that creates the job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID that creates the job.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -925,7 +1106,96 @@
                 }
             }
         },
+        "com.amazonaws.s3control#CreateMultiRegionAccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#CreateMultiRegionAccessPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#CreateMultiRegionAccessPointResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Creates a Multi-Region Access Point and associates it with the specified buckets. For more information about creating Multi-Region Access Points, see \n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html\">Creating\n         Multi-Region Access Points</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>This action will always be routed to the US West (Oregon) Region. For more\n            information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing\n                Multi-Region Access Points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>This request is asynchronous, meaning that you might receive a response before the\n            command has completed. When this request provides a response, it provides a token that\n            you can use to monitor the status of the request with\n                <code>DescribeMultiRegionAccessPointOperation</code>.</p>\n         <p>The following actions are related to <code>CreateMultiRegionAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html\">GetMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html\">ListMultiRegionAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/async-requests/mrap/create",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {}
+            }
+        },
+        "com.amazonaws.s3control#CreateMultiRegionAccessPointInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Multi-Region Access Point associated with this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PublicAccessBlock": {
+                    "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration"
+                },
+                "Regions": {
+                    "target": "com.amazonaws.s3control#RegionCreationList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The buckets in different Regions that are associated with the Multi-Region Access Point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for the information associated with a\n          <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a>\n          request.\n      </p>"
+            }
+        },
+        "com.amazonaws.s3control#CreateMultiRegionAccessPointRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point. The owner of the Multi-Region Access Point also must own\n            the underlying buckets.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An idempotency token used to identify the request and guarantee that requests are\n            unique.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Details": {
+                    "target": "com.amazonaws.s3control#CreateMultiRegionAccessPointInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container element containing details about the Multi-Region Access Point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#CreateMultiRegionAccessPointResult": {
+            "type": "structure",
+            "members": {
+                "RequestTokenARN": {
+                    "target": "com.amazonaws.s3control#AsyncRequestTokenARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request token associated with the request. You can use this token with <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> to determine the status of\n            asynchronous requests.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#CreationDate": {
+            "type": "timestamp"
+        },
+        "com.amazonaws.s3control#CreationTimestamp": {
             "type": "timestamp"
         },
         "com.amazonaws.s3control#Date": {
@@ -1155,7 +1425,7 @@
                 "target": "com.amazonaws.s3control#DeleteBucketPolicyRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an \n         S3 bucket policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon S3 API Reference</i>.\n      </p>\n         </note>\n         <p>This implementation of the DELETE action uses the policy subresource to delete the\n         policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the\n         root user of the account that owns the bucket, the calling identity must have the\n            <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket\n         and belong to the bucket owner's account to use this action. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in\n            <i>Amazon S3 User Guide</i>.</p>\n      \n         <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a\n         <code>403 Access Denied</code> error. If you have the correct permissions, but you're\n         not using an identity that belongs to the bucket owner's account, Amazon S3 returns a\n         <code>405 Method Not Allowed</code> error. </p>\n      \n      \n         <important>\n            <p>As a security precaution, the root user of the account that owns a bucket can always use this action,\n         even if the policy explicitly denies the root user the ability to perform this action.</p>\n         </important>      \n      \n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>. </p>\n      \n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p>\n      \n         <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action deletes an Amazon S3 on Outposts bucket policy. To delete an \n         S3 bucket policy, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_DeleteBucketPolicy.html\">DeleteBucketPolicy</a> in the <i>Amazon S3 API Reference</i>.\n      </p>\n         </note>\n         <p>This implementation of the DELETE action uses the policy subresource to delete the\n         policy of a specified Amazon S3 on Outposts bucket. If you are using an identity other than the\n         root user of the Amazon Web Services account that owns the bucket, the calling identity must have the\n            <code>s3-outposts:DeleteBucketPolicy</code> permissions on the specified Outposts bucket\n         and belong to the bucket owner's account to use this action. For more information, see\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in\n            <i>Amazon S3 User Guide</i>.</p>\n      \n         <p>If you don't have <code>DeleteBucketPolicy</code> permissions, Amazon S3 returns a\n         <code>403 Access Denied</code> error. If you have the correct permissions, but you're\n         not using an identity that belongs to the bucket owner's account, Amazon S3 returns a\n         <code>405 Method Not Allowed</code> error. </p>\n      \n      \n         <important>\n            <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action,\n         even if the policy explicitly denies the root user the ability to perform this action.</p>\n         </important>      \n      \n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>. </p>\n      \n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html#API_control_DeleteBucketPolicy_Examples\">Examples</a> section.</p>\n      \n         <p>The following actions are related to <code>DeleteBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -1233,7 +1503,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket tag set to be removed.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket tag set to be removed.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -1286,7 +1556,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -1306,13 +1576,89 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.s3control#DeleteMultiRegionAccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DeleteMultiRegionAccessPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#DeleteMultiRegionAccessPointResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes a Multi-Region Access Point. This action does not delete the buckets associated with the Multi-Region Access Point,\n            only the Multi-Region Access Point itself.</p>\n         <p>This action will always be routed to the US West (Oregon) Region. For more\n            information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing\n                Multi-Region Access Points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>This request is asynchronous, meaning that you might receive a response before the\n            command has completed. When this request provides a response, it provides a token that\n            you can use to monitor the status of the request with\n                <code>DescribeMultiRegionAccessPointOperation</code>.</p>\n         <p>The following actions are related to <code>DeleteMultiRegionAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html\">GetMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html\">ListMultiRegionAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/async-requests/mrap/delete",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {}
+            }
+        },
+        "com.amazonaws.s3control#DeleteMultiRegionAccessPointInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Multi-Region Access Point associated with this request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for the information associated with a\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a>\n         request.</p>"
+            }
+        },
+        "com.amazonaws.s3control#DeleteMultiRegionAccessPointRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An idempotency token used to identify the request and guarantee that requests are\n            unique.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Details": {
+                    "target": "com.amazonaws.s3control#DeleteMultiRegionAccessPointInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container element containing details about the Multi-Region Access Point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DeleteMultiRegionAccessPointResult": {
+            "type": "structure",
+            "members": {
+                "RequestTokenARN": {
+                    "target": "com.amazonaws.s3control#AsyncRequestTokenARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request token associated with the request. You can use this token with <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> to determine the status of\n            asynchronous requests.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#DeletePublicAccessBlock": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.s3control#DeletePublicAccessBlockRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Removes the <code>PublicAccessBlock</code> configuration for an account. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block\n            public access</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html\">GetPublicAccessBlock</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html\">PutPublicAccessBlock</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Removes the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block\n            public access</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html\">GetPublicAccessBlock</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html\">PutPublicAccessBlock</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -1329,7 +1675,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID for the account whose <code>PublicAccessBlock</code> configuration you want\n         to remove.</p>",
+                        "smithy.api#documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want\n         to remove.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -1462,7 +1808,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -1489,6 +1835,60 @@
                 }
             }
         },
+        "com.amazonaws.s3control#DescribeMultiRegionAccessPointOperation": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#DescribeMultiRegionAccessPointOperationRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#DescribeMultiRegionAccessPointOperationResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Retrieves the status of an asynchronous request to manage a Multi-Region Access Point. For more information\n            about managing Multi-Region Access Points and how asynchronous requests work, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing\n                Multi-Region Access Points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>The following actions are related to <code>GetMultiRegionAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html\">GetMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html\">ListMultiRegionAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/async-requests/mrap/{RequestTokenARN+}",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {}
+            }
+        },
+        "com.amazonaws.s3control#DescribeMultiRegionAccessPointOperationRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "RequestTokenARN": {
+                    "target": "com.amazonaws.s3control#AsyncRequestTokenARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request token associated with the request you want to know about. This request token\n            is returned as part of the response when you make an asynchronous request. You provide\n            this token to query about the status of the asynchronous action.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#DescribeMultiRegionAccessPointOperationResult": {
+            "type": "structure",
+            "members": {
+                "AsyncOperation": {
+                    "target": "com.amazonaws.s3control#AsyncOperation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container element containing the details of the asynchronous operation.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#Endpoints": {
             "type": "map",
             "key": {
@@ -1496,6 +1896,20 @@
             },
             "value": {
                 "target": "com.amazonaws.s3control#NonEmptyMaxLength1024String"
+            }
+        },
+        "com.amazonaws.s3control#EstablishedMultiRegionAccessPointPolicy": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.s3control#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the last established policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The last established access control policy for a Multi-Region Access Point.</p>\n         <p>When you update the policy, the update is first listed as the proposed policy. After the\n            update is finished and all Regions have been updated, the proposed policy is listed as\n            the established policy. If both policies have the same version number, the proposed\n            policy is the established policy.</p>"
             }
         },
         "com.amazonaws.s3control#ExceptionMessage": {
@@ -2004,7 +2418,7 @@
                 "target": "com.amazonaws.s3control#GetBucketResult"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">\n         Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>If you are using an identity other than the root user of the account \n         that owns the Outposts bucket, the calling identity must have the \n         <code>s3-outposts:GetBucket</code> permissions on the specified Outposts bucket and \n         belong to the Outposts bucket owner's account in order to use this action. Only \n         users from Outposts bucket owner account with the right permissions can perform \n         actions on an Outposts bucket. \n      </p>\n         <p>\n         If you don't have <code>s3-outposts:GetBucket</code> permissions or you're not using an identity that belongs to the bucket owner's \n         account, Amazon S3 returns a <code>403 Access Denied</code> error.</p>\n         <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples\">Examples</a> section.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">CreateBucket</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Gets an Amazon S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">\n         Using Amazon S3 on Outposts</a> in the <i>Amazon S3 User Guide</i>.</p>\n         <p>If you are using an identity other than the root user of the Amazon Web Services account \n         that owns the Outposts bucket, the calling identity must have the \n         <code>s3-outposts:GetBucket</code> permissions on the specified Outposts bucket and \n         belong to the Outposts bucket owner's account in order to use this action. Only \n         users from Outposts bucket owner account with the right permissions can perform \n         actions on an Outposts bucket. \n      </p>\n         <p>\n         If you don't have <code>s3-outposts:GetBucket</code> permissions or you're not using an identity that belongs to the bucket owner's \n         account, Amazon S3 returns a <code>403 Access Denied</code> error.</p>\n         <p>The following actions are related to <code>GetBucket</code> for Amazon S3 on Outposts:</p>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucket.html#API_control_GetBucket_Examples\">Examples</a> section.</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutObject.html\">PutObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateBucket.html\">CreateBucket</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucket.html\">DeleteBucket</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -2041,7 +2455,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -2077,7 +2491,7 @@
                 "target": "com.amazonaws.s3control#GetBucketPolicyResult"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3\n            bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html\">GetBucketPolicy</a> in the\n               <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the policy of a specified Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>If you are using an identity other than the root user of the account that owns the bucket, the calling identity \n      must have the <code>GetBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner's account in order to use this action.</p>\n      \n         <p>Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. \n         If you don't have <code>s3-outposts:GetBucketPolicy</code> permissions or you're not using an identity that belongs to the bucket owner's \n         account, Amazon S3 returns a <code>403 Access Denied</code> error.</p>\n      \n         <important>\n            <p>As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy \n         explicitly denies the root user the ability to perform this action.</p>\n         </important>\n      \n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p>\n      \n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples\">Examples</a> section.</p>\n      \n         <p>The following actions are related to <code>GetBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action gets a bucket policy for an Amazon S3 on Outposts bucket. To get a policy for an S3\n            bucket, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetBucketPolicy.html\">GetBucketPolicy</a> in the\n               <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Returns the policy of a specified Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the bucket, the calling identity \n      must have the <code>GetBucketPolicy</code> permissions on the specified bucket and belong to the bucket owner's account in order to use this action.</p>\n      \n         <p>Only users from Outposts bucket owner account with the right permissions can perform actions on an Outposts bucket. \n         If you don't have <code>s3-outposts:GetBucketPolicy</code> permissions or you're not using an identity that belongs to the bucket owner's \n         account, Amazon S3 returns a <code>403 Access Denied</code> error.</p>\n      \n         <important>\n            <p>As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy \n         explicitly denies the root user the ability to perform this action.</p>\n         </important>\n      \n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p>\n      \n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html#API_control_GetBucketPolicy_Examples\">Examples</a> section.</p>\n      \n         <p>The following actions are related to <code>GetBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_GetObject.html\">GetObject</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html\">PutBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -2094,7 +2508,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -2127,7 +2541,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -2192,7 +2606,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -2257,7 +2671,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -2284,6 +2698,165 @@
                 }
             }
         },
+        "com.amazonaws.s3control#GetMultiRegionAccessPoint": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetMultiRegionAccessPointRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetMultiRegionAccessPointResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns configuration information about the specified Multi-Region Access Point.</p>\n         <p>This action will always be routed to the US West (Oregon) Region. For more\n            information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing\n                Multi-Region Access Points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>The following actions are related to <code>GetMultiRegionAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_ListMultiRegionAccessPoints.html\">ListMultiRegionAccessPoints</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/mrap/instances/{Name}",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {}
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns the access control policy of the specified Multi-Region Access Point.</p>\n         <p>This action will always be routed to the US West (Oregon) Region. For more\n            information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing\n                Multi-Region Access Points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>The following actions are related to <code>GetMultiRegionAccessPointPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html\">GetMultiRegionAccessPointPolicyStatus</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html\">PutMultiRegionAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/mrap/instances/{Name}/policy",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {}
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Multi-Region Access Point. The name of the Multi-Region Access Point is different from the alias. For more\n            information about the distinction between the name and the alias of an Multi-Region Access Point, see\n                <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming\">Managing Multi-Region Access Points</a> in the\n                <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyResult": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointPolicyDocument",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy associated with the specified Multi-Region Access Point.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyStatus": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyStatusRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyStatusResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Indicates whether the specified Multi-Region Access Point has an access control policy that allows public\n            access.</p>\n         <p>This action will always be routed to the US West (Oregon) Region. For more\n            information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing\n                Multi-Region Access Points</a> in the\n          <i>Amazon S3 User Guide</i>.</p>\n         <p>The following actions are related to <code>GetMultiRegionAccessPointPolicyStatus</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html\">GetMultiRegionAccessPointPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPointPolicy.html\">PutMultiRegionAccessPointPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/mrap/instances/{Name}/policystatus",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {}
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyStatusRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Multi-Region Access Point. The name of the Multi-Region Access Point is different from the alias. For more\n            information about the distinction between the name and the alias of an Multi-Region Access Point, see\n                <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming\">Managing Multi-Region Access Points</a> in the\n                <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointPolicyStatusResult": {
+            "type": "structure",
+            "members": {
+                "Established": {
+                    "target": "com.amazonaws.s3control#PolicyStatus"
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Name": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Multi-Region Access Point whose configuration information you want to receive. The name of\n            the Multi-Region Access Point is different from the alias. For more information about the distinction\n            between the name and the alias of an Multi-Region Access Point, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming\">Managing Multi-Region Access Points</a> in the\n                <i>Amazon S3 User Guide</i>.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#GetMultiRegionAccessPointResult": {
+            "type": "structure",
+            "members": {
+                "AccessPoint": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointReport",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container element containing the details of the requested Multi-Region Access Point.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#GetPublicAccessBlock": {
             "type": "operation",
             "input": {
@@ -2298,7 +2871,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves the <code>PublicAccessBlock</code> configuration for an account. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block\n            public access</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html\">DeletePublicAccessBlock</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html\">PutPublicAccessBlock</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Retrieves the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For more\n         information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block\n            public access</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html\">DeletePublicAccessBlock</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutPublicAccessBlock.html\">PutPublicAccessBlock</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -2315,7 +2888,7 @@
                 "PublicAccessBlockConfiguration": {
                     "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration currently in effect for this account.</p>",
+                        "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration currently in effect for this Amazon Web Services account.</p>",
                         "smithy.api#httpPayload": {}
                     }
                 }
@@ -2327,7 +2900,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID for the account whose <code>PublicAccessBlock</code> configuration you want\n         to retrieve.</p>",
+                        "smithy.api#documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want\n         to retrieve.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -3438,7 +4011,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID for owner of the bucket whose access points you want to list.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for owner of the bucket whose access points you want to list.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -3504,7 +4077,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for\n         the account making the request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html\">S3 Batch Operations</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>Related actions include:</p>\n         <p></p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html\">CreateJob</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html\">DescribeJob</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html\">UpdateJobPriority</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html\">UpdateJobStatus</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Lists current S3 Batch Operations jobs and jobs that have ended within the last 30 days for\n         the Amazon Web Services account making the request. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/batch-ops-basics.html\">S3 Batch Operations</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>Related actions include:</p>\n         <p></p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateJob.html\">CreateJob</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeJob.html\">DescribeJob</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobPriority.html\">UpdateJobPriority</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_UpdateJobStatus.html\">UpdateJobStatus</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -3526,7 +4099,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -3573,6 +4146,77 @@
                 }
             }
         },
+        "com.amazonaws.s3control#ListMultiRegionAccessPoints": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#ListMultiRegionAccessPointsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#ListMultiRegionAccessPointsResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns a list of the Multi-Region Access Points currently associated with the specified Amazon Web Services account. Each\n          call can return up to 100 Multi-Region Access Points, the maximum number of Multi-Region Access Points that can be associated with\n          a single account.</p>\n         <p>This action will always be routed to the US West (Oregon) Region. For more\n            information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing\n                Multi-Region Access Points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>The following actions are related to <code>ListMultiRegionAccessPoint</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_CreateMultiRegionAccessPoint.html\">CreateMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteMultiRegionAccessPoint.html\">DeleteMultiRegionAccessPoint</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPoint.html\">GetMultiRegionAccessPoint</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/v20180820/mrap/instances",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {},
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.s3control#ListMultiRegionAccessPointsRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#NonEmptyMaxLength1024String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Not currently used. Do not use this parameter.</p>",
+                        "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "MaxResults": {
+                    "target": "com.amazonaws.s3control#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Not currently used. Do not use this parameter.</p>",
+                        "smithy.api#httpQuery": "maxResults"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#ListMultiRegionAccessPointsResult": {
+            "type": "structure",
+            "members": {
+                "AccessPoints": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointReportList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of Multi-Region Access Points associated with the user.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.s3control#NonEmptyMaxLength1024String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If the specified bucket has more Multi-Region Access Points than can be returned in one call to this\n            action, this field contains a continuation token. You can use this token tin subsequent\n            calls to this action to retrieve additional Multi-Region Access Points.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#ListRegionalBuckets": {
             "type": "operation",
             "input": {
@@ -3604,7 +4248,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -3776,6 +4420,180 @@
                     "min": 0.1,
                     "max": 100
                 }
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointAlias": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z][a-z0-9]*[.]mrap$"
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointClientToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^\\S+$"
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^[a-z0-9][-a-z0-9]{1,48}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointPolicyDocument": {
+            "type": "structure",
+            "members": {
+                "Established": {
+                    "target": "com.amazonaws.s3control#EstablishedMultiRegionAccessPointPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The last established policy for the Multi-Region Access Point.</p>"
+                    }
+                },
+                "Proposed": {
+                    "target": "com.amazonaws.s3control#ProposedMultiRegionAccessPointPolicy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The proposed policy for the Multi-Region Access Point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Multi-Region Access Point access control policy.</p>\n         <p>When you update the policy, the update is first listed as the proposed policy. After the\n            update is finished and all Regions have been updated, the proposed policy is listed as\n            the established policy. If both policies have the same version number, the proposed\n            policy is the established policy.</p>"
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointRegionalResponse": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Region in the Multi-Region Access Point.</p>"
+                    }
+                },
+                "RequestStatus": {
+                    "target": "com.amazonaws.s3control#AsyncRequestStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Multi-Region Access Point in this Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Status information for a single Multi-Region Access Point Region.</p>"
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointRegionalResponseList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#MultiRegionAccessPointRegionalResponse",
+                "traits": {
+                    "smithy.api#xmlName": "Region"
+                }
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointReport": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Multi-Region Access Point.</p>"
+                    }
+                },
+                "Alias": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointAlias",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The alias for the Multi-Region Access Point. For more information about the distinction between the\n         name and the alias of an Multi-Region Access Point, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CreatingMultiRegionAccessPoints.html#multi-region-access-point-naming\">Managing\n            Multi-Region Access Points</a>.</p>"
+                    }
+                },
+                "CreatedAt": {
+                    "target": "com.amazonaws.s3control#CreationTimestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>When the Multi-Region Access Point create request was received.</p>"
+                    }
+                },
+                "PublicAccessBlock": {
+                    "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration"
+                },
+                "Status": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current status of the Multi-Region Access Point.</p>\n         <p>\n            <code>CREATING</code> and <code>DELETING</code> are temporary states that exist while\n            the request is propogating and being completed. If a Multi-Region Access Point has a status of\n                <code>PARTIALLY_CREATED</code>, you can retry creation or send a request to delete\n            the Multi-Region Access Point. If a Multi-Region Access Point has a status of <code>PARTIALLY_DELETED</code>, you can retry a\n            delete request to finish the deletion of the Multi-Region Access Point.</p>"
+                    }
+                },
+                "Regions": {
+                    "target": "com.amazonaws.s3control#RegionReportList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of the Regions and buckets associated with the Multi-Region Access Point.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A collection of statuses for a Multi-Region Access Point in the various Regions it supports.</p>"
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointReportList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#MultiRegionAccessPointReport",
+                "traits": {
+                    "smithy.api#xmlName": "AccessPoint"
+                }
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "READY",
+                        "name": "READY"
+                    },
+                    {
+                        "value": "INCONSISTENT_ACROSS_REGIONS",
+                        "name": "INCONSISTENT_ACROSS_REGIONS"
+                    },
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "PARTIALLY_CREATED",
+                        "name": "PARTIALLY_CREATED"
+                    },
+                    {
+                        "value": "PARTIALLY_DELETED",
+                        "name": "PARTIALLY_DELETED"
+                    },
+                    {
+                        "value": "DELETING",
+                        "name": "DELETING"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.s3control#MultiRegionAccessPointsAsyncResponse": {
+            "type": "structure",
+            "members": {
+                "Regions": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointRegionalResponseList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A collection of status information for the different Regions that a Multi-Region Access Point\n            supports.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Multi-Region Access Point details that are returned when querying about an asynchronous request.</p>"
             }
         },
         "com.amazonaws.s3control#NetworkOrigin": {
@@ -4192,6 +5010,20 @@
                 "smithy.api#documentation": "<p>A container for the prefix-level storage metrics for S3 Storage Lens.</p>"
             }
         },
+        "com.amazonaws.s3control#ProposedMultiRegionAccessPointPolicy": {
+            "type": "structure",
+            "members": {
+                "Policy": {
+                    "target": "com.amazonaws.s3control#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The details of the proposed policy.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The proposed access control policy for the Multi-Region Access Point.</p>\n         <p>When you update the policy, the update is first listed as the proposed policy. After the\n            update is finished and all Regions have been updated, the proposed policy is listed as\n            the established policy. If both policies have the same version number, the proposed\n            policy is the established policy.</p>"
+            }
+        },
         "com.amazonaws.s3control#PublicAccessBlockConfiguration": {
             "type": "structure",
             "members": {
@@ -4346,7 +5178,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID for owner of the bucket associated with the specified access point.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for owner of the bucket associated with the specified access point.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -4393,7 +5225,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -4423,7 +5255,7 @@
                 "target": "com.amazonaws.s3control#PutBucketPolicyRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, \n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html\">PutBucketPolicy</a> in the <i>Amazon S3 API Reference</i>.\n      </p>\n         </note>\n         <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>.</p> \n         <p>If you are using an identity other than the root user of the account that owns the\n         Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code>\n         permissions on the specified Outposts bucket and belong to the bucket owner's account in\n         order to use this action.</p>\n      \n         <p>If you don't have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, \n         but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error.</p>\n      \n         <important>\n            <p> As a security precaution, the root user of the account that owns a bucket can always use this action, even if the policy \n         explicitly denies the root user the ability to perform this action.\n      </p>\n         </important>\n      \n      \n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p>\n      \n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples\">Examples</a> section.</p>\n      \n         <p>The following actions are related to <code>PutBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action puts a bucket policy to an Amazon S3 on Outposts bucket. To put a policy on an S3 bucket, \n         see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketPolicy.html\">PutBucketPolicy</a> in the <i>Amazon S3 API Reference</i>.\n      </p>\n         </note>\n         <p>Applies an Amazon S3 bucket policy to an Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>.</p> \n         <p>If you are using an identity other than the root user of the Amazon Web Services account that owns the\n         Outposts bucket, the calling identity must have the <code>PutBucketPolicy</code>\n         permissions on the specified Outposts bucket and belong to the bucket owner's account in\n         order to use this action.</p>\n      \n         <p>If you don't have <code>PutBucketPolicy</code> permissions, Amazon S3 returns a <code>403 Access Denied</code> error. If you have the correct permissions, \n         but you're not using an identity that belongs to the bucket owner's account, Amazon S3 returns a <code>405 Method Not Allowed</code> error.</p>\n      \n         <important>\n            <p> As a security precaution, the root user of the Amazon Web Services account that owns a bucket can always use this action, even if the policy \n         explicitly denies the root user the ability to perform this action.\n      </p>\n         </important>\n      \n      \n         <p>For more information about bucket policies, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/using-iam-policies.html\">Using Bucket Policies and User Policies</a>.</p>\n      \n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketPolicy.html#API_control_PutBucketPolicy_Examples\">Examples</a> section.</p>\n      \n         <p>The following actions are related to <code>PutBucketPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketPolicy.html\">GetBucketPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketPolicy.html\">DeleteBucketPolicy</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -4441,7 +5273,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -4477,7 +5309,7 @@
                 "target": "com.amazonaws.s3control#PutBucketTaggingRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<note>\n            <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see\n               <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your \n         account bill with tag key values included. Then, to see the cost of combined resources, organize your \n         billing information according to resources with the same tag key values. For example, you can tag several \n         resources with a specific application name, and then organize your billing information to see the total cost \n         of that application across several services. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost \n            allocation and tagging</a>.</p>\n      \n         <note>\n            <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites \n         the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html\">\n            Using cost allocation in Amazon S3 bucket tags</a>.</p>\n         </note>\n         <p>To use this action, you must have permissions to perform the\n            <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this\n         permission by default and can grant this permission to others. For more information about\n         permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing access permissions to your Amazon S3\n            resources</a>.</p>\n      \n         <p>\n            <code>PutBucketTagging</code> has the following special errors:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>InvalidTagError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. \n                  For information about tag restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">\n                     User-Defined Tag Restrictions</a>  and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\">\n                        Amazon Web Services-Generated Cost Allocation Tag Restrictions</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>MalformedXMLError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The XML provided does not match the schema.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>OperationAbortedError </code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: A conflicting conditional action is currently in progress against this\n                     resource. Try again.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>InternalError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The service was unable to apply the provided tag to the bucket.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p>\n      \n         <p>The following actions are related to <code>PutBucketTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<note>\n            <p>This action puts tags on an Amazon S3 on Outposts bucket. To put tags on an S3 bucket, see\n               <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketTagging.html\">PutBucketTagging</a> in the <i>Amazon S3 API Reference</i>. </p>\n         </note>\n         <p>Sets the tags for an S3 on Outposts bucket. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/S3onOutposts.html\">Using Amazon S3 on Outposts</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>Use tags to organize your Amazon Web Services bill to reflect your own cost structure. To do this, sign up to get your \n         Amazon Web Services account bill with tag key values included. Then, to see the cost of combined resources, organize your \n         billing information according to resources with the same tag key values. For example, you can tag several \n         resources with a specific application name, and then organize your billing information to see the total cost \n         of that application across several services. For more information, see \n         <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html\">Cost \n            allocation and tagging</a>.</p>\n      \n         <note>\n            <p>Within a bucket, if you add a tag that has the same key as an existing tag, the new value overwrites \n         the old value. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/CostAllocTagging.html\">\n            Using cost allocation in Amazon S3 bucket tags</a>.</p>\n         </note>\n         <p>To use this action, you must have permissions to perform the\n            <code>s3-outposts:PutBucketTagging</code> action. The Outposts bucket owner has this\n         permission by default and can grant this permission to others. For more information about\n         permissions, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/using-with-s3-actions.html#using-with-s3-actions-related-to-bucket-subresources\"> Permissions Related to Bucket Subresource Operations</a> and <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/s3-access-control.html\">Managing access permissions to your Amazon S3\n            resources</a>.</p>\n      \n         <p>\n            <code>PutBucketTagging</code> has the following special errors:</p>\n         <ul>\n            <li>\n               <p>Error code: <code>InvalidTagError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The tag provided was not a valid tag. This error can occur if the tag did not pass input validation. \n                  For information about tag restrictions, see <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/allocation-tag-restrictions.html\">\n                     User-Defined Tag Restrictions</a>  and <a href=\"https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/aws-tag-restrictions.html\">\n                        Amazon Web Services-Generated Cost Allocation Tag Restrictions</a>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>MalformedXMLError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The XML provided does not match the schema.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>OperationAbortedError </code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: A conflicting conditional action is currently in progress against this\n                     resource. Try again.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>Error code: <code>InternalError</code>\n               </p>\n               <ul>\n                  <li>\n                     <p>Description: The service was unable to apply the provided tag to the bucket.</p>\n                  </li>\n               </ul>\n            </li>\n         </ul>\n         <p>All Amazon S3 on Outposts REST API requests for this action require an additional parameter of <code>x-amz-outpost-id</code> to be passed with the request and an S3 on Outposts endpoint hostname prefix instead of <code>s3-control</code>. For an example of the request syntax for Amazon S3 on Outposts that uses the S3 on Outposts endpoint hostname prefix and the <code>x-amz-outpost-id</code> derived using the access point ARN, see the <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutBucketTagging.html#API_control_PutBucketTagging_Examples\">Examples</a> section.</p>\n      \n         <p>The following actions are related to <code>PutBucketTagging</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetBucketTagging.html\">GetBucketTagging</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeleteBucketTagging.html\">DeleteBucketTagging</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -4495,7 +5327,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID of the Outposts bucket.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID of the Outposts bucket.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -4560,7 +5392,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -4587,13 +5419,96 @@
             "type": "structure",
             "members": {}
         },
+        "com.amazonaws.s3control#PutMultiRegionAccessPointPolicy": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.s3control#PutMultiRegionAccessPointPolicyRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.s3control#PutMultiRegionAccessPointPolicyResult"
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Associates an access control policy with the specified Multi-Region Access Point. Each Multi-Region Access Point can have only\n            one policy, so a request made to this action replaces any existing policy that is\n            associated with the specified Multi-Region Access Point.</p>\n         <p>This action will always be routed to the US West (Oregon) Region. For more\n            information about the restrictions around managing Multi-Region Access Points, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/userguide/ManagingMultiRegionAccessPoints.html\">Managing\n                Multi-Region Access Points</a> in the\n            <i>Amazon S3 User Guide</i>.</p>\n         <p>The following actions are related to <code>PutMultiRegionAccessPointPolicy</code>:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicy.html\">GetMultiRegionAccessPointPolicy</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetMultiRegionAccessPointPolicyStatus.html\">GetMultiRegionAccessPointPolicyStatus</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#endpoint": {
+                    "hostPrefix": "{AccountId}."
+                },
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/v20180820/async-requests/mrap/put-policy",
+                    "code": 200
+                },
+                "smithy.api#httpChecksumRequired": {}
+            }
+        },
+        "com.amazonaws.s3control#PutMultiRegionAccessPointPolicyInput": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Multi-Region Access Point associated with the request.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Policy": {
+                    "target": "com.amazonaws.s3control#Policy",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The policy details for the <code>PutMultiRegionAccessPoint</code> request.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container for the information associated with a\n         <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_PutMultiRegionAccessPoint.html\">PutMultiRegionAccessPoint</a>\n         request.</p>"
+            }
+        },
+        "com.amazonaws.s3control#PutMultiRegionAccessPointPolicyRequest": {
+            "type": "structure",
+            "members": {
+                "AccountId": {
+                    "target": "com.amazonaws.s3control#AccountId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID for the owner of the Multi-Region Access Point.</p>",
+                        "smithy.api#hostLabel": {},
+                        "smithy.api#httpHeader": "x-amz-account-id",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ClientToken": {
+                    "target": "com.amazonaws.s3control#MultiRegionAccessPointClientToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>An idempotency token used to identify the request and guarantee that requests are\n            unique.</p>",
+                        "smithy.api#idempotencyToken": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "Details": {
+                    "target": "com.amazonaws.s3control#PutMultiRegionAccessPointPolicyInput",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container element containing the details of the policy for the Multi-Region Access Point.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.s3control#PutMultiRegionAccessPointPolicyResult": {
+            "type": "structure",
+            "members": {
+                "RequestTokenARN": {
+                    "target": "com.amazonaws.s3control#AsyncRequestTokenARN",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The request token associated with the request. You can use this token with <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DescribeMultiRegionAccessPointOperation.html\">DescribeMultiRegionAccessPointOperation</a> to determine the status of\n            asynchronous requests.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.s3control#PutPublicAccessBlock": {
             "type": "operation",
             "input": {
                 "target": "com.amazonaws.s3control#PutPublicAccessBlockRequest"
             },
             "traits": {
-                "smithy.api#documentation": "<p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an account. For\n         more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block\n            public access</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html\">GetPublicAccessBlock</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html\">DeletePublicAccessBlock</a>\n               </p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Creates or modifies the <code>PublicAccessBlock</code> configuration for an Amazon Web Services account. For\n         more information, see <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/dev/access-control-block-public-access.html\"> Using Amazon S3 block\n            public access</a>.</p>\n         <p>Related actions include:</p>\n         <ul>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_GetPublicAccessBlock.html\">GetPublicAccessBlock</a>\n               </p>\n            </li>\n            <li>\n               <p>\n                  <a href=\"https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_DeletePublicAccessBlock.html\">DeletePublicAccessBlock</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#endpoint": {
                     "hostPrefix": "{AccountId}."
                 },
@@ -4610,7 +5525,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID for the account whose <code>PublicAccessBlock</code> configuration you want\n         to set.</p>",
+                        "smithy.api#documentation": "<p>The account ID for the Amazon Web Services account whose <code>PublicAccessBlock</code> configuration you want\n         to set.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -4619,7 +5534,7 @@
                 "PublicAccessBlockConfiguration": {
                     "target": "com.amazonaws.s3control#PublicAccessBlockConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to the specified account.</p>",
+                        "smithy.api#documentation": "<p>The <code>PublicAccessBlock</code> configuration that you want to apply to the specified Amazon Web Services account.</p>",
                         "smithy.api#httpPayload": {},
                         "smithy.api#required": {},
                         "smithy.api#xmlName": "PublicAccessBlockConfiguration"
@@ -4731,6 +5646,68 @@
         "com.amazonaws.s3control#PutStorageLensConfigurationTaggingResult": {
             "type": "structure",
             "members": {}
+        },
+        "com.amazonaws.s3control#Region": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3control#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the associated bucket for the Region.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A Region that supports a Multi-Region Access Point as well as the associated bucket for the Region.</p>"
+            }
+        },
+        "com.amazonaws.s3control#RegionCreationList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#Region",
+                "traits": {
+                    "smithy.api#xmlName": "Region"
+                }
+            }
+        },
+        "com.amazonaws.s3control#RegionName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                }
+            }
+        },
+        "com.amazonaws.s3control#RegionReport": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.s3control#BucketName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the bucket.</p>"
+                    }
+                },
+                "Region": {
+                    "target": "com.amazonaws.s3control#RegionName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the Region.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A combination of a bucket and Region that's part of a Multi-Region Access Point.</p>"
+            }
+        },
+        "com.amazonaws.s3control#RegionReportList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.s3control#RegionReport",
+                "traits": {
+                    "smithy.api#xmlName": "Region"
+                }
+            }
         },
         "com.amazonaws.s3control#RegionalBucket": {
             "type": "structure",
@@ -6028,7 +7005,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}
@@ -6114,7 +7091,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.s3control#AccountId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The account ID associated with the S3 Batch Operations job.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Web Services account ID associated with the S3 Batch Operations job.</p>",
                         "smithy.api#hostLabel": {},
                         "smithy.api#httpHeader": "x-amz-account-id",
                         "smithy.api#required": {}

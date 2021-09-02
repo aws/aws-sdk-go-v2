@@ -35,7 +35,7 @@ func (c *Client) CreateIngestion(ctx context.Context, params *CreateIngestionInp
 
 type CreateIngestionInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The Amazon Web Services account ID.
 	//
 	// This member is required.
 	AwsAccountId *string

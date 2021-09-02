@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists your Device Defender detect custom metrics.
+// Lists your Device Defender detect custom metrics. Requires permission to access
+// the ListCustomMetrics
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListCustomMetrics(ctx context.Context, params *ListCustomMetricsInput, optFns ...func(*Options)) (*ListCustomMetricsOutput, error) {
 	if params == nil {
 		params = &ListCustomMetricsInput{}

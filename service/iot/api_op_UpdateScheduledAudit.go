@@ -12,7 +12,9 @@ import (
 )
 
 // Updates a scheduled audit, including which checks are performed and how often
-// the audit takes place.
+// the audit takes place. Requires permission to access the UpdateScheduledAudit
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateScheduledAudit(ctx context.Context, params *UpdateScheduledAuditInput, optFns ...func(*Options)) (*UpdateScheduledAuditOutput, error) {
 	if params == nil {
 		params = &UpdateScheduledAuditInput{}

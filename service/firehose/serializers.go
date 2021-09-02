@@ -721,6 +721,25 @@ func awsAwsjson11_serializeDocumentDeserializer(v *types.Deserializer, value smi
 	return nil
 }
 
+func awsAwsjson11_serializeDocumentDynamicPartitioningConfiguration(v *types.DynamicPartitioningConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled != nil {
+		ok := object.Key("Enabled")
+		ok.Boolean(*v.Enabled)
+	}
+
+	if v.RetryOptions != nil {
+		ok := object.Key("RetryOptions")
+		if err := awsAwsjson11_serializeDocumentRetryOptions(v.RetryOptions, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeDocumentElasticsearchBufferingHints(v *types.ElasticsearchBufferingHints, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -960,6 +979,13 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationConfiguration(v *types.E
 		}
 	}
 
+	if v.DynamicPartitioningConfiguration != nil {
+		ok := object.Key("DynamicPartitioningConfiguration")
+		if err := awsAwsjson11_serializeDocumentDynamicPartitioningConfiguration(v.DynamicPartitioningConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.EncryptionConfiguration != nil {
 		ok := object.Key("EncryptionConfiguration")
 		if err := awsAwsjson11_serializeDocumentEncryptionConfiguration(v.EncryptionConfiguration, ok); err != nil {
@@ -1035,6 +1061,13 @@ func awsAwsjson11_serializeDocumentExtendedS3DestinationUpdate(v *types.Extended
 	if v.DataFormatConversionConfiguration != nil {
 		ok := object.Key("DataFormatConversionConfiguration")
 		if err := awsAwsjson11_serializeDocumentDataFormatConversionConfiguration(v.DataFormatConversionConfiguration, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DynamicPartitioningConfiguration != nil {
+		ok := object.Key("DynamicPartitioningConfiguration")
+		if err := awsAwsjson11_serializeDocumentDynamicPartitioningConfiguration(v.DynamicPartitioningConfiguration, ok); err != nil {
 			return err
 		}
 	}
@@ -1822,6 +1855,18 @@ func awsAwsjson11_serializeDocumentRedshiftDestinationUpdate(v *types.RedshiftDe
 }
 
 func awsAwsjson11_serializeDocumentRedshiftRetryOptions(v *types.RedshiftRetryOptions, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.DurationInSeconds != nil {
+		ok := object.Key("DurationInSeconds")
+		ok.Integer(*v.DurationInSeconds)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentRetryOptions(v *types.RetryOptions, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
 

@@ -13,13 +13,13 @@ import (
 	"time"
 )
 
-// Returns a list of configuration items for the specified resource. The list
+// Returns a list of ConfigurationItems for the specified resource. The list
 // contains details about each state of the resource during the specified time
 // interval. If you specified a retention period to retain your ConfigurationItems
-// between a minimum of 30 days and a maximum of 7 years (2557 days), AWS Config
+// between a minimum of 30 days and a maximum of 7 years (2557 days), Config
 // returns the ConfigurationItems for the specified retention period. The response
-// is paginated. By default, AWS Config returns a limit of 10 configuration items
-// per page. You can customize this number with the limit parameter. The response
+// is paginated. By default, Config returns a limit of 10 configuration items per
+// page. You can customize this number with the limit parameter. The response
 // includes a nextToken string. To get the next page of results, run the request
 // again and specify the string for the nextToken parameter. Each call to the API
 // is limited to span a duration of seven days. It is likely that the number of
@@ -67,8 +67,8 @@ type GetResourceConfigHistoryInput struct {
 	LaterTime *time.Time
 
 	// The maximum number of configuration items returned on each page. The default is
-	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// 10. You cannot specify a number greater than 100. If you specify 0, Config uses
+	// the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -169,8 +169,8 @@ var _ GetResourceConfigHistoryAPIClient = (*Client)(nil)
 // GetResourceConfigHistory
 type GetResourceConfigHistoryPaginatorOptions struct {
 	// The maximum number of configuration items returned on each page. The default is
-	// 10. You cannot specify a number greater than 100. If you specify 0, AWS Config
-	// uses the default.
+	// 10. You cannot specify a number greater than 100. If you specify 0, Config uses
+	// the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

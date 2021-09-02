@@ -26,7 +26,7 @@ func (e *AccessDeniedException) ErrorMessage() string {
 func (e *AccessDeniedException) ErrorCode() string             { return "AccessDeniedException" }
 func (e *AccessDeniedException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// This exception is thrown when the UpdatServer is called for a file transfer
+// This exception is thrown when the UpdateServer is called for a file transfer
 // protocol-enabled server that has VPC as the endpoint type and the server's
 // VpcEndpointID is not in the available state.
 type ConflictException struct {

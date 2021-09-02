@@ -33,13 +33,13 @@ func (c *Client) DescribeRemediationExecutionStatus(ctx context.Context, params 
 
 type DescribeRemediationExecutionStatusInput struct {
 
-	// A list of AWS Config rule names.
+	// A list of Config rule names.
 	//
 	// This member is required.
 	ConfigRuleName *string
 
 	// The maximum number of RemediationExecutionStatuses returned on each page. The
-	// default is maximum. If you specify 0, AWS Config uses the default.
+	// default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -143,7 +143,7 @@ var _ DescribeRemediationExecutionStatusAPIClient = (*Client)(nil)
 // DescribeRemediationExecutionStatus
 type DescribeRemediationExecutionStatusPaginatorOptions struct {
 	// The maximum number of RemediationExecutionStatuses returned on each page. The
-	// default is maximum. If you specify 0, AWS Config uses the default.
+	// default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

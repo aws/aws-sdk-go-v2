@@ -44,9 +44,9 @@ type GetGeneratedPolicyInput struct {
 	IncludeResourcePlaceholders *bool
 
 	// The level of detail that you want to generate. You can specify whether to
-	// generate service-level policies. Access Analyzer uses iam:servicelastaccessed to
-	// identify services that have been used recently to create this service-level
-	// template.
+	// generate service-level policies. IAM Access Analyzer uses
+	// iam:servicelastaccessed to identify services that have been used recently to
+	// create this service-level template.
 	IncludeServiceLevelTemplate *bool
 
 	noSmithyDocumentSerde

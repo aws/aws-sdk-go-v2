@@ -11,19 +11,19 @@ import (
 // system.
 type ActiveDirectoryBackupAttributes struct {
 
-	// The ID of the AWS Managed Microsoft Active Directory instance to which the file
-	// system is joined.
+	// The ID of the Amazon Web Services Managed Microsoft Active Directory instance to
+	// which the file system is joined.
 	ActiveDirectoryId *string
 
 	// The fully qualified domain name of the self-managed AD directory.
 	DomainName *string
 
-	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS
-	// resources. We require an ARN when you need to specify a resource unambiguously
-	// across all of AWS. For more information, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	ResourceARN *string
 
 	noSmithyDocumentSerde
@@ -110,6 +110,9 @@ type AdministrativeAction struct {
 	// actions.
 	TargetFileSystemValues *FileSystem
 
+	// Describes an Amazon FSx for NetApp ONTAP volume.
+	TargetVolumeValues *Volume
+
 	noSmithyDocumentSerde
 }
 
@@ -145,8 +148,8 @@ type Alias struct {
 	// is disassociating the DNS alias from the file system and deleting it.
 	//
 	// *
-	// DELETE_FAILED - Amazon FSx was unable to disassocate the DNS alias from the file
-	// system.
+	// DELETE_FAILED - Amazon FSx was unable to disassociate the DNS alias from the
+	// file system.
 	Lifecycle AliasLifecycle
 
 	// The name of the DNS alias. The alias name has to meet the following
@@ -172,7 +175,8 @@ type Alias struct {
 	noSmithyDocumentSerde
 }
 
-// A backup of an Amazon FSx file system.
+// A backup of an Amazon FSx for Windows File Server or Amazon FSx for Lustre file
+// system, or of an Amazon FSx for NetApp ONTAP volume.
 type Backup struct {
 
 	// The ID of the backup.
@@ -228,12 +232,12 @@ type Backup struct {
 	// Details explaining any failures that occur when creating a backup.
 	FailureDetails *BackupFailureDetails
 
-	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the
-	// backup of the Amazon FSx file system's data at rest.
+	// The ID of the Key Management Service (KMS) key used to encrypt the backup of the
+	// Amazon FSx file system's data at rest.
 	KmsKeyId *string
 
-	// An AWS account ID. This ID is a 12-digit number that you use to construct Amazon
-	// Resource Names (ARNs) for resources.
+	// An Amazon Web Services account ID. This ID is a 12-digit number that you use to
+	// construct Amazon Resource Names (ARNs) for resources.
 	OwnerId *string
 
 	// The current percent of progress of an asynchronous task.
@@ -241,6 +245,9 @@ type Backup struct {
 
 	// The Amazon Resource Name (ARN) for the backup resource.
 	ResourceARN *string
+
+	// Specifies the resource type that is backed up.
+	ResourceType ResourceType
 
 	// The ID of the source backup. Specifies the backup you are copying.
 	SourceBackupId *string
@@ -251,6 +258,9 @@ type Backup struct {
 
 	// Tags associated with a particular file system.
 	Tags []Tag
+
+	// Describes an Amazon FSx for NetApp ONTAP volume.
+	Volume *Volume
 
 	noSmithyDocumentSerde
 }
@@ -378,8 +388,8 @@ type CreateFileSystemLustreConfiguration struct {
 	// this feature (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/data-
 	// protection.html). (Default = SCRATCH_1) Encryption of data in-transit for
 	// SCRATCH_2 and PERSISTENT_1 deployment types is supported when accessed from
-	// supported instance types in supported AWS Regions. To learn more, Encrypting
-	// Data in Transit
+	// supported instance types in supported Amazon Web Services Regions. To learn
+	// more, Encrypting Data in Transit
 	// (https://docs.aws.amazon.com/fsx/latest/LustreGuide/encryption-in-transit-fsxl.html).
 	DeploymentType LustreDeploymentType
 
@@ -440,6 +450,66 @@ type CreateFileSystemLustreConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The ONTAP configuration properties of the FSx for NetApp ONTAP file system that
+// you are creating.
+type CreateFileSystemOntapConfiguration struct {
+
+	// Specifies the ONTAP file system deployment type to use in creating the file
+	// system.
+	//
+	// This member is required.
+	DeploymentType OntapDeploymentType
+
+	// Sustained throughput of an Amazon FSx file system in MBps.
+	//
+	// This member is required.
+	ThroughputCapacity *int32
+
+	// The number of days to retain automatic backups. Setting this to 0 disables
+	// automatic backups. You can retain automatic backups for a maximum of 90 days.
+	// The default is 0.
+	AutomaticBackupRetentionDays *int32
+
+	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
+	// specifies 5 AM daily.
+	DailyAutomaticBackupStartTime *string
+
+	// The SSD IOPS configuration for the Amazon FSx for NetApp ONTAP file system.
+	DiskIopsConfiguration *DiskIopsConfiguration
+
+	// Specifies the IP address range in which the endpoints to access your file system
+	// will be created. By default, Amazon FSx selects an unused IP address range for
+	// you from the 198.19.* range.
+	EndpointIpAddressRange *string
+
+	// The ONTAP administrative password for the fsxadmin user that you can use to
+	// administer your file system using the ONTAP CLI and REST API.
+	FsxAdminPassword *string
+
+	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private
+	// cloud (VPC). For more information, see VPC and Subnets
+	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) in the
+	// Amazon VPC User Guide.
+	PreferredSubnetId *string
+
+	// Specifies the VPC route tables in which your file system's endpoints will be
+	// created. You should specify all VPC route tables associated with the subnets in
+	// which your clients are located. By default, Amazon FSx selects your VPC's
+	// default route table.
+	RouteTableIds []string
+
+	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
+	// which 1 represents Monday and 7 represents Sunday. For further details, see the
+	// ISO-8601 spec as described on Wikipedia
+	// (https://en.wikipedia.org/wiki/ISO_week_date). HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 1:05:00
+	// specifies maintenance at 5 AM Monday.
+	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration object for the Microsoft Windows file system used in
 // CreateFileSystem and CreateFileSystemFromBackup operations.
 type CreateFileSystemWindowsConfiguration struct {
@@ -450,8 +520,8 @@ type CreateFileSystemWindowsConfiguration struct {
 	// This member is required.
 	ThroughputCapacity *int32
 
-	// The ID for an existing AWS Managed Microsoft Active Directory (AD) instance that
-	// the file system should join when it's created.
+	// The ID for an existing Amazon Web Services Managed Microsoft Active Directory
+	// (AD) instance that the file system should join when it's created.
 	ActiveDirectoryId *string
 
 	// An array of one or more DNS alias names that you want to associate with the
@@ -513,40 +583,117 @@ type CreateFileSystemWindowsConfiguration struct {
 	// *
 	// MULTI_AZ_1 - Deploys a high availability file system that is configured for
 	// Multi-AZ redundancy to tolerate temporary Availability Zone (AZ) unavailability.
-	// You can only deploy a Multi-AZ file system in AWS Regions that have a minimum of
-	// three Availability Zones. Also supports HDD storage type
+	// You can only deploy a Multi-AZ file system in Amazon Web Services Regions that
+	// have a minimum of three Availability Zones. Also supports HDD storage type
 	//
-	// * SINGLE_AZ_1 -
-	// (Default) Choose to deploy a file system that is configured for single AZ
-	// redundancy.
+	// *
+	// SINGLE_AZ_1 - (Default) Choose to deploy a file system that is configured for
+	// single AZ redundancy.
 	//
-	// * SINGLE_AZ_2 - The latest generation Single AZ file system.
-	// Specifies a file system that is configured for single AZ redundancy and supports
-	// HDD storage type.
+	// * SINGLE_AZ_2 - The latest generation Single AZ file
+	// system. Specifies a file system that is configured for single AZ redundancy and
+	// supports HDD storage type.
 	//
-	// For more information, see  Availability and Durability:
-	// Single-AZ and Multi-AZ File Systems
+	// For more information, see  Availability and
+	// Durability: Single-AZ and Multi-AZ File Systems
 	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/high-availability-multiAZ.html).
 	DeploymentType WindowsDeploymentType
 
 	// Required when DeploymentType is set to MULTI_AZ_1. This specifies the subnet in
-	// which you want the preferred file server to be located. For in-AWS applications,
-	// we recommend that you launch your clients in the same Availability Zone (AZ) as
-	// your preferred file server to reduce cross-AZ data transfer costs and minimize
-	// latency.
+	// which you want the preferred file server to be located. For in-Amazon Web
+	// Services applications, we recommend that you launch your clients in the same
+	// Availability Zone (AZ) as your preferred file server to reduce cross-AZ data
+	// transfer costs and minimize latency.
 	PreferredSubnetId *string
 
-	// The configuration that Amazon FSx uses to join the Windows File Server instance
-	// to your self-managed (including on-premises) Microsoft Active Directory (AD)
-	// directory. For more information, see  Using Amazon FSx with your self-managed
-	// Microsoft Active Directory
-	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html).
+	// The configuration that Amazon FSx uses to join a Amazon FSx for Windows File
+	// Server file system or an ONTAP storage virtual machine (SVM) to a self-managed
+	// (including on-premises) Microsoft Active Directory (AD) directory. For more
+	// information, see  Using Amazon FSx with your self-managed Microsoft Active
+	// Directory
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html) or
+	// Managing SVMs
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html).
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
 	// The preferred start time to perform weekly maintenance, formatted d:HH:MM in the
 	// UTC time zone, where d is the weekday number, from 1 through 7, beginning with
 	// Monday and ending with Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// Specifies the configuration of the ONTAP volume that you are creating.
+type CreateOntapVolumeConfiguration struct {
+
+	// Specifies the location in the SVM's namespace where the volume is mounted. The
+	// JunctionPath must have a leading forward slash, such as /vol3.
+	//
+	// This member is required.
+	JunctionPath *string
+
+	// Specifies the size of the volume, in megabytes (MB), that you are creating.
+	//
+	// This member is required.
+	SizeInMegabytes *int32
+
+	// Set to true to enable deduplication, compression, and compaction storage
+	// efficiency features on the volume.
+	//
+	// This member is required.
+	StorageEfficiencyEnabled *bool
+
+	// Specifies the ONTAP SVM in which to create the volume.
+	//
+	// This member is required.
+	StorageVirtualMachineId *string
+
+	// The security style for the volume. Specify one of the following values:
+	//
+	// * UNIX
+	// if the file system is managed by a UNIX administrator, the majority of users are
+	// NFS clients, and an application accessing the data uses a UNIX user as the
+	// service account. UNIX is the default.
+	//
+	// * NTFS if the file system is managed by a
+	// Windows administrator, the majority of users are SMB clients, and an application
+	// accessing the data uses a Windows user as the service account.
+	//
+	// * MIXED if the
+	// file system is managed by both UNIX and Windows administrators and users consist
+	// of both NFS and SMB clients.
+	SecurityStyle SecurityStyle
+
+	// Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
+	// for ONTAP's intelligent tiering automatically transitions a volume's data
+	// between the file system's primary storage and capacity pool storage based on
+	// your access patterns.
+	TieringPolicy *TieringPolicy
+
+	noSmithyDocumentSerde
+}
+
+// The configuration that Amazon FSx uses to join the ONTAP storage virtual machine
+// (SVM) to your self-managed (including on-premises) Microsoft Active Directory
+// (AD) directory.
+type CreateSvmActiveDirectoryConfiguration struct {
+
+	// The NetBIOS name of the Active Directory computer object that will be created
+	// for your SVM.
+	//
+	// This member is required.
+	NetBiosName *string
+
+	// The configuration that Amazon FSx uses to join a Amazon FSx for Windows File
+	// Server file system or an ONTAP storage virtual machine (SVM) to a self-managed
+	// (including on-premises) Microsoft Active Directory (AD) directory. For more
+	// information, see  Using Amazon FSx with your self-managed Microsoft Active
+	// Directory
+	// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html) or
+	// Managing SVMs
+	// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html).
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfiguration
 
 	noSmithyDocumentSerde
 }
@@ -716,12 +863,12 @@ type DataRepositoryTask struct {
 	// or not a report gets generated for a task using the Enabled parameter.
 	Report *CompletionReport
 
-	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify AWS
-	// resources. We require an ARN when you need to specify a resource unambiguously
-	// across all of AWS. For more information, see Amazon Resource Names (ARNs) and
-	// AWS Service Namespaces
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see Amazon Resource Names (ARNs)
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
-	// the AWS General Reference.
+	// the Amazon Web Services General Reference.
 	ResourceARN *string
 
 	// The time that Amazon FSx began processing the task.
@@ -854,12 +1001,55 @@ type DeleteFileSystemWindowsResponse struct {
 	noSmithyDocumentSerde
 }
 
+// Use to specify skipping a final backup, or to add tags to a final backup.
+type DeleteVolumeOntapConfiguration struct {
+
+	// A list of Tag values, with a maximum of 50 elements.
+	FinalBackupTags []Tag
+
+	// Set to true if you want to skip taking a final backup of the volume you are
+	// deleting.
+	SkipFinalBackup *bool
+
+	noSmithyDocumentSerde
+}
+
+// The response object for the Amazon FSx for NetApp ONTAP volume being deleted in
+// the DeleteVolume operation.
+type DeleteVolumeOntapResponse struct {
+
+	// The ID of the source backup. Specifies the backup you are copying.
+	FinalBackupId *string
+
+	// A list of Tag values, with a maximum of 50 elements.
+	FinalBackupTags []Tag
+
+	noSmithyDocumentSerde
+}
+
+// The SSD IOPS (input/output operations per second) configuration for an Amazon
+// FSx for NetApp ONTAP file system. The default is 3 IOPS per GB of storage
+// capacity, but you can provision additional IOPS per GB of storage. The
+// configuration consists of the total number of provisioned SSD IOPS and how the
+// amount was provisioned (by the customer or by the system).
+type DiskIopsConfiguration struct {
+
+	// The total number of SSD IOPS provisioned for the file system.
+	Iops *int64
+
+	// Specifies whether the number of IOPS for the file system is using the system
+	// default (AUTOMATIC) or was provisioned by the customer (USER_PROVISIONED).
+	Mode DiskIopsConfigurationMode
+
+	noSmithyDocumentSerde
+}
+
 // A description of a specific Amazon FSx file system.
 type FileSystem struct {
 
 	// A list of administrative actions for the file system that are in process or
-	// waiting to be processed. Administrative actions describe changes to the Windows
-	// file system that you have initiated using the UpdateFileSystem action.
+	// waiting to be processed. Administrative actions describe changes to the Amazon
+	// FSx file system that you have initiated using the UpdateFileSystem action.
 	AdministrativeActions []AdministrativeAction
 
 	// The time that the file system was created, in seconds (since
@@ -876,17 +1066,17 @@ type FileSystem struct {
 	// The system-generated, unique 17-digit ID of the file system.
 	FileSystemId *string
 
-	// The type of Amazon FSx file system, either LUSTRE or WINDOWS.
+	// The type of Amazon FSx file system, which can be LUSTRE, WINDOWS, or ONTAP.
 	FileSystemType FileSystemType
 
-	// The ID of the AWS Key Management Service (AWS KMS) key used to encrypt the file
-	// system's data for Amazon FSx for Windows File Server file systems and persistent
-	// Amazon FSx for Lustre file systems at rest. In either case, if not specified,
-	// the Amazon FSx managed key is used. The scratch Amazon FSx for Lustre file
-	// systems are always encrypted at rest using Amazon FSx managed keys. For more
-	// information, see Encrypt
+	// The ID of the Key Management Service (KMS) key used to encrypt the file system's
+	// data for Amazon FSx for Windows File Server file systems, Amazon FSx for NetApp
+	// ONTAP file systems, and persistent Amazon FSx for Lustre file systems at rest.
+	// If not specified, the Amazon FSx managed key is used. The scratch Amazon FSx for
+	// Lustre file systems are always encrypted at rest using Amazon FSx managed keys.
+	// For more information, see Encrypt
 	// (https://docs.aws.amazon.com/kms/latest/APIReference/API_Encrypt.html) in the
-	// AWS Key Management Service API Reference.
+	// Key Management Service API Reference.
 	KmsKeyId *string
 
 	// The lifecycle status of the file system, following are the possible values and
@@ -925,9 +1115,12 @@ type FileSystem struct {
 	// you can have more than one.
 	NetworkInterfaceIds []string
 
-	// The AWS account that created the file system. If the file system was created by
-	// an AWS Identity and Access Management (IAM) user, the AWS account to which the
-	// IAM user belongs is the owner.
+	// The configuration for this FSx for NetApp ONTAP file system.
+	OntapConfiguration *OntapFileSystemConfiguration
+
+	// The Amazon Web Services account that created the file system. If the file system
+	// was created by an Identity and Access Management (IAM) user, the Amazon Web
+	// Services account to which the IAM user belongs is the owner.
 	OwnerId *string
 
 	// The Amazon Resource Name (ARN) for the file system resource.
@@ -942,13 +1135,13 @@ type FileSystem struct {
 	StorageType StorageType
 
 	// Specifies the IDs of the subnets that the file system is accessible from. For
-	// Windows MULTI_AZ_1 file system deployment type, there are two subnet IDs, one
-	// for the preferred file server and one for the standby file server. The preferred
-	// file server subnet identified in the PreferredSubnetID property. All other file
-	// systems have only one subnet ID. For Lustre file systems, and Single-AZ Windows
-	// file systems, this is the ID of the subnet that contains the endpoint for the
-	// file system. For MULTI_AZ_1 Windows file systems, the endpoint for the file
-	// system is available in the PreferredSubnetID.
+	// Windows and ONTAP MULTI_AZ_1 file system deployment type, there are two subnet
+	// IDs, one for the preferred file server and one for the standby file server. The
+	// preferred file server subnet identified in the PreferredSubnetID property. All
+	// other file systems have only one subnet ID. For Lustre file systems, and
+	// Single-AZ Windows file systems, this is the ID of the subnet that contains the
+	// endpoint for the file system. For MULTI_AZ_1 Windows and ONTAP file systems, the
+	// endpoint for the file system is available in the PreferredSubnetID.
 	SubnetIds []string
 
 	// The tags to associate with the file system. For more information, see Tagging
@@ -962,6 +1155,37 @@ type FileSystem struct {
 
 	// The configuration for this Microsoft Windows file system.
 	WindowsConfiguration *WindowsFileSystemConfiguration
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon FSx for NetApp ONTAP file system has two endpoints that are used to
+// access data or to manage the file system using the NetApp ONTAP CLI, REST API,
+// or NetApp SnapMirror. They are the Management and Intercluster endpoints.
+type FileSystemEndpoint struct {
+
+	// The Domain Name Service (DNS) name for the file system. You can mount your file
+	// system using its DNS name.
+	DNSName *string
+
+	// IP addresses of the file system endpoint.
+	IpAddresses []string
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon FSx for NetApp ONTAP file system has the following endpoints that are
+// used to access data or to manage the file system using the NetApp ONTAP CLI,
+// REST API, or NetApp SnapMirror.
+type FileSystemEndpoints struct {
+
+	// An endpoint for managing your file system by setting up NetApp SnapMirror with
+	// other ONTAP systems.
+	Intercluster *FileSystemEndpoint
+
+	// An endpoint for managing your file system using the NetApp ONTAP CLI and NetApp
+	// ONTAP API.
+	Management *FileSystemEndpoint
 
 	noSmithyDocumentSerde
 }
@@ -986,6 +1210,15 @@ type Filter struct {
 	// The values of the filter. These are all the values for any of the applied
 	// filters.
 	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes why a resource lifecycle state changed.
+type LifecycleTransitionReason struct {
+
+	// A detailed error message.
+	Message *string
 
 	noSmithyDocumentSerde
 }
@@ -1050,7 +1283,8 @@ type LustreFileSystemConfiguration struct {
 
 	// You use the MountName value when mounting the file system. For the SCRATCH_1
 	// deployment type, this value is always "fsx". For SCRATCH_2 and PERSISTENT_1
-	// deployment types, this value is a string that is unique within an AWS Region.
+	// deployment types, this value is a string that is unique within an Amazon Web
+	// Services Region.
 	MountName *string
 
 	// Per unit storage throughput represents the megabytes per second of read or write
@@ -1068,8 +1302,128 @@ type LustreFileSystemConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// Configuration for the FSx for NetApp ONTAP file system.
+type OntapFileSystemConfiguration struct {
+
+	// The number of days to retain automatic backups. Setting this to 0 disables
+	// automatic backups. You can retain automatic backups for a maximum of 90 days.
+	// The default is 0.
+	AutomaticBackupRetentionDays *int32
+
+	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
+	// specifies 5 AM daily.
+	DailyAutomaticBackupStartTime *string
+
+	// The ONTAP file system deployment type.
+	DeploymentType OntapDeploymentType
+
+	// The SSD IOPS configuration for the ONTAP file system, specifying the number of
+	// provisioned IOPS and the provision mode.
+	DiskIopsConfiguration *DiskIopsConfiguration
+
+	// The IP address range in which the endpoints to access your file system are
+	// created.
+	EndpointIpAddressRange *string
+
+	// The Management and Intercluster endpoints that are used to access data or to
+	// manage the file system using the NetApp ONTAP CLI, REST API, or NetApp
+	// SnapMirror.
+	Endpoints *FileSystemEndpoints
+
+	// The ID for a subnet. A subnet is a range of IP addresses in your virtual private
+	// cloud (VPC). For more information, see VPC and Subnets
+	// (https://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Subnets.html) in the
+	// Amazon VPC User Guide.
+	PreferredSubnetId *string
+
+	// The VPC route tables in which your file system's endpoints are created.
+	RouteTableIds []string
+
+	// Sustained throughput of an Amazon FSx file system in MBps.
+	ThroughputCapacity *int32
+
+	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
+	// which 1 represents Monday and 7 represents Sunday. For further details, see the
+	// ISO-8601 spec as described on Wikipedia
+	// (https://en.wikipedia.org/wiki/ISO_week_date). HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 1:05:00
+	// specifies maintenance at 5 AM Monday.
+	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration of an Amazon FSx for NetApp ONTAP volume
+type OntapVolumeConfiguration struct {
+
+	// Specifies the FlexCache endpoint type of the volume. Valid values are the
+	// following:
+	//
+	// * NONE specifies that the volume doesn't have a FlexCache
+	// configuration. NONE is the default.
+	//
+	// * ORIGIN specifies that the volume is the
+	// origin volume for a FlexCache volume.
+	//
+	// * CACHE specifies that the volume is a
+	// FlexCache volume.
+	FlexCacheEndpointType FlexCacheEndpointType
+
+	// Specifies the directory that NAS clients use to mount the volume, along with the
+	// SVM DNS name or IP address. You can create a JunctionPath directly below a
+	// parent volume junction or on a directory within a volume. A JunctionPath for a
+	// volume named vol3 might be /vol1/vol2/vol3, or /vol1/dir2/vol3, or even
+	// /dir1/dir2/vol3..
+	JunctionPath *string
+
+	// Specifies the type of volume. Valid values are the following:
+	//
+	// * RW specifies a
+	// read-write volume. RW is the default.
+	//
+	// * DP specifies a data protection volume.
+	// You can protect data by replicating it to data protection mirror copies and use
+	// data protection mirror copies to recover data when a disaster occurs.
+	//
+	// * LS
+	// specifies a load-sharing mirror volume. A load-sharing mirror reduces the
+	// network traffic to a FlexVol volume by providing additional read-only access to
+	// clients.
+	OntapVolumeType OntapVolumeType
+
+	// The security style for the volume, which can be UNIX, NTFS, or MIXED.
+	SecurityStyle SecurityStyle
+
+	// The configured size of the volume, in megabytes (MBs).
+	SizeInMegabytes *int32
+
+	// The volume's storage efficiency setting.
+	StorageEfficiencyEnabled *bool
+
+	// The ID of the volume's storage virtual machine.
+	StorageVirtualMachineId *string
+
+	// A boolean flag indicating whether this volume is the root volume for its storage
+	// virtual machine (SVM). Only one volume on an SVM can be the root volume. This
+	// value defaults to false. If this value is true, then this is the SVM root
+	// volume. This flag is useful when you're deleting an SVM, because you must first
+	// delete all non-root volumes. This flag, when set to false, helps you identify
+	// which volumes to delete before you can delete the SVM.
+	StorageVirtualMachineRoot *bool
+
+	// The volume's TieringPolicy setting.
+	TieringPolicy *TieringPolicy
+
+	// The volume's UUID (universally unique identifier).
+	UUID *string
+
+	noSmithyDocumentSerde
+}
+
 // The configuration of the self-managed Microsoft Active Directory (AD) directory
-// to which the Windows File Server instance is joined.
+// to which the Windows File Server or ONTAP storage virtual machine (SVM) instance
+// is joined.
 type SelfManagedActiveDirectoryAttributes struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the
@@ -1084,7 +1438,8 @@ type SelfManagedActiveDirectoryAttributes struct {
 	FileSystemAdministratorsGroup *string
 
 	// The fully qualified distinguished name of the organizational unit within the
-	// self-managed AD directory to which the Windows File Server instance is joined.
+	// self-managed AD directory to which the Windows File Server or ONTAP storage
+	// virtual machine (SVM) instance is joined.
 	OrganizationalUnitDistinguishedName *string
 
 	// The user name for the service account on your self-managed AD domain that FSx
@@ -1094,11 +1449,14 @@ type SelfManagedActiveDirectoryAttributes struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration that Amazon FSx uses to join the Windows File Server instance
-// to your self-managed (including on-premises) Microsoft Active Directory (AD)
-// directory. For more information, see  Using Amazon FSx with your self-managed
-// Microsoft Active Directory
-// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html).
+// The configuration that Amazon FSx uses to join a Amazon FSx for Windows File
+// Server file system or an ONTAP storage virtual machine (SVM) to a self-managed
+// (including on-premises) Microsoft Active Directory (AD) directory. For more
+// information, see  Using Amazon FSx with your self-managed Microsoft Active
+// Directory
+// (https://docs.aws.amazon.com/fsx/latest/WindowsGuide/self-managed-AD.html) or
+// Managing SVMs
+// (https://docs.aws.amazon.com/fsx/latest/ONTAPGuide/managing-svms.html).
 type SelfManagedActiveDirectoryConfiguration struct {
 
 	// A list of up to two IP addresses of DNS servers or domain controllers in the
@@ -1137,13 +1495,12 @@ type SelfManagedActiveDirectoryConfiguration struct {
 	FileSystemAdministratorsGroup *string
 
 	// (Optional) The fully qualified distinguished name of the organizational unit
-	// within your self-managed AD directory that the Windows File Server instance will
-	// join. Amazon FSx only accepts OU as the direct parent of the file system. An
-	// example is OU=FSx,DC=yourdomain,DC=corp,DC=com. To learn more, see RFC 2253
-	// (https://tools.ietf.org/html/rfc2253). If none is provided, the FSx file system
-	// is created in the default location of your self-managed AD directory. Only
-	// Organizational Unit (OU) objects can be the direct parent of the file system
-	// that you're creating.
+	// within your self-managed AD directory. Amazon FSx only accepts OU as the direct
+	// parent of the file system. An example is OU=FSx,DC=yourdomain,DC=corp,DC=com. To
+	// learn more, see RFC 2253 (https://tools.ietf.org/html/rfc2253). If none is
+	// provided, the FSx file system is created in the default location of your
+	// self-managed AD directory. Only Organizational Unit (OU) objects can be the
+	// direct parent of the file system that you're creating.
 	OrganizationalUnitDistinguishedName *string
 
 	noSmithyDocumentSerde
@@ -1170,6 +1527,147 @@ type SelfManagedActiveDirectoryConfigurationUpdates struct {
 	noSmithyDocumentSerde
 }
 
+// Describes the Amazon FSx for NetApp ONTAP storage virtual machine (SVM)
+// configuraton.
+type StorageVirtualMachine struct {
+
+	// Describes the Microsoft Active Directory configuration to which the SVM is
+	// joined, if applicable.
+	ActiveDirectoryConfiguration *SvmActiveDirectoryConfiguration
+
+	// The time that the resource was created, in seconds (since 1970-01-01T00:00:00Z),
+	// also known as Unix time.
+	CreationTime *time.Time
+
+	// The endpoints that are used to access data or to manage the SVM using the NetApp
+	// ONTAP CLI, REST API, or NetApp CloudManager. They are the Iscsi, Management,
+	// Nfs, and Smb endpoints.
+	Endpoints *SvmEndpoints
+
+	// The globally unique ID of the file system, assigned by Amazon FSx.
+	FileSystemId *string
+
+	// Describes the SVM's lifecycle status.
+	//
+	// * CREATED - The SVM is fully available
+	// for use.
+	//
+	// * CREATING - Amazon FSx is creating the new SVM.
+	//
+	// * DELETING - Amazon
+	// FSx is deleting an existing SVM.
+	//
+	// * FAILED - Amazon FSx was unable to create the
+	// SVM.
+	//
+	// * MISCONFIGURED - The SVM is in a failed but recoverable state.
+	//
+	// * PENDING
+	// - Amazon FSx has not started creating the SVM.
+	Lifecycle StorageVirtualMachineLifecycle
+
+	// Describes why the SVM lifecycle state changed.
+	LifecycleTransitionReason *LifecycleTransitionReason
+
+	// The name of the SVM, if provisioned.
+	Name *string
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the Amazon Web Services General Reference.
+	ResourceARN *string
+
+	// The security style of the root volume of the SVM.
+	RootVolumeSecurityStyle StorageVirtualMachineRootVolumeSecurityStyle
+
+	// The SVM's system generated unique ID.
+	StorageVirtualMachineId *string
+
+	// Describes the SVM's subtype.
+	Subtype StorageVirtualMachineSubtype
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []Tag
+
+	// The SVM's UUID (universally unique identifier).
+	UUID *string
+
+	noSmithyDocumentSerde
+}
+
+// A filter used to restrict the results of describe calls for Amazon FSx for
+// NetApp ONTAP storage virtual machines (SVMs). You can use multiple filters to
+// return results that meet all applied filter requirements.
+type StorageVirtualMachineFilter struct {
+
+	// The name for this filter.
+	Name StorageVirtualMachineFilterName
+
+	// The values of the filter. These are all the values for any of the applied
+	// filters.
+	Values []string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the configuration of the Microsoft Active Directory (AD) directory to
+// which the Amazon FSx for ONTAP storage virtual machine (SVM) is joined. Pleae
+// note, account credentials are not returned in the response payload.
+type SvmActiveDirectoryConfiguration struct {
+
+	// The NetBIOS name of the Active Directory computer object that is joined to your
+	// SVM.
+	NetBiosName *string
+
+	// The configuration of the self-managed Microsoft Active Directory (AD) directory
+	// to which the Windows File Server or ONTAP storage virtual machine (SVM) instance
+	// is joined.
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryAttributes
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has four endpoints
+// that are used to access data or to manage the SVM using the NetApp ONTAP CLI,
+// REST API, or NetApp CloudManager. They are the Iscsi, Management, Nfs, and Smb
+// endpoints.
+type SvmEndpoint struct {
+
+	// The Domain Name Service (DNS) name for the file system. You can mount your file
+	// system using its DNS name.
+	DNSName *string
+
+	// The SVM endpoint's IP addresses.
+	IpAddresses []string
+
+	noSmithyDocumentSerde
+}
+
+// An Amazon FSx for NetApp ONTAP storage virtual machine (SVM) has the following
+// endpoints that are used to access data or to manage the SVM using the NetApp
+// ONTAP CLI, REST API, or NetApp CloudManager.
+type SvmEndpoints struct {
+
+	// An endpoint for connecting using the Internet Small Computer Systems Interface
+	// (iSCSI) protocol.
+	Iscsi *SvmEndpoint
+
+	// An endpoint for managing SVMs using the NetApp ONTAP CLI, NetApp ONTAP API, or
+	// NetApp CloudManager.
+	Management *SvmEndpoint
+
+	// An endpoint for connecting using the Network File System (NFS) protocol.
+	Nfs *SvmEndpoint
+
+	// An endpoint for connecting using the Server Message Block (SMB) protocol.
+	Smb *SvmEndpoint
+
+	noSmithyDocumentSerde
+}
+
 // Specifies a key-value pair for a resource tag.
 type Tag struct {
 
@@ -1186,6 +1684,38 @@ type Tag struct {
 	//
 	// This member is required.
 	Value *string
+
+	noSmithyDocumentSerde
+}
+
+// Describes the data tiering policy for an ONTAP volume. When enabled, Amazon FSx
+// for ONTAP's intelligent tiering automatically transitions a volume's data
+// between the file system's primary storage and capacity pool storage based on
+// your access patterns.
+type TieringPolicy struct {
+
+	// Specifies the number of days that user data in a volume must remain inactive
+	// before it is considered "cold" and moved to the capacity pool. Used with the
+	// AUTO and SNAPSHOT_ONLY tiering policies. Enter a whole number between 2 and 183.
+	// Default values are 31 days for AUTO and 2 days for SNAPSHOT_ONLY.
+	CoolingPeriod *int32
+
+	// Specifies the tiering policy used to transition data. Default value is
+	// SNAPSHOT_ONLY.
+	//
+	// * SNAPSHOT_ONLY - moves cold snapshots to the capacity pool
+	// storage tier.
+	//
+	// * AUTO - moves cold user data and snapshots to the capacity pool
+	// storage tier based on your access patterns.
+	//
+	// * ALL - moves all user data blocks
+	// in both the active file system and Snapshot copies to the storage pool tier.
+	//
+	// *
+	// NONE - keeps a volume's data in the primary storage tier, preventing it from
+	// being moved to the capacity pool tier.
+	Name TieringPolicyName
 
 	noSmithyDocumentSerde
 }
@@ -1251,6 +1781,33 @@ type UpdateFileSystemLustreConfiguration struct {
 	noSmithyDocumentSerde
 }
 
+// The configuration updates for an Amazon FSx for NetApp ONTAP file system.
+type UpdateFileSystemOntapConfiguration struct {
+
+	// The number of days to retain automatic backups. Setting this to 0 disables
+	// automatic backups. You can retain automatic backups for a maximum of 90 days.
+	// The default is 0.
+	AutomaticBackupRetentionDays *int32
+
+	// A recurring daily time, in the format HH:MM. HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 05:00
+	// specifies 5 AM daily.
+	DailyAutomaticBackupStartTime *string
+
+	// The ONTAP administrative password for the fsxadmin user.
+	FsxAdminPassword *string
+
+	// A recurring weekly time, in the format D:HH:MM. D is the day of the week, for
+	// which 1 represents Monday and 7 represents Sunday. For further details, see the
+	// ISO-8601 spec as described on Wikipedia
+	// (https://en.wikipedia.org/wiki/ISO_week_date). HH is the zero-padded hour of the
+	// day (0-23), and MM is the zero-padded minute of the hour. For example, 1:05:00
+	// specifies maintenance at 5 AM Monday.
+	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
+}
+
 // Updates the configuration for an existing Amazon FSx for Windows File Server
 // file system. Amazon FSx only overwrites existing properties with non-null values
 // provided in the request.
@@ -1290,6 +1847,114 @@ type UpdateFileSystemWindowsConfiguration struct {
 	// UTC time zone. Where d is the weekday number, from 1 through 7, with 1 = Monday
 	// and 7 = Sunday.
 	WeeklyMaintenanceStartTime *string
+
+	noSmithyDocumentSerde
+}
+
+// Used to specify changes to the ONTAP configuration for the volume you are
+// updating.
+type UpdateOntapVolumeConfiguration struct {
+
+	// Specifies the location in the SVM's namespace where the volume is mounted. The
+	// JunctionPath must have a leading forward slash, such as /vol3.
+	JunctionPath *string
+
+	// The security style for the volume, which can be UNIX. NTFS, or MIXED.
+	SecurityStyle SecurityStyle
+
+	// Specifies the size of the volume in megabytes.
+	SizeInMegabytes *int32
+
+	// Default is false. Set to true to enable the deduplication, compression, and
+	// compaction storage efficiency features on the volume.
+	StorageEfficiencyEnabled *bool
+
+	// Update the volume's data tiering policy.
+	TieringPolicy *TieringPolicy
+
+	noSmithyDocumentSerde
+}
+
+// Updates the Microsoft Active Directory (AD) configuration of an SVM joined to an
+// AD. Pleae note, account credentials are not returned in the response payload.
+type UpdateSvmActiveDirectoryConfiguration struct {
+
+	// The configuration that Amazon FSx uses to join the Windows File Server instance
+	// to a self-managed Microsoft Active Directory (AD) directory.
+	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryConfigurationUpdates
+
+	noSmithyDocumentSerde
+}
+
+// Describes an Amazon FSx for NetApp ONTAP volume.
+type Volume struct {
+
+	// The time that the resource was created, in seconds (since 1970-01-01T00:00:00Z),
+	// also known as Unix time.
+	CreationTime *time.Time
+
+	// The globally unique ID of the file system, assigned by Amazon FSx.
+	FileSystemId *string
+
+	// The lifecycle status of the volume.
+	//
+	// * CREATED - The volume is fully available
+	// for use.
+	//
+	// * CREATING - Amazon FSx is creating the new volume.
+	//
+	// * DELETING -
+	// Amazon FSx is deleting an existing volume.
+	//
+	// * FAILED - Amazon FSx was unable to
+	// create the volume.
+	//
+	// * MISCONFIGURED - The volume is in a failed but recoverable
+	// state.
+	//
+	// * PENDING - Amazon FSx has not started creating the volume.
+	Lifecycle VolumeLifecycle
+
+	// Describes why the volume lifecycle state changed.
+	LifecycleTransitionReason *LifecycleTransitionReason
+
+	// The name of the volume.
+	Name *string
+
+	// The configuration of an Amazon FSx for NetApp ONTAP volume
+	OntapConfiguration *OntapVolumeConfiguration
+
+	// The Amazon Resource Name (ARN) for a given resource. ARNs uniquely identify
+	// Amazon Web Services resources. We require an ARN when you need to specify a
+	// resource unambiguously across all of Amazon Web Services. For more information,
+	// see Amazon Resource Names (ARNs)
+	// (https://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html) in
+	// the Amazon Web Services General Reference.
+	ResourceARN *string
+
+	// A list of Tag values, with a maximum of 50 elements.
+	Tags []Tag
+
+	// The system-generated, unique ID of the volume.
+	VolumeId *string
+
+	// The type of volume; ONTAP is the only valid volume type.
+	VolumeType VolumeType
+
+	noSmithyDocumentSerde
+}
+
+// A filter used to restrict the results of describe calls for Amazon FSx for
+// NetApp ONTAP volumes. You can use multiple filters to return results that meet
+// all applied filter requirements.
+type VolumeFilter struct {
+
+	// The name for this filter.
+	Name VolumeFilterName
+
+	// The values of the filter. These are all the values for any of the applied
+	// filters.
+	Values []string
 
 	noSmithyDocumentSerde
 }
@@ -1342,8 +2007,8 @@ type WindowsAuditLogConfiguration struct {
 	// group must begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data
 	// Firehouse delivery stream must begin with the aws-fsx prefix. The destination
 	// ARN (either CloudWatch Logs log group or Kinesis Data Firehose delivery stream)
-	// must be in the same AWS partition, AWS region, and AWS account as your Amazon
-	// FSx file system.
+	// must be in the same Amazon Web Services partition, Amazon Web Services Region,
+	// and Amazon Web Services account as your Amazon FSx file system.
 	AuditLogDestination *string
 
 	noSmithyDocumentSerde
@@ -1395,24 +2060,25 @@ type WindowsAuditLogCreateConfiguration struct {
 	//
 	// *
 	// The destination ARN that you provide (either CloudWatch Logs log group or
-	// Kinesis Data Firehose delivery stream) must be in the same AWS partition, AWS
-	// region, and AWS account as your Amazon FSx file system.
+	// Kinesis Data Firehose delivery stream) must be in the same Amazon Web Services
+	// partition, Amazon Web Services Region, and Amazon Web Services account as your
+	// Amazon FSx file system.
 	//
-	// * The name of the
-	// Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix. The name
-	// of the Amazon Kinesis Data Firehouse delivery stream must begin with the aws-fsx
-	// prefix.
+	// * The name of the Amazon CloudWatch Logs log group must
+	// begin with the /aws/fsx prefix. The name of the Amazon Kinesis Data Firehouse
+	// delivery stream must begin with the aws-fsx prefix.
 	//
-	// * If you do not provide a destination in AuditLogDestination, Amazon
-	// FSx will create and use a log stream in the CloudWatch Logs /aws/fsx/windows log
-	// group.
+	// * If you do not provide a
+	// destination in AuditLogDestination, Amazon FSx will create and use a log stream
+	// in the CloudWatch Logs /aws/fsx/windows log group.
 	//
-	// * If AuditLogDestination is provided and the resource does not exist,
-	// the request will fail with a BadRequest error.
+	// * If AuditLogDestination is
+	// provided and the resource does not exist, the request will fail with a
+	// BadRequest error.
 	//
-	// * If FileAccessAuditLogLevel and
-	// FileShareAccessAuditLogLevel are both set to DISABLED, you cannot specify a
-	// destination in AuditLogDestination.
+	// * If FileAccessAuditLogLevel and FileShareAccessAuditLogLevel
+	// are both set to DISABLED, you cannot specify a destination in
+	// AuditLogDestination.
 	AuditLogDestination *string
 
 	noSmithyDocumentSerde
@@ -1421,8 +2087,8 @@ type WindowsAuditLogCreateConfiguration struct {
 // The configuration for this Microsoft Windows file system.
 type WindowsFileSystemConfiguration struct {
 
-	// The ID for an existing AWS Managed Microsoft Active Directory instance that the
-	// file system is joined to.
+	// The ID for an existing Amazon Web Services Managed Microsoft Active Directory
+	// instance that the file system is joined to.
 	ActiveDirectoryId *string
 
 	// An array of one or more DNS aliases that are currently associated with the
@@ -1508,7 +2174,8 @@ type WindowsFileSystemConfiguration struct {
 	RemoteAdministrationEndpoint *string
 
 	// The configuration of the self-managed Microsoft Active Directory (AD) directory
-	// to which the Windows File Server instance is joined.
+	// to which the Windows File Server or ONTAP storage virtual machine (SVM) instance
+	// is joined.
 	SelfManagedActiveDirectoryConfiguration *SelfManagedActiveDirectoryAttributes
 
 	// The throughput of the Amazon FSx file system, measured in megabytes per second.

@@ -49,9 +49,9 @@ type DeleteStackInstancesInput struct {
 	// This member is required.
 	StackSetName *string
 
-	// [Self-managed permissions] The names of the accounts that you want to delete
-	// stack instances for. You can specify Accounts or DeploymentTargets, but not
-	// both.
+	// [Self-managed permissions] The names of the Amazon Web Services accounts that
+	// you want to delete stack instances for. You can specify Accounts or
+	// DeploymentTargets, but not both.
 	Accounts []string
 
 	// [Service-managed permissions] Specifies whether you are acting as an account
@@ -63,9 +63,9 @@ type DeleteStackInstancesInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
+	// must be registered as a delegated administrator in the management account. For
+	// more information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
 	// in the CloudFormation User Guide.
 	CallAs types.CallAs

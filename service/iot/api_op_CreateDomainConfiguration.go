@@ -11,7 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a domain configuration.
+// Creates a domain configuration. Requires permission to access the
+// CreateDomainConfiguration
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateDomainConfiguration(ctx context.Context, params *CreateDomainConfigurationInput, optFns ...func(*Options)) (*CreateDomainConfigurationOutput, error) {
 	if params == nil {
 		params = &CreateDomainConfigurationInput{}
@@ -40,13 +43,13 @@ type CreateDomainConfigurationInput struct {
 	// The name of the domain.
 	DomainName *string
 
-	// The ARNs of the certificates that AWS IoT passes to the device during the TLS
+	// The ARNs of the certificates that IoT passes to the device during the TLS
 	// handshake. Currently you can specify only one certificate ARN. This value is not
-	// required for AWS-managed domains.
+	// required for Amazon Web Services-managed domains.
 	ServerCertificateArns []string
 
-	// The type of service delivered by the endpoint. AWS IoT Core currently supports
-	// only the DATA service type.
+	// The type of service delivered by the endpoint. Amazon Web Services IoT Core
+	// currently supports only the DATA service type.
 	ServiceType types.ServiceType
 
 	// Metadata which can be used to manage the domain configuration. For URI Request
@@ -57,7 +60,7 @@ type CreateDomainConfigurationInput struct {
 
 	// The certificate used to validate the server certificate and prove domain name
 	// ownership. This certificate must be signed by a public certificate authority.
-	// This value is not required for AWS-managed domains.
+	// This value is not required for Amazon Web Services-managed domains.
 	ValidationCertificateArn *string
 
 	noSmithyDocumentSerde

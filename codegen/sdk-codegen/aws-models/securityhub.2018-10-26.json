@@ -363,6 +363,32 @@
                 "target": "com.amazonaws.securityhub#ActionTarget"
             }
         },
+        "com.amazonaws.securityhub#Adjustment": {
+            "type": "structure",
+            "members": {
+                "Metric": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The metric to adjust.</p>"
+                    }
+                },
+                "Reason": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The reason for the adjustment.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>An adjustment to the CVSS metric.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AdjustmentList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Adjustment"
+            }
+        },
         "com.amazonaws.securityhub#AdminAccount": {
             "type": "structure",
             "members": {
@@ -1061,6 +1087,218 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Provides details about an auto scaling group.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails": {
+            "type": "structure",
+            "members": {
+                "DeviceName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The device name that is exposed to the EC2 instance. For example, <code>/dev/sdh</code> or <code>xvdh</code>.</p>"
+                    }
+                },
+                "Ebs": {
+                    "target": "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Parameters that are used to automatically set up Amazon EBS volumes when an instance is launched.</p>"
+                    }
+                },
+                "NoDevice": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to suppress the device that is included in the block device mapping of the Amazon Machine Image (AMI).</p>\n         <p>If <code>NoDevice</code> is <code>true</code>, then you cannot specify <code>Ebs</code>.></p>"
+                    }
+                },
+                "VirtualName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the virtual device (for example, <code>ephemeral0</code>).</p>\n         <p>You can provide either <code>VirtualName</code> or <code>Ebs</code>, but not both.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A block device for the instance.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationBlockDeviceMappingsEbsDetails": {
+            "type": "structure",
+            "members": {
+                "DeleteOnTermination": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to delete the volume when the instance is terminated.</p>"
+                    }
+                },
+                "Encrypted": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether to encrypt the volume.</p>"
+                    }
+                },
+                "Iops": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of input/output (I/O) operations per second (IOPS) to provision for the volume.</p>\n         <p>Only supported for <code>gp3</code> or <code>io1</code> volumes. Required for <code>io1</code> volumes. Not used with <code>standard</code>, <code>gp2</code>, <code>st1</code>, or <code>sc1</code> volumes.</p>"
+                    }
+                },
+                "SnapshotId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The snapshot ID of the volume to use.</p>\n         <p>You must specify either <code>VolumeSize</code> or <code>SnapshotId</code>.</p>"
+                    }
+                },
+                "VolumeSize": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume size, in GiBs. The following are the supported volumes sizes for each volume type:</p>\n         <ul>\n            <li>\n               <p>gp2 and gp3: 1-16,384</p>\n            </li>\n            <li>\n               <p>io1: 4-16,384</p>\n            </li>\n            <li>\n               <p>st1 and sc1: 125-16,384</p>\n            </li>\n            <li>\n               <p>standard: 1-1,024</p>\n            </li>\n         </ul>\n         <p>You must specify either <code>SnapshotId</code> or <code>VolumeSize</code>. If you specify both <code>SnapshotId</code> and <code>VolumeSize</code>, the volume size must be equal or greater than the size of the snapshot.</p>"
+                    }
+                },
+                "VolumeType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The volume type.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Parameters that are used to automatically set up EBS volumes when an instance is launched.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationBlockDeviceMappingsDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationDetails": {
+            "type": "structure",
+            "members": {
+                "AssociatePublicIpAddress": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>For Auto Scaling groups that run in a VPC, specifies whether to assign a public IP address to the group's instances.</p>"
+                    }
+                },
+                "BlockDeviceMappings": {
+                    "target": "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationBlockDeviceMappingsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the block devices for the instance.</p>"
+                    }
+                },
+                "ClassicLinkVpcId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of a ClassicLink-enabled VPC that EC2-Classic instances are linked to.</p>"
+                    }
+                },
+                "ClassicLinkVpcSecurityGroups": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifiers of one or more security groups for the VPC that is specified in <code>ClassicLinkVPCId</code>.</p>"
+                    }
+                },
+                "CreatedTime": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The creation date and time for the launch configuration.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                    }
+                },
+                "EbsOptimized": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the launch configuration is optimized for Amazon EBS I/O.</p>"
+                    }
+                },
+                "IamInstanceProfile": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or the ARN of the instance profile associated with the IAM role for the\n         instance. The instance profile contains the IAM role.</p>"
+                    }
+                },
+                "ImageId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the Amazon Machine Image (AMI) that is used to launch EC2\n         instances.</p>"
+                    }
+                },
+                "InstanceMonitoring": {
+                    "target": "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of monitoring for instances in the group.</p>"
+                    }
+                },
+                "InstanceType": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The instance type for the instances.</p>"
+                    }
+                },
+                "KernelId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the kernel associated with the AMI.</p>"
+                    }
+                },
+                "KeyName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the key pair.</p>"
+                    }
+                },
+                "LaunchConfigurationName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the launch configuration.</p>"
+                    }
+                },
+                "PlacementTenancy": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The tenancy of the instance. An instance with <code>dedicated</code> tenancy runs on\n         isolated, single-tenant hardware and can only be launched into a VPC.</p>"
+                    }
+                },
+                "RamdiskId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the RAM disk associated with the AMI.</p>"
+                    }
+                },
+                "SecurityGroups": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The security groups to assign to the instances in the Auto Scaling group.</p>"
+                    }
+                },
+                "SpotPrice": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The maximum hourly price to be paid for any Spot Instance that is launched to fulfill the\n         request.</p>"
+                    }
+                },
+                "UserData": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The user data to make available to the launched EC2 instances. Must be base64-encoded\n         text.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about a launch configuration.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationInstanceMonitoringDetails": {
+            "type": "structure",
+            "members": {
+                "Enabled": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If set to <code>true</code>, then instances in the group launch with detailed\n         monitoring.</p>\n         <p>If set to <code>false</code>, then instances in the group launch with basic\n         monitoring.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the type of monitoring for instances in the group.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsCertificateManagerCertificateDetails": {
@@ -1775,7 +2013,7 @@
                 "EncryptionKey": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS customer master key (CMK) used to encrypt the\n         build output artifacts.</p>\n         <p>You can specify either the ARN of the CMK or, if available, the\n         CMK alias (using the format alias/alias-name). </p>"
+                        "smithy.api#documentation": "<p>The KMS key used to encrypt the\n         build output artifacts.</p>\n         <p>You can specify either the ARN of the KMS key or, if available, the\n         KMS key alias (using the format alias/alias-name). </p>"
                     }
                 },
                 "Environment": {
@@ -2351,7 +2589,7 @@
                 "KmsMasterKeyId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMS customer master key (CMK) that will be used for KMS\n         encryption for the replica.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS key that will be used for KMS\n         encryption for the replica.</p>"
                     }
                 },
                 "ProvisionedThroughputOverride": {
@@ -2471,7 +2709,7 @@
                 "KmsMasterKeyArn": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS customer master key (CMK) that is used for the KMS\n         encryption.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the KMS key that is used for the KMS\n         encryption.</p>"
                     }
                 }
             },
@@ -3341,7 +3579,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the KMS customer master key (CMK) that was\n         used to protect the volume encryption key for the volume.</p>"
+                        "smithy.api#documentation": "<p>The ARN of the KMS key that was\n         used to protect the volume encryption key for the volume.</p>"
                     }
                 },
                 "Attachments": {
@@ -3385,6 +3623,330 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Details about an EC2 VPC.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2VpnConnectionDetails": {
+            "type": "structure",
+            "members": {
+                "VpnConnectionId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the VPN connection.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the VPN connection.</p>"
+                    }
+                },
+                "CustomerGatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the customer gateway that is at your end of the VPN connection.</p>"
+                    }
+                },
+                "CustomerGatewayConfiguration": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration information for the VPN connection's customer gateway, in the native XML\n         format.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of VPN connection.</p>"
+                    }
+                },
+                "VpnGatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the virtual private gateway that is at the Amazon Web Services side of the VPN\n         connection.</p>"
+                    }
+                },
+                "Category": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The category of the VPN connection. <code>VPN</code> indicates an Amazon Web Services VPN connection. <code>VPN-Classic</code>\n         indicates an Amazon Web Services Classic VPN connection.</p>"
+                    }
+                },
+                "VgwTelemetry": {
+                    "target": "com.amazonaws.securityhub#AwsEc2VpnConnectionVgwTelemetryList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about the VPN tunnel.</p>"
+                    }
+                },
+                "Options": {
+                    "target": "com.amazonaws.securityhub#AwsEc2VpnConnectionOptionsDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPN connection options.</p>"
+                    }
+                },
+                "Routes": {
+                    "target": "com.amazonaws.securityhub#AwsEc2VpnConnectionRoutesList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The static routes that are associated with the VPN connection.</p>"
+                    }
+                },
+                "TransitGatewayId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The identifier of the transit gateway that is associated with the VPN connection.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details about an Amazon EC2 VPN\n         connection.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2VpnConnectionOptionsDetails": {
+            "type": "structure",
+            "members": {
+                "StaticRoutesOnly": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the VPN connection uses static routes only.</p>"
+                    }
+                },
+                "TunnelOptions": {
+                    "target": "com.amazonaws.securityhub#AwsEc2VpnConnectionOptionsTunnelOptionsList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The VPN tunnel options.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>VPN connection options.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2VpnConnectionOptionsTunnelOptionsDetails": {
+            "type": "structure",
+            "members": {
+                "DpdTimeoutSeconds": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of seconds after which a Dead Peer Detection (DPD) timeout occurs.</p>"
+                    }
+                },
+                "IkeVersions": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Internet Key Exchange (IKE) versions that are permitted for the VPN tunnel.</p>"
+                    }
+                },
+                "OutsideIpAddress": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The external IP address of the VPN tunnel.</p>"
+                    }
+                },
+                "Phase1DhGroupNumbers": {
+                    "target": "com.amazonaws.securityhub#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 1 IKE\n         negotiations.</p>"
+                    }
+                },
+                "Phase1EncryptionAlgorithms": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 1 IKE\n         negotiations.</p>"
+                    }
+                },
+                "Phase1IntegrityAlgorithms": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permitted integrity algorithms for the VPN tunnel for phase 1 IKE\n         negotiations.</p>"
+                    }
+                },
+                "Phase1LifetimeSeconds": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifetime for phase 1 of the IKE negotiation, in seconds.</p>"
+                    }
+                },
+                "Phase2DhGroupNumbers": {
+                    "target": "com.amazonaws.securityhub#IntegerList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permitted Diffie-Hellman group numbers for the VPN tunnel for phase 2 IKE\n         negotiations.</p>"
+                    }
+                },
+                "Phase2EncryptionAlgorithms": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permitted encryption algorithms for the VPN tunnel for phase 2 IKE\n         negotiations.</p>"
+                    }
+                },
+                "Phase2IntegrityAlgorithms": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The permitted integrity algorithms for the VPN tunnel for phase 2 IKE\n         negotiations.</p>"
+                    }
+                },
+                "Phase2LifetimeSeconds": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The lifetime for phase 2 of the IKE negotiation, in seconds.</p>"
+                    }
+                },
+                "PreSharedKey": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The preshared key to establish initial authentication between the virtual private gateway\n         and the customer gateway.</p>"
+                    }
+                },
+                "RekeyFuzzPercentage": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The percentage of the rekey window, which is determined by\n         <code>RekeyMarginTimeSeconds</code> during which the rekey time is randomly selected.</p>"
+                    }
+                },
+                "RekeyMarginTimeSeconds": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The margin time, in seconds, before the phase 2 lifetime expires, during which the Amazon Web Services\n         side of the VPN connection performs an IKE rekey.</p>"
+                    }
+                },
+                "ReplayWindowSize": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of packets in an IKE replay window.</p>"
+                    }
+                },
+                "TunnelInsideCidr": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The range of inside IPv4 addresses for the tunnel.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The VPN tunnel options.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2VpnConnectionOptionsTunnelOptionsList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEc2VpnConnectionOptionsTunnelOptionsDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2VpnConnectionRoutesDetails": {
+            "type": "structure",
+            "members": {
+                "DestinationCidrBlock": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The CIDR block associated with the local subnet of the customer data center.</p>"
+                    }
+                },
+                "State": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The current state of the static route.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A static routes associated with\n         the VPN connection.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2VpnConnectionRoutesList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEc2VpnConnectionRoutesDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2VpnConnectionVgwTelemetryDetails": {
+            "type": "structure",
+            "members": {
+                "AcceptedRouteCount": {
+                    "target": "com.amazonaws.securityhub#Integer",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The number of accepted routes.</p>"
+                    }
+                },
+                "CertificateArn": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the VPN tunnel endpoint certificate.</p>"
+                    }
+                },
+                "LastStatusChange": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time of the last change in status.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                    }
+                },
+                "OutsideIpAddress": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Internet-routable IP address of the virtual private gateway's outside\n         interface.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the VPN tunnel.</p>"
+                    }
+                },
+                "StatusMessage": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>If an error occurs, a description of the error.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about the VPN tunnel.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEc2VpnConnectionVgwTelemetryList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsEc2VpnConnectionVgwTelemetryDetails"
+            }
+        },
+        "com.amazonaws.securityhub#AwsEcrContainerImageDetails": {
+            "type": "structure",
+            "members": {
+                "RegistryId": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Web Services account identifier that is associated with the registry that the image belongs\n         to.</p>"
+                    }
+                },
+                "RepositoryName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the repository that the image belongs to.</p>"
+                    }
+                },
+                "Architecture": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The architecture of the image.</p>"
+                    }
+                },
+                "ImageDigest": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The sha256 digest of the image manifest.</p>"
+                    }
+                },
+                "ImageTags": {
+                    "target": "com.amazonaws.securityhub#NonEmptyStringList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of tags that are associated with the image.</p>"
+                    }
+                },
+                "ImagePublishedAt": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The date and time when the image was pushed to the repository.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n         Date/Time Format</a>. The value cannot contain spaces. For example,\n         <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an Amazon ECR image.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsEcsClusterClusterSettingsDetails": {
@@ -6819,37 +7381,37 @@
                 "AWSAccountId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The twelve-digit account ID of the Amazon Web Services account that owns the CMK.</p>"
+                        "smithy.api#documentation": "<p>The twelve-digit account ID of the Amazon Web Services account that owns the KMS key.</p>"
                     }
                 },
                 "CreationDate": {
                     "target": "com.amazonaws.securityhub#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates when the CMK was created.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>"
+                        "smithy.api#documentation": "<p>Indicates when the KMS key was created.</p>\n         <p>Uses the <code>date-time</code> format specified in <a href=\"https://tools.ietf.org/html/rfc3339#section-5.6\">RFC 3339 section 5.6, Internet\n            Date/Time Format</a>. The value cannot contain spaces. For example,\n            <code>2020-03-22T13:22:13.933Z</code>.</p>"
                     }
                 },
                 "KeyId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The globally unique identifier for the CMK.</p>"
+                        "smithy.api#documentation": "<p>The globally unique identifier for the KMS key.</p>"
                     }
                 },
                 "KeyManager": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The manager of the CMK. CMKs in your Amazon Web Services account are either customer managed or Amazon Web Services managed.</p>"
+                        "smithy.api#documentation": "<p>The manager of the KMS key. KMS keys in your Amazon Web Services account are either customer managed or Amazon Web Services managed.</p>"
                     }
                 },
                 "KeyState": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The state of the CMK.</p>"
+                        "smithy.api#documentation": "<p>The state of the KMS key.</p>"
                     }
                 },
                 "Origin": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The source of the CMK's key material.</p>\n         <p>When this value is <code>AWS_KMS</code>, KMS created the key material.</p>\n         <p>When this value is <code>EXTERNAL</code>, the key material was imported from your\n         existing key management infrastructure or the CMK lacks key material.</p>\n         <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the CloudHSM cluster associated with a custom key store.</p>"
+                        "smithy.api#documentation": "<p>The source of the KMS key material.</p>\n         <p>When this value is <code>AWS_KMS</code>, KMS created the key material.</p>\n         <p>When this value is <code>EXTERNAL</code>, the key material was imported from your\n         existing key management infrastructure or the KMS key lacks key material.</p>\n         <p>When this value is <code>AWS_CLOUDHSM</code>, the key material was created in the CloudHSM cluster associated with a custom key store.</p>"
                     }
                 },
                 "Description": {
@@ -6857,10 +7419,16 @@
                     "traits": {
                         "smithy.api#documentation": "<p>A description of the key.</p>"
                     }
+                },
+                "KeyRotationStatus": {
+                    "target": "com.amazonaws.securityhub#Boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Whether the key has key rotation enabled.</p>"
+                    }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Contains metadata about a customer master key (CMK).</p>"
+                "smithy.api#documentation": "<p>Contains metadata about an KMS key.</p>"
             }
         },
         "com.amazonaws.securityhub#AwsLambdaFunctionCode": {
@@ -6951,7 +7519,7 @@
                 "KmsKeyArn": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed CMK.</p>"
+                        "smithy.api#documentation": "<p>The KMS key that is used to encrypt the function's environment variables. This key is only returned if you've configured a customer managed customer managed key.</p>"
                     }
                 },
                 "LastModified": {
@@ -9689,10 +10257,181 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Provides information about the Amazon S3 Public Access Block configuration for the S3 bucket.</p>"
                     }
+                },
+                "AccessControlList": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The access control list for the S3 bucket.</p>"
+                    }
+                },
+                "BucketLoggingConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketLoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The logging configuration for the S3 bucket.</p>"
+                    }
+                },
+                "BucketWebsiteConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketWebsiteConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The website configuration parameters for the S3 bucket.</p>"
+                    }
+                },
+                "BucketNotificationConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The notification configuration for the S3 bucket.</p>"
+                    }
                 }
             },
             "traits": {
                 "smithy.api#documentation": "<p>The details of an Amazon S3 bucket.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketLoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "DestinationBucketName": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the S3 bucket where log files for the S3 bucket are stored.</p>"
+                    }
+                },
+                "LogFilePrefix": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The prefix added to log files for the S3 bucket.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about logging for\n         the S3 bucket</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfiguration": {
+            "type": "structure",
+            "members": {
+                "Configurations": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Configurations for S3 bucket notifications.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The notification\n         configuration for the S3 bucket.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationDetail": {
+            "type": "structure",
+            "members": {
+                "Events": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationEvents",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The list of events that trigger a notification.</p>"
+                    }
+                },
+                "Filter": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filters that determine which S3 buckets generate notifications.</p>"
+                    }
+                },
+                "Destination": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN of the Lambda function, Amazon SQS queue, or Amazon SNS topic that generates the\n         notification.</p>"
+                    }
+                },
+                "Type": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates the type of notification. Notifications can be generated using Lambda functions,\n         Amazon SQS queues or Amazon SNS topics.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for an S3 bucket notification configuration.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationDetail"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationEvents": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#NonEmptyString"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationFilter": {
+            "type": "structure",
+            "members": {
+                "S3KeyFilter": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilter",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for an Amazon S3 filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Filtering information for the notifications. The\n         filtering is based on Amazon S3 key names.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilter": {
+            "type": "structure",
+            "members": {
+                "FilterRules": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilterRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter rules for the filter.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for an Amazon S3 filter.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilterRule": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilterRuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the filter is based on the prefix or suffix of the Amazon S3 key.</p>"
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The filter value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Details for a filter rule.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilterRuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Prefix",
+                        "name": "PREFIX"
+                    },
+                    {
+                        "value": "Suffix",
+                        "name": "SUFFIX"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilterRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsS3BucketNotificationConfigurationS3KeyFilterRule"
             }
         },
         "com.amazonaws.securityhub#AwsS3BucketServerSideEncryptionByDefault": {
@@ -9707,7 +10446,7 @@
                 "KMSMasterKeyID": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>KMS customer master key (CMK) ID to use for the default encryption.</p>"
+                        "smithy.api#documentation": "<p>KMS key ID to use for the default encryption.</p>"
                     }
                 }
             },
@@ -9749,6 +10488,142 @@
                 "target": "com.amazonaws.securityhub#AwsS3BucketServerSideEncryptionRule"
             }
         },
+        "com.amazonaws.securityhub#AwsS3BucketWebsiteConfiguration": {
+            "type": "structure",
+            "members": {
+                "ErrorDocument": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the error document for the website.</p>"
+                    }
+                },
+                "IndexDocumentSuffix": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the index document for the website.</p>"
+                    }
+                },
+                "RedirectAllRequestsTo": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRedirectTo",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The redirect behavior for requests to the website.</p>"
+                    }
+                },
+                "RoutingRules": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRoutingRules",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The rules for applying redirects for requests to the website.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Website parameters for the S3\n         bucket.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRedirectTo": {
+            "type": "structure",
+            "members": {
+                "Hostname": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the host to redirect requests to.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol to use when redirecting requests. By default, uses the same protocol as the\n         original request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The redirect behavior for requests\n         to the website.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRoutingRule": {
+            "type": "structure",
+            "members": {
+                "Condition": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRoutingRuleCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the condition that must be met in order to apply the routing rule.</p>"
+                    }
+                },
+                "Redirect": {
+                    "target": "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRoutingRuleRedirect",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides the rules to redirect the request if the condition in <code>Condition</code> is\n         met.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A rule for redirecting requests\n         to the website.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRoutingRuleCondition": {
+            "type": "structure",
+            "members": {
+                "HttpErrorCodeReturnedEquals": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates to redirect the request if the HTTP error code matches this value.</p>"
+                    }
+                },
+                "KeyPrefixEquals": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates to redirect the request if the key prefix matches this value.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The condition that must be met in order to apply the routing rule.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRoutingRuleRedirect": {
+            "type": "structure",
+            "members": {
+                "Hostname": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The host name to use in the redirect request.</p>"
+                    }
+                },
+                "HttpRedirectCode": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The HTTP redirect code to use in the response.</p>"
+                    }
+                },
+                "Protocol": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The protocol to use to redirect the request. By default, uses the protocol from the\n         original request.</p>"
+                    }
+                },
+                "ReplaceKeyPrefixWith": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The object key prefix to use in the redirect request.</p>\n         <p>Cannot be provided if <code>ReplaceKeyWith</code> is present.</p>"
+                    }
+                },
+                "ReplaceKeyWith": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The specific object key to use in the redirect request.</p>\n         <p>Cannot be provided if <code>ReplaceKeyPrefixWith</code> is present.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The rules to redirect the request if the condition in <code>Condition</code> is\n         met.</p>"
+            }
+        },
+        "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRoutingRules": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#AwsS3BucketWebsiteConfigurationRoutingRule"
+            }
+        },
         "com.amazonaws.securityhub#AwsS3ObjectDetails": {
             "type": "structure",
             "members": {
@@ -9785,7 +10660,7 @@
                 "SSEKMSKeyId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The identifier of the KMS symmetric customer managed\n         customer master key (CMK) that was used for the object.</p>"
+                        "smithy.api#documentation": "<p>The identifier of the KMS symmetric customer managed key that was used for the object.</p>"
                     }
                 }
             },
@@ -9811,7 +10686,7 @@
                 "KmsKeyId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN, Key ID, or alias of the KMS customer master key (CMK) used to encrypt the\n            <code>SecretString</code> or <code>SecretBinary</code> values for versions of this\n         secret.</p>"
+                        "smithy.api#documentation": "<p>The ARN, Key ID, or alias of the KMS key used to encrypt the\n            <code>SecretString</code> or <code>SecretBinary</code> values for versions of this\n         secret.</p>"
                     }
                 },
                 "RotationEnabled": {
@@ -9890,7 +10765,7 @@
                 "ProductName": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the product that generated the finding.</p>\n         <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p>\n         <p>When you use the Security Hub console to filter findings by product name, you use this attribute.</p>\n         <p>When you use the Security Hub API to filter findings by product name, you use the <code>aws/securityhub/ProductyName</code> attribute under <code>ProductFields</code>.</p>\n         <p>Security Hub does not synchronize those two attributes.</p>"
+                        "smithy.api#documentation": "<p>The name of the product that generated the finding.</p>\n         <p>Security Hub populates this attribute automatically for each finding. You cannot update it using <code>BatchImportFindings</code> or <code>BatchUpdateFindings</code>. The exception to this is when you use a custom integration.</p>\n         <p>When you use the Security Hub console to filter findings by product name, you use this attribute.</p>\n         <p>When you use the Security Hub API to filter findings by product name, you use the <code>aws/securityhub/ProductName</code> attribute under <code>ProductFields</code>.</p>\n         <p>Security Hub does not synchronize those two attributes.</p>"
                     }
                 },
                 "CompanyName": {
@@ -10739,7 +11614,7 @@
                 "KmsMasterKeyId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SNS or a custom\n         CMK.</p>"
+                        "smithy.api#documentation": "<p>The ID of an Amazon Web Services managed key for Amazon SNS or a customer managed key.</p>"
                     }
                 },
                 "Subscription": {
@@ -10803,7 +11678,7 @@
                 "KmsMasterKeyId": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of an Amazon Web Services managed customer master key (CMK) for Amazon SQS or a custom\n         CMK.</p>"
+                        "smithy.api#documentation": "<p>The ID of an Amazon Web Services managed key for Amazon SQS or a custom\n         KMS key.</p>"
                     }
                 },
                 "QueueName": {
@@ -11945,6 +12820,18 @@
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The base scoring vector for the CVSS score.</p>"
+                    }
+                },
+                "Source": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The origin of the original CVSS score and vector.</p>"
+                    }
+                },
+                "Adjustments": {
+                    "target": "com.amazonaws.securityhub#AdjustmentList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Adjustments to the CVSS metrics.</p>"
                     }
                 }
             },
@@ -13962,6 +14849,12 @@
         "com.amazonaws.securityhub#Integer": {
             "type": "integer"
         },
+        "com.amazonaws.securityhub#IntegerList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.securityhub#Integer"
+            }
+        },
         "com.amazonaws.securityhub#IntegrationType": {
             "type": "string",
             "traits": {
@@ -15527,7 +16420,7 @@
                 "MarketplaceUrl": {
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
-                        "smithy.api#documentation": "<p>For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service.</p>\n         <p>For integrations with third-party products, the Marketplace URL from which to subscribe to or purchase the product.</p>"
+                        "smithy.api#documentation": "<p>For integrations with Amazon Web Services services, the Amazon Web Services Console URL from which to activate the service.</p>\n         <p>For integrations with third-party products, the Amazon Web Services Marketplace URL from which to subscribe to or purchase the product.</p>"
                     }
                 },
                 "ActivationUrl": {
@@ -15975,7 +16868,7 @@
                 "AwsElbLoadBalancer": {
                     "target": "com.amazonaws.securityhub#AwsElbLoadBalancerDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>contains details about a Classic Load Balancer.</p>"
+                        "smithy.api#documentation": "<p>Contains details about a Classic Load Balancer.</p>"
                     }
                 },
                 "AwsIamGroup": {
@@ -16084,6 +16977,24 @@
                     "target": "com.amazonaws.securityhub#AwsEcsServiceDetails",
                     "traits": {
                         "smithy.api#documentation": "<p>Details about a service within an ECS cluster.</p>"
+                    }
+                },
+                "AwsAutoScalingLaunchConfiguration": {
+                    "target": "com.amazonaws.securityhub#AwsAutoScalingLaunchConfigurationDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Provides details about a launch configuration.</p>"
+                    }
+                },
+                "AwsEc2VpnConnection": {
+                    "target": "com.amazonaws.securityhub#AwsEc2VpnConnectionDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details about an EC2 VPN connection.</p>"
+                    }
+                },
+                "AwsEcrContainerImage": {
+                    "target": "com.amazonaws.securityhub#AwsEcrContainerImageDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>information about an Amazon ECR image.</p>"
                     }
                 }
             },
@@ -16525,6 +17436,18 @@
                     "target": "com.amazonaws.securityhub#NonEmptyString",
                     "traits": {
                         "smithy.api#documentation": "<p>The architecture used for the software package.</p>"
+                    }
+                },
+                "PackageManager": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the package.</p>"
+                    }
+                },
+                "FilePath": {
+                    "target": "com.amazonaws.securityhub#NonEmptyString",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The file system path to the package manager inventory file.</p>"
                     }
                 }
             },
@@ -17705,7 +18628,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#WorkflowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the investigation into the finding. The allowed values are the\n         following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n               <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or\n                  <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>RecordState</code> changes from <code>ARCHIVED</code> to\n                        <code>ACTIVE</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ComplianceStatus</code> changes from <code>PASSED</code> to either\n                        <code>WARNING</code>, <code>FAILED</code>, or\n                     <code>NOT_AVAILABLE</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that you notified the resource owner about the\n               security issue. Used when the initial reviewer is not the resource owner, and needs\n               intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be\n               acted upon.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved. </p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to <code>SUPPRESSED</code> or <code>RESOLVED</code> does not prevent a new finding for the same issue.</p>\n         <p>The allowed values are the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n               <p>Security Hub also resets the workflow status from <code>NOTIFIED</code> or\n                  <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>\n               <ul>\n                  <li>\n                     <p>\n                        <code>RecordState</code> changes from <code>ARCHIVED</code> to\n                        <code>ACTIVE</code>.</p>\n                  </li>\n                  <li>\n                     <p>\n                        <code>ComplianceStatus</code> changes from <code>PASSED</code> to either\n                        <code>WARNING</code>, <code>FAILED</code>, or\n                     <code>NOT_AVAILABLE</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that you notified the resource owner about the\n               security issue. Used when the initial reviewer is not the resource owner, and needs\n               intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved. </p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -17772,7 +18695,7 @@
                 "Status": {
                     "target": "com.amazonaws.securityhub#WorkflowStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The status of the investigation into the finding. The allowed values are the\n         following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n               <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or\n                  <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>\n               <ul>\n                  <li>\n                     <p>The record state changes from <code>ARCHIVED</code> to\n                     <code>ACTIVE</code>.</p>\n                  </li>\n                  <li>\n                     <p>The compliance status changes from <code>PASSED</code> to either\n                        <code>WARNING</code>, <code>FAILED</code>, or\n                     <code>NOT_AVAILABLE</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that you notified the resource owner about the\n               security issue. Used when the initial reviewer is not the resource owner, and needs\n               intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - The finding will not be reviewed again and will not be\n               acted upon.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The status of the investigation into the finding. The workflow status is specific to an individual finding. It does not affect the generation of new findings. For example, setting the workflow status to <code>SUPPRESSED</code> or <code>RESOLVED</code> does not prevent a new finding for the same issue.</p>\n         <p>The allowed values are the following.</p>\n         <ul>\n            <li>\n               <p>\n                  <code>NEW</code> - The initial state of a finding, before it is reviewed.</p>\n               <p>Security Hub also resets <code>WorkFlowStatus</code> from <code>NOTIFIED</code> or\n                  <code>RESOLVED</code> to <code>NEW</code> in the following cases:</p>\n               <ul>\n                  <li>\n                     <p>The record state changes from <code>ARCHIVED</code> to\n                     <code>ACTIVE</code>.</p>\n                  </li>\n                  <li>\n                     <p>The compliance status changes from <code>PASSED</code> to either\n                        <code>WARNING</code>, <code>FAILED</code>, or\n                     <code>NOT_AVAILABLE</code>.</p>\n                  </li>\n               </ul>\n            </li>\n            <li>\n               <p>\n                  <code>NOTIFIED</code> - Indicates that you notified the resource owner about the\n               security issue. Used when the initial reviewer is not the resource owner, and needs\n               intervention from the resource owner.</p>\n            </li>\n            <li>\n               <p>\n                  <code>RESOLVED</code> - The finding was reviewed and remediated and is now\n               considered resolved.</p>\n            </li>\n            <li>\n               <p>\n                  <code>SUPPRESSED</code> - Indicates that you reviewed the finding and do not believe that any action is needed. The finding is no longer updated.</p>\n            </li>\n         </ul>"
                     }
                 }
             },

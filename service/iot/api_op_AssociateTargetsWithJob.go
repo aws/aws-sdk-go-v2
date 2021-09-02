@@ -20,6 +20,11 @@ import (
 //
 // * The total
 // number of targets associated with a job must not exceed 100.
+//
+// Requires
+// permission to access the AssociateTargetsWithJob
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) AssociateTargetsWithJob(ctx context.Context, params *AssociateTargetsWithJobInput, optFns ...func(*Options)) (*AssociateTargetsWithJobOutput, error) {
 	if params == nil {
 		params = &AssociateTargetsWithJobInput{}
@@ -52,8 +57,8 @@ type AssociateTargetsWithJobInput struct {
 	Comment *string
 
 	// The namespace used to indicate that a job is a customer-managed job. When you
-	// specify a value for this parameter, AWS IoT Core sends jobs notifications to
-	// MQTT topics that contain the value in the following format.
+	// specify a value for this parameter, Amazon Web Services IoT Core sends jobs
+	// notifications to MQTT topics that contain the value in the following format.
 	// $aws/things/THING_NAME/jobs/JOB_ID/notify-namespace-NAMESPACE_ID/ The
 	// namespaceId feature is in public preview.
 	NamespaceId *string

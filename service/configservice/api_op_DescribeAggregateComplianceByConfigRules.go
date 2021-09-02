@@ -13,8 +13,9 @@ import (
 )
 
 // Returns a list of compliant and noncompliant rules with the number of resources
-// for compliant and noncompliant rules. The results can return an empty result
-// page, but if you have a nextToken, the results are displayed on the next page.
+// for compliant and noncompliant rules. Does not display rules that do not have
+// compliance results. The results can return an empty result page, but if you have
+// a nextToken, the results are displayed on the next page.
 func (c *Client) DescribeAggregateComplianceByConfigRules(ctx context.Context, params *DescribeAggregateComplianceByConfigRulesInput, optFns ...func(*Options)) (*DescribeAggregateComplianceByConfigRulesOutput, error) {
 	if params == nil {
 		params = &DescribeAggregateComplianceByConfigRulesInput{}
@@ -41,7 +42,7 @@ type DescribeAggregateComplianceByConfigRulesInput struct {
 	Filters *types.ConfigRuleComplianceFilters
 
 	// The maximum number of evaluation results returned on each page. The default is
-	// maximum. If you specify 0, AWS Config uses the default.
+	// maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -141,7 +142,7 @@ var _ DescribeAggregateComplianceByConfigRulesAPIClient = (*Client)(nil)
 // options for DescribeAggregateComplianceByConfigRules
 type DescribeAggregateComplianceByConfigRulesPaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. The default is
-	// maximum. If you specify 0, AWS Config uses the default.
+	// maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

@@ -29,8 +29,8 @@ func (c *Client) UpdateUser(ctx context.Context, params *UpdateUserInput, optFns
 
 type UpdateUserInput struct {
 
-	// The ID for the Amazon Web Services account; that the user is in. Currently, you
-	// use the ID for the Amazon Web Services account; that contains your Amazon
+	// The ID for the Amazon Web Services account that the user is in. Currently, you
+	// use the ID for the Amazon Web Services account that contains your Amazon
 	// QuickSight account.
 	//
 	// This member is required.
@@ -58,8 +58,8 @@ type UpdateUserInput struct {
 	// * ADMIN: A user who is an author, who can also manage Amazon
 	// QuickSight settings.
 	//
-	// The name of the QuickSight role is invisible to the user
-	// except for the console screens dealing with permissions.
+	// The name of the Amazon QuickSight role is invisible to the
+	// user except for the console screens dealing with permissions.
 	//
 	// This member is required.
 	Role types.UserRole
@@ -70,8 +70,8 @@ type UpdateUserInput struct {
 	UserName *string
 
 	// The URL of the custom OpenID Connect (OIDC) provider that provides identity to
-	// let a user federate into QuickSight with an associated AWS Identity and Access
-	// Management (IAM) role. This parameter should only be used when
+	// let a user federate into Amazon QuickSight with an associated Identity and
+	// Access Management(IAM) role. This parameter should only be used when
 	// ExternalLoginFederationProviderType parameter is set to CUSTOM_OIDC.
 	CustomFederationProviderUrl *string
 
@@ -91,18 +91,18 @@ type UpdateUserInput struct {
 	//
 	// A set of custom permissions includes any
 	// combination of these restrictions. Currently, you need to create the profile
-	// names for custom permission sets by using the QuickSight console. Then, you use
-	// the RegisterUser API operation to assign the named set of permissions to a
-	// QuickSight user. QuickSight custom permissions are applied through IAM policies.
-	// Therefore, they override the permissions typically granted by assigning
-	// QuickSight users to one of the default security cohorts in QuickSight (admin,
-	// author, reader). This feature is available only to QuickSight Enterprise edition
-	// subscriptions.
+	// names for custom permission sets by using the Amazon QuickSight console. Then,
+	// you use the RegisterUser API operation to assign the named set of permissions to
+	// a Amazon QuickSight user. Amazon QuickSight custom permissions are applied
+	// through IAMpolicies. Therefore, they override the permissions typically granted
+	// by assigning Amazon QuickSight users to one of the default security cohorts in
+	// Amazon QuickSight (admin, author, reader). This feature is available only to
+	// Amazon QuickSight Enterprise edition subscriptions.
 	CustomPermissionsName *string
 
 	// The type of supported external login provider that provides identity to let a
-	// user federate into QuickSight with an associated AWS Identity and Access
-	// Management (IAM) role. The type of supported external login provider can be one
+	// user federate into Amazon QuickSight with an associated Identity and Access
+	// Management(IAM) role. The type of supported external login provider can be one
 	// of the following.
 	//
 	// * COGNITO: Amazon Cognito. The provider URL is

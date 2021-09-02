@@ -50,6 +50,10 @@ type ExecuteChangeSetInput struct {
 	// them.
 	ClientRequestToken *string
 
+	// Preserves the state of previously provisioned resources when an operation fails.
+	// Default: True
+	DisableRollback *bool
+
 	// If you specified the name of a change set, specify the stack name or ID (ARN)
 	// that is associated with the change set you want to execute.
 	StackName *string

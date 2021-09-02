@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Updates a role alias.
+// Updates a role alias. Requires permission to access the UpdateRoleAlias
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) UpdateRoleAlias(ctx context.Context, params *UpdateRoleAliasInput, optFns ...func(*Options)) (*UpdateRoleAliasOutput, error) {
 	if params == nil {
 		params = &UpdateRoleAliasInput{}

@@ -13,9 +13,12 @@ import (
 )
 
 // Create a dimension that you can use to limit the scope of a metric used in a
-// security profile for AWS IoT Device Defender. For example, using a TOPIC_FILTER
+// security profile for IoT Device Defender. For example, using a TOPIC_FILTER
 // dimension, you can narrow down the scope of the metric only to MQTT topics whose
-// name match the pattern specified in the dimension.
+// name match the pattern specified in the dimension. Requires permission to access
+// the CreateDimension
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateDimension(ctx context.Context, params *CreateDimensionInput, optFns ...func(*Options)) (*CreateDimensionOutput, error) {
 	if params == nil {
 		params = &CreateDimensionInput{}
@@ -35,8 +38,8 @@ type CreateDimensionInput struct {
 
 	// Each dimension must have a unique client request token. If you try to create a
 	// new dimension with the same token as a dimension that already exists, an
-	// exception occurs. If you omit this value, AWS SDKs will automatically generate a
-	// unique client request.
+	// exception occurs. If you omit this value, Amazon Web Services SDKs will
+	// automatically generate a unique client request.
 	//
 	// This member is required.
 	ClientRequestToken *string

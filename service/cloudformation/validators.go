@@ -690,6 +690,26 @@ func (m *validateOpRegisterType) HandleInitialize(ctx context.Context, in middle
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRollbackStack struct {
+}
+
+func (*validateOpRollbackStack) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRollbackStack) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RollbackStackInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRollbackStackInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpSetStackPolicy struct {
 }
 
@@ -984,6 +1004,10 @@ func addOpRecordHandlerProgressValidationMiddleware(stack *middleware.Stack) err
 
 func addOpRegisterTypeValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpRegisterType{}, middleware.After)
+}
+
+func addOpRollbackStackValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRollbackStack{}, middleware.After)
 }
 
 func addOpSetStackPolicyValidationMiddleware(stack *middleware.Stack) error {
@@ -1736,6 +1760,21 @@ func validateOpRegisterTypeInput(v *RegisterTypeInput) error {
 		if err := validateLoggingConfig(v.LoggingConfig); err != nil {
 			invalidParams.AddNested("LoggingConfig", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRollbackStackInput(v *RollbackStackInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RollbackStackInput"}
+	if v.StackName == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("StackName"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

@@ -168,6 +168,15 @@ func awsRestjson1_deserializeOpDocumentCreateDiscovererOutput(v **CreateDiscover
 
 	for key, value := range shape {
 		switch key {
+		case "CrossAccount":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrossAccount = jtv
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -1512,6 +1521,15 @@ func awsRestjson1_deserializeOpDocumentDescribeDiscovererOutput(v **DescribeDisc
 
 	for key, value := range shape {
 		switch key {
+		case "CrossAccount":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrossAccount = jtv
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -4738,6 +4756,15 @@ func awsRestjson1_deserializeOpDocumentUpdateDiscovererOutput(v **UpdateDiscover
 
 	for key, value := range shape {
 		switch key {
+		case "CrossAccount":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrossAccount = jtv
+			}
+
 		case "Description":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -5900,6 +5927,15 @@ func awsRestjson1_deserializeDocumentDiscovererSummary(v **types.DiscovererSumma
 
 	for key, value := range shape {
 		switch key {
+		case "CrossAccount":
+			if value != nil {
+				jtv, ok := value.(bool)
+				if !ok {
+					return fmt.Errorf("expected __boolean to be of type *bool, got %T instead", value)
+				}
+				sv.CrossAccount = jtv
+			}
+
 		case "DiscovererArn":
 			if value != nil {
 				jtv, ok := value.(string)

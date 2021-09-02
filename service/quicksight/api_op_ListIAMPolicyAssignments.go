@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists IAM policy assignments in the current Amazon QuickSight account.
+// Lists IAMpolicy assignments in the current Amazon QuickSight account.
 func (c *Client) ListIAMPolicyAssignments(ctx context.Context, params *ListIAMPolicyAssignmentsInput, optFns ...func(*Options)) (*ListIAMPolicyAssignmentsOutput, error) {
 	if params == nil {
 		params = &ListIAMPolicyAssignmentsInput{}
@@ -29,7 +29,7 @@ func (c *Client) ListIAMPolicyAssignments(ctx context.Context, params *ListIAMPo
 
 type ListIAMPolicyAssignmentsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains these IAM policy
+	// The ID of the Amazon Web Services account that contains these IAMpolicy
 	// assignments.
 	//
 	// This member is required.
@@ -54,7 +54,7 @@ type ListIAMPolicyAssignmentsInput struct {
 
 type ListIAMPolicyAssignmentsOutput struct {
 
-	// Information describing the IAM policy assignments.
+	// Information describing the IAMpolicy assignments.
 	IAMPolicyAssignments []types.IAMPolicyAssignmentSummary
 
 	// The token for the next set of results, or null if there are no more results.

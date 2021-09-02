@@ -11,13 +11,13 @@ import (
 )
 
 // Sets the Cluster$VisibleToAllUsers value for an EMR cluster. When true, IAM
-// principals in the account can perform EMR cluster actions that their IAM
-// policies allow. When false, only the IAM principal that created the cluster and
-// the account root user can perform EMR actions on the cluster, regardless of IAM
-// permissions policies attached to other IAM principals. This action works on
-// running clusters. When you create a cluster, use the
-// RunJobFlowInput$VisibleToAllUsers parameter. For more information, see
-// Understanding the EMR Cluster VisibleToAllUsers Setting
+// principals in the Amazon Web Services account can perform EMR cluster actions
+// that their IAM policies allow. When false, only the IAM principal that created
+// the cluster and the Amazon Web Services account root user can perform EMR
+// actions on the cluster, regardless of IAM permissions policies attached to other
+// IAM principals. This action works on running clusters. When you create a
+// cluster, use the RunJobFlowInput$VisibleToAllUsers parameter. For more
+// information, see Understanding the EMR Cluster VisibleToAllUsers Setting
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
 // in the Amazon EMRManagement Guide.
 func (c *Client) SetVisibleToAllUsers(ctx context.Context, params *SetVisibleToAllUsersInput, optFns ...func(*Options)) (*SetVisibleToAllUsersOutput, error) {
@@ -43,10 +43,11 @@ type SetVisibleToAllUsersInput struct {
 	// This member is required.
 	JobFlowIds []string
 
-	// A value of true indicates that an IAM principal in the account can perform EMR
-	// actions on the cluster that the IAM policies attached to the principal allow. A
-	// value of false indicates that only the IAM principal that created the cluster
-	// and the Amazon Web Services root user can perform EMR actions on the cluster.
+	// A value of true indicates that an IAM principal in the Amazon Web Services
+	// account can perform EMR actions on the cluster that the IAM policies attached to
+	// the principal allow. A value of false indicates that only the IAM principal that
+	// created the cluster and the Amazon Web Services root user can perform EMR
+	// actions on the cluster.
 	//
 	// This member is required.
 	VisibleToAllUsers bool

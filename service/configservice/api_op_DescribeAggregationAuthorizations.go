@@ -32,7 +32,7 @@ func (c *Client) DescribeAggregationAuthorizations(ctx context.Context, params *
 type DescribeAggregationAuthorizationsInput struct {
 
 	// The maximum number of AggregationAuthorizations returned on each page. The
-	// default is maximum. If you specify 0, AWS Config uses the default.
+	// default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -130,7 +130,7 @@ var _ DescribeAggregationAuthorizationsAPIClient = (*Client)(nil)
 // DescribeAggregationAuthorizations
 type DescribeAggregationAuthorizationsPaginatorOptions struct {
 	// The maximum number of AggregationAuthorizations returned on each page. The
-	// default is maximum. If you specify 0, AWS Config uses the default.
+	// default is maximum. If you specify 0, Config uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

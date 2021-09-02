@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// List the tags for AWS Config resource.
+// List the tags for Config resource.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}
@@ -38,7 +38,7 @@ type ListTagsForResourceInput struct {
 	ResourceArn *string
 
 	// The maximum number of tags returned on each page. The limit maximum is 50. You
-	// cannot specify a number greater than 50. If you specify 0, AWS Config uses the
+	// cannot specify a number greater than 50. If you specify 0, Config uses the
 	// default.
 	Limit int32
 
@@ -139,7 +139,7 @@ var _ ListTagsForResourceAPIClient = (*Client)(nil)
 // ListTagsForResource
 type ListTagsForResourcePaginatorOptions struct {
 	// The maximum number of tags returned on each page. The limit maximum is 50. You
-	// cannot specify a number greater than 50. If you specify 0, AWS Config uses the
+	// cannot specify a number greater than 50. If you specify 0, Config uses the
 	// default.
 	Limit int32
 

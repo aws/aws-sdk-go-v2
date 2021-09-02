@@ -11,12 +11,12 @@ import (
 )
 
 // Deletes the configuration recorder. After the configuration recorder is deleted,
-// AWS Config will not record resource configuration changes until you create a new
+// Config will not record resource configuration changes until you create a new
 // configuration recorder. This action does not delete the configuration
 // information that was previously recorded. You will be able to access the
 // previously recorded information by using the GetResourceConfigHistory action,
-// but you will not be able to access this information in the AWS Config console
-// until you create a new configuration recorder.
+// but you will not be able to access this information in the Config console until
+// you create a new configuration recorder.
 func (c *Client) DeleteConfigurationRecorder(ctx context.Context, params *DeleteConfigurationRecorderInput, optFns ...func(*Options)) (*DeleteConfigurationRecorderOutput, error) {
 	if params == nil {
 		params = &DeleteConfigurationRecorderInput{}

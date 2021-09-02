@@ -67,7 +67,10 @@ type CreateAccessPointInput struct {
 	// fail.
 	RootDirectory *types.RootDirectory
 
-	// Creates tags associated with the access point. Each tag is a key-value pair.
+	// Creates tags associated with the access point. Each tag is a key-value pair,
+	// each key must be unique. For more information, see Tagging Amazon Web Services
+	// resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in
+	// the Amazon Web Services General Reference Guide.
 	Tags []types.Tag
 
 	noSmithyDocumentSerde
@@ -94,7 +97,7 @@ type CreateAccessPointOutput struct {
 	// The name of the access point. This is the value of the Name tag.
 	Name *string
 
-	// Identified the AWS account that owns the access point resource.
+	// Identified the Amazon Web Services account that owns the access point resource.
 	OwnerId *string
 
 	// The full POSIX identity, including the user ID, group ID, and secondary group

@@ -55,7 +55,7 @@ func (c *Client) DeleteBucketTagging(ctx context.Context, params *DeleteBucketTa
 
 type DeleteBucketTaggingInput struct {
 
-	// The account ID of the Outposts bucket tag set to be removed.
+	// The Amazon Web Services account ID of the Outposts bucket tag set to be removed.
 	//
 	// This member is required.
 	AccountId *string

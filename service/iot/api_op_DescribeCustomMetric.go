@@ -12,7 +12,10 @@ import (
 	"time"
 )
 
-// Gets information about a Device Defender detect custom metric.
+// Gets information about a Device Defender detect custom metric. Requires
+// permission to access the DescribeCustomMetric
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DescribeCustomMetric(ctx context.Context, params *DescribeCustomMetricInput, optFns ...func(*Options)) (*DescribeCustomMetricOutput, error) {
 	if params == nil {
 		params = &DescribeCustomMetricInput{}

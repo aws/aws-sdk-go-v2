@@ -10,9 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Starts recording configurations of the AWS resources you have selected to record
-// in your AWS account. You must have created at least one delivery channel to
-// successfully start the configuration recorder.
+// Starts recording configurations of the Amazon Web Services resources you have
+// selected to record in your Amazon Web Services account. You must have created at
+// least one delivery channel to successfully start the configuration recorder.
 func (c *Client) StartConfigurationRecorder(ctx context.Context, params *StartConfigurationRecorderInput, optFns ...func(*Options)) (*StartConfigurationRecorderOutput, error) {
 	if params == nil {
 		params = &StartConfigurationRecorderInput{}

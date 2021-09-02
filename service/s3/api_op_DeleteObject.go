@@ -80,7 +80,8 @@ type DeleteObjectInput struct {
 	Key *string
 
 	// Indicates whether S3 Object Lock should bypass Governance-mode restrictions to
-	// process this operation.
+	// process this operation. To use this header, you must have the
+	// s3:PutBucketPublicAccessBlock permission.
 	BypassGovernanceRetention bool
 
 	// The account ID of the expected bucket owner. If the bucket is owned by a

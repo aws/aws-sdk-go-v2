@@ -351,7 +351,7 @@
                     "name": "memorydb"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>Amazon MemoryDB for Redis is a fully managed, Redis-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.\n       \n       MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis, a popular open source data store, enabling you to leverage Redis’ flexible and friendly data structures, APIs, and commands.</p>",
+                "smithy.api#documentation": "<p>MemoryDB for Redis is a fully managed, Redis-compatible, in-memory database that delivers ultra-fast performance and Multi-AZ durability for modern applications built using microservices architectures.\n       \n       MemoryDB stores the entire database in-memory, enabling low latency and high throughput data access. It is compatible with Redis, a popular open source data store, enabling you to leverage Redis’ flexible and friendly data structures, APIs, and commands.</p>",
                 "smithy.api#title": "Amazon MemoryDB",
                 "smithy.api#xmlNamespace": {
                     "uri": "http://memorydb.amazonaws.com/doc/2021-01-01/"
@@ -447,7 +447,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Apply the service update to a list of clusters supplied. For more information on service updates and applying them, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/managing-updates.html#applying-updates\">Applying the service updates</a>.</p>"
+                "smithy.api#documentation": "<p>Apply the service update to a list of clusters supplied. For more information on service updates and applying them, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/managing-updates.html#applying-updates\">Applying the service updates</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#BatchUpdateClusterRequest": {
@@ -900,7 +900,7 @@
                 "TargetBucket": {
                     "target": "com.amazonaws.memorydb#TargetBucket",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.\n       \n       When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see \n       \n       <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/snapshots-exporting.html\">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>. \n       \n     </p>"
+                        "smithy.api#documentation": "<p>The Amazon S3 bucket to which the snapshot is exported. This parameter is used only when exporting a snapshot for external access.\n       \n       When using this parameter to export a snapshot, be sure MemoryDB has the needed permissions to this S3 bucket. For more information, see \n       \n       <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html\">Step 2: Grant MemoryDB Access to Your Amazon S3 Bucket</a>. \n       \n     </p>"
                     }
                 },
                 "KmsKeyId": {
@@ -960,7 +960,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates an Access Control List. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html\">Authenticating users with Access Contol Lists (ACLs)</a>.</p>"
+                "smithy.api#documentation": "<p>Creates an Access Control List. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html\">Authenticating users with Access Contol Lists (ACLs)</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#CreateACLRequest": {
@@ -1092,13 +1092,13 @@
                 "NumShards": {
                     "target": "com.amazonaws.memorydb#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of shards the cluster will contain.</p>\n         <p>Clusters can have up to 500 shards, with your data partitioned across the shards. For example, you can choose to configure a 500 node cluster that ranges between \n\t\t\t83 shards (one primary and 5 replicas per shard) and 500 shards (single primary and no replicas). Make sure there are enough available IP addresses to accommodate the increase. \n\t\t\tCommon pitfalls include the subnets in the subnet group have too small a CIDR range or the subnets are shared and heavily used by other clusters. </p>"
+                        "smithy.api#documentation": "<p>The number of shards the cluster will contain. The default value is 1. </p>"
                     }
                 },
                 "NumReplicasPerShard": {
                     "target": "com.amazonaws.memorydb#IntegerOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>The number of replicas to apply to each shard. The limit is 5.</p>"
+                        "smithy.api#documentation": "<p>The number of replicas to apply to each shard. The default value is 1. The maximum is 5. </p>"
                     }
                 },
                 "SubnetGroupName": {
@@ -1237,7 +1237,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For \n         more information, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/ParameterGroups.html\">Configuring engine parameters using parameter groups</a>.\n         \n         </p>"
+                "smithy.api#documentation": "<p>Creates a new MemoryDB parameter group. A parameter group is a collection of parameters and their values that are applied to all of the nodes in any cluster. For \n         more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/parametergroups.html\">Configuring engine parameters using parameter groups</a>.\n         \n         </p>"
             }
         },
         "com.amazonaws.memorydb#CreateParameterGroupRequest": {
@@ -1394,7 +1394,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a subnet group. A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment.\n         \n         When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes. \n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/SubnetGroups.html\">Subnets and subnet groups</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a subnet group. A subnet group is a collection of subnets (typically private) that you can designate for your clusters running in an Amazon Virtual Private Cloud (VPC) environment.\n         \n         When you create a cluster in an Amazon VPC, you must specify a subnet group. MemoryDB uses that subnet group to choose a subnet and IP addresses within that subnet to associate with your nodes. \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/subnetgroups.html\">Subnets and subnet groups</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#CreateSubnetGroupRequest": {
@@ -1468,7 +1468,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a MemoryDB user. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html\">Authenticating users with Access Contol Lists (ACLs)</a>.</p>"
+                "smithy.api#documentation": "<p>Creates a MemoryDB user. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html\">Authenticating users with Access Contol Lists (ACLs)</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#CreateUserRequest": {
@@ -1551,7 +1551,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes an Access Control List. The ACL must first be disassociated from the cluster before it can be deleted. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Clusters.ACLs.html\">Authenticating users with Access Contol Lists (ACLs)</a>.</p>"
+                "smithy.api#documentation": "<p>Deletes an Access Control List. The ACL must first be disassociated from the cluster before it can be deleted. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/clusters.acls.html\">Authenticating users with Access Contol Lists (ACLs)</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#DeleteACLRequest": {
@@ -3144,7 +3144,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.\n         \n         A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. \n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>\n         </p>"
+                "smithy.api#documentation": "<p>Lists all tags currently on a named resource.\n         \n         A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track your MemoryDB resources. \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>\n         </p>"
             }
         },
         "com.amazonaws.memorydb#ListTagsRequest": {
@@ -3911,6 +3911,7 @@
                     "code": "ShardNotFoundFault",
                     "httpResponseCode": 404
                 },
+                "smithy.api#documentation": "<p></p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -4311,7 +4312,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources. \n         When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see \n         <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging-Resources.html\">Tagging your MemoryDB resources</a>\n         </p>"
+                "smithy.api#documentation": "<p>A tag that can be added to an MemoryDB resource. Tags are composed of a Key/Value pair. You can use tags to categorize and track all your MemoryDB resources. \n         When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. A tag with a null Value is permitted. For more information, see \n         <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging-resources.html\">Tagging your MemoryDB resources</a>\n         </p>"
             }
         },
         "com.amazonaws.memorydb#TagList": {
@@ -4404,7 +4405,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. \n\n         When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. For more information, see \n\n         <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/IAM.ResourceLevelPermissions.html\">Resource-level permissions</a>.</p>\n         \n         <p>For example, you can use cost-allocation tags to your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value \n          (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories \n          (such as cost centers, application names, or owners) to organize your costs across multiple services.\n         \n         For more information, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/Tagging.html\">Using Cost Allocation Tags</a>.</p>"
+                "smithy.api#documentation": "<p>A tag is a key-value pair where the key and value are case-sensitive. You can use tags to categorize and track all your MemoryDB resources. \n\n         When you add or remove tags on clusters, those actions will be replicated to all nodes in the cluster. For more information, see \n\n         <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/iam.resourcelevelpermissions.html\">Resource-level permissions</a>.</p>\n         \n         <p>For example, you can use cost-allocation tags to your MemoryDB resources, Amazon generates a cost allocation report as a comma-separated value \n          (CSV) file with your usage and costs aggregated by your tags. You can apply tags that represent business categories \n          (such as cost centers, application names, or owners) to organize your costs across multiple services.\n         \n         For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/tagging.html\">Using Cost Allocation Tags</a>.</p>"
             }
         },
         "com.amazonaws.memorydb#TagResourceRequest": {
@@ -4894,7 +4895,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Updates a subnet group. For more information, see <a href=\"https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/SubnetGroups.Modifying.html\">Updating a subnet group</a>\n         </p>"
+                "smithy.api#documentation": "<p>Updates a subnet group. For more information, see <a href=\"https://docs.aws.amazon.com/MemoryDB/latest/devguide/ubnetGroups.Modifying.html\">Updating a subnet group</a>\n         </p>"
             }
         },
         "com.amazonaws.memorydb#UpdateSubnetGroupRequest": {

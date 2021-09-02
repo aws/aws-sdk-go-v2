@@ -12,8 +12,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the stored queries for a single AWS account and a single AWS Region. The
-// default is 100.
+// Lists the stored queries for a single Amazon Web Services account and a single
+// Amazon Web Services Region. The default is 100.
 func (c *Client) ListStoredQueries(ctx context.Context, params *ListStoredQueriesInput, optFns ...func(*Options)) (*ListStoredQueriesOutput, error) {
 	if params == nil {
 		params = &ListStoredQueriesInput{}

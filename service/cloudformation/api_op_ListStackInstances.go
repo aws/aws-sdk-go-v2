@@ -14,7 +14,8 @@ import (
 
 // Returns summary information about stack instances that are associated with the
 // specified stack set. You can filter for stack instances that are associated with
-// a specific account name or Region, or that have a specific status.
+// a specific Amazon Web Services account name or Region, or that have a specific
+// status.
 func (c *Client) ListStackInstances(ctx context.Context, params *ListStackInstancesInput, optFns ...func(*Options)) (*ListStackInstancesOutput, error) {
 	if params == nil {
 		params = &ListStackInstancesInput{}
@@ -47,9 +48,9 @@ type ListStackInstancesInput struct {
 	// management account, specify SELF.
 	//
 	// * If you are signed in to a delegated
-	// administrator account, specify DELEGATED_ADMIN. Your account must be registered
-	// as a delegated administrator in the management account. For more information,
-	// see Register a delegated administrator
+	// administrator account, specify DELEGATED_ADMIN. Your Amazon Web Services account
+	// must be registered as a delegated administrator in the management account. For
+	// more information, see Register a delegated administrator
 	// (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/stacksets-orgs-delegated-admin.html)
 	// in the CloudFormation User Guide.
 	CallAs types.CallAs
@@ -70,7 +71,8 @@ type ListStackInstancesInput struct {
 	// response object's NextToken parameter is set to null.
 	NextToken *string
 
-	// The name of the account that you want to list stack instances for.
+	// The name of the Amazon Web Services account that you want to list stack
+	// instances for.
 	StackInstanceAccount *string
 
 	// The name of the Region where you want to list stack instances.

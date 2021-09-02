@@ -29,7 +29,7 @@ func (c *Client) DescribeRemediationConfigurations(ctx context.Context, params *
 
 type DescribeRemediationConfigurationsInput struct {
 
-	// A list of AWS Config rule names of remediation configurations for which you want
+	// A list of Config rule names of remediation configurations for which you want
 	// details.
 	//
 	// This member is required.

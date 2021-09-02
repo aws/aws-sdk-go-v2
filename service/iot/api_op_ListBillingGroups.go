@@ -12,7 +12,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the billing groups you have created.
+// Lists the billing groups you have created. Requires permission to access the
+// ListBillingGroups
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListBillingGroups(ctx context.Context, params *ListBillingGroupsInput, optFns ...func(*Options)) (*ListBillingGroupsOutput, error) {
 	if params == nil {
 		params = &ListBillingGroupsInput{}

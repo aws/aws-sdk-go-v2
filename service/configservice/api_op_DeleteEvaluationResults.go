@@ -10,10 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes the evaluation results for the specified AWS Config rule. You can
-// specify one AWS Config rule per request. After you delete the evaluation
-// results, you can call the StartConfigRulesEvaluation API to start evaluating
-// your AWS resources against the rule.
+// Deletes the evaluation results for the specified Config rule. You can specify
+// one Config rule per request. After you delete the evaluation results, you can
+// call the StartConfigRulesEvaluation API to start evaluating your Amazon Web
+// Services resources against the rule.
 func (c *Client) DeleteEvaluationResults(ctx context.Context, params *DeleteEvaluationResultsInput, optFns ...func(*Options)) (*DeleteEvaluationResultsOutput, error) {
 	if params == nil {
 		params = &DeleteEvaluationResultsInput{}
@@ -32,8 +32,7 @@ func (c *Client) DeleteEvaluationResults(ctx context.Context, params *DeleteEval
 //
 type DeleteEvaluationResultsInput struct {
 
-	// The name of the AWS Config rule for which you want to delete the evaluation
-	// results.
+	// The name of the Config rule for which you want to delete the evaluation results.
 	//
 	// This member is required.
 	ConfigRuleName *string
@@ -41,8 +40,7 @@ type DeleteEvaluationResultsInput struct {
 	noSmithyDocumentSerde
 }
 
-// The output when you delete the evaluation results for the specified AWS Config
-// rule.
+// The output when you delete the evaluation results for the specified Config rule.
 type DeleteEvaluationResultsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

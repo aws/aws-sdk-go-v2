@@ -158,6 +158,10 @@ type CreateServerInput struct {
 	// Key-value pairs that can be used to group and search for servers.
 	Tags []types.Tag
 
+	// Specifies the workflow ID for the workflow to assign and the execution role used
+	// for executing the workflow.
+	WorkflowDetails *types.WorkflowDetails
+
 	noSmithyDocumentSerde
 }
 

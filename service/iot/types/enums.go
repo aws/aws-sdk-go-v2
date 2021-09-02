@@ -40,6 +40,26 @@ func (ActionType) Values() []ActionType {
 	}
 }
 
+type AggregationTypeName string
+
+// Enum values for AggregationTypeName
+const (
+	AggregationTypeNameStatistics  AggregationTypeName = "Statistics"
+	AggregationTypeNamePercentiles AggregationTypeName = "Percentiles"
+	AggregationTypeNameCardinality AggregationTypeName = "Cardinality"
+)
+
+// Values returns all known values for AggregationTypeName. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (AggregationTypeName) Values() []AggregationTypeName {
+	return []AggregationTypeName{
+		"Statistics",
+		"Percentiles",
+		"Cardinality",
+	}
+}
+
 type AlertTargetType string
 
 // Enum values for AlertTargetType
@@ -786,6 +806,74 @@ func (FieldType) Values() []FieldType {
 		"Number",
 		"String",
 		"Boolean",
+	}
+}
+
+type FleetMetricUnit string
+
+// Enum values for FleetMetricUnit
+const (
+	FleetMetricUnitSeconds         FleetMetricUnit = "Seconds"
+	FleetMetricUnitMicroseconds    FleetMetricUnit = "Microseconds"
+	FleetMetricUnitMilliseconds    FleetMetricUnit = "Milliseconds"
+	FleetMetricUnitBytes           FleetMetricUnit = "Bytes"
+	FleetMetricUnitKilobytes       FleetMetricUnit = "Kilobytes"
+	FleetMetricUnitMegabytes       FleetMetricUnit = "Megabytes"
+	FleetMetricUnitGigabytes       FleetMetricUnit = "Gigabytes"
+	FleetMetricUnitTerabytes       FleetMetricUnit = "Terabytes"
+	FleetMetricUnitBits            FleetMetricUnit = "Bits"
+	FleetMetricUnitKilobits        FleetMetricUnit = "Kilobits"
+	FleetMetricUnitMegabits        FleetMetricUnit = "Megabits"
+	FleetMetricUnitGigabits        FleetMetricUnit = "Gigabits"
+	FleetMetricUnitTerabits        FleetMetricUnit = "Terabits"
+	FleetMetricUnitPercent         FleetMetricUnit = "Percent"
+	FleetMetricUnitCount           FleetMetricUnit = "Count"
+	FleetMetricUnitBytesSecond     FleetMetricUnit = "Bytes/Second"
+	FleetMetricUnitKilobytesSecond FleetMetricUnit = "Kilobytes/Second"
+	FleetMetricUnitMegabytesSecond FleetMetricUnit = "Megabytes/Second"
+	FleetMetricUnitGigabytesSecond FleetMetricUnit = "Gigabytes/Second"
+	FleetMetricUnitTerabytesSecond FleetMetricUnit = "Terabytes/Second"
+	FleetMetricUnitBitsSecond      FleetMetricUnit = "Bits/Second"
+	FleetMetricUnitKilobitsSecond  FleetMetricUnit = "Kilobits/Second"
+	FleetMetricUnitMegabitsSecond  FleetMetricUnit = "Megabits/Second"
+	FleetMetricUnitGigabitsSecond  FleetMetricUnit = "Gigabits/Second"
+	FleetMetricUnitTerabitsSecond  FleetMetricUnit = "Terabits/Second"
+	FleetMetricUnitCountSecond     FleetMetricUnit = "Count/Second"
+	FleetMetricUnitNone            FleetMetricUnit = "None"
+)
+
+// Values returns all known values for FleetMetricUnit. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (FleetMetricUnit) Values() []FleetMetricUnit {
+	return []FleetMetricUnit{
+		"Seconds",
+		"Microseconds",
+		"Milliseconds",
+		"Bytes",
+		"Kilobytes",
+		"Megabytes",
+		"Gigabytes",
+		"Terabytes",
+		"Bits",
+		"Kilobits",
+		"Megabits",
+		"Gigabits",
+		"Terabits",
+		"Percent",
+		"Count",
+		"Bytes/Second",
+		"Kilobytes/Second",
+		"Megabytes/Second",
+		"Gigabytes/Second",
+		"Terabytes/Second",
+		"Bits/Second",
+		"Kilobits/Second",
+		"Megabits/Second",
+		"Gigabits/Second",
+		"Terabits/Second",
+		"Count/Second",
+		"None",
 	}
 }
 

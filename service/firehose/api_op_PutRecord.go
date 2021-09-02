@@ -21,7 +21,7 @@ import (
 // increase, see Amazon Kinesis Data Firehose Limits
 // (https://docs.aws.amazon.com/firehose/latest/dev/limits.html). You must specify
 // the name of the delivery stream and the data record when using PutRecord. The
-// data record consists of a data blob that can be up to 1,000 KB in size, and any
+// data record consists of a data blob that can be up to 1,000 KiB in size, and any
 // kind of data. For example, it can be a segment from a log file, geographic
 // location data, website clickstream data, and so on. Kinesis Data Firehose
 // buffers records before delivering them to the destination. To disambiguate the

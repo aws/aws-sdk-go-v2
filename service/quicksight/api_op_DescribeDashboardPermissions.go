@@ -29,13 +29,13 @@ func (c *Client) DescribeDashboardPermissions(ctx context.Context, params *Descr
 
 type DescribeDashboardPermissionsInput struct {
 
-	// The ID of the Amazon Web Services account; that contains the dashboard that
+	// The ID of the Amazon Web Services account that contains the dashboard that
 	// you're describing permissions for.
 	//
 	// This member is required.
 	AwsAccountId *string
 
-	// The ID for the dashboard, also added to the IAM policy.
+	// The ID for the dashboard, also added to the IAMpolicy.
 	//
 	// This member is required.
 	DashboardId *string

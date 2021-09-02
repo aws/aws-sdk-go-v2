@@ -65,6 +65,16 @@
                 "smithy.api#pattern": "^arn:"
             }
         },
+        "com.amazonaws.transfer#CallbackToken": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^\\w+$"
+            }
+        },
         "com.amazonaws.transfer#Certificate": {
             "type": "string",
             "traits": {
@@ -85,9 +95,32 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>This exception is thrown when the <code>UpdatServer</code> is called for a file transfer\n      protocol-enabled server that has VPC as the endpoint type and the server's\n        <code>VpcEndpointID</code> is not in the available state.</p>",
+                "smithy.api#documentation": "<p>This exception is thrown when the <code>UpdateServer</code> is called for a file transfer\n      protocol-enabled server that has VPC as the endpoint type and the server's\n        <code>VpcEndpointID</code> is not in the available state.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 409
+            }
+        },
+        "com.amazonaws.transfer#CopyStepDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.transfer#WorkflowStepName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step, used as an identifier.</p>"
+                    }
+                },
+                "DestinationFileLocation": {
+                    "target": "com.amazonaws.transfer#InputFileLocation"
+                },
+                "OverwriteExisting": {
+                    "target": "com.amazonaws.transfer#OverwriteExisting",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A flag that indicates whether or not to overwrite an existing file of the same name.\n      The default is <code>FALSE</code>.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Each step type has its own <code>StepDetails</code> structure.</p>"
             }
         },
         "com.amazonaws.transfer#CreateAccess": {
@@ -131,19 +164,19 @@
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
                     }
                 },
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"your-personal-report.pdf\", \"Target\": \"/bucket3/customized-reports/${transfer:UserName}.pdf\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the scope-down policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"your-personal-report.pdf\", \"Target\": \"/bucket3/customized-reports/${transfer:UserName}.pdf\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
                     }
                 },
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n         <note>\n            <p>This only applies when domain of <code>ServerId</code> is S3.\n      Amazon EFS does not use scope-down policies.</p>\n            <p>For scope-down policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p>\n            <p>For an example of a scope-down policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html\">Example\n          scope-down policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services Security Token Service API\n          Reference</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n         <note>\n            <p>This only applies when the domain of <code>ServerId</code> is S3. EFS does not use session policies.</p>\n            <p>For session policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>      \n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example\n          session policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services Security Token Service API\n          Reference</i>.</p>\n         </note>"
                     }
                 },
                 "PosixProfile": {
@@ -211,6 +244,9 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
                 },
                 {
                     "target": "com.amazonaws.transfer#ServiceUnavailableException"
@@ -291,6 +327,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for servers.</p>"
                     }
+                },
+                "WorkflowDetails": {
+                    "target": "com.amazonaws.transfer#WorkflowDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.</p>"
+                    }
                 }
             }
         },
@@ -332,7 +374,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a user and associates them with an existing file transfer protocol-enabled server.\n      You can only create and associate users with servers that have the\n        <code>IdentityProviderType</code> set to <code>SERVICE_MANAGED</code>. Using parameters for\n        <code>CreateUser</code>, you can specify the user name, set the home directory, store the\n      user's public key, and assign the user's Amazon Web Services Identity and Access Management (IAM)\n      role. You can also optionally add a scope-down policy, and assign metadata with tags that can\n      be used to group and search for users.</p>"
+                "smithy.api#documentation": "<p>Creates a user and associates them with an existing file transfer protocol-enabled server.\n      You can only create and associate users with servers that have the\n        <code>IdentityProviderType</code> set to <code>SERVICE_MANAGED</code>. Using parameters for\n        <code>CreateUser</code>, you can specify the user name, set the home directory, store the\n      user's public key, and assign the user's Amazon Web Services Identity and Access Management (IAM)\n      role. You can also optionally add a session policy, and assign metadata with tags that can\n      be used to group and search for users.</p>"
             }
         },
         "com.amazonaws.transfer#CreateUserRequest": {
@@ -347,19 +389,19 @@
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
                     }
                 },
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n\n         <p>\n            <code>[ { \"Entry\": \"your-personal-report.pdf\", \"Target\":\n        \"/bucket3/customized-reports/${transfer:UserName}.pdf\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the scope-down policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n\n         <p>\n            <code>[ { \"Entry\": \"your-personal-report.pdf\", \"Target\":\n        \"/bucket3/customized-reports/${transfer:UserName}.pdf\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
                     }
                 },
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n\n         <note>\n            <p>This only applies when domain of ServerId is S3. EFS does not use scope down policy.</p>\n            <p>For scope-down policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n\n      \n\n            <p>For an example of a scope-down policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html\">Example scope-down\n        policy</a>.</p>\n\n      \n\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services\n          Security Token Service API Reference</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n\n         <note>\n            <p>This only applies when the domain of <code>ServerId</code> is S3. EFS does not use session policies.</p>\n            <p>For session policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n\n      \n\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example session\n        policy</a>.</p>\n\n      \n\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services\n          Security Token Service API Reference</i>.</p>\n         </note>"
                     }
                 },
                 "PosixProfile": {
@@ -397,7 +439,7 @@
                 "UserName": {
                     "target": "com.amazonaws.transfer#UserName",
                     "traits": {
-                        "smithy.api#documentation": "<p>A unique string that identifies a user and is associated with a as specified by the\n        <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters\n      long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen\n      '-', period '.', and at sign '@'. The user name can't start\n      with a hyphen, period, or at sign.</p>",
+                        "smithy.api#documentation": "<p>A unique string that identifies a user and is associated with a <code>ServerId</code>. This user name must be a minimum of 3 and a maximum of 100 characters\n      long. The following are valid characters: a-z, A-Z, 0-9, underscore '_', hyphen\n      '-', period '.', and at sign '@'. The user name can't start\n      with a hyphen, period, or at sign.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -419,6 +461,141 @@
                         "smithy.api#documentation": "<p>A unique string that identifies a user account associated with a server.</p>",
                         "smithy.api#required": {}
                     }
+                }
+            }
+        },
+        "com.amazonaws.transfer#CreateWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#CreateWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#CreateWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceExistsException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>\n      Allows you to create a workflow with specified steps and step details the workflow invokes after file transfer completes.\n      After creating a workflow, you can associate the workflow created with any transfer servers by specifying the <code>workflow-details</code> field in <code>CreateServer</code> and <code>UpdateServer</code> operations.\n    </p>"
+            }
+        },
+        "com.amazonaws.transfer#CreateWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "Description": {
+                    "target": "com.amazonaws.transfer#WorkflowDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A textual description for the workflow.</p>"
+                    }
+                },
+                "Steps": {
+                    "target": "com.amazonaws.transfer#WorkflowSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the details for the steps that are in the specified workflow.</p>\n         <p>\n      The <code>TYPE</code> specifies which of the following actions is being taken for this step.\n    </p>\n         <ul>\n            <li>\n               <p>\n                  <i>Copy</i>: copy the file to another location</p>\n            </li>\n            <li>\n               <p>\n                  <i>Custom</i>: custom step with a lambda target</p>\n            </li>\n            <li>\n               <p>\n                  <i>Delete</i>: delete the file</p>\n            </li>\n            <li>\n               <p>\n                  <i>Tag</i>: add a tag to the file</p>\n            </li>\n         </ul>\n         <p>\n      For file location, you specify either the S3 bucket and key, or the EFS filesystem ID and path.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "OnExceptionSteps": {
+                    "target": "com.amazonaws.transfer#WorkflowSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.transfer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached\n      to workflows for any purpose.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#CreateWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#CustomStepDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.transfer#WorkflowStepName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step, used as an identifier.</p>"
+                    }
+                },
+                "Target": {
+                    "target": "com.amazonaws.transfer#CustomStepTarget",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ARN for the lambda function that is being called.</p>"
+                    }
+                },
+                "TimeoutSeconds": {
+                    "target": "com.amazonaws.transfer#CustomStepTimeoutSeconds",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Timeout, in seconds, for the step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Each step type has its own <code>StepDetails</code> structure.</p>"
+            }
+        },
+        "com.amazonaws.transfer#CustomStepStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "SUCCESS",
+                        "name": "SUCCESS"
+                    },
+                    {
+                        "value": "FAILURE",
+                        "name": "FAILURE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#CustomStepTarget": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 170
+                },
+                "smithy.api#pattern": "^arn:[a-z-]+:lambda:.*$"
+            }
+        },
+        "com.amazonaws.transfer#CustomStepTimeoutSeconds": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#box": {},
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 1800
                 }
             }
         },
@@ -528,7 +705,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Deletes a user's Secure Shell (SSH) public key.</p>\n\n         <p>No response is returned from this operation.</p>"
+                "smithy.api#documentation": "<p>Deletes a user's Secure Shell (SSH) public key.</p>"
             }
         },
         "com.amazonaws.transfer#DeleteSshPublicKeyRequest": {
@@ -555,6 +732,20 @@
                         "smithy.api#required": {}
                     }
                 }
+            }
+        },
+        "com.amazonaws.transfer#DeleteStepDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.transfer#WorkflowStepName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step, used as an identifier.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The name of the step, used to identify the step that is being deleted.</p>"
             }
         },
         "com.amazonaws.transfer#DeleteUser": {
@@ -594,6 +785,44 @@
                     "target": "com.amazonaws.transfer#UserName",
                     "traits": {
                         "smithy.api#documentation": "<p>A unique string that identifies a user that is being deleted from a server.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#DeleteWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DeleteWorkflowRequest"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deletes the specified workflow.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DeleteWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -658,6 +887,70 @@
                     "target": "com.amazonaws.transfer#DescribedAccess",
                     "traits": {
                         "smithy.api#documentation": "<p>The external ID of the server that the access is attached to.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#DescribeExecution": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DescribeExecutionRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#DescribeExecutionResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>You can use <code>DescribeExecution</code> to check the details of the execution of the specified workflow.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribeExecutionRequest": {
+            "type": "structure",
+            "members": {
+                "ExecutionId": {
+                    "target": "com.amazonaws.transfer#ExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the execution of a workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#DescribeExecutionResponse": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Execution": {
+                    "target": "com.amazonaws.transfer#DescribedExecution",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that contains the details of the workflow' execution.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -827,6 +1120,56 @@
                 }
             }
         },
+        "com.amazonaws.transfer#DescribeWorkflow": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#DescribeWorkflowRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#DescribeWorkflowResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the specified workflow.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribeWorkflowRequest": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#DescribeWorkflowResponse": {
+            "type": "structure",
+            "members": {
+                "Workflow": {
+                    "target": "com.amazonaws.transfer#DescribedWorkflow",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The structure that contains the details of the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#DescribedAccess": {
             "type": "structure",
             "members": {
@@ -839,19 +1182,19 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n    \n         <p>In most cases, you can use this value instead of the scope-down policy to lock down the\n      associated access to the designated home directory (\"<code>chroot</code>\"). To do this, you\n      can set <code>Entry</code> to '/' and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n    \n         <p>In most cases, you can use this value instead of the session policy to lock down the\n      associated access to the designated home directory (\"<code>chroot</code>\"). To do this, you\n      can set <code>Entry</code> to '/' and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>"
                     }
                 },
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
                     }
                 },
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>"
                     }
                 },
                 "PosixProfile": {
@@ -872,6 +1215,59 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Describes the properties of the access that was specified.</p>"
+            }
+        },
+        "com.amazonaws.transfer#DescribedExecution": {
+            "type": "structure",
+            "members": {
+                "ExecutionId": {
+                    "target": "com.amazonaws.transfer#ExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the execution of a workflow.</p>"
+                    }
+                },
+                "InitialFileLocation": {
+                    "target": "com.amazonaws.transfer#FileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that describes the Amazon S3 or EFS file location.\n      This is the file location when the execution begins: if the file is being copied,\n    this is the initial (as opposed to destination) file location.</p>"
+                    }
+                },
+                "ServiceMetadata": {
+                    "target": "com.amazonaws.transfer#ServiceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container object for the session details associated with a workflow.</p>"
+                    }
+                },
+                "ExecutionRole": {
+                    "target": "com.amazonaws.transfer#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM role associated with the execution.</p>"
+                    }
+                },
+                "LoggingConfiguration": {
+                    "target": "com.amazonaws.transfer#LoggingConfiguration",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The IAM logging role associated with the execution.</p>"
+                    }
+                },
+                "PosixProfile": {
+                    "target": "com.amazonaws.transfer#PosixProfile"
+                },
+                "Status": {
+                    "target": "com.amazonaws.transfer#ExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status is one of the execution. Can be in progress, completed, exception encountered, or handling the exception.\n      </p>"
+                    }
+                },
+                "Results": {
+                    "target": "com.amazonaws.transfer#ExecutionResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that describes the execution results. This includes a list of the steps along with the details of each step,\n    error type and message (if any), and the <code>OnExceptionSteps</code> structure.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The details for an execution object.</p>"
             }
         },
         "com.amazonaws.transfer#DescribedSecurityPolicy": {
@@ -1018,6 +1414,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Specifies the number of users that are assigned to a server you specified with the\n        <code>ServerId</code>.</p>"
                     }
+                },
+                "WorkflowDetails": {
+                    "target": "com.amazonaws.transfer#WorkflowDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.</p>"
+                    }
                 }
             },
             "traits": {
@@ -1043,19 +1445,19 @@
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>In most cases, you can use this value instead of the scope-down policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock your user\n      down to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>"
                     }
                 },
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
                     }
                 },
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>"
                     }
                 },
                 "PosixProfile": {
@@ -1093,6 +1495,51 @@
                 "smithy.api#documentation": "<p>Describes the properties of a user that was specified.</p>"
             }
         },
+        "com.amazonaws.transfer#DescribedWorkflow": {
+            "type": "structure",
+            "members": {
+                "Arn": {
+                    "target": "com.amazonaws.transfer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique Amazon Resource Name (ARN) for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.transfer#WorkflowDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the text description for the workflow.</p>"
+                    }
+                },
+                "Steps": {
+                    "target": "com.amazonaws.transfer#WorkflowSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the details for the steps that are in the specified workflow.</p>"
+                    }
+                },
+                "OnExceptionSteps": {
+                    "target": "com.amazonaws.transfer#WorkflowSteps",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.</p>"
+                    }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.transfer#Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Key-value pairs that can be used to group and search for workflows. Tags are metadata attached to workflows for any purpose.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Describes the properties of the specified workflow</p>"
+            }
+        },
         "com.amazonaws.transfer#DirectoryId": {
             "type": "string",
             "traits": {
@@ -1116,6 +1563,46 @@
                         "name": "EFS"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.transfer#EfsFileLocation": {
+            "type": "structure",
+            "members": {
+                "FileSystemId": {
+                    "target": "com.amazonaws.transfer#EfsFileSystemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the file system, assigned by Amazon EFS.</p>"
+                    }
+                },
+                "Path": {
+                    "target": "com.amazonaws.transfer#EfsPath",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The pathname for the folder being used by a workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the details for the file location for the file being used in the workflow. Only applicable if you are using Amazon EFS for storage.</p>\n         <p>\n     You need to provide the file system ID and the pathname.\n      The pathname can represent either a path or a file.\n      This is determined by whether or not you end the path value with the forward slash (/) character.\n      If the final character is \"/\", then your file is copied to the folder, and its name does not change.\n      If, rather, the final character is alphanumeric, your uploaded file is renamed to the path value. In this case, if a file with that name already exists, it is overwritten.\n    </p>\n         <p>For example, if your path is <code>shared-files/bob/</code>, your uploaded files are copied to the <code>shared-files/bob/</code>, folder.\n      If your path is <code>shared-files/today</code>, each uploaded file is copied to the <code>shared-files</code> folder and named <code>today</code>:\n      each upload overwrites the previous version of the <code>bob</code> file.</p>"
+            }
+        },
+        "com.amazonaws.transfer#EfsFileSystemId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^(arn:aws[-a-z]*:elasticfilesystem:[0-9a-z-:]+:(access-point/fsap|file-system/fs)-[0-9a-f]{8,40}|fs(ap)?-[0-9a-f]{8,40})$"
+            }
+        },
+        "com.amazonaws.transfer#EfsPath": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^(\\/|(\\/(?!\\.)+[^$#<>;`|&?{}^*/\\n]+){1,4})$"
             }
         },
         "com.amazonaws.transfer#EndpointDetails": {
@@ -1175,6 +1662,133 @@
                 ]
             }
         },
+        "com.amazonaws.transfer#ExecutionError": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.transfer#ExecutionErrorType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the error type: currently, the only valid value is <code>PERMISSION_DENIED</code>, which occurs\n    if your policy does not contain the correct permissions to complete one or more of the steps in the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Message": {
+                    "target": "com.amazonaws.transfer#ExecutionErrorMessage",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the descriptive message that corresponds to the <code>ErrorType</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the error message and type, for an error that occurs during the execution of the workflow.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ExecutionErrorMessage": {
+            "type": "string"
+        },
+        "com.amazonaws.transfer#ExecutionErrorType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "PERMISSION_DENIED",
+                        "name": "PERMISSION_DENIED"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#ExecutionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 36,
+                    "max": 36
+                },
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{4}\\-[0-9a-fA-F]{12}$"
+            }
+        },
+        "com.amazonaws.transfer#ExecutionResults": {
+            "type": "structure",
+            "members": {
+                "Steps": {
+                    "target": "com.amazonaws.transfer#ExecutionStepResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the details for the steps that are in the specified workflow.</p>"
+                    }
+                },
+                "OnExceptionSteps": {
+                    "target": "com.amazonaws.transfer#ExecutionStepResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the steps (actions) to take if any errors are encountered during execution of the workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the steps in the workflow, as well as the steps to execute in case of any errors during workflow execution.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ExecutionStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "IN_PROGRESS",
+                        "name": "IN_PROGRESS"
+                    },
+                    {
+                        "value": "COMPLETED",
+                        "name": "COMPLETED"
+                    },
+                    {
+                        "value": "EXCEPTION",
+                        "name": "EXCEPTION"
+                    },
+                    {
+                        "value": "HANDLING_EXCEPTION",
+                        "name": "HANDLING_EXCEPTION"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#ExecutionStepResult": {
+            "type": "structure",
+            "members": {
+                "StepType": {
+                    "target": "com.amazonaws.transfer#WorkflowStepType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>One of the available step types.</p>\n         <ul>\n            <li>\n               <p>\n                  <i>Copy</i>: copy the file to another location</p>\n            </li>\n            <li>\n               <p>\n                  <i>Custom</i>: custom step with a lambda target</p>\n            </li>\n            <li>\n               <p>\n                  <i>Delete</i>: delete the file</p>\n            </li>\n            <li>\n               <p>\n                  <i>Tag</i>: add a tag to the file</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "Outputs": {
+                    "target": "com.amazonaws.transfer#StepResultOutputsJson",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The values for the key/value pair applied as a tag to the file. Only applicable if the step type is <code>TAG</code>.</p>"
+                    }
+                },
+                "Error": {
+                    "target": "com.amazonaws.transfer#ExecutionError",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the details for an error, if it occurred during execution of the specified workfow step.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the following details for the step: error (if any), outputs (if any), and the step type.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ExecutionStepResults": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#ExecutionStepResult"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                }
+            }
+        },
         "com.amazonaws.transfer#ExternalId": {
             "type": "string",
             "traits": {
@@ -1183,6 +1797,26 @@
                     "max": 256
                 },
                 "smithy.api#pattern": "^S-1-[\\d-]+$"
+            }
+        },
+        "com.amazonaws.transfer#FileLocation": {
+            "type": "structure",
+            "members": {
+                "S3FileLocation": {
+                    "target": "com.amazonaws.transfer#S3FileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the S3 details for the file being used, such as bucket, Etag, and so forth.</p>"
+                    }
+                },
+                "EfsFileLocation": {
+                    "target": "com.amazonaws.transfer#EfsFileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon EFS ID and the path for the file being used.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the Amazon S3 or EFS file details to be used in the step.</p>"
             }
         },
         "com.amazonaws.transfer#Fips": {
@@ -1396,6 +2030,26 @@
                 "smithy.api#documentation": "<p>Identifies the user, the server they belong to, and the identifier of the SSH public key\n      associated with that user. A user can have more than one key on each server that they are\n      associated with.</p>"
             }
         },
+        "com.amazonaws.transfer#InputFileLocation": {
+            "type": "structure",
+            "members": {
+                "S3FileLocation": {
+                    "target": "com.amazonaws.transfer#S3InputFileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the details for the S3 file being copied.</p>"
+                    }
+                },
+                "EfsFileLocation": {
+                    "target": "com.amazonaws.transfer#EfsFileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the details for the Amazon EFS file being copied.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the location for the file being copied. Only applicable for the Copy type of workflow steps.</p>"
+            }
+        },
         "com.amazonaws.transfer#InternalServiceError": {
             "type": "structure",
             "members": {
@@ -1522,6 +2176,89 @@
                     "target": "com.amazonaws.transfer#ListedAccesses",
                     "traits": {
                         "smithy.api#documentation": "<p>Returns the accesses and their properties for the <code>ServerId</code> value that you\n      specify.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ListExecutions": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#ListExecutionsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#ListExecutionsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all executions for the specified workflow.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.transfer#ListExecutionsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.transfer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the aximum number of executions to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>ListExecutions</code> returns the <code>NextToken</code> parameter in the output.\n      You can then pass the <code>NextToken</code> parameter in a subsequent command to\n      continue listing additional executions.</p>\n         <p>\n      This is useful for pagination, for instance.\n      If you have 100 executions for a workflow, you might only want to list first 10. If so, callthe API by specifing the <code>max-results</code>:\n    </p>\n         <p>\n            <code>aws transfer list-executions --max-results 10</code>\n         </p>\n         <p>\n      This returns details for the first 10 executions, as well as the pointer (<code>NextToken</code>) to the eleventh execution.\n      You can now call the API again, suppling the <code>NextToken</code> value you received:\n    </p>\n         <p>\n            <code>aws transfer list-executions --max-results 10 --next-token $somePointerReturnedFromPreviousListResult</code>\n         </p>\n         <p>\n      This call returns the next 10 executions, the 11th through the 20th. You can then repeat the call until the details\n      for all 100 executions have been returned.\n    </p>"
+                    }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ListExecutionsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>ListExecutions</code> returns the <code>NextToken</code> parameter in the output.\n      You can then pass the <code>NextToken</code> parameter in a subsequent command to\n      continue listing additional executions.</p>"
+                    }
+                },
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Executions": {
+                    "target": "com.amazonaws.transfer#ListedExecutions",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the details for each execution.</p>\n         <ul>\n            <li>\n               <p>\n                  <b>NextToken</b>: returned from a call to several APIs,\n      you can use pass it to a subsequent command to continue listing additional executions.</p>\n            </li>\n            <li>\n               <p>\n                  <b>StartTime</b>: timestamp indicating when the execution began.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Executions</b>: details of the execution, including the execution ID, initial file location,\n      and Service metadata.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Status</b>: one of the following values:\n        <code>IN_PROGRESS</code>, <code>COMPLETED</code>, <code>EXCEPTION</code>, <code>HANDLING_EXEPTION</code>.\n      </p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -1820,6 +2557,72 @@
                 }
             }
         },
+        "com.amazonaws.transfer#ListWorkflows": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#ListWorkflowsRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#ListWorkflowsResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidNextTokenException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Lists all of your workflows.</p>",
+                "smithy.api#paginated": {
+                    "inputToken": "NextToken",
+                    "outputToken": "NextToken",
+                    "pageSize": "MaxResults"
+                }
+            }
+        },
+        "com.amazonaws.transfer#ListWorkflowsRequest": {
+            "type": "structure",
+            "members": {
+                "MaxResults": {
+                    "target": "com.amazonaws.transfer#MaxResults",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the maximum number of workflows to return.</p>"
+                    }
+                },
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>ListWorkflows</code> returns the <code>NextToken</code> parameter in the output.\n      You can then pass the <code>NextToken</code> parameter in a subsequent command to\n      continue listing additional workflows.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#ListWorkflowsResponse": {
+            "type": "structure",
+            "members": {
+                "NextToken": {
+                    "target": "com.amazonaws.transfer#NextToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n            <code>ListWorkflows</code> returns the <code>NextToken</code> parameter in the output.\n      You can then pass the <code>NextToken</code> parameter in a subsequent command to\n      continue listing additional workflows.</p>"
+                    }
+                },
+                "Workflows": {
+                    "target": "com.amazonaws.transfer#ListedWorkflows",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Returns the <code>Arn</code>, <code>WorkflowId</code>, and <code>Description</code> for each workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
         "com.amazonaws.transfer#ListedAccess": {
             "type": "structure",
             "members": {
@@ -1832,7 +2635,7 @@
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
                     }
                 },
                 "Role": {
@@ -1856,6 +2659,44 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.transfer#ListedAccess"
+            }
+        },
+        "com.amazonaws.transfer#ListedExecution": {
+            "type": "structure",
+            "members": {
+                "ExecutionId": {
+                    "target": "com.amazonaws.transfer#ExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the execution of a workflow.</p>"
+                    }
+                },
+                "InitialFileLocation": {
+                    "target": "com.amazonaws.transfer#FileLocation",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A structure that describes the Amazon S3 or EFS file location.\n      This is the file location when the execution begins: if the file is being copied,\n      this is the initial (as opposed to destination) file location.</p>"
+                    }
+                },
+                "ServiceMetadata": {
+                    "target": "com.amazonaws.transfer#ServiceMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A container object for the session details associated with a workflow.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.transfer#ExecutionStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status is one of the execution. Can be in progress, completed, exception encountered, or handling the exception.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Returns properties of the execution that is specified.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ListedExecutions": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#ListedExecution"
             }
         },
         "com.amazonaws.transfer#ListedServer": {
@@ -1940,7 +2781,7 @@
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
                     }
                 },
                 "Role": {
@@ -1970,6 +2811,68 @@
             "type": "list",
             "member": {
                 "target": "com.amazonaws.transfer#ListedUser"
+            }
+        },
+        "com.amazonaws.transfer#ListedWorkflow": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>"
+                    }
+                },
+                "Description": {
+                    "target": "com.amazonaws.transfer#WorkflowDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the text description for the workflow.</p>"
+                    }
+                },
+                "Arn": {
+                    "target": "com.amazonaws.transfer#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the unique Amazon Resource Name (ARN) for the workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Contains the ID, text description, and Amazon Resource Name (ARN) for the workflow.</p>"
+            }
+        },
+        "com.amazonaws.transfer#ListedWorkflows": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#ListedWorkflow"
+            }
+        },
+        "com.amazonaws.transfer#LogGroupName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 512
+                },
+                "smithy.api#pattern": "^[\\.\\-_/#A-Za-z0-9]*$"
+            }
+        },
+        "com.amazonaws.transfer#LoggingConfiguration": {
+            "type": "structure",
+            "members": {
+                "LoggingRole": {
+                    "target": "com.amazonaws.transfer#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the Amazon Resource Name (ARN) of the Amazon Web Services Identity and Access Management (IAM) role that allows a server to turn\n      on Amazon CloudWatch logging for Amazon S3 or Amazon EFS events. When set, user activity can be viewed in\n      your CloudWatch logs.</p>"
+                    }
+                },
+                "LogGroupName": {
+                    "target": "com.amazonaws.transfer#LogGroupName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the CloudWatch logging group for the Amazon Web Services Transfer server to which this workflow belongs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Consists of the logging role and the log group name.</p>"
             }
         },
         "com.amazonaws.transfer#MapEntry": {
@@ -2022,6 +2925,33 @@
                     "max": 2048
                 },
                 "smithy.api#pattern": "^$|arn:.*role/"
+            }
+        },
+        "com.amazonaws.transfer#OnUploadWorkflowDetails": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#WorkflowDetail"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1
+                }
+            }
+        },
+        "com.amazonaws.transfer#OverwriteExisting": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "TRUE",
+                        "name": "TRUE"
+                    },
+                    {
+                        "value": "FALSE",
+                        "name": "FALSE"
+                    }
+                ]
             }
         },
         "com.amazonaws.transfer#PassiveIp": {
@@ -2105,7 +3035,7 @@
                 "PassiveIp": {
                     "target": "com.amazonaws.transfer#PassiveIp",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Indicates passive mode, for FTP and FTPS protocols.\n      Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer.\n      For example:\n    </p>\n         <p>\n            <code>\n        aws transfer update-server --protocol-details PassiveIp=<i>0.0.0.0</i>\n            </code>\n         </p>\n         <p>Replace <code>\n               <i>0.0.0.0</i>\n            </code> in the example above with the actual IP address you want to use.</p>"
+                        "smithy.api#documentation": "<p>\n      Indicates passive mode, for FTP and FTPS protocols.\n      Enter a single dotted-quad IPv4 address, such as the external IP address of a firewall, router, or load balancer.\n      For example:\n    </p>\n         <p>\n            <code>\n        aws transfer update-server --protocol-details PassiveIp=<i>0.0.0.0</i>\n            </code>\n         </p>\n         <p>Replace <code>\n               <i>0.0.0.0</i>\n            </code> in the example above with the actual IP address you want to use.</p>\n         <note>\n            <p>\n        If you change the <code>PassiveIp</code> value, you must stop and then restart your Transfer server for the change to take effect. For details on using Passive IP (PASV) in a NAT environment, see <a href=\"http://aws.amazon.com/blogs/storage/configuring-your-ftps-server-behind-a-firewall-or-nat-with-aws-transfer-family/\">Configuring your FTPS server behind a firewall or NAT with Amazon Web Services Transfer Family</a>.\n      </p>\n         </note>"
                     }
                 }
             },
@@ -2203,6 +3133,152 @@
                 "smithy.api#pattern": "^arn:.*role/"
             }
         },
+        "com.amazonaws.transfer#S3Bucket": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 63
+                },
+                "smithy.api#pattern": "^[a-z0-9][\\.\\-a-z0-9]{1,61}[a-z0-9]$"
+            }
+        },
+        "com.amazonaws.transfer#S3Etag": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 65536
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
+        "com.amazonaws.transfer#S3FileLocation": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.transfer#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the S3 bucket that contains the file being used.</p>"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.transfer#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name assigned to the file when it was created in S3. You use the object key to retrieve the object.</p>"
+                    }
+                },
+                "VersionId": {
+                    "target": "com.amazonaws.transfer#S3VersionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the file version.</p>"
+                    }
+                },
+                "Etag": {
+                    "target": "com.amazonaws.transfer#S3Etag",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The entity tag is a hash of the object. The ETag reflects changes only to the contents of an object, not its metadata.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the details for the file location for the file being used in the workflow. Only applicable if you are using S3 storage.</p>\n         <p>\n      You need to provide the bucket and key.\n      The key can represent either a path or a file.\n      This is determined by whether or not you end the key value with the forward slash (/) character.\n      If the final character is \"/\", then your file is copied to the folder, and its name does not change.\n      If, rather, the final character is alphanumeric, your uploaded file is renamed to the path value. In this case, if a file with that name already exists, it is overwritten.\n    </p>\n         <p>For example, if your path is <code>shared-files/bob/</code>, your uploaded files are copied to the <code>shared-files/bob/</code>, folder.\n      If your path is <code>shared-files/today</code>, each uploaded file is copied to the <code>shared-files</code> folder and named <code>today</code>:\n      each upload overwrites the previous version of the <i>bob</i> file.</p>"
+            }
+        },
+        "com.amazonaws.transfer#S3InputFileLocation": {
+            "type": "structure",
+            "members": {
+                "Bucket": {
+                    "target": "com.amazonaws.transfer#S3Bucket",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the S3 bucket that contains the file being copied.</p>"
+                    }
+                },
+                "Key": {
+                    "target": "com.amazonaws.transfer#S3Key",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name assigned to the file when it was created in S3. You use the object key to retrieve the object.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the details for the S3 file being copied.</p>"
+            }
+        },
+        "com.amazonaws.transfer#S3Key": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^[\\P{M}\\p{M}]*$"
+            }
+        },
+        "com.amazonaws.transfer#S3Tag": {
+            "type": "structure",
+            "members": {
+                "Key": {
+                    "target": "com.amazonaws.transfer#S3TagKey",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name assigned to the tag that you create.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Value": {
+                    "target": "com.amazonaws.transfer#S3TagValue",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The value that corresponds to the key.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the key-value pair that are assigned to a file during the execution of a Tagging step.</p>"
+            }
+        },
+        "com.amazonaws.transfer#S3TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.transfer#S3TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.transfer#S3Tags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#S3Tag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                }
+            }
+        },
+        "com.amazonaws.transfer#S3VersionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1024
+                },
+                "smithy.api#pattern": "^.+$"
+            }
+        },
         "com.amazonaws.transfer#SecondaryGids": {
             "type": "list",
             "member": {
@@ -2262,6 +3338,75 @@
                 "target": "com.amazonaws.transfer#SecurityPolicyOption"
             }
         },
+        "com.amazonaws.transfer#SendWorkflowStepState": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.transfer#SendWorkflowStepStateRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.transfer#SendWorkflowStepStateResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.transfer#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InternalServiceError"
+                },
+                {
+                    "target": "com.amazonaws.transfer#InvalidRequestException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ServiceUnavailableException"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ThrottlingException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Sends a callback for asynchronous custom steps.</p>\n         <p>\n      The <code>ExecutionId</code>, <code>WorkflowId</code>, and <code>Token</code> are passed to the target resource during execution of a custom step of a workflow.\n      You must include those with their callback as well as providing a status.\n    </p>"
+            }
+        },
+        "com.amazonaws.transfer#SendWorkflowStepStateRequest": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionId": {
+                    "target": "com.amazonaws.transfer#ExecutionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the execution of a workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Token": {
+                    "target": "com.amazonaws.transfer#CallbackToken",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Used to distinguish between multiple callbacks for multiple Lambda steps within the same execution.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.transfer#CustomStepStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether the specified step succeeded or failed.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.transfer#SendWorkflowStepStateResponse": {
+            "type": "structure",
+            "members": {}
+        },
         "com.amazonaws.transfer#ServerId": {
             "type": "string",
             "traits": {
@@ -2274,6 +3419,21 @@
         },
         "com.amazonaws.transfer#ServiceErrorMessage": {
             "type": "string"
+        },
+        "com.amazonaws.transfer#ServiceMetadata": {
+            "type": "structure",
+            "members": {
+                "UserDetails": {
+                    "target": "com.amazonaws.transfer#UserDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Server ID (<code>ServerId</code>), Session ID (<code>SessionId</code>) and user (<code>UserName</code>) make up the <code>UserDetails</code>.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>A container object for the session details associated with a workflow.</p>"
+            }
         },
         "com.amazonaws.transfer#ServiceUnavailableException": {
             "type": "structure",
@@ -2290,6 +3450,16 @@
                 "smithy.api#documentation": "<p>The request has failed because the Amazon Web ServicesTransfer Family service is not available.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
+            }
+        },
+        "com.amazonaws.transfer#SessionId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 3,
+                    "max": 32
+                },
+                "smithy.api#pattern": "^[\\w-]*$"
             }
         },
         "com.amazonaws.transfer#SourceIp": {
@@ -2442,6 +3612,15 @@
         "com.amazonaws.transfer#StatusCode": {
             "type": "integer"
         },
+        "com.amazonaws.transfer#StepResultOutputsJson": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 65536
+                }
+            }
+        },
         "com.amazonaws.transfer#StopServer": {
             "type": "operation",
             "input": {
@@ -2574,6 +3753,26 @@
                 }
             }
         },
+        "com.amazonaws.transfer#TagStepDetails": {
+            "type": "structure",
+            "members": {
+                "Name": {
+                    "target": "com.amazonaws.transfer#WorkflowStepName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the step, used as an identifier.</p>"
+                    }
+                },
+                "Tags": {
+                    "target": "com.amazonaws.transfer#S3Tags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Array that contains from 1 to 10 key/value pairs.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Each step type has its own <code>StepDetails</code> structure.</p>\n         <p>The key/value pairs used to tag a file during the execution of a workflow step.</p>"
+            }
+        },
         "com.amazonaws.transfer#TagValue": {
             "type": "string",
             "traits": {
@@ -2618,7 +3817,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>If the <code>IdentityProviderType</code> of a file transfer protocol-enabled server is\n        <code>AWS_DIRECTORY_SERVICE</code> or <code>API_Gateway</code>, tests whether your identity\n      provider is set up successfully. We highly recommend that you call this operation to test your\n      authentication method as soon as you create your server. By doing so, you can troubleshoot\n      issues with the identity provider integration to ensure that your users can successfully use\n      the service.</p>"
+                "smithy.api#documentation": "<p>If the <code>IdentityProviderType</code> of a file transfer protocol-enabled server is\n        <code>AWS_DIRECTORY_SERVICE</code> or <code>API_Gateway</code>, tests whether your identity\n      provider is set up successfully. We highly recommend that you call this operation to test your\n      authentication method as soon as you create your server. By doing so, you can troubleshoot\n      issues with the identity provider integration to ensure that your users can successfully use\n      the service.</p>\n         <p>\n      The <code>ServerId</code> and <code>UserName</code> parameters are required. The <code>ServerProtocol</code>, <code>SourceIp</code>, and <code>UserPassword</code> are all optional. \n    </p>\n         <note>\n            <p>\n        You cannot use <code>TestIdentityProvider</code> if the <code>IdentityProviderType</code> of your server is <code>SERVICE_MANAGED</code>.\n      </p>\n         </note>\n         <ul>\n            <li>\n               <p>\n        If you provide any incorrect values for any parameters, the <code>Response</code> field is empty.\n      </p>\n            </li>\n            <li>\n               <p>\n        If you provide a server ID for a server that uses service-managed users, you get an error:\n      </p>\n               <p>\n                  <code>\n        An error occurred (InvalidRequestException) when calling the TestIdentityProvider operation: s-<i>server-ID</i> not configured for external auth\n      </code>\n               </p>\n            </li>\n            <li>\n               <p>\n          If you enter a Server ID for the <code>--server-id</code> parameter that does not identify an actual Transfer server, you receive the following error:\n        </p>\n               <p>\n                  <code>An error occurred (ResourceNotFoundException) when calling the TestIdentityProvider operation: Unknown server</code>\n               </p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.transfer#TestIdentityProviderRequest": {
@@ -2719,6 +3918,9 @@
                     "target": "com.amazonaws.transfer#CreateUser"
                 },
                 {
+                    "target": "com.amazonaws.transfer#CreateWorkflow"
+                },
+                {
                     "target": "com.amazonaws.transfer#DeleteAccess"
                 },
                 {
@@ -2731,7 +3933,13 @@
                     "target": "com.amazonaws.transfer#DeleteUser"
                 },
                 {
+                    "target": "com.amazonaws.transfer#DeleteWorkflow"
+                },
+                {
                     "target": "com.amazonaws.transfer#DescribeAccess"
+                },
+                {
+                    "target": "com.amazonaws.transfer#DescribeExecution"
                 },
                 {
                     "target": "com.amazonaws.transfer#DescribeSecurityPolicy"
@@ -2743,10 +3951,16 @@
                     "target": "com.amazonaws.transfer#DescribeUser"
                 },
                 {
+                    "target": "com.amazonaws.transfer#DescribeWorkflow"
+                },
+                {
                     "target": "com.amazonaws.transfer#ImportSshPublicKey"
                 },
                 {
                     "target": "com.amazonaws.transfer#ListAccesses"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ListExecutions"
                 },
                 {
                     "target": "com.amazonaws.transfer#ListSecurityPolicies"
@@ -2759,6 +3973,12 @@
                 },
                 {
                     "target": "com.amazonaws.transfer#ListUsers"
+                },
+                {
+                    "target": "com.amazonaws.transfer#ListWorkflows"
+                },
+                {
+                    "target": "com.amazonaws.transfer#SendWorkflowStepState"
                 },
                 {
                     "target": "com.amazonaws.transfer#StartServer"
@@ -2884,19 +4104,19 @@
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
                     }
                 },
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"your-personal-report.pdf\", \"Target\": \"/bucket3/customized-reports/${transfer:UserName}.pdf\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the scope-down policy to lock down your\n        user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n   \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"your-personal-report.pdf\", \"Target\": \"/bucket3/customized-reports/${transfer:UserName}.pdf\" } ]</code>\n         </p>\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n        user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to <code>/</code> and set <code>Target</code> to the\n        <code>HomeDirectory</code> parameter value.</p>\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n   \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
                     }
                 },
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n         <note>\n            <p>This only applies when domain of <code>ServerId</code> is S3. Amazon EFS does not use scope\n      down policy.</p>\n            <p>For scope-down policies, Amazon Web ServicesTransfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p>\n            <p>For an example of a scope-down policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/scope-down-policy.html\">Example\n        scope-down policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web ServicesSecurity Token Service API\n          Reference</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n    \n         <note>\n            <p>This only applies when the domain of <code>ServerId</code> is S3. EFS does not use session policies.</p>\n            <p>For session policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy.html\">Example\n        session policy</a>.</p>\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web ServicesSecurity Token Service API\n          Reference</i>.</p>\n         </note>"
                     }
                 },
                 "PosixProfile": {
@@ -3044,6 +4264,12 @@
                         "smithy.api#documentation": "<p>A system-assigned unique identifier for a server instance that the user account is\n      assigned to.</p>",
                         "smithy.api#required": {}
                     }
+                },
+                "WorkflowDetails": {
+                    "target": "com.amazonaws.transfer#WorkflowDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.</p>"
+                    }
                 }
             }
         },
@@ -3100,19 +4326,19 @@
                 "HomeDirectoryType": {
                     "target": "com.amazonaws.transfer#HomeDirectoryType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you will need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
+                        "smithy.api#documentation": "<p>The type of landing directory (folder) you want your users' home directory to be when they log into the server.\n    If you set it to <code>PATH</code>, the user will see the absolute Amazon S3 bucket or EFS paths as is in their file transfer protocol clients.\n    If you set it <code>LOGICAL</code>, you need to provide mappings in the <code>HomeDirectoryMappings</code> for how you want to make Amazon\n    S3 or EFS paths visible to your users.</p>"
                     }
                 },
                 "HomeDirectoryMappings": {
                     "target": "com.amazonaws.transfer#HomeDirectoryMappings",
                     "traits": {
-                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"your-personal-report.pdf\", \"Target\":\n        \"/bucket3/customized-reports/${transfer:UserName}.pdf\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the scope-down policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>Logical directory mappings that specify what Amazon S3 or Amazon EFS paths and keys should\n      be visible to your user and how you want to make them visible. You must specify the\n        <code>Entry</code> and <code>Target</code> pair, where <code>Entry</code> shows how the path\n      is made visible and <code>Target</code> is the actual Amazon S3 or Amazon EFS path. If you\n      only specify a target, it is displayed as is. You also must ensure that your Amazon Web Services Identity\n      and Access Management (IAM) role provides access to paths in <code>Target</code>. This value\n      can only be set when <code>HomeDirectoryType</code> is set to\n      <i>LOGICAL</i>.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example.</p>\n         <p>\n            <code>[ { \"Entry\": \"your-personal-report.pdf\", \"Target\":\n        \"/bucket3/customized-reports/${transfer:UserName}.pdf\" } ]</code>\n         </p>\n\n         <p>In most cases, you can use this value instead of the session policy to lock down your\n      user to the designated home directory (\"<code>chroot</code>\"). To do this, you can set\n        <code>Entry</code> to '/' and set <code>Target</code> to the HomeDirectory\n      parameter value.</p>\n\n         <p>The following is an <code>Entry</code> and <code>Target</code> pair example for <code>chroot</code>.</p>\n         <p>\n            <code>[ { \"Entry:\": \"/\", \"Target\": \"/bucket_name/home/mydirectory\" } ]</code>\n         </p>\n \n         <note>\n            <p>If the target of a logical directory entry does not exist in Amazon S3 or EFS, the entry is\n        ignored. As a workaround, you can use the Amazon S3 API or EFS API to create 0 byte objects as place\n        holders for your directory. If using the CLI, use the <code>s3api</code> or <code>efsapi</code> call instead of\n        <code>s3</code> or <code>efs</code> so you can use the put-object operation. For example, you use the\n        following: <code>aws s3api put-object --bucket bucketname --key path/to/folder/</code>. Make\n        sure that the end of the key name ends in a <code>/</code> for it to be considered a folder.</p>\n         </note>"
                     }
                 },
                 "Policy": {
                     "target": "com.amazonaws.transfer#Policy",
                     "traits": {
-                        "smithy.api#documentation": "<p>A scope-down policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n         <note>\n            <p>This only applies when domain of <code>ServerId</code> is S3.\n      Amazon EFS does not use scope-down policies.</p>\n      \n            <p>For scope-down policies, Amazon Web ServicesTransfer Family stores the policy as a JSON blob, instead of the Amazon Resource Name (ARN) of the policy.\n        You save the policy as a JSON blob and pass it in the <code>Policy</code> argument.</p>\n      \n      \n\n            <p>For an example of a scope-down policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/users.html#users-policies-scope-down\">Creating a scope-down\n          policy</a>.</p>\n\n      \n\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services\n          Security Token Service API Reference</i>.</p>\n         </note>"
+                        "smithy.api#documentation": "<p>A session policy for your user so that you can use the same IAM role across multiple users. This policy scopes down user\n     access to portions of their Amazon S3 bucket. Variables that you can use inside this policy include <code>${Transfer:UserName}</code>,\n     <code>${Transfer:HomeDirectory}</code>, and <code>${Transfer:HomeBucket}</code>.</p>\n    \n         <note>\n            <p>This only applies when the domain of <code>ServerId</code> is S3. EFS does not use session policies.</p>\n            <p>For session policies, Amazon Web Services Transfer Family stores the policy as a JSON blob, instead\n        of the Amazon Resource Name (ARN) of the policy. You save the policy as a JSON blob and pass\n        it in the <code>Policy</code> argument.</p>\n      \n      \n\n            <p>For an example of a session policy, see <a href=\"https://docs.aws.amazon.com/transfer/latest/userguide/session-policy\">Creating a session\n          policy</a>.</p>\n\n      \n\n            <p>For more information, see <a href=\"https://docs.aws.amazon.com/STS/latest/APIReference/API_AssumeRole.html\">AssumeRole</a> in the <i>Amazon Web Services\n          Security Token Service API Reference</i>.</p>\n         </note>"
                     }
                 },
                 "PosixProfile": {
@@ -3180,6 +4406,34 @@
                 "smithy.api#box": {}
             }
         },
+        "com.amazonaws.transfer#UserDetails": {
+            "type": "structure",
+            "members": {
+                "UserName": {
+                    "target": "com.amazonaws.transfer#UserName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique string that identifies a user account associated with a server.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ServerId": {
+                    "target": "com.amazonaws.transfer#ServerId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-assigned unique identifier for a Transfer server instance. </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "SessionId": {
+                    "target": "com.amazonaws.transfer#SessionId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The system-assigned unique identifier for a session that corresponds to the workflow.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the user name, server ID, and session ID for a workflow.</p>"
+            }
+        },
         "com.amazonaws.transfer#UserName": {
             "type": "string",
             "traits": {
@@ -3212,6 +4466,146 @@
         },
         "com.amazonaws.transfer#VpcId": {
             "type": "string"
+        },
+        "com.amazonaws.transfer#WorkflowDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^[\\w- ]*$"
+            }
+        },
+        "com.amazonaws.transfer#WorkflowDetail": {
+            "type": "structure",
+            "members": {
+                "WorkflowId": {
+                    "target": "com.amazonaws.transfer#WorkflowId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique identifier for the workflow.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "ExecutionRole": {
+                    "target": "com.amazonaws.transfer#Role",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Includes the necessary permissions for S3, EFS, and Lambda operations that Transfer can\n      assume, so that all workflow steps can operate on the required resources</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Specifies the workflow ID for the workflow to assign and the execution role used for executing the workflow.</p>"
+            }
+        },
+        "com.amazonaws.transfer#WorkflowDetails": {
+            "type": "structure",
+            "members": {
+                "OnUpload": {
+                    "target": "com.amazonaws.transfer#OnUploadWorkflowDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A trigger that starts a workflow: the workflow begins to execute after a file is uploaded.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Container for the <code>WorkflowDetail</code> data type.\n      It is used by actions that trigger a workflow to begin execution.</p>"
+            }
+        },
+        "com.amazonaws.transfer#WorkflowId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 19,
+                    "max": 19
+                },
+                "smithy.api#pattern": "^w-([a-z0-9]{17})$"
+            }
+        },
+        "com.amazonaws.transfer#WorkflowStep": {
+            "type": "structure",
+            "members": {
+                "Type": {
+                    "target": "com.amazonaws.transfer#WorkflowStepType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n        Currently, the following step types are supported.\n      </p>\n         <ul>\n            <li>\n               <p>\n                  <i>Copy</i>: copy the file to another location</p>\n            </li>\n            <li>\n               <p>\n                  <i>Custom</i>: custom step with a lambda target</p>\n            </li>\n            <li>\n               <p>\n                  <i>Delete</i>: delete the file</p>\n            </li>\n            <li>\n               <p>\n                  <i>Tag</i>: add a tag to the file</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CopyStepDetails": {
+                    "target": "com.amazonaws.transfer#CopyStepDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for a step that performs a file copy.</p>\n         <p>\n        Consists of the following values:\n      </p>\n         <ul>\n            <li>\n               <p>A description</p>\n            </li>\n            <li>\n               <p>An S3 or EFS location for the destination of the file copy.</p>\n            </li>\n            <li>\n               <p>A flag that indicates whether or not to overwrite an existing file of the same name.\n        The default is <code>FALSE</code>.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "CustomStepDetails": {
+                    "target": "com.amazonaws.transfer#CustomStepDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for a step that invokes a lambda function.</p>\n         <p>\n        Consists of the lambda function name, target, and timeout (in seconds).\n      </p>"
+                    }
+                },
+                "DeleteStepDetails": {
+                    "target": "com.amazonaws.transfer#DeleteStepDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>You need to specify the name of the file to be deleted.</p>"
+                    }
+                },
+                "TagStepDetails": {
+                    "target": "com.amazonaws.transfer#TagStepDetails",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Details for a step that creates one or more tags.</p>\n         <p>You specify one or more tags: each tag contains a key/value pair.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The basic building block of a workflow.</p>"
+            }
+        },
+        "com.amazonaws.transfer#WorkflowStepName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 30
+                },
+                "smithy.api#pattern": "^[\\w-]*$"
+            }
+        },
+        "com.amazonaws.transfer#WorkflowStepType": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "COPY",
+                        "name": "COPY"
+                    },
+                    {
+                        "value": "CUSTOM",
+                        "name": "CUSTOM"
+                    },
+                    {
+                        "value": "TAG",
+                        "name": "TAG"
+                    },
+                    {
+                        "value": "DELETE",
+                        "name": "DELETE"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.transfer#WorkflowSteps": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.transfer#WorkflowStep"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 8
+                }
+            }
         }
     }
 }

@@ -13,14 +13,20 @@ import (
 // Deletes the specified grant. You revoke a grant to terminate the permissions
 // that the grant allows. For more information, see Retiring and revoking grants
 // (https://docs.aws.amazon.com/kms/latest/developerguide/managing-grants.html#grant-delete)
-// in the AWS Key Management Service Developer Guide . When you create, retire, or
+// in the Key Management Service Developer Guide . When you create, retire, or
 // revoke a grant, there might be a brief delay, usually less than five minutes,
-// until the grant is available throughout AWS KMS. This state is known as eventual
+// until the grant is available throughout KMS. This state is known as eventual
 // consistency. For details, see Eventual consistency
 // (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html#terms-eventual-consistency)
-// in the AWS Key Management Service Developer Guide . Cross-account use: Yes. To
-// perform this operation on a CMK in a different AWS account, specify the key ARN
-// in the value of the KeyId parameter. Required permissions: kms:RevokeGrant
+// in the Key Management Service Developer Guide . For detailed information about
+// grants, including grant terminology, see Using grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/grants.html) in the Key
+// Management Service Developer Guide . For examples of working with grants in
+// several programming languages, see Programming grants
+// (https://docs.aws.amazon.com/kms/latest/developerguide/programming-grants.html).
+// Cross-account use: Yes. To perform this operation on a KMS key in a different
+// Amazon Web Services account, specify the key ARN in the value of the KeyId
+// parameter. Required permissions: kms:RevokeGrant
 // (https://docs.aws.amazon.com/kms/latest/developerguide/kms-api-permissions-reference.html)
 // (key policy). Related operations:
 //
@@ -55,10 +61,10 @@ type RevokeGrantInput struct {
 	// This member is required.
 	GrantId *string
 
-	// A unique identifier for the customer master key (CMK) associated with the grant.
-	// To get the key ID and key ARN for a CMK, use ListKeys or DescribeKey. Specify
-	// the key ID or key ARN of the CMK. To specify a CMK in a different AWS account,
-	// you must use the key ARN. For example:
+	// A unique identifier for the KMS key associated with the grant. To get the key ID
+	// and key ARN for a KMS key, use ListKeys or DescribeKey. Specify the key ID or
+	// key ARN of the KMS key. To specify a KMS key in a different Amazon Web Services
+	// account, you must use the key ARN. For example:
 	//
 	// * Key ID:
 	// 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -67,7 +73,7 @@ type RevokeGrantInput struct {
 	// arn:aws:kms:us-east-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab
 	//
 	// To
-	// get the key ID and key ARN for a CMK, use ListKeys or DescribeKey.
+	// get the key ID and key ARN for a KMS key, use ListKeys or DescribeKey.
 	//
 	// This member is required.
 	KeyId *string

@@ -44,8 +44,8 @@ type GetAggregateConfigRuleComplianceSummaryInput struct {
 	GroupByKey types.ConfigRuleComplianceSummaryGroupKey
 
 	// The maximum number of evaluation results returned on each page. The default is
-	// 1000. You cannot specify a number greater than 1000. If you specify 0, AWS
-	// Config uses the default.
+	// 1000. You cannot specify a number greater than 1000. If you specify 0, Config
+	// uses the default.
 	Limit int32
 
 	// The nextToken string returned on a previous page that you use to get the next
@@ -148,8 +148,8 @@ var _ GetAggregateConfigRuleComplianceSummaryAPIClient = (*Client)(nil)
 // for GetAggregateConfigRuleComplianceSummary
 type GetAggregateConfigRuleComplianceSummaryPaginatorOptions struct {
 	// The maximum number of evaluation results returned on each page. The default is
-	// 1000. You cannot specify a number greater than 1000. If you specify 0, AWS
-	// Config uses the default.
+	// 1000. You cannot specify a number greater than 1000. If you specify 0, Config
+	// uses the default.
 	Limit int32
 
 	// Set to true if pagination should stop if the service returns a pagination token

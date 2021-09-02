@@ -12,6 +12,9 @@ import (
 )
 
 // Lists the versions of the specified policy and identifies the default version.
+// Requires permission to access the ListPolicyVersions
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) ListPolicyVersions(ctx context.Context, params *ListPolicyVersionsInput, optFns ...func(*Options)) (*ListPolicyVersionsOutput, error) {
 	if params == nil {
 		params = &ListPolicyVersionsInput{}

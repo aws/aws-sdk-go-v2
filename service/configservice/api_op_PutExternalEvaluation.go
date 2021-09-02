@@ -12,7 +12,7 @@ import (
 )
 
 // Add or updates the evaluations for process checks. This API checks if the rule
-// is a process check when the name of the AWS Config rule is provided.
+// is a process check when the name of the Config rule is provided.
 func (c *Client) PutExternalEvaluation(ctx context.Context, params *PutExternalEvaluationInput, optFns ...func(*Options)) (*PutExternalEvaluationOutput, error) {
 	if params == nil {
 		params = &PutExternalEvaluationInput{}
@@ -30,7 +30,7 @@ func (c *Client) PutExternalEvaluation(ctx context.Context, params *PutExternalE
 
 type PutExternalEvaluationInput struct {
 
-	// The name of the AWS Config rule.
+	// The name of the Config rule.
 	//
 	// This member is required.
 	ConfigRuleName *string

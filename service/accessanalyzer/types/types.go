@@ -57,7 +57,7 @@ type AccessPreview struct {
 type AccessPreviewFinding struct {
 
 	// Provides context on how the access preview finding compares to existing access
-	// identified in Access Analyzer.
+	// identified in IAM Access Analyzer.
 	//
 	// * New - The finding is for newly-introduced
 	// access.
@@ -87,8 +87,9 @@ type AccessPreviewFinding struct {
 	// This member is required.
 	Id *string
 
-	// The AWS account ID that owns the resource. For most AWS resources, the owning
-	// account is the account in which the resource was created.
+	// The Amazon Web Services account ID that owns the resource. For most Amazon Web
+	// Services resources, the owning account is the account in which the resource was
+	// created.
 	//
 	// This member is required.
 	ResourceOwnerAccount *string
@@ -116,8 +117,8 @@ type AccessPreviewFinding struct {
 	// An error.
 	Error *string
 
-	// The existing ID of the finding in Access Analyzer, provided only for existing
-	// findings.
+	// The existing ID of the finding in IAM Access Analyzer, provided only for
+	// existing findings.
 	ExistingFindingId *string
 
 	// The existing status of the finding, provided only for existing findings.
@@ -207,7 +208,7 @@ type AclGrantee interface {
 	isAclGrantee()
 }
 
-// The value specified is the canonical user ID of an AWS account.
+// The value specified is the canonical user ID of an Amazon Web Services account.
 type AclGranteeMemberId struct {
 	Value string
 
@@ -249,7 +250,7 @@ type AnalyzedResource struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The AWS account ID that owns the resource.
+	// The Amazon Web Services account ID that owns the resource.
 	//
 	// This member is required.
 	ResourceOwnerAccount *string
@@ -289,7 +290,7 @@ type AnalyzedResourceSummary struct {
 	// This member is required.
 	ResourceArn *string
 
-	// The AWS account ID that owns the resource.
+	// The Amazon Web Services account ID that owns the resource.
 	//
 	// This member is required.
 	ResourceOwnerAccount *string
@@ -322,10 +323,10 @@ type AnalyzerSummary struct {
 
 	// The status of the analyzer. An Active analyzer successfully monitors supported
 	// resources and generates new findings. The analyzer is Disabled when a user
-	// action, such as removing trusted access for AWS IAM Access Analyzer from AWS
-	// Organizations, causes the analyzer to stop generating new findings. The status
-	// is Creating when the analyzer creation is in progress and Failed when the
-	// analyzer creation has failed.
+	// action, such as removing trusted access for Identity and Access Management
+	// Access Analyzer from Organizations, causes the analyzer to stop generating new
+	// findings. The status is Creating when the analyzer creation is in progress and
+	// Failed when the analyzer creation has failed.
 	//
 	// This member is required.
 	Status AnalyzerStatus
@@ -346,7 +347,7 @@ type AnalyzerSummary struct {
 	// For example, if the creation for the analyzer fails, a Failed status is
 	// returned. For an analyzer with organization as the type, this failure can be due
 	// to an issue with creating the service-linked roles required in the member
-	// accounts of the AWS organization.
+	// accounts of the Amazon Web Services organization.
 	StatusReason *StatusReason
 
 	// The tags added to the analyzer.
@@ -384,15 +385,15 @@ type ArchiveRuleSummary struct {
 // Contains information about CloudTrail access.
 type CloudTrailDetails struct {
 
-	// The ARN of the service role that Access Analyzer uses to access your CloudTrail
-	// trail and service last accessed information.
+	// The ARN of the service role that IAM Access Analyzer uses to access your
+	// CloudTrail trail and service last accessed information.
 	//
 	// This member is required.
 	AccessRole *string
 
-	// The start of the time range for which Access Analyzer reviews your CloudTrail
-	// events. Events with a timestamp before this time are not considered to generate
-	// a policy.
+	// The start of the time range for which IAM Access Analyzer reviews your
+	// CloudTrail events. Events with a timestamp before this time are not considered
+	// to generate a policy.
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -402,7 +403,7 @@ type CloudTrailDetails struct {
 	// This member is required.
 	Trails []Trail
 
-	// The end of the time range for which Access Analyzer reviews your CloudTrail
+	// The end of the time range for which IAM Access Analyzer reviews your CloudTrail
 	// events. Events with a timestamp after this time are not considered to generate a
 	// policy. If this is not included in the request, the default value is the current
 	// time.
@@ -414,7 +415,7 @@ type CloudTrailDetails struct {
 // Contains information about CloudTrail access.
 type CloudTrailProperties struct {
 
-	// The end of the time range for which Access Analyzer reviews your CloudTrail
+	// The end of the time range for which IAM Access Analyzer reviews your CloudTrail
 	// events. Events with a timestamp after this time are not considered to generate a
 	// policy. If this is not included in the request, the default value is the current
 	// time.
@@ -422,9 +423,9 @@ type CloudTrailProperties struct {
 	// This member is required.
 	EndTime *time.Time
 
-	// The start of the time range for which Access Analyzer reviews your CloudTrail
-	// events. Events with a timestamp before this time are not considered to generate
-	// a policy.
+	// The start of the time range for which IAM Access Analyzer reviews your
+	// CloudTrail events. Events with a timestamp before this time are not considered
+	// to generate a policy.
 	//
 	// This member is required.
 	StartTime *time.Time
@@ -487,7 +488,7 @@ type ConfigurationMemberS3Bucket struct {
 
 func (*ConfigurationMemberS3Bucket) isConfiguration() {}
 
-// The access control configuration is for an SQS queue.
+// The access control configuration is for an Amazon SQS queue.
 type ConfigurationMemberSqsQueue struct {
 	Value SqsQueueConfiguration
 
@@ -537,7 +538,7 @@ type Finding struct {
 	// This member is required.
 	Id *string
 
-	// The AWS account ID that owns the resource.
+	// The Amazon Web Services account ID that owns the resource.
 	//
 	// This member is required.
 	ResourceOwnerAccount *string
@@ -601,7 +602,8 @@ type FindingSource struct {
 // This is populated for Amazon S3 bucket findings.
 type FindingSourceDetail struct {
 
-	// The ARN of the access point that generated the finding.
+	// The ARN of the access point that generated the finding. The ARN format depends
+	// on whether the ARN represents an access point or a multi-region access point.
 	AccessPointArn *string
 
 	noSmithyDocumentSerde
@@ -631,7 +633,7 @@ type FindingSummary struct {
 	// This member is required.
 	Id *string
 
-	// The AWS account ID that owns the resource.
+	// The Amazon Web Services account ID that owns the resource.
 	//
 	// This member is required.
 	ResourceOwnerAccount *string
@@ -701,8 +703,8 @@ type GeneratedPolicyProperties struct {
 	CloudTrailProperties *CloudTrailProperties
 
 	// This value is set to true if the generated policy contains all possible actions
-	// for a service that Access Analyzer identified from the CloudTrail trail that you
-	// specified, and false otherwise.
+	// for a service that IAM Access Analyzer identified from the CloudTrail trail that
+	// you specified, and false otherwise.
 	IsComplete *bool
 
 	noSmithyDocumentSerde
@@ -760,7 +762,8 @@ type InlineArchiveRule struct {
 	noSmithyDocumentSerde
 }
 
-// This configuration sets the Amazon S3 access point network origin to Internet.
+// This configuration sets the network origin for the Amazon S3 access point or
+// multi-region access point to Internet.
 type InternetConfiguration struct {
 	noSmithyDocumentSerde
 }
@@ -788,7 +791,7 @@ type JobDetails struct {
 	// A timestamp of when the job was completed.
 	CompletedOn *time.Time
 
-	// Contains the details about the policy generation error.
+	// The job error for the policy generation request.
 	JobError *JobError
 
 	noSmithyDocumentSerde
@@ -822,8 +825,8 @@ type KmsGrantConfiguration struct {
 	// This member is required.
 	GranteePrincipal *string
 
-	// The AWS account under which the grant was issued. The account is used to propose
-	// KMS grants issued by accounts other than the owner of the key.
+	// The Amazon Web Services account under which the grant was issued. The account is
+	// used to propose KMS grants issued by accounts other than the owner of the key.
 	//
 	// This member is required.
 	IssuingAccount *string
@@ -921,9 +924,10 @@ type Location struct {
 }
 
 // The proposed InternetConfiguration or VpcConfiguration to apply to the Amazon S3
-// Access point. You can make the access point accessible from the internet, or you
-// can specify that all requests made through that access point must originate from
-// a specific virtual private cloud (VPC). You can specify only one type of network
+// access point. VpcConfiguration does not apply to multi-region access points. You
+// can make the access point accessible from the internet, or you can specify that
+// all requests made through that access point must originate from a specific
+// virtual private cloud (VPC). You can specify only one type of network
 // configuration. For more information, see Creating access points
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
 //
@@ -935,7 +939,8 @@ type NetworkOriginConfiguration interface {
 }
 
 // The proposed virtual private cloud (VPC) configuration for the Amazon S3 access
-// point. For more information, see VpcConfiguration
+// point. VPC configuration does not apply to multi-region access points. For more
+// information, see VpcConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html).
 type NetworkOriginConfigurationMemberVpcConfiguration struct {
 	Value VpcConfiguration
@@ -945,7 +950,8 @@ type NetworkOriginConfigurationMemberVpcConfiguration struct {
 
 func (*NetworkOriginConfigurationMemberVpcConfiguration) isNetworkOriginConfiguration() {}
 
-// The configuration for the Amazon S3 access point with an Internet origin.
+// The configuration for the Amazon S3 access point or multi-region access point
+// with an Internet origin.
 type NetworkOriginConfigurationMemberInternetConfiguration struct {
 	Value InternetConfiguration
 
@@ -1064,30 +1070,32 @@ type Position struct {
 	noSmithyDocumentSerde
 }
 
-// The configuration for an Amazon S3 access point for the bucket. You can propose
-// up to 10 access points per bucket. If the proposed Amazon S3 access point
-// configuration is for an existing bucket, the access preview uses the proposed
-// access point configuration in place of the existing access points. To propose an
-// access point without a policy, you can provide an empty string as the access
-// point policy. For more information, see Creating access points
+// The configuration for an Amazon S3 access point or multi-region access point for
+// the bucket. You can propose up to 10 access points or multi-region access points
+// per bucket. If the proposed Amazon S3 access point configuration is for an
+// existing bucket, the access preview uses the proposed access point configuration
+// in place of the existing access points. To propose an access point without a
+// policy, you can provide an empty string as the access point policy. For more
+// information, see Creating access points
 // (https://docs.aws.amazon.com/https:/docs.aws.amazon.com/AmazonS3/latest/dev/creating-access-points.html).
 // For more information about access point policy limits, see Access points
 // restrictions and limitations
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/access-points-restrictions-limitations.html).
 type S3AccessPointConfiguration struct {
 
-	// The access point policy.
+	// The access point or multi-region access point policy.
 	AccessPointPolicy *string
 
 	// The proposed Internet and VpcConfiguration to apply to this Amazon S3 access
-	// point. If the access preview is for a new resource and neither is specified, the
-	// access preview uses Internet for the network origin. If the access preview is
-	// for an existing resource and neither is specified, the access preview uses the
-	// exiting network origin.
+	// point. VpcConfiguration does not apply to multi-region access points. If the
+	// access preview is for a new resource and neither is specified, the access
+	// preview uses Internet for the network origin. If the access preview is for an
+	// existing resource and neither is specified, the access preview uses the exiting
+	// network origin.
 	NetworkOrigin NetworkOriginConfiguration
 
-	// The proposed S3PublicAccessBlock configuration to apply to this Amazon S3 Access
-	// Point.
+	// The proposed S3PublicAccessBlock configuration to apply to this Amazon S3 access
+	// point or multi-region access point.
 	PublicAccessBlock *S3PublicAccessBlockConfiguration
 
 	noSmithyDocumentSerde
@@ -1114,18 +1122,19 @@ type S3BucketAclGrantConfiguration struct {
 // Proposed access control configuration for an Amazon S3 bucket. You can propose a
 // configuration for a new Amazon S3 bucket or an existing Amazon S3 bucket that
 // you own by specifying the Amazon S3 bucket policy, bucket ACLs, bucket BPA
-// settings, and Amazon S3 access points attached to the bucket. If the
-// configuration is for an existing Amazon S3 bucket and you do not specify the
-// Amazon S3 bucket policy, the access preview uses the existing policy attached to
-// the bucket. If the access preview is for a new resource and you do not specify
-// the Amazon S3 bucket policy, the access preview assumes a bucket without a
-// policy. To propose deletion of an existing bucket policy, you can specify an
-// empty string. For more information about bucket policy limits, see Bucket Policy
-// Examples
+// settings, Amazon S3 access points, and multi-region access points attached to
+// the bucket. If the configuration is for an existing Amazon S3 bucket and you do
+// not specify the Amazon S3 bucket policy, the access preview uses the existing
+// policy attached to the bucket. If the access preview is for a new resource and
+// you do not specify the Amazon S3 bucket policy, the access preview assumes a
+// bucket without a policy. To propose deletion of an existing bucket policy, you
+// can specify an empty string. For more information about bucket policy limits,
+// see Bucket Policy Examples
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/example-bucket-policies.html).
 type S3BucketConfiguration struct {
 
-	// The configuration of Amazon S3 access points for the bucket.
+	// The configuration of Amazon S3 access points or multi-region access points for
+	// the bucket. You can propose up to 10 new access points per bucket.
 	AccessPoints map[string]S3AccessPointConfiguration
 
 	// The proposed list of ACL grants for the Amazon S3 bucket. You can propose up to
@@ -1149,8 +1158,9 @@ type S3BucketConfiguration struct {
 // is not specified, the access preview uses the existing setting. If the proposed
 // configuration is for a new bucket and the configuration is not specified, the
 // access preview uses false. If the proposed configuration is for a new access
-// point and the access point BPA configuration is not specified, the access
-// preview uses true. For more information, see PublicAccessBlockConfiguration
+// point or multi-region access point and the access point BPA configuration is not
+// specified, the access preview uses true. For more information, see
+// PublicAccessBlockConfiguration
 // (https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/aws-properties-s3-bucket-publicaccessblockconfiguration.html).
 type S3PublicAccessBlockConfiguration struct {
 
@@ -1180,13 +1190,14 @@ type S3PublicAccessBlockConfiguration struct {
 // access preview assumes a secret without a policy. To propose deletion of an
 // existing policy, you can specify an empty string. If the proposed configuration
 // is for a new secret and you do not specify the KMS key ID, the access preview
-// uses the default CMK of the AWS account. If you specify an empty string for the
-// KMS key ID, the access preview uses the default CMK of the AWS account. For more
-// information about secret policy limits, see Quotas for AWS Secrets Manager.
+// uses the default CMK of the Amazon Web Services account. If you specify an empty
+// string for the KMS key ID, the access preview uses the default CMK of the Amazon
+// Web Services account. For more information about secret policy limits, see
+// Quotas for Secrets Manager.
 // (https://docs.aws.amazon.com/secretsmanager/latest/userguide/reference_limits.html).
 type SecretsManagerSecretConfiguration struct {
 
-	// The proposed ARN, key ID, or alias of the AWS KMS customer master key (CMK).
+	// The proposed ARN, key ID, or alias of the KMS customer master key (CMK).
 	KmsKeyId *string
 
 	// The proposed resource policy defining who can access or manage the secret.
@@ -1224,19 +1235,20 @@ type Span struct {
 	noSmithyDocumentSerde
 }
 
-// The proposed access control configuration for an SQS queue. You can propose a
-// configuration for a new SQS queue or an existing SQS queue that you own by
-// specifying the SQS policy. If the configuration is for an existing SQS queue and
-// you do not specify the SQS policy, the access preview uses the existing SQS
-// policy for the queue. If the access preview is for a new resource and you do not
-// specify the policy, the access preview assumes an SQS queue without a policy. To
-// propose deletion of an existing SQS queue policy, you can specify an empty
-// string for the SQS policy. For more information about SQS policy limits, see
+// The proposed access control configuration for an Amazon SQS queue. You can
+// propose a configuration for a new Amazon SQS queue or an existing Amazon SQS
+// queue that you own by specifying the Amazon SQS policy. If the configuration is
+// for an existing Amazon SQS queue and you do not specify the Amazon SQS policy,
+// the access preview uses the existing Amazon SQS policy for the queue. If the
+// access preview is for a new resource and you do not specify the policy, the
+// access preview assumes an Amazon SQS queue without a policy. To propose deletion
+// of an existing Amazon SQS queue policy, you can specify an empty string for the
+// Amazon SQS policy. For more information about Amazon SQS policy limits, see
 // Quotas related to policies
 // (https://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/quotas-policies.html).
 type SqsQueueConfiguration struct {
 
-	// The proposed resource policy for the SQS queue.
+	// The proposed resource policy for the Amazon SQS queue.
 	QueuePolicy *string
 
 	noSmithyDocumentSerde
@@ -1245,8 +1257,8 @@ type SqsQueueConfiguration struct {
 // Provides more details about the current status of the analyzer. For example, if
 // the creation for the analyzer fails, a Failed status is returned. For an
 // analyzer with organization as the type, this failure can be due to an issue with
-// creating the service-linked roles required in the member accounts of the AWS
-// organization.
+// creating the service-linked roles required in the member accounts of the Amazon
+// Web Services organization.
 type StatusReason struct {
 
 	// The reason code for the current status of the analyzer.
@@ -1282,7 +1294,7 @@ type Trail struct {
 	// This member is required.
 	CloudTrailArn *string
 
-	// Possible values are true or false. If set to true, Access Analyzer retrieves
+	// Possible values are true or false. If set to true, IAM Access Analyzer retrieves
 	// CloudTrail data from all regions to analyze and generate a policy.
 	AllRegions *bool
 
@@ -1301,7 +1313,7 @@ type TrailProperties struct {
 	// This member is required.
 	CloudTrailArn *string
 
-	// Possible values are true or false. If set to true, Access Analyzer retrieves
+	// Possible values are true or false. If set to true, IAM Access Analyzer retrieves
 	// CloudTrail data from all regions to analyze and generate a policy.
 	AllRegions *bool
 
@@ -1366,7 +1378,8 @@ type ValidationExceptionField struct {
 }
 
 // The proposed virtual private cloud (VPC) configuration for the Amazon S3 access
-// point. For more information, see VpcConfiguration
+// point. VPC configuration does not apply to multi-region access points. For more
+// information, see VpcConfiguration
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/API_control_VpcConfiguration.html).
 type VpcConfiguration struct {
 

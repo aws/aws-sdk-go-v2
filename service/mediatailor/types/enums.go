@@ -94,7 +94,8 @@ type PlaybackMode string
 
 // Enum values for PlaybackMode
 const (
-	PlaybackModeLoop PlaybackMode = "LOOP"
+	PlaybackModeLoop   PlaybackMode = "LOOP"
+	PlaybackModeLinear PlaybackMode = "LINEAR"
 )
 
 // Values returns all known values for PlaybackMode. Note that this can be expanded
@@ -103,6 +104,7 @@ const (
 func (PlaybackMode) Values() []PlaybackMode {
 	return []PlaybackMode{
 		"LOOP",
+		"LINEAR",
 	}
 }
 
@@ -121,6 +123,24 @@ func (RelativePosition) Values() []RelativePosition {
 	return []RelativePosition{
 		"BEFORE_PROGRAM",
 		"AFTER_PROGRAM",
+	}
+}
+
+type ScheduleEntryType string
+
+// Enum values for ScheduleEntryType
+const (
+	ScheduleEntryTypeProgram     ScheduleEntryType = "PROGRAM"
+	ScheduleEntryTypeFillerSlate ScheduleEntryType = "FILLER_SLATE"
+)
+
+// Values returns all known values for ScheduleEntryType. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ScheduleEntryType) Values() []ScheduleEntryType {
+	return []ScheduleEntryType{
+		"PROGRAM",
+		"FILLER_SLATE",
 	}
 }
 

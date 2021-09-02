@@ -11,27 +11,28 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deploys conformance packs across member accounts in an AWS Organization. Only a
-// master account and a delegated administrator can call this API. When calling
-// this API with a delegated administrator, you must ensure AWS Organizations
-// ListDelegatedAdministrator permissions are added. This API enables organization
-// service access for config-multiaccountsetup.amazonaws.com through the
-// EnableAWSServiceAccess action and creates a service linked role
+// Deploys conformance packs across member accounts in an Amazon Web Services
+// Organization. Only a master account and a delegated administrator can call this
+// API. When calling this API with a delegated administrator, you must ensure
+// Organizations ListDelegatedAdministrator permissions are added. This API enables
+// organization service access for config-multiaccountsetup.amazonaws.com through
+// the EnableAWSServiceAccess action and creates a service linked role
 // AWSServiceRoleForConfigMultiAccountSetup in the master or delegated
 // administrator account of your organization. The service linked role is created
 // only when the role does not exist in the caller account. To use this API with
-// delegated administrator, register a delegated administrator by calling AWS
-// Organization register-delegate-admin for config-multiaccountsetup.amazonaws.com.
-// Prerequisite: Ensure you call EnableAllFeatures API to enable all features in an
-// organization. You must specify either the TemplateS3Uri or the TemplateBody
-// parameter, but not both. If you provide both AWS Config uses the TemplateS3Uri
-// parameter and ignores the TemplateBody parameter. AWS Config sets the state of a
-// conformance pack to CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the
-// conformance pack is created or updated.
+// delegated administrator, register a delegated administrator by calling Amazon
+// Web Services Organization register-delegate-admin for
+// config-multiaccountsetup.amazonaws.com. Prerequisite: Ensure you call
+// EnableAllFeatures API to enable all features in an organization. You must
+// specify either the TemplateS3Uri or the TemplateBody parameter, but not both. If
+// you provide both Config uses the TemplateS3Uri parameter and ignores the
+// TemplateBody parameter. Config sets the state of a conformance pack to
+// CREATE_IN_PROGRESS and UPDATE_IN_PROGRESS until the conformance pack is created
+// or updated.
 //
-// You cannot update a conformance pack
-// while it is in this state. You can create 50 conformance packs with 25 AWS
-// Config rules in each pack and 3 delegated administrator per organization.
+// You cannot update a conformance pack while it is in this state. You
+// can create 50 conformance packs with 25 Config rules in each pack and 3
+// delegated administrator per organization.
 func (c *Client) PutOrganizationConformancePack(ctx context.Context, params *PutOrganizationConformancePackInput, optFns ...func(*Options)) (*PutOrganizationConformancePackOutput, error) {
 	if params == nil {
 		params = &PutOrganizationConformancePackInput{}
@@ -57,15 +58,15 @@ type PutOrganizationConformancePackInput struct {
 	// A list of ConformancePackInputParameter objects.
 	ConformancePackInputParameters []types.ConformancePackInputParameter
 
-	// Amazon S3 bucket where AWS Config stores conformance pack templates. This field
-	// is optional. If used, it must be prefixed with awsconfigconforms.
+	// The name of the Amazon S3 bucket where Config stores conformance pack templates.
+	// This field is optional. If used, it must be prefixed with awsconfigconforms.
 	DeliveryS3Bucket *string
 
 	// The prefix for the Amazon S3 bucket. This field is optional.
 	DeliveryS3KeyPrefix *string
 
-	// A list of AWS accounts to be excluded from an organization conformance pack
-	// while deploying a conformance pack.
+	// A list of Amazon Web Services accounts to be excluded from an organization
+	// conformance pack while deploying a conformance pack.
 	ExcludedAccounts []string
 
 	// A string containing full conformance pack template body. Structure containing

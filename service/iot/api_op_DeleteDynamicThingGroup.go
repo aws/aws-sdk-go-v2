@@ -10,7 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Deletes a dynamic thing group.
+// Deletes a dynamic thing group. Requires permission to access the
+// DeleteDynamicThingGroup
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DeleteDynamicThingGroup(ctx context.Context, params *DeleteDynamicThingGroupInput, optFns ...func(*Options)) (*DeleteDynamicThingGroupOutput, error) {
 	if params == nil {
 		params = &DeleteDynamicThingGroupInput{}

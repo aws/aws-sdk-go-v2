@@ -10,7 +10,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disables the rule.
+// Disables the rule. Requires permission to access the DisableTopicRule
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) DisableTopicRule(ctx context.Context, params *DisableTopicRuleInput, optFns ...func(*Options)) (*DisableTopicRuleOutput, error) {
 	if params == nil {
 		params = &DisableTopicRuleInput{}

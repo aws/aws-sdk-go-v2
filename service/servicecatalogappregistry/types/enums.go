@@ -2,6 +2,32 @@
 
 package types
 
+type ResourceGroupState string
+
+// Enum values for ResourceGroupState
+const (
+	ResourceGroupStateCreating       ResourceGroupState = "CREATING"
+	ResourceGroupStateCreateComplete ResourceGroupState = "CREATE_COMPLETE"
+	ResourceGroupStateCreateFailed   ResourceGroupState = "CREATE_FAILED"
+	ResourceGroupStateUpdating       ResourceGroupState = "UPDATING"
+	ResourceGroupStateUpdateComplete ResourceGroupState = "UPDATE_COMPLETE"
+	ResourceGroupStateUpdateFailed   ResourceGroupState = "UPDATE_FAILED"
+)
+
+// Values returns all known values for ResourceGroupState. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ResourceGroupState) Values() []ResourceGroupState {
+	return []ResourceGroupState{
+		"CREATING",
+		"CREATE_COMPLETE",
+		"CREATE_FAILED",
+		"UPDATING",
+		"UPDATE_COMPLETE",
+		"UPDATE_FAILED",
+	}
+}
+
 type ResourceType string
 
 // Enum values for ResourceType

@@ -12,19 +12,20 @@ import (
 )
 
 // Registers an extension with the CloudFormation service. Registering an extension
-// makes it available for use in CloudFormation templates in your account, and
-// includes:
+// makes it available for use in CloudFormation templates in your Amazon Web
+// Services account, and includes:
 //
 // * Validating the extension schema
 //
-// * Determining which handlers, if
-// any, have been specified for the extension
+// *
+// Determining which handlers, if any, have been specified for the extension
 //
-// * Making the extension available for
-// use in your account
+// *
+// Making the extension available for use in your account
 //
-// For more information on how to develop extensions and ready
-// them for registeration, see Creating Resource Providers
+// For more information on
+// how to develop extensions and ready them for registeration, see Creating
+// Resource Providers
 // (https://docs.aws.amazon.com/cloudformation-cli/latest/userguide/resource-types.html)
 // in the CloudFormation CLI User Guide. You can have a maximum of 50 resource
 // extension versions registered at a time. This maximum is per account and per

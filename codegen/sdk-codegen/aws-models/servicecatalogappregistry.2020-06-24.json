@@ -61,6 +61,9 @@
                     "target": "com.amazonaws.servicecatalogappregistry#GetApplication"
                 },
                 {
+                    "target": "com.amazonaws.servicecatalogappregistry#GetAssociatedResource"
+                },
+                {
                     "target": "com.amazonaws.servicecatalogappregistry#GetAttributeGroup"
                 },
                 {
@@ -106,7 +109,7 @@
                     "name": "servicecatalog"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p> AWS Service Catalog AppRegistry enables organizations to understand the application context of their AWS resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>",
+                "smithy.api#documentation": "<p> Amazon Web Services Service Catalog AppRegistry enables organizations to understand the application context of their Amazon Web Services resources. AppRegistry provides a repository of your applications, their resources, and the application metadata that you use within your enterprise.</p>",
                 "smithy.api#title": "AWS Service Catalog App Registry"
             }
         },
@@ -157,19 +160,23 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a Service Catalog AppRegistry application that is the top-level node in a hierarchy of related\n       cloud resource abstractions.</p>"
+                "smithy.api#documentation": "<p>Represents a Amazon Web Services Service Catalog AppRegistry application that is the top-level node in a hierarchy of related\n       cloud resource abstractions.</p>"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ApplicationArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/applications/[a-z0-9]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ApplicationId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[a-z0-9]{12}"
+                "smithy.api#length": {
+                    "min": 26,
+                    "max": 26
+                },
+                "smithy.api#pattern": "^[a-z0-9]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier": {
@@ -179,7 +186,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "\\w+"
+                "smithy.api#pattern": "^[-.\\w]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ApplicationSummaries": {
@@ -229,7 +236,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary of a Service Catalog AppRegistry application.</p>"
+                "smithy.api#documentation": "<p>Summary of a Amazon Web Services Service Catalog AppRegistry application.</p>"
             }
         },
         "com.amazonaws.servicecatalogappregistry#Arn": {
@@ -239,7 +246,7 @@
                     "min": 1,
                     "max": 1600
                 },
-                "smithy.api#pattern": "arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)"
+                "smithy.api#pattern": "^arn:(aws[a-zA-Z0-9-]*):([a-zA-Z0-9\\-])+:([a-z]{2}(-gov)?-[a-z]+-\\d{1})?:(\\d{12})?:(.*)$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#AssociateAttributeGroup": {
@@ -443,23 +450,23 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Represents a Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.</p>"
+                "smithy.api#documentation": "<p>Represents a Amazon Web Services Service Catalog AppRegistry attribute group that is rich metadata which describes an application and its components.</p>"
             }
         },
         "com.amazonaws.servicecatalogappregistry#AttributeGroupArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:servicecatalog:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:/attribute-groups/[a-z0-9]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#AttributeGroupId": {
             "type": "string",
             "traits": {
                 "smithy.api#length": {
-                    "min": 1,
-                    "max": 100
+                    "min": 26,
+                    "max": 26
                 },
-                "smithy.api#pattern": "[a-z0-9]{12}"
+                "smithy.api#pattern": "^[a-z0-9]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#AttributeGroupIds": {
@@ -475,7 +482,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "\\w+"
+                "smithy.api#pattern": "^[-.\\w]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#AttributeGroupSummaries": {
@@ -525,7 +532,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Summary of a Service Catalog AppRegistry attribute group.</p>"
+                "smithy.api#documentation": "<p>Summary of a Amazon Web Services Service Catalog AppRegistry attribute group.</p>"
             }
         },
         "com.amazonaws.servicecatalogappregistry#Attributes": {
@@ -535,7 +542,7 @@
                     "min": 1,
                     "max": 8000
                 },
-                "smithy.api#pattern": "[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+"
+                "smithy.api#pattern": "^[\\u0009\\u000A\\u000D\\u0020-\\u00FF]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ClientToken": {
@@ -545,7 +552,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "[a-zA-Z0-9][a-zA-Z0-9_-]*"
+                "smithy.api#pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]*$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ConflictException": {
@@ -1054,6 +1061,81 @@
                     "traits": {
                         "smithy.api#documentation": "<p>Key-value pairs associated with the application.</p>"
                     }
+                },
+                "integrations": {
+                    "target": "com.amazonaws.servicecatalogappregistry#Integrations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about the integration of the application with other services, such as Resource Groups.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#GetAssociatedResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.servicecatalogappregistry#GetAssociatedResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.servicecatalogappregistry#GetAssociatedResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.servicecatalogappregistry#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.servicecatalogappregistry#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Gets the resource associated with the application.</p>",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/applications/{application}/resources/{resourceType}/{resource}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#GetAssociatedResourceRequest": {
+            "type": "structure",
+            "members": {
+                "application": {
+                    "target": "com.amazonaws.servicecatalogappregistry#ApplicationSpecifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ID of the application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "resourceType": {
+                    "target": "com.amazonaws.servicecatalogappregistry#ResourceType",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The type of resource associated with the application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "resource": {
+                    "target": "com.amazonaws.servicecatalogappregistry#ResourceSpecifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name or ID of the resource associated with the application.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#GetAssociatedResourceResponse": {
+            "type": "structure",
+            "members": {
+                "resource": {
+                    "target": "com.amazonaws.servicecatalogappregistry#Resource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The resource associated with the application.</p>"
+                    }
                 }
             }
         },
@@ -1149,6 +1231,20 @@
                         "smithy.api#documentation": "<p>Key-value pairs associated with the attribute group.</p>"
                     }
                 }
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#Integrations": {
+            "type": "structure",
+            "members": {
+                "resourceGroup": {
+                    "target": "com.amazonaws.servicecatalogappregistry#ResourceGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p> The information about the resource group integration.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The information about the service integration.</p>"
             }
         },
         "com.amazonaws.servicecatalogappregistry#InternalServerException": {
@@ -1526,7 +1622,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "\\w+"
+                "smithy.api#pattern": "^[-.\\w]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#NextToken": {
@@ -1536,7 +1632,96 @@
                     "min": 1,
                     "max": 2024
                 },
-                "smithy.api#pattern": "[A-Za-z0-9+/=]+"
+                "smithy.api#pattern": "^[A-Za-z0-9+/=]+$"
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#Resource": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.servicecatalogappregistry#ResourceSpecifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the resource.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.servicecatalogappregistry#StackArn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource.</p>"
+                    }
+                },
+                "associationTime": {
+                    "target": "com.amazonaws.servicecatalogappregistry#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The time the resource was associated with the application.</p>"
+                    }
+                },
+                "integrations": {
+                    "target": "com.amazonaws.servicecatalogappregistry#ResourceIntegrations",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The service integration information about the resource.\n     </p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p> The information about the resource.</p>"
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#ResourceGroup": {
+            "type": "structure",
+            "members": {
+                "state": {
+                    "target": "com.amazonaws.servicecatalogappregistry#ResourceGroupState",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The state of the propagation process for the resource group. The states includes:</p>\n         <p>\n            <code>CREATING </code>if the resource group is in the process of being created.</p>\n         <p>\n            <code>CREATE_COMPLETE</code> if the resource group was created successfully.</p>\n         <p>\n            <code>CREATE_FAILED</code> if the resource group failed to be created.</p>\n         <p>\n            <code>UPDATING</code> if the resource group is in the process of being updated.</p>\n         <p>\n            <code>UPDATE_COMPLETE</code> if the resource group updated successfully.</p>\n         <p>\n            <code>UPDATE_FAILED</code> if the resource group could not update successfully.</p>"
+                    }
+                },
+                "arn": {
+                    "target": "com.amazonaws.servicecatalogappregistry#Arn",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon resource name (ARN) of the resource group.</p>"
+                    }
+                },
+                "errorMessage": {
+                    "target": "com.amazonaws.servicecatalogappregistry#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The error message that generates when the propagation process for the resource group fails.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The information about the resource group integration.</p>"
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#ResourceGroupState": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "CREATING",
+                        "name": "CREATING"
+                    },
+                    {
+                        "value": "CREATE_COMPLETE",
+                        "name": "CREATE_COMPLETE"
+                    },
+                    {
+                        "value": "CREATE_FAILED",
+                        "name": "CREATE_FAILED"
+                    },
+                    {
+                        "value": "UPDATING",
+                        "name": "UPDATING"
+                    },
+                    {
+                        "value": "UPDATE_COMPLETE",
+                        "name": "UPDATE_COMPLETE"
+                    },
+                    {
+                        "value": "UPDATE_FAILED",
+                        "name": "UPDATE_FAILED"
+                    }
+                ]
             }
         },
         "com.amazonaws.servicecatalogappregistry#ResourceInfo": {
@@ -1556,7 +1741,21 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the resource.</p>"
+                "smithy.api#documentation": "<p>The information about the resource.</p>"
+            }
+        },
+        "com.amazonaws.servicecatalogappregistry#ResourceIntegrations": {
+            "type": "structure",
+            "members": {
+                "resourceGroup": {
+                    "target": "com.amazonaws.servicecatalogappregistry#ResourceGroup",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The information about the integration of Resource Groups.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The service integration information about the resource.</p>"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ResourceNotFoundException": {
@@ -1579,7 +1778,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "\\S+"
+                "smithy.api#pattern": "^\\S+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#ResourceType": {
@@ -1615,7 +1814,7 @@
         "com.amazonaws.servicecatalogappregistry#StackArn": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}"
+                "smithy.api#pattern": "^arn:aws[-a-z]*:cloudformation:[a-z]{2}(-gov)?-[a-z]+-\\d:\\d{12}:stack/[a-zA-Z][-A-Za-z0-9]{0,127}/[0-9a-f]{8}(-[0-9a-f]{4}){3}-[0-9a-f]{12}$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#String": {
@@ -1656,7 +1855,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Syncs the resource with what is currently recorded in App registry. Specifically, the resource’s App registry system tags are synced with its associated application. The resource is removed if it is not associated with the application. The caller must have permissions to read and update the resource.</p>",
+                "smithy.api#documentation": "<p>Syncs the resource with current AppRegistry records.</p> \n         <p>Specifically, the resource’s AppRegistry system tags sync with its associated application. We remove the resource's AppRegistry system tags if it does not associate with the application. The caller must have permissions to read and update the resource.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/sync/{resourceType}/{resource}",
@@ -1678,7 +1877,7 @@
                 "resource": {
                     "target": "com.amazonaws.servicecatalogappregistry#ResourceSpecifier",
                     "traits": {
-                        "smithy.api#documentation": "<p>An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an AWS CloudFormation stack, or an Amazon S3 bucket.</p>",
+                        "smithy.api#documentation": "<p>An entity you can work with and specify with a name or ID. Examples include an Amazon EC2 instance, an Amazon Web Services CloudFormation stack, or an Amazon S3 bucket.</p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -1715,7 +1914,7 @@
                     "min": 1,
                     "max": 128
                 },
-                "smithy.api#pattern": "(?!aws:)[a-zA-Z+-=._:/]+"
+                "smithy.api#pattern": "^(?!aws:)[a-zA-Z+-=._:/]+$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#TagKeys": {
@@ -1789,7 +1988,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*"
+                "smithy.api#pattern": "^[\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*$"
             }
         },
         "com.amazonaws.servicecatalogappregistry#Tags": {

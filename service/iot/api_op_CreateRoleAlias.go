@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a role alias.
+// Creates a role alias. Requires permission to access the CreateRoleAlias
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateRoleAlias(ctx context.Context, params *CreateRoleAliasInput, optFns ...func(*Options)) (*CreateRoleAliasOutput, error) {
 	if params == nil {
 		params = &CreateRoleAliasInput{}
@@ -40,7 +42,8 @@ type CreateRoleAliasInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// How long (in seconds) the credentials will be valid.
+	// How long (in seconds) the credentials will be valid. The default value is 3,600
+	// seconds.
 	CredentialDurationSeconds *int32
 
 	// Metadata which can be used to manage the role alias. For URI Request parameters

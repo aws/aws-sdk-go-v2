@@ -30,7 +30,7 @@ func (c *Client) ListIngestions(ctx context.Context, params *ListIngestionsInput
 
 type ListIngestionsInput struct {
 
-	// The Amazon Web Services account; ID.
+	// The Amazon Web Services account ID.
 	//
 	// This member is required.
 	AwsAccountId *string

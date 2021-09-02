@@ -81,6 +81,13 @@ type RunJobFlowInput struct {
 	// instance group.
 	AutoScalingRole *string
 
+	// An auto-termination policy for an Amazon EMR cluster. An auto-termination policy
+	// defines the amount of idle time in seconds after which a cluster automatically
+	// terminates. For alternative cluster termination options, see Control cluster
+	// termination
+	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-termination.html).
+	AutoTerminationPolicy *types.AutoTerminationPolicy
+
 	// A list of bootstrap actions to run before Hadoop starts on the cluster nodes.
 	BootstrapActions []types.BootstrapActionConfig
 
@@ -230,15 +237,16 @@ type RunJobFlowInput struct {
 	// instances.
 	Tags []types.Tag
 
-	// Set this value to true so that IAM principals in the account associated with the
-	// cluster can perform EMR actions on the cluster that their IAM policies allow.
-	// This value defaults to true for clusters created using the EMR API or the CLI
-	// create-cluster
+	// Set this value to true so that IAM principals in the Amazon Web Services account
+	// associated with the cluster can perform EMR actions on the cluster that their
+	// IAM policies allow. This value defaults to true for clusters created using the
+	// EMR API or the CLI create-cluster
 	// (https://docs.aws.amazon.com/cli/latest/reference/emr/create-cluster.html)
 	// command. When set to false, only the IAM principal that created the cluster and
-	// the account root user can perform EMR actions for the cluster, regardless of the
-	// IAM permissions policies attached to other IAM principals. For more information,
-	// see Understanding the EMR Cluster VisibleToAllUsers Setting
+	// the Amazon Web Services account root user can perform EMR actions for the
+	// cluster, regardless of the IAM permissions policies attached to other IAM
+	// principals. For more information, see Understanding the EMR Cluster
+	// VisibleToAllUsers Setting
 	// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/security_iam_emr-with-iam.html#security_set_visible_to_all_users)
 	// in the Amazon EMRManagement Guide.
 	VisibleToAllUsers bool

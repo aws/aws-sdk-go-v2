@@ -11,7 +11,9 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates an authorizer.
+// Creates an authorizer. Requires permission to access the CreateAuthorizer
+// (https://docs.aws.amazon.com/service-authorization/latest/reference/list_awsiot.html#awsiot-actions-as-permissions)
+// action.
 func (c *Client) CreateAuthorizer(ctx context.Context, params *CreateAuthorizerInput, optFns ...func(*Options)) (*CreateAuthorizerOutput, error) {
 	if params == nil {
 		params = &CreateAuthorizerInput{}
@@ -39,8 +41,7 @@ type CreateAuthorizerInput struct {
 	// This member is required.
 	AuthorizerName *string
 
-	// Specifies whether AWS IoT validates the token signature in an authorization
-	// request.
+	// Specifies whether IoT validates the token signature in an authorization request.
 	SigningDisabled *bool
 
 	// The status of the create authorizer request.

@@ -27,10 +27,10 @@ func (e *AlreadyExistsException) ErrorMessage() string {
 func (e *AlreadyExistsException) ErrorCode() string             { return "AlreadyExistsException" }
 func (e *AlreadyExistsException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the specified AWS CloudHSM cluster is already
+// The request was rejected because the specified CloudHSM cluster is already
 // associated with a custom key store or it shares a backup history with a cluster
 // that is associated with a custom key store. Each custom key store must be
-// associated with a different AWS CloudHSM cluster. Clusters that share a backup
+// associated with a different CloudHSM cluster. Clusters that share a backup
 // history have the same cluster certificate. To view the cluster certificate of a
 // cluster, use the DescribeClusters
 // (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
@@ -53,12 +53,12 @@ func (e *CloudHsmClusterInUseException) ErrorMessage() string {
 func (e *CloudHsmClusterInUseException) ErrorCode() string             { return "CloudHsmClusterInUseException" }
 func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the associated AWS CloudHSM cluster did not
-// meet the configuration requirements for a custom key store.
+// The request was rejected because the associated CloudHSM cluster did not meet
+// the configuration requirements for a custom key store.
 //
-// * The cluster must
-// be configured with private subnets in at least two different Availability Zones
-// in the Region.
+// * The cluster must be
+// configured with private subnets in at least two different Availability Zones in
+// the Region.
 //
 // * The security group for the cluster
 // (https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html)
@@ -72,25 +72,24 @@ func (e *CloudHsmClusterInUseException) ErrorFault() smithy.ErrorFault { return 
 // operation.
 //
 // * The cluster must contain at least as many HSMs as the operation
-// requires. To add HSMs, use the AWS CloudHSM CreateHsm
+// requires. To add HSMs, use the CloudHSM CreateHsm
 // (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_CreateHsm.html)
 // operation. For the CreateCustomKeyStore, UpdateCustomKeyStore, and CreateKey
-// operations, the AWS CloudHSM cluster must have at least two active HSMs, each in
-// a different Availability Zone. For the ConnectCustomKeyStore operation, the AWS
+// operations, the CloudHSM cluster must have at least two active HSMs, each in a
+// different Availability Zone. For the ConnectCustomKeyStore operation, the
 // CloudHSM must contain at least one active HSM.
 //
 // For information about the
-// requirements for an AWS CloudHSM cluster that is associated with a custom key
-// store, see Assemble the Prerequisites
+// requirements for an CloudHSM cluster that is associated with a custom key store,
+// see Assemble the Prerequisites
 // (https://docs.aws.amazon.com/kms/latest/developerguide/create-keystore.html#before-keystore)
-// in the AWS Key Management Service Developer Guide. For information about
-// creating a private subnet for an AWS CloudHSM cluster, see Create a Private
-// Subnet
+// in the Key Management Service Developer Guide. For information about creating a
+// private subnet for an CloudHSM cluster, see Create a Private Subnet
 // (https://docs.aws.amazon.com/cloudhsm/latest/userguide/create-subnets.html) in
-// the AWS CloudHSM User Guide. For information about cluster security groups, see
+// the CloudHSM User Guide. For information about cluster security groups, see
 // Configure a Default Security Group
 // (https://docs.aws.amazon.com/cloudhsm/latest/userguide/configure-sg.html) in the
-// AWS CloudHSM User Guide .
+// CloudHSM User Guide .
 type CloudHsmClusterInvalidConfigurationException struct {
 	Message *string
 
@@ -113,11 +112,11 @@ func (e *CloudHsmClusterInvalidConfigurationException) ErrorFault() smithy.Error
 	return smithy.FaultClient
 }
 
-// The request was rejected because the AWS CloudHSM cluster that is associated
-// with the custom key store is not active. Initialize and activate the cluster and
-// try the command again. For detailed instructions, see Getting Started
+// The request was rejected because the CloudHSM cluster that is associated with
+// the custom key store is not active. Initialize and activate the cluster and try
+// the command again. For detailed instructions, see Getting Started
 // (https://docs.aws.amazon.com/cloudhsm/latest/userguide/getting-started.html) in
-// the AWS CloudHSM User Guide.
+// the CloudHSM User Guide.
 type CloudHsmClusterNotActiveException struct {
 	Message *string
 
@@ -138,8 +137,8 @@ func (e *CloudHsmClusterNotActiveException) ErrorCode() string {
 }
 func (e *CloudHsmClusterNotActiveException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because AWS KMS cannot find the AWS CloudHSM cluster
-// with the specified cluster ID. Retry the request with a different cluster ID.
+// The request was rejected because KMS cannot find the CloudHSM cluster with the
+// specified cluster ID. Retry the request with a different cluster ID.
 type CloudHsmClusterNotFoundException struct {
 	Message *string
 
@@ -160,14 +159,14 @@ func (e *CloudHsmClusterNotFoundException) ErrorCode() string {
 }
 func (e *CloudHsmClusterNotFoundException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the specified AWS CloudHSM cluster has a
-// different cluster certificate than the original cluster. You cannot use the
-// operation to specify an unrelated cluster. Specify a cluster that shares a
-// backup history with the original cluster. This includes clusters that were
-// created from a backup of the current cluster, and clusters that were created
-// from the same backup that produced the current cluster. Clusters that share a
-// backup history have the same cluster certificate. To view the cluster
-// certificate of a cluster, use the DescribeClusters
+// The request was rejected because the specified CloudHSM cluster has a different
+// cluster certificate than the original cluster. You cannot use the operation to
+// specify an unrelated cluster. Specify a cluster that shares a backup history
+// with the original cluster. This includes clusters that were created from a
+// backup of the current cluster, and clusters that were created from the same
+// backup that produced the current cluster. Clusters that share a backup history
+// have the same cluster certificate. To view the cluster certificate of a cluster,
+// use the DescribeClusters
 // (https://docs.aws.amazon.com/cloudhsm/latest/APIReference/API_DescribeClusters.html)
 // operation.
 type CloudHsmClusterNotRelatedException struct {
@@ -192,10 +191,10 @@ func (e *CloudHsmClusterNotRelatedException) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-// The request was rejected because the custom key store contains AWS KMS customer
-// master keys (CMKs). After verifying that you do not need to use the CMKs, use
-// the ScheduleKeyDeletion operation to delete the CMKs. After they are deleted,
-// you can delete the custom key store.
+// The request was rejected because the custom key store contains KMS keys. After
+// verifying that you do not need to use the KMS keys, use the ScheduleKeyDeletion
+// operation to delete the KMS keys. After they are deleted, you can delete the
+// custom key store.
 type CustomKeyStoreHasCMKsException struct {
 	Message *string
 
@@ -276,7 +275,7 @@ func (e *CustomKeyStoreNameInUseException) ErrorCode() string {
 }
 func (e *CustomKeyStoreNameInUseException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because AWS KMS cannot find a custom key store with the
+// The request was rejected because KMS cannot find a custom key store with the
 // specified key store name or ID.
 type CustomKeyStoreNotFoundException struct {
 	Message *string
@@ -318,7 +317,7 @@ func (e *DependencyTimeoutException) ErrorMessage() string {
 func (e *DependencyTimeoutException) ErrorCode() string             { return "DependencyTimeoutException" }
 func (e *DependencyTimeoutException) ErrorFault() smithy.ErrorFault { return smithy.FaultServer }
 
-// The request was rejected because the specified CMK is not enabled.
+// The request was rejected because the specified KMS key is not enabled.
 type DisabledException struct {
 	Message *string
 
@@ -358,9 +357,9 @@ func (e *ExpiredImportTokenException) ErrorMessage() string {
 func (e *ExpiredImportTokenException) ErrorCode() string             { return "ExpiredImportTokenException" }
 func (e *ExpiredImportTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the specified CMK cannot decrypt the data. The
-// KeyId in a Decrypt request and the SourceKeyId in a ReEncrypt request must
-// identify the same CMK that was used to encrypt the ciphertext.
+// The request was rejected because the specified KMS key cannot decrypt the data.
+// The KeyId in a Decrypt request and the SourceKeyId in a ReEncrypt request must
+// identify the same KMS key that was used to encrypt the ciphertext.
 type IncorrectKeyException struct {
 	Message *string
 
@@ -381,7 +380,7 @@ func (e *IncorrectKeyException) ErrorFault() smithy.ErrorFault { return smithy.F
 
 // The request was rejected because the key material in the request is, expired,
 // invalid, or is not the same key material that was previously imported into this
-// customer master key (CMK).
+// KMS key.
 type IncorrectKeyMaterialException struct {
 	Message *string
 
@@ -401,8 +400,8 @@ func (e *IncorrectKeyMaterialException) ErrorCode() string             { return 
 func (e *IncorrectKeyMaterialException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the trust anchor certificate in the request is
-// not the trust anchor certificate for the specified AWS CloudHSM cluster. When
-// you initialize the cluster
+// not the trust anchor certificate for the specified CloudHSM cluster. When you
+// initialize the cluster
 // (https://docs.aws.amazon.com/cloudhsm/latest/userguide/initialize-cluster.html#sign-csr),
 // you create the trust anchor certificate and save it in the customerCA.crt file.
 type IncorrectTrustAnchorException struct {
@@ -466,7 +465,7 @@ func (e *InvalidArnException) ErrorFault() smithy.ErrorFault { return smithy.Fau
 // specified ciphertext, or additional authenticated data incorporated into the
 // ciphertext, such as the encryption context, is corrupted, missing, or otherwise
 // invalid. From the ImportKeyMaterial operation, the request was rejected because
-// AWS KMS could not decrypt the encrypted (wrapped) key material.
+// KMS could not decrypt the encrypted (wrapped) key material.
 type InvalidCiphertextException struct {
 	Message *string
 
@@ -524,7 +523,7 @@ func (e *InvalidGrantTokenException) ErrorCode() string             { return "In
 func (e *InvalidGrantTokenException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
 // The request was rejected because the provided import token is invalid or is
-// associated with a different customer master key (CMK).
+// associated with a different KMS key.
 type InvalidImportTokenException struct {
 	Message *string
 
@@ -546,17 +545,17 @@ func (e *InvalidImportTokenException) ErrorFault() smithy.ErrorFault { return sm
 // The request was rejected for one of the following reasons:
 //
 // * The KeyUsage value
-// of the CMK is incompatible with the API operation.
+// of the KMS key is incompatible with the API operation.
 //
-// * The encryption algorithm
-// or signing algorithm specified for the operation is incompatible with the type
-// of key material in the CMK (CustomerMasterKeySpec).
+// * The encryption
+// algorithm or signing algorithm specified for the operation is incompatible with
+// the type of key material in the KMS key (KeySpec).
 //
 // For encrypting, decrypting,
 // re-encrypting, and generating data keys, the KeyUsage must be ENCRYPT_DECRYPT.
 // For signing and verifying, the KeyUsage must be SIGN_VERIFY. To find the
-// KeyUsage of a CMK, use the DescribeKey operation. To find the encryption or
-// signing algorithms supported for a particular CMK, use the DescribeKey
+// KeyUsage of a KMS key, use the DescribeKey operation. To find the encryption or
+// signing algorithms supported for a particular KMS key, use the DescribeKey
 // operation.
 type InvalidKeyUsageException struct {
 	Message *string
@@ -596,8 +595,8 @@ func (e *InvalidMarkerException) ErrorMessage() string {
 func (e *InvalidMarkerException) ErrorCode() string             { return "InvalidMarkerException" }
 func (e *InvalidMarkerException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The request was rejected because the specified CMK was not available. You can
-// retry the request.
+// The request was rejected because the specified KMS key was not available. You
+// can retry the request.
 type KeyUnavailableException struct {
 	Message *string
 
@@ -638,7 +637,7 @@ func (e *KMSInternalException) ErrorFault() smithy.ErrorFault { return smithy.Fa
 
 // The request was rejected because the signature verification failed. Signature
 // verification fails when it cannot confirm that signature was produced by signing
-// the specified message with the specified CMK and signing algorithm.
+// the specified message with the specified KMS key and signing algorithm.
 type KMSInvalidSignatureException struct {
 	Message *string
 
@@ -659,9 +658,9 @@ func (e *KMSInvalidSignatureException) ErrorFault() smithy.ErrorFault { return s
 
 // The request was rejected because the state of the specified resource is not
 // valid for this request. For more information about how key state affects the use
-// of a CMK, see How Key State Affects Use of a Customer Master Key
+// of a KMS key, see Key state: Effect on your KMS key
 // (https://docs.aws.amazon.com/kms/latest/developerguide/key-state.html) in the
-// AWS Key Management Service Developer Guide .
+// Key Management Service Developer Guide .
 type KMSInvalidStateException struct {
 	Message *string
 
@@ -682,7 +681,7 @@ func (e *KMSInvalidStateException) ErrorFault() smithy.ErrorFault { return smith
 
 // The request was rejected because a quota was exceeded. For more information, see
 // Quotas (https://docs.aws.amazon.com/kms/latest/developerguide/limits.html) in
-// the AWS Key Management Service Developer Guide.
+// the Key Management Service Developer Guide.
 type LimitExceededException struct {
 	Message *string
 

@@ -53,7 +53,7 @@ type CopySnapshotInput struct {
 	// export a snapshot, be sure MemoryDB has the needed permissions to this S3
 	// bucket. For more information, see Step 2: Grant MemoryDB Access to Your Amazon
 	// S3 Bucket
-	// (https://docs.aws.amazon.com/AmazonMemoryDB/latest/devguide/snapshots-exporting.html).
+	// (https://docs.aws.amazon.com/MemoryDB/latest/devguide/snapshots-exporting.html).
 	TargetBucket *string
 
 	noSmithyDocumentSerde

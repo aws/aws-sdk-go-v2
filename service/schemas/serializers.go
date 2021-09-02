@@ -73,6 +73,11 @@ func awsRestjson1_serializeOpDocumentCreateDiscovererInput(v *CreateDiscovererIn
 	object := value.Object()
 	defer object.Close()
 
+	if v.CrossAccount {
+		ok := object.Key("CrossAccount")
+		ok.Boolean(v.CrossAccount)
+	}
+
 	if v.Description != nil {
 		ok := object.Key("Description")
 		ok.String(*v.Description)
@@ -2049,6 +2054,11 @@ func awsRestjson1_serializeOpHttpBindingsUpdateDiscovererInput(v *UpdateDiscover
 func awsRestjson1_serializeOpDocumentUpdateDiscovererInput(v *UpdateDiscovererInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
+
+	if v.CrossAccount {
+		ok := object.Key("CrossAccount")
+		ok.Boolean(v.CrossAccount)
+	}
 
 	if v.Description != nil {
 		ok := object.Key("Description")

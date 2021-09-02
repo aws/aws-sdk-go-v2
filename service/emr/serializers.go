@@ -862,6 +862,53 @@ func (m *awsAwsjson11_serializeOpDescribeStudio) HandleSerialize(ctx context.Con
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpGetAutoTerminationPolicy struct {
+}
+
+func (*awsAwsjson11_serializeOpGetAutoTerminationPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpGetAutoTerminationPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetAutoTerminationPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.GetAutoTerminationPolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentGetAutoTerminationPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpGetBlockPublicAccessConfiguration struct {
 }
 
@@ -1708,6 +1755,53 @@ func (m *awsAwsjson11_serializeOpPutAutoScalingPolicy) HandleSerialize(ctx conte
 	return next.HandleSerialize(ctx, in)
 }
 
+type awsAwsjson11_serializeOpPutAutoTerminationPolicy struct {
+}
+
+func (*awsAwsjson11_serializeOpPutAutoTerminationPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpPutAutoTerminationPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*PutAutoTerminationPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.PutAutoTerminationPolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentPutAutoTerminationPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
 type awsAwsjson11_serializeOpPutBlockPublicAccessConfiguration struct {
 }
 
@@ -1834,6 +1928,53 @@ func (m *awsAwsjson11_serializeOpRemoveAutoScalingPolicy) HandleSerialize(ctx co
 
 	jsonEncoder := smithyjson.NewEncoder()
 	if err := awsAwsjson11_serializeOpDocumentRemoveAutoScalingPolicyInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = httpBindingEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+
+type awsAwsjson11_serializeOpRemoveAutoTerminationPolicy struct {
+}
+
+func (*awsAwsjson11_serializeOpRemoveAutoTerminationPolicy) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsAwsjson11_serializeOpRemoveAutoTerminationPolicy) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*RemoveAutoTerminationPolicyInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	request.Request.URL.Path = "/"
+	request.Request.Method = "POST"
+	httpBindingEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	httpBindingEncoder.SetHeader("Content-Type").String("application/x-amz-json-1.1")
+	httpBindingEncoder.SetHeader("X-Amz-Target").String("ElasticMapReduce.RemoveAutoTerminationPolicy")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsAwsjson11_serializeOpDocumentRemoveAutoTerminationPolicyInput(input, jsonEncoder.Value); err != nil {
 		return out, metadata, &smithy.SerializationError{Err: err}
 	}
 
@@ -2378,6 +2519,18 @@ func awsAwsjson11_serializeDocumentAutoScalingPolicy(v *types.AutoScalingPolicy,
 		if err := awsAwsjson11_serializeDocumentScalingRuleList(v.Rules, ok); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentAutoTerminationPolicy(v *types.AutoTerminationPolicy, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.IdleTimeout != 0 {
+		ok := object.Key("IdleTimeout")
+		ok.Long(v.IdleTimeout)
 	}
 
 	return nil
@@ -4215,6 +4368,18 @@ func awsAwsjson11_serializeOpDocumentDescribeStudioInput(v *DescribeStudioInput,
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentGetAutoTerminationPolicyInput(v *GetAutoTerminationPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterId != nil {
+		ok := object.Key("ClusterId")
+		ok.String(*v.ClusterId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentGetBlockPublicAccessConfigurationInput(v *GetBlockPublicAccessConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4599,6 +4764,25 @@ func awsAwsjson11_serializeOpDocumentPutAutoScalingPolicyInput(v *PutAutoScaling
 	return nil
 }
 
+func awsAwsjson11_serializeOpDocumentPutAutoTerminationPolicyInput(v *PutAutoTerminationPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.AutoTerminationPolicy != nil {
+		ok := object.Key("AutoTerminationPolicy")
+		if err := awsAwsjson11_serializeDocumentAutoTerminationPolicy(v.AutoTerminationPolicy, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ClusterId != nil {
+		ok := object.Key("ClusterId")
+		ok.String(*v.ClusterId)
+	}
+
+	return nil
+}
+
 func awsAwsjson11_serializeOpDocumentPutBlockPublicAccessConfigurationInput(v *PutBlockPublicAccessConfigurationInput, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -4644,6 +4828,18 @@ func awsAwsjson11_serializeOpDocumentRemoveAutoScalingPolicyInput(v *RemoveAutoS
 	if v.InstanceGroupId != nil {
 		ok := object.Key("InstanceGroupId")
 		ok.String(*v.InstanceGroupId)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeOpDocumentRemoveAutoTerminationPolicyInput(v *RemoveAutoTerminationPolicyInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClusterId != nil {
+		ok := object.Key("ClusterId")
+		ok.String(*v.ClusterId)
 	}
 
 	return nil
@@ -4704,6 +4900,13 @@ func awsAwsjson11_serializeOpDocumentRunJobFlowInput(v *RunJobFlowInput, value s
 	if v.AutoScalingRole != nil {
 		ok := object.Key("AutoScalingRole")
 		ok.String(*v.AutoScalingRole)
+	}
+
+	if v.AutoTerminationPolicy != nil {
+		ok := object.Key("AutoTerminationPolicy")
+		if err := awsAwsjson11_serializeDocumentAutoTerminationPolicy(v.AutoTerminationPolicy, ok); err != nil {
+			return err
+		}
 	}
 
 	if v.BootstrapActions != nil {
