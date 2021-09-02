@@ -1,3 +1,9 @@
+# v1.15.0 (2021-09-02)
+
+* **Feature**: API client updated
+* **Feature**: Add support for S3 Multi-Region Access Point ARNs.
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.14.0 (2021-08-27)
 
 * **Feature**: Updated API model to latest revision.

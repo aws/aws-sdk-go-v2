@@ -1,3 +1,7 @@
+# v1.8.0 (2021-09-02)
+
+* **Feature**: Add support for S3 Multi-Region Access Point ARNs.
+
 # v1.7.0 (2021-08-27)
 
 * **Feature**: Updated `github.com/aws/smithy-go` to latest version

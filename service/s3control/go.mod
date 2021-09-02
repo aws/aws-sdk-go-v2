@@ -4,7 +4,7 @@ go 1.15
 
 require (
 	github.com/aws/aws-sdk-go-v2 v1.9.0
-	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.6.0
+	github.com/aws/aws-sdk-go-v2/service/internal/s3shared v1.7.0
 	github.com/aws/smithy-go v1.8.0
 )
 
