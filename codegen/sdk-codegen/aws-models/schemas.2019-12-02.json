@@ -150,6 +150,12 @@
                         "smithy.api#required": {}
                     }
                 },
+                "CrossAccount": {
+                    "target": "com.amazonaws.schemas#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Support discovery of schemas in events sent to the bus from another account. (default: true).</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.schemas#Tags",
                     "traits": {
@@ -190,6 +196,12 @@
                     "target": "com.amazonaws.schemas#DiscovererState",
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the discoverer.</p>"
+                    }
+                },
+                "CrossAccount": {
+                    "target": "com.amazonaws.schemas#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
                     }
                 },
                 "Tags": {
@@ -912,6 +924,12 @@
                         "smithy.api#documentation": "<p>The state of the discoverer.</p>"
                     }
                 },
+                "CrossAccount": {
+                    "target": "com.amazonaws.schemas#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
+                    }
+                },
                 "Tags": {
                     "target": "com.amazonaws.schemas#Tags",
                     "traits": {
@@ -1166,6 +1184,12 @@
                     "target": "com.amazonaws.schemas#DiscovererState",
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the discoverer.</p>"
+                    }
+                },
+                "CrossAccount": {
+                    "target": "com.amazonaws.schemas#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
                     }
                 },
                 "Tags": {
@@ -2841,6 +2865,12 @@
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
+                },
+                "CrossAccount": {
+                    "target": "com.amazonaws.schemas#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Support discovery of schemas in events sent to the bus from another account. (default: true)</p>"
+                    }
                 }
             }
         },
@@ -2875,6 +2905,12 @@
                     "target": "com.amazonaws.schemas#DiscovererState",
                     "traits": {
                         "smithy.api#documentation": "<p>The state of the discoverer.</p>"
+                    }
+                },
+                "CrossAccount": {
+                    "target": "com.amazonaws.schemas#__boolean",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Status if the discoverer will discover schemas from events sent from another account.</p>"
                     }
                 },
                 "Tags": {
@@ -3107,6 +3143,9 @@
                     }
                 }
             }
+        },
+        "com.amazonaws.schemas#__boolean": {
+            "type": "boolean"
         },
         "com.amazonaws.schemas#__integer": {
             "type": "integer"
