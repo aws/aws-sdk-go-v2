@@ -1,0 +1,10 @@
+{
+    "id": "0c026d00-c5d0-4cf3-a1a1-00108e4634da",
+    "type": "feature",
+    "description": "Add support for S3 Multi-Region Access Point ARNs.",
+    "modules": [
+        "config",
+        "service/internal/s3shared",
+        "service/s3"
+    ]
+}
