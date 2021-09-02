@@ -46,6 +46,7 @@ public final class AwsSignatureVersion4 implements GoIntegration {
     public static final String SIGNER_INTERFACE_NAME = "HTTPSignerV4";
     public static final String SIGNER_CONFIG_FIELD_NAME = SIGNER_INTERFACE_NAME;
     public static final String NEW_SIGNER_FUNC_NAME = "newDefaultV4Signer";
+    public static final String NEW_SIGNER_V4A_FUNC_NAME = "newDefaultV4aSigner";
     public static final String SIGNER_RESOLVER = "resolve" + SIGNER_CONFIG_FIELD_NAME;
 
     private static final List<String> DISABLE_URI_PATH_ESCAPE = ListUtils.of("com.amazonaws.s3#AmazonS3");
