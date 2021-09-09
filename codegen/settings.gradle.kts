@@ -13,6 +13,13 @@
  * permissions and limitations under the License.
  */
 
+pluginManagement {
+    repositories {
+        mavenCentral()
+        gradlePluginPortal()
+    }
+}
+
 rootProject.name = "codegen"
 include(":sdk-codegen")
 include(":smithy-aws-go-codegen")

@@ -21,7 +21,7 @@ plugins {
 
 dependencies {
     implementation("software.amazon.smithy:smithy-aws-protocol-tests:[1.6.0,1.10.0[")
-    compile(project(":smithy-aws-go-codegen"))
+    implementation(project(":smithy-aws-go-codegen"))
 }
 
 // This project doesn't produce a JAR.

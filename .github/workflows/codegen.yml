@@ -13,7 +13,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        java-version: ['11', '8']
+        java-version: ['16']
         go-version: [1.17]
     env:
       JAVA_TOOL_OPTIONS: "-Xmx2g"
