@@ -7,7 +7,7 @@ import (
 	smithy "github.com/aws/smithy-go"
 )
 
-// You don't have sufficient access to perform this action.
+// You don't have sufficient access to perform this operation.
 type AccessDeniedException struct {
 	Message *string
 
@@ -48,7 +48,7 @@ func (e *ConflictException) ErrorMessage() string {
 func (e *ConflictException) ErrorCode() string             { return "ConflictException" }
 func (e *ConflictException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The action failed to due an encryption key error.
+// The operation failed to due an encryption key error.
 type DataEncryptionException struct {
 	Message *string
 
@@ -157,7 +157,8 @@ func (e *ThrottlingException) ErrorMessage() string {
 func (e *ThrottlingException) ErrorCode() string             { return "ThrottlingException" }
 func (e *ThrottlingException) ErrorFault() smithy.ErrorFault { return smithy.FaultClient }
 
-// The input fails to satisfy the constraints specified by an AWS service.
+// The input fails to satisfy the constraints specified by an Amazon Web Services
+// service.
 type ValidationException struct {
 	Message *string
 

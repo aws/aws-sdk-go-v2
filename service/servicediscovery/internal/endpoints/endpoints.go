@@ -134,5 +134,15 @@ var defaultPartitions = endpoints.Partitions{
 		},
 		RegionRegex:    partitionRegexp.AwsUsGov,
 		IsRegionalized: true,
+		Endpoints: endpoints.Endpoints{
+			"servicediscovery-fips": endpoints.Endpoint{
+				Hostname: "servicediscovery-fips.us-gov-west-1.amazonaws.com",
+				CredentialScope: endpoints.CredentialScope{
+					Region: "us-gov-west-1",
+				},
+			},
+			"us-gov-east-1": endpoints.Endpoint{},
+			"us-gov-west-1": endpoints.Endpoint{},
+		},
 	},
 }

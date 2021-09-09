@@ -11,9 +11,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Adds tags to an Amazon EMR resource. Tags make it easier to associate clusters
-// in various ways, such as grouping clusters to track your Amazon EMR resource
-// allocation costs. For more information, see Tag Clusters
+// Adds tags to an Amazon EMR resource, such as a cluster or an Amazon EMR Studio.
+// Tags make it easier to associate resources in various ways, such as grouping
+// clusters to track your Amazon EMR resource allocation costs. For more
+// information, see Tag Clusters
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html).
 func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...func(*Options)) (*AddTagsOutput, error) {
 	if params == nil {
@@ -30,19 +31,18 @@ func (c *Client) AddTags(ctx context.Context, params *AddTagsInput, optFns ...fu
 	return out, nil
 }
 
-// This input identifies a cluster and a list of tags to attach.
+// This input identifies an Amazon EMR resource and a list of tags to attach.
 type AddTagsInput struct {
 
-	// The Amazon EMR resource identifier to which tags will be added. This value must
-	// be a cluster identifier.
+	// The Amazon EMR resource identifier to which tags will be added. For example, a
+	// cluster identifier or an Amazon EMR Studio ID.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// A list of tags to associate with a cluster and propagate to EC2 instances. Tags
-	// are user-defined key-value pairs that consist of a required key string with a
-	// maximum of 128 characters, and an optional value string with a maximum of 256
-	// characters.
+	// A list of tags to associate with a resource. Tags are user-defined key-value
+	// pairs that consist of a required key string with a maximum of 128 characters,
+	// and an optional value string with a maximum of 256 characters.
 	//
 	// This member is required.
 	Tags []types.Tag

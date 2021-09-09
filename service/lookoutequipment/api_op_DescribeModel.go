@@ -12,8 +12,9 @@ import (
 	"time"
 )
 
-// Provides overall information about a specific ML model, including model name and
-// ARN, dataset, training and evaluation information, status, and so on.
+// Provides a JSON containing the overall information about a specific ML model,
+// including model name and ARN, dataset, training and evaluation information,
+// status, and so on.
 func (c *Client) DescribeModel(ctx context.Context, params *DescribeModelInput, optFns ...func(*Options)) (*DescribeModelOutput, error) {
 	if params == nil {
 		params = &DescribeModelInput{}
@@ -94,6 +95,11 @@ type DescribeModelOutput struct {
 	// The name of the ML model being described.
 	ModelName *string
 
+	// Indicates that the asset associated with this sensor has been shut off. As long
+	// as this condition is met, Lookout for Equipment will not use data from this
+	// asset for training, evaluation, or inference.
+	OffCondition *string
+
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source for the ML model being described.
 	RoleArn *string
@@ -104,8 +110,8 @@ type DescribeModelOutput struct {
 	// This value conforms to the media type: application/json
 	Schema *string
 
-	// Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
-	// model data by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt model data by Amazon
+	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Specifies the current status of the model being described. Status describes the

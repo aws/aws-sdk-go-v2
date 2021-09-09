@@ -87,8 +87,8 @@ type DescribeInferenceSchedulerOutput struct {
 	// source for the inference scheduler being described.
 	RoleArn *string
 
-	// Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
-	// inference scheduler data by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt inference scheduler data
+	// by Amazon Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Indicates the status of the inference scheduler.

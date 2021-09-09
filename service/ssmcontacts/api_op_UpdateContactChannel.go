@@ -38,7 +38,7 @@ type UpdateContactChannelInput struct {
 	// channel.
 	DeliveryAddress *types.ContactChannelAddress
 
-	// The name of the contact channel
+	// The name of the contact channel.
 	Name *string
 
 	noSmithyDocumentSerde

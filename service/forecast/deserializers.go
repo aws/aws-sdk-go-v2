@@ -4914,6 +4914,74 @@ func awsAwsjson11_deserializeDocumentErrorMetric(v **types.ErrorMetric, value in
 				sv.ForecastType = ptr.String(jtv)
 			}
 
+		case "MAPE":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MAPE = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MAPE = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
+		case "MASE":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.MASE = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.MASE = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "RMSE":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -6099,6 +6167,40 @@ func awsAwsjson11_deserializeDocumentMetrics(v **types.Metrics, value interface{
 
 	for key, value := range shape {
 		switch key {
+		case "AverageWeightedQuantileLoss":
+			if value != nil {
+				switch jtv := value.(type) {
+				case json.Number:
+					f64, err := jtv.Float64()
+					if err != nil {
+						return err
+					}
+					sv.AverageWeightedQuantileLoss = ptr.Float64(f64)
+
+				case string:
+					var f64 float64
+					switch {
+					case strings.EqualFold(jtv, "NaN"):
+						f64 = math.NaN()
+
+					case strings.EqualFold(jtv, "Infinity"):
+						f64 = math.Inf(1)
+
+					case strings.EqualFold(jtv, "-Infinity"):
+						f64 = math.Inf(-1)
+
+					default:
+						return fmt.Errorf("unknown JSON number value: %s", jtv)
+
+					}
+					sv.AverageWeightedQuantileLoss = ptr.Float64(f64)
+
+				default:
+					return fmt.Errorf("expected Double to be a JSON Number, got %T instead", value)
+
+				}
+			}
+
 		case "ErrorMetrics":
 			if err := awsAwsjson11_deserializeDocumentErrorMetrics(&sv.ErrorMetrics, value); err != nil {
 				return err
@@ -8975,6 +9077,15 @@ func awsAwsjson11_deserializeOpDocumentDescribePredictorOutput(v **DescribePredi
 				sv.Message = ptr.String(jtv)
 			}
 
+		case "OptimizationMetric":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OptimizationMetric to be of type string, got %T instead", value)
+				}
+				sv.OptimizationMetric = types.OptimizationMetric(jtv)
+			}
+
 		case "PerformAutoML":
 			if value != nil {
 				jtv, ok := value.(bool)
@@ -9068,6 +9179,15 @@ func awsAwsjson11_deserializeOpDocumentGetAccuracyMetricsOutput(v **GetAccuracyM
 					return fmt.Errorf("expected AutoMLOverrideStrategy to be of type string, got %T instead", value)
 				}
 				sv.AutoMLOverrideStrategy = types.AutoMLOverrideStrategy(jtv)
+			}
+
+		case "OptimizationMetric":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OptimizationMetric to be of type string, got %T instead", value)
+				}
+				sv.OptimizationMetric = types.OptimizationMetric(jtv)
 			}
 
 		case "PredictorEvaluationResults":

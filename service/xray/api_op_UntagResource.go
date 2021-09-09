@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete
-// system tags (those with an aws: prefix).
+// Removes tags from an Amazon Web Services X-Ray group or sampling rule. You
+// cannot edit or delete system tags (those with an aws: prefix).
 func (c *Client) UntagResource(ctx context.Context, params *UntagResourceInput, optFns ...func(*Options)) (*UntagResourceOutput, error) {
 	if params == nil {
 		params = &UntagResourceInput{}

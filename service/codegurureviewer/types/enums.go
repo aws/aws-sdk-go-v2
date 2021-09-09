@@ -116,6 +116,7 @@ const (
 	RecommendationCategoryJavaBestPractices       RecommendationCategory = "JavaBestPractices"
 	RecommendationCategoryResourceLeaks           RecommendationCategory = "ResourceLeaks"
 	RecommendationCategorySecurityIssues          RecommendationCategory = "SecurityIssues"
+	RecommendationCategoryCodeInconsistencies     RecommendationCategory = "CodeInconsistencies"
 )
 
 // Values returns all known values for RecommendationCategory. Note that this can
@@ -133,6 +134,7 @@ func (RecommendationCategory) Values() []RecommendationCategory {
 		"JavaBestPractices",
 		"ResourceLeaks",
 		"SecurityIssues",
+		"CodeInconsistencies",
 	}
 }
 
@@ -157,6 +159,30 @@ func (RepositoryAssociationState) Values() []RepositoryAssociationState {
 		"Failed",
 		"Disassociating",
 		"Disassociated",
+	}
+}
+
+type Severity string
+
+// Enum values for Severity
+const (
+	SeverityInfo     Severity = "Info"
+	SeverityLow      Severity = "Low"
+	SeverityMedium   Severity = "Medium"
+	SeverityHigh     Severity = "High"
+	SeverityCritical Severity = "Critical"
+)
+
+// Values returns all known values for Severity. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Severity) Values() []Severity {
+	return []Severity{
+		"Info",
+		"Low",
+		"Medium",
+		"High",
+		"Critical",
 	}
 }
 

@@ -10,7 +10,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Disassociates an AWS RAM permission from a resource share.
+// Disassociates an RAM permission from a resource share.
 func (c *Client) DisassociateResourceSharePermission(ctx context.Context, params *DisassociateResourceSharePermissionInput, optFns ...func(*Options)) (*DisassociateResourceSharePermissionOutput, error) {
 	if params == nil {
 		params = &DisassociateResourceSharePermissionInput{}
@@ -28,7 +28,8 @@ func (c *Client) DisassociateResourceSharePermission(ctx context.Context, params
 
 type DisassociateResourceSharePermissionInput struct {
 
-	// The ARN of the permission to disassociate from the resource share.
+	// The Amazon Resource Name (ARN) of the permission to disassociate from the
+	// resource share.
 	//
 	// This member is required.
 	PermissionArn *string

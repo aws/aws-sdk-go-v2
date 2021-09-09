@@ -39,12 +39,29 @@ type AssociateResourceShareInput struct {
 	// of the request.
 	ClientToken *string
 
-	// The principals to associate with the resource share. The possible values are IDs
-	// of AWS accounts, and the ARNs of organizational units (OU) or organizations from
-	// AWS Organizations.
+	// The principals to associate with the resource share. The possible values are:
+	//
+	// *
+	// An Amazon Web Services account ID
+	//
+	// * An Amazon Resource Name (ARN) of an
+	// organization in Organizations
+	//
+	// * An ARN of an organizational unit (OU) in
+	// Organizations
+	//
+	// * An ARN of an IAM role
+	//
+	// * An ARN of an IAM user
+	//
+	// Not all
+	// resource types can be shared with IAM roles and IAM users. For more information,
+	// see Sharing with IAM roles and IAM users
+	// (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
+	// in the Resource Access Manager User Guide.
 	Principals []string
 
-	// The Amazon Resource Names (ARN) of the resources.
+	// The Amazon Resource Names (ARNs) of the resources.
 	ResourceArns []string
 
 	noSmithyDocumentSerde

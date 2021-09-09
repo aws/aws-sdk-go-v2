@@ -131,11 +131,11 @@ type InferenceExecutionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// > Specifies configuration information for the input data for the inference,
+// Specifies configuration information for the input data for the inference,
 // including S3 location of input data..
 type InferenceInputConfiguration struct {
 
-	// > Specifies configuration information for the input data for the inference,
+	// Specifies configuration information for the input data for the inference,
 	// including timestamp format and delimiter.
 	InferenceInputNameConfiguration *InferenceInputNameConfiguration
 
@@ -149,7 +149,7 @@ type InferenceInputConfiguration struct {
 	noSmithyDocumentSerde
 }
 
-// >> Specifies configuration information for the input data for the inference,
+// Specifies configuration information for the input data for the inference,
 // including timestamp format and delimiter.
 type InferenceInputNameConfiguration struct {
 
@@ -213,7 +213,7 @@ type InferenceS3OutputConfiguration struct {
 // delay offset, model name and ARN, status, and so on.
 type InferenceSchedulerSummary struct {
 
-	// > A period of time (in minutes) by which inference on the data is delayed after
+	// A period of time (in minutes) by which inference on the data is delayed after
 	// the data starts. For instance, if an offset delay time of five minutes was
 	// selected, inference will not begin on the data until the first data measurement
 	// after the five minute mark. For example, if five minutes is selected, the

@@ -2532,6 +2532,11 @@ func awsAwsjson11_serializeOpDocumentCreatePredictorInput(v *CreatePredictorInpu
 		}
 	}
 
+	if len(v.OptimizationMetric) > 0 {
+		ok := object.Key("OptimizationMetric")
+		ok.String(string(v.OptimizationMetric))
+	}
+
 	if v.PerformAutoML != nil {
 		ok := object.Key("PerformAutoML")
 		ok.Boolean(*v.PerformAutoML)

@@ -11,7 +11,12 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Creates a resource share.
+// Creates a resource share. You must provide a list of the Amazon Resource Names
+// (ARNs) for the resources you want to share. You must also specify who you want
+// to share the resources with, and the permissions that you grant them. Sharing a
+// resource makes it available for use by principals outside of the Amazon Web
+// Services account that created the resource. Sharing doesn't change any
+// permissions or quotas that apply to the resource in the account that created it.
 func (c *Client) CreateResourceShare(ctx context.Context, params *CreateResourceShareInput, optFns ...func(*Options)) (*CreateResourceShareOutput, error) {
 	if params == nil {
 		params = &CreateResourceShareInput{}
@@ -34,25 +39,44 @@ type CreateResourceShareInput struct {
 	// This member is required.
 	Name *string
 
-	// Indicates whether principals outside your AWS organization can be associated
-	// with a resource share.
+	// Indicates whether principals outside your organization in Organizations can be
+	// associated with a resource share.
 	AllowExternalPrincipals *bool
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency
 	// of the request.
 	ClientToken *string
 
-	// The ARNs of the permissions to associate with the resource share. If you do not
-	// specify an ARN for the permission, AWS RAM automatically attaches the default
-	// version of the permission for each resource type.
+	// The Amazon Resource Names (ARNs) of the permissions to associate with the
+	// resource share. If you do not specify an ARN for the permission, RAM
+	// automatically attaches the default version of the permission for each resource
+	// type. Only one permission can be associated with each resource type in a
+	// resource share.
 	PermissionArns []string
 
-	// The principals to associate with the resource share. The possible values are IDs
-	// of AWS accounts, the ARN of an OU or organization from AWS Organizations.
+	// The principals to associate with the resource share. The possible values are:
+	//
+	// *
+	// An Amazon Web Services account ID
+	//
+	// * An Amazon Resource Name (ARN) of an
+	// organization in Organizations
+	//
+	// * An ARN of an organizational unit (OU) in
+	// Organizations
+	//
+	// * An ARN of an IAM role
+	//
+	// * An ARN of an IAM user
+	//
+	// Not all
+	// resource types can be shared with IAM roles and IAM users. For more information,
+	// see Sharing with IAM roles and IAM users
+	// (https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types)
+	// in the Resource Access Manager User Guide.
 	Principals []string
 
-	// The Amazon Resource Names (ARN) of the resources to associate with the resource
-	// share.
+	// The ARNs of the resources to associate with the resource share.
 	ResourceArns []string
 
 	// One or more tags.

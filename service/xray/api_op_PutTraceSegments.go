@@ -11,32 +11,32 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Uploads segment documents to AWS X-Ray. The X-Ray SDK
+// Uploads segment documents to Amazon Web Services X-Ray. The X-Ray SDK
 // (https://docs.aws.amazon.com/xray/index.html) generates segment documents and
 // sends them to the X-Ray daemon, which uploads them in batches. A segment
 // document can be a completed segment, an in-progress segment, or an array of
 // subsegments. Segments must include the following fields. For the full segment
-// document schema, see AWS X-Ray Segment Documents
+// document schema, see Amazon Web Services X-Ray Segment Documents
 // (https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html)
-// in the AWS X-Ray Developer Guide. Required segment document fields
+// in the Amazon Web Services X-Ray Developer Guide. Required segment document
+// fields
 //
-// * name - The
-// name of the service that handled the request.
+// * name - The name of the service that handled the request.
 //
-// * id - A 64-bit identifier for
-// the segment, unique among segments in the same trace, in 16 hexadecimal
-// digits.
+// * id - A
+// 64-bit identifier for the segment, unique among segments in the same trace, in
+// 16 hexadecimal digits.
 //
-// * trace_id - A unique identifier that connects all segments and
-// subsegments originating from a single client request.
+// * trace_id - A unique identifier that connects all
+// segments and subsegments originating from a single client request.
 //
-// * start_time - Time the
-// segment or subsegment was created, in floating point seconds in epoch time,
-// accurate to milliseconds. For example, 1480615200.010 or 1.480615200010E9.
+// * start_time
+// - Time the segment or subsegment was created, in floating point seconds in epoch
+// time, accurate to milliseconds. For example, 1480615200.010 or
+// 1.480615200010E9.
 //
-// *
-// end_time - Time the segment or subsegment was closed. For example,
-// 1480615200.090 or 1.480615200090E9. Specify either an end_time or
+// * end_time - Time the segment or subsegment was closed. For
+// example, 1480615200.090 or 1.480615200090E9. Specify either an end_time or
 // in_progress.
 //
 // * in_progress - Set to true instead of specifying an end_time to

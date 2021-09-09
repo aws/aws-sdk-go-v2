@@ -142,6 +142,30 @@ func (FilterConditionString) Values() []FilterConditionString {
 	}
 }
 
+type OptimizationMetric string
+
+// Enum values for OptimizationMetric
+const (
+	OptimizationMetricWape                        OptimizationMetric = "WAPE"
+	OptimizationMetricRmse                        OptimizationMetric = "RMSE"
+	OptimizationMetricAverageWeightedQuantileLoss OptimizationMetric = "AverageWeightedQuantileLoss"
+	OptimizationMetricMase                        OptimizationMetric = "MASE"
+	OptimizationMetricMape                        OptimizationMetric = "MAPE"
+)
+
+// Values returns all known values for OptimizationMetric. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (OptimizationMetric) Values() []OptimizationMetric {
+	return []OptimizationMetric{
+		"WAPE",
+		"RMSE",
+		"AverageWeightedQuantileLoss",
+		"MASE",
+		"MAPE",
+	}
+}
+
 type ScalingType string
 
 // Enum values for ScalingType

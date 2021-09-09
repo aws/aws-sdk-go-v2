@@ -64,9 +64,11 @@ type DescribePredictorOutput struct {
 	// When PerformAutoML is specified, the ARN of the chosen algorithm.
 	AutoMLAlgorithmArns []string
 
-	// The AutoML strategy used to train the predictor. Unless LatencyOptimized is
-	// specified, the AutoML strategy optimizes predictor accuracy. This parameter is
-	// only valid for predictors trained using AutoML.
+	// The LatencyOptimized AutoML override strategy is only available in private beta.
+	// Contact AWS Support or your account manager to learn more about access
+	// privileges. The AutoML strategy used to train the predictor. Unless
+	// LatencyOptimized is specified, the AutoML strategy optimizes predictor accuracy.
+	// This parameter is only valid for predictors trained using AutoML.
 	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
 
 	// When the model training task was created.
@@ -127,6 +129,9 @@ type DescribePredictorOutput struct {
 
 	// If an error occurred, an informational message about the error.
 	Message *string
+
+	// The accuracy metric used to optimize the predictor.
+	OptimizationMetric types.OptimizationMetric
 
 	// Whether the predictor is set to perform AutoML.
 	PerformAutoML *bool

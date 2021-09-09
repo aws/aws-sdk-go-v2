@@ -23,7 +23,7 @@ import (
 // a full list of indexed fields and keywords that you can use in filter
 // expressions, see Using Filter Expressions
 // (https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html) in
-// the AWS X-Ray Developer Guide.
+// the Amazon Web Services X-Ray Developer Guide.
 func (c *Client) GetTraceSummaries(ctx context.Context, params *GetTraceSummariesInput, optFns ...func(*Options)) (*GetTraceSummariesOutput, error) {
 	if params == nil {
 		params = &GetTraceSummariesInput{}

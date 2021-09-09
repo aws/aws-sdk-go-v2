@@ -1931,9 +1931,6 @@ func validateOpCreateStudioInput(v *CreateStudioInput) error {
 	if v.ServiceRole == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("ServiceRole"))
 	}
-	if v.UserRole == nil {
-		invalidParams.Add(smithy.NewErrParamRequired("UserRole"))
-	}
 	if v.WorkspaceSecurityGroupId == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("WorkspaceSecurityGroupId"))
 	}

@@ -38,6 +38,9 @@ type CreateWorkspaceInput struct {
 	// idempotency of the request.
 	ClientToken *string
 
+	// Optional, user-provided tags for this workspace.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -58,6 +61,9 @@ type CreateWorkspaceOutput struct {
 	//
 	// This member is required.
 	WorkspaceId *string
+
+	// The tags of this workspace.
+	Tags map[string]string
 
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

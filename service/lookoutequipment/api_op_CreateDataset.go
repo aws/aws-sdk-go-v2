@@ -51,8 +51,8 @@ type CreateDatasetInput struct {
 	// This member is required.
 	DatasetSchema *types.DatasetSchema
 
-	// Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
-	// dataset data by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt dataset data by Amazon
+	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Any tags associated with the ingested data described in the dataset.

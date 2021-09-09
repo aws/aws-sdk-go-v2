@@ -29,8 +29,8 @@ func (c *Client) CreateStudio(ctx context.Context, params *CreateStudioInput, op
 
 type CreateStudioInput struct {
 
-	// Specifies whether the Studio authenticates users using single sign-on (SSO) or
-	// IAM. Amazon EMR Studio currently only supports SSO authentication.
+	// Specifies whether the Studio authenticates users using IAM or Amazon Web
+	// Services SSO.
 	//
 	// This member is required.
 	AuthMode types.AuthMode
@@ -53,9 +53,8 @@ type CreateStudioInput struct {
 	// This member is required.
 	Name *string
 
-	// The IAM role that will be assumed by the Amazon EMR Studio. The service role
-	// provides a way for Amazon EMR Studio to interoperate with other Amazon Web
-	// Services services.
+	// The IAM role that the Amazon EMR Studio assumes. The service role provides a way
+	// for Amazon EMR Studio to interoperate with other Amazon Web Services services.
 	//
 	// This member is required.
 	ServiceRole *string
@@ -66,13 +65,6 @@ type CreateStudioInput struct {
 	//
 	// This member is required.
 	SubnetIds []string
-
-	// The IAM user role that will be assumed by users and groups logged in to an
-	// Amazon EMR Studio. The permissions attached to this IAM role can be scoped down
-	// for each user or group using session policies.
-	//
-	// This member is required.
-	UserRole *string
 
 	// The ID of the Amazon Virtual Private Cloud (Amazon VPC) to associate with the
 	// Studio.
@@ -90,10 +82,28 @@ type CreateStudioInput struct {
 	// A detailed description of the Amazon EMR Studio.
 	Description *string
 
+	// The authentication endpoint of your identity provider (IdP). Specify this value
+	// when you use IAM authentication and want to let federated users log in to a
+	// Studio with the Studio URL and credentials from your IdP. Amazon EMR Studio
+	// redirects users to this endpoint to enter credentials.
+	IdpAuthUrl *string
+
+	// The name that your identity provider (IdP) uses for its RelayState parameter.
+	// For example, RelayState or TargetSource. Specify this value when you use IAM
+	// authentication and want to let federated users log in to a Studio using the
+	// Studio URL. The RelayState parameter differs by IdP.
+	IdpRelayStateParameterName *string
+
 	// A list of tags to associate with the Amazon EMR Studio. Tags are user-defined
 	// key-value pairs that consist of a required key string with a maximum of 128
 	// characters, and an optional value string with a maximum of 256 characters.
 	Tags []types.Tag
+
+	// The IAM user role that users and groups assume when logged in to an Amazon EMR
+	// Studio. Only specify a UserRole when you use Amazon Web Services SSO
+	// authentication. The permissions attached to the UserRole can be scoped down for
+	// each user or group using session policies.
+	UserRole *string
 
 	noSmithyDocumentSerde
 }

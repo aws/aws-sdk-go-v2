@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Used by the AWS X-Ray daemon to upload telemetry.
+// Used by the Amazon Web Services X-Ray daemon to upload telemetry.
 func (c *Client) PutTelemetryRecords(ctx context.Context, params *PutTelemetryRecordsInput, optFns ...func(*Options)) (*PutTelemetryRecordsOutput, error) {
 	if params == nil {
 		params = &PutTelemetryRecordsInput{}

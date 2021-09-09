@@ -10,9 +10,10 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Removes tags from an Amazon EMR resource. Tags make it easier to associate
-// clusters in various ways, such as grouping clusters to track your Amazon EMR
-// resource allocation costs. For more information, see Tag Clusters
+// Removes tags from an Amazon EMR resource, such as a cluster or Amazon EMR
+// Studio. Tags make it easier to associate resources in various ways, such as
+// grouping clusters to track your Amazon EMR resource allocation costs. For more
+// information, see Tag Clusters
 // (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-plan-tags.html). The
 // following example removes the stack tag with value Prod from a cluster:
 func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns ...func(*Options)) (*RemoveTagsOutput, error) {
@@ -30,16 +31,16 @@ func (c *Client) RemoveTags(ctx context.Context, params *RemoveTagsInput, optFns
 	return out, nil
 }
 
-// This input identifies a cluster and a list of tags to remove.
+// This input identifies an Amazon EMR resource and a list of tags to remove.
 type RemoveTagsInput struct {
 
-	// The Amazon EMR resource identifier from which tags will be removed. This value
-	// must be a cluster identifier.
+	// The Amazon EMR resource identifier from which tags will be removed. For example,
+	// a cluster identifier or an Amazon EMR Studio ID.
 	//
 	// This member is required.
 	ResourceId *string
 
-	// A list of tag keys to remove from a resource.
+	// A list of tag keys to remove from the resource.
 	//
 	// This member is required.
 	TagKeys []string
@@ -47,7 +48,7 @@ type RemoveTagsInput struct {
 	noSmithyDocumentSerde
 }
 
-// This output indicates the result of removing tags from a resource.
+// This output indicates the result of removing tags from the resource.
 type RemoveTagsOutput struct {
 	// Metadata pertaining to the operation's result.
 	ResultMetadata middleware.Metadata

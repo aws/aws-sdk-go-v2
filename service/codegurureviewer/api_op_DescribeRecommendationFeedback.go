@@ -44,10 +44,10 @@ type DescribeRecommendationFeedbackInput struct {
 
 	// Optional parameter to describe the feedback for a given user. If this is not
 	// supplied, it defaults to the user making the request. The UserId is an IAM
-	// principal that can be specified as an AWS account ID or an Amazon Resource Name
-	// (ARN). For more information, see  Specifying a Principal
+	// principal that can be specified as an Amazon Web Services account ID or an
+	// Amazon Resource Name (ARN). For more information, see  Specifying a Principal
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
-	// in the AWS Identity and Access Management User Guide.
+	// in the Amazon Web Services Identity and Access Management User Guide.
 	UserId *string
 
 	noSmithyDocumentSerde

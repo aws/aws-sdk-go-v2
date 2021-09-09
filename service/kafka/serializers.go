@@ -2220,6 +2220,101 @@ func awsRestjson1_serializeOpDocumentUpdateMonitoringInput(v *UpdateMonitoringIn
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateSecurity struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateSecurity) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateSecurity) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateSecurityInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/clusters/{ClusterArn}/security")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PATCH"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateSecurityInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentUpdateSecurityInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateSecurityInput(v *UpdateSecurityInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ClusterArn == nil || len(*v.ClusterArn) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ClusterArn must not be empty")}
+	}
+	if v.ClusterArn != nil {
+		if err := encoder.SetURI("ClusterArn").String(*v.ClusterArn); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentUpdateSecurityInput(v *UpdateSecurityInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.ClientAuthentication != nil {
+		ok := object.Key("clientAuthentication")
+		if err := awsRestjson1_serializeDocumentClientAuthentication(v.ClientAuthentication, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CurrentVersion != nil {
+		ok := object.Key("currentVersion")
+		ok.String(*v.CurrentVersion)
+	}
+
+	if v.EncryptionInfo != nil {
+		ok := object.Key("encryptionInfo")
+		if err := awsRestjson1_serializeDocumentEncryptionInfo(v.EncryptionInfo, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocument__listOf__string(v []string, value smithyjson.Value) error {
 	array := value.Array()
 	defer array.Close()
@@ -2352,6 +2447,13 @@ func awsRestjson1_serializeDocumentClientAuthentication(v *types.ClientAuthentic
 	if v.Tls != nil {
 		ok := object.Key("tls")
 		if err := awsRestjson1_serializeDocumentTls(v.Tls, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Unauthenticated != nil {
+		ok := object.Key("unauthenticated")
+		if err := awsRestjson1_serializeDocumentUnauthenticated(v.Unauthenticated, ok); err != nil {
 			return err
 		}
 	}
@@ -2635,6 +2737,23 @@ func awsRestjson1_serializeDocumentTls(v *types.Tls, value smithyjson.Value) err
 		if err := awsRestjson1_serializeDocument__listOf__string(v.CertificateAuthorityArnList, ok); err != nil {
 			return err
 		}
+	}
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentUnauthenticated(v *types.Unauthenticated, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Enabled {
+		ok := object.Key("enabled")
+		ok.Boolean(v.Enabled)
 	}
 
 	return nil

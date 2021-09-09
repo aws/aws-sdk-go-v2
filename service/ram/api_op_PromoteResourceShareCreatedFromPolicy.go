@@ -12,13 +12,13 @@ import (
 
 // Resource shares that were created by attaching a policy to a resource are
 // visible only to the resource share owner, and the resource share cannot be
-// modified in AWS RAM. Use this API action to promote the resource share. When you
+// modified in RAM. Use this API action to promote the resource share. When you
 // promote the resource share, it becomes:
 //
 // * Visible to all principals that it is
 // shared with.
 //
-// * Modifiable in AWS RAM.
+// * Modifiable in RAM.
 func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, params *PromoteResourceShareCreatedFromPolicyInput, optFns ...func(*Options)) (*PromoteResourceShareCreatedFromPolicyOutput, error) {
 	if params == nil {
 		params = &PromoteResourceShareCreatedFromPolicyInput{}
@@ -36,7 +36,7 @@ func (c *Client) PromoteResourceShareCreatedFromPolicy(ctx context.Context, para
 
 type PromoteResourceShareCreatedFromPolicyInput struct {
 
-	// The ARN of the resource share to promote.
+	// The Amazon Resource Name (ARN) of the resource share to promote.
 	//
 	// This member is required.
 	ResourceShareArn *string

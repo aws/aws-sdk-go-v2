@@ -34,8 +34,8 @@ type UpdateResourceShareInput struct {
 	// This member is required.
 	ResourceShareArn *string
 
-	// Indicates whether principals outside your AWS organization can be associated
-	// with a resource share.
+	// Indicates whether principals outside your organization in Organizations can be
+	// associated with a resource share.
 	AllowExternalPrincipals *bool
 
 	// A unique, case-sensitive identifier that you provide to ensure the idempotency

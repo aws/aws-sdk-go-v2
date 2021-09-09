@@ -12,7 +12,11 @@ import (
 )
 
 // Maps a user or group to the Amazon EMR Studio specified by StudioId, and applies
-// a session policy to refine Studio permissions for that user or group.
+// a session policy to refine Studio permissions for that user or group. Use
+// CreateStudioSessionMapping to assign users to a Studio when you use Amazon Web
+// Services SSO authentication. For instructions on how to assign users to a Studio
+// when you use IAM authentication, see Assign a user or group to your EMR Studio
+// (https://docs.aws.amazon.com/emr/latest/ManagementGuide/emr-studio-manage-users.html#emr-studio-assign-users-groups).
 func (c *Client) CreateStudioSessionMapping(ctx context.Context, params *CreateStudioSessionMappingInput, optFns ...func(*Options)) (*CreateStudioSessionMappingOutput, error) {
 	if params == nil {
 		params = &CreateStudioSessionMappingInput{}

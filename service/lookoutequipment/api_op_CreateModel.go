@@ -80,12 +80,17 @@ type CreateModelInput struct {
 	// created.
 	LabelsInputConfiguration *types.LabelsInputConfiguration
 
+	// Indicates that the asset associated with this sensor has been shut off. As long
+	// as this condition is met, Lookout for Equipment will not use data from this
+	// asset for training, evaluation, or inference.
+	OffCondition *string
+
 	// The Amazon Resource Name (ARN) of a role with permission to access the data
 	// source being used to create the ML model.
 	RoleArn *string
 
-	// Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
-	// model data by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt model data by Amazon
+	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Any tags associated with the ML model being created.

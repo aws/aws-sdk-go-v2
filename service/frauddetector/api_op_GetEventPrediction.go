@@ -93,6 +93,9 @@ type GetEventPredictionInput struct {
 
 type GetEventPredictionOutput struct {
 
+	// The model scores for Amazon SageMaker models.
+	ExternalModelOutputs []types.ExternalModelOutputs
+
 	// The model scores. Amazon Fraud Detector generates model scores between 0 and
 	// 1000, where 0 is low fraud risk and 1000 is high fraud risk. Model scores are
 	// directly related to the false positive rate (FPR). For example, a score of 600

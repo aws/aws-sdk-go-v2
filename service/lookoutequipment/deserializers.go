@@ -5108,6 +5108,15 @@ func awsAwsjson10_deserializeOpDocumentDescribeModelOutput(v **DescribeModelOutp
 				sv.ModelName = ptr.String(jtv)
 			}
 
+		case "OffCondition":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected OffCondition to be of type string, got %T instead", value)
+				}
+				sv.OffCondition = ptr.String(jtv)
+			}
+
 		case "RoleArn":
 			if value != nil {
 				jtv, ok := value.(string)

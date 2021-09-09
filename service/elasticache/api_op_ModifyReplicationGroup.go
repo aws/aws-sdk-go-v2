@@ -164,7 +164,7 @@ type ModifyReplicationGroupInput struct {
 	// read replicas.
 	PrimaryClusterId *string
 
-	// Removes the user groups that can access this replication group.
+	// Removes the user group associated with this replication group.
 	RemoveUserGroups *bool
 
 	// A description for the replication group. Maximum length is 255 characters.
@@ -193,11 +193,11 @@ type ModifyReplicationGroupInput struct {
 	// groups.
 	SnapshottingClusterId *string
 
-	// The user group you are associating with the replication group.
+	// The ID of the user group you are associating with the replication group.
 	UserGroupIdsToAdd []string
 
-	// The user group to remove, meaning the users in the group no longer can access
-	// the replication group.
+	// The ID of the user group to disassociate from the replication group, meaning the
+	// users in the group no longer can access the replication group.
 	UserGroupIdsToRemove []string
 
 	noSmithyDocumentSerde
