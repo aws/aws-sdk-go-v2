@@ -21,6 +21,17 @@
         "com.amazonaws.amp#AmazonPrometheusService": {
             "type": "service",
             "version": "2020-08-01",
+            "operations": [
+                {
+                    "target": "com.amazonaws.amp#ListTagsForResource"
+                },
+                {
+                    "target": "com.amazonaws.amp#TagResource"
+                },
+                {
+                    "target": "com.amazonaws.amp#UntagResource"
+                }
+            ],
             "resources": [
                 {
                     "target": "com.amazonaws.amp#Workspace"
@@ -31,7 +42,8 @@
                     "sdkId": "amp",
                     "arnNamespace": "aps",
                     "cloudFormationName": "AmazonPrometheusService",
-                    "cloudTrailEventSource": "CLOUDTRAIL_PLACEHOLDER_REPLACED_BY_CDK"
+                    "cloudTrailEventSource": "CLOUDTRAIL_PLACEHOLDER_REPLACED_BY_CDK",
+                    "endpointPrefix": "aps"
                 },
                 "aws.auth#sigv4": {
                     "name": "aps"
@@ -148,6 +160,12 @@
                         "smithy.api#documentation": "Optional, unique, case-sensitive, user-provided identifier to ensure the idempotency of the request.",
                         "smithy.api#idempotencyToken": {}
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "Optional, user-provided tags for this workspace."
+                    }
                 }
             },
             "traits": {
@@ -176,6 +194,12 @@
                     "traits": {
                         "smithy.api#documentation": "The status of the workspace that was just created (usually CREATING).",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags of this workspace."
                     }
                 }
             },
@@ -339,6 +363,62 @@
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500,
                 "smithy.api#retryable": {}
+            }
+        },
+        "com.amazonaws.amp#ListTagsForResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#ListTagsForResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#ListTagsForResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Lists the tags you have assigned to the resource.",
+                "smithy.api#http": {
+                    "method": "GET",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#readonly": {}
+            }
+        },
+        "com.amazonaws.amp#ListTagsForResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the resource.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amp#ListTagsForResourceResponse": {
+            "type": "structure",
+            "members": {
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap"
+                }
             }
         },
         "com.amazonaws.amp#ListWorkspaces": {
@@ -515,6 +595,110 @@
                 "smithy.api#httpError": 402
             }
         },
+        "com.amazonaws.amp#TagKey": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 128
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
+        "com.amazonaws.amp#TagKeys": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.amp#TagKey"
+            }
+        },
+        "com.amazonaws.amp#TagMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.amp#TagKey",
+                "traits": {
+                    "smithy.api#documentation": "The key of the tag.\n\nConstraints: Tag keys are case-sensitive and accept a maximum of 128 Unicode characters.\nValid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @\nMay not begin with `aws:`.\n"
+                }
+            },
+            "value": {
+                "target": "com.amazonaws.amp#TagValue",
+                "traits": {
+                    "smithy.api#documentation": "The value of the tag.\n\nConstraints: Tag values are case-sensitive and accept a maximum of 256 Unicode characters.\nValid characters are Unicode letters, digits, white space, and any of the following symbols: _ . : / = + - @\n"
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "The list of tags assigned to the resource.",
+                "smithy.api#length": {
+                    "max": 50
+                }
+            }
+        },
+        "com.amazonaws.amp#TagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#TagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#TagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Creates tags for the specified resource.",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.amp#TagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the resource.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amp#TagResourceResponse": {
+            "type": "structure",
+            "members": {}
+        },
+        "com.amazonaws.amp#TagValue": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 0,
+                    "max": 256
+                },
+                "smithy.api#pattern": "^([\\p{L}\\p{Z}\\p{N}_.:/=+\\-@]*)$"
+            }
+        },
         "com.amazonaws.amp#ThrottlingException": {
             "type": "structure",
             "members": {
@@ -551,6 +735,66 @@
                 "smithy.api#httpError": 429,
                 "smithy.api#retryable": {}
             }
+        },
+        "com.amazonaws.amp#UntagResource": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.amp#UntagResourceRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.amp#UntagResourceResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.amp#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.amp#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ThrottlingException"
+                },
+                {
+                    "target": "com.amazonaws.amp#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "Deletes tags from the specified resource.",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/tags/{resourceArn}",
+                    "code": 200
+                },
+                "smithy.api#idempotent": {}
+            }
+        },
+        "com.amazonaws.amp#UntagResourceRequest": {
+            "type": "structure",
+            "members": {
+                "resourceArn": {
+                    "target": "smithy.api#String",
+                    "traits": {
+                        "smithy.api#documentation": "The ARN of the resource.",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                },
+                "tagKeys": {
+                    "target": "com.amazonaws.amp#TagKeys",
+                    "traits": {
+                        "smithy.api#documentation": "One or more tag keys",
+                        "smithy.api#httpQuery": "tagKeys",
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.amp#UntagResourceResponse": {
+            "type": "structure",
+            "members": {}
         },
         "com.amazonaws.amp#UpdateWorkspaceAlias": {
             "type": "operation",
@@ -808,6 +1052,12 @@
                         "smithy.api#documentation": "The time when the workspace was created.",
                         "smithy.api#required": {}
                     }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags of this workspace."
+                    }
                 }
             },
             "traits": {
@@ -913,6 +1163,12 @@
                     "traits": {
                         "smithy.api#documentation": "The time when the workspace was created.",
                         "smithy.api#required": {}
+                    }
+                },
+                "tags": {
+                    "target": "com.amazonaws.amp#TagMap",
+                    "traits": {
+                        "smithy.api#documentation": "The tags of this workspace."
                     }
                 }
             },

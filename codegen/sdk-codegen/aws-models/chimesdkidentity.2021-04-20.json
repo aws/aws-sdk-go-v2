@@ -334,7 +334,7 @@
                     "name": "chime"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>The Amazon Chime SDK Identity APIs in this section allow software developers to create\n         and manage unique instances of their messaging applications. These APIs provide the\n         overarching framework for creating and sending messages. For more information about the\n         identity APIs, refer to .</p>",
+                "smithy.api#documentation": "<p>The Amazon Chime SDK Identity APIs in this section allow software developers to create\n         and manage unique instances of their messaging applications. These APIs provide the\n         overarching framework for creating and sending messages. For more information about the\n         identity APIs, refer to <a href=\"https://docs.aws.amazon.com/chime/latest/APIReference/API_Operations_Amazon_Chime_SDK_Identity.html\">Amazon Chime SDK identity</a>.</p>",
                 "smithy.api#title": "Amazon Chime SDK Identity"
             }
         },

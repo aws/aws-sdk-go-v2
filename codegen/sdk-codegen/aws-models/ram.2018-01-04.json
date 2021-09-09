@@ -70,7 +70,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Accepts an invitation to a resource share from another AWS account.</p>",
+                "smithy.api#documentation": "<p>Accepts an invitation to a resource share from another Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/acceptresourceshareinvitation",
@@ -202,7 +202,7 @@
                     "name": "ram"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>Use AWS Resource Access Manager to share AWS resources between AWS accounts. To share a resource, you\n          create a resource share, associate the resource with the resource share, and specify the principals that\n          can access the resources associated with the resource share. The following principals are supported:\n          AWS accounts, organizational units (OU) from AWS Organizations, and organizations from\n          AWS Organizations.</p>\n         <p>For more information, see the <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/\">AWS Resource Access Manager User Guide</a>.</p>",
+                "smithy.api#documentation": "<p>This is the <i>Resource Access Manager API Reference</i>. This documentation provides\n            descriptions and syntax for each of the actions and data types in RAM. RAM is a\n            service that helps you securely share your Amazon Web Services resources across Amazon Web Services accounts and\n            within your organization or organizational units (OUs) in Organizations. For supported\n            resource types, you can also share resources with IAM roles and IAM users. If you have\n            multiple Amazon Web Services accounts, you can use RAM to share those resources with other\n            accounts.</p>\n\n        <p>To learn more about RAM, see the following resources:</p>\n\n        <ul>\n            <li>\n                <p>\n                    <a href=\"http://aws.amazon.com/ram\">Resource Access Manager product page</a>\n               </p>\n            </li>\n            <li>\n                <p>\n                  <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/\">Resource Access Manager User\n                        Guide</a>\n               </p>\n            </li>\n         </ul>",
                 "smithy.api#title": "AWS Resource Access Manager"
             }
         },
@@ -308,14 +308,14 @@
                 "permissionArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS RAM permissions to associate with the resource share.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RAM permission to associate with the\n            resource share.</p>",
                         "smithy.api#required": {}
                     }
                 },
                 "replace": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the permission should replace the permissions that are currently \n        \tassociated with the resource share. Use <code>true</code> to replace the current permissions. \n        \tUse <code>false</code> to add the permission to the current permission.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the permission should replace the permissions that are currently\n            associated with the resource share. Use <code>true</code> to replace the current permissions. Use\n                <code>false</code> to add the permission to the current permission.</p>"
                     }
                 },
                 "clientToken": {
@@ -327,7 +327,7 @@
                 "permissionVersion": {
                     "target": "com.amazonaws.ram#Integer",
                     "traits": {
-                        "smithy.api#documentation": "<p>The version of the AWS RAM permissions to associate with the resource share.</p>"
+                        "smithy.api#documentation": "<p>The version of the RAM permissions to associate with the resource share.</p>"
                     }
                 }
             }
@@ -362,13 +362,13 @@
                 "resourceArns": {
                     "target": "com.amazonaws.ram#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources.</p>"
                     }
                 },
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principals to associate with the resource share. The possible values are IDs of \n       \tAWS accounts, and the ARNs of organizational units (OU) or organizations from AWS \n       \tOrganizations.</p>"
+                        "smithy.api#documentation": "<p>The principals to associate with the resource share. The possible values are:</p>\n        <ul>\n            <li>\n                <p>An Amazon Web Services account ID</p>\n            </li>\n            <li>\n                <p>An Amazon Resource Name (ARN) of an organization in Organizations</p>\n            </li>\n            <li>\n                <p>An ARN of an organizational unit (OU) in Organizations</p>\n            </li>\n            <li>\n                <p>An ARN of an IAM role</p>\n            </li>\n            <li>\n                <p>An ARN of an IAM user</p>\n            </li>\n         </ul>\n        <note>\n            <p>Not all resource types can be shared with IAM roles and IAM users. For more\n                information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n        </note>"
                     }
                 },
                 "clientToken": {
@@ -446,7 +446,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a resource share.</p>",
+                "smithy.api#documentation": "<p>Creates a resource share. You must provide a list of the Amazon Resource Names (ARNs) for the\n            resources you want to share. You must also specify who you want to share the resources\n            with, and the permissions that you grant them.</p>\n        <note>\n            <p>Sharing a resource makes it available for use by principals outside of the\n                Amazon Web Services account that created the resource. Sharing doesn't change any permissions or\n                quotas that apply to the resource in the account that created it.</p>\n        </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/createresourceshare",
@@ -467,13 +467,13 @@
                 "resourceArns": {
                     "target": "com.amazonaws.ram#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the resources to associate with the resource share.</p>"
+                        "smithy.api#documentation": "<p>The ARNs of the resources to associate with the resource share.</p>"
                     }
                 },
                 "principals": {
                     "target": "com.amazonaws.ram#PrincipalArnOrIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principals to associate with the resource share. The possible values are IDs of AWS accounts,\n          the ARN of an OU or organization from AWS Organizations.</p>"
+                        "smithy.api#documentation": "<p>The principals to associate with the resource share. The possible values are:</p>\n        <ul>\n            <li>\n                <p>An Amazon Web Services account ID</p>\n            </li>\n            <li>\n                <p>An Amazon Resource Name (ARN) of an organization in Organizations</p>\n            </li>\n            <li>\n                <p>An ARN of an organizational unit (OU) in Organizations</p>\n            </li>\n            <li>\n                <p>An ARN of an IAM role</p>\n            </li>\n            <li>\n                <p>An ARN of an IAM user</p>\n            </li>\n         </ul>\n        <note>\n            <p>Not all resource types can be shared with IAM roles and IAM users. For more\n                information, see <a href=\"https://docs.aws.amazon.com/ram/latest/userguide/permissions.html#permissions-rbp-supported-resource-types\">Sharing with IAM roles and IAM users</a> in the <i>Resource Access Manager User\n                    Guide</i>.</p>\n        </note>"
                     }
                 },
                 "tags": {
@@ -485,7 +485,7 @@
                 "allowExternalPrincipals": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether principals outside your AWS organization can be associated with a resource share.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether principals outside your organization in Organizations can be associated\n            with a resource share.</p>"
                     }
                 },
                 "clientToken": {
@@ -497,7 +497,7 @@
                 "permissionArns": {
                     "target": "com.amazonaws.ram#PermissionArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARNs of the permissions to associate with the resource share. If you do not specify an ARN\n\t\t\tfor the permission, AWS RAM automatically attaches the default version of the permission\n\t\t\tfor each resource type.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the permissions to associate with the resource share. If you\n            do not specify an ARN for the permission, RAM automatically attaches the default\n            version of the permission for each resource type. Only one permission can be associated\n            with each resource type in a resource share.</p>"
                     }
                 }
             }
@@ -690,7 +690,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Disassociates an AWS RAM permission from a resource share.</p>",
+                "smithy.api#documentation": "<p>Disassociates an RAM permission from a resource share.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/disassociateresourcesharepermission",
@@ -711,7 +711,7 @@
                 "permissionArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission to disassociate from the resource share.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the permission to disassociate from the resource share.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -807,7 +807,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Enables resource sharing within your AWS Organization.</p>\n         <p>The caller must be the master account for the AWS Organization.</p>",
+                "smithy.api#documentation": "<p>Enables resource sharing within your organization in Organizations.</p>\n        <p>The caller must be the master account for the organization.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/enablesharingwithawsorganization",
@@ -860,7 +860,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Gets the contents of an AWS RAM permission in JSON format.</p>",
+                "smithy.api#documentation": "<p>Gets the contents of an RAM permission in JSON format.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/getpermission",
@@ -874,7 +874,7 @@
                 "permissionArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the permission.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -945,7 +945,7 @@
                 "resourceArns": {
                     "target": "com.amazonaws.ram#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the resources.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1037,7 +1037,7 @@
                 "associationType": {
                     "target": "com.amazonaws.ram#ResourceShareAssociationType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The association type. Specify <code>PRINCIPAL</code> to list the principals that are \n   \t\tassociated with the specified resource share. Specify <code>RESOURCE</code> to list \n   \t\tthe resources that are associated with the specified resource share.</p>",
+                        "smithy.api#documentation": "<p>The association type. Specify <code>PRINCIPAL</code> to list the principals that are\n            associated with the specified resource share. Specify <code>RESOURCE</code> to list the resources\n            that are associated with the specified resource share.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -1050,13 +1050,13 @@
                 "resourceArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if the \n      \tassociation type is <code>PRINCIPAL</code>.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource. You cannot specify this parameter if\n            the association type is <code>PRINCIPAL</code>.</p>"
                     }
                 },
                 "principal": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The principal. You cannot specify this parameter if the association type is \n     \t<code>RESOURCE</code>.</p>"
+                        "smithy.api#documentation": "<p>The principal. You cannot specify this parameter if the association type is\n                <code>RESOURCE</code>.</p>"
                     }
                 },
                 "associationStatus": {
@@ -1238,7 +1238,7 @@
                 "resourceShareArns": {
                     "target": "com.amazonaws.ram#ResourceShareArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARNs of the resource shares.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resource shares.</p>"
                     }
                 },
                 "resourceShareStatus": {
@@ -1281,7 +1281,7 @@
                 "permissionArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the AWS RAM permission that is associated with the resource share.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the RAM permission that is associated with the\n            resource share.</p>"
                     }
                 }
             }
@@ -1314,7 +1314,11 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A client token input parameter was reused with an operation, but at least one of\n        the other input parameters is different from the previous call to the operation.</p>",
+                "aws.protocols#awsQueryError": {
+                    "code": "IdempotentParameterMismatch",
+                    "httpResponseCode": 400
+                },
+                "smithy.api#documentation": "<p>A client token input parameter was reused with an operation, but at least one of the\n            other input parameters is different from the previous call to the operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -1336,6 +1340,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidClientToken",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A client token is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1352,6 +1360,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidMaxResults",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified value for MaxResults is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1368,6 +1380,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidNextToken",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified value for NextToken is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1384,6 +1400,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidParameter",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A parameter is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1400,6 +1420,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResourceType.Unknown",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified resource type is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1416,6 +1440,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidStateTransitionException.Unknown",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested state transition is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -1459,7 +1487,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the resources in a resource share that is shared with you but that the invitation is still pending for.</p>",
+                "smithy.api#documentation": "<p>Lists the resources in a resource share that is shared with you but that the invitation is still\n            pending for.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listpendinginvitationresources",
@@ -1539,7 +1567,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the AWS RAM permissions.</p>",
+                "smithy.api#documentation": "<p>Lists the RAM permissions.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listpermissions",
@@ -1558,7 +1586,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies the resource type for which to list permissions. For example, to list only \n\t\tpermissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>.</p>"
+                        "smithy.api#documentation": "<p>Specifies the resource type for which to list permissions. For example, to list only\n            permissions that apply to EC2 subnets, specify <code>ec2:Subnet</code>.</p>"
                     }
                 },
                 "nextToken": {
@@ -1621,7 +1649,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the principals that you have shared resources with or that have shared resources\n\t\t\twith you.</p>",
+                "smithy.api#documentation": "<p>Lists the principals that you have shared resources with or that have shared resources\n            with you.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listprincipals",
@@ -1659,7 +1687,7 @@
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type.</p>\n   \t     <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The resource type.</p>\n        <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code>\n         </p>"
                     }
                 },
                 "resourceShareArns": {
@@ -1731,7 +1759,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the AWS RAM permissions that are associated with a resource share.</p>",
+                "smithy.api#documentation": "<p>Lists the RAM permissions that are associated with a resource share.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listresourcesharepermissions",
@@ -1808,7 +1836,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the shareable resource types supported by AWS RAM.</p>",
+                "smithy.api#documentation": "<p>Lists the shareable resource types supported by RAM.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listresourcetypes",
@@ -1844,7 +1872,7 @@
                 "resourceTypes": {
                     "target": "com.amazonaws.ram#ServiceNameAndResourceTypeList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The shareable resource types supported by AWS RAM.</p>"
+                        "smithy.api#documentation": "<p>The shareable resource types supported by RAM.</p>"
                     }
                 },
                 "nextToken": {
@@ -1887,7 +1915,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Lists the resources that you added to a resource shares or the resources that are shared with you.</p>",
+                "smithy.api#documentation": "<p>Lists the resources that you added to a resource shares or the resources that are shared with\n            you.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/listresources",
@@ -1919,13 +1947,13 @@
                 "resourceType": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The resource type.</p>\n   \t     <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code>\n         </p>"
+                        "smithy.api#documentation": "<p>The resource type.</p>\n        <p>Valid values: <code>acm-pca:CertificateAuthority</code> | <code>appmesh:Mesh</code> | <code>codebuild:Project</code> | <code>codebuild:ReportGroup</code> | <code>ec2:CapacityReservation</code> | <code>ec2:DedicatedHost</code> | <code>ec2:LocalGatewayRouteTable</code> | <code>ec2:PrefixList</code> | <code>ec2:Subnet</code> | <code>ec2:TrafficMirrorTarget</code> | <code>ec2:TransitGateway</code> | <code>imagebuilder:Component</code> | <code>imagebuilder:Image</code> | <code>imagebuilder:ImageRecipe</code> | <code>imagebuilder:ContainerRecipe</code> | <code>glue:Catalog</code> | <code>glue:Database</code> | <code>glue:Table</code> | <code>license-manager:LicenseConfiguration</code> I <code>network-firewall:FirewallPolicy</code> | <code>network-firewall:StatefulRuleGroup</code> | <code>network-firewall:StatelessRuleGroup</code> | <code>outposts:Outpost</code> | <code>resource-groups:Group</code> | <code>rds:Cluster</code> | <code>route53resolver:FirewallRuleGroup</code> |<code>route53resolver:ResolverQueryLogConfig</code> | <code>route53resolver:ResolverRule</code> | <code>s3-outposts:Outpost</code> | <code>ssm-contacts:Contact</code> | <code>ssm-incidents:ResponsePlan</code>\n         </p>"
                     }
                 },
                 "resourceArns": {
                     "target": "com.amazonaws.ram#ResourceArnList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARN) of the resources.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Names (ARNs) of the resources.</p>"
                     }
                 },
                 "resourceShareArns": {
@@ -1976,6 +2004,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidArn.Malformed",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The format of an Amazon Resource Name (ARN) is not valid.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2002,6 +2034,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "MissingRequiredParameter",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A required input parameter is missing.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2018,6 +2054,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "OperationNotPermitted",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested operation is not permitted.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2074,12 +2114,12 @@
                 "external": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the principal belongs to the same organization in Organizations as the\n            Amazon Web Services account that owns the resource share.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Describes a principal for use with AWS Resource Access Manager.</p>"
+                "smithy.api#documentation": "<p>Describes a principal for use with Resource Access Manager.</p>"
             }
         },
         "com.amazonaws.ram#PrincipalArnOrIdList": {
@@ -2135,7 +2175,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Resource shares that were created by attaching a policy to a resource are visible only to\n\t\t\tthe resource share owner, and the resource share cannot be modified in AWS RAM.</p>\n    \t\n    \t    <p>Use this API action to promote the resource share. When you promote the resource share,\n\t\t\tit becomes:</p>\n    \t    <ul>\n            <li>\n    \t\t\t        <p>Visible to all principals that it is shared with.</p>\n    \t\t      </li>\n            <li>\n    \t\t\t        <p>Modifiable in AWS RAM.</p>\n    \t\t      </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Resource shares that were created by attaching a policy to a resource are visible only\n            to the resource share owner, and the resource share cannot be modified in RAM.</p>\n\n        <p>Use this API action to promote the resource share. When you promote the resource\n            share, it becomes:</p>\n        <ul>\n            <li>\n                <p>Visible to all principals that it is shared with.</p>\n            </li>\n            <li>\n                <p>Modifiable in RAM.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/promoteresourcesharecreatedfrompolicy",
@@ -2149,7 +2189,7 @@
                 "resourceShareArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource share to promote.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource share to promote.</p>",
                         "smithy.api#httpQuery": "resourceShareArn",
                         "smithy.api#required": {}
                     }
@@ -2209,7 +2249,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Rejects an invitation to a resource share from another AWS account.</p>",
+                "smithy.api#documentation": "<p>Rejects an invitation to a resource share from another Amazon Web Services account.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/rejectresourceshareinvitation",
@@ -2276,7 +2316,7 @@
                 "resourceGroupArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the resource group. This value is returned only if the resource is a resource\n\t\t\tgroup.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the resource group. This value is returned only if\n            the resource is a resource group.</p>"
                     }
                 },
                 "status": {
@@ -2328,6 +2368,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResourceArn.NotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>An Amazon Resource Name (ARN) was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2375,13 +2419,13 @@
                 "owningAccountId": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS account that owns the resource share.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that owns the resource share.</p>"
                     }
                 },
                 "allowExternalPrincipals": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether principals outside your AWS organization can be associated with a resource share.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether principals outside your organization in Organizations can be associated\n            with a resource share.</p>"
                     }
                 },
                 "status": {
@@ -2417,7 +2461,7 @@
                 "featureSet": {
                     "target": "com.amazonaws.ram#ResourceShareFeatureSet",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates how the resource share was created. Possible values include:</p>\n\t        <ul>\n            <li>\n\t\t\t            <p>\n                  <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an AWS Identity\n\t\t\t\t\tand Access Management (AWS IAM) policy attached to a resource. These resource shares are\n\t\t\t\t\tvisible only to the AWS account that created it. They cannot be modified in\n\t\t\t\t\tAWS RAM.</p>\n\t\t          </li>\n            <li>\n\t\t\t            <p>\n                  <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process \n\t\t\t\tof being promoted. For more information, see \n\t\t\t\t<a>PromoteResourceShareCreatedFromPolicy</a>.</p>\n\t\t          </li>\n            <li>\n\t\t\t            <p>\n                  <code>STANDARD</code> - Indicates that the resource share was created in AWS RAM using the console or\n\t\t\t\t\tAPIs. These resource shares are visible to all principals. They can be modified\n\t\t\t\t\tin AWS RAM.</p>\n\t\t          </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Indicates how the resource share was created. Possible values include:</p>\n        <ul>\n            <li>\n                <p>\n                  <code>CREATED_FROM_POLICY</code> - Indicates that the resource share was created from an\n                    Amazon Web Services Identity and Access Management (Amazon Web Services IAM) policy attached to a resource.\n                    These resource shares are visible only to the Amazon Web Services account that created it. They cannot\n                    be modified in RAM.</p>\n            </li>\n            <li>\n                <p>\n                  <code>PROMOTING_TO_STANDARD</code> - The resource share is in the process of being\n                    promoted. For more information, see <a>PromoteResourceShareCreatedFromPolicy</a>.</p>\n            </li>\n            <li>\n                <p>\n                  <code>STANDARD</code> - Indicates that the resource share was created in RAM using the\n                    console or APIs. These resource shares are visible to all principals. They can\n                    be modified in RAM.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2452,7 +2496,7 @@
                 "associatedEntity": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The associated entity. For resource associations, this is the ARN of the resource.\n       For principal associations, this is the ID of an AWS account or the ARN of an OU or\n       organization from AWS Organizations.</p>"
+                        "smithy.api#documentation": "<p>The associated entity. For resource associations, this is the Amazon Resource Name\n            (ARN) of the resource. For principal associations, this is one of the following:</p>\n        <ul>\n            <li>\n                <p>An Amazon Web Services account ID</p>\n            </li>\n            <li>\n                <p>An ARN of an organization in Organizations</p>\n            </li>\n            <li>\n                <p>An ARN of an organizational unit (OU) in Organizations</p>\n            </li>\n            <li>\n                <p>An ARN of an IAM role</p>\n            </li>\n            <li>\n                <p>An ARN of an IAM user</p>\n            </li>\n         </ul>"
                     }
                 },
                 "associationType": {
@@ -2488,7 +2532,7 @@
                 "external": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether the principal belongs to the same AWS organization as the AWS account that owns the resource share.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether the principal belongs to the same organization in Organizations as the\n            Amazon Web Services account that owns the resource share.</p>"
                     }
                 }
             },
@@ -2590,13 +2634,13 @@
                 "senderAccountId": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS account that sent the invitation.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that sent the invitation.</p>"
                     }
                 },
                 "receiverAccountId": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS account that received the invitation.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services account that received the invitation.</p>"
                     }
                 },
                 "invitationTimestamp": {
@@ -2617,13 +2661,13 @@
                         "smithy.api#deprecated": {
                             "message": "This member has been deprecated. Use ListPendingInvitationResources."
                         },
-                        "smithy.api#documentation": "<p>To view the resources associated with a pending resource share invitation, use \n      \t<a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html\">\n      \t\tListPendingInvitationResources</a>.</p>"
+                        "smithy.api#documentation": "<p>To view the resources associated with a pending resource share invitation, use <a href=\"https://docs.aws.amazon.com/ram/latest/APIReference/API_ListPendingInvitationResources.html\">\n                ListPendingInvitationResources</a>.</p>"
                     }
                 },
                 "receiverArn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM user or IAM role that received the invitation.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the IAM user or IAM role that received the\n            invitation.</p>"
                     }
                 }
             },
@@ -2642,6 +2686,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResourceShareInvitationArn.AlreadyAccepted",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The invitation was already accepted.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2658,6 +2706,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResourceShareInvitationArn.AlreadyRejected",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The invitation was already rejected.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2683,6 +2735,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResourceShareInvitationArn.NotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) for an invitation was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2699,6 +2755,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResourceShareInvitationArn.Expired",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The invitation is expired.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2747,6 +2807,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "ResourceShareLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested resource share exceeds the limit for your account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -2767,7 +2831,7 @@
                 "arn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the permission.</p>"
                     }
                 },
                 "version": {
@@ -2779,7 +2843,7 @@
                 "defaultVersion": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this permission.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this\n            permission.</p>"
                     }
                 },
                 "name": {
@@ -2797,7 +2861,7 @@
                 "permission": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The permission's effect and actions in JSON format. The <code>effect</code> indicates whether\n\t\t\tthe actions are allowed or denied. The <code>actions</code> list the API actions to\n\t\t\twhich the principal is granted or denied access.</p>"
+                        "smithy.api#documentation": "<p>The permission's effect and actions in JSON format. The <code>effect</code> indicates\n            whether the actions are allowed or denied. The <code>actions</code> list the API actions\n            to which the principal is granted or denied access.</p>"
                     }
                 },
                 "creationTime": {
@@ -2815,12 +2879,12 @@
                 "isResourceTypeDefault": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this resource type.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this\n            resource type.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an AWS RAM permission.</p>"
+                "smithy.api#documentation": "<p>Information about an RAM permission.</p>"
             }
         },
         "com.amazonaws.ram#ResourceSharePermissionList": {
@@ -2838,7 +2902,7 @@
                 "arn": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the permission.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the permission.</p>"
                     }
                 },
                 "version": {
@@ -2850,7 +2914,7 @@
                 "defaultVersion": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this permission.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this\n            permission.</p>"
                     }
                 },
                 "name": {
@@ -2886,7 +2950,7 @@
                 "isResourceTypeDefault": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this resource type.</p>"
+                        "smithy.api#documentation": "<p>Specifies whether the version of the permission is set to the default version for this\n            resource type.</p>"
                     }
                 }
             },
@@ -2959,6 +3023,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InternalError",
+                    "httpResponseCode": 500
+                },
                 "smithy.api#documentation": "<p>The service could not respond to the request due to an internal problem.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 500
@@ -2976,12 +3044,12 @@
                 "serviceName": {
                     "target": "com.amazonaws.ram#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the AWS services to which the resources belong.</p>"
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services services to which the resources belong.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about the shareable resource types and the AWS services to which they belong.</p>"
+                "smithy.api#documentation": "<p>Information about the shareable resource types and the Amazon Web Services services to which they\n            belong.</p>"
             }
         },
         "com.amazonaws.ram#ServiceNameAndResourceTypeList": {
@@ -3004,6 +3072,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "Unavailable",
+                    "httpResponseCode": 503
+                },
                 "smithy.api#documentation": "<p>The service is not available.</p>",
                 "smithy.api#error": "server",
                 "smithy.api#httpError": 503
@@ -3078,6 +3150,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TagLimitExceeded",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The requested tags exceed the limit for your account.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3100,6 +3176,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "TagPolicyViolation",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>The specified tag is a reserved word and cannot be used.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3191,6 +3271,10 @@
                 }
             },
             "traits": {
+                "aws.protocols#awsQueryError": {
+                    "code": "InvalidResourceShareArn.NotFound",
+                    "httpResponseCode": 400
+                },
                 "smithy.api#documentation": "<p>A specified resource was not found.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
@@ -3312,7 +3396,7 @@
                 "allowExternalPrincipals": {
                     "target": "com.amazonaws.ram#Boolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>Indicates whether principals outside your AWS organization can be associated with a resource share.</p>"
+                        "smithy.api#documentation": "<p>Indicates whether principals outside your organization in Organizations can be associated\n            with a resource share.</p>"
                     }
                 },
                 "clientToken": {

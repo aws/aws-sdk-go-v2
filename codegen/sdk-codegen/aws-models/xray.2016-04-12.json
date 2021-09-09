@@ -127,7 +127,7 @@
                     "name": "xray"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>AWS X-Ray provides APIs for managing debug traces and retrieving service maps\n      and other data created by processing those traces.</p>",
+                "smithy.api#documentation": "<p>Amazon Web Services X-Ray provides APIs for managing debug traces and retrieving service maps\n      and other data created by processing those traces.</p>",
                 "smithy.api#title": "AWS X-Ray"
             }
         },
@@ -465,7 +465,7 @@
                 "Tags": {
                     "target": "com.amazonaws.xray#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group.\n            For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n                resources</a> in the <i>AWS General Reference</i>.</p>\n        <p>The following restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n                <p>Maximum tag key length: 128 Unicode characters</p>\n            </li>\n            <li>\n                <p>Maximum tag value length: 256 Unicode characters</p>\n            </li>\n            <li>\n                <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . :\n                    / = + - and @</p>\n            </li>\n            <li>\n                <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n                <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS\n                    use.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group.\n            For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n                resources</a> in the <i>Amazon Web Services General Reference</i>.</p>\n        <p>The following restrictions apply to tags:</p>\n        <ul>\n            <li>\n                <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n                <p>Maximum tag key length: 128 Unicode characters</p>\n            </li>\n            <li>\n                <p>Maximum tag value length: 256 Unicode characters</p>\n            </li>\n            <li>\n                <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . :\n                    / = + - and @</p>\n            </li>\n            <li>\n                <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n                <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for Amazon Web Services\n                    use.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -501,7 +501,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Creates a rule to control sampling behavior for instrumented applications. Services\n         retrieve rules with <a>GetSamplingRules</a>, and evaluate each rule in ascending\n         order of <i>priority</i> for each request. If a rule matches, the service\n         records a trace, borrowing it from the reservoir size. After 10 seconds, the service\n         reports back to X-Ray with <a>GetSamplingTargets</a> to get updated versions of\n         each in-use rule. The updated rule contains a trace quota that the service can use instead\n         of borrowing from the reservoir.</p>",
+                "smithy.api#documentation": "<p>Creates a rule to control sampling behavior for instrumented applications. Services\n         retrieve rules with <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html\">GetSamplingRules</a>, and evaluate each rule in ascending\n         order of <i>priority</i> for each request. If a rule matches, the service\n         records a trace, borrowing it from the reservoir size. After 10 seconds, the service\n         reports back to X-Ray with <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html\">GetSamplingTargets</a> to get updated versions of\n         each in-use rule. The updated rule contains a trace quota that the service can use instead\n         of borrowing from the reservoir.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/CreateSamplingRule",
@@ -522,7 +522,7 @@
                 "Tags": {
                     "target": "com.amazonaws.xray#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map that contains one or more tag keys and tag values to attach to an X-Ray sampling\n         rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS\n            resources</a> in the <i>AWS General Reference</i>.</p>\n         <p>The following restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n               <p>Maximum tag key length: 128 Unicode characters</p>\n            </li>\n            <li>\n               <p>Maximum tag value length: 256 Unicode characters</p>\n            </li>\n            <li>\n               <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . :\n               / = + - and @</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS\n               use.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A map that contains one or more tag keys and tag values to attach to an X-Ray sampling\n         rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services\n            resources</a> in the <i>Amazon Web Services General Reference</i>.</p>\n         <p>The following restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n               <p>Maximum tag key length: 128 Unicode characters</p>\n            </li>\n            <li>\n               <p>Maximum tag value length: 256 Unicode characters</p>\n            </li>\n            <li>\n               <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . :\n               / = + - and @</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for Amazon Web Services\n               use.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -743,7 +743,7 @@
                 "KeyId": {
                     "target": "com.amazonaws.xray#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the customer master key (CMK) used for encryption, if applicable.</p>"
+                        "smithy.api#documentation": "<p>The ID of the KMS key used for encryption, if applicable.</p>"
                     }
                 },
                 "Status": {
@@ -755,7 +755,7 @@
                 "Type": {
                     "target": "com.amazonaws.xray#EncryptionType",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS</code> for encryption with CMKs. Set to <code>NONE</code> for\n      default encryption.</p>"
+                        "smithy.api#documentation": "<p>The type of encryption. Set to <code>KMS</code> for encryption with KMS keys. Set to <code>NONE</code> for\n      default encryption.</p>"
                     }
                 }
             },
@@ -1470,7 +1470,7 @@
                 "Services": {
                     "target": "com.amazonaws.xray#InsightImpactGraphServiceList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AWS instrumented services related to the insight.</p>"
+                        "smithy.api#documentation": "<p>The Amazon Web Services instrumented services related to the insight.</p>"
                     }
                 },
                 "NextToken": {
@@ -1775,13 +1775,13 @@
                 "LastRuleModification": {
                     "target": "com.amazonaws.xray#Timestamp",
                     "traits": {
-                        "smithy.api#documentation": "<p>The last time a user changed the sampling rule configuration. If\n         the sampling rule configuration changed since the service last retrieved it, the service\n         should call <a>GetSamplingRules</a> to get the latest version.</p>"
+                        "smithy.api#documentation": "<p>The last time a user changed the sampling rule configuration. If\n         the sampling rule configuration changed since the service last retrieved it, the service\n         should call <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingRules.html\">GetSamplingRules</a> to get the latest version.</p>"
                     }
                 },
                 "UnprocessedStatistics": {
                     "target": "com.amazonaws.xray#UnprocessedStatisticsList",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about <a>SamplingStatisticsDocument</a> that X-Ray could not\n         process.</p>"
+                        "smithy.api#documentation": "<p>Information about <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_SamplingStatisticsDocument.html\">SamplingStatisticsDocument</a> that X-Ray could not\n         process.</p>"
                     }
                 }
             }
@@ -1803,7 +1803,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves a document that describes services that process incoming requests, and\n      downstream services that they call as a result. Root services process incoming requests and\n      make calls to downstream services. Root services are applications that use the <a href=\"https://docs.aws.amazon.com/xray/index.html\">AWS X-Ray SDK</a>.\n      Downstream services can be other applications, AWS resources, HTTP web APIs, or SQL\n      databases.</p>",
+                "smithy.api#documentation": "<p>Retrieves a document that describes services that process incoming requests, and\n      downstream services that they call as a result. Root services process incoming requests and\n      make calls to downstream services. Root services are applications that use the <a href=\"https://docs.aws.amazon.com/xray/index.html\">Amazon Web Services X-Ray SDK</a>.\n      Downstream services can be other applications, Amazon Web Services resources, HTTP web APIs, or SQL\n      databases.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ServiceGraph",
@@ -2078,7 +2078,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Retrieves IDs and annotations for traces available for a specified time frame using an\n      optional filter. To get the full traces, pass the trace IDs to\n      <code>BatchGetTraces</code>.</p>\n         <p>A filter expression can target traced requests that hit specific service nodes or\n      edges, have errors, or come from a known user. For example, the following filter expression\n      targets traces that pass through <code>api.example.com</code>:</p>\n         <p>\n            <code>service(\"api.example.com\")</code>\n         </p>\n         <p>This filter expression finds traces that have an annotation named <code>account</code>\n      with the value <code>12345</code>:</p>\n         <p>\n            <code>annotation.account = \"12345\"</code>\n         </p>\n         <p>For a full list of indexed fields and keywords that you can use in filter expressions,\n      see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html\">Using Filter\n        Expressions</a> in the <i>AWS X-Ray Developer Guide</i>.</p>",
+                "smithy.api#documentation": "<p>Retrieves IDs and annotations for traces available for a specified time frame using an\n      optional filter. To get the full traces, pass the trace IDs to\n      <code>BatchGetTraces</code>.</p>\n         <p>A filter expression can target traced requests that hit specific service nodes or\n      edges, have errors, or come from a known user. For example, the following filter expression\n      targets traces that pass through <code>api.example.com</code>:</p>\n         <p>\n            <code>service(\"api.example.com\")</code>\n         </p>\n         <p>This filter expression finds traces that have an annotation named <code>account</code>\n      with the value <code>12345</code>:</p>\n         <p>\n            <code>annotation.account = \"12345\"</code>\n         </p>\n         <p>For a full list of indexed fields and keywords that you can use in filter expressions,\n      see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-console-filters.html\">Using Filter\n        Expressions</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/TraceSummaries",
@@ -2193,7 +2193,7 @@
                 "InsightsConfiguration": {
                     "target": "com.amazonaws.xray#InsightsConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>The structure containing configurations related to insights.</p>\n        <ul>\n            <li>\n                <p>The InsightsEnabled boolean can be set to true to enable insights for the\n                    group or false to disable insights for the group.</p>\n            </li>\n            <li>\n                <p>The NotifcationsEnabled  boolean can be set to true to enable insights\n                    notifications through Amazon EventBridge for the group.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The structure containing configurations related to insights.</p>\n        <ul>\n            <li>\n                <p>The InsightsEnabled boolean can be set to true to enable insights for the\n                    group or false to disable insights for the group.</p>\n            </li>\n            <li>\n                <p>The NotificationsEnabled boolean can be set to true to enable insights\n                    notifications through Amazon EventBridge for the group.</p>\n            </li>\n         </ul>"
                     }
                 }
             },
@@ -2489,7 +2489,7 @@
         "com.amazonaws.xray#InsightId": {
             "type": "string",
             "traits": {
-                "smithy.api#pattern": "[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}"
+                "smithy.api#pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}$"
             }
         },
         "com.amazonaws.xray#InsightImpactGraphEdge": {
@@ -2524,7 +2524,7 @@
                 "Type": {
                     "target": "com.amazonaws.xray#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifier for the service. Unique within the service map.</p>\n         <ul>\n            <li>\n               <p>AWS Resource - The type of an AWS resource. For example, AWS::EC2::Instance for an application running\n               on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used. </p>\n            </li>\n            <li>\n               <p>AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon\n               DynamoDB that didn't target a specific table. </p>\n            </li>\n            <li>\n               <p>AWS Service - The type of an AWS service. For example, AWS::DynamoDB for downstream calls to Amazon\n               DynamoDB that didn't target a specific table. </p>\n            </li>\n            <li>\n               <p>remote - A downstream service of indeterminate type.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>Identifier for the service. Unique within the service map.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services Resource - The type of an Amazon Web Services resource. For example, AWS::EC2::Instance for an application running\n               on Amazon EC2 or AWS::DynamoDB::Table for an Amazon DynamoDB table that the application used. </p>\n            </li>\n            <li>\n               <p>Amazon Web Services Service - The type of an Amazon Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon\n               DynamoDB that didn't target a specific table. </p>\n            </li>\n            <li>\n               <p>Amazon Web Services Service - The type of an Amazon Web Services service. For example, AWS::DynamoDB for downstream calls to Amazon\n               DynamoDB that didn't target a specific table. </p>\n            </li>\n            <li>\n               <p>remote - A downstream service of indeterminate type.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "Name": {
@@ -2542,7 +2542,7 @@
                 "AccountId": {
                     "target": "com.amazonaws.xray#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifier of the AWS account in which the service runs.</p>"
+                        "smithy.api#documentation": "<p>Identifier of the Amazon Web Services account in which the service runs.</p>"
                     }
                 },
                 "Edges": {
@@ -2750,7 +2750,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Returns a list of tags that are applied to the specified AWS X-Ray group or sampling rule.</p>",
+                "smithy.api#documentation": "<p>Returns a list of tags that are applied to the specified Amazon Web Services X-Ray group or sampling rule.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/ListTagsForResource",
@@ -2857,7 +2857,7 @@
                 "KeyId": {
                     "target": "com.amazonaws.xray#EncryptionKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>An AWS KMS customer master key (CMK) in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Alias</b> - The name of the key. For example,\n            <code>alias/MyKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Key ID</b> - The KMS key ID of the key. For example,\n          <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. AWS X-Ray does not support asymmetric CMKs.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ARN</b> - The full Amazon Resource Name of the key ID or alias.\n          For example,\n            <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.\n          Use this format to specify a key in a different account.</p>\n            </li>\n         </ul>\n         <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>"
+                        "smithy.api#documentation": "<p>An Amazon Web Services KMS key in one of the following formats:</p>\n         <ul>\n            <li>\n               <p>\n                  <b>Alias</b> - The name of the key. For example,\n            <code>alias/MyKey</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <b>Key ID</b> - The KMS key ID of the key. For example,\n          <code>ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>. Amazon Web Services X-Ray does not support asymmetric KMS keys.</p>\n            </li>\n            <li>\n               <p>\n                  <b>ARN</b> - The full Amazon Resource Name of the key ID or alias.\n          For example,\n            <code>arn:aws:kms:us-east-2:123456789012:key/ae4aa6d49-a4d8-9df9-a475-4ff6d7898456</code>.\n          Use this format to specify a key in a different account.</p>\n            </li>\n         </ul>\n         <p>Omit this key if you set <code>Type</code> to <code>NONE</code>.</p>"
                     }
                 },
                 "Type": {
@@ -2897,7 +2897,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Used by the AWS X-Ray daemon to upload telemetry.</p>",
+                "smithy.api#documentation": "<p>Used by the Amazon Web Services X-Ray daemon to upload telemetry.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/TelemetryRecords",
@@ -2956,7 +2956,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Uploads segment documents to AWS X-Ray. The <a href=\"https://docs.aws.amazon.com/xray/index.html\">X-Ray SDK</a> generates segment documents and sends them to the X-Ray daemon, which uploads them in\n      batches. A segment document can be a completed segment, an in-progress segment, or an array of\n      subsegments.</p>\n         <p>Segments must include the following fields. For the full segment document schema, see\n        <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">AWS X-Ray\n        Segment Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p>\n         <p class=\"title\">\n            <b>Required segment document fields</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code> - The name of the service that handled the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16\n          hexadecimal digits.</p>\n            </li>\n            <li>\n               <p>\n                  <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from\n          a single client request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in\n          epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or\n            <code>1.480615200010E9</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>end_time</code> - Time the segment or subsegment was closed. For example,\n            <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or\n            <code>in_progress</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to\n          record that a segment has been started, but is not complete. Send an in-progress segment when your application\n          receives a request that will take a long time to serve, to trace that the request was received. When the\n          response is sent, send the complete segment to overwrite the in-progress segment.</p>\n            </li>\n         </ul>\n         <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example,\n      1-58406520-a006649127e371903a2de979. This includes:</p>\n         <p class=\"title\">\n            <b>Trace ID Format</b>\n         </p>\n         <ul>\n            <li>\n               <p>The version number, for instance, <code>1</code>.</p>\n            </li>\n            <li>\n               <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For\n          example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds,\n          or <code>58406520</code> in hexadecimal.</p>\n            </li>\n            <li>\n               <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal\n          digits.</p>\n            </li>\n         </ul>",
+                "smithy.api#documentation": "<p>Uploads segment documents to Amazon Web Services X-Ray. The <a href=\"https://docs.aws.amazon.com/xray/index.html\">X-Ray SDK</a> generates segment documents and sends them to the X-Ray daemon, which uploads them in\n      batches. A segment document can be a completed segment, an in-progress segment, or an array of\n      subsegments.</p>\n         <p>Segments must include the following fields. For the full segment document schema, see\n      <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">Amazon Web Services X-Ray\n        Segment Documents</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>\n         <p class=\"title\">\n            <b>Required segment document fields</b>\n         </p>\n         <ul>\n            <li>\n               <p>\n                  <code>name</code> - The name of the service that handled the request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>id</code> - A 64-bit identifier for the segment, unique among segments in the same trace, in 16\n          hexadecimal digits.</p>\n            </li>\n            <li>\n               <p>\n                  <code>trace_id</code> - A unique identifier that connects all segments and subsegments originating from\n          a single client request.</p>\n            </li>\n            <li>\n               <p>\n                  <code>start_time</code> - Time the segment or subsegment was created, in floating point seconds in\n          epoch time, accurate to milliseconds. For example, <code>1480615200.010</code> or\n            <code>1.480615200010E9</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>end_time</code> - Time the segment or subsegment was closed. For example,\n            <code>1480615200.090</code> or <code>1.480615200090E9</code>. Specify either an <code>end_time</code> or\n            <code>in_progress</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>in_progress</code> - Set to <code>true</code> instead of specifying an <code>end_time</code> to\n          record that a segment has been started, but is not complete. Send an in-progress segment when your application\n          receives a request that will take a long time to serve, to trace that the request was received. When the\n          response is sent, send the complete segment to overwrite the in-progress segment.</p>\n            </li>\n         </ul>\n         <p>A <code>trace_id</code> consists of three numbers separated by hyphens. For example,\n      1-58406520-a006649127e371903a2de979. This includes:</p>\n         <p class=\"title\">\n            <b>Trace ID Format</b>\n         </p>\n         <ul>\n            <li>\n               <p>The version number, for instance, <code>1</code>.</p>\n            </li>\n            <li>\n               <p>The time of the original request, in Unix epoch time, in 8 hexadecimal digits. For\n          example, 10:00AM December 2nd, 2016 PST in epoch time is <code>1480615200</code> seconds,\n          or <code>58406520</code> in hexadecimal.</p>\n            </li>\n            <li>\n               <p>A 96-bit identifier for the trace, globally unique, in 24 hexadecimal\n          digits.</p>\n            </li>\n         </ul>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/TraceSegments",
@@ -3249,7 +3249,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.xray#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>Matches the ARN of the AWS resource on which the service runs.</p>",
+                        "smithy.api#documentation": "<p>Matches the ARN of the Amazon Web Services resource on which the service runs.</p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -3350,7 +3350,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A <a>SamplingRule</a> and its metadata.</p>"
+                "smithy.api#documentation": "<p>A <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_SamplingRule.html\">SamplingRule</a> and its metadata.</p>"
             }
         },
         "com.amazonaws.xray#SamplingRuleRecordList": {
@@ -3377,7 +3377,7 @@
                 "ResourceARN": {
                     "target": "com.amazonaws.xray#ResourceARN",
                     "traits": {
-                        "smithy.api#documentation": "<p>Matches the ARN of the AWS resource on which the service runs.</p>"
+                        "smithy.api#documentation": "<p>Matches the ARN of the Amazon Web Services resource on which the service runs.</p>"
                     }
                 },
                 "Priority": {
@@ -3529,7 +3529,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request sampling results for a single rule from a service. Results are for the last 10\n      seconds unless the service has been assigned a longer reporting interval after a previous call\n      to <a>GetSamplingTargets</a>.</p>"
+                "smithy.api#documentation": "<p>Request sampling results for a single rule from a service. Results are for the last 10\n      seconds unless the service has been assigned a longer reporting interval after a previous call\n      to <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html\">GetSamplingTargets</a>.</p>"
             }
         },
         "com.amazonaws.xray#SamplingStatisticsDocumentList": {
@@ -3614,7 +3614,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Temporary changes to a sampling rule configuration. To meet the global sampling target for a rule, X-Ray\n      calculates a new reservoir for each service based on the recent sampling results of all services that called <a>GetSamplingTargets</a>.</p>"
+                "smithy.api#documentation": "<p>Temporary changes to a sampling rule configuration. To meet the global sampling target for a rule, X-Ray\n      calculates a new reservoir for each service based on the recent sampling results of all services that called \n      <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html\">GetSamplingTargets</a>.</p>"
             }
         },
         "com.amazonaws.xray#SamplingTargetDocumentList": {
@@ -3640,7 +3640,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be\n      compiled from documents uploaded with <a>PutTraceSegments</a>, or an\n        <code>inferred</code> segment for a downstream service, generated from a subsegment sent by\n      the service that called it.</p>\n         <p>For the full segment document schema, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">AWS X-Ray Segment\n        Documents</a> in the <i>AWS X-Ray Developer Guide</i>.</p>"
+                "smithy.api#documentation": "<p>A segment from a trace that has been ingested by the X-Ray service. The segment can be\n      compiled from documents uploaded with <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_PutTraceSegments.html\">PutTraceSegments</a>, or an\n        <code>inferred</code> segment for a downstream service, generated from a subsegment sent by\n      the service that called it.</p>\n         <p>For the full segment document schema, see <a href=\"https://docs.aws.amazon.com/xray/latest/devguide/xray-api-segmentdocuments.html\">Amazon Web Services X-Ray Segment\n      Documents</a> in the <i>Amazon Web Services X-Ray Developer Guide</i>.</p>"
             }
         },
         "com.amazonaws.xray#SegmentDocument": {
@@ -3690,13 +3690,13 @@
                 "AccountId": {
                     "target": "com.amazonaws.xray#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>Identifier of the AWS account in which the service runs.</p>"
+                        "smithy.api#documentation": "<p>Identifier of the Amazon Web Services account in which the service runs.</p>"
                     }
                 },
                 "Type": {
                     "target": "com.amazonaws.xray#String",
                     "traits": {
-                        "smithy.api#documentation": "<p>The type of service.</p>\n         <ul>\n            <li>\n               <p>AWS Resource - The type of an AWS resource. For example, <code>AWS::EC2::Instance</code> for an\n          application running on Amazon EC2 or <code>AWS::DynamoDB::Table</code> for an Amazon DynamoDB table that the\n          application used.</p>\n            </li>\n            <li>\n               <p>AWS Service - The type of an AWS service. For example, <code>AWS::DynamoDB</code>\n          for downstream calls to Amazon DynamoDB that didn't target a specific table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>client</code> - Represents the clients that sent requests to a root\n          service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>remote</code> - A downstream service of indeterminate type.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>The type of service.</p>\n         <ul>\n            <li>\n               <p>Amazon Web Services Resource - The type of an Amazon Web Services resource. For example, <code>AWS::EC2::Instance</code> for an\n          application running on Amazon EC2 or <code>AWS::DynamoDB::Table</code> for an Amazon DynamoDB table that the\n          application used.</p>\n            </li>\n            <li>\n               <p>Amazon Web Services Service - The type of an Amazon Web Services service. For example, <code>AWS::DynamoDB</code>\n          for downstream calls to Amazon DynamoDB that didn't target a specific table.</p>\n            </li>\n            <li>\n               <p>\n                  <code>client</code> - Represents the clients that sent requests to a root\n          service.</p>\n            </li>\n            <li>\n               <p>\n                  <code>remote</code> - A downstream service of indeterminate type.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "State": {
@@ -3874,7 +3874,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an AWS X-Ray group or sampling\n      rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS resources</a>\n      in the <i>AWS General Reference</i>.</p>\n         <p>The following restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS use. You\n          cannot edit or delete system tags.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>A map that contains tag keys and tag values to attach to an Amazon Web Services X-Ray group or sampling\n      rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>\n      in the <i>Amazon Web Services General Reference</i>.</p>\n         <p>The following restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for Amazon Web Services use. You\n          cannot edit or delete system tags.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.xray#TagKey": {
@@ -3933,7 +3933,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Applies tags to an existing AWS X-Ray group or sampling rule.</p>",
+                "smithy.api#documentation": "<p>Applies tags to an existing Amazon Web Services X-Ray group or sampling rule.</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/TagResource",
@@ -3954,7 +3954,7 @@
                 "Tags": {
                     "target": "com.amazonaws.xray#TagList",
                     "traits": {
-                        "smithy.api#documentation": "<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group or\n      sampling rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging AWS resources</a>\n      in the <i>AWS General Reference</i>.</p>\n         <p>The following restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n               <p>Maximum tag key length: 128 Unicode characters</p>\n            </li>\n            <li>\n               <p>Maximum tag value length: 256 Unicode characters</p>\n            </li>\n            <li>\n               <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . :\n          / = + - and @</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for AWS use. You\n          cannot edit or delete system tags.</p>\n            </li>\n         </ul>",
+                        "smithy.api#documentation": "<p>A map that contains one or more tag keys and tag values to attach to an X-Ray group or\n      sampling rule. For more information about ways to use tags, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html\">Tagging Amazon Web Services resources</a>\n      in the <i>Amazon Web Services General Reference</i>.</p>\n         <p>The following restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of user-applied tags per resource: 50</p>\n            </li>\n            <li>\n               <p>Maximum tag key length: 128 Unicode characters</p>\n            </li>\n            <li>\n               <p>Maximum tag value length: 256 Unicode characters</p>\n            </li>\n            <li>\n               <p>Valid values for key and value: a-z, A-Z, 0-9, space, and the following characters: _ . :\n          / = + - and @</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Don't use <code>aws:</code> as a prefix for keys; it's reserved for Amazon Web Services use. You\n          cannot edit or delete system tags.</p>\n            </li>\n         </ul>",
                         "smithy.api#required": {}
                     }
                 }
@@ -4136,7 +4136,7 @@
                 "LimitExceeded": {
                     "target": "com.amazonaws.xray#NullableBoolean",
                     "traits": {
-                        "smithy.api#documentation": "<p>LimitExceeded is set to true when the trace has exceeded one of the defined quotas. For\n      more information about quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/xray.html\">AWS X-Ray endpoints and quotas</a>.</p>"
+                        "smithy.api#documentation": "<p>LimitExceeded is set to true when the trace has exceeded one of the defined quotas. For\n      more information about quotas, see <a href=\"https://docs.aws.amazon.com/general/latest/gr/xray.html\">Amazon Web Services X-Ray endpoints and quotas</a>.</p>"
                     }
                 },
                 "Segments": {
@@ -4390,7 +4390,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Sampling statistics from a call to <a>GetSamplingTargets</a> that X-Ray\n      could not process.</p>"
+                "smithy.api#documentation": "<p>Sampling statistics from a call to <a href=\"https://docs.aws.amazon.com/xray/latest/api/API_GetSamplingTargets.html\">GetSamplingTargets</a> that X-Ray\n      could not process.</p>"
             }
         },
         "com.amazonaws.xray#UnprocessedStatisticsList": {
@@ -4457,7 +4457,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Removes tags from an AWS X-Ray group or sampling rule. You cannot edit or delete system\n      tags (those with an <code>aws:</code> prefix).</p>",
+                "smithy.api#documentation": "<p>Removes tags from an Amazon Web Services X-Ray group or sampling rule. You cannot edit or delete system\n      tags (those with an <code>aws:</code> prefix).</p>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/UntagResource",

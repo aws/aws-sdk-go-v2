@@ -87,6 +87,9 @@
                     "target": "com.amazonaws.eks#DeleteNodegroup"
                 },
                 {
+                    "target": "com.amazonaws.eks#DeregisterCluster"
+                },
+                {
                     "target": "com.amazonaws.eks#DescribeAddon"
                 },
                 {
@@ -130,6 +133,9 @@
                 },
                 {
                     "target": "com.amazonaws.eks#ListUpdates"
+                },
+                {
+                    "target": "com.amazonaws.eks#RegisterCluster"
                 },
                 {
                     "target": "com.amazonaws.eks#TagResource"
@@ -781,13 +787,19 @@
                 "tags": {
                     "target": "com.amazonaws.eks#TagMap",
                     "traits": {
-                        "smithy.api#documentation": "<p>The metadata that you apply to the cluster to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Cluster tags do not propagate to any other resources associated with the\n            cluster. </p>"
+                        "smithy.api#documentation": "<p>The metadata that you apply to the cluster to assist with categorization and\n            organization. Each tag consists of a key and an optional value, both of which you\n            define. Cluster tags do not propagate to any other resources associated with the\n            cluster.</p>"
                     }
                 },
                 "encryptionConfig": {
                     "target": "com.amazonaws.eks#EncryptionConfigList",
                     "traits": {
                         "smithy.api#documentation": "<p>The encryption configuration for the cluster.</p>"
+                    }
+                },
+                "connectorConfig": {
+                    "target": "com.amazonaws.eks#ConnectorConfigResponse",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration used to connect to a cluster for registration.</p>"
                     }
                 }
             },
@@ -828,6 +840,10 @@
                     {
                         "value": "UPDATING",
                         "name": "UPDATING"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
                     }
                 ]
             }
@@ -862,6 +878,109 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Compatibility information.</p>"
+            }
+        },
+        "com.amazonaws.eks#ConnectorConfigProvider": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "EKS_ANYWHERE",
+                        "name": "EKS_ANYWHERE"
+                    },
+                    {
+                        "value": "ANTHOS",
+                        "name": "ANTHOS"
+                    },
+                    {
+                        "value": "GKE",
+                        "name": "GKE"
+                    },
+                    {
+                        "value": "AKS",
+                        "name": "AKS"
+                    },
+                    {
+                        "value": "OPENSHIFT",
+                        "name": "OPENSHIFT"
+                    },
+                    {
+                        "value": "TANZU",
+                        "name": "TANZU"
+                    },
+                    {
+                        "value": "RANCHER",
+                        "name": "RANCHER"
+                    },
+                    {
+                        "value": "EC2",
+                        "name": "EC2"
+                    },
+                    {
+                        "value": "OTHER",
+                        "name": "OTHER"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.eks#ConnectorConfigRequest": {
+            "type": "structure",
+            "members": {
+                "roleArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that is authorized to request the connector configuration.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.eks#ConnectorConfigProvider",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cloud provider for the target cluster to connect.</p>",
+                        "smithy.api#required": {}
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The configuration sent to a cluster for configuration.</p>"
+            }
+        },
+        "com.amazonaws.eks#ConnectorConfigResponse": {
+            "type": "structure",
+            "members": {
+                "activationId": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique ID associated with the cluster for registration purposes.</p>"
+                    }
+                },
+                "activationCode": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A unique code associated with the cluster for registration purposes.</p>"
+                    }
+                },
+                "activationExpiry": {
+                    "target": "com.amazonaws.eks#Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The expiration time of the connected cluster. The cluster's YAML file must be applied through the native \n        provider.</p>"
+                    }
+                },
+                "provider": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The cluster's cloud service provider.</p>"
+                    }
+                },
+                "roleArn": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the role that is used by the EKS connector to communicate with AWS services from the connected Kubernetes cluster.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The full description of your connected cluster.</p>"
             }
         },
         "com.amazonaws.eks#CreateAddon": {
@@ -1604,6 +1723,61 @@
                 }
             }
         },
+        "com.amazonaws.eks#DeregisterCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#DeregisterClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#DeregisterClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceInUseException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceNotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Deregisters a connected cluster to remove it from the Amazon EKS control plane.</p>",
+                "smithy.api#http": {
+                    "method": "DELETE",
+                    "uri": "/cluster-registrations/{name}",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#DeregisterClusterRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the connected cluster to deregister.</p>",
+                        "smithy.api#httpLabel": {},
+                        "smithy.api#required": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#DeregisterClusterResponse": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.eks#Cluster"
+                }
+            }
+        },
         "com.amazonaws.eks#DescribeAddon": {
             "type": "operation",
             "input": {
@@ -1902,6 +2076,16 @@
                                     "output": {
                                         "path": "cluster.status",
                                         "expected": "CREATING",
+                                        "comparator": "stringEquals"
+                                    }
+                                }
+                            },
+                            {
+                                "state": "failure",
+                                "matcher": {
+                                    "output": {
+                                        "path": "cluster.status",
+                                        "expected": "PENDING",
                                         "comparator": "stringEquals"
                                     }
                                 }
@@ -2701,13 +2885,19 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that represents an identity configuration.</p>"
+                "smithy.api#documentation": "<p>The full description of your identity configuration.</p>"
             }
         },
         "com.amazonaws.eks#IdentityProviderConfigs": {
             "type": "list",
             "member": {
                 "target": "com.amazonaws.eks#IdentityProviderConfig"
+            }
+        },
+        "com.amazonaws.eks#IncludeClustersList": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.eks#String"
             }
         },
         "com.amazonaws.eks#InvalidParameterException": {
@@ -3004,6 +3194,13 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The <code>nextToken</code> value returned from a previous paginated\n                <code>ListClusters</code> request where <code>maxResults</code> was used and the\n            results exceeded the value of that parameter. Pagination continues from the end of the\n            previous results that returned the <code>nextToken</code> value.</p>\n        <note>\n            <p>This token should be treated as an opaque identifier that is used only to\n                retrieve the next items in a list and not for other programmatic purposes.</p>\n        </note>",
                         "smithy.api#httpQuery": "nextToken"
+                    }
+                },
+                "include": {
+                    "target": "com.amazonaws.eks#IncludeClustersList",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates whether connected clusters are included in the returned list. Default value is 'ALL'.</p>",
+                        "smithy.api#httpQuery": "include"
                     }
                 }
             }
@@ -4068,6 +4265,74 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>Identifies the Key Management Service (KMS) key used to encrypt the secrets.</p>"
+            }
+        },
+        "com.amazonaws.eks#RegisterCluster": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.eks#RegisterClusterRequest"
+            },
+            "output": {
+                "target": "com.amazonaws.eks#RegisterClusterResponse"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.eks#ClientException"
+                },
+                {
+                    "target": "com.amazonaws.eks#InvalidParameterException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ResourceLimitExceededException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServerException"
+                },
+                {
+                    "target": "com.amazonaws.eks#ServiceUnavailableException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Connects a Kubernetes cluster to the Amazon EKS control plane. </p>\n        <p>Any Kubernetes cluster can be connected to the Amazon EKS control plane to view current information about the cluster and its nodes.\n         </p>\n        <p>Cluster connection requires two steps. First, send a <code>\n               <a>RegisterClusterRequest</a>\n            </code> to add it to the Amazon EKS control plane.</p>\n        <p>Second, a <a href=\"https://amazon-eks.s3.us-west-2.amazonaws.com/eks-connector/manifests/eks-connector/latest/eks-connector.yaml\">Manifest</a> containing the <code>activationID</code> and <code>activationCode</code> must be applied to the Kubernetes cluster through it's native provider to provide visibility.</p>\n        \n        <p>After the Manifest is updated and applied, then the connected cluster is visible to the Amazon EKS control plane. If the Manifest is not applied within a set amount of time, \n            then the connected cluster will no longer be visible and must be deregistered. See <a>DeregisterCluster</a>.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/cluster-registrations",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.eks#RegisterClusterRequest": {
+            "type": "structure",
+            "members": {
+                "name": {
+                    "target": "com.amazonaws.eks#ClusterName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Define a unique name for this cluster within your AWS account.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "connectorConfig": {
+                    "target": "com.amazonaws.eks#ConnectorConfigRequest",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The configuration settings required to connect the Kubernetes cluster to the Amazon EKS control plane.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "clientRequestToken": {
+                    "target": "com.amazonaws.eks#String",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Unique, case-sensitive identifier that you provide to ensure the idempotency of the request.</p>",
+                        "smithy.api#idempotencyToken": {}
+                    }
+                }
+            }
+        },
+        "com.amazonaws.eks#RegisterClusterResponse": {
+            "type": "structure",
+            "members": {
+                "cluster": {
+                    "target": "com.amazonaws.eks#Cluster"
+                }
             }
         },
         "com.amazonaws.eks#RemoteAccessConfig": {

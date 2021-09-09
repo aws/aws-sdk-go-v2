@@ -189,6 +189,7 @@
   "Network Firewall": "network-firewall",
   "NetworkManager": "networkmanager",
   "Nimble": "nimble",
+  "OpenSearch": "es",
   "OpsWorks": "opsworks",
   "OpsWorksCM": "opsworks-cm",
   "Organizations": "organizations",
