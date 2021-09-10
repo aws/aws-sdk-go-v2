@@ -1,3 +1,7 @@
+# v1.8.1 (2021-09-10)
+
+* **Dependency Update**: Updated to the latest SDK module versions
+
 # v1.8.0 (2021-09-02)
 
 * **Feature**: Add support for S3 Multi-Region Access Point ARNs.

@@ -1,3 +1,7 @@
+# v1.15.1 (2021-09-10)
+
+* No change notes available for this release.
+
 # v1.15.0 (2021-09-02)
 
 * **Feature**: API client updated

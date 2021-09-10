@@ -1,3 +1,7 @@
+# v1.8.0 (2021-09-10)
+
+* **Feature**: API client updated
+
 # v1.7.0 (2021-08-27)
 
 * **Feature**: Updated API model to latest revision.

@@ -1,3 +1,7 @@
+# v1.4.1 (2021-09-10)
+
+* **Documentation**: Fixes the AssumeRoleProvider's documentation for using custom TokenProviders.
+
 # v1.4.0 (2021-08-27)
 
 * **Feature**: Adds support for Tags and TransitiveTagKeys to stscreds.AssumeRoleProvider. Closes https://github.com/aws/aws-sdk-go-v2/issues/723

@@ -1,8 +1,0 @@
-{
-    "id": "ea9496c0-40f4-4c2d-b880-7f5dbc80088a",
-    "type": "documentation",
-    "description": "Fixes the AssumeRoleProvider's documentation for using custom TokenProviders.",
-    "modules": [
-        "credentials"
-    ]
-}

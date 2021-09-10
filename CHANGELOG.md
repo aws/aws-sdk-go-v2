@@ -1,3 +1,53 @@
+# Release (2021-09-10)
+
+## General Highlights
+* **Dependency Update**: Updated to the latest SDK module versions
+
+## Module Highlights
+* `github.com/aws/aws-sdk-go-v2/credentials`: [v1.4.1](credentials/CHANGELOG.md#v141-2021-09-10)
+  * **Documentation**: Fixes the AssumeRoleProvider's documentation for using custom TokenProviders.
+* `github.com/aws/aws-sdk-go-v2/service/amp`: [v1.5.0](service/amp/CHANGELOG.md#v150-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/braket`: [v1.7.0](service/braket/CHANGELOG.md#v170-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkidentity`: [v1.2.0](service/chimesdkidentity/CHANGELOG.md#v120-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/chimesdkmessaging`: [v1.2.0](service/chimesdkmessaging/CHANGELOG.md#v120-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/codegurureviewer`: [v1.7.0](service/codegurureviewer/CHANGELOG.md#v170-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/eks`: [v1.10.0](service/eks/CHANGELOG.md#v1100-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/elasticache`: [v1.11.0](service/elasticache/CHANGELOG.md#v1110-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/emr`: [v1.9.0](service/emr/CHANGELOG.md#v190-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/forecast`: [v1.10.0](service/forecast/CHANGELOG.md#v1100-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/frauddetector`: [v1.9.0](service/frauddetector/CHANGELOG.md#v190-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/kafka`: [v1.7.0](service/kafka/CHANGELOG.md#v170-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/lookoutequipment`: [v1.4.0](service/lookoutequipment/CHANGELOG.md#v140-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/mediapackage`: [v1.8.0](service/mediapackage/CHANGELOG.md#v180-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/opensearch`: [v1.0.0](service/opensearch/CHANGELOG.md#v100-2021-09-10)
+  * **Release**: New AWS service client module
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/outposts`: [v1.8.0](service/outposts/CHANGELOG.md#v180-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ram`: [v1.7.0](service/ram/CHANGELOG.md#v170-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/sagemaker`: [v1.14.0](service/sagemaker/CHANGELOG.md#v1140-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/servicediscovery`: [v1.9.0](service/servicediscovery/CHANGELOG.md#v190-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/ssmcontacts`: [v1.5.0](service/ssmcontacts/CHANGELOG.md#v150-2021-09-10)
+  * **Feature**: API client updated
+* `github.com/aws/aws-sdk-go-v2/service/xray`: [v1.6.0](service/xray/CHANGELOG.md#v160-2021-09-10)
+  * **Feature**: API client updated
+
 # Release (2021-09-02)
 
 ## General Highlights
