@@ -1316,7 +1316,7 @@ type ReplicationGroup struct {
 	// group in an Amazon VPC using redis version 3.2.6, 4.x or later. Default: false
 	TransitEncryptionEnabled *bool
 
-	// The list of user group IDs that have access to the replication group.
+	// The ID of the user group associated to the replication group.
 	UserGroupIds []string
 
 	noSmithyDocumentSerde
@@ -1342,7 +1342,7 @@ type ReplicationGroupPendingModifiedValues struct {
 	// The status of an online resharding operation.
 	Resharding *ReshardingStatus
 
-	// The user groups being modified.
+	// The user group being modified.
 	UserGroups *UserGroupsUpdateStatus
 
 	noSmithyDocumentSerde
@@ -2005,7 +2005,7 @@ type UserGroup struct {
 	// The current supported value is Redis.
 	Engine *string
 
-	// A list of updates being applied to the user groups.
+	// A list of updates being applied to the user group.
 	PendingChanges *UserGroupPendingChanges
 
 	// A list of replication groups that the user group can access.
@@ -2039,10 +2039,10 @@ type UserGroupPendingChanges struct {
 // The status of the user group update.
 type UserGroupsUpdateStatus struct {
 
-	// The list of user group IDs to add.
+	// The ID of the user group to add.
 	UserGroupIdsToAdd []string
 
-	// The list of user group IDs to remove.
+	// The ID of the user group to remove.
 	UserGroupIdsToRemove []string
 
 	noSmithyDocumentSerde

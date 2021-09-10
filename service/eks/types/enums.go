@@ -109,6 +109,7 @@ const (
 	ClusterStatusDeleting ClusterStatus = "DELETING"
 	ClusterStatusFailed   ClusterStatus = "FAILED"
 	ClusterStatusUpdating ClusterStatus = "UPDATING"
+	ClusterStatusPending  ClusterStatus = "PENDING"
 )
 
 // Values returns all known values for ClusterStatus. Note that this can be
@@ -121,6 +122,7 @@ func (ClusterStatus) Values() []ClusterStatus {
 		"DELETING",
 		"FAILED",
 		"UPDATING",
+		"PENDING",
 	}
 }
 
@@ -141,6 +143,38 @@ func (ConfigStatus) Values() []ConfigStatus {
 		"CREATING",
 		"DELETING",
 		"ACTIVE",
+	}
+}
+
+type ConnectorConfigProvider string
+
+// Enum values for ConnectorConfigProvider
+const (
+	ConnectorConfigProviderEksAnywhere ConnectorConfigProvider = "EKS_ANYWHERE"
+	ConnectorConfigProviderAnthos      ConnectorConfigProvider = "ANTHOS"
+	ConnectorConfigProviderGke         ConnectorConfigProvider = "GKE"
+	ConnectorConfigProviderAks         ConnectorConfigProvider = "AKS"
+	ConnectorConfigProviderOpenshift   ConnectorConfigProvider = "OPENSHIFT"
+	ConnectorConfigProviderTanzu       ConnectorConfigProvider = "TANZU"
+	ConnectorConfigProviderRancher     ConnectorConfigProvider = "RANCHER"
+	ConnectorConfigProviderEc2         ConnectorConfigProvider = "EC2"
+	ConnectorConfigProviderOther       ConnectorConfigProvider = "OTHER"
+)
+
+// Values returns all known values for ConnectorConfigProvider. Note that this can
+// be expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (ConnectorConfigProvider) Values() []ConnectorConfigProvider {
+	return []ConnectorConfigProvider{
+		"EKS_ANYWHERE",
+		"ANTHOS",
+		"GKE",
+		"AKS",
+		"OPENSHIFT",
+		"TANZU",
+		"RANCHER",
+		"EC2",
+		"OTHER",
 	}
 }
 

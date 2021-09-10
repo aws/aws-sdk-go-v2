@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Applies tags to an existing AWS X-Ray group or sampling rule.
+// Applies tags to an existing Amazon Web Services X-Ray group or sampling rule.
 func (c *Client) TagResource(ctx context.Context, params *TagResourceInput, optFns ...func(*Options)) (*TagResourceOutput, error) {
 	if params == nil {
 		params = &TagResourceInput{}
@@ -36,8 +36,9 @@ type TagResourceInput struct {
 
 	// A map that contains one or more tag keys and tag values to attach to an X-Ray
 	// group or sampling rule. For more information about ways to use tags, see Tagging
-	// AWS resources (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html)
-	// in the AWS General Reference. The following restrictions apply to tags:
+	// Amazon Web Services resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html) in the Amazon
+	// Web Services General Reference. The following restrictions apply to tags:
 	//
 	// *
 	// Maximum number of user-applied tags per resource: 50
@@ -54,8 +55,8 @@ type TagResourceInput struct {
 	// * Tag keys and values are case sensitive.
 	//
 	// *
-	// Don't use aws: as a prefix for keys; it's reserved for AWS use. You cannot edit
-	// or delete system tags.
+	// Don't use aws: as a prefix for keys; it's reserved for Amazon Web Services use.
+	// You cannot edit or delete system tags.
 	//
 	// This member is required.
 	Tags []types.Tag

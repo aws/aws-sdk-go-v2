@@ -12,22 +12,23 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Use to associate an AWS CodeCommit repository or a repostory managed by AWS
-// CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a
-// repository, CodeGuru Reviewer reviews source code changes in the repository's
-// pull requests and provides automatic recommendations. You can view
-// recommendations using the CodeGuru Reviewer console. For more information, see
-// Recommendations in Amazon CodeGuru Reviewer
+// Use to associate an Amazon Web Services CodeCommit repository or a repostory
+// managed by Amazon Web Services CodeStar Connections with Amazon CodeGuru
+// Reviewer. When you associate a repository, CodeGuru Reviewer reviews source code
+// changes in the repository's pull requests and provides automatic
+// recommendations. You can view recommendations using the CodeGuru Reviewer
+// console. For more information, see Recommendations in Amazon CodeGuru Reviewer
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html)
 // in the Amazon CodeGuru Reviewer User Guide. If you associate a CodeCommit or S3
-// repository, it must be in the same AWS Region and AWS account where its CodeGuru
-// Reviewer code reviews are configured. Bitbucket and GitHub Enterprise Server
-// repositories are managed by AWS CodeStar Connections to connect to CodeGuru
-// Reviewer. For more information, see Associate a repository
+// repository, it must be in the same Amazon Web Services Region and Amazon Web
+// Services account where its CodeGuru Reviewer code reviews are configured.
+// Bitbucket and GitHub Enterprise Server repositories are managed by Amazon Web
+// Services CodeStar Connections to connect to CodeGuru Reviewer. For more
+// information, see Associate a repository
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html)
 // in the Amazon CodeGuru Reviewer User Guide. You cannot use the CodeGuru Reviewer
-// SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru
-// Reviewer. To associate a GitHub repository, use the console. For more
+// SDK or the Amazon Web Services CLI to associate a GitHub repository with Amazon
+// CodeGuru Reviewer. To associate a GitHub repository, use the console. For more
 // information, see Getting started with CodeGuru Reviewer
 // (https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html)
 // in the CodeGuru Reviewer User Guide.
@@ -60,11 +61,12 @@ type AssociateRepositoryInput struct {
 	// A KMSKeyDetails object that contains:
 	//
 	// * The encryption option for this
-	// repository association. It is either owned by AWS Key Management Service (KMS)
-	// (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
+	// repository association. It is either owned by Amazon Web Services Key Management
+	// Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
 	//
-	// * The ID of the AWS
-	// KMS key that is associated with this respository association.
+	// * The
+	// ID of the Amazon Web Services KMS key that is associated with this respository
+	// association.
 	KMSKeyDetails *types.KMSKeyDetails
 
 	// An array of key-value pairs used to tag an associated repository. A tag is a

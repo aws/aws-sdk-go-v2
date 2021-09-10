@@ -221,8 +221,14 @@ type EncryptionConfig struct {
 // object is part of the Metrics object.
 type ErrorMetric struct {
 
-	// The Forecast type used to compute WAPE and RMSE.
+	// The Forecast type used to compute WAPE, MAPE, MASE, and RMSE.
 	ForecastType *string
+
+	// The Mean Absolute Percentage Error (MAPE)
+	MAPE *float64
+
+	// The Mean Absolute Scaled Error (MASE)
+	MASE *float64
 
 	// The root-mean-square error (RMSE).
 	RMSE *float64
@@ -619,8 +625,12 @@ type IntegerParameterRange struct {
 // object is part of the WindowSummary object.
 type Metrics struct {
 
-	// Provides detailed error metrics on forecast type, root-mean square-error (RMSE),
-	// and weighted average percentage error (WAPE).
+	// The average value of all weighted quantile losses.
+	AverageWeightedQuantileLoss *float64
+
+	// Provides detailed error metrics for each forecast type. Metrics include
+	// root-mean square-error (RMSE), mean absolute percentage error (MAPE), mean
+	// absolute scaled error (MASE), and weighted average percentage error (WAPE).
 	ErrorMetrics []ErrorMetric
 
 	// The root-mean-square error (RMSE).

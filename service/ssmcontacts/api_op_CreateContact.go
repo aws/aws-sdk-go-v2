@@ -53,7 +53,8 @@ type CreateContactInput struct {
 	// The full name of the contact or escalation plan.
 	DisplayName *string
 
-	// A token ensuring that the action is called only once with the specified details.
+	// A token ensuring that the operation is called only once with the specified
+	// details.
 	IdempotencyToken *string
 
 	// Adds a tag to the target. You can only tag resources created in the first Region

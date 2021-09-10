@@ -262,7 +262,7 @@ type Tag struct {
 	noSmithyDocumentSerde
 }
 
-// The contact or contact channel that is being engaged.
+// The contact or contact channel that's being engaged.
 type Target struct {
 
 	// Information about the contact channel Incident Manager is engaging.

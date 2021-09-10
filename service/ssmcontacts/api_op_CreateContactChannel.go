@@ -74,7 +74,8 @@ type CreateContactChannelInput struct {
 	// activated.
 	DeferActivation *bool
 
-	// A token ensuring that the action is called only once with the specified details.
+	// A token ensuring that the operation is called only once with the specified
+	// details.
 	IdempotencyToken *string
 
 	noSmithyDocumentSerde
@@ -82,7 +83,7 @@ type CreateContactChannelInput struct {
 
 type CreateContactChannelOutput struct {
 
-	// The ARN of the contact channel.
+	// The Amazon Resource Name (ARN) of the contact channel.
 	//
 	// This member is required.
 	ContactChannelArn *string

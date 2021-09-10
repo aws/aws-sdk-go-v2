@@ -373,7 +373,7 @@ func (e *ClusterQuotaForCustomerExceededFault) ErrorFault() smithy.ErrorFault {
 	return smithy.FaultClient
 }
 
-//
+// The default user assigned to the user group.
 type DefaultUserAssociatedToUserGroupFault struct {
 	Message *string
 

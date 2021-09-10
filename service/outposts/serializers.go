@@ -6,12 +6,98 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"github.com/aws/aws-sdk-go-v2/service/outposts/types"
 	smithy "github.com/aws/smithy-go"
 	"github.com/aws/smithy-go/encoding/httpbinding"
 	smithyjson "github.com/aws/smithy-go/encoding/json"
 	"github.com/aws/smithy-go/middleware"
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
+
+type awsRestjson1_serializeOpCreateOrder struct {
+}
+
+func (*awsRestjson1_serializeOpCreateOrder) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateOrder) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateOrderInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/orders")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	restEncoder.SetHeader("Content-Type").String("application/json")
+
+	jsonEncoder := smithyjson.NewEncoder()
+	if err := awsRestjson1_serializeOpDocumentCreateOrderInput(input, jsonEncoder.Value); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request, err = request.SetStream(bytes.NewReader(jsonEncoder.Bytes())); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateOrderInput(v *CreateOrderInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeOpDocumentCreateOrderInput(v *CreateOrderInput, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.LineItems != nil {
+		ok := object.Key("LineItems")
+		if err := awsRestjson1_serializeDocumentLineItemRequestListDefinition(v.LineItems, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.OutpostIdentifier != nil {
+		ok := object.Key("OutpostIdentifier")
+		ok.String(*v.OutpostIdentifier)
+	}
+
+	if len(v.PaymentOption) > 0 {
+		ok := object.Key("PaymentOption")
+		ok.String(string(v.PaymentOption))
+	}
+
+	if len(v.PaymentTerm) > 0 {
+		ok := object.Key("PaymentTerm")
+		ok.String(string(v.PaymentTerm))
+	}
+
+	return nil
+}
 
 type awsRestjson1_serializeOpCreateOutpost struct {
 }
@@ -682,6 +768,36 @@ func awsRestjson1_serializeOpHttpBindingsUntagResourceInput(v *UntagResourceInpu
 		}
 	}
 
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLineItemRequest(v *types.LineItemRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.CatalogItemId != nil {
+		ok := object.Key("CatalogItemId")
+		ok.String(*v.CatalogItemId)
+	}
+
+	if v.Quantity != 0 {
+		ok := object.Key("Quantity")
+		ok.Integer(v.Quantity)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentLineItemRequestListDefinition(v []types.LineItemRequest, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentLineItemRequest(&v[i], av); err != nil {
+			return err
+		}
+	}
 	return nil
 }
 

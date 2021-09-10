@@ -3226,7 +3226,7 @@
                     "code": "DefaultUserAssociatedToUserGroup",
                     "httpResponseCode": 400
                 },
-                "smithy.api#documentation": "<p></p>",
+                "smithy.api#documentation": "<p>The default user assigned to the user group.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -6936,19 +6936,19 @@
                 "UserGroupIdsToAdd": {
                     "target": "com.amazonaws.elasticache#UserGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user group you are associating with the replication group.</p>"
+                        "smithy.api#documentation": "<p>The ID of the user group you are associating with the replication group.</p>"
                     }
                 },
                 "UserGroupIdsToRemove": {
                     "target": "com.amazonaws.elasticache#UserGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user group to remove, meaning the users in the group no longer can access the replication group.</p>"
+                        "smithy.api#documentation": "<p>The ID of the user group to disassociate from the replication group, meaning the users in the group no longer can access the replication group.</p>"
                     }
                 },
                 "RemoveUserGroups": {
                     "target": "com.amazonaws.elasticache#BooleanOptional",
                     "traits": {
-                        "smithy.api#documentation": "<p>Removes the user groups that can access this replication group.</p>"
+                        "smithy.api#documentation": "<p>Removes the user group associated with this replication group.</p>"
                     }
                 },
                 "LogDeliveryConfigurations": {
@@ -8460,7 +8460,7 @@
                 "UserGroupIds": {
                     "target": "com.amazonaws.elasticache#UserGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of user group IDs that have access to the replication group.</p>"
+                        "smithy.api#documentation": "<p>The ID of the user group associated to the replication group.</p>"
                     }
                 },
                 "LogDeliveryConfigurations": {
@@ -8628,7 +8628,7 @@
                 "UserGroups": {
                     "target": "com.amazonaws.elasticache#UserGroupsUpdateStatus",
                     "traits": {
-                        "smithy.api#documentation": "<p>The user groups being modified.</p>"
+                        "smithy.api#documentation": "<p>The user group being modified.</p>"
                     }
                 },
                 "LogDeliveryConfigurations": {
@@ -10333,7 +10333,7 @@
                 "PendingChanges": {
                     "target": "com.amazonaws.elasticache#UserGroupPendingChanges",
                     "traits": {
-                        "smithy.api#documentation": "<p>A list of updates being applied to the user groups.</p>"
+                        "smithy.api#documentation": "<p>A list of updates being applied to the user group.</p>"
                     }
                 },
                 "ReplicationGroups": {
@@ -10459,13 +10459,13 @@
                 "UserGroupIdsToAdd": {
                     "target": "com.amazonaws.elasticache#UserGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of user group IDs to add.</p>"
+                        "smithy.api#documentation": "<p>The ID of the user group to add.</p>"
                     }
                 },
                 "UserGroupIdsToRemove": {
                     "target": "com.amazonaws.elasticache#UserGroupIdList",
                     "traits": {
-                        "smithy.api#documentation": "<p>The list of user group IDs to remove.</p>"
+                        "smithy.api#documentation": "<p>The ID of the user group to remove.</p>"
                     }
                 }
             },

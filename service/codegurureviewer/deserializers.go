@@ -3570,6 +3570,20 @@ func awsRestjson1_deserializeDocumentRecommendationSummary(v **types.Recommendat
 				sv.RecommendationId = ptr.String(jtv)
 			}
 
+		case "RuleMetadata":
+			if err := awsRestjson1_deserializeDocumentRuleMetadata(&sv.RuleMetadata, value); err != nil {
+				return err
+			}
+
+		case "Severity":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected Severity to be of type string, got %T instead", value)
+				}
+				sv.Severity = types.Severity(jtv)
+			}
+
 		case "StartLine":
 			if value != nil {
 				jtv, ok := value.(json.Number)
@@ -4021,6 +4035,114 @@ func awsRestjson1_deserializeDocumentResourceNotFoundException(v **types.Resourc
 		}
 	}
 	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuleMetadata(v **types.RuleMetadata, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.RuleMetadata
+	if *v == nil {
+		sv = &types.RuleMetadata{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "LongDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected LongDescription to be of type string, got %T instead", value)
+				}
+				sv.LongDescription = ptr.String(jtv)
+			}
+
+		case "RuleId":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleId to be of type string, got %T instead", value)
+				}
+				sv.RuleId = ptr.String(jtv)
+			}
+
+		case "RuleName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RuleName to be of type string, got %T instead", value)
+				}
+				sv.RuleName = ptr.String(jtv)
+			}
+
+		case "RuleTags":
+			if err := awsRestjson1_deserializeDocumentRuleTags(&sv.RuleTags, value); err != nil {
+				return err
+			}
+
+		case "ShortDescription":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ShortDescription to be of type string, got %T instead", value)
+				}
+				sv.ShortDescription = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentRuleTags(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected RuleTag to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
 	return nil
 }
 

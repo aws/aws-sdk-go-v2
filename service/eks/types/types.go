@@ -136,6 +136,9 @@ type Cluster struct {
 	// the request.
 	ClientRequestToken *string
 
+	// The configuration used to connect to a cluster for registration.
+	ConnectorConfig *ConnectorConfigResponse
+
 	// The Unix epoch timestamp in seconds for when the cluster was created.
 	CreatedAt *time.Time
 
@@ -203,6 +206,46 @@ type Compatibility struct {
 
 	// The supported compute platform.
 	PlatformVersions []string
+
+	noSmithyDocumentSerde
+}
+
+// The configuration sent to a cluster for configuration.
+type ConnectorConfigRequest struct {
+
+	// The cloud provider for the target cluster to connect.
+	//
+	// This member is required.
+	Provider ConnectorConfigProvider
+
+	// The Amazon Resource Name (ARN) of the role that is authorized to request the
+	// connector configuration.
+	//
+	// This member is required.
+	RoleArn *string
+
+	noSmithyDocumentSerde
+}
+
+// The full description of your connected cluster.
+type ConnectorConfigResponse struct {
+
+	// A unique code associated with the cluster for registration purposes.
+	ActivationCode *string
+
+	// The expiration time of the connected cluster. The cluster's YAML file must be
+	// applied through the native provider.
+	ActivationExpiry *time.Time
+
+	// A unique ID associated with the cluster for registration purposes.
+	ActivationId *string
+
+	// The cluster's cloud service provider.
+	Provider *string
+
+	// The Amazon Resource Name (ARN) of the role that is used by the EKS connector to
+	// communicate with AWS services from the connected Kubernetes cluster.
+	RoleArn *string
 
 	noSmithyDocumentSerde
 }
@@ -336,7 +379,7 @@ type IdentityProviderConfig struct {
 	noSmithyDocumentSerde
 }
 
-// An object that represents an identity configuration.
+// The full description of your identity configuration.
 type IdentityProviderConfigResponse struct {
 
 	// An object that represents an OpenID Connect (OIDC) identity provider

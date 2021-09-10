@@ -122,7 +122,7 @@
                 "AcceptCodeValidation": {
                     "target": "com.amazonaws.ssmcontacts#AcceptCodeValidation",
                     "traits": {
-                        "smithy.api#documentation": "<p>An\n         optional field that Incident Manager uses to <code>ENFORCE</code>\n            <code>AcceptCode</code> validation when acknowledging an page.\n         Acknowledgement can occur by replying to a page, or when entering the AcceptCode in the\n         console. Enforcing AcceptCode validation causes Incident Manager to verify that the code\n         entered by the user matches the code sent by Incident Manager with the page.</p>\n         <p>Incident Manager can also <code>IGNORE</code>\n            <code>AcceptCode</code> validation. Ignoring <code>AcceptCode</code> validation causes\n         Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>"
+                        "smithy.api#documentation": "<p>An optional field that Incident Manager uses to <code>ENFORCE</code>\n            <code>AcceptCode</code> validation when acknowledging an page. Acknowledgement can occur by\n         replying to a page, or when entering the AcceptCode in the console. Enforcing AcceptCode\n         validation causes Incident Manager to verify that the code entered by the user matches the\n         code sent by Incident Manager with the page.</p>\n         <p>Incident Manager can also <code>IGNORE</code>\n            <code>AcceptCode</code> validation. Ignoring <code>AcceptCode</code> validation causes\n         Incident Manager to accept any value entered for the <code>AcceptCode</code>.</p>"
                     }
                 }
             }
@@ -157,7 +157,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>You don't have sufficient access to perform this action.</p>",
+                "smithy.api#documentation": "<p>You don't have sufficient access to perform this operation.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 403
             }
@@ -188,7 +188,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Activates a contact's contact channel. Incident Manager can't engage a contact until\n         the\n         contact channel has been activated.</p>"
+                "smithy.api#documentation": "<p>Activates a contact's contact channel. Incident Manager can't engage a contact until the\n         contact channel has been activated.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#ActivateContactChannelRequest": {
@@ -611,7 +611,7 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.ssmcontacts#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified\n         details.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -623,7 +623,7 @@
                 "ContactChannelArn": {
                     "target": "com.amazonaws.ssmcontacts#SsmContactsArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ARN of the contact channel.</p>",
+                        "smithy.api#documentation": "<p>The Amazon Resource Name (ARN) of the contact channel.</p>",
                         "smithy.api#required": {}
                     }
                 }
@@ -668,7 +668,7 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.ssmcontacts#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified\n         details.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -697,7 +697,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The action failed to due an encryption key error.</p>",
+                "smithy.api#documentation": "<p>The operation failed to due an encryption key error.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }
@@ -2227,7 +2227,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Request references a resource that\n         doesn't\n         exist.</p>",
+                "smithy.api#documentation": "<p>Request references a resource that doesn't exist.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 404
             }
@@ -2343,7 +2343,7 @@
                     "name": "ssm-contacts"
                 },
                 "aws.protocols#awsJson1_1": {},
-                "smithy.api#documentation": "<p>AWS Systems Manager Incident Manager is an incident management console designed to help\n        users mitigate and recover from incidents affecting their AWS-hosted applications. An incident\n        is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n        highlighting relevant troubleshooting data, and providing collaboration tools to get services\n        back up and running. To achieve the primary goal of reducing the time-to-resolution of\n        critical incidents, Incident Manager automates response plans and enables responder team\n        escalation. </p>",
+                "smithy.api#documentation": "<p>Systems Manager Incident Manager is an incident management console designed to help users\n         mitigate and recover from incidents affecting their Amazon Web Services-hosted applications.\n         An incident is any unplanned interruption or reduction in quality of services. </p>\n         <p>Incident Manager increases incident resolution by notifying responders of impact,\n         highlighting relevant troubleshooting data, and providing collaboration tools to get\n         services back up and running. To achieve the primary goal of reducing the\n         time-to-resolution of critical incidents, Incident Manager automates response plans\n         and enables responder team escalation. </p>",
                 "smithy.api#title": "AWS Systems Manager Incident Manager Contacts"
             }
         },
@@ -2379,7 +2379,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Sends an activation code to a contact channel. The contact can use this code to activate\n         the contact channel in the console or with the <code>ActivateChannel</code> action.\n         Incident Manager can't engage a contact channel until it has been activated.</p>"
+                "smithy.api#documentation": "<p>Sends an activation code to a contact channel. The contact can use this code to activate\n         the contact channel in the console or with the <code>ActivateChannel</code> operation.\n         Incident Manager can't engage a contact channel until it has been activated.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#SendActivationCodeRequest": {
@@ -2591,7 +2591,7 @@
                 "IdempotencyToken": {
                     "target": "com.amazonaws.ssmcontacts#IdempotencyToken",
                     "traits": {
-                        "smithy.api#documentation": "<p>A token ensuring that the action is called only once with the specified details.</p>",
+                        "smithy.api#documentation": "<p>A token ensuring that the operation is called only once with the specified\n         details.</p>",
                         "smithy.api#idempotencyToken": {}
                     }
                 }
@@ -2819,7 +2819,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The contact or contact channel that is being engaged.</p>"
+                "smithy.api#documentation": "<p>The contact or contact channel that's being engaged.</p>"
             }
         },
         "com.amazonaws.ssmcontacts#TargetsList": {
@@ -3018,7 +3018,7 @@
                 "Name": {
                     "target": "com.amazonaws.ssmcontacts#ChannelName",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the contact channel</p>"
+                        "smithy.api#documentation": "<p>The name of the contact channel.</p>"
                     }
                 },
                 "DeliveryAddress": {
@@ -3084,7 +3084,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an\n         AWS\n         service.</p>",
+                "smithy.api#documentation": "<p>The input fails to satisfy the constraints specified by an Amazon Web Services\n         service.</p>",
                 "smithy.api#error": "client",
                 "smithy.api#httpError": 400
             }

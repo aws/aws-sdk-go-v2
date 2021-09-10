@@ -7,14 +7,14 @@ import (
 	"time"
 )
 
-// Describes a principal for use with AWS Resource Access Manager.
+// Describes a principal for use with Resource Access Manager.
 type Principal struct {
 
 	// The time when the principal was associated with the resource share.
 	CreationTime *time.Time
 
-	// Indicates whether the principal belongs to the same AWS organization as the AWS
-	// account that owns the resource share.
+	// Indicates whether the principal belongs to the same organization in
+	// Organizations as the Amazon Web Services account that owns the resource share.
 	External *bool
 
 	// The ID of the principal.
@@ -41,8 +41,8 @@ type Resource struct {
 	// The time when the association was last updated.
 	LastUpdatedTime *time.Time
 
-	// The ARN of the resource group. This value is returned only if the resource is a
-	// resource group.
+	// The Amazon Resource Name (ARN) of the resource group. This value is returned
+	// only if the resource is a resource group.
 	ResourceGroupArn *string
 
 	// The Amazon Resource Name (ARN) of the resource share.
@@ -63,8 +63,8 @@ type Resource struct {
 // Describes a resource share.
 type ResourceShare struct {
 
-	// Indicates whether principals outside your AWS organization can be associated
-	// with a resource share.
+	// Indicates whether principals outside your organization in Organizations can be
+	// associated with a resource share.
 	AllowExternalPrincipals *bool
 
 	// The time when the resource share was created.
@@ -73,18 +73,19 @@ type ResourceShare struct {
 	// Indicates how the resource share was created. Possible values include:
 	//
 	// *
-	// CREATED_FROM_POLICY - Indicates that the resource share was created from an AWS
-	// Identity and Access Management (AWS IAM) policy attached to a resource. These
-	// resource shares are visible only to the AWS account that created it. They cannot
-	// be modified in AWS RAM.
+	// CREATED_FROM_POLICY - Indicates that the resource share was created from an
+	// Amazon Web Services Identity and Access Management (Amazon Web Services IAM)
+	// policy attached to a resource. These resource shares are visible only to the
+	// Amazon Web Services account that created it. They cannot be modified in RAM.
 	//
-	// * PROMOTING_TO_STANDARD - The resource share is in the
-	// process of being promoted. For more information, see
-	// PromoteResourceShareCreatedFromPolicy.
+	// *
+	// PROMOTING_TO_STANDARD - The resource share is in the process of being promoted.
+	// For more information, see PromoteResourceShareCreatedFromPolicy.
 	//
-	// * STANDARD - Indicates that the resource
-	// share was created in AWS RAM using the console or APIs. These resource shares
-	// are visible to all principals. They can be modified in AWS RAM.
+	// * STANDARD -
+	// Indicates that the resource share was created in RAM using the console or APIs.
+	// These resource shares are visible to all principals. They can be modified in
+	// RAM.
 	FeatureSet ResourceShareFeatureSet
 
 	// The time when the resource share was last updated.
@@ -93,7 +94,7 @@ type ResourceShare struct {
 	// The name of the resource share.
 	Name *string
 
-	// The ID of the AWS account that owns the resource share.
+	// The ID of the Amazon Web Services account that owns the resource share.
 	OwningAccountId *string
 
 	// The Amazon Resource Name (ARN) of the resource share.
@@ -114,9 +115,21 @@ type ResourceShare struct {
 // Describes an association with a resource share.
 type ResourceShareAssociation struct {
 
-	// The associated entity. For resource associations, this is the ARN of the
-	// resource. For principal associations, this is the ID of an AWS account or the
-	// ARN of an OU or organization from AWS Organizations.
+	// The associated entity. For resource associations, this is the Amazon Resource
+	// Name (ARN) of the resource. For principal associations, this is one of the
+	// following:
+	//
+	// * An Amazon Web Services account ID
+	//
+	// * An ARN of an organization in
+	// Organizations
+	//
+	// * An ARN of an organizational unit (OU) in Organizations
+	//
+	// * An
+	// ARN of an IAM role
+	//
+	// * An ARN of an IAM user
 	AssociatedEntity *string
 
 	// The association type.
@@ -125,8 +138,8 @@ type ResourceShareAssociation struct {
 	// The time when the association was created.
 	CreationTime *time.Time
 
-	// Indicates whether the principal belongs to the same AWS organization as the AWS
-	// account that owns the resource share.
+	// Indicates whether the principal belongs to the same organization in
+	// Organizations as the Amazon Web Services account that owns the resource share.
 	External *bool
 
 	// The time when the association was last updated.
@@ -153,7 +166,7 @@ type ResourceShareInvitation struct {
 	// The date and time when the invitation was sent.
 	InvitationTimestamp *time.Time
 
-	// The ID of the AWS account that received the invitation.
+	// The ID of the Amazon Web Services account that received the invitation.
 	ReceiverAccountId *string
 
 	// The Amazon Resource Name (ARN) of the IAM user or IAM role that received the
@@ -176,7 +189,7 @@ type ResourceShareInvitation struct {
 	// The name of the resource share.
 	ResourceShareName *string
 
-	// The ID of the AWS account that sent the invitation.
+	// The ID of the Amazon Web Services account that sent the invitation.
 	SenderAccountId *string
 
 	// The status of the invitation.
@@ -185,10 +198,10 @@ type ResourceShareInvitation struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an AWS RAM permission.
+// Information about an RAM permission.
 type ResourceSharePermissionDetail struct {
 
-	// The ARN of the permission.
+	// The Amazon Resource Name (ARN) of the permission.
 	Arn *string
 
 	// The date and time when the permission was created.
@@ -225,7 +238,7 @@ type ResourceSharePermissionDetail struct {
 // Information about a permission that is associated with a resource share.
 type ResourceSharePermissionSummary struct {
 
-	// The ARN of the permission.
+	// The Amazon Resource Name (ARN) of the permission.
 	Arn *string
 
 	// The date and time when the permission was created.
@@ -257,14 +270,14 @@ type ResourceSharePermissionSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the shareable resource types and the AWS services to which
-// they belong.
+// Information about the shareable resource types and the Amazon Web Services
+// services to which they belong.
 type ServiceNameAndResourceType struct {
 
 	// The shareable resource types.
 	ResourceType *string
 
-	// The name of the AWS services to which the resources belong.
+	// The name of the Amazon Web Services services to which the resources belong.
 	ServiceName *string
 
 	noSmithyDocumentSerde

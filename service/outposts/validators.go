@@ -9,6 +9,26 @@ import (
 	"github.com/aws/smithy-go/middleware"
 )
 
+type validateOpCreateOrder struct {
+}
+
+func (*validateOpCreateOrder) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpCreateOrder) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*CreateOrderInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpCreateOrderInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpCreateOutpost struct {
 }
 
@@ -169,6 +189,10 @@ func (m *validateOpUntagResource) HandleInitialize(ctx context.Context, in middl
 	return next.HandleInitialize(ctx, in)
 }
 
+func addOpCreateOrderValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpCreateOrder{}, middleware.After)
+}
+
 func addOpCreateOutpostValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpCreateOutpost{}, middleware.After)
 }
@@ -199,6 +223,27 @@ func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 
 func addOpUntagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUntagResource{}, middleware.After)
+}
+
+func validateOpCreateOrderInput(v *CreateOrderInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "CreateOrderInput"}
+	if v.OutpostIdentifier == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("OutpostIdentifier"))
+	}
+	if v.LineItems == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("LineItems"))
+	}
+	if len(v.PaymentOption) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("PaymentOption"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateOpCreateOutpostInput(v *CreateOutpostInput) error {

@@ -4125,6 +4125,16 @@ func awsAwsjson11_serializeOpDocumentCreateStudioInput(v *CreateStudioInput, val
 		ok.String(*v.EngineSecurityGroupId)
 	}
 
+	if v.IdpAuthUrl != nil {
+		ok := object.Key("IdpAuthUrl")
+		ok.String(*v.IdpAuthUrl)
+	}
+
+	if v.IdpRelayStateParameterName != nil {
+		ok := object.Key("IdpRelayStateParameterName")
+		ok.String(*v.IdpRelayStateParameterName)
+	}
+
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)

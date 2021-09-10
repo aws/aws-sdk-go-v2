@@ -210,6 +210,26 @@ func (m *validateOpDeleteNodegroup) HandleInitialize(ctx context.Context, in mid
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpDeregisterCluster struct {
+}
+
+func (*validateOpDeregisterCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpDeregisterCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*DeregisterClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpDeregisterClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpDescribeAddon struct {
 }
 
@@ -470,6 +490,26 @@ func (m *validateOpListUpdates) HandleInitialize(ctx context.Context, in middlew
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpRegisterCluster struct {
+}
+
+func (*validateOpRegisterCluster) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpRegisterCluster) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*RegisterClusterInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpRegisterClusterInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 type validateOpTagResource struct {
 }
 
@@ -650,6 +690,10 @@ func addOpDeleteNodegroupValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDeleteNodegroup{}, middleware.After)
 }
 
+func addOpDeregisterClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpDeregisterCluster{}, middleware.After)
+}
+
 func addOpDescribeAddonValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpDescribeAddon{}, middleware.After)
 }
@@ -702,6 +746,10 @@ func addOpListUpdatesValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpListUpdates{}, middleware.After)
 }
 
+func addOpRegisterClusterValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpRegisterCluster{}, middleware.After)
+}
+
 func addOpTagResourceValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpTagResource{}, middleware.After)
 }
@@ -728,6 +776,24 @@ func addOpUpdateNodegroupConfigValidationMiddleware(stack *middleware.Stack) err
 
 func addOpUpdateNodegroupVersionValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateNodegroupVersion{}, middleware.After)
+}
+
+func validateConnectorConfigRequest(v *types.ConnectorConfigRequest) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "ConnectorConfigRequest"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if len(v.Provider) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("Provider"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
 }
 
 func validateIdentityProviderConfig(v *types.IdentityProviderConfig) error {
@@ -962,6 +1028,21 @@ func validateOpDeleteNodegroupInput(v *DeleteNodegroupInput) error {
 	}
 }
 
+func validateOpDeregisterClusterInput(v *DeregisterClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DeregisterClusterInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateOpDescribeAddonInput(v *DescribeAddonInput) error {
 	if v == nil {
 		return nil
@@ -1175,6 +1256,28 @@ func validateOpListUpdatesInput(v *ListUpdatesInput) error {
 	invalidParams := smithy.InvalidParamsError{Context: "ListUpdatesInput"}
 	if v.Name == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpRegisterClusterInput(v *RegisterClusterInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "RegisterClusterInput"}
+	if v.Name == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Name"))
+	}
+	if v.ConnectorConfig == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ConnectorConfig"))
+	} else if v.ConnectorConfig != nil {
+		if err := validateConnectorConfigRequest(v.ConnectorConfig); err != nil {
+			invalidParams.AddNested("ConnectorConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

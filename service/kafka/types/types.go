@@ -124,6 +124,9 @@ type ClientAuthentication struct {
 	// Details for ClientAuthentication using TLS.
 	Tls *Tls
 
+	// Contains information about unauthenticated traffic to the cluster.
+	Unauthenticated *Unauthenticated
+
 	noSmithyDocumentSerde
 }
 
@@ -482,8 +485,14 @@ type MutableClusterInfo struct {
 	// Specifies the size of the EBS volume and the ID of the associated broker.
 	BrokerEBSVolumeInfo []BrokerEBSVolumeInfo
 
+	// Includes all client authentication information.
+	ClientAuthentication *ClientAuthentication
+
 	// Information about the changes in the configuration of the brokers.
 	ConfigurationInfo *ConfigurationInfo
+
+	// Includes all encryption-related information.
+	EncryptionInfo *EncryptionInfo
 
 	// Specifies which Apache Kafka metrics Amazon MSK gathers and sends to Amazon
 	// CloudWatch for this cluster.
@@ -495,6 +504,8 @@ type MutableClusterInfo struct {
 	// The Kafka version.
 	KafkaVersion *string
 
+	// You can configure your MSK cluster to send broker logs to different destination
+	// types. This is a container for the configuration details related to broker logs.
 	LoggingInfo *LoggingInfo
 
 	// The number of broker nodes in the cluster.
@@ -653,6 +664,18 @@ type Tls struct {
 
 	// List of ACM Certificate Authority ARNs.
 	CertificateAuthorityArnList []string
+
+	// Specifies whether you want to enable or disable TLS authentication.
+	Enabled bool
+
+	noSmithyDocumentSerde
+}
+
+type Unauthenticated struct {
+
+	// Specifies whether you want to enable or disable unauthenticated traffic to your
+	// cluster.
+	Enabled bool
 
 	noSmithyDocumentSerde
 }

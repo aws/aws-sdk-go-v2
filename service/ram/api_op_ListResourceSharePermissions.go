@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the AWS RAM permissions that are associated with a resource share.
+// Lists the RAM permissions that are associated with a resource share.
 func (c *Client) ListResourceSharePermissions(ctx context.Context, params *ListResourceSharePermissionsInput, optFns ...func(*Options)) (*ListResourceSharePermissionsOutput, error) {
 	if params == nil {
 		params = &ListResourceSharePermissionsInput{}

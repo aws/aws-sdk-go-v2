@@ -75,7 +75,7 @@ type GetInsightImpactGraphOutput struct {
 	// The time, in Unix seconds, at which the service graph started.
 	ServiceGraphStartTime *time.Time
 
-	// The AWS instrumented services related to the insight.
+	// The Amazon Web Services instrumented services related to the insight.
 	Services []types.InsightImpactGraphService
 
 	// The provided start time.

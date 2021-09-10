@@ -59,7 +59,7 @@ type CreateUserGroupOutput struct {
 	// The current supported value is Redis.
 	Engine *string
 
-	// A list of updates being applied to the user groups.
+	// A list of updates being applied to the user group.
 	PendingChanges *types.UserGroupPendingChanges
 
 	// A list of replication groups that the user group can access.

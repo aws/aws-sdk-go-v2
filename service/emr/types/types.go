@@ -385,8 +385,8 @@ type Cluster struct {
 	// The name of the security configuration applied to the cluster.
 	SecurityConfiguration *string
 
-	// The IAM role that will be assumed by the Amazon EMR service to access Amazon Web
-	// Services resources on your behalf.
+	// The IAM role that Amazon EMR assumes in order to access Amazon Web Services
+	// resources on your behalf.
 	ServiceRole *string
 
 	// The current status details about the cluster.
@@ -2563,8 +2563,8 @@ type StepTimeline struct {
 // Details for an Amazon EMR Studio including ID, creation time, name, and so on.
 type Studio struct {
 
-	// Specifies whether the Amazon EMR Studio authenticates users using single sign-on
-	// (SSO) or IAM.
+	// Specifies whether the Amazon EMR Studio authenticates users using IAM or Amazon
+	// Web Services SSO.
 	AuthMode AuthMode
 
 	// The time the Amazon EMR Studio was created.
@@ -2581,6 +2581,14 @@ type Studio struct {
 	// Engine security group allows inbound network traffic from resources in the
 	// Workspace security group.
 	EngineSecurityGroupId *string
+
+	// Your identity provider's authentication endpoint. Amazon EMR Studio redirects
+	// federated users to this endpoint for authentication when logging in to a Studio
+	// with the Studio URL.
+	IdpAuthUrl *string
+
+	// The name of your identity provider's RelayState parameter.
+	IdpRelayStateParameterName *string
 
 	// The name of the Amazon EMR Studio.
 	Name *string
@@ -2603,7 +2611,8 @@ type Studio struct {
 	// The unique access URL of the Amazon EMR Studio.
 	Url *string
 
-	// The name of the IAM role assumed by users logged in to the Amazon EMR Studio.
+	// The name of the IAM role assumed by users logged in to the Amazon EMR Studio. A
+	// Studio only requires a UserRole when you use IAM authentication.
 	UserRole *string
 
 	// The ID of the VPC associated with the Amazon EMR Studio.
@@ -2621,6 +2630,10 @@ type Studio struct {
 // details do not include subnets, IAM roles, security groups, or tags associated
 // with the Studio.
 type StudioSummary struct {
+
+	// Specifies whether the Studio authenticates users using IAM or Amazon Web
+	// Services SSO.
+	AuthMode AuthMode
 
 	// The time when the Amazon EMR Studio was created.
 	CreationTime *time.Time

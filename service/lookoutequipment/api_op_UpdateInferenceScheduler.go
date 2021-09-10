@@ -34,7 +34,7 @@ type UpdateInferenceSchedulerInput struct {
 	// This member is required.
 	InferenceSchedulerName *string
 
-	// > A period of time (in minutes) by which inference on the data is delayed after
+	// A period of time (in minutes) by which inference on the data is delayed after
 	// the data starts. For instance, if you select an offset delay time of five
 	// minutes, inference will not begin on the data until the first data measurement
 	// after the five minute mark. For example, if five minutes is selected, the

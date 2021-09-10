@@ -12,7 +12,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Lists the shareable resource types supported by AWS RAM.
+// Lists the shareable resource types supported by RAM.
 func (c *Client) ListResourceTypes(ctx context.Context, params *ListResourceTypesInput, optFns ...func(*Options)) (*ListResourceTypesOutput, error) {
 	if params == nil {
 		params = &ListResourceTypesInput{}
@@ -46,7 +46,7 @@ type ListResourceTypesOutput struct {
 	// there are no more results to return.
 	NextToken *string
 
-	// The shareable resource types supported by AWS RAM.
+	// The shareable resource types supported by RAM.
 	ResourceTypes []types.ServiceNameAndResourceType
 
 	// Metadata pertaining to the operation's result.

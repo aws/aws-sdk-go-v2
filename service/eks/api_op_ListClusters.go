@@ -30,6 +30,10 @@ func (c *Client) ListClusters(ctx context.Context, params *ListClustersInput, op
 
 type ListClustersInput struct {
 
+	// Indicates whether connected clusters are included in the returned list. Default
+	// value is 'ALL'.
+	Include []string
+
 	// The maximum number of cluster results returned by ListClusters in paginated
 	// output. When you use this parameter, ListClusters returns only maxResults
 	// results in a single page along with a nextToken response element. You can see

@@ -481,6 +481,23 @@ func clusterDeletedStateRetryable(ctx context.Context, input *DescribeClusterInp
 		}
 	}
 
+	if err == nil {
+		pathValue, err := jmespath.Search("cluster.status", output)
+		if err != nil {
+			return false, fmt.Errorf("error evaluating waiter state: %w", err)
+		}
+
+		expectedValue := "PENDING"
+		value, ok := pathValue.(types.ClusterStatus)
+		if !ok {
+			return false, fmt.Errorf("waiter comparator expected types.ClusterStatus value, got %T", pathValue)
+		}
+
+		if string(value) == expectedValue {
+			return false, fmt.Errorf("waiter state transitioned to Failure")
+		}
+	}
+
 	if err != nil {
 		var errorType *types.ResourceNotFoundException
 		if errors.As(err, &errorType) {

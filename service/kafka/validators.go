@@ -530,6 +530,26 @@ func (m *validateOpUpdateMonitoring) HandleInitialize(ctx context.Context, in mi
 	return next.HandleInitialize(ctx, in)
 }
 
+type validateOpUpdateSecurity struct {
+}
+
+func (*validateOpUpdateSecurity) ID() string {
+	return "OperationInputValidation"
+}
+
+func (m *validateOpUpdateSecurity) HandleInitialize(ctx context.Context, in middleware.InitializeInput, next middleware.InitializeHandler) (
+	out middleware.InitializeOutput, metadata middleware.Metadata, err error,
+) {
+	input, ok := in.Parameters.(*UpdateSecurityInput)
+	if !ok {
+		return out, metadata, fmt.Errorf("unknown input parameters type %T", in.Parameters)
+	}
+	if err := validateOpUpdateSecurityInput(input); err != nil {
+		return out, metadata, err
+	}
+	return next.HandleInitialize(ctx, in)
+}
+
 func addOpBatchAssociateScramSecretValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpBatchAssociateScramSecret{}, middleware.After)
 }
@@ -632,6 +652,10 @@ func addOpUpdateConfigurationValidationMiddleware(stack *middleware.Stack) error
 
 func addOpUpdateMonitoringValidationMiddleware(stack *middleware.Stack) error {
 	return stack.Initialize.Add(&validateOpUpdateMonitoring{}, middleware.After)
+}
+
+func addOpUpdateSecurityValidationMiddleware(stack *middleware.Stack) error {
+	return stack.Initialize.Add(&validateOpUpdateSecurity{}, middleware.After)
 }
 
 func validate__listOfBrokerEBSVolumeInfo(v []types.BrokerEBSVolumeInfo) error {
@@ -1363,6 +1387,29 @@ func validateOpUpdateMonitoringInput(v *UpdateMonitoringInput) error {
 	if v.LoggingInfo != nil {
 		if err := validateLoggingInfo(v.LoggingInfo); err != nil {
 			invalidParams.AddNested("LoggingInfo", err.(smithy.InvalidParamsError))
+		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpUpdateSecurityInput(v *UpdateSecurityInput) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "UpdateSecurityInput"}
+	if v.ClusterArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("ClusterArn"))
+	}
+	if v.CurrentVersion == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("CurrentVersion"))
+	}
+	if v.EncryptionInfo != nil {
+		if err := validateEncryptionInfo(v.EncryptionInfo); err != nil {
+			invalidParams.AddNested("EncryptionInfo", err.(smithy.InvalidParamsError))
 		}
 	}
 	if invalidParams.Len() > 0 {

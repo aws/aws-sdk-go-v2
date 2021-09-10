@@ -4,6 +4,7 @@ package types
 
 import (
 	smithydocument "github.com/aws/smithy-go/document"
+	"time"
 )
 
 // Information about an instance type.
@@ -11,6 +12,63 @@ type InstanceTypeItem struct {
 
 	// The instance type.
 	InstanceType *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a line item.
+type LineItem struct {
+
+	// The ID of the catalog item.
+	CatalogItemId *string
+
+	// The ID of the line item.
+	LineItemId *string
+
+	// The quantity of the line item.
+	Quantity int32
+
+	// The status of the line item.
+	Status *string
+
+	noSmithyDocumentSerde
+}
+
+// Information about a line item request.
+type LineItemRequest struct {
+
+	// The ID of the catalog item.
+	CatalogItemId *string
+
+	// The quantity of a line item request.
+	Quantity int32
+
+	noSmithyDocumentSerde
+}
+
+// Information about an order.
+type Order struct {
+
+	// The line items for the order
+	LineItems []LineItem
+
+	// The fulfillment date of the order.
+	OrderFulfilledDate *time.Time
+
+	// The ID of the order.
+	OrderId *string
+
+	// The submission date for the order.
+	OrderSubmissionDate *time.Time
+
+	// The ID of the Outpost.
+	OutpostId *string
+
+	// The payment option for the order.
+	PaymentOption PaymentOption
+
+	// The status of the order
+	Status OrderStatus
 
 	noSmithyDocumentSerde
 }

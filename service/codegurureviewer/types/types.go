@@ -52,15 +52,15 @@ type CodeArtifacts struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an AWS CodeCommit repository. The CodeCommit repository must
-// be in the same AWS Region and AWS account where its CodeGuru Reviewer code
-// reviews are configured.
+// Information about an Amazon Web Services CodeCommit repository. The CodeCommit
+// repository must be in the same Amazon Web Services Region and Amazon Web
+// Services account where its CodeGuru Reviewer code reviews are configured.
 type CodeCommitRepository struct {
 
-	// The name of the AWS CodeCommit repository. For more information, see
-	// repositoryName
+	// The name of the Amazon Web Services CodeCommit repository. For more information,
+	// see repositoryName
 	// (https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName)
-	// in the AWS CodeCommit API Reference.
+	// in the Amazon Web Services CodeCommit API Reference.
 	//
 	// This member is required.
 	Name *string
@@ -101,11 +101,11 @@ type CodeReview struct {
 	// The name of the code review.
 	Name *string
 
-	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub, GitHub
-	// Enterprise Server, or Bitbucket repository, this is the username for the account
-	// that owns the repository. For an S3 repository, it can be the username or AWS
-	// account ID.
+	// The owner of the repository. For an Amazon Web Services CodeCommit repository,
+	// this is the Amazon Web Services account ID of the account that owns the
+	// repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository,
+	// this is the username for the account that owns the repository. For an S3
+	// repository, it can be the username or Amazon Web Services account ID.
 	Owner *string
 
 	// The type of repository that contains the reviewed code (for example, GitHub or
@@ -164,11 +164,11 @@ type CodeReviewSummary struct {
 	// The name of the code review.
 	Name *string
 
-	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub, GitHub
-	// Enterprise Server, or Bitbucket repository, this is the username for the account
-	// that owns the repository. For an S3 repository, it can be the username or AWS
-	// account ID.
+	// The owner of the repository. For an Amazon Web Services CodeCommit repository,
+	// this is the Amazon Web Services account ID of the account that owns the
+	// repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository,
+	// this is the username for the account that owns the repository. For an S3
+	// repository, it can be the username or Amazon Web Services account ID.
 	Owner *string
 
 	// The provider type of the repository association.
@@ -268,19 +268,20 @@ type EventInfo struct {
 // An object that contains:
 //
 // * The encryption option for a repository association.
-// It is either owned by AWS Key Management Service (KMS) (AWS_OWNED_CMK) or
-// customer managed (CUSTOMER_MANAGED_CMK).
+// It is either owned by Amazon Web Services Key Management Service (KMS)
+// (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
 //
-// * The ID of the AWS KMS key that is
-// associated with a respository association.
+// * The ID of the
+// Amazon Web Services KMS key that is associated with a respository association.
 type KMSKeyDetails struct {
 
-	// The encryption option for a repository association. It is either owned by AWS
-	// Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed
+	// The encryption option for a repository association. It is either owned by Amazon
+	// Web Services Key Management Service (KMS) (AWS_OWNED_CMK) or customer managed
 	// (CUSTOMER_MANAGED_CMK).
 	EncryptionOption EncryptionOption
 
-	// The ID of the AWS KMS key that is associated with a respository association.
+	// The ID of the Amazon Web Services KMS key that is associated with a respository
+	// association.
 	KMSKeyId *string
 
 	noSmithyDocumentSerde
@@ -292,17 +293,9 @@ type Metrics struct {
 	// Total number of recommendations found in the code review.
 	FindingsCount *int64
 
-	// Lines of code metered in the code review. For the initial code review pull
-	// request and all subsequent revisions, this includes all lines of code in the
-	// files added to the pull request. In subsequent revisions, for files that already
-	// existed in the pull request, this includes only the changed lines of code. In
-	// both cases, this does not include non-code lines such as comments and import
-	// statements. For example, if you submit a pull request containing 5 files, each
-	// with 500 lines of code, and in a subsequent revision you added a new file with
-	// 200 lines of code, and also modified a total of 25 lines across the initial 5
-	// files, MeteredLinesOfCodeCount includes the first 5 files (5 * 500 = 2,500
-	// lines), the new file (200 lines) and the 25 changed lines of code for a total of
-	// 2,725 lines of code.
+	// MeteredLinesOfCode is the number of lines of code in the repository where the
+	// code review happened. This does not include non-code lines such as comments and
+	// blank lines.
 	MeteredLinesOfCodeCount *int64
 
 	noSmithyDocumentSerde
@@ -353,10 +346,10 @@ type RecommendationFeedback struct {
 	RecommendationId *string
 
 	// The ID of the user that made the API call. The UserId is an IAM principal that
-	// can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more
-	// information, see  Specifying a Principal
+	// can be specified as an Amazon Web Services account ID or an Amazon Resource Name
+	// (ARN). For more information, see  Specifying a Principal
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
-	// in the AWS Identity and Access Management User Guide.
+	// in the Amazon Web Services Identity and Access Management User Guide.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -373,10 +366,10 @@ type RecommendationFeedbackSummary struct {
 	RecommendationId *string
 
 	// The ID of the user that gave the feedback. The UserId is an IAM principal that
-	// can be specified as an AWS account ID or an Amazon Resource Name (ARN). For more
-	// information, see  Specifying a Principal
+	// can be specified as an Amazon Web Services account ID or an Amazon Resource Name
+	// (ARN). For more information, see  Specifying a Principal
 	// (https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying)
-	// in the AWS Identity and Access Management User Guide.
+	// in the Amazon Web Services Identity and Access Management User Guide.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -404,6 +397,15 @@ type RecommendationSummary struct {
 	// Later on it can be used to collect the feedback.
 	RecommendationId *string
 
+	// Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and
+	// a short and long description. CodeGuru Reviewer uses rules to analyze code. A
+	// rule's recommendation is included in analysis results if code is detected that
+	// violates the rule.
+	RuleMetadata *RuleMetadata
+
+	// The severity of the issue in the code that generated this recommendation.
+	Severity Severity
+
 	// Start line from where the recommendation is applicable in the source commit or
 	// source branch.
 	StartLine *int32
@@ -411,16 +413,16 @@ type RecommendationSummary struct {
 	noSmithyDocumentSerde
 }
 
-// Information about an associated AWS CodeCommit repository or an associated
-// repository that is managed by AWS CodeStar Connections (for example, Bitbucket).
-// This Repository object is not used if your source code is in an associated
-// GitHub repository.
+// Information about an associated Amazon Web Services CodeCommit repository or an
+// associated repository that is managed by Amazon Web Services CodeStar
+// Connections (for example, Bitbucket). This Repository object is not used if your
+// source code is in an associated GitHub repository.
 type Repository struct {
 
 	// Information about a Bitbucket repository.
 	Bitbucket *ThirdPartySourceRepository
 
-	// Information about an AWS CodeCommit repository.
+	// Information about an Amazon Web Services CodeCommit repository.
 	CodeCommit *CodeCommitRepository
 
 	// Information about a GitHub Enterprise Server repository.
@@ -460,12 +462,12 @@ type RepositoryAssociation struct {
 	// The ID of the repository association.
 	AssociationId *string
 
-	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its
-	// format is
+	// The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections
+	// connection. Its format is
 	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
 	// For more information, see Connection
 	// (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
-	// in the AWS CodeStar Connections API Reference.
+	// in the Amazon Web Services CodeStar Connections API Reference.
 	ConnectionArn *string
 
 	// The time, in milliseconds since the epoch, when the repository association was
@@ -475,11 +477,12 @@ type RepositoryAssociation struct {
 	// A KMSKeyDetails object that contains:
 	//
 	// * The encryption option for this
-	// repository association. It is either owned by AWS Key Management Service (KMS)
-	// (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
+	// repository association. It is either owned by Amazon Web Services Key Management
+	// Service (KMS) (AWS_OWNED_CMK) or customer managed (CUSTOMER_MANAGED_CMK).
 	//
-	// * The ID of the AWS
-	// KMS key that is associated with this respository association.
+	// * The
+	// ID of the Amazon Web Services KMS key that is associated with this respository
+	// association.
 	KMSKeyDetails *KMSKeyDetails
 
 	// The time, in milliseconds since the epoch, when the repository association was
@@ -489,11 +492,11 @@ type RepositoryAssociation struct {
 	// The name of the repository.
 	Name *string
 
-	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub, GitHub
-	// Enterprise Server, or Bitbucket repository, this is the username for the account
-	// that owns the repository. For an S3 repository, it can be the username or AWS
-	// account ID.
+	// The owner of the repository. For an Amazon Web Services CodeCommit repository,
+	// this is the Amazon Web Services account ID of the account that owns the
+	// repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository,
+	// this is the username for the account that owns the repository. For an S3
+	// repository, it can be the username or Amazon Web Services account ID.
 	Owner *string
 
 	// The provider type of the repository association.
@@ -559,12 +562,12 @@ type RepositoryAssociationSummary struct {
 	// The repository association ID.
 	AssociationId *string
 
-	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its
-	// format is
+	// The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections
+	// connection. Its format is
 	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
 	// For more information, see Connection
 	// (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
-	// in the AWS CodeStar Connections API Reference.
+	// in the Amazon Web Services CodeStar Connections API Reference.
 	ConnectionArn *string
 
 	// The time, in milliseconds since the epoch, since the repository association was
@@ -574,11 +577,11 @@ type RepositoryAssociationSummary struct {
 	// The name of the repository association.
 	Name *string
 
-	// The owner of the repository. For an AWS CodeCommit repository, this is the AWS
-	// account ID of the account that owns the repository. For a GitHub, GitHub
-	// Enterprise Server, or Bitbucket repository, this is the username for the account
-	// that owns the repository. For an S3 repository, it can be the username or AWS
-	// account ID.
+	// The owner of the repository. For an Amazon Web Services CodeCommit repository,
+	// this is the Amazon Web Services account ID of the account that owns the
+	// repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository,
+	// this is the username for the account that owns the repository. For an S3
+	// repository, it can be the username or Amazon Web Services account ID.
 	Owner *string
 
 	// The provider type of the repository association.
@@ -658,6 +661,30 @@ type RequestMetadata struct {
 	// in RepositoryAssociation
 	// (https://docs.aws.amazon.com/codeguru/latest/reviewer-api/API_RepositoryAssociation.html).
 	VendorName VendorName
+
+	noSmithyDocumentSerde
+}
+
+// Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and
+// a short and long description. CodeGuru Reviewer uses rules to analyze code. A
+// rule's recommendation is included in analysis results if code is detected that
+// violates the rule.
+type RuleMetadata struct {
+
+	// A long description of the rule.
+	LongDescription *string
+
+	// The ID of the rule.
+	RuleId *string
+
+	// The name of the rule.
+	RuleName *string
+
+	// Tags that are associated with the rule.
+	RuleTags []string
+
+	// A short description of the rule.
+	ShortDescription *string
 
 	noSmithyDocumentSerde
 }
@@ -756,12 +783,12 @@ type SourceCodeType struct {
 // Reviewer.
 type ThirdPartySourceRepository struct {
 
-	// The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its
-	// format is
+	// The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections
+	// connection. Its format is
 	// arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id.
 	// For more information, see Connection
 	// (https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html)
-	// in the AWS CodeStar Connections API Reference.
+	// in the Amazon Web Services CodeStar Connections API Reference.
 	//
 	// This member is required.
 	ConnectionArn *string
@@ -773,7 +800,7 @@ type ThirdPartySourceRepository struct {
 
 	// The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket
 	// repository, this is the username for the account that owns the repository. For
-	// an S3 repository, this can be the username or AWS account ID.
+	// an S3 repository, this can be the username or Amazon Web Services account ID.
 	//
 	// This member is required.
 	Owner *string

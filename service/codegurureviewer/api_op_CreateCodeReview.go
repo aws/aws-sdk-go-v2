@@ -34,8 +34,8 @@ func (c *Client) CreateCodeReview(ctx context.Context, params *CreateCodeReviewI
 
 type CreateCodeReviewInput struct {
 
-	// The name of the code review. The name of each code review in your AWS account
-	// must be unique.
+	// The name of the code review. The name of each code review in your Amazon Web
+	// Services account must be unique.
 	//
 	// This member is required.
 	Name *string

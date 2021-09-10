@@ -109,9 +109,11 @@ type CreatePredictorInput struct {
 	// * arn:aws:forecast:::algorithm/Prophet
 	AlgorithmArn *string
 
-	// Used to overide the default AutoML strategy, which is to optimize predictor
-	// accuracy. To apply an AutoML strategy that minimizes training time, use
-	// LatencyOptimized. This parameter is only valid for predictors trained using
+	// The LatencyOptimized AutoML override strategy is only available in private beta.
+	// Contact AWS Support or your account manager to learn more about access
+	// privileges. Used to overide the default AutoML strategy, which is to optimize
+	// predictor accuracy. To apply an AutoML strategy that minimizes training time,
+	// use LatencyOptimized. This parameter is only valid for predictors trained using
 	// AutoML.
 	AutoMLOverrideStrategy types.AutoMLOverrideStrategy
 
@@ -137,6 +139,9 @@ type CreatePredictorInput struct {
 	// more information, see aws-forecast-choosing-recipes. If you included the
 	// HPOConfig object, you must set PerformHPO to true.
 	HPOConfig *types.HyperParameterTuningJobConfig
+
+	// The accuracy metric used to optimize the predictor.
+	OptimizationMetric types.OptimizationMetric
 
 	// Whether to perform AutoML. When Amazon Forecast performs AutoML, it evaluates
 	// the algorithms it provides and chooses the best algorithm and configuration for

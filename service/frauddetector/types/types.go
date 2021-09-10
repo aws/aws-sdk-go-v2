@@ -260,6 +260,30 @@ type ExternalModel struct {
 	noSmithyDocumentSerde
 }
 
+// The fraud prediction scores from Amazon SageMaker model.
+type ExternalModelOutputs struct {
+
+	// The Amazon SageMaker model.
+	ExternalModel *ExternalModelSummary
+
+	// The fraud prediction scores from Amazon SageMaker model.
+	Outputs map[string]string
+
+	noSmithyDocumentSerde
+}
+
+// The Amazon SageMaker model.
+type ExternalModelSummary struct {
+
+	// The endpoint of the Amazon SageMaker model.
+	ModelEndpoint *string
+
+	// The source of the model.
+	ModelSource ModelSource
+
+	noSmithyDocumentSerde
+}
+
 // The message details.
 type FieldValidationMessage struct {
 

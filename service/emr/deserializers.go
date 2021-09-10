@@ -12561,6 +12561,24 @@ func awsAwsjson11_deserializeDocumentStudio(v **types.Studio, value interface{})
 				sv.EngineSecurityGroupId = ptr.String(jtv)
 			}
 
+		case "IdpAuthUrl":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlString to be of type string, got %T instead", value)
+				}
+				sv.IdpAuthUrl = ptr.String(jtv)
+			}
+
+		case "IdpRelayStateParameterName":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected XmlStringMaxLen256 to be of type string, got %T instead", value)
+				}
+				sv.IdpRelayStateParameterName = ptr.String(jtv)
+			}
+
 		case "Name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12674,6 +12692,15 @@ func awsAwsjson11_deserializeDocumentStudioSummary(v **types.StudioSummary, valu
 
 	for key, value := range shape {
 		switch key {
+		case "AuthMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AuthMode to be of type string, got %T instead", value)
+				}
+				sv.AuthMode = types.AuthMode(jtv)
+			}
+
 		case "CreationTime":
 			if value != nil {
 				switch jtv := value.(type) {

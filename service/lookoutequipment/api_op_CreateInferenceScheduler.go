@@ -90,8 +90,8 @@ type CreateInferenceSchedulerInput struct {
 	// when uploading new data.
 	DataDelayOffsetInMinutes *int64
 
-	// Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
-	// inference scheduler data by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt inference scheduler data
+	// by Amazon Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Any tags associated with the inference scheduler.

@@ -53,6 +53,9 @@ type WorkspaceDescription struct {
 	// Prometheus endpoint URI.
 	PrometheusEndpoint *string
 
+	// The tags of this workspace.
+	Tags map[string]string
+
 	noSmithyDocumentSerde
 }
 
@@ -92,6 +95,9 @@ type WorkspaceSummary struct {
 
 	// Alias of this workspace.
 	Alias *string
+
+	// The tags of this workspace.
+	Tags map[string]string
 
 	noSmithyDocumentSerde
 }

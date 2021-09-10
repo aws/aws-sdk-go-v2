@@ -134,6 +134,86 @@
                 "smithy.api#httpError": 409
             }
         },
+        "com.amazonaws.outposts#CreateOrder": {
+            "type": "operation",
+            "input": {
+                "target": "com.amazonaws.outposts#CreateOrderInput"
+            },
+            "output": {
+                "target": "com.amazonaws.outposts#CreateOrderOutput"
+            },
+            "errors": [
+                {
+                    "target": "com.amazonaws.outposts#AccessDeniedException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ConflictException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#InternalServerException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#NotFoundException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ServiceQuotaExceededException"
+                },
+                {
+                    "target": "com.amazonaws.outposts#ValidationException"
+                }
+            ],
+            "traits": {
+                "smithy.api#documentation": "<p>Creates an order for an Outpost.</p>",
+                "smithy.api#http": {
+                    "method": "POST",
+                    "uri": "/orders",
+                    "code": 200
+                }
+            }
+        },
+        "com.amazonaws.outposts#CreateOrderInput": {
+            "type": "structure",
+            "members": {
+                "OutpostIdentifier": {
+                    "target": "com.amazonaws.outposts#OutpostIdentifier",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID or the Amazon Resource Name (ARN) of the Outpost.\n    </p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "LineItems": {
+                    "target": "com.amazonaws.outposts#LineItemRequestListDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The line items that make up the order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PaymentOption": {
+                    "target": "com.amazonaws.outposts#PaymentOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment option for the order.</p>",
+                        "smithy.api#required": {}
+                    }
+                },
+                "PaymentTerm": {
+                    "target": "com.amazonaws.outposts#PaymentTerm",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment terms for the order.</p>"
+                    }
+                }
+            }
+        },
+        "com.amazonaws.outposts#CreateOrderOutput": {
+            "type": "structure",
+            "members": {
+                "Order": {
+                    "target": "com.amazonaws.outposts#Order",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Information about this order.</p>"
+                    }
+                }
+            }
+        },
         "com.amazonaws.outposts#CreateOutpost": {
             "type": "operation",
             "input": {
@@ -251,6 +331,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.outposts#OutpostId",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the Outpost.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -358,6 +439,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.outposts#OutpostId",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the Outpost.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -401,6 +483,7 @@
                 "OutpostId": {
                     "target": "com.amazonaws.outposts#OutpostId",
                     "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the Outpost.\n    </p>",
                         "smithy.api#httpLabel": {},
                         "smithy.api#required": {}
                     }
@@ -429,7 +512,10 @@
                     "target": "com.amazonaws.outposts#Token"
                 },
                 "OutpostId": {
-                    "target": "com.amazonaws.outposts#OutpostId"
+                    "target": "com.amazonaws.outposts#OutpostId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the Outpost.\n    </p>"
+                    }
                 },
                 "OutpostArn": {
                     "target": "com.amazonaws.outposts#OutpostArn"
@@ -443,6 +529,9 @@
                     "target": "com.amazonaws.outposts#Outpost"
                 }
             }
+        },
+        "com.amazonaws.outposts#ISO8601Timestamp": {
+            "type": "timestamp"
         },
         "com.amazonaws.outposts#InstanceType": {
             "type": "string",
@@ -503,6 +592,91 @@
                 "smithy.api#length": {
                     "min": 1,
                     "max": 5
+                }
+            }
+        },
+        "com.amazonaws.outposts#LineItem": {
+            "type": "structure",
+            "members": {
+                "CatalogItemId": {
+                    "target": "com.amazonaws.outposts#SkuCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the catalog item.\n    </p>"
+                    }
+                },
+                "LineItemId": {
+                    "target": "com.amazonaws.outposts#LineItemId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the line item.</p>"
+                    }
+                },
+                "Quantity": {
+                    "target": "com.amazonaws.outposts#LineItemQuantity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of the line item.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.outposts#Status",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the line item.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a line item.</p>"
+            }
+        },
+        "com.amazonaws.outposts#LineItemId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#pattern": "^ooi-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.outposts#LineItemListDefinition": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#LineItem"
+            }
+        },
+        "com.amazonaws.outposts#LineItemQuantity": {
+            "type": "integer",
+            "traits": {
+                "smithy.api#range": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
+        "com.amazonaws.outposts#LineItemRequest": {
+            "type": "structure",
+            "members": {
+                "CatalogItemId": {
+                    "target": "com.amazonaws.outposts#SkuCode",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the catalog item.</p>"
+                    }
+                },
+                "Quantity": {
+                    "target": "com.amazonaws.outposts#LineItemQuantity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The quantity of a line item request.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about a line item request.</p>"
+            }
+        },
+        "com.amazonaws.outposts#LineItemRequestListDefinition": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.outposts#LineItemRequest"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
                 }
             }
         },
@@ -725,11 +899,105 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.outposts#Order": {
+            "type": "structure",
+            "members": {
+                "OutpostId": {
+                    "target": "com.amazonaws.outposts#OutpostIdOnly",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the Outpost.\n    </p>"
+                    }
+                },
+                "OrderId": {
+                    "target": "com.amazonaws.outposts#OrderId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the order.</p>"
+                    }
+                },
+                "Status": {
+                    "target": "com.amazonaws.outposts#OrderStatus",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The status of the order</p>"
+                    }
+                },
+                "LineItems": {
+                    "target": "com.amazonaws.outposts#LineItemListDefinition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The line items for the order</p>"
+                    }
+                },
+                "PaymentOption": {
+                    "target": "com.amazonaws.outposts#PaymentOption",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The payment option for the order.</p>"
+                    }
+                },
+                "OrderSubmissionDate": {
+                    "target": "com.amazonaws.outposts#ISO8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The submission date for the order.</p>"
+                    }
+                },
+                "OrderFulfilledDate": {
+                    "target": "com.amazonaws.outposts#ISO8601Timestamp",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fulfillment date of the order.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Information about an order.</p>"
+            }
+        },
+        "com.amazonaws.outposts#OrderId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^oo-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.outposts#OrderStatus": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "RECEIVED",
+                        "name": "RECEIVED"
+                    },
+                    {
+                        "value": "PENDING",
+                        "name": "PENDING"
+                    },
+                    {
+                        "value": "PROCESSING",
+                        "name": "PROCESSING"
+                    },
+                    {
+                        "value": "INSTALLING",
+                        "name": "INSTALLING"
+                    },
+                    {
+                        "value": "FULFILLED",
+                        "name": "FULFILLED"
+                    },
+                    {
+                        "value": "CANCELLED",
+                        "name": "CANCELLED"
+                    }
+                ]
+            }
+        },
         "com.amazonaws.outposts#Outpost": {
             "type": "structure",
             "members": {
                 "OutpostId": {
-                    "target": "com.amazonaws.outposts#OutpostId"
+                    "target": "com.amazonaws.outposts#OutpostId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>\n      The ID of the Outpost.\n    </p>"
+                    }
                 },
                 "OwnerId": {
                     "target": "com.amazonaws.outposts#OwnerId"
@@ -794,7 +1062,26 @@
         "com.amazonaws.outposts#OutpostId": {
             "type": "string",
             "traits": {
-                "smithy.api#documentation": "<p>The ID of the Outpost.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 180
+                },
+                "smithy.api#pattern": "^(arn:aws([a-z-]+)?:outposts:[a-z\\d-]+:\\d{12}:outpost/)?op-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.outposts#OutpostIdOnly": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                },
+                "smithy.api#pattern": "^op-[a-f0-9]{17}$"
+            }
+        },
+        "com.amazonaws.outposts#OutpostIdentifier": {
+            "type": "string",
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 180
@@ -817,6 +1104,9 @@
             "type": "service",
             "version": "2019-12-03",
             "operations": [
+                {
+                    "target": "com.amazonaws.outposts#CreateOrder"
+                },
                 {
                     "target": "com.amazonaws.outposts#CreateOutpost"
                 },
@@ -873,6 +1163,36 @@
                     "max": 12
                 },
                 "smithy.api#pattern": "^\\d{12}$"
+            }
+        },
+        "com.amazonaws.outposts#PaymentOption": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "ALL_UPFRONT",
+                        "name": "ALL_UPFRONT"
+                    },
+                    {
+                        "value": "NO_UPFRONT",
+                        "name": "NO_UPFRONT"
+                    },
+                    {
+                        "value": "PARTIAL_UPFRONT",
+                        "name": "PARTIAL_UPFRONT"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.outposts#PaymentTerm": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "THREE_YEARS",
+                        "name": "THREE_YEARS"
+                    }
+                ]
             }
         },
         "com.amazonaws.outposts#ResourceType": {
@@ -965,6 +1285,26 @@
             "type": "string",
             "traits": {
                 "smithy.api#documentation": "<p>The name of the site.</p>",
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^[\\S ]+$"
+            }
+        },
+        "com.amazonaws.outposts#SkuCode": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 10
+                },
+                "smithy.api#pattern": "^OR-[A-Z0-9]{7}$"
+            }
+        },
+        "com.amazonaws.outposts#Status": {
+            "type": "string",
+            "traits": {
                 "smithy.api#length": {
                     "min": 1,
                     "max": 1000

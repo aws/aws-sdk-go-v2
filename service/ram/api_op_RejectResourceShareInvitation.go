@@ -11,7 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Rejects an invitation to a resource share from another AWS account.
+// Rejects an invitation to a resource share from another Amazon Web Services
+// account.
 func (c *Client) RejectResourceShareInvitation(ctx context.Context, params *RejectResourceShareInvitationInput, optFns ...func(*Options)) (*RejectResourceShareInvitationOutput, error) {
 	if params == nil {
 		params = &RejectResourceShareInvitationInput{}

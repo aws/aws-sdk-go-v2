@@ -12,8 +12,8 @@ import (
 	"time"
 )
 
-// Provides information on a specified dataset such as the schema location, status,
-// and so on.
+// Provides a JSON description of the data that is in each time series dataset,
+// including names, column names, and data types.
 func (c *Client) DescribeDataset(ctx context.Context, params *DescribeDatasetInput, optFns ...func(*Options)) (*DescribeDatasetOutput, error) {
 	if params == nil {
 		params = &DescribeDatasetInput{}
@@ -63,8 +63,8 @@ type DescribeDatasetOutput struct {
 	// This value conforms to the media type: application/json
 	Schema *string
 
-	// Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt
-	// dataset data by Amazon Lookout for Equipment.
+	// Provides the identifier of the KMS key used to encrypt dataset data by Amazon
+	// Lookout for Equipment.
 	ServerSideKmsKeyId *string
 
 	// Indicates the status of the dataset.

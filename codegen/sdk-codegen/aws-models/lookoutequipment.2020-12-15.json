@@ -148,7 +148,7 @@
                     "min": 1,
                     "max": 5000
                 },
-                "smithy.api#pattern": "[\\P{M}\\p{M}]{1,5000}"
+                "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,5000}$"
             }
         },
         "com.amazonaws.lookoutequipment#ComponentTimestampDelimiter": {
@@ -229,7 +229,7 @@
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#NameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
                     }
                 },
                 "ClientToken": {
@@ -326,7 +326,7 @@
                 "DataDelayOffsetInMinutes": {
                     "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p> A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if you select an offset delay time of five minutes, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data. </p>"
+                        "smithy.api#documentation": "<p>A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if you select an offset delay time of five minutes, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data. </p>"
                     }
                 },
                 "DataUploadFrequency": {
@@ -360,7 +360,7 @@
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#NameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
                     }
                 },
                 "ClientToken": {
@@ -513,13 +513,19 @@
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#NameOrArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. </p>"
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment. </p>"
                     }
                 },
                 "Tags": {
                     "target": "com.amazonaws.lookoutequipment#TagList",
                     "traits": {
                         "smithy.api#documentation": "<p> Any tags associated with the ML model being created. </p>"
+                    }
+                },
+                "OffCondition": {
+                    "target": "com.amazonaws.lookoutequipment#OffCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.</p>"
                     }
                 }
             }
@@ -643,7 +649,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:dataset\\/.+"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:dataset\\/.+$"
             }
         },
         "com.amazonaws.lookoutequipment#DatasetIdentifier": {
@@ -968,7 +974,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides information on a specified dataset such as the schema location, status, and so\n         on.</p>"
+                "smithy.api#documentation": "<p>Provides a JSON description of the data that is in each time series dataset, including names, column names, and data types.</p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeDatasetRequest": {
@@ -1025,7 +1031,7 @@
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key used to encrypt dataset data by Amazon Lookout for Equipment. </p>"
                     }
                 },
                 "IngestionInputConfiguration": {
@@ -1155,7 +1161,7 @@
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key used to encrypt inference scheduler data by Amazon Lookout for Equipment. </p>"
                     }
                 }
             }
@@ -1186,7 +1192,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides overall information about a specific ML model, including model name and ARN,\n         dataset, training and evaluation information, status, and so on. </p>"
+                "smithy.api#documentation": "<p>Provides a JSON containing the overall information about a specific ML model, including model name and ARN,\n         dataset, training and evaluation information, status, and so on. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#DescribeModelRequest": {
@@ -1321,7 +1327,13 @@
                 "ServerSideKmsKeyId": {
                     "target": "com.amazonaws.lookoutequipment#KmsKeyArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>Provides the identifier of the AWS KMS customer master key (CMK) used to encrypt model data by Amazon Lookout for Equipment. </p>"
+                        "smithy.api#documentation": "<p>Provides the identifier of the KMS key used to encrypt model data by Amazon Lookout for Equipment. </p>"
+                    }
+                },
+                "OffCondition": {
+                    "target": "com.amazonaws.lookoutequipment#OffCondition",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Indicates that the asset associated with this sensor has been shut off. As long as this condition is met, Lookout for Equipment will not use data from this asset for training, evaluation, or inference.</p>"
                     }
                 }
             }
@@ -1339,7 +1351,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:iam::[0-9]{12}:role/.+$"
             }
         },
         "com.amazonaws.lookoutequipment#IdempotenceToken": {
@@ -1349,7 +1361,7 @@
                     "min": 1,
                     "max": 256
                 },
-                "smithy.api#pattern": "\\p{ASCII}{1,256}"
+                "smithy.api#pattern": "^\\p{ASCII}{1,256}$"
             }
         },
         "com.amazonaws.lookoutequipment#InferenceExecutionStatus": {
@@ -1475,12 +1487,12 @@
                 "InferenceInputNameConfiguration": {
                     "target": "com.amazonaws.lookoutequipment#InferenceInputNameConfiguration",
                     "traits": {
-                        "smithy.api#documentation": "<p>> Specifies configuration information for the input data for the inference, including\n         timestamp format and delimiter. </p>"
+                        "smithy.api#documentation": "<p>Specifies configuration information for the input data for the inference, including\n         timestamp format and delimiter. </p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>> Specifies configuration information for the input data for the inference, including S3\n         location of input data.. </p>"
+                "smithy.api#documentation": "<p>Specifies configuration information for the input data for the inference, including S3\n         location of input data.. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#InferenceInputNameConfiguration": {
@@ -1500,7 +1512,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>>> Specifies configuration information for the input data for the inference, including\n         timestamp format and delimiter. </p>"
+                "smithy.api#documentation": "<p>Specifies configuration information for the input data for the inference, including\n         timestamp format and delimiter. </p>"
             }
         },
         "com.amazonaws.lookoutequipment#InferenceOutputConfiguration": {
@@ -1573,7 +1585,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:inference-scheduler\\/.+$"
             }
         },
         "com.amazonaws.lookoutequipment#InferenceSchedulerIdentifier": {
@@ -1661,7 +1673,7 @@
                 "DataDelayOffsetInMinutes": {
                     "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>> A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if an offset delay time of five minutes was selected, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data.\n      </p>"
+                        "smithy.api#documentation": "<p>A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if an offset delay time of five minutes was selected, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data.\n      </p>"
                     }
                 },
                 "DataUploadFrequency": {
@@ -1697,7 +1709,7 @@
                     "min": 0,
                     "max": 32
                 },
-                "smithy.api#pattern": "[A-Fa-f0-9]{0,32}"
+                "smithy.api#pattern": "^[A-Fa-f0-9]{0,32}$"
             }
         },
         "com.amazonaws.lookoutequipment#IngestionJobStatus": {
@@ -1763,7 +1775,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "arn:aws[a-z\\-]*:kms:[a-z0-9\\-]*:\\d{12}:[\\w\\-\\/]+"
+                "smithy.api#pattern": "^arn:aws[a-z\\-]*:kms:[a-z0-9\\-]*:\\d{12}:[\\w\\-\\/]+$"
             }
         },
         "com.amazonaws.lookoutequipment#LabelsInputConfiguration": {
@@ -2272,7 +2284,7 @@
                     "min": 20,
                     "max": 2048
                 },
-                "smithy.api#pattern": "arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:model\\/.+"
+                "smithy.api#pattern": "^arn:aws(-[^:]+)?:lookoutequipment:[a-zA-Z0-9\\-]*:[0-9]{12}:model\\/.+$"
             }
         },
         "com.amazonaws.lookoutequipment#ModelName": {
@@ -2371,7 +2383,16 @@
                     "min": 0,
                     "max": 8192
                 },
-                "smithy.api#pattern": "\\p{ASCII}{0,8192}"
+                "smithy.api#pattern": "^\\p{ASCII}{0,8192}$"
+            }
+        },
+        "com.amazonaws.lookoutequipment#OffCondition": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 2048
+                }
             }
         },
         "com.amazonaws.lookoutequipment#ResourceNotFoundException": {
@@ -2407,7 +2428,7 @@
                     "min": 1,
                     "max": 1024
                 },
-                "smithy.api#pattern": "[\\P{M}\\p{M}]{1,1024}[^/]$"
+                "smithy.api#pattern": "^[\\P{M}\\p{M}]{1,1024}[^/]$"
             }
         },
         "com.amazonaws.lookoutequipment#S3Object": {
@@ -2439,7 +2460,7 @@
                     "min": 0,
                     "max": 1024
                 },
-                "smithy.api#pattern": "(^$)|([\\P{M}\\p{M}]{1,1023}/$)"
+                "smithy.api#pattern": "^(^$)|([\\P{M}\\p{M}]{1,1023}/$)$"
             }
         },
         "com.amazonaws.lookoutequipment#ServiceQuotaExceededException": {
@@ -2840,7 +2861,7 @@
                     "min": 0,
                     "max": 256
                 },
-                "smithy.api#pattern": "[\\s\\w+-=\\.:/@]*"
+                "smithy.api#pattern": "^[\\s\\w+-=\\.:/@]*$"
             }
         },
         "com.amazonaws.lookoutequipment#TargetSamplingRate": {
@@ -3013,7 +3034,7 @@
                 "DataDelayOffsetInMinutes": {
                     "target": "com.amazonaws.lookoutequipment#DataDelayOffsetInMinutes",
                     "traits": {
-                        "smithy.api#documentation": "<p>> A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if you select an offset delay time of five minutes, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data.</p>"
+                        "smithy.api#documentation": "<p> A period of time (in minutes) by which inference on the data is delayed after the data\n         starts. For instance, if you select an offset delay time of five minutes, inference will\n         not begin on the data until the first data measurement after the five minute mark. For example, if \n         five minutes is selected, the inference scheduler will wake up at the configured frequency with the \n         additional five minute delay time to check the customer S3 bucket. The customer can upload data at \n         the same frequency and they don't need to stop and restart the scheduler when uploading new data.</p>"
                     }
                 },
                 "DataUploadFrequency": {

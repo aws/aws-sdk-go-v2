@@ -2360,6 +2360,55 @@
                 "target": "com.amazonaws.frauddetector#ExternalModel"
             }
         },
+        "com.amazonaws.frauddetector#ExternalModelOutputs": {
+            "type": "structure",
+            "members": {
+                "externalModel": {
+                    "target": "com.amazonaws.frauddetector#ExternalModelSummary",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Amazon SageMaker model.</p>"
+                    }
+                },
+                "outputs": {
+                    "target": "com.amazonaws.frauddetector#ExternalModelPredictionMap",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The fraud prediction scores from Amazon SageMaker model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The fraud prediction scores from Amazon SageMaker model.</p>"
+            }
+        },
+        "com.amazonaws.frauddetector#ExternalModelPredictionMap": {
+            "type": "map",
+            "key": {
+                "target": "com.amazonaws.frauddetector#string"
+            },
+            "value": {
+                "target": "com.amazonaws.frauddetector#string"
+            }
+        },
+        "com.amazonaws.frauddetector#ExternalModelSummary": {
+            "type": "structure",
+            "members": {
+                "modelEndpoint": {
+                    "target": "com.amazonaws.frauddetector#string",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The endpoint of the Amazon SageMaker model.</p>"
+                    }
+                },
+                "modelSource": {
+                    "target": "com.amazonaws.frauddetector#ModelSource",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The source of the model.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>The Amazon SageMaker model.</p>"
+            }
+        },
         "com.amazonaws.frauddetector#ExternalModelsMaxResults": {
             "type": "integer",
             "traits": {
@@ -2882,6 +2931,12 @@
                     "target": "com.amazonaws.frauddetector#ListOfRuleResults",
                     "traits": {
                         "smithy.api#documentation": "<p>The results from the rules.</p>"
+                    }
+                },
+                "externalModelOutputs": {
+                    "target": "com.amazonaws.frauddetector#ListOfExternalModelOutputs",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The model scores for Amazon SageMaker models.</p>"
                     }
                 }
             }
@@ -3685,6 +3740,12 @@
                         "name": "DETECTORPL"
                     }
                 ]
+            }
+        },
+        "com.amazonaws.frauddetector#ListOfExternalModelOutputs": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.frauddetector#ExternalModelOutputs"
             }
         },
         "com.amazonaws.frauddetector#ListOfLogOddsMetrics": {

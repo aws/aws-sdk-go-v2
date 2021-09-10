@@ -88,7 +88,7 @@
                     "name": "codeguru-reviewer"
                 },
                 "aws.protocols#restJson1": {},
-                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service\n         that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends\n         fixes in your Java and Python code.</p>\n         \n         <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer\n            improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the \n            <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n      \n         <p>\n         To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by \n         creating an <i>interface VPC endpoint</i>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface \n            VPC endpoints (AWS PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.\n      </p>",
+                "smithy.api#documentation": "<p>This section provides documentation for the Amazon CodeGuru Reviewer API operations. CodeGuru Reviewer is a service\n         that uses program analysis and machine learning to detect potential defects that are difficult for developers to find and recommends\n         fixes in your Java and Python code.</p>\n         \n         <p>By proactively detecting and providing recommendations for addressing code defects and implementing best practices, CodeGuru Reviewer\n            improves the overall quality and maintainability of your code base during the code review stage. For more information about CodeGuru Reviewer, see the \n            <i>\n               <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/welcome.html\">Amazon CodeGuru Reviewer User Guide</a>.</i>\n         </p>\n      \n         <p>\n         To improve the security of your CodeGuru Reviewer API calls, you can establish a private connection between your VPC and CodeGuru Reviewer by \n         creating an <i>interface VPC endpoint</i>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/vpc-interface-endpoints.html\">CodeGuru Reviewer and interface \n            VPC endpoints (Amazon Web Services PrivateLink)</a> in the <i>Amazon CodeGuru Reviewer User Guide</i>.\n      </p>",
                 "smithy.api#title": "Amazon CodeGuru Reviewer"
             }
         },
@@ -162,7 +162,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>\n         Use to associate an AWS CodeCommit repository or a repostory managed by \n         AWS CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a \n        repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides \n        automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html\">Recommendations in \n            Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> \n        </p>\n      \n         <p>If you associate a CodeCommit or S3 repository, it must be in the same \n         AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.</p>\n      \n         <p>Bitbucket and GitHub Enterprise Server repositories are managed by AWS CodeStar\n         Connections to connect to CodeGuru Reviewer. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html\">Associate a repository</a> in\n         the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n      \n         <note>\n            <p>\n            You cannot use the CodeGuru Reviewer SDK or the AWS CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate \n            a GitHub repository, use the console. For more information, see \n            <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html\">Getting \n            started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>\n            </p>\n         </note>",
+                "smithy.api#documentation": "<p>\n         Use to associate an Amazon Web Services CodeCommit repository or a repostory managed by \n         Amazon Web Services CodeStar Connections with Amazon CodeGuru Reviewer. When you associate a \n        repository, CodeGuru Reviewer reviews source code changes in the repository's pull requests and provides \n        automatic recommendations. You can view recommendations using the CodeGuru Reviewer console. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/recommendations.html\">Recommendations in \n            Amazon CodeGuru Reviewer</a> in the <i>Amazon CodeGuru Reviewer User Guide.</i> \n        </p>\n      \n         <p>If you associate a CodeCommit or S3 repository, it must be in the same \n         Amazon Web Services Region and Amazon Web Services account where its CodeGuru Reviewer code reviews are configured.</p>\n      \n         <p>Bitbucket and GitHub Enterprise Server repositories are managed by Amazon Web Services CodeStar\n         Connections to connect to CodeGuru Reviewer. For more information, see <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-associate-repository.html\">Associate a repository</a> in\n         the <i>Amazon CodeGuru Reviewer User Guide.</i>\n         </p>\n      \n         <note>\n            <p>\n            You cannot use the CodeGuru Reviewer SDK or the Amazon Web Services CLI to associate a GitHub repository with Amazon CodeGuru Reviewer. To associate \n            a GitHub repository, use the console. For more information, see \n            <a href=\"https://docs.aws.amazon.com/codeguru/latest/reviewer-ug/getting-started-with-guru.html\">Getting \n            started with CodeGuru Reviewer</a> in the <i>CodeGuru Reviewer User Guide.</i>\n            </p>\n         </note>",
                 "smithy.api#http": {
                     "method": "POST",
                     "uri": "/associations",
@@ -196,7 +196,7 @@
                 "KMSKeyDetails": {
                     "target": "com.amazonaws.codegurureviewer#KMSKeyDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>KMSKeyDetails</code> object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for this repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the AWS KMS key that \n            is associated with this respository association.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A <code>KMSKeyDetails</code> object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for this repository association. It is either owned by Amazon Web Services \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the Amazon Web Services KMS key that \n            is associated with this respository association.</p>\n            </li>\n         </ul>"
                     }
                 }
             }
@@ -315,13 +315,13 @@
                 "Name": {
                     "target": "com.amazonaws.codegurureviewer#Name",
                     "traits": {
-                        "smithy.api#documentation": "<p>The name of the AWS CodeCommit repository. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName\">repositoryName</a> \n         in the <i>AWS CodeCommit API Reference</i>.</p>",
+                        "smithy.api#documentation": "<p>The name of the Amazon Web Services CodeCommit repository. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codecommit/latest/APIReference/API_GetRepository.html#CodeCommit-GetRepository-request-repositoryName\">repositoryName</a> \n         in the <i>Amazon Web Services CodeCommit API Reference</i>.</p>",
                         "smithy.api#required": {}
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Information about an AWS CodeCommit repository. The CodeCommit repository must be in the same \n      AWS Region and AWS account where its CodeGuru Reviewer code reviews are configured.</p>"
+                "smithy.api#documentation": "<p>Information about an Amazon Web Services CodeCommit repository. The CodeCommit repository must be in the same \n      Amazon Web Services Region and Amazon Web Services account where its CodeGuru Reviewer code reviews are configured.</p>"
             }
         },
         "com.amazonaws.codegurureviewer#CodeReview": {
@@ -348,7 +348,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or Amazon Web Services account ID.</p>"
                     }
                 },
                 "ProviderType": {
@@ -462,7 +462,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or Amazon Web Services account ID.</p>"
                     }
                 },
                 "ProviderType": {
@@ -637,7 +637,7 @@
                 "Name": {
                     "target": "com.amazonaws.codegurureviewer#CodeReviewName",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The name of the code review. The name of each code review in your AWS account must be unique.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The name of the code review. The name of each code review in your Amazon Web Services account must be unique.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
@@ -814,7 +814,7 @@
                 "UserId": {
                     "target": "com.amazonaws.codegurureviewer#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         Optional parameter to describe the feedback for a given user. If this is not supplied, it defaults to the user making the request.\n      </p>\n         <p>\n         The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For \n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">\n            Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         Optional parameter to describe the feedback for a given user. If this is not supplied, it defaults to the user making the request.\n      </p>\n         <p>\n         The <code>UserId</code> is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For \n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">\n            Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.\n      </p>",
                         "smithy.api#httpQuery": "UserId"
                     }
                 }
@@ -1117,18 +1117,18 @@
                 "KMSKeyId": {
                     "target": "com.amazonaws.codegurureviewer#KMSKeyId",
                     "traits": {
-                        "smithy.api#documentation": "<p>The ID of the AWS KMS key that is associated with a respository association.</p>"
+                        "smithy.api#documentation": "<p>The ID of the Amazon Web Services KMS key that is associated with a respository association.</p>"
                     }
                 },
                 "EncryptionOption": {
                     "target": "com.amazonaws.codegurureviewer#EncryptionOption",
                     "traits": {
-                        "smithy.api#documentation": "<p>The encryption option for a repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>"
+                        "smithy.api#documentation": "<p>The encryption option for a repository association. It is either owned by Amazon Web Services \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>An object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for a repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the AWS KMS key that \n            is associated with a respository association.</p>\n            </li>\n         </ul>"
+                "smithy.api#documentation": "<p>An object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for a repository association. It is either owned by Amazon Web Services \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the Amazon Web Services KMS key that \n            is associated with a respository association.</p>\n            </li>\n         </ul>"
             }
         },
         "com.amazonaws.codegurureviewer#KMSKeyId": {
@@ -1325,7 +1325,7 @@
                 "UserIds": {
                     "target": "com.amazonaws.codegurureviewer#UserIds",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         An AWS user's account ID or Amazon Resource Name (ARN). Use this ID to query the recommendation feedback for a code review from that user.\n      </p>\n         <p>\n         The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For \n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">\n            Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         An Amazon Web Services user's account ID or Amazon Resource Name (ARN). Use this ID to query the recommendation feedback for a code review from that user.\n      </p>\n         <p>\n         The <code>UserId</code> is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For \n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">\n            Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.\n      </p>",
                         "smithy.api#httpQuery": "UserIds"
                     }
                 },
@@ -1498,7 +1498,7 @@
                 "Owners": {
                     "target": "com.amazonaws.codegurureviewer#Owners",
                     "traits": {
-                        "smithy.api#documentation": "<p>List of owners to use as a filter. \n        For AWS CodeCommit, it is the name of the CodeCommit account that was\n        used to associate the repository. For other repository source providers, such as Bitbucket and GitHub Enterprise Server, this is name of the account \n        that was used to associate the repository. </p>",
+                        "smithy.api#documentation": "<p>List of owners to use as a filter. \n        For Amazon Web Services CodeCommit, it is the name of the CodeCommit account that was\n        used to associate the repository. For other repository source providers, such as Bitbucket and GitHub Enterprise Server, this is name of the account \n        that was used to associate the repository. </p>",
                         "smithy.api#httpQuery": "Owner"
                     }
                 },
@@ -1587,6 +1587,16 @@
                 }
             }
         },
+        "com.amazonaws.codegurureviewer#LongDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 1000
+                },
+                "smithy.api#pattern": "^\\S(.*\\S)?$"
+            }
+        },
         "com.amazonaws.codegurureviewer#MaxResults": {
             "type": "integer",
             "traits": {
@@ -1609,7 +1619,7 @@
                 "MeteredLinesOfCodeCount": {
                     "target": "com.amazonaws.codegurureviewer#MeteredLinesOfCodeCount",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n        Lines of code metered in the code review. For the initial code review pull request and all subsequent revisions, \n        this includes all lines of code in the files added to the pull request. In subsequent revisions, for files that already \n        existed in the pull request, this includes only the changed lines of code. In both cases, this does not include non-code lines such as comments \n        and import statements. For example, if you submit a pull request containing 5 files, each with 500 lines of code, and in \n        a subsequent revision you added a new file with 200 lines of code, and also modified a total of 25 lines across the initial 5 files, \n        <code>MeteredLinesOfCodeCount</code> includes the first 5 files (5 * 500 = 2,500 lines), the new file (200 lines) and the 25 changed lines of\n         code for a total of 2,725 lines of code.\n      </p>"
+                        "smithy.api#documentation": "<p>\n            <code>MeteredLinesOfCode</code> is the number of lines of code in the repository where the code review happened. \n         This does not include non-code lines such as comments and blank lines.\n      </p>"
                     }
                 },
                 "FindingsCount": {
@@ -1891,6 +1901,10 @@
                     {
                         "value": "SecurityIssues",
                         "name": "SECURITY_ISSUES"
+                    },
+                    {
+                        "value": "CodeInconsistencies",
+                        "name": "CODE_INCONSISTENCIES"
                     }
                 ]
             }
@@ -1919,7 +1933,7 @@
                 "UserId": {
                     "target": "com.amazonaws.codegurureviewer#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The ID of the user that made the API call.\n      </p>\n         <p>\n         The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For \n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">\n            Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The ID of the user that made the API call.\n      </p>\n         <p>\n         The <code>UserId</code> is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For \n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">\n            Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.\n      </p>"
                     }
                 },
                 "CreatedTimeStamp": {
@@ -1963,7 +1977,7 @@
                 "UserId": {
                     "target": "com.amazonaws.codegurureviewer#UserId",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The ID of the user that gave the feedback.\n      </p>\n         <p>\n         The <code>UserId</code> is an IAM principal that can be specified as an AWS account ID or an Amazon Resource Name (ARN). For \n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">\n            Specifying a Principal</a> in the <i>AWS Identity and Access Management User Guide</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The ID of the user that gave the feedback.\n      </p>\n         <p>\n         The <code>UserId</code> is an IAM principal that can be specified as an Amazon Web Services account ID or an Amazon Resource Name (ARN). For \n         more information, see <a href=\"https://docs.aws.amazon.com/IAM/latest/UserGuide/reference_policies_elements_principal.html#Principal_specifying\">\n            Specifying a Principal</a> in the <i>Amazon Web Services Identity and Access Management User Guide</i>.\n      </p>"
                     }
                 }
             },
@@ -2036,6 +2050,18 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The type of a recommendation.</p>"
                     }
+                },
+                "RuleMetadata": {
+                    "target": "com.amazonaws.codegurureviewer#RuleMetadata",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and a \n         short and long description. CodeGuru Reviewer uses rules to analyze code. A rule's recommendation is \n         included in analysis results if code is detected that violates the rule.</p>"
+                    }
+                },
+                "Severity": {
+                    "target": "com.amazonaws.codegurureviewer#Severity",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The severity of the issue in the code that generated this recommendation.</p>"
+                    }
                 }
             },
             "traits": {
@@ -2048,7 +2074,7 @@
                 "CodeCommit": {
                     "target": "com.amazonaws.codegurureviewer#CodeCommitRepository",
                     "traits": {
-                        "smithy.api#documentation": "<p>Information about an AWS CodeCommit repository.</p>"
+                        "smithy.api#documentation": "<p>Information about an Amazon Web Services CodeCommit repository.</p>"
                     }
                 },
                 "Bitbucket": {
@@ -2068,7 +2094,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n         Information about an associated AWS CodeCommit repository or an associated repository that is managed \n         by AWS CodeStar Connections (for example, Bitbucket). This <code>Repository</code> object \n         is not used if your source code is in an associated GitHub repository.\n      </p>"
+                "smithy.api#documentation": "<p>\n         Information about an associated Amazon Web Services CodeCommit repository or an associated repository that is managed \n         by Amazon Web Services CodeStar Connections (for example, Bitbucket). This <code>Repository</code> object \n         is not used if your source code is in an associated GitHub repository.\n      </p>"
             }
         },
         "com.amazonaws.codegurureviewer#RepositoryAnalysis": {
@@ -2106,7 +2132,7 @@
                 "ConnectionArn": {
                     "target": "com.amazonaws.codegurureviewer#ConnectionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is \n         <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html\">\n               <code>Connection</code>\n            </a> in \n         the <i>AWS CodeStar Connections API Reference</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is \n         <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html\">\n               <code>Connection</code>\n            </a> in \n         the <i>Amazon Web Services CodeStar Connections API Reference</i>.\n      </p>"
                     }
                 },
                 "Name": {
@@ -2118,7 +2144,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or Amazon Web Services account ID.</p>"
                     }
                 },
                 "ProviderType": {
@@ -2154,7 +2180,7 @@
                 "KMSKeyDetails": {
                     "target": "com.amazonaws.codegurureviewer#KMSKeyDetails",
                     "traits": {
-                        "smithy.api#documentation": "<p>A <code>KMSKeyDetails</code> object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for this repository association. It is either owned by AWS \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the AWS KMS key that \n            is associated with this respository association.</p>\n            </li>\n         </ul>"
+                        "smithy.api#documentation": "<p>A <code>KMSKeyDetails</code> object that contains:</p>\n         <ul>\n            <li>\n               <p>The encryption option for this repository association. It is either owned by Amazon Web Services \n            Key Management Service (KMS) (<code>AWS_OWNED_CMK</code>) or customer managed (<code>CUSTOMER_MANAGED_CMK</code>).</p>\n            </li>\n            <li>\n               <p>The ID of the Amazon Web Services KMS key that \n            is associated with this respository association.</p>\n            </li>\n         </ul>"
                     }
                 },
                 "S3RepositoryDetails": {
@@ -2222,7 +2248,7 @@
                 "ConnectionArn": {
                     "target": "com.amazonaws.codegurureviewer#ConnectionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is \n         <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html\">\n               <code>Connection</code>\n            </a> in \n         the <i>AWS CodeStar Connections API Reference</i>.\n      </p>"
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is \n         <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html\">\n               <code>Connection</code>\n            </a> in \n         the <i>Amazon Web Services CodeStar Connections API Reference</i>.\n      </p>"
                     }
                 },
                 "LastUpdatedTimeStamp": {
@@ -2246,7 +2272,7 @@
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>The owner of the repository. For an AWS CodeCommit repository, this is the AWS account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or AWS account ID.</p>"
+                        "smithy.api#documentation": "<p>The owner of the repository. For an Amazon Web Services CodeCommit repository, this is the Amazon Web Services account ID of the \n      account that owns the repository. For a GitHub, GitHub Enterprise Server, or Bitbucket repository, this is the username for the account that owns the repository.\n      For an S3 repository, it can be the username or Amazon Web Services account ID.</p>"
                     }
                 },
                 "ProviderType": {
@@ -2357,6 +2383,86 @@
                 "smithy.api#httpError": 404
             }
         },
+        "com.amazonaws.codegurureviewer#RuleId": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 64
+                },
+                "smithy.api#pattern": "^\\S+\\/[a-zA-Z0-9-]+@v\\d+\\.\\d+$"
+            }
+        },
+        "com.amazonaws.codegurureviewer#RuleMetadata": {
+            "type": "structure",
+            "members": {
+                "RuleId": {
+                    "target": "com.amazonaws.codegurureviewer#RuleId",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The ID of the rule.</p>"
+                    }
+                },
+                "RuleName": {
+                    "target": "com.amazonaws.codegurureviewer#RuleName",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The name of the rule.</p>"
+                    }
+                },
+                "ShortDescription": {
+                    "target": "com.amazonaws.codegurureviewer#ShortDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A short description of the rule.</p>"
+                    }
+                },
+                "LongDescription": {
+                    "target": "com.amazonaws.codegurureviewer#LongDescription",
+                    "traits": {
+                        "smithy.api#documentation": "<p>A long description of the rule.</p>"
+                    }
+                },
+                "RuleTags": {
+                    "target": "com.amazonaws.codegurureviewer#RuleTags",
+                    "traits": {
+                        "smithy.api#documentation": "<p>Tags that are associated with the rule.</p>"
+                    }
+                }
+            },
+            "traits": {
+                "smithy.api#documentation": "<p>Metadata about a rule. Rule metadata includes an ID, a name, a list of tags, and a \n         short and long description. CodeGuru Reviewer uses rules to analyze code. A rule's recommendation is \n         included in analysis results if code is detected that violates the rule.</p>"
+            }
+        },
+        "com.amazonaws.codegurureviewer#RuleName": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 100
+                },
+                "smithy.api#pattern": "^\\S(.*\\S)?$"
+            }
+        },
+        "com.amazonaws.codegurureviewer#RuleTag": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 50
+                },
+                "smithy.api#pattern": "^\\S(.*\\S)?$"
+            }
+        },
+        "com.amazonaws.codegurureviewer#RuleTags": {
+            "type": "list",
+            "member": {
+                "target": "com.amazonaws.codegurureviewer#RuleTag"
+            },
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 20
+                }
+            }
+        },
         "com.amazonaws.codegurureviewer#S3BucketName": {
             "type": "string",
             "traits": {
@@ -2428,6 +2534,43 @@
             },
             "traits": {
                 "smithy.api#documentation": "<p>\n         Specifies the name of an S3 bucket and a <code>CodeArtifacts</code> object that contains the S3 \n         object keys for a source code .zip file and for a build artifacts .zip file that contains .jar or .class files.\n      </p>"
+            }
+        },
+        "com.amazonaws.codegurureviewer#Severity": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "Info",
+                        "name": "INFO"
+                    },
+                    {
+                        "value": "Low",
+                        "name": "LOW"
+                    },
+                    {
+                        "value": "Medium",
+                        "name": "MEDIUM"
+                    },
+                    {
+                        "value": "High",
+                        "name": "HIGH"
+                    },
+                    {
+                        "value": "Critical",
+                        "name": "CRITICAL"
+                    }
+                ]
+            }
+        },
+        "com.amazonaws.codegurureviewer#ShortDescription": {
+            "type": "string",
+            "traits": {
+                "smithy.api#length": {
+                    "min": 1,
+                    "max": 200
+                },
+                "smithy.api#pattern": "^\\S(.*\\S)?$"
             }
         },
         "com.amazonaws.codegurureviewer#SourceCodeArtifactsObjectKey": {
@@ -2603,14 +2746,14 @@
                 "ConnectionArn": {
                     "target": "com.amazonaws.codegurureviewer#ConnectionArn",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of an AWS CodeStar Connections connection. Its format is \n         <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html\">\n               <code>Connection</code>\n            </a> in \n         the <i>AWS CodeStar Connections API Reference</i>.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The Amazon Resource Name (ARN) of an Amazon Web Services CodeStar Connections connection. Its format is \n         <code>arn:aws:codestar-connections:region-id:aws-account_id:connection/connection-id</code>. For more information, see \n         <a href=\"https://docs.aws.amazon.com/codestar-connections/latest/APIReference/API_Connection.html\">\n               <code>Connection</code>\n            </a> in \n         the <i>Amazon Web Services CodeStar Connections API Reference</i>.\n      </p>",
                         "smithy.api#required": {}
                     }
                 },
                 "Owner": {
                     "target": "com.amazonaws.codegurureviewer#Owner",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n         The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, \n         this is the username for the account that owns the repository. For an S3 repository, \n         this can be the username or AWS account ID.\n      </p>",
+                        "smithy.api#documentation": "<p>\n         The owner of the repository. For a GitHub, GitHub Enterprise, or Bitbucket repository, \n         this is the username for the account that owns the repository. For an S3 repository, \n         this can be the username or Amazon Web Services account ID.\n      </p>",
                         "smithy.api#required": {}
                     }
                 }

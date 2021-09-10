@@ -29,7 +29,7 @@ func (c *Client) GetResourcePolicies(ctx context.Context, params *GetResourcePol
 
 type GetResourcePoliciesInput struct {
 
-	// The Amazon Resource Names (ARN) of the resources.
+	// The Amazon Resource Names (ARNs) of the resources.
 	//
 	// This member is required.
 	ResourceArns []string

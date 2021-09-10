@@ -11,7 +11,7 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Gets the contents of an AWS RAM permission in JSON format.
+// Gets the contents of an RAM permission in JSON format.
 func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, optFns ...func(*Options)) (*GetPermissionOutput, error) {
 	if params == nil {
 		params = &GetPermissionInput{}
@@ -29,7 +29,7 @@ func (c *Client) GetPermission(ctx context.Context, params *GetPermissionInput, 
 
 type GetPermissionInput struct {
 
-	// The ARN of the permission.
+	// The Amazon Resource Name (ARN) of the permission.
 	//
 	// This member is required.
 	PermissionArn *string

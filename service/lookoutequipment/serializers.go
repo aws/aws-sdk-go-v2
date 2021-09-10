@@ -1420,6 +1420,11 @@ func awsAwsjson10_serializeOpDocumentCreateModelInput(v *CreateModelInput, value
 		ok.String(*v.ModelName)
 	}
 
+	if v.OffCondition != nil {
+		ok := object.Key("OffCondition")
+		ok.String(*v.OffCondition)
+	}
+
 	if v.RoleArn != nil {
 		ok := object.Key("RoleArn")
 		ok.String(*v.RoleArn)

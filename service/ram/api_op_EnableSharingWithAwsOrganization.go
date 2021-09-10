@@ -10,8 +10,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Enables resource sharing within your AWS Organization. The caller must be the
-// master account for the AWS Organization.
+// Enables resource sharing within your organization in Organizations. The caller
+// must be the master account for the organization.
 func (c *Client) EnableSharingWithAwsOrganization(ctx context.Context, params *EnableSharingWithAwsOrganizationInput, optFns ...func(*Options)) (*EnableSharingWithAwsOrganizationOutput, error) {
 	if params == nil {
 		params = &EnableSharingWithAwsOrganizationInput{}

@@ -5,6 +5,7 @@
     },
     "files": [
         "api_client.go",
+        "api_op_CreateOrder.go",
         "api_op_CreateOutpost.go",
         "api_op_DeleteOutpost.go",
         "api_op_DeleteSite.go",

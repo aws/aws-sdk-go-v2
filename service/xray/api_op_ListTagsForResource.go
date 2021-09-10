@@ -11,8 +11,8 @@ import (
 	smithyhttp "github.com/aws/smithy-go/transport/http"
 )
 
-// Returns a list of tags that are applied to the specified AWS X-Ray group or
-// sampling rule.
+// Returns a list of tags that are applied to the specified Amazon Web Services
+// X-Ray group or sampling rule.
 func (c *Client) ListTagsForResource(ctx context.Context, params *ListTagsForResourceInput, optFns ...func(*Options)) (*ListTagsForResourceOutput, error) {
 	if params == nil {
 		params = &ListTagsForResourceInput{}

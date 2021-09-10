@@ -829,7 +829,7 @@
                 "AutoMLOverrideStrategy": {
                     "target": "com.amazonaws.forecast#AutoMLOverrideStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>Used to overide the default AutoML strategy, which is to optimize predictor accuracy.\n            To apply an AutoML strategy that minimizes training time, use\n                <code>LatencyOptimized</code>.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
+                        "smithy.api#documentation": "<note>\n            <p> The <code>LatencyOptimized</code> AutoML override strategy is only available in private beta.\n                Contact AWS Support or your account manager to learn more about access privileges.\n            </p>\n        </note>\n        <p>Used to overide the default AutoML strategy, which is to optimize predictor accuracy.\n            To apply an AutoML strategy that minimizes training time, use\n                <code>LatencyOptimized</code>.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
                     }
                 },
                 "PerformHPO": {
@@ -880,6 +880,12 @@
                     "target": "com.amazonaws.forecast#Tags",
                     "traits": {
                         "smithy.api#documentation": "<p>The optional metadata that you apply to the predictor to help you categorize and organize them. Each tag consists of a key and an optional value, both of which you define.</p>\n         <p>The following basic restrictions apply to tags:</p>\n         <ul>\n            <li>\n               <p>Maximum number of tags per resource - 50.</p>\n            </li>\n            <li>\n               <p>For each resource, each tag key must be unique, and each tag key can have only one value.</p>\n            </li>\n            <li>\n               <p>Maximum key length - 128 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>Maximum value length - 256 Unicode characters in UTF-8.</p>\n            </li>\n            <li>\n               <p>If your tagging schema is used across multiple services and resources, remember that other services may have restrictions on allowed characters. Generally allowed characters are: letters, numbers, and spaces representable in UTF-8, and the following characters: + - = . _ : / @.</p>\n            </li>\n            <li>\n               <p>Tag keys and values are case sensitive.</p>\n            </li>\n            <li>\n               <p>Do not use <code>aws:</code>, <code>AWS:</code>, or any upper or lowercase combination of such as a prefix for keys as it is reserved for AWS use. You cannot edit or delete tag keys with this prefix. Values can have this prefix. If a tag value has <code>aws</code> as its prefix but the key does not, then Forecast considers it to be a user tag and will count against the limit of 50 tags. Tags with only the key prefix of <code>aws</code> do not count against your tags per resource limit.</p>\n            </li>\n         </ul>"
+                    }
+                },
+                "OptimizationMetric": {
+                    "target": "com.amazonaws.forecast#OptimizationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
                     }
                 }
             }
@@ -2000,7 +2006,7 @@
                 "AutoMLOverrideStrategy": {
                     "target": "com.amazonaws.forecast#AutoMLOverrideStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>\n            is specified, the AutoML strategy optimizes predictor accuracy.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
+                        "smithy.api#documentation": "<note>\n            <p> The <code>LatencyOptimized</code> AutoML override strategy is only available in private beta.\n                Contact AWS Support or your account manager to learn more about access privileges.\n            </p>\n        </note>\n        <p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>\n            is specified, the AutoML strategy optimizes predictor accuracy.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
                     }
                 },
                 "PerformHPO": {
@@ -2092,6 +2098,12 @@
                     "traits": {
                         "smithy.api#documentation": "<p>The last time the resource was modified. The timestamp depends on the status of the job:</p>\n         <ul>\n            <li>\n               <p>\n                  <code>CREATE_PENDING</code> - The <code>CreationTime</code>.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_IN_PROGRESS</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPING</code> - The current timestamp.</p>\n            </li>\n            <li>\n               <p>\n                  <code>CREATE_STOPPED</code> - When the job stopped.</p>\n            </li>\n            <li>\n               <p>\n                  <code>ACTIVE</code> or <code>CREATE_FAILED</code> - When the job finished or\n          failed.</p>\n            </li>\n         </ul>"
                     }
+                },
+                "OptimizationMetric": {
+                    "target": "com.amazonaws.forecast#OptimizationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
+                    }
                 }
             }
         },
@@ -2167,24 +2179,36 @@
                 "ForecastType": {
                     "target": "com.amazonaws.forecast#ForecastType",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The Forecast type used to compute WAPE and RMSE.\n    </p>"
+                        "smithy.api#documentation": "<p> The Forecast type used to compute WAPE, MAPE, MASE, and RMSE. </p>"
                     }
                 },
                 "WAPE": {
                     "target": "com.amazonaws.forecast#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The weighted absolute percentage error (WAPE).\n    </p>"
+                        "smithy.api#documentation": "<p> The weighted absolute percentage error (WAPE). </p>"
                     }
                 },
                 "RMSE": {
                     "target": "com.amazonaws.forecast#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      The root-mean-square error (RMSE).\n    </p>"
+                        "smithy.api#documentation": "<p> The root-mean-square error (RMSE). </p>"
+                    }
+                },
+                "MASE": {
+                    "target": "com.amazonaws.forecast#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Mean Absolute Scaled Error (MASE)</p>"
+                    }
+                },
+                "MAPE": {
+                    "target": "com.amazonaws.forecast#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The Mean Absolute Percentage Error (MAPE)</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>\n      Provides detailed error metrics to evaluate the performance of a predictor. This object is\n      part of the <a>Metrics</a> object.\n    </p>"
+                "smithy.api#documentation": "<p> Provides detailed error metrics to evaluate the performance of a predictor. This object\n      is part of the <a>Metrics</a> object. </p>"
             }
         },
         "com.amazonaws.forecast#ErrorMetrics": {
@@ -2225,12 +2249,12 @@
                 "TestWindows": {
                     "target": "com.amazonaws.forecast#TestWindows",
                     "traits": {
-                        "smithy.api#documentation": "<p>The array of test windows used for evaluating the algorithm. The\n      <code>NumberOfBacktestWindows</code> from the <a>EvaluationParameters</a>\n      object determines the number of windows in the array.</p>"
+                        "smithy.api#documentation": "<p>The array of test windows used for evaluating the algorithm. The\n        <code>NumberOfBacktestWindows</code> from the <a>EvaluationParameters</a> object\n      determines the number of windows in the array.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The results of evaluating an algorithm. Returned as part of the\n      <a>GetAccuracyMetrics</a> response.</p>"
+                "smithy.api#documentation": "<p>The results of evaluating an algorithm. Returned as part of the <a>GetAccuracyMetrics</a> response.</p>"
             }
         },
         "com.amazonaws.forecast#EvaluationType": {
@@ -2610,7 +2634,7 @@
                 }
             ],
             "traits": {
-                "smithy.api#documentation": "<p>Provides metrics on the accuracy of the models that were trained by the <a>CreatePredictor</a> operation. Use metrics to see how well the model performed and\n      to decide whether to use the predictor to generate a forecast. For more information, see\n        <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/metrics.html\">Predictor\n        Metrics</a>.</p>\n         <p>This operation generates metrics for each backtest window that was evaluated. The number of backtest windows\n      (<code>NumberOfBacktestWindows</code>) is specified using the\n      <a>EvaluationParameters</a> object, which is optionally\n      included in the <code>CreatePredictor</code> request. If\n      <code>NumberOfBacktestWindows</code> isn't specified, the number defaults to one.</p>\n         <p>The parameters of the <code>filling</code> method determine which items contribute to\n      the metrics. If you want all items to contribute, specify <code>zero</code>.\n      If you want only those items that have complete data in the range being evaluated to\n      contribute, specify <code>nan</code>.\n      For more information, see <a>FeaturizationMethod</a>.</p>\n      \n         <note>\n            <p>Before you can get accuracy metrics, the <code>Status</code> of the predictor must be\n        <code>ACTIVE</code>, signifying that training has completed.\n        To get the status, use the <a>DescribePredictor</a> operation.</p>\n         </note>",
+                "smithy.api#documentation": "<p>Provides metrics on the accuracy of the models that were trained by the <a>CreatePredictor</a> operation. Use metrics to see how well the model performed and\n      to decide whether to use the predictor to generate a forecast. For more information, see\n        <a href=\"https://docs.aws.amazon.com/forecast/latest/dg/metrics.html\">Predictor\n        Metrics</a>.</p>\n         <p>This operation generates metrics for each backtest window that was evaluated. The number\n      of backtest windows (<code>NumberOfBacktestWindows</code>) is specified using the <a>EvaluationParameters</a> object, which is optionally included in the\n        <code>CreatePredictor</code> request. If <code>NumberOfBacktestWindows</code> isn't\n      specified, the number defaults to one.</p>\n         <p>The parameters of the <code>filling</code> method determine which items contribute to the\n      metrics. If you want all items to contribute, specify <code>zero</code>. If you want only\n      those items that have complete data in the range being evaluated to contribute, specify\n        <code>nan</code>. For more information, see <a>FeaturizationMethod</a>.</p>\n      \n         <note>\n            <p>Before you can get accuracy metrics, the <code>Status</code> of the predictor must be\n          <code>ACTIVE</code>, signifying that training has completed. To get the status, use the\n          <a>DescribePredictor</a> operation.</p>\n         </note>",
                 "smithy.api#idempotent": {}
             }
         },
@@ -2638,7 +2662,13 @@
                 "AutoMLOverrideStrategy": {
                     "target": "com.amazonaws.forecast#AutoMLOverrideStrategy",
                     "traits": {
-                        "smithy.api#documentation": "<p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>\n            is specified, the AutoML strategy optimizes predictor accuracy.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
+                        "smithy.api#documentation": "<note>\n            <p> The <code>LatencyOptimized</code> AutoML override strategy is only available in private beta.\n                Contact AWS Support or your account manager to learn more about access privileges.\n            </p>\n        </note>\n        <p>The AutoML strategy used to train the predictor. Unless <code>LatencyOptimized</code>\n            is specified, the AutoML strategy optimizes predictor accuracy.</p>\n        <p>This parameter is only valid for predictors trained using AutoML.</p>"
+                    }
+                },
+                "OptimizationMetric": {
+                    "target": "com.amazonaws.forecast#OptimizationMetric",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The accuracy metric used to optimize the predictor.</p>"
                     }
                 }
             }
@@ -3314,12 +3344,18 @@
                 "ErrorMetrics": {
                     "target": "com.amazonaws.forecast#ErrorMetrics",
                     "traits": {
-                        "smithy.api#documentation": "<p>\n      Provides detailed error metrics on forecast type, root-mean square-error (RMSE), and weighted\n      average percentage error (WAPE).\n    </p>"
+                        "smithy.api#documentation": "<p> Provides detailed error metrics for each forecast type. Metrics include root-mean\n      square-error (RMSE), mean absolute percentage error (MAPE), mean absolute scaled error (MASE),\n      and weighted average percentage error (WAPE). </p>"
+                    }
+                },
+                "AverageWeightedQuantileLoss": {
+                    "target": "com.amazonaws.forecast#Double",
+                    "traits": {
+                        "smithy.api#documentation": "<p>The average value of all weighted quantile losses.</p>"
                     }
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>Provides metrics that are used to evaluate the performance of a predictor. This object\n      is part of the <a>WindowSummary</a> object.</p>"
+                "smithy.api#documentation": "<p>Provides metrics that are used to evaluate the performance of a predictor. This object is\n      part of the <a>WindowSummary</a> object.</p>"
             }
         },
         "com.amazonaws.forecast#Name": {
@@ -3339,6 +3375,33 @@
                     "min": 1,
                     "max": 3000
                 }
+            }
+        },
+        "com.amazonaws.forecast#OptimizationMetric": {
+            "type": "string",
+            "traits": {
+                "smithy.api#enum": [
+                    {
+                        "value": "WAPE",
+                        "name": "WAPE"
+                    },
+                    {
+                        "value": "RMSE",
+                        "name": "RMSE"
+                    },
+                    {
+                        "value": "AverageWeightedQuantileLoss",
+                        "name": "AverageWeightedQuantileLoss"
+                    },
+                    {
+                        "value": "MASE",
+                        "name": "MASE"
+                    },
+                    {
+                        "value": "MAPE",
+                        "name": "MAPE"
+                    }
+                ]
             }
         },
         "com.amazonaws.forecast#ParameterKey": {
@@ -4173,7 +4236,7 @@
                 "Quantile": {
                     "target": "com.amazonaws.forecast#Double",
                     "traits": {
-                        "smithy.api#documentation": "<p>The quantile. Quantiles divide a probability distribution into regions of equal\n      probability. For example, if the distribution was divided into 5 regions of equal\n      probability, the quantiles would be 0.2, 0.4, 0.6, and 0.8.</p>"
+                        "smithy.api#documentation": "<p>The quantile. Quantiles divide a probability distribution into regions of equal\n      probability. For example, if the distribution was divided into 5 regions of equal probability,\n      the quantiles would be 0.2, 0.4, 0.6, and 0.8.</p>"
                     }
                 },
                 "LossValue": {
@@ -4184,7 +4247,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The weighted loss value for a quantile. This object is part of the\n      <a>Metrics</a> object.</p>"
+                "smithy.api#documentation": "<p>The weighted loss value for a quantile. This object is part of the <a>Metrics</a> object.</p>"
             }
         },
         "com.amazonaws.forecast#WeightedQuantileLosses": {
@@ -4228,7 +4291,7 @@
                 }
             },
             "traits": {
-                "smithy.api#documentation": "<p>The metrics for a time range within the evaluation portion of a dataset. This object\n      is part of the <a>EvaluationResult</a> object.</p>\n         <p>The <code>TestWindowStart</code> and <code>TestWindowEnd</code> parameters are\n      determined by the <code>BackTestWindowOffset</code> parameter of the\n      <a>EvaluationParameters</a> object.</p>"
+                "smithy.api#documentation": "<p>The metrics for a time range within the evaluation portion of a dataset. This object is\n      part of the <a>EvaluationResult</a> object.</p>\n         <p>The <code>TestWindowStart</code> and <code>TestWindowEnd</code> parameters are determined\n      by the <code>BackTestWindowOffset</code> parameter of the <a>EvaluationParameters</a> object.</p>"
             }
         }
     }
