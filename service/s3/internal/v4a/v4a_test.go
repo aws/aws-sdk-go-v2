@@ -122,7 +122,7 @@ func TestPresignHTTP(t *testing.T) {
 	query.Set("X-Amz-Expires", "18000")
 	req.URL.RawQuery = query.Encode()
 
-	signedUrl, _, err := signer.PresignHTTP(context.Background(), key, req, EmptyStringSHA256, "dynamodb", []string{"us-east-1"}, time.Unix(0, 0))
+	signedURL, _, err := signer.PresignHTTP(context.Background(), key, req, EmptyStringSHA256, "dynamodb", []string{"us-east-1"}, time.Unix(0, 0))
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}
@@ -134,7 +134,7 @@ func TestPresignHTTP(t *testing.T) {
 	expectedStrToSignHash := "d7ffbd2fab644384c056957e6ac38de4ae68246764b5f5df171b3824153b6397"
 	expectedTarget := "prefix.Operation"
 
-	signedReq, err := url.Parse(signedUrl)
+	signedReq, err := url.Parse(signedURL)
 	if err != nil {
 		t.Fatalf("expected no error, got %v", err)
 	}

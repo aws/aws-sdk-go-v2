@@ -94,10 +94,10 @@ func hasCredentialProvider(p CredentialsProvider) bool {
 // present, this provided middleware will be swapped. Otherwise the middleware will be added at the tail of the
 // finalize step.
 func RegisterSigningMiddleware(stack *middleware.Stack, signingMiddleware *SignHTTPRequestMiddleware) (err error) {
-	const signingId = "Signing"
-	_, present := stack.Finalize.Get(signingId)
+	const signedID = "Signing"
+	_, present := stack.Finalize.Get(signedID)
 	if present {
-		_, err = stack.Finalize.Swap(signingId, signingMiddleware)
+		_, err = stack.Finalize.Swap(signedID, signingMiddleware)
 	} else {
 		err = stack.Finalize.Add(signingMiddleware, middleware.After)
 	}

@@ -134,6 +134,8 @@ func (s *SymmetricCredentialAdaptor) retrieveFromSymmetricProvider(ctx context.C
 	return credentials, nil
 }
 
+// CredentialsProvider is the interface for a provider to retrieve credentials
+// to sign requests with.
 type CredentialsProvider interface {
 	RetrievePrivateKey(context.Context) (Credentials, error)
 }

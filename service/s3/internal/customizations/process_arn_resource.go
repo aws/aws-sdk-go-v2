@@ -413,8 +413,8 @@ func buildS3ObjectLambdaAccessPointRequest(ctx context.Context, options accesspo
 }
 
 func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspointOptions) (context.Context, error) {
-	const s3_global_label = "s3-global."
-	const accesspoint_label = "accesspoint."
+	const s3GlobalLabel = "s3-global."
+	const accesspointLabel = "accesspoint."
 
 	tv := options.resource
 	req := options.request
@@ -456,7 +456,7 @@ func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspoin
 		return ctx, fmt.Errorf("Error determining dns suffix from arn partition, %w", err)
 	}
 	// set url as per partition
-	endpoint.URL = scheme[0] + "://" + s3_global_label + dnsSuffix
+	endpoint.URL = scheme[0] + "://" + s3GlobalLabel + dnsSuffix
 
 	// assign resolved endpoint url to request url
 	req.URL, err = url.Parse(endpoint.URL)
@@ -465,7 +465,7 @@ func buildMultiRegionAccessPointsRequest(ctx context.Context, options accesspoin
 	}
 
 	// build access point host prefix
-	accessPointHostPrefix := tv.AccessPointName + "." + accesspoint_label
+	accessPointHostPrefix := tv.AccessPointName + "." + accesspointLabel
 
 	// add host prefix to url
 	req.URL.Host = accessPointHostPrefix + req.URL.Host

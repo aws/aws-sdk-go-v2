@@ -3,6 +3,7 @@ package customizations
 import (
 	"context"
 	"fmt"
+
 	"github.com/aws/aws-sdk-go-v2/aws"
 	v4 "github.com/aws/aws-sdk-go-v2/aws/signer/v4"
 	"github.com/aws/aws-sdk-go-v2/service/s3/internal/v4a"
@@ -110,10 +111,10 @@ func (s *SignHTTPRequestMiddleware) HandleFinalize(ctx context.Context, in middl
 // present, this provided middleware will be swapped. Otherwise the middleware will be added at the tail of the
 // finalize step.
 func RegisterSigningMiddleware(stack *middleware.Stack, signingMiddleware *SignHTTPRequestMiddleware) (err error) {
-	const signingId = "Signing"
-	_, present := stack.Finalize.Get(signingId)
+	const signedID = "Signing"
+	_, present := stack.Finalize.Get(signedID)
 	if present {
-		_, err = stack.Finalize.Swap(signingId, signingMiddleware)
+		_, err = stack.Finalize.Swap(signedID, signingMiddleware)
 	} else {
 		err = stack.Finalize.Add(signingMiddleware, middleware.After)
 	}
@@ -201,10 +202,10 @@ func (p *PresignHTTPRequestMiddleware) HandleFinalize(
 // present, this provided middleware will be swapped. Otherwise the middleware will be added at the tail of the
 // finalize step.
 func RegisterPreSigningMiddleware(stack *middleware.Stack, signingMiddleware *PresignHTTPRequestMiddleware) (err error) {
-	const signingId = "PresignHTTPRequest"
-	_, present := stack.Finalize.Get(signingId)
+	const signedID = "PresignHTTPRequest"
+	_, present := stack.Finalize.Get(signedID)
 	if present {
-		_, err = stack.Finalize.Swap(signingId, signingMiddleware)
+		_, err = stack.Finalize.Swap(signedID, signingMiddleware)
 	} else {
 		err = stack.Finalize.Add(signingMiddleware, middleware.After)
 	}
