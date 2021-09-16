@@ -22,8 +22,9 @@ group = "software.amazon.smithy.go"
 version = "0.1.0"
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+    toolchain {
+        languageVersion.set(JavaLanguageVersion.of(17))
+    }
 }
 
 tasks.withType<Test> {
@@ -35,10 +36,10 @@ dependencies {
     api("software.amazon.smithy:smithy-aws-iam-traits:[1.6.1,2.0.0[")
     api("software.amazon.smithy:smithy-aws-cloudformation-traits:[1.8.0,2.0.0[")
     api("software.amazon.smithy.go:smithy-go-codegen:0.1.0")
-    testCompile("org.junit.jupiter:junit-jupiter-api:5.4.0")
-    testRuntime("org.junit.jupiter:junit-jupiter-engine:5.4.0")
-    testCompile("org.junit.jupiter:junit-jupiter-params:5.4.0")
-    testCompile("org.hamcrest:hamcrest:2.1")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.4.0")
+    testImplementation("org.junit.jupiter:junit-jupiter-engine:5.4.0")
+    testCompileOnly("org.junit.jupiter:junit-jupiter-params:5.4.0")
+    testImplementation("org.hamcrest:hamcrest:2.1")
 }
 
 // == Code coverage ==
