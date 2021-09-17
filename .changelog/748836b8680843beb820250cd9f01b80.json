@@ -1,0 +1,8 @@
+{
+    "id": "748836b8-6808-43be-b820-250cd9f01b80",
+    "type": "documentation",
+    "description": "Updated API client and endpoints to latest revision.",
+    "modules": [
+        "service/cloudformation"
+    ]
+}
