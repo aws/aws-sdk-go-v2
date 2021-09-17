@@ -2737,6 +2737,21 @@ func validateAmazonElasticsearchParameters(v *types.AmazonElasticsearchParameter
 	}
 }
 
+func validateAmazonOpenSearchParameters(v *types.AmazonOpenSearchParameters) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "AmazonOpenSearchParameters"}
+	if v.Domain == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Domain"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateAnalysisSourceEntity(v *types.AnalysisSourceEntity) error {
 	if v == nil {
 		return nil
@@ -3149,6 +3164,11 @@ func validateDataSourceParameters(v types.DataSourceParameters) error {
 	case *types.DataSourceParametersMemberAmazonElasticsearchParameters:
 		if err := validateAmazonElasticsearchParameters(&uv.Value); err != nil {
 			invalidParams.AddNested("[AmazonElasticsearchParameters]", err.(smithy.InvalidParamsError))
+		}
+
+	case *types.DataSourceParametersMemberAmazonOpenSearchParameters:
+		if err := validateAmazonOpenSearchParameters(&uv.Value); err != nil {
+			invalidParams.AddNested("[AmazonOpenSearchParameters]", err.(smithy.InvalidParamsError))
 		}
 
 	case *types.DataSourceParametersMemberAuroraParameters:

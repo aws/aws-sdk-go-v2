@@ -72,6 +72,14 @@ type AmazonElasticsearchParameters struct {
 	noSmithyDocumentSerde
 }
 
+type AmazonOpenSearchParameters struct {
+
+	// This member is required.
+	Domain *string
+
+	noSmithyDocumentSerde
+}
+
 // Metadata structure for an analysis in Amazon QuickSight
 type Analysis struct {
 
@@ -942,6 +950,7 @@ type DataSourceErrorInfo struct {
 //  DataSourceParametersMemberSqlServerParameters
 //  DataSourceParametersMemberTeradataParameters
 //  DataSourceParametersMemberTwitterParameters
+//  DataSourceParametersMemberAmazonOpenSearchParameters
 type DataSourceParameters interface {
 	isDataSourceParameters()
 }
@@ -1125,6 +1134,14 @@ type DataSourceParametersMemberTwitterParameters struct {
 }
 
 func (*DataSourceParametersMemberTwitterParameters) isDataSourceParameters() {}
+
+type DataSourceParametersMemberAmazonOpenSearchParameters struct {
+	Value AmazonOpenSearchParameters
+
+	noSmithyDocumentSerde
+}
+
+func (*DataSourceParametersMemberAmazonOpenSearchParameters) isDataSourceParameters() {}
 
 // A date-time parameter.
 type DateTimeParameter struct {

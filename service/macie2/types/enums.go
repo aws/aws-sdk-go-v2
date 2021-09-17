@@ -486,6 +486,29 @@ func (MacieStatus) Values() []MacieStatus {
 	}
 }
 
+type ManagedDataIdentifierSelector string
+
+// Enum values for ManagedDataIdentifierSelector
+const (
+	ManagedDataIdentifierSelectorAll     ManagedDataIdentifierSelector = "ALL"
+	ManagedDataIdentifierSelectorExclude ManagedDataIdentifierSelector = "EXCLUDE"
+	ManagedDataIdentifierSelectorInclude ManagedDataIdentifierSelector = "INCLUDE"
+	ManagedDataIdentifierSelectorNone    ManagedDataIdentifierSelector = "NONE"
+)
+
+// Values returns all known values for ManagedDataIdentifierSelector. Note that
+// this can be expanded in the future, and so it is only as up to date as the
+// client. The ordering of this slice is not guaranteed to be stable across
+// updates.
+func (ManagedDataIdentifierSelector) Values() []ManagedDataIdentifierSelector {
+	return []ManagedDataIdentifierSelector{
+		"ALL",
+		"EXCLUDE",
+		"INCLUDE",
+		"NONE",
+	}
+}
+
 type OrderBy string
 
 // Enum values for OrderBy

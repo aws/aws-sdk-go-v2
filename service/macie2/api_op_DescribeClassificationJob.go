@@ -48,14 +48,19 @@ type DescribeClassificationJobOutput struct {
 	// created.
 	CreatedAt *time.Time
 
-	// The custom data identifiers that the job uses to analyze data.
+	// An array of unique identifiers, one for each custom data identifier that the job
+	// uses to analyze data. This value is null if the job uses only managed data
+	// identifiers to analyze data.
 	CustomDataIdentifierIds []string
 
 	// The custom description of the job.
 	Description *string
 
-	// Specifies whether the job is configured to analyze all existing, eligible
-	// objects immediately after it's created.
+	// For a recurring job, specifies whether you configured the job to analyze all
+	// existing, eligible objects immediately after the job was created (true). If you
+	// configured the job to analyze only those objects that were created or changed
+	// after the job was created and before the job's first scheduled run, this value
+	// is false. This value is also false for a one-time job.
 	InitialRun bool
 
 	// The Amazon Resource Name (ARN) of the job.
@@ -78,18 +83,18 @@ type DescribeClassificationJobOutput struct {
 	// the next scheduled run is pending. This value doesn't apply to one-time jobs.
 	//
 	// *
-	// PAUSED - Amazon Macie started running the job but additional processing would
-	// exceed the monthly sensitive data discovery quota for your account or one or
-	// more member accounts that the job analyzes data for.
+	// PAUSED - Macie started running the job but additional processing would exceed
+	// the monthly sensitive data discovery quota for your account or one or more
+	// member accounts that the job analyzes data for.
 	//
-	// * RUNNING - For a one-time
-	// job, the job is in progress. For a recurring job, a scheduled run is in
-	// progress.
+	// * RUNNING - For a one-time job,
+	// the job is in progress. For a recurring job, a scheduled run is in progress.
 	//
-	// * USER_PAUSED - You paused the job. If you paused the job while it
-	// had a status of RUNNING and you don't resume it within 30 days of pausing it,
-	// the job or job run will expire and be cancelled, depending on the job's type. To
-	// check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+	// *
+	// USER_PAUSED - You paused the job. If you paused the job while it had a status of
+	// RUNNING and you don't resume it within 30 days of pausing it, the job or job run
+	// will expire and be cancelled, depending on the job's type. To check the
+	// expiration date, refer to the UserPausedDetails.jobExpiresAt property.
 	JobStatus types.JobStatus
 
 	// The schedule for running the job. Possible values are:
@@ -112,6 +117,35 @@ type DescribeClassificationJobOutput struct {
 	// started.
 	LastRunTime *time.Time
 
+	// An array of unique identifiers, one for each managed data identifier that the
+	// job is explicitly configured to include (use) or exclude (not use) when it
+	// analyzes data. Inclusion or exclusion depends on the managed data identifier
+	// selection type specified for the job (managedDataIdentifierSelector). This value
+	// is null if the job's managed data identifier selection type is ALL or the job
+	// uses only custom data identifiers (customDataIdentifierIds) to analyze data.
+	ManagedDataIdentifierIds []string
+
+	// The selection type that determines which managed data identifiers the job uses
+	// to analyze data. Possible values are:
+	//
+	// * ALL - Use all the managed data
+	// identifiers that Amazon Macie provides.
+	//
+	// * EXCLUDE - Use all the managed data
+	// identifiers that Macie provides except the managed data identifiers specified by
+	// the managedDataIdentifierIds property.
+	//
+	// * INCLUDE - Use only the managed data
+	// identifiers specified by the managedDataIdentifierIds property.
+	//
+	// * NONE - Don't
+	// use any managed data identifiers.
+	//
+	// If this value is null, the job uses all
+	// managed data identifiers. If this value is null, ALL, or EXCLUDE for a recurring
+	// job, the job also uses new managed data identifiers as they are released.
+	ManagedDataIdentifierSelector types.ManagedDataIdentifierSelector
+
 	// The custom name of the job.
 	Name *string
 
@@ -123,8 +157,8 @@ type DescribeClassificationJobOutput struct {
 	// objects that the job analyzes.
 	SamplingPercentage int32
 
-	// The recurrence pattern for running the job. If the job is configured to run only
-	// once, this value is null.
+	// The recurrence pattern for running the job. This value is null if the job is
+	// configured to run only once.
 	ScheduleFrequency *types.JobScheduleFrequency
 
 	// The number of times that the job has run and processing statistics for the job's

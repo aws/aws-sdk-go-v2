@@ -77,7 +77,9 @@ type ModifyInstancePlacementInput struct {
 	// Reserved for future use.
 	PartitionNumber *int32
 
-	// The tenancy for the instance.
+	// The tenancy for the instance. For T3 instances, you can't change the tenancy
+	// from dedicated to host, or from host to dedicated. Attempting to make one of
+	// these unsupported tenancy changes results in the InvalidTenancy error code.
 	Tenancy types.HostTenancy
 
 	noSmithyDocumentSerde

@@ -45,13 +45,15 @@ type CreateSimulationApplicationInput struct {
 	// This member is required.
 	SimulationSoftwareSuite *types.SimulationSoftwareSuite
 
-	// The sources of the simulation application.
-	//
-	// This member is required.
-	Sources []types.SourceConfig
+	// The object that contains the Docker image URI used to create your simulation
+	// application.
+	Environment *types.Environment
 
 	// The rendering engine for the simulation application.
 	RenderingEngine *types.RenderingEngine
+
+	// The sources of the simulation application.
+	Sources []types.SourceConfig
 
 	// A map that contains tag keys and tag values that are attached to the simulation
 	// application.
@@ -64,6 +66,10 @@ type CreateSimulationApplicationOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation application.
 	Arn *string
+
+	// The object that contains the Docker image URI that you used to create your
+	// simulation application.
+	Environment *types.Environment
 
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.

@@ -2807,6 +2807,13 @@ func awsRestjson1_serializeOpDocumentCreateSipMediaApplicationCallInput(v *Creat
 		ok.String(*v.FromPhoneNumber)
 	}
 
+	if v.SipHeaders != nil {
+		ok := object.Key("SipHeaders")
+		if err := awsRestjson1_serializeDocumentSipHeadersMap(v.SipHeaders, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.ToPhoneNumber != nil {
 		ok := object.Key("ToPhoneNumber")
 		ok.String(*v.ToPhoneNumber)
@@ -14567,6 +14574,17 @@ func awsRestjson1_serializeDocumentSigninDelegateGroupList(v []types.SigninDeleg
 		if err := awsRestjson1_serializeDocumentSigninDelegateGroup(&v[i], av); err != nil {
 			return err
 		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentSipHeadersMap(v map[string]string, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	for key := range v {
+		om := object.Key(key)
+		om.String(v[key])
 	}
 	return nil
 }

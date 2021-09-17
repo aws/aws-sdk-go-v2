@@ -44,16 +44,16 @@ import (
 //
 // *
 // Encryption request headers, like x-amz-server-side-encryption, should not be
-// sent for GET requests if your object uses server-side encryption with CMKs
-// stored in Amazon Web Services KMS (SSE-KMS) or server-side encryption with
-// Amazon S3–managed encryption keys (SSE-S3). If your object does use these types
-// of keys, you’ll get an HTTP 400 BadRequest error.
+// sent for GET requests if your object uses server-side encryption with KMS keys
+// (SSE-KMS) or server-side encryption with Amazon S3–managed encryption keys
+// (SSE-S3). If your object does use these types of keys, you’ll get an HTTP 400
+// BadRequest error.
 //
-// * The last modified property
-// in this case is the creation date of the object.
+// * The last modified property in this case is the creation
+// date of the object.
 //
-// Request headers are limited to
-// 8 KB in size. For more information, see Common Request Headers
+// Request headers are limited to 8 KB in size. For more
+// information, see Common Request Headers
 // (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTCommonRequestHeaders.html).
 // Consider the following when using request headers:
 //
@@ -352,15 +352,14 @@ type HeadObjectOutput struct {
 	SSECustomerKeyMD5 *string
 
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
-	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
-	// that was used for the object.
+	// (Amazon Web Services KMS) symmetric customer managed key that was used for the
+	// object.
 	SSEKMSKeyId *string
 
 	// If the object is stored using server-side encryption either with an Amazon Web
-	// Services KMS customer master key (CMK) or an Amazon S3-managed encryption key,
-	// the response includes this header with the value of the server-side encryption
-	// algorithm used when storing this object in Amazon S3 (for example, AES256,
-	// aws:kms).
+	// Services KMS key or an Amazon S3-managed encryption key, the response includes
+	// this header with the value of the server-side encryption algorithm used when
+	// storing this object in Amazon S3 (for example, AES256, aws:kms).
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Provides storage class information of the object. Amazon S3 returns this header

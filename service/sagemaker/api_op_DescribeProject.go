@@ -72,8 +72,8 @@ type DescribeProjectOutput struct {
 	// This member is required.
 	ServiceCatalogProvisioningDetails *types.ServiceCatalogProvisioningDetails
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *types.UserContext
 
 	// The description of the project.

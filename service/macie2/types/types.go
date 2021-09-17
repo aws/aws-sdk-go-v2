@@ -826,8 +826,8 @@ type DailySchedule struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about a type of sensitive data that was detected by managed
-// data identifiers and produced a sensitive data finding.
+// Provides information about a type of sensitive data that was detected by a
+// managed data identifier and produced a sensitive data finding.
 type DefaultDetection struct {
 
 	// The total number of occurrences of the type of sensitive data that was detected.
@@ -1315,18 +1315,18 @@ type JobSummary struct {
 	// the next scheduled run is pending. This value doesn't apply to one-time jobs.
 	//
 	// *
-	// PAUSED - Amazon Macie started running the job but additional processing would
-	// exceed the monthly sensitive data discovery quota for your account or one or
-	// more member accounts that the job analyzes data for.
+	// PAUSED - Macie started running the job but additional processing would exceed
+	// the monthly sensitive data discovery quota for your account or one or more
+	// member accounts that the job analyzes data for.
 	//
-	// * RUNNING - For a one-time
-	// job, the job is in progress. For a recurring job, a scheduled run is in
-	// progress.
+	// * RUNNING - For a one-time job,
+	// the job is in progress. For a recurring job, a scheduled run is in progress.
 	//
-	// * USER_PAUSED - You paused the job. If you paused the job while it
-	// had a status of RUNNING and you don't resume it within 30 days of pausing it,
-	// the job or job run will expire and be cancelled, depending on the job's type. To
-	// check the expiration date, refer to the UserPausedDetails.jobExpiresAt property.
+	// *
+	// USER_PAUSED - You paused the job. If you paused the job while it had a status of
+	// RUNNING and you don't resume it within 30 days of pausing it, the job or job run
+	// will expire and be cancelled, depending on the job's type. To check the
+	// expiration date, refer to the UserPausedDetails.jobExpiresAt property.
 	JobStatus JobStatus
 
 	// The schedule for running the job. Possible values are:
@@ -1433,6 +1433,29 @@ type ListJobsSortCriteria struct {
 	// specified by the attributeName property. Valid values are: ASC, sort the results
 	// in ascending order; and, DESC, sort the results in descending order.
 	OrderBy OrderBy
+
+	noSmithyDocumentSerde
+}
+
+// Provides information about a managed data identifier. For additional
+// information, see Using managed data identifiers
+// (https://docs.aws.amazon.com/macie/latest/user/managed-data-identifiers.html) in
+// the Amazon Macie User Guide.
+type ManagedDataIdentifierSummary struct {
+
+	// The category of sensitive data that the managed data identifier detects:
+	// CREDENTIALS, for credentials data such as private keys or Amazon Web Services
+	// secret keys; FINANCIAL_INFORMATION, for financial data such as credit card
+	// numbers; or, PERSONAL_INFORMATION, for personal health information, such as
+	// health insurance identification numbers, or personally identifiable information,
+	// such as passport numbers.
+	Category SensitiveDataItemCategory
+
+	// The unique identifier for the managed data identifier. This is a string that
+	// describes the type of sensitive data that the managed data identifier detects.
+	// For example: OPENSSH_PRIVATE_KEY for OpenSSH private keys, CREDIT_CARD_NUMBER
+	// for credit card numbers, or USA_PASSPORT_NUMBER for US passport numbers.
+	Id *string
 
 	noSmithyDocumentSerde
 }
@@ -1621,8 +1644,8 @@ type ObjectLevelStatistics struct {
 }
 
 // Specifies the location of 1-15 occurrences of sensitive data that was detected
-// by managed data identifiers or a custom data identifier and produced a sensitive
-// data finding.
+// by a managed data identifier or a custom data identifier and produced a
+// sensitive data finding.
 type Occurrences struct {
 
 	// An array of objects, one for each occurrence of sensitive data in a Microsoft
@@ -1805,8 +1828,8 @@ type S3Bucket struct {
 	// The name of the bucket.
 	Name *string
 
-	// The display name and Amazon Web Services account ID for the user who owns the
-	// bucket.
+	// The display name and canonical user ID for the Amazon Web Services account that
+	// owns the bucket.
 	Owner *S3BucketOwner
 
 	// The permissions settings that determine whether the bucket is publicly
@@ -1853,13 +1876,14 @@ type S3BucketDefinitionForJob struct {
 	noSmithyDocumentSerde
 }
 
-// Provides information about the user who owns an S3 bucket.
+// Provides information about the Amazon Web Services account that owns an S3
+// bucket.
 type S3BucketOwner struct {
 
-	// The display name of the user who owns the bucket.
+	// The display name of the account that owns the bucket.
 	DisplayName *string
 
-	// The Amazon Web Services account ID for the user who owns the bucket.
+	// The canonical user ID for the account that owns the bucket.
 	Id *string
 
 	noSmithyDocumentSerde
@@ -2140,8 +2164,8 @@ type SensitiveDataItem struct {
 	// credentials data such as private keys or Amazon Web Services secret keys;
 	// FINANCIAL_INFORMATION, for financial data such as credit card numbers; or,
 	// PERSONAL_INFORMATION, for personal health information, such as health insurance
-	// identification numbers, or personally identifiable information, such as driver's
-	// license identification numbers.
+	// identification numbers, or personally identifiable information, such as passport
+	// numbers.
 	Category SensitiveDataItemCategory
 
 	// An array of objects, one for each type of sensitive data that was detected. Each

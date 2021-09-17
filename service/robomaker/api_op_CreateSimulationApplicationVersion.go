@@ -39,6 +39,14 @@ type CreateSimulationApplicationVersionInput struct {
 	// and it matches the latest revision ID, a new version will be created.
 	CurrentRevisionId *string
 
+	// The SHA256 digest used to identify the Docker image URI used to created the
+	// simulation application.
+	ImageDigest *string
+
+	// The Amazon S3 eTag identifier for the zip file bundle that you use to create the
+	// simulation application.
+	S3Etags []string
+
 	noSmithyDocumentSerde
 }
 
@@ -46,6 +54,10 @@ type CreateSimulationApplicationVersionOutput struct {
 
 	// The Amazon Resource Name (ARN) of the simulation application.
 	Arn *string
+
+	// The object that contains the Docker image URI used to create the simulation
+	// application.
+	Environment *types.Environment
 
 	// The time, in milliseconds since the epoch, when the simulation application was
 	// last updated.

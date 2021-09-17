@@ -49,8 +49,8 @@ type DescribeContextOutput struct {
 	// The type of the context.
 	ContextType *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *types.UserContext
 
 	// When the context was created.
@@ -59,8 +59,8 @@ type DescribeContextOutput struct {
 	// The description of the context.
 	Description *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *types.UserContext
 
 	// When the context was last modified.

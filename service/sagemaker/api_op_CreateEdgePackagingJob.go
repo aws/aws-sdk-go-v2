@@ -64,7 +64,8 @@ type CreateEdgePackagingJobInput struct {
 	// This member is required.
 	RoleArn *string
 
-	// The CMK to use when encrypting the EBS volume the edge packaging job runs on.
+	// The Amazon Web Services KMS key to use when encrypting the EBS volume the edge
+	// packaging job runs on.
 	ResourceKey *string
 
 	// Creates tags for the packaging job.

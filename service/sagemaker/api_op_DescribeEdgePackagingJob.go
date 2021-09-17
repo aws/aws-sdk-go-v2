@@ -86,7 +86,8 @@ type DescribeEdgePackagingJobOutput struct {
 	// The output of a SageMaker Edge Manager deployable resource.
 	PresetDeploymentOutput *types.EdgePresetDeploymentOutput
 
-	// The CMK to use when encrypting the EBS volume the job run on.
+	// The Amazon Web Services KMS key to use when encrypting the EBS volume the job
+	// run on.
 	ResourceKey *string
 
 	// The Amazon Resource Name (ARN) of an IAM role that enables Amazon SageMaker to

@@ -4495,6 +4495,11 @@ func validateAction(v *types.Action) error {
 			invalidParams.AddNested("Kafka", err.(smithy.InvalidParamsError))
 		}
 	}
+	if v.OpenSearch != nil {
+		if err := validateOpenSearchAction(v.OpenSearch); err != nil {
+			invalidParams.AddNested("OpenSearch", err.(smithy.InvalidParamsError))
+		}
+	}
 	if invalidParams.Len() > 0 {
 		return invalidParams
 	} else {
@@ -5355,6 +5360,33 @@ func validateMitigationActionParams(v *types.MitigationActionParams) error {
 		if err := validatePublishFindingToSnsParams(v.PublishFindingToSnsParams); err != nil {
 			invalidParams.AddNested("PublishFindingToSnsParams", err.(smithy.InvalidParamsError))
 		}
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
+func validateOpenSearchAction(v *types.OpenSearchAction) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "OpenSearchAction"}
+	if v.RoleArn == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("RoleArn"))
+	}
+	if v.Endpoint == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Endpoint"))
+	}
+	if v.Index == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Index"))
+	}
+	if v.Type == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Type"))
+	}
+	if v.Id == nil {
+		invalidParams.Add(smithy.NewErrParamRequired("Id"))
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

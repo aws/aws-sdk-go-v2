@@ -368,6 +368,79 @@ func awsRestjson1_serializeOpHttpBindingsCreateImportJobInput(v *CreateImportJob
 	return nil
 }
 
+type awsRestjson1_serializeOpCreateInAppTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpCreateInAppTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpCreateInAppTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*CreateInAppTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/templates/{TemplateName}/inapp")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "POST"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsCreateInAppTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.InAppTemplateRequest != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/json")
+		}
+
+		jsonEncoder := smithyjson.NewEncoder()
+		if err := awsRestjson1_serializeDocumentInAppTemplateRequest(input.InAppTemplateRequest, jsonEncoder.Value); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsCreateInAppTemplateInput(v *CreateInAppTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
+	}
+	if v.TemplateName != nil {
+		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpCreateJourney struct {
 }
 
@@ -1564,6 +1637,68 @@ func awsRestjson1_serializeOpHttpBindingsDeleteGcmChannelInput(v *DeleteGcmChann
 		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
 			return err
 		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpDeleteInAppTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpDeleteInAppTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpDeleteInAppTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*DeleteInAppTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/templates/{TemplateName}/inapp")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "DELETE"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsDeleteInAppTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsDeleteInAppTemplateInput(v *DeleteInAppTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
+	}
+	if v.TemplateName != nil {
+		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
+			return err
+		}
+	}
+
+	if v.Version != nil {
+		encoder.SetQuery("version").String(*v.Version)
 	}
 
 	return nil
@@ -3807,6 +3942,135 @@ func awsRestjson1_serializeOpHttpBindingsGetImportJobsInput(v *GetImportJobsInpu
 
 	if v.Token != nil {
 		encoder.SetQuery("token").String(*v.Token)
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetInAppMessages struct {
+}
+
+func (*awsRestjson1_serializeOpGetInAppMessages) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetInAppMessages) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetInAppMessagesInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/apps/{ApplicationId}/endpoints/{EndpointId}/inappmessages")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetInAppMessagesInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetInAppMessagesInput(v *GetInAppMessagesInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.ApplicationId == nil || len(*v.ApplicationId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member ApplicationId must not be empty")}
+	}
+	if v.ApplicationId != nil {
+		if err := encoder.SetURI("ApplicationId").String(*v.ApplicationId); err != nil {
+			return err
+		}
+	}
+
+	if v.EndpointId == nil || len(*v.EndpointId) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member EndpointId must not be empty")}
+	}
+	if v.EndpointId != nil {
+		if err := encoder.SetURI("EndpointId").String(*v.EndpointId); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+type awsRestjson1_serializeOpGetInAppTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpGetInAppTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpGetInAppTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*GetInAppTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/templates/{TemplateName}/inapp")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "GET"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsGetInAppTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsGetInAppTemplateInput(v *GetInAppTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
+	}
+	if v.TemplateName != nil {
+		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
+			return err
+		}
+	}
+
+	if v.Version != nil {
+		encoder.SetQuery("version").String(*v.Version)
 	}
 
 	return nil
@@ -6858,6 +7122,87 @@ func awsRestjson1_serializeOpHttpBindingsUpdateGcmChannelInput(v *UpdateGcmChann
 	return nil
 }
 
+type awsRestjson1_serializeOpUpdateInAppTemplate struct {
+}
+
+func (*awsRestjson1_serializeOpUpdateInAppTemplate) ID() string {
+	return "OperationSerializer"
+}
+
+func (m *awsRestjson1_serializeOpUpdateInAppTemplate) HandleSerialize(ctx context.Context, in middleware.SerializeInput, next middleware.SerializeHandler) (
+	out middleware.SerializeOutput, metadata middleware.Metadata, err error,
+) {
+	request, ok := in.Request.(*smithyhttp.Request)
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown transport type %T", in.Request)}
+	}
+
+	input, ok := in.Parameters.(*UpdateInAppTemplateInput)
+	_ = input
+	if !ok {
+		return out, metadata, &smithy.SerializationError{Err: fmt.Errorf("unknown input parameters type %T", in.Parameters)}
+	}
+
+	opPath, opQuery := httpbinding.SplitURI("/v1/templates/{TemplateName}/inapp")
+	request.URL.Path = smithyhttp.JoinPath(request.URL.Path, opPath)
+	request.URL.RawQuery = smithyhttp.JoinRawQuery(request.URL.RawQuery, opQuery)
+	request.Method = "PUT"
+	restEncoder, err := httpbinding.NewEncoder(request.URL.Path, request.URL.RawQuery, request.Header)
+	if err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if err := awsRestjson1_serializeOpHttpBindingsUpdateInAppTemplateInput(input, restEncoder); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+
+	if input.InAppTemplateRequest != nil {
+		if !restEncoder.HasHeader("Content-Type") {
+			restEncoder.SetHeader("Content-Type").String("application/json")
+		}
+
+		jsonEncoder := smithyjson.NewEncoder()
+		if err := awsRestjson1_serializeDocumentInAppTemplateRequest(input.InAppTemplateRequest, jsonEncoder.Value); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+		payload := bytes.NewReader(jsonEncoder.Bytes())
+		if request, err = request.SetStream(payload); err != nil {
+			return out, metadata, &smithy.SerializationError{Err: err}
+		}
+	}
+
+	if request.Request, err = restEncoder.Encode(request.Request); err != nil {
+		return out, metadata, &smithy.SerializationError{Err: err}
+	}
+	in.Request = request
+
+	return next.HandleSerialize(ctx, in)
+}
+func awsRestjson1_serializeOpHttpBindingsUpdateInAppTemplateInput(v *UpdateInAppTemplateInput, encoder *httpbinding.Encoder) error {
+	if v == nil {
+		return fmt.Errorf("unsupported serialization of nil %T", v)
+	}
+
+	if v.CreateNewVersion {
+		encoder.SetQuery("create-new-version").Boolean(v.CreateNewVersion)
+	}
+
+	if v.TemplateName == nil || len(*v.TemplateName) == 0 {
+		return &smithy.SerializationError{Err: fmt.Errorf("input member TemplateName must not be empty")}
+	}
+	if v.TemplateName != nil {
+		if err := encoder.SetURI("TemplateName").String(*v.TemplateName); err != nil {
+			return err
+		}
+	}
+
+	if v.Version != nil {
+		encoder.SetQuery("version").String(*v.Version)
+	}
+
+	return nil
+}
+
 type awsRestjson1_serializeOpUpdateJourney struct {
 }
 
@@ -8462,6 +8807,37 @@ func awsRestjson1_serializeDocumentCampaignHook(v *types.CampaignHook, value smi
 	return nil
 }
 
+func awsRestjson1_serializeDocumentCampaignInAppMessage(v *types.CampaignInAppMessage, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Body != nil {
+		ok := object.Key("Body")
+		ok.String(*v.Body)
+	}
+
+	if v.Content != nil {
+		ok := object.Key("Content")
+		if err := awsRestjson1_serializeDocumentListOfInAppMessageContent(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomConfig != nil {
+		ok := object.Key("CustomConfig")
+		if err := awsRestjson1_serializeDocumentMapOf__string(v.CustomConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Layout) > 0 {
+		ok := object.Key("Layout")
+		ok.String(string(v.Layout))
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentCampaignLimits(v *types.CampaignLimits, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -8479,6 +8855,11 @@ func awsRestjson1_serializeDocumentCampaignLimits(v *types.CampaignLimits, value
 	if v.MessagesPerSecond != 0 {
 		ok := object.Key("MessagesPerSecond")
 		ok.Integer(v.MessagesPerSecond)
+	}
+
+	if v.Session != 0 {
+		ok := object.Key("Session")
+		ok.Integer(v.Session)
 	}
 
 	if v.Total != 0 {
@@ -8704,6 +9085,43 @@ func awsRestjson1_serializeDocumentCustomMessageActivity(v *types.CustomMessageA
 	if v.TemplateVersion != nil {
 		ok := object.Key("TemplateVersion")
 		ok.String(*v.TemplateVersion)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentDefaultButtonConfiguration(v *types.DefaultButtonConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackgroundColor != nil {
+		ok := object.Key("BackgroundColor")
+		ok.String(*v.BackgroundColor)
+	}
+
+	if v.BorderRadius != 0 {
+		ok := object.Key("BorderRadius")
+		ok.Integer(v.BorderRadius)
+	}
+
+	if len(v.ButtonAction) > 0 {
+		ok := object.Key("ButtonAction")
+		ok.String(string(v.ButtonAction))
+	}
+
+	if v.Link != nil {
+		ok := object.Key("Link")
+		ok.String(*v.Link)
+	}
+
+	if v.Text != nil {
+		ok := object.Key("Text")
+		ok.String(*v.Text)
+	}
+
+	if v.TextColor != nil {
+		ok := object.Key("TextColor")
+		ok.String(*v.TextColor)
 	}
 
 	return nil
@@ -9821,6 +10239,168 @@ func awsRestjson1_serializeDocumentImportJobRequest(v *types.ImportJobRequest, v
 	return nil
 }
 
+func awsRestjson1_serializeDocumentInAppMessageBodyConfig(v *types.InAppMessageBodyConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Alignment) > 0 {
+		ok := object.Key("Alignment")
+		ok.String(string(v.Alignment))
+	}
+
+	if v.Body != nil {
+		ok := object.Key("Body")
+		ok.String(*v.Body)
+	}
+
+	if v.TextColor != nil {
+		ok := object.Key("TextColor")
+		ok.String(*v.TextColor)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInAppMessageButton(v *types.InAppMessageButton, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Android != nil {
+		ok := object.Key("Android")
+		if err := awsRestjson1_serializeDocumentOverrideButtonConfiguration(v.Android, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.DefaultConfig != nil {
+		ok := object.Key("DefaultConfig")
+		if err := awsRestjson1_serializeDocumentDefaultButtonConfiguration(v.DefaultConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.IOS != nil {
+		ok := object.Key("IOS")
+		if err := awsRestjson1_serializeDocumentOverrideButtonConfiguration(v.IOS, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.Web != nil {
+		ok := object.Key("Web")
+		if err := awsRestjson1_serializeDocumentOverrideButtonConfiguration(v.Web, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInAppMessageContent(v *types.InAppMessageContent, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.BackgroundColor != nil {
+		ok := object.Key("BackgroundColor")
+		ok.String(*v.BackgroundColor)
+	}
+
+	if v.BodyConfig != nil {
+		ok := object.Key("BodyConfig")
+		if err := awsRestjson1_serializeDocumentInAppMessageBodyConfig(v.BodyConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.HeaderConfig != nil {
+		ok := object.Key("HeaderConfig")
+		if err := awsRestjson1_serializeDocumentInAppMessageHeaderConfig(v.HeaderConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.ImageUrl != nil {
+		ok := object.Key("ImageUrl")
+		ok.String(*v.ImageUrl)
+	}
+
+	if v.PrimaryBtn != nil {
+		ok := object.Key("PrimaryBtn")
+		if err := awsRestjson1_serializeDocumentInAppMessageButton(v.PrimaryBtn, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.SecondaryBtn != nil {
+		ok := object.Key("SecondaryBtn")
+		if err := awsRestjson1_serializeDocumentInAppMessageButton(v.SecondaryBtn, ok); err != nil {
+			return err
+		}
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInAppMessageHeaderConfig(v *types.InAppMessageHeaderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.Alignment) > 0 {
+		ok := object.Key("Alignment")
+		ok.String(string(v.Alignment))
+	}
+
+	if v.Header != nil {
+		ok := object.Key("Header")
+		ok.String(*v.Header)
+	}
+
+	if v.TextColor != nil {
+		ok := object.Key("TextColor")
+		ok.String(*v.TextColor)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentInAppTemplateRequest(v *types.InAppTemplateRequest, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Content != nil {
+		ok := object.Key("Content")
+		if err := awsRestjson1_serializeDocumentListOfInAppMessageContent(v.Content, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.CustomConfig != nil {
+		ok := object.Key("CustomConfig")
+		if err := awsRestjson1_serializeDocumentMapOf__string(v.CustomConfig, ok); err != nil {
+			return err
+		}
+	}
+
+	if len(v.Layout) > 0 {
+		ok := object.Key("Layout")
+		ok.String(string(v.Layout))
+	}
+
+	if v.Tags != nil {
+		ok := object.Key("tags")
+		if err := awsRestjson1_serializeDocumentMapOf__string(v.Tags, ok); err != nil {
+			return err
+		}
+	}
+
+	if v.TemplateDescription != nil {
+		ok := object.Key("TemplateDescription")
+		ok.String(*v.TemplateDescription)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentJourneyCustomMessage(v *types.JourneyCustomMessage, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -9979,6 +10559,19 @@ func awsRestjson1_serializeDocumentListOfEndpointBatchItem(v []types.EndpointBat
 	for i := range v {
 		av := array.Value()
 		if err := awsRestjson1_serializeDocumentEndpointBatchItem(&v[i], av); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func awsRestjson1_serializeDocumentListOfInAppMessageContent(v []types.InAppMessageContent, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		if err := awsRestjson1_serializeDocumentInAppMessageContent(&v[i], av); err != nil {
 			return err
 		}
 	}
@@ -10345,6 +10938,13 @@ func awsRestjson1_serializeDocumentMessageConfiguration(v *types.MessageConfigur
 		}
 	}
 
+	if v.InAppMessage != nil {
+		ok := object.Key("InAppMessage")
+		if err := awsRestjson1_serializeDocumentCampaignInAppMessage(v.InAppMessage, ok); err != nil {
+			return err
+		}
+	}
+
 	if v.SMSMessage != nil {
 		ok := object.Key("SMSMessage")
 		if err := awsRestjson1_serializeDocumentCampaignSmsMessage(v.SMSMessage, ok); err != nil {
@@ -10489,6 +11089,23 @@ func awsRestjson1_serializeDocumentNumberValidateRequest(v *types.NumberValidate
 	if v.PhoneNumber != nil {
 		ok := object.Key("PhoneNumber")
 		ok.String(*v.PhoneNumber)
+	}
+
+	return nil
+}
+
+func awsRestjson1_serializeDocumentOverrideButtonConfiguration(v *types.OverrideButtonConfiguration, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.ButtonAction) > 0 {
+		ok := object.Key("ButtonAction")
+		ok.String(string(v.ButtonAction))
+	}
+
+	if v.Link != nil {
+		ok := object.Key("Link")
+		ok.String(*v.Link)
 	}
 
 	return nil
@@ -11680,6 +12297,11 @@ func awsRestjson1_serializeDocumentWriteCampaignRequest(v *types.WriteCampaignRe
 	if v.Name != nil {
 		ok := object.Key("Name")
 		ok.String(*v.Name)
+	}
+
+	if v.Priority != 0 {
+		ok := object.Key("Priority")
+		ok.Integer(v.Priority)
 	}
 
 	if v.Schedule != nil {

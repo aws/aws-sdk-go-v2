@@ -14,10 +14,10 @@ import (
 // Defines the versions of your managed rule set that you are offering to the
 // customers. Customers see your offerings as managed rule groups with versioning.
 // This is intended for use only by vendors of managed rule sets. Vendors are
-// Amazon Web Services and Marketplace sellers. Vendors, you can use the managed
-// rule set APIs to provide controlled rollout of your versioned managed rule group
-// offerings for your customers. The APIs are ListManagedRuleSets,
-// GetManagedRuleSet, PutManagedRuleSetVersions, and
+// Amazon Web Services and Amazon Web Services Marketplace sellers. Vendors, you
+// can use the managed rule set APIs to provide controlled rollout of your
+// versioned managed rule group offerings for your customers. The APIs are
+// ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and
 // UpdateManagedRuleSetVersionExpiryDate. Customers retrieve their managed rule
 // group list by calling ListAvailableManagedRuleGroups. The name that you provide
 // here for your managed rule set is the name the customer sees for the

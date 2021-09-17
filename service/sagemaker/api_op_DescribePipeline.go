@@ -40,15 +40,15 @@ type DescribePipelineInput struct {
 
 type DescribePipelineOutput struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *types.UserContext
 
 	// The time when the pipeline was created.
 	CreationTime *time.Time
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *types.UserContext
 
 	// The time when the pipeline was last modified.

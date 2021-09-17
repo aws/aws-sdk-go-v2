@@ -1588,6 +1588,11 @@ func awsRestjson1_deserializeOpDocumentCreateRobotApplicationOutput(v **CreateRo
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "environment":
+			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
+				return err
+			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -1809,6 +1814,11 @@ func awsRestjson1_deserializeOpDocumentCreateRobotApplicationVersionOutput(v **C
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "environment":
+			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
+				return err
+			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -2026,6 +2036,11 @@ func awsRestjson1_deserializeOpDocumentCreateSimulationApplicationOutput(v **Cre
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "environment":
+			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
+				return err
 			}
 
 		case "lastUpdatedAt":
@@ -2257,6 +2272,11 @@ func awsRestjson1_deserializeOpDocumentCreateSimulationApplicationVersionOutput(
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "environment":
+			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
+				return err
 			}
 
 		case "lastUpdatedAt":
@@ -4792,6 +4812,20 @@ func awsRestjson1_deserializeOpDocumentDescribeRobotApplicationOutput(v **Descri
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "environment":
+			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
+				return err
+			}
+
+		case "imageDigest":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageDigest to be of type string, got %T instead", value)
+				}
+				sv.ImageDigest = ptr.String(jtv)
+			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -5008,6 +5042,20 @@ func awsRestjson1_deserializeOpDocumentDescribeSimulationApplicationOutput(v **D
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "environment":
+			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
+				return err
+			}
+
+		case "imageDigest":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ImageDigest to be of type string, got %T instead", value)
+				}
+				sv.ImageDigest = ptr.String(jtv)
 			}
 
 		case "lastUpdatedAt":
@@ -9752,6 +9800,11 @@ func awsRestjson1_deserializeOpDocumentUpdateRobotApplicationOutput(v **UpdateRo
 				sv.Arn = ptr.String(jtv)
 			}
 
+		case "environment":
+			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
+				return err
+			}
+
 		case "lastUpdatedAt":
 			if value != nil {
 				switch jtv := value.(type) {
@@ -9966,6 +10019,11 @@ func awsRestjson1_deserializeOpDocumentUpdateSimulationApplicationOutput(v **Upd
 					return fmt.Errorf("expected Arn to be of type string, got %T instead", value)
 				}
 				sv.Arn = ptr.String(jtv)
+			}
+
+		case "environment":
+			if err := awsRestjson1_deserializeDocumentEnvironment(&sv.Environment, value); err != nil {
+				return err
 			}
 
 		case "lastUpdatedAt":
@@ -11392,6 +11450,46 @@ func awsRestjson1_deserializeDocumentDeploymentLaunchConfig(v **types.Deployment
 					return fmt.Errorf("expected Path to be of type string, got %T instead", value)
 				}
 				sv.PreLaunchFile = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentEnvironment(v **types.Environment, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.Environment
+	if *v == nil {
+		sv = &types.Environment{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected RepositoryUrl to be of type string, got %T instead", value)
+				}
+				sv.Uri = ptr.String(jtv)
 			}
 
 		default:

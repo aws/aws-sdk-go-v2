@@ -767,6 +767,9 @@ const (
 	ParameterExceptionFieldBodyParsingFallbackBehavior    ParameterExceptionField = "BODY_PARSING_FALLBACK_BEHAVIOR"
 	ParameterExceptionFieldLoggingFilter                  ParameterExceptionField = "LOGGING_FILTER"
 	ParameterExceptionFieldFilterCondition                ParameterExceptionField = "FILTER_CONDITION"
+	ParameterExceptionFieldExpireTimestamp                ParameterExceptionField = "EXPIRE_TIMESTAMP"
+	ParameterExceptionFieldChangePropagationStatus        ParameterExceptionField = "CHANGE_PROPAGATION_STATUS"
+	ParameterExceptionFieldAssociableResource             ParameterExceptionField = "ASSOCIABLE_RESOURCE"
 )
 
 // Values returns all known values for ParameterExceptionField. Note that this can
@@ -827,6 +830,9 @@ func (ParameterExceptionField) Values() []ParameterExceptionField {
 		"BODY_PARSING_FALLBACK_BEHAVIOR",
 		"LOGGING_FILTER",
 		"FILTER_CONDITION",
+		"EXPIRE_TIMESTAMP",
+		"CHANGE_PROPAGATION_STATUS",
+		"ASSOCIABLE_RESOURCE",
 	}
 }
 

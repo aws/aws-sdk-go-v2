@@ -49,8 +49,8 @@ type DescribeActionOutput struct {
 	// The type of the action.
 	ActionType *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *types.UserContext
 
 	// When the action was created.
@@ -59,8 +59,8 @@ type DescribeActionOutput struct {
 	// The description of the action.
 	Description *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *types.UserContext
 
 	// When the action was last modified.

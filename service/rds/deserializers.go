@@ -41347,6 +41347,23 @@ func awsAwsquery_deserializeDocumentScalingConfigurationInfo(v **types.ScalingCo
 				sv.MinCapacity = ptr.Int32(int32(i64))
 			}
 
+		case strings.EqualFold("SecondsBeforeTimeout", t.Name.Local):
+			val, err := decoder.Value()
+			if err != nil {
+				return err
+			}
+			if val == nil {
+				break
+			}
+			{
+				xtv := string(val)
+				i64, err := strconv.ParseInt(xtv, 10, 64)
+				if err != nil {
+					return err
+				}
+				sv.SecondsBeforeTimeout = ptr.Int32(int32(i64))
+			}
+
 		case strings.EqualFold("SecondsUntilAutoPause", t.Name.Local):
 			val, err := decoder.Value()
 			if err != nil {

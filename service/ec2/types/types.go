@@ -2643,35 +2643,32 @@ type EventInformation struct {
 	// modify_succeeded - The EC2 Fleet or Spot Fleet request was modified.
 	//
 	// *
-	// price_update - The price for a launch configuration was adjusted because it was
-	// too high. This change is permanent.
+	// submitted - The EC2 Fleet or Spot Fleet request is being evaluated and Amazon
+	// EC2 is preparing to launch the target number of Spot Instances.
 	//
-	// * submitted - The EC2 Fleet or Spot Fleet
-	// request is being evaluated and Amazon EC2 is preparing to launch the target
-	// number of Spot Instances.
+	// The following
+	// are the instanceChange events:
 	//
-	// The following are the instanceChange events:
+	// * launched - A request was fulfilled and a new
+	// instance was launched.
+	//
+	// * terminated - An instance was terminated by the
+	// user.
+	//
+	// The following are the Information events:
 	//
 	// *
-	// launched - A request was fulfilled and a new instance was launched.
+	// launchSpecTemporarilyBlacklisted - The configuration is not valid and several
+	// attempts to launch instances have failed. For more information, see the
+	// description of the event.
 	//
-	// *
-	// terminated - An instance was terminated by the user.
+	// * launchSpecUnusable - The price in a launch
+	// specification is not valid because it is below the Spot price or the Spot price
+	// is above the On-Demand price.
 	//
-	// The following are the
-	// Information events:
-	//
-	// * launchSpecTemporarilyBlacklisted - The configuration is
-	// not valid and several attempts to launch instances have failed. For more
-	// information, see the description of the event.
-	//
-	// * launchSpecUnusable - The price
-	// in a launch specification is not valid because it is below the Spot price or the
-	// Spot price is above the On-Demand price.
-	//
-	// * fleetProgressHalted - The price in
-	// every launch specification is not valid. A launch specification might become
-	// valid if the Spot price changes.
+	// * fleetProgressHalted - The price in every launch
+	// specification is not valid. A launch specification might become valid if the
+	// Spot price changes.
 	EventSubType *string
 
 	// The ID of the instance. This information is available only for instanceChange
@@ -3952,8 +3949,8 @@ type Image struct {
 	// The location of the AMI.
 	ImageLocation *string
 
-	// The AWS account alias (for example, amazon, self) or the AWS account ID of the
-	// AMI owner.
+	// The Amazon Web Services account alias (for example, amazon, self) or the Amazon
+	// Web Services account ID of the AMI owner.
 	ImageOwnerAlias *string
 
 	// The type of image.
@@ -3966,14 +3963,14 @@ type Image struct {
 	// The name of the AMI that was provided during image creation.
 	Name *string
 
-	// The AWS account ID of the image owner.
+	// The ID of the Amazon Web Services account that owns the image.
 	OwnerId *string
 
 	// This value is set to windows for Windows AMIs; otherwise, it is blank.
 	Platform PlatformValues
 
 	// The platform details associated with the billing code of the AMI. For more
-	// information, see Obtaining Billing Information
+	// information, see Understanding AMI billing
 	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html) in
 	// the Amazon Elastic Compute Cloud User Guide.
 	PlatformDetails *string
@@ -3993,8 +3990,8 @@ type Image struct {
 	// The device name of the root device volume (for example, /dev/sda1).
 	RootDeviceName *string
 
-	// The type of root device used by the AMI. The AMI can use an EBS volume or an
-	// instance store volume.
+	// The type of root device used by the AMI. The AMI can use an Amazon EBS volume or
+	// an instance store volume.
 	RootDeviceType DeviceType
 
 	// Specifies whether enhanced networking with the Intel 82599 Virtual Function
@@ -4014,12 +4011,15 @@ type Image struct {
 	// The operation of the Amazon EC2 instance and the billing code that is associated
 	// with the AMI. usageOperation corresponds to the lineitem/Operation
 	// (https://docs.aws.amazon.com/cur/latest/userguide/Lineitem-columns.html#Lineitem-details-O-Operation)
-	// column on your AWS Cost and Usage Report and in the AWS Price List API
+	// column on your Amazon Web Services Cost and Usage Report and in the Amazon Web
+	// Services Price List API
 	// (https://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/price-changes.html).
-	// For the list of UsageOperation codes, see Platform Details and Usage Operation
-	// Billing Codes
-	// (https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ami-billing-info.html#billing-info)
-	// in the Amazon Elastic Compute Cloud User Guide.
+	// You can view these fields on the Instances or AMIs pages in the Amazon EC2
+	// console, or in the responses that are returned by the DescribeImages
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_DescribeImages.html)
+	// command in the Amazon EC2 API, or the describe-images
+	// (https://docs.aws.amazon.com/cli/latest/reference/ec2/describe-images.html)
+	// command in the CLI.
 	UsageOperation *string
 
 	// The type of virtualization of the AMI.
@@ -4536,7 +4536,8 @@ type InstanceCreditSpecification struct {
 type InstanceCreditSpecificationRequest struct {
 
 	// The credit option for CPU usage of the instance. Valid values are standard and
-	// unlimited.
+	// unlimited. T3 instances with host tenancy do not support the unlimited CPU
+	// credit option.
 	CpuCredits *string
 
 	// The ID of the instance.
@@ -5619,8 +5620,8 @@ type LaunchPermission struct {
 	// The name of the group.
 	Group PermissionGroup
 
-	// The AWS account ID. Constraints: Up to 10 000 account IDs can be specified in a
-	// single request.
+	// The Amazon Web Services account ID. Constraints: Up to 10 000 account IDs can be
+	// specified in a single request.
 	UserId *string
 
 	noSmithyDocumentSerde
@@ -5629,10 +5630,12 @@ type LaunchPermission struct {
 // Describes a launch permission modification.
 type LaunchPermissionModifications struct {
 
-	// The AWS account ID to add to the list of launch permissions for the AMI.
+	// The Amazon Web Services account ID to add to the list of launch permissions for
+	// the AMI.
 	Add []LaunchPermission
 
-	// The AWS account ID to remove from the list of launch permissions for the AMI.
+	// The Amazon Web Services account ID to remove from the list of launch permissions
+	// for the AMI.
 	Remove []LaunchPermission
 
 	noSmithyDocumentSerde
@@ -6853,7 +6856,7 @@ type ManagedPrefixList struct {
 	// The name of the prefix list.
 	PrefixListName *string
 
-	// The state of the prefix list.
+	// The current state of the prefix list.
 	State PrefixListState
 
 	// The state message.
@@ -7965,7 +7968,8 @@ type Placement struct {
 	// not supported for the ImportInstance
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_ImportInstance.html)
 	// command. This parameter is not supported by CreateFleet
-	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet).
+	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateFleet). T3
+	// instances that use the unlimited CPU credit option do not support host tenancy.
 	Tenancy Tenancy
 
 	noSmithyDocumentSerde
@@ -9276,8 +9280,8 @@ type RunInstancesMonitoringEnabled struct {
 	noSmithyDocumentSerde
 }
 
-// The tags to apply to the AMI object that will be stored in the S3 bucket. For
-// more information, see Categorizing your storage using tags
+// The tags to apply to the AMI object that will be stored in the Amazon S3 bucket.
+// For more information, see Categorizing your storage using tags
 // (https://docs.aws.amazon.com/AmazonS3/latest/userguide/object-tagging.html) in
 // the Amazon Simple Storage Service User Guide.
 type S3ObjectTag struct {
@@ -9293,13 +9297,13 @@ type S3ObjectTag struct {
 	noSmithyDocumentSerde
 }
 
-// Describes the storage parameters for S3 and S3 buckets for an instance
-// store-backed AMI.
+// Describes the storage parameters for Amazon S3 and Amazon S3 buckets for an
+// instance store-backed AMI.
 type S3Storage struct {
 
 	// The access key ID of the owner of the bucket. Before you specify a value for
 	// your access key ID, review and follow the guidance in Best Practices for
-	// Managing AWS Access Keys
+	// Managing Amazon Web Services Access Keys
 	// (https://docs.aws.amazon.com/general/latest/gr/aws-access-keys-best-practices.html).
 	AWSAccessKeyId *string
 
@@ -11034,7 +11038,7 @@ type StoreImageTaskResult struct {
 	// The ID of the AMI that is being stored.
 	AmiId *string
 
-	// The name of the S3 bucket that contains the stored AMI object.
+	// The name of the Amazon S3 bucket that contains the stored AMI object.
 	Bucket *string
 
 	// The progress of the task as a percentage.
@@ -11238,23 +11242,22 @@ type TagDescription struct {
 // The tags to apply to a resource when the resource is being created.
 type TagSpecification struct {
 
-	// The type of resource to tag. Currently, the resource types that support tagging
-	// on creation are: capacity-reservation | carrier-gateway | client-vpn-endpoint |
-	// customer-gateway | dedicated-host | dhcp-options | egress-only-internet-gateway
-	// | elastic-ip | elastic-gpu | export-image-task | export-instance-task | fleet |
-	// fpga-image | host-reservation | image| import-image-task | import-snapshot-task
-	// | instance | instance-event-window | internet-gateway | ipv4pool-ec2 |
-	// ipv6pool-ec2 | key-pair | launch-template |
-	// local-gateway-route-table-vpc-association | placement-group | prefix-list |
-	// natgateway | network-acl | network-interface | reserved-instances |route-table |
-	// security-group| snapshot | spot-fleet-request | spot-instances-request |
-	// snapshot | subnet | traffic-mirror-filter | traffic-mirror-session |
-	// traffic-mirror-target | transit-gateway | transit-gateway-attachment |
-	// transit-gateway-multicast-domain | transit-gateway-route-table | volume |vpc |
-	// vpc-peering-connection | vpc-endpoint (for interface and gateway endpoints) |
-	// vpc-endpoint-service (for Amazon Web Services PrivateLink) | vpc-flow-log |
-	// vpn-connection | vpn-gateway. To tag a resource after it has been created, see
-	// CreateTags
+	// The type of resource to tag on creation. The possible values are:
+	// capacity-reservation | carrier-gateway | client-vpn-endpoint | customer-gateway
+	// | dedicated-host | dhcp-options | egress-only-internet-gateway | elastic-gpu |
+	// elastic-ip | export-image-task | export-instance-task | fleet | fpga-image |
+	// host-reservation | image | import-image-task | import-snapshot-task | instance |
+	// instance-event-window | internet-gateway | ipv4pool-ec2 | ipv6pool-ec2 |
+	// key-pair | launch-template | local-gateway-route-table-vpc-association |
+	// natgateway | network-acl | network-insights-analysis | network-insights-path |
+	// network-interface | placement-group | prefix-list | reserved-instances |
+	// route-table | security-group | security-group-rule | snapshot |
+	// spot-fleet-request | spot-instances-request | subnet | traffic-mirror-filter |
+	// traffic-mirror-session | traffic-mirror-target | transit-gateway |
+	// transit-gateway-attachment | transit-gateway-multicast-domain |
+	// transit-gateway-route-table | volume | vpc | vpc-endpoint | vpc-endpoint-service
+	// | vpc-flow-log | vpc-peering-connection | vpn-connection | vpn-gateway. To tag a
+	// resource after it has been created, see CreateTags
 	// (https://docs.aws.amazon.com/AWSEC2/latest/APIReference/API_CreateTags.html).
 	ResourceType ResourceType
 
@@ -11353,8 +11356,8 @@ type TargetConfigurationRequest struct {
 	// This member is required.
 	OfferingId *string
 
-	// The number of instances the Covertible Reserved Instance offering can be applied
-	// to. This parameter is reserved and cannot be specified in a request
+	// The number of instances the Convertible Reserved Instance offering can be
+	// applied to. This parameter is reserved and cannot be specified in a request
 	InstanceCount *int32
 
 	noSmithyDocumentSerde

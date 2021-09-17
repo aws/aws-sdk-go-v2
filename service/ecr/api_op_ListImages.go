@@ -60,9 +60,9 @@ type ListImagesInput struct {
 	// retrieve the next items in a list and not for other programmatic purposes.
 	NextToken *string
 
-	// The AWS account ID associated with the registry that contains the repository in
-	// which to list images. If you do not specify a registry, the default registry is
-	// assumed.
+	// The Amazon Web Services account ID associated with the registry that contains
+	// the repository in which to list images. If you do not specify a registry, the
+	// default registry is assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde

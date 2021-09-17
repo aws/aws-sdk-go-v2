@@ -1308,8 +1308,8 @@ type AssociationSummary struct {
 	// The type of the association.
 	AssociationType AssociationEdgeType
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *UserContext
 
 	// When the association was created.
@@ -3256,8 +3256,7 @@ type EndpointSummary struct {
 // The properties of an experiment as returned by the Search API.
 type Experiment struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Who created the experiment.
 	CreatedBy *UserContext
 
 	// When the experiment was created.
@@ -3276,8 +3275,8 @@ type Experiment struct {
 	// The name of the experiment.
 	ExperimentName *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *UserContext
 
 	// When the experiment was last modified.
@@ -5930,6 +5929,10 @@ type JupyterServerAppSettings struct {
 	// SageMaker image used by the JupyterServer app.
 	DefaultResourceSpec *ResourceSpec
 
+	// The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the
+	// JupyterServerApp.
+	LifecycleConfigArns []string
+
 	noSmithyDocumentSerde
 }
 
@@ -5943,6 +5946,10 @@ type KernelGatewayAppSettings struct {
 	// The default instance type and the Amazon Resource Name (ARN) of the default
 	// SageMaker image used by the KernelGateway app.
 	DefaultResourceSpec *ResourceSpec
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configurations attached to the
+	// the user profile or domain.
+	LifecycleConfigArns []string
 
 	noSmithyDocumentSerde
 }
@@ -6190,10 +6197,10 @@ type LabelingJobResourceConfig struct {
 	// ML compute instance(s) that run the training and inference jobs used for
 	// automated data labeling. You can only specify a VolumeKmsKeyId when you create a
 	// labeling job with automated data labeling enabled using the API operation
-	// CreateLabelingJob. You cannot specify an Amazon Web Services KMS customer
-	// managed CMK to encrypt the storage volume used for automated data labeling model
-	// training and inference when you create a labeling job using the console. To
-	// learn more, see Output Data and Storage Volume Encryption
+	// CreateLabelingJob. You cannot specify an Amazon Web Services KMS key to encrypt
+	// the storage volume used for automated data labeling model training and inference
+	// when you create a labeling job using the console. To learn more, see Output Data
+	// and Storage Volume Encryption
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sms-security.html). The
 	// VolumeKmsKeyId can be any of the following formats:
 	//
@@ -6648,8 +6655,8 @@ type ModelPackage struct {
 	// (https://docs.aws.amazon.com/sagemaker/latest/dg/sagemaker-mkt-list.html).
 	CertifyForMarketplace bool
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *UserContext
 
 	// The time that the model package was created.
@@ -6658,8 +6665,8 @@ type ModelPackage struct {
 	// Defines how to perform inference generation after a training job is run.
 	InferenceSpecification *InferenceSpecification
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *UserContext
 
 	// The last time the model package was modified.
@@ -6774,8 +6781,8 @@ type ModelPackageContainerDefinition struct {
 // A group of versioned models in the model registry.
 type ModelPackageGroup struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *UserContext
 
 	// The time that the model group was created.
@@ -8126,8 +8133,8 @@ type OutputDataConfig struct {
 	// Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
 	// If you use a
-	// KMS key ID or an alias of your master key, the Amazon SageMaker execution role
-	// must include permissions to call kms:Encrypt. If you don't provide a KMS key ID,
+	// KMS key ID or an alias of your KMS key, the Amazon SageMaker execution role must
+	// include permissions to call kms:Encrypt. If you don't provide a KMS key ID,
 	// Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
 	// Amazon SageMaker uses server-side encryption with KMS-managed keys for
 	// OutputDataConfig. If you use a bucket policy with an s3:PutObject permission
@@ -8251,15 +8258,15 @@ type ParentHyperParameterTuningJob struct {
 // A SageMaker Model Building Pipeline instance.
 type Pipeline struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *UserContext
 
 	// The creation time of the pipeline.
 	CreationTime *time.Time
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *UserContext
 
 	// The time that the pipeline was last modified.
@@ -8295,8 +8302,8 @@ type Pipeline struct {
 // An execution of a pipeline.
 type PipelineExecution struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *UserContext
 
 	// The creation time of the pipeline execution.
@@ -8305,8 +8312,8 @@ type PipelineExecution struct {
 	// If the execution failed, a message describing why.
 	FailureReason *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *UserContext
 
 	// The time that the pipeline execution was last modified.
@@ -8906,8 +8913,8 @@ type ProductionVariantCoreDumpConfig struct {
 	// Key Alias "arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias"
 	//
 	// If you use a
-	// KMS key ID or an alias of your master key, the Amazon SageMaker execution role
-	// must include permissions to call kms:Encrypt. If you don't provide a KMS key ID,
+	// KMS key ID or an alias of your KMS key, the Amazon SageMaker execution role must
+	// include permissions to call kms:Encrypt. If you don't provide a KMS key ID,
 	// Amazon SageMaker uses the default KMS key for Amazon S3 for your role's account.
 	// Amazon SageMaker uses server-side encryption with KMS-managed keys for
 	// OutputDataConfig. If you use a bucket policy with an s3:PutObject permission
@@ -9063,6 +9070,49 @@ type ProfilerRuleEvaluationStatus struct {
 
 	// Details from the rule evaluation.
 	StatusDetails *string
+
+	noSmithyDocumentSerde
+}
+
+// The properties of a project as returned by the Search API.
+type Project struct {
+
+	// Who created the project.
+	CreatedBy *UserContext
+
+	// A timestamp specifying when the project was created.
+	CreationTime *time.Time
+
+	// The Amazon Resource Name (ARN) of the project.
+	ProjectArn *string
+
+	// The description of the project.
+	ProjectDescription *string
+
+	// The ID of the project.
+	ProjectId *string
+
+	// The name of the project.
+	ProjectName *string
+
+	// The status of the project.
+	ProjectStatus ProjectStatus
+
+	// Details of a provisioned service catalog product. For information about service
+	// catalog, see What is Amazon Web Services Service Catalog
+	// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+	ServiceCatalogProvisionedProductDetails *ServiceCatalogProvisionedProductDetails
+
+	// Details that you specify to provision a service catalog product. For information
+	// about service catalog, see What is Amazon Web Services Service Catalog
+	// (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
+	ServiceCatalogProvisioningDetails *ServiceCatalogProvisioningDetails
+
+	// An array of key-value pairs. You can use tags to categorize your Amazon Web
+	// Services resources in different ways, for example, by purpose, owner, or
+	// environment. For more information, see Tagging Amazon Web Services Resources
+	// (https://docs.aws.amazon.com/general/latest/gr/aws_tagging.html).
+	Tags []Tag
 
 	noSmithyDocumentSerde
 }
@@ -9569,6 +9619,10 @@ type ResourceSpec struct {
 	// The instance type that the image version runs on.
 	InstanceType AppInstanceType
 
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration attached to the
+	// Resource.
+	LifecycleConfigArn *string
+
 	// The ARN of the SageMaker image that the image version belongs to.
 	SageMakerImageArn *string
 
@@ -9802,6 +9856,9 @@ type SearchRecord struct {
 	// An execution of a pipeline.
 	PipelineExecution *PipelineExecution
 
+	// The properties of a project.
+	Project *Project
+
 	// The properties of a training job.
 	TrainingJob *TrainingJob
 
@@ -9968,7 +10025,7 @@ type ServiceCatalogProvisionedProductDetails struct {
 }
 
 // Details that you specify to provision a service catalog product. For information
-// about service catalog, see .What is Amazon Web Services Service Catalog
+// about service catalog, see What is Amazon Web Services Service Catalog
 // (https://docs.aws.amazon.com/servicecatalog/latest/adminguide/introduction.html).
 type ServiceCatalogProvisioningDetails struct {
 
@@ -10122,6 +10179,28 @@ type StoppingCondition struct {
 	// MaxWaitTimeInSeconds specifies the maximum time for all of the attempts in
 	// total, not each individual attempt.
 	MaxWaitTimeInSeconds *int32
+
+	noSmithyDocumentSerde
+}
+
+// Details of the Studio Lifecycle Configuration.
+type StudioLifecycleConfigDetails struct {
+
+	// The creation time of the Studio Lifecycle Configuration.
+	CreationTime *time.Time
+
+	// This value is equivalent to CreationTime because Studio Lifecycle Configurations
+	// are immutable.
+	LastModifiedTime *time.Time
+
+	// The App type to which the Lifecycle Configuration is attached.
+	StudioLifecycleConfigAppType StudioLifecycleConfigAppType
+
+	// The Amazon Resource Name (ARN) of the Lifecycle Configuration.
+	StudioLifecycleConfigArn *string
+
+	// The name of the Studio Lifecycle Configuration.
+	StudioLifecycleConfigName *string
 
 	noSmithyDocumentSerde
 }
@@ -11098,8 +11177,7 @@ type TransformS3DataSource struct {
 // The properties of a trial as returned by the Search API.
 type Trial struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Who created the trial.
 	CreatedBy *UserContext
 
 	// When the trial was created.
@@ -11112,8 +11190,8 @@ type Trial struct {
 	// The name of the experiment the trial is part of.
 	ExperimentName *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *UserContext
 
 	// Who last modified the trial.
@@ -11145,8 +11223,7 @@ type Trial struct {
 // The properties of a trial component as returned by the Search API.
 type TrialComponent struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Who created the trial component.
 	CreatedBy *UserContext
 
 	// When the component was created.
@@ -11162,8 +11239,8 @@ type TrialComponent struct {
 	// The input artifacts of the component.
 	InputArtifacts map[string]TrialComponentArtifact
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *UserContext
 
 	// When the component was last modified.
@@ -11298,8 +11375,8 @@ func (*TrialComponentParameterValueMemberNumberValue) isTrialComponentParameterV
 // A short summary of a trial component.
 type TrialComponentSimpleSummary struct {
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *UserContext
 
 	// When the component was created.
@@ -11366,7 +11443,7 @@ type TrialComponentStatus struct {
 // call the DescribeTrialComponent API and provide the TrialComponentName.
 type TrialComponentSummary struct {
 
-	// Who created the component.
+	// Who created the trial component.
 	CreatedBy *UserContext
 
 	// When the component was created.
@@ -11571,8 +11648,8 @@ type USD struct {
 	noSmithyDocumentSerde
 }
 
-// Information about the user who created or modified an experiment, trial, or
-// trial component.
+// Information about the user who created or modified an experiment, trial, trial
+// component, or project.
 type UserContext struct {
 
 	// The domain associated with the user.

@@ -40,7 +40,7 @@ type DescribeTrialComponentInput struct {
 
 type DescribeTrialComponentOutput struct {
 
-	// Who created the component.
+	// Who created the trial component.
 	CreatedBy *types.UserContext
 
 	// When the component was created.

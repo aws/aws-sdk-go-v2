@@ -47,6 +47,7 @@
         "api_op_ListFindings.go",
         "api_op_ListFindingsFilters.go",
         "api_op_ListInvitations.go",
+        "api_op_ListManagedDataIdentifiers.go",
         "api_op_ListMembers.go",
         "api_op_ListOrganizationAdminAccounts.go",
         "api_op_ListTagsForResource.go",

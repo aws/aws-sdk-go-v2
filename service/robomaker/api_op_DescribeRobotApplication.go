@@ -46,6 +46,14 @@ type DescribeRobotApplicationOutput struct {
 	// The Amazon Resource Name (ARN) of the robot application.
 	Arn *string
 
+	// The object that contains the Docker image URI used to create the robot
+	// application.
+	Environment *types.Environment
+
+	// A SHA256 identifier for the Docker image that you use for your robot
+	// application.
+	ImageDigest *string
+
 	// The time, in milliseconds since the epoch, when the robot application was last
 	// updated.
 	LastUpdatedAt *time.Time

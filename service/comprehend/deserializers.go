@@ -8048,9 +8048,27 @@ func awsAwsjson11_deserializeDocumentAugmentedManifestsListItem(v **types.Augmen
 
 	for key, value := range shape {
 		switch key {
+		case "AnnotationDataS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.AnnotationDataS3Uri = ptr.String(jtv)
+			}
+
 		case "AttributeNames":
 			if err := awsAwsjson11_deserializeDocumentAttributeNamesList(&sv.AttributeNames, value); err != nil {
 				return err
+			}
+
+		case "DocumentType":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected AugmentedManifestsDocumentTypeFormat to be of type string, got %T instead", value)
+				}
+				sv.DocumentType = types.AugmentedManifestsDocumentTypeFormat(jtv)
 			}
 
 		case "S3Uri":
@@ -8060,6 +8078,15 @@ func awsAwsjson11_deserializeDocumentAugmentedManifestsListItem(v **types.Augmen
 					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
 				}
 				sv.S3Uri = ptr.String(jtv)
+			}
+
+		case "SourceDocumentsS3Uri":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected S3Uri to be of type string, got %T instead", value)
+				}
+				sv.SourceDocumentsS3Uri = ptr.String(jtv)
 			}
 
 		default:
@@ -9567,6 +9594,60 @@ func awsAwsjson11_deserializeDocumentDocumentLabel(v **types.DocumentLabel, valu
 					return fmt.Errorf("expected Float to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentDocumentReaderConfig(v **types.DocumentReaderConfig, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.DocumentReaderConfig
+	if *v == nil {
+		sv = &types.DocumentReaderConfig{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "DocumentReadAction":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentReadAction to be of type string, got %T instead", value)
+				}
+				sv.DocumentReadAction = types.DocumentReadAction(jtv)
+			}
+
+		case "DocumentReadMode":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected DocumentReadMode to be of type string, got %T instead", value)
+				}
+				sv.DocumentReadMode = types.DocumentReadMode(jtv)
+			}
+
+		case "FeatureTypes":
+			if err := awsAwsjson11_deserializeDocumentListOfDocumentReadFeatureTypes(&sv.FeatureTypes, value); err != nil {
+				return err
 			}
 
 		default:
@@ -11493,6 +11574,11 @@ func awsAwsjson11_deserializeDocumentInputDataConfig(v **types.InputDataConfig, 
 
 	for key, value := range shape {
 		switch key {
+		case "DocumentReaderConfig":
+			if err := awsAwsjson11_deserializeDocumentDocumentReaderConfig(&sv.DocumentReaderConfig, value); err != nil {
+				return err
+			}
+
 		case "InputFormat":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -12201,6 +12287,42 @@ func awsAwsjson11_deserializeDocumentListOfDetectSyntaxResult(v *[]types.BatchDe
 			return err
 		}
 		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentListOfDocumentReadFeatureTypes(v *[]types.DocumentReadFeatureTypes, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.DocumentReadFeatureTypes
+	if *v == nil {
+		cv = []types.DocumentReadFeatureTypes{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.DocumentReadFeatureTypes
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected DocumentReadFeatureTypes to be of type string, got %T instead", value)
+			}
+			col = types.DocumentReadFeatureTypes(jtv)
+		}
 		cv = append(cv, col)
 
 	}

@@ -49,15 +49,15 @@ type DescribeArtifactOutput struct {
 	// The type of the artifact.
 	ArtifactType *string
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *types.UserContext
 
 	// When the artifact was created.
 	CreationTime *time.Time
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *types.UserContext
 
 	// When the artifact was last modified.

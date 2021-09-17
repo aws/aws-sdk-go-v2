@@ -29,6 +29,26 @@ type AugmentedManifestsListItem struct {
 	// This member is required.
 	S3Uri *string
 
+	// The S3 prefix to the annotation files that are referred in the augmented
+	// manifest file.
+	AnnotationDataS3Uri *string
+
+	// The type of augmented manifest. PlainTextDocument or SemiStructuredDocument. If
+	// you don't specify, the default is PlainTextDocument.
+	//
+	// * PLAIN_TEXT_DOCUMENT A
+	// document type that represents any unicode text that is encoded in UTF-8.
+	//
+	// *
+	// SEMI_STRUCTURED_DOCUMENT A document type with positional and structural context,
+	// like a PDF. For training with Amazon Comprehend, only PDFs are supported. For
+	// inference, Amazon Comprehend support PDFs, DOCX and TXT.
+	DocumentType AugmentedManifestsDocumentTypeFormat
+
+	// The S3 prefix to the source files (PDFs) that are referred to in the augmented
+	// manifest file.
+	SourceDocumentsS3Uri *string
+
 	noSmithyDocumentSerde
 }
 
@@ -495,6 +515,37 @@ type DocumentLabel struct {
 
 	// The confidence score that Amazon Comprehend has this label correctly attributed.
 	Score *float32
+
+	noSmithyDocumentSerde
+}
+
+// The input properties for a topic detection job.
+type DocumentReaderConfig struct {
+
+	// This enum field will start with two values which will apply to PDFs:
+	//
+	// *
+	// TEXTRACT_DETECT_DOCUMENT_TEXT - The service calls DetectDocumentText for PDF
+	// documents per page.
+	//
+	// * TEXTRACT_ANALYZE_DOCUMENT - The service calls
+	// AnalyzeDocument for PDF documents per page.
+	//
+	// This member is required.
+	DocumentReadAction DocumentReadAction
+
+	// This enum field provides two values:
+	//
+	// * SERVICE_DEFAULT - use service defaults
+	// for Document reading. For Digital PDF it would mean using an internal parser
+	// instead of Textract APIs
+	//
+	// * FORCE_DOCUMENT_READ_ACTION - Always use specified
+	// action for DocumentReadAction, including Digital PDF.
+	DocumentReadMode DocumentReadMode
+
+	// Specifies how the text in an input file should be processed:
+	FeatureTypes []DocumentReadFeatureTypes
 
 	noSmithyDocumentSerde
 }
@@ -1150,7 +1201,7 @@ type EventsDetectionJobProperties struct {
 	noSmithyDocumentSerde
 }
 
-// The input properties for a topic detection job.
+// The input properties for an inference job.
 type InputDataConfig struct {
 
 	// The Amazon S3 URI for the input data. The URI must be in same region as the API
@@ -1162,6 +1213,12 @@ type InputDataConfig struct {
 	//
 	// This member is required.
 	S3Uri *string
+
+	// The document reader config field applies only for InputDataConfig of
+	// StartEntitiesDetectionJob. Use DocumentReaderConfig to provide specifications
+	// about how you want your inference documents read. Currently it applies for PDF
+	// documents in StartEntitiesDetectionJob custom inference.
+	DocumentReaderConfig *DocumentReaderConfig
 
 	// Specifies how the text in an input file should be processed:
 	//

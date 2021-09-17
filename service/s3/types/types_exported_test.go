@@ -63,6 +63,9 @@ func ExampleMetricsFilter_outputUsage() {
 	var union types.MetricsFilter
 	// type switches can be used to check the union value
 	switch v := union.(type) {
+	case *types.MetricsFilterMemberAccessPointArn:
+		_ = v.Value // Value is string
+
 	case *types.MetricsFilterMemberAnd:
 		_ = v.Value // Value is types.MetricsAndOperator
 
@@ -81,6 +84,7 @@ func ExampleMetricsFilter_outputUsage() {
 	}
 }
 
+var _ *string
 var _ *string
 var _ *types.Tag
 var _ *types.MetricsAndOperator

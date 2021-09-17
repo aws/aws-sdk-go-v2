@@ -9687,6 +9687,18 @@ func awsRestjson1_serializeDocumentAmazonElasticsearchParameters(v *types.Amazon
 	return nil
 }
 
+func awsRestjson1_serializeDocumentAmazonOpenSearchParameters(v *types.AmazonOpenSearchParameters, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if v.Domain != nil {
+		ok := object.Key("Domain")
+		ok.String(*v.Domain)
+	}
+
+	return nil
+}
+
 func awsRestjson1_serializeDocumentAnalysisSearchFilter(v *types.AnalysisSearchFilter, value smithyjson.Value) error {
 	object := value.Object()
 	defer object.Close()
@@ -10341,6 +10353,12 @@ func awsRestjson1_serializeDocumentDataSourceParameters(v types.DataSourceParame
 	case *types.DataSourceParametersMemberAmazonElasticsearchParameters:
 		av := object.Key("AmazonElasticsearchParameters")
 		if err := awsRestjson1_serializeDocumentAmazonElasticsearchParameters(&uv.Value, av); err != nil {
+			return err
+		}
+
+	case *types.DataSourceParametersMemberAmazonOpenSearchParameters:
+		av := object.Key("AmazonOpenSearchParameters")
+		if err := awsRestjson1_serializeDocumentAmazonOpenSearchParameters(&uv.Value, av); err != nil {
 			return err
 		}
 

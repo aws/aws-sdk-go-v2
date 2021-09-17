@@ -210,14 +210,14 @@ type CompleteMultipartUploadOutput struct {
 	RequestCharged types.RequestCharged
 
 	// If present, specifies the ID of the Amazon Web Services Key Management Service
-	// (Amazon Web Services KMS) symmetric customer managed customer master key (CMK)
-	// that was used for the object.
+	// (Amazon Web Services KMS) symmetric customer managed key that was used for the
+	// object.
 	SSEKMSKeyId *string
 
 	// If you specified server-side encryption either with an Amazon S3-managed
-	// encryption key or an Amazon Web Services KMS customer master key (CMK) in your
-	// initiate multipart upload request, the response includes this header. It
-	// confirms the encryption algorithm that Amazon S3 used to encrypt the object.
+	// encryption key or an Amazon Web Services KMS key in your initiate multipart
+	// upload request, the response includes this header. It confirms the encryption
+	// algorithm that Amazon S3 used to encrypt the object.
 	ServerSideEncryption types.ServerSideEncryption
 
 	// Version ID of the newly created object, in case the bucket has versioning turned

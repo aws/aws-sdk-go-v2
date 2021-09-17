@@ -34,12 +34,11 @@ import (
 // For information about enabling versioning on a bucket, see Using Versioning
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/Versioning.html). Handling
 // Replication of Encrypted Objects By default, Amazon S3 doesn't replicate objects
-// that are stored at rest using server-side encryption with CMKs stored in Amazon
-// Web Services KMS. To replicate Amazon Web Services KMS-encrypted objects, add
-// the following: SourceSelectionCriteria, SseKmsEncryptedObjects, Status,
+// that are stored at rest using server-side encryption with KMS keys. To replicate
+// Amazon Web Services KMS-encrypted objects, add the following:
+// SourceSelectionCriteria, SseKmsEncryptedObjects, Status,
 // EncryptionConfiguration, and ReplicaKmsKeyID. For information about replication
-// configuration, see Replicating Objects Created with SSE Using CMKs stored in
-// Amazon Web Services KMS
+// configuration, see Replicating Objects Created with SSE Using KMS keys
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/replication-config-for-kms-objects.html).
 // For information on PutBucketReplication errors, see List of replication-related
 // error codes

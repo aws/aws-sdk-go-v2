@@ -69,9 +69,9 @@ type GetCustomDataIdentifierOutput struct {
 	Keywords []string
 
 	// The maximum number of characters that can exist between text that matches the
-	// regex pattern and the character sequences specified by the keywords array. Macie
-	// includes or excludes a result based on the proximity of a keyword to text that
-	// matches the regex pattern.
+	// regex pattern and the character sequences specified by the keywords array.
+	// Amazon Macie includes or excludes a result based on the proximity of a keyword
+	// to text that matches the regex pattern.
 	MaximumMatchDistance int32
 
 	// The custom name of the custom data identifier.

@@ -2308,6 +2308,20 @@ func awsRestjson1_deserializeOpDocumentDescribeClassificationJobOutput(v **Descr
 				sv.LastRunTime = ptr.Time(t)
 			}
 
+		case "managedDataIdentifierIds":
+			if err := awsRestjson1_deserializeDocument__listOf__string(&sv.ManagedDataIdentifierIds, value); err != nil {
+				return err
+			}
+
+		case "managedDataIdentifierSelector":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected ManagedDataIdentifierSelector to be of type string, got %T instead", value)
+				}
+				sv.ManagedDataIdentifierSelector = types.ManagedDataIdentifierSelector(jtv)
+			}
+
 		case "name":
 			if value != nil {
 				jtv, ok := value.(string)
@@ -6861,6 +6875,159 @@ func awsRestjson1_deserializeOpDocumentListInvitationsOutput(v **ListInvitations
 	return nil
 }
 
+type awsRestjson1_deserializeOpListManagedDataIdentifiers struct {
+}
+
+func (*awsRestjson1_deserializeOpListManagedDataIdentifiers) ID() string {
+	return "OperationDeserializer"
+}
+
+func (m *awsRestjson1_deserializeOpListManagedDataIdentifiers) HandleDeserialize(ctx context.Context, in middleware.DeserializeInput, next middleware.DeserializeHandler) (
+	out middleware.DeserializeOutput, metadata middleware.Metadata, err error,
+) {
+	out, metadata, err = next.HandleDeserialize(ctx, in)
+	if err != nil {
+		return out, metadata, err
+	}
+
+	response, ok := out.RawResponse.(*smithyhttp.Response)
+	if !ok {
+		return out, metadata, &smithy.DeserializationError{Err: fmt.Errorf("unknown transport type %T", out.RawResponse)}
+	}
+
+	if response.StatusCode < 200 || response.StatusCode >= 300 {
+		return out, metadata, awsRestjson1_deserializeOpErrorListManagedDataIdentifiers(response, &metadata)
+	}
+	output := &ListManagedDataIdentifiersOutput{}
+	out.Result = output
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(response.Body, ringBuffer)
+
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	var shape interface{}
+	if err := decoder.Decode(&shape); err != nil && err != io.EOF {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return out, metadata, err
+	}
+
+	err = awsRestjson1_deserializeOpDocumentListManagedDataIdentifiersOutput(&output, shape)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		return out, metadata, &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body with invalid JSON, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+	}
+
+	return out, metadata, err
+}
+
+func awsRestjson1_deserializeOpErrorListManagedDataIdentifiers(response *smithyhttp.Response, metadata *middleware.Metadata) error {
+	var errorBuffer bytes.Buffer
+	if _, err := io.Copy(&errorBuffer, response.Body); err != nil {
+		return &smithy.DeserializationError{Err: fmt.Errorf("failed to copy error response body, %w", err)}
+	}
+	errorBody := bytes.NewReader(errorBuffer.Bytes())
+
+	errorCode := "UnknownError"
+	errorMessage := errorCode
+
+	code := response.Header.Get("X-Amzn-ErrorType")
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+
+	var buff [1024]byte
+	ringBuffer := smithyio.NewRingBuffer(buff[:])
+
+	body := io.TeeReader(errorBody, ringBuffer)
+	decoder := json.NewDecoder(body)
+	decoder.UseNumber()
+	code, message, err := restjson.GetErrorInfo(decoder)
+	if err != nil {
+		var snapshot bytes.Buffer
+		io.Copy(&snapshot, ringBuffer)
+		err = &smithy.DeserializationError{
+			Err:      fmt.Errorf("failed to decode response body, %w", err),
+			Snapshot: snapshot.Bytes(),
+		}
+		return err
+	}
+
+	errorBody.Seek(0, io.SeekStart)
+	if len(code) != 0 {
+		errorCode = restjson.SanitizeErrorCode(code)
+	}
+	if len(message) != 0 {
+		errorMessage = message
+	}
+
+	switch {
+	default:
+		genericError := &smithy.GenericAPIError{
+			Code:    errorCode,
+			Message: errorMessage,
+		}
+		return genericError
+
+	}
+}
+
+func awsRestjson1_deserializeOpDocumentListManagedDataIdentifiersOutput(v **ListManagedDataIdentifiersOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *ListManagedDataIdentifiersOutput
+	if *v == nil {
+		sv = &ListManagedDataIdentifiersOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "items":
+			if err := awsRestjson1_deserializeDocument__listOfManagedDataIdentifierSummary(&sv.Items, value); err != nil {
+				return err
+			}
+
+		case "nextToken":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.NextToken = ptr.String(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 type awsRestjson1_deserializeOpListMembers struct {
 }
 
@@ -9394,6 +9561,40 @@ func awsRestjson1_deserializeDocument__listOfKeyValuePair(v *[]types.KeyValuePai
 		var col types.KeyValuePair
 		destAddr := &col
 		if err := awsRestjson1_deserializeDocumentKeyValuePair(&destAddr, value); err != nil {
+			return err
+		}
+		col = *destAddr
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsRestjson1_deserializeDocument__listOfManagedDataIdentifierSummary(v *[]types.ManagedDataIdentifierSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.ManagedDataIdentifierSummary
+	if *v == nil {
+		cv = []types.ManagedDataIdentifierSummary{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.ManagedDataIdentifierSummary
+		destAddr := &col
+		if err := awsRestjson1_deserializeDocumentManagedDataIdentifierSummary(&destAddr, value); err != nil {
 			return err
 		}
 		col = *destAddr
@@ -13439,6 +13640,55 @@ func awsRestjson1_deserializeDocumentLastRunErrorStatus(v **types.LastRunErrorSt
 					return fmt.Errorf("expected LastRunErrorStatusCode to be of type string, got %T instead", value)
 				}
 				sv.Code = types.LastRunErrorStatusCode(jtv)
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
+func awsRestjson1_deserializeDocumentManagedDataIdentifierSummary(v **types.ManagedDataIdentifierSummary, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.ManagedDataIdentifierSummary
+	if *v == nil {
+		sv = &types.ManagedDataIdentifierSummary{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "category":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected SensitiveDataItemCategory to be of type string, got %T instead", value)
+				}
+				sv.Category = types.SensitiveDataItemCategory(jtv)
+			}
+
+		case "id":
+			if value != nil {
+				jtv, ok := value.(string)
+				if !ok {
+					return fmt.Errorf("expected __string to be of type string, got %T instead", value)
+				}
+				sv.Id = ptr.String(jtv)
 			}
 
 		default:

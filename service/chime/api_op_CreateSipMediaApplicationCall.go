@@ -46,6 +46,9 @@ type CreateSipMediaApplicationCallInput struct {
 	// This member is required.
 	ToPhoneNumber *string
 
+	// The SIP headers added to an outbound call leg.
+	SipHeaders map[string]string
+
 	noSmithyDocumentSerde
 }
 

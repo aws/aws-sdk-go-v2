@@ -16,10 +16,6 @@ import (
 // endpoint and a model package. For more information, see Amazon SageMaker ML
 // Lineage Tracking
 // (https://docs.aws.amazon.com/sagemaker/latest/dg/lineage-tracking.html).
-// CreateContext can only be invoked from within an SageMaker managed environment.
-// This includes SageMaker training jobs, processing jobs, transform jobs, and
-// SageMaker notebooks. A call to CreateContext from outside one of these
-// environments results in an error.
 func (c *Client) CreateContext(ctx context.Context, params *CreateContextInput, optFns ...func(*Options)) (*CreateContextOutput, error) {
 	if params == nil {
 		params = &CreateContextInput{}

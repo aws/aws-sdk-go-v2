@@ -60,22 +60,61 @@ type CreateClassificationJobInput struct {
 	// This member is required.
 	S3JobDefinition *types.S3JobDefinition
 
-	// The custom data identifiers to use for data analysis and classification.
+	// An array of unique identifiers, one for each custom data identifier for the job
+	// to use when it analyzes data. To use only managed data identifiers, don't
+	// specify a value for this property and specify a value other than NONE for the
+	// managedDataIdentifierSelector property.
 	CustomDataIdentifierIds []string
 
 	// A custom description of the job. The description can contain as many as 200
 	// characters.
 	Description *string
 
-	// Specifies whether to analyze all existing, eligible objects immediately after
-	// the job is created.
+	// For a recurring job, specifies whether to analyze all existing, eligible objects
+	// immediately after the job is created (true). To analyze only those objects that
+	// are created or changed after you create the job and before the job's first
+	// scheduled run, set this value to false.If you configure the job to run only
+	// once, don't specify a value for this property.
 	InitialRun bool
 
-	// The sampling depth, as a percentage, to apply when processing objects. This
-	// value determines the percentage of eligible objects that the job analyzes. If
-	// this value is less than 100, Amazon Macie selects the objects to analyze at
-	// random, up to the specified percentage, and analyzes all the data in those
-	// objects.
+	// An array of unique identifiers, one for each managed data identifier for the job
+	// to include (use) or exclude (not use) when it analyzes data. Inclusion or
+	// exclusion depends on the managed data identifier selection type that you specify
+	// for the job (managedDataIdentifierSelector).To retrieve a list of valid values
+	// for this property, use the ListManagedDataIdentifiers operation.
+	ManagedDataIdentifierIds []string
+
+	// The selection type to apply when determining which managed data identifiers the
+	// job uses to analyze data. Valid values are:
+	//
+	// * ALL - Use all the managed data
+	// identifiers that Amazon Macie provides. If you specify this value, don't specify
+	// any values for the managedDataIdentifierIds property.
+	//
+	// * EXCLUDE - Use all the
+	// managed data identifiers that Macie provides except the managed data identifiers
+	// specified by the managedDataIdentifierIds property.
+	//
+	// * INCLUDE - Use only the
+	// managed data identifiers specified by the managedDataIdentifierIds property.
+	//
+	// *
+	// NONE - Don't use any managed data identifiers. If you specify this value,
+	// specify at least one custom data identifier for the job
+	// (customDataIdentifierIds) and don't specify any values for the
+	// managedDataIdentifierIds property.
+	//
+	// If you don't specify a value for this
+	// property, the job uses all managed data identifiers. If you don't specify a
+	// value for this property or you specify ALL or EXCLUDE for a recurring job, the
+	// job also uses new managed data identifiers as they are released.
+	ManagedDataIdentifierSelector types.ManagedDataIdentifierSelector
+
+	// The sampling depth, as a percentage, for the job to apply when processing
+	// objects. This value determines the percentage of eligible objects that the job
+	// analyzes. If this value is less than 100, Amazon Macie selects the objects to
+	// analyze at random, up to the specified percentage, and analyzes all the data in
+	// those objects.
 	SamplingPercentage int32
 
 	// The recurrence pattern for running the job. To run the job only once, don't

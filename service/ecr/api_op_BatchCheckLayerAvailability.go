@@ -44,8 +44,9 @@ type BatchCheckLayerAvailabilityInput struct {
 	// This member is required.
 	RepositoryName *string
 
-	// The AWS account ID associated with the registry that contains the image layers
-	// to check. If you do not specify a registry, the default registry is assumed.
+	// The Amazon Web Services account ID associated with the registry that contains
+	// the image layers to check. If you do not specify a registry, the default
+	// registry is assumed.
 	RegistryId *string
 
 	noSmithyDocumentSerde

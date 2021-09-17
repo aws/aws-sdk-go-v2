@@ -1262,6 +1262,21 @@ func validateDocumentClassifierInputDataConfig(v *types.DocumentClassifierInputD
 	}
 }
 
+func validateDocumentReaderConfig(v *types.DocumentReaderConfig) error {
+	if v == nil {
+		return nil
+	}
+	invalidParams := smithy.InvalidParamsError{Context: "DocumentReaderConfig"}
+	if len(v.DocumentReadAction) == 0 {
+		invalidParams.Add(smithy.NewErrParamRequired("DocumentReadAction"))
+	}
+	if invalidParams.Len() > 0 {
+		return invalidParams
+	} else {
+		return nil
+	}
+}
+
 func validateEntityRecognizerAnnotations(v *types.EntityRecognizerAnnotations) error {
 	if v == nil {
 		return nil
@@ -1402,6 +1417,11 @@ func validateInputDataConfig(v *types.InputDataConfig) error {
 	invalidParams := smithy.InvalidParamsError{Context: "InputDataConfig"}
 	if v.S3Uri == nil {
 		invalidParams.Add(smithy.NewErrParamRequired("S3Uri"))
+	}
+	if v.DocumentReaderConfig != nil {
+		if err := validateDocumentReaderConfig(v.DocumentReaderConfig); err != nil {
+			invalidParams.AddNested("DocumentReaderConfig", err.(smithy.InvalidParamsError))
+		}
 	}
 	if invalidParams.Len() > 0 {
 		return invalidParams

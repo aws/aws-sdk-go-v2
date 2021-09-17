@@ -18,6 +18,7 @@ const (
 	EndpointTypesElementEmail           EndpointTypesElement = "EMAIL"
 	EndpointTypesElementBaidu           EndpointTypesElement = "BAIDU"
 	EndpointTypesElementCustom          EndpointTypesElement = "CUSTOM"
+	EndpointTypesElementInApp           EndpointTypesElement = "IN_APP"
 )
 
 // Values returns all known values for EndpointTypesElement. Note that this can be
@@ -37,6 +38,7 @@ func (EndpointTypesElement) Values() []EndpointTypesElement {
 		"EMAIL",
 		"BAIDU",
 		"CUSTOM",
+		"IN_APP",
 	}
 }
 
@@ -57,6 +59,26 @@ func (Action) Values() []Action {
 		"OPEN_APP",
 		"DEEP_LINK",
 		"URL",
+	}
+}
+
+type Alignment string
+
+// Enum values for Alignment
+const (
+	AlignmentLeft   Alignment = "LEFT"
+	AlignmentCenter Alignment = "CENTER"
+	AlignmentRight  Alignment = "RIGHT"
+)
+
+// Values returns all known values for Alignment. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Alignment) Values() []Alignment {
+	return []Alignment{
+		"LEFT",
+		"CENTER",
+		"RIGHT",
 	}
 }
 
@@ -85,6 +107,26 @@ func (AttributeType) Values() []AttributeType {
 		"AFTER",
 		"ON",
 		"BETWEEN",
+	}
+}
+
+type ButtonAction string
+
+// Enum values for ButtonAction
+const (
+	ButtonActionLink     ButtonAction = "LINK"
+	ButtonActionDeepLink ButtonAction = "DEEP_LINK"
+	ButtonActionClose    ButtonAction = "CLOSE"
+)
+
+// Values returns all known values for ButtonAction. Note that this can be expanded
+// in the future, and so it is only as up to date as the client. The ordering of
+// this slice is not guaranteed to be stable across updates.
+func (ButtonAction) Values() []ButtonAction {
+	return []ButtonAction{
+		"LINK",
+		"DEEP_LINK",
+		"CLOSE",
 	}
 }
 
@@ -132,6 +174,7 @@ const (
 	ChannelTypeEmail           ChannelType = "EMAIL"
 	ChannelTypeBaidu           ChannelType = "BAIDU"
 	ChannelTypeCustom          ChannelType = "CUSTOM"
+	ChannelTypeInApp           ChannelType = "IN_APP"
 )
 
 // Values returns all known values for ChannelType. Note that this can be expanded
@@ -151,6 +194,7 @@ func (ChannelType) Values() []ChannelType {
 		"EMAIL",
 		"BAIDU",
 		"CUSTOM",
+		"IN_APP",
 	}
 }
 
@@ -262,12 +306,13 @@ type Frequency string
 
 // Enum values for Frequency
 const (
-	FrequencyOnce    Frequency = "ONCE"
-	FrequencyHourly  Frequency = "HOURLY"
-	FrequencyDaily   Frequency = "DAILY"
-	FrequencyWeekly  Frequency = "WEEKLY"
-	FrequencyMonthly Frequency = "MONTHLY"
-	FrequencyEvent   Frequency = "EVENT"
+	FrequencyOnce       Frequency = "ONCE"
+	FrequencyHourly     Frequency = "HOURLY"
+	FrequencyDaily      Frequency = "DAILY"
+	FrequencyWeekly     Frequency = "WEEKLY"
+	FrequencyMonthly    Frequency = "MONTHLY"
+	FrequencyEvent      Frequency = "EVENT"
+	FrequencyInAppEvent Frequency = "IN_APP_EVENT"
 )
 
 // Values returns all known values for Frequency. Note that this can be expanded in
@@ -281,6 +326,7 @@ func (Frequency) Values() []Frequency {
 		"WEEKLY",
 		"MONTHLY",
 		"EVENT",
+		"IN_APP_EVENT",
 	}
 }
 
@@ -333,6 +379,32 @@ func (JobStatus) Values() []JobStatus {
 		"COMPLETED",
 		"FAILING",
 		"FAILED",
+	}
+}
+
+type Layout string
+
+// Enum values for Layout
+const (
+	LayoutBottomBanner Layout = "BOTTOM_BANNER"
+	LayoutTopBanner    Layout = "TOP_BANNER"
+	LayoutOverlays     Layout = "OVERLAYS"
+	LayoutMobileFeed   Layout = "MOBILE_FEED"
+	LayoutMiddleBanner Layout = "MIDDLE_BANNER"
+	LayoutCarousel     Layout = "CAROUSEL"
+)
+
+// Values returns all known values for Layout. Note that this can be expanded in
+// the future, and so it is only as up to date as the client. The ordering of this
+// slice is not guaranteed to be stable across updates.
+func (Layout) Values() []Layout {
+	return []Layout{
+		"BOTTOM_BANNER",
+		"TOP_BANNER",
+		"OVERLAYS",
+		"MOBILE_FEED",
+		"MIDDLE_BANNER",
+		"CAROUSEL",
 	}
 }
 
@@ -480,6 +552,7 @@ const (
 	TemplateTypeSms   TemplateType = "SMS"
 	TemplateTypeVoice TemplateType = "VOICE"
 	TemplateTypePush  TemplateType = "PUSH"
+	TemplateTypeInapp TemplateType = "INAPP"
 )
 
 // Values returns all known values for TemplateType. Note that this can be expanded
@@ -491,6 +564,7 @@ func (TemplateType) Values() []TemplateType {
 		"SMS",
 		"VOICE",
 		"PUSH",
+		"INAPP",
 	}
 }
 

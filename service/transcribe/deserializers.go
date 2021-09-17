@@ -7136,6 +7136,119 @@ func awsAwsjson11_deserializeDocumentStringTargetList(v *[]string, value interfa
 	return nil
 }
 
+func awsAwsjson11_deserializeDocumentSubtitleFileUris(v *[]string, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []string
+	if *v == nil {
+		cv = []string{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col string
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected Uri to be of type string, got %T instead", value)
+			}
+			col = jtv
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSubtitleFormats(v *[]types.SubtitleFormat, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.([]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var cv []types.SubtitleFormat
+	if *v == nil {
+		cv = []types.SubtitleFormat{}
+	} else {
+		cv = *v
+	}
+
+	for _, value := range shape {
+		var col types.SubtitleFormat
+		if value != nil {
+			jtv, ok := value.(string)
+			if !ok {
+				return fmt.Errorf("expected SubtitleFormat to be of type string, got %T instead", value)
+			}
+			col = types.SubtitleFormat(jtv)
+		}
+		cv = append(cv, col)
+
+	}
+	*v = cv
+	return nil
+}
+
+func awsAwsjson11_deserializeDocumentSubtitlesOutput(v **types.SubtitlesOutput, value interface{}) error {
+	if v == nil {
+		return fmt.Errorf("unexpected nil of type %T", v)
+	}
+	if value == nil {
+		return nil
+	}
+
+	shape, ok := value.(map[string]interface{})
+	if !ok {
+		return fmt.Errorf("unexpected JSON type %v", value)
+	}
+
+	var sv *types.SubtitlesOutput
+	if *v == nil {
+		sv = &types.SubtitlesOutput{}
+	} else {
+		sv = *v
+	}
+
+	for key, value := range shape {
+		switch key {
+		case "Formats":
+			if err := awsAwsjson11_deserializeDocumentSubtitleFormats(&sv.Formats, value); err != nil {
+				return err
+			}
+
+		case "SubtitleFileUris":
+			if err := awsAwsjson11_deserializeDocumentSubtitleFileUris(&sv.SubtitleFileUris, value); err != nil {
+				return err
+			}
+
+		default:
+			_, _ = key, value
+
+		}
+	}
+	*v = sv
+	return nil
+}
+
 func awsAwsjson11_deserializeDocumentTag(v **types.Tag, value interface{}) error {
 	if v == nil {
 		return fmt.Errorf("unexpected nil of type %T", v)
@@ -7522,6 +7635,11 @@ func awsAwsjson11_deserializeDocumentTranscriptionJob(v **types.TranscriptionJob
 					return fmt.Errorf("expected DateTime to be a JSON Number, got %T instead", value)
 
 				}
+			}
+
+		case "Subtitles":
+			if err := awsAwsjson11_deserializeDocumentSubtitlesOutput(&sv.Subtitles, value); err != nil {
+				return err
 			}
 
 		case "Tags":

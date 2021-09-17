@@ -77,16 +77,16 @@ type DescribeModelPackageOutput struct {
 	// Marketplace.
 	CertifyForMarketplace bool
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	CreatedBy *types.UserContext
 
 	// Details about inference jobs that can be run with models based on this model
 	// package.
 	InferenceSpecification *types.InferenceSpecification
 
-	// Information about the user who created or modified an experiment, trial, or
-	// trial component.
+	// Information about the user who created or modified an experiment, trial, trial
+	// component, or project.
 	LastModifiedBy *types.UserContext
 
 	// The last time the model package was modified.

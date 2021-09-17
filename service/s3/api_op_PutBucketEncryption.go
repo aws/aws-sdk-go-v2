@@ -14,10 +14,10 @@ import (
 
 // This action uses the encryption subresource to configure default encryption and
 // Amazon S3 Bucket Key for an existing bucket. Default encryption for a bucket can
-// use server-side encryption with Amazon S3-managed keys (SSE-S3) or Amazon Web
-// Services KMS customer master keys (SSE-KMS). If you specify default encryption
-// using SSE-KMS, you can also configure Amazon S3 Bucket Key. For information
-// about default encryption, see Amazon S3 default bucket encryption
+// use server-side encryption with Amazon S3-managed keys (SSE-S3) or customer
+// managed keys (SSE-KMS). If you specify default encryption using SSE-KMS, you can
+// also configure Amazon S3 Bucket Key. For information about default encryption,
+// see Amazon S3 default bucket encryption
 // (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the
 // Amazon S3 User Guide. For more information about S3 Bucket Keys, see Amazon S3
 // Bucket Keys (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-key.html) in
@@ -59,9 +59,9 @@ func (c *Client) PutBucketEncryption(ctx context.Context, params *PutBucketEncry
 type PutBucketEncryptionInput struct {
 
 	// Specifies default encryption for a bucket using server-side encryption with
-	// Amazon S3-managed keys (SSE-S3) or customer master keys stored in Amazon Web
-	// Services KMS (SSE-KMS). For information about the Amazon S3 default encryption
-	// feature, see Amazon S3 Default Bucket Encryption
+	// Amazon S3-managed keys (SSE-S3) or customer managed keys (SSE-KMS). For
+	// information about the Amazon S3 default encryption feature, see Amazon S3
+	// Default Bucket Encryption
 	// (https://docs.aws.amazon.com/AmazonS3/latest/dev/bucket-encryption.html) in the
 	// Amazon S3 User Guide.
 	//

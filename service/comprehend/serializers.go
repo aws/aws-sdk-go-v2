@@ -2896,6 +2896,11 @@ func awsAwsjson11_serializeDocumentAugmentedManifestsListItem(v *types.Augmented
 	object := value.Object()
 	defer object.Close()
 
+	if v.AnnotationDataS3Uri != nil {
+		ok := object.Key("AnnotationDataS3Uri")
+		ok.String(*v.AnnotationDataS3Uri)
+	}
+
 	if v.AttributeNames != nil {
 		ok := object.Key("AttributeNames")
 		if err := awsAwsjson11_serializeDocumentAttributeNamesList(v.AttributeNames, ok); err != nil {
@@ -2903,9 +2908,19 @@ func awsAwsjson11_serializeDocumentAugmentedManifestsListItem(v *types.Augmented
 		}
 	}
 
+	if len(v.DocumentType) > 0 {
+		ok := object.Key("DocumentType")
+		ok.String(string(v.DocumentType))
+	}
+
 	if v.S3Uri != nil {
 		ok := object.Key("S3Uri")
 		ok.String(*v.S3Uri)
+	}
+
+	if v.SourceDocumentsS3Uri != nil {
+		ok := object.Key("SourceDocumentsS3Uri")
+		ok.String(*v.SourceDocumentsS3Uri)
 	}
 
 	return nil
@@ -3025,6 +3040,30 @@ func awsAwsjson11_serializeDocumentDocumentClassifierOutputDataConfig(v *types.D
 	if v.S3Uri != nil {
 		ok := object.Key("S3Uri")
 		ok.String(*v.S3Uri)
+	}
+
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentDocumentReaderConfig(v *types.DocumentReaderConfig, value smithyjson.Value) error {
+	object := value.Object()
+	defer object.Close()
+
+	if len(v.DocumentReadAction) > 0 {
+		ok := object.Key("DocumentReadAction")
+		ok.String(string(v.DocumentReadAction))
+	}
+
+	if len(v.DocumentReadMode) > 0 {
+		ok := object.Key("DocumentReadMode")
+		ok.String(string(v.DocumentReadMode))
+	}
+
+	if v.FeatureTypes != nil {
+		ok := object.Key("FeatureTypes")
+		if err := awsAwsjson11_serializeDocumentListOfDocumentReadFeatureTypes(v.FeatureTypes, ok); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -3285,6 +3324,13 @@ func awsAwsjson11_serializeDocumentInputDataConfig(v *types.InputDataConfig, val
 	object := value.Object()
 	defer object.Close()
 
+	if v.DocumentReaderConfig != nil {
+		ok := object.Key("DocumentReaderConfig")
+		if err := awsAwsjson11_serializeDocumentDocumentReaderConfig(v.DocumentReaderConfig, ok); err != nil {
+			return err
+		}
+	}
+
 	if len(v.InputFormat) > 0 {
 		ok := object.Key("InputFormat")
 		ok.String(string(v.InputFormat))
@@ -3322,6 +3368,17 @@ func awsAwsjson11_serializeDocumentKeyPhrasesDetectionJobFilter(v *types.KeyPhra
 		ok.Double(smithytime.FormatEpochSeconds(*v.SubmitTimeBefore))
 	}
 
+	return nil
+}
+
+func awsAwsjson11_serializeDocumentListOfDocumentReadFeatureTypes(v []types.DocumentReadFeatureTypes, value smithyjson.Value) error {
+	array := value.Array()
+	defer array.Close()
+
+	for i := range v {
+		av := array.Value()
+		av.String(string(v[i]))
+	}
 	return nil
 }
 

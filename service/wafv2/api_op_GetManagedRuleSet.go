@@ -12,11 +12,11 @@ import (
 )
 
 // Retrieves the specified managed rule set. This is intended for use only by
-// vendors of managed rule sets. Vendors are Amazon Web Services and Marketplace
-// sellers. Vendors, you can use the managed rule set APIs to provide controlled
-// rollout of your versioned managed rule group offerings for your customers. The
-// APIs are ListManagedRuleSets, GetManagedRuleSet, PutManagedRuleSetVersions, and
-// UpdateManagedRuleSetVersionExpiryDate.
+// vendors of managed rule sets. Vendors are Amazon Web Services and Amazon Web
+// Services Marketplace sellers. Vendors, you can use the managed rule set APIs to
+// provide controlled rollout of your versioned managed rule group offerings for
+// your customers. The APIs are ListManagedRuleSets, GetManagedRuleSet,
+// PutManagedRuleSetVersions, and UpdateManagedRuleSetVersionExpiryDate.
 func (c *Client) GetManagedRuleSet(ctx context.Context, params *GetManagedRuleSetInput, optFns ...func(*Options)) (*GetManagedRuleSetOutput, error) {
 	if params == nil {
 		params = &GetManagedRuleSetInput{}

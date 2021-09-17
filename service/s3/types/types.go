@@ -615,9 +615,9 @@ type Encryption struct {
 	KMSContext *string
 
 	// If the encryption type is aws:kms, this optional value specifies the ID of the
-	// symmetric customer managed Amazon Web Services KMS CMK to use for encryption of
-	// job results. Amazon S3 only supports symmetric CMKs. For more information, see
-	// Using symmetric and asymmetric keys
+	// symmetric customer managed key to use for encryption of job results. Amazon S3
+	// only supports symmetric keys. For more information, see Using symmetric and
+	// asymmetric keys
 	// (https://docs.aws.amazon.com/kms/latest/developerguide/symmetric-asymmetric.html)
 	// in the Amazon Web Services Key Management Service Developer Guide.
 	KMSKeyId *string
@@ -2198,6 +2198,9 @@ type Metrics struct {
 // all of the predicates in order for the filter to apply.
 type MetricsAndOperator struct {
 
+	// The access point ARN used when evaluating an AND predicate.
+	AccessPointArn *string
+
 	// The prefix used when evaluating an AND predicate.
 	Prefix *string
 
@@ -2211,9 +2214,8 @@ type MetricsAndOperator struct {
 // by the metrics configuration ID) from an Amazon S3 bucket. If you're updating an
 // existing metrics configuration, note that this is a full replacement of the
 // existing metrics configuration. If you don't include the elements you want to
-// keep, they are erased. For more information, see  PUT Bucket metrics
-// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html)
-// in the Amazon S3 API Reference.
+// keep, they are erased. For more information, see PutBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/RESTBucketPUTMetricConfiguration.html).
 type MetricsConfiguration struct {
 
 	// The ID used to identify the metrics configuration.
@@ -2222,20 +2224,23 @@ type MetricsConfiguration struct {
 	Id *string
 
 	// Specifies a metrics configuration filter. The metrics configuration will only
-	// include objects that meet the filter's criteria. A filter must be a prefix, a
-	// tag, or a conjunction (MetricsAndOperator).
+	// include objects that meet the filter's criteria. A filter must be a prefix, an
+	// object tag, an access point ARN, or a conjunction (MetricsAndOperator).
 	Filter MetricsFilter
 
 	noSmithyDocumentSerde
 }
 
 // Specifies a metrics configuration filter. The metrics configuration only
-// includes objects that meet the filter's criteria. A filter must be a prefix, a
-// tag, or a conjunction (MetricsAndOperator).
+// includes objects that meet the filter's criteria. A filter must be a prefix, an
+// object tag, an access point ARN, or a conjunction (MetricsAndOperator). For more
+// information, see PutBucketMetricsConfiguration
+// (https://docs.aws.amazon.com/AmazonS3/latest/API/API_PutBucketMetricsConfiguration.html).
 //
 // The following types satisfy this interface:
 //  MetricsFilterMemberPrefix
 //  MetricsFilterMemberTag
+//  MetricsFilterMemberAccessPointArn
 //  MetricsFilterMemberAnd
 type MetricsFilter interface {
 	isMetricsFilter()
@@ -2258,6 +2263,15 @@ type MetricsFilterMemberTag struct {
 }
 
 func (*MetricsFilterMemberTag) isMetricsFilter() {}
+
+// The access point ARN used when evaluating a metrics filter.
+type MetricsFilterMemberAccessPointArn struct {
+	Value string
+
+	noSmithyDocumentSerde
+}
+
+func (*MetricsFilterMemberAccessPointArn) isMetricsFilter() {}
 
 // A conjunction (logical AND) of predicates, which is used in evaluating a metrics
 // filter. The operator must have at least two predicates, and an object must match
@@ -2830,8 +2844,8 @@ type ReplicationRule struct {
 	// A container that describes additional filters for identifying the source objects
 	// that you want to replicate. You can choose to enable or disable the replication
 	// of these objects. Currently, Amazon S3 supports only the filter that you can
-	// specify for objects created with server-side encryption using a customer master
-	// key (CMK) stored in Amazon Web Services Key Management Service (SSE-KMS).
+	// specify for objects created with server-side encryption using a customer managed
+	// key stored in Amazon Web Services Key Management Service (SSE-KMS).
 	SourceSelectionCriteria *SourceSelectionCriteria
 
 	noSmithyDocumentSerde
@@ -3144,8 +3158,8 @@ type ServerSideEncryptionRule struct {
 // A container that describes additional filters for identifying the source objects
 // that you want to replicate. You can choose to enable or disable the replication
 // of these objects. Currently, Amazon S3 supports only the filter that you can
-// specify for objects created with server-side encryption using a customer master
-// key (CMK) stored in Amazon Web Services Key Management Service (SSE-KMS).
+// specify for objects created with server-side encryption using a customer managed
+// key stored in Amazon Web Services Key Management Service (SSE-KMS).
 type SourceSelectionCriteria struct {
 
 	// A filter that you can specify for selections for modifications on replicas.
@@ -3169,8 +3183,8 @@ type SourceSelectionCriteria struct {
 type SSEKMS struct {
 
 	// Specifies the ID of the Amazon Web Services Key Management Service (Amazon Web
-	// Services KMS) symmetric customer managed customer master key (CMK) to use for
-	// encrypting inventory reports.
+	// Services KMS) symmetric customer managed key to use for encrypting inventory
+	// reports.
 	//
 	// This member is required.
 	KeyId *string

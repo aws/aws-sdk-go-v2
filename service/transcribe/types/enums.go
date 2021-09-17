@@ -333,6 +333,24 @@ func (Specialty) Values() []Specialty {
 	}
 }
 
+type SubtitleFormat string
+
+// Enum values for SubtitleFormat
+const (
+	SubtitleFormatVtt SubtitleFormat = "vtt"
+	SubtitleFormatSrt SubtitleFormat = "srt"
+)
+
+// Values returns all known values for SubtitleFormat. Note that this can be
+// expanded in the future, and so it is only as up to date as the client. The
+// ordering of this slice is not guaranteed to be stable across updates.
+func (SubtitleFormat) Values() []SubtitleFormat {
+	return []SubtitleFormat{
+		"vtt",
+		"srt",
+	}
+}
+
 type TranscriptFilterType string
 
 // Enum values for TranscriptFilterType
